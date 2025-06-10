@@ -1,0 +1,1 @@
+# Volcengine Cloud Control Resource Provider Definition Schema

@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "schema/provider.configuration.definition.schema.v1.json",
+    "title": "Cloud Control Type Provider Configuration Definition MetaSchema",
+    "description": "This schema validates a Cloud Control type provider configuration definition.",
+    "type": "object",
+    "properties": {
+        "additionalProperties": {
+            "$comment": "All properties must be expressed in the schema - arbitrary inputs are not allowed",
+            "type": "boolean",
+            "const": false
+        },
+        "deprecatedProperties": {
+            "$ref": "file://./base.definition.schema.v1.json#/properties/deprecatedProperties"
+        },
+        "allOf": {
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
+        },
+        "anyOf": {
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
+        },
+        "oneOf": {
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
+        },
+        "required": {
+            "$ref": "file://./base.definition.schema.v1.json#/properties/required"
+        },
+        "description": {
+            "$comment": "A short description of the type configuration. ",
+            "$ref": "file://./base.definition.schema.v1.json#/properties/description"
+        },
+        "properties": {
+            "type": "object",
+            "patternProperties": {
+                "": {
+                    "$comment": "TypeConfiguration properties starting with `Cloud Control` are reserved for Cloud Control use",
+                    "$ref": "file://./base.definition.schema.v1.json#/definitions/properties"
+                }
+            },
+            "minProperties": 1,
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "properties",
+        "additionalProperties"
+    ],
+    "additionalProperties": false
+}

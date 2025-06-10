@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_iam_role.example "role_name"

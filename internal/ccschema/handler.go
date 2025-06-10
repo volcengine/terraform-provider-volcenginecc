@@ -1,0 +1,18 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
+package ccschema
+
+const (
+	HandlerTypeCreate = "create"
+	HandlerTypeDelete = "delete"
+	HandlerTypeList   = "list"
+	HandlerTypeRead   = "read"
+	HandlerTypeUpdate = "update"
+)
+
+type Handler struct {
+	HandlerSchema    *HandlerSchema `json:"handlerSchema,omitempty"`
+	Permissions      []string       `json:"permissions,omitempty"`
+	TimeoutInMinutes int            `json:"timeoutInMinutes,omitempty"`
+}

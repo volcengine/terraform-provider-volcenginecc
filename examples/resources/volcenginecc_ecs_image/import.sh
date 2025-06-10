@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ecs_image.example "image_id"

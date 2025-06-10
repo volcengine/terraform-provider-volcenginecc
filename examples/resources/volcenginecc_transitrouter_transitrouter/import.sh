@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_transitrouter_transitrouter.example "transit_router_id"

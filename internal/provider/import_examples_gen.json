@@ -1,0 +1,52 @@
+[
+    {
+        "resource": "volcenginecc_iam_role",
+        "identifier": ["RoleName"],
+        "path": "./examples/resources/volcenginecc_iam_role/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_image",
+        "identifier": ["ImageId"],
+        "path": "./examples/resources/volcenginecc_ecs_image/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cr_repository",
+        "identifier": ["Registry","Namespace","Name"],
+        "path": "./examples/resources/volcenginecc_cr_repository/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_clb",
+        "identifier": ["LoadBalancerId"],
+        "path": "./examples/resources/volcenginecc_clb_clb/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_vpc",
+        "identifier": ["VpcId"],
+        "path": "./examples/resources/volcenginecc_vpc_vpc/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_transitrouter",
+        "identifier": ["TransitRouterId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_transitrouter/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_loadbalancer",
+        "identifier": ["LoadBalancerId"],
+        "path": "./examples/resources/volcenginecc_alb_loadbalancer/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ebs_volume",
+        "identifier": ["VolumeId"],
+        "path": "./examples/resources/volcenginecc_ebs_volume/import.sh"
+    },
+    {
+        "resource": "volcenginecc_iam_user",
+        "identifier": ["UserName"],
+        "path": "./examples/resources/volcenginecc_iam_user/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ark_endpoint",
+        "identifier": ["Id"],
+        "path": "./examples/resources/volcenginecc_ark_endpoint/import.sh"
+    }
+]
