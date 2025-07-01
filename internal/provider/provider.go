@@ -11,10 +11,11 @@ import (
 	"net/url"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int32validator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
@@ -107,15 +108,11 @@ func (p *VolcengineCCProvider) Schema(ctx context.Context, request provider.Sche
 						Description: "he TRN of the role to assume.",
 						Required:    true,
 					},
-					"assume_role_session_name": schema.StringAttribute{
-						Description: "The session name to use when making the AssumeRole call.",
-						Required:    true,
-					},
-					"duration_seconds": schema.Int64Attribute{
+					"duration_seconds": schema.Int32Attribute{
 						Description: "The duration of the session when making the AssumeRole call. Its value ranges from 900 to 43200(seconds), and default is 3600 seconds.",
-						Required:    true,
-						Validators: []validator.Int64{
-							int64validator.Between(900, 43200),
+						Optional:    true,
+						Validators: []validator.Int32{
+							int32validator.Between(900, 43200),
 						},
 					},
 					"policy": schema.StringAttribute{
@@ -157,10 +154,9 @@ type configModel struct {
 	terraformVersion string
 }
 type AssumeRoleData struct {
-	AssumeRoleTRN         types.String `tfsdk:"assume_role_trn"`
-	AssumeRoleSessionName types.String `tfsdk:"assume_role_session_name"`
-	Duration              types.Int32  `tfsdk:"duration"`
-	Policy                types.String `tfsdk:"policy"`
+	AssumeRoleTRN types.String `tfsdk:"assume_role_trn"`
+	Duration      types.Int32  `tfsdk:"duration_seconds"`
+	Policy        types.String `tfsdk:"policy"`
 }
 
 type endpointData struct {
@@ -198,6 +194,58 @@ func (p *VolcengineCCProvider) Configure(ctx context.Context, request provider.C
 	}
 	if config.Region.ValueString() == "" {
 		response.Diagnostics.AddError("Missing Region", "Region must be set")
+	}
+	if config.DisableSSL.IsNull() || config.DisableSSL.IsUnknown() {
+		if disableSSLString := os.Getenv("VOLCENGINE_DISABLE_SSL"); disableSSLString != "" {
+			disableSSLBool, _ := strconv.ParseBool(disableSSLString)
+			config.DisableSSL = types.BoolValue(disableSSLBool)
+		}
+	}
+	if config.ProxyURL.IsNull() || config.ProxyURL.IsUnknown() {
+		if proxyURL := os.Getenv("VOLCENGINE_PROXY_URL"); proxyURL != "" {
+			config.ProxyURL = types.StringValue(proxyURL)
+		}
+	}
+	if config.CustomerHeaders.IsNull() || config.CustomerHeaders.IsUnknown() {
+		if customerHeader := os.Getenv("VOLCENGINE_CUSTOMER_HEADERS"); customerHeader != "" {
+			config.CustomerHeaders = types.StringValue(customerHeader)
+		}
+	}
+	if config.Endpoints == nil {
+		config.Endpoints = &endpointData{}
+	}
+	if config.Endpoints.CloudControlAPI.IsNull() || config.Endpoints.CloudControlAPI.IsUnknown() {
+		if ccEndpoint := os.Getenv("VOLCENGINE_CC_ENDPOINT"); ccEndpoint != "" {
+			config.Endpoints.CloudControlAPI = types.StringValue(ccEndpoint)
+		}
+	}
+	if config.Endpoints.STS.IsNull() || config.Endpoints.STS.IsUnknown() {
+		if stsEndpoint := os.Getenv("VOLCENGINE_STS_ENDPOINT"); stsEndpoint != "" {
+			config.Endpoints.STS = types.StringValue(stsEndpoint)
+		}
+	}
+	if config.AssumeRole == nil {
+		config.AssumeRole = &AssumeRoleData{
+			AssumeRoleTRN: types.StringNull(),
+			Duration:      types.Int32Null(),
+			Policy:        types.StringNull(),
+		}
+	}
+	if config.AssumeRole.AssumeRoleTRN.IsNull() || config.AssumeRole.AssumeRoleTRN.IsUnknown() {
+		if trn := os.Getenv("VOLCENGINE_ASSUME_ROLE_TRN"); trn != "" {
+			config.AssumeRole.AssumeRoleTRN = types.StringValue(trn)
+		}
+	}
+	if config.AssumeRole.Duration.IsNull() || config.AssumeRole.Duration.IsUnknown() {
+		if duration := os.Getenv("VOLCENGINE_ASSUME_ROLE_DURATION_SECONDS"); duration != "" {
+			durationInt, _ := strconv.Atoi(duration)
+			config.AssumeRole.Duration = types.Int32Value(int32(durationInt))
+		}
+	}
+	if config.AssumeRole.Policy.IsNull() || config.AssumeRole.Policy.IsUnknown() {
+		if policy := os.Getenv("VOLCENGINE_ASSUME_ROLE_POLICY"); policy != "" {
+			config.AssumeRole.Policy = types.StringValue("VOLCENGINE_ASSUME_ROLE_Policy")
+		}
 	}
 
 	providerData, diags := newProviderData(ctx, &config)
@@ -308,13 +356,18 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 		httpClient.Transport = t
 	}
 
-	if c.AssumeRole != nil {
+	if c.AssumeRole != nil && !c.AssumeRole.AssumeRoleTRN.IsNull() {
 		accountId, roleName, err := ParseTrn(c.AssumeRole.AssumeRoleTRN.ValueString())
 		if err != nil {
 			diags.AddError(err.Error(), err.Error())
 			return nil, diags
 
 		}
+
+		if c.AssumeRole.Duration.IsNull() || c.AssumeRole.Duration.IsUnknown() {
+			c.AssumeRole.Duration = types.Int32Value(3600)
+		}
+
 		stsValue := credentials.StsValue{
 			AccessKey:       c.AccessKey.ValueString(),
 			SecurityKey:     c.SecretKey.ValueString(),
