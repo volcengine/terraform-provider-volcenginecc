@@ -39,6 +39,8 @@ Public：公有类型 OCI 制品仓库，可以被所有用户访问。
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 $ terraform import volcenginecc_cr_repository.example "registry|namespace|name"
 ```

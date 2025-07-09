@@ -59,3 +59,6 @@ resource_schema "volcengine_ark_endpoint" {
 resource_schema "volcengine_tos_bucket" {
   cloudcontrol_type_name = "Volcengine::TOS::Bucket"
 }
+resource_schema "volcengine_tos_bucket" {
+  cloudcontrol_type_name = "Volcengine::TOS::Bucket"
+}

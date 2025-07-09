@@ -1,5 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
+// Copyright (c) 2025 Beijing Volcano Engine Technology Co., Ltd.
 // SPDX-License-Identifier: MPL-2.0
+// This file has been modified by Beijing Volcano Engine Technology Co., Ltd. on 2025
 
 package generic
 
