@@ -403,6 +403,9 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API Failed", "CreateResource", apiErr))
 		return
 	}
+	tflog.Info(ctx, "Cloud Control API CreateResource waiting task ......  ", map[string]interface{}{
+		"TaskID": hclog.Fmt("%v", taskId),
+	})
 	var event *cloudcontrol.ProgressEvent
 	if !Success {
 		event, _, err = tfcloudcontrol.AwaitTask(ctx, cloudControlClient, taskId)
@@ -632,7 +635,9 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "UpdateResource", apiErr))
 		return
 	}
-
+	tflog.Info(ctx, "Cloud Control API UpdateResource waiting task ...... ", map[string]interface{}{
+		"TaskID": hclog.Fmt("%v", taskId),
+	})
 	if !Success {
 		_, _, err = tfcloudcontrol.AwaitTask(ctx, cloudControlClient, taskId)
 		if err != nil {

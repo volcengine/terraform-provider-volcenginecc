@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/base"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/cloudcontrol"
@@ -44,7 +45,9 @@ func DeleteResource(ctx context.Context, cloudControlClient *cloudcontrol.CloudC
 	} else {
 		return fmt.Errorf("invoke DeleteResource handler unknown failed,resp:%s ", util.JsonString(resp))
 	}
-
+	tflog.Info(ctx, "Cloud Control API DeleteResource waiting task ...... ", map[string]interface{}{
+		"TaskID": hclog.Fmt("%v", taskId),
+	})
 	_, _, err = AwaitTask(ctx, cloudControlClient, taskId)
 	if err != nil {
 		return err
