@@ -46,7 +46,8 @@ func DeleteResource(ctx context.Context, cloudControlClient *cloudcontrol.CloudC
 		return fmt.Errorf("invoke DeleteResource handler unknown failed,resp:%s ", util.JsonString(resp))
 	}
 	tflog.Info(ctx, "Cloud Control API DeleteResource waiting task ...... ", map[string]interface{}{
-		"TaskID": hclog.Fmt("%v", taskId),
+		"TaskID":    hclog.Fmt("%v", taskId),
+		"RequestID": hclog.Fmt("%v", resp.GetRequestId()),
 	})
 	_, _, err = AwaitTask(ctx, cloudControlClient, taskId)
 	if err != nil {

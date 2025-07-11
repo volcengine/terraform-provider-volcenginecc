@@ -42,11 +42,22 @@ type (
 	}
 
 	UpdateResourceOutput struct {
-		ResponseMetadata *response.ResponseMetadata
-		EventTime        *string
-		TypeName         *string
-		Operation        *string
-		OperationStatus  *string
-		TaskID           *string
+		Metadata        *response.ResponseMetadata
+		EventTime       *string
+		TypeName        *string
+		Operation       *string
+		OperationStatus *string
+		TaskID          *string
 	}
 )
+
+func (output *UpdateResourceOutput) GetRequestId() string {
+	if output == nil || output.Metadata == nil {
+		return "-"
+	}
+	reqId := output.Metadata.RequestId
+	if reqId == "" {
+		return "-"
+	}
+	return output.Metadata.RequestId
+}

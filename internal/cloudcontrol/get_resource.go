@@ -40,7 +40,7 @@ type (
 	}
 
 	GetResourceOutput struct {
-		ResponseMetadata *response.ResponseMetadata
+		Metadata *response.ResponseMetadata
 
 		TypeName            *string
 		ResourceDescription *ResourceDescriptionForGetResourceOutput
@@ -51,3 +51,14 @@ type (
 		Properties *string
 	}
 )
+
+func (output *GetResourceOutput) GetRequestId() string {
+	if output == nil || output.Metadata == nil {
+		return "-"
+	}
+	reqId := output.Metadata.RequestId
+	if reqId == "" {
+		return "-"
+	}
+	return output.Metadata.RequestId
+}

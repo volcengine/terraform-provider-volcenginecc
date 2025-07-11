@@ -61,3 +61,14 @@ type (
 		ResourceModel   *string
 	}
 )
+
+func (output *CreateResourceOutput) GetRequestId() string {
+	if output == nil || output.Metadata == nil {
+		return "-"
+	}
+	reqId := output.Metadata.RequestId
+	if reqId == "" {
+		return "-"
+	}
+	return output.Metadata.RequestId
+}
