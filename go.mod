@@ -16,7 +16,7 @@ require (
 	github.com/hashicorp/terraform-plugin-log v0.9.0
 	github.com/hashicorp/terraform-plugin-testing v1.13.1
 	github.com/jinzhu/inflection v1.0.0
-	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
+	github.com/mattbaird/jsonpatch v0.0.0-20240118010651-0ba75a80ca38
 	github.com/test-go/testify v1.1.4
 	github.com/volcengine/volcengine-go-sdk v1.1.18
 	github.com/xeipuuv/gojsonschema v1.2.0
