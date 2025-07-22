@@ -1,1 +1,0 @@
-$ terraform import volcenginecc_alb_loadbalancer.example "load_balancer_id"

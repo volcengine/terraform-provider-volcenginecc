@@ -1,1 +1,0 @@
-$ terraform import volcenginecc_cr_repository.example "registry|namespace|name"

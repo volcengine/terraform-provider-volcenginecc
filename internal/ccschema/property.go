@@ -29,7 +29,7 @@ const (
 	PropertyFormatTime                = "time"
 	PropertyFormatUri                 = "uri"
 	PropertyFormatUriReference        = "uri-reference"
-	PropertyFormatUriTemplate         = "uri-template"
+	PropertyFormatUriTemplate         = "uri-templates"
 )
 
 const (

@@ -1,1 +1,0 @@
-$ terraform import volcenginecc_vpc_vpc.example "vpc_id"

@@ -1,1 +1,0 @@
-$ terraform import volcenginecc_iam_user.example "user_name"
