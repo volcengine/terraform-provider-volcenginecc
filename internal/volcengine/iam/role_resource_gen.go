@@ -7,6 +7,7 @@ package iam
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -117,12 +118,14 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "items": {
-		//	    "additionalProperties": false,
+		//	    "description": "角色策略",
 		//	    "properties": {
 		//	      "PolicyName": {
+		//	        "description": "策略名",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
+		//	        "description": "策略类型",
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -143,8 +146,9 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "策略名",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -154,8 +158,9 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "策略类型",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"System",
@@ -194,23 +199,29 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "角色名",
+		//	  "pattern": "^[\\w.\\-]{1,64}$",
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色名",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w.\\-]{1,64}$"), ""),
+			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "items": {
-		//	    "additionalProperties": false,
+		//	    "description": "标签",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "标签键",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "标签值",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -227,8 +238,9 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "标签键",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -238,8 +250,9 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "标签值",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/

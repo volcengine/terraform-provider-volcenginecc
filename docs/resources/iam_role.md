@@ -42,8 +42,8 @@ description: |-
 
 Optional:
 
-- `policy_name` (String)
-- `policy_type` (String)
+- `policy_name` (String) 策略名
+- `policy_type` (String) 策略类型
 
 
 <a id="nestedatt--tags"></a>
@@ -51,8 +51,8 @@ Optional:
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) 标签键
+- `value` (String) 标签值
 
 ## Import
 

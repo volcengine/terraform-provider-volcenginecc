@@ -88,12 +88,14 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "items": {
-		//	    "additionalProperties": false,
+		//	    "description": "角色策略",
 		//	    "properties": {
 		//	      "PolicyName": {
+		//	        "description": "策略名",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
+		//	        "description": "策略类型",
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -114,11 +116,13 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "策略名",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "策略类型",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -140,6 +144,7 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "角色名",
+		//	  "pattern": "^[\\w.\\-]{1,64}$",
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -151,12 +156,14 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "items": {
-		//	    "additionalProperties": false,
+		//	    "description": "标签",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "标签键",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "标签值",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -173,11 +180,13 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "标签键",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "标签值",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

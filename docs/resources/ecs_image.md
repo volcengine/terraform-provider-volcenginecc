@@ -22,36 +22,34 @@ description: |-
 ### Optional
 
 - `boot_mode` (String) 镜像的启动模式
-- `create_whole_image` (Boolean) 是否创建整机镜像
 - `description` (String) 镜像描述
 - `detection_results` (Attributes) (see [below for nested schema](#nestedatt--detection_results))
 - `instance_id` (String) 实例ID
 - `kernel` (String) 镜像的内核版本
 - `license_type` (String) 镜像许可证类型
-- `need_detection` (Boolean) 是否进行镜像检测
 - `os_name` (String) 镜像操作系统的名称
 - `os_type` (String) 操作系统类型
 - `platform` (String) 镜像操作系统的发行版本
 - `platform_version` (String) 镜像的发行版本
 - `project_name` (String) 资源所属项目
-- `share_permission` (List of String) 镜像共享的账户
+- `share_permission` (Set of String) 镜像共享的账户
 - `snapshot_group_id` (String) 快照一致性组ID，表示使用快照一致性组创建自定义镜像
 - `snapshot_id` (String) 系统盘快照ID，表示使用系统盘快照创建自定义镜像
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `architecture` (String) 镜像的架构类型
 - `created_at` (String) 镜像创建时间
 - `id` (String) Uniquely identifies the resource.
-- `image_id` (String) 镜像ID
+- `image_id` (String) 实例ID
 - `image_owner_id` (String) 镜像所属的账号ID
 - `is_install_run_command_agent` (Boolean) 镜像中是否安装了云助手Agent
 - `is_lts` (Boolean) 公共镜像是否长期维护
 - `is_support_cloud_init` (Boolean) 镜像是否支持Cloud-init
 - `share_status` (String) 镜像共享状态
 - `size` (Number) 镜像大小
-- `snapshots` (Attributes List) 镜像关联快照的信息 (see [below for nested schema](#nestedatt--snapshots))
+- `snapshots` (Attributes Set) 镜像关联快照的信息 (see [below for nested schema](#nestedatt--snapshots))
 - `status` (String) 镜像的状态
 - `updated_at` (String) 镜像更新时间
 - `virtual_size` (Number) 镜像大小，单位为Byte

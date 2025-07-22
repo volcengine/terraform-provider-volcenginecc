@@ -53,17 +53,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "镜像的启动模式",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: CreateWholeImage
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "是否创建整机镜像",
-		//	  "type": "boolean"
-		//	}
-		"create_whole_image": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否创建整机镜像",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// Cloud Control resource type schema:
 		//
@@ -101,6 +90,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Items": {
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Name": {
@@ -122,7 +112,8 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": false
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -169,11 +160,11 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像ID",
+		//	  "description": "实例ID",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像ID",
+			Description: "实例ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImageName
@@ -271,17 +262,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "镜像许可证类型",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: NeedDetection
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "是否进行镜像检测",
-		//	  "type": "boolean"
-		//	}
-		"need_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否进行镜像检测",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: OsName
 		// Cloud Control resource type schema:
 		//
@@ -351,12 +331,14 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "镜像共享的账户",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"share_permission": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"share_permission": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "镜像共享的账户",
 			Computed:    true,
@@ -414,6 +396,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "镜像关联快照的信息",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Size": {
@@ -435,9 +418,10 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"snapshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"snapshots": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Size
@@ -475,6 +459,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
@@ -490,9 +475,10 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
@@ -564,7 +550,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"architecture":                 "Architecture",
 		"boot_mode":                    "BootMode",
-		"create_whole_image":           "CreateWholeImage",
 		"created_at":                   "CreatedAt",
 		"description":                  "Description",
 		"detection_results":            "DetectionResults",
@@ -581,7 +566,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                          "Key",
 		"license_type":                 "LicenseType",
 		"name":                         "Name",
-		"need_detection":               "NeedDetection",
 		"os_name":                      "OsName",
 		"os_type":                      "OsType",
 		"platform":                     "Platform",

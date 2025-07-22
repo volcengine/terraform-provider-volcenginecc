@@ -18,7 +18,7 @@ type CloudControl struct {
 const (
 	ServiceName = "cloudcontrol" // Name of service.
 	EndpointsID = ServiceName    // ID to lookup a service endpoint with.
-	ServiceID   = "cloudcontrol" // ServiceID is a unique identifer of a specific service.
+	ServiceID   = ServiceName    // ServiceID is a unique identifer of a specific service.
 	APIVersion  = "2025-06-01"
 )
 

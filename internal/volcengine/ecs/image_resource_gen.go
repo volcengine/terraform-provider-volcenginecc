@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -76,22 +77,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: CreateWholeImage
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "是否创建整机镜像",
-		//	  "type": "boolean"
-		//	}
-		"create_whole_image": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否创建整机镜像",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// Cloud Control resource type schema:
 		//
@@ -139,6 +124,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Items": {
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Name": {
@@ -160,7 +146,8 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": false
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -227,6 +214,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -241,11 +229,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像ID",
+		//	  "description": "实例ID",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像ID",
+			Description: "实例ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -381,22 +369,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: NeedDetection
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "是否进行镜像检测",
-		//	  "type": "boolean"
-		//	}
-		"need_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否进行镜像检测",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: OsName
 		// Cloud Control resource type schema:
 		//
@@ -497,18 +469,20 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "镜像共享的账户",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"share_permission": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"share_permission": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "镜像共享的账户",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ShareStatus
@@ -580,6 +554,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "镜像关联快照的信息",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Size": {
@@ -601,9 +576,10 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"snapshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"snapshots": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Size
@@ -625,8 +601,8 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Description: "镜像关联快照的信息",
 			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -647,6 +623,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
@@ -662,9 +639,10 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
@@ -693,8 +671,8 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
@@ -768,7 +746,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"architecture":                 "Architecture",
 		"boot_mode":                    "BootMode",
-		"create_whole_image":           "CreateWholeImage",
 		"created_at":                   "CreatedAt",
 		"description":                  "Description",
 		"detection_results":            "DetectionResults",
@@ -785,7 +762,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"key":                          "Key",
 		"license_type":                 "LicenseType",
 		"name":                         "Name",
-		"need_detection":               "NeedDetection",
 		"os_name":                      "OsName",
 		"os_type":                      "OsType",
 		"platform":                     "Platform",
