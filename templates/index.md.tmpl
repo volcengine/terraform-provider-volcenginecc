@@ -18,20 +18,30 @@ terraform {
   required_providers {
     volcenginecc = {
       source  = "volcengine/volcenginecc"
-      version = "~> 1.0"
+      version = "~> 0.0.1-beta"
     }
   }
 }
 
-# Create iam role
-resource "volcenginecc_iam_role" "Demo" {
-  role_name = "RoleName"
-  description = "RoleDescription"
+# Create VPC
+resource "volcenginecc_vpc_vpc" "VPCDemo" {
+  vpc_name = "vpc-demo"
+  description = "VpcDemo Example"
+  cidr_block = "192.168.0.0/24"
+  support_ipv_4_gateway = true
+  enable_ipv_6 = false
+  project_name = "default"
+  tags = [
+    {
+      key = "env"
+      value = "test"
+    }
+  ]
 }
 
-# Query iam role
-data "volcenginecc_iam_role" "Demo" {
-  role_name = "RoleName"
+# Query VPC
+data "volcenginecc_vpc_vpc" "VpcVpcDataSource" {
+  id = volcenginecc_vpc_vpc.VPCDemo.id
 }
 ```
 
@@ -43,7 +53,7 @@ The Volcenginecc provider offers a flexible means of providing credentials for a
 
 Static credentials can be provided by adding an public_key and private_key in-line in the volcengine provider block:
 
-> Warning:
+> **Warning**:
 > Hard-coded credentials are not recommended in any Terraform configuration and risks secret leakage should this file ever be committed to a public version control system.
 
 Usage:
@@ -69,7 +79,7 @@ provider "volcenginecc" {
 Usage:
 
 ```shell
-export VOLCENGINE_ACCESS_KEY="your_public_key"
+$ export VOLCENGINE_ACCESS_KEY="your_public_key"
 $ export VOLCENGINE_SECRET_KEY="your_private_key"
 $ export VOLCENGINE_REGION="cn-beijing"
 ```
@@ -81,13 +91,14 @@ $ export VOLCENGINE_REGION="cn-beijing"
 ### Optional
 
 - `access_key` (String) The Access Key for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_ACCESS_KEY` environment variable
+- `secret_key` (String) he Secret Key for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_SECRET_KEY` environment variable
 - `assume_role` (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
 - `customer_headers` (String) CUSTOMER HEADERS for Volcengine Provider. The customer_headers field uses commas (,) to separate multiple headers, and colons (:) to separate each header key from its corresponding value.
 - `disable_ssl` (Boolean) Disable SSL for Volcengine Provider
 - `endpoints` (Attributes) An `endpoints` block (documented below). Only one `endpoints` block may be in the configuration. (see [below for nested schema](#nestedatt--endpoints))
 - `proxy_url` (String) PROXY URL for Volcengine Provider
 - `region` (String) The Region for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_REGION` environment variable
-- `secret_key` (String) he Secret Key for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_SECRET_KEY` environment variable
+
 
 <a id="nestedatt--assume_role"></a>
 
