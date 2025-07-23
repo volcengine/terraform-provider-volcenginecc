@@ -1,17 +1,17 @@
 resource "volcenginecc_vpc_vpc" "VPCDemo" {
-  cidr_block            = "192.168.0.0/24"
+  cidr_block = "192.168.0.0/24"
   support_ipv_4_gateway = true
-  enable_ipv_6          = false
-  vpc_name              = "vpc-demo"
-  description           = "VpcDemo Example"
-  dns_servers           = [
+  enable_ipv_6 = false
+  vpc_name = "vpc-demo"
+  description = "VpcDemo Example"
+  dns_servers = [
     "12.3.x.x"
   ]
   associate_cens = [
     {
-      cen_id       = "cen-3re8cx4vwdibk5zsk2xxxx"
+      cen_id = "cen-3re8cx4vwdibk5zsk2xxxx"
       cen_owner_id = "200000xxx"
-      cen_status   = "Attaching"
+      cen_status = "Attaching"
     }
   ]
   nat_gateway_ids = [
@@ -24,9 +24,9 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
     "sg-29mkx39jb80741e1hgj2bxxx"
   ]
   project_name = "default"
-  tags         = [
+  tags = [
     {
-      key   = "env"
+      key = "env"
       value = "test"
     }
   ]

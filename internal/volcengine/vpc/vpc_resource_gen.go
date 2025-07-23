@@ -7,14 +7,15 @@ package vpc
 
 import (
 	"context"
+	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -35,11 +36,11 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC所属账号的ID。",
+		//	  "description": "VPC所属账号的ID",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC所属账号的ID。",
+			Description: "VPC所属账号的ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -49,21 +50,20 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC关联的CEN信息。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC关联的CEN信息",
 		//	  "items": {
-		//	    "description": "VPC关联的CEN信息。",
+		//	    "description": "VPC关联的CEN信息",
 		//	    "properties": {
 		//	      "CenId": {
-		//	        "description": "CEN的ID。",
+		//	        "description": "CEN的ID",
 		//	        "type": "string"
 		//	      },
 		//	      "CenOwnerId": {
-		//	        "description": "CEN的用户ID。",
+		//	        "description": "CEN的用户ID",
 		//	        "type": "string"
 		//	      },
 		//	      "CenStatus": {
-		//	        "description": "VPC在CEN中的状态。Attaching：加载中，Attached：已加载",
+		//	        "description": "VPC在CEN中的状态",
 		//	        "enum": [
 		//	          "Attaching",
 		//	          "Attached"
@@ -73,15 +73,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"associate_cens": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"associate_cens": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CenId
 					"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "CEN的ID。",
+						Description: "CEN的ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -90,7 +89,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: CenOwnerId
 					"cen_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "CEN的用户ID。",
+						Description: "CEN的用户ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -99,7 +98,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: CenStatus
 					"cen_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC在CEN中的状态。Attaching：加载中，Attached：已加载",
+						Description: "VPC在CEN中的状态",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -114,24 +113,46 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "VPC关联的CEN信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "VPC关联的CEN信息",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24、10.0.0.0/8 ~ 24、172.16.0.0/12 ~ 24。",
+		//	  "description": "VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24（默认）；10.0.0.0/8 ~ 24；172.16.0.0/12 ~ 24",
 		//	  "type": "string"
 		//	}
 		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24、10.0.0.0/8 ~ 24、172.16.0.0/12 ~ 24。",
+			Description: "VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24（默认）；10.0.0.0/8 ~ 24；172.16.0.0/12 ~ 24",
 			Optional:    true,
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClientToken
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "客户端Token，用于保证请求幂等性",
+		//	  "maxLength": 64,
+		//	  "pattern": "^[\\x00-\\x7F]*$",
+		//	  "type": "string"
+		//	}
+		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "客户端Token，用于保证请求幂等性",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\x00-\\x7F]*$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -141,11 +162,11 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建VPC的时间。",
+		//	  "description": "创建VPC的时间",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建VPC的时间。",
+			Description: "创建VPC的时间",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -155,13 +176,13 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不能以http://或https://开头。",
+		//	  "description": "VPC的描述信息",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不能以http://或https://开头。",
+			Description: "VPC的描述信息",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -175,36 +196,34 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用\u0026分隔。不填则配置为默认DNS服务器地址。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC的DNS服务器地址",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 5,
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"dns_servers": schema.SetAttribute{ /*START ATTRIBUTE*/
+		"dns_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用&分隔。不填则配置为默认DNS服务器地址。",
+			Description: "VPC的DNS服务器地址",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(5),
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(5),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnableIpv6
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
+		//	  "description": "是否开启IPv6网段，默认值false",
 		//	  "type": "boolean"
 		//	}
 		"enable_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
+			Description: "是否开启IPv6网段，默认值false",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -215,11 +234,11 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC 绑定的 IPv4 网关的 ID。",
+		//	  "description": "VPC 绑定的 IPv4 网关的 ID",
 		//	  "type": "string"
 		//	}
 		"ipv_4_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC 绑定的 IPv4 网关的 ID。",
+			Description: "VPC 绑定的 IPv4 网关的 ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -231,11 +250,11 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的IPv6网段。传入此参数后，参数Ipv6MaskLen不生效。参数Ipv6Isp传入非BGP后，参数Ipv6MaskLen和参数Ipv6CidrBlock二者必须传入一个。参数Ipv6Isp未传或传入BGP，此参数未传，则由系统自动分配IPv6网段。",
+		//	  "description": "VPC的IPv6网段。参数EnableIpv6设置为“true”时，如果不传入该参数，则由系统自动分配IPv6网段。",
 		//	  "type": "string"
 		//	}
 		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的IPv6网段。传入此参数后，参数Ipv6MaskLen不生效。参数Ipv6Isp传入非BGP后，参数Ipv6MaskLen和参数Ipv6CidrBlock二者必须传入一个。参数Ipv6Isp未传或传入BGP，此参数未传，则由系统自动分配IPv6网段。",
+			Description: "VPC的IPv6网段。参数EnableIpv6设置为“true”时，如果不传入该参数，则由系统自动分配IPv6网段。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -246,11 +265,11 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该VPC是否为默认VPC。true：默认VPC，表示该VPC是创建ECS实例时系统自动创建的VPC。false：非默认VPC，表示该VPC是用户手动创建的。",
+		//	  "description": "该VPC是否为默认VPC",
 		//	  "type": "boolean"
 		//	}
 		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "该VPC是否为默认VPC。true：默认VPC，表示该VPC是创建ECS实例时系统自动创建的VPC。false：非默认VPC，表示该VPC是用户手动创建的。",
+			Description: "该VPC是否为默认VPC",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -260,32 +279,30 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中创建的NAT网关的ID。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC中创建的NAT网关的ID",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"nat_gateway_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+		"nat_gateway_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC中创建的NAT网关的ID。",
+			Description: "VPC中创建的NAT网关的ID",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkAclNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中的网络ACL的数量。",
+		//	  "description": "VPC中的网络ACL的数量",
 		//	  "type": "string"
 		//	}
 		"network_acl_num": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC中的网络ACL的数量。",
+			Description: "VPC中的网络ACL的数量",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -295,11 +312,11 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC所属项目的名称。不填默认加入default项目。",
+		//	  "description": "VPC所属项目的名称",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC所属项目的名称。不填默认加入default项目。",
+			Description: "VPC所属项目的名称",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -311,70 +328,64 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC关联的路由表ID。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC下创建的路由表的ID",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"route_table_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+		"route_table_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC关联的路由表ID。",
+			Description: "VPC下创建的路由表的ID",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryCidrBlocks
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的辅助网段。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC的辅助网段",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"secondary_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
+		"secondary_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC的辅助网段。",
+			Description: "VPC的辅助网段",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中安全组的列表。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC的安全组列表",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC中安全组的列表。",
+			Description: "VPC的安全组列表",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的状态。Creating：创建中。Pending：已创建。Available：可用。",
+		//	  "description": "VPC的状态",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Pending",
@@ -383,7 +394,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的状态。Creating：创建中。Pending：已创建。Available：可用。",
+			Description: "VPC的状态",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -393,32 +404,30 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中子网的列表。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC中子网的列表",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC中子网的列表。",
+			Description: "VPC中子网的列表",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SupportIpv4Gateway
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC 是否启用 IPv4 网关。false（默认值）：不启用。true：启用。",
+		//	  "description": "VPC 是否启用 IPv4 网关",
 		//	  "type": "boolean"
 		//	}
 		"support_ipv_4_gateway": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC 是否启用 IPv4 网关。false（默认值）：不启用。true：启用。",
+			Description: "VPC 是否启用 IPv4 网关",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -430,17 +439,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络绑定的标签。",
-		//	  "insertionOrder": false,
+		//	  "description": "标签",
 		//	  "items": {
-		//	    "description": "资源标签。",
+		//	    "description": "资源标签",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "标签键",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "标签值",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -450,15 +458,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "标签键",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -470,7 +477,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "标签值",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -482,22 +489,22 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "私有网络绑定的标签。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "标签",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新VPC的时间。",
+		//	  "description": "更新VPC的时间",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新VPC的时间。",
+			Description: "更新VPC的时间",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -507,32 +514,30 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的用户网段。",
-		//	  "insertionOrder": false,
+		//	  "description": "VPC的用户网段",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"user_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
+		"user_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC的用户网段。",
+			Description: "VPC的用户网段",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的ID。",
+		//	  "description": "VPC的ID",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的ID。",
+			Description: "VPC的ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -542,13 +547,13 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为VPC实例的ID。不能以http://或https://开头。",
+		//	  "description": "VPC的名称，不填默认为VPC实例的ID",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为VPC实例的ID。不能以http://或https://开头。",
+			Description: "VPC的名称，不填默认为VPC实例的ID",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -570,7 +575,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "私有网络为云上资源构建隔离的、自主配置的虚拟网络环境。可以在私有网络中自定义IP地址段、安全组、路由策略等网络特性，简单高效安全地管理云上资源。",
+		Description: "私有网络",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -586,6 +591,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"cen_owner_id":          "CenOwnerId",
 		"cen_status":            "CenStatus",
 		"cidr_block":            "CidrBlock",
+		"client_token":          "ClientToken",
 		"creation_time":         "CreationTime",
 		"description":           "Description",
 		"dns_servers":           "DnsServers",
@@ -611,23 +617,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_name":              "VpcName",
 	})
 
-	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/VpcId",
-		"/properties/CreationTime",
-		"/properties/UpdateTime",
-		"/properties/Status",
-		"/properties/AccountId",
-		"/properties/IsDefault",
-		"/properties/NetworkAclNum",
-	})
-
-	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/ClientToken",
-		"/properties/CidrBlock",
-		"/properties/ProjectName",
-		"/properties/SupportIpv4Gateway",
-		"/properties/Ipv4GatewayId",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

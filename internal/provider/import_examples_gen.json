@@ -1,72 +1,17 @@
 [
     {
-        "resource": "volcenginecc_ecs_image",
-        "identifier": ["ImageId"],
-        "path": "./examples/resources/volcenginecc_ecs_image/import.sh"
-    },
-    {
         "resource": "volcenginecc_tos_bucket",
         "identifier": ["Name"],
         "path": "./examples/resources/volcenginecc_tos_bucket/import.sh"
     },
     {
-        "resource": "volcenginecc_iam_group",
-        "identifier": ["UserGroupName"],
-        "path": "./examples/resources/volcenginecc_iam_group/import.sh"
-    },
-    {
-        "resource": "volcenginecc_iam_user",
-        "identifier": ["UserName"],
-        "path": "./examples/resources/volcenginecc_iam_user/import.sh"
-    },
-    {
-        "resource": "volcenginecc_vpc_securitygroup",
-        "identifier": ["SecurityGroupId"],
-        "path": "./examples/resources/volcenginecc_vpc_securitygroup/import.sh"
-    },
-    {
-        "resource": "volcenginecc_vpc_subnet",
-        "identifier": ["SubnetId"],
-        "path": "./examples/resources/volcenginecc_vpc_subnet/import.sh"
-    },
-    {
-        "resource": "volcenginecc_iam_accesskey",
-        "identifier": ["AccessKeyId","UserName"],
-        "path": "./examples/resources/volcenginecc_iam_accesskey/import.sh"
-    },
-    {
-        "resource": "volcenginecc_vpc_eni",
-        "identifier": ["NetworkInterfaceId"],
-        "path": "./examples/resources/volcenginecc_vpc_eni/import.sh"
-    },
-    {
-        "resource": "volcenginecc_iam_policy",
-        "identifier": ["PolicyName","PolicyType"],
-        "path": "./examples/resources/volcenginecc_iam_policy/import.sh"
-    },
-    {
-        "resource": "volcenginecc_vpc_eip",
-        "identifier": ["AllocationId"],
-        "path": "./examples/resources/volcenginecc_vpc_eip/import.sh"
-    },
-    {
-        "resource": "volcenginecc_vpc_route_table",
-        "identifier": ["RouteTableId"],
-        "path": "./examples/resources/volcenginecc_vpc_route_table/import.sh"
-    },
-    {
-        "resource": "volcenginecc_ark_endpoint",
-        "identifier": ["EndpointId"],
-        "path": "./examples/resources/volcenginecc_ark_endpoint/import.sh"
+        "resource": "volcenginecc_ecs_image",
+        "identifier": ["ImageId"],
+        "path": "./examples/resources/volcenginecc_ecs_image/import.sh"
     },
     {
         "resource": "volcenginecc_vpc_vpc",
         "identifier": ["VpcId"],
         "path": "./examples/resources/volcenginecc_vpc_vpc/import.sh"
-    },
-    {
-        "resource": "volcenginecc_iam_role",
-        "identifier": ["RoleName"],
-        "path": "./examples/resources/volcenginecc_iam_role/import.sh"
     }
 ]

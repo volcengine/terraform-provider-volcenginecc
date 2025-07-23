@@ -26,22 +26,16 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "桶的访问控制权限。",
 		//	  "properties": {
 		//	    "BucketACLDelivered": {
-		//	      "description": "是否开启对象默认继承桶 ACL 功能。true：开启对象默认继承桶 ACL 功能。false：关闭对象默认继承桶 ACL 功能。",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Grants": {
-		//	      "description": "对象的访问控制权限根节点。",
-		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Grantee": {
-		//	            "description": "被授权用户信息。",
 		//	            "properties": {
 		//	              "Canned": {
-		//	                "description": "预定义组。包括AllUsers、AuthenticatedUsers。",
 		//	                "enum": [
 		//	                  "AllUsers",
 		//	                  "AuthenticatedUsers"
@@ -49,15 +43,13 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "DisplayName": {
-		//	                "description": "展示名。",
 		//	                "type": "string"
 		//	              },
-		//	              "GranteeId": {
-		//	                "description": "账号ID。",
+		//	              "ID": {
+		//	                "description": "账号ID",
 		//	                "type": "string"
 		//	              },
 		//	              "Type": {
-		//	                "description": "用户类型。包括Group、CanonicalUser。",
 		//	                "enum": [
 		//	                  "Group",
 		//	                  "CanonicalUser"
@@ -68,10 +60,9 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "Permission": {
-		//	            "description": "授权类型。包括READ、READ_NON_LIST、WRITE、READ_ACP、WRITE_ACP、FULL_CONTROL。",
+		//	            "description": "桶访问权限",
 		//	            "enum": [
 		//	              "READ",
-		//	              "READ_NON_LIST",
 		//	              "WRITE",
 		//	              "READ_ACP",
 		//	              "WRITE_ACP",
@@ -82,18 +73,14 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array",
-		//	      "uniqueItems": true
+		//	      "type": "array"
 		//	    },
 		//	    "Owner": {
-		//	      "description": "对象所有者。",
 		//	      "properties": {
 		//	        "DisplayName": {
-		//	          "description": "展示名。",
 		//	          "type": "string"
 		//	        },
-		//	        "OwnerId": {
-		//	          "description": "账号ID。",
+		//	        "ID": {
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -106,11 +93,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BucketACLDelivered
 				"bucket_acl_delivered": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启对象默认继承桶 ACL 功能。true：开启对象默认继承桶 ACL 功能。false：关闭对象默认继承桶 ACL 功能。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Grants
-				"grants": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+				"grants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Grantee
@@ -118,58 +104,49 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Canned
 									"canned": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "预定义组。包括AllUsers、AuthenticatedUsers。",
-										Computed:    true,
+										Computed: true,
 									}, /*END ATTRIBUTE*/
 									// Property: DisplayName
 									"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "展示名。",
-										Computed:    true,
+										Computed: true,
 									}, /*END ATTRIBUTE*/
-									// Property: GranteeId
-									"grantee_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "账号ID。",
+									// Property: ID
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "账号ID",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "用户类型。包括Group、CanonicalUser。",
-										Computed:    true,
+										Computed: true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "被授权用户信息。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Permission
 							"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "授权类型。包括READ、READ_NON_LIST、WRITE、READ_ACP、WRITE_ACP、FULL_CONTROL。",
+								Description: "桶访问权限",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "对象的访问控制权限根节点。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Owner
 				"owner": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "展示名。",
-							Computed:    true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
-						// Property: OwnerId
-						"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "账号ID。",
-							Computed:    true,
+						// Property: ID
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "对象所有者。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "桶的访问控制权限。",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ACLGrant
 		// Cloud Control resource type schema:
@@ -177,7 +154,6 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "properties": {
 		//	    "ACL": {
-		//	      "description": "桶的访问权限。包括private、public-read、public-read-write、authenticated-read、bucket-owner-read、bucket-owner-full-control、log-delivery-write、bucket-owner-entrusted、default。",
 		//	      "enum": [
 		//	        "private",
 		//	        "public-read",
@@ -192,23 +168,18 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "GrantFullControl": {
-		//	      "description": "授予指定用户所有权限。",
 		//	      "type": "string"
 		//	    },
 		//	    "GrantRead": {
-		//	      "description": "授予指定用户读权限。",
 		//	      "type": "string"
 		//	    },
 		//	    "GrantReadAcp": {
-		//	      "description": "授予指定用户查看桶 ACL 的权限。",
 		//	      "type": "string"
 		//	    },
 		//	    "GrantWrite": {
-		//	      "description": "授予指定用户写权限。",
 		//	      "type": "string"
 		//	    },
 		//	    "GrantWriteAcp": {
-		//	      "description": "授予指定用户修改和删除桶 ACL 的权限。",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -218,33 +189,27 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ACL
 				"acl": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "桶的访问权限。包括private、public-read、public-read-write、authenticated-read、bucket-owner-read、bucket-owner-full-control、log-delivery-write、bucket-owner-entrusted、default。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: GrantFullControl
 				"grant_full_control": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "授予指定用户所有权限。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: GrantRead
 				"grant_read": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "授予指定用户读权限。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: GrantReadAcp
 				"grant_read_acp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "授予指定用户查看桶 ACL 的权限。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: GrantWrite
 				"grant_write": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "授予指定用户写权限。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: GrantWriteAcp
 				"grant_write_acp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "授予指定用户修改和删除桶 ACL 的权限。",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
@@ -253,7 +218,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "桶的可用区冗余类型。包括single-az：单可用区冗余，multi-az：多可用区冗余。",
+		//	  "description": "桶的可用区冗余类型",
 		//	  "enum": [
 		//	    "single-az",
 		//	    "multi-az"
@@ -261,14 +226,14 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"az_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "桶的可用区冗余类型。包括single-az：单可用区冗余，multi-az：多可用区冗余。",
+			Description: "桶的可用区冗余类型",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BucketType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "桶的类型。包括hns：获取所有分层桶列表，fns：获取所有扁平桶列表。",
+		//	  "description": "桶的类型",
 		//	  "enum": [
 		//	    "fns",
 		//	    "hns"
@@ -276,153 +241,130 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"bucket_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "桶的类型。包括hns：获取所有分层桶列表，fns：获取所有扁平桶列表。",
+			Description: "桶的类型",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreationDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "桶的创建时间。",
+		//	  "description": "桶的创建时间",
 		//	  "type": "string"
 		//	}
 		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "桶的创建时间。",
+			Description: "桶的创建时间",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: EnableVersionStatus
+		// Property: EnableVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。",
 		//	  "enum": [
 		//	    "Enabled",
 		//	    "Suspended"
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"enable_version_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。",
-			Computed:    true,
+		"enable_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExtranetEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶的 TOS 协议公网访问域名。",
+		//	  "description": "外部域名",
 		//	  "type": "string"
 		//	}
 		"extranet_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储桶的 TOS 协议公网访问域名。",
+			Description: "外部域名",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IntranetEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶的 TOS 协议私网访问域名",
+		//	  "description": "内部域名",
 		//	  "type": "string"
 		//	}
 		"intranet_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储桶的 TOS 协议私网访问域名",
+			Description: "内部域名",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Lifecycle
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶的声明周期。",
-		//	  "insertionOrder": false,
+		//	  "description": "存储桶的声明周期",
 		//	  "items": {
 		//	    "properties": {
 		//	      "AbortInCompleteMultipartUpload": {
-		//	        "description": "指定未合并的分片任务（碎片）的过期属性。",
 		//	        "properties": {
 		//	          "DaysAfterInitiation": {
-		//	            "description": "指定未合并的分片任务（碎片）的生命周期规则，在分片任务初始化过后过期删除的天数。",
 		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "Expiration": {
-		//	        "description": "基于最后修改时间的生命周期规则中删除最新版本对象的过期属性。",
 		//	        "properties": {
 		//	          "Date": {
-		//	            "description": "基于最后修改时间的生命周期规则中最新版本对象过期删除的具体日期。",
 		//	            "type": "string"
 		//	          },
 		//	          "Days": {
-		//	            "description": "基于最后修改时间的生命周期规则中最新版本对象过期删除的天数。",
 		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "Filter": {
-		//	        "description": "指定规则生效的过滤条件。",
 		//	        "properties": {
 		//	          "GreaterThanIncludeEqual": {
-		//	            "description": "是否启用相等条件。包括Enabled、Disabled。",
 		//	            "enum": [
 		//	              "Enabled",
-		//	              "Disabled",
-		//	              ""
+		//	              "Disabled"
 		//	            ],
 		//	            "type": "string"
 		//	          },
 		//	          "LessThanIncludeEqual": {
-		//	            "description": "是否启用相等条件。包括Enabled、Disabled。",
 		//	            "enum": [
 		//	              "Enabled",
-		//	              "Disabled",
-		//	              ""
+		//	              "Disabled"
 		//	            ],
 		//	            "type": "string"
 		//	          },
 		//	          "ObjectSizeGreaterThan": {
-		//	            "description": "设置规则生效于大于指定大小的对象。",
 		//	            "type": "integer"
 		//	          },
 		//	          "ObjectSizeLessThan": {
-		//	            "description": "设置规则生效于小于指定大小的对象。",
 		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "LifecycleRuleId": {
-		//	        "description": "规则 ID。",
+		//	      "ID": {
 		//	        "type": "string"
 		//	      },
 		//	      "NoCurrentVersionExpiration": {
 		//	        "properties": {
 		//	          "NonCurrentDate": {
-		//	            "description": "基于最后修改时间的生命周期规则中历史版本对象过期删除的具体日期。",
 		//	            "type": "string"
 		//	          },
 		//	          "NonCurrentDays": {
-		//	            "description": "基于最后修改时间的生命周期规则中历史版本对象过期删除的天数。",
 		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "NonCurrentVersionTransitions": {
-		//	        "description": "基于最后修改时间的生命周期规则中沉降历史版本对象的的过期属性。",
-		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "NonCurrentDate": {
-		//	              "description": "基于最后修改时间的生命周期规则中历史版本对象沉降的具体日期。",
 		//	              "type": "string"
 		//	            },
 		//	            "NonCurrentDays": {
-		//	              "description": "基于最后修改时间的生命周期规则中历史版本对象沉降的天数。",
 		//	              "type": "integer"
 		//	            },
 		//	            "StorageClass": {
-		//	              "description": "存储类型。包括STANDARD、IA、ARCHIVE_FR、INTELLIGENT_TIERING、COLD_ARCHIVE、ARCHIVE、DEEP_COLD_ARCHIVE。",
 		//	              "enum": [
 		//	                "STANDARD",
 		//	                "IA",
@@ -437,15 +379,12 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "type": "object"
 		//	        },
-		//	        "type": "array",
-		//	        "uniqueItems": true
+		//	        "type": "array"
 		//	      },
 		//	      "Prefix": {
-		//	        "description": "规则所适用的前缀。",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "是否启用规则。包括Enabled、Disabled。",
 		//	        "enum": [
 		//	          "Enabled",
 		//	          "Disabled"
@@ -453,16 +392,12 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Tags": {
-		//	        "description": "标签。",
-		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "Key": {
-		//	              "description": "标签键。",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "description": "标签值。",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -472,24 +407,18 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
-		//	        "type": "array",
-		//	        "uniqueItems": true
+		//	        "type": "array"
 		//	      },
 		//	      "Transitions": {
-		//	        "description": "基于最后修改时间的生命周期规则中沉降最新版本对象的的过期属性。",
-		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "Date": {
-		//	              "description": "基于最后修改时间的生命周期规则中最新版本对象过期沉降的具体日期。",
 		//	              "type": "string"
 		//	            },
 		//	            "Days": {
-		//	              "description": "基于最后修改时间的生命周期规则中最新版本对象过期沉降的天数。",
 		//	              "type": "integer"
 		//	            },
 		//	            "StorageClass": {
-		//	              "description": "基于最后修改时间的生命周期规则中历史版本对象沉降的存储类型。包括STANDARD、IA、ARCHIVE_FR、INTELLIGENT_TIERING、COLD_ARCHIVE、ARCHIVE、DEEP_COLD_ARCHIVE。",
 		//	              "enum": [
 		//	                "STANDARD",
 		//	                "IA",
@@ -504,16 +433,18 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "type": "object"
 		//	        },
-		//	        "type": "array",
-		//	        "uniqueItems": true
+		//	        "type": "array"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "ID",
+		//	      "Status"
+		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"lifecycle_config": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"lifecycle_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AbortInCompleteMultipartUpload
@@ -521,200 +452,175 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: DaysAfterInitiation
 							"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "指定未合并的分片任务（碎片）的生命周期规则，在分片任务初始化过后过期删除的天数。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "指定未合并的分片任务（碎片）的过期属性。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Expiration
 					"expiration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Date
 							"date": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "基于最后修改时间的生命周期规则中最新版本对象过期删除的具体日期。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Days
 							"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "基于最后修改时间的生命周期规则中最新版本对象过期删除的天数。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "基于最后修改时间的生命周期规则中删除最新版本对象的过期属性。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Filter
 					"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: GreaterThanIncludeEqual
 							"greater_than_include_equal": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "是否启用相等条件。包括Enabled、Disabled。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: LessThanIncludeEqual
 							"less_than_include_equal": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "是否启用相等条件。包括Enabled、Disabled。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: ObjectSizeGreaterThan
 							"object_size_greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "设置规则生效于大于指定大小的对象。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: ObjectSizeLessThan
 							"object_size_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "设置规则生效于小于指定大小的对象。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "指定规则生效的过滤条件。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
-					// Property: LifecycleRuleId
-					"lifecycle_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则 ID。",
-						Computed:    true,
+					// Property: ID
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: NoCurrentVersionExpiration
 					"no_current_version_expiration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: NonCurrentDate
 							"non_current_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "基于最后修改时间的生命周期规则中历史版本对象过期删除的具体日期。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: NonCurrentDays
 							"non_current_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "基于最后修改时间的生命周期规则中历史版本对象过期删除的天数。",
-								Computed:    true,
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: NonCurrentVersionTransitions
-					"non_current_version_transitions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					"non_current_version_transitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: NonCurrentDate
 								"non_current_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "基于最后修改时间的生命周期规则中历史版本对象沉降的具体日期。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: NonCurrentDays
 								"non_current_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "基于最后修改时间的生命周期规则中历史版本对象沉降的天数。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: StorageClass
 								"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "存储类型。包括STANDARD、IA、ARCHIVE_FR、INTELLIGENT_TIERING、COLD_ARCHIVE、ARCHIVE、DEEP_COLD_ARCHIVE。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "基于最后修改时间的生命周期规则中沉降历史版本对象的的过期属性。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Prefix
 					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则所适用的前缀。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "是否启用规则。包括Enabled、Disabled。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Tags
-					"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "标签键。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "标签值。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "标签。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Transitions
-					"transitions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					"transitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Date
 								"date": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "基于最后修改时间的生命周期规则中最新版本对象过期沉降的具体日期。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: Days
 								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "基于最后修改时间的生命周期规则中最新版本对象过期沉降的天数。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: StorageClass
 								"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "基于最后修改时间的生命周期规则中历史版本对象沉降的存储类型。包括STANDARD、IA、ARCHIVE_FR、INTELLIGENT_TIERING、COLD_ARCHIVE、ARCHIVE、DEEP_COLD_ARCHIVE。",
-									Computed:    true,
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "基于最后修改时间的生命周期规则中沉降最新版本对象的的过期属性。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "存储桶的声明周期。",
+			Description: "存储桶的声明周期",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Location
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "桶所在区域。",
+		//	  "description": "桶所在区域",
 		//	  "type": "string"
 		//	}
 		"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "桶所在区域。",
+			Description: "桶所在区域",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "桶名。",
+		//	  "description": "桶名",
 		//	  "maxLength": 63,
 		//	  "minLength": 3,
+		//	  "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "桶名。",
+			Description: "桶名",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶所属项目。",
+		//	  "description": "桶关联的项目名称",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储桶所属项目。",
+			Description: "桶关联的项目名称",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageClass
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "桶的默认存储类型。包括STANDARD：标准存储。IA：低频访问存储。INTELLIGENT_TIERING：智能分层存储。ARCHIVE_FR：归档闪回存储。ARCHIVE：归档存储。COLD_ARCHIVE：冷归档存储。DEEP_COLD_ARCHIVE：深度冷归档存储。",
+		//	  "description": "桶的默认存储类型",
 		//	  "enum": [
 		//	    "STANDARD",
 		//	    "IA",
@@ -727,23 +633,20 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "桶的默认存储类型。包括STANDARD：标准存储。IA：低频访问存储。INTELLIGENT_TIERING：智能分层存储。ARCHIVE_FR：归档闪回存储。ARCHIVE：归档存储。COLD_ARCHIVE：冷归档存储。DEEP_COLD_ARCHIVE：深度冷归档存储。",
+			Description: "桶的默认存储类型",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶的标签信息。",
-		//	  "insertionOrder": false,
+		//	  "description": "存储桶的标签信息",
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -753,25 +656,22 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "type": "array"
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
-						Computed:    true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "存储桶的标签信息。",
+			Description: "存储桶的标签信息",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -803,7 +703,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"days":                               "Days",
 		"days_after_initiation":              "DaysAfterInitiation",
 		"display_name":                       "DisplayName",
-		"enable_version_status":              "EnableVersionStatus",
+		"enable_version":                     "EnableVersion",
 		"expiration":                         "Expiration",
 		"extranet_endpoint":                  "ExtranetEndpoint",
 		"filter":                             "Filter",
@@ -813,14 +713,13 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"grant_write":                        "GrantWrite",
 		"grant_write_acp":                    "GrantWriteAcp",
 		"grantee":                            "Grantee",
-		"grantee_id":                         "GranteeId",
 		"grants":                             "Grants",
 		"greater_than_include_equal":         "GreaterThanIncludeEqual",
+		"id":                                 "ID",
 		"intranet_endpoint":                  "IntranetEndpoint",
 		"key":                                "Key",
 		"less_than_include_equal":            "LessThanIncludeEqual",
 		"lifecycle_config":                   "Lifecycle",
-		"lifecycle_rule_id":                  "LifecycleRuleId",
 		"location":                           "Location",
 		"name":                               "Name",
 		"no_current_version_expiration":      "NoCurrentVersionExpiration",
@@ -830,7 +729,6 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"object_size_greater_than":           "ObjectSizeGreaterThan",
 		"object_size_less_than":              "ObjectSizeLessThan",
 		"owner":                              "Owner",
-		"owner_id":                           "OwnerId",
 		"permission":                         "Permission",
 		"prefix":                             "Prefix",
 		"project_name":                       "ProjectName",
