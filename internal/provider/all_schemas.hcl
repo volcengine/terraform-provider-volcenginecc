@@ -12,14 +12,7 @@ meta_schema {
 
 # CloudControl resource types schemas are available for use with the Cloud Control API.
 
-resource_schema "volcengine_tos_bucket" {
-  cloudcontrol_type_name = "Volcengine::TOS::Bucket"
-}
 
 resource_schema "volcengine_ecs_image" {
   cloudcontrol_type_name = "Volcengine::ECS::Image"
-}
-
-resource_schema "volcengine_vpc_vpc" {
-  cloudcontrol_type_name = "Volcengine::VPC::VPC"
 }
