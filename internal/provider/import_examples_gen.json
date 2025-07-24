@@ -1,17 +1,7 @@
 [
     {
-        "resource": "volcenginecc_tos_bucket",
-        "identifier": ["Name"],
-        "path": "./examples/resources/volcenginecc_tos_bucket/import.sh"
-    },
-    {
         "resource": "volcenginecc_ecs_image",
         "identifier": ["ImageId"],
         "path": "./examples/resources/volcenginecc_ecs_image/import.sh"
-    },
-    {
-        "resource": "volcenginecc_vpc_vpc",
-        "identifier": ["VpcId"],
-        "path": "./examples/resources/volcenginecc_vpc_vpc/import.sh"
     }
 ]
