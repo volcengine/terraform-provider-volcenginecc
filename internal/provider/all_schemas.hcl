@@ -12,9 +12,6 @@ meta_schema {
 
 # CloudControl resource types schemas are available for use with the Cloud Control API.
 
-resource_schema "volcengine_iam_role" {
-  cloudcontrol_type_name = "Volcengine::IAM::Role"
-}
 
 resource_schema "volcengine_ecs_image" {
   cloudcontrol_type_name = "Volcengine::ECS::Image"
