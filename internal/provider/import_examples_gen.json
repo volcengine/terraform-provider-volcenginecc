@@ -1,10 +1,5 @@
 [
     {
-        "resource": "volcenginecc_iam_role",
-        "identifier": ["RoleName"],
-        "path": "./examples/resources/volcenginecc_iam_role/import.sh"
-    },
-    {
         "resource": "volcenginecc_ecs_image",
         "identifier": ["ImageId"],
         "path": "./examples/resources/volcenginecc_ecs_image/import.sh"
