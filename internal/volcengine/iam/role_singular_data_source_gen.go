@@ -26,40 +26,40 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色创建时间",
+		//	  "description": "角色创建时间。",
 		//	  "type": "string"
 		//	}
 		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色创建时间",
+			Description: "角色创建时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色描述",
+		//	  "description": "角色描述，长度不超过128。",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色描述",
+			Description: "角色描述，长度不超过128。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色显示名",
+		//	  "description": "角色显示名，长度不超过64。",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色显示名",
+			Description: "角色显示名，长度不超过64。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsServiceLinkedRole
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否是服务关联角色, 0否，1是",
+		//	  "description": "是否是服务关联角色, 0否，1是。",
 		//	  "enum": [
 		//	    0,
 		//	    1
@@ -67,35 +67,36 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"is_service_linked_role": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否是服务关联角色, 0否，1是",
+			Description: "是否是服务关联角色, 0否，1是。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxSessionDuration
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色最大会话时间",
+		//	  "description": "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
 		//	  "maximum": 43200,
 		//	  "minimum": 3600,
 		//	  "type": "integer"
 		//	}
 		"max_session_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "角色最大会话时间",
+			Description: "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policies
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "角色策略",
+		//	    "description": "角色策略。",
 		//	    "properties": {
 		//	      "PolicyName": {
-		//	        "description": "策略名",
+		//	        "description": "策略名。",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
-		//	        "description": "策略类型",
+		//	        "description": "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -109,19 +110,20 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略名",
+						Description: "策略名。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略类型",
+						Description: "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -132,38 +134,38 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色ID",
+		//	  "description": "角色ID。",
 		//	  "type": "integer"
 		//	}
 		"role_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "角色ID",
+			Description: "角色ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色名",
-		//	  "pattern": "^[\\w.\\-]{1,64}$",
+		//	  "description": "角色名，长度1~64，支持英文、数字和.-_符号。",
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色名",
+			Description: "角色名，长度1~64，支持英文、数字和.-_符号。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "标签",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键",
+		//	        "description": "标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值",
+		//	        "description": "标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -173,19 +175,20 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键",
+						Description: "标签键。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值",
+						Description: "标签值。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -196,33 +199,33 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色TRN",
+		//	  "description": "角色TRN。",
 		//	  "type": "string"
 		//	}
 		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色TRN",
+			Description: "角色TRN。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrustPolicyDocument
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色信任策略",
+		//	  "description": "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
 		//	  "type": "string"
 		//	}
 		"trust_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色信任策略",
+			Description: "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色更新时间",
+		//	  "description": "角色更新时间。",
 		//	  "type": "string"
 		//	}
 		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色更新时间",
+			Description: "角色更新时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

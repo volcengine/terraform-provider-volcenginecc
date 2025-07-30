@@ -3,12 +3,12 @@
 page_title: "volcenginecc_iam_users Data Source - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
-  Plural Data Source schema for Volcengine::Iam::User
+  Plural Data Source schema for Volcengine::IAM::User
 ---
 
 # volcenginecc_iam_users (Data Source)
 
-Plural Data Source schema for Volcengine::Iam::User
+Plural Data Source schema for Volcengine::IAM::User
 
 
 

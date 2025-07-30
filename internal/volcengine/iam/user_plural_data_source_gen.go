@@ -20,7 +20,7 @@ func init() {
 }
 
 // usersDataSource returns the Terraform volcenginecc_iam_users data source.
-// This Terraform data source corresponds to the Cloud Control Volcengine::Iam::User resource.
+// This Terraform data source corresponds to the Cloud Control Volcengine::IAM::User resource.
 func usersDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
@@ -35,13 +35,13 @@ func usersDataSource(ctx context.Context) (datasource.DataSource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Plural Data Source schema for Volcengine::Iam::User",
+		Description: "Plural Data Source schema for Volcengine::IAM::User",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::Iam::User").WithTerraformTypeName("volcenginecc_iam_users")
+	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_users")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)

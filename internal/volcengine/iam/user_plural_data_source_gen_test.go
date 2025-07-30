@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineIamUsersDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::Iam::User", "volcenginecc_iam_users", "test")
+func TestAccVolcengineIAMUsersDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_users", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
