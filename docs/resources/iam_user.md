@@ -1,4 +1,4 @@
-iam_role.md.tmpltos_bucket.md.tmpl---
+---
 page_title: "volcenginecc_iam_user Resource - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
