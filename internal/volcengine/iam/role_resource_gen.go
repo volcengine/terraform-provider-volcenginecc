@@ -7,15 +7,14 @@ package iam
 
 import (
 	"context"
-	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
@@ -35,11 +34,11 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色创建时间",
+		//	  "description": "角色创建时间。",
 		//	  "type": "string"
 		//	}
 		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色创建时间",
+			Description: "角色创建时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -49,11 +48,11 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色描述",
+		//	  "description": "角色描述，长度不超过128。",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色描述",
+			Description: "角色描述，长度不超过128。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -64,11 +63,11 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色显示名",
+		//	  "description": "角色显示名，长度不超过64。",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色显示名",
+			Description: "角色显示名，长度不超过64。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -79,7 +78,7 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否是服务关联角色, 0否，1是",
+		//	  "description": "是否是服务关联角色, 0否，1是。",
 		//	  "enum": [
 		//	    0,
 		//	    1
@@ -87,7 +86,7 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"is_service_linked_role": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否是服务关联角色, 0否，1是",
+			Description: "是否是服务关联角色, 0否，1是。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -97,13 +96,13 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色最大会话时间",
+		//	  "description": "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
 		//	  "maximum": 43200,
 		//	  "minimum": 3600,
 		//	  "type": "integer"
 		//	}
 		"max_session_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "角色最大会话时间",
+			Description: "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -117,15 +116,16 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "角色策略",
+		//	    "description": "角色策略。",
 		//	    "properties": {
 		//	      "PolicyName": {
-		//	        "description": "策略名",
+		//	        "description": "策略名。",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
-		//	        "description": "策略类型",
+		//	        "description": "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -139,14 +139,15 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略名",
+						Description: "策略名。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -158,7 +159,7 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略类型",
+						Description: "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -176,19 +177,19 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色ID",
+		//	  "description": "角色ID。",
 		//	  "type": "integer"
 		//	}
 		"role_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "角色ID",
+			Description: "角色ID。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -198,30 +199,30 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色名",
-		//	  "pattern": "^[\\w.\\-]{1,64}$",
+		//	  "description": "角色名，长度1~64，支持英文、数字和.-_符号。",
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色名",
+			Description: "角色名，长度1~64，支持英文、数字和.-_符号。",
 			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w.\\-]{1,64}$"), ""),
-			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "标签",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键",
+		//	        "description": "标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值",
+		//	        "description": "标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -231,14 +232,15 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键",
+						Description: "标签键。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -250,7 +252,7 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值",
+						Description: "标签值。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -264,19 +266,19 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Trn
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色TRN",
+		//	  "description": "角色TRN。",
 		//	  "type": "string"
 		//	}
 		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色TRN",
+			Description: "角色TRN。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -286,11 +288,11 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色信任策略",
+		//	  "description": "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
 		//	  "type": "string"
 		//	}
 		"trust_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色信任策略",
+			Description: "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -301,11 +303,11 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "角色更新时间",
+		//	  "description": "角色更新时间。",
 		//	  "type": "string"
 		//	}
 		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "角色更新时间",
+			Description: "角色更新时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -323,7 +325,7 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "角色",
+		Description: "角色（Role）是IAM体系里的一种虚拟身份，用于将账号内某些访问权限授予给各类身份实体，受信任的身份实体可扮演该角色来访问账号内的云资源。",
 		Version:     1,
 		Attributes:  attributes,
 	}

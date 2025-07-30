@@ -29,18 +29,18 @@ func init() {
 }
 
 // userResource returns the Terraform volcenginecc_iam_user resource.
-// This Terraform resource corresponds to the Cloud Control Volcengine::Iam::User resource.
+// This Terraform resource corresponds to the Cloud Control Volcengine::IAM::User resource.
 func userResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户归属的主账号",
+		//	  "description": "子用户归属的主账号。",
 		//	  "type": "number"
 		//	}
 		"account_id": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "子用户归属的主账号",
+			Description: "子用户归属的主账号。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -50,11 +50,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的创建时间",
+		//	  "description": "子用户对应的创建时间。",
 		//	  "type": "string"
 		//	}
 		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的创建时间",
+			Description: "子用户对应的创建时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -64,11 +64,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的描述信息",
+		//	  "description": "子用户对应的描述信息，长度不超过255。",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的描述信息",
+			Description: "子用户对应的描述信息，长度不超过255。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -79,12 +79,12 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的展示名称",
+		//	  "description": "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的展示名称",
+			Description: "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -98,11 +98,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的电子邮件地址",
+		//	  "description": "子用户对应的电子邮件地址。",
 		//	  "type": "string"
 		//	}
 		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的电子邮件地址",
+			Description: "子用户对应的电子邮件地址。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -113,7 +113,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户归属的用户组",
+		//	  "description": "子用户归属的用户组。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -123,7 +123,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"groups": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "子用户归属的用户组",
+			Description: "子用户归属的用户组。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -134,42 +134,42 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户的登录配置",
+		//	  "description": "子用户的登录配置。",
 		//	  "properties": {
 		//	    "LastResetPasswordTime": {
-		//	      "description": "上次重置密码的时间",
+		//	      "description": "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
 		//	      "type": "number"
 		//	    },
 		//	    "LoginAllowed": {
-		//	      "description": "是否允许登录",
+		//	      "description": "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Password": {
-		//	      "description": "登录密码",
+		//	      "description": "登录密码。",
 		//	      "type": "string"
 		//	    },
 		//	    "PasswordResetRequired": {
-		//	      "description": "下次登录是否需要重设密码",
+		//	      "description": "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SafeAuthExemptDuration": {
-		//	      "description": "登录保护豁免时长",
+		//	      "description": "登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthExemptRequired": {
-		//	      "description": "是否开启登录保护豁免",
+		//	      "description": "是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthExemptUnit": {
-		//	      "description": "登录保护豁免的时间单位",
+		//	      "description": "登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthFlag": {
-		//	      "description": "是否开启登录保护",
+		//	      "description": "是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SafeAuthType": {
-		//	      "description": "登录保护类型",
+		//	      "description": "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -179,7 +179,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: LastResetPasswordTime
 				"last_reset_password_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "上次重置密码的时间",
+					Description: "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -188,7 +188,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: LoginAllowed
 				"login_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否允许登录",
+					Description: "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -197,7 +197,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "登录密码",
+					Description: "登录密码。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -207,7 +207,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PasswordResetRequired
 				"password_reset_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "下次登录是否需要重设密码",
+					Description: "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -216,7 +216,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptDuration
 				"safe_auth_exempt_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "登录保护豁免时长",
+					Description: "登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -225,7 +225,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptRequired
 				"safe_auth_exempt_required": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "是否开启登录保护豁免",
+					Description: "是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -234,7 +234,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptUnit
 				"safe_auth_exempt_unit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "登录保护豁免的时间单位",
+					Description: "登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -243,7 +243,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthFlag
 				"safe_auth_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启登录保护",
+					Description: "是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -252,7 +252,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthType
 				"safe_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "登录保护类型",
+					Description: "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -260,7 +260,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "子用户的登录配置",
+			Description: "子用户的登录配置。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -271,12 +271,12 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的手机号",
+		//	  "description": "子用户对应的手机号。",
 		//	  "maxLength": 20,
 		//	  "type": "string"
 		//	}
 		"mobile_phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的手机号",
+			Description: "子用户对应的手机号。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -290,17 +290,17 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的权限策略",
+		//	  "description": "子用户对应的权限策略。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "权限策略",
+		//	    "description": "权限策略。",
 		//	    "properties": {
 		//	      "PolicyName": {
-		//	        "description": "权限策略名称",
+		//	        "description": "权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
-		//	        "description": "权限策略类型",
+		//	        "description": "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -322,7 +322,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "权限策略名称",
+						Description: "权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -334,7 +334,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "权限策略类型",
+						Description: "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -350,7 +350,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "子用户对应的权限策略",
+			Description: "子用户对应的权限策略。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -361,17 +361,17 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的资源标签",
+		//	  "description": "子用户对应的资源标签。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "资源标签",
+		//	    "description": "资源标签。",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键",
+		//	        "description": "标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值",
+		//	        "description": "标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -389,7 +389,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键",
+						Description: "标签键。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -401,7 +401,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值",
+						Description: "标签值。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -413,7 +413,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "子用户对应的资源标签",
+			Description: "子用户对应的资源标签。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -424,11 +424,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的Trn表达式",
+		//	  "description": "子用户对应的Trn表达式。",
 		//	  "type": "string"
 		//	}
 		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的Trn表达式",
+			Description: "子用户对应的Trn表达式。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -438,11 +438,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的更新时间",
+		//	  "description": "子用户对应的更新时间。",
 		//	  "type": "string"
 		//	}
 		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的更新时间",
+			Description: "子用户对应的更新时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -452,13 +452,13 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户名称",
+		//	  "description": "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户名称",
+			Description: "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
@@ -486,7 +486,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 
 	var opts generic.ResourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::Iam::User").WithTerraformTypeName("volcenginecc_iam_user")
+	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_user")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                "AccountId",

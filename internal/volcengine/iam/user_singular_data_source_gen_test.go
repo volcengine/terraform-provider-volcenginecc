@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineIamUserDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::Iam::User", "volcenginecc_iam_user", "test")
+func TestAccVolcengineIAMUserDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_user", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
@@ -24,8 +24,8 @@ func TestAccVolcengineIamUserDataSource_basic(t *testing.T) {
 	})
 }
 
-func TestAccVolcengineIamUserDataSource_NonExistent(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::Iam::User", "volcenginecc_iam_user", "test")
+func TestAccVolcengineIAMUserDataSource_NonExistent(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_user", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

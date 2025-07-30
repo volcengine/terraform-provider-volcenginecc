@@ -21,54 +21,54 @@ Data Source schema for Volcengine::ECS::Image
 
 ### Read-Only
 
-- `architecture` (String) 镜像的架构类型
-- `boot_mode` (String) 镜像的启动模式
+- `architecture` (String) 镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。
+- `boot_mode` (String) 镜像的启动模式。可以选择BIOS、UEFI类型。
 - `created_at` (String) 镜像创建时间
-- `description` (String) 镜像描述
-- `detection_results` (Attributes) (see [below for nested schema](#nestedatt--detection_results))
-- `image_id` (String) 实例ID
-- `image_name` (String) 镜像名称
-- `image_owner_id` (String) 镜像所属的账号ID
-- `instance_id` (String) 实例ID
-- `is_install_run_command_agent` (Boolean) 镜像中是否安装了云助手Agent
-- `is_lts` (Boolean) 公共镜像是否长期维护
-- `is_support_cloud_init` (Boolean) 镜像是否支持Cloud-init
-- `kernel` (String) 镜像的内核版本
-- `license_type` (String) 镜像许可证类型
-- `os_name` (String) 镜像操作系统的名称
-- `os_type` (String) 操作系统类型
-- `platform` (String) 镜像操作系统的发行版本
-- `platform_version` (String) 镜像的发行版本
-- `project_name` (String) 资源所属项目
+- `description` (String) 镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。
+- `detection_results` (Attributes) 镜像的检测结果。 (see [below for nested schema](#nestedatt--detection_results))
+- `image_id` (String) 镜像ID。
+- `image_name` (String) 镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。
+- `image_owner_id` (String) 镜像所属的账号ID。
+- `instance_id` (String) 实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。
+- `is_install_run_command_agent` (Boolean) 镜像中是否安装了云助手Agent。
+- `is_lts` (Boolean) 公共镜像是否长期维护。
+- `is_support_cloud_init` (Boolean) 镜像是否支持Cloud-init。
+- `kernel` (String) 镜像的内核版本。
+- `license_type` (String) 镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。
+- `os_name` (String) 镜像操作系统的名称。
+- `os_type` (String) 操作系统类型。
+- `platform` (String) 镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。
+- `platform_version` (String) 镜像的发行版本。
+- `project_name` (String) 资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。
 - `share_permission` (Set of String) 镜像共享的账户
-- `share_status` (String) 镜像共享状态
-- `size` (Number) 镜像大小
-- `snapshot_group_id` (String) 快照一致性组ID，表示使用快照一致性组创建自定义镜像
-- `snapshot_id` (String) 系统盘快照ID，表示使用系统盘快照创建自定义镜像
-- `snapshots` (Attributes Set) 镜像关联快照的信息 (see [below for nested schema](#nestedatt--snapshots))
-- `status` (String) 镜像的状态
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `share_status` (String) 镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。
+- `size` (Number) 镜像大小，单位为GiB。
+- `snapshot_group_id` (String) 快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。
+- `snapshot_id` (String) 系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。
+- `snapshots` (Attributes Set) 镜像关联快照的信息。 (see [below for nested schema](#nestedatt--snapshots))
+- `status` (String) 镜像的状态。
+- `tags` (Attributes Set) 镜像绑定的标签列表。 (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) 镜像更新时间
-- `virtual_size` (Number) 镜像大小，单位为Byte
-- `visibility` (String) 镜像的可见性
+- `virtual_size` (Number) 镜像大小，单位为Byte。
+- `visibility` (String) 镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。
 
 <a id="nestedatt--detection_results"></a>
 ### Nested Schema for `detection_results`
 
 Read-Only:
 
-- `detection_status` (String) 检测状态
-- `items` (Attributes List) (see [below for nested schema](#nestedatt--detection_results--items))
+- `detection_status` (String) 检测状态。可以选择Finished（已完成）、Processing（处理中）类型。
+- `items` (Attributes List) 镜像检测项详情。 (see [below for nested schema](#nestedatt--detection_results--items))
 
 <a id="nestedatt--detection_results--items"></a>
 ### Nested Schema for `detection_results.items`
 
 Read-Only:
 
-- `name` (String) 检测项名称
-- `result` (String) 该检测项对应结果
-- `risk_code` (String) 风险描述码
-- `risk_level` (String) 风险等级
+- `name` (String) 检测项名称。
+- `result` (String) 该检测项对应结果。
+- `risk_code` (String) 风险描述码。
+- `risk_level` (String) 风险等级。若该参数返回值为空，表示无风险。
 
 
 
@@ -77,9 +77,9 @@ Read-Only:
 
 Read-Only:
 
-- `size` (Number) 快照大小
-- `snapshot_id` (String) 快照ID
-- `volume_kind` (String) 云盘种类
+- `size` (Number) 快照大小。单位为GiB。
+- `snapshot_id` (String) 快照ID。
+- `volume_kind` (String) 云盘种类。system：系统盘。data：数据盘。
 
 
 <a id="nestedatt--tags"></a>
@@ -87,5 +87,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) 镜像标签的标签键。
+- `value` (String) 镜像标签的值。
