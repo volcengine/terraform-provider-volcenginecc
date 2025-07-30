@@ -1,4 +1,4 @@
-iam_role.md.tmpltos_bucket.md.tmpl---
+---
 page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
 subcategory: ""
 description: |-
@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-{{ tffile (printf "examples/resources/%s/iam_user.tf" .Name)}}
+{{ tffile (printf "examples/resources/%s/tos_bucket.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
