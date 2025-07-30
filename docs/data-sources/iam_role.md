@@ -22,9 +22,6 @@ Data Source schema for Volcengine::IAM::Role
 ### Read-Only
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 - `create_date` (String) 角色创建时间。
 - `description` (String) 角色描述，长度不超过128。
 - `display_name` (String) 角色显示名，长度不超过64。
@@ -37,7 +34,6 @@ Data Source schema for Volcengine::IAM::Role
 - `trn` (String) 角色TRN。
 - `trust_policy_document` (String) 角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。
 - `update_date` (String) 角色更新时间。
-<<<<<<< HEAD
 =======
 - `create_date` (String) 角色创建时间
 - `description` (String) 角色描述
@@ -52,8 +48,6 @@ Data Source schema for Volcengine::IAM::Role
 - `trust_policy_document` (String) 角色信任策略
 - `update_date` (String) 角色更新时间
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 <a id="nestedatt--policies"></a>
 ### Nested Schema for `policies`
@@ -61,17 +55,12 @@ Data Source schema for Volcengine::IAM::Role
 Read-Only:
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 - `policy_name` (String) 策略名。
 - `policy_type` (String) 策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。
 =======
 - `policy_name` (String) 策略名
 - `policy_type` (String) 策略类型
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-- `policy_name` (String) 策略名。
-- `policy_type` (String) 策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 <a id="nestedatt--tags"></a>
@@ -80,14 +69,9 @@ Read-Only:
 Read-Only:
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 - `key` (String) 标签键。
 - `value` (String) 标签值。
 =======
 - `key` (String) 标签键
 - `value` (String) 标签值
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-- `key` (String) 标签键。
-- `value` (String) 标签值。
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)

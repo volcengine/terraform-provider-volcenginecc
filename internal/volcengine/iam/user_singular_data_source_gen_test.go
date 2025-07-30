@@ -14,17 +14,12 @@ import (
 )
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 func TestAccVolcengineIAMUserDataSource_basic(t *testing.T) {
 	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_user", "test")
 =======
 func TestAccVolcengineIamUserDataSource_basic(t *testing.T) {
 	td := acctest.NewTestData(t, "Volcengine::Iam::User", "volcenginecc_iam_user", "test")
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-func TestAccVolcengineIAMUserDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_user", "test")
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
@@ -35,17 +30,12 @@ func TestAccVolcengineIAMUserDataSource_basic(t *testing.T) {
 }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 func TestAccVolcengineIAMUserDataSource_NonExistent(t *testing.T) {
 	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_user", "test")
 =======
 func TestAccVolcengineIamUserDataSource_NonExistent(t *testing.T) {
 	td := acctest.NewTestData(t, "Volcengine::Iam::User", "volcenginecc_iam_user", "test")
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-func TestAccVolcengineIAMUserDataSource_NonExistent(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_user", "test")
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
