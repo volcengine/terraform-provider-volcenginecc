@@ -27,7 +27,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的架构类型",
+		//	  "description": "镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。",
 		//	  "enum": [
 		//	    "amd64",
 		//	    "arm64"
@@ -35,14 +35,14 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的架构类型",
+			Description: "镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BootMode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的启动模式",
+		//	  "description": "镜像的启动模式。可以选择BIOS、UEFI类型。",
 		//	  "enum": [
 		//	    "BIOS",
 		//	    "UEFI"
@@ -50,7 +50,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"boot_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的启动模式",
+			Description: "镜像的启动模式。可以选择BIOS、UEFI类型。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
@@ -68,21 +68,22 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像描述",
+		//	  "description": "镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像描述",
+			Description: "镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DetectionResults
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "镜像的检测结果。",
 		//	  "properties": {
 		//	    "DetectionStatus": {
-		//	      "description": "检测状态",
+		//	      "description": "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
 		//	      "enum": [
 		//	        "Finished",
 		//	        "Processing"
@@ -90,23 +91,24 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Items": {
+		//	      "description": "镜像检测项详情。",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Name": {
-		//	            "description": "检测项名称",
+		//	            "description": "检测项名称。",
 		//	            "type": "string"
 		//	          },
 		//	          "Result": {
-		//	            "description": "该检测项对应结果",
+		//	            "description": "该检测项对应结果。",
 		//	            "type": "string"
 		//	          },
 		//	          "RiskCode": {
-		//	            "description": "风险描述码",
+		//	            "description": "风险描述码。",
 		//	            "type": "string"
 		//	          },
 		//	          "RiskLevel": {
-		//	            "description": "风险等级",
+		//	            "description": "风险等级。若该参数返回值为空，表示无风险。",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -122,7 +124,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DetectionStatus
 				"detection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "检测状态",
+					Description: "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Items
@@ -131,126 +133,128 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "检测项名称",
+								Description: "检测项名称。",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Result
 							"result": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "该检测项对应结果",
+								Description: "该检测项对应结果。",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RiskCode
 							"risk_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "风险描述码",
+								Description: "风险描述码。",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RiskLevel
 							"risk_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "风险等级",
+								Description: "风险等级。若该参数返回值为空，表示无风险。",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "镜像检测项详情。",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "镜像的检测结果。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImageId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID",
+		//	  "description": "镜像ID。",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID",
+			Description: "镜像ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImageName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像名称",
+		//	  "description": "镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像名称",
+			Description: "镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImageOwnerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像所属的账号ID",
+		//	  "description": "镜像所属的账号ID。",
 		//	  "type": "string"
 		//	}
 		"image_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像所属的账号ID",
+			Description: "镜像所属的账号ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID",
+		//	  "description": "实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID",
+			Description: "实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsInstallRunCommandAgent
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像中是否安装了云助手Agent",
+		//	  "description": "镜像中是否安装了云助手Agent。",
 		//	  "type": "boolean"
 		//	}
 		"is_install_run_command_agent": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像中是否安装了云助手Agent",
+			Description: "镜像中是否安装了云助手Agent。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsLTS
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公共镜像是否长期维护",
+		//	  "description": "公共镜像是否长期维护。",
 		//	  "type": "boolean"
 		//	}
 		"is_lts": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "公共镜像是否长期维护",
+			Description: "公共镜像是否长期维护。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsSupportCloudInit
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像是否支持Cloud-init",
+		//	  "description": "镜像是否支持Cloud-init。",
 		//	  "type": "boolean"
 		//	}
 		"is_support_cloud_init": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像是否支持Cloud-init",
+			Description: "镜像是否支持Cloud-init。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Kernel
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的内核版本",
+		//	  "description": "镜像的内核版本。",
 		//	  "type": "string"
 		//	}
 		"kernel": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的内核版本",
+			Description: "镜像的内核版本。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LicenseType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像许可证类型",
+		//	  "description": "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。",
 		//	  "enum": [
 		//	    "VolcanoEngine",
 		//	    "BYOL",
@@ -259,36 +263,36 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"license_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像许可证类型",
+			Description: "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OsName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像操作系统的名称",
+		//	  "description": "镜像操作系统的名称。",
 		//	  "type": "string"
 		//	}
 		"os_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像操作系统的名称",
+			Description: "镜像操作系统的名称。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OsType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "操作系统类型",
+		//	  "description": "操作系统类型。",
 		//	  "type": "string"
 		//	}
 		"os_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "操作系统类型",
+			Description: "操作系统类型。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Platform
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像操作系统的发行版本",
+		//	  "description": "镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。",
 		//	  "enum": [
 		//	    "CentOS",
 		//	    "Debian",
@@ -301,29 +305,29 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像操作系统的发行版本",
+			Description: "镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PlatformVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的发行版本",
+		//	  "description": "镜像的发行版本。",
 		//	  "type": "string"
 		//	}
 		"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的发行版本",
+			Description: "镜像的发行版本。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源所属项目",
+		//	  "description": "资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源所属项目",
+			Description: "资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SharePermission
@@ -347,7 +351,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像共享状态",
+		//	  "description": "镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。",
 		//	  "enum": [
 		//	    "HasShared",
 		//	    ""
@@ -355,60 +359,60 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像共享状态",
+			Description: "镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Size
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像大小",
+		//	  "description": "镜像大小，单位为GiB。",
 		//	  "type": "integer"
 		//	}
 		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "镜像大小",
+			Description: "镜像大小，单位为GiB。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照一致性组ID，表示使用快照一致性组创建自定义镜像",
+		//	  "description": "快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。",
 		//	  "type": "string"
 		//	}
 		"snapshot_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照一致性组ID，表示使用快照一致性组创建自定义镜像",
+			Description: "快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "系统盘快照ID，表示使用系统盘快照创建自定义镜像",
+		//	  "description": "系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "系统盘快照ID，表示使用系统盘快照创建自定义镜像",
+			Description: "系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Snapshots
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像关联快照的信息",
+		//	  "description": "镜像关联快照的信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Size": {
-		//	        "description": "快照大小",
+		//	        "description": "快照大小。单位为GiB。",
 		//	        "type": "integer"
 		//	      },
 		//	      "SnapshotId": {
-		//	        "description": "快照ID",
+		//	        "description": "快照ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "VolumeKind": {
-		//	        "description": "云盘种类",
+		//	        "description": "云盘种类。system：系统盘。data：数据盘。",
 		//	        "enum": [
 		//	          "system",
 		//	          "data"
@@ -426,46 +430,49 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "快照大小",
+						Description: "快照大小。单位为GiB。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SnapshotId
 					"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "快照ID",
+						Description: "快照ID。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeKind
 					"volume_kind": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘种类",
+						Description: "云盘种类。system：系统盘。data：数据盘。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "镜像关联快照的信息",
+			Description: "镜像关联快照的信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的状态",
+		//	  "description": "镜像的状态。",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的状态",
+			Description: "镜像的状态。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "镜像绑定的标签列表。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "镜像标签的标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "镜像标签的值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -483,15 +490,18 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "镜像标签的标签键。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "镜像标签的值。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "镜像绑定的标签列表。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// Cloud Control resource type schema:
@@ -508,18 +518,18 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像大小，单位为Byte",
+		//	  "description": "镜像大小，单位为Byte。",
 		//	  "type": "number"
 		//	}
 		"virtual_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "镜像大小，单位为Byte",
+			Description: "镜像大小，单位为Byte。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Visibility
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的可见性",
+		//	  "description": "镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。",
 		//	  "enum": [
 		//	    "public",
 		//	    "private",
@@ -528,7 +538,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的可见性",
+			Description: "镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
