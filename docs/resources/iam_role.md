@@ -1,25 +1,13 @@
-<<<<<<< HEAD
 ---
-page_title: "volcenginecc_iam_role Resource - terraform-provider-volcenginecc"
-subcategory: ""
-description: |-
-  角色（Role）是IAM体系里的一种虚拟身份，用于将账号内某些访问权限授予给各类身份实体，受信任的身份实体可扮演该角色来访问账号内的云资源。
-=======
-tos_bucket.md.tmpl---
 page_title: "volcenginecc_iam_role Resource - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
   角色
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 ---
 
 # volcenginecc_iam_role (Resource)
 
-<<<<<<< HEAD
-角色（Role）是IAM体系里的一种虚拟身份，用于将账号内某些访问权限授予给各类身份实体，受信任的身份实体可扮演该角色来访问账号内的云资源。
-=======
 角色
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 ## Example Usage
 
@@ -43,27 +31,6 @@ resource "volcenginecc_iam_role" "RoleDemo" {
 
 ### Required
 
-<<<<<<< HEAD
-- `role_name` (String) 角色名，长度1~64，支持英文、数字和.-_符号。
-
-### Optional
-
-- `description` (String) 角色描述，长度不超过128。
-- `display_name` (String) 角色显示名，长度不超过64。
-- `max_session_duration` (Number) 角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。
-- `policies` (Attributes Set) (see [below for nested schema](#nestedatt--policies))
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- `trust_policy_document` (String) 角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。
-
-### Read-Only
-
-- `create_date` (String) 角色创建时间。
-- `id` (String) Uniquely identifies the resource.
-- `is_service_linked_role` (Number) 是否是服务关联角色, 0否，1是。
-- `role_id` (Number) 角色ID。
-- `trn` (String) 角色TRN。
-- `update_date` (String) 角色更新时间。
-=======
 - `role_name` (String) 角色名
 
 ### Optional
@@ -83,20 +50,14 @@ resource "volcenginecc_iam_role" "RoleDemo" {
 - `role_id` (Number) 角色ID
 - `trn` (String) 角色TRN
 - `update_date` (String) 角色更新时间
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 <a id="nestedatt--policies"></a>
 ### Nested Schema for `policies`
 
 Optional:
 
-<<<<<<< HEAD
-- `policy_name` (String) 策略名。
-- `policy_type` (String) 策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。
-=======
 - `policy_name` (String) 策略名
 - `policy_type` (String) 策略类型
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 <a id="nestedatt--tags"></a>
@@ -104,13 +65,8 @@ Optional:
 
 Optional:
 
-<<<<<<< HEAD
-- `key` (String) 标签键。
-- `value` (String) 标签值。
-=======
 - `key` (String) 标签键
 - `value` (String) 标签值
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 ## Import
 

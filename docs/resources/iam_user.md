@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 ---
-=======
-iam_role.md.tmpltos_bucket.md.tmpl---
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 page_title: "volcenginecc_iam_user Resource - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
@@ -42,28 +38,6 @@ resource "volcenginecc_iam_user" "UserDemo" {
 
 ### Required
 
-<<<<<<< HEAD
-- `user_name` (String) 子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。
-
-### Optional
-
-- `description` (String) 子用户对应的描述信息，长度不超过255。
-- `display_name` (String) 子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。
-- `email` (String) 子用户对应的电子邮件地址。
-- `groups` (Set of String) 子用户归属的用户组。
-- `login_profile` (Attributes) 子用户的登录配置。 (see [below for nested schema](#nestedatt--login_profile))
-- `mobile_phone` (String) 子用户对应的手机号。
-- `policies` (Attributes Set) 子用户对应的权限策略。 (see [below for nested schema](#nestedatt--policies))
-- `tags` (Attributes Set) 子用户对应的资源标签。 (see [below for nested schema](#nestedatt--tags))
-
-### Read-Only
-
-- `account_id` (Number) 子用户归属的主账号。
-- `create_date` (String) 子用户对应的创建时间。
-- `id` (String) Uniquely identifies the resource.
-- `trn` (String) 子用户对应的Trn表达式。
-- `update_date` (String) 子用户对应的更新时间。
-=======
 - `user_name` (String) 子用户名称
 
 ### Optional
@@ -84,24 +58,12 @@ resource "volcenginecc_iam_user" "UserDemo" {
 - `id` (String) Uniquely identifies the resource.
 - `trn` (String) 子用户对应的Trn表达式
 - `update_date` (String) 子用户对应的更新时间
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 <a id="nestedatt--login_profile"></a>
 ### Nested Schema for `login_profile`
 
 Optional:
 
-<<<<<<< HEAD
-- `last_reset_password_time` (Number) 上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。
-- `login_allowed` (Boolean) 是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。
-- `password` (String) 登录密码。
-- `password_reset_required` (Boolean) 下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。
-- `safe_auth_exempt_duration` (Number) 登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。
-- `safe_auth_exempt_required` (Number) 是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。
-- `safe_auth_exempt_unit` (Number) 登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。
-- `safe_auth_flag` (Boolean) 是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。
-- `safe_auth_type` (String) 登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。
-=======
 - `last_reset_password_time` (Number) 上次重置密码的时间
 - `login_allowed` (Boolean) 是否允许登录
 - `password` (String) 登录密码
@@ -111,7 +73,6 @@ Optional:
 - `safe_auth_exempt_unit` (Number) 登录保护豁免的时间单位
 - `safe_auth_flag` (Boolean) 是否开启登录保护
 - `safe_auth_type` (String) 登录保护类型
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 <a id="nestedatt--policies"></a>
@@ -119,13 +80,8 @@ Optional:
 
 Optional:
 
-<<<<<<< HEAD
-- `policy_name` (String) 权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。
-- `policy_type` (String) 权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。
-=======
 - `policy_name` (String) 权限策略名称
 - `policy_type` (String) 权限策略类型
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 <a id="nestedatt--tags"></a>
@@ -133,13 +89,8 @@ Optional:
 
 Optional:
 
-<<<<<<< HEAD
-- `key` (String) 标签键。
-- `value` (String) 标签值。
-=======
 - `key` (String) 标签键
 - `value` (String) 标签值
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 ## Import
 
