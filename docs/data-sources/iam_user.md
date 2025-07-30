@@ -4,19 +4,27 @@ page_title: "volcenginecc_iam_user Data Source - terraform-provider-volcenginecc
 subcategory: ""
 description: |-
 <<<<<<< HEAD
+<<<<<<< HEAD
   Data Source schema for Volcengine::IAM::User
 =======
   Data Source schema for Volcengine::Iam::User
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+  Data Source schema for Volcengine::IAM::User
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 ---
 
 # volcenginecc_iam_user (Data Source)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Data Source schema for Volcengine::IAM::User
 =======
 Data Source schema for Volcengine::Iam::User
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+Data Source schema for Volcengine::IAM::User
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 
@@ -30,6 +38,9 @@ Data Source schema for Volcengine::Iam::User
 ### Read-Only
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 - `account_id` (Number) 子用户归属的主账号。
 - `create_date` (String) 子用户对应的创建时间。
 - `description` (String) 子用户对应的描述信息，长度不超过255。
@@ -43,6 +54,7 @@ Data Source schema for Volcengine::Iam::User
 - `trn` (String) 子用户对应的Trn表达式。
 - `update_date` (String) 子用户对应的更新时间。
 - `user_name` (String) 子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。
+<<<<<<< HEAD
 =======
 - `account_id` (Number) 子用户归属的主账号
 - `create_date` (String) 子用户对应的创建时间
@@ -58,6 +70,8 @@ Data Source schema for Volcengine::Iam::User
 - `update_date` (String) 子用户对应的更新时间
 - `user_name` (String) 子用户名称
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 <a id="nestedatt--login_profile"></a>
 ### Nested Schema for `login_profile`
@@ -65,6 +79,9 @@ Data Source schema for Volcengine::Iam::User
 Read-Only:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 - `last_reset_password_time` (Number) 上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。
 - `login_allowed` (Boolean) 是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。
 - `password` (String) 登录密码。
@@ -74,6 +91,7 @@ Read-Only:
 - `safe_auth_exempt_unit` (Number) 登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。
 - `safe_auth_flag` (Boolean) 是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。
 - `safe_auth_type` (String) 登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。
+<<<<<<< HEAD
 =======
 - `last_reset_password_time` (Number) 上次重置密码的时间
 - `login_allowed` (Boolean) 是否允许登录
@@ -85,6 +103,8 @@ Read-Only:
 - `safe_auth_flag` (Boolean) 是否开启登录保护
 - `safe_auth_type` (String) 登录保护类型
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 <a id="nestedatt--policies"></a>
@@ -93,12 +113,17 @@ Read-Only:
 Read-Only:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - `policy_name` (String) 权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。
 - `policy_type` (String) 权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。
 =======
 - `policy_name` (String) 权限策略名称
 - `policy_type` (String) 权限策略类型
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+- `policy_name` (String) 权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。
+- `policy_type` (String) 权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 <a id="nestedatt--tags"></a>
@@ -107,9 +132,14 @@ Read-Only:
 Read-Only:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - `key` (String) 标签键。
 - `value` (String) 标签值。
 =======
 - `key` (String) 标签键
 - `value` (String) 标签值
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+- `key` (String) 标签键。
+- `value` (String) 标签值。
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)

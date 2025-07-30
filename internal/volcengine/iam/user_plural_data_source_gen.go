@@ -21,10 +21,14 @@ func init() {
 
 // usersDataSource returns the Terraform volcenginecc_iam_users data source.
 <<<<<<< HEAD
+<<<<<<< HEAD
 // This Terraform data source corresponds to the Cloud Control Volcengine::IAM::User resource.
 =======
 // This Terraform data source corresponds to the Cloud Control Volcengine::Iam::User resource.
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+// This Terraform data source corresponds to the Cloud Control Volcengine::IAM::User resource.
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 func usersDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
@@ -40,20 +44,28 @@ func usersDataSource(ctx context.Context) (datasource.DataSource, error) {
 
 	schema := schema.Schema{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Description: "Plural Data Source schema for Volcengine::IAM::User",
 =======
 		Description: "Plural Data Source schema for Volcengine::Iam::User",
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		Description: "Plural Data Source schema for Volcengine::IAM::User",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_users")
 =======
 	opts = opts.WithCloudControlTypeName("Volcengine::Iam::User").WithTerraformTypeName("volcenginecc_iam_users")
 >>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_users")
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)
