@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_iam_group.example "user_group_name"

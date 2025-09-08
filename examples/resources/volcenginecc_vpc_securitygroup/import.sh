@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_securitygroup.example "security_group_id"

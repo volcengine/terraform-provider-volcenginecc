@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_eip.example "allocation_id"

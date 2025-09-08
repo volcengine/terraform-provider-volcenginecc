@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_eni.example "network_interface_id"

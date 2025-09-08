@@ -33,6 +33,77 @@ func init() {
 // This Terraform resource corresponds to the Cloud Control Volcengine::IAM::User resource.
 func userResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessKey
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户的访问密钥。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "子用户的访问密钥。",
+		//	    "properties": {
+		//	      "AccessKeyId": {
+		//	        "description": "访问密钥ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "CreateDate": {
+		//	        "description": "访问密钥创建时间。",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "访问密钥状态。Active代表启用，Inactive代表禁用。",
+		//	        "type": "string"
+		//	      },
+		//	      "UpdateDate": {
+		//	        "description": "访问密钥更新时间。",
+		//	        "type": "string"
+		//	      },
+		//	      "UserName": {
+		//	        "description": "访问密钥Secret。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"access_key": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccessKeyId
+					"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥ID。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CreateDate
+					"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥创建时间。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥状态。Active代表启用，Inactive代表禁用。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UpdateDate
+					"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥更新时间。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UserName
+					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥Secret。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "子用户的访问密钥。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
@@ -108,6 +179,21 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EmailIsVerify
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
+		//	  "type": "boolean"
+		//	}
+		"email_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Groups
@@ -365,6 +451,21 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MobilePhoneIsVerify
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户手机号是否已验证。true代表已验证，false代表未验证。",
+		//	  "type": "boolean"
+		//	}
+		"mobile_phone_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "子用户手机号是否已验证。true代表已验证，false代表未验证。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Policies
 		// Cloud Control resource type schema:
 		//
@@ -470,7 +571,6 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SafeAuthExemptDuration
 				"safe_auth_exempt_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "操作保护的豁免时间，完成验证后在豁免时间内将不再进行验证。支持设置5至30，默认值为10。单位为分钟。",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
@@ -640,11 +740,14 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_user")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_key":                "AccessKey",
+		"access_key_id":             "AccessKeyId",
 		"account_id":                "AccountId",
 		"create_date":               "CreateDate",
 		"description":               "Description",
 		"display_name":              "DisplayName",
 		"email":                     "Email",
+		"email_is_verify":           "EmailIsVerify",
 		"groups":                    "Groups",
 		"key":                       "Key",
 		"last_login_date":           "LastLoginDate",
@@ -654,6 +757,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"login_locked":              "LoginLocked",
 		"login_profile":             "LoginProfile",
 		"mobile_phone":              "MobilePhone",
+		"mobile_phone_is_verify":    "MobilePhoneIsVerify",
 		"password":                  "Password",
 		"password_expire_at":        "PasswordExpireAt",
 		"password_reset_required":   "PasswordResetRequired",
@@ -667,6 +771,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"safe_auth_flag":            "SafeAuthFlag",
 		"safe_auth_type":            "SafeAuthType",
 		"security_config":           "SecurityConfig",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"trn":                       "Trn",
 		"update_date":               "UpdateDate",
@@ -686,6 +791,8 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CreateDate",
 		"/properties/UpdateDate",
 		"/properties/SecurityConfig/SafeAuthClose",
+		"/properties/SecurityConfig/SafeAuthExemptDuration",
+		"/properties/AccessKey",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

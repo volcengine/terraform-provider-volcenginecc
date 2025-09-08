@@ -1,0 +1,229 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/UserGroupName"
+  ],
+  "definitions": {
+    "AttachedPolicy": {
+      "properties": {
+        "AttachTime": {
+          "description": "策略绑定时间。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "策略描述。",
+          "type": "string"
+        },
+        "PolicyName": {
+          "description": "策略名。",
+          "type": "string"
+        },
+        "PolicyScope": {
+          "description": "策略授权的作用范围，特指项目范围。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PolicyScope"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "PolicyTrn": {
+          "description": "策略TRN。",
+          "type": "string"
+        },
+        "PolicyType": {
+          "default": "All",
+          "description": "策略类型。System代表系统预设策略，Custom代表自定义策略。",
+          "enum": [
+            "Custom",
+            "System",
+            "All"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "PolicyName",
+        "PolicyType"
+      ],
+      "type": "object"
+    },
+    "PolicyScope": {
+      "properties": {
+        "AttachTime": {
+          "description": "项目授权时间。",
+          "type": "string"
+        },
+        "PolicyScopeType": {
+          "description": "授权类型。Global代表全局授权（不限制项目），Project代表按项目授权。",
+          "enum": [
+            "Global",
+            "Project"
+          ],
+          "type": "string"
+        },
+        "ProjectDisplayName": {
+          "description": "按项目授权时的项目显示名。",
+          "type": "string"
+        },
+        "ProjectName": {
+          "description": "按项目授权时的项目名。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "User": {
+      "properties": {
+        "Description": {
+          "description": "用户描述。",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "用户显示名。",
+          "type": "string"
+        },
+        "JoinTime": {
+          "description": "用户加入用户组的时间。",
+          "type": "string"
+        },
+        "UserID": {
+          "description": "用户ID。",
+          "type": "integer"
+        },
+        "UserName": {
+          "description": "用户名。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "UserName"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "用户组是用户的集合。当用户组被关联上策略后，同一用户组里的所有用户会拥有对应的策略权限，同一个用户可存在于多个用户组中，可同时拥有多个用户组的权限。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateGroup",
+        "iam:AddUserToGroup",
+        "iam:AttachUserGroupPolicy",
+        "iam:GetGroup",
+        "iam:ListUsersForGroup",
+        "iam:ListAttachedUserGroupPolicies"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeleteGroup",
+        "iam:GetGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetGroup",
+        "iam:ListUsersForGroup",
+        "iam:ListAttachedUserGroupPolicies"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateGroup",
+        "iam:RemoveUserFromGroup",
+        "iam:AddUserToGroup",
+        "iam:GetGroup",
+        "iam:ListUsersForGroup",
+        "iam:ListAttachedUserGroupPolicies",
+        "iam:AttachUserGroupPolicy",
+        "iam:DetachUserGroupPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/UserGroupName"
+  ],
+  "properties": {
+    "AccountID": {
+      "description": "用户组所属主账号的ID。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AttachedPolicys": {
+      "description": "用户组绑定的策略信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AttachedPolicy"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedTime": {
+      "description": "用户组的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "用户组描述信息。长度不超过128。",
+      "maxLength": 128,
+      "semantic": "description",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "用户组显示名称。长度不超过64。",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "用户组的更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UserGroupID": {
+      "description": "用户组ID。",
+      "semantic": "resourceId",
+      "type": "integer"
+    },
+    "UserGroupName": {
+      "description": "用户组名称。长度1~64，支持英文、数字和.-_符号。",
+      "maxLength": 64,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Users": {
+      "description": "用户组内绑定的用户信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/User"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountID",
+    "/properties/UserGroupID",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/Users/*/UserID",
+    "/properties/Users/*/DisplayName",
+    "/properties/Users/*/Description",
+    "/properties/Users/*/JoinTime",
+    "/properties/AttachedPolicys/*/PolicyTrn",
+    "/properties/AttachedPolicys/*/AttachTime",
+    "/properties/AttachedPolicys/*/Description"
+  ],
+  "required": [
+    "UserGroupName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::Group"
+}
