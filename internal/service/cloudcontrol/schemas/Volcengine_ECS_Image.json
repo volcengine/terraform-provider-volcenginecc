@@ -320,8 +320,7 @@
     "/properties/Size",
     "/properties/ShareStatus",
     "/properties/VirtualSize",
-    "/properties/Visibility",
-    "/properties/BootMode"
+    "/properties/Visibility"
   ],
   "required": [
     "ImageName"
@@ -331,10 +330,5 @@
     "tagUpdatable": true,
     "taggable": true
   },
-  "typeName": "Volcengine::ECS::Image",
-  "writeOnlyProperties": [
-    "/properties/InstanceId",
-    "/properties/SnapshotGroupId",
-    "/properties/SnapshotId"
-  ]
+  "typeName": "Volcengine::ECS::Image"
 }

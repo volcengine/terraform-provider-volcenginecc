@@ -21,14 +21,17 @@ Data Source schema for Volcengine::IAM::User
 
 ### Read-Only
 
+- `access_key` (Attributes Set) 子用户的访问密钥。 (see [below for nested schema](#nestedatt--access_key))
 - `account_id` (Number) 子用户归属的主账号。
 - `create_date` (String) 子用户对应的创建时间。
 - `description` (String) 子用户对应的描述信息，长度不超过255。
 - `display_name` (String) 子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。
 - `email` (String) 子用户对应的电子邮件地址。
+- `email_is_verify` (Boolean) 子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。
 - `groups` (Set of String) 子用户归属的用户组。
 - `login_profile` (Attributes) 子用户的登录配置。 (see [below for nested schema](#nestedatt--login_profile))
 - `mobile_phone` (String) 子用户对应的手机号。
+- `mobile_phone_is_verify` (Boolean) 子用户手机号是否已验证。true代表已验证，false代表未验证。
 - `policies` (Attributes Set) 子用户对应的权限策略。 (see [below for nested schema](#nestedatt--policies))
 - `security_config` (Attributes) 子用户的操作保护配置。 (see [below for nested schema](#nestedatt--security_config))
 - `tags` (Attributes Set) 子用户对应的资源标签。 (see [below for nested schema](#nestedatt--tags))
@@ -36,6 +39,18 @@ Data Source schema for Volcengine::IAM::User
 - `update_date` (String) 子用户对应的更新时间。
 - `user_id` (Number) 子用户的ID。
 - `user_name` (String) 子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。
+
+<a id="nestedatt--access_key"></a>
+### Nested Schema for `access_key`
+
+Read-Only:
+
+- `access_key_id` (String) 访问密钥ID。
+- `create_date` (String) 访问密钥创建时间。
+- `status` (String) 访问密钥状态。Active代表启用，Inactive代表禁用。
+- `update_date` (String) 访问密钥更新时间。
+- `user_name` (String) 访问密钥Secret。
+
 
 <a id="nestedatt--login_profile"></a>
 ### Nested Schema for `login_profile`

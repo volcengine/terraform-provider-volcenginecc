@@ -65,7 +65,14 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"boot_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "镜像的启动模式。可以选择BIOS、UEFI类型。",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"BIOS",
+					"UEFI",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -281,7 +288,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// InstanceId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: IsInstallRunCommandAgent
 		// Cloud Control resource type schema:
@@ -530,7 +536,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// SnapshotGroupId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
 		// Cloud Control resource type schema:
@@ -547,7 +552,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// SnapshotId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Snapshots
 		// Cloud Control resource type schema:
@@ -791,12 +795,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"volume_kind":                  "VolumeKind",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/InstanceId",
-		"/properties/SnapshotGroupId",
-		"/properties/SnapshotId",
-	})
-
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/ImageId",
 		"/properties/CreatedAt",
@@ -812,7 +810,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ShareStatus",
 		"/properties/VirtualSize",
 		"/properties/Visibility",
-		"/properties/BootMode",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
