@@ -52,7 +52,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "description": "展示名。",
 		//	                "type": "string"
 		//	              },
-		//	              "ID": {
+		//	              "GranteeId": {
 		//	                "description": "账号ID。",
 		//	                "type": "string"
 		//	              },
@@ -92,7 +92,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "展示名。",
 		//	          "type": "string"
 		//	        },
-		//	        "ID": {
+		//	        "OwnerId": {
 		//	          "description": "账号ID。",
 		//	          "type": "string"
 		//	        }
@@ -126,8 +126,8 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Description: "展示名。",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
-									// Property: ID
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									// Property: GranteeId
+									"grantee_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "账号ID。",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -158,8 +158,8 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "展示名。",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
-						// Property: ID
-						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						// Property: OwnerId
+						"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "账号ID。",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -294,7 +294,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶的版本控制状态。",
+		//	  "description": "存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。",
 		//	  "enum": [
 		//	    "Enabled",
 		//	    "Suspended"
@@ -302,7 +302,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enable_version_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储桶的版本控制状态。",
+			Description: "存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExtranetEndpoint
@@ -391,7 +391,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "ID": {
+		//	      "LifecycleRuleId": {
 		//	        "description": "规则 ID。",
 		//	        "type": "string"
 		//	      },
@@ -572,8 +572,8 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "指定规则生效的过滤条件。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
-					// Property: ID
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					// Property: LifecycleRuleId
+					"lifecycle_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "规则 ID。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -813,13 +813,14 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"grant_write":                        "GrantWrite",
 		"grant_write_acp":                    "GrantWriteAcp",
 		"grantee":                            "Grantee",
+		"grantee_id":                         "GranteeId",
 		"grants":                             "Grants",
 		"greater_than_include_equal":         "GreaterThanIncludeEqual",
-		"id":                                 "ID",
 		"intranet_endpoint":                  "IntranetEndpoint",
 		"key":                                "Key",
 		"less_than_include_equal":            "LessThanIncludeEqual",
 		"lifecycle_config":                   "Lifecycle",
+		"lifecycle_rule_id":                  "LifecycleRuleId",
 		"location":                           "Location",
 		"name":                               "Name",
 		"no_current_version_expiration":      "NoCurrentVersionExpiration",
@@ -829,6 +830,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"object_size_greater_than":           "ObjectSizeGreaterThan",
 		"object_size_less_than":              "ObjectSizeLessThan",
 		"owner":                              "Owner",
+		"owner_id":                           "OwnerId",
 		"permission":                         "Permission",
 		"prefix":                             "Prefix",
 		"project_name":                       "ProjectName",

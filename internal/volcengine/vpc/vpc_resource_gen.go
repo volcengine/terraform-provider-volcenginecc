@@ -114,7 +114,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "VPC关联的CEN信息。",
+			Description: "VPC关联的CEN信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -194,21 +194,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: EnableIpv6
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
-		//	  "type": "boolean"
-		//	}
-		"enable_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4GatewayId
@@ -482,7 +467,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "私有网络绑定的标签。",
+			Description: "私有网络绑定的标签。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -589,7 +574,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time":         "CreationTime",
 		"description":           "Description",
 		"dns_servers":           "DnsServers",
-		"enable_ipv_6":          "EnableIpv6",
 		"ipv_4_gateway_id":      "Ipv4GatewayId",
 		"ipv_6_cidr_block":      "Ipv6CidrBlock",
 		"is_default":            "IsDefault",
@@ -611,6 +595,23 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_name":              "VpcName",
 	})
 
+	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/VpcId",
+		"/properties/CreationTime",
+		"/properties/UpdateTime",
+		"/properties/Status",
+		"/properties/AccountId",
+		"/properties/IsDefault",
+		"/properties/NetworkAclNum",
+	})
+
+	opts = opts.WithCreateOnlyPropertyPaths([]string{
+		"/properties/ClientToken",
+		"/properties/CidrBlock",
+		"/properties/ProjectName",
+		"/properties/SupportIpv4Gateway",
+		"/properties/Ipv4GatewayId",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

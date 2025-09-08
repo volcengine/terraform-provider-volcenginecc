@@ -43,7 +43,6 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 
 ### Optional
 
-- `boot_mode` (String) 镜像的启动模式。可以选择BIOS、UEFI类型。
 - `description` (String) 镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。
 - `detection_results` (Attributes) 镜像的检测结果。 (see [below for nested schema](#nestedatt--detection_results))
 - `instance_id` (String) 实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。
@@ -63,6 +62,7 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 ### Read-Only
 
 - `architecture` (String) 镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。
+- `boot_mode` (String) 镜像的启动模式。可以选择BIOS、UEFI类型。
 - `created_at` (String) 镜像创建时间
 - `id` (String) Uniquely identifies the resource.
 - `image_id` (String) 镜像ID。
