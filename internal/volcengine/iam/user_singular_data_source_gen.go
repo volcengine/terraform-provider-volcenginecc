@@ -102,6 +102,18 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "子用户的登录配置。",
 		//	  "properties": {
+		//	    "CreateDate": {
+		//	      "description": "登录配置创建时间。",
+		//	      "type": "string"
+		//	    },
+		//	    "LastLoginDate": {
+		//	      "description": "上次登录时间。",
+		//	      "type": "string"
+		//	    },
+		//	    "LastLoginIp": {
+		//	      "description": "上次登录IP。",
+		//	      "type": "string"
+		//	    },
 		//	    "LastResetPasswordTime": {
 		//	      "description": "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
 		//	      "type": "number"
@@ -110,9 +122,17 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
 		//	      "type": "boolean"
 		//	    },
+		//	    "LoginLocked": {
+		//	      "description": "登录是否被锁定。true代表已锁定，false代表未锁定。管理员设置错误密码重试次数限制后，用户命中后登录会被锁定。",
+		//	      "type": "boolean"
+		//	    },
 		//	    "Password": {
 		//	      "description": "登录密码。",
 		//	      "type": "string"
+		//	    },
+		//	    "PasswordExpireAt": {
+		//	      "description": "密码过期时间。0代表永不过期，非0代表过期时间的时间戳。",
+		//	      "type": "number"
 		//	    },
 		//	    "PasswordResetRequired": {
 		//	      "description": "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
@@ -137,12 +157,31 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SafeAuthType": {
 		//	      "description": "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
 		//	      "type": "string"
+		//	    },
+		//	    "UpdateDate": {
+		//	      "description": "登录配置更新时间。",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
 		"login_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CreateDate
+				"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "登录配置创建时间。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LastLoginDate
+				"last_login_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "上次登录时间。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LastLoginIp
+				"last_login_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "上次登录IP。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: LastResetPasswordTime
 				"last_reset_password_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
@@ -153,9 +192,19 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: LoginLocked
+				"login_locked": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "登录是否被锁定。true代表已锁定，false代表未锁定。管理员设置错误密码重试次数限制后，用户命中后登录会被锁定。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "登录密码。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PasswordExpireAt
+				"password_expire_at": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "密码过期时间。0代表永不过期，非0代表过期时间的时间戳。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PasswordResetRequired
@@ -186,6 +235,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: SafeAuthType
 				"safe_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateDate
+				"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "登录配置更新时间。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -251,6 +305,48 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "子用户对应的权限策略。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityConfig
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户的操作保护配置。",
+		//	  "properties": {
+		//	    "SafeAuthClose": {
+		//	      "description": "是否开启操作保护。0代表开启，1代表关闭。",
+		//	      "type": "number"
+		//	    },
+		//	    "SafeAuthExemptDuration": {
+		//	      "description": "操作保护的豁免时间，完成验证后在豁免时间内将不再进行验证。支持设置5至30，默认值为10。单位为分钟。",
+		//	      "type": "number"
+		//	    },
+		//	    "SafeAuthType": {
+		//	      "description": "操作保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"security_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SafeAuthClose
+				"safe_auth_close": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "是否开启操作保护。0代表开启，1代表关闭。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SafeAuthExemptDuration
+				"safe_auth_exempt_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "操作保护的豁免时间，完成验证后在豁免时间内将不再进行验证。支持设置5至30，默认值为10。单位为分钟。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SafeAuthType
+				"safe_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "操作保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "子用户的操作保护配置。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -320,6 +416,18 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "子用户对应的更新时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UserId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户的ID。",
+		//	  "format": "int64",
+		//	  "type": "integer"
+		//	}
+		"user_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "子用户的ID。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// Cloud Control resource type schema:
 		//
@@ -357,23 +465,30 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"email":                     "Email",
 		"groups":                    "Groups",
 		"key":                       "Key",
+		"last_login_date":           "LastLoginDate",
+		"last_login_ip":             "LastLoginIp",
 		"last_reset_password_time":  "LastResetPasswordTime",
 		"login_allowed":             "LoginAllowed",
+		"login_locked":              "LoginLocked",
 		"login_profile":             "LoginProfile",
 		"mobile_phone":              "MobilePhone",
 		"password":                  "Password",
+		"password_expire_at":        "PasswordExpireAt",
 		"password_reset_required":   "PasswordResetRequired",
 		"policies":                  "Policies",
 		"policy_name":               "PolicyName",
 		"policy_type":               "PolicyType",
+		"safe_auth_close":           "SafeAuthClose",
 		"safe_auth_exempt_duration": "SafeAuthExemptDuration",
 		"safe_auth_exempt_required": "SafeAuthExemptRequired",
 		"safe_auth_exempt_unit":     "SafeAuthExemptUnit",
 		"safe_auth_flag":            "SafeAuthFlag",
 		"safe_auth_type":            "SafeAuthType",
+		"security_config":           "SecurityConfig",
 		"tags":                      "Tags",
 		"trn":                       "Trn",
 		"update_date":               "UpdateDate",
+		"user_id":                   "UserId",
 		"user_name":                 "UserName",
 		"value":                     "Value",
 	})

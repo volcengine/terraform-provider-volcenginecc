@@ -61,7 +61,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                "description": "展示名。",
 		//	                "type": "string"
 		//	              },
-		//	              "ID": {
+		//	              "GranteeId": {
 		//	                "description": "账号ID。",
 		//	                "type": "string"
 		//	              },
@@ -101,7 +101,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "展示名。",
 		//	          "type": "string"
 		//	        },
-		//	        "ID": {
+		//	        "OwnerId": {
 		//	          "description": "账号ID。",
 		//	          "type": "string"
 		//	        }
@@ -153,8 +153,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
-									// Property: ID
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									// Property: GranteeId
+									"grantee_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "账号ID。",
 										Optional:    true,
 										Computed:    true,
@@ -206,7 +206,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "对象的访问控制权限根节点。",
+					Description: "对象的访问控制权限根节点。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -225,8 +225,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
-						// Property: ID
-						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						// Property: OwnerId
+						"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "账号ID。",
 							Optional:    true,
 							Computed:    true,
@@ -439,7 +439,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储桶的版本控制状态。",
+		//	  "description": "存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。",
 		//	  "enum": [
 		//	    "Enabled",
 		//	    "Suspended"
@@ -447,7 +447,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"enable_version_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储桶的版本控制状态。",
+			Description: "存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -552,7 +552,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "ID": {
+		//	      "LifecycleRuleId": {
 		//	        "description": "规则 ID。",
 		//	        "type": "string"
 		//	      },
@@ -787,8 +787,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
-					// Property: ID
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					// Property: LifecycleRuleId
+					"lifecycle_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "规则 ID。",
 						Optional:    true,
 						Computed:    true,
@@ -868,7 +868,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "基于最后修改时间的生命周期规则中沉降历史版本对象的的过期属性。",
+						Description: "基于最后修改时间的生命周期规则中沉降历史版本对象的的过期属性。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -929,7 +929,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "标签。",
+						Description: "标签。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -980,7 +980,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "基于最后修改时间的生命周期规则中沉降最新版本对象的的过期属性。",
+						Description: "基于最后修改时间的生命周期规则中沉降最新版本对象的的过期属性。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -989,7 +989,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "存储桶的声明周期。",
+			Description: "存储桶的声明周期。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1135,7 +1135,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "存储桶的标签信息。",
+			Description: "存储桶的标签信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1186,13 +1186,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"grant_write":                        "GrantWrite",
 		"grant_write_acp":                    "GrantWriteAcp",
 		"grantee":                            "Grantee",
+		"grantee_id":                         "GranteeId",
 		"grants":                             "Grants",
 		"greater_than_include_equal":         "GreaterThanIncludeEqual",
-		"id":                                 "ID",
 		"intranet_endpoint":                  "IntranetEndpoint",
 		"key":                                "Key",
 		"less_than_include_equal":            "LessThanIncludeEqual",
 		"lifecycle_config":                   "Lifecycle",
+		"lifecycle_rule_id":                  "LifecycleRuleId",
 		"location":                           "Location",
 		"name":                               "Name",
 		"no_current_version_expiration":      "NoCurrentVersionExpiration",
@@ -1202,6 +1203,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"object_size_greater_than":           "ObjectSizeGreaterThan",
 		"object_size_less_than":              "ObjectSizeLessThan",
 		"owner":                              "Owner",
+		"owner_id":                           "OwnerId",
 		"permission":                         "Permission",
 		"prefix":                             "Prefix",
 		"project_name":                       "ProjectName",
@@ -1213,6 +1215,19 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"value":                              "Value",
 	})
 
+	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/Location",
+		"/properties/CreationDate",
+		"/properties/ExtranetEndpoint",
+		"/properties/IntranetEndpoint",
+	})
+
+	opts = opts.WithCreateOnlyPropertyPaths([]string{
+		"/properties/Name",
+		"/properties/ProjectName",
+		"/properties/BucketType",
+		"/properties/AzRedundancy",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

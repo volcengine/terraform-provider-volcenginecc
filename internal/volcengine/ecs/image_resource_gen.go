@@ -65,14 +65,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"boot_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "镜像的启动模式。可以选择BIOS、UEFI类型。",
-			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"BIOS",
-					"UEFI",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -213,7 +206,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "镜像检测项详情。",
+					Description: "镜像检测项详情。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -288,6 +281,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// InstanceId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: IsInstallRunCommandAgent
 		// Cloud Control resource type schema:
@@ -536,6 +530,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// SnapshotGroupId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
 		// Cloud Control resource type schema:
@@ -552,6 +547,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// SnapshotId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Snapshots
 		// Cloud Control resource type schema:
@@ -603,7 +599,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "镜像关联快照的信息。",
+			Description: "镜像关联快照的信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -678,7 +674,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "镜像绑定的标签列表。",
+			Description: "镜像绑定的标签列表。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -795,6 +791,35 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"volume_kind":                  "VolumeKind",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/InstanceId",
+		"/properties/SnapshotGroupId",
+		"/properties/SnapshotId",
+	})
+
+	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/ImageId",
+		"/properties/CreatedAt",
+		"/properties/UpdatedAt",
+		"/properties/Architecture",
+		"/properties/ImageOwnerId",
+		"/properties/IsInstallRunCommandAgent",
+		"/properties/IsLTS",
+		"/properties/Status",
+		"/properties/Snapshots",
+		"/properties/IsSupportCloudInit",
+		"/properties/Size",
+		"/properties/ShareStatus",
+		"/properties/VirtualSize",
+		"/properties/Visibility",
+		"/properties/BootMode",
+	})
+
+	opts = opts.WithCreateOnlyPropertyPaths([]string{
+		"/properties/InstanceId",
+		"/properties/SnapshotGroupId",
+		"/properties/SnapshotId",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

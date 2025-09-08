@@ -359,7 +359,7 @@ func (d *Downloader) ResourceSchema(client *cloudcontrol.CloudControl, schema Re
 			return "", "", fmt.Errorf("describing Cloud Control type: %w", err)
 		}
 
-		schema, err := json.Marshal(output.Schema)
+		schema, err := json.MarshalIndent(output.Schema, "", "  ")
 
 		if err != nil {
 			return "", "", fmt.Errorf("sanitizing schema: %w", err)

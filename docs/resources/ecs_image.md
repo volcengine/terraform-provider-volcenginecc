@@ -45,7 +45,6 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 
 ### Optional
 
-- `boot_mode` (String) 镜像的启动模式。可以选择BIOS、UEFI类型。
 - `description` (String) 镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。
 - `detection_results` (Attributes) 镜像的检测结果。 (see [below for nested schema](#nestedatt--detection_results))
 - `instance_id` (String) 实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。
@@ -59,11 +58,13 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 - `share_permission` (Set of String) 镜像共享的账户
 - `snapshot_group_id` (String) 快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。
 - `snapshot_id` (String) 系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。
-- `tags` (Attributes Set) 镜像绑定的标签列表。 (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 镜像绑定的标签列表。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `architecture` (String) 镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。
+- `boot_mode` (String) 镜像的启动模式。可以选择BIOS、UEFI类型。
 - `created_at` (String) 镜像创建时间
 - `id` (String) Uniquely identifies the resource.
 - `image_id` (String) 镜像ID。
@@ -73,7 +74,8 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 - `is_support_cloud_init` (Boolean) 镜像是否支持Cloud-init。
 - `share_status` (String) 镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。
 - `size` (Number) 镜像大小，单位为GiB。
-- `snapshots` (Attributes Set) 镜像关联快照的信息。 (see [below for nested schema](#nestedatt--snapshots))
+- `snapshots` (Attributes Set) 镜像关联快照的信息。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--snapshots))
 - `status` (String) 镜像的状态。
 - `updated_at` (String) 镜像更新时间
 - `virtual_size` (Number) 镜像大小，单位为Byte。
@@ -85,7 +87,8 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 Optional:
 
 - `detection_status` (String) 检测状态。可以选择Finished（已完成）、Processing（处理中）类型。
-- `items` (Attributes List) 镜像检测项详情。 (see [below for nested schema](#nestedatt--detection_results--items))
+- `items` (Attributes List) 镜像检测项详情。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--detection_results--items))
 
 <a id="nestedatt--detection_results--items"></a>
 ### Nested Schema for `detection_results.items`

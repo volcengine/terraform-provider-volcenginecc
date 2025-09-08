@@ -48,7 +48,19 @@ func (r *Resource) IsCreateOnlyPropertyPath(path string) bool {
 
 	return false
 }
+func (r *Resource) IsReadOnleyPropertyPath(path string) bool {
+	if r == nil {
+		return false
+	}
 
+	for _, readOnlyProperty := range r.ReadOnlyProperties {
+		if readOnlyProperty.EqualsStringPath(path) {
+			return true
+		}
+	}
+
+	return false
+}
 func (r *Resource) IsRequired(name string) bool {
 	if r == nil {
 		return false

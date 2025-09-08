@@ -26,7 +26,7 @@ Data Source schema for Volcengine::TOS::Bucket
 - `az_redundancy` (String) 桶的可用区冗余类型。包括single-az：单可用区冗余，multi-az：多可用区冗余。
 - `bucket_type` (String) 桶的类型。包括hns：获取所有分层桶列表，fns：获取所有扁平桶列表。
 - `creation_date` (String) 桶的创建时间。
-- `enable_version_status` (String) 存储桶的版本控制状态。
+- `enable_version_status` (String) 存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。
 - `extranet_endpoint` (String) 存储桶的 TOS 协议公网访问域名。
 - `intranet_endpoint` (String) 存储桶的 TOS 协议私网访问域名
 - `lifecycle_config` (Attributes Set) 存储桶的声明周期。 (see [below for nested schema](#nestedatt--lifecycle_config))
@@ -60,7 +60,7 @@ Read-Only:
 
 - `canned` (String) 预定义组。包括AllUsers、AuthenticatedUsers。
 - `display_name` (String) 展示名。
-- `id` (String) 账号ID。
+- `grantee_id` (String) 账号ID。
 - `type` (String) 用户类型。包括Group、CanonicalUser。
 
 
@@ -71,7 +71,7 @@ Read-Only:
 Read-Only:
 
 - `display_name` (String) 展示名。
-- `id` (String) 账号ID。
+- `owner_id` (String) 账号ID。
 
 
 
@@ -96,7 +96,7 @@ Read-Only:
 - `abort_in_complete_multipart_upload` (Attributes) 指定未合并的分片任务（碎片）的过期属性。 (see [below for nested schema](#nestedatt--lifecycle_config--abort_in_complete_multipart_upload))
 - `expiration` (Attributes) 基于最后修改时间的生命周期规则中删除最新版本对象的过期属性。 (see [below for nested schema](#nestedatt--lifecycle_config--expiration))
 - `filter` (Attributes) 指定规则生效的过滤条件。 (see [below for nested schema](#nestedatt--lifecycle_config--filter))
-- `id` (String) 规则 ID。
+- `lifecycle_rule_id` (String) 规则 ID。
 - `no_current_version_expiration` (Attributes) (see [below for nested schema](#nestedatt--lifecycle_config--no_current_version_expiration))
 - `non_current_version_transitions` (Attributes Set) 基于最后修改时间的生命周期规则中沉降历史版本对象的的过期属性。 (see [below for nested schema](#nestedatt--lifecycle_config--non_current_version_transitions))
 - `prefix` (String) 规则所适用的前缀。

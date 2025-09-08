@@ -353,6 +353,17 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		"value":                  "Value",
 	})
 
+	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/IsServiceLinkedRole",
+		"/properties/Trn",
+		"/properties/RoleId",
+		"/properties/CreateDate",
+		"/properties/UpdateDate",
+	})
+
+	opts = opts.WithCreateOnlyPropertyPaths([]string{
+		"/properties/RoleName",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

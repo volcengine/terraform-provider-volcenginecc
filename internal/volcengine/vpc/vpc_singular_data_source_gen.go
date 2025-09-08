@@ -141,17 +141,6 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用&分隔。不填则配置为默认DNS服务器地址。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: EnableIpv6
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
-		//	  "type": "boolean"
-		//	}
-		"enable_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: Ipv4GatewayId
 		// Cloud Control resource type schema:
 		//
@@ -442,7 +431,6 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_time":         "CreationTime",
 		"description":           "Description",
 		"dns_servers":           "DnsServers",
-		"enable_ipv_6":          "EnableIpv6",
 		"ipv_4_gateway_id":      "Ipv4GatewayId",
 		"ipv_6_cidr_block":      "Ipv6CidrBlock",
 		"is_default":            "IsDefault",

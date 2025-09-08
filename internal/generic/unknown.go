@@ -92,6 +92,37 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 	return nil
 }
 
+// SetReadOnlyFromResourceModel fills readonly values from a Cloud Control ResourceModel (string).
+func SetReadOnlyFromResourceModel(ctx context.Context, state *tfsdk.State, paths []*path.Path, resourceModel string, cfToTfNameMap map[string]string) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	// Get the Terraform Value of the ResourceModel.
+	translator := toTerraform{cfToTfNameMap: cfToTfNameMap}
+	schema := state.Schema
+	val, err := translator.FromString(ctx, schema, resourceModel)
+
+	if err != nil {
+		diags.AddError("", err.Error())
+		return diags
+	}
+
+	src := tfsdk.State{
+		Schema: schema,
+		Raw:    val,
+	}
+
+	// Copy all unknown values from the ResourceModel to destination State.
+	for _, path := range paths {
+		diag := copyStateValueAtPath(ctx, state, &src, *path)
+		if diag.HasError() {
+			diags.Append(diag...)
+			return diags
+		}
+	}
+
+	return nil
+}
+
 type typeAtTerraformPather interface {
 	TypeAtTerraformPath(context.Context, *tftypes.AttributePath) (attr.Type, error)
 }

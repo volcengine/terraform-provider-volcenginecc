@@ -1,1 +1,176 @@
-{"additionalProperties":false,"createOnlyProperties":["/properties/RoleName"],"definitions":{"Policy":{"description":"角色策略。","properties":{"PolicyName":{"description":"策略名。","type":"string"},"PolicyType":{"description":"策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。","enum":["System","Custom"],"type":"string"}},"required":["PolicyName","PolicyType"],"type":"object"},"Tag":{"description":"标签","properties":{"Key":{"description":"标签键。","type":"string"},"Value":{"description":"标签值。","type":"string"}},"required":["Key","Value"],"type":"object"}},"description":"角色（Role）是IAM体系里的一种虚拟身份，用于将账号内某些访问权限授予给各类身份实体，受信任的身份实体可扮演该角色来访问账号内的云资源。","handlers":{"create":{"permissions":["iam:CreateRole","iam:AttachRolePolicy","iam:GetRole","iam:ListAttachedRolePolicies"]},"delete":{"permissions":["iam:DeleteRole","iam:GetRole"]},"list":{"permissions":["iam:ListRoles"]},"read":{"permissions":["iam:GetRole","iam:ListAttachedRolePolicies"]},"update":{"permissions":["iam:UpdateRole","iam:AttachRolePolicy","iam:DetachRolePolicy","iam:GetRole","iam:ListAttachedRolePolicies","iam:TagResources","iam:UntagResources"]}},"primaryIdentifier":["/properties/RoleName"],"properties":{"CreateDate":{"description":"角色创建时间。","type":"string"},"Description":{"description":"角色描述，长度不超过128。","type":"string"},"DisplayName":{"description":"角色显示名，长度不超过64。","type":"string"},"IsServiceLinkedRole":{"description":"是否是服务关联角色, 0否，1是。","enum":[0,1],"type":"integer"},"MaxSessionDuration":{"description":"角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。","maximum":43200,"minimum":3600,"type":"integer"},"Policies":{"insertionOrder":false,"items":{"$ref":"#/definitions/Policy"},"type":"array","uniqueItems":true},"RoleId":{"description":"角色ID。","type":"integer"},"RoleName":{"description":"角色名，长度1~64，支持英文、数字和.-_符号。","type":"string"},"Tags":{"insertionOrder":false,"items":{"$ref":"#/definitions/Tag"},"type":"array","uniqueItems":true},"Trn":{"description":"角色TRN。","type":"string"},"TrustPolicyDocument":{"description":"角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。","type":"string"},"UpdateDate":{"description":"角色更新时间。","type":"string"}},"readOnlyProperties":["/properties/IsServiceLinkedRole","/properties/Trn","/properties/RoleId","/properties/CreateDate","/properties/UpdateDate"],"required":["RoleName"],"tagging":{"tagOnCreate":true,"tagUpdatable":true,"taggable":false},"typeName":"Volcengine::IAM::Role"}
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/RoleName"
+  ],
+  "definitions": {
+    "Policy": {
+      "description": "角色策略。",
+      "properties": {
+        "PolicyName": {
+          "description": "策略名。",
+          "type": "string"
+        },
+        "PolicyType": {
+          "description": "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
+          "enum": [
+            "System",
+            "Custom"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "PolicyName",
+        "PolicyType"
+      ],
+      "type": "object"
+    },
+    "Tag": {
+      "description": "标签",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "角色（Role）是IAM体系里的一种虚拟身份，用于将账号内某些访问权限授予给各类身份实体，受信任的身份实体可扮演该角色来访问账号内的云资源。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateRole",
+        "iam:AttachRolePolicy",
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeleteRole",
+        "iam:GetRole"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListRoles"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateRole",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies",
+        "iam:TagResources",
+        "iam:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/RoleName"
+  ],
+  "properties": {
+    "CreateDate": {
+      "description": "角色创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "角色描述，长度不超过128。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "角色显示名，长度不超过64。",
+      "type": "string"
+    },
+    "IsServiceLinkedRole": {
+      "description": "是否是服务关联角色, 0否，1是。",
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer"
+    },
+    "MaxSessionDuration": {
+      "description": "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
+      "maximum": 43200,
+      "minimum": 3600,
+      "type": "integer"
+    },
+    "Policies": {
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Policy"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RoleId": {
+      "description": "角色ID。",
+      "semantic": "resourceId",
+      "type": "integer"
+    },
+    "RoleName": {
+      "description": "角色名，长度1~64，支持英文、数字和.-_符号。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Tags": {
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Trn": {
+      "description": "角色TRN。",
+      "type": "string"
+    },
+    "TrustPolicyDocument": {
+      "description": "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
+      "type": "string"
+    },
+    "UpdateDate": {
+      "description": "角色更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/IsServiceLinkedRole",
+    "/properties/Trn",
+    "/properties/RoleId",
+    "/properties/CreateDate",
+    "/properties/UpdateDate"
+  ],
+  "required": [
+    "RoleName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::IAM::Role"
+}

@@ -119,6 +119,14 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	for _, path := range resource.CfResource.ReadOnlyProperties {
+		templateData.ReadOnlyPropertyPaths = append(templateData.ReadOnlyPropertyPaths, string(path))
+	}
+
+	for _, path := range resource.CfResource.CreateOnlyProperties {
+		templateData.CreateOnlyPropertyPaths = append(templateData.CreateOnlyPropertyPaths, string(path))
+	}
+
 	for _, path := range resource.CfResource.PrimaryIdentifier {
 		templateData.PrimaryIdentifier = append(templateData.PrimaryIdentifier, string(path))
 	}
@@ -168,6 +176,8 @@ type TemplateData struct {
 	TerraformTypeName             string
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string
+	ReadOnlyPropertyPaths         []string
+	CreateOnlyPropertyPaths       []string
 }
 
 type Resource struct {

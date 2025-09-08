@@ -1,1 +1,340 @@
-{"additionalProperties":false,"createOnlyProperties":["/properties/InstanceId","/properties/SnapshotGroupId","/properties/SnapshotId"],"definitions":{"Item":{"properties":{"Name":{"description":"检测项名称。","type":"string"},"Result":{"description":"该检测项对应结果。","type":"string"},"RiskCode":{"description":"风险描述码。","type":"string"},"RiskLevel":{"description":"风险等级。若该参数返回值为空，表示无风险。","type":"string"}},"type":"object"},"Snapshot":{"properties":{"Size":{"description":"快照大小。单位为GiB。","type":"integer"},"SnapshotId":{"description":"快照ID。","type":"string"},"VolumeKind":{"description":"云盘种类。system：系统盘。data：数据盘。","enum":["system","data"],"type":"string"}},"type":"object"},"Tag":{"properties":{"Key":{"description":"镜像标签的标签键。","type":"string"},"Value":{"description":"镜像标签的值。","type":"string"}},"required":["Key","Value"],"type":"object"}},"description":"镜像是包含了云服务器实例所需的基本操作系统、应用数据的特殊文件。创建实例时，必须选择镜像。","handlers":{"create":{"permissions":["ecs:CreateImage","ecs:DescribeTasks","ecs:ModifyImageSharePermission","ecs:DescribeImages","ecs:DescribeImageSharePermission"]},"delete":{"permissions":["ecs:DeleteImages","ecs:DescribeImages"]},"list":{"permissions":["ecs:DescribeImages"]},"read":{"permissions":["ecs:DescribeImages","ecs:DescribeImageSharePermission"]},"update":{"permissions":["ecs:DescribeImages","ecs:DescribeImageSharePermission","ecs:ModifyImageAttribute","ecs:TagResources","ecs:UntagResources","ecs:ModifyImageSharePermission"]}},"primaryIdentifier":["/properties/ImageId"],"properties":{"Architecture":{"description":"镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。","enum":["amd64","arm64"],"type":"string"},"BootMode":{"description":"镜像的启动模式。可以选择BIOS、UEFI类型。","enum":["BIOS","UEFI"],"type":"string"},"CreatedAt":{"description":"镜像创建时间","semantic":"createdTime","type":"string"},"Description":{"description":"镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。","maxLength":255,"semantic":"description","type":"string"},"DetectionResults":{"description":"镜像的检测结果。","properties":{"DetectionStatus":{"description":"检测状态。可以选择Finished（已完成）、Processing（处理中）类型。","enum":["Finished","Processing"],"type":"string"},"Items":{"description":"镜像检测项详情。","insertionOrder":false,"items":{"$ref":"#/definitions/Item"},"type":"array","uniqueItems":false}},"type":"object"},"ImageId":{"description":"镜像ID。","semantic":"resourceId","type":"string"},"ImageName":{"description":"镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。","maxLength":128,"minLength":1,"semantic":"resourceName","type":"string"},"ImageOwnerId":{"description":"镜像所属的账号ID。","type":"string"},"InstanceId":{"description":"实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。","type":"string"},"IsInstallRunCommandAgent":{"description":"镜像中是否安装了云助手Agent。","type":"boolean"},"IsLTS":{"description":"公共镜像是否长期维护。","type":"boolean"},"IsSupportCloudInit":{"description":"镜像是否支持Cloud-init。","type":"boolean"},"Kernel":{"description":"镜像的内核版本。","type":"string"},"LicenseType":{"description":"镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。","enum":["VolcanoEngine","BYOL",""],"type":"string"},"OsName":{"description":"镜像操作系统的名称。","type":"string"},"OsType":{"description":"操作系统类型。","type":"string"},"Platform":{"description":"镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。","enum":["CentOS","Debian","veLinux","Windows Server","Fedora","OpenSUSE","Ubuntu"],"type":"string"},"PlatformVersion":{"description":"镜像的发行版本。","type":"string"},"ProjectName":{"description":"资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。","semantic":"projectName","type":"string"},"SharePermission":{"description":"镜像共享的账户","insertionOrder":false,"items":{"type":"string"},"type":"array","uniqueItems":true},"ShareStatus":{"description":"镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。","enum":["HasShared",""],"type":"string"},"Size":{"description":"镜像大小，单位为GiB。","type":"integer"},"SnapshotGroupId":{"description":"快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。","type":"string"},"SnapshotId":{"description":"系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。","type":"string"},"Snapshots":{"description":"镜像关联快照的信息。","insertionOrder":false,"items":{"$ref":"#/definitions/Snapshot"},"type":"array","uniqueItems":true},"Status":{"description":"镜像的状态。","semantic":"status","type":"string"},"Tags":{"description":"镜像绑定的标签列表。","insertionOrder":false,"items":{"$ref":"#/definitions/Tag"},"semantic":"tags","type":"array","uniqueItems":true},"UpdatedAt":{"description":"镜像更新时间","semantic":"updatedTime","type":"string"},"VirtualSize":{"description":"镜像大小，单位为Byte。","type":"number"},"Visibility":{"description":"镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。","enum":["public","private","shared"],"type":"string"}},"readOnlyProperties":["/properties/ImageId","/properties/CreatedAt","/properties/UpdatedAt","/properties/Architecture","/properties/ImageOwnerId","/properties/IsInstallRunCommandAgent","/properties/IsLTS","/properties/Status","/properties/Snapshots","/properties/IsSupportCloudInit","/properties/Size","/properties/ShareStatus","/properties/VirtualSize","/properties/Visibility"],"required":["ImageName"],"tagging":{"tagOnCreate":true,"tagUpdatable":true,"taggable":true},"typeName":"Volcengine::ECS::Image"}
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/SnapshotGroupId",
+    "/properties/SnapshotId"
+  ],
+  "definitions": {
+    "Item": {
+      "properties": {
+        "Name": {
+          "description": "检测项名称。",
+          "type": "string"
+        },
+        "Result": {
+          "description": "该检测项对应结果。",
+          "type": "string"
+        },
+        "RiskCode": {
+          "description": "风险描述码。",
+          "type": "string"
+        },
+        "RiskLevel": {
+          "description": "风险等级。若该参数返回值为空，表示无风险。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Snapshot": {
+      "properties": {
+        "Size": {
+          "description": "快照大小。单位为GiB。",
+          "type": "integer"
+        },
+        "SnapshotId": {
+          "description": "快照ID。",
+          "type": "string"
+        },
+        "VolumeKind": {
+          "description": "云盘种类。system：系统盘。data：数据盘。",
+          "enum": [
+            "system",
+            "data"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "镜像标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "镜像标签的值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "镜像是包含了云服务器实例所需的基本操作系统、应用数据的特殊文件。创建实例时，必须选择镜像。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ecs:CreateImage",
+        "ecs:DescribeTasks",
+        "ecs:ModifyImageSharePermission",
+        "ecs:DescribeImages",
+        "ecs:DescribeImageSharePermission"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ecs:DeleteImages",
+        "ecs:DescribeImages"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ecs:DescribeImages"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ecs:DescribeImages",
+        "ecs:DescribeImageSharePermission"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ecs:DescribeImages",
+        "ecs:DescribeImageSharePermission",
+        "ecs:ModifyImageAttribute",
+        "ecs:TagResources",
+        "ecs:UntagResources",
+        "ecs:ModifyImageSharePermission"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ImageId"
+  ],
+  "properties": {
+    "Architecture": {
+      "description": "镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。",
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "type": "string"
+    },
+    "BootMode": {
+      "description": "镜像的启动模式。可以选择BIOS、UEFI类型。",
+      "enum": [
+        "BIOS",
+        "UEFI"
+      ],
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "镜像创建时间",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "DetectionResults": {
+      "description": "镜像的检测结果。",
+      "properties": {
+        "DetectionStatus": {
+          "description": "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
+          "enum": [
+            "Finished",
+            "Processing"
+          ],
+          "type": "string"
+        },
+        "Items": {
+          "description": "镜像检测项详情。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Item"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
+    "ImageId": {
+      "description": "镜像ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ImageName": {
+      "description": "镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ImageOwnerId": {
+      "description": "镜像所属的账号ID。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。",
+      "type": "string"
+    },
+    "IsInstallRunCommandAgent": {
+      "description": "镜像中是否安装了云助手Agent。",
+      "type": "boolean"
+    },
+    "IsLTS": {
+      "description": "公共镜像是否长期维护。",
+      "type": "boolean"
+    },
+    "IsSupportCloudInit": {
+      "description": "镜像是否支持Cloud-init。",
+      "type": "boolean"
+    },
+    "Kernel": {
+      "description": "镜像的内核版本。",
+      "type": "string"
+    },
+    "LicenseType": {
+      "description": "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。",
+      "enum": [
+        "VolcanoEngine",
+        "BYOL",
+        ""
+      ],
+      "type": "string"
+    },
+    "OsName": {
+      "description": "镜像操作系统的名称。",
+      "type": "string"
+    },
+    "OsType": {
+      "description": "操作系统类型。",
+      "type": "string"
+    },
+    "Platform": {
+      "description": "镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。",
+      "enum": [
+        "CentOS",
+        "Debian",
+        "veLinux",
+        "Windows Server",
+        "Fedora",
+        "OpenSUSE",
+        "Ubuntu"
+      ],
+      "type": "string"
+    },
+    "PlatformVersion": {
+      "description": "镜像的发行版本。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "SharePermission": {
+      "description": "镜像共享的账户",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ShareStatus": {
+      "description": "镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。",
+      "enum": [
+        "HasShared",
+        ""
+      ],
+      "type": "string"
+    },
+    "Size": {
+      "description": "镜像大小，单位为GiB。",
+      "type": "integer"
+    },
+    "SnapshotGroupId": {
+      "description": "快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。",
+      "type": "string"
+    },
+    "SnapshotId": {
+      "description": "系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。",
+      "type": "string"
+    },
+    "Snapshots": {
+      "description": "镜像关联快照的信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Snapshot"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Status": {
+      "description": "镜像的状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "镜像绑定的标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedAt": {
+      "description": "镜像更新时间",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VirtualSize": {
+      "description": "镜像大小，单位为Byte。",
+      "type": "number"
+    },
+    "Visibility": {
+      "description": "镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。",
+      "enum": [
+        "public",
+        "private",
+        "shared"
+      ],
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ImageId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Architecture",
+    "/properties/ImageOwnerId",
+    "/properties/IsInstallRunCommandAgent",
+    "/properties/IsLTS",
+    "/properties/Status",
+    "/properties/Snapshots",
+    "/properties/IsSupportCloudInit",
+    "/properties/Size",
+    "/properties/ShareStatus",
+    "/properties/VirtualSize",
+    "/properties/Visibility",
+    "/properties/BootMode"
+  ],
+  "required": [
+    "ImageName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::ECS::Image",
+  "writeOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/SnapshotGroupId",
+    "/properties/SnapshotId"
+  ]
+}
