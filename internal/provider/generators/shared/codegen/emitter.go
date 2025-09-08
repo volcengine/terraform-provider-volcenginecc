@@ -79,6 +79,7 @@ type Emitter struct {
 type parent struct {
 	computedAndOptional bool
 	computedOnly        bool
+	parentIfSetList     bool //是否为数组或者Set下的嵌套属性,会结合该属性+readOnly属性，在ListNestedAttribute或者SetNestedAttribute进行属性过滤
 	path                []string
 	reqd                interface {
 		IsRequired(name string) bool
@@ -115,12 +116,16 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 
 // emitAttribute generates the Terraform Plugin SDK code for a Cloud Control property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *ccschema.Property, required, parentComputedOnly, parentComputedAndOptional bool) (Features, error) {
+func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *ccschema.Property, required, parentComputedOnly, parentComputedAndOptional bool, parentIfListOrSet bool) (Features, bool, error) {
 	var features Features
 	var validators []string
 	var planModifiers []string
 	var fwPlanModifierPackage, fwPlanModifierType, fwValidatorType string
-
+	if parentIfListOrSet && e.CfResource.ReadOnlyProperties.ContainsPath(path) && !e.IsDataSource {
+		e.printf("// Property %s was skipped because its parent is a ListNestedAttribute or SetNestedAttribute, and the property is read-only.\n", name)
+		return features, true, nil
+	}
+	ifListOrSetNestedAttribute := false
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
@@ -194,7 +199,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		fwValidatorType = "Int64"
 
 		if f, v, err := integerValidators(path, property); err != nil {
-			return features, err
+			return features, false, err
 		} else if len(v) > 0 {
 			features = features.LogicalOr(f)
 			validators = append(validators, v...)
@@ -207,7 +212,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		fwValidatorType = "Float64"
 
 		if f, v, err := numberValidators(path, property); err != nil {
-			return features, err
+			return features, false, err
 		} else if len(v) > 0 {
 			features = features.LogicalOr(f)
 			validators = append(validators, v...)
@@ -217,7 +222,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
 
 		if f, c, err := stringCustomType(path, property); err != nil {
-			return features, err
+			return features, false, err
 		} else if c != "" {
 			features = features.LogicalOr(f)
 			e.printf("CustomType:%s,\n", c)
@@ -228,7 +233,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		fwValidatorType = "String"
 
 		if f, v, err := stringValidators(path, property); err != nil {
-			return features, err
+			return features, false, err
 		} else if len(v) > 0 {
 			features = features.LogicalOr(f)
 			validators = append(validators, v...)
@@ -265,7 +270,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 			case ccschema.PropertyTypeString:
 				if f, c, err := stringCustomType(path, property.Items); err != nil {
-					return features, err
+					return features, false, err
 				} else if c != "" {
 					features = features.LogicalOr(f)
 					elementType = c
@@ -277,12 +282,13 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 			case ccschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
-					return features, unsupportedTypeError(path, "set of key-value map")
+					return features, false, unsupportedTypeError(path, "set of key-value map")
 				}
 
 				if len(property.Items.Properties) == 0 {
-					return features, unsupportedTypeError(path, "set of undefined schema")
+					return features, false, unsupportedTypeError(path, "set of undefined schema")
 				}
+				ifListOrSetNestedAttribute = true
 
 				e.printf("schema.SetNestedAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
@@ -296,11 +302,12 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						computedOnly:        computedOnly,
 						path:                path,
 						reqd:                property.Items,
+						parentIfSetList:     true,
 					},
 					property.Items.Properties)
 
 				if err != nil {
-					return features, err
+					return features, false, err
 				}
 
 				features = features.LogicalOr(f)
@@ -309,14 +316,14 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf("}/*END NESTED OBJECT*/,\n")
 
 				if v, err := setLengthValidator(path, property); err != nil {
-					return features, err
+					return features, false, err
 				} else if v != "" {
 					validators = append(validators, v)
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "setvalidator")
 				}
 
 			default:
-				return features, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
+				return features, false, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
 			}
 
 			if elementType != "" {
@@ -326,7 +333,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := setLengthValidator(path, property); err != nil {
-					return features, err
+					return features, false, err
 				} else if v != "" {
 					validators = append(validators, v)
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "setvalidator")
@@ -334,7 +341,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 				if validatorsGenerator != nil {
 					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
-						return features, err
+						return features, false, err
 					} else if len(v) > 0 {
 						features = features.LogicalOr(f)
 
@@ -345,7 +352,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						case ccschema.PropertyTypeInteger:
 							fprintf(w, "setvalidator.ValueInt64sAre(\n")
 						default:
-							return features, fmt.Errorf("%s is of unsupported type for set item validation: %s", strings.Join(path, "/"), itemType)
+							return features, false, fmt.Errorf("%s is of unsupported type for set item validation: %s", strings.Join(path, "/"), itemType)
 						}
 						for _, v := range v {
 							fprintf(w, "%s,\n", v)
@@ -382,7 +389,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 			case ccschema.PropertyTypeString:
 				if f, c, err := stringCustomType(path, property.Items); err != nil {
-					return features, err
+					return features, false, err
 				} else if c != "" {
 					features = features.LogicalOr(f)
 					elementType = c
@@ -394,12 +401,13 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 			case ccschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
-					return features, unsupportedTypeError(path, "list of key-value map")
+					return features, false, unsupportedTypeError(path, "list of key-value map")
 				}
 
 				if len(property.Items.Properties) == 0 {
-					return features, unsupportedTypeError(path, "list of undefined schema")
+					return features, false, unsupportedTypeError(path, "list of undefined schema")
 				}
+				ifListOrSetNestedAttribute = true
 
 				e.printf("schema.ListNestedAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
@@ -413,11 +421,12 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						computedOnly:        computedOnly,
 						path:                path,
 						reqd:                property.Items,
+						parentIfSetList:     true,
 					},
 					property.Items.Properties)
 
 				if err != nil {
-					return features, err
+					return features, false, err
 				}
 
 				features = features.LogicalOr(f)
@@ -426,7 +435,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf("}/*END NESTED OBJECT*/,\n")
 
 				if v, err := listLengthValidator(path, property); err != nil {
-					return features, err
+					return features, false, err
 				} else if v != "" {
 					validators = append(validators, v)
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
@@ -441,7 +450,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				}
 
 			default:
-				return features, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
+				return features, false, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
 			}
 
 			if elementType != "" {
@@ -451,7 +460,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := listLengthValidator(path, property); err != nil {
-					return features, err
+					return features, false, err
 				} else if v != "" {
 					validators = append(validators, v)
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
@@ -467,7 +476,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 				if validatorsGenerator != nil {
 					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
-						return features, err
+						return features, false, err
 					} else if len(v) > 0 {
 						features = features.LogicalOr(f)
 
@@ -478,7 +487,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						case ccschema.PropertyTypeInteger:
 							fprintf(w, "listvalidator.ValueInt64sAre(\n")
 						default:
-							return features, fmt.Errorf("%s is of unsupported type for list item validation: %s", strings.Join(path, "/"), itemType)
+							return features, false, fmt.Errorf("%s is of unsupported type for list item validation: %s", strings.Join(path, "/"), itemType)
 						}
 						for _, v := range v {
 							fprintf(w, "%s,\n", v)
@@ -504,7 +513,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 			// Map.
 			//
 			if len(property.Properties) > 0 {
-				return features, fmt.Errorf("%s has both Properties and PatternProperties", strings.Join(path, "/"))
+				return features, false, fmt.Errorf("%s has both Properties and PatternProperties", strings.Join(path, "/"))
 			}
 
 			fwPlanModifierPackage = "mapplanmodifier"
@@ -571,7 +580,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						e.printf("ElementType:types.SetType{ElemType:types.StringType},\n")
 
 					default:
-						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
+						return features, false, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
 					}
 
 					features.UsesFrameworkTypes = true
@@ -594,7 +603,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						e.printf("ElementType:types.ListType{ElemType:types.StringType},\n")
 
 					default:
-						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of list of %s", itemType))
+						return features, false, unsupportedTypeError(path, fmt.Sprintf("key-value map of list of %s", itemType))
 					}
 
 					features.UsesFrameworkTypes = true
@@ -602,11 +611,11 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 			case ccschema.PropertyTypeObject:
 				if len(patternProperty.PatternProperties) > 0 {
-					return features, unsupportedTypeError(path, "key-value map of key-value map")
+					return features, false, unsupportedTypeError(path, "key-value map of key-value map")
 				}
 
 				if len(patternProperty.Properties) == 0 {
-					return features, unsupportedTypeError(path, "key-value map of undefined schema")
+					return features, false, unsupportedTypeError(path, "key-value map of undefined schema")
 				}
 
 				e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
@@ -621,21 +630,22 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						computedOnly:        computedOnly,
 						path:                path,
 						reqd:                property.Items,
+						parentIfSetList:     parentIfListOrSet,
 					},
 					patternProperty.Properties)
 
 				if err != nil {
-					return features, err
+					return features, false, err
 				}
 
 				features = features.LogicalOr(f)
 
 				if !e.IsDataSource {
 					if patternProperty.MinItems != nil {
-						return features, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
+						return features, false, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
 					}
 					if patternProperty.MaxItems != nil {
-						return features, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
+						return features, false, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
 					}
 				}
 
@@ -643,7 +653,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf("}/*END NESTED OBJECT*/,\n")
 
 			default:
-				return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
+				return features, false, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
 			}
 
 			for _, pattern := range patterns[1:] {
@@ -684,11 +694,12 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				computedOnly:        computedOnly,
 				path:                path,
 				reqd:                property,
+				parentIfSetList:     parentIfListOrSet,
 			},
 			property.Properties)
 
 		if err != nil {
-			return features, err
+			return features, false, err
 		}
 
 		features = features.LogicalOr(f)
@@ -696,11 +707,16 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		e.printf(",\n")
 
 	default:
-		return features, unsupportedTypeError(path, propertyType)
+		return features, false, unsupportedTypeError(path, propertyType)
 	}
 
 	if description := property.Description; description != nil {
-		e.printf("Description:%q,\n", *description)
+		if !e.IsDataSource && ifListOrSetNestedAttribute {
+			e.printf("Description:%q,\n", *description+"\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。")
+
+		} else {
+			e.printf("Description:%q,\n", *description)
+		}
 	}
 
 	// Return early as attribute validations are not required and additional configurations are not supported for data source.
@@ -708,7 +724,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		e.printf("Computed:true,\n")
 		e.printf("}/*END ATTRIBUTE*/")
 
-		return features, nil
+		return features, false, nil
 	}
 
 	if required {
@@ -723,7 +739,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 	// Handle any default value.
 	if f, defaultValue, planModifier, err := attributeDefaultValue(path, property); err != nil {
-		return features, err
+		return features, false, err
 	} else {
 		features = features.LogicalOr(f)
 		if defaultValue != "" {
@@ -789,7 +805,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 	e.printf("}/*END ATTRIBUTE*/")
 
-	return features, nil
+	return features, false, nil
 }
 
 // emitSchema generates the Terraform Plugin SDK code for a Cloud Control property's schema.
@@ -857,10 +873,10 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 			// Comment out each line.
 			e.printf("%s\n", regexp.MustCompile(`(?m)^`).ReplaceAllString(fmt.Sprintf("%v", properties[name]), "// "))
 		}
-
-		e.printf("%q:", tfAttributeName)
-
-		f, err := e.emitAttribute(
+		schemaBuilder := e.Writer
+		attributeBuilder := &strings.Builder{}
+		e.Writer = attributeBuilder
+		f, skipAttribute, err := e.emitAttribute(
 			tfType,
 			attributeNameMap,
 			append(parent.path, name),
@@ -869,6 +885,7 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 			parent.reqd.IsRequired(name),
 			parent.computedOnly,
 			parent.computedAndOptional,
+			parent.parentIfSetList,
 		)
 
 		if err != nil {
@@ -876,8 +893,12 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 		}
 
 		features = features.LogicalOr(f)
-
-		e.printf(",\n")
+		e.Writer = schemaBuilder
+		if !skipAttribute {
+			e.printf("%q:", tfAttributeName)
+			e.printf("%s", attributeBuilder.String())
+			e.printf(",\n")
+		}
 	}
 	e.printf("}/*END SCHEMA*/")
 

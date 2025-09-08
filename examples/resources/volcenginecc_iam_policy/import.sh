@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_iam_policy.example "policy_name|policy_type"

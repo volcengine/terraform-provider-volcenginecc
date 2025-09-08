@@ -21,9 +21,38 @@ resource_schema "volcengine_tos_bucket" {
   cloudcontrol_type_name = "Volcengine::TOS::Bucket"
 }
 
+resource_schema "volcengine_iam_group" {
+  cloudcontrol_type_name = "Volcengine::IAM::Group"
+}
 resource_schema "volcengine_iam_user" {
   cloudcontrol_type_name = "Volcengine::IAM::User"
+}
+resource_schema "volcengine_vpc_securitygroup" {
+  cloudcontrol_type_name = "Volcengine::VPC::SecurityGroup"
+}
+resource_schema "volcengine_vpc_subnet" {
+  cloudcontrol_type_name = "Volcengine::VPC::Subnet"
+}
+resource_schema "volcengine_iam_accesskey" {
+  cloudcontrol_type_name = "Volcengine::IAM::Accesskey"
+}
+resource_schema "volcengine_vpc_eni" {
+  cloudcontrol_type_name = "Volcengine::VPC::ENI"
+}
+resource_schema "volcengine_iam_policy" {
+  cloudcontrol_type_name = "Volcengine::IAM::Policy"
+}
 
+resource_schema "volcengine_vpc_eip" {
+  cloudcontrol_type_name = "Volcengine::VPC::EIP"
+}
+
+resource_schema "volcengine_vpc_route_table" {
+  cloudcontrol_type_name = "Volcengine::VPC::RouteTable"
+}
+
+resource_schema "volcengine_ark_endpoint" {
+  cloudcontrol_type_name = "Volcengine::ARK::Endpoint"
 }
 
 resource_schema "volcengine_vpc_vpc" {

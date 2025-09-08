@@ -13,8 +13,18 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 func TestAccVolcengineIAMUsersDataSource_basic(t *testing.T) {
 	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_users", "test")
+=======
+func TestAccVolcengineIamUsersDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::Iam::User", "volcenginecc_iam_users", "test")
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+func TestAccVolcengineIAMUsersDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::IAM::User", "volcenginecc_iam_users", "test")
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

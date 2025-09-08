@@ -1,0 +1,295 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Isp",
+    "/properties/BandwidthPackageId",
+    "/properties/ProjectName",
+    "/properties/IpAddressPoolId",
+    "/properties/SecurityProtectionTypes"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "用户标签。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "公网IP（Elastic IP Address，EIP）及其公网出口带宽，是火山引擎为云资源提供的可独立购买和持有的IP连通服务。公网IP支持直接绑定云服务器（包括ECS云服务器、EBM裸金属服务器、GPU云服务器），还支持绑定公网NAT网关、负载均衡、辅助网卡等组件，为云服务器提供公网互通能力。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:AllocateEipAddress",
+        "vpc:AssociateEipAddress",
+        "vpc:DescribeEipAddressesAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DescribeEipAddresses",
+        "vpc:DisassociateEipAddress",
+        "vpc:ReleaseEipAddress"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeEipAddresses"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeEipAddressesAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:DisassociateEipAddress",
+        "vpc:UntagResources",
+        "vpc:TagResources",
+        "vpc:ModifyEipAddressAttributes",
+        "vpc:DescribeEipAddressAttributes",
+        "vpc:AssociateEipAddress",
+        "vpc:DisassociateEipAddress"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllocationId"
+  ],
+  "properties": {
+    "AllocationId": {
+      "description": "公网IP的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Bandwidth": {
+      "default": 1,
+      "description": "公网IP的带宽上限，默认为“1”，单位：Mbps,BillingType传入1：取值范围1 ~ 500。BillingType传入2：取值范围1 ~ 500。BillingType传入3：取值范围1 ~ 200。",
+      "maximum": 500,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "BandwidthPackageId": {
+      "description": "共享带宽包的ID，表示将公网IP加入到共享带宽包。公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的地域相同。公网IP的计费方式必须是按量计费。共享带宽包为IPv4类型。",
+      "type": "string"
+    },
+    "BillingType": {
+      "description": "公网IP的计费方式。取值如下：1：包年包月。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "公网IP是否被锁定。Normal: 正常。FinancialLocked: 被锁定。",
+      "enum": [
+        "Normal",
+        "FinancialLocked"
+      ],
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "公网IP的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "预期资源强制回收时间。包年包月公网IP，此参数有返回值。按量计费公网IP，仅欠费冻结时，此参数有返回值。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "公网IP的描述信息。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DirectMode": {
+      "description": "绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。",
+      "type": "boolean"
+    },
+    "EipAddress": {
+      "description": "公网IP地址。",
+      "semantic": "publicIp",
+      "type": "string"
+    },
+    "ExpiredTime": {
+      "description": "公网IP的到期时间。包年包月，返回值为到期时间。按量计费，返回值为空。",
+      "type": "string"
+    },
+    "ISP": {
+      "description": "线路类型。BGP：BGP（多线）。ChinaMobile：中国移动静态单线。ChinaTelecom：中国电信静态单线。ChinaUnicom：中国联通静态单线。SingleLine_BGP：BGP单线。Fusion_BGP：融合BGP。ChinaMobile_Value：中国移动惠选型静态单线。ChinaUnicom_Value：中国联通惠选型静态单线。ChinaTelecom_Value：中国电信惠选型静态单线。",
+      "enum": [
+        "BGP",
+        "SingleLine_BGP",
+        "Fusion_BGP",
+        "ChinaMobile",
+        "ChinaTelecom",
+        "ChinaUnicom",
+        "ChinaMobile_Value",
+        "ChinaUnicom_Value",
+        "ChinaTelecom_Value"
+      ],
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "当前绑定的实例ID。",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "当前绑定的实例类型。Nat：公网NAT网关。NetworkInterface: 弹性网卡。ClbInstance: 负载均衡。EcsInstance：云服务器。HaVip：高可用虚拟IP。",
+      "enum": [
+        "Nat",
+        "NetworkInterface",
+        "ClbInstance",
+        "EcsInstance",
+        "HaVip",
+        ""
+      ],
+      "type": "string"
+    },
+    "IpAddress": {
+      "description": "申请申请指定的公网IP地址。仅支持填写使用后释放的IP地址，不填则表示自动分配。指定的公网IP地址",
+      "type": "string"
+    },
+    "IpAddressPoolId": {
+      "description": "IP地址池的ID。",
+      "type": "string"
+    },
+    "IsBlocked": {
+      "description": "是否被封禁。true：是。false：否。",
+      "type": "boolean"
+    },
+    "LockReason": {
+      "description": "公网IP被锁定的原因。financial: 因欠费被锁定。unlock: 欠费关停后充值恢复过程中。空值 : 没有被锁定。",
+      "type": "string"
+    },
+    "Name": {
+      "description": "公网IP的名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "OverdueTime": {
+      "description": "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。",
+      "type": "string"
+    },
+    "Period": {
+      "description": "购买包年包月公网IP的时长，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。",
+      "type": "integer"
+    },
+    "PeriodUnit": {
+      "description": "购买包年包月公网IP时长的单位。取值如下：1（默认值）：月。2 ：年。",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "PrivateIpAddress": {
+      "description": "要绑定公网IP的实例的私网IP地址。只支持传入云服务ECS主网卡的私网IP地址和辅助网卡IP地址。若不填写：InstanceType传入EcsInstance，则绑定云服务器ECS主网卡的主私网IP地址。InstanceType传入NetworkInterface，则绑定辅助网卡主私网IP地址。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "公网IP所属项目的名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ReleaseWithInstance": {
+      "description": "是否随云服务器实例删除。仅按量计费公网IP有效。开启后，当云服务器实例被系统自动回收（退订24小时后、到期回收、欠费回收）或被调用DeleteInstances接口时，公网IP随其一同释放。true：是。false：否。",
+      "type": "boolean"
+    },
+    "RenewPeriodTimes": {
+      "description": "自动续费的时长，取值范围1、2、3、6、12，单位：月。若RenewType传入2，则必须传入RenewPeriodTimes",
+      "type": "integer"
+    },
+    "RenewType": {
+      "description": "包年包月公网IP续费的方式。取值如下：1（默认值）：手动续费。2：自动续费。3：到期不续费。",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "type": "integer"
+    },
+    "SecurityProtectionInstanceId": {
+      "description": "DDoS原生防护（企业版）ID。您可以调用 DescInstanceList 接口，查询DDoS原生防护（企业版）的ID。当SecurityProtectionTypes传入AntiDDoS_Enhanced时，此参数必须传入。",
+      "type": "integer"
+    },
+    "SecurityProtectionTypes": {
+      "description": "防护类型。AntiDDoS_Enhanced：增强防护类型的公网IP，可以加入到DDoS原生防护（企业版）实例。空值：默认防护类型的公网IP。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceManaged": {
+      "description": "是否由服务管理",
+      "type": "boolean"
+    },
+    "Status": {
+      "description": "公网IP的状态。Attaching：绑定中。Detaching：解绑中。Attached：已绑定。Available：可用。Deleting：删除中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "公网IP的标签信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "更新公网IP的时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllocationId",
+    "/properties/CreatedTime",
+    "/properties/BusinessStatus",
+    "/properties/DeletedTime",
+    "/properties/EipAddress",
+    "/properties/ExpiredTime",
+    "/properties/Status",
+    "/properties/IsBlocked",
+    "/properties/LockReason",
+    "/properties/OverdueTime",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "BillingType"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::EIP",
+  "writeOnlyProperties": [
+    "/properties/Period",
+    "/properties/IpAddress",
+    "/properties/PeriodUnit",
+    "/properties/RenewType",
+    "/properties/RenewPeriodTimes",
+    "/properties/SecurityProtectionInstanceId"
+  ]
+}

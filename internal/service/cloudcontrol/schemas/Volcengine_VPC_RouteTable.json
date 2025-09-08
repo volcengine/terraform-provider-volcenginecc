@@ -1,0 +1,275 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/vpcId",
+    "/properties/DestinationCidrBlock",
+    "/properties/DestinationPrefixListId"
+  ],
+  "definitions": {
+    "DescribeRouteEntry": {
+      "properties": {
+        "Description": {
+          "description": "路由条目描述。",
+          "maxLength": 255,
+          "type": "string"
+        },
+        "DestinationCidrBlock": {
+          "description": "路由条目的目标网段。",
+          "type": "string"
+        },
+        "DestinationPrefixListId": {
+          "description": "前缀列表ID。",
+          "type": "string"
+        },
+        "NextHopId": {
+          "description": "下一跳资源ID。",
+          "type": "string"
+        },
+        "NextHopName": {
+          "description": "路由条目下一跳资源的名称。",
+          "type": "string"
+        },
+        "NextHopType": {
+          "description": "自定义路由条目的下一跳的类型。1、Instance：ECS实例。2、HaVip：高可用虚拟IP。3、NetworkInterface：辅助网卡。4、NatGW：NAT网关。5、VpnGW：VPN网关。6、TransitRouter：中转路由器。7、IPv6GW：IPv6网关。8、CloudConnector：云连接器。9、GWLBEndpoint：网关负载均衡终端节点。",
+          "type": "string"
+        },
+        "PrefixListCidrBlocks": {
+          "description": "前缀列表的CIDR。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "RouteEntryId": {
+          "description": "路由条目ID。",
+          "type": "string"
+        },
+        "RouteEntryName": {
+          "description": "路由条目名称。",
+          "type": "string"
+        },
+        "RouteTableId": {
+          "description": "路由表ID。",
+          "type": "string"
+        },
+        "Status": {
+          "description": "路由条目状态。1、Pending：待创建。2、Available：可用。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "路由条目类型。1、Custom：自定义路由条目。2、System：系统默认路由条目。",
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string"
+        },
+        "VpcId": {
+          "description": "路由条目所属私有网络的ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "路由表由一系列路由条目组成，为私有网络的流量指定下一跳的云资源，每个子网必须且仅支持关联一个路由表，使子网内的资源通过路由表转发流量。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateRouteTable",
+        "vpc:CreateRouteEntry",
+        "vpc:AssociateRouteTable",
+        "vpc:DescribeRouteTableList",
+        "vpc:DescribeRouteEntryList"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteRouteTable",
+        "vpc:DeleteRouteEntry",
+        "vpc:DisassociateRouteTable",
+        "vpc:DescribeRouteTableList",
+        "vpc:DescribeRouteEntryList"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeRouteTableList"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeRouteTableList",
+        "vpc:DescribeRouteEntryList"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyRouteTableAttributes",
+        "vpc:DisassociateRouteTable",
+        "vpc:AssociateRouteTable",
+        "vpc:DeleteRouteEntry",
+        "vpc:CreateRouteEntry",
+        "vpc:ModifyRouteEntry",
+        "vpc:UntagResources",
+        "vpc:TagResources",
+        "vpc:DeleteRouteTable",
+        "vpc:DescribeRouteTableList",
+        "vpc:DescribeRouteEntryList"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/RouteTableId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "路由表所属账号的ID。",
+      "type": "string"
+    },
+    "AssociateType": {
+      "description": "创建路由表输入的关联类型。1、Subnet：子网关联。2、Gateway：网关关联。",
+      "enum": [
+        "Subnet",
+        "Gateway"
+      ],
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "路由表创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CustomRouteEntries": {
+      "description": "路由表关联的自定义路由条目列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DescribeRouteEntry"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Description": {
+      "description": "路由表描述信息。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "Ipv4GatewayId": {
+      "description": "关联路由表的IPv4网关ID。",
+      "type": "string"
+    },
+    "Ipv6GatewayId": {
+      "description": "关联路由表的IPv6网关ID。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "路由表所属项目的名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RouteTableId": {
+      "description": "路由表ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RouteTableName": {
+      "description": "路由表名称。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "RouteTableType": {
+      "description": "路由表类型。1、Custom：自定义路由表。2、System：系统路由表。",
+      "enum": [
+        "Custom",
+        "System"
+      ],
+      "type": "string"
+    },
+    "SubnetIds": {
+      "description": "关联的子网的ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SystemRouteEntries": {
+      "description": "路由表关联的系统默认路由条目列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DescribeRouteEntry"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "路由表更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "路由表所属VPC的ID。",
+      "type": "string"
+    },
+    "VpcName": {
+      "description": "VPC的名称。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/RouteTableId",
+    "/properties/RouteTableType",
+    "/properties/UpdatedTime",
+    "/properties/CreatedTime",
+    "/properties/SystemRouteEntries",
+    "/properties/CustomRouteEntries/*/RouteEntryId",
+    "/properties/CustomRouteEntries/*/PrefixListCidrBlocks",
+    "/properties/CustomRouteEntries/*/RouteTableId",
+    "/properties/CustomRouteEntries/*/Status",
+    "/properties/CustomRouteEntries/*/Type",
+    "/properties/CustomRouteEntries/*/VpcId"
+  ],
+  "required": [
+    "VpcId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::RouteTable"
+}
