@@ -57,8 +57,9 @@ func (p *PropertyJsonPointer) Path() []string {
 	if p == nil {
 		return nil
 	}
-
-	pathParts := strings.Split(strings.TrimPrefix(string(*p), PropertiesJsonPointerPrefix+JsonPointerReferenceTokenSeparator), JsonPointerReferenceTokenSeparator)
+	pathConvert := strings.ReplaceAll(string(*p), "/*/", "/")
+	pathConvert = strings.TrimSuffix(pathConvert, "/*")
+	pathParts := strings.Split(strings.TrimPrefix(pathConvert, PropertiesJsonPointerPrefix+JsonPointerReferenceTokenSeparator), JsonPointerReferenceTokenSeparator)
 
 	return pathParts
 }

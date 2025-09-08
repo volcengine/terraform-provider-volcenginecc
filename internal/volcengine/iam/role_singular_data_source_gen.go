@@ -26,40 +26,96 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色创建时间。",
 		//	  "type": "string"
 		//	}
 		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色创建时间。",
+=======
+		//	  "description": "角色创建时间",
+		//	  "type": "string"
+		//	}
+		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色创建时间",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色创建时间。",
+		//	  "type": "string"
+		//	}
+		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色创建时间。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色描述，长度不超过128。",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色描述，长度不超过128。",
+=======
+		//	  "description": "角色描述",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色描述",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色描述，长度不超过128。",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色描述，长度不超过128。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色显示名，长度不超过64。",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色显示名，长度不超过64。",
+=======
+		//	  "description": "角色显示名",
+		//	  "type": "string"
+		//	}
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色显示名",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色显示名，长度不超过64。",
+		//	  "type": "string"
+		//	}
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色显示名，长度不超过64。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsServiceLinkedRole
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "是否是服务关联角色, 0否，1是。",
+=======
+		//	  "description": "是否是服务关联角色, 0否，1是",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "是否是服务关联角色, 0否，1是。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	  "enum": [
 		//	    0,
 		//	    1
@@ -67,26 +123,52 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"is_service_linked_role": schema.Int64Attribute{ /*START ATTRIBUTE*/
+<<<<<<< HEAD
+<<<<<<< HEAD
 			Description: "是否是服务关联角色, 0否，1是。",
+=======
+			Description: "是否是服务关联角色, 0否，1是",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+			Description: "是否是服务关联角色, 0否，1是。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxSessionDuration
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
+=======
+		//	  "description": "角色最大会话时间",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	  "maximum": 43200,
 		//	  "minimum": 3600,
 		//	  "type": "integer"
 		//	}
 		"max_session_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+<<<<<<< HEAD
+<<<<<<< HEAD
 			Description: "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
+=======
+			Description: "角色最大会话时间",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+			Description: "角色最大会话时间，角色最大会话时间。用于限制角色扮演产生的临时安全凭证的有效期的最大范围。取值范围：3600~43200，单位为秒，默认为43200。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policies
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "角色策略。",
@@ -97,6 +179,24 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "PolicyType": {
 		//	        "description": "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
+=======
+=======
+		//	  "insertionOrder": false,
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+		//	  "items": {
+		//	    "description": "角色策略。",
+		//	    "properties": {
+		//	      "PolicyName": {
+		//	        "description": "策略名。",
+		//	        "type": "string"
+		//	      },
+		//	      "PolicyType": {
+<<<<<<< HEAD
+		//	        "description": "策略类型",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	        "description": "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -110,20 +210,49 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
 		"policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+=======
+		//	  "type": "array"
+		//	}
+		"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+<<<<<<< HEAD
+<<<<<<< HEAD
 						Description: "策略名。",
+=======
+						Description: "策略名",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+						Description: "策略名。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+<<<<<<< HEAD
+<<<<<<< HEAD
 						Description: "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
+=======
+						Description: "策略类型",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+						Description: "策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -134,38 +263,94 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色ID。",
 		//	  "type": "integer"
 		//	}
 		"role_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "角色ID。",
+=======
+		//	  "description": "角色ID",
+		//	  "type": "integer"
+		//	}
+		"role_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "角色ID",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色ID。",
+		//	  "type": "integer"
+		//	}
+		"role_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "角色ID。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleName
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色名，长度1~64，支持英文、数字和.-_符号。",
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色名，长度1~64，支持英文、数字和.-_符号。",
+=======
+		//	  "description": "角色名",
+		//	  "pattern": "^[\\w.\\-]{1,64}$",
+		//	  "type": "string"
+		//	}
+		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色名",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色名，长度1~64，支持英文、数字和.-_符号。",
+		//	  "type": "string"
+		//	}
+		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色名，长度1~64，支持英文、数字和.-_符号。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "insertionOrder": false,
+=======
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "insertionOrder": false,
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	  "items": {
 		//	    "description": "标签",
 		//	    "properties": {
 		//	      "Key": {
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	        "description": "标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
 		//	        "description": "标签值。",
+=======
+		//	        "description": "标签键",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "标签值",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	        "description": "标签键。",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "标签值。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -175,20 +360,49 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
 		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+=======
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+<<<<<<< HEAD
+<<<<<<< HEAD
 						Description: "标签键。",
+=======
+						Description: "标签键",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+						Description: "标签键。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+<<<<<<< HEAD
+<<<<<<< HEAD
 						Description: "标签值。",
+=======
+						Description: "标签值",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+						Description: "标签值。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -199,33 +413,81 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色TRN。",
 		//	  "type": "string"
 		//	}
 		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色TRN。",
+=======
+		//	  "description": "角色TRN",
+		//	  "type": "string"
+		//	}
+		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色TRN",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色TRN。",
+		//	  "type": "string"
+		//	}
+		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色TRN。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrustPolicyDocument
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
 		//	  "type": "string"
 		//	}
 		"trust_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
+=======
+		//	  "description": "角色信任策略",
+		//	  "type": "string"
+		//	}
+		"trust_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色信任策略",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
+		//	  "type": "string"
+		//	}
+		"trust_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色信任策略，信任策略遵循IAM的策略语法中基于资源的策略规则。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
+<<<<<<< HEAD
+<<<<<<< HEAD
 		//	  "description": "角色更新时间。",
 		//	  "type": "string"
 		//	}
 		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "角色更新时间。",
+=======
+		//	  "description": "角色更新时间",
+		//	  "type": "string"
+		//	}
+		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色更新时间",
+>>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
+=======
+		//	  "description": "角色更新时间。",
+		//	  "type": "string"
+		//	}
+		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "角色更新时间。",
+>>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -13,6 +13,7 @@ import (
 	"time"
 
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -117,6 +118,8 @@ func resourceWithWriteOnlyPropertyPaths(v []string) ResourceOptionsFunc {
 		writeOnlyAttributePaths := make([]*path.Path, 0)
 
 		for _, writeOnlyPropertyPath := range v {
+			writeOnlyPropertyPath = strings.ReplaceAll(writeOnlyPropertyPath, "/*/", "/")
+			writeOnlyPropertyPath = strings.TrimSuffix(writeOnlyPropertyPath, "/*")
 			writeOnlyAttributePath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
 
 			if err != nil {
@@ -128,6 +131,62 @@ func resourceWithWriteOnlyPropertyPaths(v []string) ResourceOptionsFunc {
 		}
 
 		o.writeOnlyAttributePaths = writeOnlyAttributePaths
+
+		return nil
+	}
+}
+
+// resourceWithReadOnlyPropertyPaths is a helper function to construct functional options
+// that set a resource type's read-only property paths (JSON Pointer).
+// If multiple resourceWithWriteOnlyPropertyPaths calls are made, the last call overrides
+// the previous calls' values.
+func resourceWithReadOnlyPropertyPaths(v []string) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		readOnlyAttributePaths := make([]*path.Path, 0)
+
+		for _, readOnlyPath := range v {
+			readOnlyPath = strings.ReplaceAll(readOnlyPath, "/*/", "/")
+			readOnlyPath = strings.TrimSuffix(readOnlyPath, "/*")
+
+			readOnlyAttributePath, err := o.propertyPathToAttributePath(readOnlyPath)
+
+			if err != nil {
+				// return fmt.Errorf("creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
+				continue
+			}
+
+			readOnlyAttributePaths = append(readOnlyAttributePaths, readOnlyAttributePath)
+		}
+
+		o.readOnlyAttributePaths = readOnlyAttributePaths
+
+		return nil
+	}
+}
+
+// resourceWithCreateOnlyPropertyPaths is a helper function to construct functional options
+// that set a resource type's create-only property paths (JSON Pointer).
+// If multiple resourceWithWriteOnlyPropertyPaths calls are made, the last call overrides
+// the previous calls' values.
+func resourceWithCreateOnlyPropertyPaths(v []string) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		createOnlyAttributePaths := make([]*path.Path, 0)
+
+		for _, createOnlyPath := range v {
+			createOnlyPath = strings.ReplaceAll(createOnlyPath, "/*/", "/")
+			createOnlyPath = strings.TrimSuffix(createOnlyPath, "/*")
+
+			createOnlyAttributePath, err := o.propertyPathToAttributePath(createOnlyPath)
+
+			if err != nil {
+				// return fmt.Errorf("creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
+				continue
+			}
+
+			createOnlyAttributePaths = append(createOnlyAttributePaths, createOnlyAttributePath)
+		}
+
+		o.createOnlyAttributePaths = createOnlyAttributePaths
 
 		return nil
 	}
@@ -250,6 +309,22 @@ func (opts ResourceOptions) WithWriteOnlyPropertyPaths(v []string) ResourceOptio
 	return append(opts, resourceWithWriteOnlyPropertyPaths(v))
 }
 
+// WithReadOnlyPropertyPaths is a helper function to construct functional options
+// that set a resource type's read-only property paths, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceOptions) WithReadOnlyPropertyPaths(v []string) ResourceOptions {
+	return append(opts, resourceWithReadOnlyPropertyPaths(v))
+}
+
+// WithCreateOnlyPropertyPaths is a helper function to construct functional options
+// that set a resource type's read-only property paths, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceOptions) WithCreateOnlyPropertyPaths(v []string) ResourceOptions {
+	return append(opts, resourceWithCreateOnlyPropertyPaths(v))
+}
+
 // WithCreateTimeoutInMinutes is a helper function to construct functional options
 // that set a resource type's create timeout, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -307,18 +382,21 @@ func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Res
 
 // Implements resource.Resource.
 type genericResource struct {
-	ccTypeName              string                     // Cloud Control type name for the resource type
-	tfSchema                schema.Schema              // Terraform schema for the resource type
-	tfTypeName              string                     // Terraform type name for resource type
-	tfToCcNameMap           map[string]string          // Map of Terraform attribute name to Cloud Control property name
-	ccToTfNameMap           map[string]string          // Map of Cloud Control property name to Terraform attribute name
-	isImmutableType         bool                       // Resources cannot be updated and must be recreated
-	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
-	createTimeout           time.Duration              // Maximum wait time for resource creation
-	updateTimeout           time.Duration              // Maximum wait time for resource update
-	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
-	configValidators        []resource.ConfigValidator // Required attributes validators
-	provider                tfcloudcontrol.Provider
+	ccTypeName               string            // Cloud Control type name for the resource type
+	tfSchema                 schema.Schema     // Terraform schema for the resource type
+	tfTypeName               string            // Terraform type name for resource type
+	tfToCcNameMap            map[string]string // Map of Terraform attribute name to Cloud Control property name
+	ccToTfNameMap            map[string]string // Map of Cloud Control property name to Terraform attribute name
+	isImmutableType          bool              // Resources cannot be updated and must be recreated
+	writeOnlyAttributePaths  []*path.Path      // Paths to any write-only attributes
+	readOnlyAttributePaths   []*path.Path      // Paths to any read-only attributes
+	createOnlyAttributePaths []*path.Path      // Paths to any create-only attributes
+
+	createTimeout    time.Duration              // Maximum wait time for resource creation
+	updateTimeout    time.Duration              // Maximum wait time for resource update
+	deleteTimeout    time.Duration              // Maximum wait time for resource deletion
+	configValidators []resource.ConfigValidator // Required attributes validators
+	provider         tfcloudcontrol.Provider
 }
 
 var (
@@ -361,7 +439,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
-	tflog.Debug(ctx, "CloudControl DesiredState", map[string]interface{}{
+	tflog.Debug(ctx, "Cloud Control DesiredState", map[string]interface{}{
 		"value": desiredState,
 	})
 
@@ -446,6 +524,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 }
 
 func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest, response *resource.ReadResponse) {
+
 	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.Read")
@@ -469,7 +548,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 	if tfresource.NotFound(err) {
 		response.Diagnostics.Append(ResourceNotFoundWarningDiag(err))
-		response.State.RemoveResource(ctx)
+		//response.State.RemoveResource(ctx)
 
 		return
 	}
@@ -479,7 +558,9 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 		return
 	}
-
+	tflog.Debug(ctx, "Cloud Control API GetResource", map[string]interface{}{
+		"value": util.ToString(description.ResourceDescription.Properties),
+	})
 	translator := toTerraform{cfToTfNameMap: r.ccToTfNameMap}
 	schema := currentState.Schema
 	val, err := translator.FromString(ctx, schema, util.ToString(description.ResourceDescription.Properties))
@@ -540,32 +621,55 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	// Clear any write-only values.
 	// This forces patch document generation to always add values.
 	currentStateRaw := currentState.Raw
+	planRaw := request.Plan.Raw
+	copyPlan := planRaw.Copy()
+
 	if len(r.writeOnlyAttributePaths) > 0 {
-		currentStateRaw, err = tftypes.Transform(currentStateRaw, func(tfPath *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
+		planRaw, err = tftypes.Transform(planRaw, func(tfPath *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
 			if len(tfPath.Steps()) < 1 {
 				return val, nil
 			}
 
-			path, diags := attributePath(ctx, tfPath, currentState.Schema)
+			path, diags := attributePath(ctx, tfPath, request.Plan.Schema)
 			if diags.HasError() {
 				return val, ccdiag.DiagnosticsError(diags)
 			}
 
 			for _, woPath := range r.writeOnlyAttributePaths {
 				if woPath.Equal(path) {
-					return tftypes.NewValue(val.Type(), nil), nil
+					//if write only value not change,set the val nil
+					var currentValue attr.Value
+					getCurrentDiags := currentState.GetAttribute(context.Background(), path, &currentValue)
+					if !getCurrentDiags.HasError() {
+						tfCurVal, tfErr := currentValue.ToTerraformValue(context.Background())
+						if tfErr == nil {
+							if val.Equal(tfCurVal) {
+								return tftypes.NewValue(val.Type(), nil), nil
+							}
+						}
+					}
+					createOnly := false
+					for _, createOnlyPath := range r.createOnlyAttributePaths {
+						if createOnlyPath.Equal(path) {
+							createOnly = true
+							break
+						}
+					}
+					if createOnly {
+						return tftypes.NewValue(val.Type(), nil), nil
+					} else {
+						return val, nil
+					}
 				}
-			}
 
+			}
 			return val, nil
 		})
 		if err != nil {
 			response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
-
 			return
 		}
 	}
-
 	translator := toCloudControl{tfToCfNameMap: r.tfToCcNameMap}
 	currentDesiredState, err := translator.AsString(ctx, currentState.Schema, currentStateRaw)
 
@@ -575,14 +679,35 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Schema, request.Plan.Raw)
+	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Schema, planRaw)
 
 	if err != nil {
 		response.Diagnostics.Append(DesiredStateErrorDiag("Plan", err))
-
 		return
 	}
 
+	//for update set ,get new resource
+	description, err := r.describe(ctx, r.provider.CloudControlAPIClient(ctx), id)
+
+	if tfresource.NotFound(err) {
+		response.Diagnostics.Append(ResourceNotFoundAfterWriteDiag(err))
+		return
+	}
+	if err != nil {
+		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+		return
+	}
+
+	if description == nil {
+		response.Diagnostics.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
+		return
+	}
+	tflog.Debug(ctx, "Cloud Control API GetResource", map[string]interface{}{
+		"value": util.ToString(description.ResourceDescription.Properties),
+	})
+	currentDesiredState = util.ToString(description.ResourceDescription.Properties)
+	currentDesiredState, err = translateForUpdate(currentDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
+	plannedDesiredState, err = translateForUpdate(plannedDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
 	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
 
 	if err != nil {
@@ -647,9 +772,33 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 			return
 		}
 	}
+	//
+	//if len(r.writeOnlyAttributePaths) > 0 {
+	//	planRaw, err = tftypes.Transform(planRaw, func(tfPath *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
+	//		if len(tfPath.Steps()) < 1 {
+	//			return val, nil
+	//		}
+	//
+	//		path, diags := attributePath(ctx, tfPath, request.Plan.Schema)
+	//		if diags.HasError() {
+	//			return val, ccdiag.DiagnosticsError(diags)
+	//		}
+	//
+	//		for _, woPath := range r.writeOnlyAttributePaths {
+	//			if woPath.Equal(path) {
+	//				return tftypes.NewValue(val.Type(), nil), nil
+	//			}
+	//		}
+	//		return val, nil
+	//	})
+	//	if err != nil {
+	//		response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
+	//		return
+	//	}
+	//}
 
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
-	response.State.Raw = request.Plan.Raw
+	response.State.Raw = copyPlan
 
 	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
 	if response.Diagnostics.HasError() {
@@ -754,7 +903,6 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 
 		return diags
 	}
-
 	if len(unknowns) == 0 {
 		return nil
 	}
@@ -790,6 +938,7 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 		return diags
 	}
 
+	//diags = SetReadOnlyFromResourceModel(ctx, state, r.readOnlyAttributePaths, util.ToString(description.ResourceDescription.Properties), r.ccToTfNameMap)
 	return nil
 }
 

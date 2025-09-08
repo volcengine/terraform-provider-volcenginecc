@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ark_endpoint.example "endpoint_id"

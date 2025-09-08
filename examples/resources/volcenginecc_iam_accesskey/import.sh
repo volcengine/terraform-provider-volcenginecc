@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_iam_accesskey.example "access_key_id|user_name"

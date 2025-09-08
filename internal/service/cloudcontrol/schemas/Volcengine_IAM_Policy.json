@@ -1,0 +1,240 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/PolicyName",
+    "/properties/PolicyType"
+  ],
+  "definitions": {
+    "PolicyForListEntities": {
+      "properties": {
+        "CreatedTime": {
+          "description": "策略绑定时间。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "策略描述。",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "显示名称。",
+          "type": "string"
+        },
+        "EntitiesId": {
+          "description": "唯一标识。",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "对应用户、角色、用户组的名称。",
+          "type": "string"
+        },
+        "PolicyScope": {
+          "description": "策略绑定的项目列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PolicyScopeDetail"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "type": "object"
+    },
+    "PolicyScopeDetail": {
+      "properties": {
+        "CreatedTime": {
+          "description": "项目授权时间。",
+          "type": "string"
+        },
+        "PolicyScopeType": {
+          "description": "授权类型。Global代表全局授权，Project代表按项目授权。",
+          "enum": [
+            "Global",
+            "Project"
+          ],
+          "type": "string"
+        },
+        "ProjectDisplayName": {
+          "description": "项目显示名。",
+          "type": "string"
+        },
+        "ProjectName": {
+          "description": "项目名。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ProjectName"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "策略是对权限的一种描述，IAM用户、用户组或角色均需通过关联策略来赋予权限。当系统预设策略不能满足要求时，您可以创建自定义策略，对权限进行细粒度的定义。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreatePolicy",
+        "iam:GetPolicy",
+        "iam:ListEntitiesForPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeletePolicy",
+        "iam:GetPolicy",
+        "iam:ListEntitiesForPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListPolicies"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetPolicy",
+        "iam:ListEntitiesForPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdatePolicy",
+        "iam:DetachPolicyInProject",
+        "iam:DetachUserPolicy",
+        "iam:DetachRolePolicy",
+        "iam:DetachUserGroupPolicy",
+        "iam:AttachPolicyInProject",
+        "iam:AttachUserPolicy",
+        "iam:AttachRolePolicy",
+        "iam:AttachUserGroupPolicy",
+        "iam:GetPolicy",
+        "iam:ListEntitiesForPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PolicyName",
+    "/properties/PolicyType"
+  ],
+  "properties": {
+    "AttachmentCount": {
+      "description": "策略绑定的身份数量。",
+      "type": "integer"
+    },
+    "Category": {
+      "description": "系统预设策略所属的分类，通常为服务代码，对于自定义策略该字段不会返回值。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "策略创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "策略描述，长度不超过128。",
+      "maxLength": 128,
+      "semantic": "description",
+      "type": "string"
+    },
+    "IsServiceRolePolicy": {
+      "description": "是否是服务关联角色的策略，0代表否，1代表是。",
+      "type": "integer"
+    },
+    "PolicyDocument": {
+      "description": "策略语法内容，例如：{\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:\",\"tag:\"],\"Resource\":[\"*\"]}]}",
+      "maxLength": 6144,
+      "minLength": 1,
+      "type": "string"
+    },
+    "PolicyName": {
+      "description": "策略名，长度1~64，支持英文、数字和+=,.@-_符号。",
+      "maxLength": 64,
+      "minLength": 1,
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "PolicyRoles": {
+      "description": "策略绑定的角色列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PolicyForListEntities"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PolicyTrn": {
+      "description": "策略的TRN。",
+      "type": "string"
+    },
+    "PolicyType": {
+      "description": "策略类型。System代表系统预设策略，Custom代表自定义策略。",
+      "enum": [
+        "System",
+        "Custom"
+      ],
+      "type": "string"
+    },
+    "PolicyUserGroups": {
+      "description": "策略绑定的用户组列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PolicyForListEntities"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PolicyUsers": {
+      "description": "策略绑定的用户列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PolicyForListEntities"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "策略更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AttachmentCount",
+    "/properties/CreatedTime",
+    "/properties/IsServiceRolePolicy",
+    "/properties/PolicyTrn",
+    "/properties/UpdatedTime",
+    "/properties/PolicyRoles/*/CreatedTime",
+    "/properties/PolicyRoles/*/Description",
+    "/properties/PolicyRoles/*/DisplayName",
+    "/properties/PolicyRoles/*/EntitiesId",
+    "/properties/PolicyRoles/*/PolicyScope/*/CreatedTime",
+    "/properties/PolicyRoles/*/PolicyScope/*/PolicyScopeType",
+    "/properties/PolicyRoles/*/PolicyScope/*/ProjectDisplayName",
+    "/properties/PolicyUserGroups/*/CreatedTime",
+    "/properties/PolicyUserGroups/*/Description",
+    "/properties/PolicyUserGroups/*/DisplayName",
+    "/properties/PolicyUserGroups/*/EntitiesId",
+    "/properties/PolicyUserGroups/*/PolicyScope/*/CreatedTime",
+    "/properties/PolicyUserGroups/*/PolicyScope/*/PolicyScopeType",
+    "/properties/PolicyUserGroups/*/PolicyScope/*/ProjectDisplayName",
+    "/properties/PolicyUsers/*/CreatedTime",
+    "/properties/PolicyUsers/*/Description",
+    "/properties/PolicyUsers/*/DisplayName",
+    "/properties/PolicyUsers/*/EntitiesId",
+    "/properties/PolicyUsers/*/PolicyScope/*/CreatedTime",
+    "/properties/PolicyUsers/*/PolicyScope/*/PolicyScopeType",
+    "/properties/PolicyUsers/*/PolicyScope/*/ProjectDisplayName"
+  ],
+  "required": [
+    "PolicyDocument",
+    "PolicyName",
+    "PolicyType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::Policy"
+}

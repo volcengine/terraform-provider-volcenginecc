@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_subnet.example "subnet_id"
