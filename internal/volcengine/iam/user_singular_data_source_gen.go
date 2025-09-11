@@ -20,245 +20,70 @@ func init() {
 }
 
 // userDataSource returns the Terraform volcenginecc_iam_user data source.
-<<<<<<< HEAD
-<<<<<<< HEAD
 // This Terraform data source corresponds to the Cloud Control Volcengine::IAM::User resource.
-=======
-// This Terraform data source corresponds to the Cloud Control Volcengine::Iam::User resource.
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-// This Terraform data source corresponds to the Cloud Control Volcengine::IAM::User resource.
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AccessKey
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "子用户的访问密钥。",
-		//	  "insertionOrder": false,
-		//	  "items": {
-		//	    "description": "子用户的访问密钥。",
-		//	    "properties": {
-		//	      "AccessKeyId": {
-		//	        "description": "访问密钥ID。",
-		//	        "type": "string"
-		//	      },
-		//	      "CreateDate": {
-		//	        "description": "访问密钥创建时间。",
-		//	        "type": "string"
-		//	      },
-		//	      "Status": {
-		//	        "description": "访问密钥状态。Active代表启用，Inactive代表禁用。",
-		//	        "type": "string"
-		//	      },
-		//	      "UpdateDate": {
-		//	        "description": "访问密钥更新时间。",
-		//	        "type": "string"
-		//	      },
-		//	      "UserName": {
-		//	        "description": "访问密钥Secret。",
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
-		//	}
-		"access_key": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AccessKeyId
-					"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥ID。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: CreateDate
-					"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥创建时间。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥状态。Active代表启用，Inactive代表禁用。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UpdateDate
-					"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥更新时间。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UserName
-					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥Secret。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "子用户的访问密钥。",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户归属的主账号。",
 		//	  "type": "number"
 		//	}
 		"account_id": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "子用户归属的主账号。",
-=======
-		//	  "description": "子用户归属的主账号",
-		//	  "type": "number"
-		//	}
-		"account_id": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "子用户归属的主账号",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户归属的主账号。",
-		//	  "type": "number"
-		//	}
-		"account_id": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "子用户归属的主账号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的创建时间。",
 		//	  "type": "string"
 		//	}
 		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子用户对应的创建时间。",
-=======
-		//	  "description": "子用户对应的创建时间",
-		//	  "type": "string"
-		//	}
-		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的创建时间",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户对应的创建时间。",
-		//	  "type": "string"
-		//	}
-		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的创建时间。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的描述信息，长度不超过255。",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子用户对应的描述信息，长度不超过255。",
-=======
-		//	  "description": "子用户对应的描述信息",
-		//	  "type": "string"
-		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的描述信息",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户对应的描述信息，长度不超过255。",
-		//	  "type": "string"
-		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的描述信息，长度不超过255。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
-=======
-		//	  "description": "子用户对应的展示名称",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Description: "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
-=======
-			Description: "子用户对应的展示名称",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-			Description: "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Email
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的电子邮件地址。",
 		//	  "type": "string"
 		//	}
 		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子用户对应的电子邮件地址。",
-=======
-		//	  "description": "子用户对应的电子邮件地址",
-		//	  "type": "string"
-		//	}
-		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的电子邮件地址",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户对应的电子邮件地址。",
-		//	  "type": "string"
-		//	}
-		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的电子邮件地址。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: EmailIsVerify
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
-		//	  "type": "boolean"
-		//	}
-		"email_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Groups
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户归属的用户组。",
-=======
-		//	  "description": "子用户归属的用户组",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户归属的用户组。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -268,23 +93,13 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"groups": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Description: "子用户归属的用户组。",
-=======
-			Description: "子用户归属的用户组",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-			Description: "子用户归属的用户组。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoginProfile
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户的登录配置。",
 		//	  "properties": {
 		//	    "CreateDate": {
@@ -341,51 +156,6 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "SafeAuthType": {
 		//	      "description": "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
-=======
-		//	  "description": "子用户的登录配置",
-=======
-		//	  "description": "子用户的登录配置。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-		//	  "properties": {
-		//	    "LastResetPasswordTime": {
-		//	      "description": "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
-		//	      "type": "number"
-		//	    },
-		//	    "LoginAllowed": {
-		//	      "description": "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
-		//	      "type": "boolean"
-		//	    },
-		//	    "Password": {
-		//	      "description": "登录密码。",
-		//	      "type": "string"
-		//	    },
-		//	    "PasswordResetRequired": {
-		//	      "description": "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
-		//	      "type": "boolean"
-		//	    },
-		//	    "SafeAuthExemptDuration": {
-		//	      "description": "登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。",
-		//	      "type": "number"
-		//	    },
-		//	    "SafeAuthExemptRequired": {
-		//	      "description": "是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。",
-		//	      "type": "number"
-		//	    },
-		//	    "SafeAuthExemptUnit": {
-		//	      "description": "登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。",
-		//	      "type": "number"
-		//	    },
-		//	    "SafeAuthFlag": {
-		//	      "description": "是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。",
-		//	      "type": "boolean"
-		//	    },
-		//	    "SafeAuthType": {
-<<<<<<< HEAD
-		//	      "description": "登录保护类型",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	      "description": "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	      "type": "string"
 		//	    },
 		//	    "UpdateDate": {
@@ -414,28 +184,12 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: LastResetPasswordTime
 				"last_reset_password_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
-=======
-					Description: "上次重置密码的时间",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LoginAllowed
 				"login_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
-=======
-					Description: "是否允许登录",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LoginLocked
@@ -445,15 +199,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "登录密码。",
-=======
-					Description: "登录密码",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "登录密码。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PasswordExpireAt
@@ -463,73 +209,31 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PasswordResetRequired
 				"password_reset_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
-=======
-					Description: "下次登录是否需要重设密码",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptDuration
 				"safe_auth_exempt_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。",
-=======
-					Description: "登录保护豁免时长",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptRequired
 				"safe_auth_exempt_required": schema.Float64Attribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。",
-=======
-					Description: "是否开启登录保护豁免",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptUnit
 				"safe_auth_exempt_unit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。",
-=======
-					Description: "登录保护豁免的时间单位",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthFlag
 				"safe_auth_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。",
-=======
-					Description: "是否开启登录保护",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthType
 				"safe_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 					Description: "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -540,67 +244,24 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "子用户的登录配置。",
-=======
-					Description: "登录保护类型",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "子用户的登录配置",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-					Description: "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "子用户的登录配置。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MobilePhone
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的手机号。",
-=======
-		//	  "description": "子用户对应的手机号",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户对应的手机号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	  "maxLength": 20,
 		//	  "type": "string"
 		//	}
 		"mobile_phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Description: "子用户对应的手机号。",
-=======
-			Description: "子用户对应的手机号",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-			Description: "子用户对应的手机号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: MobilePhoneIsVerify
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "子用户手机号是否已验证。true代表已验证，false代表未验证。",
-		//	  "type": "boolean"
-		//	}
-		"mobile_phone_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户手机号是否已验证。true代表已验证，false代表未验证。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policies
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的权限策略。",
 		//	  "insertionOrder": false,
 		//	  "items": {
@@ -612,26 +273,6 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "PolicyType": {
 		//	        "description": "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
-=======
-		//	  "description": "子用户对应的权限策略",
-=======
-		//	  "description": "子用户对应的权限策略。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-		//	  "insertionOrder": false,
-		//	  "items": {
-		//	    "description": "权限策略。",
-		//	    "properties": {
-		//	      "PolicyName": {
-		//	        "description": "权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。",
-		//	        "type": "string"
-		//	      },
-		//	      "PolicyType": {
-<<<<<<< HEAD
-		//	        "description": "权限策略类型",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	        "description": "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -653,41 +294,17 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 						Description: "权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。",
-=======
-						Description: "权限策略名称",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-						Description: "权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 						Description: "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
-=======
-						Description: "权限策略类型",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-						Description: "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Description: "子用户对应的权限策略。",
-=======
-			Description: "子用户对应的权限策略",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-			Description: "子用户对应的权限策略。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityConfig
@@ -736,8 +353,6 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的资源标签。",
 		//	  "insertionOrder": false,
 		//	  "items": {
@@ -749,26 +364,6 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "description": "标签值。",
-=======
-		//	  "description": "子用户对应的资源标签",
-=======
-		//	  "description": "子用户对应的资源标签。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-		//	  "insertionOrder": false,
-		//	  "items": {
-		//	    "description": "资源标签。",
-		//	    "properties": {
-		//	      "Key": {
-		//	        "description": "标签键。",
-		//	        "type": "string"
-		//	      },
-		//	      "Value": {
-<<<<<<< HEAD
-		//	        "description": "标签值",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	        "description": "标签值。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -786,95 +381,39 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 						Description: "标签键。",
-=======
-						Description: "标签键",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-						Description: "标签键。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 						Description: "标签值。",
-=======
-						Description: "标签值",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-						Description: "标签值。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Description: "子用户对应的资源标签。",
-=======
-			Description: "子用户对应的资源标签",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-			Description: "子用户对应的资源标签。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Trn
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的Trn表达式。",
 		//	  "type": "string"
 		//	}
 		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子用户对应的Trn表达式。",
-=======
-		//	  "description": "子用户对应的Trn表达式",
-		//	  "type": "string"
-		//	}
-		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的Trn表达式",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户对应的Trn表达式。",
-		//	  "type": "string"
-		//	}
-		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的Trn表达式。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户对应的更新时间。",
 		//	  "type": "string"
 		//	}
 		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子用户对应的更新时间。",
-=======
-		//	  "description": "子用户对应的更新时间",
-		//	  "type": "string"
-		//	}
-		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的更新时间",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户对应的更新时间。",
-		//	  "type": "string"
-		//	}
-		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的更新时间。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserId
@@ -893,29 +432,13 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		//	  "description": "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
-=======
-		//	  "description": "子用户名称",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		//	  "description": "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-<<<<<<< HEAD
-<<<<<<< HEAD
 			Description: "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
-=======
-			Description: "子用户名称",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-			Description: "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -926,39 +449,20 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	}
 
 	schema := schema.Schema{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		Description: "Data Source schema for Volcengine::IAM::User",
-=======
-		Description: "Data Source schema for Volcengine::Iam::User",
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-		Description: "Data Source schema for Volcengine::IAM::User",
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_user")
-=======
-	opts = opts.WithCloudControlTypeName("Volcengine::Iam::User").WithTerraformTypeName("volcenginecc_iam_user")
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_user")
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_key":                "AccessKey",
-		"access_key_id":             "AccessKeyId",
 		"account_id":                "AccountId",
 		"create_date":               "CreateDate",
 		"description":               "Description",
 		"display_name":              "DisplayName",
 		"email":                     "Email",
-		"email_is_verify":           "EmailIsVerify",
 		"groups":                    "Groups",
 		"key":                       "Key",
 		"last_login_date":           "LastLoginDate",
@@ -968,7 +472,6 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"login_locked":              "LoginLocked",
 		"login_profile":             "LoginProfile",
 		"mobile_phone":              "MobilePhone",
-		"mobile_phone_is_verify":    "MobilePhoneIsVerify",
 		"password":                  "Password",
 		"password_expire_at":        "PasswordExpireAt",
 		"password_reset_required":   "PasswordResetRequired",
@@ -982,7 +485,6 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"safe_auth_flag":            "SafeAuthFlag",
 		"safe_auth_type":            "SafeAuthType",
 		"security_config":           "SecurityConfig",
-		"status":                    "Status",
 		"tags":                      "Tags",
 		"trn":                       "Trn",
 		"update_date":               "UpdateDate",

@@ -8,12 +8,10 @@ package iam
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 )
@@ -41,15 +39,15 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: CreatedTime
+		// Property: CreateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥创建时间。时间格式为ISO8601。",
+		//	  "description": "密钥创建时间",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥创建时间。时间格式为ISO8601。",
+		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "密钥创建时间",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -115,36 +113,26 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥状态。active代表启用状态，inactive代表禁用状态。",
-		//	  "enum": [
-		//	    "active",
-		//	    "inactive"
-		//	  ],
+		//	  "description": "密钥状态 (active/inactive)",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥状态。active代表启用状态，inactive代表禁用状态。",
+			Description: "密钥状态 (active/inactive)",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"active",
-					"inactive",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: UpdatedTime
+		// Property: UpdateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥更新时间。时间格式为ISO8601。",
+		//	  "description": "密钥更新时间",
 		//	  "type": "string"
 		//	}
-		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥更新时间。时间格式为ISO8601。",
+		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "密钥更新时间",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -154,11 +142,11 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。",
+		//	  "description": "用户名",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。",
+			Description: "用户名",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -178,7 +166,7 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "访问控制(Identity and Access Management，缩写为IAM)是火山引擎为客户提供的一套权限管理系统，用于控制不同身份对云资源的访问权限。",
+		Description: "",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -189,22 +177,22 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_key_id":     "AccessKeyId",
-		"created_time":      "CreatedTime",
+		"create_date":       "CreateDate",
 		"region":            "Region",
 		"request_time":      "RequestTime",
 		"secret_access_key": "SecretAccessKey",
 		"service":           "Service",
 		"status":            "Status",
-		"updated_time":      "UpdatedTime",
+		"update_date":       "UpdateDate",
 		"user_name":         "UserName",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/CreatedTime",
+		"/properties/CreateDate",
 		"/properties/Region",
 		"/properties/RequestTime",
 		"/properties/Service",
-		"/properties/UpdatedTime",
+		"/properties/UpdateDate",
 		"/properties/SecretAccessKey",
 	})
 

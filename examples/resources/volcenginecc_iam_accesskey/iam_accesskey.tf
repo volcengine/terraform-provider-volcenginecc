@@ -1,5 +1,3 @@
-resource "volcenginecc_iam_accesskey" "TestTerraform" {
+resource "volcenginecc_iam_accesskey" "AccesskeyDemo" {
   user_name = "s2222"
-  # 禁用的时候传
-  status    = "inactive"
 }

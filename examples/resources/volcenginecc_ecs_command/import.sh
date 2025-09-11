@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ecs_command.example "command_id"

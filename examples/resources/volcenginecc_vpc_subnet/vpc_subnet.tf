@@ -1,9 +1,9 @@
 resource "volcenginecc_vpc_subnet" "SubnetDemo" {
-  vpc_id      = volcenginecc_vpc_vpc.TestTerraform_vpc_vpc.id
-  zone_id     = var.pre_zone_id
+  vpc_id      = "vpc-xxxx"
+  zone_id     = "cn-beijing"
   subnet_name = "subnetDemo"
   description = "subnetDemo description"
-  cidr_block  = "192.xxx.x.0/24"
+  cidr_block  = "192.168.xx.0/24"
   tags        = [
     {
       key   = "env"

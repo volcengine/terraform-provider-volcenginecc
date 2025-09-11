@@ -2,20 +2,18 @@
 page_title: "volcenginecc_iam_accesskey Resource - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
-  访问控制(Identity and Access Management，缩写为IAM)是火山引擎为客户提供的一套权限管理系统，用于控制不同身份对云资源的访问权限。
+  
 ---
 
 # volcenginecc_iam_accesskey (Resource)
 
-访问控制(Identity and Access Management，缩写为IAM)是火山引擎为客户提供的一套权限管理系统，用于控制不同身份对云资源的访问权限。
+
 
 ## Example Usage
 
 ```terraform
-resource "volcenginecc_iam_accesskey" "TestTerraform" {
+resource "volcenginecc_iam_accesskey" "AccesskeyDemo" {
   user_name = "s2222"
-  # 禁用的时候传
-  status    = "inactive"
 }
 ```
 
@@ -25,18 +23,18 @@ resource "volcenginecc_iam_accesskey" "TestTerraform" {
 ### Optional
 
 - `access_key_id` (String) 密钥ID（Access Key Id）。
-- `status` (String) 密钥状态。active代表启用状态，inactive代表禁用状态。
-- `user_name` (String) 用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。
+- `status` (String) 密钥状态 (active/inactive)
+- `user_name` (String) 用户名
 
 ### Read-Only
 
-- `created_time` (String) 密钥创建时间。时间格式为ISO8601。
+- `create_date` (String) 密钥创建时间
 - `id` (String) Uniquely identifies the resource.
 - `region` (String) API密钥最后访问的地域。
 - `request_time` (String) API密钥的最后使用的时间。
 - `secret_access_key` (String) 私有密钥（Secret Access Key）。
 - `service` (String) API密钥最后访问的服务的英文简称。
-- `updated_time` (String) 密钥更新时间。时间格式为ISO8601。
+- `update_date` (String) 密钥更新时间
 
 ## Import
 

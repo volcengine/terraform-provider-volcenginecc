@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ecs_invocation.example "invocation_id"

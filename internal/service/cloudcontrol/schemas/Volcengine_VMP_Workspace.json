@@ -1,0 +1,264 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "InstanceType": {
+      "properties": {
+        "ActiveSeries": {
+          "description": "最大活跃时序数。",
+          "type": "integer"
+        },
+        "AvailabilityZoneReplicas": {
+          "description": "可用区（az）数。",
+          "type": "integer"
+        },
+        "DownsamplingPeriods": {
+          "description": "降采样策略。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "IngestSamplesPerSecond": {
+          "description": "最大每秒写入样本数。",
+          "type": "integer"
+        },
+        "QueryConcurrency": {
+          "description": "最大查询并发数。",
+          "type": "integer"
+        },
+        "QueryPerSecond": {
+          "description": "最大查询 QPS。",
+          "type": "integer"
+        },
+        "ReplicasPerZone": {
+          "description": "每个可用区（az）的数据副本数。",
+          "type": "integer"
+        },
+        "RetentionPeriod": {
+          "description": "最长数据保留时间。",
+          "type": "string"
+        },
+        "ScanSamplesPerSecond": {
+          "description": "最大每秒扫描样本数。",
+          "type": "integer"
+        },
+        "ScanSeriesPerSecond": {
+          "description": "最大每秒扫描时序数。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Quota": {
+      "properties": {
+        "ActiveSeries": {
+          "description": "最大活跃时序数。整数形式，默认取值范围为 1～50000000。",
+          "type": "integer"
+        },
+        "IngestSamplesPerSecond": {
+          "description": "指标摄入速率，即最大每秒写入样本数。整数形式，默认取值范围为 1～5000000。",
+          "type": "integer"
+        },
+        "QueryPerSecond": {
+          "description": "最大查询 QPS。整数形式，默认取值范围为 1～500。",
+          "type": "integer"
+        },
+        "ScanSamplesPerSecond": {
+          "description": "最大每秒扫描样本数。整数形式，默认取值范围为 1～1000000000。",
+          "type": "integer"
+        },
+        "ScanSeriesPerSecond": {
+          "description": "最大每秒扫描时序数。整数形式，默认取值范围为 1～200000。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "标签。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    },
+    "Usage": {
+      "description": "工作区使用量。",
+      "properties": {
+        "ActiveSeries": {
+          "description": "活跃时序数。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "IngestedSamplesPerSecond": {
+          "description": "每秒写入样本数。",
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "工作区（Workspace）是 VMP 服务中采集数据和规则的抽象整合，为用户提供物理隔离或逻辑隔离的 Prometheus 能力。在 VMP 服务中可创建不同的工作区，不同工作区中的数据彼此隔离。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vmp:CreateWorkspace",
+        "vmp:GetWorkspace",
+        "vmp:ListWorkspaceStatus"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vmp:DeleteWorkspace",
+        "vmp:ListWorkspaces"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vmp:ListWorkspaces"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vmp:GetWorkspace",
+        "vmp:ListWorkspaceStatus"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vmp:GetWorkspace",
+        "vmp:ListWorkspaceStatus",
+        "vmp:UpdateWorkspace"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/WorkspaceId"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "工作区创建时间，RFC3339 格式。",
+      "type": "string"
+    },
+    "DeleteProtectionEnabled": {
+      "description": "是否开启工作区删除保护,true：开启，false：关闭。",
+      "type": "boolean"
+    },
+    "Description": {
+      "description": "工作区描述信息，字符串形式，长度限制为 0～200。",
+      "type": "string"
+    },
+    "InstanceType": {
+      "$ref": "#/definitions/InstanceType",
+      "description": "工作区规格详情。",
+      "type": "object"
+    },
+    "InstanceTypeId": {
+      "description": "工作区规格,vmp.standard.15d：15 天存储时长工作区。vmp.standard.30d：30 天存储时长工作区。vmp.standard.90d：90 天存储时长工作区。vmp.standard.180d：180 天存储时长工作区。vmp.standard.1y：1 年存储时长工作区。",
+      "type": "string"
+    },
+    "Name": {
+      "description": "工作区名称，字符串形式，长度限制为 1～100。",
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+    },
+    "OverdueReclaimTime": {
+      "description": "工作区预期欠费回收时间，RFC3339 格式。",
+      "type": "string"
+    },
+    "Password": {
+      "description": "工作区 BasicAuth 密码。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "type": "string"
+    },
+    "PrometheusPushIntranetEndpoint": {
+      "description": "工作区 Push Gateway URL 地址。",
+      "type": "string"
+    },
+    "PrometheusQueryIntranetEndpoint": {
+      "description": "工作区 Query URL 地址。",
+      "type": "string"
+    },
+    "PrometheusWriteIntranetEndpoint": {
+      "description": "工作区 RemoteWrite URL 地址。",
+      "type": "string"
+    },
+    "Quota": {
+      "$ref": "#/definitions/Quota",
+      "description": "工作区配额详情。",
+      "type": "object"
+    },
+    "Status": {
+      "description": "工作区状态，取值：Creating：创建中 Active：正常 Updating：更新中 Deleting：删除中 OverdueShutted：欠费关停 Resuming：恢复中 Error：错误。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "工作区标签。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Usage": {
+      "$ref": "#/definitions/Usage",
+      "description": "工作区用量。",
+      "type": "object"
+    },
+    "Username": {
+      "description": "工作区 BasicAuth 用户名。",
+      "pattern": "^[A-Za-z0-9_]+$",
+      "type": "string"
+    },
+    "WorkspaceId": {
+      "description": "工作区Id。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreateTime",
+    "/properties/OverdueReclaimTime",
+    "/properties/WorkspaceId",
+    "/properties/Usage",
+    "/properties/Quota",
+    "/properties/InstanceType",
+    "/properties/Status",
+    "/properties/PrometheusWriteIntranetEndpoint",
+    "/properties/PrometheusQueryIntranetEndpoint",
+    "/properties/PrometheusPushIntranetEndpoint"
+  ],
+  "required": [
+    "Name",
+    "InstanceTypeId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VMP::Workspace",
+  "writeOnlyProperties": [
+    "/properties/Password"
+  ]
+}
