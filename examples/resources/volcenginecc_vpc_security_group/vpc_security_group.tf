@@ -1,4 +1,4 @@
-resource "volcenginecc_vpc_securitygroup" "SecurityGroupDemo" {
+resource "volcenginecc_vpc_security_group" "SecurityGroupDemo" {
   vpc_id              = "vpc-xxxx"
   security_group_name = "SecurityGroupDemo"
   description         = "SecurityGroupDemo description"
