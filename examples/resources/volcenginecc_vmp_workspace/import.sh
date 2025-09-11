@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vmp_workspace.example "workspace_id"

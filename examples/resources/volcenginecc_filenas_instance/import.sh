@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_filenas_instance.example "file_system_id"

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_storageebs_volume.example "volume_id"

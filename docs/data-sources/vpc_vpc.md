@@ -27,7 +27,6 @@ Data Source schema for Volcengine::VPC::VPC
 - `creation_time` (String) 创建VPC的时间。
 - `description` (String) VPC的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不能以http://或https://开头。
 - `dns_servers` (Set of String) VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用&分隔。不填则配置为默认DNS服务器地址。
-- `enable_ipv_6` (Boolean) 是否开启IPv6网段。false（默认值）：不开启。true：开启。
 - `ipv_4_gateway_id` (String) VPC 绑定的 IPv4 网关的 ID。
 - `ipv_6_cidr_block` (String) VPC的IPv6网段。传入此参数后，参数Ipv6MaskLen不生效。参数Ipv6Isp传入非BGP后，参数Ipv6MaskLen和参数Ipv6CidrBlock二者必须传入一个。参数Ipv6Isp未传或传入BGP，此参数未传，则由系统自动分配IPv6网段。
 - `is_default` (Boolean) 该VPC是否为默认VPC。true：默认VPC，表示该VPC是创建ECS实例时系统自动创建的VPC。false：非默认VPC，表示该VPC是用户手动创建的。

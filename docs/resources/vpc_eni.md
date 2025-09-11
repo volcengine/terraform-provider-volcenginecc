@@ -12,34 +12,23 @@ description: |-
 ## Example Usage
 
 ```terraform
-resource "volcenginecc_vpc_eni" "eniDemo" {
-  network_interface_name = "eniDemo"
-  subnet_id              = volcenginecc_vpc_subnet.TestTerraform_vpc_subnet.id
-  security_group_ids     = [
-    volcenginecc_vpc_securitygroup.TestTerraform_vpc_security_group.id
-  ]
-  device_id          = volcenginecc_ecs_instance.TestTerraform_ecs_instance.id
-  project_name       = "default"
+resource "volcenginecc_vpc_eni" "EniDemo" {
+  network_interface_name = "EniDemo"
+  subnet_id = "vpc_subnet-xxxx"
+  security_group_ids = ["vpc_security_group-xxxx"]
+  instance_id = "i-ye498lwge85i3z3kxxxx"
+  project_name = "default"
   primary_ip_address = {
-    private_ip_address = "192.168.xxx.10"
-  }
-  private_ip_sets = [
-    {
-      private_ip_address = "192.168.xxx.102"
-    },
-    {
-      private_ip_address    = "192.168.xxx.101"
-      associated_elastic_ip = {
-        allocation_id = "eip-17xf500wwdb7kv98gwdxxxxxx"
-      }
+    private_ip_address = "192.168.x.130"
+    associated_elastic_ip = {
+      allocation_id = "eip-2f80zqjduo6ps4f4pzzcxxxxx"
     }
-  ]
-  i_pv_6_sets : ["2408:1000:ab69:fe68:4099:9e0c:5c3c:xxx"]
+  }
+  secondary_private_ip_address_count = 2
   tags = [
     {
-      key   = "ENV"
-      value = "test"
-    }
+      key = "env"
+      value = "test"    }
   ]
 }
 ```

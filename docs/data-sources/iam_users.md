@@ -3,28 +3,12 @@
 page_title: "volcenginecc_iam_users Data Source - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
-<<<<<<< HEAD
-<<<<<<< HEAD
   Plural Data Source schema for Volcengine::IAM::User
-=======
-  Plural Data Source schema for Volcengine::Iam::User
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-  Plural Data Source schema for Volcengine::IAM::User
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 ---
 
 # volcenginecc_iam_users (Data Source)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Plural Data Source schema for Volcengine::IAM::User
-=======
-Plural Data Source schema for Volcengine::Iam::User
->>>>>>> b862fcd (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
-=======
-Plural Data Source schema for Volcengine::IAM::User
->>>>>>> 582f820 (feat: volcenginecc_vpc_vpc、volcenginecc_iam_user、volcengine_iam_role、volcenginecc_tos_bucket)
 
 
 

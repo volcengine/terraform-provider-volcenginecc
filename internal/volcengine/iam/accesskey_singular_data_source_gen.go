@@ -33,15 +33,15 @@ func accesskeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "密钥ID（Access Key Id）。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: CreatedTime
+		// Property: CreateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥创建时间。时间格式为ISO8601。",
+		//	  "description": "密钥创建时间",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥创建时间。时间格式为ISO8601。",
+		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "密钥创建时间",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Region
@@ -92,37 +92,33 @@ func accesskeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥状态。active代表启用状态，inactive代表禁用状态。",
-		//	  "enum": [
-		//	    "active",
-		//	    "inactive"
-		//	  ],
+		//	  "description": "密钥状态 (active/inactive)",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥状态。active代表启用状态，inactive代表禁用状态。",
+			Description: "密钥状态 (active/inactive)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: UpdatedTime
+		// Property: UpdateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥更新时间。时间格式为ISO8601。",
+		//	  "description": "密钥更新时间",
 		//	  "type": "string"
 		//	}
-		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥更新时间。时间格式为ISO8601。",
+		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "密钥更新时间",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。",
+		//	  "description": "用户名",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。",
+			Description: "用户名",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -143,13 +139,13 @@ func accesskeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_key_id":     "AccessKeyId",
-		"created_time":      "CreatedTime",
+		"create_date":       "CreateDate",
 		"region":            "Region",
 		"request_time":      "RequestTime",
 		"secret_access_key": "SecretAccessKey",
 		"service":           "Service",
 		"status":            "Status",
-		"updated_time":      "UpdatedTime",
+		"update_date":       "UpdateDate",
 		"user_name":         "UserName",
 	})
 

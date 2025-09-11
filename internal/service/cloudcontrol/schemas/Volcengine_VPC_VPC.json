@@ -129,10 +129,6 @@
       "type": "array",
       "uniqueItems": true
     },
-    "EnableIpv6": {
-      "description": "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
-      "type": "boolean"
-    },
     "Ipv4GatewayId": {
       "description": "VPC 绑定的 IPv4 网关的 ID。",
       "type": "string"
