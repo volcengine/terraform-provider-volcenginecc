@@ -15,7 +15,7 @@ description: |-
 resource "volcenginecc_tos_bucket" "BucketDemo" {
   name                  = "bucket-demo"
   enable_version_status = "Enabled"
-  tags                  = [
+  tags = [
     {
       key   = "env"
       value = "test"

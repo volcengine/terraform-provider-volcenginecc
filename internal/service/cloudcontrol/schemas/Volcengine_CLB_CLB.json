@@ -8,7 +8,12 @@
     "/properties/VpcId",
     "/properties/SubnetId",
     "/properties/ZoneType",
-    "/properties/Eip",
+    "/properties/Eip/ISP",
+    "/properties/Eip/EipBillingType",
+    "/properties/Eip/Bandwidth",
+    "/properties/Eip/BandwidthPackageId",
+    "/properties/Eip/SecurityProtectionTypes",
+    "/properties/Eip/SecurityProtectionInstanceId",
     "/properties/EniAddressNum"
   ],
   "definitions": {

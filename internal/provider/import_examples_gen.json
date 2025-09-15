@@ -113,5 +113,40 @@
         "resource": "volcenginecc_storageebs_volume",
         "identifier": ["VolumeId"],
         "path": "./examples/resources/volcenginecc_storageebs_volume/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ark_endpoint",
+        "identifier": ["EndpointId"],
+        "path": "./examples/resources/volcenginecc_ark_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_keypair",
+        "identifier": ["KeyPairName"],
+        "path": "./examples/resources/volcenginecc_ecs_keypair/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_hpc_cluster",
+        "identifier": ["HpcClusterId"],
+        "path": "./examples/resources/volcenginecc_ecs_hpc_cluster/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_nlb_listener",
+        "identifier": ["ListenerId"],
+        "path": "./examples/resources/volcenginecc_clb_nlb_listener/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_server_group",
+        "identifier": ["ServerGroupId"],
+        "path": "./examples/resources/volcenginecc_clb_server_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_bandwidth_package",
+        "identifier": ["BandwidthPackageId"],
+        "path": "./examples/resources/volcenginecc_vpc_bandwidth_package/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_certificate",
+        "identifier": ["CertificateId","CertificateType"],
+        "path": "./examples/resources/volcenginecc_alb_certificate/import.sh"
     }
 ]

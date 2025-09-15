@@ -298,6 +298,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+						float64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: BandwidthPackageId
@@ -307,6 +308,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EipBillingType
@@ -319,6 +321,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+						float64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
@@ -328,6 +331,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityProtectionInstanceId
@@ -337,6 +341,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+						float64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityProtectionTypes
@@ -347,6 +352,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -355,7 +361,6 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EipAddress
@@ -1214,7 +1219,12 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/VpcId",
 		"/properties/SubnetId",
 		"/properties/ZoneType",
-		"/properties/Eip",
+		"/properties/Eip/ISP",
+		"/properties/Eip/EipBillingType",
+		"/properties/Eip/Bandwidth",
+		"/properties/Eip/BandwidthPackageId",
+		"/properties/Eip/SecurityProtectionTypes",
+		"/properties/Eip/SecurityProtectionInstanceId",
 		"/properties/EniAddressNum",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

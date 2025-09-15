@@ -18,7 +18,7 @@ resource "volcenginecc_iam_group" "GroupDemo" {
   display_name    = "GroupDemo-DisplayName"
   users = [
     {
-      user_name = "demo" }
+    user_name = "demo" }
   ]
   attached_policys = [
     {
@@ -29,8 +29,8 @@ resource "volcenginecc_iam_group" "GroupDemo" {
           attach_time          = "20230810T071***Z"
           policy_scope_type    = "Project"
           project_display_name = "demo"
-          project_name = "Project" }
-      ] }
+        project_name = "Project" }
+    ] }
   ]
 }
 ```

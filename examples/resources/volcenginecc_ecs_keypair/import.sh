@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ecs_keypair.example "key_pair_name"

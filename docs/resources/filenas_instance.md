@@ -17,10 +17,10 @@ resource "volcenginecc_filenas_instance" "FileNASInstanceDemo" {
   capacity = {
     total = 105
   }
-  charge_type = "PayAsYouGo"
+  charge_type      = "PayAsYouGo"
   file_system_type = "Extreme"
-  protocol_type = "NFS"
-  zone_id = "cn-beijing-x"
+  protocol_type    = "NFS"
+  zone_id          = "cn-beijing-x"
 }
 ```
 

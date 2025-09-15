@@ -13,10 +13,10 @@ OCI 制品仓库用于存储容器镜像或 Helm Chart 等，符合开源容器�
 
 ```terraform
 resource "volcenginecc_cr_repository" "RepositoryDemo" {
-  registry = "test"
-  namespace = "default"
-  name = "RepositoryDemo"
-  description = "RepositoryDemo description"
+  registry     = "test"
+  namespace    = "default"
+  name         = "RepositoryDemo"
+  description  = "RepositoryDemo description"
   access_level = "Public"
 }
 ```

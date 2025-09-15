@@ -1,0 +1,162 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/PublicKey",
+    "/properties/PrivateKey",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "ALB 支持上传服务器证书、CA 证书到控制台，对上传的证书单独管理。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "alb:UploadCertificate",
+        "alb:UploadCACertificate",
+        "alb:DescribeAllCertificates"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "alb:DescribeAllCertificates",
+        "alb:DeleteCertificate",
+        "alb:DeleteCACertificate"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "alb:DescribeAllCertificates"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "alb:DescribeCertificates",
+        "alb:DescribeCACertificates"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "alb:DescribeAllCertificates",
+        "alb:ModifyCertificateAttributes",
+        "alb:ModifyCACertificateAttributes",
+        "alb:UntagResources",
+        "alb:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CertificateId",
+    "/properties/CertificateType"
+  ],
+  "properties": {
+    "CertificateId": {
+      "description": "证书ID。",
+      "type": "string"
+    },
+    "CertificateName": {
+      "description": "证书名称，长度限制为1 ～ 128个字符，必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。",
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+    },
+    "CertificateType": {
+      "description": "证书类型，取值：CA：CA证书、Server：服务器证书。",
+      "enum": [
+        "CA",
+        "Server"
+      ],
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "证书创建时间。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "证书描述。",
+      "type": "string"
+    },
+    "DomainName": {
+      "description": "证书域名。",
+      "type": "string"
+    },
+    "ExpiredAt": {
+      "description": "证书过期时间。",
+      "type": "string"
+    },
+    "Listeners": {
+      "description": "证书关联的监听器列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PrivateKey": {
+      "description": "服务器证书的私钥，当证书类型为Server时必填。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "type": "string"
+    },
+    "PublicKey": {
+      "description": "服务器证书的公钥。",
+      "type": "string"
+    },
+    "San": {
+      "description": "证书扩展域名列表，用英文',' 分隔多个域名， 包含(commonName,DnsName,IP)。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "证书的状态，取值为：Creating：创建中。Active：运行中。Deleting：删除中。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CertificateId",
+    "/properties/CreatedTime",
+    "/properties/DomainName",
+    "/properties/ExpiredAt",
+    "/properties/Listeners",
+    "/properties/San",
+    "/properties/Status"
+  ],
+  "required": [
+    "CertificateType",
+    "PublicKey"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::ALB::Certificate",
+  "writeOnlyProperties": [
+    "/properties/PublicKey",
+    "/properties/PrivateKey"
+  ]
+}

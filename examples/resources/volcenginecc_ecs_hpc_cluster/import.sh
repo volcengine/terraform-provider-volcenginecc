@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ecs_hpc_cluster.example "hpc_cluster_id"
