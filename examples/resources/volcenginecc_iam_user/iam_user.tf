@@ -1,7 +1,7 @@
 resource "volcenginecc_iam_user" "UserDemo" {
   user_name   = "UserDemo"
   description = "user description"
-  groups      = [
+  groups = [
     "UserGroupDemo"
   ]
   policies = [

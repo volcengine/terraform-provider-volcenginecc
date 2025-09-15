@@ -13,11 +13,11 @@ description: |-
 
 ```terraform
 resource "volcenginecc_vpc_route_table" "RouteTableDemo" {
-  vpc_id               = "vpc-xxxxx"
-  route_table_name     = "routeTableDemo"
-  description          = "routeTableDemo description"
-  project_name         = "default"
-  subnet_ids           = ["subnet-rrxxxxxx"]
+  vpc_id           = "vpc-xxxxx"
+  route_table_name = "routeTableDemo"
+  description      = "routeTableDemo description"
+  project_name     = "default"
+  subnet_ids       = ["subnet-rrxxxxxx"]
   custom_route_entries = [
     {
       destination_cidr_block = "192.168.x.0/30"

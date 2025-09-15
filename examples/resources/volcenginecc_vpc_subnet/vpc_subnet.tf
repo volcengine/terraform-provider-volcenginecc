@@ -4,7 +4,7 @@ resource "volcenginecc_vpc_subnet" "SubnetDemo" {
   subnet_name = "subnetDemo"
   description = "subnetDemo description"
   cidr_block  = "192.168.xx.0/24"
-  tags        = [
+  tags = [
     {
       key   = "env"
       value = "test"

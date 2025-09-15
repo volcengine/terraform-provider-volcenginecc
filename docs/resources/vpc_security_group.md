@@ -41,6 +41,7 @@ resource "volcenginecc_vpc_security_group" "SecurityGroupDemo" {
       cidr_ip         = "192.168.xx.0/26"
       prefix_list_id  = "list-xxx"
       source_group_id = "group-xxx"
+    }
   ]
   tags = [
     {
