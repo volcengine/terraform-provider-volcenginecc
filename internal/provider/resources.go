@@ -25,10 +25,19 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_cr_repository -ccschema ../service/cloudcontrol/schemas/Volcengine_CR_Repository.json -package cr -- ../volcengine/cr/repository_resource_gen.go ../volcengine/cr/repository_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_filenas_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_FileNAS_Instance.json -package filenas -- ../volcengine/filenas/instance_resource_gen.go ../volcengine/filenas/instance_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_storageebs_volume -ccschema ../service/cloudcontrol/schemas/Volcengine_StorageEBS_Volume.json -package storageebs -- ../volcengine/storageebs/volume_resource_gen.go ../volcengine/storageebs/volume_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_ark_endpoint -ccschema ../service/cloudcontrol/schemas/Volcengine_ARK_Endpoint.json -package ark -- ../volcengine/ark/endpoint_resource_gen.go ../volcengine/ark/endpoint_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_ecs_keypair -ccschema ../service/cloudcontrol/schemas/Volcengine_ECS_Keypair.json -package ecs -- ../volcengine/ecs/keypair_resource_gen.go ../volcengine/ecs/keypair_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_ecs_hpc_cluster -ccschema ../service/cloudcontrol/schemas/Volcengine_ECS_HpcCluster.json -package ecs -- ../volcengine/ecs/hpc_cluster_resource_gen.go ../volcengine/ecs/hpc_cluster_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_clb_nlb_listener -ccschema ../service/cloudcontrol/schemas/Volcengine_CLB_NLBListener.json -package clb -- ../volcengine/clb/nlb_listener_resource_gen.go ../volcengine/clb/nlb_listener_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_clb_server_group -ccschema ../service/cloudcontrol/schemas/Volcengine_CLB_ServerGroup.json -package clb -- ../volcengine/clb/server_group_resource_gen.go ../volcengine/clb/server_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vpc_bandwidth_package -ccschema ../service/cloudcontrol/schemas/Volcengine_VPC_BandwidthPackage.json -package vpc -- ../volcengine/vpc/bandwidth_package_resource_gen.go ../volcengine/vpc/bandwidth_package_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_alb_certificate -ccschema ../service/cloudcontrol/schemas/Volcengine_ALB_Certificate.json -package alb -- ../volcengine/alb/certificate_resource_gen.go ../volcengine/alb/certificate_resource_gen_test.go
 
 package provider
 
 import (
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/alb"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"

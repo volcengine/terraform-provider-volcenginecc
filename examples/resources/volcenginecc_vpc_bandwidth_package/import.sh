@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_bandwidth_package.example "bandwidth_package_id"

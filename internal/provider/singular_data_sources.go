@@ -25,10 +25,19 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_cr_repository -ccschema ../service/cloudcontrol/schemas/Volcengine_CR_Repository.json -package cr ../volcengine/cr/repository_singular_data_source_gen.go ../volcengine/cr/repository_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_filenas_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_FileNAS_Instance.json -package filenas ../volcengine/filenas/instance_singular_data_source_gen.go ../volcengine/filenas/instance_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_storageebs_volume -ccschema ../service/cloudcontrol/schemas/Volcengine_StorageEBS_Volume.json -package storageebs ../volcengine/storageebs/volume_singular_data_source_gen.go ../volcengine/storageebs/volume_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_ark_endpoint -ccschema ../service/cloudcontrol/schemas/Volcengine_ARK_Endpoint.json -package ark ../volcengine/ark/endpoint_singular_data_source_gen.go ../volcengine/ark/endpoint_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_ecs_keypair -ccschema ../service/cloudcontrol/schemas/Volcengine_ECS_Keypair.json -package ecs ../volcengine/ecs/keypair_singular_data_source_gen.go ../volcengine/ecs/keypair_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_ecs_hpc_cluster -ccschema ../service/cloudcontrol/schemas/Volcengine_ECS_HpcCluster.json -package ecs ../volcengine/ecs/hpc_cluster_singular_data_source_gen.go ../volcengine/ecs/hpc_cluster_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_clb_nlb_listener -ccschema ../service/cloudcontrol/schemas/Volcengine_CLB_NLBListener.json -package clb ../volcengine/clb/nlb_listener_singular_data_source_gen.go ../volcengine/clb/nlb_listener_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_clb_server_group -ccschema ../service/cloudcontrol/schemas/Volcengine_CLB_ServerGroup.json -package clb ../volcengine/clb/server_group_singular_data_source_gen.go ../volcengine/clb/server_group_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vpc_bandwidth_package -ccschema ../service/cloudcontrol/schemas/Volcengine_VPC_BandwidthPackage.json -package vpc ../volcengine/vpc/bandwidth_package_singular_data_source_gen.go ../volcengine/vpc/bandwidth_package_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_alb_certificate -ccschema ../service/cloudcontrol/schemas/Volcengine_ALB_Certificate.json -package alb ../volcengine/alb/certificate_singular_data_source_gen.go ../volcengine/alb/certificate_singular_data_source_gen_test.go
 
 package provider
 
 import (
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/alb"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"

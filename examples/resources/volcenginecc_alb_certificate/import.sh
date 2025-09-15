@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_alb_certificate.example "certificate_id|certificate_type"

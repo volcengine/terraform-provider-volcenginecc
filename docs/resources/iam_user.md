@@ -15,7 +15,7 @@ IAM子用户是访问控制的一种身份，由账号或是拥有权限的用�
 resource "volcenginecc_iam_user" "UserDemo" {
   user_name   = "UserDemo"
   description = "user description"
-  groups      = [
+  groups = [
     "UserGroupDemo"
   ]
   policies = [

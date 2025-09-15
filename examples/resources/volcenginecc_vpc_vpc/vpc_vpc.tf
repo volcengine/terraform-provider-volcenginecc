@@ -4,7 +4,7 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
   enable_ipv_6          = false
   vpc_name              = "vpc-demo"
   description           = "VpcDemo Example"
-  dns_servers           = [
+  dns_servers = [
     "12.3.x.x"
   ]
   associate_cens = [
@@ -24,7 +24,7 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
     "sg-29mkx39jb80741e1hgj2bxxx"
   ]
   project_name = "default"
-  tags         = [
+  tags = [
     {
       key   = "env"
       value = "test"
