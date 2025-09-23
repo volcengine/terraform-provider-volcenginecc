@@ -4,16 +4,23 @@ PKG_NAME            ?= internal/volcengine/...
 ACCTEST_TIMEOUT     ?= 180m
 ACCTEST_PARALLELISM ?= 20
 GO_VER              ?= go
+VERSION  			?=0.0.1
 
-.PHONY: all build default docs docs-all docs-import golangci-lint help lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
-all: schemas resources singular-data-sources plural-data-sources build docs-all ## Generate all schemas, resources, data sources, documentation, and build the provider
+.PHONY: set-version all build default docs docs-all docs-import golangci-lint help lint plural-data-sources resources schemas singular-data-sources test testacc tools
+
+all: set-version schemas resources singular-data-sources plural-data-sources build docs-all ## Generate all schemas, resources, data sources, documentation, and build the provider
 
 help: ## Display this help
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-21s\033[0m %s\n", $$1, $$2}'
 
 build: prereq-go ## Build the provider
 	$(GO_VER) install
+
+set-version:
+	@echo "$(VERSION)" > ./version/VERSION
+	@sed -i.bak 's/\(TerraformProviderVersion = \).*/\1"$(VERSION)"/' ./internal/common/common.go
+	@rm -f ./internal/common/common.go.bak
 
 plural-data-sources: prereq-go ## Generate plural data sources
 	rm -f internal/*/*/*_plural_data_source_gen.go
