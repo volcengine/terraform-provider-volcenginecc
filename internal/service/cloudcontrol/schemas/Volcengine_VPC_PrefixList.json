@@ -1,0 +1,202 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/IpVersion",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "PrefixListAssociation": {
+      "properties": {
+        "ResourceId": {
+          "description": "关联资源的ID。",
+          "type": "string"
+        },
+        "ResourceType": {
+          "description": "关联资源的类型。VpcRouteTable：路由表；VpcSecurityGroup：安全组。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PrefixListEntry": {
+      "properties": {
+        "Cidr": {
+          "description": "前缀列表条目的CIDR。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "前缀列表条目的描述。长度限制为0~255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+          "maxLength": 255,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Cidr"
+      ],
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "前缀列表是一组CIDR地址块的集合，用于简化安全组规则、路由表条目的配置。当前缀列表修改时，所有关联它的资源均会同步修改。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreatePrefixList",
+        "vpc:DescribePrefixLists",
+        "vpc:DescribePrefixListEntries",
+        "vpc:DescribePrefixListAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeletePrefixList",
+        "vpc:DescribePrefixLists"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribePrefixLists"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribePrefixLists",
+        "vpc:DescribePrefixListEntries",
+        "vpc:DescribePrefixListAssociations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyPrefixList",
+        "vpc:UntagResources",
+        "vpc:TagResources",
+        "vpc:DescribePrefixLists",
+        "vpc:DescribePrefixListEntries",
+        "vpc:DescribePrefixListAssociations"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PrefixListId"
+  ],
+  "properties": {
+    "AssociationCount": {
+      "description": "前缀列表关联的资源数量。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AssociationsRouteTables": {
+      "description": "前缀列表关联的路由表信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PrefixListAssociation"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AssociationsSecurityGroups": {
+      "description": "前缀列表关联的安全组信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PrefixListAssociation"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedTime": {
+      "description": "前缀列表的创建时间。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "前缀列表的描述信息。长度限制为0~ 255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+      "maxLength": 255,
+      "type": "string"
+    },
+    "IpVersion": {
+      "default": "IPv4",
+      "description": "IP版本类型。取值：IPv4（默认值）：IPv4类型。IPv6：IPv6类型。",
+      "type": "string"
+    },
+    "MaxEntries": {
+      "description": "最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。",
+      "format": "int64",
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "integer"
+    },
+    "PrefixListEntries": {
+      "description": "前缀列表条目的CIDR。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PrefixListEntry"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PrefixListId": {
+      "description": "前缀列表的ID。",
+      "type": "string"
+    },
+    "PrefixListName": {
+      "description": "前缀列表的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。",
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "前缀列表所属项目的名称，不填默认加入default项目。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "前缀列表的状态。取值：Available：可用；Creating：创建中；Deleting：删除中；Pending：修改中。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "前缀列表的最近一次修改时间。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AssociationCount",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/PrefixListId",
+    "/properties/Status",
+    "/properties/AssociationsSecurityGroups",
+    "/properties/AssociationsRouteTables"
+  ],
+  "required": [
+    "MaxEntries"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::PrefixList"
+}

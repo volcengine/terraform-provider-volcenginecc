@@ -1,0 +1,309 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Password",
+    "/properties/ScalingGroupId",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Eip": {
+      "description": "弹性公网IP。",
+      "properties": {
+        "Bandwidth": {
+          "description": "公网IP的带宽峰值，默认为1，单位：Mbps。取值：当Eip.BillingType取值为PostPaidByBandwidth时，取值为1 ～ 500。当Eip.BillingType取值为PostPaidByTraffic时，取值为1 ～ 200。",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "BandwidthPackageId": {
+          "description": "共享带宽包的ID，表示将公网IP加入到共享带宽包。 您可以调用 DescribeBandwidthPackages 接口，查询共享带宽包的ID。 公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的线路类型相同。共享带宽包为IPv4类型。",
+          "type": "string"
+        },
+        "BillingType": {
+          "description": "公网IP的计费类型，取值：PostPaidByBandwidth（默认）：按量计费-按带宽上限计费。PostPaidByTraffic：按量计费-按实际流量计费。",
+          "enum": [
+            "PostPaidByBandwidth",
+            "PostPaidByTraffic"
+          ],
+          "type": "string"
+        },
+        "ISP": {
+          "description": "线路类型，取值：BGP（默认）：BGP线路。若您的账号已申请使用静态单线，ISP还可以传入ChinaMobile（表示中国移动）、ChinaTelecom（表示中国电信）、ChinaUnicom（表示中国联通）。",
+          "enum": [
+            "BGP",
+            "ChinaMobile",
+            "ChinaTelecom",
+            "ChinaUnicom"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceTypeOverride": {
+      "description": "抢占式实例。",
+      "properties": {
+        "InstanceType": {
+          "description": "指定抢占式实例的规格。参数 - N：表示实例规格的序号，取值为1 ～ 10。取值 - InstanceType：表示抢占式实例的规格。多个规格之间用\u0026分隔。",
+          "type": "string"
+        },
+        "PriceLimit": {
+          "description": "指定抢占式实例规格每小时的最高价格参数 - N：表示实例规格的序号，取值为1 ～ 10。取值 - PriceLimit：表示抢占式实例规格每小时的最高价格。取值：大于0，且最大不超过3位小数。多个价格之间用\u0026分隔。",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    },
+    "Volume": {
+      "description": "云盘。",
+      "properties": {
+        "DeleteWithInstance": {
+          "description": "云盘是否随实例释放：参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 - 15。参数 - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+          "type": "boolean"
+        },
+        "Size": {
+          "description": "云盘的容量，单位为GiB。参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值 - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。多个云盘之间用\u0026分隔。",
+          "type": "integer"
+        },
+        "VolumeType": {
+          "description": "云盘的类型：参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数 - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用\u0026分隔。",
+          "enum": [
+            "ESSD_FlexPL",
+            "ESSD_PL0",
+            "PTSSD"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "用于定义伸缩组中的实例配置，包括计算、内存、网络、存储、安全等，伸缩组扩容时，会按照此处的配置来源创建新实例。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "auto_scaling:CreateScalingConfiguration",
+        "auto_scaling:EnableScalingConfiguration",
+        "auto_scaling:DescribeScalingConfigurations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "auto_scaling:DeleteScalingConfiguration",
+        "auto_scaling:DescribeScalingConfigurations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "auto_scaling:DescribeScalingConfigurations"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "auto_scaling:DescribeScalingConfigurations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "auto_scaling:ModifyScalingConfiguration",
+        "auto_scaling:EnableScalingConfiguration"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ScalingConfigurationId"
+  ],
+  "properties": {
+    "CreatedAt": {
+      "description": "资源创建时间(UTC时间)",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Eip": {
+      "$ref": "#/definitions/Eip",
+      "description": "公网IP。",
+      "type": "object"
+    },
+    "HostName": {
+      "description": "实例的主机名。取值：Linux实例允许使用点号分隔字符成多段，每段中允许使用字母、数字或中划线“-”。不能以点号“.”或中划线“-”开头或结尾，且不能连续使用点号“.”或中划线“-”。Linux系统的主机名长度限制为2～63个字符。Windows实例允许使用字母、数字或中划线“-”，不能完全是数字。不能以中划线“-”开头或结尾，且不能连续使用中划线“-”。Windows系统的主机名长度限制在2～15个字符。如不填，则遵循以下规则自动生成：结构：iv- + 初始主机名，例如iv-3tigy72q3u3vj0******。已创建实例保持原主机名生成逻辑，不随实例重启发生变化。初始主机名生成逻辑：Linux：提取实例IDi-之后的全部字符。Windows：提取实例IDi-之后的后12位字符。",
+      "type": "string"
+    },
+    "HpcClusterId": {
+      "description": "实例所属的高性能计算集群的ID。仅当InstanceTypes.N指定为“高性能计算GPU型”时有效。",
+      "type": "string"
+    },
+    "ImageId": {
+      "description": "镜像ID，伸缩组自动创建实例时使用的镜像资源。",
+      "type": "string"
+    },
+    "InstanceChargeType": {
+      "description": "实例计费类型。取值：PrePaid（包年包月）/PostPaid（按量付费）",
+      "enum": [
+        "PrePaid",
+        "PostPaid"
+      ],
+      "type": "string"
+    },
+    "InstanceDescription": {
+      "description": "实例的描述，取值：不能以数字、中划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0 ~ 255之间。不填默认为空字符串。",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "实例的名称，取值：以字母或中文开头。只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。长度限制为1～128个字符。",
+      "type": "string"
+    },
+    "InstanceTypeOverrides": {
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InstanceTypeOverride"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceTypes": {
+      "description": "实例的计算规格列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Ipv6AddressCount": {
+      "description": "是否为实例网卡分配IPv6地址。取值：0：不分配IPv6地址。1：分配IPv6地址，系统自动为您分配IPv6网段。",
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer"
+    },
+    "KeyPairName": {
+      "description": "KeyPairName string 可选 示例值：kp-test-123，使用“SSH密钥对”登录实例时，请输入密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+      "type": "string"
+    },
+    "LifecycleState": {
+      "description": "生命周期状态。取值：Active（活跃）/InActive（非活跃）",
+      "enum": [
+        "Active",
+        "InActive"
+      ],
+      "type": "string"
+    },
+    "Password": {
+      "description": "使用“密码”方式登录实例时，请设置root登录密码：长度限制在8～30之间，密码只能由大写字母、小写字母、数字和特殊字符组成，且必须包含至少三项，特殊字符可以使用：`~!#$%^\u0026*()_-+= |，不能以“/”和“$6$”开头",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "伸缩配置创建的实例所属项目，默认为空。一个资源只能归属于一个项目。\n只能包含字母、数字、下划线“_”、点“.”和中划线“-”。\n长度限制在64个字符以内。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ScalingConfigurationId": {
+      "description": "伸缩配置ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ScalingConfigurationName": {
+      "description": "伸缩配置的名称，在同一地域下同一伸缩组内伸缩配置名称唯一。取值:只能以中文、字母开头。只能包含中文、字母、数字、下划线和中划线。长度限制为1 ~ 128个字符。暂不支持特殊字符。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ScalingGroupId": {
+      "description": "伸缩配置所属的伸缩组ID。",
+      "type": "string"
+    },
+    "SecurityEnhancementStrategy": {
+      "description": "是否开启安全加固，取值：Active：开启安全加固，仅对公共镜像生效。InActive：关闭安全加固，对所有镜像生效。",
+      "enum": [
+        "Active",
+        "InActive"
+      ],
+      "type": "string"
+    },
+    "SecurityGroupIds": {
+      "description": "实例主网卡关联的安全组ID。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SpotStrategy": {
+      "description": "实例的抢占策略。取值：NoSpot（默认）：表示创建正常按量付费实例。SpotAsPriceGo：表示系统自动出价，跟随当前市场实际价格的抢占式实例。SpotWithPriceLimit：表示需要设置出价上限的抢占式实例。",
+      "enum": [
+        "NoSpot",
+        "SpotAsPriceGo",
+        "SpotWithPriceLimit"
+      ],
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签键值对。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedAt": {
+      "description": "资源更新时间(UTC时间)",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UserData": {
+      "description": "实例自定义数据。设置的自定义数据必须经过Base64编码，且Base64编码前的自定义数据大小不能超过16KB。不填则默认为空。",
+      "type": "string"
+    },
+    "Volumes": {
+      "description": "云盘。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Volume"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "ZoneId": {
+      "description": "伸缩配置可用区ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ScalingConfigurationId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/InstanceChargeType",
+    "/properties/InstanceTypes"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::AutoScaling::ScalingConfiguration",
+  "writeOnlyProperties": [
+    "/properties/Password"
+  ]
+}

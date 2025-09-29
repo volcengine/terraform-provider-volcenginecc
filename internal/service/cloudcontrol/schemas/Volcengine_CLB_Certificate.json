@@ -1,0 +1,153 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/PrivateKey",
+    "/properties/PublicKey",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "针对HTTPS协议，提供统一的证书管理服务，证书无需上传到后端服务器，支持在CLB实例上解密处理，降低了后端服务器的CPU开销。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "clb:UploadCertificate",
+        "clb:DescribeCertificates"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "clb:DescribeCertificates",
+        "clb:DeleteCertificate"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "clb:DescribeCertificates"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "clb:DescribeCertificates"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "clb:DescribeCertificates",
+        "clb:ModifyCertificateAttributes",
+        "clb:UntagResources",
+        "clb:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CertificateId"
+  ],
+  "properties": {
+    "CertificateId": {
+      "description": "证书的ID。",
+      "type": "string"
+    },
+    "CertificateName": {
+      "description": "证书的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 128个字符。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "证书的创建时间。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "证书的描述，默认值为空字符串。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。",
+      "maxLength": 255,
+      "type": "string"
+    },
+    "DomainName": {
+      "description": "证书的主域名。",
+      "type": "string"
+    },
+    "ExpiredAt": {
+      "description": "证书的过期时间。",
+      "type": "string"
+    },
+    "Listeners": {
+      "description": "证书关联的监听器的ID。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PrivateKey": {
+      "description": "证书的私钥。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "证书所属项目的名称。不填默认为default。",
+      "type": "string"
+    },
+    "PublicKey": {
+      "description": "证书的公钥。",
+      "type": "string"
+    },
+    "ServiceManaged": {
+      "description": "是否为托管资源。true：托管资源。false：非托管资源。",
+      "type": "boolean"
+    },
+    "SubjectAlternativeNames": {
+      "description": "证书的备用域名列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CertificateId",
+    "/properties/CreatedTime",
+    "/properties/DomainName",
+    "/properties/ExpiredAt",
+    "/properties/Listeners",
+    "/properties/ServiceManaged",
+    "/properties/SubjectAlternativeNames"
+  ],
+  "required": [
+    "PrivateKey",
+    "PublicKey"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::CLB::Certificate",
+  "writeOnlyProperties": [
+    "/properties/PublicKey",
+    "/properties/PrivateKey"
+  ]
+}

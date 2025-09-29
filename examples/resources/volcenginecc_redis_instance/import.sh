@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_redis_instance.example "instance_id"

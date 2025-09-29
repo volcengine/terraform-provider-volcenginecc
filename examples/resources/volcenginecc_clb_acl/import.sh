@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_clb_acl.example "acl_id"

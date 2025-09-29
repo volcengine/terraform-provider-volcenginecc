@@ -133,3 +133,60 @@ resource_schema "volcengine_vpc_bandwidth_package" {
 resource_schema "volcengine_alb_certificate" {
   cloudcontrol_type_name = "Volcengine::ALB::Certificate"
 }
+
+resource_schema "volcengine_transitrouter_transit_router_route_entry" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::TransitRouterRouteEntry"
+}
+
+resource_schema "volcengine_cr_name_space" {
+  cloudcontrol_type_name = "Volcengine::CR::NameSpace"
+}
+
+resource_schema "volcengine_clb_rule" {
+  cloudcontrol_type_name = "Volcengine::CLB::Rule"
+}
+
+resource_schema "volcengine_clb_certificate" {
+  cloudcontrol_type_name = "Volcengine::CLB::Certificate"
+}
+
+resource_schema "volcengine_clb_acl" {
+  cloudcontrol_type_name = "Volcengine::CLB::ACL"
+}
+
+resource_schema "volcengine_autoscaling_scaling_configuration" {
+  cloudcontrol_type_name = "Volcengine::AutoScaling::ScalingConfiguration"
+}
+
+resource_schema "volcengine_alb_listener" {
+  cloudcontrol_type_name = "Volcengine::ALB::Listener"
+}
+
+resource_schema "volcengine_vpc_prefix_list" {
+  cloudcontrol_type_name = "Volcengine::VPC::PrefixList"
+}
+
+resource_schema "volcengine_alb_acl" {
+  cloudcontrol_type_name = "Volcengine::ALB::ACL"
+}
+
+resource_schema "volcengine_alb_server_group" {
+  cloudcontrol_type_name = "Volcengine::ALB::ServerGroup"
+}
+
+resource_schema "volcengine_alb_load_balancer" {
+  cloudcontrol_type_name = "Volcengine::ALB::LoadBalancer"
+}
+
+resource_schema "volcengine_rdsmysql_database" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::Database"
+}
+
+resource_schema "volcengine_redis_instance" {
+  cloudcontrol_type_name = "Volcengine::Redis::Instance"
+}
+
+
+
+
+

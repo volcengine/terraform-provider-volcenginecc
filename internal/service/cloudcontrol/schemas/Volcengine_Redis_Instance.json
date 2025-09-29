@@ -1,0 +1,504 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AllowListIds",
+    "/properties/EngineVersion",
+    "/properties/Port",
+    "/properties/ProjectName",
+    "/properties/SubnetId",
+    "/properties/VpcId",
+    "/properties/ParameterGroupId",
+    "/properties/NoAuthMode",
+    "/properties/ShardedCluster",
+    "/properties/ConfigureNodes",
+    "/properties/NodeNumber"
+  ],
+  "definitions": {
+    "Capacity": {
+      "properties": {
+        "Total": {
+          "description": "当前实例的内存总容量。单位：MiB。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Used": {
+          "description": "当前实例已用容量。单位：MiB。",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ConfigureNode": {
+      "properties": {
+        "AZ": {
+          "description": "每个节点所属的可用区。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceShard": {
+      "description": "实例中所有 Shard 分片的详情列表。",
+      "properties": {
+        "NodeNumber": {
+          "description": "分片中的节点数量",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ServerNodes": {
+          "description": "分片中所有 Server 节点的详情列表。",
+          "items": {
+            "$ref": "#/definitions/ServerNode"
+          },
+          "type": "array"
+        },
+        "ShardId": {
+          "description": "分片 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ServerNode": {
+      "description": "分片中所有 Server 节点的详情列表。",
+      "properties": {
+        "CurrentRole": {
+          "description": "节点当前的角色。取值范围如下：PrimaryNode：主节点。SecondaryNode：从节点。",
+          "enum": [
+            "PrimaryNode",
+            "SecondaryNode"
+          ],
+          "type": "string"
+        },
+        "NodeId": {
+          "description": "节点 ID。",
+          "type": "string"
+        },
+        "Status": {
+          "description": "节点状态。取值范围如下：deploy：启动中。running：运行中。loading：数据加载中。error：错误。",
+          "enum": [
+            "deploy",
+            "running",
+            "loading",
+            "error"
+          ],
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "节点所在的可用区。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "标签键值对。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    },
+    "VisitAddr": {
+      "properties": {
+        "AddrType": {
+          "description": "连接地址类型，取值范围如下：Private：私网连接地址；Public：公网连接地址；DirectLink：直连地址。",
+          "type": "string"
+        },
+        "Address": {
+          "description": "IP 地址或者域名。",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "实例公网地址所绑定的EIP ID。仅当连接地址类型（即AddrType）为Public公网连接地址时，返回该参数。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口号。",
+          "type": "string"
+        },
+        "VIP": {
+          "description": "连接地址所对应的 IPv4 地址。",
+          "type": "string"
+        },
+        "VIPv6": {
+          "description": "连接地址所对应的 IPv6 地址。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "缓存数据库 Redis 版的基本单位是实例。实例是独立的、虚拟化的数据库运行环境，是多个数据节点与代理节点的集合，数据节点上运行 Redis 引擎。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "redis:CreateDBInstance",
+        "redis:DescribeDBInstances",
+        "redis:DescribeDBInstanceDetail",
+        "redis:DescribeNodeIds",
+        "redis:DescribeDBInstanceShards"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "redis:DeleteDBInstance",
+        "redis:DescribeDBInstanceDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "redis:DescribeDBInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "redis:DescribeDBInstances",
+        "redis:DescribeDBInstanceDetail",
+        "redis:DescribeNodeIds",
+        "redis:DescribeDBInstanceShards"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "redis:DescribeDBInstanceDetail",
+        "redis:ModifyDBInstanceName",
+        "redis:ModifyDBInstanceDeletionProtectionPolicy",
+        "redis:RemoveTagsFromResource",
+        "redis:AddTagsToResource",
+        "redis:ModifyDBInstanceShardCapacity",
+        "redis:ModifyDBInstanceShardNumber",
+        "redis:ModifyDBInstanceChargeType",
+        "redis:DescribeDBInstances",
+        "redis:DescribeNodeIds",
+        "redis:DescribeDBInstanceShards"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AllowListIds": {
+      "description": "白名单 ID 列表。若该参数留空，新建实例默认不加入任何白名单。您可以调用 DescribeAllowLists 接口查询当前账号下指定地域内的所有 IP 白名单信息，包括白名单 ID 信息。每个实例最多支持绑定 100 个白名单，每次可最多批量绑定 100 个白名单。每个实例最多支持绑定 1000 个 IP 地址或 CIDR 格式的 IP 地址段。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AutoRenew": {
+      "default": false,
+      "description": "是否开启自动续费。取值范围如下：false（默认值）：不开启。true：开启。",
+      "type": "boolean"
+    },
+    "BackupPointName": {
+      "description": "为变更前创建的全量备份设置备份名称。",
+      "type": "string"
+    },
+    "Capacity": {
+      "$ref": "#/definitions/Capacity",
+      "description": "实例的容量信息。"
+    },
+    "ChargeType": {
+      "description": "实例计费类型。取值范围如下：PrePaid：包年包月（也称预付费）。PostPaid：按量计费（也称后付费）。",
+      "enum": [
+        "PostPaid",
+        "PrePaid"
+      ],
+      "type": "string"
+    },
+    "ConfigureNodes": {
+      "description": "设置节点所属的可用区列表。",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/ConfigureNode"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "CreateBackup": {
+      "description": "是否在变更前创建备份。",
+      "type": "boolean"
+    },
+    "CreateTime": {
+      "description": "实例的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DataLayout": {
+      "description": "实例的数据存储形态。该参数仅对企业版（即ServiceType为Enterprise）实例有意义；社区版（即ServiceType为Basic）实例不涉及数据存储形态，DataLayout取值固定为RAM。若该参数留空，表示不使用数据存储形态进行筛选。",
+      "type": "string"
+    },
+    "DeletionProtection": {
+      "description": "开启或关闭实例删除保护功能。",
+      "enum": [
+        "disabled",
+        "enabled"
+      ],
+      "type": "string"
+    },
+    "EngineVersion": {
+      "description": "数据库版本号。",
+      "enum": [
+        "5.0",
+        "6.0",
+        "7.0"
+      ],
+      "type": "string"
+    },
+    "ExpiredTime": {
+      "description": "实例到期时间。",
+      "type": "string"
+    },
+    "InstanceClass": {
+      "description": "Redis 实例的类型。取值范围如下：PrimarySecondary：主备实例；Standalone：单节点实例。若该参数留空，表示不使用实例类型条件进行筛选。关于实例类型的更多信息，请参见产品架构。",
+      "enum": [
+        "PrimarySecondary",
+        "Standalone"
+      ],
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "实例名称。命名规则：不能以数字、中划线（-）开头；只能包含中文、字母、数字、下划线（_）和中划线（-）；长度需要在1~128个字符内。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceShards": {
+      "description": "实例中所有 Shard 分片的详情列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InstanceShard"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "MaintenanceTime": {
+      "description": "实例的可维护时间段，格式为HH:mm-HH:mm（UTC+8）。",
+      "type": "string"
+    },
+    "MaxConnections": {
+      "description": "实例当前单分片最大连接数。每分片的默认连接数为10000，您也可以根据业务需要调用ModifyDBInstanceMaxConn接口修改单分片的最大连接数。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "MultiAZ": {
+      "description": "设置实例的可用区部署方案。",
+      "enum": [
+        "disabled",
+        "enabled"
+      ],
+      "type": "string"
+    },
+    "NoAuthMode": {
+      "default": "close",
+      "description": "为新建实例开启或关闭免密访问功能。取值范围如下：open：开启免密访问。close（默认值）：关闭免密访问。",
+      "enum": [
+        "open",
+        "close"
+      ],
+      "type": "string"
+    },
+    "NodeIds": {
+      "description": " Proxy 和 Server 节点 ID 列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "NodeNumber": {
+      "description": "每个分片中的节点数。取值范围为1~6。每个账号在每个地域下默认最多可创建4个256MiB规格的节点，若需要调整配额上限为10个，请参见账号配额。取值为1时表示创建单节点实例；取值大于1时表示创建主备实例。关于两种类型实例的功能特性差异详情，请参见功能特性差异。",
+      "format": "int32",
+      "maximum": 6,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "ParameterGroupId": {
+      "description": "需要应用到新实例的参数模板。缓存数据库 Redis 版为每个数据库版本都创建了一份默认的系统参数模板，模板中包含了该版本支持设置的所有参数和默认参数值。若该参数留空，默认会根据您设置的数据库版本（即 EngineVersion）为新建实例选择并应用对应版本的系统参数模板。您可以调用 DescribeParameterGroups 接口查询当前账号和地域下的所有参数模板的基本信息，包括参数模板 ID。",
+      "type": "string"
+    },
+    "Password": {
+      "description": "设置默认数据库 default 账号的密码。",
+      "type": "string"
+    },
+    "Port": {
+      "description": "自定义私网连接地址的端口号。取值范围：1024~65535。若该参数留空，私网连接地址默认使用6379端口。实例创建成功后，还可以修改私网地址的端口号，修改方法请参见修改端口号。",
+      "format": "int32",
+      "maximum": 65535,
+      "minimum": 1024,
+      "type": "integer"
+    },
+    "PrivateAddress": {
+      "description": "实例私网连接地址的域名。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "实例所属的项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "PurchaseMonths": {
+      "description": "购买时长，单位：月。取值范围如下：按月购买：1，2，3，4，5，6，7，8，9。按年购买：12，24，36。当ChargeType为PrePaid时，该参数必填。",
+      "format": "int32",
+      "maximum": 36,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "ReserveAdditionalBandwidth": {
+      "description": "设置是否保留额外带宽",
+      "type": "boolean"
+    },
+    "ServiceType": {
+      "description": "实例的服务类型",
+      "enum": [
+        "Basic",
+        "Enterprise"
+      ],
+      "type": "string"
+    },
+    "ShardCapacity": {
+      "description": "实例中每个分片的内存容量。单位：MiB。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ShardNumber": {
+      "description": "实例中的分片数量。取值范围为 2~256。仅当 ShardedCluster 取值为 1（即启用分片集群）时，需要指定该参数。",
+      "format": "int32",
+      "maximum": 256,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "ShardedCluster": {
+      "description": "是否启用分片集群。取值范围如下：0：不启用。1：启用。",
+      "enum": [
+        0,
+        1
+      ],
+      "format": "int32",
+      "type": "integer"
+    },
+    "Status": {
+      "description": "实例的服务类型，取值范围如下：Basic（默认值）：社区版；Enterprise：企业版。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "设置实例的子网ID。子网具有可用区属性，必须选择目标私有网络中与实例属于同一可用区下的子网。子网是私有网络内的IP地址块私有网络中的所有云资源都必须部署在子网内，子网为云资源分配私网IP地址，您可以调用CreateSubnet接口创建子网。您可以调用DescribeSubnets接口查询指定可用区内的所有子网列表信息，包括子网ID。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "设置实例的标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "VIP": {
+      "description": "实例私网连接地址所对应的 IPv4 地址。",
+      "type": "string"
+    },
+    "VIPv6": {
+      "description": "实例私网连接地址所对应的 IPv6 地址。仅当实例使用了 IPv6 地址时才会返回该参数。",
+      "type": "string"
+    },
+    "VisitAddrs": {
+      "description": "连接地址信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/VisitAddr"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "VpcAuthMode": {
+      "description": "开启或关闭免密访问功能。取值范围如下：open：开启免密访问；close：关闭免密访问。参数取值不区分大小写。",
+      "enum": [
+        "open",
+        "close"
+      ],
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "设置实例的私有网络ID。建议Redis实例与需要连接的ECS实例在同一私有网络，否则它们无法通过内网互通来实现最佳性能。您可以调用CreateVpc接口创建私有网络。您可以调用DescribeVpcs接口查询符合指定条件的私有网络信息，包括私有网络ID。",
+      "type": "string"
+    },
+    "ZoneIds": {
+      "description": "实例所在的可用区列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Capacity",
+    "/properties/CreateTime",
+    "/properties/DataLayout",
+    "/properties/ExpiredTime",
+    "/properties/InstanceClass",
+    "/properties/InstanceId",
+    "/properties/PrivateAddress",
+    "/properties/ServiceType",
+    "/properties/Status",
+    "/properties/VIP",
+    "/properties/VIPv6",
+    "/properties/ZoneIds",
+    "/properties/MaintenanceTime",
+    "/properties/MaxConnections",
+    "/properties/VisitAddrs",
+    "/properties/VpcAuthMode",
+    "/properties/InstanceShards",
+    "/properties/NodeIds"
+  ],
+  "required": [
+    "EngineVersion",
+    "MultiAZ",
+    "NodeNumber",
+    "ShardedCluster",
+    "SubnetId",
+    "VpcId",
+    "ShardCapacity",
+    "ConfigureNodes"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Redis::Instance",
+  "writeOnlyProperties": [
+    "/properties/AllowListIds",
+    "/properties/BackupPointName",
+    "/properties/CreateBackup",
+    "/properties/NoAuthMode",
+    "/properties/ParameterGroupId",
+    "/properties/Password",
+    "/properties/Port",
+    "/properties/PurchaseMonths",
+    "/properties/ReserveAdditionalBandwidth"
+  ]
+}

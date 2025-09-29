@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_alb_server_group.example "server_group_id"

@@ -1,0 +1,404 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/Protocol",
+    "/properties/ServerGroupType",
+    "/properties/VpcId"
+  ],
+  "definitions": {
+    "HealthCheck": {
+      "properties": {
+        "Domain": {
+          "description": "健康检查的域名，需配置为后端服务器上真实对外提供服务的地址。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。需至少包含一个‘.’，且不允许以‘.’开头或结尾。域名每一级由字母、数字、‘-’、‘.’字符组成，且‘-’不得出现在每一级的头部或尾部。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为空，表示负载均衡使用各后端服务器的私网IP地址进行健康检查。",
+          "type": "string"
+        },
+        "Enabled": {
+          "default": "on",
+          "description": "监听器是否开启健康检查功能。取值：on：开启（默认值）。off：不开启。",
+          "enum": [
+            "on",
+            "off"
+          ],
+          "type": "string"
+        },
+        "HealthyThreshold": {
+          "default": 3,
+          "description": "健康检查的健康阈值。表示连续执行指定次数的健康检查，结果均为正常的后端服务器将判定为健康检查正常。单位：次，取值：2~10，默认值为 3。",
+          "format": "int64",
+          "maximum": 10,
+          "minimum": 2,
+          "type": "integer"
+        },
+        "HttpCode": {
+          "description": "健康检查正常的HTTP状态码，多个状态码间用半角逗号分隔。只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值如下：http_2xx（默认值）。http_3xx（默认值）。http_4xx 。http_5xx 。",
+          "type": "string"
+        },
+        "HttpVersion": {
+          "default": "HTTP1.0",
+          "description": "健康检查HTTP协议版本，只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值：HTTP1.0（使用API时，HTTP协议版本默认值）。HTTP1.1。",
+          "enum": [
+            "HTTP1.0",
+            "HTTP1.1"
+          ],
+          "type": "string"
+        },
+        "Interval": {
+          "default": 2,
+          "description": "开启健康检查后，执行健康检查的时间间隔。 单位：秒，取值：1~300s，默认值为 2。",
+          "format": "int64",
+          "maximum": 300,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "Method": {
+          "default": "HEAD",
+          "description": "开启健康检查后，健康检查的方法。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。取值如下：GET：服务器需支持GET方法。HEAD（默认）：服务器仅返回HEAD头部信息，可以降低后端性能消耗，但服务器需要支持HEAD方法。",
+          "enum": [
+            "GET",
+            "HEAD"
+          ],
+          "type": "string"
+        },
+        "Port": {
+          "description": "健康检查端口。支持取值：0（默认值）：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Protocol": {
+          "default": "HTTP",
+          "description": "健康检查协议，当前支持HTTP、TCP。默认值为 HTTP。",
+          "enum": [
+            "HTTP",
+            "TCP"
+          ],
+          "type": "string"
+        },
+        "Timeout": {
+          "default": 2,
+          "description": "健康检查的响应超时时间。表示如果后端服务器在指定的时间内没有正确响应，则判定为健康检查异常。单位：秒，取值：1~60，默认值为 2。",
+          "format": "int64",
+          "maximum": 60,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "URI": {
+          "description": "健康检查的路径，需配置为后端服务器上真实对外提供的路径。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘\u0026’、‘＝’ 字符。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为“/”。",
+          "type": "string"
+        },
+        "UnhealthyThreshold": {
+          "default": 3,
+          "description": "健康检查的不健康阈值。表示连续执行指定次数的健康检查，结果均为异常的后端服务器将判定为健康检查异常。单位：次，取值：2~10，默认值为 3。",
+          "format": "int64",
+          "maximum": 10,
+          "minimum": 2,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Port"
+      ],
+      "type": "object"
+    },
+    "Listener": {
+      "properties": {
+        "ListenerId": {
+          "description": "监听器的ID。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ListenerId"
+      ],
+      "type": "object"
+    },
+    "Server": {
+      "properties": {
+        "Description": {
+          "description": "后端服务器的描述。",
+          "type": "string"
+        },
+        "InstanceId": {
+          "description": "云服务器实例或网卡的ID。",
+          "type": "string"
+        },
+        "Ip": {
+          "description": "后端服务器的私网IP地址。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "后端服务器接收请求的端口号。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "RemoteEnabled": {
+          "default": "off",
+          "description": "是否开启远端IP功能。当后端服务器实例类型为IP地址，即 Type 取值为 ip 时，此字段有效。取值：on：开启。off（默认值）：不开启。",
+          "enum": [
+            "on",
+            "off"
+          ],
+          "type": "string"
+        },
+        "ServerId": {
+          "description": "后端服务器ID。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "后端服务器实例类型。ecs：云服务器实例。eni：辅助网卡。ip：IP地址（仅 Ip 类型服务器组有效）。",
+          "enum": [
+            "ecs",
+            "eni",
+            "ip"
+          ],
+          "type": "string"
+        },
+        "Weight": {
+          "description": "后端服务器的权重。",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "InstanceId",
+        "Type",
+        "Ip",
+        "Port"
+      ],
+      "type": "object"
+    },
+    "StickySessionConfig": {
+      "properties": {
+        "Cookie": {
+          "description": "服务配置的会话保持 Cookie 名称。仅在开启会话保持功能并选择重写 Cookie 时有效。 具体规则如下：Cookie 名称长度为1~200个字符。名称只能包含 ASCII 英文字母和数字字符，不能包含半角逗号（,）、半角分号（;）或空格，也不能以美元符号（$）开头。当 tickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 server时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，该参数无效。",
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string"
+        },
+        "CookieTimeout": {
+          "default": 1000,
+          "description": "会话保持 Cookie 超时时间。仅在开启会话保持功能并选择植入 Cookie 时有效。 单位：秒。具体规则如下：超时时间的取值范围：1～86400。 默认值为：1000。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionType 为 server 时，此参数无效。",
+          "format": "int64",
+          "maximum": 86400,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "StickySessionEnabled": {
+          "default": "off",
+          "description": "是否开启会话保持功能。on：开启；off（默认值）：关闭。",
+          "enum": [
+            "on",
+            "off"
+          ],
+          "type": "string"
+        },
+        "StickySessionType": {
+          "description": "对 Cookie 的处理方式。当 StickySessionConfig.StickySessionEnabled 值为 on 时，此字段参数必填。取值如下：insert：植入 Cookie；ALB 会记录客户端请求第一次转发到的后端服务器。ALB 在返回请求中植入 Cookie ，后续客户端请求携带此 Cookie，ALB 会将请求转发到之前记录的后端服务器上。server：重写 Cookie；开启重写 Cookie 的会话保持后，在客户端请求第一次转发到后端服务器后，ALB 在返回请求中发现您自定义的 Cookie 时，会对原来的 Cookie 进行重写。后续客户端请求携带改写后的 Cookie，ALB 会将请求转发到之前记录的后端服务器上。",
+          "enum": [
+            "insert",
+            "server"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "服务器组是后端服务器的逻辑集合。ALB 实例按照您配置的转发规则确定客户端请求将被转发到的服务器组。然后，ALB 实例根据您配置的负载均衡策略，将请求分发给服务器组内的后端服务器。后端服务器接收并处理请求。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "alb:CreateServerGroup",
+        "alb:DescribeServerGroups",
+        "alb:AddServerGroupBackendServers",
+        "alb:DescribeServerGroupAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "alb:DeleteServerGroup",
+        "alb:DescribeServerGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "alb:DescribeServerGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "alb:DescribeServerGroups",
+        "alb:DescribeServerGroupAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "alb:ModifyServerGroupAttributes",
+        "alb:RemoveServerGroupBackendServers",
+        "alb:ModifyServerGroupBackendServers",
+        "alb:AddServerGroupBackendServers",
+        "alb:UntagResources",
+        "alb:TagResources",
+        "alb:DescribeServerGroups",
+        "alb:DescribeServerGroupAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ServerGroupId"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "后端服务器组的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "后端服务器组的描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "HealthCheck": {
+      "$ref": "#/definitions/HealthCheck",
+      "description": "服务器组健康检查配置信息。",
+      "type": "object"
+    },
+    "IPAddressType": {
+      "description": "服务器组的IP地址类型。目前只支持 IPv4",
+      "type": "string"
+    },
+    "Listeners": {
+      "description": "后端服务器组关联的监听器信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Listener"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProjectName": {
+      "description": "后端服务器组所属项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Protocol": {
+      "description": "后端协议：HTTP，HTTPS。",
+      "enum": [
+        "HTTP",
+        "HTTPS"
+      ],
+      "type": "string"
+    },
+    "Scheduler": {
+      "default": "wrr",
+      "description": "调度算法。取值：wrr：加权轮询。wlc：加权最小连接数。sh：源地址哈希。",
+      "enum": [
+        "wrr",
+        "wlc",
+        "sh"
+      ],
+      "type": "string"
+    },
+    "ServerCount": {
+      "description": "服务器组内后端服务器的个数。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ServerGroupId": {
+      "description": "后端服务器组的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ServerGroupName": {
+      "description": "后端服务器组的名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ServerGroupType": {
+      "default": "instance",
+      "description": "后端服务器组的类型。instance：服务器类型，该类型服务器组支持添加 ecs、eni 实例作为后端服务器。ip：IP类型，该类型服务器组支持添加 IP 地址作为后端服务器。",
+      "enum": [
+        "instance",
+        "ip"
+      ],
+      "type": "string"
+    },
+    "Servers": {
+      "description": "后端服务器组中服务器的信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Server"
+      },
+      "maxItems": 200,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Status": {
+      "description": "服务器组状态。Creating：创建中。Active：运行中。Configuring：配置中。Deleting：删除中。",
+      "enum": [
+        "Creating",
+        "Active",
+        "Configuring",
+        "Deleting"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "StickySessionConfig": {
+      "$ref": "#/definitions/StickySessionConfig",
+      "description": "会话保持功能的参数信息。",
+      "type": "object"
+    },
+    "Tags": {
+      "description": "标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "后端服务器组的最近操作时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "后端服务器组所属 Vpc 的 ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ServerGroupId",
+    "/properties/ServerCount",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/Listeners"
+  ],
+  "required": [
+    "VpcId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::ALB::ServerGroup"
+}
