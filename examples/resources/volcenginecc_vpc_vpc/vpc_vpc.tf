@@ -1,7 +1,6 @@
 resource "volcenginecc_vpc_vpc" "VPCDemo" {
   cidr_block            = "192.168.0.0/24"
   support_ipv_4_gateway = true
-  enable_ipv_6          = false
   vpc_name              = "vpc-demo"
   description           = "VpcDemo Example"
   dns_servers = [

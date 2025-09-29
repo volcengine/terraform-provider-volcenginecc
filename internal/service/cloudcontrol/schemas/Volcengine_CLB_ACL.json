@@ -1,0 +1,221 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "AclEntry": {
+      "properties": {
+        "Description": {
+          "description": "IP条目的描述，默认值为空字符串。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。",
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string"
+        },
+        "Entry": {
+          "description": "IP条目的地址段，只支持CIDR地址。支持同时传入IPv4和IPv6条目。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Listener": {
+      "properties": {
+        "AclType": {
+          "description": "监听器对本访问控制策略组的控制方式。white：白名单。监听器监听CLB的流量时，CLB仅转发其白名单关联访问控制策略组中IP地址的请求。black：黑名单。监听器监听CLB的流量时，对于黑名单关联访问控制策略组中IP地址的请求，CLB拒绝转发。",
+          "enum": [
+            "white",
+            "black"
+          ],
+          "type": "string"
+        },
+        "ListenerId": {
+          "description": "监听器的ID。",
+          "type": "string"
+        },
+        "ListenerName": {
+          "description": "监听器的名称。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "监听器的端口。",
+          "format": "int64",
+          "maximum": 65535,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "Protocol": {
+          "description": "监听器的协议。",
+          "enum": [
+            "TCP",
+            "UDP",
+            "HTTP",
+            "HTTPS"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "CLB提供监听级别的访问控制，如果您希望仅允许某些IP、或仅拒绝某些IP通过监听端口访问CLB实例，可以对该监听器设置访问控制策略。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "clb:CreateAcl",
+        "clb:AddAclEntries",
+        "clb:DescribeAclAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "clb:DeleteAcl",
+        "clb:DescribeAclAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "clb:DescribeAcls"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "clb:DescribeAclAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "clb:ModifyAclAttributes",
+        "clb:DescribeAclAttributes",
+        "clb:RemoveAclEntries",
+        "clb:AddAclEntries",
+        "clb:TagResources",
+        "clb:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AclId"
+  ],
+  "properties": {
+    "AclEntries": {
+      "description": "访问控制策略组中IP条目的详细信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AclEntry"
+      },
+      "maxItems": 300,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AclEntryCount": {
+      "description": "访问控制策略组包含的IP条目数量。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AclId": {
+      "description": "访问控制策略组的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AclName": {
+      "description": "访问控制策略组的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填默认为访问控制策略组ID。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "访问控制策略组的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "访问控制策略组的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255字符。不填则默认为空字符串。",
+      "maxLength": 255,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "Listeners": {
+      "description": "访问控制策略组关联的监听器的详细信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Listener"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "访问控制策略组所属项目的名称。不填默认为default。",
+      "type": "string"
+    },
+    "ServiceManaged": {
+      "description": "是否为托管资源。true：是。false：否。",
+      "type": "boolean"
+    },
+    "Status": {
+      "description": "访问控制策略组的状态。Creating：创建中。Active：正常可用。Configuring：配置中。Deleting：删除中。",
+      "enum": [
+        "Creating",
+        "Active",
+        "Configuring",
+        "Deleting"
+      ],
+      "type": "string"
+    },
+    "Tags": {
+      "description": "访问控制策略组标签的详细信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "访问控制策略组的最近操作时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AclId",
+    "/properties/AclEntryCount",
+    "/properties/Listeners",
+    "/properties/ServiceManaged",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/Status"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::CLB::ACL"
+}

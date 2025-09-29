@@ -1,0 +1,529 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/VpcId",
+    "/properties/EipBillingConfig",
+    "/properties/Ipv6EipBillingConfig",
+    "/properties/ZoneMappings",
+    "/properties/Type",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Eip": {
+      "description": "弹性公网IP（EIP）的属性集合。",
+      "properties": {
+        "AssociationMode": {
+          "description": "EIP的绑定模式，例如Default或Normal。",
+          "enum": [
+            "Default",
+            "Normal",
+            ""
+          ],
+          "type": "string"
+        },
+        "Bandwidth": {
+          "description": "EIP的带宽峰值，单位为Mbps。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "EipAddress": {
+          "description": "弹性公网IP（EIP）的地址。",
+          "type": "string"
+        },
+        "EipBillingType": {
+          "description": "EIP的计费方式，2为按带宽计费，3为按流量计费。",
+          "enum": [
+            2,
+            3
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "EipType": {
+          "description": "EIP的类型，例如静态BGP。",
+          "type": "string"
+        },
+        "ISP": {
+          "description": "公网IP的线路类型，BGP表示多线。",
+          "enum": [
+            "BGP"
+          ],
+          "type": "string"
+        },
+        "PopLocations": {
+          "description": "EIP的接入点位置信息列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PopLocation"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "EipBillingConfig": {
+      "description": "弹性公网IP（EIP）的详细计费配置。",
+      "properties": {
+        "Bandwidth": {
+          "default": 1,
+          "description": "EIP的带宽峰值，单位为Mbps。",
+          "format": "int64",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "BillingType": {
+          "default": 2,
+          "description": "EIP的计费方式，2为按带宽计费，3为按流量计费。",
+          "enum": [
+            2,
+            3
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "ISP": {
+          "default": "BGP",
+          "description": "公网IP的线路类型，BGP表示多线。",
+          "enum": [
+            "BGP"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GlobalAccelerator": {
+      "description": "全球加速器（GA）的详细配置信息。",
+      "properties": {
+        "AcceleratorId": {
+          "description": "绑定的全球加速实例的ID。",
+          "type": "string"
+        },
+        "AcceleratorListenerId": {
+          "description": "绑定的全球加速监听器的ID。",
+          "type": "string"
+        },
+        "EndpointGroupId": {
+          "description": "绑定的终端节点组的ID。",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "后端服务器的权重，决定流量分发比例。",
+          "format": "int64",
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Ipv6Eip": {
+      "description": "IPv6弹性公网IP的属性集合。",
+      "properties": {
+        "Bandwidth": {
+          "description": "IPv6 EIP的带宽峰值，单位为Mbps。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "BillingType": {
+          "description": "IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。",
+          "enum": [
+            2,
+            3
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "ISP": {
+          "description": "IPv6公网IP的线路类型，BGP表示多线。",
+          "enum": [
+            "BGP"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Ipv6EipBillingConfig": {
+      "description": "IPv6弹性公网IP的详细计费配置。",
+      "properties": {
+        "Bandwidth": {
+          "default": 1,
+          "description": "IPv6 EIP的带宽峰值，单位为Mbps。",
+          "format": "int64",
+          "maximum": 500,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "BillingType": {
+          "default": 3,
+          "description": "IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。",
+          "enum": [
+            2,
+            3
+          ],
+          "format": "int64",
+          "type": "integer"
+        },
+        "ISP": {
+          "default": "BGP",
+          "description": "IPv6公网IP的线路类型，BGP表示多线。",
+          "enum": [
+            "BGP"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LoadBalancerAddress": {
+      "description": "负载均衡提供的IP地址的详细信息。",
+      "properties": {
+        "Eip": {
+          "$ref": "#/definitions/Eip",
+          "description": "弹性公网IP（EIP）的详细信息。"
+        },
+        "EipAddress": {
+          "description": "绑定的弹性公网IP（EIP）的地址。",
+          "semantic": "publicIp",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "绑定的弹性公网IP（EIP）的ID。",
+          "type": "string"
+        },
+        "EniAddress": {
+          "description": "弹性网卡（ENI）上的私网IP地址。",
+          "semantic": "privateIp",
+          "type": "string"
+        },
+        "EniId": {
+          "description": "IP地址所属的弹性网卡（ENI）的ID。",
+          "type": "string"
+        },
+        "EniIpv6Address": {
+          "description": "弹性网卡（ENI）上的IPv6私网地址。",
+          "type": "string"
+        },
+        "Ipv6Eip": {
+          "$ref": "#/definitions/Ipv6Eip",
+          "description": "IPv6弹性公网IP的详细信息。"
+        },
+        "Ipv6EipId": {
+          "description": "绑定的IPv6 EIP的ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PopLocation": {
+      "description": "公网IP的接入点（PoP）位置信息。",
+      "properties": {
+        "PopId": {
+          "description": "接入点（PoP）的唯一ID。",
+          "type": "string"
+        },
+        "PopName": {
+          "description": "接入点（PoP）的名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "资源的标签，由键值对组成。",
+      "properties": {
+        "Key": {
+          "description": "标签的键，用于标识标签的类别。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签的值，用于标识具体的标签内容。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    },
+    "ZoneMapping": {
+      "description": "可用区和子网的映射关系定义。",
+      "properties": {
+        "LoadBalancerAddresses": {
+          "description": "该可用区下负载均衡提供的IP地址列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/LoadBalancerAddress"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "SubnetId": {
+          "description": "可用区内提供服务的子网ID。",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "可用区的唯一标识符。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "SubnetId",
+        "ZoneId"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "应用型负载均衡（ALB）是对“七层”网络协议的流量进行分发的服务。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "alb:CreateLoadBalancer",
+        "alb:DescribeLoadBalancers",
+        "alb:ModifyLoadBalancerAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "alb:DescribeLoadBalancers",
+        "alb:DeleteLoadBalancer"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "alb:DescribeLoadBalancers"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "alb:DescribeLoadBalancers"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "alb:ModifyLoadBalancerAttributes",
+        "alb:TagResources",
+        "alb:UntagResources",
+        "alb:DescribeLoadBalancers"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/LoadBalancerId"
+  ],
+  "properties": {
+    "AddressIpVersion": {
+      "default": "IPv4",
+      "description": "ALB 实例的 IP 类型。IPv4：IPv4 类型；DualStack：IPv4\u0026IPv6 双栈类型。",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "type": "string"
+    },
+    "BandwidthPackageId": {
+      "description": "绑定的共享带宽包ID，可实现带宽共享。",
+      "type": "string"
+    },
+    "BusinessStatus": {
+      "description": "ALB 实例的服务状态。Normal：正常；FinancialLocked：因欠费被锁定。",
+      "enum": [
+        "Normal",
+        "FinancialLocked",
+        ""
+      ],
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "ALB 实例的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeleteProtection": {
+      "default": "off",
+      "description": "删除保护开关。on：开启；off：关闭。",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "ALB 实例的预期回收时间。该参数只有实例处于 FinancialLocked 状态时有返回值。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "ALB 实例的描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DnsName": {
+      "description": "DNS域名。",
+      "type": "string"
+    },
+    "EipBillingConfig": {
+      "$ref": "#/definitions/EipBillingConfig",
+      "description": "公网IP的计费配置，仅适用于公网实例。"
+    },
+    "GlobalAccelerator": {
+      "$ref": "#/definitions/GlobalAccelerator",
+      "description": "全球加速器配置，用于提升跨地域访问速度。"
+    },
+    "Ipv6EipBillingConfig": {
+      "$ref": "#/definitions/Ipv6EipBillingConfig",
+      "description": "IPv6公网IP的计費配置，仅适用于公网实例。"
+    },
+    "LoadBalancerBillingType": {
+      "default": 1,
+      "description": "ALB实例计费类型，当前仅支持按量计费（取值为1）。",
+      "enum": [
+        1
+      ],
+      "format": "int64",
+      "type": "integer"
+    },
+    "LoadBalancerEdition": {
+      "default": "Basic",
+      "description": "应用型负载均衡的版本。Basic：基础版；Standard：标准版。",
+      "enum": [
+        "Basic",
+        "Standard"
+      ],
+      "type": "string"
+    },
+    "LoadBalancerId": {
+      "description": "ALB 实例 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "LoadBalancerName": {
+      "description": "ALB 实例的名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "LockReason": {
+      "description": "ALB 实例被冻结的原因，例如 Financial（欠费）或 Security（安全原因）。仅在实例被锁定时返回。",
+      "type": "string"
+    },
+    "ModificationProtectionReason": {
+      "description": "修改保护原因。仅在 ModificationProtectionStatus 为 ConsoleProtection 时，该参数有效且合法。",
+      "type": "string"
+    },
+    "ModificationProtectionStatus": {
+      "default": "NonProtection",
+      "description": "修改保护状态。NonProtection：不保护；ConsoleProtection：控制台修改保护，通过控制台无法修改实例配置。",
+      "enum": [
+        "",
+        "NonProtection",
+        "ConsoleProtection"
+      ],
+      "type": "string"
+    },
+    "OverdueTime": {
+      "description": "ALB 实例的冻结时间。该参数只有实例处于 FinancialLocked 状态时有返回值。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "实例所属项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "ALB 实例状态：Active（运行中）、Provisioning（创建中）、Configuring（配置中）、Deleting（删除中）、CreateFailed（创建失败）、Inactive（已停止）。",
+      "enum": [
+        "Active",
+        "Provisioning",
+        "Configuring",
+        "Deleting",
+        "CreateFailed",
+        "Inactive"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "为实例绑定的标签列表，用于分类和计费。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Type": {
+      "description": "ALB 实例的类型。取值是 public 或 private 。public：表示创建一个公网负载均衡实例，系统会分配一个公网IP地址和一个私网IP地址，可用于转发公网请求和私网请求。private：表示创建一个私网负载均衡实例，系统会分配一个私网IP地址，仅用于转发私网请求。",
+      "enum": [
+        "public",
+        "private"
+      ],
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "ALB 实例的最后更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "负载均衡实例所属的私有网络（VPC）的ID。",
+      "type": "string"
+    },
+    "WafInstanceId": {
+      "description": "ALB 实例绑定的 WAF 安全防护实例 ID。",
+      "type": "string"
+    },
+    "WafProtectedDomain": {
+      "description": "WAF防护的域名，用于精确匹配防护规则。",
+      "type": "string"
+    },
+    "WafProtectionEnabled": {
+      "description": "WAF 安全防护开关。on：开启；off：关闭。",
+      "enum": [
+        "off",
+        "on"
+      ],
+      "type": "string"
+    },
+    "ZoneMappings": {
+      "description": "可用区映射列表，定义了实例在哪些可用区提供服务。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ZoneMapping"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/LoadBalancerId",
+    "/properties/Status",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/BusinessStatus",
+    "/properties/LockReason",
+    "/properties/OverdueTime",
+    "/properties/DeletedTime",
+    "/properties/DnsName"
+  ],
+  "required": [
+    "Type",
+    "VpcId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::ALB::LoadBalancer",
+  "writeOnlyProperties": [
+    "/properties/WafProtectedDomain",
+    "/properties/GlobalAccelerator",
+    "/properties/EipBillingConfig",
+    "/properties/Ipv6EipBillingConfig",
+    "/properties/BandwidthPackageId"
+  ]
+}

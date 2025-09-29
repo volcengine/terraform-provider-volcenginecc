@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_clb_rule.example "listener_id|rule_id"

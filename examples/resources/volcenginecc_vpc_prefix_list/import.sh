@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_prefix_list.example "prefix_list_id"

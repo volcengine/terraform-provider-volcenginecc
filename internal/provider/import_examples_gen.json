@@ -148,5 +148,70 @@
         "resource": "volcenginecc_alb_certificate",
         "identifier": ["CertificateId","CertificateType"],
         "path": "./examples/resources/volcenginecc_alb_certificate/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_transit_router_route_entry",
+        "identifier": ["TransitRouterRouteTableId","TransitRouterRouteEntryId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_transit_router_route_entry/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cr_name_space",
+        "identifier": ["Name","Registry"],
+        "path": "./examples/resources/volcenginecc_cr_name_space/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_rule",
+        "identifier": ["ListenerId","RuleId"],
+        "path": "./examples/resources/volcenginecc_clb_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_certificate",
+        "identifier": ["CertificateId"],
+        "path": "./examples/resources/volcenginecc_clb_certificate/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_acl",
+        "identifier": ["AclId"],
+        "path": "./examples/resources/volcenginecc_clb_acl/import.sh"
+    },
+    {
+        "resource": "volcenginecc_autoscaling_scaling_configuration",
+        "identifier": ["ScalingConfigurationId"],
+        "path": "./examples/resources/volcenginecc_autoscaling_scaling_configuration/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_listener",
+        "identifier": ["ListenerId"],
+        "path": "./examples/resources/volcenginecc_alb_listener/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_prefix_list",
+        "identifier": ["PrefixListId"],
+        "path": "./examples/resources/volcenginecc_vpc_prefix_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_acl",
+        "identifier": ["AclId"],
+        "path": "./examples/resources/volcenginecc_alb_acl/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_server_group",
+        "identifier": ["ServerGroupId"],
+        "path": "./examples/resources/volcenginecc_alb_server_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_load_balancer",
+        "identifier": ["LoadBalancerId"],
+        "path": "./examples/resources/volcenginecc_alb_load_balancer/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_database",
+        "identifier": ["InstanceId","Name"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_database/import.sh"
+    },
+    {
+        "resource": "volcenginecc_redis_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_redis_instance/import.sh"
     }
 ]

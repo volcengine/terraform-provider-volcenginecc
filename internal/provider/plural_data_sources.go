@@ -32,17 +32,33 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_server_groups -cctype Volcengine::CLB::ServerGroup -package clb ../volcengine/clb/server_group_plural_data_source_gen.go ../volcengine/clb/server_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpc_bandwidth_packages -cctype Volcengine::VPC::BandwidthPackage -package vpc ../volcengine/vpc/bandwidth_package_plural_data_source_gen.go ../volcengine/vpc/bandwidth_package_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_alb_certificates -cctype Volcengine::ALB::Certificate -package alb ../volcengine/alb/certificate_plural_data_source_gen.go ../volcengine/alb/certificate_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_transitrouter_transit_router_route_entries -cctype Volcengine::TransitRouter::TransitRouterRouteEntry -package transitrouter ../volcengine/transitrouter/transit_router_route_entry_plural_data_source_gen.go ../volcengine/transitrouter/transit_router_route_entry_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cr_name_spaces -cctype Volcengine::CR::NameSpace -package cr ../volcengine/cr/name_space_plural_data_source_gen.go ../volcengine/cr/name_space_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_rules -cctype Volcengine::CLB::Rule -package clb ../volcengine/clb/rule_plural_data_source_gen.go ../volcengine/clb/rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_certificates -cctype Volcengine::CLB::Certificate -package clb ../volcengine/clb/certificate_plural_data_source_gen.go ../volcengine/clb/certificate_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_acls -cctype Volcengine::CLB::ACL -package clb ../volcengine/clb/acl_plural_data_source_gen.go ../volcengine/clb/acl_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_autoscaling_scaling_configurations -cctype Volcengine::AutoScaling::ScalingConfiguration -package autoscaling ../volcengine/autoscaling/scaling_configuration_plural_data_source_gen.go ../volcengine/autoscaling/scaling_configuration_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_alb_listeners -cctype Volcengine::ALB::Listener -package alb ../volcengine/alb/listener_plural_data_source_gen.go ../volcengine/alb/listener_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpc_prefix_lists -cctype Volcengine::VPC::PrefixList -package vpc ../volcengine/vpc/prefix_list_plural_data_source_gen.go ../volcengine/vpc/prefix_list_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_alb_acls -cctype Volcengine::ALB::ACL -package alb ../volcengine/alb/acl_plural_data_source_gen.go ../volcengine/alb/acl_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_alb_server_groups -cctype Volcengine::ALB::ServerGroup -package alb ../volcengine/alb/server_group_plural_data_source_gen.go ../volcengine/alb/server_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_alb_load_balancers -cctype Volcengine::ALB::LoadBalancer -package alb ../volcengine/alb/load_balancer_plural_data_source_gen.go ../volcengine/alb/load_balancer_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmysql_databases -cctype Volcengine::RDSMySQL::Database -package rdsmysql ../volcengine/rdsmysql/database_plural_data_source_gen.go ../volcengine/rdsmysql/database_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_redis_instances -cctype Volcengine::Redis::Instance -package redis ../volcengine/redis/instance_plural_data_source_gen.go ../volcengine/redis/instance_plural_data_source_gen_test.go
 
 package provider
 
 import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/alb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
