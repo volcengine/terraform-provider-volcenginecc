@@ -213,5 +213,10 @@
         "resource": "volcenginecc_redis_instance",
         "identifier": ["InstanceId"],
         "path": "./examples/resources/volcenginecc_redis_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_listener",
+        "identifier": ["ListenerId"],
+        "path": "./examples/resources/volcenginecc_clb_listener/import.sh"
     }
 ]

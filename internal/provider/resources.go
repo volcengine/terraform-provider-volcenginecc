@@ -45,6 +45,7 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_alb_load_balancer -ccschema ../service/cloudcontrol/schemas/Volcengine_ALB_LoadBalancer.json -package alb -- ../volcengine/alb/load_balancer_resource_gen.go ../volcengine/alb/load_balancer_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_rdsmysql_database -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSMySQL_Database.json -package rdsmysql -- ../volcengine/rdsmysql/database_resource_gen.go ../volcengine/rdsmysql/database_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_redis_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_Redis_Instance.json -package redis -- ../volcengine/redis/instance_resource_gen.go ../volcengine/redis/instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_clb_listener -ccschema ../service/cloudcontrol/schemas/Volcengine_CLB_Listener.json -package clb -- ../volcengine/clb/listener_resource_gen.go ../volcengine/clb/listener_resource_gen_test.go
 
 package provider
 

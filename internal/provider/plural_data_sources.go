@@ -45,6 +45,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_alb_load_balancers -cctype Volcengine::ALB::LoadBalancer -package alb ../volcengine/alb/load_balancer_plural_data_source_gen.go ../volcengine/alb/load_balancer_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmysql_databases -cctype Volcengine::RDSMySQL::Database -package rdsmysql ../volcengine/rdsmysql/database_plural_data_source_gen.go ../volcengine/rdsmysql/database_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_redis_instances -cctype Volcengine::Redis::Instance -package redis ../volcengine/redis/instance_plural_data_source_gen.go ../volcengine/redis/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_listeners -cctype Volcengine::CLB::Listener -package clb ../volcengine/clb/listener_plural_data_source_gen.go ../volcengine/clb/listener_plural_data_source_gen_test.go
 
 package provider
 
