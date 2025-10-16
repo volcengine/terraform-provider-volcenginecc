@@ -187,6 +187,10 @@ resource_schema "volcengine_redis_instance" {
 }
 
 
+resource_schema "volcengine_clb_listener" {
+  cloudcontrol_type_name = "Volcengine::CLB::Listener"
+}
+
 
 
 
