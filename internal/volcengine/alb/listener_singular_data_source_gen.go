@@ -103,7 +103,6 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "alb",
 		//	  "description": "HTTPS 监听器关联的 CA 证书的来源，用于双向认证。alb（默认）：表示通过 ALB 上传的证书。标准版 ALB 实例不支持此来源的证书。pca_root：表示通过火山引擎证书中心购买或上传的私有根 CA 证书。pca_sub：表示通过火山引擎证书中心购买或上传的私有子 CA 证书。",
 		//	  "enum": [
 		//	    "alb",
@@ -296,7 +295,6 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "off",
 		//	  "description": "HTTP2.0 特性开关，该参数仅对 HTTPS 监听器有效。取值如下：on：开启。off：关闭（默认）。",
 		//	  "enum": [
 		//	    "on",
@@ -312,7 +310,6 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "off",
 		//	  "description": "QUIC 特性开关，该参数仅对 HTTPS 监听器有效，取值如下：on：开启。off：关闭（默认）。只有标准版 ALB 实例支持 QUIC。",
 		//	  "enum": [
 		//	    "on",

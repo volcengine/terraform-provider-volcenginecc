@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ecs_instance.example "instance_id"

@@ -43,6 +43,7 @@ Data Source schema for Volcengine::StorageEBS::Volume
 - `snapshot_count` (Number) 快照计数
 - `source_snapshot_id` (String) 源快照。
 - `status` (String) 云盘状态
+- `tags` (Attributes Set) 云盘的标签信息 (see [below for nested schema](#nestedatt--tags))
 - `total_performance` (Attributes) 总性能。 (see [below for nested schema](#nestedatt--total_performance))
 - `trade_status` (Number) 交易状态 0：创建中 1：运行中 2：创建失败
 - `updated_at` (String) 云盘更新时间。
@@ -68,6 +69,15 @@ Read-Only:
 - `extra_performance_type_id` (String) 额外性能的类型，取值如下：Balance：均衡型额外性能；IOPS：IOPS型额外性能；Throughput：吞吐量型额外性能。
 - `iops` (Number) 云盘的额外IOPS。
 - `throughput` (Number) 云盘的额外吞吐量。
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) 标签键。
+- `value` (String) 标签值。
 
 
 <a id="nestedatt--total_performance"></a>
