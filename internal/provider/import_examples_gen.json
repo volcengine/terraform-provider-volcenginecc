@@ -218,5 +218,10 @@
         "resource": "volcenginecc_clb_listener",
         "identifier": ["ListenerId"],
         "path": "./examples/resources/volcenginecc_clb_listener/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_ecs_instance/import.sh"
     }
 ]

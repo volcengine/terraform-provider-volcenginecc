@@ -40,6 +40,24 @@
       },
       "type": "object"
     },
+    "Tag": {
+      "description": "标签",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    },
     "TotalPerformance": {
       "description": "总性能。",
       "properties": {
@@ -83,8 +101,6 @@
     "update": {
       "permissions": [
         "storage_ebs:DescribeVolumes",
-        "storage_ebs:DeleteTags",
-        "storage_ebs:CreateTags",
         "storage_ebs:ApplyAutoSnapshotPolicy",
         "storage_ebs:CancelAutoSnapshotPolicy",
         "storage_ebs:ModifyVolumeAttribute",
@@ -217,6 +233,16 @@
       ],
       "semantic": "status",
       "type": "string"
+    },
+    "Tags": {
+      "description": "云盘的标签信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
     },
     "TotalPerformance": {
       "$ref": "#/definitions/TotalPerformance",

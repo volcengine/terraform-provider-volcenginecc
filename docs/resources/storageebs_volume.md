@@ -42,6 +42,8 @@ resource "volcenginecc_storageebs_volume" "VolumeDemo" {
 - `pay_type` (String) 付费类型，说明如下： Pre：预付费（包年包月） Post：后付费（按量计费）。
 - `project_name` (String) 云盘所要加入的Project（项目）名称。
 - `source_snapshot_id` (String) 源快照。
+- `tags` (Attributes Set) 云盘的标签信息
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -71,6 +73,15 @@ Optional:
 - `extra_performance_type_id` (String) 额外性能的类型，取值如下：Balance：均衡型额外性能；IOPS：IOPS型额外性能；Throughput：吞吐量型额外性能。
 - `iops` (Number) 云盘的额外IOPS。
 - `throughput` (Number) 云盘的额外吞吐量。
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) 标签键。
+- `value` (String) 标签值。
 
 
 <a id="nestedatt--baseline_performance"></a>

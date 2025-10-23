@@ -191,6 +191,9 @@ resource_schema "volcengine_clb_listener" {
   cloudcontrol_type_name = "Volcengine::CLB::Listener"
 }
 
+resource_schema "volcengine_ecs_instance" {
+  cloudcontrol_type_name = "Volcengine::ECS::Instance"
+}
 
 
 

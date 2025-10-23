@@ -16,10 +16,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
+	fwvalidators "github.com/volcengine/terraform-provider-volcenginecc/internal/validators"
 )
 
 func init() {
@@ -446,6 +448,69 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "云盘的标签信息",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "标签",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "标签键。",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "标签值。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签键。",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签值。",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "云盘的标签信息\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TotalPerformance
 		// Cloud Control resource type schema:
 		//
@@ -619,6 +684,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"image_id":                  "ImageId",
 		"instance_id":               "InstanceId",
 		"iops":                      "IOPS",
+		"key":                       "Key",
 		"kind":                      "Kind",
 		"overdue_reclaim_time":      "OverdueReclaimTime",
 		"overdue_time":              "OverdueTime",
@@ -629,10 +695,12 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"snapshot_count":            "SnapshotCount",
 		"source_snapshot_id":        "SourceSnapshotId",
 		"status":                    "Status",
+		"tags":                      "Tags",
 		"throughput":                "Throughput",
 		"total_performance":         "TotalPerformance",
 		"trade_status":              "TradeStatus",
 		"updated_at":                "UpdatedAt",
+		"value":                     "Value",
 		"volume_id":                 "VolumeId",
 		"volume_name":               "VolumeName",
 		"volume_type":               "VolumeType",

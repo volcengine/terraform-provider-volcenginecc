@@ -340,6 +340,51 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "云盘状态",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "云盘的标签信息",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "标签",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "标签键。",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "标签值。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签键。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签值。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "云盘的标签信息",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TotalPerformance
 		// Cloud Control resource type schema:
 		//
@@ -483,6 +528,7 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"image_id":                  "ImageId",
 		"instance_id":               "InstanceId",
 		"iops":                      "IOPS",
+		"key":                       "Key",
 		"kind":                      "Kind",
 		"overdue_reclaim_time":      "OverdueReclaimTime",
 		"overdue_time":              "OverdueTime",
@@ -493,10 +539,12 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"snapshot_count":            "SnapshotCount",
 		"source_snapshot_id":        "SourceSnapshotId",
 		"status":                    "Status",
+		"tags":                      "Tags",
 		"throughput":                "Throughput",
 		"total_performance":         "TotalPerformance",
 		"trade_status":              "TradeStatus",
 		"updated_at":                "UpdatedAt",
+		"value":                     "Value",
 		"volume_id":                 "VolumeId",
 		"volume_name":               "VolumeName",
 		"volume_type":               "VolumeType",
