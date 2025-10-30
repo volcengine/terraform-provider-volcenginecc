@@ -1,0 +1,169 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectId",
+    "/properties/ShardCount"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tls:CreateTopic",
+        "tls:DescribeTopic"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tls:DescribeTopic",
+        "tls:DeleteTopic"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "tls:DescribeTopics"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tls:DescribeTopic"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tls:DescribeTopic",
+        "tls:ModifyTopic",
+        "tls:AddTagsToResource",
+        "tls:RemoveTagsFromResource"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TopicID"
+  ],
+  "properties": {
+    "ArchiveTtl": {
+      "description": "归档存储时长。该时长取值范围为 60~3650。满足如下任一条件时，可实现归档存储。标准存储时长 30 天及以上。标准存储时长 7 天及以上且低频存储时长 30 天及以上。此参数仅在 EnableHotTtl 为 true 时生效。",
+      "maximum": 3650,
+      "type": "integer"
+    },
+    "AutoSplit": {
+      "description": "是否开启分区的自动分裂功能。true：当写入的数据量连续 5 分钟超过已有分区服务能力时，日志服务会根据数据量自动分裂分区以满足业务需求，但分裂后的分区数量不可超出最大分裂数。最近 15 分钟内分裂出来的新分区不会自动分裂。false：不开启分区的自动分裂。",
+      "type": "boolean"
+    },
+    "ColdTtl": {
+      "description": "低频存储时长。该时长取值范围为 30~3650。标准存储时长 7 天及以上可实现低频存储。此参数仅在 EnableHotTtl 为 true 时生效。",
+      "maximum": 3650,
+      "type": "integer"
+    },
+    "CreatedTime": {
+      "description": "日志主题创建时间。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "日志主题描述信息。不支持 \u003c\u003e、'、\\、\\\\、所有 emoji 表情符号。长度为 0~64 个字符。",
+      "maxLength": 64,
+      "type": "string"
+    },
+    "EnableHotTtl": {
+      "description": "是否开启分层存储。开启后，日志服务支持标准存储、低频存储和归档存储。设置 HotTtl、ArchiveTtl、ColdTtl 后，如果数据存储时间超过对应时长，那么数据会自动沉降至低频存储、归档存储进行后续保存，直到日志采集到服务端的总时长达到 Ttl 时，被后端服务自动清理。",
+      "type": "boolean"
+    },
+    "EnableTracking": {
+      "description": "是否开启 WebTracking 功能，开启后，可以通过 WebTracking 快速采集前端埋点数据。true：开启 WebTracking功能。false：（默认）关闭 WebTracking 功能。为日志主题开启 Web Tracking 后，通过 API 接口 WebTracks 写入数据时无需经过鉴权，相当于面向公网开放了匿名写入权限，可能产生脏数据。",
+      "type": "boolean"
+    },
+    "HotTtl": {
+      "description": "标准存储时长。该时长默认为 30 天，取值范围为 7~3650。此参数仅在 EnableHotTtl 为 true 时生效。",
+      "maximum": 3650,
+      "type": "integer"
+    },
+    "LogPublicIP": {
+      "description": "是否开启记录外网 IP 功能。默认为开启状态。开启后日志服务会自动在日志内容中添加以下元数据字段。__tag____client_ip__：日志来源设备的公网 IP 地址。使用日志服务的私网域名写入日志数据时，则记录私网 IP 地址。__tag____receive_time__：日志达到服务端的时间，格式为 10 位的 Unixtime 时间戳。",
+      "type": "boolean"
+    },
+    "MaxSplitShard": {
+      "description": "分区的最大分裂数，即分区分裂后，所有分区的最大数量。取值范围为 1~256，默认为 256。仅在开启自动分裂日志分区，即 AutoSplit 为 true 时必选。MaxSplitShard 必须大于指定的 ShardCount，否则日志服务无法自动分裂分区。",
+      "maximum": 256,
+      "type": "integer"
+    },
+    "ProjectId": {
+      "description": "日志主题所属的日志项目 ID。",
+      "type": "string"
+    },
+    "ShardCount": {
+      "description": "日志分区的数量，默认创建 1 个分区，取值范围为 1～10。 每个分区提供的写入能力为 5MiB/s、500 次/s，读取能力为 20 MiB/s、100 次/s。请在创建日志主题时合理规划分区，创建后暂不支持修改分区数量。",
+      "type": "integer"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TimeFormat": {
+      "description": "时间格式",
+      "type": "string"
+    },
+    "TimeKey": {
+      "description": "时间字段名",
+      "type": "string"
+    },
+    "TopicID": {
+      "description": "日志主题 ID。",
+      "type": "string"
+    },
+    "TopicName": {
+      "description": "日志主题名称。",
+      "type": "string"
+    },
+    "Ttl": {
+      "default": 30,
+      "description": "日志在日志服务中的总保存时间，超过指定的日志存储时长后，此日志主题中的过期日志会被自动清除。单位为天，默认为 30 天。取值范围为 1～3650，指定为 3650 天表示永久存储。",
+      "maximum": 3650,
+      "type": "integer"
+    },
+    "UpdatedTime": {
+      "description": "日志主题修改时间。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TopicID",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "TopicName",
+    "ProjectId",
+    "Ttl",
+    "ShardCount"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TLS::Topic"
+}

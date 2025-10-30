@@ -47,23 +47,36 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_redis_instances -cctype Volcengine::Redis::Instance -package redis ../volcengine/redis/instance_plural_data_source_gen.go ../volcengine/redis/instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_listeners -cctype Volcengine::CLB::Listener -package clb ../volcengine/clb/listener_plural_data_source_gen.go ../volcengine/clb/listener_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_ecs_instances -cctype Volcengine::ECS::Instance -package ecs ../volcengine/ecs/instance_plural_data_source_gen.go ../volcengine/ecs/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_waf_domains -cctype Volcengine::WAF::Domain -package waf ../volcengine/waf/domain_plural_data_source_gen.go ../volcengine/waf/domain_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cr_registries -cctype Volcengine::CR::Registry -package cr ../volcengine/cr/registry_plural_data_source_gen.go ../volcengine/cr/registry_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_directconnect_direct_connect_gateways -cctype Volcengine::DirectConnect::DirectConnectGateway -package directconnect ../volcengine/directconnect/direct_connect_gateway_plural_data_source_gen.go ../volcengine/directconnect/direct_connect_gateway_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_transitrouter_transit_router_route_tables -cctype Volcengine::TransitRouter::TransitRouterRouteTable -package transitrouter ../volcengine/transitrouter/transit_router_route_table_plural_data_source_gen.go ../volcengine/transitrouter/transit_router_route_table_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpc_network_acls -cctype Volcengine::VPC::NetworkAcl -package vpc ../volcengine/vpc/network_acl_plural_data_source_gen.go ../volcengine/vpc/network_acl_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_topics -cctype Volcengine::TLS::Topic -package tls ../volcengine/tls/topic_plural_data_source_gen.go ../volcengine/tls/topic_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_upstream_sources -cctype Volcengine::APIG::UpstreamSource -package apig ../volcengine/apig/upstream_source_plural_data_source_gen.go ../volcengine/apig/upstream_source_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vke_addons -cctype Volcengine::VKE::Addon -package vke ../volcengine/vke/addon_plural_data_source_gen.go ../volcengine/vke/addon_plural_data_source_gen_test.go
 
 package provider
 
 import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/alb"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/apig"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/waf"
 )
