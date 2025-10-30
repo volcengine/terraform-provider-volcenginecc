@@ -1,0 +1,146 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TransitRouterId"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "TR路由表的标签信息",
+      "properties": {
+        "Key": {
+          "description": "标签键",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "中转路由器转发流量的依据，具有关联转发、静态路由、路由学习、路由同步等能力。每个TR实例下可以创建多个TR路由表，分别用于转发具有不同访问需求的网络实例的流量。多条网络实例连接可以关联同一个TR路由表。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:CreateTransitRouterRouteTable",
+        "transitrouter:DescribeTransitRouterRouteTables"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DeleteTransitRouterRouteTable",
+        "transitrouter:DescribeTransitRouterRouteTables"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterRouteTables"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transitrouter:ModifyTransitRouterRouteTableAttributes",
+        "transitrouter:DescribeTransitRouterRouteTables",
+        "transitrouter:TagResources",
+        "transitrouter:UnTagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterId",
+    "/properties/TransitRouterRouteTableId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "TR路由表的创建时间",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "InRoutePolicyTableId": {
+      "description": "TR路由表关联的收方向路由策略的ID",
+      "type": "string"
+    },
+    "OutRoutePolicyTableId": {
+      "description": "TR路由表关联的发方向路由策略的ID",
+      "type": "string"
+    },
+    "Status": {
+      "description": "TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Pending",
+        "Available"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "TR路由表的标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TransitRouterId": {
+      "description": "中转路由器实例的ID",
+      "type": "string"
+    },
+    "TransitRouterRouteTableId": {
+      "description": "TR路由表的ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterRouteTableName": {
+      "description": "TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "TransitRouterRouteTableType": {
+      "description": "TR路由表的类型。System：系统路由表。Custom：自定义路由表。",
+      "enum": [
+        "System",
+        "Custom"
+      ],
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "TR路由表的最近操作时间",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreationTime",
+    "/properties/InRoutePolicyTableId",
+    "/properties/OutRoutePolicyTableId",
+    "/properties/Status",
+    "/properties/TransitRouterRouteTableId",
+    "/properties/TransitRouterRouteTableType",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "TransitRouterId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TransitRouter::TransitRouterRouteTable"
+}

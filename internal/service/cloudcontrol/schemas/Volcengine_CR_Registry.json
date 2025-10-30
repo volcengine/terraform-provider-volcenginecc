@@ -1,0 +1,152 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Project",
+    "/properties/Name",
+    "/properties/Type",
+    "/properties/Tags/*/Key",
+    "/properties/Tags/*/Value"
+  ],
+  "definitions": {
+    "ProxyCache": {
+      "properties": {
+        "Type": {
+          "description": "ProxyCache支持的镜像仓库实例类型，参数值说明如下：DockerHub：dockerhub 镜像仓库。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Status": {
+      "properties": {
+        "Conditions": {
+          "description": "Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Phase": {
+          "description": "Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "标签的 Key 值。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签的 Value 值列表。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "镜像仓库（Container Registry，CR）提供安全高可用的容器镜像、Helm Chart 等符合 OCI 标准的云原生制品托管服务，方便企业用户管理容器镜像和 Helm Chart 的全生命周期。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cr:CreateRegistry",
+        "cr:ListRegistries"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cr:DeleteRegistry",
+        "cr:ListRegistries"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cr:ListRegistries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cr:ListRegistries"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "properties": {
+    "ChargeType": {
+      "description": "镜像仓库实例的付费类型，目前仅支持 PostCharge按量付费模式。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建镜像仓库实例的时间。",
+      "type": "string"
+    },
+    "ExpireTime": {
+      "description": "仅计费类型为HybridCharge有值，实例到期时间",
+      "type": "string"
+    },
+    "Name": {
+      "description": "标准版实例名称，同一个地域下，名称必须唯一。支持小写英文字母、数字、短划线（-）且数字不能在首位，短划线（-）不能在首位或末位，长度限制为 3～30 个字符。",
+      "maximum": 30,
+      "minimum": 3,
+      "type": "string"
+    },
+    "Project": {
+      "description": "填写实例需要关联的项目。一个实例仅支持关联一个项目",
+      "type": "string"
+    },
+    "ProxyCache": {
+      "$ref": "#/definitions/ProxyCache",
+      "description": "ProxyCache配置，设置为ProxyCache时必填",
+      "type": "object"
+    },
+    "ProxyCacheEnabled": {
+      "description": "是否设置为ProxyCache实例",
+      "type": "boolean"
+    },
+    "RenewType": {
+      "description": "仅计费类型为HybridCharge有值，实例自动续费类型",
+      "type": "string"
+    },
+    "Status": {
+      "$ref": "#/definitions/Status",
+      "description": "镜像仓库实例状态，由 Phase 和 Conditions 组成。合法的 Phase 和 Conditions 组合如下所示：{Creating, [Progressing]}：创建中,{Running, [Ok]}：运行中,{Running, [Degraded]}：运行中,{Stopped, [Balance]}：欠费关停,{Stopped, [Released]}：待回收,{Stopped, [Released, Balance]}：欠费关停,{Starting, [Progressing]}：启动中,{Deleting, [Progressing]}：销毁中,{Failed, [Unknown]}：异常",
+      "type": "object"
+    },
+    "Tags": {
+      "description": "实例的标签",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Type": {
+      "description": "不填写默认创建标准版实例。Enterprise：标准版，Micro：小微版",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ChargeType",
+    "/properties/CreatedTime",
+    "/properties/ExpireTime",
+    "/properties/ProxyCache",
+    "/properties/ProxyCacheEnabled",
+    "/properties/RenewType",
+    "/properties/Status"
+  ],
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::CR::Registry"
+}

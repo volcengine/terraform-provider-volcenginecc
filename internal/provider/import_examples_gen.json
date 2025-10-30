@@ -223,5 +223,45 @@
         "resource": "volcenginecc_ecs_instance",
         "identifier": ["InstanceId"],
         "path": "./examples/resources/volcenginecc_ecs_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_waf_domain",
+        "identifier": ["Domain"],
+        "path": "./examples/resources/volcenginecc_waf_domain/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cr_registry",
+        "identifier": ["Name"],
+        "path": "./examples/resources/volcenginecc_cr_registry/import.sh"
+    },
+    {
+        "resource": "volcenginecc_directconnect_direct_connect_gateway",
+        "identifier": ["DirectConnectGatewayId"],
+        "path": "./examples/resources/volcenginecc_directconnect_direct_connect_gateway/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_transit_router_route_table",
+        "identifier": ["TransitRouterId","TransitRouterRouteTableId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_transit_router_route_table/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_network_acl",
+        "identifier": ["NetworkAclId"],
+        "path": "./examples/resources/volcenginecc_vpc_network_acl/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_topic",
+        "identifier": ["TopicID"],
+        "path": "./examples/resources/volcenginecc_tls_topic/import.sh"
+    },
+    {
+        "resource": "volcenginecc_apig_upstream_source",
+        "identifier": ["UpstreamSourceId"],
+        "path": "./examples/resources/volcenginecc_apig_upstream_source/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_addon",
+        "identifier": ["ClusterId","Name"],
+        "path": "./examples/resources/volcenginecc_vke_addon/import.sh"
     }
 ]

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_network_acl.example "network_acl_id"

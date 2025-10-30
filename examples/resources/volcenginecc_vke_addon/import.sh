@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vke_addon.example "cluster_id|name"

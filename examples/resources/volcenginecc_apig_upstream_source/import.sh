@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_apig_upstream_source.example "upstream_source_id"

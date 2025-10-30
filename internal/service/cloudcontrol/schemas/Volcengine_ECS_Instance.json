@@ -20,9 +20,13 @@
     "/properties/PeriodUnit",
     "/properties/AutoRenew",
     "/properties/AutoRenewPeriod",
-    "/properties/SystemVolumes",
+    "/properties/SystemVolume",
     "/properties/InstanceType",
-    "/properties/CpuMaxFrequency"
+    "/properties/CpuMaxFrequency",
+    "/properties/KeyPair",
+    "/properties/DeletionProtection",
+    "/properties/DeploymentSetGroupNumber",
+    "/properties/Placement"
   ],
   "definitions": {
     "CpuMemory": {

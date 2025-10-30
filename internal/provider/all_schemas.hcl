@@ -196,4 +196,38 @@ resource_schema "volcengine_ecs_instance" {
 }
 
 
+resource_schema "volcengine_waf_domain" {
+  cloudcontrol_type_name = "Volcengine::WAF::Domain"
+}
+
+resource_schema "volcengine_cr_registry" {
+  cloudcontrol_type_name = "Volcengine::CR::Registry"
+}
+
+resource_schema "volcengine_directconnect_direct_connect_gateway" {
+  cloudcontrol_type_name = "Volcengine::DirectConnect::DirectConnectGateway"
+}
+
+resource_schema "volcengine_transitrouter_transit_router_route_table" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::TransitRouterRouteTable"
+}
+
+resource_schema "volcengine_vpc_network_acl" {
+  cloudcontrol_type_name = "Volcengine::VPC::NetworkAcl"
+}
+
+resource_schema "volcengine_tls_topic" {
+  cloudcontrol_type_name = "Volcengine::TLS::Topic"
+}
+
+resource_schema "volcengine_apig_upstream_source" {
+  cloudcontrol_type_name = "Volcengine::APIG::UpstreamSource"
+}
+
+resource_schema "volcengine_vke_addon" {
+  cloudcontrol_type_name = "Volcengine::VKE::Addon"
+}
+
+
+
 

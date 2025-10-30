@@ -47,23 +47,36 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_redis_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_Redis_Instance.json -package redis ../volcengine/redis/instance_singular_data_source_gen.go ../volcengine/redis/instance_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_clb_listener -ccschema ../service/cloudcontrol/schemas/Volcengine_CLB_Listener.json -package clb ../volcengine/clb/listener_singular_data_source_gen.go ../volcengine/clb/listener_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_ecs_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_ECS_Instance.json -package ecs ../volcengine/ecs/instance_singular_data_source_gen.go ../volcengine/ecs/instance_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_waf_domain -ccschema ../service/cloudcontrol/schemas/Volcengine_WAF_Domain.json -package waf ../volcengine/waf/domain_singular_data_source_gen.go ../volcengine/waf/domain_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_cr_registry -ccschema ../service/cloudcontrol/schemas/Volcengine_CR_Registry.json -package cr ../volcengine/cr/registry_singular_data_source_gen.go ../volcengine/cr/registry_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_directconnect_direct_connect_gateway -ccschema ../service/cloudcontrol/schemas/Volcengine_DirectConnect_DirectConnectGateway.json -package directconnect ../volcengine/directconnect/direct_connect_gateway_singular_data_source_gen.go ../volcengine/directconnect/direct_connect_gateway_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_transitrouter_transit_router_route_table -ccschema ../service/cloudcontrol/schemas/Volcengine_TransitRouter_TransitRouterRouteTable.json -package transitrouter ../volcengine/transitrouter/transit_router_route_table_singular_data_source_gen.go ../volcengine/transitrouter/transit_router_route_table_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vpc_network_acl -ccschema ../service/cloudcontrol/schemas/Volcengine_VPC_NetworkAcl.json -package vpc ../volcengine/vpc/network_acl_singular_data_source_gen.go ../volcengine/vpc/network_acl_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_tls_topic -ccschema ../service/cloudcontrol/schemas/Volcengine_TLS_Topic.json -package tls ../volcengine/tls/topic_singular_data_source_gen.go ../volcengine/tls/topic_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_apig_upstream_source -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_UpstreamSource.json -package apig ../volcengine/apig/upstream_source_singular_data_source_gen.go ../volcengine/apig/upstream_source_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vke_addon -ccschema ../service/cloudcontrol/schemas/Volcengine_VKE_Addon.json -package vke ../volcengine/vke/addon_singular_data_source_gen.go ../volcengine/vke/addon_singular_data_source_gen_test.go
 
 package provider
 
 import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/alb"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/apig"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/waf"
 )

@@ -1,0 +1,132 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/Name",
+    "/properties/DeployMode",
+    "/properties/DeployNodeType"
+  ],
+  "definitions": {
+    "AddonCondition": {
+      "description": "组件状态条件。",
+      "properties": {
+        "Type": {
+          "description": "组件当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AddonStatus": {
+      "description": "组件状态信息。",
+      "properties": {
+        "Conditions": {
+          "description": "组件当前主状态下的状态条件。",
+          "items": {
+            "$ref": "#/definitions/AddonCondition"
+          },
+          "type": "array"
+        },
+        "Phase": {
+          "description": "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "查询符合条件的已安装组件详情列表。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vke:CreateAddon",
+        "vke:ListAddons"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vke:DeleteAddon",
+        "vke:ListAddons"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vke:ListAddons"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vke:ListAddons"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vke:UpdateAddonConfig",
+        "vke:UpdateAddonVersion",
+        "vke:ListAddons"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId",
+    "/properties/Name"
+  ],
+  "properties": {
+    "ClusterId": {
+      "description": "组件所在集群 ID。",
+      "type": "string"
+    },
+    "Config": {
+      "description": "组件配置。",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeployMode": {
+      "description": "组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。",
+      "enum": [
+        "Unmanaged",
+        "Managed"
+      ],
+      "type": "string"
+    },
+    "DeployNodeType": {
+      "description": "部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。",
+      "enum": [
+        "Node",
+        "VirtualNode"
+      ],
+      "type": "string"
+    },
+    "Name": {
+      "description": "组件名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Status": {
+      "$ref": "#/definitions/AddonStatus",
+      "description": "组件状态。"
+    },
+    "UpdateTime": {
+      "description": "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Version": {
+      "description": "组件版本。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/Status"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VKE::Addon"
+}

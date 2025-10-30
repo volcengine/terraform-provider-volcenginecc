@@ -1,0 +1,237 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GatewayId",
+    "/properties/SourceSpec/K8SSource",
+    "/properties/SourceSpec/NacosSource/AuthConfig",
+    "/properties/SourceSpec/NacosSource/NacosId",
+    "/properties/SourceType"
+  ],
+  "definitions": {
+    "AuthConfig": {
+      "properties": {
+        "Basic": {
+          "$ref": "#/definitions/Basic",
+          "description": "Basic认证。"
+        }
+      },
+      "type": "object"
+    },
+    "Basic": {
+      "properties": {
+        "Password": {
+          "description": "密码。",
+          "type": "string"
+        },
+        "Username": {
+          "description": "用户名。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IngressSettings": {
+      "properties": {
+        "EnableAllIngressClasses": {
+          "description": "是否启用所有Ingress类。",
+          "type": "boolean"
+        },
+        "EnableAllNamespaces": {
+          "description": "是否全部命名空间。",
+          "type": "boolean"
+        },
+        "EnableIngress": {
+          "description": "是否开启。",
+          "type": "boolean"
+        },
+        "EnableIngressWithoutIngressClass": {
+          "description": "是否监听IngressClass为空的资源。",
+          "type": "boolean"
+        },
+        "IngressClasses": {
+          "description": "指定IngressClass。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "UpdateStatus": {
+          "description": "流量入口切换。开启后，当前集群Ingress中Status的IP地址会被修改为当前网关的IP地址。",
+          "type": "boolean"
+        },
+        "WatchNamespaces": {
+          "description": "指定命名空间。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "K8SSource": {
+      "properties": {
+        "ClusterId": {
+          "description": "集群ID。",
+          "type": "string"
+        },
+        "ClusterType": {
+          "description": "集群类型。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NacosSource": {
+      "properties": {
+        "AuthConfig": {
+          "$ref": "#/definitions/AuthConfig",
+          "description": "认证配置。"
+        },
+        "NacosId": {
+          "description": "Nacos ID。",
+          "type": "string"
+        },
+        "NacosName": {
+          "description": "Nacos名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SourceSpec": {
+      "properties": {
+        "K8SSource": {
+          "$ref": "#/definitions/K8SSource",
+          "description": "容器集群来源。"
+        },
+        "NacosSource": {
+          "$ref": "#/definitions/NacosSource",
+          "description": "注册中心来源。"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "API 网关支持基于容器服务（VKE）集和容器服务的注册集群功能，将集群导入到 API 网关实例，将其作为网关的 Upstream 来源，以便网关获取集群中的 Service 列表。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apig:CreateUpstreamSource",
+        "apig:GetUpstreamSource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apig:GetUpstreamSource",
+        "apig:DeleteUpstreamSource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apig:ListUpstreamSources"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apig:GetUpstreamSource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apig:GetUpstreamSource",
+        "apig:UpdateUpstreamSource"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/UpstreamSourceId"
+  ],
+  "properties": {
+    "Comments": {
+      "description": "备注，长度限制为0~253个字符。",
+      "maxLength": 253,
+      "semantic": "description",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "GatewayId": {
+      "description": "网关实例ID。",
+      "type": "string"
+    },
+    "IngressSettings": {
+      "$ref": "#/definitions/IngressSettings",
+      "description": "路由同步。开启后，API网关会自动监听Ingress资源的变化，并将Ingress资源转义为服务，域名，Upstream等资源合并至当前网关。由Ingress转义的资源不支持在控制台操作。仅支持容器集群来源类型。",
+      "type": "object"
+    },
+    "SourceSpec": {
+      "$ref": "#/definitions/SourceSpec",
+      "description": "Upstream来源配置。",
+      "type": "object"
+    },
+    "SourceType": {
+      "description": "Upstream来源类型，取值：K8S：容器集群。Nacos：注册中心。",
+      "enum": [
+        "K8S",
+        "Nacos"
+      ],
+      "type": "string"
+    },
+    "Status": {
+      "description": "导入状态，取值：Syncing：导入中。SyncedSucceed：导入成功。SyncedFailed：导入失败。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "StatusMessage": {
+      "description": "导入状态信息，取值：ConnectionFailed：Nacos集群无法连接。AuthenticationFailed：认证失败。PermissionFailed：Nacos集群无法连接。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UpstreamSourceId": {
+      "description": "Upstream来源ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "WatchNamespaces": {
+      "description": "指定命名空间。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/UpstreamSourceId",
+    "/properties/CreatedTime",
+    "/properties/Status",
+    "/properties/StatusMessage",
+    "/properties/UpdatedTime",
+    "/properties/SourceSpec/NacosSource/NacosName"
+  ],
+  "required": [
+    "GatewayId",
+    "SourceSpec",
+    "SourceType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::APIG::UpstreamSource",
+  "writeOnlyProperties": [
+    "/properties/SourceSpec/NacosSource/AuthConfig"
+  ]
+}
