@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_waf_domain.example "domain"

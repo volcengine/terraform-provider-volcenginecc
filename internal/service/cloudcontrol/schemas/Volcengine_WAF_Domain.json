@@ -1,0 +1,650 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AccessMode",
+    "/properties/Domain",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Backend": {
+      "properties": {
+        "IP": {
+          "description": "源站 IP 地址。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "源站端口。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "Protocol": {
+          "description": "源站协议。",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "源站权重。",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "BackendGroup": {
+      "properties": {
+        "AccessPort": {
+          "description": "接入的端口号。",
+          "insertionOrder": false,
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Backends": {
+          "description": "源站组详情。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Backend"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Name": {
+          "description": "源站组名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CloudAccessConfig": {
+      "properties": {
+        "AccessProtocol": {
+          "description": "接入协议类型。",
+          "type": "string"
+        },
+        "DefenceMode": {
+          "description": "防护模式。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "InstanceID": {
+          "description": "负载均衡实例 ID。",
+          "type": "string"
+        },
+        "InstanceName": {
+          "description": "负载均衡实例名称。",
+          "type": "string"
+        },
+        "ListenerID": {
+          "description": "负载均衡监听器 ID。",
+          "type": "string"
+        },
+        "LostAssociationFromALB": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Port": {
+          "description": "监听器转发规则的端口号。",
+          "type": "string"
+        },
+        "Protocol": {
+          "description": "监听器转发规则的协议类型。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "HeadersConfig": {
+      "properties": {
+        "Enable": {
+          "description": "是否记录全量 header。\n\n关闭，仅记录常见 header 字段。\n启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ExcludedKeyList": {
+          "description": "例外 header 字段，将对应字段从字段的 JSON 中排除，可帮助节约日志存储空间。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "StatisticalKeyList": {
+          "description": "统计 header 字段，将对应字段用于日志统计分析和告警。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "ProtocolPorts": {
+      "properties": {
+        "HTTP": {
+          "description": "HTTP 协议的端口号。",
+          "insertionOrder": false,
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "HTTPS": {
+          "description": "HTTPS 协议的端口号。",
+          "insertionOrder": false,
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "TCPListenerConfig": {
+      "properties": {
+        "AccessProtocol": {
+          "type": "string"
+        },
+        "DefenceMode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InstanceID": {
+          "type": "string"
+        },
+        "InstanceName": {
+          "type": "string"
+        },
+        "ListenerID": {
+          "type": "string"
+        },
+        "LostAssociationFromALB": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Port": {
+          "type": "string"
+        },
+        "Protocol": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TLSFieldsConfig": {
+      "properties": {
+        "HeadersConfig": {
+          "$ref": "#/definitions/HeadersConfig",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "通过 CNAME 或是负载均衡方式接入防护网站，并配置接入能力和回源能力，将业务流量接入到 WAF 实例，实现防护。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "waf:CreateDomain",
+        "waf:ListDomain"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "waf:ListDomain",
+        "waf:DeleteDomain"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "waf:ListDomain"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "waf:ListDomain"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "waf:ListDomain",
+        "waf:UpdateDomain",
+        "waf:UpdateWafServiceControl",
+        "waf:ModifyServiceDefenceMode"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Domain"
+  ],
+  "properties": {
+    "AccessMode": {
+      "description": "接入模式。10：CNAME 接入，11：负载均衡（CLB）7 层接入。",
+      "enum": [
+        10,
+        11
+      ],
+      "format": "int32",
+      "type": "integer"
+    },
+    "AdvancedDefenseIP": {
+      "description": "高防实例 IP。高防型 WAF 接入展示，否则为空。",
+      "type": "string"
+    },
+    "AdvancedDefenseIpv6": {
+      "description": "高防实例 Ipv6。高防型 WAF 接入展示，否则为空。",
+      "type": "string"
+    },
+    "ApiEnable": {
+      "description": "是否开启了 API 防护策略。0：关闭，1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "AttackStatus": {
+      "description": "攻击状态。0:未发现攻击,1:发现攻击。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "AutoCCEnable": {
+      "description": "是否开启智能 CC 防护策略。0：关闭，1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "AutomaticBlackEnable": {
+      "description": "是否开启自动封禁。0：关闭，1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "BackendGroups": {
+      "description": "源站配置。",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/BackendGroup"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BlackIpEnable": {
+      "description": "是否开启了黑名单策略。0：关闭, 1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "BlackLctEnable": {
+      "description": "是否开启了区域封禁策略。0：关闭;1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "BotDytokenEnable": {
+      "description": "是否开启动态Token防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "BotFrequencyEnable": {
+      "description": "是否开启 bot 频率限制策略。\n0：关闭\n1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "BotRepeatEnable": {
+      "description": "是否开启 bot 统计防护策略。\n0：关闭\n1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "BotSequenceDefaultAction": {
+      "default": 0,
+      "description": "设置 bot 行为地图策略默认动作，当 BotSequenceEnable = 1 开启状态时生效。默认为 0 （观察）。\n0：观察\n2：拦截\n6：JS 挑战\n7：人机验证。",
+      "enum": [
+        0,
+        2,
+        6,
+        7
+      ],
+      "format": "int32",
+      "type": "integer"
+    },
+    "BotSequenceEnable": {
+      "description": "是否开启 bot 行为地图。\n0：关闭\n1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "CcEnable": {
+      "description": "是否开启 CC 防护策略。\n0：关闭\n1：开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "CertificateID": {
+      "description": "托管至证书中心的证书ID。",
+      "type": "string"
+    },
+    "CertificateName": {
+      "description": "证书名称，协议类型包含 HTTPS 时显示。",
+      "type": "string"
+    },
+    "CertificatePlatform": {
+      "description": "证书托管平台:waf/certificate_service。",
+      "type": "string"
+    },
+    "ClbInstanceIds": {
+      "description": "CLB实例ID。",
+      "type": "string"
+    },
+    "ClbListenerId": {
+      "description": "CLB监听器ID。",
+      "type": "string"
+    },
+    "ClbPoolId": {
+      "description": "CLB后端服务器组ID。",
+      "type": "string"
+    },
+    "ClbServerId": {
+      "description": "CLB后端服务器ID。",
+      "type": "string"
+    },
+    "ClientIPLocation": {
+      "description": "客户端IP获取方式。0:自定义Header字段,1:通过X-Forwarded-For(XFF)字段中第一个公网IP地址作为客户端真实IP地址。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ClientMaxBodySize": {
+      "description": "客户端请求body最大值(MB)。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "CloudAccessConfig": {
+      "description": "LB接入参数。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/CloudAccessConfig"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Cname": {
+      "description": "CNAME记录。",
+      "type": "string"
+    },
+    "CustomBotEnable": {
+      "description": "是否开启自定义BOT防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "CustomHeader": {
+      "description": "自定义Header。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CustomRspEnable": {
+      "description": "是否开启自定义响应。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "CustomSNI": {
+      "description": "自定义SNI。",
+      "type": "string"
+    },
+    "DefenceMode": {
+      "description": "为例外 ALB 实例设置防护模式。\n1：启用防护，已配置的防护策略生效。\n2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。\n3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。\n设置例外防护实例后，域名可能还会存在以下防护状态：\n5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。\n6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。\n7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "DlpEnable": {
+      "description": "是否开启数据泄露防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Domain": {
+      "description": "防护的域名信息，支持泛域名和精确域名。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "EnableCustomRedirect": {
+      "description": "是否开启用户自定义重定向。0:关闭,1:开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "EnableHTTP2": {
+      "description": "是否开启HTTP2.0。0:关闭,1:开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "EnableIpv6": {
+      "description": "是否支持防护Ipv6请求。0:关闭,1:开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "EnableSNI": {
+      "description": "是否开启SNI配置。0:关闭,1:开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "KeepAliveRequest": {
+      "description": "长连接复用个数。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "KeepAliveTimeout": {
+      "description": "长连接保持时间(秒)。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "LBAlgorithm": {
+      "description": "负载均衡算法类型。wrr:加权轮询,wlc:加权最小连接数,sh:源地址哈希。",
+      "type": "string"
+    },
+    "Port": {
+      "description": "端口号。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ProtocolFollow": {
+      "description": "是否开启协议跟随。0:关闭,1:开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProtocolPorts": {
+      "$ref": "#/definitions/ProtocolPorts",
+      "description": "接入端口信息。"
+    },
+    "Protocols": {
+      "description": "接入协议类型,支持HTTP/HTTPS。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProxyConfig": {
+      "description": "是否开启代理配置。0:关闭,1:开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProxyConnectTimeout": {
+      "description": "WAF和后端服务器的建连超时时间(秒)。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProxyKeepAlive": {
+      "description": "WAF回源长连接可复用个数。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProxyKeepAliveTimeout": {
+      "description": "空闲长连接超时时间(秒)。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProxyReadTimeout": {
+      "description": "WAF从后端服务器读取响应的超时时间(秒)。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProxyRetry": {
+      "description": "WAF回源重试次数。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ProxyWriteTimeout": {
+      "description": "WAF将请求传输到后端服务器的超时时间(秒)。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "PublicRealServer": {
+      "description": "CNAME接入回源方式。0:私网回源,1:公网回源。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "RspAbnormalEnable": {
+      "description": "是否开启异常响应防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "SSLCiphers": {
+      "description": "加密套件。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SSLProtocols": {
+      "description": "TLS协议版本。如:TLSv1,TLSv1.1,TLSv1.2,TLSv1.3。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServerIps": {
+      "description": "服务IP。",
+      "type": "string"
+    },
+    "SrcIps": {
+      "description": "WAF回源IP。",
+      "type": "string"
+    },
+    "SrcProtocol": {
+      "description": "源站协议。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "接入状态。0:正常,1:DNS未解析,2:配置中,3:配置失败,4:配置未生效,5:更新中,6:实例已删除。",
+      "format": "int32",
+      "semantic": "status",
+      "type": "integer"
+    },
+    "SystemBotEnable": {
+      "description": "是否开启托管BOT防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "TCPListenerConfig": {
+      "description": "TCP监听器配置。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TCPListenerConfig"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TLSEnable": {
+      "description": "是否开启日志服务。0:关闭,1:开启。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "TLSFieldsConfig": {
+      "$ref": "#/definitions/TLSFieldsConfig",
+      "description": "日志字段配置详情。",
+      "type": "object"
+    },
+    "TamperProofEnable": {
+      "description": "是否开启防篡改。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "UpdateTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcID": {
+      "description": "VPC ID。",
+      "type": "string"
+    },
+    "WafEnable": {
+      "description": "是否开启WAF防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "WafWhiteReqEnable": {
+      "description": "是否开启白名单请求防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "WhiteEnable": {
+      "description": "是否开启白名单防护。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "WhiteFieldEnable": {
+      "description": "是否开启字段白名单防护。",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AdvancedDefenseIP",
+    "/properties/AdvancedDefenseIpv6",
+    "/properties/AttackStatus",
+    "/properties/AutomaticBlackEnable",
+    "/properties/Cname",
+    "/properties/RspAbnormalEnable",
+    "/properties/ServerIps",
+    "/properties/SrcIps",
+    "/properties/SrcProtocol",
+    "/properties/Status",
+    "/properties/UpdateTime",
+    "/properties/CertificateName",
+    "/properties/ClbInstanceIds",
+    "/properties/ClbListenerId",
+    "/properties/ClbPoolId",
+    "/properties/ClbServerId",
+    "/properties/Port",
+    "/properties/TCPListenerConfig"
+  ],
+  "required": [
+    "AccessMode",
+    "Domain"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::WAF::Domain",
+  "writeOnlyProperties": [
+    "/properties/CustomSNI",
+    "/properties/EnableCustomRedirect",
+    "/properties/EnableSNI",
+    "/properties/ProjectName",
+    "/properties/TLSFieldsConfig",
+    "/properties/BotDytokenEnable"
+  ]
+}
