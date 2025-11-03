@@ -1,0 +1,189 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GatewayId",
+    "/properties/ServiceName"
+  ],
+  "definitions": {
+    "AuthSpec": {
+      "properties": {
+        "Enable": {
+          "description": "是否开启认证。",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "CustomDomain": {
+      "properties": {
+        "Domain": {
+          "description": "自定义域名。",
+          "type": "string"
+        },
+        "DomainId": {
+          "description": "自定义域名ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Domain": {
+      "properties": {
+        "Domain": {
+          "description": "域名。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "域名类型。取值：public：公网。private：私网。",
+          "enum": [
+            "public",
+            "private"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DomainSpec": {
+      "properties": {
+        "EnablePublicResolution": {
+          "description": "开启私网域名公网解析。",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "服务是一组路由对外暴露的入口，用于区分流量的来源和协议，实现业务、环境、逻辑租户隔离。服务可以绑定独立的访问域名，以域名维度访问业务。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apig:CreateGatewayService",
+        "apig:GetGatewayService"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apig:DeleteGatewayService",
+        "apig:GetGatewayService"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apig:ListGatewayServices"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apig:GetGatewayService"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apig:UpdateGatewayService",
+        "apig:GetGatewayService"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ServiceId"
+  ],
+  "properties": {
+    "AuthSpec": {
+      "$ref": "#/definitions/AuthSpec",
+      "description": "认证配置。",
+      "type": "object"
+    },
+    "Comments": {
+      "description": "备注，长度限制为0~253个字符。",
+      "maxLength": 253,
+      "semantic": "description",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CustomDomains": {
+      "description": "自定义域名列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/CustomDomain"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DomainSpec": {
+      "$ref": "#/definitions/DomainSpec",
+      "description": "域名详情。",
+      "type": "object"
+    },
+    "Domains": {
+      "description": "默认域名。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Domain"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "GatewayId": {
+      "description": "网关ID。",
+      "type": "string"
+    },
+    "GatewayName": {
+      "description": "网关名称。",
+      "type": "string"
+    },
+    "Message": {
+      "description": "服务创建失败、删除失败或异常时的错误信息。",
+      "type": "string"
+    },
+    "Protocol": {
+      "description": "服务支持的协议。取值：HTTP：HTTP。HTTPS：HTTPS。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceId": {
+      "description": "服务ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ServiceName": {
+      "description": "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Creating：创建中。CreatedFailed：创建失败。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。",
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/ServiceId",
+    "/properties/CustomDomains",
+    "/properties/Domains",
+    "/properties/GatewayName",
+    "/properties/Message",
+    "/properties/Status",
+    "/properties/DomainSpec"
+  ],
+  "required": [
+    "ServiceName",
+    "Protocol",
+    "GatewayId",
+    "AuthSpec"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::APIG::GatewayService"
+}

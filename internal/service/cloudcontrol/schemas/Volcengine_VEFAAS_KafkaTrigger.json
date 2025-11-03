@@ -1,0 +1,172 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/KafkaCredentials",
+    "/properties/MqInstanceId",
+    "/properties/Name",
+    "/properties/StartingPosition",
+    "/properties/TopicName"
+  ],
+  "definitions": {
+    "KafkaCredentials": {
+      "properties": {
+        "Mechanism": {
+          "description": "Kafka 认证机制。取值：PLAIN，SCRAM-SHA-256。",
+          "enum": [
+            "PLAIN",
+            "SCRAM-SHA-256"
+          ],
+          "type": "string"
+        },
+        "Password": {
+          "description": "创建 Kafka 实例时设置的 SASL/PLAIN 用户密码。",
+          "type": "string"
+        },
+        "Username": {
+          "description": "创建 Kafka 实例时设置的 SASL/PLAIN 用户名称。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Mechanism",
+        "Password",
+        "Username"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "函数服务支持对接消息队列 Kafka 版。通过创建 Kafka 触发器，函数服务将作为消费者消费 Kafka 中的消息，并将消息传递给用户函数，触发函数代码逻辑。您无需关心函数服务消费消息的细节，只需编写处理消息的函数。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vefaas:CreateKafkaTrigger",
+        "vefaas:GetKafkaTrigger"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vefaas:GetKafkaTrigger",
+        "vefaas:DeleteKafkaTrigger"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vefaas:GetKafkaTrigger"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vefaas:GetKafkaTrigger",
+        "vefaas:UpdateKafkaTrigger"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FunctionId",
+    "/properties/KafkaTriggerId"
+  ],
+  "properties": {
+    "BatchFlushDurationMilliseconds": {
+      "default": 1000,
+      "description": "触发器批量消费的最长等待时间。单位为毫秒（ms），取值范围为 1000 ~ 60000 ms，默认值为 1000 ms。",
+      "maximum": 60000,
+      "type": "integer"
+    },
+    "BatchSize": {
+      "description": "触发器批量消费的每批次消息数。",
+      "type": "integer"
+    },
+    "ConsumerGroup": {
+      "description": "消息队列 Kafka 实例的消费组名字。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "Kafka 触发器创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Kafka 触发器描述。长度限制为 200 个字符以内。",
+      "maxLength": 200,
+      "semantic": "description",
+      "type": "string"
+    },
+    "Enabled": {
+      "description": "是否在创建触发器的同时启用触发器。取值：true：启用。false：关闭。",
+      "type": "boolean"
+    },
+    "FunctionId": {
+      "description": "函数 ID。",
+      "type": "string"
+    },
+    "KafkaCredentials": {
+      "$ref": "#/definitions/KafkaCredentials",
+      "description": "Kafka 身份认证。函数服务将通过 Kafka ACL 权限策略，对 PLAIN 和 SCRAM-SHA-256 两种类型的 SASL 用户进行消息消费鉴权。",
+      "type": "object"
+    },
+    "KafkaTriggerId": {
+      "description": "Kafka 触发器 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "MaximumRetryAttempts": {
+      "description": "函数发生运行错误（包括用户代码错误和 Runtime 错误）时的最大重试次数。取值范围为 0～100 的正整数。",
+      "maximum": 100,
+      "type": "integer"
+    },
+    "MqInstanceId": {
+      "description": "消息队列 Kafka 实例 ID。",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Kafka 触发器名字。同一函数下，触发器名称不可重复。只能包含大小写字母、数字、下划线，并且以字母开头，长度限制为 4~63 个字符。",
+      "maxLength": 63,
+      "minLength": 4,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "StartingPosition": {
+      "description": "指定开始消费 Topic 中消息的位置。取值：Latest：只消费订阅 Topic 后产生的消息。Earliest：从 Topic 中生产的第一条消息开始消费。",
+      "enum": [
+        "Latest",
+        "Earliest"
+      ],
+      "type": "string"
+    },
+    "Status": {
+      "description": "Kafka 触发器状态。参数值说明：ready：运行，failed：失败，pending：启动中",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TopicName": {
+      "description": "消息队列 Kafka 实例的 Topic 名称。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "Kafka 触发器最近一次更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/KafkaTriggerId",
+    "/properties/ConsumerGroup",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/Status"
+  ],
+  "required": [
+    "FunctionId",
+    "MqInstanceId",
+    "Name",
+    "TopicName",
+    "KafkaCredentials"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEFAAS::KafkaTrigger",
+  "writeOnlyProperties": [
+    "/properties/KafkaCredentials"
+  ]
+}

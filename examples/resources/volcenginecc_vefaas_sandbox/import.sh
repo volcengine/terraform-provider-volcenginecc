@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vefaas_sandbox.example "function_id|sandbox_id"

@@ -228,6 +228,18 @@ resource_schema "volcengine_vke_addon" {
   cloudcontrol_type_name = "Volcengine::VKE::Addon"
 }
 
+resource_schema "volcengine_apig_gateway_service" {
+  cloudcontrol_type_name = "Volcengine::APIG::GatewayService"
+}
+
+resource_schema "volcengine_vefaas_sandbox" {
+  cloudcontrol_type_name = "Volcengine::VEFAAS::Sandbox"
+}
+
+resource_schema "volcengine_vefaas_kafka_trigger" {
+  cloudcontrol_type_name = "Volcengine::VEFAAS::KafkaTrigger"
+}
+
 
 
 
