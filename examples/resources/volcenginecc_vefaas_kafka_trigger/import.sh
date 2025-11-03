@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vefaas_kafka_trigger.example "function_id|kafka_trigger_id"
