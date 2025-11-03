@@ -263,5 +263,20 @@
         "resource": "volcenginecc_vke_addon",
         "identifier": ["ClusterId","Name"],
         "path": "./examples/resources/volcenginecc_vke_addon/import.sh"
+    },
+    {
+        "resource": "volcenginecc_apig_gateway_service",
+        "identifier": ["ServiceId"],
+        "path": "./examples/resources/volcenginecc_apig_gateway_service/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vefaas_sandbox",
+        "identifier": ["FunctionId","SandboxId"],
+        "path": "./examples/resources/volcenginecc_vefaas_sandbox/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vefaas_kafka_trigger",
+        "identifier": ["FunctionId","KafkaTriggerId"],
+        "path": "./examples/resources/volcenginecc_vefaas_kafka_trigger/import.sh"
     }
 ]

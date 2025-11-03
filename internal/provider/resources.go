@@ -55,6 +55,9 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_tls_topic -ccschema ../service/cloudcontrol/schemas/Volcengine_TLS_Topic.json -package tls -- ../volcengine/tls/topic_resource_gen.go ../volcengine/tls/topic_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_apig_upstream_source -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_UpstreamSource.json -package apig -- ../volcengine/apig/upstream_source_resource_gen.go ../volcengine/apig/upstream_source_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_vke_addon -ccschema ../service/cloudcontrol/schemas/Volcengine_VKE_Addon.json -package vke -- ../volcengine/vke/addon_resource_gen.go ../volcengine/vke/addon_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_apig_gateway_service -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_GatewayService.json -package apig -- ../volcengine/apig/gateway_service_resource_gen.go ../volcengine/apig/gateway_service_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vefaas_sandbox -ccschema ../service/cloudcontrol/schemas/Volcengine_VEFAAS_Sandbox.json -package vefaas -- ../volcengine/vefaas/sandbox_resource_gen.go ../volcengine/vefaas/sandbox_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vefaas_kafka_trigger -ccschema ../service/cloudcontrol/schemas/Volcengine_VEFAAS_KafkaTrigger.json -package vefaas -- ../volcengine/vefaas/kafka_trigger_resource_gen.go ../volcengine/vefaas/kafka_trigger_resource_gen_test.go
 
 package provider
 
@@ -75,6 +78,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"

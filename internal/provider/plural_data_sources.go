@@ -55,6 +55,9 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_topics -cctype Volcengine::TLS::Topic -package tls ../volcengine/tls/topic_plural_data_source_gen.go ../volcengine/tls/topic_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_upstream_sources -cctype Volcengine::APIG::UpstreamSource -package apig ../volcengine/apig/upstream_source_plural_data_source_gen.go ../volcengine/apig/upstream_source_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vke_addons -cctype Volcengine::VKE::Addon -package vke ../volcengine/vke/addon_plural_data_source_gen.go ../volcengine/vke/addon_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_gateway_services -cctype Volcengine::APIG::GatewayService -package apig ../volcengine/apig/gateway_service_plural_data_source_gen.go ../volcengine/apig/gateway_service_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vefaas_sandboxes -cctype Volcengine::VEFAAS::Sandbox -package vefaas ../volcengine/vefaas/sandbox_plural_data_source_gen.go ../volcengine/vefaas/sandbox_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vefaas_kafka_triggers -cctype Volcengine::VEFAAS::KafkaTrigger -package vefaas ../volcengine/vefaas/kafka_trigger_plural_data_source_gen.go ../volcengine/vefaas/kafka_trigger_plural_data_source_gen_test.go
 
 package provider
 
@@ -75,6 +78,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"
