@@ -5,7 +5,7 @@ The Volcengine Cloud Control Provider enables interaction with various Volcengin
 Use the left navigation panel to explore available resource documentation. If you cannot find the desired resource, please submit an issue report for assistance.
 
 > **NOTE**：
-> 1. The Volcengine Cloud Control provider requires the use of Terraform 1.0.7 or later.
+> 1. The Volcengine Cloud Control provider requires the use of Terraform 1.0.7 or later. 
 > 2. This guide requires an available Volcengine account or sub-account to create resources.
 
 ## Example Usage
