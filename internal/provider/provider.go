@@ -350,7 +350,7 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 	if c.Endpoints != nil && !c.Endpoints.CloudControlAPI.IsNull() {
 		config.WithEndpoint(c.Endpoints.CloudControlAPI.ValueString())
 	} else {
-		config.WithEndpoint(fmt.Sprintf("cloudcontrol.%s.volcengineapi.com}", c.Region.ValueString()))
+		config.WithEndpoint(fmt.Sprintf("cloudcontrol.%s.volcengineapi.com", c.Region.ValueString()))
 	}
 
 	if !(c.ProxyURL.IsNull() || c.ProxyURL.IsUnknown()) {
