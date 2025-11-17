@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_natgateway_ngw.example "nat_gateway_id"

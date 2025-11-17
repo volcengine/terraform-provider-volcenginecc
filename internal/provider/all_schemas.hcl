@@ -240,6 +240,32 @@ resource_schema "volcengine_vefaas_kafka_trigger" {
   cloudcontrol_type_name = "Volcengine::VEFAAS::KafkaTrigger"
 }
 
+resource_schema "volcengine_vke_permission" {
+  cloudcontrol_type_name = "Volcengine::VKE::Permission"
+}
 
+resource_schema "volcengine_kafka_topic" {
+  cloudcontrol_type_name = "Volcengine::Kafka::Topic"
+}
+
+resource_schema "volcengine_cdn_share_config" {
+  cloudcontrol_type_name = "Volcengine::CDN::ShareConfig"
+}
+
+resource_schema "volcengine_privatezone_resolver_endpoint" {
+  cloudcontrol_type_name = "Volcengine::PrivateZone::ResolverEndpoint"
+}
+
+resource_schema "volcengine_privatezone_resolver_rule" {
+  cloudcontrol_type_name = "Volcengine::PrivateZone::ResolverRule"
+}
+
+resource_schema "volcengine_apig_upstream" {
+  cloudcontrol_type_name = "Volcengine::APIG::Upstream"
+}
+
+resource_schema "volcengine_natgateway_ngw" {
+  cloudcontrol_type_name = "Volcengine::NatGateway::NGW"
+}
 
 

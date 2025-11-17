@@ -874,7 +874,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的协议。",
+		//	  "description": "监听器的协议。包括：TCP、UDP、HTTP、HTTPS。",
 		//	  "enum": [
 		//	    "TCP",
 		//	    "UDP",
@@ -884,7 +884,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的协议。",
+			Description: "监听器的协议。包括：TCP、UDP、HTTP、HTTPS。",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(

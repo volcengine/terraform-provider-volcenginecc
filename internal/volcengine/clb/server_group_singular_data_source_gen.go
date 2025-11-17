@@ -178,10 +178,9 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "后端服务器接收请求的端口号。取值范围为1～65535。",
+		//	        "description": "后端服务器接收请求的端口号。取值范围为1～65535。参数AnyPortEnabled为“off”，且需要同时添加后端服务器时，该参数必须传入；参数AnyPortEnabled为“on”时，该参数默认为0。",
 		//	        "format": "int64",
 		//	        "maximum": 65535,
-		//	        "minimum": 1,
 		//	        "type": "integer"
 		//	      },
 		//	      "ServerId": {
@@ -241,7 +240,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器接收请求的端口号。取值范围为1～65535。",
+						Description: "后端服务器接收请求的端口号。取值范围为1～65535。参数AnyPortEnabled为“off”，且需要同时添加后端服务器时，该参数必须传入；参数AnyPortEnabled为“on”时，该参数默认为0。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ServerId
@@ -273,9 +272,11 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "绑定的标签键信息。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "绑定的标签值信息。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -294,11 +295,13 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "绑定的标签键信息。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "绑定的标签值信息。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

@@ -1,0 +1,198 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/VpcID",
+    "/properties/VpcRegion",
+    "/properties/Direction",
+    "/properties/ProjectName",
+    "/properties/VpcID",
+    "/properties/VpcRegion",
+    "/properties/EndpointType",
+    "/properties/IpConfigs/*/AzID",
+    "/properties/IpConfigs/*/IP",
+    "/properties/IpConfigs/*/Ipv6",
+    "/properties/IpConfigs/*/SubnetID"
+  ],
+  "definitions": {
+    "IpConfig": {
+      "properties": {
+        "AzID": {
+          "description": "终端节点 IP 地址所在的可用区。为了保证高可用，建议您至少添加 2 个可用区。",
+          "type": "string"
+        },
+        "IP": {
+          "description": "终端节点的 IPv4 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+          "type": "string"
+        },
+        "Ipv6": {
+          "description": "终端节点的 IPv6 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+          "type": "string"
+        },
+        "SubnetID": {
+          "description": "终端节点 IP 地址所在的子网 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "在把外部的 DNS 查询请求转发到解析器的场景中，您需要创建终端节点。收到解析器转发的 DNS 查询请求后，终端节点出站终端节点会把 DNS 查询请求转发到外部的 DNS 服务器。收到来自外部的 DNS 查询请求后，入站终端节点会把 DNS 查询请求转发到解析器。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "privatezone:CreateResolverEndpoint",
+        "privatezone:QueryResolverEndpoint"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "privatezone:QueryResolverEndpoint",
+        "privatezone:DeleteResolverEndpoint"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "privatezone:ListResolverEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "privatezone:QueryResolverEndpoint"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "privatezone:QueryResolverEndpoint",
+        "privatezone:UpdateResolverEndpoint",
+        "privatezone:UntagResources",
+        "privatezone:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/EndpointID"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Direction": {
+      "default": "OUTBOUND",
+      "description": "终端节点的 DNS 请求转发方向。OUTBOUND：（默认）出站终端节点，把来自 VPC 内的 DNS 查询请求转发到外部的 DNS 服务器。INBOUND：入站终端节点，把来自外部的 DNS 查询请求转发到解析器。",
+      "enum": [
+        "OUTBOUND",
+        "INBOUND"
+      ],
+      "type": "string"
+    },
+    "EndpointID": {
+      "description": "终端节点的 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "EndpointType": {
+      "description": "终端节点类型。IPv4：IPv4 节点。DualStack：双栈节点。",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "type": "string"
+    },
+    "IpConfigs": {
+      "description": "终端节点的可用区、子网和 IP 配置。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/IpConfig"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Name": {
+      "description": "终端节点的名称。支持 UTF-8 格式。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "终端节点所属的项目名称。默认为 default。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "SecurityGroupID": {
+      "description": "适用于终端节点 IP 地址的安全组 ID。终端节点默认会使用预设安全组：对于出站终端节点：入方向拒绝流量通行；出方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口。对于入站终端节点：入方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口；出方向拒绝流量通行。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "终端节点的状态。Creating：创建中。Running：运行中。Updating：更新中。Error：运行异常。",
+      "enum": [
+        "Creating",
+        "Running",
+        "Updating",
+        "Error"
+      ],
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "更新时间",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcID": {
+      "description": "终端节点所在的 VPC 的 ID。",
+      "type": "string"
+    },
+    "VpcRegion": {
+      "description": "终端节点所在的 VPC 的地域。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/EndpointID",
+    "/properties/CreatedTime",
+    "/properties/Status",
+    "/properties/UpdatedTime",
+    "/properties/SecurityGroupID"
+  ],
+  "required": [
+    "Name",
+    "VpcID",
+    "VpcRegion"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::PrivateZone::ResolverEndpoint",
+  "writeOnlyProperties": [
+    "/properties/EndpointType"
+  ]
+}

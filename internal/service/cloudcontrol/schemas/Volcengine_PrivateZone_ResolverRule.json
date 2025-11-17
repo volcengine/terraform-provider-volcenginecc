@@ -1,0 +1,223 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/VpcTrns",
+    "/properties/EndpointTrn"
+  ],
+  "definitions": {
+    "BindVPC": {
+      "properties": {
+        "AccountID": {
+          "description": "创建该 VPC 的火山引擎账号 ID。",
+          "type": "string"
+        },
+        "Region": {
+          "description": "VPC 的地域。",
+          "type": "string"
+        },
+        "RegionName": {
+          "description": "VPC 的地域的名称。",
+          "type": "string"
+        },
+        "VpcId": {
+          "description": "VPC 的 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ForwardIP": {
+      "properties": {
+        "IP": {
+          "description": "VPC 外部的 DNS 服务器的 IP 地址。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "VPC 外部的 DNS 服务器的端口。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "转发规则详细信息",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "private_zone:CreateResolverRule",
+        "private_zone:QueryResolverRule"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "private_zone:DeleteResolverRule",
+        "private_zone:ListResolverRules"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "private_zone:ListResolverRules"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "private_zone:QueryResolverRule"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "private_zone:UpdateResolverRule",
+        "private_zone:QueryResolverRule",
+        "private_zone:TagResources",
+        "private_zone:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/RuleID"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "转发规则的创建时间",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Enable": {
+      "description": "转发规则是否被启用。true：启用。false：禁用。",
+      "type": "boolean"
+    },
+    "EndpointID": {
+      "description": "终端节点的 ID。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。",
+      "type": "integer"
+    },
+    "EndpointTrn": {
+      "description": "终端节点的 TRN。",
+      "type": "string"
+    },
+    "ForwardIPs": {
+      "description": "外部的 DNS 服务器的 IP 地址和端口。您最多只能添加 10 个 IP 地址。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ForwardIP"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "LastOperator": {
+      "description": "最近一次更新转发规则的火山引擎账号的 ID",
+      "type": "string"
+    },
+    "Line": {
+      "description": "递归 DNS 服务器的出口 IP 地址的运营商。该参数仅在 Type 参数是 LINE 时有效。支持的取值：移动：中国移动，电信：中国电信，联通：中国联通",
+      "enum": [
+        "移动",
+        "电信",
+        "联通"
+      ],
+      "type": "string"
+    },
+    "Name": {
+      "description": "转发规则的名称。支持 UTF-8 格式。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "转发规则所属的项目名称。默认为 default。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RuleID": {
+      "description": "转发规则的 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "转发规则所属的一个或多个标签",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Type": {
+      "description": "转发规则类型。OUTBOUND：转发到外部的 DNS 服务器。LINE：自定义公网递归 DNS 服务器的出口 IP 地址的运营商。",
+      "enum": [
+        "OUTBOUND",
+        "LINE"
+      ],
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "转发规则的更新时间",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VPCs": {
+      "description": "转发规则所关联的 VPC。转发规则在关联的 VPC 中生效。Type 参数是 OUTBOUND 时，VPC 的地域必须和终端节点所在的地域相同。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/BindVPC"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "VpcTrns": {
+      "description": "域名所关联的一个或多个 VPC 的 TRN。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ZoneName": {
+      "description": "转发规则转发规则所关联的域名。您可以输入一个或多个域名。多个域名之间使用英文逗号, 分隔。最多支持输入 500 个域名。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。如果您把该参数设置为 *，则转发规则适用于 VPC 关联的所有域名。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RuleID",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/LastOperator"
+  ],
+  "required": [
+    "Name",
+    "Type"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::PrivateZone::ResolverRule",
+  "writeOnlyProperties": [
+    "/properties/EndpointTrn",
+    "/properties/VpcTrns"
+  ]
+}

@@ -58,6 +58,13 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_apig_gateway_service -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_GatewayService.json -package apig ../volcengine/apig/gateway_service_singular_data_source_gen.go ../volcengine/apig/gateway_service_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vefaas_sandbox -ccschema ../service/cloudcontrol/schemas/Volcengine_VEFAAS_Sandbox.json -package vefaas ../volcengine/vefaas/sandbox_singular_data_source_gen.go ../volcengine/vefaas/sandbox_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vefaas_kafka_trigger -ccschema ../service/cloudcontrol/schemas/Volcengine_VEFAAS_KafkaTrigger.json -package vefaas ../volcengine/vefaas/kafka_trigger_singular_data_source_gen.go ../volcengine/vefaas/kafka_trigger_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vke_permission -ccschema ../service/cloudcontrol/schemas/Volcengine_VKE_Permission.json -package vke ../volcengine/vke/permission_singular_data_source_gen.go ../volcengine/vke/permission_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_kafka_topic -ccschema ../service/cloudcontrol/schemas/Volcengine_Kafka_Topic.json -package kafka ../volcengine/kafka/topic_singular_data_source_gen.go ../volcengine/kafka/topic_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_cdn_share_config -ccschema ../service/cloudcontrol/schemas/Volcengine_CDN_ShareConfig.json -package cdn ../volcengine/cdn/share_config_singular_data_source_gen.go ../volcengine/cdn/share_config_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_privatezone_resolver_endpoint -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateZone_ResolverEndpoint.json -package privatezone ../volcengine/privatezone/resolver_endpoint_singular_data_source_gen.go ../volcengine/privatezone/resolver_endpoint_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_privatezone_resolver_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateZone_ResolverRule.json -package privatezone ../volcengine/privatezone/resolver_rule_singular_data_source_gen.go ../volcengine/privatezone/resolver_rule_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_apig_upstream -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_Upstream.json -package apig ../volcengine/apig/upstream_singular_data_source_gen.go ../volcengine/apig/upstream_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_natgateway_ngw -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_NGW.json -package natgateway ../volcengine/natgateway/ngw_singular_data_source_gen.go ../volcengine/natgateway/ngw_singular_data_source_gen_test.go
 
 package provider
 
@@ -66,12 +73,16 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/apig"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cdn"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/natgateway"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatezone"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"

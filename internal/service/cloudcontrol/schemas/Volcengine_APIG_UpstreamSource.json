@@ -12,7 +12,8 @@
       "properties": {
         "Basic": {
           "$ref": "#/definitions/Basic",
-          "description": "Basic认证。"
+          "description": "Basic认证。",
+          "type": "object"
         }
       },
       "type": "object"
@@ -90,7 +91,8 @@
       "properties": {
         "AuthConfig": {
           "$ref": "#/definitions/AuthConfig",
-          "description": "认证配置。"
+          "description": "认证配置。",
+          "type": "object"
         },
         "NacosId": {
           "description": "Nacos ID。",
@@ -107,11 +109,13 @@
       "properties": {
         "K8SSource": {
           "$ref": "#/definitions/K8SSource",
-          "description": "容器集群来源。"
+          "description": "容器集群来源。",
+          "type": "object"
         },
         "NacosSource": {
           "$ref": "#/definitions/NacosSource",
-          "description": "注册中心来源。"
+          "description": "注册中心来源。",
+          "type": "object"
         }
       },
       "type": "object"
