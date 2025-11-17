@@ -287,7 +287,8 @@
     },
     "HealthCheck": {
       "$ref": "#/definitions/HealthCheck",
-      "description": "健康检查相关信息。"
+      "description": "健康检查相关信息。",
+      "type": "object"
     },
     "Http2Enabled": {
       "description": "监听器是否开启前端HTTP 2.0协议。仅参数`Protocol取HTTPS时，本参数有效。取值如下：|on：开启。off（默认值）：不开启。",
@@ -349,7 +350,7 @@
       "type": "integer"
     },
     "Protocol": {
-      "description": "监听器的协议。",
+      "description": "监听器的协议。包括：TCP、UDP、HTTP、HTTPS。",
       "enum": [
         "TCP",
         "UDP",

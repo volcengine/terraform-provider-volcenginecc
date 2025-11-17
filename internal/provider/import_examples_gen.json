@@ -278,5 +278,40 @@
         "resource": "volcenginecc_vefaas_kafka_trigger",
         "identifier": ["FunctionId","KafkaTriggerId"],
         "path": "./examples/resources/volcenginecc_vefaas_kafka_trigger/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_permission",
+        "identifier": ["PermissionId"],
+        "path": "./examples/resources/volcenginecc_vke_permission/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kafka_topic",
+        "identifier": ["InstanceId","TopicName"],
+        "path": "./examples/resources/volcenginecc_kafka_topic/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cdn_share_config",
+        "identifier": ["ConfigName"],
+        "path": "./examples/resources/volcenginecc_cdn_share_config/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatezone_resolver_endpoint",
+        "identifier": ["EndpointID"],
+        "path": "./examples/resources/volcenginecc_privatezone_resolver_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatezone_resolver_rule",
+        "identifier": ["RuleID"],
+        "path": "./examples/resources/volcenginecc_privatezone_resolver_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_apig_upstream",
+        "identifier": ["UpstreamId"],
+        "path": "./examples/resources/volcenginecc_apig_upstream/import.sh"
+    },
+    {
+        "resource": "volcenginecc_natgateway_ngw",
+        "identifier": ["NatGatewayId"],
+        "path": "./examples/resources/volcenginecc_natgateway_ngw/import.sh"
     }
 ]

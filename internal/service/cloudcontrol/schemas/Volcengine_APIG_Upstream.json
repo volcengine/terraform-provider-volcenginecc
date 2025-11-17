@@ -1,0 +1,461 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GatewayId"
+  ],
+  "definitions": {
+    "AIProvider": {
+      "description": "AI模型代理。",
+      "properties": {
+        "BaseUrl": {
+          "description": "模型地址。",
+          "type": "string"
+        },
+        "CustomModelService": {
+          "$ref": "#/definitions/CustomModelService",
+          "description": "火山自部署模型服务。",
+          "type": "object"
+        },
+        "Name": {
+          "description": "模型服务商名称。",
+          "type": "string"
+        },
+        "Token": {
+          "description": "模型API key。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BackendTarget": {
+      "description": "后端节点，Upstream来源类型为VeFaas时无效。",
+      "properties": {
+        "HealthStatus": {
+          "description": "健康检查状态。",
+          "type": "string"
+        },
+        "IP": {
+          "description": "后端节点IP。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "后端节点端口。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "CircuitBreakingSettings": {
+      "description": "服务熔断配置。",
+      "properties": {
+        "BaseEjectionTime": {
+          "default": 30,
+          "description": "最小弹出时间。单位为毫秒。取值限制为1~86400000。默认值为30秒。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "ConsecutiveErrors": {
+          "description": "连续失败次数。取值限制为1~100。默认值为5。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Enable": {
+          "description": "开启。",
+          "type": "boolean"
+        },
+        "Interval": {
+          "default": 10,
+          "description": "计算周期。单位为毫秒。取值限制为1~86400000。默认值为10秒。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "MaxEjectionPercent": {
+          "default": 20,
+          "description": "最大熔断比例。取值限制为1~100。默认值为20%。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "MinHealthPercent": {
+          "default": 60,
+          "description": "最小健康比例。取值限制为0~100。默认值为60%。",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ConsistentHashLB": {
+      "description": "一致性哈希负载均衡。",
+      "properties": {
+        "HTTPCookie": {
+          "$ref": "#/definitions/HTTPCookie",
+          "description": "Cookie。",
+          "type": "object"
+        },
+        "HashKey": {
+          "description": "一致性哈希方式，取值：UseSourceIp：基于源IP地址。HttpQueryParameterName：基于参数。HttpHeaderName：基于头。HTTPCookie：基于cookie。",
+          "type": "string"
+        },
+        "HttpHeaderName": {
+          "description": "参数。支持ASCII可打印字符，长度限制为1~256个字符。",
+          "type": "string"
+        },
+        "HttpQueryParameterName": {
+          "description": "参数。支持ASCII可打印字符，长度限制为1~256个字符。",
+          "type": "string"
+        },
+        "UseSourceIp": {
+          "description": "源IP地址。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomModelService": {
+      "description": "火山自部署模型服务。",
+      "properties": {
+        "Name": {
+          "description": "模型服务名称。",
+          "type": "string"
+        },
+        "Namespace": {
+          "description": "命名空间。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "EcsInstances": {
+      "description": "云服务器。",
+      "properties": {
+        "EcsId": {
+          "description": "云服务器ID。",
+          "type": "string"
+        },
+        "IP": {
+          "description": "IP地址。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "HTTPCookie": {
+      "description": "Cookie。",
+      "properties": {
+        "Name": {
+          "description": "名称。支持ASCII可打印字符，长度限制为0~256个字符。",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        },
+        "Path": {
+          "description": "路径。支持ASCII可打印字符，长度限制为1~256个字符。",
+          "type": "string"
+        },
+        "Ttl": {
+          "description": "有效期。单位为秒。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "K8SService": {
+      "description": "容器服务。",
+      "properties": {
+        "Name": {
+          "description": "容器服务名称。长度限制为2~63个字符。",
+          "type": "string"
+        },
+        "Namespace": {
+          "description": "命名空间。长度限制为2~63个字符。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Label": {
+      "description": "标签。",
+      "properties": {
+        "Key": {
+          "description": "键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "值。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LoadBalancerSettings": {
+      "description": "负载均衡配置。",
+      "properties": {
+        "ConsistentHashLB": {
+          "$ref": "#/definitions/ConsistentHashLB",
+          "description": "一致性哈希负载均衡。",
+          "type": "object"
+        },
+        "LbPolicy": {
+          "description": "负载均衡策略，取值：SimpleLB：简单负载均衡。ConsistentHashLB：一致性哈希负载均衡。",
+          "type": "string"
+        },
+        "SimpleLB": {
+          "description": "简单负载均衡，取值：ROUND_ROBIN：轮询。LEAST_CONN：最小连接数。RANDOM：随机。",
+          "type": "string"
+        },
+        "WarmupDuration": {
+          "description": "预热时间。单位为秒。",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "NacosService": {
+      "description": "注册中心。",
+      "properties": {
+        "Group": {
+          "description": "分组。",
+          "type": "string"
+        },
+        "Namespace": {
+          "description": "命名空间。",
+          "type": "string"
+        },
+        "NamespaceId": {
+          "description": "命名空间ID。",
+          "type": "string"
+        },
+        "Service": {
+          "description": "服务。",
+          "type": "string"
+        },
+        "UpstreamSourceId": {
+          "description": "Upstream来源ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TlsSettings": {
+      "description": "TLS配置。",
+      "properties": {
+        "Sni": {
+          "description": "SNI。留空时会将访问网关的域名透传到upstream。",
+          "type": "string"
+        },
+        "TlsMode": {
+          "description": "TLS模式，取值：DISABLE：关闭TLS。SIMPLE：单向TLS。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UpstreamSpec": {
+      "description": "Upstream配置。",
+      "properties": {
+        "AIProvider": {
+          "$ref": "#/definitions/AIProvider",
+          "description": "AI模型代理。",
+          "type": "object"
+        },
+        "EcsInstances": {
+          "description": "云服务器。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EcsInstances"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "K8SService": {
+          "$ref": "#/definitions/K8SService",
+          "description": "容器服务。",
+          "type": "object"
+        },
+        "NacosService": {
+          "$ref": "#/definitions/NacosService",
+          "description": "注册中心。",
+          "type": "object"
+        },
+        "VeFaas": {
+          "$ref": "#/definitions/VeFaas",
+          "description": "函数服务。",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "VeFaas": {
+      "description": "函数服务。",
+      "properties": {
+        "FunctionId": {
+          "description": "函数ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "VersionDetail": {
+      "description": "版本详情。",
+      "properties": {
+        "Labels": {
+          "description": "标签。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Name": {
+          "description": "版本名称。支持大小写字母、数字和中划线（-），长度限制为2~63个字符。不能以中划线（-）开头。",
+          "type": "string"
+        },
+        "UpdateTime": {
+          "description": "更新时间。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Upstream 是对 API 网关实例后端的抽象。您可以将具有相同功能的后端应用抽象为一个 Upstream，实现路由和后端应用解耦，更灵活地支持后端应用的灰度发布、多版本管理等场景。本文为您介绍 Upstream 的概念及作用。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apig:CreateUpstream",
+        "apig:GetUpstream"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apig:DeleteUpstream",
+        "apig:GetUpstream"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apig:ListUpstreams"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apig:GetUpstream"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apig:UpdateUpstream",
+        "apig:GetUpstream"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/UpstreamId"
+  ],
+  "properties": {
+    "BackendTargets": {
+      "description": "后端节点，Upstream来源类型为VeFaas时无效。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/BackendTarget"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CircuitBreakingSettings": {
+      "$ref": "#/definitions/CircuitBreakingSettings",
+      "description": "服务熔断配置。",
+      "type": "object"
+    },
+    "Comments": {
+      "description": "备注。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "Upstream创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "GatewayId": {
+      "description": "网关实例ID。",
+      "type": "string"
+    },
+    "LoadBalancerSettings": {
+      "$ref": "#/definitions/LoadBalancerSettings",
+      "description": "负载均衡配置。",
+      "type": "object"
+    },
+    "Name": {
+      "description": "Upstream名称。",
+      "type": "string"
+    },
+    "Protocol": {
+      "description": "协议，取值：HTTP：HTTP/1.1。HTTP2：HTTP/2。GRPC：GRPC。",
+      "type": "string"
+    },
+    "SourceType": {
+      "description": "Upstream来源类型，取值：VeFaas：函数服务。ECS：云服务器。K8S：容器服务。Nacos：注册中心。AIProvider：AI模型代理。",
+      "type": "string"
+    },
+    "TlsSettings": {
+      "$ref": "#/definitions/TlsSettings",
+      "description": "TLS配置。",
+      "type": "object"
+    },
+    "UpdatedTime": {
+      "description": "Upstream更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UpstreamId": {
+      "description": "Upstream ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "UpstreamSpec": {
+      "$ref": "#/definitions/UpstreamSpec",
+      "description": "Upstream配置。",
+      "type": "object"
+    },
+    "VersionDetails": {
+      "description": "Upstream版本，仅在Upstream来源类型为K8S时有效。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/VersionDetail"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/UpstreamId",
+    "/properties/BackendTargets",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/VersionDetails"
+  ],
+  "required": [
+    "GatewayId",
+    "Name",
+    "SourceType",
+    "UpstreamSpec"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::APIG::Upstream"
+}

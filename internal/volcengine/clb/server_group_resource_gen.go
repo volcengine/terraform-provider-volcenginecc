@@ -86,7 +86,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// AnyPortEnabled is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
@@ -239,10 +238,9 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "后端服务器接收请求的端口号。取值范围为1～65535。",
+		//	        "description": "后端服务器接收请求的端口号。取值范围为1～65535。参数AnyPortEnabled为“off”，且需要同时添加后端服务器时，该参数必须传入；参数AnyPortEnabled为“on”时，该参数默认为0。",
 		//	        "format": "int64",
 		//	        "maximum": 65535,
-		//	        "minimum": 1,
 		//	        "type": "integer"
 		//	      },
 		//	      "ServerId": {
@@ -321,11 +319,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器接收请求的端口号。取值范围为1～65535。",
+						Description: "后端服务器接收请求的端口号。取值范围为1～65535。参数AnyPortEnabled为“off”，且需要同时添加后端服务器时，该参数必须传入；参数AnyPortEnabled为“on”时，该参数默认为0。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
-							int64validator.Between(1, 65535),
+							int64validator.AtMost(65535),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
@@ -381,9 +379,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "绑定的标签键信息。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "绑定的标签值信息。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -402,8 +402,9 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "绑定的标签键信息。",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -413,8 +414,9 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "绑定的标签值信息。",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -518,10 +520,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		"update_time":        "UpdateTime",
 		"value":              "Value",
 		"weight":             "Weight",
-	})
-
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/AnyPortEnabled",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

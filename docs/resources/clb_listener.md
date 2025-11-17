@@ -56,7 +56,7 @@ resource "volcenginecc_clb_listener" "ClbListenerDemo" {
 
 - `load_balancer_id` (String) CLB实例的ID。
 - `port` (Number) 监听器接收请求使用的端口。取值范围为 0～65535。参数Protocol为“TCP”或“UDP”时，支持传入0，表示用全端口监听。
-- `protocol` (String) 监听器的协议。
+- `protocol` (String) 监听器的协议。包括：TCP、UDP、HTTP、HTTPS。
 - `server_group_id` (String) 监听器关联的后端服务器组 ID。
 
 ### Optional

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cdn_share_config.example "config_name"

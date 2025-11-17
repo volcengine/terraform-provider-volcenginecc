@@ -58,6 +58,13 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_gateway_services -cctype Volcengine::APIG::GatewayService -package apig ../volcengine/apig/gateway_service_plural_data_source_gen.go ../volcengine/apig/gateway_service_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vefaas_sandboxes -cctype Volcengine::VEFAAS::Sandbox -package vefaas ../volcengine/vefaas/sandbox_plural_data_source_gen.go ../volcengine/vefaas/sandbox_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vefaas_kafka_triggers -cctype Volcengine::VEFAAS::KafkaTrigger -package vefaas ../volcengine/vefaas/kafka_trigger_plural_data_source_gen.go ../volcengine/vefaas/kafka_trigger_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vke_permissions -cctype Volcengine::VKE::Permission -package vke ../volcengine/vke/permission_plural_data_source_gen.go ../volcengine/vke/permission_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_kafka_topics -cctype Volcengine::Kafka::Topic -package kafka ../volcengine/kafka/topic_plural_data_source_gen.go ../volcengine/kafka/topic_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cdn_share_configs -cctype Volcengine::CDN::ShareConfig -package cdn ../volcengine/cdn/share_config_plural_data_source_gen.go ../volcengine/cdn/share_config_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_privatezone_resolver_endpoints -cctype Volcengine::PrivateZone::ResolverEndpoint -package privatezone ../volcengine/privatezone/resolver_endpoint_plural_data_source_gen.go ../volcengine/privatezone/resolver_endpoint_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_privatezone_resolver_rules -cctype Volcengine::PrivateZone::ResolverRule -package privatezone ../volcengine/privatezone/resolver_rule_plural_data_source_gen.go ../volcengine/privatezone/resolver_rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_upstreams -cctype Volcengine::APIG::Upstream -package apig ../volcengine/apig/upstream_plural_data_source_gen.go ../volcengine/apig/upstream_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_natgateway_ngws -cctype Volcengine::NatGateway::NGW -package natgateway ../volcengine/natgateway/ngw_plural_data_source_gen.go ../volcengine/natgateway/ngw_plural_data_source_gen_test.go
 
 package provider
 
@@ -66,12 +73,16 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/apig"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cdn"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/natgateway"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatezone"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_privatezone_resolver_rule.example "rule_id"

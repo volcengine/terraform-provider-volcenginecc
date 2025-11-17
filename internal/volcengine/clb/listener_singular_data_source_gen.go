@@ -573,7 +573,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的协议。",
+		//	  "description": "监听器的协议。包括：TCP、UDP、HTTP、HTTPS。",
 		//	  "enum": [
 		//	    "TCP",
 		//	    "UDP",
@@ -583,7 +583,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的协议。",
+			Description: "监听器的协议。包括：TCP、UDP、HTTP、HTTPS。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyConnectTimeout

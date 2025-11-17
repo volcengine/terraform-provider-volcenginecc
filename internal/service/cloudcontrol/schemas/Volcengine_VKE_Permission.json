@@ -1,0 +1,161 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/IsCustomRole",
+    "/properties/Namespace",
+    "/properties/RoleDomain",
+    "/properties/RoleName",
+    "/properties/AuthorizerId",
+    "/properties/AuthorizerType",
+    "/properties/GranteeId",
+    "/properties/GranteeType"
+  ],
+  "description": "容器服务提供集群 RBAC 授权功能，为 IAM 用户或角色授予 RBAC 访问权限，包括可访问的资源、权限的作用范围、预置的角色类型等，从而更好地管理集群的安全访问控制，满足企业用户细粒度的资源访问权限控制需求。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vke:GrantPermission",
+        "vke:ListPermissions"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vke:RevokePermission",
+        "vke:ListPermissions"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vke:ListPermissions"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vke:ListPermissions"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PermissionId"
+  ],
+  "properties": {
+    "AuthorizedAt": {
+      "description": "RBAC 权限策略资源被授权的时间。",
+      "type": "string"
+    },
+    "AuthorizerId": {
+      "description": "授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AuthorizerName": {
+      "description": "授权者名称",
+      "type": "string"
+    },
+    "AuthorizerType": {
+      "description": "授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。",
+      "enum": [
+        "User",
+        "Role",
+        "Account"
+      ],
+      "type": "string"
+    },
+    "ClusterId": {
+      "description": "需要授权给 IAM 用户或角色的集群 ID。roleDomain为namespace或cluster时必须填写该参数值。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "RBAC 权限策略资源创建的时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "GranteeId": {
+      "description": "被授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "GranteeType": {
+      "description": "被授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。",
+      "enum": [
+        "User",
+        "Role",
+        "Account"
+      ],
+      "type": "string"
+    },
+    "IsCustomRole": {
+      "description": "给被授权者授予的 RBAC 角色是否为自定义角色，取值如下：true：自定义角色。false：（默认值）系统预置的角色。",
+      "type": "boolean"
+    },
+    "KubeRoleBindingName": {
+      "description": "RBAC 权限策略资源在 Kubernetes 中的对象名称。",
+      "type": "string"
+    },
+    "Message": {
+      "description": "授权详细消息。",
+      "type": "string"
+    },
+    "Namespace": {
+      "description": "需要授权给 IAM 用户或角色的名空间名称。roleDomain等于namespace时必须填写该参数值。roleDomain不等于namespace时，填写该参数值不生效。",
+      "type": "string"
+    },
+    "PermissionId": {
+      "description": "RBAC 权限策略资源 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ProjectSelector": {
+      "description": "项目选择器",
+      "type": "string"
+    },
+    "RevokedAt": {
+      "description": "撤销授权的时间。",
+      "type": "string"
+    },
+    "RoleDomain": {
+      "description": "为 IAM 用户或角色授予的权限类型，取值如下：namespace：授予命名空间级别的权限。cluster：授予集群级别的权限。all_clusters：授予当前账号下全部集群级别的权限。",
+      "enum": [
+        "namespace",
+        "cluster",
+        "all_clusters"
+      ],
+      "type": "string"
+    },
+    "RoleName": {
+      "description": "给被授权者授予的 RBAC 角色名称。目前必须填写该参数。当roleDomain为all_clusters时，不可以自定义角色名称。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "RBAC 权限访问策略资源的状态，取值如下：Success：授权成功。Failed：授权失败。Pending：授权中。PartialSuccess：部分授权成功。",
+      "enum": [
+        "Success",
+        "Failed",
+        "Pending",
+        "PartialSuccess"
+      ],
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/PermissionId",
+    "/properties/AuthorizerName",
+    "/properties/AuthorizedAt",
+    "/properties/CreatedTime",
+    "/properties/KubeRoleBindingName",
+    "/properties/Message",
+    "/properties/ProjectSelector",
+    "/properties/RevokedAt",
+    "/properties/Status"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VKE::Permission",
+  "writeOnlyProperties": [
+    "/properties/RoleDomain"
+  ]
+}

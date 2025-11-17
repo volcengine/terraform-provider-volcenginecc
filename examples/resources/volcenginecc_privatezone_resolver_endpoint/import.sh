@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_privatezone_resolver_endpoint.example "endpoint_id"

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vke_permission.example "permission_id"

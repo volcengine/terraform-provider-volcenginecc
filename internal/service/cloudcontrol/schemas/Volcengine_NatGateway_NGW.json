@@ -1,0 +1,311 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BillingType",
+    "/properties/Period",
+    "/properties/PeriodUnit",
+    "/properties/ProjectName",
+    "/properties/NetworkType",
+    "/properties/SubnetId",
+    "/properties/VpcId"
+  ],
+  "definitions": {
+    "EipAddress": {
+      "properties": {
+        "AllocationId": {
+          "description": "公网IP的ID。",
+          "type": "string"
+        },
+        "EipAddress": {
+          "description": "公网IP的地址。",
+          "semantic": "publicIp",
+          "type": "string"
+        },
+        "UsingStatus": {
+          "description": "公网IP的使用状态。Idle：未使用。UsedBySnat：被SNAT规则使用。UsedByDnat：被DNAT规则使用。UsedByNat：被SNAT/DNAT规则同时使用。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NatIpAddress": {
+      "properties": {
+        "NatIpAddress": {
+          "description": "中转Ip地址。",
+          "type": "string"
+        },
+        "NatIpId": {
+          "description": "中转Ip id。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "NAT网关为私有网络内的云服务器提供网络地址转换服务。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "natgateway:CreateNatGateway",
+        "natgateway:DescribeNatGatewayAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "natgateway:DeleteNatGateway",
+        "natgateway:DescribeNatGatewayAttributes",
+        "natgateway:DeleteDnatEntry",
+        "natgateway:DeleteSnatEntry"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "natgateway:DescribeNatGateways"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "natgateway:DescribeNatGatewayAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "natgateway:ModifyNatGatewayAttributes",
+        "natgateway:DescribeNatGatewayAttributes",
+        "natgateway:UntagResources",
+        "natgateway:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/NatGatewayId"
+  ],
+  "properties": {
+    "BillingType": {
+      "description": "NAT网关的计费方式。取值如下：1 ：包年包月。2（默认值）：按量计费-按规格计费。3：按量计费-按使用量计费。当NetworkType传入intranet时，本参数仅支持且必须传入3。",
+      "format": "int64",
+      "maximum": 3,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "NAT网关是否被锁定。空值：正常未被锁定。Normal：正常未被锁定。FinancialLocked：因欠费被锁定。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "删除时间",
+      "type": "string"
+    },
+    "Description": {
+      "description": "NAT网关的描述。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1 ～ 255个字符。不填默认空字符串。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "DirectMode": {
+      "default": true,
+      "description": "标识该nat是直通还是非直通。 - true（默认）：EIP直通nat网关。 - false：非EIP直通nat网关。",
+      "type": "boolean"
+    },
+    "DnatEntryIds": {
+      "description": "DNAT规则ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "EipAddresses": {
+      "description": "NAT网关绑定公网IP的信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/EipAddress"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ExpiredTime": {
+      "description": "包年包月NAT网关到期时间。仅包年包月计费类型的NAT网关会返回此参数。",
+      "type": "string"
+    },
+    "LockReason": {
+      "description": "NAT被锁定的原因。financial：因欠费被锁定。security：因安全原因被锁定。",
+      "type": "string"
+    },
+    "NatGatewayId": {
+      "description": "NAT网关ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "NatGatewayName": {
+      "description": "NAT网关的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。长度限制为1 ~ 128个字符。不填默认是NAT网关实例的ID。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NatIpAddresses": {
+      "description": "私网NAT实例的中转IP列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NatIpAddress"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "NetworkInterfaceId": {
+      "description": "NAT网关占用的网卡ID。",
+      "type": "string"
+    },
+    "NetworkType": {
+      "default": "internet",
+      "description": "NAT网关类型。internet：公网NAT网关。intranet：私网NAT网关。",
+      "enum": [
+        "internet",
+        "intranet"
+      ],
+      "type": "string"
+    },
+    "OverdueTime": {
+      "description": "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。",
+      "type": "string"
+    },
+    "Period": {
+      "description": "购买包年包月NAT网关的时长，默认1。当PeriodUnit传入Month，Period取值范围：1 ~ 9、12、24、36。当PeriodUnit传入Year，Period取值范围：1 ~ 3。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "PeriodUnit": {
+      "description": "购买包年包月NAT网关时长的单位，默认Month。Month ：月。Year ：年。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "NAT网关所属项目的名称。不填默认加入default项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "SmartScheduleEnabled": {
+      "description": "是否开启智能调度。",
+      "type": "boolean"
+    },
+    "SmartScheduleRule": {
+      "description": "智能调度策略规则。ChinaMobile：中国移动。ChinaUnicom：中国联通。ChinaTelecom：中国电信。BGP：BGP多线。",
+      "enum": [
+        "ChinaMobile",
+        "ChinaUnicom",
+        "ChinaTelecom",
+        "BGP",
+        ""
+      ],
+      "type": "string"
+    },
+    "SnatEntryIds": {
+      "description": "SNAT规则ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Spec": {
+      "description": "NAT网关的规格。Small（默认）：小型。Medium：中型。Large：大型。Extra_Large_1：超大型-1。Extra_Large_2：超大型-2。",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large",
+        "Extra_Large_1",
+        "Extra_Large_2"
+      ],
+      "type": "string"
+    },
+    "Status": {
+      "description": "NAT网关的状态。Available：可用。Creating：创建中。Pending：操作中。Deleting：删除中。",
+      "enum": [
+        "Available",
+        "Creating",
+        "Pending",
+        "Deleting"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "NAT网关所在子网的ID。传入的子网，必须是VpcId传入的私有网络的子网。子网内至少有一个可用的私网IP。系统自动生成的NAT网关网卡将占用该子网一个私网IP。子网所在的可用区需要已部署NAT网关资源。子网所在可用区将作为NAT网关的主可用区，并自动关联备可用区。当主可用区发生故障时，NAT网关自动切换到备可用区。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "NAT网关的最后操作时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "NAT网关所在私有网络的ID。",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "NAT网关所属主可用区的ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/NatGatewayId",
+    "/properties/BusinessStatus",
+    "/properties/CreatedTime",
+    "/properties/DeletedTime",
+    "/properties/DnatEntryIds",
+    "/properties/ExpiredTime",
+    "/properties/LockReason",
+    "/properties/NetworkInterfaceId",
+    "/properties/OverdueTime",
+    "/properties/SnatEntryIds",
+    "/properties/Status",
+    "/properties/UpdatedTime",
+    "/properties/ZoneId",
+    "/properties/EipAddresses",
+    "/properties/NatIpAddresses",
+    "/properties/DirectMode"
+  ],
+  "required": [
+    "VpcId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::NatGateway::NGW"
+}
