@@ -57,22 +57,22 @@ resource "volcenginecc_waf_domain" "WafDomainDemo" {
 - `black_lct_enable` (Number) 是否开启了区域封禁策略。0：关闭;1：开启。
 - `bot_dytoken_enable` (Number) 是否开启动态Token防护。
 - `bot_frequency_enable` (Number) 是否开启 bot 频率限制策略。
-0：关闭
-1：开启。
+  0：关闭
+  1：开启。
 - `bot_repeat_enable` (Number) 是否开启 bot 统计防护策略。
-0：关闭
-1：开启。
+  0：关闭
+  1：开启。
 - `bot_sequence_default_action` (Number) 设置 bot 行为地图策略默认动作，当 BotSequenceEnable = 1 开启状态时生效。默认为 0 （观察）。
-0：观察
-2：拦截
-6：JS 挑战
-7：人机验证。
+  0：观察
+  2：拦截
+  6：JS 挑战
+  7：人机验证。
 - `bot_sequence_enable` (Number) 是否开启 bot 行为地图。
-0：关闭
-1：开启。
+  0：关闭
+  1：开启。
 - `cc_enable` (Number) 是否开启 CC 防护策略。
-0：关闭
-1：开启。
+  0：关闭
+  1：开启。
 - `certificate_id` (String) 托管至证书中心的证书ID。
 - `certificate_platform` (String) 证书托管平台:waf/certificate_service。
 - `client_ip_location` (Number) 客户端IP获取方式。0:自定义Header字段,1:通过X-Forwarded-For(XFF)字段中第一个公网IP地址作为客户端真实IP地址。
@@ -84,13 +84,13 @@ resource "volcenginecc_waf_domain" "WafDomainDemo" {
 - `custom_rsp_enable` (Number) 是否开启自定义响应。
 - `custom_sni` (String) 自定义SNI。
 - `defence_mode` (Number) 为例外 ALB 实例设置防护模式。
-1：启用防护，已配置的防护策略生效。
-2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。
-3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。
-设置例外防护实例后，域名可能还会存在以下防护状态：
-5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。
-6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。
-7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。
+  1：启用防护，已配置的防护策略生效。
+  2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。
+  3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。
+  设置例外防护实例后，域名可能还会存在以下防护状态：
+  5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。
+  6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。
+  7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。
 - `dlp_enable` (Number) 是否开启数据泄露防护。
 - `enable_custom_redirect` (Number) 是否开启用户自定义重定向。0:关闭,1:开启。
 - `enable_http2` (Number) 是否开启HTTP2.0。0:关闭,1:开启。
@@ -205,9 +205,9 @@ Optional:
 Optional:
 
 - `enable` (Number) 是否记录全量 header。
-
-关闭，仅记录常见 header 字段。
-启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。
+  
+  关闭，仅记录常见 header 字段。
+  启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。
 - `excluded_key_list` (Set of String) 例外 header 字段，将对应字段从字段的 JSON 中排除，可帮助节约日志存储空间。
 - `statistical_key_list` (Set of String) 统计 header 字段，将对应字段用于日志统计分析和告警。
 

@@ -603,7 +603,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器的监听端口，取值：1 - 65535 。",
+			Description: "监听器的监听端口，取值：1   - 65535 。",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(1, 65535),

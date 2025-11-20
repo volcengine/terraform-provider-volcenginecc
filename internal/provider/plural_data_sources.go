@@ -65,6 +65,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_privatezone_resolver_rules -cctype Volcengine::PrivateZone::ResolverRule -package privatezone ../volcengine/privatezone/resolver_rule_plural_data_source_gen.go ../volcengine/privatezone/resolver_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_upstreams -cctype Volcengine::APIG::Upstream -package apig ../volcengine/apig/upstream_plural_data_source_gen.go ../volcengine/apig/upstream_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_natgateway_ngws -cctype Volcengine::NatGateway::NGW -package natgateway ../volcengine/natgateway/ngw_plural_data_source_gen.go ../volcengine/natgateway/ngw_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_units -cctype Volcengine::Organization::Unit -package organization ../volcengine/organization/unit_plural_data_source_gen.go ../volcengine/organization/unit_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmysql_db_accounts -cctype Volcengine::RDSMySQL::DBAccount -package rdsmysql ../volcengine/rdsmysql/db_account_plural_data_source_gen.go ../volcengine/rdsmysql/db_account_plural_data_source_gen_test.go
 
 package provider
 
@@ -82,6 +84,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/natgateway"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/organization"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatezone"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"

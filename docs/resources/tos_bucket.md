@@ -14,13 +14,16 @@ description: |-
 ```terraform
 resource "volcenginecc_tos_bucket" "BucketDemo" {
   name                  = "bucket-demo"
+  storage_class         = "STANDARD"
   enable_version_status = "Enabled"
+  bucket_type           = "fns"
   tags = [
     {
       key   = "env"
       value = "test"
     }
   ]
+  policy = "{\"Version\":\"1.0\",\"Statement\":[{\"Sid\":\"f8fd\",\"Effect\":\"Allow\",\"Principal\":[\"*******\"],\"Action\":[\"tos:Get*\",\"tos:List*\",\"tos:HeadBucket\"],\"Resource\":[\"trn:tos:::************\",\"trn:tos:::************/*\"]}]}"
   lifecycle_config = [
     {
       expiration = {
@@ -32,10 +35,9 @@ resource "volcenginecc_tos_bucket" "BucketDemo" {
         object_size_greater_than   = 123
         object_size_less_than      = 789
       }
-      id     = "bucketdemo"
-      prefix = "prefix"
-      status = "Enabled"
-    }
+      lifecycle_rule_id = "bucketdemo"
+      prefix            = "prefix"
+    status = "Enabled" }
   ]
 }
 ```
@@ -56,6 +58,7 @@ resource "volcenginecc_tos_bucket" "BucketDemo" {
 - `enable_version_status` (String) 存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。
 - `lifecycle_config` (Attributes Set) 存储桶的声明周期。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config))
+- `policy` (String) JSON 格式的字符串，包含了桶策略的信息，但单个桶的所有桶策略 JSON 序列化后总大小不能超过 20KB。
 - `project_name` (String) 存储桶所属项目。
 - `storage_class` (String) 桶的默认存储类型。包括STANDARD：标准存储。IA：低频访问存储。INTELLIGENT_TIERING：智能分层存储。ARCHIVE_FR：归档闪回存储。ARCHIVE：归档存储。COLD_ARCHIVE：冷归档存储。DEEP_COLD_ARCHIVE：深度冷归档存储。
 - `tags` (Attributes Set) 存储桶的标签信息。

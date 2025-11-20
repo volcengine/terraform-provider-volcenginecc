@@ -259,7 +259,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"bot_frequency_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 bot 频率限制策略。\n0：关闭\n1：开启。",
+			Description: "是否开启 bot 频率限制策略。\n  0：关闭\n  1：开启。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BotRepeatEnable
@@ -271,7 +271,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"bot_repeat_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 bot 统计防护策略。\n0：关闭\n1：开启。",
+			Description: "是否开启 bot 统计防护策略。\n  0：关闭\n  1：开启。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BotSequenceDefaultAction
@@ -290,7 +290,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"bot_sequence_default_action": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "设置 bot 行为地图策略默认动作，当 BotSequenceEnable = 1 开启状态时生效。默认为 0 （观察）。\n0：观察\n2：拦截\n6：JS 挑战\n7：人机验证。",
+			Description: "设置 bot 行为地图策略默认动作，当 BotSequenceEnable = 1 开启状态时生效。默认为 0 （观察）。\n  0：观察\n  2：拦截\n  6：JS 挑战\n  7：人机验证。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BotSequenceEnable
@@ -302,7 +302,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"bot_sequence_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 bot 行为地图。\n0：关闭\n1：开启。",
+			Description: "是否开启 bot 行为地图。\n  0：关闭\n  1：开启。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CcEnable
@@ -314,7 +314,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"cc_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 CC 防护策略。\n0：关闭\n1：开启。",
+			Description: "是否开启 CC 防护策略。\n  0：关闭\n  1：开启。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateID
@@ -585,7 +585,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"defence_mode": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "为例外 ALB 实例设置防护模式。\n1：启用防护，已配置的防护策略生效。\n2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。\n3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。\n设置例外防护实例后，域名可能还会存在以下防护状态：\n5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。\n6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。\n7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。",
+			Description: "为例外 ALB 实例设置防护模式。\n  1：启用防护，已配置的防护策略生效。\n  2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。\n  3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。\n  设置例外防护实例后，域名可能还会存在以下防护状态：\n  5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。\n  6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。\n  7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DlpEnable
@@ -1128,7 +1128,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enable
 						"enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "是否记录全量 header。\n\n关闭，仅记录常见 header 字段。\n启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。",
+							Description: "是否记录全量 header。\n  \n  关闭，仅记录常见 header 字段。\n  启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ExcludedKeyList

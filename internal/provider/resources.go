@@ -65,6 +65,8 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_privatezone_resolver_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateZone_ResolverRule.json -package privatezone -- ../volcengine/privatezone/resolver_rule_resource_gen.go ../volcengine/privatezone/resolver_rule_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_apig_upstream -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_Upstream.json -package apig -- ../volcengine/apig/upstream_resource_gen.go ../volcengine/apig/upstream_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_natgateway_ngw -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_NGW.json -package natgateway -- ../volcengine/natgateway/ngw_resource_gen.go ../volcengine/natgateway/ngw_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_organization_unit -ccschema ../service/cloudcontrol/schemas/Volcengine_Organization_Unit.json -package organization -- ../volcengine/organization/unit_resource_gen.go ../volcengine/organization/unit_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rdsmysql_db_account -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSMySQL_DBAccount.json -package rdsmysql -- ../volcengine/rdsmysql/db_account_resource_gen.go ../volcengine/rdsmysql/db_account_resource_gen_test.go
 
 package provider
 
@@ -82,6 +84,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/natgateway"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/organization"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatezone"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"

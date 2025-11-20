@@ -416,7 +416,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器的监听端口，取值：1 - 65535 。",
+			Description: "监听器的监听端口，取值：1   - 65535 。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName

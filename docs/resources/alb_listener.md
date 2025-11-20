@@ -53,7 +53,7 @@ resource "volcenginecc_alb_listener" "ALBListenerDemo" {
 ### Required
 
 - `load_balancer_id` (String) 监听器所属的负载均衡实例 ID。
-- `port` (Number) 监听器的监听端口，取值：1 - 65535 。
+- `port` (Number) 监听器的监听端口，取值：1   - 65535 。
 - `protocol` (String) 监听器的协议，支持 HTTP 协议和 HTTPS 协议。
 - `server_group_id` (String) 监听器的默认服务器组。
 

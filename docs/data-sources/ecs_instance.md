@@ -22,114 +22,116 @@ Data Source schema for Volcengine::ECS::Instance
 ### Read-Only
 
 - `affinity_group_size` (Number) 亲和组规格，取值：2。
-:::tip
-- 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。
-- 该功能正在邀测中，如需试用，请联系客户经理申请。
-:::
+  
+  **提示:**
+    - 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。
+    - 该功能正在邀测中，如需试用，请联系客户经理申请。
 - `auto_renew` (Boolean) 实例到期后是否自动续费，取值：
-- true：自动续费。
-- false（默认）：不自动续费。
-:::tip
-仅当参数`InstanceChargeType`取值为`PrePaid`时生效。
-:::
+    - true：自动续费。
+    - false（默认）：不自动续费。
+  
+  **提示:**
+  仅当参数`InstanceChargeType`取值为`PrePaid`时生效。
 - `auto_renew_period` (Number) 每次自动续费的时长。
-- 仅当参数`AutoRenew`取值为`True`时，该参数生效，默认值为1。
-- `PeriodUnit`取值为`Month`时，该参数取值为1、2、3、6、12。
+    - 仅当参数`AutoRenew`取值为`True`时，该参数生效，默认值为1。
+    - `PeriodUnit`取值为`Month`时，该参数取值为1、2、3、6、12。
 - `cpu_max_frequency` (Number) 指定CPU最大频率，单位：GHz，取值范围：CPU的主频到睿频之间。
-:::tip
-- 当前仅g3al、c3al、r3al、g4i、c4i、r4i、g4ie、c4ie、r4ie实例支持设置该参数。规格的主频/睿频及更多信息，请参见[实例规格介绍](https://www.volcengine.com/docs/6396/70840)。
-- 该功能正在邀测中，如需使用，请联系客户经理申请。
-:::
+  
+  **提示:**
+    - 当前仅g3al、c3al、r3al、g4i、c4i、r4i、g4ie、c4ie、r4ie实例支持设置该参数。规格的主频/睿频及更多信息，请参见[实例规格介绍](https://www.volcengine.com/docs/6396/70840)。
+    - 该功能正在邀测中，如需使用，请联系客户经理申请。
 - `cpu_memory` (Attributes) 实例的CPU选项。 (see [below for nested schema](#nestedatt--cpu_memory))
 - `created_at` (String) 实例的创建时间。
 - `credit_specification` (String) 突发性能实例的运行模式，取值：
-- Standard：标准模式。
-- Unlimited：无性能约束模式（暂不支持）。
-:::tip
-- 仅当`InstanceTypeId`取值为ecs.t2系列，即突发性能实例时该参数生效。
-- 不传或传入空值时，突发性能实例默认为`Standard`标准模式。
-:::
+    - Standard：标准模式。
+    - Unlimited：无性能约束模式（暂不支持）。
+  
+  **提示:**
+    - 仅当`InstanceTypeId`取值为ecs.t2系列，即突发性能实例时该参数生效。
+    - 不传或传入空值时，突发性能实例默认为`Standard`标准模式。
 - `deletion_protection` (Boolean) 实例删除保护属性，指定是否支持通过控制台或API删除实例。取值：
-- true：开启实例删除保护。
-- false（默认）：关闭实例删除保护。
-开启实例删除保护后，在控制台或调用API删除实例时，会收到删除失败的错误码。如需删除，请先关闭实例删除保护。
+    - true：开启实例删除保护。
+    - false（默认）：关闭实例删除保护。
+  开启实例删除保护后，在控制台或调用API删除实例时，会收到删除失败的错误码。如需删除，请先关闭实例删除保护。
 - `deployment_set_group_number` (Number) 当ECS实例要加入或调整的部署集策略为部署集组高可用策略（AvailabilityGroup）时，可以通过该参数指定实例在部署集中的分组号，取值范围：1～7。
 - `deployment_set_id` (String) 实例需要加入的部署集ID。
-- 您可以调用[DescribeDeploymentSets](https://www.volcengine.com/docs/6396/70873)接口，查询已创建的部署集。
-- 关于部署集的更多信息，请参见[部署集](https://www.volcengine.com/docs/6396/70871)。
+    - 您可以调用[DescribeDeploymentSets](https://www.volcengine.com/docs/6396/70873)接口，查询已创建的部署集。
+    - 关于部署集的更多信息，请参见[部署集](https://www.volcengine.com/docs/6396/70871)。
 - `description` (String) 实例的描述，默认为空字符串。
-- 必须以字母或中文开头。
-- 只能包含中文、字母、数字、点号“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”
-- 长度限制在255个字符以内。
+    - 必须以字母或中文开头。
+    - 只能包含中文、字母、数字、点号“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”
+    - 长度限制在255个字符以内。
 - `eip_address` (Attributes) 实例的EIP地址。 (see [below for nested schema](#nestedatt--eip_address))
 - `expired_at` (String) 实例的过期时间。
 - `hostname` (String) 实例主机名，即实例操作系统内部的计算机名。
-- Linux实例：
-  - 允许使用字母、数字、点号“.”或中划线“-”。
-  - 不能以中划线、点号开头或结尾，且不能连续使用中划线和点号。
-  - Linux系统长度限制在2～63个字符之间。
-- Windows实例：
-  - 允许使用字母、数字或中划线“-”，不能完全是数字。
-  - 不能以中划线开头或结尾，且不能连续使用中划线。
-  - Windows系统长度限制在2～15个字符之间。
+    - Linux实例：
+      - 允许使用字母、数字、点号“.”或中划线“-”。
+      - 不能以中划线、点号开头或结尾，且不能连续使用中划线和点号。
+      - Linux系统长度限制在2～63个字符之间。
+    - Windows实例：
+      - 允许使用字母、数字或中划线“-”，不能完全是数字。
+      - 不能以中划线开头或结尾，且不能连续使用中划线。
+      - Windows系统长度限制在2～15个字符之间。
 - `hpc_cluster_id` (String) 实例所属的高性能计算集群ID。
-:::tip
-仅当创建高性能计算GPU型实例时，该参数生效且为必填项。
-:::
+  
+  **提示:**
+  仅当创建高性能计算GPU型实例时，该参数生效且为必填项。
 - `image` (Attributes) 实例的镜像。 (see [below for nested schema](#nestedatt--image))
 - `instance_charge_type` (String) 实例和云盘的计费类型，取值：
-- PostPaid：按量计费。
-- PrePaid：包年包月。请确认您的账号支持余额支付或者信控支付，否则将返回InvalidInstanceChargeType的错误提示。
+    - PostPaid：按量计费。
+    - PrePaid：包年包月。请确认您的账号支持余额支付或者信控支付，否则将返回InvalidInstanceChargeType的错误提示。
 - `instance_id` (String) ECS实例的ID。
 - `instance_name` (String) 实例的名称。
-- 以字母或中文开头。
-- 只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。
-- 长度限制为1～128个字符。
+    - 以字母或中文开头。
+    - 只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。
+    - 长度限制为1～128个字符。
 - `instance_type` (String) 实例规格。
-- 产品选型：您可以参考[实例规格介绍](https://www.volcengine.com/docs/6396/70840)或者调用[DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769)查看实例规格的性能数据，也可以参考[实例选型最佳实践](https://www.volcengine.com/docs/6396/74174)了解如何选择实例规格。
-- 查询库存：您可以调用[DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279)查询可用区中计算资源的库存信息。
+    - 产品选型：您可以参考[实例规格介绍](https://www.volcengine.com/docs/6396/70840)或者调用[DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769)查看实例规格的性能数据，也可以参考[实例选型最佳实践](https://www.volcengine.com/docs/6396/74174)了解如何选择实例规格。
+    - 查询库存：您可以调用[DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279)查询可用区中计算资源的库存信息。
 - `key_pair` (Attributes) 实例的密钥对名称。 (see [below for nested schema](#nestedatt--key_pair))
 - `operation_system` (Attributes) 实例的操作系统类型。 (see [below for nested schema](#nestedatt--operation_system))
 - `password` (String) 实例的密码。
 - `period` (Number) 购买资源的时长（N）。
-- `PeriodUnit`为`Month`（默认）时，取值：1、2、3、4、5、6、7、8、9、12、24、36、48、60。
-- `PeriodUnit`为`Year`时，取值：1、2、3、4、5。
-:::tip
-仅当`InstanceChargeType`取值为`PrePaid`时生效，且为必填。
+    - `PeriodUnit`为`Month`（默认）时，取值：1、2、3、4、5、6、7、8、9、12、24、36、48、60。
+    - `PeriodUnit`为`Year`时，取值：1、2、3、4、5。
+  
+  **提示:**
+  仅当`InstanceChargeType`取值为`PrePaid`时生效，且为必填。
 - `period_unit` (String) 购买资源的时长单位。取值：
-- Month（默认）：月。
-- Year：年。
-:::tip
-仅当`InstanceChargeType`取值为`PrePaid`时生效。
+    - Month（默认）：月。
+    - Year：年。
+  
+  **提示:**
+  仅当`InstanceChargeType`取值为`PrePaid`时生效。
 - `placement` (Attributes) 实例的部署信息。 (see [below for nested schema](#nestedatt--placement))
 - `primary_network_interface` (Attributes) 实例的主网卡。 (see [below for nested schema](#nestedatt--primary_network_interface))
 - `project_name` (String) 实例所属的项目名称。
 - `secondary_network_interfaces` (Attributes List) 实例的辅助网卡。 (see [below for nested schema](#nestedatt--secondary_network_interfaces))
 - `spot_price_limit` (Number) 竞价实例的每小时最高价格。
-- 支持小数点后3位的精度。
-- 仅当`SpotStrategy`取值为`SpotWithPriceLimit`时生效。
-- 当`SpotStrategy`取值为`SpotWithPriceLimit`时，您可以自定义设置竞价实例的价格上限，当市场价格高于您的出价时，实例会被释放；当`SpotStrategy`取值为`SpotAsPriceGo`时，则代表您接受系统自动出价，跟随当前市场实际价格，此时无需填写该参数。
+    - 支持小数点后3位的精度。
+    - 仅当`SpotStrategy`取值为`SpotWithPriceLimit`时生效。
+    - 当`SpotStrategy`取值为`SpotWithPriceLimit`时，您可以自定义设置竞价实例的价格上限，当市场价格高于您的出价时，实例会被释放；当`SpotStrategy`取值为`SpotAsPriceGo`时，则代表您接受系统自动出价，跟随当前市场实际价格，此时无需填写该参数。
 - `spot_strategy` (String) 竞价策略。取值：
-- NoSpot（默认）：非竞价实例。
-- SpotWithPriceLimit：设置价格上限的竞ga价实例。
-- SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的竞价实例。
+    - NoSpot（默认）：非竞价实例。
+    - SpotWithPriceLimit：设置价格上限的竞ga价实例。
+    - SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的竞价实例。
 - `status` (String) 实例的状态。实例的状态，取值：
-CREATING：创建中
-RUNNING：运行中
-STOPPING：停止中
-STOPPED：已停止
-REBOOTING: 重启中
-STARTING：启动中
-REBUILDING：重装中
-RESIZING：更配中
-ERROR：错误
-DELETING：删除中。
+  CREATING：创建中
+  RUNNING：运行中
+  STOPPING：停止中
+  STOPPED：已停止
+  REBOOTING: 重启中
+  STARTING：启动中
+  REBUILDING：重装中
+  RESIZING：更配中
+  ERROR：错误
+  DELETING：删除中。
 - `system_volume` (Attributes) 实例的系统卷。 (see [below for nested schema](#nestedatt--system_volume))
 - `tags` (Attributes Set) 标签 (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) 实例的更新时间。
 - `user_data` (String) 实例的自定义数据，默认为空。最终传入的UserData会被Base64转码。
-- Linux实例：脚本内容不能超过16KB，且必须经过Base64编码。
-- Windows实例：脚本内容不能超过8KB，且无需Base64编码。
+    - Linux实例：脚本内容不能超过16KB，且必须经过Base64编码。
+    - Windows实例：脚本内容不能超过8KB，且无需Base64编码。
 - `vpc_id` (String) 实例所属的私有网络ID。您可以调用[DescribeVpcs](https://www.volcengine.com/docs/6563/66127)接口获取目标地域下的VPC信息。
 - `zone_id` (String) 实例所在的可用区ID。
 
@@ -151,31 +153,31 @@ Read-Only:
 
 - `allocation_id` (String) 实例的分配ID。
 - `bandwidth_mbps` (Number) 公网IP的带宽上限，默认值为1，单位：Mbps。
-- `ChargeType`传入`PayByBandwidth`：取值范围1～500。
-- `ChargeType`传入`PayByTraffic`：取值范围1～200。
+    - `ChargeType`传入`PayByBandwidth`：取值范围1～500。
+    - `ChargeType`传入`PayByTraffic`：取值范围1～200。
 - `bandwidth_package_id` (String) 共享带宽包的ID，表示将公网IP加入到共享带宽包。
-- 您可以调用[DescribeBandwidthPackages](https://www.volcengine.com/docs/6623/100685)接口，查询共享带宽包的ID。
-- 公网IP加入到共享带宽包必须同时满足如下条件：
-  - 二者的安全防护类型相同。
-  - 二者的地域相同。
-  - 公网IP的计费方式必须是按量计费。
-  - 共享带宽包为IPv4类型。
+    - 您可以调用[DescribeBandwidthPackages](https://www.volcengine.com/docs/6623/100685)接口，查询共享带宽包的ID。
+    - 公网IP加入到共享带宽包必须同时满足如下条件：
+      - 二者的安全防护类型相同。
+      - 二者的地域相同。
+      - 公网IP的计费方式必须是按量计费。
+      - 共享带宽包为IPv4类型。
 - `charge_type` (String) 公网IP的计费方式，取值：
-- PayByBandwidth（默认）：按量计费-按带宽上限计费。
-- PayByTraffic：按量计费-按实际流量计费。
-- PrePaid：包年包月。
-:::tip
-实例的计费类型`InstanceChargeType`取值为`PostPaid`时，该参数取值不能为`PrePaid`。
-:::
+    - PayByBandwidth（默认）：按量计费-按带宽上限计费。
+    - PayByTraffic：按量计费-按实际流量计费。
+    - PrePaid：包年包月。
+  
+  **提示:**
+  实例的计费类型`InstanceChargeType`取值为`PostPaid`时，该参数取值不能为`PrePaid`。
 - `ip_address` (String) 实例的IP地址。
 - `isp` (String) 公网IP的线路类型，默认为BGP。取值：
-- BGP：BGP（多线）。
-- 若您的账号已申请并开通了静态单线权限，则可传入如下取值：
-  - ChinaMobile：中国移动静态单线。
-  - ChinaTelecom：中国电信静态单线。
-  - ChinaUnicom：中国联通静态单线。
-- 若您的账号已申请并开通了BGP单线权限，则可传入SingleLine_BGP。
-- 若您的账号已申请并开通了静态BGP权限，则可传入Static_BGP。
+    - BGP：BGP（多线）。
+    - 若您的账号已申请并开通了静态单线权限，则可传入如下取值：
+      - ChinaMobile：中国移动静态单线。
+      - ChinaTelecom：中国电信静态单线。
+      - ChinaUnicom：中国联通静态单线。
+    - 若您的账号已申请并开通了BGP单线权限，则可传入SingleLine_BGP。
+    - 若您的账号已申请并开通了静态BGP权限，则可传入Static_BGP。
 - `release_with_instance` (Boolean) 实例是否随实例释放。
 
 

@@ -32,6 +32,7 @@ Data Source schema for Volcengine::TOS::Bucket
 - `lifecycle_config` (Attributes Set) 存储桶的声明周期。 (see [below for nested schema](#nestedatt--lifecycle_config))
 - `location` (String) 桶所在区域。
 - `name` (String) 桶名。
+- `policy` (String) JSON 格式的字符串，包含了桶策略的信息，但单个桶的所有桶策略 JSON 序列化后总大小不能超过 20KB。
 - `project_name` (String) 存储桶所属项目。
 - `storage_class` (String) 桶的默认存储类型。包括STANDARD：标准存储。IA：低频访问存储。INTELLIGENT_TIERING：智能分层存储。ARCHIVE_FR：归档闪回存储。ARCHIVE：归档存储。COLD_ARCHIVE：冷归档存储。DEEP_COLD_ARCHIVE：深度冷归档存储。
 - `tags` (Attributes Set) 存储桶的标签信息。 (see [below for nested schema](#nestedatt--tags))

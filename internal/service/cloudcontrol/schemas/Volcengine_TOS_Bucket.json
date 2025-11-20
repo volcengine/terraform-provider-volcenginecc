@@ -7,6 +7,30 @@
     "/properties/AzRedundancy"
   ],
   "definitions": {
+    "ACL": {
+      "description": "桶的访问控制权限。",
+      "properties": {
+        "BucketACLDelivered": {
+          "description": "是否开启对象默认继承桶 ACL 功能。true：开启对象默认继承桶 ACL 功能。false：关闭对象默认继承桶 ACL 功能。",
+          "type": "boolean"
+        },
+        "Grants": {
+          "description": "对象的访问控制权限根节点。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Grant"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Owner": {
+          "$ref": "#/definitions/Owner",
+          "description": "对象所有者。",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "ACLGrant": {
       "properties": {
         "ACL": {
@@ -332,7 +356,9 @@
         "tos:GetBucketACL",
         "tos:GetBucketVersioning",
         "tos:GetBucketTagging",
-        "tos:GetBucketLifecycle"
+        "tos:GetBucketLifecycle",
+        "tos:PutBucketPolicy",
+        "tos:GetBucketPolicy"
       ]
     },
     "delete": {
@@ -353,7 +379,8 @@
         "tos:GetBucketACL",
         "tos:GetBucketVersioning",
         "tos:GetBucketTagging",
-        "tos:GetBucketLifecycle"
+        "tos:GetBucketLifecycle",
+        "tos:GetBucketPolicy"
       ]
     },
     "update": {
@@ -368,7 +395,10 @@
         "tos:GetBucketACL",
         "tos:GetBucketVersioning",
         "tos:GetBucketTagging",
-        "tos:GetBucketLifecycle"
+        "tos:GetBucketLifecycle",
+        "tos:PutBucketPolicy",
+        "tos:GetBucketPolicy",
+        "tos:DeleteBucketPolicy"
       ]
     }
   },
@@ -377,27 +407,8 @@
   ],
   "properties": {
     "ACL": {
+      "$ref": "#/definitions/ACL",
       "description": "桶的访问控制权限。",
-      "properties": {
-        "BucketACLDelivered": {
-          "description": "是否开启对象默认继承桶 ACL 功能。true：开启对象默认继承桶 ACL 功能。false：关闭对象默认继承桶 ACL 功能。",
-          "type": "boolean"
-        },
-        "Grants": {
-          "description": "对象的访问控制权限根节点。",
-          "insertionOrder": false,
-          "items": {
-            "$ref": "#/definitions/Grant"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "Owner": {
-          "$ref": "#/definitions/Owner",
-          "description": "对象所有者。",
-          "type": "object"
-        }
-      },
       "type": "object"
     },
     "ACLGrant": {
@@ -460,6 +471,10 @@
       "maxLength": 63,
       "minLength": 3,
       "semantic": "resourceId",
+      "type": "string"
+    },
+    "Policy": {
+      "description": "JSON 格式的字符串，包含了桶策略的信息，但单个桶的所有桶策略 JSON 序列化后总大小不能超过 20KB。",
       "type": "string"
     },
     "ProjectName": {

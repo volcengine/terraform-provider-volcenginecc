@@ -126,7 +126,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "boolean"
 		//	}
 		"direct_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "标识该nat是直通还是非直通。 - true（默认）：EIP直通nat网关。 - false：非EIP直通nat网关。",
+			Description: "标识该nat是直通还是非直通。   - true（默认）：EIP直通nat网关。   - false：非EIP直通nat网关。",
 			Computed:    true,
 			Default:     booldefault.StaticBool(true),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/

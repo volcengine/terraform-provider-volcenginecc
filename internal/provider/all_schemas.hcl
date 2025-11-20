@@ -268,4 +268,10 @@ resource_schema "volcengine_natgateway_ngw" {
   cloudcontrol_type_name = "Volcengine::NatGateway::NGW"
 }
 
+resource_schema "volcengine_organization_unit" {
+  cloudcontrol_type_name = "Volcengine::Organization::Unit"
+}
 
+resource_schema "volcengine_rdsmysql_db_account" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::DBAccount"
+}

@@ -699,6 +699,17 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "桶名。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "JSON 格式的字符串，包含了桶策略的信息，但单个桶的所有桶策略 JSON 序列化后总大小不能超过 20KB。",
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "JSON 格式的字符串，包含了桶策略的信息，但单个桶的所有桶策略 JSON 序列化后总大小不能超过 20KB。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
@@ -832,6 +843,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"owner":                              "Owner",
 		"owner_id":                           "OwnerId",
 		"permission":                         "Permission",
+		"policy":                             "Policy",
 		"prefix":                             "Prefix",
 		"project_name":                       "ProjectName",
 		"status":                             "Status",
