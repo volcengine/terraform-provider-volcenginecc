@@ -43,7 +43,7 @@ Data Source schema for Volcengine::ALB::Listener
 - `pca_leaf_certificate_id` (String) HTTPS监听器关联的私有叶子证书 ID。创建 HTTPS 监听器且证书来源为 pca_leaf 时必传。
 - `pca_root_ca_certificate_id` (String) HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_root 时，必须指定 PcaRootCACertificateId 参数。
 - `pca_sub_ca_certificate_id` (String) HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_sub 时，必须指定 PcaSubCACertificateId 参数。
-- `port` (Number) 监听器的监听端口，取值：1 - 65535 。
+- `port` (Number) 监听器的监听端口，取值：1   - 65535 。
 - `project_name` (String) 监听器所属项目名称。
 - `protocol` (String) 监听器的协议，支持 HTTP 协议和 HTTPS 协议。
 - `server_group_id` (String) 监听器的默认服务器组。

@@ -1,0 +1,109 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ParentId"
+  ],
+  "description": "企业组织的创建者管理员账号可以新建组织单元来搭建企业的组织结构，对账号进行分组织单元管理。组织单元可以分多个组织单元层级，管理员账号也可属于任意层级的任意组织单元节点。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "organization:CreateOrganizationalUnit",
+        "organization:DescribeOrganizationalUnit"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "organization:DeleteOrganizationalUnit",
+        "organization:DescribeOrganizationalUnit"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "organization:DescribeOrganizationalUnit"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "organization:UpdateOrganizationalUnit",
+        "organization:DescribeOrganizationalUnit"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/OrgUnitId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeleteUk": {
+      "description": "删除标识。",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "删除时间。",
+      "type": "string"
+    },
+    "Depth": {
+      "description": "深度。",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Name": {
+      "description": "组织单元名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "OrgID": {
+      "description": "组织ID。",
+      "type": "string"
+    },
+    "OrgType": {
+      "description": "组织类型。企业组织： 1",
+      "type": "integer"
+    },
+    "OrgUnitId": {
+      "description": "组织单元ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Owner": {
+      "description": "管理员ID。",
+      "type": "string"
+    },
+    "ParentId": {
+      "description": "父单元Id。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/OrgUnitId",
+    "/properties/CreatedTime",
+    "/properties/DeleteUk",
+    "/properties/DeletedTime",
+    "/properties/Depth",
+    "/properties/OrgID",
+    "/properties/OrgType",
+    "/properties/Owner",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "ParentId",
+    "Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Organization::Unit"
+}

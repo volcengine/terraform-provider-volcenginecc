@@ -313,5 +313,15 @@
         "resource": "volcenginecc_natgateway_ngw",
         "identifier": ["NatGatewayId"],
         "path": "./examples/resources/volcenginecc_natgateway_ngw/import.sh"
+    },
+    {
+        "resource": "volcenginecc_organization_unit",
+        "identifier": ["OrgUnitId"],
+        "path": "./examples/resources/volcenginecc_organization_unit/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_db_account",
+        "identifier": ["InstanceId","AccountName","Host"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_db_account/import.sh"
     }
 ]

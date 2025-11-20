@@ -105,7 +105,7 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "string"
 		//	}
 		"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的主机名。取值：Linux实例允许使用点号分隔字符成多段，每段中允许使用字母、数字或中划线“-”。不能以点号“.”或中划线“-”开头或结尾，且不能连续使用点号“.”或中划线“-”。Linux系统的主机名长度限制为2～63个字符。Windows实例允许使用字母、数字或中划线“-”，不能完全是数字。不能以中划线“-”开头或结尾，且不能连续使用中划线“-”。Windows系统的主机名长度限制在2～15个字符。如不填，则遵循以下规则自动生成：结构：iv- + 初始主机名，例如iv-3tigy72q3u3vj0******。已创建实例保持原主机名生成逻辑，不随实例重启发生变化。初始主机名生成逻辑：Linux：提取实例IDi-之后的全部字符。Windows：提取实例IDi-之后的后12位字符。",
+			Description: "实例的主机名。取值：Linux实例允许使用点号分隔字符成多段，每段中允许使用字母、数字或中划线“-”。不能以点号“.”或中划线“-”开头或结尾，且不能连续使用点号“.”或中划线“-”。Linux系统的主机名长度限制为2～63个字符。Windows实例允许使用字母、数字或中划线“-”，不能完全是数字。不能以中划线“-”开头或结尾，且不能连续使用中划线“-”。Windows系统的主机名长度限制在2～15个字符。如不填，则遵循以下规则自动生成：结构：iv  - + 初始主机名，例如iv-3tigy72q3u3vj0******。已创建实例保持原主机名生成逻辑，不随实例重启发生变化。初始主机名生成逻辑：Linux：提取实例IDi-之后的全部字符。Windows：提取实例IDi-之后的后12位字符。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HpcClusterId
@@ -196,12 +196,12 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceType
 					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "指定抢占式实例的规格。参数 - N：表示实例规格的序号，取值为1 ～ 10。取值 - InstanceType：表示抢占式实例的规格。多个规格之间用&分隔。",
+						Description: "指定抢占式实例的规格。参数   - N：表示实例规格的序号，取值为1 ～ 10。取值   - InstanceType：表示抢占式实例的规格。多个规格之间用&分隔。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PriceLimit
 					"price_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "指定抢占式实例规格每小时的最高价格参数 - N：表示实例规格的序号，取值为1 ～ 10。取值 - PriceLimit：表示抢占式实例规格每小时的最高价格。取值：大于0，且最大不超过3位小数。多个价格之间用&分隔。",
+						Description: "指定抢占式实例规格每小时的最高价格参数   - N：表示实例规格的序号，取值为1 ～ 10。取值   - PriceLimit：表示抢占式实例规格每小时的最高价格。取值：大于0，且最大不超过3位小数。多个价格之间用&分隔。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -285,7 +285,7 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩配置创建的实例所属项目，默认为空。一个资源只能归属于一个项目。\n只能包含字母、数字、下划线“_”、点“.”和中划线“-”。\n长度限制在64个字符以内。",
+			Description: "伸缩配置创建的实例所属项目，默认为空。一个资源只能归属于一个项目。\n  只能包含字母、数字、下划线“_”、点“.”和中划线“-”。\n  长度限制在64个字符以内。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScalingConfigurationId
@@ -474,17 +474,17 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DeleteWithInstance
 					"delete_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘是否随实例释放：参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 - 15。参数 - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+						Description: "云盘是否随实例释放：参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1   - 15。参数   - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘的容量，单位为GiB。参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值 - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。多个云盘之间用&分隔。",
+						Description: "云盘的容量，单位为GiB。参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值   - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。多个云盘之间用&分隔。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeType
 					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘的类型：参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数 - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用&分隔。",
+						Description: "云盘的类型：参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数   - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用&分隔。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

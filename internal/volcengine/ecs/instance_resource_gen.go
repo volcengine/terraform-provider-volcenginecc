@@ -49,7 +49,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"affinity_group_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "亲和组规格，取值：2。\n:::tip\n- 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。\n- 该功能正在邀测中，如需试用，请联系客户经理申请。\n::: ",
+			Description: "亲和组规格，取值：2。\n  \n  **提示:**\n    - 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。\n    - 该功能正在邀测中，如需试用，请联系客户经理申请。\n   ",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -65,7 +65,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "boolean"
 		//	}
 		"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例到期后是否自动续费，取值：\n- true：自动续费。\n- false（默认）：不自动续费。\n:::tip\n仅当参数`InstanceChargeType`取值为`PrePaid`时生效。\n:::",
+			Description: "实例到期后是否自动续费，取值：\n    - true：自动续费。\n    - false（默认）：不自动续费。\n  \n  **提示:**\n  仅当参数`InstanceChargeType`取值为`PrePaid`时生效。\n  ",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -89,7 +89,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"auto_renew_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "每次自动续费的时长。\n- 仅当参数`AutoRenew`取值为`True`时，该参数生效，默认值为1。\n- `PeriodUnit`取值为`Month`时，该参数取值为1、2、3、6、12。",
+			Description: "每次自动续费的时长。\n    - 仅当参数`AutoRenew`取值为`True`时，该参数生效，默认值为1。\n    - `PeriodUnit`取值为`Month`时，该参数取值为1、2、3、6、12。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -115,7 +115,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "number"
 		//	}
 		"cpu_max_frequency": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: " 指定CPU最大频率，单位：GHz，取值范围：CPU的主频到睿频之间。\n:::tip\n- 当前仅g3al、c3al、r3al、g4i、c4i、r4i、g4ie、c4ie、r4ie实例支持设置该参数。规格的主频/睿频及更多信息，请参见[实例规格介绍](https://www.volcengine.com/docs/6396/70840)。\n- 该功能正在邀测中，如需使用，请联系客户经理申请。\n:::",
+			Description: " 指定CPU最大频率，单位：GHz，取值范围：CPU的主频到睿频之间。\n  \n  **提示:**\n    - 当前仅g3al、c3al、r3al、g4i、c4i、r4i、g4ie、c4ie、r4ie实例支持设置该参数。规格的主频/睿频及更多信息，请参见[实例规格介绍](https://www.volcengine.com/docs/6396/70840)。\n    - 该功能正在邀测中，如需使用，请联系客户经理申请。\n  ",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -206,7 +206,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"credit_specification": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "突发性能实例的运行模式，取值：\n- Standard：标准模式。\n- Unlimited：无性能约束模式（暂不支持）。\n:::tip\n- 仅当`InstanceTypeId`取值为ecs.t2系列，即突发性能实例时该参数生效。\n- 不传或传入空值时，突发性能实例默认为`Standard`标准模式。\n:::",
+			Description: "突发性能实例的运行模式，取值：\n    - Standard：标准模式。\n    - Unlimited：无性能约束模式（暂不支持）。\n  \n  **提示:**\n    - 仅当`InstanceTypeId`取值为ecs.t2系列，即突发性能实例时该参数生效。\n    - 不传或传入空值时，突发性能实例默认为`Standard`标准模式。\n  ",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -228,7 +228,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "boolean"
 		//	}
 		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例删除保护属性，指定是否支持通过控制台或API删除实例。取值：\n- true：开启实例删除保护。\n- false（默认）：关闭实例删除保护。\n开启实例删除保护后，在控制台或调用API删除实例时，会收到删除失败的错误码。如需删除，请先关闭实例删除保护。",
+			Description: "实例删除保护属性，指定是否支持通过控制台或API删除实例。取值：\n    - true：开启实例删除保护。\n    - false（默认）：关闭实例删除保护。\n  开启实例删除保护后，在控制台或调用API删除实例时，会收到删除失败的错误码。如需删除，请先关闭实例删除保护。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -260,7 +260,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"deployment_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例需要加入的部署集ID。\n- 您可以调用[DescribeDeploymentSets](https://www.volcengine.com/docs/6396/70873)接口，查询已创建的部署集。\n- 关于部署集的更多信息，请参见[部署集](https://www.volcengine.com/docs/6396/70871)。",
+			Description: "实例需要加入的部署集ID。\n    - 您可以调用[DescribeDeploymentSets](https://www.volcengine.com/docs/6396/70873)接口，查询已创建的部署集。\n    - 关于部署集的更多信息，请参见[部署集](https://www.volcengine.com/docs/6396/70871)。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -277,7 +277,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的描述，默认为空字符串。\n- 必须以字母或中文开头。\n- 只能包含中文、字母、数字、点号“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”\n- 长度限制在255个字符以内。",
+			Description: "实例的描述，默认为空字符串。\n    - 必须以字母或中文开头。\n    - 只能包含中文、字母、数字、点号“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”\n    - 长度限制在255个字符以内。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -354,7 +354,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BandwidthMbps
 				"bandwidth_mbps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的带宽上限，默认值为1，单位：Mbps。\n- `ChargeType`传入`PayByBandwidth`：取值范围1～500。\n- `ChargeType`传入`PayByTraffic`：取值范围1～200。",
+					Description: "公网IP的带宽上限，默认值为1，单位：Mbps。\n    - `ChargeType`传入`PayByBandwidth`：取值范围1～500。\n    - `ChargeType`传入`PayByTraffic`：取值范围1～200。",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -368,7 +368,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BandwidthPackageId
 				"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "共享带宽包的ID，表示将公网IP加入到共享带宽包。\n- 您可以调用[DescribeBandwidthPackages](https://www.volcengine.com/docs/6623/100685)接口，查询共享带宽包的ID。\n- 公网IP加入到共享带宽包必须同时满足如下条件：\n  - 二者的安全防护类型相同。\n  - 二者的地域相同。\n  - 公网IP的计费方式必须是按量计费。\n  - 共享带宽包为IPv4类型。",
+					Description: "共享带宽包的ID，表示将公网IP加入到共享带宽包。\n    - 您可以调用[DescribeBandwidthPackages](https://www.volcengine.com/docs/6623/100685)接口，查询共享带宽包的ID。\n    - 公网IP加入到共享带宽包必须同时满足如下条件：\n      - 二者的安全防护类型相同。\n      - 二者的地域相同。\n      - 公网IP的计费方式必须是按量计费。\n      - 共享带宽包为IPv4类型。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -379,7 +379,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的计费方式，取值：\n- PayByBandwidth（默认）：按量计费-按带宽上限计费。\n- PayByTraffic：按量计费-按实际流量计费。\n- PrePaid：包年包月。\n:::tip\n实例的计费类型`InstanceChargeType`取值为`PostPaid`时，该参数取值不能为`PrePaid`。\n:::",
+					Description: "公网IP的计费方式，取值：\n    - PayByBandwidth（默认）：按量计费-按带宽上限计费。\n    - PayByTraffic：按量计费-按实际流量计费。\n    - PrePaid：包年包月。\n  \n  **提示:**\n  实例的计费类型`InstanceChargeType`取值为`PostPaid`时，该参数取值不能为`PrePaid`。\n  ",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("PayByBandwidth"),
@@ -398,7 +398,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
 				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的线路类型，默认为BGP。取值：\n- BGP：BGP（多线）。\n- 若您的账号已申请并开通了静态单线权限，则可传入如下取值：\n  - ChinaMobile：中国移动静态单线。\n  - ChinaTelecom：中国电信静态单线。\n  - ChinaUnicom：中国联通静态单线。\n- 若您的账号已申请并开通了BGP单线权限，则可传入SingleLine_BGP。\n- 若您的账号已申请并开通了静态BGP权限，则可传入Static_BGP。",
+					Description: "公网IP的线路类型，默认为BGP。取值：\n    - BGP：BGP（多线）。\n    - 若您的账号已申请并开通了静态单线权限，则可传入如下取值：\n      - ChinaMobile：中国移动静态单线。\n      - ChinaTelecom：中国电信静态单线。\n      - ChinaUnicom：中国联通静态单线。\n    - 若您的账号已申请并开通了BGP单线权限，则可传入SingleLine_BGP。\n    - 若您的账号已申请并开通了静态BGP权限，则可传入Static_BGP。",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -470,7 +470,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例主机名，即实例操作系统内部的计算机名。\n- Linux实例：\n  - 允许使用字母、数字、点号“.”或中划线“-”。\n  - 不能以中划线、点号开头或结尾，且不能连续使用中划线和点号。\n  - Linux系统长度限制在2～63个字符之间。\n- Windows实例：\n  - 允许使用字母、数字或中划线“-”，不能完全是数字。\n  - 不能以中划线开头或结尾，且不能连续使用中划线。\n  - Windows系统长度限制在2～15个字符之间。",
+			Description: "实例主机名，即实例操作系统内部的计算机名。\n    - Linux实例：\n      - 允许使用字母、数字、点号“.”或中划线“-”。\n      - 不能以中划线、点号开头或结尾，且不能连续使用中划线和点号。\n      - Linux系统长度限制在2～63个字符之间。\n    - Windows实例：\n      - 允许使用字母、数字或中划线“-”，不能完全是数字。\n      - 不能以中划线开头或结尾，且不能连续使用中划线。\n      - Windows系统长度限制在2～15个字符之间。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -488,7 +488,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"hpc_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的高性能计算集群ID。\n:::tip\n仅当创建高性能计算GPU型实例时，该参数生效且为必填项。\n:::",
+			Description: "实例所属的高性能计算集群ID。\n  \n  **提示:**\n  仅当创建高性能计算GPU型实例时，该参数生效且为必填项。\n  ",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -589,7 +589,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"instance_charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例和云盘的计费类型，取值：\n- PostPaid：按量计费。\n- PrePaid：包年包月。请确认您的账号支持余额支付或者信控支付，否则将返回InvalidInstanceChargeType的错误提示。",
+			Description: "实例和云盘的计费类型，取值：\n    - PostPaid：按量计费。\n    - PrePaid：包年包月。请确认您的账号支持余额支付或者信控支付，否则将返回InvalidInstanceChargeType的错误提示。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -626,7 +626,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的名称。\n- 以字母或中文开头。\n- 只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。\n- 长度限制为1～128个字符。",
+			Description: "实例的名称。\n    - 以字母或中文开头。\n    - 只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。\n    - 长度限制为1～128个字符。",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_.-]{1,128}"), ""),
@@ -640,7 +640,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例规格。\n- 产品选型：您可以参考[实例规格介绍](https://www.volcengine.com/docs/6396/70840)或者调用[DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769)查看实例规格的性能数据，也可以参考[实例选型最佳实践](https://www.volcengine.com/docs/6396/74174)了解如何选择实例规格。\n- 查询库存：您可以调用[DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279)查询可用区中计算资源的库存信息。",
+			Description: "实例规格。\n    - 产品选型：您可以参考[实例规格介绍](https://www.volcengine.com/docs/6396/70840)或者调用[DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769)查看实例规格的性能数据，也可以参考[实例选型最佳实践](https://www.volcengine.com/docs/6396/74174)了解如何选择实例规格。\n    - 查询库存：您可以调用[DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279)查询可用区中计算资源的库存信息。",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -793,7 +793,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "购买资源的时长（N）。\n- `PeriodUnit`为`Month`（默认）时，取值：1、2、3、4、5、6、7、8、9、12、24、36、48、60。\n- `PeriodUnit`为`Year`时，取值：1、2、3、4、5。\n:::tip\n仅当`InstanceChargeType`取值为`PrePaid`时生效，且为必填。",
+			Description: "购买资源的时长（N）。\n    - `PeriodUnit`为`Month`（默认）时，取值：1、2、3、4、5、6、7、8、9、12、24、36、48、60。\n    - `PeriodUnit`为`Year`时，取值：1、2、3、4、5。\n  \n  **提示:**\n  仅当`InstanceChargeType`取值为`PrePaid`时生效，且为必填。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -831,7 +831,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "购买资源的时长单位。取值：\n- Month（默认）：月。\n- Year：年。\n:::tip\n仅当`InstanceChargeType`取值为`PrePaid`时生效。",
+			Description: "购买资源的时长单位。取值：\n    - Month（默认）：月。\n    - Year：年。\n  \n  **提示:**\n  仅当`InstanceChargeType`取值为`PrePaid`时生效。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -1281,7 +1281,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "number"
 		//	}
 		"spot_price_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "竞价实例的每小时最高价格。\n- 支持小数点后3位的精度。\n- 仅当`SpotStrategy`取值为`SpotWithPriceLimit`时生效。\n- 当`SpotStrategy`取值为`SpotWithPriceLimit`时，您可以自定义设置竞价实例的价格上限，当市场价格高于您的出价时，实例会被释放；当`SpotStrategy`取值为`SpotAsPriceGo`时，则代表您接受系统自动出价，跟随当前市场实际价格，此时无需填写该参数。",
+			Description: "竞价实例的每小时最高价格。\n    - 支持小数点后3位的精度。\n    - 仅当`SpotStrategy`取值为`SpotWithPriceLimit`时生效。\n    - 当`SpotStrategy`取值为`SpotWithPriceLimit`时，您可以自定义设置竞价实例的价格上限，当市场价格高于您的出价时，实例会被释放；当`SpotStrategy`取值为`SpotAsPriceGo`时，则代表您接受系统自动出价，跟随当前市场实际价格，此时无需填写该参数。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -1303,7 +1303,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"spot_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "竞价策略。取值：\n- NoSpot（默认）：非竞价实例。\n- SpotWithPriceLimit：设置价格上限的竞ga价实例。\n- SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的竞价实例。",
+			Description: "竞价策略。取值：\n    - NoSpot（默认）：非竞价实例。\n    - SpotWithPriceLimit：设置价格上限的竞ga价实例。\n    - SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的竞价实例。",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("NoSpot"),
@@ -1340,7 +1340,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的状态。实例的状态，取值：\nCREATING：创建中\nRUNNING：运行中\nSTOPPING：停止中\nSTOPPED：已停止\nREBOOTING: 重启中\nSTARTING：启动中\nREBUILDING：重装中\nRESIZING：更配中\nERROR：错误\nDELETING：删除中。",
+			Description: "实例的状态。实例的状态，取值：\n  CREATING：创建中\n  RUNNING：运行中\n  STOPPING：停止中\n  STOPPED：已停止\n  REBOOTING: 重启中\n  STARTING：启动中\n  REBUILDING：重装中\n  RESIZING：更配中\n  ERROR：错误\n  DELETING：删除中。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -1617,7 +1617,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的自定义数据，默认为空。最终传入的UserData会被Base64转码。\n- Linux实例：脚本内容不能超过16KB，且必须经过Base64编码。\n- Windows实例：脚本内容不能超过8KB，且无需Base64编码。",
+			Description: "实例的自定义数据，默认为空。最终传入的UserData会被Base64转码。\n    - Linux实例：脚本内容不能超过16KB，且必须经过Base64编码。\n    - Windows实例：脚本内容不能超过8KB，且无需Base64编码。",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/

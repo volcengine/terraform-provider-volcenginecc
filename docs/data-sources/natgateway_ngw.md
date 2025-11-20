@@ -26,7 +26,7 @@ Data Source schema for Volcengine::NatGateway::NGW
 - `created_time` (String) 创建时间
 - `deleted_time` (String) 删除时间
 - `description` (String) NAT网关的描述。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1 ～ 255个字符。不填默认空字符串。
-- `direct_mode` (Boolean) 标识该nat是直通还是非直通。 - true（默认）：EIP直通nat网关。 - false：非EIP直通nat网关。
+- `direct_mode` (Boolean) 标识该nat是直通还是非直通。   - true（默认）：EIP直通nat网关。   - false：非EIP直通nat网关。
 - `dnat_entry_ids` (Set of String) DNAT规则ID列表。
 - `eip_addresses` (Attributes Set) NAT网关绑定公网IP的信息。 (see [below for nested schema](#nestedatt--eip_addresses))
 - `expired_time` (String) 包年包月NAT网关到期时间。仅包年包月计费类型的NAT网关会返回此参数。
