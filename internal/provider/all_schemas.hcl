@@ -275,3 +275,27 @@ resource_schema "volcengine_organization_unit" {
 resource_schema "volcengine_rdsmysql_db_account" {
   cloudcontrol_type_name = "Volcengine::RDSMySQL::DBAccount"
 }
+
+resource_schema "volcengine_autoscaling_scaling_group" {
+  cloudcontrol_type_name = "Volcengine::AutoScaling::ScalingGroup"
+}
+
+resource_schema "volcengine_cen_cen" {
+  cloudcontrol_type_name = "Volcengine::CEN::CEN"
+}
+
+resource_schema "volcengine_vedbm_instance" {
+  cloudcontrol_type_name = "Volcengine::VEDBM::Instance"
+}
+
+resource_schema "volcengine_natgateway_snatentry" {
+  cloudcontrol_type_name = "Volcengine::NatGateway::Snatentry"
+}
+
+resource_schema "volcengine_natgateway_dnatentry" {
+  cloudcontrol_type_name = "Volcengine::NatGateway::Dnatentry"
+}
+
+resource_schema "volcengine_natgateway_nat_ip" {
+  cloudcontrol_type_name = "Volcengine::NatGateway::NatIp"
+}

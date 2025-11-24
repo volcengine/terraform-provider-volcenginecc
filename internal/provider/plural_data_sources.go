@@ -67,6 +67,12 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_natgateway_ngws -cctype Volcengine::NatGateway::NGW -package natgateway ../volcengine/natgateway/ngw_plural_data_source_gen.go ../volcengine/natgateway/ngw_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_units -cctype Volcengine::Organization::Unit -package organization ../volcengine/organization/unit_plural_data_source_gen.go ../volcengine/organization/unit_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmysql_db_accounts -cctype Volcengine::RDSMySQL::DBAccount -package rdsmysql ../volcengine/rdsmysql/db_account_plural_data_source_gen.go ../volcengine/rdsmysql/db_account_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_autoscaling_scaling_groups -cctype Volcengine::AutoScaling::ScalingGroup -package autoscaling ../volcengine/autoscaling/scaling_group_plural_data_source_gen.go ../volcengine/autoscaling/scaling_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cen_cens -cctype Volcengine::CEN::CEN -package cen ../volcengine/cen/cen_plural_data_source_gen.go ../volcengine/cen/cen_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vedbm_instances -cctype Volcengine::VEDBM::Instance -package vedbm ../volcengine/vedbm/instance_plural_data_source_gen.go ../volcengine/vedbm/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_natgateway_snatentries -cctype Volcengine::NatGateway::Snatentry -package natgateway ../volcengine/natgateway/snatentry_plural_data_source_gen.go ../volcengine/natgateway/snatentry_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_natgateway_dnatentries -cctype Volcengine::NatGateway::Dnatentry -package natgateway ../volcengine/natgateway/dnatentry_plural_data_source_gen.go ../volcengine/natgateway/dnatentry_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_natgateway_nat_ips -cctype Volcengine::NatGateway::NatIp -package natgateway ../volcengine/natgateway/nat_ip_plural_data_source_gen.go ../volcengine/natgateway/nat_ip_plural_data_source_gen_test.go
 
 package provider
 
@@ -76,6 +82,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cdn"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cen"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
@@ -92,6 +99,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vedbm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"

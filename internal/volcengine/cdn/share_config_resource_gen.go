@@ -12,9 +12,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
@@ -42,7 +42,7 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array",
-		//	      "uniqueItems": false
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -50,14 +50,13 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		"allow_ip_access_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Rules
-				"rules": schema.ListAttribute{ /*START ATTRIBUTE*/
+				"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。",
 					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -87,10 +86,12 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "Rules": {
 		//	          "description": "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
-		//	          "type": "array"
+		//	          "type": "array",
+		//	          "uniqueItems": true
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -122,13 +123,13 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
-						"rules": schema.ListAttribute{ /*START ATTRIBUTE*/
+						"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
 							Optional:    true,
 							Computed:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -147,7 +148,7 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: CommonMatchs
+		// Property: CommonMatchList
 		// Cloud Control resource type schema:
 		//
 		//	{
@@ -162,10 +163,12 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "Rules": {
 		//	          "description": "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
-		//	          "type": "array"
+		//	          "type": "array",
+		//	          "uniqueItems": true
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -173,7 +176,7 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"common_matchs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		"common_match_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CommonType
 				"common_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -188,13 +191,13 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
-						"rules": schema.ListAttribute{ /*START ATTRIBUTE*/
+						"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
 							Optional:    true,
 							Computed:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -253,11 +256,13 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "Rules": {
 		//	      "description": "表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。",
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。",
 		//	        "type": "string"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -265,13 +270,13 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		"deny_ip_access_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Rules
-				"rules": schema.ListAttribute{ /*START ATTRIBUTE*/
+				"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。",
 					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -301,10 +306,12 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "Rules": {
 		//	          "description": "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
-		//	          "type": "array"
+		//	          "type": "array",
+		//	          "uniqueItems": true
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -336,13 +343,13 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
-						"rules": schema.ListAttribute{ /*START ATTRIBUTE*/
+						"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
 							Optional:    true,
 							Computed:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -446,7 +453,7 @@ func shareConfigResource(ctx context.Context) (resource.Resource, error) {
 		"allow_empty":               "AllowEmpty",
 		"allow_ip_access_rule":      "AllowIpAccessRule",
 		"allow_referer_access_rule": "AllowRefererAccessRule",
-		"common_matchs":             "CommonMatchs",
+		"common_match_list":         "CommonMatchList",
 		"common_type":               "CommonType",
 		"config_name":               "ConfigName",
 		"config_type":               "ConfigType",

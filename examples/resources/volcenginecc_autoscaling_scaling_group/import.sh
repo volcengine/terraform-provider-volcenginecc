@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_autoscaling_scaling_group.example "scaling_group_id"

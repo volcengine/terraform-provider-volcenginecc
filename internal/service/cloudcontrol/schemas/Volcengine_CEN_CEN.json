@@ -1,0 +1,149 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。长度限制为1～128个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。长度限制为0～256个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "云企业网（Cloud Enterprise Network，CEN）提供一种能够快速构建跨地域私有网络（VPC）与云下数据中心（IDC）之间高速、优质、稳定的网络能力，帮助您打造一张具有企业级规模和通信能力的全球云上网络。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cen:CreateCen",
+        "cen:DescribeCenAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cen:DeleteCen",
+        "cen:DescribeCenAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cen:DescribeCens"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cen:DescribeCenAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cen:ModifyCenAttributes",
+        "cen:DescribeCenAttributes",
+        "cen:UntagResources",
+        "cen:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CenId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "CEN实例所属的账号ID。",
+      "type": "string"
+    },
+    "CenBandwidthPackageIds": {
+      "description": "带宽包ID。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CenId": {
+      "description": "CEN实例的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CenName": {
+      "description": "CEN实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填则默认为CEN实例的ID。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "创建CEN实例的时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "CEN实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255个字符。不填则默认为空。",
+      "maxLength": 255,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "CEN实例所属项目的名称。不填则默认为default。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "CEN实例的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Pending",
+        "Available"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "更新CEN实例的时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/CenBandwidthPackageIds",
+    "/properties/CenId",
+    "/properties/Status",
+    "/properties/CreationTime",
+    "/properties/UpdateTime"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::CEN::CEN"
+}

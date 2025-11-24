@@ -67,6 +67,12 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_natgateway_ngw -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_NGW.json -package natgateway -- ../volcengine/natgateway/ngw_resource_gen.go ../volcengine/natgateway/ngw_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_organization_unit -ccschema ../service/cloudcontrol/schemas/Volcengine_Organization_Unit.json -package organization -- ../volcengine/organization/unit_resource_gen.go ../volcengine/organization/unit_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_rdsmysql_db_account -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSMySQL_DBAccount.json -package rdsmysql -- ../volcengine/rdsmysql/db_account_resource_gen.go ../volcengine/rdsmysql/db_account_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_autoscaling_scaling_group -ccschema ../service/cloudcontrol/schemas/Volcengine_AutoScaling_ScalingGroup.json -package autoscaling -- ../volcengine/autoscaling/scaling_group_resource_gen.go ../volcengine/autoscaling/scaling_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cen_cen -ccschema ../service/cloudcontrol/schemas/Volcengine_CEN_CEN.json -package cen -- ../volcengine/cen/cen_resource_gen.go ../volcengine/cen/cen_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vedbm_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_VEDBM_Instance.json -package vedbm -- ../volcengine/vedbm/instance_resource_gen.go ../volcengine/vedbm/instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_natgateway_snatentry -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_Snatentry.json -package natgateway -- ../volcengine/natgateway/snatentry_resource_gen.go ../volcengine/natgateway/snatentry_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_natgateway_dnatentry -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_Dnatentry.json -package natgateway -- ../volcengine/natgateway/dnatentry_resource_gen.go ../volcengine/natgateway/dnatentry_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_natgateway_nat_ip -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_NatIp.json -package natgateway -- ../volcengine/natgateway/nat_ip_resource_gen.go ../volcengine/natgateway/nat_ip_resource_gen_test.go
 
 package provider
 
@@ -76,6 +82,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cdn"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cen"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
@@ -92,6 +99,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vedbm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"

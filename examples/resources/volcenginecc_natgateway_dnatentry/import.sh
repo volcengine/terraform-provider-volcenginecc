@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_natgateway_dnatentry.example "dnat_entry_id"

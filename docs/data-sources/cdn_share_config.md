@@ -23,7 +23,7 @@ Data Source schema for Volcengine::CDN::ShareConfig
 
 - `allow_ip_access_rule` (Attributes) 表示一个 IP 白名单的配置，对应 ConfigType 是 allow_ip_access_rule。 (see [below for nested schema](#nestedatt--allow_ip_access_rule))
 - `allow_referer_access_rule` (Attributes) 表示一个 Referer 白名单的配置，对应 ConfigType 是 allow_referer_access_rule。 (see [below for nested schema](#nestedatt--allow_referer_access_rule))
-- `common_matchs` (Attributes) 表示一个通用列表的配置，对应 ConfigType 是 common_match_list。 (see [below for nested schema](#nestedatt--common_matchs))
+- `common_match_list` (Attributes) 表示一个通用列表的配置，对应 ConfigType 是 common_match_list。 (see [below for nested schema](#nestedatt--common_match_list))
 - `config_name` (String) 表示全局配置的名称。名称有以下要求：名称可以包含汉字、字母、数字、下划线（_），长度在 3-45 个字符之间。一个汉字占 3 个字符。名称不能与主账号下某个已有的全局配置的名称相同。
 - `config_type` (String) 表示该全局配置的类型。该参数有以下取值：deny_ip_access_rule：表示 IP 黑名单。allow_ip_access_rule：表示 IP 白名单。deny_referer_access_rule：表示 Referer 黑名单。allow_referer_access_rule：表示 Referer 白名单。common_match_list：表示通用列表。
 - `deny_ip_access_rule` (Attributes) 表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。 (see [below for nested schema](#nestedatt--deny_ip_access_rule))
@@ -38,7 +38,7 @@ Data Source schema for Volcengine::CDN::ShareConfig
 
 Read-Only:
 
-- `rules` (List of String) 表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。
+- `rules` (Set of String) 表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。
 
 
 <a id="nestedatt--allow_referer_access_rule"></a>
@@ -55,24 +55,24 @@ Read-Only:
 Read-Only:
 
 - `ignore_case` (Boolean) 表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。
-- `rules` (List of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
+- `rules` (Set of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
 
 
 
-<a id="nestedatt--common_matchs"></a>
-### Nested Schema for `common_matchs`
+<a id="nestedatt--common_match_list"></a>
+### Nested Schema for `common_match_list`
 
 Read-Only:
 
-- `common_type` (Attributes) 表示该通用列表的内容。 (see [below for nested schema](#nestedatt--common_matchs--common_type))
+- `common_type` (Attributes) 表示该通用列表的内容。 (see [below for nested schema](#nestedatt--common_match_list--common_type))
 
-<a id="nestedatt--common_matchs--common_type"></a>
-### Nested Schema for `common_matchs.common_type`
+<a id="nestedatt--common_match_list--common_type"></a>
+### Nested Schema for `common_match_list.common_type`
 
 Read-Only:
 
 - `ignore_case` (Boolean) 表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。
-- `rules` (List of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
+- `rules` (Set of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
 
 
 
@@ -81,7 +81,7 @@ Read-Only:
 
 Read-Only:
 
-- `rules` (List of String) 表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。
+- `rules` (Set of String) 表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。
 
 
 <a id="nestedatt--deny_referer_access_rule"></a>
@@ -98,4 +98,4 @@ Read-Only:
 Read-Only:
 
 - `ignore_case` (Boolean) 表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。
-- `rules` (List of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
+- `rules` (Set of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
