@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_natgateway_snatentry.example "snat_entry_id"

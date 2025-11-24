@@ -1,0 +1,102 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/PortType",
+    "/properties/NatGatewayId"
+  ],
+  "description": "目的地址转换。即当中转IP及端口被访问时，私网NAT网关将访问请求中的目的地址和端口替换成云服务器的私网IP及端口后，进行转发。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "natgateway:CreateDnatEntry",
+        "natgateway:DescribeDnatEntryAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "natgateway:DeleteDnatEntry",
+        "natgateway:DescribeDnatEntryAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "natgateway:DescribeDnatEntries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "natgateway:DescribeDnatEntryAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "natgateway:ModifyDnatEntryAttributes",
+        "natgateway:DescribeDnatEntryAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/DnatEntryId"
+  ],
+  "properties": {
+    "DnatEntryId": {
+      "description": "DNAT规则的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "DnatEntryName": {
+      "description": "DNAT规则的名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ExternalIp": {
+      "description": "NAT网关用于网络地址转换的IP地址。当NAT网关为公网NAT网关时，传入其绑定的公网IP地址。当NAT网关为私网NAT网关时，传入其中转IP地址。",
+      "type": "string"
+    },
+    "ExternalPort": {
+      "description": "接收来自公网外部请求的端口或端口段。",
+      "type": "string"
+    },
+    "InternalIp": {
+      "description": "云服务器实例的私网IP。",
+      "type": "string"
+    },
+    "InternalPort": {
+      "description": "云服务器实例私网IP的端口或端口段。",
+      "type": "string"
+    },
+    "NatGatewayId": {
+      "description": "DNAT规则所属NAT网关的ID。",
+      "type": "string"
+    },
+    "PortType": {
+      "description": "DNAT规则的端口类型。specified：指定端口。any：任意端口。即IP映射。",
+      "type": "string"
+    },
+    "Protocol": {
+      "description": "协议类型。tcp：转发TCP协议的报文。udp：转发UDP协议的报文。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "DNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Status",
+    "/properties/DnatEntryId"
+  ],
+  "required": [
+    "ExternalIp",
+    "ExternalPort",
+    "InternalIp",
+    "InternalPort",
+    "NatGatewayId",
+    "Protocol"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::NatGateway::Dnatentry"
+}

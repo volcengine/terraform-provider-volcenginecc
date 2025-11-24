@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cen_cen.example "cen_id"

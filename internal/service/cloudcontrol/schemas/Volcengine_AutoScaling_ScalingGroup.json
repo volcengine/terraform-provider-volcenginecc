@@ -1,0 +1,354 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/ScalingMode"
+  ],
+  "definitions": {
+    "InstancesDistribution": {
+      "properties": {
+        "CompensateWithOnDemand": {
+          "default": false,
+          "description": "当因价格、库存等原因无法创建足够的抢占式实例时，是否允许使用按量实例补充抢占式容量。true: 允许。false（默认）: 不允许。",
+          "type": "boolean"
+        },
+        "OnDemandBaseCapacity": {
+          "description": "伸缩组中按量计费实例个数的最小值，取值范围：0~2000。当组中按量计费实例个数少于该值时，将优先创建按量计费的实例。",
+          "maximum": 2000,
+          "type": "integer"
+        },
+        "OnDemandPercentageAboveBaseCapacity": {
+          "description": "伸缩组满足最小按量实例数要求后，超出的实例中按量实例应占的比例，取值范围：0～100。",
+          "maximum": 100,
+          "type": "integer"
+        },
+        "SpotInstanceRemedy": {
+          "default": false,
+          "description": "是否允许抢占式实例到期替换。开启则表示在抢占式实例被回收前5分钟左右，伸缩组将主动新建新的抢占式实例替换掉当前抢占式实例。true: 允许。false（默认）: 不允许。",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "LaunchTemplateOverride": {
+      "properties": {
+        "InstanceType": {
+          "description": "指定实例规格。本参数仅当LaunchTemplateId参数存在取值时生有效。",
+          "type": "string"
+        },
+        "PriceLimit": {
+          "description": "指定抢占式实例规格每小时的最高价格。本参数仅当LaunchTemplateId参数存在取值，且启动模版的计费模式为设置出价上限的抢占式实例（即SpotWithPriceLimit）时有效。",
+          "type": "number"
+        },
+        "WeightedCapacity": {
+          "description": "实例规格的权重。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ServerGroupAttribute": {
+      "properties": {
+        "LoadBalancerId": {
+          "description": "负载均衡实例的ID。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "负载均衡后端服务器组中服务器的端口号。取值1 ～ 65535。",
+          "type": "integer"
+        },
+        "ServerGroupId": {
+          "description": "负载均衡后端服务器组的ID。",
+          "type": "string"
+        },
+        "Type": {
+          "default": "CLB",
+          "description": "负载均衡服务器组类型。单个CLB/ALB最多支持添加20个后端服务器组，所有CLB/ALB最多支持添加100个后端服务器。ALB：应用型负载均衡。CLB：传统型型负载均衡（默认）。",
+          "enum": [
+            "ALB",
+            "CLB"
+          ],
+          "type": "string"
+        },
+        "Weight": {
+          "description": "负载均衡后端服务器组中服务器的权重。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "伸缩组用于管理一组云资源实例。通过伸缩组可以定义云资源池中的实例数/容量、冷却时间、负载均衡等信息。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "autoscaling:CreateScalingGroup",
+        "autoscaling:DescribeScalingGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "autoscaling:DeleteScalingGroup",
+        "autoscaling:DescribeScalingGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "autoscaling:DescribeScalingGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "autoscaling:DescribeScalingGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "autoscaling:ModifyScalingGroup",
+        "autoscaling:AttachServerGroups",
+        "autoscaling:DetachServerGroups",
+        "autoscaling:SuspendProcesses",
+        "autoscaling:ResumeProcesses",
+        "autoscaling:EnableScalingGroup",
+        "autoscaling:DisableScalingGroup",
+        "autoscaling:UntagResources",
+        "autoscaling:TagResources",
+        "autoscaling:DescribeScalingGroups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ScalingGroupId"
+  ],
+  "properties": {
+    "ActiveScalingConfigurationId": {
+      "description": "伸缩组绑定的伸缩配置的ID。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "伸缩组创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DBInstanceIds": {
+      "description": "RDS数据库实例的ID。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DefaultCooldown": {
+      "default": 300,
+      "description": "执行一次伸缩活动（添加或移出ECS实例）结束后的冷却时间。冷却时间内，该伸缩组不执行其它的伸缩活动，仅针对云监控报警任务触发的伸缩活动和伸缩规则有效。取值范围：5 ~ 86400，单位：秒。默认值：300。",
+      "maximum": 86400,
+      "minimum": 5,
+      "type": "integer"
+    },
+    "DesireInstanceNumber": {
+      "default": -1,
+      "description": "伸缩组中期望运行的实例个数。1、不小于最小实例数MinInstanceNumber且不大于最大实例数MaxInstanceNumber。2、默认值：-1，表示不开启期望实例数能力。此时，伸缩组创建完成后会立即开始伸缩活动自动添加相应个数的实例。",
+      "type": "integer"
+    },
+    "HealthCheckType": {
+      "default": "ECS",
+      "description": "伸缩组的健康检查方式。1、NONE：不做实例健康状态检查。2、ECS（默认）：对伸缩组内的ECS实例做健康检查。",
+      "enum": [
+        "NONE",
+        "ECS"
+      ],
+      "type": "string"
+    },
+    "InstanceTerminatePolicy": {
+      "default": "OldestScalingConfigurationWithOldestInstance",
+      "description": "实例移除策略，1、OldestInstance：移出最早加入 （包括自动创建和手动添加）伸缩组的实例。2、NewestInstance：移出最晚加入（包括自动创建和手动添加）伸缩组的实例。3、OldestScalingConfigurationWithOldestInstance（默认）：移出最早与伸缩组绑定的伸缩配置中，最早由伸缩组 自动创建 的实例。4、OldestScalingConfigurationWithNewestInstance：移出最早与伸缩组绑定的伸缩配置中，最晚由伸缩组 自动创建 的实例。",
+      "enum": [
+        "OldestInstance",
+        "NewestInstance",
+        "OldestScalingConfigurationWithNewestInstance",
+        "OldestScalingConfigurationWithOldestInstance"
+      ],
+      "type": "string"
+    },
+    "InstancesDistribution": {
+      "$ref": "#/definitions/InstancesDistribution",
+      "description": "实例分布策略。",
+      "type": "object"
+    },
+    "IsEnableScalingGroup": {
+      "description": "是否启用伸缩组。true：启用。false：停止",
+      "type": "boolean"
+    },
+    "LaunchTemplateId": {
+      "description": "实例启动模板ID，配置后表示选择启动模版作为伸缩配置来源。",
+      "type": "string"
+    },
+    "LaunchTemplateOverrides": {
+      "description": "实例启动模版信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/LaunchTemplateOverride"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "LaunchTemplateVersion": {
+      "default": "Default",
+      "description": "实例启动模板的版本。1、模板的某个版本号。2、Default（默认）：始终使用模板默认版本。3、Latest：始终使用模板最新版本。",
+      "type": "string"
+    },
+    "LifecycleState": {
+      "description": "伸缩组的状态。Active：已启用。InActive：未激活。Deleting：删除中。Locked: 已锁定。CoolingDown: 冷却中。Unknown: 未知状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "LoadBalancerHealthCheckGracePeriod": {
+      "description": "伸缩组实例CLB健康状况检查宽限期。",
+      "type": "integer"
+    },
+    "MaxInstanceNumber": {
+      "description": "伸缩组中实例个数的最大值，默认取值0 ～ 100。您可以通过配额中心调整。",
+      "type": "integer"
+    },
+    "MinInstanceNumber": {
+      "description": "伸缩组中实例个数的最小值，默认取值0 ～ 100。您可以通过配额中心调整。",
+      "type": "integer"
+    },
+    "MultiAZPolicy": {
+      "default": "PRIORITY",
+      "description": "扩缩容策略，如果您选择了多个子网，需配置本参数。1、PRIORITY（默认）：优先级策略。2、BALANCE：均衡分布策略。",
+      "enum": [
+        "PRIORITY",
+        "BALANCE"
+      ],
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "伸缩组所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+      "maxLength": 64,
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ScalingGroupId": {
+      "description": "伸缩组ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ScalingGroupName": {
+      "description": "伸缩组名称，同一地域下伸缩组名称唯一。只能以中文、字母开头，只能包含中文、字母、数字、下划线和中划线 。长度限制为1 ~ 128个字符。暂不支持特殊字符。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ScalingMode": {
+      "default": "release",
+      "description": "伸缩组的实例回收模式。1、release（默认）：释放模式。2、recycle：停机回收模式。",
+      "enum": [
+        "release",
+        "recycle"
+      ],
+      "type": "string"
+    },
+    "ServerGroupAttributes": {
+      "description": "伸缩组关联的负载均衡信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ServerGroupAttribute"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "StoppedInstanceCount": {
+      "description": "伸缩组内处于停用中状态的实例数量。",
+      "type": "integer"
+    },
+    "SubnetIds": {
+      "description": "伸缩组中实例主网卡的子网ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SuspendedProcesses": {
+      "description": "暂停中的流程，无暂停中流程则返回空值。ScaleIn：缩容流程。ScaleOut：扩容流程。HealthCheck：健康检查。AlarmNotification：报警任务。ScheduledAction：定时任务。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TotalInstanceCount": {
+      "description": "当前伸缩组内实例的个数。",
+      "type": "integer"
+    },
+    "UpdatedTime": {
+      "description": "伸缩组更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "伸缩组所属私有网络ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ScalingGroupId",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/LifecycleState",
+    "/properties/LoadBalancerHealthCheckGracePeriod",
+    "/properties/StoppedInstanceCount",
+    "/properties/TotalInstanceCount",
+    "/properties/VpcId",
+    "/properties/DBInstanceIds",
+    "/properties/ServerGroupAttributes/*/LoadBalancerId",
+    "/properties/LaunchTemplateOverrides/*/WeightedCapacity"
+  ],
+  "required": [
+    "MaxInstanceNumber",
+    "MinInstanceNumber",
+    "ScalingGroupName",
+    "SubnetIds"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::AutoScaling::ScalingGroup",
+  "writeOnlyProperties": [
+    "/properties/IsEnableScalingGroup"
+  ]
+}

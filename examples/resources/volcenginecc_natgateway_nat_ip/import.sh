@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_natgateway_nat_ip.example "nat_ip_id"

@@ -15,7 +15,7 @@
             "type": "string"
           },
           "type": "array",
-          "uniqueItems": false
+          "uniqueItems": true
         }
       },
       "type": "object"
@@ -34,7 +34,7 @@
       },
       "type": "object"
     },
-    "CommonMatch": {
+    "CommonMatchList": {
       "description": "表示一个通用列表的配置，对应 ConfigType 是 common_match_list。",
       "properties": {
         "CommonType": {
@@ -54,10 +54,12 @@
         },
         "Rules": {
           "description": "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+          "insertionOrder": false,
           "items": {
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "type": "object"
@@ -67,11 +69,13 @@
       "properties": {
         "Rules": {
           "description": "表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。",
+          "insertionOrder": false,
           "items": {
             "description": "表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。",
             "type": "string"
           },
-          "type": "array"
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "type": "object"
@@ -141,8 +145,8 @@
       "description": "表示一个 Referer 白名单的配置，对应 ConfigType 是 allow_referer_access_rule。",
       "type": "object"
     },
-    "CommonMatchs": {
-      "$ref": "#/definitions/CommonMatch",
+    "CommonMatchList": {
+      "$ref": "#/definitions/CommonMatchList",
       "description": "表示一个通用列表的配置，对应 ConfigType 是 common_match_list。",
       "type": "object"
     },

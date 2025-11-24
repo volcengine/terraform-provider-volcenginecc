@@ -1,0 +1,95 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/SourceCidr",
+    "/properties/NatGatewayId",
+    "/properties/SubnetId"
+  ],
+  "description": "当私有网络内有多台云服务器实例需要访问公网时，为了节省公网IP且避免在公网上直接暴露云服务器IP，您可以使用公网NAT网关的SNAT规则，安全、便捷、高效地访问公网。SNAT规则支持私有网络、子网、云服务器、自定义网段等四种粒度，您可根据业务需求灵活配置。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "natgateway:CreateSnatEntry",
+        "natgateway:DescribeSnatEntryAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "natgateway:DeleteSnatEntry",
+        "natgateway:DescribeSnatEntryAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "natgateway:DescribeSnatEntries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "natgateway:DescribeSnatEntryAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "natgateway:ModifySnatEntryAttributes",
+        "natgateway:DescribeSnatEntryAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SnatEntryId"
+  ],
+  "properties": {
+    "EipAddress": {
+      "description": "SNAT规则关联的公网IP的IP地址。返回单个公网IP的IP地址。 返回多个公网IP的IP地址。",
+      "type": "string"
+    },
+    "EipId": {
+      "description": "SNAT规则关联的公网IP的ID。返回单个公网IP的ID。 返回多个公网IP的ID。",
+      "type": "string"
+    },
+    "NatGatewayId": {
+      "description": "SNAT规则所属NAT网关的ID。",
+      "type": "string"
+    },
+    "NatIpId": {
+      "description": "私网NAT网关的中转IP的ID。",
+      "type": "string"
+    },
+    "SnatEntryId": {
+      "description": "SNAT规则的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SnatEntryName": {
+      "description": "SNAT规则的名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "SourceCidr": {
+      "description": "SNAT规则对应的网段。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "SNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "SNAT规则关联子网的ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/SnatEntryId",
+    "/properties/EipAddress",
+    "/properties/Status"
+  ],
+  "required": [
+    "NatGatewayId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::NatGateway::Snatentry"
+}

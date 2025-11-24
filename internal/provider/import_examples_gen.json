@@ -323,5 +323,35 @@
         "resource": "volcenginecc_rdsmysql_db_account",
         "identifier": ["InstanceId","AccountName","Host"],
         "path": "./examples/resources/volcenginecc_rdsmysql_db_account/import.sh"
+    },
+    {
+        "resource": "volcenginecc_autoscaling_scaling_group",
+        "identifier": ["ScalingGroupId"],
+        "path": "./examples/resources/volcenginecc_autoscaling_scaling_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cen_cen",
+        "identifier": ["CenId"],
+        "path": "./examples/resources/volcenginecc_cen_cen/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vedbm_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_vedbm_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_natgateway_snatentry",
+        "identifier": ["SnatEntryId"],
+        "path": "./examples/resources/volcenginecc_natgateway_snatentry/import.sh"
+    },
+    {
+        "resource": "volcenginecc_natgateway_dnatentry",
+        "identifier": ["DnatEntryId"],
+        "path": "./examples/resources/volcenginecc_natgateway_dnatentry/import.sh"
+    },
+    {
+        "resource": "volcenginecc_natgateway_nat_ip",
+        "identifier": ["NatIpId"],
+        "path": "./examples/resources/volcenginecc_natgateway_nat_ip/import.sh"
     }
 ]
