@@ -108,6 +108,20 @@
         "mappings"
       ],
       "additionalProperties": false
+    },
+    "filterDefinition": {
+      "description": "Defines filterable properties and required properties.",
+      "type": "object",
+      "properties": {
+        "required": {
+          "$ref": "file://./base.definition.schema.v1.json#/properties/required"
+        },
+        "filterableProperties": {
+          "description": "A list of JSON pointers to properties that are able to be filtered in a List request",
+          "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "type": "object",
@@ -230,6 +244,11 @@
     "readOnlyProperties": {
       "description": "A list of JSON pointers to properties that are able to be found in a Read request but unable to be specified by the customer",
       "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
+    },
+    "filterProperties": {
+      "description": "A list of JSON pointers to properties that are able to be filtered in a List request",
+      "type": "object",
+      "$ref": "#/definitions/filterDefinition"
     },
     "writeOnlyProperties": {
       "description": "A list of JSON pointers to properties (typically sensitive) that are able to be specified by the customer but unable to be returned in a Read request",
