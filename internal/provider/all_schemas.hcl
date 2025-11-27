@@ -299,3 +299,16 @@ resource_schema "volcengine_natgateway_dnatentry" {
 resource_schema "volcengine_natgateway_nat_ip" {
   cloudcontrol_type_name = "Volcengine::NatGateway::NatIp"
 }
+
+resource_schema "volcengine_autoscaling_scaling_policy" {
+  cloudcontrol_type_name = "Volcengine::AutoScaling::ScalingPolicy"
+}
+
+resource_schema "volcengine_vke_cluster" {
+  cloudcontrol_type_name = "Volcengine::VKE::Cluster"
+}
+
+resource_schema "volcengine_rabbitmq_instance" {
+  cloudcontrol_type_name = "Volcengine::RabbitMQ::Instance"
+}
+

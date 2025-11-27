@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_autoscaling_scaling_policy.example "scaling_group_id|scaling_policy_id"

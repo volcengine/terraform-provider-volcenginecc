@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rdsmysql_instance.example "instance_id"

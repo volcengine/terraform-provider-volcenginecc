@@ -73,6 +73,9 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_natgateway_snatentry -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_Snatentry.json -package natgateway ../volcengine/natgateway/snatentry_singular_data_source_gen.go ../volcengine/natgateway/snatentry_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_natgateway_dnatentry -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_Dnatentry.json -package natgateway ../volcengine/natgateway/dnatentry_singular_data_source_gen.go ../volcengine/natgateway/dnatentry_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_natgateway_nat_ip -ccschema ../service/cloudcontrol/schemas/Volcengine_NatGateway_NatIp.json -package natgateway ../volcengine/natgateway/nat_ip_singular_data_source_gen.go ../volcengine/natgateway/nat_ip_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_autoscaling_scaling_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_AutoScaling_ScalingPolicy.json -package autoscaling ../volcengine/autoscaling/scaling_policy_singular_data_source_gen.go ../volcengine/autoscaling/scaling_policy_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vke_cluster -ccschema ../service/cloudcontrol/schemas/Volcengine_VKE_Cluster.json -package vke ../volcengine/vke/cluster_singular_data_source_gen.go ../volcengine/vke/cluster_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_rabbitmq_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_RabbitMQ_Instance.json -package rabbitmq ../volcengine/rabbitmq/instance_singular_data_source_gen.go ../volcengine/rabbitmq/instance_singular_data_source_gen_test.go
 
 package provider
 
@@ -93,6 +96,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/natgateway"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/organization"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatezone"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rabbitmq"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"

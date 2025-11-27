@@ -353,5 +353,20 @@
         "resource": "volcenginecc_natgateway_nat_ip",
         "identifier": ["NatIpId"],
         "path": "./examples/resources/volcenginecc_natgateway_nat_ip/import.sh"
+    },
+    {
+        "resource": "volcenginecc_autoscaling_scaling_policy",
+        "identifier": ["ScalingGroupId","ScalingPolicyId"],
+        "path": "./examples/resources/volcenginecc_autoscaling_scaling_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_cluster",
+        "identifier": ["ClusterId"],
+        "path": "./examples/resources/volcenginecc_vke_cluster/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rabbitmq_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_rabbitmq_instance/import.sh"
     }
 ]

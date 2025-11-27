@@ -1,0 +1,530 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/KubernetesVersionCreate",
+    "/properties/ProjectName",
+    "/properties/ClusterConfig/ResourcePublicAccessDefaultEnabled",
+    "/properties/PodsConfig/PodNetworkMode",
+    "/properties/PodsConfig/FlannelConfig",
+    "/properties/PodsConfig/VpcCniConfig/TrunkEniEnabled",
+    "/properties/ServicesConfig",
+    "/properties/LoggingConfig/LogProjectId",
+    "/properties/LoggingConfig/LogSetups/*/LogTtl",
+    "/properties/LoggingConfig/LogSetups/*/Enabled",
+    "/properties/LoggingConfig/LogSetups/*/LogType"
+  ],
+  "definitions": {
+    "ApiServerEndpoints": {
+      "properties": {
+        "PrivateIp": {
+          "$ref": "#/definitions/PrivateIp",
+          "description": "集群 API Server 私网的 IPv4 地址。",
+          "type": "object"
+        },
+        "PublicIp": {
+          "$ref": "#/definitions/PublicIp",
+          "description": "集群 API Server 公网的 IPv4 地址。",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ApiServerPublicAccessConfig": {
+      "properties": {
+        "PublicAccessNetworkConfig": {
+          "$ref": "#/definitions/PublicAccessNetworkConfig",
+          "description": "公网访问网络配置。ApiServerPublicAccessEnable=true时才返回的参数。",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ClusterConfig": {
+      "properties": {
+        "ApiServerEndpoints": {
+          "$ref": "#/definitions/ApiServerEndpoints",
+          "description": "集群 API Server 访问的 IPv4 地址信息。",
+          "type": "object"
+        },
+        "ApiServerPublicAccessConfig": {
+          "$ref": "#/definitions/ApiServerPublicAccessConfig",
+          "description": "集群 API Server 公网访问配置信息。ApiServerPublicAccessEnable=true时才返回的参数。",
+          "type": "object"
+        },
+        "ApiServerPublicAccessEnabled": {
+          "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+          "type": "boolean"
+        },
+        "ResourcePublicAccessDefaultEnabled": {
+          "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+          "type": "boolean"
+        },
+        "SecurityGroupIds": {
+          "description": "集群控制面及节点使用的的安全组。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "SubnetIds": {
+          "description": "集群控制面在私有网络内通信的子网 ID。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "VpcId": {
+          "description": "集群控制面及部分节点的网络所在的私有网络（VPC）ID。",
+          "semantic": "privateIp",
+          "type": "string"
+        }
+      },
+      "required": [
+        "SubnetIds"
+      ],
+      "type": "object"
+    },
+    "ComponentConfig": {
+      "description": "单个监控组件的配置，用于控制组件是否启用。",
+      "properties": {
+        "Enabled": {
+          "description": "是否启用该监控组件，true 表示启用，false 表示禁用。",
+          "type": "boolean"
+        },
+        "Name": {
+          "description": "监控组件的名称，例如 'prometheus'、'grafana' 等。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Condition": {
+      "properties": {
+        "Type": {
+          "description": "条件类型",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "FlannelConfig": {
+      "properties": {
+        "MaxPodsPerNode": {
+          "description": "Flannel 模型容器网络的单节点 Pod 实例数量上限，取值：64（默认值）、16、32、128、256。",
+          "enum": [
+            16,
+            32,
+            64,
+            128,
+            256
+          ],
+          "type": "integer"
+        },
+        "PodCidrs": {
+          "description": "Flannel 容器网络的 Pod CIDR。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "LogSetup": {
+      "properties": {
+        "Enabled": {
+          "description": "是否开启该日志选项，参数值说明：true：已开启。false：未开启。",
+          "type": "boolean"
+        },
+        "LogTopicId": {
+          "description": "采集目标的TLS日志主题ID。 如果为空，表示对应日志的主题未被创建。",
+          "type": "string"
+        },
+        "LogTtl": {
+          "default": 30,
+          "description": "日志在日志服务中的保存时间，单位为天。 3650 天表示永久存储。",
+          "maximum": 3650,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "LogType": {
+          "description": "当前开启的日志类型，参数值说明：Audit：集群审计日志。KubeApiServer：kube-apiserver 组件日志。KubeScheduler：kube-scheduler 组件日志。KubeControllerManager：kube-controller-manager 组件日志。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LoggingConfig": {
+      "properties": {
+        "LogProjectId": {
+          "description": "集群的日志项目（Log Project）ID。 如果为空，表示集群的日志项目未被创建。",
+          "type": "string"
+        },
+        "LogSetups": {
+          "description": "集群的日志选项信息。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/LogSetup"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "MonitoringConfig": {
+      "description": "集群监控配置，用于定义监控组件和工作区信息。",
+      "properties": {
+        "ComponentConfigs": {
+          "description": "监控组件的配置列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ComponentConfig"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "WorkspaceId": {
+          "description": "监控数据所属的工作区 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NodeStatistics": {
+      "properties": {
+        "CreatingCount": {
+          "description": "Phase=Creating的节点总数量。",
+          "type": "integer"
+        },
+        "DeletingCount": {
+          "description": "Phase=Deleting的节点总数量。",
+          "type": "integer"
+        },
+        "FailedCount": {
+          "description": "Phase=Failed的节点总数量。",
+          "type": "integer"
+        },
+        "RunningCount": {
+          "description": "Phase=Running的节点总数量。",
+          "type": "integer"
+        },
+        "TotalCount": {
+          "description": "节点总数量。",
+          "type": "integer"
+        },
+        "UpdatingCount": {
+          "description": "Phase=Updating的节点总数量。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PodsConfig": {
+      "properties": {
+        "FlannelConfig": {
+          "$ref": "#/definitions/FlannelConfig",
+          "description": "Flannel 网络配置。",
+          "type": "object"
+        },
+        "PodNetworkMode": {
+          "description": "容器（Pod）网络模型（CNI），参数值说明：Flannel：Flannel 网络模型，独立的 Underlay 容器网络模型。VpcCniShared：VPC-CNI 网络模型，基于私有网络的弹性网卡 ENI 实现的 Underlay 容器网络模型。",
+          "enum": [
+            "Flannel",
+            "VpcCniShared"
+          ],
+          "type": "string"
+        },
+        "VpcCniConfig": {
+          "$ref": "#/definitions/VpcCniConfig",
+          "description": "VPC-CNI 网络配置。",
+          "type": "object"
+        }
+      },
+      "required": [
+        "PodNetworkMode"
+      ],
+      "type": "object"
+    },
+    "PrivateIp": {
+      "properties": {
+        "Ipv4": {
+          "description": "私网 IP 的 IPv4 地址。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PublicAccessNetworkConfig": {
+      "properties": {
+        "Bandwidth": {
+          "description": "公网 IP 的带宽峰值，单位：Mbps。",
+          "type": "integer"
+        },
+        "BillingType": {
+          "description": "公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。",
+          "type": "integer"
+        },
+        "Isp": {
+          "description": "公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PublicIp": {
+      "properties": {
+        "Ipv4": {
+          "description": "公网 IP 的 IPv4 地址。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ServicesConfig": {
+      "properties": {
+        "ServiceCidrsv4": {
+          "description": "Kubernetes 服务（Service）暴露的 IPv4 私有网络地址。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "ServiceCidrsv4"
+      ],
+      "type": "object"
+    },
+    "Status": {
+      "properties": {
+        "Conditions": {
+          "description": "状态条件列表",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Phase": {
+          "description": "集群状态阶段",
+          "semantic": "status",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    },
+    "VpcCniConfig": {
+      "properties": {
+        "SubnetIds": {
+          "description": "VPC-CNI 容器网络模型对应的 Pod 子网 ID 列表。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "TrunkEniEnabled": {
+          "description": "是否开启 VPC-CNI 容器网络模型的 Trunk 模式。",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "容器服务通过深度融合新一代云原生技术，提供以容器为核心的高性能 Kubernetes 容器集群管理服务。在云端一键构建高可用 Kubernetes 集群，并实现容器化应用的可视化全生命周期管理，助力用户快速构建容器化应用。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vke:CreateCluster",
+        "vke:ListClusters",
+        "vke:DeleteCluster"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vke:DeleteCluster",
+        "vke:ListClusters"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vke:ListClusters"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vke:ListClusters"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vke:UpdateClusterConfig",
+        "vke:ListClusters",
+        "vke:UntagResources",
+        "vke:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId"
+  ],
+  "properties": {
+    "ClusterConfig": {
+      "$ref": "#/definitions/ClusterConfig",
+      "description": "集群控制面及部分节点的网络配置。",
+      "type": "object"
+    },
+    "ClusterId": {
+      "description": "集群 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "集群创建时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeleteProtectionEnabled": {
+      "default": false,
+      "description": "集群删除保护，取值：false：（默认值）关闭删除保护。true：开启删除保护，不允许直接删除集群。",
+      "type": "boolean"
+    },
+    "Description": {
+      "description": "集群描述。长度限制为 300 个字符以内。",
+      "maxLength": 300,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "KubernetesVersion": {
+      "description": "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）",
+      "type": "string"
+    },
+    "KubernetesVersionCreate": {
+      "description": "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。(创建使用)",
+      "type": "string"
+    },
+    "LoggingConfig": {
+      "$ref": "#/definitions/LoggingConfig",
+      "description": "集群的日志配置信息。",
+      "type": "object"
+    },
+    "Message": {
+      "description": "集群状态描述。",
+      "type": "string"
+    },
+    "MonitoringConfig": {
+      "$ref": "#/definitions/MonitoringConfig",
+      "description": "监控配置信息。",
+      "type": "object"
+    },
+    "Name": {
+      "description": "集群名称。同一个地域下，名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。",
+      "maxLength": 64,
+      "minLength": 2,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NodeStatistics": {
+      "$ref": "#/definitions/NodeStatistics",
+      "description": "集群中各主状态下对应的节点数量统计。",
+      "type": "object"
+    },
+    "PodsConfig": {
+      "$ref": "#/definitions/PodsConfig",
+      "description": "Pod 的网络配置。",
+      "type": "object"
+    },
+    "ProjectName": {
+      "description": "集群所属项目名称，一个集群只能归属于一个项目。只能包含英文字母、数字、下划线（_）、英文句点（.）和中划线（-）。长度限制在 64 个字符以内。默认值：default。",
+      "maxLength": 64,
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ServicesConfig": {
+      "$ref": "#/definitions/ServicesConfig",
+      "description": "服务的网络配置。",
+      "type": "object"
+    },
+    "SourceRegion": {
+      "description": "集群源地域。",
+      "type": "string"
+    },
+    "Status": {
+      "$ref": "#/definitions/Status",
+      "description": "集群状态。",
+      "type": "object"
+    },
+    "Tags": {
+      "description": "集群的标签。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Type": {
+      "description": "集群类型。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "集群最近一次更新的时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/Message",
+    "/properties/Type",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/ClusterConfig/ApiServerEndpoints",
+    "/properties/ClusterConfig/SecurityGroupIds",
+    "/properties/ClusterConfig/VpcId",
+    "/properties/LoggingConfig/LogSetups/*/LogTopicId",
+    "/properties/NodeStatistics",
+    "/properties/Status"
+  ],
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VKE::Cluster",
+  "writeOnlyProperties": [
+    "/properties/KubernetesVersionCreate"
+  ]
+}
