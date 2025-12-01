@@ -1,0 +1,291 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/FileSystemType",
+    "/properties/ProjectName",
+    "/properties/ProtocolType",
+    "/properties/StoreType",
+    "/properties/SubnetId",
+    "/properties/VersionNumber",
+    "/properties/VpcId",
+    "/properties/ZoneId",
+    "/properties/ChargeType"
+  ],
+  "definitions": {
+    "CapacityInfo": {
+      "properties": {
+        "TotalTiB": {
+          "description": "文件系统总容量，单位为 TiB。",
+          "type": "integer"
+        },
+        "UsedGiB": {
+          "description": "已使用容量（GiB）。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "标签类型，说明如下：Custom: 用户自定义标签。System: 系统标签。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "文件存储 vePFS 是推出的一种高吞吐、低延时、可扩展并行的文件系统服务，满足高性能计算场景下高吞吐低延时的数据读写需求，可广泛应用于 HPC 高性能计算、AI 人工智能训练或推理、能源勘探、工业仿真、影视渲染、生命科学、气象分析等场景。同时，vePFS 提供一键化部署及配套监控报警能力，免去部署、维护费用的同时，最大化提升您的业务效率。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/FileSystemId",
+      "/properties/ProjectName",
+      "/properties/ChargeType",
+      "/properties/FileSystemType",
+      "/properties/StoreType",
+      "/properties/FileSystemName",
+      "/properties/Status",
+      "/properties/ZoneId",
+      "/properties/ProtocolType",
+      "/properties/AccountId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vepfs:CreateFileSystem",
+        "vepfs:DescribeFileSystems"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vepfs:DeleteFileSystem",
+        "vepfs:DescribeFileSystems"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vepfs:DescribeFileSystems"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vepfs:DescribeFileSystems"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vepfs:UpdateFileSystem",
+        "vepfs:ExpandFileSystem",
+        "vepfs:DescribeFileSystems"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FileSystemId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "账户ID。",
+      "type": "string"
+    },
+    "Bandwidth": {
+      "description": "vePFS 文件系统吞吐上限。",
+      "type": "integer"
+    },
+    "Capacity": {
+      "description": "文件系统容量，单位为 TiB。",
+      "type": "integer"
+    },
+    "CapacityInfo": {
+      "$ref": "#/definitions/CapacityInfo",
+      "description": "容量信息。",
+      "type": "object"
+    },
+    "ChargeStatus": {
+      "description": "计费状态，默认为 Normal，表示正常计费。",
+      "type": "string"
+    },
+    "ChargeType": {
+      "description": "计费类型。取值说明如下：PayAsYouGo：按量计费。",
+      "enum": [
+        "PayAsYouGo"
+      ],
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "文件系统描述信息。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EnableRestripe": {
+      "description": "扩容后是否开启数据均衡，取值说明如下：true：扩容后立即开启数据均衡。false：扩容后不开启数据均衡。注意：仅 100MB/s/TiB 规格的文件系统支持数据均衡功能。由于数据均衡过程会消耗存储节点的网络和磁盘带宽，导致文件系统的性能下降，建议您评估业务需求，谨慎开启。数据均衡的时间主要受存量数据量的影响，如果您的存量数据较多，均衡的时间可能会较长，根据扩容容量大小和文件系统状态，此过程可能需要花费数小时至 2 天的时间，建议您在业务低峰期开启并耐心等待。",
+      "type": "boolean"
+    },
+    "ExpireTime": {
+      "description": "过期时间。",
+      "type": "string"
+    },
+    "FileSystemId": {
+      "description": "文件系统 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "FileSystemName": {
+      "description": "文件系统名称。命名规范如下：只能以中文或英文开头。只能包含中文、字母、数字、半角句号（.）、下划线（_）或中划线（-）。长度需要在 1~128 个字符内。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "FileSystemType": {
+      "default": "VePFS",
+      "description": "文件系统类型，默认为 VePFS。",
+      "type": "string"
+    },
+    "FreeTime": {
+      "description": "文件系统释放时间。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "文件系统所属项目，默认为 default。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ProtocolType": {
+      "default": "VePFS",
+      "description": "协议类型，默认为 VePFS。",
+      "type": "string"
+    },
+    "ReadBandwidth": {
+      "description": "读带宽值, 单位MB/s。",
+      "type": "integer"
+    },
+    "SecurityGroupId": {
+      "description": "生成的辅助网卡所在的安全组ID。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "文件系统状态。取值说明如下：Running：实例运行中。Creating：实例创建中。CreateError：实例创建失败。Updating：实例更新中。UpdateError：实例更新失败。Expanding：实例扩容中。ExpandError：实例扩容失败。Deleting：实例删除中。DeleteError：实例删除失败。Stopped：实例已关停。Error：实例处于错误状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "StopServiceTime": {
+      "description": "文件系统关停时间。",
+      "type": "string"
+    },
+    "StoreType": {
+      "description": "文件系统规格，取值说明如下：Advance_100：100MB/s/TiB。Performance：性能版。Intelligent_Computing：智算版。",
+      "enum": [
+        "Advance_100",
+        "Performance",
+        "Intelligent_Computing"
+      ],
+      "type": "string"
+    },
+    "StoreTypeCN": {
+      "description": "文件系统规格中文名称，支持如下：100MB/s/TiB。性能版。智算版。",
+      "type": "string"
+    },
+    "StoreTypeEN": {
+      "description": "存储类型英文名。",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "子网 ID。子网必须属于所选的可用区。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "文件系统更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VersionNumber": {
+      "description": "文件系统版本号。",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "私有网络 ID。",
+      "type": "string"
+    },
+    "WriteBandwidth": {
+      "description": "写带宽值, 单位MB/s。",
+      "type": "integer"
+    },
+    "ZoneId": {
+      "description": "可用区 ID。",
+      "type": "string"
+    },
+    "ZoneName": {
+      "description": "可用区名称。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/FileSystemId",
+    "/properties/CapacityInfo",
+    "/properties/AccountId",
+    "/properties/Bandwidth",
+    "/properties/ChargeStatus",
+    "/properties/CreatedTime",
+    "/properties/ExpireTime",
+    "/properties/FreeTime",
+    "/properties/UpdatedTime",
+    "/properties/SecurityGroupId",
+    "/properties/Status",
+    "/properties/StopServiceTime",
+    "/properties/StoreTypeCN",
+    "/properties/StoreTypeEN",
+    "/properties/WriteBandwidth",
+    "/properties/ZoneName",
+    "/properties/ReadBandwidth",
+    "/properties/Tags/*/Type"
+  ],
+  "required": [
+    "Capacity",
+    "FileSystemName",
+    "FileSystemType",
+    "ProtocolType",
+    "StoreType",
+    "ZoneId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VEPFS::Instance",
+  "writeOnlyProperties": [
+    "/properties/Capacity",
+    "/properties/EnableRestripe"
+  ]
+}

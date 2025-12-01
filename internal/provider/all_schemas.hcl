@@ -312,3 +312,22 @@ resource_schema "volcengine_rabbitmq_instance" {
   cloudcontrol_type_name = "Volcengine::RabbitMQ::Instance"
 }
 
+resource_schema "volcengine_vke_node_pool" {
+  cloudcontrol_type_name = "Volcengine::VKE::NodePool"
+}
+
+resource_schema "volcengine_rdsmysql_instance" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::Instance"
+}
+
+resource_schema "volcengine_vepfs_instance" {
+  cloudcontrol_type_name = "Volcengine::VEPFS::Instance"
+}
+
+resource_schema "volcengine_escloud_instance" {
+  cloudcontrol_type_name = "Volcengine::ESCloud::Instance"
+}
+
+resource_schema "volcengine_apig_gateway" {
+  cloudcontrol_type_name = "Volcengine::APIG::Gateway"
+}

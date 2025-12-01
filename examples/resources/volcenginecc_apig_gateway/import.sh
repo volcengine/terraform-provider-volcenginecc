@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_apig_gateway.example "gateway_id"

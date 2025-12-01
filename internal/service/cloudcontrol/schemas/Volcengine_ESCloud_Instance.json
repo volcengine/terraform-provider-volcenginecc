@@ -1,0 +1,1035 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceConfiguration/EnableHttps",
+    "/properties/InstanceConfiguration/EnablePureMaster",
+    "/properties/InstanceConfiguration/Period",
+    "/properties/InstanceConfiguration/ProjectName",
+    "/properties/InstanceConfiguration/RegionId",
+    "/properties/InstanceConfiguration/Subnet",
+    "/properties/InstanceConfiguration/VPC",
+    "/properties/InstanceConfiguration/Version",
+    "/properties/InstanceConfiguration/ZoneId",
+    "/properties/InstanceConfiguration/AdminUserName",
+    "/properties/InstanceConfiguration/ZoneNumber"
+  ],
+  "definitions": {
+    "ColdNodeResourceSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "CPU": {
+          "description": "节点规格的 CPU 资源，单位为核（Core）",
+          "type": "integer"
+        },
+        "Description": {
+          "description": "节点规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "节点规格的显示名称",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "节点规格的内存容量，单位 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "节点规格。如需了解节点规格类型和详情",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ColdNodeStorageSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "Description": {
+          "description": "存储规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "存储规格的显示名称",
+          "type": "string"
+        },
+        "MaxSize": {
+          "description": "存储规格的最大值，单位为 GiB",
+          "type": "integer"
+        },
+        "MinSize": {
+          "description": "存储规格最小值，单位为 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+          "type": "string"
+        },
+        "Size": {
+          "description": "当前存储规格值，单位为 GiB",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "CoordinatorNodeResourceSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "CPU": {
+          "description": "节点规格的 CPU 资源，单位为核（Core）",
+          "type": "integer"
+        },
+        "Description": {
+          "description": "节点规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "节点规格的显示名称",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "节点规格的内存容量，单位 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "节点规格。如需了解节点规格类型和详情",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CoordinatorNodeStorageSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "Description": {
+          "description": "存储规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "存储规格的显示名称",
+          "type": "string"
+        },
+        "MaxSize": {
+          "description": "存储规格的最大值，单位为 GiB",
+          "type": "integer"
+        },
+        "MinSize": {
+          "description": "存储规格最小值，单位为 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+          "type": "string"
+        },
+        "Size": {
+          "description": "当前存储规格值，单位为 GiB",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ExtraPerformance": {
+      "description": "磁盘额外性能包相关配置。",
+      "properties": {
+        "Throughput": {
+          "description": "当您的数据节点选择使用 FlexPL 存储类型，且存储规格配置为 500GiB 及以上时，支持购买带宽包增加磁盘带宽。单位为MiB，调整步长为10MiB。当前支持的存储规格及对应额外性能包吞吐量上限如下：es.volume.essd.flexpl-standard：650",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "HotNodeResourceSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "CPU": {
+          "description": "节点规格的 CPU 资源，单位为核（Core）。",
+          "type": "integer"
+        },
+        "Description": {
+          "description": "节点规格的描述信息。",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "节点规格的显示名称。",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "节点规格的内存容量，单位 GiB。",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "节点规格。如需了解节点规格类型和详情，请参见产品规格。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "HotNodeStorageSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "Description": {
+          "description": "存储规格的描述信息。",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "存储规格的显示名称。",
+          "type": "string"
+        },
+        "MaxSize": {
+          "description": "存储规格的最大值，单位为 GiB。",
+          "type": "integer"
+        },
+        "MinSize": {
+          "description": "存储规格最小值，单位为 GiB。",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+          "type": "string"
+        },
+        "Size": {
+          "description": "配置的可用磁盘空间大小。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceConfiguration": {
+      "description": "实例配置。",
+      "properties": {
+        "AdminPassword": {
+          "description": "管理员密码。",
+          "type": "string"
+        },
+        "AdminUserName": {
+          "description": "管理员用户名。",
+          "type": "string"
+        },
+        "AutoRenew": {
+          "description": "包年包月实例是否配置自动续费。true：自动续费，系统会在每次到期前自动为实例续费。false：未开启自动续费，需要在实例到期前进行手动续费。如需了解更多，请参见实例续费。",
+          "type": "boolean"
+        },
+        "ChargeType": {
+          "description": "实例计费类型。PostPaid：按量计费。PrePaid：包年包月。",
+          "enum": [
+            "PostPaid",
+            "PrePaid"
+          ],
+          "type": "string"
+        },
+        "ColdNodeNumber": {
+          "description": "冷节点数量。",
+          "type": "integer"
+        },
+        "ColdNodeResourceSpec": {
+          "$ref": "#/definitions/ColdNodeResourceSpec",
+          "description": "冷节点的节点规格配置详情。",
+          "type": "object"
+        },
+        "ColdNodeStorageSpec": {
+          "$ref": "#/definitions/ColdNodeStorageSpec",
+          "description": "冷节点的存储规格配置详情。",
+          "type": "object"
+        },
+        "ConfigurationCode": {
+          "description": "计费配置码，可以通过调用DescribeNodeAvailableSpecs接口获得。",
+          "type": "string"
+        },
+        "CoordinatorNodeNumber": {
+          "description": "协调节点数量。",
+          "type": "integer"
+        },
+        "CoordinatorNodeResourceSpec": {
+          "$ref": "#/definitions/CoordinatorNodeResourceSpec",
+          "description": "协调节点的节点规格配置详情。",
+          "type": "object"
+        },
+        "CoordinatorNodeStorageSpec": {
+          "$ref": "#/definitions/CoordinatorNodeStorageSpec",
+          "description": "协调节点的存储规格配置详情。",
+          "type": "object"
+        },
+        "DeletionProtection": {
+          "description": "是否开启实例删除保护功能，取值说明如下：true：开启实例删除保护。false：关闭实例删除保护。说明开启实例删除保护后，您将无法通过控制台或者 API 删除实例。",
+          "type": "boolean"
+        },
+        "EnableHttps": {
+          "description": "是否启用 HTTPS 访问协议。true：启用 HTTPS 访问。false：不启用 HTTPS，使用 HTTP 访问。说明如果选择使用 HTTP 访问，将无需安全认证即可访问，并使用 HTTP 明文传输数据。您需要确保访问环境的安全性，且不要将访问接口暴露在公网环境上。实例创建完成后，支持根据业务需求修改传输协议。相关文档，请参见切换实例传输协议。",
+          "type": "boolean"
+        },
+        "EnablePureMaster": {
+          "description": "Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即使用 Hot 声明。",
+          "type": "boolean"
+        },
+        "HotNodeNumber": {
+          "description": "数据节点数量。",
+          "type": "integer"
+        },
+        "HotNodeResourceSpec": {
+          "$ref": "#/definitions/HotNodeResourceSpec",
+          "description": "数据节点的节点规格配置详情。",
+          "type": "object"
+        },
+        "HotNodeStorageSpec": {
+          "$ref": "#/definitions/HotNodeStorageSpec",
+          "description": "数据节点的存储规格配置详情。",
+          "type": "object"
+        },
+        "IncludeMonths": {
+          "description": "包年包月实例购买时长。",
+          "type": "integer"
+        },
+        "InstanceName": {
+          "description": "自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。",
+          "maxLength": 128,
+          "minLength": 1,
+          "semantic": "resourceName",
+          "type": "string"
+        },
+        "KibanaNodeNumber": {
+          "description": "kibana 节点数量。",
+          "type": "integer"
+        },
+        "KibanaNodeResourceSpec": {
+          "$ref": "#/definitions/KibanaNodeResourceSpec",
+          "description": "Kibana 节点的节点规格配置详情。",
+          "type": "object"
+        },
+        "MasterNodeNumber": {
+          "description": "master 节点数量。",
+          "type": "integer"
+        },
+        "MasterNodeResourceSpec": {
+          "$ref": "#/definitions/MasterNodeResourceSpec",
+          "description": "Master 节点的节点规格配置详情。",
+          "type": "object"
+        },
+        "MasterNodeStorageSpec": {
+          "$ref": "#/definitions/MasterNodeStorageSpec",
+          "description": "Master 节点的存储规格配置详情。",
+          "type": "object"
+        },
+        "NetworkSpecs": {
+          "description": "实例公网规格配置。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/NetworkSpec"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NodeSpecsAssigns": {
+          "description": "实例中各种节点的数量和规格配置。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/NodeSpecsAssign"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Period": {
+          "description": "包年包月实例的购买时长，单位：月。",
+          "type": "integer"
+        },
+        "ProjectName": {
+          "description": "按需设置云搜索实例所属的项目，有利于云资源的分组管理。项目是提供的一种资源管理方式，有利于维护资源独立、数据安全；同时可从项目维度查看资源消费账单，便于计算云资源使用成本。如需了解更多信息，请参见项目概述",
+          "semantic": "projectName",
+          "type": "string"
+        },
+        "RegionId": {
+          "description": "实例所在区域。",
+          "type": "string"
+        },
+        "Subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "设置实例的子网信息。说明设置的子网必须是主可用区中的子网。",
+          "type": "object"
+        },
+        "Tags": {
+          "description": "标签信息。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "semantic": "tags",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "VPC": {
+          "$ref": "#/definitions/VPC",
+          "description": "设置实例的私有网络 VPC 信息。",
+          "type": "object"
+        },
+        "Version": {
+          "description": "API的版本，取值：2023-01-01。",
+          "type": "string"
+        },
+        "WarmNodeNumber": {
+          "description": "温节点数量。",
+          "type": "integer"
+        },
+        "WarmNodeResourceSpec": {
+          "$ref": "#/definitions/WarmNodeResourceSpec",
+          "description": "温节点的节点规格配置详情。",
+          "type": "object"
+        },
+        "WarmNodeStorageSpec": {
+          "$ref": "#/definitions/WarmNodeStorageSpec",
+          "description": "温节点的存储规格配置详情。",
+          "type": "object"
+        },
+        "ZoneId": {
+          "description": "实例所在可用区。说明如果是多可用区部署，则填写多个 ZoneId，使用英文逗号分隔，如cn-beijing-a,cn-beijing-c。最左侧的 ZoneId 为主可用区，其余为备可用区。",
+          "type": "string"
+        },
+        "ZoneNumber": {
+          "description": "实例的可用区数量。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "KibanaConfig": {
+      "properties": {
+        "RequestTimeout": {
+          "description": "接口请求超时时长，默认为 30000 毫秒，即后端响应时长超过 30 秒时将出现503 Request timed out报错。如果需要正常获得响应、减少 503 报错，您可以选择增加请求超时时长。",
+          "type": "integer"
+        },
+        "SessionKeepAlive": {
+          "description": "是否主动延长会话有效期。true：默认值，表示每次页面请求都会延长会话有效期。false：不会主动延长会话有效期。此种配置下可以实现会话超时过期效果，当登录时长达到 Session 有效时长后，将会自动退出登录。",
+          "type": "boolean"
+        },
+        "SessionTTL": {
+          "description": "会话有效时长，默认为 3600000 毫秒（1 小时）。如果您选择将 Session 活动保持设置为否，当登录时长达到 Session 有效时长后，将会自动退出登录。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "KibanaNodeResourceSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "CPU": {
+          "description": "节点规格的 CPU 资源，单位为核（Core）",
+          "type": "integer"
+        },
+        "Description": {
+          "description": "节点规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "节点规格的显示名称",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "节点规格的内存容量，单位 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "节点规格。如需了解节点规格类型和详情",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MasterNodeResourceSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "CPU": {
+          "description": "节点规格的 CPU 资源，单位为核（Core）",
+          "type": "integer"
+        },
+        "Description": {
+          "description": "节点规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "节点规格的显示名称",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "节点规格的内存容量，单位 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "节点规格。如需了解节点规格类型和详情",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MasterNodeStorageSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "Description": {
+          "description": "存储规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "存储规格的显示名称",
+          "type": "string"
+        },
+        "MaxSize": {
+          "description": "存储规格的最大值，单位为 GiB",
+          "type": "integer"
+        },
+        "MinSize": {
+          "description": "存储规格最小值，单位为 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+          "type": "string"
+        },
+        "Size": {
+          "description": "当前存储规格值，单位为 GiB",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkSpec": {
+      "properties": {
+        "Bandwidth": {
+          "description": "公网IP的带宽上限，默认为“1”，单位：Mbps。",
+          "type": "integer"
+        },
+        "IsOpen": {
+          "description": "开启/关闭",
+          "type": "boolean"
+        },
+        "SpecName": {
+          "description": "实例公网资源规格名称",
+          "type": "string"
+        },
+        "Type": {
+          "description": "公网应用类型 Elasticsearch：es实例使用。Kibana：Dashboard使用",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NodeSpecsAssign": {
+      "properties": {
+        "ExtraPerformance": {
+          "$ref": "#/definitions/ExtraPerformance",
+          "description": "磁盘额外性能包相关配置。",
+          "type": "object"
+        },
+        "Number": {
+          "description": "节点数量。配置数据节点数量时，在不同部署方式下，需要注意以下信息：单可用区部署：建议生产环境至少配置 3 个数据节点，配置 2 个节点时存在脑裂风险。如果启用专有主节点，2 个数据节点不会脑裂。双可用区部署，默认启用专有主节点：建议生产环境至少配置 4 个数据节点，即每个可用区两个数据节点。三可用区部署，默认启用专有主节点：建议生产环境至少配置 6 个数据节点，即每个可用区两个数据节点。数据节点数量可设范围为 1~100，如果有更多数据节点的需求，可申请开白提升配额到 200。配置 Master 节点：如果没有启用专有主节点，那么 Master 节点的配置和数据节点相同，否则 Master 配置是独立的。配置专有主节点，如需启用专有主节点，数量默认配置为 3。配置 Kibana 节点，数量固定为 1。配置协调节点，如需启用，生产环境建议至少 2 个协调节点，可配范围为 2~50。温数据节点：如需启用，生产环境建议至少 3 个温数据节点，最多可配置 100 个。冷数据节点：如需启用，生产环境建议至少 2 个温数据节点，最多可配置 100 个。",
+          "type": "integer"
+        },
+        "ResourceSpecName": {
+          "description": "计算资源规格名称。您可以通过调用DescribeNodeAvailableSpecs接口获取可用的节点规格列表。如需了解规格详情，请参见V2 实例规格",
+          "type": "string"
+        },
+        "StorageSize": {
+          "description": "存储容量，单位为 GiB。默认值为 100GiB，调整步长为 10GiB。说明Kibana 节点的 StorageSize 设置为0，即\"StorageSize\": 0。专有主节点和协调节点的 StorageSize 默认是 20。",
+          "type": "integer"
+        },
+        "StorageSpecName": {
+          "description": "存储规格名称，当前支持的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0。es.volume.essd.flexpl-standard：标准版-高性能云盘-flexpl。说明Kibana 节点的 StorageSpecName 设置为空，即\"StorageSpecName\": \"\"。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "节点类型。请先了解节点类型的作用，然后结合业务判断是否需要创建，详情请参见节点类型。Master：Master 节点。Hot：数据节点。Cold：冷数据节点。Warm：温数据节点。Kibana：Kibana 节点。Coordinator：协调节点。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReduceSpecConfig": {
+      "properties": {
+        "ColdNodeNum": {
+          "description": "冷节点数量。",
+          "type": "integer"
+        },
+        "DataNodeNum": {
+          "description": "数据节点数量。",
+          "type": "integer"
+        },
+        "EnablePureMaster": {
+          "description": "Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即用 Hot 来声明。",
+          "type": "boolean"
+        },
+        "MasterNodeNum": {
+          "description": "Master 节点数量。",
+          "type": "integer"
+        },
+        "WarmNodeNum": {
+          "description": "温节点数量。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SubInstance": {
+      "properties": {
+        "SubInstanceId": {
+          "description": "企业级 SQL 分析实例 ID。",
+          "type": "string"
+        },
+        "SubInstanceStatus": {
+          "description": "实例状态。",
+          "type": "string"
+        },
+        "SubInstanceType": {
+          "description": "实例类型。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Subnet": {
+      "properties": {
+        "SubnetId": {
+          "description": "Subnet ID。",
+          "type": "string"
+        },
+        "SubnetName": {
+          "description": "Subnet 名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。长度限制为1～128个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。长度限制为0～256个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    },
+    "TransferInfo": {
+      "properties": {
+        "ForbidStop": {
+          "description": "ForbidStop",
+          "type": "boolean"
+        },
+        "ReduceSpecConfig": {
+          "$ref": "#/definitions/ReduceSpecConfig",
+          "description": "资源信息。",
+          "type": "object"
+        },
+        "TransferProgress": {
+          "description": "数据迁移任务进度，百分制。",
+          "type": "number"
+        },
+        "TransferStatus": {
+          "description": "数据迁移任务状态。",
+          "type": "string"
+        },
+        "TransferTaskId": {
+          "description": "数据迁移任务 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "VPC": {
+      "properties": {
+        "VpcId": {
+          "description": "VPC ID。",
+          "type": "string"
+        },
+        "VpcName": {
+          "description": "VPC 名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WarmNodeResourceSpec": {
+      "properties": {
+        "CPU": {
+          "description": "节点规格的 CPU 资源，单位为核（Core）",
+          "type": "integer"
+        },
+        "Description": {
+          "description": "节点规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "节点规格的显示名称",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "节点规格的内存容量，单位 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "节点规格。如需了解节点规格类型和详情",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WarmNodeStorageSpec": {
+      "description": "冷节点数量。",
+      "properties": {
+        "Description": {
+          "description": "存储规格的描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "存储规格的显示名称",
+          "type": "string"
+        },
+        "MaxSize": {
+          "description": "存储规格的最大值，单位为 GiB",
+          "type": "integer"
+        },
+        "MinSize": {
+          "description": "存储规格最小值，单位为 GiB",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+          "type": "string"
+        },
+        "Size": {
+          "description": "当前存储规格值，单位为 GiB",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "云搜索服务（Cloud Search）是提供的全托管一站式信息检索和分析平台，兼容 Elasticsearch、OpenSearch、Kibana、Dashboards、Cerebro 以及常用的开源插件，可应用于全文搜索、向量搜索、混合搜索、AI 搜索、时空检索等场景。使用云搜索服务，您可以实现一键部署、弹性扩缩、简化运维，快速构建日志分析、信息检索分析等实际业务。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/InstanceConfiguration/InstanceName",
+      "/properties/InstanceConfiguration/ZoneId",
+      "/properties/Status",
+      "/properties/InstanceConfiguration/Version",
+      "/properties/InstanceConfiguration/ChargeType",
+      "/properties/InstanceConfiguration/Tags/*/Key",
+      "/properties/InstanceConfiguration/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ESCloud:CreateInstance",
+        "ESCloud:DescribeInstance",
+        "ESCloud:ListTagsForResources"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ESCloud:ReleaseInstance",
+        "ESCloud:DescribeInstance"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ESCloud:DescribeInstances",
+        "ESCloud:ListTagsForResources"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ESCloud:DescribeInstance",
+        "ESCloud:ListTagsForResources"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ESCloud:RenameInstance",
+        "ESCloud:ResetAdminPassword",
+        "ESCloud:ModifyMaintenanceSetting",
+        "ESCloud:ModifyDeletionProtection",
+        "ESCloud:ModifyChargeCode",
+        "ESCloud:ModifyNodeSpecInOneStep",
+        "ESCloud:DescribeInstance",
+        "ESCloud:ListTagsForResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "CerebroEnabled": {
+      "description": "是否开启 cerebro。true：开启 cerebrofalse：不开启 cerebro",
+      "type": "boolean"
+    },
+    "CerebroPrivateDomain": {
+      "description": "cerebro 私网访问地址。说明Cerebro 和 Kibana 共享域名。如果是历史实例，访问地址有可能是http(s)://kibana-***开头",
+      "type": "string"
+    },
+    "CerebroPublicDomain": {
+      "description": "erebro 公网访问地址。说明Cerebro 和 Kibana 共享域名。如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+      "type": "string"
+    },
+    "ChargeEnabled": {
+      "description": "实例是否开启了计费。取值说明如下：true：已开启计费false：未开启计费",
+      "type": "boolean"
+    },
+    "ClusterId": {
+      "description": "实例所属集群的 ID。",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "实例的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "ESEip": {
+      "description": "实例所绑定的 EIP。",
+      "type": "string"
+    },
+    "ESEipId": {
+      "description": "实例所绑定的 EIP 的 ID。",
+      "type": "string"
+    },
+    "ESPrivateEndpoint": {
+      "description": "实例私网访问地址。",
+      "type": "string"
+    },
+    "ESPrivateIpAllowList": {
+      "description": "实例私网地址访问白名单。同 ESPrivateIpWhitelist",
+      "type": "string"
+    },
+    "ESPrivateIpWhitelist": {
+      "description": "实例私网地址访问白名单。",
+      "type": "string"
+    },
+    "ESPublicEndpoint": {
+      "description": "实例公网访问地址。",
+      "type": "string"
+    },
+    "ESPublicIpAllowList": {
+      "description": "实例公网地址访问白名单。同 ESPublicIpWhitelist",
+      "type": "string"
+    },
+    "ESPublicIpWhitelist": {
+      "description": "实例公网地址访问白名单。",
+      "type": "string"
+    },
+    "EnableESPrivateDomainPublic": {
+      "description": "实例是否开启私网地址公网解析。true：已开启私网地址公网解析false：未开启私网地址公网解析",
+      "type": "boolean"
+    },
+    "EnableESPrivateNetwork": {
+      "description": "实例是否开启了私网访问。true：默认值，开启私网访问false：未开启私网访问",
+      "type": "boolean"
+    },
+    "EnableESPublicNetwork": {
+      "description": "实例是否开启了公网访问。true：已开启公网访问false：未开启公网访问",
+      "type": "boolean"
+    },
+    "EnableKibanaPrivateDomainPublic": {
+      "description": "Kibana 是否开启私网地址公网解析。true：已开启私网地址公网解析false：未开启私网地址公网解析",
+      "type": "boolean"
+    },
+    "EnableKibanaPrivateNetwork": {
+      "description": "Kibana 是否开启私网访问。true：默认值，已开启私网访问 false：未开启Kibana私网访问",
+      "type": "boolean"
+    },
+    "EnableKibanaPublicNetwork": {
+      "description": "Kibana 是否开启了公网访问。true：已开启公网访问 false：未开启公网访问",
+      "type": "boolean"
+    },
+    "EsPubBandwidth": {
+      "description": "ES公网带宽，单位:Mbps。",
+      "type": "integer"
+    },
+    "ExpireDate": {
+      "description": "包年包月实例的付费过期时间。",
+      "type": "string"
+    },
+    "InstanceConfiguration": {
+      "$ref": "#/definitions/InstanceConfiguration",
+      "description": "实例配置详情信息。",
+      "type": "object"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "KibanaConfig": {
+      "$ref": "#/definitions/KibanaConfig",
+      "description": "Kibana 参数配置。",
+      "type": "object"
+    },
+    "KibanaEip": {
+      "description": "Kibana 所绑定的 EIP。",
+      "type": "string"
+    },
+    "KibanaEipId": {
+      "description": "Kibana 所绑定的 EIP 的 ID。",
+      "type": "string"
+    },
+    "KibanaPrivateDomain": {
+      "description": "Kibana 私网访问地址。说明如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+      "type": "string"
+    },
+    "KibanaPrivateIpAllowList": {
+      "description": "Kibana 私网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。同 KibanaPrivateIpWhitelist",
+      "type": "string"
+    },
+    "KibanaPrivateIpWhitelist": {
+      "description": "Kibana 私网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。说明Cerebro 和 Kibana 共用一套白名单。",
+      "type": "string"
+    },
+    "KibanaPubBandwidth": {
+      "description": "Kibana公网带宽，单位: Mbps",
+      "type": "integer"
+    },
+    "KibanaPublicDomain": {
+      "description": "Kibana 公网访问地址。说明如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+      "type": "string"
+    },
+    "KibanaPublicIpAllowList": {
+      "description": "Kibana 公网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。同 KibanaPublicIpWhitelist",
+      "type": "string"
+    },
+    "KibanaPublicIpWhitelist": {
+      "description": "Kibana 公网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。说明Cerebro 和 Kibana 共用一套白名单",
+      "type": "string"
+    },
+    "MainZoneId": {
+      "description": "主可用区",
+      "type": "string"
+    },
+    "MaintenanceDay": {
+      "description": "实例的可维护日期。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "MaintenanceTime": {
+      "description": "实例的可维护时间段。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "实例当前状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubInstanceEnable": {
+      "description": "子实例开启情况。",
+      "type": "string"
+    },
+    "SubInstances": {
+      "description": "企业级 SQL 分析实例配置信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SubInstance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SupportColdNode": {
+      "description": "是否支持冷节点。",
+      "type": "boolean"
+    },
+    "TotalNodes": {
+      "description": "实例的总节点数。",
+      "type": "integer"
+    },
+    "TransferInfo": {
+      "$ref": "#/definitions/TransferInfo",
+      "description": "数据迁移任务信息。",
+      "type": "object"
+    },
+    "UserId": {
+      "description": "实例所有者的用户 ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CerebroEnabled",
+    "/properties/CerebroPrivateDomain",
+    "/properties/CerebroPublicDomain",
+    "/properties/ChargeEnabled",
+    "/properties/ClusterId",
+    "/properties/CreateTime",
+    "/properties/ESEip",
+    "/properties/ESEipId",
+    "/properties/ESPrivateEndpoint",
+    "/properties/ESPrivateIpAllowList",
+    "/properties/ESPrivateIpWhitelist",
+    "/properties/ESPublicEndpoint",
+    "/properties/ESPublicIpAllowList",
+    "/properties/ESPublicIpWhitelist",
+    "/properties/EnableESPrivateDomainPublic",
+    "/properties/EnableESPrivateNetwork",
+    "/properties/EnableESPublicNetwork",
+    "/properties/EnableKibanaPrivateDomainPublic",
+    "/properties/EnableKibanaPrivateNetwork",
+    "/properties/EnableKibanaPublicNetwork",
+    "/properties/EsPubBandwidth",
+    "/properties/ExpireDate",
+    "/properties/InstanceId",
+    "/properties/KibanaConfig",
+    "/properties/KibanaEip",
+    "/properties/KibanaEipId",
+    "/properties/KibanaPrivateDomain",
+    "/properties/KibanaPrivateIpAllowList",
+    "/properties/KibanaPrivateIpWhitelist",
+    "/properties/KibanaPubBandwidth",
+    "/properties/KibanaPublicDomain",
+    "/properties/KibanaPublicIpAllowList",
+    "/properties/KibanaPublicIpWhitelist",
+    "/properties/MainZoneId",
+    "/properties/Status",
+    "/properties/SubInstanceEnable",
+    "/properties/SubInstances",
+    "/properties/SupportColdNode",
+    "/properties/TotalNodes",
+    "/properties/TransferInfo",
+    "/properties/UserId",
+    "/properties/InstanceConfiguration/ColdNodeNumber",
+    "/properties/InstanceConfiguration/ColdNodeResourceSpec",
+    "/properties/InstanceConfiguration/ColdNodeStorageSpec",
+    "/properties/InstanceConfiguration/CoordinatorNodeNumber",
+    "/properties/InstanceConfiguration/CoordinatorNodeResourceSpec",
+    "/properties/InstanceConfiguration/CoordinatorNodeStorageSpec",
+    "/properties/InstanceConfiguration/HotNodeNumber",
+    "/properties/InstanceConfiguration/HotNodeResourceSpec",
+    "/properties/InstanceConfiguration/HotNodeStorageSpec",
+    "/properties/InstanceConfiguration/KibanaNodeNumber",
+    "/properties/InstanceConfiguration/KibanaNodeResourceSpec",
+    "/properties/InstanceConfiguration/MasterNodeNumber",
+    "/properties/InstanceConfiguration/MasterNodeResourceSpec",
+    "/properties/InstanceConfiguration/MasterNodeStorageSpec",
+    "/properties/InstanceConfiguration/WarmNodeNumber",
+    "/properties/InstanceConfiguration/WarmNodeResourceSpec",
+    "/properties/InstanceConfiguration/WarmNodeStorageSpec",
+    "/properties/InstanceConfiguration/WarmNodeStorageSpec"
+  ],
+  "required": [
+    "InstanceConfiguration"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::ESCloud::Instance",
+  "writeOnlyProperties": [
+    "/properties/InstanceConfiguration/AdminPassword",
+    "/properties/InstanceConfiguration/NetworkSpecs",
+    "/properties/InstanceConfiguration/NodeSpecsAssigns",
+    "/properties/InstanceConfiguration/ConfigurationCode"
+  ]
+}

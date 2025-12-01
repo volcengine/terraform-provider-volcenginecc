@@ -76,6 +76,11 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_autoscaling_scaling_policies -cctype Volcengine::AutoScaling::ScalingPolicy -package autoscaling ../volcengine/autoscaling/scaling_policy_plural_data_source_gen.go ../volcengine/autoscaling/scaling_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vke_clusters -cctype Volcengine::VKE::Cluster -package vke ../volcengine/vke/cluster_plural_data_source_gen.go ../volcengine/vke/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rabbitmq_instances -cctype Volcengine::RabbitMQ::Instance -package rabbitmq ../volcengine/rabbitmq/instance_plural_data_source_gen.go ../volcengine/rabbitmq/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vke_node_pools -cctype Volcengine::VKE::NodePool -package vke ../volcengine/vke/node_pool_plural_data_source_gen.go ../volcengine/vke/node_pool_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmysql_instances -cctype Volcengine::RDSMySQL::Instance -package rdsmysql ../volcengine/rdsmysql/instance_plural_data_source_gen.go ../volcengine/rdsmysql/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vepfs_instances -cctype Volcengine::VEPFS::Instance -package vepfs ../volcengine/vepfs/instance_plural_data_source_gen.go ../volcengine/vepfs/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_escloud_instances -cctype Volcengine::ESCloud::Instance -package escloud ../volcengine/escloud/instance_plural_data_source_gen.go ../volcengine/escloud/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_gateways -cctype Volcengine::APIG::Gateway -package apig ../volcengine/apig/gateway_plural_data_source_gen.go ../volcengine/apig/gateway_plural_data_source_gen_test.go
 
 package provider
 
@@ -90,6 +95,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
@@ -105,6 +111,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vedbm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vepfs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"

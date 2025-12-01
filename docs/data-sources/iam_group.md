@@ -22,7 +22,7 @@ Data Source schema for Volcengine::IAM::Group
 ### Read-Only
 
 - `account_id` (Number) 用户组所属主账号的ID。
-- `attached_policys` (Attributes Set) 用户组绑定的策略信息。 (see [below for nested schema](#nestedatt--attached_policys))
+- `attached_policies` (Attributes Set) 用户组绑定的策略信息。 (see [below for nested schema](#nestedatt--attached_policies))
 - `created_time` (String) 用户组的创建时间。
 - `description` (String) 用户组描述信息。长度不超过128。
 - `display_name` (String) 用户组显示名称。长度不超过64。
@@ -31,20 +31,20 @@ Data Source schema for Volcengine::IAM::Group
 - `user_group_name` (String) 用户组名称。长度1~64，支持英文、数字和.-_符号。
 - `users` (Attributes Set) 用户组内绑定的用户信息。 (see [below for nested schema](#nestedatt--users))
 
-<a id="nestedatt--attached_policys"></a>
-### Nested Schema for `attached_policys`
+<a id="nestedatt--attached_policies"></a>
+### Nested Schema for `attached_policies`
 
 Read-Only:
 
 - `attach_time` (String) 策略绑定时间。
 - `description` (String) 策略描述。
 - `policy_name` (String) 策略名。
-- `policy_scope` (Attributes Set) 策略授权的作用范围，特指项目范围。 (see [below for nested schema](#nestedatt--attached_policys--policy_scope))
+- `policy_scope` (Attributes Set) 策略授权的作用范围，特指项目范围。 (see [below for nested schema](#nestedatt--attached_policies--policy_scope))
 - `policy_trn` (String) 策略TRN。
 - `policy_type` (String) 策略类型。System代表系统预设策略，Custom代表自定义策略。
 
-<a id="nestedatt--attached_policys--policy_scope"></a>
-### Nested Schema for `attached_policys.policy_scope`
+<a id="nestedatt--attached_policies--policy_scope"></a>
+### Nested Schema for `attached_policies.policy_scope`
 
 Read-Only:
 

@@ -34,7 +34,7 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "用户组所属主账号的ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: AttachedPolicys
+		// Property: AttachedPolicies
 		// Cloud Control resource type schema:
 		//
 		//	{
@@ -90,12 +90,10 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
-		//	        "default": "All",
 		//	        "description": "策略类型。System代表系统预设策略，Custom代表自定义策略。",
 		//	        "enum": [
 		//	          "Custom",
-		//	          "System",
-		//	          "All"
+		//	          "System"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -109,7 +107,7 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"attached_policys": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"attached_policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AttachTime
@@ -330,7 +328,7 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":           "AccountID",
 		"attach_time":          "AttachTime",
-		"attached_policys":     "AttachedPolicys",
+		"attached_policies":    "AttachedPolicies",
 		"created_time":         "CreatedTime",
 		"description":          "Description",
 		"display_name":         "DisplayName",
