@@ -1,0 +1,497 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/VpcId",
+    "/properties/SubnetIds",
+    "/properties/Type",
+    "/properties/ProjectName",
+    "/properties/ResourceSpec/CLBSpecCode",
+    "/properties/ResourceSpec/PublicNetworkBillingType",
+    "/properties/ResourceSpec/PublicNetworkBandwidth",
+    "/properties/ResourceSpec/NetworkType"
+  ],
+  "definitions": {
+    "APMTraceSpec": {
+      "description": "应用性能监控全链路版链路追踪配置。",
+      "properties": {
+        "ApiKey": {
+          "description": "API Key。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BackendSpec": {
+      "description": "后端服务配置信息。",
+      "properties": {
+        "IsVkeWithFlannelCNISupported": {
+          "description": "是否支持VKE Flannel CNI。",
+          "type": "boolean"
+        },
+        "VkePodCidr": {
+          "description": "VKE Pod CIDR。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomLog": {
+      "description": "自定义日志打印。",
+      "properties": {
+        "CustomVariables": {
+          "$ref": "#/definitions/CustomVariables",
+          "type": "object"
+        },
+        "RequestHeaders": {
+          "$ref": "#/definitions/RequestHeaders",
+          "type": "object"
+        },
+        "ResponseHeaders": {
+          "$ref": "#/definitions/ResponseHeaders",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "CustomVariables": {
+      "description": "自定义变量信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HeaderInfo"
+      },
+      "maxItems": 20,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Event": {
+      "description": "事件信息。",
+      "properties": {
+        "Code": {
+          "description": "事件代码。",
+          "type": "string"
+        },
+        "CreatedTime": {
+          "description": "事件创建时间。",
+          "type": "string"
+        },
+        "Data": {
+          "description": "附带信息。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "事件描述。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "HeaderInfo": {
+      "description": "请求头信息。",
+      "properties": {
+        "AliasesInLog": {
+          "description": "字段别名。",
+          "type": "string"
+        },
+        "Key": {
+          "description": "请求头键。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LogSpec": {
+      "description": "日志配置信息。",
+      "properties": {
+        "Enable": {
+          "description": "是否开启日志服务。",
+          "type": "boolean"
+        },
+        "ProjectId": {
+          "description": "日志项目ID。",
+          "type": "string"
+        },
+        "TopicId": {
+          "description": "日志主题ID。ProjectId 指定项目里面的日志主题。",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Enable",
+        "ProjectId",
+        "TopicId"
+      ],
+      "type": "object"
+    },
+    "MonitorSpec": {
+      "description": "监控配置信息。",
+      "properties": {
+        "Enable": {
+          "description": "托管Prometheus（VMP）服务。",
+          "type": "boolean"
+        },
+        "WorkspaceID": {
+          "description": "Prometheus工作区ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkSpec": {
+      "description": "网络配置信息。",
+      "properties": {
+        "Subnets": {
+          "description": "子网配置信息列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "VpcId": {
+          "description": "VPC ID。",
+          "type": "string"
+        },
+        "VpcName": {
+          "description": "VPC名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NetworkType": {
+      "properties": {
+        "EnablePrivateNetwork": {
+          "description": "是否启用私网。",
+          "type": "boolean"
+        },
+        "EnablePublicNetwork": {
+          "description": "是否启用公网。",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "RequestHeaders": {
+      "description": "请求头信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HeaderInfo"
+      },
+      "maxItems": 20,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ResourceSpec": {
+      "description": "资源规格配置信息。",
+      "properties": {
+        "CLBSpecCode": {
+          "description": "CLB规格编码。CLB规格，取值：small_1：小型 I。small_2：小型 II。medium_1：中型 I。medium_2：中型 II。large_1：大型 I。large_2：大型 II。",
+          "enum": [
+            "small_1",
+            "small_2",
+            "medium_1",
+            "medium_2",
+            "large_1",
+            "large_2",
+            ""
+          ],
+          "type": "string"
+        },
+        "InstanceSpecCode": {
+          "description": "节点规格，取值：1c2g。2c4g。4c8g。8c16g。",
+          "enum": [
+            "1c2g",
+            "2c4g",
+            "4c8g",
+            "8c16g"
+          ],
+          "type": "string"
+        },
+        "NetworkType": {
+          "$ref": "#/definitions/NetworkType",
+          "description": "网络类型。默认值为开启公网，开启私网。",
+          "type": "object"
+        },
+        "PublicNetworkBandwidth": {
+          "description": "公网带宽上限，该字段仅用于“按带宽上限收费”公网网络计费方式。单位为Mbps。取值限制为0~500。默认值为0。",
+          "maximum": 500,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "PublicNetworkBillingType": {
+          "description": "公网网络计费方式，取值：traffic：按实际流量计费。bandwidth：按带宽上限计费。",
+          "enum": [
+            "traffic",
+            "bandwidth",
+            ""
+          ],
+          "type": "string"
+        },
+        "Replicas": {
+          "description": "节点数量。取值限制为2~100。",
+          "maximum": 100,
+          "minimum": 2,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ResponseHeaders": {
+      "description": "响应头信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HeaderInfo"
+      },
+      "maxItems": 20,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Subnet": {
+      "description": "子网配置信息。",
+      "properties": {
+        "AZ": {
+          "description": "可用区。",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "子网ID。",
+          "type": "string"
+        },
+        "SubnetName": {
+          "description": "子网名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TLSTraceSpec": {
+      "description": "链路追踪配置信息。",
+      "properties": {
+        "IamUserAK": {
+          "description": "Access key。",
+          "type": "string"
+        },
+        "IamUserSK": {
+          "description": "Secret key。",
+          "type": "string"
+        },
+        "ProjectId": {
+          "description": "日志项目ID。",
+          "type": "string"
+        },
+        "TraceId": {
+          "description": "Trace ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TraceSpec": {
+      "description": "链路追踪配置信息。",
+      "properties": {
+        "APMTraceSpec": {
+          "$ref": "#/definitions/APMTraceSpec",
+          "type": "object"
+        },
+        "Enable": {
+          "description": "是否启用链路追踪。",
+          "type": "boolean"
+        },
+        "TLSTraceSpec": {
+          "$ref": "#/definitions/TLSTraceSpec",
+          "type": "object"
+        },
+        "TraceType": {
+          "description": "链路追踪类型，取值：tls：日志服务。apm：应用性能监控全链路版。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "API网关(Gateway)是API管理服务的核心组件，负责接收、处理、转发API请求，并提供安全认证、流量控制等功能。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/GatewayID",
+      "/properties/Name",
+      "/properties/Status",
+      "/properties/Type",
+      "/properties/NetworkSpec/VpcId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apig:CreateGateway",
+        "apig:GetGateway",
+        "apig:ListGateways"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apig:DeleteGateway",
+        "apig:GetGateway"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apig:ListGateways"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apig:GetGateway",
+        "apig:ListGateways"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apig:UpdateGateway",
+        "apig:GetGateway",
+        "apig:ListGateways",
+        "apig:UpdateGatewayCustomLog",
+        "apig:UpdateGatewayLog",
+        "apig:UpdateGatewaySpec",
+        "apig:UpdateGatewayTrace"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GatewayID"
+  ],
+  "properties": {
+    "BackendSpec": {
+      "$ref": "#/definitions/BackendSpec",
+      "description": "后端服务配置信息。",
+      "type": "object"
+    },
+    "Comments": {
+      "description": "网关备注信息。长度限制为0~253个字符。",
+      "maxLength": 253,
+      "semantic": "description",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "网关创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CustomLog": {
+      "$ref": "#/definitions/CustomLog",
+      "description": "自定义日志配置。",
+      "type": "object"
+    },
+    "Events": {
+      "description": "事件。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Event"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "GatewayID": {
+      "description": "网关实例ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "LogSpec": {
+      "$ref": "#/definitions/LogSpec",
+      "description": "日志配置。",
+      "type": "object"
+    },
+    "Message": {
+      "description": "网关创建失败、删除失败或异常时的错误信息。",
+      "type": "string"
+    },
+    "MonitorSpec": {
+      "$ref": "#/definitions/MonitorSpec",
+      "description": "监控配置信息。",
+      "type": "object"
+    },
+    "Name": {
+      "description": "网关名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NetworkSpec": {
+      "$ref": "#/definitions/NetworkSpec",
+      "description": "网络配置信息。",
+      "type": "object"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ResourceSpec": {
+      "$ref": "#/definitions/ResourceSpec",
+      "description": "资源规格配置信息。",
+      "type": "object"
+    },
+    "Status": {
+      "description": "网关状态，取值：Creating：创建中。CreatedFailed：创建失败。Updating：更新中。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetIds": {
+      "description": "子网ID列表。长度限制为1~2个。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TraceSpec": {
+      "$ref": "#/definitions/TraceSpec",
+      "description": "链路追踪配置信息。",
+      "type": "object"
+    },
+    "Type": {
+      "description": "网关类型，取值：standard：标准网关。serverless：Serverless网关（暂不支持）。",
+      "enum": [
+        "standard"
+      ],
+      "type": "string"
+    },
+    "Version": {
+      "description": "网关版本。",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "VPC ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/GatewayID",
+    "/properties/NetworkSpec",
+    "/properties/BackendSpec",
+    "/properties/Status",
+    "/properties/Message",
+    "/properties/CreatedTime",
+    "/properties/Version",
+    "/properties/Events",
+    "/properties/TraceSpec/TLSTraceSpec/TraceId"
+  ],
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::APIG::Gateway",
+  "writeOnlyProperties": [
+    "/properties/VpcId",
+    "/properties/SubnetIds",
+    "/properties/TraceSpec/TLSTraceSpec/IamUserAK",
+    "/properties/TraceSpec/TLSTraceSpec/IamUserSK",
+    "/properties/TraceSpec/APMTraceSpec/ApiKey"
+  ]
+}

@@ -32,12 +32,10 @@
           "type": "string"
         },
         "PolicyType": {
-          "default": "All",
           "description": "策略类型。System代表系统预设策略，Custom代表自定义策略。",
           "enum": [
             "Custom",
-            "System",
-            "All"
+            "System"
           ],
           "type": "string"
         }
@@ -154,7 +152,7 @@
       "format": "int64",
       "type": "integer"
     },
-    "AttachedPolicys": {
+    "AttachedPolicies": {
       "description": "用户组绑定的策略信息。",
       "insertionOrder": false,
       "items": {
@@ -215,9 +213,9 @@
     "/properties/Users/*/DisplayName",
     "/properties/Users/*/Description",
     "/properties/Users/*/JoinTime",
-    "/properties/AttachedPolicys/*/PolicyTrn",
-    "/properties/AttachedPolicys/*/AttachTime",
-    "/properties/AttachedPolicys/*/Description"
+    "/properties/AttachedPolicies/*/PolicyTrn",
+    "/properties/AttachedPolicies/*/AttachTime",
+    "/properties/AttachedPolicies/*/Description"
   ],
   "required": [
     "UserGroupName"

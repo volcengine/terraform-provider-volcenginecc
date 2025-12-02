@@ -79,7 +79,6 @@
         },
         "VpcId": {
           "description": "集群控制面及部分节点的网络所在的私有网络（VPC）ID。",
-          "semantic": "privateIp",
           "type": "string"
         }
       },
@@ -317,7 +316,6 @@
         },
         "Phase": {
           "description": "集群状态阶段",
-          "semantic": "status",
           "type": "string"
         }
       },

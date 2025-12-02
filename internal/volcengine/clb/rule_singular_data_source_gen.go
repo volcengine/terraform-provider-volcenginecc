@@ -26,6 +26,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "default": "Forward",
 		//	  "description": "转发规则的转发动作。取值如下：Forward：转发至。Redirect：重定向至。",
 		//	  "type": "string"
 		//	}
@@ -38,6 +39,8 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "转发规则的描述，默认值为空字符串。规范如下：必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。",
+		//	  "maxLength": 255,
+		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -74,21 +77,29 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "Host": {
 		//	      "description": "转发规则重定向的域名，当前仅支持精确域名。规范如下：需至少包含一个‘.’，且不允许以‘.’开头或结尾。仅允许包含字母、数字、‘.’、‘-‘。长度限制为1 ～ 128个字符。符合域名规范的精确域名，例如：www.test.com。",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Path": {
 		//	      "description": "转发规则重定向的路径。规范如下：必须以正斜线“/”开头，字符‘/’不能连续出现。仅允许包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘\u0026’、‘＝’等字符。长度限制为1 ～ 128个字符。",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Port": {
 		//	      "description": "转发规则重定向的端口，取值范围为 1~65535。",
+		//	      "maximum": 65535,
+		//	      "minimum": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Protocol": {
+		//	      "default": "HTTPS",
 		//	      "description": "转发规则重定向的协议。取值如下：HTTP。HTTPS（默认值）。",
 		//	      "type": "string"
 		//	    },
 		//	    "StatusCode": {
+		//	      "default": "301",
 		//	      "description": "转发规则重定向的状态码。取值如下：301（默认）：表示请求的资源已被永久移动到新的 URL，客户端应该使用新的 URL 进行后续请求。302：表示请求的资源被临时移动到新的 URL，但未来可能会再次更改，客户端应该使用新的 URL 进行后续请求。307：与 302 类似，但在重定向时要求客户端保持请求方法不变。例如，原来是 GET 请求，则重定向后仍然是 GET 请求。308：与 301 类似，但在重定向时要求客户端保持请求方法不变。",
 		//	      "type": "string"
 		//	    }
@@ -153,7 +164,9 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "标签列表。",
+		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "description": "转发规则标签。",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "标签键。",
@@ -170,9 +183,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key

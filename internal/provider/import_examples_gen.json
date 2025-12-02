@@ -368,5 +368,30 @@
         "resource": "volcenginecc_rabbitmq_instance",
         "identifier": ["InstanceId"],
         "path": "./examples/resources/volcenginecc_rabbitmq_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_node_pool",
+        "identifier": ["ClusterId","NodePoolId"],
+        "path": "./examples/resources/volcenginecc_vke_node_pool/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vepfs_instance",
+        "identifier": ["FileSystemId"],
+        "path": "./examples/resources/volcenginecc_vepfs_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_escloud_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_escloud_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_apig_gateway",
+        "identifier": ["GatewayID"],
+        "path": "./examples/resources/volcenginecc_apig_gateway/import.sh"
     }
 ]

@@ -28,7 +28,7 @@ Data Source schema for Volcengine::CLB::Rule
 - `redirect_config` (Attributes) 重定向相关配置信息。 (see [below for nested schema](#nestedatt--redirect_config))
 - `rule_id` (String) 转发规则ID。
 - `server_group_id` (String) 转发规则关联的后端服务器组的ID。
-- `tags` (Attributes List) 标签列表。 (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
 - `url` (String) 转发规则的URL。
 
 <a id="nestedatt--redirect_config"></a>

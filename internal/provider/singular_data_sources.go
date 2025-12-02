@@ -76,6 +76,11 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_autoscaling_scaling_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_AutoScaling_ScalingPolicy.json -package autoscaling ../volcengine/autoscaling/scaling_policy_singular_data_source_gen.go ../volcengine/autoscaling/scaling_policy_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vke_cluster -ccschema ../service/cloudcontrol/schemas/Volcengine_VKE_Cluster.json -package vke ../volcengine/vke/cluster_singular_data_source_gen.go ../volcengine/vke/cluster_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_rabbitmq_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_RabbitMQ_Instance.json -package rabbitmq ../volcengine/rabbitmq/instance_singular_data_source_gen.go ../volcengine/rabbitmq/instance_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vke_node_pool -ccschema ../service/cloudcontrol/schemas/Volcengine_VKE_NodePool.json -package vke ../volcengine/vke/node_pool_singular_data_source_gen.go ../volcengine/vke/node_pool_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_rdsmysql_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSMySQL_Instance.json -package rdsmysql ../volcengine/rdsmysql/instance_singular_data_source_gen.go ../volcengine/rdsmysql/instance_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vepfs_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_VEPFS_Instance.json -package vepfs ../volcengine/vepfs/instance_singular_data_source_gen.go ../volcengine/vepfs/instance_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_escloud_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_ESCloud_Instance.json -package escloud ../volcengine/escloud/instance_singular_data_source_gen.go ../volcengine/escloud/instance_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_apig_gateway -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_Gateway.json -package apig ../volcengine/apig/gateway_singular_data_source_gen.go ../volcengine/apig/gateway_singular_data_source_gen_test.go
 
 package provider
 
@@ -90,6 +95,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
@@ -105,6 +111,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vedbm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vepfs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"

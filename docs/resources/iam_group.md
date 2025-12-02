@@ -44,8 +44,8 @@ resource "volcenginecc_iam_group" "GroupDemo" {
 
 ### Optional
 
-- `attached_policys` (Attributes Set) 用户组绑定的策略信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attached_policys))
+- `attached_policies` (Attributes Set) 用户组绑定的策略信息。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attached_policies))
 - `description` (String) 用户组描述信息。长度不超过128。
 - `display_name` (String) 用户组显示名称。长度不超过64。
 - `users` (Attributes Set) 用户组内绑定的用户信息。
@@ -59,18 +59,18 @@ resource "volcenginecc_iam_group" "GroupDemo" {
 - `updated_time` (String) 用户组的更新时间。
 - `user_group_id` (Number) 用户组ID。
 
-<a id="nestedatt--attached_policys"></a>
-### Nested Schema for `attached_policys`
+<a id="nestedatt--attached_policies"></a>
+### Nested Schema for `attached_policies`
 
 Optional:
 
 - `policy_name` (String) 策略名。
 - `policy_scope` (Attributes Set) 策略授权的作用范围，特指项目范围。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attached_policys--policy_scope))
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attached_policies--policy_scope))
 - `policy_type` (String) 策略类型。System代表系统预设策略，Custom代表自定义策略。
 
-<a id="nestedatt--attached_policys--policy_scope"></a>
-### Nested Schema for `attached_policys.policy_scope`
+<a id="nestedatt--attached_policies--policy_scope"></a>
+### Nested Schema for `attached_policies.policy_scope`
 
 Optional:
 

@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
@@ -45,7 +44,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: AttachedPolicys
+		// Property: AttachedPolicies
 		// Cloud Control resource type schema:
 		//
 		//	{
@@ -101,12 +100,10 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
-		//	        "default": "All",
 		//	        "description": "策略类型。System代表系统预设策略，Custom代表自定义策略。",
 		//	        "enum": [
 		//	          "Custom",
-		//	          "System",
-		//	          "All"
+		//	          "System"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -120,7 +117,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"attached_policys": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"attached_policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AttachTime
@@ -198,13 +195,12 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 						Description: "策略类型。System代表系统预设策略，Custom代表自定义策略。",
 						Optional:    true,
 						Computed:    true,
-						Default:     stringdefault.StaticString("All"),
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"Custom",
 								"System",
-								"All",
 							),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -407,7 +403,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":           "AccountID",
 		"attach_time":          "AttachTime",
-		"attached_policys":     "AttachedPolicys",
+		"attached_policies":    "AttachedPolicies",
 		"created_time":         "CreatedTime",
 		"description":          "Description",
 		"display_name":         "DisplayName",
@@ -436,9 +432,9 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Users/*/DisplayName",
 		"/properties/Users/*/Description",
 		"/properties/Users/*/JoinTime",
-		"/properties/AttachedPolicys/*/PolicyTrn",
-		"/properties/AttachedPolicys/*/AttachTime",
-		"/properties/AttachedPolicys/*/Description",
+		"/properties/AttachedPolicies/*/PolicyTrn",
+		"/properties/AttachedPolicies/*/AttachTime",
+		"/properties/AttachedPolicies/*/Description",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
