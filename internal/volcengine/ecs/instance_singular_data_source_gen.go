@@ -937,6 +937,21 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "实例的状态。实例的状态，取值：\n  CREATING：创建中\n  RUNNING：运行中\n  STOPPING：停止中\n  STOPPED：已停止\n  REBOOTING: 重启中\n  STARTING：启动中\n  REBUILDING：重装中\n  RESIZING：更配中\n  ERROR：错误\n  DELETING：删除中。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StoppedMode
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
+		//	  "enum": [
+		//	    "KeepCharging",
+		//	    "StopCharging"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"stopped_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "StoppedMode string 可选 示例值：KeepCharging\n  停机模式，取值：\n  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\n  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n  有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SystemVolume
 		// Cloud Control resource type schema:
 		//
@@ -1218,6 +1233,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"spot_price_limit":                "SpotPriceLimit",
 		"spot_strategy":                   "SpotStrategy",
 		"status":                          "Status",
+		"stopped_mode":                    "StoppedMode",
 		"subnet_id":                       "SubnetId",
 		"system_volume":                   "SystemVolume",
 		"tags":                            "Tags",

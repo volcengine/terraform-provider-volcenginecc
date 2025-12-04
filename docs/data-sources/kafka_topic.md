@@ -23,16 +23,16 @@ Data Source schema for Volcengine::Kafka::Topic
 
 - `access_policies` (Attributes Set) 自定义权限配置，即为某些用户设置对于此 Topic 的自定义权限。仅在 AllAuthority 为 False 时需要设置。 (see [below for nested schema](#nestedatt--access_policies))
 - `all_authority` (Boolean) 待创建的Topic默认是否对所有用户都开启读写权限。true：（默认）所有用户都具备此 Topic 的读写权限。false：并非所有用户都具备此 Topic 的读写权限。默认情况下，用户对于此 Topic 的权限沿用用户的默认权限，如果默认权限不满足需求，您也可以通过 AccessPolicies 指定某个用户对于此 Topic 的自定义权限。
-- `cleanup_policy` (Set of String) opic 的消息清理策略，支持以下三种取值方式：[delete]：默认的消息清理策略。在磁盘容量充足的情况下，保留在最长保留时间范围内的消息；在磁盘容量不足时，将提前删除旧消息，以保证服务可用性。[compact]：COMPACT 消息清理策略针对每个消息的 Key 进行整合，对于有相同 Key 的消息，只保留最新的 value 值，旧的记录则会被清除。[delete,compact]：同时配置 DELETE 和 COMPACT 两种消息清理策略。只要消息满足任一条清理策略时，都将被清除。
+- `cleanup_policy` (Set of String) Topic 的消息清理策略，支持以下三种取值方式：[delete]：默认的消息清理策略。在磁盘容量充足的情况下，保留在最长保留时间范围内的消息；在磁盘容量不足时，将提前删除旧消息，以保证服务可用性。[compact]：COMPACT 消息清理策略针对每个消息的 Key 进行整合，对于有相同 Key 的消息，只保留最新的 value 值，旧的记录则会被清除。[delete,compact]：同时配置 DELETE 和 COMPACT 两种消息清理策略。只要消息满足任一条清理策略时，都将被清除。
 - `created_time` (String) Topic 的创建时间。
 - `description` (String) Topic 的描述信息。长度不超过 128 个字符。
 - `instance_id` (String) 实例 ID。
-- `log_retention_hours` (Number) 消息保留时长，单位小时。
+- `log_retention_hours` (Number) 消息保留时长，单位小时。Topic维度的消息保留时长，取值范围：1   - 2160小时（90天）。
 - `parameters` (String) Topic 级别的参数配置。Parameters 参数说明 MinInsyncReplicaNumber:2：最小同步副本个数。当同步副本个数小于配置值时，消息将无法写入对应 Topic。配置值越大，数据可靠性增加，但是可用性将会降低。默认值为副本数减 1。考虑到 Topic 的可用性，建议设置为副本数减 1。MessageMaxByte:12：最大消息大小。单位为 MB，取值范围为 1～12。默认沿用实例的最大消息大小设置。LogRetentionHours:72：消息保留时长。单位为小时，取值范围为 0～2160，即消息最久保留 90 天。默认沿用实例的消息保留时长设置。
 - `partition_number` (Number) Topic 分区数。取值范围为 1~300，如果实例中已创建了其他 Topic，则所有 Topic 的分区数之和不超过该实例的分区数上限。如果分区数无法满足业务需求，您可以购买更多分区，提升实例的分区数量上限。
 - `replica_number` (Number) Topic 副本个数。可设置为为 2 或 3，默认值为 3。
 - `status` (String) Topic 的状态。
-- `tags` (Attributes Set) 公网IP的标签信息 (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) Topic 的标签信息 (see [below for nested schema](#nestedatt--tags))
 - `topic_name` (String) 待创建的 Topic 名称。3～64 个字符。必须以英文或数字开头。支持的字符包括英文、数字、连字符（-）、下划线（_）和英文句号（.）。
 - `used_storage_percentage_in_instance` (Number) 当前 Topic 总数据量占实例总存储空间的比例，控制台页面显示为保留两位小数的百分数。
 - `used_storage_space_in_bytes` (Number) 当前 Topic 已使用的总存储空间大小。

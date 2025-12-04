@@ -172,6 +172,12 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
   RESIZING：更配中
   ERROR：错误
   DELETING：删除中。
+- `stopped_mode` (String) StoppedMode string 可选 示例值：KeepCharging
+  停机模式，取值：
+  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。
+  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。
+  有关节省停机的启用条件，请参见按量计费节省停机模式说明。
+  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。
 - `tags` (Attributes Set) 标签
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `user_data` (String) 实例的自定义数据，默认为空。最终传入的UserData会被Base64转码。
@@ -235,8 +241,11 @@ Optional:
 - `extra_performance_type_id` (String) 额外性能的类型，取值如下：Balance：均衡型额外性能。IOPS：IOPS型额外性能。Throughput：吞吐量型额外性能。
 - `size` (Number) 实例的大小，单位GiB。
 - `snapshot_id` (String) 实例的快照ID。
-- `volume_id` (String) 实例的卷ID。
 - `volume_type` (String) 云盘类型，取值说明如下：PTSSD：性能型SSD。ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL: 极速型SSD云盘，FlexPL规格。TSSD_TL0：吞吐型SSD云盘。
+
+Read-Only:
+
+- `volume_id` (String) 实例的卷ID。
 
 
 <a id="nestedatt--eip_address"></a>
