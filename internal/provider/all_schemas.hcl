@@ -331,3 +331,5 @@ resource_schema "volcengine_escloud_instance" {
 resource_schema "volcengine_apig_gateway" {
   cloudcontrol_type_name = "Volcengine::APIG::Gateway"
 }
+
+

@@ -1362,6 +1362,31 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StoppedMode
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
+		//	  "enum": [
+		//	    "KeepCharging",
+		//	    "StopCharging"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"stopped_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "StoppedMode string 可选 示例值：KeepCharging\n  停机模式，取值：\n  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\n  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n  有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"KeepCharging",
+					"StopCharging",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SystemVolume
 		// Cloud Control resource type schema:
 		//
@@ -1432,7 +1457,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Default:     booldefault.StaticBool(true),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// DeleteWithInstance is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExtraPerformanceIOPS
 				"extra_performance_iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1444,7 +1471,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ExtraPerformanceIOPS is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExtraPerformanceThroughputMB
 				"extra_performance_throughput_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1456,7 +1485,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ExtraPerformanceThroughputMB is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ExtraPerformanceTypeId
 				"extra_performance_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1473,7 +1504,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// ExtraPerformanceTypeId is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Size
 				"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1485,7 +1518,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Size is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: SnapshotId
 				"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1494,12 +1529,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// SnapshotId is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: VolumeId
 				"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "实例的卷ID。",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1520,14 +1556,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// VolumeType is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "实例的系统卷。",
 			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
@@ -1744,6 +1779,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"spot_price_limit":                "SpotPriceLimit",
 		"spot_strategy":                   "SpotStrategy",
 		"status":                          "Status",
+		"stopped_mode":                    "StoppedMode",
 		"subnet_id":                       "SubnetId",
 		"system_volume":                   "SystemVolume",
 		"tags":                            "Tags",
@@ -1777,6 +1813,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AutoRenewPeriod",
 		"/properties/CpuMaxFrequency",
 		"/properties/CreditSpecification",
+		"/properties/SystemVolume/VolumeType",
+		"/properties/SystemVolume/Size",
+		"/properties/SystemVolume/DeleteWithInstance",
+		"/properties/SystemVolume/ExtraPerformanceIOPS",
+		"/properties/SystemVolume/ExtraPerformanceThroughputMB",
+		"/properties/SystemVolume/ExtraPerformanceTypeId",
+		"/properties/SystemVolume/SnapshotId",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -1794,6 +1837,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SecondaryNetworkInterfaces/*/Ipv6Addresses",
 		"/properties/SecondaryNetworkInterfaces/*/MacAddress",
 		"/properties/SecondaryNetworkInterfaces/*/NetworkInterfaceId",
+		"/properties/SystemVolume/VolumeId",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -1816,7 +1860,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/PeriodUnit",
 		"/properties/AutoRenew",
 		"/properties/AutoRenewPeriod",
-		"/properties/SystemVolume",
+		"/properties/SystemVolume/VolumeType",
+		"/properties/SystemVolume/Size",
+		"/properties/SystemVolume/DeleteWithInstance",
+		"/properties/SystemVolume/ExtraPerformanceIOPS",
+		"/properties/SystemVolume/ExtraPerformanceThroughputMB",
+		"/properties/SystemVolume/ExtraPerformanceTypeId",
+		"/properties/SystemVolume/SnapshotId",
 		"/properties/InstanceType",
 		"/properties/CpuMaxFrequency",
 		"/properties/KeyPair",

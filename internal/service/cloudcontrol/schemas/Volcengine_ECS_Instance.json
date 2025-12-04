@@ -20,7 +20,13 @@
     "/properties/PeriodUnit",
     "/properties/AutoRenew",
     "/properties/AutoRenewPeriod",
-    "/properties/SystemVolume",
+    "/properties/SystemVolume/VolumeType",
+    "/properties/SystemVolume/Size",
+    "/properties/SystemVolume/DeleteWithInstance",
+    "/properties/SystemVolume/ExtraPerformanceIOPS",
+    "/properties/SystemVolume/ExtraPerformanceThroughputMB",
+    "/properties/SystemVolume/ExtraPerformanceTypeId",
+    "/properties/SystemVolume/SnapshotId",
     "/properties/InstanceType",
     "/properties/CpuMaxFrequency",
     "/properties/KeyPair",
@@ -585,6 +591,14 @@
       "semantic": "status",
       "type": "string"
     },
+    "StoppedMode": {
+      "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
+      "enum": [
+        "KeepCharging",
+        "StopCharging"
+      ],
+      "type": "string"
+    },
     "SystemVolume": {
       "$ref": "#/definitions/Volume",
       "description": "实例的系统卷。",
@@ -635,7 +649,8 @@
     "/properties/PrimaryNetworkInterface/PrimaryIpAddress",
     "/properties/SecondaryNetworkInterfaces/*/Ipv6Addresses",
     "/properties/SecondaryNetworkInterfaces/*/MacAddress",
-    "/properties/SecondaryNetworkInterfaces/*/NetworkInterfaceId"
+    "/properties/SecondaryNetworkInterfaces/*/NetworkInterfaceId",
+    "/properties/SystemVolume/VolumeId"
   ],
   "required": [
     "InstanceName",
@@ -645,6 +660,11 @@
     "PrimaryNetworkInterface",
     "SystemVolume"
   ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
   "typeName": "Volcengine::ECS::Instance",
   "writeOnlyProperties": [
     "/properties/Password",
@@ -663,6 +683,13 @@
     "/properties/AutoRenew",
     "/properties/AutoRenewPeriod",
     "/properties/CpuMaxFrequency",
-    "/properties/CreditSpecification"
+    "/properties/CreditSpecification",
+    "/properties/SystemVolume/VolumeType",
+    "/properties/SystemVolume/Size",
+    "/properties/SystemVolume/DeleteWithInstance",
+    "/properties/SystemVolume/ExtraPerformanceIOPS",
+    "/properties/SystemVolume/ExtraPerformanceThroughputMB",
+    "/properties/SystemVolume/ExtraPerformanceTypeId",
+    "/properties/SystemVolume/SnapshotId"
   ]
 }
