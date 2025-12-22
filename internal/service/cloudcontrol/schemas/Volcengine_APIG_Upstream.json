@@ -333,6 +333,14 @@
     }
   },
   "description": "Upstream 是对 API 网关实例后端的抽象。您可以将具有相同功能的后端应用抽象为一个 Upstream，实现路由和后端应用解耦，更灵活地支持后端应用的灰度发布、多版本管理等场景。本文为您介绍 Upstream 的概念及作用。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/GatewayId",
+      "/properties/SourceType",
+      "/properties/UpstreamId",
+      "/properties/Name"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

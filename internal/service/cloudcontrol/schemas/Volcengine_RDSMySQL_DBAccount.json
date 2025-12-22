@@ -2,6 +2,7 @@
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/AccountName",
+    "/properties/InstanceId",
     "/properties/Host"
   ],
   "definitions": {
@@ -100,29 +101,44 @@
     }
   },
   "description": "数据库账号",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/AccountName"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "rdsmysql:CreateDBAccount",
-        "rdsmysql:DescribeDBAccounts"
+        "rds_mysql:CreateDBAccount",
+        "rds_mysql:DescribeDBAccounts"
       ]
     },
     "delete": {
       "permissions": [
-        "rdsmysql:DeleteDBAccount",
-        "rdsmysql:DescribeDBAccounts"
+        "rds_mysql:DeleteDBAccount",
+        "rds_mysql:DescribeDBAccounts"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_mysql:DescribeDBAccounts"
       ]
     },
     "read": {
       "permissions": [
-        "rdsmysql:DescribeDBAccounts"
+        "rds_mysql:DescribeDBAccounts"
       ]
     },
     "update": {
       "permissions": [
-        "rdsmysql:ModifyDBAccountHost",
-        "rdsmysql:ModifyDBAccountDescription",
-        "rdsmysql:DescribeDBAccounts"
+        "rds_mysql:ModifyDBAccountDescription",
+        "rds_mysql:DescribeDBAccounts",
+        "rds_mysql:GrantDBAccountPrivilege",
+        "rds_mysql:ResetDBAccount"
       ]
     }
   },
@@ -204,8 +220,7 @@
   "readOnlyProperties": [
     "/properties/HasTableColumnPrivilegeDBNames",
     "/properties/AccountPrivilegesSQL",
-    "/properties/AccountStatus",
-    "/properties/InstanceId"
+    "/properties/AccountStatus"
   ],
   "required": [
     "InstanceId",

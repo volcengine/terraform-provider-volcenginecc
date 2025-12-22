@@ -230,6 +230,9 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "实例 ID。",
 			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TableColumnPrivileges
 		// Cloud Control resource type schema:
@@ -448,11 +451,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/HasTableColumnPrivilegeDBNames",
 		"/properties/AccountPrivilegesSQL",
 		"/properties/AccountStatus",
-		"/properties/InstanceId",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/AccountName",
+		"/properties/InstanceId",
 		"/properties/Host",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

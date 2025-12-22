@@ -83,6 +83,9 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 					"Server",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
@@ -246,9 +249,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "用户标签的标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "用户标签的标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -265,8 +270,9 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "用户标签的标签键。",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -276,8 +282,9 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "用户标签的标签值。",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -350,6 +357,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/PublicKey",
 		"/properties/PrivateKey",
 		"/properties/ProjectName",
+		"/properties/CertificateType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

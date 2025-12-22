@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 )
@@ -54,17 +53,6 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"endpoint_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "终端节点的 ID。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: EndpointTrn
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "终端节点的 TRN。",
-		//	  "type": "string"
-		//	}
-		"endpoint_trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点的 TRN。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ForwardIPs
@@ -111,11 +99,11 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最近一次更新转发规则的火山引擎账号的 ID",
+		//	  "description": "最近一次更新转发规则的账号的 ID",
 		//	  "type": "string"
 		//	}
 		"last_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "最近一次更新转发规则的火山引擎账号的 ID",
+			Description: "最近一次更新转发规则的账号的 ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Line
@@ -190,8 +178,7 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -252,7 +239,7 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccountID": {
-		//	        "description": "创建该 VPC 的火山引擎账号 ID。",
+		//	        "description": "创建该 VPC 的账号 ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "Region": {
@@ -278,7 +265,7 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccountID
 					"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "创建该 VPC 的火山引擎账号 ID。",
+						Description: "创建该 VPC 的账号 ID。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Region
@@ -299,23 +286,6 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "转发规则所关联的 VPC。转发规则在关联的 VPC 中生效。Type 参数是 OUTBOUND 时，VPC 的地域必须和终端节点所在的地域相同。",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: VpcTrns
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "域名所关联的一个或多个 VPC 的 TRN。",
-		//	  "insertionOrder": false,
-		//	  "items": {
-		//	    "type": "string"
-		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
-		//	}
-		"vpc_trns": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "域名所关联的一个或多个 VPC 的 TRN。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneName
@@ -350,7 +320,6 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"created_time":  "CreatedTime",
 		"enable":        "Enable",
 		"endpoint_id":   "EndpointID",
-		"endpoint_trn":  "EndpointTrn",
 		"forward_i_ps":  "ForwardIPs",
 		"ip":            "IP",
 		"key":           "Key",
@@ -368,7 +337,6 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"value":         "Value",
 		"vp_cs":         "VPCs",
 		"vpc_id":        "VpcId",
-		"vpc_trns":      "VpcTrns",
 		"zone_name":     "ZoneName",
 	})
 

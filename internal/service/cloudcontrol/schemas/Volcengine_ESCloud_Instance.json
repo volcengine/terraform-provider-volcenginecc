@@ -3,15 +3,12 @@
   "createOnlyProperties": [
     "/properties/InstanceConfiguration/EnableHttps",
     "/properties/InstanceConfiguration/EnablePureMaster",
-    "/properties/InstanceConfiguration/Period",
     "/properties/InstanceConfiguration/ProjectName",
     "/properties/InstanceConfiguration/RegionId",
     "/properties/InstanceConfiguration/Subnet",
     "/properties/InstanceConfiguration/VPC",
     "/properties/InstanceConfiguration/Version",
-    "/properties/InstanceConfiguration/ZoneId",
-    "/properties/InstanceConfiguration/AdminUserName",
-    "/properties/InstanceConfiguration/ZoneNumber"
+    "/properties/InstanceConfiguration/ZoneId"
   ],
   "definitions": {
     "ColdNodeResourceSpec": {
@@ -272,10 +269,6 @@
           "$ref": "#/definitions/HotNodeStorageSpec",
           "description": "数据节点的存储规格配置详情。",
           "type": "object"
-        },
-        "IncludeMonths": {
-          "description": "包年包月实例购买时长。",
-          "type": "integer"
         },
         "InstanceName": {
           "description": "自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。",
@@ -755,7 +748,9 @@
         "ESCloud:ModifyChargeCode",
         "ESCloud:ModifyNodeSpecInOneStep",
         "ESCloud:DescribeInstance",
-        "ESCloud:ListTagsForResources"
+        "ESCloud:ListTagsForResources",
+        "ESCloud:TagResources",
+        "ESCloud:UntagResources"
       ]
     }
   },
@@ -998,6 +993,8 @@
     "/properties/TotalNodes",
     "/properties/TransferInfo",
     "/properties/UserId",
+    "/properties/InstanceConfiguration/AdminUserName",
+    "/properties/InstanceConfiguration/ZoneNumber",
     "/properties/InstanceConfiguration/ColdNodeNumber",
     "/properties/InstanceConfiguration/ColdNodeResourceSpec",
     "/properties/InstanceConfiguration/ColdNodeStorageSpec",
@@ -1030,6 +1027,8 @@
     "/properties/InstanceConfiguration/AdminPassword",
     "/properties/InstanceConfiguration/NetworkSpecs",
     "/properties/InstanceConfiguration/NodeSpecsAssigns",
-    "/properties/InstanceConfiguration/ConfigurationCode"
+    "/properties/InstanceConfiguration/ConfigurationCode",
+    "/properties/InstanceConfiguration/AutoRenew",
+    "/properties/InstanceConfiguration/Period"
   ]
 }

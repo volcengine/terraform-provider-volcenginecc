@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_mongodb_instance.example "instance_id"

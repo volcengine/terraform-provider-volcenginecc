@@ -88,7 +88,6 @@ Read-Only:
 - `hot_node_number` (Number) 数据节点数量。
 - `hot_node_resource_spec` (Attributes) 数据节点的节点规格配置详情。 (see [below for nested schema](#nestedatt--instance_configuration--hot_node_resource_spec))
 - `hot_node_storage_spec` (Attributes) 数据节点的存储规格配置详情。 (see [below for nested schema](#nestedatt--instance_configuration--hot_node_storage_spec))
-- `include_months` (Number) 包年包月实例购买时长。
 - `instance_name` (String) 自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。
 - `kibana_node_number` (Number) kibana 节点数量。
 - `kibana_node_resource_spec` (Attributes) Kibana 节点的节点规格配置详情。 (see [below for nested schema](#nestedatt--instance_configuration--kibana_node_resource_spec))

@@ -167,10 +167,6 @@ func sandboxDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "integer"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Command",
-		//	    "Port"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"instance_image_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

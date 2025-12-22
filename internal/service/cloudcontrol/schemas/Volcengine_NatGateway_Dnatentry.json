@@ -5,6 +5,19 @@
     "/properties/NatGatewayId"
   ],
   "description": "目的地址转换。即当中转IP及端口被访问时，私网NAT网关将访问请求中的目的地址和端口替换成云服务器的私网IP及端口后，进行转发。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/DnatEntryId",
+      "/properties/DnatEntryName",
+      "/properties/ExternalIp",
+      "/properties/ExternalPort",
+      "/properties/InternalIp",
+      "/properties/InternalPort",
+      "/properties/NatGatewayId",
+      "/properties/PortType",
+      "/properties/Protocol"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -15,7 +28,8 @@
     "delete": {
       "permissions": [
         "natgateway:DeleteDnatEntry",
-        "natgateway:DescribeDnatEntryAttributes"
+        "natgateway:DescribeDnatEntryAttributes",
+        "natgateway:DescribeNatGatewayAttributes"
       ]
     },
     "list": {

@@ -41,5 +41,5 @@ Data Source schema for Volcengine::ALB::Certificate
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) 用户标签的标签键。
+- `value` (String) 用户标签的标签值。

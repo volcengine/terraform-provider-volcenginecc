@@ -89,48 +89,56 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "伸缩组用于管理一组云资源实例。通过伸缩组可以定义云资源池中的实例数/容量、冷却时间、负载均衡等信息。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/ScalingGroupId",
+      "/properties/ScalingGroupName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "autoscaling:CreateScalingGroup",
-        "autoscaling:DescribeScalingGroups"
+        "auto_scaling:CreateScalingGroup",
+        "auto_scaling:DescribeScalingGroups"
       ]
     },
     "delete": {
       "permissions": [
-        "autoscaling:DeleteScalingGroup",
-        "autoscaling:DescribeScalingGroups"
+        "auto_scaling:DeleteScalingGroup",
+        "auto_scaling:DescribeScalingGroups"
       ]
     },
     "list": {
       "permissions": [
-        "autoscaling:DescribeScalingGroups"
+        "auto_scaling:DescribeScalingGroups"
       ]
     },
     "read": {
       "permissions": [
-        "autoscaling:DescribeScalingGroups"
+        "auto_scaling:DescribeScalingGroups"
       ]
     },
     "update": {
       "permissions": [
-        "autoscaling:ModifyScalingGroup",
-        "autoscaling:AttachServerGroups",
-        "autoscaling:DetachServerGroups",
-        "autoscaling:SuspendProcesses",
-        "autoscaling:ResumeProcesses",
-        "autoscaling:EnableScalingGroup",
-        "autoscaling:DisableScalingGroup",
-        "autoscaling:UntagResources",
-        "autoscaling:TagResources",
-        "autoscaling:DescribeScalingGroups"
+        "auto_scaling:ModifyScalingGroup",
+        "auto_scaling:AttachServerGroups",
+        "auto_scaling:DetachServerGroups",
+        "auto_scaling:SuspendProcesses",
+        "auto_scaling:ResumeProcesses",
+        "auto_scaling:EnableScalingGroup",
+        "auto_scaling:DisableScalingGroup",
+        "auto_scaling:UntagResources",
+        "auto_scaling:TagResources",
+        "auto_scaling:DescribeScalingGroups"
       ]
     }
   },

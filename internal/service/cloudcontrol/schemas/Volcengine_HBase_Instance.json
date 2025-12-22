@@ -1,0 +1,327 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/MasterSpec",
+    "/properties/StorageCapacity",
+    "/properties/EnableCloudStorage",
+    "/properties/ProjectName",
+    "/properties/RSCount",
+    "/properties/RegionId",
+    "/properties/StorageType",
+    "/properties/MultiAZ",
+    "/properties/RSSpec",
+    "/properties/EngineVersion",
+    "/properties/EnableAuth",
+    "/properties/VpcId",
+    "/properties/ZoneId",
+    "/properties/ColdStorage",
+    "/properties/InstanceType",
+    "/properties/SubnetId",
+    "/properties/Tags"
+  ],
+  "definitions": {
+    "Endpoint": {
+      "description": "连接地址信息。",
+      "properties": {
+        "AddressType": {
+          "description": "连接地址类型，关于连接地址的更多信息，请参见连接地址类型。取值范围如下：Zk：ZK 地址。Thrift：Thrift2 地址。HBaseReUsedEipId：当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示实例中其他组件（如 RS 节点、Master 节点等）共享绑定使用的 EIP ID 信息。",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示 EIP ID。",
+          "type": "string"
+        },
+        "EndpointId": {
+          "description": "连接地址 ID。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的 ID。当连接地址类型为 HBaseReUsedEipId 时，连接地址 ID 也固定为 HBaseReUsedEipId。",
+          "type": "string"
+        },
+        "EndpointStr": {
+          "description": "连接地址的连接串。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的连接串。当连接地址类型为 HBaseReUsedEipId 时，连接地址的连接串也固定为 HBaseReUsedEipId。",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "连接地址网络类型。取值范围如下：Public：公网访问地址。Private：私网访问地址。",
+          "type": "string"
+        },
+        "PrivateDNSVisibility": {
+          "description": "私网域名是否开启公网解析。",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "标签键值对对象。",
+      "properties": {
+        "Key": {
+          "description": "实例所绑定标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "实例所绑定标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "表格数据库 HBase 版是基于 Apache HBase 提供的全托管 NoSQL 服务，兼容标准 HBase 访问协议，具备低成本存储、高扩展吞吐等优势。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/RegionId",
+      "/properties/InstanceId",
+      "/properties/InstanceName",
+      "/properties/Status",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "hbase:CreateDBInstance",
+        "hbase:DescribeDBInstanceDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "hbase:DeleteDBInstance",
+        "hbase:DescribeDBInstanceDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "hbase:DescribeDBInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "hbase:DescribeDBInstanceDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "hbase:ModifyDBInstanceName",
+        "hbase:ModifyInstanceDeletionProtectionPolicy",
+        "hbase:ModifyInstanceChargeType",
+        "hbase:DescribeDBInstanceDetail"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AutoRenew": {
+      "description": "预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。",
+      "type": "boolean"
+    },
+    "ChargeStatus": {
+      "description": "计费状态。取值：Normal：正常。Overdue：欠费。Shutdown：关停。",
+      "enum": [
+        "Normal",
+        "Overdue",
+        "Shutdown"
+      ],
+      "type": "string"
+    },
+    "ChargeType": {
+      "description": "计费类型，取值：PostPaid：按量计费（后付费）。PrePaid：包年包月（预付费）。",
+      "enum": [
+        "PostPaid",
+        "PrePaid"
+      ],
+      "type": "string"
+    },
+    "ColdStorage": {
+      "description": "实例总容量型存储空间大小，单位 GiB。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "CreateTime": {
+      "description": "实例创建时间（UTC 时间）。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletionProtection": {
+      "description": "实例删除保护功能开关状态。取值范围：enabled：已开启。disabled：未开启。说明关于实例删除保护的更多信息，请参见实例删除保护。",
+      "type": "string"
+    },
+    "EnableAuth": {
+      "description": "是否开启登录认证。取值：true：已开启登录认证。false：未开启登录认证。",
+      "type": "boolean"
+    },
+    "EnableCloudStorage": {
+      "description": "是否开通存储型容量，取值：true：开通容量型存储。false：不开通容量型存储。说明容量型存储的详细介绍，请参见冷热分离介绍。仅当 MultiAZ（部署方式）取值为 false（单可用区部署）时，支持冷热分离功能。",
+      "type": "boolean"
+    },
+    "Endpoints": {
+      "description": "连接地址信息列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Endpoint"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "EngineVersion": {
+      "description": "HBase 数据库引擎版本。当前仅支持 HBase 2.0 版本，取值默认为 HBase_2.0。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "实例名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "实例类型。当前仅支持标准型，取值默认为 Standard。",
+      "type": "string"
+    },
+    "MasterCount": {
+      "description": "Master 节点个数。单可用区部署，默认包含 2 个 Master 节点。",
+      "type": "integer"
+    },
+    "MasterSpec": {
+      "description": "Master 节点的规格码。说明关于 Master 节点所支持的规格信息，请参见实例规格。Master 节点数量为固定值，不支持增减。",
+      "type": "string"
+    },
+    "MultiAZ": {
+      "description": "实例的部署方式，取值：true：多可用区部署。false：单可用区部署。目前仅支持单可用区部署。",
+      "type": "boolean"
+    },
+    "PrimarySubnetId": {
+      "description": "实时主可用区子网 ID。",
+      "type": "string"
+    },
+    "PrimaryZoneId": {
+      "description": "实时主可用区 ID。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "实例所属的项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "PurchaseMonths": {
+      "description": "购买时长，单位：月。取值范围如下：1，2，3，4，5，6，7，8，9，12，24，36。说明当 ChargeType 为 PrePaid时，该参数必填。",
+      "type": "integer"
+    },
+    "RSCount": {
+      "description": "RegionServer 节点的数量。",
+      "type": "integer"
+    },
+    "RSSpec": {
+      "description": "RegionServer 节点的规格码。",
+      "type": "string"
+    },
+    "RegionId": {
+      "description": "实例所属的地域 ID。",
+      "type": "string"
+    },
+    "StandbySubnetId": {
+      "description": "实时备可用区子网 ID。",
+      "type": "string"
+    },
+    "StandbyZoneId": {
+      "description": "实时备可用区 ID。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "实例当前状态。关于实例状态的更多说明，请参见实例状态说明。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "StorageCapacity": {
+      "description": "实例总存储容量，单位：GiB。",
+      "type": "integer"
+    },
+    "StorageType": {
+      "description": "实例的存储类型，取值：HdfsHdd：HDD 文件存储。HdfsSsd：SSD 文件存储。",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "实例所属的子网 ID。单可用区实例，仅包含一个可用区的子网 ID。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "需要绑定的标签键和标签值数组对象。说明支持一次传入多组标签键值对象，多组标签键值对象间用英文逗号（,）分隔。单次最多同时传入 20 组标签键值对，单个实例最多绑定 50 个标签。标签键值需满足设置规则，具体规则请参见标签设置规则。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UsedColdStorage": {
+      "description": "实例已使用的容量型存储空间大小，单位 MiB。",
+      "type": "integer"
+    },
+    "UsedStorage": {
+      "description": "主实例已使用的存储容量，单位：MiB。",
+      "type": "number"
+    },
+    "VpcId": {
+      "description": "私有网络 ID。说明您可以调用 DescribeVpcs 接口查询可创建 HBase 实例的私有网络信息，包括私有网络 ID。",
+      "type": "string"
+    },
+    "VpcName": {
+      "description": "实例所属的私有网络名称。",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "实例所属的可用区 ID。",
+      "type": "string"
+    },
+    "ZoneName": {
+      "description": "实例所属的可用区名称。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/UsedColdStorage",
+    "/properties/PrimarySubnetId",
+    "/properties/UsedStorage",
+    "/properties/StandbySubnetId",
+    "/properties/ZoneName",
+    "/properties/CreateTime",
+    "/properties/ChargeStatus",
+    "/properties/PrimaryZoneId",
+    "/properties/StandbyZoneId",
+    "/properties/VpcName",
+    "/properties/Status",
+    "/properties/InstanceId",
+    "/properties/MasterCount"
+  ],
+  "required": [
+    "ChargeType",
+    "EngineVersion",
+    "MasterSpec",
+    "RSCount",
+    "RSSpec",
+    "RegionId",
+    "StorageCapacity",
+    "StorageType",
+    "SubnetId",
+    "VpcId",
+    "ZoneId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::HBase::Instance",
+  "writeOnlyProperties": [
+    "/properties/EnableCloudStorage",
+    "/properties/PurchaseMonths"
+  ]
+}

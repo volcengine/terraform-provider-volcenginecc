@@ -150,14 +150,12 @@ resource "volcenginecc_escloud_instance" "ESCloudInstanceDemo" {
 Optional:
 
 - `admin_password` (String) 管理员密码。
-- `admin_user_name` (String) 管理员用户名。
 - `auto_renew` (Boolean) 包年包月实例是否配置自动续费。true：自动续费，系统会在每次到期前自动为实例续费。false：未开启自动续费，需要在实例到期前进行手动续费。如需了解更多，请参见实例续费。
 - `charge_type` (String) 实例计费类型。PostPaid：按量计费。PrePaid：包年包月。
 - `configuration_code` (String) 计费配置码，可以通过调用DescribeNodeAvailableSpecs接口获得。
 - `deletion_protection` (Boolean) 是否开启实例删除保护功能，取值说明如下：true：开启实例删除保护。false：关闭实例删除保护。说明开启实例删除保护后，您将无法通过控制台或者 API 删除实例。
 - `enable_https` (Boolean) 是否启用 HTTPS 访问协议。true：启用 HTTPS 访问。false：不启用 HTTPS，使用 HTTP 访问。说明如果选择使用 HTTP 访问，将无需安全认证即可访问，并使用 HTTP 明文传输数据。您需要确保访问环境的安全性，且不要将访问接口暴露在公网环境上。实例创建完成后，支持根据业务需求修改传输协议。相关文档，请参见切换实例传输协议。
 - `enable_pure_master` (Boolean) Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即使用 Hot 声明。
-- `include_months` (Number) 包年包月实例购买时长。
 - `instance_name` (String) 自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。
 - `network_specs` (Attributes Set) 实例公网规格配置。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_configuration--network_specs))
@@ -172,10 +170,10 @@ Optional:
 - `version` (String) API的版本，取值：2023-01-01。
 - `vpc` (Attributes) 设置实例的私有网络 VPC 信息。 (see [below for nested schema](#nestedatt--instance_configuration--vpc))
 - `zone_id` (String) 实例所在可用区。说明如果是多可用区部署，则填写多个 ZoneId，使用英文逗号分隔，如cn-beijing-a,cn-beijing-c。最左侧的 ZoneId 为主可用区，其余为备可用区。
-- `zone_number` (Number) 实例的可用区数量。
 
 Read-Only:
 
+- `admin_user_name` (String) 管理员用户名。
 - `cold_node_number` (Number) 冷节点数量。
 - `cold_node_resource_spec` (Attributes) 冷节点的节点规格配置详情。 (see [below for nested schema](#nestedatt--instance_configuration--cold_node_resource_spec))
 - `cold_node_storage_spec` (Attributes) 冷节点的存储规格配置详情。 (see [below for nested schema](#nestedatt--instance_configuration--cold_node_storage_spec))
@@ -193,6 +191,7 @@ Read-Only:
 - `warm_node_number` (Number) 温节点数量。
 - `warm_node_resource_spec` (Attributes) 温节点的节点规格配置详情。 (see [below for nested schema](#nestedatt--instance_configuration--warm_node_resource_spec))
 - `warm_node_storage_spec` (Attributes) 温节点的存储规格配置详情。 (see [below for nested schema](#nestedatt--instance_configuration--warm_node_storage_spec))
+- `zone_number` (Number) 实例的可用区数量。
 
 <a id="nestedatt--instance_configuration--network_specs"></a>
 ### Nested Schema for `instance_configuration.network_specs`
