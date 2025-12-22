@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_hbase_instance.example "instance_id"

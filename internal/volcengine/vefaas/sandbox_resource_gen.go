@@ -194,6 +194,9 @@ func sandboxResource(ctx context.Context) (resource.Resource, error) {
 		"function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "沙箱实例所属的沙箱应用 ID。",
 			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceImageInfo
 		// Cloud Control resource type schema:
@@ -218,10 +221,6 @@ func sandboxResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Command",
-		//	    "Port"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"instance_image_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -231,9 +230,6 @@ func sandboxResource(ctx context.Context) (resource.Resource, error) {
 					Description: "沙箱实例程序的启动命令。如需指定脚本文件，请使用绝对路径，并确保脚本具有相应的可执行权限。",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -261,9 +257,6 @@ func sandboxResource(ctx context.Context) (resource.Resource, error) {
 					Description: "沙箱实例镜像监听端口。",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						fwvalidators.NotNullInt64(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -673,6 +666,7 @@ func sandboxResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/MemoryMB",
 		"/properties/Metadata",
 		"/properties/RequestTimeout",
+		"/properties/FunctionId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

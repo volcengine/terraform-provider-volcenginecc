@@ -332,4 +332,22 @@ resource_schema "volcengine_apig_gateway" {
   cloudcontrol_type_name = "Volcengine::APIG::Gateway"
 }
 
+resource_schema "volcengine_mongodb_instance" {
+  cloudcontrol_type_name = "Volcengine::MongoDB::Instance"
+}
+
+resource_schema "volcengine_hbase_instance" {
+  cloudcontrol_type_name = "Volcengine::HBase::Instance"
+}
+
+resource_schema "volcengine_kms_key" {
+  cloudcontrol_type_name = "Volcengine::KMS::Key"
+}
+
+resource_schema "volcengine_apig_custom_domain" {
+  cloudcontrol_type_name = "Volcengine::APIG::CustomDomain"
+}
+
+
+
 

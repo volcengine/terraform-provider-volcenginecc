@@ -393,5 +393,25 @@
         "resource": "volcenginecc_apig_gateway",
         "identifier": ["GatewayID"],
         "path": "./examples/resources/volcenginecc_apig_gateway/import.sh"
+    },
+    {
+        "resource": "volcenginecc_mongodb_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_mongodb_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_hbase_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_hbase_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kms_key",
+        "identifier": ["KeyringName","KeyID"],
+        "path": "./examples/resources/volcenginecc_kms_key/import.sh"
+    },
+    {
+        "resource": "volcenginecc_apig_custom_domain",
+        "identifier": ["CustomDomainId"],
+        "path": "./examples/resources/volcenginecc_apig_custom_domain/import.sh"
     }
 ]

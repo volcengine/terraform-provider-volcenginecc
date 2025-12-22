@@ -12,6 +12,17 @@
     "/properties/GranteeType"
   ],
   "description": "容器服务提供集群 RBAC 授权功能，为 IAM 用户或角色授予 RBAC 访问权限，包括可访问的资源、权限的作用范围、预置的角色类型等，从而更好地管理集群的安全访问控制，满足企业用户细粒度的资源访问权限控制需求。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId",
+      "/properties/GranteeId",
+      "/properties/GranteeType",
+      "/properties/Status",
+      "/properties/Namespace",
+      "/properties/RoleName",
+      "/properties/PermissionId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -64,7 +75,6 @@
     },
     "ClusterId": {
       "description": "需要授权给 IAM 用户或角色的集群 ID。roleDomain为namespace或cluster时必须填写该参数值。",
-      "semantic": "description",
       "type": "string"
     },
     "CreatedTime": {

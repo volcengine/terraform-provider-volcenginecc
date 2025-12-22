@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 	fwvalidators "github.com/volcengine/terraform-provider-volcenginecc/internal/validators"
@@ -56,7 +55,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "转发规则是否被启用。true：启用。false：禁用。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -75,24 +73,8 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: EndpointTrn
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "终端节点的 TRN。",
-		//	  "type": "string"
-		//	}
-		"endpoint_trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点的 TRN。",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// EndpointTrn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ForwardIPs
 		// Cloud Control resource type schema:
@@ -150,11 +132,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最近一次更新转发规则的火山引擎账号的 ID",
+		//	  "description": "最近一次更新转发规则的账号的 ID",
 		//	  "type": "string"
 		//	}
 		"last_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "最近一次更新转发规则的火山引擎账号的 ID",
+			Description: "最近一次更新转发规则的账号的 ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -213,6 +195,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 			Default:     stringdefault.StaticString("default"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RuleID
@@ -251,8 +234,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -283,7 +265,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -321,6 +302,9 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					"LINE",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
@@ -345,7 +329,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccountID": {
-		//	        "description": "创建该 VPC 的火山引擎账号 ID。",
+		//	        "description": "创建该 VPC 的账号 ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "Region": {
@@ -370,14 +354,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccountID
-					"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "创建该 VPC 的火山引擎账号 ID。",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "VPC 的地域。",
@@ -388,14 +364,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: RegionName
-					"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC 的地域的名称。",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 					// Property: VpcId
 					"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "VPC 的 ID。",
@@ -414,29 +382,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: VpcTrns
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "域名所关联的一个或多个 VPC 的 TRN。",
-		//	  "insertionOrder": false,
-		//	  "items": {
-		//	    "type": "string"
-		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
-		//	}
-		"vpc_trns": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "域名所关联的一个或多个 VPC 的 TRN。",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// VpcTrns is a write-only property.
-		}, /*END ATTRIBUTE*/
 		// Property: ZoneName
 		// Cloud Control resource type schema:
 		//
@@ -450,6 +395,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -478,7 +424,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		"created_time":  "CreatedTime",
 		"enable":        "Enable",
 		"endpoint_id":   "EndpointID",
-		"endpoint_trn":  "EndpointTrn",
 		"forward_i_ps":  "ForwardIPs",
 		"ip":            "IP",
 		"key":           "Key",
@@ -496,13 +441,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		"value":         "Value",
 		"vp_cs":         "VPCs",
 		"vpc_id":        "VpcId",
-		"vpc_trns":      "VpcTrns",
 		"zone_name":     "ZoneName",
-	})
-
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/EndpointTrn",
-		"/properties/VpcTrns",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -510,11 +449,16 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CreatedTime",
 		"/properties/UpdatedTime",
 		"/properties/LastOperator",
+		"/properties/VPCs/*/AccountID",
+		"/properties/VPCs/*/RegionName",
+		"/properties/Enable",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/VpcTrns",
-		"/properties/EndpointTrn",
+		"/properties/EndpointID",
+		"/properties/ProjectName",
+		"/properties/Type",
+		"/properties/ZoneName",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

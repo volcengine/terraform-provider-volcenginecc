@@ -487,10 +487,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
-		//	    "IncludeMonths": {
-		//	      "description": "包年包月实例购买时长。",
-		//	      "type": "integer"
-		//	    },
 		//	    "InstanceName": {
 		//	      "description": "自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。",
 		//	      "maxLength": 128,
@@ -1058,11 +1054,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "数据节点的存储规格配置详情。",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IncludeMonths
-				"include_months": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例购买时长。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceName
@@ -1885,7 +1876,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hot_node_number":                     "HotNodeNumber",
 		"hot_node_resource_spec":              "HotNodeResourceSpec",
 		"hot_node_storage_spec":               "HotNodeStorageSpec",
-		"include_months":                      "IncludeMonths",
 		"instance_configuration":              "InstanceConfiguration",
 		"instance_id":                         "InstanceId",
 		"instance_name":                       "InstanceName",

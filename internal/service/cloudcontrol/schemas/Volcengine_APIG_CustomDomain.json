@@ -1,0 +1,113 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ServiceId",
+    "/properties/Domain"
+  ],
+  "description": "服务作为业务对外暴露的入口，可以通过绑定域名功能，将您的自定义域名绑定至服务。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ServiceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apig:CreateCustomDomain",
+        "apig:GetCustomDomain"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apig:DeleteCustomDomain",
+        "apig:GetCustomDomain"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apig:ListCustomDomains"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apig:GetCustomDomain"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apig:UpdateCustomDomain",
+        "apig:GetCustomDomain"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CustomDomainId"
+  ],
+  "properties": {
+    "CertificateId": {
+      "description": "自定义域名证书ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Comments": {
+      "description": "备注。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CustomDomainId": {
+      "description": "自定义域名ID。",
+      "type": "string"
+    },
+    "Domain": {
+      "description": "自定义域名。",
+      "type": "string"
+    },
+    "Protocol": {
+      "description": "协议，取值：HTTP。HTTPS。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SSLRedirect": {
+      "description": "重定向到HTTPS。",
+      "type": "boolean"
+    },
+    "ServiceId": {
+      "description": "服务ID。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/CustomDomainId",
+    "/properties/Status",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "ServiceId",
+    "Domain",
+    "Protocol"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::APIG::CustomDomain"
+}

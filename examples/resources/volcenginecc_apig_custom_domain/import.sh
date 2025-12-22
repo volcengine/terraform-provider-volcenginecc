@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_apig_custom_domain.example "custom_domain_id"

@@ -81,6 +81,10 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vepfs_instances -cctype Volcengine::VEPFS::Instance -package vepfs ../volcengine/vepfs/instance_plural_data_source_gen.go ../volcengine/vepfs/instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_escloud_instances -cctype Volcengine::ESCloud::Instance -package escloud ../volcengine/escloud/instance_plural_data_source_gen.go ../volcengine/escloud/instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_gateways -cctype Volcengine::APIG::Gateway -package apig ../volcengine/apig/gateway_plural_data_source_gen.go ../volcengine/apig/gateway_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_mongodb_instances -cctype Volcengine::MongoDB::Instance -package mongodb ../volcengine/mongodb/instance_plural_data_source_gen.go ../volcengine/mongodb/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_hbase_instances -cctype Volcengine::HBase::Instance -package hbase ../volcengine/hbase/instance_plural_data_source_gen.go ../volcengine/hbase/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_kms_keys -cctype Volcengine::KMS::Key -package kms ../volcengine/kms/key_plural_data_source_gen.go ../volcengine/kms/key_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_apig_custom_domains -cctype Volcengine::APIG::CustomDomain -package apig ../volcengine/apig/custom_domain_plural_data_source_gen.go ../volcengine/apig/custom_domain_plural_data_source_gen_test.go
 
 package provider
 
@@ -97,8 +101,11 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/hbase"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kms"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/mongodb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/natgateway"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/organization"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatezone"

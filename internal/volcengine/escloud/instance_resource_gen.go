@@ -562,10 +562,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
-		//	    "IncludeMonths": {
-		//	      "description": "包年包月实例购买时长。",
-		//	      "type": "integer"
-		//	    },
 		//	    "InstanceName": {
 		//	      "description": "自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。",
 		//	      "maxLength": 128,
@@ -886,11 +882,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AdminUserName
 				"admin_user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "管理员用户名。",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenew
@@ -901,6 +895,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// AutoRenew is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1205,15 +1200,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
-				// Property: IncludeMonths
-				"include_months": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例购买时长。",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
 				// Property: InstanceName
 				"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。",
@@ -1488,8 +1474,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
-						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
+					// Period is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ProjectName
 				"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1715,11 +1701,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ZoneNumber
 				"zone_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "实例的可用区数量。",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
-						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -2264,7 +2248,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"hot_node_number":                     "HotNodeNumber",
 		"hot_node_resource_spec":              "HotNodeResourceSpec",
 		"hot_node_storage_spec":               "HotNodeStorageSpec",
-		"include_months":                      "IncludeMonths",
 		"instance_configuration":              "InstanceConfiguration",
 		"instance_id":                         "InstanceId",
 		"instance_name":                       "InstanceName",
@@ -2345,6 +2328,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/InstanceConfiguration/NetworkSpecs",
 		"/properties/InstanceConfiguration/NodeSpecsAssigns",
 		"/properties/InstanceConfiguration/ConfigurationCode",
+		"/properties/InstanceConfiguration/AutoRenew",
+		"/properties/InstanceConfiguration/Period",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -2389,6 +2374,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/TotalNodes",
 		"/properties/TransferInfo",
 		"/properties/UserId",
+		"/properties/InstanceConfiguration/AdminUserName",
+		"/properties/InstanceConfiguration/ZoneNumber",
 		"/properties/InstanceConfiguration/ColdNodeNumber",
 		"/properties/InstanceConfiguration/ColdNodeResourceSpec",
 		"/properties/InstanceConfiguration/ColdNodeStorageSpec",
@@ -2412,15 +2399,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/InstanceConfiguration/EnableHttps",
 		"/properties/InstanceConfiguration/EnablePureMaster",
-		"/properties/InstanceConfiguration/Period",
 		"/properties/InstanceConfiguration/ProjectName",
 		"/properties/InstanceConfiguration/RegionId",
 		"/properties/InstanceConfiguration/Subnet",
 		"/properties/InstanceConfiguration/VPC",
 		"/properties/InstanceConfiguration/Version",
 		"/properties/InstanceConfiguration/ZoneId",
-		"/properties/InstanceConfiguration/AdminUserName",
-		"/properties/InstanceConfiguration/ZoneNumber",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

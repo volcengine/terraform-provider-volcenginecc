@@ -3,15 +3,18 @@
   "createOnlyProperties": [
     "/properties/PublicKey",
     "/properties/PrivateKey",
-    "/properties/ProjectName"
+    "/properties/ProjectName",
+    "/properties/CertificateType"
   ],
   "definitions": {
     "Tag": {
       "properties": {
         "Key": {
+          "description": "用户标签的标签键。",
           "type": "string"
         },
         "Value": {
+          "description": "用户标签的标签值。",
           "type": "string"
         }
       },
@@ -22,6 +25,16 @@
     }
   },
   "description": "ALB 支持上传服务器证书、CA 证书到控制台，对上传的证书单独管理。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/CertificateId",
+      "/properties/CertificateType",
+      "/properties/CertificateName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -65,12 +78,14 @@
   "properties": {
     "CertificateId": {
       "description": "证书ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "CertificateName": {
       "description": "证书名称，长度限制为1 ～ 128个字符，必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。",
       "maxLength": 128,
       "minLength": 1,
+      "semantic": "resourceName",
       "type": "string"
     },
     "CertificateType": {
@@ -83,10 +98,12 @@
     },
     "CreatedTime": {
       "description": "证书创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "证书描述。",
+      "semantic": "description",
       "type": "string"
     },
     "DomainName": {
@@ -112,6 +129,7 @@
     },
     "ProjectName": {
       "description": "项目名称。",
+      "semantic": "projectName",
       "type": "string"
     },
     "PublicKey": {
@@ -124,6 +142,7 @@
     },
     "Status": {
       "description": "证书的状态，取值为：Creating：创建中。Active：运行中。Deleting：删除中。",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -132,6 +151,7 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     }

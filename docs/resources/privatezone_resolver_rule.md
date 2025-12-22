@@ -43,9 +43,7 @@ resource "volcenginecc_privatezone_resolver_rule" "PrivateZoneResolverRuleDemo" 
 
 ### Optional
 
-- `enable` (Boolean) 转发规则是否被启用。true：启用。false：禁用。
 - `endpoint_id` (Number) 终端节点的 ID。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。
-- `endpoint_trn` (String) 终端节点的 TRN。
 - `forward_i_ps` (Attributes Set) 外部的 DNS 服务器的 IP 地址和端口。您最多只能添加 10 个 IP 地址。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--forward_i_ps))
 - `line` (String) 递归 DNS 服务器的出口 IP 地址的运营商。该参数仅在 Type 参数是 LINE 时有效。支持的取值：移动：中国移动，电信：中国电信，联通：中国联通
@@ -54,14 +52,14 @@ resource "volcenginecc_privatezone_resolver_rule" "PrivateZoneResolverRuleDemo" 
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `vp_cs` (Attributes Set) 转发规则所关联的 VPC。转发规则在关联的 VPC 中生效。Type 参数是 OUTBOUND 时，VPC 的地域必须和终端节点所在的地域相同。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--vp_cs))
-- `vpc_trns` (Set of String) 域名所关联的一个或多个 VPC 的 TRN。
 - `zone_name` (String) 转发规则转发规则所关联的域名。您可以输入一个或多个域名。多个域名之间使用英文逗号, 分隔。最多支持输入 500 个域名。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。如果您把该参数设置为 *，则转发规则适用于 VPC 关联的所有域名。
 
 ### Read-Only
 
 - `created_time` (String) 转发规则的创建时间
+- `enable` (Boolean) 转发规则是否被启用。true：启用。false：禁用。
 - `id` (String) Uniquely identifies the resource.
-- `last_operator` (String) 最近一次更新转发规则的火山引擎账号的 ID
+- `last_operator` (String) 最近一次更新转发规则的账号的 ID
 - `rule_id` (String) 转发规则的 ID。
 - `updated_time` (String) 转发规则的更新时间
 
@@ -88,9 +86,7 @@ Optional:
 
 Optional:
 
-- `account_id` (String) 创建该 VPC 的火山引擎账号 ID。
 - `region` (String) VPC 的地域。
-- `region_name` (String) VPC 的地域的名称。
 - `vpc_id` (String) VPC 的 ID。
 
 ## Import

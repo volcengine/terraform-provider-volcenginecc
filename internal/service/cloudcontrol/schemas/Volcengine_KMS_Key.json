@@ -1,0 +1,264 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/KeySpec",
+    "/properties/KeyUsage",
+    "/properties/MultiRegion",
+    "/properties/Origin",
+    "/properties/ProtectionLevel",
+    "/properties/RotateState",
+    "/properties/KeyringName"
+  ],
+  "definitions": {
+    "MultiRegionConfiguration": {
+      "properties": {
+        "MultiRegionKeyType": {
+          "description": "多区域密钥的类型。",
+          "type": "string"
+        },
+        "PrimaryKey": {
+          "$ref": "#/definitions/PrimaryKey",
+          "description": "主多区域键的事务识别号和区域 ID。",
+          "type": "object"
+        },
+        "ReplicaKeys": {
+          "description": "副本多区域密钥的事务记录编号和区域 ID。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ReplicaKey"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "PrimaryKey": {
+      "description": "主多区域键的事务识别号和区域 ID。",
+      "properties": {
+        "Region": {
+          "description": "多区域密钥的区域 ID。",
+          "type": "string"
+        },
+        "Trn": {
+          "description": "多区域密钥的 TRN。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReplicaKey": {
+      "description": "副本多区域密钥的事务记录编号和区域 ID。",
+      "properties": {
+        "Region": {
+          "description": "多区域密钥的区域 ID。",
+          "type": "string"
+        },
+        "Trn": {
+          "description": "多区域密钥的转换。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "KMS密钥的标签",
+      "properties": {
+        "Key": {
+          "description": "KMS密钥的标签键",
+          "type": "string"
+        },
+        "Value": {
+          "description": "KMS密钥的标签值",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "密钥管理服务（Key Management Service）是火山引擎上一站式的密钥管理和数据加密服务平台。提供简单易用的加密接口，KMS 帮助用户轻松管理密钥、保护云上核心数据的安全。同时极大降低用户自行部署密码基础设施的采购、研发成本。帮助业务轻松满足监管和合规需求。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/KeyringName",
+      "/properties/KeyName",
+      "/properties/KeySpec",
+      "/properties/Description",
+      "/properties/KeyState",
+      "/properties/KeyUsage",
+      "/properties/ProtectionLevel",
+      "/properties/RotateState",
+      "/properties/Origin",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ],
+    "required": [
+      "/properties/KeyringName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "kms:CreateKey",
+        "kms:DescribeKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "kms:ScheduleKeyDeletion",
+        "kms:DescribeKey"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "kms:DescribeKeys"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "kms:DescribeKey"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "kms:UpdateKey",
+        "kms:EnableKey",
+        "kms:DisableKey",
+        "kms:CancelKeyDeletion",
+        "kms:DescribeKey"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/KeyringName",
+    "/properties/KeyID"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "密钥创建时间。",
+      "format": "int64",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "密钥描述:长度为 0 - 8192 个字符。",
+      "maxLength": 8192,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "KeyID": {
+      "description": "密钥唯一标识符，UUID形式。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "KeyMaterialExpireTime": {
+      "description": "密钥材料过期时间，当值为空时表示不会过期。",
+      "type": "string"
+    },
+    "KeyName": {
+      "description": "主密钥名称，长度为 2 - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+      "maxLength": 31,
+      "minLength": 2,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "KeySpec": {
+      "description": "对称密钥：SYMMETRIC_256，SYMMETRIC_128，非对称密钥：RSA_2048，RSA_3072，RSA_4096，EC_P256，EC_P256K，EC_P384，EC_P521，EC_SM2。",
+      "type": "string"
+    },
+    "KeyState": {
+      "description": "密钥状态：Enable，Disable，PendingDelete，Archived，PendingImport。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "KeyUsage": {
+      "description": "密钥用途，取值：ENCRYPT_DECRYPT，SIGN_VERIFY，GENERATE_VERIFY_MAC。",
+      "type": "string"
+    },
+    "KeyringName": {
+      "description": "密钥环名称，长度为 2 - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+      "maxLength": 31,
+      "minLength": 2,
+      "type": "string"
+    },
+    "LastRotationTime": {
+      "description": "密钥最后轮转时间。",
+      "type": "string"
+    },
+    "MultiRegion": {
+      "description": "是否为 Multi-region 类型的主密钥。",
+      "type": "boolean"
+    },
+    "MultiRegionConfiguration": {
+      "$ref": "#/definitions/MultiRegionConfiguration",
+      "description": "Multi-region key 配置信息。",
+      "type": "object"
+    },
+    "Origin": {
+      "description": "密钥来源，取值：CloudKMS，External，ExternalKeyStore。",
+      "type": "string"
+    },
+    "ProtectionLevel": {
+      "description": "密钥保护级别，取值：SOFTWARE，HSM。",
+      "type": "string"
+    },
+    "RotateState": {
+      "description": "密钥轮转状态，取值：Enable，Disable。",
+      "type": "string"
+    },
+    "ScheduleDeleteTime": {
+      "description": "密钥删除时间。",
+      "type": "string"
+    },
+    "ScheduleRotationTime": {
+      "description": "密钥轮转时间。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "KMS密钥的标签信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Trn": {
+      "description": "资源名称，格式应为 trn:${Service}:${Region}:${AccountID}:${ResourcePath}。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "密钥更新时间。",
+      "format": "int64",
+      "semantic": "updatedTime",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/KeyState",
+    "/properties/CreatedTime",
+    "/properties/KeyID",
+    "/properties/KeyMaterialExpireTime",
+    "/properties/LastRotationTime",
+    "/properties/MultiRegionConfiguration",
+    "/properties/ScheduleDeleteTime",
+    "/properties/ScheduleRotationTime",
+    "/properties/Trn",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "KeyringName",
+    "KeyName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::KMS::Key"
+}

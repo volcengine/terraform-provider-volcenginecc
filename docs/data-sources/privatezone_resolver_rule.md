@@ -24,9 +24,8 @@ Data Source schema for Volcengine::PrivateZone::ResolverRule
 - `created_time` (String) 转发规则的创建时间
 - `enable` (Boolean) 转发规则是否被启用。true：启用。false：禁用。
 - `endpoint_id` (Number) 终端节点的 ID。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。
-- `endpoint_trn` (String) 终端节点的 TRN。
 - `forward_i_ps` (Attributes Set) 外部的 DNS 服务器的 IP 地址和端口。您最多只能添加 10 个 IP 地址。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。 (see [below for nested schema](#nestedatt--forward_i_ps))
-- `last_operator` (String) 最近一次更新转发规则的火山引擎账号的 ID
+- `last_operator` (String) 最近一次更新转发规则的账号的 ID
 - `line` (String) 递归 DNS 服务器的出口 IP 地址的运营商。该参数仅在 Type 参数是 LINE 时有效。支持的取值：移动：中国移动，电信：中国电信，联通：中国联通
 - `name` (String) 转发规则的名称。支持 UTF-8 格式。
 - `project_name` (String) 转发规则所属的项目名称。默认为 default。
@@ -35,7 +34,6 @@ Data Source schema for Volcengine::PrivateZone::ResolverRule
 - `type` (String) 转发规则类型。OUTBOUND：转发到外部的 DNS 服务器。LINE：自定义公网递归 DNS 服务器的出口 IP 地址的运营商。
 - `updated_time` (String) 转发规则的更新时间
 - `vp_cs` (Attributes Set) 转发规则所关联的 VPC。转发规则在关联的 VPC 中生效。Type 参数是 OUTBOUND 时，VPC 的地域必须和终端节点所在的地域相同。 (see [below for nested schema](#nestedatt--vp_cs))
-- `vpc_trns` (Set of String) 域名所关联的一个或多个 VPC 的 TRN。
 - `zone_name` (String) 转发规则转发规则所关联的域名。您可以输入一个或多个域名。多个域名之间使用英文逗号, 分隔。最多支持输入 500 个域名。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。如果您把该参数设置为 *，则转发规则适用于 VPC 关联的所有域名。
 
 <a id="nestedatt--forward_i_ps"></a>
@@ -61,7 +59,7 @@ Read-Only:
 
 Read-Only:
 
-- `account_id` (String) 创建该 VPC 的火山引擎账号 ID。
+- `account_id` (String) 创建该 VPC 的账号 ID。
 - `region` (String) VPC 的地域。
 - `region_name` (String) VPC 的地域的名称。
 - `vpc_id` (String) VPC 的 ID。

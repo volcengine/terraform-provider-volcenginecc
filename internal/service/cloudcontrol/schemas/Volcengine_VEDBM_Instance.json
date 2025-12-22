@@ -10,6 +10,7 @@
     "/properties/ProjectName",
     "/properties/VpcId",
     "/properties/SubnetId",
+    "/properties/TemplateId",
     "/properties/SuperAccountName",
     "/properties/SuperAccountPassword",
     "/properties/ZoneIds"
@@ -249,13 +250,27 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "云数据库 veDB MySQL 版是火山引擎自研新一代云原生关系型数据库。云数据库 veDB MySQL 版 100% 兼容 MySQL，适用于企业多样化的数据库应用场景。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ChargeDetail/ChargeType",
+      "/properties/DBEngineVersion",
+      "/properties/InstanceId",
+      "/properties/InstanceName",
+      "/properties/InstanceStatus",
+      "/properties/NodeSpec",
+      "/properties/ProjectName",
+      "/properties/StorageChargeType",
+      "/properties/ZoneIds",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -508,6 +523,8 @@
     "/properties/TemplateId",
     "/properties/SuperAccountName",
     "/properties/SuperAccountPassword",
+    "/properties/ChargeDetail/Period",
+    "/properties/ChargeDetail/PeriodUnit",
     "/properties/Port",
     "/properties/Number",
     "/properties/NodeNumber",

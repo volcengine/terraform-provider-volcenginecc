@@ -164,6 +164,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Period is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: PeriodUnit
 				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -179,6 +180,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// PeriodUnit is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "计费详细信息。",
@@ -953,8 +955,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -985,7 +986,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1016,6 +1016,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// TemplateId is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1160,6 +1161,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/TemplateId",
 		"/properties/SuperAccountName",
 		"/properties/SuperAccountPassword",
+		"/properties/ChargeDetail/Period",
+		"/properties/ChargeDetail/PeriodUnit",
 		"/properties/Port",
 		"/properties/Number",
 		"/properties/NodeNumber",
@@ -1199,6 +1202,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ProjectName",
 		"/properties/VpcId",
 		"/properties/SubnetId",
+		"/properties/TemplateId",
 		"/properties/SuperAccountName",
 		"/properties/SuperAccountPassword",
 		"/properties/ZoneIds",

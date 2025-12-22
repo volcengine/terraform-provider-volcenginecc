@@ -8,7 +8,8 @@
     "/properties/MaxConcurrency",
     "/properties/MemoryMB",
     "/properties/Metadata",
-    "/properties/RequestTimeout"
+    "/properties/RequestTimeout",
+    "/properties/FunctionId"
   ],
   "definitions": {
     "Env": {
@@ -47,10 +48,6 @@
           "type": "integer"
         }
       },
-      "required": [
-        "Command",
-        "Port"
-      ],
       "type": "object"
     },
     "InstanceTosMountConfig": {
@@ -111,6 +108,19 @@
     }
   },
   "description": "沙箱实例是云沙箱中实际执行沙箱镜像的安全且隔离的容器运行环境。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/FunctionId",
+      "/properties/SandboxId",
+      "/properties/Status",
+      "/properties/InstanceImageInfo/Image",
+      "/properties/Metadata/*/Key",
+      "/properties/Metadata/*/Value"
+    ],
+    "required": [
+      "/properties/FunctionId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -122,6 +132,11 @@
       "permissions": [
         "vefaas:KillSandbox",
         "vefaas:DescribeSandbox"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vefaas:ListSandboxes"
       ]
     },
     "read": {

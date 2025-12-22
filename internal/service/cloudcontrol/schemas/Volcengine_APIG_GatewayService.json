@@ -55,6 +55,13 @@
     }
   },
   "description": "服务是一组路由对外暴露的入口，用于区分流量的来源和协议，实现业务、环境、逻辑租户隔离。服务可以绑定独立的访问域名，以域名维度访问业务。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/GatewayId",
+      "/properties/ServiceName",
+      "/properties/Status"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
