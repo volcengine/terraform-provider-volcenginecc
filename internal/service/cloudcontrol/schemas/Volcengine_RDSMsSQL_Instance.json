@@ -1,0 +1,501 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AllowListIds",
+    "/properties/DBEngineVersion",
+    "/properties/TimeZone",
+    "/properties/InstanceType",
+    "/properties/MaintenanceTime",
+    "/properties/NodeSpec",
+    "/properties/ProjectName",
+    "/properties/ServerCollation",
+    "/properties/StorageSpace",
+    "/properties/SubnetId",
+    "/properties/SuperAccountPassword",
+    "/properties/VpcId",
+    "/properties/ZoneId",
+    "/properties/Tags",
+    "/properties/ChargeInfo/AutoRenew",
+    "/properties/ChargeInfo/ChargeType",
+    "/properties/ChargeInfo/Period",
+    "/properties/ChargeInfo/PeriodUnit"
+  ],
+  "definitions": {
+    "Address": {
+      "properties": {
+        "DNSVisibility": {
+          "description": "表示是否开启私网到公网解析，取值如下：true：表示开启私网到公网解析。false：表示不开启私网到公网解析。",
+          "type": "boolean"
+        },
+        "Domain": {
+          "description": "域名。",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "EIP的ID，仅对公网地址有效。",
+          "type": "string"
+        },
+        "IPAddress": {
+          "description": "IP地址。",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "网络地址类型。取值：Private：私网类型。Public：公网类型。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口。",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "子网 ID，仅对私网地址有效。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Charge": {
+      "properties": {
+        "AutoRenew": {
+          "description": "预付费场景下是否自动续费。true：自动续费（默认）。false：不自动续费。",
+          "type": "boolean"
+        },
+        "ChargeEndTime": {
+          "description": "计费到期时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+          "type": "string"
+        },
+        "ChargeStartTime": {
+          "description": "计费开始时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+          "type": "string"
+        },
+        "ChargeStatus": {
+          "description": "付费状态。取值：Normal：表示实例正常。Overdue：表示实例欠费。Unpaid：表示实例等待支付。",
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "付费类型。取值：PostPaid：表示按量付费。PrePaid：表示包年包月。",
+          "enum": [
+            "PostPaid",
+            "PrePaid"
+          ],
+          "type": "string"
+        },
+        "OverdueReclaimTime": {
+          "description": "欠费关停时预计释放时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+          "type": "string"
+        },
+        "OverdueTime": {
+          "description": "欠费关停时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+          "type": "string"
+        },
+        "Period": {
+          "description": "预付费场景下的购买时长。默认值：1。",
+          "type": "integer"
+        },
+        "PeriodUnit": {
+          "description": "预付费场景下的购买周期。Month：表示包月(默认值)。Year：表示包年。",
+          "enum": [
+            "Month",
+            "Year"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Connection": {
+      "properties": {
+        "Address": {
+          "description": "地址列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Address"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Description": {
+          "description": "描述信息。",
+          "type": "string"
+        },
+        "EndpointId": {
+          "description": "终端 ID。",
+          "type": "string"
+        },
+        "EndpointName": {
+          "description": "终端名称。",
+          "type": "string"
+        },
+        "EndpointType": {
+          "description": "终端类型。取值如下：Primary：表示主节点终端。ROCluster：表示只读集群终端。RO：表示只读节点终端。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NodeDetail": {
+      "properties": {
+        "CreateTime": {
+          "description": "节点的创建时间。",
+          "type": "string"
+        },
+        "InstanceId": {
+          "description": "实例ID。",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "内存大小，单位为 GiB。",
+          "type": "integer"
+        },
+        "NodeIP": {
+          "description": "节点IP。",
+          "type": "string"
+        },
+        "NodeId": {
+          "description": "节点ID。",
+          "type": "string"
+        },
+        "NodeSpec": {
+          "description": "节点规格。",
+          "type": "string"
+        },
+        "NodeStatus": {
+          "description": "节点状态，取值为：Running：运行中。Creating：创建中。Deleting：删除中。Restarting：重启中。Updating：变更中。MasterChanging：主备切换中。Error：错误。",
+          "type": "string"
+        },
+        "NodeType": {
+          "description": "节点类型。取值：Primary：表示主节点终端。ReadOnly：表示只读节点终端。Secondary：表示备节点终端。",
+          "type": "string"
+        },
+        "RegionId": {
+          "description": "区域ID。",
+          "type": "string"
+        },
+        "UpdateTime": {
+          "description": "更新时间。",
+          "type": "string"
+        },
+        "VCPU": {
+          "description": "vCPU 数量。",
+          "type": "integer"
+        },
+        "ZoneId": {
+          "description": "可用区ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "云数据库 SQL Server 版是基于世界一流的商用型数据库产品 Microsoft SQL Server 打造的一种稳定、可靠、可弹性伸缩的在线数据库服务。实例是使用云数据库 SQL Server 版的第一步",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/DBEngineVersion",
+      "/properties/InstanceCategory",
+      "/properties/InstanceId",
+      "/properties/InstanceName",
+      "/properties/InstanceStatus",
+      "/properties/InstanceType",
+      "/properties/PrimaryInstanceId",
+      "/properties/ProjectName",
+      "/properties/ServerCollation",
+      "/properties/ZoneId",
+      "/properties/ChargeInfo/ChargeType",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_mssql:CreateDBInstance",
+        "rds_mssql:DescribeDBInstanceDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_mssql:DeleteDBInstance",
+        "rds_mssql:DescribeDBInstanceDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_mssql:DescribeDBInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_mssql:DescribeDBInstanceDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_mssql:ModifyDBInstanceName",
+        "rds_mssql:ModifyDBFailover",
+        "rds_mssql:ModifyInstanceAdvancedFeatures",
+        "rds_mssql:DescribeDBInstanceDetail"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AdvancedFeatures": {
+      "description": "需要修改的实例高级特性。该接口当前属于加白接口，如需使用，您可以联系技术支持。示例值：{\"Key\":\"Value\"}",
+      "type": "string"
+    },
+    "AllowListIds": {
+      "description": "允许访问的白名单ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BackupUse": {
+      "description": "实例已用备份空间。单位：GiB。",
+      "type": "number"
+    },
+    "ChargeInfo": {
+      "$ref": "#/definitions/Charge",
+      "description": "付费方式。",
+      "type": "object"
+    },
+    "ConnectionInfo": {
+      "description": "连接信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Connection"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DBEngineVersion": {
+      "description": "兼容版本。取值如下：SQLServer_2019_Std：表示 SQL Server 2019 标准版。SQLServer_2019_Ent：表示 SQL Server 2019 企业版。SQLServer_2019_Web：表示 SQL Server 2019 Web 版。SQLServer_2022_Std：表示 SQL Server 2022 标准版。SQLServer_2022_Ent：表示 SQL Server 2022 企业版。SQLServer_2022_Web：表示 SQL Server 2022 Web 版。",
+      "type": "string"
+    },
+    "InnerVersion": {
+      "description": "内核版本号。",
+      "type": "string"
+    },
+    "InstanceCategory": {
+      "description": "实例分类。取值：Primary：主实例。ReadOnly：只读实例。",
+      "enum": [
+        "Primary",
+        "ReadOnly"
+      ],
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "实例名称。实例名称的命名规则如下：不能以数字、中划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在 1~128 之间。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceStatus": {
+      "description": "实例状态，取值：Running：运行中。Creating：创建中。CreateFailed：创建失败。Deleting：删除中。Restarting：重启中。Updating：变更中。MasterChanging：主节点切换中。Error：错误。",
+      "enum": [
+        "Running",
+        "Creating",
+        "CreateFailed",
+        "Deleting",
+        "Restarting",
+        "Updating",
+        "MasterChanging",
+        "Error"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "实例类型。取值如下：HA（高可用）、Basic（基础版）、Cluster（集群版）。不同引擎版本支持的类型不同：2019 Std 支持 HA/Basic；2019 Ent 支持 Cluster/Basic；2019 Web 支持 Basic。",
+      "type": "string"
+    },
+    "MaintenanceTime": {
+      "description": "实例的可维护时间段。格式：HH:mmZ-HH:mmZ（UTC时间）。默认取值为 UTC18:00Z-21:59Z（即北京时间 02:00-05:59）。说明：为保护云数据库的稳定性，系统会不定期对实例进行维护。可维护时间段建议设置在业务低峰期，避免对业务造成影响。在可维护时间段内，实例可能会出现 1~2 次的连接闪断，需确保应用程序具有自动重连机制。可维护时间段最小时间间隔 1 小时，最大时间间隔 24 小时，不允许跨天选择可维护时间段。",
+      "type": "string"
+    },
+    "MasterNodeId": {
+      "description": "主节点ID。手动切换主备节点时，该参数为必填项。",
+      "type": "string"
+    },
+    "Memory": {
+      "description": "内存大小，单位为 GiB。",
+      "type": "integer"
+    },
+    "NodeDetailInfo": {
+      "description": "实例节点信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NodeDetail"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "NodeSpec": {
+      "description": "实例规格代码。",
+      "type": "string"
+    },
+    "Port": {
+      "description": "端口",
+      "type": "string"
+    },
+    "PrimaryInstanceId": {
+      "description": "主实例ID。如果为空说明它是主实例。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "所属项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ReadOnlyNumber": {
+      "description": "只读实例数量。",
+      "type": "integer"
+    },
+    "ServerCollation": {
+      "default": "Chinese_PRC_CI_AS",
+      "description": "实例字符集排序规则，默认 Chinese_PRC_CI_AS。目前已支持大多数原生字符集具体取值如下：Latin1_General_CI_AS，Latin1_General_CS_AS，SQL_Latin1_General_CP1_CI_AS，SQL_Latin1_General_CP1_CS_AS，Chinese_PRC_CI_AS，Chinese_PRC_CS_AS，Chinese_PRC_BIN，Japanese_CI_AS，Japanese_CS_AS，Chinese_Taiwan_Stroke_CI_AS，Chinese_Taiwan_Stroke_CS_AS，Thai_CI_AS，Chinese_PRC_CI_AI，Chinese_PRC_BIN2，Cyrillic_General_CI_AS。",
+      "type": "string"
+    },
+    "SlowQueryEnable": {
+      "description": "表示是否开启慢日志，取值如下：true：表示开启慢日志。false：表示不开启慢日志。",
+      "type": "boolean"
+    },
+    "SlowQueryTime": {
+      "description": "慢日志的阈值，取值范围为 [1~10]，单位：秒（s）。",
+      "type": "string"
+    },
+    "StorageSpace": {
+      "description": "存储空间大小，单位为 GiB。取值范围：20GiB ~ 4000GiB，步长为 10GiB。",
+      "maximum": 4000,
+      "minimum": 20,
+      "type": "integer"
+    },
+    "StorageType": {
+      "description": "实例存储类型。",
+      "type": "string"
+    },
+    "StorageUse": {
+      "description": "实例已用储空间。单位：GiB。",
+      "type": "number"
+    },
+    "SubnetId": {
+      "description": "子网 ID。当主备节点不在同一个可用区时，主备节点的子网也需设置为对应可用区私有网络下的子网，多个可用区需使用英文分号（;）隔开。",
+      "type": "string"
+    },
+    "SuperAccountPassword": {
+      "description": "高权限账号的密码。密码规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的至少三种组成。特殊字符为 !@#$%^\u0026*()_+-=。",
+      "maxLength": 32,
+      "minLength": 8,
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TimeZone": {
+      "description": "时区。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VCPU": {
+      "description": "CPU 大小。例如：1 表示 1核。",
+      "type": "integer"
+    },
+    "VpcId": {
+      "description": "VPC ID",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "节点所在可用区。当主备节点不在同一个可用区时，您可以使用英文分号（;）隔开，默认第一个为主节点可用区，第二个为备节点可用区。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/CreatedTime",
+    "/properties/InstanceCategory",
+    "/properties/InstanceStatus",
+    "/properties/Port",
+    "/properties/PrimaryInstanceId",
+    "/properties/ReadOnlyNumber",
+    "/properties/StorageType",
+    "/properties/ConnectionInfo",
+    "/properties/NodeDetailInfo",
+    "/properties/BackupUse",
+    "/properties/UpdatedTime",
+    "/properties/SlowQueryEnable",
+    "/properties/StorageUse",
+    "/properties/Memory",
+    "/properties/InnerVersion",
+    "/properties/SlowQueryTime",
+    "/properties/VCPU",
+    "/properties/ChargeInfo/ChargeEndTime",
+    "/properties/ChargeInfo/ChargeStartTime",
+    "/properties/ChargeInfo/ChargeStatus",
+    "/properties/ChargeInfo/OverdueReclaimTime",
+    "/properties/ChargeInfo/OverdueTime"
+  ],
+  "required": [
+    "DBEngineVersion",
+    "TimeZone",
+    "InstanceType",
+    "NodeSpec",
+    "StorageSpace",
+    "SubnetId",
+    "SuperAccountPassword",
+    "VpcId",
+    "ZoneId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::RDSMsSQL::Instance",
+  "writeOnlyProperties": [
+    "/properties/AllowListIds",
+    "/properties/SuperAccountPassword",
+    "/properties/MasterNodeId",
+    "/properties/AdvancedFeatures"
+  ]
+}

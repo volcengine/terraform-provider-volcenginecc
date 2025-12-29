@@ -1,0 +1,111 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/VaultName",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "备份库标签。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "用于存放您的备份数据。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/VaultId",
+      "/properties/ProjectName",
+      "/properties/VaultName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cbr:CreateVault",
+        "cbr:DescribeVaults"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cbr:DeleteVault",
+        "cbr:DescribeVaults"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cbr:DescribeVaults"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cbr:DescribeVaults"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/VaultId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Endpoint": {
+      "description": "访问域名。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "备份库标签。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "VaultId": {
+      "description": "备份库 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "VaultName": {
+      "description": "备份库名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/Endpoint",
+    "/properties/VaultId",
+    "/properties/Tags"
+  ],
+  "required": [
+    "VaultName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CBR::Vault"
+}

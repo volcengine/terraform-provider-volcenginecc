@@ -1,0 +1,218 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/ZoneName",
+    "/properties/Tags"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "该域名的标签。默认为空。",
+      "properties": {
+        "Key": {
+          "description": "标签的键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签的值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "资源里的zone就是域名，可以是主域名 例如 example.com，也可以是子域名 例如 abc.example.com",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ZoneName",
+      "/properties/ProjectName",
+      "/properties/Stage",
+      "/properties/TradeCode",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dns:CreateZone",
+        "dns:QueryZone",
+        "dns:ListZones"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dns:DeleteZone",
+        "dns:QueryZone",
+        "dns:ListZones"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dns:ListZones"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dns:QueryZone",
+        "dns:ListZones"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dns:UpdateZone",
+        "dns:QueryZone",
+        "dns:ListZones"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ZID"
+  ],
+  "properties": {
+    "AllocateDNSServerList": {
+      "description": "云解析 DNS 分配给域名的 DNS 服务器列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AutoRenew": {
+      "description": "是否开启域名自动续费。true：开启域名自动续费。false：关闭域名自动续费。",
+      "type": "boolean"
+    },
+    "CacheStage": {
+      "description": "域名所有权的状态。该参数有以下取值：0：表示您是域名的所有者。您添加此域名后，就可以管理该域名的 DNS 解析。1：表示您不是域名的所有者。您添加此域名后，该域名的状态是 域名待找回。如果您要管理该域名的 DNS 解析，您需要在控制台根据提示验证您的域名所有权。",
+      "type": "integer"
+    },
+    "CreatedTime": {
+      "description": "域名的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DnsSecurity": {
+      "description": "DNS DDoS 防护服务的版本。dns_security_standard_inner：安全防护标准版。\"\"：无安全防护版。",
+      "type": "string"
+    },
+    "ExpiredTime": {
+      "description": "实例的过期时间。格式是 Unix 时间戳。对于云解析 DNS 免费版，该字段的值为 null。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "InstanceID": {
+      "description": "实例的 ID。对于云解析 DNS 免费版，该字段的值为 null。",
+      "type": "string"
+    },
+    "InstanceNo": {
+      "description": "实例的 ID。对于云解析 DNS 免费版，该字段的值为 null。",
+      "type": "string"
+    },
+    "IsNSCorrect": {
+      "description": "DNS 服务器的配置是否正确。如果配置正确，该域名在云解析 DNS 中的状态是 正常。该参数有以下取值：true： RealDNSServerList的 DNS 服务器列表包含所有 AllocateDNSServerList中的 DNS 服务器。此时，DNS 服务器的配置是正确的。false： RealDNSServerList的 DNS 服务器列表包含部分或者未包含 AllocateDNSServerList中的 DNS 服务器。此时，DNS 服务器的配置是不正确的。",
+      "type": "boolean"
+    },
+    "IsSubDomain": {
+      "description": "是否是子域名。true：子域名。false：主域名。",
+      "type": "boolean"
+    },
+    "LastOperator": {
+      "description": "创建该域名的用户的账号的 ID。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "域名的项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RealDNSServerList": {
+      "description": "域名实际使用的 DNS 服务器列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RecordCount": {
+      "description": "域名所包含的解析记录的总数。",
+      "type": "integer"
+    },
+    "Remark": {
+      "description": "域名的备注。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Stage": {
+      "description": "域名的状态。该参数有以下取值：0：正常。在该状态下，该域名的解析记录处于生效状态。1：域名待找回。在该状态下，该域名的解析记录不生效。该状态表示您不是该域名的所有者。如果您需要管理域名解析，您需要验证您的域名所有权。2：未使用TrafficRoute解析。在该状态下，该域名的解析记录不生效。该状态表示分配给该域名的 DNS 服务器不是云解析 DNS 的 DNS 服务器。3：异常。在该状态下，该域名的解析记录不生效。引起该状态的常见原因如下：域名未实名认证导致域名被注册局或注册商停用。域名未配置 DNS 服务器。域名未注册。API 在查询域名时超时。超时原因可能是网络问题。5：请变更DNS服务器。该状态表示由于云解析 DNS 的服务升级或变更，您需要把域名的 DNS 服务器更新为云解析 DNS 新分配的 DNS 服务器。",
+      "semantic": "status",
+      "type": "integer"
+    },
+    "SubDomainHost": {
+      "description": "子域名的域名前缀。如果该域名不是子域名，那么该参数为 null。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "该域名的标签。默认为空。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TradeCode": {
+      "description": "域名的功能版本。该参数有以下取值：free_inner：免费版。professional_inner：专业版。enterprise_inner：企业版。ultimate_inner：旗舰版。ultimate_exclusive_inner：尊享版。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "域名最近一次的更新时间。更新操作包括：更新域名备注在域名下创建解析记录。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "ZID": {
+      "description": "域名的 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ZoneName": {
+      "description": "域名。",
+      "semantic": "resourceName",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CacheStage",
+    "/properties/CreatedTime",
+    "/properties/InstanceID",
+    "/properties/LastOperator",
+    "/properties/ZID",
+    "/properties/AllocateDNSServerList",
+    "/properties/AutoRenew",
+    "/properties/DnsSecurity",
+    "/properties/ExpiredTime",
+    "/properties/InstanceNo",
+    "/properties/IsNSCorrect",
+    "/properties/IsSubDomain",
+    "/properties/RealDNSServerList",
+    "/properties/RecordCount",
+    "/properties/Stage",
+    "/properties/SubDomainHost",
+    "/properties/TradeCode",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "ZoneName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::DNS::Zone"
+}

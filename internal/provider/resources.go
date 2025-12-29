@@ -85,6 +85,19 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_hbase_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_HBase_Instance.json -package hbase -- ../volcengine/hbase/instance_resource_gen.go ../volcengine/hbase/instance_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_kms_key -ccschema ../service/cloudcontrol/schemas/Volcengine_KMS_Key.json -package kms -- ../volcengine/kms/key_resource_gen.go ../volcengine/kms/key_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_apig_custom_domain -ccschema ../service/cloudcontrol/schemas/Volcengine_APIG_CustomDomain.json -package apig -- ../volcengine/apig/custom_domain_resource_gen.go ../volcengine/apig/custom_domain_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_bmq_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_BMQ_Instance.json -package bmq -- ../volcengine/bmq/instance_resource_gen.go ../volcengine/bmq/instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_storageebs_snapshot -ccschema ../service/cloudcontrol/schemas/Volcengine_StorageEBS_Snapshot.json -package storageebs -- ../volcengine/storageebs/snapshot_resource_gen.go ../volcengine/storageebs/snapshot_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cloudidentity_user -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudIdentity_User.json -package cloudidentity -- ../volcengine/cloudidentity/user_resource_gen.go ../volcengine/cloudidentity/user_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_privatelink_endpoint_service -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateLink_EndpointService.json -package privatelink -- ../volcengine/privatelink/endpoint_service_resource_gen.go ../volcengine/privatelink/endpoint_service_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rocketmq_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_RocketMQ_Instance.json -package rocketmq -- ../volcengine/rocketmq/instance_resource_gen.go ../volcengine/rocketmq/instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cbr_vault -ccschema ../service/cloudcontrol/schemas/Volcengine_CBR_Vault.json -package cbr -- ../volcengine/cbr/vault_resource_gen.go ../volcengine/cbr/vault_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cbr_backup_resource -ccschema ../service/cloudcontrol/schemas/Volcengine_CBR_BackupResource.json -package cbr -- ../volcengine/cbr/backup_resource_resource_gen.go ../volcengine/cbr/backup_resource_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cbr_backup_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_CBR_BackupPolicy.json -package cbr -- ../volcengine/cbr/backup_policy_resource_gen.go ../volcengine/cbr/backup_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cbr_backup_plan -ccschema ../service/cloudcontrol/schemas/Volcengine_CBR_BackupPlan.json -package cbr -- ../volcengine/cbr/backup_plan_resource_gen.go ../volcengine/cbr/backup_plan_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rdsmssql_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSMsSQL_Instance.json -package rdsmssql -- ../volcengine/rdsmssql/instance_resource_gen.go ../volcengine/rdsmssql/instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_firewallcenter_dns_control_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_FireWallCenter_DnsControlPolicy.json -package firewallcenter -- ../volcengine/firewallcenter/dns_control_policy_resource_gen.go ../volcengine/firewallcenter/dns_control_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_dns_zone -ccschema ../service/cloudcontrol/schemas/Volcengine_DNS_Zone.json -package dns -- ../volcengine/dns/zone_resource_gen.go ../volcengine/dns/zone_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_iam_project -ccschema ../service/cloudcontrol/schemas/Volcengine_IAM_Project.json -package iam -- ../volcengine/iam/project_resource_gen.go ../volcengine/iam/project_resource_gen_test.go
 
 package provider
 
@@ -93,14 +106,19 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/apig"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/bmq"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cbr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cdn"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cen"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cloudidentity"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/dns"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/firewallcenter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/hbase"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
@@ -108,10 +126,13 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/mongodb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/natgateway"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/organization"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatelink"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/privatezone"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rabbitmq"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmssql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rdsmysql"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rocketmq"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"

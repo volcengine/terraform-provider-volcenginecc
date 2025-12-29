@@ -1,0 +1,185 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "AddressInfo": {
+      "properties": {
+        "Address": {
+          "description": "具体地址信息。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "描述信息。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "地址类型。支持的取值如下所示。ip：IPv4 地址；ipv6：IPv6 地址；domain：域名；port：端口。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SourceInfo": {
+      "properties": {
+        "Region": {
+          "description": "VPC地域信息。",
+          "type": "string"
+        },
+        "VpcId": {
+          "description": "VPC ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "域名黑名单访问控制策略。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Description",
+      "/properties/Destination",
+      "/properties/InternetFirewallId",
+      "/properties/RuleId",
+      "/properties/Sources/*/VpcId",
+      "/properties/Status"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fw_center:AddDnsControlPolicy",
+        "fw_center:DescribeDnsControlPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fw_center:DeleteDnsControlPolicy",
+        "fw_center:DescribeDnsControlPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fw_center:DescribeDnsControlPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fw_center:DescribeDnsControlPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fw_center:ModifyDnsControlPolicy",
+        "fw_center:DescribeDnsControlPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/RuleId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "用户的唯一标识ID。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "策略的描述信息。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Destination": {
+      "description": "访问目的，可以是域名或域名地址簿的唯一标识ID。当前仅支持一个地址簿。",
+      "type": "string"
+    },
+    "DestinationGroupList": {
+      "description": "域名地址簿名称列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DestinationType": {
+      "description": "访问目的的类型。domain：域名；group：域名地址簿。",
+      "enum": [
+        "domain",
+        "group"
+      ],
+      "type": "string"
+    },
+    "DomainList": {
+      "description": "域名列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DomainListV1": {
+      "description": "域名地址簿的域名列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AddressInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "HitCnt": {
+      "description": "命中计数，表示该域名黑名单访问控制策略被触发的次数。",
+      "type": "integer"
+    },
+    "InternetFirewallId": {
+      "description": "互联网边界防火墙实例ID。",
+      "type": "string"
+    },
+    "LastHitTime": {
+      "description": "最近命中时间戳，表示该域名黑名单访问控制策略最后一次被触发的时间。",
+      "type": "integer"
+    },
+    "RuleId": {
+      "description": "访问控制策略的唯一标识ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Sources": {
+      "description": "访问源信息，包含VPC列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SourceInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Status": {
+      "description": "域名黑名单访问控制策略的开关状态。false：关闭；true：开启。",
+      "semantic": "status",
+      "type": "boolean"
+    },
+    "UseCount": {
+      "description": "该域名黑名单访问控制策略占用的策略数量。",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/HitCnt",
+    "/properties/RuleId",
+    "/properties/UseCount",
+    "/properties/AccountId",
+    "/properties/DomainList",
+    "/properties/LastHitTime",
+    "/properties/DomainListV1",
+    "/properties/DestinationGroupList"
+  ],
+  "required": [
+    "Destination",
+    "DestinationType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::FireWallCenter::DnsControlPolicy",
+  "writeOnlyProperties": [
+    "/properties/InternetFirewallId"
+  ]
+}

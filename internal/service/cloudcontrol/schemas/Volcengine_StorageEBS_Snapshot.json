@@ -1,0 +1,236 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/VolumeId"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "快照的标签信息",
+      "properties": {
+        "Key": {
+          "description": "为资源添加的用户标签的标签键。命名规则如下：不能以任何大小写形式的volc:或sys:开头。volc:或sys:开头为系统预留标签键禁止创建。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "Value": {
+          "description": "为资源添加的用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "快照是一种备份方式，每个快照都是云盘数据在某个时间点的备份文件。当数据丢失或故障时，您可以通过快照回滚云盘数据，找回丢失的数据。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/SnapshotId",
+      "/properties/VolumeId",
+      "/properties/SnapshotName",
+      "/properties/Status",
+      "/properties/ZoneId",
+      "/properties/CreationTime",
+      "/properties/ProjectName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "storage_ebs:CreateSnapshot",
+        "storage_ebs:DescribeSnapshots"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "storage_ebs:DeleteSnapshot",
+        "storage_ebs:DescribeSnapshots",
+        "ecs:DeleteImages"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "storage_ebs:DescribeSnapshots"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "storage_ebs:DescribeSnapshots"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "storage_ebs:ModifySnapshotAttribute",
+        "storage_ebs:DeleteTags",
+        "storage_ebs:CreateTags",
+        "storage_ebs:DescribeSnapshots"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SnapshotId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "快照创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "default": "",
+      "description": "快照描述信息，默认为空，长度限制为0~255个字符。",
+      "maxLength": 255,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "ImageId": {
+      "description": "镜像ID",
+      "type": "string"
+    },
+    "InstantAccess": {
+      "description": "快照是否开启极速可用能力，取值说明如下：true：已开启极速可用能力。false：未开启极速可用能力。",
+      "type": "boolean"
+    },
+    "Progress": {
+      "description": "快照转储进度。",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "快照所要加入的Project（项目）名称。注意快照不会继承云盘的项目，即快照与云盘可以所属不同的项目。如果您在创建快照时未设置ProjectName，快照会默认加入default项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RetentionDays": {
+      "description": "快照保留时间，单位为天，取值说明如下：空：永久保留快照 。1~65536：指定保存天数。默认为空，即默认永久保留快照。说明快照保留时间从快照创建时刻开始计算。",
+      "type": "integer"
+    },
+    "Shared": {
+      "description": "快照是否共享。",
+      "type": "boolean"
+    },
+    "SnapshotGroupId": {
+      "description": "快照一致性组ID。",
+      "type": "string"
+    },
+    "SnapshotId": {
+      "description": "快照ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SnapshotName": {
+      "description": "创建的快照名称。命名规范如下：长度限制为1~128个字符。只能包含中文、字母、数字、下划线（_）、中划线（-）和英文句号（.）。为防止和自动快照的名称冲突，不能以“auto”开头。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "SnapshotType": {
+      "description": "快照类型，取值说明如下：user：查询手动快照。auto：查询自动快照。share：查询共享快照。默认查询所有快照。",
+      "enum": [
+        "user",
+        "auto",
+        "share"
+      ],
+      "type": "string"
+    },
+    "Status": {
+      "description": "快照状态，取值说明如下：available：可用。creating：创建中。rollbacking：回滚中。deleted：已删除。failed：错误。",
+      "enum": [
+        "available",
+        "creating",
+        "rollbacking",
+        "deleted",
+        "failed"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "快照的标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "VolumeId": {
+      "description": "快照相关的云盘ID。",
+      "type": "string"
+    },
+    "VolumeKind": {
+      "description": "云盘种类，取值说明如下：system：系统盘。data：数据盘。",
+      "type": "string"
+    },
+    "VolumeName": {
+      "description": "云盘名称。",
+      "type": "string"
+    },
+    "VolumeSize": {
+      "description": "云盘大小，单位为GiB。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "VolumeStatus": {
+      "description": "云盘状态，取值说明如下：available：可用, attaching：挂载中, attached：已挂载, detaching：卸载中, creating：创建中, deleting：删除中, error：错误, extending：扩容中, \"\"：云盘被删除。 ",
+      "enum": [
+        "available",
+        "attaching",
+        "attached",
+        "detaching",
+        "creating",
+        "deleting",
+        "error",
+        "extending",
+        ""
+      ],
+      "type": "string"
+    },
+    "VolumeType": {
+      "description": "云盘类型，取值说明如下：ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL：极速型SSD云盘，FlexPL规格。TSSD_TL0：吞吐型SSD云盘",
+      "enum": [
+        "ESSD_PL0",
+        "ESSD_FlexPL",
+        "TSSD_TL0"
+      ],
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "快照所在的可用区ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/SnapshotId",
+    "/properties/CreationTime",
+    "/properties/Status",
+    "/properties/SnapshotType",
+    "/properties/Progress",
+    "/properties/InstantAccess",
+    "/properties/Shared",
+    "/properties/SnapshotGroupId",
+    "/properties/ImageId",
+    "/properties/VolumeKind",
+    "/properties/VolumeName",
+    "/properties/VolumeSize",
+    "/properties/VolumeStatus",
+    "/properties/VolumeType",
+    "/properties/ZoneId"
+  ],
+  "required": [
+    "VolumeId",
+    "SnapshotName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::StorageEBS::Snapshot"
+}

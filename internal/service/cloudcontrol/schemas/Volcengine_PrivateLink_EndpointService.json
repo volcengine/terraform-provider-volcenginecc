@@ -1,0 +1,279 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Payer",
+    "/properties/ProjectName",
+    "/properties/ServiceNameManaged",
+    "/properties/ServiceNameSuffix",
+    "/properties/ServiceOwner",
+    "/properties/ServiceResourceType",
+    "/properties/ServiceType",
+    "/properties/WildcardDomainEnabled",
+    "/properties/Resources"
+  ],
+  "definitions": {
+    "PrivateDNSNameConfiguration": {
+      "description": "终端节点服务私有DNS名称的配置信息。说明PrivateDNSType为private时，不返回该参数。",
+      "properties": {
+        "Name": {
+          "description": "域验证名称。",
+          "type": "string"
+        },
+        "Status": {
+          "description": "域验证状态。PendingVerification：待验证Verifying：验证中Verified：验证通过Failed：验证失败",
+          "type": "string"
+        },
+        "Type": {
+          "description": "域验证类型。TXT：TXT记录。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "域验证值。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Resource": {
+      "properties": {
+        "InstanceId": {
+          "description": "终端节点服务ID。",
+          "type": "string"
+        },
+        "ResourceId": {
+          "description": "待添加到终端节点服务中的服务资源ID。",
+          "type": "string"
+        },
+        "ZoneIds": {
+          "description": "负载均衡提供服务的可用区。",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "终端节点服务标签的键值对。",
+      "properties": {
+        "Key": {
+          "description": "终端节点服务标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "终端节点服务标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "终端节点服务是可以与其他VPC通过终端节点建立私网连接的服务。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/ServiceId",
+      "/properties/ServiceName",
+      "/properties/ServiceResourceType",
+      "/properties/ServiceType",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "privatelink:CreateVpcEndpointService",
+        "privatelink:DescribeVpcEndpointServiceAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "privatelink:DeleteVpcEndpointService",
+        "privatelink:DescribeVpcEndpointServiceAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "privatelink:DescribeVpcEndpointServices"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "privatelink:DescribeVpcEndpointServiceAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "privatelink:ModifyVpcEndpointServiceAttributes",
+        "privatelink:UntagResources",
+        "privatelink:TagResources",
+        "privatelink:DescribeVpcEndpointServiceAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ServiceId"
+  ],
+  "properties": {
+    "AutoAcceptEnabled": {
+      "description": "是否自动接受终端节点连接。true：终端节点服务自动接受终端节点连接。false：终端节点服务不会自动接受终端节点连接，需要调用EnableVpcEndpointConnection接口手动接受。",
+      "type": "boolean"
+    },
+    "BillingType": {
+      "description": "终端节点服务的计费类型。0：不计费。3：按量计费。",
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "终端节点服务是否被锁定。Normal：正常。FinancialLocked：被锁定。说明该参数返回为空时，表示终端节点服务未锁定。",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "终端节点服务的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "终端节点服务的描述信息。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "IpAddressVersions": {
+      "description": "终端节点服务的IP协议类型。返回值中仅包含ipv4时，说明该终端节点服务为IPv4类型，仅支持提供IPv4服务。返回值中同时包含ipv4和ipv6时，说明该终端节点服务为双栈类型，支持同时提供IPv4和IPv6服务。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Payer": {
+      "description": "私网连接的付费账号。Endpoint：终端节点账号。EndpointService：终端节点服务账号。",
+      "type": "string"
+    },
+    "PrivateDNSEnabled": {
+      "description": "终端节点服务是否启用私有DNS名称。false：未启用。true：已启用。",
+      "type": "boolean"
+    },
+    "PrivateDNSName": {
+      "description": "终端节点服务的私有DNS名称。参数PrivateDNSEnabled返回值为false时，该参数返回空。",
+      "type": "string"
+    },
+    "PrivateDNSNameConfiguration": {
+      "$ref": "#/definitions/PrivateDNSNameConfiguration",
+      "description": "终端节点服务私有DNS名称的配置信息。说明PrivateDNSType为private时，不返回该参数。",
+      "type": "object"
+    },
+    "PrivateDNSType": {
+      "description": "私有DNS名称的域名类型。public：公网。说明未开通自定义私网域名功能时，不返回该参数。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "终端节点服务所属的项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Resources": {
+      "description": "终端节点服务提供服务的资源。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Resource"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceDomain": {
+      "description": "终端节点服务的服务域名。",
+      "type": "string"
+    },
+    "ServiceId": {
+      "description": "终端节点服务的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ServiceName": {
+      "description": "终端节点服务的名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ServiceNameManaged": {
+      "description": "是否为托管终端节点服务。false：非托管终端节点服务。true：托管终端节点服务。说明终端节点服务所属账号未开通托管终端节点服务功能时，不返回该参数。",
+      "type": "string"
+    },
+    "ServiceNameSuffix": {
+      "description": "终端节点服务的名称后缀。设置名称后缀后，系统会按照com.volces.privatelink.\u003c地域ID\u003e.\u003c名称后缀\u003e的格式生成终端节点服务的名称。说明该参数正在邀测中，如需使用不同名称后缀区分业务，请联系客户经理。",
+      "type": "string"
+    },
+    "ServiceOwner": {
+      "description": "当前服务主体。",
+      "type": "string"
+    },
+    "ServiceResourceType": {
+      "description": "服务资源的类型。CLB：负载均衡CLB。ALB：应用型负载均衡ALB。RDSMySQL：云数据库 MySQL版。",
+      "type": "string"
+    },
+    "ServiceType": {
+      "description": "终端节点服务的类型。Interface：接口终端节点服务。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "终端节点服务的状态。Creating：创建中。Pending：配置修改中。Available：可用。Deleting：删除中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "终端节点服务的标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "终端节点服务的最近操作时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "WildcardDomainEnabled": {
+      "description": "是否启用通配符域名。true：启用。false：未启用。",
+      "type": "boolean"
+    },
+    "ZoneIds": {
+      "description": "终端节点服务提供服务的可用区。说明参数ServiceResourceType返回值为RDSMySQL时，该参数返回空值。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BillingType",
+    "/properties/BusinessStatus",
+    "/properties/CreateTime",
+    "/properties/PrivateDNSNameConfiguration",
+    "/properties/ServiceDomain",
+    "/properties/ServiceId",
+    "/properties/ServiceName",
+    "/properties/Status",
+    "/properties/UpdateTime",
+    "/properties/ZoneIds"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::PrivateLink::EndpointService",
+  "writeOnlyProperties": [
+    "/properties/ServiceNameSuffix",
+    "/properties/Resources"
+  ]
+}

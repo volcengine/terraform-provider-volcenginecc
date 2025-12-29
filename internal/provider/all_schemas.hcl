@@ -348,6 +348,58 @@ resource_schema "volcengine_apig_custom_domain" {
   cloudcontrol_type_name = "Volcengine::APIG::CustomDomain"
 }
 
+resource_schema "volcengine_bmq_instance" {
+  cloudcontrol_type_name = "Volcengine::BMQ::Instance"
+}
 
+resource_schema "volcengine_storageebs_snapshot" {
+  cloudcontrol_type_name = "Volcengine::StorageEBS::Snapshot"
+}
+
+resource_schema "volcengine_cloudidentity_user" {
+  cloudcontrol_type_name = "Volcengine::CloudIdentity::User"
+}
+
+resource_schema "volcengine_privatelink_endpoint_service" {
+  cloudcontrol_type_name = "Volcengine::PrivateLink::EndpointService"
+}
+
+resource_schema "volcengine_rocketmq_instance" {
+  cloudcontrol_type_name = "Volcengine::RocketMQ::Instance"
+}
+
+resource_schema "volcengine_cbr_vault" {
+  cloudcontrol_type_name = "Volcengine::CBR::Vault"
+}
+
+resource_schema "volcengine_cbr_backup_resource" {
+  cloudcontrol_type_name = "Volcengine::CBR::BackupResource"
+}
+
+resource_schema "volcengine_cbr_backup_policy" {
+  cloudcontrol_type_name = "Volcengine::CBR::BackupPolicy"
+}
+
+
+resource_schema "volcengine_cbr_backup_plan" {
+  cloudcontrol_type_name = "Volcengine::CBR::BackupPlan"
+}
+
+
+resource_schema "volcengine_rdsmssql_instance" {
+  cloudcontrol_type_name = "Volcengine::RDSMsSQL::Instance"
+}
+
+resource_schema "volcengine_firewallcenter_dns_control_policy" {
+  cloudcontrol_type_name = "Volcengine::FireWallCenter::DnsControlPolicy"
+}
+
+resource_schema "volcengine_dns_zone" {
+  cloudcontrol_type_name = "Volcengine::DNS::Zone"
+}
+
+resource_schema "volcengine_iam_project" {
+  cloudcontrol_type_name = "Volcengine::IAM::Project"
+}
 
 

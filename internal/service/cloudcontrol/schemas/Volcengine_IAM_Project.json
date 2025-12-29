@@ -1,0 +1,103 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/ParentProjectName"
+  ],
+  "description": "资源项目（Project）是提供的一种资源分组管理的机制，帮助您达成逻辑层面的资源隔离，您能够通过资源项目进行项目制授权和分账等操作。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateProject",
+        "iam:GetProject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeleteProject",
+        "iam:GetProject"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListProjects"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetProject"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateProject",
+        "iam:GetProject"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ProjectName"
+  ],
+  "properties": {
+    "AccountID": {
+      "description": "账号ID",
+      "type": "integer"
+    },
+    "CreatedTime": {
+      "description": "创建时间",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "描述",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "展示名",
+      "type": "string"
+    },
+    "HasPermission": {
+      "description": "是否可见",
+      "type": "boolean"
+    },
+    "ParentProjectName": {
+      "description": "父项目名称",
+      "type": "string"
+    },
+    "Path": {
+      "description": "项目路径",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Status": {
+      "description": "启用状态",
+      "semantic": "status",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountID",
+    "/properties/CreatedTime",
+    "/properties/Path",
+    "/properties/Status",
+    "/properties/UpdatedTime",
+    "/properties/HasPermission"
+  ],
+  "required": [
+    "ProjectName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::Project"
+}

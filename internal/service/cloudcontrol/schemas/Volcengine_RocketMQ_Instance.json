@@ -1,0 +1,368 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/EipId",
+    "/properties/EnableSSL",
+    "/properties/FileReservedTime",
+    "/properties/ProjectName",
+    "/properties/SSLMode",
+    "/properties/SubnetId",
+    "/properties/Version",
+    "/properties/VpcId",
+    "/properties/ZoneId",
+    "/properties/AllowListIds",
+    "/properties/IPVersionType",
+    "/properties/NetworkTypes"
+  ],
+  "definitions": {
+    "ChargeDetail": {
+      "description": "实例的计费方式等计费信息。",
+      "properties": {
+        "AutoRenew": {
+          "description": "包年包月实例到期后是否自动续费。true：自动续费。false：不自动续费。到期后需要手动续费，否则实例将被关停。",
+          "type": "boolean"
+        },
+        "ChargeExpireTime": {
+          "description": "包年包月实例的到期时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。按量付费实例此字段默认显示为 1970-01-01T00:00:00Z。",
+          "type": "string"
+        },
+        "ChargeStartTime": {
+          "description": "实例的开始计费时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        },
+        "ChargeStatus": {
+          "description": "实例的计费状态。包括：Normal：正常Overdue：按量计费欠费Expired：包年包月到期",
+          "enum": [
+            "Normal",
+            "Overdue",
+            "Expired"
+          ],
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "实例的计费类型。支持的类型包括：PostPaid ：按量付费PrePaid：包年包月",
+          "enum": [
+            "PostPaid",
+            "PrePaid"
+          ],
+          "type": "string"
+        },
+        "OverdueReclaimTime": {
+          "description": "实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        },
+        "OverdueTime": {
+          "description": "实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        },
+        "Period": {
+          "description": "包年包月类型实例的购买时长。PeriodUnit 指定为 Monthly 时，取值范围为 1~9。PeriodUnit 指定为 Yearly 时，取值范围为 1~3。仅包年包月类型的实例需要指定，即 ChargeType 指定为 PrePaid 时必选。",
+          "type": "integer"
+        },
+        "PeriodUnit": {
+          "description": "包年包月类型实例的生命周期单位，即指定以月或以年为单位购买。其中：Monthly：（默认）包月Yearly：包年",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ConnectionInfo": {
+      "description": "实例的连接信息。",
+      "properties": {
+        "EndpointAddressIP": {
+          "description": "实例的接入点 IP 地址。",
+          "type": "string"
+        },
+        "EndpointType": {
+          "description": "实例的接入点类型。",
+          "type": "string"
+        },
+        "InternalEndpoint": {
+          "description": "实例的私网接入点地址。",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "实例的接入点类型。",
+          "type": "string"
+        },
+        "PublicEndpoint": {
+          "description": "实例的公网接入点地址。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProductInfo": {
+      "description": "产品配置信息。说明仅 RocketMQ 5.x 版本实例支持调整实例的 TPS 占比。",
+      "properties": {
+        "SendReceiveRatio": {
+          "description": "修改读写限流比例，默认读写比例各占 50%。假设设置为 40，表示发送的 TPS 比列为 40%，订阅比列为 60%。说明仅 RocketMQ 5.x 版本实例支持调整实例的 TPS 占比。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "实例绑定的标签。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "消息队列 RocketMQ版是基于 Apache RocketMQ 构建的分布式消息中间件服务，完全兼容开源 RocketMQ 的各个组件与概念，同时具备低延迟、弹性高可靠、高吞吐等特性优势，业务代码无需改造，帮助用户快速迁移上云。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/InstanceName",
+      "/properties/InstanceStatus",
+      "/properties/ProjectName",
+      "/properties/ComputeSpec",
+      "/properties/ZoneId",
+      "/properties/VpcId",
+      "/properties/Version",
+      "/properties/ChargeDetail/ChargeType",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "RocketMQ:CreateInstance",
+        "RocketMQ:DescribeInstanceDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "RocketMQ:DeleteInstance",
+        "RocketMQ:DescribeInstanceDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "RocketMQ:DescribeInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "RocketMQ:DescribeInstanceDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "RocketMQ:ModifyInstanceAttributes",
+        "RocketMQ:ModifyInstanceSpec",
+        "RocketMQ:ModifyInstanceChargeType",
+        "RocketMQ:DescribeInstanceDetail",
+        "RocketMQ:RemoveTagsFromResource",
+        "RocketMQ:AddTagsToResource"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "实例所属的账号 ID。",
+      "type": "string"
+    },
+    "AllowListIds": {
+      "description": "实例绑定的白名单 ID 列表。绑定白名单后，仅配置在白名单中的 IP 地址与地址段才能访问此实例。如果实例未绑定任何白名单，表示禁止所有 IP 地址访问该实例。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ApplyPrivateDNSToPublic": {
+      "description": "是否已开启私网域名支持公网解析功能。true：已开启false：已关闭",
+      "type": "boolean"
+    },
+    "AutoScaleQueue": {
+      "description": "实例规格更改时，是否自动创建队列。",
+      "type": "boolean"
+    },
+    "AvailableQueueNumber": {
+      "description": "剩余可创建的分区数量。",
+      "type": "integer"
+    },
+    "ChargeDetail": {
+      "$ref": "#/definitions/ChargeDetail",
+      "description": "实例的计费方式等计费信息。",
+      "type": "object"
+    },
+    "ComputeSpec": {
+      "description": "实例的计算规格。您可以在产品规格中查看目前在售的计算规格列表。",
+      "type": "string"
+    },
+    "ConnectionInfo": {
+      "description": "实例的连接信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ConnectionInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreateTime": {
+      "description": "实例的创建时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "EipId": {
+      "description": "EIP 的 ID。指定 EipId 表示开启实例的公网访问。EIP 提供独立的公网 IP 资源，包括公网 IP 地址与公网出口带宽服务。指定此参数开启公网访问后，公网地址将绑定您的弹性公网IP（EIP），费用由EIP收取。",
+      "type": "string"
+    },
+    "EnableSSL": {
+      "description": "是否使用 SSL 加密。",
+      "type": "boolean"
+    },
+    "FileReservedTime": {
+      "description": "消息在消息队列 RocketMQ版服务端的保留时长，超过保留时长的消息将被过期清理。单位为小时，取值范围为 1~72 小时。",
+      "type": "integer"
+    },
+    "IPVersionType": {
+      "description": "IP 版本， 可选直为 IPv4 或者 DualStack。",
+      "type": "string"
+    },
+    "InstanceDescription": {
+      "description": "实例的简单描述。长度范围为 1~128 个字符。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "实例的名称。 需满足以下要求：只能包含中文、字母、数字、下划线（_）和连字符（-）。不能以数字和连字符（-）开头。长度范围为 1~128 个字符。如果创建实例时未指定名称，则默认将实例 ID 作为实例名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceStatus": {
+      "description": "实例状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "NetworkTypes": {
+      "description": "实例网络类型，固定为 PrivateNetwork。",
+      "type": "string"
+    },
+    "ProductInfo": {
+      "$ref": "#/definitions/ProductInfo",
+      "description": "产品配置信息。说明仅 RocketMQ 5.x 版本实例支持调整实例的 TPS 占比。",
+      "type": "object"
+    },
+    "ProjectName": {
+      "description": "当前创建的实例所属的 IAM 项目。若未设置，则会将新实例绑定到名为 default 的 IAM 项目中。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RegionId": {
+      "description": "实例所在的地域 ID。",
+      "type": "string"
+    },
+    "SSLMode": {
+      "description": "实例的公网连接策略，仅在开启公网访问时需要设置。支持设置为：enforcing：通过公网访问实例时，必须经由 SSL 认证。SSL 认证可实现数据的加密传输，相较于普通公网访问方式具备更高的安全性，但性能会有所下降。permissive：通过公网访问实例时，可以选择是否经由 SSL 认证。创建实例后，公网访问为开启状态时，不能修改 SSL 连接策略。如需修改，需要为实例关闭并重新开启公网访问，在重新开启时再次设置 SSL 连接策略。详细说明请参考设置公网访问与 SSL 认证策略。",
+      "type": "string"
+    },
+    "StorageSpace": {
+      "description": "实例的存储空间。单位为 GiB，必须指定为 100 的倍数。取值范围取决于当前指定的计算规格。",
+      "type": "integer"
+    },
+    "SubnetId": {
+      "description": "实例所在的 VPC 子网 ID。实例创建完成后，不可修改对应的私有网络和子网。创建实例时请谨慎操作。您可以调用私有网络（VPC）的 DescribeVpcs 接口查询可用的VPC和子网列表。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "云资源标签。可以将实例通过标签进行归类，便于实例的搜索和资源聚合。详细说明请参考标签概述。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UsedGroupNumber": {
+      "description": "当前实例已经创建的消费组（Group）个数。",
+      "type": "integer"
+    },
+    "UsedQueueNumber": {
+      "description": "实例已经使用的队列数。",
+      "type": "integer"
+    },
+    "UsedStorageSpace": {
+      "description": "实例已用储空间。单位为 GiB。",
+      "type": "integer"
+    },
+    "UsedTopicNumber": {
+      "description": "当前实例已创建的 Topic 个数。",
+      "type": "integer"
+    },
+    "Version": {
+      "description": "支持的 RocketMQ 版本。当前支持的版本包括：4.8：兼容 RocketMQ 4.x 版本系列。5.x：兼容 RocketMQ 5.x 版本系列。目前 5.x 版本处于加白阶段，如需使用请联系技术支持申请开白。",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "实例所在的私有网络（VPC） ID。实例创建完成后，不可修改对应的私有网络和子网。创建实例时请谨慎操作。您可以调用私有网络（VPC）的 DescribeVpcs 接口查询可用的VPC和子网列表。",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "实例所在的可用区 ID。消息队列 RocketMQ版实例支持跨 AZ 部署，查看指定可用区下提供哪些计算规格时，可以指定多个可用区。多个可用区 ID 之间以逗号（,）间隔。您可以调用 DescribeAvailabilityZones 查询当前提供服务的可用区列表。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/ApplyPrivateDNSToPublic",
+    "/properties/AvailableQueueNumber",
+    "/properties/ConnectionInfo",
+    "/properties/CreateTime",
+    "/properties/InstanceId",
+    "/properties/InstanceStatus",
+    "/properties/RegionId",
+    "/properties/UsedGroupNumber",
+    "/properties/UsedQueueNumber",
+    "/properties/UsedStorageSpace",
+    "/properties/UsedTopicNumber"
+  ],
+  "required": [
+    "Version",
+    "ZoneId",
+    "ComputeSpec",
+    "StorageSpace",
+    "VpcId",
+    "SubnetId",
+    "FileReservedTime",
+    "ChargeDetail",
+    "NetworkTypes"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::RocketMQ::Instance",
+  "writeOnlyProperties": [
+    "/properties/AllowListIds",
+    "/properties/IPVersionType",
+    "/properties/NetworkTypes",
+    "/properties/AutoScaleQueue",
+    "/properties/ProductInfo"
+  ]
+}
