@@ -1,0 +1,115 @@
+{
+  "additionalProperties": false,
+  "description": "云身份中心用户，与企业员工身份一一映射。云身份中心用户是一种身份类型，可与某个账号下的IAM用户身份进行唯一关联并单点登录。云身份中心提供企业员工身份全生命周期管理、权限管理能力，推荐您在本产品内统一管理员工身份。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Source",
+      "/properties/UserName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudidentity:CreateUser",
+        "cloudidentity:ResetPassword",
+        "cloudidentity:GetUser"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudidentity:DeleteUser",
+        "cloudidentity:GetUser"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudidentity:ListUsers"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudidentity:GetUser"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudidentity:UpdateUser",
+        "cloudidentity:ResetPassword",
+        "cloudidentity:GetUser"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/UserId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "用户描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "用户显示名。",
+      "type": "string"
+    },
+    "Email": {
+      "description": "邮箱。",
+      "type": "string"
+    },
+    "IdentityType": {
+      "description": "身份类型。",
+      "type": "string"
+    },
+    "Password": {
+      "description": "密码。密码长度8-32位字符,包含大写字母、小写字母、数字和物特殊符号至少3种。",
+      "type": "string"
+    },
+    "PasswordResetRequired": {
+      "description": "首次登陆需不需要重置密码。",
+      "type": "boolean"
+    },
+    "Phone": {
+      "description": "手机号。",
+      "type": "string"
+    },
+    "Source": {
+      "description": "用户来源。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UserId": {
+      "description": "用户id。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "UserName": {
+      "description": "用户名。",
+      "semantic": "resourceName",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/IdentityType",
+    "/properties/Source",
+    "/properties/UserId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudIdentity::User",
+  "writeOnlyProperties": [
+    "/properties/Password",
+    "/properties/PasswordResetRequired"
+  ]
+}

@@ -1,0 +1,392 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/EipId",
+    "/properties/BillingType",
+    "/properties/BillingPeriod",
+    "/properties/Times",
+    "/properties/AutoRenew",
+    "/properties/Description",
+    "/properties/ProjectName",
+    "/properties/VpcId",
+    "/properties/ZoneIdList",
+    "/properties/SubnetIdList",
+    "/properties/Specification",
+    "/properties/SecurityGroupIdList"
+  ],
+  "definitions": {
+    "EndpointInfo": {
+      "properties": {
+        "Address": {
+          "description": "域名映射地址。",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "实例绑定的EIP的ID。",
+          "type": "string"
+        },
+        "Plain": {
+          "description": "私网Plain接入点。",
+          "type": "string"
+        },
+        "PlainPort": {
+          "description": "普通接入点端口。",
+          "type": "integer"
+        },
+        "Sasl": {
+          "description": "私网SASL认证接入点。",
+          "type": "string"
+        },
+        "SaslPort": {
+          "description": "认证接入点端口。",
+          "type": "integer"
+        },
+        "Ssl": {
+          "description": "加密接入点。",
+          "type": "string"
+        },
+        "SslPort": {
+          "description": "加密接入点端口。",
+          "type": "integer"
+        },
+        "Status": {
+          "description": "接入点状态。",
+          "type": "string"
+        },
+        "VpcIds": {
+          "description": "售卖区网络关联的VPC ID列表。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "Endpoints": {
+      "properties": {
+        "Overlay": {
+          "$ref": "#/definitions/EndpointInfo",
+          "description": "实例私网访问接入点响应数据。",
+          "type": "object"
+        },
+        "Public": {
+          "$ref": "#/definitions/EndpointInfo",
+          "description": "实例公网访问接入点响应数据。",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceTag": {
+      "properties": {
+        "TagKvs": {
+          "description": "标签键值对。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Type": {
+          "description": "标签类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Resources": {
+      "properties": {
+        "Storage": {
+          "$ref": "#/definitions/Storage",
+          "description": "资源统计响应数据。"
+        }
+      },
+      "type": "object"
+    },
+    "Storage": {
+      "properties": {
+        "Size": {
+          "description": "资源大小。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Unit": {
+          "description": "资源单位。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "实例标签的类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "云原生消息引擎 100% 兼容 Apache Kafka 协议，基于云原生的全托管、高吞吐、低时延、高可用、高可扩展性、高稳定性的分布式消息引擎服务，支持灵活动态扩缩容和流批一体计算，提供企业级大数据量级的实时流数据处理能力，帮助您构建数据处理的“中枢神经系统”，广泛应用于日志收集、数据聚合、离线数据分析等业务场景。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/Name",
+      "/properties/Status",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bmq:CreateInstance",
+        "bmq:DescribeInstance",
+        "bmq:ModifyInstanceTag",
+        "bmq:EnableOverlayAccess",
+        "bmq:EnablePublicAccess"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bmq:DeleteInstance",
+        "bmq:DescribeInstances"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bmq:DescribeInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bmq:DescribeInstance"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bmq:ModifyInstanceAttributes",
+        "bmq:DescribeInstance",
+        "bmq:ModifyInstanceTag",
+        "bmq:UpdateInstanceMessageRetention",
+        "bmq:EnableOverlayAccess",
+        "bmq:DisableOverlayAccess",
+        "bmq:ModifyOverlayAccess",
+        "bmq:EnablePublicAccess",
+        "bmq:DisablePublicAccess"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AutoRenew": {
+      "description": "是否开启自动续费，取值如下：true：开启自动续费。false：关闭自动续费。",
+      "type": "string"
+    },
+    "BillingPeriod": {
+      "description": "购买时长的单位，取值如下：MONTHLY：按月购买。YEARLY：按年购买。",
+      "type": "string"
+    },
+    "BillingType": {
+      "description": "实例的计费方式，取值如下：POST：按量计费。MIX：包年包月。",
+      "enum": [
+        "POST",
+        "MIX"
+      ],
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "实例的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "实例的描述语句。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EipId": {
+      "description": "实例是否开启公网访问。如果需要开启公网访问，请配置相同地域的公网 IP 的 ID。",
+      "type": "string"
+    },
+    "Endpoints": {
+      "$ref": "#/definitions/Endpoints",
+      "description": "实例所有接入点响应数据。",
+      "type": "object"
+    },
+    "ExpirationTime": {
+      "description": "实例过期时间。",
+      "type": "string"
+    },
+    "GroupLimit": {
+      "description": "实例消费组数量上限。",
+      "type": "integer"
+    },
+    "InstanceId": {
+      "description": "实例ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "MessageRetention": {
+      "description": "实例下所有 Topic 的消息保留时长，单位为小时。",
+      "type": "integer"
+    },
+    "Name": {
+      "description": "自定设置 BMQ 实例的名称，约束限制如下：由小写字母、数字和中划线（-）组成。长度为 1~64 字符。",
+      "maxLength": 64,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PartitionLimit": {
+      "description": "实例分区数量上限。",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "实例所属项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ResourceTags": {
+      "description": "实例资源标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ResourceTag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Resources": {
+      "$ref": "#/definitions/Resources",
+      "description": "实例资源统计响应数据。",
+      "type": "object"
+    },
+    "SecurityGroupIdList": {
+      "description": "实例使用安全组列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Specification": {
+      "description": "实例规格。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "实例的状态。取值如下：INITIALIZING：初始化中，INITIALIZATION_FAILED：初始化失败，RUNNING：运行中，MODIFYING：更新中，MODIFY_FAILED：更新失败，RELEASING：释放中，STOPPING：停止中，STOPPED：停止，RECOVERING：恢复中，EXCEPTION：异常，CAPACITY_EXPAXION_FAILED：扩容失败，EXPANDING_CAPACITY：扩容中，CANCEL_EXPANDING_CAPACITY：扩容取消中，RESTARTING：重启中，UNPAID：未支付",
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetIdList": {
+      "description": "实例使用的子网列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Tags": {
+      "description": "实例资源标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Times": {
+      "description": "包年包月类型实例的购买时长，单位为月。",
+      "type": "integer"
+    },
+    "TopicLimit": {
+      "description": "实例Topic数量上限。",
+      "type": "integer"
+    },
+    "VpcId": {
+      "description": "实例所在VPC ID。",
+      "type": "string"
+    },
+    "ZoneIdList": {
+      "description": "实例所在可用区列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/Status",
+    "/properties/CreatedTime",
+    "/properties/GroupLimit",
+    "/properties/TopicLimit",
+    "/properties/Resources",
+    "/properties/ResourceTags",
+    "/properties/ExpirationTime",
+    "/properties/PartitionLimit",
+    "/properties/Endpoints/Public/Ssl",
+    "/properties/Endpoints/Public/Sasl",
+    "/properties/Endpoints/Public/Plain",
+    "/properties/Endpoints/Public/Status",
+    "/properties/Endpoints/Public/VpcIds",
+    "/properties/Endpoints/Public/Address",
+    "/properties/Endpoints/Public/SslPort",
+    "/properties/Endpoints/Public/SaslPort",
+    "/properties/Endpoints/Public/PlainPort",
+    "/properties/Endpoints/Overlay/Ssl",
+    "/properties/Endpoints/Overlay/Sasl",
+    "/properties/Endpoints/Overlay/EipId",
+    "/properties/Endpoints/Overlay/Plain",
+    "/properties/Endpoints/Overlay/Status",
+    "/properties/Endpoints/Overlay/Address",
+    "/properties/Endpoints/Overlay/SslPort",
+    "/properties/Endpoints/Overlay/SaslPort",
+    "/properties/Endpoints/Overlay/PlainPort"
+  ],
+  "required": [
+    "Name",
+    "ProjectName",
+    "BillingType",
+    "VpcId",
+    "ZoneIdList",
+    "SubnetIdList",
+    "Specification",
+    "SecurityGroupIdList"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::BMQ::Instance",
+  "writeOnlyProperties": [
+    "/properties/EipId",
+    "/properties/BillingPeriod",
+    "/properties/Times",
+    "/properties/AutoRenew"
+  ]
+}

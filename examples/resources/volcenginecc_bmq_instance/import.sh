@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_bmq_instance.example "instance_id"

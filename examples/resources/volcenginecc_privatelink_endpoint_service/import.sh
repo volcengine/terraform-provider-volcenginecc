@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_privatelink_endpoint_service.example "service_id"

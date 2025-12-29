@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cbr_backup_resource.example "resource_id"

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cbr_vault.example "vault_id"

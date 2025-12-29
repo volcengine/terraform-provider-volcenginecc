@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_storageebs_snapshot.example "snapshot_id"

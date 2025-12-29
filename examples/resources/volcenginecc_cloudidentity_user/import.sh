@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cloudidentity_user.example "user_id"

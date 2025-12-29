@@ -1,0 +1,126 @@
+{
+  "additionalProperties": false,
+  "description": "备份策略中定义了备份周期、备份类型等信息。后续通过备份计划关联备份策略与备份存储空间，实现自动备份。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/EnablePolicy",
+      "/properties/Name",
+      "/properties/PolicyId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cbr:CreateBackupPolicy",
+        "cbr:DescribeBackupPolicies"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cbr:DeleteBackupPolicy",
+        "cbr:DescribeBackupPolicies"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cbr:DescribeBackupPolicies"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cbr:DescribeBackupPolicies"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cbr:UpdateBackupPolicy",
+        "cbr:DescribeBackupPolicies"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PolicyId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "创建此策略的账户 ID。",
+      "type": "string"
+    },
+    "BackupType": {
+      "description": "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+      "enum": [
+        "FULL",
+        "INCREMENTAL"
+      ],
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Crontab": {
+      "description": "备份周期，采用 crontab 表达式。",
+      "type": "string"
+    },
+    "EnablePolicy": {
+      "description": "策略是否启用，取值说明如下：true：启用策略。false：禁用策略。",
+      "type": "boolean"
+    },
+    "Name": {
+      "description": "策略名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PlanNumber": {
+      "description": "该策略已关联的备份计划数量。",
+      "type": "integer"
+    },
+    "PolicyId": {
+      "description": "备份策略 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RetentionDay": {
+      "description": "恢复点保留时间，-1 表示持续保留。其它合法取值的范围是[1, 999999]",
+      "type": "integer"
+    },
+    "RetentionNumMax": {
+      "description": "最大恢复点保留数量。",
+      "type": "integer"
+    },
+    "RetentionNumMin": {
+      "description": "最小恢复点保留数量下限。",
+      "type": "integer"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/PolicyId",
+    "/properties/AccountId",
+    "/properties/CreatedTime",
+    "/properties/PlanNumber",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "BackupType",
+    "Crontab",
+    "EnablePolicy",
+    "Name",
+    "RetentionDay",
+    "RetentionNumMax",
+    "RetentionNumMin"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CBR::BackupPolicy",
+  "writeOnlyProperties": [
+    "/properties/RetentionNumMax",
+    "/properties/RetentionNumMin"
+  ]
+}

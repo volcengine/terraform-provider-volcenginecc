@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_dns_zone.example "zid"

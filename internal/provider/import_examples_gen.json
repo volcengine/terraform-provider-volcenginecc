@@ -413,5 +413,70 @@
         "resource": "volcenginecc_apig_custom_domain",
         "identifier": ["CustomDomainId"],
         "path": "./examples/resources/volcenginecc_apig_custom_domain/import.sh"
+    },
+    {
+        "resource": "volcenginecc_bmq_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_bmq_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_storageebs_snapshot",
+        "identifier": ["SnapshotId"],
+        "path": "./examples/resources/volcenginecc_storageebs_snapshot/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudidentity_user",
+        "identifier": ["UserId"],
+        "path": "./examples/resources/volcenginecc_cloudidentity_user/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatelink_endpoint_service",
+        "identifier": ["ServiceId"],
+        "path": "./examples/resources/volcenginecc_privatelink_endpoint_service/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rocketmq_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_rocketmq_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cbr_vault",
+        "identifier": ["VaultId"],
+        "path": "./examples/resources/volcenginecc_cbr_vault/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cbr_backup_resource",
+        "identifier": ["ResourceId"],
+        "path": "./examples/resources/volcenginecc_cbr_backup_resource/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cbr_backup_policy",
+        "identifier": ["PolicyId"],
+        "path": "./examples/resources/volcenginecc_cbr_backup_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cbr_backup_plan",
+        "identifier": ["PlanId"],
+        "path": "./examples/resources/volcenginecc_cbr_backup_plan/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmssql_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_rdsmssql_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_firewallcenter_dns_control_policy",
+        "identifier": ["RuleId"],
+        "path": "./examples/resources/volcenginecc_firewallcenter_dns_control_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_dns_zone",
+        "identifier": ["ZID"],
+        "path": "./examples/resources/volcenginecc_dns_zone/import.sh"
+    },
+    {
+        "resource": "volcenginecc_iam_project",
+        "identifier": ["ProjectName"],
+        "path": "./examples/resources/volcenginecc_iam_project/import.sh"
     }
 ]

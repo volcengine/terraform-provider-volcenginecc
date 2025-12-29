@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_firewallcenter_dns_control_policy.example "rule_id"

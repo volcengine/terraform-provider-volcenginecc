@@ -1,0 +1,192 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "MetaInformation": {
+      "description": "资源的meta信息，创建备份计划时，用于存储额外的配置。",
+      "properties": {
+        "EcsMeta": {
+          "description": "ECS 的元数据，是一个 JSON string。",
+          "type": "string"
+        },
+        "VepfsMeta": {
+          "description": "vePFS 备份源元数据，是一个 JSON string。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Policy": {
+      "description": "备份策略。",
+      "properties": {
+        "AccountId": {
+          "description": "创建此策略的账户 ID。",
+          "type": "string"
+        },
+        "BackupType": {
+          "description": "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+          "type": "string"
+        },
+        "CreatedTime": {
+          "description": "创建时间。",
+          "type": "string"
+        },
+        "Crontab": {
+          "description": "用于指定备份周期，支持标准 crontab 表达式配置。",
+          "type": "string"
+        },
+        "EnablePolicy": {
+          "description": "是否启用策略，取值说明如下：true：启用策略。false：禁用策略。",
+          "type": "boolean"
+        },
+        "Name": {
+          "description": "策略名称。",
+          "type": "string"
+        },
+        "PlanNumber": {
+          "description": "该策略已关联的备份计划数量。",
+          "type": "integer"
+        },
+        "PolicyId": {
+          "description": "备份策略 ID。",
+          "type": "string"
+        },
+        "RetentionDay": {
+          "description": "恢复点保留时间，-1 表示持续保留。",
+          "type": "integer"
+        },
+        "UpdatedTime": {
+          "description": "更新时间。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceList": {
+      "description": "备份源列表项。",
+      "properties": {
+        "MetaInformation": {
+          "$ref": "#/definitions/MetaInformation",
+          "description": "资源的meta信息，创建备份计划时，用于存储额外的配置。",
+          "type": "object"
+        },
+        "ResourceId": {
+          "description": "备份源 ID。",
+          "type": "string"
+        },
+        "ResourceType": {
+          "description": "备份源类型，取值如下：ECS：ECS 整机备份。vePFS：vePFS 文件系统备份。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "MetaInformation",
+        "ResourceId",
+        "ResourceType"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "当需要对备份源进行自动备份时，可以创建备份计划，在备份计划中关联备份源和备份策略，指定备份存储空间，并设置备份数据保留规则等。在创建备份计划后，系统将按照关联备份策略配置，对指定备份源进行统一自动备份。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/PlanId",
+      "/properties/Name"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cbr:CreateBackupPlan",
+        "cbr:DescribeBackupPlans"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cbr:DeleteBackupPlan",
+        "cbr:DescribeBackupPlans"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cbr:DescribeBackupPlans"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cbr:DescribeBackupPlans"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cbr:UpdateBackupPlan",
+        "cbr:DescribeBackupPlans"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PlanId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "创建此计划的账户 ID。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Name": {
+      "description": "备份计划名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PlanId": {
+      "description": "备份计划 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Policy": {
+      "$ref": "#/definitions/Policy",
+      "description": "备份策略。",
+      "type": "object"
+    },
+    "PolicyId": {
+      "description": "备份策略 ID。",
+      "type": "string"
+    },
+    "ResourceList": {
+      "description": "备份源列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ResourceList"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/CreatedTime",
+    "/properties/PlanId",
+    "/properties/Policy",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "Name",
+    "ResourceList"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CBR::BackupPlan",
+  "writeOnlyProperties": [
+    "/properties/ResourceList",
+    "/properties/PolicyId"
+  ]
+}
