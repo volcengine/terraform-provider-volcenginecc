@@ -95,7 +95,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。",
-		//	  "maximum": 255,
+		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -133,6 +133,18 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子网所在VPC实例所属项目的名称。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReadIpv6CidrBlock
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "只读字段，子网IPv6网段。",
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"read_ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "只读字段，子网IPv6网段。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTable
@@ -207,9 +219,9 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "子网的标签信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "子网的标签信息。",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "用户标签的标签键。",
@@ -243,7 +255,8 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "子网的标签信息。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TotalIpv4Count
 		// Cloud Control resource type schema:
@@ -318,6 +331,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                        "Key",
 		"network_acl_id":             "NetworkAclId",
 		"project_name":               "ProjectName",
+		"read_ipv_6_cidr_block":      "ReadIpv6CidrBlock",
 		"route_table":                "RouteTable",
 		"route_table_id":             "RouteTableId",
 		"route_table_type":           "RouteTableType",

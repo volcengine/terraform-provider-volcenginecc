@@ -23,14 +23,14 @@ Data Source schema for Volcengine::VPC::SecurityGroup
 
 - `creation_time` (String) 安全组创建时间。
 - `description` (String) 安全组的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不填默认空字符串。
-- `egress_permissions` (Attributes List) 安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。 (see [below for nested schema](#nestedatt--egress_permissions))
-- `ingress_permissions` (Attributes List) 安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。 (see [below for nested schema](#nestedatt--ingress_permissions))
+- `egress_permissions` (Attributes Set) 安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。 (see [below for nested schema](#nestedatt--egress_permissions))
+- `ingress_permissions` (Attributes Set) 安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。 (see [below for nested schema](#nestedatt--ingress_permissions))
 - `project_name` (String) 安全组所属项目名称。不填默认项目为default。
 - `security_group_id` (String) 安全组ID。
 - `security_group_name` (String) 安全组的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认是安全组的ID。
 - `service_managed` (Boolean) 安全组是否为托管安全组。true为托管安全组，false为非托管安全组。
 - `status` (String) 安全组状态。Available为可用，Creating为创建中。
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
 - `type` (String) 安全组类型。1、default：默认安全组。2、normal：自定义安全组。3、VpnGW： VPN网关安全组。4、NatGW： Nat网关安全组。 5、cidr_only：CIDR-Only安全组。
 - `vpc_id` (String) 安全组所属的VPC ID。
 

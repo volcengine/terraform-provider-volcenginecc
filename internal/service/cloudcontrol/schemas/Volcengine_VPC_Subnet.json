@@ -37,6 +37,20 @@
     }
   },
   "description": "子网是在指定可用区内分配的一段VPC网段内的网段，它为云上资源（如云服务器、负载均衡等）提供私网IP地址。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/IsDefault",
+      "/properties/RouteTable/RouteTableId",
+      "/properties/SubnetId",
+      "/properties/SubnetName",
+      "/properties/AccountId",
+      "/properties/VpcId",
+      "/properties/ZoneId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -103,7 +117,7 @@
     },
     "Ipv6CidrBlock": {
       "description": "子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。",
-      "maximum": 255,
+      "maxLength": 255,
       "type": "string"
     },
     "IsDefault": {
@@ -119,9 +133,15 @@
       "semantic": "projectName",
       "type": "string"
     },
+    "ReadIpv6CidrBlock": {
+      "description": "只读字段，子网IPv6网段。",
+      "maxLength": 255,
+      "type": "string"
+    },
     "RouteTable": {
       "$ref": "#/definitions/RouteTable",
-      "description": "路由表信息。"
+      "description": "路由表信息。",
+      "type": "object"
     },
     "Status": {
       "description": "子网的状态。1、Pending：表示配置中。2、Available：表示可用。",
@@ -141,10 +161,10 @@
       "type": "string"
     },
     "Tags": {
+      "description": "子网的标签信息。",
       "insertionOrder": false,
       "items": {
-        "$ref": "#/definitions/Tag",
-        "description": "子网的标签信息。"
+        "$ref": "#/definitions/Tag"
       },
       "semantic": "tags",
       "type": "array",
@@ -180,7 +200,8 @@
     "/properties/TotalIpv4Count",
     "/properties/UpdatedTime",
     "/properties/AccountId",
-    "/properties/ProjectName"
+    "/properties/ProjectName",
+    "/properties/ReadIpv6CidrBlock"
   ],
   "required": [
     "CidrBlock",
@@ -194,6 +215,7 @@
   },
   "typeName": "Volcengine::VPC::Subnet",
   "writeOnlyProperties": [
-    "/properties/EnableIpv6"
+    "/properties/EnableIpv6",
+    "/properties/Ipv6CidrBlock"
   ]
 }

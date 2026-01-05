@@ -351,6 +351,9 @@ Optional:
 - `login` (Attributes) 节点的访问方式配置。 (see [below for nested schema](#nestedatt--node_config--security--login))
 - `security_group_ids` (Set of String) 节点网络所在的安全组 ID 列表。
 - `security_strategies` (Set of String) 节点的安全策略，参数值说明：Hids：主机安全加固。
+
+Read-Only:
+
 - `security_strategy_enabled` (Boolean) 节点是否启用了安全加固配置，参数值说明：true：已开启。false：未开启。
 
 <a id="nestedatt--node_config--security--login"></a>
@@ -360,6 +363,9 @@ Optional:
 
 - `password` (String) Root 用户登录密码，使用 Base64 编码格式。请遵循云服务器对于实例密码的要求规范：长度为 8～30 个字符，不能以/和$6$开头，支持以下几项字符，且至少包含三项，小写字母a~z，大写字母A~Z，数字0~9，特殊字符( ) ` ~ ! @ # $ % ^ & * _   - + = | { } [ ] : ; ' < > , . ? /
 - `ssh_key_pair_name` (String) SSH 密钥对名称。请确保该密钥对已在云服务器中创建或托管。
+
+Read-Only:
+
 - `type` (String) 节点的访问登录方式，参数值说明：Password：密码登录。SshKeyPair：SSH 密钥对登录。
 
 

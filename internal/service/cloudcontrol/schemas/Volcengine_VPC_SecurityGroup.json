@@ -96,6 +96,16 @@
     }
   },
   "description": "安全组是一个逻辑意义上的分组，为同一个私有网络内具有相同安全保护需求并相互信任的网卡提供访问策略。您可以通过配置安全组规则，控制安全组关联网卡的出入流量。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/SecurityGroupId",
+      "/properties/SecurityGroupName",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -152,23 +162,24 @@
     },
     "EgressPermissions": {
       "description": "安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
-      "insertionOrder": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/RuleDescribeSecurityGroupAttribute"
       },
       "type": "array",
-      "uniqueItems": false
+      "uniqueItems": true
     },
     "IngressPermissions": {
       "description": "安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
-      "insertionOrder": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/RuleDescribeSecurityGroupAttribute"
       },
       "type": "array",
-      "uniqueItems": false
+      "uniqueItems": true
     },
     "ProjectName": {
+      "default": "default",
       "description": "安全组所属项目名称。不填默认项目为default。",
       "semantic": "projectName",
       "type": "string"
@@ -195,6 +206,7 @@
       "type": "string"
     },
     "Tags": {
+      "description": "标签列表。",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"

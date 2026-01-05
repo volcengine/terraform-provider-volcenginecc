@@ -23,12 +23,12 @@ Data Source schema for Volcengine::VKE::Addon
 
 - `cluster_id` (String) 组件所在集群 ID。
 - `config` (String) 组件配置。
-- `create_time` (String) 安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。
+- `created_time` (String) 安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。
 - `deploy_mode` (String) 组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。
 - `deploy_node_type` (String) 部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。
 - `name` (String) 组件名称。
 - `status` (Attributes) 组件状态。 (see [below for nested schema](#nestedatt--status))
-- `update_time` (String) 更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。
+- `updated_time` (String) 更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。
 - `version` (String) 组件版本。
 
 <a id="nestedatt--status"></a>
@@ -36,7 +36,7 @@ Data Source schema for Volcengine::VKE::Addon
 
 Read-Only:
 
-- `conditions` (Attributes List) 组件当前主状态下的状态条件。 (see [below for nested schema](#nestedatt--status--conditions))
+- `conditions` (Attributes Set) 组件当前主状态下的状态条件。 (see [below for nested schema](#nestedatt--status--conditions))
 - `phase` (String) 组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating
 
 <a id="nestedatt--status--conditions"></a>

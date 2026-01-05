@@ -3,9 +3,32 @@
   "createOnlyProperties": [
     "/properties/InstanceId",
     "/properties/SnapshotGroupId",
-    "/properties/SnapshotId"
+    "/properties/SnapshotId",
+    "/properties/ProjectName"
   ],
   "definitions": {
+    "DetectionResult": {
+      "properties": {
+        "DetectionStatus": {
+          "description": "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
+          "enum": [
+            "Finished",
+            "Processing"
+          ],
+          "type": "string"
+        },
+        "Items": {
+          "description": "镜像检测项详情。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Item"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
     "Item": {
       "properties": {
         "Name": {
@@ -60,13 +83,27 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "镜像是包含了云服务器实例所需的基本操作系统、应用数据的特殊文件。创建实例时，必须选择镜像。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ImageId",
+      "/properties/ImageName",
+      "/properties/Status",
+      "/properties/IsLTS",
+      "/properties/IsSupportCloudInit",
+      "/properties/OsType",
+      "/properties/Platform",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value",
+      "/properties/Visibility"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -137,26 +174,8 @@
       "type": "string"
     },
     "DetectionResults": {
+      "$ref": "#/definitions/DetectionResult",
       "description": "镜像的检测结果。",
-      "properties": {
-        "DetectionStatus": {
-          "description": "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
-          "enum": [
-            "Finished",
-            "Processing"
-          ],
-          "type": "string"
-        },
-        "Items": {
-          "description": "镜像检测项详情。",
-          "insertionOrder": false,
-          "items": {
-            "$ref": "#/definitions/Item"
-          },
-          "type": "array",
-          "uniqueItems": false
-        }
-      },
       "type": "object"
     },
     "ImageId": {
@@ -196,7 +215,7 @@
       "type": "string"
     },
     "LicenseType": {
-      "description": "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。",
+      "description": "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。",
       "enum": [
         "VolcanoEngine",
         "BYOL",
@@ -321,7 +340,14 @@
     "/properties/ShareStatus",
     "/properties/VirtualSize",
     "/properties/Visibility",
-    "/properties/BootMode"
+    "/properties/BootMode",
+    "/properties/DetectionResults",
+    "/properties/Kernel",
+    "/properties/LicenseType",
+    "/properties/OsName",
+    "/properties/OsType",
+    "/properties/Platform",
+    "/properties/PlatformVersion"
   ],
   "required": [
     "ImageName"

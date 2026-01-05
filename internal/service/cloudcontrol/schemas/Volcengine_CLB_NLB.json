@@ -19,8 +19,7 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     },
@@ -32,10 +31,12 @@
         },
         "Ipv4Address": {
           "description": "NLB实例的私网IPv4 VIP地址。该参数不传入，则系统自动从子网中分配一个可用的IPv4地址。",
+          "semantic": "privateIp",
           "type": "string"
         },
         "Ipv4EipAddress": {
           "description": "NLB实例的公网IPv4 EIP地址。",
+          "semantic": "publicIp",
           "type": "string"
         },
         "Ipv4EipId": {
@@ -89,6 +90,18 @@
     }
   },
   "description": "NLB 实例用于接收用户的访问请求，并根据监听器和服务器组的配置设定，将访问请求转发至后端服务器。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/LoadBalancerId",
+      "/properties/VpcId",
+      "/properties/LoadBalancerName",
+      "/properties/Status",
+      "/properties/IpAddressVersion",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -151,6 +164,7 @@
     },
     "CreatedTime": {
       "description": "NLB实例的创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "CrossZoneEnabled": {
@@ -165,6 +179,7 @@
     "Description": {
       "description": "NLB实例的描述。必须以字母、数字或中文开头，可包含以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。该参数不传入，则默认为空字符串。",
       "maxLength": 255,
+      "semantic": "description",
       "type": "string"
     },
     "ExpectedOverdueTime": {
@@ -205,10 +220,12 @@
     },
     "LoadBalancerId": {
       "description": "NLB实例ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "LoadBalancerName": {
       "description": "NLB实例的名称。",
+      "semantic": "resourceName",
       "type": "string"
     },
     "ManagedSecurityGroupId": {
@@ -230,6 +247,7 @@
     },
     "ProjectName": {
       "description": "NLB实例所属项目的名称。",
+      "semantic": "projectName",
       "type": "string"
     },
     "ReclaimedTime": {
@@ -256,6 +274,7 @@
         "Deleting",
         "CreateFailed"
       ],
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -264,11 +283,13 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
     "UpdatedTime": {
       "description": "NLB实例的更新时间。",
+      "semantic": "updatedTime",
       "type": "string"
     },
     "VpcId": {
@@ -277,10 +298,12 @@
     },
     "ZoneMappings": {
       "description": "NLB实例的可用区信息。",
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/ZoneMapping"
       },
-      "type": "array"
+      "type": "array",
+      "uniqueItems": true
     }
   },
   "readOnlyProperties": [

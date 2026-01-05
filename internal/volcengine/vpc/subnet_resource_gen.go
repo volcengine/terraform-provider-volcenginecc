@@ -128,16 +128,20 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。",
-		//	  "maximum": 255,
+		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。",
 			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(255),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Ipv6CidrBlock is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: IsDefault
 		// Cloud Control resource type schema:
@@ -176,6 +180,21 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子网所在VPC实例所属项目的名称。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ReadIpv6CidrBlock
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "只读字段，子网IPv6网段。",
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"read_ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "只读字段，子网IPv6网段。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -269,9 +288,9 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "子网的标签信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "子网的标签信息。",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "用户标签的标签键。",
@@ -316,8 +335,9 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "子网的标签信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -412,6 +432,7 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		"key":                        "Key",
 		"network_acl_id":             "NetworkAclId",
 		"project_name":               "ProjectName",
+		"read_ipv_6_cidr_block":      "ReadIpv6CidrBlock",
 		"route_table":                "RouteTable",
 		"route_table_id":             "RouteTableId",
 		"route_table_type":           "RouteTableType",
@@ -428,6 +449,7 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EnableIpv6",
+		"/properties/Ipv6CidrBlock",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -442,6 +464,7 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/UpdatedTime",
 		"/properties/AccountId",
 		"/properties/ProjectName",
+		"/properties/ReadIpv6CidrBlock",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

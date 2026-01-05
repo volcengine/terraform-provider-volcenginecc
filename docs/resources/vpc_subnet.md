@@ -42,7 +42,8 @@ resource "volcenginecc_vpc_subnet" "SubnetDemo" {
 - `enable_ipv_6` (Boolean) 开启/关闭IPv6功能。仅当子网所属的VPC开通IPv6功能时，可配置此参数。1、true：开启。2、false：关闭。仅当子网内没有分配IPv6地址的云资源时，可配置此取值。
 - `ipv_6_cidr_block` (String) 子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。
 - `subnet_name` (String) 子网的名称，长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-），不能以http://或https://开头，不填默认是子网的ID。
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 子网的标签信息。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -53,6 +54,7 @@ resource "volcenginecc_vpc_subnet" "SubnetDemo" {
 - `is_default` (Boolean) 该子网是否为默认子网。1、true：默认子网，表示该子网是创建ECS实例时系统自动创建的子网。2、false：非默认子网，表示该子网是用户手动创建的。
 - `network_acl_id` (String) 子网关联的网络ACL的ID。
 - `project_name` (String) 子网所在VPC实例所属项目的名称。
+- `read_ipv_6_cidr_block` (String) 只读字段，子网IPv6网段。
 - `route_table` (Attributes) 路由表信息。 (see [below for nested schema](#nestedatt--route_table))
 - `status` (String) 子网的状态。1、Pending：表示配置中。2、Available：表示可用。
 - `subnet_id` (String) 待修改信息的子网的ID。

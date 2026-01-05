@@ -13,16 +13,9 @@ description: |-
 
 ```terraform
 resource "volcenginecc_ecs_image" "ImageDemo" {
-  boot_mode        = "UEFI"
   description      = "ImageDemo Example"
   image_name       = "image-demo"
   instance_id      = "i-ydzhj1el8gr9cxxdnxxxx"
-  kernel           = "Linux"
-  license_type     = "BYOL"
-  os_name          = "CentOS"
-  os_type          = "Linux"
-  platform         = "CentOS"
-  platform_version = "8.3"
   project_name     = "default"
   share_permission = ["2000000***"]
   tags = [
@@ -44,14 +37,7 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 ### Optional
 
 - `description` (String) 镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。
-- `detection_results` (Attributes) 镜像的检测结果。 (see [below for nested schema](#nestedatt--detection_results))
 - `instance_id` (String) 实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。
-- `kernel` (String) 镜像的内核版本。
-- `license_type` (String) 镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。
-- `os_name` (String) 镜像操作系统的名称。
-- `os_type` (String) 操作系统类型。
-- `platform` (String) 镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。
-- `platform_version` (String) 镜像的发行版本。
 - `project_name` (String) 资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。
 - `share_permission` (Set of String) 镜像共享的账户
 - `snapshot_group_id` (String) 快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。
@@ -64,12 +50,19 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 - `architecture` (String) 镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。
 - `boot_mode` (String) 镜像的启动模式。可以选择BIOS、UEFI类型。
 - `created_at` (String) 镜像创建时间
+- `detection_results` (Attributes) 镜像的检测结果。 (see [below for nested schema](#nestedatt--detection_results))
 - `id` (String) Uniquely identifies the resource.
 - `image_id` (String) 镜像ID。
 - `image_owner_id` (String) 镜像所属的账号ID。
 - `is_install_run_command_agent` (Boolean) 镜像中是否安装了云助手Agent。
 - `is_lts` (Boolean) 公共镜像是否长期维护。
 - `is_support_cloud_init` (Boolean) 镜像是否支持Cloud-init。
+- `kernel` (String) 镜像的内核版本。
+- `license_type` (String) 镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。
+- `os_name` (String) 镜像操作系统的名称。
+- `os_type` (String) 操作系统类型。
+- `platform` (String) 镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。
+- `platform_version` (String) 镜像的发行版本。
 - `share_status` (String) 镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。
 - `size` (Number) 镜像大小，单位为GiB。
 - `snapshots` (Attributes Set) 镜像关联快照的信息。
@@ -79,10 +72,19 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 - `virtual_size` (Number) 镜像大小，单位为Byte。
 - `visibility` (String) 镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。
 
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) 镜像标签的标签键。
+- `value` (String) 镜像标签的值。
+
+
 <a id="nestedatt--detection_results"></a>
 ### Nested Schema for `detection_results`
 
-Optional:
+Read-Only:
 
 - `detection_status` (String) 检测状态。可以选择Finished（已完成）、Processing（处理中）类型。
 - `items` (Attributes List) 镜像检测项详情。
@@ -91,22 +93,13 @@ Optional:
 <a id="nestedatt--detection_results--items"></a>
 ### Nested Schema for `detection_results.items`
 
-Optional:
+Read-Only:
 
 - `name` (String) 检测项名称。
 - `result` (String) 该检测项对应结果。
 - `risk_code` (String) 风险描述码。
 - `risk_level` (String) 风险等级。若该参数返回值为空，表示无风险。
 
-
-
-<a id="nestedatt--tags"></a>
-### Nested Schema for `tags`
-
-Optional:
-
-- `key` (String) 镜像标签的标签键。
-- `value` (String) 镜像标签的值。
 
 
 <a id="nestedatt--snapshots"></a>

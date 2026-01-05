@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
@@ -58,14 +59,14 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: CreateTime
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -148,6 +149,7 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "Conditions": {
 		//	      "description": "组件当前主状态下的状态条件。",
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "组件状态条件。",
 		//	        "properties": {
@@ -158,7 +160,8 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
 		//	      "description": "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
@@ -170,39 +173,43 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		"status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Conditions
-				"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+				"conditions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "组件当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "组件当前主状态下的状态条件。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Optional:    true,
 					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
 					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "组件状态。",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateTime
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -236,7 +243,7 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "查询符合条件的已安装组件详情列表。",
+		Description: "集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -249,21 +256,22 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_id":       "ClusterId",
 		"conditions":       "Conditions",
 		"config":           "Config",
-		"create_time":      "CreateTime",
+		"created_time":     "CreatedTime",
 		"deploy_mode":      "DeployMode",
 		"deploy_node_type": "DeployNodeType",
 		"name":             "Name",
 		"phase":            "Phase",
 		"status":           "Status",
 		"type":             "Type",
-		"update_time":      "UpdateTime",
+		"updated_time":     "UpdatedTime",
 		"version":          "Version",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/CreateTime",
-		"/properties/UpdateTime",
-		"/properties/Status",
+		"/properties/CreatedTime",
+		"/properties/UpdatedTime",
+		"/properties/Status/Phase",
+		"/properties/Status/Conditions/*/Type",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

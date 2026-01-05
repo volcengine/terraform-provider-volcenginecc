@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -398,6 +399,7 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "default": "default",
 		//	  "description": "网卡所属项目的名称。",
 		//	  "type": "string"
 		//	}
@@ -405,6 +407,7 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 			Description: "网卡所属项目的名称。",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("default"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -456,11 +459,11 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为火山引擎官方服务网卡，true为是，false为否。",
+		//	  "description": "是否为官方服务网卡，true为是，false为否。",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为火山引擎官方服务网卡，true为是，false为否。",
+			Description: "是否为官方服务网卡，true为是，false为否。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -470,11 +473,11 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网卡的绑定状态。",
+		//	  "description": "网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网卡的绑定状态。",
+			Description: "网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -500,9 +503,9 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "标签。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签。",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "用户标签的标签键。",
@@ -547,8 +550,9 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "标签。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -618,7 +622,6 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "网卡所属可用区的ID。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -683,8 +686,8 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeleteOnTermination",
-		"/properties/Ipv6AddressCount",
 		"/properties/SecondaryPrivateIpAddressCount",
+		"/properties/Ipv6AddressCount",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -698,6 +701,7 @@ func eNIResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CreatedTime",
 		"/properties/VpcId",
 		"/properties/VpcName",
+		"/properties/ZoneId",
 		"/properties/PrivateIpSets/*/Primary",
 		"/properties/PrivateIpSets/*/AssociatedElasticIp/EipAddress",
 		"/properties/PrivateIpSets/*/AssociatedElasticIp/ReleaseWithInstance",

@@ -1,5 +1,10 @@
 {
   "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/NodeConfig/DeploymentSetGroupNumber",
+    "/properties/NodeConfig/DeploymentSetId",
+    "/properties/NodeConfig/SpotStrategy"
+  ],
   "definitions": {
     "AutoScaling": {
       "properties": {
@@ -777,7 +782,9 @@
     "/properties/NodePoolId",
     "/properties/NodeStatistics",
     "/properties/Status",
-    "/properties/UpdatedTime"
+    "/properties/UpdatedTime",
+    "/properties/NodeConfig/Security/Login/Type",
+    "/properties/NodeConfig/Security/SecurityStrategyEnabled"
   ],
   "required": [
     "ClusterId"
@@ -791,7 +798,6 @@
   "writeOnlyProperties": [
     "/properties/KubernetesConfig/NameUseHostname",
     "/properties/KubernetesConfig/NameSuffix",
-    "/properties/RetainResources",
     "/properties/NodeConfig/Security/Login/Password",
     "/properties/NodeConfig/InstanceName",
     "/properties/NodeConfig/Hostname",

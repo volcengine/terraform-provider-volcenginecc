@@ -109,7 +109,6 @@ resource_schema "volcengine_ark_endpoint" {
   cloudcontrol_type_name = "Volcengine::ARK::Endpoint"
 }
 
-# 9月15日发布
 resource_schema "volcengine_ecs_keypair" {
   cloudcontrol_type_name = "Volcengine::ECS::Keypair"
 }

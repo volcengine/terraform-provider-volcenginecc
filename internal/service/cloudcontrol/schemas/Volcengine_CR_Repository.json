@@ -6,6 +6,17 @@
     "/properties/Registry"
   ],
   "description": "OCI 制品仓库用于存储容器镜像或 Helm Chart 等，符合开源容器标准的 OCI（Open Container Initiative） 制品。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AccessLevel",
+      "/properties/Name",
+      "/properties/Namespace",
+      "/properties/Registry"
+    ],
+    "required": [
+      "/properties/Registry"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -16,6 +27,11 @@
     "delete": {
       "permissions": [
         "cr:DeleteRepository",
+        "cr:ListRepositories"
+      ]
+    },
+    "list": {
+      "permissions": [
         "cr:ListRepositories"
       ]
     },
@@ -43,17 +59,20 @@
     },
     "CreateTime": {
       "description": "创建 OCI 制品仓库的时间。RFC3339 格式的 UTC+0 时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "镜像仓库描述，描述长度为 0~300 个 UTF-8 字符。",
       "maxLength": 300,
+      "semantic": "description",
       "type": "string"
     },
     "Name": {
       "description": "OCI 制品仓库名称。同一个命名空间下，名称必须唯一。支持小写英文、数字、分隔符（分隔符可输入一个.或/、一个或多个-、一个或两个_，且分隔符不能出现在首位或末位，不能连续出现），长度限制为 1～128 个字符。",
       "maxLength": 128,
       "minLength": 1,
+      "semantic": "resourceId",
       "type": "string"
     },
     "Namespace": {
@@ -70,6 +89,7 @@
     },
     "UpdateTime": {
       "description": "最近一次更新 OCI 制品仓库的时间。RFC3339 格式的 UTC+0 时间。",
+      "semantic": "updatedTime",
       "type": "string"
     }
   },

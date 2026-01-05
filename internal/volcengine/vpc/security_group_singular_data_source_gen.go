@@ -51,7 +51,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
@@ -126,9 +126,9 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
-		//	  "uniqueItems": false
+		//	  "uniqueItems": true
 		//	}
-		"egress_permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"egress_permissions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
@@ -207,7 +207,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
@@ -282,9 +282,9 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
-		//	  "uniqueItems": false
+		//	  "uniqueItems": true
 		//	}
-		"ingress_permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"ingress_permissions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
@@ -362,6 +362,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "default": "default",
 		//	  "description": "安全组所属项目名称。不填默认项目为default。",
 		//	  "type": "string"
 		//	}
@@ -419,6 +420,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "标签列表。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
@@ -454,7 +456,8 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "标签列表。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:

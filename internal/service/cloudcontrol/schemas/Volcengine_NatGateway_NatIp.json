@@ -5,6 +5,16 @@
     "/properties/NatIp"
   ],
   "description": "从私网NAT网关所属子网分配，用于IP地址转换。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/NatGatewayId",
+      "/properties/NatIpId",
+      "/properties/NatIpName"
+    ],
+    "required": [
+      "/properties/NatGatewayId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -16,6 +26,11 @@
       "permissions": [
         "natgateway:DeleteNatIp",
         "natgateway:DescribeNatIpAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "natgateway:DescribeNatIps"
       ]
     },
     "read": {

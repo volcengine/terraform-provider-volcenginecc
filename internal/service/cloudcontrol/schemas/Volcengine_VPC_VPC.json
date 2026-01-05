@@ -1,7 +1,6 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/ClientToken",
     "/properties/CidrBlock",
     "/properties/ProjectName",
     "/properties/SupportIpv4Gateway",
@@ -43,13 +42,23 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "私有网络为云上资源构建隔离的、自主配置的虚拟网络环境。可以在私有网络中自定义IP地址段、安全组、路由策略等网络特性，简单高效安全地管理云上资源。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/IsDefault",
+      "/properties/VpcName",
+      "/properties/AccountId",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -253,7 +262,11 @@
     "/properties/Status",
     "/properties/AccountId",
     "/properties/IsDefault",
-    "/properties/NetworkAclNum"
+    "/properties/NetworkAclNum",
+    "/properties/AssociateCens",
+    "/properties/RouteTableIds",
+    "/properties/SecurityGroupIds",
+    "/properties/UserCidrBlocks"
   ],
   "tagging": {
     "tagOnCreate": true,

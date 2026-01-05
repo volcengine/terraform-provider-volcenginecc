@@ -310,6 +310,7 @@ func eNIDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "default": "default",
 		//	  "description": "网卡所属项目的名称。",
 		//	  "type": "string"
 		//	}
@@ -351,22 +352,22 @@ func eNIDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为火山引擎官方服务网卡，true为是，false为否。",
+		//	  "description": "是否为官方服务网卡，true为是，false为否。",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为火山引擎官方服务网卡，true为是，false为否。",
+			Description: "是否为官方服务网卡，true为是，false为否。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网卡的绑定状态。",
+		//	  "description": "网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网卡的绑定状态。",
+			Description: "网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
@@ -384,9 +385,9 @@ func eNIDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "标签。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签。",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "用户标签的标签键。",
@@ -420,7 +421,8 @@ func eNIDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "标签。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:

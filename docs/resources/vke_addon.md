@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vke_addon Resource - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
-  查询符合条件的已安装组件详情列表。
+  集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。
 ---
 
 # volcenginecc_vke_addon (Resource)
 
-查询符合条件的已安装组件详情列表。
+集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。
 
 ## Example Usage
 
@@ -32,30 +32,29 @@ resource "volcenginecc_vke_addon" "VKEAddonDemo" {
 - `deploy_mode` (String) 组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。
 - `deploy_node_type` (String) 部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。
 - `name` (String) 组件名称。
+- `status` (Attributes) 组件状态。 (see [below for nested schema](#nestedatt--status))
 - `version` (String) 组件版本。
 
 ### Read-Only
 
-- `create_time` (String) 安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。
+- `created_time` (String) 安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。
 - `id` (String) Uniquely identifies the resource.
-- `status` (Attributes) 组件状态。 (see [below for nested schema](#nestedatt--status))
-- `update_time` (String) 更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。
+- `updated_time` (String) 更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。
 
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`
 
+Optional:
+
+- `conditions` (Attributes Set) 组件当前主状态下的状态条件。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
+
 Read-Only:
 
-- `conditions` (Attributes List) 组件当前主状态下的状态条件。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
 - `phase` (String) 组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating
 
 <a id="nestedatt--status--conditions"></a>
 ### Nested Schema for `status.conditions`
-
-Read-Only:
-
-- `type` (String) 组件当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed
 
 ## Import
 
