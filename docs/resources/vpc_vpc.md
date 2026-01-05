@@ -51,8 +51,6 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
 
 ### Optional
 
-- `associate_cens` (Attributes Set) VPC关联的CEN信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
 - `cidr_block` (String) VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24、10.0.0.0/8 ~ 24、172.16.0.0/12 ~ 24。
 - `description` (String) VPC的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不能以http://或https://开头。
 - `dns_servers` (Set of String) VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用&分隔。不填则配置为默认DNS服务器地址。
@@ -60,36 +58,28 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
 - `ipv_6_cidr_block` (String) VPC的IPv6网段。传入此参数后，参数Ipv6MaskLen不生效。参数Ipv6Isp传入非BGP后，参数Ipv6MaskLen和参数Ipv6CidrBlock二者必须传入一个。参数Ipv6Isp未传或传入BGP，此参数未传，则由系统自动分配IPv6网段。
 - `nat_gateway_ids` (Set of String) VPC中创建的NAT网关的ID。
 - `project_name` (String) VPC所属项目的名称。不填默认加入default项目。
-- `route_table_ids` (Set of String) VPC关联的路由表ID。
 - `secondary_cidr_blocks` (Set of String) VPC的辅助网段。
-- `security_group_ids` (Set of String) VPC中安全组的列表。
 - `subnet_ids` (Set of String) VPC中子网的列表。
 - `support_ipv_4_gateway` (Boolean) VPC 是否启用 IPv4 网关。false（默认值）：不启用。true：启用。
 - `tags` (Attributes Set) 私有网络绑定的标签。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `user_cidr_blocks` (Set of String) VPC的用户网段。
 - `vpc_name` (String) VPC的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为VPC实例的ID。不能以http://或https://开头。
 
 ### Read-Only
 
 - `account_id` (String) VPC所属账号的ID。
+- `associate_cens` (Attributes Set) VPC关联的CEN信息。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
 - `creation_time` (String) 创建VPC的时间。
 - `id` (String) Uniquely identifies the resource.
 - `is_default` (Boolean) 该VPC是否为默认VPC。true：默认VPC，表示该VPC是创建ECS实例时系统自动创建的VPC。false：非默认VPC，表示该VPC是用户手动创建的。
 - `network_acl_num` (String) VPC中的网络ACL的数量。
+- `route_table_ids` (Set of String) VPC关联的路由表ID。
+- `security_group_ids` (Set of String) VPC中安全组的列表。
 - `status` (String) VPC的状态。Creating：创建中。Pending：已创建。Available：可用。
 - `update_time` (String) 更新VPC的时间。
+- `user_cidr_blocks` (Set of String) VPC的用户网段。
 - `vpc_id` (String) VPC的ID。
-
-<a id="nestedatt--associate_cens"></a>
-### Nested Schema for `associate_cens`
-
-Optional:
-
-- `cen_id` (String) CEN的ID。
-- `cen_owner_id` (String) CEN的用户ID。
-- `cen_status` (String) VPC在CEN中的状态。Attaching：加载中，Attached：已加载
-
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -98,6 +88,16 @@ Optional:
 
 - `key` (String) 标签键。
 - `value` (String) 标签值。
+
+
+<a id="nestedatt--associate_cens"></a>
+### Nested Schema for `associate_cens`
+
+Read-Only:
+
+- `cen_id` (String) CEN的ID。
+- `cen_owner_id` (String) CEN的用户ID。
+- `cen_status` (String) VPC在CEN中的状态。Attaching：加载中，Attached：已加载
 
 ## Import
 

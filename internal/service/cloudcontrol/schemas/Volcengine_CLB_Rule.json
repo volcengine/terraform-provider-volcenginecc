@@ -52,23 +52,37 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "转发规则用于将指定域名和URL的请求引流至指定的后端服务器组。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ListenerId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ],
+    "required": [
+      "/properties/ListenerId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "clb:CreateRule",
+        "clb:CreateRules",
         "clb:DescribeRules"
       ]
     },
     "delete": {
       "permissions": [
         "clb:DeleteRules",
+        "clb:DescribeRules"
+      ]
+    },
+    "list": {
+      "permissions": [
         "clb:DescribeRules"
       ]
     },

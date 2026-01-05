@@ -492,7 +492,8 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Medium",
 		//	    "Large",
 		//	    "Extra_Large_1",
-		//	    "Extra_Large_2"
+		//	    "Extra_Large_2",
+		//	    ""
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -507,6 +508,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 					"Large",
 					"Extra_Large_1",
 					"Extra_Large_2",
+					"",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -567,8 +569,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -595,9 +596,6 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 						Description: "用户标签的标签值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/

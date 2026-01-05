@@ -46,7 +46,7 @@ Data Source schema for Volcengine::CLB::NLB
 - `tags` (Attributes Set) NLB实例的标签信息。 (see [below for nested schema](#nestedatt--tags))
 - `updated_time` (String) NLB实例的更新时间。
 - `vpc_id` (String) NLB实例所属的VPC ID。
-- `zone_mappings` (Attributes List) NLB实例的可用区信息。 (see [below for nested schema](#nestedatt--zone_mappings))
+- `zone_mappings` (Attributes Set) NLB实例的可用区信息。 (see [below for nested schema](#nestedatt--zone_mappings))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

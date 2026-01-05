@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -152,17 +151,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				// Property: DetectionStatus
 				"detection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"Finished",
-							"Processing",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Items
 				"items": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -171,52 +160,33 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "检测项名称。",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Result
 							"result": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "该检测项对应结果。",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: RiskCode
 							"risk_code": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "风险描述码。",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: RiskLevel
 							"risk_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "风险等级。若该参数返回值为空，表示无风险。",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "镜像检测项详情。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "镜像的检测结果。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -334,7 +304,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"kernel": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "镜像的内核版本。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -344,7 +313,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。",
+		//	  "description": "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。",
 		//	  "enum": [
 		//	    "VolcanoEngine",
 		//	    "BYOL",
@@ -353,16 +322,8 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"license_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。",
-			Optional:    true,
+			Description: "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。",
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"VolcanoEngine",
-					"BYOL",
-					"",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -376,7 +337,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"os_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "镜像操作系统的名称。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -391,7 +351,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"os_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "操作系统类型。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -415,19 +374,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。",
-			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"CentOS",
-					"Debian",
-					"veLinux",
-					"Windows Server",
-					"Fedora",
-					"OpenSUSE",
-					"Ubuntu",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -441,7 +388,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "镜像的发行版本。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -460,6 +406,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SharePermission
@@ -637,8 +584,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -665,9 +611,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 						Description: "镜像标签的值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -813,12 +756,20 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/VirtualSize",
 		"/properties/Visibility",
 		"/properties/BootMode",
+		"/properties/DetectionResults",
+		"/properties/Kernel",
+		"/properties/LicenseType",
+		"/properties/OsName",
+		"/properties/OsType",
+		"/properties/Platform",
+		"/properties/PlatformVersion",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/InstanceId",
 		"/properties/SnapshotGroupId",
 		"/properties/SnapshotId",
+		"/properties/ProjectName",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -53,13 +53,26 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "NAT网关为私有网络内的云服务器提供网络地址转换服务。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Description",
+      "/properties/NatGatewayId",
+      "/properties/NatGatewayName",
+      "/properties/NetworkType",
+      "/properties/ProjectName",
+      "/properties/SubnetId",
+      "/properties/Spec",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -238,7 +251,8 @@
         "Medium",
         "Large",
         "Extra_Large_1",
-        "Extra_Large_2"
+        "Extra_Large_2",
+        ""
       ],
       "type": "string"
     },

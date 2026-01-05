@@ -28,7 +28,8 @@
       "properties": {
         "AssociatedElasticIp": {
           "$ref": "#/definitions/AssociatedElasticIp",
-          "description": "网卡主私网IPv4关联的公网IP的信息。"
+          "description": "网卡主私网IPv4关联的公网IP的信息。",
+          "type": "object"
         },
         "Primary": {
           "description": "是否为主私网IPv4地址。",
@@ -60,6 +61,25 @@
     }
   },
   "description": "网卡即虚拟网卡。在私有网络里，网卡是挂载在云服务器、负载均衡等云资源上的一种网络接口。每张网卡均有一个主私网IP地址。若有需要，可手动为其分配多个辅助私网IP地址。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/InstanceId",
+      "/properties/NetworkInterfaceId",
+      "/properties/NetworkInterfaceName",
+      "/properties/Status",
+      "/properties/SubnetId",
+      "/properties/Type",
+      "/properties/VpcId",
+      "/properties/ZoneId",
+      "/properties/Ipv6Sets",
+      "/properties/SecurityGroupIds",
+      "/properties/PrimaryIpAddress/PrivateIpAddress",
+      "/properties/PrivateIpSets/*/PrivateIpAddress",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -175,6 +195,7 @@
       "uniqueItems": true
     },
     "ProjectName": {
+      "default": "default",
       "description": "网卡所属项目的名称。",
       "semantic": "projectName",
       "type": "string"
@@ -195,11 +216,11 @@
       "uniqueItems": true
     },
     "ServiceManaged": {
-      "description": "是否为火山引擎官方服务网卡，true为是，false为否。",
+      "description": "是否为官方服务网卡，true为是，false为否。",
       "type": "boolean"
     },
     "Status": {
-      "description": "网卡的绑定状态。",
+      "description": "网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。",
       "semantic": "status",
       "type": "string"
     },
@@ -208,10 +229,10 @@
       "type": "string"
     },
     "Tags": {
+      "description": "标签。",
       "insertionOrder": false,
       "items": {
-        "$ref": "#/definitions/Tag",
-        "description": "标签。"
+        "$ref": "#/definitions/Tag"
       },
       "semantic": "tags",
       "type": "array",
@@ -250,6 +271,7 @@
     "/properties/CreatedTime",
     "/properties/VpcId",
     "/properties/VpcName",
+    "/properties/ZoneId",
     "/properties/PrivateIpSets/*/Primary",
     "/properties/PrivateIpSets/*/AssociatedElasticIp/EipAddress",
     "/properties/PrivateIpSets/*/AssociatedElasticIp/ReleaseWithInstance",
@@ -265,7 +287,7 @@
   "typeName": "Volcengine::VPC::ENI",
   "writeOnlyProperties": [
     "/properties/DeleteOnTermination",
-    "/properties/Ipv6AddressCount",
-    "/properties/SecondaryPrivateIpAddressCount"
+    "/properties/SecondaryPrivateIpAddressCount",
+    "/properties/Ipv6AddressCount"
   ]
 }

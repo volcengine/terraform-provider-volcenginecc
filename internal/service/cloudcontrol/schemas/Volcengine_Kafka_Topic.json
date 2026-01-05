@@ -39,6 +39,19 @@
     }
   },
   "description": "Topic即消息的主题，用于分类消息。支持 Topic 级别的资源管理，即 Topic 的创建、查看与删除等操作。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/PartitionNumber",
+      "/properties/ReplicaNumber",
+      "/properties/TopicName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -54,6 +67,11 @@
         "Kafka:DescribeTopics",
         "Kafka:DescribeTopicAccessPolicies",
         "Kafka:DescribeTopicParameters"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Kafka:DescribeTopics"
       ]
     },
     "read": {

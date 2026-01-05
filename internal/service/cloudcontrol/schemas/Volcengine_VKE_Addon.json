@@ -22,10 +22,12 @@
       "properties": {
         "Conditions": {
           "description": "组件当前主状态下的状态条件。",
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/AddonCondition"
           },
-          "type": "array"
+          "type": "array",
+          "uniqueItems": true
         },
         "Phase": {
           "description": "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
@@ -35,7 +37,20 @@
       "type": "object"
     }
   },
-  "description": "查询符合条件的已安装组件详情列表。",
+  "description": "集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId",
+      "/properties/DeployMode",
+      "/properties/DeployNodeType",
+      "/properties/Name",
+      "/properties/Status/Phase",
+      "/properties/Status/Conditions/*/Type"
+    ],
+    "required": [
+      "/properties/ClusterId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -80,7 +95,7 @@
       "description": "组件配置。",
       "type": "string"
     },
-    "CreateTime": {
+    "CreatedTime": {
       "description": "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
       "semantic": "createdTime",
       "type": "string"
@@ -103,14 +118,16 @@
     },
     "Name": {
       "description": "组件名称。",
-      "semantic": "resourceName",
+      "semantic": "resourceId",
       "type": "string"
     },
     "Status": {
       "$ref": "#/definitions/AddonStatus",
-      "description": "组件状态。"
+      "description": "组件状态。",
+      "semantic": "status",
+      "type": "object"
     },
-    "UpdateTime": {
+    "UpdatedTime": {
       "description": "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
       "semantic": "updatedTime",
       "type": "string"
@@ -121,9 +138,10 @@
     }
   },
   "readOnlyProperties": [
-    "/properties/CreateTime",
-    "/properties/UpdateTime",
-    "/properties/Status"
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/Status/Phase",
+    "/properties/Status/Conditions/*/Type"
   ],
   "tagging": {
     "taggable": false

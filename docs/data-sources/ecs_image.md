@@ -34,7 +34,7 @@ Data Source schema for Volcengine::ECS::Image
 - `is_lts` (Boolean) 公共镜像是否长期维护。
 - `is_support_cloud_init` (Boolean) 镜像是否支持Cloud-init。
 - `kernel` (String) 镜像的内核版本。
-- `license_type` (String) 镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用火山引擎官方渠道的许可证。BYOL：自带许可证（BYOL）。
+- `license_type` (String) 镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。
 - `os_name` (String) 镜像操作系统的名称。
 - `os_type` (String) 操作系统类型。
 - `platform` (String) 镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。

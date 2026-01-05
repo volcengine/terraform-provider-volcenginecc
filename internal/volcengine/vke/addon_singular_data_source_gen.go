@@ -44,14 +44,14 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "组件配置。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: CreateTime
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -104,6 +104,7 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "Conditions": {
 		//	      "description": "组件当前主状态下的状态条件。",
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "组件状态条件。",
 		//	        "properties": {
@@ -114,7 +115,8 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
 		//	      "description": "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
@@ -126,7 +128,7 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Conditions
-				"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+				"conditions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
@@ -148,14 +150,14 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "组件状态。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateTime
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -190,14 +192,14 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_id":       "ClusterId",
 		"conditions":       "Conditions",
 		"config":           "Config",
-		"create_time":      "CreateTime",
+		"created_time":     "CreatedTime",
 		"deploy_mode":      "DeployMode",
 		"deploy_node_type": "DeployNodeType",
 		"name":             "Name",
 		"phase":            "Phase",
 		"status":           "Status",
 		"type":             "Type",
-		"update_time":      "UpdateTime",
+		"updated_time":     "UpdatedTime",
 		"version":          "Version",
 	})
 

@@ -82,40 +82,21 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CenId
 					"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "CEN的ID。",
-						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: CenOwnerId
 					"cen_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "CEN的用户ID。",
-						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: CenStatus
 					"cen_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "VPC在CEN中的状态。Attaching：加载中，Attached：已加载",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"Attaching",
-								"Attached",
-							),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "VPC关联的CEN信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -307,7 +288,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"route_table_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "VPC关联的路由表ID。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -349,7 +329,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "VPC中安全组的列表。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -430,8 +409,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -458,9 +436,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 						Description: "标签值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -503,7 +478,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"user_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "VPC的用户网段。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -603,10 +577,13 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AccountId",
 		"/properties/IsDefault",
 		"/properties/NetworkAclNum",
+		"/properties/AssociateCens",
+		"/properties/RouteTableIds",
+		"/properties/SecurityGroupIds",
+		"/properties/UserCidrBlocks",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/ClientToken",
 		"/properties/CidrBlock",
 		"/properties/ProjectName",
 		"/properties/SupportIpv4Gateway",

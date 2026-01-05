@@ -59,7 +59,7 @@ resource "volcenginecc_storageebs_volume" "VolumeDemo" {
 - `overdue_time` (String) 云盘欠费关停时间。
 - `renew_type` (Number) 续费方式 1：手动续费 2 ：自动续费 3 ：到期不续费。
 - `snapshot_count` (Number) 快照计数
-- `status` (String) 云盘状态
+- `status` (String) 云盘状态，取值说明如下：available：可用。attaching：挂载中。attached：已挂载。detaching：卸载中。creating：创建中。deleting：删除中。error：错误。extending：扩容中。
 - `total_performance` (Attributes) 总性能。 (see [below for nested schema](#nestedatt--total_performance))
 - `trade_status` (Number) 交易状态 0：创建中 1：运行中 2：创建失败
 - `updated_at` (String) 云盘更新时间。

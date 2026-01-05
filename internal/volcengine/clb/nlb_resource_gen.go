@@ -436,8 +436,7 @@ func nLBResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -464,9 +463,6 @@ func nLBResource(ctx context.Context) (resource.Resource, error) {
 						Description: "标签值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -513,6 +509,7 @@ func nLBResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "NLB实例的可用区信息。",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "EniId": {
@@ -576,9 +573,10 @@ func nLBResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"zone_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"zone_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EniId

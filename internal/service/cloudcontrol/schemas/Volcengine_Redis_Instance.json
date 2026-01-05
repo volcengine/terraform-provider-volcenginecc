@@ -105,8 +105,7 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     },
@@ -141,48 +140,64 @@
     }
   },
   "description": "缓存数据库 Redis 版的基本单位是实例。实例是独立的、虚拟化的数据库运行环境，是多个数据节点与代理节点的集合，数据节点上运行 Redis 引擎。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/InstanceName",
+      "/properties/ShardedCluster",
+      "/properties/Status",
+      "/properties/EngineVersion",
+      "/properties/VpcId",
+      "/properties/ChargeType",
+      "/properties/ProjectName",
+      "/properties/ServiceType",
+      "/properties/DataLayout",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "redis:CreateDBInstance",
-        "redis:DescribeDBInstances",
-        "redis:DescribeDBInstanceDetail",
-        "redis:DescribeNodeIds",
-        "redis:DescribeDBInstanceShards"
+        "Redis:CreateDBInstance",
+        "Redis:DescribeDBInstances",
+        "Redis:DescribeDBInstanceDetail",
+        "Redis:DescribeNodeIds",
+        "Redis:DescribeDBInstanceShards"
       ]
     },
     "delete": {
       "permissions": [
-        "redis:DeleteDBInstance",
-        "redis:DescribeDBInstanceDetail"
+        "Redis:DeleteDBInstance",
+        "Redis:DescribeDBInstanceDetail"
       ]
     },
     "list": {
       "permissions": [
-        "redis:DescribeDBInstances"
+        "Redis:DescribeDBInstances"
       ]
     },
     "read": {
       "permissions": [
-        "redis:DescribeDBInstances",
-        "redis:DescribeDBInstanceDetail",
-        "redis:DescribeNodeIds",
-        "redis:DescribeDBInstanceShards"
+        "Redis:DescribeDBInstances",
+        "Redis:DescribeDBInstanceDetail",
+        "Redis:DescribeNodeIds",
+        "Redis:DescribeDBInstanceShards"
       ]
     },
     "update": {
       "permissions": [
-        "redis:DescribeDBInstanceDetail",
-        "redis:ModifyDBInstanceName",
-        "redis:ModifyDBInstanceDeletionProtectionPolicy",
-        "redis:RemoveTagsFromResource",
-        "redis:AddTagsToResource",
-        "redis:ModifyDBInstanceShardCapacity",
-        "redis:ModifyDBInstanceShardNumber",
-        "redis:ModifyDBInstanceChargeType",
-        "redis:DescribeDBInstances",
-        "redis:DescribeNodeIds",
-        "redis:DescribeDBInstanceShards"
+        "Redis:DescribeDBInstanceDetail",
+        "Redis:ModifyDBInstanceName",
+        "Redis:ModifyDBInstanceDeletionProtectionPolicy",
+        "Redis:RemoveTagsFromResource",
+        "Redis:AddTagsToResource",
+        "Redis:ModifyDBInstanceShardCapacity",
+        "Redis:ModifyDBInstanceShardNumber",
+        "Redis:ModifyDBInstanceChargeType",
+        "Redis:DescribeDBInstances",
+        "Redis:DescribeNodeIds",
+        "Redis:DescribeDBInstanceShards"
       ]
     }
   },

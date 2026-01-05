@@ -52,8 +52,8 @@ resource "volcenginecc_vpc_eni" "EniDemo" {
 - `secondary_private_ip_address_count` (Number) 为辅助网卡自动分配辅助私网IPv4地址数量，取值1~49。创建时不能与PrivateIpSets同时传入。
 - `security_group_ids` (Set of String) 辅助网卡加入一个或多个安全组的ID。
 - `subnet_id` (String) 辅助网卡所在子网的ID。
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- `zone_id` (String) 网卡所属可用区的ID。
+- `tags` (Attributes Set) 标签。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -62,12 +62,13 @@ resource "volcenginecc_vpc_eni" "EniDemo" {
 - `id` (String) Uniquely identifies the resource.
 - `mac_address` (String) 网卡的MAC地址。
 - `network_interface_id` (String) 网卡ID。
-- `service_managed` (Boolean) 是否为火山引擎官方服务网卡，true为是，false为否。
-- `status` (String) 网卡的绑定状态。
+- `service_managed` (Boolean) 是否为官方服务网卡，true为是，false为否。
+- `status` (String) 网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。
 - `type` (String) 网卡类型。primary：主网卡，secondary：辅助网卡
 - `updated_time` (String) 更新网卡的时间。
 - `vpc_id` (String) 网卡所属的VPC的ID。
 - `vpc_name` (String) 网卡所属VPC的名称。
+- `zone_id` (String) 网卡所属可用区的ID。
 
 <a id="nestedatt--primary_ip_address"></a>
 ### Nested Schema for `primary_ip_address`

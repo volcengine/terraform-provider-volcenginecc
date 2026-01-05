@@ -1207,6 +1207,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentSetId
@@ -1216,6 +1217,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Hostname
@@ -1464,7 +1466,6 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Type
 								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "节点的访问登录方式，参数值说明：Password：密码登录。SshKeyPair：SSH 密钥对登录。",
-									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1501,7 +1502,6 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SecurityStrategyEnabled
 						"security_strategy_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "节点是否启用了安全加固配置，参数值说明：true：已开启。false：未开启。",
-							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
@@ -1528,6 +1528,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
@@ -1741,7 +1742,6 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// RetainResources is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
@@ -1999,7 +1999,6 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/KubernetesConfig/NameUseHostname",
 		"/properties/KubernetesConfig/NameSuffix",
-		"/properties/RetainResources",
 		"/properties/NodeConfig/Security/Login/Password",
 		"/properties/NodeConfig/InstanceName",
 		"/properties/NodeConfig/Hostname",
@@ -2012,8 +2011,15 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/NodeStatistics",
 		"/properties/Status",
 		"/properties/UpdatedTime",
+		"/properties/NodeConfig/Security/Login/Type",
+		"/properties/NodeConfig/Security/SecurityStrategyEnabled",
 	})
 
+	opts = opts.WithCreateOnlyPropertyPaths([]string{
+		"/properties/NodeConfig/DeploymentSetGroupNumber",
+		"/properties/NodeConfig/DeploymentSetId",
+		"/properties/NodeConfig/SpotStrategy",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

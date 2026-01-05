@@ -357,6 +357,20 @@
     }
   },
   "description": "容器服务通过深度融合新一代云原生技术，提供以容器为核心的高性能 Kubernetes 容器集群管理服务。在云端一键构建高可用 Kubernetes 集群，并实现容器化应用的可视化全生命周期管理，助力用户快速构建容器化应用。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/DeleteProtectionEnabled",
+      "/properties/ClusterId",
+      "/properties/Name",
+      "/properties/PodsConfig/PodNetworkMode",
+      "/properties/Status/Phase",
+      "/properties/Status/Conditions/*/Type",
+      "/properties/Type",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

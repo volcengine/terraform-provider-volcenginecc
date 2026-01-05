@@ -37,10 +37,10 @@ Data Source schema for Volcengine::VPC::ENI
 - `project_name` (String) 网卡所属项目的名称。
 - `secondary_private_ip_address_count` (Number) 为辅助网卡自动分配辅助私网IPv4地址数量，取值1~49。创建时不能与PrivateIpSets同时传入。
 - `security_group_ids` (Set of String) 辅助网卡加入一个或多个安全组的ID。
-- `service_managed` (Boolean) 是否为火山引擎官方服务网卡，true为是，false为否。
-- `status` (String) 网卡的绑定状态。
+- `service_managed` (Boolean) 是否为官方服务网卡，true为是，false为否。
+- `status` (String) 网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。
 - `subnet_id` (String) 辅助网卡所在子网的ID。
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 标签。 (see [below for nested schema](#nestedatt--tags))
 - `type` (String) 网卡类型。primary：主网卡，secondary：辅助网卡
 - `updated_time` (String) 更新网卡的时间。
 - `vpc_id` (String) 网卡所属的VPC的ID。

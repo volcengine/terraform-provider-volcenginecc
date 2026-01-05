@@ -374,7 +374,8 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Medium",
 		//	    "Large",
 		//	    "Extra_Large_1",
-		//	    "Extra_Large_2"
+		//	    "Extra_Large_2",
+		//	    ""
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -428,8 +429,7 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
