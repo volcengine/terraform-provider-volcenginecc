@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_bmq_group.example "group_id"

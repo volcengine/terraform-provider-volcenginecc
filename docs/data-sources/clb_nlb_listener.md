@@ -21,7 +21,7 @@ Data Source schema for Volcengine::CLB::NLBListener
 
 ### Read-Only
 
-- `certificate_id` (String) TLS监听器服务器证书的ID，仅支持传入火山引擎证书中心 SSL 证书。。
+- `certificate_id` (String) TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。
 - `connection_timeout` (Number) 监听器的连接超时时间（秒）。
 - `created_time` (String) 监听器的创建时间。
 - `description` (String) 监听器描述信息。
@@ -32,7 +32,7 @@ Data Source schema for Volcengine::CLB::NLBListener
 - `listener_name` (String) 监听器名称。
 - `load_balancer_id` (String) 负载均衡实例ID。
 - `port` (Number) 监听器接收请求的端口，0表示启用全端口监听。
-- `protocol` (String) 监听协议类型。
+- `protocol` (String) 监听协议类型。TCP,UDP,TLS
 - `security_policy_id` (String) TLS 安全策略ID，支持系统安全策略和自定义安全策略。系统安全策略取值：.tls_cipher_policy_1_0.tls_cipher_policy_1_1.tls_cipher_policy_1_2.tls_cipher_policy_1_2_strict.tls_cipher_policy_1_2_strict_with_1_3.自定义安全策略：输入自定义安全策略 ID。当Protocol为TLS 时，该参数为必填。。
 - `server_group_id` (String) 监听器关联的服务器组ID。
 - `start_port` (Number) 全端口监听的起始端口，仅当Port为0时有效。

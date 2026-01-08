@@ -128,57 +128,8 @@ Optional:
 
 Optional:
 
-- `load_balancer_addresses` (Attributes Set) 该可用区下负载均衡提供的IP地址列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses))
 - `subnet_id` (String) 可用区内提供服务的子网ID。
 - `zone_id` (String) 可用区的唯一标识符。
-
-<a id="nestedatt--zone_mappings--load_balancer_addresses"></a>
-### Nested Schema for `zone_mappings.load_balancer_addresses`
-
-Optional:
-
-- `eip` (Attributes) 弹性公网IP（EIP）的详细信息。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--eip))
-- `eip_address` (String) 绑定的弹性公网IP（EIP）的地址。
-- `eip_id` (String) 绑定的弹性公网IP（EIP）的ID。
-- `eni_address` (String) 弹性网卡（ENI）上的私网IP地址。
-- `eni_id` (String) IP地址所属的弹性网卡（ENI）的ID。
-- `eni_ipv_6_address` (String) 弹性网卡（ENI）上的IPv6私网地址。
-- `ipv_6_eip` (Attributes) IPv6弹性公网IP的详细信息。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--ipv_6_eip))
-- `ipv_6_eip_id` (String) 绑定的IPv6 EIP的ID。
-
-<a id="nestedatt--zone_mappings--load_balancer_addresses--eip"></a>
-### Nested Schema for `zone_mappings.load_balancer_addresses.eip`
-
-Optional:
-
-- `association_mode` (String) EIP的绑定模式，例如Default或Normal。
-- `bandwidth` (Number) EIP的带宽峰值，单位为Mbps。
-- `eip_address` (String) 弹性公网IP（EIP）的地址。
-- `eip_billing_type` (Number) EIP的计费方式，2为按带宽计费，3为按流量计费。
-- `eip_type` (String) EIP的类型，例如静态BGP。
-- `isp` (String) 公网IP的线路类型，BGP表示多线。
-- `pop_locations` (Attributes Set) EIP的接入点位置信息列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--eip--pop_locations))
-
-<a id="nestedatt--zone_mappings--load_balancer_addresses--eip--pop_locations"></a>
-### Nested Schema for `zone_mappings.load_balancer_addresses.eip.pop_locations`
-
-Optional:
-
-- `pop_id` (String) 接入点（PoP）的唯一ID。
-- `pop_name` (String) 接入点（PoP）的名称。
-
-
-
-<a id="nestedatt--zone_mappings--load_balancer_addresses--ipv_6_eip"></a>
-### Nested Schema for `zone_mappings.load_balancer_addresses.ipv_6_eip`
-
-Optional:
-
-- `bandwidth` (Number) IPv6 EIP的带宽峰值，单位为Mbps。
-- `billing_type` (Number) IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。
-- `isp` (String) IPv6公网IP的线路类型，BGP表示多线。
 
 ## Import
 

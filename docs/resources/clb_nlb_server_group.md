@@ -2,12 +2,12 @@
 page_title: "volcenginecc_clb_nlb_server_group Resource - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
-  服务器组
+  服务器组是一组后端服务器。
 ---
 
 # volcenginecc_clb_nlb_server_group (Resource)
 
-服务器组
+服务器组是一组后端服务器。
 
 ## Example Usage
 
@@ -57,61 +57,61 @@ resource "volcenginecc_clb_nlb_server_group" "NLBServerGroupDemo" {
 
 ### Required
 
-- `protocol` (String) NLB转发流量到后端服务器时使用的通信协议
+- `protocol` (String) NLB转发流量到后端服务器时使用的通信协议。取值如下：TCP。UDP。
 - `vpc_id` (String) 服务器组所属私有网络的ID。
 
 ### Optional
 
-- `account_id` (String) 账号ID
-- `any_port_enabled` (Boolean) 是否开启全端口转发
-- `bypass_security_group_enabled` (Boolean) 是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数
-- `connection_drain_enabled` (Boolean) 是否开启连接优雅中断
+- `any_port_enabled` (Boolean) 是否开启全端口转发。
+- `bypass_security_group_enabled` (Boolean) 是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数。
+- `connection_drain_enabled` (Boolean) 是否开启连接优雅中断。
 - `connection_drain_timeout` (Number) 连接优雅中断超时时间，取值范围为0～900秒。参数ConnectionDrainEnabled为“true”时，该参数为必填。
-- `created_time` (String) 后端服务器组的创建时间
 - `description` (String) 后端服务器组的描述,服务器组的描述。必须以字母、数字或中文开头，可包含以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）长度限制为0 ～ 255个字符。该参数不传入，则默认为空字符串。
-- `health_check` (Attributes) 健康检查相关参数 (see [below for nested schema](#nestedatt--health_check))
-- `ip_address_version` (String) 服务器组的IP地址类型
-- `preserve_client_ip_enabled` (Boolean) 是否开启源地址保持
-- `project_name` (String) 项目名称
-- `proxy_protocol_type` (String) 是否开启Proxy-Protocol协议
-- `scheduler` (String) NLB转发流量时遵循的规则
+- `health_check` (Attributes) 健康检查相关参数。 (see [below for nested schema](#nestedatt--health_check))
+- `ip_address_version` (String) 服务器组的IP地址类型。取值如下：ipv4（默认值）：表示该服务器组仅支持添加IPv4类型的后端服务器。ipv6：表示该服务器组仅支持添加IPv6类型的后端服务器。
+- `preserve_client_ip_enabled` (Boolean) 是否开启源地址保持。
+- `project_name` (String) 项目名称。
+- `proxy_protocol_type` (String) 是否开启Proxy-Protocol协议。取值如下：off（默认值）：关闭。standard：开启。NLB将通过Proxy-Protocol协议携带客户端源IP地址转发至后端服务器，还需要在后端服务器上配置Proxy-Protocol。
+- `scheduler` (String) NLB转发流量时遵循的规则。取值如下：wrr（默认值）：加权轮询，权重值越高的后端服务器，被轮询到的次数（概率）越高。wlc：加权最小连接数，在最少连接数的基础上，根据后端服务器的不同处理能力，给每个服务器分配不同的权重，使其能够接受相应权值数的服务请求。sh：源地址哈希，基于源IP地址的一致性哈希，相同的源地址会调度到相同的后端服务器。
 - `server_group_name` (String) 服务器组名称, 必须以字母、数字或中文开头，可包含以下特殊字符：点号（.）、下划线（_）和中划线（-）。限制为1 ～ 128个字符。该参数不传入，则默认为服务器组ID。
-- `servers` (Attributes Set) 服务器组中待添加后端服务器的信息
+- `servers` (Attributes Set) 服务器组中待添加后端服务器的信息。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--servers))
-- `session_persistence_enabled` (Boolean) 是否开启会话保持
-- `session_persistence_timeout` (Number) 会话保持的超时时间，取值范围为1～3600秒，默认1000秒
-- `tags` (Attributes Set) 标签
+- `session_persistence_enabled` (Boolean) 是否开启会话保持。
+- `session_persistence_timeout` (Number) 会话保持的超时时间，取值范围为1～3600秒，默认1000秒。
+- `tags` (Attributes Set) 标签。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `timestamp_remove_enabled` (Boolean) 是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能
-- `type` (String) 服务器组的类型
-- `updated_time` (String) 后端服务器组的更新时间
+- `timestamp_remove_enabled` (Boolean) 是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能。
+- `type` (String) 服务器组的类型。取值如下：instance（默认值）：服务器类型。支持添加云服务器实例和已绑定云服务器实例的辅助网卡作为后端服务器。ip：IP地址类型。支持添加任何网络可达的VPC或IDC中的服务器作为后端服务器。
 
 ### Read-Only
 
+- `account_id` (String) 账号ID。
+- `created_time` (String) 后端服务器组的创建时间。
 - `id` (String) Uniquely identifies the resource.
-- `related_load_balancer_ids` (Set of String) 服务器组关联的NLB实例
-- `server_count` (Number) 服务器组中后端服务器的数量
-- `server_group_id` (String) 服务器组ID
-- `status` (String) 服务器组的状态
+- `related_load_balancer_ids` (Set of String) 服务器组关联的NLB实例。
+- `server_count` (Number) 服务器组中后端服务器的数量。
+- `server_group_id` (String) 服务器组ID。
+- `status` (String) 服务器组的状态。
+- `updated_time` (String) 后端服务器组的更新时间。
 
 <a id="nestedatt--health_check"></a>
 ### Nested Schema for `health_check`
 
 Optional:
 
-- `domain` (String) 健康检查的域名
-- `enabled` (Boolean) 是否开启健康检查
+- `domain` (String) 健康检查的域名。
+- `enabled` (Boolean) 是否开启健康检查。
 - `healthy_threshold` (Number) 健康检查的健康阈值，取值范围为2 ～ 10次，默认值为3次。连续执行指定次数的健康检查，结果均为“正常”的后端服务器将被判定为健康检查“正常”。
-- `http_code` (String) 健康检查正常的HTTP状态码
+- `http_code` (String) 健康检查正常的HTTP状态码。
 - `interval` (Number) 健康检查的时间间隔，取值范围为1 ～ 300秒，默认值为10秒。
-- `method` (String) 健康检查的请求方法
+- `method` (String) 健康检查的请求方法。
 - `port` (Number) 健康检查的端口，取值范围 1～65535。服务器组未开启全端口转发时，该参数默认为0，表示使用后端服务器的端口进行健康检查。服务器组开启全端口转发时，必须指定该参数。
 - `timeout` (Number) 健康检查的响应超时时间，取值范围为1 ～ 60秒，默认值为3秒。如果后端服务器在指定时间内没有正确响应，则判定为健康检查“异常”。
-- `type` (String) 健康检查的协议类型
+- `type` (String) 健康检查的协议类型。取值如下：取值如下：TCP（默认值）、HTTP、UDP
 - `udp_expect` (String) UDP健康检查的请求字符串。只允许包含字母和数字，最大长度限制为64个字符。
-- `udp_request` (String) UDP健康检查的预期响应字符串
+- `udp_request` (String) UDP健康检查的预期响应字符串。
 - `unhealthy_threshold` (Number) 健康检查的不健康阈值，取值范围为2 ～ 10次，默认值为3次。连续执行指定次数的健康检查，结果均为“异常”的后端服务器将被判定为健康检查异常。
-- `uri` (String) 健康检查的路径
+- `uri` (String) 健康检查的路径。
 
 
 <a id="nestedatt--servers"></a>
@@ -119,13 +119,13 @@ Optional:
 
 Optional:
 
-- `description` (String) 后端服务器的描述，默认值为空字符串
+- `description` (String) 后端服务器的描述，默认值为空字符串。
 - `instance_id` (String) 服务器实例的ID或IP地址。服务器类型为“ecs”时，传入云服务器实例的ID。您可以调用DescribeInstances接口云服务器实例ID。服务器类型为“eni”时，传入已绑定云服务器实例的网卡ID。您可以调用DescribeNetworkInterfaces接口获取网卡ID。服务器类型为“ip”时，传入后端服务器的IP地址。
 - `ip` (String) 后端服务器的私网IP地址。您可以调用DescribeInstances接口获取“ecs”类型后端服务器的私网IP地址。您可以调用DescribeNetworkInterfaces接口获取“eni”类型后端服务器的私网IP地址。
 - `port` (Number) 后端服务器接收请求的端口号，取值范围为 1～65535。参数AnyPortEnabled为“false”，即服务器组未开启全端口转发时，该参数为必填。参数AnyPortEnabled为“true”，即服务器组开启全端口转发时，该参数默认为0。
-- `server_id` (String) 后端服务器 ID
-- `type` (String) 后端服务器的类型
-- `weight` (Number) 后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0
+- `server_id` (String) 后端服务器 ID。
+- `type` (String) 后端服务器的类型。取值如下：ecs：云服务器实例（即主网卡）。eni：辅助网卡。ip：IP地址。
+- `weight` (Number) 后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0。
 - `zone_id` (String) 指定后端服务器关联的NLB实例可用区。当参数Servers.N.Type为ip时，此参数必填。NLB实例开启跨可用区转发功能时，该后端服务器可以接收来自NLB实例所有可用区的流量。NLB实例关闭跨可用区转发功能时，则该后端服务器仅接收来自指定可用区的流量。
 
 
@@ -134,8 +134,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 标签键
-- `value` (String) 标签值
+- `key` (String) 标签键。
+- `value` (String) 标签值。
 
 ## Import
 

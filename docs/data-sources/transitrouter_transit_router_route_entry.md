@@ -22,7 +22,7 @@ Data Source schema for Volcengine::TransitRouter::TransitRouterRouteEntry
 ### Read-Only
 
 - `as_path` (Set of String) 路由条目的AS路径。
-- `creation_time` (String) 路由条目的创建时间。
+- `created_time` (String) 路由条目的创建时间。
 - `description` (String) TR路由表路由条目的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
 - `destination_cidr_block` (String) 路由条目的目标网段。
 - `status` (String) 路由条目的状态。Available：可用。Creating：创建中。Pending：配置中。Deleting：删除中。Conflicted：未生效。
@@ -32,4 +32,4 @@ Data Source schema for Volcengine::TransitRouter::TransitRouterRouteEntry
 - `transit_router_route_entry_next_hop_type` (String) 路由条目的下一跳类型。取值如下：Attachment：网络实例，表示匹配该路由条目的流量会被转发到指定的网络实例。BlackHole：黑洞，表示匹配该路由条目的流量会被丢弃。
 - `transit_router_route_entry_type` (String) 路由条目的类型。Static：静态路由。Propagated：自动学习路由。
 - `transit_router_route_table_id` (String) 中转路由器实例关联的路由表的ID。
-- `update_time` (String) 路由条目的更新时间。
+- `updated_time` (String) 路由条目的更新时间。

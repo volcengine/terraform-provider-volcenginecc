@@ -142,32 +142,32 @@
   "handlers": {
     "create": {
       "permissions": [
-        "autoscaling:CreateScalingPolicy",
-        "autoscaling:DescribeScalingPolicies"
+        "auto_scaling:CreateScalingPolicy",
+        "auto_scaling:DescribeScalingPolicies"
       ]
     },
     "delete": {
       "permissions": [
-        "autoscaling:DeleteScalingPolicy",
-        "autoscaling:DescribeScalingPolicies"
+        "auto_scaling:DeleteScalingPolicy",
+        "auto_scaling:DescribeScalingPolicies"
       ]
     },
     "list": {
       "permissions": [
-        "autoscaling:DescribeScalingPolicies"
+        "auto_scaling:DescribeScalingPolicies"
       ]
     },
     "read": {
       "permissions": [
-        "autoscaling:DescribeScalingPolicies"
+        "auto_scaling:DescribeScalingPolicies"
       ]
     },
     "update": {
       "permissions": [
-        "autoscaling:DescribeScalingPolicies",
-        "autoscaling:ModifyScalingPolicy",
-        "autoscaling:EnableScalingPolicy",
-        "autoscaling:DisableScalingPolicy"
+        "auto_scaling:DescribeScalingPolicies",
+        "auto_scaling:ModifyScalingPolicy",
+        "auto_scaling:EnableScalingPolicy",
+        "auto_scaling:DisableScalingPolicy"
       ]
     }
   },

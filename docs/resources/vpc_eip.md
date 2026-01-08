@@ -45,14 +45,13 @@ resource "volcenginecc_vpc_eip" "EipDemo" {
 - `bandwidth` (Number) 公网IP的带宽上限，默认为“1”，单位：Mbps,BillingType传入1：取值范围1 ~ 500。BillingType传入2：取值范围1 ~ 500。BillingType传入3：取值范围1 ~ 200。
 - `bandwidth_package_id` (String) 共享带宽包的ID，表示将公网IP加入到共享带宽包。公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的地域相同。公网IP的计费方式必须是按量计费。共享带宽包为IPv4类型。
 - `description` (String) 公网IP的描述信息。
-- `direct_mode` (Boolean) 绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。
 - `instance_id` (String) 当前绑定的实例ID。
 - `instance_type` (String) 当前绑定的实例类型。Nat：公网NAT网关。NetworkInterface: 弹性网卡。ClbInstance: 负载均衡。EcsInstance：云服务器。HaVip：高可用虚拟IP。
 - `ip_address` (String) 申请申请指定的公网IP地址。仅支持填写使用后释放的IP地址，不填则表示自动分配。指定的公网IP地址
 - `ip_address_pool_id` (String) IP地址池的ID。
 - `isp` (String) 线路类型。BGP：BGP（多线）。ChinaMobile：中国移动静态单线。ChinaTelecom：中国电信静态单线。ChinaUnicom：中国联通静态单线。SingleLine_BGP：BGP单线。Fusion_BGP：融合BGP。ChinaMobile_Value：中国移动惠选型静态单线。ChinaUnicom_Value：中国联通惠选型静态单线。ChinaTelecom_Value：中国电信惠选型静态单线。
 - `name` (String) 公网IP的名称。
-- `period` (Number) 购买包年包月公网IP的时长，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。
+- `period` (Number) 代表购买包年包月公网IP的时长时，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。代表临时升配的时长时：单位为小时，取值范围：1～720。
 - `period_unit` (Number) 购买包年包月公网IP时长的单位。取值如下：1（默认值）：月。2 ：年。
 - `private_ip_address` (String) 要绑定公网IP的实例的私网IP地址。只支持传入云服务ECS主网卡的私网IP地址和辅助网卡IP地址。若不填写：InstanceType传入EcsInstance，则绑定云服务器ECS主网卡的主私网IP地址。InstanceType传入NetworkInterface，则绑定辅助网卡主私网IP地址。
 - `project_name` (String) 公网IP所属项目的名称。
@@ -61,7 +60,6 @@ resource "volcenginecc_vpc_eip" "EipDemo" {
 - `renew_type` (Number) 包年包月公网IP续费的方式。取值如下：1（默认值）：手动续费。2：自动续费。3：到期不续费。
 - `security_protection_instance_id` (Number) DDoS原生防护（企业版）ID。您可以调用 DescInstanceList 接口，查询DDoS原生防护（企业版）的ID。当SecurityProtectionTypes传入AntiDDoS_Enhanced时，此参数必须传入。
 - `security_protection_types` (Set of String) 防护类型。AntiDDoS_Enhanced：增强防护类型的公网IP，可以加入到DDoS原生防护（企业版）实例。空值：默认防护类型的公网IP。
-- `service_managed` (Boolean) 是否由服务管理
 - `tags` (Attributes Set) 公网IP的标签信息
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
@@ -71,12 +69,14 @@ resource "volcenginecc_vpc_eip" "EipDemo" {
 - `business_status` (String) 公网IP是否被锁定。Normal: 正常。FinancialLocked: 被锁定。
 - `created_time` (String) 公网IP的创建时间。
 - `deleted_time` (String) 预期资源强制回收时间。包年包月公网IP，此参数有返回值。按量计费公网IP，仅欠费冻结时，此参数有返回值。
+- `direct_mode` (Boolean) 绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。
 - `eip_address` (String) 公网IP地址。
 - `expired_time` (String) 公网IP的到期时间。包年包月，返回值为到期时间。按量计费，返回值为空。
 - `id` (String) Uniquely identifies the resource.
 - `is_blocked` (Boolean) 是否被封禁。true：是。false：否。
 - `lock_reason` (String) 公网IP被锁定的原因。financial: 因欠费被锁定。unlock: 欠费关停后充值恢复过程中。空值 : 没有被锁定。
 - `overdue_time` (String) 资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。
+- `service_managed` (Boolean) 是否由服务管理
 - `status` (String) 公网IP的状态。Attaching：绑定中。Detaching：解绑中。Attached：已绑定。Available：可用。Deleting：删除中。
 - `updated_time` (String) 更新公网IP的时间。
 

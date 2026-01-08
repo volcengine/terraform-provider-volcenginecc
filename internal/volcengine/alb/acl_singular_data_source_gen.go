@@ -27,6 +27,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "访问控制策略组中IP条目的详细信息。",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
@@ -45,9 +46,10 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"acl_entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"acl_entries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
@@ -101,14 +103,14 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "访问控制策略组的名字。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。不填默认为访问控制策略组ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: CreateTime
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "访问控制策略组的创建时间。",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "访问控制策略组的创建时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -130,6 +132,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "访问控制策略组关联的监听器详细信息。",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AclType": {
@@ -166,9 +169,10 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"listeners": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"listeners": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AclType
@@ -234,6 +238,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "访问控制策略组绑定的标签。",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
@@ -250,14 +255,14 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
@@ -275,14 +280,14 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "访问控制策略组绑定的标签。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateTime
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "访问控制策略组的最近操作时间。",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "访问控制策略组的最近操作时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -308,7 +313,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"acl_id":          "AclId",
 		"acl_name":        "AclName",
 		"acl_type":        "AclType",
-		"create_time":     "CreateTime",
+		"created_time":    "CreatedTime",
 		"description":     "Description",
 		"entry":           "Entry",
 		"key":             "Key",
@@ -320,7 +325,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol":        "Protocol",
 		"status":          "Status",
 		"tags":            "Tags",
-		"update_time":     "UpdateTime",
+		"updated_time":    "UpdatedTime",
 		"value":           "Value",
 	})
 

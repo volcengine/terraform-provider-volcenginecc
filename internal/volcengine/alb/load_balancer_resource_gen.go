@@ -58,6 +58,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BandwidthPackageId
@@ -73,6 +74,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// BandwidthPackageId is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -463,6 +465,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerEdition
@@ -490,6 +493,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
@@ -650,8 +654,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -678,9 +681,6 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 						Description: "标签的值，用于标识具体的标签内容。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -960,235 +960,6 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: LoadBalancerAddresses
-					"load_balancer_addresses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Eip
-								"eip": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AssociationMode
-										"association_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "EIP的绑定模式，例如Default或Normal。",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"Default",
-													"Normal",
-													"",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Bandwidth
-										"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "EIP的带宽峰值，单位为Mbps。",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: EipAddress
-										"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "弹性公网IP（EIP）的地址。",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: EipBillingType
-										"eip_billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "EIP的计费方式，2为按带宽计费，3为按流量计费。",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.OneOf(
-													2,
-													3,
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: EipType
-										"eip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "EIP的类型，例如静态BGP。",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: ISP
-										"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "公网IP的线路类型，BGP表示多线。",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"BGP",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PopLocations
-										"pop_locations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PopId
-													"pop_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "接入点（PoP）的唯一ID。",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: PopName
-													"pop_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "接入点（PoP）的名称。",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "EIP的接入点位置信息列表。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-												setplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "弹性公网IP（EIP）的详细信息。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: EipAddress
-								"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "绑定的弹性公网IP（EIP）的地址。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: EipId
-								"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "绑定的弹性公网IP（EIP）的ID。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: EniAddress
-								"eni_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "弹性网卡（ENI）上的私网IP地址。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: EniId
-								"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "IP地址所属的弹性网卡（ENI）的ID。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: EniIpv6Address
-								"eni_ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "弹性网卡（ENI）上的IPv6私网地址。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Ipv6Eip
-								"ipv_6_eip": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Bandwidth
-										"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "IPv6 EIP的带宽峰值，单位为Mbps。",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: BillingType
-										"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.OneOf(
-													2,
-													3,
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: ISP
-										"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "IPv6公网IP的线路类型，BGP表示多线。",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"BGP",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "IPv6弹性公网IP的详细信息。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Ipv6EipId
-								"ipv_6_eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "绑定的IPv6 EIP的ID。",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "该可用区下负载均衡提供的IP地址列表。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-							setplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "可用区内提供服务的子网ID。",
@@ -1199,6 +970,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
@@ -1211,6 +983,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -1220,7 +993,6 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -1248,7 +1020,6 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"accelerator_id":                 "AcceleratorId",
 		"accelerator_listener_id":        "AcceleratorListenerId",
 		"address_ip_version":             "AddressIpVersion",
-		"association_mode":               "AssociationMode",
 		"bandwidth":                      "Bandwidth",
 		"bandwidth_package_id":           "BandwidthPackageId",
 		"billing_type":                   "BillingType",
@@ -1258,20 +1029,10 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"deleted_time":                   "DeletedTime",
 		"description":                    "Description",
 		"dns_name":                       "DnsName",
-		"eip":                            "Eip",
-		"eip_address":                    "EipAddress",
 		"eip_billing_config":             "EipBillingConfig",
-		"eip_billing_type":               "EipBillingType",
-		"eip_id":                         "EipId",
-		"eip_type":                       "EipType",
 		"endpoint_group_id":              "EndpointGroupId",
-		"eni_address":                    "EniAddress",
-		"eni_id":                         "EniId",
-		"eni_ipv_6_address":              "EniIpv6Address",
 		"global_accelerator":             "GlobalAccelerator",
-		"ipv_6_eip":                      "Ipv6Eip",
 		"ipv_6_eip_billing_config":       "Ipv6EipBillingConfig",
-		"ipv_6_eip_id":                   "Ipv6EipId",
 		"isp":                            "ISP",
 		"key":                            "Key",
 		"load_balancer_addresses":        "LoadBalancerAddresses",
@@ -1283,9 +1044,6 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"modification_protection_reason": "ModificationProtectionReason",
 		"modification_protection_status": "ModificationProtectionStatus",
 		"overdue_time":                   "OverdueTime",
-		"pop_id":                         "PopId",
-		"pop_locations":                  "PopLocations",
-		"pop_name":                       "PopName",
 		"project_name":                   "ProjectName",
 		"status":                         "Status",
 		"subnet_id":                      "SubnetId",
@@ -1311,24 +1069,30 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/LoadBalancerId",
-		"/properties/Status",
-		"/properties/CreateTime",
-		"/properties/UpdateTime",
 		"/properties/BusinessStatus",
-		"/properties/LockReason",
-		"/properties/OverdueTime",
+		"/properties/CreateTime",
 		"/properties/DeletedTime",
 		"/properties/DnsName",
+		"/properties/LoadBalancerId",
+		"/properties/LockReason",
+		"/properties/OverdueTime",
+		"/properties/Status",
+		"/properties/UpdateTime",
+		"/properties/ZoneMappings/*/LoadBalancerAddresses",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/VpcId",
+		"/properties/AddressIpVersion",
+		"/properties/BandwidthPackageId",
+		"/properties/LoadBalancerBillingType",
+		"/properties/LoadBalancerEdition",
 		"/properties/EipBillingConfig",
 		"/properties/Ipv6EipBillingConfig",
-		"/properties/ZoneMappings",
-		"/properties/Type",
 		"/properties/ProjectName",
+		"/properties/Type",
+		"/properties/VpcId",
+		"/properties/ZoneMappings/*/SubnetId",
+		"/properties/ZoneMappings/*/ZoneId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

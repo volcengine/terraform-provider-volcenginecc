@@ -1,8 +1,9 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/KeyPairName ",
-    "/properties/ProjectName "
+    "/properties/KeyPairName",
+    "/properties/ProjectName",
+    "/properties/PublicKey"
   ],
   "definitions": {
     "Tag": {
@@ -17,13 +18,22 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "ECS 密钥对（Keypair）默认采用 RSA 2048 位加密算法生成一对关联密钥，包含公钥（public key）和私钥（private key）。其中，公钥用于对数据进行加密处理，可将明文转换为不可直接读取的密文；私钥则作为解密的唯一凭证，能将密文还原为原始明文，实现安全的身份验证与数据传输。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value",
+      "/properties/FingerPrint",
+      "/properties/KeyPairId",
+      "/properties/KeyPairName",
+      "/properties/ProjectName"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -44,7 +54,7 @@
     },
     "list": {
       "permissions": [
-        "ecs:DescribeKeyPairs "
+        "ecs:DescribeKeyPairs"
       ]
     },
     "read": {
@@ -59,7 +69,9 @@
         "ecs:AttachKeyPair",
         "ecs:DetachKeyPair",
         "ecs:DescribeKeyPairs",
-        "ecs:DescribeInstances"
+        "ecs:DescribeInstances",
+        "ecs:UntagResources",
+        "ecs:TagResources"
       ]
     }
   },
@@ -83,7 +95,7 @@
     },
     "InstanceIds": {
       "description": "操作的实例ID。",
-      "insertionOrder": true,
+      "insertionOrder": false,
       "items": {
         "type": "string"
       },
@@ -92,16 +104,11 @@
     },
     "KeyPairId": {
       "description": "密钥对唯一ID。",
-      "semantic": "resourceId",
       "type": "string"
     },
     "KeyPairName": {
       "description": "密钥对名称。不可与已有名称重复。长度限制在 2～64 个字符之间。允许使用点号“.”分隔字符成多段，每段允许使用大小写字母、数字或连字符“-”。不能以“-”和“.”开头或结尾，不能连续使用“-”或者“.”。",
-      "semantic": "resourceName",
-      "type": "string"
-    },
-    "PrivateKey": {
-      "description": "密钥对私钥信息。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "ProjectName": {
@@ -115,11 +122,10 @@
     },
     "Tags": {
       "description": "密钥对的标签。",
-      "insertionOrder": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
       },
-      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
@@ -145,7 +151,6 @@
   },
   "typeName": "Volcengine::ECS::Keypair",
   "writeOnlyProperties": [
-    "/properties/PrivateKey",
     "/properties/PublicKey"
   ]
 }

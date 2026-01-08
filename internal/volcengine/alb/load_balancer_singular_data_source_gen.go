@@ -444,8 +444,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },

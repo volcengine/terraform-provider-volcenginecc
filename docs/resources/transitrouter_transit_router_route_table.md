@@ -40,14 +40,14 @@ resource "volcenginecc_transitrouter_transit_router_route_table" "TransitRouterT
 
 ### Read-Only
 
-- `creation_time` (String) TR路由表的创建时间
+- `created_time` (String) TR路由表的创建时间
 - `id` (String) Uniquely identifies the resource.
 - `in_route_policy_table_id` (String) TR路由表关联的收方向路由策略的ID
 - `out_route_policy_table_id` (String) TR路由表关联的发方向路由策略的ID
 - `status` (String) TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用
 - `transit_router_route_table_id` (String) TR路由表的ID
 - `transit_router_route_table_type` (String) TR路由表的类型。System：系统路由表。Custom：自定义路由表。
-- `update_time` (String) TR路由表的最近操作时间
+- `updated_time` (String) TR路由表的最近操作时间
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -178,7 +178,7 @@
   "tagging": {
     "taggable": false
   },
-  "typeName": "Volcengine::FireWallCenter::DnsControlPolicy",
+  "typeName": "Volcengine::FWCenter::DnsControlPolicy",
   "writeOnlyProperties": [
     "/properties/InternetFirewallId"
   ]

@@ -1,11 +1,13 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
+    "/properties/ChargeType",
     "/properties/FileSystemType",
     "/properties/ProtocolType",
+    "/properties/SnapshotId",
+    "/properties/StorageType",
     "/properties/ZoneId",
-    "/properties/ProjectName",
-    "/properties/SnapshotId"
+    "/properties/ProjectName"
   ],
   "definitions": {
     "CachePerformance": {
@@ -52,13 +54,27 @@
         }
       },
       "required": [
-        "Key",
-        "Type"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "文件系统通过标准的 NFS 协议为您提供文件存储服务，用于网络文件远程访问，通过管理控制台创建挂载地址后，即可按需在客户端中通过标准的 POSIX 接口对文件系统进行访问。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/FileSystemId",
+      "/properties/FileSystemType",
+      "/properties/ProjectName",
+      "/properties/Status",
+      "/properties/FileSystemName",
+      "/properties/ZoneId",
+      "/properties/ProtocolType",
+      "/properties/StorageType",
+      "/properties/ChargeType",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -156,7 +172,7 @@
       "type": "string"
     },
     "Status": {
-      "description": "文件系统状态",
+      "description": "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
       "enum": [
         "Unknown",
         "Running",
@@ -201,9 +217,12 @@
   },
   "readOnlyProperties": [
     "/properties/CreateTime",
-    "/properties/UpdateTime",
+    "/properties/FileSystemId",
+    "/properties/SnapshotCount",
     "/properties/Status",
-    "/properties/SnapshotCount"
+    "/properties/UpdateTime",
+    "/properties/ZoneName",
+    "/properties/Capacity/Used"
   ],
   "required": [
     "ZoneId",
@@ -217,5 +236,8 @@
     "tagUpdatable": true,
     "taggable": true
   },
-  "typeName": "Volcengine::FileNAS::Instance"
+  "typeName": "Volcengine::FileNAS::Instance",
+  "writeOnlyProperties": [
+    "/properties/SnapshotId"
+  ]
 }

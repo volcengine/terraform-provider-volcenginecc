@@ -2,12 +2,12 @@
 page_title: "volcenginecc_alb_acl Resource - terraform-provider-volcenginecc"
 subcategory: ""
 description: |-
-  
+  ALB提供监听级别的访问控制，如果您希望仅允许某些IP、或仅拒绝某些IP通过监听端口访问ALB实例，可以对该监听器设置访问控制策略。您可以在创建监听器时配置访问控制，也可以在监听器创建后修改或重新配置访问控制。
 ---
 
 # volcenginecc_alb_acl (Resource)
 
-
+ALB提供监听级别的访问控制，如果您希望仅允许某些IP、或仅拒绝某些IP通过监听端口访问ALB实例，可以对该监听器设置访问控制策略。您可以在创建监听器时配置访问控制，也可以在监听器创建后修改或重新配置访问控制。
 
 ## Example Usage
 
@@ -34,24 +34,24 @@ resource "volcenginecc_alb_acl" "AlbAclDemo" {
 
 ### Optional
 
-- `acl_entries` (Attributes List) 访问控制策略组中IP条目的详细信息。
+- `acl_entries` (Attributes Set) 访问控制策略组中IP条目的详细信息。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--acl_entries))
 - `acl_name` (String) 访问控制策略组的名字。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。不填默认为访问控制策略组ID。
 - `description` (String) 访问控制策略组的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。
+- `listeners` (Attributes Set) 访问控制策略组关联的监听器详细信息。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
 - `project_name` (String) 访问控制策略组所属项目名称。
-- `tags` (Attributes List) 访问控制策略组绑定的标签。
+- `tags` (Attributes Set) 访问控制策略组绑定的标签。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `acl_entry_count` (Number) 访问控制策略组包含的IP条目数量。
 - `acl_id` (String) 访问控制策略组的ID。
-- `create_time` (String) 访问控制策略组的创建时间。
+- `created_time` (String) 访问控制策略组的创建时间。
 - `id` (String) Uniquely identifies the resource.
-- `listeners` (Attributes List) 访问控制策略组关联的监听器详细信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
 - `status` (String) 访问控制策略组的状态。Creating：创建中。Active：正常可用。Configuring：配置中。Deleting：删除中。
-- `update_time` (String) 访问控制策略组的最近操作时间。
+- `updated_time` (String) 访问控制策略组的最近操作时间。
 
 <a id="nestedatt--acl_entries"></a>
 ### Nested Schema for `acl_entries`
@@ -62,6 +62,14 @@ Optional:
 - `entry` (String) IP条目的地址段，只支持CIDR地址。
 
 
+<a id="nestedatt--listeners"></a>
+### Nested Schema for `listeners`
+
+Optional:
+
+- `acl_type` (String) 监听器对本访问控制策略组的控制方式。white：白名单方式；black：黑名单方式
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -69,18 +77,6 @@ Optional:
 
 - `key` (String) 用户标签的标签键。长度限制为1～128个字符。大小写敏感。不能以volc:和sys:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。
 - `value` (String) 用户标签的标签值。长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。
-
-
-<a id="nestedatt--listeners"></a>
-### Nested Schema for `listeners`
-
-Read-Only:
-
-- `acl_type` (String) 监听器对本访问控制策略组的控制方式。white：白名单方式；black：黑名单方式
-- `listener_id` (String) 监听器的ID
-- `listener_name` (String) 监听器的名称
-- `port` (Number) 监听器的端口
-- `protocol` (String) 监听器的协议
 
 ## Import
 

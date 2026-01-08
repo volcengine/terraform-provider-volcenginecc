@@ -1,7 +1,6 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/AccountId",
     "/properties/AnyPortEnabled",
     "/properties/ProjectName",
     "/properties/Protocol",
@@ -13,12 +12,12 @@
     "HealthCheck": {
       "properties": {
         "Domain": {
-          "description": "健康检查的域名",
+          "description": "健康检查的域名。",
           "type": "string"
         },
         "Enabled": {
           "default": true,
-          "description": "是否开启健康检查",
+          "description": "是否开启健康检查。",
           "type": "boolean"
         },
         "HealthyThreshold": {
@@ -28,7 +27,7 @@
           "type": "integer"
         },
         "HttpCode": {
-          "description": "健康检查正常的HTTP状态码",
+          "description": "健康检查正常的HTTP状态码。",
           "type": "string"
         },
         "Interval": {
@@ -39,7 +38,7 @@
         },
         "Method": {
           "default": "GET",
-          "description": "健康检查的请求方法",
+          "description": "健康检查的请求方法。",
           "type": "string"
         },
         "Port": {
@@ -55,7 +54,7 @@
         },
         "Type": {
           "default": "TCP",
-          "description": "健康检查的协议类型",
+          "description": "健康检查的协议类型。取值如下：取值如下：TCP（默认值）、HTTP、UDP",
           "enum": [
             "TCP",
             "HTTP",
@@ -69,7 +68,7 @@
           "type": "string"
         },
         "UdpRequest": {
-          "description": "UDP健康检查的预期响应字符串",
+          "description": "UDP健康检查的预期响应字符串。",
           "maxLength": 64,
           "type": "string"
         },
@@ -80,7 +79,7 @@
           "type": "integer"
         },
         "Uri": {
-          "description": "健康检查的路径",
+          "description": "健康检查的路径。",
           "maxLength": 128,
           "type": "string"
         }
@@ -90,7 +89,7 @@
     "Server": {
       "properties": {
         "Description": {
-          "description": "后端服务器的描述，默认值为空字符串",
+          "description": "后端服务器的描述，默认值为空字符串。",
           "maxLength": 255,
           "type": "string"
         },
@@ -108,11 +107,11 @@
           "type": "integer"
         },
         "ServerId": {
-          "description": "后端服务器 ID",
+          "description": "后端服务器 ID。",
           "type": "string"
         },
         "Type": {
-          "description": "后端服务器的类型",
+          "description": "后端服务器的类型。取值如下：ecs：云服务器实例（即主网卡）。eni：辅助网卡。ip：IP地址。",
           "enum": [
             "ecs",
             "eni",
@@ -121,7 +120,7 @@
           "type": "string"
         },
         "Weight": {
-          "description": "后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0",
+          "description": "后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0。",
           "format": "int64",
           "type": "integer"
         },
@@ -135,18 +134,32 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "标签键",
+          "description": "标签键。",
           "type": "string"
         },
         "Value": {
-          "description": "标签值",
+          "description": "标签值。",
           "type": "string"
         }
       },
+      "required": [
+        "Key"
+      ],
       "type": "object"
     }
   },
-  "description": "服务器组",
+  "description": "服务器组是一组后端服务器。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/ServerGroupId",
+      "/properties/ServerGroupName",
+      "/properties/Type",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -187,22 +200,22 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "账号ID",
+      "description": "账号ID。",
       "type": "string"
     },
     "AnyPortEnabled": {
       "default": false,
-      "description": "是否开启全端口转发",
+      "description": "是否开启全端口转发。",
       "type": "boolean"
     },
     "BypassSecurityGroupEnabled": {
       "default": false,
-      "description": "是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数",
+      "description": "是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数。",
       "type": "boolean"
     },
     "ConnectionDrainEnabled": {
       "default": false,
-      "description": "是否开启连接优雅中断",
+      "description": "是否开启连接优雅中断。",
       "type": "boolean"
     },
     "ConnectionDrainTimeout": {
@@ -211,22 +224,24 @@
       "type": "integer"
     },
     "CreatedTime": {
-      "description": "后端服务器组的创建时间",
+      "description": "后端服务器组的创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "后端服务器组的描述,服务器组的描述。必须以字母、数字或中文开头，可包含以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）长度限制为0 ～ 255个字符。该参数不传入，则默认为空字符串。",
       "maxLength": 255,
       "minLength": 0,
+      "semantic": "description",
       "type": "string"
     },
     "HealthCheck": {
       "$ref": "#/definitions/HealthCheck",
-      "description": "健康检查相关参数"
+      "description": "健康检查相关参数。"
     },
     "IpAddressVersion": {
       "default": "ipv4",
-      "description": "服务器组的IP地址类型",
+      "description": "服务器组的IP地址类型。取值如下：ipv4（默认值）：表示该服务器组仅支持添加IPv4类型的后端服务器。ipv6：表示该服务器组仅支持添加IPv6类型的后端服务器。",
       "enum": [
         "ipv4",
         "ipv6"
@@ -234,15 +249,16 @@
       "type": "string"
     },
     "PreserveClientIpEnabled": {
-      "description": "是否开启源地址保持",
+      "description": "是否开启源地址保持。",
       "type": "boolean"
     },
     "ProjectName": {
-      "description": "项目名称",
+      "description": "项目名称。",
+      "semantic": "projectName",
       "type": "string"
     },
     "Protocol": {
-      "description": "NLB转发流量到后端服务器时使用的通信协议",
+      "description": "NLB转发流量到后端服务器时使用的通信协议。取值如下：TCP。UDP。",
       "enum": [
         "TCP",
         "UDP"
@@ -251,7 +267,7 @@
     },
     "ProxyProtocolType": {
       "default": "off",
-      "description": "是否开启Proxy-Protocol协议",
+      "description": "是否开启Proxy-Protocol协议。取值如下：off（默认值）：关闭。standard：开启。NLB将通过Proxy-Protocol协议携带客户端源IP地址转发至后端服务器，还需要在后端服务器上配置Proxy-Protocol。",
       "enum": [
         "off",
         "standard"
@@ -259,7 +275,7 @@
       "type": "string"
     },
     "RelatedLoadBalancerIds": {
-      "description": "服务器组关联的NLB实例",
+      "description": "服务器组关联的NLB实例。",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -269,7 +285,7 @@
     },
     "Scheduler": {
       "default": "wrr",
-      "description": "NLB转发流量时遵循的规则",
+      "description": "NLB转发流量时遵循的规则。取值如下：wrr（默认值）：加权轮询，权重值越高的后端服务器，被轮询到的次数（概率）越高。wlc：加权最小连接数，在最少连接数的基础上，根据后端服务器的不同处理能力，给每个服务器分配不同的权重，使其能够接受相应权值数的服务请求。sh：源地址哈希，基于源IP地址的一致性哈希，相同的源地址会调度到相同的后端服务器。",
       "enum": [
         "wrr",
         "wlc",
@@ -278,22 +294,24 @@
       "type": "string"
     },
     "ServerCount": {
-      "description": "服务器组中后端服务器的数量",
+      "description": "服务器组中后端服务器的数量。",
       "format": "int64",
       "type": "integer"
     },
     "ServerGroupId": {
-      "description": "服务器组ID",
+      "description": "服务器组ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "ServerGroupName": {
       "description": "服务器组名称, 必须以字母、数字或中文开头，可包含以下特殊字符：点号（.）、下划线（_）和中划线（-）。限制为1 ～ 128个字符。该参数不传入，则默认为服务器组ID。",
       "maxLength": 128,
       "minLength": 1,
+      "semantic": "resourceName",
       "type": "string"
     },
     "Servers": {
-      "description": "服务器组中待添加后端服务器的信息",
+      "description": "服务器组中待添加后端服务器的信息。",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Server"
@@ -303,35 +321,37 @@
     },
     "SessionPersistenceEnabled": {
       "default": false,
-      "description": "是否开启会话保持",
+      "description": "是否开启会话保持。",
       "type": "boolean"
     },
     "SessionPersistenceTimeout": {
       "default": 1000,
-      "description": "会话保持的超时时间，取值范围为1～3600秒，默认1000秒",
+      "description": "会话保持的超时时间，取值范围为1～3600秒，默认1000秒。",
       "format": "int64",
       "type": "integer"
     },
     "Status": {
-      "description": "服务器组的状态",
+      "description": "服务器组的状态。",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
-      "description": "标签",
+      "description": "标签。",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
     "TimestampRemoveEnabled": {
-      "description": "是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能",
+      "description": "是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能。",
       "type": "boolean"
     },
     "Type": {
       "default": "instance",
-      "description": "服务器组的类型",
+      "description": "服务器组的类型。取值如下：instance（默认值）：服务器类型。支持添加云服务器实例和已绑定云服务器实例的辅助网卡作为后端服务器。ip：IP地址类型。支持添加任何网络可达的VPC或IDC中的服务器作为后端服务器。",
       "enum": [
         "instance",
         "ip"
@@ -339,7 +359,8 @@
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "后端服务器组的更新时间",
+      "description": "后端服务器组的更新时间。",
+      "semantic": "updatedTime",
       "type": "string"
     },
     "VpcId": {
@@ -348,12 +369,13 @@
     }
   },
   "readOnlyProperties": [
-    "/properties/CreateTime",
+    "/properties/AccountId",
+    "/properties/CreatedTime",
     "/properties/RelatedLoadBalancerIds",
     "/properties/ServerCount",
     "/properties/ServerGroupId",
     "/properties/Status",
-    "/properties/UpdateTime"
+    "/properties/UpdatedTime"
   ],
   "required": [
     "VpcId",

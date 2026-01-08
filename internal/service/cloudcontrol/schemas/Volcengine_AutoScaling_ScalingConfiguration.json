@@ -75,15 +75,15 @@
       "description": "云盘。",
       "properties": {
         "DeleteWithInstance": {
-          "description": "云盘是否随实例释放：参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 - 15。参数 - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+          "description": "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
           "type": "boolean"
         },
         "Size": {
-          "description": "云盘的容量，单位为GiB。参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值 - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。多个云盘之间用\u0026分隔。",
+          "description": "云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。",
           "type": "integer"
         },
         "VolumeType": {
-          "description": "云盘的类型：参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数 - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用\u0026分隔。",
+          "description": "云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。",
           "enum": [
             "ESSD_FlexPL",
             "ESSD_PL0",
@@ -96,6 +96,13 @@
     }
   },
   "description": "用于定义伸缩组中的实例配置，包括计算、内存、网络、存储、安全等，伸缩组扩容时，会按照此处的配置来源创建新实例。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ScalingConfigurationId",
+      "/properties/ScalingConfigurationName",
+      "/properties/ScalingGroupId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -163,6 +170,7 @@
     },
     "InstanceDescription": {
       "description": "实例的描述，取值：不能以数字、中划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0 ~ 255之间。不填默认为空字符串。",
+      "semantic": "description",
       "type": "string"
     },
     "InstanceName": {
@@ -170,6 +178,7 @@
       "type": "string"
     },
     "InstanceTypeOverrides": {
+      "description": "抢占式实例的规格信息。",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/InstanceTypeOverride"
@@ -197,7 +206,7 @@
       "type": "integer"
     },
     "KeyPairName": {
-      "description": "KeyPairName string 可选 示例值：kp-test-123，使用“SSH密钥对”登录实例时，请输入密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+      "description": "密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
       "type": "string"
     },
     "LifecycleState": {

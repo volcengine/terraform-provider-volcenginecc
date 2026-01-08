@@ -171,6 +171,7 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "抢占式实例的规格信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "抢占式实例。",
@@ -206,7 +207,8 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "抢占式实例的规格信息。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceTypes
 		// Cloud Control resource type schema:
@@ -244,11 +246,11 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "KeyPairName string 可选 示例值：kp-test-123，使用“SSH密钥对”登录实例时，请输入密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+		//	  "description": "密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
 		//	  "type": "string"
 		//	}
 		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "KeyPairName string 可选 示例值：kp-test-123，使用“SSH密钥对”登录实例时，请输入密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+			Description: "密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecycleState
@@ -447,15 +449,15 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    "description": "云盘。",
 		//	    "properties": {
 		//	      "DeleteWithInstance": {
-		//	        "description": "云盘是否随实例释放：参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 - 15。参数 - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+		//	        "description": "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Size": {
-		//	        "description": "云盘的容量，单位为GiB。参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值 - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。多个云盘之间用\u0026分隔。",
+		//	        "description": "云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。",
 		//	        "type": "integer"
 		//	      },
 		//	      "VolumeType": {
-		//	        "description": "云盘的类型：参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数 - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用\u0026分隔。",
+		//	        "description": "云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。",
 		//	        "enum": [
 		//	          "ESSD_FlexPL",
 		//	          "ESSD_PL0",
@@ -474,17 +476,17 @@ func scalingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DeleteWithInstance
 					"delete_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘是否随实例释放：参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1   - 15。参数   - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+						Description: "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘的容量，单位为GiB。参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值   - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。多个云盘之间用&分隔。",
+						Description: "云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeType
 					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘的类型：参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数   - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用&分隔。",
+						Description: "云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

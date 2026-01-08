@@ -156,7 +156,7 @@
     },
     {
         "resource": "volcenginecc_cr_name_space",
-        "identifier": ["Name","Registry"],
+        "identifier": ["Registry","Name"],
         "path": "./examples/resources/volcenginecc_cr_name_space/import.sh"
     },
     {
@@ -465,9 +465,9 @@
         "path": "./examples/resources/volcenginecc_rdsmssql_instance/import.sh"
     },
     {
-        "resource": "volcenginecc_firewallcenter_dns_control_policy",
+        "resource": "volcenginecc_fwcenter_dns_control_policy",
         "identifier": ["RuleId"],
-        "path": "./examples/resources/volcenginecc_firewallcenter_dns_control_policy/import.sh"
+        "path": "./examples/resources/volcenginecc_fwcenter_dns_control_policy/import.sh"
     },
     {
         "resource": "volcenginecc_dns_zone",
@@ -478,5 +478,15 @@
         "resource": "volcenginecc_iam_project",
         "identifier": ["ProjectName"],
         "path": "./examples/resources/volcenginecc_iam_project/import.sh"
+    },
+    {
+        "resource": "volcenginecc_bmq_group",
+        "identifier": ["GroupId"],
+        "path": "./examples/resources/volcenginecc_bmq_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudmonitor_rule",
+        "identifier": ["RuleId"],
+        "path": "./examples/resources/volcenginecc_cloudmonitor_rule/import.sh"
     }
 ]

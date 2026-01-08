@@ -78,13 +78,23 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "每个 ALB 实例至少要有一个监听器才能正常工作。监听器接收客户端请求，并根据您配置的转发规则和负载均衡算法将请求分发到后端服务器上。您可以在一个 ALB 实例下创建多个监听器，并为监听器配置不同的监听协议，以处理使用不同协议的客户端请求。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/LoadBalancerId",
+      "/properties/ListenerId",
+      "/properties/ListenerName",
+      "/properties/ProjectName",
+      "/properties/Protocol",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

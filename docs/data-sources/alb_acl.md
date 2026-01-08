@@ -21,17 +21,17 @@ Data Source schema for Volcengine::ALB::ACL
 
 ### Read-Only
 
-- `acl_entries` (Attributes List) 访问控制策略组中IP条目的详细信息。 (see [below for nested schema](#nestedatt--acl_entries))
+- `acl_entries` (Attributes Set) 访问控制策略组中IP条目的详细信息。 (see [below for nested schema](#nestedatt--acl_entries))
 - `acl_entry_count` (Number) 访问控制策略组包含的IP条目数量。
 - `acl_id` (String) 访问控制策略组的ID。
 - `acl_name` (String) 访问控制策略组的名字。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。不填默认为访问控制策略组ID。
-- `create_time` (String) 访问控制策略组的创建时间。
+- `created_time` (String) 访问控制策略组的创建时间。
 - `description` (String) 访问控制策略组的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。
-- `listeners` (Attributes List) 访问控制策略组关联的监听器详细信息。 (see [below for nested schema](#nestedatt--listeners))
+- `listeners` (Attributes Set) 访问控制策略组关联的监听器详细信息。 (see [below for nested schema](#nestedatt--listeners))
 - `project_name` (String) 访问控制策略组所属项目名称。
 - `status` (String) 访问控制策略组的状态。Creating：创建中。Active：正常可用。Configuring：配置中。Deleting：删除中。
-- `tags` (Attributes List) 访问控制策略组绑定的标签。 (see [below for nested schema](#nestedatt--tags))
-- `update_time` (String) 访问控制策略组的最近操作时间。
+- `tags` (Attributes Set) 访问控制策略组绑定的标签。 (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) 访问控制策略组的最近操作时间。
 
 <a id="nestedatt--acl_entries"></a>
 ### Nested Schema for `acl_entries`

@@ -53,35 +53,46 @@
     }
   },
   "description": "在把外部的 DNS 查询请求转发到解析器的场景中，您需要创建终端节点。收到解析器转发的 DNS 查询请求后，终端节点出站终端节点会把 DNS 查询请求转发到外部的 DNS 服务器。收到来自外部的 DNS 查询请求后，入站终端节点会把 DNS 查询请求转发到解析器。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Direction",
+      "/properties/VpcID",
+      "/properties/Name",
+      "/properties/ProjectName",
+      "/properties/Status",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "privatezone:CreateResolverEndpoint",
-        "privatezone:QueryResolverEndpoint"
+        "private_zone:CreateResolverEndpoint",
+        "private_zone:QueryResolverEndpoint"
       ]
     },
     "delete": {
       "permissions": [
-        "privatezone:QueryResolverEndpoint",
-        "privatezone:DeleteResolverEndpoint"
+        "private_zone:QueryResolverEndpoint",
+        "private_zone:DeleteResolverEndpoint"
       ]
     },
     "list": {
       "permissions": [
-        "privatezone:ListResolverEndpoints"
+        "private_zone:ListResolverEndpoints"
       ]
     },
     "read": {
       "permissions": [
-        "privatezone:QueryResolverEndpoint"
+        "private_zone:QueryResolverEndpoint"
       ]
     },
     "update": {
       "permissions": [
-        "privatezone:QueryResolverEndpoint",
-        "privatezone:UpdateResolverEndpoint",
-        "privatezone:UntagResources",
-        "privatezone:TagResources"
+        "private_zone:QueryResolverEndpoint",
+        "private_zone:UpdateResolverEndpoint",
+        "private_zone:UntagResources",
+        "private_zone:TagResources"
       ]
     }
   },
@@ -148,6 +159,7 @@
         "Updating",
         "Error"
       ],
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {

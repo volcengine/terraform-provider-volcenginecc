@@ -8,11 +8,10 @@ package ecs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -77,23 +76,20 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "操作的实例ID。",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"instance_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"instance_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "操作的实例ID。",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KeyPairId
@@ -120,22 +116,9 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "密钥对名称。不可与已有名称重复。长度限制在 2～64 个字符之间。允许使用点号“.”分隔字符成多段，每段允许使用大小写字母、数字或连字符“-”。不能以“-”和“.”开头或结尾，不能连续使用“-”或者“.”。",
 			Required:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: PrivateKey
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "密钥对私钥信息。",
-		//	  "type": "string"
-		//	}
-		"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对私钥信息。",
-			Optional:    true,
-			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// PrivateKey is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
@@ -150,6 +133,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PublicKey
@@ -165,6 +149,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// PublicKey is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -173,7 +158,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "密钥对的标签。",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
@@ -186,15 +171,14 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
@@ -214,9 +198,6 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 						Description: "标签值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -226,11 +207,8 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 			Description: "密钥对的标签。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
@@ -276,7 +254,6 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		"key":           "Key",
 		"key_pair_id":   "KeyPairId",
 		"key_pair_name": "KeyPairName",
-		"private_key":   "PrivateKey",
 		"project_name":  "ProjectName",
 		"public_key":    "PublicKey",
 		"tags":          "Tags",
@@ -285,7 +262,6 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/PrivateKey",
 		"/properties/PublicKey",
 	})
 
@@ -297,8 +273,9 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/KeyPairName ",
-		"/properties/ProjectName ",
+		"/properties/KeyPairName",
+		"/properties/ProjectName",
+		"/properties/PublicKey",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

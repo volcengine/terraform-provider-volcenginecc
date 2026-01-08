@@ -248,6 +248,7 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "default": "default",
 		//	  "description": "路由表所属项目的名称。",
 		//	  "type": "string"
 		//	}

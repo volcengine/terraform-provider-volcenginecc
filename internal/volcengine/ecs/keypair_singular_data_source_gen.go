@@ -61,14 +61,14 @@ func keypairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "操作的实例ID。",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"instance_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"instance_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "操作的实例ID。",
 			Computed:    true,
@@ -93,17 +93,6 @@ func keypairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "密钥对名称。不可与已有名称重复。长度限制在 2～64 个字符之间。允许使用点号“.”分隔字符成多段，每段允许使用大小写字母、数字或连字符“-”。不能以“-”和“.”开头或结尾，不能连续使用“-”或者“.”。",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: PrivateKey
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "密钥对私钥信息。",
-		//	  "type": "string"
-		//	}
-		"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对私钥信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -133,7 +122,7 @@ func keypairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "密钥对的标签。",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
@@ -146,15 +135,14 @@ func keypairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
@@ -207,7 +195,6 @@ func keypairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":           "Key",
 		"key_pair_id":   "KeyPairId",
 		"key_pair_name": "KeyPairName",
-		"private_key":   "PrivateKey",
 		"project_name":  "ProjectName",
 		"public_key":    "PublicKey",
 		"tags":          "Tags",

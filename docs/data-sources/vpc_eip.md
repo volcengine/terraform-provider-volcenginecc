@@ -41,7 +41,7 @@ Data Source schema for Volcengine::VPC::EIP
 - `lock_reason` (String) 公网IP被锁定的原因。financial: 因欠费被锁定。unlock: 欠费关停后充值恢复过程中。空值 : 没有被锁定。
 - `name` (String) 公网IP的名称。
 - `overdue_time` (String) 资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。
-- `period` (Number) 购买包年包月公网IP的时长，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。
+- `period` (Number) 代表购买包年包月公网IP的时长时，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。代表临时升配的时长时：单位为小时，取值范围：1～720。
 - `period_unit` (Number) 购买包年包月公网IP时长的单位。取值如下：1（默认值）：月。2 ：年。
 - `private_ip_address` (String) 要绑定公网IP的实例的私网IP地址。只支持传入云服务ECS主网卡的私网IP地址和辅助网卡IP地址。若不填写：InstanceType传入EcsInstance，则绑定云服务器ECS主网卡的主私网IP地址。InstanceType传入NetworkInterface，则绑定辅助网卡主私网IP地址。
 - `project_name` (String) 公网IP所属项目的名称。

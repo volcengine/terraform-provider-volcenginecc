@@ -21,7 +21,7 @@ Data Source schema for Volcengine::TransitRouter::TransitRouterRouteTable
 
 ### Read-Only
 
-- `creation_time` (String) TR路由表的创建时间
+- `created_time` (String) TR路由表的创建时间
 - `description` (String) TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
 - `in_route_policy_table_id` (String) TR路由表关联的收方向路由策略的ID
 - `out_route_policy_table_id` (String) TR路由表关联的发方向路由策略的ID
@@ -31,7 +31,7 @@ Data Source schema for Volcengine::TransitRouter::TransitRouterRouteTable
 - `transit_router_route_table_id` (String) TR路由表的ID
 - `transit_router_route_table_name` (String) TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID
 - `transit_router_route_table_type` (String) TR路由表的类型。System：系统路由表。Custom：自定义路由表。
-- `update_time` (String) TR路由表的最近操作时间
+- `updated_time` (String) TR路由表的最近操作时间
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

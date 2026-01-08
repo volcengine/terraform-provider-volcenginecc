@@ -247,6 +247,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "抢占式实例的规格信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "抢占式实例。",
@@ -290,8 +291,9 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "抢占式实例的规格信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeBetween(1, 10),
 			}, /*END VALIDATORS*/
@@ -348,11 +350,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "KeyPairName string 可选 示例值：kp-test-123，使用“SSH密钥对”登录实例时，请输入密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+		//	  "description": "密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
 		//	  "type": "string"
 		//	}
 		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "KeyPairName string 可选 示例值：kp-test-123，使用“SSH密钥对”登录实例时，请输入密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+			Description: "密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -641,15 +643,15 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	    "description": "云盘。",
 		//	    "properties": {
 		//	      "DeleteWithInstance": {
-		//	        "description": "云盘是否随实例释放：参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 - 15。参数 - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+		//	        "description": "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Size": {
-		//	        "description": "云盘的容量，单位为GiB。参数 - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值 - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。多个云盘之间用\u0026分隔。",
+		//	        "description": "云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。",
 		//	        "type": "integer"
 		//	      },
 		//	      "VolumeType": {
-		//	        "description": "云盘的类型：参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数 - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用\u0026分隔。",
+		//	        "description": "云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。",
 		//	        "enum": [
 		//	          "ESSD_FlexPL",
 		//	          "ESSD_PL0",
@@ -668,7 +670,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DeleteWithInstance
 					"delete_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘是否随实例释放：参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1   - 15。参数   - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+						Description: "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -677,7 +679,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘的容量，单位为GiB。参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值   - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。多个云盘之间用&分隔。",
+						Description: "云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -686,7 +688,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeType
 					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘的类型：参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数   - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用&分隔。",
+						Description: "云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
