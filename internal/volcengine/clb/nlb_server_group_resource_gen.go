@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
+	fwvalidators "github.com/volcengine/terraform-provider-volcenginecc/internal/validators"
 )
 
 func init() {
@@ -38,16 +39,14 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号ID",
+		//	  "description": "账号ID。",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号ID",
-			Optional:    true,
+			Description: "账号ID。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AnyPortEnabled
@@ -55,11 +54,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "是否开启全端口转发",
+		//	  "description": "是否开启全端口转发。",
 		//	  "type": "boolean"
 		//	}
 		"any_port_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启全端口转发",
+			Description: "是否开启全端口转发。",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),
@@ -73,11 +72,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数",
+		//	  "description": "是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数。",
 		//	  "type": "boolean"
 		//	}
 		"bypass_security_group_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数",
+			Description: "是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数。",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),
@@ -90,11 +89,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "是否开启连接优雅中断",
+		//	  "description": "是否开启连接优雅中断。",
 		//	  "type": "boolean"
 		//	}
 		"connection_drain_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启连接优雅中断",
+			Description: "是否开启连接优雅中断。",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),
@@ -122,12 +121,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的创建时间",
+		//	  "description": "后端服务器组的创建时间。",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的创建时间",
-			Optional:    true,
+			Description: "后端服务器组的创建时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -157,15 +155,15 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查相关参数",
+		//	  "description": "健康检查相关参数。",
 		//	  "properties": {
 		//	    "Domain": {
-		//	      "description": "健康检查的域名",
+		//	      "description": "健康检查的域名。",
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
 		//	      "default": true,
-		//	      "description": "是否开启健康检查",
+		//	      "description": "是否开启健康检查。",
 		//	      "type": "boolean"
 		//	    },
 		//	    "HealthyThreshold": {
@@ -175,7 +173,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "HttpCode": {
-		//	      "description": "健康检查正常的HTTP状态码",
+		//	      "description": "健康检查正常的HTTP状态码。",
 		//	      "type": "string"
 		//	    },
 		//	    "Interval": {
@@ -186,7 +184,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Method": {
 		//	      "default": "GET",
-		//	      "description": "健康检查的请求方法",
+		//	      "description": "健康检查的请求方法。",
 		//	      "type": "string"
 		//	    },
 		//	    "Port": {
@@ -202,7 +200,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Type": {
 		//	      "default": "TCP",
-		//	      "description": "健康检查的协议类型",
+		//	      "description": "健康检查的协议类型。取值如下：取值如下：TCP（默认值）、HTTP、UDP",
 		//	      "enum": [
 		//	        "TCP",
 		//	        "HTTP",
@@ -216,7 +214,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "UdpRequest": {
-		//	      "description": "UDP健康检查的预期响应字符串",
+		//	      "description": "UDP健康检查的预期响应字符串。",
 		//	      "maxLength": 64,
 		//	      "type": "string"
 		//	    },
@@ -227,7 +225,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "Uri": {
-		//	      "description": "健康检查的路径",
+		//	      "description": "健康检查的路径。",
 		//	      "maxLength": 128,
 		//	      "type": "string"
 		//	    }
@@ -238,7 +236,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Domain
 				"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的域名",
+					Description: "健康检查的域名。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -247,7 +245,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启健康检查",
+					Description: "是否开启健康检查。",
 					Optional:    true,
 					Computed:    true,
 					Default:     booldefault.StaticBool(true),
@@ -267,7 +265,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: HttpCode
 				"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查正常的HTTP状态码",
+					Description: "健康检查正常的HTTP状态码。",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -286,7 +284,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Method
 				"method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的请求方法",
+					Description: "健康检查的请求方法。",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("GET"),
@@ -315,7 +313,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的协议类型",
+					Description: "健康检查的协议类型。取值如下：取值如下：TCP（默认值）、HTTP、UDP",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("TCP"),
@@ -344,7 +342,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: UdpRequest
 				"udp_request": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "UDP健康检查的预期响应字符串",
+					Description: "UDP健康检查的预期响应字符串。",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -366,7 +364,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Uri
 				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的路径",
+					Description: "健康检查的路径。",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -377,7 +375,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "健康检查相关参数",
+			Description: "健康检查相关参数。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -389,7 +387,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "ipv4",
-		//	  "description": "服务器组的IP地址类型",
+		//	  "description": "服务器组的IP地址类型。取值如下：ipv4（默认值）：表示该服务器组仅支持添加IPv4类型的后端服务器。ipv6：表示该服务器组仅支持添加IPv6类型的后端服务器。",
 		//	  "enum": [
 		//	    "ipv4",
 		//	    "ipv6"
@@ -397,7 +395,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"ip_address_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器组的IP地址类型",
+			Description: "服务器组的IP地址类型。取值如下：ipv4（默认值）：表示该服务器组仅支持添加IPv4类型的后端服务器。ipv6：表示该服务器组仅支持添加IPv6类型的后端服务器。",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("ipv4"),
@@ -416,11 +414,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启源地址保持",
+		//	  "description": "是否开启源地址保持。",
 		//	  "type": "boolean"
 		//	}
 		"preserve_client_ip_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启源地址保持",
+			Description: "是否开启源地址保持。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -431,11 +429,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称",
+		//	  "description": "项目名称。",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称",
+			Description: "项目名称。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -447,7 +445,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB转发流量到后端服务器时使用的通信协议",
+		//	  "description": "NLB转发流量到后端服务器时使用的通信协议。取值如下：TCP。UDP。",
 		//	  "enum": [
 		//	    "TCP",
 		//	    "UDP"
@@ -455,7 +453,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB转发流量到后端服务器时使用的通信协议",
+			Description: "NLB转发流量到后端服务器时使用的通信协议。取值如下：TCP。UDP。",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -472,7 +470,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "off",
-		//	  "description": "是否开启Proxy-Protocol协议",
+		//	  "description": "是否开启Proxy-Protocol协议。取值如下：off（默认值）：关闭。standard：开启。NLB将通过Proxy-Protocol协议携带客户端源IP地址转发至后端服务器，还需要在后端服务器上配置Proxy-Protocol。",
 		//	  "enum": [
 		//	    "off",
 		//	    "standard"
@@ -480,7 +478,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"proxy_protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启Proxy-Protocol协议",
+			Description: "是否开启Proxy-Protocol协议。取值如下：off（默认值）：关闭。standard：开启。NLB将通过Proxy-Protocol协议携带客户端源IP地址转发至后端服务器，还需要在后端服务器上配置Proxy-Protocol。",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("off"),
@@ -498,7 +496,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组关联的NLB实例",
+		//	  "description": "服务器组关联的NLB实例。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -508,7 +506,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"related_load_balancer_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "服务器组关联的NLB实例",
+			Description: "服务器组关联的NLB实例。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -519,7 +517,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "wrr",
-		//	  "description": "NLB转发流量时遵循的规则",
+		//	  "description": "NLB转发流量时遵循的规则。取值如下：wrr（默认值）：加权轮询，权重值越高的后端服务器，被轮询到的次数（概率）越高。wlc：加权最小连接数，在最少连接数的基础上，根据后端服务器的不同处理能力，给每个服务器分配不同的权重，使其能够接受相应权值数的服务请求。sh：源地址哈希，基于源IP地址的一致性哈希，相同的源地址会调度到相同的后端服务器。",
 		//	  "enum": [
 		//	    "wrr",
 		//	    "wlc",
@@ -528,7 +526,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"scheduler": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB转发流量时遵循的规则",
+			Description: "NLB转发流量时遵循的规则。取值如下：wrr（默认值）：加权轮询，权重值越高的后端服务器，被轮询到的次数（概率）越高。wlc：加权最小连接数，在最少连接数的基础上，根据后端服务器的不同处理能力，给每个服务器分配不同的权重，使其能够接受相应权值数的服务请求。sh：源地址哈希，基于源IP地址的一致性哈希，相同的源地址会调度到相同的后端服务器。",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("wrr"),
@@ -547,12 +545,12 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组中后端服务器的数量",
+		//	  "description": "服务器组中后端服务器的数量。",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"server_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "服务器组中后端服务器的数量",
+			Description: "服务器组中后端服务器的数量。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -562,11 +560,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组ID",
+		//	  "description": "服务器组ID。",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器组ID",
+			Description: "服务器组ID。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -596,12 +594,12 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组中待添加后端服务器的信息",
+		//	  "description": "服务器组中待添加后端服务器的信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "后端服务器的描述，默认值为空字符串",
+		//	        "description": "后端服务器的描述，默认值为空字符串。",
 		//	        "maxLength": 255,
 		//	        "type": "string"
 		//	      },
@@ -619,11 +617,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "ServerId": {
-		//	        "description": "后端服务器 ID",
+		//	        "description": "后端服务器 ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "后端服务器的类型",
+		//	        "description": "后端服务器的类型。取值如下：ecs：云服务器实例（即主网卡）。eni：辅助网卡。ip：IP地址。",
 		//	        "enum": [
 		//	          "ecs",
 		//	          "eni",
@@ -632,7 +630,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {
-		//	        "description": "后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0",
+		//	        "description": "后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0。",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
@@ -651,7 +649,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的描述，默认值为空字符串",
+						Description: "后端服务器的描述，默认值为空字符串。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -690,7 +688,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ServerId
 					"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器 ID",
+						Description: "后端服务器 ID。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -699,7 +697,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的类型",
+						Description: "后端服务器的类型。取值如下：ecs：云服务器实例（即主网卡）。eni：辅助网卡。ip：IP地址。",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -715,7 +713,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0",
+						Description: "后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -733,7 +731,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "服务器组中待添加后端服务器的信息\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "服务器组中待添加后端服务器的信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -745,11 +743,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "是否开启会话保持",
+		//	  "description": "是否开启会话保持。",
 		//	  "type": "boolean"
 		//	}
 		"session_persistence_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启会话保持",
+			Description: "是否开启会话保持。",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),
@@ -762,12 +760,12 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 1000,
-		//	  "description": "会话保持的超时时间，取值范围为1～3600秒，默认1000秒",
+		//	  "description": "会话保持的超时时间，取值范围为1～3600秒，默认1000秒。",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"session_persistence_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "会话保持的超时时间，取值范围为1～3600秒，默认1000秒",
+			Description: "会话保持的超时时间，取值范围为1～3600秒，默认1000秒。",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(1000),
@@ -779,11 +777,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组的状态",
+		//	  "description": "服务器组的状态。",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器组的状态",
+			Description: "服务器组的状态。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -793,19 +791,22 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签",
+		//	  "description": "标签。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键",
+		//	        "description": "标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值",
+		//	        "description": "标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
@@ -816,16 +817,19 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键",
+						Description: "标签键。",
 						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值",
+						Description: "标签值。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -834,7 +838,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "标签。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -845,11 +849,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能",
+		//	  "description": "是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能。",
 		//	  "type": "boolean"
 		//	}
 		"timestamp_remove_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能",
+			Description: "是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -861,7 +865,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "instance",
-		//	  "description": "服务器组的类型",
+		//	  "description": "服务器组的类型。取值如下：instance（默认值）：服务器类型。支持添加云服务器实例和已绑定云服务器实例的辅助网卡作为后端服务器。ip：IP地址类型。支持添加任何网络可达的VPC或IDC中的服务器作为后端服务器。",
 		//	  "enum": [
 		//	    "instance",
 		//	    "ip"
@@ -869,7 +873,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器组的类型",
+			Description: "服务器组的类型。取值如下：instance（默认值）：服务器类型。支持添加云服务器实例和已绑定云服务器实例的辅助网卡作为后端服务器。ip：IP地址类型。支持添加任何网络可达的VPC或IDC中的服务器作为后端服务器。",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("instance"),
@@ -888,12 +892,11 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的更新时间",
+		//	  "description": "后端服务器组的更新时间。",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的更新时间",
-			Optional:    true,
+			Description: "后端服务器组的更新时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -925,7 +928,7 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "服务器组",
+		Description: "服务器组是一组后端服务器。",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -984,16 +987,16 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/CreateTime",
+		"/properties/AccountId",
+		"/properties/CreatedTime",
 		"/properties/RelatedLoadBalancerIds",
 		"/properties/ServerCount",
 		"/properties/ServerGroupId",
 		"/properties/Status",
-		"/properties/UpdateTime",
+		"/properties/UpdatedTime",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/AccountId",
 		"/properties/AnyPortEnabled",
 		"/properties/ProjectName",
 		"/properties/Protocol",

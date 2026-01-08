@@ -95,9 +95,11 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cbr_backup_policies -cctype Volcengine::CBR::BackupPolicy -package cbr ../volcengine/cbr/backup_policy_plural_data_source_gen.go ../volcengine/cbr/backup_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cbr_backup_plans -cctype Volcengine::CBR::BackupPlan -package cbr ../volcengine/cbr/backup_plan_plural_data_source_gen.go ../volcengine/cbr/backup_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmssql_instances -cctype Volcengine::RDSMsSQL::Instance -package rdsmssql ../volcengine/rdsmssql/instance_plural_data_source_gen.go ../volcengine/rdsmssql/instance_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_firewallcenter_dns_control_policies -cctype Volcengine::FireWallCenter::DnsControlPolicy -package firewallcenter ../volcengine/firewallcenter/dns_control_policy_plural_data_source_gen.go ../volcengine/firewallcenter/dns_control_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_fwcenter_dns_control_policies -cctype Volcengine::FWCenter::DnsControlPolicy -package fwcenter ../volcengine/fwcenter/dns_control_policy_plural_data_source_gen.go ../volcengine/fwcenter/dns_control_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_dns_zones -cctype Volcengine::DNS::Zone -package dns ../volcengine/dns/zone_plural_data_source_gen.go ../volcengine/dns/zone_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_iam_projects -cctype Volcengine::IAM::Project -package iam ../volcengine/iam/project_plural_data_source_gen.go ../volcengine/iam/project_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_bmq_groups -cctype Volcengine::BMQ::Group -package bmq ../volcengine/bmq/group_plural_data_source_gen.go ../volcengine/bmq/group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_rules -cctype Volcengine::CloudMonitor::Rule -package cloudmonitor ../volcengine/cloudmonitor/rule_plural_data_source_gen.go ../volcengine/cloudmonitor/rule_plural_data_source_gen_test.go
 
 package provider
 
@@ -112,13 +114,14 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cen"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/clb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cloudidentity"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cloudmonitor"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/dns"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
-	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/firewallcenter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/fwcenter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/hbase"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"

@@ -100,7 +100,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Used
 				"used": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "文件系统已使用容量，单位为 MiB。",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
@@ -124,6 +123,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "计费类型，取值 PayAsYouGo，表示按量计费。",
 			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
@@ -163,7 +165,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "文件系统 ID。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -265,12 +266,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// SnapshotId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统状态",
+		//	  "description": "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
 		//	  "enum": [
 		//	    "Unknown",
 		//	    "Running",
@@ -285,7 +287,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统状态",
+			Description: "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -304,6 +306,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -329,8 +332,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Type"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -357,9 +359,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						Description: "标签类型。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -419,7 +418,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "可用区名称。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -473,19 +471,28 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"zone_name":         "ZoneName",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/SnapshotId",
+	})
+
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/CreateTime",
-		"/properties/UpdateTime",
-		"/properties/Status",
+		"/properties/FileSystemId",
 		"/properties/SnapshotCount",
+		"/properties/Status",
+		"/properties/UpdateTime",
+		"/properties/ZoneName",
+		"/properties/Capacity/Used",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
+		"/properties/ChargeType",
 		"/properties/FileSystemType",
 		"/properties/ProtocolType",
+		"/properties/SnapshotId",
+		"/properties/StorageType",
 		"/properties/ZoneId",
 		"/properties/ProjectName",
-		"/properties/SnapshotId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

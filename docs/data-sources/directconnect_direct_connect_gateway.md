@@ -23,6 +23,7 @@ Data Source schema for Volcengine::DirectConnect::DirectConnectGateway
 
 - `account_id` (String) 专线网关所属账号的ID。
 - `associate_cens` (Attributes Set) 关联的CEN信息。 (see [below for nested schema](#nestedatt--associate_cens))
+- `bgp_asn` (Number) 专线网关的ASN（Autonomous System Number）。专线网关ASN有效范围为：137718、64512 ～ 65534 、4200000000 ～ 4294967294，其中137718为火山引擎的ASN。如果专线网关仅在普通场景下使用（如本地IDC通过专线连接访问单个云上VPC资源），请使用火山引擎ASN（137718）。如果专线网关在特殊场景下使用（如单个IDC通过专线连接访问多个云企业网），每个专线网关均要自定义ASN且避免使用火山引擎ASN（137718），确保不同专线网关的ASN不重复。
 - `business_status` (String) 专线网关是否被锁定。Normal：正常。FinancialLocked：被锁定。
 - `created_time` (String) 创建专线网关的时间。
 - `deleted_time` (String) 预期资源强制回收时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。

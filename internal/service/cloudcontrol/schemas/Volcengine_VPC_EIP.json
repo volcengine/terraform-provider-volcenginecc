@@ -1,7 +1,7 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/Isp",
+    "/properties/ISP",
     "/properties/BandwidthPackageId",
     "/properties/ProjectName",
     "/properties/IpAddressPoolId",
@@ -21,13 +21,26 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "公网IP（Elastic IP Address，EIP）及其公网出口带宽，是火山引擎为云资源提供的可独立购买和持有的IP连通服务。公网IP支持直接绑定云服务器（包括ECS云服务器、EBM裸金属服务器、GPU云服务器），还支持绑定公网NAT网关、负载均衡、辅助网卡等组件，为云服务器提供公网互通能力。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/BillingType",
+      "/properties/ISP",
+      "/properties/IpAddressPoolId",
+      "/properties/Name",
+      "/properties/Status",
+      "/properties/AllocationId",
+      "/properties/EipAddress",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -186,7 +199,7 @@
       "type": "string"
     },
     "Period": {
-      "description": "购买包年包月公网IP的时长，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。",
+      "description": "代表购买包年包月公网IP的时长时，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。代表临时升配的时长时：单位为小时，取值范围：1～720。",
       "type": "integer"
     },
     "PeriodUnit": {
@@ -273,7 +286,9 @@
     "/properties/IsBlocked",
     "/properties/LockReason",
     "/properties/OverdueTime",
-    "/properties/UpdatedTime"
+    "/properties/UpdatedTime",
+    "/properties/ServiceManaged",
+    "/properties/DirectMode"
   ],
   "required": [
     "BillingType"

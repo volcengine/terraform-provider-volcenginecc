@@ -48,14 +48,14 @@ func transitRouterRouteEntryResource(ctx context.Context) (resource.Resource, er
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: CreationTime
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "路由条目的创建时间。",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "路由条目的创建时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -199,17 +199,9 @@ func transitRouterRouteEntryResource(ctx context.Context) (resource.Resource, er
 		//	}
 		"transit_router_route_entry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "路由条目的类型。Static：静态路由。Propagated：自动学习路由。",
-			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"Static",
-					"Propagated",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterRouteTableId
@@ -226,14 +218,14 @@ func transitRouterRouteEntryResource(ctx context.Context) (resource.Resource, er
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateTime
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "路由条目的更新时间。",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "路由条目的更新时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -263,7 +255,7 @@ func transitRouterRouteEntryResource(ctx context.Context) (resource.Resource, er
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"as_path":                                  "AsPath",
-		"creation_time":                            "CreationTime",
+		"created_time":                             "CreatedTime",
 		"description":                              "Description",
 		"destination_cidr_block":                   "DestinationCidrBlock",
 		"status":                                   "Status",
@@ -273,15 +265,16 @@ func transitRouterRouteEntryResource(ctx context.Context) (resource.Resource, er
 		"transit_router_route_entry_next_hop_type": "TransitRouterRouteEntryNextHopType",
 		"transit_router_route_entry_type":          "TransitRouterRouteEntryType",
 		"transit_router_route_table_id":            "TransitRouterRouteTableId",
-		"update_time":                              "UpdateTime",
+		"updated_time":                             "UpdatedTime",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/TransitRouterRouteEntryId",
 		"/properties/Status",
-		"/properties/CreationTime",
-		"/properties/UpdateTime",
+		"/properties/CreatedTime",
+		"/properties/UpdatedTime",
 		"/properties/AsPath",
+		"/properties/TransitRouterRouteEntryType",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -289,7 +282,6 @@ func transitRouterRouteEntryResource(ctx context.Context) (resource.Resource, er
 		"/properties/DestinationCidrBlock",
 		"/properties/TransitRouterRouteEntryNextHopId",
 		"/properties/TransitRouterRouteEntryNextHopType",
-		"/properties/TransitRouterRouteEntryType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

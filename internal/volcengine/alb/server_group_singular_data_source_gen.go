@@ -550,15 +550,16 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "标签的标签键。同一资源的标签键不允许重复。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "标签的标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -571,11 +572,13 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "标签的标签键。同一资源的标签键不允许重复。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "标签的标签值。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

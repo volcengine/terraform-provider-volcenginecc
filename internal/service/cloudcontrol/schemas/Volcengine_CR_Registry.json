@@ -30,6 +30,7 @@
         },
         "Phase": {
           "description": "Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。",
+          "semantic": "status",
           "type": "string"
         }
       },
@@ -50,6 +51,17 @@
     }
   },
   "description": "镜像仓库（Container Registry，CR）提供安全高可用的容器镜像、Helm Chart 等符合 OCI 标准的云原生制品托管服务，方便企业用户管理容器镜像和 Helm Chart 的全生命周期。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Name",
+      "/properties/Project",
+      "/properties/Type",
+      "/properties/Status/Conditions",
+      "/properties/Status/Phase",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -84,6 +96,7 @@
     },
     "CreatedTime": {
       "description": "创建镜像仓库实例的时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "ExpireTime": {
@@ -92,12 +105,14 @@
     },
     "Name": {
       "description": "标准版实例名称，同一个地域下，名称必须唯一。支持小写英文字母、数字、短划线（-）且数字不能在首位，短划线（-）不能在首位或末位，长度限制为 3～30 个字符。",
-      "maximum": 30,
-      "minimum": 3,
+      "maxLength": 30,
+      "minLength": 3,
+      "semantic": "resourceId",
       "type": "string"
     },
     "Project": {
       "description": "填写实例需要关联的项目。一个实例仅支持关联一个项目",
+      "semantic": "projectName",
       "type": "string"
     },
     "ProxyCache": {
@@ -124,6 +139,7 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },

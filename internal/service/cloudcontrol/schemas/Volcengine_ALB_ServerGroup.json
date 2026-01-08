@@ -4,7 +4,8 @@
     "/properties/ProjectName",
     "/properties/Protocol",
     "/properties/ServerGroupType",
-    "/properties/VpcId"
+    "/properties/VpcId",
+    "/properties/IPAddressType"
   ],
   "definitions": {
     "HealthCheck": {
@@ -206,20 +207,32 @@
     "Tag": {
       "properties": {
         "Key": {
+          "description": "标签的标签键。同一资源的标签键不允许重复。",
           "type": "string"
         },
         "Value": {
+          "description": "标签的标签值。",
           "type": "string"
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "服务器组是后端服务器的逻辑集合。ALB 实例按照您配置的转发规则确定客户端请求将被转发到的服务器组。然后，ALB 实例根据您配置的负载均衡策略，将请求分发给服务器组内的后端服务器。后端服务器接收并处理请求。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/ServerGroupId",
+      "/properties/ServerGroupName",
+      "/properties/ServerGroupType",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

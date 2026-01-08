@@ -8,7 +8,6 @@ package clb
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -36,11 +35,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS监听器服务器证书的ID，仅支持传入火山引擎证书中心 SSL 证书。。",
+		//	  "description": "TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TLS监听器服务器证书的ID，仅支持传入火山引擎证书中心 SSL 证书。。",
+			Description: "TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -145,7 +144,6 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Ip": {
 		//	        "description": "后端服务器的IP地址。",
-		//	        "format": "ipv4",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
@@ -179,7 +177,6 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "UpdatedTime": {
 		//	        "description": "健康状态最后更新时间。",
-		//	        "format": "date-time",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneId": {
@@ -268,7 +265,6 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: UpdatedTime
 					"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType:  timetypes.RFC3339Type{},
 						Description: "健康状态最后更新时间。",
 						Optional:    true,
 						Computed:    true,
@@ -361,7 +357,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听协议类型。",
+		//	  "description": "监听协议类型。TCP,UDP,TLS",
 		//	  "enum": [
 		//	    "TCP",
 		//	    "UDP",
@@ -370,7 +366,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听协议类型。",
+			Description: "监听协议类型。TCP,UDP,TLS",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -581,7 +577,6 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CreatedTime",
 		"/properties/UpdatedTime",
 		"/properties/Status",
-		"/properties/HealthResponse",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

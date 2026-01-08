@@ -110,18 +110,28 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "监听器负责根据指定的协议和端口，监听CLB实例接收到的用户访问请求。CLB将按照该监听器配置的调度算法，将访问请求转发至该后端服务器组内健康的后端服务器。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ListenerId",
+      "/properties/ListenerName",
+      "/properties/LoadBalancerId",
+      "/properties/Protocol",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "clb:CreateListener",
-        "clb:DescribeListenerAttributes"
+        "clb:DescribeListenerAttributes",
+        "clb:DescribeRules"
       ]
     },
     "delete": {
@@ -137,7 +147,8 @@
     },
     "read": {
       "permissions": [
-        "clb:DescribeListenerAttributes"
+        "clb:DescribeListenerAttributes",
+        "clb:DescribeRules"
       ]
     },
     "update": {
@@ -145,7 +156,8 @@
         "clb:ModifyListenerAttributes",
         "clb:DescribeListenerAttributes",
         "clb:TagResources",
-        "clb:UntagResources"
+        "clb:UntagResources",
+        "clb:DescribeRules"
       ]
     }
   },
@@ -388,6 +400,15 @@
       "minimum": 30,
       "type": "integer"
     },
+    "RuleIds": {
+      "description": "监听器绑定的规则ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
     "Scheduler": {
       "default": "wrr",
       "description": "监听器使用的调度算法。wrr（默认值）：加权轮询。wlc：加权最小连接数。sh：源地址哈希。",
@@ -461,7 +482,8 @@
     "/properties/CreatedTime",
     "/properties/UpdatedTime",
     "/properties/Status",
-    "/properties/WafProtectionEnabled"
+    "/properties/WafProtectionEnabled",
+    "/properties/RuleIds"
   ],
   "required": [
     "Protocol",

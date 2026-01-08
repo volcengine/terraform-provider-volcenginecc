@@ -4,10 +4,7 @@
     "/properties/LoadBalancerId",
     "/properties/Type",
     "/properties/AddressIpVersion",
-    "/properties/AnyPortEnabled",
-    "/properties/Servers/*/Type",
-    "/properties/Servers/*/InstanceId",
-    "/properties/Servers/*/Ip"
+    "/properties/AnyPortEnabled"
   ],
   "definitions": {
     "Listener": {
@@ -94,13 +91,21 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "后端服务器组是一组后端服务器。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/LoadBalancerId",
+      "/properties/ServerGroupId",
+      "/properties/ServerGroupName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

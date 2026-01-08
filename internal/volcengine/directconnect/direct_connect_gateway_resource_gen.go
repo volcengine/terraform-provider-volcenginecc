@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -75,15 +76,43 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CenId
+					"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "CEN的ID。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: CenOwnerId
+					"cen_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "CEN的用户ID。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: CenStatus
+					"cen_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "实例在CEN中的状态。Attaching：加载中。Attached：已加载。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "关联的CEN信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BgpAsn
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "专线网关的ASN（Autonomous System Number）。专线网关ASN有效范围为：137718、64512 ～ 65534 、4200000000 ～ 4294967294，其中137718为火山引擎的ASN。如果专线网关仅在普通场景下使用（如本地IDC通过专线连接访问单个云上VPC资源），请使用火山引擎ASN（137718）。如果专线网关在特殊场景下使用（如单个IDC通过专线连接访问多个云企业网），每个专线网关均要自定义ASN且避免使用火山引擎ASN（137718），确保不同专线网关的ASN不重复。",
+		//	  "format": "int64",
+		//	  "type": "integer"
+		//	}
+		"bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "专线网关的ASN（Autonomous System Number）。专线网关ASN有效范围为：137718、64512 ～ 65534 、4200000000 ～ 4294967294，其中137718为火山引擎的ASN。如果专线网关仅在普通场景下使用（如本地IDC通过专线连接访问单个云上VPC资源），请使用火山引擎ASN（137718）。如果专线网关在特殊场景下使用（如单个IDC通过专线连接访问多个云企业网），每个专线网关均要自定义ASN且避免使用火山引擎ASN（137718），确保不同专线网关的ASN不重复。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BusinessStatus
@@ -278,8 +307,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -310,7 +338,6 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -366,6 +393,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                  "AccountId",
 		"associate_cens":              "AssociateCens",
+		"bgp_asn":                     "BgpAsn",
 		"business_status":             "BusinessStatus",
 		"cen_id":                      "CenId",
 		"cen_owner_id":                "CenOwnerId",
@@ -400,14 +428,12 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		"/properties/LockReason",
 		"/properties/OverdueTime",
 		"/properties/DeletedTime",
-		"/properties/AssociateCens/*/CenId",
-		"/properties/AssociateCens/*/CenOwnerId",
-		"/properties/AssociateCens/*/CenStatus",
+		"/properties/AssociateCens",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/VpcId",
 		"/properties/ProjectName",
+		"/properties/BgpAsn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

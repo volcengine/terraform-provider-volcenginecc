@@ -36,12 +36,12 @@ resource "volcenginecc_clb_nlb_listener" "CLBNLBListenerDemo" {
 
 - `load_balancer_id` (String) 负载均衡实例ID。
 - `port` (Number) 监听器接收请求的端口，0表示启用全端口监听。
-- `protocol` (String) 监听协议类型。
+- `protocol` (String) 监听协议类型。TCP,UDP,TLS
 - `server_group_id` (String) 监听器关联的服务器组ID。
 
 ### Optional
 
-- `certificate_id` (String) TLS监听器服务器证书的ID，仅支持传入火山引擎证书中心 SSL 证书。。
+- `certificate_id` (String) TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。
 - `connection_timeout` (Number) 监听器的连接超时时间（秒）。
 - `description` (String) 监听器描述信息。
 - `enabled` (Boolean) 是否启用监听器。true：开启；false：关闭。

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -66,6 +67,7 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
@@ -295,6 +297,7 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "default": "default",
 		//	  "description": "路由表所属项目的名称。",
 		//	  "type": "string"
 		//	}
@@ -302,6 +305,7 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 			Description: "路由表所属项目的名称。",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("default"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -615,6 +619,9 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "路由表所属VPC的ID。",
 			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcName
 		// Cloud Control resource type schema:
@@ -625,7 +632,6 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "VPC的名称。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -690,6 +696,7 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/RouteTableType",
 		"/properties/UpdatedTime",
 		"/properties/CreatedTime",
+		"/properties/VpcName",
 		"/properties/SystemRouteEntries",
 		"/properties/CustomRouteEntries/*/RouteEntryId",
 		"/properties/CustomRouteEntries/*/PrefixListCidrBlocks",
@@ -701,9 +708,8 @@ func routeTableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/ProjectName",
-		"/properties/vpcId",
-		"/properties/DestinationCidrBlock",
-		"/properties/DestinationPrefixListId",
+		"/properties/AssociateType",
+		"/properties/VpcId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

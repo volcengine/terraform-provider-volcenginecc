@@ -1,0 +1,233 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Description",
+    "/properties/InstanceId",
+    "/properties/GroupName"
+  ],
+  "definitions": {
+    "PartitionInfo": {
+      "properties": {
+        "CurrentOffset": {
+          "description": "当前消费位点。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "GroupName": {
+          "description": "Consumer Group 的名称。",
+          "type": "string"
+        },
+        "Lag": {
+          "description": "分区中未被消费的消息条数。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "LatestOffset": {
+          "description": "最新消费位点。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "PartitionId": {
+          "description": "分区序号。",
+          "type": "integer"
+        },
+        "TopicName": {
+          "description": "Consumer Group 订阅的 Topic 名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ResetInfo": {
+      "properties": {
+        "OffsetType": {
+          "description": "重置方式为 OFFSET 时，该参数必传，指定重新消费的基准消费位置，取值如下：EARLIEST：基准消费位置为最早消费位点。CURRENT：基准消费位置为当前消费位点。LATEST：基准消费位置为最近消费位点。",
+          "type": "string"
+        },
+        "PartitionId": {
+          "description": "分区序号。",
+          "type": "integer"
+        },
+        "ResetBy": {
+          "description": "重置方式，取值如下：TIMESTAMP：根据时间点重置消费位点，指定过去或将来的时间点，直接跳转到该时间点的位点开始消费。OFFSET：根据指定的 offset 重置消费位点，即从指定的位点开始消费，可以通过 offsetType 参数指定 offset。",
+          "type": "string"
+        },
+        "ResetValue": {
+          "description": "重置值。选择重置方式为 TIMESTAMP 时，该值为重新消费的时间点。例如 1722224612000。选择重置方式为 OFFSET 时，该值为相对于 OffsetType 中基准位点的 相对偏移量。例如 100。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "TopicId": {
+          "description": "Topic ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TopicInfo": {
+      "properties": {
+        "CreateTime": {
+          "description": "Topic 的创建时间。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Topic 的描述语句。",
+          "type": "string"
+        },
+        "Lag": {
+          "description": "Topic 中未被消费的消息条数。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "PartitionInfos": {
+          "description": "分区列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PartitionInfo"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Partitions": {
+          "description": "Topic 分区数。",
+          "type": "integer"
+        },
+        "Retention": {
+          "description": "数据在 Topic 中的保留时长，单位为小时。",
+          "type": "integer"
+        },
+        "Status": {
+          "description": "Topic 的状态。",
+          "type": "string"
+        },
+        "TopicId": {
+          "description": "Topic ID。",
+          "type": "string"
+        },
+        "TopicName": {
+          "description": "Topic 的名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "一组具有相同 Group ID 的消费端。当一个 Topic 被同一个 Group 的多个 Consumer 消费时，每一条消息都只会被投递到一个 Consumer，实现消费的负载均衡。通过 Group，您可以确保一个 Topic 的消息被并行消费。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/GroupName",
+      "/properties/Status"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bmq:CreateGroup",
+        "bmq:DescribeGroup",
+        "bmq:DescribeTopicsInGroup",
+        "bmq:DescribeSubscription"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bmq:DeleteGroup",
+        "bmq:DescribeGroup",
+        "bmq:DescribeTopicsInGroup",
+        "bmq:DescribeSubscription"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bmq:SearchGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bmq:DescribeGroup",
+        "bmq:DescribeTopicsInGroup",
+        "bmq:DescribeSubscription"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bmq:ResetSubscriptionOffset",
+        "bmq:DescribeGroup",
+        "bmq:DescribeTopicsInGroup",
+        "bmq:DescribeSubscription"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GroupId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "Consumer Group 创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Consumer Group 描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "GroupId": {
+      "description": "Consumer Group 的 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "GroupName": {
+      "description": "自定义设置Consumer Group 的名称，约束限制如下：只能由小写英文字符、数字、下划线和中划线（-）组成。长度为 3~64 字符。",
+      "maxLength": 64,
+      "minLength": 3,
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "所属 BMQ 实例 ID。",
+      "type": "string"
+    },
+    "OwnerId": {
+      "description": "Consumer Group 所属用户的 ID。",
+      "type": "string"
+    },
+    "OwnerName": {
+      "description": "Consumer Group 所属用户的名称。",
+      "type": "string"
+    },
+    "ResetInfo": {
+      "$ref": "#/definitions/ResetInfo",
+      "description": "重置消费位点信息。",
+      "type": "object"
+    },
+    "Status": {
+      "description": "Consumer Group 的状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TopicInfos": {
+      "description": "Topic 列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TopicInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Status",
+    "/properties/GroupId",
+    "/properties/OwnerId",
+    "/properties/OwnerName",
+    "/properties/CreatedTime",
+    "/properties/TopicInfos"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::BMQ::Group",
+  "writeOnlyProperties": [
+    "/properties/ResetInfo"
+  ]
+}

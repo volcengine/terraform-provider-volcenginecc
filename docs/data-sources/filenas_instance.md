@@ -33,7 +33,7 @@ Data Source schema for Volcengine::FileNAS::Instance
 - `protocol_type` (String) 文件系统协议类型。取值 NFS，表示 NFS 协议，常用于 Linux 客户端。
 - `snapshot_count` (Number) 快照数量
 - `snapshot_id` (String) 创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。
-- `status` (String) 文件系统状态
+- `status` (String) 文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。
 - `storage_type` (String) 存储类型，取值Standard，表示标准型。
 - `tags` (Attributes Set) 文件系统的标签信息 (see [below for nested schema](#nestedatt--tags))
 - `update_time` (String) 更新时间

@@ -278,11 +278,11 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "购买包年包月公网IP的时长，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。",
+		//	  "description": "代表购买包年包月公网IP的时长时，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。代表临时升配的时长时：单位为小时，取值范围：1～720。",
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "购买包年包月公网IP的时长，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。",
+			Description: "代表购买包年包月公网IP的时长时，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。代表临时升配的时长时：单位为小时，取值范围：1～720。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeriodUnit
@@ -430,8 +430,7 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },

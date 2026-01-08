@@ -98,5 +98,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) 标签的标签键。同一资源的标签键不允许重复。
+- `value` (String) 标签的标签值。

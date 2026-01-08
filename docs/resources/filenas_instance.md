@@ -40,21 +40,21 @@ resource "volcenginecc_filenas_instance" "FileNASInstanceDemo" {
 - `cache_performance` (Attributes) 缓存型性能信息。 (see [below for nested schema](#nestedatt--cache_performance))
 - `capacity` (Attributes) 文件系统容量。 (see [below for nested schema](#nestedatt--capacity))
 - `description` (String) 描述信息。
-- `file_system_id` (String) 文件系统 ID。
 - `project_name` (String) 所属项目，默认值为 default 项目。
 - `snapshot_id` (String) 创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。
 - `storage_type` (String) 存储类型，取值Standard，表示标准型。
 - `tags` (Attributes Set) 文件系统的标签信息
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `zone_name` (String) 可用区名称。
 
 ### Read-Only
 
 - `create_time` (String) 创建时间
+- `file_system_id` (String) 文件系统 ID。
 - `id` (String) Uniquely identifies the resource.
 - `snapshot_count` (Number) 快照数量
-- `status` (String) 文件系统状态
+- `status` (String) 文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。
 - `update_time` (String) 更新时间
+- `zone_name` (String) 可用区名称。
 
 <a id="nestedatt--cache_performance"></a>
 ### Nested Schema for `cache_performance`
@@ -70,6 +70,9 @@ Optional:
 Optional:
 
 - `total` (Number) 文件系统可用总容量，单位为 GiB。
+
+Read-Only:
+
 - `used` (Number) 文件系统已使用容量，单位为 MiB。
 
 

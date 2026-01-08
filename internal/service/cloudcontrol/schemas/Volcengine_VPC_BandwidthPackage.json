@@ -18,6 +18,7 @@
         },
         "EipAddress": {
           "description": "弹性IP地址",
+          "semantic": "publicIp",
           "type": "string"
         }
       },
@@ -44,12 +45,25 @@
     }
   },
   "description": "共享带宽包是一种支持复用和共享带宽的云资源。将单个地域内多个公网IP或IPv6公网带宽添加到一个共享带宽包实例中，共享一条带宽。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/BandwidthPackageId",
+      "/properties/BandwidthPackageName",
+      "/properties/ISP",
+      "/properties/Protocol",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "vpc:CreateBandwidthPackage",
         "vpc:AddBandwidthPackageIp",
-        "vpc:DescribeBandwidthPackages"
+        "vpc:DescribeBandwidthPackages",
+        "vpc:DescribeEipAddresses",
+        "vpc:DescribeIpv6AddressBandwidths"
       ]
     },
     "delete": {
@@ -77,7 +91,9 @@
         "vpc:RemoveBandwidthPackageIp",
         "vpc:AddBandwidthPackageIp",
         "vpc:UntagResources",
-        "vpc:TagResources"
+        "vpc:TagResources",
+        "vpc:DescribeEipAddresses",
+        "vpc:DescribeIpv6AddressBandwidths"
       ]
     }
   },
@@ -94,12 +110,14 @@
     },
     "BandwidthPackageId": {
       "description": "带宽包ID",
+      "semantic": "resourceId",
       "type": "string"
     },
     "BandwidthPackageName": {
       "description": "带宽包名称，长度限制为1 ~ 128个字符，需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。",
       "maxLength": 128,
       "minLength": 1,
+      "semantic": "resourceName",
       "type": "string"
     },
     "BillingType": {
@@ -115,6 +133,7 @@
     },
     "CreatedTime": {
       "description": "创建时间",
+      "semantic": "createdTime",
       "type": "string"
     },
     "DeletedTime": {
@@ -124,6 +143,7 @@
     "Description": {
       "description": "描述信息，长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
       "maxLength": 255,
+      "semantic": "description",
       "type": "string"
     },
     "EipAddresses": {
@@ -179,6 +199,7 @@
     },
     "ProjectName": {
       "description": "项目名称，不填默认加入default项目。",
+      "semantic": "projectName",
       "type": "string"
     },
     "Protocol": {
@@ -201,6 +222,7 @@
     },
     "Status": {
       "description": "共享带宽包的状态。Creating：创建中。Available：可用。Deleting：删除中。",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -209,11 +231,13 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
     "UpdatedTime": {
       "description": "更新时间",
+      "semantic": "updatedTime",
       "type": "string"
     }
   },
@@ -226,7 +250,8 @@
     "/properties/OverdueTime",
     "/properties/Ratio",
     "/properties/Status",
-    "/properties/UpdatedTime"
+    "/properties/UpdatedTime",
+    "/properties/EipAddresses/*/EipAddress"
   ],
   "required": [
     "Bandwidth"

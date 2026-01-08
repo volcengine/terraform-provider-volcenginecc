@@ -389,8 +389,8 @@ resource_schema "volcengine_rdsmssql_instance" {
   cloudcontrol_type_name = "Volcengine::RDSMsSQL::Instance"
 }
 
-resource_schema "volcengine_firewallcenter_dns_control_policy" {
-  cloudcontrol_type_name = "Volcengine::FireWallCenter::DnsControlPolicy"
+resource_schema "volcengine_fwcenter_dns_control_policy" {
+  cloudcontrol_type_name = "Volcengine::FWCenter::DnsControlPolicy"
 }
 
 resource_schema "volcengine_dns_zone" {
@@ -400,5 +400,14 @@ resource_schema "volcengine_dns_zone" {
 resource_schema "volcengine_iam_project" {
   cloudcontrol_type_name = "Volcengine::IAM::Project"
 }
+
+resource_schema "volcengine_bmq_group" {
+  cloudcontrol_type_name = "Volcengine::BMQ::Group"
+}
+
+resource_schema "volcengine_cloudmonitor_rule" {
+  cloudcontrol_type_name = "Volcengine::CloudMonitor::Rule"
+}
+
 
 

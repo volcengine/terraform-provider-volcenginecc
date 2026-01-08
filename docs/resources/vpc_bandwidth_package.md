@@ -78,7 +78,6 @@ resource "volcenginecc_vpc_bandwidth_package" "BandwidthPackageDemo" {
 Optional:
 
 - `allocation_id` (String) 分配ID
-- `eip_address` (String) 弹性IP地址
 
 
 <a id="nestedatt--tags"></a>

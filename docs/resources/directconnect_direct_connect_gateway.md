@@ -30,8 +30,7 @@ resource "volcenginecc_directconnect_direct_connect_gateway" "DirectConnectDirec
 
 ### Optional
 
-- `associate_cens` (Attributes Set) 关联的CEN信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
+- `bgp_asn` (Number) 专线网关的ASN（Autonomous System Number）。专线网关ASN有效范围为：137718、64512 ～ 65534 、4200000000 ～ 4294967294，其中137718为火山引擎的ASN。如果专线网关仅在普通场景下使用（如本地IDC通过专线连接访问单个云上VPC资源），请使用火山引擎ASN（137718）。如果专线网关在特殊场景下使用（如单个IDC通过专线连接访问多个云企业网），每个专线网关均要自定义ASN且避免使用火山引擎ASN（137718），确保不同专线网关的ASN不重复。
 - `description` (String) 专线网关的描述信息。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、空格（ ）、下划线（_）、中划线（-）、等号（=）、英文逗号（,）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
 - `direct_connect_gateway_name` (String) 专线网关的名称。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为专线网关的ID。
 - `enable_ipv_6` (Boolean) 是否支持IPv6。true：支持。false：不支持。
@@ -42,6 +41,8 @@ resource "volcenginecc_directconnect_direct_connect_gateway" "DirectConnectDirec
 ### Read-Only
 
 - `account_id` (String) 专线网关所属账号的ID。
+- `associate_cens` (Attributes Set) 关联的CEN信息。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
 - `business_status` (String) 专线网关是否被锁定。Normal：正常。FinancialLocked：被锁定。
 - `created_time` (String) 创建专线网关的时间。
 - `deleted_time` (String) 预期资源强制回收时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。
@@ -52,10 +53,6 @@ resource "volcenginecc_directconnect_direct_connect_gateway" "DirectConnectDirec
 - `status` (String) 专线网关的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。
 - `updated_time` (String) 更新专线网关的时间。
 
-<a id="nestedatt--associate_cens"></a>
-### Nested Schema for `associate_cens`
-
-
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -63,6 +60,16 @@ Optional:
 
 - `key` (String) 用户标签的标签键。长度取值范围为1~128字符。
 - `value` (String) 用户标签的标签值。长度取值范围为0~256字符。
+
+
+<a id="nestedatt--associate_cens"></a>
+### Nested Schema for `associate_cens`
+
+Read-Only:
+
+- `cen_id` (String) CEN的ID。
+- `cen_owner_id` (String) CEN的用户ID。
+- `cen_status` (String) 实例在CEN中的状态。Attaching：加载中。Attached：已加载。
 
 ## Import
 

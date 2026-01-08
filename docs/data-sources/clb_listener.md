@@ -56,6 +56,7 @@ Data Source schema for Volcengine::CLB::Listener
 - `proxy_protocol_type` (String) 是否启用Proxy-Protocol协议。仅参数Protocol取TCP或UDP时，本参数有效。取值如下：off（默认值）：关闭。standard：开启。
 - `proxy_read_timeout` (Number) CLB从后端服务器读取响应的超时时间。此超时时间仅针对两个连续的读操作之间设置，而非整个响应的传输过程。取值范围为30-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。
 - `proxy_send_timeout` (Number) CLB将请求传输到后端服务器的超时时间。此超时仅针对两个连续的写操作之间设置，而非整个请求的传输过程。取值范围为30-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。
+- `rule_ids` (Set of String) 监听器绑定的规则ID列表。
 - `scheduler` (String) 监听器使用的调度算法。wrr（默认值）：加权轮询。wlc：加权最小连接数。sh：源地址哈希。
 - `security_policy_id` (String) HTTPS监听器的TLS安全策略。仅参数Protocol取HTTPS时，本参数有效。 取值如下：default_policy（默认值）：支持SSL v3、TLS v1.0、TLS v1.1、TLS v1.2。tls_cipher_policy_1_0：支持TLS v1.0、TLS v1.1、TLS v1.2。tls_cipher_policy_1_1：支持TLS v1.1、TLS v1.2。tls_cipher_policy_1_2：支持TLS v1.2。tls_cipher_policy_1_2_strict：支持TLS v1.2。
 - `send_timeout` (Number) CLB向客户端发送响应的超时时间。此超时仅针对两个连续的写操作之间设置，而非整响应的传输过程。取值范围为 1-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。

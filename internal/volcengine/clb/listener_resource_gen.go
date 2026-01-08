@@ -986,6 +986,26 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RuleIds
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "监听器绑定的规则ID列表。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"rule_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "监听器绑定的规则ID列表。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Scheduler
 		// Cloud Control resource type schema:
 		//
@@ -1126,8 +1146,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -1158,7 +1177,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1271,6 +1289,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"proxy_protocol_type":        "ProxyProtocolType",
 		"proxy_read_timeout":         "ProxyReadTimeout",
 		"proxy_send_timeout":         "ProxySendTimeout",
+		"rule_ids":                   "RuleIds",
 		"scheduler":                  "Scheduler",
 		"security_policy_id":         "SecurityPolicyId",
 		"send_timeout":               "SendTimeout",
@@ -1294,6 +1313,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/UpdatedTime",
 		"/properties/Status",
 		"/properties/WafProtectionEnabled",
+		"/properties/RuleIds",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

@@ -37,16 +37,16 @@ resource "volcenginecc_transitrouter_transit_router_route_entry" "TransitRouterR
 - `description` (String) TR路由表路由条目的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
 - `transit_router_route_entry_name` (String) 路由条目的名称。
 - `transit_router_route_entry_next_hop_id` (String) 路由条目的下一跳ID。
-- `transit_router_route_entry_type` (String) 路由条目的类型。Static：静态路由。Propagated：自动学习路由。
 
 ### Read-Only
 
 - `as_path` (Set of String) 路由条目的AS路径。
-- `creation_time` (String) 路由条目的创建时间。
+- `created_time` (String) 路由条目的创建时间。
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) 路由条目的状态。Available：可用。Creating：创建中。Pending：配置中。Deleting：删除中。Conflicted：未生效。
 - `transit_router_route_entry_id` (String) TR路由条目的ID。
-- `update_time` (String) 路由条目的更新时间。
+- `transit_router_route_entry_type` (String) 路由条目的类型。Static：静态路由。Propagated：自动学习路由。
+- `updated_time` (String) 路由条目的更新时间。
 
 ## Import
 

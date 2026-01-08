@@ -28,14 +28,14 @@ func init() {
 // This Terraform resource corresponds to the Cloud Control Volcengine::TransitRouter::TransitRouterRouteTable resource.
 func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: CreationTime
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "TR路由表的创建时间",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "TR路由表的创建时间",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -128,8 +128,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -156,9 +155,6 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 						Description: "标签值",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -237,14 +233,14 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateTime
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "TR路由表的最近操作时间",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "TR路由表的最近操作时间",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -273,7 +269,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 	opts = opts.WithCloudControlTypeName("Volcengine::TransitRouter::TransitRouterRouteTable").WithTerraformTypeName("volcenginecc_transitrouter_transit_router_route_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"creation_time":                   "CreationTime",
+		"created_time":                    "CreatedTime",
 		"description":                     "Description",
 		"in_route_policy_table_id":        "InRoutePolicyTableId",
 		"key":                             "Key",
@@ -284,18 +280,18 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		"transit_router_route_table_id":   "TransitRouterRouteTableId",
 		"transit_router_route_table_name": "TransitRouterRouteTableName",
 		"transit_router_route_table_type": "TransitRouterRouteTableType",
-		"update_time":                     "UpdateTime",
+		"updated_time":                    "UpdatedTime",
 		"value":                           "Value",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/CreationTime",
+		"/properties/CreatedTime",
 		"/properties/InRoutePolicyTableId",
 		"/properties/OutRoutePolicyTableId",
 		"/properties/Status",
 		"/properties/TransitRouterRouteTableId",
 		"/properties/TransitRouterRouteTableType",
-		"/properties/UpdateTime",
+		"/properties/UpdatedTime",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

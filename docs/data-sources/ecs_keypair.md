@@ -24,13 +24,12 @@ Data Source schema for Volcengine::ECS::Keypair
 - `created_time` (String) 密钥对创建时间。
 - `description` (String) 密钥对的描述，默认值为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”长度限制在255个字符以内。
 - `finger_print` (String) 密钥对的指纹。根据RFC4716定义的公钥指纹格式，采用MD5信息摘要算法。
-- `instance_ids` (List of String) 操作的实例ID。
+- `instance_ids` (Set of String) 操作的实例ID。
 - `key_pair_id` (String) 密钥对唯一ID。
 - `key_pair_name` (String) 密钥对名称。不可与已有名称重复。长度限制在 2～64 个字符之间。允许使用点号“.”分隔字符成多段，每段允许使用大小写字母、数字或连字符“-”。不能以“-”和“.”开头或结尾，不能连续使用“-”或者“.”。
-- `private_key` (String) 密钥对私钥信息。
 - `project_name` (String) 资源所属项目，一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。
 - `public_key` (String) 密钥对的公钥信息。
-- `tags` (Attributes List) 密钥对的标签。 (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 密钥对的标签。 (see [below for nested schema](#nestedatt--tags))
 - `updated_time` (String) 密钥对更新时间。
 
 <a id="nestedatt--tags"></a>

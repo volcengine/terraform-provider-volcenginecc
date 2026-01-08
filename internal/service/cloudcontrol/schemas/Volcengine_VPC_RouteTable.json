@@ -2,9 +2,8 @@
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/ProjectName",
-    "/properties/vpcId",
-    "/properties/DestinationCidrBlock",
-    "/properties/DestinationPrefixListId"
+    "/properties/AssociateType",
+    "/properties/VpcId"
   ],
   "definitions": {
     "DescribeRouteEntry": {
@@ -92,6 +91,17 @@
     }
   },
   "description": "路由表由一系列路由条目组成，为私有网络的流量指定下一跳的云资源，每个子网必须且仅支持关联一个路由表，使子网内的资源通过路由表转发流量。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/AssociateType",
+      "/properties/RouteTableId",
+      "/properties/RouteTableName",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -99,7 +109,8 @@
         "vpc:CreateRouteEntry",
         "vpc:AssociateRouteTable",
         "vpc:DescribeRouteTableList",
-        "vpc:DescribeRouteEntryList"
+        "vpc:DescribeRouteEntryList",
+        "vpc:DisassociateRouteTable"
       ]
     },
     "delete": {
@@ -132,7 +143,6 @@
         "vpc:ModifyRouteEntry",
         "vpc:UntagResources",
         "vpc:TagResources",
-        "vpc:DeleteRouteTable",
         "vpc:DescribeRouteTableList",
         "vpc:DescribeRouteEntryList"
       ]
@@ -183,6 +193,7 @@
       "type": "string"
     },
     "ProjectName": {
+      "default": "default",
       "description": "路由表所属项目的名称。",
       "semantic": "projectName",
       "type": "string"
@@ -255,6 +266,7 @@
     "/properties/RouteTableType",
     "/properties/UpdatedTime",
     "/properties/CreatedTime",
+    "/properties/VpcName",
     "/properties/SystemRouteEntries",
     "/properties/CustomRouteEntries/*/RouteEntryId",
     "/properties/CustomRouteEntries/*/PrefixListCidrBlocks",

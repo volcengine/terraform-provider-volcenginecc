@@ -63,9 +63,10 @@ resource "volcenginecc_autoscaling_scaling_configuration" "AutoScalingDemo" {
 - `image_id` (String) 镜像ID，伸缩组自动创建实例时使用的镜像资源。
 - `instance_description` (String) 实例的描述，取值：不能以数字、中划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0 ~ 255之间。不填默认为空字符串。
 - `instance_name` (String) 实例的名称，取值：以字母或中文开头。只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。长度限制为1～128个字符。
-- `instance_type_overrides` (Attributes Set) (see [below for nested schema](#nestedatt--instance_type_overrides))
+- `instance_type_overrides` (Attributes Set) 抢占式实例的规格信息。
+ 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_type_overrides))
 - `ipv_6_address_count` (Number) 是否为实例网卡分配IPv6地址。取值：0：不分配IPv6地址。1：分配IPv6地址，系统自动为您分配IPv6网段。
-- `key_pair_name` (String) KeyPairName string 可选 示例值：kp-test-123，使用“SSH密钥对”登录实例时，请输入密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。
+- `key_pair_name` (String) 密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。
 - `lifecycle_state` (String) 生命周期状态。取值：Active（活跃）/InActive（非活跃）
 - `password` (String) 使用“密码”方式登录实例时，请设置root登录密码：长度限制在8～30之间，密码只能由大写字母、小写字母、数字和特殊字符组成，且必须包含至少三项，特殊字符可以使用：`~!#$%^&*()_-+= |，不能以“/”和“$6$”开头
 - `project_name` (String) 伸缩配置创建的实例所属项目，默认为空。一个资源只能归属于一个项目。
@@ -126,9 +127,9 @@ Optional:
 
 Optional:
 
-- `delete_with_instance` (Boolean) 云盘是否随实例释放：参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1   - 15。参数   - DeleteWithInstance：云盘是否随实例释放。true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。
-- `size` (Number) 云盘的容量，单位为GiB。参数   - N：表示云盘的序号，序号为“1”表示系统盘；序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。取值   - Size：表述第N个云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。多个云盘之间用&分隔。
-- `volume_type` (String) 云盘的类型：参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘。取值：1 ～ 15。参数   - VolumeType：表示第N个云盘的类型，取值：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。多个云盘之间用&分隔。
+- `delete_with_instance` (Boolean) 云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。
+- `size` (Number) 云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。
+- `volume_type` (String) 云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。
 
 ## Import
 

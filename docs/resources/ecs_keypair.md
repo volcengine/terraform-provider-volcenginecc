@@ -35,11 +35,10 @@ resource "volcenginecc_ecs_keypair" "ECSKeypairDemo" {
 ### Optional
 
 - `description` (String) 密钥对的描述，默认值为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”长度限制在255个字符以内。
-- `instance_ids` (List of String) 操作的实例ID。
-- `private_key` (String) 密钥对私钥信息。
+- `instance_ids` (Set of String) 操作的实例ID。
 - `project_name` (String) 资源所属项目，一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。
 - `public_key` (String) 密钥对的公钥信息。
-- `tags` (Attributes List) 密钥对的标签。
+- `tags` (Attributes Set) 密钥对的标签。
  特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

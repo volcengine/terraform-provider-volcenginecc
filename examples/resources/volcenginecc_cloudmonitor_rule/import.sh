@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cloudmonitor_rule.example "rule_id"

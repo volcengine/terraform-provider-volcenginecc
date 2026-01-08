@@ -1,12 +1,17 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/VpcId",
+    "/properties/AddressIpVersion",
+    "/properties/BandwidthPackageId",
+    "/properties/LoadBalancerBillingType",
+    "/properties/LoadBalancerEdition",
     "/properties/EipBillingConfig",
     "/properties/Ipv6EipBillingConfig",
-    "/properties/ZoneMappings",
+    "/properties/ProjectName",
     "/properties/Type",
-    "/properties/ProjectName"
+    "/properties/VpcId",
+    "/properties/ZoneMappings/*/SubnetId",
+    "/properties/ZoneMappings/*/ZoneId"
   ],
   "definitions": {
     "Eip": {
@@ -245,8 +250,7 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     },
@@ -279,6 +283,16 @@
     }
   },
   "description": "应用型负载均衡（ALB）是对“七层”网络协议的流量进行分发的服务。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/LoadBalancerId",
+      "/properties/VpcId",
+      "/properties/LoadBalancerName",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -499,15 +513,16 @@
     }
   },
   "readOnlyProperties": [
-    "/properties/LoadBalancerId",
-    "/properties/Status",
-    "/properties/CreateTime",
-    "/properties/UpdateTime",
     "/properties/BusinessStatus",
+    "/properties/CreateTime",
+    "/properties/DeletedTime",
+    "/properties/DnsName",
+    "/properties/LoadBalancerId",
     "/properties/LockReason",
     "/properties/OverdueTime",
-    "/properties/DeletedTime",
-    "/properties/DnsName"
+    "/properties/Status",
+    "/properties/UpdateTime",
+    "/properties/ZoneMappings/*/LoadBalancerAddresses"
   ],
   "required": [
     "Type",

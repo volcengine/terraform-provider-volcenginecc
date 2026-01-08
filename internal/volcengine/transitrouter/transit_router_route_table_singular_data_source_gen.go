@@ -22,14 +22,14 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::TransitRouter::TransitRouterRouteTable resource.
 func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: CreationTime
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "TR路由表的创建时间",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "TR路由表的创建时间",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -103,8 +103,7 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -178,14 +177,14 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 			Description: "TR路由表的类型。System：系统路由表。Custom：自定义路由表。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateTime
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "TR路由表的最近操作时间",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "TR路由表的最近操作时间",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -206,7 +205,7 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 	opts = opts.WithCloudControlTypeName("Volcengine::TransitRouter::TransitRouterRouteTable").WithTerraformTypeName("volcenginecc_transitrouter_transit_router_route_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"creation_time":                   "CreationTime",
+		"created_time":                    "CreatedTime",
 		"description":                     "Description",
 		"in_route_policy_table_id":        "InRoutePolicyTableId",
 		"key":                             "Key",
@@ -217,7 +216,7 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 		"transit_router_route_table_id":   "TransitRouterRouteTableId",
 		"transit_router_route_table_name": "TransitRouterRouteTableName",
 		"transit_router_route_table_type": "TransitRouterRouteTableType",
-		"update_time":                     "UpdateTime",
+		"updated_time":                    "UpdatedTime",
 		"value":                           "Value",
 	})
 

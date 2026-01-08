@@ -338,6 +338,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
@@ -840,15 +841,16 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "标签的标签键。同一资源的标签键不允许重复。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "标签的标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -861,8 +863,9 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "标签的标签键。同一资源的标签键不允许重复。",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -872,11 +875,9 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
+						Description: "标签的标签值。",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -1000,6 +1001,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Protocol",
 		"/properties/ServerGroupType",
 		"/properties/VpcId",
+		"/properties/IPAddressType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

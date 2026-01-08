@@ -40,14 +40,14 @@ func transitRouterRouteEntryDataSource(ctx context.Context) (datasource.DataSour
 			Description: "路由条目的AS路径。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: CreationTime
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "路由条目的创建时间。",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "路由条目的创建时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -167,14 +167,14 @@ func transitRouterRouteEntryDataSource(ctx context.Context) (datasource.DataSour
 			Description: "中转路由器实例关联的路由表的ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateTime
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "路由条目的更新时间。",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "路由条目的更新时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -196,7 +196,7 @@ func transitRouterRouteEntryDataSource(ctx context.Context) (datasource.DataSour
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"as_path":                                  "AsPath",
-		"creation_time":                            "CreationTime",
+		"created_time":                             "CreatedTime",
 		"description":                              "Description",
 		"destination_cidr_block":                   "DestinationCidrBlock",
 		"status":                                   "Status",
@@ -206,7 +206,7 @@ func transitRouterRouteEntryDataSource(ctx context.Context) (datasource.DataSour
 		"transit_router_route_entry_next_hop_type": "TransitRouterRouteEntryNextHopType",
 		"transit_router_route_entry_type":          "TransitRouterRouteEntryType",
 		"transit_router_route_table_id":            "TransitRouterRouteTableId",
-		"update_time":                              "UpdateTime",
+		"updated_time":                             "UpdatedTime",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

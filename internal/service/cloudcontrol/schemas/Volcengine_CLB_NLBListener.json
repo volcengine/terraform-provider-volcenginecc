@@ -17,7 +17,6 @@
         },
         "Ip": {
           "description": "后端服务器的IP地址。",
-          "format": "ipv4",
           "type": "string"
         },
         "Port": {
@@ -51,7 +50,6 @@
         },
         "UpdatedTime": {
           "description": "健康状态最后更新时间。",
-          "format": "date-time",
           "type": "string"
         },
         "ZoneId": {
@@ -80,37 +78,49 @@
     }
   },
   "description": "监听器负责根据指定的协议和端口，监听NLB实例接收到的用户访问请求。NLB将按照该监听器关联的服务器组配置的调度算法，将访问请求转发至该服务器组内健康的后端服务器。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ListenerId",
+      "/properties/ListenerName",
+      "/properties/Protocol",
+      "/properties/LoadBalancerId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "nlb:CreateNLBListener",
-        "nlb:DescribeNLBListenerAttributes",
-        "nlb:DescribeNLBListenerHealth"
+        "clb:CreateNLBListener",
+        "clb:DescribeNLBListenerAttributes",
+        "clb:DescribeNLBListenerHealth"
       ]
     },
     "delete": {
       "permissions": [
-        "nlb:DeleteNLBListener",
-        "nlb:DescribeNLBListenerAttributes",
-        "nlb:DescribeNLBListenerHealth"
+        "clb:DeleteNLBListener",
+        "clb:DescribeNLBListenerAttributes",
+        "clb:DescribeNLBListenerHealth"
       ]
     },
     "list": {
       "permissions": [
-        "nlb:DescribeNLBListeners"
+        "clb:DescribeNLBListeners"
       ]
     },
     "read": {
       "permissions": [
-        "nlb:DescribeNLBListenerAttributes",
-        "nlb:DescribeNLBListenerHealth"
+        "clb:DescribeNLBListenerAttributes",
+        "clb:DescribeNLBListenerHealth"
       ]
     },
     "update": {
       "permissions": [
-        "nlb:ModifyNLBListenerAttributes",
-        "nlb:DescribeNLBListenerAttributes",
-        "nlb:DescribeNLBListenerHealth"
+        "clb:ModifyNLBListenerAttributes",
+        "clb:DescribeNLBListenerAttributes",
+        "clb:DescribeNLBListenerHealth",
+        "clb:UntagNLBResources",
+        "clb:TagNLBResources"
       ]
     }
   },
@@ -119,7 +129,7 @@
   ],
   "properties": {
     "CertificateId": {
-      "description": "TLS监听器服务器证书的ID，仅支持传入火山引擎证书中心 SSL 证书。。",
+      "description": "TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。",
       "type": "string"
     },
     "ConnectionTimeout": {
@@ -179,7 +189,7 @@
       "type": "integer"
     },
     "Protocol": {
-      "description": "监听协议类型。",
+      "description": "监听协议类型。TCP,UDP,TLS",
       "enum": [
         "TCP",
         "UDP",
@@ -227,8 +237,7 @@
     "/properties/ListenerId",
     "/properties/CreatedTime",
     "/properties/UpdatedTime",
-    "/properties/Status",
-    "/properties/HealthResponse"
+    "/properties/Status"
   ],
   "required": [
     "LoadBalancerId",

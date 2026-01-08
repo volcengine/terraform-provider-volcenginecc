@@ -103,6 +103,7 @@ resource "volcenginecc_clb_listener" "ClbListenerDemo" {
 - `created_time` (String) 监听器的创建时间。
 - `id` (String) Uniquely identifies the resource.
 - `listener_id` (String) 监听器的ID。
+- `rule_ids` (Set of String) 监听器绑定的规则ID列表。
 - `status` (String) 监听器的状态。Creating：创建中。Active：运行中。Deleting: 删除中。Disabled: 已停用。
 - `updated_time` (String) 监听器最近一次的操作时间。
 - `waf_protection_enabled` (String) 是否将经过七层监听器的流量送至Web应用防火墙进行检测和过滤。on：是。off：否。
