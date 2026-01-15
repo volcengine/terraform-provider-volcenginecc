@@ -51,14 +51,14 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
 - `private_dns_type` (String) 私有DNS名称的域名类型。public：公网。说明未开通自定义私网域名功能时，不返回该参数。
 - `project_name` (String) 终端节点服务所属的项目名称。
 - `resources` (Attributes Set) 终端节点服务提供服务的资源。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resources))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resources))
 - `service_name_managed` (String) 是否为托管终端节点服务。false：非托管终端节点服务。true：托管终端节点服务。说明终端节点服务所属账号未开通托管终端节点服务功能时，不返回该参数。
 - `service_name_suffix` (String) 终端节点服务的名称后缀。设置名称后缀后，系统会按照com.volces.privatelink.<地域ID>.<名称后缀>的格式生成终端节点服务的名称。说明该参数正在邀测中，如需使用不同名称后缀区分业务，请联系客户经理。
 - `service_owner` (String) 当前服务主体。
 - `service_resource_type` (String) 服务资源的类型。CLB：负载均衡CLB。ALB：应用型负载均衡ALB。RDSMySQL：云数据库 MySQL版。
 - `service_type` (String) 终端节点服务的类型。Interface：接口终端节点服务。
 - `tags` (Attributes Set) 终端节点服务的标签信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `wildcard_domain_enabled` (Boolean) 是否启用通配符域名。true：启用。false：未启用。
 
 ### Read-Only

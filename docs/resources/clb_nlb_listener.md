@@ -47,12 +47,12 @@ resource "volcenginecc_clb_nlb_listener" "CLBNLBListenerDemo" {
 - `enabled` (Boolean) 是否启用监听器。true：开启；false：关闭。
 - `end_port` (Number) 全端口监听的结束端口，仅当Port为0时有效。
 - `health` (Attributes Set) 后端实例健康检查响应信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--health))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--health))
 - `listener_name` (String) 监听器名称。
 - `security_policy_id` (String) TLS 安全策略ID，支持系统安全策略和自定义安全策略。系统安全策略取值：.tls_cipher_policy_1_0.tls_cipher_policy_1_1.tls_cipher_policy_1_2.tls_cipher_policy_1_2_strict.tls_cipher_policy_1_2_strict_with_1_3.自定义安全策略：输入自定义安全策略 ID。当Protocol为TLS 时，该参数为必填。。
 - `start_port` (Number) 全端口监听的起始端口，仅当Port为0时有效。
 - `tags` (Attributes Set) 资源标签。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -138,7 +138,7 @@ resource "volcenginecc_escloud_instance" "ESCloudInstanceDemo" {
 - `status` (String) 实例当前状态。
 - `sub_instance_enable` (String) 子实例开启情况。
 - `sub_instances` (Attributes Set) 企业级 SQL 分析实例配置信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--sub_instances))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--sub_instances))
 - `support_cold_node` (Boolean) 是否支持冷节点。
 - `total_nodes` (Number) 实例的总节点数。
 - `transfer_info` (Attributes) 数据迁移任务信息。 (see [below for nested schema](#nestedatt--transfer_info))
@@ -158,15 +158,15 @@ Optional:
 - `enable_pure_master` (Boolean) Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即使用 Hot 声明。
 - `instance_name` (String) 自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。
 - `network_specs` (Attributes Set) 实例公网规格配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_configuration--network_specs))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_configuration--network_specs))
 - `node_specs_assigns` (Attributes Set) 实例中各种节点的数量和规格配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_configuration--node_specs_assigns))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_configuration--node_specs_assigns))
 - `period` (Number) 包年包月实例的购买时长，单位：月。
 - `project_name` (String) 按需设置云搜索实例所属的项目，有利于云资源的分组管理。项目是提供的一种资源管理方式，有利于维护资源独立、数据安全；同时可从项目维度查看资源消费账单，便于计算云资源使用成本。如需了解更多信息，请参见项目概述
 - `region_id` (String) 实例所在区域。
 - `subnet` (Attributes) 设置实例的子网信息。说明设置的子网必须是主可用区中的子网。 (see [below for nested schema](#nestedatt--instance_configuration--subnet))
 - `tags` (Attributes Set) 标签信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_configuration--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_configuration--tags))
 - `version` (String) API的版本，取值：2023-01-01。
 - `vpc` (Attributes) 设置实例的私有网络 VPC 信息。 (see [below for nested schema](#nestedatt--instance_configuration--vpc))
 - `zone_id` (String) 实例所在可用区。说明如果是多可用区部署，则填写多个 ZoneId，使用英文逗号分隔，如cn-beijing-a,cn-beijing-c。最左侧的 ZoneId 为主可用区，其余为备可用区。

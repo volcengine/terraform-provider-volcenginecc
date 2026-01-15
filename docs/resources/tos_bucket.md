@@ -57,12 +57,12 @@ resource "volcenginecc_tos_bucket" "BucketDemo" {
 - `bucket_type` (String) 桶的类型。包括hns：获取所有分层桶列表，fns：获取所有扁平桶列表。
 - `enable_version_status` (String) 存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。
 - `lifecycle_config` (Attributes Set) 存储桶的声明周期。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config))
 - `policy` (String) JSON 格式的字符串，包含了桶策略的信息，但单个桶的所有桶策略 JSON 序列化后总大小不能超过 20KB。
 - `project_name` (String) 存储桶所属项目。
 - `storage_class` (String) 桶的默认存储类型。包括STANDARD：标准存储。IA：低频访问存储。INTELLIGENT_TIERING：智能分层存储。ARCHIVE_FR：归档闪回存储。ARCHIVE：归档存储。COLD_ARCHIVE：冷归档存储。DEEP_COLD_ARCHIVE：深度冷归档存储。
 - `tags` (Attributes Set) 存储桶的标签信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -79,7 +79,7 @@ Optional:
 
 - `bucket_acl_delivered` (Boolean) 是否开启对象默认继承桶 ACL 功能。true：开启对象默认继承桶 ACL 功能。false：关闭对象默认继承桶 ACL 功能。
 - `grants` (Attributes Set) 对象的访问控制权限根节点。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--acl--grants))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--acl--grants))
 - `owner` (Attributes) 对象所有者。 (see [below for nested schema](#nestedatt--acl--owner))
 
 <a id="nestedatt--acl--grants"></a>
@@ -136,13 +136,13 @@ Optional:
 - `lifecycle_rule_id` (String) 规则 ID。
 - `no_current_version_expiration` (Attributes) (see [below for nested schema](#nestedatt--lifecycle_config--no_current_version_expiration))
 - `non_current_version_transitions` (Attributes Set) 基于最后修改时间的生命周期规则中沉降历史版本对象的的过期属性。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config--non_current_version_transitions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config--non_current_version_transitions))
 - `prefix` (String) 规则所适用的前缀。
 - `status` (String) 是否启用规则。包括Enabled、Disabled。
 - `tags` (Attributes Set) 标签。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config--tags))
 - `transitions` (Attributes Set) 基于最后修改时间的生命周期规则中沉降最新版本对象的的过期属性。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config--transitions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--lifecycle_config--transitions))
 
 <a id="nestedatt--lifecycle_config--abort_in_complete_multipart_upload"></a>
 ### Nested Schema for `lifecycle_config.abort_in_complete_multipart_upload`

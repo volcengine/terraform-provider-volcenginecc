@@ -61,7 +61,7 @@ resource "volcenginecc_vpc_eip" "EipDemo" {
 - `security_protection_instance_id` (Number) DDoS原生防护（企业版）ID。您可以调用 DescInstanceList 接口，查询DDoS原生防护（企业版）的ID。当SecurityProtectionTypes传入AntiDDoS_Enhanced时，此参数必须传入。
 - `security_protection_types` (Set of String) 防护类型。AntiDDoS_Enhanced：增强防护类型的公网IP，可以加入到DDoS原生防护（企业版）实例。空值：默认防护类型的公网IP。
 - `tags` (Attributes Set) 公网IP的标签信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -71,18 +71,18 @@ resource "volcenginecc_alb_server_group" "AlbServergroupDemo" {
 - `server_group_name` (String) 后端服务器组的名称。
 - `server_group_type` (String) 后端服务器组的类型。instance：服务器类型，该类型服务器组支持添加 ecs、eni 实例作为后端服务器。ip：IP类型，该类型服务器组支持添加 IP 地址作为后端服务器。
 - `servers` (Attributes Set) 后端服务器组中服务器的信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--servers))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--servers))
 - `status` (String) 服务器组状态。Creating：创建中。Active：运行中。Configuring：配置中。Deleting：删除中。
 - `sticky_session_config` (Attributes) 会话保持功能的参数信息。 (see [below for nested schema](#nestedatt--sticky_session_config))
 - `tags` (Attributes Set) 标签信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `create_time` (String) 后端服务器组的创建时间。
 - `id` (String) Uniquely identifies the resource.
 - `listeners` (Attributes Set) 后端服务器组关联的监听器信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
 - `server_count` (Number) 服务器组内后端服务器的个数。
 - `server_group_id` (String) 后端服务器组的ID。
 - `update_time` (String) 后端服务器组的最近操作时间。

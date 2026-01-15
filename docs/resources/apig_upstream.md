@@ -64,13 +64,13 @@ resource "volcenginecc_apig_upstream" "APIGUpstreamAIProviderDemo" {
 ### Read-Only
 
 - `backend_targets` (Attributes Set) 后端节点，Upstream来源类型为VeFaas时无效。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backend_targets))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backend_targets))
 - `created_time` (String) Upstream创建时间。
 - `id` (String) Uniquely identifies the resource.
 - `updated_time` (String) Upstream更新时间。
 - `upstream_id` (String) Upstream ID。
 - `version_details` (Attributes Set) Upstream版本，仅在Upstream来源类型为K8S时有效。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--version_details))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--version_details))
 
 <a id="nestedatt--upstream_spec"></a>
 ### Nested Schema for `upstream_spec`
@@ -79,7 +79,7 @@ Optional:
 
 - `ai_provider` (Attributes) AI模型代理。 (see [below for nested schema](#nestedatt--upstream_spec--ai_provider))
 - `ecs_instances` (Attributes Set) 云服务器。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--upstream_spec--ecs_instances))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--upstream_spec--ecs_instances))
 - `k8_s_service` (Attributes) 容器服务。 (see [below for nested schema](#nestedatt--upstream_spec--k8_s_service))
 - `nacos_service` (Attributes) 注册中心。 (see [below for nested schema](#nestedatt--upstream_spec--nacos_service))
 - `ve_faas` (Attributes) 函数服务。 (see [below for nested schema](#nestedatt--upstream_spec--ve_faas))
@@ -217,7 +217,7 @@ Read-Only:
 Read-Only:
 
 - `labels` (Attributes Set) 标签。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--version_details--labels))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--version_details--labels))
 - `name` (String) 版本名称。支持大小写字母、数字和中划线（-），长度限制为2~63个字符。不能以中划线（-）开头。
 - `update_time` (String) 更新时间。
 

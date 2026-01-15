@@ -100,6 +100,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_iam_projects -cctype Volcengine::IAM::Project -package iam ../volcengine/iam/project_plural_data_source_gen.go ../volcengine/iam/project_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_bmq_groups -cctype Volcengine::BMQ::Group -package bmq ../volcengine/bmq/group_plural_data_source_gen.go ../volcengine/bmq/group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_rules -cctype Volcengine::CloudMonitor::Rule -package cloudmonitor ../volcengine/cloudmonitor/rule_plural_data_source_gen.go ../volcengine/cloudmonitor/rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpn_vpn_gateways -cctype Volcengine::VPN::VPNGateway -package vpn ../volcengine/vpn/vpn_gateway_plural_data_source_gen.go ../volcengine/vpn/vpn_gateway_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_filenas_snapshots -cctype Volcengine::FileNAS::Snapshot -package filenas ../volcengine/filenas/snapshot_plural_data_source_gen.go ../volcengine/filenas/snapshot_plural_data_source_gen_test.go
 
 package provider
 
@@ -146,5 +148,6 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpn"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/waf"
 )

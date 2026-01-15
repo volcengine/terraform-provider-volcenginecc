@@ -68,7 +68,7 @@ resource "volcenginecc_mongodb_instance" "MongoDBInstanceDemo" {
 - `mongos_node_number` (Number) 分片集群中 Mongos 节点的数量。取值范围：2~32。
 - `mongos_node_spec` (String) 分片集群中 Mongos 节点的规格码。
 - `node_availability_zone` (Attributes Set) 添加只读节点信息，包括只读节点所在的可用区和数量。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_availability_zone))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_availability_zone))
 - `node_number` (Number) 节点数量，其中：当实例类型为副本集（即 InstanceType 取值为 ReplicaSet）时，该参数表示副本集实例的计算节点数量。当实例类型为分片集群（即 InstanceType 取值为 ShardedCluster）时，该参数表示每个 Shard 分片中的节点数量。
 - `period` (Number) 包年包月实例的购买时长，其中：当 PeriodUnit 为 Year 时，Period 取值为 1~3。当 PeriodUnit 为 Month 时，Period 取值为 1~9。
 - `period_unit` (String) 指定包年包月实例为包年或者包月类型。取值如下：Year：包年。Month：包月。
@@ -77,14 +77,14 @@ resource "volcenginecc_mongodb_instance" "MongoDBInstanceDemo" {
 - `super_account_name` (String) 数据库账号名称。当前仅支持在创建实例时设置超级管理员账号，账号名称固定为 root。
 - `super_account_password` (String) root 账号的密码。密码需同时满足如下条件：只能为大小写字母、数字及以下特殊字符 _#!@$%^&*()+=-。长度为 8~32 个字符。至少包含大写字母、小写字母、数字或特殊字符中的任意三种。不允许使用极易被破解的弱密码（如 Admin@123）。
 - `tags` (Attributes Set) MongoDB实例的标签信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `charge_status` (String) 实例计费状态，取值范围如下：Normal：正常。WaitingPaid：等待支付。ChangingPayType：计费变更中。Renewing：续费中。Overdue：已到期。Owing：欠费中。Unsubscribing：退订中。
 - `closed_time` (String) 计划关停时间（UTC）。
 - `config_servers` (Attributes Set) ConfigServers 的信息列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--config_servers))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--config_servers))
 - `config_servers_id` (String) ConfigServer 的 ID。
 - `created_time` (String) 实例创建时间（UTC）。
 - `db_engine_version_str` (String) 数据库引擎版本的字符串。
@@ -93,15 +93,15 @@ resource "volcenginecc_mongodb_instance" "MongoDBInstanceDemo" {
 - `instance_id` (String) 实例 ID。
 - `instance_status` (String) 实例状态。创建中：Creating。运行中：Running。白名单维护中：AllowListMaintaining。变更配置中：Scaling。重启中：Restarting。网络维护中：NetworkMaintaining。恢复中：Restoring。升级版本中：Upgrading。不可用：Unavailable。关停中：Closing。删除中：Deleting。已关停：Closed。SSL SSL变更中：SSLUpdating。主节点切换中：SwitchMastering。角色切换中：RoleChanging。迁移中：Migrating。
 - `mongos` (Attributes Set) Mongos 的信息列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--mongos))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--mongos))
 - `mongos_id` (String) Mongos 的 ID。
 - `nodes` (Attributes Set) 副本集实例中各节点或分片集群 Shard 分片中各节点的信息列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nodes))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nodes))
 - `private_endpoint` (String) 实例私网连接地址的字符串信息。
 - `read_only_node_number` (Number) 实例的只读节点数量。
 - `reclaim_time` (String) 实例的计划回收时间（UTC）。
 - `shards` (Attributes Set) Shards 的信息列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--shards))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--shards))
 - `storage_type` (String) 实例的存储类型。当前仅支持本地 SSD 盘（即 LocalSSD）存储。
 - `updated_time` (String) 实例的更新时间（UTC）。
 
@@ -178,7 +178,7 @@ Read-Only:
 Read-Only:
 
 - `nodes` (Attributes Set) Shard 分片中各节点的信息列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--shards--nodes))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--shards--nodes))
 - `shard_id` (String) Shard 节点的 ID。
 
 <a id="nestedatt--shards--nodes"></a>

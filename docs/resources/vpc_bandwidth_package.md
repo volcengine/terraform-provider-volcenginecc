@@ -48,7 +48,7 @@ resource "volcenginecc_vpc_bandwidth_package" "BandwidthPackageDemo" {
 - `billing_type` (Number) 共享带宽包的计费方式。取值如下：1：包年包月。2 : 按带宽上限计费（默认值）。3：按主流量计费。4 : 按传统95计费（保底比例默认20%）。
 - `description` (String) 描述信息，长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。
 - `eip_addresses` (Attributes Set) 加入共享带宽包的公网IP信息列表。必须同时满足如下条件：1、二者线路类型相同。2、二者安全防护类型相同。3、二者地域相同。4、公网IP或IPv6公网带宽为按量计费。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--eip_addresses))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--eip_addresses))
 - `enable_dual_stack` (Boolean) 是否启用双栈，取值如下：true：启用双栈。false：不启用双栈。
 - `isp` (String) 线路类型，默认为BGP。BGP：BGP（多线）。1、若您的账号已申请并开通了静态单线权限，则可传入如下取值：1.1、ChinaMobile：中国移动静态单线。1.2、ChinaTelecom：中国电信静态单线。1.3、ChinaUnicom：中国联通静态单线。2、若您的账号已申请并开通了BGP单线权限，则可传入SingleLine_BGP。3、若您的账号已申请并开通了精品BGP权限，则可传入Premium_BGP。4、若您的账号已申请并开通了融合BGP权限，则可传入Fusion_BGP。5、若您的账号已申请并开通了惠选型静态单线权限，则可传入如下取值：5.1、ChinaMobile_Value：中国移动惠选型静态单线。5.2、ChinaUnicom_Value：中国联通惠选型静态单线。5.3、ChinaTelecom_Value：中国电信惠选型静态单线。
 - `period` (Number) 购买包年包月共享带宽包的时长，默认“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36。当PeriodUnit传入2，Period取值范围：1～3。
@@ -57,7 +57,7 @@ resource "volcenginecc_vpc_bandwidth_package" "BandwidthPackageDemo" {
 - `protocol` (String) 共享带宽包的IP协议，取值如下：Dual-stack：双栈协议类型。IPv4：IPv4协议类型协议。仅BillingType传2或4时，本参数支持传入Dual-stack
 - `security_protection_types` (Set of String) 共享带宽包的的安全防护类型。AntiDDoS_Enhanced：创建增强防护类型的共享带宽包，即创建支持添加基础防护类型公网IP的共享带宽包。不填则表示基础防护类型的共享带宽包，即创建支持添加增强防护类型公网IP的共享带宽包。
 - `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

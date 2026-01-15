@@ -20,7 +20,7 @@ resource "volcenginecc_fwcenter_dns_control_policy" "FWCenterDnsControlPolicyDem
   sources = [
     {
       region = "cn-beijing"
-      vpc_id = "vpc-3rehw4xxxxk2ixxxxx" }
+    vpc_id = "vpc-3rehw4xxxxk2ixxxxx" }
   ]
 }
 ```
@@ -38,7 +38,7 @@ resource "volcenginecc_fwcenter_dns_control_policy" "FWCenterDnsControlPolicyDem
 - `description` (String) 策略的描述信息。
 - `internet_firewall_id` (String) 互联网边界防火墙实例ID。
 - `sources` (Attributes Set) 访问源信息，包含VPC列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--sources))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--sources))
 - `status` (Boolean) 域名黑名单访问控制策略的开关状态。false：关闭；true：开启。
 
 ### Read-Only
@@ -47,7 +47,7 @@ resource "volcenginecc_fwcenter_dns_control_policy" "FWCenterDnsControlPolicyDem
 - `destination_group_list` (Set of String) 域名地址簿名称列表。
 - `domain_list` (Set of String) 域名列表。
 - `domain_list_v1` (Attributes Set) 域名地址簿的域名列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domain_list_v1))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domain_list_v1))
 - `hit_cnt` (Number) 命中计数，表示该域名黑名单访问控制策略被触发的次数。
 - `id` (String) Uniquely identifies the resource.
 - `last_hit_time` (Number) 最近命中时间戳，表示该域名黑名单访问控制策略最后一次被触发的时间。

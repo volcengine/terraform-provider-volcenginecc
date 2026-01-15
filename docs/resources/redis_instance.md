@@ -47,7 +47,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 ### Required
 
 - `configure_nodes` (Attributes List) 设置节点所属的可用区列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--configure_nodes))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--configure_nodes))
 - `engine_version` (String) 数据库版本号。
 - `multi_az` (String) 设置实例的可用区部署方案。
 - `node_number` (Number) 每个分片中的节点数。取值范围为1~6。每个账号在每个地域下默认最多可创建4个256MiB规格的节点，若需要调整配额上限为10个，请参见账号配额。取值为1时表示创建单节点实例；取值大于1时表示创建主备实例。关于两种类型实例的功能特性差异详情，请参见功能特性差异。
@@ -74,7 +74,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `reserve_additional_bandwidth` (Boolean) 设置是否保留额外带宽
 - `shard_number` (Number) 实例中的分片数量。取值范围为 2~256。仅当 ShardedCluster 取值为 1（即启用分片集群）时，需要指定该参数。
 - `tags` (Attributes Set) 设置实例的标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -86,7 +86,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `instance_class` (String) Redis 实例的类型。取值范围如下：PrimarySecondary：主备实例；Standalone：单节点实例。若该参数留空，表示不使用实例类型条件进行筛选。关于实例类型的更多信息，请参见产品架构。
 - `instance_id` (String) 实例 ID。
 - `instance_shards` (Attributes Set) 实例中所有 Shard 分片的详情列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_shards))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_shards))
 - `maintenance_time` (String) 实例的可维护时间段，格式为HH:mm-HH:mm（UTC+8）。
 - `max_connections` (Number) 实例当前单分片最大连接数。每分片的默认连接数为10000，您也可以根据业务需要调用ModifyDBInstanceMaxConn接口修改单分片的最大连接数。
 - `node_ids` (Set of String) Proxy 和 Server 节点 ID 列表。
@@ -96,7 +96,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `vi_pv_6` (String) 实例私网连接地址所对应的 IPv6 地址。仅当实例使用了 IPv6 地址时才会返回该参数。
 - `vip` (String) 实例私网连接地址所对应的 IPv4 地址。
 - `visit_addrs` (Attributes Set) 连接地址信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--visit_addrs))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--visit_addrs))
 - `vpc_auth_mode` (String) 开启或关闭免密访问功能。取值范围如下：open：开启免密访问；close：关闭免密访问。参数取值不区分大小写。
 - `zone_ids` (Set of String) 实例所在的可用区列表。
 
@@ -133,7 +133,7 @@ Read-Only:
 
 - `node_number` (Number) 分片中的节点数量
 - `server_nodes` (Attributes List) 分片中所有 Server 节点的详情列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_shards--server_nodes))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_shards--server_nodes))
 - `shard_id` (String) 分片 ID。
 
 <a id="nestedatt--instance_shards--server_nodes"></a>

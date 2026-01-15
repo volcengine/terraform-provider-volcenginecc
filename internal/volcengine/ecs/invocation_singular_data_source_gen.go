@@ -204,11 +204,6 @@ func invocationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "ErrorCode": {
 		//	        "description": "命令执行失败的错误码。TaskDeliveryTimeout：表示命令下发超时。TaskExecutionTimeout：表示命令执行超时。TaskExecutionFailed：表示命令执行失败。",
-		//	        "enum": [
-		//	          "TaskDeliveryTimeout",
-		//	          "TaskExecutionTimeout",
-		//	          "TaskExecutionFailed"
-		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "ErrorMessage": {
@@ -347,6 +342,7 @@ func invocationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "任务触发时的命令自定义参数定义。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
@@ -452,7 +448,8 @@ func invocationDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "任务触发时的命令自定义参数定义。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// Cloud Control resource type schema:
@@ -518,19 +515,24 @@ func invocationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "标签键值对。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+		//	        "maxLength": 256,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -542,15 +544,18 @@ func invocationDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "标签键值对。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Timeout
 		// Cloud Control resource type schema:

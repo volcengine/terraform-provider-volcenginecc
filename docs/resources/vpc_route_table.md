@@ -45,7 +45,7 @@ resource "volcenginecc_vpc_route_table" "RouteTableDemo" {
 
 - `associate_type` (String) 创建路由表输入的关联类型。1、Subnet：子网关联。2、Gateway：网关关联。
 - `custom_route_entries` (Attributes Set) 路由表关联的自定义路由条目列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_route_entries))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_route_entries))
 - `description` (String) 路由表描述信息。
 - `ipv_4_gateway_id` (String) 关联路由表的IPv4网关ID。
 - `ipv_6_gateway_id` (String) 关联路由表的IPv6网关ID。
@@ -53,7 +53,7 @@ resource "volcenginecc_vpc_route_table" "RouteTableDemo" {
 - `route_table_name` (String) 路由表名称。
 - `subnet_ids` (Set of String) 关联的子网的ID列表。
 - `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -63,7 +63,7 @@ resource "volcenginecc_vpc_route_table" "RouteTableDemo" {
 - `route_table_id` (String) 路由表ID。
 - `route_table_type` (String) 路由表类型。1、Custom：自定义路由表。2、System：系统路由表。
 - `system_route_entries` (Attributes Set) 路由表关联的系统默认路由条目列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--system_route_entries))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--system_route_entries))
 - `updated_time` (String) 路由表更新时间。
 - `vpc_name` (String) VPC的名称。
 

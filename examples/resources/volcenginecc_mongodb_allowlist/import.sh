@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_mongodb_allowlist.example "allow_list_id"

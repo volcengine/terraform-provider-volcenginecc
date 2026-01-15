@@ -56,7 +56,7 @@ resource "volcenginecc_tls_topic" "TlsTopicDemo" {
 - `log_public_ip` (Boolean) 是否开启记录外网 IP 功能。默认为开启状态。开启后日志服务会自动在日志内容中添加以下元数据字段。__tag____client_ip__：日志来源设备的公网 IP 地址。使用日志服务的私网域名写入日志数据时，则记录私网 IP 地址。__tag____receive_time__：日志达到服务端的时间，格式为 10 位的 Unixtime 时间戳。
 - `max_split_shard` (Number) 分区的最大分裂数，即分区分裂后，所有分区的最大数量。取值范围为 1~256，默认为 256。仅在开启自动分裂日志分区，即 AutoSplit 为 true 时必选。MaxSplitShard 必须大于指定的 ShardCount，否则日志服务无法自动分裂分区。
 - `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `time_format` (String) 时间格式
 - `time_key` (String) 时间字段名
 - `ttl` (Number) 日志在日志服务中的总保存时间，超过指定的日志存储时长后，此日志主题中的过期日志会被自动清除。单位为天，默认为 30 天。取值范围为 1～3650，指定为 3650 天表示永久存储。

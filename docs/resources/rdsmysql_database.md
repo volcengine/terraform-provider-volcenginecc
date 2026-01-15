@@ -38,7 +38,7 @@ resource "volcenginecc_rdsmysql_database" "DatabaseDemo" {
 
 - `character_set_name` (String) 数据库字符集。目前支持的字符集包含：utf8、utf8mb4（默认）、latin1、ascii。
 - `database_privileges` (Attributes Set) 授权数据库权限信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--database_privileges))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--database_privileges))
 - `description` (String) 数据库的描述信息，长度不超过 256 个字符。该字段可选，若不设置该字段，或设置了该字段但描述信息长度为 0 ，则描述信息为空。
 
 ### Read-Only

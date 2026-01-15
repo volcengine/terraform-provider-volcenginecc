@@ -47,10 +47,10 @@ resource "volcenginecc_rdsmysql_db_account" "RDSMySQLDBAccountDemo" {
 
 - `account_desc` (String) 账号信息描述信息，长度不超过 256 个字符。
 - `account_privileges` (Attributes Set) 账号的指定数据库权限信息。说明当 AccountType 取值为 Super 时，无需为 AccountPrivileges 传值
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--account_privileges))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--account_privileges))
 - `host` (String) 指定的数据库账号可以访问数据库的 IP 地址。
 - `table_column_privileges` (Attributes Set) 账号的表列权限设置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--table_column_privileges))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--table_column_privileges))
 
 ### Read-Only
 
@@ -75,10 +75,10 @@ Optional:
 Optional:
 
 - `column_privileges` (Attributes Set) 账号的列权限信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--table_column_privileges--column_privileges))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--table_column_privileges--column_privileges))
 - `db_name` (String) 对账号进行权限设置的表所属的数据库的名称。
 - `table_privileges` (Attributes Set) 账号的表权限信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--table_column_privileges--table_privileges))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--table_column_privileges--table_privileges))
 
 <a id="nestedatt--table_column_privileges--column_privileges"></a>
 ### Nested Schema for `table_column_privileges.column_privileges`

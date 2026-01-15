@@ -22,17 +22,6 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::TransitRouter::TransitRouter resource.
 func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AccountId
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "网络实例连接所属的账号ID。",
-		//	  "type": "string"
-		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接所属的账号ID。",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: Asn
 		// Cloud Control resource type schema:
 		//
@@ -54,10 +43,6 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
-		//	      "AccountId": {
-		//	        "description": "网络实例连接所属的账号ID。",
-		//	        "type": "string"
-		//	      },
 		//	      "AutoPublishRouteEnabled": {
 		//	        "description": "是否自动同步TR路由到网络实例路由表中。true：是。false：否。",
 		//	        "type": "boolean"
@@ -114,8 +99,7 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            }
 		//	          },
 		//	          "required": [
-		//	            "Key",
-		//	            "Value"
+		//	            "Key"
 		//	          ],
 		//	          "type": "object"
 		//	        },
@@ -163,11 +147,6 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 		"attachments": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AccountId
-					"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接所属的账号ID。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: AutoPublishRouteEnabled
 					"auto_publish_route_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "是否自动同步TR路由到网络实例路由表中。true：是。false：否。",
@@ -391,8 +370,7 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -434,6 +412,7 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "description": "中转路由器实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为中转路由器实例的ID。",
 		//	  "maxLength": 128,
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"transit_router_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -468,7 +447,6 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudControlTypeName("Volcengine::TransitRouter::TransitRouter").WithTerraformTypeName("volcenginecc_transitrouter_transit_router")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                             "AccountId",
 		"asn":                                    "Asn",
 		"attachments":                            "Attachments",
 		"auto_publish_route_enabled":             "AutoPublishRouteEnabled",

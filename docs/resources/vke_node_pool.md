@@ -147,7 +147,7 @@ resource "volcenginecc_vke_node_pool" "VKENodePoolDemo" {
 - `node_config` (Attributes) 节点池中云服务器（ECS）实例配置。 (see [below for nested schema](#nestedatt--node_config))
 - `retain_resources` (Set of String) 删除节点池时，指定保留的相关资源，取值：取值为空：（默认值）删除关联资源。Ecs：删除节点池时，保留节点池中的云服务器（ECS）实例。若指定的节点池内存在包年包月的云服务器实例，且未选择保留云服务器，则该接口仅从节点池中移除云服务器实例，不会删除。您可以通过云服务器控制台或云服务器API查询到该实例，并按需执行后续操作。
 - `tags` (Attributes Set) 节点池的标签信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -181,12 +181,12 @@ Optional:
 - `cordon` (Boolean) 封锁节点配置，参数值说明：false：不封锁。true：封锁。
 - `kubelet_config` (Attributes) Kubelet 组件的相关配置 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config))
 - `labels` (Attributes Set) 节点池/节点的 Kubernetes 标签（Labels）信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--labels))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--labels))
 - `name_prefix` (String) Kubernetes 中节点对象的元数据名称前缀。
 - `name_suffix` (String) Kubernetes 中节点对象的元数据名称后缀。
 - `name_use_hostname` (Boolean) Kubernetes 中节点对象的元数据名称是否使用 ECS 主机名称，取值：true：使用 ECS 主机名称作为节点名称。false：不使用使用 ECS 主机名称作为节点名称。
 - `taints` (Attributes Set) 节点池/节点的 Kubernetes 污点（Taints）信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--taints))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--taints))
 
 <a id="nestedatt--kubernetes_config--kubelet_config"></a>
 ### Nested Schema for `kubernetes_config.kubelet_config`
@@ -198,13 +198,13 @@ Optional:
 - `kube_api_burst` (Number) 每秒发送到 API 服务器的突发请求数量上限。不包括事件和节点心跳 API，其速率限制由一组不同的标志控制。
 - `kube_api_qps` (Number) 与 apiserver 通信的每秒查询个数（QPS）。不包含事件和节点心跳 API，它们的速率限制是由一组不同的标志所控制。
 - `kube_reserved` (Attributes Set) 节点预留给 Kubernetes 系统组件的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--kube_reserved))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--kube_reserved))
 - `max_pods` (Number) 配置 kubelet 支持的最大 Pod 数量
 - `registry_burst` (Number) 设置突发性镜像拉取的个数上限，在不超过 RegistryPullQps 设置值的前提下暂时允许此参数所给的镜像拉取个数。
 - `registry_pull_qps` (Number) 可用来限制镜像仓库的 QPS 上限
 - `serialize_image_pulls` (Boolean) 逐一拉取镜像。
 - `system_reserved` (Attributes Set) 节点预留给操作系统的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
 - `topology_manager_policy` (String) 拓扑管理策略，取值：none：（默认）禁用拓扑管理策略。restricted：kubelet 仅接受在所请求资源上实现最佳 NUMA（Non-Uniform Memory Access，非一致存储访问结构）的 Pod。best-effort：kubelet 会优先选择在 CPU 和设备资源上实现 NUMA 的 Pod。single-numa-node：kubelet 仅允许在同一个节点的 CPU 和设备资源上实现 NUMA 的 Pod。
 - `topology_manager_scope` (String) 拓扑管理策略的资源粒度，取值：container：表示资源对齐粒度为容器级。pod：表示资源对齐粒度为 Pod 级。
 
@@ -283,7 +283,7 @@ Optional:
 - `auto_renew` (Boolean) 云服务器实例到期是否自动续费，参数值说明：true：自动续费false：不自动续费仅当InstanceChargeType=PrePaid时才返回的参数。
 - `auto_renew_period` (Number) 云服务器实例每次自动续费时长，单位为月。仅当AutoRenew=true时才返回的参数。
 - `data_volumes` (Attributes Set) 节点的数据盘配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_config--data_volumes))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_config--data_volumes))
 - `deployment_set_group_number` (Number) 实例在部署集中的分组号，0表示未设置
 - `deployment_set_id` (String) 实例需要加入的部署集ID
 - `hostname` (String) 节点对应的主机名称。
@@ -306,7 +306,7 @@ Optional:
 - `subnet_ids` (Set of String) 节点网络所属的子网 ID 列表。
 - `system_volume` (Attributes) 节点的系统盘配置。 (see [below for nested schema](#nestedatt--node_config--system_volume))
 - `tags` (Attributes Set) 节点池配置的标签信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_config--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_config--tags))
 
 <a id="nestedatt--node_config--data_volumes"></a>
 ### Nested Schema for `node_config.data_volumes`
@@ -419,7 +419,7 @@ Read-Only:
 Read-Only:
 
 - `conditions` (Attributes Set) 节点池当前主状态下的状态条件，即进入该主状态的原因。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
 - `phase` (String) 节点池的状态，参数值有：Creating、Running、Updating、Deleting、Failed、Scaling。
 
 <a id="nestedatt--status--conditions"></a>

@@ -21,7 +21,6 @@ Data Source schema for Volcengine::TransitRouter::TransitRouter
 
 ### Read-Only
 
-- `account_id` (String) 网络实例连接所属的账号ID。
 - `asn` (Number) 中转路由器的ASN号。取值范围为64512 ～ 65534 和 4200000000 ～ 4294967294，默认值为64512。
 - `attachments` (Attributes Set) 网络实例连接的详细信息。 (see [below for nested schema](#nestedatt--attachments))
 - `business_status` (String) 网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。
@@ -42,7 +41,6 @@ Data Source schema for Volcengine::TransitRouter::TransitRouter
 
 Read-Only:
 
-- `account_id` (String) 网络实例连接所属的账号ID。
 - `auto_publish_route_enabled` (Boolean) 是否自动同步TR路由到网络实例路由表中。true：是。false：否。
 - `business_status` (String) 网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。
 - `creation_time` (String) 网络实例连接的创建时间。

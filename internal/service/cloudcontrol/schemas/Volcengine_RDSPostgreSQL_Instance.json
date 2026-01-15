@@ -1,0 +1,618 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/DBEngineVersion",
+    "/properties/VpcId",
+    "/properties/SubnetId"
+  ],
+  "definitions": {
+    "Address": {
+      "description": "地址列表",
+      "properties": {
+        "DNSVisibility": {
+          "description": "是否开启公网解析。取值为：- false：默认值，私网解析。- true：私网以及公网解析。",
+          "type": "boolean"
+        },
+        "Domain": {
+          "description": "连接域名。",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "EIP 的 ID，仅对 Public 地址有效。",
+          "type": "string"
+        },
+        "IPAddress": {
+          "description": "IP 地址。",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "网络地址类型，取值为：- `Private`：私网连接地址。- `Public`：公网连接地址。- `Inner`：公共服务区地址。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口。",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "子网 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ChargeDetail": {
+      "description": "付费方式",
+      "properties": {
+        "AutoRenew": {
+          "description": "预付费场景下是否自动续费",
+          "type": "boolean"
+        },
+        "ChargeEndTime": {
+          "description": "包年包月实例的计费到期时间",
+          "type": "string"
+        },
+        "ChargeStartTime": {
+          "description": "实例的计费开始时间",
+          "type": "string"
+        },
+        "ChargeStatus": {
+          "description": "付费状态，取值为：- `Normal`：正常。- `Overdue`：欠费关停。- `Unpaid`：未支付。",
+          "enum": [
+            "Normal",
+            "Overdue",
+            "Unpaid"
+          ],
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "付费类型，取值为：- `PostPaid`：后付费。- `PrePaid`：预付费。",
+          "enum": [
+            "PostPaid",
+            "PrePaid"
+          ],
+          "type": "string"
+        },
+        "OverdueReclaimTime": {
+          "description": "实例欠费关停后的预计释放时间",
+          "type": "string"
+        },
+        "OverdueTime": {
+          "description": "实例的欠费关停时间",
+          "type": "string"
+        },
+        "Period": {
+          "description": "预付费场景下的购买时长",
+          "type": "number"
+        },
+        "PeriodUnit": {
+          "description": "预付费场景下的购买周期，取值为：- `Month`：月。- `Year`：年。",
+          "enum": [
+            "Month",
+            "Year"
+          ],
+          "type": "string"
+        },
+        "TempModifyEndTime": {
+          "description": "临时升配的还原时间",
+          "type": "string"
+        },
+        "TempModifyStartTime": {
+          "description": "临时升配的开始时间",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ChargeType"
+      ],
+      "type": "object"
+    },
+    "DBAccount": {
+      "description": "数据库账号信息",
+      "properties": {
+        "AccountName": {
+          "description": "数据库账号名称。账号名称的设置规则如下：长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能以 pg_ 开头。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。",
+          "type": "string"
+        },
+        "AccountPassword": {
+          "description": "数据库账号的密码。数据库账号密码的设置规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的任意三种组成。特殊字符为 !@#$%^*()\u0026_+-=。",
+          "type": "string"
+        },
+        "AccountPrivileges": {
+          "description": "账号权限信息。多个权限中间以英文逗号（,）分隔。取值：Login：登录权限。Inherit：继承权限。CreateRole：创建角色权限。CreateDB：创建数据库权限。说明当账号类型为高权限账号时，无需传入该参数，默认支持全部权限。当账号类型为普通账号时，支持传入该参数，默认值为 Login 和 Inherit。账号类型为实例只读账号时，即 AccountType 取值为 InstanceReadOnly 时，不支持传入该参数",
+          "type": "string"
+        },
+        "AccountType": {
+          "description": "数据库账号类型，取值范围如下：Super：高权限账号。Normal：普通账号。InstanceReadOnly：实例只读账号。",
+          "type": "string"
+        },
+        "NotAllowPrivileges": {
+          "description": "为账号禁用的权限。当前仅支持取值为 DDL。说明仅支持为高权限账号或普通账号传入此字段，即 AccountType 取值为 Super 或 Normal 时。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "Database": {
+      "description": "数据库信息",
+      "properties": {
+        "CType": {
+          "description": "字符分类。取值范围： C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX。",
+          "type": "string"
+        },
+        "CharacterSetName": {
+          "description": "数据库字符集。目前支持的字符集包含：utf8（默认）、latin1、ascii",
+          "type": "string"
+        },
+        "Collate": {
+          "description": "排序规则。取值范围：C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX",
+          "type": "string"
+        },
+        "DBName": {
+          "description": "数据库名称。命名规则如下：长度 2~63 个字符。由字母、数字、下划线或中划线组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。",
+          "type": "string"
+        },
+        "DBStatus": {
+          "description": "数据库状态：Unavailable：不可用。Available：可用。",
+          "type": "string"
+        },
+        "Owner": {
+          "description": "数据库的 owner。说明：实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为数据库的 owner。不传值或传空值时，会为该字段取值为 rds superuser",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Endpoint": {
+      "description": "实例的连接信息",
+      "properties": {
+        "Address": {
+          "description": "地址列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Address"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AutoAddNewNodes": {
+          "description": "当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：- `Enable`：自动加入。- `Disable`：不自动加入（默认）。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "地址描述。",
+          "type": "string"
+        },
+        "EnableReadOnly": {
+          "description": "是否已开启全局只读。- `Enable`：开启。- `Disable`：未开启。",
+          "type": "string"
+        },
+        "EnableReadWriteSplitting": {
+          "description": "是否已开启读写分离，取值：- `Enable`：开启。- `Disable`：未开启。",
+          "type": "string"
+        },
+        "EndpointId": {
+          "description": "实例连接终端 ID。",
+          "type": "string"
+        },
+        "EndpointName": {
+          "description": "实例连接终端名称。",
+          "type": "string"
+        },
+        "EndpointType": {
+          "description": "终端类型：- `Cluster`：默认终端（默认创建）。- `Custom`：自定义终端。",
+          "type": "string"
+        },
+        "ReadOnlyNodeDistributionType": {
+          "description": "只读权重分配模式。取值：- `Default`：标准权重分配（默认值）。- `Custom`：自定义权重分配。",
+          "type": "string"
+        },
+        "ReadOnlyNodeMaxDelayTime": {
+          "description": "只读节点的最大延迟阈值，当只读节点延迟时间超过该值时，读取流量不发往该节点，单位：秒。取值：0~3600。默认值：30。:::tip支持对开通了读写分离的默认终端设置此参数。:::",
+          "type": "number"
+        },
+        "ReadOnlyNodeWeight": {
+          "description": "连接终端配置的节点列表及对应的只读权重。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ReadOnlyNodeWeight"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ReadWriteMode": {
+          "description": "读写模式：- `ReadWrite`：读写。- `ReadOnly`：只读。",
+          "type": "string"
+        },
+        "ReadWriteProxyConnection": {
+          "description": "终端开启读写分离后，为终端设置的代理连接数。- 代理连接数的取值下限为 20。- 代理连接数的取值上限取决于实例主节点的规格，不同规格支持的代理连接数上限不同，详细信息请参见[产品规格]。",
+          "type": "number"
+        },
+        "WriteNodeHaltWriting": {
+          "description": "终端是否将写请求发送给写节点（目前写节点仅有主节点）。取值：- `true`：是。默认值。- `false`：否。",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "NodeInfo": {
+      "description": "实例规格配置。Primary 节点有且只有 1 个，Secondary 节点有且只有 1 个，Read-Only 节点可选 0~10 个",
+      "properties": {
+        "CreateTime": {
+          "description": "节点创建的时间。格式为 yyyy-MM-ddTHH:mm:ss.sssZ（UTC 时间）",
+          "type": "string"
+        },
+        "InstanceId": {
+          "description": "实例ID",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "内存大小，单位为 GB",
+          "type": "number"
+        },
+        "NodeId": {
+          "description": "节点ID",
+          "type": "string"
+        },
+        "NodeSpec": {
+          "description": "节点规格",
+          "type": "string"
+        },
+        "NodeStatus": {
+          "description": "节点状态",
+          "type": "string"
+        },
+        "NodeType": {
+          "description": "节点类型",
+          "type": "string"
+        },
+        "RegionId": {
+          "description": "地域ID",
+          "type": "string"
+        },
+        "UpdateTime": {
+          "description": "节点更新的时间。格式为 yyyy-MM-ddTHH:mm:ss.sssZ（UTC 时间）",
+          "type": "string"
+        },
+        "VCPU": {
+          "description": "CPU大小。例如：1 表示 1U",
+          "type": "number"
+        },
+        "ZoneId": {
+          "description": "节点所在可用区",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ZoneId",
+        "NodeType",
+        "NodeSpec"
+      ],
+      "type": "object"
+    },
+    "ReadOnlyNodeWeight": {
+      "description": "连接终端配置的节点列表及对应的只读权重",
+      "properties": {
+        "NodeId": {
+          "description": "只读节点需要传入 NodeId",
+          "type": "string"
+        },
+        "NodeType": {
+          "description": "节点类型",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "节点的读权重，以 100 递增，最大值为 10000",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Schema": {
+      "description": "数据库 Schema 信息",
+      "properties": {
+        "DBName": {
+          "description": "数据库名称",
+          "type": "string"
+        },
+        "Owner": {
+          "description": "Schema 的 owner。说明实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为 Schema 的 owner。",
+          "type": "string"
+        },
+        "SchemaName": {
+          "description": "Schema 名称。长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。不能以 pg_ 开头",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "资源标签",
+      "properties": {
+        "Key": {
+          "description": "标签键",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "云数据库实例管理",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:CreateDBInstance",
+        "rds_postgresql:CreateDatabase",
+        "rds_postgresql:CreateDBAccount",
+        "rds_postgresql:CreateSchema",
+        "rds_postgresql:DescribeDatabases",
+        "rds_postgresql:DescribeDBAccounts",
+        "rds_postgresql:DescribeSchemas"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:DeleteDBInstance"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:DescribeDatabases",
+        "rds_postgresql:DescribeDBAccounts",
+        "rds_postgresql:DescribeSchemas"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:AddTagsToResource",
+        "rds_postgresql:ModifyDBInstanceAvailabilityZone",
+        "rds_postgresql:ModifyDBInstanceChargeType",
+        "rds_postgresql:ModifyDBInstanceName",
+        "rds_postgresql:ModifyDBInstanceSpec",
+        "rds_postgresql:RemoveTagsFromResource",
+        "rds_postgresql:ModifyDatabaseOwner",
+        "rds_postgresql:DeleteDatabase",
+        "rds_postgresql:ModifyDBAccountPrivilege",
+        "rds_postgresql:RevokeDBAccountPrivilege",
+        "rds_postgresql:ResetDBAccount",
+        "rds_postgresql:DeleteDBAccount",
+        "rds_postgresql:ModifySchemaOwner",
+        "rds_postgresql:DeleteSchema"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "ChargeDetail": {
+      "$ref": "#/definitions/ChargeDetail",
+      "description": "付费方式",
+      "type": "object"
+    },
+    "CreateTime": {
+      "description": "实例创建的时间",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DBAccounts": {
+      "description": "数据库账号列表",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/DBAccount"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DBEngineVersion": {
+      "description": "兼容版本",
+      "type": "string"
+    },
+    "DataSyncMode": {
+      "description": "同步方式。取值为 Async，即异步同步",
+      "type": "string"
+    },
+    "Databases": {
+      "description": "数据库列表",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Database"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Endpoints": {
+      "description": "实例的连接信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Endpoint"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceId": {
+      "description": "实例 ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "实例名称",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceStatus": {
+      "description": "实例状态",
+      "semantic": "status",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "实例类型。取值：HA（高可用版）",
+      "type": "string"
+    },
+    "Memory": {
+      "description": "内存大小，单位：GB",
+      "type": "number"
+    },
+    "NodeInfo": {
+      "description": "实例规格配置",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/NodeInfo"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "NodeNumber": {
+      "description": "节点数量",
+      "type": "number"
+    },
+    "NodeSpec": {
+      "description": "主节点规格",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "所属项目，默认值为 default 项目",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Schemas": {
+      "description": "数据库模式列表",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Schema"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "StorageDataUse": {
+      "description": "实例主节点已用数据文件空间。单位：Byte",
+      "type": "number"
+    },
+    "StorageLogUse": {
+      "description": "实例主节点已用日志文件空间。单位：Byte",
+      "type": "number"
+    },
+    "StorageSpace": {
+      "description": "实例存储空间。取值范围：[20, 3000]，单位：GB，步长 10GB。默认值为 100",
+      "maximum": 3000,
+      "minimum": 20,
+      "type": "number"
+    },
+    "StorageTempUse": {
+      "description": "实例主节点已用临时文件空间。单位：Byte",
+      "type": "number"
+    },
+    "StorageType": {
+      "description": "实例存储类型，取固定值 LocalSSD（本地 SSD 盘）",
+      "type": "string"
+    },
+    "StorageUse": {
+      "description": "实例已用储空间。单位：Byte",
+      "type": "number"
+    },
+    "StorageWALUse": {
+      "description": "实例主节点已用 WAL 文件空间。单位：Byte",
+      "type": "number"
+    },
+    "SubnetId": {
+      "description": "子网 ID",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "云盘的标签信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "实例更新的时间",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VCPU": {
+      "description": "CPU 大小。例如：1 表示 1U",
+      "type": "number"
+    },
+    "VpcId": {
+      "description": "使用此参数指定实例使用的私有网络",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/DataSyncMode",
+    "/properties/InstanceId",
+    "/properties/CreateTime",
+    "/properties/InstanceStatus",
+    "/properties/StorageDataUse",
+    "/properties/StorageLogUse",
+    "/properties/StorageTempUse",
+    "/properties/StorageType",
+    "/properties/StorageUse",
+    "/properties/StorageWALUse",
+    "/properties/NodeInfo/*/NodeId",
+    "/properties/NodeInfo/*/InstanceId",
+    "/properties/NodeInfo/*/RegionId",
+    "/properties/NodeInfo/*/NodeStatus",
+    "/properties/NodeInfo/*/VCPU",
+    "/properties/NodeInfo/*/Memory",
+    "/properties/NodeInfo/*/CreateTime",
+    "/properties/NodeInfo/*/UpdateTime",
+    "/properties/ChargeDetail/ChargeStatus",
+    "/properties/ChargeDetail/ChargeStartTime",
+    "/properties/ChargeDetail/ChargeEndTime",
+    "/properties/ChargeDetail/OverdueTime",
+    "/properties/ChargeDetail/OverdueReclaimTime",
+    "/properties/ChargeDetail/TempModifyStartTime",
+    "/properties/ChargeDetail/TempModifyEndTime",
+    "/properties/UpdateTime",
+    "/properties/InstanceType",
+    "/properties/Memory",
+    "/properties/NodeNumber",
+    "/properties/NodeSpec",
+    "/properties/VCPU",
+    "/properties/Endpoints"
+  ],
+  "required": [
+    "DBEngineVersion",
+    "NodeInfo",
+    "StorageType",
+    "VpcId",
+    "SubnetId",
+    "ChargeDetail"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::Instance",
+  "writeOnlyProperties": [
+    "/properties/DBAccounts/*/AccountPassword"
+  ]
+}

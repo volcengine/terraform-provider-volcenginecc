@@ -75,11 +75,11 @@ resource "volcenginecc_clb_nlb_server_group" "NLBServerGroupDemo" {
 - `scheduler` (String) NLB转发流量时遵循的规则。取值如下：wrr（默认值）：加权轮询，权重值越高的后端服务器，被轮询到的次数（概率）越高。wlc：加权最小连接数，在最少连接数的基础上，根据后端服务器的不同处理能力，给每个服务器分配不同的权重，使其能够接受相应权值数的服务请求。sh：源地址哈希，基于源IP地址的一致性哈希，相同的源地址会调度到相同的后端服务器。
 - `server_group_name` (String) 服务器组名称, 必须以字母、数字或中文开头，可包含以下特殊字符：点号（.）、下划线（_）和中划线（-）。限制为1 ～ 128个字符。该参数不传入，则默认为服务器组ID。
 - `servers` (Attributes Set) 服务器组中待添加后端服务器的信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--servers))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--servers))
 - `session_persistence_enabled` (Boolean) 是否开启会话保持。
 - `session_persistence_timeout` (Number) 会话保持的超时时间，取值范围为1～3600秒，默认1000秒。
 - `tags` (Attributes Set) 标签。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `timestamp_remove_enabled` (Boolean) 是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能。
 - `type` (String) 服务器组的类型。取值如下：instance（默认值）：服务器类型。支持添加云服务器实例和已绑定云服务器实例的辅助网卡作为后端服务器。ip：IP地址类型。支持添加任何网络可达的VPC或IDC中的服务器作为后端服务器。
 

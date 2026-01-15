@@ -53,7 +53,8 @@ resource "volcenginecc_ecs_invocation" "InvocationDemo" {
 - `project_name` (String) 资源所属项目，一个资源只能归属于一个项目。
 - `recurrence_end_time` (String) 周期结束时间，仅适用于周期任务（Rate）。
 - `repeat_mode` (String) 设置命令执行的方式。Once：默认，表示立即执行命令。Rate：周期执行命令，需要通过Frequency参数传入Rate表达式指定执行周期。Fixed：定时执行命令，需要通过LaunchTime参数指定的执行时间。
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 标签键值对。
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `timeout` (Number) 创建的命令在ECS实例中执行时最大的超时时间，单位为秒。默认值：60。可选范围为：30~86400。
 - `username` (String) 在ECS实例中执行命令的用户名称。
 - `windows_password` (String) 自定义windows用户的密码。
@@ -72,9 +73,10 @@ resource "volcenginecc_ecs_invocation" "InvocationDemo" {
 - `instance_number` (Number) 执行实例数量。
 - `invocation_id` (String) 任务执行 ID。
 - `invocation_results` (Attributes Set) 单台实例执行命令的结果。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--invocation_results))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--invocation_results))
 - `invocation_status` (String) 命令执行的总执行状态。
-- `parameter_definitions` (Attributes Set) (see [below for nested schema](#nestedatt--parameter_definitions))
+- `parameter_definitions` (Attributes Set) 任务触发时的命令自定义参数定义。
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--parameter_definitions))
 - `start_time` (String) 任务开始时间。
 
 <a id="nestedatt--tags"></a>
@@ -82,8 +84,8 @@ resource "volcenginecc_ecs_invocation" "InvocationDemo" {
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) 用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。
+- `value` (String) 用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。
 
 
 <a id="nestedatt--invocation_results"></a>

@@ -30,18 +30,17 @@ resource "volcenginecc_transitrouter_transit_router" "TransitRouterDemo" {
 
 ### Optional
 
-- `account_id` (String) 网络实例连接所属的账号ID。
 - `asn` (Number) 中转路由器的ASN号。取值范围为64512 ～ 65534 和 4200000000 ～ 4294967294，默认值为64512。
 - `description` (String) 中转路由器实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
 - `project_name` (String) 中转路由器实例所属项目的名称。不传入该参数或该参数不传入数值时，默认为default。
 - `tags` (Attributes Set) 标签列表
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `transit_router_name` (String) 中转路由器实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为中转路由器实例的ID。
 
 ### Read-Only
 
 - `attachments` (Attributes Set) 网络实例连接的详细信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attachments))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attachments))
 - `business_status` (String) 网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。
 - `creation_time` (String) 网络实例连接的创建时间。
 - `deleted_time` (String) 网络实例连接的删除时间。
@@ -66,7 +65,6 @@ Optional:
 
 Read-Only:
 
-- `account_id` (String) 网络实例连接所属的账号ID。
 - `auto_publish_route_enabled` (Boolean) 是否自动同步TR路由到网络实例路由表中。true：是。false：否。
 - `business_status` (String) 网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。
 - `creation_time` (String) 网络实例连接的创建时间。
@@ -78,7 +76,7 @@ Read-Only:
 - `resource_type` (String) 网络实例连接关联的网络实例类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。
 - `status` (String) 网络实例连接的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。
 - `tags` (Attributes Set) 网络实例连接的标签信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attachments--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attachments--tags))
 - `transit_router_attachment_id` (String) 网络实例连接的ID。
 - `transit_router_attachment_name` (String) 网络实例连接的名称。
 - `transit_router_forward_policy_table_id` (String) 跨地域连接关联的转发策略的ID。

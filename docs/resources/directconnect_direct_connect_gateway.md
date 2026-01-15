@@ -36,13 +36,13 @@ resource "volcenginecc_directconnect_direct_connect_gateway" "DirectConnectDirec
 - `enable_ipv_6` (Boolean) 是否支持IPv6。true：支持。false：不支持。
 - `project_name` (String) 专线网关所属的项目。
 - `tags` (Attributes Set) 专线网关已添加的全部标签信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `account_id` (String) 专线网关所属账号的ID。
 - `associate_cens` (Attributes Set) 关联的CEN信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
 - `business_status` (String) 专线网关是否被锁定。Normal：正常。FinancialLocked：被锁定。
 - `created_time` (String) 创建专线网关的时间。
 - `deleted_time` (String) 预期资源强制回收时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。

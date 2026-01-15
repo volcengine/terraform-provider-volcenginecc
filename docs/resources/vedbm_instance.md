@@ -61,7 +61,7 @@ resource "volcenginecc_vedbm_instance" "VEDBMInstanceDemo" {
 - `lower_case_table_names` (String) 表名是否区分大小写。取值范围：0：表名称大小写敏感，后端根据实际表名存储。1：表名称不区分大小写，后端存储时将表名称统一为小写字母。
 - `maintenance_window` (Attributes) 实例的可维护时间窗口信息。 (see [below for nested schema](#nestedatt--maintenance_window))
 - `nodes` (Attributes List) 实例节点的详细信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nodes))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nodes))
 - `number` (Number) 创建的实例数量，取值范围 1~50，默认值为 1。
 - `port` (Number) 为实例默认创建的连接终端指定私网端口号。默认取值为 3306，取值范围为 1000~65534。
 - `pre_paid_storage_in_gb` (Number) 预付费的存储总容量大小，单位 GiB。
@@ -70,7 +70,7 @@ resource "volcenginecc_vedbm_instance" "VEDBMInstanceDemo" {
 - `super_account_name` (String) 高权限用户的账号名称。账号名称需满足以下要求：名称唯一，且长度在 2~32 个字符内。由字母、数字、中划线（-）、下划线（_）组成。以字母开头，以字母或数字结尾。名称内不能包含禁用关键词。
 - `super_account_password` (String) 高权限账号的密码。账号密码需满足以下要求：只能包含大小写字母、数字和特殊字符（如 ~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/）。长度需在 8~32 个字符内。至少包含大写字母、小写字母、数字或特殊字符中的 3 种。
 - `tags` (Attributes Set) 实例绑定的标签键和标签值数组对象。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `template_id` (String) 参数模板 ID。
 - `time_zone` (String) 实例的时区。国内所有地域默认时区为 UTC +08:00。
 
@@ -79,7 +79,7 @@ resource "volcenginecc_vedbm_instance" "VEDBMInstanceDemo" {
 - `created_time` (String) 实例的创建时间，格式：YYYY-MM-DDTHH:MM:SSZ（UTC 时间）。
 - `db_revision_version` (String) 实例的内核版本。
 - `endpoints` (Attributes Set) 连接终端的详细信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
 - `id` (String) Uniquely identifies the resource.
 - `instance_id` (String) 实例 ID。
 - `instance_status` (String) 实例状态。
@@ -143,7 +143,7 @@ Optional:
 Read-Only:
 
 - `addresses` (Attributes Set) 连接地址信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints--addresses))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints--addresses))
 - `auto_add_new_nodes` (Boolean) 是否允许自动加入新节点，取值：true：是。false：否。
 - `consist_level` (String) 一致性级别，仅对读写模式的连接终端有效。取值：Eventual：最终一致性。Session：会话一致性。Global：全局一致性。
 - `consist_timeout` (Number) 延迟很大时，只读节点同步最新数据的超时时间，单位为 us，取值范围为 1us~100000000us。

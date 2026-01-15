@@ -71,7 +71,7 @@ resource "volcenginecc_alb_listener" "ALBListenerDemo" {
 - `customized_cfg_id` (String) 个性化配置ID，未绑定时值为空字符串。
 - `description` (String) 监听器的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。
 - `domain_extensions` (Attributes Set) HTTPS监听器关联的扩展域名列表。一个HTTPS监听器能关联的扩展域名上限为20个。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domain_extensions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domain_extensions))
 - `enable_http_2` (String) HTTP2.0 特性开关，该参数仅对 HTTPS 监听器有效。取值如下：on：开启。off：关闭（默认）。
 - `enable_quic` (String) QUIC 特性开关，该参数仅对 HTTPS 监听器有效，取值如下：on：开启。off：关闭（默认）。只有标准版 ALB 实例支持 QUIC。
 - `enabled` (String) 监听器开启/关闭，取值如下：on：开启（默认）。off：关闭。
@@ -80,9 +80,9 @@ resource "volcenginecc_alb_listener" "ALBListenerDemo" {
 - `pca_root_ca_certificate_id` (String) HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_root 时，必须指定 PcaRootCACertificateId 参数。
 - `pca_sub_ca_certificate_id` (String) HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_sub 时，必须指定 PcaSubCACertificateId 参数。
 - `server_groups` (Attributes Set) 关联监听器的所有服务器组。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--server_groups))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--server_groups))
 - `tags` (Attributes Set) 监听器所属标签。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

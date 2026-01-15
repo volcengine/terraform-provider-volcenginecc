@@ -38,13 +38,13 @@ Data Source schema for Volcengine::ECS::Invocation
 - `invocation_results` (Attributes Set) 单台实例执行命令的结果。 (see [below for nested schema](#nestedatt--invocation_results))
 - `invocation_status` (String) 命令执行的总执行状态。
 - `launch_time` (String) 执行时间。
-- `parameter_definitions` (Attributes Set) (see [below for nested schema](#nestedatt--parameter_definitions))
+- `parameter_definitions` (Attributes Set) 任务触发时的命令自定义参数定义。 (see [below for nested schema](#nestedatt--parameter_definitions))
 - `parameters` (String) 命令中包含自定义参数时，需通过本参数传入自定义参数的键值对。自定义参数个数范围为0~60。Key不允许为空字符串，最多支持64个字符。Value允许为空字符串。自定义参数与原始命令内容在Base64编码后，综合长度不能超过16KB。设置的自定义参数名集合必须为创建命令时定义的参数集的子集。对于未传入的参数，使用默认值代替。
 - `project_name` (String) 资源所属项目，一个资源只能归属于一个项目。
 - `recurrence_end_time` (String) 周期结束时间，仅适用于周期任务（Rate）。
 - `repeat_mode` (String) 设置命令执行的方式。Once：默认，表示立即执行命令。Rate：周期执行命令，需要通过Frequency参数传入Rate表达式指定执行周期。Fixed：定时执行命令，需要通过LaunchTime参数指定的执行时间。
 - `start_time` (String) 任务开始时间。
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) 标签键值对。 (see [below for nested schema](#nestedatt--tags))
 - `timeout` (Number) 创建的命令在ECS实例中执行时最大的超时时间，单位为秒。默认值：60。可选范围为：30~86400。
 - `username` (String) 在ECS实例中执行命令的用户名称。
 - `windows_password` (String) 自定义windows用户的密码。
@@ -90,5 +90,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) 用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。
+- `value` (String) 用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。

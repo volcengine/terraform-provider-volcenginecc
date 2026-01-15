@@ -1,0 +1,142 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AllowListType",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "AssociatedInstance": {
+      "properties": {
+        "InstanceId": {
+          "description": "已绑定当前白名单的实例 ID。",
+          "type": "string"
+        },
+        "InstanceName": {
+          "description": "已绑定当前白名单的实例名称。",
+          "type": "string"
+        },
+        "ProjectName": {
+          "description": "实例所属的项目名称。",
+          "type": "string"
+        },
+        "VPC": {
+          "description": "实例所属的私有网络 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "文档数据库 MongoDB 版实例创建成功后，您可以为实例设置白名单，以允许外部设备访问该实例。本文介绍如何通过控制台设置白名单。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mongodb:CreateAllowList",
+        "mongodb:AssociateAllowList",
+        "mongodb:DescribeAllowListDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mongodb:DeleteAllowList",
+        "mongodb:DescribeAllowListDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mongodb:DescribeAllowLists"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mongodb:DescribeAllowListDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mongodb:ModifyAllowList",
+        "mongodb:AssociateAllowList",
+        "mongodb:DisassociateAllowList",
+        "mongodb:DescribeAllowListDetail"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllowListId"
+  ],
+  "properties": {
+    "AllowList": {
+      "description": "输入 IP 地址或 CIDR 格式的 IP 地址段。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AllowListCategory": {
+      "description": "白名单类型。取值范围如下：Ordinary：普通白名单；Default：默认白名单。",
+      "enum": [
+        "Ordinary",
+        "Default"
+      ],
+      "type": "string"
+    },
+    "AllowListDesc": {
+      "description": "白名单的备注信息，长度不可超过 200 个字符。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "AllowListIPNum": {
+      "description": "白名单内的 IP 地址（或地址段）总数。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AllowListId": {
+      "description": "白名单 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AllowListName": {
+      "description": "白名单名称，名称需同时满足如下要求：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需为 1~128 个字符。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AllowListType": {
+      "description": "白名单内的 IP 地址类型。当前仅支持 IPv4 地址。",
+      "type": "string"
+    },
+    "AssociatedInstanceNum": {
+      "description": "已绑定当前白名单的实例总数。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AssociatedInstances": {
+      "description": "已绑定当前白名单的实例信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AssociatedInstance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProjectName": {
+      "description": "当前白名单所属的项目。",
+      "semantic": "projectName",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllowListIPNum",
+    "/properties/AllowListId",
+    "/properties/AssociatedInstanceNum"
+  ],
+  "required": [
+    "AllowListName",
+    "AllowList"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::MongoDB::AllowList"
+}

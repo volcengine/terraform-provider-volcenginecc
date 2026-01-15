@@ -74,7 +74,7 @@ resource "volcenginecc_vke_cluster" "VKEClusterDemo" {
 - `services_config` (Attributes) 服务的网络配置。 (see [below for nested schema](#nestedatt--services_config))
 - `source_region` (String) 集群源地域。
 - `tags` (Attributes Set) 集群的标签。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -154,7 +154,7 @@ Optional:
 
 - `log_project_id` (String) 集群的日志项目（Log Project）ID。 如果为空，表示集群的日志项目未被创建。
 - `log_setups` (Attributes Set) 集群的日志选项信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--logging_config--log_setups))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--logging_config--log_setups))
 
 <a id="nestedatt--logging_config--log_setups"></a>
 ### Nested Schema for `logging_config.log_setups`
@@ -173,7 +173,7 @@ Optional:
 Optional:
 
 - `component_configs` (Attributes Set) 监控组件的配置列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--monitoring_config--component_configs))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--monitoring_config--component_configs))
 - `workspace_id` (String) 监控数据所属的工作区 ID。
 
 <a id="nestedatt--monitoring_config--component_configs"></a>
@@ -250,7 +250,7 @@ Read-Only:
 Read-Only:
 
 - `conditions` (Attributes Set) 状态条件列表
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
 - `phase` (String) 集群状态阶段
 
 <a id="nestedatt--status--conditions"></a>

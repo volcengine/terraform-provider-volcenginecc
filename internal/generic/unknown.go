@@ -83,7 +83,7 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 			return ccdiag.DiagnosticsError(diags)
 		}
 
-		diags.Append(copyStateValueAtPath(ctx, state, &src, path)...)
+		diags.Append(copyStateValue(ctx, state, &src, path)...)
 		if diags.HasError() {
 			return ccdiag.DiagnosticsError(diags)
 		}
@@ -113,7 +113,7 @@ func SetReadOnlyFromResourceModel(ctx context.Context, state *tfsdk.State, paths
 
 	// Copy all unknown values from the ResourceModel to destination State.
 	for _, path := range paths {
-		diag := copyStateValueAtPath(ctx, state, &src, *path)
+		diag := copyStateValue(ctx, state, &src, *path)
 		if diag.HasError() {
 			diags.Append(diag...)
 			return diags
