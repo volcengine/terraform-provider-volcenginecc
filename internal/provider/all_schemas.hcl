@@ -409,5 +409,11 @@ resource_schema "volcengine_cloudmonitor_rule" {
   cloudcontrol_type_name = "Volcengine::CloudMonitor::Rule"
 }
 
+resource_schema "volcengine_vpn_vpn_gateway" {
+  cloudcontrol_type_name = "Volcengine::VPN::VPNGateway"
+}
 
+resource_schema "volcengine_filenas_snapshot" {
+  cloudcontrol_type_name = "Volcengine::FileNAS::Snapshot"
+}
 

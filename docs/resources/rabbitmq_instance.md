@@ -58,7 +58,7 @@ resource "volcenginecc_rabbitmq_instance" "RabbitMQInstanceDemo" {
 - `instance_name` (String) RabbitMQ 实例名称。
 - `project_name` (String) 实例所属的IAM项目。
 - `tags` (Attributes Set) 实例绑定的标签。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -67,7 +67,7 @@ resource "volcenginecc_rabbitmq_instance" "RabbitMQInstanceDemo" {
 - `arch_type` (String) 实例的类型，即集群版或单机版。
 - `created_time` (String) 实例的创建时间。
 - `endpoints` (Attributes Set) 实例的连接信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
 - `id` (String) Uniquely identifies the resource.
 - `instance_id` (String) RabbitMQ 实例 ID。
 - `instance_status` (String) 实例状态。

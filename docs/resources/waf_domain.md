@@ -52,7 +52,7 @@ resource "volcenginecc_waf_domain" "WafDomainDemo" {
 - `api_enable` (Number) 是否开启了 API 防护策略。0：关闭，1：开启。
 - `auto_cc_enable` (Number) 是否开启智能 CC 防护策略。0：关闭，1：开启。
 - `backend_groups` (Attributes List) 源站配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backend_groups))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backend_groups))
 - `black_ip_enable` (Number) 是否开启了黑名单策略。0：关闭, 1：开启。
 - `black_lct_enable` (Number) 是否开启了区域封禁策略。0：关闭;1：开启。
 - `bot_dytoken_enable` (Number) 是否开启动态Token防护。
@@ -78,7 +78,7 @@ resource "volcenginecc_waf_domain" "WafDomainDemo" {
 - `client_ip_location` (Number) 客户端IP获取方式。0:自定义Header字段,1:通过X-Forwarded-For(XFF)字段中第一个公网IP地址作为客户端真实IP地址。
 - `client_max_body_size` (Number) 客户端请求body最大值(MB)。
 - `cloud_access_config` (Attributes Set) LB接入参数。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--cloud_access_config))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--cloud_access_config))
 - `custom_bot_enable` (Number) 是否开启自定义BOT防护。
 - `custom_header` (Set of String) 自定义Header。
 - `custom_rsp_enable` (Number) 是否开启自定义响应。
@@ -143,7 +143,7 @@ resource "volcenginecc_waf_domain" "WafDomainDemo" {
 - `src_protocol` (String) 源站协议。
 - `status` (Number) 接入状态。0:正常,1:DNS未解析,2:配置中,3:配置失败,4:配置未生效,5:更新中,6:实例已删除。
 - `tcp_listener_config` (Attributes Set) TCP监听器配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tcp_listener_config))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tcp_listener_config))
 - `update_time` (String) 更新时间。
 
 <a id="nestedatt--backend_groups"></a>
@@ -153,7 +153,7 @@ Optional:
 
 - `access_port` (Set of Number) 接入的端口号。
 - `backends` (Attributes Set) 源站组详情。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backend_groups--backends))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backend_groups--backends))
 - `name` (String) 源站组名称。
 
 <a id="nestedatt--backend_groups--backends"></a>

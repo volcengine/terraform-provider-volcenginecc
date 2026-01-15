@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_filenas_snapshot.example "snapshot_id"

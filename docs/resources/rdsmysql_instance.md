@@ -78,7 +78,7 @@ resource "volcenginecc_rdsmysql_instance" "RDSMySQLInstanceDemo" {
 - `charge_detail` (Attributes) 付费方式。 (see [below for nested schema](#nestedatt--charge_detail))
 - `db_engine_version` (String) 兼容版本。取值：MySQL_5_7：MySQL 5.7 版本。MySQL_8_0：MySQL 8.0 版本。
 - `nodes` (Attributes Set) 实例节点信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nodes))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nodes))
 - `storage_space` (Number) 实例总存储空间。单位为 GB。
 - `storage_type` (String) 实例的存储类型。取值范围：LocalSSD：本地盘。CloudESSD_FlexPL：FlexPL 云盘。CloudESSD_PL0：PL0 云盘。
 - `subnet_id` (String) 子网 ID。
@@ -105,12 +105,12 @@ resource "volcenginecc_rdsmysql_instance" "RDSMySQLInstanceDemo" {
 - `super_account_password` (String) 高权限账号的密码。密码规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的至少三种组成。特殊字符为 !@#$%^&*()_+-=,.&?|/。
 - `sync_mode` (String) 数据同步方式：SemiSync：半同步。Async：异步。
 - `tags` (Attributes Set) RDS MySQL 实例的标签信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `address_objects` (Attributes Set) 默认终端的连接信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--address_objects))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--address_objects))
 - `allow_list_version` (String) 白名单版本。
 - `backup_audit_log_size` (Number) 备份中审计日志使用的空间。
 - `backup_bin_log_size` (Number) 备份中 Binlog 日志使用的空间。
@@ -125,13 +125,13 @@ resource "volcenginecc_rdsmysql_instance" "RDSMySQLInstanceDemo" {
 - `created_time` (String) 实例创建本地时间。
 - `current_kernel_version` (String) 实例的内核小版本。
 - `disaster_recovery_instances` (Attributes Set) 实例的灾备实例的信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--disaster_recovery_instances))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--disaster_recovery_instances))
 - `dr_dts_task_id` (String) 主实例与灾备实例之间的数据同步链路在 DTS 数据同步任务的 ID。
 - `dr_dts_task_name` (String) 主实例与灾备实例之间同步任务的名称。
 - `dr_dts_task_status` (String) 主实例与灾备实例之间同步任务的状态。
 - `dr_seconds_behind_master` (Number) 灾备实例与主实例之间的时延。
 - `endpoints` (Attributes Set) 实例的连接信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
 - `has_disaster_recovery_instances` (Boolean) 实例是否有灾备实例。取值：true：是。false：否。
 - `has_green_instance` (Boolean) 实例是否处于蓝绿部署中。取值：true：是。false：否。
 - `id` (String) Uniquely identifies the resource.
@@ -275,7 +275,7 @@ Read-Only:
 - `read_only_node_distribution_type` (String) 读权重分配模式。当开通读写分离设置为 true 时需要传入此参数。在 CreateDBEndpoint 和 ModifyDBEndpoint 接口中做请求参数时，取值范围如下：LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。在 DescribeDBInstanceDetail 接口中做返回参数时，取值范围如下：Default：按规格权重自动分配。Custom：自定义分配权重。RoundRobin：轮询调度。LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。
 - `read_only_node_max_delay_time` (Number) 只读节点延迟阈值。取值范围为 1~3600，默认为 30，单位为秒。
 - `read_only_node_weight` (Attributes Set) 连接终端配置的节点列表及对应的只读权重。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints--read_only_node_weight))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints--read_only_node_weight))
 - `read_write_mode` (String) 读写模式：ReadWrite：读写。ReadOnly：只读。
 
 <a id="nestedatt--endpoints--read_only_node_weight"></a>

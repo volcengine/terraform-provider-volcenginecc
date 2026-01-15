@@ -1,7 +1,8 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/ProjectName"
+    "/properties/ProjectName",
+    "/properties/InstanceTypeId"
   ],
   "definitions": {
     "InstanceType": {
@@ -92,8 +93,7 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     },
@@ -115,6 +115,17 @@
     }
   },
   "description": "工作区（Workspace）是 VMP 服务中采集数据和规则的抽象整合，为用户提供物理隔离或逻辑隔离的 Prometheus 能力。在 VMP 服务中可创建不同的工作区，不同工作区中的数据彼此隔离。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/WorkspaceId",
+      "/properties/InstanceTypeId",
+      "/properties/Name",
+      "/properties/Status",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -154,6 +165,7 @@
   "properties": {
     "CreateTime": {
       "description": "工作区创建时间，RFC3339 格式。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "DeleteProtectionEnabled": {
@@ -162,6 +174,7 @@
     },
     "Description": {
       "description": "工作区描述信息，字符串形式，长度限制为 0～200。",
+      "semantic": "description",
       "type": "string"
     },
     "InstanceType": {
@@ -177,6 +190,7 @@
       "description": "工作区名称，字符串形式，长度限制为 1～100。",
       "maxLength": 100,
       "minLength": 1,
+      "semantic": "resourceName",
       "type": "string"
     },
     "OverdueReclaimTime": {
@@ -189,6 +203,7 @@
     },
     "ProjectName": {
       "description": "项目名称。",
+      "semantic": "projectName",
       "type": "string"
     },
     "PrometheusPushIntranetEndpoint": {
@@ -210,6 +225,7 @@
     },
     "Status": {
       "description": "工作区状态，取值：Creating：创建中 Active：正常 Updating：更新中 Deleting：删除中 OverdueShutted：欠费关停 Resuming：恢复中 Error：错误。",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -218,6 +234,7 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
@@ -233,6 +250,7 @@
     },
     "WorkspaceId": {
       "description": "工作区Id。",
+      "semantic": "resourceId",
       "type": "string"
     }
   },

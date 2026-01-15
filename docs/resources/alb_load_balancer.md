@@ -63,12 +63,12 @@ resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
 - `modification_protection_status` (String) 修改保护状态。NonProtection：不保护；ConsoleProtection：控制台修改保护，通过控制台无法修改实例配置。
 - `project_name` (String) 实例所属项目名称。
 - `tags` (Attributes Set) 为实例绑定的标签列表，用于分类和计费。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `waf_instance_id` (String) ALB 实例绑定的 WAF 安全防护实例 ID。
 - `waf_protected_domain` (String) WAF防护的域名，用于精确匹配防护规则。
 - `waf_protection_enabled` (String) WAF 安全防护开关。on：开启；off：关闭。
 - `zone_mappings` (Attributes Set) 可用区映射列表，定义了实例在哪些可用区提供服务。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--zone_mappings))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--zone_mappings))
 
 ### Read-Only
 

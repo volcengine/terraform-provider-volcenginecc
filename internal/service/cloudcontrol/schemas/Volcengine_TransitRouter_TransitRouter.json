@@ -1,17 +1,12 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/AccountId",
     "/properties/Asn",
     "/properties/ProjectName"
   ],
   "definitions": {
     "Attachment": {
       "properties": {
-        "AccountId": {
-          "description": "网络实例连接所属的账号ID。",
-          "type": "string"
-        },
         "AutoPublishRouteEnabled": {
           "description": "是否自动同步TR路由到网络实例路由表中。true：是。false：否。",
           "type": "boolean"
@@ -109,45 +104,53 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "中转路由器服务的运行载体。接受来自网络实例的流量，并根据关联转发路由表进行转发。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value",
+      "/properties/TransitRouterId",
+      "/properties/TransitRouterName"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "TransitRouter:CreateTransitRouter",
-        "TransitRouter:DescribeTransitRouters",
-        "TransitRouter:DescribeTransitRouterAttachments"
+        "transitrouter:CreateTransitRouter",
+        "transitrouter:DescribeTransitRouters",
+        "transitrouter:DescribeTransitRouterAttachments"
       ]
     },
     "delete": {
       "permissions": [
-        "TransitRouter:DeleteTransitRouter",
-        "TransitRouter:DescribeTransitRouters"
+        "transitrouter:DeleteTransitRouter",
+        "transitrouter:DescribeTransitRouters"
       ]
     },
     "list": {
       "permissions": [
-        "TransitRouter:DescribeTransitRouters"
+        "transitrouter:DescribeTransitRouters"
       ]
     },
     "read": {
       "permissions": [
-        "TransitRouter:DescribeTransitRouters",
-        "TransitRouter:DescribeTransitRouterAttachments"
+        "transitrouter:DescribeTransitRouters",
+        "transitrouter:DescribeTransitRouterAttachments"
       ]
     },
     "update": {
       "permissions": [
-        "TransitRouter:ModifyTransitRouterAttributes",
-        "TransitRouter:UntagResources",
-        "TransitRouter:TagResources",
-        "TransitRouter:DescribeTransitRouters",
-        "TransitRouter:DescribeTransitRouterAttachments"
+        "transitrouter:ModifyTransitRouterAttributes",
+        "transitrouter:UntagResources",
+        "transitrouter:TagResources",
+        "transitrouter:DescribeTransitRouters",
+        "transitrouter:DescribeTransitRouterAttachments"
       ]
     }
   },
@@ -155,10 +158,6 @@
     "/properties/TransitRouterId"
   ],
   "properties": {
-    "AccountId": {
-      "description": "网络实例连接所属的账号ID。",
-      "type": "string"
-    },
     "Asn": {
       "default": 64512,
       "description": "中转路由器的ASN号。取值范围为64512 ～ 65534 和 4200000000 ～ 4294967294，默认值为64512。",
@@ -180,6 +179,7 @@
     },
     "CreationTime": {
       "description": "网络实例连接的创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "DeletedTime": {
@@ -189,6 +189,7 @@
     "Description": {
       "description": "中转路由器实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
       "maxLength": 255,
+      "semantic": "description",
       "type": "string"
     },
     "GrantStatus": {
@@ -202,10 +203,12 @@
     "ProjectName": {
       "default": "default",
       "description": "中转路由器实例所属项目的名称。不传入该参数或该参数不传入数值时，默认为default。",
+      "semantic": "projectName",
       "type": "string"
     },
     "Status": {
       "description": "中转路由器实例的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -214,20 +217,25 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
     "TransitRouterId": {
       "description": "中转路由器实例的ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "TransitRouterName": {
       "description": "中转路由器实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为中转路由器实例的ID。",
       "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
       "type": "string"
     },
     "UpdateTime": {
       "description": "中转路由器实例的最近操作时间。",
+      "semantic": "updatedTime",
       "type": "string"
     }
   },

@@ -91,23 +91,23 @@ resource "volcenginecc_cloudmonitor_rule" "CloudMonitorRuleDemo" {
 - `alert_methods` (Set of String) 告警通知的方式。Email：邮件 Phone：电话 SMS：短信 Webhook：告警回调。
 - `condition_operator` (String) 多指标判定条件。&&：多个指标同时成立才判定为触发告警,||：任意指标满足条件触发判定为告警。
 - `conditions` (Attributes Set) 告警条件。数组形式，支持填写多个指标判断语句，最多 10 个。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--conditions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--conditions))
 - `contact_group_ids` (Set of String) 告警策略绑定的告警通知组 ID。
 - `description` (String) 告警策略描述信息。
 - `dimension_conditions` (Attributes) Dimension 配置。 (see [below for nested schema](#nestedatt--dimension_conditions))
 - `level_conditions` (Attributes Set) 告警分级配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--level_conditions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--level_conditions))
 - `multiple_conditions` (Boolean) 告警策略是否用多指标。true：多指标,false：单指标（默认）。
 - `no_data` (Attributes) 无数据告警。 (see [below for nested schema](#nestedatt--no_data))
 - `notification_id` (String) 通知策略 ID。
 - `notify_templates` (Attributes Set) 通知模版配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--notify_templates))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--notify_templates))
 - `original_dimensions` (Attributes) 告警策略检测的资源 ID。 (see [below for nested schema](#nestedatt--original_dimensions))
 - `project_name` (String) 告警策略所属项目。
 - `recovery_notify` (Attributes) 告警恢复通知。 (see [below for nested schema](#nestedatt--recovery_notify))
 - `regions` (Set of String) 云产品所属可用区 ID。
 - `tags` (Attributes Set) 告警策略绑定 Tag。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `webhook` (String) 告警策略绑定的告警回调 URL 地址。
 - `webhook_ids` (Set of String) 告警发生时告警回调 ID 列表。
 
@@ -151,7 +151,7 @@ Optional:
 - `all_dimensions` (Boolean) 是否为全量资源。true：全部资源。false：部分资源。
 - `condition` (String) 判断条件。and：全部满足。or：任意满足。
 - `metas` (Attributes List) 判断条件。and：全部满足。or：任意满足。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--dimension_conditions--meta_condition--metas))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--dimension_conditions--meta_condition--metas))
 
 <a id="nestedatt--dimension_conditions--meta_condition--metas"></a>
 ### Nested Schema for `dimension_conditions.meta_condition.metas`
@@ -179,7 +179,7 @@ Optional:
 
 - `condition` (String) 判断条件。and：全部满足。or：任意满足。
 - `tags` (Attributes Set) 标签列表。最多支持配置 10 个标签列表。标签值不能超过 50 个字符。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--dimension_conditions--tag_condition--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--dimension_conditions--tag_condition--tags))
 
 <a id="nestedatt--dimension_conditions--tag_condition--tags"></a>
 ### Nested Schema for `dimension_conditions.tag_condition.tags`
@@ -199,7 +199,7 @@ Optional:
 Optional:
 
 - `conditions` (Attributes List) 告警分级配置。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--level_conditions--conditions))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--level_conditions--conditions))
 - `level` (String) 告警通知等级，取值：notice：通知warning：警告critical：严重recovery：恢复。
 
 <a id="nestedatt--level_conditions--conditions"></a>

@@ -100,6 +100,8 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_iam_project -ccschema ../service/cloudcontrol/schemas/Volcengine_IAM_Project.json -package iam -- ../volcengine/iam/project_resource_gen.go ../volcengine/iam/project_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_bmq_group -ccschema ../service/cloudcontrol/schemas/Volcengine_BMQ_Group.json -package bmq -- ../volcengine/bmq/group_resource_gen.go ../volcengine/bmq/group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_cloudmonitor_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_Rule.json -package cloudmonitor -- ../volcengine/cloudmonitor/rule_resource_gen.go ../volcengine/cloudmonitor/rule_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vpn_vpn_gateway -ccschema ../service/cloudcontrol/schemas/Volcengine_VPN_VPNGateway.json -package vpn -- ../volcengine/vpn/vpn_gateway_resource_gen.go ../volcengine/vpn/vpn_gateway_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_filenas_snapshot -ccschema ../service/cloudcontrol/schemas/Volcengine_FileNAS_Snapshot.json -package filenas -- ../volcengine/filenas/snapshot_resource_gen.go ../volcengine/filenas/snapshot_resource_gen_test.go
 
 package provider
 
@@ -146,5 +148,6 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vmp"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpc"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vpn"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/waf"
 )

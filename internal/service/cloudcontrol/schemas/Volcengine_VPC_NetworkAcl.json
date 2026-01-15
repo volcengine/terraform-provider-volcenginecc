@@ -87,13 +87,23 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "网络ACL用于控制子网的出入流量，其基于白名单原理设计，出入子网的流量必须被网络ACL规则允许才能放通。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/NetworkAclId",
+      "/properties/NetworkAclName",
+      "/properties/VpcId",
+      "/properties/Resources/*/ResourceId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -138,6 +148,7 @@
   "properties": {
     "CreatedTime": {
       "description": "网络ACL的创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "DefaultEgressAclEntries": {
@@ -161,6 +172,7 @@
     "Description": {
       "description": "网络ACL描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
       "maxLength": 255,
+      "semantic": "description",
       "type": "string"
     },
     "EgressAclEntries": {
@@ -183,17 +195,20 @@
     },
     "NetworkAclId": {
       "description": "网络ACL的ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "NetworkAclName": {
       "description": "网络ACL名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。",
       "maxLength": 128,
       "minLength": 1,
+      "semantic": "resourceName",
       "type": "string"
     },
     "ProjectName": {
       "default": "default",
       "description": "网络ACL所属项目的名称。不填默认加入default项目。",
+      "semantic": "projectName",
       "type": "string"
     },
     "Resources": {
@@ -207,6 +222,7 @@
     },
     "Status": {
       "description": "网络ACL的状态。Available：可用，Creating：创建中",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -215,11 +231,13 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
     "UpdatedTime": {
       "description": "网络ACL的更新时间。",
+      "semantic": "updatedTime",
       "type": "string"
     },
     "VpcId": {

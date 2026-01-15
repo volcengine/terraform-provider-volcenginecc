@@ -488,5 +488,15 @@
         "resource": "volcenginecc_cloudmonitor_rule",
         "identifier": ["RuleId"],
         "path": "./examples/resources/volcenginecc_cloudmonitor_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpn_vpn_gateway",
+        "identifier": ["VpnGatewayId"],
+        "path": "./examples/resources/volcenginecc_vpn_vpn_gateway/import.sh"
+    },
+    {
+        "resource": "volcenginecc_filenas_snapshot",
+        "identifier": ["SnapshotId"],
+        "path": "./examples/resources/volcenginecc_filenas_snapshot/import.sh"
     }
 ]

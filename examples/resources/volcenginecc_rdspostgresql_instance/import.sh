@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rdspostgresql_instance.example "instance_id"

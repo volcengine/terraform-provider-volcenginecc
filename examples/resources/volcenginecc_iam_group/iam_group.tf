@@ -6,7 +6,7 @@ resource "volcenginecc_iam_group" "GroupDemo" {
     {
     user_name = "demo" }
   ]
-  attached_policys = [
+  attached_policies = [
     {
       policy_type = "System"
       policy_name = "ECSFullAccess"

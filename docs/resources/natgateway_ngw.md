@@ -50,7 +50,7 @@ resource "volcenginecc_natgateway_ngw" "NatGatewayNGWDemo" {
 - `spec` (String) NAT网关的规格。Small（默认）：小型。Medium：中型。Large：大型。Extra_Large_1：超大型-1。Extra_Large_2：超大型-2。
 - `subnet_id` (String) NAT网关所在子网的ID。传入的子网，必须是VpcId传入的私有网络的子网。子网内至少有一个可用的私网IP。系统自动生成的NAT网关网卡将占用该子网一个私网IP。子网所在的可用区需要已部署NAT网关资源。子网所在可用区将作为NAT网关的主可用区，并自动关联备可用区。当主可用区发生故障时，NAT网关自动切换到备可用区。
 - `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -60,13 +60,13 @@ resource "volcenginecc_natgateway_ngw" "NatGatewayNGWDemo" {
 - `direct_mode` (Boolean) 标识该nat是直通还是非直通。   - true（默认）：EIP直通nat网关。   - false：非EIP直通nat网关。
 - `dnat_entry_ids` (Set of String) DNAT规则ID列表。
 - `eip_addresses` (Attributes Set) NAT网关绑定公网IP的信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--eip_addresses))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--eip_addresses))
 - `expired_time` (String) 包年包月NAT网关到期时间。仅包年包月计费类型的NAT网关会返回此参数。
 - `id` (String) Uniquely identifies the resource.
 - `lock_reason` (String) NAT被锁定的原因。financial：因欠费被锁定。security：因安全原因被锁定。
 - `nat_gateway_id` (String) NAT网关ID。
 - `nat_ip_addresses` (Attributes Set) 私网NAT实例的中转IP列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nat_ip_addresses))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--nat_ip_addresses))
 - `network_interface_id` (String) NAT网关占用的网卡ID。
 - `overdue_time` (String) 资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。
 - `snat_entry_ids` (Set of String) SNAT规则ID列表。

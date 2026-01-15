@@ -6,6 +6,6 @@ resource "volcenginecc_fwcenter_dns_control_policy" "FWCenterDnsControlPolicyDem
   sources = [
     {
       region = "cn-beijing"
-      vpc_id = "vpc-3rehw4xxxxk2ixxxxx" }
+    vpc_id = "vpc-3rehw4xxxxk2ixxxxx" }
   ]
 }

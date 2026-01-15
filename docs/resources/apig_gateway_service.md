@@ -41,10 +41,10 @@ resource "volcenginecc_apig_gateway_service" "ApigGatewayServiceDemo" {
 
 - `created_time` (String) 创建时间。
 - `custom_domains` (Attributes Set) 自定义域名列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_domains))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_domains))
 - `domain_spec` (Attributes) 域名详情。 (see [below for nested schema](#nestedatt--domain_spec))
 - `domains` (Attributes Set) 默认域名。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domains))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domains))
 - `gateway_name` (String) 网关名称。
 - `id` (String) Uniquely identifies the resource.
 - `message` (String) 服务创建失败、删除失败或异常时的错误信息。

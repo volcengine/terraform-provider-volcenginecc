@@ -64,13 +64,13 @@ resource "volcenginecc_rdsmssql_instance" "RDSMsSQLInstanceDemo" {
 - `project_name` (String) 所属项目。
 - `server_collation` (String) 实例字符集排序规则，默认 Chinese_PRC_CI_AS。目前已支持大多数原生字符集具体取值如下：Latin1_General_CI_AS，Latin1_General_CS_AS，SQL_Latin1_General_CP1_CI_AS，SQL_Latin1_General_CP1_CS_AS，Chinese_PRC_CI_AS，Chinese_PRC_CS_AS，Chinese_PRC_BIN，Japanese_CI_AS，Japanese_CS_AS，Chinese_Taiwan_Stroke_CI_AS，Chinese_Taiwan_Stroke_CS_AS，Thai_CI_AS，Chinese_PRC_CI_AI，Chinese_PRC_BIN2，Cyrillic_General_CI_AS。
 - `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `backup_use` (Number) 实例已用备份空间。单位：GiB。
 - `connection_info` (Attributes Set) 连接信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--connection_info))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--connection_info))
 - `created_time` (String) 创建时间。
 - `id` (String) Uniquely identifies the resource.
 - `inner_version` (String) 内核版本号。
@@ -79,7 +79,7 @@ resource "volcenginecc_rdsmssql_instance" "RDSMsSQLInstanceDemo" {
 - `instance_status` (String) 实例状态，取值：Running：运行中。Creating：创建中。CreateFailed：创建失败。Deleting：删除中。Restarting：重启中。Updating：变更中。MasterChanging：主节点切换中。Error：错误。
 - `memory` (Number) 内存大小，单位为 GiB。
 - `node_detail_info` (Attributes Set) 实例节点信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_detail_info))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--node_detail_info))
 - `port` (String) 端口
 - `primary_instance_id` (String) 主实例ID。如果为空说明它是主实例。
 - `read_only_number` (Number) 只读实例数量。
@@ -124,7 +124,7 @@ Optional:
 Read-Only:
 
 - `address` (Attributes Set) 地址列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--connection_info--address))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--connection_info--address))
 - `description` (String) 描述信息。
 - `endpoint_id` (String) 终端 ID。
 - `endpoint_name` (String) 终端名称。

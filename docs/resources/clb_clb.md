@@ -60,7 +60,7 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
 - `enis` (Attributes) 负载均衡实例的私网IPv4地址信息列表，创建时通过EniAddressNum指定数量 (see [below for nested schema](#nestedatt--enis))
 - `exclusive_cluster_id` (String) 独占集群Id
 - `listeners` (Attributes Set) 负载均衡实例中监听器的信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
 - `load_balancer_billing_type` (Number) 负载均衡实例计费方式
 - `load_balancer_name` (String) 负载均衡实例的名称
 - `load_balancer_spec` (String) 负载均衡实例的规格
@@ -74,11 +74,11 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
 - `project_name` (String) CLB实例所属项目的名称
 - `region_id` (String) 请求的Region
 - `server_groups` (Attributes Set) 负载均衡实例中后端服务器组的信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--server_groups))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--server_groups))
 - `slave_zone_id` (String) 负载均衡实例的备可用区ID
 - `subnet_id` (String) 负载均衡实例所属VPC内的子网ID
 - `tags` (Attributes Set) CLB实例标签
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `type` (String) 负载均衡实例的类型
 - `vpc_id` (String) 负载均衡实例所属的VPC ID
 - `zone_type` (String) 负载均衡实例的可用区类型

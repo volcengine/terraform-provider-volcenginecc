@@ -63,7 +63,7 @@ resource "volcenginecc_bmq_instance" "BMQInstanceDemo" {
 - `endpoints` (Attributes) 实例所有接入点响应数据。 (see [below for nested schema](#nestedatt--endpoints))
 - `message_retention` (Number) 实例下所有 Topic 的消息保留时长，单位为小时。
 - `tags` (Attributes Set) 实例资源标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `times` (Number) 包年包月类型实例的购买时长，单位为月。
 
 ### Read-Only
@@ -75,7 +75,7 @@ resource "volcenginecc_bmq_instance" "BMQInstanceDemo" {
 - `instance_id` (String) 实例ID。
 - `partition_limit` (Number) 实例分区数量上限。
 - `resource_tags` (Attributes Set) 实例资源标签列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resource_tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resource_tags))
 - `resources` (Attributes) 实例资源统计响应数据。 (see [below for nested schema](#nestedatt--resources))
 - `status` (String) 实例的状态。取值如下：INITIALIZING：初始化中，INITIALIZATION_FAILED：初始化失败，RUNNING：运行中，MODIFYING：更新中，MODIFY_FAILED：更新失败，RELEASING：释放中，STOPPING：停止中，STOPPED：停止，RECOVERING：恢复中，EXCEPTION：异常，CAPACITY_EXPAXION_FAILED：扩容失败，EXPANDING_CAPACITY：扩容中，CANCEL_EXPANDING_CAPACITY：扩容取消中，RESTARTING：重启中，UNPAID：未支付
 - `topic_limit` (Number) 实例Topic数量上限。
@@ -145,7 +145,7 @@ Optional:
 Read-Only:
 
 - `tag_kvs` (Attributes Set) 标签键值对。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resource_tags--tag_kvs))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resource_tags--tag_kvs))
 - `type` (String) 标签类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。
 
 <a id="nestedatt--resource_tags--tag_kvs"></a>

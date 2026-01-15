@@ -72,6 +72,11 @@
     }
   },
   "description": "策略是对权限的一种描述，IAM用户、用户组或角色均需通过关联策略来赋予权限。当系统预设策略不能满足要求时，您可以创建自定义策略，对权限进行细粒度的定义。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/PolicyType"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -206,6 +211,7 @@
     "/properties/IsServiceRolePolicy",
     "/properties/PolicyTrn",
     "/properties/UpdatedTime",
+    "/properties/Category",
     "/properties/PolicyRoles/*/CreatedTime",
     "/properties/PolicyRoles/*/Description",
     "/properties/PolicyRoles/*/DisplayName",

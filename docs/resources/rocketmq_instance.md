@@ -71,7 +71,7 @@ resource "volcenginecc_rocketmq_instance" "RocketMQInstanceDemo" {
 - `project_name` (String) 当前创建的实例所属的 IAM 项目。若未设置，则会将新实例绑定到名为 default 的 IAM 项目中。
 - `ssl_mode` (String) 实例的公网连接策略，仅在开启公网访问时需要设置。支持设置为：enforcing：通过公网访问实例时，必须经由 SSL 认证。SSL 认证可实现数据的加密传输，相较于普通公网访问方式具备更高的安全性，但性能会有所下降。permissive：通过公网访问实例时，可以选择是否经由 SSL 认证。创建实例后，公网访问为开启状态时，不能修改 SSL 连接策略。如需修改，需要为实例关闭并重新开启公网访问，在重新开启时再次设置 SSL 连接策略。详细说明请参考设置公网访问与 SSL 认证策略。
 - `tags` (Attributes Set) 云资源标签。可以将实例通过标签进行归类，便于实例的搜索和资源聚合。详细说明请参考标签概述。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -79,7 +79,7 @@ resource "volcenginecc_rocketmq_instance" "RocketMQInstanceDemo" {
 - `apply_private_dns_to_public` (Boolean) 是否已开启私网域名支持公网解析功能。true：已开启false：已关闭
 - `available_queue_number` (Number) 剩余可创建的分区数量。
 - `connection_info` (Attributes Set) 实例的连接信息。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--connection_info))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--connection_info))
 - `create_time` (String) 实例的创建时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。
 - `id` (String) Uniquely identifies the resource.
 - `instance_id` (String) 实例 ID。

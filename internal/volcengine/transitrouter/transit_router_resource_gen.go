@@ -31,22 +31,6 @@ func init() {
 // This Terraform resource corresponds to the Cloud Control Volcengine::TransitRouter::TransitRouter resource.
 func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AccountId
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "网络实例连接所属的账号ID。",
-		//	  "type": "string"
-		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接所属的账号ID。",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Asn
 		// Cloud Control resource type schema:
 		//
@@ -74,10 +58,6 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
-		//	      "AccountId": {
-		//	        "description": "网络实例连接所属的账号ID。",
-		//	        "type": "string"
-		//	      },
 		//	      "AutoPublishRouteEnabled": {
 		//	        "description": "是否自动同步TR路由到网络实例路由表中。true：是。false：否。",
 		//	        "type": "boolean"
@@ -134,8 +114,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "required": [
-		//	            "Key",
-		//	            "Value"
+		//	            "Key"
 		//	          ],
 		//	          "type": "object"
 		//	        },
@@ -183,11 +162,6 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		"attachments": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AccountId
-					"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接所属的账号ID。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: AutoPublishRouteEnabled
 					"auto_publish_route_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "是否自动同步TR路由到网络实例路由表中。true：是。false：否。",
@@ -254,7 +228,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "网络实例连接的标签信息\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "网络实例连接的标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterAttachmentId
@@ -299,7 +273,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "网络实例连接的详细信息。\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "网络实例连接的详细信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -445,8 +419,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -473,16 +446,13 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 						Description: "标签值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表\n 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "标签列表\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -509,6 +479,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "中转路由器实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为中转路由器实例的ID。",
 		//	  "maxLength": 128,
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"transit_router_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -516,7 +487,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -558,7 +529,6 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::TransitRouter::TransitRouter").WithTerraformTypeName("volcenginecc_transitrouter_transit_router")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                             "AccountId",
 		"asn":                                    "Asn",
 		"attachments":                            "Attachments",
 		"auto_publish_route_enabled":             "AutoPublishRouteEnabled",
@@ -600,7 +570,6 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/AccountId",
 		"/properties/Asn",
 		"/properties/ProjectName",
 	})

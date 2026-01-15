@@ -48,7 +48,7 @@ resource "volcenginecc_kms_key" "KMSKeyDemo" {
 - `protection_level` (String) 密钥保护级别，取值：SOFTWARE，HSM。
 - `rotate_state` (String) 密钥轮转状态，取值：Enable，Disable。
 - `tags` (Attributes Set) KMS密钥的标签信息
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -81,7 +81,7 @@ Read-Only:
 - `multi_region_key_type` (String) 多区域密钥的类型。
 - `primary_key` (Attributes) 主多区域键的事务识别号和区域 ID。 (see [below for nested schema](#nestedatt--multi_region_configuration--primary_key))
 - `replica_keys` (Attributes Set) 副本多区域密钥的事务记录编号和区域 ID。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--multi_region_configuration--replica_keys))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--multi_region_configuration--replica_keys))
 
 <a id="nestedatt--multi_region_configuration--primary_key"></a>
 ### Nested Schema for `multi_region_configuration.primary_key`

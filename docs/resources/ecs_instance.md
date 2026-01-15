@@ -152,7 +152,7 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
 - `placement` (Attributes) 实例的部署信息。 (see [below for nested schema](#nestedatt--placement))
 - `project_name` (String) 实例所属的项目名称。
 - `secondary_network_interfaces` (Attributes List) 实例的辅助网卡。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--secondary_network_interfaces))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--secondary_network_interfaces))
 - `spot_price_limit` (Number) 竞价实例的每小时最高价格。
     - 支持小数点后3位的精度。
     - 仅当`SpotStrategy`取值为`SpotWithPriceLimit`时生效。
@@ -179,7 +179,7 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
   有关节省停机的启用条件，请参见按量计费节省停机模式说明。
   默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。
 - `tags` (Attributes Set) 标签
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `user_data` (String) 实例的自定义数据，默认为空。最终传入的UserData会被Base64转码。
     - Linux实例：脚本内容不能超过16KB，且必须经过Base64编码。
     - Windows实例：脚本内容不能超过8KB，且无需Base64编码。

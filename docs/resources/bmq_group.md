@@ -45,7 +45,7 @@ resource "volcenginecc_bmq_group" "BMQGroupDemo" {
 - `owner_name` (String) Consumer Group 所属用户的名称。
 - `status` (String) Consumer Group 的状态。
 - `topic_infos` (Attributes Set) Topic 列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--topic_infos))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--topic_infos))
 
 <a id="nestedatt--reset_info"></a>
 ### Nested Schema for `reset_info`
@@ -68,7 +68,7 @@ Read-Only:
 - `description` (String) Topic 的描述语句。
 - `lag` (Number) Topic 中未被消费的消息条数。
 - `partition_infos` (Attributes Set) 分区列表。
- 特别提示: 在使用 ListNestedAttribute 或 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--topic_infos--partition_infos))
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--topic_infos--partition_infos))
 - `partitions` (Number) Topic 分区数。
 - `retention` (Number) 数据在 Topic 中的保留时长，单位为小时。
 - `status` (String) Topic 的状态。
