@@ -76,9 +76,7 @@ func NormalizeResourceDescription(desc *cloudcontrol.ResourceDescriptionForGetRe
 					}
 				}
 			}
-			if len(cleanedArr) > 0 {
-				props["Tags"] = cleanedArr
-			}
+			props["Tags"] = cleanedArr
 		}
 	}
 	normalized, err := json.Marshal(props)

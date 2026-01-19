@@ -416,4 +416,3 @@ resource_schema "volcengine_vpn_vpn_gateway" {
 resource_schema "volcengine_filenas_snapshot" {
   cloudcontrol_type_name = "Volcengine::FileNAS::Snapshot"
 }
-

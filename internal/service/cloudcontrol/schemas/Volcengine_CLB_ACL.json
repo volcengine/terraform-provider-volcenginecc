@@ -45,7 +45,7 @@
           "type": "integer"
         },
         "Protocol": {
-          "description": "监听器的协议。",
+          "description": "监听器的协议。包括 TCP、UDP、HTTP、HTTPS。",
           "enum": [
             "TCP",
             "UDP",
@@ -73,13 +73,21 @@
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "CLB提供监听级别的访问控制，如果您希望仅允许某些IP、或仅拒绝某些IP通过监听端口访问CLB实例，可以对该监听器设置访问控制策略。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AclId",
+      "/properties/AclName",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -170,6 +178,7 @@
     "ProjectName": {
       "default": "default",
       "description": "访问控制策略组所属项目的名称。不填默认为default。",
+      "semantic": "projectName",
       "type": "string"
     },
     "ServiceManaged": {
@@ -184,6 +193,7 @@
         "Configuring",
         "Deleting"
       ],
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {

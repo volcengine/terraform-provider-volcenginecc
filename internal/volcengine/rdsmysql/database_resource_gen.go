@@ -128,14 +128,6 @@ func databaseResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: AccountPrivilegeDetail
-					"account_privilege_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "数据库权限字符串。作为请求参数时，当 AccountPrivilege 取值为 Custom 时必填，取值：SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER,作为返回结果时，不管 AccountPrivilege 的值是否为 Custom，都会展示 AccountPrivilege 的详细权限。",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 					// Property: Host
 					"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "指定的数据库账号可以访问数据库的 IP 地址。默认值为 %。若指定 Host 为 %，允许该账号从任意 IP 地址访问数据库。若指定 Host 为 192.10.10.%，则表示该账号可从 192.10.10.0~192.10.10.255 之间的 IP 地址访问数据库。指定的 Host 需要添加在实例所绑定的白名单中，",
@@ -183,6 +175,9 @@ func databaseResource(ctx context.Context) (resource.Resource, error) {
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "数据库实例 ID。",
 			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
@@ -207,10 +202,12 @@ func databaseResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "数据库状态。取值为：Unavailable：不可用。Available：可用。",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "数据库状态。取值为：Unavailable：不可用。Available：可用。",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -250,13 +247,13 @@ func databaseResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/InstanceId",
 		"/properties/Status",
-		"/properties/DatabasePrivileges/*/DatabasePrivilege",
+		"/properties/DatabasePrivileges/*/AccountPrivilegeDetail",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/Name",
+		"/properties/InstanceId",
 		"/properties/CharacterSetName",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

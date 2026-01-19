@@ -8,6 +8,7 @@ package vpc
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -188,13 +189,16 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。",
 		//	  "format": "int64",
-		//	  "maxLength": 200,
-		//	  "minLength": 1,
+		//	  "maximum": 200,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_entries": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。",
 			Required:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(1, 200),
+			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PrefixListEntries
 		// Cloud Control resource type schema:

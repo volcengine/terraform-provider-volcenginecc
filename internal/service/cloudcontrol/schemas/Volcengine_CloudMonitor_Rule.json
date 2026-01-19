@@ -306,10 +306,12 @@
     },
     "CreatedAt": {
       "description": "告警策略创建时间，时间戳格式。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "告警策略描述信息。",
+      "semantic": "description",
       "type": "string"
     },
     "DimensionConditions": {
@@ -379,6 +381,7 @@
     },
     "ProjectName": {
       "description": "告警策略所属项目。",
+      "semantic": "projectName",
       "type": "string"
     },
     "RecoveryNotify": {
@@ -406,6 +409,7 @@
     },
     "RuleName": {
       "description": "告警策略名称。",
+      "semantic": "resourceName",
       "type": "string"
     },
     "RuleType": {
@@ -432,6 +436,7 @@
     },
     "UpdatedAt": {
       "description": "告警策略更新时间，时间戳格式。",
+      "semantic": "updatedTime",
       "type": "string"
     },
     "Webhook": {

@@ -26,7 +26,7 @@ Data Source schema for Volcengine::RDSMySQL::Database
 - `description` (String) 数据库的描述信息，长度不超过 256 个字符。该字段可选，若不设置该字段，或设置了该字段但描述信息长度为 0 ，则描述信息为空。
 - `instance_id` (String) 数据库实例 ID。
 - `name` (String) 数据库名称。命名规则如下：名称唯一。长度为 2~64 个字符。以字母开头，以字母或数字结尾。由字母、数字、下划线（_）或中划线（-）组成。不能使用某些预留字，包括 root、admin 等。
-- `status` (String)
+- `status` (String) 数据库状态。取值为：Unavailable：不可用。Available：可用。
 
 <a id="nestedatt--database_privileges"></a>
 ### Nested Schema for `database_privileges`

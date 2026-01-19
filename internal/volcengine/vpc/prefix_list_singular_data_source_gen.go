@@ -155,8 +155,8 @@ func prefixListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。",
 		//	  "format": "int64",
-		//	  "maxLength": 200,
-		//	  "minLength": 1,
+		//	  "maximum": 200,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_entries": schema.Int64Attribute{ /*START ATTRIBUTE*/

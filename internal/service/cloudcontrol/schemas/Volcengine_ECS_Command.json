@@ -45,7 +45,7 @@
           "type": "boolean"
         },
         "Type": {
-          "description": "自定义参数类型。",
+          "description": "自定义参数类型。取值：String：表示自定义参数类型为String（字符串）类型。Digit：表示自定义参数类型为Digit（数值）类型。",
           "enum": [
             "String",
             "Digit"
@@ -58,20 +58,37 @@
     "Tag": {
       "properties": {
         "Key": {
+          "description": "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+          "maxLength": 128,
+          "minLength": 1,
           "type": "string"
         },
         "Value": {
+          "description": "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+          "maxLength": 256,
+          "minLength": 0,
           "type": "string"
         }
       },
       "required": [
-        "Key",
-        "Value"
+        "Key"
       ],
       "type": "object"
     }
   },
   "description": "自定义命令是云助手提供的满足您个性化运维需求的功能，您可以在预置的公共命令不满足需求时创建自定义命令，并通过运维任务在实例中批量执行您编写的自定义命令。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/CommandId",
+      "/properties/ContentEncoding",
+      "/properties/Name",
+      "/properties/ProjectName",
+      "/properties/Provider",
+      "/properties/Type",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -230,5 +247,8 @@
     "tagUpdatable": true,
     "taggable": true
   },
-  "typeName": "Volcengine::ECS::Command"
+  "typeName": "Volcengine::ECS::Command",
+  "writeOnlyProperties": [
+    "/properties/ContentEncoding"
+  ]
 }
