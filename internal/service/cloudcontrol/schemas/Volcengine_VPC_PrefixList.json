@@ -53,6 +53,16 @@
     }
   },
   "description": "前缀列表是一组CIDR地址块的集合，用于简化安全组规则、路由表条目的配置。当前缀列表修改时，所有关联它的资源均会同步修改。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/IpVersion",
+      "/properties/PrefixListId",
+      "/properties/PrefixListName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -120,11 +130,13 @@
     },
     "CreatedTime": {
       "description": "前缀列表的创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "前缀列表的描述信息。长度限制为0~ 255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
       "maxLength": 255,
+      "semantic": "description",
       "type": "string"
     },
     "IpVersion": {
@@ -135,8 +147,8 @@
     "MaxEntries": {
       "description": "最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。",
       "format": "int64",
-      "maxLength": 200,
-      "minLength": 1,
+      "maximum": 200,
+      "minimum": 1,
       "type": "integer"
     },
     "PrefixListEntries": {
@@ -150,21 +162,25 @@
     },
     "PrefixListId": {
       "description": "前缀列表的ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "PrefixListName": {
       "description": "前缀列表的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。",
       "maxLength": 128,
       "minLength": 1,
+      "semantic": "resourceName",
       "type": "string"
     },
     "ProjectName": {
       "default": "default",
       "description": "前缀列表所属项目的名称，不填默认加入default项目。",
+      "semantic": "projectName",
       "type": "string"
     },
     "Status": {
       "description": "前缀列表的状态。取值：Available：可用；Creating：创建中；Deleting：删除中；Pending：修改中。",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -173,11 +189,13 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
     "UpdatedTime": {
       "description": "前缀列表的最近一次修改时间。",
+      "semantic": "updatedTime",
       "type": "string"
     }
   },

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -159,6 +160,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "default": "default",
 		//	  "description": "证书所属项目的名称。不填默认为default。",
 		//	  "type": "string"
 		//	}
@@ -166,6 +168,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			Description: "证书所属项目的名称。不填默认为default。",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("default"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -229,9 +232,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "用户标签的标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "用户标签的标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -248,8 +253,9 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "用户标签的标签键。",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -259,8 +265,9 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "用户标签的标签值。",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/

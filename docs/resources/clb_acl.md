@@ -85,7 +85,7 @@ Read-Only:
 - `listener_id` (String) 监听器的ID。
 - `listener_name` (String) 监听器的名称。
 - `port` (Number) 监听器的端口。
-- `protocol` (String) 监听器的协议。
+- `protocol` (String) 监听器的协议。包括 TCP、UDP、HTTP、HTTPS。
 
 ## Import
 

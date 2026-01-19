@@ -2,6 +2,7 @@
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/Name",
+    "/properties/InstanceId",
     "/properties/CharacterSetName"
   ],
   "definitions": {
@@ -35,6 +36,15 @@
     }
   },
   "description": "数据库",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/Name"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -46,6 +56,11 @@
     "delete": {
       "permissions": [
         "rds_mysql:DeleteDatabase",
+        "rds_mysql:DescribeDatabases"
+      ]
+    },
+    "list": {
+      "permissions": [
         "rds_mysql:DescribeDatabases"
       ]
     },
@@ -106,14 +121,14 @@
       "type": "string"
     },
     "Status": {
+      "description": "数据库状态。取值为：Unavailable：不可用。Available：可用。",
       "semantic": "status",
       "type": "string"
     }
   },
   "readOnlyProperties": [
-    "/properties/InstanceId",
     "/properties/Status",
-    "/properties/DatabasePrivileges/*/DatabasePrivilege"
+    "/properties/DatabasePrivileges/*/AccountPrivilegeDetail"
   ],
   "required": [
     "InstanceId",

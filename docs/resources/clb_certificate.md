@@ -59,8 +59,8 @@ resource "volcenginecc_clb_certificate" "CertificatDemo" {
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) 用户标签的标签键。
+- `value` (String) 用户标签的标签值。
 
 ## Import
 

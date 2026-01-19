@@ -157,7 +157,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "监听器的协议。",
+		//	        "description": "监听器的协议。包括 TCP、UDP、HTTP、HTTPS。",
 		//	        "enum": [
 		//	          "TCP",
 		//	          "UDP",
@@ -197,7 +197,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的协议。",
+						Description: "监听器的协议。包括 TCP、UDP、HTTP、HTTPS。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -267,8 +267,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },

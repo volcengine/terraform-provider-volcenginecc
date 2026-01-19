@@ -9,9 +9,11 @@
     "Tag": {
       "properties": {
         "Key": {
+          "description": "用户标签的标签键。",
           "type": "string"
         },
         "Value": {
+          "description": "用户标签的标签值。",
           "type": "string"
         }
       },
@@ -22,6 +24,15 @@
     }
   },
   "description": "针对HTTPS协议，提供统一的证书管理服务，证书无需上传到后端服务器，支持在CLB实例上解密处理，降低了后端服务器的CPU开销。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/CertificateId",
+      "/properties/CertificateName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -60,19 +71,23 @@
   "properties": {
     "CertificateId": {
       "description": "证书的ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "CertificateName": {
       "description": "证书的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 128个字符。",
+      "semantic": "resourceName",
       "type": "string"
     },
     "CreatedTime": {
       "description": "证书的创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "证书的描述，默认值为空字符串。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。",
       "maxLength": 255,
+      "semantic": "description",
       "type": "string"
     },
     "DomainName": {
@@ -97,7 +112,9 @@
       "type": "string"
     },
     "ProjectName": {
+      "default": "default",
       "description": "证书所属项目的名称。不填默认为default。",
+      "semantic": "projectName",
       "type": "string"
     },
     "PublicKey": {
@@ -123,6 +140,7 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     }

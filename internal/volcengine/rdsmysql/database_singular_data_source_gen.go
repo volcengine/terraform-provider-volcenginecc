@@ -145,10 +145,12 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
+		//	  "description": "数据库状态。取值为：Unavailable：不可用。Available：可用。",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "数据库状态。取值为：Unavailable：不可用。Available：可用。",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
