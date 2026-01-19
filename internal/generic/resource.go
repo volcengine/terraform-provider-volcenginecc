@@ -687,7 +687,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	}
 
 	//for update set ,get new resource
-	description, err := r.describe(ctx, r.provider.CloudControlAPIClient(ctx), id)
+	description, err := r.describeWithSysTag(ctx, r.provider.CloudControlAPIClient(ctx), id)
 
 	if tfresource.NotFound(err) {
 		response.Diagnostics.Append(ResourceNotFoundAfterWriteDiag(err))
@@ -706,8 +706,19 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		"value": util.ToString(description.ResourceDescription.Properties),
 	})
 	currentDesiredState = util.ToString(description.ResourceDescription.Properties)
+
 	currentDesiredState, err = translateForUpdate(currentDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
 	plannedDesiredState, err = translateForUpdate(plannedDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
+	//plannedDesiredState中补全sys: volc: tag处理，保证patchDocument与CCAPI计算一致
+	plannedDesiredState, err = MergeSystemTags(currentDesiredState, plannedDesiredState)
+	if err != nil {
+		response.Diagnostics.AddError(
+			"Creation Of JSON Patch Unsuccessful",
+			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
+
+		return
+	}
 	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
 
 	if err != nil {
@@ -866,6 +877,11 @@ func (r *genericResource) describe(ctx context.Context, client *cloudcontrol.Clo
 	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, client, r.provider.Region(ctx), r.ccTypeName, id)
 }
 
+// describe returns the live state of the specified resource.
+func (r *genericResource) describeWithSysTag(ctx context.Context, client *cloudcontrol.CloudControl, id string) (*cloudcontrol.GetResourceOutput, error) {
+	return tfcloudcontrol.FindResourceByTypeNameAndIDWithSysTag(ctx, client, r.provider.Region(ctx), r.ccTypeName, id)
+}
+
 // getId returns the resource's primary identifier value from State.
 func (r *genericResource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
 	var val string
@@ -948,6 +964,87 @@ func (r *genericResource) bootstrapContext(ctx context.Context) context.Context 
 	//ctx = r.provider.RegisterLogger(ctx)
 
 	return ctx
+}
+
+func MergeSystemTags(
+	currentDesiredState string,
+	plannedDesiredState string,
+) (string, error) {
+
+	var current map[string]interface{}
+	var planned map[string]interface{}
+
+	if err := json.Unmarshal([]byte(currentDesiredState), &current); err != nil {
+		return "", fmt.Errorf("unmarshal currentDesiredState failed: %w", err)
+	}
+	if err := json.Unmarshal([]byte(plannedDesiredState), &planned); err != nil {
+		return "", fmt.Errorf("unmarshal plannedDesiredState failed: %w", err)
+	}
+
+	// 提取 Tags
+	currentTags := extractTags(current)
+	plannedTags := extractTags(planned)
+	if currentTags == nil {
+		return plannedDesiredState, nil
+	}
+	if plannedTags == nil {
+		plannedTags = make([]map[string]interface{}, 0)
+	}
+
+	// 构建 planned 中已有 tag 的索引（Key → exists）
+	existing := make(map[string]struct{})
+	for _, t := range plannedTags {
+		if key, ok := t["Key"].(string); ok {
+			existing[key] = struct{}{}
+		}
+	}
+
+	// 将 current 中的 sys:/volc: tag 合并进 planned
+	for _, t := range currentTags {
+		key, ok := t["Key"].(string)
+		if !ok {
+			continue
+		}
+
+		if strings.HasPrefix(key, "sys:") || strings.HasPrefix(key, "volc:") {
+			if _, found := existing[key]; !found {
+				plannedTags = append(plannedTags, t)
+				existing[key] = struct{}{}
+			}
+		}
+	}
+
+	// 回写 Tags
+	if len(plannedTags) > 0 {
+		planned["Tags"] = plannedTags
+	}
+
+	merged, err := json.Marshal(planned)
+	if err != nil {
+		return "", fmt.Errorf("marshal merged plannedDesiredState failed: %w", err)
+	}
+
+	return string(merged), nil
+}
+
+func extractTags(obj map[string]interface{}) []map[string]interface{} {
+	raw, ok := obj["Tags"]
+	if !ok {
+		return nil
+	}
+
+	arr, ok := raw.([]interface{})
+	if !ok {
+		return nil
+	}
+
+	result := make([]map[string]interface{}, 0, len(arr))
+	for _, item := range arr {
+		if m, ok := item.(map[string]interface{}); ok {
+			result = append(result, m)
+		}
+	}
+	return result
 }
 
 // patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
