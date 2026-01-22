@@ -452,7 +452,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	output, err := cloudControlClient.CreateResourceWithContext(ctx, &cloudcontrol.CreateResourceInput{
 		TypeName:    util.StringPtr(r.ccTypeName),
 		RegionID:    r.provider.Region(ctx),
-		ClientToken: util.StringPtr(util.GenerateToken(24)),
+		ClientToken: util.StringPtr(util.GenerateToken(32)),
 		TargetState: &targetState,
 	})
 
@@ -743,7 +743,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		TypeName:      util.StringPtr(r.ccTypeName),
 		RegionID:      util.StringPtr(r.provider.Region(ctx)),
 		Identifier:    util.StringPtr(id),
-		ClientToken:   util.StringPtr(util.GenerateToken(24)),
+		ClientToken:   util.StringPtr(util.GenerateToken(32)),
 		PatchDocument: PatchDocumentArray,
 	})
 	if err != nil {
