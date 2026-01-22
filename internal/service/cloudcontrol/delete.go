@@ -25,7 +25,7 @@ func DeleteResource(ctx context.Context, cloudControlClient *cloudcontrol.CloudC
 		TypeName:    util.StringPtr(typeName),
 		RegionID:    util.StringPtr(region),
 		Identifier:  util.StringPtr(id),
-		ClientToken: util.StringPtr(util.GenerateToken(24)),
+		ClientToken: util.StringPtr(util.GenerateToken(32)),
 	})
 	if err != nil {
 		return err
