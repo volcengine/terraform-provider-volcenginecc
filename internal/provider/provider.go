@@ -31,6 +31,7 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 	"github.com/volcengine/volcengine-go-sdk/volcengine"
 	"github.com/volcengine/volcengine-go-sdk/volcengine/credentials"
+	"github.com/volcengine/volcengine-go-sdk/volcengine/credentials/clicreds"
 	"github.com/volcengine/volcengine-go-sdk/volcengine/session"
 )
 
@@ -139,20 +140,29 @@ func (p *VolcengineCCProvider) Schema(ctx context.Context, request provider.Sche
 				Optional:    true,
 				Description: "An `endpoints` block (documented below). Only one `endpoints` block may be in the configuration.",
 			},
+			"profile": schema.StringAttribute{
+				Description: "The profile for Volcengine Provider. It can be sourced from the `VOLCENGINE_PROFILE` environment variable",
+				Optional:    true,
+			},
+			"file_path": schema.StringAttribute{
+				Description: "The file path for Volcengine Provider configuration. It can be sourced from the `VOLCENGINE_FILE_PATH` environment variable",
+				Optional:    true,
+			},
 		},
 	}
 }
 
 type configModel struct {
-	AccessKey       types.String    `tfsdk:"access_key"`
-	SecretKey       types.String    `tfsdk:"secret_key"`
-	Region          types.String    `tfsdk:"region"`
-	DisableSSL      types.Bool      `tfsdk:"disable_ssl"`
-	CustomerHeaders types.String    `tfsdk:"customer_headers"`
-	ProxyURL        types.String    `tfsdk:"proxy_url"`
-	AssumeRole      *AssumeRoleData `tfsdk:"assume_role"`
-	Endpoints       *endpointData   `tfsdk:"endpoints"`
-
+	AccessKey        types.String    `tfsdk:"access_key"`
+	SecretKey        types.String    `tfsdk:"secret_key"`
+	Region           types.String    `tfsdk:"region"`
+	DisableSSL       types.Bool      `tfsdk:"disable_ssl"`
+	CustomerHeaders  types.String    `tfsdk:"customer_headers"`
+	ProxyURL         types.String    `tfsdk:"proxy_url"`
+	AssumeRole       *AssumeRoleData `tfsdk:"assume_role"`
+	Endpoints        *endpointData   `tfsdk:"endpoints"`
+	Profile          types.String    `tfsdk:"profile"`
+	FilePath         types.String    `tfsdk:"file_path"`
 	terraformVersion string
 }
 type AssumeRoleData struct {
@@ -185,14 +195,22 @@ func (p *VolcengineCCProvider) Configure(ctx context.Context, request provider.C
 	if config.SecretKey.IsNull() || config.SecretKey.IsUnknown() {
 		config.SecretKey = types.StringValue(os.Getenv("VOLCENGINE_SECRET_KEY"))
 	}
+	if config.Profile.IsNull() || config.Profile.IsUnknown() {
+		config.Profile = types.StringValue(os.Getenv("VOLCENGINE_PROFILE"))
+	}
+	if config.FilePath.IsNull() || config.FilePath.IsUnknown() {
+		config.FilePath = types.StringValue(os.Getenv("VOLCENGINE_FILE_PATH"))
+	}
 	if config.Region.IsNull() || config.Region.IsUnknown() {
 		config.Region = types.StringValue(os.Getenv("VOLCENGINE_REGION"))
 	}
-	if config.AccessKey.ValueString() == "" {
-		response.Diagnostics.AddError("Missing AccessKey", "AccessKey must be set")
-	}
-	if config.SecretKey.ValueString() == "" {
-		response.Diagnostics.AddError("Missing SecretKey", "SecretKey must be set")
+	// 验证认证方式：必须配置ak + sk，或者必须配置profile + file_path
+	hasAKSK := config.AccessKey.ValueString() != "" && config.SecretKey.ValueString() != ""
+	hasProfile := config.Profile.ValueString() != ""
+
+	if !hasAKSK && !hasProfile {
+		response.Diagnostics.AddError("Invalid Authentication Configuration",
+			"Either (AccessKey and SecretKey) or Profile must be provided")
 	}
 	if config.Region.ValueString() == "" {
 		response.Diagnostics.AddError("Missing Region", "Region must be set")
@@ -318,13 +336,25 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 		return nil, diags
 	}
 
-	config := volcengine.NewConfig().
-		WithRegion(c.Region.ValueString()).
-		WithCredentials(credentials.NewStaticCredentials(c.AccessKey.ValueString(), c.SecretKey.ValueString(), "")).
-		WithDisableSSL(c.DisableSSL.ValueBool()).
-		WithExtendHttpRequest(func(ctx context.Context, request *http.Request) {
-			request.Header.Set("user-agent", version)
-		})
+	var config *volcengine.Config
+
+	if c.AccessKey.ValueString() != "" && c.SecretKey.ValueString() != "" {
+		config = volcengine.NewConfig().
+			WithRegion(c.Region.ValueString()).
+			WithCredentials(credentials.NewStaticCredentials(c.AccessKey.ValueString(), c.SecretKey.ValueString(), "")).
+			WithDisableSSL(c.DisableSSL.ValueBool()).
+			WithExtendHttpRequest(func(ctx context.Context, request *http.Request) {
+				request.Header.Set("user-agent", version)
+			})
+	} else {
+		config = volcengine.NewConfig().
+			WithRegion(c.Region.ValueString()).
+			WithCredentials(clicreds.NewCliCredentials(c.FilePath.ValueString(), c.Profile.ValueString())).
+			WithDisableSSL(c.DisableSSL.ValueBool()).
+			WithExtendHttpRequest(func(ctx context.Context, request *http.Request) {
+				request.Header.Set("user-agent", version)
+			})
+	}
 
 	if !(c.CustomerHeaders.IsNull() || c.CustomerHeaders.IsUnknown()) {
 		customHeaderMap := make(map[string]string)
