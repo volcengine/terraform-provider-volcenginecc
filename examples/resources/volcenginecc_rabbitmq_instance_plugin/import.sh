@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rabbitmq_instance_plugin.example "instance_id|plugin_name"

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_ecs_launch_template.example "launch_template_id"

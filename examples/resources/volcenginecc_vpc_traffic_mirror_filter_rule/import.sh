@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_traffic_mirror_filter_rule.example "traffic_mirror_filter_id|traffic_mirror_filter_rule_id"

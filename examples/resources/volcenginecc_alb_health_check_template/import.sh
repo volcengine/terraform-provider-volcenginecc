@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_alb_health_check_template.example "health_check_template_id"

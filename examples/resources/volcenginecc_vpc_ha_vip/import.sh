@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_ha_vip.example "ha_vip_id"

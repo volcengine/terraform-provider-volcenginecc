@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpn_customer_gateway.example "customer_gateway_id"

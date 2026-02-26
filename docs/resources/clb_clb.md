@@ -48,70 +48,70 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
 
 ### Optional
 
-- `access_log` (Attributes) 负载均衡实例中访问日志的信息 (see [below for nested schema](#nestedatt--access_log))
-- `address_ip_version` (String) 负载均衡实例的IP地址类型
-- `allowed_ports` (Set of String) 允许的多个端口范围
-- `bypass_security_group_enabled` (String) 是否开启bypass安全组功能
-- `description` (String) 负载均衡实例的描述
-- `eip` (Attributes) 负载均衡实例的公网IP的信息 (see [below for nested schema](#nestedatt--eip))
-- `eip_address` (String) 公网IP地址
-- `eip_id` (String) 公网IP ID
-- `eni_address_num` (Number) 负载均衡实例的私网IPv4地址数量。该参数和参数EniAddress不能同时传入，如果传入该参数，则无需传入EniAddress
-- `enis` (Attributes) 负载均衡实例的私网IPv4地址信息列表，创建时通过EniAddressNum指定数量 (see [below for nested schema](#nestedatt--enis))
-- `exclusive_cluster_id` (String) 独占集群Id
-- `listeners` (Attributes Set) 负载均衡实例中监听器的信息
+- `access_log` (Attributes) 负载均衡实例中访问日志的信息。 (see [below for nested schema](#nestedatt--access_log))
+- `address_ip_version` (String) CLB实例的IP地址类型。取值如下：ipv4（默认值）：表示该CLB为IPv4类型，仅支持转发IPv4请求。DualStack：表示该CLB为双栈类型，支持转发IPv4和IPv6请求。仅参数Type取private时，才可传入DualStack。
+- `allowed_ports` (Set of String) 允许的多个端口范围。
+- `auto_renewal` (Boolean) 是否开通自动续费。true：是，默认自动续费为1个月。false（默认值）：否
+- `bypass_security_group_enabled` (String) 是否开启bypass安全组功能。
+- `description` (String) 负载均衡实例的描述。
+- `eip` (Attributes) 负载均衡实例的公网IP的信息。 (see [below for nested schema](#nestedatt--eip))
+- `eip_address` (String) 公网IP地址。
+- `eip_id` (String) 公网IP ID。
+- `eni_address_num` (Number) 负载均衡实例的私网IPv4地址数量。该参数和参数EniAddress不能同时传入，如果传入该参数，则无需传入EniAddress。
+- `enis` (Attributes) 负载均衡实例的私网IPv4地址信息列表，创建时通过EniAddressNum指定数量。 (see [below for nested schema](#nestedatt--enis))
+- `exclusive_cluster_id` (String) 独占集群Id。
+- `listeners` (Attributes Set) 负载均衡实例中监听器的信息。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
-- `load_balancer_billing_type` (Number) 负载均衡实例计费方式
-- `load_balancer_name` (String) 负载均衡实例的名称
-- `load_balancer_spec` (String) 负载均衡实例的规格
-- `master_zone_id` (String) 负载均衡实例的主可用区ID
-- `modification_protection_reason` (String) 设置修改保护状态的原因
-- `modification_protection_status` (String) 负载均衡实例在控制台上修改保护的状态
-- `new_arch` (Boolean) 是否为新架构
-- `order_id` (String) 订单ID。仅在创建动作的参数LoadBalancerBillingType配置为1时，改参数有值
-- `period` (Number) 包年包月计费类型的时长数量
-- `period_unit` (String) 包年包月计费类型的时长单位
-- `project_name` (String) CLB实例所属项目的名称
-- `region_id` (String) 请求的Region
-- `server_groups` (Attributes Set) 负载均衡实例中后端服务器组的信息
+- `load_balancer_billing_type` (Number) CLB实例计费方式。取值如下：1：包年包月。2（默认值）：按量计费-按规格计费。3：按量计费-按使用量计费。
+- `load_balancer_name` (String) 负载均衡实例的名称。
+- `load_balancer_spec` (String) CLB实例的规格，不同规格提供的转发能力不同。small_1：小型I。small_2：小型II。medium_1：中型I。medium_2：中型II。large_1：大型I。large_2：大型II。
+- `master_zone_id` (String) 负载均衡实例的主可用区ID。
+- `modification_protection_reason` (String) 设置修改保护状态的原因。仅参数ModificationProtectionStatus取ConsoleProtection时，本参数有效。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：半角句号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 80个字符。
+- `modification_protection_status` (String) CLB实例是否开启控制台上修改保护。开启后，禁止通过控制台修改实例或删除实例。取值如下：NonProtection：不开启。ConsoleProtection：开启。
+- `new_arch` (Boolean) 是否为新架构。
+- `order_id` (String) 订单ID。仅在创建动作的参数LoadBalancerBillingType配置为1时，该参数有值。
+- `period` (Number) 购买包年包月CLB实例的时长。默认为“1”。当PeriodUnit配置为Month时，取值范围为1～9，12，24和36。当PeriodUnit配置为Year时，取值范围为1～3。
+- `period_unit` (String) 购买包年包月CLB实例的时长单位。仅LoadBalancerBillingType取1时，本参数有效。取值如下：Month (默认值)：月。Year：年
+- `project_name` (String) CLB实例所属项目的名称。
+- `server_groups` (Attributes Set) 负载均衡实例中后端服务器组的信息。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--server_groups))
-- `slave_zone_id` (String) 负载均衡实例的备可用区ID
-- `subnet_id` (String) 负载均衡实例所属VPC内的子网ID
-- `tags` (Attributes Set) CLB实例标签
+- `slave_zone_id` (String) 负载均衡实例的备可用区ID。
+- `subnet_id` (String) 负载均衡实例所属VPC内的子网ID。
+- `tags` (Attributes Set) CLB实例标签。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `type` (String) 负载均衡实例的类型
-- `vpc_id` (String) 负载均衡实例所属的VPC ID
-- `zone_type` (String) 负载均衡实例的可用区类型
+- `type` (String) CLB实例的类型。取值如下：public：公网类型。创建一个公网类型CLB实例，系统会分配一个公网IP地址，用于转发公网请求。private：私网类型。创建一个私网类型CLB实例，您需要为其绑定公网IP后，才能转发公网请求。
+- `vpc_id` (String) 负载均衡实例所属的VPC ID。
+- `zone_type` (String) 负载均衡实例的可用区类型。
 
 ### Read-Only
 
-- `account_id` (String) 负载均衡实例所属的账号ID
-- `business_status` (String) 负载均衡实例是否被锁定
-- `create_time` (String) 负载均衡实例的创建时间
-- `deleted_time` (String) 负载均衡实例的预期回收时间
-- `enabled` (Boolean) 负载均衡实例的启用状态
-- `eni` (Attributes) 负载均衡实例的私网IPv4地址信息 (see [below for nested schema](#nestedatt--eni))
-- `eni_ipv_6_address` (String) 负载均衡实例的私网IPv6地址
-- `expired_time` (String) 负载均衡实例到期时间
+- `account_id` (String) 负载均衡实例所属的账号ID。
+- `business_status` (String) 负载均衡实例是否被锁定。
+- `create_time` (String) 负载均衡实例的创建时间。
+- `deleted_time` (String) 负载均衡实例的预期回收时间。
+- `enabled` (Boolean) 负载均衡实例的启用状态。
+- `eni` (Attributes) 负载均衡实例的私网IPv4地址信息。 (see [below for nested schema](#nestedatt--eni))
+- `eni_ipv_6_address` (String) 负载均衡实例的私网IPv6地址。
+- `expired_time` (String) 负载均衡实例到期时间。
 - `id` (String) Uniquely identifies the resource.
-- `load_balancer_id` (String) 负载均衡实例ID
-- `lock_reason` (String) 负载均衡实例被冻结的原因
-- `overdue_time` (String) 负载均衡实例的冻结时间
-- `service_managed` (Boolean) CLB实例是否为托管资源
-- `status` (String) 负载均衡实例状态
-- `timestamp_remove_enabled` (String) 是否开启 TCP Timestamp 清除功能
-- `update_time` (String) 负载均衡实例的最近操作时间
+- `load_balancer_id` (String) 负载均衡实例ID。
+- `lock_reason` (String) 负载均衡实例被冻结的原因。
+- `overdue_time` (String) 负载均衡实例的冻结时间。
+- `service_managed` (Boolean) CLB实例是否为托管资源。
+- `status` (String) 负载均衡实例状态，Inactive：已停止。Active：运行中。Creating：创建中。Provisioning：创建中。Configuring：配置中。Deleting：删除中。CreateFailed：创建失败。
+- `timestamp_remove_enabled` (String) 是否开启 TCP Timestamp 清除功能。
+- `update_time` (String) 负载均衡实例的最近操作时间。
 
 <a id="nestedatt--access_log"></a>
 ### Nested Schema for `access_log`
 
 Optional:
 
-- `bucket_name` (String) 存储七层访问日志的对象存储桶的名称
-- `delivery_type` (String) 日志投递类型
-- `enabled` (Boolean) 是否开启访问日志（七层）投递至对象存储TOS的功能
-- `tls_project_id` (String) 日志项目
-- `tls_topic_id` (String) 日志主题
+- `bucket_name` (String) 存储七层访问日志的对象存储桶的名称。
+- `delivery_type` (String) 日志投递类型。取值如下：tos（默认值）: 将日志投递至对象存储服务TOS。tls：将日志投递至日志服务TLS。
+- `enabled` (Boolean) 是否开启访问日志（七层）投递至对象存储TOS的功能。
+- `tls_project_id` (String) 日志项目。
+- `tls_topic_id` (String) 日志主题。
 
 
 <a id="nestedatt--eip"></a>
@@ -119,12 +119,12 @@ Optional:
 
 Optional:
 
-- `bandwidth` (Number) 带宽峰值
-- `bandwidth_package_id` (String) 共享带宽包ID
-- `eip_billing_type` (Number) 计费方式
-- `isp` (String) 线路类型
-- `security_protection_instance_id` (Number) 防护包ID
-- `security_protection_types` (Set of String) 安全防护类型
+- `bandwidth` (Number) 带宽峰值。
+- `bandwidth_package_id` (String) 共享带宽包ID。
+- `eip_billing_type` (Number) 计费方式。
+- `isp` (String) 线路类型。
+- `security_protection_instance_id` (Number) 防护包ID。
+- `security_protection_types` (Set of String) 安全防护类型。
 
 
 <a id="nestedatt--enis"></a>
@@ -132,8 +132,8 @@ Optional:
 
 Optional:
 
-- `eni_address` (String) 负载均衡实例的私网IP地址
-- `eni_id` (String) 负载均衡实例占用的网卡ID
+- `eni_address` (String) 负载均衡实例的私网IP地址。
+- `eni_id` (String) 负载均衡实例占用的网卡ID。
 
 
 <a id="nestedatt--listeners"></a>
@@ -141,8 +141,8 @@ Optional:
 
 Optional:
 
-- `listener_id` (String) 监听器的ID
-- `listener_name` (String) 监听器的名称
+- `listener_id` (String) 监听器的ID。
+- `listener_name` (String) 监听器的名称。
 
 
 <a id="nestedatt--server_groups"></a>
@@ -150,8 +150,8 @@ Optional:
 
 Optional:
 
-- `server_group_id` (String) 负载均衡实例中后端服务器组的ID
-- `server_group_name` (String) 负载均衡实例中后端服务器组的名称
+- `server_group_id` (String) 负载均衡实例中后端服务器组的ID。
+- `server_group_name` (String) 负载均衡实例中后端服务器组的名称。
 
 
 <a id="nestedatt--tags"></a>
@@ -159,8 +159,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 标签键
-- `value` (String) 标签值
+- `key` (String) 标签键。
+- `value` (String) 标签值。
 
 
 <a id="nestedatt--eni"></a>
@@ -168,8 +168,8 @@ Optional:
 
 Read-Only:
 
-- `eni_address` (String) 负载均衡实例的私网IP地址
-- `eni_id` (String) 负载均衡实例占用的网卡ID
+- `eni_address` (String) 负载均衡实例的私网IP地址。
+- `eni_id` (String) 负载均衡实例占用的网卡ID。
 
 ## Import
 

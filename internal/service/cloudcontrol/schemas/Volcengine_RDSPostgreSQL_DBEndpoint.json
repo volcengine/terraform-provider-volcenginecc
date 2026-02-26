@@ -1,0 +1,227 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/EndpointType",
+    "/properties/InstanceId",
+    "/properties/Nodes",
+    "/properties/ReadWriteMode"
+  ],
+  "definitions": {
+    "Address": {
+      "description": "连接终端地址。",
+      "properties": {
+        "CrossRegionDomain": {
+          "description": "可跨地域访问的私网地址。说明无此地址时则不返回该字段。",
+          "type": "string"
+        },
+        "DNSVisibility": {
+          "description": "是否开启公网解析。取值为：false：默认值，私网解析。true：私网以及公网解析。",
+          "type": "boolean"
+        },
+        "Domain": {
+          "description": "连接域名。",
+          "type": "string"
+        },
+        "DomainPrefix": {
+          "description": "新的访问地址前缀。访问地址前缀应满足以下规则：由小写字母、数字和中划线（-）组成。至少包含 8 个字符，总长度（含后缀）不得超过 63 个字符。以小写字母开头，以小写字母或数字结尾。",
+          "type": "string"
+        },
+        "DomainVisibilitySetting": {
+          "description": "私网地址类型。取值：LocalDomain：本地域域名。CrossRegionDomain：可跨地域访问域名。",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "EIP 的 ID，仅对 Public 地址有效。",
+          "type": "string"
+        },
+        "IPAddress": {
+          "description": "IP 地址。",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "网络地址类型，取值为：Private：私网连接地址。Public：公网连接地址。Inner：公共服务区地址。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口号。",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "子网 ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReadOnlyNodeWeight": {
+      "description": "只读节点权重。",
+      "properties": {
+        "NodeId": {
+          "description": "只读节点需要传入 NodeId。",
+          "type": "string"
+        },
+        "NodeType": {
+          "description": "节点类型。取值：Primary：主节点。ReadOnly：只读节点。",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "节点的读权重，以 100 递增，最大值为 40000。说明权重不可全部设置为 0。",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "连接终端是位于数据库和应用程序之间的网络代理服务，用于代理应用程序访问数据库时的所有请求，具有高可用、高性能、可运维、简单易用等特点，支持读写分离和负载均衡等高级功能。云数据库 PostgreSQL 版提供了默认终端和自定义只读终端两种类型。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:CreateDBEndpoint",
+        "rds_postgresql:DescribeDBInstanceDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:DeleteDBEndpoint",
+        "rds_postgresql:DescribeDBInstanceDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:ModifyDBEndpointName",
+        "rds_postgresql:ModifyDBEndpointReadWeight",
+        "rds_postgresql:ModifyDBEndpointReadWriteFlag",
+        "rds_postgresql:ModifyDBEndpointReadWriteDelayThreshold",
+        "rds_postgresql:ModifyDBEndpointProxyConfig",
+        "rds_postgresql:ModifyDBEndpointAddress",
+        "rds_postgresql:ModifyDBEndpointDNS"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/EndpointId"
+  ],
+  "properties": {
+    "Addresses": {
+      "description": "地址列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Address"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AutoAddNewNodes": {
+      "description": "当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：Enable：自动加入。Disable：不自动加入（默认）。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "地址描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EnableReadOnly": {
+      "description": "是否已开启全局只读。Enable：开启。Disable：未开启。",
+      "type": "string"
+    },
+    "EnableReadWriteSplitting": {
+      "description": "是否已开启读写分离，取值：Enable：开启。Disable：未开启。",
+      "type": "string"
+    },
+    "EndpointId": {
+      "description": "实例连接终端 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "EndpointName": {
+      "description": "实例连接终端名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "EndpointType": {
+      "description": "终端类型：Cluster：默认终端（默认创建）。Custom：自定义终端。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "type": "string"
+    },
+    "Nodes": {
+      "description": "连接终端配置的节点列表。说明当 EndpointType 为 Custom 时必选。主节点无需传节点 ID，传入 Primary 字符串即可。",
+      "type": "string"
+    },
+    "ReadOnlyNodeDistributionType": {
+      "description": "只读权重分配模式。取值：Default：标准权重分配（默认值）。Custom：自定义权重分配。",
+      "type": "string"
+    },
+    "ReadOnlyNodeMaxDelayTime": {
+      "description": "只读节点的最大延迟阈值，当只读节点延迟时间超过该值时，读取流量不发往该节点，单位：秒。取值：0~3600。默认值：30。说明支持对开通了读写分离的默认终端设置此参数。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ReadOnlyNodeWeights": {
+      "description": "连接终端配置的节点列表及对应的只读权重。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ReadOnlyNodeWeight"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ReadWriteMode": {
+      "description": "读写模式：ReadWrite：读写。ReadOnly：只读。",
+      "type": "string"
+    },
+    "ReadWriteProxyConnection": {
+      "description": "终端开启读写分离后，为终端设置的代理连接数。代理连接数的取值下限为 20。代理连接数的取值上限取决于实例主节点的规格，不同规格支持的代理连接数上限不同，详细信息请参见产品规格。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "WriteNodeHaltWriting": {
+      "description": "终端是否将写请求发送给写节点（目前仅主节点为写节点）。取值：true：是。默认值。false：否。",
+      "type": "boolean"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Addresses/*/CrossRegionDomain",
+    "/properties/Addresses/*/Domain",
+    "/properties/Addresses/*/DomainVisibilitySetting",
+    "/properties/Addresses/*/EipId",
+    "/properties/Addresses/*/IPAddress",
+    "/properties/Addresses/*/NetworkType",
+    "/properties/Addresses/*/SubnetId",
+    "/properties/AutoAddNewNodes",
+    "/properties/Description",
+    "/properties/EnableReadOnly",
+    "/properties/EndpointId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::DBEndpoint",
+  "writeOnlyProperties": [
+    "/properties/Nodes",
+    "/properties/Addresses/*/DomainPrefix"
+  ]
+}

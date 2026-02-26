@@ -1,0 +1,170 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TransitRouterId",
+    "/properties/VpnConnectionId",
+    "/properties/TransitRouterRouteTableId",
+    "/properties/ZoneId"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "通过在VPN连接的IPsec连接和中转路由器之间建立连接，可以实现VPN连通的网络与中转路由器的私网互通。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TransitRouterId",
+      "/properties/TransitRouterAttachmentId",
+      "/properties/VpnConnectionId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ],
+    "required": [
+      "/properties/TransitRouterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:CreateTransitRouterVpnAttachment",
+        "transitrouter:DescribeTransitRouterVpnAttachments"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DeleteTransitRouterVpnAttachment",
+        "transitrouter:DescribeTransitRouterVpnAttachments"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterVpnAttachments"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterVpnAttachments"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transitrouter:ModifyTransitRouterVpnAttachmentAttributes",
+        "transitrouter:DescribeTransitRouterVpnAttachments",
+        "transitrouter:UntagResources",
+        "transitrouter:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterId",
+    "/properties/TransitRouterAttachmentId"
+  ],
+  "properties": {
+    "AutoPublishRouteEnabled": {
+      "description": "是否自动同步TR路由到网络实例路由表中。",
+      "type": "boolean"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "网络实例连接的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "HealthCheckRevokeRouteEnabled": {
+      "description": "是否开启健康检查收敛路由功能。true：是。仅当IPsec连接开启健康检查功能时生效，且只支持收敛静态路由，不支持收敛BGP路由。false：否。",
+      "type": "boolean"
+    },
+    "Ipv6Enabled": {
+      "description": "是否开启IPv6功能。",
+      "type": "boolean"
+    },
+    "Status": {
+      "description": "网络实例连接的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TransitRouterAttachmentId": {
+      "description": "网络实例连接的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterAttachmentName": {
+      "description": "网络实例连接的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为网络实例连接的ID。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "TransitRouterId": {
+      "description": "中转路由器实例的ID。",
+      "type": "string"
+    },
+    "TransitRouterRouteTableId": {
+      "description": "关联的TR路由表ID。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpnConnectionId": {
+      "description": "IPsec连接的ID。",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "IPsec连接所属可用区的ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TransitRouterAttachmentId",
+    "/properties/AutoPublishRouteEnabled",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/Status",
+    "/properties/Ipv6Enabled"
+  ],
+  "required": [
+    "TransitRouterId",
+    "VpnConnectionId",
+    "ZoneId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TransitRouter::VpnAttachment",
+  "writeOnlyProperties": [
+    "/properties/TransitRouterRouteTableId"
+  ]
+}

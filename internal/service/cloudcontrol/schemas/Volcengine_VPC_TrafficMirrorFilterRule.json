@@ -1,0 +1,134 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TrafficMirrorFilterId",
+    "/properties/TrafficDirection"
+  ],
+  "description": "筛选条件由筛选规则组成，分为入向筛选规则和出向筛选规则。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TrafficMirrorFilterId"
+    ],
+    "required": [
+      "/properties/TrafficMirrorFilterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateTrafficMirrorFilterRule",
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteTrafficMirrorFilterRule",
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyTrafficMirrorFilterRuleAttributes",
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TrafficMirrorFilterId",
+    "/properties/TrafficMirrorFilterRuleId"
+  ],
+  "properties": {
+    "Description": {
+      "description": "筛选规则的描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DestinationCidrBlock": {
+      "description": "目的网段。",
+      "type": "string"
+    },
+    "DestinationPortRange": {
+      "description": "流量目的端口范围。当Protocol传入all或icmp时，无需传入本参数，默认取值-1/-1，表示不限制端口。当Protocol传入tcp或udp时，本参数为必选，取值范围1～65535，使用正斜线（/）隔开起始端口和终止端口，如1/50、80/80。",
+      "type": "string"
+    },
+    "Policy": {
+      "description": "流量采集策略。accept：允许。即当镜像源的流量匹配该规则时，复制该流量至镜像目标进行监控分析。reject：拒绝。即当镜像源的流量匹配该规则时，不复制该流量，拒绝对该流量进行监控分析。",
+      "enum": [
+        "accept",
+        "reject"
+      ],
+      "type": "string"
+    },
+    "Priority": {
+      "description": "筛选规则的优先级，范围为1-1000。数值越小，优先级越高。默认为1，1为最高优先级。同一筛选条件同一方向的优先级唯一。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "Protocol": {
+      "description": "流量的协议。取值如下：all：含TCP、UDP、ICMP协议。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。",
+      "enum": [
+        "all",
+        "tcp",
+        "udp",
+        "icmp"
+      ],
+      "type": "string"
+    },
+    "SourceCidrBlock": {
+      "description": "流量源网段。",
+      "type": "string"
+    },
+    "SourcePortRange": {
+      "description": "流量源端口范围。当Protocol传入all或icmp时，无需传入本参数，默认取值-1/-1，表示不限制端口。当Protocol传入tcp或udp时，本参数为必选，取值范围1～65535，使用正斜线（/）隔开起始端口和终止端口，如1/50、80/80。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "筛选规则的状态。Available：可用。Deleting：删除中。Creating：创建中。Pending：修改中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TrafficDirection": {
+      "description": "流量的方向。取值如下：ingress：入向规则。egress：出向规则。",
+      "enum": [
+        "ingress",
+        "egress"
+      ],
+      "type": "string"
+    },
+    "TrafficMirrorFilterId": {
+      "description": "筛选条件的ID。",
+      "type": "string"
+    },
+    "TrafficMirrorFilterRuleId": {
+      "description": "筛选规则的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TrafficMirrorFilterRuleId",
+    "/properties/Status"
+  ],
+  "required": [
+    "DestinationCidrBlock",
+    "Policy",
+    "Protocol",
+    "SourceCidrBlock",
+    "TrafficDirection",
+    "TrafficMirrorFilterId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VPC::TrafficMirrorFilterRule"
+}

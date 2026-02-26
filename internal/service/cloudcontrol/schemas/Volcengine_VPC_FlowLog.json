@@ -1,0 +1,234 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/LogProjectName",
+    "/properties/LogTopicName",
+    "/properties/ProjectName",
+    "/properties/ResourceId",
+    "/properties/ResourceType",
+    "/properties/TrafficType"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "流日志对网卡出入流量的日志数据按需聚合处理后，投递至 日志服务 存储和检索分析，您可以根据流日志的分析监控网络流量、排查网络问题、优化网络架构。VPC流日志记录VPC网络流量的详细信息，用于网络监控、流量分析和故障排查。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AggregationInterval",
+      "/properties/Description",
+      "/properties/FlowLogId",
+      "/properties/FlowLogName",
+      "/properties/LogProjectId",
+      "/properties/LogTopicId",
+      "/properties/ProjectName",
+      "/properties/ResourceId",
+      "/properties/ResourceType",
+      "/properties/Status",
+      "/properties/TrafficType",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateFlowLog",
+        "vpc:DescribeFlowLogs"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteFlowLog",
+        "vpc:DescribeFlowLogs"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeFlowLogs"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeFlowLogs"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyFlowLogAttribute",
+        "vpc:TagResources",
+        "vpc:UntagResources",
+        "vpc:ActiveFlowLog",
+        "vpc:DeactiveFlowLog",
+        "vpc:DescribeFlowLogs"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FlowLogId"
+  ],
+  "properties": {
+    "AggregationInterval": {
+      "description": "流日志的采样间隔。取值如下。1：1分钟。5：5分钟。10（默认值）：10分钟。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "流日志是否被锁定。Normal: 正常。FinancialLocked: 被锁定。",
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "流日志的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "流日志的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+      "maxLength": 255,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "EnableIndex": {
+      "description": "是否自动配置索引。索引用于检索分析数据，流日志在检索分析之前，必须先配置索引。true：是。false（默认值）：否。",
+      "type": "boolean"
+    },
+    "FlowLogId": {
+      "description": "流日志的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "FlowLogName": {
+      "description": "流日志的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为流日志实例的ID。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "LockReason": {
+      "description": "流日志被锁定的原因。financial: 因欠费被锁定。unlock：欠费关停后充值恢复过程中。空值 : 没有被锁定。",
+      "type": "string"
+    },
+    "LogProjectId": {
+      "description": "流日志项目的ID。",
+      "type": "string"
+    },
+    "LogProjectName": {
+      "description": "流日志项目的名称。名称只能由小写字母、数字和连字符（-）组成。必须以小写字母或者数字开头和结尾。名称的长度范围为 3~63 个字符。",
+      "maxLength": 63,
+      "minLength": 3,
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "LogTopicId": {
+      "description": "流日志主题的ID。",
+      "type": "string"
+    },
+    "LogTopicName": {
+      "description": "流日志项目的名称。名称只能由小写字母、数字和连字符（-）组成。必须以小写字母或者数字开头和结尾。名称的长度范围为 3~63 个字符。",
+      "maxLength": 63,
+      "minLength": 3,
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "流流日志所属项目的名称。",
+      "type": "string"
+    },
+    "ResourceId": {
+      "description": "要捕获流量的资源ID。",
+      "type": "string"
+    },
+    "ResourceType": {
+      "description": "要采集流量的资源类型，取值如下：vpc：私有网络。subnet：子网。eni：网卡。",
+      "enum": [
+        "vpc",
+        "subnet",
+        "eni"
+      ],
+      "type": "string"
+    },
+    "Status": {
+      "description": "流日志的状态。取值如下：Active：启动状态。Pending：正在操作中。Inactive：未启动状态。Creating：正在创建中。Deleting：正在删除中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "流日志的标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TrafficType": {
+      "description": "采集的流量类型。取值如下：All：全部流量。Allow：网络ACL和安全组允许的流量。Drop：网络ACL和安全组拒绝的流量。",
+      "enum": [
+        "All",
+        "Allow",
+        "Drop"
+      ],
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "description": "更新流日志的时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "流日志的VPC的ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/FlowLogId",
+    "/properties/EnableIndex",
+    "/properties/LogProjectId",
+    "/properties/LogTopicId",
+    "/properties/BusinessStatus",
+    "/properties/LockReason",
+    "/properties/VpcId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "required": [
+    "AggregationInterval",
+    "FlowLogName",
+    "LogProjectName",
+    "LogTopicName",
+    "ResourceId",
+    "ResourceType",
+    "TrafficType"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::FlowLog",
+  "writeOnlyProperties": [
+    "/properties/LogProjectName",
+    "/properties/LogTopicName"
+  ]
+}

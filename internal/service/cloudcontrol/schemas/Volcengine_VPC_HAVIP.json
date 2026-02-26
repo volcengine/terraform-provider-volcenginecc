@@ -1,0 +1,194 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/SubnetId",
+    "/properties/IpAddress"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "高可用虚拟IP是一种可独立持有，可根据实际业务需要随时创建或删除的私网IP资源。在主备集群场景下，高可用虚拟IP通常与高可用软件（如Keepalived、Window Server Failover Cluster）搭配使用，搭建高可用主备服务。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/HaVipId",
+      "/properties/HaVipName",
+      "/properties/IpAddress",
+      "/properties/ProjectName",
+      "/properties/Status",
+      "/properties/SubnetId",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateHaVip",
+        "vpc:DescribeHaVips",
+        "vpc:AssociateEipAddress",
+        "vpc:AssociateHaVip"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteHaVip",
+        "vpc:DisassociateHaVip",
+        "vpc:DisassociateEipAddress",
+        "vpc:DescribeHaVips"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeHaVips"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeHaVips"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyHaVipAttributes",
+        "vpc:DisassociateHaVip",
+        "vpc:AssociateHaVip",
+        "vpc:DisassociateEipAddress",
+        "vpc:AssociateEipAddress",
+        "vpc:UntagResources",
+        "vpc:TagResources",
+        "vpc:DescribeHaVips"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/HaVipId"
+  ],
+  "properties": {
+    "AssociatedEipAddress": {
+      "description": "HAVIP绑定的公网IP的IP地址。",
+      "type": "string"
+    },
+    "AssociatedEipId": {
+      "description": "HAVIP绑定的公网IP的ID。",
+      "type": "string"
+    },
+    "AssociatedInstanceIds": {
+      "description": "绑定HAVIP的实例ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AssociatedInstanceType": {
+      "description": "绑定HAVIP的实例类型。EcsInstance：云服务器实例。NetworkInterface：弹性网卡。",
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "HAVIP的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "HAVIP的描述。长度限制为0～255个字符。",
+      "maxLength": 255,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "HaVipId": {
+      "description": "HAVIP的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "HaVipName": {
+      "description": "HAVIP的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制在0～128字符之间。",
+      "maxLength": 128,
+      "minLength": 0,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "IpAddress": {
+      "description": "HAVIP的IP地址。",
+      "type": "string"
+    },
+    "MasterInstanceId": {
+      "description": "与HAVIP绑定的主实例的ID。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "HAVIP的项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "HAVIP的状态。Available：可用。Creating：创建中。InUse：使用中。Deleting：删除中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "HAVIP所属的子网 ID。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "HAVIP所属标签。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedAt": {
+      "description": "HAVIP最近一次的修改时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "HAVIP所属的VPC ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status",
+    "/properties/HaVipId",
+    "/properties/VpcId",
+    "/properties/AssociatedEipAddress",
+    "/properties/MasterInstanceId",
+    "/properties/ProjectName"
+  ],
+  "required": [
+    "SubnetId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::HAVIP"
+}

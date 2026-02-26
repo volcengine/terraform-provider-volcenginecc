@@ -1,0 +1,253 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/EipId"
+  ],
+  "definitions": {
+    "ChargeDetail": {
+      "properties": {
+        "AutoRenew": {
+          "description": "包年包月实例到期后是否自动续费。",
+          "type": "boolean"
+        },
+        "ChargeEndTime": {
+          "description": "实例的结束计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        },
+        "ChargeExpireTime": {
+          "description": "包年包月实例的到期时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        },
+        "ChargeStartTime": {
+          "description": "实例的开始计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        },
+        "ChargeStatus": {
+          "description": "实例的计费状态。包括：Normal：正常，Overdue：按量计费欠费，Expired：包年包月到期。",
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "实例的计费类型。支持的类型包括：PostPaid ：按量付费，PrePaid：包年包月。",
+          "type": "string"
+        },
+        "OverdueReclaimTime": {
+          "description": "实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        },
+        "OverdueTime": {
+          "description": "实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Endpoint": {
+      "properties": {
+        "EndpointType": {
+          "description": "实例的接入点类型。RabbitMQ实例提供的接入点类型包括：WEB：Web UI 接入点，AMQP0_9_1：AMQP 接入点，MQTT：MQTT接入点，WEB_MQTT：WEB ，MQTT 接入点，STOMP：STOMP 接入点。",
+          "type": "string"
+        },
+        "InternalEndpoint": {
+          "description": "实例的私网访问域名。",
+          "type": "string"
+        },
+        "InternalIpEndpoint": {
+          "description": "公共服务区 IP 接入点。",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "接入点的网络类型。PrivateNetwork 表示私有网络 VPC。",
+          "type": "string"
+        },
+        "PublicEndpoint": {
+          "description": "实例公网访问域名。仅在开启公网访问之后显示。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "标签的键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签的值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "消息队列 RabbitMQ版支持开启公网访问，开启后，您可以通过公网访问 RabbitMQ 实例。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "RabbitMQ:CreatePublicAddress",
+        "RabbitMQ:DescribeInstanceDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "RabbitMQ:DeletePublicAddress",
+        "RabbitMQ:DescribeInstanceDetail"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "RabbitMQ:DescribeInstanceDetail"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "创建实例的主账号ID。",
+      "type": "string"
+    },
+    "ApplyPrivateDNSToPublic": {
+      "description": "是否已开启公网解析功能。true：已开启, false：已关闭。",
+      "type": "boolean"
+    },
+    "ArchType": {
+      "description": "实例的类型，即集群版或单机版。",
+      "type": "string"
+    },
+    "ChargeDetail": {
+      "$ref": "#/definitions/ChargeDetail",
+      "description": "实例的计费方式等计费信息。",
+      "type": "object"
+    },
+    "ComputeSpec": {
+      "description": "RabbitMQ实例的计算规格。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "实例的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "EipId": {
+      "description": "EIP的ID。",
+      "type": "string"
+    },
+    "Endpoints": {
+      "description": "实例的连接信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Endpoint"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceDescription": {
+      "description": "实例的简单描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "RabbitMQ 实例 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "RabbitMQ 实例名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceStatus": {
+      "description": "实例状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "IsEncrypted": {
+      "description": "是否开启了云盘加密。",
+      "type": "boolean"
+    },
+    "ProjectName": {
+      "description": "实例所属的IAM项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "StorageSpace": {
+      "description": "实例总存储空间。单位为 GiB。",
+      "type": "integer"
+    },
+    "SubnetId": {
+      "description": "VPC的子网ID。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "实例绑定的标签。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UsedStorageSpace": {
+      "description": "实例已用存储空间。单位为 GiB。",
+      "type": "integer"
+    },
+    "UserName": {
+      "description": "RabbitMQ WebUI管理员账号名。",
+      "type": "string"
+    },
+    "Version": {
+      "description": "支持的 RabbitMQ 版本。当前支持的版本包括：3.8.18：RabbitMQ 3.8.18 版本。",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "私有网络（VPC）ID。",
+      "type": "string"
+    },
+    "ZoneDescription": {
+      "description": "可用区的描述信息。",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "实例所在的可用区 ID。对于跨 AZ 的高可用实例，此处会返回多个可用区 ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/InstanceName",
+    "/properties/StorageSpace",
+    "/properties/ProjectName",
+    "/properties/VpcId",
+    "/properties/SubnetId",
+    "/properties/UserName",
+    "/properties/Version",
+    "/properties/ZoneId",
+    "/properties/ComputeSpec",
+    "/properties/InstanceDescription",
+    "/properties/InstanceStatus",
+    "/properties/UsedStorageSpace",
+    "/properties/ZoneDescription",
+    "/properties/ApplyPrivateDNSToPublic",
+    "/properties/ChargeDetail",
+    "/properties/IsEncrypted",
+    "/properties/AccountId",
+    "/properties/CreatedTime",
+    "/properties/ArchType",
+    "/properties/Endpoints",
+    "/properties/Tags"
+  ],
+  "required": [
+    "InstanceId",
+    "EipId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RabbitMQ::PublicAddress"
+}

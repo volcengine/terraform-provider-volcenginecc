@@ -4,6 +4,44 @@
     "/properties/UserName"
   ],
   "definitions": {
+    "AccessKey": {
+      "description": "子用户的访问密钥。",
+      "properties": {
+        "AccessKeyId": {
+          "description": "访问密钥ID。",
+          "type": "string"
+        },
+        "CreateDate": {
+          "description": "访问密钥创建时间。",
+          "type": "string"
+        },
+        "Region": {
+          "description": "最近一次使用的服务区域。",
+          "type": "string"
+        },
+        "RequestTime": {
+          "description": "访问密钥最近一次使用时间。",
+          "type": "string"
+        },
+        "Service": {
+          "description": "最近一次使用的服务名称。",
+          "type": "string"
+        },
+        "Status": {
+          "description": "访问密钥状态。Active代表启用，Inactive代表禁用。",
+          "type": "string"
+        },
+        "UpdateDate": {
+          "description": "访问密钥更新时间。",
+          "type": "string"
+        },
+        "UserName": {
+          "description": "访问密钥Secret。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "LoginProfile": {
       "description": "子用户的登录配置。",
       "properties": {
@@ -144,13 +182,16 @@
         "iam:SetSecurityConfig",
         "iam:GetUser",
         "iam:GetLoginProfile",
-        "iam:UpdateLoginProfile"
+        "iam:UpdateLoginProfile",
+        "iam:ListAccessKeys",
+        "iam:GetAccessKeyLastUsed"
       ]
     },
     "delete": {
       "permissions": [
         "iam:DeleteUser",
-        "iam:GetUser"
+        "iam:GetUser",
+        "iam:ListAccessKeys"
       ]
     },
     "list": {
@@ -164,7 +205,9 @@
         "iam:ListAttachedUserPolicies",
         "iam:GetUser",
         "iam:GetLoginProfile",
-        "iam:GetSecurityConfig"
+        "iam:GetSecurityConfig",
+        "iam:ListAccessKeys",
+        "iam:GetAccessKeyLastUsed"
       ]
     },
     "update": {
@@ -182,7 +225,9 @@
         "iam:GetLoginProfile",
         "iam:UpdateLoginProfile",
         "iam:GetSecurityConfig",
-        "iam:SetSecurityConfig"
+        "iam:SetSecurityConfig",
+        "iam:ListAccessKeys",
+        "iam:GetAccessKeyLastUsed"
       ]
     }
   },
@@ -190,6 +235,15 @@
     "/properties/UserName"
   ],
   "properties": {
+    "AccessKey": {
+      "description": "子用户的访问密钥。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AccessKey"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
     "AccountId": {
       "description": "子用户归属的主账号。",
       "type": "number"
@@ -213,6 +267,10 @@
       "description": "子用户对应的电子邮件地址。",
       "type": "string"
     },
+    "EmailIsVerify": {
+      "description": "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
+      "type": "boolean"
+    },
     "Groups": {
       "description": "子用户归属的用户组。",
       "insertionOrder": false,
@@ -230,6 +288,10 @@
       "description": "子用户对应的手机号。",
       "maxLength": 20,
       "type": "string"
+    },
+    "MobilePhoneIsVerify": {
+      "description": "子用户手机号是否已验证。true代表已验证，false代表未验证。",
+      "type": "boolean"
     },
     "Policies": {
       "description": "子用户对应的权限策略。",
@@ -283,7 +345,9 @@
     "/properties/UserId",
     "/properties/CreateDate",
     "/properties/UpdateDate",
-    "/properties/SecurityConfig/SafeAuthClose"
+    "/properties/SecurityConfig/SafeAuthClose",
+    "/properties/SecurityConfig/SafeAuthExemptDuration",
+    "/properties/AccessKey"
   ],
   "required": [
     "UserName"

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rdspostgresql_db_endpoint.example "instance_id|endpoint_id"

@@ -27,14 +27,14 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例中访问日志的信息",
+		//	  "description": "负载均衡实例中访问日志的信息。",
 		//	  "properties": {
 		//	    "BucketName": {
-		//	      "description": "存储七层访问日志的对象存储桶的名称",
+		//	      "description": "存储七层访问日志的对象存储桶的名称。",
 		//	      "type": "string"
 		//	    },
 		//	    "DeliveryType": {
-		//	      "description": "日志投递类型",
+		//	      "description": "日志投递类型。取值如下：tos（默认值）: 将日志投递至对象存储服务TOS。tls：将日志投递至日志服务TLS。",
 		//	      "enum": [
 		//	        "tos",
 		//	        "tls"
@@ -42,15 +42,15 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
-		//	      "description": "是否开启访问日志（七层）投递至对象存储TOS的功能",
+		//	      "description": "是否开启访问日志（七层）投递至对象存储TOS的功能。",
 		//	      "type": "boolean"
 		//	    },
 		//	    "TlsProjectId": {
-		//	      "description": "日志项目",
+		//	      "description": "日志项目。",
 		//	      "type": "string"
 		//	    },
 		//	    "TlsTopicId": {
-		//	      "description": "日志主题",
+		//	      "description": "日志主题。",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -60,60 +60,60 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BucketName
 				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "存储七层访问日志的对象存储桶的名称",
+					Description: "存储七层访问日志的对象存储桶的名称。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DeliveryType
 				"delivery_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "日志投递类型",
+					Description: "日志投递类型。取值如下：tos（默认值）: 将日志投递至对象存储服务TOS。tls：将日志投递至日志服务TLS。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启访问日志（七层）投递至对象存储TOS的功能",
+					Description: "是否开启访问日志（七层）投递至对象存储TOS的功能。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TlsProjectId
 				"tls_project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "日志项目",
+					Description: "日志项目。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TlsTopicId
 				"tls_topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "日志主题",
+					Description: "日志主题。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "负载均衡实例中访问日志的信息",
+			Description: "负载均衡实例中访问日志的信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例所属的账号ID",
+		//	  "description": "负载均衡实例所属的账号ID。",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例所属的账号ID",
+			Description: "负载均衡实例所属的账号ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AddressIpVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的IP地址类型",
+		//	  "description": "CLB实例的IP地址类型。取值如下：ipv4（默认值）：表示该CLB为IPv4类型，仅支持转发IPv4请求。DualStack：表示该CLB为双栈类型，支持转发IPv4和IPv6请求。仅参数Type取private时，才可传入DualStack。",
 		//	  "type": "string"
 		//	}
 		"address_ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的IP地址类型",
+			Description: "CLB实例的IP地址类型。取值如下：ipv4（默认值）：表示该CLB为IPv4类型，仅支持转发IPv4请求。DualStack：表示该CLB为双栈类型，支持转发IPv4和IPv6请求。仅参数Type取private时，才可传入DualStack。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowedPorts
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "允许的多个端口范围",
+		//	  "description": "允许的多个端口范围。",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -123,94 +123,105 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"allowed_ports": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "允许的多个端口范围",
+			Description: "允许的多个端口范围。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoRenewal
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "是否开通自动续费。true：是，默认自动续费为1个月。false（默认值）：否",
+		//	  "type": "boolean"
+		//	}
+		"auto_renewal": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "是否开通自动续费。true：是，默认自动续费为1个月。false（默认值）：否",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BusinessStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例是否被锁定",
+		//	  "description": "负载均衡实例是否被锁定。",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例是否被锁定",
+			Description: "负载均衡实例是否被锁定。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BypassSecurityGroupEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启bypass安全组功能",
+		//	  "description": "是否开启bypass安全组功能。",
 		//	  "type": "string"
 		//	}
 		"bypass_security_group_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启bypass安全组功能",
+			Description: "是否开启bypass安全组功能。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的创建时间",
+		//	  "description": "负载均衡实例的创建时间。",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的创建时间",
+			Description: "负载均衡实例的创建时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeletedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的预期回收时间",
+		//	  "description": "负载均衡实例的预期回收时间。",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的预期回收时间",
+			Description: "负载均衡实例的预期回收时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的描述",
+		//	  "description": "负载均衡实例的描述。",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的描述",
+			Description: "负载均衡实例的描述。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Eip
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的公网IP的信息",
+		//	  "description": "负载均衡实例的公网IP的信息。",
 		//	  "properties": {
 		//	    "Bandwidth": {
-		//	      "description": "带宽峰值",
+		//	      "description": "带宽峰值。",
 		//	      "type": "number"
 		//	    },
 		//	    "BandwidthPackageId": {
-		//	      "description": "共享带宽包ID",
+		//	      "description": "共享带宽包ID。",
 		//	      "type": "string"
 		//	    },
 		//	    "EipBillingType": {
-		//	      "description": "计费方式",
+		//	      "description": "计费方式。",
 		//	      "maximum": 3,
 		//	      "minimum": 1,
 		//	      "type": "number"
 		//	    },
 		//	    "ISP": {
-		//	      "description": "线路类型",
+		//	      "description": "线路类型。",
 		//	      "type": "string"
 		//	    },
 		//	    "SecurityProtectionInstanceId": {
-		//	      "description": "防护包ID",
+		//	      "description": "防护包ID。",
 		//	      "type": "number"
 		//	    },
 		//	    "SecurityProtectionTypes": {
-		//	      "description": "安全防护类型",
+		//	      "description": "安全防护类型。",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -225,84 +236,84 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bandwidth
 				"bandwidth": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "带宽峰值",
+					Description: "带宽峰值。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BandwidthPackageId
 				"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "共享带宽包ID",
+					Description: "共享带宽包ID。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EipBillingType
 				"eip_billing_type": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "计费方式",
+					Description: "计费方式。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
 				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "线路类型",
+					Description: "线路类型。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityProtectionInstanceId
 				"security_protection_instance_id": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "防护包ID",
+					Description: "防护包ID。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityProtectionTypes
 				"security_protection_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "安全防护类型",
+					Description: "安全防护类型。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "负载均衡实例的公网IP的信息",
+			Description: "负载均衡实例的公网IP的信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipAddress
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP地址",
+		//	  "description": "公网IP地址。",
 		//	  "type": "string"
 		//	}
 		"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP地址",
+			Description: "公网IP地址。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP ID",
+		//	  "description": "公网IP ID。",
 		//	  "type": "string"
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP ID",
+			Description: "公网IP ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的启用状态",
+		//	  "description": "负载均衡实例的启用状态。",
 		//	  "type": "boolean"
 		//	}
 		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的启用状态",
+			Description: "负载均衡实例的启用状态。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Eni
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的私网IPv4地址信息",
+		//	  "description": "负载均衡实例的私网IPv4地址信息。",
 		//	  "properties": {
 		//	    "EniAddress": {
-		//	      "description": "负载均衡实例的私网IP地址",
+		//	      "description": "负载均衡实例的私网IP地址。",
 		//	      "type": "string"
 		//	    },
 		//	    "EniID": {
-		//	      "description": "负载均衡实例占用的网卡ID",
+		//	      "description": "负载均衡实例占用的网卡ID。",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -312,52 +323,52 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EniAddress
 				"eni_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "负载均衡实例的私网IP地址",
+					Description: "负载均衡实例的私网IP地址。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EniID
 				"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "负载均衡实例占用的网卡ID",
+					Description: "负载均衡实例占用的网卡ID。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "负载均衡实例的私网IPv4地址信息",
+			Description: "负载均衡实例的私网IPv4地址信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EniAddressNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的私网IPv4地址数量。该参数和参数EniAddress不能同时传入，如果传入该参数，则无需传入EniAddress",
+		//	  "description": "负载均衡实例的私网IPv4地址数量。该参数和参数EniAddress不能同时传入，如果传入该参数，则无需传入EniAddress。",
 		//	  "type": "number"
 		//	}
 		"eni_address_num": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的私网IPv4地址数量。该参数和参数EniAddress不能同时传入，如果传入该参数，则无需传入EniAddress",
+			Description: "负载均衡实例的私网IPv4地址数量。该参数和参数EniAddress不能同时传入，如果传入该参数，则无需传入EniAddress。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EniIpv6Address
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的私网IPv6地址",
+		//	  "description": "负载均衡实例的私网IPv6地址。",
 		//	  "type": "string"
 		//	}
 		"eni_ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的私网IPv6地址",
+			Description: "负载均衡实例的私网IPv6地址。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enis
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的私网IPv4地址信息列表，创建时通过EniAddressNum指定数量",
+		//	  "description": "负载均衡实例的私网IPv4地址信息列表，创建时通过EniAddressNum指定数量。",
 		//	  "properties": {
 		//	    "EniAddress": {
-		//	      "description": "负载均衡实例的私网IP地址",
+		//	      "description": "负载均衡实例的私网IP地址。",
 		//	      "type": "string"
 		//	    },
 		//	    "EniID": {
-		//	      "description": "负载均衡实例占用的网卡ID",
+		//	      "description": "负载均衡实例占用的网卡ID。",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -367,55 +378,55 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EniAddress
 				"eni_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "负载均衡实例的私网IP地址",
+					Description: "负载均衡实例的私网IP地址。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EniID
 				"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "负载均衡实例占用的网卡ID",
+					Description: "负载均衡实例占用的网卡ID。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "负载均衡实例的私网IPv4地址信息列表，创建时通过EniAddressNum指定数量",
+			Description: "负载均衡实例的私网IPv4地址信息列表，创建时通过EniAddressNum指定数量。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExclusiveClusterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "独占集群Id",
+		//	  "description": "独占集群Id。",
 		//	  "type": "string"
 		//	}
 		"exclusive_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "独占集群Id",
+			Description: "独占集群Id。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例到期时间",
+		//	  "description": "负载均衡实例到期时间。",
 		//	  "type": "string"
 		//	}
 		"expired_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例到期时间",
+			Description: "负载均衡实例到期时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例中监听器的信息",
+		//	  "description": "负载均衡实例中监听器的信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "监听器信息",
+		//	    "description": "监听器信息。",
 		//	    "properties": {
 		//	      "ListenerId": {
-		//	        "description": "监听器的ID",
+		//	        "description": "监听器的ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerName": {
-		//	        "description": "监听器的名称",
+		//	        "description": "监听器的名称。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -433,199 +444,188 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ListenerId
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的ID",
+						Description: "监听器的ID。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerName
 					"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的名称",
+						Description: "监听器的名称。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "负载均衡实例中监听器的信息",
+			Description: "负载均衡实例中监听器的信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerBillingType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例计费方式",
+		//	  "description": "CLB实例计费方式。取值如下：1：包年包月。2（默认值）：按量计费-按规格计费。3：按量计费-按使用量计费。",
 		//	  "type": "number"
 		//	}
 		"load_balancer_billing_type": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例计费方式",
+			Description: "CLB实例计费方式。取值如下：1：包年包月。2（默认值）：按量计费-按规格计费。3：按量计费-按使用量计费。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例ID",
+		//	  "description": "负载均衡实例ID。",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例ID",
+			Description: "负载均衡实例ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的名称",
+		//	  "description": "负载均衡实例的名称。",
 		//	  "type": "string"
 		//	}
 		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的名称",
+			Description: "负载均衡实例的名称。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的规格",
+		//	  "description": "CLB实例的规格，不同规格提供的转发能力不同。small_1：小型I。small_2：小型II。medium_1：中型I。medium_2：中型II。large_1：大型I。large_2：大型II。",
 		//	  "type": "string"
 		//	}
 		"load_balancer_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的规格",
+			Description: "CLB实例的规格，不同规格提供的转发能力不同。small_1：小型I。small_2：小型II。medium_1：中型I。medium_2：中型II。large_1：大型I。large_2：大型II。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例被冻结的原因",
+		//	  "description": "负载均衡实例被冻结的原因。",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例被冻结的原因",
+			Description: "负载均衡实例被冻结的原因。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MasterZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的主可用区ID",
+		//	  "description": "负载均衡实例的主可用区ID。",
 		//	  "type": "string"
 		//	}
 		"master_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的主可用区ID",
+			Description: "负载均衡实例的主可用区ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModificationProtectionReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "设置修改保护状态的原因",
+		//	  "description": "设置修改保护状态的原因。仅参数ModificationProtectionStatus取ConsoleProtection时，本参数有效。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：半角句号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 80个字符。",
 		//	  "type": "string"
 		//	}
 		"modification_protection_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "设置修改保护状态的原因",
+			Description: "设置修改保护状态的原因。仅参数ModificationProtectionStatus取ConsoleProtection时，本参数有效。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：半角句号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 80个字符。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModificationProtectionStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例在控制台上修改保护的状态",
+		//	  "description": "CLB实例是否开启控制台上修改保护。开启后，禁止通过控制台修改实例或删除实例。取值如下：NonProtection：不开启。ConsoleProtection：开启。",
 		//	  "type": "string"
 		//	}
 		"modification_protection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例在控制台上修改保护的状态",
+			Description: "CLB实例是否开启控制台上修改保护。开启后，禁止通过控制台修改实例或删除实例。取值如下：NonProtection：不开启。ConsoleProtection：开启。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NewArch
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为新架构",
+		//	  "description": "是否为新架构。",
 		//	  "type": "boolean"
 		//	}
 		"new_arch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为新架构",
+			Description: "是否为新架构。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OrderId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "订单ID。仅在创建动作的参数LoadBalancerBillingType配置为1时，改参数有值",
+		//	  "description": "订单ID。仅在创建动作的参数LoadBalancerBillingType配置为1时，该参数有值。",
 		//	  "type": "string"
 		//	}
 		"order_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "订单ID。仅在创建动作的参数LoadBalancerBillingType配置为1时，改参数有值",
+			Description: "订单ID。仅在创建动作的参数LoadBalancerBillingType配置为1时，该参数有值。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的冻结时间",
+		//	  "description": "负载均衡实例的冻结时间。",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的冻结时间",
+			Description: "负载均衡实例的冻结时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Period
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月计费类型的时长数量",
+		//	  "description": "购买包年包月CLB实例的时长。默认为“1”。当PeriodUnit配置为Month时，取值范围为1～9，12，24和36。当PeriodUnit配置为Year时，取值范围为1～3。",
 		//	  "type": "number"
 		//	}
 		"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "包年包月计费类型的时长数量",
+			Description: "购买包年包月CLB实例的时长。默认为“1”。当PeriodUnit配置为Month时，取值范围为1～9，12，24和36。当PeriodUnit配置为Year时，取值范围为1～3。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeriodUnit
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月计费类型的时长单位",
+		//	  "description": "购买包年包月CLB实例的时长单位。仅LoadBalancerBillingType取1时，本参数有效。取值如下：Month (默认值)：月。Year：年",
 		//	  "type": "string"
 		//	}
 		"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "包年包月计费类型的时长单位",
+			Description: "购买包年包月CLB实例的时长单位。仅LoadBalancerBillingType取1时，本参数有效。取值如下：Month (默认值)：月。Year：年",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB实例所属项目的名称",
+		//	  "description": "CLB实例所属项目的名称。",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB实例所属项目的名称",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: RegionId
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "请求的Region",
-		//	  "type": "string"
-		//	}
-		"region_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "请求的Region",
+			Description: "CLB实例所属项目的名称。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroups
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例中后端服务器组的信息",
+		//	  "description": "负载均衡实例中后端服务器组的信息。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "监听器信息",
+		//	    "description": "服务器组信息。",
 		//	    "properties": {
 		//	      "ServerGroupId": {
-		//	        "description": "负载均衡实例中后端服务器组的ID",
+		//	        "description": "负载均衡实例中后端服务器组的ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "ServerGroupName": {
-		//	        "description": "负载均衡实例中后端服务器组的名称",
+		//	        "description": "负载均衡实例中后端服务器组的名称。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -643,46 +643,46 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ServerGroupId
 					"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡实例中后端服务器组的ID",
+						Description: "负载均衡实例中后端服务器组的ID。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ServerGroupName
 					"server_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡实例中后端服务器组的名称",
+						Description: "负载均衡实例中后端服务器组的名称。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "负载均衡实例中后端服务器组的信息",
+			Description: "负载均衡实例中后端服务器组的信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceManaged
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB实例是否为托管资源",
+		//	  "description": "CLB实例是否为托管资源。",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB实例是否为托管资源",
+			Description: "CLB实例是否为托管资源。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SlaveZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的备可用区ID",
+		//	  "description": "负载均衡实例的备可用区ID。",
 		//	  "type": "string"
 		//	}
 		"slave_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的备可用区ID",
+			Description: "负载均衡实例的备可用区ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例状态",
+		//	  "description": "负载均衡实例状态，Inactive：已停止。Active：运行中。Creating：创建中。Provisioning：创建中。Configuring：配置中。Deleting：删除中。CreateFailed：创建失败。",
 		//	  "enum": [
 		//	    "Provisioning",
 		//	    "Creating",
@@ -695,41 +695,40 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例状态",
+			Description: "负载均衡实例状态，Inactive：已停止。Active：运行中。Creating：创建中。Provisioning：创建中。Configuring：配置中。Deleting：删除中。CreateFailed：创建失败。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例所属VPC内的子网ID",
+		//	  "description": "负载均衡实例所属VPC内的子网ID。",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例所属VPC内的子网ID",
+			Description: "负载均衡实例所属VPC内的子网ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB实例标签",
+		//	  "description": "CLB实例标签。",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "资源标签",
+		//	    "description": "资源标签。",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键",
+		//	        "description": "标签键。",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值",
+		//	        "description": "标签值。",
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -741,72 +740,72 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键",
+						Description: "标签键。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值",
+						Description: "标签值。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "CLB实例标签",
+			Description: "CLB实例标签。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TimestampRemoveEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启 TCP Timestamp 清除功能",
+		//	  "description": "是否开启 TCP Timestamp 清除功能。",
 		//	  "type": "string"
 		//	}
 		"timestamp_remove_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 TCP Timestamp 清除功能",
+			Description: "是否开启 TCP Timestamp 清除功能。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的类型",
+		//	  "description": "CLB实例的类型。取值如下：public：公网类型。创建一个公网类型CLB实例，系统会分配一个公网IP地址，用于转发公网请求。private：私网类型。创建一个私网类型CLB实例，您需要为其绑定公网IP后，才能转发公网请求。",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的类型",
+			Description: "CLB实例的类型。取值如下：public：公网类型。创建一个公网类型CLB实例，系统会分配一个公网IP地址，用于转发公网请求。private：私网类型。创建一个私网类型CLB实例，您需要为其绑定公网IP后，才能转发公网请求。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的最近操作时间",
+		//	  "description": "负载均衡实例的最近操作时间。",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的最近操作时间",
+			Description: "负载均衡实例的最近操作时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例所属的VPC ID",
+		//	  "description": "负载均衡实例所属的VPC ID。",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例所属的VPC ID",
+			Description: "负载均衡实例所属的VPC ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例的可用区类型",
+		//	  "description": "负载均衡实例的可用区类型。",
 		//	  "type": "string"
 		//	}
 		"zone_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例的可用区类型",
+			Description: "负载均衡实例的可用区类型。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -830,6 +829,7 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"account_id":                      "AccountId",
 		"address_ip_version":              "AddressIpVersion",
 		"allowed_ports":                   "AllowedPorts",
+		"auto_renewal":                    "AutoRenewal",
 		"bandwidth":                       "Bandwidth",
 		"bandwidth_package_id":            "BandwidthPackageId",
 		"bucket_name":                     "BucketName",
@@ -871,7 +871,6 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"period":                          "Period",
 		"period_unit":                     "PeriodUnit",
 		"project_name":                    "ProjectName",
-		"region_id":                       "RegionId",
 		"security_protection_instance_id": "SecurityProtectionInstanceId",
 		"security_protection_types":       "SecurityProtectionTypes",
 		"server_group_id":                 "ServerGroupId",

@@ -3,6 +3,7 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
   support_ipv_4_gateway = true
   vpc_name              = "vpc-demo"
   description           = "VpcDemo Example"
+  enable_ipv_6          = false
   dns_servers = [
     "12.3.x.x"
   ]

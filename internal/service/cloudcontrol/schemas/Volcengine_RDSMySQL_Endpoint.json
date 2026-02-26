@@ -1,0 +1,300 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ConnectionMode",
+    "/properties/EndpointType",
+    "/properties/InstanceId"
+  ],
+  "definitions": {
+    "Address": {
+      "properties": {
+        "DNSVisibility": {
+          "description": "false：火山引擎私网解析（默认）。true：火山引擎私网以及公网解析。",
+          "type": "boolean"
+        },
+        "Domain": {
+          "description": "连接域名。",
+          "type": "string"
+        },
+        "DomainPrefix": {
+          "description": "连接地址前缀。连接地址的前缀需满足以下规则：以小写字母开头，以小写字母或数字结尾。由小写字母、数字和中划线（-）中的至少两种组成。连接地址前缀应至少包含 8 个字符，连接地址总长度（前缀+后缀）不得超过 63个字符。",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "EIP 的 ID，仅对 Public 地址有效。",
+          "type": "string"
+        },
+        "EipLocked": {
+          "description": "连接终端使用的 EIP 是否因欠费关停。取值：true：是。false：否。",
+          "type": "boolean"
+        },
+        "IPAddress": {
+          "description": "IP 地址。",
+          "type": "string"
+        },
+        "InternetProtocol": {
+          "description": "IP 协议版本。取值为 IPv4。",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "网络地址类型，取值为：Private：私网地址。Public：公网地址。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口。",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "子网 ID，仅对 Private 地址有效。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomRouteStrategy": {
+      "description": "连接终端的自定义路由转发规则。",
+      "properties": {
+        "KeywordRouteStrategy": {
+          "description": "自定义路由策略列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeywordRouteStrategy"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "KeywordRouteStrategy": {
+      "description": "自定义路由策略。",
+      "properties": {
+        "NodeType": {
+          "description": "SQL 转发规则的转发目标。取值：Primary：主节点。Secondary：备节点。ReadOnly：只读节点。说明如实例为双节点实例，可选择主节点或只读节点。如实例为多节点实例，可选择主节点或备节点。",
+          "type": "string"
+        },
+        "SQLKeyword": {
+          "description": "转发规则的关键字。SQL 关键字的设置规则如下：单个规则最多可包含 20 个关键字。最大长度为 64 个字符，可包含英文字母、数字、下划线 _、@、#、:= 和中文字符。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReadOnlyNodeWeight": {
+      "description": "自定义读权重分配策略。",
+      "properties": {
+        "NodeId": {
+          "description": "只读节点需要传入 NodeId，主节点无需传入。",
+          "type": "string"
+        },
+        "NodeType": {
+          "description": "节点类型。Primary：主节点。ReadOnly：只读节点。",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "节点的读权重，以 100 递增，最大值为 10000。说明权重不可全部设置为 0。",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "连接终端是云数据库 MySQL 版提供的位于数据库和应用程序之间的网络代理服务。根据连接终端的功能差异，连接终端可以分为代理终端和直连终端两种类型。通过代理终端的连接将经过代理，可使用代理相关的特性和功能，如读写分离、负载均衡、空闲连接回收和 Multi-Statements 等；通过直连终端的连接将直连到对应节点，不能使用代理相关特性。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_mysql:CreateDBEndpoint",
+        "rds_mysql:DescribeDBInstanceEndpoints",
+        "rds_mysql:DescribeDBInstanceAttribute"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_mysql:DeleteDBEndpoint",
+        "rds_mysql:DescribeDBInstanceEndpoints",
+        "rds_mysql:DescribeDBInstanceAttribute"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_mysql:DescribeDBInstanceEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_mysql:DescribeDBInstanceEndpoints"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_mysql:ModifyDBEndpoint",
+        "rds_mysql:ModifyDBEndpointAddress",
+        "rds_mysql:ModifyDBEndpointDNS",
+        "rds_mysql:DescribeDBInstanceEndpoints",
+        "rds_mysql:DescribeDBInstanceAttribute"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/EndpointId"
+  ],
+  "properties": {
+    "Addresses": {
+      "description": "终端节点地址列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Address"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AutoAddNewNodes": {
+      "description": "当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：true：自动加入。false：不自动加入（默认）。",
+      "type": "boolean"
+    },
+    "ConnectAllSlaveNodes": {
+      "description": "是否关联所有的备节点。取值：true：是。默认值。false：否。说明仅多节点实例的只读终端支持该配置。仅在实例有两个或更多备节点时才能关闭此功能。",
+      "type": "boolean"
+    },
+    "ConnectionInfoTags": {
+      "description": "连接终端标签。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ConnectionMode": {
+      "description": "连接终端类型。取值：Proxy：代理终端。Direct：直连终端。说明如实例的数据库代理功能已开启，可以取值为 Proxy 或 Direct。如实例的数据库代理功能未开启，仅可以取值为 Direct。可调用 DescribeDBInstanceDetail 接口查询实例数据库代理功能的开启状态。",
+      "type": "string"
+    },
+    "ConnectionPoolType": {
+      "description": "代理终端的连接池类型。取值：Transaction：事务级连接池。默认值。Direct：直连模式。说明单节点实例不支持该功能。",
+      "type": "string"
+    },
+    "CustomRouteStrategy": {
+      "$ref": "#/definitions/CustomRouteStrategy",
+      "description": "连接终端的 SQL 转发规则。",
+      "type": "object"
+    },
+    "Description": {
+      "description": "备注。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EnableConnectionPersistent": {
+      "description": "是否开启连接终端的连接保持功能。取值：true：是。false：否。说明仅代理终端支持该设置。",
+      "type": "boolean"
+    },
+    "EnableReadOnly": {
+      "description": "是否已开启全局只读，取值：Enable：开启。Disable：未开启。",
+      "type": "string"
+    },
+    "EndpointId": {
+      "description": "实例连接终端 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "EndpointName": {
+      "description": "实例连接终端名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "EndpointType": {
+      "description": "终端类型。取值为 Custom，自定义终端。",
+      "type": "string"
+    },
+    "IdleConnectionReclaim": {
+      "description": "空闲连接回收功能是否开启。true：开启。false：不开启。说明仅代理终端会返回该字段。",
+      "type": "boolean"
+    },
+    "ImplicitTransSplit": {
+      "description": "是否开启事务分离。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+      "type": "boolean"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "type": "string"
+    },
+    "MasterNodeRouting": {
+      "description": "是否开启主节点路由。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+      "type": "boolean"
+    },
+    "MasterProtectorTimeout": {
+      "description": "过载保护超时时间。取值范围为 60~7200 之间的整数，单位为秒。说明仅代理终端会返回该字段。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "MultiStatementsMode": {
+      "description": "代理终端的 Multi-Statements 模式。取值：Strict：Strict 模式。默认值。Loose：Loose 模式。",
+      "type": "string"
+    },
+    "Nodes": {
+      "description": "连接终端配置的节点 ID 列表。当 EndpointType 为 Custom 时必选。说明如需将主节点加入终端，不需填写主节点 ID，只需填写 Primary。多个节点 ID 之间用英文逗号（,）分隔。",
+      "type": "string"
+    },
+    "OverloadProtection": {
+      "description": "是否开启过载保护。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+      "type": "boolean"
+    },
+    "ReadOnlyNodeDistributionType": {
+      "description": "读权重分配模式。当开通读写分离设置为 true 时需要传入此参数。在 CreateDBEndpoint 和 ModifyDBEndpoint 接口中做请求参数时，取值范围如下：LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。在 DescribeDBInstanceDetail 接口中做返回参数时，取值范围如下：Default：按规格权重自动分配。Custom：自定义分配权重。RoundRobin：轮询调度。LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。",
+      "type": "string"
+    },
+    "ReadOnlyNodeMaxDelayTime": {
+      "description": "只读节点延迟阈值。取值范围为 1~3600，默认为 30，单位为秒。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ReadOnlyNodeWeights": {
+      "description": "连接终端配置的节点列表及对应的只读权重。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ReadOnlyNodeWeight"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ReadWriteMode": {
+      "description": "读写模式：ReadWrite：读写。ReadOnly：只读。",
+      "type": "string"
+    },
+    "ReadWriteSpliting": {
+      "description": "是否开启读写分离。取值：true：是。默认值。false：否。",
+      "type": "boolean"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Addresses/*/Domain",
+    "/properties/Addresses/*/EipId",
+    "/properties/Addresses/*/EipLocked",
+    "/properties/Addresses/*/IPAddress",
+    "/properties/Addresses/*/InternetProtocol",
+    "/properties/Addresses/*/NetworkType",
+    "/properties/Addresses/*/SubnetId",
+    "/properties/ConnectionInfoTags",
+    "/properties/CustomRouteStrategy",
+    "/properties/EnableReadOnly",
+    "/properties/EndpointId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSMySQL::Endpoint",
+  "writeOnlyProperties": [
+    "/properties/ConnectAllSlaveNodes",
+    "/properties/Nodes",
+    "/properties/Addresses/*/DomainPrefix"
+  ]
+}

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rabbitmq_public_address.example "instance_id"

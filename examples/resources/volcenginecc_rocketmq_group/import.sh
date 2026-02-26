@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rocketmq_group.example "instance_id|group_id"

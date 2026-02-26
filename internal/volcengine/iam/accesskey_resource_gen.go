@@ -8,10 +8,12 @@ package iam
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 )
@@ -33,21 +35,34 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "密钥ID（Access Key Id）。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: CreateDate
+		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥创建时间",
+		//	  "description": "密钥创建时间。时间格式为ISO8601。",
 		//	  "type": "string"
 		//	}
-		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥创建时间",
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "密钥创建时间。时间格式为ISO8601。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastLoginDate
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "最后登录时间。",
+		//	  "type": "string"
+		//	}
+		"last_login_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "最后登录时间。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -90,10 +105,12 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"secret_access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "私有密钥（Secret Access Key）。",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// SecretAccessKey is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Service
 		// Cloud Control resource type schema:
@@ -113,26 +130,36 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥状态 (active/inactive)",
+		//	  "description": "密钥状态。active代表启用状态，inactive代表禁用状态。",
+		//	  "enum": [
+		//	    "active",
+		//	    "inactive"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥状态 (active/inactive)",
+			Description: "密钥状态。active代表启用状态，inactive代表禁用状态。",
 			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"active",
+					"inactive",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: UpdateDate
+		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥更新时间",
+		//	  "description": "密钥更新时间。时间格式为ISO8601。",
 		//	  "type": "string"
 		//	}
-		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥更新时间",
+		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "密钥更新时间。时间格式为ISO8601。",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -142,11 +169,11 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户名",
+		//	  "description": "用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户名",
+			Description: "用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -166,7 +193,7 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "",
+		Description: "访问控制(Identity and Access Management，缩写为IAM)是火山引擎为客户提供的一套权限管理系统，用于控制不同身份对云资源的访问权限。",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -177,23 +204,29 @@ func accesskeyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_key_id":     "AccessKeyId",
-		"create_date":       "CreateDate",
+		"created_time":      "CreatedTime",
+		"last_login_date":   "LastLoginDate",
 		"region":            "Region",
 		"request_time":      "RequestTime",
 		"secret_access_key": "SecretAccessKey",
 		"service":           "Service",
 		"status":            "Status",
-		"update_date":       "UpdateDate",
+		"updated_time":      "UpdatedTime",
 		"user_name":         "UserName",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/SecretAccessKey",
+	})
+
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/CreateDate",
+		"/properties/AccessKeyId",
+		"/properties/CreatedTime",
 		"/properties/Region",
 		"/properties/RequestTime",
 		"/properties/Service",
-		"/properties/UpdateDate",
-		"/properties/SecretAccessKey",
+		"/properties/UpdatedTime",
+		"/properties/LastLoginDate",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

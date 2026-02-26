@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_privatezone_record.example "record_id"

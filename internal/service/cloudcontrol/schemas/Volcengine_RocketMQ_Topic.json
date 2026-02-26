@@ -1,0 +1,220 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/TopicName",
+    "/properties/MessageType",
+    "/properties/QueueNumber"
+  ],
+  "definitions": {
+    "AccessPolicy": {
+      "properties": {
+        "AccessKey": {
+          "description": "RocketMQ 密钥的 AccessKey。",
+          "type": "string"
+        },
+        "Authority": {
+          "description": "用户对于当前Topic的访问权限。ALL：拥有发布、订阅权限。PUB：拥有发布权限。SUB：拥有订阅权限。DENY：不具备发布或订阅权限。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GroupsInfo": {
+      "properties": {
+        "GroupId": {
+          "description": "消费组的 Group ID。",
+          "type": "string"
+        },
+        "MessageModel": {
+          "description": "消费模式。取值说明如下：Clustering：集群消费模式。Broadcasting：广播消费模式。",
+          "type": "string"
+        },
+        "SubString": {
+          "description": "订阅的规则，此字段直接透传消费组订阅此 Topic 时指定的字符串，一般为 * 或 TAG1 || TAG2。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "QueuesInfo": {
+      "properties": {
+        "EndOffset": {
+          "description": "当前队列的最大偏移量，即下一条消息的偏移量，当前最新消息的位置为 EndOffset - 1。",
+          "type": "integer"
+        },
+        "LastUpdateTimestamp": {
+          "description": "该队列最近一次消息写入的时间。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "MessageCount": {
+          "description": "当前队列队列内的消息个数。EndOffset 为下一条消息的偏移量，所以 MessageCount=EndOffset-StartOffset。",
+          "type": "integer"
+        },
+        "QueueId": {
+          "description": "队列的编号 ID。",
+          "type": "string"
+        },
+        "StartOffset": {
+          "description": "当前队列最早消息的偏移量。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "在RocketMQ 实例中，Topic 是消息发送与接收的基本单元，消息队列 RocketMQ版通过 Topic 对各类消息进行分类管理。消息的生产者将消息发送到 RocketMQ Topic 中，而消息的消费者则通过订阅该 RocketMQ Topic 来消费消息。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/TopicName",
+      "/properties/MessageType"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "RocketMQ:CreateTopic",
+        "RocketMQ:DescribeTopicDetail",
+        "RocketMQ:DescribeTopicAccessPolicies",
+        "RocketMQ:DescribeTopicQueue",
+        "RocketMQ:DescribeTopicGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "RocketMQ:DeleteTopic",
+        "RocketMQ:DescribeTopicDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "RocketMQ:DescribeTopics"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "RocketMQ:DescribeTopicDetail",
+        "RocketMQ:DescribeTopicAccessPolicies",
+        "RocketMQ:DescribeTopicQueue",
+        "RocketMQ:DescribeTopicGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "RocketMQ:ModifyTopicAccessPolicies",
+        "RocketMQ:ModifyTopicDescription",
+        "RocketMQ:DescribeTopicDetail",
+        "RocketMQ:DescribeTopicAccessPolicies",
+        "RocketMQ:DescribeTopicQueue",
+        "RocketMQ:DescribeTopicGroups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/TopicName"
+  ],
+  "properties": {
+    "AccessPolicies": {
+      "description": "每个 RocketMQ 密钥对于当前 Topic 的权限，支持批量设置权限。若未设置，每个密钥对于当前 Topic 维持密钥的默认权限。",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/AccessPolicy"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedTime": {
+      "description": "Topic 创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Topic 的描述信息，长度为 0~128 个字符。",
+      "maxLength": 128,
+      "semantic": "description",
+      "type": "string"
+    },
+    "GroupsInfos": {
+      "description": "消费者组信息列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/GroupsInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "实例名称。",
+      "type": "string"
+    },
+    "MessageType": {
+      "description": "消息类型。设置此参数表示根据指定的消息类型筛选 Topic 列表。取值说明如下：0：普通消息。1：事务消息。2：分区顺序消息。3：全局顺序消息。4：延时消息。",
+      "type": "integer"
+    },
+    "QueueNumber": {
+      "description": "设置当前 Topic 的队列数量，最大不可超过当前实例剩余可用队列数。每个实例规格的队列数量限制请参考产品规格。在 4.x 版本实例中创建 Topic 时，请参考以下说明设置队列数：全局顺序类型的 Topic 队列数默认为 1。其他类型 Topic 的队列数和计算规格有关，n3 及以下规格的队列数默认为 6，n3 以上规格的队列数默认是 broker 组数的两倍。队列数建议设置为计算节点数的倍数，否则可能造成不同 Broker 之间数据不均衡。例如规格 rocketmq.n3.x2.medium 的计算节点数为 3，队列数建议设置为 3 的倍数，即 3、6、9 等。在 5.x 版本实例中创建 Topic 时，请参考以下说明设置队列数：全局顺序类型的 Topic 队列数默认为 1。其他类型 Topic 的队列数默认是 broker 组数的两倍。非顺序场景性能不受队列个数影响，更多队列仅用于提升顺序消费并发性能。",
+      "type": "integer"
+    },
+    "QueuesInfos": {
+      "description": "队列信息列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/QueuesInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ReadAccessPolicies": {
+      "description": "每个 RocketMQ 密钥对于当前 Topic 的权限，读字段",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AccessPolicy"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceStatus": {
+      "description": "服务状态。Creating：创建中，Running：运行中，Deleting：删除中，Abnormal：异常，Updating：更新中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TopicName": {
+      "description": "Topic 的名称。命名规则如下：长度为 3~100 个字符。只能包含英文、数字、连字符（-）以及下划线（_）。Topic 名称中不可包含以下保留字符或特殊前缀。保留字符：RMQ_SYS_TRANS_OP_HALF_TOPIC、BenchmarkTest、TBW102、OFFSET_MOVED_EVENT、SELF_TEST_TOPIC、RMQ_SYS_TRANS_HALF_TOPIC、SCHEDULE_TOPIC_XXXX、RMQ_SYS_TRACE_TOPIC。特殊前缀：rocketmq-broker-、%RETRY%、rmq_sys_、%DLQ%。",
+      "maxLength": 100,
+      "minLength": 3,
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/GroupsInfos",
+    "/properties/QueuesInfos",
+    "/properties/CreatedTime",
+    "/properties/InstanceName",
+    "/properties/ServiceStatus",
+    "/properties/ReadAccessPolicies"
+  ],
+  "required": [
+    "InstanceId",
+    "MessageType",
+    "QueueNumber",
+    "TopicName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RocketMQ::Topic",
+  "writeOnlyProperties": [
+    "/properties/AccessPolicies"
+  ]
+}

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rdspostgresql_allow_list.example "allow_list_id"

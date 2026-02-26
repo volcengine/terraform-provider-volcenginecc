@@ -3,41 +3,66 @@
   "createOnlyProperties": [
     "/properties/UserName"
   ],
-  "description": "",
+  "description": "访问控制(Identity and Access Management，缩写为IAM)是火山引擎为客户提供的一套权限管理系统，用于控制不同身份对云资源的访问权限。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/UserName"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "iam:CreateAccessKey"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "iam:DeleteAccessKey"
-      ]
-    },
-    "list": {
-      "permissions": [
+        "iam:CreateAccessKey",
         "iam:ListAccessKeys",
         "iam:GetAccessKeyLastUsed"
       ]
     },
+    "delete": {
+      "permissions": [
+        "iam:DeleteAccessKey",
+        "iam:ListAccessKeys",
+        "iam:GetAccessKeyLastUsed"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListAccessKeys"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:ListAccessKeys",
+        "iam:GetAccessKeyLastUsed",
+        "iam:GetUser",
+        "iam:GetLoginProfile"
+      ]
+    },
     "update": {
       "permissions": [
-        "iam:UpdateAccessKey"
+        "iam:UpdateAccessKey",
+        "iam:ListAccessKeys",
+        "iam:GetAccessKeyLastUsed",
+        "iam:GetUser",
+        "iam:GetLoginProfile"
       ]
     }
   },
   "primaryIdentifier": [
-    "/properties/AccessKeyId",
-    "/properties/UserName"
+    "/properties/AccessKeyId"
   ],
   "properties": {
     "AccessKeyId": {
       "description": "密钥ID（Access Key Id）。",
+      "semantic": "resourceId",
       "type": "string"
     },
-    "CreateDate": {
-      "description": "密钥创建时间",
+    "CreatedTime": {
+      "description": "密钥创建时间。时间格式为ISO8601。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "LastLoginDate": {
+      "description": "最后登录时间。",
       "type": "string"
     },
     "Region": {
@@ -57,28 +82,39 @@
       "type": "string"
     },
     "Status": {
-      "description": "密钥状态 (active/inactive)",
+      "description": "密钥状态。active代表启用状态，inactive代表禁用状态。",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "semantic": "status",
       "type": "string"
     },
-    "UpdateDate": {
-      "description": "密钥更新时间",
+    "UpdatedTime": {
+      "description": "密钥更新时间。时间格式为ISO8601。",
+      "semantic": "updatedTime",
       "type": "string"
     },
     "UserName": {
-      "description": "用户名",
+      "description": "用户名。用于给指定的IAM用户创建密钥，未指定用户名时则为当前请求身份创建密钥（即主账号请求时为主账号自身创建密钥，IAM用户请求时为IAM用户自身创建密钥。注意：角色不支持为自身创建密钥）。当IAM用户拥有密钥自管理权限时（AccessKeySelfManageAccess），如需为自身创建密钥则需要在请求中传递自身的UserName。",
+      "semantic": "resourceName",
       "type": "string"
     }
   },
   "readOnlyProperties": [
-    "/properties/CreateDate",
+    "/properties/AccessKeyId",
+    "/properties/CreatedTime",
     "/properties/Region",
     "/properties/RequestTime",
     "/properties/Service",
-    "/properties/UpdateDate",
-    "/properties/SecretAccessKey"
+    "/properties/UpdatedTime",
+    "/properties/LastLoginDate"
   ],
   "tagging": {
     "taggable": false
   },
-  "typeName": "Volcengine::IAM::Accesskey"
+  "typeName": "Volcengine::IAM::Accesskey",
+  "writeOnlyProperties": [
+    "/properties/SecretAccessKey"
+  ]
 }

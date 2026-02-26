@@ -24,6 +24,17 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::ECS::Instance resource.
 func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AffinityGroupId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "亲和组ID。",
+		//	  "type": "string"
+		//	}
+		"affinity_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "亲和组ID。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AffinityGroupSize
 		// Cloud Control resource type schema:
 		//
@@ -33,6 +44,17 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"affinity_group_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "亲和组规格，取值：2。\n  \n  **提示:**\n    - 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。\n    - 该功能正在邀测中，如需试用，请联系客户经理申请。\n   ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoPay
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "是否自动支付，取值：true：自动支付。您需要确保账户余额充足，如果账户余额不足会生成异常订单，计费方式转换失败。false（默认）：仅生成订单但不扣费，您可以在生成订单后，登录订单管理页面完成支付。",
+		//	  "type": "boolean"
+		//	}
+		"auto_pay": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "是否自动支付，取值：true：自动支付。您需要确保账户余额充足，如果账户余额不足会生成异常订单，计费方式转换失败。false（默认）：仅生成订单但不扣费，您可以在生成订单后，登录订单管理页面完成支付。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AutoRenew
@@ -250,6 +272,19 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "default": false,
 		//	      "description": "实例是否随实例释放。",
 		//	      "type": "boolean"
+		//	    },
+		//	    "SecurityProtectionInstanceId": {
+		//	      "description": "DDoS原生防护（企业版）ID。",
+		//	      "type": "integer"
+		//	    },
+		//	    "SecurityProtectionTypes": {
+		//	      "description": "公网IP的安全防护类型。",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -291,8 +326,41 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "实例是否随实例释放。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionInstanceId
+				"security_protection_instance_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "DDoS原生防护（企业版）ID。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionTypes
+				"security_protection_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "公网IP的安全防护类型。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "实例的EIP地址。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ElasticScheduledInstanceType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "弹性预约实例类型，取值：NoEsi：非弹性预约实例。Esi：弹性预约实例。Segmented：弹性预约实例-时段型。",
+		//	  "type": "string"
+		//	}
+		"elastic_scheduled_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "弹性预约实例类型，取值：NoEsi：非弹性预约实例。Esi：弹性预约实例。Segmented：弹性预约实例-时段型。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnableJumboFrame
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例是否开启巨型帧。取值：false：不开启巨型帧，该实例的所有网卡MTU值为1500。true：开启巨型帧，该实例的所有网卡MTU值为8500。",
+		//	  "type": "boolean"
+		//	}
+		"enable_jumbo_frame": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "实例是否开启巨型帧。取值：false：不开启巨型帧，该实例的所有网卡MTU值为1500。true：开启巨型帧，该实例的所有网卡MTU值为8500。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredAt
@@ -389,6 +457,28 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "实例的镜像。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IncludeDataVolumes
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "是否将实例上挂载的所有按量计费数据盘转换为包年包月数据盘。true：转换。false （默认）：不转换。",
+		//	  "type": "boolean"
+		//	}
+		"include_data_volumes": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "是否将实例上挂载的所有按量计费数据盘转换为包年包月数据盘。true：转换。false （默认）：不转换。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: InstallRunCommandAgent
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "创建实例时是否安装云助手Agent，取值：true：创建时安装。false（默认）：创建时不安装。",
+		//	  "type": "boolean"
+		//	}
+		"install_run_command_agent": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "创建实例时是否安装云助手Agent，取值：true：创建时安装。false（默认）：创建时不安装。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceChargeType
 		// Cloud Control resource type schema:
 		//
@@ -472,6 +562,56 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "实例的密钥对名称。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LocalVolumes
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例对应的本地盘配置信息。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "实例对应的本地盘配置信息。",
+		//	    "properties": {
+		//	      "Count": {
+		//	        "description": "实例挂载的本地盘数量。",
+		//	        "type": "integer"
+		//	      },
+		//	      "Size": {
+		//	        "description": "实例挂载的本地盘的单盘容量，单位GiB。",
+		//	        "type": "integer"
+		//	      },
+		//	      "VolumeType": {
+		//	        "description": "本地盘类型，取值：LOCAL_SSD：SSD本地盘。LOCAL_HDD：HDD本地盘。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"local_volumes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Count
+					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "实例挂载的本地盘数量。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Size
+					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "实例挂载的本地盘的单盘容量，单位GiB。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VolumeType
+					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "本地盘类型，取值：LOCAL_SSD：SSD本地盘。LOCAL_HDD：HDD本地盘。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "实例对应的本地盘配置信息。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OperationSystem
@@ -684,10 +824,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "SubnetId",
-		//	    "SecurityGroupIds"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"primary_network_interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -756,6 +892,162 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "实例所属的项目名称。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RdmaIpAddresses
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "当查询高性能计算GPU型实例时，列表形式返回各网卡的RDMA IP地址。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"rdma_ip_addresses": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "当查询高性能计算GPU型实例时，列表形式返回各网卡的RDMA IP地址。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RdmaNetworkInterfaceDetails
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "各网卡的RDMA 信息。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "网卡的RDMA 信息。",
+		//	    "properties": {
+		//	      "Gateway": {
+		//	        "description": "网关地址。",
+		//	        "type": "string"
+		//	      },
+		//	      "Ip": {
+		//	        "description": "IP地址。",
+		//	        "type": "string"
+		//	      },
+		//	      "Mask": {
+		//	        "description": "子网掩码。",
+		//	        "type": "string"
+		//	      },
+		//	      "SwitchName": {
+		//	        "description": "交换机名称。",
+		//	        "type": "string"
+		//	      },
+		//	      "SwitchPort": {
+		//	        "description": "交换机端口。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"rdma_network_interface_details": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Gateway
+					"gateway": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网关地址。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ip
+					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "IP地址。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Mask
+					"mask": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "子网掩码。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SwitchName
+					"switch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "交换机名称。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SwitchPort
+					"switch_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "交换机端口。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "各网卡的RDMA 信息。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RenewInfo
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "续费信息。",
+		//	  "properties": {
+		//	    "Period": {
+		//	      "description": "续费的月数，取值：1、2、3、4、5、6、7、8、9、12、24、36。",
+		//	      "enum": [
+		//	        1,
+		//	        2,
+		//	        3,
+		//	        4,
+		//	        5,
+		//	        6,
+		//	        7,
+		//	        8,
+		//	        9,
+		//	        12,
+		//	        24,
+		//	        36
+		//	      ],
+		//	      "type": "integer"
+		//	    },
+		//	    "PeriodUnit": {
+		//	      "description": "续费时长的时间单位，即参数Period的单位。取值：Month（默认）。",
+		//	      "enum": [
+		//	        "Month"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Period",
+		//	    "PeriodUnit"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"renew_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "续费的月数，取值：1、2、3、4、5、6、7、8、9、12、24、36。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PeriodUnit
+				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "续费时长的时间单位，即参数Period的单位。取值：Month（默认）。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "续费信息。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RoleNames
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例绑定的IAM角色名称。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"role_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "实例绑定的IAM角色名称。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecondaryNetworkInterfaces
 		// Cloud Control resource type schema:
 		//
@@ -819,10 +1111,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "SubnetId",
-		//	      "SecurityGroupIds"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "minItems": 1,
@@ -941,15 +1229,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
-		//	  "enum": [
-		//	    "KeepCharging",
-		//	    "StopCharging"
-		//	  ],
+		//	  "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。NotApplicable：表示本实例不支持节省停机功能。",
 		//	  "type": "string"
 		//	}
 		"stopped_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "StoppedMode string 可选 示例值：KeepCharging\n  停机模式，取值：\n  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\n  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n  有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
+			Description: "StoppedMode string 可选 示例值：KeepCharging\n  停机模式，取值：\n  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\n  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n  有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。NotApplicable：表示本实例不支持节省停机功能。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SystemVolume
@@ -1168,14 +1452,17 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"affinity":                        "Affinity",
+		"affinity_group_id":               "AffinityGroupId",
 		"affinity_group_size":             "AffinityGroupSize",
 		"allocation_id":                   "AllocationId",
+		"auto_pay":                        "AutoPay",
 		"auto_renew":                      "AutoRenew",
 		"auto_renew_period":               "AutoRenewPeriod",
 		"bandwidth_mbps":                  "BandwidthMbps",
 		"bandwidth_package_id":            "BandwidthPackageId",
 		"charge_type":                     "ChargeType",
 		"core_count":                      "CoreCount",
+		"count":                           "Count",
 		"cpu_max_frequency":               "CpuMaxFrequency",
 		"cpu_memory":                      "CpuMemory",
 		"cpu_number":                      "CpuNumber",
@@ -1189,19 +1476,25 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"deployment_set_id":               "DeploymentSetId",
 		"description":                     "Description",
 		"eip_address":                     "EipAddress",
+		"elastic_scheduled_instance_type": "ElasticScheduledInstanceType",
+		"enable_jumbo_frame":              "EnableJumboFrame",
 		"expired_at":                      "ExpiredAt",
 		"extra_performance_iops":          "ExtraPerformanceIOPS",
 		"extra_performance_throughput_mb": "ExtraPerformanceThroughputMB",
 		"extra_performance_type_id":       "ExtraPerformanceTypeId",
+		"gateway":                         "Gateway",
 		"hostname":                        "Hostname",
 		"hpc_cluster_id":                  "HpcClusterId",
 		"image":                           "Image",
 		"image_id":                        "ImageId",
 		"image_release_version":           "ImageReleaseVersion",
+		"include_data_volumes":            "IncludeDataVolumes",
+		"install_run_command_agent":       "InstallRunCommandAgent",
 		"instance_charge_type":            "InstanceChargeType",
 		"instance_id":                     "InstanceId",
 		"instance_name":                   "InstanceName",
 		"instance_type":                   "InstanceType",
+		"ip":                              "Ip",
 		"ip_address":                      "IpAddress",
 		"ipv_6_address_count":             "Ipv6AddressCount",
 		"ipv_6_addresses":                 "Ipv6Addresses",
@@ -1211,7 +1504,9 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_pair":                        "KeyPair",
 		"key_pair_id":                     "KeyPairId",
 		"key_pair_name":                   "KeyPairName",
+		"local_volumes":                   "LocalVolumes",
 		"mac_address":                     "MacAddress",
+		"mask":                            "Mask",
 		"memory_size":                     "MemorySize",
 		"name":                            "Name",
 		"network_interface_id":            "NetworkInterfaceId",
@@ -1224,10 +1519,16 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"primary_network_interface":       "PrimaryNetworkInterface",
 		"private_ip_addresses":            "PrivateIpAddresses",
 		"project_name":                    "ProjectName",
+		"rdma_ip_addresses":               "RdmaIpAddresses",
+		"rdma_network_interface_details":  "RdmaNetworkInterfaceDetails",
 		"release_with_instance":           "ReleaseWithInstance",
+		"renew_info":                      "RenewInfo",
+		"role_names":                      "RoleNames",
 		"secondary_network_interfaces":    "SecondaryNetworkInterfaces",
 		"security_enhancement_strategy":   "SecurityEnhancementStrategy",
 		"security_group_ids":              "SecurityGroupIds",
+		"security_protection_instance_id": "SecurityProtectionInstanceId",
+		"security_protection_types":       "SecurityProtectionTypes",
 		"size":                            "Size",
 		"snapshot_id":                     "SnapshotId",
 		"spot_price_limit":                "SpotPriceLimit",
@@ -1235,6 +1536,8 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status":                          "Status",
 		"stopped_mode":                    "StoppedMode",
 		"subnet_id":                       "SubnetId",
+		"switch_name":                     "SwitchName",
+		"switch_port":                     "SwitchPort",
 		"system_volume":                   "SystemVolume",
 		"tags":                            "Tags",
 		"tenancy":                         "Tenancy",

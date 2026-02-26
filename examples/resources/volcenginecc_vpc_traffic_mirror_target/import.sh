@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_traffic_mirror_target.example "traffic_mirror_target_id"

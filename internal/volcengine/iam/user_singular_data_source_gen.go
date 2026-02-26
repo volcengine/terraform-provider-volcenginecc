@@ -23,6 +23,101 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::IAM::User resource.
 func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessKey
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户的访问密钥。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "子用户的访问密钥。",
+		//	    "properties": {
+		//	      "AccessKeyId": {
+		//	        "description": "访问密钥ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "CreateDate": {
+		//	        "description": "访问密钥创建时间。",
+		//	        "type": "string"
+		//	      },
+		//	      "Region": {
+		//	        "description": "最近一次使用的服务区域。",
+		//	        "type": "string"
+		//	      },
+		//	      "RequestTime": {
+		//	        "description": "访问密钥最近一次使用时间。",
+		//	        "type": "string"
+		//	      },
+		//	      "Service": {
+		//	        "description": "最近一次使用的服务名称。",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "访问密钥状态。Active代表启用，Inactive代表禁用。",
+		//	        "type": "string"
+		//	      },
+		//	      "UpdateDate": {
+		//	        "description": "访问密钥更新时间。",
+		//	        "type": "string"
+		//	      },
+		//	      "UserName": {
+		//	        "description": "访问密钥Secret。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"access_key": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccessKeyId
+					"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥ID。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CreateDate
+					"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥创建时间。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "最近一次使用的服务区域。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RequestTime
+					"request_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥最近一次使用时间。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Service
+					"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "最近一次使用的服务名称。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥状态。Active代表启用，Inactive代表禁用。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UpdateDate
+					"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥更新时间。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UserName
+					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "访问密钥Secret。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "子用户的访问密钥。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
@@ -77,6 +172,17 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子用户对应的电子邮件地址。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EmailIsVerify
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
+		//	  "type": "boolean"
+		//	}
+		"email_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Groups
@@ -256,6 +362,17 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"mobile_phone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "子用户对应的手机号。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MobilePhoneIsVerify
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "子用户手机号是否已验证。true代表已验证，false代表未验证。",
+		//	  "type": "boolean"
+		//	}
+		"mobile_phone_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "子用户手机号是否已验证。true代表已验证，false代表未验证。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policies
@@ -458,11 +575,14 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::IAM::User").WithTerraformTypeName("volcenginecc_iam_user")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_key":                "AccessKey",
+		"access_key_id":             "AccessKeyId",
 		"account_id":                "AccountId",
 		"create_date":               "CreateDate",
 		"description":               "Description",
 		"display_name":              "DisplayName",
 		"email":                     "Email",
+		"email_is_verify":           "EmailIsVerify",
 		"groups":                    "Groups",
 		"key":                       "Key",
 		"last_login_date":           "LastLoginDate",
@@ -472,12 +592,15 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"login_locked":              "LoginLocked",
 		"login_profile":             "LoginProfile",
 		"mobile_phone":              "MobilePhone",
+		"mobile_phone_is_verify":    "MobilePhoneIsVerify",
 		"password":                  "Password",
 		"password_expire_at":        "PasswordExpireAt",
 		"password_reset_required":   "PasswordResetRequired",
 		"policies":                  "Policies",
 		"policy_name":               "PolicyName",
 		"policy_type":               "PolicyType",
+		"region":                    "Region",
+		"request_time":              "RequestTime",
 		"safe_auth_close":           "SafeAuthClose",
 		"safe_auth_exempt_duration": "SafeAuthExemptDuration",
 		"safe_auth_exempt_required": "SafeAuthExemptRequired",
@@ -485,6 +608,8 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"safe_auth_flag":            "SafeAuthFlag",
 		"safe_auth_type":            "SafeAuthType",
 		"security_config":           "SecurityConfig",
+		"service":                   "Service",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"trn":                       "Trn",
 		"update_date":               "UpdateDate",

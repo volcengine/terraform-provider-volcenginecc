@@ -1,0 +1,111 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/KeyringName",
+    "/properties/KeyringType",
+    "/properties/ProjectName"
+  ],
+  "description": "用户管理密钥的集合，用户将相同类型或用途的密钥放在同一密钥环中以便于管理。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/KeyringName",
+      "/properties/KeyringType",
+      "/properties/Description"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "kms:CreateKeyring",
+        "kms:QueryKeyring"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "kms:DeleteKeyring",
+        "kms:QueryKeyring"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "kms:DescribeKeyrings"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "kms:QueryKeyring"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "kms:UpdateKeyring",
+        "kms:QueryKeyring"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/KeyRingId"
+  ],
+  "properties": {
+    "CreateDate": {
+      "description": "密钥环创建日期。",
+      "format": "int64",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "密钥环描述，长度为 0 - 8192 个字符。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "KeyCount": {
+      "description": "密钥环密钥次数。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "KeyRingId": {
+      "description": "密钥环唯一标识符，UUID形式。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "KeyringName": {
+      "description": "密钥环名称，长度为 2 - 31 个字符。合法字符：[a-zA-Z0-9-_]。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "KeyringType": {
+      "description": "密钥环类型，取值：CustomKeyring。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称，默认值：default。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "UID": {
+      "description": "密钥环租户ID。",
+      "type": "string"
+    },
+    "UpdateDate": {
+      "description": "密钥环更新日期。",
+      "format": "int64",
+      "semantic": "updatedTime",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/KeyRingId",
+    "/properties/CreateDate",
+    "/properties/UpdateDate",
+    "/properties/KeyCount",
+    "/properties/UID"
+  ],
+  "required": [
+    "KeyringName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::KMS::KeyRing"
+}

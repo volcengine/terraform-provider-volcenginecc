@@ -1,0 +1,170 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/IpAddress",
+    "/properties/ProjectName",
+    "/properties/Asn",
+    "/properties/IpVersion"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "用户网关是您本地网关侧的信息集合和抽象。通过用户网关，您可以把本地网关的信息注册到云上VPC之中。一个用户网关，可以对接多个VPN网关。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/CustomerGatewayName",
+      "/properties/IpAddress",
+      "/properties/IpVersion",
+      "/properties/ProjectName",
+      "/properties/Status",
+      "/properties/CustomerGatewayId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpn:CreateCustomerGateway",
+        "vpn:DescribeCustomerGateways",
+        "vpn:DescribeCustomerGatewayAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpn:DeleteCustomerGateway",
+        "vpn:DescribeCustomerGateways",
+        "vpn:DescribeCustomerGatewayAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpn:DescribeCustomerGateways"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpn:DescribeCustomerGatewayAttributes",
+        "vpn:DescribeCustomerGateways"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpn:ModifyCustomerGatewayAttributes",
+        "vpn:DescribeCustomerGateways",
+        "vpn:DescribeCustomerGatewayAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CustomerGatewayId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "用户网关所属账户的ID。",
+      "type": "string"
+    },
+    "Asn": {
+      "description": "用户网关的ASN（Autonomous System Number）。如需使用BGP功能，则此参数必须填写。ASN有效范围1～4294967295（137718 、150436、65533除外）。",
+      "format": "int64",
+      "maximum": 4294967295,
+      "type": "integer"
+    },
+    "ConnectionCount": {
+      "description": "用户网关关联的IPsec连接的数量。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "CreatedTime": {
+      "description": "创建用户网关的时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CustomerGatewayId": {
+      "description": "网关ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CustomerGatewayName": {
+      "description": "用户网关的名称。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、下划线（_）和短划线（-）。长度限制为1 ~ 128个字符。不填默认为用户网关的ID。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Description": {
+      "description": "用户网关的描述信息。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、空格（ ）、下划线（_）、中划线（-）、等号（=）、英文逗号（,）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不填默认为空字符串。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "IpAddress": {
+      "description": "对端本地数据中心网关的静态公网IP地址或其他VPC的VPN网关出口IP地址。若对端为非固定静态公网IP，此处需传入0.0.0.0。",
+      "type": "string"
+    },
+    "IpVersion": {
+      "default": "ipv4",
+      "description": "VPN网关的IP地址协议类型，取值如下：ipv4 （默认值）ipv6",
+      "enum": [
+        "ipv4",
+        "ipv6"
+      ],
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "用户网关所属的项目。不填默认为default，即创建的资源属于default项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "用户网关的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "更新用户网关的时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CustomerGatewayId",
+    "/properties/AccountId",
+    "/properties/ConnectionCount",
+    "/properties/CreatedTime",
+    "/properties/Status",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "IpAddress"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VPN::CustomerGateway"
+}

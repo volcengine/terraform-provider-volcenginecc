@@ -21,11 +21,13 @@ Data Source schema for Volcengine::ECS::Instance
 
 ### Read-Only
 
+- `affinity_group_id` (String) 亲和组ID。
 - `affinity_group_size` (Number) 亲和组规格，取值：2。
   
   **提示:**
     - 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。
     - 该功能正在邀测中，如需试用，请联系客户经理申请。
+- `auto_pay` (Boolean) 是否自动支付，取值：true：自动支付。您需要确保账户余额充足，如果账户余额不足会生成异常订单，计费方式转换失败。false（默认）：仅生成订单但不扣费，您可以在生成订单后，登录订单管理页面完成支付。
 - `auto_renew` (Boolean) 实例到期后是否自动续费，取值：
     - true：自动续费。
     - false（默认）：不自动续费。
@@ -62,6 +64,8 @@ Data Source schema for Volcengine::ECS::Instance
     - 只能包含中文、字母、数字、点号“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”
     - 长度限制在255个字符以内。
 - `eip_address` (Attributes) 实例的EIP地址。 (see [below for nested schema](#nestedatt--eip_address))
+- `elastic_scheduled_instance_type` (String) 弹性预约实例类型，取值：NoEsi：非弹性预约实例。Esi：弹性预约实例。Segmented：弹性预约实例-时段型。
+- `enable_jumbo_frame` (Boolean) 实例是否开启巨型帧。取值：false：不开启巨型帧，该实例的所有网卡MTU值为1500。true：开启巨型帧，该实例的所有网卡MTU值为8500。
 - `expired_at` (String) 实例的过期时间。
 - `hostname` (String) 实例主机名，即实例操作系统内部的计算机名。
     - Linux实例：
@@ -77,6 +81,8 @@ Data Source schema for Volcengine::ECS::Instance
   **提示:**
   仅当创建高性能计算GPU型实例时，该参数生效且为必填项。
 - `image` (Attributes) 实例的镜像。 (see [below for nested schema](#nestedatt--image))
+- `include_data_volumes` (Boolean) 是否将实例上挂载的所有按量计费数据盘转换为包年包月数据盘。true：转换。false （默认）：不转换。
+- `install_run_command_agent` (Boolean) 创建实例时是否安装云助手Agent，取值：true：创建时安装。false（默认）：创建时不安装。
 - `instance_charge_type` (String) 实例和云盘的计费类型，取值：
     - PostPaid：按量计费。
     - PrePaid：包年包月。请确认您的账号支持余额支付或者信控支付，否则将返回InvalidInstanceChargeType的错误提示。
@@ -89,6 +95,7 @@ Data Source schema for Volcengine::ECS::Instance
     - 产品选型：您可以参考[实例规格介绍](https://www.volcengine.com/docs/6396/70840)或者调用[DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769)查看实例规格的性能数据，也可以参考[实例选型最佳实践](https://www.volcengine.com/docs/6396/74174)了解如何选择实例规格。
     - 查询库存：您可以调用[DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279)查询可用区中计算资源的库存信息。
 - `key_pair` (Attributes) 实例的密钥对名称。 (see [below for nested schema](#nestedatt--key_pair))
+- `local_volumes` (Attributes Set) 实例对应的本地盘配置信息。 (see [below for nested schema](#nestedatt--local_volumes))
 - `operation_system` (Attributes) 实例的操作系统类型。 (see [below for nested schema](#nestedatt--operation_system))
 - `password` (String) 实例的密码。
 - `period` (Number) 购买资源的时长（N）。
@@ -106,6 +113,10 @@ Data Source schema for Volcengine::ECS::Instance
 - `placement` (Attributes) 实例的部署信息。 (see [below for nested schema](#nestedatt--placement))
 - `primary_network_interface` (Attributes) 实例的主网卡。 (see [below for nested schema](#nestedatt--primary_network_interface))
 - `project_name` (String) 实例所属的项目名称。
+- `rdma_ip_addresses` (Set of String) 当查询高性能计算GPU型实例时，列表形式返回各网卡的RDMA IP地址。
+- `rdma_network_interface_details` (Attributes Set) 各网卡的RDMA 信息。 (see [below for nested schema](#nestedatt--rdma_network_interface_details))
+- `renew_info` (Attributes) 续费信息。 (see [below for nested schema](#nestedatt--renew_info))
+- `role_names` (Set of String) 实例绑定的IAM角色名称。
 - `secondary_network_interfaces` (Attributes List) 实例的辅助网卡。 (see [below for nested schema](#nestedatt--secondary_network_interfaces))
 - `spot_price_limit` (Number) 竞价实例的每小时最高价格。
     - 支持小数点后3位的精度。
@@ -131,7 +142,7 @@ Data Source schema for Volcengine::ECS::Instance
   KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。
   StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。
   有关节省停机的启用条件，请参见按量计费节省停机模式说明。
-  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。
+  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。NotApplicable：表示本实例不支持节省停机功能。
 - `system_volume` (Attributes) 实例的系统卷。 (see [below for nested schema](#nestedatt--system_volume))
 - `tags` (Attributes Set) 标签 (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) 实例的更新时间。
@@ -185,6 +196,8 @@ Read-Only:
     - 若您的账号已申请并开通了BGP单线权限，则可传入SingleLine_BGP。
     - 若您的账号已申请并开通了静态BGP权限，则可传入Static_BGP。
 - `release_with_instance` (Boolean) 实例是否随实例释放。
+- `security_protection_instance_id` (Number) DDoS原生防护（企业版）ID。
+- `security_protection_types` (Set of String) 公网IP的安全防护类型。
 
 
 <a id="nestedatt--image"></a>
@@ -205,6 +218,16 @@ Read-Only:
 
 - `key_pair_id` (String) 实例的公钥。
 - `key_pair_name` (String) 实例的密钥对名称。
+
+
+<a id="nestedatt--local_volumes"></a>
+### Nested Schema for `local_volumes`
+
+Read-Only:
+
+- `count` (Number) 实例挂载的本地盘数量。
+- `size` (Number) 实例挂载的本地盘的单盘容量，单位GiB。
+- `volume_type` (String) 本地盘类型，取值：LOCAL_SSD：SSD本地盘。LOCAL_HDD：HDD本地盘。
 
 
 <a id="nestedatt--operation_system"></a>
@@ -241,6 +264,27 @@ Read-Only:
 - `security_group_ids` (Set of String) 实例的安全组ID。
 - `subnet_id` (String) 实例的子网ID。
 - `vpc_id` (String) 实例的VPC ID。
+
+
+<a id="nestedatt--rdma_network_interface_details"></a>
+### Nested Schema for `rdma_network_interface_details`
+
+Read-Only:
+
+- `gateway` (String) 网关地址。
+- `ip` (String) IP地址。
+- `mask` (String) 子网掩码。
+- `switch_name` (String) 交换机名称。
+- `switch_port` (String) 交换机端口。
+
+
+<a id="nestedatt--renew_info"></a>
+### Nested Schema for `renew_info`
+
+Read-Only:
+
+- `period` (Number) 续费的月数，取值：1、2、3、4、5、6、7、8、9、12、24、36。
+- `period_unit` (String) 续费时长的时间单位，即参数Period的单位。取值：Month（默认）。
 
 
 <a id="nestedatt--secondary_network_interfaces"></a>
