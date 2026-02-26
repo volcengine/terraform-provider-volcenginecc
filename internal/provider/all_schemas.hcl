@@ -416,3 +416,133 @@ resource_schema "volcengine_vpn_vpn_gateway" {
 resource_schema "volcengine_filenas_snapshot" {
   cloudcontrol_type_name = "Volcengine::FileNAS::Snapshot"
 }
+
+resource_schema "volcengine_ecs_launch_template" {
+  cloudcontrol_type_name = "Volcengine::ECS::Launchtemplate"
+}
+
+resource_schema "volcengine_ecs_launch_template_version" {
+  cloudcontrol_type_name = "Volcengine::ECS::LaunchtemplateVersion"
+}
+
+resource_schema "volcengine_ecs_deployment_set" {
+  cloudcontrol_type_name = "Volcengine::ECS::DeploymentSet"
+}
+
+resource_schema "volcengine_vke_default_node_pool" {
+  cloudcontrol_type_name = "Volcengine::VKE::DefaultNodePool"
+}
+
+resource_schema "volcengine_vke_node" {
+  cloudcontrol_type_name = "Volcengine::VKE::Node"
+}
+
+resource_schema "volcengine_vpc_ha_vip" {
+  cloudcontrol_type_name = "Volcengine::VPC::HAVIP"
+}
+
+resource_schema "volcengine_vpc_flow_log" {
+  cloudcontrol_type_name = "Volcengine::VPC::FlowLog"
+}
+
+resource_schema "volcengine_vpc_traffic_mirror_target" {
+  cloudcontrol_type_name = "Volcengine::VPC::TrafficMirrorTarget"
+}
+
+resource_schema "volcengine_vpc_traffic_mirror_filter" {
+  cloudcontrol_type_name = "Volcengine::VPC::TrafficMirrorFilter"
+}
+
+resource_schema "volcengine_vpc_ipv6_address_bandwidth" {
+  cloudcontrol_type_name = "Volcengine::VPC::Ipv6AddressBandwidth"
+}
+
+resource_schema "volcengine_vpc_traffic_mirror_session" {
+  cloudcontrol_type_name = "Volcengine::VPC::TrafficMirrorSession"
+}
+
+resource_schema "volcengine_vpc_ipv6_gateway" {
+  cloudcontrol_type_name = "Volcengine::VPC::Ipv6Gateway"
+}
+
+resource_schema "volcengine_vpc_traffic_mirror_filter_rule" {
+  cloudcontrol_type_name = "Volcengine::VPC::TrafficMirrorFilterRule"
+}
+
+resource_schema "volcengine_vpn_customer_gateway" {
+  cloudcontrol_type_name = "Volcengine::VPN::CustomerGateway"
+}
+
+resource_schema "volcengine_transitrouter_vpn_attachment" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::VpnAttachment"
+}
+
+resource_schema "volcengine_transitrouter_vpc_attachment" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::VpcAttachment"
+}
+
+resource_schema "volcengine_alb_health_check_template" {
+  cloudcontrol_type_name = "Volcengine::ALB::HealthCheckTemplate"
+}
+
+resource_schema "volcengine_alb_customized_cfg" {
+  cloudcontrol_type_name = "Volcengine::ALB::CustomizedCfg"
+}
+
+resource_schema "volcengine_rdsmysql_backup" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::Backup"
+}
+
+resource_schema "volcengine_rdsmysql_endpoint" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::Endpoint"
+}
+
+resource_schema "volcengine_rdsmysql_allow_list" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::AllowList"
+}
+
+resource_schema "volcengine_redis_account" {
+  cloudcontrol_type_name = "Volcengine::Redis::Account"
+}
+
+resource_schema "volcengine_redis_endpoint_public_address" {
+  cloudcontrol_type_name = "Volcengine::Redis::EndpointPublicAddress"
+}
+
+resource_schema "volcengine_rdspostgresql_db_endpoint" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::DBEndpoint"
+}
+
+resource_schema "volcengine_rdspostgresql_allow_list" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::AllowList"
+}
+
+resource_schema "volcengine_privatezone_record" {
+  cloudcontrol_type_name = "Volcengine::PrivateZone::Record"
+}
+
+resource_schema "volcengine_organization_account" {
+  cloudcontrol_type_name = "Volcengine::Organization::Account"
+}
+
+resource_schema "volcengine_rabbitmq_public_address" {
+  cloudcontrol_type_name = "Volcengine::RabbitMQ::PublicAddress"
+}
+
+resource_schema "volcengine_rabbitmq_instance_plugin" {
+  cloudcontrol_type_name = "Volcengine::RabbitMQ::InstancePlugin"
+}
+
+resource_schema "volcengine_kms_key_ring" {
+  cloudcontrol_type_name = "Volcengine::KMS::KeyRing"
+}
+
+resource_schema "volcengine_rocketmq_topic" {
+  cloudcontrol_type_name = "Volcengine::RocketMQ::Topic"
+}
+
+resource_schema "volcengine_rocketmq_group" {
+  cloudcontrol_type_name = "Volcengine::RocketMQ::Group"
+}
+
+

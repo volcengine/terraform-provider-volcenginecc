@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vke_node.example "cluster_id|node_pool_id|node_id"

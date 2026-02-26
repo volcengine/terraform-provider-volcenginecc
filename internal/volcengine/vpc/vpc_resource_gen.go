@@ -177,6 +177,22 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnableIpv6
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
+		//	  "type": "boolean"
+		//	}
+		"enable_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EnableIpv6 is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4GatewayId
 		// Cloud Control resource type schema:
 		//
@@ -548,6 +564,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time":         "CreationTime",
 		"description":           "Description",
 		"dns_servers":           "DnsServers",
+		"enable_ipv_6":          "EnableIpv6",
 		"ipv_4_gateway_id":      "Ipv4GatewayId",
 		"ipv_6_cidr_block":      "Ipv6CidrBlock",
 		"is_default":            "IsDefault",
@@ -567,6 +584,10 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"value":                 "Value",
 		"vpc_id":                "VpcId",
 		"vpc_name":              "VpcName",
+	})
+
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EnableIpv6",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

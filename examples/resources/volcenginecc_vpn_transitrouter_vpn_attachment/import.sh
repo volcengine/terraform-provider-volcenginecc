@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpn_transitrouter_vpn_attachment.example "transit_router_id|transit_router_attachment_id"

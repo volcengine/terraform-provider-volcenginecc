@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_redis_endpoint_public_address.example "instance_id|eip_id"

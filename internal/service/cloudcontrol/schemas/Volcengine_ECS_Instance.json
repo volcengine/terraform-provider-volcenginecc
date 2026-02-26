@@ -2,7 +2,6 @@
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/ZoneId",
-    "/properties/Image/ImageId",
     "/properties/ProjectName",
     "/properties/SpotStrategy",
     "/properties/SpotPriceLimit",
@@ -10,16 +9,15 @@
     "/properties/PrimaryNetworkInterface/Ipv6AddressCount",
     "/properties/PrimaryNetworkInterface/PrivateIpAddresses",
     "/properties/SecondaryNetworkInterfaces/*/Ipv6AddressCount",
+    "/properties/SecondaryNetworkInterfaces/*/PrimaryIpAddress",
+    "/properties/SecondaryNetworkInterfaces/*/PrivateIpAddresses",
+    "/properties/SecondaryNetworkInterfaces/*/SecurityGroupIds",
+    "/properties/SecondaryNetworkInterfaces/*/SubnetId",
     "/properties/EipAddress/BandwidthPackageId",
     "/properties/EipAddress/BandwidthMbps",
     "/properties/EipAddress/ReleaseWithInstance",
     "/properties/EipAddress/ISP",
     "/properties/EipAddress/ChargeType",
-    "/properties/InstanceChargeType",
-    "/properties/Period",
-    "/properties/PeriodUnit",
-    "/properties/AutoRenew",
-    "/properties/AutoRenewPeriod",
     "/properties/SystemVolume/VolumeType",
     "/properties/SystemVolume/Size",
     "/properties/SystemVolume/DeleteWithInstance",
@@ -27,12 +25,16 @@
     "/properties/SystemVolume/ExtraPerformanceThroughputMB",
     "/properties/SystemVolume/ExtraPerformanceTypeId",
     "/properties/SystemVolume/SnapshotId",
-    "/properties/InstanceType",
     "/properties/CpuMaxFrequency",
-    "/properties/KeyPair",
-    "/properties/DeletionProtection",
     "/properties/DeploymentSetGroupNumber",
-    "/properties/Placement"
+    "/properties/Placement",
+    "/properties/InstallRunCommandAgent",
+    "/properties/AffinityGroupSize",
+    "/properties/CreditSpecification",
+    "/properties/EipAddress/SecurityProtectionInstanceId",
+    "/properties/EipAddress/SecurityProtectionTypes",
+    "/properties/HpcClusterId",
+    "/properties/Image/SecurityEnhancementStrategy"
   ],
   "definitions": {
     "CpuMemory": {
@@ -106,6 +108,19 @@
           "default": false,
           "description": "实例是否随实例释放。",
           "type": "boolean"
+        },
+        "SecurityProtectionInstanceId": {
+          "description": "DDoS原生防护（企业版）ID。",
+          "type": "integer"
+        },
+        "SecurityProtectionTypes": {
+          "description": "公网IP的安全防护类型。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "type": "object"
@@ -154,6 +169,24 @@
       "required": [
         "KeyPairName"
       ],
+      "type": "object"
+    },
+    "LocalVolume": {
+      "description": "实例对应的本地盘配置信息。",
+      "properties": {
+        "Count": {
+          "description": "实例挂载的本地盘数量。",
+          "type": "integer"
+        },
+        "Size": {
+          "description": "实例挂载的本地盘的单盘容量，单位GiB。",
+          "type": "integer"
+        },
+        "VolumeType": {
+          "description": "本地盘类型，取值：LOCAL_SSD：SSD本地盘。LOCAL_HDD：HDD本地盘。",
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "NetworkInterface": {
@@ -214,10 +247,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "SubnetId",
-        "SecurityGroupIds"
-      ],
       "type": "object"
     },
     "OperationSystem": {
@@ -268,6 +297,67 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "RdmaNetworkInterfaceDetail": {
+      "description": "网卡的RDMA 信息。",
+      "properties": {
+        "Gateway": {
+          "description": "网关地址。",
+          "type": "string"
+        },
+        "Ip": {
+          "description": "IP地址。",
+          "type": "string"
+        },
+        "Mask": {
+          "description": "子网掩码。",
+          "type": "string"
+        },
+        "SwitchName": {
+          "description": "交换机名称。",
+          "type": "string"
+        },
+        "SwitchPort": {
+          "description": "交换机端口。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RenewInfo": {
+      "description": "续费信息。",
+      "properties": {
+        "Period": {
+          "description": "续费的月数，取值：1、2、3、4、5、6、7、8、9、12、24、36。",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            12,
+            24,
+            36
+          ],
+          "type": "integer"
+        },
+        "PeriodUnit": {
+          "description": "续费时长的时间单位，即参数Period的单位。取值：Month（默认）。",
+          "enum": [
+            "Month"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "Period",
+        "PeriodUnit"
+      ],
       "type": "object"
     },
     "Tag": {
@@ -346,11 +436,38 @@
     }
   },
   "description": "表示一个弹性计算服务（ECS）的实例资源。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AffinityGroupId",
+      "/properties/Placement/DedicatedHostClusterId",
+      "/properties/Placement/DedicatedHostId",
+      "/properties/DeploymentSetGroupNumber",
+      "/properties/DeploymentSetId",
+      "/properties/EipAddress/IpAddress",
+      "/properties/HpcClusterId",
+      "/properties/InstanceChargeType",
+      "/properties/InstanceId",
+      "/properties/InstanceName",
+      "/properties/InstanceType",
+      "/properties/PrimaryNetworkInterface/Ipv6Addresses",
+      "/properties/PrimaryNetworkInterface/PrimaryIpAddress",
+      "/properties/KeyPair/KeyPairName",
+      "/properties/ProjectName",
+      "/properties/Status",
+      "/properties/VpcId",
+      "/properties/ZoneId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "ecs:RunInstance",
-        "ecs:DescribeInstances"
+        "ecs:RunInstances",
+        "ecs:AssociateInstancesIamRole",
+        "ecs:DescribeInstances",
+        "ecs:DescribeUserData",
+        "ecs:DescribeInstancesIamRoles"
       ]
     },
     "delete": {
@@ -367,17 +484,28 @@
     "read": {
       "permissions": [
         "ecs:DescribeInstances",
-        "ecs:DescribeUserData"
+        "ecs:DescribeUserData",
+        "ecs:DescribeInstancesIamRoles"
       ]
     },
     "update": {
       "permissions": [
+        "ecs:ReplaceSystemVolume",
+        "ecs:StopInstance",
+        "ecs:StartInstance",
+        "ecs:RebootInstances",
         "ecs:ModifyInstanceAttribute",
         "ecs:ModifyInstanceVpcAttribute",
+        "ecs:ModifyInstanceSpec",
+        "ecs:ModifyInstanceChargeType",
+        "ecs:AssociateInstancesIamRole",
+        "ecs:DisassociateInstancesIamRole",
+        "ecs:RenewInstance",
         "ecs:TagResources",
         "ecs:UntagResources",
         "ecs:DescribeInstances",
-        "ecs:DescribeUserData"
+        "ecs:DescribeUserData",
+        "ecs:DescribeInstancesIamRoles"
       ]
     }
   },
@@ -385,9 +513,17 @@
     "/properties/InstanceId"
   ],
   "properties": {
+    "AffinityGroupId": {
+      "description": "亲和组ID。",
+      "type": "string"
+    },
     "AffinityGroupSize": {
       "description": "亲和组规格，取值：2。\n:::tip\n- 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。\n- 该功能正在邀测中，如需试用，请联系客户经理申请。\n::: ",
       "type": "integer"
+    },
+    "AutoPay": {
+      "description": "是否自动支付，取值：true：自动支付。您需要确保账户余额充足，如果账户余额不足会生成异常订单，计费方式转换失败。false（默认）：仅生成订单但不扣费，您可以在生成订单后，登录订单管理页面完成支付。",
+      "type": "boolean"
     },
     "AutoRenew": {
       "description": "实例到期后是否自动续费，取值：\n- true：自动续费。\n- false（默认）：不自动续费。\n:::tip\n仅当参数`InstanceChargeType`取值为`PrePaid`时生效。\n:::",
@@ -450,6 +586,14 @@
       "description": "实例的EIP地址。",
       "type": "object"
     },
+    "ElasticScheduledInstanceType": {
+      "description": "弹性预约实例类型，取值：NoEsi：非弹性预约实例。Esi：弹性预约实例。Segmented：弹性预约实例-时段型。",
+      "type": "string"
+    },
+    "EnableJumboFrame": {
+      "description": "实例是否开启巨型帧。取值：false：不开启巨型帧，该实例的所有网卡MTU值为1500。true：开启巨型帧，该实例的所有网卡MTU值为8500。",
+      "type": "boolean"
+    },
     "ExpiredAt": {
       "description": "实例的过期时间。",
       "format": "date-time",
@@ -468,6 +612,14 @@
       "$ref": "#/definitions/Image",
       "description": "实例的镜像。",
       "type": "object"
+    },
+    "IncludeDataVolumes": {
+      "description": "是否将实例上挂载的所有按量计费数据盘转换为包年包月数据盘。true：转换。false （默认）：不转换。",
+      "type": "boolean"
+    },
+    "InstallRunCommandAgent": {
+      "description": "创建实例时是否安装云助手Agent，取值：true：创建时安装。false（默认）：创建时不安装。",
+      "type": "boolean"
     },
     "InstanceChargeType": {
       "description": "实例和云盘的计费类型，取值：\n- PostPaid：按量计费。\n- PrePaid：包年包月。请确认您的账号支持余额支付或者信控支付，否则将返回InvalidInstanceChargeType的错误提示。",
@@ -496,6 +648,15 @@
       "$ref": "#/definitions/KeyPair",
       "description": "实例的密钥对名称。",
       "type": "object"
+    },
+    "LocalVolumes": {
+      "description": "实例对应的本地盘配置信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/LocalVolume"
+      },
+      "type": "array",
+      "uniqueItems": true
     },
     "OperationSystem": {
       "$ref": "#/definitions/OperationSystem",
@@ -549,6 +710,38 @@
       "semantic": "projectName",
       "type": "string"
     },
+    "RdmaIpAddresses": {
+      "description": "当查询高性能计算GPU型实例时，列表形式返回各网卡的RDMA IP地址。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RdmaNetworkInterfaceDetails": {
+      "description": "各网卡的RDMA 信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RdmaNetworkInterfaceDetail"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RenewInfo": {
+      "$ref": "#/definitions/RenewInfo",
+      "description": "续费信息。",
+      "type": "object"
+    },
+    "RoleNames": {
+      "description": "实例绑定的IAM角色名称。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
     "SecondaryNetworkInterfaces": {
       "description": "实例的辅助网卡。",
       "insertionOrder": false,
@@ -592,11 +785,7 @@
       "type": "string"
     },
     "StoppedMode": {
-      "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
-      "enum": [
-        "KeepCharging",
-        "StopCharging"
-      ],
+      "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。NotApplicable：表示本实例不支持节省停机功能。",
       "type": "string"
     },
     "SystemVolume": {
@@ -636,6 +825,11 @@
     }
   },
   "readOnlyProperties": [
+    "/properties/AffinityGroupId",
+    "/properties/ElasticScheduledInstanceType",
+    "/properties/LocalVolumes",
+    "/properties/RdmaIpAddresses",
+    "/properties/RdmaNetworkInterfaceDetails",
     "/properties/InstanceId",
     "/properties/CreatedAt",
     "/properties/ExpiredAt",
@@ -646,11 +840,14 @@
     "/properties/PrimaryNetworkInterface/Ipv6Addresses",
     "/properties/PrimaryNetworkInterface/MacAddress",
     "/properties/PrimaryNetworkInterface/NetworkInterfaceId",
-    "/properties/PrimaryNetworkInterface/PrimaryIpAddress",
     "/properties/SecondaryNetworkInterfaces/*/Ipv6Addresses",
     "/properties/SecondaryNetworkInterfaces/*/MacAddress",
     "/properties/SecondaryNetworkInterfaces/*/NetworkInterfaceId",
-    "/properties/SystemVolume/VolumeId"
+    "/properties/SecondaryNetworkInterfaces/*/VpcId",
+    "/properties/SystemVolume/VolumeId",
+    "/properties/KeyPair/KeyPairId",
+    "/properties/OperationSystem",
+    "/properties/VpcId"
   ],
   "required": [
     "InstanceName",
@@ -676,12 +873,18 @@
     "/properties/EipAddress/ReleaseWithInstance",
     "/properties/EipAddress/ISP",
     "/properties/EipAddress/ChargeType",
+    "/properties/EipAddress/SecurityProtectionInstanceId",
+    "/properties/EipAddress/SecurityProtectionTypes",
+    "/properties/InstallRunCommandAgent",
     "/properties/AffinityGroupSize",
     "/properties/PrimaryNetworkInterface/PrivateIpAddresses",
     "/properties/Period",
     "/properties/PeriodUnit",
     "/properties/AutoRenew",
     "/properties/AutoRenewPeriod",
+    "/properties/RenewInfo",
+    "/properties/AutoPay",
+    "/properties/IncludeDataVolumes",
     "/properties/CpuMaxFrequency",
     "/properties/CreditSpecification",
     "/properties/SystemVolume/VolumeType",

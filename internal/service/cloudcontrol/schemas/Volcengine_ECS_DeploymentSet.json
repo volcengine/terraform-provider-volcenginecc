@@ -1,0 +1,150 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Granularity",
+    "/properties/GroupCount",
+    "/properties/Strategy"
+  ],
+  "definitions": {
+    "Capacity": {
+      "properties": {
+        "AvailableCount": {
+          "description": "该可用区内，还可以加入当前部署集的ECS实例数量。",
+          "type": "integer"
+        },
+        "UsedCount": {
+          "description": "部署集内属于该可用区的ECS实例数量。",
+          "type": "integer"
+        },
+        "ZoneId": {
+          "description": "可用区ID。只返回部署集内存量ECS实例所属的可用区ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "部署集是在底层硬件维度上控制实例分散部署的策略，可以实现物理层级的安全隔离。您可以通过创建部署集，使实例分散部署在不同的底层硬件上，用于保障业务的底层容灾能力及高可用性。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/DeploymentSetId",
+      "/properties/DeploymentSetName",
+      "/properties/Granularity",
+      "/properties/Strategy"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ecs:CreateDeploymentSet",
+        "ecs:DescribeDeploymentSets"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ecs:ModifyInstanceDeployment",
+        "ecs:DeleteDeploymentSet",
+        "ecs:DescribeDeploymentSets"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ecs:DescribeDeploymentSets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ecs:DescribeDeploymentSets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ecs:ModifyDeploymentSetAttribute",
+        "ecs:ModifyInstanceDeployment",
+        "ecs:DescribeDeploymentSets"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/DeploymentSetId"
+  ],
+  "properties": {
+    "Capacities": {
+      "description": "实例启动模板版本信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Capacity"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedAt": {
+      "description": "部署集的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeploymentSetGroupNumber": {
+      "description": "部署集组的序号，取值范围：1～7。",
+      "type": "integer"
+    },
+    "DeploymentSetId": {
+      "description": "部署集ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "DeploymentSetName": {
+      "description": "部署集名称。不能以数字、中划线、下划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制为1～128个字符。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Description": {
+      "description": "部署集的描述信息。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”。长度限制在255个字符以内。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "Granularity": {
+      "description": "部署粒度，取值：host：物理机。rack：机架。switch：交换机。",
+      "type": "string"
+    },
+    "GroupCount": {
+      "description": "部署集组数量。为部署集组高可用策略设置分组数量。取值范围：1～7。默认值：7。",
+      "type": "integer"
+    },
+    "InstanceAmount": {
+      "description": "部署集内的ECS实例数量。",
+      "type": "integer"
+    },
+    "InstanceIds": {
+      "description": "部署集内的ECS实例ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Strategy": {
+      "description": "部署策略，取值：Availability（默认）：高可用策略。AvailabilityGroup：部署集组高可用策略。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/DeploymentSetId",
+    "/properties/InstanceAmount",
+    "/properties/Capacities"
+  ],
+  "required": [
+    "DeploymentSetName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::ECS::DeploymentSet",
+  "writeOnlyProperties": [
+    "/properties/DeploymentSetGroupNumber"
+  ]
+}

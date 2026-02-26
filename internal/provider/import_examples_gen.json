@@ -26,7 +26,7 @@
     },
     {
         "resource": "volcenginecc_iam_accesskey",
-        "identifier": ["AccessKeyId","UserName"],
+        "identifier": ["AccessKeyId"],
         "path": "./examples/resources/volcenginecc_iam_accesskey/import.sh"
     },
     {
@@ -498,5 +498,165 @@
         "resource": "volcenginecc_filenas_snapshot",
         "identifier": ["SnapshotId"],
         "path": "./examples/resources/volcenginecc_filenas_snapshot/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_launch_template",
+        "identifier": ["LaunchTemplateId"],
+        "path": "./examples/resources/volcenginecc_ecs_launch_template/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_launch_template_version",
+        "identifier": ["LaunchTemplateId","VersionNumber"],
+        "path": "./examples/resources/volcenginecc_ecs_launch_template_version/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_deployment_set",
+        "identifier": ["DeploymentSetId"],
+        "path": "./examples/resources/volcenginecc_ecs_deployment_set/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_default_node_pool",
+        "identifier": ["ClusterId","NodePoolId"],
+        "path": "./examples/resources/volcenginecc_vke_default_node_pool/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_node",
+        "identifier": ["ClusterId","NodePoolId","NodeId"],
+        "path": "./examples/resources/volcenginecc_vke_node/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_ha_vip",
+        "identifier": ["HaVipId"],
+        "path": "./examples/resources/volcenginecc_vpc_ha_vip/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_flow_log",
+        "identifier": ["FlowLogId"],
+        "path": "./examples/resources/volcenginecc_vpc_flow_log/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_traffic_mirror_target",
+        "identifier": ["TrafficMirrorTargetId"],
+        "path": "./examples/resources/volcenginecc_vpc_traffic_mirror_target/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_traffic_mirror_filter",
+        "identifier": ["TrafficMirrorFilterId"],
+        "path": "./examples/resources/volcenginecc_vpc_traffic_mirror_filter/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_ipv6_address_bandwidth",
+        "identifier": ["AllocationId"],
+        "path": "./examples/resources/volcenginecc_vpc_ipv6_address_bandwidth/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_traffic_mirror_session",
+        "identifier": ["TrafficMirrorSessionId"],
+        "path": "./examples/resources/volcenginecc_vpc_traffic_mirror_session/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_ipv6_gateway",
+        "identifier": ["Ipv6GatewayId"],
+        "path": "./examples/resources/volcenginecc_vpc_ipv6_gateway/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_traffic_mirror_filter_rule",
+        "identifier": ["TrafficMirrorFilterId","TrafficMirrorFilterRuleId"],
+        "path": "./examples/resources/volcenginecc_vpc_traffic_mirror_filter_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpn_customer_gateway",
+        "identifier": ["CustomerGatewayId"],
+        "path": "./examples/resources/volcenginecc_vpn_customer_gateway/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_vpn_attachment",
+        "identifier": ["TransitRouterId","TransitRouterAttachmentId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_vpn_attachment/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_vpc_attachment",
+        "identifier": ["TransitRouterId","TransitRouterAttachmentId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_vpc_attachment/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_health_check_template",
+        "identifier": ["HealthCheckTemplateId"],
+        "path": "./examples/resources/volcenginecc_alb_health_check_template/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_customized_cfg",
+        "identifier": ["CustomizedCfgId"],
+        "path": "./examples/resources/volcenginecc_alb_customized_cfg/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_backup",
+        "identifier": ["InstanceId","BackupId"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_backup/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_endpoint",
+        "identifier": ["InstanceId","EndpointId"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_allow_list",
+        "identifier": ["AllowListId"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_allow_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_redis_account",
+        "identifier": ["InstanceId","AccountName"],
+        "path": "./examples/resources/volcenginecc_redis_account/import.sh"
+    },
+    {
+        "resource": "volcenginecc_redis_endpoint_public_address",
+        "identifier": ["InstanceId","EipId"],
+        "path": "./examples/resources/volcenginecc_redis_endpoint_public_address/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdspostgresql_db_endpoint",
+        "identifier": ["InstanceId","EndpointId"],
+        "path": "./examples/resources/volcenginecc_rdspostgresql_db_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdspostgresql_allow_list",
+        "identifier": ["AllowListId"],
+        "path": "./examples/resources/volcenginecc_rdspostgresql_allow_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatezone_record",
+        "identifier": ["RecordId"],
+        "path": "./examples/resources/volcenginecc_privatezone_record/import.sh"
+    },
+    {
+        "resource": "volcenginecc_organization_account",
+        "identifier": ["AccountId"],
+        "path": "./examples/resources/volcenginecc_organization_account/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rabbitmq_public_address",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_rabbitmq_public_address/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rabbitmq_instance_plugin",
+        "identifier": ["InstanceId","PluginName"],
+        "path": "./examples/resources/volcenginecc_rabbitmq_instance_plugin/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kms_key_ring",
+        "identifier": ["KeyRingId"],
+        "path": "./examples/resources/volcenginecc_kms_key_ring/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rocketmq_topic",
+        "identifier": ["InstanceId","TopicName"],
+        "path": "./examples/resources/volcenginecc_rocketmq_topic/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rocketmq_group",
+        "identifier": ["InstanceId","GroupId"],
+        "path": "./examples/resources/volcenginecc_rocketmq_group/import.sh"
     }
 ]

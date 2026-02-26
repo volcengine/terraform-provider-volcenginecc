@@ -1,0 +1,187 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/NetworkInterfaceId",
+    "/properties/Tags",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "标签信息。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "镜像会话关联镜像源、镜像目的、筛选条件，使从镜像源复制的流量私网转发到镜像目的，是流量镜像的载体。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/NetworkInterfaceId",
+      "/properties/PacketLength",
+      "/properties/Priority",
+      "/properties/TrafficMirrorFilterId",
+      "/properties/TrafficMirrorSessionId",
+      "/properties/TrafficMirrorSessionName",
+      "/properties/VirtualNetworkId",
+      "/properties/TrafficMirrorTargetId",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateTrafficMirrorSession",
+        "vpc:DescribeTrafficMirrorSessions"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteTrafficMirrorSession",
+        "vpc:DescribeTrafficMirrorSessions"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorSessions"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorSessions"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyTrafficMirrorSessionAttributes",
+        "vpc:DescribeTrafficMirrorSessions",
+        "vpc:TagResources",
+        "vpc:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TrafficMirrorSessionId"
+  ],
+  "properties": {
+    "BusinessStatus": {
+      "description": "会话计费状态。Normal：正常计费中。- FinancialLocked：欠费锁定。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "镜像会话实例描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "LockReason": {
+      "description": "锁定原因。",
+      "type": "string"
+    },
+    "NetworkInterfaceId": {
+      "description": "镜像源实例ID，当前只支持ECS的主网卡和辅助网卡。",
+      "type": "string"
+    },
+    "PacketLength": {
+      "description": "镜像会话MTU，超过被截断，取值范围：64～9600。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "Priority": {
+      "description": "镜像会话优先级，取值范围1 ～ 32766，同一账户下镜像会话优先级不能重复。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "所属项目的名称",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "会话状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TrafficMirrorFilterId": {
+      "description": "筛选条件实例ID。",
+      "type": "string"
+    },
+    "TrafficMirrorSessionId": {
+      "description": "镜像会话实例ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TrafficMirrorSessionName": {
+      "description": "镜像会话名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "TrafficMirrorSourceIds": {
+      "description": "镜像源实例列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TrafficMirrorTargetId": {
+      "description": "镜像目的实例ID。",
+      "type": "string"
+    },
+    "VirtualNetworkId": {
+      "description": "镜像会话VNI，取值范围1 ～ 16777215。",
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BusinessStatus",
+    "/properties/CreatedTime",
+    "/properties/LockReason",
+    "/properties/Status",
+    "/properties/TrafficMirrorSessionId",
+    "/properties/TrafficMirrorSourceIds"
+  ],
+  "required": [
+    "NetworkInterfaceId",
+    "Priority",
+    "TrafficMirrorFilterId",
+    "TrafficMirrorTargetId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::TrafficMirrorSession",
+  "writeOnlyProperties": [
+    "/properties/NetworkInterfaceId"
+  ]
+}

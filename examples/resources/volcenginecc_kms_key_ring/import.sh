@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_kms_key_ring.example "key_ring_id"

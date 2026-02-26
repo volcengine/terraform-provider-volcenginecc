@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_ipv6_gateway.example "ipv6_gateway_id"

@@ -1,0 +1,230 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BackupMethod",
+    "/properties/BackupType",
+    "/properties/InstanceId",
+    "/properties/BackupMeta"
+  ],
+  "definitions": {
+    "DBTableInfo": {
+      "properties": {
+        "Database": {
+          "description": "数据库名。",
+          "type": "string"
+        },
+        "Tables": {
+          "description": "表名列表。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "备份是数据库的重要运行时文件，基于备份文件，数据库能够实现容灾、恢复等功能。云数据库 MySQL 版提供了数据备份和日志备份两种备份能力：通过数据备份可将数据库恢复至某个备份集，通过日志备份可将数据库恢复至指定时间点。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/BackupEndTime",
+      "/properties/BackupId",
+      "/properties/BackupMethod",
+      "/properties/BackupName",
+      "/properties/BackupStartTime",
+      "/properties/BackupStatus",
+      "/properties/BackupType",
+      "/properties/CreateType",
+      "/properties/InstanceId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_mysql:CreateBackup",
+        "rds_mysql:DescribeBackups",
+        "rds_mysql:DeleteDataBackup"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_mysql:DeleteDataBackup",
+        "rds_mysql:DescribeBackups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_mysql:DescribeBackups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_mysql:DescribeBackups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/BackupId"
+  ],
+  "properties": {
+    "BackupEndTime": {
+      "description": "备份创建结束时间（UTC）。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "BackupFileName": {
+      "description": "备份文件名。",
+      "type": "string"
+    },
+    "BackupFileSize": {
+      "description": "备份文件大小，单位为字节。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BackupId": {
+      "description": "备份 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "BackupMeta": {
+      "description": "创建逻辑备份类型的库表备份时，用于指定要备份的库表信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DBTableInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BackupMethod": {
+      "description": "备份类型，取值：Physical（物理备份）、Logical（逻辑备份）、Snapshot（快照备份）。",
+      "enum": [
+        "Physical",
+        "Logical",
+        "Snapshot"
+      ],
+      "type": "string"
+    },
+    "BackupName": {
+      "description": "备份的名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "BackupRegion": {
+      "description": "备份所在区域。",
+      "type": "string"
+    },
+    "BackupStartTime": {
+      "description": "备份创建开始时间（UTC）。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "BackupStatus": {
+      "description": "备份状态，取值：Success（成功）、Failed（失败）、Running（执行中）。",
+      "enum": [
+        "Success",
+        "Failed",
+        "Running"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "BackupType": {
+      "description": "备份方式，取值：Full（全量/库表备）、Increment（增量备份）、DumpAll（全库备份）。",
+      "enum": [
+        "Full",
+        "Increment",
+        "DumpAll"
+      ],
+      "type": "string"
+    },
+    "ConsistentTime": {
+      "description": "一致性时间点。",
+      "type": "string"
+    },
+    "CreateType": {
+      "description": "备份创建者，取值：System（系统）、User（用户）。",
+      "enum": [
+        "System",
+        "User"
+      ],
+      "type": "string"
+    },
+    "DBEngineVersion": {
+      "description": "兼容版本。取值：MySQL_5_7：MySQL 5.7 版本。MySQL_8_0：MySQL 8.0 版本。",
+      "type": "string"
+    },
+    "DBTableInfos": {
+      "description": "库表信息列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DBTableInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DownloadStatus": {
+      "description": "下载状态。",
+      "type": "string"
+    },
+    "EngineType": {
+      "description": "数据库引擎类型。取值：InnoDB：InnoDB 引擎。RocksDB：RocksDB 引擎。",
+      "type": "string"
+    },
+    "ErrorMessage": {
+      "description": "备份失败的错误信息。",
+      "type": "string"
+    },
+    "ExpiredTime": {
+      "description": "备份过期时间（UTC）。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "type": "string"
+    },
+    "IsEncrypted": {
+      "description": "是否加密。",
+      "type": "boolean"
+    },
+    "IsExpired": {
+      "description": "是否已过期。",
+      "type": "boolean"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BackupId",
+    "/properties/BackupName",
+    "/properties/BackupStatus",
+    "/properties/BackupFileName",
+    "/properties/BackupFileSize",
+    "/properties/BackupRegion",
+    "/properties/BackupStartTime",
+    "/properties/BackupEndTime",
+    "/properties/ConsistentTime",
+    "/properties/CreateType",
+    "/properties/DBEngineVersion",
+    "/properties/DownloadStatus",
+    "/properties/ExpiredTime",
+    "/properties/ErrorMessage",
+    "/properties/EngineType",
+    "/properties/IsEncrypted",
+    "/properties/IsExpired",
+    "/properties/DBTableInfos"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSMySQL::Backup",
+  "writeOnlyProperties": [
+    "/properties/BackupMeta"
+  ]
+}

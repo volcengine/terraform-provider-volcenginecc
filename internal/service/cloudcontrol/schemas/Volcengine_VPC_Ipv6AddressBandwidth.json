@@ -1,0 +1,196 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BandwidthPackageId",
+    "/properties/BillingType",
+    "/properties/Ipv6Address",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "标签信息。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "IPv6公网流量的带宽，决定IPv6地址的公网通信能力。IPv6地址若未开通IPv6公网带宽，则仅支持私网互通，您可以按需为IPv6地址开通IPv6公网带宽，使该IPv6地址具备与公网互通的能力。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/BandwidthPackageId",
+      "/properties/ISP",
+      "/properties/NetworkType",
+      "/properties/ProjectName",
+      "/properties/Ipv6Address",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:AllocateIpv6AddressBandwidth",
+        "vpc:DescribeIpv6AddressBandwidthAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:ReleaseIpv6AddressBandwidth",
+        "vpc:DescribeIpv6AddressBandwidthAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeIpv6AddressBandwidths"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeIpv6AddressBandwidthAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyIpv6AddressBandwidth",
+        "vpc:DescribeIpv6AddressBandwidthAttributes",
+        "vpc:TagResources",
+        "vpc:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllocationId"
+  ],
+  "properties": {
+    "AllocationId": {
+      "description": "IPv6公网带宽的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Bandwidth": {
+      "description": "IPv6公网带宽的带宽上限。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BandwidthPackageId": {
+      "description": "IPv6共享带宽包的ID。",
+      "type": "string"
+    },
+    "BillingType": {
+      "description": "IPv6公网带宽的计费类型。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "IPv6公网带宽是否被锁定。Normal：正常。FinancialLocked：被锁定。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "IPv6公网带宽的开通时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "IPv6公网带宽的删除时间。",
+      "type": "string"
+    },
+    "ISP": {
+      "description": "IPv6公网带宽的线路类型。BGP：BGP（多线）。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "IPv6公网带宽关联的实例ID。",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "IPv6公网带宽关联的实例类型。EcsInstance：云服务器实例。ClbInstance：负载均衡。",
+      "type": "string"
+    },
+    "Ipv6Address": {
+      "description": "IPv6地址。",
+      "type": "string"
+    },
+    "Ipv6GatewayId": {
+      "description": "IPv6网关的ID。",
+      "type": "string"
+    },
+    "LockReason": {
+      "description": "IPv6公网带宽被锁定的原因。该参数只有IPv6公网带宽处于FinancialLocked状态时才有返回值。Financial：因欠费被锁定。Security：因安全被锁定。",
+      "type": "string"
+    },
+    "NetworkType": {
+      "description": "IPv6地址的通信类型。Private：私网通信类型。Public：公网通信类型。",
+      "type": "string"
+    },
+    "OverdueTime": {
+      "description": "IPv6公网带宽欠费关停的时间。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "IPv6公网带宽的项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ServiceManaged": {
+      "description": "是否为服务托管。",
+      "type": "boolean"
+    },
+    "Status": {
+      "description": "IPv6公网带宽的状态。Creating：创建中。Available：可用。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "IPv6公网带宽的最近操作时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllocationId",
+    "/properties/BusinessStatus",
+    "/properties/DeletedTime",
+    "/properties/ISP",
+    "/properties/InstanceId",
+    "/properties/InstanceType",
+    "/properties/Ipv6GatewayId",
+    "/properties/LockReason",
+    "/properties/NetworkType",
+    "/properties/OverdueTime",
+    "/properties/Status",
+    "/properties/CreatedTime",
+    "/properties/ServiceManaged",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "Ipv6Address",
+    "BillingType"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::Ipv6AddressBandwidth"
+}

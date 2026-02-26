@@ -1,0 +1,217 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/GroupId",
+    "/properties/GroupType",
+    "/properties/RetryMaxTimes",
+    "/properties/ConsumeMessageOrderly"
+  ],
+  "definitions": {
+    "ConsumedClientsInfo": {
+      "properties": {
+        "ClientAddress": {
+          "description": "该消费者实例的地址和端口。",
+          "type": "string"
+        },
+        "ClientId": {
+          "description": "该消费者实例的 ID。",
+          "type": "string"
+        },
+        "Diff": {
+          "description": "消息堆积量。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Language": {
+          "description": "消费者应用的开发语言。",
+          "type": "string"
+        },
+        "Version": {
+          "description": "消费端版本。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ConsumedTopicsInfo": {
+      "properties": {
+        "QueueNum": {
+          "description": "Topic 对应的队列数。每个 Topic 下有一到多个队列用于存储消息。",
+          "type": "integer"
+        },
+        "SubString": {
+          "description": "订阅规则。",
+          "type": "string"
+        },
+        "TopicName": {
+          "description": "客户端订阅的 Topic 名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Group 即消费组（Consumer Group），是一类具有相同消费行为的消费者集合，用于分类管理不同的消费者。每个消费组消费不同种类的消息，且消息发布或订阅的逻辑一致。在消息队列 RocketMQ版中，您需要创建 Group，并通过 Group ID 标识不同类别的生产者或消费者。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/GroupId",
+      "/properties/GroupType"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "RocketMQ:CreateGroup",
+        "RocketMQ:DescribeGroupsDetail",
+        "RocketMQ:DescribeConsumedTopics",
+        "RocketMQ:DescribeConsumedClients"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "RocketMQ:DeleteGroup",
+        "RocketMQ:DescribeGroupsDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "RocketMQ:DescribeGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "RocketMQ:DescribeGroupsDetail",
+        "RocketMQ:DescribeConsumedTopics",
+        "RocketMQ:DescribeConsumedClients"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "RocketMQ:ModifyGroupDescription",
+        "RocketMQ:DescribeGroupsDetail",
+        "RocketMQ:DescribeConsumedTopics",
+        "RocketMQ:DescribeConsumedClients"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/GroupId"
+  ],
+  "properties": {
+    "ConsumeMessageOrderly": {
+      "description": "Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。",
+      "type": "boolean"
+    },
+    "ConsumedClients": {
+      "description": "消费客户端列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ConsumedClientsInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ConsumedTopics": {
+      "description": "该 Group 下消费者实例群组订阅的 Topic 信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ConsumedTopicsInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedTime": {
+      "description": "Group 的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Group 的简单描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "GroupId": {
+      "description": "Group 的 ID。长度限制为 7~120 个字符，只能包含字母、数字、短划线（-）和下划线（_）。推荐以 GID- 或 GID_ 开头。创建 Group 后无法修改 ID，请谨慎设置。对于2023年6月5日及之前创建的 RocketMQ 实例，Group 名称不可超过 93 个字符。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "GroupType": {
+      "description": "Group 的协议标识，用于备注该 Group 的生产消费协议类型。可指定为 TCP。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID。",
+      "type": "string"
+    },
+    "IsSubSame": {
+      "description": "Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。",
+      "type": "boolean"
+    },
+    "LastUpdateTimestamp": {
+      "description": "是否顺序消费。",
+      "type": "string"
+    },
+    "MessageDelayTime": {
+      "description": "消息延迟时间，消费者实例群组最早的一条未消费消息的生产时间与当前时间的差值。单位为毫秒。",
+      "type": "string"
+    },
+    "MessageModel": {
+      "description": "消息消费模式。默认为集群模式，请勿在同一 Group 下同时配置集群模式和广播模式。Clustering：集群消费模式，Broadcasting：广播消费模式。",
+      "type": "string"
+    },
+    "RetryMaxTimes": {
+      "description": "消费最大重试次数。",
+      "type": "integer"
+    },
+    "RocketmqVersion": {
+      "description": "RocketMQ 版本。",
+      "type": "string"
+    },
+    "ServiceStatus": {
+      "description": "服务状态。Creating：创建中，Running：运行中，Deleting：删除中，Abnormal：异常，Updating：更新中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Status": {
+      "description": "消费组状态。Online：消费中，Offline：未消费。",
+      "type": "string"
+    },
+    "TotalConsumedRate": {
+      "description": "该 Group 下消费者实例群组接收消息的总 TPS，单位为条/秒。",
+      "type": "string"
+    },
+    "TotalDiff": {
+      "description": "消费者实例群组的未消费消息的总量。此处显示的消息堆积量为未过滤 Tag 的总堆积量，包括 Topic 下所有 Tag 的消息。",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/LastUpdateTimestamp",
+    "/properties/Status",
+    "/properties/ServiceStatus",
+    "/properties/ConsumedTopics",
+    "/properties/ConsumedClients",
+    "/properties/IsSubSame",
+    "/properties/MessageDelayTime",
+    "/properties/MessageModel",
+    "/properties/RocketmqVersion",
+    "/properties/TotalConsumedRate",
+    "/properties/TotalDiff"
+  ],
+  "required": [
+    "GroupId",
+    "GroupType",
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RocketMQ::Group"
+}

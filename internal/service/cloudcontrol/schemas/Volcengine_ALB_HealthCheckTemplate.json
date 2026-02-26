@@ -1,0 +1,175 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "健康检查模板关联的标签。",
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。具体规则如下：长度限制为1～128个字符。大小写敏感。不能以sys:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。如果传入该参数，则必须先传入Tags.N.Key。具体规则如下：长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "健康检查是确保应用程序是否可用的关键功能。ALB 通过定期对后端服务器进行健康检查，来验证这些服务器是否可以接受新的请求。当一个后端服务器不能正常响应 ALB 的健康检查请求时，来自客户端的流量不会被路由到该服务器。ALB 会将流量转发至其他状态为正常的服务器上。从而保证了服务的连续性和可靠性。ALB 健康检查是基于服务器组进行的。服务器组启用健康检查后，ALB 定期检查服务器组内的后端服务器状态。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/HealthCheckTemplateId",
+      "/properties/HealthCheckTemplateName",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "alb:CreateHealthCheckTemplates",
+        "alb:DescribeHealthCheckTemplates"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "alb:DeleteHealthCheckTemplates",
+        "alb:DescribeHealthCheckTemplates"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "alb:DescribeHealthCheckTemplates"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "alb:DescribeHealthCheckTemplates"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "alb:ModifyHealthCheckTemplates",
+        "alb:UntagResources",
+        "alb:TagResources",
+        "alb:DescribeHealthCheckTemplates"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/HealthCheckTemplateId"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "健康检查模版的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "健康检查描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "HealthCheckDomain": {
+      "description": "健康检查的域名。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：需至少包含一个‘.’，且不允许以‘.’开头结尾。单个字符串由字母、数字、‘-’、‘.’字符组成，‘-’不得出现在字符串的头部或尾部。长度限制为1 ～ 128个字符。不填则此参数为空，负载均衡默认使用各后端服务器的私网IP地址进行健康检查。",
+      "type": "string"
+    },
+    "HealthCheckHttpCode": {
+      "description": "健康检查正常的HTTP状态码。多个状态码用以半角逗号分隔，只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：http_2xx（默认）。http_3xx（默认） 。http_4xx 。http_5xx 。",
+      "type": "string"
+    },
+    "HealthCheckHttpVersion": {
+      "description": "健康检查HTTP协议版本。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：HTTP1.0（默认值）。HTTP1.1。",
+      "type": "string"
+    },
+    "HealthCheckInterval": {
+      "description": "执行健康检查的时间间隔，默认为2，取值1-300s 。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "HealthCheckMethod": {
+      "description": "健康检查的方法。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：GETHEAD（默认方法）",
+      "type": "string"
+    },
+    "HealthCheckPort": {
+      "description": "健康检查端口。取值如下：0：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "HealthCheckProtocol": {
+      "description": "健康检查的协议。HTTPTCP。",
+      "type": "string"
+    },
+    "HealthCheckTemplateId": {
+      "description": "健康检查模板 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "HealthCheckTemplateName": {
+      "description": "健康检查模板的名称。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点（.）、下划线（_）和短横线（-）。长度限制在1～128字符之间。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "HealthCheckTimeout": {
+      "description": "健康检查的响应超时时间，默认为2，取值1-60s 。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "HealthCheckURI": {
+      "description": "健康检查的路径。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘\u0026’、‘＝’字符。长度限制为1 ～ 128个字符。不填默认为“/”。",
+      "type": "string"
+    },
+    "HealthyThreshold": {
+      "description": "健康检查的健康阈值，默认为3，取值2-10次。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "健康检查模板所属项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "健康检查模板关联的标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UnhealthyThreshold": {
+      "description": "健康检查的不健康阈值，默认为3，取值2-10次。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "UpdateTime": {
+      "description": "健康检查模版最近一次的操作时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreateTime",
+    "/properties/HealthCheckTemplateId",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "HealthCheckTemplateName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::ALB::HealthCheckTemplate"
+}

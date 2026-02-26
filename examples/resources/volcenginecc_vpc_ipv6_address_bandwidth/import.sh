@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_ipv6_address_bandwidth.example "allocation_id"

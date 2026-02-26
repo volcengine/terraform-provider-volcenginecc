@@ -1,0 +1,264 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/Tags"
+  ],
+  "definitions": {
+    "EgressFilterRule": {
+      "description": "出方向筛选规则的详细信息。",
+      "properties": {
+        "Description": {
+          "description": "筛选规则实例描述。",
+          "type": "string"
+        },
+        "DestinationCidrBlock": {
+          "description": "筛选规则目的地址。",
+          "type": "string"
+        },
+        "DestinationPortRange": {
+          "description": "筛选规则目的端口范围。",
+          "type": "string"
+        },
+        "Policy": {
+          "description": "筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。",
+          "type": "string"
+        },
+        "Priority": {
+          "description": "筛选规则优先级。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "ProjectName": {
+          "description": "所属项目的名称。",
+          "type": "string"
+        },
+        "Protocol": {
+          "description": "筛选规则协议类型。",
+          "type": "string"
+        },
+        "SourceCidrBlock": {
+          "description": "筛选规则源地址。",
+          "type": "string"
+        },
+        "SourcePortRange": {
+          "description": "筛选规则源端口范围。",
+          "type": "string"
+        },
+        "Status": {
+          "description": "筛选规则状态。",
+          "type": "string"
+        },
+        "TrafficDirection": {
+          "description": "筛选规则方向。egress：出方向。ingress：入方向。",
+          "type": "string"
+        },
+        "TrafficMirrorFilterId": {
+          "description": "筛选条件实例ID。",
+          "type": "string"
+        },
+        "TrafficMirrorFilterRuleId": {
+          "description": "筛选规则实例ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IngressFilterRule": {
+      "description": "入方向筛选规则的详细信息。",
+      "properties": {
+        "Description": {
+          "description": "筛选规则实例描述。",
+          "type": "string"
+        },
+        "DestinationCidrBlock": {
+          "description": "筛选规则目的地址。",
+          "type": "string"
+        },
+        "DestinationPortRange": {
+          "description": "筛选规则目的端口范围。",
+          "type": "string"
+        },
+        "Policy": {
+          "description": "筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。",
+          "type": "string"
+        },
+        "Priority": {
+          "description": "筛选规则优先级。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "ProjectName": {
+          "description": "所属项目的名称。",
+          "type": "string"
+        },
+        "Protocol": {
+          "description": "筛选规则协议类型。",
+          "type": "string"
+        },
+        "SourceCidrBlock": {
+          "description": "筛选规则源地址。",
+          "type": "string"
+        },
+        "SourcePortRange": {
+          "description": "筛选规则源端口范围。",
+          "type": "string"
+        },
+        "Status": {
+          "description": "筛选规则状态。",
+          "type": "string"
+        },
+        "TrafficDirection": {
+          "description": "筛选规则方向。egress：出方向。ingress：入方向。",
+          "type": "string"
+        },
+        "TrafficMirrorFilterId": {
+          "description": "筛选条件实例ID。",
+          "type": "string"
+        },
+        "TrafficMirrorFilterRuleId": {
+          "description": "筛选规则实例ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "标签信息。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "通过流量镜像，您可以按自己设定的筛选条件复制网卡的流量，并将复制的流量私网转发到目标服务进行监控分析。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TrafficMirrorFilterId",
+      "/properties/TrafficMirrorFilterName",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateTrafficMirrorFilter",
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteTrafficMirrorFilter",
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorFilters"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyTrafficMirrorFilterAttributes",
+        "vpc:DescribeTrafficMirrorFilters",
+        "vpc:TagResources",
+        "vpc:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TrafficMirrorFilterId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "筛选条件的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "筛选条件实例描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EgressFilterRules": {
+      "description": "出方向筛选规则的详细信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/EgressFilterRule",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "IngressFilterRules": {
+      "description": "入方向筛选规则的详细信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/IngressFilterRule",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProjectName": {
+      "description": "筛选条件所属项目的名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "筛选条件状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TrafficMirrorFilterId": {
+      "description": "筛选条件实例ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TrafficMirrorFilterName": {
+      "description": "筛选条件名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/EgressFilterRules",
+    "/properties/IngressFilterRules",
+    "/properties/Status",
+    "/properties/TrafficMirrorFilterId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::TrafficMirrorFilter"
+}

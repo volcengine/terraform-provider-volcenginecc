@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rocketmq_topic.example "instance_id|topic_name"

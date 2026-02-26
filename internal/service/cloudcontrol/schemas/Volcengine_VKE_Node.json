@@ -1,0 +1,259 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AdditionalContainerStorageEnabled",
+    "/properties/ClusterId",
+    "/properties/InstanceId",
+    "/properties/ContainerStoragePath",
+    "/properties/ImageId",
+    "/properties/InitializeScript",
+    "/properties/KubernetesConfig",
+    "/properties/NodePoolId",
+    "/properties/KeepInstanceName"
+  ],
+  "definitions": {
+    "Condition": {
+      "description": "节点当前主状态下的状态条件，即进入该主状态的原因。",
+      "properties": {
+        "Type": {
+          "description": "节点当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing，Ok，Unschedulable，InitilizeFailed，NotReady，Balance，ResourceCleanupFailed，Unknown。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "KubernetesConfig": {
+      "description": "节点 Kubernetes 相关配置。",
+      "properties": {
+        "Cordon": {
+          "description": "封锁节点配置，取值：false：（默认值）不封锁 true：封锁",
+          "type": "boolean"
+        },
+        "Labels": {
+          "description": "节点池/节点的 Kubernetes 标签（Labels）信息。最多可传入 20 个标签。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Label",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Taints": {
+          "description": "节点池/节点的 Kubernetes 污点（Taints）信息。最多可传入 20 个污点。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Taint",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "Label": {
+      "description": "节点池/节点的 Kubernetes 标签（Labels）信息。",
+      "properties": {
+        "Key": {
+          "description": "标签键，有效的标签键有两个段：\u003c前缀\u003e和\u003c名称\u003e，用斜杠（/）分隔。\u003c名称\u003e是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。\u003c前缀\u003e是可选的。如果指定\u003c前缀\u003e，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。\u003c前缀\u003e和\u003c名称\u003e总长度不超过 82 个字符。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Status": {
+      "description": "节点状态。",
+      "properties": {
+        "Conditions": {
+          "description": "节点当前主状态下的状态条件，即进入该主状态的原因。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Condition",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Phase": {
+          "description": "节点的状态，参数值有：Creating，Running，Deleting，Failed，Updating。",
+          "semantic": "status",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Taint": {
+      "description": "节点池/节点的 Kubernetes 污点（Taints）信息。",
+      "properties": {
+        "Effect": {
+          "default": "NoSchedule",
+          "description": "污点效果，取值：NoSchedule：（默认值）不调度。NoExecute：驱逐没有容忍污点的 Pod。PreferNoSchedule：尽量避免调度。",
+          "enum": [
+            "NoSchedule",
+            "NoExecute",
+            "PreferNoSchedule"
+          ],
+          "type": "string"
+        },
+        "Key": {
+          "description": "污点键，有效的污点键有两个段：\u003c前缀\u003e和\u003c名称\u003e，用斜杠（/）分隔。\u003c名称\u003e是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。\u003c前缀\u003e是可选的。如果指定\u003c前缀\u003e，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。\u003c前缀\u003e和\u003c名称\u003e总长度不超过 82 个字符。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "污点值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "对应 Kubernetes 中的 Node，是容器服务集群组成的基本元素。节点主要包括：Master 节点（控制节点）和 Worker 节点（计算节点/工作节点）。应用实际部署在 Worker 节点上，支持通过配置随机部署在 Worker 节点上或部署在指定的 Worker 节点上。容器服务中的 节点 一般指 Worker 节点。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId",
+      "/properties/NodePoolId",
+      "/properties/NodeId",
+      "/properties/Name",
+      "/properties/ZoneId",
+      "/properties/Status/Phase",
+      "/properties/Status/Conditions/*/Type",
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vke:CreateNodes",
+        "vke:ListNodes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vke:DeleteNodes",
+        "vke:ListNodes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vke:ListNodes"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vke:ListNodes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId",
+    "/properties/NodePoolId",
+    "/properties/NodeId"
+  ],
+  "properties": {
+    "AdditionalContainerStorageEnabled": {
+      "description": "选择配置节点的数据盘并格式化挂载作为容器镜像和日志的存储目录，取值：false：（默认值）关闭。默认节点池：表示不挂载数据盘。自定义节点池：使用节点池的数据盘配置进行挂载，被添加到节点池的 ECS 实例数据盘必须包含目标节点池指定了挂载的数据盘（含本地盘），且盘类型和大小完全一致。true: 开启。此时必须同时配置 ContainerStoragePath 参数。节点通过 ContainerStoragePath参数中的配置进行挂载，而忽略节点池的数据盘配置，对被添加到节点池的 ECS 实例数据盘无特殊要求。",
+      "type": "boolean"
+    },
+    "ClusterId": {
+      "description": "集群的 ID。",
+      "type": "string"
+    },
+    "ContainerStoragePath": {
+      "description": "使用该数据盘设备挂载容器和镜像存储目录/var/lib/containerd。\n仅当AdditionalContainerStorageEnabled=true时有效，且不能为空。须满足以下条件，否则将初始化失败：仅支持已挂载数据盘的 ECS 实例。指定数据盘设备名时，请确保该数据盘设备存在，否则会初始化失败。指定数据盘分区或逻辑卷名时，请确保该分区或逻辑卷存在，且为 ext4 文件系统。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "ImageId": {
+      "description": "节点对应的 ECS 实例使用的镜像 ID。",
+      "type": "string"
+    },
+    "InitializeScript": {
+      "description": "创建 ECS 节点并完成 Kubernetes 组件部署后执行的脚本。支持 Shell 格式，Base64 编码后长度不超过 1 KB。为空时，节点继承使用默认节点池配置的初始化脚本NodeConfig.InitializeScript。自定义填写脚本内容后，使用自定义的脚本，忽略默认节点池配置的初始化脚本。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "节点对应的云服务器实例 ID。",
+      "type": "string"
+    },
+    "IsVirtual": {
+      "description": "是否为虚拟节点，参数值说明：false：否 true：是。",
+      "type": "boolean"
+    },
+    "KeepInstanceName": {
+      "description": "是否保留原 ECS 实例名称，取值：false：（默认值）不保留原 ECS 实例名称，由容器服务自动为其命名。true：保留原 ECS 实例名称。",
+      "type": "boolean"
+    },
+    "KubernetesConfig": {
+      "$ref": "#/definitions/KubernetesConfig",
+      "description": "节点 Kubernetes 相关配置。为空时，节点继承使用默认节点池的 Kubernetes 配置KubernetesConfig.Labels/Taints/Cordon。自定义填写配置后，使用自定义配置内容，忽略默认节点池的 Kubernetes 配置。",
+      "type": "object"
+    },
+    "Name": {
+      "description": "节点名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NodeId": {
+      "description": "节点 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "NodePoolId": {
+      "description": "节点池 ID。不传入参数值：表示将已有 ECS 实例添加到默认节点池。传入参数值：表示将已有 ECS 实例添加到自定义节点池。",
+      "type": "string"
+    },
+    "Roles": {
+      "description": "节点角色，参数值说明：Worker：Worker节点。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Status": {
+      "$ref": "#/definitions/Status",
+      "description": "节点状态。",
+      "type": "object"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "可用区 ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/NodeId",
+    "/properties/IsVirtual",
+    "/properties/Name",
+    "/properties/Roles",
+    "/properties/Status",
+    "/properties/UpdatedTime",
+    "/properties/ZoneId"
+  ],
+  "required": [
+    "ClusterId",
+    "NodePoolId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VKE::Node",
+  "writeOnlyProperties": [
+    "/properties/KeepInstanceName"
+  ]
+}

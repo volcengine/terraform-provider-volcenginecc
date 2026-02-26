@@ -1,0 +1,155 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceType",
+    "/properties/InstanceId",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签的标签值。长度取值范围为0～256字符，不填默认为空。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "镜像目的是收集流量的网卡或传统型负载均衡。您可以通过流量镜像，按自己设定的筛选条件复制网卡的流量，并将复制的流量私网转发到目标服务进行监控分析。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TrafficMirrorTargetId",
+      "/properties/TrafficMirrorTargetName",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateTrafficMirrorTarget",
+        "vpc:DescribeTrafficMirrorTargets"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteTrafficMirrorTarget",
+        "vpc:DescribeTrafficMirrorTargets"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorTargets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeTrafficMirrorTargets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyTrafficMirrorTargetAttributes",
+        "vpc:TagResources",
+        "vpc:UnTagResources",
+        "vpc:DescribeTrafficMirrorTargets"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TrafficMirrorTargetId"
+  ],
+  "properties": {
+    "CreatedAt": {
+      "description": "镜像会话的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "监听器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。不填则默认值为空字符串。",
+      "maxLength": 255,
+      "minLength": 0,
+      "semantic": "description",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "镜像目的的资源ID。",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "镜像目的的资源类型。NetworkInterface：弹性网卡。ClbInstance：传统型负载均衡。",
+      "enum": [
+        "NetworkInterface",
+        "ClbInstance"
+      ],
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "镜像目的所属项目的名称。不填默认加入default项目。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "镜像目的状态。Available：可用。Creating：创建中。",
+      "enum": [
+        "Available",
+        "Creating"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "镜像目的的标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TrafficMirrorTargetId": {
+      "description": "镜像目的的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TrafficMirrorTargetName": {
+      "description": "监听器的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线_）和中划线（-）。长度限制在1～128字符之间。不填则默认将“协议-端口”作为监听器名称。",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "description": "镜像会话的更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TrafficMirrorTargetId",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "required": [
+    "InstanceType",
+    "InstanceId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::TrafficMirrorTarget"
+}

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_organization_account.example "account_id"

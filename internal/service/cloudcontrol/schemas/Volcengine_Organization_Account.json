@@ -1,0 +1,289 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/VerificationRelationId"
+  ],
+  "definitions": {
+    "SecureContactInfo": {
+      "properties": {
+        "Email": {
+          "description": "安全邮箱。",
+          "type": "string"
+        },
+        "EmailVerified": {
+          "description": "安全邮箱是否验证，1: 未验证，2: 已验证。",
+          "enum": [
+            1,
+            2
+          ],
+          "type": "integer"
+        },
+        "NewEmail": {
+          "description": "变更中的新邮箱。",
+          "type": "string"
+        },
+        "NewPhone": {
+          "description": "变更中的新手机号。",
+          "type": "string"
+        },
+        "Phone": {
+          "description": "安全手机号。",
+          "type": "string"
+        },
+        "PhoneVerified": {
+          "description": "安全手机号是否验证，1: 未验证，2: 已验证。",
+          "enum": [
+            1,
+            2
+          ],
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "查看和管理您组织内的所有账号。每个账号可以直接放在根节点中，也可以移动到您创建的任意组织节点层级结构中，每个账号只能归属于一个节点。您可以分层树状结构管理您的组织结构以及成员账号。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/OrgUnitID",
+      "/properties/OrgVerificationID"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "organization:CreateAccount",
+        "organization:InviteAccount",
+        "organization:TagResources",
+        "organization:EnableConsoleLogin",
+        "organization:ChangeAccountSecureContactInfo",
+        "organization:DescribeAccount",
+        "organization:ListTagResources",
+        "organization:GetAccountSecureContactInfo"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "organization:RemoveAccount",
+        "organization:DescribeAccount"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "organization:ListAccounts"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "organization:DescribeAccount",
+        "organization:ListTagResources",
+        "organization:GetAccountSecureContactInfo"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "organization:UpdateAccount",
+        "organization:UnTagResources",
+        "organization:TagResources",
+        "organization:EnableConsoleLogin",
+        "organization:DisableConsoleLogin",
+        "organization:MoveAccount",
+        "organization:ChangeAccountSecureContactInfo",
+        "organization:DescribeAccount",
+        "organization:ListTagResources",
+        "organization:GetAccountSecureContactInfo"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AccountId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "火山账号ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AccountName": {
+      "description": "账户名称。5-20个字符。",
+      "maxLength": 20,
+      "minLength": 5,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AllowConsole": {
+      "description": "允许控制台访问，1: 允许，2: 不允许。",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "AllowExit": {
+      "description": "允许退出，1: 允许，2: 不允许。",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeleteUk": {
+      "description": "删除标记。",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "删除时间。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "IamRole": {
+      "description": "IAM角色名称。",
+      "type": "string"
+    },
+    "IsOwner": {
+      "description": "是否是管理员，0.非管理员，1.管理员。",
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer"
+    },
+    "JoinType": {
+      "description": "加入类型，1: 创建，2: 邀请。",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "MainName": {
+      "description": "主体名称。",
+      "type": "string"
+    },
+    "MemberAccountId": {
+      "description": "组织成员账号ID。",
+      "type": "string"
+    },
+    "OrgID": {
+      "description": "组织ID。",
+      "type": "string"
+    },
+    "OrgType": {
+      "description": "组织类型，1.企业组织。",
+      "enum": [
+        1
+      ],
+      "type": "integer"
+    },
+    "OrgUnitID": {
+      "description": "组织单元ID。传入 0 加入到 root 单元。",
+      "type": "string"
+    },
+    "OrgUnitName": {
+      "description": "组织单元名称。",
+      "type": "string"
+    },
+    "OrgVerificationID": {
+      "description": "认证主体ID。",
+      "type": "string"
+    },
+    "Owner": {
+      "description": "管理员ID。",
+      "type": "string"
+    },
+    "Password": {
+      "description": "账户密码。",
+      "maxLength": 32,
+      "minLength": 8,
+      "type": "string"
+    },
+    "SecureContactInfo": {
+      "$ref": "#/definitions/SecureContactInfo",
+      "description": "安全联系信息。",
+      "type": "object"
+    },
+    "ShowName": {
+      "description": "显示名称。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VerificationRelationId": {
+      "description": "被继承认证主体的账号ID，给非管理员认证主体创建账号时需要，账号需已加入企业组织。默认不传，则继承企业组织管理员的认证主体。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/MemberAccountId",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/DeletedTime",
+    "/properties/IsOwner",
+    "/properties/Owner",
+    "/properties/OrgID",
+    "/properties/OrgType",
+    "/properties/OrgUnitName",
+    "/properties/OrgVerificationID",
+    "/properties/IamRole",
+    "/properties/MainName",
+    "/properties/JoinType",
+    "/properties/SecureContactInfo/Phone",
+    "/properties/SecureContactInfo/PhoneVerified",
+    "/properties/SecureContactInfo/Email",
+    "/properties/SecureContactInfo/EmailVerified"
+  ],
+  "required": [
+    "AccountName",
+    "ShowName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::Organization::Account",
+  "writeOnlyProperties": [
+    "/properties/Password"
+  ]
+}

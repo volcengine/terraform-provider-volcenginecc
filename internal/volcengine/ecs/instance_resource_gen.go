@@ -41,6 +41,20 @@ func init() {
 // This Terraform resource corresponds to the Cloud Control Volcengine::ECS::Instance resource.
 func instanceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AffinityGroupId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "亲和组ID。",
+		//	  "type": "string"
+		//	}
+		"affinity_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "亲和组ID。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AffinityGroupSize
 		// Cloud Control resource type schema:
 		//
@@ -54,8 +68,25 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// AffinityGroupSize is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: AutoPay
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "是否自动支付，取值：true：自动支付。您需要确保账户余额充足，如果账户余额不足会生成异常订单，计费方式转换失败。false（默认）：仅生成订单但不扣费，您可以在生成订单后，登录订单管理页面完成支付。",
+		//	  "type": "boolean"
+		//	}
+		"auto_pay": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "是否自动支付，取值：true：自动支付。您需要确保账户余额充足，如果账户余额不足会生成异常订单，计费方式转换失败。false（默认）：仅生成订单但不扣费，您可以在生成订单后，登录订单管理页面完成支付。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AutoPay is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AutoRenew
 		// Cloud Control resource type schema:
@@ -70,7 +101,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// AutoRenew is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -103,7 +133,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// AutoRenewPeriod is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -217,6 +246,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// CreditSpecification is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -233,7 +263,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentSetGroupNumber
@@ -338,6 +367,19 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "default": false,
 		//	      "description": "实例是否随实例释放。",
 		//	      "type": "boolean"
+		//	    },
+		//	    "SecurityProtectionInstanceId": {
+		//	      "description": "DDoS原生防护（企业版）ID。",
+		//	      "type": "integer"
+		//	    },
+		//	    "SecurityProtectionTypes": {
+		//	      "description": "公网IP的安全防护类型。",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -437,12 +479,64 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 					// ReleaseWithInstance is a write-only property.
 				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionInstanceId
+				"security_protection_instance_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "DDoS原生防护（企业版）ID。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+					// SecurityProtectionInstanceId is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionTypes
+				"security_protection_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "公网IP的安全防护类型。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+					// SecurityProtectionTypes is a write-only property.
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "实例的EIP地址。",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ElasticScheduledInstanceType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "弹性预约实例类型，取值：NoEsi：非弹性预约实例。Esi：弹性预约实例。Segmented：弹性预约实例-时段型。",
+		//	  "type": "string"
+		//	}
+		"elastic_scheduled_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "弹性预约实例类型，取值：NoEsi：非弹性预约实例。Esi：弹性预约实例。Segmented：弹性预约实例-时段型。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnableJumboFrame
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例是否开启巨型帧。取值：false：不开启巨型帧，该实例的所有网卡MTU值为1500。true：开启巨型帧，该实例的所有网卡MTU值为8500。",
+		//	  "type": "boolean"
+		//	}
+		"enable_jumbo_frame": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "实例是否开启巨型帧。取值：false：不开启巨型帧，该实例的所有网卡MTU值为1500。true：开启巨型帧，该实例的所有网卡MTU值为8500。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredAt
@@ -493,6 +587,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Image
@@ -533,9 +628,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "实例的镜像ID。",
 					Required:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.RequiresReplace(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ImageReleaseVersion
 				"image_release_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -570,12 +662,46 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 					// SecurityEnhancementStrategy is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "实例的镜像。",
 			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IncludeDataVolumes
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "是否将实例上挂载的所有按量计费数据盘转换为包年包月数据盘。true：转换。false （默认）：不转换。",
+		//	  "type": "boolean"
+		//	}
+		"include_data_volumes": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "是否将实例上挂载的所有按量计费数据盘转换为包年包月数据盘。true：转换。false （默认）：不转换。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// IncludeDataVolumes is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: InstallRunCommandAgent
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "创建实例时是否安装云助手Agent，取值：true：创建时安装。false（默认）：创建时不安装。",
+		//	  "type": "boolean"
+		//	}
+		"install_run_command_agent": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "创建实例时是否安装云助手Agent，取值：true：创建时安装。false（默认）：创建时不安装。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// InstallRunCommandAgent is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceChargeType
 		// Cloud Control resource type schema:
@@ -600,7 +726,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
@@ -642,9 +767,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "实例规格。\n    - 产品选型：您可以参考[实例规格介绍](https://www.volcengine.com/docs/6396/70840)或者调用[DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769)查看实例规格的性能数据，也可以参考[实例选型最佳实践](https://www.volcengine.com/docs/6396/74174)了解如何选择实例规格。\n    - 查询库存：您可以调用[DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279)查询可用区中计算资源的库存信息。",
 			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KeyPair
 		// Cloud Control resource type schema:
@@ -671,7 +793,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: KeyPairId
 				"key_pair_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "实例的公钥。",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -695,7 +816,59 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LocalVolumes
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例对应的本地盘配置信息。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "实例对应的本地盘配置信息。",
+		//	    "properties": {
+		//	      "Count": {
+		//	        "description": "实例挂载的本地盘数量。",
+		//	        "type": "integer"
+		//	      },
+		//	      "Size": {
+		//	        "description": "实例挂载的本地盘的单盘容量，单位GiB。",
+		//	        "type": "integer"
+		//	      },
+		//	      "VolumeType": {
+		//	        "description": "本地盘类型，取值：LOCAL_SSD：SSD本地盘。LOCAL_HDD：HDD本地盘。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"local_volumes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Count
+					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "实例挂载的本地盘数量。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Size
+					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "实例挂载的本地盘的单盘容量，单位GiB。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VolumeType
+					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "本地盘类型，取值：LOCAL_SSD：SSD本地盘。LOCAL_HDD：HDD本地盘。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "实例对应的本地盘配置信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OperationSystem
@@ -724,30 +897,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "实例的操作系统名称。",
-					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "实例的操作系统类型。Linux：Linux系统。Windows：Windows系统。",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"Linux",
-							"Windows",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "实例的操作系统类型。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -816,7 +974,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Period is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -841,7 +998,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// PeriodUnit is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1001,10 +1157,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "SubnetId",
-		//	    "SecurityGroupIds"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"primary_network_interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1050,6 +1202,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: PrimaryIpAddress
 				"primary_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "实例的主IP地址。",
+					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1071,15 +1224,23 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "实例的安全组ID。",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeAtMost(5),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetId
 				"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "实例的子网ID。",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VpcId
 				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1112,6 +1273,208 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RdmaIpAddresses
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "当查询高性能计算GPU型实例时，列表形式返回各网卡的RDMA IP地址。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"rdma_ip_addresses": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "当查询高性能计算GPU型实例时，列表形式返回各网卡的RDMA IP地址。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RdmaNetworkInterfaceDetails
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "各网卡的RDMA 信息。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "网卡的RDMA 信息。",
+		//	    "properties": {
+		//	      "Gateway": {
+		//	        "description": "网关地址。",
+		//	        "type": "string"
+		//	      },
+		//	      "Ip": {
+		//	        "description": "IP地址。",
+		//	        "type": "string"
+		//	      },
+		//	      "Mask": {
+		//	        "description": "子网掩码。",
+		//	        "type": "string"
+		//	      },
+		//	      "SwitchName": {
+		//	        "description": "交换机名称。",
+		//	        "type": "string"
+		//	      },
+		//	      "SwitchPort": {
+		//	        "description": "交换机端口。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"rdma_network_interface_details": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Gateway
+					"gateway": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网关地址。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ip
+					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "IP地址。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Mask
+					"mask": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "子网掩码。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SwitchName
+					"switch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "交换机名称。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SwitchPort
+					"switch_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "交换机端口。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "各网卡的RDMA 信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RenewInfo
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "续费信息。",
+		//	  "properties": {
+		//	    "Period": {
+		//	      "description": "续费的月数，取值：1、2、3、4、5、6、7、8、9、12、24、36。",
+		//	      "enum": [
+		//	        1,
+		//	        2,
+		//	        3,
+		//	        4,
+		//	        5,
+		//	        6,
+		//	        7,
+		//	        8,
+		//	        9,
+		//	        12,
+		//	        24,
+		//	        36
+		//	      ],
+		//	      "type": "integer"
+		//	    },
+		//	    "PeriodUnit": {
+		//	      "description": "续费时长的时间单位，即参数Period的单位。取值：Month（默认）。",
+		//	      "enum": [
+		//	        "Month"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Period",
+		//	    "PeriodUnit"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"renew_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "续费的月数，取值：1、2、3、4、5、6、7、8、9、12、24、36。",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.OneOf(
+							1,
+							2,
+							3,
+							4,
+							5,
+							6,
+							7,
+							8,
+							9,
+							12,
+							24,
+							36,
+						),
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PeriodUnit
+				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "续费时长的时间单位，即参数Period的单位。取值：Month（默认）。",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Month",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "续费信息。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// RenewInfo is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: RoleNames
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例绑定的IAM角色名称。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"role_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "实例绑定的IAM角色名称。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryNetworkInterfaces
@@ -1177,10 +1540,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "SubnetId",
-		//	      "SecurityGroupIds"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "minItems": 1,
@@ -1213,6 +1572,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: PrivateIpAddresses
@@ -1223,6 +1583,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 							setplanmodifier.UseStateForUnknown(),
+							setplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SecurityGroupIds
@@ -1233,10 +1594,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
 							setvalidator.SizeAtMost(5),
-							fwvalidators.NotNullSet(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 							setplanmodifier.UseStateForUnknown(),
+							setplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
@@ -1244,22 +1605,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						Description: "实例的子网ID。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+							stringplanmodifier.RequiresReplaceIfConfigured(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: VpcId
-					"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的VPC ID。",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "实例的辅助网卡。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
@@ -1366,23 +1717,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
-		//	  "enum": [
-		//	    "KeepCharging",
-		//	    "StopCharging"
-		//	  ],
+		//	  "description": "StoppedMode string 可选 示例值：KeepCharging\n停机模式，取值：\nKeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\nStopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。NotApplicable：表示本实例不支持节省停机功能。",
 		//	  "type": "string"
 		//	}
 		"stopped_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "StoppedMode string 可选 示例值：KeepCharging\n  停机模式，取值：\n  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\n  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n  有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。",
+			Description: "StoppedMode string 可选 示例值：KeepCharging\n  停机模式，取值：\n  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。\n  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。\n  有关节省停机的启用条件，请参见按量计费节省停机模式说明。\n  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。NotApplicable：表示本实例不支持节省停机功能。",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"KeepCharging",
-					"StopCharging",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1671,7 +2012,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "实例所属的私有网络ID。您可以调用[DescribeVpcs](https://www.volcengine.com/docs/6563/66127)接口获取目标地域下的VPC信息。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1714,14 +2054,17 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"affinity":                        "Affinity",
+		"affinity_group_id":               "AffinityGroupId",
 		"affinity_group_size":             "AffinityGroupSize",
 		"allocation_id":                   "AllocationId",
+		"auto_pay":                        "AutoPay",
 		"auto_renew":                      "AutoRenew",
 		"auto_renew_period":               "AutoRenewPeriod",
 		"bandwidth_mbps":                  "BandwidthMbps",
 		"bandwidth_package_id":            "BandwidthPackageId",
 		"charge_type":                     "ChargeType",
 		"core_count":                      "CoreCount",
+		"count":                           "Count",
 		"cpu_max_frequency":               "CpuMaxFrequency",
 		"cpu_memory":                      "CpuMemory",
 		"cpu_number":                      "CpuNumber",
@@ -1735,19 +2078,25 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"deployment_set_id":               "DeploymentSetId",
 		"description":                     "Description",
 		"eip_address":                     "EipAddress",
+		"elastic_scheduled_instance_type": "ElasticScheduledInstanceType",
+		"enable_jumbo_frame":              "EnableJumboFrame",
 		"expired_at":                      "ExpiredAt",
 		"extra_performance_iops":          "ExtraPerformanceIOPS",
 		"extra_performance_throughput_mb": "ExtraPerformanceThroughputMB",
 		"extra_performance_type_id":       "ExtraPerformanceTypeId",
+		"gateway":                         "Gateway",
 		"hostname":                        "Hostname",
 		"hpc_cluster_id":                  "HpcClusterId",
 		"image":                           "Image",
 		"image_id":                        "ImageId",
 		"image_release_version":           "ImageReleaseVersion",
+		"include_data_volumes":            "IncludeDataVolumes",
+		"install_run_command_agent":       "InstallRunCommandAgent",
 		"instance_charge_type":            "InstanceChargeType",
 		"instance_id":                     "InstanceId",
 		"instance_name":                   "InstanceName",
 		"instance_type":                   "InstanceType",
+		"ip":                              "Ip",
 		"ip_address":                      "IpAddress",
 		"ipv_6_address_count":             "Ipv6AddressCount",
 		"ipv_6_addresses":                 "Ipv6Addresses",
@@ -1757,7 +2106,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"key_pair":                        "KeyPair",
 		"key_pair_id":                     "KeyPairId",
 		"key_pair_name":                   "KeyPairName",
+		"local_volumes":                   "LocalVolumes",
 		"mac_address":                     "MacAddress",
+		"mask":                            "Mask",
 		"memory_size":                     "MemorySize",
 		"name":                            "Name",
 		"network_interface_id":            "NetworkInterfaceId",
@@ -1770,10 +2121,16 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"primary_network_interface":       "PrimaryNetworkInterface",
 		"private_ip_addresses":            "PrivateIpAddresses",
 		"project_name":                    "ProjectName",
+		"rdma_ip_addresses":               "RdmaIpAddresses",
+		"rdma_network_interface_details":  "RdmaNetworkInterfaceDetails",
 		"release_with_instance":           "ReleaseWithInstance",
+		"renew_info":                      "RenewInfo",
+		"role_names":                      "RoleNames",
 		"secondary_network_interfaces":    "SecondaryNetworkInterfaces",
 		"security_enhancement_strategy":   "SecurityEnhancementStrategy",
 		"security_group_ids":              "SecurityGroupIds",
+		"security_protection_instance_id": "SecurityProtectionInstanceId",
+		"security_protection_types":       "SecurityProtectionTypes",
 		"size":                            "Size",
 		"snapshot_id":                     "SnapshotId",
 		"spot_price_limit":                "SpotPriceLimit",
@@ -1781,6 +2138,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"status":                          "Status",
 		"stopped_mode":                    "StoppedMode",
 		"subnet_id":                       "SubnetId",
+		"switch_name":                     "SwitchName",
+		"switch_port":                     "SwitchPort",
 		"system_volume":                   "SystemVolume",
 		"tags":                            "Tags",
 		"tenancy":                         "Tenancy",
@@ -1805,12 +2164,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/EipAddress/ReleaseWithInstance",
 		"/properties/EipAddress/ISP",
 		"/properties/EipAddress/ChargeType",
+		"/properties/EipAddress/SecurityProtectionInstanceId",
+		"/properties/EipAddress/SecurityProtectionTypes",
+		"/properties/InstallRunCommandAgent",
 		"/properties/AffinityGroupSize",
 		"/properties/PrimaryNetworkInterface/PrivateIpAddresses",
 		"/properties/Period",
 		"/properties/PeriodUnit",
 		"/properties/AutoRenew",
 		"/properties/AutoRenewPeriod",
+		"/properties/RenewInfo",
+		"/properties/AutoPay",
+		"/properties/IncludeDataVolumes",
 		"/properties/CpuMaxFrequency",
 		"/properties/CreditSpecification",
 		"/properties/SystemVolume/VolumeType",
@@ -1823,6 +2188,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/AffinityGroupId",
+		"/properties/ElasticScheduledInstanceType",
+		"/properties/LocalVolumes",
+		"/properties/RdmaIpAddresses",
+		"/properties/RdmaNetworkInterfaceDetails",
 		"/properties/InstanceId",
 		"/properties/CreatedAt",
 		"/properties/ExpiredAt",
@@ -1833,16 +2203,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/PrimaryNetworkInterface/Ipv6Addresses",
 		"/properties/PrimaryNetworkInterface/MacAddress",
 		"/properties/PrimaryNetworkInterface/NetworkInterfaceId",
-		"/properties/PrimaryNetworkInterface/PrimaryIpAddress",
 		"/properties/SecondaryNetworkInterfaces/*/Ipv6Addresses",
 		"/properties/SecondaryNetworkInterfaces/*/MacAddress",
 		"/properties/SecondaryNetworkInterfaces/*/NetworkInterfaceId",
+		"/properties/SecondaryNetworkInterfaces/*/VpcId",
 		"/properties/SystemVolume/VolumeId",
+		"/properties/KeyPair/KeyPairId",
+		"/properties/OperationSystem",
+		"/properties/VpcId",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/ZoneId",
-		"/properties/Image/ImageId",
 		"/properties/ProjectName",
 		"/properties/SpotStrategy",
 		"/properties/SpotPriceLimit",
@@ -1850,16 +2222,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/PrimaryNetworkInterface/Ipv6AddressCount",
 		"/properties/PrimaryNetworkInterface/PrivateIpAddresses",
 		"/properties/SecondaryNetworkInterfaces/*/Ipv6AddressCount",
+		"/properties/SecondaryNetworkInterfaces/*/PrimaryIpAddress",
+		"/properties/SecondaryNetworkInterfaces/*/PrivateIpAddresses",
+		"/properties/SecondaryNetworkInterfaces/*/SecurityGroupIds",
+		"/properties/SecondaryNetworkInterfaces/*/SubnetId",
 		"/properties/EipAddress/BandwidthPackageId",
 		"/properties/EipAddress/BandwidthMbps",
 		"/properties/EipAddress/ReleaseWithInstance",
 		"/properties/EipAddress/ISP",
 		"/properties/EipAddress/ChargeType",
-		"/properties/InstanceChargeType",
-		"/properties/Period",
-		"/properties/PeriodUnit",
-		"/properties/AutoRenew",
-		"/properties/AutoRenewPeriod",
 		"/properties/SystemVolume/VolumeType",
 		"/properties/SystemVolume/Size",
 		"/properties/SystemVolume/DeleteWithInstance",
@@ -1867,12 +2238,16 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SystemVolume/ExtraPerformanceThroughputMB",
 		"/properties/SystemVolume/ExtraPerformanceTypeId",
 		"/properties/SystemVolume/SnapshotId",
-		"/properties/InstanceType",
 		"/properties/CpuMaxFrequency",
-		"/properties/KeyPair",
-		"/properties/DeletionProtection",
 		"/properties/DeploymentSetGroupNumber",
 		"/properties/Placement",
+		"/properties/InstallRunCommandAgent",
+		"/properties/AffinityGroupSize",
+		"/properties/CreditSpecification",
+		"/properties/EipAddress/SecurityProtectionInstanceId",
+		"/properties/EipAddress/SecurityProtectionTypes",
+		"/properties/HpcClusterId",
+		"/properties/Image/SecurityEnhancementStrategy",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

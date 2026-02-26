@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rdsmysql_backup.example "instance_id|backup_id"
