@@ -658,5 +658,35 @@
         "resource": "volcenginecc_rocketmq_group",
         "identifier": ["InstanceId","GroupId"],
         "path": "./examples/resources/volcenginecc_rocketmq_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_efs_file_system",
+        "identifier": ["FileSystemId"],
+        "path": "./examples/resources/volcenginecc_efs_file_system/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_nlb_security_policy",
+        "identifier": ["SecurityPolicyId"],
+        "path": "./examples/resources/volcenginecc_clb_nlb_security_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudidentity_permission_set",
+        "identifier": ["PermissionSetId"],
+        "path": "./examples/resources/volcenginecc_cloudidentity_permission_set/import.sh"
+    },
+    {
+        "resource": "volcenginecc_filenas_mount_point",
+        "identifier": ["FileSystemId","MountPointId"],
+        "path": "./examples/resources/volcenginecc_filenas_mount_point/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudidentity_group",
+        "identifier": ["GroupId"],
+        "path": "./examples/resources/volcenginecc_cloudidentity_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdspostgresql_db_account",
+        "identifier": ["InstanceId","AccountName"],
+        "path": "./examples/resources/volcenginecc_rdspostgresql_db_account/import.sh"
     }
 ]

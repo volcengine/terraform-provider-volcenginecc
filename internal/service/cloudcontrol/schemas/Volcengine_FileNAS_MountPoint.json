@@ -1,0 +1,251 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/FileSystemId",
+    "/properties/SubnetId",
+    "/properties/VpcId"
+  ],
+  "definitions": {
+    "Client": {
+      "description": "客户端信息。",
+      "properties": {
+        "Ip": {
+          "description": "客户端的私有网络 IP 地址。",
+          "type": "string"
+        },
+        "ProtocolVersion": {
+          "description": "挂载协议版本号。取值：NFSv3。",
+          "enum": [
+            "NFSv3"
+          ],
+          "type": "string"
+        },
+        "VpcName": {
+          "description": "私有网络名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MountPoint": {
+      "description": "挂载点信息。",
+      "properties": {
+        "FileSystemId": {
+          "description": "文件系统 ID。",
+          "type": "string"
+        },
+        "MountPointId": {
+          "description": "挂载点 ID。",
+          "type": "string"
+        },
+        "MountPointName": {
+          "description": "挂载点名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PermissionGroup": {
+      "description": "权限组信息。",
+      "properties": {
+        "CreateTime": {
+          "description": "权限组创建时间。",
+          "type": "string"
+        },
+        "Description": {
+          "description": "权限组描述信息。",
+          "type": "string"
+        },
+        "FileSystemCount": {
+          "description": "关联该权限组的文件系统数量。",
+          "type": "integer"
+        },
+        "FileSystemType": {
+          "description": "文件系统类型。取值说明如下：Extreme：NAS 极速型。Capacity：NAS 容量型。Cache：NAS 缓存型。",
+          "enum": [
+            "Extreme",
+            "Capacity",
+            "Cache"
+          ],
+          "type": "string"
+        },
+        "MountPoints": {
+          "description": "使用该权限组的挂载点信息。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/MountPoint",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "PermissionGroupName": {
+          "description": "权限组名称。",
+          "type": "string"
+        },
+        "PermissionRuleCount": {
+          "description": "权限规则数量。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "挂载点是 NAS 文件系统在网络环境中的连接点。NAS 文件系统需要挂载在计算节点中才能完成数据的访问与存储。挂载是将计算节点与 NAS 文件系统相连接的操作。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/FileSystemId",
+      "/properties/MountPointId",
+      "/properties/VpcId",
+      "/properties/MountPointName"
+    ],
+    "required": [
+      "/properties/FileSystemId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "FileNAS:CreateMountPoint",
+        "FileNAS:DescribeMountPoints",
+        "FileNAS:DescribeMountedClients"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "FileNAS:DeleteMountPoint",
+        "FileNAS:DescribeMountPoints",
+        "FileNAS:DescribeMountedClients"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "FileNAS:DescribeMountPoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "FileNAS:DescribeMountPoints",
+        "FileNAS:DescribeMountedClients"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "FileNAS:UpdateMountPoint",
+        "FileNAS:DescribeMountPoints",
+        "FileNAS:DescribeMountedClients"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FileSystemId",
+    "/properties/MountPointId"
+  ],
+  "properties": {
+    "Clients": {
+      "description": "客户端信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Client",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedTime": {
+      "description": "挂载点创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Domain": {
+      "description": "DNS 地址。",
+      "type": "string"
+    },
+    "FileSystemId": {
+      "description": "文件系统 ID。",
+      "type": "string"
+    },
+    "Ip": {
+      "description": "挂载点地址。",
+      "type": "string"
+    },
+    "MountPointId": {
+      "description": "挂载点 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "MountPointName": {
+      "description": "挂载点名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PermissionGroup": {
+      "$ref": "#/definitions/PermissionGroup",
+      "description": "挂载点绑定的权限组信息。",
+      "type": "object"
+    },
+    "PermissionGroupId": {
+      "description": "权限组 ID。",
+      "type": "string"
+    },
+    "Status": {
+      "description": "挂载点状态。取值：Running：运行中。Creating：创建中。Updating：更新中。Error：异常。Deleting：删除中。DeleteError：删除异常。Deleted：已删除。Stopped：已停止。",
+      "enum": [
+        "Running",
+        "Creating",
+        "Updating",
+        "Error",
+        "Deleting",
+        "DeleteError",
+        "Deleted",
+        "Stopped"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "子网 ID。",
+      "type": "string"
+    },
+    "SubnetName": {
+      "description": "子网名称。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "挂载点更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "私有网络 ID。",
+      "type": "string"
+    },
+    "VpcName": {
+      "description": "私有网络名称。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/Domain",
+    "/properties/Ip",
+    "/properties/MountPointId",
+    "/properties/Status",
+    "/properties/SubnetName",
+    "/properties/UpdatedTime",
+    "/properties/VpcName",
+    "/properties/Clients",
+    "/properties/PermissionGroup"
+  ],
+  "required": [
+    "FileSystemId",
+    "MountPointName",
+    "PermissionGroupId",
+    "SubnetId",
+    "VpcId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::FileNAS::MountPoint"
+}

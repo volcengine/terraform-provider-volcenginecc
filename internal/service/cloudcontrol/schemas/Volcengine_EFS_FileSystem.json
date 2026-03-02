@@ -1,0 +1,313 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ChargeType",
+    "/properties/InstanceType",
+    "/properties/PerformanceDensity",
+    "/properties/ProjectName",
+    "/properties/ZoneId"
+  ],
+  "definitions": {
+    "ChargeConfig": {
+      "description": "文件系统计费配置。",
+      "properties": {
+        "ChargeStatus": {
+          "description": "计费状态，取值说明如下：WaitingPaid：等待支付,Pending：创建中,Modifying：更配中,Failed：失败,Normal：正常,Expired：过期,Overdue：欠费,Reclaimed：回收,Terminated：退订。",
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+          "type": "string"
+        },
+        "ExpireTime": {
+          "description": "到期时间。",
+          "type": "string"
+        },
+        "ReclaimTime": {
+          "description": "回收时间。",
+          "type": "string"
+        },
+        "StopTime": {
+          "description": "关停时间。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Performance": {
+      "description": "文件系统性能信息。",
+      "properties": {
+        "BandwidthMode": {
+          "description": "带宽模式，取值说明如下：Baseline：基线带宽模式,Provisioned：预置带宽模式",
+          "type": "string"
+        },
+        "BaselineBandwidth": {
+          "description": "基准带宽。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "BaselineIops": {
+          "description": "基准 IOPS。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "BurstBandwidth": {
+          "description": "突发带宽。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "BurstIops": {
+          "description": "突发 IOPS。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ProvisionedBandwidth": {
+          "description": "预置带宽。",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ProvisionedIops": {
+          "description": "预置 IOPS。",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "BandwidthMode"
+      ],
+      "type": "object"
+    },
+    "Storage": {
+      "description": "文件系统容量信息。",
+      "properties": {
+        "CapacityLimit": {
+          "description": "容量上限，单位为 MiB。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "CapacityUsed": {
+          "description": "已用容量，单位为 MiB。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "InodeLimit": {
+          "description": "文件数上限。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "InodeUsed": {
+          "description": "已用文件数。",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "标签键值对。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Type": {
+          "description": "标签类型。取值说明如下：System：系统标签,Custom：自定义标签。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "文件系统是一种通过目录树结构管理文件的存储系统，分为本地文件系统和远程文件系统，此处特指远程文件系统，支持多个计算节点并发访问，共享数据集。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ChargeType",
+      "/properties/FileSystemId",
+      "/properties/FileSystemName",
+      "/properties/InstanceType",
+      "/properties/Performance/BandwidthMode",
+      "/properties/PerformanceDensity",
+      "/properties/ProjectName",
+      "/properties/Status",
+      "/properties/ZoneId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "efs:CreateFileSystem",
+        "efs:DescribeFileSystems"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "efs:DeleteFileSystem",
+        "efs:DescribeFileSystems"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "efs:DescribeFileSystems"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "efs:DescribeFileSystems"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "efs:UpdateFileSystem",
+        "efs:UntagResources",
+        "efs:TagResources",
+        "efs:DescribeFileSystems"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FileSystemId"
+  ],
+  "properties": {
+    "AccessPointLimit": {
+      "description": "接入点上限。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ChargeConfig": {
+      "$ref": "#/definitions/ChargeConfig",
+      "description": "文件系统计费配置。",
+      "type": "object"
+    },
+    "ChargeType": {
+      "description": "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "文件系统创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "描述信息。",
+      "type": "string"
+    },
+    "DowngradeUnlockTime": {
+      "description": "文件系统带宽可以降配的时间。",
+      "type": "string"
+    },
+    "FileSystemId": {
+      "description": "文件系统 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "FileSystemName": {
+      "description": "文件系统名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "Basic：基础型,Premium：高级型",
+      "type": "string"
+    },
+    "MountPointLimit": {
+      "description": "挂载点上限。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Performance": {
+      "$ref": "#/definitions/Performance",
+      "description": "文件系统性能信息。",
+      "type": "object"
+    },
+    "PerformanceDensity": {
+      "description": "文件系统性能密度，取值说明如下：Basic_50：基础型 50MB/s/TiB,Premium_125：高级型 125MB/s/TiB。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ProtocolTypes": {
+      "description": "协议类型",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Status": {
+      "description": "文件系统状态。取值说明如下：Creating：创建中。CreateError：创建失败。Running：运行中。Updating：更新中。Deleting：删除中。DeleteError：删除失败。Deleted：已删除。Stopped：已关停。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Storage": {
+      "$ref": "#/definitions/Storage",
+      "description": "文件系统容量信息。",
+      "type": "object"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "文件系统更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "可用区 ID。",
+      "type": "string"
+    },
+    "ZoneName": {
+      "description": "可用区名称。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccessPointLimit",
+    "/properties/ChargeConfig",
+    "/properties/CreateTime",
+    "/properties/DowngradeUnlockTime",
+    "/properties/FileSystemId",
+    "/properties/MountPointLimit",
+    "/properties/Performance/BaselineBandwidth",
+    "/properties/Performance/BaselineIops",
+    "/properties/Performance/BurstIops",
+    "/properties/Performance/ProvisionedIops",
+    "/properties/ProtocolTypes",
+    "/properties/Status",
+    "/properties/Storage",
+    "/properties/UpdateTime",
+    "/properties/ZoneName"
+  ],
+  "required": [
+    "Performance",
+    "FileSystemName",
+    "InstanceType",
+    "PerformanceDensity",
+    "ZoneId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::EFS::FileSystem",
+  "writeOnlyProperties": [
+    "/properties/ChargeType"
+  ]
+}

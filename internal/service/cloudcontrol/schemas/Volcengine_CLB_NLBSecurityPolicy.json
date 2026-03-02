@@ -1,0 +1,161 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "基于一些常见的场景，为您预置了一些安全策略，若系统预置的策略不满足您的需求，您还可以自定义安全策略。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/SecurityPolicyId",
+      "/properties/SecurityPolicyName",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "clb:CreateNLBSecurityPolicy",
+        "clb:DescribeNLBSecurityPolicies"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "clb:DeleteNLBSecurityPolicy",
+        "clb:DescribeNLBSecurityPolicies"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "clb:DescribeNLBSecurityPolicies"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "clb:DescribeNLBSecurityPolicies"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "clb:ModifyNLBSecurityPolicyAttributes",
+        "clb:DescribeNLBSecurityPolicies",
+        "clb:UntagNLBResources",
+        "clb:TagNLBResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SecurityPolicyId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "TLS 安全策略所属的账号ID。",
+      "type": "string"
+    },
+    "Ciphers": {
+      "description": "TLS自定义安全策略的加密套件，不同的TLS协议版本支持的加密套件如下：TLSv1.0 \u0026 TLSv1.1：ECDHE-ECDSA-AES128-SHA，ECDHE-ECDSA-AES256-SHA，ECDHE-RSA-AES128-SHA，ECDHE-RSA-AES256-SHA，AES128-SHA，AES256-SHA，DES-CBC3-SHA。TLSv1.2：ECDHE-ECDSA-AES128-GCM-SHA256，ECDHE-ECDSA-AES256-GCM-SHA384，ECDHE-ECDSA-AES128-SHA256，ECDHE-ECDSA-AES256-SHA384，ECDHE-RSA-AES128-GCM-SHA256，ECDHE-RSA-AES256-GCM-SHA384，ECDHE-RSA-AES128-SHA256，ECDHE-RSA-AES256-SHA384，AES128-GCM-SHA256，AES256-GCM-SHA384，AES128-SHA256，AES256-SHA256。TLSv1.3：TLS_CHACHA20_POLY1305_SHA256，TLS_AES_256_GCM_SHA384，TLS_AES_128_GCM_SHA256，TLS_AES_128_CCM_8_SHA256，TLS_AES_128_CCM_SHA256，TLS_SM4_GCM_SM3，TLS_SM4_CCM_SM3。当传入此参数时，需要传入待支持的全部加密套件，不支持通过此接口仅新增/删除加密套件。仅传入Ciphers.N，未传入TlsVersions.N，则依据当前监听器支持的TLS 协议版本和请求中传入的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS 协议版本和加密套件做校验。TLS_SM4_GCM_SM3和TLS_SM4_CCM_SM3两个加密套件正在邀测中，如需试用，请联系客户经理。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "TLS自定义安全策略所属项目的名称。不传则默认为defaul。",
+      "type": "string"
+    },
+    "RelatedListenerIds": {
+      "description": "TLS 安全策略关联的监听器。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SecurityPolicyId": {
+      "description": "安全策略ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SecurityPolicyName": {
+      "description": "安全策略名称。必须以字母、数字或中文开头，可包含以下特殊字符：点（.）、下划线（_）和中划线（-）；长度限制为1 ～ 128个字符；该参数不传入，则默认为策略ID。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "TLS 自定义安全策略状态。Creating：创建中。Configuring：配置中。Active：正常。Deleting：删除中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TlsVersions": {
+      "description": "更新TLS自定义安全策略的TLS 协议版本。取值：TLSv1.0，TLSv1.1，TLSv1.2，TLSv1.3。当传入此参数时，需要传入待支持的全部TLS版本，不支持通过此接口仅新增/删除TLS协议版本。仅传入TlsVersions.N，未传入Ciphers.N，则依据请求中传入的TLS协议版本和当前监听器支持的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS协议版本和加密套件做校验。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/SecurityPolicyId",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/AccountId",
+    "/properties/Status",
+    "/properties/RelatedListenerIds"
+  ],
+  "required": [
+    "Ciphers",
+    "TlsVersions"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::CLB::NLBSecurityPolicy"
+}

@@ -1,0 +1,98 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AccountName",
+    "/properties/AccountType",
+    "/properties/InstanceId",
+    "/properties/NotAllowPrivileges"
+  ],
+  "description": "RDS PostgreSQL 数据库账号",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/AccountName"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:CreateDBAccount",
+        "rds_postgresql:DescribeDBAccounts"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:DescribeDBAccounts",
+        "rds_postgresql:DeleteDBAccount"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_postgresql:DescribeDBAccounts"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeDBAccounts"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:ModifyDBAccountPrivilege",
+        "rds_postgresql:ResetDBAccount",
+        "rds_postgresql:DescribeDBAccounts"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/AccountName"
+  ],
+  "properties": {
+    "AccountName": {
+      "description": "数据库账号名称。账号名称的设置规则如下：长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能以 pg_ 开头。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。",
+      "type": "string"
+    },
+    "AccountPassword": {
+      "description": "数据库账号的密码。数据库账号密码的设置规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的任意三种组成。特殊字符为 !@#$%^*()\u0026_+-=。",
+      "type": "string"
+    },
+    "AccountPrivileges": {
+      "description": "账号权限信息。多个权限中间以英文逗号（,）分隔。取值：Login：登录权限。Inherit：继承权限。CreateRole：创建角色权限。CreateDB：创建数据库权限。说明当账号类型为高权限账号时，无需传入该参数，默认支持全部权限。当账号类型为普通账号时，支持传入该参数，默认值为 Login 和 Inherit。账号类型为实例只读账号时，即 AccountType 取值为 InstanceReadOnly 时，不支持传入该参数",
+      "type": "string"
+    },
+    "AccountType": {
+      "description": "数据库账号类型，取值范围如下：Super：高权限账号。Normal：普通账号。InstanceReadOnly：实例只读账号。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "NotAllowPrivileges": {
+      "description": "为账号禁用的权限。当前仅支持取值为 DDL。说明仅支持为高权限账号或普通账号传入此字段，即 AccountType 取值为 Super 或 Normal 时。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "AccountName",
+    "AccountPassword",
+    "AccountType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::DBAccount",
+  "writeOnlyProperties": [
+    "/properties/AccountPassword"
+  ]
+}

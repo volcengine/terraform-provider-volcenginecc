@@ -134,6 +134,12 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_kms_key_ring -ccschema ../service/cloudcontrol/schemas/Volcengine_KMS_KeyRing.json -package kms -- ../volcengine/kms/key_ring_resource_gen.go ../volcengine/kms/key_ring_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_rocketmq_topic -ccschema ../service/cloudcontrol/schemas/Volcengine_RocketMQ_Topic.json -package rocketmq -- ../volcengine/rocketmq/topic_resource_gen.go ../volcengine/rocketmq/topic_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_rocketmq_group -ccschema ../service/cloudcontrol/schemas/Volcengine_RocketMQ_Group.json -package rocketmq -- ../volcengine/rocketmq/group_resource_gen.go ../volcengine/rocketmq/group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_efs_file_system -ccschema ../service/cloudcontrol/schemas/Volcengine_EFS_FileSystem.json -package efs -- ../volcengine/efs/file_system_resource_gen.go ../volcengine/efs/file_system_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_clb_nlb_security_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_CLB_NLBSecurityPolicy.json -package clb -- ../volcengine/clb/nlb_security_policy_resource_gen.go ../volcengine/clb/nlb_security_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cloudidentity_permission_set -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudIdentity_PermissionSet.json -package cloudidentity -- ../volcengine/cloudidentity/permission_set_resource_gen.go ../volcengine/cloudidentity/permission_set_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_filenas_mount_point -ccschema ../service/cloudcontrol/schemas/Volcengine_FileNAS_MountPoint.json -package filenas -- ../volcengine/filenas/mount_point_resource_gen.go ../volcengine/filenas/mount_point_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cloudidentity_group -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudIdentity_Group.json -package cloudidentity -- ../volcengine/cloudidentity/group_resource_gen.go ../volcengine/cloudidentity/group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rdspostgresql_db_account -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSPostgreSQL_DBAccount.json -package rdspostgresql -- ../volcengine/rdspostgresql/db_account_resource_gen.go ../volcengine/rdspostgresql/db_account_resource_gen_test.go
 
 package provider
 
@@ -153,6 +159,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/directconnect"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/dns"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/efs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/fwcenter"
