@@ -1,0 +1,166 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GroupName",
+    "/properties/JoinType"
+  ],
+  "definitions": {
+    "Member": {
+      "description": "用户组成员信息",
+      "properties": {
+        "Description": {
+          "description": "用户描述信息",
+          "type": "string"
+        },
+        "DisplayName": {
+          "description": "用户显示名称。",
+          "type": "string"
+        },
+        "Email": {
+          "description": "用户邮箱。",
+          "type": "string"
+        },
+        "IdentityType": {
+          "description": "用户身份类型。",
+          "type": "string"
+        },
+        "JoinTime": {
+          "description": "用户加入用户组的时间。",
+          "type": "string"
+        },
+        "Phone": {
+          "description": "用户手机号。",
+          "type": "string"
+        },
+        "Source": {
+          "description": "用户来源。",
+          "type": "string"
+        },
+        "UserId": {
+          "description": "用户id。",
+          "type": "string"
+        },
+        "UserName": {
+          "description": "用户名。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "当您需要批量为云身份中心用户进行SSO授权时，您可以先通过用户组进行批量的用户管理。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/JoinType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudidentity:CreateGroup",
+        "cloudidentity:AddUserToGroup",
+        "cloudidentity:ListGroupMembers",
+        "cloudidentity:GetGroup"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudidentity:DeleteGroup",
+        "cloudidentity:GetGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudidentity:ListGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudidentity:GetGroup",
+        "cloudidentity:ListGroupMembers"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudidentity:UpdateGroup",
+        "cloudidentity:AddUserToGroup",
+        "cloudidentity:RemoveUserFromGroup",
+        "cloudidentity:GetGroup",
+        "cloudidentity:ListGroupMembers"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GroupId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "显示名。",
+      "type": "string"
+    },
+    "GroupId": {
+      "description": "用户组id。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "GroupName": {
+      "description": "用户组名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "JoinType": {
+      "description": "用户组类型。",
+      "type": "string"
+    },
+    "Members": {
+      "description": "用户组成员列表",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Member"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Source": {
+      "description": "用户组来源。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/GroupId",
+    "/properties/Source",
+    "/properties/UpdatedTime",
+    "/properties/Members/*/Description",
+    "/properties/Members/*/DisplayName",
+    "/properties/Members/*/Email",
+    "/properties/Members/*/IdentityType",
+    "/properties/Members/*/JoinTime",
+    "/properties/Members/*/Phone",
+    "/properties/Members/*/Source",
+    "/properties/Members/*/UserName"
+  ],
+  "required": [
+    "GroupName",
+    "JoinType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudIdentity::Group"
+}

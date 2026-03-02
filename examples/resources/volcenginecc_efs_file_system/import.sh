@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_efs_file_system.example "file_system_id"

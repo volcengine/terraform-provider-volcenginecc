@@ -545,4 +545,26 @@ resource_schema "volcengine_rocketmq_group" {
   cloudcontrol_type_name = "Volcengine::RocketMQ::Group"
 }
 
+resource_schema "volcengine_efs_file_system" {
+  cloudcontrol_type_name = "Volcengine::EFS::FileSystem"
+}
 
+resource_schema "volcengine_clb_nlb_security_policy" {
+  cloudcontrol_type_name = "Volcengine::CLB::NLBSecurityPolicy"
+}
+
+resource_schema "volcengine_cloudidentity_permission_set" {
+  cloudcontrol_type_name = "Volcengine::CloudIdentity::PermissionSet"
+}
+
+resource_schema "volcengine_filenas_mount_point" {
+  cloudcontrol_type_name = "Volcengine::FileNAS::MountPoint"
+}
+
+resource_schema "volcengine_cloudidentity_group" {
+  cloudcontrol_type_name = "Volcengine::CloudIdentity::Group"
+}
+
+resource_schema "volcengine_rdspostgresql_db_account" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::DBAccount"
+}

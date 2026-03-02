@@ -137,3 +137,6 @@ Optional:
 
 - `cloudcontrolapi` (String) Use this to override the default Cloud Control API service endpoint URL
 - `sts` (String) Use this to override the default STS service endpoint URL
+
+##Warning：
+The current version has a known issue when modifying the SetNestedAttribute and ListNestedAttribute of nested ReadOnly/WriteOnly properties, which may cause abnormal plan/apply results. It is recommended that you consider the above limitations and be cautious when changing related data.

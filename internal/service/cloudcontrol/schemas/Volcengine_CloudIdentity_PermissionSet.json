@@ -1,0 +1,151 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "definitions": {
+    "PermissionPolicy": {
+      "description": "权限策略定义。",
+      "properties": {
+        "CreatedTime": {
+          "description": "策略创建时间。",
+          "type": "string"
+        },
+        "PermissionPolicyDocument": {
+          "description": "策略语法内容。语法可参考 策略语法说明。",
+          "type": "string"
+        },
+        "PermissionPolicyName": {
+          "description": "策略名称。",
+          "type": "string"
+        },
+        "PermissionPolicyType": {
+          "description": "策略类型，System or Inline。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/PermissionSetId",
+      "/properties/Name"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudidentity:CreatePermissionSet",
+        "cloudidentity:AddSystemPolicyToPermissionSet",
+        "cloudidentity:AddInlinePolicyToPermissionSet",
+        "cloudidentity:GetPermissionSet",
+        "cloudidentity:ListPermissionPoliciesInPermissionSet",
+        "cloudidentity:ListPermissionSets"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudidentity:DeletePermissionSet",
+        "cloudidentity:GetPermissionSet"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudidentity:ListPermissionSets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudidentity:GetPermissionSet",
+        "cloudidentity:ListPermissionPoliciesInPermissionSet",
+        "cloudidentity:ListPermissionSets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudidentity:UpdatePermissionSet",
+        "cloudidentity:AddSystemPolicyToPermissionSet",
+        "cloudidentity:AddInlinePolicyToPermissionSet",
+        "cloudidentity:UpdateInlinePolicyToPermissionSet",
+        "cloudidentity:RemovePermissionPolicyFromPermissionSet",
+        "cloudidentity:GetPermissionSet",
+        "cloudidentity:ListPermissionPoliciesInPermissionSet",
+        "cloudidentity:ListPermissionSets"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PermissionSetId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "权限集描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Name": {
+      "description": "权限集名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PermissionPolicies": {
+      "description": "权限集下的策略列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PermissionPolicy"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PermissionSetId": {
+      "description": "权限集 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RelayState": {
+      "description": "跳转控制台 URL。",
+      "type": "string"
+    },
+    "SessionDuration": {
+      "description": "session 过期时间，单位秒。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "StatusNotifications": {
+      "description": "状态通知配置。",
+      "insertionOrder": false,
+      "items": {
+        "description": "状态通知配置项。",
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/PermissionSetId",
+    "/properties/StatusNotifications",
+    "/properties/PermissionPolicies/*/CreatedTime",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudIdentity::PermissionSet"
+}
