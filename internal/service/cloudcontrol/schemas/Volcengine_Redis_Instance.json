@@ -223,6 +223,10 @@
       "description": "为变更前创建的全量备份设置备份名称。",
       "type": "string"
     },
+    "BlueGreenRole": {
+      "description": "实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。",
+      "type": "string"
+    },
     "Capacity": {
       "$ref": "#/definitions/Capacity",
       "description": "实例的容量信息。"
@@ -367,6 +371,10 @@
       "description": "实例私网连接地址的域名。",
       "type": "string"
     },
+    "PrivatePort": {
+      "description": "实例私网连接地址的端口号。",
+      "type": "string"
+    },
     "ProjectName": {
       "default": "default",
       "description": "实例所属的项目。",
@@ -472,6 +480,7 @@
     }
   },
   "readOnlyProperties": [
+    "/properties/BlueGreenRole",
     "/properties/Capacity",
     "/properties/CreateTime",
     "/properties/DataLayout",
@@ -479,6 +488,7 @@
     "/properties/InstanceClass",
     "/properties/InstanceId",
     "/properties/PrivateAddress",
+    "/properties/PrivatePort",
     "/properties/ServiceType",
     "/properties/Status",
     "/properties/VIP",

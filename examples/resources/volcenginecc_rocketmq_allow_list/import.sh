@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rocketmq_allow_list.example "allow_list_id"

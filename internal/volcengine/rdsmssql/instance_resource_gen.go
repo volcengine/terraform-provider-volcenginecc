@@ -576,6 +576,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "节点的创建时间。",
 		//	        "type": "string"
 		//	      },
+		//	      "HostName": {
+		//	        "description": "节点主机名。",
+		//	        "type": "string"
+		//	      },
 		//	      "InstanceId": {
 		//	        "description": "实例ID。",
 		//	        "type": "string"
@@ -632,6 +636,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CreateTime
 					"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "节点的创建时间。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HostName
+					"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "节点主机名。",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceId
@@ -1070,6 +1079,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_id":            "EndpointId",
 		"endpoint_name":          "EndpointName",
 		"endpoint_type":          "EndpointType",
+		"host_name":              "HostName",
 		"inner_version":          "InnerVersion",
 		"instance_category":      "InstanceCategory",
 		"instance_id":            "InstanceId",

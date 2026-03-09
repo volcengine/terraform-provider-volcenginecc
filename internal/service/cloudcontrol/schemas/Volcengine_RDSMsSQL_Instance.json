@@ -139,6 +139,10 @@
           "description": "节点的创建时间。",
           "type": "string"
         },
+        "HostName": {
+          "description": "节点主机名。",
+          "type": "string"
+        },
         "InstanceId": {
           "description": "实例ID。",
           "type": "string"

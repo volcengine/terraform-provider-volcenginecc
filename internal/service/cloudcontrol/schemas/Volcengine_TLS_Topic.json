@@ -17,12 +17,13 @@
         }
       },
       "required": [
-        "Key"
+        "Key",
+        "Value"
       ],
       "type": "object"
     }
   },
-  "description": "",
+  "description": "日志主题是日志服务进行日志管理的基本单位，日志接入、检索分析、消费等功能都是基于日志主题的粒度进行操作。",
   "handlers": {
     "create": {
       "permissions": [
@@ -75,11 +76,13 @@
     },
     "CreatedTime": {
       "description": "日志主题创建时间。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "日志主题描述信息。不支持 \u003c\u003e、'、\\、\\\\、所有 emoji 表情符号。长度为 0~64 个字符。",
       "maxLength": 64,
+      "semantic": "description",
       "type": "string"
     },
     "EnableHotTtl": {
@@ -132,20 +135,24 @@
     },
     "TopicID": {
       "description": "日志主题 ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "TopicName": {
       "description": "日志主题名称。",
+      "semantic": "resourceName",
       "type": "string"
     },
     "Ttl": {
       "default": 30,
       "description": "日志在日志服务中的总保存时间，超过指定的日志存储时长后，此日志主题中的过期日志会被自动清除。单位为天，默认为 30 天。取值范围为 1～3650，指定为 3650 天表示永久存储。",
       "maximum": 3650,
+      "minimum": 1,
       "type": "integer"
     },
     "UpdatedTime": {
       "description": "日志主题修改时间。",
+      "semantic": "updatedTime",
       "type": "string"
     }
   },

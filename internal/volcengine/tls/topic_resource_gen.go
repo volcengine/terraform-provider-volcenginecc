@@ -247,7 +247,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -274,6 +275,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 						Description: "用户标签的标签值。",
 						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -349,6 +353,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "default": 30,
 		//	  "description": "日志在日志服务中的总保存时间，超过指定的日志存储时长后，此日志主题中的过期日志会被自动清除。单位为天，默认为 30 天。取值范围为 1～3650，指定为 3650 天表示永久存储。",
 		//	  "maximum": 3650,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -357,7 +362,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Default:     int64default.StaticInt64(30),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtMost(3650),
+				int64validator.Between(1, 3650),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -389,7 +394,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "",
+		Description: "日志主题是日志服务进行日志管理的基本单位，日志接入、检索分析、消费等功能都是基于日志主题的粒度进行操作。",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -197,6 +197,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Period is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: PeriodUnit
 				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -206,6 +207,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// PeriodUnit is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "实例的计费方式等计费信息。",
@@ -456,8 +458,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -484,9 +485,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						Description: "标签的值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -660,6 +658,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/UserPassword",
+		"/properties/ChargeDetail/Period",
+		"/properties/ChargeDetail/PeriodUnit",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

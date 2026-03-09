@@ -1,0 +1,126 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "AssociatedInstance": {
+      "description": "白名单绑定的实例信息。",
+      "properties": {
+        "InstanceId": {
+          "description": "白名单绑定的实例ID。",
+          "type": "string"
+        },
+        "InstanceName": {
+          "description": "白名单绑定的实例名称。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "创建 Kafka 实例时，可以按需为其绑定白名单，绑定白名单与 Kafka 实例之后，仅配置在白名单中的 IP 地址与地址段才能访问消息队列 Kafka版实例。安全起见，建议您创建白名单，并将客户端的 IP 地址或 IP 地址段添加到 Kafka 实例的白名单中。建议您定期维护和管理白名单，提高 Kafka 实例访问的安全性。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AssociatedInstances/*/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "Kafka:CreateAllowList",
+        "Kafka:AssociateAllowList",
+        "Kafka:DescribeAllowListDetail",
+        "Kafka:DescribeAllowLists"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Kafka:DeleteAllowList",
+        "Kafka:DisassociateAllowList",
+        "Kafka:DescribeAllowListDetail",
+        "Kafka:DescribeAllowLists"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Kafka:DescribeAllowLists"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Kafka:DescribeAllowListDetail",
+        "Kafka:DescribeAllowLists"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Kafka:ModifyAllowList",
+        "Kafka:AssociateAllowList",
+        "Kafka:DisassociateAllowList",
+        "Kafka:DescribeAllowListDetail",
+        "Kafka:DescribeAllowLists"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllowListId"
+  ],
+  "properties": {
+    "AllowList": {
+      "description": "白名单规则列表。支持指定为 IP 地址或者 IP 网段。多个 IP 地址或网段之间使用英文逗号（,）分隔。每个白名单最多可配置 300 个 IP 地址或网段。",
+      "type": "string"
+    },
+    "AllowListDesc": {
+      "description": "白名单描述。长度不超过200个字符。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "AllowListId": {
+      "description": "白名单 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AllowListIpNum": {
+      "description": "白名单指定的规则个数。",
+      "type": "integer"
+    },
+    "AllowListName": {
+      "description": "白名单规则名称。长度为 1～128 个字符。只能包含中文、字母、数字、下划线和连字符（-）。不能以数字或连字符（-）开头。白名单名称在当前地域下唯一。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ApplyInstanceNum": {
+      "description": "此白名单已绑定的实例数量。若指定 AllowList 参数，则此字段必填，用于指定规则修改后预期将会影响到的实例个数。若预期影响个数与实际影响个数不符，则请求失败。",
+      "type": "integer"
+    },
+    "AssociatedInstanceNum": {
+      "description": "白名单绑定的实例个数。",
+      "type": "integer"
+    },
+    "AssociatedInstances": {
+      "description": "白名单绑定的实例信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AssociatedInstance",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllowListId",
+    "/properties/AllowListIpNum",
+    "/properties/AssociatedInstanceNum",
+    "/properties/AssociatedInstances/*/InstanceName"
+  ],
+  "required": [
+    "AllowListName",
+    "AllowList"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Kafka::AllowList",
+  "writeOnlyProperties": [
+    "/properties/ApplyInstanceNum"
+  ]
+}

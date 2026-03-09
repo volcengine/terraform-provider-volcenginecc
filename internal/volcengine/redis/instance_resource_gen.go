@@ -92,6 +92,20 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// BackupPointName is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: BlueGreenRole
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。",
+		//	  "type": "string"
+		//	}
+		"blue_green_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Capacity
 		// Cloud Control resource type schema:
 		//
@@ -652,6 +666,20 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PrivatePort
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例私网连接地址的端口号。",
+		//	  "type": "string"
+		//	}
+		"private_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "实例私网连接地址的端口号。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
@@ -1058,6 +1086,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"auto_renew":                   "AutoRenew",
 		"az":                           "AZ",
 		"backup_point_name":            "BackupPointName",
+		"blue_green_role":              "BlueGreenRole",
 		"capacity":                     "Capacity",
 		"charge_type":                  "ChargeType",
 		"configure_nodes":              "ConfigureNodes",
@@ -1085,6 +1114,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"password":                     "Password",
 		"port":                         "Port",
 		"private_address":              "PrivateAddress",
+		"private_port":                 "PrivatePort",
 		"project_name":                 "ProjectName",
 		"purchase_months":              "PurchaseMonths",
 		"reserve_additional_bandwidth": "ReserveAdditionalBandwidth",
@@ -1122,6 +1152,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/BlueGreenRole",
 		"/properties/Capacity",
 		"/properties/CreateTime",
 		"/properties/DataLayout",
@@ -1129,6 +1160,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/InstanceClass",
 		"/properties/InstanceId",
 		"/properties/PrivateAddress",
+		"/properties/PrivatePort",
 		"/properties/ServiceType",
 		"/properties/Status",
 		"/properties/VIP",

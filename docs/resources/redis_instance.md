@@ -78,6 +78,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 
 ### Read-Only
 
+- `blue_green_role` (String) 实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。
 - `capacity` (Attributes) 实例的容量信息。 (see [below for nested schema](#nestedatt--capacity))
 - `create_time` (String) 实例的创建时间。
 - `data_layout` (String) 实例的数据存储形态。该参数仅对企业版（即ServiceType为Enterprise）实例有意义；社区版（即ServiceType为Basic）实例不涉及数据存储形态，DataLayout取值固定为RAM。若该参数留空，表示不使用数据存储形态进行筛选。
@@ -91,6 +92,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `max_connections` (Number) 实例当前单分片最大连接数。每分片的默认连接数为10000，您也可以根据业务需要调用ModifyDBInstanceMaxConn接口修改单分片的最大连接数。
 - `node_ids` (Set of String) Proxy 和 Server 节点 ID 列表。
 - `private_address` (String) 实例私网连接地址的域名。
+- `private_port` (String) 实例私网连接地址的端口号。
 - `service_type` (String) 实例的服务类型
 - `status` (String) 实例的服务类型，取值范围如下：Basic（默认值）：社区版；Enterprise：企业版。
 - `vi_pv_6` (String) 实例私网连接地址所对应的 IPv6 地址。仅当实例使用了 IPv6 地址时才会返回该参数。

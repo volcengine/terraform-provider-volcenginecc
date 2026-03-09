@@ -188,6 +188,46 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。",
 		//	      "type": "boolean"
 		//	    },
+		//	    "ContainerdConfig": {
+		//	      "description": "节点池 Containerd 相关配置。",
+		//	      "properties": {
+		//	        "InsecureRegistries": {
+		//	          "description": "指定跳过证书认证的容器镜像仓库地址。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "RegistryProxyConfigs": {
+		//	          "description": "容器镜像仓库代理配置。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "容器镜像仓库代理配置。",
+		//	            "properties": {
+		//	              "ProxyEndpoints": {
+		//	                "description": "代理地址。",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              },
+		//	              "Registry": {
+		//	                "description": "容器镜像仓库地址。",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Cordon": {
 		//	      "description": "封锁节点配置，参数值说明：false：不封锁。true：封锁。",
 		//	      "type": "boolean"
@@ -198,6 +238,36 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	        "CpuManagerPolicy": {
 		//	          "description": "配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略",
 		//	          "type": "string"
+		//	        },
+		//	        "EvictionHard": {
+		//	          "description": "触发 Pod 驱逐操作的一组硬性门限。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "触发 Pod 驱逐操作的一组硬性门限。",
+		//	            "properties": {
+		//	              "Key": {
+		//	                "description": "硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available",
+		//	                "enum": [
+		//	                  "memory.available",
+		//	                  "nodefs.available",
+		//	                  "nodefs.inodesFree",
+		//	                  "imagefs.available"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "description": "硬性门限值。",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Key",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
 		//	        },
 		//	        "FeatureGates": {
 		//	          "description": "特性门控。",
@@ -378,6 +448,59 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: ContainerdConfig
+				"containerd_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InsecureRegistries
+						"insecure_registries": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "指定跳过证书认证的容器镜像仓库地址。",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RegistryProxyConfigs
+						"registry_proxy_configs": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ProxyEndpoints
+									"proxy_endpoints": schema.SetAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "代理地址。",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+											setplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Registry
+									"registry": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "容器镜像仓库地址。",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "容器镜像仓库代理配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "节点池 Containerd 相关配置。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Cordon
 				"cordon": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "封锁节点配置，参数值说明：false：不封锁。true：封锁。",
@@ -397,6 +520,49 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EvictionHard
+						"eviction_hard": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"memory.available",
+												"nodefs.available",
+												"nodefs.inodesFree",
+												"imagefs.available",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "硬性门限值。",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "触发 Pod 驱逐操作的一组硬性门限。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: FeatureGates
@@ -644,7 +810,6 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
-					// NameSuffix is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: NameUseHostname
 				"name_use_hostname": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -654,7 +819,6 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
-					// NameUseHostname is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Taints
 				"taints": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
@@ -1905,6 +2069,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_id":                           "ClusterId",
 		"compensate_with_on_demand":            "CompensateWithOnDemand",
 		"conditions":                           "Conditions",
+		"containerd_config":                    "ContainerdConfig",
 		"cordon":                               "Cordon",
 		"cpu_manager_policy":                   "CpuManagerPolicy",
 		"created_time":                         "CreatedTime",
@@ -1916,6 +2081,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		"desired_replicas":                     "DesiredReplicas",
 		"effect":                               "Effect",
 		"enabled":                              "Enabled",
+		"eviction_hard":                        "EvictionHard",
 		"failed_count":                         "FailedCount",
 		"feature_gates":                        "FeatureGates",
 		"file_system":                          "FileSystem",
@@ -1924,6 +2090,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		"image_id":                             "ImageId",
 		"in_place_pod_vertical_scaling":        "InPlacePodVerticalScaling",
 		"initialize_script":                    "InitializeScript",
+		"insecure_registries":                  "InsecureRegistries",
 		"instance_charge_type":                 "InstanceChargeType",
 		"instance_name":                        "InstanceName",
 		"instance_type_ids":                    "InstanceTypeIds",
@@ -1959,11 +2126,14 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		"pre_script":                "PreScript",
 		"priority":                  "Priority",
 		"project_name":              "ProjectName",
+		"proxy_endpoints":           "ProxyEndpoints",
 		"public_access_config":      "PublicAccessConfig",
 		"public_access_enabled":     "PublicAccessEnabled",
 		"qo_s_resource_manager":     "QoSResourceManager",
 		"quantity":                  "Quantity",
+		"registry":                  "Registry",
 		"registry_burst":            "RegistryBurst",
+		"registry_proxy_configs":    "RegistryProxyConfigs",
 		"registry_pull_qps":         "RegistryPullQps",
 		"remedy_config":             "RemedyConfig",
 		"remedy_id":                 "RemedyId",
@@ -1997,8 +2167,6 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/KubernetesConfig/NameUseHostname",
-		"/properties/KubernetesConfig/NameSuffix",
 		"/properties/NodeConfig/Security/Login/Password",
 		"/properties/NodeConfig/InstanceName",
 		"/properties/NodeConfig/Hostname",

@@ -688,5 +688,40 @@
         "resource": "volcenginecc_rdspostgresql_db_account",
         "identifier": ["InstanceId","AccountName"],
         "path": "./examples/resources/volcenginecc_rdspostgresql_db_account/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudidentity_user_provisioning",
+        "identifier": ["UserProvisioningId"],
+        "path": "./examples/resources/volcenginecc_cloudidentity_user_provisioning/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudidentity_permission_set_assignment",
+        "identifier": ["TargetId","PrincipalId","PermissionSetId"],
+        "path": "./examples/resources/volcenginecc_cloudidentity_permission_set_assignment/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudidentity_permission_set_provisioning",
+        "identifier": ["PermissionSetId","TargetId"],
+        "path": "./examples/resources/volcenginecc_cloudidentity_permission_set_provisioning/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_project",
+        "identifier": ["ProjectID"],
+        "path": "./examples/resources/volcenginecc_tls_project/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kafka_allow_list",
+        "identifier": ["AllowListId"],
+        "path": "./examples/resources/volcenginecc_kafka_allow_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rocketmq_allow_list",
+        "identifier": ["AllowListId"],
+        "path": "./examples/resources/volcenginecc_rocketmq_allow_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_alb_rule",
+        "identifier": ["ListenerId","RuleId"],
+        "path": "./examples/resources/volcenginecc_alb_rule/import.sh"
     }
 ]

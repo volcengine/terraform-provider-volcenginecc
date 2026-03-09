@@ -177,7 +177,8 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -253,6 +254,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "default": 30,
 		//	  "description": "日志在日志服务中的总保存时间，超过指定的日志存储时长后，此日志主题中的过期日志会被自动清除。单位为天，默认为 30 天。取值范围为 1～3650，指定为 3650 天表示永久存储。",
 		//	  "maximum": 3650,
+		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/

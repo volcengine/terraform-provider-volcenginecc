@@ -568,3 +568,31 @@ resource_schema "volcengine_cloudidentity_group" {
 resource_schema "volcengine_rdspostgresql_db_account" {
   cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::DBAccount"
 }
+
+resource_schema "volcengine_cloudidentity_user_provisioning" {
+  cloudcontrol_type_name = "Volcengine::CloudIdentity::UserProvisioning"
+}
+
+resource_schema "volcengine_cloudidentity_permission_set_assignment" {
+  cloudcontrol_type_name = "Volcengine::CloudIdentity::PermissionSetAssignment"
+}
+
+resource_schema "volcengine_cloudidentity_permission_set_provisioning" {
+  cloudcontrol_type_name = "Volcengine::CloudIdentity::PermissionSetProvisioning"
+}
+
+resource_schema "volcengine_tls_project" {
+  cloudcontrol_type_name = "Volcengine::TLS::Project"
+}
+
+resource_schema "volcengine_kafka_allow_list" {
+  cloudcontrol_type_name = "Volcengine::Kafka::AllowList"
+}
+
+resource_schema "volcengine_rocketmq_allow_list" {
+  cloudcontrol_type_name = "Volcengine::RocketMQ::AllowList"
+}
+
+resource_schema "volcengine_alb_rule" {
+  cloudcontrol_type_name = "Volcengine::ALB::Rule"
+}

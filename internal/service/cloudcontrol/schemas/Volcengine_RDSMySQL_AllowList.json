@@ -170,6 +170,7 @@
     },
     "ProjectName": {
       "description": "所属的项目。说明如您调用接口使用的 AK/SK 属于某个子账号，且该子账号只拥有某个项目的权限，需要传入该请求参数。",
+      "semantic": "projectName",
       "type": "string"
     },
     "SecurityGroupBindInfos": {

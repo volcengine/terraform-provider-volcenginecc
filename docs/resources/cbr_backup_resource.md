@@ -28,15 +28,12 @@ resource "volcenginecc_cbr_backup_resource" "CBRBackupResourceDemo" {
 - `instance_name` (String) 实例名称。
 - `resource_type` (String) 备份源类型，取值说明如下：ECS：ECS 整机。vePFS：vePFS 文件系统。
 
-### Optional
-
-- `meta_information` (Attributes) 资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。 (see [below for nested schema](#nestedatt--meta_information))
-
 ### Read-Only
 
 - `account_id` (String) 创建此备份源的账户 ID。
 - `created_time` (String) 创建时间。
 - `id` (String) Uniquely identifies the resource.
+- `meta_information` (Attributes) 资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。 (see [below for nested schema](#nestedatt--meta_information))
 - `plans` (Attributes Set) 关联的备份计划列表。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--plans))
 - `recovery_point_number` (Number) 恢复点的数量
@@ -48,7 +45,7 @@ resource "volcenginecc_cbr_backup_resource" "CBRBackupResourceDemo" {
 <a id="nestedatt--meta_information"></a>
 ### Nested Schema for `meta_information`
 
-Optional:
+Read-Only:
 
 - `ecs_meta` (String) ECS 的元数据，是一个 JSON string。格式见数据结构的 EcsBackupConfiguration 结构体。
 - `vepfs_meta` (String) vePFS 备份源元数据，是一个 JSON string。格式见数据结构的VePFSBackupConfiguration 结构体。
