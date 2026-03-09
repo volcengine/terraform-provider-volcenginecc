@@ -1,0 +1,139 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AllowListType"
+  ],
+  "definitions": {
+    "Instance": {
+      "properties": {
+        "InstanceId": {
+          "description": "实例ID。",
+          "type": "string"
+        },
+        "InstanceName": {
+          "description": "实例名称。",
+          "type": "string"
+        },
+        "VPC": {
+          "description": "实例所属VPC ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "RocketMQ访问白名单。",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "RocketMQ:CreateAllowList",
+        "RocketMQ:DescribeAllowLists",
+        "RocketMQ:AssociateAllowList",
+        "RocketMQ:DescribeAllowListDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "RocketMQ:DescribeAllowListDetail",
+        "RocketMQ:DeleteAllowList",
+        "RocketMQ:DisassociateAllowList"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "RocketMQ:DescribeAllowLists"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "RocketMQ:DescribeAllowLists",
+        "RocketMQ:DescribeAllowListDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "RocketMQ:DescribeAllowListDetail",
+        "RocketMQ:ModifyAllowList",
+        "RocketMQ:AssociateAllowList",
+        "RocketMQ:DisassociateAllowList"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllowListId"
+  ],
+  "properties": {
+    "AllowList": {
+      "description": "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+      "type": "string"
+    },
+    "AllowListCategory": {
+      "description": "白名单分类。",
+      "type": "string"
+    },
+    "AllowListDesc": {
+      "description": "白名单描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "AllowListIPNum": {
+      "description": "白名单内的 IP 地址（或地址段）总数。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AllowListId": {
+      "description": "白名单的id。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AllowListName": {
+      "description": "白名单名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AllowListType": {
+      "description": "白名单内的IP地址类型，当前仅支持IPv4。",
+      "type": "string"
+    },
+    "ApplyDBInstanceNum": {
+      "description": "已应用实例数量，即当前该白名单所绑定的实例数。主要目的是确认本次修改的影响范围，避免误操作引发故障。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "AssociatedInstanceNum": {
+      "description": "白名单下绑定的实例总数",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AssociatedInstances": {
+      "description": "绑定的实例列表。",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/Instance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceId": {
+      "description": "实例ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllowListId",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstanceNum",
+    "/properties/AssociatedInstances/*/InstanceName",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "required": [
+    "AllowListName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RocketMQ::AllowList",
+  "writeOnlyProperties": [
+    "/properties/ApplyDBInstanceNum"
+  ]
+}

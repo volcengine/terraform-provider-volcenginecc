@@ -151,6 +151,7 @@ Read-Only:
 Read-Only:
 
 - `create_time` (String) 节点的创建时间。
+- `host_name` (String) 节点主机名。
 - `instance_id` (String) 实例ID。
 - `memory` (Number) 内存大小，单位为 GiB。
 - `node_id` (String) 节点ID。

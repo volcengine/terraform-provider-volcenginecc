@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_alb_rule.example "listener_id|rule_id"

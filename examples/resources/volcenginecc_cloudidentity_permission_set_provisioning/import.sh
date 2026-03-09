@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cloudidentity_permission_set_provisioning.example "permission_set_id|target_id"

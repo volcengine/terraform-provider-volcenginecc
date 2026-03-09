@@ -24,6 +24,7 @@ Data Source schema for Volcengine::Redis::Instance
 - `allow_list_ids` (Set of String) 白名单 ID 列表。若该参数留空，新建实例默认不加入任何白名单。您可以调用 DescribeAllowLists 接口查询当前账号下指定地域内的所有 IP 白名单信息，包括白名单 ID 信息。每个实例最多支持绑定 100 个白名单，每次可最多批量绑定 100 个白名单。每个实例最多支持绑定 1000 个 IP 地址或 CIDR 格式的 IP 地址段。
 - `auto_renew` (Boolean) 是否开启自动续费。取值范围如下：false（默认值）：不开启。true：开启。
 - `backup_point_name` (String) 为变更前创建的全量备份设置备份名称。
+- `blue_green_role` (String) 实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。
 - `capacity` (Attributes) 实例的容量信息。 (see [below for nested schema](#nestedatt--capacity))
 - `charge_type` (String) 实例计费类型。取值范围如下：PrePaid：包年包月（也称预付费）。PostPaid：按量计费（也称后付费）。
 - `configure_nodes` (Attributes List) 设置节点所属的可用区列表。 (see [below for nested schema](#nestedatt--configure_nodes))
@@ -47,6 +48,7 @@ Data Source schema for Volcengine::Redis::Instance
 - `password` (String) 设置默认数据库 default 账号的密码。
 - `port` (Number) 自定义私网连接地址的端口号。取值范围：1024~65535。若该参数留空，私网连接地址默认使用6379端口。实例创建成功后，还可以修改私网地址的端口号，修改方法请参见修改端口号。
 - `private_address` (String) 实例私网连接地址的域名。
+- `private_port` (String) 实例私网连接地址的端口号。
 - `project_name` (String) 实例所属的项目。
 - `purchase_months` (Number) 购买时长，单位：月。取值范围如下：按月购买：1，2，3，4，5，6，7，8，9。按年购买：12，24，36。当ChargeType为PrePaid时，该参数必填。
 - `reserve_additional_bandwidth` (Boolean) 设置是否保留额外带宽

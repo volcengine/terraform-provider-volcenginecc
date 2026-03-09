@@ -137,6 +137,46 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。",
 		//	      "type": "boolean"
 		//	    },
+		//	    "ContainerdConfig": {
+		//	      "description": "节点池 Containerd 相关配置。",
+		//	      "properties": {
+		//	        "InsecureRegistries": {
+		//	          "description": "指定跳过证书认证的容器镜像仓库地址。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "RegistryProxyConfigs": {
+		//	          "description": "容器镜像仓库代理配置。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "容器镜像仓库代理配置。",
+		//	            "properties": {
+		//	              "ProxyEndpoints": {
+		//	                "description": "代理地址。",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              },
+		//	              "Registry": {
+		//	                "description": "容器镜像仓库地址。",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Cordon": {
 		//	      "description": "封锁节点配置，参数值说明：false：不封锁。true：封锁。",
 		//	      "type": "boolean"
@@ -147,6 +187,36 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "CpuManagerPolicy": {
 		//	          "description": "配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略",
 		//	          "type": "string"
+		//	        },
+		//	        "EvictionHard": {
+		//	          "description": "触发 Pod 驱逐操作的一组硬性门限。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "触发 Pod 驱逐操作的一组硬性门限。",
+		//	            "properties": {
+		//	              "Key": {
+		//	                "description": "硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available",
+		//	                "enum": [
+		//	                  "memory.available",
+		//	                  "nodefs.available",
+		//	                  "nodefs.inodesFree",
+		//	                  "imagefs.available"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "description": "硬性门限值。",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Key",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
 		//	        },
 		//	        "FeatureGates": {
 		//	          "description": "特性门控。",
@@ -323,6 +393,39 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: ContainerdConfig
+				"containerd_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InsecureRegistries
+						"insecure_registries": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "指定跳过证书认证的容器镜像仓库地址。",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RegistryProxyConfigs
+						"registry_proxy_configs": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ProxyEndpoints
+									"proxy_endpoints": schema.SetAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "代理地址。",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Registry
+									"registry": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "容器镜像仓库地址。",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "容器镜像仓库代理配置。",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "节点池 Containerd 相关配置。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Cordon
 				"cordon": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "封锁节点配置，参数值说明：false：不封锁。true：封锁。",
@@ -334,6 +437,25 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: CpuManagerPolicy
 						"cpu_manager_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EvictionHard
+						"eviction_hard": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "硬性门限值。",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "触发 Pod 驱逐操作的一组硬性门限。",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: FeatureGates
@@ -1381,6 +1503,7 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_id":                           "ClusterId",
 		"compensate_with_on_demand":            "CompensateWithOnDemand",
 		"conditions":                           "Conditions",
+		"containerd_config":                    "ContainerdConfig",
 		"cordon":                               "Cordon",
 		"cpu_manager_policy":                   "CpuManagerPolicy",
 		"created_time":                         "CreatedTime",
@@ -1392,6 +1515,7 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"desired_replicas":                     "DesiredReplicas",
 		"effect":                               "Effect",
 		"enabled":                              "Enabled",
+		"eviction_hard":                        "EvictionHard",
 		"failed_count":                         "FailedCount",
 		"feature_gates":                        "FeatureGates",
 		"file_system":                          "FileSystem",
@@ -1400,6 +1524,7 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"image_id":                             "ImageId",
 		"in_place_pod_vertical_scaling":        "InPlacePodVerticalScaling",
 		"initialize_script":                    "InitializeScript",
+		"insecure_registries":                  "InsecureRegistries",
 		"instance_charge_type":                 "InstanceChargeType",
 		"instance_name":                        "InstanceName",
 		"instance_type_ids":                    "InstanceTypeIds",
@@ -1435,11 +1560,14 @@ func nodePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pre_script":                "PreScript",
 		"priority":                  "Priority",
 		"project_name":              "ProjectName",
+		"proxy_endpoints":           "ProxyEndpoints",
 		"public_access_config":      "PublicAccessConfig",
 		"public_access_enabled":     "PublicAccessEnabled",
 		"qo_s_resource_manager":     "QoSResourceManager",
 		"quantity":                  "Quantity",
+		"registry":                  "Registry",
 		"registry_burst":            "RegistryBurst",
+		"registry_proxy_configs":    "RegistryProxyConfigs",
 		"registry_pull_qps":         "RegistryPullQps",
 		"remedy_config":             "RemedyConfig",
 		"remedy_id":                 "RemedyId",

@@ -63,6 +63,17 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "为变更前创建的全量备份设置备份名称。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BlueGreenRole
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。",
+		//	  "type": "string"
+		//	}
+		"blue_green_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Capacity
 		// Cloud Control resource type schema:
 		//
@@ -496,6 +507,17 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "实例私网连接地址的域名。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PrivatePort
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "实例私网连接地址的端口号。",
+		//	  "type": "string"
+		//	}
+		"private_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "实例私网连接地址的端口号。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
@@ -820,6 +842,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_renew":                   "AutoRenew",
 		"az":                           "AZ",
 		"backup_point_name":            "BackupPointName",
+		"blue_green_role":              "BlueGreenRole",
 		"capacity":                     "Capacity",
 		"charge_type":                  "ChargeType",
 		"configure_nodes":              "ConfigureNodes",
@@ -847,6 +870,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"password":                     "Password",
 		"port":                         "Port",
 		"private_address":              "PrivateAddress",
+		"private_port":                 "PrivatePort",
 		"project_name":                 "ProjectName",
 		"purchase_months":              "PurchaseMonths",
 		"reserve_additional_bandwidth": "ReserveAdditionalBandwidth",

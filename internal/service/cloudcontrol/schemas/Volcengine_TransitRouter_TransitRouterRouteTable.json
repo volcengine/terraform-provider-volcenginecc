@@ -63,7 +63,7 @@
         "transitrouter:ModifyTransitRouterRouteTableAttributes",
         "transitrouter:DescribeTransitRouterRouteTables",
         "transitrouter:TagResources",
-        "transitrouter:UnTagResources"
+        "transitrouter:UntagResources"
       ]
     }
   },

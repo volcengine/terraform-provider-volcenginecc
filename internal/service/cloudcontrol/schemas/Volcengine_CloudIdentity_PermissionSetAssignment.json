@@ -1,0 +1,102 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/PermissionSetId",
+    "/properties/PrincipalId",
+    "/properties/PrincipalType",
+    "/properties/TargetId"
+  ],
+  "description": "当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。\n当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/PermissionSetId",
+      "/properties/PrincipalId",
+      "/properties/PrincipalType",
+      "/properties/TargetId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudidentity:CreateAccountAssignment",
+        "cloudidentity:GetTaskStatus",
+        "cloudidentity:ListAccountAssignments"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudidentity:DeleteAccountAssignment",
+        "cloudidentity:GetTaskStatus",
+        "cloudidentity:ListAccountAssignments"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudidentity:ListAccountAssignments"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudidentity:ListAccountAssignments"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TargetId",
+    "/properties/PrincipalId",
+    "/properties/PermissionSetId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "授权创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "PermissionSetId": {
+      "description": "权限集 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "PermissionSetName": {
+      "description": "权限集名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PrincipalId": {
+      "description": "云身份中心对象 ID",
+      "type": "string"
+    },
+    "PrincipalName": {
+      "description": "云身份中心对象名。",
+      "type": "string"
+    },
+    "PrincipalType": {
+      "description": "云身份中心对象类型，User 或者 Group。",
+      "type": "string"
+    },
+    "TargetId": {
+      "description": "授权账号 ID。",
+      "type": "string"
+    },
+    "TargetName": {
+      "description": "授权账号名。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/PermissionSetName",
+    "/properties/PrincipalName",
+    "/properties/TargetName"
+  ],
+  "required": [
+    "PermissionSetId",
+    "PrincipalId",
+    "PrincipalType",
+    "TargetId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudIdentity::PermissionSetAssignment"
+}

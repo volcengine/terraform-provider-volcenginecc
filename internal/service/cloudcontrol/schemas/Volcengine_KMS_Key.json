@@ -6,7 +6,7 @@
     "/properties/MultiRegion",
     "/properties/Origin",
     "/properties/ProtectionLevel",
-    "/properties/RotateState",
+    "/properties/RotateInterval",
     "/properties/KeyringName"
   ],
   "definitions": {
@@ -103,7 +103,13 @@
     "create": {
       "permissions": [
         "kms:CreateKey",
-        "kms:DescribeKey"
+        "kms:DescribeKey",
+        "kms:ArchiveKey",
+        "kms:CancelArchiveKey",
+        "kms:EnableKey",
+        "kms:DisableKey",
+        "kms:EnableKeyRotation",
+        "kms:DisableKeyRotation"
       ]
     },
     "delete": {
@@ -125,10 +131,14 @@
     "update": {
       "permissions": [
         "kms:UpdateKey",
+        "kms:CancelKeyDeletion",
+        "kms:DescribeKey",
+        "kms:ArchiveKey",
+        "kms:CancelArchiveKey",
         "kms:EnableKey",
         "kms:DisableKey",
-        "kms:CancelKeyDeletion",
-        "kms:DescribeKey"
+        "kms:EnableKeyRotation",
+        "kms:DisableKeyRotation"
       ]
     }
   },
@@ -150,6 +160,16 @@
       "semantic": "description",
       "type": "string"
     },
+    "KeyArchiveOperation": {
+      "description": "用户主密钥归档操作（用户输入1=归档，2=取消归档）",
+      "format": "int32",
+      "type": "integer"
+    },
+    "KeyEnableOperation": {
+      "description": "用户主密钥启用操作（用户输入1=启用，2=禁用）",
+      "format": "int32",
+      "type": "integer"
+    },
     "KeyID": {
       "description": "密钥唯一标识符，UUID形式。",
       "semantic": "resourceId",
@@ -165,6 +185,11 @@
       "minLength": 2,
       "semantic": "resourceName",
       "type": "string"
+    },
+    "KeyRotationOperation": {
+      "description": "用户主密钥轮转操作（用户输入1=开启，2=关闭）",
+      "format": "int32",
+      "type": "integer"
     },
     "KeySpec": {
       "description": "对称密钥：SYMMETRIC_256，SYMMETRIC_128，非对称密钥：RSA_2048，RSA_3072，RSA_4096，EC_P256，EC_P256K，EC_P384，EC_P521，EC_SM2。",
@@ -205,6 +230,10 @@
     "ProtectionLevel": {
       "description": "密钥保护级别，取值：SOFTWARE，HSM。",
       "type": "string"
+    },
+    "RotateInterval": {
+      "description": "密钥轮转周期，单位：天；取值范围：[90, 2560]。",
+      "type": "integer"
     },
     "RotateState": {
       "description": "密钥轮转状态，取值：Enable，Disable。",
@@ -249,6 +278,7 @@
     "/properties/ScheduleDeleteTime",
     "/properties/ScheduleRotationTime",
     "/properties/Trn",
+    "/properties/RotateState",
     "/properties/UpdatedTime"
   ],
   "required": [
@@ -260,5 +290,11 @@
     "tagUpdatable": true,
     "taggable": true
   },
-  "typeName": "Volcengine::KMS::Key"
+  "typeName": "Volcengine::KMS::Key",
+  "writeOnlyProperties": [
+    "/properties/KeyRotationOperation",
+    "/properties/KeyArchiveOperation",
+    "/properties/KeyEnableOperation",
+    "/properties/RotateInterval"
+  ]
 }

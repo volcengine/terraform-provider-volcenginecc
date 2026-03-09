@@ -55,6 +55,7 @@ Read-Only:
 Read-Only:
 
 - `auto_sync_disabled` (Boolean) 是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。
+- `containerd_config` (Attributes) 节点池 Containerd 相关配置。 (see [below for nested schema](#nestedatt--kubernetes_config--containerd_config))
 - `cordon` (Boolean) 封锁节点配置，参数值说明：false：不封锁。true：封锁。
 - `kubelet_config` (Attributes) Kubelet 组件的相关配置 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config))
 - `labels` (Attributes Set) 节点池/节点的 Kubernetes 标签（Labels）信息。 (see [below for nested schema](#nestedatt--kubernetes_config--labels))
@@ -63,12 +64,31 @@ Read-Only:
 - `name_use_hostname` (Boolean) Kubernetes 中节点对象的元数据名称是否使用 ECS 主机名称，取值：true：使用 ECS 主机名称作为节点名称。false：不使用使用 ECS 主机名称作为节点名称。
 - `taints` (Attributes Set) 节点池/节点的 Kubernetes 污点（Taints）信息。 (see [below for nested schema](#nestedatt--kubernetes_config--taints))
 
+<a id="nestedatt--kubernetes_config--containerd_config"></a>
+### Nested Schema for `kubernetes_config.containerd_config`
+
+Read-Only:
+
+- `insecure_registries` (Set of String) 指定跳过证书认证的容器镜像仓库地址。
+- `registry_proxy_configs` (Attributes Set) 容器镜像仓库代理配置。 (see [below for nested schema](#nestedatt--kubernetes_config--containerd_config--registry_proxy_configs))
+
+<a id="nestedatt--kubernetes_config--containerd_config--registry_proxy_configs"></a>
+### Nested Schema for `kubernetes_config.containerd_config.registry_proxy_configs`
+
+Read-Only:
+
+- `proxy_endpoints` (Set of String) 代理地址。
+- `registry` (String) 容器镜像仓库地址。
+
+
+
 <a id="nestedatt--kubernetes_config--kubelet_config"></a>
 ### Nested Schema for `kubernetes_config.kubelet_config`
 
 Read-Only:
 
 - `cpu_manager_policy` (String) 配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略
+- `eviction_hard` (Attributes Set) 触发 Pod 驱逐操作的一组硬性门限。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--eviction_hard))
 - `feature_gates` (Attributes) 特性门控。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--feature_gates))
 - `kube_api_burst` (Number) 每秒发送到 API 服务器的突发请求数量上限。不包括事件和节点心跳 API，其速率限制由一组不同的标志控制。
 - `kube_api_qps` (Number) 与 apiserver 通信的每秒查询个数（QPS）。不包含事件和节点心跳 API，它们的速率限制是由一组不同的标志所控制。
@@ -80,6 +100,15 @@ Read-Only:
 - `system_reserved` (Attributes Set) 节点预留给操作系统的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
 - `topology_manager_policy` (String) 拓扑管理策略，取值：none：（默认）禁用拓扑管理策略。restricted：kubelet 仅接受在所请求资源上实现最佳 NUMA（Non-Uniform Memory Access，非一致存储访问结构）的 Pod。best-effort：kubelet 会优先选择在 CPU 和设备资源上实现 NUMA 的 Pod。single-numa-node：kubelet 仅允许在同一个节点的 CPU 和设备资源上实现 NUMA 的 Pod。
 - `topology_manager_scope` (String) 拓扑管理策略的资源粒度，取值：container：表示资源对齐粒度为容器级。pod：表示资源对齐粒度为 Pod 级。
+
+<a id="nestedatt--kubernetes_config--kubelet_config--eviction_hard"></a>
+### Nested Schema for `kubernetes_config.kubelet_config.eviction_hard`
+
+Read-Only:
+
+- `key` (String) 硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available
+- `value` (String) 硬性门限值。
+
 
 <a id="nestedatt--kubernetes_config--kubelet_config--feature_gates"></a>
 ### Nested Schema for `kubernetes_config.kubelet_config.feature_gates`

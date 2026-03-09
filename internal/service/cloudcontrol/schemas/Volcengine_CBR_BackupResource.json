@@ -3,7 +3,6 @@
   "createOnlyProperties": [
     "/properties/InstanceId",
     "/properties/InstanceName",
-    "/properties/MetaInformation",
     "/properties/ResourceType"
   ],
   "definitions": {
@@ -145,7 +144,8 @@
     "/properties/ResourceId",
     "/properties/Status",
     "/properties/UpdatedTime",
-    "/properties/UsedCapacityInBytes"
+    "/properties/UsedCapacityInBytes",
+    "/properties/MetaInformation"
   ],
   "required": [
     "InstanceId",

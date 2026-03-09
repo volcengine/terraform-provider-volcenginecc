@@ -13,101 +13,6 @@ description: |-
 
 ```terraform
 resource "volcenginecc_vke_node_pool" "VKENodePoolDemo" {
-  cluster_id = "cd4iklanmxxxb9ixxxxx"
-  name       = "VKENodePoolDemo"
-  kubernetes_config = {
-    labels = [
-      {
-        key = "labels-key"
-      value = "labels-value" }
-    ]
-    taints = [
-      {
-        key   = "taints-key"
-        value = "taints-value"
-      effect = "NoSchedule" }
-    ]
-    cordon      = false
-    name_prefix = "name-prefix"
-    kubelet_config = {
-      feature_gates = {
-        qo_s_resource_manager = true
-      }
-      topology_manager_scope  = "container"
-      topology_manager_policy = "none"
-      max_pods                = 110
-      kube_api_qps            = 5
-      kube_api_burst          = 10
-      kube_reserved = [
-        {
-          name = "memory"
-        quantity = "200m" }
-      ]
-      system_reserved = [
-        {
-          name = "memory"
-        quantity = "200m" }
-      ]
-      registry_pull_qps     = 5
-      registry_burst        = 10
-      serialize_image_pulls = true
-      cpu_manager_policy    = "none"
-    }
-    auto_sync_disabled = false
-    name_suffix        = "name-suffix"
-    name_use_hostname  = false
-  }
-  node_config = {
-    instance_type_ids = ["ecs.g3il.large"]
-    subnet_ids        = ["subnet-3nr6sws8sxxx931ebscxxxxx"]
-    image_id          = "image-ybqi99sxxx8rx7mxxxxx"
-    system_volume = {
-      size = 40
-      type = "ESSD_PL0"
-    }
-    data_volumes = [
-      {
-        size        = 20
-        type        = "ESSD_PL0"
-        mount_point = "/dev/vdb"
-      snapshot_id = "snap-3wpmsnixxx55inqxxxxx" }
-    ]
-    initialize_script = "YmFzaCBteV9maWxxxxxx"
-    security = {
-      security_group_ids  = ["sg-3hitecg7d6xxx3nkipkyxxxxx"]
-      security_strategies = ["Hids"]
-      login = {
-        password = "*******"
-      }
-    }
-    additional_container_storage_enabled = true
-    instance_charge_type                 = "PostPaid"
-    name_prefix                          = "name-prefix"
-    tags = [
-      {
-        key = "env"
-      value = "test" }
-    ]
-    spot_strategy = "SpotAsPriceGo"
-    instances_distribution = {
-      capacity_rebalance                       = true
-      compensate_with_on_demand                = true
-      on_demand_base_capacity                  = 0
-      on_demand_percentage_above_base_capacity = 0
-    }
-    project_name          = "default"
-    public_access_enabled = false
-    public_access_config = {
-      billing_type = 2
-      isp          = "BGP"
-      bandwidth    = 5
-    }
-    hostname                    = "node-host"
-    instance_name               = "node"
-    network_traffic_mode        = "Standard"
-    deployment_set_id           = "dps-ydzccfzqjxxxx8kxxxxx"
-    deployment_set_group_number = 1
-  }
   auto_scaling = {
     max_replicas     = 10
     min_replicas     = 0
@@ -116,18 +21,138 @@ resource "volcenginecc_vke_node_pool" "VKENodePoolDemo" {
     priority         = 10
     subnet_policy    = "ZoneBalance"
   }
-  tags = [
-    {
-      key = "env"
-    value = "test" }
-  ]
+  cluster_id = "cd6gojxxxxxxxxxxx"
+  kubernetes_config = {
+    auto_sync_disabled = false
+    containerd_config = {
+      insecure_registries = [
+      "example.com"]
+      registry_proxy_configs = [
+        {
+          proxy_endpoints = [
+          "https://example.com:8080"]
+          registry = "example.com:8080"
+        }
+      ]
+    }
+    cordon = false
+    kubelet_config = {
+      cpu_manager_policy = "none"
+      eviction_hard = [
+        {
+          key   = "memory.available"
+          value = "15%"
+        }
+      ]
+      kube_api_burst = 10
+      kube_api_qps   = 5
+      kube_reserved = [
+        {
+          name     = "memory"
+          quantity = "200m"
+        }
+      ]
+      max_pods              = 110
+      registry_burst        = 10
+      registry_pull_qps     = 5
+      serialize_image_pulls = true
+      system_reserved = [
+        {
+          name     = "memory"
+          quantity = "200m"
+        }
+      ]
+      topology_manager_policy = "none"
+      topology_manager_scope  = "container"
+    }
+    labels = [
+      {
+        key   = "label-key"
+        value = "label-value"
+      }
+    ]
+    name_prefix       = "name-prefix"
+    name_suffix       = "name-suffix"
+    name_use_hostname = false
+    taints = [
+      {
+        key    = "taint-key"
+        value  = "taint-value"
+        effect = "NoSchedule"
+      }
+    ]
+  }
   management = {
     enabled = true
     remedy_config = {
       enabled   = true
-      remedy_id = "R202511251441xxxxuv230vsiu92xxxxx"
+      remedy_id = "R20260227xxxxxxxxxxx"
     }
   }
+  name = "test"
+  node_config = {
+    instance_charge_type = "PostPaid"
+    spot_strategy        = "SpotAsPriceGo"
+    instances_distribution = {
+      capacity_rebalance                       = true
+      compensate_with_on_demand                = true
+      on_demand_base_capacity                  = 0
+      on_demand_percentage_above_base_capacity = 0
+    }
+    security = {
+      security_group_ids = [
+      "sg-1a14cxqxxxxxxxxxx"]
+      security_strategies = [
+      "Hids"]
+      login = {
+        ssh_key_pair_name = "MigrationKey-job-yecd7xxxxxxxxxx"
+      }
+    }
+    data_volumes = [
+      {
+        mount_point = "/dev/vdb"
+        size        = 100
+        snapshot_id = "snap-3wvah8xxxxxxxxxx"
+        type        = "ESSD_PL0"
+      }
+    ]
+    system_volume = {
+      size = 40
+      type = "ESSD_PL0"
+    }
+    additional_container_storage_enabled = true
+    deployment_set_group_number          = 0
+    deployment_set_id                    = "dps-yedy0wxxxxxxxxxx"
+    hostname                             = "node-host"
+    image_id                             = "image-ybqi99xxxxxxxxxxx"
+    initialize_script                    = "YmFzaCxxxxx9maxxxxx"
+    instance_name                        = "node"
+    instance_type_ids = [
+    "ecs.g4il.large"]
+    name_prefix          = "name-prefix"
+    network_traffic_mode = "Standard"
+    project_name         = "default"
+    public_access_config = {
+      billing_type = 2
+      isp          = "BGP"
+      bandwidth    = 5
+    }
+    public_access_enabled = false
+    subnet_ids = [
+    "subnet-ijifxxxxxo8cuxxxxx"]
+    tags = [
+      {
+        key   = "key"
+        value = "value"
+      }
+    ]
+  }
+  tags = [
+    {
+      key   = "env"
+      value = "test"
+    }
+  ]
 }
 ```
 
@@ -178,6 +203,7 @@ Optional:
 Optional:
 
 - `auto_sync_disabled` (Boolean) 是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。
+- `containerd_config` (Attributes) 节点池 Containerd 相关配置。 (see [below for nested schema](#nestedatt--kubernetes_config--containerd_config))
 - `cordon` (Boolean) 封锁节点配置，参数值说明：false：不封锁。true：封锁。
 - `kubelet_config` (Attributes) Kubelet 组件的相关配置 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config))
 - `labels` (Attributes Set) 节点池/节点的 Kubernetes 标签（Labels）信息。
@@ -188,12 +214,33 @@ Optional:
 - `taints` (Attributes Set) 节点池/节点的 Kubernetes 污点（Taints）信息。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--taints))
 
+<a id="nestedatt--kubernetes_config--containerd_config"></a>
+### Nested Schema for `kubernetes_config.containerd_config`
+
+Optional:
+
+- `insecure_registries` (Set of String) 指定跳过证书认证的容器镜像仓库地址。
+- `registry_proxy_configs` (Attributes Set) 容器镜像仓库代理配置。
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--containerd_config--registry_proxy_configs))
+
+<a id="nestedatt--kubernetes_config--containerd_config--registry_proxy_configs"></a>
+### Nested Schema for `kubernetes_config.containerd_config.registry_proxy_configs`
+
+Optional:
+
+- `proxy_endpoints` (Set of String) 代理地址。
+- `registry` (String) 容器镜像仓库地址。
+
+
+
 <a id="nestedatt--kubernetes_config--kubelet_config"></a>
 ### Nested Schema for `kubernetes_config.kubelet_config`
 
 Optional:
 
 - `cpu_manager_policy` (String) 配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略
+- `eviction_hard` (Attributes Set) 触发 Pod 驱逐操作的一组硬性门限。
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--eviction_hard))
 - `feature_gates` (Attributes) 特性门控。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--feature_gates))
 - `kube_api_burst` (Number) 每秒发送到 API 服务器的突发请求数量上限。不包括事件和节点心跳 API，其速率限制由一组不同的标志控制。
 - `kube_api_qps` (Number) 与 apiserver 通信的每秒查询个数（QPS）。不包含事件和节点心跳 API，它们的速率限制是由一组不同的标志所控制。
@@ -207,6 +254,15 @@ Optional:
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
 - `topology_manager_policy` (String) 拓扑管理策略，取值：none：（默认）禁用拓扑管理策略。restricted：kubelet 仅接受在所请求资源上实现最佳 NUMA（Non-Uniform Memory Access，非一致存储访问结构）的 Pod。best-effort：kubelet 会优先选择在 CPU 和设备资源上实现 NUMA 的 Pod。single-numa-node：kubelet 仅允许在同一个节点的 CPU 和设备资源上实现 NUMA 的 Pod。
 - `topology_manager_scope` (String) 拓扑管理策略的资源粒度，取值：container：表示资源对齐粒度为容器级。pod：表示资源对齐粒度为 Pod 级。
+
+<a id="nestedatt--kubernetes_config--kubelet_config--eviction_hard"></a>
+### Nested Schema for `kubernetes_config.kubelet_config.eviction_hard`
+
+Optional:
+
+- `key` (String) 硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available
+- `value` (String) 硬性门限值。
+
 
 <a id="nestedatt--kubernetes_config--kubelet_config--feature_gates"></a>
 ### Nested Schema for `kubernetes_config.kubelet_config.feature_gates`

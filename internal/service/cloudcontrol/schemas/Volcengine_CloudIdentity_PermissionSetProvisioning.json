@@ -1,0 +1,93 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/PermissionSetId",
+    "/properties/TargetId"
+  ],
+  "description": "给指定的账号部署权限集。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/PermissionSetId",
+      "/properties/TargetId",
+      "/properties/ProvisioningStatus"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudidentity:ProvisionPermissionSet",
+        "cloudidentity:ListPermissionSetProvisionings"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudidentity:DeprovisionPermissionSet",
+        "cloudidentity:GetTaskStatus"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudidentity:ListPermissionSetProvisionings"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudidentity:ListPermissionSetProvisionings"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PermissionSetId",
+    "/properties/TargetId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "PermissionSetId": {
+      "description": "权限集 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "PermissionSetName": {
+      "description": "权限集名。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProvisioningStatus": {
+      "description": "权限集状态 Running：运行中,Reprovision Required：需要重新部署,Provision Failed：部署失败,Provisioned：已部署",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TargetId": {
+      "description": "授权的账号 ID。",
+      "type": "string"
+    },
+    "TargetName": {
+      "description": "账号名。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/PermissionSetName",
+    "/properties/ProvisioningStatus",
+    "/properties/TargetName",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "PermissionSetId",
+    "TargetId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudIdentity::PermissionSetProvisioning"
+}

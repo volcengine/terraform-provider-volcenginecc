@@ -107,28 +107,18 @@ func backupResourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: EcsMeta
 				"ecs_meta": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "ECS 的元数据，是一个 JSON string。格式见数据结构的 EcsBackupConfiguration 结构体。",
-					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VepfsMeta
 				"vepfs_meta": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "vePFS 备份源元数据，是一个 JSON string。格式见数据结构的VePFSBackupConfiguration 结构体。",
-					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Plans
@@ -318,12 +308,12 @@ func backupResourceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Status",
 		"/properties/UpdatedTime",
 		"/properties/UsedCapacityInBytes",
+		"/properties/MetaInformation",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/InstanceId",
 		"/properties/InstanceName",
-		"/properties/MetaInformation",
 		"/properties/ResourceType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

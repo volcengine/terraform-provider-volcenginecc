@@ -47,6 +47,30 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "密钥描述:长度为 0   - 8192 个字符。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KeyArchiveOperation
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "用户主密钥归档操作（用户输入1=归档，2=取消归档）",
+		//	  "format": "int32",
+		//	  "type": "integer"
+		//	}
+		"key_archive_operation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "用户主密钥归档操作（用户输入1=归档，2=取消归档）",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KeyEnableOperation
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "用户主密钥启用操作（用户输入1=启用，2=禁用）",
+		//	  "format": "int32",
+		//	  "type": "integer"
+		//	}
+		"key_enable_operation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "用户主密钥启用操作（用户输入1=启用，2=禁用）",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeyID
 		// Cloud Control resource type schema:
 		//
@@ -80,6 +104,18 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "主密钥名称，长度为 2   - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KeyRotationOperation
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "用户主密钥轮转操作（用户输入1=开启，2=关闭）",
+		//	  "format": "int32",
+		//	  "type": "integer"
+		//	}
+		"key_rotation_operation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "用户主密钥轮转操作（用户输入1=开启，2=关闭）",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeySpec
@@ -266,6 +302,17 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "密钥保护级别，取值：SOFTWARE，HSM。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RotateInterval
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "密钥轮转周期，单位：天；取值范围：[90, 2560]。",
+		//	  "type": "integer"
+		//	}
+		"rotate_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "密钥轮转周期，单位：天；取值范围：[90, 2560]。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RotateState
 		// Cloud Control resource type schema:
 		//
@@ -387,9 +434,12 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_time":               "CreatedTime",
 		"description":                "Description",
 		"key":                        "Key",
+		"key_archive_operation":      "KeyArchiveOperation",
+		"key_enable_operation":       "KeyEnableOperation",
 		"key_id":                     "KeyID",
 		"key_material_expire_time":   "KeyMaterialExpireTime",
 		"key_name":                   "KeyName",
+		"key_rotation_operation":     "KeyRotationOperation",
 		"key_spec":                   "KeySpec",
 		"key_state":                  "KeyState",
 		"key_usage":                  "KeyUsage",
@@ -403,6 +453,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protection_level":           "ProtectionLevel",
 		"region":                     "Region",
 		"replica_keys":               "ReplicaKeys",
+		"rotate_interval":            "RotateInterval",
 		"rotate_state":               "RotateState",
 		"schedule_delete_time":       "ScheduleDeleteTime",
 		"schedule_rotation_time":     "ScheduleRotationTime",

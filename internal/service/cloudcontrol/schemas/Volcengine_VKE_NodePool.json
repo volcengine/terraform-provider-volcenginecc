@@ -52,6 +52,31 @@
       },
       "type": "object"
     },
+    "ContainerdConfig": {
+      "description": "节点池 Containerd 相关配置。",
+      "properties": {
+        "InsecureRegistries": {
+          "description": "指定跳过证书认证的容器镜像仓库地址。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "RegistryProxyConfigs": {
+          "description": "容器镜像仓库代理配置。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/RegistryProxyConfig",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
     "DataVolume": {
       "properties": {
         "FileSystem": {
@@ -83,6 +108,30 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "EvictionHard": {
+      "description": "触发 Pod 驱逐操作的一组硬性门限。",
+      "properties": {
+        "Key": {
+          "description": "硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available",
+          "enum": [
+            "memory.available",
+            "nodefs.available",
+            "nodefs.inodesFree",
+            "imagefs.available"
+          ],
+          "type": "string"
+        },
+        "Value": {
+          "description": "硬性门限值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
       "type": "object"
     },
     "FeatureGates": {
@@ -139,6 +188,16 @@
         "CpuManagerPolicy": {
           "description": "配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略",
           "type": "string"
+        },
+        "EvictionHard": {
+          "description": "触发 Pod 驱逐操作的一组硬性门限。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EvictionHard",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
         },
         "FeatureGates": {
           "$ref": "#/definitions/FeatureGates",
@@ -221,6 +280,11 @@
         "AutoSyncDisabled": {
           "description": "是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。",
           "type": "boolean"
+        },
+        "ContainerdConfig": {
+          "$ref": "#/definitions/ContainerdConfig",
+          "description": "节点池 Containerd 相关配置。",
+          "type": "object"
         },
         "Cordon": {
           "description": "封锁节点配置，参数值说明：false：不封锁。true：封锁。",
@@ -507,6 +571,25 @@
       },
       "type": "object"
     },
+    "RegistryProxyConfig": {
+      "description": "容器镜像仓库代理配置。",
+      "properties": {
+        "ProxyEndpoints": {
+          "description": "代理地址。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Registry": {
+          "description": "容器镜像仓库地址。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "RemedyConfig": {
       "description": "检查自愈配置。",
       "properties": {
@@ -689,7 +772,7 @@
     },
     "update": {
       "permissions": [
-        "vke:UpdateNodePool",
+        "vke:UpdateNodePoolConfig",
         "vke:ListNodePools",
         "vke:UntagResources",
         "vke:TagResources"
@@ -796,8 +879,6 @@
   },
   "typeName": "Volcengine::VKE::NodePool",
   "writeOnlyProperties": [
-    "/properties/KubernetesConfig/NameUseHostname",
-    "/properties/KubernetesConfig/NameSuffix",
     "/properties/NodeConfig/Security/Login/Password",
     "/properties/NodeConfig/InstanceName",
     "/properties/NodeConfig/Hostname",

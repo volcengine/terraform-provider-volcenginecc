@@ -1,0 +1,129 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/IamProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "标签信息。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "日志项目是数据的项目管理单元，用于租户资源隔离和控制，通常一个日志项目对应一个应用、业务或产品。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectID",
+      "/properties/ProjectName",
+      "/properties/IamProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateProject",
+        "TLS:DescribeProject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteProject",
+        "TLS:DescribeProject"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeProjects"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeProject"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:ModifyProject",
+        "TLS:DescribeProject",
+        "TLS:AddTagsToResource",
+        "TLS:RemoveTagsFromResource"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ProjectID"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "日志项目创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "日志项目的简单描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "IamProjectName": {
+      "description": "日志项目所属的 IAM 项目。",
+      "type": "string"
+    },
+    "InnerNetDomain": {
+      "description": "私网连接域名。",
+      "type": "string"
+    },
+    "ProjectID": {
+      "description": "日志项目的 ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "日志项目名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TopicCount": {
+      "description": "当前日志项目下的日志主题数量。",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ProjectID",
+    "/properties/CreatedTime",
+    "/properties/TopicCount",
+    "/properties/InnerNetDomain"
+  ],
+  "required": [
+    "ProjectName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TLS::Project"
+}

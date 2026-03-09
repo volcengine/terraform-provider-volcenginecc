@@ -155,7 +155,7 @@
     },
     "AccountName": {
       "description": "数据库账号名称。命名规则如下：长度为 2~32 个字符。以字母开头，以字母或数字结尾。由字母、数字、下划线（_）和中划线（-）组成。账号名称在实例内必须是唯一的。不能使用某些预留字，被禁用的预留字请参见禁用词列表。说明在高权限账号名称中可使用关键字 root 和 admin。",
-      "semantic": "resourceName",
+      "semantic": "resourceId",
       "type": "string"
     },
     "AccountPassword": {
@@ -204,7 +204,6 @@
     },
     "InstanceId": {
       "description": "实例 ID。",
-      "semantic": "resourceId",
       "type": "string"
     },
     "TableColumnPrivileges": {

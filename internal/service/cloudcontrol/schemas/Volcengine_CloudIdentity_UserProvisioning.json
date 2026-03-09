@@ -1,0 +1,125 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/DeletionStrategy",
+    "/properties/Description",
+    "/properties/DuplicationStrategy",
+    "/properties/DuplicationSuffix",
+    "/properties/IdentitySourceStrategy",
+    "/properties/PrincipalId",
+    "/properties/PrincipalType",
+    "/properties/TargetId"
+  ],
+  "description": "当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TargetId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudidentity:CreateUserProvisioning",
+        "cloudidentity:GetUserProvisioning"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudidentity:DeleteUserProvisioning",
+        "cloudidentity:GetUserProvisioning"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudidentity:ListUserProvisionings"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudidentity:GetUserProvisioning"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/UserProvisioningId"
+  ],
+  "properties": {
+    "CreatedTime": {
+      "description": "创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletionStrategy": {
+      "description": "删除策略。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "任务描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DuplicationStrategy": {
+      "description": "用户名冲突策略。",
+      "type": "string"
+    },
+    "DuplicationSuffix": {
+      "description": "本次同步IAM用户名称后缀。",
+      "type": "string"
+    },
+    "IdentitySourceStrategy": {
+      "description": "身份源冲突策略。",
+      "type": "string"
+    },
+    "PrincipalId": {
+      "description": "身份id。",
+      "type": "string"
+    },
+    "PrincipalName": {
+      "description": "目标名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PrincipalType": {
+      "description": "身份类型。",
+      "type": "string"
+    },
+    "ProvisionStatus": {
+      "description": "授权任务状态。Provisioned 授权成功，Provisioning 正在授权，DeleteProvisioning 授权解除中，DeleteProvisioned 授权解除成功",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TargetId": {
+      "description": "目标id。",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UserProvisioningId": {
+      "description": "IAM 用户同步任务ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/PrincipalName",
+    "/properties/ProvisionStatus",
+    "/properties/UpdatedTime",
+    "/properties/UserProvisioningId"
+  ],
+  "required": [
+    "PrincipalId",
+    "PrincipalType",
+    "TargetId",
+    "IdentitySourceStrategy",
+    "DuplicationStrategy",
+    "DeletionStrategy"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudIdentity::UserProvisioning"
+}

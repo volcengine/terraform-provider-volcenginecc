@@ -19,13 +19,13 @@
   "handlers": {
     "create": {
       "permissions": [
-        "cr:CreateNameSpace",
+        "cr:CreateNamespace",
         "cr:ListNamespaces"
       ]
     },
     "delete": {
       "permissions": [
-        "cr:DeleteNameSpace",
+        "cr:DeleteNamespace",
         "cr:ListNamespaces"
       ]
     },
