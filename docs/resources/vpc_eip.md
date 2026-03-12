@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_eip Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   公网IP（Elastic IP Address，EIP）及其公网出口带宽，是火山引擎为云资源提供的可独立购买和持有的IP连通服务。公网IP支持直接绑定云服务器（包括ECS云服务器、EBM裸金属服务器、GPU云服务器），还支持绑定公网NAT网关、负载均衡、辅助网卡等组件，为云服务器提供公网互通能力。
 ---
@@ -45,6 +45,7 @@ resource "volcenginecc_vpc_eip" "EipDemo" {
 - `bandwidth` (Number) 公网IP的带宽上限，默认为“1”，单位：Mbps,BillingType传入1：取值范围1 ~ 500。BillingType传入2：取值范围1 ~ 500。BillingType传入3：取值范围1 ~ 200。
 - `bandwidth_package_id` (String) 共享带宽包的ID，表示将公网IP加入到共享带宽包。公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的地域相同。公网IP的计费方式必须是按量计费。共享带宽包为IPv4类型。
 - `description` (String) 公网IP的描述信息。
+- `direct_mode` (Boolean) 绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。
 - `instance_id` (String) 当前绑定的实例ID。
 - `instance_type` (String) 当前绑定的实例类型。Nat：公网NAT网关。NetworkInterface: 弹性网卡。ClbInstance: 负载均衡。EcsInstance：云服务器。HaVip：高可用虚拟IP。
 - `ip_address` (String) 申请申请指定的公网IP地址。仅支持填写使用后释放的IP地址，不填则表示自动分配。指定的公网IP地址
@@ -69,7 +70,6 @@ resource "volcenginecc_vpc_eip" "EipDemo" {
 - `business_status` (String) 公网IP是否被锁定。Normal: 正常。FinancialLocked: 被锁定。
 - `created_time` (String) 公网IP的创建时间。
 - `deleted_time` (String) 预期资源强制回收时间。包年包月公网IP，此参数有返回值。按量计费公网IP，仅欠费冻结时，此参数有返回值。
-- `direct_mode` (Boolean) 绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。
 - `eip_address` (String) 公网IP地址。
 - `expired_time` (String) 公网IP的到期时间。包年包月，返回值为到期时间。按量计费，返回值为空。
 - `id` (String) Uniquely identifies the resource.

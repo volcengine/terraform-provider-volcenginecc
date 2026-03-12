@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_organization_unit Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "Organization"
 description: |-
   企业组织的创建者管理员账号可以新建组织单元来搭建企业的组织结构，对账号进行分组织单元管理。组织单元可以分多个组织单元层级，管理员账号也可属于任意层级的任意组织单元节点。
 ---

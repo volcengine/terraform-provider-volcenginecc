@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_redis_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "Redis"
 description: |-
   缓存数据库 Redis 版的基本单位是实例。实例是独立的、虚拟化的数据库运行环境，是多个数据节点与代理节点的集合，数据节点上运行 Redis 引擎。
 ---

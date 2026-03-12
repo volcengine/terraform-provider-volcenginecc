@@ -1,0 +1,158 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/AllowListType"
+  ],
+  "definitions": {
+    "Instance": {
+      "properties": {
+        "InstanceId": {
+          "description": "实例ID。",
+          "type": "string"
+        },
+        "InstanceName": {
+          "description": "实例名称。",
+          "type": "string"
+        },
+        "InstanceStatus": {
+          "description": "实例状态。",
+          "type": "string"
+        },
+        "IsLatest": {
+          "description": "是否同步最新白名单 IP",
+          "type": "boolean"
+        },
+        "ProjectName": {
+          "description": "实例所属项目名称。",
+          "type": "string"
+        },
+        "VPC": {
+          "description": "实例所属VPC ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "API请求参数 - 创建RDS SQL Server白名单（CreateAllowList）。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_mssql:CreateAllowList",
+        "rds_mssql:DescribeAllowLists",
+        "rds_mssql:AssociateAllowList"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_mssql:DeleteAllowList",
+        "rds_mssql:DescribeAllowListDetail",
+        "rds_mssql:DisassociateAllowList"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_mssql:DescribeAllowLists",
+        "rds_mssql:DescribeInstanceAllowLists"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_mssql:DescribeAllowLists",
+        "rds_mssql:DescribeAllowListDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_mssql:ModifyAllowList",
+        "rds_mssql:AssociateAllowList",
+        "rds_mssql:DisassociateAllowList"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllowListId"
+  ],
+  "properties": {
+    "AllowList": {
+      "description": "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+      "type": "string"
+    },
+    "AllowListCategory": {
+      "description": "白名单分类。",
+      "type": "string"
+    },
+    "AllowListDesc": {
+      "description": "白名单描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "AllowListIPNum": {
+      "description": "AllowListIP数量。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AllowListId": {
+      "description": "白名单的id。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AllowListName": {
+      "description": "白名单名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AllowListType": {
+      "description": "白名单内的IP地址类型，当前仅支持IPv4。",
+      "type": "string"
+    },
+    "AssociatedInstanceNum": {
+      "description": "绑定的实例数量。解绑实例的白名单时必传。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AssociatedInstances": {
+      "description": "绑定的实例列表。",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/Instance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceId": {
+      "description": "实例ID。",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "type": "string"
+    },
+    "UserAllowList": {
+      "description": "安全组之外的、需要加入白名单的IP地址，可输入IP地址或CIDR格式的IP地址段。如果该字段与AllowList同时指定，以AllowList为准。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllowListId",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/InstanceName",
+    "/properties/AssociatedInstances/*/VPC",
+    "/properties/AssociatedInstances/*/IsLatest",
+    "/properties/AssociatedInstances/*/ProjectName",
+    "/properties/AssociatedInstances/*/InstanceStatus"
+  ],
+  "required": [
+    "AllowListName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSMsSQL::Allowlist"
+}

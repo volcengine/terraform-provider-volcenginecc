@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_iam_role Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "IAM"
 description: |-
   角色（Role）是IAM体系里的一种虚拟身份，用于将账号内某些访问权限授予给各类身份实体，受信任的身份实体可扮演该角色来访问账号内的云资源。
 ---

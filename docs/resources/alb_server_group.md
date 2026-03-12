@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_alb_server_group Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ALB"
 description: |-
   服务器组是后端服务器的逻辑集合。ALB 实例按照您配置的转发规则确定客户端请求将被转发到的服务器组。然后，ALB 实例根据您配置的负载均衡策略，将请求分发给服务器组内的后端服务器。后端服务器接收并处理请求。
 ---
@@ -13,11 +13,12 @@ description: |-
 
 ```terraform
 resource "volcenginecc_alb_server_group" "AlbServergroupDemo" {
-  vpc_id            = "vpc-13f8***"
-  server_group_name = "test-servergroup"
-  server_group_type = "instance"
-  protocol          = "HTTP"
-  scheduler         = "wrr"
+  vpc_id             = "vpc-13f8***"
+  server_group_name  = "test-servergroup"
+  server_group_type  = "instance"
+  protocol           = "HTTP"
+  scheduler          = "wrr"
+  cross_zone_enabled = "on"
   health_check = {
     enabled             = "on"
     port                = 80
@@ -62,6 +63,7 @@ resource "volcenginecc_alb_server_group" "AlbServergroupDemo" {
 
 ### Optional
 
+- `cross_zone_enabled` (String) 是否开启服务器组的跨可用区负载均衡功能。取值如下：on（默认值）：开启。off：不开启。
 - `description` (String) 后端服务器组的描述。
 - `health_check` (Attributes) 服务器组健康检查配置信息。 (see [below for nested schema](#nestedatt--health_check))
 - `ip_address_type` (String) 服务器组的IP地址类型。目前只支持 IPv4

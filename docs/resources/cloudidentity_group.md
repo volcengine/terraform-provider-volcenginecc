@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cloudidentity_group Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CloudIdentity"
 description: |-
   当您需要批量为云身份中心用户进行SSO授权时，您可以先通过用户组进行批量的用户管理。
 ---

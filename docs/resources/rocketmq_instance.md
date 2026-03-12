@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rocketmq_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RocketMQ"
 description: |-
   消息队列 RocketMQ版是基于 Apache RocketMQ 构建的分布式消息中间件服务，完全兼容开源 RocketMQ 的各个组件与概念，同时具备低延迟、弹性高可靠、高吞吐等特性优势，业务代码无需改造，帮助用户快速迁移上云。
 ---

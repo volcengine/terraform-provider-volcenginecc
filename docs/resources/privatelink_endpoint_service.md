@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_privatelink_endpoint_service Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "PrivateLink"
 description: |-
   终端节点服务是可以与其他VPC通过终端节点建立私网连接的服务。
 ---

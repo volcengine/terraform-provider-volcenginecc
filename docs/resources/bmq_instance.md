@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_bmq_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "BMQ"
 description: |-
   云原生消息引擎 100% 兼容 Apache Kafka 协议，基于云原生的全托管、高吞吐、低时延、高可用、高可扩展性、高稳定性的分布式消息引擎服务，支持灵活动态扩缩容和流批一体计算，提供企业级大数据量级的实时流数据处理能力，帮助您构建数据处理的“中枢神经系统”，广泛应用于日志收集、数据聚合、离线数据分析等业务场景。
 ---

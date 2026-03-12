@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vedbm_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VEDBM"
 description: |-
   云数据库 veDB MySQL 版是火山引擎自研新一代云原生关系型数据库。云数据库 veDB MySQL 版 100% 兼容 MySQL，适用于企业多样化的数据库应用场景。
 ---

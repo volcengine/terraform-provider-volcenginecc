@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdsmysql_backup Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSMySQL"
 description: |-
   备份是数据库的重要运行时文件，基于备份文件，数据库能够实现容灾、恢复等功能。云数据库 MySQL 版提供了数据备份和日志备份两种备份能力：通过数据备份可将数据库恢复至某个备份集，通过日志备份可将数据库恢复至指定时间点。
 ---

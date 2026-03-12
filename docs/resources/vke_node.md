@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vke_node Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VKE"
 description: |-
   对应 Kubernetes 中的 Node，是容器服务集群组成的基本元素。节点主要包括：Master 节点（控制节点）和 Worker 节点（计算节点/工作节点）。应用实际部署在 Worker 节点上，支持通过配置随机部署在 Worker 节点上或部署在指定的 Worker 节点上。容器服务中的 节点 一般指 Worker 节点。
 ---

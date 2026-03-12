@@ -3,9 +3,40 @@
   "createOnlyProperties": [
     "/properties/Description",
     "/properties/Name",
-    "/properties/ZoneId"
+    "/properties/ZoneId",
+    "/properties/Tags",
+    "/properties/ProjectName"
   ],
+  "definitions": {
+    "Tag": {
+      "description": "标签键值对。",
+      "properties": {
+        "Key": {
+          "description": "标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
   "description": "高性能计算集群（High Performance Compute Cluster，HPC集群）是一种用于处理大规模计算任务的集群计算环境，通常由大量的计算节点组成，这些节点通过RDMA（Remote Direct Memory Access）高速网络互联，并协同工作以处理复杂的计算任务。高性能计算集群可以提供强大的计算能力、大内存、高速存储和高速网络，以满足对计算密集型、数据密集型或两者结合的工作负载的需求。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/HpcClusterId",
+      "/properties/ZoneId",
+      "/properties/Name",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -36,26 +67,46 @@
   "properties": {
     "CreatedTime": {
       "description": "创建时间，格式满足RFC3339。",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "高性能计算集群描述，默认为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0～255之间。",
+      "semantic": "description",
       "type": "string"
     },
     "HpcClusterId": {
       "description": "高性能计算集群ID。",
+      "semantic": "resourceId",
       "type": "string"
     },
     "Name": {
       "description": "高性能计算集群名称。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1～128之间。",
+      "semantic": "resourceName",
       "type": "string"
+    },
+    "ProjectName": {
+      "description": "项目名称。",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "标签信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
     },
     "UpdatedTime": {
       "description": "更新时间，格式满足RFC3339。",
+      "semantic": "updatedTime",
       "type": "string"
     },
     "VpcId": {
       "description": "私有网络ID。",
+      "semantic": "privateIp",
       "type": "string"
     },
     "ZoneId": {
@@ -66,8 +117,8 @@
   "readOnlyProperties": [
     "/properties/HpcClusterId",
     "/properties/VpcId",
-    "/properties/CreatedAt",
-    "/properties/UpdatedAt"
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime"
   ],
   "required": [
     "Name",

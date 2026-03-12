@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_alb_certificate Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ALB"
 description: |-
   ALB 支持上传服务器证书、CA 证书到控制台，对上传的证书单独管理。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_mongodb_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "MongoDB"
 description: |-
   文档数据库 MongoDB 版支持多种架构，能够满足业务灵活部署的需求。除副本集实例架构外，文档数据库 MongoDB 版还提供了分片集群架构，以满足海量数据业务场景，同时提供了灾备、备份及恢复、监控等全套解决方案；在互联网（游戏、电商、直播、资讯、社交）、新零售、在线教育、金融、物联网、政企等行业都有广泛的应用。
 ---

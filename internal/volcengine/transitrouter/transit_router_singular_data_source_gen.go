@@ -306,6 +306,17 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "中转路由器实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GrantSourceType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。",
+		//	  "type": "string"
+		//	}
+		"grant_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: GrantStatus
 		// Cloud Control resource type schema:
 		//
@@ -315,6 +326,17 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"grant_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "实例共享的状态。Accepted：已接受。Initial：待接受。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MulticastEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "中转路由器是否开启组播。true：开启。false（默认值）：不开启",
+		//	  "type": "boolean"
+		//	}
+		"multicast_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "中转路由器是否开启组播。true：开启。false（默认值）：不开启",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
@@ -454,9 +476,11 @@ func transitRouterDataSource(ctx context.Context) (datasource.DataSource, error)
 		"creation_time":                          "CreationTime",
 		"deleted_time":                           "DeletedTime",
 		"description":                            "Description",
+		"grant_source_type":                      "GrantSourceType",
 		"grant_status":                           "GrantStatus",
 		"ipv_6_enabled":                          "Ipv6Enabled",
 		"key":                                    "Key",
+		"multicast_enabled":                      "MulticastEnabled",
 		"overdue_time":                           "OverdueTime",
 		"project_name":                           "ProjectName",
 		"resource_id":                            "ResourceId",

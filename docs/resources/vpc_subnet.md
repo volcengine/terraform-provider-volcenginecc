@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_subnet Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   子网是在指定可用区内分配的一段VPC网段内的网段，它为云上资源（如云服务器、负载均衡等）提供私网IP地址。
 ---

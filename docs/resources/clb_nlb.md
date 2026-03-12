@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_clb_nlb Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CLB"
 description: |-
   NLB 实例用于接收用户的访问请求，并根据监听器和服务器组的配置设定，将访问请求转发至后端服务器。
 ---

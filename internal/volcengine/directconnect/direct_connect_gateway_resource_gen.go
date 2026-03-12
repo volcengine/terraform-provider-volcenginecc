@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -96,6 +97,51 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssociateEic
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "关联的EIC信息。",
+		//	  "properties": {
+		//	    "EicId": {
+		//	      "description": "EIC的ID。",
+		//	      "type": "string"
+		//	    },
+		//	    "EicOwnerId": {
+		//	      "description": "EIC的用户ID。",
+		//	      "type": "string"
+		//	    },
+		//	    "EicStatus": {
+		//	      "description": "实例在EIC中的状态。",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"associate_eic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EicId
+				"eic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "EIC的ID。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EicOwnerId
+				"eic_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "EIC的用户ID。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EicStatus
+				"eic_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "实例在EIC中的状态。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "关联的EIC信息。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BgpAsn
@@ -393,6 +439,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                  "AccountId",
 		"associate_cens":              "AssociateCens",
+		"associate_eic":               "AssociateEic",
 		"bgp_asn":                     "BgpAsn",
 		"business_status":             "BusinessStatus",
 		"cen_id":                      "CenId",
@@ -403,6 +450,9 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		"description":                 "Description",
 		"direct_connect_gateway_id":   "DirectConnectGatewayId",
 		"direct_connect_gateway_name": "DirectConnectGatewayName",
+		"eic_id":                      "EicId",
+		"eic_owner_id":                "EicOwnerId",
+		"eic_status":                  "EicStatus",
 		"enable_ipv_6":                "EnableIpv6",
 		"key":                         "Key",
 		"lock_reason":                 "LockReason",
@@ -429,6 +479,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		"/properties/OverdueTime",
 		"/properties/DeletedTime",
 		"/properties/AssociateCens",
+		"/properties/AssociateEic",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

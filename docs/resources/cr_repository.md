@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cr_repository Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CR"
 description: |-
   OCI 制品仓库用于存储容器镜像或 Helm Chart 等，符合开源容器标准的 OCI（Open Container Initiative） 制品。
 ---

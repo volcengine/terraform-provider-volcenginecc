@@ -179,10 +179,12 @@ func eIPResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"direct_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// DirectMode is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EipAddress
 		// Cloud Control resource type schema:
@@ -728,6 +730,7 @@ func eIPResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/RenewType",
 		"/properties/RenewPeriodTimes",
 		"/properties/SecurityProtectionInstanceId",
+		"/properties/DirectMode",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -743,7 +746,6 @@ func eIPResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/OverdueTime",
 		"/properties/UpdatedTime",
 		"/properties/ServiceManaged",
-		"/properties/DirectMode",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

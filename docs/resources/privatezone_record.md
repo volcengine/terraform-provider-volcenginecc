@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_privatezone_record Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "PrivateZone"
 description: |-
   解析记录是域名与 VPC 内资源信息的映射。
 ---

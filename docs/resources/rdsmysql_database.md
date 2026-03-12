@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdsmysql_database Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSMySQL"
 description: |-
   数据库
 ---

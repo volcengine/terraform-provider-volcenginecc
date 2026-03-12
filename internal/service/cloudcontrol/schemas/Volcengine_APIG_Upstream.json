@@ -84,6 +84,28 @@
       },
       "type": "object"
     },
+    "ConnectionPoolSettings": {
+      "description": "连接池配置。",
+      "properties": {
+        "Enable": {
+          "description": "开启。",
+          "type": "boolean"
+        },
+        "Http1MaxPendingRequests": {
+          "description": "HTTP/1最大等待请求数。取值限制为0~2^31-1，0为不限制。",
+          "type": "integer"
+        },
+        "IdleTimeout": {
+          "description": "空闲超时时间。单位为秒。取值限制为0~2^31-1，0为不限制。",
+          "type": "integer"
+        },
+        "MaxConnections": {
+          "description": "TCP最大连接数。取值限制为0~2^31-1，0为不限制。",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "ConsistentHashLB": {
       "description": "一致性哈希负载均衡。",
       "properties": {
@@ -91,6 +113,10 @@
           "$ref": "#/definitions/HTTPCookie",
           "description": "Cookie。",
           "type": "object"
+        },
+        "HashBalanceFactor": {
+          "description": "过载保护参数。取值限制为100~200。当取值为120时，upstream节点当前活跃请求数超过平均活跃请求数的120%时，将触发过载保护。当触发过载保护时，即使请求的hash命中某一upstream节点，负载均衡器也会随机选择upstream节点。",
+          "type": "integer"
         },
         "HashKey": {
           "description": "一致性哈希方式，取值：UseSourceIp：基于源IP地址。HttpQueryParameterName：基于参数。HttpHeaderName：基于头。HTTPCookie：基于cookie。",
@@ -127,6 +153,39 @@
           "type": "integer"
         }
       },
+      "type": "object"
+    },
+    "Domain": {
+      "description": "固定域名。",
+      "properties": {
+        "DomainList": {
+          "description": "域名列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/DomainList",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "DomainList": {
+      "description": "固定域名。",
+      "properties": {
+        "Domain": {
+          "description": "域名。",
+          "type": "string"
+        },
+        "Port": {
+          "description": "端口。协议类型为HTTP时，默认值为80。协议类型为HTTPS时，默认值为443。",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Domain"
+      ],
       "type": "object"
     },
     "EcsInstances": {
@@ -271,6 +330,11 @@
           "description": "AI模型代理。",
           "type": "object"
         },
+        "Domain": {
+          "$ref": "#/definitions/Domain",
+          "description": "固定域名。",
+          "type": "object"
+        },
         "EcsInstances": {
           "description": "云服务器。",
           "insertionOrder": false,
@@ -392,6 +456,11 @@
     "Comments": {
       "description": "备注。",
       "type": "string"
+    },
+    "ConnectionPoolSettings": {
+      "$ref": "#/definitions/ConnectionPoolSettings",
+      "description": "连接池配置。",
+      "type": "object"
     },
     "CreatedTime": {
       "description": "Upstream创建时间。",

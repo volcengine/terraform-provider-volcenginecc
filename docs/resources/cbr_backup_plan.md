@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cbr_backup_plan Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CBR"
 description: |-
   当需要对备份源进行自动备份时，可以创建备份计划，在备份计划中关联备份源和备份策略，指定备份存储空间，并设置备份数据保留规则等。在创建备份计划后，系统将按照关联备份策略配置，对指定备份源进行统一自动备份。
 ---

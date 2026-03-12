@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_kms_key Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "KMS"
 description: |-
   密钥管理服务（Key Management Service）是火山引擎上一站式的密钥管理和数据加密服务平台。提供简单易用的加密接口，KMS 帮助用户轻松管理密钥、保护云上核心数据的安全。同时极大降低用户自行部署密码基础设施的采购、研发成本。帮助业务轻松满足监管和合规需求。
 ---

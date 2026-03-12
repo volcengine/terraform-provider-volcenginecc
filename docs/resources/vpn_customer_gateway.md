@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpn_customer_gateway Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPN"
 description: |-
   用户网关是您本地网关侧的信息集合和抽象。通过用户网关，您可以把本地网关的信息注册到云上VPC之中。一个用户网关，可以对接多个VPN网关。
 ---

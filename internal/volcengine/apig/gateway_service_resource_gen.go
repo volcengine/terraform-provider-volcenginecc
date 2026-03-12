@@ -117,18 +117,11 @@ func gatewayServiceResource(ctx context.Context) (resource.Resource, error) {
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Domain
-					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义域名。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: DomainId
-					"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义域名ID。",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "自定义域名列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -160,6 +153,23 @@ func gatewayServiceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。",
+		//	  "type": "string"
+		//	}
+		"domain_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// DomainType is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Domains
 		// Cloud Control resource type schema:
@@ -285,18 +295,99 @@ func gatewayServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。。",
+		//	  "description": "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。。",
+			Description: "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceNetworkSpec
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "服务默认域名网络配置。。",
+		//	  "properties": {
+		//	    "EnablePrivateNetwork": {
+		//	      "description": "开启私网。",
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnablePublicNetwork": {
+		//	      "description": "开启公网。",
+		//	      "type": "boolean"
+		//	    },
+		//	    "PrivateNetworkIP": {
+		//	      "description": "私网域名解析的目标IP。",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"service_network_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnablePrivateNetwork
+				"enable_private_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "开启私网。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnablePublicNetwork
+				"enable_public_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "开启公网。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateNetworkIP
+				"private_network_ip": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "私网域名解析的目标IP。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "服务默认域名网络配置。。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ServiceNetworkSpec is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "服务类型，取值：AIProvider：AI模型代理。",
+		//	  "type": "string"
+		//	}
+		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "服务类型，取值：AIProvider：AI模型代理。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -342,33 +433,47 @@ func gatewayServiceResource(ctx context.Context) (resource.Resource, error) {
 		"domain":                   "Domain",
 		"domain_id":                "DomainId",
 		"domain_spec":              "DomainSpec",
+		"domain_type":              "DomainType",
 		"domains":                  "Domains",
 		"enable":                   "Enable",
+		"enable_private_network":   "EnablePrivateNetwork",
+		"enable_public_network":    "EnablePublicNetwork",
 		"enable_public_resolution": "EnablePublicResolution",
 		"gateway_id":               "GatewayId",
 		"gateway_name":             "GatewayName",
 		"message":                  "Message",
+		"private_network_ip":       "PrivateNetworkIP",
 		"protocol":                 "Protocol",
 		"service_id":               "ServiceId",
 		"service_name":             "ServiceName",
+		"service_network_spec":     "ServiceNetworkSpec",
+		"service_type":             "ServiceType",
 		"status":                   "Status",
 		"type":                     "Type",
+	})
+
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/DomainType",
+		"/properties/ServiceNetworkSpec",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/CreatedTime",
 		"/properties/ServiceId",
-		"/properties/CustomDomains",
 		"/properties/Domains",
 		"/properties/GatewayName",
 		"/properties/Message",
 		"/properties/Status",
 		"/properties/DomainSpec",
+		"/properties/CustomDomains/*/Domain",
+		"/properties/CustomDomains/*/DomainId",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/GatewayId",
 		"/properties/ServiceName",
+		"/properties/ServiceType",
+		"/properties/DomainType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

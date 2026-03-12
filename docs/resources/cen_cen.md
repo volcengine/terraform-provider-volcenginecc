@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cen_cen Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CEN"
 description: |-
   云企业网（Cloud Enterprise Network，CEN）提供一种能够快速构建跨地域私有网络（VPC）与云下数据中心（IDC）之间高速、优质、稳定的网络能力，帮助您打造一张具有企业级规模和通信能力的全球云上网络。
 ---

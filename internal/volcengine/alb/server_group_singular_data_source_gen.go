@@ -33,6 +33,17 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "后端服务器组的创建时间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CrossZoneEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "是否开启服务器组的跨可用区负载均衡功能。取值如下：on（默认值）：开启。off：不开启。",
+		//	  "type": "string"
+		//	}
+		"cross_zone_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "是否开启服务器组的跨可用区负载均衡功能。取值如下：on（默认值）：开启。off：不开启。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
@@ -627,6 +638,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cookie":                 "Cookie",
 		"cookie_timeout":         "CookieTimeout",
 		"create_time":            "CreateTime",
+		"cross_zone_enabled":     "CrossZoneEnabled",
 		"description":            "Description",
 		"domain":                 "Domain",
 		"enabled":                "Enabled",

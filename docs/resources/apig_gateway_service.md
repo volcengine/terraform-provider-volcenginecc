@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_apig_gateway_service Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "APIG"
 description: |-
   服务是一组路由对外暴露的入口，用于区分流量的来源和协议，实现业务、环境、逻辑租户隔离。服务可以绑定独立的访问域名，以域名维度访问业务。
 ---
@@ -13,13 +13,19 @@ description: |-
 
 ```terraform
 resource "volcenginecc_apig_gateway_service" "ApigGatewayServiceDemo" {
-  service_name = "ApigGatewayServiceDemo"
-  gateway_id   = "gd3vehjs7npja181xxxxx"
+  service_name = "ccapi-terraform-1"
+  gateway_id   = "gd6l9lbilgrmdxxxxxx"
   protocol     = ["HTTP", "HTTPS"]
   auth_spec = {
-    enable = false
+    enable = true
   }
-  comments = "ApigGatewayServiceDemo-test"
+  comments     = "test"
+  service_type = "AIProvider"
+  service_network_spec = {
+    enable_public_network  = true
+    enable_private_network = false
+    private_network_ip     = []
+  }
 }
 ```
 
@@ -31,17 +37,20 @@ resource "volcenginecc_apig_gateway_service" "ApigGatewayServiceDemo" {
 - `auth_spec` (Attributes) 认证配置。 (see [below for nested schema](#nestedatt--auth_spec))
 - `gateway_id` (String) 网关ID。
 - `protocol` (Set of String) 服务支持的协议。取值：HTTP：HTTP。HTTPS：HTTPS。
-- `service_name` (String) 服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。。
+- `service_name` (String) 服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。
 
 ### Optional
 
 - `comments` (String) 备注，长度限制为0~253个字符。
+- `custom_domains` (Attributes Set) 自定义域名列表。
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_domains))
+- `domain_type` (String) 域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。
+- `service_network_spec` (Attributes) 服务默认域名网络配置。。 (see [below for nested schema](#nestedatt--service_network_spec))
+- `service_type` (String) 服务类型，取值：AIProvider：AI模型代理。
 
 ### Read-Only
 
 - `created_time` (String) 创建时间。
-- `custom_domains` (Attributes Set) 自定义域名列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_domains))
 - `domain_spec` (Attributes) 域名详情。 (see [below for nested schema](#nestedatt--domain_spec))
 - `domains` (Attributes Set) 默认域名。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domains))
@@ -62,10 +71,15 @@ Optional:
 <a id="nestedatt--custom_domains"></a>
 ### Nested Schema for `custom_domains`
 
-Read-Only:
 
-- `domain` (String) 自定义域名。
-- `domain_id` (String) 自定义域名ID。
+<a id="nestedatt--service_network_spec"></a>
+### Nested Schema for `service_network_spec`
+
+Optional:
+
+- `enable_private_network` (Boolean) 开启私网。
+- `enable_public_network` (Boolean) 开启公网。
+- `private_network_ip` (Set of String) 私网域名解析的目标IP。
 
 
 <a id="nestedatt--domain_spec"></a>

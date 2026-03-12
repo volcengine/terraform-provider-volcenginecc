@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdspostgresql_db_account Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSPostgreSQL"
 description: |-
   RDS PostgreSQL 数据库账号
 ---

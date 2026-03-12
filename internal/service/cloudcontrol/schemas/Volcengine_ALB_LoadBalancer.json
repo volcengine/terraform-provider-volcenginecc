@@ -3,6 +3,7 @@
   "createOnlyProperties": [
     "/properties/AddressIpVersion",
     "/properties/BandwidthPackageId",
+    "/properties/Ipv6BandwidthPackageId",
     "/properties/LoadBalancerBillingType",
     "/properties/LoadBalancerEdition",
     "/properties/EipBillingConfig",
@@ -94,6 +95,15 @@
           "enum": [
             "BGP"
           ],
+          "type": "string"
+        },
+        "SecurityProtectionInstanceId": {
+          "description": "创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "SecurityProtectionTypes": {
+          "description": "创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。",
           "type": "string"
         }
       },
@@ -289,6 +299,7 @@
       "/properties/VpcId",
       "/properties/LoadBalancerName",
       "/properties/ProjectName",
+      "/properties/Type",
       "/properties/Tags/*/Key",
       "/properties/Tags/*/Value"
     ]
@@ -387,6 +398,10 @@
       "$ref": "#/definitions/GlobalAccelerator",
       "description": "全球加速器配置，用于提升跨地域访问速度。"
     },
+    "Ipv6BandwidthPackageId": {
+      "description": "创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。",
+      "type": "string"
+    },
     "Ipv6EipBillingConfig": {
       "$ref": "#/definitions/Ipv6EipBillingConfig",
       "description": "IPv6公网IP的计費配置，仅适用于公网实例。"
@@ -444,6 +459,10 @@
     "ProjectName": {
       "description": "实例所属项目名称。",
       "semantic": "projectName",
+      "type": "string"
+    },
+    "ProxyProtocolEnabled": {
+      "description": "ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。",
       "type": "string"
     },
     "Status": {
@@ -539,6 +558,8 @@
     "/properties/GlobalAccelerator",
     "/properties/EipBillingConfig",
     "/properties/Ipv6EipBillingConfig",
-    "/properties/BandwidthPackageId"
+    "/properties/BandwidthPackageId",
+    "/properties/ProxyProtocolEnabled",
+    "/properties/Ipv6BandwidthPackageId"
   ]
 }

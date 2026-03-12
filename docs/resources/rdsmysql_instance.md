@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdsmysql_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSMySQL"
 description: |-
   云数据库 MySQL 版是火山引擎基于开源数据库 MySQL 打造的弹性、可靠的在线关系型数据库服务。 MySQL 实例使用云原生方式部署，结合本地 SSD 存储类型，提供高性能读写能力；完全兼容 MySQL 引擎，并提供实例管理、备份恢复、日志管理、监控告警、数据迁移等全套解决方案，帮助企业简化繁杂的数据库管理和运维任务，使企业有更多的时间与资源聚焦于自己的核心业务。
 ---

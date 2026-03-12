@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vke_node_pool Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VKE"
 description: |-
   节点池是集群中具有相同配置的一组节点，一个节点池包含一个节点或多个节点。节点池的配置包含节点的属性，例如节点规格、可用区、标签、污点等。这些属性可以在创建节点池时指定，也可以在创建完成后进行编辑修改。
 ---

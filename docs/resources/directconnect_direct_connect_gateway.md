@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_directconnect_direct_connect_gateway Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "DirectConnect"
 description: |-
   专线网关是本地数据中心访问云上的入口，用于连接私有网络（VPC）与物理专线，实现云下数据中心（IDC）和云上私有网络（VPC）互访。
 ---
@@ -43,6 +43,7 @@ resource "volcenginecc_directconnect_direct_connect_gateway" "DirectConnectDirec
 - `account_id` (String) 专线网关所属账号的ID。
 - `associate_cens` (Attributes Set) 关联的CEN信息。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
+- `associate_eic` (Attributes) 关联的EIC信息。 (see [below for nested schema](#nestedatt--associate_eic))
 - `business_status` (String) 专线网关是否被锁定。Normal：正常。FinancialLocked：被锁定。
 - `created_time` (String) 创建专线网关的时间。
 - `deleted_time` (String) 预期资源强制回收时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。
@@ -70,6 +71,16 @@ Read-Only:
 - `cen_id` (String) CEN的ID。
 - `cen_owner_id` (String) CEN的用户ID。
 - `cen_status` (String) 实例在CEN中的状态。Attaching：加载中。Attached：已加载。
+
+
+<a id="nestedatt--associate_eic"></a>
+### Nested Schema for `associate_eic`
+
+Read-Only:
+
+- `eic_id` (String) EIC的ID。
+- `eic_owner_id` (String) EIC的用户ID。
+- `eic_status` (String) 实例在EIC中的状态。
 
 ## Import
 

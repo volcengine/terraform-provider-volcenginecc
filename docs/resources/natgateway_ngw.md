@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_natgateway_ngw Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "NatGateway"
 description: |-
   NAT网关为私有网络内的云服务器提供网络地址转换服务。
 ---

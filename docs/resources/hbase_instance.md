@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_hbase_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "HBase"
 description: |-
   表格数据库 HBase 版是基于 Apache HBase 提供的全托管 NoSQL 服务，兼容标准 HBase 访问协议，具备低成本存储、高扩展吞吐等优势。
 ---

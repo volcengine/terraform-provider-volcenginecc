@@ -1,0 +1,82 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/DBName",
+    "/properties/InstanceId",
+    "/properties/SchemaName"
+  ],
+  "description": "RDS PostgreSQL Schema 资源类型",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/DBName"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:CreateSchema",
+        "rds_postgresql:DescribeSchemas"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:DeleteSchema",
+        "rds_postgresql:DescribeSchemas"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_postgresql:DescribeSchemas"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeSchemas"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:ModifySchemaOwner",
+        "rds_postgresql:DescribeSchemas"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/DBName",
+    "/properties/SchemaName"
+  ],
+  "properties": {
+    "DBName": {
+      "description": "数据库名称",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Owner": {
+      "description": "Schema 的 owner。说明实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为 Schema 的 owner。",
+      "type": "string"
+    },
+    "SchemaName": {
+      "description": "Schema 名称。长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。不能以 pg_ 开头",
+      "type": "string"
+    }
+  },
+  "required": [
+    "InstanceId",
+    "DBName",
+    "SchemaName",
+    "Owner"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::Schema"
+}

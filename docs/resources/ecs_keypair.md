@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_ecs_keypair Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ECS"
 description: |-
   ECS 密钥对（Keypair）默认采用 RSA 2048 位加密算法生成一对关联密钥，包含公钥（public key）和私钥（private key）。其中，公钥用于对数据进行加密处理，可将明文转换为不可直接读取的密文；私钥则作为解密的唯一凭证，能将密文还原为原始明文，实现安全的身份验证与数据传输。
 ---

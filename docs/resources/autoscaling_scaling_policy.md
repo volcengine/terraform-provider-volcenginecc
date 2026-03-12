@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_autoscaling_scaling_policy Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "AutoScaling"
 description: |-
   伸缩规则用于定义触发扩缩容行为的条件和方式，包括规则类型、触发时间、伸缩行为、冷却时间等。在同一个伸缩组中，您可以启用多条伸缩规则，满足任意类型时均会执行伸缩动作。但当同一时间满足多个类型时，将优先执行手动触发的伸缩行为。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_kafka_allow_list Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "Kafka"
 description: |-
   创建 Kafka 实例时，可以按需为其绑定白名单，绑定白名单与 Kafka 实例之后，仅配置在白名单中的 IP 地址与地址段才能访问消息队列 Kafka版实例。安全起见，建议您创建白名单，并将客户端的 IP 地址或 IP 地址段添加到 Kafka 实例的白名单中。建议您定期维护和管理白名单，提高 Kafka 实例访问的安全性。
 ---

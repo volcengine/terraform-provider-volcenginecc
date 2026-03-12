@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_natgateway_snatentry Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "NatGateway"
 description: |-
   当私有网络内有多台云服务器实例需要访问公网时，为了节省公网IP且避免在公网上直接暴露云服务器IP，您可以使用公网NAT网关的SNAT规则，安全、便捷、高效地访问公网。SNAT规则支持私有网络、子网、云服务器、自定义网段等四种粒度，您可根据业务需求灵活配置。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_iam_project Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "IAM"
 description: |-
   资源项目（Project）是提供的一种资源分组管理的机制，帮助您达成逻辑层面的资源隔离，您能够通过资源项目进行项目制授权和分账等操作。
 ---

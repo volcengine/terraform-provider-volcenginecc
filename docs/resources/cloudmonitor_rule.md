@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cloudmonitor_rule Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CloudMonitor"
 description: |-
   如果您需要监控某一云产品资源的数据状态，则可以创建云监控告警策略。当被监控的云产品资源数据达到告警的触发条件时，系统会通过您指定的方式推送告警通知，便于您及时发现存在异常数据的资源。
 ---

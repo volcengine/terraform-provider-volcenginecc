@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_waf_domain Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "WAF"
 description: |-
   通过 CNAME 或是负载均衡方式接入防护网站，并配置接入能力和回源能力，将业务流量接入到 WAF 实例，实现防护。
 ---

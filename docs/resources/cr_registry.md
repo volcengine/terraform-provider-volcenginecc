@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cr_registry Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CR"
 description: |-
   镜像仓库（Container Registry，CR）提供安全高可用的容器镜像、Helm Chart 等符合 OCI 标准的云原生制品托管服务，方便企业用户管理容器镜像和 Helm Chart 的全生命周期。
 ---

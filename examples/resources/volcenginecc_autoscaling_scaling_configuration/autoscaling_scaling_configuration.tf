@@ -5,10 +5,11 @@ resource "volcenginecc_autoscaling_scaling_configuration" "AutoScalingDemo" {
   scaling_group_id           = "scg-ye43d97gsvkxgganxxxx"
   security_group_ids         = ["sg-rrco3fkzzy0wv0x589wxxxx"]
   eip = {
-    bandwidth            = 1
-    billing_type         = "PostPaidByBandwidth"
-    isp                  = "BGP"
-    bandwidth_package_id = "bwp-btgl56gbli4g5h0b2v7ixxxx"
+    bandwidth             = 1
+    billing_type          = "PostPaidByBandwidth"
+    isp                   = "BGP"
+    bandwidth_package_id  = "bwp-btgl56gbli4g5h0b2v7ixxxx"
+    release_with_instance = true
   }
   ipv_6_address_count = 1
   spot_strategy       = "SpotWithPriceLimit"
@@ -23,7 +24,25 @@ resource "volcenginecc_autoscaling_scaling_configuration" "AutoScalingDemo" {
     {
       delete_with_instance = true
       size                 = 40
-    volume_type = "ESSD_FlexPL" }
+    volume_type = "ESSD_PL0" },
+    {
+      delete_with_instance   = true
+      size                   = 500
+      volume_type            = "ESSD_FlexPL"
+      extra_performance_iops = 3
+    extra_performance_type_id = "Balance" },
+    {
+      delete_with_instance   = true
+      size                   = 510
+      volume_type            = "ESSD_FlexPL"
+      extra_performance_iops = 2
+    extra_performance_type_id = "IOPS" },
+    {
+      delete_with_instance            = true
+      size                            = 520
+      volume_type                     = "ESSD_FlexPL"
+      extra_performance_throughput_mb = 2
+    extra_performance_type_id = "Throughput" }
   ]
   project_name         = "default"
   key_pair_name        = "test"

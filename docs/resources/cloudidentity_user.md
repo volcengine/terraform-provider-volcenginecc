@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cloudidentity_user Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CloudIdentity"
 description: |-
   云身份中心用户，与企业员工身份一一映射。云身份中心用户是一种身份类型，可与某个账号下的IAM用户身份进行唯一关联并单点登录。云身份中心提供企业员工身份全生命周期管理、权限管理能力，推荐您在本产品内统一管理员工身份。
 ---

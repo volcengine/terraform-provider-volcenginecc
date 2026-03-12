@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vepfs_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VEPFS"
 description: |-
   文件存储 vePFS 是推出的一种高吞吐、低延时、可扩展并行的文件系统服务，满足高性能计算场景下高吞吐低延时的数据读写需求，可广泛应用于 HPC 高性能计算、AI 人工智能训练或推理、能源勘探、工业仿真、影视渲染、生命科学、气象分析等场景。同时，vePFS 提供一键化部署及配套监控报警能力，免去部署、维护费用的同时，最大化提升您的业务效率。
 ---

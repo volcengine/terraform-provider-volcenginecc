@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_storageebs_volume Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "StorageEBS"
 description: |-
   云盘是高可用、高可靠、高性能、弹性扩展的块存储设备，可以作为云服务器和弹性容器服务的可扩展硬盘使用。
 ---

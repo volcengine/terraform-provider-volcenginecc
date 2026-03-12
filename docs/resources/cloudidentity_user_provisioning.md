@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cloudidentity_user_provisioning Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CloudIdentity"
 description: |-
   当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。
 ---

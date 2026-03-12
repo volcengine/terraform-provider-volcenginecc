@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vmp_workspace Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VMP"
 description: |-
   工作区（Workspace）是 VMP 服务中采集数据和规则的抽象整合，为用户提供物理隔离或逻辑隔离的 Prometheus 能力。在 VMP 服务中可创建不同的工作区，不同工作区中的数据彼此隔离。
 ---

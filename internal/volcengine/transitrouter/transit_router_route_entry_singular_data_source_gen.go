@@ -126,6 +126,28 @@ func transitRouterRouteEntryDataSource(ctx context.Context) (datasource.DataSour
 			Description: "路由条目的下一跳ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TransitRouterRouteEntryNextHopResourceId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "路由条目下一跳网络实例ID。",
+		//	  "type": "string"
+		//	}
+		"transit_router_route_entry_next_hop_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "路由条目下一跳网络实例ID。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TransitRouterRouteEntryNextHopResourceType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "路由条目下一跳网络实例的类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。",
+		//	  "type": "string"
+		//	}
+		"transit_router_route_entry_next_hop_resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "路由条目下一跳网络实例的类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterRouteEntryNextHopType
 		// Cloud Control resource type schema:
 		//
@@ -195,18 +217,20 @@ func transitRouterRouteEntryDataSource(ctx context.Context) (datasource.DataSour
 	opts = opts.WithCloudControlTypeName("Volcengine::TransitRouter::TransitRouterRouteEntry").WithTerraformTypeName("volcenginecc_transitrouter_transit_router_route_entry")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"as_path":                                  "AsPath",
-		"created_time":                             "CreatedTime",
-		"description":                              "Description",
-		"destination_cidr_block":                   "DestinationCidrBlock",
-		"status":                                   "Status",
-		"transit_router_route_entry_id":            "TransitRouterRouteEntryId",
-		"transit_router_route_entry_name":          "TransitRouterRouteEntryName",
-		"transit_router_route_entry_next_hop_id":   "TransitRouterRouteEntryNextHopId",
-		"transit_router_route_entry_next_hop_type": "TransitRouterRouteEntryNextHopType",
-		"transit_router_route_entry_type":          "TransitRouterRouteEntryType",
-		"transit_router_route_table_id":            "TransitRouterRouteTableId",
-		"updated_time":                             "UpdatedTime",
+		"as_path":                                "AsPath",
+		"created_time":                           "CreatedTime",
+		"description":                            "Description",
+		"destination_cidr_block":                 "DestinationCidrBlock",
+		"status":                                 "Status",
+		"transit_router_route_entry_id":          "TransitRouterRouteEntryId",
+		"transit_router_route_entry_name":        "TransitRouterRouteEntryName",
+		"transit_router_route_entry_next_hop_id": "TransitRouterRouteEntryNextHopId",
+		"transit_router_route_entry_next_hop_resource_id":   "TransitRouterRouteEntryNextHopResourceId",
+		"transit_router_route_entry_next_hop_resource_type": "TransitRouterRouteEntryNextHopResourceType",
+		"transit_router_route_entry_next_hop_type":          "TransitRouterRouteEntryNextHopType",
+		"transit_router_route_entry_type":                   "TransitRouterRouteEntryType",
+		"transit_router_route_table_id":                     "TransitRouterRouteTableId",
+		"updated_time":                                      "UpdatedTime",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

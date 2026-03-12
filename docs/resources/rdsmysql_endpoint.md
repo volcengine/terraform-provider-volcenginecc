@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdsmysql_endpoint Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSMySQL"
 description: |-
   连接终端是云数据库 MySQL 版提供的位于数据库和应用程序之间的网络代理服务。根据连接终端的功能差异，连接终端可以分为代理终端和直连终端两种类型。通过代理终端的连接将经过代理，可使用代理相关的特性和功能，如读写分离、负载均衡、空闲连接回收和 Multi-Statements 等；通过直连终端的连接将直连到对应节点，不能使用代理相关特性。
 ---

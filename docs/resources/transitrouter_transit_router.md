@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_transitrouter_transit_router Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "TransitRouter"
 description: |-
   中转路由器服务的运行载体。接受来自网络实例的流量，并根据关联转发路由表进行转发。
 ---
@@ -32,6 +32,7 @@ resource "volcenginecc_transitrouter_transit_router" "TransitRouterDemo" {
 
 - `asn` (Number) 中转路由器的ASN号。取值范围为64512 ～ 65534 和 4200000000 ～ 4294967294，默认值为64512。
 - `description` (String) 中转路由器实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
+- `multicast_enabled` (Boolean) 中转路由器是否开启组播。true：开启。false（默认值）：不开启
 - `project_name` (String) 中转路由器实例所属项目的名称。不传入该参数或该参数不传入数值时，默认为default。
 - `tags` (Attributes Set) 标签列表
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
@@ -44,6 +45,7 @@ resource "volcenginecc_transitrouter_transit_router" "TransitRouterDemo" {
 - `business_status` (String) 网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。
 - `creation_time` (String) 网络实例连接的创建时间。
 - `deleted_time` (String) 网络实例连接的删除时间。
+- `grant_source_type` (String) 中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。
 - `grant_status` (String) 实例共享的状态。Accepted：已接受。Initial：待接受。
 - `id` (String) Uniquely identifies the resource.
 - `overdue_time` (String) 中转路由器实例的欠费关停时间。

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_efs_file_system Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "EFS"
 description: |-
   文件系统是一种通过目录树结构管理文件的存储系统，分为本地文件系统和远程文件系统，此处特指远程文件系统，支持多个计算节点并发访问，共享数据集。
 ---

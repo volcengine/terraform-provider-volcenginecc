@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vke_default_node_pool Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VKE"
 description: |-
   除标准的自定义节点池外，容器服务支持 默认节点池（固定名称vke-default-nodepool）能力，用来纳管已有云服务器（ECS）实例。默认节点池的安全配置、高级配置、更多配置等配置能力与标准节点池一致，但不具备扩缩容、编辑数量等能力。
 ---

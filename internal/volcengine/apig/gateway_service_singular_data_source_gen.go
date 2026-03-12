@@ -134,6 +134,17 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "域名详情。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。",
+		//	  "type": "string"
+		//	}
+		"domain_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domains
 		// Cloud Control resource type schema:
 		//
@@ -243,12 +254,71 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。。",
+		//	  "description": "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。。",
+			Description: "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceNetworkSpec
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "服务默认域名网络配置。。",
+		//	  "properties": {
+		//	    "EnablePrivateNetwork": {
+		//	      "description": "开启私网。",
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnablePublicNetwork": {
+		//	      "description": "开启公网。",
+		//	      "type": "boolean"
+		//	    },
+		//	    "PrivateNetworkIP": {
+		//	      "description": "私网域名解析的目标IP。",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"service_network_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnablePrivateNetwork
+				"enable_private_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "开启私网。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnablePublicNetwork
+				"enable_public_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "开启公网。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateNetworkIP
+				"private_network_ip": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "私网域名解析的目标IP。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "服务默认域名网络配置。。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "服务类型，取值：AIProvider：AI模型代理。",
+		//	  "type": "string"
+		//	}
+		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "服务类型，取值：AIProvider：AI模型代理。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -286,15 +356,21 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 		"domain":                   "Domain",
 		"domain_id":                "DomainId",
 		"domain_spec":              "DomainSpec",
+		"domain_type":              "DomainType",
 		"domains":                  "Domains",
 		"enable":                   "Enable",
+		"enable_private_network":   "EnablePrivateNetwork",
+		"enable_public_network":    "EnablePublicNetwork",
 		"enable_public_resolution": "EnablePublicResolution",
 		"gateway_id":               "GatewayId",
 		"gateway_name":             "GatewayName",
 		"message":                  "Message",
+		"private_network_ip":       "PrivateNetworkIP",
 		"protocol":                 "Protocol",
 		"service_id":               "ServiceId",
 		"service_name":             "ServiceName",
+		"service_network_spec":     "ServiceNetworkSpec",
+		"service_type":             "ServiceType",
 		"status":                   "Status",
 		"type":                     "Type",
 	})

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_iam_user Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "IAM"
 description: |-
   IAM子用户是访问控制的一种身份，由账号或是拥有权限的用户创建。用户被授予权限后，可登录控制台或使用访问密钥调用API访问云资源。
 ---

@@ -1,0 +1,96 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/CType",
+    "/properties/CharacterSetName",
+    "/properties/Collate",
+    "/properties/DBName",
+    "/properties/InstanceId"
+  ],
+  "description": "数据库是 PostgreSQL 实例中的一个独立数据库，用于存储和管理数据。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/DBName"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:CreateDatabase",
+        "rds_postgresql:DescribeDatabases"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:DeleteDatabase",
+        "rds_postgresql:DescribeDatabases"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_postgresql:DescribeDatabases"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeDatabases"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:ModifyDatabaseOwner",
+        "rds_postgresql:DescribeDatabases"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/DBName"
+  ],
+  "properties": {
+    "CType": {
+      "description": "字符分类。取值范围： C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX。",
+      "type": "string"
+    },
+    "CharacterSetName": {
+      "description": "数据库字符集。目前支持的字符集包含：utf8（默认）、latin1、ascii",
+      "type": "string"
+    },
+    "Collate": {
+      "description": "排序规则。取值范围：C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX",
+      "type": "string"
+    },
+    "DBName": {
+      "description": "数据库名称。命名规则如下：长度 2~63 个字符。由字母、数字、下划线或中划线组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。",
+      "type": "string"
+    },
+    "DBStatus": {
+      "description": "数据库状态：Unavailable：不可用。Available：可用。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例 ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Owner": {
+      "description": "数据库的 owner。说明：实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为数据库的 owner。不传值或传空值时，会为该字段取值为 rds superuser",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/DBStatus"
+  ],
+  "required": [
+    "InstanceId",
+    "DBName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::Database"
+}

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vke_addon Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VKE"
 description: |-
   集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。
 ---

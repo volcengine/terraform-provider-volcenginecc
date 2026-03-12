@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -340,6 +341,20 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: GrantSourceType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。",
+		//	  "type": "string"
+		//	}
+		"grant_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GrantStatus
 		// Cloud Control resource type schema:
 		//
@@ -352,6 +367,22 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MulticastEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "中转路由器是否开启组播。true：开启。false（默认值）：不开启",
+		//	  "type": "boolean"
+		//	}
+		"multicast_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "中转路由器是否开启组播。true：开启。false（默认值）：不开启",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
@@ -536,9 +567,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time":                          "CreationTime",
 		"deleted_time":                           "DeletedTime",
 		"description":                            "Description",
+		"grant_source_type":                      "GrantSourceType",
 		"grant_status":                           "GrantStatus",
 		"ipv_6_enabled":                          "Ipv6Enabled",
 		"key":                                    "Key",
+		"multicast_enabled":                      "MulticastEnabled",
 		"overdue_time":                           "OverdueTime",
 		"project_name":                           "ProjectName",
 		"resource_id":                            "ResourceId",
@@ -567,11 +600,13 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Status",
 		"/properties/TransitRouterId",
 		"/properties/UpdateTime",
+		"/properties/GrantSourceType",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/Asn",
 		"/properties/ProjectName",
+		"/properties/MulticastEnabled",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
