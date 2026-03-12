@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vke_permission Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VKE"
 description: |-
   容器服务提供集群 RBAC 授权功能，为 IAM 用户或角色授予 RBAC 访问权限，包括可访问的资源、权限的作用范围、预置的角色类型等，从而更好地管理集群的安全访问控制，满足企业用户细粒度的资源访问权限控制需求。
 ---

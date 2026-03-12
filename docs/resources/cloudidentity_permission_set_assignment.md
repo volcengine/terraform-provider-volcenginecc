@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cloudidentity_permission_set_assignment Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CloudIdentity"
 description: |-
   当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。
   当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_prefix_list Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   前缀列表是一组CIDR地址块的集合，用于简化安全组规则、路由表条目的配置。当前缀列表修改时，所有关联它的资源均会同步修改。
 ---

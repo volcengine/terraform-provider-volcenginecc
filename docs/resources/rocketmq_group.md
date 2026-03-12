@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rocketmq_group Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RocketMQ"
 description: |-
   Group 即消费组（Consumer Group），是一类具有相同消费行为的消费者集合，用于分类管理不同的消费者。每个消费组消费不同种类的消息，且消息发布或订阅的逻辑一致。在消息队列 RocketMQ版中，您需要创建 Group，并通过 Group ID 标识不同类别的生产者或消费者。
 ---

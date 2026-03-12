@@ -147,6 +147,10 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_kafka_allow_list -ccschema ../service/cloudcontrol/schemas/Volcengine_Kafka_AllowList.json -package kafka -- ../volcengine/kafka/allow_list_resource_gen.go ../volcengine/kafka/allow_list_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_rocketmq_allow_list -ccschema ../service/cloudcontrol/schemas/Volcengine_RocketMQ_AllowList.json -package rocketmq -- ../volcengine/rocketmq/allow_list_resource_gen.go ../volcengine/rocketmq/allow_list_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_alb_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_ALB_Rule.json -package alb -- ../volcengine/alb/rule_resource_gen.go ../volcengine/alb/rule_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rdsmssql_allow_list -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSMsSQL_Allowlist.json -package rdsmssql -- ../volcengine/rdsmssql/allow_list_resource_gen.go ../volcengine/rdsmssql/allow_list_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rdspostgresql_database -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSPostgreSQL_Database.json -package rdspostgresql -- ../volcengine/rdspostgresql/database_resource_gen.go ../volcengine/rdspostgresql/database_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_mongodb_allow_list -ccschema ../service/cloudcontrol/schemas/Volcengine_MongoDB_AllowList.json -package mongodb -- ../volcengine/mongodb/allow_list_resource_gen.go ../volcengine/mongodb/allow_list_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rdspostgresql_schema -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSPostgreSQL_Schema.json -package rdspostgresql -- ../volcengine/rdspostgresql/schema_resource_gen.go ../volcengine/rdspostgresql/schema_resource_gen_test.go
 
 package provider
 

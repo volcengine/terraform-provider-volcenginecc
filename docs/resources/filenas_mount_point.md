@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_filenas_mount_point Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "FileNAS"
 description: |-
   挂载点是 NAS 文件系统在网络环境中的连接点。NAS 文件系统需要挂载在计算节点中才能完成数据的访问与存储。挂载是将计算节点与 NAS 文件系统相连接的操作。
 ---

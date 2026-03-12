@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_clb_clb Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CLB"
 description: |-
   负载均衡实例
 ---

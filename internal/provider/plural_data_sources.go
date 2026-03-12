@@ -147,6 +147,10 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_kafka_allow_lists -cctype Volcengine::Kafka::AllowList -package kafka ../volcengine/kafka/allow_list_plural_data_source_gen.go ../volcengine/kafka/allow_list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rocketmq_allow_lists -cctype Volcengine::RocketMQ::AllowList -package rocketmq ../volcengine/rocketmq/allow_list_plural_data_source_gen.go ../volcengine/rocketmq/allow_list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_alb_rules -cctype Volcengine::ALB::Rule -package alb ../volcengine/alb/rule_plural_data_source_gen.go ../volcengine/alb/rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmssql_allow_lists -cctype Volcengine::RDSMsSQL::Allowlist -package rdsmssql ../volcengine/rdsmssql/allow_list_plural_data_source_gen.go ../volcengine/rdsmssql/allow_list_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdspostgresql_databases -cctype Volcengine::RDSPostgreSQL::Database -package rdspostgresql ../volcengine/rdspostgresql/database_plural_data_source_gen.go ../volcengine/rdspostgresql/database_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_mongodb_allow_lists -cctype Volcengine::MongoDB::AllowList -package mongodb ../volcengine/mongodb/allow_list_plural_data_source_gen.go ../volcengine/mongodb/allow_list_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdspostgresql_schemas -cctype Volcengine::RDSPostgreSQL::Schema -package rdspostgresql ../volcengine/rdspostgresql/schema_plural_data_source_gen.go ../volcengine/rdspostgresql/schema_plural_data_source_gen_test.go
 
 package provider
 

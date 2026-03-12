@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rocketmq_allow_list Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RocketMQ"
 description: |-
   RocketMQ访问白名单。
 ---

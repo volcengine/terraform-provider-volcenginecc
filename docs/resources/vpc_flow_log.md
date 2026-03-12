@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_flow_log Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   流日志对网卡出入流量的日志数据按需聚合处理后，投递至 日志服务 存储和检索分析，您可以根据流日志的分析监控网络流量、排查网络问题、优化网络架构。VPC流日志记录VPC网络流量的详细信息，用于网络监控、流量分析和故障排查。
 ---

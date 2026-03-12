@@ -212,6 +212,15 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		//	        "BGP"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "SecurityProtectionInstanceId": {
+		//	      "description": "创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。",
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    },
+		//	    "SecurityProtectionTypes": {
+		//	      "description": "创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -258,6 +267,24 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 							"BGP",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionInstanceId
+				"security_protection_instance_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionTypes
+				"security_protection_types": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -349,6 +376,23 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// GlobalAccelerator is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6BandwidthPackageId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。",
+		//	  "type": "string"
+		//	}
+		"ipv_6_bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv6BandwidthPackageId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6EipBillingConfig
 		// Cloud Control resource type schema:
@@ -612,6 +656,22 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProxyProtocolEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。",
+		//	  "type": "string"
+		//	}
+		"proxy_protocol_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ProxyProtocolEnabled is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
@@ -1017,47 +1077,51 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::ALB::LoadBalancer").WithTerraformTypeName("volcenginecc_alb_load_balancer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_id":                 "AcceleratorId",
-		"accelerator_listener_id":        "AcceleratorListenerId",
-		"address_ip_version":             "AddressIpVersion",
-		"bandwidth":                      "Bandwidth",
-		"bandwidth_package_id":           "BandwidthPackageId",
-		"billing_type":                   "BillingType",
-		"business_status":                "BusinessStatus",
-		"create_time":                    "CreateTime",
-		"delete_protection":              "DeleteProtection",
-		"deleted_time":                   "DeletedTime",
-		"description":                    "Description",
-		"dns_name":                       "DnsName",
-		"eip_billing_config":             "EipBillingConfig",
-		"endpoint_group_id":              "EndpointGroupId",
-		"global_accelerator":             "GlobalAccelerator",
-		"ipv_6_eip_billing_config":       "Ipv6EipBillingConfig",
-		"isp":                            "ISP",
-		"key":                            "Key",
-		"load_balancer_addresses":        "LoadBalancerAddresses",
-		"load_balancer_billing_type":     "LoadBalancerBillingType",
-		"load_balancer_edition":          "LoadBalancerEdition",
-		"load_balancer_id":               "LoadBalancerId",
-		"load_balancer_name":             "LoadBalancerName",
-		"lock_reason":                    "LockReason",
-		"modification_protection_reason": "ModificationProtectionReason",
-		"modification_protection_status": "ModificationProtectionStatus",
-		"overdue_time":                   "OverdueTime",
-		"project_name":                   "ProjectName",
-		"status":                         "Status",
-		"subnet_id":                      "SubnetId",
-		"tags":                           "Tags",
-		"type":                           "Type",
-		"update_time":                    "UpdateTime",
-		"value":                          "Value",
-		"vpc_id":                         "VpcId",
-		"waf_instance_id":                "WafInstanceId",
-		"waf_protected_domain":           "WafProtectedDomain",
-		"waf_protection_enabled":         "WafProtectionEnabled",
-		"weight":                         "Weight",
-		"zone_id":                        "ZoneId",
-		"zone_mappings":                  "ZoneMappings",
+		"accelerator_id":                  "AcceleratorId",
+		"accelerator_listener_id":         "AcceleratorListenerId",
+		"address_ip_version":              "AddressIpVersion",
+		"bandwidth":                       "Bandwidth",
+		"bandwidth_package_id":            "BandwidthPackageId",
+		"billing_type":                    "BillingType",
+		"business_status":                 "BusinessStatus",
+		"create_time":                     "CreateTime",
+		"delete_protection":               "DeleteProtection",
+		"deleted_time":                    "DeletedTime",
+		"description":                     "Description",
+		"dns_name":                        "DnsName",
+		"eip_billing_config":              "EipBillingConfig",
+		"endpoint_group_id":               "EndpointGroupId",
+		"global_accelerator":              "GlobalAccelerator",
+		"ipv_6_bandwidth_package_id":      "Ipv6BandwidthPackageId",
+		"ipv_6_eip_billing_config":        "Ipv6EipBillingConfig",
+		"isp":                             "ISP",
+		"key":                             "Key",
+		"load_balancer_addresses":         "LoadBalancerAddresses",
+		"load_balancer_billing_type":      "LoadBalancerBillingType",
+		"load_balancer_edition":           "LoadBalancerEdition",
+		"load_balancer_id":                "LoadBalancerId",
+		"load_balancer_name":              "LoadBalancerName",
+		"lock_reason":                     "LockReason",
+		"modification_protection_reason":  "ModificationProtectionReason",
+		"modification_protection_status":  "ModificationProtectionStatus",
+		"overdue_time":                    "OverdueTime",
+		"project_name":                    "ProjectName",
+		"proxy_protocol_enabled":          "ProxyProtocolEnabled",
+		"security_protection_instance_id": "SecurityProtectionInstanceId",
+		"security_protection_types":       "SecurityProtectionTypes",
+		"status":                          "Status",
+		"subnet_id":                       "SubnetId",
+		"tags":                            "Tags",
+		"type":                            "Type",
+		"update_time":                     "UpdateTime",
+		"value":                           "Value",
+		"vpc_id":                          "VpcId",
+		"waf_instance_id":                 "WafInstanceId",
+		"waf_protected_domain":            "WafProtectedDomain",
+		"waf_protection_enabled":          "WafProtectionEnabled",
+		"weight":                          "Weight",
+		"zone_id":                         "ZoneId",
+		"zone_mappings":                   "ZoneMappings",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
@@ -1066,6 +1130,8 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/EipBillingConfig",
 		"/properties/Ipv6EipBillingConfig",
 		"/properties/BandwidthPackageId",
+		"/properties/ProxyProtocolEnabled",
+		"/properties/Ipv6BandwidthPackageId",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -1084,6 +1150,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/AddressIpVersion",
 		"/properties/BandwidthPackageId",
+		"/properties/Ipv6BandwidthPackageId",
 		"/properties/LoadBalancerBillingType",
 		"/properties/LoadBalancerEdition",
 		"/properties/EipBillingConfig",

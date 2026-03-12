@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_route_table Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   路由表由一系列路由条目组成，为私有网络的流量指定下一跳的云资源，每个子网必须且仅支持关联一个路由表，使子网内的资源通过路由表转发流量。
 ---

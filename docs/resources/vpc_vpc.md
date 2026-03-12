@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_vpc Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   私有网络为云上资源构建隔离的、自主配置的虚拟网络环境。可以在私有网络中自定义IP地址段、安全组、路由策略等网络特性，简单高效安全地管理云上资源。
 ---

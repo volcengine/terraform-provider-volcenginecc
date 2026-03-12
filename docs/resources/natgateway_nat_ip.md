@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_natgateway_nat_ip Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "NatGateway"
 description: |-
   从私网NAT网关所属子网分配，用于IP地址转换。
 ---

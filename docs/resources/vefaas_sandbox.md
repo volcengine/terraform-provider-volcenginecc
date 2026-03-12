@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vefaas_sandbox Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VEFAAS"
 description: |-
   沙箱实例是云沙箱中实际执行沙箱镜像的安全且隔离的容器运行环境。
 ---

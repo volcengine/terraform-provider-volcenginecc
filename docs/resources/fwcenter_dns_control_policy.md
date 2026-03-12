@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_fwcenter_dns_control_policy Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "FWCenter"
 description: |-
   域名黑名单访问控制策略。
 ---

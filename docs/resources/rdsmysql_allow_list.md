@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdsmysql_allow_list Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSMySQL"
 description: |-
   白名单是数据库连接的安全防控手段，只有白名单内的 IP 地址才能访问数据库。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_tos_bucket Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "TOS"
 description: |-
   存储桶是存储对象（Object）的容器，所有的对象都必须隶属于某个存储桶。存储桶具有各种配置属性，包括地域、访问权限等。您可以根据实际需求，创建不同类型的存储桶来存储不同的数据。
 ---

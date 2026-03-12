@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_apig_gateway Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "APIG"
 description: |-
   API网关(Gateway)是API管理服务的核心组件，负责接收、处理、转发API请求，并提供安全认证、流量控制等功能。
 ---

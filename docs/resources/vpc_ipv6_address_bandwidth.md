@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_ipv6_address_bandwidth Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   IPv6公网流量的带宽，决定IPv6地址的公网通信能力。IPv6地址若未开通IPv6公网带宽，则仅支持私网互通，您可以按需为IPv6地址开通IPv6公网带宽，使该IPv6地址具备与公网互通的能力。
 ---

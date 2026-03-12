@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_alb_customized_cfg Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ALB"
 description: |-
   ALB 提供监听维度的个性化配置功能。通过控制台可以创建并管理常规的 NGINX 配置策略，在监听器详情页一键关联配置策略，无需提交工单即可完成满足业务需求的个性化配置。
 ---

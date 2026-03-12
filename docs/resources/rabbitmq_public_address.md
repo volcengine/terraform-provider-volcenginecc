@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rabbitmq_public_address Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RabbitMQ"
 description: |-
   消息队列 RabbitMQ版支持开启公网访问，开启后，您可以通过公网访问 RabbitMQ 实例。
 ---

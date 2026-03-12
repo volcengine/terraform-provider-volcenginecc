@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdsmssql_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSMsSQL"
 description: |-
   云数据库 SQL Server 版是基于世界一流的商用型数据库产品 Microsoft SQL Server 打造的一种稳定、可靠、可弹性伸缩的在线数据库服务。实例是使用云数据库 SQL Server 版的第一步
 ---

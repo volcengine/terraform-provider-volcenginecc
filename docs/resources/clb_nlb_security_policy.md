@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_clb_nlb_security_policy Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CLB"
 description: |-
   基于一些常见的场景，为您预置了一些安全策略，若系统预置的策略不满足您的需求，您还可以自定义安全策略。
 ---

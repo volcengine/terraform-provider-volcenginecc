@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_clb_certificate Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CLB"
 description: |-
   针对HTTPS协议，提供统一的证书管理服务，证书无需上传到后端服务器，支持在CLB实例上解密处理，降低了后端服务器的CPU开销。
 ---

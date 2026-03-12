@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_ecs_hpc_cluster Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ECS"
 description: |-
   高性能计算集群（High Performance Compute Cluster，HPC集群）是一种用于处理大规模计算任务的集群计算环境，通常由大量的计算节点组成，这些节点通过RDMA（Remote Direct Memory Access）高速网络互联，并协同工作以处理复杂的计算任务。高性能计算集群可以提供强大的计算能力、大内存、高速存储和高速网络，以满足对计算密集型、数据密集型或两者结合的工作负载的需求。
 ---
@@ -13,9 +13,15 @@ description: |-
 
 ```terraform
 resource "volcenginecc_ecs_hpc_cluster" "ECSHpcClusterDemo" {
-  name        = "ECSHpcClusterDemo"
-  zone_id     = "cn-beijing-a"
-  description = "ECSHpcClusterDemo description"
+  name         = "ECSHpcClusterDemo"
+  zone_id      = "cn-beijing-a"
+  description  = "ECSHpcClusterDemo description"
+  project_name = "default"
+  tags = [
+    {
+      key = "env"
+    value = "test" }
+  ]
 }
 ```
 
@@ -29,15 +35,26 @@ resource "volcenginecc_ecs_hpc_cluster" "ECSHpcClusterDemo" {
 
 ### Optional
 
-- `created_time` (String) 创建时间，格式满足RFC3339。
 - `description` (String) 高性能计算集群描述，默认为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0～255之间。
-- `updated_time` (String) 更新时间，格式满足RFC3339。
+- `project_name` (String) 项目名称。
+- `tags` (Attributes Set) 标签信息。
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
+- `created_time` (String) 创建时间，格式满足RFC3339。
 - `hpc_cluster_id` (String) 高性能计算集群ID。
 - `id` (String) Uniquely identifies the resource.
+- `updated_time` (String) 更新时间，格式满足RFC3339。
 - `vpc_id` (String) 私有网络ID。
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) 标签键。
+- `value` (String) 标签值。
 
 ## Import
 

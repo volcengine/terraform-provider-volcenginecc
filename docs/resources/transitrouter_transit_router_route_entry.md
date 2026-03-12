@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_transitrouter_transit_router_route_entry Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "TransitRouter"
 description: |-
   通过为网络实例连接或跨地域连接关联的路由表创建或删除静态路由，能够灵活地控制中转路由器中的流量走向。
 ---
@@ -45,6 +45,8 @@ resource "volcenginecc_transitrouter_transit_router_route_entry" "TransitRouterR
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) 路由条目的状态。Available：可用。Creating：创建中。Pending：配置中。Deleting：删除中。Conflicted：未生效。
 - `transit_router_route_entry_id` (String) TR路由条目的ID。
+- `transit_router_route_entry_next_hop_resource_id` (String) 路由条目下一跳网络实例ID。
+- `transit_router_route_entry_next_hop_resource_type` (String) 路由条目下一跳网络实例的类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。
 - `transit_router_route_entry_type` (String) 路由条目的类型。Static：静态路由。Propagated：自动学习路由。
 - `updated_time` (String) 路由条目的更新时间。
 

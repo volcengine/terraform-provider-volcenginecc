@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_eni Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   网卡即虚拟网卡。在私有网络里，网卡是挂载在云服务器、负载均衡等云资源上的一种网络接口。每张网卡均有一个主私网IP地址。若有需要，可手动为其分配多个辅助私网IP地址。
 ---

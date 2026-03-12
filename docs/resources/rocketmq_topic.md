@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rocketmq_topic Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RocketMQ"
 description: |-
   在RocketMQ 实例中，Topic 是消息发送与接收的基本单元，消息队列 RocketMQ版通过 Topic 对各类消息进行分类管理。消息的生产者将消息发送到 RocketMQ Topic 中，而消息的消费者则通过订阅该 RocketMQ Topic 来消费消息。
 ---

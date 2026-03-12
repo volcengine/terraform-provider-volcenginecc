@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cbr_vault Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CBR"
 description: |-
   用于存放您的备份数据。
 ---

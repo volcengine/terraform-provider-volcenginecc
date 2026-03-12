@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rabbitmq_instance_plugin Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RabbitMQ"
 description: |-
   在消息队列 RabbitMQ版控制台中创建实例之后，实例插件默认为关闭状态，您可以手动为实例开启/关闭插件。开启/关闭部分插件会导致集群滚动重启，建议避开业务运行时段执行该操作。集群滚动重启时会造成未持久化的消息丢失，也会出现短暂的连接不稳定现象，例如连接断开，断开后会根据客户端配置决定是否自动重连。
 ---

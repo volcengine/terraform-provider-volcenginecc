@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cbr_backup_resource Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CBR"
 description: |-
   指备份对象，是云备份操作的起点。它可以是备份源产品中的计算资源、服务实例或者一组协同工作的服务和资源的集合，例如 ECS 整机、云盘、对象存储 Bucket。
 ---

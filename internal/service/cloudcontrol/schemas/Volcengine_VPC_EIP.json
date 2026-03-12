@@ -46,12 +46,12 @@
       "permissions": [
         "vpc:AllocateEipAddress",
         "vpc:AssociateEipAddress",
-        "vpc:DescribeEipAddressesAttributes"
+        "vpc:DescribeEipAddressAttributes"
       ]
     },
     "delete": {
       "permissions": [
-        "vpc:DescribeEipAddresses",
+        "vpc:DescribeEipAddressAttributes",
         "vpc:DisassociateEipAddress",
         "vpc:ReleaseEipAddress"
       ]
@@ -63,7 +63,7 @@
     },
     "read": {
       "permissions": [
-        "vpc:DescribeEipAddressesAttributes"
+        "vpc:DescribeEipAddressAttributes"
       ]
     },
     "update": {
@@ -287,8 +287,7 @@
     "/properties/LockReason",
     "/properties/OverdueTime",
     "/properties/UpdatedTime",
-    "/properties/ServiceManaged",
-    "/properties/DirectMode"
+    "/properties/ServiceManaged"
   ],
   "required": [
     "BillingType"
@@ -305,6 +304,7 @@
     "/properties/PeriodUnit",
     "/properties/RenewType",
     "/properties/RenewPeriodTimes",
-    "/properties/SecurityProtectionInstanceId"
+    "/properties/SecurityProtectionInstanceId",
+    "/properties/DirectMode"
   ]
 }

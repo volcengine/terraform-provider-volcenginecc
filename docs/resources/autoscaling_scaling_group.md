@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_autoscaling_scaling_group Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "AutoScaling"
 description: |-
   伸缩组用于管理一组云资源实例。通过伸缩组可以定义云资源池中的实例数/容量、冷却时间、负载均衡等信息。
 ---

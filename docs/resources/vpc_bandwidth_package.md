@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpc_bandwidth_package Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPC"
 description: |-
   共享带宽包是一种支持复用和共享带宽的云资源。将单个地域内多个公网IP或IPv6公网带宽添加到一个共享带宽包实例中，共享一条带宽。
 ---

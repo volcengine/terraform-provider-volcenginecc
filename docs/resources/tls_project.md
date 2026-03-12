@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_tls_project Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "TLS"
 description: |-
   日志项目是数据的项目管理单元，用于租户资源隔离和控制，通常一个日志项目对应一个应用、业务或产品。
 ---

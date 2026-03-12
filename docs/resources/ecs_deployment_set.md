@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_ecs_deployment_set Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ECS"
 description: |-
   部署集是在底层硬件维度上控制实例分散部署的策略，可以实现物理层级的安全隔离。您可以通过创建部署集，使实例分散部署在不同的底层硬件上，用于保障业务的底层容灾能力及高可用性。
 ---

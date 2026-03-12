@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_kms_key_ring Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "KMS"
 description: |-
   用户管理密钥的集合，用户将相同类型或用途的密钥放在同一密钥环中以便于管理。
 ---

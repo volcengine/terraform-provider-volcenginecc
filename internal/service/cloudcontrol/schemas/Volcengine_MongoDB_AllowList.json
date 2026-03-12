@@ -28,6 +28,12 @@
     }
   },
   "description": "文档数据库 MongoDB 版实例创建成功后，您可以为实例设置白名单，以允许外部设备访问该实例。本文介绍如何通过控制台设置白名单。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AllowListCategory",
+      "/properties/ProjectName"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [

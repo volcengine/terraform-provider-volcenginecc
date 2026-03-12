@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_alb_health_check_template Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ALB"
 description: |-
   健康检查是确保应用程序是否可用的关键功能。ALB 通过定期对后端服务器进行健康检查，来验证这些服务器是否可以接受新的请求。当一个后端服务器不能正常响应 ALB 的健康检查请求时，来自客户端的流量不会被路由到该服务器。ALB 会将流量转发至其他状态为正常的服务器上。从而保证了服务的连续性和可靠性。ALB 健康检查是基于服务器组进行的。服务器组启用健康检查后，ALB 定期检查服务器组内的后端服务器状态。
 ---

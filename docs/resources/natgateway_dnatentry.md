@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_natgateway_dnatentry Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "NatGateway"
 description: |-
   目的地址转换。即当中转IP及端口被访问时，私网NAT网关将访问请求中的目的地址和端口替换成云服务器的私网IP及端口后，进行转发。
 ---

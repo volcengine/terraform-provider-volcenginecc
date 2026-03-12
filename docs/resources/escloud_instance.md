@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_escloud_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ESCloud"
 description: |-
   云搜索服务（Cloud Search）是提供的全托管一站式信息检索和分析平台，兼容 Elasticsearch、OpenSearch、Kibana、Dashboards、Cerebro 以及常用的开源插件，可应用于全文搜索、向量搜索、混合搜索、AI 搜索、时空检索等场景。使用云搜索服务，您可以实现一键部署、弹性扩缩、简化运维，快速构建日志分析、信息检索分析等实际业务。
 ---

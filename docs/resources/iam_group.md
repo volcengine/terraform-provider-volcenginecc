@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_iam_group Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "IAM"
 description: |-
   用户组是用户的集合。当用户组被关联上策略后，同一用户组里的所有用户会拥有对应的策略权限，同一个用户可存在于多个用户组中，可同时拥有多个用户组的权限。
 ---

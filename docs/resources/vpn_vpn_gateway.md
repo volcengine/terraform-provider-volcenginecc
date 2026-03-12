@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vpn_vpn_gateway Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VPN"
 description: |-
   当您需要通过VPN连接实现私有网络与本地数据中心或其他私有网络之间的通信，您需要先创建一个VPN网关。
 ---

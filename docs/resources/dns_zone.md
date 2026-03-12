@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_dns_zone Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "DNS"
 description: |-
   资源里的zone就是域名，可以是主域名 例如 example.com，也可以是子域名 例如 abc.example.com
 ---

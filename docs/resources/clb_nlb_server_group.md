@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_clb_nlb_server_group Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CLB"
 description: |-
   服务器组是一组后端服务器。
 ---

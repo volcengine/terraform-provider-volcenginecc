@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_organization_account Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "Organization"
 description: |-
   查看和管理您组织内的所有账号。每个账号可以直接放在根节点中，也可以移动到您创建的任意组织节点层级结构中，每个账号只能归属于一个节点。您可以分层树状结构管理您的组织结构以及成员账号。
 ---

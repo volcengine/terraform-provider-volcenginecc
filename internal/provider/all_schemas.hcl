@@ -596,3 +596,19 @@ resource_schema "volcengine_rocketmq_allow_list" {
 resource_schema "volcengine_alb_rule" {
   cloudcontrol_type_name = "Volcengine::ALB::Rule"
 }
+
+resource_schema "volcengine_rdsmssql_allow_list" {
+  cloudcontrol_type_name = "Volcengine::RDSMsSQL::Allowlist"
+}
+
+resource_schema "volcengine_rdspostgresql_database" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::Database"
+}
+
+resource_schema "volcengine_mongodb_allow_list" {
+  cloudcontrol_type_name = "Volcengine::MongoDB::AllowList"
+}
+
+resource_schema "volcengine_rdspostgresql_schema" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::Schema"
+}

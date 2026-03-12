@@ -156,6 +156,8 @@
       "/properties/ServerGroupName",
       "/properties/Type",
       "/properties/VpcId",
+      "/properties/Servers/*/Ip",
+      "/properties/Servers/*/InstanceId",
       "/properties/Tags/*/Key",
       "/properties/Tags/*/Value"
     ]

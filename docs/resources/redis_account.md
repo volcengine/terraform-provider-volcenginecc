@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_redis_account Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "Redis"
 description: |-
   缓存数据库 Redis 版支持创建多个账号，您可以在创建账号时选择不同的角色，不同的角色支持的权限不同，帮助您实现数据库的精细化管理，提升数据安全性。
 ---

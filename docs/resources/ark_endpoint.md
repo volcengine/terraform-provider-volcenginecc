@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_ark_endpoint Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ARK"
 description: |-
   在使用大语言模型进行推理服务时，推理接入点（Endpoint）是模型调用的关键入口。开发者只需通过指定的 ID 即可向大模型发起 API / SDK 推理请求，实现快速接入与灵活调用。系统提供统一的 API 调用方式、调用监控、限流策略与安全保障机制，确保推理过程的稳定性与安全性。
 ---

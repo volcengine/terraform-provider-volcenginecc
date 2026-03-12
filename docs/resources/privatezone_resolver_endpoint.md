@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_privatezone_resolver_endpoint Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "PrivateZone"
 description: |-
   在把外部的 DNS 查询请求转发到解析器的场景中，您需要创建终端节点。收到解析器转发的 DNS 查询请求后，终端节点出站终端节点会把 DNS 查询请求转发到外部的 DNS 服务器。收到来自外部的 DNS 查询请求后，入站终端节点会把 DNS 查询请求转发到解析器。
 ---

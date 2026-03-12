@@ -1,9 +1,10 @@
 resource "volcenginecc_alb_server_group" "AlbServergroupDemo" {
-  vpc_id            = "vpc-13f8***"
-  server_group_name = "test-servergroup"
-  server_group_type = "instance"
-  protocol          = "HTTP"
-  scheduler         = "wrr"
+  vpc_id             = "vpc-13f8***"
+  server_group_name  = "test-servergroup"
+  server_group_type  = "instance"
+  protocol           = "HTTP"
+  scheduler          = "wrr"
+  cross_zone_enabled = "on"
   health_check = {
     enabled             = "on"
     port                = 80

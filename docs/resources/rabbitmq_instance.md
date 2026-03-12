@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rabbitmq_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RabbitMQ"
 description: |-
   消息队列 RabbitMQ版是一款支持 AMQP（Advanced Message Queuing Protocol） 协议的分布式高可用消息队列产品，完全兼容 RabbitMQ 开源生态及多语言客户端，提供丰富的消息特性和灵活的消息路由，同时具备分布式、高吞吐、低延迟、灵活扩展的云消息服务优势，无需用户部署运维，能够轻松实现快速上云。
 ---

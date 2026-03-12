@@ -66,6 +66,61 @@ func hpcClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "高性能计算集群名称。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1～128之间。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectName
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "项目名称。",
+		//	  "type": "string"
+		//	}
+		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "项目名称。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "标签信息。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "标签键值对。",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "标签键。",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "标签值。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签键。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签值。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "标签信息。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
@@ -119,8 +174,12 @@ func hpcClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_time":   "CreatedTime",
 		"description":    "Description",
 		"hpc_cluster_id": "HpcClusterId",
+		"key":            "Key",
 		"name":           "Name",
+		"project_name":   "ProjectName",
+		"tags":           "Tags",
 		"updated_time":   "UpdatedTime",
+		"value":          "Value",
 		"vpc_id":         "VpcId",
 		"zone_id":        "ZoneId",
 	})

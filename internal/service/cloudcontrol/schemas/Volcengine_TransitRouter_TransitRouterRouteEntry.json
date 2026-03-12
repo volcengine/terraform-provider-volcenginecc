@@ -13,7 +13,11 @@
       "/properties/DestinationCidrBlock",
       "/properties/Status",
       "/properties/TransitRouterRouteEntryId",
-      "/properties/TransitRouterRouteEntryName"
+      "/properties/TransitRouterRouteEntryName",
+      "/properties/TransitRouterRouteEntryNextHopId",
+      "/properties/TransitRouterRouteEntryNextHopResourceType",
+      "/properties/TransitRouterRouteEntryNextHopType",
+      "/properties/TransitRouterRouteEntryType"
     ],
     "required": [
       "/properties/TransitRouterRouteTableId"
@@ -105,6 +109,14 @@
       "description": "路由条目的下一跳ID。",
       "type": "string"
     },
+    "TransitRouterRouteEntryNextHopResourceId": {
+      "description": "路由条目下一跳网络实例ID。",
+      "type": "string"
+    },
+    "TransitRouterRouteEntryNextHopResourceType": {
+      "description": "路由条目下一跳网络实例的类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。",
+      "type": "string"
+    },
     "TransitRouterRouteEntryNextHopType": {
       "description": "路由条目的下一跳类型。取值如下：Attachment：网络实例，表示匹配该路由条目的流量会被转发到指定的网络实例。BlackHole：黑洞，表示匹配该路由条目的流量会被丢弃。",
       "enum": [
@@ -137,7 +149,9 @@
     "/properties/CreatedTime",
     "/properties/UpdatedTime",
     "/properties/AsPath",
-    "/properties/TransitRouterRouteEntryType"
+    "/properties/TransitRouterRouteEntryType",
+    "/properties/TransitRouterRouteEntryNextHopResourceType",
+    "/properties/TransitRouterRouteEntryNextHopResourceId"
   ],
   "required": [
     "TransitRouterRouteTableId",

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_storageebs_snapshot Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "StorageEBS"
 description: |-
   快照是一种备份方式，每个快照都是云盘数据在某个时间点的备份文件。当数据丢失或故障时，您可以通过快照回滚云盘数据，找回丢失的数据。
 ---

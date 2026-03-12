@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cloudidentity_permission_set_provisioning Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CloudIdentity"
 description: |-
   给指定的账号部署权限集。
 ---

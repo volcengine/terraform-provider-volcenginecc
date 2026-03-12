@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_vefaas_kafka_trigger Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "VEFAAS"
 description: |-
   函数服务支持对接消息队列 Kafka 版。通过创建 Kafka 触发器，函数服务将作为消费者消费 Kafka 中的消息，并将消息传递给用户函数，触发函数代码逻辑。您无需关心函数服务消费消息的细节，只需编写处理消息的函数。
 ---

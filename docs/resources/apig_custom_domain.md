@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_apig_custom_domain Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "APIG"
 description: |-
   服务作为业务对外暴露的入口，可以通过绑定域名功能，将您的自定义域名绑定至服务。
 ---

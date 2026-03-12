@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_privatezone_resolver_rule Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "PrivateZone"
 description: |-
   转发规则详细信息
 ---

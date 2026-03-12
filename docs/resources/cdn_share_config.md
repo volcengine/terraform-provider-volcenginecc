@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cdn_share_config Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CDN"
 description: |-
   全局配置扩展了域名的配置能力，具有以下优点：提升了黑白名单的容量。例如，IP 黑名单可以包含高达 30,000 个条目。提升了域名配置的效率。一个全局配置可与多个域名关联。提供了通用列表类型，可以在额外的域名配置中被使用。一个全局配置的修改可立刻应用于其关联的所有域名。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_filenas_instance Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "FileNAS"
 description: |-
   文件系统通过标准的 NFS 协议为您提供文件存储服务，用于网络文件远程访问，通过管理控制台创建挂载地址后，即可按需在客户端中通过标准的 POSIX 接口对文件系统进行访问。
 ---

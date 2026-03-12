@@ -156,6 +156,15 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "BGP"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "SecurityProtectionInstanceId": {
+		//	      "description": "创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。",
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    },
+		//	    "SecurityProtectionTypes": {
+		//	      "description": "创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -175,6 +184,16 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 				// Property: ISP
 				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "公网IP的线路类型，BGP表示多线。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionInstanceId
+				"security_protection_instance_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityProtectionTypes
+				"security_protection_types": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -233,6 +252,17 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "全球加速器配置，用于提升跨地域访问速度。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6BandwidthPackageId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。",
+		//	  "type": "string"
+		//	}
+		"ipv_6_bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6EipBillingConfig
@@ -404,6 +434,17 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "实例所属项目名称。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProxyProtocolEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。",
+		//	  "type": "string"
+		//	}
+		"proxy_protocol_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -849,61 +890,65 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudControlTypeName("Volcengine::ALB::LoadBalancer").WithTerraformTypeName("volcenginecc_alb_load_balancer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_id":                 "AcceleratorId",
-		"accelerator_listener_id":        "AcceleratorListenerId",
-		"address_ip_version":             "AddressIpVersion",
-		"association_mode":               "AssociationMode",
-		"bandwidth":                      "Bandwidth",
-		"bandwidth_package_id":           "BandwidthPackageId",
-		"billing_type":                   "BillingType",
-		"business_status":                "BusinessStatus",
-		"create_time":                    "CreateTime",
-		"delete_protection":              "DeleteProtection",
-		"deleted_time":                   "DeletedTime",
-		"description":                    "Description",
-		"dns_name":                       "DnsName",
-		"eip":                            "Eip",
-		"eip_address":                    "EipAddress",
-		"eip_billing_config":             "EipBillingConfig",
-		"eip_billing_type":               "EipBillingType",
-		"eip_id":                         "EipId",
-		"eip_type":                       "EipType",
-		"endpoint_group_id":              "EndpointGroupId",
-		"eni_address":                    "EniAddress",
-		"eni_id":                         "EniId",
-		"eni_ipv_6_address":              "EniIpv6Address",
-		"global_accelerator":             "GlobalAccelerator",
-		"ipv_6_eip":                      "Ipv6Eip",
-		"ipv_6_eip_billing_config":       "Ipv6EipBillingConfig",
-		"ipv_6_eip_id":                   "Ipv6EipId",
-		"isp":                            "ISP",
-		"key":                            "Key",
-		"load_balancer_addresses":        "LoadBalancerAddresses",
-		"load_balancer_billing_type":     "LoadBalancerBillingType",
-		"load_balancer_edition":          "LoadBalancerEdition",
-		"load_balancer_id":               "LoadBalancerId",
-		"load_balancer_name":             "LoadBalancerName",
-		"lock_reason":                    "LockReason",
-		"modification_protection_reason": "ModificationProtectionReason",
-		"modification_protection_status": "ModificationProtectionStatus",
-		"overdue_time":                   "OverdueTime",
-		"pop_id":                         "PopId",
-		"pop_locations":                  "PopLocations",
-		"pop_name":                       "PopName",
-		"project_name":                   "ProjectName",
-		"status":                         "Status",
-		"subnet_id":                      "SubnetId",
-		"tags":                           "Tags",
-		"type":                           "Type",
-		"update_time":                    "UpdateTime",
-		"value":                          "Value",
-		"vpc_id":                         "VpcId",
-		"waf_instance_id":                "WafInstanceId",
-		"waf_protected_domain":           "WafProtectedDomain",
-		"waf_protection_enabled":         "WafProtectionEnabled",
-		"weight":                         "Weight",
-		"zone_id":                        "ZoneId",
-		"zone_mappings":                  "ZoneMappings",
+		"accelerator_id":                  "AcceleratorId",
+		"accelerator_listener_id":         "AcceleratorListenerId",
+		"address_ip_version":              "AddressIpVersion",
+		"association_mode":                "AssociationMode",
+		"bandwidth":                       "Bandwidth",
+		"bandwidth_package_id":            "BandwidthPackageId",
+		"billing_type":                    "BillingType",
+		"business_status":                 "BusinessStatus",
+		"create_time":                     "CreateTime",
+		"delete_protection":               "DeleteProtection",
+		"deleted_time":                    "DeletedTime",
+		"description":                     "Description",
+		"dns_name":                        "DnsName",
+		"eip":                             "Eip",
+		"eip_address":                     "EipAddress",
+		"eip_billing_config":              "EipBillingConfig",
+		"eip_billing_type":                "EipBillingType",
+		"eip_id":                          "EipId",
+		"eip_type":                        "EipType",
+		"endpoint_group_id":               "EndpointGroupId",
+		"eni_address":                     "EniAddress",
+		"eni_id":                          "EniId",
+		"eni_ipv_6_address":               "EniIpv6Address",
+		"global_accelerator":              "GlobalAccelerator",
+		"ipv_6_bandwidth_package_id":      "Ipv6BandwidthPackageId",
+		"ipv_6_eip":                       "Ipv6Eip",
+		"ipv_6_eip_billing_config":        "Ipv6EipBillingConfig",
+		"ipv_6_eip_id":                    "Ipv6EipId",
+		"isp":                             "ISP",
+		"key":                             "Key",
+		"load_balancer_addresses":         "LoadBalancerAddresses",
+		"load_balancer_billing_type":      "LoadBalancerBillingType",
+		"load_balancer_edition":           "LoadBalancerEdition",
+		"load_balancer_id":                "LoadBalancerId",
+		"load_balancer_name":              "LoadBalancerName",
+		"lock_reason":                     "LockReason",
+		"modification_protection_reason":  "ModificationProtectionReason",
+		"modification_protection_status":  "ModificationProtectionStatus",
+		"overdue_time":                    "OverdueTime",
+		"pop_id":                          "PopId",
+		"pop_locations":                   "PopLocations",
+		"pop_name":                        "PopName",
+		"project_name":                    "ProjectName",
+		"proxy_protocol_enabled":          "ProxyProtocolEnabled",
+		"security_protection_instance_id": "SecurityProtectionInstanceId",
+		"security_protection_types":       "SecurityProtectionTypes",
+		"status":                          "Status",
+		"subnet_id":                       "SubnetId",
+		"tags":                            "Tags",
+		"type":                            "Type",
+		"update_time":                     "UpdateTime",
+		"value":                           "Value",
+		"vpc_id":                          "VpcId",
+		"waf_instance_id":                 "WafInstanceId",
+		"waf_protected_domain":            "WafProtectedDomain",
+		"waf_protection_enabled":          "WafProtectionEnabled",
+		"weight":                          "Weight",
+		"zone_id":                         "ZoneId",
+		"zone_mappings":                   "ZoneMappings",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

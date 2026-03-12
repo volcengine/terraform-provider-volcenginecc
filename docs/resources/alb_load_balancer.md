@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_alb_load_balancer Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ALB"
 description: |-
   应用型负载均衡（ALB）是对“七层”网络协议的流量进行分发的服务。
 ---
@@ -13,22 +13,37 @@ description: |-
 
 ```terraform
 resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
-  type                       = "private"
-  address_ip_version         = "IPv4"
-  load_balancer_name         = "ALBLoadBalancerDemo"
-  description                = "ALBLoadBalancerDemo description"
-  vpc_id                     = "vpc-rrco37ovjq4gv0x58zfxxxx"
+  type                       = "public"
+  address_ip_version         = "DualStack"
+  load_balancer_name         = "ccapi-alb-4"
+  description                = "Create by ccaip"
+  vpc_id                     = "vpc-rrco37ovjq4gv0x5xxxxx"
   load_balancer_billing_type = 1
-  bandwidth_package_id       = "bwp-1c099l94j13b45e8j6zz5xxxx"
   delete_protection          = "off"
+  bandwidth_package_id       = "bwp-1a1i9jjnawidc8nvexxxxx"
+  ipv_6_bandwidth_package_id = "bwp-1a1i9jjnawidc8nvxxxxx"
+  eip_billing_config = {
+    isp                             = "BGP"
+    billing_type                    = 3
+    bandwidth                       = 1
+    security_protection_types       = "AntiDDoS_Enhanced"
+    security_protection_instance_id = 743
+  }
   zone_mappings = [
     {
-      subnet_id = "subnet-rrwqhg3qzxfkv0x57g3xxxx"
-    zone_id = "cn-test-a" }
+      subnet_id = "subnet-rrwqhg3qzxfkv0xxxxxx"
+    zone_id = "cn-beijing-a" },
+    {
+      subnet_id = "subnet-btnzu3hrc0005h0xxxxx"
+    zone_id = "cn-beijing-b" }
   ]
+  ipv_6_eip_billing_config = {
+    isp          = "BGP"
+    billing_type = 3
+    bandwidth    = 1
+  }
   project_name                   = "default"
   modification_protection_status = "NonProtection"
-  modification_protection_reason = ""
   load_balancer_edition          = "Standard"
   waf_protection_enabled         = "off"
   tags = [
@@ -55,6 +70,7 @@ resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
 - `description` (String) ALB 实例的描述。
 - `eip_billing_config` (Attributes) 公网IP的计费配置，仅适用于公网实例。 (see [below for nested schema](#nestedatt--eip_billing_config))
 - `global_accelerator` (Attributes) 全球加速器配置，用于提升跨地域访问速度。 (see [below for nested schema](#nestedatt--global_accelerator))
+- `ipv_6_bandwidth_package_id` (String) 创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。
 - `ipv_6_eip_billing_config` (Attributes) IPv6公网IP的计費配置，仅适用于公网实例。 (see [below for nested schema](#nestedatt--ipv_6_eip_billing_config))
 - `load_balancer_billing_type` (Number) ALB实例计费类型，当前仅支持按量计费（取值为1）。
 - `load_balancer_edition` (String) 应用型负载均衡的版本。Basic：基础版；Standard：标准版。
@@ -62,6 +78,7 @@ resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
 - `modification_protection_reason` (String) 修改保护原因。仅在 ModificationProtectionStatus 为 ConsoleProtection 时，该参数有效且合法。
 - `modification_protection_status` (String) 修改保护状态。NonProtection：不保护；ConsoleProtection：控制台修改保护，通过控制台无法修改实例配置。
 - `project_name` (String) 实例所属项目名称。
+- `proxy_protocol_enabled` (String) ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。
 - `tags` (Attributes Set) 为实例绑定的标签列表，用于分类和计费。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
 - `waf_instance_id` (String) ALB 实例绑定的 WAF 安全防护实例 ID。
@@ -91,6 +108,8 @@ Optional:
 - `bandwidth` (Number) EIP的带宽峰值，单位为Mbps。
 - `billing_type` (Number) EIP的计费方式，2为按带宽计费，3为按流量计费。
 - `isp` (String) 公网IP的线路类型，BGP表示多线。
+- `security_protection_instance_id` (Number) 创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。
+- `security_protection_types` (String) 创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。
 
 
 <a id="nestedatt--global_accelerator"></a>

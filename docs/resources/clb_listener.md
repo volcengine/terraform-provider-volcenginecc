@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_clb_listener Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CLB"
 description: |-
   监听器负责根据指定的协议和端口，监听CLB实例接收到的用户访问请求。CLB将按照该监听器配置的调度算法，将访问请求转发至该后端服务器组内健康的后端服务器。
 ---

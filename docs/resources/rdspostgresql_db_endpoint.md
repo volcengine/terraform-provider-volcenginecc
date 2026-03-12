@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdspostgresql_db_endpoint Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSPostgreSQL"
 description: |-
   连接终端是位于数据库和应用程序之间的网络代理服务，用于代理应用程序访问数据库时的所有请求，具有高可用、高性能、可运维、简单易用等特点，支持读写分离和负载均衡等高级功能。云数据库 PostgreSQL 版提供了默认终端和自定义只读终端两种类型。
 ---

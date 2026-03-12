@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_ecs_image Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ECS"
 description: |-
   镜像是包含了云服务器实例所需的基本操作系统、应用数据的特殊文件。创建实例时，必须选择镜像。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_ecs_invocation Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ECS"
 description: |-
   云助手是火山引擎打造的原生自动化运维工具。您可以创建立即执行、周期执行、定时执行的作业任务，创建完成后完，云助手客户端将按照执行模式自动开始执行。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_bmq_group Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "BMQ"
 description: |-
   一组具有相同 Group ID 的消费端。当一个 Topic 被同一个 Group 的多个 Consumer 消费时，每一条消息都只会被投递到一个 Consumer，实现消费的负载均衡。通过 Group，您可以确保一个 Topic 的消息被并行消费。
 ---

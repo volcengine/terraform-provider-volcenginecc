@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_apig_upstream Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "APIG"
 description: |-
   Upstream 是对 API 网关实例后端的抽象。您可以将具有相同功能的后端应用抽象为一个 Upstream，实现路由和后端应用解耦，更灵活地支持后端应用的灰度发布、多版本管理等场景。本文为您介绍 Upstream 的概念及作用。
 ---
@@ -13,32 +13,42 @@ Upstream 是对 API 网关实例后端的抽象。您可以将具有相同功能
 
 ```terraform
 resource "volcenginecc_apig_upstream" "APIGUpstreamAIProviderDemo" {
-  name        = "APIGUpstreamAIProviderDemo"
-  gateway_id  = "gd45elb819ma6giexxxxx"
-  comments    = "APIGUpstreamAIProviderDemo"
-  protocol    = "HTTP"
-  source_type = "K8S"
-  upstream_spec = {
-    k8_s_service = {
-      namespace = "namespace"
-      name      = "server"
-      port      = 2001
-    }
-  }
-  load_balancer_settings = {
-    lb_policy = "SimpleLB"
-    simple_lb = "RANDOM"
-  }
   circuit_breaking_settings = {
-    enable               = true
+    base_ejection_time   = 30
     consecutive_errors   = 5
-    interval             = 10000
-    base_ejection_time   = 30000
+    enable               = true
+    interval             = 10
     max_ejection_percent = 20
     min_health_percent   = 60
   }
+  comments = "this is a test"
+  connection_pool_settings = {
+    enable                      = true
+    http_1_max_pending_requests = 1000
+    idle_timeout                = 1000
+    max_connections             = 1000
+  }
+  gateway_id = "gd6hagxxxxxkh7is70"
+  load_balancer_settings = {
+    lb_policy       = "SimpleLB"
+    simple_lb       = "LEAST_CONN"
+    warmup_duration = 5
+  }
+  name     = "test-7"
+  protocol = "HTTP"
   tls_settings = {
+    sni      = ""
     tls_mode = "DISABLE"
+  }
+  source_type = "Domain"
+  upstream_spec = {
+    domain = {
+      domain_list = [
+        {
+          domain = "www.test7.com"
+        port = 5566 }
+      ]
+    }
   }
 }
 ```
@@ -57,6 +67,7 @@ resource "volcenginecc_apig_upstream" "APIGUpstreamAIProviderDemo" {
 
 - `circuit_breaking_settings` (Attributes) 服务熔断配置。 (see [below for nested schema](#nestedatt--circuit_breaking_settings))
 - `comments` (String) 备注。
+- `connection_pool_settings` (Attributes) 连接池配置。 (see [below for nested schema](#nestedatt--connection_pool_settings))
 - `load_balancer_settings` (Attributes) 负载均衡配置。 (see [below for nested schema](#nestedatt--load_balancer_settings))
 - `protocol` (String) 协议，取值：HTTP：HTTP/1.1。HTTP2：HTTP/2。GRPC：GRPC。
 - `tls_settings` (Attributes) TLS配置。 (see [below for nested schema](#nestedatt--tls_settings))
@@ -78,6 +89,7 @@ resource "volcenginecc_apig_upstream" "APIGUpstreamAIProviderDemo" {
 Optional:
 
 - `ai_provider` (Attributes) AI模型代理。 (see [below for nested schema](#nestedatt--upstream_spec--ai_provider))
+- `domain` (Attributes) 固定域名。 (see [below for nested schema](#nestedatt--upstream_spec--domain))
 - `ecs_instances` (Attributes Set) 云服务器。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--upstream_spec--ecs_instances))
 - `k8_s_service` (Attributes) 容器服务。 (see [below for nested schema](#nestedatt--upstream_spec--k8_s_service))
@@ -102,6 +114,24 @@ Optional:
 - `name` (String) 模型服务名称。
 - `namespace` (String) 命名空间。
 - `port` (Number) 端口。
+
+
+
+<a id="nestedatt--upstream_spec--domain"></a>
+### Nested Schema for `upstream_spec.domain`
+
+Optional:
+
+- `domain_list` (Attributes Set) 域名列表。
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--upstream_spec--domain--domain_list))
+
+<a id="nestedatt--upstream_spec--domain--domain_list"></a>
+### Nested Schema for `upstream_spec.domain.domain_list`
+
+Optional:
+
+- `domain` (String) 域名。
+- `port` (Number) 端口。协议类型为HTTP时，默认值为80。协议类型为HTTPS时，默认值为443。
 
 
 
@@ -159,6 +189,17 @@ Optional:
 - `min_health_percent` (Number) 最小健康比例。取值限制为0~100。默认值为60%。
 
 
+<a id="nestedatt--connection_pool_settings"></a>
+### Nested Schema for `connection_pool_settings`
+
+Optional:
+
+- `enable` (Boolean) 开启。
+- `http_1_max_pending_requests` (Number) HTTP/1最大等待请求数。取值限制为0~2^31-1，0为不限制。
+- `idle_timeout` (Number) 空闲超时时间。单位为秒。取值限制为0~2^31-1，0为不限制。
+- `max_connections` (Number) TCP最大连接数。取值限制为0~2^31-1，0为不限制。
+
+
 <a id="nestedatt--load_balancer_settings"></a>
 ### Nested Schema for `load_balancer_settings`
 
@@ -174,6 +215,7 @@ Optional:
 
 Optional:
 
+- `hash_balance_factor` (Number) 过载保护参数。取值限制为100~200。当取值为120时，upstream节点当前活跃请求数超过平均活跃请求数的120%时，将触发过载保护。当触发过载保护时，即使请求的hash命中某一upstream节点，负载均衡器也会随机选择upstream节点。
 - `hash_key` (String) 一致性哈希方式，取值：UseSourceIp：基于源IP地址。HttpQueryParameterName：基于参数。HttpHeaderName：基于头。HTTPCookie：基于cookie。
 - `http_cookie` (Attributes) Cookie。 (see [below for nested schema](#nestedatt--load_balancer_settings--consistent_hash_lb--http_cookie))
 - `http_header_name` (String) 参数。支持ASCII可打印字符，长度限制为1~256个字符。

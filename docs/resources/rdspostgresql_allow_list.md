@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_rdspostgresql_allow_list Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "RDSPostgreSQL"
 description: |-
   白名单是数据库连接的安全防控手段，只有白名单内的 IP 地址才能访问数据库。PostgreSQL 实例在创建后，不会绑定任何白名单，默认禁止所有 IP 地址访问实例。因此无论是通过私网还是通过公网连接访问实例，都需要先为实例配置白名单，才能保证实例可连接。
 ---

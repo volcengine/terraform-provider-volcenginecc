@@ -11,9 +11,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
+	fwvalidators "github.com/volcengine/terraform-provider-volcenginecc/internal/validators"
 )
 
 func init() {
@@ -33,7 +36,6 @@ func hpcClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "创建时间，格式满足RFC3339。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -83,6 +85,82 @@ func hpcClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectName
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "项目名称。",
+		//	  "type": "string"
+		//	}
+		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "项目名称。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "标签信息。",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "标签键值对。",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "标签键。",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "标签值。",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签键。",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "标签值。",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "标签信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
@@ -92,7 +170,6 @@ func hpcClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "更新时间，格式满足RFC3339。",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -151,8 +228,12 @@ func hpcClusterResource(ctx context.Context) (resource.Resource, error) {
 		"created_time":   "CreatedTime",
 		"description":    "Description",
 		"hpc_cluster_id": "HpcClusterId",
+		"key":            "Key",
 		"name":           "Name",
+		"project_name":   "ProjectName",
+		"tags":           "Tags",
 		"updated_time":   "UpdatedTime",
+		"value":          "Value",
 		"vpc_id":         "VpcId",
 		"zone_id":        "ZoneId",
 	})
@@ -160,14 +241,16 @@ func hpcClusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/HpcClusterId",
 		"/properties/VpcId",
-		"/properties/CreatedAt",
-		"/properties/UpdatedAt",
+		"/properties/CreatedTime",
+		"/properties/UpdatedTime",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/Description",
 		"/properties/Name",
 		"/properties/ZoneId",
+		"/properties/Tags",
+		"/properties/ProjectName",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

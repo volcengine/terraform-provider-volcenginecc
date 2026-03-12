@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_cbr_backup_policy Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "CBR"
 description: |-
   备份策略中定义了备份周期、备份类型等信息。后续通过备份计划关联备份策略与备份存储空间，实现自动备份。
 ---

@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_filenas_snapshot Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "FileNAS"
 description: |-
   快照是一种备份方式，每个快照都是文件存储在某个时间点的备份。当数据丢失或故障时，您可以通过快照恢复文件存储数据，找回丢失的数据。
 ---

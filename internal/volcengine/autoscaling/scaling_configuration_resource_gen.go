@@ -83,6 +83,10 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	        "ChinaUnicom"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "ReleaseWithInstance": {
+		//	      "description": "公网IP是否随实例删除。仅按量计费公网IP且在ECS控制台删除实例时生效，在伸缩组中删除实例后公网IP的保留情况请参见实例管理中的详细说明。取值：true：公网IP随实例删除。false：公网IP不随实例删除。",
+		//	      "type": "boolean"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -140,6 +144,15 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ReleaseWithInstance
+				"release_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "公网IP是否随实例删除。仅按量计费公网IP且在ECS控制台删除实例时生效，在伸缩组中删除实例后公网IP的保留情况请参见实例管理中的详细说明。取值：true：公网IP随实例删除。false：公网IP不随实例删除。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -646,8 +659,20 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	        "description": "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
 		//	        "type": "boolean"
 		//	      },
+		//	      "ExtraPerformanceIOPS": {
+		//	        "description": "通过此参数可配置云盘额外性能包IOPS性能大小，仅ESSD FlexPL支持。参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceIOPS 表示第N个云盘的额外性能包IOPS大小：IOPS: 1-50000。Balance: 1-50000。",
+		//	        "type": "integer"
+		//	      },
+		//	      "ExtraPerformanceThroughputMB": {
+		//	        "description": "通过此参数可配置云盘额外性能包吞吐性能大小，单位MB/s，仅ESSD FlexPL支持。参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceThroughputMB 表示第N个云盘的额外性能包吞吐大小：Throughput：1-650。",
+		//	        "type": "integer"
+		//	      },
+		//	      "ExtraPerformanceTypeId": {
+		//	        "description": "通过此参数可为云盘购买额外性能，仅ESSD FlexPL支持。参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包。取值：2～16。ExtraPerformanceTypeId 表示第N个云盘的额外性能包类型：IOPS:IOPS型，使用ExtraPerformanceIOPS参数。Balance: 均衡型，使用ExtraPerformanceIOPS参数。Throughput：吞吐量型，使用ExtraPerformanceThroughputMB参数。",
+		//	        "type": "string"
+		//	      },
 		//	      "Size": {
-		//	        "description": "云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。",
+		//	        "description": "云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。如果是 ESSD_FlexPL 并使用额外性能，大小必须 \u003e= 500 GB。",
 		//	        "type": "integer"
 		//	      },
 		//	      "VolumeType": {
@@ -677,9 +702,36 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 							boolplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ExtraPerformanceIOPS
+					"extra_performance_iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "通过此参数可配置云盘额外性能包IOPS性能大小，仅ESSD FlexPL支持。参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceIOPS 表示第N个云盘的额外性能包IOPS大小：IOPS: 1-50000。Balance: 1-50000。",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ExtraPerformanceThroughputMB
+					"extra_performance_throughput_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "通过此参数可配置云盘额外性能包吞吐性能大小，单位MB/s，仅ESSD FlexPL支持。参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceThroughputMB 表示第N个云盘的额外性能包吞吐大小：Throughput：1-650。",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ExtraPerformanceTypeId
+					"extra_performance_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "通过此参数可为云盘购买额外性能，仅ESSD FlexPL支持。参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包。取值：2～16。ExtraPerformanceTypeId 表示第N个云盘的额外性能包类型：IOPS:IOPS型，使用ExtraPerformanceIOPS参数。Balance: 均衡型，使用ExtraPerformanceIOPS参数。Throughput：吞吐量型，使用ExtraPerformanceThroughputMB参数。",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。",
+						Description: "云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。如果是 ESSD_FlexPL 并使用额外性能，大小必须 >= 500 GB。",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -749,43 +801,47 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithCloudControlTypeName("Volcengine::AutoScaling::ScalingConfiguration").WithTerraformTypeName("volcenginecc_autoscaling_scaling_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bandwidth":                     "Bandwidth",
-		"bandwidth_package_id":          "BandwidthPackageId",
-		"billing_type":                  "BillingType",
-		"created_at":                    "CreatedAt",
-		"delete_with_instance":          "DeleteWithInstance",
-		"eip":                           "Eip",
-		"host_name":                     "HostName",
-		"hpc_cluster_id":                "HpcClusterId",
-		"image_id":                      "ImageId",
-		"instance_charge_type":          "InstanceChargeType",
-		"instance_description":          "InstanceDescription",
-		"instance_name":                 "InstanceName",
-		"instance_type":                 "InstanceType",
-		"instance_type_overrides":       "InstanceTypeOverrides",
-		"instance_types":                "InstanceTypes",
-		"ipv_6_address_count":           "Ipv6AddressCount",
-		"isp":                           "ISP",
-		"key":                           "Key",
-		"key_pair_name":                 "KeyPairName",
-		"lifecycle_state":               "LifecycleState",
-		"password":                      "Password",
-		"price_limit":                   "PriceLimit",
-		"project_name":                  "ProjectName",
-		"scaling_configuration_id":      "ScalingConfigurationId",
-		"scaling_configuration_name":    "ScalingConfigurationName",
-		"scaling_group_id":              "ScalingGroupId",
-		"security_enhancement_strategy": "SecurityEnhancementStrategy",
-		"security_group_ids":            "SecurityGroupIds",
-		"size":                          "Size",
-		"spot_strategy":                 "SpotStrategy",
-		"tags":                          "Tags",
-		"updated_at":                    "UpdatedAt",
-		"user_data":                     "UserData",
-		"value":                         "Value",
-		"volume_type":                   "VolumeType",
-		"volumes":                       "Volumes",
-		"zone_id":                       "ZoneId",
+		"bandwidth":                       "Bandwidth",
+		"bandwidth_package_id":            "BandwidthPackageId",
+		"billing_type":                    "BillingType",
+		"created_at":                      "CreatedAt",
+		"delete_with_instance":            "DeleteWithInstance",
+		"eip":                             "Eip",
+		"extra_performance_iops":          "ExtraPerformanceIOPS",
+		"extra_performance_throughput_mb": "ExtraPerformanceThroughputMB",
+		"extra_performance_type_id":       "ExtraPerformanceTypeId",
+		"host_name":                       "HostName",
+		"hpc_cluster_id":                  "HpcClusterId",
+		"image_id":                        "ImageId",
+		"instance_charge_type":            "InstanceChargeType",
+		"instance_description":            "InstanceDescription",
+		"instance_name":                   "InstanceName",
+		"instance_type":                   "InstanceType",
+		"instance_type_overrides":         "InstanceTypeOverrides",
+		"instance_types":                  "InstanceTypes",
+		"ipv_6_address_count":             "Ipv6AddressCount",
+		"isp":                             "ISP",
+		"key":                             "Key",
+		"key_pair_name":                   "KeyPairName",
+		"lifecycle_state":                 "LifecycleState",
+		"password":                        "Password",
+		"price_limit":                     "PriceLimit",
+		"project_name":                    "ProjectName",
+		"release_with_instance":           "ReleaseWithInstance",
+		"scaling_configuration_id":        "ScalingConfigurationId",
+		"scaling_configuration_name":      "ScalingConfigurationName",
+		"scaling_group_id":                "ScalingGroupId",
+		"security_enhancement_strategy":   "SecurityEnhancementStrategy",
+		"security_group_ids":              "SecurityGroupIds",
+		"size":                            "Size",
+		"spot_strategy":                   "SpotStrategy",
+		"tags":                            "Tags",
+		"updated_at":                      "UpdatedAt",
+		"user_data":                       "UserData",
+		"value":                           "Value",
+		"volume_type":                     "VolumeType",
+		"volumes":                         "Volumes",
+		"zone_id":                         "ZoneId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

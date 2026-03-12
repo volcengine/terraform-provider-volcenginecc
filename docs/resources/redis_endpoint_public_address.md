@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_redis_endpoint_public_address Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "Redis"
 description: |-
   开启公网访问，以便 VPC 外的设备来访问 Redis 实例。
 ---

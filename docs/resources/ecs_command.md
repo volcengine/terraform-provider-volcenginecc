@@ -1,6 +1,6 @@
 ---
 page_title: "volcenginecc_ecs_command Resource - terraform-provider-volcenginecc"
-subcategory: ""
+subcategory: "ECS"
 description: |-
   自定义命令是云助手提供的满足您个性化运维需求的功能，您可以在预置的公共命令不满足需求时创建自定义命令，并通过运维任务在实例中批量执行您编写的自定义命令。
 ---

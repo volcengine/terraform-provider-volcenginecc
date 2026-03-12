@@ -161,6 +161,57 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "备注。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ConnectionPoolSettings
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "连接池配置。",
+		//	  "properties": {
+		//	    "Enable": {
+		//	      "description": "开启。",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Http1MaxPendingRequests": {
+		//	      "description": "HTTP/1最大等待请求数。取值限制为0~2^31-1，0为不限制。",
+		//	      "type": "integer"
+		//	    },
+		//	    "IdleTimeout": {
+		//	      "description": "空闲超时时间。单位为秒。取值限制为0~2^31-1，0为不限制。",
+		//	      "type": "integer"
+		//	    },
+		//	    "MaxConnections": {
+		//	      "description": "TCP最大连接数。取值限制为0~2^31-1，0为不限制。",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"connection_pool_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enable
+				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "开启。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Http1MaxPendingRequests
+				"http_1_max_pending_requests": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "HTTP/1最大等待请求数。取值限制为0~2^31-1，0为不限制。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdleTimeout
+				"idle_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "空闲超时时间。单位为秒。取值限制为0~2^31-1，0为不限制。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxConnections
+				"max_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "TCP最大连接数。取值限制为0~2^31-1，0为不限制。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "连接池配置。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
@@ -211,6 +262,10 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "HashBalanceFactor": {
+		//	          "description": "过载保护参数。取值限制为100~200。当取值为120时，upstream节点当前活跃请求数超过平均活跃请求数的120%时，将触发过载保护。当触发过载保护时，即使请求的hash命中某一upstream节点，负载均衡器也会随机选择upstream节点。",
+		//	          "type": "integer"
 		//	        },
 		//	        "HashKey": {
 		//	          "description": "一致性哈希方式，取值：UseSourceIp：基于源IP地址。HttpQueryParameterName：基于参数。HttpHeaderName：基于头。HTTPCookie：基于cookie。",
@@ -272,6 +327,11 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Cookie。",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HashBalanceFactor
+						"hash_balance_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "过载保护参数。取值限制为100~200。当取值为120时，upstream节点当前活跃请求数超过平均活跃请求数的120%时，将触发过载保护。当触发过载保护时，即使请求的hash命中某一upstream节点，负载均衡器也会随机选择upstream节点。",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: HashKey
@@ -447,6 +507,35 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "Domain": {
+		//	      "description": "固定域名。",
+		//	      "properties": {
+		//	        "DomainList": {
+		//	          "description": "域名列表。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "固定域名。",
+		//	            "properties": {
+		//	              "Domain": {
+		//	                "description": "域名。",
+		//	                "type": "string"
+		//	              },
+		//	              "Port": {
+		//	                "description": "端口。协议类型为HTTP时，默认值为80。协议类型为HTTPS时，默认值为443。",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Domain"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "EcsInstances": {
 		//	      "description": "云服务器。",
 		//	      "insertionOrder": false,
@@ -572,6 +661,32 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "AI模型代理。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Domain
+				"domain": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainList
+						"domain_list": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Domain
+									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "域名。",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Port
+									"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "端口。协议类型为HTTP时，默认值为80。协议类型为HTTPS时，默认值为443。",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "域名列表。",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "固定域名。",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcsInstances
@@ -765,61 +880,68 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::APIG::Upstream").WithTerraformTypeName("volcenginecc_apig_upstream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ai_provider":               "AIProvider",
-		"backend_targets":           "BackendTargets",
-		"base_ejection_time":        "BaseEjectionTime",
-		"base_url":                  "BaseUrl",
-		"circuit_breaking_settings": "CircuitBreakingSettings",
-		"comments":                  "Comments",
-		"consecutive_errors":        "ConsecutiveErrors",
-		"consistent_hash_lb":        "ConsistentHashLB",
-		"created_time":              "CreatedTime",
-		"custom_model_service":      "CustomModelService",
-		"ecs_id":                    "EcsId",
-		"ecs_instances":             "EcsInstances",
-		"enable":                    "Enable",
-		"function_id":               "FunctionId",
-		"gateway_id":                "GatewayId",
-		"group":                     "Group",
-		"hash_key":                  "HashKey",
-		"health_status":             "HealthStatus",
-		"http_cookie":               "HTTPCookie",
-		"http_header_name":          "HttpHeaderName",
-		"http_query_parameter_name": "HttpQueryParameterName",
-		"interval":                  "Interval",
-		"ip":                        "IP",
-		"k8_s_service":              "K8SService",
-		"key":                       "Key",
-		"labels":                    "Labels",
-		"lb_policy":                 "LbPolicy",
-		"load_balancer_settings":    "LoadBalancerSettings",
-		"max_ejection_percent":      "MaxEjectionPercent",
-		"min_health_percent":        "MinHealthPercent",
-		"nacos_service":             "NacosService",
-		"name":                      "Name",
-		"namespace":                 "Namespace",
-		"namespace_id":              "NamespaceId",
-		"path":                      "Path",
-		"port":                      "Port",
-		"protocol":                  "Protocol",
-		"service":                   "Service",
-		"simple_lb":                 "SimpleLB",
-		"sni":                       "Sni",
-		"source_type":               "SourceType",
-		"tls_mode":                  "TlsMode",
-		"tls_settings":              "TlsSettings",
-		"token":                     "Token",
-		"ttl":                       "Ttl",
-		"update_time":               "UpdateTime",
-		"updated_time":              "UpdatedTime",
-		"upstream_id":               "UpstreamId",
-		"upstream_source_id":        "UpstreamSourceId",
-		"upstream_spec":             "UpstreamSpec",
-		"use_source_ip":             "UseSourceIp",
-		"value":                     "Value",
-		"ve_faas":                   "VeFaas",
-		"version_details":           "VersionDetails",
-		"warmup_duration":           "WarmupDuration",
+		"ai_provider":                 "AIProvider",
+		"backend_targets":             "BackendTargets",
+		"base_ejection_time":          "BaseEjectionTime",
+		"base_url":                    "BaseUrl",
+		"circuit_breaking_settings":   "CircuitBreakingSettings",
+		"comments":                    "Comments",
+		"connection_pool_settings":    "ConnectionPoolSettings",
+		"consecutive_errors":          "ConsecutiveErrors",
+		"consistent_hash_lb":          "ConsistentHashLB",
+		"created_time":                "CreatedTime",
+		"custom_model_service":        "CustomModelService",
+		"domain":                      "Domain",
+		"domain_list":                 "DomainList",
+		"ecs_id":                      "EcsId",
+		"ecs_instances":               "EcsInstances",
+		"enable":                      "Enable",
+		"function_id":                 "FunctionId",
+		"gateway_id":                  "GatewayId",
+		"group":                       "Group",
+		"hash_balance_factor":         "HashBalanceFactor",
+		"hash_key":                    "HashKey",
+		"health_status":               "HealthStatus",
+		"http_1_max_pending_requests": "Http1MaxPendingRequests",
+		"http_cookie":                 "HTTPCookie",
+		"http_header_name":            "HttpHeaderName",
+		"http_query_parameter_name":   "HttpQueryParameterName",
+		"idle_timeout":                "IdleTimeout",
+		"interval":                    "Interval",
+		"ip":                          "IP",
+		"k8_s_service":                "K8SService",
+		"key":                         "Key",
+		"labels":                      "Labels",
+		"lb_policy":                   "LbPolicy",
+		"load_balancer_settings":      "LoadBalancerSettings",
+		"max_connections":             "MaxConnections",
+		"max_ejection_percent":        "MaxEjectionPercent",
+		"min_health_percent":          "MinHealthPercent",
+		"nacos_service":               "NacosService",
+		"name":                        "Name",
+		"namespace":                   "Namespace",
+		"namespace_id":                "NamespaceId",
+		"path":                        "Path",
+		"port":                        "Port",
+		"protocol":                    "Protocol",
+		"service":                     "Service",
+		"simple_lb":                   "SimpleLB",
+		"sni":                         "Sni",
+		"source_type":                 "SourceType",
+		"tls_mode":                    "TlsMode",
+		"tls_settings":                "TlsSettings",
+		"token":                       "Token",
+		"ttl":                         "Ttl",
+		"update_time":                 "UpdateTime",
+		"updated_time":                "UpdatedTime",
+		"upstream_id":                 "UpstreamId",
+		"upstream_source_id":          "UpstreamSourceId",
+		"upstream_spec":               "UpstreamSpec",
+		"use_source_ip":               "UseSourceIp",
+		"value":                       "Value",
+		"ve_faas":                     "VeFaas",
+		"version_details":             "VersionDetails",
+		"warmup_duration":             "WarmupDuration",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
