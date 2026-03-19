@@ -1,0 +1,114 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/LifecycleHookName",
+    "/properties/ScalingGroupId"
+  ],
+  "definitions": {
+    "LifecycleCommand": {
+      "properties": {
+        "CommandId": {
+          "description": "云助手命令ID，表示触发生命周期挂钩后在实例中执行云助手命令。如果命令执行成功，则按照CONTINUE执行挂起结束后的策略。如果命令执行失败/超时或生命周期挂钩超时，则按照LifecycleHookPolicy参数的配置执行挂起结束后的策略。",
+          "type": "string"
+        },
+        "Parameters": {
+          "description": "云助手命令中的参数和参数值。参数的个数范围为0~60，且需要注意：参数不允许为空字符串，最多支持64个字符。值允许为空字符串。参数与原始命令内容在Base64编码后，综合长度不能超过16KB。设置的参数名集合必须为创建命令时定义的参数集的子集。对于未传入的参数，使用默认值代替。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "伸缩组触发伸缩规则、健康检查、实例数量检查后，生命周期挂钩可以将“加入中”、“移出中”、“停用中”实例的状态挂起，进入 加入/移出挂起中 状态，此时实例处于等待状态，您可以在这段时间内进行自定义操作，直至生命周期挂钩超时或您手动结束挂起。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ScalingGroupId",
+      "/properties/LifecycleHookId",
+      "/properties/LifecycleHookName"
+    ],
+    "required": [
+      "/properties/ScalingGroupId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "auto_scaling:CreateLifecycleHook",
+        "auto_scaling:DescribeLifecycleHooks"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "auto_scaling:DeleteLifecycleHook",
+        "auto_scaling:DescribeLifecycleHooks"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "auto_scaling:DescribeLifecycleHooks"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "auto_scaling:DescribeLifecycleHooks"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "auto_scaling:ModifyLifecycleHook",
+        "auto_scaling:DescribeLifecycleHooks"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ScalingGroupId",
+    "/properties/LifecycleHookId"
+  ],
+  "properties": {
+    "LifecycleCommand": {
+      "$ref": "#/definitions/LifecycleCommand",
+      "description": "云助手相关命令信息。",
+      "type": "object"
+    },
+    "LifecycleHookId": {
+      "description": "生命周期挂钩ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "LifecycleHookName": {
+      "description": "生命周期挂钩名称，创建后不可修改。取值：不能以数字、中划线、下划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1 ~ 128个字符之间。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "LifecycleHookPolicy": {
+      "description": "实例挂起状态结束后执行的策略。取值：CONTINUE：继续执行。REJECT：中止后续操作。ROLLBACK：针对弹性收缩活动，会拒绝释放ECS实例，进行回滚；针对弹性扩张活动，效果同REJECT一样。",
+      "type": "string"
+    },
+    "LifecycleHookTimeout": {
+      "description": "ECS实例保持挂起状态的时间，超时后，自动结束挂起状态，根据执行策略继续执行扩缩容行为。 请您评估自定义操作的处理时间后，设置合适的超时时间。取值：30 ～ 21600（6小时），单位 s，且必须为整数。",
+      "type": "integer"
+    },
+    "LifecycleHookType": {
+      "description": "伸缩活动的类型，发生指定类型的伸缩活动时，生命周期挂钩会被触发并挂起ECS实例。取值：SCALE_IN：弹性收缩活动。SCALE_OUT：弹性扩张活动。",
+      "type": "string"
+    },
+    "ScalingGroupId": {
+      "description": "伸缩组ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/LifecycleHookId"
+  ],
+  "required": [
+    "LifecycleHookName",
+    "LifecycleHookPolicy",
+    "LifecycleHookTimeout",
+    "LifecycleHookType",
+    "ScalingGroupId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::AutoScaling::ScalingLifecycleHook"
+}

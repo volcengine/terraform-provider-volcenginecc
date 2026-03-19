@@ -22,6 +22,17 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::TLS::Topic resource.
 func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowConsume
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "指定日志主题是否已开启了 Kafka 协议消费功能。true：已开启。false：未开启。",
+		//	  "type": "boolean"
+		//	}
+		"allow_consume": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "指定日志主题是否已开启了 Kafka 协议消费功能。true：已开启。false：未开启。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArchiveTtl
 		// Cloud Control resource type schema:
 		//
@@ -55,6 +66,17 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"cold_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "低频存储时长。该时长取值范围为 30~3650。标准存储时长 7 天及以上可实现低频存储。此参数仅在 EnableHotTtl 为 true 时生效。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ConsumeTopic
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Kafka 协议消费主题 ID，格式为 out+日志主题 ID。通过 Kafka 协议消费此日志主题中的日志数据时，Topic 应指定为此 ID。",
+		//	  "type": "string"
+		//	}
+		"consume_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Kafka 协议消费主题 ID，格式为 out+日志主题 ID。通过 Kafka 协议消费此日志主题中的日志数据时，Topic 应指定为此 ID。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
@@ -177,8 +199,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -289,9 +310,11 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::TLS::Topic").WithTerraformTypeName("volcenginecc_tls_topic")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_consume":   "AllowConsume",
 		"archive_ttl":     "ArchiveTtl",
 		"auto_split":      "AutoSplit",
 		"cold_ttl":        "ColdTtl",
+		"consume_topic":   "ConsumeTopic",
 		"created_time":    "CreatedTime",
 		"description":     "Description",
 		"enable_hot_ttl":  "EnableHotTtl",

@@ -21,9 +21,11 @@ Data Source schema for Volcengine::TLS::Topic
 
 ### Read-Only
 
+- `allow_consume` (Boolean) 指定日志主题是否已开启了 Kafka 协议消费功能。true：已开启。false：未开启。
 - `archive_ttl` (Number) 归档存储时长。该时长取值范围为 60~3650。满足如下任一条件时，可实现归档存储。标准存储时长 30 天及以上。标准存储时长 7 天及以上且低频存储时长 30 天及以上。此参数仅在 EnableHotTtl 为 true 时生效。
 - `auto_split` (Boolean) 是否开启分区的自动分裂功能。true：当写入的数据量连续 5 分钟超过已有分区服务能力时，日志服务会根据数据量自动分裂分区以满足业务需求，但分裂后的分区数量不可超出最大分裂数。最近 15 分钟内分裂出来的新分区不会自动分裂。false：不开启分区的自动分裂。
 - `cold_ttl` (Number) 低频存储时长。该时长取值范围为 30~3650。标准存储时长 7 天及以上可实现低频存储。此参数仅在 EnableHotTtl 为 true 时生效。
+- `consume_topic` (String) Kafka 协议消费主题 ID，格式为 out+日志主题 ID。通过 Kafka 协议消费此日志主题中的日志数据时，Topic 应指定为此 ID。
 - `created_time` (String) 日志主题创建时间。
 - `description` (String) 日志主题描述信息。不支持 <>、'、\、\\、所有 emoji 表情符号。长度为 0~64 个字符。
 - `enable_hot_ttl` (Boolean) 是否开启分层存储。开启后，日志服务支持标准存储、低频存储和归档存储。设置 HotTtl、ArchiveTtl、ColdTtl 后，如果数据存储时间超过对应时长，那么数据会自动沉降至低频存储、归档存储进行后续保存，直到日志采集到服务端的总时长达到 Ttl 时，被后端服务自动清理。

@@ -1,0 +1,114 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "OrganizationDetail": {
+      "description": "组织详情",
+      "properties": {
+        "CreatedTime": {
+          "description": "创建时间",
+          "type": "string"
+        },
+        "Description": {
+          "description": "描述",
+          "type": "string"
+        },
+        "Name": {
+          "description": "组织名称",
+          "type": "string"
+        },
+        "Owner": {
+          "description": "管理员ID",
+          "type": "string"
+        },
+        "Status": {
+          "description": "状态",
+          "type": "integer"
+        },
+        "Type": {
+          "description": "组织类型，企业组织固定是 1",
+          "type": "integer"
+        },
+        "UpdatedTime": {
+          "description": "更新时间",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OwnerDetail": {
+      "description": "管理员详情",
+      "properties": {
+        "AccountID": {
+          "description": "账号ID",
+          "type": "integer"
+        },
+        "AccountName": {
+          "description": "账号名称",
+          "type": "string"
+        },
+        "MainName": {
+          "description": "主体名称",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "企业组织管理",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "organization:CreateOrganization",
+        "organization:DescribeOrganization"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "organization:DeleteOrganization",
+        "organization:DescribeOrganization"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "organization:DescribeOrganization"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/OrganizationID"
+  ],
+  "properties": {
+    "Organization": {
+      "$ref": "#/definitions/OrganizationDetail",
+      "description": "组织详情",
+      "type": "object"
+    },
+    "OrganizationID": {
+      "description": "组织ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Owner": {
+      "$ref": "#/definitions/OwnerDetail",
+      "description": "管理员详情",
+      "type": "object"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/OrganizationID",
+    "/properties/Organization/CreatedTime",
+    "/properties/Organization/UpdatedTime",
+    "/properties/Organization/Owner",
+    "/properties/Organization/Type",
+    "/properties/Organization/Name",
+    "/properties/Organization/Description",
+    "/properties/Organization/Status",
+    "/properties/Owner/AccountID",
+    "/properties/Owner/AccountName",
+    "/properties/Owner/MainName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Organization::Organization"
+}

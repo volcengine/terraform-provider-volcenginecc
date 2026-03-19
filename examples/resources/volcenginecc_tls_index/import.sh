@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_index.example "topic_id"

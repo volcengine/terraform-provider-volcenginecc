@@ -151,6 +151,16 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_rdspostgresql_database -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSPostgreSQL_Database.json -package rdspostgresql -- ../volcengine/rdspostgresql/database_resource_gen.go ../volcengine/rdspostgresql/database_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_mongodb_allow_list -ccschema ../service/cloudcontrol/schemas/Volcengine_MongoDB_AllowList.json -package mongodb -- ../volcengine/mongodb/allow_list_resource_gen.go ../volcengine/mongodb/allow_list_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_rdspostgresql_schema -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSPostgreSQL_Schema.json -package rdspostgresql -- ../volcengine/rdspostgresql/schema_resource_gen.go ../volcengine/rdspostgresql/schema_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cdn_domain -ccschema ../service/cloudcontrol/schemas/Volcengine_CDN_Domain.json -package cdn -- ../volcengine/cdn/domain_resource_gen.go ../volcengine/cdn/domain_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vedbm_backup -ccschema ../service/cloudcontrol/schemas/Volcengine_VEDBM_Backup.json -package vedbm -- ../volcengine/vedbm/backup_resource_gen.go ../volcengine/vedbm/backup_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_emr_cluster -ccschema ../service/cloudcontrol/schemas/Volcengine_EMR_Cluster.json -package emr -- ../volcengine/emr/cluster_resource_gen.go ../volcengine/emr/cluster_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_emr_cluster_user -ccschema ../service/cloudcontrol/schemas/Volcengine_EMR_ClusterUser.json -package emr -- ../volcengine/emr/cluster_user_resource_gen.go ../volcengine/emr/cluster_user_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_emr_cluster_user_group -ccschema ../service/cloudcontrol/schemas/Volcengine_EMR_ClusterUserGroup.json -package emr -- ../volcengine/emr/cluster_user_group_resource_gen.go ../volcengine/emr/cluster_user_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tls_schedule_sql_task -ccschema ../service/cloudcontrol/schemas/Volcengine_TLS_ScheduleSqlTask.json -package tls -- ../volcengine/tls/schedule_sql_task_resource_gen.go ../volcengine/tls/schedule_sql_task_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_autoscaling_scaling_lifecycle_hook -ccschema ../service/cloudcontrol/schemas/Volcengine_AutoScaling_ScalingLifecycleHook.json -package autoscaling -- ../volcengine/autoscaling/scaling_lifecycle_hook_resource_gen.go ../volcengine/autoscaling/scaling_lifecycle_hook_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tls_index -ccschema ../service/cloudcontrol/schemas/Volcengine_TLS_Index.json -package tls -- ../volcengine/tls/index_resource_gen.go ../volcengine/tls/index_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vedbm_database -ccschema ../service/cloudcontrol/schemas/Volcengine_VEDBM_Database.json -package vedbm -- ../volcengine/vedbm/database_resource_gen.go ../volcengine/vedbm/database_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_organization_organization -ccschema ../service/cloudcontrol/schemas/Volcengine_Organization_Organization.json -package organization -- ../volcengine/organization/organization_resource_gen.go ../volcengine/organization/organization_resource_gen_test.go
 
 package provider
 
@@ -171,6 +181,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/dns"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/efs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/emr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/fwcenter"

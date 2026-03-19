@@ -1,0 +1,123 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/UserName"
+  ],
+  "description": "E-MapReduce（EMR）集群中的用户分为普通用户和系统用户两类。其中:普通用户是您在用户管理模块手动通过导入、创建操作向集群中添加的用户；系统用户则是集群在初始化过程中为每个组件内置的管理用户，不支持编辑和删除操作。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId",
+      "/properties/UserName",
+      "/properties/CreatorName",
+      "/properties/UserGroupNames"
+    ],
+    "required": [
+      "/properties/ClusterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "emr:CreateClusterUser",
+        "emr:ListClusterUsers"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "emr:DeleteClusterUser",
+        "emr:ListClusterUsers"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "emr:ListClusterUsers"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "emr:ListClusterUsers"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "emr:UpdateClusterUserPassword",
+        "emr:UpdateClusterUser",
+        "emr:ListClusterUsers"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId",
+    "/properties/UserName"
+  ],
+  "properties": {
+    "ClusterId": {
+      "description": "集群ID。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "format": "int64",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "CreatorName": {
+      "description": "创建者用户名。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "用户组描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "OldPassword": {
+      "description": "旧的用户的登录密码。修改密码时必填。",
+      "maxLength": 20,
+      "type": "string"
+    },
+    "Password": {
+      "description": "新的用户的登录密码。密码的长度需在8-20个字符之间，支持数字，字母，-，_ 且 至少包含1个数字和1个字母。",
+      "maxLength": 20,
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "更新时间。",
+      "format": "int64",
+      "semantic": "updatedTime",
+      "type": "integer"
+    },
+    "UserGroupNames": {
+      "description": "所属用户组名称。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UserName": {
+      "description": "集群用户名。仅支持小写字母。",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime",
+    "/properties/CreatorName"
+  ],
+  "required": [
+    "ClusterId",
+    "UserName",
+    "Password"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::EMR::ClusterUser",
+  "writeOnlyProperties": [
+    "/properties/Password",
+    "/properties/OldPassword"
+  ]
+}

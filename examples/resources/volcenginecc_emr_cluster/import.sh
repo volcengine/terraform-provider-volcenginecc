@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_emr_cluster.example "cluster_id"

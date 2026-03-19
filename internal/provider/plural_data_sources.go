@@ -151,6 +151,16 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdspostgresql_databases -cctype Volcengine::RDSPostgreSQL::Database -package rdspostgresql ../volcengine/rdspostgresql/database_plural_data_source_gen.go ../volcengine/rdspostgresql/database_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_mongodb_allow_lists -cctype Volcengine::MongoDB::AllowList -package mongodb ../volcengine/mongodb/allow_list_plural_data_source_gen.go ../volcengine/mongodb/allow_list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdspostgresql_schemas -cctype Volcengine::RDSPostgreSQL::Schema -package rdspostgresql ../volcengine/rdspostgresql/schema_plural_data_source_gen.go ../volcengine/rdspostgresql/schema_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cdn_domains -cctype Volcengine::CDN::Domain -package cdn ../volcengine/cdn/domain_plural_data_source_gen.go ../volcengine/cdn/domain_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vedbm_backups -cctype Volcengine::VEDBM::Backup -package vedbm ../volcengine/vedbm/backup_plural_data_source_gen.go ../volcengine/vedbm/backup_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_emr_clusters -cctype Volcengine::EMR::Cluster -package emr ../volcengine/emr/cluster_plural_data_source_gen.go ../volcengine/emr/cluster_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_emr_cluster_users -cctype Volcengine::EMR::ClusterUser -package emr ../volcengine/emr/cluster_user_plural_data_source_gen.go ../volcengine/emr/cluster_user_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_emr_cluster_user_groups -cctype Volcengine::EMR::ClusterUserGroup -package emr ../volcengine/emr/cluster_user_group_plural_data_source_gen.go ../volcengine/emr/cluster_user_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_schedule_sql_tasks -cctype Volcengine::TLS::ScheduleSqlTask -package tls ../volcengine/tls/schedule_sql_task_plural_data_source_gen.go ../volcengine/tls/schedule_sql_task_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_autoscaling_scaling_lifecycle_hooks -cctype Volcengine::AutoScaling::ScalingLifecycleHook -package autoscaling ../volcengine/autoscaling/scaling_lifecycle_hook_plural_data_source_gen.go ../volcengine/autoscaling/scaling_lifecycle_hook_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_indices -cctype Volcengine::TLS::Index -package tls ../volcengine/tls/index_plural_data_source_gen.go ../volcengine/tls/index_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vedbm_databases -cctype Volcengine::VEDBM::Database -package vedbm ../volcengine/vedbm/database_plural_data_source_gen.go ../volcengine/vedbm/database_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_organizations -cctype Volcengine::Organization::Organization -package organization ../volcengine/organization/organization_plural_data_source_gen.go ../volcengine/organization/organization_plural_data_source_gen_test.go
 
 package provider
 
@@ -171,6 +181,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/dns"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ecs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/efs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/emr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/fwcenter"

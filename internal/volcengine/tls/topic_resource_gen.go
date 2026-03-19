@@ -32,6 +32,21 @@ func init() {
 // This Terraform resource corresponds to the Cloud Control Volcengine::TLS::Topic resource.
 func topicResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowConsume
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "指定日志主题是否已开启了 Kafka 协议消费功能。true：已开启。false：未开启。",
+		//	  "type": "boolean"
+		//	}
+		"allow_consume": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "指定日志主题是否已开启了 Kafka 协议消费功能。true：已开启。false：未开启。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ArchiveTtl
 		// Cloud Control resource type schema:
 		//
@@ -83,6 +98,20 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConsumeTopic
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Kafka 协议消费主题 ID，格式为 out+日志主题 ID。通过 Kafka 协议消费此日志主题中的日志数据时，Topic 应指定为此 ID。",
+		//	  "type": "string"
+		//	}
+		"consume_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Kafka 协议消费主题 ID，格式为 out+日志主题 ID。通过 Kafka 协议消费此日志主题中的日志数据时，Topic 应指定为此 ID。",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
@@ -247,8 +276,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key",
-		//	      "Value"
+		//	      "Key"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -275,9 +303,6 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 						Description: "用户标签的标签值。",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -404,9 +429,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::TLS::Topic").WithTerraformTypeName("volcenginecc_tls_topic")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_consume":   "AllowConsume",
 		"archive_ttl":     "ArchiveTtl",
 		"auto_split":      "AutoSplit",
 		"cold_ttl":        "ColdTtl",
+		"consume_topic":   "ConsumeTopic",
 		"created_time":    "CreatedTime",
 		"description":     "Description",
 		"enable_hot_ttl":  "EnableHotTtl",
@@ -429,6 +456,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/TopicID",
+		"/properties/ConsumeTopic",
 		"/properties/CreatedTime",
 		"/properties/UpdatedTime",
 	})

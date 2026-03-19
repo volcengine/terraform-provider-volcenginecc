@@ -612,3 +612,43 @@ resource_schema "volcengine_mongodb_allow_list" {
 resource_schema "volcengine_rdspostgresql_schema" {
   cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::Schema"
 }
+
+resource_schema "volcengine_cdn_domain" {
+  cloudcontrol_type_name = "Volcengine::CDN::Domain"
+}
+
+resource_schema "volcengine_vedbm_backup" {
+  cloudcontrol_type_name = "Volcengine::VEDBM::Backup"
+}
+
+resource_schema "volcengine_emr_cluster" {
+  cloudcontrol_type_name = "Volcengine::EMR::Cluster"
+}
+
+resource_schema "volcengine_emr_cluster_user" {
+  cloudcontrol_type_name = "Volcengine::EMR::ClusterUser"
+}
+
+resource_schema "volcengine_emr_cluster_user_group" {
+  cloudcontrol_type_name = "Volcengine::EMR::ClusterUserGroup"
+}
+
+resource_schema "volcengine_tls_schedule_sql_task" {
+  cloudcontrol_type_name = "Volcengine::TLS::ScheduleSqlTask"
+}
+
+resource_schema "volcengine_autoscaling_scaling_lifecycle_hook" {
+  cloudcontrol_type_name = "Volcengine::AutoScaling::ScalingLifecycleHook"
+}
+
+resource_schema "volcengine_tls_index" {
+  cloudcontrol_type_name = "Volcengine::TLS::Index"
+}
+
+resource_schema "volcengine_vedbm_database" {
+  cloudcontrol_type_name = "Volcengine::VEDBM::Database"
+}
+
+resource_schema "volcengine_organization_organization" {
+  cloudcontrol_type_name = "Volcengine::Organization::Organization"
+}

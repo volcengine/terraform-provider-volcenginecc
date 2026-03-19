@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_emr_cluster_user.example "cluster_id|user_name"

@@ -1,0 +1,112 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/DBName",
+    "/properties/CharacterSetName",
+    "/properties/DatabasesPrivileges",
+    "/properties/InstanceId"
+  ],
+  "definitions": {
+    "DatabasesPrivilege": {
+      "properties": {
+        "AccountName": {
+          "description": "需授权的账号名称",
+          "type": "string"
+        },
+        "AccountPrivilege": {
+          "description": "授权数据库权限类型：ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom",
+          "type": "string"
+        },
+        "AccountPrivilegeDetail": {
+          "description": "具体SQL操作权限，多个用英文逗号分隔；Custom类型时必填",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "云数据库管理",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/DBName"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vedbm:CreateDatabase",
+        "vedbm:DescribeDatabases"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vedbm:DeleteDatabase",
+        "vedbm:DescribeDatabases"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vedbm:DescribeDatabases"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vedbm:DescribeDatabases"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vedbm:ModifyDatabaseDescription",
+        "vedbm:DescribeDatabases"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/DBName"
+  ],
+  "properties": {
+    "CharacterSetName": {
+      "description": "数据库字符集，可选值：utf8mb4（默认）、utf8、latin1、ascii",
+      "type": "string"
+    },
+    "DBDesc": {
+      "description": "数据库描述信息，长度0~256字符，可包含数字、中文、英文、下划线(_)、中划线(-)",
+      "type": "string"
+    },
+    "DBName": {
+      "description": "数据库名称。命名规则：当前实例下唯一；长度2~64字符；以字母开头，字母/数字结尾；由字母、数字、下划线(_)、中划线(-)组成；不能使用预留字",
+      "type": "string"
+    },
+    "DatabasesPrivileges": {
+      "description": "数据库的权限信息",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DatabasesPrivilege"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceId": {
+      "description": "实例ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEDBM::Database"
+}
