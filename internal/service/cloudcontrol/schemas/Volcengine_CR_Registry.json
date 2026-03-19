@@ -84,6 +84,12 @@
       "permissions": [
         "cr:ListRegistries"
       ]
+    },
+    "update": {
+      "permissions": [
+        "cr:StartRegistry",
+        "cr:ListRegistries"
+      ]
     }
   },
   "primaryIdentifier": [
@@ -154,8 +160,7 @@
     "/properties/ExpireTime",
     "/properties/ProxyCache",
     "/properties/ProxyCacheEnabled",
-    "/properties/RenewType",
-    "/properties/Status"
+    "/properties/RenewType"
   ],
   "required": [
     "Name"

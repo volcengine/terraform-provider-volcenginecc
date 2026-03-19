@@ -1,0 +1,761 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ChargeType",
+    "/properties/ClusterType",
+    "/properties/DeployMode",
+    "/properties/HistoryServerMode",
+    "/properties/NodeAttribute",
+    "/properties/ProjectName",
+    "/properties/ReleaseVersion",
+    "/properties/SecurityGroupId",
+    "/properties/SecurityMode",
+    "/properties/ApplicationNames",
+    "/properties/VpcId",
+    "/properties/ApplicationExtras",
+    "/properties/BootstrapScripts",
+    "/properties/NodeGroupAttributes"
+  ],
+  "definitions": {
+    "Application": {
+      "properties": {
+        "ApplicationConfigHome": {
+          "description": "应用配置路径。",
+          "type": "string"
+        },
+        "ApplicationHome": {
+          "description": "应用安装路径。",
+          "type": "string"
+        },
+        "ApplicationName": {
+          "description": "应用名称。",
+          "type": "string"
+        },
+        "ApplicationState": {
+          "description": "服务状态。NORMAL：正常；WARNING：告警；STOPPED：已停止；INIT：初始化中；INSTALLING：安装中；INSTALLED：已安装；STARTING：启动中；STARTED：已启动；STOPPING：停止中；UNINSTALLING：卸载中；UNINSTALLED：已卸载；EXCEPTION：异常。",
+          "type": "string"
+        },
+        "ApplicationVersion": {
+          "description": "应用版本。",
+          "type": "string"
+        },
+        "Group": {
+          "description": "应用用户组。",
+          "type": "string"
+        },
+        "SupportClient": {
+          "description": "是否支持客户端。",
+          "type": "boolean"
+        },
+        "User": {
+          "description": "应用用户。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ApplicationComponentLayout": {
+      "properties": {
+        "ComponentName": {
+          "description": "组件名称。",
+          "type": "string"
+        },
+        "EffectiveScope": {
+          "$ref": "#/definitions/EffectiveScope",
+          "description": "组件的布局范围。",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ApplicationConfig": {
+      "properties": {
+        "ComponentInstanceName": {
+          "description": "组件实例名称。",
+          "type": "string"
+        },
+        "ComponentName": {
+          "description": "组件名称。",
+          "type": "string"
+        },
+        "ConfigFileName": {
+          "description": "配置文件名。",
+          "type": "string"
+        },
+        "ConfigItemKey": {
+          "description": "配置项名称。",
+          "type": "string"
+        },
+        "ConfigItemValue": {
+          "description": "配置项值。",
+          "type": "string"
+        },
+        "Deleted": {
+          "description": "是否删除。",
+          "type": "boolean"
+        },
+        "EffectiveScope": {
+          "$ref": "#/definitions/EffectiveScope",
+          "description": "影响组件。",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ApplicationExtra": {
+      "properties": {
+        "ApplicationComponentLayouts": {
+          "description": "服务组件的自定义部署拓扑列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ApplicationComponentLayout"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ApplicationConfigs": {
+          "description": "服务的自定义配置参数列表。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ApplicationConfig"
+          },
+          "type": "array",
+          "uniqueItems": false
+        },
+        "ApplicationName": {
+          "description": "应用名称。",
+          "type": "string"
+        },
+        "ConnectionId": {
+          "description": "元数据连接id。",
+          "type": "string"
+        },
+        "ConnectionType": {
+          "description": "元数据连接类型。BUILT_IN_MYSQL：内置数据库。EXTERNAL_MYSQL：外置数据库。HIVE_METASTORE：HMS。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BootstrapScript": {
+      "properties": {
+        "EffectiveScope": {
+          "$ref": "#/definitions/EffectiveScope",
+          "description": "脚本执行范围。",
+          "type": "object"
+        },
+        "ExecutionFailStrategy": {
+          "description": "执行失败策略。取值范围：FAILED_CONTINUE：失败后继续执行其他任务。FAILED_BLOCK：失败后中断，不再继续执行后续任务。当脚本为BOOTSTRAP时，会导致创建集群、扩容节点组操作中断并失败。默认值：FAILED_BLOCK。",
+          "enum": [
+            "FAILED_CONTINUE",
+            "FAILED_BLOCK"
+          ],
+          "type": "string"
+        },
+        "ExecutionMoment": {
+          "description": "脚本的执行时机。仅scriptType=BOOTSTRAP时生效。BEFORE_APPLICATION_INSTALL：应用安装前。AFTER_APPLICATION_STARTED：应用启动后。默认值：BEFORE_APP_INSTALL",
+          "enum": [
+            "BEFORE_APPLICATION_INSTALL",
+            "AFTER_APPLICATION_STARTED"
+          ],
+          "type": "string"
+        },
+        "Priority": {
+          "description": "脚本执行优先级。取值范围：1~1000。默认值1。",
+          "maxLength": 1000,
+          "type": "string"
+        },
+        "ScriptArgs": {
+          "description": "脚本参数。",
+          "type": "string"
+        },
+        "ScriptName": {
+          "description": "脚本名称。必填。长度为1~128个字符，必须以大小字母或中文开头，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。",
+          "maxLength": 128,
+          "type": "string"
+        },
+        "ScriptPath": {
+          "description": "脚本所在TOS路径。必填。以 tos:： 开头。",
+          "type": "string"
+        },
+        "ScriptType": {
+          "description": "脚本类型。NORMAL：普通脚本。BOOTSTRAP：引导脚本。",
+          "enum": [
+            "NORMAL",
+            "BOOTSTRAP"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ChargePreConfig": {
+      "properties": {
+        "AutoRenew": {
+          "description": "是否开启自动续费。取值范围：true：开启。false：不开启。",
+          "type": "boolean"
+        },
+        "AutoRenewPeriod": {
+          "description": "自动续费触发时的续费时长，当AutoRenew=true时，默认值=1。",
+          "type": "integer"
+        },
+        "AutoRenewPeriodUnit": {
+          "description": "自动续费触发时的续费时长单位，当AutoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。",
+          "enum": [
+            "Month",
+            "Year"
+          ],
+          "type": "string"
+        },
+        "ChargePeriod": {
+          "description": "chargeType=PRE默认值=1，包月的购买时长单位。",
+          "type": "integer"
+        },
+        "ChargePeriodUnit": {
+          "description": "chargeType=PRE时，默认值=Month，包月的购买时长单位，取值范围：Month：月。Year：年。",
+          "enum": [
+            "Month",
+            "Year"
+          ],
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "付费类型，取值范围：PRE，POST。",
+          "enum": [
+            "PRE",
+            "POST"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DataDisk": {
+      "properties": {
+        "Count": {
+          "description": "磁盘块数，默认值4，最大15，最小1。",
+          "maximum": 15,
+          "type": "integer"
+        },
+        "Size": {
+          "description": "磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+          "maximum": 2048,
+          "type": "integer"
+        },
+        "VolumeType": {
+          "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Count",
+        "Size"
+      ],
+      "type": "object"
+    },
+    "EffectiveScope": {
+      "properties": {
+        "ComponentNames": {
+          "description": "组件名列表，当EffectiveType=COMPONENT_NAME，必选。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "EffectiveType": {
+          "description": "生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。",
+          "enum": [
+            "CLUSTER",
+            "NODE_GROUP_NAME",
+            "NODE_GROUP_ID",
+            "NODE_GROUP_TYPE",
+            "NODE_NAME",
+            "NODE_ID",
+            "COMPONENT_NAME"
+          ],
+          "type": "string"
+        },
+        "NodeGroupIds": {
+          "description": "节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NodeGroupNames": {
+          "description": "节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NodeGroupTypes": {
+          "description": "节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NodeIds": {
+          "description": "节点ID列表，EffectiveType=NODE_ID时，必选。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NodeNames": {
+          "description": "节点名列表，EffectiveType=NODE_NAME时，必选。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "NodeAttribute": {
+      "properties": {
+        "EcsIamRole": {
+          "description": "ECS实例角色。",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "可用区ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NodeGroupAttribute": {
+      "properties": {
+        "Bandwidth": {
+          "description": "公网带宽。默认值 8M。后续如果用户侧调整了，emr侧需要同步该信息。",
+          "type": "integer"
+        },
+        "ChargeType": {
+          "description": "节点组付费类型。为空时，复用集群的chargeType。Master、Core组必须复用集群维度的付费类型。当集群的chargeType为PRE时，task节点组的chargeType允许设置为POST；当集群的chargeType为POST时，节点组的chargeType默认为POST，节点组上的此参数设置无效。",
+          "type": "string"
+        },
+        "CreateTime": {
+          "description": "节点组创建时间。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "DataDisks": {
+          "description": "数据盘配置。当前单个节点组内只支持同规格的数据盘。即List的长度限制为1。",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "EcsInstanceTypes": {
+          "description": "节点组的ecs机型列表。当前只支持设置1个机型。即List的长度限制为1。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "EcsKeyPairName": {
+          "description": "ecs的密钥对名称。",
+          "type": "string"
+        },
+        "EcsPassword": {
+          "description": "Ecs root账号的密码。",
+          "type": "string"
+        },
+        "LayoutComponentNames": {
+          "description": "部署的组件名称列表。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NodeCount": {
+          "description": "节点组当前期望购买的节点数量。",
+          "type": "integer"
+        },
+        "NodeGroupId": {
+          "description": "节点组ID。",
+          "type": "string"
+        },
+        "NodeGroupName": {
+          "description": "长度为1~128个字符，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。",
+          "maxLength": 128,
+          "type": "string"
+        },
+        "NodeGroupState": {
+          "description": "节点组状态。RUNNING,运行中。EXTENDING，扩容中。REDUCING，缩容中。DISK_EXTENDING，磁盘扩容中。MODIFYING，变配中",
+          "type": "string"
+        },
+        "NodeGroupType": {
+          "description": "节点组类型。",
+          "type": "string"
+        },
+        "SubnetIds": {
+          "description": "子网Id列表，目前只能传递一个参数，且各节点组的子网Id都是相同的。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "SystemDisk": {
+          "$ref": "#/definitions/SystemDisk",
+          "description": "系统盘配置。",
+          "type": "object"
+        },
+        "WithPublicIp": {
+          "description": "是否挂载公网ip。",
+          "type": "boolean"
+        },
+        "ZoneId": {
+          "description": "可用区ID。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "SubnetIds",
+        "NodeGroupName",
+        "NodeGroupType",
+        "EcsInstanceTypes",
+        "NodeCount",
+        "SystemDisk",
+        "DataDisks"
+      ],
+      "type": "object"
+    },
+    "StateChangeReason": {
+      "properties": {
+        "Code": {
+          "description": "状态更新码。",
+          "type": "string"
+        },
+        "Reason": {
+          "description": "状态更新原因。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SystemDisk": {
+      "properties": {
+        "Size": {
+          "description": "磁盘大小。",
+          "type": "integer"
+        },
+        "VolumeType": {
+          "description": "磁盘类型。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "用户标签的标签键。",
+          "type": "string"
+        },
+        "Value": {
+          "description": "用户标签的标签值。",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "E-MapReduce（EMR）是开源 Hadoop 生态的企业级大数据分析系统，完全兼容开源，为您提供 Hadoop、Spark、Hive、Hudi、Iceberg 等生态组件集成和管理。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId",
+      "/properties/ClusterName",
+      "/properties/ProjectName",
+      "/properties/ReleaseVersion",
+      "/properties/ChargeType",
+      "/properties/ClusterState",
+      "/properties/ClusterType",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "emr:CreateCluster",
+        "emr:GetCluster",
+        "emr:ListApplications"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "emr:ReleaseCluster",
+        "emr:GetCluster"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "emr:ListClusters"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "emr:GetCluster",
+        "emr:ListApplications"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "emr:UpdateClusterAttribute",
+        "emr:GetCluster",
+        "emr:ListApplications",
+        "emr:UntagResources",
+        "emr:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "账号ID。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ApplicationExtras": {
+      "description": "集群服务的扩展信息列表，包括服务的自定义配置项、服务组件的自定义部署拓扑设置，以及服务的元数据连接配置信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ApplicationExtra"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "ApplicationNames": {
+      "description": "集群安装的服务名称列表。创建字段。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Applications": {
+      "description": "集群安装的服务列表。只读字段。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Application"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BootstrapScripts": {
+      "description": "集群的引导脚本列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/BootstrapScript"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ChargePreConfig": {
+      "$ref": "#/definitions/ChargePreConfig",
+      "description": "包月的配置参数，当chargeType=PRE时，必选。",
+      "type": "object"
+    },
+    "ChargeType": {
+      "description": "付费类型，PRE表示包月，POST表示按量计费。",
+      "type": "string"
+    },
+    "ClusterDomainNames": {
+      "description": "集群dns域名后缀列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ClusterId": {
+      "description": "集群ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ClusterName": {
+      "description": "集群名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ClusterState": {
+      "description": "集群状态。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "ClusterType": {
+      "description": "集群类型。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "集群创建时间。",
+      "format": "int64",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "CreatorId": {
+      "description": "创建者ID。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "CreatorName": {
+      "description": "创建者名称。",
+      "type": "string"
+    },
+    "DeployMode": {
+      "description": "部署模式。SIMPLE表示简单模式，HIGH_AVAILABLE表示高可用模式。",
+      "type": "string"
+    },
+    "EcsImageId": {
+      "description": "ECS镜像ID。",
+      "type": "string"
+    },
+    "ExpireTime": {
+      "description": "集群过期时间。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "HistoryServerMode": {
+      "description": "HistoryServer模式，LOCAL将活动数据存储于集群内，PHS将活动数据存储于集群外。",
+      "type": "string"
+    },
+    "NodeAttribute": {
+      "$ref": "#/definitions/NodeAttribute",
+      "description": "集群全局的节点信息。",
+      "type": "object"
+    },
+    "NodeGroupAttributes": {
+      "description": "节点组属性列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NodeGroupAttribute"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "资源所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+      "maxLength": 64,
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ReadyTime": {
+      "description": "集群创建完成时间。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ReleaseVersion": {
+      "description": "集群版本。",
+      "type": "string"
+    },
+    "SecurityGroupId": {
+      "description": "集群全局安全组ID，所有节点组下的ecs都会加入该安全组。",
+      "type": "string"
+    },
+    "SecurityMode": {
+      "description": "安全模式。",
+      "type": "string"
+    },
+    "StateChangeReason": {
+      "$ref": "#/definitions/StateChangeReason",
+      "description": "状态变更原因。",
+      "type": "object"
+    },
+    "Tags": {
+      "description": "标签列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TerminateTime": {
+      "description": "集群终止时间。",
+      "format": "int64",
+      "type": "integer"
+    },
+    "VpcId": {
+      "description": "Vpc ID。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/AccountId",
+    "/properties/ClusterDomainNames",
+    "/properties/ClusterState",
+    "/properties/CreatedTime",
+    "/properties/CreatorName",
+    "/properties/EcsImageId",
+    "/properties/ExpireTime",
+    "/properties/ReadyTime",
+    "/properties/StateChangeReason",
+    "/properties/TerminateTime",
+    "/properties/Applications",
+    "/properties/CreatorId",
+    "/properties/ChargePreConfig/AutoRenew",
+    "/properties/ChargePreConfig/AutoRenewPeriod",
+    "/properties/ChargePreConfig/AutoRenewPeriodUnit",
+    "/properties/ChargePreConfig/ChargeType",
+    "/properties/NodeGroupAttributes/*/CreateTime",
+    "/properties/NodeGroupAttributes/*/NodeGroupId",
+    "/properties/NodeGroupAttributes/*/LayoutComponentNames",
+    "/properties/NodeGroupAttributes/*/NodeGroupState"
+  ],
+  "required": [
+    "ChargeType",
+    "ClusterName",
+    "ClusterType",
+    "ReleaseVersion",
+    "SecurityGroupId",
+    "VpcId",
+    "NodeAttribute"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::EMR::Cluster",
+  "writeOnlyProperties": [
+    "/properties/ApplicationExtras",
+    "/properties/BootstrapScripts",
+    "/properties/ApplicationNames",
+    "/properties/ChargePreConfig/ChargePeriodUnit",
+    "/properties/ChargePreConfig/ChargePeriod",
+    "/properties/NodeGroupAttributes"
+  ]
+}

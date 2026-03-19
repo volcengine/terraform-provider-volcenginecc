@@ -743,5 +743,55 @@
         "resource": "volcenginecc_rdspostgresql_schema",
         "identifier": ["InstanceId","DBName","SchemaName"],
         "path": "./examples/resources/volcenginecc_rdspostgresql_schema/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cdn_domain",
+        "identifier": ["Domain"],
+        "path": "./examples/resources/volcenginecc_cdn_domain/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vedbm_backup",
+        "identifier": ["InstanceId","BackupId"],
+        "path": "./examples/resources/volcenginecc_vedbm_backup/import.sh"
+    },
+    {
+        "resource": "volcenginecc_emr_cluster",
+        "identifier": ["ClusterId"],
+        "path": "./examples/resources/volcenginecc_emr_cluster/import.sh"
+    },
+    {
+        "resource": "volcenginecc_emr_cluster_user",
+        "identifier": ["ClusterId","UserName"],
+        "path": "./examples/resources/volcenginecc_emr_cluster_user/import.sh"
+    },
+    {
+        "resource": "volcenginecc_emr_cluster_user_group",
+        "identifier": ["ClusterId","UserGroupName"],
+        "path": "./examples/resources/volcenginecc_emr_cluster_user_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_schedule_sql_task",
+        "identifier": ["TaskId"],
+        "path": "./examples/resources/volcenginecc_tls_schedule_sql_task/import.sh"
+    },
+    {
+        "resource": "volcenginecc_autoscaling_scaling_lifecycle_hook",
+        "identifier": ["ScalingGroupId","LifecycleHookId"],
+        "path": "./examples/resources/volcenginecc_autoscaling_scaling_lifecycle_hook/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_index",
+        "identifier": ["TopicId"],
+        "path": "./examples/resources/volcenginecc_tls_index/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vedbm_database",
+        "identifier": ["InstanceId","DBName"],
+        "path": "./examples/resources/volcenginecc_vedbm_database/import.sh"
+    },
+    {
+        "resource": "volcenginecc_organization_organization",
+        "identifier": ["OrganizationID"],
+        "path": "./examples/resources/volcenginecc_organization_organization/import.sh"
     }
 ]

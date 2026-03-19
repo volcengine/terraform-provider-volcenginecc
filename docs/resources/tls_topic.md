@@ -22,16 +22,17 @@ resource "volcenginecc_tls_topic" "TlsTopicDemo" {
   max_split_shard = 256
   tags = [
     {
-      key = "env"
-    value = "test" }
+      key = "key1"
+    value = "v1" }
   ]
   time_key       = "time"
   time_format    = "%Y-%m-%d %H:%M:%S"
   log_public_ip  = false
-  topic_name     = "test"
+  topic_name     = "ccapi-test"
   description    = "test"
-  project_id     = "44a425f0-a6ef-4a****"
+  project_id     = "c6fef4c1-041f-434e-b0f4-d5e9*****"
   enable_hot_ttl = false
+  allow_consume  = false
 }
 ```
 
@@ -46,6 +47,7 @@ resource "volcenginecc_tls_topic" "TlsTopicDemo" {
 
 ### Optional
 
+- `allow_consume` (Boolean) 指定日志主题是否已开启了 Kafka 协议消费功能。true：已开启。false：未开启。
 - `archive_ttl` (Number) 归档存储时长。该时长取值范围为 60~3650。满足如下任一条件时，可实现归档存储。标准存储时长 30 天及以上。标准存储时长 7 天及以上且低频存储时长 30 天及以上。此参数仅在 EnableHotTtl 为 true 时生效。
 - `auto_split` (Boolean) 是否开启分区的自动分裂功能。true：当写入的数据量连续 5 分钟超过已有分区服务能力时，日志服务会根据数据量自动分裂分区以满足业务需求，但分裂后的分区数量不可超出最大分裂数。最近 15 分钟内分裂出来的新分区不会自动分裂。false：不开启分区的自动分裂。
 - `cold_ttl` (Number) 低频存储时长。该时长取值范围为 30~3650。标准存储时长 7 天及以上可实现低频存储。此参数仅在 EnableHotTtl 为 true 时生效。
@@ -63,6 +65,7 @@ resource "volcenginecc_tls_topic" "TlsTopicDemo" {
 
 ### Read-Only
 
+- `consume_topic` (String) Kafka 协议消费主题 ID，格式为 out+日志主题 ID。通过 Kafka 协议消费此日志主题中的日志数据时，Topic 应指定为此 ID。
 - `created_time` (String) 日志主题创建时间。
 - `id` (String) Uniquely identifies the resource.
 - `topic_id` (String) 日志主题 ID。

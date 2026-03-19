@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cdn_domain.example "domain"

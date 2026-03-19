@@ -8,6 +8,44 @@ Use the left navigation panel to explore available resource documentation. If yo
 > 1. The Volcengine Cloud Control provider requires the use of Terraform 1.0.7 or later.
 > 2. This guide requires an available Volcengine account or sub-account to create resources.
 
+## Network Mirror Configuration
+
+If you experience slow provider downloads, you can configure a network mirror to accelerate the process. Add the following configuration to your Terraform CLI configuration file:
+
+### Linux & macOS
+
+Create or edit the `~/.terraformrc` file:
+
+```hcl
+provider_installation {
+  network_mirror {
+    url     = "https://mirrors.volces.com/terraform/terraformcc/"
+    include = ["registry.terraform.io/volcengine/volcenginecc"]
+  }
+  direct {
+    exclude = ["registry.terraform.io/volcengine/volcenginecc"]
+  }
+}
+```
+
+### Windows
+
+Create or edit the `%APPDATA%\terraform.rc` file:
+
+```hcl
+provider_installation {
+  network_mirror {
+    url     = "https://mirrors.volces.com/terraform/terraformcc/"
+    include = ["registry.terraform.io/volcengine/volcenginecc"]
+  }
+  direct {
+    exclude = ["registry.terraform.io/volcengine/volcenginecc"]
+  }
+}
+```
+
+> **NOTE**: The `direct` block with `exclude` ensures that only the volcenginecc provider is fetched from the mirror, while other providers continue to be downloaded directly from the Terraform registry.
+
 ## Example Usage
 
 Terraform 1.0.7 and later:

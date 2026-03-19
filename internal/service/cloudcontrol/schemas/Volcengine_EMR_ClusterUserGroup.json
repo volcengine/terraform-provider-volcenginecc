@@ -1,0 +1,88 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/UserGroupName"
+  ],
+  "description": " E-MapReduce（EMR）集群中支持对用户进行组管理，允许您创建、编辑和删除用户组。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId",
+      "/properties/UserGroupName"
+    ],
+    "required": [
+      "/properties/ClusterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "emr:CreateClusterUserGroup",
+        "emr:ListClusterUserGroups",
+        "emr:ListClusterUsers"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "emr:DeleteClusterUserGroup",
+        "emr:ListClusterUserGroups",
+        "emr:ListClusterUsers"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "emr:ListClusterUserGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "emr:ListClusterUserGroups",
+        "emr:ListClusterUsers"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "emr:UpdateClusterUserGroup",
+        "emr:ListClusterUserGroups",
+        "emr:ListClusterUsers"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId",
+    "/properties/UserGroupName"
+  ],
+  "properties": {
+    "ClusterId": {
+      "description": "集群ID。",
+      "type": "string"
+    },
+    "Description": {
+      "description": "用户组描述。",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Members": {
+      "description": "用户组成员。不支持操作特殊用户，如admin等。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UserGroupName": {
+      "description": "用户组名称。",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ClusterId",
+    "UserGroupName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::EMR::ClusterUserGroup"
+}

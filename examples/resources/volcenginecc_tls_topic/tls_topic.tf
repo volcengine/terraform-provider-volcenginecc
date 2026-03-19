@@ -8,14 +8,15 @@ resource "volcenginecc_tls_topic" "TlsTopicDemo" {
   max_split_shard = 256
   tags = [
     {
-      key = "env"
-    value = "test" }
+      key = "key1"
+    value = "v1" }
   ]
   time_key       = "time"
   time_format    = "%Y-%m-%d %H:%M:%S"
   log_public_ip  = false
-  topic_name     = "test"
+  topic_name     = "ccapi-test"
   description    = "test"
-  project_id     = "44a425f0-a6ef-4a****"
+  project_id     = "c6fef4c1-041f-434e-b0f4-d5e9*****"
   enable_hot_ttl = false
+  allow_consume  = false
 }

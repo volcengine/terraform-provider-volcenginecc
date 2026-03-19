@@ -1,0 +1,137 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BackupType",
+    "/properties/BackupMethod"
+  ],
+  "description": "云数据库 veDB备份管理",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/BackupType",
+      "/properties/BackupStartTime",
+      "/properties/BackupEndTime",
+      "/properties/BackupStatus",
+      "/properties/BackupMethod"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vedbm:CreateBackup",
+        "vedbm:DescribeBackups",
+        "vedbm:DescribeBackupPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vedbm:DeleteBackup",
+        "vedbm:DescribeBackups",
+        "vedbm:DescribeBackupPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vedbm:DescribeBackups",
+        "vedbm:DescribeBackupPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vedbm:DescribeBackups",
+        "vedbm:DescribeBackupPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vedbm:ModifyBackupPolicy",
+        "vedbm:DescribeBackups",
+        "vedbm:DescribeBackupPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/BackupId"
+  ],
+  "properties": {
+    "BackupEndTime": {
+      "description": "备份的结束时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+      "type": "string"
+    },
+    "BackupFileSize": {
+      "description": "备份文件大小，单位为 KiB。",
+      "format": "int32",
+      "type": "integer"
+    },
+    "BackupId": {
+      "description": "备份 ID。",
+      "type": "string"
+    },
+    "BackupMethod": {
+      "description": "备份方式，目前仅支持物理备份。",
+      "type": "string"
+    },
+    "BackupRetentionPeriod": {
+      "description": "数据备份保留天数。",
+      "type": "integer"
+    },
+    "BackupStartTime": {
+      "description": "备份的开始时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+      "type": "string"
+    },
+    "BackupStatus": {
+      "description": "备份状态。",
+      "type": "string"
+    },
+    "BackupTime": {
+      "description": "执行备份任务的时间，间隔窗口为两小时。格式：HH:mmZ-HH:mmZ（UTC 时间）。",
+      "type": "string"
+    },
+    "BackupType": {
+      "description": "备份类型，目前仅支持全量备份。",
+      "type": "string"
+    },
+    "ConsistentTime": {
+      "description": "一致性备份的时间点，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+      "type": "string"
+    },
+    "ContinueBackup": {
+      "description": "是否开启持续备份，取值固定为 true。",
+      "type": "boolean"
+    },
+    "CreateType": {
+      "description": "创建类型。",
+      "type": "string"
+    },
+    "FullBackupPeriod": {
+      "description": "全量备份周期，多个取值用英文逗号（,）隔开。",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "实例ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BackupId",
+    "/properties/ContinueBackup",
+    "/properties/BackupStatus",
+    "/properties/CreateType",
+    "/properties/BackupFileSize",
+    "/properties/BackupStartTime",
+    "/properties/BackupEndTime",
+    "/properties/ConsistentTime"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEDBM::Backup"
+}
