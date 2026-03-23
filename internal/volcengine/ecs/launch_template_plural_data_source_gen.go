@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("volcenginecc_ecs_launch_templates", launchtemplatesDataSource)
+	registry.AddDataSourceFactory("volcenginecc_ecs_launch_templates", launchTemplatesDataSource)
 }
 
-// launchtemplatesDataSource returns the Terraform volcenginecc_ecs_launch_templates data source.
-// This Terraform data source corresponds to the Cloud Control Volcengine::ECS::Launchtemplate resource.
-func launchtemplatesDataSource(ctx context.Context) (datasource.DataSource, error) {
+// launchTemplatesDataSource returns the Terraform volcenginecc_ecs_launch_templates data source.
+// This Terraform data source corresponds to the Cloud Control Volcengine::ECS::LaunchTemplate resource.
+func launchTemplatesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -35,13 +35,13 @@ func launchtemplatesDataSource(ctx context.Context) (datasource.DataSource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "Plural Data Source schema for Volcengine::ECS::Launchtemplate",
+		Description: "Plural Data Source schema for Volcengine::ECS::LaunchTemplate",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::ECS::Launchtemplate").WithTerraformTypeName("volcenginecc_ecs_launch_templates")
+	opts = opts.WithCloudControlTypeName("Volcengine::ECS::LaunchTemplate").WithTerraformTypeName("volcenginecc_ecs_launch_templates")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)

@@ -6,6 +6,24 @@
     "/properties/VpcId"
   ],
   "definitions": {
+    "AccessLog": {
+      "description": "NLB实例的访问日志信息。",
+      "properties": {
+        "AccessLogEnabled": {
+          "description": "是否开启访问日志。true：是。flase：否。",
+          "type": "boolean"
+        },
+        "ProjectId": {
+          "description": "日志项目的ID。",
+          "type": "string"
+        },
+        "TopicId": {
+          "description": "日志主题的ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Tag": {
       "description": "标签键值对。",
       "properties": {
@@ -142,6 +160,11 @@
     "/properties/LoadBalancerId"
   ],
   "properties": {
+    "AccessLog": {
+      "$ref": "#/definitions/AccessLog",
+      "description": "NLB实例的访问日志信息。",
+      "type": "object"
+    },
     "AccountId": {
       "description": "NLB实例所属的账号ID。",
       "type": "string"
@@ -317,7 +340,8 @@
     "/properties/ManagedSecurityGroupId",
     "/properties/OverdueTime",
     "/properties/ReclaimedTime",
-    "/properties/Status"
+    "/properties/Status",
+    "/properties/AccessLog"
   ],
   "required": [
     "Ipv4NetworkType",

@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineRDSMsSQLAllowlistsDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::RDSMsSQL::Allowlist", "volcenginecc_rdsmssql_allow_lists", "test")
+func TestAccVolcengineRDSMsSQLAllowListsDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::RDSMsSQL::AllowList", "volcenginecc_rdsmssql_allow_lists", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

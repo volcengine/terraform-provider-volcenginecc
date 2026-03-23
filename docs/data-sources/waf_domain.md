@@ -144,7 +144,7 @@ Read-Only:
 - `instance_id` (String) 负载均衡实例 ID。
 - `instance_name` (String) 负载均衡实例名称。
 - `listener_id` (String) 负载均衡监听器 ID。
-- `lost_association_from_alb` (Number)
+- `lost_association_from_alb` (Number) 是否从 ALB 中丢失关联。
 - `port` (String) 监听器转发规则的端口号。
 - `protocol` (String) 监听器转发规则的协议类型。
 
@@ -163,14 +163,14 @@ Read-Only:
 
 Read-Only:
 
-- `access_protocol` (String)
-- `defence_mode` (Number)
-- `instance_id` (String)
-- `instance_name` (String)
-- `listener_id` (String)
-- `lost_association_from_alb` (Number)
-- `port` (String)
-- `protocol` (String)
+- `access_protocol` (String) 接入协议类型。
+- `defence_mode` (Number) 防护模式。
+- `instance_id` (String) 实例 ID。
+- `instance_name` (String) 实例名称。
+- `listener_id` (String) 监听器 ID。
+- `lost_association_from_alb` (Number) 是否从 ALB 中丢失关联。
+- `port` (String) 监听器的端口号。
+- `protocol` (String) 监听器协议类型。
 
 
 <a id="nestedatt--tls_fields_config"></a>

@@ -26,6 +26,7 @@ Data Source schema for Volcengine::VKE::Cluster
 - `created_time` (String) 集群创建时间。标准 RFC3339 格式的 UTC+0 时间。
 - `delete_protection_enabled` (Boolean) 集群删除保护，取值：false：（默认值）关闭删除保护。true：开启删除保护，不允许直接删除集群。
 - `description` (String) 集群描述。长度限制为 300 个字符以内。
+- `irsa_config` (Attributes) IRSA（IAM Role for Service Account）能力相关参数配置。 (see [below for nested schema](#nestedatt--irsa_config))
 - `kubernetes_version` (String) 集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）
 - `kubernetes_version_create` (String) 集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。(创建使用)
 - `logging_config` (Attributes) 集群的日志配置信息。 (see [below for nested schema](#nestedatt--logging_config))
@@ -50,6 +51,7 @@ Read-Only:
 - `api_server_endpoints` (Attributes) 集群 API Server 访问的 IPv4 地址信息。 (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints))
 - `api_server_public_access_config` (Attributes) 集群 API Server 公网访问配置信息。ApiServerPublicAccessEnable=true时才返回的参数。 (see [below for nested schema](#nestedatt--cluster_config--api_server_public_access_config))
 - `api_server_public_access_enabled` (Boolean) 节点公网访问配置，参数值说明：false：未开启。true：已开启。
+- `ip_family` (String) 集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。
 - `resource_public_access_default_enabled` (Boolean) 节点公网访问配置，参数值说明：false：未开启。true：已开启。
 - `security_group_ids` (Set of String) 集群控制面及节点使用的的安全组。
 - `subnet_ids` (Set of String) 集群控制面在私有网络内通信的子网 ID。
@@ -99,6 +101,19 @@ Read-Only:
 
 
 
+<a id="nestedatt--irsa_config"></a>
+### Nested Schema for `irsa_config`
+
+Read-Only:
+
+- `audience` (String) 接受令牌的标识符。
+- `enabled` (Boolean) 是否开启 IRSA 功能，参数值说明：true：开启,false：不开启
+- `issuer` (String) OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。
+- `jwks_url` (String) JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。
+- `oidc_trn` (String) OIDC 提供商 TRN。
+- `open_id_config_url` (String) OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。
+
+
 <a id="nestedatt--logging_config"></a>
 ### Nested Schema for `logging_config`
 
@@ -125,6 +140,7 @@ Read-Only:
 Read-Only:
 
 - `component_configs` (Attributes Set) 监控组件的配置列表。 (see [below for nested schema](#nestedatt--monitoring_config--component_configs))
+- `enable_metrics_external_collection` (Boolean) 是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。
 - `workspace_id` (String) 监控数据所属的工作区 ID。
 
 <a id="nestedatt--monitoring_config--component_configs"></a>
@@ -166,6 +182,7 @@ Read-Only:
 
 - `max_pods_per_node` (Number) Flannel 模型容器网络的单节点 Pod 实例数量上限，取值：64（默认值）、16、32、128、256。
 - `pod_cidrs` (Set of String) Flannel 容器网络的 Pod CIDR。
+- `subnet_ids` (Set of String) Flannel 容器网络模型对应的 Pod 子网 ID 列表。
 
 
 <a id="nestedatt--pods_config--vpc_cni_config"></a>

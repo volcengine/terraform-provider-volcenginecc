@@ -30,12 +30,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceFactory("volcenginecc_ecs_launch_template_version", launchtemplateVersionResource)
+	registry.AddResourceFactory("volcenginecc_ecs_launch_template_version", launchTemplateVersionResource)
 }
 
-// launchtemplateVersionResource returns the Terraform volcenginecc_ecs_launch_template_version resource.
-// This Terraform resource corresponds to the Cloud Control Volcengine::ECS::LaunchtemplateVersion resource.
-func launchtemplateVersionResource(ctx context.Context) (resource.Resource, error) {
+// launchTemplateVersionResource returns the Terraform volcenginecc_ecs_launch_template_version resource.
+// This Terraform resource corresponds to the Cloud Control Volcengine::ECS::LaunchTemplateVersion resource.
+func launchTemplateVersionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: DeploymentSetGroupNumber
 		// Cloud Control resource type schema:
@@ -871,7 +871,7 @@ func launchtemplateVersionResource(ctx context.Context) (resource.Resource, erro
 
 	var opts generic.ResourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::ECS::LaunchtemplateVersion").WithTerraformTypeName("volcenginecc_ecs_launch_template_version")
+	opts = opts.WithCloudControlTypeName("Volcengine::ECS::LaunchTemplateVersion").WithTerraformTypeName("volcenginecc_ecs_launch_template_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bandwidth":                       "Bandwidth",

@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("volcenginecc_rdsmssql_allow_lists", allowlistsDataSource)
+	registry.AddDataSourceFactory("volcenginecc_rdsmssql_allow_lists", allowListsDataSource)
 }
 
-// allowlistsDataSource returns the Terraform volcenginecc_rdsmssql_allow_lists data source.
-// This Terraform data source corresponds to the Cloud Control Volcengine::RDSMsSQL::Allowlist resource.
-func allowlistsDataSource(ctx context.Context) (datasource.DataSource, error) {
+// allowListsDataSource returns the Terraform volcenginecc_rdsmssql_allow_lists data source.
+// This Terraform data source corresponds to the Cloud Control Volcengine::RDSMsSQL::AllowList resource.
+func allowListsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -35,13 +35,13 @@ func allowlistsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Plural Data Source schema for Volcengine::RDSMsSQL::Allowlist",
+		Description: "Plural Data Source schema for Volcengine::RDSMsSQL::AllowList",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::RDSMsSQL::Allowlist").WithTerraformTypeName("volcenginecc_rdsmssql_allow_lists")
+	opts = opts.WithCloudControlTypeName("Volcengine::RDSMsSQL::AllowList").WithTerraformTypeName("volcenginecc_rdsmssql_allow_lists")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)

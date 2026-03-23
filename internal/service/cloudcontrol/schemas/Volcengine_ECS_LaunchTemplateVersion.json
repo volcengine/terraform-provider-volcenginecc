@@ -345,7 +345,7 @@
     "tagOnCreate": true,
     "taggable": true
   },
-  "typeName": "Volcengine::ECS::LaunchtemplateVersion",
+  "typeName": "Volcengine::ECS::LaunchTemplateVersion",
   "writeOnlyProperties": [
     "/properties/ImageName"
   ]

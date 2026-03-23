@@ -154,5 +154,5 @@
   "tagging": {
     "taggable": false
   },
-  "typeName": "Volcengine::RDSMsSQL::Allowlist"
+  "typeName": "Volcengine::RDSMsSQL::AllowList"
 }

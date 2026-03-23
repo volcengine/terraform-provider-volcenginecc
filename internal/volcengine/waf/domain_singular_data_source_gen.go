@@ -448,6 +448,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "LostAssociationFromALB": {
+		//	        "description": "是否从 ALB 中丢失关联。",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      },
@@ -496,7 +497,8 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: LostAssociationFromALB
 					"lost_association_from_alb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "是否从 ALB 中丢失关联。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1001,29 +1003,37 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccessProtocol": {
+		//	        "description": "接入协议类型。",
 		//	        "type": "string"
 		//	      },
 		//	      "DefenceMode": {
+		//	        "description": "防护模式。",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      },
 		//	      "InstanceID": {
+		//	        "description": "实例 ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
+		//	        "description": "实例名称。",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerID": {
+		//	        "description": "监听器 ID。",
 		//	        "type": "string"
 		//	      },
 		//	      "LostAssociationFromALB": {
+		//	        "description": "是否从 ALB 中丢失关联。",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      },
 		//	      "Port": {
+		//	        "description": "监听器的端口号。",
 		//	        "type": "string"
 		//	      },
 		//	      "Protocol": {
+		//	        "description": "监听器协议类型。",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1037,35 +1047,43 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccessProtocol
 					"access_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "接入协议类型。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DefenceMode
 					"defence_mode": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "防护模式。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceID
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "实例 ID。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
 					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "实例名称。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerID
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "监听器 ID。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: LostAssociationFromALB
 					"lost_association_from_alb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "是否从 ALB 中丢失关联。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "监听器的端口号。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "监听器协议类型。",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

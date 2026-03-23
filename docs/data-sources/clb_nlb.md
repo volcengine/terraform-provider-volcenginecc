@@ -21,6 +21,7 @@ Data Source schema for Volcengine::CLB::NLB
 
 ### Read-Only
 
+- `access_log` (Attributes) NLB实例的访问日志信息。 (see [below for nested schema](#nestedatt--access_log))
 - `account_id` (String) NLB实例所属的账号ID。
 - `billing_status` (String) NLB实例的计费状态。Normal: 正常，FinancialLocked: 被锁定。
 - `billing_type` (Number) NLB实例的计费类型。3：按使用量计费
@@ -47,6 +48,16 @@ Data Source schema for Volcengine::CLB::NLB
 - `updated_time` (String) NLB实例的更新时间。
 - `vpc_id` (String) NLB实例所属的VPC ID。
 - `zone_mappings` (Attributes Set) NLB实例的可用区信息。 (see [below for nested schema](#nestedatt--zone_mappings))
+
+<a id="nestedatt--access_log"></a>
+### Nested Schema for `access_log`
+
+Read-Only:
+
+- `access_log_enabled` (Boolean) 是否开启访问日志。true：是。flase：否。
+- `project_id` (String) 日志项目的ID。
+- `topic_id` (String) 日志主题的ID。
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

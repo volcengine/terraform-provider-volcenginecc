@@ -101,6 +101,10 @@
       "description": "记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。",
       "type": "integer"
     },
+    "WeightEnabled": {
+      "description": "该记录集是否开启了负载均衡。",
+      "type": "boolean"
+    },
     "ZID": {
       "description": "域名 ID。",
       "type": "integer"
@@ -121,5 +125,8 @@
   "tagging": {
     "taggable": false
   },
-  "typeName": "Volcengine::PrivateZone::Record"
+  "typeName": "Volcengine::PrivateZone::Record",
+  "writeOnlyProperties": [
+    "/properties/WeightEnabled"
+  ]
 }

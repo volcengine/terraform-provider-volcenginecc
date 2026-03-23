@@ -418,11 +418,11 @@ resource_schema "volcengine_filenas_snapshot" {
 }
 
 resource_schema "volcengine_ecs_launch_template" {
-  cloudcontrol_type_name = "Volcengine::ECS::Launchtemplate"
+  cloudcontrol_type_name = "Volcengine::ECS::LaunchTemplate"
 }
 
 resource_schema "volcengine_ecs_launch_template_version" {
-  cloudcontrol_type_name = "Volcengine::ECS::LaunchtemplateVersion"
+  cloudcontrol_type_name = "Volcengine::ECS::LaunchTemplateVersion"
 }
 
 resource_schema "volcengine_ecs_deployment_set" {
@@ -598,7 +598,7 @@ resource_schema "volcengine_alb_rule" {
 }
 
 resource_schema "volcengine_rdsmssql_allow_list" {
-  cloudcontrol_type_name = "Volcengine::RDSMsSQL::Allowlist"
+  cloudcontrol_type_name = "Volcengine::RDSMsSQL::AllowList"
 }
 
 resource_schema "volcengine_rdspostgresql_database" {
@@ -651,4 +651,12 @@ resource_schema "volcengine_vedbm_database" {
 
 resource_schema "volcengine_organization_organization" {
   cloudcontrol_type_name = "Volcengine::Organization::Organization"
+}
+
+resource_schema "volcengine_vedbm_allow_list" {
+  cloudcontrol_type_name = "Volcengine::VEDBM::AllowList"
+}
+
+resource_schema "volcengine_kafka_instance" {
+  cloudcontrol_type_name = "Volcengine::Kafka::Instance"
 }

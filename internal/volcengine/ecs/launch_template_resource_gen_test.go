@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineECSLaunchtemplate_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::ECS::Launchtemplate", "volcenginecc_ecs_launch_template", "test")
+func TestAccVolcengineECSLaunchTemplate_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::ECS::LaunchTemplate", "volcenginecc_ecs_launch_template", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

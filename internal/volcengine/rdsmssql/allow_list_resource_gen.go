@@ -21,12 +21,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceFactory("volcenginecc_rdsmssql_allow_list", allowlistResource)
+	registry.AddResourceFactory("volcenginecc_rdsmssql_allow_list", allowListResource)
 }
 
-// allowlistResource returns the Terraform volcenginecc_rdsmssql_allow_list resource.
-// This Terraform resource corresponds to the Cloud Control Volcengine::RDSMsSQL::Allowlist resource.
-func allowlistResource(ctx context.Context) (resource.Resource, error) {
+// allowListResource returns the Terraform volcenginecc_rdsmssql_allow_list resource.
+// This Terraform resource corresponds to the Cloud Control Volcengine::RDSMsSQL::AllowList resource.
+func allowListResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: AllowList
 		// Cloud Control resource type schema:
@@ -277,7 +277,7 @@ func allowlistResource(ctx context.Context) (resource.Resource, error) {
 
 	var opts generic.ResourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::RDSMsSQL::Allowlist").WithTerraformTypeName("volcenginecc_rdsmssql_allow_list")
+	opts = opts.WithCloudControlTypeName("Volcengine::RDSMsSQL::AllowList").WithTerraformTypeName("volcenginecc_rdsmssql_allow_list")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_list":              "AllowList",

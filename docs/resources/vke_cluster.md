@@ -65,7 +65,7 @@ resource "volcenginecc_vke_cluster" "VKEClusterDemo" {
 - `cluster_config` (Attributes) 集群控制面及部分节点的网络配置。 (see [below for nested schema](#nestedatt--cluster_config))
 - `delete_protection_enabled` (Boolean) 集群删除保护，取值：false：（默认值）关闭删除保护。true：开启删除保护，不允许直接删除集群。
 - `description` (String) 集群描述。长度限制为 300 个字符以内。
-- `kubernetes_version` (String) 集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）
+- `irsa_config` (Attributes) IRSA（IAM Role for Service Account）能力相关参数配置。 (see [below for nested schema](#nestedatt--irsa_config))
 - `kubernetes_version_create` (String) 集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。(创建使用)
 - `logging_config` (Attributes) 集群的日志配置信息。 (see [below for nested schema](#nestedatt--logging_config))
 - `monitoring_config` (Attributes) 监控配置信息。 (see [below for nested schema](#nestedatt--monitoring_config))
@@ -81,6 +81,7 @@ resource "volcenginecc_vke_cluster" "VKEClusterDemo" {
 - `cluster_id` (String) 集群 ID。
 - `created_time` (String) 集群创建时间。标准 RFC3339 格式的 UTC+0 时间。
 - `id` (String) Uniquely identifies the resource.
+- `kubernetes_version` (String) 集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）
 - `message` (String) 集群状态描述。
 - `node_statistics` (Attributes) 集群中各主状态下对应的节点数量统计。 (see [below for nested schema](#nestedatt--node_statistics))
 - `status` (Attributes) 集群状态。 (see [below for nested schema](#nestedatt--status))
@@ -100,6 +101,7 @@ Optional:
 Read-Only:
 
 - `api_server_endpoints` (Attributes) 集群 API Server 访问的 IPv4 地址信息。 (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints))
+- `ip_family` (String) 集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。
 - `security_group_ids` (Set of String) 集群控制面及节点使用的的安全组。
 - `vpc_id` (String) 集群控制面及部分节点的网络所在的私有网络（VPC）ID。
 
@@ -147,6 +149,22 @@ Read-Only:
 
 
 
+<a id="nestedatt--irsa_config"></a>
+### Nested Schema for `irsa_config`
+
+Optional:
+
+- `enabled` (Boolean) 是否开启 IRSA 功能，参数值说明：true：开启,false：不开启
+
+Read-Only:
+
+- `audience` (String) 接受令牌的标识符。
+- `issuer` (String) OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。
+- `jwks_url` (String) JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。
+- `oidc_trn` (String) OIDC 提供商 TRN。
+- `open_id_config_url` (String) OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。
+
+
 <a id="nestedatt--logging_config"></a>
 ### Nested Schema for `logging_config`
 
@@ -174,6 +192,7 @@ Optional:
 
 - `component_configs` (Attributes Set) 监控组件的配置列表。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--monitoring_config--component_configs))
+- `enable_metrics_external_collection` (Boolean) 是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。
 - `workspace_id` (String) 监控数据所属的工作区 ID。
 
 <a id="nestedatt--monitoring_config--component_configs"></a>
@@ -202,6 +221,7 @@ Optional:
 
 - `max_pods_per_node` (Number) Flannel 模型容器网络的单节点 Pod 实例数量上限，取值：64（默认值）、16、32、128、256。
 - `pod_cidrs` (Set of String) Flannel 容器网络的 Pod CIDR。
+- `subnet_ids` (Set of String) Flannel 容器网络模型对应的 Pod 子网 ID 列表。
 
 
 <a id="nestedatt--pods_config--vpc_cni_config"></a>

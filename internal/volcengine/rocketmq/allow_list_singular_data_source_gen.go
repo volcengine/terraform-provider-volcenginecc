@@ -100,18 +100,6 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "白名单内的IP地址类型，当前仅支持IPv4。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: ApplyDBInstanceNum
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "已应用实例数量，即当前该白名单所绑定的实例数。主要目的是确认本次修改的影响范围，避免误操作引发故障。",
-		//	  "format": "int32",
-		//	  "type": "integer"
-		//	}
-		"apply_db_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "已应用实例数量，即当前该白名单所绑定的实例数。主要目的是确认本次修改的影响范围，避免误操作引发故障。",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceNum
 		// Cloud Control resource type schema:
 		//
@@ -208,7 +196,6 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"allow_list_ip_num":       "AllowListIPNum",
 		"allow_list_name":         "AllowListName",
 		"allow_list_type":         "AllowListType",
-		"apply_db_instance_num":   "ApplyDBInstanceNum",
 		"associated_instance_num": "AssociatedInstanceNum",
 		"associated_instances":    "AssociatedInstances",
 		"instance_id":             "InstanceId",

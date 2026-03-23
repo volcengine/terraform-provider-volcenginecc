@@ -17,6 +17,9 @@ resource "volcenginecc_rocketmq_allow_list" "RocketMQAllowListDemo" {
   allow_list      = "192.xxx.0.0/24"
   allow_list_name = "ccapi-test"
   allow_list_desc = "this is a description"
+  associated_instances = [{
+    instance_id = "rocketmq-cnnxxxx68a106"
+  }]
 }
 ```
 
@@ -33,7 +36,6 @@ resource "volcenginecc_rocketmq_allow_list" "RocketMQAllowListDemo" {
 - `allow_list_category` (String) 白名单分类。
 - `allow_list_desc` (String) 白名单描述。
 - `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `apply_db_instance_num` (Number) 已应用实例数量，即当前该白名单所绑定的实例数。主要目的是确认本次修改的影响范围，避免误操作引发故障。
 - `associated_instances` (Attributes List) 绑定的实例列表。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associated_instances))
 - `instance_id` (String) 实例ID。
