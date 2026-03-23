@@ -64,6 +64,7 @@ resource "volcenginecc_clb_nlb" "NLBDemo" {
 
 ### Read-Only
 
+- `access_log` (Attributes) NLB实例的访问日志信息。 (see [below for nested schema](#nestedatt--access_log))
 - `billing_status` (String) NLB实例的计费状态。Normal: 正常，FinancialLocked: 被锁定。
 - `billing_type` (Number) NLB实例的计费类型。3：按使用量计费
 - `created_time` (String) NLB实例的创建时间。
@@ -103,6 +104,16 @@ Optional:
 
 - `key` (String) 标签键。
 - `value` (String) 标签值。
+
+
+<a id="nestedatt--access_log"></a>
+### Nested Schema for `access_log`
+
+Read-Only:
+
+- `access_log_enabled` (Boolean) 是否开启访问日志。true：是。flase：否。
+- `project_id` (String) 日志项目的ID。
+- `topic_id` (String) 日志主题的ID。
 
 ## Import
 

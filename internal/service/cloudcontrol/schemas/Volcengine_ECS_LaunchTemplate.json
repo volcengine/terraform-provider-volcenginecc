@@ -376,7 +376,7 @@
     "tagOnCreate": true,
     "taggable": true
   },
-  "typeName": "Volcengine::ECS::Launchtemplate",
+  "typeName": "Volcengine::ECS::LaunchTemplate",
   "writeOnlyProperties": [
     "/properties/LaunchTemplateVersion"
   ]

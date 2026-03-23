@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineRDSMsSQLAllowlistDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::RDSMsSQL::Allowlist", "volcenginecc_rdsmssql_allow_list", "test")
+func TestAccVolcengineRDSMsSQLAllowListDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::RDSMsSQL::AllowList", "volcenginecc_rdsmssql_allow_list", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
@@ -24,8 +24,8 @@ func TestAccVolcengineRDSMsSQLAllowlistDataSource_basic(t *testing.T) {
 	})
 }
 
-func TestAccVolcengineRDSMsSQLAllowlistDataSource_NonExistent(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::RDSMsSQL::Allowlist", "volcenginecc_rdsmssql_allow_list", "test")
+func TestAccVolcengineRDSMsSQLAllowListDataSource_NonExistent(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::RDSMsSQL::AllowList", "volcenginecc_rdsmssql_allow_list", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("volcenginecc_ecs_launch_template_version", launchtemplateVersionDataSource)
+	registry.AddDataSourceFactory("volcenginecc_ecs_launch_template_version", launchTemplateVersionDataSource)
 }
 
-// launchtemplateVersionDataSource returns the Terraform volcenginecc_ecs_launch_template_version data source.
-// This Terraform data source corresponds to the Cloud Control Volcengine::ECS::LaunchtemplateVersion resource.
-func launchtemplateVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
+// launchTemplateVersionDataSource returns the Terraform volcenginecc_ecs_launch_template_version data source.
+// This Terraform data source corresponds to the Cloud Control Volcengine::ECS::LaunchTemplateVersion resource.
+func launchTemplateVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: DeploymentSetGroupNumber
 		// Cloud Control resource type schema:
@@ -598,13 +598,13 @@ func launchtemplateVersionDataSource(ctx context.Context) (datasource.DataSource
 	}
 
 	schema := schema.Schema{
-		Description: "Data Source schema for Volcengine::ECS::LaunchtemplateVersion",
+		Description: "Data Source schema for Volcengine::ECS::LaunchTemplateVersion",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::ECS::LaunchtemplateVersion").WithTerraformTypeName("volcenginecc_ecs_launch_template_version")
+	opts = opts.WithCloudControlTypeName("Volcengine::ECS::LaunchTemplateVersion").WithTerraformTypeName("volcenginecc_ecs_launch_template_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bandwidth":                       "Bandwidth",

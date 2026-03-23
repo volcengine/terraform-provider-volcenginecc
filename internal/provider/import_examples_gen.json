@@ -793,5 +793,15 @@
         "resource": "volcenginecc_organization_organization",
         "identifier": ["OrganizationID"],
         "path": "./examples/resources/volcenginecc_organization_organization/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vedbm_allow_list",
+        "identifier": ["AllowListId"],
+        "path": "./examples/resources/volcenginecc_vedbm_allow_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kafka_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_kafka_instance/import.sh"
     }
 ]

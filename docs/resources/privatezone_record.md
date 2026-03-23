@@ -42,6 +42,7 @@ resource "volcenginecc_privatezone_record" "PrivateZoneRecordDemo" {
 - `remark` (String) 备注。支持 UTF-8 字符。不能超过 16 个字符。默认值为空字符串。
 - `ttl` (Number) 解析记录的过期时间。单位为秒。默认值为 600。
 - `weight` (Number) 记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。
+- `weight_enabled` (Boolean) 该记录集是否开启了负载均衡。
 
 ### Read-Only
 

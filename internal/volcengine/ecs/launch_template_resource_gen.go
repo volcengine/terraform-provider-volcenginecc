@@ -30,12 +30,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceFactory("volcenginecc_ecs_launch_template", launchtemplateResource)
+	registry.AddResourceFactory("volcenginecc_ecs_launch_template", launchTemplateResource)
 }
 
-// launchtemplateResource returns the Terraform volcenginecc_ecs_launch_template resource.
-// This Terraform resource corresponds to the Cloud Control Volcengine::ECS::Launchtemplate resource.
-func launchtemplateResource(ctx context.Context) (resource.Resource, error) {
+// launchTemplateResource returns the Terraform volcenginecc_ecs_launch_template resource.
+// This Terraform resource corresponds to the Cloud Control Volcengine::ECS::LaunchTemplate resource.
+func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: CreatedAt
 		// Cloud Control resource type schema:
@@ -944,7 +944,7 @@ func launchtemplateResource(ctx context.Context) (resource.Resource, error) {
 
 	var opts generic.ResourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::ECS::Launchtemplate").WithTerraformTypeName("volcenginecc_ecs_launch_template")
+	opts = opts.WithCloudControlTypeName("Volcengine::ECS::LaunchTemplate").WithTerraformTypeName("volcenginecc_ecs_launch_template")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bandwidth":                       "Bandwidth",

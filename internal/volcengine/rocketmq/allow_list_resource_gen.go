@@ -129,23 +129,6 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: ApplyDBInstanceNum
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "已应用实例数量，即当前该白名单所绑定的实例数。主要目的是确认本次修改的影响范围，避免误操作引发故障。",
-		//	  "format": "int32",
-		//	  "type": "integer"
-		//	}
-		"apply_db_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "已应用实例数量，即当前该白名单所绑定的实例数。主要目的是确认本次修改的影响范围，避免误操作引发故障。",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ApplyDBInstanceNum is a write-only property.
-		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceNum
 		// Cloud Control resource type schema:
 		//
@@ -257,16 +240,11 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		"allow_list_ip_num":       "AllowListIPNum",
 		"allow_list_name":         "AllowListName",
 		"allow_list_type":         "AllowListType",
-		"apply_db_instance_num":   "ApplyDBInstanceNum",
 		"associated_instance_num": "AssociatedInstanceNum",
 		"associated_instances":    "AssociatedInstances",
 		"instance_id":             "InstanceId",
 		"instance_name":           "InstanceName",
 		"vpc":                     "VPC",
-	})
-
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/ApplyDBInstanceNum",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

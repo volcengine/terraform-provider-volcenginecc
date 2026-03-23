@@ -95,6 +95,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
 		//	      "type": "boolean"
 		//	    },
+		//	    "IpFamily": {
+		//	      "description": "集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。",
+		//	      "type": "string"
+		//	    },
 		//	    "ResourcePublicAccessDefaultEnabled": {
 		//	      "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
 		//	      "type": "boolean"
@@ -221,6 +225,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: IpFamily
+				"ip_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ResourcePublicAccessDefaultEnabled
 				"resource_public_access_default_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
@@ -228,7 +240,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
-						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
@@ -334,6 +345,98 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IrsaConfig
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "IRSA（IAM Role for Service Account）能力相关参数配置。",
+		//	  "properties": {
+		//	    "Audience": {
+		//	      "description": "接受令牌的标识符。",
+		//	      "type": "string"
+		//	    },
+		//	    "Enabled": {
+		//	      "description": "是否开启 IRSA 功能，参数值说明：true：开启,false：不开启",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Issuer": {
+		//	      "description": "OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。",
+		//	      "type": "string"
+		//	    },
+		//	    "JwksUrl": {
+		//	      "description": "JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。",
+		//	      "type": "string"
+		//	    },
+		//	    "OidcTrn": {
+		//	      "description": "OIDC 提供商 TRN。",
+		//	      "type": "string"
+		//	    },
+		//	    "OpenIdConfigUrl": {
+		//	      "description": "OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"irsa_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Audience
+				"audience": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "接受令牌的标识符。",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "是否开启 IRSA 功能，参数值说明：true：开启,false：不开启",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Issuer
+				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: JwksUrl
+				"jwks_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OidcTrn
+				"oidc_trn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "OIDC 提供商 TRN。",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OpenIdConfigUrl
+				"open_id_config_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "IRSA（IAM Role for Service Account）能力相关参数配置。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KubernetesVersion
 		// Cloud Control resource type schema:
 		//
@@ -343,7 +446,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"kubernetes_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -517,6 +619,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": true
 		//	    },
+		//	    "EnableMetricsExternalCollection": {
+		//	      "description": "是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。",
+		//	      "type": "boolean"
+		//	    },
 		//	    "WorkspaceId": {
 		//	      "description": "监控数据所属的工作区 ID。",
 		//	      "type": "string"
@@ -555,6 +661,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnableMetricsExternalCollection
+				"enable_metrics_external_collection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WorkspaceId
@@ -690,6 +805,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "type": "array",
 		//	          "uniqueItems": true
+		//	        },
+		//	        "SubnetIds": {
+		//	          "description": "Flannel 容器网络模型对应的 Pod 子网 ID 列表。",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -748,12 +872,24 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
+								int64planmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: PodCidrs
 						"pod_cidrs": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "Flannel 容器网络的 Pod CIDR。",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+								setplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetIds
+						"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Flannel 容器网络模型对应的 Pod 子网 ID 列表。",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -766,7 +902,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PodNetworkMode
@@ -1072,6 +1207,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"api_server_endpoints":                   "ApiServerEndpoints",
 		"api_server_public_access_config":        "ApiServerPublicAccessConfig",
 		"api_server_public_access_enabled":       "ApiServerPublicAccessEnabled",
+		"audience":                               "Audience",
 		"bandwidth":                              "Bandwidth",
 		"billing_type":                           "BillingType",
 		"cluster_config":                         "ClusterConfig",
@@ -1083,11 +1219,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"delete_protection_enabled":              "DeleteProtectionEnabled",
 		"deleting_count":                         "DeletingCount",
 		"description":                            "Description",
+		"enable_metrics_external_collection":     "EnableMetricsExternalCollection",
 		"enabled":                                "Enabled",
 		"failed_count":                           "FailedCount",
 		"flannel_config":                         "FlannelConfig",
+		"ip_family":                              "IpFamily",
 		"ipv_4":                                  "Ipv4",
+		"irsa_config":                            "IrsaConfig",
 		"isp":                                    "Isp",
+		"issuer":                                 "Issuer",
+		"jwks_url":                               "JwksUrl",
 		"key":                                    "Key",
 		"kubernetes_version":                     "KubernetesVersion",
 		"kubernetes_version_create":              "KubernetesVersionCreate",
@@ -1102,6 +1243,8 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"monitoring_config":                      "MonitoringConfig",
 		"name":                                   "Name",
 		"node_statistics":                        "NodeStatistics",
+		"oidc_trn":                               "OidcTrn",
+		"open_id_config_url":                     "OpenIdConfigUrl",
 		"phase":                                  "Phase",
 		"pod_cidrs":                              "PodCidrs",
 		"pod_network_mode":                       "PodNetworkMode",
@@ -1135,6 +1278,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/KubernetesVersion",
 		"/properties/ClusterId",
 		"/properties/Message",
 		"/properties/Type",
@@ -1146,14 +1290,20 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/LoggingConfig/LogSetups/*/LogTopicId",
 		"/properties/NodeStatistics",
 		"/properties/Status",
+		"/properties/IrsaConfig/Audience",
+		"/properties/IrsaConfig/Issuer",
+		"/properties/IrsaConfig/JwksUrl",
+		"/properties/IrsaConfig/OidcTrn",
+		"/properties/IrsaConfig/OpenIdConfigUrl",
+		"/properties/ClusterConfig/IpFamily",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/KubernetesVersionCreate",
 		"/properties/ProjectName",
-		"/properties/ClusterConfig/ResourcePublicAccessDefaultEnabled",
 		"/properties/PodsConfig/PodNetworkMode",
-		"/properties/PodsConfig/FlannelConfig",
+		"/properties/PodsConfig/FlannelConfig/MaxPodsPerNode",
+		"/properties/PodsConfig/FlannelConfig/PodCidrs",
 		"/properties/PodsConfig/VpcCniConfig/TrunkEniEnabled",
 		"/properties/ServicesConfig",
 		"/properties/LoggingConfig/LogProjectId",

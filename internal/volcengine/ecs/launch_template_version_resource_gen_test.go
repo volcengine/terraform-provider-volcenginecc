@@ -12,8 +12,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineECSLaunchtemplateVersion_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::ECS::LaunchtemplateVersion", "volcenginecc_ecs_launch_template_version", "test")
+func TestAccVolcengineECSLaunchTemplateVersion_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::ECS::LaunchTemplateVersion", "volcenginecc_ecs_launch_template_version", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -30,8 +30,8 @@ func TestAccVolcengineECSLaunchtemplateVersion_basic(t *testing.T) {
 	})
 }
 
-func TestAccVolcengineECSLaunchtemplateVersion_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::ECS::LaunchtemplateVersion", "volcenginecc_ecs_launch_template_version", "test")
+func TestAccVolcengineECSLaunchTemplateVersion_disappears(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::ECS::LaunchTemplateVersion", "volcenginecc_ecs_launch_template_version", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

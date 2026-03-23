@@ -33,4 +33,5 @@ Data Source schema for Volcengine::PrivateZone::Record
 - `updated_at` (String) 解析记录最近一次的更新时间。
 - `value` (String) 记录值。
 - `weight` (Number) 记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。
+- `weight_enabled` (Boolean) 该记录集是否开启了负载均衡。
 - `zid` (Number) 域名 ID。

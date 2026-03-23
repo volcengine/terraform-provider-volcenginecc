@@ -23,6 +23,48 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::CLB::NLB resource.
 func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessLog
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "NLB实例的访问日志信息。",
+		//	  "properties": {
+		//	    "AccessLogEnabled": {
+		//	      "description": "是否开启访问日志。true：是。flase：否。",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ProjectId": {
+		//	      "description": "日志项目的ID。",
+		//	      "type": "string"
+		//	    },
+		//	    "TopicId": {
+		//	      "description": "日志主题的ID。",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"access_log": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessLogEnabled
+				"access_log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "是否开启访问日志。true：是。flase：否。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProjectId
+				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "日志项目的ID。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicId
+				"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "日志主题的ID。",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "NLB实例的访问日志信息。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
@@ -532,6 +574,8 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::CLB::NLB").WithTerraformTypeName("volcenginecc_clb_nlb")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_log":                     "AccessLog",
+		"access_log_enabled":             "AccessLogEnabled",
 		"account_id":                     "AccountId",
 		"billing_status":                 "BillingStatus",
 		"billing_type":                   "BillingType",
@@ -561,12 +605,14 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"managed_security_group_id":      "ManagedSecurityGroupId",
 		"modification_protection_status": "ModificationProtectionStatus",
 		"overdue_time":                   "OverdueTime",
+		"project_id":                     "ProjectId",
 		"project_name":                   "ProjectName",
 		"reclaimed_time":                 "ReclaimedTime",
 		"security_group_ids":             "SecurityGroupIds",
 		"status":                         "Status",
 		"subnet_id":                      "SubnetId",
 		"tags":                           "Tags",
+		"topic_id":                       "TopicId",
 		"updated_time":                   "UpdatedTime",
 		"value":                          "Value",
 		"vpc_id":                         "VpcId",

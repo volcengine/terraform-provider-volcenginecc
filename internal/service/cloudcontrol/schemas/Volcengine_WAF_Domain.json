@@ -81,6 +81,7 @@
           "type": "string"
         },
         "LostAssociationFromALB": {
+          "description": "是否从 ALB 中丢失关联。",
           "format": "int32",
           "type": "integer"
         },
@@ -151,29 +152,37 @@
     "TCPListenerConfig": {
       "properties": {
         "AccessProtocol": {
+          "description": "接入协议类型。",
           "type": "string"
         },
         "DefenceMode": {
+          "description": "防护模式。",
           "format": "int32",
           "type": "integer"
         },
         "InstanceID": {
+          "description": "实例 ID。",
           "type": "string"
         },
         "InstanceName": {
+          "description": "实例名称。",
           "type": "string"
         },
         "ListenerID": {
+          "description": "监听器 ID。",
           "type": "string"
         },
         "LostAssociationFromALB": {
+          "description": "是否从 ALB 中丢失关联。",
           "format": "int32",
           "type": "integer"
         },
         "Port": {
+          "description": "监听器的端口号。",
           "type": "string"
         },
         "Protocol": {
+          "description": "监听器协议类型。",
           "type": "string"
         }
       },

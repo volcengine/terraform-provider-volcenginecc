@@ -154,6 +154,17 @@ func recordDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WeightEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "该记录集是否开启了负载均衡。",
+		//	  "type": "boolean"
+		//	}
+		"weight_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "该记录集是否开启了负载均衡。",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ZID
 		// Cloud Control resource type schema:
 		//
@@ -182,19 +193,20 @@ func recordDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::PrivateZone::Record").WithTerraformTypeName("volcenginecc_privatezone_record")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":    "CreatedAt",
-		"enable":        "Enable",
-		"host":          "Host",
-		"last_operator": "LastOperator",
-		"line":          "Line",
-		"record_id":     "RecordId",
-		"remark":        "Remark",
-		"ttl":           "TTL",
-		"type":          "Type",
-		"updated_at":    "UpdatedAt",
-		"value":         "Value",
-		"weight":        "Weight",
-		"zid":           "ZID",
+		"created_at":     "CreatedAt",
+		"enable":         "Enable",
+		"host":           "Host",
+		"last_operator":  "LastOperator",
+		"line":           "Line",
+		"record_id":      "RecordId",
+		"remark":         "Remark",
+		"ttl":            "TTL",
+		"type":           "Type",
+		"updated_at":     "UpdatedAt",
+		"value":          "Value",
+		"weight":         "Weight",
+		"weight_enabled": "WeightEnabled",
+		"zid":            "ZID",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

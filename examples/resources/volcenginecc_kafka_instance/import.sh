@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_kafka_instance.example "instance_id"
