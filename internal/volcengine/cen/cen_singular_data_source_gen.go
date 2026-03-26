@@ -99,6 +99,95 @@ func cENDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "CEN实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255个字符。不填则默认为空。",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Instances
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "已关联的网络实例列表",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "CEN关联的网络实例",
+		//	    "properties": {
+		//	      "CenId": {
+		//	        "description": "云企业网实例的ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "CreationTime": {
+		//	        "description": "网络实例的创建时间。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceId": {
+		//	        "description": "网络实例的ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceOwnerId": {
+		//	        "description": "网络实例所属账号的ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceRegionId": {
+		//	        "description": "网络实例所在的地域。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceType": {
+		//	        "description": "网络实例的类型。",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "网络实例的加载状态。Attaching：加载中Available：可用",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "InstanceId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"instances": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CenId
+					"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "云企业网实例的ID。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CreationTime
+					"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例的创建时间。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceId
+					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例的ID。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceOwnerId
+					"instance_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例所属账号的ID。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceRegionId
+					"instance_region_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例所在的地域。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例的类型。",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例的加载状态。Attaching：加载中Available：可用",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "已关联的网络实例列表",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
@@ -208,6 +297,11 @@ func cENDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cen_name":                  "CenName",
 		"creation_time":             "CreationTime",
 		"description":               "Description",
+		"instance_id":               "InstanceId",
+		"instance_owner_id":         "InstanceOwnerId",
+		"instance_region_id":        "InstanceRegionId",
+		"instance_type":             "InstanceType",
+		"instances":                 "Instances",
 		"key":                       "Key",
 		"project_name":              "ProjectName",
 		"status":                    "Status",

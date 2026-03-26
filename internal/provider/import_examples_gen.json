@@ -803,5 +803,10 @@
         "resource": "volcenginecc_kafka_instance",
         "identifier": ["InstanceId"],
         "path": "./examples/resources/volcenginecc_kafka_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_emr_node_group",
+        "identifier": ["ClusterId","NodeGroupId"],
+        "path": "./examples/resources/volcenginecc_emr_node_group/import.sh"
     }
 ]

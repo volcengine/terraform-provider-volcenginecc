@@ -4,6 +4,43 @@
     "/properties/ProjectName"
   ],
   "definitions": {
+    "CenInstance": {
+      "description": "CEN关联的网络实例",
+      "properties": {
+        "CenId": {
+          "description": "云企业网实例的ID。",
+          "type": "string"
+        },
+        "CreationTime": {
+          "description": "网络实例的创建时间。",
+          "type": "string"
+        },
+        "InstanceId": {
+          "description": "网络实例的ID。",
+          "type": "string"
+        },
+        "InstanceOwnerId": {
+          "description": "网络实例所属账号的ID。",
+          "type": "string"
+        },
+        "InstanceRegionId": {
+          "description": "网络实例所在的地域。",
+          "type": "string"
+        },
+        "InstanceType": {
+          "description": "网络实例的类型。",
+          "type": "string"
+        },
+        "Status": {
+          "description": "网络实例的加载状态。Attaching：加载中Available：可用",
+          "type": "string"
+        }
+      },
+      "required": [
+        "InstanceId"
+      ],
+      "type": "object"
+    },
     "Tag": {
       "properties": {
         "Key": {
@@ -39,12 +76,16 @@
     "create": {
       "permissions": [
         "cen:CreateCen",
-        "cen:DescribeCenAttributes"
+        "cen:AttachInstanceToCen",
+        "cen:DescribeCenAttributes",
+        "cen:DescribeCenAttachedInstances"
       ]
     },
     "delete": {
       "permissions": [
         "cen:DeleteCen",
+        "cen:DetachInstanceFromCen",
+        "cen:DisassociateCenBandwidthPackage",
         "cen:DescribeCenAttributes"
       ]
     },
@@ -55,13 +96,17 @@
     },
     "read": {
       "permissions": [
-        "cen:DescribeCenAttributes"
+        "cen:DescribeCenAttributes",
+        "cen:DescribeCenAttachedInstances"
       ]
     },
     "update": {
       "permissions": [
         "cen:ModifyCenAttributes",
         "cen:DescribeCenAttributes",
+        "cen:DescribeCenAttachedInstances",
+        "cen:DetachInstanceFromCen",
+        "cen:AttachInstanceToCen",
         "cen:UntagResources",
         "cen:TagResources"
       ]
@@ -108,6 +153,15 @@
       "semantic": "description",
       "type": "string"
     },
+    "Instances": {
+      "description": "已关联的网络实例列表",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/CenInstance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
     "ProjectName": {
       "description": "CEN实例所属项目的名称。不填则默认为default。",
       "semantic": "projectName",
@@ -146,7 +200,10 @@
     "/properties/CenId",
     "/properties/Status",
     "/properties/CreationTime",
-    "/properties/UpdateTime"
+    "/properties/UpdateTime",
+    "/properties/Instances/*/CenId",
+    "/properties/Instances/*/CreationTime",
+    "/properties/Instances/*/Status"
   ],
   "tagging": {
     "tagOnCreate": true,
