@@ -1,0 +1,355 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/NodeGroupType",
+    "/properties/ZoneId",
+    "/properties/SubnetIds",
+    "/properties/ApplicationLayouts",
+    "/properties/SystemDisk",
+    "/properties/WithPublicIp",
+    "/properties/DataDisks"
+  ],
+  "definitions": {
+    "ApplicationLayout": {
+      "properties": {
+        "ApplicationName": {
+          "description": "应用名称。",
+          "type": "string"
+        },
+        "LayoutComponentNames": {
+          "description": "组件的自定义配置参数列表。",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "ChargePreConfig": {
+      "properties": {
+        "AutoRenew": {
+          "description": "是否开启自动续费。",
+          "type": "boolean"
+        },
+        "AutoRenewPeriod": {
+          "description": "自动续费触发时的续费时长，当autoRenew=true时，默认值=1。",
+          "type": "integer"
+        },
+        "AutoRenewPeriodUnit": {
+          "description": "自动续费触发时的续费时长单位，当autoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。",
+          "enum": [
+            "Month",
+            "Year"
+          ],
+          "type": "string"
+        },
+        "ChargePeriod": {
+          "description": "chargeType=PRE默认值=1，包月的购买时长单位。",
+          "type": "integer"
+        },
+        "ChargePeriodUnit": {
+          "description": "chargeType=PRE时，默认值=Month，包月的购买时长单位。取值范围：Month：月。Year：年。",
+          "enum": [
+            "Month",
+            "Year"
+          ],
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "付费类型，枚举值：POST，PRE。",
+          "enum": [
+            "POST",
+            "PRE"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DataDisk": {
+      "properties": {
+        "Count": {
+          "description": "磁盘块数，默认值4，最大15，最小1。",
+          "type": "integer"
+        },
+        "Size": {
+          "description": "磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+          "type": "integer"
+        },
+        "VolumeType": {
+          "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Node": {
+      "properties": {
+        "CreatedTime": {
+          "description": "节点创建时间。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "EcsInstanceType": {
+          "description": "ecs实例规格。",
+          "type": "string"
+        },
+        "NodeFqdn": {
+          "description": "节点FQDN。",
+          "type": "string"
+        },
+        "NodeId": {
+          "description": "节点ID。",
+          "type": "string"
+        },
+        "NodeName": {
+          "description": "节点名称。",
+          "type": "string"
+        },
+        "NodeState": {
+          "description": "节点状态。UNKNOWN：未知状态。CREATING：创建中。RUNNING：运行中。STOPPING：停止中。STOPPED：已停止。REBOOTING：重启中。DELETED：已删除。",
+          "type": "string"
+        },
+        "PrivateIp": {
+          "description": "私有IP。",
+          "type": "string"
+        },
+        "PublicIp": {
+          "description": "公网IP。",
+          "type": "string"
+        },
+        "ReadyTime": {
+          "description": "准备完毕时间。",
+          "format": "int64",
+          "type": "integer"
+        },
+        "TerminateTime": {
+          "description": "集群终止时间。",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SystemDisk": {
+      "properties": {
+        "Size": {
+          "description": "系统盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+          "type": "integer"
+        },
+        "VolumeType": {
+          "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "E-MapReduce集群由多个不同类型的实例节点组成，包括主实例节点（Master）、核心实例节点（Core）和计算实例节点（Task）。不同实例节点上部署的服务进程不同，负责完成的任务也不同。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId",
+      "/properties/NodeGroupId",
+      "/properties/NodeGroupName",
+      "/properties/NodeGroupType"
+    ],
+    "required": [
+      "/properties/ClusterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "emr:CreateNodeGroup",
+        "emr:ListNodeGroups",
+        "emr:ListNodes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "emr:DeleteNodeGroup",
+        "emr:ListNodeGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "emr:ListNodeGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "emr:ListNodeGroups",
+        "emr:ListNodes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "emr:UpdateNodeGroupChargeType",
+        "emr:UpdateNodeGroupEcsSpec",
+        "emr:UpdateNodeGroupAttribute",
+        "emr:ScaleUpNodeGroupDisk",
+        "emr:ScaleOutNodeGroup",
+        "emr:ScaleInNodeGroup",
+        "emr:ListNodeGroups",
+        "emr:ListNodes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId",
+    "/properties/NodeGroupId"
+  ],
+  "properties": {
+    "ApplicationLayouts": {
+      "description": "当前节点组可布局的组件名称列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ApplicationLayout"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ChargePreConfig": {
+      "$ref": "#/definitions/ChargePreConfig",
+      "description": "包周期付费配置。",
+      "type": "object"
+    },
+    "ChargeType": {
+      "description": "付费类型。PRE表示包月，POST表示按量计费。",
+      "enum": [
+        "POST",
+        "PRE"
+      ],
+      "type": "string"
+    },
+    "ClusterId": {
+      "description": "集群ID。",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "创建时间。",
+      "format": "int64",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "DataDisks": {
+      "description": "数据盘配置。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DataDisk"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "EcsInstanceTypes": {
+      "description": "ECS实例规格列表。当前修改仅支持单个实例规格。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "LayoutComponentNames": {
+      "description": "返回的节点组组件的自定义配置参数列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "NodeCount": {
+      "description": "节点数量。取值范围：1~1000。",
+      "maximum": 1000,
+      "type": "integer"
+    },
+    "NodeGroupId": {
+      "description": "节点组ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "NodeGroupName": {
+      "description": "节点组名称。",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NodeGroupState": {
+      "description": "节点组状态。RUNNING：运行中。EXTENDING：扩容中。REDUCING：缩容中。DISK_EXTENDING：磁盘扩容中。MODIFYING：变配中。",
+      "semantic": "status",
+      "type": "string"
+    },
+    "NodeGroupType": {
+      "description": "节点组类型。",
+      "type": "string"
+    },
+    "Nodes": {
+      "description": "节点列表。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Node"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SubnetIds": {
+      "description": "子网ID列表。",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SystemDisk": {
+      "$ref": "#/definitions/SystemDisk",
+      "description": "系统盘。",
+      "type": "object"
+    },
+    "TargetDiskSize": {
+      "description": "待扩容的目标磁盘大小，最小60GB，最大2048GB，单位GB。",
+      "maximum": 2048,
+      "type": "integer"
+    },
+    "TerminateTime": {
+      "description": "集群终止时间。",
+      "type": "string"
+    },
+    "WithPublicIp": {
+      "description": "ECS是否附带公网IP。",
+      "type": "boolean"
+    },
+    "ZoneId": {
+      "description": "zoneId，为空时默认复用集群的zoneId。",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/NodeGroupId",
+    "/properties/CreatedTime",
+    "/properties/TerminateTime",
+    "/properties/NodeGroupState",
+    "/properties/Nodes",
+    "/properties/LayoutComponentNames"
+  ],
+  "required": [
+    "ChargeType",
+    "ClusterId",
+    "NodeCount",
+    "NodeGroupName",
+    "NodeGroupType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::EMR::NodeGroup",
+  "writeOnlyProperties": [
+    "/properties/ChargePreConfig",
+    "/properties/TargetDiskSize",
+    "/properties/ApplicationLayouts"
+  ]
+}

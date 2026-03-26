@@ -28,7 +28,6 @@ Data Source schema for Volcengine::RocketMQ::AllowList
 - `allow_list_ip_num` (Number) 白名单内的 IP 地址（或地址段）总数。
 - `allow_list_name` (String) 白名单名称。
 - `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `apply_db_instance_num` (Number) 已应用实例数量，即当前该白名单所绑定的实例数。主要目的是确认本次修改的影响范围，避免误操作引发故障。
 - `associated_instance_num` (Number) 白名单下绑定的实例总数
 - `associated_instances` (Attributes List) 绑定的实例列表。 (see [below for nested schema](#nestedatt--associated_instances))
 - `instance_id` (String) 实例ID。

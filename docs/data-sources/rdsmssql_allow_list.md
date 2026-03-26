@@ -3,12 +3,12 @@
 page_title: "volcenginecc_rdsmssql_allow_list Data Source - terraform-provider-volcenginecc"
 subcategory: "RDSMsSQL"
 description: |-
-  Data Source schema for Volcengine::RDSMsSQL::Allowlist
+  Data Source schema for Volcengine::RDSMsSQL::AllowList
 ---
 
 # volcenginecc_rdsmssql_allow_list (Data Source)
 
-Data Source schema for Volcengine::RDSMsSQL::Allowlist
+Data Source schema for Volcengine::RDSMsSQL::AllowList
 
 
 

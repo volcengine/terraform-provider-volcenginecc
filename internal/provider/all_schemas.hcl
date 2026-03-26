@@ -660,3 +660,7 @@ resource_schema "volcengine_vedbm_allow_list" {
 resource_schema "volcengine_kafka_instance" {
   cloudcontrol_type_name = "Volcengine::Kafka::Instance"
 }
+
+resource_schema "volcengine_emr_node_group" {
+  cloudcontrol_type_name = "Volcengine::EMR::NodeGroup"
+}

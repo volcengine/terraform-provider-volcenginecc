@@ -163,6 +163,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_organization_organization -ccschema ../service/cloudcontrol/schemas/Volcengine_Organization_Organization.json -package organization ../volcengine/organization/organization_singular_data_source_gen.go ../volcengine/organization/organization_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_vedbm_allow_list -ccschema ../service/cloudcontrol/schemas/Volcengine_VEDBM_AllowList.json -package vedbm ../volcengine/vedbm/allow_list_singular_data_source_gen.go ../volcengine/vedbm/allow_list_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_kafka_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_Kafka_Instance.json -package kafka ../volcengine/kafka/instance_singular_data_source_gen.go ../volcengine/kafka/instance_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_emr_node_group -ccschema ../service/cloudcontrol/schemas/Volcengine_EMR_NodeGroup.json -package emr ../volcengine/emr/node_group_singular_data_source_gen.go ../volcengine/emr/node_group_singular_data_source_gen_test.go
 
 package provider
 

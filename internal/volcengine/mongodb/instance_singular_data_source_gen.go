@@ -104,7 +104,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "mongo.config.1c2g",
 		//	  "description": "分片集群中 ConfigServer 节点的规格码。默认值为 mongo.config.1c2g。",
 		//	  "type": "string"
 		//	}
@@ -116,7 +115,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": 20,
 		//	  "description": "分片集群中 ConfigServer 的存储空间，单位：GiB。步长为 10，默认值：20。",
 		//	  "type": "integer"
 		//	}

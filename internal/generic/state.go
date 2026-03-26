@@ -19,7 +19,8 @@ func copyStateValueAtPath(ctx context.Context, dst, src *tfsdk.State, p path.Pat
 	var val attr.Value
 	currentPath := path.Empty()
 	currentPathList := []path.Path{currentPath}
-	for _, step := range p.Steps() {
+	steps := p.Steps()
+	for stepIdx, step := range steps {
 		stepNeedCopyList := make([]path.Path, 0)
 		for _, cur := range currentPathList {
 			currentPathTemp := cur.AtName(step.String())
@@ -39,8 +40,11 @@ func copyStateValueAtPath(ctx context.Context, dst, src *tfsdk.State, p path.Pat
 					stepNeedCopyList = append(stepNeedCopyList, subPath)
 				}
 			case types.Set:
-				//如果遇到Set类型，直接退出，不进行WriteOnly字段的赋值
-				return diags
+				// Set 作为叶子节点（路径最后一步）：整体直接复制
+				// Set 作为中间节点：无法建立元素对应关系，跳过该路径
+				if stepIdx == len(steps)-1 {
+					stepNeedCopyList = append(stepNeedCopyList, currentPathTemp)
+				}
 			default:
 				//继续遍历
 				stepNeedCopyList = append(stepNeedCopyList, currentPathTemp)

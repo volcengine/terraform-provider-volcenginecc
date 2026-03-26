@@ -131,6 +131,106 @@ func cENResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Instances
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "已关联的网络实例列表",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "CEN关联的网络实例",
+		//	    "properties": {
+		//	      "CenId": {
+		//	        "description": "云企业网实例的ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "CreationTime": {
+		//	        "description": "网络实例的创建时间。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceId": {
+		//	        "description": "网络实例的ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceOwnerId": {
+		//	        "description": "网络实例所属账号的ID。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceRegionId": {
+		//	        "description": "网络实例所在的地域。",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceType": {
+		//	        "description": "网络实例的类型。",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "网络实例的加载状态。Attaching：加载中Available：可用",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "InstanceId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"instances": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CenId
+					// Property: CreationTime
+					// Property: InstanceId
+					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例的ID。",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceOwnerId
+					"instance_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例所属账号的ID。",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceRegionId
+					"instance_region_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例所在的地域。",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "网络实例的类型。",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "已关联的网络实例列表\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
@@ -275,6 +375,11 @@ func cENResource(ctx context.Context) (resource.Resource, error) {
 		"cen_name":                  "CenName",
 		"creation_time":             "CreationTime",
 		"description":               "Description",
+		"instance_id":               "InstanceId",
+		"instance_owner_id":         "InstanceOwnerId",
+		"instance_region_id":        "InstanceRegionId",
+		"instance_type":             "InstanceType",
+		"instances":                 "Instances",
 		"key":                       "Key",
 		"project_name":              "ProjectName",
 		"status":                    "Status",
@@ -290,6 +395,9 @@ func cENResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Status",
 		"/properties/CreationTime",
 		"/properties/UpdateTime",
+		"/properties/Instances/*/CenId",
+		"/properties/Instances/*/CreationTime",
+		"/properties/Instances/*/Status",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

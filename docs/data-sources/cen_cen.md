@@ -27,10 +27,25 @@ Data Source schema for Volcengine::CEN::CEN
 - `cen_name` (String) CEN实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填则默认为CEN实例的ID。
 - `creation_time` (String) 创建CEN实例的时间。
 - `description` (String) CEN实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255个字符。不填则默认为空。
+- `instances` (Attributes Set) 已关联的网络实例列表 (see [below for nested schema](#nestedatt--instances))
 - `project_name` (String) CEN实例所属项目的名称。不填则默认为default。
 - `status` (String) CEN实例的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用
 - `tags` (Attributes Set) 标签信息。 (see [below for nested schema](#nestedatt--tags))
 - `update_time` (String) 更新CEN实例的时间。
+
+<a id="nestedatt--instances"></a>
+### Nested Schema for `instances`
+
+Read-Only:
+
+- `cen_id` (String) 云企业网实例的ID。
+- `creation_time` (String) 网络实例的创建时间。
+- `instance_id` (String) 网络实例的ID。
+- `instance_owner_id` (String) 网络实例所属账号的ID。
+- `instance_region_id` (String) 网络实例所在的地域。
+- `instance_type` (String) 网络实例的类型。
+- `status` (String) 网络实例的加载状态。Attaching：加载中Available：可用
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

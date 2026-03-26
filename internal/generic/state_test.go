@@ -433,6 +433,112 @@ func TestCopyValueAtPath(t *testing.T) {
 			},
 		},
 		{
+			TestName: "Set as leaf node - should copy",
+			SrcState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"name":         tftypes.String,
+						"machine_type": tftypes.String,
+						"ports":        tftypes.List{ElementType: tftypes.Number},
+						"tags":         tftypes.Set{ElementType: tftypes.String},
+						"disks":        tftypes.List{ElementType: diskElementType},
+						"boot_disk":    diskElementType,
+						"scratch_disk": tftypes.Object{AttributeTypes: map[string]tftypes.Type{"interface": tftypes.String}},
+						"video_ports":  tftypes.Set{ElementType: videoPortElementType},
+						"identifier":   tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"name":         tftypes.NewValue(tftypes.String, "src"),
+					"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
+					"ports":        tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{tftypes.NewValue(tftypes.Number, 80)}),
+					"tags": tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+						tftypes.NewValue(tftypes.String, "red"),
+						tftypes.NewValue(tftypes.String, "blue"),
+					}),
+					"disks":        tftypes.NewValue(tftypes.List{ElementType: diskElementType}, []tftypes.Value{}),
+					"boot_disk":    tftypes.NewValue(diskElementType, map[string]tftypes.Value{"id": tftypes.NewValue(tftypes.String, "bd"), "delete_with_instance": tftypes.NewValue(tftypes.Bool, true)}),
+					"scratch_disk": tftypes.NewValue(tftypes.Object{AttributeTypes: map[string]tftypes.Type{"interface": tftypes.String}}, map[string]tftypes.Value{"interface": tftypes.NewValue(tftypes.String, "SCSI")}),
+					"video_ports":  tftypes.NewValue(tftypes.Set{ElementType: videoPortElementType}, []tftypes.Value{}),
+					"identifier":   tftypes.NewValue(tftypes.String, "id-src"),
+				}),
+				Schema: testComplexSchema,
+			},
+			DstState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"name":         tftypes.String,
+						"machine_type": tftypes.String,
+						"ports":        tftypes.List{ElementType: tftypes.Number},
+						"tags":         tftypes.Set{ElementType: tftypes.String},
+						"disks":        tftypes.List{ElementType: diskElementType},
+						"boot_disk":    diskElementType,
+						"scratch_disk": tftypes.Object{AttributeTypes: map[string]tftypes.Type{"interface": tftypes.String}},
+						"video_ports":  tftypes.Set{ElementType: videoPortElementType},
+						"identifier":   tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"name":         tftypes.NewValue(tftypes.String, "dst"),
+					"machine_type": tftypes.NewValue(tftypes.String, "e2-small"),
+					"ports":        tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{tftypes.NewValue(tftypes.Number, 443)}),
+					"tags": tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+						tftypes.NewValue(tftypes.String, "green"),
+					}),
+					"disks":        tftypes.NewValue(tftypes.List{ElementType: diskElementType}, []tftypes.Value{}),
+					"boot_disk":    tftypes.NewValue(diskElementType, map[string]tftypes.Value{"id": tftypes.NewValue(tftypes.String, "bd"), "delete_with_instance": tftypes.NewValue(tftypes.Bool, false)}),
+					"scratch_disk": tftypes.NewValue(tftypes.Object{AttributeTypes: map[string]tftypes.Type{"interface": tftypes.String}}, map[string]tftypes.Value{"interface": tftypes.NewValue(tftypes.String, "SATA")}),
+					"video_ports":  tftypes.NewValue(tftypes.Set{ElementType: videoPortElementType}, []tftypes.Value{}),
+					"identifier":   tftypes.NewValue(tftypes.String, "id-dst"),
+				}),
+				Schema: testComplexSchema,
+			},
+			Path: path.Root("tags"),
+			ExpectedState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"name":         tftypes.String,
+						"machine_type": tftypes.String,
+						"ports":        tftypes.List{ElementType: tftypes.Number},
+						"tags":         tftypes.Set{ElementType: tftypes.String},
+						"disks":        tftypes.List{ElementType: diskElementType},
+						"boot_disk":    diskElementType,
+						"scratch_disk": tftypes.Object{AttributeTypes: map[string]tftypes.Type{"interface": tftypes.String}},
+						"video_ports":  tftypes.Set{ElementType: videoPortElementType},
+						"identifier":   tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"name":         tftypes.NewValue(tftypes.String, "dst"),
+					"machine_type": tftypes.NewValue(tftypes.String, "e2-small"),
+					"ports":        tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{tftypes.NewValue(tftypes.Number, 443)}),
+					"tags": tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+						tftypes.NewValue(tftypes.String, "red"),
+						tftypes.NewValue(tftypes.String, "blue"),
+					}),
+					"disks":        tftypes.NewValue(tftypes.List{ElementType: diskElementType}, []tftypes.Value{}),
+					"boot_disk":    tftypes.NewValue(diskElementType, map[string]tftypes.Value{"id": tftypes.NewValue(tftypes.String, "bd"), "delete_with_instance": tftypes.NewValue(tftypes.Bool, false)}),
+					"scratch_disk": tftypes.NewValue(tftypes.Object{AttributeTypes: map[string]tftypes.Type{"interface": tftypes.String}}, map[string]tftypes.Value{"interface": tftypes.NewValue(tftypes.String, "SATA")}),
+					"video_ports":  tftypes.NewValue(tftypes.Set{ElementType: videoPortElementType}, []tftypes.Value{}),
+					"identifier":   tftypes.NewValue(tftypes.String, "id-dst"),
+				}),
+				Schema: testComplexSchema,
+			},
+		},
+		{
+			TestName: "Set as intermediate node - should skip",
+			SrcState: tfsdk.State{
+				Raw:    makeComplexValueWithUnknowns(),
+				Schema: testComplexSchema,
+			},
+			DstState: tfsdk.State{
+				Raw:    makeComplexValueWithUnknowns(),
+				Schema: testComplexSchema,
+			},
+			Path: path.Root("video_ports").AtName("id"),
+			ExpectedState: tfsdk.State{
+				Raw:    makeComplexValueWithUnknowns(),
+				Schema: testComplexSchema,
+			},
+		},
+		{
 			TestName: "invalid Path",
 			SrcState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{

@@ -163,6 +163,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_organizations -cctype Volcengine::Organization::Organization -package organization ../volcengine/organization/organization_plural_data_source_gen.go ../volcengine/organization/organization_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vedbm_allow_lists -cctype Volcengine::VEDBM::AllowList -package vedbm ../volcengine/vedbm/allow_list_plural_data_source_gen.go ../volcengine/vedbm/allow_list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_kafka_instances -cctype Volcengine::Kafka::Instance -package kafka ../volcengine/kafka/instance_plural_data_source_gen.go ../volcengine/kafka/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_emr_node_groups -cctype Volcengine::EMR::NodeGroup -package emr ../volcengine/emr/node_group_plural_data_source_gen.go ../volcengine/emr/node_group_plural_data_source_gen_test.go
 
 package provider
 

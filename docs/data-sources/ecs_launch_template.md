@@ -3,12 +3,12 @@
 page_title: "volcenginecc_ecs_launch_template Data Source - terraform-provider-volcenginecc"
 subcategory: "ECS"
 description: |-
-  Data Source schema for Volcengine::ECS::Launchtemplate
+  Data Source schema for Volcengine::ECS::LaunchTemplate
 ---
 
 # volcenginecc_ecs_launch_template (Data Source)
 
-Data Source schema for Volcengine::ECS::Launchtemplate
+Data Source schema for Volcengine::ECS::LaunchTemplate
 
 
 

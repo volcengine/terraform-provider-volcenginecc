@@ -21,6 +21,14 @@ resource "volcenginecc_cen_cen" "CENCENDemo" {
       key = "dev"
     value = "test" }
   ]
+  instances = [
+    {
+      instance_id        = "vpc-3psq16gaiw4qo6csxyv***",
+      instance_owner_id  = "21074****",
+      instance_region_id = "cn-beijing",
+      instance_type      = "VPC"
+    }
+  ]
 }
 ```
 
@@ -31,6 +39,8 @@ resource "volcenginecc_cen_cen" "CENCENDemo" {
 
 - `cen_name` (String) CEN实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填则默认为CEN实例的ID。
 - `description` (String) CEN实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255个字符。不填则默认为空。
+- `instances` (Attributes Set) 已关联的网络实例列表
+ 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instances))
 - `project_name` (String) CEN实例所属项目的名称。不填则默认为default。
 - `tags` (Attributes Set) 标签信息。
  特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
@@ -44,6 +54,17 @@ resource "volcenginecc_cen_cen" "CENCENDemo" {
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) CEN实例的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用
 - `update_time` (String) 更新CEN实例的时间。
+
+<a id="nestedatt--instances"></a>
+### Nested Schema for `instances`
+
+Optional:
+
+- `instance_id` (String) 网络实例的ID。
+- `instance_owner_id` (String) 网络实例所属账号的ID。
+- `instance_region_id` (String) 网络实例所在的地域。
+- `instance_type` (String) 网络实例的类型。
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
