@@ -6,14 +6,14 @@
   ],
   "definitions": {
     "Tag": {
-      "description": "备份库标签。",
+      "description": "Backup Repository Tag",
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag Key",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag Value",
           "type": "string"
         }
       },
@@ -24,7 +24,7 @@
       "type": "object"
     }
   },
-  "description": "用于存放您的备份数据。",
+  "description": "Used to store your backup data",
   "filterProperties": {
     "filterableProperties": [
       "/properties/VaultId",
@@ -61,21 +61,21 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation Time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Endpoint": {
-      "description": "访问域名。",
+      "description": "Access Domain Name",
       "type": "string"
     },
     "ProjectName": {
-      "description": "项目名称。",
+      "description": "Project Name",
       "semantic": "projectName",
       "type": "string"
     },
     "Tags": {
-      "description": "备份库标签。",
+      "description": "Backup Repository Tag",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -85,12 +85,12 @@
       "uniqueItems": true
     },
     "VaultId": {
-      "description": "备份库 ID。",
+      "description": "Backup Repository ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "VaultName": {
-      "description": "备份库名称。",
+      "description": "Backup Repository Name",
       "semantic": "resourceName",
       "type": "string"
     }

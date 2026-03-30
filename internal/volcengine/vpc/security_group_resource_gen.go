@@ -35,11 +35,11 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组创建时间。",
+		//	  "description": "Security group creation time",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组创建时间。",
+			Description: "Security group creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -49,12 +49,12 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不填默认空字符串。",
+		//	  "description": "Description of the security group. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). If not specified, defaults to an empty string",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不填默认空字符串。",
+			Description: "Description of the security group. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). If not specified, defaults to an empty string",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -68,42 +68,42 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+		//	  "description": "Description for outbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "源地址的IPv4 CIDR或IPv6 CIDR",
+		//	        "description": "IPv4 CIDR or IPv6 CIDR of the source address",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {
-		//	        "description": "安全组规则创建时间。",
+		//	        "description": "Security group rule creation time",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+		//	        "description": "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 		//	        "type": "string"
 		//	      },
 		//	      "Direction": {
-		//	        "description": "安全组规则方向。ingress：入方向。egress：出方向",
+		//	        "description": "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+		//	        "description": "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 		//	        "type": "string"
 		//	      },
 		//	      "PortEnd": {
-		//	        "description": "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PortStart": {
-		//	        "description": "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PrefixListCidrs": {
-		//	        "description": "前缀列表的CIDR。",
+		//	        "description": "Prefix list CIDR",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -112,24 +112,24 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "PrefixListId": {
-		//	        "description": "前缀列表的ID",
+		//	        "description": "Prefix list ID",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+		//	        "description": "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp、udp、icmp、icmpv6、all",
+		//	        "description": "Protocol type. tcp, udp, icmp, icmpv6, all",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceGroupId": {
-		//	        "description": "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+		//	        "description": "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 		//	        "type": "string"
 		//	      },
 		//	      "UpdateTime": {
-		//	        "description": "安全组规则更新时间。",
+		//	        "description": "Security group rule update time",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -151,7 +151,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址的IPv4 CIDR或IPv6 CIDR",
+						Description: "IPv4 CIDR or IPv6 CIDR of the source address",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -161,7 +161,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CreationTime
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+						Description: "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -173,7 +173,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Direction
 					"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则方向。ingress：入方向。egress：出方向",
+						Description: "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -182,7 +182,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+						Description: "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -194,7 +194,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PortEnd
 					"port_end": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -206,7 +206,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PortStart
 					"port_start": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -219,7 +219,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: PrefixListCidrs
 					// Property: PrefixListId
 					"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表的ID",
+						Description: "Prefix list ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -228,7 +228,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+						Description: "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -240,7 +240,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp、udp、icmp、icmpv6、all",
+						Description: "Protocol type. tcp, udp, icmp, icmpv6, all",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -252,7 +252,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: SourceGroupId
 					"source_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+						Description: "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -262,7 +262,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: UpdateTime
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Description for outbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -273,42 +273,42 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+		//	  "description": "Description for inbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "源地址的IPv4 CIDR或IPv6 CIDR",
+		//	        "description": "IPv4 CIDR or IPv6 CIDR of the source address",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {
-		//	        "description": "安全组规则创建时间。",
+		//	        "description": "Security group rule creation time",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+		//	        "description": "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 		//	        "type": "string"
 		//	      },
 		//	      "Direction": {
-		//	        "description": "安全组规则方向。ingress：入方向。egress：出方向",
+		//	        "description": "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+		//	        "description": "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 		//	        "type": "string"
 		//	      },
 		//	      "PortEnd": {
-		//	        "description": "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PortStart": {
-		//	        "description": "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PrefixListCidrs": {
-		//	        "description": "前缀列表的CIDR。",
+		//	        "description": "Prefix list CIDR",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -317,24 +317,24 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "PrefixListId": {
-		//	        "description": "前缀列表的ID",
+		//	        "description": "Prefix list ID",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+		//	        "description": "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp、udp、icmp、icmpv6、all",
+		//	        "description": "Protocol type. tcp, udp, icmp, icmpv6, all",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceGroupId": {
-		//	        "description": "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+		//	        "description": "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 		//	        "type": "string"
 		//	      },
 		//	      "UpdateTime": {
-		//	        "description": "安全组规则更新时间。",
+		//	        "description": "Security group rule update time",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -356,7 +356,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址的IPv4 CIDR或IPv6 CIDR",
+						Description: "IPv4 CIDR or IPv6 CIDR of the source address",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -366,7 +366,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CreationTime
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+						Description: "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -378,7 +378,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Direction
 					"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则方向。ingress：入方向。egress：出方向",
+						Description: "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -387,7 +387,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+						Description: "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -399,7 +399,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PortEnd
 					"port_end": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -411,7 +411,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PortStart
 					"port_start": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -424,7 +424,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: PrefixListCidrs
 					// Property: PrefixListId
 					"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表的ID",
+						Description: "Prefix list ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -433,7 +433,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+						Description: "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -445,7 +445,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp、udp、icmp、icmpv6、all",
+						Description: "Protocol type. tcp, udp, icmp, icmpv6, all",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -457,7 +457,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: SourceGroupId
 					"source_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+						Description: "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -467,7 +467,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: UpdateTime
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Description for inbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -479,11 +479,11 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "安全组所属项目名称。不填默认项目为default。",
+		//	  "description": "Project name to which the security group belongs. Default project is 'default' if not specified",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组所属项目名称。不填默认项目为default。",
+			Description: "Project name to which the security group belongs. Default project is 'default' if not specified",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -496,11 +496,11 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组ID。",
+		//	  "description": "Security group ID",
 		//	  "type": "string"
 		//	}
 		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组ID。",
+			Description: "Security group ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -510,13 +510,13 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认是安全组的ID。",
+		//	  "description": "Security group name. Length: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Default is security group ID if not specified",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"security_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认是安全组的ID。",
+			Description: "Security group name. Length: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Default is security group ID if not specified",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -530,11 +530,11 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组是否为托管安全组。true为托管安全组，false为非托管安全组。",
+		//	  "description": "Indicates whether the security group is managed. true means managed security group, false means unmanaged security group",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组是否为托管安全组。true为托管安全组，false为非托管安全组。",
+			Description: "Indicates whether the security group is managed. true means managed security group, false means unmanaged security group",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -544,11 +544,11 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组状态。Available为可用，Creating为创建中。",
+		//	  "description": "Security group status. Available means available for use, Creating means being created",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组状态。Available为可用，Creating为创建中。",
+			Description: "Security group status. Available means available for use, Creating means being created",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -558,16 +558,16 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -584,7 +584,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -596,7 +596,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -605,7 +605,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -616,11 +616,11 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组类型。1、default：默认安全组。2、normal：自定义安全组。3、VpnGW： VPN网关安全组。4、NatGW： Nat网关安全组。 5、cidr_only：CIDR-Only安全组。",
+		//	  "description": "Security group type. 1. default: default security group. 2. normal: custom security group. 3. VpnGW: VPN gateway security group. 4. NatGW: NAT gateway security group. 5. cidr_only: CIDR-Only security group",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组类型。1、default：默认安全组。2、normal：自定义安全组。3、VpnGW： VPN网关安全组。4、NatGW： Nat网关安全组。 5、cidr_only：CIDR-Only安全组。",
+			Description: "Security group type. 1. default: default security group. 2. normal: custom security group. 3. VpnGW: VPN gateway security group. 4. NatGW: NAT gateway security group. 5. cidr_only: CIDR-Only security group",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -630,11 +630,11 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组所属的VPC ID。",
+		//	  "description": "VPC ID to which the security group belongs",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组所属的VPC ID。",
+			Description: "VPC ID to which the security group belongs",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -652,7 +652,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "安全组是一个逻辑意义上的分组，为同一个私有网络内具有相同安全保护需求并相互信任的网卡提供访问策略。您可以通过配置安全组规则，控制安全组关联网卡的出入流量。",
+		Description: "A security group is a logical grouping that provides access policies for NICs within the same private network that share security requirements and mutual trust. You can control inbound and outbound traffic for associated NICs by configuring security group rules",
 		Version:     1,
 		Attributes:  attributes,
 	}

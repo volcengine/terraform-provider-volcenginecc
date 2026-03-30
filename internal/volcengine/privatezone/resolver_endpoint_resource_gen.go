@@ -33,11 +33,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间",
+			Description: "Creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -48,7 +48,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "OUTBOUND",
-		//	  "description": "终端节点的 DNS 请求转发方向。OUTBOUND：（默认）出站终端节点，把来自 VPC 内的 DNS 查询请求转发到外部的 DNS 服务器。INBOUND：入站终端节点，把来自外部的 DNS 查询请求转发到解析器。",
+		//	  "description": "DNS request forwarding direction for the endpoint. OUTBOUND (default): outbound endpoint forwards DNS queries from within the VPC to external DNS servers. INBOUND: inbound endpoint forwards DNS queries from external sources to the resolver",
 		//	  "enum": [
 		//	    "OUTBOUND",
 		//	    "INBOUND"
@@ -56,7 +56,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点的 DNS 请求转发方向。OUTBOUND：（默认）出站终端节点，把来自 VPC 内的 DNS 查询请求转发到外部的 DNS 服务器。INBOUND：入站终端节点，把来自外部的 DNS 查询请求转发到解析器。",
+			Description: "DNS request forwarding direction for the endpoint. OUTBOUND (default): outbound endpoint forwards DNS queries from within the VPC to external DNS servers. INBOUND: inbound endpoint forwards DNS queries from external sources to the resolver",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("OUTBOUND"),
@@ -75,11 +75,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点的 ID。",
+		//	  "description": "Endpoint ID",
 		//	  "type": "string"
 		//	}
 		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点的 ID。",
+			Description: "Endpoint ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -89,7 +89,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点类型。IPv4：IPv4 节点。DualStack：双栈节点。",
+		//	  "description": "Endpoint type. IPv4: IPv4 endpoint. DualStack: dual-stack endpoint",
 		//	  "enum": [
 		//	    "IPv4",
 		//	    "DualStack"
@@ -97,7 +97,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点类型。IPv4：IPv4 节点。DualStack：双栈节点。",
+			Description: "Endpoint type. IPv4: IPv4 endpoint. DualStack: dual-stack endpoint",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -116,24 +116,24 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点的可用区、子网和 IP 配置。",
+		//	  "description": "Availability zone, subnet, and IP configuration for the endpoint",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AzID": {
-		//	        "description": "终端节点 IP 地址所在的可用区。为了保证高可用，建议您至少添加 2 个可用区。",
+		//	        "description": "Availability zone for the endpoint IP address. To ensure high availability, it is recommended to add at least 2 availability zones",
 		//	        "type": "string"
 		//	      },
 		//	      "IP": {
-		//	        "description": "终端节点的 IPv4 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+		//	        "description": "IPv4 address of the endpoint. If you do not set this parameter, the system automatically assigns an IP address. You can add up to 6 IP addresses",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv6": {
-		//	        "description": "终端节点的 IPv6 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+		//	        "description": "IPv6 address of the endpoint. If you do not set this parameter, the system automatically assigns an IP address. You can add up to 6 IP addresses",
 		//	        "type": "string"
 		//	      },
 		//	      "SubnetID": {
-		//	        "description": "终端节点 IP 地址所在的子网 ID。",
+		//	        "description": "Subnet ID for the endpoint IP address",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -147,7 +147,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AzID
 					"az_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "终端节点 IP 地址所在的可用区。为了保证高可用，建议您至少添加 2 个可用区。",
+						Description: "Availability zone for the endpoint IP address. To ensure high availability, it is recommended to add at least 2 availability zones",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -157,7 +157,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: IP
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "终端节点的 IPv4 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+						Description: "IPv4 address of the endpoint. If you do not set this parameter, the system automatically assigns an IP address. You can add up to 6 IP addresses",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -167,7 +167,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv6
 					"ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "终端节点的 IPv6 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+						Description: "IPv6 address of the endpoint. If you do not set this parameter, the system automatically assigns an IP address. You can add up to 6 IP addresses",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -177,7 +177,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetID
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "终端节点 IP 地址所在的子网 ID。",
+						Description: "Subnet ID for the endpoint IP address",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -187,7 +187,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "终端节点的可用区、子网和 IP 配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Availability zone, subnet, and IP configuration for the endpoint\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -198,11 +198,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点的名称。支持 UTF-8 格式。",
+		//	  "description": "Endpoint name. Supports UTF-8 format",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点的名称。支持 UTF-8 格式。",
+			Description: "Endpoint name. Supports UTF-8 format",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -210,11 +210,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "终端节点所属的项目名称。默认为 default。",
+		//	  "description": "Project name to which the endpoint belongs. Default is default",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点所属的项目名称。默认为 default。",
+			Description: "Project name to which the endpoint belongs. Default is default",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -227,11 +227,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "适用于终端节点 IP 地址的安全组 ID。终端节点默认会使用预设安全组：对于出站终端节点：入方向拒绝流量通行；出方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口。对于入站终端节点：入方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口；出方向拒绝流量通行。",
+		//	  "description": "Security group ID for the endpoint IP address. The endpoint uses a default security group: For outbound endpoints, inbound traffic is denied; outbound traffic allows TCP port 53 and UDP port 53 to 0.0.0.0/0. For inbound endpoints, inbound traffic allows TCP port 53 and UDP port 53 to 0.0.0.0/0; outbound traffic is denied",
 		//	  "type": "string"
 		//	}
 		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "适用于终端节点 IP 地址的安全组 ID。终端节点默认会使用预设安全组：对于出站终端节点：入方向拒绝流量通行；出方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口。对于入站终端节点：入方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口；出方向拒绝流量通行。",
+			Description: "Security group ID for the endpoint IP address. The endpoint uses a default security group: For outbound endpoints, inbound traffic is denied; outbound traffic allows TCP port 53 and UDP port 53 to 0.0.0.0/0. For inbound endpoints, inbound traffic allows TCP port 53 and UDP port 53 to 0.0.0.0/0; outbound traffic is denied",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -241,7 +241,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点的状态。Creating：创建中。Running：运行中。Updating：更新中。Error：运行异常。",
+		//	  "description": "Endpoint status. Creating: creating. Running: running. Updating: updating. Error: abnormal operation",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Running",
@@ -251,7 +251,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点的状态。Creating：创建中。Running：运行中。Updating：更新中。Error：运行异常。",
+			Description: "Endpoint status. Creating: creating. Running: running. Updating: updating. Error: abnormal operation",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -261,16 +261,16 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -287,7 +287,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -299,7 +299,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -308,7 +308,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -319,11 +319,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间",
+			Description: "Update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -333,11 +333,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点所在的 VPC 的 ID。",
+		//	  "description": "VPC ID where the endpoint is located",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点所在的 VPC 的 ID。",
+			Description: "VPC ID where the endpoint is located",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -347,11 +347,11 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点所在的 VPC 的地域。",
+		//	  "description": "Region of the VPC where the endpoint is located",
 		//	  "type": "string"
 		//	}
 		"vpc_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点所在的 VPC 的地域。",
+			Description: "Region of the VPC where the endpoint is located",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -369,7 +369,7 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "在把外部的 DNS 查询请求转发到解析器的场景中，您需要创建终端节点。收到解析器转发的 DNS 查询请求后，终端节点出站终端节点会把 DNS 查询请求转发到外部的 DNS 服务器。收到来自外部的 DNS 查询请求后，入站终端节点会把 DNS 查询请求转发到解析器。",
+		Description: "In scenarios where external DNS query requests are forwarded to the resolver, you need to create an endpoint. After receiving DNS query requests forwarded by the resolver, outbound endpoints forward DNS queries to external DNS servers. After receiving DNS query requests from external sources, inbound endpoints forward DNS queries to the resolver",
 		Version:     1,
 		Attributes:  attributes,
 	}

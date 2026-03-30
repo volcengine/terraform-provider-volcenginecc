@@ -11,24 +11,24 @@
   ],
   "definitions": {
     "CachePerformance": {
-      "description": "缓存型性能信息",
+      "description": "Cache performance information",
       "properties": {
         "CacheBandwidth": {
-          "description": "预配置带宽，用于增加文件系统带宽。",
+          "description": "Provisioned bandwidth, used to increase file system bandwidth",
           "type": "integer"
         }
       },
       "type": "object"
     },
     "Capacity": {
-      "description": "容量信息",
+      "description": "Capacity information",
       "properties": {
         "Total": {
-          "description": "文件系统可用总容量，单位为 GiB。",
+          "description": "Total available file system capacity, in GiB",
           "type": "number"
         },
         "Used": {
-          "description": "文件系统已使用容量，单位为 MiB。",
+          "description": "Used file system capacity, in MiB",
           "type": "number"
         }
       },
@@ -38,18 +38,18 @@
       "type": "object"
     },
     "Tag": {
-      "description": "资源标签。",
+      "description": "Resource tags",
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key",
           "type": "string"
         },
         "Type": {
-          "description": "标签类型。",
+          "description": "Tag type",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value",
           "type": "string"
         }
       },
@@ -59,7 +59,7 @@
       "type": "object"
     }
   },
-  "description": "文件系统通过标准的 NFS 协议为您提供文件存储服务，用于网络文件远程访问，通过管理控制台创建挂载地址后，即可按需在客户端中通过标准的 POSIX 接口对文件系统进行访问。",
+  "description": "The file system provides file storage services through the standard NFS protocol for remote network file access. After creating a mount point in the management console, you can access the file system on your client as needed using the standard POSIX interface",
   "filterProperties": {
     "filterableProperties": [
       "/properties/FileSystemId",
@@ -113,40 +113,40 @@
   "properties": {
     "CachePerformance": {
       "$ref": "#/definitions/CachePerformance",
-      "description": "缓存型性能信息。",
+      "description": "Cache performance information",
       "type": "object"
     },
     "Capacity": {
       "$ref": "#/definitions/Capacity",
-      "description": "文件系统容量。",
+      "description": "File system capacity",
       "type": "object"
     },
     "ChargeType": {
-      "description": "计费类型，取值 PayAsYouGo，表示按量计费。",
+      "description": "Billing type. Value: PayAsYouGo, indicates pay-as-you-go billing",
       "type": "string"
     },
     "CreateTime": {
-      "description": "创建时间",
+      "description": "Creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "描述信息。",
+      "description": "Description",
       "semantic": "description",
       "type": "string"
     },
     "FileSystemId": {
-      "description": "文件系统 ID。",
+      "description": "File system ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "FileSystemName": {
-      "description": "文件系统名称。",
+      "description": "File system name",
       "semantic": "resourceName",
       "type": "string"
     },
     "FileSystemType": {
-      "description": "文件系统类型。取值说明：Extreme：NAS 极速型；Capacity：NAS 容量型；Cache：NAS 缓存型。",
+      "description": "File system type. Possible values: Extreme: NAS Extreme type; Capacity: NAS Capacity type; Cache: NAS Cache type",
       "enum": [
         "Extreme",
         "Capacity",
@@ -155,24 +155,24 @@
       "type": "string"
     },
     "ProjectName": {
-      "description": "所属项目，默认值为 default 项目。",
+      "description": "Project, default value is the Default project",
       "semantic": "projectName",
       "type": "string"
     },
     "ProtocolType": {
-      "description": "文件系统协议类型。取值 NFS，表示 NFS 协议，常用于 Linux 客户端。",
+      "description": "File system protocol type. Value: NFS, indicates NFS protocol, commonly used for Linux clients",
       "type": "string"
     },
     "SnapshotCount": {
-      "description": "快照数量",
+      "description": "Number of snapshots",
       "type": "integer"
     },
     "SnapshotId": {
-      "description": "创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。",
+      "description": "Snapshot ID used at creation. If this parameter is provided, the file system will be created from the snapshot",
       "type": "string"
     },
     "Status": {
-      "description": "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
+      "description": "File system status. Possible values: Unknown: Status unknown. Running: File system running. Creating: File system being created. Expanding: File system being upgraded. Error: File system error. Deleting: File system being deleted. DeleteError: File system deletion failed. Deleted: File system deleted. Stopped: File system stopped.",
       "enum": [
         "Unknown",
         "Running",
@@ -188,11 +188,11 @@
       "type": "string"
     },
     "StorageType": {
-      "description": "存储类型，取值Standard，表示标准型。",
+      "description": "Storage type. Value: Standard, indicates standard type",
       "type": "string"
     },
     "Tags": {
-      "description": "文件系统的标签信息",
+      "description": "File system tag information",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -202,16 +202,16 @@
       "uniqueItems": true
     },
     "UpdateTime": {
-      "description": "更新时间",
+      "description": "Update time",
       "semantic": "updatedTime",
       "type": "string"
     },
     "ZoneId": {
-      "description": "可用区 ID。",
+      "description": "Availability Zone ID",
       "type": "string"
     },
     "ZoneName": {
-      "description": "可用区名称。",
+      "description": "Availability Zone name",
       "type": "string"
     }
   },

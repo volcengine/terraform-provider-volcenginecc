@@ -2,12 +2,12 @@
 page_title: "volcenginecc_ecs_hpc_cluster Resource - terraform-provider-volcenginecc"
 subcategory: "ECS"
 description: |-
-  高性能计算集群（High Performance Compute Cluster，HPC集群）是一种用于处理大规模计算任务的集群计算环境，通常由大量的计算节点组成，这些节点通过RDMA（Remote Direct Memory Access）高速网络互联，并协同工作以处理复杂的计算任务。高性能计算集群可以提供强大的计算能力、大内存、高速存储和高速网络，以满足对计算密集型、数据密集型或两者结合的工作负载的需求。
+  A high performance compute cluster (HPC cluster) is a cluster computing environment designed for large-scale computational tasks. It typically consists of numerous compute nodes interconnected via RDMA (Remote Direct Memory Access) high-speed networks, working together to handle complex computational workloads. High performance compute clusters provide powerful computing capabilities, large memory, high-speed storage, and high-speed networking to meet the demands of compute-intensive, data-intensive, or combined workloads
 ---
 
 # volcenginecc_ecs_hpc_cluster (Resource)
 
-高性能计算集群（High Performance Compute Cluster，HPC集群）是一种用于处理大规模计算任务的集群计算环境，通常由大量的计算节点组成，这些节点通过RDMA（Remote Direct Memory Access）高速网络互联，并协同工作以处理复杂的计算任务。高性能计算集群可以提供强大的计算能力、大内存、高速存储和高速网络，以满足对计算密集型、数据密集型或两者结合的工作负载的需求。
+A high performance compute cluster (HPC cluster) is a cluster computing environment designed for large-scale computational tasks. It typically consists of numerous compute nodes interconnected via RDMA (Remote Direct Memory Access) high-speed networks, working together to handle complex computational workloads. High performance compute clusters provide powerful computing capabilities, large memory, high-speed storage, and high-speed networking to meet the demands of compute-intensive, data-intensive, or combined workloads
 
 ## Example Usage
 
@@ -30,31 +30,31 @@ resource "volcenginecc_ecs_hpc_cluster" "ECSHpcClusterDemo" {
 
 ### Required
 
-- `name` (String) 高性能计算集群名称。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1～128之间。
-- `zone_id` (String) 高性能计算集群所属可用区ID。
+- `name` (String) High performance compute cluster name. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 1 and 128 characters
+- `zone_id` (String) Availability zone ID of the high performance compute cluster
 
 ### Optional
 
-- `description` (String) 高性能计算集群描述，默认为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0～255之间。
-- `project_name` (String) 项目名称。
-- `tags` (Attributes Set) 标签信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `description` (String) High performance compute cluster description. Defaults to an empty string. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 0 and 255 characters
+- `project_name` (String) Project name
+- `tags` (Attributes Set) Tag information
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `created_time` (String) 创建时间，格式满足RFC3339。
-- `hpc_cluster_id` (String) 高性能计算集群ID。
+- `created_time` (String) Creation time, formatted according to RFC3339
+- `hpc_cluster_id` (String) High performance compute cluster ID
 - `id` (String) Uniquely identifies the resource.
-- `updated_time` (String) 更新时间，格式满足RFC3339。
-- `vpc_id` (String) 私有网络ID。
+- `updated_time` (String) Update time, formatted according to RFC3339
+- `vpc_id` (String) Private network ID
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 ## Import
 

@@ -10,11 +10,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "用户标签的标签键。",
+          "description": "User tag key",
           "type": "string"
         },
         "Value": {
-          "description": "用户标签的标签值。",
+          "description": "User tag value",
           "type": "string"
         }
       },
@@ -24,7 +24,7 @@
       "type": "object"
     }
   },
-  "description": "ALB 支持上传服务器证书、CA 证书到控制台，对上传的证书单独管理。",
+  "description": "ALB supports uploading server certificates and CA certificates to the console and manages uploaded certificates separately",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -77,19 +77,19 @@
   ],
   "properties": {
     "CertificateId": {
-      "description": "证书ID。",
+      "description": "Certificate ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "CertificateName": {
-      "description": "证书名称，长度限制为1 ～ 128个字符，必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。",
+      "description": "Certificate name. Length must be between 1 and 128 characters, start with a letter or Chinese character, and may include numbers, periods (.), underscores (_), and hyphens (-)",
       "maxLength": 128,
       "minLength": 1,
       "semantic": "resourceName",
       "type": "string"
     },
     "CertificateType": {
-      "description": "证书类型，取值：CA：CA证书、Server：服务器证书。",
+      "description": "Certificate type. Options: CA: CA certificate; Server: server certificate",
       "enum": [
         "CA",
         "Server"
@@ -97,25 +97,25 @@
       "type": "string"
     },
     "CreatedTime": {
-      "description": "证书创建时间。",
+      "description": "Certificate creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "证书描述。",
+      "description": "Certificate description",
       "semantic": "description",
       "type": "string"
     },
     "DomainName": {
-      "description": "证书域名。",
+      "description": "Certificate domain name",
       "type": "string"
     },
     "ExpiredAt": {
-      "description": "证书过期时间。",
+      "description": "Certificate expiration time",
       "type": "string"
     },
     "Listeners": {
-      "description": "证书关联的监听器列表。",
+      "description": "List of listeners associated with the certificate",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -124,29 +124,29 @@
       "uniqueItems": true
     },
     "PrivateKey": {
-      "description": "服务器证书的私钥，当证书类型为Server时必填。",
+      "description": "Server certificate private key. Required when certificate type is Server",
       "type": "string"
     },
     "ProjectName": {
-      "description": "项目名称。",
+      "description": "Project name",
       "semantic": "projectName",
       "type": "string"
     },
     "PublicKey": {
-      "description": "服务器证书的公钥。",
+      "description": "Server certificate public key",
       "type": "string"
     },
     "San": {
-      "description": "证书扩展域名列表，用英文',' 分隔多个域名， 包含(commonName,DnsName,IP)。",
+      "description": "Certificate subject alternative name list. Use English ',' to separate multiple domain names. Includes (commonName, DnsName, IP)",
       "type": "string"
     },
     "Status": {
-      "description": "证书的状态，取值为：Creating：创建中。Active：运行中。Deleting：删除中。",
+      "description": "Certificate status. Options: Creating: creating; Active: active; Deleting: deleting",
       "semantic": "status",
       "type": "string"
     },
     "Tags": {
-      "description": "标签列表。",
+      "description": "Tag list",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"

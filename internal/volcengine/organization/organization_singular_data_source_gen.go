@@ -26,34 +26,34 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织详情",
+		//	  "description": "Organization Details",
 		//	  "properties": {
 		//	    "CreatedTime": {
-		//	      "description": "创建时间",
+		//	      "description": "Creation Time",
 		//	      "type": "string"
 		//	    },
 		//	    "Description": {
-		//	      "description": "描述",
+		//	      "description": "Description",
 		//	      "type": "string"
 		//	    },
 		//	    "Name": {
-		//	      "description": "组织名称",
+		//	      "description": "Organization Name",
 		//	      "type": "string"
 		//	    },
 		//	    "Owner": {
-		//	      "description": "管理员ID",
+		//	      "description": "Administrator ID",
 		//	      "type": "string"
 		//	    },
 		//	    "Status": {
-		//	      "description": "状态",
+		//	      "description": "Status",
 		//	      "type": "integer"
 		//	    },
 		//	    "Type": {
-		//	      "description": "组织类型，企业组织固定是 1",
+		//	      "description": "Organization type, enterprise organization is always 1",
 		//	      "type": "integer"
 		//	    },
 		//	    "UpdatedTime": {
-		//	      "description": "更新时间",
+		//	      "description": "Last Updated",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -63,70 +63,70 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CreatedTime
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "创建时间",
+					Description: "Creation Time",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "描述",
+					Description: "Description",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "组织名称",
+					Description: "Organization Name",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Owner
 				"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "管理员ID",
+					Description: "Administrator ID",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "状态",
+					Description: "Status",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "组织类型，企业组织固定是 1",
+					Description: "Organization type, enterprise organization is always 1",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UpdatedTime
 				"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "更新时间",
+					Description: "Last Updated",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "组织详情",
+			Description: "Organization Details",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OrganizationID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织ID",
+		//	  "description": "Organization ID",
 		//	  "type": "string"
 		//	}
 		"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织ID",
+			Description: "Organization ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "管理员详情",
+		//	  "description": "Administrator Details",
 		//	  "properties": {
 		//	    "AccountID": {
-		//	      "description": "账号ID",
+		//	      "description": "Account ID",
 		//	      "type": "integer"
 		//	    },
 		//	    "AccountName": {
-		//	      "description": "账号名称",
+		//	      "description": "Account Name",
 		//	      "type": "string"
 		//	    },
 		//	    "MainName": {
-		//	      "description": "主体名称",
+		//	      "description": "Entity Name",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -136,21 +136,21 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AccountID
 				"account_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "账号ID",
+					Description: "Account ID",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AccountName
 				"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "账号名称",
+					Description: "Account Name",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MainName
 				"main_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "主体名称",
+					Description: "Entity Name",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "管理员详情",
+			Description: "Administrator Details",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

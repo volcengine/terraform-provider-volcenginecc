@@ -2,12 +2,12 @@
 page_title: "volcenginecc_bmq_group Resource - terraform-provider-volcenginecc"
 subcategory: "BMQ"
 description: |-
-  一组具有相同 Group ID 的消费端。当一个 Topic 被同一个 Group 的多个 Consumer 消费时，每一条消息都只会被投递到一个 Consumer，实现消费的负载均衡。通过 Group，您可以确保一个 Topic 的消息被并行消费。
+  A group of consumers with the same Group ID. When multiple consumers in the same Group consume a Topic, each message is delivered to only one consumer, enabling load balancing. Using Groups ensures that messages in a Topic are consumed in parallel.
 ---
 
 # volcenginecc_bmq_group (Resource)
 
-一组具有相同 Group ID 的消费端。当一个 Topic 被同一个 Group 的多个 Consumer 消费时，每一条消息都只会被投递到一个 Consumer，实现消费的负载均衡。通过 Group，您可以确保一个 Topic 的消息被并行消费。
+A group of consumers with the same Group ID. When multiple consumers in the same Group consume a Topic, each message is delivered to only one consumer, enabling load balancing. Using Groups ensures that messages in a Topic are consumed in parallel.
 
 ## Example Usage
 
@@ -31,31 +31,31 @@ resource "volcenginecc_bmq_group" "BMQGroupDemo" {
 
 ### Optional
 
-- `description` (String) Consumer Group 描述。
-- `group_name` (String) 自定义设置Consumer Group 的名称，约束限制如下：只能由小写英文字符、数字、下划线和中划线（-）组成。长度为 3~64 字符。
-- `instance_id` (String) 所属 BMQ 实例 ID。
-- `reset_info` (Attributes) 重置消费位点信息。 (see [below for nested schema](#nestedatt--reset_info))
+- `description` (String) Consumer Group description
+- `group_name` (String) Set a custom Consumer Group name. Constraints: Only lowercase English letters, numbers, underscores, and hyphens (-) are allowed. Length must be 3–64 characters.
+- `instance_id` (String) BMQ instance ID
+- `reset_info` (Attributes) Reset consumption offset information (see [below for nested schema](#nestedatt--reset_info))
 
 ### Read-Only
 
-- `created_time` (String) Consumer Group 创建时间。
-- `group_id` (String) Consumer Group 的 ID。
+- `created_time` (String) Consumer Group creation time
+- `group_id` (String) Consumer Group ID
 - `id` (String) Uniquely identifies the resource.
-- `owner_id` (String) Consumer Group 所属用户的 ID。
-- `owner_name` (String) Consumer Group 所属用户的名称。
-- `status` (String) Consumer Group 的状态。
-- `topic_infos` (Attributes Set) Topic 列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--topic_infos))
+- `owner_id` (String) User ID of the Consumer Group owner
+- `owner_name` (String) Name of the Consumer Group owner
+- `status` (String) Consumer Group status
+- `topic_infos` (Attributes Set) Topic list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--topic_infos))
 
 <a id="nestedatt--reset_info"></a>
 ### Nested Schema for `reset_info`
 
 Optional:
 
-- `offset_type` (String) 重置方式为 OFFSET 时，该参数必传，指定重新消费的基准消费位置，取值如下：EARLIEST：基准消费位置为最早消费位点。CURRENT：基准消费位置为当前消费位点。LATEST：基准消费位置为最近消费位点。
-- `partition_id` (Number) 分区序号。
-- `reset_by` (String) 重置方式，取值如下：TIMESTAMP：根据时间点重置消费位点，指定过去或将来的时间点，直接跳转到该时间点的位点开始消费。OFFSET：根据指定的 offset 重置消费位点，即从指定的位点开始消费，可以通过 offsetType 参数指定 offset。
-- `reset_value` (Number) 重置值。选择重置方式为 TIMESTAMP 时，该值为重新消费的时间点。例如 1722224612000。选择重置方式为 OFFSET 时，该值为相对于 OffsetType 中基准位点的 相对偏移量。例如 100。
+- `offset_type` (String) If the reset mode is OFFSET, this parameter is required. Specify the reference consumption position for resuming consumption. Options: EARLIEST: Reference position is the earliest offset. CURRENT: Reference position is the current offset. LATEST: Reference position is the latest offset.
+- `partition_id` (Number) Partition number
+- `reset_by` (String) Reset mode. Options: TIMESTAMP: Reset the consumption offset based on a timestamp. Specify a past or future time to jump directly to the offset at that time and start consuming. OFFSET: Reset the consumption offset based on a specified offset, starting consumption from that offset. You can specify the offset using the offsetType parameter.
+- `reset_value` (Number) Reset value. If TIMESTAMP is selected, this value is the timestamp for resuming consumption, e.g., 1722224612000. If OFFSET is selected, this value is the relative offset from the reference offset in OffsetType, e.g., 100.
 - `topic_id` (String) Topic ID。
 
 
@@ -64,28 +64,28 @@ Optional:
 
 Read-Only:
 
-- `create_time` (String) Topic 的创建时间。
-- `description` (String) Topic 的描述语句。
-- `lag` (Number) Topic 中未被消费的消息条数。
-- `partition_infos` (Attributes Set) 分区列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--topic_infos--partition_infos))
-- `partitions` (Number) Topic 分区数。
-- `retention` (Number) 数据在 Topic 中的保留时长，单位为小时。
-- `status` (String) Topic 的状态。
+- `create_time` (String) Topic creation time
+- `description` (String) Topic description
+- `lag` (Number) Number of unconsumed messages in the Topic
+- `partition_infos` (Attributes Set) Partition list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--topic_infos--partition_infos))
+- `partitions` (Number) Number of Topic partitions
+- `retention` (Number) Retention period of data in the Topic, in hours
+- `status` (String) Topic status
 - `topic_id` (String) Topic ID。
-- `topic_name` (String) Topic 的名称。
+- `topic_name` (String) Topic name
 
 <a id="nestedatt--topic_infos--partition_infos"></a>
 ### Nested Schema for `topic_infos.partition_infos`
 
 Read-Only:
 
-- `current_offset` (Number) 当前消费位点。
-- `group_name` (String) Consumer Group 的名称。
-- `lag` (Number) 分区中未被消费的消息条数。
-- `latest_offset` (Number) 最新消费位点。
-- `partition_id` (Number) 分区序号。
-- `topic_name` (String) Consumer Group 订阅的 Topic 名称。
+- `current_offset` (Number) Current consumption offset
+- `group_name` (String) Consumer Group name
+- `lag` (Number) Number of unconsumed messages in the partition
+- `latest_offset` (Number) Latest consumption offset
+- `partition_id` (Number) Partition number
+- `topic_name` (String) Name of the Topic subscribed by the Consumer Group
 
 ## Import
 

@@ -9,11 +9,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+          "description": "Tag key. Length must be between 1 and 128 characters. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system will automatically remove it.",
           "type": "string"
         },
         "Value": {
-          "description": "标签的标签值。长度取值范围为0～256字符，不填默认为空。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+          "description": "Tag value. Length must be between 0 and 256 characters. If not specified, the default is empty. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.",
           "type": "string"
         }
       },
@@ -23,7 +23,7 @@
       "type": "object"
     }
   },
-  "description": "镜像目的是收集流量的网卡或传统型负载均衡。您可以通过流量镜像，按自己设定的筛选条件复制网卡的流量，并将复制的流量私网转发到目标服务进行监控分析。",
+  "description": "The mirror target is the network interface or classic load balancer used to collect traffic. You can use traffic mirroring to replicate network interface traffic based on your filtering criteria and forward the replicated traffic over the private network to the target service for monitoring and analysis.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/TrafficMirrorTargetId",
@@ -70,23 +70,23 @@
   ],
   "properties": {
     "CreatedAt": {
-      "description": "镜像会话的创建时间。",
+      "description": "Creation time of the mirror session.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "监听器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。不填则默认值为空字符串。",
+      "description": "Listener description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If not specified, the default value is an empty string.",
       "maxLength": 255,
       "minLength": 0,
       "semantic": "description",
       "type": "string"
     },
     "InstanceId": {
-      "description": "镜像目的的资源ID。",
+      "description": "Resource ID of the mirror target.",
       "type": "string"
     },
     "InstanceType": {
-      "description": "镜像目的的资源类型。NetworkInterface：弹性网卡。ClbInstance：传统型负载均衡。",
+      "description": "Resource type of the mirror target. NetworkInterface: Elastic network interface. ClbInstance: Classic load balancer.",
       "enum": [
         "NetworkInterface",
         "ClbInstance"
@@ -94,12 +94,12 @@
       "type": "string"
     },
     "ProjectName": {
-      "description": "镜像目的所属项目的名称。不填默认加入default项目。",
+      "description": "Name of the project to which the mirror target belongs. If not specified, it will be added to the default project.",
       "semantic": "projectName",
       "type": "string"
     },
     "Status": {
-      "description": "镜像目的状态。Available：可用。Creating：创建中。",
+      "description": "Status of the mirror target. Available: Available. Creating: Creating.",
       "enum": [
         "Available",
         "Creating"
@@ -108,7 +108,7 @@
       "type": "string"
     },
     "Tags": {
-      "description": "镜像目的的标签信息。",
+      "description": "Tag information of the mirror target.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -119,19 +119,19 @@
       "uniqueItems": true
     },
     "TrafficMirrorTargetId": {
-      "description": "镜像目的的ID。",
+      "description": "ID of the mirror target.",
       "semantic": "resourceId",
       "type": "string"
     },
     "TrafficMirrorTargetName": {
-      "description": "监听器的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线_）和中划线（-）。长度限制在1～128字符之间。不填则默认将“协议-端口”作为监听器名称。",
+      "description": "Listener name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, the default is 'protocol-port' as the listener name.",
       "maxLength": 128,
       "minLength": 1,
       "semantic": "resourceName",
       "type": "string"
     },
     "UpdatedAt": {
-      "description": "镜像会话的更新时间。",
+      "description": "Update time of the mirror session.",
       "semantic": "updatedTime",
       "type": "string"
     }

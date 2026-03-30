@@ -27,7 +27,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "ipv4",
-		//	  "description": "后端服务器组的IP地址类型。ipv4：后端服务器组为IPv4类型。ipv6：后端服务器组为IPv6类型。",
+		//	  "description": "IP address type of the backend server group. ipv4: The backend server group is of IPv4 type. ipv6: The backend server group is of IPv6 type.",
 		//	  "enum": [
 		//	    "ipv4",
 		//	    "ipv6"
@@ -35,14 +35,14 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"address_ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的IP地址类型。ipv4：后端服务器组为IPv4类型。ipv6：后端服务器组为IPv6类型。",
+			Description: "IP address type of the backend server group. ipv4: The backend server group is of IPv4 type. ipv6: The backend server group is of IPv6 type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AnyPortEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启全端口转发。on：开启全端口转发。off：关闭全端口转发。",
+		//	  "description": "Whether to enable all-port forwarding. on: enable all-port forwarding. off: disable all-port forwarding.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -50,43 +50,43 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"any_port_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启全端口转发。on：开启全端口转发。off：关闭全端口转发。",
+			Description: "Whether to enable all-port forwarding. on: enable all-port forwarding. off: disable all-port forwarding.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的创建时间。",
+		//	  "description": "Creation time of the backend server group.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的创建时间。",
+			Description: "Creation time of the backend server group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个符。不填则默认为空字符串。",
+		//	  "description": "Description of the backend server group. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个符。不填则默认为空字符串。",
+			Description: "Description of the backend server group. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组关联的监听器信息。",
+		//	  "description": "Listener information associated with the backend server group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ListenerId": {
-		//	        "description": "监听器的ID。",
+		//	        "description": "Listener ID.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -103,60 +103,60 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ListenerId
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的ID。",
+						Description: "Listener ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "后端服务器组关联的监听器信息。",
+			Description: "Listener information associated with the backend server group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组所属的CLB实例ID。",
+		//	  "description": "CLB instance ID to which the backend server group belongs.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组所属的CLB实例ID。",
+			Description: "CLB instance ID to which the backend server group belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的ID。",
+		//	  "description": "Backend server group ID.",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的ID。",
+			Description: "Backend server group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroupName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。限制为1 ～ 128个字符。不填默认为后端服务器组ID。",
+		//	  "description": "Name of the backend server group. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Limit: 1–128 characters. If not specified, defaults to the backend server group ID.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"server_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。限制为1 ～ 128个字符。不填默认为后端服务器组ID。",
+			Description: "Name of the backend server group. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Limit: 1–128 characters. If not specified, defaults to the backend server group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Servers
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组中服务器的信息。",
+		//	  "description": "Information about servers in the backend server group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AnyPortEnabled": {
 		//	        "default": "off",
-		//	        "description": "是否开启全端口转发。on：开启。off（默认值）：关闭。",
+		//	        "description": "Enable all-port forwarding. on: enabled. off (default): disabled.",
 		//	        "enum": [
 		//	          "on",
 		//	          "off"
@@ -164,31 +164,31 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "后端服务器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255字符。不填则默认为空字符串。",
+		//	        "description": "Backend server description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.",
 		//	        "maxLength": 255,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceId": {
-		//	        "description": "后端服务器。取值情况如下：当 Type 取ecs时，传云服务器实例的ID。当Type 取eni时，传已挂载至云服务器的辅助网卡的ID。当 Type 取ip时，传IP地址作为后端服务器。",
+		//	        "description": "Backend server. Value options: When Type is ecs, provide the cloud server instance ID. When Type is eni, provide the ID of the auxiliary network card attached to the cloud server. When Type is ip, provide the IP address as the backend server.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ip": {
-		//	        "description": "后端服务器的私网IP地址。多个后端服务器IP之间使用“\u0026”分隔。",
+		//	        "description": "Private IP address of the backend server. Use '\u0026' to separate multiple backend server IP addresses.",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "后端服务器接收请求的端口号。取值范围为1～65535。参数AnyPortEnabled为“off”，且需要同时添加后端服务器时，该参数必须传入；参数AnyPortEnabled为“on”时，该参数默认为0。",
+		//	        "description": "Port number on which the backend server receives requests. Value range: 1–65535. If the AnyPortEnabled parameter is 'off' and you need to add backend servers at the same time, this parameter must be provided. If AnyPortEnabled is 'on', this parameter defaults to 0.",
 		//	        "format": "int64",
 		//	        "maximum": 65535,
 		//	        "type": "integer"
 		//	      },
 		//	      "ServerId": {
-		//	        "description": "后端服务器ID。",
+		//	        "description": "Backend server ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "后端服务器实例类型。当参数Type取instance时，取值如下：ecs：云服务器实例。eni：网卡。当参数Type取ip时，本参数取值为ip。",
+		//	        "description": "Backend server instance type. When the Type parameter is instance, value options are: ecs: cloud server instance. eni: auxiliary network card. When the Type parameter is ip, this parameter value is ip.",
 		//	        "enum": [
 		//	          "ecs",
 		//	          "eni",
@@ -198,7 +198,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Weight": {
 		//	        "default": 0,
-		//	        "description": "后端服务器的权重，取值范围为0 ～ 100。不填则默认为0。0表示不会将请求转发给该后端服务器。",
+		//	        "description": "Backend server weight, range: 0–100. If not specified, defaults to 0. 0 means requests will not be forwarded to this backend server.",
 		//	        "format": "int64",
 		//	        "maximum": 100,
 		//	        "minimum": 0,
@@ -220,63 +220,63 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AnyPortEnabled
 					"any_port_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "是否开启全端口转发。on：开启。off（默认值）：关闭。",
+						Description: "Enable all-port forwarding. on: enabled. off (default): disabled.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255字符。不填则默认为空字符串。",
+						Description: "Backend server description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器。取值情况如下：当 Type 取ecs时，传云服务器实例的ID。当Type 取eni时，传已挂载至云服务器的辅助网卡的ID。当 Type 取ip时，传IP地址作为后端服务器。",
+						Description: "Backend server. Value options: When Type is ecs, provide the cloud server instance ID. When Type is eni, provide the ID of the auxiliary network card attached to the cloud server. When Type is ip, provide the IP address as the backend server.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ip
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的私网IP地址。多个后端服务器IP之间使用“&”分隔。",
+						Description: "Private IP address of the backend server. Use '&' to separate multiple backend server IP addresses.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器接收请求的端口号。取值范围为1～65535。参数AnyPortEnabled为“off”，且需要同时添加后端服务器时，该参数必须传入；参数AnyPortEnabled为“on”时，该参数默认为0。",
+						Description: "Port number on which the backend server receives requests. Value range: 1–65535. If the AnyPortEnabled parameter is 'off' and you need to add backend servers at the same time, this parameter must be provided. If AnyPortEnabled is 'on', this parameter defaults to 0.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ServerId
 					"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器ID。",
+						Description: "Backend server ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器实例类型。当参数Type取instance时，取值如下：ecs：云服务器实例。eni：网卡。当参数Type取ip时，本参数取值为ip。",
+						Description: "Backend server instance type. When the Type parameter is instance, value options are: ecs: cloud server instance. eni: auxiliary network card. When the Type parameter is ip, this parameter value is ip.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的权重，取值范围为0 ～ 100。不填则默认为0。0表示不会将请求转发给该后端服务器。",
+						Description: "Backend server weight, range: 0–100. If not specified, defaults to 0. 0 means requests will not be forwarded to this backend server.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "后端服务器组中服务器的信息。",
+			Description: "Information about servers in the backend server group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息。",
+		//	  "description": "Tag information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "绑定的标签键信息。",
+		//	        "description": "Information about bound tag keys.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "绑定的标签值信息。",
+		//	        "description": "Bound tag value information.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -294,17 +294,17 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "绑定的标签键信息。",
+						Description: "Information about bound tag keys.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "绑定的标签值信息。",
+						Description: "Bound tag value information.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息。",
+			Description: "Tag information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
@@ -312,7 +312,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "instance",
-		//	  "description": "后端服务器组的类型。instance：表示该后端服务器组只能添加云服务器的主网卡或辅助网卡作为后端服务器。ip：表示该后端服务器组只能添加IP地址作为后端服务器。",
+		//	  "description": "Type of the backend server group. instance: This backend server group can only add the primary or auxiliary network card of a cloud server as backend servers. ip: This backend server group can only add IP addresses as backend servers.",
 		//	  "enum": [
 		//	    "instance",
 		//	    "ip"
@@ -320,18 +320,18 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的类型。instance：表示该后端服务器组只能添加云服务器的主网卡或辅助网卡作为后端服务器。ip：表示该后端服务器组只能添加IP地址作为后端服务器。",
+			Description: "Type of the backend server group. instance: This backend server group can only add the primary or auxiliary network card of a cloud server as backend servers. ip: This backend server group can only add IP addresses as backend servers.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的最近操作时间。",
+		//	  "description": "Last operation time of the backend server group.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的最近操作时间。",
+			Description: "Last operation time of the backend server group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -26,85 +26,85 @@ func customizedCfgDataSource(ctx context.Context) (datasource.DataSource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置的创建时间。",
+		//	  "description": "Creation time of the personalized configuration.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置的创建时间。",
+			Description: "Creation time of the personalized configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomizedCfgContent
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置项内容。具体规则如下：长度不超过4096字符。空格和分号需要转义。不同的配置项之间通过\";\\r\\n\"分隔，配置项不能重复。当前支持的配置项有ssl_protocols、ssl_ciphers、client_max_body_size、keepalive_timeout、proxy_request_buffering、proxy_connect_timeout、add_header、client_header_timeout、proxy_read_timeout、proxy_send_timeout、client_body_timeout、send_timeout和ssl_verify_depth。详细信息参见官网文档。",
+		//	  "description": "Content of the personalized configuration item. Specific rules: Length must not exceed 4096 characters. Spaces and semicolons must be escaped. Different configuration items are separated by ';\r\n'. Configuration items cannot be duplicated. Currently supported configuration items include ssl_protocols, ssl_ciphers, client_max_body_size, keepalive_timeout, proxy_request_buffering, proxy_connect_timeout, add_header, client_header_timeout, proxy_read_timeout, proxy_send_timeout, client_body_timeout, send_timeout, and ssl_verify_depth. For details, see the official documentation.",
 		//	  "maxLength": 4096,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"customized_cfg_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置项内容。具体规则如下：长度不超过4096字符。空格和分号需要转义。不同的配置项之间通过\";\\r\\n\"分隔，配置项不能重复。当前支持的配置项有ssl_protocols、ssl_ciphers、client_max_body_size、keepalive_timeout、proxy_request_buffering、proxy_connect_timeout、add_header、client_header_timeout、proxy_read_timeout、proxy_send_timeout、client_body_timeout、send_timeout和ssl_verify_depth。详细信息参见官网文档。",
+			Description: "Content of the personalized configuration item. Specific rules: Length must not exceed 4096 characters. Spaces and semicolons must be escaped. Different configuration items are separated by ';\r\n  '. Configuration items cannot be duplicated. Currently supported configuration items include ssl_protocols, ssl_ciphers, client_max_body_size, keepalive_timeout, proxy_request_buffering, proxy_connect_timeout, add_header, client_header_timeout, proxy_read_timeout, proxy_send_timeout, client_body_timeout, send_timeout, and ssl_verify_depth. For details, see the official documentation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomizedCfgId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置的 ID 。",
+		//	  "description": "Personalized configuration ID.",
 		//	  "type": "string"
 		//	}
 		"customized_cfg_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置的 ID 。",
+			Description: "Personalized configuration ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomizedCfgName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置的名字。具体规则如下：不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。",
+		//	  "description": "Name of the personalized configuration. Specific rules: Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"customized_cfg_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置的名字。具体规则如下：不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。",
+			Description: "Name of the personalized configuration. Specific rules: Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置的描述。具体规则如下：不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）长度限制为1 ～ 255个字符。不填默认为空字符串。",
+		//	  "description": "Description of the personalized configuration. Specific rules: Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置的描述。具体规则如下：不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）长度限制为1 ～ 255个字符。不填默认为空字符串。",
+			Description: "Description of the personalized configuration. Specific rules: Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置关联的监听器列表。",
+		//	  "description": "List of listeners associated with the personalized configuration.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ListenerId": {
-		//	        "description": "监听器的 ID。",
+		//	        "description": "Listener ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerName": {
-		//	        "description": "监听器的名称。",
+		//	        "description": "Listener name.",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "监听器的端口。",
+		//	        "description": "Listener port.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "监听器的协议。",
+		//	        "description": "Listener protocol.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -118,27 +118,27 @@ func customizedCfgDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ListenerId
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的 ID。",
+						Description: "Listener ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerName
 					"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的名称。",
+						Description: "Listener name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "监听器的端口。",
+						Description: "Listener port.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的协议。",
+						Description: "Listener protocol.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "个性化配置关联的监听器列表。",
+			Description: "List of listeners associated with the personalized configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -146,38 +146,38 @@ func customizedCfgDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "个性化配置所属项目名称。",
+		//	  "description": "Project name to which the personalized configuration belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置所属项目名称。",
+			Description: "Project name to which the personalized configuration belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置状态。包括Active、Configuring、Creating或者Deleting。",
+		//	  "description": "Status of the personalized configuration. Includes Active, Configuring, Creating, or Deleting.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置状态。包括Active、Configuring、Creating或者Deleting。",
+			Description: "Status of the personalized configuration. Includes Active, Configuring, Creating, or Deleting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -194,28 +194,28 @@ func customizedCfgDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置的最近操作时间。",
+		//	  "description": "Last operation time of the personalized configuration.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置的最近操作时间。",
+			Description: "Last operation time of the personalized configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

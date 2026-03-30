@@ -28,11 +28,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权创建时间。",
+		//	  "description": "Authorization creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权创建时间。",
+			Description: "Authorization creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -42,11 +42,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集 ID。",
+		//	  "description": "Permission set ID",
 		//	  "type": "string"
 		//	}
 		"permission_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集 ID。",
+			Description: "Permission set ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -56,11 +56,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集名称。",
+		//	  "description": "Permission set name",
 		//	  "type": "string"
 		//	}
 		"permission_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集名称。",
+			Description: "Permission set name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -70,11 +70,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云身份中心对象 ID",
+		//	  "description": "Cloud Identity Center object ID",
 		//	  "type": "string"
 		//	}
 		"principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云身份中心对象 ID",
+			Description: "Cloud Identity Center object ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -84,11 +84,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云身份中心对象名。",
+		//	  "description": "Cloud Identity Center object name",
 		//	  "type": "string"
 		//	}
 		"principal_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云身份中心对象名。",
+			Description: "Cloud Identity Center object name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -98,11 +98,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云身份中心对象类型，User 或者 Group。",
+		//	  "description": "Cloud Identity Center object type: User or Group",
 		//	  "type": "string"
 		//	}
 		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云身份中心对象类型，User 或者 Group。",
+			Description: "Cloud Identity Center object type: User or Group",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -112,11 +112,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权账号 ID。",
+		//	  "description": "Authorized account ID",
 		//	  "type": "string"
 		//	}
 		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权账号 ID。",
+			Description: "Authorized account ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -126,11 +126,11 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权账号名。",
+		//	  "description": "Authorized account name",
 		//	  "type": "string"
 		//	}
 		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权账号名。",
+			Description: "Authorized account name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -148,7 +148,7 @@ func permissionSetAssignmentResource(ctx context.Context) (resource.Resource, er
 	}
 
 	schema := schema.Schema{
-		Description: "当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。\n当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。",
+		Description: "After you create a Cloud Identity Center user, you need to grant the user login access to each account.\nWhen users require access to Volcano Engine cloud resources with permissions that share abstractable characteristics, such as network operations permissions or security management permissions, you can predefine permission sets in the Cloud Identity Center as templates. You can achieve centralized authorization based on these permission sets. The Cloud Identity Center will synchronize and distribute permission sets to each account, reducing enterprise permission management costs.",
 		Version:     1,
 		Attributes:  attributes,
 	}

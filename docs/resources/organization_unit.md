@@ -2,12 +2,12 @@
 page_title: "volcenginecc_organization_unit Resource - terraform-provider-volcenginecc"
 subcategory: "Organization"
 description: |-
-  企业组织的创建者管理员账号可以新建组织单元来搭建企业的组织结构，对账号进行分组织单元管理。组织单元可以分多个组织单元层级，管理员账号也可属于任意层级的任意组织单元节点。
+  The administrator account that created the enterprise organization can create organizational units to build the enterprise's organizational structure and manage accounts by organizational unit. Organizational units can have multiple hierarchical levels, and administrator accounts can belong to any organizational unit node at any level.
 ---
 
 # volcenginecc_organization_unit (Resource)
 
-企业组织的创建者管理员账号可以新建组织单元来搭建企业的组织结构，对账号进行分组织单元管理。组织单元可以分多个组织单元层级，管理员账号也可属于任意层级的任意组织单元节点。
+The administrator account that created the enterprise organization can create organizational units to build the enterprise's organizational structure and manage accounts by organizational unit. Organizational units can have multiple hierarchical levels, and administrator accounts can belong to any organizational unit node at any level.
 
 ## Example Usage
 
@@ -24,25 +24,25 @@ resource "volcenginecc_organization_unit" "OrganizationUnitDemo" {
 
 ### Required
 
-- `name` (String) 组织单元名称。
-- `parent_id` (String) 父单元Id。
+- `name` (String) Organizational unit name.
+- `parent_id` (String) Parent unit ID.
 
 ### Optional
 
-- `description` (String) 描述。
+- `description` (String) Description.
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `delete_uk` (String) 删除标识。
-- `deleted_time` (String) 删除时间。
-- `depth` (Number) 深度。
+- `created_time` (String) Creation time.
+- `delete_uk` (String) Deletion flag.
+- `deleted_time` (String) Deletion time.
+- `depth` (Number) Depth.
 - `id` (String) Uniquely identifies the resource.
-- `org_id` (String) 组织ID。
-- `org_type` (Number) 组织类型。企业组织： 1
-- `org_unit_id` (String) 组织单元ID。
-- `owner` (String) 管理员ID。
-- `updated_time` (String) 更新时间。
+- `org_id` (String) Organization ID.
+- `org_type` (Number) Organization type. Enterprise organization: 1
+- `org_unit_id` (String) Organizational unit ID.
+- `owner` (String) Administrator ID.
+- `updated_time` (String) Update time.
 
 ## Import
 

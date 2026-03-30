@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cbr_backup_policy Resource - terraform-provider-volcenginecc"
 subcategory: "CBR"
 description: |-
-  备份策略中定义了备份周期、备份类型等信息。后续通过备份计划关联备份策略与备份存储空间，实现自动备份。
+  The backup policy defines information such as backup cycle and backup type. Subsequently, backup plans associate the backup policy with backup storage space to achieve automatic backup
 ---
 
 # volcenginecc_cbr_backup_policy (Resource)
 
-备份策略中定义了备份周期、备份类型等信息。后续通过备份计划关联备份策略与备份存储空间，实现自动备份。
+The backup policy defines information such as backup cycle and backup type. Subsequently, backup plans associate the backup policy with backup storage space to achieve automatic backup
 
 ## Example Usage
 
@@ -28,22 +28,22 @@ resource "volcenginecc_cbr_backuppolicy" "CBRBackupPolicyDemo" {
 
 ### Required
 
-- `backup_type` (String) 备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。
-- `crontab` (String) 备份周期，采用 crontab 表达式。
-- `enable_policy` (Boolean) 策略是否启用，取值说明如下：true：启用策略。false：禁用策略。
-- `name` (String) 策略名称。
-- `retention_day` (Number) 恢复点保留时间，-1 表示持续保留。其它合法取值的范围是[1, 999999]
-- `retention_num_max` (Number) 最大恢复点保留数量。
-- `retention_num_min` (Number) 最小恢复点保留数量下限。
+- `backup_type` (String) Backup type. Values are as follows: FULL: full backup; INCREMENTAL: incremental backup
+- `crontab` (String) Backup cycle, using a crontab expression
+- `enable_policy` (Boolean) Whether the policy is enabled. Values are as follows: true: policy enabled; false: policy disabled
+- `name` (String) Policy Name
+- `retention_day` (Number) Restore point retention period. -1 means retain indefinitely. Other valid values range from [1, 999999]
+- `retention_num_max` (Number) Maximum number of restore points retained
+- `retention_num_min` (Number) Minimum restore point retention limit
 
 ### Read-Only
 
-- `account_id` (String) 创建此策略的账户 ID。
-- `created_time` (String) 创建时间。
+- `account_id` (String) Account ID that created this policy
+- `created_time` (String) Creation time
 - `id` (String) Uniquely identifies the resource.
-- `plan_number` (Number) 该策略已关联的备份计划数量。
-- `policy_id` (String) 备份策略 ID。
-- `updated_time` (String) 更新时间。
+- `plan_number` (Number) Number of backup plans associated with this policy
+- `policy_id` (String) Backup Policy ID
+- `updated_time` (String) Update time
 
 ## Import
 

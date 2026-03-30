@@ -21,20 +21,20 @@ Data Source schema for Volcengine::ECS::HpcCluster
 
 ### Read-Only
 
-- `created_time` (String) 创建时间，格式满足RFC3339。
-- `description` (String) 高性能计算集群描述，默认为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0～255之间。
-- `hpc_cluster_id` (String) 高性能计算集群ID。
-- `name` (String) 高性能计算集群名称。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1～128之间。
-- `project_name` (String) 项目名称。
-- `tags` (Attributes Set) 标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) 更新时间，格式满足RFC3339。
-- `vpc_id` (String) 私有网络ID。
-- `zone_id` (String) 高性能计算集群所属可用区ID。
+- `created_time` (String) Creation time, formatted according to RFC3339
+- `description` (String) High performance compute cluster description. Defaults to an empty string. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 0 and 255 characters
+- `hpc_cluster_id` (String) High performance compute cluster ID
+- `name` (String) High performance compute cluster name. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 1 and 128 characters
+- `project_name` (String) Project name
+- `tags` (Attributes Set) Tag information (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Update time, formatted according to RFC3339
+- `vpc_id` (String) Private network ID
+- `zone_id` (String) Availability zone ID of the high performance compute cluster
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

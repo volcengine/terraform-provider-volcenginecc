@@ -664,3 +664,19 @@ resource_schema "volcengine_kafka_instance" {
 resource_schema "volcengine_emr_node_group" {
   cloudcontrol_type_name = "Volcengine::EMR::NodeGroup"
 }
+
+resource_schema "volcengine_vefaas_function" {
+  cloudcontrol_type_name = "Volcengine::VEFAAS::Function"
+}
+
+resource_schema "volcengine_cen_grant_instance" {
+  cloudcontrol_type_name = "Volcengine::CEN::GrantInstance"
+}
+
+resource_schema "volcengine_vpn_vpn_connection" {
+  cloudcontrol_type_name = "Volcengine::VPN::VPNConnection"
+}
+
+resource_schema "volcengine_privatezone_user_vpc_authorization" {
+  cloudcontrol_type_name = "Volcengine::PrivateZone::UserVPCAuthorization"
+}

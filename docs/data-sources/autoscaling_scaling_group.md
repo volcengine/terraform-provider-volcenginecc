@@ -21,45 +21,79 @@ Data Source schema for Volcengine::AutoScaling::ScalingGroup
 
 ### Read-Only
 
-- `active_scaling_configuration_id` (String) 伸缩组绑定的伸缩配置的ID。
-- `created_time` (String) 伸缩组创建时间。
-- `db_instance_ids` (Set of String) RDS数据库实例的ID。
-- `default_cooldown` (Number) 执行一次伸缩活动（添加或移出ECS实例）结束后的冷却时间。冷却时间内，该伸缩组不执行其它的伸缩活动，仅针对云监控报警任务触发的伸缩活动和伸缩规则有效。取值范围：5 ~ 86400，单位：秒。默认值：300。
-- `desire_instance_number` (Number) 伸缩组中期望运行的实例个数。1、不小于最小实例数MinInstanceNumber且不大于最大实例数MaxInstanceNumber。2、默认值：-1，表示不开启期望实例数能力。此时，伸缩组创建完成后会立即开始伸缩活动自动添加相应个数的实例。
-- `health_check_type` (String) 伸缩组的健康检查方式。1、NONE：不做实例健康状态检查。2、ECS（默认）：对伸缩组内的ECS实例做健康检查。
-- `instance_terminate_policy` (String) 实例移除策略，1、OldestInstance：移出最早加入 （包括自动创建和手动添加）伸缩组的实例。2、NewestInstance：移出最晚加入（包括自动创建和手动添加）伸缩组的实例。3、OldestScalingConfigurationWithOldestInstance（默认）：移出最早与伸缩组绑定的伸缩配置中，最早由伸缩组 自动创建 的实例。4、OldestScalingConfigurationWithNewestInstance：移出最早与伸缩组绑定的伸缩配置中，最晚由伸缩组 自动创建 的实例。
-- `instances_distribution` (Attributes) 实例分布策略。 (see [below for nested schema](#nestedatt--instances_distribution))
-- `is_enable_scaling_group` (Boolean) 是否启用伸缩组。true：启用。false：停止
-- `launch_template_id` (String) 实例启动模板ID，配置后表示选择启动模版作为伸缩配置来源。
-- `launch_template_overrides` (Attributes Set) 实例启动模版信息。 (see [below for nested schema](#nestedatt--launch_template_overrides))
-- `launch_template_version` (String) 实例启动模板的版本。1、模板的某个版本号。2、Default（默认）：始终使用模板默认版本。3、Latest：始终使用模板最新版本。
-- `lifecycle_state` (String) 伸缩组的状态。Active：已启用。InActive：未激活。Deleting：删除中。Locked: 已锁定。CoolingDown: 冷却中。Unknown: 未知状态。
-- `load_balancer_health_check_grace_period` (Number) 伸缩组实例CLB健康状况检查宽限期。
-- `max_instance_number` (Number) 伸缩组中实例个数的最大值，默认取值0 ～ 100。您可以通过配额中心调整。
-- `min_instance_number` (Number) 伸缩组中实例个数的最小值，默认取值0 ～ 100。您可以通过配额中心调整。
-- `multi_az_policy` (String) 扩缩容策略，如果您选择了多个子网，需配置本参数。1、PRIORITY（默认）：优先级策略。2、BALANCE：均衡分布策略。
-- `project_name` (String) 伸缩组所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。
-- `scaling_group_id` (String) 伸缩组ID。
-- `scaling_group_name` (String) 伸缩组名称，同一地域下伸缩组名称唯一。只能以中文、字母开头，只能包含中文、字母、数字、下划线和中划线 。长度限制为1 ~ 128个字符。暂不支持特殊字符。
-- `scaling_mode` (String) 伸缩组的实例回收模式。1、release（默认）：释放模式。2、recycle：停机回收模式。
-- `server_group_attributes` (Attributes Set) 伸缩组关联的负载均衡信息。 (see [below for nested schema](#nestedatt--server_group_attributes))
-- `stopped_instance_count` (Number) 伸缩组内处于停用中状态的实例数量。
-- `subnet_ids` (Set of String) 伸缩组中实例主网卡的子网ID列表。
-- `suspended_processes` (Set of String) 暂停中的流程，无暂停中流程则返回空值。ScaleIn：缩容流程。ScaleOut：扩容流程。HealthCheck：健康检查。AlarmNotification：报警任务。ScheduledAction：定时任务。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `total_instance_count` (Number) 当前伸缩组内实例的个数。
-- `updated_time` (String) 伸缩组更新时间。
-- `vpc_id` (String) 伸缩组所属私有网络ID。
+- `active_scaling_configuration_id` (String) ID of the scaling configuration bound to the scaling group
+- `created_time` (String) Scaling group creation time
+- `db_instance_ids` (Set of String) ID of the RDS database instance.
+- `default_cooldown` (Number) Cooldown period after a scaling activity (adding or removing ECS instances) completes. During the cooldown period, the scaling group does not perform other scaling activities; only scaling activities triggered by Cloud Monitoring alarms and scaling rules are effective. Value range: 5 ~ 86400 seconds. Default value: 300.
+- `desire_instance_number` (Number) Expected number of running instances in the scaling group. 1. Must be no less than MinInstanceNumber and no greater than MaxInstanceNumber. 2. Default value: -1, which means the expected instance count feature is disabled. In this case, after the scaling group is created, scaling activities will automatically add the corresponding number of instances.
+- `health_check_type` (String) Health check mode for the scaling group. 1. NONE: No instance health check. 2. ECS (default): Performs health checks on ECS instances in the scaling group.
+- `instance_remove_policies` (Attributes List) Instance removal policy (see [below for nested schema](#nestedatt--instance_remove_policies))
+- `instance_terminate_policy` (String) Instance removal policies: 1. OldestInstance: Removes the earliest instance added to the scaling group (including both automatically created and manually added instances). 2. NewestInstance: Removes the latest instance added to the scaling group (including both automatically created and manually added instances). 3. OldestScalingConfigurationWithOldestInstance (default): Removes the earliest automatically created instance in the scaling configuration that was first associated with the scaling group. 4. OldestScalingConfigurationWithNewestInstance: Removes the latest automatically created instance in the scaling configuration that was first associated with the scaling group.
+- `instances` (Attributes List) Collection of instance subresources managed manually within the scaling group (Attach / Detach / Remove) (see [below for nested schema](#nestedatt--instances))
+- `instances_distribution` (Attributes) Instance distribution policy. (see [below for nested schema](#nestedatt--instances_distribution))
+- `is_enable_scaling_group` (Boolean) Whether to enable the scaling group. true: enabled. false: stopped
+- `launch_template_id` (String) Instance launch template ID. When configured, it indicates that the launch template is used as the source for the scaling configuration.
+- `launch_template_overrides` (Attributes Set) Instance launch template information (see [below for nested schema](#nestedatt--launch_template_overrides))
+- `launch_template_version` (String) Instance launch template version. 1. A specific template version number. 2. Default: always use the default template version. 3. Latest: always use the latest template version.
+- `lifecycle_state` (String) Status of the scaling group. Active: enabled. InActive: not activated. Deleting: deleting. Locked: locked. CoolingDown: cooling down. Unknown: unknown status.
+- `load_balancer_health_check_grace_period` (Number) Grace period for CLB health checks on scaling group instances
+- `max_instance_number` (Number) Maximum number of instances in the scaling group. Default value: 0 ~ 100. You can adjust this in the Quota Center.
+- `min_instance_number` (Number) Minimum number of instances in the scaling group. Default value: 0–100. You can adjust this in the quota center.
+- `multi_az_policy` (String) Scaling strategy. If you select multiple subnets, you must configure this parameter. 1. PRIORITY (default): priority strategy. 2. BALANCE: balanced distribution strategy.
+- `project_name` (String) Project to which the scaling group belongs. Default is 'default'. A resource can belong to only one project. Only letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed. Maximum length: 64 characters.
+- `scaling_group_id` (String) Scaling group ID.
+- `scaling_group_name` (String) Scaling group name, unique within the same region. Must start with a Chinese character or letter, and can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length limit: 1 ~ 128 characters. Special characters are not supported.
+- `scaling_mode` (String) Instance recycling mode for the scaling group. 1. release (default): Release mode. 2. recycle: Stop-and-recycle mode.
+- `server_group_attributes` (Attributes Set) Load balancer information associated with the scaling group. (see [below for nested schema](#nestedatt--server_group_attributes))
+- `stopped_instance_count` (Number) Number of instances in the scaling group that are in the disabled state.
+- `subnet_ids` (Set of String) List of subnet IDs for the primary network interface of instances in the scaling group
+- `suspended_processes` (Set of String) Paused processes. If there are no paused processes, returns an empty value. ScaleIn: scale-in process. ScaleOut: scale-out process. HealthCheck: health check. AlarmNotification: alarm task. ScheduledAction: scheduled task.
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
+- `total_instance_count` (Number) Number of instances currently in the scaling group
+- `updated_time` (String) Scaling group update time.
+- `vpc_id` (String) VPC ID to which the scaling group belongs
+
+<a id="nestedatt--instance_remove_policies"></a>
+### Nested Schema for `instance_remove_policies`
+
+Read-Only:
+
+- `decrease_desired_capacity` (Boolean) Whether to decrease the desired instance count synchronously when DetachInstances or RemoveInstances is performed
+- `detach_option` (String) Instance removal policy for DetachInstances
+- `force_delete` (Boolean) Whether to force delete the instance when RemoveInstances is performed
+- `instance_id` (String) ECS instance ID, unique identifier of the subresource
+- `lifecycle_hook` (Boolean) Whether to trigger lifecycle hooks when the instance is attached, detached, or removed
+- `mode` (String) Mode: How to handle an instance when it is removed from the scaling group: Detach means only remove from the scaling group, Remove means remove and delete the instance
+- `remove_mode` (String) Removal mode for RemoveInstances
+
+
+<a id="nestedatt--instances"></a>
+### Nested Schema for `instances`
+
+Read-Only:
+
+- `created_time` (String) Time when the instance joined the scaling group
+- `creation_type` (String) How the instance joined the scaling group (Attached / AutoCreated)
+- `entrusted` (Boolean) Whether to enable managed mode for the instance when AttachInstances is performed
+- `instance_id` (String) ECS instance ID, unique identifier of the subresource
+- `launch_template_id` (String) Launch template ID used by the instance
+- `launch_template_version` (String) Launch template version used by the instance
+- `lifecycle_hook` (Boolean) Whether to trigger lifecycle hooks when the instance is attached, detached, or removed
+- `scaling_configuration_id` (String) Scaling configuration ID associated with the instance
+- `scaling_policy_id` (String) Scaling policy ID associated with the instance
+- `status` (String) Current status of the instance in the scaling group
+- `zone_id` (String) Availability zone of the instance
+
 
 <a id="nestedatt--instances_distribution"></a>
 ### Nested Schema for `instances_distribution`
 
 Read-Only:
 
-- `compensate_with_on_demand` (Boolean) 当因价格、库存等原因无法创建足够的抢占式实例时，是否允许使用按量实例补充抢占式容量。true: 允许。false（默认）: 不允许。
-- `on_demand_base_capacity` (Number) 伸缩组中按量计费实例个数的最小值，取值范围：0~2000。当组中按量计费实例个数少于该值时，将优先创建按量计费的实例。
-- `on_demand_percentage_above_base_capacity` (Number) 伸缩组满足最小按量实例数要求后，超出的实例中按量实例应占的比例，取值范围：0～100。
-- `spot_instance_remedy` (Boolean) 是否允许抢占式实例到期替换。开启则表示在抢占式实例被回收前5分钟左右，伸缩组将主动新建新的抢占式实例替换掉当前抢占式实例。true: 允许。false（默认）: 不允许。
+- `compensate_with_on_demand` (Boolean) Whether pay-as-you-go instances are allowed to supplement spot capacity if spot instances cannot be created due to price or inventory constraints. true: allowed. false (default): not allowed.
+- `on_demand_base_capacity` (Number) Minimum number of pay-as-you-go instances in the scaling group. Value range: 0~2000. If the number of pay-as-you-go instances in the group is less than this value, pay-as-you-go instances will be prioritized for creation.
+- `on_demand_percentage_above_base_capacity` (Number) After the scaling group meets the minimum number of pay-as-you-go instances, the proportion of pay-as-you-go instances among the excess instances. Value range: 0–100.
+- `spot_instance_remedy` (Boolean) Whether to allow preemptible instance replacement upon expiration. If enabled, the scaling group will proactively create a new preemptible instance to replace the current one about 5 minutes before the preemptible instance is reclaimed. true: allowed. false (default): not allowed.
 
 
 <a id="nestedatt--launch_template_overrides"></a>
@@ -67,9 +101,9 @@ Read-Only:
 
 Read-Only:
 
-- `instance_type` (String) 指定实例规格。本参数仅当LaunchTemplateId参数存在取值时生有效。
-- `price_limit` (Number) 指定抢占式实例规格每小时的最高价格。本参数仅当LaunchTemplateId参数存在取值，且启动模版的计费模式为设置出价上限的抢占式实例（即SpotWithPriceLimit）时有效。
-- `weighted_capacity` (Number) 实例规格的权重。
+- `instance_type` (String) Specify the instance type. This parameter is valid only when the LaunchTemplateId parameter is set.
+- `price_limit` (Number) Specify the maximum hourly price for spot instance types. This parameter is valid only when the LaunchTemplateId parameter is set and the launch template's billing mode is SpotWithPriceLimit.
+- `weighted_capacity` (Number) Instance type weight
 
 
 <a id="nestedatt--server_group_attributes"></a>
@@ -77,11 +111,11 @@ Read-Only:
 
 Read-Only:
 
-- `load_balancer_id` (String) 负载均衡实例的ID。
-- `port` (Number) 负载均衡后端服务器组中服务器的端口号。取值1 ～ 65535。
-- `server_group_id` (String) 负载均衡后端服务器组的ID。
-- `type` (String) 负载均衡服务器组类型。单个CLB/ALB最多支持添加20个后端服务器组，所有CLB/ALB最多支持添加100个后端服务器。ALB：应用型负载均衡。CLB：传统型型负载均衡（默认）。
-- `weight` (Number) 负载均衡后端服务器组中服务器的权重。
+- `load_balancer_id` (String) ID of the load balancer instance.
+- `port` (Number) Port number of the server in the backend server group for load balancing. Range: 1–65535.
+- `server_group_id` (String) Backend server group ID for load balancing.
+- `type` (String) Load balancing server group type. A single CLB/ALB supports up to 20 backend server groups, and the total number of backend servers supported by all CLB/ALB is 100. ALB: Application Load Balancer. CLB: Classic Load Balancer (default).
+- `weight` (Number) Weight of servers in the backend server group of the load balancer
 
 
 <a id="nestedatt--tags"></a>
@@ -89,5 +123,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User label tag key
+- `value` (String) The value of the user tag.

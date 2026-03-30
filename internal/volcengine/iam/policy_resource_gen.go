@@ -33,11 +33,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略绑定的身份数量。",
+		//	  "description": "Number of identities bound to the policy.",
 		//	  "type": "integer"
 		//	}
 		"attachment_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "策略绑定的身份数量。",
+			Description: "Number of identities bound to the policy.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -47,11 +47,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "系统预设策略所属的分类，通常为服务代码，对于自定义策略该字段不会返回值。",
+		//	  "description": "Category of the system preset policy, usually the service code. This field is not returned for custom policies.",
 		//	  "type": "string"
 		//	}
 		"category": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "系统预设策略所属的分类，通常为服务代码，对于自定义策略该字段不会返回值。",
+			Description: "Category of the system preset policy, usually the service code. This field is not returned for custom policies.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -61,11 +61,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略创建时间。",
+		//	  "description": "Policy creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略创建时间。",
+			Description: "Policy creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -75,12 +75,12 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略描述，长度不超过128。",
+		//	  "description": "Policy description, no more than 128 characters.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略描述，长度不超过128。",
+			Description: "Policy description, no more than 128 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -94,11 +94,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否是服务关联角色的策略，0代表否，1代表是。",
+		//	  "description": "Indicates whether the policy is for a service-linked role. 0 means no; 1 means yes.",
 		//	  "type": "integer"
 		//	}
 		"is_service_role_policy": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否是服务关联角色的策略，0代表否，1代表是。",
+			Description: "Indicates whether the policy is for a service-linked role. 0 means no; 1 means yes.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -108,13 +108,13 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略语法内容，例如：{\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:\",\"tag:\"],\"Resource\":[\"*\"]}]}",
+		//	  "description": "Policy syntax content, for example: {\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:\",\"tag:\"],\"Resource\":[\"*\"]}]}",
 		//	  "maxLength": 6144,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略语法内容，例如：{\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:\",\"tag:\"],\"Resource\":[\"*\"]}]}",
+			Description: "Policy syntax content, for example: {\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"iam:\",\"tag:\"],\"Resource\":[\"*\"]}]}",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 6144),
@@ -124,13 +124,13 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略名，长度1~64，支持英文、数字和+=,.@-_符号。",
+		//	  "description": "Policy name, 1–64 characters. Supports English letters, numbers, and +=,.@-_ symbols.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略名，长度1~64，支持英文、数字和+=,.@-_符号。",
+			Description: "Policy name, 1–64 characters. Supports English letters, numbers, and +=,.@-_ symbols.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
@@ -143,41 +143,41 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略绑定的角色列表。",
+		//	  "description": "List of roles bound to the policy.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CreatedTime": {
-		//	        "description": "策略绑定时间。",
+		//	        "description": "Policy binding time.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "策略描述。",
+		//	        "description": "Policy description.",
 		//	        "type": "string"
 		//	      },
 		//	      "DisplayName": {
-		//	        "description": "显示名称。",
+		//	        "description": "Display name.",
 		//	        "type": "string"
 		//	      },
 		//	      "EntitiesId": {
-		//	        "description": "唯一标识。",
+		//	        "description": "Unique identifier.",
 		//	        "type": "integer"
 		//	      },
 		//	      "Name": {
-		//	        "description": "对应用户、角色、用户组的名称。",
+		//	        "description": "Name of the corresponding user, role, or user group.",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyScope": {
-		//	        "description": "策略绑定的项目列表。",
+		//	        "description": "List of projects bound to the policy.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "CreatedTime": {
-		//	              "description": "项目授权时间。",
+		//	              "description": "Project authorization time.",
 		//	              "type": "string"
 		//	            },
 		//	            "PolicyScopeType": {
-		//	              "description": "授权类型。Global代表全局授权，Project代表按项目授权。",
+		//	              "description": "Authorization type. Global indicates global authorization; Project indicates project-based authorization.",
 		//	              "enum": [
 		//	                "Global",
 		//	                "Project"
@@ -185,11 +185,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectDisplayName": {
-		//	              "description": "项目显示名。",
+		//	              "description": "Project display name.",
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectName": {
-		//	              "description": "项目名。",
+		//	              "description": "Project name.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -219,7 +219,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EntitiesId
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "对应用户、角色、用户组的名称。",
+						Description: "Name of the corresponding user, role, or user group.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -238,7 +238,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ProjectDisplayName
 								// Property: ProjectName
 								"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "项目名。",
+									Description: "Project name.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -250,7 +250,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "策略绑定的项目列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "List of projects bound to the policy.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -259,7 +259,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "策略绑定的角色列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "List of roles bound to the policy.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -270,11 +270,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略的TRN。",
+		//	  "description": "Policy TRN.",
 		//	  "type": "string"
 		//	}
 		"policy_trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略的TRN。",
+			Description: "Policy TRN.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -284,7 +284,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略类型。System代表系统预设策略，Custom代表自定义策略。",
+		//	  "description": "Policy type. System indicates a system preset policy; Custom indicates a custom policy.",
 		//	  "enum": [
 		//	    "System",
 		//	    "Custom"
@@ -292,7 +292,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略类型。System代表系统预设策略，Custom代表自定义策略。",
+			Description: "Policy type. System indicates a system preset policy; Custom indicates a custom policy.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -308,41 +308,41 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略绑定的用户组列表。",
+		//	  "description": "List of user groups bound to the policy.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CreatedTime": {
-		//	        "description": "策略绑定时间。",
+		//	        "description": "Policy binding time.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "策略描述。",
+		//	        "description": "Policy description.",
 		//	        "type": "string"
 		//	      },
 		//	      "DisplayName": {
-		//	        "description": "显示名称。",
+		//	        "description": "Display name.",
 		//	        "type": "string"
 		//	      },
 		//	      "EntitiesId": {
-		//	        "description": "唯一标识。",
+		//	        "description": "Unique identifier.",
 		//	        "type": "integer"
 		//	      },
 		//	      "Name": {
-		//	        "description": "对应用户、角色、用户组的名称。",
+		//	        "description": "Name of the corresponding user, role, or user group.",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyScope": {
-		//	        "description": "策略绑定的项目列表。",
+		//	        "description": "List of projects bound to the policy.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "CreatedTime": {
-		//	              "description": "项目授权时间。",
+		//	              "description": "Project authorization time.",
 		//	              "type": "string"
 		//	            },
 		//	            "PolicyScopeType": {
-		//	              "description": "授权类型。Global代表全局授权，Project代表按项目授权。",
+		//	              "description": "Authorization type. Global indicates global authorization; Project indicates project-based authorization.",
 		//	              "enum": [
 		//	                "Global",
 		//	                "Project"
@@ -350,11 +350,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectDisplayName": {
-		//	              "description": "项目显示名。",
+		//	              "description": "Project display name.",
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectName": {
-		//	              "description": "项目名。",
+		//	              "description": "Project name.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -384,7 +384,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EntitiesId
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "对应用户、角色、用户组的名称。",
+						Description: "Name of the corresponding user, role, or user group.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -403,7 +403,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ProjectDisplayName
 								// Property: ProjectName
 								"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "项目名。",
+									Description: "Project name.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -415,7 +415,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "策略绑定的项目列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "List of projects bound to the policy.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -424,7 +424,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "策略绑定的用户组列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "List of user groups bound to the policy.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -435,41 +435,41 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略绑定的用户列表。",
+		//	  "description": "List of users bound to the policy.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CreatedTime": {
-		//	        "description": "策略绑定时间。",
+		//	        "description": "Policy binding time.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "策略描述。",
+		//	        "description": "Policy description.",
 		//	        "type": "string"
 		//	      },
 		//	      "DisplayName": {
-		//	        "description": "显示名称。",
+		//	        "description": "Display name.",
 		//	        "type": "string"
 		//	      },
 		//	      "EntitiesId": {
-		//	        "description": "唯一标识。",
+		//	        "description": "Unique identifier.",
 		//	        "type": "integer"
 		//	      },
 		//	      "Name": {
-		//	        "description": "对应用户、角色、用户组的名称。",
+		//	        "description": "Name of the corresponding user, role, or user group.",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyScope": {
-		//	        "description": "策略绑定的项目列表。",
+		//	        "description": "List of projects bound to the policy.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "CreatedTime": {
-		//	              "description": "项目授权时间。",
+		//	              "description": "Project authorization time.",
 		//	              "type": "string"
 		//	            },
 		//	            "PolicyScopeType": {
-		//	              "description": "授权类型。Global代表全局授权，Project代表按项目授权。",
+		//	              "description": "Authorization type. Global indicates global authorization; Project indicates project-based authorization.",
 		//	              "enum": [
 		//	                "Global",
 		//	                "Project"
@@ -477,11 +477,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectDisplayName": {
-		//	              "description": "项目显示名。",
+		//	              "description": "Project display name.",
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectName": {
-		//	              "description": "项目名。",
+		//	              "description": "Project name.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -511,7 +511,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EntitiesId
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "对应用户、角色、用户组的名称。",
+						Description: "Name of the corresponding user, role, or user group.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -530,7 +530,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ProjectDisplayName
 								// Property: ProjectName
 								"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "项目名。",
+									Description: "Project name.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -542,7 +542,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "策略绑定的项目列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "List of projects bound to the policy.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -551,7 +551,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "策略绑定的用户列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "List of users bound to the policy.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -562,11 +562,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略更新时间。",
+		//	  "description": "Policy update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略更新时间。",
+			Description: "Policy update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -584,7 +584,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "策略是对权限的一种描述，IAM用户、用户组或角色均需通过关联策略来赋予权限。当系统预设策略不能满足要求时，您可以创建自定义策略，对权限进行细粒度的定义。",
+		Description: "A policy describes permissions. IAM users, user groups, or roles must be granted permissions by associating policies. If system preset policies do not meet your requirements, you can create custom policies for fine-grained permission definition.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -32,12 +32,12 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点上限。",
+		//	  "description": "Access point limit.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"access_point_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "接入点上限。",
+			Description: "Access point limit.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -47,26 +47,26 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统计费配置。",
+		//	  "description": "File system billing configuration.",
 		//	  "properties": {
 		//	    "ChargeStatus": {
-		//	      "description": "计费状态，取值说明如下：WaitingPaid：等待支付,Pending：创建中,Modifying：更配中,Failed：失败,Normal：正常,Expired：过期,Overdue：欠费,Reclaimed：回收,Terminated：退订。",
+		//	      "description": "Billing status. Value description: WaitingPaid: Waiting for payment, Pending: Creating, Modifying: Reconfiguring, Failed: Failed, Normal: Normal, Expired: Expired, Overdue: Overdue, Reclaimed: Reclaimed, Terminated: Unsubscribed.",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeType": {
-		//	      "description": "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+		//	      "description": "Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.",
 		//	      "type": "string"
 		//	    },
 		//	    "ExpireTime": {
-		//	      "description": "到期时间。",
+		//	      "description": "Expiration time.",
 		//	      "type": "string"
 		//	    },
 		//	    "ReclaimTime": {
-		//	      "description": "回收时间。",
+		//	      "description": "Recycle time.",
 		//	      "type": "string"
 		//	    },
 		//	    "StopTime": {
-		//	      "description": "关停时间。",
+		//	      "description": "Shutdown time.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -76,31 +76,31 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ChargeStatus
 				"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "计费状态，取值说明如下：WaitingPaid：等待支付,Pending：创建中,Modifying：更配中,Failed：失败,Normal：正常,Expired：过期,Overdue：欠费,Reclaimed：回收,Terminated：退订。",
+					Description: "Billing status. Value description: WaitingPaid: Waiting for payment, Pending: Creating, Modifying: Reconfiguring, Failed: Failed, Normal: Normal, Expired: Expired, Overdue: Overdue, Reclaimed: Reclaimed, Terminated: Unsubscribed.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+					Description: "Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ExpireTime
 				"expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "到期时间。",
+					Description: "Expiration time.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ReclaimTime
 				"reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "回收时间。",
+					Description: "Recycle time.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StopTime
 				"stop_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "关停时间。",
+					Description: "Shutdown time.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "文件系统计费配置。",
+			Description: "File system billing configuration.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -110,11 +110,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+		//	  "description": "Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.",
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+			Description: "Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -127,11 +127,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统创建时间。",
+		//	  "description": "File system creation time.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统创建时间。",
+			Description: "File system creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -141,11 +141,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述信息。",
+		//	  "description": "Description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述信息。",
+			Description: "Description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -156,11 +156,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统带宽可以降配的时间。",
+		//	  "description": "Time when file system bandwidth can be downgraded.",
 		//	  "type": "string"
 		//	}
 		"downgrade_unlock_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统带宽可以降配的时间。",
+			Description: "Time when file system bandwidth can be downgraded.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -170,11 +170,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统 ID。",
+		//	  "description": "File system ID.",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统 ID。",
+			Description: "File system ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -184,22 +184,22 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统名称。",
+		//	  "description": "File system name.",
 		//	  "type": "string"
 		//	}
 		"file_system_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统名称。",
+			Description: "File system name.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Basic：基础型,Premium：高级型",
+		//	  "description": "Basic: Basic type, Premium: Premium type.",
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Basic：基础型,Premium：高级型",
+			Description: "Basic: Basic type, Premium: Premium type.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -209,12 +209,12 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点上限。",
+		//	  "description": "Mount point limit.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"mount_point_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "挂载点上限。",
+			Description: "Mount point limit.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -224,39 +224,39 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统性能信息。",
+		//	  "description": "File system performance information.",
 		//	  "properties": {
 		//	    "BandwidthMode": {
-		//	      "description": "带宽模式，取值说明如下：Baseline：基线带宽模式,Provisioned：预置带宽模式",
+		//	      "description": "Bandwidth mode. Value description: Baseline: Baseline bandwidth mode, Provisioned: Provisioned bandwidth mode.",
 		//	      "type": "string"
 		//	    },
 		//	    "BaselineBandwidth": {
-		//	      "description": "基准带宽。",
+		//	      "description": "Baseline bandwidth.",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    },
 		//	    "BaselineIops": {
-		//	      "description": "基准 IOPS。",
+		//	      "description": "Baseline IOPS.",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    },
 		//	    "BurstBandwidth": {
-		//	      "description": "突发带宽。",
+		//	      "description": "Burst bandwidth.",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    },
 		//	    "BurstIops": {
-		//	      "description": "突发 IOPS。",
+		//	      "description": "Burst IOPS.",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    },
 		//	    "ProvisionedBandwidth": {
-		//	      "description": "预置带宽。",
+		//	      "description": "Provisioned bandwidth.",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    },
 		//	    "ProvisionedIops": {
-		//	      "description": "预置 IOPS。",
+		//	      "description": "Provisioned IOPS.",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    }
@@ -270,12 +270,12 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BandwidthMode
 				"bandwidth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "带宽模式，取值说明如下：Baseline：基线带宽模式,Provisioned：预置带宽模式",
+					Description: "Bandwidth mode. Value description: Baseline: Baseline bandwidth mode, Provisioned: Provisioned bandwidth mode.",
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BaselineBandwidth
 				"baseline_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "基准带宽。",
+					Description: "Baseline bandwidth.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -283,7 +283,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BaselineIops
 				"baseline_iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "基准 IOPS。",
+					Description: "Baseline IOPS.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -291,7 +291,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BurstBandwidth
 				"burst_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "突发带宽。",
+					Description: "Burst bandwidth.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -300,7 +300,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BurstIops
 				"burst_iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "突发 IOPS。",
+					Description: "Burst IOPS.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -308,7 +308,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ProvisionedBandwidth
 				"provisioned_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "预置带宽。",
+					Description: "Provisioned bandwidth.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -317,25 +317,25 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ProvisionedIops
 				"provisioned_iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "预置 IOPS。",
+					Description: "Provisioned IOPS.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "文件系统性能信息。",
+			Description: "File system performance information.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PerformanceDensity
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统性能密度，取值说明如下：Basic_50：基础型 50MB/s/TiB,Premium_125：高级型 125MB/s/TiB。",
+		//	  "description": "File system performance density. Value description: Basic_50: Basic type 50MB/s/TiB, Premium_125: Premium type 125MB/s/TiB.",
 		//	  "type": "string"
 		//	}
 		"performance_density": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统性能密度，取值说明如下：Basic_50：基础型 50MB/s/TiB,Premium_125：高级型 125MB/s/TiB。",
+			Description: "File system performance density. Value description: Basic_50: Basic type 50MB/s/TiB, Premium_125: Premium type 125MB/s/TiB.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -345,11 +345,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project name.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -361,7 +361,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "协议类型",
+		//	  "description": "Protocol type.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -371,7 +371,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"protocol_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "协议类型",
+			Description: "Protocol type.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -381,11 +381,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统状态。取值说明如下：Creating：创建中。CreateError：创建失败。Running：运行中。Updating：更新中。Deleting：删除中。DeleteError：删除失败。Deleted：已删除。Stopped：已关停。",
+		//	  "description": "File system status. Value description: Creating: Creating. CreateError: Creation failed. Running: Running. Updating: Updating. Deleting: Deleting. DeleteError: Deletion failed. Deleted: Deleted. Stopped: Stopped.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统状态。取值说明如下：Creating：创建中。CreateError：创建失败。Running：运行中。Updating：更新中。Deleting：删除中。DeleteError：删除失败。Deleted：已删除。Stopped：已关停。",
+			Description: "File system status. Value description: Creating: Creating. CreateError: Creation failed. Running: Running. Updating: Updating. Deleting: Deleting. DeleteError: Deletion failed. Deleted: Deleted. Stopped: Stopped.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -395,25 +395,25 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统容量信息。",
+		//	  "description": "File system capacity information.",
 		//	  "properties": {
 		//	    "CapacityLimit": {
-		//	      "description": "容量上限，单位为 MiB。",
+		//	      "description": "Capacity limit, in MiB.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "CapacityUsed": {
-		//	      "description": "已用容量，单位为 MiB。",
+		//	      "description": "Used capacity, in MiB.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "InodeLimit": {
-		//	      "description": "文件数上限。",
+		//	      "description": "File count limit.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "InodeUsed": {
-		//	      "description": "已用文件数。",
+		//	      "description": "Used file count.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    }
@@ -424,26 +424,26 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CapacityLimit
 				"capacity_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "容量上限，单位为 MiB。",
+					Description: "Capacity limit, in MiB.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CapacityUsed
 				"capacity_used": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "已用容量，单位为 MiB。",
+					Description: "Used capacity, in MiB.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: InodeLimit
 				"inode_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "文件数上限。",
+					Description: "File count limit.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: InodeUsed
 				"inode_used": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "已用文件数。",
+					Description: "Used file count.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "文件系统容量信息。",
+			Description: "File system capacity information.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -453,21 +453,21 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签键值对。",
+		//	    "description": "Tag key-value pair.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "标签类型。取值说明如下：System：系统标签,Custom：自定义标签。",
+		//	        "description": "Tag type. Value description: System: System tag, Custom: Custom tag.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -481,7 +481,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -490,7 +490,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签类型。取值说明如下：System：系统标签,Custom：自定义标签。",
+						Description: "Tag type. Value description: System: System tag, Custom: Custom tag.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -499,7 +499,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -508,7 +508,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -519,11 +519,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统更新时间。",
+		//	  "description": "File system update time.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统更新时间。",
+			Description: "File system update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -533,11 +533,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability zone ID.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability zone ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -547,11 +547,11 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区名称。",
+		//	  "description": "Availability zone name.",
 		//	  "type": "string"
 		//	}
 		"zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区名称。",
+			Description: "Availability zone name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -569,7 +569,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "文件系统是一种通过目录树结构管理文件的存储系统，分为本地文件系统和远程文件系统，此处特指远程文件系统，支持多个计算节点并发访问，共享数据集。",
+		Description: "A file system is a storage system that manages files through a directory tree structure. It is divided into local file systems and remote file systems. This refers specifically to remote file systems, which support concurrent access by multiple compute nodes and shared datasets.",
 		Version:     1,
 		Attributes:  attributes,
 	}

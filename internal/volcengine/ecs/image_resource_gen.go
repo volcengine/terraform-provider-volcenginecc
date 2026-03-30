@@ -37,7 +37,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。",
+		//	  "description": "Image architecture type. Options: amd64 (x86 compute), arm64 (ARM compute).",
 		//	  "enum": [
 		//	    "amd64",
 		//	    "arm64"
@@ -45,17 +45,25 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。",
+			Description: "Image architecture type. Options: amd64 (x86 compute), arm64 (ARM compute).",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"amd64",
+					"arm64",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BootMode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的启动模式。可以选择BIOS、UEFI类型。",
+		//	  "description": "Image boot mode. You can select BIOS or UEFI",
 		//	  "enum": [
 		//	    "BIOS",
 		//	    "UEFI"
@@ -63,21 +71,45 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"boot_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的启动模式。可以选择BIOS、UEFI类型。",
+			Description: "Image boot mode. You can select BIOS or UEFI",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"BIOS",
+					"UEFI",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreateWholeImage
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to create a full instance image. Values: false: Default, do not create a full instance image. true: Create a full instance image.",
+		//	  "type": "boolean"
+		//	}
+		"create_whole_image": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to create a full instance image. Values: false: Default, do not create a full instance image. true: Create a full instance image.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// CreateWholeImage is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像创建时间",
+		//	  "description": "Image creation time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像创建时间",
+			Description: "Image creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -87,12 +119,12 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。",
+		//	  "description": "Image description. Must start with a letter or Chinese character. Can contain Chinese characters, letters, numbers, underscores \"_\", hyphens \"-\", equals signs \"=\", English commas \",\", English periods \".\", Chinese commas \"，\", Chinese periods \"。\", and spaces. Length: 0–255 characters. If left blank, defaults to empty.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。",
+			Description: "Image description. Must start with a letter or Chinese character. Can contain Chinese characters, letters, numbers, underscores \"_\", hyphens \"-\", equals signs \"=\", English commas \",\", English periods \".\", Chinese commas \"，\", Chinese periods \"。\", and spaces. Length: 0–255 characters. If left blank, defaults to empty.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -106,10 +138,10 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的检测结果。",
+		//	  "description": "Image check result.",
 		//	  "properties": {
 		//	    "DetectionStatus": {
-		//	      "description": "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
+		//	      "description": "Check status. Options: Finished (completed), Processing (in progress).",
 		//	      "enum": [
 		//	        "Finished",
 		//	        "Processing"
@@ -117,24 +149,24 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Items": {
-		//	      "description": "镜像检测项详情。",
+		//	      "description": "Details of image check items.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Name": {
-		//	            "description": "检测项名称。",
+		//	            "description": "Check item name",
 		//	            "type": "string"
 		//	          },
 		//	          "Result": {
-		//	            "description": "该检测项对应结果。",
+		//	            "description": "Result for this check item.",
 		//	            "type": "string"
 		//	          },
 		//	          "RiskCode": {
-		//	            "description": "风险描述码。",
+		//	            "description": "Risk description code",
 		//	            "type": "string"
 		//	          },
 		//	          "RiskLevel": {
-		//	            "description": "风险等级。若该参数返回值为空，表示无风险。",
+		//	            "description": "Risk level. If this parameter is empty, it means no risk",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -150,7 +182,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DetectionStatus
 				"detection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "检测状态。可以选择Finished（已完成）、Processing（处理中）类型。",
+					Description: "Check status. Options: Finished (completed), Processing (in progress).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Items
@@ -159,34 +191,34 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "检测项名称。",
+								Description: "Check item name",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Result
 							"result": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "该检测项对应结果。",
+								Description: "Result for this check item.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RiskCode
 							"risk_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "风险描述码。",
+								Description: "Risk description code",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RiskLevel
 							"risk_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "风险等级。若该参数返回值为空，表示无风险。",
+								Description: "Risk level. If this parameter is empty, it means no risk",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "镜像检测项详情。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Details of image check items.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "镜像的检测结果。",
+			Description: "Image check result.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -196,11 +228,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像ID。",
+		//	  "description": "Image ID",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像ID。",
+			Description: "Image ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -210,13 +242,13 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。",
+		//	  "description": "Image name. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores \"_\", hyphens \"-\", and periods \".\". Length: 1–128 characters",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。",
+			Description: "Image name. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores \"_\", hyphens \"-\", and periods \".\". Length: 1–128 characters",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
@@ -226,25 +258,84 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像所属的账号ID。",
+		//	  "description": "Account ID to which the image belongs.",
 		//	  "type": "string"
 		//	}
 		"image_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像所属的账号ID。",
+			Description: "Account ID to which the image belongs.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ImportImage
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Imported image information",
+		//	  "properties": {
+		//	    "ImportDataVolumes": {
+		//	      "description": "Data disk files included in the custom image, at the TOS bucket URL.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Url": {
+		//	      "description": "System disk files included in the custom image, at the TOS bucket URL.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Url"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"import_image": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImportDataVolumes
+				"import_data_volumes": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Data disk files included in the custom image, at the TOS bucket URL.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Url
+				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "System disk files included in the custom image, at the TOS bucket URL.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Imported image information",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ImportImage is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。",
+		//	  "description": "Instance ID. You must specify one of InstanceId, SnapshotId, or SnapshotGroupId.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。",
+			Description: "Instance ID. You must specify one of InstanceId, SnapshotId, or SnapshotGroupId.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -257,11 +348,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像中是否安装了云助手Agent。",
+		//	  "description": "Whether Cloud Assistant Agent is installed in the image",
 		//	  "type": "boolean"
 		//	}
 		"is_install_run_command_agent": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像中是否安装了云助手Agent。",
+			Description: "Whether Cloud Assistant Agent is installed in the image",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -271,11 +362,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公共镜像是否长期维护。",
+		//	  "description": "Whether the public image is maintained long-term.",
 		//	  "type": "boolean"
 		//	}
 		"is_lts": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "公共镜像是否长期维护。",
+			Description: "Whether the public image is maintained long-term.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -285,11 +376,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像是否支持Cloud-init。",
+		//	  "description": "Whether the image supports Cloud-init.",
 		//	  "type": "boolean"
 		//	}
 		"is_support_cloud_init": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像是否支持Cloud-init。",
+			Description: "Whether the image supports Cloud-init.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -299,11 +390,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的内核版本。",
+		//	  "description": "Image kernel version.",
 		//	  "type": "string"
 		//	}
 		"kernel": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的内核版本。",
+			Description: "Image kernel version.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -313,7 +404,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。",
+		//	  "description": "Image license type. VolcanoEngine: Default, uses the official license based on your platform setting. BYOL: Bring Your Own License (BYOL)",
 		//	  "enum": [
 		//	    "VolcanoEngine",
 		//	    "BYOL",
@@ -322,21 +413,47 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"license_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。",
+			Description: "Image license type. VolcanoEngine: Default, uses the official license based on your platform setting. BYOL: Bring Your Own License (BYOL)",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"VolcanoEngine",
+					"BYOL",
+					"",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NeedDetection
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to perform image check. Values: true: Default, check enabled. false: Check disabled.",
+		//	  "type": "boolean"
+		//	}
+		"need_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to perform image check. Values: true: Default, check enabled. false: Check disabled.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// NeedDetection is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: OsName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像操作系统的名称。",
+		//	  "description": "Name of the image operating system.",
 		//	  "type": "string"
 		//	}
 		"os_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像操作系统的名称。",
+			Description: "Name of the image operating system.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -346,21 +463,23 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "操作系统类型。",
+		//	  "description": "Operating system type",
 		//	  "type": "string"
 		//	}
 		"os_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "操作系统类型。",
+			Description: "Operating system type",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Platform
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。",
+		//	  "description": "Release version of the image operating system. Options: CentOS, Debian, veLinux, Windows Server, Fedora, OpenSUSE, Ubuntu.",
 		//	  "enum": [
 		//	    "CentOS",
 		//	    "Debian",
@@ -373,21 +492,50 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。",
+			Description: "Release version of the image operating system. Options: CentOS, Debian, veLinux, Windows Server, Fedora, OpenSUSE, Ubuntu.",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CentOS",
+					"Debian",
+					"veLinux",
+					"Windows Server",
+					"Fedora",
+					"OpenSUSE",
+					"Ubuntu",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PlatformVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的发行版本。",
+		//	  "description": "Image release version.",
 		//	  "type": "string"
 		//	}
 		"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的发行版本。",
+			Description: "Image release version.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProductCode
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Product code for marketplace image",
+		//	  "type": "string"
+		//	}
+		"product_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Product code for marketplace image",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -397,11 +545,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。",
+		//	  "description": "Project to which the resource belongs. If the API caller account only has permissions for certain projects, you must provide a project with the required permissions",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。",
+			Description: "Project to which the resource belongs. If the API caller account only has permissions for certain projects, you must provide a project with the required permissions",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -413,7 +561,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像共享的账户",
+		//	  "description": "Accounts with which the image is shared",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -423,7 +571,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"share_permission": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "镜像共享的账户",
+			Description: "Accounts with which the image is shared",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -434,7 +582,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。",
+		//	  "description": "Image sharing status. HasShared: The custom image has been shared with other users. If the custom image is not shared or a public image is used, ShareStatus returns empty.",
 		//	  "enum": [
 		//	    "HasShared",
 		//	    ""
@@ -442,7 +590,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。",
+			Description: "Image sharing status. HasShared: The custom image has been shared with other users. If the custom image is not shared or a public image is used, ShareStatus returns empty.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -452,11 +600,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像大小，单位为GiB。",
+		//	  "description": "Image size, in GiB.",
 		//	  "type": "integer"
 		//	}
 		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "镜像大小，单位为GiB。",
+			Description: "Image size, in GiB.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -466,11 +614,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。",
+		//	  "description": "Snapshot consistency group ID, used to create a custom image from a snapshot consistency group. One of Snapshot consistency group ID, SnapshotId, or InstanceId must be provided",
 		//	  "type": "string"
 		//	}
 		"snapshot_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。",
+			Description: "Snapshot consistency group ID, used to create a custom image from a snapshot consistency group. One of Snapshot consistency group ID, SnapshotId, or InstanceId must be provided",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -483,11 +631,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。",
+		//	  "description": "System disk snapshot ID, used to create a custom image from a system disk snapshot. You must specify one of InstanceId, SnapshotId, or SnapshotGroupId.",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。",
+			Description: "System disk snapshot ID, used to create a custom image from a system disk snapshot. You must specify one of InstanceId, SnapshotId, or SnapshotGroupId.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -500,20 +648,20 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像关联快照的信息。",
+		//	  "description": "Information about snapshots associated with the image.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Size": {
-		//	        "description": "快照大小。单位为GiB。",
+		//	        "description": "Snapshot size (GiB)",
 		//	        "type": "integer"
 		//	      },
 		//	      "SnapshotId": {
-		//	        "description": "快照ID。",
+		//	        "description": "Snapshot ID",
 		//	        "type": "string"
 		//	      },
 		//	      "VolumeKind": {
-		//	        "description": "云盘种类。system：系统盘。data：数据盘。",
+		//	        "description": "Cloud disk type. system: System disk. data: Data disk.",
 		//	        "enum": [
 		//	          "system",
 		//	          "data"
@@ -531,22 +679,22 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "快照大小。单位为GiB。",
+						Description: "Snapshot size (GiB)",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SnapshotId
 					"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "快照ID。",
+						Description: "Snapshot ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeKind
 					"volume_kind": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘种类。system：系统盘。data：数据盘。",
+						Description: "Cloud disk type. system: System disk. data: Data disk.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "镜像关联快照的信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Information about snapshots associated with the image.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -556,11 +704,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的状态。",
+		//	  "description": "Image status.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的状态。",
+			Description: "Image status.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -570,16 +718,16 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像绑定的标签列表。",
+		//	  "description": "List of tags bound to the image.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "镜像标签的标签键。",
+		//	        "description": "Tag key for the image label.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "镜像标签的值。",
+		//	        "description": "Image tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -596,7 +744,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "镜像标签的标签键。",
+						Description: "Tag key for the image label.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -608,7 +756,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "镜像标签的值。",
+						Description: "Image tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -617,7 +765,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "镜像绑定的标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "List of tags bound to the image.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -628,11 +776,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像更新时间",
+		//	  "description": "Image update time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像更新时间",
+			Description: "Image update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -642,11 +790,11 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像大小，单位为Byte。",
+		//	  "description": "Image size, in Bytes.",
 		//	  "type": "number"
 		//	}
 		"virtual_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "镜像大小，单位为Byte。",
+			Description: "Image size, in Bytes.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -656,7 +804,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。",
+		//	  "description": "Image visibility. public: Public image. private: Private image. shared: Shared image.",
 		//	  "enum": [
 		//	    "public",
 		//	    "private",
@@ -665,7 +813,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。",
+			Description: "Image visibility. public: Public image. private: Private image. shared: Shared image.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -683,7 +831,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "镜像是包含了云服务器实例所需的基本操作系统、应用数据的特殊文件。创建实例时，必须选择镜像。",
+		Description: "An image is a special file containing the basic operating system and application data required for a cloud server instance. You must select an image when creating an instance.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -695,6 +843,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"architecture":                 "Architecture",
 		"boot_mode":                    "BootMode",
+		"create_whole_image":           "CreateWholeImage",
 		"created_at":                   "CreatedAt",
 		"description":                  "Description",
 		"detection_results":            "DetectionResults",
@@ -702,6 +851,8 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"image_id":                     "ImageId",
 		"image_name":                   "ImageName",
 		"image_owner_id":               "ImageOwnerId",
+		"import_data_volumes":          "ImportDataVolumes",
+		"import_image":                 "ImportImage",
 		"instance_id":                  "InstanceId",
 		"is_install_run_command_agent": "IsInstallRunCommandAgent",
 		"is_lts":                       "IsLTS",
@@ -711,10 +862,12 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"key":                          "Key",
 		"license_type":                 "LicenseType",
 		"name":                         "Name",
+		"need_detection":               "NeedDetection",
 		"os_name":                      "OsName",
 		"os_type":                      "OsType",
 		"platform":                     "Platform",
 		"platform_version":             "PlatformVersion",
+		"product_code":                 "ProductCode",
 		"project_name":                 "ProjectName",
 		"result":                       "Result",
 		"risk_code":                    "RiskCode",
@@ -728,6 +881,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"status":                       "Status",
 		"tags":                         "Tags",
 		"updated_at":                   "UpdatedAt",
+		"url":                          "Url",
 		"value":                        "Value",
 		"virtual_size":                 "VirtualSize",
 		"visibility":                   "Visibility",
@@ -738,13 +892,15 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/InstanceId",
 		"/properties/SnapshotGroupId",
 		"/properties/SnapshotId",
+		"/properties/ImportImage",
+		"/properties/NeedDetection",
+		"/properties/CreateWholeImage",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/ImageId",
 		"/properties/CreatedAt",
 		"/properties/UpdatedAt",
-		"/properties/Architecture",
 		"/properties/ImageOwnerId",
 		"/properties/IsInstallRunCommandAgent",
 		"/properties/IsLTS",
@@ -755,14 +911,10 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ShareStatus",
 		"/properties/VirtualSize",
 		"/properties/Visibility",
-		"/properties/BootMode",
 		"/properties/DetectionResults",
 		"/properties/Kernel",
-		"/properties/LicenseType",
 		"/properties/OsName",
-		"/properties/OsType",
-		"/properties/Platform",
-		"/properties/PlatformVersion",
+		"/properties/ProductCode",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -770,6 +922,14 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SnapshotGroupId",
 		"/properties/SnapshotId",
 		"/properties/ProjectName",
+		"/properties/ImportImage",
+		"/properties/NeedDetection",
+		"/properties/CreateWholeImage",
+		"/properties/Architecture",
+		"/properties/LicenseType",
+		"/properties/OsType",
+		"/properties/Platform",
+		"/properties/PlatformVersion",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

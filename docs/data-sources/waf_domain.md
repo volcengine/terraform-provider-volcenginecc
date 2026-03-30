@@ -21,116 +21,116 @@ Data Source schema for Volcengine::WAF::Domain
 
 ### Read-Only
 
-- `access_mode` (Number) 接入模式。10：CNAME 接入，11：负载均衡（CLB）7 层接入。
-- `advanced_defense_ip` (String) 高防实例 IP。高防型 WAF 接入展示，否则为空。
-- `advanced_defense_ipv_6` (String) 高防实例 Ipv6。高防型 WAF 接入展示，否则为空。
-- `api_enable` (Number) 是否开启了 API 防护策略。0：关闭，1：开启。
-- `attack_status` (Number) 攻击状态。0:未发现攻击,1:发现攻击。
-- `auto_cc_enable` (Number) 是否开启智能 CC 防护策略。0：关闭，1：开启。
-- `automatic_black_enable` (Number) 是否开启自动封禁。0：关闭，1：开启。
-- `backend_groups` (Attributes List) 源站配置。 (see [below for nested schema](#nestedatt--backend_groups))
-- `black_ip_enable` (Number) 是否开启了黑名单策略。0：关闭, 1：开启。
-- `black_lct_enable` (Number) 是否开启了区域封禁策略。0：关闭;1：开启。
-- `bot_dytoken_enable` (Number) 是否开启动态Token防护。
-- `bot_frequency_enable` (Number) 是否开启 bot 频率限制策略。
-  0：关闭
-  1：开启。
-- `bot_repeat_enable` (Number) 是否开启 bot 统计防护策略。
-  0：关闭
-  1：开启。
-- `bot_sequence_default_action` (Number) 设置 bot 行为地图策略默认动作，当 BotSequenceEnable = 1 开启状态时生效。默认为 0 （观察）。
-  0：观察
-  2：拦截
-  6：JS 挑战
-  7：人机验证。
-- `bot_sequence_enable` (Number) 是否开启 bot 行为地图。
-  0：关闭
-  1：开启。
-- `cc_enable` (Number) 是否开启 CC 防护策略。
-  0：关闭
-  1：开启。
-- `certificate_id` (String) 托管至证书中心的证书ID。
-- `certificate_name` (String) 证书名称，协议类型包含 HTTPS 时显示。
-- `certificate_platform` (String) 证书托管平台:waf/certificate_service。
-- `clb_instance_ids` (String) CLB实例ID。
-- `clb_listener_id` (String) CLB监听器ID。
-- `clb_pool_id` (String) CLB后端服务器组ID。
-- `clb_server_id` (String) CLB后端服务器ID。
-- `client_ip_location` (Number) 客户端IP获取方式。0:自定义Header字段,1:通过X-Forwarded-For(XFF)字段中第一个公网IP地址作为客户端真实IP地址。
-- `client_max_body_size` (Number) 客户端请求body最大值(MB)。
-- `cloud_access_config` (Attributes Set) LB接入参数。 (see [below for nested schema](#nestedatt--cloud_access_config))
-- `cname` (String) CNAME记录。
-- `custom_bot_enable` (Number) 是否开启自定义BOT防护。
-- `custom_header` (Set of String) 自定义Header。
-- `custom_rsp_enable` (Number) 是否开启自定义响应。
-- `custom_sni` (String) 自定义SNI。
-- `defence_mode` (Number) 为例外 ALB 实例设置防护模式。
-  1：启用防护，已配置的防护策略生效。
-  2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。
-  3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。
-  设置例外防护实例后，域名可能还会存在以下防护状态：
-  5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。
-  6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。
-  7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。
-- `dlp_enable` (Number) 是否开启数据泄露防护。
-- `domain` (String) 防护的域名信息，支持泛域名和精确域名。
-- `enable_custom_redirect` (Number) 是否开启用户自定义重定向。0:关闭,1:开启。
-- `enable_http2` (Number) 是否开启HTTP2.0。0:关闭,1:开启。
-- `enable_ipv_6` (Number) 是否支持防护Ipv6请求。0:关闭,1:开启。
-- `enable_sni` (Number) 是否开启SNI配置。0:关闭,1:开启。
-- `keep_alive_request` (Number) 长连接复用个数。
-- `keep_alive_timeout` (Number) 长连接保持时间(秒)。
-- `lb_algorithm` (String) 负载均衡算法类型。wrr:加权轮询,wlc:加权最小连接数,sh:源地址哈希。
-- `port` (Number) 端口号。
-- `project_name` (String) 项目名称。
-- `protocol_follow` (Number) 是否开启协议跟随。0:关闭,1:开启。
-- `protocol_ports` (Attributes) 接入端口信息。 (see [below for nested schema](#nestedatt--protocol_ports))
-- `protocols` (Set of String) 接入协议类型,支持HTTP/HTTPS。
-- `proxy_config` (Number) 是否开启代理配置。0:关闭,1:开启。
-- `proxy_connect_timeout` (Number) WAF和后端服务器的建连超时时间(秒)。
-- `proxy_keep_alive` (Number) WAF回源长连接可复用个数。
-- `proxy_keep_alive_timeout` (Number) 空闲长连接超时时间(秒)。
-- `proxy_read_timeout` (Number) WAF从后端服务器读取响应的超时时间(秒)。
-- `proxy_retry` (Number) WAF回源重试次数。
-- `proxy_write_timeout` (Number) WAF将请求传输到后端服务器的超时时间(秒)。
-- `public_real_server` (Number) CNAME接入回源方式。0:私网回源,1:公网回源。
-- `rsp_abnormal_enable` (Number) 是否开启异常响应防护。
-- `server_ips` (String) 服务IP。
-- `src_ips` (String) WAF回源IP。
-- `src_protocol` (String) 源站协议。
-- `ssl_ciphers` (Set of String) 加密套件。
-- `ssl_protocols` (Set of String) TLS协议版本。如:TLSv1,TLSv1.1,TLSv1.2,TLSv1.3。
-- `status` (Number) 接入状态。0:正常,1:DNS未解析,2:配置中,3:配置失败,4:配置未生效,5:更新中,6:实例已删除。
-- `system_bot_enable` (Number) 是否开启托管BOT防护。
-- `tamper_proof_enable` (Number) 是否开启防篡改。
-- `tcp_listener_config` (Attributes Set) TCP监听器配置。 (see [below for nested schema](#nestedatt--tcp_listener_config))
-- `tls_enable` (Number) 是否开启日志服务。0:关闭,1:开启。
-- `tls_fields_config` (Attributes) 日志字段配置详情。 (see [below for nested schema](#nestedatt--tls_fields_config))
-- `update_time` (String) 更新时间。
+- `access_mode` (Number) Access mode. 10: CNAME access, 11: Layer 7 load balancing (CLB) access.
+- `advanced_defense_ip` (String) High defense instance IP. Displayed for high-defense WAF access; otherwise blank.
+- `advanced_defense_ipv_6` (String) High defense instance IPv6. Displayed for high-defense WAF access; otherwise blank.
+- `api_enable` (Number) API protection policy enabled. 0: Off, 1: On
+- `attack_status` (Number) Attack status. 0: No attack detected, 1: Attack detected.
+- `auto_cc_enable` (Number) Whether to enable intelligent CC protection policy. 0: Disabled, 1: Enabled.
+- `automatic_black_enable` (Number) Whether to enable automatic blocking. 0: Disabled, 1: Enabled.
+- `backend_groups` (Attributes List) Origin configuration. (see [below for nested schema](#nestedatt--backend_groups))
+- `black_ip_enable` (Number) Denylist policy enabled. 0: Off, 1: On
+- `black_lct_enable` (Number) Whether to enable regional blocking policy. 0: Disabled; 1: Enabled.
+- `bot_dytoken_enable` (Number) Dynamic token protection enabled
+- `bot_frequency_enable` (Number) Bot rate limit policy enabled.
+  0: Off
+  1: On
+- `bot_repeat_enable` (Number) Bot statistics protection policy enabled.
+  0: Off
+  1: On
+- `bot_sequence_default_action` (Number) Set the default action for the bot behavior map policy. Effective when BotSequenceEnable = 1 is enabled. Default is 0 (Observe).
+  0: Observe
+  2: Intercept
+  6: JS Challenge
+  7: CAPTCHA.
+- `bot_sequence_enable` (Number) Whether to enable bot behavior map.
+  0: Off
+  1: On.
+- `cc_enable` (Number) Whether to enable CC protection policy.
+  0: Disabled
+  1: Enabled.
+- `certificate_id` (String) Certificate ID managed in Certificate Center
+- `certificate_name` (String) Certificate name. Displayed when protocol type includes HTTPS.
+- `certificate_platform` (String) Certificate hosting platform: waf/certificate_service.
+- `clb_instance_ids` (String) CLB instance ID.
+- `clb_listener_id` (String) CLB listener ID.
+- `clb_pool_id` (String) CLB backend server group ID.
+- `clb_server_id` (String) CLB backend server ID
+- `client_ip_location` (Number) Client IP acquisition method. 0: Custom header field, 1: Use the first public IP address in the X-Forwarded-For (XFF) field as the real client IP address.
+- `client_max_body_size` (Number) Maximum client request body size (MB).
+- `cloud_access_config` (Attributes Set) LB access parameters. (see [below for nested schema](#nestedatt--cloud_access_config))
+- `cname` (String) CNAME record.
+- `custom_bot_enable` (Number) Whether to enable custom bot protection.
+- `custom_header` (Set of String) Custom header.
+- `custom_rsp_enable` (Number) Whether to enable custom response.
+- `custom_sni` (String) Custom SNI.
+- `defence_mode` (Number) Set protection mode for exception ALB instances.
+  1: Enable protection. The configured protection policies take effect.
+  2: Pause protection. Only forwarding is performed without inspection; the configured protection policies do not take effect.
+  3: Origin mode. Requests are sent directly to the origin server and are no longer forwarded to the WAF instance.
+  After configuring exception protection instances, the domain may also have the following protection statuses:
+  5: Partially enabled. The default protection mode is enabled, but some exception instances are in paused protection or origin mode.
+  6: Partially paused. The default protection mode is paused, but some exception instances are in enabled protection or origin mode.
+  7: Partially origin. The default protection mode is origin mode, but some exception instances are in enabled protection or paused protection.
+- `dlp_enable` (Number) Data leakage protection enabled
+- `domain` (String) Protected domain information. Supports wildcard and exact domains
+- `enable_custom_redirect` (Number) User-defined redirection enabled. 0: Off, 1: On
+- `enable_http2` (Number) Whether to enable HTTP/2.0. 0: Disabled, 1: Enabled.
+- `enable_ipv_6` (Number) IPv6 request protection supported. 0: Off, 1: On
+- `enable_sni` (Number) Whether to enable SNI configuration. 0: Off, 1: On.
+- `keep_alive_request` (Number) Persistent connection reuse count
+- `keep_alive_timeout` (Number) Persistent connection keep-alive time (seconds)
+- `lb_algorithm` (String) Load balancing algorithm type. wrr: Weighted round robin, wlc: Weighted least connections, sh: Source address hash.
+- `port` (Number) Port number
+- `project_name` (String) Project name.
+- `protocol_follow` (Number) Protocol following enabled. 0: Off, 1: On
+- `protocol_ports` (Attributes) Access port information (see [below for nested schema](#nestedatt--protocol_ports))
+- `protocols` (Set of String) Access protocol type: supports HTTP/HTTPS
+- `proxy_config` (Number) Proxy configuration enabled. 0: Off, 1: On
+- `proxy_connect_timeout` (Number) Connection timeout between WAF and backend server (seconds).
+- `proxy_keep_alive` (Number) Number of reusable WAF origin persistent connections.
+- `proxy_keep_alive_timeout` (Number) Idle persistent connection timeout (seconds)
+- `proxy_read_timeout` (Number) Timeout for WAF to read response from backend server (seconds).
+- `proxy_retry` (Number) WAF origin retry count.
+- `proxy_write_timeout` (Number) Timeout for WAF to transmit request to backend server (seconds).
+- `public_real_server` (Number) CNAME access origin method. 0: Private network origin, 1: Public network origin.
+- `rsp_abnormal_enable` (Number) Whether to enable abnormal response protection.
+- `server_ips` (String) Service IP
+- `src_ips` (String) WAF origin IP.
+- `src_protocol` (String) Origin protocol.
+- `ssl_ciphers` (Set of String) Cipher suite
+- `ssl_protocols` (Set of String) TLS protocol version. For example: TLSv1, TLSv1.1, TLSv1.2, TLSv1.3
+- `status` (Number) Access status. 0: Normal, 1: DNS not resolved, 2: Configuring, 3: Configuration failed, 4: Configuration not effective, 5: Updating, 6: Instance deleted.
+- `system_bot_enable` (Number) Whether to enable managed bot protection.
+- `tamper_proof_enable` (Number) Whether to enable anti-tampering.
+- `tcp_listener_config` (Attributes Set) TCP listener configuration. (see [below for nested schema](#nestedatt--tcp_listener_config))
+- `tls_enable` (Number) Log service enabled. 0: Off, 1: On
+- `tls_fields_config` (Attributes) Log field configuration details (see [below for nested schema](#nestedatt--tls_fields_config))
+- `update_time` (String) Update time
 - `vpc_id` (String) VPC ID。
-- `waf_enable` (Number) 是否开启WAF防护。
-- `waf_white_req_enable` (Number) 是否开启白名单请求防护。
-- `white_enable` (Number) 是否开启白名单防护。
-- `white_field_enable` (Number) 是否开启字段白名单防护。
+- `waf_enable` (Number) WAF protection enabled
+- `waf_white_req_enable` (Number) Allowlist request protection enabled
+- `white_enable` (Number) Whether to enable allowlist protection.
+- `white_field_enable` (Number) Field allowlist protection enabled
 
 <a id="nestedatt--backend_groups"></a>
 ### Nested Schema for `backend_groups`
 
 Read-Only:
 
-- `access_port` (Set of Number) 接入的端口号。
-- `backends` (Attributes Set) 源站组详情。 (see [below for nested schema](#nestedatt--backend_groups--backends))
-- `name` (String) 源站组名称。
+- `access_port` (Set of Number) Access port number.
+- `backends` (Attributes Set) Origin group details. (see [below for nested schema](#nestedatt--backend_groups--backends))
+- `name` (String) Origin group name.
 
 <a id="nestedatt--backend_groups--backends"></a>
 ### Nested Schema for `backend_groups.backends`
 
 Read-Only:
 
-- `ip` (String) 源站 IP 地址。
-- `port` (Number) 源站端口。
-- `protocol` (String) 源站协议。
-- `weight` (Number) 源站权重。
+- `ip` (String) Origin IP address
+- `port` (Number) Origin port
+- `protocol` (String) Origin protocol.
+- `weight` (Number) Origin weight
 
 
 
@@ -139,14 +139,14 @@ Read-Only:
 
 Read-Only:
 
-- `access_protocol` (String) 接入协议类型。
-- `defence_mode` (Number) 防护模式。
-- `instance_id` (String) 负载均衡实例 ID。
-- `instance_name` (String) 负载均衡实例名称。
-- `listener_id` (String) 负载均衡监听器 ID。
-- `lost_association_from_alb` (Number) 是否从 ALB 中丢失关联。
-- `port` (String) 监听器转发规则的端口号。
-- `protocol` (String) 监听器转发规则的协议类型。
+- `access_protocol` (String) Access protocol type
+- `defence_mode` (Number) Protection mode
+- `instance_id` (String) Load balancing instance ID.
+- `instance_name` (String) Load balancer instance name.
+- `listener_id` (String) Load balancing listener ID.
+- `lost_association_from_alb` (Number) Disassociated from ALB
+- `port` (String) Listener forwarding rule port number
+- `protocol` (String) Protocol type for listener forwarding rules.
 
 
 <a id="nestedatt--protocol_ports"></a>
@@ -154,8 +154,8 @@ Read-Only:
 
 Read-Only:
 
-- `http` (Set of Number) HTTP 协议的端口号。
-- `https` (Set of Number) HTTPS 协议的端口号。
+- `http` (Set of Number) HTTP protocol port number
+- `https` (Set of Number) HTTPS protocol port number
 
 
 <a id="nestedatt--tcp_listener_config"></a>
@@ -163,14 +163,14 @@ Read-Only:
 
 Read-Only:
 
-- `access_protocol` (String) 接入协议类型。
-- `defence_mode` (Number) 防护模式。
-- `instance_id` (String) 实例 ID。
-- `instance_name` (String) 实例名称。
-- `listener_id` (String) 监听器 ID。
-- `lost_association_from_alb` (Number) 是否从 ALB 中丢失关联。
-- `port` (String) 监听器的端口号。
-- `protocol` (String) 监听器协议类型。
+- `access_protocol` (String) Access protocol type
+- `defence_mode` (Number) Protection mode
+- `instance_id` (String) Instance ID.
+- `instance_name` (String) Instance name.
+- `listener_id` (String) Listener ID.
+- `lost_association_from_alb` (Number) Disassociated from ALB
+- `port` (String) Listener port number
+- `protocol` (String) Listener protocol type.
 
 
 <a id="nestedatt--tls_fields_config"></a>
@@ -185,9 +185,9 @@ Read-Only:
 
 Read-Only:
 
-- `enable` (Number) 是否记录全量 header。
+- `enable` (Number) Record all header fields
   
-  关闭，仅记录常见 header 字段。
-  启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。
-- `excluded_key_list` (Set of String) 例外 header 字段，将对应字段从字段的 JSON 中排除，可帮助节约日志存储空间。
-- `statistical_key_list` (Set of String) 统计 header 字段，将对应字段用于日志统计分析和告警。
+  Off: Only common header fields are recorded
+  On: All header fields are recorded. Exception header fields and statistical header fields can be configured
+- `excluded_key_list` (Set of String) Exception header fields. Exclude the specified fields from the JSON to help save log storage space.
+- `statistical_key_list` (Set of String) Statistics header fields. Use the specified fields for log analysis and alerts.

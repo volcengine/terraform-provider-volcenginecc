@@ -21,26 +21,26 @@ Data Source schema for Volcengine::CBR::BackupResource
 
 ### Read-Only
 
-- `account_id` (String) 创建此备份源的账户 ID。
-- `created_time` (String) 创建时间。
-- `instance_id` (String) 实例 ID。
-- `instance_name` (String) 实例名称。
-- `meta_information` (Attributes) 资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。 (see [below for nested schema](#nestedatt--meta_information))
-- `plans` (Attributes Set) 关联的备份计划列表。 (see [below for nested schema](#nestedatt--plans))
-- `recovery_point_number` (Number) 恢复点的数量
-- `resource_id` (String) 备份源 ID。
-- `resource_type` (String) 备份源类型，取值说明如下：ECS：ECS 整机。vePFS：vePFS 文件系统。
-- `status` (String) 备份源状态。可能的值为：AVAILABLE、REMOVING、BEING_BACKED_UP、RECOVERING、CREATING、ERROR、UNAVAILABLE。
-- `updated_time` (String) 更新时间
-- `used_capacity_in_bytes` (Number) 已经备份的字节数。
+- `account_id` (String) Account ID that created this backup source
+- `created_time` (String) Creation Time
+- `instance_id` (String) Instance ID
+- `instance_name` (String) Instance Name
+- `meta_information` (Attributes) Resource meta information (used to store additional configuration when creating a backup plan). ECS full backup parameters: see the EcsBackupConfiguration structure. vePFS backup parameters: see the VePFSBackupConfiguration structure. (see [below for nested schema](#nestedatt--meta_information))
+- `plans` (Attributes Set) List of Associated Backup Plans (see [below for nested schema](#nestedatt--plans))
+- `recovery_point_number` (Number) Number of Restore Points
+- `resource_id` (String) Backup Source ID
+- `resource_type` (String) Backup source type. Value description: ECS: ECS full instance. vePFS: vePFS file system.
+- `status` (String) Backup source status. Possible values: AVAILABLE, REMOVING, BEING_BACKED_UP, RECOVERING, CREATING, ERROR, UNAVAILABLE.
+- `updated_time` (String) Update Time
+- `used_capacity_in_bytes` (Number) Bytes Already Backed Up
 
 <a id="nestedatt--meta_information"></a>
 ### Nested Schema for `meta_information`
 
 Read-Only:
 
-- `ecs_meta` (String) ECS 的元数据，是一个 JSON string。格式见数据结构的 EcsBackupConfiguration 结构体。
-- `vepfs_meta` (String) vePFS 备份源元数据，是一个 JSON string。格式见数据结构的VePFSBackupConfiguration 结构体。
+- `ecs_meta` (String) ECS metadata, as a JSON string. For format, see the EcsBackupConfiguration structure in the data structure.
+- `vepfs_meta` (String) vePFS backup source metadata, as a JSON string. For format, see the VePFSBackupConfiguration structure in the data structure.
 
 
 <a id="nestedatt--plans"></a>
@@ -48,5 +48,5 @@ Read-Only:
 
 Read-Only:
 
-- `plan_id` (String) 备份计划 ID
-- `plan_name` (String) 备份计划名称
+- `plan_id` (String) Backup Plan ID
+- `plan_name` (String) Backup Plan Name

@@ -31,11 +31,11 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -45,11 +45,11 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集描述。",
+		//	  "description": "Permission Set Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集描述。",
+			Description: "Permission Set Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -60,11 +60,11 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集名称。",
+		//	  "description": "Permission Set Name",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集名称。",
+			Description: "Permission Set Name",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -74,25 +74,25 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集下的策略列表。",
+		//	  "description": "Policy List Under Permission Set",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "权限策略定义。",
+		//	    "description": "Permission Policy Definition",
 		//	    "properties": {
 		//	      "CreatedTime": {
-		//	        "description": "策略创建时间。",
+		//	        "description": "Policy Creation Time",
 		//	        "type": "string"
 		//	      },
 		//	      "PermissionPolicyDocument": {
-		//	        "description": "策略语法内容。语法可参考 策略语法说明。",
+		//	        "description": "Policy syntax content. Refer to policy syntax documentation",
 		//	        "type": "string"
 		//	      },
 		//	      "PermissionPolicyName": {
-		//	        "description": "策略名称。",
+		//	        "description": "Policy Name",
 		//	        "type": "string"
 		//	      },
 		//	      "PermissionPolicyType": {
-		//	        "description": "策略类型，System or Inline。",
+		//	        "description": "Policy Type: System or Inline",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -107,7 +107,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CreatedTime
 					// Property: PermissionPolicyDocument
 					"permission_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略语法内容。语法可参考 策略语法说明。",
+						Description: "Policy syntax content. Refer to policy syntax documentation",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -116,7 +116,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PermissionPolicyName
 					"permission_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略名称。",
+						Description: "Policy Name",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -125,7 +125,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PermissionPolicyType
 					"permission_policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略类型，System or Inline。",
+						Description: "Policy Type: System or Inline",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -134,7 +134,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "权限集下的策略列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Policy List Under Permission Set\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -145,11 +145,11 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集 ID。",
+		//	  "description": "Permission Set ID",
 		//	  "type": "string"
 		//	}
 		"permission_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集 ID。",
+			Description: "Permission Set ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -159,11 +159,11 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "跳转控制台 URL。",
+		//	  "description": "Console Redirect URL",
 		//	  "type": "string"
 		//	}
 		"relay_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "跳转控制台 URL。",
+			Description: "Console Redirect URL",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -174,12 +174,12 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "session 过期时间，单位秒。",
+		//	  "description": "Session Expiration Time (seconds)",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"session_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "session 过期时间，单位秒。",
+			Description: "Session Expiration Time (seconds)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -190,10 +190,10 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "状态通知配置。",
+		//	  "description": "Status Notification Configuration",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "状态通知配置项。",
+		//	    "description": "Status Notification Configuration Item",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -201,7 +201,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"status_notifications": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "状态通知配置。",
+			Description: "Status Notification Configuration",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -211,11 +211,11 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -233,7 +233,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。",
+		Description: "After you create a Cloud Identity Center user, you need to grant the user login access permissions to each account. When access permissions to Volcano Engine cloud resources share common characteristics, such as network operations permissions or security management permissions, you can predefine permission sets in the Cloud Identity Center as templates. You can achieve centralized authorization based on these permission sets. The Cloud Identity Center will synchronize and distribute permission sets to each account, reducing enterprise permission operation and maintenance costs",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_natgateway_snatentry Resource - terraform-provider-volcenginecc"
 subcategory: "NatGateway"
 description: |-
-  当私有网络内有多台云服务器实例需要访问公网时，为了节省公网IP且避免在公网上直接暴露云服务器IP，您可以使用公网NAT网关的SNAT规则，安全、便捷、高效地访问公网。SNAT规则支持私有网络、子网、云服务器、自定义网段等四种粒度，您可根据业务需求灵活配置。
+  When multiple cloud server instances in a private network need to access the public network, you can use SNAT rules of the public NAT gateway to save public IPs and avoid exposing cloud server IPs directly to the public network for secure, convenient, and efficient access. SNAT rules support four granularities: private network, subnet, cloud server, and custom network segment. Configure flexibly based on your business needs.
 ---
 
 # volcenginecc_natgateway_snatentry (Resource)
 
-当私有网络内有多台云服务器实例需要访问公网时，为了节省公网IP且避免在公网上直接暴露云服务器IP，您可以使用公网NAT网关的SNAT规则，安全、便捷、高效地访问公网。SNAT规则支持私有网络、子网、云服务器、自定义网段等四种粒度，您可根据业务需求灵活配置。
+When multiple cloud server instances in a private network need to access the public network, you can use SNAT rules of the public NAT gateway to save public IPs and avoid exposing cloud server IPs directly to the public network for secure, convenient, and efficient access. SNAT rules support four granularities: private network, subnet, cloud server, and custom network segment. Configure flexibly based on your business needs.
 
 ## Example Usage
 
@@ -15,7 +15,7 @@ description: |-
 resource "volcenginecc_natgateway_snatentry" "NatGatewaySnatentryDemo" {
   nat_gateway_id  = "ngw-2pc28yhdpbx8g227qo1xxxxx"
   eip_id          = "eip-iivdtssgbdog74o8cuxxxxx,eip-btbv1pk36g3k5h0b2vxxxxx"
-  snat_entry_name = "私有网络"
+  snat_entry_name = "test"
   source_cidr     = "0.0.0.0/0"
 }
 ```
@@ -25,22 +25,22 @@ resource "volcenginecc_natgateway_snatentry" "NatGatewaySnatentryDemo" {
 
 ### Required
 
-- `nat_gateway_id` (String) SNAT规则所属NAT网关的ID。
+- `nat_gateway_id` (String) ID of the NAT gateway associated with the SNAT rule
 
 ### Optional
 
-- `eip_id` (String) SNAT规则关联的公网IP的ID。返回单个公网IP的ID。 返回多个公网IP的ID。
-- `nat_ip_id` (String) 私网NAT网关的中转IP的ID。
-- `snat_entry_name` (String) SNAT规则的名称。
-- `source_cidr` (String) SNAT规则对应的网段。
-- `subnet_id` (String) SNAT规则关联子网的ID。
+- `eip_id` (String) ID of the public IP associated with the SNAT rule. Returns the ID for a single public IP. Returns IDs for multiple public IPs.
+- `nat_ip_id` (String) ID of the transit IP for the private NAT gateway
+- `snat_entry_name` (String) Name of the SNAT rule
+- `source_cidr` (String) Network segment corresponding to the SNAT rule
+- `subnet_id` (String) ID of the subnet associated with the SNAT rule
 
 ### Read-Only
 
-- `eip_address` (String) SNAT规则关联的公网IP的IP地址。返回单个公网IP的IP地址。 返回多个公网IP的IP地址。
+- `eip_address` (String) IP address of the public IP associated with the SNAT rule. Returns the IP address for a single public IP. Returns IP addresses for multiple public IPs.
 - `id` (String) Uniquely identifies the resource.
-- `snat_entry_id` (String) SNAT规则的ID。
-- `status` (String) SNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。
+- `snat_entry_id` (String) ID of the SNAT rule
+- `status` (String) Status of the SNAT rule. Creating: being created. Deleting: being deleted. Available: available.
 
 ## Import
 

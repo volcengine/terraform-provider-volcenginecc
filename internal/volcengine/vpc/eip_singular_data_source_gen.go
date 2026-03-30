@@ -27,11 +27,11 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的ID。",
+		//	  "description": "Public IP ID.",
 		//	  "type": "string"
 		//	}
 		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的ID。",
+			Description: "Public IP ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Bandwidth
@@ -39,31 +39,31 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": 1,
-		//	  "description": "公网IP的带宽上限，默认为“1”，单位：Mbps,BillingType传入1：取值范围1 ~ 500。BillingType传入2：取值范围1 ~ 500。BillingType传入3：取值范围1 ~ 200。",
+		//	  "description": "Maximum bandwidth of the public IP. Default is '1', unit: Mbps. If BillingType is 1: range is 1~500. If BillingType is 2: range is 1~500. If BillingType is 3: range is 1~200.",
 		//	  "maximum": 500,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的带宽上限，默认为“1”，单位：Mbps,BillingType传入1：取值范围1 ~ 500。BillingType传入2：取值范围1 ~ 500。BillingType传入3：取值范围1 ~ 200。",
+			Description: "Maximum bandwidth of the public IP. Default is '1', unit: Mbps. If BillingType is 1: range is 1~500. If BillingType is 2: range is 1~500. If BillingType is 3: range is 1~200.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "共享带宽包的ID，表示将公网IP加入到共享带宽包。公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的地域相同。公网IP的计费方式必须是按量计费。共享带宽包为IPv4类型。",
+		//	  "description": "Shared bandwidth package ID, indicating the public IP is added to a shared bandwidth package. To add a public IP to a shared bandwidth package, the following conditions must be met: Both have the same security protection type. Both are in the same region. The public IP must use pay-as-you-go billing. The shared bandwidth package must be IPv4 type.",
 		//	  "type": "string"
 		//	}
 		"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "共享带宽包的ID，表示将公网IP加入到共享带宽包。公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的地域相同。公网IP的计费方式必须是按量计费。共享带宽包为IPv4类型。",
+			Description: "Shared bandwidth package ID, indicating the public IP is added to a shared bandwidth package. To add a public IP to a shared bandwidth package, the following conditions must be met: Both have the same security protection type. Both are in the same region. The public IP must use pay-as-you-go billing. The shared bandwidth package must be IPv4 type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BillingType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的计费方式。取值如下：1：包年包月。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+		//	  "description": "Billing method for public IP. Values: 1: annual/monthly. 2: pay-as-you-go - based on bandwidth cap. 3: pay-as-you-go - based on actual traffic.",
 		//	  "enum": [
 		//	    1,
 		//	    2,
@@ -72,14 +72,14 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的计费方式。取值如下：1：包年包月。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+			Description: "Billing method for public IP. Values: 1: annual/monthly. 2: pay-as-you-go   - based on bandwidth cap. 3: pay-as-you-go   - based on actual traffic.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BusinessStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP是否被锁定。Normal: 正常。FinancialLocked: 被锁定。",
+		//	  "description": "Whether the public IP is locked. Normal: normal. FinancialLocked: locked.",
 		//	  "enum": [
 		//	    "Normal",
 		//	    "FinancialLocked"
@@ -87,80 +87,80 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP是否被锁定。Normal: 正常。FinancialLocked: 被锁定。",
+			Description: "Whether the public IP is locked. Normal: normal. FinancialLocked: locked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的创建时间。",
+		//	  "description": "Creation time of the public IP.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的创建时间。",
+			Description: "Creation time of the public IP.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeletedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "预期资源强制回收时间。包年包月公网IP，此参数有返回值。按量计费公网IP，仅欠费冻结时，此参数有返回值。",
+		//	  "description": "Expected forced resource recycle time. For subscription public IPs, this parameter returns a value. For pay-as-you-go public IPs, this parameter returns a value only when frozen due to overdue payment.",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "预期资源强制回收时间。包年包月公网IP，此参数有返回值。按量计费公网IP，仅欠费冻结时，此参数有返回值。",
+			Description: "Expected forced resource recycle time. For subscription public IPs, this parameter returns a value. For pay-as-you-go public IPs, this parameter returns a value only when frozen due to overdue payment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的描述信息。",
+		//	  "description": "Description of the public IP.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的描述信息。",
+			Description: "Description of the public IP.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DirectMode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。",
+		//	  "description": "Whether to enable passthrough mode when binding public IP. Enter the following enum values exactly as shown; do not use other values. false (default): passthrough mode not enabled. true: passthrough mode enabled.",
 		//	  "type": "boolean"
 		//	}
 		"direct_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "绑定公网IP时是否启用直通模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。false（默认）：不使用直通模式。true：使用直通模式。",
+			Description: "Whether to enable passthrough mode when binding public IP. Enter the following enum values exactly as shown; do not use other values. false (default): passthrough mode not enabled. true: passthrough mode enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipAddress
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP地址。",
+		//	  "description": "Public IP address.",
 		//	  "type": "string"
 		//	}
 		"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP地址。",
+			Description: "Public IP address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的到期时间。包年包月，返回值为到期时间。按量计费，返回值为空。",
+		//	  "description": "Expiration time of the public IP. For subscription billing, the return value is the expiration time. For pay-as-you-go billing, the return value is empty.",
 		//	  "type": "string"
 		//	}
 		"expired_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的到期时间。包年包月，返回值为到期时间。按量计费，返回值为空。",
+			Description: "Expiration time of the public IP. For subscription billing, the return value is the expiration time. For pay-as-you-go billing, the return value is empty.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ISP
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "线路类型。BGP：BGP（多线）。ChinaMobile：中国移动静态单线。ChinaTelecom：中国电信静态单线。ChinaUnicom：中国联通静态单线。SingleLine_BGP：BGP单线。Fusion_BGP：融合BGP。ChinaMobile_Value：中国移动惠选型静态单线。ChinaUnicom_Value：中国联通惠选型静态单线。ChinaTelecom_Value：中国电信惠选型静态单线。",
+		//	  "description": "Line type. BGP: BGP (multi-line). ChinaMobile: China Mobile static single line. ChinaTelecom: China Telecom static single line. ChinaUnicom: China Unicom static single line. SingleLine_BGP: BGP single line. Fusion_BGP: Fusion BGP. ChinaMobile_Value: China Mobile Value static single line. ChinaUnicom_Value: China Unicom Value static single line. ChinaTelecom_Value: China Telecom Value static single line.",
 		//	  "enum": [
 		//	    "BGP",
 		//	    "SingleLine_BGP",
@@ -175,25 +175,25 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "线路类型。BGP：BGP（多线）。ChinaMobile：中国移动静态单线。ChinaTelecom：中国电信静态单线。ChinaUnicom：中国联通静态单线。SingleLine_BGP：BGP单线。Fusion_BGP：融合BGP。ChinaMobile_Value：中国移动惠选型静态单线。ChinaUnicom_Value：中国联通惠选型静态单线。ChinaTelecom_Value：中国电信惠选型静态单线。",
+			Description: "Line type. BGP: BGP (multi-line). ChinaMobile: China Mobile static single line. ChinaTelecom: China Telecom static single line. ChinaUnicom: China Unicom static single line. SingleLine_BGP: BGP single line. Fusion_BGP: Fusion BGP. ChinaMobile_Value: China Mobile Value static single line. ChinaUnicom_Value: China Unicom Value static single line. ChinaTelecom_Value: China Telecom Value static single line.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前绑定的实例ID。",
+		//	  "description": "Currently bound instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "当前绑定的实例ID。",
+			Description: "Currently bound instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前绑定的实例类型。Nat：公网NAT网关。NetworkInterface: 弹性网卡。ClbInstance: 负载均衡。EcsInstance：云服务器。HaVip：高可用虚拟IP。",
+		//	  "description": "Current bound instance type. Nat: public NAT gateway. NetworkInterface: elastic network interface. ClbInstance: load balancer. EcsInstance: cloud server. HaVip: high availability virtual IP.",
 		//	  "enum": [
 		//	    "Nat",
 		//	    "NetworkInterface",
@@ -205,91 +205,91 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "当前绑定的实例类型。Nat：公网NAT网关。NetworkInterface: 弹性网卡。ClbInstance: 负载均衡。EcsInstance：云服务器。HaVip：高可用虚拟IP。",
+			Description: "Current bound instance type. Nat: public NAT gateway. NetworkInterface: elastic network interface. ClbInstance: load balancer. EcsInstance: cloud server. HaVip: high availability virtual IP.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "申请申请指定的公网IP地址。仅支持填写使用后释放的IP地址，不填则表示自动分配。指定的公网IP地址",
+		//	  "description": "Apply for a specified public IP address. Only supports entering IP addresses that have been released after use; if not specified, the IP address is assigned automatically. Specified public IP address",
 		//	  "type": "string"
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "申请申请指定的公网IP地址。仅支持填写使用后释放的IP地址，不填则表示自动分配。指定的公网IP地址",
+			Description: "Apply for a specified public IP address. Only supports entering IP addresses that have been released after use; if not specified, the IP address is assigned automatically. Specified public IP address",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpAddressPoolId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IP地址池的ID。",
+		//	  "description": "IP address pool ID.",
 		//	  "type": "string"
 		//	}
 		"ip_address_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP地址池的ID。",
+			Description: "IP address pool ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsBlocked
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否被封禁。true：是。false：否。",
+		//	  "description": "Whether it is blocked. true: yes. false: no.",
 		//	  "type": "boolean"
 		//	}
 		"is_blocked": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否被封禁。true：是。false：否。",
+			Description: "Whether it is blocked. true: yes. false: no.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP被锁定的原因。financial: 因欠费被锁定。unlock: 欠费关停后充值恢复过程中。空值 : 没有被锁定。",
+		//	  "description": "Reason for public IP lock. financial: locked due to overdue payment. unlock: restoring after recharge following suspension for overdue payment. Empty value: not locked.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP被锁定的原因。financial: 因欠费被锁定。unlock: 欠费关停后充值恢复过程中。空值 : 没有被锁定。",
+			Description: "Reason for public IP lock. financial: locked due to overdue payment. unlock: restoring after recharge following suspension for overdue payment. Empty value: not locked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的名称。",
+		//	  "description": "Name of the public IP.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的名称。",
+			Description: "Name of the public IP.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。",
+		//	  "description": "Resource freeze time. This parameter returns a value only when the resource is frozen due to overdue payment.",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。",
+			Description: "Resource freeze time. This parameter returns a value only when the resource is frozen due to overdue payment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Period
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "代表购买包年包月公网IP的时长时，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。代表临时升配的时长时：单位为小时，取值范围：1～720。",
+		//	  "description": "When representing the duration for purchasing a subscription public IP, the default is '1'. If PeriodUnit is set to 1, Period can be 1~9, 12, 24, 36, 48, or 60. If PeriodUnit is set to 2, Period can be 1~5. When representing the duration for temporary upgrade, the unit is hours, and the range is 1~720.",
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "代表购买包年包月公网IP的时长时，默认为“1”。当PeriodUnit传入1，Period取值范围：1~9、12、24、36、48、60。当PeriodUnit传入2，Period取值范围：1～5。代表临时升配的时长时：单位为小时，取值范围：1～720。",
+			Description: "When representing the duration for purchasing a subscription public IP, the default is '1'. If PeriodUnit is set to 1, Period can be 1~9, 12, 24, 36, 48, or 60. If PeriodUnit is set to 2, Period can be 1~5. When representing the duration for temporary upgrade, the unit is hours, and the range is 1~720.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeriodUnit
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "购买包年包月公网IP时长的单位。取值如下：1（默认值）：月。2 ：年。",
+		//	  "description": "Unit for the duration when purchasing annual/monthly public IP. Values: 1 (default): month. 2: year.",
 		//	  "enum": [
 		//	    1,
 		//	    2
@@ -297,18 +297,18 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"period_unit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "购买包年包月公网IP时长的单位。取值如下：1（默认值）：月。2 ：年。",
+			Description: "Unit for the duration when purchasing annual/monthly public IP. Values: 1 (default): month. 2: year.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateIpAddress
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "要绑定公网IP的实例的私网IP地址。只支持传入云服务ECS主网卡的私网IP地址和辅助网卡IP地址。若不填写：InstanceType传入EcsInstance，则绑定云服务器ECS主网卡的主私网IP地址。InstanceType传入NetworkInterface，则绑定辅助网卡主私网IP地址。",
+		//	  "description": "Private IP address of the instance to bind the public IP to. Only ECS primary network interface private IP addresses and secondary network interface IP addresses are supported. If not specified: If InstanceType is EcsInstance, binds to the primary private IP address of the ECS primary network interface. If InstanceType is NetworkInterface, binds to the primary private IP address of the secondary network interface.",
 		//	  "type": "string"
 		//	}
 		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "要绑定公网IP的实例的私网IP地址。只支持传入云服务ECS主网卡的私网IP地址和辅助网卡IP地址。若不填写：InstanceType传入EcsInstance，则绑定云服务器ECS主网卡的主私网IP地址。InstanceType传入NetworkInterface，则绑定辅助网卡主私网IP地址。",
+			Description: "Private IP address of the instance to bind the public IP to. Only ECS primary network interface private IP addresses and secondary network interface IP addresses are supported. If not specified: If InstanceType is EcsInstance, binds to the primary private IP address of the ECS primary network interface. If InstanceType is NetworkInterface, binds to the primary private IP address of the secondary network interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -316,40 +316,40 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "公网IP所属项目的名称。",
+		//	  "description": "Name of the project to which the public IP belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP所属项目的名称。",
+			Description: "Name of the project to which the public IP belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReleaseWithInstance
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否随云服务器实例删除。仅按量计费公网IP有效。开启后，当云服务器实例被系统自动回收（退订24小时后、到期回收、欠费回收）或被调用DeleteInstances接口时，公网IP随其一同释放。true：是。false：否。",
+		//	  "description": "Whether to release the public IP when the cloud server instance is deleted. Only valid for pay-as-you-go public IPs. When enabled, the public IP is released together with the instance when the system automatically recycles the instance (24 hours after unsubscription, upon expiration, or due to overdue payment) or when the DeleteInstances API is called. true: yes. false: no.",
 		//	  "type": "boolean"
 		//	}
 		"release_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否随云服务器实例删除。仅按量计费公网IP有效。开启后，当云服务器实例被系统自动回收（退订24小时后、到期回收、欠费回收）或被调用DeleteInstances接口时，公网IP随其一同释放。true：是。false：否。",
+			Description: "Whether to release the public IP when the cloud server instance is deleted. Only valid for pay-as-you-go public IPs. When enabled, the public IP is released together with the instance when the system automatically recycles the instance (24 hours after unsubscription, upon expiration, or due to overdue payment) or when the DeleteInstances API is called. true: yes. false: no.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RenewPeriodTimes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自动续费的时长，取值范围1、2、3、6、12，单位：月。若RenewType传入2，则必须传入RenewPeriodTimes",
+		//	  "description": "Duration for automatic renewal. Valid values: 1, 2, 3, 6, 12. Unit: month. If RenewType is 2, RenewPeriodTimes must be specified.",
 		//	  "type": "integer"
 		//	}
 		"renew_period_times": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "自动续费的时长，取值范围1、2、3、6、12，单位：月。若RenewType传入2，则必须传入RenewPeriodTimes",
+			Description: "Duration for automatic renewal. Valid values: 1, 2, 3, 6, 12. Unit: month. If RenewType is 2, RenewPeriodTimes must be specified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RenewType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月公网IP续费的方式。取值如下：1（默认值）：手动续费。2：自动续费。3：到期不续费。",
+		//	  "description": "Renewal method for annual/monthly public IP. Values: 1 (default): manual renewal. 2: automatic renewal. 3: do not renew upon expiration.",
 		//	  "enum": [
 		//	    1,
 		//	    2,
@@ -358,25 +358,25 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"renew_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "包年包月公网IP续费的方式。取值如下：1（默认值）：手动续费。2：自动续费。3：到期不续费。",
+			Description: "Renewal method for annual/monthly public IP. Values: 1 (default): manual renewal. 2: automatic renewal. 3: do not renew upon expiration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityProtectionInstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DDoS原生防护（企业版）ID。您可以调用 DescInstanceList 接口，查询DDoS原生防护（企业版）的ID。当SecurityProtectionTypes传入AntiDDoS_Enhanced时，此参数必须传入。",
+		//	  "description": "DDoS native protection (Enterprise Edition) ID. You can call the DescInstanceList API to query the ID of DDoS native protection (Enterprise Edition). When SecurityProtectionTypes is set to AntiDDoS_Enhanced, this parameter is required.",
 		//	  "type": "integer"
 		//	}
 		"security_protection_instance_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "DDoS原生防护（企业版）ID。您可以调用 DescInstanceList 接口，查询DDoS原生防护（企业版）的ID。当SecurityProtectionTypes传入AntiDDoS_Enhanced时，此参数必须传入。",
+			Description: "DDoS native protection (Enterprise Edition) ID. You can call the DescInstanceList API to query the ID of DDoS native protection (Enterprise Edition). When SecurityProtectionTypes is set to AntiDDoS_Enhanced, this parameter is required.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityProtectionTypes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "防护类型。AntiDDoS_Enhanced：增强防护类型的公网IP，可以加入到DDoS原生防护（企业版）实例。空值：默认防护类型的公网IP。",
+		//	  "description": "Protection type. AntiDDoS_Enhanced: Public IPs with enhanced protection can be added to DDoS Native Protection (Enterprise Edition) instances. Null value: Public IPs with default protection type.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -386,46 +386,46 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"security_protection_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "防护类型。AntiDDoS_Enhanced：增强防护类型的公网IP，可以加入到DDoS原生防护（企业版）实例。空值：默认防护类型的公网IP。",
+			Description: "Protection type. AntiDDoS_Enhanced: Public IPs with enhanced protection can be added to DDoS Native Protection (Enterprise Edition) instances. Null value: Public IPs with default protection type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceManaged
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否由服务管理",
+		//	  "description": "Managed by service",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否由服务管理",
+			Description: "Managed by service",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的状态。Attaching：绑定中。Detaching：解绑中。Attached：已绑定。Available：可用。Deleting：删除中。",
+		//	  "description": "Status of the public IP. Attaching: binding in progress. Detaching: unbinding in progress. Attached: bound. Available: available. Deleting: deleting.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "公网IP的状态。Attaching：绑定中。Detaching：解绑中。Attached：已绑定。Available：可用。Deleting：删除中。",
+			Description: "Status of the public IP. Attaching: binding in progress. Detaching: unbinding in progress. Attached: bound. Available: available. Deleting: deleting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的标签信息",
+		//	  "description": "Tag information of the public IP",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "用户标签。",
+		//	    "description": "User tags.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -442,28 +442,28 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "公网IP的标签信息",
+			Description: "Tag information of the public IP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新公网IP的时间。",
+		//	  "description": "Time when the public IP was updated.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新公网IP的时间。",
+			Description: "Time when the public IP was updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

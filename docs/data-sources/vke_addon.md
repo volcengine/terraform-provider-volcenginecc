@@ -21,27 +21,27 @@ Data Source schema for Volcengine::VKE::Addon
 
 ### Read-Only
 
-- `cluster_id` (String) 组件所在集群 ID。
-- `config` (String) 组件配置。
-- `created_time` (String) 安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。
-- `deploy_mode` (String) 组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。
-- `deploy_node_type` (String) 部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。
-- `name` (String) 组件名称。
-- `status` (Attributes) 组件状态。 (see [below for nested schema](#nestedatt--status))
-- `updated_time` (String) 更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。
-- `version` (String) 组件版本。
+- `cluster_id` (String) Cluster ID where the component is located.
+- `config` (String) Component configuration.
+- `created_time` (String) Component installation time. Standard RFC3339 format, UTC+0 time.
+- `deploy_mode` (String) Component deployment mode. Values: Unmanaged: deployed in unmanaged mode. Managed: deployed in managed mode.
+- `deploy_node_type` (String) Type of deployment node. This parameter needs to be specified only when DeployModes=Unmanaged. Values: Node: deployed as a node. VirtualNode: deployed as a virtual node.
+- `name` (String) Component name.
+- `status` (Attributes) Component status. (see [below for nested schema](#nestedatt--status))
+- `updated_time` (String) Component update time. Standard RFC3339 format, UTC+0 time.
+- `version` (String) Component version.
 
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`
 
 Read-Only:
 
-- `conditions` (Attributes Set) 组件当前主状态下的状态条件。 (see [below for nested schema](#nestedatt--status--conditions))
-- `phase` (String) 组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating
+- `conditions` (Attributes Set) Status conditions under the component's current primary state. (see [below for nested schema](#nestedatt--status--conditions))
+- `phase` (String) Component status. Parameter values include: Running, Failed, Creating, Deleting, Updating
 
 <a id="nestedatt--status--conditions"></a>
 ### Nested Schema for `status.conditions`
 
 Read-Only:
 
-- `type` (String) 组件当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed
+- `type` (String) Status conditions under the component's current primary state, indicating the reasons for entering this state. Multiple reasons are possible. Parameter values include: Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed

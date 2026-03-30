@@ -13,16 +13,16 @@
     "MultiRegionConfiguration": {
       "properties": {
         "MultiRegionKeyType": {
-          "description": "多区域密钥的类型。",
+          "description": "Multi-region key type.",
           "type": "string"
         },
         "PrimaryKey": {
           "$ref": "#/definitions/PrimaryKey",
-          "description": "主多区域键的事务识别号和区域 ID。",
+          "description": "Primary multi-region key transaction identifier and region ID.",
           "type": "object"
         },
         "ReplicaKeys": {
-          "description": "副本多区域密钥的事务记录编号和区域 ID。",
+          "description": "Replica multi-region key transaction record number and region ID.",
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/ReplicaKey"
@@ -34,42 +34,42 @@
       "type": "object"
     },
     "PrimaryKey": {
-      "description": "主多区域键的事务识别号和区域 ID。",
+      "description": "Primary multi-region key transaction identifier and region ID.",
       "properties": {
         "Region": {
-          "description": "多区域密钥的区域 ID。",
+          "description": "Multi-region key region ID.",
           "type": "string"
         },
         "Trn": {
-          "description": "多区域密钥的 TRN。",
+          "description": "Multi-region key TRN.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "ReplicaKey": {
-      "description": "副本多区域密钥的事务记录编号和区域 ID。",
+      "description": "Replica multi-region key transaction record number and region ID.",
       "properties": {
         "Region": {
-          "description": "多区域密钥的区域 ID。",
+          "description": "Multi-region key region ID.",
           "type": "string"
         },
         "Trn": {
-          "description": "多区域密钥的转换。",
+          "description": "Multi-region key conversion.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "Tag": {
-      "description": "KMS密钥的标签",
+      "description": "KMS key label.",
       "properties": {
         "Key": {
-          "description": "KMS密钥的标签键",
+          "description": "KMS key label key.",
           "type": "string"
         },
         "Value": {
-          "description": "KMS密钥的标签值",
+          "description": "KMS key label value.",
           "type": "string"
         }
       },
@@ -80,7 +80,7 @@
       "type": "object"
     }
   },
-  "description": "密钥管理服务（Key Management Service）是火山引擎上一站式的密钥管理和数据加密服务平台。提供简单易用的加密接口，KMS 帮助用户轻松管理密钥、保护云上核心数据的安全。同时极大降低用户自行部署密码基础设施的采购、研发成本。帮助业务轻松满足监管和合规需求。",
+  "description": "Key Management Service (KMS) is a one-stop key management and data encryption platform on Volcano Engine. It provides easy-to-use encryption interfaces. KMS helps users easily manage keys and protect the security of core cloud data. It also greatly reduces the procurement and development costs for users to deploy their own cryptographic infrastructure. KMS helps businesses easily meet regulatory and compliance requirements.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/KeyringName",
@@ -148,107 +148,107 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "密钥创建时间。",
+      "description": "Key creation time.",
       "format": "int64",
       "semantic": "createdTime",
       "type": "integer"
     },
     "Description": {
-      "description": "密钥描述:长度为 0 - 8192 个字符。",
+      "description": "Key description: Length 0–8192 characters.",
       "maxLength": 8192,
       "minLength": 0,
       "semantic": "description",
       "type": "string"
     },
     "KeyArchiveOperation": {
-      "description": "用户主密钥归档操作（用户输入1=归档，2=取消归档）",
+      "description": "User master key archive operation (enter 1 to archive, 2 to unarchive).",
       "format": "int32",
       "type": "integer"
     },
     "KeyEnableOperation": {
-      "description": "用户主密钥启用操作（用户输入1=启用，2=禁用）",
+      "description": "User master key enable operation (enter 1 to enable, 2 to disable).",
       "format": "int32",
       "type": "integer"
     },
     "KeyID": {
-      "description": "密钥唯一标识符，UUID形式。",
+      "description": "Key unique identifier in UUID format.",
       "semantic": "resourceId",
       "type": "string"
     },
     "KeyMaterialExpireTime": {
-      "description": "密钥材料过期时间，当值为空时表示不会过期。",
+      "description": "Key material expiration time. If empty, the key does not expire.",
       "type": "string"
     },
     "KeyName": {
-      "description": "主密钥名称，长度为 2 - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+      "description": "Master key name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].",
       "maxLength": 31,
       "minLength": 2,
       "semantic": "resourceName",
       "type": "string"
     },
     "KeyRotationOperation": {
-      "description": "用户主密钥轮转操作（用户输入1=开启，2=关闭）",
+      "description": "User master key rotation operation (enter 1 to enable, 2 to disable).",
       "format": "int32",
       "type": "integer"
     },
     "KeySpec": {
-      "description": "对称密钥：SYMMETRIC_256，SYMMETRIC_128，非对称密钥：RSA_2048，RSA_3072，RSA_4096，EC_P256，EC_P256K，EC_P384，EC_P521，EC_SM2。",
+      "description": "Symmetric keys: SYMMETRIC_256, SYMMETRIC_128; asymmetric keys: RSA_2048, RSA_3072, RSA_4096, EC_P256, EC_P256K, EC_P384, EC_P521, EC_SM2.",
       "type": "string"
     },
     "KeyState": {
-      "description": "密钥状态：Enable，Disable，PendingDelete，Archived，PendingImport。",
+      "description": "Key status: Enable, Disable, PendingDelete, Archived, PendingImport.",
       "semantic": "status",
       "type": "string"
     },
     "KeyUsage": {
-      "description": "密钥用途，取值：ENCRYPT_DECRYPT，SIGN_VERIFY，GENERATE_VERIFY_MAC。",
+      "description": "Key usage. Options: ENCRYPT_DECRYPT, SIGN_VERIFY, GENERATE_VERIFY_MAC.",
       "type": "string"
     },
     "KeyringName": {
-      "description": "密钥环名称，长度为 2 - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+      "description": "Key ring name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].",
       "maxLength": 31,
       "minLength": 2,
       "type": "string"
     },
     "LastRotationTime": {
-      "description": "密钥最后轮转时间。",
+      "description": "Key last rotation time.",
       "type": "string"
     },
     "MultiRegion": {
-      "description": "是否为 Multi-region 类型的主密钥。",
+      "description": "Is this a multi-region type master key.",
       "type": "boolean"
     },
     "MultiRegionConfiguration": {
       "$ref": "#/definitions/MultiRegionConfiguration",
-      "description": "Multi-region key 配置信息。",
+      "description": "Multi-region key configuration information.",
       "type": "object"
     },
     "Origin": {
-      "description": "密钥来源，取值：CloudKMS，External，ExternalKeyStore。",
+      "description": "Key source. Options: CloudKMS, External, ExternalKeyStore.",
       "type": "string"
     },
     "ProtectionLevel": {
-      "description": "密钥保护级别，取值：SOFTWARE，HSM。",
+      "description": "Key protection level. Options: SOFTWARE, HSM.",
       "type": "string"
     },
     "RotateInterval": {
-      "description": "密钥轮转周期，单位：天；取值范围：[90, 2560]。",
+      "description": "Key rotation period (days). Range: [90, 2560].",
       "type": "integer"
     },
     "RotateState": {
-      "description": "密钥轮转状态，取值：Enable，Disable。",
+      "description": "Key rotation status. Options: Enable, Disable.",
       "type": "string"
     },
     "ScheduleDeleteTime": {
-      "description": "密钥删除时间。",
+      "description": "Key deletion time.",
       "type": "string"
     },
     "ScheduleRotationTime": {
-      "description": "密钥轮转时间。",
+      "description": "Key rotation time.",
       "type": "string"
     },
     "Tags": {
-      "description": "KMS密钥的标签信息",
+      "description": "KMS key label information.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -258,11 +258,11 @@
       "uniqueItems": true
     },
     "Trn": {
-      "description": "资源名称，格式应为 trn:${Service}:${Region}:${AccountID}:${ResourcePath}。",
+      "description": "Resource name. Format should be trn:${Service}:${Region}:${AccountID}:${ResourcePath}.",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "密钥更新时间。",
+      "description": "Key update time.",
       "format": "int64",
       "semantic": "updatedTime",
       "type": "integer"

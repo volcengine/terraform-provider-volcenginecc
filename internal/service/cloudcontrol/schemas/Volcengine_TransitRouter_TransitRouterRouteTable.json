@@ -5,14 +5,14 @@
   ],
   "definitions": {
     "Tag": {
-      "description": "TR路由表的标签信息",
+      "description": "Tag information for the TR routing table",
       "properties": {
         "Key": {
-          "description": "标签键",
+          "description": "Tag key",
           "type": "string"
         },
         "Value": {
-          "description": "标签值",
+          "description": "Tag value",
           "type": "string"
         }
       },
@@ -22,7 +22,7 @@
       "type": "object"
     }
   },
-  "description": "中转路由器转发流量的依据，具有关联转发、静态路由、路由学习、路由同步等能力。每个TR实例下可以创建多个TR路由表，分别用于转发具有不同访问需求的网络实例的流量。多条网络实例连接可以关联同一个TR路由表。",
+  "description": "Basis for Transit Router to forward traffic, supporting associated forwarding, static routing, route learning, and route synchronization. Multiple TR routing tables can be created under each TR instance to forward traffic for network instances with different access requirements. Multiple network instance connections can be associated with the same TR routing table.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/TransitRouterId",
@@ -73,26 +73,26 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "TR路由表的创建时间",
+      "description": "Creation time of the TR routing table",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+      "description": "Description of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
       "maxLength": 255,
       "semantic": "description",
       "type": "string"
     },
     "InRoutePolicyTableId": {
-      "description": "TR路由表关联的收方向路由策略的ID",
+      "description": "ID of the inbound routing policy associated with the TR routing table",
       "type": "string"
     },
     "OutRoutePolicyTableId": {
-      "description": "TR路由表关联的发方向路由策略的ID",
+      "description": "ID of the outbound routing policy associated with the TR routing table",
       "type": "string"
     },
     "Status": {
-      "description": "TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用",
+      "description": "Status of the TR routing table. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
       "enum": [
         "Creating",
         "Deleting",
@@ -103,7 +103,7 @@
       "type": "string"
     },
     "Tags": {
-      "description": "TR路由表的标签信息。",
+      "description": "Tag information for the TR routing table",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -113,22 +113,22 @@
       "uniqueItems": true
     },
     "TransitRouterId": {
-      "description": "中转路由器实例的ID",
+      "description": "Transit Router instance ID",
       "type": "string"
     },
     "TransitRouterRouteTableId": {
-      "description": "TR路由表的ID",
+      "description": "TR routing table ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "TransitRouterRouteTableName": {
-      "description": "TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID",
+      "description": "Name of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the TR routing table ID",
       "maxLength": 128,
       "semantic": "resourceName",
       "type": "string"
     },
     "TransitRouterRouteTableType": {
-      "description": "TR路由表的类型。System：系统路由表。Custom：自定义路由表。",
+      "description": "Type of TR routing table. System: system routing table. Custom: custom routing table.",
       "enum": [
         "System",
         "Custom"
@@ -136,7 +136,7 @@
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "TR路由表的最近操作时间",
+      "description": "Last operation time of the TR routing table",
       "semantic": "updatedTime",
       "type": "string"
     }

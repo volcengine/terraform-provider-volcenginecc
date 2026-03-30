@@ -26,88 +26,88 @@ func permissionSetAssignmentDataSource(ctx context.Context) (datasource.DataSour
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权创建时间。",
+		//	  "description": "Authorization creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权创建时间。",
+			Description: "Authorization creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionSetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集 ID。",
+		//	  "description": "Permission set ID",
 		//	  "type": "string"
 		//	}
 		"permission_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集 ID。",
+			Description: "Permission set ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionSetName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集名称。",
+		//	  "description": "Permission set name",
 		//	  "type": "string"
 		//	}
 		"permission_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集名称。",
+			Description: "Permission set name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrincipalId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云身份中心对象 ID",
+		//	  "description": "Cloud Identity Center object ID",
 		//	  "type": "string"
 		//	}
 		"principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云身份中心对象 ID",
+			Description: "Cloud Identity Center object ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrincipalName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云身份中心对象名。",
+		//	  "description": "Cloud Identity Center object name",
 		//	  "type": "string"
 		//	}
 		"principal_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云身份中心对象名。",
+			Description: "Cloud Identity Center object name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrincipalType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云身份中心对象类型，User 或者 Group。",
+		//	  "description": "Cloud Identity Center object type: User or Group",
 		//	  "type": "string"
 		//	}
 		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云身份中心对象类型，User 或者 Group。",
+			Description: "Cloud Identity Center object type: User or Group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TargetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权账号 ID。",
+		//	  "description": "Authorized account ID",
 		//	  "type": "string"
 		//	}
 		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权账号 ID。",
+			Description: "Authorized account ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TargetName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权账号名。",
+		//	  "description": "Authorized account name",
 		//	  "type": "string"
 		//	}
 		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权账号名。",
+			Description: "Authorized account name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

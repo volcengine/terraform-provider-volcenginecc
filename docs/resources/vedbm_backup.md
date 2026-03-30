@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vedbm_backup Resource - terraform-provider-volcenginecc"
 subcategory: "VEDBM"
 description: |-
-  云数据库 veDB备份管理
+  Cloud Database veDB Backup Management
 ---
 
 # volcenginecc_vedbm_backup (Resource)
 
-云数据库 veDB备份管理
+Cloud Database veDB Backup Management
 
 ## Example Usage
 
@@ -28,26 +28,26 @@ resource "volcenginecc_vedbm_backup" "vedbmbackupDemo" {
 
 ### Required
 
-- `instance_id` (String) 实例ID。
+- `instance_id` (String) Instance ID
 
 ### Optional
 
-- `backup_method` (String) 备份方式，目前仅支持物理备份。
-- `backup_retention_period` (Number) 数据备份保留天数。
-- `backup_time` (String) 执行备份任务的时间，间隔窗口为两小时。格式：HH:mmZ-HH:mmZ（UTC 时间）。
-- `backup_type` (String) 备份类型，目前仅支持全量备份。
-- `full_backup_period` (String) 全量备份周期，多个取值用英文逗号（,）隔开。
+- `backup_method` (String) Backup method, currently only physical backup is supported
+- `backup_retention_period` (Number) Data backup retention days
+- `backup_time` (String) Backup task execution time, interval window is two hours. Format: HH:mmZ-HH:mmZ (UTC time)
+- `backup_type` (String) Backup type, currently only full backup is supported
+- `full_backup_period` (String) Full backup cycle, use commas (,) to separate multiple values
 
 ### Read-Only
 
-- `backup_end_time` (String) 备份的结束时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `backup_file_size` (Number) 备份文件大小，单位为 KiB。
-- `backup_id` (String) 备份 ID。
-- `backup_start_time` (String) 备份的开始时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `backup_status` (String) 备份状态。
-- `consistent_time` (String) 一致性备份的时间点，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `continue_backup` (Boolean) 是否开启持续备份，取值固定为 true。
-- `create_type` (String) 创建类型。
+- `backup_end_time` (String) Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)
+- `backup_file_size` (Number) Backup file size, unit: KiB
+- `backup_id` (String) Backup ID
+- `backup_start_time` (String) Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)
+- `backup_status` (String) Backup status
+- `consistent_time` (String) Consistency backup timestamp, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)
+- `continue_backup` (Boolean) Enable continuous backup, value is always true
+- `create_type` (String) Creation type
 - `id` (String) Uniquely identifies the resource.
 
 ## Import

@@ -33,20 +33,20 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例启动模板版本信息。",
+		//	  "description": "Instance launch template version information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AvailableCount": {
-		//	        "description": "该可用区内，还可以加入当前部署集的ECS实例数量。",
+		//	        "description": "You can also include the number of ECS instances in the current deployment set within this availability zone.",
 		//	        "type": "integer"
 		//	      },
 		//	      "UsedCount": {
-		//	        "description": "部署集内属于该可用区的ECS实例数量。",
+		//	        "description": "Number of ECS instances in the deployment set that belong to this availability zone.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "可用区ID。只返回部署集内存量ECS实例所属的可用区ID。",
+		//	        "description": "Availability zone ID. Only returns the availability zone ID for ECS instances in the deployment set.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -60,22 +60,22 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AvailableCount
 					"available_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "该可用区内，还可以加入当前部署集的ECS实例数量。",
+						Description: "You can also include the number of ECS instances in the current deployment set within this availability zone.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedCount
 					"used_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "部署集内属于该可用区的ECS实例数量。",
+						Description: "Number of ECS instances in the deployment set that belong to this availability zone.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "可用区ID。只返回部署集内存量ECS实例所属的可用区ID。",
+						Description: "Availability zone ID. Only returns the availability zone ID for ECS instances in the deployment set.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例启动模板版本信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Instance launch template version information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -85,11 +85,11 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集的创建时间。",
+		//	  "description": "Deployment set creation time.",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署集的创建时间。",
+			Description: "Deployment set creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -99,11 +99,11 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集组的序号，取值范围：1～7。",
+		//	  "description": "Deployment set group index. Value range: 1–7.",
 		//	  "type": "integer"
 		//	}
 		"deployment_set_group_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "部署集组的序号，取值范围：1～7。",
+			Description: "Deployment set group index. Value range: 1–7.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -115,11 +115,11 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集ID。",
+		//	  "description": "Deployment set ID.",
 		//	  "type": "string"
 		//	}
 		"deployment_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署集ID。",
+			Description: "Deployment set ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -129,13 +129,13 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集名称。不能以数字、中划线、下划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制为1～128个字符。",
+		//	  "description": "Deployment set name. Cannot start with a digit, hyphen, or underscore. Can only contain Chinese characters, letters, digits, underscores, and hyphens. Length limit: 1–128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"deployment_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署集名称。不能以数字、中划线、下划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制为1～128个字符。",
+			Description: "Deployment set name. Cannot start with a digit, hyphen, or underscore. Can only contain Chinese characters, letters, digits, underscores, and hyphens. Length limit: 1–128 characters.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
@@ -145,12 +145,12 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集的描述信息。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”。长度限制在255个字符以内。",
+		//	  "description": "Deployment set description. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, digits, period '.', space, underscore '_', hyphen '-', equals '=', English comma ',', Chinese comma '，', and Chinese period '。'. Length limit: within 255 characters.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署集的描述信息。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”。长度限制在255个字符以内。",
+			Description: "Deployment set description. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, digits, period '.', space, underscore '_', hyphen '-', equals '=', English comma ',', Chinese comma '，', and Chinese period '。'. Length limit: within 255 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -164,11 +164,11 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署粒度，取值：host：物理机。rack：机架。switch：交换机。",
+		//	  "description": "Deployment granularity. Options: host: physical machine. rack: rack. switch: switch.",
 		//	  "type": "string"
 		//	}
 		"granularity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署粒度，取值：host：物理机。rack：机架。switch：交换机。",
+			Description: "Deployment granularity. Options: host: physical machine. rack: rack. switch: switch.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -180,11 +180,11 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集组数量。为部署集组高可用策略设置分组数量。取值范围：1～7。默认值：7。",
+		//	  "description": "Number of deployment set groups. Set the group count for the deployment set group high availability policy. Value range: 1–7. Default: 7.",
 		//	  "type": "integer"
 		//	}
 		"group_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "部署集组数量。为部署集组高可用策略设置分组数量。取值范围：1～7。默认值：7。",
+			Description: "Number of deployment set groups. Set the group count for the deployment set group high availability policy. Value range: 1–7. Default: 7.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -196,11 +196,11 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集内的ECS实例数量。",
+		//	  "description": "Number of ECS instances in the deployment set.",
 		//	  "type": "integer"
 		//	}
 		"instance_amount": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "部署集内的ECS实例数量。",
+			Description: "Number of ECS instances in the deployment set.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -210,7 +210,7 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署集内的ECS实例ID列表。",
+		//	  "description": "List of ECS instance IDs in the deployment set.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -220,7 +220,7 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "部署集内的ECS实例ID列表。",
+			Description: "List of ECS instance IDs in the deployment set.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -231,11 +231,11 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署策略，取值：Availability（默认）：高可用策略。AvailabilityGroup：部署集组高可用策略。",
+		//	  "description": "Deployment policy. Options: Availability (default): high availability policy. AvailabilityGroup: deployment set group high availability policy.",
 		//	  "type": "string"
 		//	}
 		"strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署策略，取值：Availability（默认）：高可用策略。AvailabilityGroup：部署集组高可用策略。",
+			Description: "Deployment policy. Options: Availability (default): high availability policy. AvailabilityGroup: deployment set group high availability policy.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -255,7 +255,7 @@ func deploymentSetResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "部署集是在底层硬件维度上控制实例分散部署的策略，可以实现物理层级的安全隔离。您可以通过创建部署集，使实例分散部署在不同的底层硬件上，用于保障业务的底层容灾能力及高可用性。",
+		Description: "A deployment set is a strategy that controls the distribution of instances at the underlying hardware level, enabling physical-level security isolation. By creating deployment sets, you can distribute instances across different underlying hardware to ensure disaster recovery and high availability for your business.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -33,11 +33,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的ID。",
+		//	  "description": "IPv6 public bandwidth ID",
 		//	  "type": "string"
 		//	}
 		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的ID。",
+			Description: "IPv6 public bandwidth ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -47,12 +47,12 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的带宽上限。",
+		//	  "description": "IPv6 public bandwidth cap",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的带宽上限。",
+			Description: "IPv6 public bandwidth cap",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -63,11 +63,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6共享带宽包的ID。",
+		//	  "description": "IPv6 shared bandwidth package ID",
 		//	  "type": "string"
 		//	}
 		"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6共享带宽包的ID。",
+			Description: "IPv6 shared bandwidth package ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -79,12 +79,12 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的计费类型。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+		//	  "description": "IPv6 public bandwidth billing type. 2: Pay-as-you-go - billed by bandwidth cap. 3: Pay-as-you-go - billed by actual traffic.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的计费类型。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+			Description: "IPv6 public bandwidth billing type. 2: Pay-as-you-go   - billed by bandwidth cap. 3: Pay-as-you-go   - billed by actual traffic.",
 			Required:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
@@ -94,11 +94,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽是否被锁定。Normal：正常。FinancialLocked：被锁定。",
+		//	  "description": "Whether IPv6 public bandwidth is locked. Normal: Normal. FinancialLocked: Locked.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽是否被锁定。Normal：正常。FinancialLocked：被锁定。",
+			Description: "Whether IPv6 public bandwidth is locked. Normal: Normal. FinancialLocked: Locked.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -108,11 +108,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的开通时间。",
+		//	  "description": "IPv6 public bandwidth activation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的开通时间。",
+			Description: "IPv6 public bandwidth activation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -122,11 +122,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的删除时间。",
+		//	  "description": "IPv6 public bandwidth deletion time",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的删除时间。",
+			Description: "IPv6 public bandwidth deletion time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -136,11 +136,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的线路类型。BGP：BGP（多线）。",
+		//	  "description": "IPv6 public bandwidth line type. BGP: BGP (multi-line).",
 		//	  "type": "string"
 		//	}
 		"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的线路类型。BGP：BGP（多线）。",
+			Description: "IPv6 public bandwidth line type. BGP: BGP (multi-line).",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -150,11 +150,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽关联的实例ID。",
+		//	  "description": "Instance ID associated with IPv6 public bandwidth",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽关联的实例ID。",
+			Description: "Instance ID associated with IPv6 public bandwidth",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -164,11 +164,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽关联的实例类型。EcsInstance：云服务器实例。ClbInstance：负载均衡。",
+		//	  "description": "Instance type associated with IPv6 public bandwidth. EcsInstance: Cloud server instance. ClbInstance: Load balancer.",
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽关联的实例类型。EcsInstance：云服务器实例。ClbInstance：负载均衡。",
+			Description: "Instance type associated with IPv6 public bandwidth. EcsInstance: Cloud server instance. ClbInstance: Load balancer.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -178,11 +178,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6地址。",
+		//	  "description": "IPv6 address",
 		//	  "type": "string"
 		//	}
 		"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6地址。",
+			Description: "IPv6 address",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -192,11 +192,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关的ID。",
+		//	  "description": "IPv6 gateway ID",
 		//	  "type": "string"
 		//	}
 		"ipv_6_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关的ID。",
+			Description: "IPv6 gateway ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -206,11 +206,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽被锁定的原因。该参数只有IPv6公网带宽处于FinancialLocked状态时才有返回值。Financial：因欠费被锁定。Security：因安全被锁定。",
+		//	  "description": "Reason for IPv6 public bandwidth lock. This parameter is returned only when IPv6 public bandwidth is in FinancialLocked status. Financial: Locked due to overdue payment. Security: Locked due to security reasons.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽被锁定的原因。该参数只有IPv6公网带宽处于FinancialLocked状态时才有返回值。Financial：因欠费被锁定。Security：因安全被锁定。",
+			Description: "Reason for IPv6 public bandwidth lock. This parameter is returned only when IPv6 public bandwidth is in FinancialLocked status. Financial: Locked due to overdue payment. Security: Locked due to security reasons.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -220,11 +220,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6地址的通信类型。Private：私网通信类型。Public：公网通信类型。",
+		//	  "description": "IPv6 address communication type. Private: Private network communication type. Public: Public network communication type.",
 		//	  "type": "string"
 		//	}
 		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6地址的通信类型。Private：私网通信类型。Public：公网通信类型。",
+			Description: "IPv6 address communication type. Private: Private network communication type. Public: Public network communication type.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -234,11 +234,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽欠费关停的时间。",
+		//	  "description": "IPv6 public bandwidth deactivation time due to overdue payment",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽欠费关停的时间。",
+			Description: "IPv6 public bandwidth deactivation time due to overdue payment",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -248,11 +248,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的项目。",
+		//	  "description": "IPv6 public bandwidth project",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的项目。",
+			Description: "IPv6 public bandwidth project",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -264,11 +264,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为服务托管。",
+		//	  "description": "Service hosting status",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为服务托管。",
+			Description: "Service hosting status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -278,11 +278,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的状态。Creating：创建中。Available：可用。",
+		//	  "description": "IPv6 public bandwidth status. Creating: Creating. Available: Available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的状态。Creating：创建中。Available：可用。",
+			Description: "IPv6 public bandwidth status. Creating: Creating. Available: Available.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -292,17 +292,17 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签信息。",
+		//	    "description": "Tag information",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -319,7 +319,7 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -331,7 +331,7 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -340,7 +340,7 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -351,11 +351,11 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的最近操作时间。",
+		//	  "description": "IPv6 public bandwidth last operation time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的最近操作时间。",
+			Description: "IPv6 public bandwidth last operation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -373,7 +373,7 @@ func ipv6AddressBandwidthResource(ctx context.Context) (resource.Resource, error
 	}
 
 	schema := schema.Schema{
-		Description: "IPv6公网流量的带宽，决定IPv6地址的公网通信能力。IPv6地址若未开通IPv6公网带宽，则仅支持私网互通，您可以按需为IPv6地址开通IPv6公网带宽，使该IPv6地址具备与公网互通的能力。",
+		Description: "IPv6 public traffic bandwidth determines the public communication capability of the IPv6 address. If the IPv6 address does not have IPv6 public bandwidth enabled, it only supports private network communication. You can enable IPv6 public bandwidth for the IPv6 address as needed to allow public network communication.",
 		Version:     1,
 		Attributes:  attributes,
 	}

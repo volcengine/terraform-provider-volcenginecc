@@ -30,11 +30,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号ID",
+		//	  "description": "Account ID",
 		//	  "type": "integer"
 		//	}
 		"account_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "账号ID",
+			Description: "Account ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -44,11 +44,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间",
+			Description: "Creation Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -58,11 +58,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述",
+		//	  "description": "Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述",
+			Description: "Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -73,11 +73,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "展示名",
+		//	  "description": "Display Name",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "展示名",
+			Description: "Display Name",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -88,11 +88,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否可见",
+		//	  "description": "Visible",
 		//	  "type": "boolean"
 		//	}
 		"has_permission": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否可见",
+			Description: "Visible",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -102,11 +102,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "父项目名称",
+		//	  "description": "Parent Project Name",
 		//	  "type": "string"
 		//	}
 		"parent_project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "父项目名称",
+			Description: "Parent Project Name",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -118,11 +118,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目路径",
+		//	  "description": "Project Path",
 		//	  "type": "string"
 		//	}
 		"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目路径",
+			Description: "Project Path",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -132,11 +132,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称",
+		//	  "description": "Project Name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称",
+			Description: "Project Name",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -146,11 +146,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "启用状态",
+		//	  "description": "Enabled Status",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "启用状态",
+			Description: "Enabled Status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -160,11 +160,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间",
+			Description: "Update Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -182,7 +182,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "资源项目（Project）是提供的一种资源分组管理的机制，帮助您达成逻辑层面的资源隔离，您能够通过资源项目进行项目制授权和分账等操作。",
+		Description: "Resource project (Project) provides a mechanism for resource group management, helping you achieve logical resource isolation. You can use resource projects for project-based authorization, billing, and other operations.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -5,7 +5,7 @@ resource "volcenginecc_vpc_security_group" "SecurityGroupDemo" {
   project_name        = "default"
   ingress_permissions = [
     {
-      description     = "进的规则"
+      description     = "test-rule"
       policy          = "drop"
       port_end        = 1
       port_start      = 1
@@ -18,7 +18,7 @@ resource "volcenginecc_vpc_security_group" "SecurityGroupDemo" {
   ]
   egress_permissions = [
     {
-      description     = "出的规则"
+      description     = "test-rule"
       policy          = "drop"
       port_end        = -1
       port_start      = -1

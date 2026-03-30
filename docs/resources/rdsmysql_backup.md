@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rdsmysql_backup Resource - terraform-provider-volcenginecc"
 subcategory: "RDSMySQL"
 description: |-
-  备份是数据库的重要运行时文件，基于备份文件，数据库能够实现容灾、恢复等功能。云数据库 MySQL 版提供了数据备份和日志备份两种备份能力：通过数据备份可将数据库恢复至某个备份集，通过日志备份可将数据库恢复至指定时间点。
+  Backups are important runtime files for the database. Based on backup files, the database can achieve disaster recovery and restoration. MySQL Cloud Database provides two backup capabilities: data backup and log backup. Data backup allows you to restore the database to a specific backup set, while log backup enables restoration to a specified point in time
 ---
 
 # volcenginecc_rdsmysql_backup (Resource)
 
-备份是数据库的重要运行时文件，基于备份文件，数据库能够实现容灾、恢复等功能。云数据库 MySQL 版提供了数据备份和日志备份两种备份能力：通过数据备份可将数据库恢复至某个备份集，通过日志备份可将数据库恢复至指定时间点。
+Backups are important runtime files for the database. Based on backup files, the database can achieve disaster recovery and restoration. MySQL Cloud Database provides two backup capabilities: data backup and log backup. Data backup allows you to restore the database to a specific backup set, while log backup enables restoration to a specified point in time
 
 ## Example Usage
 
@@ -30,45 +30,45 @@ resource "volcenginecc_rdsmysql_backup" "rdsmysqlbackupDemo" {
 
 ### Required
 
-- `instance_id` (String) 实例 ID。
+- `instance_id` (String) Instance ID
 
 ### Optional
 
-- `backup_meta` (Attributes Set) 创建逻辑备份类型的库表备份时，用于指定要备份的库表信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backup_meta))
-- `backup_method` (String) 备份类型，取值：Physical（物理备份）、Logical（逻辑备份）、Snapshot（快照备份）。
-- `backup_type` (String) 备份方式，取值：Full（全量/库表备）、Increment（增量备份）、DumpAll（全库备份）。
+- `backup_meta` (Attributes Set) When creating a logical backup of database tables, this is used to specify the database and table information to be backed up
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--backup_meta))
+- `backup_method` (String) Backup type. Values: Physical (physical backup), Logical (logical backup), Snapshot (snapshot backup)
+- `backup_type` (String) Backup method. Values: Full (full/database table backup), Increment (incremental backup), DumpAll (full database backup)
 
 ### Read-Only
 
-- `backup_end_time` (String) 备份创建结束时间（UTC）。
-- `backup_file_name` (String) 备份文件名。
-- `backup_file_size` (Number) 备份文件大小，单位为字节。
-- `backup_id` (String) 备份 ID。
-- `backup_name` (String) 备份的名称。
-- `backup_region` (String) 备份所在区域。
-- `backup_start_time` (String) 备份创建开始时间（UTC）。
-- `backup_status` (String) 备份状态，取值：Success（成功）、Failed（失败）、Running（执行中）。
-- `consistent_time` (String) 一致性时间点。
-- `create_type` (String) 备份创建者，取值：System（系统）、User（用户）。
-- `db_engine_version` (String) 兼容版本。取值：MySQL_5_7：MySQL 5.7 版本。MySQL_8_0：MySQL 8.0 版本。
-- `db_table_infos` (Attributes Set) 库表信息列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--db_table_infos))
-- `download_status` (String) 下载状态。
-- `engine_type` (String) 数据库引擎类型。取值：InnoDB：InnoDB 引擎。RocksDB：RocksDB 引擎。
-- `error_message` (String) 备份失败的错误信息。
-- `expired_time` (String) 备份过期时间（UTC）。
+- `backup_end_time` (String) Backup creation end time (UTC)
+- `backup_file_name` (String) Backup file name
+- `backup_file_size` (Number) Backup file size (bytes)
+- `backup_id` (String) Backup ID
+- `backup_name` (String) Backup name
+- `backup_region` (String) Backup region
+- `backup_start_time` (String) Backup creation start time (UTC)
+- `backup_status` (String) Backup status. Values: Success, Failed, Running
+- `consistent_time` (String) Consistency time point
+- `create_type` (String) Backup creator. Values: System (system), User (user)
+- `db_engine_version` (String) Compatible version. Values: MySQL_5_7: MySQL 5.7 version; MySQL_8_0: MySQL 8.0 version
+- `db_table_infos` (Attributes Set) Database and table information list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--db_table_infos))
+- `download_status` (String) Download status
+- `engine_type` (String) Database engine type. Values: InnoDB: InnoDB engine; RocksDB: RocksDB engine
+- `error_message` (String) Error message for backup failure
+- `expired_time` (String) Backup expiration time (UTC)
 - `id` (String) Uniquely identifies the resource.
-- `is_encrypted` (Boolean) 是否加密。
-- `is_expired` (Boolean) 是否已过期。
+- `is_encrypted` (Boolean) Whether encrypted
+- `is_expired` (Boolean) Whether expired
 
 <a id="nestedatt--backup_meta"></a>
 ### Nested Schema for `backup_meta`
 
 Optional:
 
-- `database` (String) 数据库名。
-- `tables` (Set of String) 表名列表。
+- `database` (String) Database name
+- `tables` (Set of String) Table name list
 
 
 <a id="nestedatt--db_table_infos"></a>
@@ -76,8 +76,8 @@ Optional:
 
 Read-Only:
 
-- `database` (String) 数据库名。
-- `tables` (Set of String) 表名列表。
+- `database` (String) Database name
+- `tables` (Set of String) Table name list
 
 ## Import
 

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_natgateway_nat_ip Resource - terraform-provider-volcenginecc"
 subcategory: "NatGateway"
 description: |-
-  从私网NAT网关所属子网分配，用于IP地址转换。
+  Allocated from the subnet associated with the private NAT gateway for IP address translation.
 ---
 
 # volcenginecc_natgateway_nat_ip (Resource)
 
-从私网NAT网关所属子网分配，用于IP地址转换。
+Allocated from the subnet associated with the private NAT gateway for IP address translation.
 
 ## Example Usage
 
@@ -25,21 +25,21 @@ resource "volcenginecc_natgateway_nat_ip" "NatGatewayNatIpDemo" {
 
 ### Required
 
-- `nat_gateway_id` (String) 私网NAT网关ID。
+- `nat_gateway_id` (String) Private NAT gateway ID.
 
 ### Optional
 
-- `nat_ip` (String) 中转IP的地址。若不填，则系统自动从私网NAT网关所在子网随机分配一个空闲的IP地址。
-- `nat_ip_description` (String) 中转IP的描述。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。
-- `nat_ip_name` (String) 中转IP的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。不填默认为中转IP的ID。
+- `nat_ip` (String) Transit IP address. If not specified, the system automatically randomly assigns an available IP address from the subnet of the private NAT gateway.
+- `nat_ip_description` (String) Description of the transit IP. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).
+- `nat_ip_name` (String) Name of the transit IP. Length limit: 1–128 characters. Must start with a letter, Chinese character, or number; can include period (.), underscore (_), and hyphen (-). If not specified, defaults to the transit IP ID.
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `is_default` (Boolean) 是否为默认中转IP。true：是。false：否。
-- `nat_ip_id` (String) 中转IP的ID。
-- `status` (String) 中转IP的状态。Creating：创建中。Available：可用。Deleting：删除中。Deleted：已删除。
-- `using_status` (String) 中转IP的使用状态。Idle：未使用。UsedBySnat：被SNAT规则使用。UsedByDnat：被DNAT规则使用。UsedByNat：被SNAT/DNAT规则同时使用。
+- `is_default` (Boolean) Whether this is the default transit IP. true: Yes. false: No.
+- `nat_ip_id` (String) Transit IP ID.
+- `status` (String) Status of the transit IP. Creating: Being created. Available: Available. Deleting: Being deleted. Deleted: Deleted.
+- `using_status` (String) Usage status of the transit IP. Idle: Not used. UsedBySnat: Used by SNAT rule. UsedByDnat: Used by DNAT rule. UsedByNat: Used by both SNAT and DNAT rules.
 
 ## Import
 

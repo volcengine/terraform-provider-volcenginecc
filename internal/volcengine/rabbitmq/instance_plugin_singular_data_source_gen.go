@@ -26,99 +26,99 @@ func instancePluginDataSource(ctx context.Context) (datasource.DataSource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件描述。",
+		//	  "description": "Plugin description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "插件描述。",
+			Description: "Plugin description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisablePrompt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关闭此插件的注意事项说明。",
+		//	  "description": "Notes for disabling this plugin",
 		//	  "type": "string"
 		//	}
 		"disable_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "关闭此插件的注意事项说明。",
+			Description: "Notes for disabling this plugin",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnablePrompt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "开启此插件的注意事项说明。",
+		//	  "description": "Notes for enabling this plugin",
 		//	  "type": "string"
 		//	}
 		"enable_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "开启此插件的注意事项说明。",
+			Description: "Notes for enabling this plugin",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已开启插件。true：插件已开启。false：插件已关闭。",
+		//	  "description": "Whether the plugin is enabled. true: The plugin is enabled. false: The plugin is disabled",
 		//	  "type": "boolean"
 		//	}
 		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已开启插件。true：插件已开启。false：插件已关闭。",
+			Description: "Whether the plugin is enabled. true: The plugin is enabled. false: The plugin is disabled",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NeedRebootOnChange
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "开启或关闭插件是否会引发 RabbitMQ 实例重启。true：会重启实例。false：不会重启实例。",
+		//	  "description": "Whether enabling or disabling the plugin will cause a RabbitMQ instance restart. true: The instance will restart. false: The instance will not restart",
 		//	  "type": "boolean"
 		//	}
 		"need_reboot_on_change": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "开启或关闭插件是否会引发 RabbitMQ 实例重启。true：会重启实例。false：不会重启实例。",
+			Description: "Whether enabling or disabling the plugin will cause a RabbitMQ instance restart. true: The instance will restart. false: The instance will not restart",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PluginName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件名称。",
+		//	  "description": "Plugin name",
 		//	  "type": "string"
 		//	}
 		"plugin_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "插件名称。",
+			Description: "Plugin name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件监听的端口。",
+		//	  "description": "Plugin listening port",
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "插件监听的端口。",
+			Description: "Plugin listening port",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件版本。",
+		//	  "description": "Plugin version",
 		//	  "type": "string"
 		//	}
 		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "插件版本。",
+			Description: "Plugin version",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -21,12 +21,12 @@ Data Source schema for Volcengine::NatGateway::Snatentry
 
 ### Read-Only
 
-- `eip_address` (String) SNAT规则关联的公网IP的IP地址。返回单个公网IP的IP地址。 返回多个公网IP的IP地址。
-- `eip_id` (String) SNAT规则关联的公网IP的ID。返回单个公网IP的ID。 返回多个公网IP的ID。
-- `nat_gateway_id` (String) SNAT规则所属NAT网关的ID。
-- `nat_ip_id` (String) 私网NAT网关的中转IP的ID。
-- `snat_entry_id` (String) SNAT规则的ID。
-- `snat_entry_name` (String) SNAT规则的名称。
-- `source_cidr` (String) SNAT规则对应的网段。
-- `status` (String) SNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。
-- `subnet_id` (String) SNAT规则关联子网的ID。
+- `eip_address` (String) IP address of the public IP associated with the SNAT rule. Returns the IP address for a single public IP. Returns IP addresses for multiple public IPs.
+- `eip_id` (String) ID of the public IP associated with the SNAT rule. Returns the ID for a single public IP. Returns IDs for multiple public IPs.
+- `nat_gateway_id` (String) ID of the NAT gateway associated with the SNAT rule
+- `nat_ip_id` (String) ID of the transit IP for the private NAT gateway
+- `snat_entry_id` (String) ID of the SNAT rule
+- `snat_entry_name` (String) Name of the SNAT rule
+- `source_cidr` (String) Network segment corresponding to the SNAT rule
+- `status` (String) Status of the SNAT rule. Creating: being created. Deleting: being deleted. Available: available.
+- `subnet_id` (String) ID of the subnet associated with the SNAT rule

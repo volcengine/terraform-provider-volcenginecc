@@ -27,59 +27,59 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关的计费方式。取值如下：1 ：包年包月。2（默认值）：按量计费-按规格计费。3：按量计费-按使用量计费。当NetworkType传入intranet时，本参数仅支持且必须传入3。",
+		//	  "description": "NAT Gateway billing mode. Possible values: 1: Subscription. 2 (default): Pay-as-you-go by specification. 3: Pay-as-you-go by usage. When NetworkType is set to intranet, only 3 is supported and required for this parameter.",
 		//	  "format": "int64",
 		//	  "maximum": 3,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关的计费方式。取值如下：1 ：包年包月。2（默认值）：按量计费-按规格计费。3：按量计费-按使用量计费。当NetworkType传入intranet时，本参数仅支持且必须传入3。",
+			Description: "NAT Gateway billing mode. Possible values: 1: Subscription. 2 (default): Pay-as-you-go by specification. 3: Pay-as-you-go by usage. When NetworkType is set to intranet, only 3 is supported and required for this parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BusinessStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关是否被锁定。空值：正常未被锁定。Normal：正常未被锁定。FinancialLocked：因欠费被锁定。",
+		//	  "description": "Indicates whether the NAT gateway is locked. Empty: Normal, not locked. Normal: Normal, not locked. FinancialLocked: Locked due to overdue payment.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关是否被锁定。空值：正常未被锁定。Normal：正常未被锁定。FinancialLocked：因欠费被锁定。",
+			Description: "Indicates whether the NAT gateway is locked. Empty: Normal, not locked. Normal: Normal, not locked. FinancialLocked: Locked due to overdue payment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间",
+			Description: "Creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeletedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除时间",
+		//	  "description": "Deletion time",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除时间",
+			Description: "Deletion time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关的描述。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1 ～ 255个字符。不填默认空字符串。",
+		//	  "description": "Description of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1 to 255 characters. If not specified, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关的描述。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1 ～ 255个字符。不填默认空字符串。",
+			Description: "Description of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1 to 255 characters. If not specified, defaults to an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DirectMode
@@ -87,18 +87,18 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": true,
-		//	  "description": "标识该nat是直通还是非直通。 - true（默认）：EIP直通nat网关。 - false：非EIP直通nat网关。",
+		//	  "description": "Indicates whether the NAT is direct or non-direct. - true (default): EIP direct NAT gateway. - false: Non-EIP direct NAT gateway.",
 		//	  "type": "boolean"
 		//	}
 		"direct_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "标识该nat是直通还是非直通。   - true（默认）：EIP直通nat网关。   - false：非EIP直通nat网关。",
+			Description: "Indicates whether the NAT is direct or non-direct.   - true (default): EIP direct NAT gateway.   - false: Non-EIP direct NAT gateway.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DnatEntryIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNAT规则ID列表。",
+		//	  "description": "DNAT rule ID list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -108,27 +108,27 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"dnat_entry_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "DNAT规则ID列表。",
+			Description: "DNAT rule ID list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipAddresses
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关绑定公网IP的信息。",
+		//	  "description": "Information about the public IP bound to the NAT Gateway",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AllocationId": {
-		//	        "description": "公网IP的ID。",
+		//	        "description": "Public IP ID",
 		//	        "type": "string"
 		//	      },
 		//	      "EipAddress": {
-		//	        "description": "公网IP的地址。",
+		//	        "description": "Public IP address",
 		//	        "type": "string"
 		//	      },
 		//	      "UsingStatus": {
-		//	        "description": "公网IP的使用状态。Idle：未使用。UsedBySnat：被SNAT规则使用。UsedByDnat：被DNAT规则使用。UsedByNat：被SNAT/DNAT规则同时使用。",
+		//	        "description": "Usage status of the public IP. Idle: Not used. UsedBySnat: Used by SNAT rule. UsedByDnat: Used by DNAT rule. UsedByNat: Used by both SNAT and DNAT rules.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -142,83 +142,83 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AllocationId
 					"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "公网IP的ID。",
+						Description: "Public IP ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: EipAddress
 					"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "公网IP的地址。",
+						Description: "Public IP address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsingStatus
 					"using_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "公网IP的使用状态。Idle：未使用。UsedBySnat：被SNAT规则使用。UsedByDnat：被DNAT规则使用。UsedByNat：被SNAT/DNAT规则同时使用。",
+						Description: "Usage status of the public IP. Idle: Not used. UsedBySnat: Used by SNAT rule. UsedByDnat: Used by DNAT rule. UsedByNat: Used by both SNAT and DNAT rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "NAT网关绑定公网IP的信息。",
+			Description: "Information about the public IP bound to the NAT Gateway",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月NAT网关到期时间。仅包年包月计费类型的NAT网关会返回此参数。",
+		//	  "description": "Expiration time for subscription NAT Gateway. Only NAT Gateways with subscription billing return this parameter.",
 		//	  "type": "string"
 		//	}
 		"expired_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "包年包月NAT网关到期时间。仅包年包月计费类型的NAT网关会返回此参数。",
+			Description: "Expiration time for subscription NAT Gateway. Only NAT Gateways with subscription billing return this parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT被锁定的原因。financial：因欠费被锁定。security：因安全原因被锁定。",
+		//	  "description": "Reason for NAT lock. financial: Locked due to overdue payment. security: Locked for security reasons.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT被锁定的原因。financial：因欠费被锁定。security：因安全原因被锁定。",
+			Description: "Reason for NAT lock. financial: Locked due to overdue payment. security: Locked for security reasons.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关ID。",
+		//	  "description": "NAT gateway ID.",
 		//	  "type": "string"
 		//	}
 		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关ID。",
+			Description: "NAT gateway ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。长度限制为1 ~ 128个字符。不填默认是NAT网关实例的ID。",
+		//	  "description": "Name of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Length: 1 to 128 characters. If not specified, defaults to the NAT Gateway instance ID.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"nat_gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。长度限制为1 ~ 128个字符。不填默认是NAT网关实例的ID。",
+			Description: "Name of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Length: 1 to 128 characters. If not specified, defaults to the NAT Gateway instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatIpAddresses
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私网NAT实例的中转IP列表。",
+		//	  "description": "Transit IP list for private NAT instance",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "NatIpAddress": {
-		//	        "description": "中转Ip地址。",
+		//	        "description": "Transit IP address",
 		//	        "type": "string"
 		//	      },
 		//	      "NatIpId": {
-		//	        "description": "中转Ip id。",
+		//	        "description": "Transit IP ID",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -232,28 +232,28 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: NatIpAddress
 					"nat_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "中转Ip地址。",
+						Description: "Transit IP address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NatIpId
 					"nat_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "中转Ip id。",
+						Description: "Transit IP ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "私网NAT实例的中转IP列表。",
+			Description: "Transit IP list for private NAT instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关占用的网卡ID。",
+		//	  "description": "Network interface ID occupied by the NAT gateway.",
 		//	  "type": "string"
 		//	}
 		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关占用的网卡ID。",
+			Description: "Network interface ID occupied by the NAT gateway.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
@@ -261,7 +261,7 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "internet",
-		//	  "description": "NAT网关类型。internet：公网NAT网关。intranet：私网NAT网关。",
+		//	  "description": "NAT Gateway type. internet: Public NAT Gateway. intranet: Private NAT Gateway.",
 		//	  "enum": [
 		//	    "internet",
 		//	    "intranet"
@@ -269,41 +269,41 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关类型。internet：公网NAT网关。intranet：私网NAT网关。",
+			Description: "NAT Gateway type. internet: Public NAT Gateway. intranet: Private NAT Gateway.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。",
+		//	  "description": "Resource freeze time. This parameter is returned only when the resource is frozen due to overdue payment.",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。",
+			Description: "Resource freeze time. This parameter is returned only when the resource is frozen due to overdue payment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Period
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "购买包年包月NAT网关的时长，默认1。当PeriodUnit传入Month，Period取值范围：1 ~ 9、12、24、36。当PeriodUnit传入Year，Period取值范围：1 ~ 3。",
+		//	  "description": "Duration for purchasing a subscription NAT Gateway, default is 1. If PeriodUnit is Month, Period can be 1 ~ 9, 12, 24, 36. If PeriodUnit is Year, Period can be 1 ~ 3.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "购买包年包月NAT网关的时长，默认1。当PeriodUnit传入Month，Period取值范围：1 ~ 9、12、24、36。当PeriodUnit传入Year，Period取值范围：1 ~ 3。",
+			Description: "Duration for purchasing a subscription NAT Gateway, default is 1. If PeriodUnit is Month, Period can be 1 ~ 9, 12, 24, 36. If PeriodUnit is Year, Period can be 1 ~ 3.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeriodUnit
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "购买包年包月NAT网关时长的单位，默认Month。Month ：月。Year ：年。",
+		//	  "description": "Unit for subscription NAT Gateway duration, default is Month. Month: month. Year: year.",
 		//	  "type": "string"
 		//	}
 		"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "购买包年包月NAT网关时长的单位，默认Month。Month ：月。Year ：年。",
+			Description: "Unit for subscription NAT Gateway duration, default is Month. Month: month. Year: year.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -311,29 +311,29 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "NAT网关所属项目的名称。不填默认加入default项目。",
+		//	  "description": "Name of the project the NAT Gateway belongs to. If not specified, defaults to the 'default' project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关所属项目的名称。不填默认加入default项目。",
+			Description: "Name of the project the NAT Gateway belongs to. If not specified, defaults to the 'default' project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SmartScheduleEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启智能调度。",
+		//	  "description": "Whether to enable intelligent scheduling",
 		//	  "type": "boolean"
 		//	}
 		"smart_schedule_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启智能调度。",
+			Description: "Whether to enable intelligent scheduling",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SmartScheduleRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "智能调度策略规则。ChinaMobile：中国移动。ChinaUnicom：中国联通。ChinaTelecom：中国电信。BGP：BGP多线。",
+		//	  "description": "Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.",
 		//	  "enum": [
 		//	    "ChinaMobile",
 		//	    "ChinaUnicom",
@@ -344,14 +344,14 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"smart_schedule_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "智能调度策略规则。ChinaMobile：中国移动。ChinaUnicom：中国联通。ChinaTelecom：中国电信。BGP：BGP多线。",
+			Description: "Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnatEntryIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则ID列表。",
+		//	  "description": "SNAT rule ID list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -361,14 +361,14 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"snat_entry_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "SNAT规则ID列表。",
+			Description: "SNAT rule ID list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Spec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关的规格。Small（默认）：小型。Medium：中型。Large：大型。Extra_Large_1：超大型-1。Extra_Large_2：超大型-2。",
+		//	  "description": "NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.",
 		//	  "enum": [
 		//	    "Small",
 		//	    "Medium",
@@ -380,14 +380,14 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关的规格。Small（默认）：小型。Medium：中型。Large：大型。Extra_Large_1：超大型-1。Extra_Large_2：超大型-2。",
+			Description: "NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关的状态。Available：可用。Creating：创建中。Pending：操作中。Deleting：删除中。",
+		//	  "description": "Status of the NAT Gateway. Available: Available. Creating: Creating. Pending: In progress. Deleting: Deleting.",
 		//	  "enum": [
 		//	    "Available",
 		//	    "Creating",
@@ -397,34 +397,34 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关的状态。Available：可用。Creating：创建中。Pending：操作中。Deleting：删除中。",
+			Description: "Status of the NAT Gateway. Available: Available. Creating: Creating. Pending: In progress. Deleting: Deleting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关所在子网的ID。传入的子网，必须是VpcId传入的私有网络的子网。子网内至少有一个可用的私网IP。系统自动生成的NAT网关网卡将占用该子网一个私网IP。子网所在的可用区需要已部署NAT网关资源。子网所在可用区将作为NAT网关的主可用区，并自动关联备可用区。当主可用区发生故障时，NAT网关自动切换到备可用区。",
+		//	  "description": "ID of the subnet where the NAT gateway is located. The input subnet must be a subnet of the private network specified by VpcId. There must be at least one available private IP in the subnet. The system automatically generates a NAT gateway network interface that will occupy one private IP in this subnet. The availability zone of the subnet must have deployed NAT gateway resources. The availability zone of the subnet will be used as the primary availability zone for the NAT gateway and will automatically associate with a backup availability zone. When the primary availability zone fails, the NAT gateway automatically switches to the backup availability zone.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关所在子网的ID。传入的子网，必须是VpcId传入的私有网络的子网。子网内至少有一个可用的私网IP。系统自动生成的NAT网关网卡将占用该子网一个私网IP。子网所在的可用区需要已部署NAT网关资源。子网所在可用区将作为NAT网关的主可用区，并自动关联备可用区。当主可用区发生故障时，NAT网关自动切换到备可用区。",
+			Description: "ID of the subnet where the NAT gateway is located. The input subnet must be a subnet of the private network specified by VpcId. There must be at least one available private IP in the subnet. The system automatically generates a NAT gateway network interface that will occupy one private IP in this subnet. The availability zone of the subnet must have deployed NAT gateway resources. The availability zone of the subnet will be used as the primary availability zone for the NAT gateway and will automatically associate with a backup availability zone. When the primary availability zone fails, the NAT gateway automatically switches to the backup availability zone.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -441,50 +441,50 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关的最后操作时间。",
+		//	  "description": "Last operation time of the NAT Gateway",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关的最后操作时间。",
+			Description: "Last operation time of the NAT Gateway",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关所在私有网络的ID。",
+		//	  "description": "ID of the private network where the NAT Gateway is located",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关所在私有网络的ID。",
+			Description: "ID of the private network where the NAT Gateway is located",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关所属主可用区的ID。",
+		//	  "description": "ID of the primary availability zone the NAT Gateway belongs to",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关所属主可用区的ID。",
+			Description: "ID of the primary availability zone the NAT Gateway belongs to",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

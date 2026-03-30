@@ -27,118 +27,118 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "会话计费状态。Normal：正常计费中。- FinancialLocked：欠费锁定。",
+		//	  "description": "Session billing status. Normal: Billing in progress. - FinancialLocked: Locked due to overdue payment",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "会话计费状态。Normal：正常计费中。  - FinancialLocked：欠费锁定。",
+			Description: "Session billing status. Normal: Billing in progress.   - FinancialLocked: Locked due to overdue payment",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话实例描述。",
+		//	  "description": "Mirror session instance description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话实例描述。",
+			Description: "Mirror session instance description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "锁定原因。",
+		//	  "description": "Lock reason",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "锁定原因。",
+			Description: "Lock reason",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像源实例ID，当前只支持ECS的主网卡和辅助网卡。",
+		//	  "description": "Mirror source instance ID. Currently, only ECS primary and secondary network interfaces are supported",
 		//	  "type": "string"
 		//	}
 		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像源实例ID，当前只支持ECS的主网卡和辅助网卡。",
+			Description: "Mirror source instance ID. Currently, only ECS primary and secondary network interfaces are supported",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PacketLength
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话MTU，超过被截断，取值范围：64～9600。",
+		//	  "description": "Mirror session MTU. Values exceeding this will be truncated. Range: 64–9600",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"packet_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话MTU，超过被截断，取值范围：64～9600。",
+			Description: "Mirror session MTU. Values exceeding this will be truncated. Range: 64–9600",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话优先级，取值范围1 ～ 32766，同一账户下镜像会话优先级不能重复。",
+		//	  "description": "Mirror session priority. Range: 1–32766. Priority values must be unique within the same account",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话优先级，取值范围1 ～ 32766，同一账户下镜像会话优先级不能重复。",
+			Description: "Mirror session priority. Range: 1–32766. Priority values must be unique within the same account",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "所属项目的名称",
+		//	  "description": "Name of the associated project",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "所属项目的名称",
+			Description: "Name of the associated project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "会话状态。",
+		//	  "description": "Session status",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "会话状态。",
+			Description: "Session status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息。",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签信息。",
+		//	    "description": "Tag information",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -155,57 +155,57 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息。",
+			Description: "Tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorFilterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "筛选条件实例ID。",
+		//	  "description": "Filter condition instance ID",
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "筛选条件实例ID。",
+			Description: "Filter condition instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorSessionId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话实例ID。",
+		//	  "description": "Mirror session instance ID",
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_session_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话实例ID。",
+			Description: "Mirror session instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorSessionName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话名称。",
+		//	  "description": "Mirror session name",
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_session_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话名称。",
+			Description: "Mirror session name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorSourceIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像源实例列表。",
+		//	  "description": "Mirror source instance list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -215,30 +215,30 @@ func trafficMirrorSessionDataSource(ctx context.Context) (datasource.DataSource,
 		//	}
 		"traffic_mirror_source_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "镜像源实例列表。",
+			Description: "Mirror source instance list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorTargetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像目的实例ID。",
+		//	  "description": "Mirror destination instance ID",
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像目的实例ID。",
+			Description: "Mirror destination instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VirtualNetworkId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话VNI，取值范围1 ～ 16777215。",
+		//	  "description": "Mirror session VNI. Range: 1–16777215",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"virtual_network_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话VNI，取值范围1 ～ 16777215。",
+			Description: "Mirror session VNI. Range: 1–16777215",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

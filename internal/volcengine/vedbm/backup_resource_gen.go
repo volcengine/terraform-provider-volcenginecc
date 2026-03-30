@@ -30,11 +30,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份的结束时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	  "description": "Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"backup_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份的结束时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+			Description: "Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -44,12 +44,12 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份文件大小，单位为 KiB。",
+		//	  "description": "Backup file size, unit: KiB",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"backup_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "备份文件大小，单位为 KiB。",
+			Description: "Backup file size, unit: KiB",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -59,11 +59,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份 ID。",
+		//	  "description": "Backup ID",
 		//	  "type": "string"
 		//	}
 		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份 ID。",
+			Description: "Backup ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -73,11 +73,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份方式，目前仅支持物理备份。",
+		//	  "description": "Backup method, currently only physical backup is supported",
 		//	  "type": "string"
 		//	}
 		"backup_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份方式，目前仅支持物理备份。",
+			Description: "Backup method, currently only physical backup is supported",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -89,11 +89,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据备份保留天数。",
+		//	  "description": "Data backup retention days",
 		//	  "type": "integer"
 		//	}
 		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "数据备份保留天数。",
+			Description: "Data backup retention days",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -104,11 +104,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份的开始时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	  "description": "Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"backup_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份的开始时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+			Description: "Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -118,11 +118,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份状态。",
+		//	  "description": "Backup status",
 		//	  "type": "string"
 		//	}
 		"backup_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份状态。",
+			Description: "Backup status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -132,11 +132,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "执行备份任务的时间，间隔窗口为两小时。格式：HH:mmZ-HH:mmZ（UTC 时间）。",
+		//	  "description": "Backup task execution time, interval window is two hours. Format: HH:mmZ-HH:mmZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"backup_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "执行备份任务的时间，间隔窗口为两小时。格式：HH:mmZ-HH:mmZ（UTC 时间）。",
+			Description: "Backup task execution time, interval window is two hours. Format: HH:mmZ-HH:mmZ (UTC time)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -147,11 +147,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份类型，目前仅支持全量备份。",
+		//	  "description": "Backup type, currently only full backup is supported",
 		//	  "type": "string"
 		//	}
 		"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份类型，目前仅支持全量备份。",
+			Description: "Backup type, currently only full backup is supported",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -163,11 +163,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "一致性备份的时间点，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	  "description": "Consistency backup timestamp, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"consistent_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "一致性备份的时间点，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+			Description: "Consistency backup timestamp, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -177,11 +177,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启持续备份，取值固定为 true。",
+		//	  "description": "Enable continuous backup, value is always true",
 		//	  "type": "boolean"
 		//	}
 		"continue_backup": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启持续备份，取值固定为 true。",
+			Description: "Enable continuous backup, value is always true",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -191,11 +191,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建类型。",
+		//	  "description": "Creation type",
 		//	  "type": "string"
 		//	}
 		"create_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建类型。",
+			Description: "Creation type",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -205,11 +205,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全量备份周期，多个取值用英文逗号（,）隔开。",
+		//	  "description": "Full backup cycle, use commas (,) to separate multiple values",
 		//	  "type": "string"
 		//	}
 		"full_backup_period": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "全量备份周期，多个取值用英文逗号（,）隔开。",
+			Description: "Full backup cycle, use commas (,) to separate multiple values",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -220,11 +220,11 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID。",
+			Description: "Instance ID",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -239,7 +239,7 @@ func backupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "云数据库 veDB备份管理",
+		Description: "Cloud Database veDB Backup Management",
 		Version:     1,
 		Attributes:  attributes,
 	}

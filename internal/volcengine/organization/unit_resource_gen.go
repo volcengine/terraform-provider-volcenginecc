@@ -29,11 +29,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -43,11 +43,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除标识。",
+		//	  "description": "Deletion flag.",
 		//	  "type": "string"
 		//	}
 		"delete_uk": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除标识。",
+			Description: "Deletion flag.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -57,11 +57,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除时间。",
+		//	  "description": "Deletion time.",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除时间。",
+			Description: "Deletion time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -71,11 +71,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "深度。",
+		//	  "description": "Depth.",
 		//	  "type": "integer"
 		//	}
 		"depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "深度。",
+			Description: "Depth.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -85,11 +85,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述。",
+		//	  "description": "Description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述。",
+			Description: "Description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -100,22 +100,22 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织单元名称。",
+		//	  "description": "Organizational unit name.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织单元名称。",
+			Description: "Organizational unit name.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OrgID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织ID。",
+		//	  "description": "Organization ID.",
 		//	  "type": "string"
 		//	}
 		"org_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织ID。",
+			Description: "Organization ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -125,11 +125,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织类型。企业组织： 1",
+		//	  "description": "Organization type. Enterprise organization: 1",
 		//	  "type": "integer"
 		//	}
 		"org_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "组织类型。企业组织： 1",
+			Description: "Organization type. Enterprise organization: 1",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -139,11 +139,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织单元ID。",
+		//	  "description": "Organizational unit ID.",
 		//	  "type": "string"
 		//	}
 		"org_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织单元ID。",
+			Description: "Organizational unit ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -153,11 +153,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "管理员ID。",
+		//	  "description": "Administrator ID.",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "管理员ID。",
+			Description: "Administrator ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -167,11 +167,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "父单元Id。",
+		//	  "description": "Parent unit ID.",
 		//	  "type": "string"
 		//	}
 		"parent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "父单元Id。",
+			Description: "Parent unit ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -181,11 +181,11 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -203,7 +203,7 @@ func unitResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "企业组织的创建者管理员账号可以新建组织单元来搭建企业的组织结构，对账号进行分组织单元管理。组织单元可以分多个组织单元层级，管理员账号也可属于任意层级的任意组织单元节点。",
+		Description: "The administrator account that created the enterprise organization can create organizational units to build the enterprise's organizational structure and manage accounts by organizational unit. Organizational units can have multiple hierarchical levels, and administrator accounts can belong to any organizational unit node at any level.",
 		Version:     1,
 		Attributes:  attributes,
 	}

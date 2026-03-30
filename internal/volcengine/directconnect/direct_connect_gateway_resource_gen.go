@@ -36,11 +36,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关所属账号的ID。",
+		//	  "description": "ID of the account to which the Direct Connect Gateway belongs.",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关所属账号的ID。",
+			Description: "ID of the account to which the Direct Connect Gateway belongs.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -50,21 +50,21 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联的CEN信息。",
+		//	  "description": "Associated CEN information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "关联的CEN信息。",
+		//	    "description": "Associated CEN information.",
 		//	    "properties": {
 		//	      "CenId": {
-		//	        "description": "CEN的ID。",
+		//	        "description": "ID of CEN.",
 		//	        "type": "string"
 		//	      },
 		//	      "CenOwnerId": {
-		//	        "description": "CEN的用户ID。",
+		//	        "description": "User ID of CEN.",
 		//	        "type": "string"
 		//	      },
 		//	      "CenStatus": {
-		//	        "description": "实例在CEN中的状态。Attaching：加载中。Attached：已加载。",
+		//	        "description": "Status of the instance in CEN. Attaching: attaching. Attached: attached.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -78,22 +78,22 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CenId
 					"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "CEN的ID。",
+						Description: "ID of CEN.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CenOwnerId
 					"cen_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "CEN的用户ID。",
+						Description: "User ID of CEN.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CenStatus
 					"cen_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例在CEN中的状态。Attaching：加载中。Attached：已加载。",
+						Description: "Status of the instance in CEN. Attaching: attaching. Attached: attached.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "关联的CEN信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Associated CEN information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -103,18 +103,18 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联的EIC信息。",
+		//	  "description": "Associated EIC information.",
 		//	  "properties": {
 		//	    "EicId": {
-		//	      "description": "EIC的ID。",
+		//	      "description": "ID of EIC.",
 		//	      "type": "string"
 		//	    },
 		//	    "EicOwnerId": {
-		//	      "description": "EIC的用户ID。",
+		//	      "description": "User ID of EIC.",
 		//	      "type": "string"
 		//	    },
 		//	    "EicStatus": {
-		//	      "description": "实例在EIC中的状态。",
+		//	      "description": "Status of the instance in EIC.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -124,21 +124,21 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EicId
 				"eic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "EIC的ID。",
+					Description: "ID of EIC.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EicOwnerId
 				"eic_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "EIC的用户ID。",
+					Description: "User ID of EIC.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EicStatus
 				"eic_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例在EIC中的状态。",
+					Description: "Status of the instance in EIC.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "关联的EIC信息。",
+			Description: "Associated EIC information.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -148,12 +148,12 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关的ASN（Autonomous System Number）。专线网关ASN有效范围为：137718、64512 ～ 65534 、4200000000 ～ 4294967294，其中137718为火山引擎的ASN。如果专线网关仅在普通场景下使用（如本地IDC通过专线连接访问单个云上VPC资源），请使用火山引擎ASN（137718）。如果专线网关在特殊场景下使用（如单个IDC通过专线连接访问多个云企业网），每个专线网关均要自定义ASN且避免使用火山引擎ASN（137718），确保不同专线网关的ASN不重复。",
+		//	  "description": "ASN (Autonomous System Number) of the Direct Connect Gateway. Valid ASN range: 137718, 64512–65534, 4200000000–4294967294, where 137718 is the ASN for Volcengine. If the Direct Connect Gateway is used in standard scenarios (such as a local IDC connecting to a single cloud VPC resource via dedicated connection), use the Volcengine ASN (137718). If used in special scenarios (such as a single IDC connecting to multiple Cloud Enterprise Networks via dedicated connection), each Direct Connect Gateway must use a custom ASN and avoid using the Volcengine ASN (137718), ensuring that ASNs are not duplicated across Direct Connect Gateways.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "专线网关的ASN（Autonomous System Number）。专线网关ASN有效范围为：137718、64512 ～ 65534 、4200000000 ～ 4294967294，其中137718为火山引擎的ASN。如果专线网关仅在普通场景下使用（如本地IDC通过专线连接访问单个云上VPC资源），请使用火山引擎ASN（137718）。如果专线网关在特殊场景下使用（如单个IDC通过专线连接访问多个云企业网），每个专线网关均要自定义ASN且避免使用火山引擎ASN（137718），确保不同专线网关的ASN不重复。",
+			Description: "ASN (Autonomous System Number) of the Direct Connect Gateway. Valid ASN range: 137718, 64512–65534, 4200000000–4294967294, where 137718 is the ASN for Volcengine. If the Direct Connect Gateway is used in standard scenarios (such as a local IDC connecting to a single cloud VPC resource via dedicated connection), use the Volcengine ASN (137718). If used in special scenarios (such as a single IDC connecting to multiple Cloud Enterprise Networks via dedicated connection), each Direct Connect Gateway must use a custom ASN and avoid using the Volcengine ASN (137718), ensuring that ASNs are not duplicated across Direct Connect Gateways.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -165,11 +165,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关是否被锁定。Normal：正常。FinancialLocked：被锁定。",
+		//	  "description": "Indicates whether the dedicated gateway is locked. Normal: normal. FinancialLocked: locked.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关是否被锁定。Normal：正常。FinancialLocked：被锁定。",
+			Description: "Indicates whether the dedicated gateway is locked. Normal: normal. FinancialLocked: locked.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -179,11 +179,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建专线网关的时间。",
+		//	  "description": "Time when the Direct Connect Gateway was created.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建专线网关的时间。",
+			Description: "Time when the Direct Connect Gateway was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -193,11 +193,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "预期资源强制回收时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。",
+		//	  "description": "Expected forced resource reclamation time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns null.",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "预期资源强制回收时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。",
+			Description: "Expected forced resource reclamation time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns null.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -207,13 +207,13 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关的描述信息。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、空格（ ）、下划线（_）、中划线（-）、等号（=）、英文逗号（,）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+		//	  "description": "Description for the dedicated gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space ( ), underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), and Chinese period (。). Length is limited to 0 to 255 characters. If this parameter is not provided or no value is entered, the default is an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关的描述信息。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、空格（ ）、下划线（_）、中划线（-）、等号（=）、英文逗号（,）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+			Description: "Description for the dedicated gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space ( ), underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), and Chinese period (。). Length is limited to 0 to 255 characters. If this parameter is not provided or no value is entered, the default is an empty string.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -227,11 +227,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关的ID。",
+		//	  "description": "ID of the Direct Connect Gateway.",
 		//	  "type": "string"
 		//	}
 		"direct_connect_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关的ID。",
+			Description: "ID of the Direct Connect Gateway.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -241,13 +241,13 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关的名称。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为专线网关的ID。",
+		//	  "description": "Name of the Direct Connect Gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, the default is the Direct Connect Gateway ID.",
 		//	  "maxLength": 128,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"direct_connect_gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关的名称。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为专线网关的ID。",
+			Description: "Name of the Direct Connect Gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, the default is the Direct Connect Gateway ID.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -261,11 +261,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否支持IPv6。true：支持。false：不支持。",
+		//	  "description": "Whether IPv6 is supported. true: supported. false: not supported.",
 		//	  "type": "boolean"
 		//	}
 		"enable_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否支持IPv6。true：支持。false：不支持。",
+			Description: "Whether IPv6 is supported. true: supported. false: not supported.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -276,11 +276,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关被锁定的原因。unlock：解锁。financial：因欠费被锁定。security：因安全被锁定。",
+		//	  "description": "Reason for Direct Connect Gateway lock. unlock: not locked; financial: locked due to overdue payment; security: locked due to security reasons.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关被锁定的原因。unlock：解锁。financial：因欠费被锁定。security：因安全被锁定。",
+			Description: "Reason for Direct Connect Gateway lock. unlock: not locked; financial: locked due to overdue payment; security: locked due to security reasons.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -290,11 +290,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。",
+		//	  "description": "Resource freeze time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns null.",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。",
+			Description: "Resource freeze time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns null.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -304,11 +304,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关所属的项目。",
+		//	  "description": "Project to which the Direct Connect Gateway belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关所属的项目。",
+			Description: "Project to which the Direct Connect Gateway belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -321,11 +321,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。",
+		//	  "description": "Status of the Direct Connect Gateway. Creating: creating. Deleting: deleting. Pending: configuring. Available: available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "专线网关的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。",
+			Description: "Status of the Direct Connect Gateway. Creating: creating. Deleting: deleting. Pending: configuring. Available: available.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -335,18 +335,18 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "专线网关已添加的全部标签信息。",
+		//	  "description": "All tag information added to the Direct Connect Gateway.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。长度取值范围为1~128字符。",
+		//	        "description": "User label tag key. Length must be between 1 and 128 characters.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。长度取值范围为0~256字符。",
+		//	        "description": "User label tag value. Length must be between 0 and 256 characters.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -366,7 +366,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。长度取值范围为1~128字符。",
+						Description: "User label tag key. Length must be between 1 and 128 characters.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -379,7 +379,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。长度取值范围为0~256字符。",
+						Description: "User label tag value. Length must be between 0 and 256 characters.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -391,7 +391,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "专线网关已添加的全部标签信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "All tag information added to the Direct Connect Gateway.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -405,11 +405,11 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新专线网关的时间。",
+		//	  "description": "Time when the Direct Connect Gateway was updated.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新专线网关的时间。",
+			Description: "Time when the Direct Connect Gateway was updated.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -427,7 +427,7 @@ func directConnectGatewayResource(ctx context.Context) (resource.Resource, error
 	}
 
 	schema := schema.Schema{
-		Description: "专线网关是本地数据中心访问云上的入口，用于连接私有网络（VPC）与物理专线，实现云下数据中心（IDC）和云上私有网络（VPC）互访。",
+		Description: "The Direct Connect Gateway is the entry point for local data centers to access the cloud. It connects private networks (VPC) and physical dedicated connections, enabling mutual access between on-premises data centers (IDC) and cloud private networks (VPC).",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -26,79 +26,79 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建实例的主账号ID。",
+		//	  "description": "Main account ID used to create the instance.",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建实例的主账号ID。",
+			Description: "Main account ID used to create the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ApplyPrivateDNSToPublic
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已开启公网解析功能。true：已开启, false：已关闭",
+		//	  "description": "Whether public DNS resolution is enabled. true: enabled, false: disabled.",
 		//	  "type": "boolean"
 		//	}
 		"apply_private_dns_to_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已开启公网解析功能。true：已开启, false：已关闭",
+			Description: "Whether public DNS resolution is enabled. true: enabled, false: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ArchType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的类型，即集群版或单机版。",
+		//	  "description": "Instance type, either cluster or standalone.",
 		//	  "type": "string"
 		//	}
 		"arch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的类型，即集群版或单机版。",
+			Description: "Instance type, either cluster or standalone.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeDetail
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的计费方式等计费信息。",
+		//	  "description": "Instance billing method and related billing information.",
 		//	  "properties": {
 		//	    "AutoRenew": {
-		//	      "description": "包年包月实例到期后是否自动续费。",
+		//	      "description": "Whether to automatically renew the subscription instance after expiration.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ChargeEndTime": {
-		//	      "description": "实例的结束计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Instance billing end time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeExpireTime": {
-		//	      "description": "包年包月实例的到期时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Expiration time of the subscription instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeStartTime": {
-		//	      "description": "实例的开始计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Instance billing start time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeStatus": {
-		//	      "description": "实例的计费状态。包括：Normal：正常，Overdue：按量计费欠费，Expired：包年包月到期。",
+		//	      "description": "Instance billing status. Includes: Normal: normal, Overdue: pay-as-you-go overdue, Expired: subscription expired.",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeType": {
-		//	      "description": "实例的计费类型。支持的类型包括：PostPaid ：按量付费，PrePaid：包年包月。",
+		//	      "description": "Instance billing type. Supported types include: PostPaid: pay-as-you-go, PrePaid: subscription.",
 		//	      "type": "string"
 		//	    },
 		//	    "OverdueReclaimTime": {
-		//	      "description": "实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Estimated release time after the instance is suspended due to overdue payment. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "OverdueTime": {
-		//	      "description": "实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Instance suspension time due to overdue payment. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "Period": {
-		//	      "description": "包年包月类型实例的购买时长。PeriodUnit 指定为 Month 时，取值范围为 1~9。PeriodUnit 指定为 Year 时，取值范围为 1~3。",
+		//	      "description": "Subscription instance purchase duration. When PeriodUnit is set to Month, the value range is 1–9. When PeriodUnit is set to Year, the value range is 1–3.",
 		//	      "type": "integer"
 		//	    },
 		//	    "PeriodUnit": {
-		//	      "description": "购买时长的单位，取值如下：MONTHLY：按月购买。YEARLY：按年购买。",
+		//	      "description": "Unit for purchase duration. Values: MONTHLY: monthly purchase, YEARLY: annual purchase.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -108,117 +108,117 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例到期后是否自动续费。",
+					Description: "Whether to automatically renew the subscription instance after expiration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeEndTime
 				"charge_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的结束计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Instance billing end time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeExpireTime
 				"charge_expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例的到期时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Expiration time of the subscription instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeStartTime
 				"charge_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的开始计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Instance billing start time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeStatus
 				"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的计费状态。包括：Normal：正常，Overdue：按量计费欠费，Expired：包年包月到期。",
+					Description: "Instance billing status. Includes: Normal: normal, Overdue: pay-as-you-go overdue, Expired: subscription expired.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的计费类型。支持的类型包括：PostPaid ：按量付费，PrePaid：包年包月。",
+					Description: "Instance billing type. Supported types include: PostPaid: pay-as-you-go, PrePaid: subscription.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OverdueReclaimTime
 				"overdue_reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Estimated release time after the instance is suspended due to overdue payment. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OverdueTime
 				"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Instance suspension time due to overdue payment. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "包年包月类型实例的购买时长。PeriodUnit 指定为 Month 时，取值范围为 1~9。PeriodUnit 指定为 Year 时，取值范围为 1~3。",
+					Description: "Subscription instance purchase duration. When PeriodUnit is set to Month, the value range is 1–9. When PeriodUnit is set to Year, the value range is 1–3.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PeriodUnit
 				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "购买时长的单位，取值如下：MONTHLY：按月购买。YEARLY：按年购买。",
+					Description: "Unit for purchase duration. Values: MONTHLY: monthly purchase, YEARLY: annual purchase.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例的计费方式等计费信息。",
+			Description: "Instance billing method and related billing information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ComputeSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RabbitMQ实例的计算规格。",
+		//	  "description": "Compute specification of the RabbitMQ instance.",
 		//	  "type": "string"
 		//	}
 		"compute_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RabbitMQ实例的计算规格。",
+			Description: "Compute specification of the RabbitMQ instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的创建时间。",
+		//	  "description": "Instance creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的创建时间。",
+			Description: "Instance creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "EIP的ID。",
+		//	  "description": "EIP ID.",
 		//	  "type": "string"
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "EIP的ID。",
+			Description: "EIP ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Endpoints
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的连接信息。",
+		//	  "description": "Instance connection information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "EndpointType": {
-		//	        "description": "实例的接入点类型。RabbitMQ实例提供的接入点类型包括：WEB：Web UI 接入点，AMQP0_9_1：AMQP 接入点，MQTT：MQTT接入点，WEB_MQTT：WEB ，MQTT 接入点，STOMP：STOMP 接入点。",
+		//	        "description": "Type of instance endpoint. RabbitMQ instances provide the following endpoint types: WEB: Web UI endpoint, AMQP0_9_1: AMQP endpoint, MQTT: MQTT endpoint, WEB_MQTT: WEB and MQTT endpoints, STOMP: STOMP endpoint.",
 		//	        "type": "string"
 		//	      },
 		//	      "InternalEndpoint": {
-		//	        "description": "实例的私网访问域名。",
+		//	        "description": "Private network access domain name of the instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "InternalIpEndpoint": {
-		//	        "description": "公共服务区 IP 接入点。",
+		//	        "description": "Public service zone IP endpoint.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkType": {
-		//	        "description": "接入点的网络类型。PrivateNetwork 表示私有网络 VPC。",
+		//	        "description": "Network type of the endpoint. PrivateNetwork indicates a private network (VPC).",
 		//	        "type": "string"
 		//	      },
 		//	      "PublicEndpoint": {
-		//	        "description": "实例公网访问域名。仅在开启公网访问之后显示。",
+		//	        "description": "Instance public access domain name. Displayed only after public access is enabled.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -232,136 +232,136 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EndpointType
 					"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的接入点类型。RabbitMQ实例提供的接入点类型包括：WEB：Web UI 接入点，AMQP0_9_1：AMQP 接入点，MQTT：MQTT接入点，WEB_MQTT：WEB ，MQTT 接入点，STOMP：STOMP 接入点。",
+						Description: "Type of instance endpoint. RabbitMQ instances provide the following endpoint types: WEB: Web UI endpoint, AMQP0_9_1: AMQP endpoint, MQTT: MQTT endpoint, WEB_MQTT: WEB and MQTT endpoints, STOMP: STOMP endpoint.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InternalEndpoint
 					"internal_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的私网访问域名。",
+						Description: "Private network access domain name of the instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InternalIpEndpoint
 					"internal_ip_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "公共服务区 IP 接入点。",
+						Description: "Public service zone IP endpoint.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkType
 					"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "接入点的网络类型。PrivateNetwork 表示私有网络 VPC。",
+						Description: "Network type of the endpoint. PrivateNetwork indicates a private network (VPC).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PublicEndpoint
 					"public_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例公网访问域名。仅在开启公网访问之后显示。",
+						Description: "Instance public access domain name. Displayed only after public access is enabled.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例的连接信息。",
+			Description: "Instance connection information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceDescription
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的简单描述。",
+		//	  "description": "Brief description of the instance.",
 		//	  "type": "string"
 		//	}
 		"instance_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的简单描述。",
+			Description: "Brief description of the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RabbitMQ 实例 ID。",
+		//	  "description": "RabbitMQ instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RabbitMQ 实例 ID。",
+			Description: "RabbitMQ instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RabbitMQ 实例名称。",
+		//	  "description": "RabbitMQ instance name.",
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RabbitMQ 实例名称。",
+			Description: "RabbitMQ instance name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例状态。",
+		//	  "description": "Instance status.",
 		//	  "type": "string"
 		//	}
 		"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例状态。",
+			Description: "Instance status.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsEncrypted
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启了云盘加密。",
+		//	  "description": "Whether cloud disk encryption is enabled.",
 		//	  "type": "boolean"
 		//	}
 		"is_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启了云盘加密。",
+			Description: "Whether cloud disk encryption is enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的IAM项目。",
+		//	  "description": "IAM project to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的IAM项目。",
+			Description: "IAM project to which the instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageSpace
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例总存储空间。单位为 GiB。",
+		//	  "description": "Total storage space of the instance, measured in GiB.",
 		//	  "type": "integer"
 		//	}
 		"storage_space": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例总存储空间。单位为 GiB。",
+			Description: "Total storage space of the instance, measured in GiB.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的子网ID。",
+		//	  "description": "VPC subnet ID.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的子网ID。",
+			Description: "VPC subnet ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例绑定的标签。",
+		//	  "description": "Tags bound to the instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签的键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签的值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -378,94 +378,94 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的键。",
+						Description: "Tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例绑定的标签。",
+			Description: "Tags bound to the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsedStorageSpace
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例已用存储空间。单位为 GiB。",
+		//	  "description": "Used storage space of the instance, measured in GiB.",
 		//	  "type": "integer"
 		//	}
 		"used_storage_space": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例已用存储空间。单位为 GiB。",
+			Description: "Used storage space of the instance, measured in GiB.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RabbitMQ WebUI管理员账号名。",
+		//	  "description": "RabbitMQ WebUI administrator account name.",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RabbitMQ WebUI管理员账号名。",
+			Description: "RabbitMQ WebUI administrator account name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserPassword
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RabbitMQ WebUI管理员密码。",
+		//	  "description": "RabbitMQ WebUI administrator password.",
 		//	  "type": "string"
 		//	}
 		"user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RabbitMQ WebUI管理员密码。",
+			Description: "RabbitMQ WebUI administrator password.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "支持的 RabbitMQ 版本。当前支持的版本包括：3.8.18：RabbitMQ 3.8.18 版本。",
+		//	  "description": "Supported RabbitMQ versions. Currently supported versions include: 3.8.18: RabbitMQ version 3.8.18.",
 		//	  "type": "string"
 		//	}
 		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "支持的 RabbitMQ 版本。当前支持的版本包括：3.8.18：RabbitMQ 3.8.18 版本。",
+			Description: "Supported RabbitMQ versions. Currently supported versions include: 3.8.18: RabbitMQ version 3.8.18.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络（VPC）ID。",
+		//	  "description": "Private network (VPC) ID.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络（VPC）ID。",
+			Description: "Private network (VPC) ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneDescription
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区的描述信息。",
+		//	  "description": "Description of the availability zone.",
 		//	  "type": "string"
 		//	}
 		"zone_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区的描述信息。",
+			Description: "Description of the availability zone.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在的可用区 ID。对于跨 AZ 的高可用实例，此处会返回多个可用区 ID。",
+		//	  "description": "Availability zone ID where the instance is located. For high-availability instances across AZs, multiple availability zone IDs are returned.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所在的可用区 ID。对于跨 AZ 的高可用实例，此处会返回多个可用区 ID。",
+			Description: "Availability zone ID where the instance is located. For high-availability instances across AZs, multiple availability zone IDs are returned.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

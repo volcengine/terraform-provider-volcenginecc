@@ -21,19 +21,19 @@ Data Source schema for Volcengine::TLS::Project
 
 ### Read-Only
 
-- `created_time` (String) 日志项目创建时间。
-- `description` (String) 日志项目的简单描述。
-- `iam_project_name` (String) 日志项目所属的 IAM 项目。
-- `inner_net_domain` (String) 私网连接域名。
-- `project_id` (String) 日志项目的 ID。
-- `project_name` (String) 日志项目名称。
-- `tags` (Attributes Set) 标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `topic_count` (Number) 当前日志项目下的日志主题数量。
+- `created_time` (String) Log project creation time
+- `description` (String) Brief description of the log project
+- `iam_project_name` (String) The IAM project associated with the log project
+- `inner_net_domain` (String) Private network connection domain name
+- `project_id` (String) Log project ID
+- `project_name` (String) Log project name
+- `tags` (Attributes Set) Tag information (see [below for nested schema](#nestedatt--tags))
+- `topic_count` (Number) Number of log topics in the current log project
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

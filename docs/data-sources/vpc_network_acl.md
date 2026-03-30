@@ -21,34 +21,34 @@ Data Source schema for Volcengine::VPC::NetworkAcl
 
 ### Read-Only
 
-- `created_time` (String) 网络ACL的创建时间。
-- `default_egress_acl_entries` (Attributes Set) 默认出向ACL规则列表。 (see [below for nested schema](#nestedatt--default_egress_acl_entries))
-- `default_ingress_acl_entries` (Attributes Set) 默认入向ACL规则列表。 (see [below for nested schema](#nestedatt--default_ingress_acl_entries))
-- `description` (String) 网络ACL描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。
-- `egress_acl_entries` (Attributes Set) 出向ACL规则列表。 (see [below for nested schema](#nestedatt--egress_acl_entries))
-- `ingress_acl_entries` (Attributes Set) 入向ACL规则列表。 (see [below for nested schema](#nestedatt--ingress_acl_entries))
-- `network_acl_id` (String) 网络ACL的ID。
-- `network_acl_name` (String) 网络ACL名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。
-- `project_name` (String) 网络ACL所属项目的名称。不填默认加入default项目。
-- `resources` (Attributes Set) 关联资源列表。 (see [below for nested schema](#nestedatt--resources))
-- `status` (String) 网络ACL的状态。Available：可用，Creating：创建中
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) 网络ACL的更新时间。
-- `vpc_id` (String) 网络ACL所属VPC的ID。
+- `created_time` (String) Creation time of the network ACL.
+- `default_egress_acl_entries` (Attributes Set) Default outbound ACL rule list. (see [below for nested schema](#nestedatt--default_egress_acl_entries))
+- `default_ingress_acl_entries` (Attributes Set) Default inbound ACL rule list. (see [below for nested schema](#nestedatt--default_ingress_acl_entries))
+- `description` (String) Network ACL description. Length must be 0–255 characters. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。).
+- `egress_acl_entries` (Attributes Set) Outbound ACL rule list. (see [below for nested schema](#nestedatt--egress_acl_entries))
+- `ingress_acl_entries` (Attributes Set) Inbound ACL rule list. (see [below for nested schema](#nestedatt--ingress_acl_entries))
+- `network_acl_id` (String) Network ACL ID.
+- `network_acl_name` (String) Network ACL name. Length must be 1–128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-).
+- `project_name` (String) Name of the project associated with the network ACL. If not specified, added to the default project.
+- `resources` (Attributes Set) Associated resource list. (see [below for nested schema](#nestedatt--resources))
+- `status` (String) Status of the network ACL. Available: Available. Creating: Creating.
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Last updated time of the network ACL.
+- `vpc_id` (String) ID of the VPC associated with the network ACL.
 
 <a id="nestedatt--default_egress_acl_entries"></a>
 ### Nested Schema for `default_egress_acl_entries`
 
 Read-Only:
 
-- `cidr_ip` (String) 入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。
-- `description` (String) 规则的描述信息。
-- `network_acl_entry_id` (String) 规则的ID。
-- `network_acl_entry_name` (String) 规则的名称。
-- `policy` (String) 授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。
-- `port` (String) 规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。
-- `priority` (Number) 方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。
-- `protocol` (String) 协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。
+- `cidr_ip` (String) For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.
+- `description` (String) Rule description.
+- `network_acl_entry_id` (String) Rule ID.
+- `network_acl_entry_name` (String) Rule name.
+- `policy` (String) Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.
+- `port` (String) Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.
+- `priority` (Number) Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.
+- `protocol` (String) Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.
 
 
 <a id="nestedatt--default_ingress_acl_entries"></a>
@@ -56,14 +56,14 @@ Read-Only:
 
 Read-Only:
 
-- `cidr_ip` (String) 入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。
-- `description` (String) 规则的描述信息。
-- `network_acl_entry_id` (String) 规则的ID。
-- `network_acl_entry_name` (String) 规则的名称。
-- `policy` (String) 授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。
-- `port` (String) 规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。
-- `priority` (Number) 方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。
-- `protocol` (String) 协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。
+- `cidr_ip` (String) For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.
+- `description` (String) Rule description.
+- `network_acl_entry_id` (String) Rule ID.
+- `network_acl_entry_name` (String) Rule name.
+- `policy` (String) Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.
+- `port` (String) Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.
+- `priority` (Number) Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.
+- `protocol` (String) Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.
 
 
 <a id="nestedatt--egress_acl_entries"></a>
@@ -71,14 +71,14 @@ Read-Only:
 
 Read-Only:
 
-- `cidr_ip` (String) 入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。
-- `description` (String) 规则的描述信息。
-- `network_acl_entry_id` (String) 规则的ID。
-- `network_acl_entry_name` (String) 规则的名称。
-- `policy` (String) 授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。
-- `port` (String) 规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。
-- `priority` (Number) 方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。
-- `protocol` (String) 协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。
+- `cidr_ip` (String) For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.
+- `description` (String) Rule description.
+- `network_acl_entry_id` (String) Rule ID.
+- `network_acl_entry_name` (String) Rule name.
+- `policy` (String) Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.
+- `port` (String) Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.
+- `priority` (Number) Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.
+- `protocol` (String) Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.
 
 
 <a id="nestedatt--ingress_acl_entries"></a>
@@ -86,14 +86,14 @@ Read-Only:
 
 Read-Only:
 
-- `cidr_ip` (String) 入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。
-- `description` (String) 规则的描述信息。
-- `network_acl_entry_id` (String) 规则的ID。
-- `network_acl_entry_name` (String) 规则的名称。
-- `policy` (String) 授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。
-- `port` (String) 规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。
-- `priority` (Number) 方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。
-- `protocol` (String) 协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。
+- `cidr_ip` (String) For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.
+- `description` (String) Rule description.
+- `network_acl_entry_id` (String) Rule ID.
+- `network_acl_entry_name` (String) Rule name.
+- `policy` (String) Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.
+- `port` (String) Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.
+- `priority` (Number) Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.
+- `protocol` (String) Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.
 
 
 <a id="nestedatt--resources"></a>
@@ -101,8 +101,8 @@ Read-Only:
 
 Read-Only:
 
-- `resource_id` (String) 关联资源的ID。
-- `status` (String) 网络ACL关联资源的状态。BINDED：已绑定。BINDING：绑定中。UNBINDING：解绑中。
+- `resource_id` (String) Associated resource ID.
+- `status` (String) Status of resources associated with the network ACL. BINDED: Bound. BINDING: Binding. UNBINDING: Unbinding.
 
 
 <a id="nestedatt--tags"></a>
@@ -110,5 +110,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_clb_nlb_listener Resource - terraform-provider-volcenginecc"
 subcategory: "CLB"
 description: |-
-  监听器负责根据指定的协议和端口，监听NLB实例接收到的用户访问请求。NLB将按照该监听器关联的服务器组配置的调度算法，将访问请求转发至该服务器组内健康的后端服务器。
+  The listener monitors user access requests received by the NLB instance based on the specified protocol and port. NLB forwards requests to healthy backend servers in the associated server group according to the scheduling algorithm configured for that group.
 ---
 
 # volcenginecc_clb_nlb_listener (Resource)
 
-监听器负责根据指定的协议和端口，监听NLB实例接收到的用户访问请求。NLB将按照该监听器关联的服务器组配置的调度算法，将访问请求转发至该服务器组内健康的后端服务器。
+The listener monitors user access requests received by the NLB instance based on the specified protocol and port. NLB forwards requests to healthy backend servers in the associated server group according to the scheduling algorithm configured for that group.
 
 ## Example Usage
 
@@ -34,47 +34,47 @@ resource "volcenginecc_clb_nlb_listener" "CLBNLBListenerDemo" {
 
 ### Required
 
-- `load_balancer_id` (String) 负载均衡实例ID。
-- `port` (Number) 监听器接收请求的端口，0表示启用全端口监听。
-- `protocol` (String) 监听协议类型。TCP,UDP,TLS
-- `server_group_id` (String) 监听器关联的服务器组ID。
+- `load_balancer_id` (String) Load balancer instance ID
+- `port` (Number) Port on which the listener receives requests. 0 indicates all-port listening is enabled.
+- `protocol` (String) Listener protocol type: TCP, UDP, TLS
+- `server_group_id` (String) Server group ID associated with the listener
 
 ### Optional
 
-- `certificate_id` (String) TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。
-- `connection_timeout` (Number) 监听器的连接超时时间（秒）。
-- `description` (String) 监听器描述信息。
-- `enabled` (Boolean) 是否启用监听器。true：开启；false：关闭。
-- `end_port` (Number) 全端口监听的结束端口，仅当Port为0时有效。
-- `health` (Attributes Set) 后端实例健康检查响应信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--health))
-- `listener_name` (String) 监听器名称。
-- `security_policy_id` (String) TLS 安全策略ID，支持系统安全策略和自定义安全策略。系统安全策略取值：.tls_cipher_policy_1_0.tls_cipher_policy_1_1.tls_cipher_policy_1_2.tls_cipher_policy_1_2_strict.tls_cipher_policy_1_2_strict_with_1_3.自定义安全策略：输入自定义安全策略 ID。当Protocol为TLS 时，该参数为必填。。
-- `start_port` (Number) 全端口监听的起始端口，仅当Port为0时有效。
-- `tags` (Attributes Set) 资源标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `certificate_id` (String) TLS listener server certificate ID. Only SSL certificates from the certificate center are supported.
+- `connection_timeout` (Number) Listener connection timeout (seconds)
+- `description` (String) Listener description
+- `enabled` (Boolean) Listener enabled: true (enabled); false (disabled)
+- `end_port` (Number) End port for all-port listening. Valid only when Port is 0.
+- `health` (Attributes Set) Backend instance health check response information
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--health))
+- `listener_name` (String) Listener name
+- `security_policy_id` (String) TLS security policy ID. Supports both system security policies and custom security policies. System security policy values: .tls_cipher_policy_1_0 .tls_cipher_policy_1_1 .tls_cipher_policy_1_2 .tls_cipher_policy_1_2_strict .tls_cipher_policy_1_2_strict_with_1_3. For custom security policies, enter the custom security policy ID. This parameter is required when Protocol is TLS.
+- `start_port` (Number) Start port for all-port listening. Valid only when Port is 0.
+- `tags` (Attributes Set) Resource tags
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `created_time` (String) 监听器的创建时间。
+- `created_time` (String) Listener creation time
 - `id` (String) Uniquely identifies the resource.
-- `listener_id` (String) 监听器唯一标识。
-- `status` (String) 监听器的状态。
-- `updated_time` (String) 监听器最近操作时间。
+- `listener_id` (String) Listener unique identifier
+- `status` (String) Listener status
+- `updated_time` (String) Listener's most recent operation time
 
 <a id="nestedatt--health"></a>
 ### Nested Schema for `health`
 
 Optional:
 
-- `instance_id` (String) 后端服务器的实例 ID或IP地址。
-- `ip` (String) 后端服务器的IP地址。
-- `port` (Number) 后端服务器提供服务的端口。
-- `server_id` (String) 后端服务器ID。
-- `server_type` (String) 后端服务器的类型。ecs：云服务器实例（即主网卡）；eni：辅助网卡；ip：IP地址
-- `status` (String) 后端服务器的健康状态。Up：正常；Down：异常；Unused：未被使用（NLB实例已关闭跨可用区转发，且没有来自该后端服务器可用区的访问流量）。
-- `updated_time` (String) 健康状态最后更新时间。
-- `zone_id` (String) 后端服务器接收访问流量的可用区ID。
+- `instance_id` (String) Backend server instance ID or IP address
+- `ip` (String) Backend server IP address
+- `port` (Number) Port on which the backend server provides services
+- `server_id` (String) Backend server ID
+- `server_type` (String) Backend server type: ecs (cloud server instance, i.e., primary network interface); eni (secondary network interface); ip (IP address)
+- `status` (String) Backend server health status: Up (normal); Down (abnormal); Unused (not in use—NLB instance has disabled cross-zone forwarding and there is no traffic from this backend server's zone)
+- `updated_time` (String) Last update time of health status
+- `zone_id` (String) Zone ID where the backend server receives traffic
 
 
 <a id="nestedatt--tags"></a>
@@ -82,8 +82,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 ## Import
 

@@ -21,55 +21,55 @@ Data Source schema for Volcengine::TransitRouter::TransitRouter
 
 ### Read-Only
 
-- `asn` (Number) 中转路由器的ASN号。取值范围为64512 ～ 65534 和 4200000000 ～ 4294967294，默认值为64512。
-- `attachments` (Attributes Set) 网络实例连接的详细信息。 (see [below for nested schema](#nestedatt--attachments))
-- `business_status` (String) 网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。
-- `creation_time` (String) 网络实例连接的创建时间。
-- `deleted_time` (String) 网络实例连接的删除时间。
-- `description` (String) 中转路由器实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
-- `grant_source_type` (String) 中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。
-- `grant_status` (String) 实例共享的状态。Accepted：已接受。Initial：待接受。
-- `multicast_enabled` (Boolean) 中转路由器是否开启组播。true：开启。false（默认值）：不开启
-- `overdue_time` (String) 中转路由器实例的欠费关停时间。
-- `project_name` (String) 中转路由器实例所属项目的名称。不传入该参数或该参数不传入数值时，默认为default。
-- `status` (String) 中转路由器实例的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。
-- `tags` (Attributes Set) 标签列表 (see [below for nested schema](#nestedatt--tags))
-- `transit_router_id` (String) 中转路由器实例的ID。
-- `transit_router_name` (String) 中转路由器实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为中转路由器实例的ID。
-- `update_time` (String) 中转路由器实例的最近操作时间。
+- `asn` (Number) ASN of the transit router. Value range: 64512–65534 and 4200000000–4294967294. Default value: 64512
+- `attachments` (Attributes Set) Detailed information of the network instance connection (see [below for nested schema](#nestedatt--attachments))
+- `business_status` (String) Business status of the network instance connection. Values: Normal: Normal. FinancialLocked: Financially locked.
+- `creation_time` (String) Creation time of the network instance connection.
+- `deleted_time` (String) Deletion time of the network instance connection.
+- `description` (String) Description of the transit router instance. Must start with a letter, number, or Chinese character. Can contain letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is entered, the default is an empty string
+- `grant_source_type` (String) Sharing method of the transit router instance. rs: Shared via platform resource sharing. tr: Shared via transit router instance sharing
+- `grant_status` (String) Instance sharing status. Accepted: Received. Initial: Pending acceptance.
+- `multicast_enabled` (Boolean) Whether multicast is enabled for the transit router. true: enabled. false (default): not enabled
+- `overdue_time` (String) Shutdown time due to overdue payment for the transit router instance
+- `project_name` (String) Name of the project to which the transit router instance belongs. If this parameter is not provided or no value is entered, the default is 'default'
+- `status` (String) Status of the transit router instance. Creating: creating. Deleting: deleting. Pending: configuring. Available: available
+- `tags` (Attributes Set) Tag list (see [below for nested schema](#nestedatt--tags))
+- `transit_router_id` (String) Transit router instance ID.
+- `transit_router_name` (String) Name of the transit router instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the transit router instance ID.
+- `update_time` (String) Last operation time of the transit router instance
 
 <a id="nestedatt--attachments"></a>
 ### Nested Schema for `attachments`
 
 Read-Only:
 
-- `auto_publish_route_enabled` (Boolean) 是否自动同步TR路由到网络实例路由表中。true：是。false：否。
-- `business_status` (String) 网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。
-- `creation_time` (String) 网络实例连接的创建时间。
-- `deleted_time` (String) 网络实例连接的删除时间。
-- `description` (String) 网络实例连接的描述信息。
-- `ipv_6_enabled` (Boolean) 是否开启IPv6功能。true：是。false：否。
-- `overdue_time` (String) 网络实例连接的欠费关停时间。
-- `resource_id` (String) 网络实例的ID。
-- `resource_type` (String) 网络实例连接关联的网络实例类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。
-- `status` (String) 网络实例连接的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。
-- `tags` (Attributes Set) 网络实例连接的标签信息 (see [below for nested schema](#nestedatt--attachments--tags))
-- `transit_router_attachment_id` (String) 网络实例连接的ID。
-- `transit_router_attachment_name` (String) 网络实例连接的名称。
-- `transit_router_forward_policy_table_id` (String) 跨地域连接关联的转发策略的ID。
-- `transit_router_id` (String) 中转路由器实例的ID。
-- `transit_router_route_table_id` (String) 网络实例连接关联转发的路由表ID。
-- `transit_router_traffic_qos_marking_policy_id` (String) 跨地域连接关联的流标记策略的ID。
-- `transit_router_traffic_qos_queue_policy_id` (String) 跨地域连接关联的流队列策略的ID。
-- `update_time` (String) 网络实例连接的最近操作时间。
+- `auto_publish_route_enabled` (Boolean) Whether to automatically synchronize TR routes to the network instance route table. true: Yes. false: No.
+- `business_status` (String) Business status of the network instance connection. Values: Normal: Normal. FinancialLocked: Financially locked.
+- `creation_time` (String) Creation time of the network instance connection.
+- `deleted_time` (String) Deletion time of the network instance connection.
+- `description` (String) Description of the network instance connection.
+- `ipv_6_enabled` (Boolean) Whether IPv6 is enabled. true: yes. false: no
+- `overdue_time` (String) Shutdown time due to overdue payment for the network instance connection
+- `resource_id` (String) ID of the network instance
+- `resource_type` (String) Type of network instance associated with the network instance connection. VPC: Virtual Private Cloud. VPN: VPN connection. DirectConnectGateway: Direct Connect Gateway. TransitRouter: Transit Router
+- `status` (String) Status of the network instance connection. Creating: creating. Deleting: deleting. Pending: configuring. Available: available
+- `tags` (Attributes Set) Tag information of the network instance connection (see [below for nested schema](#nestedatt--attachments--tags))
+- `transit_router_attachment_id` (String) Network instance connection ID.
+- `transit_router_attachment_name` (String) Name of the network instance connection
+- `transit_router_forward_policy_table_id` (String) ID of the forwarding policy associated with the cross-region connection
+- `transit_router_id` (String) Transit router instance ID.
+- `transit_router_route_table_id` (String) Route table ID associated with the forwarding of the network instance connection.
+- `transit_router_traffic_qos_marking_policy_id` (String) ID of the flow marking policy associated with the cross-region connection
+- `transit_router_traffic_qos_queue_policy_id` (String) ID of the flow queue policy associated with the cross-region connection
+- `update_time` (String) Last operation time of the network instance connection
 
 <a id="nestedatt--attachments--tags"></a>
 ### Nested Schema for `attachments.tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value.
 
 
 
@@ -78,5 +78,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value.

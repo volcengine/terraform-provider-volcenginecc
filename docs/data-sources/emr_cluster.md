@@ -21,35 +21,35 @@ Data Source schema for Volcengine::EMR::Cluster
 
 ### Read-Only
 
-- `account_id` (Number) 账号ID。
-- `application_extras` (Attributes List) 集群服务的扩展信息列表，包括服务的自定义配置项、服务组件的自定义部署拓扑设置，以及服务的元数据连接配置信息。 (see [below for nested schema](#nestedatt--application_extras))
-- `application_names` (Set of String) 集群安装的服务名称列表。创建字段。
-- `applications` (Attributes Set) 集群安装的服务列表。只读字段。 (see [below for nested schema](#nestedatt--applications))
-- `bootstrap_scripts` (Attributes Set) 集群的引导脚本列表。 (see [below for nested schema](#nestedatt--bootstrap_scripts))
-- `charge_pre_config` (Attributes) 包月的配置参数，当chargeType=PRE时，必选。 (see [below for nested schema](#nestedatt--charge_pre_config))
-- `charge_type` (String) 付费类型，PRE表示包月，POST表示按量计费。
-- `cluster_domain_names` (Set of String) 集群dns域名后缀列表。
-- `cluster_id` (String) 集群ID。
-- `cluster_name` (String) 集群名称。
-- `cluster_state` (String) 集群状态。
-- `cluster_type` (String) 集群类型。
-- `created_time` (Number) 集群创建时间。
-- `creator_id` (Number) 创建者ID。
-- `creator_name` (String) 创建者名称。
-- `deploy_mode` (String) 部署模式。SIMPLE表示简单模式，HIGH_AVAILABLE表示高可用模式。
-- `ecs_image_id` (String) ECS镜像ID。
-- `expire_time` (Number) 集群过期时间。
-- `history_server_mode` (String) HistoryServer模式，LOCAL将活动数据存储于集群内，PHS将活动数据存储于集群外。
-- `node_attribute` (Attributes) 集群全局的节点信息。 (see [below for nested schema](#nestedatt--node_attribute))
-- `node_group_attributes` (Attributes Set) 节点组属性列表。 (see [below for nested schema](#nestedatt--node_group_attributes))
-- `project_name` (String) 资源所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。
-- `ready_time` (Number) 集群创建完成时间。
-- `release_version` (String) 集群版本。
-- `security_group_id` (String) 集群全局安全组ID，所有节点组下的ecs都会加入该安全组。
-- `security_mode` (String) 安全模式。
-- `state_change_reason` (Attributes) 状态变更原因。 (see [below for nested schema](#nestedatt--state_change_reason))
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `terminate_time` (Number) 集群终止时间。
+- `account_id` (Number) Account ID.
+- `application_extras` (Attributes List) Cluster service extension information list, including custom configuration items for services, custom deployment topology settings for service components, and metadata connection configuration information for services. (see [below for nested schema](#nestedatt--application_extras))
+- `application_names` (Set of String) List of service names installed in the cluster. Creation-related field.
+- `applications` (Attributes Set) Installed service list for cluster. Read-only field. (see [below for nested schema](#nestedatt--applications))
+- `bootstrap_scripts` (Attributes Set) Cluster bootstrap script list. (see [below for nested schema](#nestedatt--bootstrap_scripts))
+- `charge_pre_config` (Attributes) Monthly subscription configuration parameters. Required when chargeType=PRE. (see [below for nested schema](#nestedatt--charge_pre_config))
+- `charge_type` (String) Payment type. PRE means monthly subscription, POST means pay-as-you-go.
+- `cluster_domain_names` (Set of String) Cluster DNS domain suffix list.
+- `cluster_id` (String) Cluster ID.
+- `cluster_name` (String) Cluster name.
+- `cluster_state` (String) Cluster status.
+- `cluster_type` (String) Cluster type.
+- `created_time` (Number) Cluster creation time.
+- `creator_id` (Number) Creator ID.
+- `creator_name` (String) Creator name.
+- `deploy_mode` (String) Deployment mode. SIMPLE means simple mode, HIGH_AVAILABLE means high availability mode.
+- `ecs_image_id` (String) ECS image ID.
+- `expire_time` (Number) Cluster expiration time.
+- `history_server_mode` (String) HistoryServer mode: LOCAL stores active data within the cluster, PHS stores active data outside the cluster.
+- `node_attribute` (Attributes) Cluster global node information. (see [below for nested schema](#nestedatt--node_attribute))
+- `node_group_attributes` (Attributes Set) Node group property list. (see [below for nested schema](#nestedatt--node_group_attributes))
+- `project_name` (String) Project to which the resource belongs. Default is 'default'. Each resource can belong to only one project. Only letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed. Maximum length is 64 characters.
+- `ready_time` (Number) Cluster creation completion time.
+- `release_version` (String) Cluster version.
+- `security_group_id` (String) Cluster global security group ID. All ECS in node groups will join this security group.
+- `security_mode` (String) Security mode.
+- `state_change_reason` (Attributes) Status change reason. (see [below for nested schema](#nestedatt--state_change_reason))
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
+- `terminate_time` (Number) Cluster termination time.
 - `vpc_id` (String) Vpc ID。
 
 <a id="nestedatt--application_extras"></a>
@@ -57,32 +57,32 @@ Data Source schema for Volcengine::EMR::Cluster
 
 Read-Only:
 
-- `application_component_layouts` (Attributes Set) 服务组件的自定义部署拓扑列表。 (see [below for nested schema](#nestedatt--application_extras--application_component_layouts))
-- `application_configs` (Attributes List) 服务的自定义配置参数列表。 (see [below for nested schema](#nestedatt--application_extras--application_configs))
-- `application_name` (String) 应用名称。
-- `connection_id` (String) 元数据连接id。
-- `connection_type` (String) 元数据连接类型。BUILT_IN_MYSQL：内置数据库。EXTERNAL_MYSQL：外置数据库。HIVE_METASTORE：HMS。
+- `application_component_layouts` (Attributes Set) Custom deployment topology list for service components. (see [below for nested schema](#nestedatt--application_extras--application_component_layouts))
+- `application_configs` (Attributes List) Custom configuration parameter list for services. (see [below for nested schema](#nestedatt--application_extras--application_configs))
+- `application_name` (String) Application name.
+- `connection_id` (String) Metadata connection ID.
+- `connection_type` (String) Metadata connection type. BUILT_IN_MYSQL: built-in database. EXTERNAL_MYSQL: external database. HIVE_METASTORE: HMS.
 
 <a id="nestedatt--application_extras--application_component_layouts"></a>
 ### Nested Schema for `application_extras.application_component_layouts`
 
 Read-Only:
 
-- `component_name` (String) 组件名称。
-- `effective_scope` (Attributes) 组件的布局范围。 (see [below for nested schema](#nestedatt--application_extras--application_component_layouts--effective_scope))
+- `component_name` (String) Component name.
+- `effective_scope` (Attributes) Component layout scope. (see [below for nested schema](#nestedatt--application_extras--application_component_layouts--effective_scope))
 
 <a id="nestedatt--application_extras--application_component_layouts--effective_scope"></a>
 ### Nested Schema for `application_extras.application_component_layouts.effective_scope`
 
 Read-Only:
 
-- `component_names` (Set of String) 组件名列表，当EffectiveType=COMPONENT_NAME，必选。
-- `effective_type` (String) 生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。
-- `node_group_ids` (Set of String) 节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。
-- `node_group_names` (Set of String) 节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。
-- `node_group_types` (Set of String) 节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。
-- `node_ids` (Set of String) 节点ID列表，EffectiveType=NODE_ID时，必选。
-- `node_names` (Set of String) 节点名列表，EffectiveType=NODE_NAME时，必选。
+- `component_names` (Set of String) Component name list. Required when EffectiveType=COMPONENT_NAME.
+- `effective_type` (String) Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.
+- `node_group_ids` (Set of String) Node group ID list. Required when EffectiveType=NODE_GROUP_ID.
+- `node_group_names` (Set of String) Node group name list. Required when EffectiveType=NODE_GROUP_NAME.
+- `node_group_types` (Set of String) Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.
+- `node_ids` (Set of String) Node ID list. Required when EffectiveType=NODE_ID.
+- `node_names` (Set of String) Node name list. Required when EffectiveType=NODE_NAME.
 
 
 
@@ -91,26 +91,26 @@ Read-Only:
 
 Read-Only:
 
-- `component_instance_name` (String) 组件实例名称。
-- `component_name` (String) 组件名称。
-- `config_file_name` (String) 配置文件名。
-- `config_item_key` (String) 配置项名称。
-- `config_item_value` (String) 配置项值。
-- `deleted` (Boolean) 是否删除。
-- `effective_scope` (Attributes) 影响组件。 (see [below for nested schema](#nestedatt--application_extras--application_configs--effective_scope))
+- `component_instance_name` (String) Component instance name.
+- `component_name` (String) Component name.
+- `config_file_name` (String) Configuration file name.
+- `config_item_key` (String) Configuration item name.
+- `config_item_value` (String) Configuration item value.
+- `deleted` (Boolean) Whether to delete.
+- `effective_scope` (Attributes) Affected component. (see [below for nested schema](#nestedatt--application_extras--application_configs--effective_scope))
 
 <a id="nestedatt--application_extras--application_configs--effective_scope"></a>
 ### Nested Schema for `application_extras.application_configs.effective_scope`
 
 Read-Only:
 
-- `component_names` (Set of String) 组件名列表，当EffectiveType=COMPONENT_NAME，必选。
-- `effective_type` (String) 生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。
-- `node_group_ids` (Set of String) 节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。
-- `node_group_names` (Set of String) 节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。
-- `node_group_types` (Set of String) 节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。
-- `node_ids` (Set of String) 节点ID列表，EffectiveType=NODE_ID时，必选。
-- `node_names` (Set of String) 节点名列表，EffectiveType=NODE_NAME时，必选。
+- `component_names` (Set of String) Component name list. Required when EffectiveType=COMPONENT_NAME.
+- `effective_type` (String) Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.
+- `node_group_ids` (Set of String) Node group ID list. Required when EffectiveType=NODE_GROUP_ID.
+- `node_group_names` (Set of String) Node group name list. Required when EffectiveType=NODE_GROUP_NAME.
+- `node_group_types` (Set of String) Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.
+- `node_ids` (Set of String) Node ID list. Required when EffectiveType=NODE_ID.
+- `node_names` (Set of String) Node name list. Required when EffectiveType=NODE_NAME.
 
 
 
@@ -120,14 +120,14 @@ Read-Only:
 
 Read-Only:
 
-- `application_config_home` (String) 应用配置路径。
-- `application_home` (String) 应用安装路径。
-- `application_name` (String) 应用名称。
-- `application_state` (String) 服务状态。NORMAL：正常；WARNING：告警；STOPPED：已停止；INIT：初始化中；INSTALLING：安装中；INSTALLED：已安装；STARTING：启动中；STARTED：已启动；STOPPING：停止中；UNINSTALLING：卸载中；UNINSTALLED：已卸载；EXCEPTION：异常。
-- `application_version` (String) 应用版本。
-- `group` (String) 应用用户组。
-- `support_client` (Boolean) 是否支持客户端。
-- `user` (String) 应用用户。
+- `application_config_home` (String) Application configuration path.
+- `application_home` (String) Application installation path.
+- `application_name` (String) Application name.
+- `application_state` (String) Service status. NORMAL: normal; WARNING: alert; STOPPED: stopped; INIT: initializing; INSTALLING: installing; INSTALLED: installed; STARTING: starting; STARTED: started; STOPPING: stopping; UNINSTALLING: uninstalling; UNINSTALLED: uninstalled; EXCEPTION: exception.
+- `application_version` (String) Application version.
+- `group` (String) Application user group.
+- `support_client` (Boolean) Whether client is supported.
+- `user` (String) Application user.
 
 
 <a id="nestedatt--bootstrap_scripts"></a>
@@ -135,27 +135,27 @@ Read-Only:
 
 Read-Only:
 
-- `effective_scope` (Attributes) 脚本执行范围。 (see [below for nested schema](#nestedatt--bootstrap_scripts--effective_scope))
-- `execution_fail_strategy` (String) 执行失败策略。取值范围：FAILED_CONTINUE：失败后继续执行其他任务。FAILED_BLOCK：失败后中断，不再继续执行后续任务。当脚本为BOOTSTRAP时，会导致创建集群、扩容节点组操作中断并失败。默认值：FAILED_BLOCK。
-- `execution_moment` (String) 脚本的执行时机。仅scriptType=BOOTSTRAP时生效。BEFORE_APPLICATION_INSTALL：应用安装前。AFTER_APPLICATION_STARTED：应用启动后。默认值：BEFORE_APP_INSTALL
-- `priority` (String) 脚本执行优先级。取值范围：1~1000。默认值1。
-- `script_args` (String) 脚本参数。
-- `script_name` (String) 脚本名称。必填。长度为1~128个字符，必须以大小字母或中文开头，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。
-- `script_path` (String) 脚本所在TOS路径。必填。以 tos:： 开头。
-- `script_type` (String) 脚本类型。NORMAL：普通脚本。BOOTSTRAP：引导脚本。
+- `effective_scope` (Attributes) Script execution scope. (see [below for nested schema](#nestedatt--bootstrap_scripts--effective_scope))
+- `execution_fail_strategy` (String) Execution failure policy. Range: FAILED_CONTINUE: Continue with other tasks after failure. FAILED_BLOCK: Stop and do not execute subsequent tasks after failure. If the script is BOOTSTRAP, this will interrupt and fail cluster creation or node group expansion. Default: FAILED_BLOCK.
+- `execution_moment` (String) Script execution timing. Only effective when scriptType=BOOTSTRAP. BEFORE_APPLICATION_INSTALL: before application installation. AFTER_APPLICATION_STARTED: after application startup. Default: BEFORE_APP_INSTALL.
+- `priority` (String) Script execution priority. Range: 1~1000. Default: 1.
+- `script_args` (String) Script parameters.
+- `script_name` (String) Script name (required). Length: 1–128 characters. Must start with an uppercase or lowercase letter or Chinese character. Cannot start with http: or https:. Can include Chinese, English, numbers, underscores (_), or hyphens (-).
+- `script_path` (String) Script TOS path. Required. Must start with 'tos:'.
+- `script_type` (String) Script type. NORMAL: normal script. BOOTSTRAP: bootstrap script.
 
 <a id="nestedatt--bootstrap_scripts--effective_scope"></a>
 ### Nested Schema for `bootstrap_scripts.effective_scope`
 
 Read-Only:
 
-- `component_names` (Set of String) 组件名列表，当EffectiveType=COMPONENT_NAME，必选。
-- `effective_type` (String) 生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。
-- `node_group_ids` (Set of String) 节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。
-- `node_group_names` (Set of String) 节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。
-- `node_group_types` (Set of String) 节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。
-- `node_ids` (Set of String) 节点ID列表，EffectiveType=NODE_ID时，必选。
-- `node_names` (Set of String) 节点名列表，EffectiveType=NODE_NAME时，必选。
+- `component_names` (Set of String) Component name list. Required when EffectiveType=COMPONENT_NAME.
+- `effective_type` (String) Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.
+- `node_group_ids` (Set of String) Node group ID list. Required when EffectiveType=NODE_GROUP_ID.
+- `node_group_names` (Set of String) Node group name list. Required when EffectiveType=NODE_GROUP_NAME.
+- `node_group_types` (Set of String) Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.
+- `node_ids` (Set of String) Node ID list. Required when EffectiveType=NODE_ID.
+- `node_names` (Set of String) Node name list. Required when EffectiveType=NODE_NAME.
 
 
 
@@ -164,12 +164,12 @@ Read-Only:
 
 Read-Only:
 
-- `auto_renew` (Boolean) 是否开启自动续费。取值范围：true：开启。false：不开启。
-- `auto_renew_period` (Number) 自动续费触发时的续费时长，当AutoRenew=true时，默认值=1。
-- `auto_renew_period_unit` (String) 自动续费触发时的续费时长单位，当AutoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。
-- `charge_period` (Number) chargeType=PRE默认值=1，包月的购买时长单位。
-- `charge_period_unit` (String) chargeType=PRE时，默认值=Month，包月的购买时长单位，取值范围：Month：月。Year：年。
-- `charge_type` (String) 付费类型，取值范围：PRE，POST。
+- `auto_renew` (Boolean) Enable auto-renewal. Options: true (enabled), false (disabled).
+- `auto_renew_period` (Number) Renewal duration when auto-renewal is triggered. When AutoRenew=true, the default value is 1.
+- `auto_renew_period_unit` (String) Renewal duration unit when auto-renewal is triggered. When AutoRenew=true, default is Month. Options: Month, Year.
+- `charge_period` (Number) When chargeType=PRE, default value=1. Unit for monthly subscription duration.
+- `charge_period_unit` (String) When chargeType=PRE, default value=Month. Unit for monthly subscription duration. Range: Month: month. Year: year.
+- `charge_type` (String) Payment type. Options: PRE, POST.
 
 
 <a id="nestedatt--node_attribute"></a>
@@ -177,8 +177,8 @@ Read-Only:
 
 Read-Only:
 
-- `ecs_iam_role` (String) ECS实例角色。
-- `zone_id` (String) 可用区ID。
+- `ecs_iam_role` (String) ECS instance role.
+- `zone_id` (String) Zone ID.
 
 
 <a id="nestedatt--node_group_attributes"></a>
@@ -186,32 +186,32 @@ Read-Only:
 
 Read-Only:
 
-- `bandwidth` (Number) 公网带宽。默认值 8M。后续如果用户侧调整了，emr侧需要同步该信息。
-- `charge_type` (String) 节点组付费类型。为空时，复用集群的chargeType。Master、Core组必须复用集群维度的付费类型。当集群的chargeType为PRE时，task节点组的chargeType允许设置为POST；当集群的chargeType为POST时，节点组的chargeType默认为POST，节点组上的此参数设置无效。
-- `create_time` (Number) 节点组创建时间。
-- `data_disks` (Attributes Set) 数据盘配置。当前单个节点组内只支持同规格的数据盘。即List的长度限制为1。 (see [below for nested schema](#nestedatt--node_group_attributes--data_disks))
-- `ecs_instance_types` (Set of String) 节点组的ecs机型列表。当前只支持设置1个机型。即List的长度限制为1。
-- `ecs_key_pair_name` (String) ecs的密钥对名称。
-- `ecs_password` (String) Ecs root账号的密码。
-- `layout_component_names` (Set of String) 部署的组件名称列表。
-- `node_count` (Number) 节点组当前期望购买的节点数量。
-- `node_group_id` (String) 节点组ID。
-- `node_group_name` (String) 长度为1~128个字符，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。
-- `node_group_state` (String) 节点组状态。RUNNING,运行中。EXTENDING，扩容中。REDUCING，缩容中。DISK_EXTENDING，磁盘扩容中。MODIFYING，变配中
-- `node_group_type` (String) 节点组类型。
-- `subnet_ids` (Set of String) 子网Id列表，目前只能传递一个参数，且各节点组的子网Id都是相同的。
-- `system_disk` (Attributes) 系统盘配置。 (see [below for nested schema](#nestedatt--node_group_attributes--system_disk))
-- `with_public_ip` (Boolean) 是否挂载公网ip。
-- `zone_id` (String) 可用区ID。
+- `bandwidth` (Number) Public bandwidth. Default is 8M. If the user changes it later, EMR needs to synchronize this information.
+- `charge_type` (String) Node group billing type. If empty, reuses the cluster's chargeType. Master and Core groups must reuse the cluster-level billing type. When the cluster's chargeType is PRE, the task node group's chargeType can be set to POST. When the cluster's chargeType is POST, the node group's chargeType defaults to POST, and this parameter setting on the node group is invalid.
+- `create_time` (Number) Node group creation time.
+- `data_disks` (Attributes Set) Data disk configuration. Only disks of the same specification are supported within a single node group. The list length is limited to 1. (see [below for nested schema](#nestedatt--node_group_attributes--data_disks))
+- `ecs_instance_types` (Set of String) Node group's ECS instance type list. Only one instance type can be set. The list length is limited to 1.
+- `ecs_key_pair_name` (String) ECS key pair name.
+- `ecs_password` (String) Password for ECS root account.
+- `layout_component_names` (Set of String) List of deployed component names.
+- `node_count` (Number) Current expected number of nodes to purchase for the node group.
+- `node_group_id` (String) Node group ID.
+- `node_group_name` (String) Length: 1–128 characters. Cannot start with http: or https:. Can include Chinese, English, numbers, underscores (_), or hyphens (-).
+- `node_group_state` (String) Node group status. RUNNING: running. EXTENDING: scaling out. REDUCING: scaling in. DISK_EXTENDING: disk scaling out. MODIFYING: configuration change.
+- `node_group_type` (String) Node group type.
+- `subnet_ids` (Set of String) Subnet ID list. Currently, only one parameter can be passed, and all node groups must use the same subnet ID.
+- `system_disk` (Attributes) System disk configuration. (see [below for nested schema](#nestedatt--node_group_attributes--system_disk))
+- `with_public_ip` (Boolean) Whether to attach public IP.
+- `zone_id` (String) Availability zone ID.
 
 <a id="nestedatt--node_group_attributes--data_disks"></a>
 ### Nested Schema for `node_group_attributes.data_disks`
 
 Read-Only:
 
-- `count` (Number) 磁盘块数，默认值4，最大15，最小1。
-- `size` (Number) 磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。
-- `volume_type` (String) 磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV
+- `count` (Number) Number of disk blocks. Default is 4, maximum is 15, minimum is 1.
+- `size` (Number) Disk size. Default is 80GB, minimum is 60GB, maximum is 2048GB, unit: GB.
+- `volume_type` (String) Disk type. ESSD_PL0: Ultra SSD_PL0. ESSD_PL1: Ultra SSD_PL1. ESSD_PL2: Ultra SSD_PL2. ESSD_PL3: Ultra SSD_PL3. ESSD_FLEXPL: Ultra SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.
 
 
 <a id="nestedatt--node_group_attributes--system_disk"></a>
@@ -219,8 +219,8 @@ Read-Only:
 
 Read-Only:
 
-- `size` (Number) 磁盘大小。
-- `volume_type` (String) 磁盘类型。
+- `size` (Number) Disk size.
+- `volume_type` (String) Disk type.
 
 
 
@@ -229,8 +229,8 @@ Read-Only:
 
 Read-Only:
 
-- `code` (String) 状态更新码。
-- `reason` (String) 状态更新原因。
+- `code` (String) Status update code.
+- `reason` (String) Status update reason.
 
 
 <a id="nestedatt--tags"></a>
@@ -238,5 +238,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.

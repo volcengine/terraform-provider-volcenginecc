@@ -2,12 +2,12 @@
 page_title: "volcenginecc_privatelink_endpoint_service Resource - terraform-provider-volcenginecc"
 subcategory: "PrivateLink"
 description: |-
-  终端节点服务是可以与其他VPC通过终端节点建立私网连接的服务。
+  The endpoint service enables private network connections between VPCs via endpoints.
 ---
 
 # volcenginecc_privatelink_endpoint_service (Resource)
 
-终端节点服务是可以与其他VPC通过终端节点建立私网连接的服务。
+The endpoint service enables private network connections between VPCs via endpoints.
 
 ## Example Usage
 
@@ -42,47 +42,47 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
 
 ### Optional
 
-- `auto_accept_enabled` (Boolean) 是否自动接受终端节点连接。true：终端节点服务自动接受终端节点连接。false：终端节点服务不会自动接受终端节点连接，需要调用EnableVpcEndpointConnection接口手动接受。
-- `description` (String) 终端节点服务的描述信息。
-- `ip_address_versions` (Set of String) 终端节点服务的IP协议类型。返回值中仅包含ipv4时，说明该终端节点服务为IPv4类型，仅支持提供IPv4服务。返回值中同时包含ipv4和ipv6时，说明该终端节点服务为双栈类型，支持同时提供IPv4和IPv6服务。
-- `payer` (String) 私网连接的付费账号。Endpoint：终端节点账号。EndpointService：终端节点服务账号。
-- `private_dns_enabled` (Boolean) 终端节点服务是否启用私有DNS名称。false：未启用。true：已启用。
-- `private_dns_name` (String) 终端节点服务的私有DNS名称。参数PrivateDNSEnabled返回值为false时，该参数返回空。
-- `private_dns_type` (String) 私有DNS名称的域名类型。public：公网。说明未开通自定义私网域名功能时，不返回该参数。
-- `project_name` (String) 终端节点服务所属的项目名称。
-- `resources` (Attributes Set) 终端节点服务提供服务的资源。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resources))
-- `service_name_managed` (String) 是否为托管终端节点服务。false：非托管终端节点服务。true：托管终端节点服务。说明终端节点服务所属账号未开通托管终端节点服务功能时，不返回该参数。
-- `service_name_suffix` (String) 终端节点服务的名称后缀。设置名称后缀后，系统会按照com.volces.privatelink.<地域ID>.<名称后缀>的格式生成终端节点服务的名称。说明该参数正在邀测中，如需使用不同名称后缀区分业务，请联系客户经理。
-- `service_owner` (String) 当前服务主体。
-- `service_resource_type` (String) 服务资源的类型。CLB：负载均衡CLB。ALB：应用型负载均衡ALB。RDSMySQL：云数据库 MySQL版。
-- `service_type` (String) 终端节点服务的类型。Interface：接口终端节点服务。
-- `tags` (Attributes Set) 终端节点服务的标签信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `wildcard_domain_enabled` (Boolean) 是否启用通配符域名。true：启用。false：未启用。
+- `auto_accept_enabled` (Boolean) Whether to automatically accept endpoint connections. true: The endpoint service automatically accepts endpoint connections. false: The endpoint service does not automatically accept endpoint connections; you must manually accept them by calling the EnableVpcEndpointConnection API.
+- `description` (String) Description of the endpoint service.
+- `ip_address_versions` (Set of String) IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.
+- `payer` (String) Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.
+- `private_dns_enabled` (Boolean) Whether the endpoint service enables private DNS name. false: Not enabled. true: Enabled.
+- `private_dns_name` (String) Private DNS name of the endpoint service. If the PrivateDNSEnabled parameter returns false, this parameter is empty.
+- `private_dns_type` (String) Domain name type of the private DNS name. public: public network. Note: If the custom private domain name feature is not enabled, this parameter is not returned.
+- `project_name` (String) Project name to which the endpoint service belongs.
+- `resources` (Attributes Set) Resources provided by the endpoint service.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--resources))
+- `service_name_managed` (String) Whether this is a managed endpoint service. false: not a managed endpoint service. true: managed endpoint service. If the account owning the endpoint service has not enabled managed endpoint service functionality, this parameter is not returned.
+- `service_name_suffix` (String) Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.<region ID>.<name suffix>. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.
+- `service_owner` (String) Current service principal.
+- `service_resource_type` (String) Type of service resource. CLB: Load Balancer CLB. ALB: Application Load Balancer ALB. RDSMySQL: Cloud Database MySQL Edition.
+- `service_type` (String) Type of the endpoint service. Interface: Interface endpoint service.
+- `tags` (Attributes Set) Tag information of the endpoint service.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `wildcard_domain_enabled` (Boolean) Whether to enable wildcard domain name. true: Enabled. false: Not enabled.
 
 ### Read-Only
 
-- `billing_type` (Number) 终端节点服务的计费类型。0：不计费。3：按量计费。
-- `business_status` (String) 终端节点服务是否被锁定。Normal：正常。FinancialLocked：被锁定。说明该参数返回为空时，表示终端节点服务未锁定。
-- `create_time` (String) 终端节点服务的创建时间。
+- `billing_type` (Number) Billing type of the endpoint service. 0: No charge. 3: Pay-as-you-go.
+- `business_status` (String) Whether the endpoint service is locked. Normal: normal. FinancialLocked: locked. If this parameter is empty, the endpoint service is not locked.
+- `create_time` (String) Creation time of the endpoint service.
 - `id` (String) Uniquely identifies the resource.
-- `private_dns_name_configuration` (Attributes) 终端节点服务私有DNS名称的配置信息。说明PrivateDNSType为private时，不返回该参数。 (see [below for nested schema](#nestedatt--private_dns_name_configuration))
-- `service_domain` (String) 终端节点服务的服务域名。
-- `service_id` (String) 终端节点服务的ID。
-- `service_name` (String) 终端节点服务的名称。
-- `status` (String) 终端节点服务的状态。Creating：创建中。Pending：配置修改中。Available：可用。Deleting：删除中。
-- `update_time` (String) 终端节点服务的最近操作时间。
-- `zone_ids` (Set of String) 终端节点服务提供服务的可用区。说明参数ServiceResourceType返回值为RDSMySQL时，该参数返回空值。
+- `private_dns_name_configuration` (Attributes) Configuration information for the private DNS name of the endpoint service. Note: If PrivateDNSType is private, this parameter is not returned. (see [below for nested schema](#nestedatt--private_dns_name_configuration))
+- `service_domain` (String) Service domain name of the endpoint service.
+- `service_id` (String) Endpoint service ID.
+- `service_name` (String) Name of the endpoint service.
+- `status` (String) Status of the endpoint service. Creating: being created. Pending: configuration being modified. Available: available. Deleting: being deleted.
+- `update_time` (String) Most recent operation time of the endpoint service.
+- `zone_ids` (Set of String) Availability zone where the endpoint service provides service. Note: If the ServiceResourceType parameter returns RDSMySQL, this parameter returns an empty value.
 
 <a id="nestedatt--resources"></a>
 ### Nested Schema for `resources`
 
 Optional:
 
-- `instance_id` (String) 终端节点服务ID。
-- `resource_id` (String) 待添加到终端节点服务中的服务资源ID。
-- `zone_ids` (List of String) 负载均衡提供服务的可用区。
+- `instance_id` (String) Endpoint service ID.
+- `resource_id` (String) Service resource ID to be added to the endpoint service.
+- `zone_ids` (List of String) Availability zone where the load balancer provides service.
 
 
 <a id="nestedatt--tags"></a>
@@ -90,8 +90,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 终端节点服务标签的标签键。
-- `value` (String) 终端节点服务标签的标签值。
+- `key` (String) Tag keys for endpoint service tags.
+- `value` (String) Tag value of the endpoint service tag.
 
 
 <a id="nestedatt--private_dns_name_configuration"></a>
@@ -99,10 +99,10 @@ Optional:
 
 Read-Only:
 
-- `name` (String) 域验证名称。
-- `status` (String) 域验证状态。PendingVerification：待验证Verifying：验证中Verified：验证通过Failed：验证失败
-- `type` (String) 域验证类型。TXT：TXT记录。
-- `value` (String) 域验证值。
+- `name` (String) Domain verification name.
+- `status` (String) Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.
+- `type` (String) Domain verification type. TXT: TXT record.
+- `value` (String) Domain verification value.
 
 ## Import
 

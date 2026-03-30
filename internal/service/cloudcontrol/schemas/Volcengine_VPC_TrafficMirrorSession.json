@@ -7,14 +7,14 @@
   ],
   "definitions": {
     "Tag": {
-      "description": "标签信息。",
+      "description": "Tag information",
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value",
           "type": "string"
         }
       },
@@ -24,7 +24,7 @@
       "type": "object"
     }
   },
-  "description": "镜像会话关联镜像源、镜像目的、筛选条件，使从镜像源复制的流量私网转发到镜像目的，是流量镜像的载体。",
+  "description": "The mirror session links the mirror source, mirror destination, and filter conditions, enabling private network forwarding of traffic copied from the mirror source to the mirror destination. It serves as the carrier for traffic mirroring",
   "filterProperties": {
     "filterableProperties": [
       "/properties/NetworkInterfaceId",
@@ -77,49 +77,49 @@
   ],
   "properties": {
     "BusinessStatus": {
-      "description": "会话计费状态。Normal：正常计费中。- FinancialLocked：欠费锁定。",
+      "description": "Session billing status. Normal: Billing in progress. - FinancialLocked: Locked due to overdue payment",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "镜像会话实例描述。",
+      "description": "Mirror session instance description",
       "semantic": "description",
       "type": "string"
     },
     "LockReason": {
-      "description": "锁定原因。",
+      "description": "Lock reason",
       "type": "string"
     },
     "NetworkInterfaceId": {
-      "description": "镜像源实例ID，当前只支持ECS的主网卡和辅助网卡。",
+      "description": "Mirror source instance ID. Currently, only ECS primary and secondary network interfaces are supported",
       "type": "string"
     },
     "PacketLength": {
-      "description": "镜像会话MTU，超过被截断，取值范围：64～9600。",
+      "description": "Mirror session MTU. Values exceeding this will be truncated. Range: 64–9600",
       "format": "int64",
       "type": "integer"
     },
     "Priority": {
-      "description": "镜像会话优先级，取值范围1 ～ 32766，同一账户下镜像会话优先级不能重复。",
+      "description": "Mirror session priority. Range: 1–32766. Priority values must be unique within the same account",
       "format": "int64",
       "type": "integer"
     },
     "ProjectName": {
-      "description": "所属项目的名称",
+      "description": "Name of the associated project",
       "semantic": "projectName",
       "type": "string"
     },
     "Status": {
-      "description": "会话状态。",
+      "description": "Session status",
       "semantic": "status",
       "type": "string"
     },
     "Tags": {
-      "description": "标签信息。",
+      "description": "Tag information",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -129,21 +129,21 @@
       "uniqueItems": true
     },
     "TrafficMirrorFilterId": {
-      "description": "筛选条件实例ID。",
+      "description": "Filter condition instance ID",
       "type": "string"
     },
     "TrafficMirrorSessionId": {
-      "description": "镜像会话实例ID。",
+      "description": "Mirror session instance ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "TrafficMirrorSessionName": {
-      "description": "镜像会话名称。",
+      "description": "Mirror session name",
       "semantic": "resourceName",
       "type": "string"
     },
     "TrafficMirrorSourceIds": {
-      "description": "镜像源实例列表。",
+      "description": "Mirror source instance list",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -152,11 +152,11 @@
       "uniqueItems": true
     },
     "TrafficMirrorTargetId": {
-      "description": "镜像目的实例ID。",
+      "description": "Mirror destination instance ID",
       "type": "string"
     },
     "VirtualNetworkId": {
-      "description": "镜像会话VNI，取值范围1 ～ 16777215。",
+      "description": "Mirror session VNI. Range: 1–16777215",
       "format": "int64",
       "type": "integer"
     }

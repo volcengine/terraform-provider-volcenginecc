@@ -2,12 +2,12 @@
 page_title: "volcenginecc_iam_policy Resource - terraform-provider-volcenginecc"
 subcategory: "IAM"
 description: |-
-  策略是对权限的一种描述，IAM用户、用户组或角色均需通过关联策略来赋予权限。当系统预设策略不能满足要求时，您可以创建自定义策略，对权限进行细粒度的定义。
+  A policy describes permissions. IAM users, user groups, or roles must be granted permissions by associating policies. If system preset policies do not meet your requirements, you can create custom policies for fine-grained permission definition.
 ---
 
 # volcenginecc_iam_policy (Resource)
 
-策略是对权限的一种描述，IAM用户、用户组或角色均需通过关联策略来赋予权限。当系统预设策略不能满足要求时，您可以创建自定义策略，对权限进行细粒度的定义。
+A policy describes permissions. IAM users, user groups, or roles must be granted permissions by associating policies. If system preset policies do not meet your requirements, you can create custom policies for fine-grained permission definition.
 
 ## Example Usage
 
@@ -57,45 +57,45 @@ resource "volcenginecc_iam_policy" "PolicyDemo" {
 
 ### Required
 
-- `policy_document` (String) 策略语法内容，例如：{"Statement":[{"Effect":"Allow","Action":["iam:","tag:"],"Resource":["*"]}]}
-- `policy_name` (String) 策略名，长度1~64，支持英文、数字和+=,.@-_符号。
-- `policy_type` (String) 策略类型。System代表系统预设策略，Custom代表自定义策略。
+- `policy_document` (String) Policy syntax content, for example: {"Statement":[{"Effect":"Allow","Action":["iam:","tag:"],"Resource":["*"]}]}
+- `policy_name` (String) Policy name, 1–64 characters. Supports English letters, numbers, and +=,.@-_ symbols.
+- `policy_type` (String) Policy type. System indicates a system preset policy; Custom indicates a custom policy.
 
 ### Optional
 
-- `description` (String) 策略描述，长度不超过128。
-- `policy_roles` (Attributes Set) 策略绑定的角色列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--policy_roles))
-- `policy_user_groups` (Attributes Set) 策略绑定的用户组列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--policy_user_groups))
-- `policy_users` (Attributes Set) 策略绑定的用户列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--policy_users))
+- `description` (String) Policy description, no more than 128 characters.
+- `policy_roles` (Attributes Set) List of roles bound to the policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policy_roles))
+- `policy_user_groups` (Attributes Set) List of user groups bound to the policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policy_user_groups))
+- `policy_users` (Attributes Set) List of users bound to the policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policy_users))
 
 ### Read-Only
 
-- `attachment_count` (Number) 策略绑定的身份数量。
-- `category` (String) 系统预设策略所属的分类，通常为服务代码，对于自定义策略该字段不会返回值。
-- `created_time` (String) 策略创建时间。
+- `attachment_count` (Number) Number of identities bound to the policy.
+- `category` (String) Category of the system preset policy, usually the service code. This field is not returned for custom policies.
+- `created_time` (String) Policy creation time.
 - `id` (String) Uniquely identifies the resource.
-- `is_service_role_policy` (Number) 是否是服务关联角色的策略，0代表否，1代表是。
-- `policy_trn` (String) 策略的TRN。
-- `updated_time` (String) 策略更新时间。
+- `is_service_role_policy` (Number) Indicates whether the policy is for a service-linked role. 0 means no; 1 means yes.
+- `policy_trn` (String) Policy TRN.
+- `updated_time` (String) Policy update time.
 
 <a id="nestedatt--policy_roles"></a>
 ### Nested Schema for `policy_roles`
 
 Optional:
 
-- `name` (String) 对应用户、角色、用户组的名称。
-- `policy_scope` (Attributes Set) 策略绑定的项目列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--policy_roles--policy_scope))
+- `name` (String) Name of the corresponding user, role, or user group.
+- `policy_scope` (Attributes Set) List of projects bound to the policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policy_roles--policy_scope))
 
 <a id="nestedatt--policy_roles--policy_scope"></a>
 ### Nested Schema for `policy_roles.policy_scope`
 
 Optional:
 
-- `project_name` (String) 项目名。
+- `project_name` (String) Project name.
 
 
 
@@ -104,16 +104,16 @@ Optional:
 
 Optional:
 
-- `name` (String) 对应用户、角色、用户组的名称。
-- `policy_scope` (Attributes Set) 策略绑定的项目列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--policy_user_groups--policy_scope))
+- `name` (String) Name of the corresponding user, role, or user group.
+- `policy_scope` (Attributes Set) List of projects bound to the policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policy_user_groups--policy_scope))
 
 <a id="nestedatt--policy_user_groups--policy_scope"></a>
 ### Nested Schema for `policy_user_groups.policy_scope`
 
 Optional:
 
-- `project_name` (String) 项目名。
+- `project_name` (String) Project name.
 
 
 
@@ -122,16 +122,16 @@ Optional:
 
 Optional:
 
-- `name` (String) 对应用户、角色、用户组的名称。
-- `policy_scope` (Attributes Set) 策略绑定的项目列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--policy_users--policy_scope))
+- `name` (String) Name of the corresponding user, role, or user group.
+- `policy_scope` (Attributes Set) List of projects bound to the policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policy_users--policy_scope))
 
 <a id="nestedatt--policy_users--policy_scope"></a>
 ### Nested Schema for `policy_users.policy_scope`
 
 Optional:
 
-- `project_name` (String) 项目名。
+- `project_name` (String) Project name.
 
 ## Import
 

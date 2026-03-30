@@ -21,24 +21,24 @@ Data Source schema for Volcengine::CLB::Certificate
 
 ### Read-Only
 
-- `certificate_id` (String) 证书的ID。
-- `certificate_name` (String) 证书的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 128个字符。
-- `created_time` (String) 证书的创建时间。
-- `description` (String) 证书的描述，默认值为空字符串。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。
-- `domain_name` (String) 证书的主域名。
-- `expired_at` (String) 证书的过期时间。
-- `listeners` (Set of String) 证书关联的监听器的ID。
-- `private_key` (String) 证书的私钥。
-- `project_name` (String) 证书所属项目的名称。不填默认为default。
-- `public_key` (String) 证书的公钥。
-- `service_managed` (Boolean) 是否为托管资源。true：托管资源。false：非托管资源。
-- `subject_alternative_names` (Set of String) 证书的备用域名列表。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
+- `certificate_id` (String) Certificate ID.
+- `certificate_name` (String) Certificate name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters.
+- `created_time` (String) Certificate creation time.
+- `description` (String) Certificate description. Default value is an empty string. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters.
+- `domain_name` (String) Certificate primary domain name.
+- `expired_at` (String) Certificate expiration time.
+- `listeners` (Set of String) ID of the listener associated with the certificate.
+- `private_key` (String) Certificate private key.
+- `project_name` (String) Name of the project the certificate belongs to. If not specified, defaults to 'default'.
+- `public_key` (String) Certificate public key.
+- `service_managed` (Boolean) Managed resource status. true: managed resource. false: unmanaged resource.
+- `subject_alternative_names` (Set of String) List of alternate domain names for the certificate.
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.

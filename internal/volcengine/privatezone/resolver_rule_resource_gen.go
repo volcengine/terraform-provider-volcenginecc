@@ -36,11 +36,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的创建时间",
+		//	  "description": "Creation time of the forwarding rule",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的创建时间",
+			Description: "Creation time of the forwarding rule",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -50,11 +50,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则是否被启用。true：启用。false：禁用。",
+		//	  "description": "Whether the forwarding rule is enabled. true: enabled. false: disabled",
 		//	  "type": "boolean"
 		//	}
 		"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则是否被启用。true：启用。false：禁用。",
+			Description: "Whether the forwarding rule is enabled. true: enabled. false: disabled",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -64,11 +64,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点的 ID。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。",
+		//	  "description": "Endpoint ID. This parameter is only valid and required when the Type parameter is OUTBOUND",
 		//	  "type": "integer"
 		//	}
 		"endpoint_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "终端节点的 ID。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。",
+			Description: "Endpoint ID. This parameter is only valid and required when the Type parameter is OUTBOUND",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -80,16 +80,16 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "外部的 DNS 服务器的 IP 地址和端口。您最多只能添加 10 个 IP 地址。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。",
+		//	  "description": "IP address and port of the external DNS server. You can add up to 10 IP addresses. This parameter is only valid and required when the Type parameter is OUTBOUND",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "IP": {
-		//	        "description": "VPC 外部的 DNS 服务器的 IP 地址。",
+		//	        "description": "IP address of the external DNS server for the VPC",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "VPC 外部的 DNS 服务器的端口。",
+		//	        "description": "Port of the external DNS server for the VPC",
 		//	        "type": "integer"
 		//	      }
 		//	    },
@@ -103,7 +103,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: IP
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC 外部的 DNS 服务器的 IP 地址。",
+						Description: "IP address of the external DNS server for the VPC",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -112,7 +112,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "VPC 外部的 DNS 服务器的端口。",
+						Description: "Port of the external DNS server for the VPC",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -121,7 +121,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "外部的 DNS 服务器的 IP 地址和端口。您最多只能添加 10 个 IP 地址。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "IP address and port of the external DNS server. You can add up to 10 IP addresses. This parameter is only valid and required when the Type parameter is OUTBOUND\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -132,11 +132,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最近一次更新转发规则的账号的 ID",
+		//	  "description": "Account ID of the last update to the forwarding rule",
 		//	  "type": "string"
 		//	}
 		"last_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "最近一次更新转发规则的账号的 ID",
+			Description: "Account ID of the last update to the forwarding rule",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -146,7 +146,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "递归 DNS 服务器的出口 IP 地址的运营商。该参数仅在 Type 参数是 LINE 时有效。支持的取值：移动：中国移动，电信：中国电信，联通：中国联通",
+		//	  "description": "Carrier for the outbound IP address of the recursive DNS server. This parameter is only valid when the Type parameter is LINE. Supported values: Mobile: China Mobile, Telecom: China Telecom, Unicom: China Unicom",
 		//	  "enum": [
 		//	    "移动",
 		//	    "电信",
@@ -155,7 +155,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"line": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "递归 DNS 服务器的出口 IP 地址的运营商。该参数仅在 Type 参数是 LINE 时有效。支持的取值：移动：中国移动，电信：中国电信，联通：中国联通",
+			Description: "Carrier for the outbound IP address of the recursive DNS server. This parameter is only valid when the Type parameter is LINE. Supported values: Mobile: China Mobile, Telecom: China Telecom, Unicom: China Unicom",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -173,11 +173,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的名称。支持 UTF-8 格式。",
+		//	  "description": "Name of the forwarding rule. Supports UTF-8 format",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的名称。支持 UTF-8 格式。",
+			Description: "Name of the forwarding rule. Supports UTF-8 format",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -185,11 +185,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "转发规则所属的项目名称。默认为 default。",
+		//	  "description": "Project name associated with the forwarding rule. Default is default",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则所属的项目名称。默认为 default。",
+			Description: "Project name associated with the forwarding rule. Default is default",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -202,11 +202,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的 ID。",
+		//	  "description": "Forwarding rule ID",
 		//	  "type": "string"
 		//	}
 		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的 ID。",
+			Description: "Forwarding rule ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -216,18 +216,18 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则所属的一个或多个标签",
+		//	  "description": "One or more tags associated with the forwarding rule",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "Tag key for the user tag",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "Tag value for the user tag",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -247,7 +247,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "Tag key for the user tag",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -260,7 +260,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "Tag value for the user tag",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -272,7 +272,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "转发规则所属的一个或多个标签\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "One or more tags associated with the forwarding rule\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -286,7 +286,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则类型。OUTBOUND：转发到外部的 DNS 服务器。LINE：自定义公网递归 DNS 服务器的出口 IP 地址的运营商。",
+		//	  "description": "Forwarding rule type. OUTBOUND: Forward to external DNS server. LINE: Carrier for the outbound IP address of the custom public recursive DNS server",
 		//	  "enum": [
 		//	    "OUTBOUND",
 		//	    "LINE"
@@ -294,7 +294,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则类型。OUTBOUND：转发到外部的 DNS 服务器。LINE：自定义公网递归 DNS 服务器的出口 IP 地址的运营商。",
+			Description: "Forwarding rule type. OUTBOUND: Forward to external DNS server. LINE: Carrier for the outbound IP address of the custom public recursive DNS server",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -310,11 +310,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的更新时间",
+		//	  "description": "Update time of the forwarding rule",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的更新时间",
+			Description: "Update time of the forwarding rule",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -324,24 +324,24 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则所关联的 VPC。转发规则在关联的 VPC 中生效。Type 参数是 OUTBOUND 时，VPC 的地域必须和终端节点所在的地域相同。",
+		//	  "description": "VPC associated with the forwarding rule. The forwarding rule takes effect in the associated VPC. When the Type parameter is OUTBOUND, the VPC region must match the region of the endpoint",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccountID": {
-		//	        "description": "创建该 VPC 的账号 ID。",
+		//	        "description": "Account ID that created the VPC",
 		//	        "type": "string"
 		//	      },
 		//	      "Region": {
-		//	        "description": "VPC 的地域。",
+		//	        "description": "Region of the VPC",
 		//	        "type": "string"
 		//	      },
 		//	      "RegionName": {
-		//	        "description": "VPC 的地域的名称。",
+		//	        "description": "Name of the VPC region",
 		//	        "type": "string"
 		//	      },
 		//	      "VpcId": {
-		//	        "description": "VPC 的 ID。",
+		//	        "description": "VPC ID",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -356,7 +356,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AccountID
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC 的地域。",
+						Description: "Region of the VPC",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -366,7 +366,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: RegionName
 					// Property: VpcId
 					"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC 的 ID。",
+						Description: "VPC ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -375,7 +375,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "转发规则所关联的 VPC。转发规则在关联的 VPC 中生效。Type 参数是 OUTBOUND 时，VPC 的地域必须和终端节点所在的地域相同。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "VPC associated with the forwarding rule. The forwarding rule takes effect in the associated VPC. When the Type parameter is OUTBOUND, the VPC region must match the region of the endpoint\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -386,11 +386,11 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则转发规则所关联的域名。您可以输入一个或多个域名。多个域名之间使用英文逗号, 分隔。最多支持输入 500 个域名。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。如果您把该参数设置为 *，则转发规则适用于 VPC 关联的所有域名。",
+		//	  "description": "Domain name(s) associated with the forwarding rule. You can enter one or more domain names. Separate multiple domain names with English commas. Up to 500 domain names are supported. This parameter is only valid and required when the Type parameter is OUTBOUND. If you set this parameter to *, the forwarding rule applies to all domain names associated with the VPC",
 		//	  "type": "string"
 		//	}
 		"zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则转发规则所关联的域名。您可以输入一个或多个域名。多个域名之间使用英文逗号, 分隔。最多支持输入 500 个域名。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。如果您把该参数设置为 *，则转发规则适用于 VPC 关联的所有域名。",
+			Description: "Domain name(s) associated with the forwarding rule. You can enter one or more domain names. Separate multiple domain names with English commas. Up to 500 domain names are supported. This parameter is only valid and required when the Type parameter is OUTBOUND. If you set this parameter to *, the forwarding rule applies to all domain names associated with the VPC",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -410,7 +410,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "转发规则详细信息",
+		Description: "Forwarding rule details",
 		Version:     1,
 		Attributes:  attributes,
 	}

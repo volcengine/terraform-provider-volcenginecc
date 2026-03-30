@@ -26,10 +26,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "缓存型性能信息。",
+		//	  "description": "Cache performance information",
 		//	  "properties": {
 		//	    "CacheBandwidth": {
-		//	      "description": "预配置带宽，用于增加文件系统带宽。",
+		//	      "description": "Provisioned bandwidth, used to increase file system bandwidth",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -39,25 +39,25 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CacheBandwidth
 				"cache_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "预配置带宽，用于增加文件系统带宽。",
+					Description: "Provisioned bandwidth, used to increase file system bandwidth",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "缓存型性能信息。",
+			Description: "Cache performance information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Capacity
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统容量。",
+		//	  "description": "File system capacity",
 		//	  "properties": {
 		//	    "Total": {
-		//	      "description": "文件系统可用总容量，单位为 GiB。",
+		//	      "description": "Total available file system capacity, in GiB",
 		//	      "type": "number"
 		//	    },
 		//	    "Used": {
-		//	      "description": "文件系统已使用容量，单位为 MiB。",
+		//	      "description": "Used file system capacity, in MiB",
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -70,78 +70,78 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Total
 				"total": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "文件系统可用总容量，单位为 GiB。",
+					Description: "Total available file system capacity, in GiB",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Used
 				"used": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "文件系统已使用容量，单位为 MiB。",
+					Description: "Used file system capacity, in MiB",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "文件系统容量。",
+			Description: "File system capacity",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费类型，取值 PayAsYouGo，表示按量计费。",
+		//	  "description": "Billing type. Value: PayAsYouGo, indicates pay-as-you-go billing",
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计费类型，取值 PayAsYouGo，表示按量计费。",
+			Description: "Billing type. Value: PayAsYouGo, indicates pay-as-you-go billing",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间",
+			Description: "Creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述信息。",
+		//	  "description": "Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述信息。",
+			Description: "Description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统 ID。",
+		//	  "description": "File system ID",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统 ID。",
+			Description: "File system ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统名称。",
+		//	  "description": "File system name",
 		//	  "type": "string"
 		//	}
 		"file_system_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统名称。",
+			Description: "File system name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统类型。取值说明：Extreme：NAS 极速型；Capacity：NAS 容量型；Cache：NAS 缓存型。",
+		//	  "description": "File system type. Possible values: Extreme: NAS Extreme type; Capacity: NAS Capacity type; Cache: NAS Cache type",
 		//	  "enum": [
 		//	    "Extreme",
 		//	    "Capacity",
@@ -150,58 +150,58 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"file_system_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统类型。取值说明：Extreme：NAS 极速型；Capacity：NAS 容量型；Cache：NAS 缓存型。",
+			Description: "File system type. Possible values: Extreme: NAS Extreme type; Capacity: NAS Capacity type; Cache: NAS Cache type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "所属项目，默认值为 default 项目。",
+		//	  "description": "Project, default value is the Default project",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "所属项目，默认值为 default 项目。",
+			Description: "Project, default value is the Default project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProtocolType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统协议类型。取值 NFS，表示 NFS 协议，常用于 Linux 客户端。",
+		//	  "description": "File system protocol type. Value: NFS, indicates NFS protocol, commonly used for Linux clients",
 		//	  "type": "string"
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统协议类型。取值 NFS，表示 NFS 协议，常用于 Linux 客户端。",
+			Description: "File system protocol type. Value: NFS, indicates NFS protocol, commonly used for Linux clients",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照数量",
+		//	  "description": "Number of snapshots",
 		//	  "type": "integer"
 		//	}
 		"snapshot_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "快照数量",
+			Description: "Number of snapshots",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。",
+		//	  "description": "Snapshot ID used at creation. If this parameter is provided, the file system will be created from the snapshot",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。",
+			Description: "Snapshot ID used at creation. If this parameter is provided, the file system will be created from the snapshot",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
+		//	  "description": "File system status. Possible values: Unknown: Status unknown. Running: File system running. Creating: File system being created. Expanding: File system being upgraded. Error: File system error. Deleting: File system being deleted. DeleteError: File system deletion failed. Deleted: File system deleted. Stopped: File system stopped.",
 		//	  "enum": [
 		//	    "Unknown",
 		//	    "Running",
@@ -216,39 +216,39 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
+			Description: "File system status. Possible values: Unknown: Status unknown. Running: File system running. Creating: File system being created. Expanding: File system being upgraded. Error: File system error. Deleting: File system being deleted. DeleteError: File system deletion failed. Deleted: File system deleted. Stopped: File system stopped.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储类型，取值Standard，表示标准型。",
+		//	  "description": "Storage type. Value: Standard, indicates standard type",
 		//	  "type": "string"
 		//	}
 		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储类型，取值Standard，表示标准型。",
+			Description: "Storage type. Value: Standard, indicates standard type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统的标签信息",
+		//	  "description": "File system tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "资源标签。",
+		//	    "description": "Resource tags",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "标签类型。",
+		//	        "description": "Tag type",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -265,55 +265,55 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签类型。",
+						Description: "Tag type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "文件系统的标签信息",
+			Description: "File system tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间",
+			Description: "Update time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability Zone ID",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability Zone ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区名称。",
+		//	  "description": "Availability Zone name",
 		//	  "type": "string"
 		//	}
 		"zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区名称。",
+			Description: "Availability Zone name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

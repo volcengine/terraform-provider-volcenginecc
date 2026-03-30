@@ -40,11 +40,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源创建时间(UTC时间)",
+		//	  "description": "Resource creation time (UTC)",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源创建时间(UTC时间)",
+			Description: "Resource creation time (UTC)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -54,20 +54,20 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP。",
+		//	  "description": "Public IP.",
 		//	  "properties": {
 		//	    "Bandwidth": {
-		//	      "description": "公网IP的带宽峰值，默认为1，单位：Mbps。取值：当Eip.BillingType取值为PostPaidByBandwidth时，取值为1 ～ 500。当Eip.BillingType取值为PostPaidByTraffic时，取值为1 ～ 200。",
+		//	      "description": "Peak bandwidth for the public IP. Default is 1, unit: Mbps. Value: When Eip.BillingType is set to PostPaidByBandwidth, the value is 1–500. When Eip.BillingType is set to PostPaidByTraffic, the value is 1–200.",
 		//	      "maximum": 500,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "BandwidthPackageId": {
-		//	      "description": "共享带宽包的ID，表示将公网IP加入到共享带宽包。 您可以调用 DescribeBandwidthPackages 接口，查询共享带宽包的ID。 公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的线路类型相同。共享带宽包为IPv4类型。",
+		//	      "description": "ID of the shared bandwidth package, indicating that the public IP will be added to the shared bandwidth package. You can call the DescribeBandwidthPackages API to query the shared bandwidth package ID. The public IP can be added to the shared bandwidth package only if the following conditions are met: Both have the same security protection type. Both have the same line type. The shared bandwidth package is IPv4 type.",
 		//	      "type": "string"
 		//	    },
 		//	    "BillingType": {
-		//	      "description": "公网IP的计费类型，取值：PostPaidByBandwidth（默认）：按量计费-按带宽上限计费。PostPaidByTraffic：按量计费-按实际流量计费。",
+		//	      "description": "Billing type for public IP. Options: PostPaidByBandwidth (default): Pay-as-you-go, billed by bandwidth cap. PostPaidByTraffic: Pay-as-you-go, billed by actual traffic.",
 		//	      "enum": [
 		//	        "PostPaidByBandwidth",
 		//	        "PostPaidByTraffic"
@@ -75,7 +75,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	      "type": "string"
 		//	    },
 		//	    "ISP": {
-		//	      "description": "线路类型，取值：BGP（默认）：BGP线路。若您的账号已申请使用静态单线，ISP还可以传入ChinaMobile（表示中国移动）、ChinaTelecom（表示中国电信）、ChinaUnicom（表示中国联通）。",
+		//	      "description": "Line type. Values: BGP (default): BGP line. If your account has applied for static single line, ISP can also be set to ChinaMobile (China Mobile), ChinaTelecom (China Telecom), or ChinaUnicom (China Unicom).",
 		//	      "enum": [
 		//	        "BGP",
 		//	        "ChinaMobile",
@@ -85,7 +85,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	      "type": "string"
 		//	    },
 		//	    "ReleaseWithInstance": {
-		//	      "description": "公网IP是否随实例删除。仅按量计费公网IP且在ECS控制台删除实例时生效，在伸缩组中删除实例后公网IP的保留情况请参见实例管理中的详细说明。取值：true：公网IP随实例删除。false：公网IP不随实例删除。",
+		//	      "description": "Whether the public IP is deleted along with the instance. This applies only to pay-as-you-go public IPs and takes effect when deleting the instance in the ECS console. For retention details after deleting an instance in a scaling group, see the detailed instructions in instance management. Values: true: The public IP is deleted with the instance. false: The public IP is not deleted with the instance",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -95,7 +95,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bandwidth
 				"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的带宽峰值，默认为1，单位：Mbps。取值：当Eip.BillingType取值为PostPaidByBandwidth时，取值为1 ～ 500。当Eip.BillingType取值为PostPaidByTraffic时，取值为1 ～ 200。",
+					Description: "Peak bandwidth for the public IP. Default is 1, unit: Mbps. Value: When Eip.BillingType is set to PostPaidByBandwidth, the value is 1–500. When Eip.BillingType is set to PostPaidByTraffic, the value is 1–200.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -107,7 +107,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				}, /*END ATTRIBUTE*/
 				// Property: BandwidthPackageId
 				"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "共享带宽包的ID，表示将公网IP加入到共享带宽包。 您可以调用 DescribeBandwidthPackages 接口，查询共享带宽包的ID。 公网IP加入到共享带宽包必须同时满足如下条件：二者的安全防护类型相同。二者的线路类型相同。共享带宽包为IPv4类型。",
+					Description: "ID of the shared bandwidth package, indicating that the public IP will be added to the shared bandwidth package. You can call the DescribeBandwidthPackages API to query the shared bandwidth package ID. The public IP can be added to the shared bandwidth package only if the following conditions are met: Both have the same security protection type. Both have the same line type. The shared bandwidth package is IPv4 type.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -116,7 +116,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				}, /*END ATTRIBUTE*/
 				// Property: BillingType
 				"billing_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的计费类型，取值：PostPaidByBandwidth（默认）：按量计费-按带宽上限计费。PostPaidByTraffic：按量计费-按实际流量计费。",
+					Description: "Billing type for public IP. Options: PostPaidByBandwidth (default): Pay-as-you-go, billed by bandwidth cap. PostPaidByTraffic: Pay-as-you-go, billed by actual traffic.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -131,7 +131,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
 				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "线路类型，取值：BGP（默认）：BGP线路。若您的账号已申请使用静态单线，ISP还可以传入ChinaMobile（表示中国移动）、ChinaTelecom（表示中国电信）、ChinaUnicom（表示中国联通）。",
+					Description: "Line type. Values: BGP (default): BGP line. If your account has applied for static single line, ISP can also be set to ChinaMobile (China Mobile), ChinaTelecom (China Telecom), or ChinaUnicom (China Unicom).",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -148,7 +148,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				}, /*END ATTRIBUTE*/
 				// Property: ReleaseWithInstance
 				"release_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "公网IP是否随实例删除。仅按量计费公网IP且在ECS控制台删除实例时生效，在伸缩组中删除实例后公网IP的保留情况请参见实例管理中的详细说明。取值：true：公网IP随实例删除。false：公网IP不随实例删除。",
+					Description: "Whether the public IP is deleted along with the instance. This applies only to pay-as-you-go public IPs and takes effect when deleting the instance in the ECS console. For retention details after deleting an instance in a scaling group, see the detailed instructions in instance management. Values: true: The public IP is deleted with the instance. false: The public IP is not deleted with the instance",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -156,7 +156,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "公网IP。",
+			Description: "Public IP.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -167,11 +167,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的主机名。取值：Linux实例允许使用点号分隔字符成多段，每段中允许使用字母、数字或中划线“-”。不能以点号“.”或中划线“-”开头或结尾，且不能连续使用点号“.”或中划线“-”。Linux系统的主机名长度限制为2～63个字符。Windows实例允许使用字母、数字或中划线“-”，不能完全是数字。不能以中划线“-”开头或结尾，且不能连续使用中划线“-”。Windows系统的主机名长度限制在2～15个字符。如不填，则遵循以下规则自动生成：结构：iv- + 初始主机名，例如iv-3tigy72q3u3vj0******。已创建实例保持原主机名生成逻辑，不随实例重启发生变化。初始主机名生成逻辑：Linux：提取实例IDi-之后的全部字符。Windows：提取实例IDi-之后的后12位字符。",
+		//	  "description": "Instance hostname. Value: Linux instances allow periods to separate segments; each segment can contain letters, digits, or hyphens '-'. Cannot start or end with a period '.' or hyphen '-', and periods or hyphens cannot be used consecutively. Linux hostnames must be 2–63 characters long. Windows instances allow letters, digits, or hyphens '-', but cannot be entirely numeric. Cannot start or end with a hyphen '-', and hyphens cannot be used consecutively. Windows hostnames must be 2–15 characters long. If not specified, the hostname is automatically generated as follows: Structure: iv- + initial hostname, for example iv-3tigy72q3u3vj0******. Created instances retain the original hostname generation logic and do not change upon instance restart. Initial hostname generation logic: Linux: extracts all characters after instance ID 'i-'. Windows: extracts the last 12 characters after instance ID 'i-'",
 		//	  "type": "string"
 		//	}
 		"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的主机名。取值：Linux实例允许使用点号分隔字符成多段，每段中允许使用字母、数字或中划线“-”。不能以点号“.”或中划线“-”开头或结尾，且不能连续使用点号“.”或中划线“-”。Linux系统的主机名长度限制为2～63个字符。Windows实例允许使用字母、数字或中划线“-”，不能完全是数字。不能以中划线“-”开头或结尾，且不能连续使用中划线“-”。Windows系统的主机名长度限制在2～15个字符。如不填，则遵循以下规则自动生成：结构：iv  - + 初始主机名，例如iv-3tigy72q3u3vj0******。已创建实例保持原主机名生成逻辑，不随实例重启发生变化。初始主机名生成逻辑：Linux：提取实例IDi-之后的全部字符。Windows：提取实例IDi-之后的后12位字符。",
+			Description: "Instance hostname. Value: Linux instances allow periods to separate segments; each segment can contain letters, digits, or hyphens '-'. Cannot start or end with a period '.' or hyphen '-', and periods or hyphens cannot be used consecutively. Linux hostnames must be 2–63 characters long. Windows instances allow letters, digits, or hyphens '-', but cannot be entirely numeric. Cannot start or end with a hyphen '-', and hyphens cannot be used consecutively. Windows hostnames must be 2–15 characters long. If not specified, the hostname is automatically generated as follows: Structure: iv  - + initial hostname, for example iv-3tigy72q3u3vj0******. Created instances retain the original hostname generation logic and do not change upon instance restart. Initial hostname generation logic: Linux: extracts all characters after instance ID 'i-'. Windows: extracts the last 12 characters after instance ID 'i-'",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -182,11 +182,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的高性能计算集群的ID。仅当InstanceTypes.N指定为“高性能计算GPU型”时有效。",
+		//	  "description": "ID of the high-performance computing cluster to which the instance belongs. Only valid when InstanceTypes.N is specified as 'High-Performance Computing GPU'.",
 		//	  "type": "string"
 		//	}
 		"hpc_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的高性能计算集群的ID。仅当InstanceTypes.N指定为“高性能计算GPU型”时有效。",
+			Description: "ID of the high-performance computing cluster to which the instance belongs. Only valid when InstanceTypes.N is specified as 'High-Performance Computing GPU'.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -197,11 +197,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像ID，伸缩组自动创建实例时使用的镜像资源。",
+		//	  "description": "Image ID. The image resource used when the scaling group automatically creates an instance",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像ID，伸缩组自动创建实例时使用的镜像资源。",
+			Description: "Image ID. The image resource used when the scaling group automatically creates an instance",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -212,7 +212,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例计费类型。取值：PrePaid（包年包月）/PostPaid（按量付费）",
+		//	  "description": "Instance billing type. Values: PrePaid (subscription) / PostPaid (pay-as-you-go)",
 		//	  "enum": [
 		//	    "PrePaid",
 		//	    "PostPaid"
@@ -220,7 +220,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "string"
 		//	}
 		"instance_charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例计费类型。取值：PrePaid（包年包月）/PostPaid（按量付费）",
+			Description: "Instance billing type. Values: PrePaid (subscription) / PostPaid (pay-as-you-go)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -230,11 +230,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的描述，取值：不能以数字、中划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0 ~ 255之间。不填默认为空字符串。",
+		//	  "description": "Instance description. Value: Cannot start with a digit or hyphen. Only Chinese characters, letters, digits, underscores, and hyphens are allowed. Length must be between 0 and 255 characters. If not specified, defaults to an empty string",
 		//	  "type": "string"
 		//	}
 		"instance_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的描述，取值：不能以数字、中划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0 ~ 255之间。不填默认为空字符串。",
+			Description: "Instance description. Value: Cannot start with a digit or hyphen. Only Chinese characters, letters, digits, underscores, and hyphens are allowed. Length must be between 0 and 255 characters. If not specified, defaults to an empty string",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -245,11 +245,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的名称，取值：以字母或中文开头。只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。长度限制为1～128个字符。",
+		//	  "description": "Instance name. Rules: Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscore \"_\", hyphen \"-\", and period \".\". Length: 1–128 characters.",
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的名称，取值：以字母或中文开头。只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。长度限制为1～128个字符。",
+			Description: "Instance name. Rules: Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscore \"_\", hyphen \"-\", and period \".\". Length: 1–128 characters.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -260,17 +260,17 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "抢占式实例的规格信息。",
+		//	  "description": "Specification information for preemptible instances",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "抢占式实例。",
+		//	    "description": "Preemptible instance",
 		//	    "properties": {
 		//	      "InstanceType": {
-		//	        "description": "指定抢占式实例的规格。参数 - N：表示实例规格的序号，取值为1 ～ 10。取值 - InstanceType：表示抢占式实例的规格。多个规格之间用\u0026分隔。",
+		//	        "description": "Specify the specifications for preemptible instances. Parameter - N: Indicates the sequence number of the instance specification, value range 1–10. Value - InstanceType: Specifies the specification for the preemptible instance. Use \u0026 to separate multiple specifications.",
 		//	        "type": "string"
 		//	      },
 		//	      "PriceLimit": {
-		//	        "description": "指定抢占式实例规格每小时的最高价格参数 - N：表示实例规格的序号，取值为1 ～ 10。取值 - PriceLimit：表示抢占式实例规格每小时的最高价格。取值：大于0，且最大不超过3位小数。多个价格之间用\u0026分隔。",
+		//	        "description": "Specify the maximum hourly price for preemptible instance types. Parameter - N: Indicates the instance type sequence number. Value: 1–10. PriceLimit: Specifies the maximum hourly price for the preemptible instance type. Value: Greater than 0, up to three decimal places. Use \u0026 to separate multiple prices.",
 		//	        "type": "number"
 		//	      }
 		//	    },
@@ -286,7 +286,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceType
 					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "指定抢占式实例的规格。参数   - N：表示实例规格的序号，取值为1 ～ 10。取值   - InstanceType：表示抢占式实例的规格。多个规格之间用&分隔。",
+						Description: "Specify the specifications for preemptible instances. Parameter   - N: Indicates the sequence number of the instance specification, value range 1–10. Value   - InstanceType: Specifies the specification for the preemptible instance. Use & to separate multiple specifications.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -295,7 +295,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: PriceLimit
 					"price_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "指定抢占式实例规格每小时的最高价格参数   - N：表示实例规格的序号，取值为1 ～ 10。取值   - PriceLimit：表示抢占式实例规格每小时的最高价格。取值：大于0，且最大不超过3位小数。多个价格之间用&分隔。",
+						Description: "Specify the maximum hourly price for preemptible instance types. Parameter   - N: Indicates the instance type sequence number. Value: 1–10. PriceLimit: Specifies the maximum hourly price for the preemptible instance type. Value: Greater than 0, up to three decimal places. Use & to separate multiple prices.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -304,7 +304,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "抢占式实例的规格信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Specification information for preemptible instances\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -318,7 +318,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的计算规格列表。",
+		//	  "description": "List of compute specifications for the instance",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -328,7 +328,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"instance_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例的计算规格列表。",
+			Description: "List of compute specifications for the instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -338,7 +338,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为实例网卡分配IPv6地址。取值：0：不分配IPv6地址。1：分配IPv6地址，系统自动为您分配IPv6网段。",
+		//	  "description": "Assign an IPv6 address to the instance NIC. Values: 0: Do not assign an IPv6 address. 1: Assign an IPv6 address; the system automatically allocates an IPv6 subnet for you.",
 		//	  "enum": [
 		//	    0,
 		//	    1
@@ -346,7 +346,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "integer"
 		//	}
 		"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否为实例网卡分配IPv6地址。取值：0：不分配IPv6地址。1：分配IPv6地址，系统自动为您分配IPv6网段。",
+			Description: "Assign an IPv6 address to the instance NIC. Values: 0: Do not assign an IPv6 address. 1: Assign an IPv6 address; the system automatically allocates an IPv6 subnet for you.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -363,11 +363,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+		//	  "description": "Name of the key pair. If both KeyPairName and Password are set, only KeyPairName takes effect",
 		//	  "type": "string"
 		//	}
 		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对的名称。如果同时设置了KeyPairName和Password，则仅生效KeyPairName。",
+			Description: "Name of the key pair. If both KeyPairName and Password are set, only KeyPairName takes effect",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -378,7 +378,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "生命周期状态。取值：Active（活跃）/InActive（非活跃）",
+		//	  "description": "Lifecycle status. Values: Active (active) / InActive (inactive)",
 		//	  "enum": [
 		//	    "Active",
 		//	    "InActive"
@@ -386,7 +386,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "string"
 		//	}
 		"lifecycle_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "生命周期状态。取值：Active（活跃）/InActive（非活跃）",
+			Description: "Lifecycle status. Values: Active (active) / InActive (inactive)",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -403,11 +403,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "使用“密码”方式登录实例时，请设置root登录密码：长度限制在8～30之间，密码只能由大写字母、小写字母、数字和特殊字符组成，且必须包含至少三项，特殊字符可以使用：`~!#$%^\u0026*()_-+= |，不能以“/”和“$6$”开头",
+		//	  "description": "When logging in to the instance using the 'Password' method, set the root login password: The password must be 8–30 characters long and consist of uppercase letters, lowercase letters, numbers, and special characters. At least three types must be included. Allowed special characters: `~!#$%^\u0026*()_-+= |. The password cannot start with '/' or '$6$'",
 		//	  "type": "string"
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "使用“密码”方式登录实例时，请设置root登录密码：长度限制在8～30之间，密码只能由大写字母、小写字母、数字和特殊字符组成，且必须包含至少三项，特殊字符可以使用：`~!#$%^&*()_-+= |，不能以“/”和“$6$”开头",
+			Description: "When logging in to the instance using the 'Password' method, set the root login password: The password must be 8–30 characters long and consist of uppercase letters, lowercase letters, numbers, and special characters. At least three types must be included. Allowed special characters: `~!#$%^&*()_-+= |. The password cannot start with '/' or '$6$'",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -420,11 +420,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩配置创建的实例所属项目，默认为空。一个资源只能归属于一个项目。\n只能包含字母、数字、下划线“_”、点“.”和中划线“-”。\n长度限制在64个字符以内。",
+		//	  "description": "The project to which the instance created by the scaling configuration belongs. Default is empty. Each resource can belong to only one project.\nOnly letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed.\nMaximum length: 64 characters",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩配置创建的实例所属项目，默认为空。一个资源只能归属于一个项目。\n  只能包含字母、数字、下划线“_”、点“.”和中划线“-”。\n  长度限制在64个字符以内。",
+			Description: "The project to which the instance created by the scaling configuration belongs. Default is empty. Each resource can belong to only one project.\n  Only letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed.\n  Maximum length: 64 characters",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -436,11 +436,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩配置ID。",
+		//	  "description": "Scaling configuration ID",
 		//	  "type": "string"
 		//	}
 		"scaling_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩配置ID。",
+			Description: "Scaling configuration ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -450,11 +450,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩配置的名称，在同一地域下同一伸缩组内伸缩配置名称唯一。取值:只能以中文、字母开头。只能包含中文、字母、数字、下划线和中划线。长度限制为1 ~ 128个字符。暂不支持特殊字符。",
+		//	  "description": "Name of the scaling configuration. The name must be unique within the same scaling group in the same region. Rules: Must start with a Chinese character or letter. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length: 1–128 characters. Special characters are not supported.",
 		//	  "type": "string"
 		//	}
 		"scaling_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩配置的名称，在同一地域下同一伸缩组内伸缩配置名称唯一。取值:只能以中文、字母开头。只能包含中文、字母、数字、下划线和中划线。长度限制为1 ~ 128个字符。暂不支持特殊字符。",
+			Description: "Name of the scaling configuration. The name must be unique within the same scaling group in the same region. Rules: Must start with a Chinese character or letter. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length: 1–128 characters. Special characters are not supported.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -465,11 +465,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩配置所属的伸缩组ID。",
+		//	  "description": "Scaling group ID to which the scaling configuration belongs",
 		//	  "type": "string"
 		//	}
 		"scaling_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩配置所属的伸缩组ID。",
+			Description: "Scaling group ID to which the scaling configuration belongs",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -481,7 +481,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启安全加固，取值：Active：开启安全加固，仅对公共镜像生效。InActive：关闭安全加固，对所有镜像生效。",
+		//	  "description": "Enable security hardening. Options: Active: Enable security hardening, applies only to public images. InActive: Disable security hardening, applies to all images.",
 		//	  "enum": [
 		//	    "Active",
 		//	    "InActive"
@@ -489,7 +489,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "string"
 		//	}
 		"security_enhancement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启安全加固，取值：Active：开启安全加固，仅对公共镜像生效。InActive：关闭安全加固，对所有镜像生效。",
+			Description: "Enable security hardening. Options: Active: Enable security hardening, applies only to public images. InActive: Disable security hardening, applies to all images.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -506,7 +506,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例主网卡关联的安全组ID。",
+		//	  "description": "Security group ID associated with the instance's primary network interface",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -518,7 +518,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例主网卡关联的安全组ID。",
+			Description: "Security group ID associated with the instance's primary network interface",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -532,7 +532,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的抢占策略。取值：NoSpot（默认）：表示创建正常按量付费实例。SpotAsPriceGo：表示系统自动出价，跟随当前市场实际价格的抢占式实例。SpotWithPriceLimit：表示需要设置出价上限的抢占式实例。",
+		//	  "description": "Instance preemption policy. Values: NoSpot (default): creates a standard pay-as-you-go instance. SpotAsPriceGo: system automatically bids, creating a preemptible instance that follows the current market price. SpotWithPriceLimit: creates a preemptible instance with a specified bid limit",
 		//	  "enum": [
 		//	    "NoSpot",
 		//	    "SpotAsPriceGo",
@@ -541,7 +541,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "string"
 		//	}
 		"spot_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的抢占策略。取值：NoSpot（默认）：表示创建正常按量付费实例。SpotAsPriceGo：表示系统自动出价，跟随当前市场实际价格的抢占式实例。SpotWithPriceLimit：表示需要设置出价上限的抢占式实例。",
+			Description: "Instance preemption policy. Values: NoSpot (default): creates a standard pay-as-you-go instance. SpotAsPriceGo: system automatically bids, creating a preemptible instance that follows the current market price. SpotWithPriceLimit: creates a preemptible instance with a specified bid limit",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -559,16 +559,16 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签键值对。",
+		//	  "description": "Tag key-value pairs",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -586,7 +586,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -598,7 +598,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -610,7 +610,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签键值对。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag key-value pairs\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -621,11 +621,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源更新时间(UTC时间)",
+		//	  "description": "Resource update time (UTC)",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源更新时间(UTC时间)",
+			Description: "Resource update time (UTC)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -635,11 +635,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例自定义数据。设置的自定义数据必须经过Base64编码，且Base64编码前的自定义数据大小不能超过16KB。不填则默认为空。",
+		//	  "description": "Instance custom data. Custom data must be Base64 encoded, and the size before encoding must not exceed 16 KB. If not specified, defaults to empty",
 		//	  "type": "string"
 		//	}
 		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例自定义数据。设置的自定义数据必须经过Base64编码，且Base64编码前的自定义数据大小不能超过16KB。不填则默认为空。",
+			Description: "Instance custom data. Custom data must be Base64 encoded, and the size before encoding must not exceed 16 KB. If not specified, defaults to empty",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -650,33 +650,33 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘。",
+		//	  "description": "Cloud disk",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "云盘。",
+		//	    "description": "Cloud disk",
 		//	    "properties": {
 		//	      "DeleteWithInstance": {
-		//	        "description": "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+		//	        "description": "Whether the cloud disk is released with the instance: true (default): The cloud disk is released with the instance. false: The cloud disk is not released with the instance. When set to false, this does not apply to system disks. System disks are always released with the instance and cannot be retained.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "ExtraPerformanceIOPS": {
-		//	        "description": "通过此参数可配置云盘额外性能包IOPS性能大小，仅ESSD FlexPL支持。参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceIOPS 表示第N个云盘的额外性能包IOPS大小：IOPS: 1-50000。Balance: 1-50000。",
+		//	        "description": "You can use this parameter to configure the extra performance package IOPS size for cloud disks. Only ESSD FlexPL is supported. Parameter - N: Indicates the disk sequence number. '1' represents the system disk; '2' or greater represents a data disk. Only data disks support extra performance packages. Value: 2–16. ExtraPerformanceIOPS specifies the extra performance package IOPS size for the Nth disk: IOPS: 1–50000. Balance: 1–50000.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ExtraPerformanceThroughputMB": {
-		//	        "description": "通过此参数可配置云盘额外性能包吞吐性能大小，单位MB/s，仅ESSD FlexPL支持。参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceThroughputMB 表示第N个云盘的额外性能包吞吐大小：Throughput：1-650。",
+		//	        "description": "You can use this parameter to configure the extra performance package throughput size for cloud disks, in MB/s. Only ESSD FlexPL is supported. Parameter - N: Indicates the disk sequence number. '1' represents the system disk; '2' or greater represents a data disk. Only data disks support extra performance packages. Value: 2–16. ExtraPerformanceThroughputMB specifies the extra performance package throughput size for the Nth disk: Throughput: 1–650.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ExtraPerformanceTypeId": {
-		//	        "description": "通过此参数可为云盘购买额外性能，仅ESSD FlexPL支持。参数 - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包。取值：2～16。ExtraPerformanceTypeId 表示第N个云盘的额外性能包类型：IOPS:IOPS型，使用ExtraPerformanceIOPS参数。Balance: 均衡型，使用ExtraPerformanceIOPS参数。Throughput：吞吐量型，使用ExtraPerformanceThroughputMB参数。",
+		//	        "description": "This parameter allows you to purchase extra performance for cloud disks. Only ESSD FlexPL is supported. Parameter - N: Indicates the disk sequence number. \"1\" is the system disk; \"2\" or greater indicates a data disk. Only data disks support extra performance packages. Value: 2–16. ExtraPerformanceTypeId specifies the extra performance package type for the Nth disk: IOPS: IOPS type, use the ExtraPerformanceIOPS parameter. Balance: Balanced type, use the ExtraPerformanceIOPS parameter. Throughput: Throughput type, use the ExtraPerformanceThroughputMB parameter.",
 		//	        "type": "string"
 		//	      },
 		//	      "Size": {
-		//	        "description": "云盘的容量，单位为GiB。系统盘取值范围：10 - 500。数据盘取值范围：10 - 8192。如果是 ESSD_FlexPL 并使用额外性能，大小必须 \u003e= 500 GB。",
+		//	        "description": "Cloud disk capacity, in GiB. System disk range: 10–500. Data disk range: 10–8192. If using ESSD_FlexPL with additional performance, size must be \u003e= 500 GB",
 		//	        "type": "integer"
 		//	      },
 		//	      "VolumeType": {
-		//	        "description": "云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。",
+		//	        "description": "Cloud disk types: ESSD_FlexPL: Extreme SSD FlexPL. ESSD_PL0: Extreme SSD PL0.",
 		//	        "enum": [
 		//	          "ESSD_FlexPL",
 		//	          "ESSD_PL0",
@@ -695,7 +695,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DeleteWithInstance
 					"delete_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘是否随实例释放：true（默认值）：云盘随实例释放。false：云盘不随实例释放。取值为false时对系统盘无效，系统盘默认随实例释放，不允许保留。",
+						Description: "Whether the cloud disk is released with the instance: true (default): The cloud disk is released with the instance. false: The cloud disk is not released with the instance. When set to false, this does not apply to system disks. System disks are always released with the instance and cannot be retained.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -704,7 +704,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: ExtraPerformanceIOPS
 					"extra_performance_iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "通过此参数可配置云盘额外性能包IOPS性能大小，仅ESSD FlexPL支持。参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceIOPS 表示第N个云盘的额外性能包IOPS大小：IOPS: 1-50000。Balance: 1-50000。",
+						Description: "You can use this parameter to configure the extra performance package IOPS size for cloud disks. Only ESSD FlexPL is supported. Parameter   - N: Indicates the disk sequence number. '1' represents the system disk; '2' or greater represents a data disk. Only data disks support extra performance packages. Value: 2–16. ExtraPerformanceIOPS specifies the extra performance package IOPS size for the Nth disk: IOPS: 1–50000. Balance: 1–50000.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -713,7 +713,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: ExtraPerformanceThroughputMB
 					"extra_performance_throughput_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "通过此参数可配置云盘额外性能包吞吐性能大小，单位MB/s，仅ESSD FlexPL支持。参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包，取值：2～16。ExtraPerformanceThroughputMB 表示第N个云盘的额外性能包吞吐大小：Throughput：1-650。",
+						Description: "You can use this parameter to configure the extra performance package throughput size for cloud disks, in MB/s. Only ESSD FlexPL is supported. Parameter   - N: Indicates the disk sequence number. '1' represents the system disk; '2' or greater represents a data disk. Only data disks support extra performance packages. Value: 2–16. ExtraPerformanceThroughputMB specifies the extra performance package throughput size for the Nth disk: Throughput: 1–650.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -722,7 +722,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: ExtraPerformanceTypeId
 					"extra_performance_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "通过此参数可为云盘购买额外性能，仅ESSD FlexPL支持。参数   - N：表示云盘的序号，序号为“1”表示系统盘，序号为“2”或大于“2”表示数据盘，仅数据盘支持额外性能包。取值：2～16。ExtraPerformanceTypeId 表示第N个云盘的额外性能包类型：IOPS:IOPS型，使用ExtraPerformanceIOPS参数。Balance: 均衡型，使用ExtraPerformanceIOPS参数。Throughput：吞吐量型，使用ExtraPerformanceThroughputMB参数。",
+						Description: "This parameter allows you to purchase extra performance for cloud disks. Only ESSD FlexPL is supported. Parameter   - N: Indicates the disk sequence number. \"1\" is the system disk; \"2\" or greater indicates a data disk. Only data disks support extra performance packages. Value: 2–16. ExtraPerformanceTypeId specifies the extra performance package type for the Nth disk: IOPS: IOPS type, use the ExtraPerformanceIOPS parameter. Balance: Balanced type, use the ExtraPerformanceIOPS parameter. Throughput: Throughput type, use the ExtraPerformanceThroughputMB parameter.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -731,7 +731,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘的容量，单位为GiB。系统盘取值范围：10   - 500。数据盘取值范围：10   - 8192。如果是 ESSD_FlexPL 并使用额外性能，大小必须 >= 500 GB。",
+						Description: "Cloud disk capacity, in GiB. System disk range: 10–500. Data disk range: 10–8192. If using ESSD_FlexPL with additional performance, size must be >= 500 GB",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -740,7 +740,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeType
 					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘的类型：ESSD_FlexPL：极速型SSDFlexPL。ESSD_PL0：极速型SSD PL0。",
+						Description: "Cloud disk types: ESSD_FlexPL: Extreme SSD FlexPL. ESSD_PL0: Extreme SSD PL0.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -756,7 +756,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "云盘。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Cloud disk\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -768,11 +768,11 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩配置可用区ID。",
+		//	  "description": "Availability zone ID for the scaling configuration",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩配置可用区ID。",
+			Description: "Availability zone ID for the scaling configuration",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -791,7 +791,7 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 	}
 
 	schema := schema.Schema{
-		Description: "用于定义伸缩组中的实例配置，包括计算、内存、网络、存储、安全等，伸缩组扩容时，会按照此处的配置来源创建新实例。",
+		Description: "Defines the instance configuration in the scaling group, including compute, memory, network, storage, and security. When the scaling group expands, new instances are created based on this configuration source.",
 		Version:     1,
 		Attributes:  attributes,
 	}

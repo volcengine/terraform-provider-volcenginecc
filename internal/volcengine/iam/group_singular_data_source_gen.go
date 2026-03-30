@@ -26,45 +26,45 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组所属主账号的ID。",
+		//	  "description": "ID of the primary account to which the user group belongs.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"account_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "用户组所属主账号的ID。",
+			Description: "ID of the primary account to which the user group belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AttachedPolicies
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组绑定的策略信息。",
+		//	  "description": "Policy information bound to the user group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AttachTime": {
-		//	        "description": "策略绑定时间。",
+		//	        "description": "Policy binding time.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "策略描述。",
+		//	        "description": "Policy description.",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyName": {
-		//	        "description": "策略名。",
+		//	        "description": "Policy name.",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyScope": {
-		//	        "description": "策略授权的作用范围，特指项目范围。",
+		//	        "description": "Scope of policy authorization, specifically the project scope.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "AttachTime": {
-		//	              "description": "项目授权时间。",
+		//	              "description": "Project authorization time.",
 		//	              "type": "string"
 		//	            },
 		//	            "PolicyScopeType": {
-		//	              "description": "授权类型。Global代表全局授权（不限制项目），Project代表按项目授权。",
+		//	              "description": "Authorization type. Global indicates global authorization (not limited by project); Project indicates project-based authorization.",
 		//	              "enum": [
 		//	                "Global",
 		//	                "Project"
@@ -72,11 +72,11 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectDisplayName": {
-		//	              "description": "按项目授权时的项目显示名。",
+		//	              "description": "Project display name for project-based authorization.",
 		//	              "type": "string"
 		//	            },
 		//	            "ProjectName": {
-		//	              "description": "按项目授权时的项目名。",
+		//	              "description": "Project name for project-based authorization.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -86,11 +86,11 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "PolicyTrn": {
-		//	        "description": "策略TRN。",
+		//	        "description": "Policy TRN.",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
-		//	        "description": "策略类型。System代表系统预设策略，Custom代表自定义策略。",
+		//	        "description": "Policy type. System indicates a system predefined policy; Custom indicates a custom policy.",
 		//	        "enum": [
 		//	          "Custom",
 		//	          "System"
@@ -112,17 +112,17 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AttachTime
 					"attach_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略绑定时间。",
+						Description: "Policy binding time.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略描述。",
+						Description: "Policy description.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略名。",
+						Description: "Policy name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyScope
@@ -131,140 +131,140 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AttachTime
 								"attach_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "项目授权时间。",
+									Description: "Project authorization time.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: PolicyScopeType
 								"policy_scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "授权类型。Global代表全局授权（不限制项目），Project代表按项目授权。",
+									Description: "Authorization type. Global indicates global authorization (not limited by project); Project indicates project-based authorization.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: ProjectDisplayName
 								"project_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "按项目授权时的项目显示名。",
+									Description: "Project display name for project-based authorization.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: ProjectName
 								"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "按项目授权时的项目名。",
+									Description: "Project name for project-based authorization.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "策略授权的作用范围，特指项目范围。",
+						Description: "Scope of policy authorization, specifically the project scope.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyTrn
 					"policy_trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略TRN。",
+						Description: "Policy TRN.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略类型。System代表系统预设策略，Custom代表自定义策略。",
+						Description: "Policy type. System indicates a system predefined policy; Custom indicates a custom policy.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "用户组绑定的策略信息。",
+			Description: "Policy information bound to the user group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组的创建时间。",
+		//	  "description": "User group creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组的创建时间。",
+			Description: "User group creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组描述信息。长度不超过128。",
+		//	  "description": "User group description. Maximum length: 128 characters.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组描述信息。长度不超过128。",
+			Description: "User group description. Maximum length: 128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组显示名称。长度不超过64。",
+		//	  "description": "User group display name. Maximum length: 64 characters.",
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组显示名称。长度不超过64。",
+			Description: "User group display name. Maximum length: 64 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组的更新时间。",
+		//	  "description": "User group update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组的更新时间。",
+			Description: "User group update time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserGroupID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组ID。",
+		//	  "description": "User group ID.",
 		//	  "type": "integer"
 		//	}
 		"user_group_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "用户组ID。",
+			Description: "User group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserGroupName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组名称。长度1~64，支持英文、数字和.-_符号。",
+		//	  "description": "User group name. Length: 1–64 characters. Supports English letters, numbers, and .-_ symbols.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"user_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组名称。长度1~64，支持英文、数字和.-_符号。",
+			Description: "User group name. Length: 1–64 characters. Supports English letters, numbers, and .-_ symbols.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Users
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组内绑定的用户信息。",
+		//	  "description": "User information associated with the user group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "用户描述。",
+		//	        "description": "User description.",
 		//	        "type": "string"
 		//	      },
 		//	      "DisplayName": {
-		//	        "description": "用户显示名。",
+		//	        "description": "User display name.",
 		//	        "type": "string"
 		//	      },
 		//	      "JoinTime": {
-		//	        "description": "用户加入用户组的时间。",
+		//	        "description": "Time when the user joined the user group.",
 		//	        "type": "string"
 		//	      },
 		//	      "UserID": {
-		//	        "description": "用户ID。",
+		//	        "description": "User ID.",
 		//	        "type": "integer"
 		//	      },
 		//	      "UserName": {
-		//	        "description": "用户名。",
+		//	        "description": "Username.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -281,32 +281,32 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户描述。",
+						Description: "User description.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DisplayName
 					"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户显示名。",
+						Description: "User display name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: JoinTime
 					"join_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户加入用户组的时间。",
+						Description: "Time when the user joined the user group.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UserID
 					"user_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "用户ID。",
+						Description: "User ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UserName
 					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户名。",
+						Description: "Username.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "用户组内绑定的用户信息。",
+			Description: "User information associated with the user group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

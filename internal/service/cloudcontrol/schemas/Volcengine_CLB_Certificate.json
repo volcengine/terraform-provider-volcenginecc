@@ -9,11 +9,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "用户标签的标签键。",
+          "description": "User tag key.",
           "type": "string"
         },
         "Value": {
-          "description": "用户标签的标签值。",
+          "description": "User tag value.",
           "type": "string"
         }
       },
@@ -23,7 +23,7 @@
       "type": "object"
     }
   },
-  "description": "针对HTTPS协议，提供统一的证书管理服务，证书无需上传到后端服务器，支持在CLB实例上解密处理，降低了后端服务器的CPU开销。",
+  "description": "Provides unified certificate management service for HTTPS protocol. Certificates do not need to be uploaded to backend servers. Supports decryption processing on CLB instances, reducing CPU overhead on backend servers.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -70,36 +70,36 @@
   ],
   "properties": {
     "CertificateId": {
-      "description": "证书的ID。",
+      "description": "Certificate ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "CertificateName": {
-      "description": "证书的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 128个字符。",
+      "description": "Certificate name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters.",
       "semantic": "resourceName",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "证书的创建时间。",
+      "description": "Certificate creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "证书的描述，默认值为空字符串。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。",
+      "description": "Certificate description. Default value is an empty string. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters.",
       "maxLength": 255,
       "semantic": "description",
       "type": "string"
     },
     "DomainName": {
-      "description": "证书的主域名。",
+      "description": "Certificate primary domain name.",
       "type": "string"
     },
     "ExpiredAt": {
-      "description": "证书的过期时间。",
+      "description": "Certificate expiration time.",
       "type": "string"
     },
     "Listeners": {
-      "description": "证书关联的监听器的ID。",
+      "description": "ID of the listener associated with the certificate.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -108,25 +108,25 @@
       "uniqueItems": true
     },
     "PrivateKey": {
-      "description": "证书的私钥。",
+      "description": "Certificate private key.",
       "type": "string"
     },
     "ProjectName": {
       "default": "default",
-      "description": "证书所属项目的名称。不填默认为default。",
+      "description": "Name of the project the certificate belongs to. If not specified, defaults to 'default'.",
       "semantic": "projectName",
       "type": "string"
     },
     "PublicKey": {
-      "description": "证书的公钥。",
+      "description": "Certificate public key.",
       "type": "string"
     },
     "ServiceManaged": {
-      "description": "是否为托管资源。true：托管资源。false：非托管资源。",
+      "description": "Managed resource status. true: managed resource. false: unmanaged resource.",
       "type": "boolean"
     },
     "SubjectAlternativeNames": {
-      "description": "证书的备用域名列表。",
+      "description": "List of alternate domain names for the certificate.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -135,7 +135,7 @@
       "uniqueItems": true
     },
     "Tags": {
-      "description": "标签列表。",
+      "description": "Tag list.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"

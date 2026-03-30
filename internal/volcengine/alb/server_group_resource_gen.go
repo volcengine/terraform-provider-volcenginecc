@@ -38,11 +38,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的创建时间。",
+		//	  "description": "Creation time of the backend server group.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的创建时间。",
+			Description: "Creation time of the backend server group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -52,11 +52,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启服务器组的跨可用区负载均衡功能。取值如下：on（默认值）：开启。off：不开启。",
+		//	  "description": "Whether to enable cross-zone load balancing for the server group. Values: on (default): enabled, off: disabled.",
 		//	  "type": "string"
 		//	}
 		"cross_zone_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启服务器组的跨可用区负载均衡功能。取值如下：on（默认值）：开启。off：不开启。",
+			Description: "Whether to enable cross-zone load balancing for the server group. Values: on (default): enabled, off: disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -67,11 +67,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的描述。",
+		//	  "description": "Description of the backend server group.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的描述。",
+			Description: "Description of the backend server group.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -82,15 +82,15 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组健康检查配置信息。",
+		//	  "description": "Server group health check configuration information.",
 		//	  "properties": {
 		//	    "Domain": {
-		//	      "description": "健康检查的域名，需配置为后端服务器上真实对外提供服务的地址。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。需至少包含一个‘.’，且不允许以‘.’开头或结尾。域名每一级由字母、数字、‘-’、‘.’字符组成，且‘-’不得出现在每一级的头部或尾部。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为空，表示负载均衡使用各后端服务器的私网IP地址进行健康检查。",
+		//	      "description": "Domain name for health check. Configure this as the actual service address provided by the backend server. This parameter takes effect only when HealthCheck.Protocol is set to HTTP. The domain name must contain at least one '.', and cannot start or end with '.'. Each level of the domain name can contain letters, digits, '-', and '.' characters, and '-' cannot appear at the beginning or end of any level. Length: 1–128 characters. If this parameter is not specified or no value is provided, the default is empty, meaning the load balancer uses the private IP address of each backend server for health checks.",
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
 		//	      "default": "on",
-		//	      "description": "监听器是否开启健康检查功能。取值：on：开启（默认值）。off：不开启。",
+		//	      "description": "Whether the listener enables health check. Values: on: enabled (default), off: disabled.",
 		//	      "enum": [
 		//	        "on",
 		//	        "off"
@@ -99,19 +99,19 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "HealthyThreshold": {
 		//	      "default": 3,
-		//	      "description": "健康检查的健康阈值。表示连续执行指定次数的健康检查，结果均为正常的后端服务器将判定为健康检查正常。单位：次，取值：2~10，默认值为 3。",
+		//	      "description": "Health check threshold. Indicates the number of consecutive successful health checks required for a backend server to be considered healthy. Unit: times. Value range: 2–10. Default: 3.",
 		//	      "format": "int64",
 		//	      "maximum": 10,
 		//	      "minimum": 2,
 		//	      "type": "integer"
 		//	    },
 		//	    "HttpCode": {
-		//	      "description": "健康检查正常的HTTP状态码，多个状态码间用半角逗号分隔。只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值如下：http_2xx（默认值）。http_3xx（默认值）。http_4xx 。http_5xx 。",
+		//	      "description": "HTTP status codes for a successful health check. Separate multiple codes with commas. This parameter is available only when HealthCheck.Protocol is HTTP. Valid values: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
 		//	      "type": "string"
 		//	    },
 		//	    "HttpVersion": {
 		//	      "default": "HTTP1.0",
-		//	      "description": "健康检查HTTP协议版本，只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值：HTTP1.0（使用API时，HTTP协议版本默认值）。HTTP1.1。",
+		//	      "description": "Health check HTTP protocol version. This parameter is available only when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default for API usage), HTTP1.1.",
 		//	      "enum": [
 		//	        "HTTP1.0",
 		//	        "HTTP1.1"
@@ -120,7 +120,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Interval": {
 		//	      "default": 2,
-		//	      "description": "开启健康检查后，执行健康检查的时间间隔。 单位：秒，取值：1~300s，默认值为 2。",
+		//	      "description": "After health checks are enabled, the interval for performing health checks. Unit: seconds. Value range: 1–300s. Default: 2.",
 		//	      "format": "int64",
 		//	      "maximum": 300,
 		//	      "minimum": 1,
@@ -128,7 +128,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Method": {
 		//	      "default": "HEAD",
-		//	      "description": "开启健康检查后，健康检查的方法。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。取值如下：GET：服务器需支持GET方法。HEAD（默认）：服务器仅返回HEAD头部信息，可以降低后端性能消耗，但服务器需要支持HEAD方法。",
+		//	      "description": "Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.",
 		//	      "enum": [
 		//	        "GET",
 		//	        "HEAD"
@@ -136,13 +136,13 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Port": {
-		//	      "description": "健康检查端口。支持取值：0（默认值）：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。",
+		//	      "description": "Health check port. Supported values: 0 (default): Use the backend server port for health checks. 1–65535: Use the specified port for health checks.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "Protocol": {
 		//	      "default": "HTTP",
-		//	      "description": "健康检查协议，当前支持HTTP、TCP。默认值为 HTTP。",
+		//	      "description": "Health check protocol. Currently supports HTTP and TCP. Default: HTTP.",
 		//	      "enum": [
 		//	        "HTTP",
 		//	        "TCP"
@@ -151,19 +151,19 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Timeout": {
 		//	      "default": 2,
-		//	      "description": "健康检查的响应超时时间。表示如果后端服务器在指定的时间内没有正确响应，则判定为健康检查异常。单位：秒，取值：1~60，默认值为 2。",
+		//	      "description": "Health check response timeout. If the backend server does not respond correctly within the specified time, the health check is considered abnormal. Unit: seconds. Value range: 1–60. Default: 2.",
 		//	      "format": "int64",
 		//	      "maximum": 60,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "URI": {
-		//	      "description": "健康检查的路径，需配置为后端服务器上真实对外提供的路径。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘\u0026’、‘＝’ 字符。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为“/”。",
+		//	      "description": "Health check path. Must be configured as the actual path provided by the backend server. This parameter is only effective when HealthCheck.Protocol is set to HTTP. Must start with '/'. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '\u0026', '=' are allowed. Length: 1–128 characters. If this parameter is not specified or specified without a value, the default is '/'.",
 		//	      "type": "string"
 		//	    },
 		//	    "UnhealthyThreshold": {
 		//	      "default": 3,
-		//	      "description": "健康检查的不健康阈值。表示连续执行指定次数的健康检查，结果均为异常的后端服务器将判定为健康检查异常。单位：次，取值：2~10，默认值为 3。",
+		//	      "description": "Unhealthy threshold for health checks. Indicates that a backend server is considered unhealthy if it fails the specified number of consecutive health checks. Unit: times. Range: 2–10. Default: 3.",
 		//	      "format": "int64",
 		//	      "maximum": 10,
 		//	      "minimum": 2,
@@ -179,7 +179,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Domain
 				"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的域名，需配置为后端服务器上真实对外提供服务的地址。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。需至少包含一个‘.’，且不允许以‘.’开头或结尾。域名每一级由字母、数字、‘-’、‘.’字符组成，且‘-’不得出现在每一级的头部或尾部。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为空，表示负载均衡使用各后端服务器的私网IP地址进行健康检查。",
+					Description: "Domain name for health check. Configure this as the actual service address provided by the backend server. This parameter takes effect only when HealthCheck.Protocol is set to HTTP. The domain name must contain at least one '.', and cannot start or end with '.'. Each level of the domain name can contain letters, digits, '-', and '.' characters, and '-' cannot appear at the beginning or end of any level. Length: 1–128 characters. If this parameter is not specified or no value is provided, the default is empty, meaning the load balancer uses the private IP address of each backend server for health checks.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -188,7 +188,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "监听器是否开启健康检查功能。取值：on：开启（默认值）。off：不开启。",
+					Description: "Whether the listener enables health check. Values: on: enabled (default), off: disabled.",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("on"),
@@ -204,7 +204,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: HealthyThreshold
 				"healthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的健康阈值。表示连续执行指定次数的健康检查，结果均为正常的后端服务器将判定为健康检查正常。单位：次，取值：2~10，默认值为 3。",
+					Description: "Health check threshold. Indicates the number of consecutive successful health checks required for a backend server to be considered healthy. Unit: times. Value range: 2–10. Default: 3.",
 					Optional:    true,
 					Computed:    true,
 					Default:     int64default.StaticInt64(3),
@@ -217,7 +217,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: HttpCode
 				"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查正常的HTTP状态码，多个状态码间用半角逗号分隔。只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值如下：http_2xx（默认值）。http_3xx（默认值）。http_4xx 。http_5xx 。",
+					Description: "HTTP status codes for a successful health check. Separate multiple codes with commas. This parameter is available only when HealthCheck.Protocol is HTTP. Valid values: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -226,7 +226,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: HttpVersion
 				"http_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查HTTP协议版本，只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值：HTTP1.0（使用API时，HTTP协议版本默认值）。HTTP1.1。",
+					Description: "Health check HTTP protocol version. This parameter is available only when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default for API usage), HTTP1.1.",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("HTTP1.0"),
@@ -242,7 +242,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Interval
 				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "开启健康检查后，执行健康检查的时间间隔。 单位：秒，取值：1~300s，默认值为 2。",
+					Description: "After health checks are enabled, the interval for performing health checks. Unit: seconds. Value range: 1–300s. Default: 2.",
 					Optional:    true,
 					Computed:    true,
 					Default:     int64default.StaticInt64(2),
@@ -255,7 +255,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Method
 				"method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "开启健康检查后，健康检查的方法。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。取值如下：GET：服务器需支持GET方法。HEAD（默认）：服务器仅返回HEAD头部信息，可以降低后端性能消耗，但服务器需要支持HEAD方法。",
+					Description: "Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("HEAD"),
@@ -271,7 +271,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Port
 				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "健康检查端口。支持取值：0（默认值）：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。",
+					Description: "Health check port. Supported values: 0 (default): Use the backend server port for health checks. 1–65535: Use the specified port for health checks.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -283,7 +283,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查协议，当前支持HTTP、TCP。默认值为 HTTP。",
+					Description: "Health check protocol. Currently supports HTTP and TCP. Default: HTTP.",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("HTTP"),
@@ -299,7 +299,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Timeout
 				"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的响应超时时间。表示如果后端服务器在指定的时间内没有正确响应，则判定为健康检查异常。单位：秒，取值：1~60，默认值为 2。",
+					Description: "Health check response timeout. If the backend server does not respond correctly within the specified time, the health check is considered abnormal. Unit: seconds. Value range: 1–60. Default: 2.",
 					Optional:    true,
 					Computed:    true,
 					Default:     int64default.StaticInt64(2),
@@ -312,7 +312,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: URI
 				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的路径，需配置为后端服务器上真实对外提供的路径。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘&’、‘＝’ 字符。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为“/”。",
+					Description: "Health check path. Must be configured as the actual path provided by the backend server. This parameter is only effective when HealthCheck.Protocol is set to HTTP. Must start with '/'. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '&', '=' are allowed. Length: 1–128 characters. If this parameter is not specified or specified without a value, the default is '/'.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -321,7 +321,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: UnhealthyThreshold
 				"unhealthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的不健康阈值。表示连续执行指定次数的健康检查，结果均为异常的后端服务器将判定为健康检查异常。单位：次，取值：2~10，默认值为 3。",
+					Description: "Unhealthy threshold for health checks. Indicates that a backend server is considered unhealthy if it fails the specified number of consecutive health checks. Unit: times. Range: 2–10. Default: 3.",
 					Optional:    true,
 					Computed:    true,
 					Default:     int64default.StaticInt64(3),
@@ -333,7 +333,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "服务器组健康检查配置信息。",
+			Description: "Server group health check configuration information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -344,11 +344,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组的IP地址类型。目前只支持 IPv4",
+		//	  "description": "IP address type of the server group. Only IPv4 is supported.",
 		//	  "type": "string"
 		//	}
 		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器组的IP地址类型。目前只支持 IPv4",
+			Description: "IP address type of the server group. Only IPv4 is supported.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -360,12 +360,12 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组关联的监听器信息。",
+		//	  "description": "Listener information associated with the backend server group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ListenerId": {
-		//	        "description": "监听器的ID。",
+		//	        "description": "Listener ID.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -382,12 +382,12 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ListenerId
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的ID。",
+						Description: "Listener ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "后端服务器组关联的监听器信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Listener information associated with the backend server group.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -397,11 +397,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组所属项目名称。",
+		//	  "description": "Name of the project to which the backend server group belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组所属项目名称。",
+			Description: "Name of the project to which the backend server group belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -413,7 +413,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端协议：HTTP，HTTPS。",
+		//	  "description": "Backend protocol: HTTP, HTTPS.",
 		//	  "enum": [
 		//	    "HTTP",
 		//	    "HTTPS"
@@ -421,7 +421,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端协议：HTTP，HTTPS。",
+			Description: "Backend protocol: HTTP, HTTPS.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -440,7 +440,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "wrr",
-		//	  "description": "调度算法。取值：wrr：加权轮询。wlc：加权最小连接数。sh：源地址哈希。",
+		//	  "description": "Scheduling algorithm. Parameter values: wrr: Weighted round robin. wlc: Weighted least connections. sh: Source IP hash.",
 		//	  "enum": [
 		//	    "wrr",
 		//	    "wlc",
@@ -449,7 +449,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"scheduler": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "调度算法。取值：wrr：加权轮询。wlc：加权最小连接数。sh：源地址哈希。",
+			Description: "Scheduling algorithm. Parameter values: wrr: Weighted round robin. wlc: Weighted least connections. sh: Source IP hash.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("wrr"),
@@ -468,12 +468,12 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组内后端服务器的个数。",
+		//	  "description": "Number of backend servers in the server group.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"server_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "服务器组内后端服务器的个数。",
+			Description: "Number of backend servers in the server group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -483,11 +483,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的ID。",
+		//	  "description": "ID of the backend server group.",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的ID。",
+			Description: "ID of the backend server group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -497,11 +497,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的名称。",
+		//	  "description": "Name of the backend server group.",
 		//	  "type": "string"
 		//	}
 		"server_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的名称。",
+			Description: "Name of the backend server group.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -513,7 +513,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "instance",
-		//	  "description": "后端服务器组的类型。instance：服务器类型，该类型服务器组支持添加 ecs、eni 实例作为后端服务器。ip：IP类型，该类型服务器组支持添加 IP 地址作为后端服务器。",
+		//	  "description": "Type of backend server group. instance: Server type. This type of server group supports adding ECS and ENI instances as backend servers. ip: IP type. This type of server group supports adding IP addresses as backend servers.",
 		//	  "enum": [
 		//	    "instance",
 		//	    "ip"
@@ -521,7 +521,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"server_group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的类型。instance：服务器类型，该类型服务器组支持添加 ecs、eni 实例作为后端服务器。ip：IP类型，该类型服务器组支持添加 IP 地址作为后端服务器。",
+			Description: "Type of backend server group. instance: Server type. This type of server group supports adding ECS and ENI instances as backend servers. ip: IP type. This type of server group supports adding IP addresses as backend servers.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("instance"),
@@ -540,30 +540,30 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组中服务器的信息。",
+		//	  "description": "Information about servers in the backend server group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "后端服务器的描述。",
+		//	        "description": "Description of the backend server.",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceId": {
-		//	        "description": "云服务器实例或网卡的ID。",
+		//	        "description": "ID of the cloud server instance or network interface card.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ip": {
-		//	        "description": "后端服务器的私网IP地址。",
+		//	        "description": "Private IP address of the backend server.",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "后端服务器接收请求的端口号。",
+		//	        "description": "Port number on which the backend server receives requests.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "RemoteEnabled": {
 		//	        "default": "off",
-		//	        "description": "是否开启远端IP功能。当后端服务器实例类型为IP地址，即 Type 取值为 ip 时，此字段有效。取值：on：开启。off（默认值）：不开启。",
+		//	        "description": "Enable remote IP feature. This field is valid only when the backend server instance type is IP address, that is, when Type is set to ip. Parameter values: on: Enable. off (default): Disable.",
 		//	        "enum": [
 		//	          "on",
 		//	          "off"
@@ -571,11 +571,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "ServerId": {
-		//	        "description": "后端服务器ID。",
+		//	        "description": "Backend server ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "后端服务器实例类型。ecs：云服务器实例。eni：辅助网卡。ip：IP地址（仅 Ip 类型服务器组有效）。",
+		//	        "description": "Backend server instance type. ecs: ECS instance. eni: auxiliary ENI. ip: IP address (valid only for IP-type server groups).",
 		//	        "enum": [
 		//	          "ecs",
 		//	          "eni",
@@ -584,7 +584,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {
-		//	        "description": "后端服务器的权重。",
+		//	        "description": "Weight of the backend server.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      }
@@ -606,7 +606,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的描述。",
+						Description: "Description of the backend server.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -615,7 +615,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云服务器实例或网卡的ID。",
+						Description: "ID of the cloud server instance or network interface card.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -627,7 +627,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Ip
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的私网IP地址。",
+						Description: "Private IP address of the backend server.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -639,7 +639,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器接收请求的端口号。",
+						Description: "Port number on which the backend server receives requests.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -651,7 +651,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RemoteEnabled
 					"remote_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "是否开启远端IP功能。当后端服务器实例类型为IP地址，即 Type 取值为 ip 时，此字段有效。取值：on：开启。off（默认值）：不开启。",
+						Description: "Enable remote IP feature. This field is valid only when the backend server instance type is IP address, that is, when Type is set to ip. Parameter values: on: Enable. off (default): Disable.",
 						Optional:    true,
 						Computed:    true,
 						Default:     stringdefault.StaticString("off"),
@@ -667,7 +667,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ServerId
 					"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器ID。",
+						Description: "Backend server ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -676,7 +676,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器实例类型。ecs：云服务器实例。eni：辅助网卡。ip：IP地址（仅 Ip 类型服务器组有效）。",
+						Description: "Backend server instance type. ecs: ECS instance. eni: auxiliary ENI. ip: IP address (valid only for IP-type server groups).",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -693,7 +693,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的权重。",
+						Description: "Weight of the backend server.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -702,7 +702,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "后端服务器组中服务器的信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Information about servers in the backend server group.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -716,7 +716,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器组状态。Creating：创建中。Active：运行中。Configuring：配置中。Deleting：删除中。",
+		//	  "description": "Server group status. Creating: creating. Active: running. Configuring: configuring. Deleting: deleting.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Active",
@@ -726,7 +726,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器组状态。Creating：创建中。Active：运行中。Configuring：配置中。Deleting：删除中。",
+			Description: "Server group status. Creating: creating. Active: running. Configuring: configuring. Deleting: deleting.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -745,17 +745,17 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "会话保持功能的参数信息。",
+		//	  "description": "Session persistence parameter information.",
 		//	  "properties": {
 		//	    "Cookie": {
-		//	      "description": "服务配置的会话保持 Cookie 名称。仅在开启会话保持功能并选择重写 Cookie 时有效。 具体规则如下：Cookie 名称长度为1~200个字符。名称只能包含 ASCII 英文字母和数字字符，不能包含半角逗号（,）、半角分号（;）或空格，也不能以美元符号（$）开头。当 tickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 server时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，该参数无效。",
+		//	      "description": "Name of the session persistence Cookie for service configuration. This is only valid when session persistence is enabled and Cookie overwrite is selected. The specific rules are as follows: The Cookie name must be 1–200 characters long. The name can only contain ASCII letters and digits, cannot contain commas (,), semicolons (;), or spaces, and cannot start with a dollar sign ($). This parameter is required when tickySessionConfig.StickySessionEnabled is set to on and StickySessionConfig.StickySessionType is server. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert.",
 		//	      "maxLength": 200,
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
 		//	    "CookieTimeout": {
 		//	      "default": 1000,
-		//	      "description": "会话保持 Cookie 超时时间。仅在开启会话保持功能并选择植入 Cookie 时有效。 单位：秒。具体规则如下：超时时间的取值范围：1～86400。 默认值为：1000。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionType 为 server 时，此参数无效。",
+		//	      "description": "Session persistence cookie timeout. Only valid when session persistence is enabled and the insert cookie option is selected. Unit: seconds. Rules: Timeout range: 1–86400. Default: 1000. This parameter is required when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionType is server.",
 		//	      "format": "int64",
 		//	      "maximum": 86400,
 		//	      "minimum": 0,
@@ -763,7 +763,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "StickySessionEnabled": {
 		//	      "default": "off",
-		//	      "description": "是否开启会话保持功能。on：开启；off（默认值）：关闭。",
+		//	      "description": "Enable session persistence. on: Enable; off (default): Disable.",
 		//	      "enum": [
 		//	        "on",
 		//	        "off"
@@ -771,7 +771,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "StickySessionType": {
-		//	      "description": "对 Cookie 的处理方式。当 StickySessionConfig.StickySessionEnabled 值为 on 时，此字段参数必填。取值如下：insert：植入 Cookie；ALB 会记录客户端请求第一次转发到的后端服务器。ALB 在返回请求中植入 Cookie ，后续客户端请求携带此 Cookie，ALB 会将请求转发到之前记录的后端服务器上。server：重写 Cookie；开启重写 Cookie 的会话保持后，在客户端请求第一次转发到后端服务器后，ALB 在返回请求中发现您自定义的 Cookie 时，会对原来的 Cookie 进行重写。后续客户端请求携带改写后的 Cookie，ALB 会将请求转发到之前记录的后端服务器上。",
+		//	      "description": "Cookie handling method. This field is required when StickySessionConfig.StickySessionEnabled is set to on. Parameter values: insert: Inserts a Cookie. ALB records the backend server to which the client's first request is forwarded. ALB inserts a Cookie in the response. Subsequent client requests carry this Cookie, and ALB forwards the requests to the previously recorded backend server. server: Overwrites the Cookie. When session persistence with Cookie overwrite is enabled, after the client's first request is forwarded to the backend server, if ALB detects your custom Cookie in the response, it overwrites the original Cookie. Subsequent client requests carry the overwritten Cookie, and ALB forwards the requests to the previously recorded backend server.",
 		//	      "enum": [
 		//	        "insert",
 		//	        "server"
@@ -785,7 +785,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Cookie
 				"cookie": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "服务配置的会话保持 Cookie 名称。仅在开启会话保持功能并选择重写 Cookie 时有效。 具体规则如下：Cookie 名称长度为1~200个字符。名称只能包含 ASCII 英文字母和数字字符，不能包含半角逗号（,）、半角分号（;）或空格，也不能以美元符号（$）开头。当 tickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 server时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，该参数无效。",
+					Description: "Name of the session persistence Cookie for service configuration. This is only valid when session persistence is enabled and Cookie overwrite is selected. The specific rules are as follows: The Cookie name must be 1–200 characters long. The name can only contain ASCII letters and digits, cannot contain commas (,), semicolons (;), or spaces, and cannot start with a dollar sign ($). This parameter is required when tickySessionConfig.StickySessionEnabled is set to on and StickySessionConfig.StickySessionType is server. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -797,7 +797,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CookieTimeout
 				"cookie_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "会话保持 Cookie 超时时间。仅在开启会话保持功能并选择植入 Cookie 时有效。 单位：秒。具体规则如下：超时时间的取值范围：1～86400。 默认值为：1000。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionType 为 server 时，此参数无效。",
+					Description: "Session persistence cookie timeout. Only valid when session persistence is enabled and the insert cookie option is selected. Unit: seconds. Rules: Timeout range: 1–86400. Default: 1000. This parameter is required when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionType is server.",
 					Optional:    true,
 					Computed:    true,
 					Default:     int64default.StaticInt64(1000),
@@ -810,7 +810,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StickySessionEnabled
 				"sticky_session_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启会话保持功能。on：开启；off（默认值）：关闭。",
+					Description: "Enable session persistence. on: Enable; off (default): Disable.",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("off"),
@@ -826,7 +826,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StickySessionType
 				"sticky_session_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "对 Cookie 的处理方式。当 StickySessionConfig.StickySessionEnabled 值为 on 时，此字段参数必填。取值如下：insert：植入 Cookie；ALB 会记录客户端请求第一次转发到的后端服务器。ALB 在返回请求中植入 Cookie ，后续客户端请求携带此 Cookie，ALB 会将请求转发到之前记录的后端服务器上。server：重写 Cookie；开启重写 Cookie 的会话保持后，在客户端请求第一次转发到后端服务器后，ALB 在返回请求中发现您自定义的 Cookie 时，会对原来的 Cookie 进行重写。后续客户端请求携带改写后的 Cookie，ALB 会将请求转发到之前记录的后端服务器上。",
+					Description: "Cookie handling method. This field is required when StickySessionConfig.StickySessionEnabled is set to on. Parameter values: insert: Inserts a Cookie. ALB records the backend server to which the client's first request is forwarded. ALB inserts a Cookie in the response. Subsequent client requests carry this Cookie, and ALB forwards the requests to the previously recorded backend server. server: Overwrites the Cookie. When session persistence with Cookie overwrite is enabled, after the client's first request is forwarded to the backend server, if ALB detects your custom Cookie in the response, it overwrites the original Cookie. Subsequent client requests carry the overwritten Cookie, and ALB forwards the requests to the previously recorded backend server.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -840,7 +840,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "会话保持功能的参数信息。",
+			Description: "Session persistence parameter information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -851,16 +851,16 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息。",
+		//	  "description": "Tag information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签的标签键。同一资源的标签键不允许重复。",
+		//	        "description": "Tag key. Tag keys for the same resource must be unique.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签的标签值。",
+		//	        "description": "Tag value of the tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -878,7 +878,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的标签键。同一资源的标签键不允许重复。",
+						Description: "Tag key. Tag keys for the same resource must be unique.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -890,7 +890,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的标签值。",
+						Description: "Tag value of the tag.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -899,7 +899,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -913,11 +913,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组的最近操作时间。",
+		//	  "description": "Last operation time of the backend server group.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组的最近操作时间。",
+			Description: "Last operation time of the backend server group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -927,11 +927,11 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器组所属 Vpc 的 ID。",
+		//	  "description": "ID of the VPC to which the backend server group belongs.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器组所属 Vpc 的 ID。",
+			Description: "ID of the VPC to which the backend server group belongs.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -949,7 +949,7 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "服务器组是后端服务器的逻辑集合。ALB 实例按照您配置的转发规则确定客户端请求将被转发到的服务器组。然后，ALB 实例根据您配置的负载均衡策略，将请求分发给服务器组内的后端服务器。后端服务器接收并处理请求。",
+		Description: "A server group is a logical collection of backend servers. The ALB instance determines which server group to forward client requests to based on your configured forwarding rules. Then, the ALB instance distributes requests to backend servers within the server group according to your configured load balancing policy. Backend servers receive and process the requests.",
 		Version:     1,
 		Attributes:  attributes,
 	}

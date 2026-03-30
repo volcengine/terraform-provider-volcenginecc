@@ -21,51 +21,51 @@ Data Source schema for Volcengine::VEDBM::Instance
 
 ### Read-Only
 
-- `charge_detail` (Attributes) 计费详细信息。 (see [below for nested schema](#nestedatt--charge_detail))
-- `created_time` (String) 实例的创建时间，格式：YYYY-MM-DDTHH:MM:SSZ（UTC 时间）。
-- `db_engine_version` (String) 实例兼容版本。取值范围：MySQL_8_0：表示兼容社区 MySQL 8.0 版本。MySQL_5_7：表示兼容社区 MySQL 5.7 版本。
-- `db_minor_version` (String) 根据兼容版本，选择 veDB MySQL 小版本。当 DBEngineVersion 取值为 MySQL_5_7 时，该参数取值默认为 2.0。当 DBEngineVersion 取值为 MySQL_8_0 时，该参数取值范围如下：3.0（默认）：veDB MySQL 稳定版，100% 兼容 MySQL 8.0。3.1：原生支持 HTAP 应用场景，加速复杂查询。3.2：原生支持 HTAP 应用场景，加速复杂查询。
-- `db_revision_version` (String) 实例的内核版本。
-- `deletion_protection` (String) 实例是否开启了删除保护功能。取值范围：enabled：开启。disabled：关闭。
-- `endpoints` (Attributes Set) 连接终端的详细信息。 (see [below for nested schema](#nestedatt--endpoints))
-- `instance_id` (String) 实例 ID。
-- `instance_name` (String) 实例名称。命名规则：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需在 1~128 个字符内。
-- `instance_status` (String) 实例状态。
-- `lower_case_table_names` (String) 表名是否区分大小写。取值范围：0：表名称大小写敏感，后端根据实际表名存储。1：表名称不区分大小写，后端存储时将表名称统一为小写字母。
-- `maintenance_window` (Attributes) 实例的可维护时间窗口信息。 (see [below for nested schema](#nestedatt--maintenance_window))
-- `node_number` (Number) 实例节点数量。取值范围为 2~16 个。
-- `node_spec` (String) 实例的节点规格代码。
-- `nodes` (Attributes List) 实例节点的详细信息。 (see [below for nested schema](#nestedatt--nodes))
-- `number` (Number) 创建的实例数量，取值范围 1~50，默认值为 1。
-- `port` (Number) 为实例默认创建的连接终端指定私网端口号。默认取值为 3306，取值范围为 1000~65534。
-- `pre_paid_storage_in_gb` (Number) 预付费的存储总容量大小，单位 GiB。
-- `project_name` (String) 实例所属的项目名称。
-- `spec_family` (String) 实例规格类型，取值：General：通用型。Exclusive：独享型。
-- `storage_charge_type` (String) 存储计费类型，不传入该参数时，存储计费类型默认与计算计费类型取值一致。取值：PostPaid：按量计费（后付费）。PrePaid：包年包月（预付费）。
-- `storage_used_gi_b` (Number) 已使用存储空间大小，单位 GiB。
-- `subnet_id` (String) 子网 ID。子网必须属于所选的可用区。
-- `super_account_name` (String) 高权限用户的账号名称。账号名称需满足以下要求：名称唯一，且长度在 2~32 个字符内。由字母、数字、中划线（-）、下划线（_）组成。以字母开头，以字母或数字结尾。名称内不能包含禁用关键词。
-- `super_account_password` (String) 高权限账号的密码。账号密码需满足以下要求：只能包含大小写字母、数字和特殊字符（如 ~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/）。长度需在 8~32 个字符内。至少包含大写字母、小写字母、数字或特殊字符中的 3 种。
-- `tags` (Attributes Set) 实例绑定的标签键和标签值数组对象。 (see [below for nested schema](#nestedatt--tags))
-- `template_id` (String) 参数模板 ID。
-- `time_zone` (String) 实例的时区。国内所有地域默认时区为 UTC +08:00。
-- `vpc_id` (String) 私有网络（VPC） ID。
-- `zone_ids` (String) 可用区 ID。
+- `charge_detail` (Attributes) Billing details. (see [below for nested schema](#nestedatt--charge_detail))
+- `created_time` (String) Instance creation time, format: YYYY-MM-DDTHH:MM:SSZ (UTC time)
+- `db_engine_version` (String) Instance compatible version. Options: MySQL_8_0: Compatible with community MySQL 8.0. MySQL_5_7: Compatible with community MySQL 5.7
+- `db_minor_version` (String) Select the veDB MySQL minor version based on compatibility. When DBEngineVersion is set to MySQL_5_7, the default value for this parameter is 2.0. When DBEngineVersion is set to MySQL_8_0, the parameter value options are as follows: 3.0 (default): veDB MySQL stable version, 100% compatible with MySQL 8.0. 3.1: Native support for HTAP scenarios, accelerates complex queries. 3.2: Native support for HTAP scenarios, accelerates complex queries.
+- `db_revision_version` (String) Instance kernel version.
+- `deletion_protection` (String) Whether deletion protection is enabled for the instance. Value range: enabled: enabled. disabled: disabled.
+- `endpoints` (Attributes Set) Endpoint details (see [below for nested schema](#nestedatt--endpoints))
+- `instance_id` (String) Instance ID.
+- `instance_name` (String) Instance name. Naming rules: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be between 1 and 128 characters.
+- `instance_status` (String) Instance status.
+- `lower_case_table_names` (String) Whether table names are case-sensitive. Value range: 0: table names are case-sensitive; backend stores according to actual table name. 1: table names are not case-sensitive; backend stores table names in lowercase.
+- `maintenance_window` (Attributes) Instance maintenance window information (see [below for nested schema](#nestedatt--maintenance_window))
+- `node_number` (Number) Number of instance nodes. Value range: 2–16.
+- `node_spec` (String) Instance node specification code.
+- `nodes` (Attributes List) Instance node details (see [below for nested schema](#nestedatt--nodes))
+- `number` (Number) Number of instances to create. Range: 1~50. Default: 1
+- `port` (Number) Specify the private network port number for the default connection endpoint created for the instance. Default value is 3306. Value range: 1000–65534.
+- `pre_paid_storage_in_gb` (Number) Total prepaid storage capacity, in GiB
+- `project_name` (String) Project name to which the instance belongs.
+- `spec_family` (String) Instance specification type. Values: General: general purpose. Exclusive: dedicated.
+- `storage_charge_type` (String) Storage billing type. If this parameter is not specified, the storage billing type defaults to the same value as the compute billing type. Values: PostPaid: pay-as-you-go. PrePaid: annual/monthly subscription (prepaid).
+- `storage_used_gi_b` (Number) Used storage space, in GiB
+- `subnet_id` (String) Subnet ID. The subnet must belong to the selected availability zone.
+- `super_account_name` (String) Account name for privileged user. Requirements: Must be unique, 2–32 characters. Letters, numbers, hyphens (-), and underscores (_) only. Must start with a letter and end with a letter or number. Cannot contain prohibited keywords
+- `super_account_password` (String) Password for high-privilege account. The password must meet the following requirements: can only contain uppercase and lowercase letters, numbers, and special characters (such as ~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/). Length must be between 8 and 32 characters. Must include at least three of the following: uppercase letters, lowercase letters, numbers, or special characters.
+- `tags` (Attributes Set) Array object of tag keys and tag values bound to the instance. (see [below for nested schema](#nestedatt--tags))
+- `template_id` (String) Parameter template ID
+- `time_zone` (String) Instance time zone. The default time zone for all regions in China is UTC +08:00.
+- `vpc_id` (String) Private network (VPC) ID.
+- `zone_ids` (String) Availability zone ID
 
 <a id="nestedatt--charge_detail"></a>
 ### Nested Schema for `charge_detail`
 
 Read-Only:
 
-- `auto_renew` (Boolean) 预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。
-- `charge_end_time` (String) 预付费场景下计费到期的时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `charge_start_time` (String) 计费开始的时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `charge_status` (String) 付费状态：Normal：正常。Overdue：欠费。Shutdown：关停。
-- `charge_type` (String) 计费类型。PostPaid：按量计费；PrePaid：包年包月。
-- `overdue_reclaim_time` (String) 欠费关停时预计释放时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `overdue_time` (String) 欠费关停时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `period` (Number) 预付费场景下的购买时长。
-- `period_unit` (String) 预付费场景下的购买周期。Month：包月。Year：包年。
+- `auto_renew` (Boolean) Whether to enable auto-renewal in prepaid scenarios. Values: true: auto-renewal. false: no auto-renewal.
+- `charge_end_time` (String) Billing expiration time for prepaid scenarios, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)
+- `charge_start_time` (String) Billing start time. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time)
+- `charge_status` (String) Payment status: Normal: Normal. Overdue: Overdue. Shutdown: Shutdown
+- `charge_type` (String) Billing type. PostPaid: Pay-as-you-go. PrePaid: yearly/monthly subscription
+- `overdue_reclaim_time` (String) Estimated release time when shut down due to overdue payment. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time)
+- `overdue_time` (String) Shutdown time for overdue payments. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time).
+- `period` (Number) Purchase duration for prepaid scenarios.
+- `period_unit` (String) Purchase period for prepaid scenarios. Month: monthly subscription. Year: annual subscription.
 
 
 <a id="nestedatt--endpoints"></a>
@@ -73,32 +73,32 @@ Read-Only:
 
 Read-Only:
 
-- `addresses` (Attributes Set) 连接地址信息。 (see [below for nested schema](#nestedatt--endpoints--addresses))
-- `auto_add_new_nodes` (Boolean) 是否允许自动加入新节点，取值：true：是。false：否。
-- `consist_level` (String) 一致性级别，仅对读写模式的连接终端有效。取值：Eventual：最终一致性。Session：会话一致性。Global：全局一致性。
-- `consist_timeout` (Number) 延迟很大时，只读节点同步最新数据的超时时间，单位为 us，取值范围为 1us~100000000us。
-- `consist_timeout_action` (String) 只读节点同步数据超时后的超时策略，支持以下两种策略：ReturnError：返回 SQL 报错（wait replication complete timeout, please retry）。ReadMaster：发送请求到主节点。
-- `description` (String) 地址描述。
-- `distributed_transaction` (Boolean) 是否开启事务拆分，仅对读写模式的连接终端有效。取值：true：是。false：否。
-- `endpoint_id` (String) 实例连接终端 ID。
-- `endpoint_name` (String) 实例连接终端名称。
-- `endpoint_type` (String) 连接终端类型，取值：Cluster：默认终端。Primary：主节点终端。Custom：自定义终端。
-- `master_accept_read_requests` (Boolean) 主节点是否接受读请求。仅对读写模式的连接终端有效。true：是。false：否。
-- `node_ids` (Set of String) 连接终端配置的节点列表。
-- `read_write_mode` (String) 连接终端的读写模式，取值：ReadWrite: 读写。ReadOnly: 只读。
+- `addresses` (Attributes Set) Connection address information. (see [below for nested schema](#nestedatt--endpoints--addresses))
+- `auto_add_new_nodes` (Boolean) Whether to allow automatic addition of new nodes. Values: true: yes. false: no.
+- `consist_level` (String) Consistency level, applicable only to read-write mode connection endpoints. Values: Eventual: eventual consistency. Session: session consistency. Global: global consistency.
+- `consist_timeout` (Number) When latency is high, the timeout for read-only nodes to synchronize the latest data, in microseconds (us). Range: 1us~100000000us
+- `consist_timeout_action` (String) Timeout policy for read-only node data synchronization. Supports the following two policies: ReturnError: Returns SQL error (wait replication complete timeout, please retry). ReadMaster: Sends request to the primary node.
+- `description` (String) Address description
+- `distributed_transaction` (Boolean) Whether to enable transaction splitting. Only effective for read-write mode endpoints. Values: true: yes. false: no.
+- `endpoint_id` (String) Instance connection endpoint ID.
+- `endpoint_name` (String) Instance connection endpoint name.
+- `endpoint_type` (String) Connection endpoint type. Values: Cluster: default endpoint. Primary: primary node endpoint. Custom: custom endpoint.
+- `master_accept_read_requests` (Boolean) Whether the primary node accepts read requests. Applies only to read/write mode endpoints. true: Yes. false: No
+- `node_ids` (Set of String) Node list configured for the connection endpoint.
+- `read_write_mode` (String) Endpoint read/write mode. Options: ReadWrite: Read/write. ReadOnly: Read-only
 
 <a id="nestedatt--endpoints--addresses"></a>
 ### Nested Schema for `endpoints.addresses`
 
 Read-Only:
 
-- `dns_visibility` (Boolean) 解析方式。当前返回值只能为 false。
-- `domain` (String) 实例内网访问域名。
-- `eip_id` (String) 公网 ID。
-- `ip_address` (String) IP 地址。
-- `network_type` (String) 网络类型：Private：私有网络 VPC。Public：公网访问。
-- `port` (String) 实例内网访问端口。
-- `subnet_id` (String) 子网 ID。子网必须属于所选的可用区。
+- `dns_visibility` (Boolean) Parsing method. The current return value can only be false.
+- `domain` (String) Instance private access domain name.
+- `eip_id` (String) Public network ID.
+- `ip_address` (String) IP address.
+- `network_type` (String) Network type: Private: private network VPC. Public: public access.
+- `port` (String) Instance private network access port.
+- `subnet_id` (String) Subnet ID. The subnet must belong to the selected availability zone.
 
 
 
@@ -107,10 +107,10 @@ Read-Only:
 
 Read-Only:
 
-- `day_kind` (String) 可维护周期粒度，默认取值为：Week（周）。
-- `day_of_month` (Set of Number) 指定每月哪一天为可维护时间段，默认为空，表示每天都指定。
-- `day_of_week` (Set of String) 每周的哪一天为可维护时间段，默认取值为每一天：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
-- `maintenance_time` (String) 实例的可维护时间段。格式：HH:mmZ-HH:mmZ（UTC 时间）。
+- `day_kind` (String) Maintenance cycle granularity. Default value: Week.
+- `day_of_month` (Set of Number) Specify which day of the month is the maintenance window. Default is empty, meaning every day is specified.
+- `day_of_week` (Set of String) Which day of the week is the maintenance window. Default value is every day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+- `maintenance_time` (String) Instance maintenance window. Format: HH:mmZ-HH:mmZ (UTC time).
 
 
 <a id="nestedatt--nodes"></a>
@@ -118,13 +118,13 @@ Read-Only:
 
 Read-Only:
 
-- `failover_priority` (Number) 节点切主的优先级，取值范围为 0~15。数值越大，优先级越高。
-- `memory` (Number) 内存大小，单位为 GiB。
-- `node_id` (String) 节点 ID。
-- `node_spec` (String) 节点规格。
-- `node_type` (String) 节点类型。取值：Primary：主节点。ReadOnly：只读节点。
-- `v_cpu` (Number) CPU 大小，例如当取值为 1 时表示 CPU 大小为 1U。
-- `zone_id` (String) 可用区 ID。
+- `failover_priority` (Number) Node failover priority. Range: 0~15. Higher values indicate higher priority
+- `memory` (Number) Memory size, in GiB.
+- `node_id` (String) Node ID
+- `node_spec` (String) Node specification.
+- `node_type` (String) Node type. Values: Primary: primary node. ReadOnly: read-only node.
+- `v_cpu` (Number) CPU size. For example, a value of 1 indicates a CPU size of 1U.
+- `zone_id` (String) Availability zone ID
 
 
 <a id="nestedatt--tags"></a>
@@ -132,5 +132,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。
-- `value` (String) 用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。
+- `key` (String) User tag key. Length range: 1~128 characters. Allows input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system will automatically remove it
+- `value` (String) User tag value. Allows input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), hyphens (-), and @ (@). Case-sensitive. If the tag value starts or ends with a space, the system will automatically remove it

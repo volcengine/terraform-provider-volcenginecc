@@ -31,11 +31,11 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建此策略的账户 ID。",
+		//	  "description": "Account ID that created this policy",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建此策略的账户 ID。",
+			Description: "Account ID that created this policy",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -45,7 +45,7 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+		//	  "description": "Backup type. Values are as follows: FULL: full backup; INCREMENTAL: incremental backup",
 		//	  "enum": [
 		//	    "FULL",
 		//	    "INCREMENTAL"
@@ -53,7 +53,7 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+			Description: "Backup type. Values are as follows: FULL: full backup; INCREMENTAL: incremental backup",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -66,11 +66,11 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -80,44 +80,44 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份周期，采用 crontab 表达式。",
+		//	  "description": "Backup cycle, using a crontab expression",
 		//	  "type": "string"
 		//	}
 		"crontab": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份周期，采用 crontab 表达式。",
+			Description: "Backup cycle, using a crontab expression",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnablePolicy
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略是否启用，取值说明如下：true：启用策略。false：禁用策略。",
+		//	  "description": "Whether the policy is enabled. Values are as follows: true: policy enabled; false: policy disabled",
 		//	  "type": "boolean"
 		//	}
 		"enable_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "策略是否启用，取值说明如下：true：启用策略。false：禁用策略。",
+			Description: "Whether the policy is enabled. Values are as follows: true: policy enabled; false: policy disabled",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略名称。",
+		//	  "description": "Policy Name",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略名称。",
+			Description: "Policy Name",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PlanNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该策略已关联的备份计划数量。",
+		//	  "description": "Number of backup plans associated with this policy",
 		//	  "type": "integer"
 		//	}
 		"plan_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "该策略已关联的备份计划数量。",
+			Description: "Number of backup plans associated with this policy",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -127,11 +127,11 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份策略 ID。",
+		//	  "description": "Backup Policy ID",
 		//	  "type": "string"
 		//	}
 		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份策略 ID。",
+			Description: "Backup Policy ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -141,22 +141,22 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "恢复点保留时间，-1 表示持续保留。其它合法取值的范围是[1, 999999]",
+		//	  "description": "Restore point retention period. -1 means retain indefinitely. Other valid values range from [1, 999999]",
 		//	  "type": "integer"
 		//	}
 		"retention_day": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "恢复点保留时间，-1 表示持续保留。其它合法取值的范围是[1, 999999]",
+			Description: "Restore point retention period. -1 means retain indefinitely. Other valid values range from [1, 999999]",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RetentionNumMax
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最大恢复点保留数量。",
+		//	  "description": "Maximum number of restore points retained",
 		//	  "type": "integer"
 		//	}
 		"retention_num_max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "最大恢复点保留数量。",
+			Description: "Maximum number of restore points retained",
 			Required:    true,
 			// RetentionNumMax is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -164,11 +164,11 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最小恢复点保留数量下限。",
+		//	  "description": "Minimum restore point retention limit",
 		//	  "type": "integer"
 		//	}
 		"retention_num_min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "最小恢复点保留数量下限。",
+			Description: "Minimum restore point retention limit",
 			Required:    true,
 			// RetentionNumMin is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -176,11 +176,11 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -198,7 +198,7 @@ func backupPolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "备份策略中定义了备份周期、备份类型等信息。后续通过备份计划关联备份策略与备份存储空间，实现自动备份。",
+		Description: "The backup policy defines information such as backup cycle and backup type. Subsequently, backup plans associate the backup policy with backup storage space to achieve automatic backup",
 		Version:     1,
 		Attributes:  attributes,
 	}

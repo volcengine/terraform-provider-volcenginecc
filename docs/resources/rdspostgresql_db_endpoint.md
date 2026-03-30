@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rdspostgresql_db_endpoint Resource - terraform-provider-volcenginecc"
 subcategory: "RDSPostgreSQL"
 description: |-
-  连接终端是位于数据库和应用程序之间的网络代理服务，用于代理应用程序访问数据库时的所有请求，具有高可用、高性能、可运维、简单易用等特点，支持读写分离和负载均衡等高级功能。云数据库 PostgreSQL 版提供了默认终端和自定义只读终端两种类型。
+  The connection endpoint is a network proxy service positioned between the database and the application, handling all requests from the application to the database. It features high availability, high performance, maintainability, and ease of use, and supports advanced functions such as read/write splitting and load balancing. The PostgreSQL cloud database provides two types of endpoints: default endpoint and custom read-only endpoint.
 ---
 
 # volcenginecc_rdspostgresql_db_endpoint (Resource)
 
-连接终端是位于数据库和应用程序之间的网络代理服务，用于代理应用程序访问数据库时的所有请求，具有高可用、高性能、可运维、简单易用等特点，支持读写分离和负载均衡等高级功能。云数据库 PostgreSQL 版提供了默认终端和自定义只读终端两种类型。
+The connection endpoint is a network proxy service positioned between the database and the application, handling all requests from the application to the database. It features high availability, high performance, maintainability, and ease of use, and supports advanced functions such as read/write splitting and load balancing. The PostgreSQL cloud database provides two types of endpoints: default endpoint and custom read-only endpoint.
 
 ## Example Usage
 
@@ -26,27 +26,27 @@ resource "volcenginecc_rdspostgresql_db_endpoint" "RdsPostgresqlDbEndpointDemo" 
 
 ### Optional
 
-- `addresses` (Attributes Set) 地址列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--addresses))
-- `enable_read_write_splitting` (String) 是否已开启读写分离，取值：Enable：开启。Disable：未开启。
-- `endpoint_name` (String) 实例连接终端名称。
-- `endpoint_type` (String) 终端类型：Cluster：默认终端（默认创建）。Custom：自定义终端。
-- `instance_id` (String) 实例 ID。
-- `nodes` (String) 连接终端配置的节点列表。说明当 EndpointType 为 Custom 时必选。主节点无需传节点 ID，传入 Primary 字符串即可。
-- `read_only_node_distribution_type` (String) 只读权重分配模式。取值：Default：标准权重分配（默认值）。Custom：自定义权重分配。
-- `read_only_node_max_delay_time` (Number) 只读节点的最大延迟阈值，当只读节点延迟时间超过该值时，读取流量不发往该节点，单位：秒。取值：0~3600。默认值：30。说明支持对开通了读写分离的默认终端设置此参数。
-- `read_only_node_weights` (Attributes Set) 连接终端配置的节点列表及对应的只读权重。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--read_only_node_weights))
-- `read_write_mode` (String) 读写模式：ReadWrite：读写。ReadOnly：只读。
-- `read_write_proxy_connection` (Number) 终端开启读写分离后，为终端设置的代理连接数。代理连接数的取值下限为 20。代理连接数的取值上限取决于实例主节点的规格，不同规格支持的代理连接数上限不同，详细信息请参见产品规格。
-- `write_node_halt_writing` (Boolean) 终端是否将写请求发送给写节点（目前仅主节点为写节点）。取值：true：是。默认值。false：否。
+- `addresses` (Attributes Set) Address list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--addresses))
+- `enable_read_write_splitting` (String) Whether read/write splitting is enabled. Values: Enable: Enabled. Disable: Not enabled.
+- `endpoint_name` (String) Instance connection endpoint name.
+- `endpoint_type` (String) Endpoint type: Cluster: default endpoint (created by default). Custom: custom endpoint.
+- `instance_id` (String) Instance ID.
+- `nodes` (String) List of nodes configured for the connection endpoint. Note: Required when EndpointType is Custom. The primary node does not require a node ID; use the string 'Primary'.
+- `read_only_node_distribution_type` (String) Read-only weight allocation mode. Values: Default: standard weight allocation (default). Custom: custom weight allocation.
+- `read_only_node_max_delay_time` (Number) Maximum latency threshold for read-only nodes. When the latency of a read-only node exceeds this value, read traffic will not be sent to that node. Unit: seconds. Range: 0~3600. Default: 30. Note: This parameter can be set for default endpoints with read/write splitting enabled.
+- `read_only_node_weights` (Attributes Set) List of nodes configured for the connection endpoint and their corresponding read-only weights.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--read_only_node_weights))
+- `read_write_mode` (String) Read/write mode: ReadWrite: read/write. ReadOnly: read-only.
+- `read_write_proxy_connection` (Number) After enabling read/write splitting for the endpoint, set the number of proxy connections for the endpoint. The minimum value for proxy connections is 20. The maximum value depends on the specifications of the primary node; different specifications support different maximum proxy connections. For details, see product specifications.
+- `write_node_halt_writing` (Boolean) Whether the endpoint sends write requests to the write node (currently only the primary node is the write node). Values: true: Yes (default). false: No.
 
 ### Read-Only
 
-- `auto_add_new_nodes` (String) 当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：Enable：自动加入。Disable：不自动加入（默认）。
-- `description` (String) 地址描述。
-- `enable_read_only` (String) 是否已开启全局只读。Enable：开启。Disable：未开启。
-- `endpoint_id` (String) 实例连接终端 ID。
+- `auto_add_new_nodes` (String) When the endpoint type is read/write or read-only, you can configure whether new nodes are automatically added. Values: Enable: Automatically add. Disable: Do not automatically add (default).
+- `description` (String) Address description
+- `enable_read_only` (String) Whether global read-only is enabled. Enable: Enabled. Disable: Not enabled.
+- `endpoint_id` (String) Instance connection endpoint ID.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--addresses"></a>
@@ -54,9 +54,9 @@ resource "volcenginecc_rdspostgresql_db_endpoint" "RdsPostgresqlDbEndpointDemo" 
 
 Optional:
 
-- `dns_visibility` (Boolean) 是否开启公网解析。取值为：false：默认值，私网解析。true：私网以及公网解析。
-- `domain_prefix` (String) 新的访问地址前缀。访问地址前缀应满足以下规则：由小写字母、数字和中划线（-）组成。至少包含 8 个字符，总长度（含后缀）不得超过 63 个字符。以小写字母开头，以小写字母或数字结尾。
-- `port` (String) 端口号。
+- `dns_visibility` (Boolean) Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.
+- `domain_prefix` (String) New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.
+- `port` (String) Port number.
 
 
 <a id="nestedatt--read_only_node_weights"></a>
@@ -64,9 +64,9 @@ Optional:
 
 Optional:
 
-- `node_id` (String) 只读节点需要传入 NodeId。
-- `node_type` (String) 节点类型。取值：Primary：主节点。ReadOnly：只读节点。
-- `weight` (Number) 节点的读权重，以 100 递增，最大值为 40000。说明权重不可全部设置为 0。
+- `node_id` (String) Read-only nodes require the NodeId to be provided.
+- `node_type` (String) Node type. Values: Primary: primary node. ReadOnly: read-only node.
+- `weight` (Number) Read weight of the node, increases in increments of 100, maximum value is 40000. Note: Weights cannot all be set to 0.
 
 ## Import
 

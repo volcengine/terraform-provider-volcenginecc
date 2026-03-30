@@ -27,29 +27,29 @@ func hAVIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP绑定的公网IP的IP地址。",
+		//	  "description": "IP address of the public IP bound to the HAVIP",
 		//	  "type": "string"
 		//	}
 		"associated_eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP绑定的公网IP的IP地址。",
+			Description: "IP address of the public IP bound to the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedEipId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP绑定的公网IP的ID。",
+		//	  "description": "ID of the public IP bound to the HAVIP",
 		//	  "type": "string"
 		//	}
 		"associated_eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP绑定的公网IP的ID。",
+			Description: "ID of the public IP bound to the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定HAVIP的实例ID列表。",
+		//	  "description": "List of instance IDs bound to the HAVIP",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -59,139 +59,139 @@ func hAVIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"associated_instance_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "绑定HAVIP的实例ID列表。",
+			Description: "List of instance IDs bound to the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定HAVIP的实例类型。EcsInstance：云服务器实例。NetworkInterface：弹性网卡。",
+		//	  "description": "Instance type bound to the HAVIP. EcsInstance: cloud server instance. NetworkInterface: elastic network interface",
 		//	  "type": "string"
 		//	}
 		"associated_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "绑定HAVIP的实例类型。EcsInstance：云服务器实例。NetworkInterface：弹性网卡。",
+			Description: "Instance type bound to the HAVIP. EcsInstance: cloud server instance. NetworkInterface: elastic network interface",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP的创建时间。",
+		//	  "description": "Creation time of the HAVIP",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP的创建时间。",
+			Description: "Creation time of the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP的描述。长度限制为0～255个字符。",
+		//	  "description": "Description of the HAVIP. Length limit: 0–255 characters",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP的描述。长度限制为0～255个字符。",
+			Description: "Description of the HAVIP. Length limit: 0–255 characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HaVipId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP的ID。",
+		//	  "description": "ID of the HAVIP",
 		//	  "type": "string"
 		//	}
 		"ha_vip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP的ID。",
+			Description: "ID of the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HaVipName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制在0～128字符之间。",
+		//	  "description": "Name of the HAVIP. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 0–128 characters",
 		//	  "maxLength": 128,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"ha_vip_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制在0～128字符之间。",
+			Description: "Name of the HAVIP. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 0–128 characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP的IP地址。",
+		//	  "description": "IP address of the HAVIP",
 		//	  "type": "string"
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP的IP地址。",
+			Description: "IP address of the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MasterInstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "与HAVIP绑定的主实例的ID。",
+		//	  "description": "ID of the primary instance bound to the HAVIP",
 		//	  "type": "string"
 		//	}
 		"master_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "与HAVIP绑定的主实例的ID。",
+			Description: "ID of the primary instance bound to the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP的项目名称。",
+		//	  "description": "Project name of the HAVIP",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP的项目名称。",
+			Description: "Project name of the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP的状态。Available：可用。Creating：创建中。InUse：使用中。Deleting：删除中。",
+		//	  "description": "Status of the HAVIP. Available: available. Creating: creating. InUse: in use. Deleting: deleting",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP的状态。Available：可用。Creating：创建中。InUse：使用中。Deleting：删除中。",
+			Description: "Status of the HAVIP. Available: available. Creating: creating. InUse: in use. Deleting: deleting",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP所属的子网 ID。",
+		//	  "description": "Subnet ID to which the HAVIP belongs",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP所属的子网 ID。",
+			Description: "Subnet ID to which the HAVIP belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP所属标签。",
+		//	  "description": "Tags associated with the HAVIP",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "Tag key for user tags. Length range: 1–128 characters. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system automatically removes it",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "Tag value for user tags. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system automatically removes it",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -211,39 +211,39 @@ func hAVIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+						Description: "Tag key for user tags. Length range: 1–128 characters. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system automatically removes it",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+						Description: "Tag value for user tags. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system automatically removes it",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "HAVIP所属标签。",
+			Description: "Tags associated with the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP最近一次的修改时间。",
+		//	  "description": "Last modification time of the HAVIP",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP最近一次的修改时间。",
+			Description: "Last modification time of the HAVIP",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HAVIP所属的VPC ID。",
+		//	  "description": "VPC ID to which the HAVIP belongs",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HAVIP所属的VPC ID。",
+			Description: "VPC ID to which the HAVIP belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

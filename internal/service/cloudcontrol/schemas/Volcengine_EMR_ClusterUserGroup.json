@@ -4,7 +4,7 @@
     "/properties/ClusterId",
     "/properties/UserGroupName"
   ],
-  "description": " E-MapReduce（EMR）集群中支持对用户进行组管理，允许您创建、编辑和删除用户组。",
+  "description": "User group management is supported in E-MapReduce (EMR) clusters, allowing you to create, edit, and delete user groups.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ClusterId",
@@ -54,16 +54,16 @@
   ],
   "properties": {
     "ClusterId": {
-      "description": "集群ID。",
+      "description": "Cluster ID.",
       "type": "string"
     },
     "Description": {
-      "description": "用户组描述。",
+      "description": "User group description.",
       "semantic": "description",
       "type": "string"
     },
     "Members": {
-      "description": "用户组成员。不支持操作特殊用户，如admin等。",
+      "description": "Operations on special users, such as admin, are not supported.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -72,7 +72,7 @@
       "uniqueItems": true
     },
     "UserGroupName": {
-      "description": "用户组名称。",
+      "description": "User group name.",
       "semantic": "resourceId",
       "type": "string"
     }

@@ -21,43 +21,43 @@ Data Source schema for Volcengine::VPN::VPNGateway
 
 ### Read-Only
 
-- `asn` (Number) VPN网关的ASN。
-- `bandwidth` (Number) VPN网关的带宽规格。
-- `billing_type` (Number) VPN网关的计费类型。1：包年包月。2：按量计费（按固定规格）
-- `business_status` (String) VPN网关的计费状态。Normal: 正常。FinancialLocked: 被锁定。
-- `connection_count` (Number) VPN网关关联IPsec连接的数量。
-- `create_time` (String) 创建VPN网关的时间。
-- `deleted_time` (String) 预期资源强制回收时间。
-- `description` (String) VPN网关的描述。
-- `dual_tunnel_enabled` (Boolean) VPN网关是否开启双隧道模式。true：开启false：关闭
-- `expired_time` (String) VPN网关的到期时间。
-- `ip_address` (String) VPN网关的公网IP地址。
-- `ip_stack_type` (String) VPN 网关的协议类型。ipv4_only：IPv4协议类型。ipv6_only：IPv6协议类型。ipv4_ipv6：双栈协议类型。
-- `ip_version` (String) VPN网关的IP地址类型。ipv4：IPv4地址类型。ipv6：IPv6地址类型。
-- `ipsec_enabled` (Boolean) 是否开启IPSec功能。true：开启false：关闭。
-- `is_blocked` (Boolean) 当前资源的状态是否被封禁。true：封禁false：未封禁。
-- `lock_reason` (String) VPN网关的锁定原因。financial：因欠费被锁定。security：因安全被锁定。unlock：未锁定。
-- `overdue_time` (String) 资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。
-- `period` (Number) 包年包月类型VPN网关购买的时长，默认“1”。当PeriodUnit传入值为Month，Period取值范围：1~9、12、24、36。当PeriodUnit传入值为Year，Period取值范围：1～3。
-- `period_unit` (String) 包年包月类型VPN网关购买时长的单位，默认“Month”。Month：月Year：年
-- `project_name` (String) VPN网关所属的项目。不填默认为default，即创建的资源属于default项目。您可调用ListProjects查询当前账号下项目的信息。
-- `route_count` (Number) VPN网关的路由条目数量。
-- `secondary_ip_address` (String) VPN网关的第二个公网IP地址。仅双隧道模式的VPN网关实例返回该参数，单隧道模式的VPN网关实例不返回该参数。
-- `secondary_subnet_id` (String) VPN网关实例关联的第二个子网的ID。仅双隧道模式的VPN网关实例返回该参数，单隧道模式的VPN网关实例不返回该参数。
-- `ssl_enabled` (Boolean) 是否开启SSL VPN功能。true：开启false：关闭
-- `ssl_max_connections` (Number) VPN网关的最大SSL连接数。
-- `status` (String) VPN网关的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用
-- `subnet_id` (String) VPN网关使用的端口所属子网的ID。
-- `tags` (Attributes Set) VPN网关已添加的全部标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `update_time` (String) 更新VPN网关的时间。
-- `vpc_id` (String) VPN网关所在VPC的ID。
-- `vpn_gateway_id` (String) VPN网关的ID。
-- `vpn_gateway_name` (String) VPN网关的名称。
+- `asn` (Number) ASN of the VPN gateway.
+- `bandwidth` (Number) VPN gateway bandwidth specification.
+- `billing_type` (Number) VPN gateway billing type. 1: Subscription. 2: Pay-as-you-go (fixed specification)
+- `business_status` (String) VPN gateway billing status. Normal: Normal. FinancialLocked: Locked.
+- `connection_count` (Number) Number of IPsec connections associated with the VPN gateway.
+- `create_time` (String) Time when the VPN gateway was created.
+- `deleted_time` (String) Expected resource forced reclaim time.
+- `description` (String) Description of the VPN gateway.
+- `dual_tunnel_enabled` (Boolean) Whether dual tunnel mode is enabled for the VPN gateway. true: Enabled false: Disabled
+- `expired_time` (String) VPN gateway expiration time.
+- `ip_address` (String) VPN gateway public IP address.
+- `ip_stack_type` (String) VPN gateway protocol type. ipv4_only: IPv4 protocol type. ipv6_only: IPv6 protocol type. ipv4_ipv6: Dual-stack protocol type.
+- `ip_version` (String) IP address type of the VPN gateway. ipv4: IPv4 address type. ipv6: IPv6 address type.
+- `ipsec_enabled` (Boolean) Enable IPSec feature. true: enabled false: disabled
+- `is_blocked` (Boolean) Whether the current resource is banned. true: Banned false: Not banned.
+- `lock_reason` (String) VPN gateway lock reasons. financial: Locked due to overdue payment. security: Locked for security reasons. unlock: Not locked.
+- `overdue_time` (String) Resource freeze time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns an empty value.
+- `period` (Number) Subscription VPN gateway purchase duration, default is '1'. If PeriodUnit is Month, Period value range: 1–9, 12, 24, 36. If PeriodUnit is Year, Period value range: 1–3.
+- `period_unit` (String) Unit for the purchase duration of subscription-based VPN gateways. Default is 'Month'. Month: month Year: year
+- `project_name` (String) Project to which the VPN gateway belongs. If not specified, defaults to 'default', meaning the created resource belongs to the default project. You can call ListProjects to query project information under the current account.
+- `route_count` (Number) Number of route entries for the VPN gateway.
+- `secondary_ip_address` (String) Second public IP address of the VPN gateway. This parameter is returned only for VPN gateway instances in dual tunnel mode; it is not returned for instances in single tunnel mode.
+- `secondary_subnet_id` (String) ID of the second subnet associated with the VPN gateway instance. This parameter is returned only for VPN gateway instances in dual tunnel mode; it is not returned for instances in single tunnel mode.
+- `ssl_enabled` (Boolean) Enable SSL VPN feature. true: enabled false: disabled
+- `ssl_max_connections` (Number) Maximum SSL connections for the VPN gateway.
+- `status` (String) Status of the VPN gateway. Creating: creating Deleting: deleting Pending: configuring Available: available
+- `subnet_id` (String) ID of the subnet to which the port used by the VPN gateway belongs.
+- `tags` (Attributes Set) All tag information added to the VPN gateway. (see [below for nested schema](#nestedatt--tags))
+- `update_time` (String) VPN gateway update time.
+- `vpc_id` (String) VPC ID where the VPN gateway is located.
+- `vpn_gateway_id` (String) ID of the VPN gateway.
+- `vpn_gateway_name` (String) Name of the VPN gateway.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) VPN网关标签的标签键（Key）。参数   - N：表示标签键的序号，取值范围：1～20。多个标签键之间用&分隔。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。说明同一资源的标签键不允许重复。
-- `value` (String) VPN网关标签的标签值（Value）。参数   - N：表示标签值的序号，取值范围：1～20。多个标签值之间用&分隔。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。大小写敏感，不能以空格开头或结尾。说明传入Tags.N.Value则必须传入Tags.N.Key。
+- `key` (String) VPN gateway tag key (Key). Parameter   - N: Indicates the sequence number of the tag key, value range: 1–20. Multiple tag keys are separated by &. Naming rules: Cannot start with any combination of volc: or sys: (case-insensitive). Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length limit: 1–128 characters. Note: Tag keys for the same resource must not be duplicated.
+- `value` (String) VPN gateway tag value (Value). Parameter   - N: Indicates the sequence number of the tag value, value range: 1–20. Multiple tag values are separated by &. Naming rules: Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length limit: 0–256 characters. Case-sensitive. Cannot start or end with a space. Note: If Tags.N.Value is provided, Tags.N.Key must also be provided.

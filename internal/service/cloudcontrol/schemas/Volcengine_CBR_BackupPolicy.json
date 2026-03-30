@@ -1,6 +1,6 @@
 {
   "additionalProperties": false,
-  "description": "备份策略中定义了备份周期、备份类型等信息。后续通过备份计划关联备份策略与备份存储空间，实现自动备份。",
+  "description": "The backup policy defines information such as backup cycle and backup type. Subsequently, backup plans associate the backup policy with backup storage space to achieve automatic backup",
   "filterProperties": {
     "filterableProperties": [
       "/properties/EnablePolicy",
@@ -43,11 +43,11 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "创建此策略的账户 ID。",
+      "description": "Account ID that created this policy",
       "type": "string"
     },
     "BackupType": {
-      "description": "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+      "description": "Backup type. Values are as follows: FULL: full backup; INCREMENTAL: incremental backup",
       "enum": [
         "FULL",
         "INCREMENTAL"
@@ -55,46 +55,46 @@
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Crontab": {
-      "description": "备份周期，采用 crontab 表达式。",
+      "description": "Backup cycle, using a crontab expression",
       "type": "string"
     },
     "EnablePolicy": {
-      "description": "策略是否启用，取值说明如下：true：启用策略。false：禁用策略。",
+      "description": "Whether the policy is enabled. Values are as follows: true: policy enabled; false: policy disabled",
       "type": "boolean"
     },
     "Name": {
-      "description": "策略名称。",
+      "description": "Policy Name",
       "semantic": "resourceName",
       "type": "string"
     },
     "PlanNumber": {
-      "description": "该策略已关联的备份计划数量。",
+      "description": "Number of backup plans associated with this policy",
       "type": "integer"
     },
     "PolicyId": {
-      "description": "备份策略 ID。",
+      "description": "Backup Policy ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "RetentionDay": {
-      "description": "恢复点保留时间，-1 表示持续保留。其它合法取值的范围是[1, 999999]",
+      "description": "Restore point retention period. -1 means retain indefinitely. Other valid values range from [1, 999999]",
       "type": "integer"
     },
     "RetentionNumMax": {
-      "description": "最大恢复点保留数量。",
+      "description": "Maximum number of restore points retained",
       "type": "integer"
     },
     "RetentionNumMin": {
-      "description": "最小恢复点保留数量下限。",
+      "description": "Minimum restore point retention limit",
       "type": "integer"
     },
     "UpdatedTime": {
-      "description": "更新时间。",
+      "description": "Update time",
       "semantic": "updatedTime",
       "type": "string"
     }

@@ -8,37 +8,37 @@
     "RuleDescribeSecurityGroupAttribute": {
       "properties": {
         "CidrIp": {
-          "description": "源地址的IPv4 CIDR或IPv6 CIDR",
+          "description": "IPv4 CIDR or IPv6 CIDR of the source address",
           "type": "string"
         },
         "CreationTime": {
-          "description": "安全组规则创建时间。",
+          "description": "Security group rule creation time",
           "type": "string"
         },
         "Description": {
-          "description": "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+          "description": "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
           "type": "string"
         },
         "Direction": {
-          "description": "安全组规则方向。ingress：入方向。egress：出方向",
+          "description": "Security group rule direction. ingress: inbound direction. egress: outbound direction",
           "type": "string"
         },
         "Policy": {
-          "description": "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+          "description": "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
           "type": "string"
         },
         "PortEnd": {
-          "description": "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+          "description": "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
           "format": "int64",
           "type": "integer"
         },
         "PortStart": {
-          "description": "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+          "description": "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
           "format": "int64",
           "type": "integer"
         },
         "PrefixListCidrs": {
-          "description": "前缀列表的CIDR。",
+          "description": "Prefix list CIDR",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -47,24 +47,24 @@
           "uniqueItems": true
         },
         "PrefixListId": {
-          "description": "前缀列表的ID",
+          "description": "Prefix list ID",
           "type": "string"
         },
         "Priority": {
-          "description": "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+          "description": "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
           "format": "int64",
           "type": "integer"
         },
         "Protocol": {
-          "description": "协议类型。tcp、udp、icmp、icmpv6、all",
+          "description": "Protocol type. tcp, udp, icmp, icmpv6, all",
           "type": "string"
         },
         "SourceGroupId": {
-          "description": "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+          "description": "Source address security group ID. All NIC addresses in this security group are used as source addresses",
           "type": "string"
         },
         "UpdateTime": {
-          "description": "安全组规则更新时间。",
+          "description": "Security group rule update time",
           "type": "string"
         }
       },
@@ -81,11 +81,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "用户标签的标签键。",
+          "description": "User tag key",
           "type": "string"
         },
         "Value": {
-          "description": "用户标签的标签值。",
+          "description": "User tag value",
           "type": "string"
         }
       },
@@ -95,7 +95,7 @@
       "type": "object"
     }
   },
-  "description": "安全组是一个逻辑意义上的分组，为同一个私有网络内具有相同安全保护需求并相互信任的网卡提供访问策略。您可以通过配置安全组规则，控制安全组关联网卡的出入流量。",
+  "description": "A security group is a logical grouping that provides access policies for NICs within the same private network that share security requirements and mutual trust. You can control inbound and outbound traffic for associated NICs by configuring security group rules",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -150,18 +150,18 @@
   ],
   "properties": {
     "CreationTime": {
-      "description": "安全组创建时间。",
+      "description": "Security group creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "安全组的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不填默认空字符串。",
+      "description": "Description of the security group. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). If not specified, defaults to an empty string",
       "maxLength": 255,
       "semantic": "description",
       "type": "string"
     },
     "EgressPermissions": {
-      "description": "安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+      "description": "Description for outbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/RuleDescribeSecurityGroupAttribute"
@@ -170,7 +170,7 @@
       "uniqueItems": true
     },
     "IngressPermissions": {
-      "description": "安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+      "description": "Description for inbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/RuleDescribeSecurityGroupAttribute"
@@ -180,33 +180,33 @@
     },
     "ProjectName": {
       "default": "default",
-      "description": "安全组所属项目名称。不填默认项目为default。",
+      "description": "Project name to which the security group belongs. Default project is 'default' if not specified",
       "semantic": "projectName",
       "type": "string"
     },
     "SecurityGroupId": {
-      "description": "安全组ID。",
+      "description": "Security group ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "SecurityGroupName": {
-      "description": "安全组的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认是安全组的ID。",
+      "description": "Security group name. Length: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Default is security group ID if not specified",
       "maxLength": 128,
       "minLength": 1,
       "semantic": "resourceName",
       "type": "string"
     },
     "ServiceManaged": {
-      "description": "安全组是否为托管安全组。true为托管安全组，false为非托管安全组。",
+      "description": "Indicates whether the security group is managed. true means managed security group, false means unmanaged security group",
       "type": "boolean"
     },
     "Status": {
-      "description": "安全组状态。Available为可用，Creating为创建中。",
+      "description": "Security group status. Available means available for use, Creating means being created",
       "semantic": "status",
       "type": "string"
     },
     "Tags": {
-      "description": "标签列表。",
+      "description": "Tag list",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -216,11 +216,11 @@
       "uniqueItems": true
     },
     "Type": {
-      "description": "安全组类型。1、default：默认安全组。2、normal：自定义安全组。3、VpnGW： VPN网关安全组。4、NatGW： Nat网关安全组。 5、cidr_only：CIDR-Only安全组。",
+      "description": "Security group type. 1. default: default security group. 2. normal: custom security group. 3. VpnGW: VPN gateway security group. 4. NatGW: NAT gateway security group. 5. cidr_only: CIDR-Only security group",
       "type": "string"
     },
     "VpcId": {
-      "description": "安全组所属的VPC ID。",
+      "description": "VPC ID to which the security group belongs",
       "type": "string"
     }
   },

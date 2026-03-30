@@ -35,11 +35,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否只支持 BatchChat。如果为true，只能访问 Batch 推理接口，否则只能访问在线推理接口。",
+		//	  "description": "Whether only BatchChat is supported. If true, only batch inference interfaces can be accessed; otherwise, only online inference interfaces can be accessed",
 		//	  "type": "boolean"
 		//	}
 		"batch_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否只支持 BatchChat。如果为true，只能访问 Batch 推理接口，否则只能访问在线推理接口。",
+			Description: "Whether only BatchChat is supported. If true, only batch inference interfaces can be accessed; otherwise, only online inference interfaces can be accessed",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -49,36 +49,36 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书信息。",
+		//	  "description": "Certificate information",
 		//	  "properties": {
 		//	    "NotAfter": {
-		//	      "description": "X509私有证书过期的时间。使用秒级时间戳表示。",
+		//	      "description": "X509 private certificate expiration time, represented as a timestamp in seconds",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "NotBefore": {
-		//	      "description": "X509私有证书开始生效的时间。使用秒级时间戳表示。",
+		//	      "description": "X509 private certificate activation time, represented as a timestamp in seconds",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "PCAHost": {
-		//	      "description": "证书方。",
+		//	      "description": "Certificate subject",
 		//	      "type": "string"
 		//	    },
 		//	    "PCAInstanceCertificate": {
-		//	      "description": "PEM 格式的叶子证书。",
+		//	      "description": "PEM format leaf certificate",
 		//	      "type": "string"
 		//	    },
 		//	    "PCAName": {
-		//	      "description": "证书名称。",
+		//	      "description": "Certificate name",
 		//	      "type": "string"
 		//	    },
 		//	    "PCARootCACertificate": {
-		//	      "description": "PEM 格式的根证书。",
+		//	      "description": "PEM format root certificate",
 		//	      "type": "string"
 		//	    },
 		//	    "PCASubCACertificate": {
-		//	      "description": "PEM 格式的中间根证书和根证书。",
+		//	      "description": "Intermediate certificate and root certificate in PEM format",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -88,41 +88,41 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: NotAfter
 				"not_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "X509私有证书过期的时间。使用秒级时间戳表示。",
+					Description: "X509 private certificate expiration time, represented as a timestamp in seconds",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: NotBefore
 				"not_before": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "X509私有证书开始生效的时间。使用秒级时间戳表示。",
+					Description: "X509 private certificate activation time, represented as a timestamp in seconds",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PCAHost
 				"pca_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "证书方。",
+					Description: "Certificate subject",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PCAInstanceCertificate
 				"pca_instance_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "PEM 格式的叶子证书。",
+					Description: "PEM format leaf certificate",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PCAName
 				"pca_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "证书名称。",
+					Description: "Certificate name",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PCARootCACertificate
 				"pca_root_ca_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "PEM 格式的根证书。",
+					Description: "PEM format root certificate",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PCASubCACertificate
 				"pca_sub_ca_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "PEM 格式的中间根证书和根证书。",
+					Description: "Intermediate certificate and root certificate in PEM format",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "证书信息。",
+			Description: "Certificate information",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -132,11 +132,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点创建时间，RFC3339格式。",
+		//	  "description": "Endpoint creation time, RFC3339 format",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接入点创建时间，RFC3339格式。",
+			Description: "Endpoint creation time, RFC3339 format",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -146,11 +146,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点描述。",
+		//	  "description": "Endpoint description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接入点描述。",
+			Description: "Endpoint description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -162,11 +162,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "推理接入点的ID。",
+		//	  "description": "Inference access point ID.",
 		//	  "type": "string"
 		//	}
 		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "推理接入点的ID。",
+			Description: "Inference access point ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -176,7 +176,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点模型类型。取值:FoundationModel为基础模型;CustomModel为定制模型。",
+		//	  "description": "Access point model type. Options: FoundationModel for base model; CustomModel for custom model.",
 		//	  "enum": [
 		//	    "FoundationModel",
 		//	    "CustomModel"
@@ -184,7 +184,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"endpoint_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接入点模型类型。取值:FoundationModel为基础模型;CustomModel为定制模型。",
+			Description: "Access point model type. Options: FoundationModel for base model; CustomModel for custom model.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -194,21 +194,21 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点接入模型。",
+		//	  "description": "Endpoint access model",
 		//	  "properties": {
 		//	    "CustomModelId": {
-		//	      "description": "定制模型的ID。",
+		//	      "description": "Custom model ID",
 		//	      "type": "string"
 		//	    },
 		//	    "FoundationModel": {
-		//	      "description": "基础模型。",
+		//	      "description": "Base model",
 		//	      "properties": {
 		//	        "ModelVersion": {
-		//	          "description": "基础模型版本。",
+		//	          "description": "Base model version",
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
-		//	          "description": "基础模型名称。请注意模型名称为小写。doubao 1.5 代模型的模型名称格式为\"doubao-1-5-**\"。",
+		//	          "description": "Base model name. Note: Model names are lowercase. The model name format for doubao 1.5 generation models is \"doubao-1-5-**\".",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -221,7 +221,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CustomModelId
 				"custom_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "定制模型的ID。",
+					Description: "Custom model ID",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -233,7 +233,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ModelVersion
 						"model_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "基础模型版本。",
+							Description: "Base model version",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -242,7 +242,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "基础模型名称。请注意模型名称为小写。doubao 1.5 代模型的模型名称格式为\"doubao-1-5-**\"。",
+							Description: "Base model name. Note: Model names are lowercase. The model name format for doubao 1.5 generation models is \"doubao-1-5-**\".",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -250,7 +250,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "基础模型。",
+					Description: "Base model",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -258,7 +258,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "接入点接入模型。",
+			Description: "Endpoint access model",
 			Required:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
@@ -268,11 +268,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "模型单元，为空表示后付费；否则预付费。",
+		//	  "description": "Model unit. If empty, indicates postpaid; otherwise, prepaid.",
 		//	  "type": "string"
 		//	}
 		"model_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "模型单元，为空表示后付费；否则预付费。",
+			Description: "Model unit. If empty, indicates postpaid; otherwise, prepaid.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -284,10 +284,10 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "内容护栏方案。",
+		//	  "description": "Content guardrail scheme",
 		//	  "properties": {
 		//	    "Strategy": {
-		//	      "description": "内容安全护栏方案。取值:Default: 默认方案。更低延迟，广泛覆盖内容安全通用需求;Basic：基本方案（公测中）。支持在接口响应中提供命中的风险分类，暂时只包含严重违规和激进行为两类风险。注意：如果是流式接口调用，不建议此方案，会导致吐出的每个分片的长度变长，延时变高。",
+		//	      "description": "Content safety guardrail scheme. Values: Default: default scheme. Lower latency, broadly covers general content safety requirements; Basic: basic scheme (public beta). Supports providing triggered risk categories in interface responses, currently only includes two risk types: severe violations and aggressive behavior. Note: If using streaming interface calls, this scheme is not recommended, as it will increase the length of each output fragment and raise latency",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -297,7 +297,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Strategy
 				"strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "内容安全护栏方案。取值:Default: 默认方案。更低延迟，广泛覆盖内容安全通用需求;Basic：基本方案（公测中）。支持在接口响应中提供命中的风险分类，暂时只包含严重违规和激进行为两类风险。注意：如果是流式接口调用，不建议此方案，会导致吐出的每个分片的长度变长，延时变高。",
+					Description: "Content safety guardrail scheme. Values: Default: default scheme. Lower latency, broadly covers general content safety requirements; Basic: basic scheme (public beta). Supports providing triggered risk categories in interface responses, currently only includes two risk types: severe violations and aggressive behavior. Note: If using streaming interface calls, this scheme is not recommended, as it will increase the length of each output fragment and raise latency",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -305,7 +305,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "内容护栏方案。",
+			Description: "Content guardrail scheme",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -317,11 +317,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点名称。",
+		//	  "description": "Endpoint name",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接入点名称。",
+			Description: "Endpoint name",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -332,11 +332,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "资源所属的项目名称，默认值为default。",
+		//	  "description": "Project name the resource belongs to; default value is \"default\"",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源所属的项目名称，默认值为default。",
+			Description: "Project name the resource belongs to; default value is \"default\"",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -349,15 +349,15 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点限流。",
+		//	  "description": "Endpoint rate limiting",
 		//	  "properties": {
 		//	    "Rpm": {
-		//	      "description": "Requests Per Minute，每分钟请求数。",
+		//	      "description": "Requests Per Minute, number of requests per minute",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    },
 		//	    "Tpm": {
-		//	      "description": "Tokens Per Minute，每分钟请求 token 数。",
+		//	      "description": "Tokens Per Minute, number of tokens requested per minute",
 		//	      "format": "int32",
 		//	      "type": "integer"
 		//	    }
@@ -368,7 +368,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Rpm
 				"rpm": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Requests Per Minute，每分钟请求数。",
+					Description: "Requests Per Minute, number of requests per minute",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -377,7 +377,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Tpm
 				"tpm": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Tokens Per Minute，每分钟请求 token 数。",
+					Description: "Tokens Per Minute, number of tokens requested per minute",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -385,7 +385,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "接入点限流。",
+			Description: "Endpoint rate limiting",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -397,11 +397,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点切换的Id。",
+		//	  "description": "Endpoint switch ID",
 		//	  "type": "string"
 		//	}
 		"rolling_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接入点切换的Id。",
+			Description: "Endpoint switch ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -411,11 +411,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "如果存在 TPM 保障包，则为 TPM 保障包 ID。",
+		//	  "description": "If a TPM protection package exists, this is the TPM protection package ID.",
 		//	  "type": "string"
 		//	}
 		"scale_tier_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "如果存在 TPM 保障包，则为 TPM 保障包 ID。",
+			Description: "If a TPM protection package exists, this is the TPM protection package ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -425,11 +425,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点状态。",
+		//	  "description": "Endpoint status",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接入点状态。",
+			Description: "Endpoint status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -439,11 +439,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "状态附加说明信息。",
+		//	  "description": "Additional status information",
 		//	  "type": "string"
 		//	}
 		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "状态附加说明信息。",
+			Description: "Additional status information",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -453,11 +453,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否支持接入点切换模型版本。",
+		//	  "description": "Whether endpoint supports switching model versions",
 		//	  "type": "boolean"
 		//	}
 		"support_rolling": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否支持接入点切换模型版本。",
+			Description: "Whether endpoint supports switching model versions",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -467,11 +467,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否支持TPM保障包。",
+		//	  "description": "Whether TPM protection package is supported",
 		//	  "type": "boolean"
 		//	}
 		"support_scale_tier": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否支持TPM保障包。",
+			Description: "Whether TPM protection package is supported",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -481,16 +481,16 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点绑定的标签。",
+		//	  "description": "Tags bound to the endpoint",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -507,7 +507,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -519,7 +519,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -528,7 +528,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "接入点绑定的标签。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tags bound to the endpoint\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -540,11 +540,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入点更新时间，RFC3339格式。",
+		//	  "description": "Endpoint update time, RFC3339 format",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接入点更新时间，RFC3339格式。",
+			Description: "Endpoint update time, RFC3339 format",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -562,7 +562,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "在使用大语言模型进行推理服务时，推理接入点（Endpoint）是模型调用的关键入口。开发者只需通过指定的 ID 即可向大模型发起 API / SDK 推理请求，实现快速接入与灵活调用。系统提供统一的 API 调用方式、调用监控、限流策略与安全保障机制，确保推理过程的稳定性与安全性。",
+		Description: "When using large language models for inference services, the inference endpoint is the key entry point for model invocation. Developers can initiate API/SDK inference requests to the large model simply by specifying the ID, enabling quick access and flexible invocation. The system provides a unified API invocation method, call monitoring, rate limiting strategies, and security mechanisms to ensure stability and security during inference",
 		Version:     1,
 		Attributes:  attributes,
 	}

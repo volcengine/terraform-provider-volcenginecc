@@ -21,49 +21,49 @@ Data Source schema for Volcengine::VPC::ENI
 
 ### Read-Only
 
-- `account_id` (String) 网卡所有者ID。
-- `created_time` (String) 网卡创建时间。
-- `delete_on_termination` (Boolean) 是否开启随云服务器实例删除，true为开启，false为不开启。
-- `description` (String) 辅助网卡的描述信息。长度限制为0~ 255个字符，需要以字母、中文或数字开头；可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。），不填默认空字符串。
-- `instance_id` (String) 网卡绑定实例的ID，如果网卡未挂载或参数ServiceManaged为true，则InstanceId返回值均为空。
-- `ipv_6_address_count` (Number) 为网卡分配私网IPv6地址的数量，传入该参数，系统会自动从网卡所属子网中，分配相应数量的空闲私网IPv6地址，创建时与IPv6Sets不能同时传入。
-- `ipv_6_sets` (Set of String) 网卡的IPv6地址列表，例如[2408::153:3921:XX:XX:7b12:1c5f, 2408:4008:2cf:XX:XX:dd1e:2a22:5ddf]。
-- `mac_address` (String) 网卡的MAC地址。
-- `network_interface_id` (String) 网卡ID。
-- `network_interface_name` (String) 网卡名称，长度限制为1 ~ 128个字符，需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-），不填默认是辅助网卡的ID。
-- `port_security_enabled` (Boolean) 是否为网卡开启源/目的地址检查，开启后，系统会自动阻止源地址或目的地址不是当前网卡的流量，true为开启，false为不开启（默认值）。
-- `primary_ip_address` (Attributes) 网卡的主私有IPv4地址，不支持修改地址，可以修改公网IP。如果指定，必须是对应子网中的一个空闲的私网IPv4地址，如果不指定，从对应子网中自动分配一个空闲的私网IPv4地址。例如：192.XX.XX.10。 (see [below for nested schema](#nestedatt--primary_ip_address))
-- `private_ip_sets` (Attributes Set) 网卡的私网IPv4地址列表。 (see [below for nested schema](#nestedatt--private_ip_sets))
-- `project_name` (String) 网卡所属项目的名称。
-- `secondary_private_ip_address_count` (Number) 为辅助网卡自动分配辅助私网IPv4地址数量，取值1~49。创建时不能与PrivateIpSets同时传入。
-- `security_group_ids` (Set of String) 辅助网卡加入一个或多个安全组的ID。
-- `service_managed` (Boolean) 是否为官方服务网卡，true为是，false为否。
-- `status` (String) 网卡的绑定状态。Creating：创建中。Available：未挂载。Attaching：挂载中。InUse：已挂载。Detaching：卸载中。Deleting：删除中。
-- `subnet_id` (String) 辅助网卡所在子网的ID。
-- `tags` (Attributes Set) 标签。 (see [below for nested schema](#nestedatt--tags))
-- `type` (String) 网卡类型。primary：主网卡，secondary：辅助网卡
-- `updated_time` (String) 更新网卡的时间。
-- `vpc_id` (String) 网卡所属的VPC的ID。
-- `vpc_name` (String) 网卡所属VPC的名称。
-- `zone_id` (String) 网卡所属可用区的ID。
+- `account_id` (String) NIC owner ID
+- `created_time` (String) NIC creation time
+- `delete_on_termination` (Boolean) Enable release with cloud server instance deletion. true to enable, false to disable
+- `description` (String) Description for the auxiliary network interface. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Allowed characters include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). If not specified, defaults to an empty string.
+- `instance_id` (String) ID of the instance bound to the NIC. If the NIC is not attached or the ServiceManaged parameter is true, InstanceId returns empty
+- `ipv_6_address_count` (Number) Number of private IPv6 addresses assigned to the network interface. When this parameter is specified, the system automatically assigns the corresponding number of available private IPv6 addresses from the subnet to which the network interface belongs. Cannot be used together with IPv6Sets during creation.
+- `ipv_6_sets` (Set of String) IPv6 address list of the network interface, for example [2408::153:3921:XX:XX:7b12:1c5f, 2408:4008:2cf:XX:XX:dd1e:2a22:5ddf].
+- `mac_address` (String) MAC address of the network interface.
+- `network_interface_id` (String) Network interface ID.
+- `network_interface_name` (String) NIC name. Length must be between 1 and 128 characters, starting with a letter, Chinese character, or number. Can include periods (.), underscores (_), and hyphens (-). If not specified, defaults to the ID of the secondary NIC
+- `port_security_enabled` (Boolean) Enable source/destination address check for the NIC. When enabled, the system automatically blocks traffic whose source or destination address does not match the current NIC. true to enable, false to disable (default)
+- `primary_ip_address` (Attributes) Primary private IPv4 address of the network interface. Address modification is not supported, but you can modify the public IP. If specified, it must be an available private IPv4 address in the corresponding subnet. If not specified, an available private IPv4 address will be automatically assigned from the corresponding subnet. For example: 192.XX.XX.10. (see [below for nested schema](#nestedatt--primary_ip_address))
+- `private_ip_sets` (Attributes Set) List of private IPv4 addresses for the network interface. (see [below for nested schema](#nestedatt--private_ip_sets))
+- `project_name` (String) Name of the project to which the NIC belongs
+- `secondary_private_ip_address_count` (Number) Number of auxiliary private IPv4 addresses automatically assigned to the auxiliary network interface. Value range: 1–49. Cannot be used together with PrivateIpSets during creation.
+- `security_group_ids` (Set of String) ID of one or more security groups joined by the auxiliary network interface.
+- `service_managed` (Boolean) Indicates whether this is an official service network interface. true for yes, false for no.
+- `status` (String) Binding status of the network interface. Creating: In progress. Available: Not attached. Attaching: In progress. InUse: Attached. Detaching: In progress. Deleting: In progress.
+- `subnet_id` (String) ID of the subnet where the auxiliary network interface resides.
+- `tags` (Attributes Set) Tags. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) NIC type. primary: primary NIC, secondary: secondary NIC
+- `updated_time` (String) NIC update time
+- `vpc_id` (String) ID of the VPC to which the network interface belongs.
+- `vpc_name` (String) Name of the VPC to which the NIC belongs
+- `zone_id` (String) ID of the availability zone to which the network interface belongs.
 
 <a id="nestedatt--primary_ip_address"></a>
 ### Nested Schema for `primary_ip_address`
 
 Read-Only:
 
-- `associated_elastic_ip` (Attributes) 网卡主私网IPv4关联的公网IP的信息。 (see [below for nested schema](#nestedatt--primary_ip_address--associated_elastic_ip))
-- `primary` (Boolean) 是否为主私网IPv4地址。
-- `private_ip_address` (String) 网卡的私网IP地址。
+- `associated_elastic_ip` (Attributes) Information about the public IP associated with the primary private IPv4 address of the network interface. (see [below for nested schema](#nestedatt--primary_ip_address--associated_elastic_ip))
+- `primary` (Boolean) Indicates whether this is the primary private IPv4 address.
+- `private_ip_address` (String) Private IP address of the network interface.
 
 <a id="nestedatt--primary_ip_address--associated_elastic_ip"></a>
 ### Nested Schema for `primary_ip_address.associated_elastic_ip`
 
 Read-Only:
 
-- `allocation_id` (String) 公网IP的ID。
-- `eip_address` (String) 公网IP的地址。
-- `release_with_instance` (Boolean) 公网IP是否随云服务器实例删除。仅主网卡的主私网IP绑定按量计费公网IP有效。开启后，当云服务器实例被系统自动回收（退订24小时后、到期回收、欠费回收）或被调用DeleteInstances接口时，公网IP随其一同释放，true：是，false：否。
+- `allocation_id` (String) Public IP ID
+- `eip_address` (String) Public IP address
+- `release_with_instance` (Boolean) Whether the public IP is released when the cloud server instance is deleted. Only pay-as-you-go public IPs bound to the primary NIC's primary private IP are valid. When enabled, if the cloud server instance is automatically reclaimed by the system (24 hours after unsubscription, upon expiration, or due to overdue payment) or deleted via the DeleteInstances API, the public IP is released along with the instance. true: yes, false: no
 
 
 
@@ -72,18 +72,18 @@ Read-Only:
 
 Read-Only:
 
-- `associated_elastic_ip` (Attributes) 网卡主私网IPv4关联的公网IP的信息。 (see [below for nested schema](#nestedatt--private_ip_sets--associated_elastic_ip))
-- `primary` (Boolean) 是否为主私网IPv4地址。
-- `private_ip_address` (String) 网卡的私网IP地址。
+- `associated_elastic_ip` (Attributes) Information about the public IP associated with the primary private IPv4 address of the network interface. (see [below for nested schema](#nestedatt--private_ip_sets--associated_elastic_ip))
+- `primary` (Boolean) Indicates whether this is the primary private IPv4 address.
+- `private_ip_address` (String) Private IP address of the network interface.
 
 <a id="nestedatt--private_ip_sets--associated_elastic_ip"></a>
 ### Nested Schema for `private_ip_sets.associated_elastic_ip`
 
 Read-Only:
 
-- `allocation_id` (String) 公网IP的ID。
-- `eip_address` (String) 公网IP的地址。
-- `release_with_instance` (Boolean) 公网IP是否随云服务器实例删除。仅主网卡的主私网IP绑定按量计费公网IP有效。开启后，当云服务器实例被系统自动回收（退订24小时后、到期回收、欠费回收）或被调用DeleteInstances接口时，公网IP随其一同释放，true：是，false：否。
+- `allocation_id` (String) Public IP ID
+- `eip_address` (String) Public IP address
+- `release_with_instance` (Boolean) Whether the public IP is released when the cloud server instance is deleted. Only pay-as-you-go public IPs bound to the primary NIC's primary private IP are valid. When enabled, if the cloud server instance is automatically reclaimed by the system (24 hours after unsubscription, upon expiration, or due to overdue payment) or deleted via the DeleteInstances API, the public IP is released along with the instance. true: yes, false: no
 
 
 
@@ -92,5 +92,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) Tag key for the user tag.
+- `value` (String) Tag value for the user tag.

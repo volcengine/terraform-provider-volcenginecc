@@ -33,11 +33,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Consumer Group 创建时间。",
+		//	  "description": "Consumer Group creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Consumer Group 创建时间。",
+			Description: "Consumer Group creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -47,11 +47,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Consumer Group 描述。",
+		//	  "description": "Consumer Group description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Consumer Group 描述。",
+			Description: "Consumer Group description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -63,11 +63,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Consumer Group 的 ID。",
+		//	  "description": "Consumer Group ID",
 		//	  "type": "string"
 		//	}
 		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Consumer Group 的 ID。",
+			Description: "Consumer Group ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -77,13 +77,13 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义设置Consumer Group 的名称，约束限制如下：只能由小写英文字符、数字、下划线和中划线（-）组成。长度为 3~64 字符。",
+		//	  "description": "Set a custom Consumer Group name. Constraints: Only lowercase English letters, numbers, underscores, and hyphens (-) are allowed. Length must be 3–64 characters.",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
 		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义设置Consumer Group 的名称，约束限制如下：只能由小写英文字符、数字、下划线和中划线（-）组成。长度为 3~64 字符。",
+			Description: "Set a custom Consumer Group name. Constraints: Only lowercase English letters, numbers, underscores, and hyphens (-) are allowed. Length must be 3–64 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -98,11 +98,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "所属 BMQ 实例 ID。",
+		//	  "description": "BMQ instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "所属 BMQ 实例 ID。",
+			Description: "BMQ instance ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -114,11 +114,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Consumer Group 所属用户的 ID。",
+		//	  "description": "User ID of the Consumer Group owner",
 		//	  "type": "string"
 		//	}
 		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Consumer Group 所属用户的 ID。",
+			Description: "User ID of the Consumer Group owner",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -128,11 +128,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Consumer Group 所属用户的名称。",
+		//	  "description": "Name of the Consumer Group owner",
 		//	  "type": "string"
 		//	}
 		"owner_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Consumer Group 所属用户的名称。",
+			Description: "Name of the Consumer Group owner",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -142,22 +142,22 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "重置消费位点信息。",
+		//	  "description": "Reset consumption offset information",
 		//	  "properties": {
 		//	    "OffsetType": {
-		//	      "description": "重置方式为 OFFSET 时，该参数必传，指定重新消费的基准消费位置，取值如下：EARLIEST：基准消费位置为最早消费位点。CURRENT：基准消费位置为当前消费位点。LATEST：基准消费位置为最近消费位点。",
+		//	      "description": "If the reset mode is OFFSET, this parameter is required. Specify the reference consumption position for resuming consumption. Options: EARLIEST: Reference position is the earliest offset. CURRENT: Reference position is the current offset. LATEST: Reference position is the latest offset.",
 		//	      "type": "string"
 		//	    },
 		//	    "PartitionId": {
-		//	      "description": "分区序号。",
+		//	      "description": "Partition number",
 		//	      "type": "integer"
 		//	    },
 		//	    "ResetBy": {
-		//	      "description": "重置方式，取值如下：TIMESTAMP：根据时间点重置消费位点，指定过去或将来的时间点，直接跳转到该时间点的位点开始消费。OFFSET：根据指定的 offset 重置消费位点，即从指定的位点开始消费，可以通过 offsetType 参数指定 offset。",
+		//	      "description": "Reset mode. Options: TIMESTAMP: Reset the consumption offset based on a timestamp. Specify a past or future time to jump directly to the offset at that time and start consuming. OFFSET: Reset the consumption offset based on a specified offset, starting consumption from that offset. You can specify the offset using the offsetType parameter.",
 		//	      "type": "string"
 		//	    },
 		//	    "ResetValue": {
-		//	      "description": "重置值。选择重置方式为 TIMESTAMP 时，该值为重新消费的时间点。例如 1722224612000。选择重置方式为 OFFSET 时，该值为相对于 OffsetType 中基准位点的 相对偏移量。例如 100。",
+		//	      "description": "Reset value. If TIMESTAMP is selected, this value is the timestamp for resuming consumption, e.g., 1722224612000. If OFFSET is selected, this value is the relative offset from the reference offset in OffsetType, e.g., 100.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
@@ -172,7 +172,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: OffsetType
 				"offset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重置方式为 OFFSET 时，该参数必传，指定重新消费的基准消费位置，取值如下：EARLIEST：基准消费位置为最早消费位点。CURRENT：基准消费位置为当前消费位点。LATEST：基准消费位置为最近消费位点。",
+					Description: "If the reset mode is OFFSET, this parameter is required. Specify the reference consumption position for resuming consumption. Options: EARLIEST: Reference position is the earliest offset. CURRENT: Reference position is the current offset. LATEST: Reference position is the latest offset.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -181,7 +181,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PartitionId
 				"partition_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "分区序号。",
+					Description: "Partition number",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -190,7 +190,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ResetBy
 				"reset_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重置方式，取值如下：TIMESTAMP：根据时间点重置消费位点，指定过去或将来的时间点，直接跳转到该时间点的位点开始消费。OFFSET：根据指定的 offset 重置消费位点，即从指定的位点开始消费，可以通过 offsetType 参数指定 offset。",
+					Description: "Reset mode. Options: TIMESTAMP: Reset the consumption offset based on a timestamp. Specify a past or future time to jump directly to the offset at that time and start consuming. OFFSET: Reset the consumption offset based on a specified offset, starting consumption from that offset. You can specify the offset using the offsetType parameter.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -199,7 +199,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ResetValue
 				"reset_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "重置值。选择重置方式为 TIMESTAMP 时，该值为重新消费的时间点。例如 1722224612000。选择重置方式为 OFFSET 时，该值为相对于 OffsetType 中基准位点的 相对偏移量。例如 100。",
+					Description: "Reset value. If TIMESTAMP is selected, this value is the timestamp for resuming consumption, e.g., 1722224612000. If OFFSET is selected, this value is the relative offset from the reference offset in OffsetType, e.g., 100.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -216,7 +216,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "重置消费位点信息。",
+			Description: "Reset consumption offset information",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -228,11 +228,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Consumer Group 的状态。",
+		//	  "description": "Consumer Group status",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Consumer Group 的状态。",
+			Description: "Consumer Group status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -242,53 +242,53 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 列表。",
+		//	  "description": "Topic list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CreateTime": {
-		//	        "description": "Topic 的创建时间。",
+		//	        "description": "Topic creation time",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "Topic 的描述语句。",
+		//	        "description": "Topic description",
 		//	        "type": "string"
 		//	      },
 		//	      "Lag": {
-		//	        "description": "Topic 中未被消费的消息条数。",
+		//	        "description": "Number of unconsumed messages in the Topic",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PartitionInfos": {
-		//	        "description": "分区列表。",
+		//	        "description": "Partition list",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "CurrentOffset": {
-		//	              "description": "当前消费位点。",
+		//	              "description": "Current consumption offset",
 		//	              "format": "int64",
 		//	              "type": "integer"
 		//	            },
 		//	            "GroupName": {
-		//	              "description": "Consumer Group 的名称。",
+		//	              "description": "Consumer Group name",
 		//	              "type": "string"
 		//	            },
 		//	            "Lag": {
-		//	              "description": "分区中未被消费的消息条数。",
+		//	              "description": "Number of unconsumed messages in the partition",
 		//	              "format": "int64",
 		//	              "type": "integer"
 		//	            },
 		//	            "LatestOffset": {
-		//	              "description": "最新消费位点。",
+		//	              "description": "Latest consumption offset",
 		//	              "format": "int64",
 		//	              "type": "integer"
 		//	            },
 		//	            "PartitionId": {
-		//	              "description": "分区序号。",
+		//	              "description": "Partition number",
 		//	              "type": "integer"
 		//	            },
 		//	            "TopicName": {
-		//	              "description": "Consumer Group 订阅的 Topic 名称。",
+		//	              "description": "Name of the Topic subscribed by the Consumer Group",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -298,15 +298,15 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Partitions": {
-		//	        "description": "Topic 分区数。",
+		//	        "description": "Number of Topic partitions",
 		//	        "type": "integer"
 		//	      },
 		//	      "Retention": {
-		//	        "description": "数据在 Topic 中的保留时长，单位为小时。",
+		//	        "description": "Retention period of data in the Topic, in hours",
 		//	        "type": "integer"
 		//	      },
 		//	      "Status": {
-		//	        "description": "Topic 的状态。",
+		//	        "description": "Topic status",
 		//	        "type": "string"
 		//	      },
 		//	      "TopicId": {
@@ -314,7 +314,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "TopicName": {
-		//	        "description": "Topic 的名称。",
+		//	        "description": "Topic name",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -328,17 +328,17 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CreateTime
 					"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Topic 的创建时间。",
+						Description: "Topic creation time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Topic 的描述语句。",
+						Description: "Topic description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Lag
 					"lag": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "Topic 中未被消费的消息条数。",
+						Description: "Number of unconsumed messages in the Topic",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PartitionInfos
@@ -347,52 +347,52 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: CurrentOffset
 								"current_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "当前消费位点。",
+									Description: "Current consumption offset",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: GroupName
 								"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Consumer Group 的名称。",
+									Description: "Consumer Group name",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Lag
 								"lag": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "分区中未被消费的消息条数。",
+									Description: "Number of unconsumed messages in the partition",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: LatestOffset
 								"latest_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "最新消费位点。",
+									Description: "Latest consumption offset",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: PartitionId
 								"partition_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "分区序号。",
+									Description: "Partition number",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: TopicName
 								"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Consumer Group 订阅的 Topic 名称。",
+									Description: "Name of the Topic subscribed by the Consumer Group",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "分区列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Partition list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Partitions
 					"partitions": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "Topic 分区数。",
+						Description: "Number of Topic partitions",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Retention
 					"retention": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "数据在 Topic 中的保留时长，单位为小时。",
+						Description: "Retention period of data in the Topic, in hours",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Topic 的状态。",
+						Description: "Topic status",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TopicId
@@ -402,12 +402,12 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: TopicName
 					"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Topic 的名称。",
+						Description: "Topic name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Topic 列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Topic list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -425,7 +425,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "一组具有相同 Group ID 的消费端。当一个 Topic 被同一个 Group 的多个 Consumer 消费时，每一条消息都只会被投递到一个 Consumer，实现消费的负载均衡。通过 Group，您可以确保一个 Topic 的消息被并行消费。",
+		Description: "A group of consumers with the same Group ID. When multiple consumers in the same Group consume a Topic, each message is delivered to only one consumer, enabling load balancing. Using Groups ensures that messages in a Topic are consumed in parallel.",
 		Version:     1,
 		Attributes:  attributes,
 	}

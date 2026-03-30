@@ -27,53 +27,53 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库字符集，可选值：utf8mb4（默认）、utf8、latin1、ascii",
+		//	  "description": "Database character set. Options: utf8mb4 (default), utf8, latin1, ascii",
 		//	  "type": "string"
 		//	}
 		"character_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库字符集，可选值：utf8mb4（默认）、utf8、latin1、ascii",
+			Description: "Database character set. Options: utf8mb4 (default), utf8, latin1, ascii",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBDesc
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库描述信息，长度0~256字符，可包含数字、中文、英文、下划线(_)、中划线(-)",
+		//	  "description": "Database description, length 0–256 characters; can include numbers, Chinese and English characters, underscores (_), and hyphens (-)",
 		//	  "type": "string"
 		//	}
 		"db_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库描述信息，长度0~256字符，可包含数字、中文、英文、下划线(_)、中划线(-)",
+			Description: "Database description, length 0–256 characters; can include numbers, Chinese and English characters, underscores (_), and hyphens (-)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库名称。命名规则：当前实例下唯一；长度2~64字符；以字母开头，字母/数字结尾；由字母、数字、下划线(_)、中划线(-)组成；不能使用预留字",
+		//	  "description": "Database name. Naming rules: Must be unique within the current instance; length 2–64 characters; starts with a letter, ends with a letter or number; can contain letters, numbers, underscores (_), and hyphens (-); reserved words are not allowed",
 		//	  "type": "string"
 		//	}
 		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库名称。命名规则：当前实例下唯一；长度2~64字符；以字母开头，字母/数字结尾；由字母、数字、下划线(_)、中划线(-)组成；不能使用预留字",
+			Description: "Database name. Naming rules: Must be unique within the current instance; length 2–64 characters; starts with a letter, ends with a letter or number; can contain letters, numbers, underscores (_), and hyphens (-); reserved words are not allowed",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DatabasesPrivileges
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库的权限信息",
+		//	  "description": "Database permission information",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccountName": {
-		//	        "description": "需授权的账号名称",
+		//	        "description": "Account name to be authorized",
 		//	        "type": "string"
 		//	      },
 		//	      "AccountPrivilege": {
-		//	        "description": "授权数据库权限类型：ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom",
+		//	        "description": "Database permission type: ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom",
 		//	        "type": "string"
 		//	      },
 		//	      "AccountPrivilegeDetail": {
-		//	        "description": "具体SQL操作权限，多个用英文逗号分隔；Custom类型时必填",
+		//	        "description": "Specific SQL operation permissions, separated by English commas; required for Custom type",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -92,34 +92,34 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccountName
 					"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "需授权的账号名称",
+						Description: "Account name to be authorized",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: AccountPrivilege
 					"account_privilege": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "授权数据库权限类型：ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom",
+						Description: "Database permission type: ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: AccountPrivilegeDetail
 					"account_privilege_detail": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "具体SQL操作权限，多个用英文逗号分隔；Custom类型时必填",
+						Description: "Specific SQL operation permissions, separated by English commas; required for Custom type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "数据库的权限信息",
+			Description: "Database permission information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID。",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

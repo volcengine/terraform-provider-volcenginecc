@@ -36,7 +36,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警通知的方式。Email：邮件 Phone：电话 SMS：短信 Webhook：告警回调。",
+		//	  "description": "Alert notification method. Email: email, Phone: phone, SMS: SMS, Webhook: webhook callback.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -46,7 +46,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"alert_methods": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "告警通知的方式。Email：邮件 Phone：电话 SMS：短信 Webhook：告警回调。",
+			Description: "Alert notification method. Email: email, Phone: phone, SMS: SMS, Webhook: webhook callback.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -57,11 +57,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警状态。 alerting：告警中 normal：正常。",
+		//	  "description": "Alert status. alerting: In alert; normal: Normal.",
 		//	  "type": "string"
 		//	}
 		"alert_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警状态。 alerting：告警中 normal：正常。",
+			Description: "Alert status. alerting: In alert; normal: Normal.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -71,11 +71,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "多指标判定条件。\u0026\u0026：多个指标同时成立才判定为触发告警,||：任意指标满足条件触发判定为告警。",
+		//	  "description": "Multi-metric determination condition. \u0026\u0026: Alert is triggered only if all metrics meet the condition; ||: Alert is triggered if any metric meets the condition.",
 		//	  "type": "string"
 		//	}
 		"condition_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "多指标判定条件。&&：多个指标同时成立才判定为触发告警,||：任意指标满足条件触发判定为告警。",
+			Description: "Multi-metric determination condition. &&: Alert is triggered only if all metrics meet the condition; ||: Alert is triggered if any metric meets the condition.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -86,36 +86,36 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警条件。数组形式，支持填写多个指标判断语句，最多 10 个。",
+		//	  "description": "Alert conditions. Array format; supports multiple metric evaluation statements, up to 10.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ComparisonOperator": {
-		//	        "description": "比较符号。支持普通阈值告警： \u003e、\u003e=、\u003c、\u003c=、!=、= ，以及以下同环比告警：last_period_increase_pct：环比上周期上涨。last_period_decrease_pct：环比上周起下降。last_period_abs_pct：环比上周期上涨或下降。last_day_increase_pct：同比昨天同一时段上涨。last_day_decrease_pct：同比昨天同一时段下降。last_day_abs_pct：同比昨天同一时段上涨或下降。last_week_increase_pct：同比上周同一时段上涨。last_week_decrease_pct：同比上周同一时段下降。last_week_abs_pct：同比上周同一时段上涨或下降。",
+		//	        "description": "Comparison operators. Supports standard threshold alerting: \u003e, \u003e=, \u003c, \u003c=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.",
 		//	        "type": "string"
 		//	      },
 		//	      "DisplayName": {
-		//	        "description": "指标显示名称。",
+		//	        "description": "Metric display name.",
 		//	        "type": "string"
 		//	      },
 		//	      "MetricName": {
-		//	        "description": "监控指标的名称。详情请参见 云监控指标查询 下各产品的 MetricName。",
+		//	        "description": "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",
 		//	        "type": "string"
 		//	      },
 		//	      "MetricUnit": {
-		//	        "description": "监控指标的单位。详情请参见 云监控指标查询 下各产品的 MetricUnit。说明同环比告警，MetricUnit 需要填写为 \"Percent\"。MetricUnit 中是否带有 IEC 表示不同的进位：带有 IEC：进位是 1024不带 IEC：进位是 1000。",
+		//	        "description": "Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to \"Percent.\" Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.",
 		//	        "type": "string"
 		//	      },
 		//	      "Period": {
-		//	        "description": "监控指标的统计周期。详情请参见 云监控指标查询 下各产品的 Period。",
+		//	        "description": "Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.",
 		//	        "type": "string"
 		//	      },
 		//	      "Statistics": {
-		//	        "description": "统计方法，取值：avg：平均值。max：最大值。min：最小值。说明统计方法会应用到检测时间段内的数据上。例如，默认每次检测数据的时间跨度是 1 分钟，如果统计方法为 avg，那就是对 1 分钟内的数据取平均值。",
+		//	        "description": "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
 		//	        "type": "string"
 		//	      },
 		//	      "Threshold": {
-		//	        "description": "指标阈值。支持输入正数或 0。最多支持三位小数。",
+		//	        "description": "Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -129,7 +129,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ComparisonOperator
 					"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "比较符号。支持普通阈值告警： >、>=、<、<=、!=、= ，以及以下同环比告警：last_period_increase_pct：环比上周期上涨。last_period_decrease_pct：环比上周起下降。last_period_abs_pct：环比上周期上涨或下降。last_day_increase_pct：同比昨天同一时段上涨。last_day_decrease_pct：同比昨天同一时段下降。last_day_abs_pct：同比昨天同一时段上涨或下降。last_week_increase_pct：同比上周同一时段上涨。last_week_decrease_pct：同比上周同一时段下降。last_week_abs_pct：同比上周同一时段上涨或下降。",
+						Description: "Comparison operators. Supports standard threshold alerting: >, >=, <, <=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -139,7 +139,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: DisplayName
 					// Property: MetricName
 					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监控指标的名称。详情请参见 云监控指标查询 下各产品的 MetricName。",
+						Description: "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -148,7 +148,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: MetricUnit
 					"metric_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监控指标的单位。详情请参见 云监控指标查询 下各产品的 MetricUnit。说明同环比告警，MetricUnit 需要填写为 \"Percent\"。MetricUnit 中是否带有 IEC 表示不同的进位：带有 IEC：进位是 1024不带 IEC：进位是 1000。",
+						Description: "Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to \"Percent.\" Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -157,7 +157,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Period
 					"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监控指标的统计周期。详情请参见 云监控指标查询 下各产品的 Period。",
+						Description: "Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -166,7 +166,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Statistics
 					"statistics": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "统计方法，取值：avg：平均值。max：最大值。min：最小值。说明统计方法会应用到检测时间段内的数据上。例如，默认每次检测数据的时间跨度是 1 分钟，如果统计方法为 avg，那就是对 1 分钟内的数据取平均值。",
+						Description: "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -175,7 +175,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Threshold
 					"threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "指标阈值。支持输入正数或 0。最多支持三位小数。",
+						Description: "Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -184,7 +184,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "告警条件。数组形式，支持填写多个指标判断语句，最多 10 个。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Alert conditions. Array format; supports multiple metric evaluation statements, up to 10.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -195,7 +195,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略绑定的告警通知组 ID。",
+		//	  "description": "Alert notification group ID bound to the alert policy.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -205,7 +205,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"contact_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "告警策略绑定的告警通知组 ID。",
+			Description: "Alert notification group ID bound to the alert policy.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -216,11 +216,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略创建时间，时间戳格式。",
+		//	  "description": "Alert policy creation time, in timestamp format.",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略创建时间，时间戳格式。",
+			Description: "Alert policy creation time, in timestamp format.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -230,11 +230,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略描述信息。",
+		//	  "description": "Alert policy description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略描述信息。",
+			Description: "Alert policy description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -245,33 +245,33 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Dimension 配置。",
+		//	  "description": "Dimension configuration.",
 		//	  "properties": {
 		//	    "MetaCondition": {
-		//	      "description": "根据资源名称选择告警对象的条件。当Type为meta时必填。",
+		//	      "description": "Condition for selecting alert objects based on resource name. Required when Type is meta.",
 		//	      "properties": {
 		//	        "AllDimensions": {
-		//	          "description": "是否为全量资源。true：全部资源。false：部分资源。",
+		//	          "description": "Whether all resources are included. true: All resources. false: Partial resources.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "Condition": {
-		//	          "description": "判断条件。and：全部满足。or：任意满足。",
+		//	          "description": "Condition. and: All conditions met. or: Any condition met.",
 		//	          "type": "string"
 		//	        },
 		//	        "Metas": {
-		//	          "description": "判断条件。and：全部满足。or：任意满足。",
+		//	          "description": "Condition. and: All conditions met. or: Any condition met.",
 		//	          "items": {
 		//	            "properties": {
 		//	              "Comparator": {
-		//	                "description": "标签匹配时的比较符。contain：包含not_contain：不包含prefix_match：前缀匹配suffix_match：后缀匹配equal：等于not_equal：不等于exist：存在。",
+		//	                "description": "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
 		//	                "type": "string"
 		//	              },
 		//	              "Key": {
-		//	                "description": "标签键。",
+		//	                "description": "Tag key.",
 		//	                "type": "string"
 		//	              },
 		//	              "Values": {
-		//	                "description": "标签的值（Value）。当Comparator为exist时，包含 Key 对应的所有 Value，不支持输入。当Comparator为equal或not_equal时，支持输入多个 Value。当Comparator为contain、not_contain、prefix_match或suffix_match时，仅支持输入 1 个 Value。",
+		//	                "description": "Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -288,10 +288,10 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ProjectCondition": {
-		//	      "description": "根据项目选择告警对象的条件。当Type为project时必填。",
+		//	      "description": "Condition for selecting alert targets by project. Required when Type is project.",
 		//	      "properties": {
 		//	        "Projects": {
-		//	          "description": "项目名称列表。数组形式。多个值之间使用英文半角逗号,分割。",
+		//	          "description": "Project name list, in array format. Separate multiple values with commas.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -303,27 +303,27 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "TagCondition": {
-		//	      "description": "根据标签选择告警对象的条件。当Type为tag时必填。",
+		//	      "description": "Condition for selecting alert objects by tag. Required when Type is tag.",
 		//	      "properties": {
 		//	        "Condition": {
-		//	          "description": "判断条件。and：全部满足。or：任意满足。",
+		//	          "description": "Condition. and: All conditions met. or: Any condition met.",
 		//	          "type": "string"
 		//	        },
 		//	        "Tags": {
-		//	          "description": "标签列表。最多支持配置 10 个标签列表。标签值不能超过 50 个字符。",
+		//	          "description": "Tag list. Supports up to 10 tag lists. Tag value cannot exceed 50 characters.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "properties": {
 		//	              "Comparator": {
-		//	                "description": "标签匹配时的比较符。contain：包含not_contain：不包含prefix_match：前缀匹配suffix_match：后缀匹配equal：等于not_equal：不等于exist：存在。",
+		//	                "description": "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
 		//	                "type": "string"
 		//	              },
 		//	              "Key": {
-		//	                "description": "标签键。",
+		//	                "description": "Tag key.",
 		//	                "type": "string"
 		//	              },
 		//	              "Values": {
-		//	                "description": "标签的值（Value）。当Comparator为exist时，包含 Key 对应的所有 Value，不支持输入。当Comparator为equal或not_equal时，支持输入多个 Value。当Comparator为contain、not_contain、prefix_match或suffix_match时，仅支持输入 1 个 Value。",
+		//	                "description": "Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -341,7 +341,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Type": {
-		//	      "description": "Dimensions 类型。取值：project：根据项目选择告警对象。tag：根据标签选择告警对象。meta：根据资源名称选择告警对象。",
+		//	      "description": "Dimensions type. Values: project: Select alert targets by project. tag: Select alert targets by tag. meta: Select alert targets by resource name.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -354,7 +354,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AllDimensions
 						"all_dimensions": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "是否为全量资源。true：全部资源。false：部分资源。",
+							Description: "Whether all resources are included. true: All resources. false: Partial resources.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -363,7 +363,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Condition
 						"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "判断条件。and：全部满足。or：任意满足。",
+							Description: "Condition. and: All conditions met. or: Any condition met.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -376,7 +376,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparator
 									"comparator": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "标签匹配时的比较符。contain：包含not_contain：不包含prefix_match：前缀匹配suffix_match：后缀匹配equal：等于not_equal：不等于exist：存在。",
+										Description: "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -385,7 +385,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "标签键。",
+										Description: "Tag key.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -395,7 +395,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Values
 									"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "标签的值（Value）。当Comparator为exist时，包含 Key 对应的所有 Value，不支持输入。当Comparator为equal或not_equal时，支持输入多个 Value。当Comparator为contain、not_contain、prefix_match或suffix_match时，仅支持输入 1 个 Value。",
+										Description: "Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -404,7 +404,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "判断条件。and：全部满足。or：任意满足。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Description: "Condition. and: All conditions met. or: Any condition met.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -412,7 +412,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "根据资源名称选择告警对象的条件。当Type为meta时必填。",
+					Description: "Condition for selecting alert objects based on resource name. Required when Type is meta.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -425,7 +425,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Projects
 						"projects": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "项目名称列表。数组形式。多个值之间使用英文半角逗号,分割。",
+							Description: "Project name list, in array format. Separate multiple values with commas.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -433,7 +433,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "根据项目选择告警对象的条件。当Type为project时必填。",
+					Description: "Condition for selecting alert targets by project. Required when Type is project.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -445,7 +445,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Condition
 						"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "判断条件。and：全部满足。or：任意满足。",
+							Description: "Condition. and: All conditions met. or: Any condition met.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -458,7 +458,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparator
 									"comparator": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "标签匹配时的比较符。contain：包含not_contain：不包含prefix_match：前缀匹配suffix_match：后缀匹配equal：等于not_equal：不等于exist：存在。",
+										Description: "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -467,7 +467,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "标签键。",
+										Description: "Tag key.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -477,7 +477,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Values
 									"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "标签的值（Value）。当Comparator为exist时，包含 Key 对应的所有 Value，不支持输入。当Comparator为equal或not_equal时，支持输入多个 Value。当Comparator为contain、not_contain、prefix_match或suffix_match时，仅支持输入 1 个 Value。",
+										Description: "Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -486,7 +486,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "标签列表。最多支持配置 10 个标签列表。标签值不能超过 50 个字符。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Description: "Tag list. Supports up to 10 tag lists. Tag value cannot exceed 50 characters.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -494,7 +494,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "根据标签选择告警对象的条件。当Type为tag时必填。",
+					Description: "Condition for selecting alert objects by tag. Required when Type is tag.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -503,7 +503,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Dimensions 类型。取值：project：根据项目选择告警对象。tag：根据标签选择告警对象。meta：根据资源名称选择告警对象。",
+					Description: "Dimensions type. Values: project: Select alert targets by project. tag: Select alert targets by tag. meta: Select alert targets by resource name.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -511,7 +511,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Dimension 配置。",
+			Description: "Dimension configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -522,95 +522,95 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略生效的截止时间，格式为HH:MM。",
+		//	  "description": "Policy expiration time, in HH:MM format.",
 		//	  "type": "string"
 		//	}
 		"effect_end_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略生效的截止时间，格式为HH:MM。",
+			Description: "Policy expiration time, in HH:MM format.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EffectStartAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略生效的开始时间，格式为HH:MM。",
+		//	  "description": "Policy start time, in HH:MM format.",
 		//	  "type": "string"
 		//	}
 		"effect_start_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略生效的开始时间，格式为HH:MM。",
+			Description: "Policy start time, in HH:MM format.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableState
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略的开启状态。,enable：开启,disable：禁用",
+		//	  "description": "Alert policy status. enable: enabled, disable: disabled",
 		//	  "type": "string"
 		//	}
 		"enable_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略的开启状态。,enable：开启,disable：禁用",
+			Description: "Alert policy status. enable: enabled, disable: disabled",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EvaluationCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "触发告警需要持续的周期。单位为分钟。",
+		//	  "description": "Duration required to trigger an alert, in minutes.",
 		//	  "type": "integer"
 		//	}
 		"evaluation_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "触发告警需要持续的周期。单位为分钟。",
+			Description: "Duration required to trigger an alert, in minutes.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Level
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警级别。critical：严重,warning：警告,notice：通知",
+		//	  "description": "Alert level. critical: critical, warning: warning, notice: notification",
 		//	  "type": "string"
 		//	}
 		"level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警级别。critical：严重,warning：警告,notice：通知",
+			Description: "Alert level. critical: critical, warning: warning, notice: notification",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LevelConditions
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警分级配置。",
+		//	  "description": "Alert severity configuration.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Conditions": {
-		//	        "description": "告警分级配置。",
+		//	        "description": "Alert severity configuration.",
 		//	        "items": {
 		//	          "properties": {
 		//	            "ComparisonOperator": {
-		//	              "description": "比较符号。支持普通阈值告警： \u003e、\u003e=、\u003c、\u003c=、!=、= ，以及以下同环比告警：last_period_increase_pct：环比上周期上涨。last_period_decrease_pct：环比上周起下降。last_period_abs_pct：环比上周期上涨或下降。last_day_increase_pct：同比昨天同一时段上涨。last_day_decrease_pct：同比昨天同一时段下降。last_day_abs_pct：同比昨天同一时段上涨或下降。last_week_increase_pct：同比上周同一时段上涨。last_week_decrease_pct：同比上周同一时段下降。last_week_abs_pct：同比上周同一时段上涨或下降。",
+		//	              "description": "Comparison operators. Supports standard threshold alerting: \u003e, \u003e=, \u003c, \u003c=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.",
 		//	              "type": "string"
 		//	            },
 		//	            "DisplayName": {
-		//	              "description": "指标显示名称。",
+		//	              "description": "Metric display name.",
 		//	              "type": "string"
 		//	            },
 		//	            "MetricName": {
-		//	              "description": "监控指标的名称。详情请参见 云监控指标查询 下各产品的 MetricName。",
+		//	              "description": "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",
 		//	              "type": "string"
 		//	            },
 		//	            "MetricUnit": {
-		//	              "description": "监控指标的单位。详情请参见 云监控指标查询 下各产品的 MetricUnit。说明同环比告警，MetricUnit 需要填写为 \"Percent\"。MetricUnit 中是否带有 IEC 表示不同的进位：带有 IEC：进位是 1024不带 IEC：进位是 1000。",
+		//	              "description": "Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to \"Percent.\" Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.",
 		//	              "type": "string"
 		//	            },
 		//	            "Period": {
-		//	              "description": "监控指标的统计周期。详情请参见 云监控指标查询 下各产品的 Period。",
+		//	              "description": "Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.",
 		//	              "type": "string"
 		//	            },
 		//	            "Statistics": {
-		//	              "description": "统计方法，取值：avg：平均值。max：最大值。min：最小值。说明统计方法会应用到检测时间段内的数据上。例如，默认每次检测数据的时间跨度是 1 分钟，如果统计方法为 avg，那就是对 1 分钟内的数据取平均值。",
+		//	              "description": "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
 		//	              "type": "string"
 		//	            },
 		//	            "Threshold": {
-		//	              "description": "指标阈值。支持输入正数或 0。最多支持三位小数。",
+		//	              "description": "Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -619,7 +619,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Level": {
-		//	        "description": "告警通知等级，取值：notice：通知warning：警告critical：严重recovery：恢复。",
+		//	        "description": "Alert notification level. Options: notice: notification, warning: warning, critical: critical, recovery: recovery.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -637,7 +637,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ComparisonOperator
 								"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "比较符号。支持普通阈值告警： >、>=、<、<=、!=、= ，以及以下同环比告警：last_period_increase_pct：环比上周期上涨。last_period_decrease_pct：环比上周起下降。last_period_abs_pct：环比上周期上涨或下降。last_day_increase_pct：同比昨天同一时段上涨。last_day_decrease_pct：同比昨天同一时段下降。last_day_abs_pct：同比昨天同一时段上涨或下降。last_week_increase_pct：同比上周同一时段上涨。last_week_decrease_pct：同比上周同一时段下降。last_week_abs_pct：同比上周同一时段上涨或下降。",
+									Description: "Comparison operators. Supports standard threshold alerting: >, >=, <, <=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -647,7 +647,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DisplayName
 								// Property: MetricName
 								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "监控指标的名称。详情请参见 云监控指标查询 下各产品的 MetricName。",
+									Description: "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -656,7 +656,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: MetricUnit
 								"metric_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "监控指标的单位。详情请参见 云监控指标查询 下各产品的 MetricUnit。说明同环比告警，MetricUnit 需要填写为 \"Percent\"。MetricUnit 中是否带有 IEC 表示不同的进位：带有 IEC：进位是 1024不带 IEC：进位是 1000。",
+									Description: "Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to \"Percent.\" Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -665,7 +665,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Period
 								"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "监控指标的统计周期。详情请参见 云监控指标查询 下各产品的 Period。",
+									Description: "Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -674,7 +674,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Statistics
 								"statistics": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "统计方法，取值：avg：平均值。max：最大值。min：最小值。说明统计方法会应用到检测时间段内的数据上。例如，默认每次检测数据的时间跨度是 1 分钟，如果统计方法为 avg，那就是对 1 分钟内的数据取平均值。",
+									Description: "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -683,7 +683,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Threshold
 								"threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "指标阈值。支持输入正数或 0。最多支持三位小数。",
+									Description: "Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -692,7 +692,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "告警分级配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Alert severity configuration.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -701,7 +701,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Level
 					"level": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "告警通知等级，取值：notice：通知warning：警告critical：严重recovery：恢复。",
+						Description: "Alert notification level. Options: notice: notification, warning: warning, critical: critical, recovery: recovery.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -710,7 +710,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "告警分级配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Alert severity configuration.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -721,11 +721,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略是否用多指标。true：多指标,false：单指标（默认）。",
+		//	  "description": "Does the alert policy use multiple metrics? true: multiple metrics, false: single metric (default).",
 		//	  "type": "boolean"
 		//	}
 		"multiple_conditions": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略是否用多指标。true：多指标,false：单指标（默认）。",
+			Description: "Does the alert policy use multiple metrics? true: multiple metrics, false: single metric (default).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -736,25 +736,25 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监控指标所属的云产品。详情请参见 云产品监控指标 下各产品的 Namespace。",
+		//	  "description": "Cloud product associated with the monitoring metric. For details, see Namespace for each product in Cloud Product Monitoring Metrics.",
 		//	  "type": "string"
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监控指标所属的云产品。详情请参见 云产品监控指标 下各产品的 Namespace。",
+			Description: "Cloud product associated with the monitoring metric. For details, see Namespace for each product in Cloud Product Monitoring Metrics.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NoData
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "无数据告警。",
+		//	  "description": "No data alert.",
 		//	  "properties": {
 		//	    "Enable": {
-		//	      "description": "是否开启无数据告警。取值：true：开启无数据告警。false：（默认）关闭无数据告警。",
+		//	      "description": "Enable no data alert. Values: true: enable no data alert. false (default): disable no data alert.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EvaluationCount": {
-		//	      "description": "无数据告警触发阈值，如果在配置的阈值周期内检测无数据上报，则会触发无数据告警。当Enable配置为true时，该字段为必填。整数形式，取值范围为 3～20。",
+		//	      "description": "No data alert trigger threshold. If no data is reported within the configured threshold period, a no data alert will be triggered. When Enable is set to true, this field is required. Integer format; value range is 3–20.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -764,7 +764,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启无数据告警。取值：true：开启无数据告警。false：（默认）关闭无数据告警。",
+					Description: "Enable no data alert. Values: true: enable no data alert. false (default): disable no data alert.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -773,7 +773,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: EvaluationCount
 				"evaluation_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "无数据告警触发阈值，如果在配置的阈值周期内检测无数据上报，则会触发无数据告警。当Enable配置为true时，该字段为必填。整数形式，取值范围为 3～20。",
+					Description: "No data alert trigger threshold. If no data is reported within the configured threshold period, a no data alert will be triggered. When Enable is set to true, this field is required. Integer format; value range is 3–20.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -781,7 +781,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "无数据告警。",
+			Description: "No data alert.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -793,11 +793,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "通知策略 ID。",
+		//	  "description": "Notification policy ID.",
 		//	  "type": "string"
 		//	}
 		"notification_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "通知策略 ID。",
+			Description: "Notification policy ID.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -808,16 +808,16 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "通知模版配置。",
+		//	  "description": "Notification template configuration.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Channel": {
-		//	        "description": "通知渠道，取值：email：邮箱sms：短信phone：电话lark：飞书dingtalk：钉钉wecom：企业微信slack：Slackapi：回调地址。",
+		//	        "description": "Notification channel. Options: email: Email sms: SMS phone: Phone feishu: Feishu dingtalk: DingTalk wecom: WeCom slack: Slack api: Callback URL.",
 		//	        "type": "string"
 		//	      },
 		//	      "NotifyTemplateId": {
-		//	        "description": "通知模版 ID。注意每种通知渠道仅支持配置 1 个通知模版 ID。",
+		//	        "description": "Notification template ID. Note: Each notification channel supports only one notification template ID.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -831,7 +831,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Channel
 					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "通知渠道，取值：email：邮箱sms：短信phone：电话lark：飞书dingtalk：钉钉wecom：企业微信slack：Slackapi：回调地址。",
+						Description: "Notification channel. Options: email: Email sms: SMS phone: Phone feishu: Feishu dingtalk: DingTalk wecom: WeCom slack: Slack api: Callback URL.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -840,7 +840,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: NotifyTemplateId
 					"notify_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "通知模版 ID。注意每种通知渠道仅支持配置 1 个通知模版 ID。",
+						Description: "Notification template ID. Note: Each notification channel supports only one notification template ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -849,7 +849,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "通知模版配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Notification template configuration.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -860,14 +860,14 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略检测的资源 ID。",
+		//	  "description": "Resource ID detected by the alert policy.",
 		//	  "properties": {
 		//	    "Key": {
-		//	      "description": "指标 Dimension 名称，例如ResourceID、NodeName等。不同云产品的 Dimensions 名称不同，详情请参见 云监控指标查询。ResourceID为必填项，且大小写必须与 云监控指标查询 中的一致。支持同时填写多个 Dimension 名称，并基于多个 Dimension 名称进行分组。举例如下：当您仅填写ResourceID时，系统会按照ResourceID进行告警分组。当您同时填写ResourceID和NodeName时，系统会首先按照ResourceID进行告警分组。然后在每个分组内，再按照NodeName进行分组。",
+		//	      "description": "Metric Dimension name, such as ResourceID, NodeName, etc. Dimension names vary by cloud product. For details, see Cloud Monitoring Metric Query. ResourceID is required, and its capitalization must match Cloud Monitoring Metric Query. Supports multiple Dimension names and grouping by multiple Dimension names. For example: If you only enter ResourceID, the system groups alerts by ResourceID. If you enter both ResourceID and NodeName, the system first groups alerts by ResourceID, then groups within each ResourceID group by NodeName.",
 		//	      "type": "string"
 		//	    },
 		//	    "Values": {
-		//	      "description": "指标 Dimension 值，数组形式。多个值之间使用英文半角逗号,分割。允许使用通配符*选择全部实例的值。例如：[\"*\"] 。",
+		//	      "description": "Metric Dimension values, in array format. Separate multiple values with commas. Wildcard * can be used to select all instance values. For example: [\"*\"] .",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -882,7 +882,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Key
 				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "指标 Dimension 名称，例如ResourceID、NodeName等。不同云产品的 Dimensions 名称不同，详情请参见 云监控指标查询。ResourceID为必填项，且大小写必须与 云监控指标查询 中的一致。支持同时填写多个 Dimension 名称，并基于多个 Dimension 名称进行分组。举例如下：当您仅填写ResourceID时，系统会按照ResourceID进行告警分组。当您同时填写ResourceID和NodeName时，系统会首先按照ResourceID进行告警分组。然后在每个分组内，再按照NodeName进行分组。",
+					Description: "Metric Dimension name, such as ResourceID, NodeName, etc. Dimension names vary by cloud product. For details, see Cloud Monitoring Metric Query. ResourceID is required, and its capitalization must match Cloud Monitoring Metric Query. Supports multiple Dimension names and grouping by multiple Dimension names. For example: If you only enter ResourceID, the system groups alerts by ResourceID. If you enter both ResourceID and NodeName, the system first groups alerts by ResourceID, then groups within each ResourceID group by NodeName.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -892,7 +892,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Values
 				"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "指标 Dimension 值，数组形式。多个值之间使用英文半角逗号,分割。允许使用通配符*选择全部实例的值。例如：[\"*\"] 。",
+					Description: "Metric Dimension values, in array format. Separate multiple values with commas. Wildcard * can be used to select all instance values. For example: [\"*\"] .",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -900,7 +900,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "告警策略检测的资源 ID。",
+			Description: "Resource ID detected by the alert policy.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -911,11 +911,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略所属项目。",
+		//	  "description": "Project to which the alert policy belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略所属项目。",
+			Description: "Project to which the alert policy belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -927,10 +927,10 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警恢复通知。",
+		//	  "description": "Alert recovery notification.",
 		//	  "properties": {
 		//	    "Enable": {
-		//	      "description": "是否开启告警恢复通知。取值：true：（默认）开启告警恢复通知。false：关闭告警恢复通知。",
+		//	      "description": "Enable alert recovery notification. Options: true: (default) enable alert recovery notification, false: disable alert recovery notification.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -940,7 +940,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启告警恢复通知。取值：true：（默认）开启告警恢复通知。false：关闭告警恢复通知。",
+					Description: "Enable alert recovery notification. Options: true: (default) enable alert recovery notification, false: disable alert recovery notification.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -948,7 +948,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "告警恢复通知。",
+			Description: "Alert recovery notification.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -959,7 +959,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云产品所属可用区 ID。",
+		//	  "description": "Availability zone ID of the cloud product.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -969,7 +969,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "云产品所属可用区 ID。",
+			Description: "Availability zone ID of the cloud product.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -980,11 +980,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略检测的资源类型。",
+		//	  "description": "Resource type detected by the alert policy.",
 		//	  "type": "string"
 		//	}
 		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略检测的资源类型。",
+			Description: "Resource type detected by the alert policy.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -994,11 +994,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略 ID。",
+		//	  "description": "Alarm policy ID.",
 		//	  "type": "string"
 		//	}
 		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略 ID。",
+			Description: "Alarm policy ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1008,61 +1008,61 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略名称。",
+		//	  "description": "Alert policy name.",
 		//	  "type": "string"
 		//	}
 		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略名称。",
+			Description: "Alert policy name.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RuleType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略的类型。static：手动选择。dynamic：通过资源名称、项目和标签选择。",
+		//	  "description": "Alert policy type. static: manual selection, dynamic: select by resource name, project, and tag.",
 		//	  "type": "string"
 		//	}
 		"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略的类型。static：手动选择。dynamic：通过资源名称、项目和标签选择。",
+			Description: "Alert policy type. static: manual selection, dynamic: select by resource name, project, and tag.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SilenceTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警发送周期。单位为分钟。支持配置为 5、10、15、30、60、180、360、720、1440。",
+		//	  "description": "Alert sending interval, in minutes. Supported values: 5, 10, 15, 30, 60, 180, 360, 720, 1440.",
 		//	  "type": "integer"
 		//	}
 		"silence_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "告警发送周期。单位为分钟。支持配置为 5、10、15、30、60、180、360、720、1440。",
+			Description: "Alert sending interval, in minutes. Supported values: 5, 10, 15, 30, 60, 180, 360, 720, 1440.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubNamespace
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "此策略引用的指标所属的维度。详情请参见 云产品监控指标 下各产品的 SubNamespace。",
+		//	  "description": "Dimension of the metric referenced by this policy. For details, see SubNamespace for each product in Cloud Product Monitoring Metrics.",
 		//	  "type": "string"
 		//	}
 		"sub_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "此策略引用的指标所属的维度。详情请参见 云产品监控指标 下各产品的 SubNamespace。",
+			Description: "Dimension of the metric referenced by this policy. For details, see SubNamespace for each product in Cloud Product Monitoring Metrics.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略绑定 Tag。",
+		//	  "description": "Bind alert policy to Tag.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签键值对对象。",
+		//	    "description": "Tag key-value pair object.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。支持中文、英文大写字母、英文小写字母、数字和空格。支持以下特殊字符_.:/=+-@。不能以空格为开头或结尾。volc:和/sys:为系统预留的标签键，添加标签时，标签键的开头不能设置为任何大小写形式的volc:和/sys:。标签键的长度需为 1～128 个字符。",
+		//	        "description": "Tag key. Supports Chinese, uppercase and lowercase English letters, numbers, and spaces. The following special characters are supported: _ . : / = + - @. Cannot start or end with a space. volc: and /sys: are system-reserved tag keys. When adding a tag, the tag key cannot start with any case form of volc: or /sys:. Tag key length must be 1–128 characters.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。支持中文、英文大写字母、英文小写字母、数字和空格。支持以下特殊字符_.:/=+-@。不能以空格为开头或结尾。标签键的长度需为 0～255 个字符。",
+		//	        "description": "Tag value. Supports Chinese, uppercase and lowercase English letters, numbers, and spaces. The following special characters are supported: _ . : / = + - @. Cannot start or end with a space. Tag key length must be 0–255 characters.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1079,7 +1079,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。支持中文、英文大写字母、英文小写字母、数字和空格。支持以下特殊字符_.:/=+-@。不能以空格为开头或结尾。volc:和/sys:为系统预留的标签键，添加标签时，标签键的开头不能设置为任何大小写形式的volc:和/sys:。标签键的长度需为 1～128 个字符。",
+						Description: "Tag key. Supports Chinese, uppercase and lowercase English letters, numbers, and spaces. The following special characters are supported: _ . : / = +   - @. Cannot start or end with a space. volc: and /sys: are system-reserved tag keys. When adding a tag, the tag key cannot start with any case form of volc: or /sys:. Tag key length must be 1–128 characters.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1091,7 +1091,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。支持中文、英文大写字母、英文小写字母、数字和空格。支持以下特殊字符_.:/=+-@。不能以空格为开头或结尾。标签键的长度需为 0～255 个字符。",
+						Description: "Tag value. Supports Chinese, uppercase and lowercase English letters, numbers, and spaces. The following special characters are supported: _ . : / = +   - @. Cannot start or end with a space. Tag key length must be 0–255 characters.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1100,7 +1100,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "告警策略绑定 Tag。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Bind alert policy to Tag.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1111,11 +1111,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略更新时间，时间戳格式。",
+		//	  "description": "Alarm policy update time, in timestamp format.",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略更新时间，时间戳格式。",
+			Description: "Alarm policy update time, in timestamp format.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1125,11 +1125,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警策略绑定的告警回调 URL 地址。",
+		//	  "description": "Alarm callback URL bound to the alarm policy.",
 		//	  "type": "string"
 		//	}
 		"webhook": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "告警策略绑定的告警回调 URL 地址。",
+			Description: "Alarm callback URL bound to the alarm policy.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1140,7 +1140,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "告警发生时告警回调 ID 列表。",
+		//	  "description": "Alarm callback ID list when an alarm occurs.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -1150,7 +1150,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"webhook_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "告警发生时告警回调 ID 列表。",
+			Description: "Alarm callback ID list when an alarm occurs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1169,7 +1169,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "如果您需要监控某一云产品资源的数据状态，则可以创建云监控告警策略。当被监控的云产品资源数据达到告警的触发条件时，系统会通过您指定的方式推送告警通知，便于您及时发现存在异常数据的资源。",
+		Description: "If you need to monitor the data status of a cloud product resource, you can create a cloud monitoring alert policy. When the monitored resource data meets the alert trigger conditions, the system will send alert notifications using your specified method, helping you quickly identify resources with abnormal data.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -26,40 +26,40 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。",
+		//	  "description": "Whether the subscription relationships of consumer instance groups within the Group are consistent. true: Consistent, false: Inconsistent.",
 		//	  "type": "boolean"
 		//	}
 		"consume_message_orderly": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。",
+			Description: "Whether the subscription relationships of consumer instance groups within the Group are consistent. true: Consistent, false: Inconsistent.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConsumedClients
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消费客户端列表。",
+		//	  "description": "Consumer client list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ClientAddress": {
-		//	        "description": "该消费者实例的地址和端口。",
+		//	        "description": "Address and port of this consumer instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "ClientId": {
-		//	        "description": "该消费者实例的 ID。",
+		//	        "description": "ID of this consumer instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Diff": {
-		//	        "description": "消息堆积量。",
+		//	        "description": "Message backlog.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Language": {
-		//	        "description": "消费者应用的开发语言。",
+		//	        "description": "Development language of the consumer application.",
 		//	        "type": "string"
 		//	      },
 		//	      "Version": {
-		//	        "description": "消费端版本。",
+		//	        "description": "Consumer version.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -73,52 +73,52 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ClientAddress
 					"client_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "该消费者实例的地址和端口。",
+						Description: "Address and port of this consumer instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ClientId
 					"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "该消费者实例的 ID。",
+						Description: "ID of this consumer instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Diff
 					"diff": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "消息堆积量。",
+						Description: "Message backlog.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Language
 					"language": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "消费者应用的开发语言。",
+						Description: "Development language of the consumer application.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Version
 					"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "消费端版本。",
+						Description: "Consumer version.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "消费客户端列表。",
+			Description: "Consumer client list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConsumedTopics
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该 Group 下消费者实例群组订阅的 Topic 信息。",
+		//	  "description": "Topic information subscribed by consumer instance groups under this Group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "QueueNum": {
-		//	        "description": "Topic 对应的队列数。每个 Topic 下有一到多个队列用于存储消息。",
+		//	        "description": "Number of queues associated with the Topic. Each Topic contains one or more queues for storing messages.",
 		//	        "type": "integer"
 		//	      },
 		//	      "SubString": {
-		//	        "description": "订阅规则。",
+		//	        "description": "Subscription rules.",
 		//	        "type": "string"
 		//	      },
 		//	      "TopicName": {
-		//	        "description": "客户端订阅的 Topic 名称。",
+		//	        "description": "Name of the Topic subscribed by the client.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -132,187 +132,187 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: QueueNum
 					"queue_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "Topic 对应的队列数。每个 Topic 下有一到多个队列用于存储消息。",
+						Description: "Number of queues associated with the Topic. Each Topic contains one or more queues for storing messages.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SubString
 					"sub_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "订阅规则。",
+						Description: "Subscription rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TopicName
 					"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "客户端订阅的 Topic 名称。",
+						Description: "Name of the Topic subscribed by the client.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "该 Group 下消费者实例群组订阅的 Topic 信息。",
+			Description: "Topic information subscribed by consumer instance groups under this Group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Group 的创建时间。",
+		//	  "description": "Group creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Group 的创建时间。",
+			Description: "Group creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Group 的简单描述。",
+		//	  "description": "Brief description of the Group.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Group 的简单描述。",
+			Description: "Brief description of the Group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Group 的 ID。长度限制为 7~120 个字符，只能包含字母、数字、短划线（-）和下划线（_）。推荐以 GID- 或 GID_ 开头。创建 Group 后无法修改 ID，请谨慎设置。对于2023年6月5日及之前创建的 RocketMQ 实例，Group 名称不可超过 93 个字符。",
+		//	  "description": "Group ID. Length must be between 7 and 120 characters and can only contain letters, numbers, hyphens (-), and underscores (_). It is recommended to start with GID- or GID_. The ID cannot be changed after the Group is created, so set it carefully. For RocketMQ instances created on or before June 5, 2023, the Group name cannot exceed 93 characters.",
 		//	  "type": "string"
 		//	}
 		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Group 的 ID。长度限制为 7~120 个字符，只能包含字母、数字、短划线（-）和下划线（_）。推荐以 GID  - 或 GID_ 开头。创建 Group 后无法修改 ID，请谨慎设置。对于2023年6月5日及之前创建的 RocketMQ 实例，Group 名称不可超过 93 个字符。",
+			Description: "Group ID. Length must be between 7 and 120 characters and can only contain letters, numbers, hyphens (-), and underscores (_). It is recommended to start with GID  - or GID_. The ID cannot be changed after the Group is created, so set it carefully. For RocketMQ instances created on or before June 5, 2023, the Group name cannot exceed 93 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Group 的协议标识，用于备注该 Group 的生产消费协议类型。可指定为 TCP。",
+		//	  "description": "Group protocol identifier, used to indicate the production and consumption protocol type for this Group. Can be set to TCP.",
 		//	  "type": "string"
 		//	}
 		"group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Group 的协议标识，用于备注该 Group 的生产消费协议类型。可指定为 TCP。",
+			Description: "Group protocol identifier, used to indicate the production and consumption protocol type for this Group. Can be set to TCP.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsSubSame
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。",
+		//	  "description": "Whether the subscription relationships of consumer instance groups within the Group are consistent. true: Consistent, false: Inconsistent.",
 		//	  "type": "boolean"
 		//	}
 		"is_sub_same": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。",
+			Description: "Whether the subscription relationships of consumer instance groups within the Group are consistent. true: Consistent, false: Inconsistent.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdateTimestamp
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否顺序消费。",
+		//	  "description": "Whether consumption is sequential.",
 		//	  "type": "string"
 		//	}
 		"last_update_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否顺序消费。",
+			Description: "Whether consumption is sequential.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MessageDelayTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息延迟时间，消费者实例群组最早的一条未消费消息的生产时间与当前时间的差值。单位为毫秒。",
+		//	  "description": "Message latency. The difference between the production time of the earliest unconsumed message in the consumer instance group and the current time, measured in milliseconds.",
 		//	  "type": "string"
 		//	}
 		"message_delay_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "消息延迟时间，消费者实例群组最早的一条未消费消息的生产时间与当前时间的差值。单位为毫秒。",
+			Description: "Message latency. The difference between the production time of the earliest unconsumed message in the consumer instance group and the current time, measured in milliseconds.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MessageModel
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息消费模式。默认为集群模式，请勿在同一 Group 下同时配置集群模式和广播模式。Clustering：集群消费模式，Broadcasting：广播消费模式。",
+		//	  "description": "Message consumption mode. The default is clustering mode. Do not configure both clustering and broadcasting modes under the same Group. Clustering: Clustering consumption mode, Broadcasting: Broadcasting consumption mode.",
 		//	  "type": "string"
 		//	}
 		"message_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "消息消费模式。默认为集群模式，请勿在同一 Group 下同时配置集群模式和广播模式。Clustering：集群消费模式，Broadcasting：广播消费模式。",
+			Description: "Message consumption mode. The default is clustering mode. Do not configure both clustering and broadcasting modes under the same Group. Clustering: Clustering consumption mode, Broadcasting: Broadcasting consumption mode.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RetryMaxTimes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消费最大重试次数。",
+		//	  "description": "Maximum number of consumption retries.",
 		//	  "type": "integer"
 		//	}
 		"retry_max_times": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "消费最大重试次数。",
+			Description: "Maximum number of consumption retries.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RocketmqVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RocketMQ 版本。",
+		//	  "description": "RocketMQ version.",
 		//	  "type": "string"
 		//	}
 		"rocketmq_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RocketMQ 版本。",
+			Description: "RocketMQ version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务状态。Creating：创建中，Running：运行中，Deleting：删除中，Abnormal：异常，Updating：更新中。",
+		//	  "description": "Service status. Creating: Being created, Running: Running, Deleting: Being deleted, Abnormal: Abnormal, Updating: Being updated.",
 		//	  "type": "string"
 		//	}
 		"service_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务状态。Creating：创建中，Running：运行中，Deleting：删除中，Abnormal：异常，Updating：更新中。",
+			Description: "Service status. Creating: Being created, Running: Running, Deleting: Being deleted, Abnormal: Abnormal, Updating: Being updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消费组状态。Online：消费中，Offline：未消费。",
+		//	  "description": "Consumer group status. Online: Consuming, Offline: Not consuming.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "消费组状态。Online：消费中，Offline：未消费。",
+			Description: "Consumer group status. Online: Consuming, Offline: Not consuming.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TotalConsumedRate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该 Group 下消费者实例群组接收消息的总 TPS，单位为条/秒。",
+		//	  "description": "Total TPS of consumer instance groups under this Group, measured in messages per second.",
 		//	  "type": "string"
 		//	}
 		"total_consumed_rate": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "该 Group 下消费者实例群组接收消息的总 TPS，单位为条/秒。",
+			Description: "Total TPS of consumer instance groups under this Group, measured in messages per second.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TotalDiff
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消费者实例群组的未消费消息的总量。此处显示的消息堆积量为未过滤 Tag 的总堆积量，包括 Topic 下所有 Tag 的消息。",
+		//	  "description": "Total number of unconsumed messages in the consumer instance group. The message backlog shown here is the total backlog before Tag filtering, including messages for all Tags under the Topic.",
 		//	  "type": "integer"
 		//	}
 		"total_diff": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "消费者实例群组的未消费消息的总量。此处显示的消息堆积量为未过滤 Tag 的总堆积量，包括 Topic 下所有 Tag 的消息。",
+			Description: "Total number of unconsumed messages in the consumer instance group. The message backlog shown here is the total backlog before Tag filtering, including messages for all Tags under the Topic.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

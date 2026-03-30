@@ -21,29 +21,29 @@ Data Source schema for Volcengine::APIG::GatewayService
 
 ### Read-Only
 
-- `auth_spec` (Attributes) 认证配置。 (see [below for nested schema](#nestedatt--auth_spec))
-- `comments` (String) 备注，长度限制为0~253个字符。
-- `created_time` (String) 创建时间。
-- `custom_domains` (Attributes Set) 自定义域名列表。 (see [below for nested schema](#nestedatt--custom_domains))
-- `domain_spec` (Attributes) 域名详情。 (see [below for nested schema](#nestedatt--domain_spec))
-- `domain_type` (String) 域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。
-- `domains` (Attributes Set) 默认域名。 (see [below for nested schema](#nestedatt--domains))
-- `gateway_id` (String) 网关ID。
-- `gateway_name` (String) 网关名称。
-- `message` (String) 服务创建失败、删除失败或异常时的错误信息。
-- `protocol` (Set of String) 服务支持的协议。取值：HTTP：HTTP。HTTPS：HTTPS。
-- `service_id` (String) 服务ID。
-- `service_name` (String) 服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。
-- `service_network_spec` (Attributes) 服务默认域名网络配置。。 (see [below for nested schema](#nestedatt--service_network_spec))
-- `service_type` (String) 服务类型，取值：AIProvider：AI模型代理。
-- `status` (String) Creating：创建中。CreatedFailed：创建失败。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。
+- `auth_spec` (Attributes) Authentication configuration. (see [below for nested schema](#nestedatt--auth_spec))
+- `comments` (String) Remarks. Length must be 0–253 characters.
+- `created_time` (String) Creation time.
+- `custom_domains` (Attributes Set) Custom domain list. (see [below for nested schema](#nestedatt--custom_domains))
+- `domain_spec` (Attributes) Domain details. (see [below for nested schema](#nestedatt--domain_spec))
+- `domain_type` (String) Domain type. Options: DefaultDomain: Default domain. CustomDomain: Custom domain.
+- `domains` (Attributes Set) Default domain. (see [below for nested schema](#nestedatt--domains))
+- `gateway_id` (String) Gateway ID.
+- `gateway_name` (String) Gateway name.
+- `message` (String) Error message for service creation failure, deletion failure, or abnormal status.
+- `protocol` (Set of String) Supported protocols. Options: HTTP: HTTP. HTTPS: HTTPS.
+- `service_id` (String) Service ID.
+- `service_name` (String) Service name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length must be 2–128 characters. Cannot start with a hyphen (-).
+- `service_network_spec` (Attributes) Default domain network configuration.. (see [below for nested schema](#nestedatt--service_network_spec))
+- `service_type` (String) Service type. Options: AIProvider: AI model proxy.
+- `status` (String) Creating: Creating. CreatedFailed: Creation failed. Running: Running. Deleting: Deleting. DeletedFailed: Deletion failed. Abnormal: Abnormal.
 
 <a id="nestedatt--auth_spec"></a>
 ### Nested Schema for `auth_spec`
 
 Read-Only:
 
-- `enable` (Boolean) 是否开启认证。
+- `enable` (Boolean) Whether authentication is enabled.
 
 
 <a id="nestedatt--custom_domains"></a>
@@ -51,8 +51,8 @@ Read-Only:
 
 Read-Only:
 
-- `domain` (String) 自定义域名。
-- `domain_id` (String) 自定义域名ID。
+- `domain` (String) Custom domain.
+- `domain_id` (String) Custom domain ID.
 
 
 <a id="nestedatt--domain_spec"></a>
@@ -60,7 +60,7 @@ Read-Only:
 
 Read-Only:
 
-- `enable_public_resolution` (Boolean) 开启私网域名公网解析。
+- `enable_public_resolution` (Boolean) Enable public resolution for private network domains.
 
 
 <a id="nestedatt--domains"></a>
@@ -68,8 +68,8 @@ Read-Only:
 
 Read-Only:
 
-- `domain` (String) 域名。
-- `type` (String) 域名类型。取值：public：公网。private：私网。
+- `domain` (String) Domain.
+- `type` (String) Domain type. Options: public: Public network. private: Private network.
 
 
 <a id="nestedatt--service_network_spec"></a>
@@ -77,6 +77,6 @@ Read-Only:
 
 Read-Only:
 
-- `enable_private_network` (Boolean) 开启私网。
-- `enable_public_network` (Boolean) 开启公网。
-- `private_network_ip` (Set of String) 私网域名解析的目标IP。
+- `enable_private_network` (Boolean) Enable private network.
+- `enable_public_network` (Boolean) Enable public network.
+- `private_network_ip` (Set of String) Target IP for private network domain resolution.

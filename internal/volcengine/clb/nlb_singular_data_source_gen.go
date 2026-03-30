@@ -27,18 +27,18 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的访问日志信息。",
+		//	  "description": "Access log information of the NLB instance.",
 		//	  "properties": {
 		//	    "AccessLogEnabled": {
-		//	      "description": "是否开启访问日志。true：是。flase：否。",
+		//	      "description": "Enable access logs. true: yes. false: no.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ProjectId": {
-		//	      "description": "日志项目的ID。",
+		//	      "description": "Log project ID.",
 		//	      "type": "string"
 		//	    },
 		//	    "TopicId": {
-		//	      "description": "日志主题的ID。",
+		//	      "description": "Log topic ID.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -48,39 +48,39 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AccessLogEnabled
 				"access_log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启访问日志。true：是。flase：否。",
+					Description: "Enable access logs. true: yes. false: no.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ProjectId
 				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "日志项目的ID。",
+					Description: "Log project ID.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TopicId
 				"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "日志主题的ID。",
+					Description: "Log topic ID.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "NLB实例的访问日志信息。",
+			Description: "Access log information of the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例所属的账号ID。",
+		//	  "description": "Account ID to which the NLB instance belongs.",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例所属的账号ID。",
+			Description: "Account ID to which the NLB instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BillingStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的计费状态。Normal: 正常，FinancialLocked: 被锁定。",
+		//	  "description": "Billing status of the NLB instance. Normal: normal, FinancialLocked: locked.",
 		//	  "enum": [
 		//	    "Normal",
 		//	    "FinancialLocked"
@@ -88,14 +88,14 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"billing_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的计费状态。Normal: 正常，FinancialLocked: 被锁定。",
+			Description: "Billing status of the NLB instance. Normal: normal, FinancialLocked: locked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BillingType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的计费类型。3：按使用量计费",
+		//	  "description": "Billing type of the NLB instance. 3: pay-as-you-go",
 		//	  "enum": [
 		//	    3
 		//	  ],
@@ -103,18 +103,18 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的计费类型。3：按使用量计费",
+			Description: "Billing type of the NLB instance. 3: pay-as-you-go",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的创建时间。",
+		//	  "description": "Creation time of the NLB instance.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的创建时间。",
+			Description: "Creation time of the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CrossZoneEnabled
@@ -122,52 +122,52 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": true,
-		//	  "description": "NLB实例是否开启跨可用区转发能力。true（默认值）：开启。false：关闭。",
+		//	  "description": "Whether the NLB instance has cross-availability zone forwarding enabled. true (default): enabled. false: disabled.",
 		//	  "type": "boolean"
 		//	}
 		"cross_zone_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例是否开启跨可用区转发能力。true（默认值）：开启。false：关闭。",
+			Description: "Whether the NLB instance has cross-availability zone forwarding enabled. true (default): enabled. false: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DNSName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的DNS地址。",
+		//	  "description": "DNS address of the NLB instance.",
 		//	  "type": "string"
 		//	}
 		"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的DNS地址。",
+			Description: "DNS address of the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的描述。必须以字母、数字或中文开头，可包含以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。该参数不传入，则默认为空字符串。",
+		//	  "description": "Description of the NLB instance. Must start with a letter, number, or Chinese character and can include the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided, the default is an empty string.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的描述。必须以字母、数字或中文开头，可包含以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。该参数不传入，则默认为空字符串。",
+			Description: "Description of the NLB instance. Must start with a letter, number, or Chinese character and can include the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided, the default is an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpectedOverdueTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例欠费关停时间。",
+		//	  "description": "Time when the NLB instance is suspended due to overdue payment.",
 		//	  "type": "string"
 		//	}
 		"expected_overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例欠费关停时间。",
+			Description: "Time when the NLB instance is suspended due to overdue payment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpAddressVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的IP地址类型。ipv4：IPv4版本。dualstack：双栈，即同时支持IPv4版本和IPv6版本。",
+		//	  "description": "IP address type of the NLB instance. ipv4: IPv4 version. dualstack: dual stack, supports both IPv4 and IPv6 versions.",
 		//	  "enum": [
 		//	    "ipv4",
 		//	    "dualstack"
@@ -175,25 +175,25 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"ip_address_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的IP地址类型。ipv4：IPv4版本。dualstack：双栈，即同时支持IPv4版本和IPv6版本。",
+			Description: "IP address type of the NLB instance. ipv4: IPv4 version. dualstack: dual stack, supports both IPv4 and IPv6 versions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv4类型的共享带宽包ID。",
+		//	  "description": "Shared bandwidth package ID for IPv4 type.",
 		//	  "type": "string"
 		//	}
 		"ipv_4_bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv4类型的共享带宽包ID。",
+			Description: "Shared bandwidth package ID for IPv4 type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4NetworkType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的IPv4网络类型。internet：公网类型。intranet：私网类型。",
+		//	  "description": "IPv4 network type of the NLB instance. internet: public network type. intranet: private network type.",
 		//	  "enum": [
 		//	    "internet",
 		//	    "intranet"
@@ -201,25 +201,25 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"ipv_4_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的IPv4网络类型。internet：公网类型。intranet：私网类型。",
+			Description: "IPv4 network type of the NLB instance. internet: public network type. intranet: private network type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6类型的共享带宽包ID。",
+		//	  "description": "Shared bandwidth package ID for IPv6 type.",
 		//	  "type": "string"
 		//	}
 		"ipv_6_bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6类型的共享带宽包ID。",
+			Description: "Shared bandwidth package ID for IPv6 type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6NetworkType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的IPv6网络类型。internet：公网类型。intranet：私网类型。",
+		//	  "description": "IPv6 network type of the NLB instance. internet: public network type. intranet: private network type.",
 		//	  "enum": [
 		//	    "internet",
 		//	    "intranet"
@@ -227,47 +227,47 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"ipv_6_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的IPv6网络类型。internet：公网类型。intranet：私网类型。",
+			Description: "IPv6 network type of the NLB instance. internet: public network type. intranet: private network type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例ID。",
+		//	  "description": "NLB instance ID.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例ID。",
+			Description: "NLB instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的名称。",
+		//	  "description": "Name of the NLB instance.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的名称。",
+			Description: "Name of the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ManagedSecurityGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "系统为NLB实例自动关联的托管安全组ID。",
+		//	  "description": "Managed security group ID automatically associated with the NLB instance by the system.",
 		//	  "type": "string"
 		//	}
 		"managed_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "系统为NLB实例自动关联的托管安全组ID。",
+			Description: "Managed security group ID automatically associated with the NLB instance by the system.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModificationProtectionStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例是否开启控制台上修改保护。NonProtection或空：关闭，允许通过控制台修改实例或删除实例。ConsoleProtection：开启，禁止通过控制台修改实例或删除实例。",
+		//	  "description": "Whether modification protection is enabled for the NLB instance in the console. NonProtection or empty: disabled, allows modification or deletion of the instance via the console. ConsoleProtection: enabled, prevents modification or deletion of the instance via the console.",
 		//	  "enum": [
 		//	    "NonProtection",
 		//	    "ConsoleProtection",
@@ -276,47 +276,47 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"modification_protection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例是否开启控制台上修改保护。NonProtection或空：关闭，允许通过控制台修改实例或删除实例。ConsoleProtection：开启，禁止通过控制台修改实例或删除实例。",
+			Description: "Whether modification protection is enabled for the NLB instance in the console. NonProtection or empty: disabled, allows modification or deletion of the instance via the console. ConsoleProtection: enabled, prevents modification or deletion of the instance via the console.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例被锁定的时间。参数BillingStatus为Normal时，本参数返回为空字符串。",
+		//	  "description": "Time when the NLB instance is locked. If the BillingStatus parameter is Normal, this parameter returns an empty string.",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例被锁定的时间。参数BillingStatus为Normal时，本参数返回为空字符串。",
+			Description: "Time when the NLB instance is locked. If the BillingStatus parameter is Normal, this parameter returns an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例所属项目的名称。",
+		//	  "description": "Name of the project to which the NLB instance belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例所属项目的名称。",
+			Description: "Name of the project to which the NLB instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReclaimedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的预期回收时间。参数BillingStatus为Normal时，本参数返回为空字符串。",
+		//	  "description": "Expected reclamation time of the NLB instance. If the BillingStatus parameter is Normal, this parameter returns an empty string.",
 		//	  "type": "string"
 		//	}
 		"reclaimed_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的预期回收时间。参数BillingStatus为Normal时，本参数返回为空字符串。",
+			Description: "Expected reclamation time of the NLB instance. If the BillingStatus parameter is Normal, this parameter returns an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例关联的安全组ID列表。",
+		//	  "description": "List of security group IDs associated with the NLB instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -326,14 +326,14 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "NLB实例关联的安全组ID列表。",
+			Description: "List of security group IDs associated with the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB 实例的状态。Inactive：已停止。Active：运行中。Creating：创建中。Provisioning：创建中。仅调用API创建NLB实例时存在该状态。Configuring：配置中。Deleting：删除中。CreateFailed：创建失败。",
+		//	  "description": "Status of the NLB instance. Inactive: stopped. Active: running. Creating: creating. Provisioning: creating (this status only appears when creating an NLB instance via API). Configuring: configuring. Deleting: deleting. CreateFailed: creation failed.",
 		//	  "enum": [
 		//	    "Inactive",
 		//	    "Active",
@@ -346,24 +346,24 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB 实例的状态。Inactive：已停止。Active：运行中。Creating：创建中。Provisioning：创建中。仅调用API创建NLB实例时存在该状态。Configuring：配置中。Deleting：删除中。CreateFailed：创建失败。",
+			Description: "Status of the NLB instance. Inactive: stopped. Active: running. Creating: creating. Provisioning: creating (this status only appears when creating an NLB instance via API). Configuring: configuring. Deleting: deleting. CreateFailed: creation failed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的标签信息。",
+		//	  "description": "Tag information of the NLB instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签键值对。",
+		//	    "description": "Tag key-value pair.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -380,71 +380,71 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "NLB实例的标签信息。",
+			Description: "Tag information of the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的更新时间。",
+		//	  "description": "Update time of the NLB instance.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例的更新时间。",
+			Description: "Update time of the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例所属的VPC ID。",
+		//	  "description": "VPC ID to which the NLB instance belongs.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NLB实例所属的VPC ID。",
+			Description: "VPC ID to which the NLB instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneMappings
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NLB实例的可用区信息。",
+		//	  "description": "Availability zone information for the NLB instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "EniId": {
-		//	        "description": "网卡ID。",
+		//	        "description": "Network interface card ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv4Address": {
-		//	        "description": "NLB实例的私网IPv4 VIP地址。该参数不传入，则系统自动从子网中分配一个可用的IPv4地址。",
+		//	        "description": "Private IPv4 VIP address of the NLB instance. If this parameter is not provided, the system automatically assigns an available IPv4 address from the subnet.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv4EipAddress": {
-		//	        "description": "NLB实例的公网IPv4 EIP地址。",
+		//	        "description": "Public IPv4 EIP address of the NLB instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv4EipId": {
-		//	        "description": "NLB实例的公网IPv4 EIP ID。",
+		//	        "description": "Public IPv4 EIP ID of the NLB instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv4HcStatus": {
-		//	        "description": "NLB实例私网IPv4地址的健康状态。Healthy：健康。Unhealthy：异常。",
+		//	        "description": "Health status of the NLB instance's private IPv4 address. Healthy: healthy. Unhealthy: abnormal.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv4LocalAddresses": {
-		//	        "description": "NLB实例的私网IPv4 LIP地址。",
+		//	        "description": "Private IPv4 LIP address of the NLB instance.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -453,19 +453,19 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Ipv6Address": {
-		//	        "description": "NLB实例的私网IPv6 VIP地址。",
+		//	        "description": "Private IPv6 VIP address of the NLB instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv6EipId": {
-		//	        "description": "NLB实例关联的IPv6公网带宽的ID。",
+		//	        "description": "ID of the IPv6 public bandwidth associated with the NLB instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv6HcStatus": {
-		//	        "description": "NLB实例私网IPv6地址的健康状态。Healthy：健康。Unhealthy：异常。",
+		//	        "description": "Health status of the NLB instance's private IPv6 address. Healthy: healthy. Unhealthy: abnormal.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv6LocalAddresses": {
-		//	        "description": "NLB实例的私网IPv6 LIP地址。",
+		//	        "description": "Private IPv6 LIP address of the NLB instance.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -474,11 +474,11 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "SubnetId": {
-		//	        "description": "NLB实例所属的子网ID。",
+		//	        "description": "Subnet ID to which the NLB instance belongs.",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "NLB实例所属的可用区ID。",
+		//	        "description": "Availability zone ID to which the NLB instance belongs.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -492,69 +492,69 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EniId
 					"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网卡ID。",
+						Description: "Network interface card ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv4Address
 					"ipv_4_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例的私网IPv4 VIP地址。该参数不传入，则系统自动从子网中分配一个可用的IPv4地址。",
+						Description: "Private IPv4 VIP address of the NLB instance. If this parameter is not provided, the system automatically assigns an available IPv4 address from the subnet.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv4EipAddress
 					"ipv_4_eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例的公网IPv4 EIP地址。",
+						Description: "Public IPv4 EIP address of the NLB instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv4EipId
 					"ipv_4_eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例的公网IPv4 EIP ID。",
+						Description: "Public IPv4 EIP ID of the NLB instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv4HcStatus
 					"ipv_4_hc_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例私网IPv4地址的健康状态。Healthy：健康。Unhealthy：异常。",
+						Description: "Health status of the NLB instance's private IPv4 address. Healthy: healthy. Unhealthy: abnormal.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv4LocalAddresses
 					"ipv_4_local_addresses": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "NLB实例的私网IPv4 LIP地址。",
+						Description: "Private IPv4 LIP address of the NLB instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv6Address
 					"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例的私网IPv6 VIP地址。",
+						Description: "Private IPv6 VIP address of the NLB instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv6EipId
 					"ipv_6_eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例关联的IPv6公网带宽的ID。",
+						Description: "ID of the IPv6 public bandwidth associated with the NLB instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv6HcStatus
 					"ipv_6_hc_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例私网IPv6地址的健康状态。Healthy：健康。Unhealthy：异常。",
+						Description: "Health status of the NLB instance's private IPv6 address. Healthy: healthy. Unhealthy: abnormal.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv6LocalAddresses
 					"ipv_6_local_addresses": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "NLB实例的私网IPv6 LIP地址。",
+						Description: "Private IPv6 LIP address of the NLB instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例所属的子网ID。",
+						Description: "Subnet ID to which the NLB instance belongs.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "NLB实例所属的可用区ID。",
+						Description: "Availability zone ID to which the NLB instance belongs.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "NLB实例的可用区信息。",
+			Description: "Availability zone information for the NLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

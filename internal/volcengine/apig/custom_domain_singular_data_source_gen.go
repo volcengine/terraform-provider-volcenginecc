@@ -27,62 +27,62 @@ func customDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义域名证书ID。",
+		//	  "description": "Custom Domain Certificate ID",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义域名证书ID。",
+			Description: "Custom Domain Certificate ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Comments
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备注。",
+		//	  "description": "Remarks",
 		//	  "type": "string"
 		//	}
 		"comments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备注。",
+			Description: "Remarks",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomDomainId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义域名ID。",
+		//	  "description": "Custom Domain ID",
 		//	  "type": "string"
 		//	}
 		"custom_domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义域名ID。",
+			Description: "Custom Domain ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义域名。",
+		//	  "description": "Custom Domain",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义域名。",
+			Description: "Custom Domain",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "协议，取值：HTTP。HTTPS。",
+		//	  "description": "Protocol. Values: HTTP, HTTPS",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -92,51 +92,51 @@ func customDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"protocol": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "协议，取值：HTTP。HTTPS。",
+			Description: "Protocol. Values: HTTP, HTTPS",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SSLRedirect
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "重定向到HTTPS。",
+		//	  "description": "Redirect to HTTPS",
 		//	  "type": "boolean"
 		//	}
 		"ssl_redirect": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "重定向到HTTPS。",
+			Description: "Redirect to HTTPS",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务ID。",
+		//	  "description": "Service ID",
 		//	  "type": "string"
 		//	}
 		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务ID。",
+			Description: "Service ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。",
+		//	  "description": "Status. Values: Creating: configuring; CreationFailed: configuration failed; Deleting: deleting; DeletionFailed: deletion failed; Verified: active",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。",
+			Description: "Status. Values: Creating: configuring; CreationFailed: configuration failed; Deleting: deleting; DeletionFailed: deletion failed; Verified: active",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

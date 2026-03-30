@@ -26,83 +26,83 @@ func vpnAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否自动同步TR路由到网络实例路由表中。",
+		//	  "description": "Whether to automatically sync TR routes to the network instance route table.",
 		//	  "type": "boolean"
 		//	}
 		"auto_publish_route_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否自动同步TR路由到网络实例路由表中。",
+			Description: "Whether to automatically sync TR routes to the network instance route table.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+		//	  "description": "Network instance connection description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+			Description: "Network instance connection description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckRevokeRouteEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启健康检查收敛路由功能。true：是。仅当IPsec连接开启健康检查功能时生效，且只支持收敛静态路由，不支持收敛BGP路由。false：否。",
+		//	  "description": "Whether to enable health check route convergence. true: Yes. Effective only when the IPsec connection has health check enabled; supports convergence of static routes only, not BGP routes. false: No.",
 		//	  "type": "boolean"
 		//	}
 		"health_check_revoke_route_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启健康检查收敛路由功能。true：是。仅当IPsec连接开启健康检查功能时生效，且只支持收敛静态路由，不支持收敛BGP路由。false：否。",
+			Description: "Whether to enable health check route convergence. true: Yes. Effective only when the IPsec connection has health check enabled; supports convergence of static routes only, not BGP routes. false: No.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Enabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启IPv6功能。",
+		//	  "description": "Whether to enable IPv6.",
 		//	  "type": "boolean"
 		//	}
 		"ipv_6_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启IPv6功能。",
+			Description: "Whether to enable IPv6.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。",
+		//	  "description": "Network instance connection status. Creating: being created. Deleting: being deleted. Pending: being configured. Available: available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。",
+			Description: "Network instance connection status. Creating: being created. Deleting: being deleted. Pending: being configured. Available: available.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -119,95 +119,95 @@ func vpnAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterAttachmentId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的ID。",
+		//	  "description": "Network instance connection ID.",
 		//	  "type": "string"
 		//	}
 		"transit_router_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的ID。",
+			Description: "Network instance connection ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterAttachmentName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为网络实例连接的ID。",
+		//	  "description": "Network instance connection name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the network instance connection ID.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"transit_router_attachment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为网络实例连接的ID。",
+			Description: "Network instance connection name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the network instance connection ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的ID。",
+		//	  "description": "Transit router instance ID.",
 		//	  "type": "string"
 		//	}
 		"transit_router_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的ID。",
+			Description: "Transit router instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterRouteTableId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联的TR路由表ID。",
+		//	  "description": "Associated TR route table ID.",
 		//	  "type": "string"
 		//	}
 		"transit_router_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "关联的TR路由表ID。",
+			Description: "Associated TR route table ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpnConnectionId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPsec连接的ID。",
+		//	  "description": "IPsec connection ID.",
 		//	  "type": "string"
 		//	}
 		"vpn_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPsec连接的ID。",
+			Description: "IPsec connection ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPsec连接所属可用区的ID。",
+		//	  "description": "ID of the availability zone to which the IPsec connection belongs.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPsec连接所属可用区的ID。",
+			Description: "ID of the availability zone to which the IPsec connection belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

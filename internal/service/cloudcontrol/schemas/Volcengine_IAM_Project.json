@@ -4,7 +4,7 @@
     "/properties/ProjectName",
     "/properties/ParentProjectName"
   ],
-  "description": "资源项目（Project）是提供的一种资源分组管理的机制，帮助您达成逻辑层面的资源隔离，您能够通过资源项目进行项目制授权和分账等操作。",
+  "description": "Resource project (Project) provides a mechanism for resource group management, helping you achieve logical resource isolation. You can use resource projects for project-based authorization, billing, and other operations.",
   "handlers": {
     "create": {
       "permissions": [
@@ -40,47 +40,47 @@
   ],
   "properties": {
     "AccountID": {
-      "description": "账号ID",
+      "description": "Account ID",
       "type": "integer"
     },
     "CreatedTime": {
-      "description": "创建时间",
+      "description": "Creation Time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "描述",
+      "description": "Description",
       "semantic": "description",
       "type": "string"
     },
     "DisplayName": {
-      "description": "展示名",
+      "description": "Display Name",
       "type": "string"
     },
     "HasPermission": {
-      "description": "是否可见",
+      "description": "Visible",
       "type": "boolean"
     },
     "ParentProjectName": {
-      "description": "父项目名称",
+      "description": "Parent Project Name",
       "type": "string"
     },
     "Path": {
-      "description": "项目路径",
+      "description": "Project Path",
       "type": "string"
     },
     "ProjectName": {
-      "description": "项目名称",
+      "description": "Project Name",
       "semantic": "resourceId",
       "type": "string"
     },
     "Status": {
-      "description": "启用状态",
+      "description": "Enabled Status",
       "semantic": "status",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "更新时间",
+      "description": "Update Time",
       "semantic": "updatedTime",
       "type": "string"
     }

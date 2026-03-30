@@ -26,16 +26,16 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "每个 RocketMQ 密钥对于当前 Topic 的权限，支持批量设置权限。若未设置，每个密钥对于当前 Topic 维持密钥的默认权限。",
+		//	  "description": "Permissions for each RocketMQ key on the current Topic, supports batch permission settings. If not set, each key retains its default permissions for the current Topic.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccessKey": {
-		//	        "description": "RocketMQ 密钥的 AccessKey。",
+		//	        "description": "AccessKey of the RocketMQ key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Authority": {
-		//	        "description": "用户对于当前Topic的访问权限。ALL：拥有发布、订阅权限。PUB：拥有发布权限。SUB：拥有订阅权限。DENY：不具备发布或订阅权限。",
+		//	        "description": "User access permissions for the current Topic. ALL: Publish and subscribe permissions. PUB: Publish permission. SUB: Subscribe permission. DENY: No publish or subscribe permissions.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -49,60 +49,60 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccessKey
 					"access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "RocketMQ 密钥的 AccessKey。",
+						Description: "AccessKey of the RocketMQ key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Authority
 					"authority": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户对于当前Topic的访问权限。ALL：拥有发布、订阅权限。PUB：拥有发布权限。SUB：拥有订阅权限。DENY：不具备发布或订阅权限。",
+						Description: "User access permissions for the current Topic. ALL: Publish and subscribe permissions. PUB: Publish permission. SUB: Subscribe permission. DENY: No publish or subscribe permissions.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "每个 RocketMQ 密钥对于当前 Topic 的权限，支持批量设置权限。若未设置，每个密钥对于当前 Topic 维持密钥的默认权限。",
+			Description: "Permissions for each RocketMQ key on the current Topic, supports batch permission settings. If not set, each key retains its default permissions for the current Topic.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 创建时间。",
+		//	  "description": "Topic creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Topic 创建时间。",
+			Description: "Topic creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 的描述信息，长度为 0~128 个字符。",
+		//	  "description": "Topic description, length: 0–128 characters.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Topic 的描述信息，长度为 0~128 个字符。",
+			Description: "Topic description, length: 0–128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupsInfos
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消费者组信息列表。",
+		//	  "description": "Consumer group information list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "GroupId": {
-		//	        "description": "消费组的 Group ID。",
+		//	        "description": "Group ID of the consumer group.",
 		//	        "type": "string"
 		//	      },
 		//	      "MessageModel": {
-		//	        "description": "消费模式。取值说明如下：Clustering：集群消费模式。Broadcasting：广播消费模式。",
+		//	        "description": "Consumption mode. The values are as follows: Clustering: cluster consumption mode. Broadcasting: broadcast consumption mode.",
 		//	        "type": "string"
 		//	      },
 		//	      "SubString": {
-		//	        "description": "订阅的规则，此字段直接透传消费组订阅此 Topic 时指定的字符串，一般为 * 或 TAG1 || TAG2。",
+		//	        "description": "Subscription rule. This field contains the exact string specified by the consumer group when subscribing to this Topic, usually * or TAG1 || TAG2.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -116,95 +116,95 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: GroupId
 					"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "消费组的 Group ID。",
+						Description: "Group ID of the consumer group.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MessageModel
 					"message_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "消费模式。取值说明如下：Clustering：集群消费模式。Broadcasting：广播消费模式。",
+						Description: "Consumption mode. The values are as follows: Clustering: cluster consumption mode. Broadcasting: broadcast consumption mode.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SubString
 					"sub_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "订阅的规则，此字段直接透传消费组订阅此 Topic 时指定的字符串，一般为 * 或 TAG1 || TAG2。",
+						Description: "Subscription rule. This field contains the exact string specified by the consumer group when subscribing to this Topic, usually * or TAG1 || TAG2.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "消费者组信息列表。",
+			Description: "Consumer group information list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例名称。",
+		//	  "description": "Instance name.",
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例名称。",
+			Description: "Instance name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MessageType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息类型。设置此参数表示根据指定的消息类型筛选 Topic 列表。取值说明如下：0：普通消息。1：事务消息。2：分区顺序消息。3：全局顺序消息。4：延时消息。",
+		//	  "description": "Message type. Set this parameter to filter the Topic list by the specified message type. Value description: 0: Normal message. 1: Transaction message. 2: Partitioned ordered message. 3: Globally ordered message. 4: Delayed message.",
 		//	  "type": "integer"
 		//	}
 		"message_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "消息类型。设置此参数表示根据指定的消息类型筛选 Topic 列表。取值说明如下：0：普通消息。1：事务消息。2：分区顺序消息。3：全局顺序消息。4：延时消息。",
+			Description: "Message type. Set this parameter to filter the Topic list by the specified message type. Value description: 0: Normal message. 1: Transaction message. 2: Partitioned ordered message. 3: Globally ordered message. 4: Delayed message.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: QueueNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "设置当前 Topic 的队列数量，最大不可超过当前实例剩余可用队列数。每个实例规格的队列数量限制请参考产品规格。在 4.x 版本实例中创建 Topic 时，请参考以下说明设置队列数：全局顺序类型的 Topic 队列数默认为 1。其他类型 Topic 的队列数和计算规格有关，n3 及以下规格的队列数默认为 6，n3 以上规格的队列数默认是 broker 组数的两倍。队列数建议设置为计算节点数的倍数，否则可能造成不同 Broker 之间数据不均衡。例如规格 rocketmq.n3.x2.medium 的计算节点数为 3，队列数建议设置为 3 的倍数，即 3、6、9 等。在 5.x 版本实例中创建 Topic 时，请参考以下说明设置队列数：全局顺序类型的 Topic 队列数默认为 1。其他类型 Topic 的队列数默认是 broker 组数的两倍。非顺序场景性能不受队列个数影响，更多队列仅用于提升顺序消费并发性能。",
+		//	  "description": "Set the number of queues for the current Topic. The maximum cannot exceed the remaining available queues for the current instance. For queue limits per instance specification, refer to the product specifications. When creating a Topic in a 4.x version instance, set the number of queues as follows: For globally ordered Topics, the default queue number is 1. For other Topic types, the queue number depends on the compute specification. For n3 and below, the default is 6; for above n3, the default is twice the number of broker groups. It is recommended to set the queue number as a multiple of the number of compute nodes to avoid data imbalance across Brokers. For example, for the rocketmq.n3.x2.medium specification with 3 compute nodes, set the queue number to a multiple of 3, such as 3, 6, or 9. When creating a Topic in a 5.x version instance, set the number of queues as follows: For globally ordered Topics, the default queue number is 1. For other Topic types, the default is twice the number of broker groups. In non-ordered scenarios, performance is not affected by the number of queues; more queues only improve concurrent performance for ordered consumption.",
 		//	  "type": "integer"
 		//	}
 		"queue_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "设置当前 Topic 的队列数量，最大不可超过当前实例剩余可用队列数。每个实例规格的队列数量限制请参考产品规格。在 4.x 版本实例中创建 Topic 时，请参考以下说明设置队列数：全局顺序类型的 Topic 队列数默认为 1。其他类型 Topic 的队列数和计算规格有关，n3 及以下规格的队列数默认为 6，n3 以上规格的队列数默认是 broker 组数的两倍。队列数建议设置为计算节点数的倍数，否则可能造成不同 Broker 之间数据不均衡。例如规格 rocketmq.n3.x2.medium 的计算节点数为 3，队列数建议设置为 3 的倍数，即 3、6、9 等。在 5.x 版本实例中创建 Topic 时，请参考以下说明设置队列数：全局顺序类型的 Topic 队列数默认为 1。其他类型 Topic 的队列数默认是 broker 组数的两倍。非顺序场景性能不受队列个数影响，更多队列仅用于提升顺序消费并发性能。",
+			Description: "Set the number of queues for the current Topic. The maximum cannot exceed the remaining available queues for the current instance. For queue limits per instance specification, refer to the product specifications. When creating a Topic in a 4.x version instance, set the number of queues as follows: For globally ordered Topics, the default queue number is 1. For other Topic types, the queue number depends on the compute specification. For n3 and below, the default is 6; for above n3, the default is twice the number of broker groups. It is recommended to set the queue number as a multiple of the number of compute nodes to avoid data imbalance across Brokers. For example, for the rocketmq.n3.x2.medium specification with 3 compute nodes, set the queue number to a multiple of 3, such as 3, 6, or 9. When creating a Topic in a 5.x version instance, set the number of queues as follows: For globally ordered Topics, the default queue number is 1. For other Topic types, the default is twice the number of broker groups. In non-ordered scenarios, performance is not affected by the number of queues; more queues only improve concurrent performance for ordered consumption.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: QueuesInfos
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "队列信息列表。",
+		//	  "description": "Queue information list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "EndOffset": {
-		//	        "description": "当前队列的最大偏移量，即下一条消息的偏移量，当前最新消息的位置为 EndOffset - 1。",
+		//	        "description": "The maximum offset of the current queue, which is the offset of the next message. The position of the latest message is EndOffset - 1.",
 		//	        "type": "integer"
 		//	      },
 		//	      "LastUpdateTimestamp": {
-		//	        "description": "该队列最近一次消息写入的时间。",
+		//	        "description": "The time of the most recent message written to this queue.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "MessageCount": {
-		//	        "description": "当前队列队列内的消息个数。EndOffset 为下一条消息的偏移量，所以 MessageCount=EndOffset-StartOffset。",
+		//	        "description": "The number of messages in the current queue. EndOffset is the offset of the next message, so MessageCount = EndOffset - StartOffset.",
 		//	        "type": "integer"
 		//	      },
 		//	      "QueueId": {
-		//	        "description": "队列的编号 ID。",
+		//	        "description": "Queue ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "StartOffset": {
-		//	        "description": "当前队列最早消息的偏移量。",
+		//	        "description": "The earliest message offset in the current queue.",
 		//	        "type": "integer"
 		//	      }
 		//	    },
@@ -218,48 +218,48 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EndOffset
 					"end_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "当前队列的最大偏移量，即下一条消息的偏移量，当前最新消息的位置为 EndOffset   - 1。",
+						Description: "The maximum offset of the current queue, which is the offset of the next message. The position of the latest message is EndOffset   - 1.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: LastUpdateTimestamp
 					"last_update_timestamp": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "该队列最近一次消息写入的时间。",
+						Description: "The time of the most recent message written to this queue.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MessageCount
 					"message_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "当前队列队列内的消息个数。EndOffset 为下一条消息的偏移量，所以 MessageCount=EndOffset-StartOffset。",
+						Description: "The number of messages in the current queue. EndOffset is the offset of the next message, so MessageCount = EndOffset   - StartOffset.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: QueueId
 					"queue_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "队列的编号 ID。",
+						Description: "Queue ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StartOffset
 					"start_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "当前队列最早消息的偏移量。",
+						Description: "The earliest message offset in the current queue.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "队列信息列表。",
+			Description: "Queue information list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReadAccessPolicies
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "每个 RocketMQ 密钥对于当前 Topic 的权限，读字段",
+		//	  "description": "Permissions for each RocketMQ key on the current Topic, permission field",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccessKey": {
-		//	        "description": "RocketMQ 密钥的 AccessKey。",
+		//	        "description": "AccessKey of the RocketMQ key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Authority": {
-		//	        "description": "用户对于当前Topic的访问权限。ALL：拥有发布、订阅权限。PUB：拥有发布权限。SUB：拥有订阅权限。DENY：不具备发布或订阅权限。",
+		//	        "description": "User access permissions for the current Topic. ALL: Publish and subscribe permissions. PUB: Publish permission. SUB: Subscribe permission. DENY: No publish or subscribe permissions.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -273,41 +273,41 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccessKey
 					"access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "RocketMQ 密钥的 AccessKey。",
+						Description: "AccessKey of the RocketMQ key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Authority
 					"authority": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户对于当前Topic的访问权限。ALL：拥有发布、订阅权限。PUB：拥有发布权限。SUB：拥有订阅权限。DENY：不具备发布或订阅权限。",
+						Description: "User access permissions for the current Topic. ALL: Publish and subscribe permissions. PUB: Publish permission. SUB: Subscribe permission. DENY: No publish or subscribe permissions.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "每个 RocketMQ 密钥对于当前 Topic 的权限，读字段",
+			Description: "Permissions for each RocketMQ key on the current Topic, permission field",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务状态。Creating：创建中，Running：运行中，Deleting：删除中，Abnormal：异常，Updating：更新中。",
+		//	  "description": "Service status. Creating: being created, Running: running, Deleting: being deleted, Abnormal: abnormal, Updating: being updated.",
 		//	  "type": "string"
 		//	}
 		"service_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务状态。Creating：创建中，Running：运行中，Deleting：删除中，Abnormal：异常，Updating：更新中。",
+			Description: "Service status. Creating: being created, Running: running, Deleting: being deleted, Abnormal: abnormal, Updating: being updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TopicName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 的名称。命名规则如下：长度为 3~100 个字符。只能包含英文、数字、连字符（-）以及下划线（_）。Topic 名称中不可包含以下保留字符或特殊前缀。保留字符：RMQ_SYS_TRANS_OP_HALF_TOPIC、BenchmarkTest、TBW102、OFFSET_MOVED_EVENT、SELF_TEST_TOPIC、RMQ_SYS_TRANS_HALF_TOPIC、SCHEDULE_TOPIC_XXXX、RMQ_SYS_TRACE_TOPIC。特殊前缀：rocketmq-broker-、%RETRY%、rmq_sys_、%DLQ%。",
+		//	  "description": "Topic name. Naming rules: Length must be 3–100 characters. Only English letters, numbers, hyphens (-), and underscores (_) are allowed. Topic names cannot contain the following reserved characters or special prefixes. Reserved characters: RMQ_SYS_TRANS_OP_HALF_TOPIC, BenchmarkTest, TBW102, OFFSET_MOVED_EVENT, SELF_TEST_TOPIC, RMQ_SYS_TRANS_HALF_TOPIC, SCHEDULE_TOPIC_XXXX, RMQ_SYS_TRACE_TOPIC. Special prefixes: rocketmq-broker-, %RETRY%, rmq_sys_, %DLQ%.",
 		//	  "maxLength": 100,
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
 		"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Topic 的名称。命名规则如下：长度为 3~100 个字符。只能包含英文、数字、连字符（-）以及下划线（_）。Topic 名称中不可包含以下保留字符或特殊前缀。保留字符：RMQ_SYS_TRANS_OP_HALF_TOPIC、BenchmarkTest、TBW102、OFFSET_MOVED_EVENT、SELF_TEST_TOPIC、RMQ_SYS_TRANS_HALF_TOPIC、SCHEDULE_TOPIC_XXXX、RMQ_SYS_TRACE_TOPIC。特殊前缀：rocketmq-broker-、%RETRY%、rmq_sys_、%DLQ%。",
+			Description: "Topic name. Naming rules: Length must be 3–100 characters. Only English letters, numbers, hyphens (-), and underscores (_) are allowed. Topic names cannot contain the following reserved characters or special prefixes. Reserved characters: RMQ_SYS_TRANS_OP_HALF_TOPIC, BenchmarkTest, TBW102, OFFSET_MOVED_EVENT, SELF_TEST_TOPIC, RMQ_SYS_TRANS_HALF_TOPIC, SCHEDULE_TOPIC_XXXX, RMQ_SYS_TRACE_TOPIC. Special prefixes: rocketmq-broker-, %RETRY%, rmq_sys_, %DLQ%.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

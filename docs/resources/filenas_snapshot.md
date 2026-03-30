@@ -2,12 +2,12 @@
 page_title: "volcenginecc_filenas_snapshot Resource - terraform-provider-volcenginecc"
 subcategory: "FileNAS"
 description: |-
-  快照是一种备份方式，每个快照都是文件存储在某个时间点的备份。当数据丢失或故障时，您可以通过快照恢复文件存储数据，找回丢失的数据。
+  A snapshot is a backup method. Each snapshot is a backup of file storage at a specific point in time. If data is lost or a failure occurs, you can use snapshots to restore file storage and recover lost data
 ---
 
 # volcenginecc_filenas_snapshot (Resource)
 
-快照是一种备份方式，每个快照都是文件存储在某个时间点的备份。当数据丢失或故障时，您可以通过快照恢复文件存储数据，找回丢失的数据。
+A snapshot is a backup method. Each snapshot is a backup of file storage at a specific point in time. If data is lost or a failure occurs, you can use snapshots to restore file storage and recover lost data
 
 ## Example Usage
 
@@ -24,27 +24,27 @@ resource "volcenginecc_filenas_snapshot" "FileNASSnapshotDemo" {
 
 ### Required
 
-- `file_system_id` (String) 文件系统 ID。
-- `snapshot_name` (String) 快照名称。
+- `file_system_id` (String) File System ID
+- `snapshot_name` (String) Snapshot Name
 
 ### Optional
 
-- `description` (String) 快照描述信息。
+- `description` (String) Snapshot Description
 
 ### Read-Only
 
-- `created_time` (String) 快照创建时间。
-- `file_system_name` (String) 文件系统名称。
+- `created_time` (String) Snapshot Creation Time
+- `file_system_name` (String) File System Name
 - `id` (String) Uniquely identifies the resource.
-- `is_encrypt` (Boolean) 是否加密，当前仅支持false，即不加密。
-- `progress` (String) 快照创建进度。
-- `retention_days` (Number) 快照保留时间，默认为2147483647，即永久保留。
-- `snapshot_id` (String) 快照 ID。
-- `snapshot_type` (String) 快照类型，默认为Manual，即手动快照。
-- `source_size` (Number) 文件系统容量，单位为 GiB。
-- `source_version` (String) 文件系统版本。
-- `status` (String) 快照状态。说明如下：Progressing：正在创建。Accomplished：创建成功。Failed：创建失败。
-- `zone_id` (String) 可用区 ID。
+- `is_encrypt` (Boolean) Is encryption enabled. Currently only false is supported (not encrypted)
+- `progress` (String) Snapshot Creation Progress
+- `retention_days` (Number) Snapshot Retention Period. Default is 2147483647 (permanent retention)
+- `snapshot_id` (String) Snapshot ID
+- `snapshot_type` (String) Snapshot Type. Default is Manual (manual snapshot)
+- `source_size` (Number) File System Capacity (GiB)
+- `source_version` (String) File System Version
+- `status` (String) Snapshot Status. Details: Progressing: Creating. Accomplished: Created successfully. Failed: Creation failed
+- `zone_id` (String) Availability Zone ID
 
 ## Import
 

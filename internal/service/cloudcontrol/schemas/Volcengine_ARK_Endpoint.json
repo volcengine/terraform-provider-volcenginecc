@@ -12,90 +12,90 @@
   ],
   "definitions": {
     "Certificate": {
-      "description": "接入点推理应用层加密证书。",
+      "description": "Endpoint inference application layer encryption certificate",
       "properties": {
         "NotAfter": {
-          "description": "X509私有证书过期的时间。使用秒级时间戳表示。",
+          "description": "X509 private certificate expiration time, represented as a timestamp in seconds",
           "format": "int64",
           "type": "integer"
         },
         "NotBefore": {
-          "description": "X509私有证书开始生效的时间。使用秒级时间戳表示。",
+          "description": "X509 private certificate activation time, represented as a timestamp in seconds",
           "format": "int64",
           "type": "integer"
         },
         "PCAHost": {
-          "description": "证书方。",
+          "description": "Certificate subject",
           "type": "string"
         },
         "PCAInstanceCertificate": {
-          "description": "PEM 格式的叶子证书。",
+          "description": "PEM format leaf certificate",
           "type": "string"
         },
         "PCAName": {
-          "description": "证书名称。",
+          "description": "Certificate name",
           "type": "string"
         },
         "PCARootCACertificate": {
-          "description": "PEM 格式的根证书。",
+          "description": "PEM format root certificate",
           "type": "string"
         },
         "PCASubCACertificate": {
-          "description": "PEM 格式的中间根证书和根证书。",
+          "description": "Intermediate certificate and root certificate in PEM format",
           "type": "string"
         }
       },
       "type": "object"
     },
     "FoundationModel": {
-      "description": "基础模型。",
+      "description": "Base model",
       "properties": {
         "ModelVersion": {
-          "description": "基础模型版本。",
+          "description": "Base model version",
           "type": "string"
         },
         "Name": {
-          "description": "基础模型名称。请注意模型名称为小写。doubao 1.5 代模型的模型名称格式为\"doubao-1-5-**\"。",
+          "description": "Base model name. Note: Model names are lowercase. The model name format for doubao 1.5 generation models is \"doubao-1-5-**\".",
           "type": "string"
         }
       },
       "type": "object"
     },
     "ModelReference": {
-      "description": "接入点接入模型。",
+      "description": "Endpoint access model",
       "properties": {
         "CustomModelId": {
-          "description": "定制模型的ID。",
+          "description": "Custom model ID",
           "type": "string"
         },
         "FoundationModel": {
           "$ref": "#/definitions/FoundationModel",
-          "description": "基础模型。",
+          "description": "Base model",
           "type": "object"
         }
       },
       "type": "object"
     },
     "Moderation": {
-      "description": "内容护栏方案。",
+      "description": "Content guardrail scheme",
       "properties": {
         "Strategy": {
-          "description": "内容安全护栏方案。取值:Default: 默认方案。更低延迟，广泛覆盖内容安全通用需求;Basic：基本方案（公测中）。支持在接口响应中提供命中的风险分类，暂时只包含严重违规和激进行为两类风险。注意：如果是流式接口调用，不建议此方案，会导致吐出的每个分片的长度变长，延时变高。",
+          "description": "Content safety guardrail scheme. Values: Default: default scheme. Lower latency, broadly covers general content safety requirements; Basic: basic scheme (public beta). Supports providing triggered risk categories in interface responses, currently only includes two risk types: severe violations and aggressive behavior. Note: If using streaming interface calls, this scheme is not recommended, as it will increase the length of each output fragment and raise latency",
           "type": "string"
         }
       },
       "type": "object"
     },
     "RateLimit": {
-      "description": "接入点限流。",
+      "description": "Endpoint rate limiting",
       "properties": {
         "Rpm": {
-          "description": "Requests Per Minute，每分钟请求数。",
+          "description": "Requests Per Minute, number of requests per minute",
           "format": "int32",
           "type": "integer"
         },
         "Tpm": {
-          "description": "Tokens Per Minute，每分钟请求 token 数。",
+          "description": "Tokens Per Minute, number of tokens requested per minute",
           "format": "int32",
           "type": "integer"
         }
@@ -105,11 +105,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value",
           "type": "string"
         }
       },
@@ -119,7 +119,7 @@
       "type": "object"
     }
   },
-  "description": "在使用大语言模型进行推理服务时，推理接入点（Endpoint）是模型调用的关键入口。开发者只需通过指定的 ID 即可向大模型发起 API / SDK 推理请求，实现快速接入与灵活调用。系统提供统一的 API 调用方式、调用监控、限流策略与安全保障机制，确保推理过程的稳定性与安全性。",
+  "description": "When using large language models for inference services, the inference endpoint is the key entry point for model invocation. Developers can initiate API/SDK inference requests to the large model simply by specifying the ID, enabling quick access and flexible invocation. The system provides a unified API invocation method, call monitoring, rate limiting strategies, and security mechanisms to ensure stability and security during inference",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -166,31 +166,31 @@
   ],
   "properties": {
     "BatchOnly": {
-      "description": "是否只支持 BatchChat。如果为true，只能访问 Batch 推理接口，否则只能访问在线推理接口。",
+      "description": "Whether only BatchChat is supported. If true, only batch inference interfaces can be accessed; otherwise, only online inference interfaces can be accessed",
       "type": "boolean"
     },
     "Certificate": {
       "$ref": "#/definitions/Certificate",
-      "description": "证书信息。",
+      "description": "Certificate information",
       "type": "object"
     },
     "CreateTime": {
-      "description": "接入点创建时间，RFC3339格式。",
+      "description": "Endpoint creation time, RFC3339 format",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "接入点描述。",
+      "description": "Endpoint description",
       "semantic": "description",
       "type": "string"
     },
     "EndpointId": {
-      "description": "推理接入点的ID。",
+      "description": "Inference access point ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "EndpointModelType": {
-      "description": "接入点模型类型。取值:FoundationModel为基础模型;CustomModel为定制模型。",
+      "description": "Access point model type. Options: FoundationModel for base model; CustomModel for custom model.",
       "enum": [
         "FoundationModel",
         "CustomModel"
@@ -199,61 +199,61 @@
     },
     "ModelReference": {
       "$ref": "#/definitions/ModelReference",
-      "description": "接入点接入模型。",
+      "description": "Endpoint access model",
       "type": "object"
     },
     "ModelUnitId": {
-      "description": "模型单元，为空表示后付费；否则预付费。",
+      "description": "Model unit. If empty, indicates postpaid; otherwise, prepaid.",
       "type": "string"
     },
     "Moderation": {
       "$ref": "#/definitions/Moderation",
-      "description": "内容护栏方案。",
+      "description": "Content guardrail scheme",
       "type": "object"
     },
     "Name": {
-      "description": "接入点名称。",
+      "description": "Endpoint name",
       "semantic": "resourceName",
       "type": "string"
     },
     "ProjectName": {
       "default": "default",
-      "description": "资源所属的项目名称，默认值为default。",
+      "description": "Project name the resource belongs to; default value is \"default\"",
       "semantic": "projectName",
       "type": "string"
     },
     "RateLimit": {
       "$ref": "#/definitions/RateLimit",
-      "description": "接入点限流。",
+      "description": "Endpoint rate limiting",
       "type": "object"
     },
     "RollingId": {
-      "description": "接入点切换的Id。",
+      "description": "Endpoint switch ID",
       "type": "string"
     },
     "ScaleTierId": {
-      "description": "如果存在 TPM 保障包，则为 TPM 保障包 ID。",
+      "description": "If a TPM protection package exists, this is the TPM protection package ID.",
       "type": "string"
     },
     "Status": {
-      "description": "接入点状态。",
+      "description": "Endpoint status",
       "semantic": "status",
       "type": "string"
     },
     "StatusReason": {
-      "description": "状态附加说明信息。",
+      "description": "Additional status information",
       "type": "string"
     },
     "SupportRolling": {
-      "description": "是否支持接入点切换模型版本。",
+      "description": "Whether endpoint supports switching model versions",
       "type": "boolean"
     },
     "SupportScaleTier": {
-      "description": "是否支持TPM保障包。",
+      "description": "Whether TPM protection package is supported",
       "type": "boolean"
     },
     "Tags": {
-      "description": "接入点绑定的标签。",
+      "description": "Tags bound to the endpoint",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -263,7 +263,7 @@
       "uniqueItems": true
     },
     "UpdateTime": {
-      "description": "接入点更新时间，RFC3339格式。",
+      "description": "Endpoint update time, RFC3339 format",
       "semantic": "updatedTime",
       "type": "string"
     }

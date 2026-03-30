@@ -8,26 +8,26 @@
     "AssociatedInstance": {
       "properties": {
         "InstanceId": {
-          "description": "已绑定当前白名单的实例 ID。",
+          "description": "Instance ID bound to the current allowlist.",
           "type": "string"
         },
         "InstanceName": {
-          "description": "已绑定当前白名单的实例名称。",
+          "description": "Instance name bound to the current allowlist.",
           "type": "string"
         },
         "ProjectName": {
-          "description": "实例所属的项目名称。",
+          "description": "Project name of the instance.",
           "type": "string"
         },
         "VPC": {
-          "description": "实例所属的私有网络 ID。",
+          "description": "Private network ID of the instance.",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "文档数据库 MongoDB 版实例创建成功后，您可以为实例设置白名单，以允许外部设备访问该实例。本文介绍如何通过控制台设置白名单。",
+  "description": "After you create a MongoDB document database instance, you can set an allowlist for the instance to permit external devices to access it. This article describes how to set an allowlist in the console.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/AllowListCategory",
@@ -72,7 +72,7 @@
   ],
   "properties": {
     "AllowList": {
-      "description": "输入 IP 地址或 CIDR 格式的 IP 地址段。",
+      "description": "Enter an IP address or a CIDR-format IP address range.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -81,7 +81,7 @@
       "uniqueItems": true
     },
     "AllowListCategory": {
-      "description": "白名单类型。取值范围如下：Ordinary：普通白名单；Default：默认白名单。",
+      "description": "Allowlist type. Valid values: Ordinary: ordinary allowlist; Default: default allowlist.",
       "enum": [
         "Ordinary",
         "Default"
@@ -89,36 +89,36 @@
       "type": "string"
     },
     "AllowListDesc": {
-      "description": "白名单的备注信息，长度不可超过 200 个字符。",
+      "description": "Allowlist remarks. Maximum length: 200 characters.",
       "semantic": "description",
       "type": "string"
     },
     "AllowListIPNum": {
-      "description": "白名单内的 IP 地址（或地址段）总数。",
+      "description": "Total number of IP addresses (or address ranges) in the allowlist.",
       "format": "int64",
       "type": "integer"
     },
     "AllowListId": {
-      "description": "白名单 ID。",
+      "description": "Allowlist ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "AllowListName": {
-      "description": "白名单名称，名称需同时满足如下要求：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需为 1~128 个字符。",
+      "description": "Allowlist name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 1–128 characters.",
       "semantic": "resourceName",
       "type": "string"
     },
     "AllowListType": {
-      "description": "白名单内的 IP 地址类型。当前仅支持 IPv4 地址。",
+      "description": "IP address type in the allowlist. Only IPv4 addresses are currently supported.",
       "type": "string"
     },
     "AssociatedInstanceNum": {
-      "description": "已绑定当前白名单的实例总数。",
+      "description": "Total number of instances bound to the current allowlist.",
       "format": "int64",
       "type": "integer"
     },
     "AssociatedInstances": {
-      "description": "已绑定当前白名单的实例信息。",
+      "description": "Instance information bound to the current allowlist.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/AssociatedInstance"
@@ -127,7 +127,7 @@
       "uniqueItems": true
     },
     "ProjectName": {
-      "description": "当前白名单所属的项目。",
+      "description": "Project to which the current allowlist belongs.",
       "semantic": "projectName",
       "type": "string"
     }

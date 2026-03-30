@@ -4,15 +4,15 @@
     "AddressInfo": {
       "properties": {
         "Address": {
-          "description": "具体地址信息。",
+          "description": "Specific address information.",
           "type": "string"
         },
         "Description": {
-          "description": "描述信息。",
+          "description": "Description information.",
           "type": "string"
         },
         "Type": {
-          "description": "地址类型。支持的取值如下所示。ip：IPv4 地址；ipv6：IPv6 地址；domain：域名；port：端口。",
+          "description": "Address type. Supported values are as follows. ip: IPv4 address; ipv6: IPv6 address; domain: domain name; port: port number.",
           "type": "string"
         }
       },
@@ -21,7 +21,7 @@
     "SourceInfo": {
       "properties": {
         "Region": {
-          "description": "VPC地域信息。",
+          "description": "VPC region information.",
           "type": "string"
         },
         "VpcId": {
@@ -32,7 +32,7 @@
       "type": "object"
     }
   },
-  "description": "域名黑名单访问控制策略。",
+  "description": "Domain denylist access control policy.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/Description",
@@ -78,20 +78,20 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "用户的唯一标识ID。",
+      "description": "User's unique identifier.",
       "type": "string"
     },
     "Description": {
-      "description": "策略的描述信息。",
+      "description": "Policy description information.",
       "semantic": "description",
       "type": "string"
     },
     "Destination": {
-      "description": "访问目的，可以是域名或域名地址簿的唯一标识ID。当前仅支持一个地址簿。",
+      "description": "Access target, which can be the unique identifier of a domain or domain address book. Currently, only one address book is supported.",
       "type": "string"
     },
     "DestinationGroupList": {
-      "description": "域名地址簿名称列表。",
+      "description": "Domain address book name list.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -100,7 +100,7 @@
       "uniqueItems": true
     },
     "DestinationType": {
-      "description": "访问目的的类型。domain：域名；group：域名地址簿。",
+      "description": "Type of access target. domain: domain; group: domain address book.",
       "enum": [
         "domain",
         "group"
@@ -108,7 +108,7 @@
       "type": "string"
     },
     "DomainList": {
-      "description": "域名列表。",
+      "description": "Domain list.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -117,7 +117,7 @@
       "uniqueItems": true
     },
     "DomainListV1": {
-      "description": "域名地址簿的域名列表。",
+      "description": "Domain list in the domain address book.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/AddressInfo"
@@ -126,24 +126,24 @@
       "uniqueItems": true
     },
     "HitCnt": {
-      "description": "命中计数，表示该域名黑名单访问控制策略被触发的次数。",
+      "description": "Hit count, indicating the number of times the domain denylist access control policy was triggered.",
       "type": "integer"
     },
     "InternetFirewallId": {
-      "description": "互联网边界防火墙实例ID。",
+      "description": "Internet border firewall instance ID.",
       "type": "string"
     },
     "LastHitTime": {
-      "description": "最近命中时间戳，表示该域名黑名单访问控制策略最后一次被触发的时间。",
+      "description": "Latest hit timestamp, indicating the last time the domain denylist access control policy was triggered.",
       "type": "integer"
     },
     "RuleId": {
-      "description": "访问控制策略的唯一标识ID。",
+      "description": "Unique identifier of the access control policy.",
       "semantic": "resourceId",
       "type": "string"
     },
     "Sources": {
-      "description": "访问源信息，包含VPC列表。",
+      "description": "Access source information, including VPC list.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/SourceInfo"
@@ -152,12 +152,12 @@
       "uniqueItems": true
     },
     "Status": {
-      "description": "域名黑名单访问控制策略的开关状态。false：关闭；true：开启。",
+      "description": "Switch status of the domain denylist access control policy. false: Off; true: On.",
       "semantic": "status",
       "type": "boolean"
     },
     "UseCount": {
-      "description": "该域名黑名单访问控制策略占用的策略数量。",
+      "description": "Number of policies occupied by this domain denylist access control policy.",
       "type": "integer"
     }
   },

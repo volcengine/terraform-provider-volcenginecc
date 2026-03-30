@@ -30,11 +30,11 @@ func clusterUserGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群ID。",
+		//	  "description": "Cluster ID.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群ID。",
+			Description: "Cluster ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -44,11 +44,11 @@ func clusterUserGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组描述。",
+		//	  "description": "User group description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组描述。",
+			Description: "User group description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -59,7 +59,7 @@ func clusterUserGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组成员。不支持操作特殊用户，如admin等。",
+		//	  "description": "Operations on special users, such as admin, are not supported.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -69,7 +69,7 @@ func clusterUserGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"members": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "用户组成员。不支持操作特殊用户，如admin等。",
+			Description: "Operations on special users, such as admin, are not supported.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -80,11 +80,11 @@ func clusterUserGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组名称。",
+		//	  "description": "User group name.",
 		//	  "type": "string"
 		//	}
 		"user_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组名称。",
+			Description: "User group name.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -102,7 +102,7 @@ func clusterUserGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: " E-MapReduce（EMR）集群中支持对用户进行组管理，允许您创建、编辑和删除用户组。",
+		Description: "User group management is supported in E-MapReduce (EMR) clusters, allowing you to create, edit, and delete user groups.",
 		Version:     1,
 		Attributes:  attributes,
 	}

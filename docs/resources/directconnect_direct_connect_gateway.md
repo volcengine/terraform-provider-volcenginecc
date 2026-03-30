@@ -2,12 +2,12 @@
 page_title: "volcenginecc_directconnect_direct_connect_gateway Resource - terraform-provider-volcenginecc"
 subcategory: "DirectConnect"
 description: |-
-  专线网关是本地数据中心访问云上的入口，用于连接私有网络（VPC）与物理专线，实现云下数据中心（IDC）和云上私有网络（VPC）互访。
+  The Direct Connect Gateway is the entry point for local data centers to access the cloud. It connects private networks (VPC) and physical dedicated connections, enabling mutual access between on-premises data centers (IDC) and cloud private networks (VPC).
 ---
 
 # volcenginecc_directconnect_direct_connect_gateway (Resource)
 
-专线网关是本地数据中心访问云上的入口，用于连接私有网络（VPC）与物理专线，实现云下数据中心（IDC）和云上私有网络（VPC）互访。
+The Direct Connect Gateway is the entry point for local data centers to access the cloud. It connects private networks (VPC) and physical dedicated connections, enabling mutual access between on-premises data centers (IDC) and cloud private networks (VPC).
 
 ## Example Usage
 
@@ -30,37 +30,37 @@ resource "volcenginecc_directconnect_direct_connect_gateway" "DirectConnectDirec
 
 ### Optional
 
-- `bgp_asn` (Number) 专线网关的ASN（Autonomous System Number）。专线网关ASN有效范围为：137718、64512 ～ 65534 、4200000000 ～ 4294967294，其中137718为火山引擎的ASN。如果专线网关仅在普通场景下使用（如本地IDC通过专线连接访问单个云上VPC资源），请使用火山引擎ASN（137718）。如果专线网关在特殊场景下使用（如单个IDC通过专线连接访问多个云企业网），每个专线网关均要自定义ASN且避免使用火山引擎ASN（137718），确保不同专线网关的ASN不重复。
-- `description` (String) 专线网关的描述信息。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、空格（ ）、下划线（_）、中划线（-）、等号（=）、英文逗号（,）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
-- `direct_connect_gateway_name` (String) 专线网关的名称。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为专线网关的ID。
-- `enable_ipv_6` (Boolean) 是否支持IPv6。true：支持。false：不支持。
-- `project_name` (String) 专线网关所属的项目。
-- `tags` (Attributes Set) 专线网关已添加的全部标签信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `bgp_asn` (Number) ASN (Autonomous System Number) of the Direct Connect Gateway. Valid ASN range: 137718, 64512–65534, 4200000000–4294967294, where 137718 is the ASN for Volcengine. If the Direct Connect Gateway is used in standard scenarios (such as a local IDC connecting to a single cloud VPC resource via dedicated connection), use the Volcengine ASN (137718). If used in special scenarios (such as a single IDC connecting to multiple Cloud Enterprise Networks via dedicated connection), each Direct Connect Gateway must use a custom ASN and avoid using the Volcengine ASN (137718), ensuring that ASNs are not duplicated across Direct Connect Gateways.
+- `description` (String) Description for the dedicated gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space ( ), underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), and Chinese period (。). Length is limited to 0 to 255 characters. If this parameter is not provided or no value is entered, the default is an empty string.
+- `direct_connect_gateway_name` (String) Name of the Direct Connect Gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, the default is the Direct Connect Gateway ID.
+- `enable_ipv_6` (Boolean) Whether IPv6 is supported. true: supported. false: not supported.
+- `project_name` (String) Project to which the Direct Connect Gateway belongs.
+- `tags` (Attributes Set) All tag information added to the Direct Connect Gateway.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `account_id` (String) 专线网关所属账号的ID。
-- `associate_cens` (Attributes Set) 关联的CEN信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
-- `associate_eic` (Attributes) 关联的EIC信息。 (see [below for nested schema](#nestedatt--associate_eic))
-- `business_status` (String) 专线网关是否被锁定。Normal：正常。FinancialLocked：被锁定。
-- `created_time` (String) 创建专线网关的时间。
-- `deleted_time` (String) 预期资源强制回收时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。
-- `direct_connect_gateway_id` (String) 专线网关的ID。
+- `account_id` (String) ID of the account to which the Direct Connect Gateway belongs.
+- `associate_cens` (Attributes Set) Associated CEN information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associate_cens))
+- `associate_eic` (Attributes) Associated EIC information. (see [below for nested schema](#nestedatt--associate_eic))
+- `business_status` (String) Indicates whether the dedicated gateway is locked. Normal: normal. FinancialLocked: locked.
+- `created_time` (String) Time when the Direct Connect Gateway was created.
+- `deleted_time` (String) Expected forced resource reclamation time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns null.
+- `direct_connect_gateway_id` (String) ID of the Direct Connect Gateway.
 - `id` (String) Uniquely identifies the resource.
-- `lock_reason` (String) 专线网关被锁定的原因。unlock：解锁。financial：因欠费被锁定。security：因安全被锁定。
-- `overdue_time` (String) 资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。
-- `status` (String) 专线网关的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。
-- `updated_time` (String) 更新专线网关的时间。
+- `lock_reason` (String) Reason for Direct Connect Gateway lock. unlock: not locked; financial: locked due to overdue payment; security: locked due to security reasons.
+- `overdue_time` (String) Resource freeze time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns null.
+- `status` (String) Status of the Direct Connect Gateway. Creating: creating. Deleting: deleting. Pending: configuring. Available: available.
+- `updated_time` (String) Time when the Direct Connect Gateway was updated.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。长度取值范围为1~128字符。
-- `value` (String) 用户标签的标签值。长度取值范围为0~256字符。
+- `key` (String) User label tag key. Length must be between 1 and 128 characters.
+- `value` (String) User label tag value. Length must be between 0 and 256 characters.
 
 
 <a id="nestedatt--associate_cens"></a>
@@ -68,9 +68,9 @@ Optional:
 
 Read-Only:
 
-- `cen_id` (String) CEN的ID。
-- `cen_owner_id` (String) CEN的用户ID。
-- `cen_status` (String) 实例在CEN中的状态。Attaching：加载中。Attached：已加载。
+- `cen_id` (String) ID of CEN.
+- `cen_owner_id` (String) User ID of CEN.
+- `cen_status` (String) Status of the instance in CEN. Attaching: attaching. Attached: attached.
 
 
 <a id="nestedatt--associate_eic"></a>
@@ -78,9 +78,9 @@ Read-Only:
 
 Read-Only:
 
-- `eic_id` (String) EIC的ID。
-- `eic_owner_id` (String) EIC的用户ID。
-- `eic_status` (String) 实例在EIC中的状态。
+- `eic_id` (String) ID of EIC.
+- `eic_owner_id` (String) User ID of EIC.
+- `eic_status` (String) Status of the instance in EIC.
 
 ## Import
 

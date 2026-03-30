@@ -21,52 +21,52 @@ Data Source schema for Volcengine::CloudMonitor::Rule
 
 ### Read-Only
 
-- `alert_methods` (Set of String) 告警通知的方式。Email：邮件 Phone：电话 SMS：短信 Webhook：告警回调。
-- `alert_state` (String) 告警状态。 alerting：告警中 normal：正常。
-- `condition_operator` (String) 多指标判定条件。&&：多个指标同时成立才判定为触发告警,||：任意指标满足条件触发判定为告警。
-- `conditions` (Attributes Set) 告警条件。数组形式，支持填写多个指标判断语句，最多 10 个。 (see [below for nested schema](#nestedatt--conditions))
-- `contact_group_ids` (Set of String) 告警策略绑定的告警通知组 ID。
-- `created_at` (String) 告警策略创建时间，时间戳格式。
-- `description` (String) 告警策略描述信息。
-- `dimension_conditions` (Attributes) Dimension 配置。 (see [below for nested schema](#nestedatt--dimension_conditions))
-- `effect_end_at` (String) 策略生效的截止时间，格式为HH:MM。
-- `effect_start_at` (String) 告警策略生效的开始时间，格式为HH:MM。
-- `enable_state` (String) 告警策略的开启状态。,enable：开启,disable：禁用
-- `evaluation_count` (Number) 触发告警需要持续的周期。单位为分钟。
-- `level` (String) 告警级别。critical：严重,warning：警告,notice：通知
-- `level_conditions` (Attributes Set) 告警分级配置。 (see [below for nested schema](#nestedatt--level_conditions))
-- `multiple_conditions` (Boolean) 告警策略是否用多指标。true：多指标,false：单指标（默认）。
-- `namespace` (String) 监控指标所属的云产品。详情请参见 云产品监控指标 下各产品的 Namespace。
-- `no_data` (Attributes) 无数据告警。 (see [below for nested schema](#nestedatt--no_data))
-- `notification_id` (String) 通知策略 ID。
-- `notify_templates` (Attributes Set) 通知模版配置。 (see [below for nested schema](#nestedatt--notify_templates))
-- `original_dimensions` (Attributes) 告警策略检测的资源 ID。 (see [below for nested schema](#nestedatt--original_dimensions))
-- `project_name` (String) 告警策略所属项目。
-- `recovery_notify` (Attributes) 告警恢复通知。 (see [below for nested schema](#nestedatt--recovery_notify))
-- `regions` (Set of String) 云产品所属可用区 ID。
-- `resource_type` (String) 告警策略检测的资源类型。
-- `rule_id` (String) 告警策略 ID。
-- `rule_name` (String) 告警策略名称。
-- `rule_type` (String) 告警策略的类型。static：手动选择。dynamic：通过资源名称、项目和标签选择。
-- `silence_time` (Number) 告警发送周期。单位为分钟。支持配置为 5、10、15、30、60、180、360、720、1440。
-- `sub_namespace` (String) 此策略引用的指标所属的维度。详情请参见 云产品监控指标 下各产品的 SubNamespace。
-- `tags` (Attributes Set) 告警策略绑定 Tag。 (see [below for nested schema](#nestedatt--tags))
-- `updated_at` (String) 告警策略更新时间，时间戳格式。
-- `webhook` (String) 告警策略绑定的告警回调 URL 地址。
-- `webhook_ids` (Set of String) 告警发生时告警回调 ID 列表。
+- `alert_methods` (Set of String) Alert notification method. Email: email, Phone: phone, SMS: SMS, Webhook: webhook callback.
+- `alert_state` (String) Alert status. alerting: In alert; normal: Normal.
+- `condition_operator` (String) Multi-metric determination condition. &&: Alert is triggered only if all metrics meet the condition; ||: Alert is triggered if any metric meets the condition.
+- `conditions` (Attributes Set) Alert conditions. Array format; supports multiple metric evaluation statements, up to 10. (see [below for nested schema](#nestedatt--conditions))
+- `contact_group_ids` (Set of String) Alert notification group ID bound to the alert policy.
+- `created_at` (String) Alert policy creation time, in timestamp format.
+- `description` (String) Alert policy description.
+- `dimension_conditions` (Attributes) Dimension configuration. (see [below for nested schema](#nestedatt--dimension_conditions))
+- `effect_end_at` (String) Policy expiration time, in HH:MM format.
+- `effect_start_at` (String) Policy start time, in HH:MM format.
+- `enable_state` (String) Alert policy status. enable: enabled, disable: disabled
+- `evaluation_count` (Number) Duration required to trigger an alert, in minutes.
+- `level` (String) Alert level. critical: critical, warning: warning, notice: notification
+- `level_conditions` (Attributes Set) Alert severity configuration. (see [below for nested schema](#nestedatt--level_conditions))
+- `multiple_conditions` (Boolean) Does the alert policy use multiple metrics? true: multiple metrics, false: single metric (default).
+- `namespace` (String) Cloud product associated with the monitoring metric. For details, see Namespace for each product in Cloud Product Monitoring Metrics.
+- `no_data` (Attributes) No data alert. (see [below for nested schema](#nestedatt--no_data))
+- `notification_id` (String) Notification policy ID.
+- `notify_templates` (Attributes Set) Notification template configuration. (see [below for nested schema](#nestedatt--notify_templates))
+- `original_dimensions` (Attributes) Resource ID detected by the alert policy. (see [below for nested schema](#nestedatt--original_dimensions))
+- `project_name` (String) Project to which the alert policy belongs.
+- `recovery_notify` (Attributes) Alert recovery notification. (see [below for nested schema](#nestedatt--recovery_notify))
+- `regions` (Set of String) Availability zone ID of the cloud product.
+- `resource_type` (String) Resource type detected by the alert policy.
+- `rule_id` (String) Alarm policy ID.
+- `rule_name` (String) Alert policy name.
+- `rule_type` (String) Alert policy type. static: manual selection, dynamic: select by resource name, project, and tag.
+- `silence_time` (Number) Alert sending interval, in minutes. Supported values: 5, 10, 15, 30, 60, 180, 360, 720, 1440.
+- `sub_namespace` (String) Dimension of the metric referenced by this policy. For details, see SubNamespace for each product in Cloud Product Monitoring Metrics.
+- `tags` (Attributes Set) Bind alert policy to Tag. (see [below for nested schema](#nestedatt--tags))
+- `updated_at` (String) Alarm policy update time, in timestamp format.
+- `webhook` (String) Alarm callback URL bound to the alarm policy.
+- `webhook_ids` (Set of String) Alarm callback ID list when an alarm occurs.
 
 <a id="nestedatt--conditions"></a>
 ### Nested Schema for `conditions`
 
 Read-Only:
 
-- `comparison_operator` (String) 比较符号。支持普通阈值告警： >、>=、<、<=、!=、= ，以及以下同环比告警：last_period_increase_pct：环比上周期上涨。last_period_decrease_pct：环比上周起下降。last_period_abs_pct：环比上周期上涨或下降。last_day_increase_pct：同比昨天同一时段上涨。last_day_decrease_pct：同比昨天同一时段下降。last_day_abs_pct：同比昨天同一时段上涨或下降。last_week_increase_pct：同比上周同一时段上涨。last_week_decrease_pct：同比上周同一时段下降。last_week_abs_pct：同比上周同一时段上涨或下降。
-- `display_name` (String) 指标显示名称。
-- `metric_name` (String) 监控指标的名称。详情请参见 云监控指标查询 下各产品的 MetricName。
-- `metric_unit` (String) 监控指标的单位。详情请参见 云监控指标查询 下各产品的 MetricUnit。说明同环比告警，MetricUnit 需要填写为 "Percent"。MetricUnit 中是否带有 IEC 表示不同的进位：带有 IEC：进位是 1024不带 IEC：进位是 1000。
-- `period` (String) 监控指标的统计周期。详情请参见 云监控指标查询 下各产品的 Period。
-- `statistics` (String) 统计方法，取值：avg：平均值。max：最大值。min：最小值。说明统计方法会应用到检测时间段内的数据上。例如，默认每次检测数据的时间跨度是 1 分钟，如果统计方法为 avg，那就是对 1 分钟内的数据取平均值。
-- `threshold` (String) 指标阈值。支持输入正数或 0。最多支持三位小数。
+- `comparison_operator` (String) Comparison operators. Supports standard threshold alerting: >, >=, <, <=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.
+- `display_name` (String) Metric display name.
+- `metric_name` (String) Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.
+- `metric_unit` (String) Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to "Percent." Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.
+- `period` (String) Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.
+- `statistics` (String) Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.
+- `threshold` (String) Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.
 
 
 <a id="nestedatt--dimension_conditions"></a>
@@ -74,28 +74,28 @@ Read-Only:
 
 Read-Only:
 
-- `meta_condition` (Attributes) 根据资源名称选择告警对象的条件。当Type为meta时必填。 (see [below for nested schema](#nestedatt--dimension_conditions--meta_condition))
-- `project_condition` (Attributes) 根据项目选择告警对象的条件。当Type为project时必填。 (see [below for nested schema](#nestedatt--dimension_conditions--project_condition))
-- `tag_condition` (Attributes) 根据标签选择告警对象的条件。当Type为tag时必填。 (see [below for nested schema](#nestedatt--dimension_conditions--tag_condition))
-- `type` (String) Dimensions 类型。取值：project：根据项目选择告警对象。tag：根据标签选择告警对象。meta：根据资源名称选择告警对象。
+- `meta_condition` (Attributes) Condition for selecting alert objects based on resource name. Required when Type is meta. (see [below for nested schema](#nestedatt--dimension_conditions--meta_condition))
+- `project_condition` (Attributes) Condition for selecting alert targets by project. Required when Type is project. (see [below for nested schema](#nestedatt--dimension_conditions--project_condition))
+- `tag_condition` (Attributes) Condition for selecting alert objects by tag. Required when Type is tag. (see [below for nested schema](#nestedatt--dimension_conditions--tag_condition))
+- `type` (String) Dimensions type. Values: project: Select alert targets by project. tag: Select alert targets by tag. meta: Select alert targets by resource name.
 
 <a id="nestedatt--dimension_conditions--meta_condition"></a>
 ### Nested Schema for `dimension_conditions.meta_condition`
 
 Read-Only:
 
-- `all_dimensions` (Boolean) 是否为全量资源。true：全部资源。false：部分资源。
-- `condition` (String) 判断条件。and：全部满足。or：任意满足。
-- `metas` (Attributes List) 判断条件。and：全部满足。or：任意满足。 (see [below for nested schema](#nestedatt--dimension_conditions--meta_condition--metas))
+- `all_dimensions` (Boolean) Whether all resources are included. true: All resources. false: Partial resources.
+- `condition` (String) Condition. and: All conditions met. or: Any condition met.
+- `metas` (Attributes List) Condition. and: All conditions met. or: Any condition met. (see [below for nested schema](#nestedatt--dimension_conditions--meta_condition--metas))
 
 <a id="nestedatt--dimension_conditions--meta_condition--metas"></a>
 ### Nested Schema for `dimension_conditions.meta_condition.metas`
 
 Read-Only:
 
-- `comparator` (String) 标签匹配时的比较符。contain：包含not_contain：不包含prefix_match：前缀匹配suffix_match：后缀匹配equal：等于not_equal：不等于exist：存在。
-- `key` (String) 标签键。
-- `values` (Set of String) 标签的值（Value）。当Comparator为exist时，包含 Key 对应的所有 Value，不支持输入。当Comparator为equal或not_equal时，支持输入多个 Value。当Comparator为contain、not_contain、prefix_match或suffix_match时，仅支持输入 1 个 Value。
+- `comparator` (String) Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.
+- `key` (String) Tag key.
+- `values` (Set of String) Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.
 
 
 
@@ -104,7 +104,7 @@ Read-Only:
 
 Read-Only:
 
-- `projects` (Set of String) 项目名称列表。数组形式。多个值之间使用英文半角逗号,分割。
+- `projects` (Set of String) Project name list, in array format. Separate multiple values with commas.
 
 
 <a id="nestedatt--dimension_conditions--tag_condition"></a>
@@ -112,17 +112,17 @@ Read-Only:
 
 Read-Only:
 
-- `condition` (String) 判断条件。and：全部满足。or：任意满足。
-- `tags` (Attributes Set) 标签列表。最多支持配置 10 个标签列表。标签值不能超过 50 个字符。 (see [below for nested schema](#nestedatt--dimension_conditions--tag_condition--tags))
+- `condition` (String) Condition. and: All conditions met. or: Any condition met.
+- `tags` (Attributes Set) Tag list. Supports up to 10 tag lists. Tag value cannot exceed 50 characters. (see [below for nested schema](#nestedatt--dimension_conditions--tag_condition--tags))
 
 <a id="nestedatt--dimension_conditions--tag_condition--tags"></a>
 ### Nested Schema for `dimension_conditions.tag_condition.tags`
 
 Read-Only:
 
-- `comparator` (String) 标签匹配时的比较符。contain：包含not_contain：不包含prefix_match：前缀匹配suffix_match：后缀匹配equal：等于not_equal：不等于exist：存在。
-- `key` (String) 标签键。
-- `values` (Set of String) 标签的值（Value）。当Comparator为exist时，包含 Key 对应的所有 Value，不支持输入。当Comparator为equal或not_equal时，支持输入多个 Value。当Comparator为contain、not_contain、prefix_match或suffix_match时，仅支持输入 1 个 Value。
+- `comparator` (String) Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.
+- `key` (String) Tag key.
+- `values` (Set of String) Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.
 
 
 
@@ -132,21 +132,21 @@ Read-Only:
 
 Read-Only:
 
-- `conditions` (Attributes List) 告警分级配置。 (see [below for nested schema](#nestedatt--level_conditions--conditions))
-- `level` (String) 告警通知等级，取值：notice：通知warning：警告critical：严重recovery：恢复。
+- `conditions` (Attributes List) Alert severity configuration. (see [below for nested schema](#nestedatt--level_conditions--conditions))
+- `level` (String) Alert notification level. Options: notice: notification, warning: warning, critical: critical, recovery: recovery.
 
 <a id="nestedatt--level_conditions--conditions"></a>
 ### Nested Schema for `level_conditions.conditions`
 
 Read-Only:
 
-- `comparison_operator` (String) 比较符号。支持普通阈值告警： >、>=、<、<=、!=、= ，以及以下同环比告警：last_period_increase_pct：环比上周期上涨。last_period_decrease_pct：环比上周起下降。last_period_abs_pct：环比上周期上涨或下降。last_day_increase_pct：同比昨天同一时段上涨。last_day_decrease_pct：同比昨天同一时段下降。last_day_abs_pct：同比昨天同一时段上涨或下降。last_week_increase_pct：同比上周同一时段上涨。last_week_decrease_pct：同比上周同一时段下降。last_week_abs_pct：同比上周同一时段上涨或下降。
-- `display_name` (String) 指标显示名称。
-- `metric_name` (String) 监控指标的名称。详情请参见 云监控指标查询 下各产品的 MetricName。
-- `metric_unit` (String) 监控指标的单位。详情请参见 云监控指标查询 下各产品的 MetricUnit。说明同环比告警，MetricUnit 需要填写为 "Percent"。MetricUnit 中是否带有 IEC 表示不同的进位：带有 IEC：进位是 1024不带 IEC：进位是 1000。
-- `period` (String) 监控指标的统计周期。详情请参见 云监控指标查询 下各产品的 Period。
-- `statistics` (String) 统计方法，取值：avg：平均值。max：最大值。min：最小值。说明统计方法会应用到检测时间段内的数据上。例如，默认每次检测数据的时间跨度是 1 分钟，如果统计方法为 avg，那就是对 1 分钟内的数据取平均值。
-- `threshold` (String) 指标阈值。支持输入正数或 0。最多支持三位小数。
+- `comparison_operator` (String) Comparison operators. Supports standard threshold alerting: >, >=, <, <=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.
+- `display_name` (String) Metric display name.
+- `metric_name` (String) Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.
+- `metric_unit` (String) Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to "Percent." Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.
+- `period` (String) Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.
+- `statistics` (String) Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.
+- `threshold` (String) Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.
 
 
 
@@ -155,8 +155,8 @@ Read-Only:
 
 Read-Only:
 
-- `enable` (Boolean) 是否开启无数据告警。取值：true：开启无数据告警。false：（默认）关闭无数据告警。
-- `evaluation_count` (Number) 无数据告警触发阈值，如果在配置的阈值周期内检测无数据上报，则会触发无数据告警。当Enable配置为true时，该字段为必填。整数形式，取值范围为 3～20。
+- `enable` (Boolean) Enable no data alert. Values: true: enable no data alert. false (default): disable no data alert.
+- `evaluation_count` (Number) No data alert trigger threshold. If no data is reported within the configured threshold period, a no data alert will be triggered. When Enable is set to true, this field is required. Integer format; value range is 3–20.
 
 
 <a id="nestedatt--notify_templates"></a>
@@ -164,8 +164,8 @@ Read-Only:
 
 Read-Only:
 
-- `channel` (String) 通知渠道，取值：email：邮箱sms：短信phone：电话lark：飞书dingtalk：钉钉wecom：企业微信slack：Slackapi：回调地址。
-- `notify_template_id` (String) 通知模版 ID。注意每种通知渠道仅支持配置 1 个通知模版 ID。
+- `channel` (String) Notification channel. Options: email: Email sms: SMS phone: Phone feishu: Feishu dingtalk: DingTalk wecom: WeCom slack: Slack api: Callback URL.
+- `notify_template_id` (String) Notification template ID. Note: Each notification channel supports only one notification template ID.
 
 
 <a id="nestedatt--original_dimensions"></a>
@@ -173,8 +173,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 指标 Dimension 名称，例如ResourceID、NodeName等。不同云产品的 Dimensions 名称不同，详情请参见 云监控指标查询。ResourceID为必填项，且大小写必须与 云监控指标查询 中的一致。支持同时填写多个 Dimension 名称，并基于多个 Dimension 名称进行分组。举例如下：当您仅填写ResourceID时，系统会按照ResourceID进行告警分组。当您同时填写ResourceID和NodeName时，系统会首先按照ResourceID进行告警分组。然后在每个分组内，再按照NodeName进行分组。
-- `values` (Set of String) 指标 Dimension 值，数组形式。多个值之间使用英文半角逗号,分割。允许使用通配符*选择全部实例的值。例如：["*"] 。
+- `key` (String) Metric Dimension name, such as ResourceID, NodeName, etc. Dimension names vary by cloud product. For details, see Cloud Monitoring Metric Query. ResourceID is required, and its capitalization must match Cloud Monitoring Metric Query. Supports multiple Dimension names and grouping by multiple Dimension names. For example: If you only enter ResourceID, the system groups alerts by ResourceID. If you enter both ResourceID and NodeName, the system first groups alerts by ResourceID, then groups within each ResourceID group by NodeName.
+- `values` (Set of String) Metric Dimension values, in array format. Separate multiple values with commas. Wildcard * can be used to select all instance values. For example: ["*"] .
 
 
 <a id="nestedatt--recovery_notify"></a>
@@ -182,7 +182,7 @@ Read-Only:
 
 Read-Only:
 
-- `enable` (Boolean) 是否开启告警恢复通知。取值：true：（默认）开启告警恢复通知。false：关闭告警恢复通知。
+- `enable` (Boolean) Enable alert recovery notification. Options: true: (default) enable alert recovery notification, false: disable alert recovery notification.
 
 
 <a id="nestedatt--tags"></a>
@@ -190,5 +190,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。支持中文、英文大写字母、英文小写字母、数字和空格。支持以下特殊字符_.:/=+-@。不能以空格为开头或结尾。volc:和/sys:为系统预留的标签键，添加标签时，标签键的开头不能设置为任何大小写形式的volc:和/sys:。标签键的长度需为 1～128 个字符。
-- `value` (String) 标签值。支持中文、英文大写字母、英文小写字母、数字和空格。支持以下特殊字符_.:/=+-@。不能以空格为开头或结尾。标签键的长度需为 0～255 个字符。
+- `key` (String) Tag key. Supports Chinese, uppercase and lowercase English letters, numbers, and spaces. The following special characters are supported: _ . : / = +   - @. Cannot start or end with a space. volc: and /sys: are system-reserved tag keys. When adding a tag, the tag key cannot start with any case form of volc: or /sys:. Tag key length must be 1–128 characters.
+- `value` (String) Tag value. Supports Chinese, uppercase and lowercase English letters, numbers, and spaces. The following special characters are supported: _ . : / = +   - @. Cannot start or end with a space. Tag key length must be 0–255 characters.

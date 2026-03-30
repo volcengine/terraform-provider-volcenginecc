@@ -27,7 +27,7 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "utf8mb4",
-		//	  "description": "数据库字符集。目前支持的字符集包含：utf8、utf8mb4（默认）、latin1、ascii。",
+		//	  "description": "Database character set. Supported character sets: utf8, utf8mb4 (default), latin1, ascii.",
 		//	  "enum": [
 		//	    "utf8",
 		//	    "utf8mb4",
@@ -37,23 +37,23 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"character_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库字符集。目前支持的字符集包含：utf8、utf8mb4（默认）、latin1、ascii。",
+			Description: "Database character set. Supported character sets: utf8, utf8mb4 (default), latin1, ascii.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DatabasePrivileges
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权数据库权限信息。",
+		//	  "description": "Database privilege authorization information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccountName": {
-		//	        "description": "数据库账号名称。",
+		//	        "description": "Database account name.",
 		//	        "type": "string"
 		//	      },
 		//	      "AccountPrivilege": {
-		//	        "description": "授予的账号权限类型，取值：ReadWrite：读写权限。ReadOnly：只读权限。DDLOnly：仅 DDL 权限。DMLOnly：仅 DML 权限。Custom：自定义权限。",
+		//	        "description": "Granted account privilege type. Values: ReadWrite (read and write privileges), ReadOnly (read-only privileges), DDLOnly (DDL privileges only), DMLOnly (DML privileges only), Custom (custom privileges).",
 		//	        "enum": [
 		//	          "ReadWrite",
 		//	          "ReadOnly",
@@ -64,11 +64,11 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "AccountPrivilegeDetail": {
-		//	        "description": "数据库权限字符串。作为请求参数时，当 AccountPrivilege 取值为 Custom 时必填，取值：SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER,作为返回结果时，不管 AccountPrivilege 的值是否为 Custom，都会展示 AccountPrivilege 的详细权限。",
+		//	        "description": "Database privilege string. When used as a request parameter, this field is required if AccountPrivilege is set to Custom. Values: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER. When returned, the detailed privileges for AccountPrivilege are displayed regardless of whether AccountPrivilege is set to Custom.",
 		//	        "type": "string"
 		//	      },
 		//	      "Host": {
-		//	        "description": "指定的数据库账号可以访问数据库的 IP 地址。默认值为 %。若指定 Host 为 %，允许该账号从任意 IP 地址访问数据库。若指定 Host 为 192.10.10.%，则表示该账号可从 192.10.10.0~192.10.10.255 之间的 IP 地址访问数据库。指定的 Host 需要添加在实例所绑定的白名单中，",
+		//	        "description": "The specified database account can access the database from the IP address. Default value: %. If Host is set to %, the account can access the database from any IP address. If Host is set to 192.10.10.%, the account can access the database from IP addresses between 192.10.10.0 and 192.10.10.255. The specified Host must be added to the instance's allowlist.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -82,74 +82,74 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccountName
 					"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "数据库账号名称。",
+						Description: "Database account name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: AccountPrivilege
 					"account_privilege": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "授予的账号权限类型，取值：ReadWrite：读写权限。ReadOnly：只读权限。DDLOnly：仅 DDL 权限。DMLOnly：仅 DML 权限。Custom：自定义权限。",
+						Description: "Granted account privilege type. Values: ReadWrite (read and write privileges), ReadOnly (read-only privileges), DDLOnly (DDL privileges only), DMLOnly (DML privileges only), Custom (custom privileges).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: AccountPrivilegeDetail
 					"account_privilege_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "数据库权限字符串。作为请求参数时，当 AccountPrivilege 取值为 Custom 时必填，取值：SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,EVENT,TRIGGER,作为返回结果时，不管 AccountPrivilege 的值是否为 Custom，都会展示 AccountPrivilege 的详细权限。",
+						Description: "Database privilege string. When used as a request parameter, this field is required if AccountPrivilege is set to Custom. Values: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER. When returned, the detailed privileges for AccountPrivilege are displayed regardless of whether AccountPrivilege is set to Custom.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Host
 					"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "指定的数据库账号可以访问数据库的 IP 地址。默认值为 %。若指定 Host 为 %，允许该账号从任意 IP 地址访问数据库。若指定 Host 为 192.10.10.%，则表示该账号可从 192.10.10.0~192.10.10.255 之间的 IP 地址访问数据库。指定的 Host 需要添加在实例所绑定的白名单中，",
+						Description: "The specified database account can access the database from the IP address. Default value: %. If Host is set to %, the account can access the database from any IP address. If Host is set to 192.10.10.%, the account can access the database from IP addresses between 192.10.10.0 and 192.10.10.255. The specified Host must be added to the instance's allowlist.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "授权数据库权限信息。",
+			Description: "Database privilege authorization information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库的描述信息，长度不超过 256 个字符。该字段可选，若不设置该字段，或设置了该字段但描述信息长度为 0 ，则描述信息为空。",
+		//	  "description": "Database description, up to 256 characters. This field is optional. If not set, or if set with a description length of 0, the description will be empty.",
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库的描述信息，长度不超过 256 个字符。该字段可选，若不设置该字段，或设置了该字段但描述信息长度为 0 ，则描述信息为空。",
+			Description: "Database description, up to 256 characters. This field is optional. If not set, or if set with a description length of 0, the description will be empty.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库实例 ID。",
+		//	  "description": "Database instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库实例 ID。",
+			Description: "Database instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库名称。命名规则如下：名称唯一。长度为 2~64 个字符。以字母开头，以字母或数字结尾。由字母、数字、下划线（_）或中划线（-）组成。不能使用某些预留字，包括 root、admin 等。",
+		//	  "description": "Database name. Naming rules: must be unique; length must be 2–64 characters; must start with a letter and end with a letter or number; can contain letters, numbers, underscores (_), or hyphens (-); certain reserved words, such as root and admin, cannot be used.",
 		//	  "maxLength": 64,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库名称。命名规则如下：名称唯一。长度为 2~64 个字符。以字母开头，以字母或数字结尾。由字母、数字、下划线（_）或中划线（-）组成。不能使用某些预留字，包括 root、admin 等。",
+			Description: "Database name. Naming rules: must be unique; length must be 2–64 characters; must start with a letter and end with a letter or number; can contain letters, numbers, underscores (_), or hyphens (-); certain reserved words, such as root and admin, cannot be used.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库状态。取值为：Unavailable：不可用。Available：可用。",
+		//	  "description": "Database status. Values: Unavailable (not available), Available (available).",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库状态。取值为：Unavailable：不可用。Available：可用。",
+			Description: "Database status. Values: Unavailable (not available), Available (available).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

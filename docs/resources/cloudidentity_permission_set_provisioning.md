@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cloudidentity_permission_set_provisioning Resource - terraform-provider-volcenginecc"
 subcategory: "CloudIdentity"
 description: |-
-  给指定的账号部署权限集。
+  Deploy permission set to the specified account
 ---
 
 # volcenginecc_cloudidentity_permission_set_provisioning (Resource)
 
-给指定的账号部署权限集。
+Deploy permission set to the specified account
 
 ## Example Usage
 
@@ -23,17 +23,17 @@ resource "volcenginecc_cloudidentity_permission_set_provisioning" "CloudIdentity
 
 ### Required
 
-- `permission_set_id` (String) 权限集 ID。
-- `target_id` (String) 授权的账号 ID。
+- `permission_set_id` (String) Permission set ID
+- `target_id` (String) Authorized account ID
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
+- `created_time` (String) Creation time
 - `id` (String) Uniquely identifies the resource.
-- `permission_set_name` (String) 权限集名。
-- `provisioning_status` (String) 权限集状态 Running：运行中,Reprovision Required：需要重新部署,Provision Failed：部署失败,Provisioned：已部署
-- `target_name` (String) 账号名。
-- `updated_time` (String) 更新时间。
+- `permission_set_name` (String) Permission set name
+- `provisioning_status` (String) Permission set status Running: In progress, Reprovision Required: Redeployment required, Provision Failed: Deployment failed, Provisioned: Deployed
+- `target_name` (String) Account name
+- `updated_time` (String) Update time
 
 ## Import
 

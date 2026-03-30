@@ -2,12 +2,12 @@
 page_title: "volcenginecc_apig_upstream_source Resource - terraform-provider-volcenginecc"
 subcategory: "APIG"
 description: |-
-  API 网关支持基于容器服务（VKE）集和容器服务的注册集群功能，将集群导入到 API 网关实例，将其作为网关的 Upstream 来源，以便网关获取集群中的 Service 列表。
+  The API Gateway supports cluster registration based on container services (VKE) and container service clusters. Import clusters into the API Gateway instance to use them as Upstream sources, allowing the gateway to retrieve the Service list from the cluster
 ---
 
 # volcenginecc_apig_upstream_source (Resource)
 
-API 网关支持基于容器服务（VKE）集和容器服务的注册集群功能，将集群导入到 API 网关实例，将其作为网关的 Upstream 来源，以便网关获取集群中的 Service 列表。
+The API Gateway supports cluster registration based on container services (VKE) and container service clusters. Import clusters into the API Gateway instance to use them as Upstream sources, allowing the gateway to retrieve the Service list from the cluster
 
 ## Example Usage
 
@@ -35,40 +35,40 @@ resource "volcenginecc_apig_upstream_source" "UpstreamSourceNacosDemo" {
 
 ### Required
 
-- `gateway_id` (String) 网关实例ID。
-- `source_spec` (Attributes) Upstream来源配置。 (see [below for nested schema](#nestedatt--source_spec))
-- `source_type` (String) Upstream来源类型，取值：K8S：容器集群。Nacos：注册中心。
+- `gateway_id` (String) Gateway instance ID
+- `source_spec` (Attributes) Upstream source configuration (see [below for nested schema](#nestedatt--source_spec))
+- `source_type` (String) Upstream source type. Options: K8S: Container cluster. Nacos: Registry
 
 ### Optional
 
-- `comments` (String) 备注，长度限制为0~253个字符。
-- `ingress_settings` (Attributes) 路由同步。开启后，API网关会自动监听Ingress资源的变化，并将Ingress资源转义为服务，域名，Upstream等资源合并至当前网关。由Ingress转义的资源不支持在控制台操作。仅支持容器集群来源类型。 (see [below for nested schema](#nestedatt--ingress_settings))
-- `watch_namespaces` (Set of String) 指定命名空间。
+- `comments` (String) Remarks, length limit: 0–253 characters
+- `ingress_settings` (Attributes) Route synchronization. When enabled, the API Gateway automatically monitors changes to Ingress resources and converts them into services, domains, Upstream, and other resources, merging them into the current gateway. Resources converted from Ingress cannot be managed in the console. Only supported for container cluster source type (see [below for nested schema](#nestedatt--ingress_settings))
+- `watch_namespaces` (Set of String) Specify namespace
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
+- `created_time` (String) Creation time
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) 导入状态，取值：Syncing：导入中。SyncedSucceed：导入成功。SyncedFailed：导入失败。
-- `status_message` (String) 导入状态信息，取值：ConnectionFailed：Nacos集群无法连接。AuthenticationFailed：认证失败。PermissionFailed：Nacos集群无法连接。
-- `updated_time` (String) 更新时间。
-- `upstream_source_id` (String) Upstream来源ID。
+- `status` (String) Import status. Options: Syncing: Importing. SyncedSucceed: Import successful. SyncedFailed: Import failed
+- `status_message` (String) Import status information. Options: ConnectionFailed: Unable to connect to Nacos cluster. AuthenticationFailed: Authentication failed. PermissionFailed: Unable to connect to Nacos cluster
+- `updated_time` (String) Update time
+- `upstream_source_id` (String) Upstream source ID
 
 <a id="nestedatt--source_spec"></a>
 ### Nested Schema for `source_spec`
 
 Optional:
 
-- `k8_s_source` (Attributes) 容器集群来源。 (see [below for nested schema](#nestedatt--source_spec--k8_s_source))
-- `nacos_source` (Attributes) 注册中心来源。 (see [below for nested schema](#nestedatt--source_spec--nacos_source))
+- `k8_s_source` (Attributes) Container cluster source (see [below for nested schema](#nestedatt--source_spec--k8_s_source))
+- `nacos_source` (Attributes) Registry source (see [below for nested schema](#nestedatt--source_spec--nacos_source))
 
 <a id="nestedatt--source_spec--k8_s_source"></a>
 ### Nested Schema for `source_spec.k8_s_source`
 
 Optional:
 
-- `cluster_id` (String) 集群ID。
-- `cluster_type` (String) 集群类型。
+- `cluster_id` (String) Cluster ID
+- `cluster_type` (String) Cluster type
 
 
 <a id="nestedatt--source_spec--nacos_source"></a>
@@ -76,27 +76,27 @@ Optional:
 
 Optional:
 
-- `auth_config` (Attributes) 认证配置。 (see [below for nested schema](#nestedatt--source_spec--nacos_source--auth_config))
+- `auth_config` (Attributes) Authentication configuration (see [below for nested schema](#nestedatt--source_spec--nacos_source--auth_config))
 - `nacos_id` (String) Nacos ID。
 
 Read-Only:
 
-- `nacos_name` (String) Nacos名称。
+- `nacos_name` (String) Nacos name
 
 <a id="nestedatt--source_spec--nacos_source--auth_config"></a>
 ### Nested Schema for `source_spec.nacos_source.auth_config`
 
 Optional:
 
-- `basic` (Attributes) Basic认证。 (see [below for nested schema](#nestedatt--source_spec--nacos_source--auth_config--basic))
+- `basic` (Attributes) Basic authentication (see [below for nested schema](#nestedatt--source_spec--nacos_source--auth_config--basic))
 
 <a id="nestedatt--source_spec--nacos_source--auth_config--basic"></a>
 ### Nested Schema for `source_spec.nacos_source.auth_config.basic`
 
 Optional:
 
-- `password` (String) 密码。
-- `username` (String) 用户名。
+- `password` (String) Password
+- `username` (String) Username
 
 
 
@@ -107,13 +107,13 @@ Optional:
 
 Optional:
 
-- `enable_all_ingress_classes` (Boolean) 是否启用所有Ingress类。
-- `enable_all_namespaces` (Boolean) 是否全部命名空间。
-- `enable_ingress` (Boolean) 是否开启。
-- `enable_ingress_without_ingress_class` (Boolean) 是否监听IngressClass为空的资源。
-- `ingress_classes` (Set of String) 指定IngressClass。
-- `update_status` (Boolean) 流量入口切换。开启后，当前集群Ingress中Status的IP地址会被修改为当前网关的IP地址。
-- `watch_namespaces` (Set of String) 指定命名空间。
+- `enable_all_ingress_classes` (Boolean) Whether to enable all Ingress classes
+- `enable_all_namespaces` (Boolean) Whether all namespaces
+- `enable_ingress` (Boolean) Whether enabled
+- `enable_ingress_without_ingress_class` (Boolean) Whether to monitor resources with empty IngressClass
+- `ingress_classes` (Set of String) Specify IngressClass
+- `update_status` (Boolean) Traffic entry switch. When enabled, the IP address in the Status of the current cluster's Ingress will be updated to the current gateway's IP address
+- `watch_namespaces` (Set of String) Specify namespace
 
 ## Import
 

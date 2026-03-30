@@ -33,12 +33,12 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的ASN。",
+		//	  "description": "ASN of the VPN gateway.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的ASN。",
+			Description: "ASN of the VPN gateway.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -49,24 +49,24 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的带宽规格。",
+		//	  "description": "VPN gateway bandwidth specification.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的带宽规格。",
+			Description: "VPN gateway bandwidth specification.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BillingType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的计费类型。1：包年包月。2：按量计费（按固定规格）",
+		//	  "description": "VPN gateway billing type. 1: Subscription. 2: Pay-as-you-go (fixed specification)",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的计费类型。1：包年包月。2：按量计费（按固定规格）",
+			Description: "VPN gateway billing type. 1: Subscription. 2: Pay-as-you-go (fixed specification)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -78,11 +78,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的计费状态。Normal: 正常。FinancialLocked: 被锁定。",
+		//	  "description": "VPN gateway billing status. Normal: Normal. FinancialLocked: Locked.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的计费状态。Normal: 正常。FinancialLocked: 被锁定。",
+			Description: "VPN gateway billing status. Normal: Normal. FinancialLocked: Locked.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -92,12 +92,12 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关关联IPsec连接的数量。",
+		//	  "description": "Number of IPsec connections associated with the VPN gateway.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"connection_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关关联IPsec连接的数量。",
+			Description: "Number of IPsec connections associated with the VPN gateway.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -107,11 +107,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建VPN网关的时间。",
+		//	  "description": "Time when the VPN gateway was created.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建VPN网关的时间。",
+			Description: "Time when the VPN gateway was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -121,11 +121,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "预期资源强制回收时间。",
+		//	  "description": "Expected resource forced reclaim time.",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "预期资源强制回收时间。",
+			Description: "Expected resource forced reclaim time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -135,11 +135,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的描述。",
+		//	  "description": "Description of the VPN gateway.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的描述。",
+			Description: "Description of the VPN gateway.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -150,11 +150,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关是否开启双隧道模式。true：开启false：关闭",
+		//	  "description": "Whether dual tunnel mode is enabled for the VPN gateway. true: Enabled false: Disabled",
 		//	  "type": "boolean"
 		//	}
 		"dual_tunnel_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关是否开启双隧道模式。true：开启false：关闭",
+			Description: "Whether dual tunnel mode is enabled for the VPN gateway. true: Enabled false: Disabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -166,11 +166,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的到期时间。",
+		//	  "description": "VPN gateway expiration time.",
 		//	  "type": "string"
 		//	}
 		"expired_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的到期时间。",
+			Description: "VPN gateway expiration time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -180,11 +180,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的公网IP地址。",
+		//	  "description": "VPN gateway public IP address.",
 		//	  "type": "string"
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的公网IP地址。",
+			Description: "VPN gateway public IP address.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -194,11 +194,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN 网关的协议类型。ipv4_only：IPv4协议类型。ipv6_only：IPv6协议类型。ipv4_ipv6：双栈协议类型。",
+		//	  "description": "VPN gateway protocol type. ipv4_only: IPv4 protocol type. ipv6_only: IPv6 protocol type. ipv4_ipv6: Dual-stack protocol type.",
 		//	  "type": "string"
 		//	}
 		"ip_stack_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN 网关的协议类型。ipv4_only：IPv4协议类型。ipv6_only：IPv6协议类型。ipv4_ipv6：双栈协议类型。",
+			Description: "VPN gateway protocol type. ipv4_only: IPv4 protocol type. ipv6_only: IPv6 protocol type. ipv4_ipv6: Dual-stack protocol type.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -210,11 +210,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的IP地址类型。ipv4：IPv4地址类型。ipv6：IPv6地址类型。",
+		//	  "description": "IP address type of the VPN gateway. ipv4: IPv4 address type. ipv6: IPv6 address type.",
 		//	  "type": "string"
 		//	}
 		"ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的IP地址类型。ipv4：IPv4地址类型。ipv6：IPv6地址类型。",
+			Description: "IP address type of the VPN gateway. ipv4: IPv4 address type. ipv6: IPv6 address type.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -226,11 +226,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启IPSec功能。true：开启false：关闭。",
+		//	  "description": "Enable IPSec feature. true: enabled false: disabled",
 		//	  "type": "boolean"
 		//	}
 		"ipsec_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启IPSec功能。true：开启false：关闭。",
+			Description: "Enable IPSec feature. true: enabled false: disabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -241,11 +241,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前资源的状态是否被封禁。true：封禁false：未封禁。",
+		//	  "description": "Whether the current resource is banned. true: Banned false: Not banned.",
 		//	  "type": "boolean"
 		//	}
 		"is_blocked": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "当前资源的状态是否被封禁。true：封禁false：未封禁。",
+			Description: "Whether the current resource is banned. true: Banned false: Not banned.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -255,11 +255,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的锁定原因。financial：因欠费被锁定。security：因安全被锁定。unlock：未锁定。",
+		//	  "description": "VPN gateway lock reasons. financial: Locked due to overdue payment. security: Locked for security reasons. unlock: Not locked.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的锁定原因。financial：因欠费被锁定。security：因安全被锁定。unlock：未锁定。",
+			Description: "VPN gateway lock reasons. financial: Locked due to overdue payment. security: Locked for security reasons. unlock: Not locked.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -269,11 +269,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。",
+		//	  "description": "Resource freeze time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns an empty value.",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值，否则均返回空值。",
+			Description: "Resource freeze time. This parameter returns a value only if the resource is frozen due to overdue payment; otherwise, it returns an empty value.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -283,12 +283,12 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月类型VPN网关购买的时长，默认“1”。当PeriodUnit传入值为Month，Period取值范围：1~9、12、24、36。当PeriodUnit传入值为Year，Period取值范围：1～3。",
+		//	  "description": "Subscription VPN gateway purchase duration, default is '1'. If PeriodUnit is Month, Period value range: 1–9, 12, 24, 36. If PeriodUnit is Year, Period value range: 1–3.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "包年包月类型VPN网关购买的时长，默认“1”。当PeriodUnit传入值为Month，Period取值范围：1~9、12、24、36。当PeriodUnit传入值为Year，Period取值范围：1～3。",
+			Description: "Subscription VPN gateway purchase duration, default is '1'. If PeriodUnit is Month, Period value range: 1–9, 12, 24, 36. If PeriodUnit is Year, Period value range: 1–3.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -301,11 +301,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月类型VPN网关购买时长的单位，默认“Month”。Month：月Year：年",
+		//	  "description": "Unit for the purchase duration of subscription-based VPN gateways. Default is 'Month'. Month: month Year: year",
 		//	  "type": "string"
 		//	}
 		"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "包年包月类型VPN网关购买时长的单位，默认“Month”。Month：月Year：年",
+			Description: "Unit for the purchase duration of subscription-based VPN gateways. Default is 'Month'. Month: month Year: year",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -318,11 +318,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关所属的项目。不填默认为default，即创建的资源属于default项目。您可调用ListProjects查询当前账号下项目的信息。",
+		//	  "description": "Project to which the VPN gateway belongs. If not specified, defaults to 'default', meaning the created resource belongs to the default project. You can call ListProjects to query project information under the current account.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关所属的项目。不填默认为default，即创建的资源属于default项目。您可调用ListProjects查询当前账号下项目的信息。",
+			Description: "Project to which the VPN gateway belongs. If not specified, defaults to 'default', meaning the created resource belongs to the default project. You can call ListProjects to query project information under the current account.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -334,12 +334,12 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的路由条目数量。",
+		//	  "description": "Number of route entries for the VPN gateway.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"route_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的路由条目数量。",
+			Description: "Number of route entries for the VPN gateway.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -349,11 +349,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的第二个公网IP地址。仅双隧道模式的VPN网关实例返回该参数，单隧道模式的VPN网关实例不返回该参数。",
+		//	  "description": "Second public IP address of the VPN gateway. This parameter is returned only for VPN gateway instances in dual tunnel mode; it is not returned for instances in single tunnel mode.",
 		//	  "type": "string"
 		//	}
 		"secondary_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的第二个公网IP地址。仅双隧道模式的VPN网关实例返回该参数，单隧道模式的VPN网关实例不返回该参数。",
+			Description: "Second public IP address of the VPN gateway. This parameter is returned only for VPN gateway instances in dual tunnel mode; it is not returned for instances in single tunnel mode.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -363,11 +363,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关实例关联的第二个子网的ID。仅双隧道模式的VPN网关实例返回该参数，单隧道模式的VPN网关实例不返回该参数。",
+		//	  "description": "ID of the second subnet associated with the VPN gateway instance. This parameter is returned only for VPN gateway instances in dual tunnel mode; it is not returned for instances in single tunnel mode.",
 		//	  "type": "string"
 		//	}
 		"secondary_subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关实例关联的第二个子网的ID。仅双隧道模式的VPN网关实例返回该参数，单隧道模式的VPN网关实例不返回该参数。",
+			Description: "ID of the second subnet associated with the VPN gateway instance. This parameter is returned only for VPN gateway instances in dual tunnel mode; it is not returned for instances in single tunnel mode.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -379,11 +379,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启SSL VPN功能。true：开启false：关闭",
+		//	  "description": "Enable SSL VPN feature. true: enabled false: disabled",
 		//	  "type": "boolean"
 		//	}
 		"ssl_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启SSL VPN功能。true：开启false：关闭",
+			Description: "Enable SSL VPN feature. true: enabled false: disabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -394,12 +394,12 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的最大SSL连接数。",
+		//	  "description": "Maximum SSL connections for the VPN gateway.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"ssl_max_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的最大SSL连接数。",
+			Description: "Maximum SSL connections for the VPN gateway.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -410,11 +410,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用",
+		//	  "description": "Status of the VPN gateway. Creating: creating Deleting: deleting Pending: configuring Available: available",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用",
+			Description: "Status of the VPN gateway. Creating: creating Deleting: deleting Pending: configuring Available: available",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -424,11 +424,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关使用的端口所属子网的ID。",
+		//	  "description": "ID of the subnet to which the port used by the VPN gateway belongs.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关使用的端口所属子网的ID。",
+			Description: "ID of the subnet to which the port used by the VPN gateway belongs.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -438,17 +438,17 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关已添加的全部标签信息。",
+		//	  "description": "All tag information added to the VPN gateway.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "VPN网关的标签信息。",
+		//	    "description": "Tag information for the VPN gateway.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "VPN网关标签的标签键（Key）。参数 - N：表示标签键的序号，取值范围：1～20。多个标签键之间用\u0026分隔。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。说明同一资源的标签键不允许重复。",
+		//	        "description": "VPN gateway tag key (Key). Parameter - N: Indicates the sequence number of the tag key, value range: 1–20. Multiple tag keys are separated by \u0026. Naming rules: Cannot start with any combination of volc: or sys: (case-insensitive). Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length limit: 1–128 characters. Note: Tag keys for the same resource must not be duplicated.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "VPN网关标签的标签值（Value）。参数 - N：表示标签值的序号，取值范围：1～20。多个标签值之间用\u0026分隔。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。大小写敏感，不能以空格开头或结尾。说明传入Tags.N.Value则必须传入Tags.N.Key。",
+		//	        "description": "VPN gateway tag value (Value). Parameter - N: Indicates the sequence number of the tag value, value range: 1–20. Multiple tag values are separated by \u0026. Naming rules: Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length limit: 0–256 characters. Case-sensitive. Cannot start or end with a space. Note: If Tags.N.Value is provided, Tags.N.Key must also be provided.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -465,7 +465,7 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPN网关标签的标签键（Key）。参数   - N：表示标签键的序号，取值范围：1～20。多个标签键之间用&分隔。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。说明同一资源的标签键不允许重复。",
+						Description: "VPN gateway tag key (Key). Parameter   - N: Indicates the sequence number of the tag key, value range: 1–20. Multiple tag keys are separated by &. Naming rules: Cannot start with any combination of volc: or sys: (case-insensitive). Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length limit: 1–128 characters. Note: Tag keys for the same resource must not be duplicated.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -477,7 +477,7 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPN网关标签的标签值（Value）。参数   - N：表示标签值的序号，取值范围：1～20。多个标签值之间用&分隔。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。大小写敏感，不能以空格开头或结尾。说明传入Tags.N.Value则必须传入Tags.N.Key。",
+						Description: "VPN gateway tag value (Value). Parameter   - N: Indicates the sequence number of the tag value, value range: 1–20. Multiple tag values are separated by &. Naming rules: Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length limit: 0–256 characters. Case-sensitive. Cannot start or end with a space. Note: If Tags.N.Value is provided, Tags.N.Key must also be provided.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -486,7 +486,7 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "VPN网关已添加的全部标签信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "All tag information added to the VPN gateway.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -498,11 +498,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新VPN网关的时间。",
+		//	  "description": "VPN gateway update time.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新VPN网关的时间。",
+			Description: "VPN gateway update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -512,11 +512,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关所在VPC的ID。",
+		//	  "description": "VPC ID where the VPN gateway is located.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关所在VPC的ID。",
+			Description: "VPC ID where the VPN gateway is located.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -526,11 +526,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的ID。",
+		//	  "description": "ID of the VPN gateway.",
 		//	  "type": "string"
 		//	}
 		"vpn_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的ID。",
+			Description: "ID of the VPN gateway.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -540,11 +540,11 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPN网关的名称。",
+		//	  "description": "Name of the VPN gateway.",
 		//	  "type": "string"
 		//	}
 		"vpn_gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的名称。",
+			Description: "Name of the VPN gateway.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -563,7 +563,7 @@ func vPNGatewayResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "当您需要通过VPN连接实现私有网络与本地数据中心或其他私有网络之间的通信，您需要先创建一个VPN网关。",
+		Description: "To enable communication between your private network and a local data center or another private network via a VPN connection, you must first create a VPN gateway.",
 		Version:     1,
 		Attributes:  attributes,
 	}

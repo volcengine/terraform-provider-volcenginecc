@@ -2,12 +2,12 @@
 page_title: "volcenginecc_kms_key Resource - terraform-provider-volcenginecc"
 subcategory: "KMS"
 description: |-
-  密钥管理服务（Key Management Service）是火山引擎上一站式的密钥管理和数据加密服务平台。提供简单易用的加密接口，KMS 帮助用户轻松管理密钥、保护云上核心数据的安全。同时极大降低用户自行部署密码基础设施的采购、研发成本。帮助业务轻松满足监管和合规需求。
+  Key Management Service (KMS) is a one-stop key management and data encryption platform on Volcano Engine. It provides easy-to-use encryption interfaces. KMS helps users easily manage keys and protect the security of core cloud data. It also greatly reduces the procurement and development costs for users to deploy their own cryptographic infrastructure. KMS helps businesses easily meet regulatory and compliance requirements.
 ---
 
 # volcenginecc_kms_key (Resource)
 
-密钥管理服务（Key Management Service）是火山引擎上一站式的密钥管理和数据加密服务平台。提供简单易用的加密接口，KMS 帮助用户轻松管理密钥、保护云上核心数据的安全。同时极大降低用户自行部署密码基础设施的采购、研发成本。帮助业务轻松满足监管和合规需求。
+Key Management Service (KMS) is a one-stop key management and data encryption platform on Volcano Engine. It provides easy-to-use encryption interfaces. KMS helps users easily manage keys and protect the security of core cloud data. It also greatly reduces the procurement and development costs for users to deploy their own cryptographic infrastructure. KMS helps businesses easily meet regulatory and compliance requirements.
 
 ## Example Usage
 
@@ -38,46 +38,46 @@ resource "volcenginecc_kms_key" "KMSKeyDemo" {
 
 ### Required
 
-- `key_name` (String) 主密钥名称，长度为 2   - 31 个字符，合法字符：[a-zA-Z0-9-_]。
-- `keyring_name` (String) 密钥环名称，长度为 2   - 31 个字符，合法字符：[a-zA-Z0-9-_]。
+- `key_name` (String) Master key name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].
+- `keyring_name` (String) Key ring name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].
 
 ### Optional
 
-- `description` (String) 密钥描述:长度为 0   - 8192 个字符。
-- `key_archive_operation` (Number) 用户主密钥归档操作（用户输入1=归档，2=取消归档）
-- `key_enable_operation` (Number) 用户主密钥启用操作（用户输入1=启用，2=禁用）
-- `key_rotation_operation` (Number) 用户主密钥轮转操作（用户输入1=开启，2=关闭）
-- `key_spec` (String) 对称密钥：SYMMETRIC_256，SYMMETRIC_128，非对称密钥：RSA_2048，RSA_3072，RSA_4096，EC_P256，EC_P256K，EC_P384，EC_P521，EC_SM2。
-- `key_usage` (String) 密钥用途，取值：ENCRYPT_DECRYPT，SIGN_VERIFY，GENERATE_VERIFY_MAC。
-- `multi_region` (Boolean) 是否为 Multi-region 类型的主密钥。
-- `origin` (String) 密钥来源，取值：CloudKMS，External，ExternalKeyStore。
-- `protection_level` (String) 密钥保护级别，取值：SOFTWARE，HSM。
-- `rotate_interval` (Number) 密钥轮转周期，单位：天；取值范围：[90, 2560]。
-- `tags` (Attributes Set) KMS密钥的标签信息
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Key description: Length 0–8192 characters.
+- `key_archive_operation` (Number) User master key archive operation (enter 1 to archive, 2 to unarchive).
+- `key_enable_operation` (Number) User master key enable operation (enter 1 to enable, 2 to disable).
+- `key_rotation_operation` (Number) User master key rotation operation (enter 1 to enable, 2 to disable).
+- `key_spec` (String) Symmetric keys: SYMMETRIC_256, SYMMETRIC_128; asymmetric keys: RSA_2048, RSA_3072, RSA_4096, EC_P256, EC_P256K, EC_P384, EC_P521, EC_SM2.
+- `key_usage` (String) Key usage. Options: ENCRYPT_DECRYPT, SIGN_VERIFY, GENERATE_VERIFY_MAC.
+- `multi_region` (Boolean) Is this a multi-region type master key.
+- `origin` (String) Key source. Options: CloudKMS, External, ExternalKeyStore.
+- `protection_level` (String) Key protection level. Options: SOFTWARE, HSM.
+- `rotate_interval` (Number) Key rotation period (days). Range: [90, 2560].
+- `tags` (Attributes Set) KMS key label information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `created_time` (Number) 密钥创建时间。
+- `created_time` (Number) Key creation time.
 - `id` (String) Uniquely identifies the resource.
-- `key_id` (String) 密钥唯一标识符，UUID形式。
-- `key_material_expire_time` (String) 密钥材料过期时间，当值为空时表示不会过期。
-- `key_state` (String) 密钥状态：Enable，Disable，PendingDelete，Archived，PendingImport。
-- `last_rotation_time` (String) 密钥最后轮转时间。
-- `multi_region_configuration` (Attributes) Multi-region key 配置信息。 (see [below for nested schema](#nestedatt--multi_region_configuration))
-- `rotate_state` (String) 密钥轮转状态，取值：Enable，Disable。
-- `schedule_delete_time` (String) 密钥删除时间。
-- `schedule_rotation_time` (String) 密钥轮转时间。
-- `trn` (String) 资源名称，格式应为 trn:${Service}:${Region}:${AccountID}:${ResourcePath}。
-- `updated_time` (Number) 密钥更新时间。
+- `key_id` (String) Key unique identifier in UUID format.
+- `key_material_expire_time` (String) Key material expiration time. If empty, the key does not expire.
+- `key_state` (String) Key status: Enable, Disable, PendingDelete, Archived, PendingImport.
+- `last_rotation_time` (String) Key last rotation time.
+- `multi_region_configuration` (Attributes) Multi-region key configuration information. (see [below for nested schema](#nestedatt--multi_region_configuration))
+- `rotate_state` (String) Key rotation status. Options: Enable, Disable.
+- `schedule_delete_time` (String) Key deletion time.
+- `schedule_rotation_time` (String) Key rotation time.
+- `trn` (String) Resource name. Format should be trn:${Service}:${Region}:${AccountID}:${ResourcePath}.
+- `updated_time` (Number) Key update time.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) KMS密钥的标签键
-- `value` (String) KMS密钥的标签值
+- `key` (String) KMS key label key.
+- `value` (String) KMS key label value.
 
 
 <a id="nestedatt--multi_region_configuration"></a>
@@ -85,18 +85,18 @@ Optional:
 
 Read-Only:
 
-- `multi_region_key_type` (String) 多区域密钥的类型。
-- `primary_key` (Attributes) 主多区域键的事务识别号和区域 ID。 (see [below for nested schema](#nestedatt--multi_region_configuration--primary_key))
-- `replica_keys` (Attributes Set) 副本多区域密钥的事务记录编号和区域 ID。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--multi_region_configuration--replica_keys))
+- `multi_region_key_type` (String) Multi-region key type.
+- `primary_key` (Attributes) Primary multi-region key transaction identifier and region ID. (see [below for nested schema](#nestedatt--multi_region_configuration--primary_key))
+- `replica_keys` (Attributes Set) Replica multi-region key transaction record number and region ID.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--multi_region_configuration--replica_keys))
 
 <a id="nestedatt--multi_region_configuration--primary_key"></a>
 ### Nested Schema for `multi_region_configuration.primary_key`
 
 Read-Only:
 
-- `region` (String) 多区域密钥的区域 ID。
-- `trn` (String) 多区域密钥的 TRN。
+- `region` (String) Multi-region key region ID.
+- `trn` (String) Multi-region key TRN.
 
 
 <a id="nestedatt--multi_region_configuration--replica_keys"></a>
@@ -104,8 +104,8 @@ Read-Only:
 
 Read-Only:
 
-- `region` (String) 多区域密钥的区域 ID。
-- `trn` (String) 多区域密钥的转换。
+- `region` (String) Multi-region key region ID.
+- `trn` (String) Multi-region key conversion.
 
 ## Import
 

@@ -27,10 +27,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"地域访问控制\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'regional access control' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "Area": {
-		//	      "description": "表示一个国家列表，对该列表应用白名单或者黑名单。当 Switch 是 true 时，该参数为必填。国家的名称使用简写来表示。多个国家名称使用英文逗号（,）分隔。",
+		//	      "description": "Indicates a list of countries to which an allowlist or denylist is applied. When Switch is true, this parameter is required. Country names are represented in abbreviated form. Multiple country names are separated by commas (,).",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -39,11 +39,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "RuleType": {
-		//	      "description": "表示 \"地域访问控制\" 特性的规则类型。该参数有以下取值：deny：表示白名单。allow：表示黑名单。",
+		//	      "description": "Indicates the rule type for the 'region access control' feature. This parameter has the following values: deny: indicates Denylist. allow: indicates Allowlist.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether to enable this feature. This parameter has the following values: true: Enables this feature. false: Disables this feature.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -54,28 +54,28 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Area
 				"area": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示一个国家列表，对该列表应用白名单或者黑名单。当 Switch 是 true 时，该参数为必填。国家的名称使用简写来表示。多个国家名称使用英文逗号（,）分隔。",
+					Description: "Indicates a list of countries to which an allowlist or denylist is applied. When Switch is true, this parameter is required. Country names are represented in abbreviated form. Multiple country names are separated by commas (,).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RuleType
 				"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示 \"地域访问控制\" 特性的规则类型。该参数有以下取值：deny：表示白名单。allow：表示黑名单。",
+					Description: "Indicates the rule type for the 'region access control' feature. This parameter has the following values: deny: indicates Denylist. allow: indicates Allowlist.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether to enable this feature. This parameter has the following values: true: Enables this feature. false: Disables this feature.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"地域访问控制\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'regional access control' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupOrigin
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名配置的备源站列表。如果该域名没有配置任何备源站，该参数值是 null。",
+		//	  "description": "Indicates the backup origin server list configured for this domain. If no backup origin server is configured for this domain, the parameter value is null.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -85,35 +85,35 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"backup_origin": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "表示该域名配置的备源站列表。如果该域名没有配置任何备源站，该参数值是 null。",
+			Description: "Indicates the backup origin server list configured for this domain. If no backup origin server is configured for this domain, the parameter value is null.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BrowserCache
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"浏览器缓存\" 特性的配置模块。该特性默认为禁用。该参数值表示一个规则列表，说明如下：每个列表元素是一个缓存规则的配置。您最多可以创建 50 条规则。列表中元素的顺序表示对应规则的优先级。列表中规则的优先级最高。如果您创建了多个规则，您需要留意规则之间是否存在包含关系。如果存在包含关系，作用范围较大的规则应出现在作用范围较小的规则的后面。",
+		//	  "description": "Indicates the configuration module for the 'browser cache' feature. This feature is disabled by default. The parameter value is a list of rules, described as follows: Each list element is a cache rule configuration. You can create up to 50 rules. The order of elements in the list determines the priority of the corresponding rules. The rule at the top of the list has the highest priority. If you create multiple rules, pay attention to whether there are containment relationships between rules. If containment exists, rules with a broader scope should appear after those with a narrower scope.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "表示 \"浏览器缓存\" 特性的生效条件，由一组规则组成。",
+		//	    "description": "Indicates the conditions under which the 'browser cache' feature takes effect, consisting of a set of rules.",
 		//	    "properties": {
 		//	      "CacheAction": {
-		//	        "description": "表示缓存行为的相关配置。",
+		//	        "description": "Indicates the relevant configuration for cache behavior.",
 		//	        "properties": {
 		//	          "Action": {
-		//	            "description": "表示缓存的行为。当前您仅可指定 cache。cache 表示行为是缓存。",
+		//	            "description": "Indicates caching behavior. Currently, you can only specify cache. cache means the behavior is caching.",
 		//	            "type": "string"
 		//	          },
 		//	          "DefaultPolicy": {
-		//	            "description": "该参数被多个 CDN 特性共享。",
+		//	            "description": "This parameter is shared by multiple CDN features.",
 		//	            "type": "string"
 		//	          },
 		//	          "IgnoreCase": {
-		//	            "description": "表示 Value 是否是大小写敏感的。该参数有以下取值：true：表示大小写不敏感。false：表示大小写敏感。该参数的默认值为 false。",
+		//	            "description": "Indicates whether Value is case sensitive. The parameter has the following values: true: not case sensitive. false: case sensitive. The default value is false.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Ttl": {
-		//	            "description": "表示缓存的时间，单位为秒。时间范围为 0-315,360,000。315,360,000 表示 10年。如果您不希望内容分发网络对指定的内容进行缓存，您可以设置该参数为 0。",
+		//	            "description": "Indicates the cache duration in seconds. The valid range is 0–315,360,000. 315,360,000 represents 10 years. If you do not want the content delivery network to cache the specified content, set this parameter to 0.",
 		//	            "format": "int64",
 		//	            "type": "integer"
 		//	          }
@@ -121,32 +121,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -156,7 +156,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -176,26 +176,26 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Action
 							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示缓存的行为。当前您仅可指定 cache。cache 表示行为是缓存。",
+								Description: "Indicates caching behavior. Currently, you can only specify cache. cache means the behavior is caching.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: DefaultPolicy
 							"default_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "该参数被多个 CDN 特性共享。",
+								Description: "This parameter is shared by multiple CDN features.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IgnoreCase
 							"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "表示 Value 是否是大小写敏感的。该参数有以下取值：true：表示大小写不敏感。false：表示大小写敏感。该参数的默认值为 false。",
+								Description: "Indicates whether Value is case sensitive. The parameter has the following values: true: not case sensitive. false: case sensitive. The default value is false.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Ttl
 							"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "表示缓存的时间，单位为秒。时间范围为 0-315,360,000。315,360,000 表示 10年。如果您不希望内容分发网络对指定的内容进行缓存，您可以设置该参数为 0。",
+								Description: "Indicates the cache duration in seconds. The valid range is 0–315,360,000. 315,360,000 represents 10 years. If you do not want the content delivery network to cache the specified content, set this parameter to 0.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示缓存行为的相关配置。",
+						Description: "Indicates the relevant configuration for cache behavior.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Condition
@@ -207,74 +207,74 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示 \"浏览器缓存\" 特性的配置模块。该特性默认为禁用。该参数值表示一个规则列表，说明如下：每个列表元素是一个缓存规则的配置。您最多可以创建 50 条规则。列表中元素的顺序表示对应规则的优先级。列表中规则的优先级最高。如果您创建了多个规则，您需要留意规则之间是否存在包含关系。如果存在包含关系，作用范围较大的规则应出现在作用范围较小的规则的后面。",
+			Description: "Indicates the configuration module for the 'browser cache' feature. This feature is disabled by default. The parameter value is a list of rules, described as follows: Each list element is a cache rule configuration. You can create up to 50 rules. The order of elements in the list determines the priority of the corresponding rules. The rule at the top of the list has the highest priority. If you create multiple rules, pay attention to whether there are containment relationships between rules. If containment exists, rules with a broader scope should appear after those with a narrower scope.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Cache
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"缓存规则\" 特性的配置模块。该特性默认为禁用，表示不创建自定义规则。列表中最多可以包含 50 条规则。列表中规则的顺序定义了规则的优先级。列表中第一条规则的优先级最高。规则中的过滤器定义了规则的作用范围。如果您创建了多条规则，作用范围较大的规则应出现在作用范围较小的规则后面。",
+		//	  "description": "Represents the configuration module for the 'Cache Rule' feature. This feature is disabled by default, meaning no custom rules are created. The list can contain up to 50 rules. The order of rules in the list defines their priority, with the first rule having the highest priority. The filter in each rule specifies the scope of the rule. If you create multiple rules, rules with a broader scope should appear after those with a narrower scope.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "表示 \"缓存规则\" 特性的配置模块。该特性默认为禁用，表示不创建自定义规则。",
+		//	    "description": "Indicates the configuration module for the \"Cache Rules\" feature. This feature is disabled by default, meaning no custom rules are created.",
 		//	    "properties": {
 		//	      "CacheAction": {
-		//	        "description": "表示缓存行为的相关配置。",
+		//	        "description": "Indicates the relevant configuration for cache behavior.",
 		//	        "properties": {
 		//	          "Action": {
-		//	            "description": "表示缓存的行为。当前您仅可指定 cache。cache 表示行为是缓存。",
+		//	            "description": "Indicates caching behavior. Currently, you can only specify cache. cache means the behavior is caching.",
 		//	            "type": "string"
 		//	          },
 		//	          "DefaultPolicy": {
-		//	            "description": "该参数被多个 CDN 特性共享。",
+		//	            "description": "This parameter is shared by multiple CDN features.",
 		//	            "type": "string"
 		//	          },
 		//	          "IgnoreCase": {
-		//	            "description": "表示 Value 是否是大小写敏感的。该参数有以下取值：true：表示大小写不敏感。false：表示大小写敏感。该参数的默认值为 false。",
+		//	            "description": "Indicates whether Value is case sensitive. The parameter has the following values: true: not case sensitive. false: case sensitive. The default value is false.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Ttl": {
-		//	            "description": "表示缓存的时间，单位为秒。时间范围为 0-315,360,000。315,360,000 表示 10年。如果您不希望内容分发网络对指定的内容进行缓存，您可以设置该参数为 0。",
+		//	            "description": "Indicates the cache duration in seconds. The valid range is 0–315,360,000. 315,360,000 represents 10 years. If you do not want the content delivery network to cache the specified content, set this parameter to 0.",
 		//	            "format": "int64",
 		//	            "type": "integer"
 		//	          }
@@ -282,32 +282,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -317,7 +317,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -337,26 +337,26 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Action
 							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示缓存的行为。当前您仅可指定 cache。cache 表示行为是缓存。",
+								Description: "Indicates caching behavior. Currently, you can only specify cache. cache means the behavior is caching.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: DefaultPolicy
 							"default_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "该参数被多个 CDN 特性共享。",
+								Description: "This parameter is shared by multiple CDN features.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IgnoreCase
 							"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "表示 Value 是否是大小写敏感的。该参数有以下取值：true：表示大小写不敏感。false：表示大小写敏感。该参数的默认值为 false。",
+								Description: "Indicates whether Value is case sensitive. The parameter has the following values: true: not case sensitive. false: case sensitive. The default value is false.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Ttl
 							"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "表示缓存的时间，单位为秒。时间范围为 0-315,360,000。315,360,000 表示 10年。如果您不希望内容分发网络对指定的内容进行缓存，您可以设置该参数为 0。",
+								Description: "Indicates the cache duration in seconds. The valid range is 0–315,360,000. 315,360,000 represents 10 years. If you do not want the content delivery network to cache the specified content, set this parameter to 0.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示缓存行为的相关配置。",
+						Description: "Indicates the relevant configuration for cache behavior.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Condition
@@ -368,97 +368,97 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示 \"缓存规则\" 特性的配置模块。该特性默认为禁用，表示不创建自定义规则。列表中最多可以包含 50 条规则。列表中规则的顺序定义了规则的优先级。列表中第一条规则的优先级最高。规则中的过滤器定义了规则的作用范围。如果您创建了多条规则，作用范围较大的规则应出现在作用范围较小的规则后面。",
+			Description: "Represents the configuration module for the 'Cache Rule' feature. This feature is disabled by default, meaning no custom rules are created. The list can contain up to 50 rules. The order of rules in the list defines their priority, with the first rule having the highest priority. The filter in each rule specifies the scope of the rule. If you create multiple rules, rules with a broader scope should appear after those with a narrower scope.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CacheHost
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"共享缓存\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Specifies the configuration module for the 'shared cache' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "CacheHostRule": {
-		//	      "description": "表示一组共享缓存 HOST 的配置。当前您只能只能创建一个配置。当 Switch 是 true 时，该参数为必填。",
+		//	      "description": "Indicates a set of shared cache HOST configurations. Currently, you can only create one configuration. When Switch is true, this parameter is required.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示缓存 HOST 的具体配置。",
+		//	        "description": "Indicates the specific configuration for caching HOST.",
 		//	        "properties": {
 		//	          "CacheHostAction": {
-		//	            "description": "表示目标域名。 该目标域名必须是您账户下的一个加速域名。该参数指示 Domain 共享 CacheHost 的缓存。",
+		//	            "description": "Indicates the target domain. The target domain must be an accelerated domain under your account. This parameter specifies that the Domain shares the cache of CacheHost.",
 		//	            "properties": {
 		//	              "CacheHost": {
-		//	                "description": "表示目标域名。 该目标域名必须是您账户下的一个加速域名。该参数指示 Domain 共享 CacheHost 的缓存。",
+		//	                "description": "Specifies the target domain name. The target domain name must be an acceleration domain under your account. This parameter indicates that Domain shares the cache of CacheHost.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -468,7 +468,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -481,7 +481,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature; false: disables the feature. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -498,11 +498,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: CacheHost
 									"cache_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示目标域名。 该目标域名必须是您账户下的一个加速域名。该参数指示 Domain 共享 CacheHost 的缓存。",
+										Description: "Specifies the target domain name. The target domain name must be an acceleration domain under your account. This parameter indicates that Domain shares the cache of CacheHost.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示目标域名。 该目标域名必须是您账户下的一个加速域名。该参数指示 Domain 共享 CacheHost 的缓存。",
+								Description: "Indicates the target domain. The target domain must be an accelerated domain under your account. This parameter specifies that the Domain shares the cache of CacheHost.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Condition
@@ -514,89 +514,89 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一组共享缓存 HOST 的配置。当前您只能只能创建一个配置。当 Switch 是 true 时，该参数为必填。",
+					Description: "Indicates a set of shared cache HOST configurations. Currently, you can only create one configuration. When Switch is true, this parameter is required.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature; false: disables the feature. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"共享缓存\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Specifies the configuration module for the 'shared cache' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CacheKey
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"缓存键\" 特性的配置模块。该特性默认为禁用。该参数值表示一个规则列表，说明如下：每个列表元素是一个缓存键规则的配置。您最多可以创建 50 条规则。列表中元素的顺序表示对应规则的优先级。列表中规则的优先级最高。如果您创建了多个规则，您需要留意规则之间是否存在包含关系。如果存在包含关系，作用范围较大的规则应出现在作用范围较小的规则的后面。",
+		//	  "description": "Indicates the configuration module for the 'cache key' feature. This feature is disabled by default. The parameter value is a list of rules, described as follows: Each list element is a cache key rule configuration. You can create up to 50 rules. The order of elements in the list determines the priority of the corresponding rules. The rules in the list have the highest priority. If you create multiple rules, pay attention to whether there is any inclusion relationship between rules. If inclusion exists, rules with a broader scope should appear after those with a narrower scope.",
 		//	  "insertionOrder": true,
 		//	  "items": {
-		//	    "description": "表示 \"缓存键值\" 特性的配置模块。该特性默认为禁用，表示不创建自定义的缓存键值规则。",
+		//	    "description": "Indicates the configuration module for the 'cache key' feature. This feature is disabled by default, meaning no custom cache key rules are created.",
 		//	    "properties": {
 		//	      "CacheKeyAction": {
-		//	        "description": "表示在 Condition 情况下，内容分发网络执行的操作。",
+		//	        "description": "Indicates the action performed by the content delivery network under the Condition scenario.",
 		//	        "properties": {
 		//	          "CacheKeyComponents": {
-		//	            "description": "表示一个操作配置的列表。当前您仅可设置一个操作配置。",
+		//	            "description": "Indicates a list of operation configurations. Currently, you can only set one operation configuration.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个操作配置的列表。当前您仅可设置一个操作配置。",
+		//	              "description": "Specifies a list of operation configurations. Currently, you can set only one operation configuration.",
 		//	              "properties": {
 		//	                "Action": {
-		//	                  "description": "执行动作，修改时需要指定。该参数有以下取值：exclude：缓存键不包括任何查询参数，也就是去参数缓存。include：缓存键包括所有的查询参数，也就是保留参数缓存。includePart：缓存键包括 Subobject 中的查询参数，也就是保留部分参数缓存。excludePart：缓存键不包括 Subobject 中的查询参数，也就是删除部分参数缓存。",
+		//	                  "description": "Specifies the action to perform; required when modifying. This parameter has the following values: exclude: The cache key does not include any query parameters, which means parameters are removed from the cache. include: The cache key includes all query parameters, which means parameters are retained in the cache. includePart: The cache key includes query parameters in Subobject, which means some parameters are retained in the cache. excludePart: The cache key does not include query parameters in Subobject, which means some parameters are removed from the cache.",
 		//	                  "type": "string"
 		//	                },
 		//	                "IgnoreCase": {
-		//	                  "description": "表示内容分发网络在匹配 Value 时，是否忽略大小写。该参数有以下取值：true：表示忽略大小写。false：表示不忽略大小写。该参数的默认值是 false。",
+		//	                  "description": "Indicates whether the content delivery network ignores case when matching Value. The parameter values are: true: ignore case. false: do not ignore case. The default value is false.",
 		//	                  "type": "boolean"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示需要设置的对象。当前您仅可指定 queryString。queryString 表示请求 URL 中的查询参数。",
+		//	                  "description": "Indicates the object to be set. Currently, you can only specify queryString. queryString refers to the query parameters in the request URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Subobject": {
-		//	                  "description": "指定一个或者多个 Object 类型的对象。该参数的说明如下：如果Action 是 include 或者 exclude，Subobject的值必须是 *。* 表示全部查询参数。如果 Action 是 includePart 或者 excludePart，您可以指定一个或者多个查询参数。您指定的查询参数不能是 *，也不能包含连续斜杠（//）、百分号（%）、空格。多个查询参数名称使用英文分号（;）分隔。Subobject 的默认值是 *。",
+		//	                  "description": "Specify one or more objects of the Object type. Parameter details: If Action is include or exclude, Subobject must be *. * means all query parameters. If Action is includePart or excludePart, you can specify one or more query parameters. The query parameters you specify cannot be *, and cannot contain consecutive slashes (//), percent signs (%), or spaces. Use a semicolon (;) to separate multiple query parameter names. The default value for Subobject is *.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -609,32 +609,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -644,7 +644,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -668,31 +668,31 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Action
 										"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "执行动作，修改时需要指定。该参数有以下取值：exclude：缓存键不包括任何查询参数，也就是去参数缓存。include：缓存键包括所有的查询参数，也就是保留参数缓存。includePart：缓存键包括 Subobject 中的查询参数，也就是保留部分参数缓存。excludePart：缓存键不包括 Subobject 中的查询参数，也就是删除部分参数缓存。",
+											Description: "Specifies the action to perform; required when modifying. This parameter has the following values: exclude: The cache key does not include any query parameters, which means parameters are removed from the cache. include: The cache key includes all query parameters, which means parameters are retained in the cache. includePart: The cache key includes query parameters in Subobject, which means some parameters are retained in the cache. excludePart: The cache key does not include query parameters in Subobject, which means some parameters are removed from the cache.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: IgnoreCase
 										"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "表示内容分发网络在匹配 Value 时，是否忽略大小写。该参数有以下取值：true：表示忽略大小写。false：表示不忽略大小写。该参数的默认值是 false。",
+											Description: "Indicates whether the content delivery network ignores case when matching Value. The parameter values are: true: ignore case. false: do not ignore case. The default value is false.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示需要设置的对象。当前您仅可指定 queryString。queryString 表示请求 URL 中的查询参数。",
+											Description: "Indicates the object to be set. Currently, you can only specify queryString. queryString refers to the query parameters in the request URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Subobject
 										"subobject": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "指定一个或者多个 Object 类型的对象。该参数的说明如下：如果Action 是 include 或者 exclude，Subobject的值必须是 *。* 表示全部查询参数。如果 Action 是 includePart 或者 excludePart，您可以指定一个或者多个查询参数。您指定的查询参数不能是 *，也不能包含连续斜杠（//）、百分号（%）、空格。多个查询参数名称使用英文分号（;）分隔。Subobject 的默认值是 *。",
+											Description: "Specify one or more objects of the Object type. Parameter details: If Action is include or exclude, Subobject must be *. * means all query parameters. If Action is includePart or excludePart, you can specify one or more query parameters. The query parameters you specify cannot be *, and cannot contain consecutive slashes (//), percent signs (%), or spaces. Use a semicolon (;) to separate multiple query parameter names. The default value for Subobject is *.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个操作配置的列表。当前您仅可设置一个操作配置。",
+								Description: "Indicates a list of operation configurations. Currently, you can only set one operation configuration.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示在 Condition 情况下，内容分发网络执行的操作。",
+						Description: "Indicates the action performed by the content delivery network under the Condition scenario.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Condition
@@ -704,106 +704,106 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示 \"缓存键\" 特性的配置模块。该特性默认为禁用。该参数值表示一个规则列表，说明如下：每个列表元素是一个缓存键规则的配置。您最多可以创建 50 条规则。列表中元素的顺序表示对应规则的优先级。列表中规则的优先级最高。如果您创建了多个规则，您需要留意规则之间是否存在包含关系。如果存在包含关系，作用范围较大的规则应出现在作用范围较小的规则的后面。",
+			Description: "Indicates the configuration module for the 'cache key' feature. This feature is disabled by default. The parameter value is a list of rules, described as follows: Each list element is a cache key rule configuration. You can create up to 50 rules. The order of elements in the list determines the priority of the corresponding rules. The rules in the list have the highest priority. If you create multiple rules, pay attention to whether there is any inclusion relationship between rules. If inclusion exists, rules with a broader scope should appear after those with a narrower scope.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CacheShared
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名在 \"共享缓存\" 配置中的角色。该参数有以下取值：target_host：表示 \"目标域名\"。cache_shared_on：表示 \"配置域名\"。如果该域名未在任何 \"共享缓存\" 配置中，该参数值是空（\"\"）。",
+		//	  "description": "Indicates the role of this domain in the 'shared cache' configuration. The parameter has the following values: target_host: indicates the 'target domain'. cache_shared_on: indicates the 'configured domain'. If this domain is not included in any 'shared cache' configuration, the parameter value is an empty string ('').",
 		//	  "type": "string"
 		//	}
 		"cache_shared": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该域名在 \"共享缓存\" 配置中的角色。该参数有以下取值：target_host：表示 \"目标域名\"。cache_shared_on：表示 \"配置域名\"。如果该域名未在任何 \"共享缓存\" 配置中，该参数值是空（\"\"）。",
+			Description: "Indicates the role of this domain in the 'shared cache' configuration. The parameter has the following values: target_host: indicates the 'target domain'. cache_shared_on: indicates the 'configured domain'. If this domain is not included in any 'shared cache' configuration, the parameter value is an empty string ('').",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CacheSharedTargetHost
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "如果 CacheShared 是 cache_shared_on，该参数表示该域名所在的 \"共享缓存\" 配置中的 \"目标域名\"。\n如果 CacheShared 是 target_host，该参数值为空（\"\"）。",
+		//	  "description": "If CacheShared is cache_shared_on, this parameter indicates the 'Target Domain' in the 'Shared Cache' configuration for this domain name. If CacheShared is target_host, this parameter is empty (\"\").",
 		//	  "type": "string"
 		//	}
 		"cache_shared_target_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "如果 CacheShared 是 cache_shared_on，该参数表示该域名所在的 \"共享缓存\" 配置中的 \"目标域名\"。\n  如果 CacheShared 是 target_host，该参数值为空（\"\"）。",
+			Description: "If CacheShared is cache_shared_on, this parameter indicates the 'Target Domain' in the 'Shared Cache' configuration for this domain name. If CacheShared is target_host, this parameter is empty (\"\").",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Cname
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示内容分发网络为该加速域名分配的 CNAME。",
+		//	  "description": "Indicates the CNAME assigned by the content delivery network to the acceleration domain name.",
 		//	  "type": "string"
 		//	}
 		"cname": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示内容分发网络为该加速域名分配的 CNAME。",
+			Description: "Indicates the CNAME assigned by the content delivery network to the acceleration domain name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Compression
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"智能压缩\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Represents the configuration module for the 'Smart Compression' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "CompressionRules": {
-		//	      "description": "表示一组智能压缩的配置规则。当 Switch 是 true 时，该参数为必填。",
+		//	      "description": "Indicates a set of smart compression configuration rules. This parameter is required when Switch is true.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一组智能压缩的配置规则。当 Switch 是 true 时，该参数为必填。",
+		//	        "description": "Indicates a set of smart compression configuration rules. This parameter is required when Switch is true.",
 		//	        "properties": {
 		//	          "CompressionAction": {
-		//	            "description": "表示压缩操作的配置。",
+		//	            "description": "Represents the configuration for compression operations.",
 		//	            "properties": {
 		//	              "CompressionFormat": {
-		//	                "description": "如果匹配条件是基于 Content-Type 头部（此时，Condition 是 null 或不指定），该参数用来指定 Content-Type 的匹配条件，有以下取值：default: 表示匹配条件是 Content-Type 头部匹配默认 Content-Type 列表中包含的文件类型。customize：表示匹配条件是 Content-Type 头部匹配自定义的文件类型。如果 Conditon 不为 null，表示匹配条件是在 ConditionRule 中定义的。此时，该参数必须设置为 all。",
+		//	                "description": "If the matching condition is based on the Content-Type header (when Condition is null or not specified), this parameter specifies the matching criteria for Content-Type. The values are as follows: default: matches file types included in the default Content-Type list. customize: matches custom file types in the Content-Type header. If Condition is not null, the matching criteria are defined in ConditionRule. In this case, this parameter must be set to all.",
 		//	                "type": "string"
 		//	              },
 		//	              "CompressionTarget": {
-		//	                "description": "指定压缩的文件类型。该参数的说明如下：如果 CompressionFormat 为 default，该参数必须设置为 *，表示默认的 Content-Type 列表。该列表包含以下文件类型：text/html、text/xml、text/plain、text/css、application/javascript、application/x-javascript、application/rss+xml、text/javascript、image/tiff、image/svg+xml、application/json、application/xml、text/plain; charset=utf-8。如果 CompressionFormat 为 customize，需要指定一个或者多个文件类型。多个文件类型以逗号（,）分隔。如果 CompressionFormat 为 all，该参数必须设置为 *。",
+		//	                "description": "Specifies the file types to compress. The parameter is described as follows: If CompressionFormat is default, this parameter must be set to *, indicating the default Content-Type list. The list includes the following file types: text/html, text/xml, text/plain, text/css, application/javascript, application/x-javascript, application/rss+xml, text/javascript, image/tiff, image/svg+xml, application/json, application/xml, text/plain; charset=utf-8. If CompressionFormat is customize, you need to specify one or more file types. Multiple file types are separated by commas (,). If CompressionFormat is all, this parameter must be set to *.",
 		//	                "type": "string"
 		//	              },
 		//	              "CompressionType": {
-		//	                "description": "压缩算法，gzip,br 指定类型压缩，default：默认所有文件压缩，次数Target为*；customize：自定义文件类型压缩. choices: [default, customize]",
+		//	                "description": "Compression algorithm: gzip and br specify the compression type. default: compresses all files by default, with the target count as *. customize: compresses custom file types. Choices: [default, customize]",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -812,12 +812,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "MaxFileSizeKB": {
-		//	                "description": "表示文件大小范围的最小值，CDN 仅对大小在 MinFileSizeKB 和 MaxFileSizeKB 所表示的范围内的文件进行压缩。该参数的取值范围是 0 - 2,147,483,647，单位是 KB，使用的进制是 1,024。该参数的默认值是 0。",
+		//	                "description": "Indicates the minimum value for the file size range. CDN only compresses files within the range specified by MinFileSizeKB and MaxFileSizeKB. The parameter value range is 0 - 2,147,483,647, the unit is KB, and the base is 1,024. The default value is 0.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              },
 		//	              "MinFileSizeKB": {
-		//	                "description": "表示文件大小范围的最大值，取值范围是 0 - 2,147,483,647，单位是 KB，使用的进制是 1,024。如果不指定该参数，表示您不限制文件大小的上限。",
+		//	                "description": "Indicates the maximum value for the file size range. The value range is 0 - 2,147,483,647, in KB, using a base of 1,024. If this parameter is not specified, there is no upper limit for file size.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              }
@@ -825,32 +825,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -860,7 +860,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -873,7 +873,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "智能压缩配置开关。该参数有以下取值：true：表示启用智能压缩。false：表示禁用智能压缩。",
+		//	      "description": "Smart compression configuration switch. This parameter has the following values: true: enables smart compression. false: disables smart compression.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -890,32 +890,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: CompressionFormat
 									"compression_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "如果匹配条件是基于 Content-Type 头部（此时，Condition 是 null 或不指定），该参数用来指定 Content-Type 的匹配条件，有以下取值：default: 表示匹配条件是 Content-Type 头部匹配默认 Content-Type 列表中包含的文件类型。customize：表示匹配条件是 Content-Type 头部匹配自定义的文件类型。如果 Conditon 不为 null，表示匹配条件是在 ConditionRule 中定义的。此时，该参数必须设置为 all。",
+										Description: "If the matching condition is based on the Content-Type header (when Condition is null or not specified), this parameter specifies the matching criteria for Content-Type. The values are as follows: default: matches file types included in the default Content-Type list. customize: matches custom file types in the Content-Type header. If Condition is not null, the matching criteria are defined in ConditionRule. In this case, this parameter must be set to all.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: CompressionTarget
 									"compression_target": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "指定压缩的文件类型。该参数的说明如下：如果 CompressionFormat 为 default，该参数必须设置为 *，表示默认的 Content-Type 列表。该列表包含以下文件类型：text/html、text/xml、text/plain、text/css、application/javascript、application/x-javascript、application/rss+xml、text/javascript、image/tiff、image/svg+xml、application/json、application/xml、text/plain; charset=utf-8。如果 CompressionFormat 为 customize，需要指定一个或者多个文件类型。多个文件类型以逗号（,）分隔。如果 CompressionFormat 为 all，该参数必须设置为 *。",
+										Description: "Specifies the file types to compress. The parameter is described as follows: If CompressionFormat is default, this parameter must be set to *, indicating the default Content-Type list. The list includes the following file types: text/html, text/xml, text/plain, text/css, application/javascript, application/x-javascript, application/rss+xml, text/javascript, image/tiff, image/svg+xml, application/json, application/xml, text/plain; charset=utf-8. If CompressionFormat is customize, you need to specify one or more file types. Multiple file types are separated by commas (,). If CompressionFormat is all, this parameter must be set to *.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: CompressionType
 									"compression_type": schema.SetAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "压缩算法，gzip,br 指定类型压缩，default：默认所有文件压缩，次数Target为*；customize：自定义文件类型压缩. choices: [default, customize]",
+										Description: "Compression algorithm: gzip and br specify the compression type. default: compresses all files by default, with the target count as *. customize: compresses custom file types. Choices: [default, customize]",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: MaxFileSizeKB
 									"max_file_size_kb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示文件大小范围的最小值，CDN 仅对大小在 MinFileSizeKB 和 MaxFileSizeKB 所表示的范围内的文件进行压缩。该参数的取值范围是 0   - 2,147,483,647，单位是 KB，使用的进制是 1,024。该参数的默认值是 0。",
+										Description: "Indicates the minimum value for the file size range. CDN only compresses files within the range specified by MinFileSizeKB and MaxFileSizeKB. The parameter value range is 0   - 2,147,483,647, the unit is KB, and the base is 1,024. The default value is 0.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: MinFileSizeKB
 									"min_file_size_kb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示文件大小范围的最大值，取值范围是 0   - 2,147,483,647，单位是 KB，使用的进制是 1,024。如果不指定该参数，表示您不限制文件大小的上限。",
+										Description: "Indicates the maximum value for the file size range. The value range is 0   - 2,147,483,647, in KB, using a base of 1,024. If this parameter is not specified, there is no upper limit for file size.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示压缩操作的配置。",
+								Description: "Represents the configuration for compression operations.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Condition
@@ -927,96 +927,96 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一组智能压缩的配置规则。当 Switch 是 true 时，该参数为必填。",
+					Description: "Indicates a set of smart compression configuration rules. This parameter is required when Switch is true.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "智能压缩配置开关。该参数有以下取值：true：表示启用智能压缩。false：表示禁用智能压缩。",
+					Description: "Smart compression configuration switch. This parameter has the following values: true: enables smart compression. false: disables smart compression.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"智能压缩\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Represents the configuration module for the 'Smart Compression' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConditionalOrigin
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"条件源站\" 特性的配置模块。",
+		//	  "description": "Specifies the configuration module for the 'Conditional Origin' feature.",
 		//	  "properties": {
 		//	    "OriginRules": {
-		//	      "description": "表示一个规则列表。列表中的每条规则中定义了一个过滤器以及内容分发网络对满足过滤条件的请求所执行的操作。\n\n列表中最多可以包含 50 条规则。",
+		//	      "description": "Indicates a list of rules. Each rule in the list defines a filter and the action the content delivery network performs on requests that meet the filter criteria.\n\nThe list can contain up to 50 rules.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一个规则。每条规则中定义了一个过滤器以及内容分发网络对满足过滤条件的请求所执行的操作。",
+		//	        "description": "Indicates a rule. Each rule defines a filter and the action the content delivery network takes for requests that meet the filter criteria.",
 		//	        "properties": {
 		//	          "Actions": {
-		//	            "description": "表示列表中一条规则的操作配置。",
+		//	            "description": "Indicates the operation configuration for a rule in the list.",
 		//	            "properties": {
 		//	              "OriginLines": {
-		//	                "description": "表示一个源站配置列表。当前，列表中只能包含一个源站配置。",
+		//	                "description": "Indicates a list of origin configurations. Currently, the list can contain only one origin configuration.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个源站配置。",
+		//	                  "description": "Indicates an origin configuration.",
 		//	                  "properties": {
 		//	                    "Address": {
-		//	                      "description": "表示一个源站的地址。当 InstanceType 是 ip 时，Address 表示一个 IPv4 或者 IPv6 地址。当 InstanceType 是 domain 时，Address 表示一个域名。该域名不能是泛域名。如果您指定了 OriginLines，Address 必填。",
+		//	                      "description": "Represents the address of an origin server. When InstanceType is ip, Address specifies an IPv4 or IPv6 address. When InstanceType is domain, Address specifies a domain name. The domain name cannot be a wildcard domain. If you specify OriginLines, Address is required.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "HttpPort": {
-		//	                      "description": "表示内容分发网络使用 HTTP 协议访问该源站时所使用的端口，取值范围是 1-65535，默认值是 80。如果源站没有开放该端口，您无需指定该参数。",
+		//	                      "description": "Indicates the port used by the content delivery network to access the origin server via the HTTP protocol. The valid range is 1–65535, with a default value of 80. If the origin server does not have this port open, you do not need to specify this parameter.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "HttpsPort": {
-		//	                      "description": "表示内容分发网络使用 HTTPS 协议访问该源站时所使用的端口，取值范围是 1-65535，默认值是 443。如果源站没有开放该端口，您无需指定该参数。",
+		//	                      "description": "Specifies the port used by the content delivery network to access the origin server via HTTPS. The value range is 1–65535, and the default is 443. If the origin server does not open this port, you do not need to specify this parameter.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "InstanceType": {
-		//	                      "description": "表示源站的类型。该参数有以下取值：ip：表示 IP 地址。domain：表示域名。如果您指定了 OriginLines，InstanceType 必填。",
+		//	                      "description": "Indicates the type of origin. The parameter has the following values: ip: indicates an IP address. domain: indicates a domain name. InstanceType is required if OriginLines is specified.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "OriginHost": {
-		//	                      "description": "如果源站服务器上有多个站点，该参数表示回源请求访问的站点域名。该参数的优先级高于全局 OriginHost 参数。该参数值的长度不能超过 1,024 个字符。该参数的默认值与全局 OriginHost 相同。",
+		//	                      "description": "If there are multiple sites on the origin server, this parameter specifies the domain name accessed by the origin request. This parameter takes precedence over the global OriginHost parameter. The value of this parameter cannot exceed 1,024 characters. The default value is the same as the global OriginHost.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -1029,7 +1029,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionGroups": {
 		//	                "description": "ConditionGroups",
@@ -1038,18 +1038,18 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "description": "ConditionGroups",
 		//	                  "properties": {
 		//	                    "Condition": {
-		//	                      "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	                      "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	                      "properties": {
 		//	                        "Object": {
-		//	                          "description": "表示一个过滤类型。该参数有以下取值：path：表示请求 URL 中的完整路径。directory：表示路径中的任意一个目录。假设路径是 /a/b/c/d/file，则 /a/、/b/c/、/d/ 都是目录。filetype：表示路径末尾的扩展名。full_querystring：表示请求 URL 中的查询字符串。client_ip：表示客户端的 IP 地址或者 IP 地址的归属地。如果您指定了 Condition，Object 必填。",
+		//	                          "description": "Indicates a filter type. This parameter has the following values: path: The full path in the request URL. directory: Any directory in the path. For example, if the path is /a/b/c/d/file, then /a/, /b/c/, and /d/ are directories. filetype: The extension at the end of the path. full_querystring: The query string in the request URL. client_ip: The client's IP address or the location associated with the IP address. If you specify Condition, Object is required.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Operator": {
-		//	                          "description": "表示一个对比类型。不同的 Object 对应不同的取值。当 Object 是 path、directory 或 filetype 时，该参数的取值有 equal、not_equal。当 Object 是 path 时，该参数还有额外取值 regex_match、regex_not_match。当 Object 是 full_querystring 时，该参数的取值有 regex_match、regex_not_match。当 Object 是 client_ip 时，该参数的取值有 equal、not_equal、belong、not_belong。各对比类型的说明如下：equal：表示如果 Object 匹配了 Value 中的某个过滤值，该请求就满足这个过滤条件。not_equal：表示如果 Object 不匹配 Value 中的所有过滤值，该请求才满足这个过滤条件。regex_match：表示如果 Value 中的某个正则表达式匹配了 Object 中的任何部分，该请求就满足这个过滤条件。regex_not_match：表示如果 Value 中的所有正则表达式都不匹配 Object 中的任何部分，该请求才满足这个过滤条件。belong：表示如果客户端 IP 地址归属地在 Value 所表示国家和地区列表中，该请求就满足这个过滤条件。not_belong：表示如果客户端 IP 地址归属地不在 Value 所表示国家和地区列表中，该请求才满足这个过滤条件。如果您指定了 Condition，Operator 必填。",
+		//	                          "description": "Specifies a comparison type. Different Objects correspond to different values. When Object is path, directory, or filetype, the parameter values are equal and not_equal. When Object is path, additional values are regex_match and regex_not_match. When Object is full_querystring, the values are regex_match and regex_not_match. When Object is client_ip, the values are equal, not_equal, belong, and not_belong. The comparison types are explained as follows: equal: If Object matches any filter value in Value, the request meets this filter condition. not_equal: If Object does not match any filter value in Value, the request meets this filter condition. regex_match: If any regular expression in Value matches any part of Object, the request meets this filter condition. regex_not_match: If none of the regular expressions in Value match any part of Object, the request meets this filter condition. belong: If the client IP address belongs to any country or region listed in Value, the request meets this filter condition. not_belong: If the client IP address does not belong to any country or region listed in Value, the request meets this filter condition. If you specify Condition, Operator is required.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
-		//	                          "description": "表示一个或者多个过滤值。过滤值之间使用分号（;）分隔。该参数的输入要求如下：当 Object 是 path、directory 或 filetype 时，所有过滤值的总长度不能超过 1,024 个字符，不能包含以下字符：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。当 Object 是 path 时，该参数有以下额外要求：每个过滤值必须以斜杠（/）开头，但不能以 / 结尾。您可以在过滤值中使用一个或者多个星号（*），每个星号表示一个或者多个字符。例如：/www/img/my*image.png。当 Object 是 directory 时，该参数有以下额外要求：每个过滤值必须以斜杠（/）开头和结尾。例如：/www/img/。当 Object 是 filetype 时，该参数有以下额外要求：每个过滤值无需以句点（.）开头。例如：png;txt。当 Object 是 full_querystring 时，该参数的输入要求如下：所有过滤值的总长度不能超过 256 个字符。过滤值可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。当 Object 是 client_ip 时，如果 Operator 是 equal 或者 not_equal，该参数的输入要求如下：IP 地址的数量不能超过 5 个。IP 地址必须是 IPv4 地址。如果您指定了 Condition，Value 必填。",
+		//	                          "description": "Represents one or more filter values. Filter values are separated by semicolons (;). The input requirements for this parameter are as follows: When Object is path, directory, or filetype, the total length of all filter values must not exceed 1,024 characters and must not contain the following characters: consecutive slashes (//), spaces, dollar sign ($), question mark (?), or Delete (ASCII code 127). When Object is path, this parameter has the following additional requirements: each filter value must start with a slash (/) but must not end with a slash (/). You can use one or more asterisks (*) in the filter value, where each asterisk represents one or more characters. For example: /www/img/my*image.png. When Object is directory, this parameter has the following additional requirements: each filter value must start and end with a slash (/). For example: /www/img/. When Object is filetype, this parameter has the following additional requirements: each filter value does not need to start with a period (.). For example: png;txt. When Object is full_querystring, the input requirements for this parameter are as follows: the total length of all filter values must not exceed 256 characters. Filter values can include numbers, letters, percent sign (%), underscore (_), and hyphen (-). When Object is client_ip, if Operator is equal or not_equal, the input requirements for this parameter are as follows: the number of IP addresses must not exceed 5. IP addresses must be IPv4 addresses. If you specify Condition, Value is required.",
 		//	                          "insertionOrder": false,
 		//	                          "items": {
 		//	                            "type": "string"
@@ -1067,11 +1067,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示这些条件组之间的关系。该参数有以下取值：or：表示关系是 \"或\"。在这个情况下，只要满足一个条件组，用户请求就匹配该规则。and：表示关系是 \"与\"。在这个情况下，必须满足所有条件组，用户请求才匹配该规则。该参数的默认值是 or。",
+		//	                "description": "Specifies the relationship between these condition groups. This parameter has the following values: or: Indicates an 'or' relationship. In this case, if any condition group is met, the user request matches the rule. and: Indicates an 'and' relationship. In this case, all condition groups must be met for the user request to match the rule. The default value is or.",
 		//	                "type": "string"
 		//	              },
 		//	              "IsGroup": {
-		//	                "description": "表示每个过滤条件是否是一个条件组。该参数值始终是 true，表示每个过滤条件是一个条件组。当前，每个条件组中只能包含一个过滤条件。",
+		//	                "description": "Indicates whether each filter condition is a condition group. The value of this parameter is always true, meaning each filter condition is a condition group. Currently, each condition group can only contain one filter condition.",
 		//	                "type": "boolean"
 		//	              }
 		//	            },
@@ -1084,7 +1084,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether this feature is enabled. The parameter has the following values: true: enables the feature. false: disables the feature. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -1105,36 +1105,36 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Address
 												"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个源站的地址。当 InstanceType 是 ip 时，Address 表示一个 IPv4 或者 IPv6 地址。当 InstanceType 是 domain 时，Address 表示一个域名。该域名不能是泛域名。如果您指定了 OriginLines，Address 必填。",
+													Description: "Represents the address of an origin server. When InstanceType is ip, Address specifies an IPv4 or IPv6 address. When InstanceType is domain, Address specifies a domain name. The domain name cannot be a wildcard domain. If you specify OriginLines, Address is required.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: HttpPort
 												"http_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示内容分发网络使用 HTTP 协议访问该源站时所使用的端口，取值范围是 1-65535，默认值是 80。如果源站没有开放该端口，您无需指定该参数。",
+													Description: "Indicates the port used by the content delivery network to access the origin server via the HTTP protocol. The valid range is 1–65535, with a default value of 80. If the origin server does not have this port open, you do not need to specify this parameter.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: HttpsPort
 												"https_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示内容分发网络使用 HTTPS 协议访问该源站时所使用的端口，取值范围是 1-65535，默认值是 443。如果源站没有开放该端口，您无需指定该参数。",
+													Description: "Specifies the port used by the content delivery network to access the origin server via HTTPS. The value range is 1–65535, and the default is 443. If the origin server does not open this port, you do not need to specify this parameter.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: InstanceType
 												"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示源站的类型。该参数有以下取值：ip：表示 IP 地址。domain：表示域名。如果您指定了 OriginLines，InstanceType 必填。",
+													Description: "Indicates the type of origin. The parameter has the following values: ip: indicates an IP address. domain: indicates a domain name. InstanceType is required if OriginLines is specified.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: OriginHost
 												"origin_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "如果源站服务器上有多个站点，该参数表示回源请求访问的站点域名。该参数的优先级高于全局 OriginHost 参数。该参数值的长度不能超过 1,024 个字符。该参数的默认值与全局 OriginHost 相同。",
+													Description: "If there are multiple sites on the origin server, this parameter specifies the domain name accessed by the origin request. This parameter takes precedence over the global OriginHost parameter. The value of this parameter cannot exceed 1,024 characters. The default value is the same as the global OriginHost.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个源站配置列表。当前，列表中只能包含一个源站配置。",
+										Description: "Indicates a list of origin configurations. Currently, the list can contain only one origin configuration.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示列表中一条规则的操作配置。",
+								Description: "Indicates the operation configuration for a rule in the list.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Condition
@@ -1149,22 +1149,22 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Object
 														"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示一个过滤类型。该参数有以下取值：path：表示请求 URL 中的完整路径。directory：表示路径中的任意一个目录。假设路径是 /a/b/c/d/file，则 /a/、/b/c/、/d/ 都是目录。filetype：表示路径末尾的扩展名。full_querystring：表示请求 URL 中的查询字符串。client_ip：表示客户端的 IP 地址或者 IP 地址的归属地。如果您指定了 Condition，Object 必填。",
+															Description: "Indicates a filter type. This parameter has the following values: path: The full path in the request URL. directory: Any directory in the path. For example, if the path is /a/b/c/d/file, then /a/, /b/c/, and /d/ are directories. filetype: The extension at the end of the path. full_querystring: The query string in the request URL. client_ip: The client's IP address or the location associated with the IP address. If you specify Condition, Object is required.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Operator
 														"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示一个对比类型。不同的 Object 对应不同的取值。当 Object 是 path、directory 或 filetype 时，该参数的取值有 equal、not_equal。当 Object 是 path 时，该参数还有额外取值 regex_match、regex_not_match。当 Object 是 full_querystring 时，该参数的取值有 regex_match、regex_not_match。当 Object 是 client_ip 时，该参数的取值有 equal、not_equal、belong、not_belong。各对比类型的说明如下：equal：表示如果 Object 匹配了 Value 中的某个过滤值，该请求就满足这个过滤条件。not_equal：表示如果 Object 不匹配 Value 中的所有过滤值，该请求才满足这个过滤条件。regex_match：表示如果 Value 中的某个正则表达式匹配了 Object 中的任何部分，该请求就满足这个过滤条件。regex_not_match：表示如果 Value 中的所有正则表达式都不匹配 Object 中的任何部分，该请求才满足这个过滤条件。belong：表示如果客户端 IP 地址归属地在 Value 所表示国家和地区列表中，该请求就满足这个过滤条件。not_belong：表示如果客户端 IP 地址归属地不在 Value 所表示国家和地区列表中，该请求才满足这个过滤条件。如果您指定了 Condition，Operator 必填。",
+															Description: "Specifies a comparison type. Different Objects correspond to different values. When Object is path, directory, or filetype, the parameter values are equal and not_equal. When Object is path, additional values are regex_match and regex_not_match. When Object is full_querystring, the values are regex_match and regex_not_match. When Object is client_ip, the values are equal, not_equal, belong, and not_belong. The comparison types are explained as follows: equal: If Object matches any filter value in Value, the request meets this filter condition. not_equal: If Object does not match any filter value in Value, the request meets this filter condition. regex_match: If any regular expression in Value matches any part of Object, the request meets this filter condition. regex_not_match: If none of the regular expressions in Value match any part of Object, the request meets this filter condition. belong: If the client IP address belongs to any country or region listed in Value, the request meets this filter condition. not_belong: If the client IP address does not belong to any country or region listed in Value, the request meets this filter condition. If you specify Condition, Operator is required.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.SetAttribute{ /*START ATTRIBUTE*/
 															ElementType: types.StringType,
-															Description: "表示一个或者多个过滤值。过滤值之间使用分号（;）分隔。该参数的输入要求如下：当 Object 是 path、directory 或 filetype 时，所有过滤值的总长度不能超过 1,024 个字符，不能包含以下字符：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。当 Object 是 path 时，该参数有以下额外要求：每个过滤值必须以斜杠（/）开头，但不能以 / 结尾。您可以在过滤值中使用一个或者多个星号（*），每个星号表示一个或者多个字符。例如：/www/img/my*image.png。当 Object 是 directory 时，该参数有以下额外要求：每个过滤值必须以斜杠（/）开头和结尾。例如：/www/img/。当 Object 是 filetype 时，该参数有以下额外要求：每个过滤值无需以句点（.）开头。例如：png;txt。当 Object 是 full_querystring 时，该参数的输入要求如下：所有过滤值的总长度不能超过 256 个字符。过滤值可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。当 Object 是 client_ip 时，如果 Operator 是 equal 或者 not_equal，该参数的输入要求如下：IP 地址的数量不能超过 5 个。IP 地址必须是 IPv4 地址。如果您指定了 Condition，Value 必填。",
+															Description: "Represents one or more filter values. Filter values are separated by semicolons (;). The input requirements for this parameter are as follows: When Object is path, directory, or filetype, the total length of all filter values must not exceed 1,024 characters and must not contain the following characters: consecutive slashes (//), spaces, dollar sign ($), question mark (?), or Delete (ASCII code 127). When Object is path, this parameter has the following additional requirements: each filter value must start with a slash (/) but must not end with a slash (/). You can use one or more asterisks (*) in the filter value, where each asterisk represents one or more characters. For example: /www/img/my*image.png. When Object is directory, this parameter has the following additional requirements: each filter value must start and end with a slash (/). For example: /www/img/. When Object is filetype, this parameter has the following additional requirements: each filter value does not need to start with a period (.). For example: png;txt. When Object is full_querystring, the input requirements for this parameter are as follows: the total length of all filter values must not exceed 256 characters. Filter values can include numbers, letters, percent sign (%), underscore (_), and hyphen (-). When Object is client_ip, if Operator is equal or not_equal, the input requirements for this parameter are as follows: the number of IP addresses must not exceed 5. IP addresses must be IPv4 addresses. If you specify Condition, Value is required.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "表示该配置模块的生效条件，由一组规则组成。",
+													Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -1174,73 +1174,73 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示这些条件组之间的关系。该参数有以下取值：or：表示关系是 \"或\"。在这个情况下，只要满足一个条件组，用户请求就匹配该规则。and：表示关系是 \"与\"。在这个情况下，必须满足所有条件组，用户请求才匹配该规则。该参数的默认值是 or。",
+										Description: "Specifies the relationship between these condition groups. This parameter has the following values: or: Indicates an 'or' relationship. In this case, if any condition group is met, the user request matches the rule. and: Indicates an 'and' relationship. In this case, all condition groups must be met for the user request to match the rule. The default value is or.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: IsGroup
 									"is_group": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "表示每个过滤条件是否是一个条件组。该参数值始终是 true，表示每个过滤条件是一个条件组。当前，每个条件组中只能包含一个过滤条件。",
+										Description: "Indicates whether each filter condition is a condition group. The value of this parameter is always true, meaning each filter condition is a condition group. Currently, each condition group can only contain one filter condition.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一个规则列表。列表中的每条规则中定义了一个过滤器以及内容分发网络对满足过滤条件的请求所执行的操作。\n  \n  列表中最多可以包含 50 条规则。",
+					Description: "Indicates a list of rules. Each rule in the list defines a filter and the action the content delivery network performs on requests that meet the filter criteria.\n  \n  The list can contain up to 50 rules.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether this feature is enabled. The parameter has the following values: true: enables the feature. false: disables the feature. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"条件源站\" 特性的配置模块。",
+			Description: "Specifies the configuration module for the 'Conditional Origin' feature.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该加速域名的创建时间，格式是 Unix 时间戳。",
+		//	  "description": "Indicates the creation time of this accelerated domain name, in Unix timestamp format.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "表示该加速域名的创建时间，格式是 Unix 时间戳。",
+			Description: "Indicates the creation time of this accelerated domain name, in Unix timestamp format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomErrorPage
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"自定义错误页面\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the \"Custom Error Page\" feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "ErrorPageRule": {
-		//	      "description": "表示一个配置规则的集合。您最多可以添加 50 条规则。",
+		//	      "description": "Indicates a set of configuration rules. You can add up to 50 rules.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一个错误页面配置规则。",
+		//	        "description": "Indicates an error page configuration rule",
 		//	        "properties": {
 		//	          "ErrorPageAction": {
-		//	            "description": "表示规则的相关配置。",
+		//	            "description": "Indicates the relevant configuration for the rule.",
 		//	            "properties": {
 		//	              "Action": {
-		//	                "description": "表示实际的操作。当前您只能指定该参数值为 redirect。表示对客户端请求进行重定向。",
+		//	                "description": "Indicates the actual operation. Currently, you can only set this parameter to redirect. This means the client request will be redirected.",
 		//	                "type": "string"
 		//	              },
 		//	              "RedirectCode": {
-		//	                "description": "表示重定向的响应状态码。您可以根据需求选择合适的状态码。该参数的取值有 301、302、303、307、308。需要留意的是：对于 301 和 302，如果原请求使用的方法不是 GET，那么客户端向新的URL发送请求时，新请求使用的方法可能变成 GET。对于 303，新请求使用的方法是 GET。对于 307 和 308，新请求使用的方法与原请求相同，不会被改变。",
+		//	                "description": "Indicates the response status code for redirection. You can select an appropriate status code as needed. The available values are 301, 302, 303, 307, and 308. Note: For 301 and 302, if the original request method is not GET, the client may use GET when sending the new request to the new URL. For 303, the new request method is GET. For 307 and 308, the new request method remains the same as the original request and will not be changed.",
 		//	                "type": "string"
 		//	              },
 		//	              "RedirectUrl": {
-		//	                "description": "表示跳转的目标地址，长度不能超过 1,024 个字符。地址必须包含协议，域名以及路径，并且符合 URL 的规范。",
+		//	                "description": "Indicates the target address for redirection. The length must not exceed 1,024 characters. The address must include the protocol, domain name, and path, and comply with URL specifications.",
 		//	                "type": "string"
 		//	              },
 		//	              "StatusCode": {
-		//	                "description": "表示一个状态码，取值范围是 400-599。您可以输入 4xx 或者 5xx。4xx 表示 400-499 之间的所有状态码。5xx 表示 500-599 之间的所有状态码。",
+		//	                "description": "Indicates a status code, with a value range of 400–599. You can enter 4xx or 5xx. 4xx covers all status codes from 400 to 499. 5xx covers all status codes from 500 to 599.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -1253,7 +1253,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether this feature is enabled. The parameter values are: true: Enabled. false: Disabled. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -1270,66 +1270,66 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Action
 									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示实际的操作。当前您只能指定该参数值为 redirect。表示对客户端请求进行重定向。",
+										Description: "Indicates the actual operation. Currently, you can only set this parameter to redirect. This means the client request will be redirected.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: RedirectCode
 									"redirect_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示重定向的响应状态码。您可以根据需求选择合适的状态码。该参数的取值有 301、302、303、307、308。需要留意的是：对于 301 和 302，如果原请求使用的方法不是 GET，那么客户端向新的URL发送请求时，新请求使用的方法可能变成 GET。对于 303，新请求使用的方法是 GET。对于 307 和 308，新请求使用的方法与原请求相同，不会被改变。",
+										Description: "Indicates the response status code for redirection. You can select an appropriate status code as needed. The available values are 301, 302, 303, 307, and 308. Note: For 301 and 302, if the original request method is not GET, the client may use GET when sending the new request to the new URL. For 303, the new request method is GET. For 307 and 308, the new request method remains the same as the original request and will not be changed.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: RedirectUrl
 									"redirect_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示跳转的目标地址，长度不能超过 1,024 个字符。地址必须包含协议，域名以及路径，并且符合 URL 的规范。",
+										Description: "Indicates the target address for redirection. The length must not exceed 1,024 characters. The address must include the protocol, domain name, and path, and comply with URL specifications.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: StatusCode
 									"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示一个状态码，取值范围是 400-599。您可以输入 4xx 或者 5xx。4xx 表示 400-499 之间的所有状态码。5xx 表示 500-599 之间的所有状态码。",
+										Description: "Indicates a status code, with a value range of 400–599. You can enter 4xx or 5xx. 4xx covers all status codes from 400 to 499. 5xx covers all status codes from 500 to 599.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示规则的相关配置。",
+								Description: "Indicates the relevant configuration for the rule.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一个配置规则的集合。您最多可以添加 50 条规则。",
+					Description: "Indicates a set of configuration rules. You can add up to 50 rules.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether this feature is enabled. The parameter values are: true: Enabled. false: Disabled. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"自定义错误页面\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the \"Custom Error Page\" feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomizeAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"自定义头部黑白名单\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Represents the configuration module for the 'Custom Header Allowlist and Blocklist' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "CustomizeInstances": {
-		//	      "description": "表示一个规则列表。列表中的每条规则中定义了一个黑名单或者白名单的配置。列表中最多可以包含 10 条规则。",
+		//	      "description": "Describes a rule list. Each rule in the list defines a Denylist or Allowlist configuration. The list can contain up to 10 rules.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一个规则配置。",
+		//	        "description": "Indicates a rule configuration.",
 		//	        "properties": {
 		//	          "CustomizeRule": {
-		//	            "description": "表示列表中一条规则的配置。",
+		//	            "description": "Describes the configuration for a rule in the list.",
 		//	            "properties": {
 		//	              "AccessAction": {
-		//	                "description": "表示该规则中的黑名单或者白名单的配置。",
+		//	                "description": "Indicates the configuration of the denylist or allowlist in this rule.",
 		//	                "properties": {
 		//	                  "AllowEmpty": {
-		//	                    "description": "表示 CDN 是否接受 RequestHeader 的值为空的用户请求。头部值为空指的是以下任意情况：用户请求不包含 RequestHeader。用户请求包含 RequestHeader，但头部值为空（\"\"）。",
+		//	                    "description": "Indicates whether the CDN accepts user requests where the RequestHeader value is empty. An empty header value refers to either of the following situations: The user request does not include RequestHeader. The user request includes RequestHeader, but the header value is empty (\"\").",
 		//	                    "type": "boolean"
 		//	                  },
 		//	                  "ListRules": {
-		//	                    "description": "表示一个正则表达式列表，用于匹配请求头的值。列表中的正则表达式不能超过 20 个，所有正则表达式总长度不能超过 1,024 个字符。正则表达式之间的关系是或。也就是说，如果一个用户请求中 RequestHeader 的值匹配任何一个正则表达式，该规则就匹配了这个请求。",
+		//	                    "description": "Indicates a list of regular expressions used to match the value of the request header. The list can contain up to 20 regular expressions, and the total length of all expressions cannot exceed 1,024 characters. The relationship between the regular expressions is OR. That is, if the value of RequestHeader in a user request matches any regular expression, the rule applies to the request.",
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "type": "string"
@@ -1338,43 +1338,43 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "uniqueItems": true
 		//	                  },
 		//	                  "RequestHeader": {
-		//	                    "description": "表示一个指定的请求头。头部名称不区分大小写，并且有以下要求：名称的长度不超过 1,024 个字符，名称不能是 Referer、User-Agent 或 Origin。名称可以包含字母，数字，下划线（_），连字符（-）。名称不能以数字开头。",
+		//	                    "description": "Indicates a specified request header. Header names are case-insensitive and must meet the following requirements: The name must not exceed 1,024 characters. The name cannot be Referer, User-Agent, or Origin. The name can contain letters, digits, underscores (_), and hyphens (-). The name cannot start with a digit.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "RuleType": {
-		//	                    "description": "表示名单的类型。该参数有以下取值：allow：表示该规则中定义的是一个白名单。如果一个用户请求不匹配白名单，CDN 会拒绝该请求，响应 403 状态码。deny：表示该规则中定义的是一个黑名单。如果一个用户请求匹配了黑名单，CDN 会拒绝该请求，响应 403 状态码。",
+		//	                    "description": "Indicates the type of list. This parameter has the following values: allow: defines an allowlist in this rule. If a user request does not match the allowlist, the CDN rejects the request and returns a 403 status code. deny: defines a denylist in this rule. If a user request matches the denylist, the CDN rejects the request and returns a 403 status code.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
 		//	                "type": "object"
 		//	              },
 		//	              "Condition": {
-		//	                "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	                "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	                "properties": {
 		//	                  "ConditionRule": {
-		//	                    "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                    "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                    "insertionOrder": false,
 		//	                    "items": {
-		//	                      "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                      "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                      "properties": {
 		//	                        "Name": {
-		//	                          "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                          "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Object": {
-		//	                          "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                          "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Operator": {
-		//	                          "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                          "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Type": {
-		//	                          "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                          "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
-		//	                          "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                          "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -1384,7 +1384,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "uniqueItems": true
 		//	                  },
 		//	                  "Connective": {
-		//	                    "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                    "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -1400,7 +1400,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether this feature is enabled. This parameter has the following options: true: Enable this feature. false: Disable this feature. The default value for this parameter is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -1420,27 +1420,27 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: AllowEmpty
 											"allow_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Description: "表示 CDN 是否接受 RequestHeader 的值为空的用户请求。头部值为空指的是以下任意情况：用户请求不包含 RequestHeader。用户请求包含 RequestHeader，但头部值为空（\"\"）。",
+												Description: "Indicates whether the CDN accepts user requests where the RequestHeader value is empty. An empty header value refers to either of the following situations: The user request does not include RequestHeader. The user request includes RequestHeader, but the header value is empty (\"\").",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: ListRules
 											"list_rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
-												Description: "表示一个正则表达式列表，用于匹配请求头的值。列表中的正则表达式不能超过 20 个，所有正则表达式总长度不能超过 1,024 个字符。正则表达式之间的关系是或。也就是说，如果一个用户请求中 RequestHeader 的值匹配任何一个正则表达式，该规则就匹配了这个请求。",
+												Description: "Indicates a list of regular expressions used to match the value of the request header. The list can contain up to 20 regular expressions, and the total length of all expressions cannot exceed 1,024 characters. The relationship between the regular expressions is OR. That is, if the value of RequestHeader in a user request matches any regular expression, the rule applies to the request.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: RequestHeader
 											"request_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示一个指定的请求头。头部名称不区分大小写，并且有以下要求：名称的长度不超过 1,024 个字符，名称不能是 Referer、User-Agent 或 Origin。名称可以包含字母，数字，下划线（_），连字符（-）。名称不能以数字开头。",
+												Description: "Indicates a specified request header. Header names are case-insensitive and must meet the following requirements: The name must not exceed 1,024 characters. The name cannot be Referer, User-Agent, or Origin. The name can contain letters, digits, underscores (_), and hyphens (-). The name cannot start with a digit.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: RuleType
 											"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示名单的类型。该参数有以下取值：allow：表示该规则中定义的是一个白名单。如果一个用户请求不匹配白名单，CDN 会拒绝该请求，响应 403 状态码。deny：表示该规则中定义的是一个黑名单。如果一个用户请求匹配了黑名单，CDN 会拒绝该请求，响应 403 状态码。",
+												Description: "Indicates the type of list. This parameter has the following values: allow: defines an allowlist in this rule. If a user request does not match the allowlist, the CDN rejects the request and returns a 403 status code. deny: defines a denylist in this rule. If a user request matches the denylist, the CDN rejects the request and returns a 403 status code.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示该规则中的黑名单或者白名单的配置。",
+										Description: "Indicates the configuration of the denylist or allowlist in this rule.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Condition
@@ -1452,84 +1452,84 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Name
 														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+															Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Object
 														"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+															Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Operator
 														"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+															Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Type
 														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+															Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+															Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+												Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: Connective
 											"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+												Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示该配置模块的生效条件，由一组规则组成。",
+										Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示列表中一条规则的配置。",
+								Description: "Describes the configuration for a rule in the list.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一个规则列表。列表中的每条规则中定义了一个黑名单或者白名单的配置。列表中最多可以包含 10 条规则。",
+					Description: "Describes a rule list. Each rule in the list defines a Denylist or Allowlist configuration. The list can contain up to 10 rules.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether this feature is enabled. This parameter has the following options: true: Enable this feature. false: Disable this feature. The default value for this parameter is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"自定义头部黑白名单\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Represents the configuration module for the 'Custom Header Allowlist and Blocklist' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该加速域名。",
+		//	  "description": "Indicates the acceleration domain name.",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该加速域名。",
+			Description: "Indicates the acceleration domain name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainLock
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名的锁定状态。",
+		//	  "description": "Indicates the lock status of this domain name.",
 		//	  "properties": {
 		//	    "Remark": {
-		//	      "description": "表示该加速域名被锁定的原因。如果 Status 是 on，该参数值表示原因的描述。如果 Status 是 off，该参数值是空（\"\"）。",
+		//	      "description": "Indicates the reason why the acceleration domain is locked. If Status is on, this parameter provides a description of the reason. If Status is off, this parameter is empty (\"\")",
 		//	      "type": "string"
 		//	    },
 		//	    "Status": {
-		//	      "description": "表示该加速域名的锁定状态。该参数有以下取值：on：表示该加速域名已被锁定。off：表示该加速域名未被锁定。",
+		//	      "description": "Indicates the lock status of the acceleration domain name. The parameter has the following values: on: the acceleration domain name is locked. off: the acceleration domain name is not locked.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1539,57 +1539,57 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Remark
 				"remark": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示该加速域名被锁定的原因。如果 Status 是 on，该参数值表示原因的描述。如果 Status 是 off，该参数值是空（\"\"）。",
+					Description: "Indicates the reason why the acceleration domain is locked. If Status is on, this parameter provides a description of the reason. If Status is off, this parameter is empty (\"\")",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示该加速域名的锁定状态。该参数有以下取值：on：表示该加速域名已被锁定。off：表示该加速域名未被锁定。",
+					Description: "Indicates the lock status of the acceleration domain name. The parameter has the following values: on: the acceleration domain name is locked. off: the acceleration domain name is not locked.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示该域名的锁定状态。",
+			Description: "Indicates the lock status of this domain name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DownloadSpeedLimit
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"下载限速\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Represents the configuration module for the 'Download Speed Limit' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "DownloadSpeedLimitRules": {
-		//	      "description": "表示下载限速的规则。当 Switch 是 true 时，该参数为必填。",
+		//	      "description": "Indicates the rule for download rate limiting. This parameter is required when Switch is true.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示下载限速的规则。",
+		//	        "description": "Indicates the rules for download speed limiting.",
 		//	        "properties": {
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -1599,38 +1599,38 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "DownloadSpeedLimitAction": {
-		//	            "description": "表示限速配置。",
+		//	            "description": "Indicates the rate limiting configuration.",
 		//	            "properties": {
 		//	              "SpeedLimitRate": {
-		//	                "description": "表示单个请求的下载速度上限，单位是B/S。该参数的取值范围是 1-1,073,741,824,000,000，使用的进制转换是1,024。",
+		//	                "description": "Indicates the maximum download speed for a single request, measured in B/S. The parameter range is 1–1,073,741,824,000,000, using a base conversion of 1,024.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              },
 		//	              "SpeedLimitRateAfter": {
-		//	                "description": "表示一个数据量。在单个请求下载的数据量达到该值时，才对该请求启用下载限速。单位是Byte。该参数的取值范围是 0-1,073,741,824,000,000，使用的进制转换是1,024。",
+		//	                "description": "Represents a data volume. Download throttling is enabled for a request only when the amount of data downloaded in a single request reaches this value. Unit: Byte. The parameter range is 0–1,073,741,824,000,000, using a base of 1,024 for conversion.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              },
 		//	              "SpeedLimitTime": {
-		//	                "description": "表示限速发生的日期和时间段。",
+		//	                "description": "Indicates the date and time period when rate limiting occurs.",
 		//	                "properties": {
 		//	                  "BeginTime": {
-		//	                    "description": "表示限速发生的开始时间。时间格式是 mm:ss。如果 DayWeek 的参数值是 unlimited, BeginTime 和 EndTime 参数的默认值会分别被设置为 00:00 和 23:59。",
+		//	                    "description": "Indicates the start time for rate limiting. The time format is mm:ss. If the DayWeek parameter value is unlimited, the default values for BeginTime and EndTime will be set to 00:00 and 23:59, respectively.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "DayWeek": {
-		//	                    "description": "表示限速发生的日期。该参数有以下取值：monday，tuesday，wednesday，thursday，friday，saturday，sunday，unlimited。unlimited 表示每天。您可以指定一个或多个值。多个值之间使用英文分号（;）分隔。",
+		//	                    "description": "Specifies the date when rate limiting occurs. This parameter has the following values: monday, tuesday, wednesday, thursday, friday, saturday, sunday, unlimited. unlimited means every day. You can specify one or more values. Separate multiple values with a semicolon (;).",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "EndTime": {
-		//	                    "description": "表示限速发生的结束时间。时间格式是 mm:ss。如果 DayWeek 的参数值是 unlimited, BeginTime 和 EndTime 参数的默认值会分别被设置为 00:00 和 23:59。",
+		//	                    "description": "Indicates the end time for rate limiting. The time format is mm:ss. If the DayWeek parameter is set to unlimited, the default values for BeginTime and EndTime are 00:00 and 23:59, respectively.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -1646,7 +1646,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether this feature is enabled. The parameter has the following values: true: enables the feature. false: disables the feature. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -1667,41 +1667,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: DownloadSpeedLimitAction
@@ -1709,12 +1709,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: SpeedLimitRate
 									"speed_limit_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示单个请求的下载速度上限，单位是B/S。该参数的取值范围是 1-1,073,741,824,000,000，使用的进制转换是1,024。",
+										Description: "Indicates the maximum download speed for a single request, measured in B/S. The parameter range is 1–1,073,741,824,000,000, using a base conversion of 1,024.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SpeedLimitRateAfter
 									"speed_limit_rate_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示一个数据量。在单个请求下载的数据量达到该值时，才对该请求启用下载限速。单位是Byte。该参数的取值范围是 0-1,073,741,824,000,000，使用的进制转换是1,024。",
+										Description: "Represents a data volume. Download throttling is enabled for a request only when the amount of data downloaded in a single request reaches this value. Unit: Byte. The parameter range is 0–1,073,741,824,000,000, using a base of 1,024 for conversion.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SpeedLimitTime
@@ -1722,113 +1722,113 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: BeginTime
 											"begin_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示限速发生的开始时间。时间格式是 mm:ss。如果 DayWeek 的参数值是 unlimited, BeginTime 和 EndTime 参数的默认值会分别被设置为 00:00 和 23:59。",
+												Description: "Indicates the start time for rate limiting. The time format is mm:ss. If the DayWeek parameter value is unlimited, the default values for BeginTime and EndTime will be set to 00:00 and 23:59, respectively.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: DayWeek
 											"day_week": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示限速发生的日期。该参数有以下取值：monday，tuesday，wednesday，thursday，friday，saturday，sunday，unlimited。unlimited 表示每天。您可以指定一个或多个值。多个值之间使用英文分号（;）分隔。",
+												Description: "Specifies the date when rate limiting occurs. This parameter has the following values: monday, tuesday, wednesday, thursday, friday, saturday, sunday, unlimited. unlimited means every day. You can specify one or more values. Separate multiple values with a semicolon (;).",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: EndTime
 											"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示限速发生的结束时间。时间格式是 mm:ss。如果 DayWeek 的参数值是 unlimited, BeginTime 和 EndTime 参数的默认值会分别被设置为 00:00 和 23:59。",
+												Description: "Indicates the end time for rate limiting. The time format is mm:ss. If the DayWeek parameter is set to unlimited, the default values for BeginTime and EndTime are 00:00 and 23:59, respectively.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示限速发生的日期和时间段。",
+										Description: "Indicates the date and time period when rate limiting occurs.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示限速配置。",
+								Description: "Indicates the rate limiting configuration.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示下载限速的规则。当 Switch 是 true 时，该参数为必填。",
+					Description: "Indicates the rule for download rate limiting. This parameter is required when Switch is true.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether this feature is enabled. The parameter has the following values: true: enables the feature. false: disables the feature. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"下载限速\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Represents the configuration module for the 'Download Speed Limit' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FollowRedirect
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示是否启用 \"回源重定向跟随\" 特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	  "description": "Specifies whether to enable the 'origin redirect follow' feature. The parameter values are: true: enable the feature; false: disable the feature. The default value is false.",
 		//	  "type": "boolean"
 		//	}
 		"follow_redirect": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "表示是否启用 \"回源重定向跟随\" 特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+			Description: "Specifies whether to enable the 'origin redirect follow' feature. The parameter values are: true: enable the feature; false: disable the feature. The default value is false.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HTTPS
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 HTTPS 配置模块。该功能默认是禁用。",
+		//	  "description": "Indicates the HTTPS configuration module. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "CertCheck": {
-		//	      "description": "表示 \"访问双向认证\" 特性的配置模块。要配置 \"访问双向认证\"。",
+		//	      "description": "Indicates the configuration module for the 'mutual authentication' feature. To configure 'mutual authentication'.",
 		//	      "properties": {
 		//	        "CertInfoList": {
-		//	          "description": "表示要与该加速域名关联的一个 CA 证书的列表。列表中最多包含两个 CA 证书。这些 CA 证书可以是已经托管在内容分发网络的，也可以是待上传的。CA 证书使用的加密算法可以是 RSA、ECC 或者 SM2。如果一个 CA 证书是托管在内容分发网络的，您需要在 CertId 中指定该证书的 ID。如果该证书是待上传的，您需要指定 Certificate 结构体，在该结构体中定义该证书。您上传证书后，该证书是托管在内容分发网络的。",
+		//	          "description": "Specifies a list of CA certificates to associate with the accelerated domain name. The list can contain up to two CA certificates. These CA certificates can be already hosted on the content delivery network or pending upload. The encryption algorithm for CA certificates can be RSA, ECC, or SM2. If a CA certificate is hosted on the content delivery network, you need to specify its ID in CertId. If the certificate is pending upload, you need to specify the Certificate structure and define the certificate within it. After you upload the certificate, it will be hosted on the content delivery network.",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "表示要与加速域名关联的单本证书。",
+		//	            "description": "Indicates the single certificate to be associated with the acceleration domain.",
 		//	            "properties": {
 		//	              "CertId": {
-		//	                "description": "表示一个托管在内容分发网络的 CA 证书的 ID。ID 是以 cert_hosting- 开头的。",
+		//	                "description": "Indicates the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
 		//	                "type": "string"
 		//	              },
 		//	              "CertName": {
-		//	                "description": "表示该 CA 证书的 Common Name (CN) 字段中的内容。",
+		//	                "description": "Represents the content of the Common Name (CN) field in the CA certificate.",
 		//	                "type": "string"
 		//	              },
 		//	              "Certificate": {
-		//	                "description": "表示一个待上传的 CA 证书。上传的证书是托管在内容分发网络的。",
+		//	                "description": "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the content delivery network.",
 		//	                "properties": {
 		//	                  "Certificate": {
-		//	                    "description": "表示证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该证书文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。\n\n如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的证书文件。文件名类似 \u003cdomain\u003e.crt。该证书文件中包含的公钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的证书文件。文件名类似 \u003cdomain\u003e_sign.crt。该证书文件中包含的公钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+		//	                    "description": "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n\nIf the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to \u003cdomain\u003e.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to \u003cdomain\u003e_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "EncryptionCert": {
-		//	                    "description": "表示国密证书的证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件中包含的公钥用于加密会话密钥。文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。如果待上传的证书不是国密证书，该参数无效。",
+		//	                    "description": "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "EncryptionKey": {
-		//	                    "description": "表示国密证书的私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件用于解密，扩展名是 .key 或者 .pem。文件名类似 \u003cdomain\u003e_encrypt.key。",
+		//	                    "description": "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to \u003cdomain\u003e_encrypt.key.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "PrivateKey": {
-		//	                    "description": "表示私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该私钥文件的扩展名是 .key 或者 .pem。如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的私钥文件。文件名类似 \u003cdomain\u003e.key。该私钥文件中包含的私钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的私钥文件。文件名类似 \u003cdomain\u003e_sign.key。该私钥文件中包含的私钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+		//	                    "description": "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to \u003cdomain\u003e.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to \u003cdomain\u003e_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
 		//	                "type": "object"
 		//	              },
 		//	              "EffectiveTime": {
-		//	                "description": "表示该证书的签发时间，单位是 Unix 时间戳。",
+		//	                "description": "Indicates the issuance time of the certificate, in Unix timestamp.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              },
 		//	              "EncryType": {
-		//	                "description": "表示该证书使用的加密算法。该参数有以下取值：inter_cert：表示 RSA 或 ECC 加密算法。sm_cert：表示 SM2 加密算法。",
+		//	                "description": "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
 		//	                "type": "string"
 		//	              },
 		//	              "ExpireTime": {
-		//	                "description": "表示该证书的到期时间，单位是 Unix 时间戳。",
+		//	                "description": "Indicates the expiration time of the certificate, as a Unix timestamp.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              },
 		//	              "Source": {
-		//	                "description": "表示该证书托管的位置。该参数有以下取值：volc_cert_center：表示证书中心。cdn_cert_hosting：表示内容分发网络。",
+		//	                "description": "Specifies the certificate hosting location. The parameter values are: volc_cert_center: certificate center; cdn_cert_hosting: content delivery network.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -1838,118 +1838,118 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "Switch": {
-		//	          "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	          "description": "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature; false: disables the feature. The default value is false.",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "CertInfo": {
-		//	      "description": "表示要与加速域名关联的单本证书。",
+		//	      "description": "Indicates the single certificate to be associated with the acceleration domain name.",
 		//	      "properties": {
 		//	        "CertId": {
-		//	          "description": "表示一个托管在内容分发网络的 CA 证书的 ID。ID 是以 cert_hosting- 开头的。",
+		//	          "description": "Represents the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
 		//	          "type": "string"
 		//	        },
 		//	        "CertName": {
-		//	          "description": "表示该 CA 证书的 Common Name (CN) 字段中的内容。",
+		//	          "description": "Indicates the content of the Common Name (CN) field in the CA certificate.",
 		//	          "type": "string"
 		//	        },
 		//	        "Certificate": {
-		//	          "description": "表示一个待上传的 CA 证书。上传的证书是托管在内容分发网络的。",
+		//	          "description": "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the CDN.",
 		//	          "properties": {
 		//	            "Certificate": {
-		//	              "description": "表示证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该证书文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。\n\n如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的证书文件。文件名类似 \u003cdomain\u003e.crt。该证书文件中包含的公钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的证书文件。文件名类似 \u003cdomain\u003e_sign.crt。该证书文件中包含的公钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+		//	              "description": "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n\nIf the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to \u003cdomain\u003e.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to \u003cdomain\u003e_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 		//	              "type": "string"
 		//	            },
 		//	            "EncryptionCert": {
-		//	              "description": "表示国密证书的证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件中包含的公钥用于加密会话密钥。文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。如果待上传的证书不是国密证书，该参数无效。",
+		//	              "description": "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
 		//	              "type": "string"
 		//	            },
 		//	            "EncryptionKey": {
-		//	              "description": "表示国密证书的私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件用于解密，扩展名是 .key 或者 .pem。文件名类似 \u003cdomain\u003e_encrypt.key。",
+		//	              "description": "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to \u003cdomain\u003e_encrypt.key.",
 		//	              "type": "string"
 		//	            },
 		//	            "PrivateKey": {
-		//	              "description": "表示私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该私钥文件的扩展名是 .key 或者 .pem。如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的私钥文件。文件名类似 \u003cdomain\u003e.key。该私钥文件中包含的私钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的私钥文件。文件名类似 \u003cdomain\u003e_sign.key。该私钥文件中包含的私钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+		//	              "description": "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to \u003cdomain\u003e.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to \u003cdomain\u003e_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "EffectiveTime": {
-		//	          "description": "表示该证书的签发时间，单位是 Unix 时间戳。",
+		//	          "description": "Indicates the issuance time of the certificate, in Unix timestamp.",
 		//	          "format": "int64",
 		//	          "type": "integer"
 		//	        },
 		//	        "EncryType": {
-		//	          "description": "表示该证书使用的加密算法。该参数有以下取值：inter_cert：表示 RSA 或 ECC 加密算法。sm_cert：表示 SM2 加密算法。",
+		//	          "description": "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
 		//	          "type": "string"
 		//	        },
 		//	        "ExpireTime": {
-		//	          "description": "表示该证书的到期时间，单位是 Unix 时间戳。",
+		//	          "description": "Indicates the expiration time of the certificate, in Unix timestamp.",
 		//	          "format": "int64",
 		//	          "type": "integer"
 		//	        },
 		//	        "Source": {
-		//	          "description": "表示该证书托管的位置。该参数有以下取值：volc_cert_center：表示证书中心。cdn_cert_hosting：表示内容分发网络。",
+		//	          "description": "Indicates the location where the certificate is hosted. This parameter has the following values: volc_cert_center: Certificate Center. cdn_cert_hosting: Content Delivery Network.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "CertInfoList": {
-		//	      "description": "表示要与加速域名关联的双证书。",
+		//	      "description": "Indicates the dual certificate to be associated with the acceleration domain name.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示要与加速域名关联的单本证书。",
+		//	        "description": "Indicates the single certificate to be associated with the acceleration domain.",
 		//	        "properties": {
 		//	          "CertId": {
-		//	            "description": "表示一个托管在内容分发网络的 CA 证书的 ID。ID 是以 cert_hosting- 开头的。",
+		//	            "description": "Indicates the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
 		//	            "type": "string"
 		//	          },
 		//	          "CertName": {
-		//	            "description": "表示该 CA 证书的 Common Name (CN) 字段中的内容。",
+		//	            "description": "Represents the content of the Common Name (CN) field in the CA certificate.",
 		//	            "type": "string"
 		//	          },
 		//	          "Certificate": {
-		//	            "description": "表示一个待上传的 CA 证书。上传的证书是托管在内容分发网络的。",
+		//	            "description": "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the content delivery network.",
 		//	            "properties": {
 		//	              "Certificate": {
-		//	                "description": "表示证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该证书文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。\n\n如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的证书文件。文件名类似 \u003cdomain\u003e.crt。该证书文件中包含的公钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的证书文件。文件名类似 \u003cdomain\u003e_sign.crt。该证书文件中包含的公钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+		//	                "description": "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n\nIf the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to \u003cdomain\u003e.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to \u003cdomain\u003e_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 		//	                "type": "string"
 		//	              },
 		//	              "EncryptionCert": {
-		//	                "description": "表示国密证书的证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件中包含的公钥用于加密会话密钥。文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。如果待上传的证书不是国密证书，该参数无效。",
+		//	                "description": "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
 		//	                "type": "string"
 		//	              },
 		//	              "EncryptionKey": {
-		//	                "description": "表示国密证书的私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件用于解密，扩展名是 .key 或者 .pem。文件名类似 \u003cdomain\u003e_encrypt.key。",
+		//	                "description": "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to \u003cdomain\u003e_encrypt.key.",
 		//	                "type": "string"
 		//	              },
 		//	              "PrivateKey": {
-		//	                "description": "表示私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该私钥文件的扩展名是 .key 或者 .pem。如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的私钥文件。文件名类似 \u003cdomain\u003e.key。该私钥文件中包含的私钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的私钥文件。文件名类似 \u003cdomain\u003e_sign.key。该私钥文件中包含的私钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+		//	                "description": "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to \u003cdomain\u003e.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to \u003cdomain\u003e_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "EffectiveTime": {
-		//	            "description": "表示该证书的签发时间，单位是 Unix 时间戳。",
+		//	            "description": "Indicates the issuance time of the certificate, in Unix timestamp.",
 		//	            "format": "int64",
 		//	            "type": "integer"
 		//	          },
 		//	          "EncryType": {
-		//	            "description": "表示该证书使用的加密算法。该参数有以下取值：inter_cert：表示 RSA 或 ECC 加密算法。sm_cert：表示 SM2 加密算法。",
+		//	            "description": "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
 		//	            "type": "string"
 		//	          },
 		//	          "ExpireTime": {
-		//	            "description": "表示该证书的到期时间，单位是 Unix 时间戳。",
+		//	            "description": "Indicates the expiration time of the certificate, as a Unix timestamp.",
 		//	            "format": "int64",
 		//	            "type": "integer"
 		//	          },
 		//	          "Source": {
-		//	            "description": "表示该证书托管的位置。该参数有以下取值：volc_cert_center：表示证书中心。cdn_cert_hosting：表示内容分发网络。",
+		//	            "description": "Specifies the certificate hosting location. The parameter values are: volc_cert_center: certificate center; cdn_cert_hosting: content delivery network.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1959,40 +1959,40 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "DisableHttp": {
-		//	      "description": "表示是否允许请求 URL 中 Scheme 是 HTTP 的请求。该参数有以下取值：true：表示允许 Scheme 是 HTTP 的请求。false：表示不允许 Scheme 是 HTTP 的请求。该参数的默认值是 false。",
+		//	      "description": "Indicates whether to allow requests where the URL scheme is HTTP. The parameter values are: true: allows requests with HTTP scheme. false: does not allow requests with HTTP scheme. The default value is false.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ForcedRedirect": {
-		//	      "description": "表示 \"HTTP 强制跳转到 HTTPS\" 特性的配置模块。该特性默认是禁用。",
+		//	      "description": "Indicates the configuration module for the 'HTTP Forced Redirect to HTTPS' feature. This feature is disabled by default.",
 		//	      "properties": {
 		//	        "EnableForcedRedirect": {
-		//	          "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。启用后，内容分发网络会将收到的 HTTP 请求重定向到 HTTPS 请求。false：表示禁用该特性。禁用后，内容分发网络不会将 HTTP 请求重定向到 HTTPS 请求。要启用该特性，您的加速域名必须已启用 HTTPS。",
+		//	          "description": "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature. When enabled, the content delivery network redirects HTTP requests to HTTPS requests. false: disables the feature. When disabled, the content delivery network does not redirect HTTP requests to HTTPS requests. To enable this feature, your acceleration domain must have HTTPS enabled.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "StatusCode": {
-		//	          "description": "表示当收到 HTTPS 请求时内容分发网络的重定向响应状态码。该参数有以下取值：301：表示返回的状态码是 301。302：表示返回的状态码是 302。该参数的默认值是 301。",
+		//	          "description": "Indicates the redirect response status code for the CDN when receiving HTTPS requests. The parameter values are: 301: returns status code 301. 302: returns status code 302. The default value is 301.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "HTTP2": {
-		//	      "description": "HTTP/2 配置开关。该参数有以下取值：true：表示启用 HTTP/2。false：表示禁用 HTTP/2。要启用 HTTP/2，您必须先启用 HTTPS。该功能默认是禁用。但是在以下场景中，HTTP/2 默认是启用的：加速域名的业务类型是网页，也就是 ServiceType 是 web。加速域名已经启用了 HTTPS。",
+		//	      "description": "HTTP/2 configuration switch. This parameter has the following values: true: enables HTTP/2. false: disables HTTP/2. To enable HTTP/2, you must first enable HTTPS. This feature is disabled by default. However, HTTP/2 is enabled by default in the following scenarios: The business type of the accelerated domain is web (ServiceType is web). The accelerated domain has already enabled HTTPS.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Hsts": {
-		//	      "description": "表示 HSTS 特性的配置模块。该特性默认是禁用。",
+		//	      "description": "Indicates the configuration module for the HSTS feature. This feature is disabled by default.",
 		//	      "properties": {
 		//	        "Subdomain": {
-		//	          "description": "表示 HSTS 配置是否也应用于加速域名的子域名。该参数有以下取值：include：表示 HSTS 配置应用于子域名站点。exclude：表示 HSTS 配置不应用于子域名站点。该参数的默认值是 exclude。",
+		//	          "description": "Indicates whether the HSTS configuration also applies to subdomains of the accelerated domain. The parameter has the following values: include: applies HSTS configuration to subdomain sites. exclude: does not apply HSTS configuration to subdomain sites. The default value is exclude.",
 		//	          "type": "string"
 		//	        },
 		//	        "Switch": {
-		//	          "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	          "description": "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature; false: disables the feature. The default value is false.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "Ttl": {
-		//	          "description": "表示 Strict-Transport-Security 响应头在浏览器中的缓存过期时间，单位是秒。如果 Switch 是 true，该参数为必填。该参数的取值范围是 0 - 31,536,000。31,536,000 秒表示 365 天。如果该参数值为 0，其效果等同于禁用 HSTS 设置。",
+		//	          "description": "Indicates the cache expiration time for the Strict-Transport-Security response header in the browser, in seconds. If Switch is true, this parameter is required. The value range is 0–31,536,000. 31,536,000 seconds equals 365 days. If the value is 0, it is equivalent to disabling the HSTS setting.",
 		//	          "format": "int64",
 		//	          "type": "integer"
 		//	        }
@@ -2000,15 +2000,15 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "OCSP": {
-		//	      "description": "指定是否启用 OCSP 装订。该参数有以下取值：true：表示启用 OCSP 装订。false：表示禁用 OCSP 装订。要启用 OCSP 装订，您必须先启用 HTTPS。该参数的默认值是 false。",
+		//	      "description": "Specify whether to enable OCSP stapling. This parameter has the following values: true: enables OCSP stapling. false: disables OCSP stapling. To enable OCSP stapling, you must first enable HTTPS. The default value is false.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用 HTTPS 特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。如果 Switch 是 true，您必须指定证书。如果您指定的是单本证书，您需要指定 CertInfo。如果您指定的是双证书，您需要指定 CertInfoList。您指定的证书可以是托管在证书中心，也可以是托管在内容分发网络。",
+		//	      "description": "Indicates whether to enable the HTTPS feature. This parameter has the following values: true: enables the feature; false: disables the feature. If Switch is true, you must specify a certificate. If you specify a single certificate, you need to provide CertInfo. If you specify dual certificates, you need to provide CertInfoList. The certificate you specify can be hosted in the certificate center or on the content delivery network.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "TlsVersion": {
-		//	      "description": "表示 \"TLS 版本\" 特性的配置模块。该参数指定用户请求可以使用的 TLS 版本，有以下取值：tlsv1.0：表示 TLS 1.0。tlsv1.1：表示 TLS 1.1。tlsv1.2：表示 TLS 1.2。tlsv1.3：表示 TLS 1.3。该参数的默认值是 [\"tlsv1.1\", \"tlsv1.2\", \"tlsv1.3\"]",
+		//	      "description": "Indicates the configuration module for the \"TLS Version\" feature. This parameter specifies the TLS versions that user requests can use, with the following options: tlsv1.0: TLS 1.0 tlsv1.1: TLS 1.1 tlsv1.2: TLS 1.2 tlsv1.3: TLS 1.3 The default value for this parameter is [\"tlsv1.1\", \"tlsv1.2\", \"tlsv1.3\"]",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -2030,12 +2030,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: CertId
 									"cert_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示一个托管在内容分发网络的 CA 证书的 ID。ID 是以 cert_hosting  - 开头的。",
+										Description: "Indicates the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: CertName
 									"cert_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示该 CA 证书的 Common Name (CN) 字段中的内容。",
+										Description: "Represents the content of the Common Name (CN) field in the CA certificate.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Certificate
@@ -2043,60 +2043,60 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Certificate
 											"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该证书文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。\n  \n  如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的证书文件。文件名类似 <domain>.crt。该证书文件中包含的公钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的证书文件。文件名类似 <domain>_sign.crt。该证书文件中包含的公钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+												Description: "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n  \n  If the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to <domain>.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to <domain>_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: EncryptionCert
 											"encryption_cert": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示国密证书的证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件中包含的公钥用于加密会话密钥。文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。如果待上传的证书不是国密证书，该参数无效。",
+												Description: "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: EncryptionKey
 											"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示国密证书的私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件用于解密，扩展名是 .key 或者 .pem。文件名类似 <domain>_encrypt.key。",
+												Description: "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to <domain>_encrypt.key.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: PrivateKey
 											"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该私钥文件的扩展名是 .key 或者 .pem。如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的私钥文件。文件名类似 <domain>.key。该私钥文件中包含的私钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的私钥文件。文件名类似 <domain>_sign.key。该私钥文件中包含的私钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+												Description: "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to <domain>.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to <domain>_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示一个待上传的 CA 证书。上传的证书是托管在内容分发网络的。",
+										Description: "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the content delivery network.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: EffectiveTime
 									"effective_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示该证书的签发时间，单位是 Unix 时间戳。",
+										Description: "Indicates the issuance time of the certificate, in Unix timestamp.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: EncryType
 									"encry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示该证书使用的加密算法。该参数有以下取值：inter_cert：表示 RSA 或 ECC 加密算法。sm_cert：表示 SM2 加密算法。",
+										Description: "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: ExpireTime
 									"expire_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示该证书的到期时间，单位是 Unix 时间戳。",
+										Description: "Indicates the expiration time of the certificate, as a Unix timestamp.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Source
 									"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示该证书托管的位置。该参数有以下取值：volc_cert_center：表示证书中心。cdn_cert_hosting：表示内容分发网络。",
+										Description: "Specifies the certificate hosting location. The parameter values are: volc_cert_center: certificate center; cdn_cert_hosting: content delivery network.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "表示要与该加速域名关联的一个 CA 证书的列表。列表中最多包含两个 CA 证书。这些 CA 证书可以是已经托管在内容分发网络的，也可以是待上传的。CA 证书使用的加密算法可以是 RSA、ECC 或者 SM2。如果一个 CA 证书是托管在内容分发网络的，您需要在 CertId 中指定该证书的 ID。如果该证书是待上传的，您需要指定 Certificate 结构体，在该结构体中定义该证书。您上传证书后，该证书是托管在内容分发网络的。",
+							Description: "Specifies a list of CA certificates to associate with the accelerated domain name. The list can contain up to two CA certificates. These CA certificates can be already hosted on the content delivery network or pending upload. The encryption algorithm for CA certificates can be RSA, ECC, or SM2. If a CA certificate is hosted on the content delivery network, you need to specify its ID in CertId. If the certificate is pending upload, you need to specify the Certificate structure and define the certificate within it. After you upload the certificate, it will be hosted on the content delivery network.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Switch
 						"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+							Description: "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature; false: disables the feature. The default value is false.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示 \"访问双向认证\" 特性的配置模块。要配置 \"访问双向认证\"。",
+					Description: "Indicates the configuration module for the 'mutual authentication' feature. To configure 'mutual authentication'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CertInfo
@@ -2104,12 +2104,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CertId
 						"cert_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示一个托管在内容分发网络的 CA 证书的 ID。ID 是以 cert_hosting  - 开头的。",
+							Description: "Represents the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: CertName
 						"cert_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示该 CA 证书的 Common Name (CN) 字段中的内容。",
+							Description: "Indicates the content of the Common Name (CN) field in the CA certificate.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Certificate
@@ -2117,50 +2117,50 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Certificate
 								"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "表示证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该证书文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。\n  \n  如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的证书文件。文件名类似 <domain>.crt。该证书文件中包含的公钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的证书文件。文件名类似 <domain>_sign.crt。该证书文件中包含的公钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+									Description: "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n  \n  If the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to <domain>.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to <domain>_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EncryptionCert
 								"encryption_cert": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "表示国密证书的证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件中包含的公钥用于加密会话密钥。文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。如果待上传的证书不是国密证书，该参数无效。",
+									Description: "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EncryptionKey
 								"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "表示国密证书的私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件用于解密，扩展名是 .key 或者 .pem。文件名类似 <domain>_encrypt.key。",
+									Description: "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to <domain>_encrypt.key.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: PrivateKey
 								"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "表示私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该私钥文件的扩展名是 .key 或者 .pem。如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的私钥文件。文件名类似 <domain>.key。该私钥文件中包含的私钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的私钥文件。文件名类似 <domain>_sign.key。该私钥文件中包含的私钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+									Description: "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to <domain>.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to <domain>_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "表示一个待上传的 CA 证书。上传的证书是托管在内容分发网络的。",
+							Description: "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the CDN.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: EffectiveTime
 						"effective_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "表示该证书的签发时间，单位是 Unix 时间戳。",
+							Description: "Indicates the issuance time of the certificate, in Unix timestamp.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: EncryType
 						"encry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示该证书使用的加密算法。该参数有以下取值：inter_cert：表示 RSA 或 ECC 加密算法。sm_cert：表示 SM2 加密算法。",
+							Description: "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ExpireTime
 						"expire_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "表示该证书的到期时间，单位是 Unix 时间戳。",
+							Description: "Indicates the expiration time of the certificate, in Unix timestamp.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Source
 						"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示该证书托管的位置。该参数有以下取值：volc_cert_center：表示证书中心。cdn_cert_hosting：表示内容分发网络。",
+							Description: "Indicates the location where the certificate is hosted. This parameter has the following values: volc_cert_center: Certificate Center. cdn_cert_hosting: Content Delivery Network.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示要与加速域名关联的单本证书。",
+					Description: "Indicates the single certificate to be associated with the acceleration domain name.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CertInfoList
@@ -2169,12 +2169,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: CertId
 							"cert_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示一个托管在内容分发网络的 CA 证书的 ID。ID 是以 cert_hosting  - 开头的。",
+								Description: "Indicates the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: CertName
 							"cert_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示该 CA 证书的 Common Name (CN) 字段中的内容。",
+								Description: "Represents the content of the Common Name (CN) field in the CA certificate.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Certificate
@@ -2182,56 +2182,56 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Certificate
 									"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该证书文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。\n  \n  如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的证书文件。文件名类似 <domain>.crt。该证书文件中包含的公钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的证书文件。文件名类似 <domain>_sign.crt。该证书文件中包含的公钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+										Description: "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n  \n  If the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to <domain>.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to <domain>_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: EncryptionCert
 									"encryption_cert": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示国密证书的证书文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件中包含的公钥用于加密会话密钥。文件的扩展名是 .crt 或者 .pem，并且证书文件必须包含完整的证书链。如果待上传的证书不是国密证书，该参数无效。",
+										Description: "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: EncryptionKey
 									"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示国密证书的私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该文件用于解密，扩展名是 .key 或者 .pem。文件名类似 <domain>_encrypt.key。",
+										Description: "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to <domain>_encrypt.key.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: PrivateKey
 									"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示私钥文件的内容。内容中的换行必须使用 \\r\\n 替换。该私钥文件的扩展名是 .key 或者 .pem。如果该证书使用的加密算法是 RSA 或者 ECC，该文件是您要上传的服务器证书的私钥文件。文件名类似 <domain>.key。该私钥文件中包含的私钥用于验证服务器的签名和加密会话密钥。如果该证书使用的加密算法是 SM2，该文件是您要上传的国密证书的私钥文件。文件名类似 <domain>_sign.key。该私钥文件中包含的私钥用于验证服务器的签名。对于待上传的证书，该参数必填。",
+										Description: "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to <domain>.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to <domain>_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示一个待上传的 CA 证书。上传的证书是托管在内容分发网络的。",
+								Description: "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the content delivery network.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: EffectiveTime
 							"effective_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "表示该证书的签发时间，单位是 Unix 时间戳。",
+								Description: "Indicates the issuance time of the certificate, in Unix timestamp.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: EncryType
 							"encry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示该证书使用的加密算法。该参数有以下取值：inter_cert：表示 RSA 或 ECC 加密算法。sm_cert：表示 SM2 加密算法。",
+								Description: "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ExpireTime
 							"expire_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "表示该证书的到期时间，单位是 Unix 时间戳。",
+								Description: "Indicates the expiration time of the certificate, as a Unix timestamp.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Source
 							"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示该证书托管的位置。该参数有以下取值：volc_cert_center：表示证书中心。cdn_cert_hosting：表示内容分发网络。",
+								Description: "Specifies the certificate hosting location. The parameter values are: volc_cert_center: certificate center; cdn_cert_hosting: content delivery network.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示要与加速域名关联的双证书。",
+					Description: "Indicates the dual certificate to be associated with the acceleration domain name.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DisableHttp
 				"disable_http": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否允许请求 URL 中 Scheme 是 HTTP 的请求。该参数有以下取值：true：表示允许 Scheme 是 HTTP 的请求。false：表示不允许 Scheme 是 HTTP 的请求。该参数的默认值是 false。",
+					Description: "Indicates whether to allow requests where the URL scheme is HTTP. The parameter values are: true: allows requests with HTTP scheme. false: does not allow requests with HTTP scheme. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ForcedRedirect
@@ -2239,21 +2239,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: EnableForcedRedirect
 						"enable_forced_redirect": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。启用后，内容分发网络会将收到的 HTTP 请求重定向到 HTTPS 请求。false：表示禁用该特性。禁用后，内容分发网络不会将 HTTP 请求重定向到 HTTPS 请求。要启用该特性，您的加速域名必须已启用 HTTPS。",
+							Description: "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature. When enabled, the content delivery network redirects HTTP requests to HTTPS requests. false: disables the feature. When disabled, the content delivery network does not redirect HTTP requests to HTTPS requests. To enable this feature, your acceleration domain must have HTTPS enabled.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: StatusCode
 						"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示当收到 HTTPS 请求时内容分发网络的重定向响应状态码。该参数有以下取值：301：表示返回的状态码是 301。302：表示返回的状态码是 302。该参数的默认值是 301。",
+							Description: "Indicates the redirect response status code for the CDN when receiving HTTPS requests. The parameter values are: 301: returns status code 301. 302: returns status code 302. The default value is 301.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示 \"HTTP 强制跳转到 HTTPS\" 特性的配置模块。该特性默认是禁用。",
+					Description: "Indicates the configuration module for the 'HTTP Forced Redirect to HTTPS' feature. This feature is disabled by default.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HTTP2
 				"http2": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "HTTP/2 配置开关。该参数有以下取值：true：表示启用 HTTP/2。false：表示禁用 HTTP/2。要启用 HTTP/2，您必须先启用 HTTPS。该功能默认是禁用。但是在以下场景中，HTTP/2 默认是启用的：加速域名的业务类型是网页，也就是 ServiceType 是 web。加速域名已经启用了 HTTPS。",
+					Description: "HTTP/2 configuration switch. This parameter has the following values: true: enables HTTP/2. false: disables HTTP/2. To enable HTTP/2, you must first enable HTTPS. This feature is disabled by default. However, HTTP/2 is enabled by default in the following scenarios: The business type of the accelerated domain is web (ServiceType is web). The accelerated domain has already enabled HTTPS.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Hsts
@@ -2261,55 +2261,55 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Subdomain
 						"subdomain": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示 HSTS 配置是否也应用于加速域名的子域名。该参数有以下取值：include：表示 HSTS 配置应用于子域名站点。exclude：表示 HSTS 配置不应用于子域名站点。该参数的默认值是 exclude。",
+							Description: "Indicates whether the HSTS configuration also applies to subdomains of the accelerated domain. The parameter has the following values: include: applies HSTS configuration to subdomain sites. exclude: does not apply HSTS configuration to subdomain sites. The default value is exclude.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Switch
 						"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+							Description: "Indicates whether to enable this feature. This parameter has the following values: true: enables the feature; false: disables the feature. The default value is false.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Ttl
 						"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "表示 Strict-Transport-Security 响应头在浏览器中的缓存过期时间，单位是秒。如果 Switch 是 true，该参数为必填。该参数的取值范围是 0   - 31,536,000。31,536,000 秒表示 365 天。如果该参数值为 0，其效果等同于禁用 HSTS 设置。",
+							Description: "Indicates the cache expiration time for the Strict-Transport-Security response header in the browser, in seconds. If Switch is true, this parameter is required. The value range is 0–31,536,000. 31,536,000 seconds equals 365 days. If the value is 0, it is equivalent to disabling the HSTS setting.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示 HSTS 特性的配置模块。该特性默认是禁用。",
+					Description: "Indicates the configuration module for the HSTS feature. This feature is disabled by default.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OCSP
 				"ocsp": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "指定是否启用 OCSP 装订。该参数有以下取值：true：表示启用 OCSP 装订。false：表示禁用 OCSP 装订。要启用 OCSP 装订，您必须先启用 HTTPS。该参数的默认值是 false。",
+					Description: "Specify whether to enable OCSP stapling. This parameter has the following values: true: enables OCSP stapling. false: disables OCSP stapling. To enable OCSP stapling, you must first enable HTTPS. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用 HTTPS 特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。如果 Switch 是 true，您必须指定证书。如果您指定的是单本证书，您需要指定 CertInfo。如果您指定的是双证书，您需要指定 CertInfoList。您指定的证书可以是托管在证书中心，也可以是托管在内容分发网络。",
+					Description: "Indicates whether to enable the HTTPS feature. This parameter has the following values: true: enables the feature; false: disables the feature. If Switch is true, you must specify a certificate. If you specify a single certificate, you need to provide CertInfo. If you specify dual certificates, you need to provide CertInfoList. The certificate you specify can be hosted in the certificate center or on the content delivery network.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TlsVersion
 				"tls_version": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示 \"TLS 版本\" 特性的配置模块。该参数指定用户请求可以使用的 TLS 版本，有以下取值：tlsv1.0：表示 TLS 1.0。tlsv1.1：表示 TLS 1.1。tlsv1.2：表示 TLS 1.2。tlsv1.3：表示 TLS 1.3。该参数的默认值是 [\"tlsv1.1\", \"tlsv1.2\", \"tlsv1.3\"]",
+					Description: "Indicates the configuration module for the \"TLS Version\" feature. This parameter specifies the TLS versions that user requests can use, with the following options: tlsv1.0: TLS 1.0 tlsv1.1: TLS 1.1 tlsv1.2: TLS 1.2 tlsv1.3: TLS 1.3 The default value for this parameter is [\"tlsv1.1\", \"tlsv1.2\", \"tlsv1.3\"]",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 HTTPS 配置模块。该功能默认是禁用。",
+			Description: "Indicates the HTTPS configuration module. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HttpForcedRedirect
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"HTTPS 强制跳转到 HTTP\" 特性的配置模块。该特性默认是禁用。",
+		//	  "description": "Represents the configuration module for the 'Force HTTPS Redirect to HTTP' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "EnableForcedRedirect": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。启用后，内容分发网络会将收到的 HTTPS 请求重定向到 HTTP 请求。false：表示禁用该特性。内容分发网络不会将 HTTPS 请求重定向到 HTTP 请求。要启用该特性，您的加速域名必须已启用 HTTPS。",
+		//	      "description": "Indicates whether this feature is enabled. The parameter values are: true: enables the feature. When enabled, the content delivery network redirects incoming HTTPS requests to HTTP requests. false: disables the feature. The content delivery network does not redirect HTTPS requests to HTTP requests. To enable this feature, your acceleration domain must have HTTPS enabled.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "StatusCode": {
-		//	      "description": "表示当收到 HTTPS 请求时，内容分发网络返回的重定向状态码。该参数有以下取值：301：表示 301 响应状态码。302：表示 302 响应状态码。该参数的默认值是 301。",
+		//	      "description": "Indicates the redirect status code returned by the content delivery network when it receives an HTTPS request. This parameter has the following values: 301: indicates the 301 response status code. 302: indicates the 302 response status code. The default value for this parameter is 301.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -2319,26 +2319,26 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnableForcedRedirect
 				"enable_forced_redirect": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。启用后，内容分发网络会将收到的 HTTPS 请求重定向到 HTTP 请求。false：表示禁用该特性。内容分发网络不会将 HTTPS 请求重定向到 HTTP 请求。要启用该特性，您的加速域名必须已启用 HTTPS。",
+					Description: "Indicates whether this feature is enabled. The parameter values are: true: enables the feature. When enabled, the content delivery network redirects incoming HTTPS requests to HTTP requests. false: disables the feature. The content delivery network does not redirect HTTPS requests to HTTP requests. To enable this feature, your acceleration domain must have HTTPS enabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StatusCode
 				"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示当收到 HTTPS 请求时，内容分发网络返回的重定向状态码。该参数有以下取值：301：表示 301 响应状态码。302：表示 302 响应状态码。该参数的默认值是 301。",
+					Description: "Indicates the redirect status code returned by the content delivery network when it receives an HTTPS request. This parameter has the following values: 301: indicates the 301 response status code. 302: indicates the 302 response status code. The default value for this parameter is 301.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"HTTPS 强制跳转到 HTTP\" 特性的配置模块。该特性默认是禁用。",
+			Description: "Represents the configuration module for the 'Force HTTPS Redirect to HTTP' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IPv6
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 IPv6 特性的配置模块。",
+		//	  "description": "Indicates the configuration module for the IPv6 feature.",
 		//	  "properties": {
 		//	    "Switch": {
-		//	      "description": "指定是否启用 IPv6 配置。该参数有以下取值：true：表示启用 IPv6。false：表示禁用 IPv6。",
+		//	      "description": "Specifies whether to enable IPv6 configuration. This parameter has the following values: true: Enables IPv6. false: Disables IPv6.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -2348,21 +2348,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "指定是否启用 IPv6 配置。该参数有以下取值：true：表示启用 IPv6。false：表示禁用 IPv6。",
+					Description: "Specifies whether to enable IPv6 configuration. This parameter has the following values: true: Enables IPv6. false: Disables IPv6.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 IPv6 特性的配置模块。",
+			Description: "Indicates the configuration module for the IPv6 feature.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"IP 黑白名单\" 特性的配置模块。该特性默认为禁用。该特性提供了两种配置方式：常规配置：指定 RuleType 和 Ip 对当前域名进行配置。全局配置：指定 SharedConfig 使用一个全局配置。全局配置是白名单功能。您只能选择一种配置方式。",
+		//	  "description": "Specifies the configuration module for the 'IP allowlist and blocklist' feature. This feature is disabled by default. There are two configuration methods: Standard configuration: Specify RuleType and Ip to configure the current domain. Global configuration: Specify SharedConfig to use a global configuration. The global configuration is the allowlist feature. You can only choose one configuration method.",
 		//	  "properties": {
 		//	    "Ip": {
-		//	      "description": "表示黑名单或白名单中的 IP 地址。当 Switch 是 true 时，该参数为必填。您可以指定一个或者多个 IP 地址和 IP 地址网段。IP 地址和网段可以是 IPv4 或 IPv6 格式。您最多可输入 1,000 个地址。如果您指定了 SharedConfig，就不能指定该参数。",
+		//	      "description": "Specifies IP addresses in the denylist or allowlist. This parameter is required when Switch is true. You can specify one or more IP addresses and IP address ranges. IP addresses and ranges can be in IPv4 or IPv6 format. You can enter up to 1,000 addresses. If you specify SharedConfig, you cannot specify this parameter.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -2371,21 +2371,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "RuleType": {
-		//	      "description": "表示 IP 名单的类型。当 Switch 是 true 时，该参数为必填。该参数有以下取值：allow：表示白名单。deny：表示黑名单。如果您指定了 SharedConfig，就不能指定该参数。",
+		//	      "description": "Indicates the type of IP list. This parameter is required when Switch is true. Valid values are: allow: indicates Allowlist. deny: indicates Denylist. If you specify SharedConfig, you cannot specify this parameter.",
 		//	      "type": "string"
 		//	    },
 		//	    "SharedConfig": {
-		//	      "description": "表示一个全局配置。如果您指定了该参数，就不能指定 RuleType 和 Ip。",
+		//	      "description": "Represents a global configuration. If you specify this parameter, you cannot specify RuleType and Ip.",
 		//	      "properties": {
 		//	        "ConfigName": {
-		//	          "description": "表示一个全局配置的名称。",
+		//	          "description": "Indicates the name of a global configuration.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -2396,12 +2396,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Ip
 				"ip": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示黑名单或白名单中的 IP 地址。当 Switch 是 true 时，该参数为必填。您可以指定一个或者多个 IP 地址和 IP 地址网段。IP 地址和网段可以是 IPv4 或 IPv6 格式。您最多可输入 1,000 个地址。如果您指定了 SharedConfig，就不能指定该参数。",
+					Description: "Specifies IP addresses in the denylist or allowlist. This parameter is required when Switch is true. You can specify one or more IP addresses and IP address ranges. IP addresses and ranges can be in IPv4 or IPv6 format. You can enter up to 1,000 addresses. If you specify SharedConfig, you cannot specify this parameter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RuleType
 				"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示 IP 名单的类型。当 Switch 是 true 时，该参数为必填。该参数有以下取值：allow：表示白名单。deny：表示黑名单。如果您指定了 SharedConfig，就不能指定该参数。",
+					Description: "Indicates the type of IP list. This parameter is required when Switch is true. Valid values are: allow: indicates Allowlist. deny: indicates Denylist. If you specify SharedConfig, you cannot specify this parameter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SharedConfig
@@ -2409,56 +2409,56 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ConfigName
 						"config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示一个全局配置的名称。",
+							Description: "Indicates the name of a global configuration.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示一个全局配置。如果您指定了该参数，就不能指定 RuleType 和 Ip。",
+					Description: "Represents a global configuration. If you specify this parameter, you cannot specify RuleType and Ip.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"IP 黑白名单\" 特性的配置模块。该特性默认为禁用。该特性提供了两种配置方式：常规配置：指定 RuleType 和 Ip 对当前域名进行配置。全局配置：指定 SharedConfig 使用一个全局配置。全局配置是白名单功能。您只能选择一种配置方式。",
+			Description: "Specifies the configuration module for the 'IP allowlist and blocklist' feature. This feature is disabled by default. There are two configuration methods: Standard configuration: Specify RuleType and Ip to configure the current domain. Global configuration: Specify SharedConfig to use a global configuration. The global configuration is the allowlist feature. You can only choose one configuration method.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsConflictDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名是否是一个冲突域名。在 CDN 中，每个域名都是唯一的。如果您需要添加一个已存在于其他主账号下的域名，您需要提交工单。如果您成功在您的主账号下添加了该域名，则该域名就是一个冲突域名。该参数有以下取值：true：表示该域名是冲突域名。false：表示该域名不是冲突域名。",
+		//	  "description": "Indicates whether the domain is a conflicting domain. In CDN, each domain is unique. If you need to add a domain that already exists under another primary account, you must submit a ticket. If you successfully add the domain under your primary account, it becomes a conflicting domain. This parameter has the following values: true: the domain is a conflicting domain. false: the domain is not a conflicting domain.",
 		//	  "type": "boolean"
 		//	}
 		"is_conflict_domain": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该域名是否是一个冲突域名。在 CDN 中，每个域名都是唯一的。如果您需要添加一个已存在于其他主账号下的域名，您需要提交工单。如果您成功在您的主账号下添加了该域名，则该域名就是一个冲突域名。该参数有以下取值：true：表示该域名是冲突域名。false：表示该域名不是冲突域名。",
+			Description: "Indicates whether the domain is a conflicting domain. In CDN, each domain is unique. If you need to add a domain that already exists under another primary account, you must submit a ticket. If you successfully add the domain under your primary account, it becomes a conflicting domain. This parameter has the following values: true: the domain is a conflicting domain. false: the domain is not a conflicting domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名的配置是否允许被变更。该参数有以下取值：on：表示允许。off：表示不允许。",
+		//	  "description": "Indicates whether the configuration for this domain name can be changed. The parameter values are: on: Allowed. off: Not allowed.",
 		//	  "type": "string"
 		//	}
 		"lock_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该域名的配置是否允许被变更。该参数有以下取值：on：表示允许。off：表示不允许。",
+			Description: "Indicates whether the configuration for this domain name can be changed. The parameter values are: on: Allowed. off: Not allowed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MethodDeniedRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"禁用 HTTP Method\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Represents the configuration module for the 'Disable HTTP Method' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "Methods": {
-		//	      "description": "表示被禁用的一个或多个 HTTP 请求方法。当 Switch 是 true 时，该参数为必填。多个方法使用逗号（,）分隔。该参数有以下取值：get：表示禁用 GET 请求方法。post：表示禁用 POST 请求方法。delete：表示禁用 DELETE 请求方法。put：表示禁用 PUT 请求方法。head：表示禁用 HEAD 请求方法。patch：表示 PATCH 请求方法。connect：表示 CONNECT 请求方法。options：表示 OPTIONS 请求方法。",
+		//	      "description": "Indicates one or more HTTP request methods that are disabled. When Switch is true, this parameter is required. Use commas (,) to separate multiple methods. The parameter values are: get: disables the GET request method. post: disables the POST request method. delete: disables the DELETE request method. put: disables the PUT request method. head: disables the HEAD request method. patch: disables the PATCH request method. connect: disables the CONNECT request method. options: disables the OPTIONS request method.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "配置开关 禁用方法，多个用逗号,分割，开启时必填. choices: [get, post, head, delete, put]",
+		//	      "description": "Configuration switch for disabling methods. Use commas to separate multiple methods. Required when enabled. choices: [get, post, head, delete, put]",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -2468,26 +2468,26 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Methods
 				"methods": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示被禁用的一个或多个 HTTP 请求方法。当 Switch 是 true 时，该参数为必填。多个方法使用逗号（,）分隔。该参数有以下取值：get：表示禁用 GET 请求方法。post：表示禁用 POST 请求方法。delete：表示禁用 DELETE 请求方法。put：表示禁用 PUT 请求方法。head：表示禁用 HEAD 请求方法。patch：表示 PATCH 请求方法。connect：表示 CONNECT 请求方法。options：表示 OPTIONS 请求方法。",
+					Description: "Indicates one or more HTTP request methods that are disabled. When Switch is true, this parameter is required. Use commas (,) to separate multiple methods. The parameter values are: get: disables the GET request method. post: disables the POST request method. delete: disables the DELETE request method. put: disables the PUT request method. head: disables the HEAD request method. patch: disables the PATCH request method. connect: disables the CONNECT request method. options: disables the OPTIONS request method.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "配置开关 禁用方法，多个用逗号,分割，开启时必填. choices: [get, post, head, delete, put]",
+					Description: "Configuration switch for disabling methods. Use commas to separate multiple methods. Required when enabled. choices: [get, post, head, delete, put]",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"禁用 HTTP Method\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Represents the configuration module for the 'Disable HTTP Method' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MultiRange
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示多重范围（multi-range) 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the multi-range feature. This feature is disabled by default",
 		//	  "properties": {
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。该特性启用后，CDN 允许指定了多重范围的 Range 请求。false：表示不启用该特性。如果收到一个指定了多重范围的 Range 请求，CDN 会拒绝该请求并返回 416 响应状态码。该参数的默认值是 false。",
+		//	      "description": "Indicates whether the feature is enabled. This parameter has the following values: true: enables the feature. When enabled, CDN allows Range requests with multiple ranges. false: disables the feature. If a Range request with multiple ranges is received, CDN rejects the request and returns a 416 response status code. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -2497,49 +2497,49 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。该特性启用后，CDN 允许指定了多重范围的 Range 请求。false：表示不启用该特性。如果收到一个指定了多重范围的 Range 请求，CDN 会拒绝该请求并返回 416 响应状态码。该参数的默认值是 false。",
+					Description: "Indicates whether the feature is enabled. This parameter has the following values: true: enables the feature. When enabled, CDN allows Range requests with multiple ranges. false: disables the feature. If a Range request with multiple ranges is received, CDN rejects the request and returns a 416 response status code. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示多重范围（multi-range) 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the multi-range feature. This feature is disabled by default",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NegativeCache
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"状态码缓存\" 特性的配置模块。该特性默认为禁用。该参数值是一个列表，说明如下：每个列表元素是一个缓存规则配置。您最多可以创建 50 条规则。列表中元素的顺序表示对应规则的优先级。列表中第一个规则的优先级最高。如果您创建了多个规则，您需要留意规则之间是否存在包含关系。如果存在包含关系，作用范围较大的规则应出现在作用范围较小的规则的后面。",
+		//	  "description": "Indicates the configuration module for the 'status code cache' feature. This feature is disabled by default. The parameter value is a list, as explained below: Each list element is a cache rule configuration. You can create up to 50 rules. The order of elements in the list determines the priority of the corresponding rules. The first rule in the list has the highest priority. If you create multiple rules, pay attention to whether there is containment between rules. If containment exists, rules with a broader scope should appear after rules with a narrower scope.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "表示 \"状态码缓存\" 特性的配置模块。该特性默认为禁用。",
+		//	    "description": "Indicates the configuration module for the 'status code cache' feature. This feature is disabled by default.",
 		//	    "properties": {
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -2549,29 +2549,29 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "NegativeCacheRule": {
-		//	        "description": "表示一个列表。该列表的每个元素是一个状态码缓存规则。",
+		//	        "description": "Represents a list. Each element in the list is a status code cache rule.",
 		//	        "properties": {
 		//	          "Action": {
-		//	            "description": "表示缓存的行为。当前您仅可指定 cache。cache 表示行为是缓存。",
+		//	            "description": "Represents the cache behavior. Currently, you can only specify cache. cache means the behavior is caching.",
 		//	            "type": "string"
 		//	          },
 		//	          "IgnoreCase": {
-		//	            "description": "表示内容分发网络对请求的文件匹配 ConditionRule 时，是否忽略大小写。该参数有以下取值：true：表示忽略大小写。false：表示不忽略大小写。该参数的默认值是 false。",
+		//	            "description": "Indicates whether the CDN ignores case when matching files in a request with ConditionRule. The parameter has the following options: true: ignore case. false: do not ignore case. The default value is false.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "StatusCode": {
-		//	            "description": "指定一个需要缓存的状态码。状态码的范围是 400-599。您也可以指定 4xx 或者 5xx。4xx 表示 400 到 499 之间的所有状态码。5xx 表示 500 到 599 之间的所有状态码。",
+		//	            "description": "Specify a status code to cache. The status code range is 400–599. You can also specify 4xx or 5xx. 4xx refers to all status codes from 400 to 499. 5xx refers to all status codes from 500 to 599.",
 		//	            "type": "string"
 		//	          },
 		//	          "Ttl": {
-		//	            "description": "表示状态码的缓存时间。单位是秒。时间的范围是 1-315,360,000。315,360,000 表示 10年。",
+		//	            "description": "Indicates the cache duration for status codes, in seconds. The range is 1–315,360,000. 315,360,000 means 10 years.",
 		//	            "format": "int64",
 		//	            "type": "integer"
 		//	          }
@@ -2596,41 +2596,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NegativeCacheRule
@@ -2638,49 +2638,49 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Action
 							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示缓存的行为。当前您仅可指定 cache。cache 表示行为是缓存。",
+								Description: "Represents the cache behavior. Currently, you can only specify cache. cache means the behavior is caching.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IgnoreCase
 							"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "表示内容分发网络对请求的文件匹配 ConditionRule 时，是否忽略大小写。该参数有以下取值：true：表示忽略大小写。false：表示不忽略大小写。该参数的默认值是 false。",
+								Description: "Indicates whether the CDN ignores case when matching files in a request with ConditionRule. The parameter has the following options: true: ignore case. false: do not ignore case. The default value is false.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: StatusCode
 							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "指定一个需要缓存的状态码。状态码的范围是 400-599。您也可以指定 4xx 或者 5xx。4xx 表示 400 到 499 之间的所有状态码。5xx 表示 500 到 599 之间的所有状态码。",
+								Description: "Specify a status code to cache. The status code range is 400–599. You can also specify 4xx or 5xx. 4xx refers to all status codes from 400 to 499. 5xx refers to all status codes from 500 to 599.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Ttl
 							"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "表示状态码的缓存时间。单位是秒。时间的范围是 1-315,360,000。315,360,000 表示 10年。",
+								Description: "Indicates the cache duration for status codes, in seconds. The range is 1–315,360,000. 315,360,000 means 10 years.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示一个列表。该列表的每个元素是一个状态码缓存规则。",
+						Description: "Represents a list. Each element in the list is a status code cache rule.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示 \"状态码缓存\" 特性的配置模块。该特性默认为禁用。该参数值是一个列表，说明如下：每个列表元素是一个缓存规则配置。您最多可以创建 50 条规则。列表中元素的顺序表示对应规则的优先级。列表中第一个规则的优先级最高。如果您创建了多个规则，您需要留意规则之间是否存在包含关系。如果存在包含关系，作用范围较大的规则应出现在作用范围较小的规则的后面。",
+			Description: "Indicates the configuration module for the 'status code cache' feature. This feature is disabled by default. The parameter value is a list, as explained below: Each list element is a cache rule configuration. You can create up to 50 rules. The order of elements in the list determines the priority of the corresponding rules. The first rule in the list has the highest priority. If you create multiple rules, pay attention to whether there is containment between rules. If containment exists, rules with a broader scope should appear after rules with a narrower scope.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OfflineCache
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"离线缓存\" 特性的配置模块。",
+		//	  "description": "Indicates the configuration module for the 'offline cache' feature.",
 		//	  "properties": {
 		//	    "Object": {
-		//	      "description": "表示该特性的触发条件，该参数有以下取值：request_error：表示回源请求异常。当回源请求出现异常时，CDN 无法从源站获取文件，并且 CDN 没有获得任何来自源站的响应状态码。error_code：表示 CDN 无法从源站获取文件，并且源站的响应状态码是 5xx。request_error,error_code：表示以上两个条件都包含。",
+		//	      "description": "Indicates the trigger conditions for this feature. The parameter has the following values: request_error: indicates an origin request exception. When an origin request exception occurs, the CDN cannot retrieve files from the origin and does not receive any response status code from the origin. error_code: indicates the CDN cannot retrieve files from the origin, and the origin's response status code is 5xx. request_error,error_code: indicates both conditions are included.",
 		//	      "type": "string"
 		//	    },
 		//	    "StatusCode": {
-		//	      "description": "表示具体的 5xx 响应状态码，范围是 500-599。多个状态码之间使用分号（;）分隔。您也可以输入 5xx，表示任意以数字 5 开头的状态码。当 Object 是 error_code 或者 request_error,error_code 时，该参数才有效。",
+		//	      "description": "Specifies the specific 5xx response status codes, ranging from 500 to 599. Separate multiple status codes with a semicolon (;). You can also enter 5xx to indicate any status code starting with the digit 5. This parameter is valid only when Object is error_code or request_error,error_code.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -2690,59 +2690,59 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Object
 				"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示该特性的触发条件，该参数有以下取值：request_error：表示回源请求异常。当回源请求出现异常时，CDN 无法从源站获取文件，并且 CDN 没有获得任何来自源站的响应状态码。error_code：表示 CDN 无法从源站获取文件，并且源站的响应状态码是 5xx。request_error,error_code：表示以上两个条件都包含。",
+					Description: "Indicates the trigger conditions for this feature. The parameter has the following values: request_error: indicates an origin request exception. When an origin request exception occurs, the CDN cannot retrieve files from the origin and does not receive any response status code from the origin. error_code: indicates the CDN cannot retrieve files from the origin, and the origin's response status code is 5xx. request_error,error_code: indicates both conditions are included.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StatusCode
 				"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示具体的 5xx 响应状态码，范围是 500-599。多个状态码之间使用分号（;）分隔。您也可以输入 5xx，表示任意以数字 5 开头的状态码。当 Object 是 error_code 或者 request_error,error_code 时，该参数才有效。",
+					Description: "Specifies the specific 5xx response status codes, ranging from 500 to 599. Separate multiple status codes with a semicolon (;). You can also enter 5xx to indicate any status code starting with the digit 5. This parameter is valid only when Object is error_code or request_error,error_code.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"离线缓存\" 特性的配置模块。",
+			Description: "Indicates the configuration module for the 'offline cache' feature.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Origin
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示基础源站配置模块。",
+		//	  "description": "Indicates the basic origin configuration module.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "表示 \"源站\" 特性的配置模块。该特性默认为禁用。",
+		//	    "description": "Represents the configuration module for the 'Origin' feature. This feature is disabled by default.",
 		//	    "properties": {
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -2752,73 +2752,73 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "OriginAction": {
-		//	        "description": "表示源站配置。",
+		//	        "description": "Indicates origin configuration.",
 		//	        "properties": {
 		//	          "OriginLines": {
-		//	            "description": "表示一个源站配置列表。每个配置可以包含一个或者多个源站。",
+		//	            "description": "Indicates a list of origin configurations. Each configuration can include one or more origins.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个源站配置列表。每个配置可以包含一个或者多个源站。",
+		//	              "description": "Indicates a list of origin server configurations. Each configuration can include one or more origin servers.",
 		//	              "properties": {
 		//	                "Address": {
-		//	                  "description": "表示源站地址。该参数有以下说明：如果 InstanceType 是 ip，您可以设置一个 IP 地址。IP 地址可以是 IPv4 或 IPv6 地址。如果 InstanceType 是 domain，您可以设置一个域名。该域名不能是泛域名。如果 InstanceType 是 tos，您可以设置一个对象存储桶的域名。该存储桶可以来自阿里云、腾讯云、AWS。如果您在该 API 请求中指定了多个源站配置：所有主源站配置中的 InstanceType 必须相同。所有备源站配置中的 InstanceType 也必须相同。如果主源站配置中的 InstanceType 是 ip 或者 domain，备源站配置中的 InstanceType 必须是 ip 或者 domain。主源站地址和和备源站地址的总数不能超过 50 个。\n\n如果主源站配置中的 InstanceType 是 tos，\n\n那么该 API 请求不能包含其他主源站配置。同时，您也只能指定一个 InstanceType 是 tos 的备源站配置。如果对象存储桶是来自第三方云厂商，您必须指定 PrivateBucketAuth。",
+		//	                  "description": "Indicates the origin address. The parameter has the following instructions: If InstanceType is ip, you can set an IP address. The IP address can be either IPv4 or IPv6. If InstanceType is domain, you can set a domain name. The domain name cannot be a wildcard domain. If InstanceType is tos, you can set the domain name of an object storage bucket. The bucket can be from Alibaba Cloud, Tencent Cloud, or AWS. If you specify multiple origin configurations in this API request: All primary origin configurations must have the same InstanceType. All backup origin configurations must also have the same InstanceType. If the InstanceType in the primary origin configuration is ip or domain, the InstanceType in the backup origin configuration must also be ip or domain. The total number of primary and backup origin addresses cannot exceed 50.\n\nIf the InstanceType in the primary origin configuration is tos,\n\nthen this API request cannot include other primary origin configurations. At the same time, you can only specify one backup origin configuration with InstanceType tos. If the object storage bucket is from a third-party cloud provider, you must specify PrivateBucketAuth.",
 		//	                  "type": "string"
 		//	                },
 		//	                "HttpPort": {
 		//	                  "default": "80",
-		//	                  "description": "表示内容分发网络使用 HTTP 协议访问该源站时所访问的端口，取值范围是 1-65535，默认值是 80。如果源站不支持该端口的访问，您指定默认值即可。该参数仅当 InstanceType 为 ip 或 domain 时才有效。",
+		//	                  "description": "Indicates the port used by the content delivery network to access the origin server via the HTTP protocol. The value range is 1–65535, and the default value is 80. If the origin server does not support access on this port, you can specify the default value. This parameter is only valid when InstanceType is ip or domain.",
 		//	                  "type": "string"
 		//	                },
 		//	                "HttpsPort": {
 		//	                  "default": "443",
-		//	                  "description": "表示内容分发网络使用 HTTPS 协议访问该源站时所访问的端口，取值范围是 1-65535，默认值是 443。如果源站不支持该端口的访问，您指定默认值即可。该参数仅当 InstanceType 为 ip 或 domain 时才有效。",
+		//	                  "description": "Indicates the port used by the content delivery network to access the origin server via HTTPS. The value range is 1-65535, and the default value is 443. If the origin server does not support access on this port, you can specify the default value. This parameter is only valid when InstanceType is ip or domain.",
 		//	                  "type": "string"
 		//	                },
 		//	                "InstanceType": {
-		//	                  "description": "表示源站的类型。该参数有以下取值：ip：表示源站是通过 IP 地址来访问的。domain：表示源站是通过域名来访问的。tos：表示源站是一个对象存储桶。",
+		//	                  "description": "Indicates the type of origin server. This parameter has the following values: ip: The origin server is accessed via IP address. domain: The origin server is accessed via domain name. tos: The origin server is an object storage bucket.",
 		//	                  "type": "string"
 		//	                },
 		//	                "OriginHost": {
 		//	                  "default": "",
-		//	                  "description": "如果源站服务器上有多个站点，该参数表示回源请求访问的站点域名。该参数的优先级高于全局 OriginHost 参数。该参数值的长度不能超过 1,024 个字符。如果源站不是一个对象存储桶，该参数的默认值与全局 OriginHost 相同。如果源站是一个对象存储桶，该参数无需设置，其默认值与 Address 相同。",
+		//	                  "description": "If there are multiple sites on the origin server, this parameter specifies the site domain name accessed by the origin request. This parameter takes precedence over the global OriginHost parameter. The value of this parameter cannot exceed 1,024 characters. If the origin is not an object storage bucket, the default value is the same as the global OriginHost. If the origin is an object storage bucket, this parameter does not need to be set and defaults to Address.",
 		//	                  "type": "string"
 		//	                },
 		//	                "OriginType": {
-		//	                  "description": "表示源站的类别。该参数有以下取值： - primary：表示主源站。 - backup：表示备源站。 该 API 请求中至少需要包含一个主源站配置。备源站配置是可选的。",
+		//	                  "description": "Indicates the type of origin server. This parameter has the following values: - primary: Primary origin server. - backup: Backup origin server. At least one primary origin server configuration must be included in this API request. Backup origin server configuration is optional.",
 		//	                  "type": "string"
 		//	                },
 		//	                "PrivateBucketAccess": {
 		//	                  "default": false,
-		//	                  "description": "表示对象存储桶是否开启了私有读权限。该参数仅当 InstanceType 为 tos 时才有效。该参数有以下取值：true：表示开启了该权限。false：表示未开启该权限。该参数的默认值是 false。",
+		//	                  "description": "Indicates whether private read permissions are enabled for the object storage bucket. This parameter is only valid when InstanceType is tos. The parameter values are: true: Enabled. false: Not enabled. The default value is false.",
 		//	                  "type": "boolean"
 		//	                },
 		//	                "PrivateBucketAuth": {
-		//	                  "description": "表示第三方云厂商的对象存储桶的鉴权信息。",
+		//	                  "description": "Represents the authentication information for the object storage bucket of a third-party cloud provider.",
 		//	                  "properties": {
 		//	                    "AuthType": {
-		//	                      "description": "表示对象存储桶所在的第三方云厂商。该参数有以下取值：cos：表示腾讯云。oss：表示阿里云。aws：表示 Amazon AWS。",
+		//	                      "description": "Indicates the third-party cloud provider where the object storage bucket is located. The parameter values are: cos: Tencent Cloud. oss: Alibaba Cloud. aws: Amazon AWS.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Switch": {
-		//	                      "description": "表示对象存储桶是否来自第三方云厂商。该参数有以下取值：true：表示对象存储桶来自第三方云厂商。该参数的默认值是 false。",
+		//	                      "description": "Indicates whether the object storage bucket is from a third-party cloud provider. This parameter has the following values: true: the object storage bucket is from a third-party cloud provider. The default value is false",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "TosAuthInformation": {
-		//	                      "description": "表示该第三方云厂商的访问密钥。该参数仅当 Switch 是 true 时有效。",
+		//	                      "description": "Specifies the access key for the third-party cloud provider. This parameter is only valid when Switch is true.",
 		//	                      "properties": {
 		//	                        "AccessKeyId": {
-		//	                          "description": "表示您阿里云账号的 AccessKey ID、腾讯云账号的 SecretId 或者 AWS 账号的 access key ID。",
+		//	                          "description": "Specifies the AccessKey ID for your Alibaba Cloud account, SecretId for your Tencent Cloud account, or access key ID for your AWS account.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "AccessKeySecret": {
-		//	                          "description": "表示您阿里云账号的 AccessKey Secret、腾讯云账号的 SecretKey 或者 AWS 账号的 secret access key。",
+		//	                          "description": "Indicates the AccessKey Secret for your Alibaba Cloud account, the SecretKey for your Tencent Cloud account, or the secret access key for your AWS account.",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -2828,12 +2828,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "type": "object"
 		//	                },
 		//	                "Region": {
-		//	                  "description": "该参数暂不对外开放，请勿使用该参数。",
+		//	                  "description": "This parameter is not currently available externally. Do not use this parameter.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Weight": {
 		//	                  "default": "1",
-		//	                  "description": "表示该源站的权重，取值范围是 1-100，默认值是 1。权重越大，该源站在内容分发网络发送回源请求时被选择到的概率也越大。该参数仅当 InstanceType 为 ip 或 domain 时才有效。",
+		//	                  "description": "Specifies the weight of the origin. Value range is 1–100, default is 1. The higher the weight, the more likely this origin is selected when the content delivery network sends a request to the origin. This parameter is only valid when InstanceType is ip or domain.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -2874,41 +2874,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OriginAction
@@ -2920,37 +2920,37 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Address
 										"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示源站地址。该参数有以下说明：如果 InstanceType 是 ip，您可以设置一个 IP 地址。IP 地址可以是 IPv4 或 IPv6 地址。如果 InstanceType 是 domain，您可以设置一个域名。该域名不能是泛域名。如果 InstanceType 是 tos，您可以设置一个对象存储桶的域名。该存储桶可以来自阿里云、腾讯云、AWS。如果您在该 API 请求中指定了多个源站配置：所有主源站配置中的 InstanceType 必须相同。所有备源站配置中的 InstanceType 也必须相同。如果主源站配置中的 InstanceType 是 ip 或者 domain，备源站配置中的 InstanceType 必须是 ip 或者 domain。主源站地址和和备源站地址的总数不能超过 50 个。\n  \n  如果主源站配置中的 InstanceType 是 tos，\n  \n  那么该 API 请求不能包含其他主源站配置。同时，您也只能指定一个 InstanceType 是 tos 的备源站配置。如果对象存储桶是来自第三方云厂商，您必须指定 PrivateBucketAuth。",
+											Description: "Indicates the origin address. The parameter has the following instructions: If InstanceType is ip, you can set an IP address. The IP address can be either IPv4 or IPv6. If InstanceType is domain, you can set a domain name. The domain name cannot be a wildcard domain. If InstanceType is tos, you can set the domain name of an object storage bucket. The bucket can be from Alibaba Cloud, Tencent Cloud, or AWS. If you specify multiple origin configurations in this API request: All primary origin configurations must have the same InstanceType. All backup origin configurations must also have the same InstanceType. If the InstanceType in the primary origin configuration is ip or domain, the InstanceType in the backup origin configuration must also be ip or domain. The total number of primary and backup origin addresses cannot exceed 50.\n  \n  If the InstanceType in the primary origin configuration is tos,\n  \n  then this API request cannot include other primary origin configurations. At the same time, you can only specify one backup origin configuration with InstanceType tos. If the object storage bucket is from a third-party cloud provider, you must specify PrivateBucketAuth.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: HttpPort
 										"http_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示内容分发网络使用 HTTP 协议访问该源站时所访问的端口，取值范围是 1-65535，默认值是 80。如果源站不支持该端口的访问，您指定默认值即可。该参数仅当 InstanceType 为 ip 或 domain 时才有效。",
+											Description: "Indicates the port used by the content delivery network to access the origin server via the HTTP protocol. The value range is 1–65535, and the default value is 80. If the origin server does not support access on this port, you can specify the default value. This parameter is only valid when InstanceType is ip or domain.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: HttpsPort
 										"https_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示内容分发网络使用 HTTPS 协议访问该源站时所访问的端口，取值范围是 1-65535，默认值是 443。如果源站不支持该端口的访问，您指定默认值即可。该参数仅当 InstanceType 为 ip 或 domain 时才有效。",
+											Description: "Indicates the port used by the content delivery network to access the origin server via HTTPS. The value range is 1-65535, and the default value is 443. If the origin server does not support access on this port, you can specify the default value. This parameter is only valid when InstanceType is ip or domain.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: InstanceType
 										"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示源站的类型。该参数有以下取值：ip：表示源站是通过 IP 地址来访问的。domain：表示源站是通过域名来访问的。tos：表示源站是一个对象存储桶。",
+											Description: "Indicates the type of origin server. This parameter has the following values: ip: The origin server is accessed via IP address. domain: The origin server is accessed via domain name. tos: The origin server is an object storage bucket.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: OriginHost
 										"origin_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "如果源站服务器上有多个站点，该参数表示回源请求访问的站点域名。该参数的优先级高于全局 OriginHost 参数。该参数值的长度不能超过 1,024 个字符。如果源站不是一个对象存储桶，该参数的默认值与全局 OriginHost 相同。如果源站是一个对象存储桶，该参数无需设置，其默认值与 Address 相同。",
+											Description: "If there are multiple sites on the origin server, this parameter specifies the site domain name accessed by the origin request. This parameter takes precedence over the global OriginHost parameter. The value of this parameter cannot exceed 1,024 characters. If the origin is not an object storage bucket, the default value is the same as the global OriginHost. If the origin is an object storage bucket, this parameter does not need to be set and defaults to Address.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: OriginType
 										"origin_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示源站的类别。该参数有以下取值：   - primary：表示主源站。   - backup：表示备源站。 该 API 请求中至少需要包含一个主源站配置。备源站配置是可选的。",
+											Description: "Indicates the type of origin server. This parameter has the following values:   - primary: Primary origin server.   - backup: Backup origin server. At least one primary origin server configuration must be included in this API request. Backup origin server configuration is optional.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: PrivateBucketAccess
 										"private_bucket_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "表示对象存储桶是否开启了私有读权限。该参数仅当 InstanceType 为 tos 时才有效。该参数有以下取值：true：表示开启了该权限。false：表示未开启该权限。该参数的默认值是 false。",
+											Description: "Indicates whether private read permissions are enabled for the object storage bucket. This parameter is only valid when InstanceType is tos. The parameter values are: true: Enabled. false: Not enabled. The default value is false.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: PrivateBucketAuth
@@ -2958,12 +2958,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: AuthType
 												"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示对象存储桶所在的第三方云厂商。该参数有以下取值：cos：表示腾讯云。oss：表示阿里云。aws：表示 Amazon AWS。",
+													Description: "Indicates the third-party cloud provider where the object storage bucket is located. The parameter values are: cos: Tencent Cloud. oss: Alibaba Cloud. aws: Amazon AWS.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Switch
 												"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "表示对象存储桶是否来自第三方云厂商。该参数有以下取值：true：表示对象存储桶来自第三方云厂商。该参数的默认值是 false。",
+													Description: "Indicates whether the object storage bucket is from a third-party cloud provider. This parameter has the following values: true: the object storage bucket is from a third-party cloud provider. The default value is false",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: TosAuthInformation
@@ -2971,62 +2971,62 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: AccessKeyId
 														"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示您阿里云账号的 AccessKey ID、腾讯云账号的 SecretId 或者 AWS 账号的 access key ID。",
+															Description: "Specifies the AccessKey ID for your Alibaba Cloud account, SecretId for your Tencent Cloud account, or access key ID for your AWS account.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: AccessKeySecret
 														"access_key_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示您阿里云账号的 AccessKey Secret、腾讯云账号的 SecretKey 或者 AWS 账号的 secret access key。",
+															Description: "Indicates the AccessKey Secret for your Alibaba Cloud account, the SecretKey for your Tencent Cloud account, or the secret access key for your AWS account.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "表示该第三方云厂商的访问密钥。该参数仅当 Switch 是 true 时有效。",
+													Description: "Specifies the access key for the third-party cloud provider. This parameter is only valid when Switch is true.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Description: "表示第三方云厂商的对象存储桶的鉴权信息。",
+											Description: "Represents the authentication information for the object storage bucket of a third-party cloud provider.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Region
 										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "该参数暂不对外开放，请勿使用该参数。",
+											Description: "This parameter is not currently available externally. Do not use this parameter.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Weight
 										"weight": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示该源站的权重，取值范围是 1-100，默认值是 1。权重越大，该源站在内容分发网络发送回源请求时被选择到的概率也越大。该参数仅当 InstanceType 为 ip 或 domain 时才有效。",
+											Description: "Specifies the weight of the origin. Value range is 1–100, default is 1. The higher the weight, the more likely this origin is selected when the content delivery network sends a request to the origin. This parameter is only valid when InstanceType is ip or domain.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个源站配置列表。每个配置可以包含一个或者多个源站。",
+								Description: "Indicates a list of origin configurations. Each configuration can include one or more origins.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示源站配置。",
+						Description: "Indicates origin configuration.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示基础源站配置模块。",
+			Description: "Indicates the basic origin configuration module.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"Origin 黑白名单\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'Origin allowlist and blacklist' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "AllowEmpty": {
-		//	      "description": "表示用户请求头的 Origin 头部为空（\"\"）时，请求是否允许被放行。该参数有以下取值：true：表示允许。false：表示不允许。该参数的默认值是 false。",
+		//	      "description": "Specifies whether requests are allowed when the Origin header in the user request is empty (\"\"). The parameter values are: true: allow; false: do not allow. The default value is false.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "IgnoreCase": {
-		//	      "description": "表示 Origin 是否是大小写敏感的。该参数有以下取值：true: 表示 Origin 是大小写不敏感的。false: 表示 Origin 是大小写敏感的。该参数的默认值是 true。",
+		//	      "description": "Indicates whether Origin is case sensitive. This parameter has the following values: true: Origin is case insensitive; false: Origin is case sensitive. The default value is true.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Origins": {
-		//	      "description": "RuleType对应的地址列表。当 Switch 是 true 时，该参数为必填。您可以指定一个或者多个 IP 地址，CIDR 网段，域名和泛域名。域名可以是二级域名。IP 地址可以是 IPv4 和 IPv6 格式的地址。您最多可输入100个地址。输入域名时，无需包含http:// 或 https://。该参数值的长度不能超过 3000 个字符。",
+		//	      "description": "The address list corresponding to RuleType. When Switch is true, this parameter is required. You can specify one or more IP addresses, CIDR blocks, domain names, and wildcard domain names. Domain names can be second-level domains. IP addresses can be in IPv4 or IPv6 format. You can enter up to 100 addresses. When entering domain names, you do not need to include http:// or https://. The value length cannot exceed 3,000 characters.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -3035,11 +3035,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "RuleType": {
-		//	      "description": "Origin 名单配置类型。当 Switch 是 true 时，该参数为必填。该参数有以下取值：allow：表示白名单。deny：表示黑名单。",
+		//	      "description": "Origin list configuration type. When Switch is true, this parameter is required. The parameter has the following values: allow: indicates allowlist. deny: indicates denylist.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3049,70 +3049,70 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowEmpty
 				"allow_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示用户请求头的 Origin 头部为空（\"\"）时，请求是否允许被放行。该参数有以下取值：true：表示允许。false：表示不允许。该参数的默认值是 false。",
+					Description: "Specifies whether requests are allowed when the Origin header in the user request is empty (\"\"). The parameter values are: true: allow; false: do not allow. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IgnoreCase
 				"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示 Origin 是否是大小写敏感的。该参数有以下取值：true: 表示 Origin 是大小写不敏感的。false: 表示 Origin 是大小写敏感的。该参数的默认值是 true。",
+					Description: "Indicates whether Origin is case sensitive. This parameter has the following values: true: Origin is case insensitive; false: Origin is case sensitive. The default value is true.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Origins
 				"origins": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "RuleType对应的地址列表。当 Switch 是 true 时，该参数为必填。您可以指定一个或者多个 IP 地址，CIDR 网段，域名和泛域名。域名可以是二级域名。IP 地址可以是 IPv4 和 IPv6 格式的地址。您最多可输入100个地址。输入域名时，无需包含http:// 或 https://。该参数值的长度不能超过 3000 个字符。",
+					Description: "The address list corresponding to RuleType. When Switch is true, this parameter is required. You can specify one or more IP addresses, CIDR blocks, domain names, and wildcard domain names. Domain names can be second-level domains. IP addresses can be in IPv4 or IPv6 format. You can enter up to 100 addresses. When entering domain names, you do not need to include http:// or https://. The value length cannot exceed 3,000 characters.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RuleType
 				"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Origin 名单配置类型。当 Switch 是 true 时，该参数为必填。该参数有以下取值：allow：表示白名单。deny：表示黑名单。",
+					Description: "Origin list configuration type. When Switch is true, this parameter is required. The parameter has the following values: allow: indicates allowlist. deny: indicates denylist.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"Origin 黑白名单\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'Origin allowlist and blacklist' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginArg
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"回源参数\" 配置模块的规则列表。列表中最多可以包含 50 条规则。每条规则包含一个过滤器（Condition）和 CDN 执行的操作（OriginArgAction）。列表中规则的顺序定义了规则的优先级。列表中第一条规则的优先级最高。规则中的过滤器定义了规则的作用范围。如果您创建了多条规则，作用范围较大的规则应出现在作用范围较小的规则后面。当收到一个用户请求时，CDN 按规则的优先级，从高到低尝试将请求与规则匹配。如果请求匹配了一条规则，CDN 就停止处理其余规则。你必须在规则列表的最后添加以下这条预设规则。您不可更改该规则中的 Condition，但可以更改 OriginArgAction 中的配置。",
+		//	  "description": "Represents the rule list for the 'Origin Parameters' configuration module. The list can contain up to 50 rules. Each rule includes a filter (Condition) and an action performed by the CDN (OriginArgAction). The order of rules in the list defines their priority. The first rule in the list has the highest priority. The filter in each rule defines the scope of the rule. If you create multiple rules, rules with a broader scope should appear after those with a narrower scope. When a user request is received, the CDN matches the request against the rules in order of priority, from highest to lowest. If the request matches a rule, the CDN stops processing the remaining rules. You must add the following preset rule at the end of the rule list. You cannot modify the Condition in this rule, but you can change the configuration in OriginArgAction.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "表示 \"回源参数\" 配置模块的规则列表。",
+		//	    "description": "Indicates the rule list for the 'origin parameter' configuration module.",
 		//	    "properties": {
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -3122,31 +3122,31 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "OriginArgAction": {
-		//	        "description": "表示在满足 Condition 条件时所执行的操作。",
+		//	        "description": "Represents the action performed when the Condition is met.",
 		//	        "properties": {
 		//	          "OriginArgComponents": {
-		//	            "description": "表示一个操作列表。这些操作定义了 CDN 如何设置回源请求中的查询参数。当前，列表中只能包含一个操作。",
+		//	            "description": "Indicates a list of operations. These operations define how the CDN sets query parameters in origin requests. Currently, only one operation can be included in the list.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个回源参数的配置项。",
+		//	              "description": "Represents a configuration item for an origin parameter.",
 		//	              "properties": {
 		//	                "Action": {
-		//	                  "description": "include: 表示回源请求 URL 中包含用户请求 URL 中的全部查询参数。exclude：表示回源请求 URL 中不包含用户请求 URL 中的任何查询参数。addPart：表示回源请求 URL 中包含用户请求 URL 中的全部查询参数，并额外包含 Subobject 中指定的查询参数。includePart：表示如果用户请求 URL 中包含 Subobject 中指定的查询参数，那么回源请求 URL 中包含这些指定的查询参数。excludePart：表示回源请求 URL 中包含用户请求 URL 中的全部查询参数，除了Subobject 中指定的查询参数。set：表示回源请求 URL 中包含用户请求 URL 中的全部查询参数。同时，对于您在 Subobject 中指定的查询参数和参数值，CDN 会执行以下操作:如果这些查询参数在用户请求 URL 中，CDN 会在回源请求 URL 中将这些参数的值设置为您指定的值。如果用户请求 URL 中不包含这些查询参数，CDN 会在回源请求 URL 中添加这些查询参数。",
+		//	                  "description": "include: Indicates that the origin request URL includes all query parameters from the user request URL. exclude: Indicates that the origin request URL does not include any query parameters from the user request URL. addPart: Indicates that the origin request URL includes all query parameters from the user request URL, plus the query parameters specified in the Subobject. includePart: Indicates that if the user request URL contains the query parameters specified in the Subobject, the origin request URL will include these specified query parameters. excludePart: Indicates that the origin request URL includes all query parameters from the user request URL except those specified in the Subobject. set: Indicates that the origin request URL includes all query parameters from the user request URL. For the query parameters and values you specify in the Subobject, CDN will perform the following actions: If these query parameters exist in the user request URL, CDN will set their values in the origin request URL to the values you specify. If the user request URL does not contain these query parameters, CDN will add them to the origin request URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示 CDN 对哪个对象执行 Action。当前，该参数值只能是 queryString，表示请求 URL 中的查询字符串。",
+		//	                  "description": "Indicates which object the CDN performs the Action on. Currently, this parameter can only be set to queryString, which refers to the query string in the request URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Subobject": {
-		//	                  "description": "表示一个或者多个查询参数。多个查询参数之间使用分号（;）分隔，总长度不能超过 1,024 个字符。Subobject 只能包含字母、数字、下划线（_）、逗号（,）、短横线（-）、句点（.）和感叹号（!）。在匹配请求 URL 中的查询参数时，Subobject 中的参数是大小写敏感的。Subobject 的额外说明如下：当 Action 是 include 或 exclude 时，Subobject 必须是 *，表示请求 URL 中的所有查询参数。当 Action 是 includePart 或 excludePart 时，Subobject 表示一个或者多个查询参数。例如 param1;param2。当 Action 是 addPart 或 set 时，Subobject 表示一个或者多个查询参数和参数值，格式是 key=value。例如 param1=val1;param2=val2;param3=val3。",
+		//	                  "description": "Represents one or more query parameters. Use semicolons (;) to separate multiple query parameters. The total length must not exceed 1,024 characters. Subobject can only contain letters, numbers, underscores (_), commas (,), hyphens (-), periods (.), and exclamation marks (!). When matching query parameters in the request URL, parameters in Subobject are case-sensitive. Additional notes for Subobject: When Action is include or exclude, Subobject must be *, which represents all query parameters in the request URL. When Action is includePart or excludePart, Subobject represents one or more query parameters, for example, param1;param2. When Action is addPart or set, Subobject represents one or more query parameters and their values in the format key=value, for example, param1=val1;param2=val2;param3=val3.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -3176,41 +3176,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OriginArgAction
@@ -3222,38 +3222,38 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Action
 										"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "include: 表示回源请求 URL 中包含用户请求 URL 中的全部查询参数。exclude：表示回源请求 URL 中不包含用户请求 URL 中的任何查询参数。addPart：表示回源请求 URL 中包含用户请求 URL 中的全部查询参数，并额外包含 Subobject 中指定的查询参数。includePart：表示如果用户请求 URL 中包含 Subobject 中指定的查询参数，那么回源请求 URL 中包含这些指定的查询参数。excludePart：表示回源请求 URL 中包含用户请求 URL 中的全部查询参数，除了Subobject 中指定的查询参数。set：表示回源请求 URL 中包含用户请求 URL 中的全部查询参数。同时，对于您在 Subobject 中指定的查询参数和参数值，CDN 会执行以下操作:如果这些查询参数在用户请求 URL 中，CDN 会在回源请求 URL 中将这些参数的值设置为您指定的值。如果用户请求 URL 中不包含这些查询参数，CDN 会在回源请求 URL 中添加这些查询参数。",
+											Description: "include: Indicates that the origin request URL includes all query parameters from the user request URL. exclude: Indicates that the origin request URL does not include any query parameters from the user request URL. addPart: Indicates that the origin request URL includes all query parameters from the user request URL, plus the query parameters specified in the Subobject. includePart: Indicates that if the user request URL contains the query parameters specified in the Subobject, the origin request URL will include these specified query parameters. excludePart: Indicates that the origin request URL includes all query parameters from the user request URL except those specified in the Subobject. set: Indicates that the origin request URL includes all query parameters from the user request URL. For the query parameters and values you specify in the Subobject, CDN will perform the following actions: If these query parameters exist in the user request URL, CDN will set their values in the origin request URL to the values you specify. If the user request URL does not contain these query parameters, CDN will add them to the origin request URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示 CDN 对哪个对象执行 Action。当前，该参数值只能是 queryString，表示请求 URL 中的查询字符串。",
+											Description: "Indicates which object the CDN performs the Action on. Currently, this parameter can only be set to queryString, which refers to the query string in the request URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Subobject
 										"subobject": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个或者多个查询参数。多个查询参数之间使用分号（;）分隔，总长度不能超过 1,024 个字符。Subobject 只能包含字母、数字、下划线（_）、逗号（,）、短横线（-）、句点（.）和感叹号（!）。在匹配请求 URL 中的查询参数时，Subobject 中的参数是大小写敏感的。Subobject 的额外说明如下：当 Action 是 include 或 exclude 时，Subobject 必须是 *，表示请求 URL 中的所有查询参数。当 Action 是 includePart 或 excludePart 时，Subobject 表示一个或者多个查询参数。例如 param1;param2。当 Action 是 addPart 或 set 时，Subobject 表示一个或者多个查询参数和参数值，格式是 key=value。例如 param1=val1;param2=val2;param3=val3。",
+											Description: "Represents one or more query parameters. Use semicolons (;) to separate multiple query parameters. The total length must not exceed 1,024 characters. Subobject can only contain letters, numbers, underscores (_), commas (,), hyphens (-), periods (.), and exclamation marks (!). When matching query parameters in the request URL, parameters in Subobject are case-sensitive. Additional notes for Subobject: When Action is include or exclude, Subobject must be *, which represents all query parameters in the request URL. When Action is includePart or excludePart, Subobject represents one or more query parameters, for example, param1;param2. When Action is addPart or set, Subobject represents one or more query parameters and their values in the format key=value, for example, param1=val1;param2=val2;param3=val3.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个操作列表。这些操作定义了 CDN 如何设置回源请求中的查询参数。当前，列表中只能包含一个操作。",
+								Description: "Indicates a list of operations. These operations define how the CDN sets query parameters in origin requests. Currently, only one operation can be included in the list.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示在满足 Condition 条件时所执行的操作。",
+						Description: "Represents the action performed when the Condition is met.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示 \"回源参数\" 配置模块的规则列表。列表中最多可以包含 50 条规则。每条规则包含一个过滤器（Condition）和 CDN 执行的操作（OriginArgAction）。列表中规则的顺序定义了规则的优先级。列表中第一条规则的优先级最高。规则中的过滤器定义了规则的作用范围。如果您创建了多条规则，作用范围较大的规则应出现在作用范围较小的规则后面。当收到一个用户请求时，CDN 按规则的优先级，从高到低尝试将请求与规则匹配。如果请求匹配了一条规则，CDN 就停止处理其余规则。你必须在规则列表的最后添加以下这条预设规则。您不可更改该规则中的 Condition，但可以更改 OriginArgAction 中的配置。",
+			Description: "Represents the rule list for the 'Origin Parameters' configuration module. The list can contain up to 50 rules. Each rule includes a filter (Condition) and an action performed by the CDN (OriginArgAction). The order of rules in the list defines their priority. The first rule in the list has the highest priority. The filter in each rule defines the scope of the rule. If you create multiple rules, rules with a broader scope should appear after those with a narrower scope. When a user request is received, the CDN matches the request against the rules in order of priority, from highest to lowest. If the request matches a rule, the CDN stops processing the remaining rules. You must add the following preset rule at the end of the rule list. You cannot modify the Condition in this rule, but you can change the configuration in OriginArgAction.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginCertCheck
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "源站证书校验",
+		//	  "description": "Origin certificate validation",
 		//	  "properties": {
 		//	    "Switch": {
 		//	      "description": "Switch",
@@ -3270,65 +3270,65 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "源站证书校验",
+			Description: "Origin certificate validation",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginHost
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "如果源站服务器上有多个站点，该参数表示回源请求访问的站点域名。该参数对所有源站配置生效，但是优先级低于源站配置中 OriginHost 参数。该参数的默认值与 Domain 相同。如果源站是一个对象存储桶，您无需指定该参数。其默认值与源站配置中的 Address 相同。",
+		//	  "description": "If there are multiple sites on the origin server, this parameter specifies the domain name accessed by the origin request. This parameter applies to all origin configurations, but has lower priority than the OriginHost parameter in the origin configuration. The default value of this parameter is the same as Domain. If the origin is an object storage bucket, you do not need to specify this parameter. Its default value is the same as the Address in the origin configuration.",
 		//	  "type": "string"
 		//	}
 		"origin_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "如果源站服务器上有多个站点，该参数表示回源请求访问的站点域名。该参数对所有源站配置生效，但是优先级低于源站配置中 OriginHost 参数。该参数的默认值与 Domain 相同。如果源站是一个对象存储桶，您无需指定该参数。其默认值与源站配置中的 Address 相同。",
+			Description: "If there are multiple sites on the origin server, this parameter specifies the domain name accessed by the origin request. This parameter applies to all origin configurations, but has lower priority than the OriginHost parameter in the origin configuration. The default value of this parameter is the same as Domain. If the origin is an object storage bucket, you do not need to specify this parameter. Its default value is the same as the Address in the origin configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginIPv6
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"IPv6 回源\" 的配置。该参数有以下取值：ipv6_first：表示内容分发网络始终尝试获取源站域名的 IPv6 地址。如果无法获取该 IP 地址，内容分发网络才尝试获取源站域名的 IPv4 地址。ipv4_first：表示内容分发网络始终尝试获取源站域名的 IPv4 地址。如果无法获取该 IP 地址，内容分发网络才尝试获取源站域名的 IPv6 地址。followclient：表示内容分发网络尝试获取与用户请求相同类型的 IP 地址。该参数的默认值是 followclient。由于海外部分回源节点不支持向 IPv6 地址发送回源请求，该功能仅适用于位于中国内地的回源节点。",
+		//	  "description": "Indicates the configuration for \"IPv6 origin fetch.\" This parameter has the following values: ipv6_first: The content delivery network always tries to obtain the IPv6 address of the origin domain. If it cannot obtain the IPv6 address, the content delivery network then tries to obtain the IPv4 address of the origin domain. ipv4_first: The content delivery network always tries to obtain the IPv4 address of the origin domain. If it cannot obtain the IPv4 address, the content delivery network then tries to obtain the IPv6 address of the origin domain. followclient: The content delivery network tries to obtain the same type of IP address as the user's request. The default value for this parameter is followclient. Since some overseas origin fetch nodes do not support sending origin fetch requests to IPv6 addresses, this feature is only available for origin fetch nodes located in mainland China.",
 		//	  "type": "string"
 		//	}
 		"origin_i_pv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示 \"IPv6 回源\" 的配置。该参数有以下取值：ipv6_first：表示内容分发网络始终尝试获取源站域名的 IPv6 地址。如果无法获取该 IP 地址，内容分发网络才尝试获取源站域名的 IPv4 地址。ipv4_first：表示内容分发网络始终尝试获取源站域名的 IPv4 地址。如果无法获取该 IP 地址，内容分发网络才尝试获取源站域名的 IPv6 地址。followclient：表示内容分发网络尝试获取与用户请求相同类型的 IP 地址。该参数的默认值是 followclient。由于海外部分回源节点不支持向 IPv6 地址发送回源请求，该功能仅适用于位于中国内地的回源节点。",
+			Description: "Indicates the configuration for \"IPv6 origin fetch.\" This parameter has the following values: ipv6_first: The content delivery network always tries to obtain the IPv6 address of the origin domain. If it cannot obtain the IPv6 address, the content delivery network then tries to obtain the IPv4 address of the origin domain. ipv4_first: The content delivery network always tries to obtain the IPv4 address of the origin domain. If it cannot obtain the IPv4 address, the content delivery network then tries to obtain the IPv6 address of the origin domain. followclient: The content delivery network tries to obtain the same type of IP address as the user's request. The default value for this parameter is followclient. Since some overseas origin fetch nodes do not support sending origin fetch requests to IPv6 addresses, this feature is only available for origin fetch nodes located in mainland China.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginProtocol
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示回源请求使用的协议。该参数有以下取值：http：表示回源请求使用 HTTP 协议。https：表示回源请求使用 HTTPS 协议。followclient：表示回源协议与用户请求使用的协议相同。",
+		//	  "description": "Indicates the protocol used for origin requests. The parameter has the following values: http: uses the HTTP protocol for origin requests. https: uses the HTTPS protocol for origin requests. followclient: uses the same protocol as the user's request.",
 		//	  "type": "string"
 		//	}
 		"origin_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示回源请求使用的协议。该参数有以下取值：http：表示回源请求使用 HTTP 协议。https：表示回源请求使用 HTTPS 协议。followclient：表示回源协议与用户请求使用的协议相同。",
+			Description: "Indicates the protocol used for origin requests. The parameter has the following values: http: uses the HTTP protocol for origin requests. https: uses the HTTPS protocol for origin requests. followclient: uses the same protocol as the user's request.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginRange
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示是否启用 \"Range 回源\" 特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	  "description": "Indicates whether the 'Range Origin' feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature. The default value is false.",
 		//	  "type": "boolean"
 		//	}
 		"origin_range": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "表示是否启用 \"Range 回源\" 特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+			Description: "Indicates whether the 'Range Origin' feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature. The default value is false.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginRetry
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"回源重试设置\" 特性的配置模块。",
+		//	  "description": "Indicates the configuration module for the \"origin fetch retry settings\" feature.",
 		//	  "properties": {
 		//	    "StatusCode": {
-		//	      "description": "表示范围在 400-599 之间的一个或者多个状态码。多个状态码之间使用分号（;）分隔。您可以输入 4xx 或者 5xx，表示所有以数字 4 或 数字 5 开头的状态码。",
+		//	      "description": "Indicates one or more status codes in the range 400–599. Separate multiple status codes with a semicolon (;). You can enter 4xx or 5xx to represent all status codes starting with the digit 4 or 5.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether this feature is enabled. The parameter values are: true: Enabled. false: Disabled. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3338,57 +3338,57 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: StatusCode
 				"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示范围在 400-599 之间的一个或者多个状态码。多个状态码之间使用分号（;）分隔。您可以输入 4xx 或者 5xx，表示所有以数字 4 或 数字 5 开头的状态码。",
+					Description: "Indicates one or more status codes in the range 400–599. Separate multiple status codes with a semicolon (;). You can enter 4xx or 5xx to represent all status codes starting with the digit 4 or 5.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether this feature is enabled. The parameter values are: true: Enabled. false: Disabled. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"回源重试设置\" 特性的配置模块。",
+			Description: "Indicates the configuration module for the \"origin fetch retry settings\" feature.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginRewrite
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"回源 URL 改写\" 特性的配置模块。",
+		//	  "description": "Indicates the configuration module for the 'Origin URL Rewrite' feature.",
 		//	  "properties": {
 		//	    "OriginRewriteRule": {
-		//	      "description": "表示一个规则列表。当 Switch 是 true 时，该参数为必填。列表中最多可以包含 50 条规则。列表中规则的顺序定义了规则的优先级。列表中第一条规则的优先级最高。规则中的 SourcePath 定义了规则的作用范围。如果您创建了多条规则，作用范围较大的规则应出现在作用范围较小的规则后面。当收到一个用户请求时，CDN 按规则的优先级，从高到低尝试将请求与规则匹配。如果请求匹配了一条规则，CDN 就停止处理其余规则。",
+		//	      "description": "Represents a list of rules. This parameter is required when Switch is true. The list can contain up to 50 rules. The order of rules in the list defines their priority, with the first rule having the highest priority. The SourcePath in each rule specifies the scope of the rule. If you create multiple rules, rules with a broader scope should appear after those with a narrower scope. When a user request is received, the CDN matches the request against the rules in order of priority, from highest to lowest. If the request matches a rule, the CDN stops processing the remaining rules.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一个规则列表。当 Switch 是 true 时，该参数为必填。列表中最多可以包含 50 条规则。列表中规则的顺序定义了规则的优先级。列表中第一条规则的优先级最高。规则中的 SourcePath 定义了规则的作用范围。如果您创建了多条规则，作用范围较大的规则应出现在作用范围较小的规则后面。当收到一个用户请求时，CDN 按规则的优先级，从高到低尝试将请求与规则匹配。如果请求匹配了一条规则，CDN 就停止处理其余规则。",
+		//	        "description": "Represents a list of rules. When Switch is true, this parameter is required. The list can contain up to 50 rules. The order of rules in the list defines their priority. The first rule in the list has the highest priority. SourcePath in each rule defines the scope of the rule. If you create multiple rules, rules with a broader scope should appear after those with a narrower scope. When a user request is received, the CDN matches the request against the rules in order of priority, from highest to lowest. If the request matches a rule, the CDN stops processing the remaining rules.",
 		//	        "properties": {
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -3398,25 +3398,25 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "OriginRewriteAction": {
-		//	            "description": "表示一个回源路径改写的规则配置。",
+		//	            "description": "Indicates a rule configuration for origin path rewrite.",
 		//	            "properties": {
 		//	              "RewriteType": {
-		//	                "description": "表示改写类型。该参数有以下取值：rewrite_path：表示对请求 URL 中的路径进行改写。rewrite_url：表示对请求 URL 中的路径和查询字符串进行改写。该参数的默认值是 rewrite_path。",
+		//	                "description": "Indicates the rewrite type. This parameter supports the following values: rewrite_path: rewrites the path in the request URL. rewrite_url: rewrites both the path and query string in the request URL. The default value is rewrite_path.",
 		//	                "type": "string"
 		//	              },
 		//	              "SourcePath": {
-		//	                "description": "表示一个正则表达式，长度不能超过 1,024 个字符，用于匹配用户请求 URL 中的对象。对于一个用户请求，如果该正则表达式匹配了对象中的任何部分，这条规则就匹配了这个用户请求。当 RewriteType 是 rewrite_path 时，该对象指的是请求 URL 中的路径。当 RewriteType 是 rewrite_url 时，该对象指的是请求 URL 中的路径和查询字符串。",
+		//	                "description": "Indicates a regular expression, with a maximum length of 1,024 characters, used to match objects in the user's request URL. For a user request, if the regular expression matches any part of the object, this rule applies to the request. When RewriteType is rewrite_path, the object refers to the path in the request URL. When RewriteType is rewrite_url, the object refers to both the path and query string in the request URL.",
 		//	                "type": "string"
 		//	              },
 		//	              "TargetPath": {
-		//	                "description": "表示改写后，回源请求 URL 中的对象。当 RewriteType 是 rewrite_path 时，该对象是回源请求 URL 中的路径。当 RewriteType 是 rewrite_url 时，该对象是回源请求 URL 中的路径和查询字符串。您可以在 TargetPath 中使用 $1、$2、$3 等表示您在 SourcePath 的正则表达式中定义的组。",
+		//	                "description": "Indicates the object in the origin request URL after rewriting. When RewriteType is rewrite_path, this object is the path in the origin request URL. When RewriteType is rewrite_url, this object is the path and query string in the origin request URL. You can use $1, $2, $3, etc. in TargetPath to represent groups defined in the regular expression of SourcePath.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -3429,7 +3429,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该模块。该参数有以下取值：true：表示启用该模块。false：表示禁用该模块。该参数的默认值是 false。",
+		//	      "description": "Indicates whether to enable this module. The parameter has the following values: true: enables the module. false: disables the module. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3450,41 +3450,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: OriginRewriteAction
@@ -3492,49 +3492,49 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: RewriteType
 									"rewrite_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示改写类型。该参数有以下取值：rewrite_path：表示对请求 URL 中的路径进行改写。rewrite_url：表示对请求 URL 中的路径和查询字符串进行改写。该参数的默认值是 rewrite_path。",
+										Description: "Indicates the rewrite type. This parameter supports the following values: rewrite_path: rewrites the path in the request URL. rewrite_url: rewrites both the path and query string in the request URL. The default value is rewrite_path.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePath
 									"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示一个正则表达式，长度不能超过 1,024 个字符，用于匹配用户请求 URL 中的对象。对于一个用户请求，如果该正则表达式匹配了对象中的任何部分，这条规则就匹配了这个用户请求。当 RewriteType 是 rewrite_path 时，该对象指的是请求 URL 中的路径。当 RewriteType 是 rewrite_url 时，该对象指的是请求 URL 中的路径和查询字符串。",
+										Description: "Indicates a regular expression, with a maximum length of 1,024 characters, used to match objects in the user's request URL. For a user request, if the regular expression matches any part of the object, this rule applies to the request. When RewriteType is rewrite_path, the object refers to the path in the request URL. When RewriteType is rewrite_url, the object refers to both the path and query string in the request URL.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TargetPath
 									"target_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示改写后，回源请求 URL 中的对象。当 RewriteType 是 rewrite_path 时，该对象是回源请求 URL 中的路径。当 RewriteType 是 rewrite_url 时，该对象是回源请求 URL 中的路径和查询字符串。您可以在 TargetPath 中使用 $1、$2、$3 等表示您在 SourcePath 的正则表达式中定义的组。",
+										Description: "Indicates the object in the origin request URL after rewriting. When RewriteType is rewrite_path, this object is the path in the origin request URL. When RewriteType is rewrite_url, this object is the path and query string in the origin request URL. You can use $1, $2, $3, etc. in TargetPath to represent groups defined in the regular expression of SourcePath.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示一个回源路径改写的规则配置。",
+								Description: "Indicates a rule configuration for origin path rewrite.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一个规则列表。当 Switch 是 true 时，该参数为必填。列表中最多可以包含 50 条规则。列表中规则的顺序定义了规则的优先级。列表中第一条规则的优先级最高。规则中的 SourcePath 定义了规则的作用范围。如果您创建了多条规则，作用范围较大的规则应出现在作用范围较小的规则后面。当收到一个用户请求时，CDN 按规则的优先级，从高到低尝试将请求与规则匹配。如果请求匹配了一条规则，CDN 就停止处理其余规则。",
+					Description: "Represents a list of rules. This parameter is required when Switch is true. The list can contain up to 50 rules. The order of rules in the list defines their priority, with the first rule having the highest priority. The SourcePath in each rule specifies the scope of the rule. If you create multiple rules, rules with a broader scope should appear after those with a narrower scope. When a user request is received, the CDN matches the request against the rules in order of priority, from highest to lowest. If the request matches a rule, the CDN stops processing the remaining rules.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该模块。该参数有以下取值：true：表示启用该模块。false：表示禁用该模块。该参数的默认值是 false。",
+					Description: "Indicates whether to enable this module. The parameter has the following values: true: enables the module. false: disables the module. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"回源 URL 改写\" 特性的配置模块。",
+			Description: "Indicates the configuration module for the 'Origin URL Rewrite' feature.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginSni
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"回源 SNI\" 特性的配置模块。",
+		//	  "description": "Indicates the configuration module for the 'origin SNI' feature.",
 		//	  "properties": {
 		//	    "SniDomain": {
-		//	      "description": "指定回源 SNI 的域名。当 Switch 是 true 时，该参数为必填。该参数值的长度不能超过 1,024 个字符。",
+		//	      "description": "Specifies the domain name for origin SNI. When Switch is true, this parameter is required. The value cannot exceed 1,024 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether this feature is enabled. This parameter has the following options: true: Enable this feature. false: Disable this feature. The default value for this parameter is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3544,26 +3544,26 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SniDomain
 				"sni_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "指定回源 SNI 的域名。当 Switch 是 true 时，该参数为必填。该参数值的长度不能超过 1,024 个字符。",
+					Description: "Specifies the domain name for origin SNI. When Switch is true, this parameter is required. The value cannot exceed 1,024 characters.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether this feature is enabled. This parameter has the following options: true: Enable this feature. false: Disable this feature. The default value for this parameter is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"回源 SNI\" 特性的配置模块。",
+			Description: "Indicates the configuration module for the 'origin SNI' feature.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PageOptimization
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"页面优化\" 特性的配置模块。",
+		//	  "description": "Specifies the configuration module for the 'page optimization' feature.",
 		//	  "properties": {
 		//	    "OptimizationType": {
-		//	      "description": "表示优化的对象。该参数有以下取值：html: 表示 HTML 页面。js: 表示 Javascript 代码。css: 表示 CSS 代码。该参数的默认值是 html。如果您指定了 js 或者 js，html 也必须指定。",
+		//	      "description": "Specifies the optimization target. This parameter has the following values: html: HTML page. js: JavaScript code. css: CSS code. The default value is html. If you specify js or css, html must also be specified.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -3572,7 +3572,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether this feature is enabled. The parameter values are: true: The feature is enabled. false: The feature is disabled.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3583,23 +3583,23 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: OptimizationType
 				"optimization_type": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示优化的对象。该参数有以下取值：html: 表示 HTML 页面。js: 表示 Javascript 代码。css: 表示 CSS 代码。该参数的默认值是 html。如果您指定了 js 或者 js，html 也必须指定。",
+					Description: "Specifies the optimization target. This parameter has the following values: html: HTML page. js: JavaScript code. css: CSS code. The default value is html. If you specify js or css, html must also be specified.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether this feature is enabled. The parameter values are: true: The feature is enabled. false: The feature is disabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"页面优化\" 特性的配置模块。",
+			Description: "Specifies the configuration module for the 'page optimization' feature.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrimaryOrigin
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名配置的主源站列表。",
+		//	  "description": "Indicates the list of primary origin servers configured for this domain name.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -3609,28 +3609,28 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"primary_origin": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "表示该域名配置的主源站列表。",
+			Description: "Indicates the list of primary origin servers configured for this domain name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Project
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该加速域名归属的项目。",
+		//	  "description": "Indicates the project to which the acceleration domain belongs",
 		//	  "type": "string"
 		//	}
 		"project": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该加速域名归属的项目。",
+			Description: "Indicates the project to which the acceleration domain belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Quic
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 QUIC 特性的配置模块。该特性默认是禁用。",
+		//	  "description": "Indicates the configuration module for the QUIC feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "Switch": {
-		//	      "description": "QUIC 配置开关。该参数有以下取值：true：表示启用 QUIC。false：表示禁用 QUIC。要启用 QUIC，您必须先启用 HTTPS。",
+		//	      "description": "QUIC configuration switch. The parameter values are as follows: true: enables QUIC. false: disables QUIC. To enable QUIC, you must first enable HTTPS.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3640,57 +3640,57 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "QUIC 配置开关。该参数有以下取值：true：表示启用 QUIC。false：表示禁用 QUIC。要启用 QUIC，您必须先启用 HTTPS。",
+					Description: "QUIC configuration switch. The parameter values are as follows: true: enables QUIC. false: disables QUIC. To enable QUIC, you must first enable HTTPS.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 QUIC 特性的配置模块。该特性默认是禁用。",
+			Description: "Indicates the configuration module for the QUIC feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RedirectionRewrite
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"URL 重定向改写\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Represents the configuration module for the 'URL Redirect Rewrite' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "RedirectionRule": {
-		//	      "description": "表示一个 URL 重定向改写的规则的列表。当 Switch 是 true 时，该参数为必填。该列表最多可以包含 50 条规则。",
+		//	      "description": "Indicates a list of URL redirect rewrite rules. When Switch is true, this parameter is required. The list can contain up to 50 rules.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一个 URL 重定向改写的规则的列表。",
+		//	        "description": "Indicates a list of rules for URL redirect and rewrite.",
 		//	        "properties": {
 		//	          "RedirectionAction": {
-		//	            "description": "表示一个 URL 重定向改写的规则。",
+		//	            "description": "Indicates a URL redirect rewrite rule",
 		//	            "properties": {
 		//	              "RedirectCode": {
-		//	                "description": "表示 URL 重定向的响应状态码。该参数的取值有 301、302、303、307、308。需要留意的是：对于 301 和 302，如果原请求使用的方法不是 GET，那么客户端向新的URL发送请求时，新请求使用的方法可能变成 GET。对于 303，新请求使用的方法是 GET。对于 307 和 308，新请求使用的方法与原请求相同，不会被改变。",
+		//	                "description": "Indicates the response status code for URL redirection. Valid values are 301, 302, 303, 307, and 308. Note: For 301 and 302, if the original request method is not GET, the client may use GET when sending the new request to the new URL. For 303, the new request method is GET. For 307 and 308, the new request method remains the same as the original and is not changed.",
 		//	                "type": "string"
 		//	              },
 		//	              "SourcePath": {
-		//	                "description": "表示文件的原路径。也就是请求中包含的路径。路径必须以斜杠（/）开头并且不能包含连续斜杠（//）、百分号（%）、空格。该参数值的长度不能超过 1,024 个字符。",
+		//	                "description": "Specifies the original file path, which is the path included in the request. The path must start with a slash (/) and cannot contain consecutive slashes (//), percent signs (%), or spaces. The value of this parameter cannot exceed 1,024 characters.",
 		//	                "type": "string"
 		//	              },
 		//	              "TargetHost": {
-		//	                "description": "表示目标路径所归属站点的域名或者 IP 地址。IP 地址必须是 IPv4 类型的地址。该参数值的长度不能超过 1,024 个字符。该参数的默认值就是您的加速域名。",
+		//	                "description": "Indicates the domain name or IP address of the site to which the target path belongs. The IP address must be IPv4. The parameter value cannot exceed 1,024 characters. The default value is your acceleration domain name.",
 		//	                "type": "string"
 		//	              },
 		//	              "TargetPath": {
-		//	                "description": "表示跳转后的目标路径。路径必须以斜杠（/）开头并且不能包含连续斜杠（//）、百分号（%）、空格。该参数值的长度不能超过 1,024 个字符。",
+		//	                "description": "Indicates the target path after redirection. The path must start with a slash (/) and cannot contain consecutive slashes (//), percent signs (%), or spaces. The value cannot exceed 1,024 characters.",
 		//	                "type": "string"
 		//	              },
 		//	              "TargetProtocol": {
-		//	                "description": "表示 URL重定向后的新请求所使用的协议。该参数有以下取值：followclient：表示使用原请求的协议。http：表示新请求强制使用 HTTP 协议。https：表示新请求强制使用 HTTPS 协议。",
+		//	                "description": "Specifies the protocol used for the new request after URL redirection. The parameter values are: followclient: use the protocol of the original request; http: force the new request to use HTTP; https: force the new request to use HTTPS.",
 		//	                "type": "string"
 		//	              },
 		//	              "TargetQueryComponents": {
-		//	                "description": "表示原请求 URL 中的查询参数的处理方式。",
+		//	                "description": "Indicates how the query parameters in the original request URL are handled.",
 		//	                "properties": {
 		//	                  "Action": {
-		//	                    "description": "表示原请求 URL 中的查询参数的处理方式。该参数有以下取值：include：表示在跳转后的 URL 中包含原请求 URL 中的所有查询参数。exclude：表示在跳转后的 URL 中不包含原请求 URL 中的任何查询参数。includePart：表示在跳转后的 URL 中包含原请求 URL 中特定的查询参数。excludePart：表示在跳转后的 URL 中不包含原请求 URL 中特定的查询参数。",
+		//	                    "description": "Indicates how to handle query parameters in the original request URL. This parameter has the following values: include: includes all query parameters from the original request URL in the redirected URL. exclude: excludes all query parameters from the original request URL in the redirected URL. includePart: includes specific query parameters from the original request URL in the redirected URL. excludePart: excludes specific query parameters from the original request URL in the redirected URL.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Value": {
-		//	                    "description": "表示要保留或删除的查询参数。多个查询参数间使用英文分号（;）分隔。指定的查询参数不能包含连续斜杠（//）、百分号（\"）、空格。Value 的默认值是 *，表示所有的查询参数。如果 Action 是 include 或者 exclude, 则 Value 必须为 *。如果 Action 是 includePart 或者 excludePart，您可以指定一个或者多个查询参数。此时，您指定的查询参数不能是 *。",
+		//	                    "description": "Indicates the query parameters to retain or remove. Multiple query parameters are separated by a semicolon (;). The specified query parameters cannot contain consecutive slashes (//), percent signs (\"), or spaces. The default value of Value is *, which means all query parameters. If Action is include or exclude, Value must be *. If Action is includePart or excludePart, you can specify one or more query parameters. In this case, the specified query parameters cannot be *.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -3706,7 +3706,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该配置。该参数有以下取值：true：表示启用 URL 重定向改写。false：表示禁用 URL 重定向改写。",
+		//	      "description": "Indicates whether this configuration is enabled. This parameter has the following values: true: enables URL redirect rewrite. false: disables URL redirect rewrite.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3723,27 +3723,27 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: RedirectCode
 									"redirect_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示 URL 重定向的响应状态码。该参数的取值有 301、302、303、307、308。需要留意的是：对于 301 和 302，如果原请求使用的方法不是 GET，那么客户端向新的URL发送请求时，新请求使用的方法可能变成 GET。对于 303，新请求使用的方法是 GET。对于 307 和 308，新请求使用的方法与原请求相同，不会被改变。",
+										Description: "Indicates the response status code for URL redirection. Valid values are 301, 302, 303, 307, and 308. Note: For 301 and 302, if the original request method is not GET, the client may use GET when sending the new request to the new URL. For 303, the new request method is GET. For 307 and 308, the new request method remains the same as the original and is not changed.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SourcePath
 									"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示文件的原路径。也就是请求中包含的路径。路径必须以斜杠（/）开头并且不能包含连续斜杠（//）、百分号（%）、空格。该参数值的长度不能超过 1,024 个字符。",
+										Description: "Specifies the original file path, which is the path included in the request. The path must start with a slash (/) and cannot contain consecutive slashes (//), percent signs (%), or spaces. The value of this parameter cannot exceed 1,024 characters.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TargetHost
 									"target_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示目标路径所归属站点的域名或者 IP 地址。IP 地址必须是 IPv4 类型的地址。该参数值的长度不能超过 1,024 个字符。该参数的默认值就是您的加速域名。",
+										Description: "Indicates the domain name or IP address of the site to which the target path belongs. The IP address must be IPv4. The parameter value cannot exceed 1,024 characters. The default value is your acceleration domain name.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TargetPath
 									"target_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示跳转后的目标路径。路径必须以斜杠（/）开头并且不能包含连续斜杠（//）、百分号（%）、空格。该参数值的长度不能超过 1,024 个字符。",
+										Description: "Indicates the target path after redirection. The path must start with a slash (/) and cannot contain consecutive slashes (//), percent signs (%), or spaces. The value cannot exceed 1,024 characters.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TargetProtocol
 									"target_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示 URL重定向后的新请求所使用的协议。该参数有以下取值：followclient：表示使用原请求的协议。http：表示新请求强制使用 HTTP 协议。https：表示新请求强制使用 HTTPS 协议。",
+										Description: "Specifies the protocol used for the new request after URL redirection. The parameter values are: followclient: use the protocol of the original request; http: force the new request to use HTTP; https: force the new request to use HTTPS.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TargetQueryComponents
@@ -3751,48 +3751,48 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Action
 											"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示原请求 URL 中的查询参数的处理方式。该参数有以下取值：include：表示在跳转后的 URL 中包含原请求 URL 中的所有查询参数。exclude：表示在跳转后的 URL 中不包含原请求 URL 中的任何查询参数。includePart：表示在跳转后的 URL 中包含原请求 URL 中特定的查询参数。excludePart：表示在跳转后的 URL 中不包含原请求 URL 中特定的查询参数。",
+												Description: "Indicates how to handle query parameters in the original request URL. This parameter has the following values: include: includes all query parameters from the original request URL in the redirected URL. exclude: excludes all query parameters from the original request URL in the redirected URL. includePart: includes specific query parameters from the original request URL in the redirected URL. excludePart: excludes specific query parameters from the original request URL in the redirected URL.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: Value
 											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示要保留或删除的查询参数。多个查询参数间使用英文分号（;）分隔。指定的查询参数不能包含连续斜杠（//）、百分号（\"）、空格。Value 的默认值是 *，表示所有的查询参数。如果 Action 是 include 或者 exclude, 则 Value 必须为 *。如果 Action 是 includePart 或者 excludePart，您可以指定一个或者多个查询参数。此时，您指定的查询参数不能是 *。",
+												Description: "Indicates the query parameters to retain or remove. Multiple query parameters are separated by a semicolon (;). The specified query parameters cannot contain consecutive slashes (//), percent signs (\"), or spaces. The default value of Value is *, which means all query parameters. If Action is include or exclude, Value must be *. If Action is includePart or excludePart, you can specify one or more query parameters. In this case, the specified query parameters cannot be *.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示原请求 URL 中的查询参数的处理方式。",
+										Description: "Indicates how the query parameters in the original request URL are handled.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示一个 URL 重定向改写的规则。",
+								Description: "Indicates a URL redirect rewrite rule",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一个 URL 重定向改写的规则的列表。当 Switch 是 true 时，该参数为必填。该列表最多可以包含 50 条规则。",
+					Description: "Indicates a list of URL redirect rewrite rules. When Switch is true, this parameter is required. The list can contain up to 50 rules.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该配置。该参数有以下取值：true：表示启用 URL 重定向改写。false：表示禁用 URL 重定向改写。",
+					Description: "Indicates whether this configuration is enabled. This parameter has the following values: true: enables URL redirect rewrite. false: disables URL redirect rewrite.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"URL 重定向改写\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Represents the configuration module for the 'URL Redirect Rewrite' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RefererAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"Referer 黑白名单\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the \"Referer Allowlist and Denylist\" feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "AllowEmpty": {
-		//	      "description": "表示用户请求头的 Referer 头部为空（\"\"）时，内容分发网络是否接受该请求。该参数有以下取值：true：表示接受该请求。false：表示拒绝该请求。该参数的默认值是 false。",
+		//	      "description": "Specifies whether the content delivery network accepts a request when the Referer header in the user's request is empty (\"\"). This parameter has the following values: true: accepts the request; false: rejects the request. The default value is false.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Referers": {
-		//	      "description": "表示一个 Referer 的列表，该参数的输入要求与 ReferersType 下 CommonType 类型的 Referers 的输入要求一致。建议您使用 ReferersType 来指定 Referer 列表。如果您指定了 SharedConfig，就不能指定该参数。",
+		//	      "description": "Indicates a list of Referers. The input requirements for this parameter are consistent with those for Referers under the CommonType of ReferersType. We recommend using ReferersType to specify the Referer list. If you specify SharedConfig, you cannot specify this parameter.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -3801,21 +3801,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "ReferersType": {
-		//	      "description": "表示一个 ReferersType 对象。其包含一个 CommonType 对象和一个 RegularType 对象，分别表示一个常规的 Referer 列表和一个 Referer 正则表达式列表。如果您指定了 SharedConfig，就不能指定该参数。",
+		//	      "description": "Indicates a ReferersType object. It contains a CommonType object and a RegularType object, representing a standard Referer list and a Referer regular expression list, respectively. If you specify SharedConfig, you cannot specify this parameter.",
 		//	      "properties": {
 		//	        "CommonType": {
-		//	          "description": "表示一个 CommonType 对象，其包含一个常规 Referer 的列表。",
+		//	          "description": "Indicates a CommonType object that contains a list of standard Referers.",
 		//	          "properties": {
 		//	            "IgnoreCase": {
-		//	              "description": "表示 CommonType 下的这个 Referers 列表在匹配时是否是大小写敏感的。该参数有以下取值：true: 表示大小写不敏感。false: 表示大小写敏感。该参数的默认值是 true。",
+		//	              "description": "Specifies whether the Referers list under CommonType is case sensitive during matching. The parameter supports the following values: true: not case sensitive. false: case sensitive. The default value is true.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "IgnoreScheme": {
-		//	              "description": "表示匹配 CommonType 下的这个 Referers 列表的 Referer 头部值是否必须以 HTTP 或者 HTTPS 开头。该参数有以下取值：true: 表示不以 HTTP 或者 HTTPS 开头的 Referer 头部值是合法的。在这个情况下，内容分发网络会尝试将其与 Referers 列表匹配。false: 表示不以 HTTP 或者 HTTPS 开头 Referer 头部值是非法的。在这个情况下，内容分发网络判定为不匹配 CommonType 下的这个 Referers 列表。该参数的默认值是 false。",
+		//	              "description": "Indicates whether the Referer header value in this Referers list under CommonType must start with HTTP or HTTPS. This parameter has the following values: true: Referer header values that do not start with HTTP or HTTPS are valid. In this case, the content delivery network will attempt to match them with the Referers list. false: Referer header values that do not start with HTTP or HTTPS are invalid. In this case, the content delivery network determines that they do not match the Referers list under CommonType. The default value is false.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "Referers": {
-		//	              "description": "表示一个常规 Referer 的列表。在该列表中，您可以指定一个或者多个 IP 地址，CIDR 网段，域名和泛域名。域名可以是二级域名。IP 地址可以是 IPv4 和 IPv6 格式的地址。您最多可输入 1,000 个 IP 地址。输入的域名不能包含 http:// 或 https://。在匹配时，内容分发网络会将请求 Referer 头部值中的域名与 Referer 列表进行匹配。该参数值的长度不能超过 30,000 个字符。",
+		//	              "description": "Represents a standard Referer list. In this list, you can specify one or more IP addresses, CIDR blocks, domain names, and wildcard domains. Domain names can include second-level domains. IP addresses can be in IPv4 or IPv6 format. You can enter up to 1,000 IP addresses. The domain names entered must not include http:// or https://. During matching, the content delivery network compares the domain name in the Referer header of the request with the Referer list. The value of this parameter must not exceed 30,000 characters.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -3827,10 +3827,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "RegularType": {
-		//	          "description": "表示一个 RegularType 对象，其包含一个正则表达式列表用来匹配请求的 Referer 头部值。该参数为白名单功能。要使用该参数，请提交工单。需要注意的是，如果请求的 Referer 头部值匹配 CommonType 下的 Referers 名单或者 RegularType 下的 Referers 名单，内容分发网络就认为是匹配。",
+		//	          "description": "Specifies a RegularType object, which contains a list of regular expressions used to match the Referer header value in requests This parameter provides the allowlist feature To use this parameter, submit a ticket Note that if the Referer header value in a request matches the Referers list under CommonType or the Referers list under RegularType, the content delivery network considers it a match",
 		//	          "properties": {
 		//	            "Referers": {
-		//	              "description": "表示一个 Referer 正则表达式的列表。该参数值的长度不能超过 30,000 个字符。",
+		//	              "description": "Indicates a list of Referer regular expressions. The value of this parameter cannot exceed 30,000 characters.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -3845,21 +3845,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "RuleType": {
-		//	      "description": "表示 Referer 名单的类型。当 Switch 是 true 时，该参数为必填。该参数有以下取值：allow：表示白名单。deny：表示黑名单。",
+		//	      "description": "Indicates the type of Referer list. This parameter is required when Switch is true. This parameter has the following values: allow: indicates Allowlist. deny: indicates Denylist.",
 		//	      "type": "string"
 		//	    },
 		//	    "SharedConfig": {
-		//	      "description": "表示一个全局配置。如果您指定了该参数，就不能指定 Referers，也不能指定 ReferersType。",
+		//	      "description": "Represents a global configuration. If you specify this parameter, you cannot specify Referers or ReferersType.",
 		//	      "properties": {
 		//	        "ConfigName": {
-		//	          "description": "表示一个全局配置的名称。",
+		//	          "description": "Indicates the name of a global configuration.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -3869,13 +3869,13 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowEmpty
 				"allow_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示用户请求头的 Referer 头部为空（\"\"）时，内容分发网络是否接受该请求。该参数有以下取值：true：表示接受该请求。false：表示拒绝该请求。该参数的默认值是 false。",
+					Description: "Specifies whether the content delivery network accepts a request when the Referer header in the user's request is empty (\"\"). This parameter has the following values: true: accepts the request; false: rejects the request. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Referers
 				"referers": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示一个 Referer 的列表，该参数的输入要求与 ReferersType 下 CommonType 类型的 Referers 的输入要求一致。建议您使用 ReferersType 来指定 Referer 列表。如果您指定了 SharedConfig，就不能指定该参数。",
+					Description: "Indicates a list of Referers. The input requirements for this parameter are consistent with those for Referers under the CommonType of ReferersType. We recommend using ReferersType to specify the Referer list. If you specify SharedConfig, you cannot specify this parameter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ReferersType
@@ -3886,22 +3886,22 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: IgnoreCase
 								"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "表示 CommonType 下的这个 Referers 列表在匹配时是否是大小写敏感的。该参数有以下取值：true: 表示大小写不敏感。false: 表示大小写敏感。该参数的默认值是 true。",
+									Description: "Specifies whether the Referers list under CommonType is case sensitive during matching. The parameter supports the following values: true: not case sensitive. false: case sensitive. The default value is true.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: IgnoreScheme
 								"ignore_scheme": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "表示匹配 CommonType 下的这个 Referers 列表的 Referer 头部值是否必须以 HTTP 或者 HTTPS 开头。该参数有以下取值：true: 表示不以 HTTP 或者 HTTPS 开头的 Referer 头部值是合法的。在这个情况下，内容分发网络会尝试将其与 Referers 列表匹配。false: 表示不以 HTTP 或者 HTTPS 开头 Referer 头部值是非法的。在这个情况下，内容分发网络判定为不匹配 CommonType 下的这个 Referers 列表。该参数的默认值是 false。",
+									Description: "Indicates whether the Referer header value in this Referers list under CommonType must start with HTTP or HTTPS. This parameter has the following values: true: Referer header values that do not start with HTTP or HTTPS are valid. In this case, the content delivery network will attempt to match them with the Referers list. false: Referer header values that do not start with HTTP or HTTPS are invalid. In this case, the content delivery network determines that they do not match the Referers list under CommonType. The default value is false.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Referers
 								"referers": schema.SetAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "表示一个常规 Referer 的列表。在该列表中，您可以指定一个或者多个 IP 地址，CIDR 网段，域名和泛域名。域名可以是二级域名。IP 地址可以是 IPv4 和 IPv6 格式的地址。您最多可输入 1,000 个 IP 地址。输入的域名不能包含 http:// 或 https://。在匹配时，内容分发网络会将请求 Referer 头部值中的域名与 Referer 列表进行匹配。该参数值的长度不能超过 30,000 个字符。",
+									Description: "Represents a standard Referer list. In this list, you can specify one or more IP addresses, CIDR blocks, domain names, and wildcard domains. Domain names can include second-level domains. IP addresses can be in IPv4 or IPv6 format. You can enter up to 1,000 IP addresses. The domain names entered must not include http:// or https://. During matching, the content delivery network compares the domain name in the Referer header of the request with the Referer list. The value of this parameter must not exceed 30,000 characters.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "表示一个 CommonType 对象，其包含一个常规 Referer 的列表。",
+							Description: "Indicates a CommonType object that contains a list of standard Referers.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: RegularType
@@ -3910,20 +3910,20 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: Referers
 								"referers": schema.SetAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "表示一个 Referer 正则表达式的列表。该参数值的长度不能超过 30,000 个字符。",
+									Description: "Indicates a list of Referer regular expressions. The value of this parameter cannot exceed 30,000 characters.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "表示一个 RegularType 对象，其包含一个正则表达式列表用来匹配请求的 Referer 头部值。该参数为白名单功能。要使用该参数，请提交工单。需要注意的是，如果请求的 Referer 头部值匹配 CommonType 下的 Referers 名单或者 RegularType 下的 Referers 名单，内容分发网络就认为是匹配。",
+							Description: "Specifies a RegularType object, which contains a list of regular expressions used to match the Referer header value in requests This parameter provides the allowlist feature To use this parameter, submit a ticket Note that if the Referer header value in a request matches the Referers list under CommonType or the Referers list under RegularType, the content delivery network considers it a match",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示一个 ReferersType 对象。其包含一个 CommonType 对象和一个 RegularType 对象，分别表示一个常规的 Referer 列表和一个 Referer 正则表达式列表。如果您指定了 SharedConfig，就不能指定该参数。",
+					Description: "Indicates a ReferersType object. It contains a CommonType object and a RegularType object, representing a standard Referer list and a Referer regular expression list, respectively. If you specify SharedConfig, you cannot specify this parameter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RuleType
 				"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示 Referer 名单的类型。当 Switch 是 true 时，该参数为必填。该参数有以下取值：allow：表示白名单。deny：表示黑名单。",
+					Description: "Indicates the type of Referer list. This parameter is required when Switch is true. This parameter has the following values: allow: indicates Allowlist. deny: indicates Denylist.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SharedConfig
@@ -3931,61 +3931,61 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ConfigName
 						"config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "表示一个全局配置的名称。",
+							Description: "Indicates the name of a global configuration.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示一个全局配置。如果您指定了该参数，就不能指定 Referers，也不能指定 ReferersType。",
+					Description: "Represents a global configuration. If you specify this parameter, you cannot specify Referers or ReferersType.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether this feature is enabled. This parameter has the following values: true: enables the feature. false: disables the feature.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"Referer 黑白名单\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the \"Referer Allowlist and Denylist\" feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RemoteAuth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"远程鉴权\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'remote authentication' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "RemoteAuthRules": {
-		//	      "description": "表示远程鉴权的配置规则列表。当 Switch 是 true 时，该参数为必填。您只能添加一个配置规则。",
+		//	      "description": "Specifies the list of remote authentication configuration rules. When Switch is true, this parameter is required. You can add only one configuration rule.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示远程鉴权的配置规则列表。当 Switch 是 true 时，该参数为必填。您只能添加一个配置规则。",
+		//	        "description": "Indicates the list of configuration rules for remote authentication. When Switch is true, this parameter is required. You can add only one configuration rule.",
 		//	        "properties": {
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -3995,53 +3995,53 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "RemoteAuthRuleAction": {
-		//	            "description": "表示具体的鉴权配置。",
+		//	            "description": "Indicates the specific authentication configuration.",
 		//	            "properties": {
 		//	              "AuthModeConfig": {
-		//	                "description": "表示鉴权服务器的配置。",
+		//	                "description": "Indicates the configuration of the authentication server.",
 		//	                "properties": {
 		//	                  "BackupRemoteAddr": {
-		//	                    "description": "表示鉴权服务器的备地址。地址格式和要求与主地址相同。",
+		//	                    "description": "Indicates the backup address of the authentication server. The address format and requirements are the same as the primary address.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "MasterRemoteAddr": {
-		//	                    "description": "表示鉴权服务器的主地址，长度不能超过 100 个字符。主地址的格式是 \u003cscheme\u003e://\u003cdomain\u003e:\u003cport\u003e 或 \u003cscheme\u003e://\u003cip\u003e:\u003cport\u003e，其中：\u003cscheme\u003e 是 http 或者 https。\u003cdomain\u003e 不能是 localhost。\u003cip\u003e 不能是 127.0.0.1。\u003cport\u003e 是可选的。",
+		//	                    "description": "Indicates the primary address of the authentication server. The length must not exceed 100 characters. The primary address format is \u003cscheme\u003e://\u003cdomain\u003e:\u003cport\u003e or \u003cscheme\u003e://\u003cip\u003e:\u003cport\u003e, where: \u003cscheme\u003e is http or https. \u003cdomain\u003e cannot be localhost. \u003cip\u003e cannot be 127.0.0.1. \u003cport\u003e is optional.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "PathType": {
-		//	                    "description": "表示鉴权请求的路径。鉴权地址和请求路径组成了完整的鉴权 URL。内容分发网络会把用户的请求转发到该鉴权 URL。该参数有以下取值：constant：表示鉴权请求中的路径与用户请求中的路径相同。variable：表示您需要在 pathValue 参数中指定一个鉴权请求中的路径。",
+		//	                    "description": "Indicates the path for the authentication request. The authentication address and request path together form the complete authentication URL. The content delivery network forwards the user's request to this authentication URL. The parameter accepts the following values: constant: The path in the authentication request is the same as the path in the user's request. variable: You need to specify a path for the authentication request in the pathValue parameter.",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "PathValue": {
-		//	                    "description": "表示一个鉴权请求的路径，长度不能超过 100 个字符。路径必须以斜杠（/）开头，可以包含除了以下字符的可打印 ASCII 字符：连续斜杠（//）、百分号（%）、美元符号（$）、空格、问号（?）、Delete（ASCII code 127）",
+		//	                    "description": "Represents the path for an authentication request. The path cannot exceed 100 characters. It must start with a slash (/), and can include any printable ASCII characters except the following: consecutive slashes (//), percent sign (%), dollar sign ($), space, question mark (?), and Delete (ASCII code 127).",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "RequestMethod": {
-		//	                    "description": "表示在发送鉴权请求时，内容分发网络所使用的请求方法。该参数有以下取值：default：表示鉴权请求所使用的方法与用户的请求相同。get：表示鉴权请求使用 GET 方法。post：表示鉴权请求使用 POST方法。head：表示鉴权请求使用 HEAD 方法。",
+		//	                    "description": "Indicates the request method used by the content delivery network when sending authentication requests. The parameter has the following values: default: uses the same method as the user's request. get: uses the GET method. post: uses the POST method. head: uses the HEAD method.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
 		//	                "type": "object"
 		//	              },
 		//	              "AuthResponseConfig": {
-		//	                "description": "内容分发网络需要对鉴权服务器返回的鉴权状态码进行处理。该参数表示相关的配置。",
+		//	                "description": "The content delivery network needs to handle the authentication status codes returned by the authentication server. This parameter specifies the relevant configuration.",
 		//	                "properties": {
 		//	                  "CacheAction": {
-		//	                    "description": "内容分发网络可以缓存鉴权状态码。该参数表示相关的配置。",
+		//	                    "description": "The content delivery network can cache authentication status codes. This parameter indicates the related configuration.",
 		//	                    "properties": {
 		//	                      "Action": {
-		//	                        "description": "表示内容分发网络是否缓存鉴权状态码。该参数有以下取值：nocache：表示内容分发网络不缓存鉴权状态码。cache：内容分发网络缓存鉴权状态码。",
+		//	                        "description": "Indicates whether the CDN caches authentication status codes. The parameter values are: nocache: CDN does not cache authentication status codes. cache: CDN caches authentication status codes.",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "CacheKey": {
-		//	                        "description": "缓存 key 指定了用于区分不同请求 URI 的查询参数。每个参数都必须以 $ 开头。",
+		//	                        "description": "The cache key specifies the query parameters used to distinguish different request URIs. Each parameter must start with $.",
 		//	                        "insertionOrder": false,
 		//	                        "items": {
 		//	                          "type": "string"
@@ -4050,7 +4050,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        "uniqueItems": true
 		//	                      },
 		//	                      "Ttl": {
-		//	                        "description": "表示鉴权状态码的缓存时间。单位是秒。取值范围是 1-86400。86400秒表示 24小时。",
+		//	                        "description": "Indicates the cache duration for authentication status codes, measured in seconds. The range is 1–86400. 86400 seconds equals 24 hours.",
 		//	                        "format": "int64",
 		//	                        "type": "integer"
 		//	                      }
@@ -4058,42 +4058,42 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "type": "object"
 		//	                  },
 		//	                  "ResponseAction": {
-		//	                    "description": "表示鉴权失败时，内容分发网络如何响应用户。",
+		//	                    "description": "Indicates how the content delivery network responds to users when authentication fails.",
 		//	                    "properties": {
 		//	                      "StatusCode": {
-		//	                        "description": "表示鉴权失败时，内容分发网络响应用户的状态码。您可以指定范围在 400-499 中的任意一个状态码。该参数的默认值是 403。",
+		//	                        "description": "Indicates the status code returned by the content delivery network to the user when authentication fails. You can specify any status code in the range 400–499. The default value is 403.",
 		//	                        "type": "string"
 		//	                      }
 		//	                    },
 		//	                    "type": "object"
 		//	                  },
 		//	                  "StatusCodeAction": {
-		//	                    "description": "表示内容分发网络对鉴权状态码的处理方式。",
+		//	                    "description": "Specifies how the content delivery network handles authentication status codes.",
 		//	                    "properties": {
 		//	                      "DefaultAction": {
-		//	                        "description": "表示如果鉴权状态码既不是 FailCode，又不是 SuccessCode 时，内容分发网络处理鉴权请求的方式。该参数有以下取值：reject：表示内容分发网络认为鉴权失败。pass：表示内容分发网络认为鉴权成功。",
+		//	                        "description": "Specifies how the content delivery network handles authentication requests when the authentication status code is neither FailCode nor SuccessCode. This parameter has the following values: reject: the content delivery network considers authentication failed; pass: the content delivery network considers authentication successful.",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "FailCode": {
-		//	                        "description": "表示鉴权失败时的鉴权状态码。您可以指定范围在 400-499 中的一个或者多个状态码。多个状态码使用英文分号（;）分隔。您也可以指定 4xx 表示 400-499 中的任意一个状态码。该参数的默认值是 401。",
+		//	                        "description": "Indicates the authentication status code returned when authentication fails. You can specify one or more status codes in the range 400–499. Separate multiple status codes with a semicolon (;). You can also specify 4xx to indicate any status code between 400 and 499. The default value for this parameter is 401.",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "SuccessCode": {
-		//	                        "description": "表示鉴权成功时的鉴权状态码。您可以指定范围在 200-299 中的一个或者多个状态码。多个状态码使用英文分号（;）分隔。您也可以指定 2xx 表示 200-299 中的任意一个状态码。该参数的默认值是 200。",
+		//	                        "description": "Indicates the authentication status code for successful authentication. You can specify one or more status codes in the range 200–299. Separate multiple status codes with a semicolon (;). You can also specify 2xx to represent any status code from 200–299. The default value is 200.",
 		//	                        "type": "string"
 		//	                      }
 		//	                    },
 		//	                    "type": "object"
 		//	                  },
 		//	                  "TimeOutAction": {
-		//	                    "description": "表示鉴权超时后，内容分发网络如何处理鉴权请求。",
+		//	                    "description": "Specifies how the content delivery network handles authentication requests after authentication timeout.",
 		//	                    "properties": {
 		//	                      "Action": {
-		//	                        "description": "表示鉴权超时后，内容分发网络处理鉴权请求的策略。该参数有以下取值：reject：表示内容分发网络认为鉴权失败。pass：表示内容分发网络认为鉴权成功。",
+		//	                        "description": "Indicates the strategy for handling authentication requests after a timeout in the content delivery network. This parameter supports the following values: reject: The content delivery network considers authentication failed. pass: The content delivery network considers authentication successful.",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "Time": {
-		//	                        "description": "表示鉴权超时的时间，单位是毫秒。该参数的默认值为 200，取值范围是 200 - 3600。",
+		//	                        "description": "Specifies the authentication timeout in milliseconds. The default value is 200. The valid range is 200–3600.",
 		//	                        "format": "int64",
 		//	                        "type": "integer"
 		//	                      }
@@ -4104,42 +4104,42 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "QueryStringRules": {
-		//	                "description": "表示鉴权请求的参数设置。",
+		//	                "description": "Represents the parameter settings for authentication requests.",
 		//	                "properties": {
 		//	                  "QueryStringComponents": {
-		//	                    "description": "表示鉴权请求参数的设置策略。",
+		//	                    "description": "Indicates the strategy for setting authentication request parameters.",
 		//	                    "properties": {
 		//	                      "Action": {
-		//	                        "description": "表示鉴权请求是否包含用户请求 URL 中的查询参数。该参数有以下取值：exclude：表示鉴权请求不包含任何查询参数。include：表示鉴权请求包含所有查询参数。includePart：表示鉴权请求包含指定的查询参数。",
+		//	                        "description": "Indicates whether the authentication request includes query parameters from the user's request URL. The parameter accepts the following values: exclude: The authentication request does not include any query parameters. include: The authentication request includes all query parameters. includePart: The authentication request includes specified query parameters.",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "Value": {
-		//	                        "description": "表示 Action 参数所对应的参数值，长度不能超过1,024 个字符。该参数有以下取值：如果 Action 是 exclude 或 include，Value 必须是 *。如果 Action 是 includePart，您需要在 Value 参数中指定用户请求 URL 中的一个或者多个查询参数，多个查询参数使用英文分号（;）分隔。您不能指定 *。查询参数是区分大小写的，可以包含除了以下字符的可打印 ASCII 字符：双引号（\"）、空格、Delete（ASCII code 127）该参数的默认值是 *。",
+		//	                        "description": "Indicates the parameter value corresponding to the Action parameter. The length cannot exceed 1,024 characters. The parameter accepts the following values: If Action is exclude or include, Value must be *. If Action is includePart, you need to specify one or more query parameters from the user's request URL in the Value parameter, separated by semicolons (;). You cannot specify *. Query parameters are case-sensitive and can include printable ASCII characters except for the following: double quotes (\") , spaces, and Delete (ASCII code 127). The default value for this parameter is *.",
 		//	                        "type": "string"
 		//	                      }
 		//	                    },
 		//	                    "type": "object"
 		//	                  },
 		//	                  "QueryStringInstances": {
-		//	                    "description": "表示鉴权请求中额外的参数设置。您最多可以设置 50 个参数。",
+		//	                    "description": "Indicates additional parameter settings in the authentication request. You can set up to 50 parameters.",
 		//	                    "insertionOrder": false,
 		//	                    "items": {
-		//	                      "description": "表示鉴权请求中额外的参数设置。您最多可以设置 50 个参数。",
+		//	                      "description": "Represents additional parameter settings for authentication requests. You can set up to 50 parameters.",
 		//	                      "properties": {
 		//	                        "Action": {
-		//	                          "description": "表示如何设置鉴权请求参数。当前您只能设置 Action 为 set。set 表示设置参数。您需要在 Key 中指定您需要设置的鉴权请求参数。如果您指定的鉴权请求参数不存在，内容分发网络会在鉴权请求中添加该参数。如果您指定的鉴权请求参数已存在，内容分发网络会使用 Value 的值作为该鉴权请求参数的值。",
+		//	                          "description": "Describes how to set authentication request parameters. Currently, you can only set Action to set. set means to configure parameters. You need to specify the authentication request parameter to set in Key. If the specified authentication request parameter does not exist, the content delivery network adds the parameter to the authentication request. If the specified authentication request parameter already exists, the content delivery network uses the value of Value as the parameter's value.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Key": {
-		//	                          "description": "表示您需要设置的鉴权请求参数，长度不能超过 1,024 个字符。鉴权请求参数可以包含除了以下字符的可打印 ASCII 字符：双引号（\"）、空格、Delete（ASCII code 127）",
+		//	                          "description": "Indicates the authentication request parameter you need to set. The length must not exceed 1,024 characters. The authentication request parameter can contain printable ASCII characters except for the following: double quotes (\"), space, and Delete (ASCII code 127)",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
-		//	                          "description": "表示鉴权请求参数的值，长度不能超过 1,024 个字符，并且区分大小写。Value有以下取值：当 ValueType 是 constant 时，表示鉴权请求参数的值是一个常量。您需要指定该常量值。常量值不能以美元符号（$）开头，可以包含除了以下字符的可打印 ASCII 字符：双引号（\"）、Delete（ASCII code 127）当 ValueType 是 variable 时，表示鉴权请求参数的值来自一个变量。您可以指定该变量列表中的变量。当 ValueType 是 customize 时，表示鉴权请求参数的值是列表中的变量与固定字符串拼接后的字符串。在拼接的字符串中，变量使用 ${变量名} 表示。示例值：bind${request_uri}to${local_ip}done",
+		//	                          "description": "Indicates the value of the authentication request parameter. The length cannot exceed 1,024 characters and is case-sensitive. Value has the following options: When ValueType is constant, the authentication request parameter value is a constant. You need to specify this constant value. The constant value cannot start with a dollar sign ($) and can include any printable ASCII character except the following: double quotes (\") and Delete (ASCII code 127). When ValueType is variable, the authentication request parameter value comes from a variable. You can specify a variable from the variable list. When ValueType is customize, the authentication request parameter value is a string formed by concatenating variables from the list with fixed strings. In the concatenated string, variables are represented as ${variable_name}. Example value: bind${request_uri}to${local_ip}done",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "ValueType": {
-		//	                          "description": "表示您在 Key 中设置的鉴权请求参数的类型。ValueType 有以下取值：constant：表示鉴权请求参数是一个常量。此时，您需要在 Value 中指定该常量的值。variable：表示鉴权请求参数的值来自一个变量。参见 Value 的说明。customize：表示鉴权请求参数的值是一个变量与固定字符串拼接后的字符串。",
+		//	                          "description": "Indicates the type of authentication request parameter set in Key. ValueType has the following options: constant: The authentication request parameter is a constant. In this case, you need to specify the constant value in Value. variable: The authentication request parameter value comes from a variable. See the description for Value. customize: The authentication request parameter value is a string formed by concatenating a variable and a fixed string.",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -4152,46 +4152,46 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "RequestBodyRules": {
-		//	                "description": "表示鉴权请求正文的规则。您可以不指定该参数或者设置该参数值为 default。default 表示请求正文为空（\"\"）。",
+		//	                "description": "Indicates the rule for the authentication request body. You can leave this parameter unspecified or set its value to default. default means the request body is empty (\"\").",
 		//	                "type": "string"
 		//	              },
 		//	              "RequestHeaderRules": {
-		//	                "description": "表示鉴权请求头的设置。您最多可以设置 50 个请求头。",
+		//	                "description": "Indicates the settings for authentication request headers. You can set up to 50 request headers.",
 		//	                "properties": {
 		//	                  "RequestHeaderComponents": {
-		//	                    "description": "表示鉴权请求头的设置策略。",
+		//	                    "description": "Indicates the configuration policy for authentication request headers.",
 		//	                    "properties": {
 		//	                      "Action": {
-		//	                        "description": "表示鉴权请求头是否包含用户请求头。该参数有以下取值：exclude：表示鉴权请求头中不包含任何用户请求头。include：表示鉴权请求头中包含所有用户请求头。includePart：表示鉴权请求头包含指定的用户请求头。",
+		//	                        "description": "Indicates whether the authentication request header includes user request headers. The parameter values are: exclude: the authentication request header does not include any user request headers. include: the authentication request header includes all user request headers. includePart: the authentication request header includes specified user request headers.",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "Value": {
-		//	                        "description": "表示 Action 参数所对应的参数值，长度不能超过 1,024 个字符。该参数有以下说明：如果 Action 是 exclude 或 include，Value 必须是 *。如果 Action 是 includePart，Value 参数的取值是用户请求中的一个或者多个头部。多个头部使用英文分号（;）分隔。其取值不能只是 *，可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）该参数的默认值是 *。",
+		//	                        "description": "Indicates the parameter value corresponding to the Action parameter. The length must not exceed 1,024 characters. The parameter has the following notes: If Action is exclude or include, Value must be *. If Action is includePart, the Value parameter can be one or more headers from the user's request. Multiple headers are separated by a semicolon (;). The value cannot be only *, and can include printable ASCII characters except for the following: underscore (_), space, double quotes (\"), Delete (ASCII code 127). The default value for this parameter is *.",
 		//	                        "type": "string"
 		//	                      }
 		//	                    },
 		//	                    "type": "object"
 		//	                  },
 		//	                  "RequestHeaderInstances": {
-		//	                    "description": "表示一组鉴权请求头的设置。需要留意的是，在内容分发网络发起鉴权请求时，请求中可能已经包含了以下头部：X-Forwarded-Protocol，X-Forwarded-Proto，X-Client-Scheme：这三个头部都表示用户请求所使用协议，没有区别。X-Real-IP：表示用户真实的 IP 地址。该头部的值不会受代理服务器的影响。X-Forwarded-For：表示用户的 IP 地址。如果用户的请求经过了代理服务器，该头部的值会变成代理服务器的 IP 地址。不建议您在该参数中对这些头部进行设置。如果您设置了这些头部，这些头部的原始值会被覆盖。",
+		//	                    "description": "Specifies a set of authentication request header settings Note that when the content delivery network initiates an authentication request, the following headers may already be included in the request: X-Forwarded-Protocol, X-Forwarded-Proto, X-Client-Scheme: all three headers indicate the protocol used by the user request and are equivalent X-Real-IP: indicates the user's real IP address This header value is not affected by proxy servers X-Forwarded-For: indicates the user's IP address If the user's request passes through a proxy server, this header value becomes the proxy server's IP address It is not recommended to configure these headers in this parameter If you set these headers, their original values will be overwritten",
 		//	                    "insertionOrder": false,
 		//	                    "items": {
-		//	                      "description": "表示一组鉴权请求头的设置。需要留意的是，在内容分发网络发起鉴权请求时，请求中可能已经包含了以下头部：X-Forwarded-Protocol，X-Forwarded-Proto，X-Client-Scheme：这三个头部都表示用户请求所使用协议，没有区别。X-Real-IP：表示用户真实的 IP 地址。该头部的值不会受代理服务器的影响。X-Forwarded-For：表示用户的 IP 地址。如果用户的请求经过了代理服务器，该头部的值会变成代理服务器的 IP 地址。不建议您在该参数中对这些头部进行设置。如果您设置了这些头部，这些头部的原始值会被覆盖。",
+		//	                      "description": "Indicates the settings for a group of authentication request headers. Note that when the content delivery network initiates an authentication request, the request may already include the following headers: X-Forwarded-Protocol, X-Forwarded-Proto, X-Client-Scheme: these three headers all indicate the protocol used by the user request and are equivalent. X-Real-IP: indicates the user's real IP address. The value of this header is not affected by proxy servers. X-Forwarded-For: indicates the user's IP address. If the user's request passes through a proxy server, the value of this header becomes the proxy server's IP address. It is not recommended to configure these headers in this parameter. If you set these headers, their original values will be overwritten.",
 		//	                      "properties": {
 		//	                        "Action": {
-		//	                          "description": "表示如何设置鉴权请求头。当前您只能设置该参数值为 set。set 表示设置请求头。此时，您需要在 Key 中指定您需要设置的请求头。如果您设置的请求头不存在，内容分发网络会在鉴权请求中添加该请求头。如果您设置的请求头已存在，内容分发网络会使用 Value 的值作为该请求头的值。",
+		//	                          "description": "Indicates how to set the authentication request header. Currently, you can only set this parameter to set. set means to configure the request header. You need to specify the request header in Key. If the request header does not exist, the content delivery network adds it to the authentication request. If the request header already exists, the content delivery network uses the value specified in Value as the header value.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Key": {
-		//	                          "description": "指定一个头部的名称。名称的长度不能超过 1,024 个字符，不区分大小写。同时，名称可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）",
+		//	                          "description": "Specifies the name of a header. The name cannot exceed 1,024 characters and is case insensitive. It can contain any printable ASCII character except: underscore (_), space, double quotes (\"), and Delete (ASCII code 127).",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
-		//	                          "description": "表示 Key 的值。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。当 ValueType 是 constant 时，您需要指定一个固定字符串作为头部的值。。该头部值的长度不能超过 1,024 个字符，可以包含除了以下字符的可打印 ASCII 字符：美元符号（$）、Delete（ASCII code 127）",
+		//	                          "description": "Indicates the value of the Key. This parameter is only valid when Action equals \"set\". If Action does not equal \"set\", this parameter is invalid. When ValueType is constant, you must specify a fixed string as the header value. The header value cannot exceed 1,024 characters and can contain any printable ASCII character except the following: dollar sign ($), Delete (ASCII code 127)",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "ValueType": {
-		//	                          "description": "指定 Key 的取值类型。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。该参数有以下取值：constant：表示 Key 的值是一个固定字符串。variable：表示 Key 的值来自一个变量。customize：表示 Key 的值是一个变量与固定字符串拼接后的字符串。",
+		//	                          "description": "Specifies the value type for the Key. This parameter is only valid when Action is set to 'set'. If Action is not 'set', this parameter is invalid. The parameter has the following values: constant: the Key value is a fixed string. variable: the Key value comes from a variable. customize: the Key value is a string formed by concatenating a variable and a fixed string.",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -4201,7 +4201,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "uniqueItems": true
 		//	                  },
 		//	                  "RequestHost": {
-		//	                    "description": "表示鉴权请求中 HOST 头部的值。该参数的默认值是 default，表示 HOST 头部的值与您的加速域名相同。",
+		//	                    "description": "Indicates the value of the HOST header in authentication requests. The default value for this parameter is default, meaning the HOST header matches your acceleration domain name.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -4217,7 +4217,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether this feature is enabled. The parameter values are as follows: true: enables the feature. false: disables the feature.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -4238,41 +4238,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RemoteAuthRuleAction
@@ -4283,31 +4283,31 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: BackupRemoteAddr
 											"backup_remote_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示鉴权服务器的备地址。地址格式和要求与主地址相同。",
+												Description: "Indicates the backup address of the authentication server. The address format and requirements are the same as the primary address.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: MasterRemoteAddr
 											"master_remote_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示鉴权服务器的主地址，长度不能超过 100 个字符。主地址的格式是 <scheme>://<domain>:<port> 或 <scheme>://<ip>:<port>，其中：<scheme> 是 http 或者 https。<domain> 不能是 localhost。<ip> 不能是 127.0.0.1。<port> 是可选的。",
+												Description: "Indicates the primary address of the authentication server. The length must not exceed 100 characters. The primary address format is <scheme>://<domain>:<port> or <scheme>://<ip>:<port>, where: <scheme> is http or https. <domain> cannot be localhost. <ip> cannot be 127.0.0.1. <port> is optional.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: PathType
 											"path_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示鉴权请求的路径。鉴权地址和请求路径组成了完整的鉴权 URL。内容分发网络会把用户的请求转发到该鉴权 URL。该参数有以下取值：constant：表示鉴权请求中的路径与用户请求中的路径相同。variable：表示您需要在 pathValue 参数中指定一个鉴权请求中的路径。",
+												Description: "Indicates the path for the authentication request. The authentication address and request path together form the complete authentication URL. The content delivery network forwards the user's request to this authentication URL. The parameter accepts the following values: constant: The path in the authentication request is the same as the path in the user's request. variable: You need to specify a path for the authentication request in the pathValue parameter.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: PathValue
 											"path_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示一个鉴权请求的路径，长度不能超过 100 个字符。路径必须以斜杠（/）开头，可以包含除了以下字符的可打印 ASCII 字符：连续斜杠（//）、百分号（%）、美元符号（$）、空格、问号（?）、Delete（ASCII code 127）",
+												Description: "Represents the path for an authentication request. The path cannot exceed 100 characters. It must start with a slash (/), and can include any printable ASCII characters except the following: consecutive slashes (//), percent sign (%), dollar sign ($), space, question mark (?), and Delete (ASCII code 127).",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: RequestMethod
 											"request_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示在发送鉴权请求时，内容分发网络所使用的请求方法。该参数有以下取值：default：表示鉴权请求所使用的方法与用户的请求相同。get：表示鉴权请求使用 GET 方法。post：表示鉴权请求使用 POST方法。head：表示鉴权请求使用 HEAD 方法。",
+												Description: "Indicates the request method used by the content delivery network when sending authentication requests. The parameter has the following values: default: uses the same method as the user's request. get: uses the GET method. post: uses the POST method. head: uses the HEAD method.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示鉴权服务器的配置。",
+										Description: "Indicates the configuration of the authentication server.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: AuthResponseConfig
@@ -4318,22 +4318,22 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: Action
 													"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示内容分发网络是否缓存鉴权状态码。该参数有以下取值：nocache：表示内容分发网络不缓存鉴权状态码。cache：内容分发网络缓存鉴权状态码。",
+														Description: "Indicates whether the CDN caches authentication status codes. The parameter values are: nocache: CDN does not cache authentication status codes. cache: CDN caches authentication status codes.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: CacheKey
 													"cache_key": schema.SetAttribute{ /*START ATTRIBUTE*/
 														ElementType: types.StringType,
-														Description: "缓存 key 指定了用于区分不同请求 URI 的查询参数。每个参数都必须以 $ 开头。",
+														Description: "The cache key specifies the query parameters used to distinguish different request URIs. Each parameter must start with $.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: Ttl
 													"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权状态码的缓存时间。单位是秒。取值范围是 1-86400。86400秒表示 24小时。",
+														Description: "Indicates the cache duration for authentication status codes, measured in seconds. The range is 1–86400. 86400 seconds equals 24 hours.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "内容分发网络可以缓存鉴权状态码。该参数表示相关的配置。",
+												Description: "The content delivery network can cache authentication status codes. This parameter indicates the related configuration.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: ResponseAction
@@ -4341,11 +4341,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: StatusCode
 													"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权失败时，内容分发网络响应用户的状态码。您可以指定范围在 400-499 中的任意一个状态码。该参数的默认值是 403。",
+														Description: "Indicates the status code returned by the content delivery network to the user when authentication fails. You can specify any status code in the range 400–499. The default value is 403.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "表示鉴权失败时，内容分发网络如何响应用户。",
+												Description: "Indicates how the content delivery network responds to users when authentication fails.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: StatusCodeAction
@@ -4353,21 +4353,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: DefaultAction
 													"default_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示如果鉴权状态码既不是 FailCode，又不是 SuccessCode 时，内容分发网络处理鉴权请求的方式。该参数有以下取值：reject：表示内容分发网络认为鉴权失败。pass：表示内容分发网络认为鉴权成功。",
+														Description: "Specifies how the content delivery network handles authentication requests when the authentication status code is neither FailCode nor SuccessCode. This parameter has the following values: reject: the content delivery network considers authentication failed; pass: the content delivery network considers authentication successful.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: FailCode
 													"fail_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权失败时的鉴权状态码。您可以指定范围在 400-499 中的一个或者多个状态码。多个状态码使用英文分号（;）分隔。您也可以指定 4xx 表示 400-499 中的任意一个状态码。该参数的默认值是 401。",
+														Description: "Indicates the authentication status code returned when authentication fails. You can specify one or more status codes in the range 400–499. Separate multiple status codes with a semicolon (;). You can also specify 4xx to indicate any status code between 400 and 499. The default value for this parameter is 401.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: SuccessCode
 													"success_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权成功时的鉴权状态码。您可以指定范围在 200-299 中的一个或者多个状态码。多个状态码使用英文分号（;）分隔。您也可以指定 2xx 表示 200-299 中的任意一个状态码。该参数的默认值是 200。",
+														Description: "Indicates the authentication status code for successful authentication. You can specify one or more status codes in the range 200–299. Separate multiple status codes with a semicolon (;). You can also specify 2xx to represent any status code from 200–299. The default value is 200.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "表示内容分发网络对鉴权状态码的处理方式。",
+												Description: "Specifies how the content delivery network handles authentication status codes.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: TimeOutAction
@@ -4375,20 +4375,20 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: Action
 													"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权超时后，内容分发网络处理鉴权请求的策略。该参数有以下取值：reject：表示内容分发网络认为鉴权失败。pass：表示内容分发网络认为鉴权成功。",
+														Description: "Indicates the strategy for handling authentication requests after a timeout in the content delivery network. This parameter supports the following values: reject: The content delivery network considers authentication failed. pass: The content delivery network considers authentication successful.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: Time
 													"time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权超时的时间，单位是毫秒。该参数的默认值为 200，取值范围是 200   - 3600。",
+														Description: "Specifies the authentication timeout in milliseconds. The default value is 200. The valid range is 200–3600.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "表示鉴权超时后，内容分发网络如何处理鉴权请求。",
+												Description: "Specifies how the content delivery network handles authentication requests after authentication timeout.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "内容分发网络需要对鉴权服务器返回的鉴权状态码进行处理。该参数表示相关的配置。",
+										Description: "The content delivery network needs to handle the authentication status codes returned by the authentication server. This parameter specifies the relevant configuration.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: QueryStringRules
@@ -4399,16 +4399,16 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: Action
 													"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权请求是否包含用户请求 URL 中的查询参数。该参数有以下取值：exclude：表示鉴权请求不包含任何查询参数。include：表示鉴权请求包含所有查询参数。includePart：表示鉴权请求包含指定的查询参数。",
+														Description: "Indicates whether the authentication request includes query parameters from the user's request URL. The parameter accepts the following values: exclude: The authentication request does not include any query parameters. include: The authentication request includes all query parameters. includePart: The authentication request includes specified query parameters.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: Value
 													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示 Action 参数所对应的参数值，长度不能超过1,024 个字符。该参数有以下取值：如果 Action 是 exclude 或 include，Value 必须是 *。如果 Action 是 includePart，您需要在 Value 参数中指定用户请求 URL 中的一个或者多个查询参数，多个查询参数使用英文分号（;）分隔。您不能指定 *。查询参数是区分大小写的，可以包含除了以下字符的可打印 ASCII 字符：双引号（\"）、空格、Delete（ASCII code 127）该参数的默认值是 *。",
+														Description: "Indicates the parameter value corresponding to the Action parameter. The length cannot exceed 1,024 characters. The parameter accepts the following values: If Action is exclude or include, Value must be *. If Action is includePart, you need to specify one or more query parameters from the user's request URL in the Value parameter, separated by semicolons (;). You cannot specify *. Query parameters are case-sensitive and can include printable ASCII characters except for the following: double quotes (\") , spaces, and Delete (ASCII code 127). The default value for this parameter is *.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "表示鉴权请求参数的设置策略。",
+												Description: "Indicates the strategy for setting authentication request parameters.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: QueryStringInstances
@@ -4417,36 +4417,36 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Action
 														"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示如何设置鉴权请求参数。当前您只能设置 Action 为 set。set 表示设置参数。您需要在 Key 中指定您需要设置的鉴权请求参数。如果您指定的鉴权请求参数不存在，内容分发网络会在鉴权请求中添加该参数。如果您指定的鉴权请求参数已存在，内容分发网络会使用 Value 的值作为该鉴权请求参数的值。",
+															Description: "Describes how to set authentication request parameters. Currently, you can only set Action to set. set means to configure parameters. You need to specify the authentication request parameter to set in Key. If the specified authentication request parameter does not exist, the content delivery network adds the parameter to the authentication request. If the specified authentication request parameter already exists, the content delivery network uses the value of Value as the parameter's value.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Key
 														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示您需要设置的鉴权请求参数，长度不能超过 1,024 个字符。鉴权请求参数可以包含除了以下字符的可打印 ASCII 字符：双引号（\"）、空格、Delete（ASCII code 127）",
+															Description: "Indicates the authentication request parameter you need to set. The length must not exceed 1,024 characters. The authentication request parameter can contain printable ASCII characters except for the following: double quotes (\"), space, and Delete (ASCII code 127)",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示鉴权请求参数的值，长度不能超过 1,024 个字符，并且区分大小写。Value有以下取值：当 ValueType 是 constant 时，表示鉴权请求参数的值是一个常量。您需要指定该常量值。常量值不能以美元符号（$）开头，可以包含除了以下字符的可打印 ASCII 字符：双引号（\"）、Delete（ASCII code 127）当 ValueType 是 variable 时，表示鉴权请求参数的值来自一个变量。您可以指定该变量列表中的变量。当 ValueType 是 customize 时，表示鉴权请求参数的值是列表中的变量与固定字符串拼接后的字符串。在拼接的字符串中，变量使用 ${变量名} 表示。示例值：bind${request_uri}to${local_ip}done",
+															Description: "Indicates the value of the authentication request parameter. The length cannot exceed 1,024 characters and is case-sensitive. Value has the following options: When ValueType is constant, the authentication request parameter value is a constant. You need to specify this constant value. The constant value cannot start with a dollar sign ($) and can include any printable ASCII character except the following: double quotes (\") and Delete (ASCII code 127). When ValueType is variable, the authentication request parameter value comes from a variable. You can specify a variable from the variable list. When ValueType is customize, the authentication request parameter value is a string formed by concatenating variables from the list with fixed strings. In the concatenated string, variables are represented as ${variable_name}. Example value: bind${request_uri}to${local_ip}done",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: ValueType
 														"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示您在 Key 中设置的鉴权请求参数的类型。ValueType 有以下取值：constant：表示鉴权请求参数是一个常量。此时，您需要在 Value 中指定该常量的值。variable：表示鉴权请求参数的值来自一个变量。参见 Value 的说明。customize：表示鉴权请求参数的值是一个变量与固定字符串拼接后的字符串。",
+															Description: "Indicates the type of authentication request parameter set in Key. ValueType has the following options: constant: The authentication request parameter is a constant. In this case, you need to specify the constant value in Value. variable: The authentication request parameter value comes from a variable. See the description for Value. customize: The authentication request parameter value is a string formed by concatenating a variable and a fixed string.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												Description: "表示鉴权请求中额外的参数设置。您最多可以设置 50 个参数。",
+												Description: "Indicates additional parameter settings in the authentication request. You can set up to 50 parameters.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示鉴权请求的参数设置。",
+										Description: "Represents the parameter settings for authentication requests.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: RequestBodyRules
 									"request_body_rules": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示鉴权请求正文的规则。您可以不指定该参数或者设置该参数值为 default。default 表示请求正文为空（\"\"）。",
+										Description: "Indicates the rule for the authentication request body. You can leave this parameter unspecified or set its value to default. default means the request body is empty (\"\").",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: RequestHeaderRules
@@ -4457,16 +4457,16 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: Action
 													"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示鉴权请求头是否包含用户请求头。该参数有以下取值：exclude：表示鉴权请求头中不包含任何用户请求头。include：表示鉴权请求头中包含所有用户请求头。includePart：表示鉴权请求头包含指定的用户请求头。",
+														Description: "Indicates whether the authentication request header includes user request headers. The parameter values are: exclude: the authentication request header does not include any user request headers. include: the authentication request header includes all user request headers. includePart: the authentication request header includes specified user request headers.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: Value
 													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "表示 Action 参数所对应的参数值，长度不能超过 1,024 个字符。该参数有以下说明：如果 Action 是 exclude 或 include，Value 必须是 *。如果 Action 是 includePart，Value 参数的取值是用户请求中的一个或者多个头部。多个头部使用英文分号（;）分隔。其取值不能只是 *，可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）该参数的默认值是 *。",
+														Description: "Indicates the parameter value corresponding to the Action parameter. The length must not exceed 1,024 characters. The parameter has the following notes: If Action is exclude or include, Value must be *. If Action is includePart, the Value parameter can be one or more headers from the user's request. Multiple headers are separated by a semicolon (;). The value cannot be only *, and can include printable ASCII characters except for the following: underscore (_), space, double quotes (\"), Delete (ASCII code 127). The default value for this parameter is *.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "表示鉴权请求头的设置策略。",
+												Description: "Indicates the configuration policy for authentication request headers.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: RequestHeaderInstances
@@ -4475,117 +4475,117 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Action
 														"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示如何设置鉴权请求头。当前您只能设置该参数值为 set。set 表示设置请求头。此时，您需要在 Key 中指定您需要设置的请求头。如果您设置的请求头不存在，内容分发网络会在鉴权请求中添加该请求头。如果您设置的请求头已存在，内容分发网络会使用 Value 的值作为该请求头的值。",
+															Description: "Indicates how to set the authentication request header. Currently, you can only set this parameter to set. set means to configure the request header. You need to specify the request header in Key. If the request header does not exist, the content delivery network adds it to the authentication request. If the request header already exists, the content delivery network uses the value specified in Value as the header value.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Key
 														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "指定一个头部的名称。名称的长度不能超过 1,024 个字符，不区分大小写。同时，名称可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）",
+															Description: "Specifies the name of a header. The name cannot exceed 1,024 characters and is case insensitive. It can contain any printable ASCII character except: underscore (_), space, double quotes (\"), and Delete (ASCII code 127).",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示 Key 的值。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。当 ValueType 是 constant 时，您需要指定一个固定字符串作为头部的值。。该头部值的长度不能超过 1,024 个字符，可以包含除了以下字符的可打印 ASCII 字符：美元符号（$）、Delete（ASCII code 127）",
+															Description: "Indicates the value of the Key. This parameter is only valid when Action equals \"set\". If Action does not equal \"set\", this parameter is invalid. When ValueType is constant, you must specify a fixed string as the header value. The header value cannot exceed 1,024 characters and can contain any printable ASCII character except the following: dollar sign ($), Delete (ASCII code 127)",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: ValueType
 														"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "指定 Key 的取值类型。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。该参数有以下取值：constant：表示 Key 的值是一个固定字符串。variable：表示 Key 的值来自一个变量。customize：表示 Key 的值是一个变量与固定字符串拼接后的字符串。",
+															Description: "Specifies the value type for the Key. This parameter is only valid when Action is set to 'set'. If Action is not 'set', this parameter is invalid. The parameter has the following values: constant: the Key value is a fixed string. variable: the Key value comes from a variable. customize: the Key value is a string formed by concatenating a variable and a fixed string.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												Description: "表示一组鉴权请求头的设置。需要留意的是，在内容分发网络发起鉴权请求时，请求中可能已经包含了以下头部：X-Forwarded-Protocol，X-Forwarded-Proto，X-Client-Scheme：这三个头部都表示用户请求所使用协议，没有区别。X-Real-IP：表示用户真实的 IP 地址。该头部的值不会受代理服务器的影响。X-Forwarded-For：表示用户的 IP 地址。如果用户的请求经过了代理服务器，该头部的值会变成代理服务器的 IP 地址。不建议您在该参数中对这些头部进行设置。如果您设置了这些头部，这些头部的原始值会被覆盖。",
+												Description: "Specifies a set of authentication request header settings Note that when the content delivery network initiates an authentication request, the following headers may already be included in the request: X-Forwarded-Protocol, X-Forwarded-Proto, X-Client-Scheme: all three headers indicate the protocol used by the user request and are equivalent X-Real-IP: indicates the user's real IP address This header value is not affected by proxy servers X-Forwarded-For: indicates the user's IP address If the user's request passes through a proxy server, this header value becomes the proxy server's IP address It is not recommended to configure these headers in this parameter If you set these headers, their original values will be overwritten",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: RequestHost
 											"request_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "表示鉴权请求中 HOST 头部的值。该参数的默认值是 default，表示 HOST 头部的值与您的加速域名相同。",
+												Description: "Indicates the value of the HOST header in authentication requests. The default value for this parameter is default, meaning the HOST header matches your acceleration domain name.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示鉴权请求头的设置。您最多可以设置 50 个请求头。",
+										Description: "Indicates the settings for authentication request headers. You can set up to 50 request headers.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示具体的鉴权配置。",
+								Description: "Indicates the specific authentication configuration.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示远程鉴权的配置规则列表。当 Switch 是 true 时，该参数为必填。您只能添加一个配置规则。",
+					Description: "Specifies the list of remote authentication configuration rules. When Switch is true, this parameter is required. You can add only one configuration rule.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether this feature is enabled. The parameter values are as follows: true: enables the feature. false: disables the feature.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"远程鉴权\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'remote authentication' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestBlockRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"自定义拦截\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'Custom Interception' feature. This feature is disabled by default",
 		//	  "properties": {
 		//	    "BlockRule": {
-		//	      "description": "表示一个拦截规则列表。列表中最多可以包含 10 条规则。当 Switch 是 true 时，该参数为必填。",
+		//	      "description": "Represents a list of interception rules. The list can contain up to 10 rules. When Switch is true, this parameter is required.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一个拦截规则列表。列表中最多可以包含 10 条规则。当 Switch 是 true 时，该参数为必填。",
+		//	        "description": "Indicates a list of interception rules. The list can contain up to 10 rules. This parameter is required when Switch is true",
 		//	        "properties": {
 		//	          "BlockAction": {
-		//	            "description": "表示列表中一条规则的拦截配置。",
+		//	            "description": "Indicates the interception configuration for a rule in the list.",
 		//	            "properties": {
 		//	              "Action": {
-		//	                "description": "表示内容分发网络如何拦截匹配的请求。该参数有以下取值：refuse：表示内容分发网络拒绝请求并响应一个 4xx 的错误码。错误码在 StatusCode 中指定。redirect：表示内容分发网络将请求重定向到 RedirectUrl 中指定的 URL。",
+		//	                "description": "Specifies how the content delivery network intercepts matching requests. This parameter has the following values: refuse: The content delivery network rejects the request and returns a 4xx error code. The error code is specified in StatusCode. redirect: The content delivery network redirects the request to the URL specified in RedirectUrl.",
 		//	                "type": "string"
 		//	              },
 		//	              "ErrorPage": {
-		//	                "description": "当 Action 是 refuse 时，该参数是可选的，说明如下：如果指定该参数，该参数表示全局配置下的一个自定义响应页面的名称。也就是说，当内容分发网络拒绝请求时，返回该自定义页面。需要留意的是，\"全局配置\" 是一个白名单功能。要使用该功能，请 提交工单。如果不指定该参数，表示内容分发网络使用 StatusCode 中指定错误码的标准响应正文。当 Action 是 redirect 时，该参数无效，可以不指定。",
+		//	                "description": "When Action is refuse, this parameter is optional, as explained below: If specified, this parameter indicates the name of a custom response page under global configuration. When the content delivery network refuses a request, it returns this custom page. Note that 'global configuration' is an Allowlist feature. To use this feature, submit a ticket. If this parameter is not specified, the content delivery network uses the standard response body for the error code specified in StatusCode. When Action is redirect, this parameter is invalid and can be omitted.",
 		//	                "type": "string"
 		//	              },
 		//	              "RedirectUrl": {
-		//	                "description": "当 Action 是 redirect 时，该参数必填，表示重定向 URL。URL 必须以 http:// 或 https:// 开头，长度不能超过 1,024 个字符。当 Action 是 refuse 时，该参数无效，可以不指定。",
+		//	                "description": "When Action is redirect, this parameter is required and specifies the redirect URL. The URL must start with http:// or https:// and cannot exceed 1,024 characters. When Action is refuse, this parameter is invalid and can be omitted.",
 		//	                "type": "string"
 		//	              },
 		//	              "StatusCode": {
-		//	                "description": "表示对于拦截的请求，内容分发网络的响应状态码。当 Action 是 refuse 时，该参数表示一个 400-499 范围内的错误码。当 Action 是 redirect 时，该参数有以下取值：301：表示响应状态码是 301。302：表示响应状态码是 302。",
+		//	                "description": "Represents the response status code from the content delivery network for intercepted requests. When Action is refuse, this parameter specifies an error code in the range 400–499. When Action is redirect, this parameter can be: 301: The response status code is 301. 302: The response status code is 302.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -4595,14 +4595,14 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "RuleName": {
-		//	            "description": "表示规则的名称，长度不超过 20 个字符，可以包含字母、数字、下划线（_）、中划线（-）、汉字。一个汉字占 3 个字符。",
+		//	            "description": "Indicates the name of the rule, which must not exceed 20 characters and can include letters, numbers, underscores (_), hyphens (-), and Chinese characters. One Chinese character counts as 3 characters.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -4612,7 +4612,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示该模块的配置开关。该参数有以下取值：true：表示启用该模块。false：表示禁用该模块。该参数的默认值是 false。",
+		//	      "description": "Indicates the configuration switch for this module. This parameter has the following values: true: enables the module. false: disables the module. The default value is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -4629,26 +4629,26 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Action
 									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示内容分发网络如何拦截匹配的请求。该参数有以下取值：refuse：表示内容分发网络拒绝请求并响应一个 4xx 的错误码。错误码在 StatusCode 中指定。redirect：表示内容分发网络将请求重定向到 RedirectUrl 中指定的 URL。",
+										Description: "Specifies how the content delivery network intercepts matching requests. This parameter has the following values: refuse: The content delivery network rejects the request and returns a 4xx error code. The error code is specified in StatusCode. redirect: The content delivery network redirects the request to the URL specified in RedirectUrl.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: ErrorPage
 									"error_page": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "当 Action 是 refuse 时，该参数是可选的，说明如下：如果指定该参数，该参数表示全局配置下的一个自定义响应页面的名称。也就是说，当内容分发网络拒绝请求时，返回该自定义页面。需要留意的是，\"全局配置\" 是一个白名单功能。要使用该功能，请 提交工单。如果不指定该参数，表示内容分发网络使用 StatusCode 中指定错误码的标准响应正文。当 Action 是 redirect 时，该参数无效，可以不指定。",
+										Description: "When Action is refuse, this parameter is optional, as explained below: If specified, this parameter indicates the name of a custom response page under global configuration. When the content delivery network refuses a request, it returns this custom page. Note that 'global configuration' is an Allowlist feature. To use this feature, submit a ticket. If this parameter is not specified, the content delivery network uses the standard response body for the error code specified in StatusCode. When Action is redirect, this parameter is invalid and can be omitted.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: RedirectUrl
 									"redirect_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "当 Action 是 redirect 时，该参数必填，表示重定向 URL。URL 必须以 http:// 或 https:// 开头，长度不能超过 1,024 个字符。当 Action 是 refuse 时，该参数无效，可以不指定。",
+										Description: "When Action is redirect, this parameter is required and specifies the redirect URL. The URL must start with http:// or https:// and cannot exceed 1,024 characters. When Action is refuse, this parameter is invalid and can be omitted.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: StatusCode
 									"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示对于拦截的请求，内容分发网络的响应状态码。当 Action 是 refuse 时，该参数表示一个 400-499 范围内的错误码。当 Action 是 redirect 时，该参数有以下取值：301：表示响应状态码是 301。302：表示响应状态码是 302。",
+										Description: "Represents the response status code from the content delivery network for intercepted requests. When Action is refuse, this parameter specifies an error code in the range 400–499. When Action is redirect, this parameter can be: 301: The response status code is 301. 302: The response status code is 302.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示列表中一条规则的拦截配置。",
+								Description: "Indicates the interception configuration for a rule in the list.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Condition
@@ -4660,98 +4660,98 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RuleName
 							"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示规则的名称，长度不超过 20 个字符，可以包含字母、数字、下划线（_）、中划线（-）、汉字。一个汉字占 3 个字符。",
+								Description: "Indicates the name of the rule, which must not exceed 20 characters and can include letters, numbers, underscores (_), hyphens (-), and Chinese characters. One Chinese character counts as 3 characters.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一个拦截规则列表。列表中最多可以包含 10 条规则。当 Switch 是 true 时，该参数为必填。",
+					Description: "Represents a list of interception rules. The list can contain up to 10 rules. When Switch is true, this parameter is required.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示该模块的配置开关。该参数有以下取值：true：表示启用该模块。false：表示禁用该模块。该参数的默认值是 false。",
+					Description: "Indicates the configuration switch for this module. This parameter has the following values: true: enables the module. false: disables the module. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"自定义拦截\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'Custom Interception' feature. This feature is disabled by default",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestHeader
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"回源 HTTP 请求头\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'origin HTTP request header' feature. This feature is disabled by default.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "表示 \"回源 HTTP 请求头\" 特性的配置模块。该特性默认为禁用。",
+		//	    "description": "Represents the configuration module for the 'Origin HTTP Request Header' feature. This feature is disabled by default.",
 		//	    "properties": {
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -4761,35 +4761,35 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "RequestHeaderAction": {
-		//	        "description": "表示一个请求头的配置规则列表。每个规则都包含一个头部的相关操作设置。您最多可以添加 50 条规则。",
+		//	        "description": "Represents a list of configuration rules for request headers. Each rule includes settings for header operations. You can add up to 50 rules.",
 		//	        "properties": {
 		//	          "RequestHeaderInstances": {
-		//	            "description": "表示一个请求头的配置规则列表。每个规则都包含一个头部的相关操作设置。您最多可以添加 50 条规则。",
+		//	            "description": "Indicates a list of configuration rules for request headers. Each rule includes settings for header-related operations. You can add up to 50 rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一组鉴权请求头的设置。需要留意的是，在内容分发网络发起鉴权请求时，请求中可能已经包含了以下头部：X-Forwarded-Protocol，X-Forwarded-Proto，X-Client-Scheme：这三个头部都表示用户请求所使用协议，没有区别。X-Real-IP：表示用户真实的 IP 地址。该头部的值不会受代理服务器的影响。X-Forwarded-For：表示用户的 IP 地址。如果用户的请求经过了代理服务器，该头部的值会变成代理服务器的 IP 地址。不建议您在该参数中对这些头部进行设置。如果您设置了这些头部，这些头部的原始值会被覆盖。",
+		//	              "description": "Indicates the settings for a group of authentication request headers. Note that when the content delivery network initiates an authentication request, the request may already include the following headers: X-Forwarded-Protocol, X-Forwarded-Proto, X-Client-Scheme: these three headers all indicate the protocol used by the user request and are equivalent. X-Real-IP: indicates the user's real IP address. The value of this header is not affected by proxy servers. X-Forwarded-For: indicates the user's IP address. If the user's request passes through a proxy server, the value of this header becomes the proxy server's IP address. It is not recommended to configure these headers in this parameter. If you set these headers, their original values will be overwritten.",
 		//	              "properties": {
 		//	                "Action": {
-		//	                  "description": "表示如何设置鉴权请求头。当前您只能设置该参数值为 set。set 表示设置请求头。此时，您需要在 Key 中指定您需要设置的请求头。如果您设置的请求头不存在，内容分发网络会在鉴权请求中添加该请求头。如果您设置的请求头已存在，内容分发网络会使用 Value 的值作为该请求头的值。",
+		//	                  "description": "Indicates how to set the authentication request header. Currently, you can only set this parameter to set. set means to configure the request header. You need to specify the request header in Key. If the request header does not exist, the content delivery network adds it to the authentication request. If the request header already exists, the content delivery network uses the value specified in Value as the header value.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Key": {
-		//	                  "description": "指定一个头部的名称。名称的长度不能超过 1,024 个字符，不区分大小写。同时，名称可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）",
+		//	                  "description": "Specifies the name of a header. The name cannot exceed 1,024 characters and is case insensitive. It can contain any printable ASCII character except: underscore (_), space, double quotes (\"), and Delete (ASCII code 127).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示 Key 的值。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。当 ValueType 是 constant 时，您需要指定一个固定字符串作为头部的值。。该头部值的长度不能超过 1,024 个字符，可以包含除了以下字符的可打印 ASCII 字符：美元符号（$）、Delete（ASCII code 127）",
+		//	                  "description": "Indicates the value of the Key. This parameter is only valid when Action equals \"set\". If Action does not equal \"set\", this parameter is invalid. When ValueType is constant, you must specify a fixed string as the header value. The header value cannot exceed 1,024 characters and can contain any printable ASCII character except the following: dollar sign ($), Delete (ASCII code 127)",
 		//	                  "type": "string"
 		//	                },
 		//	                "ValueType": {
-		//	                  "description": "指定 Key 的取值类型。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。该参数有以下取值：constant：表示 Key 的值是一个固定字符串。variable：表示 Key 的值来自一个变量。customize：表示 Key 的值是一个变量与固定字符串拼接后的字符串。",
+		//	                  "description": "Specifies the value type for the Key. This parameter is only valid when Action is set to 'set'. If Action is not 'set', this parameter is invalid. The parameter has the following values: constant: the Key value is a fixed string. variable: the Key value comes from a variable. customize: the Key value is a string formed by concatenating a variable and a fixed string.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -4819,41 +4819,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RequestHeaderAction
@@ -4865,74 +4865,74 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Action
 										"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示如何设置鉴权请求头。当前您只能设置该参数值为 set。set 表示设置请求头。此时，您需要在 Key 中指定您需要设置的请求头。如果您设置的请求头不存在，内容分发网络会在鉴权请求中添加该请求头。如果您设置的请求头已存在，内容分发网络会使用 Value 的值作为该请求头的值。",
+											Description: "Indicates how to set the authentication request header. Currently, you can only set this parameter to set. set means to configure the request header. You need to specify the request header in Key. If the request header does not exist, the content delivery network adds it to the authentication request. If the request header already exists, the content delivery network uses the value specified in Value as the header value.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "指定一个头部的名称。名称的长度不能超过 1,024 个字符，不区分大小写。同时，名称可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）",
+											Description: "Specifies the name of a header. The name cannot exceed 1,024 characters and is case insensitive. It can contain any printable ASCII character except: underscore (_), space, double quotes (\"), and Delete (ASCII code 127).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示 Key 的值。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。当 ValueType 是 constant 时，您需要指定一个固定字符串作为头部的值。。该头部值的长度不能超过 1,024 个字符，可以包含除了以下字符的可打印 ASCII 字符：美元符号（$）、Delete（ASCII code 127）",
+											Description: "Indicates the value of the Key. This parameter is only valid when Action equals \"set\". If Action does not equal \"set\", this parameter is invalid. When ValueType is constant, you must specify a fixed string as the header value. The header value cannot exceed 1,024 characters and can contain any printable ASCII character except the following: dollar sign ($), Delete (ASCII code 127)",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: ValueType
 										"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "指定 Key 的取值类型。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。该参数有以下取值：constant：表示 Key 的值是一个固定字符串。variable：表示 Key 的值来自一个变量。customize：表示 Key 的值是一个变量与固定字符串拼接后的字符串。",
+											Description: "Specifies the value type for the Key. This parameter is only valid when Action is set to 'set'. If Action is not 'set', this parameter is invalid. The parameter has the following values: constant: the Key value is a fixed string. variable: the Key value comes from a variable. customize: the Key value is a string formed by concatenating a variable and a fixed string.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个请求头的配置规则列表。每个规则都包含一个头部的相关操作设置。您最多可以添加 50 条规则。",
+								Description: "Indicates a list of configuration rules for request headers. Each rule includes settings for header-related operations. You can add up to 50 rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示一个请求头的配置规则列表。每个规则都包含一个头部的相关操作设置。您最多可以添加 50 条规则。",
+						Description: "Represents a list of configuration rules for request headers. Each rule includes settings for header operations. You can add up to 50 rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示 \"回源 HTTP 请求头\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'origin HTTP request header' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResponseHeader
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"HTTP 响应头\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'HTTP response header' feature. This feature is disabled by default.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "表示 \"HTTP 响应头\" 特性的配置模块。该特性默认为禁用。",
+		//	    "description": "Specifies the configuration module for the 'HTTP response header' feature. This feature is disabled by default.",
 		//	    "properties": {
 		//	      "Condition": {
-		//	        "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	        "description": "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	        "properties": {
 		//	          "ConditionRule": {
-		//	            "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	            "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	              "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	              "properties": {
 		//	                "Name": {
-		//	                  "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                  "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                  "type": "string"
 		//	                },
 		//	                "Object": {
-		//	                  "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                  "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Operator": {
-		//	                  "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                  "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Type": {
-		//	                  "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                  "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                  "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -4942,39 +4942,39 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Connective": {
-		//	            "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	            "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "ResponseHeaderAction": {
-		//	        "description": "表示内容分发网络在响应用户请求的时候，对响应头的操作。",
+		//	        "description": "Indicates operations on the response header performed by the Content Delivery Network when responding to user requests.",
 		//	        "properties": {
 		//	          "ResponseHeaderInstances": {
-		//	            "description": "表示一个响应头的配置规则列表。每个规则都包含一个头部的相关操作设置。您最多可以添加 50 条规则。",
+		//	            "description": "Specifies a list of configuration rules for response headers Each rule includes settings for header-related operations You can add up to 50 rules",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "表示一个响应头的配置规则列表。每个规则都包含一个头部的相关操作设置。您最多可以添加 50 条规则。",
+		//	              "description": "Specifies a list of configuration rules for response headers Each rule includes settings for header-related operations You can add up to 50 rules",
 		//	              "properties": {
 		//	                "AccessOriginControl": {
-		//	                  "description": "表示在内容分发网络响应用户请求时，是否校验请求头中的 Origin 字段。该参数有以下取值：true：表示内容分发网络会校验 Origin 字段。如果校验成功，内容分发网络会在响应头中包含 Access-Control-Allow-Origin 字段。字段值与 Origin 字段值相同。如果校验失败，响应头中不会包含 Access-Control-Allow-Origin 字段。false：表示内容分发网络不会校验 Origin 字段。在响应头中，内容分发网络会包含 Access-Control-Allow-Origin 字段。字段值是您配置的 Access-Control-Allow-Origin 的内容。该参数的默认值是 false。该参数仅在以下条件都满足的情况下有效：Action 是 set。Key 是 Access-Control-Allow-Origin。ValueType 是 constant。",
+		//	                  "description": "Indicates whether the Origin field in the request header is validated when the content delivery network responds to user requests. Valid values are: true: The content delivery network validates the Origin field. If validation succeeds, the response header includes the Access-Control-Allow-Origin field, with the value matching the Origin field. If validation fails, the response header does not include the Access-Control-Allow-Origin field. false: The content delivery network does not validate the Origin field. The response header includes the Access-Control-Allow-Origin field, with the value set to your configured Access-Control-Allow-Origin content. The default value is false. This parameter is only effective when all the following conditions are met: Action is set. Key is Access-Control-Allow-Origin. ValueType is constant.",
 		//	                  "type": "boolean"
 		//	                },
 		//	                "Action": {
-		//	                  "description": "指定对响应头的操作。该参数有以下取值：set：表示设置一个头部。设置操作包括添加与修改。如果源站响应中已包含该头部，该头部的值会被覆盖。如果源站响应中没有包含该头部，该头部会被添加。delete，表示删除一个头部。",
+		//	                  "description": "Specifies the operation on the response header. This parameter has the following values: set: sets a header. The set operation includes adding and modifying. If the header already exists in the origin response, its value will be overwritten. If the header does not exist in the origin response, it will be added. delete: deletes a header",
 		//	                  "type": "string"
 		//	                },
 		//	                "Key": {
-		//	                  "description": "指定一个头部的名称。名称不能超过 1,024个字符，不区分大小写，可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）",
+		//	                  "description": "Specifies the name of a header. The name cannot exceed 1,024 characters, is case-insensitive, and can include any printable ASCII character except the following: underscore (_), space, double quotes (\"), and Delete (ASCII code 127)",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "表示 Key 的值。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。当 ValueType 是 constant 时，您需要指定一个固定字符串作为头部的值。头部值的长度不能超过 1,024 个字符，可以包含除了以下字符的可打印 ASCII 字符：美元符号（$）、Delete（ASCII code 127）",
+		//	                  "description": "Indicates the value of the Key. This parameter is valid only when Action is set. If Action is not set, this parameter is invalid. When ValueType is constant, you must specify a fixed string as the header value. The header value cannot exceed 1,024 characters and can include printable ASCII characters except for the following: dollar sign ($), Delete (ASCII code 127).",
 		//	                  "type": "string"
 		//	                },
 		//	                "ValueType": {
-		//	                  "description": "指定 Key 的取值类型。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。该参数有以下取值：constant：表示 Key 的值是一个固定字符串。variable：表示 Key 的值来自一个变量。customize：表示 Key 的值是一个变量与固定字符串拼接后的字符串。",
+		//	                  "description": "Specifies the value type for Key. This parameter is only valid when Action is set. If Action is not set, this parameter is invalid. The parameter supports the following values: constant: Key is a fixed string. variable: Key is sourced from a variable. customize: Key is a string formed by concatenating a variable and a fixed string.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -5004,41 +5004,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+											Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Object
 										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+											Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Operator
 										"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+											Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Type
 										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+											Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+											Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+								Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Connective
 							"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+								Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示该配置模块的生效条件，由一组规则组成。",
+						Description: "Indicates the conditions under which this configuration module takes effect, consisting of a set of rules.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResponseHeaderAction
@@ -5050,55 +5050,55 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: AccessOriginControl
 										"access_origin_control": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "表示在内容分发网络响应用户请求时，是否校验请求头中的 Origin 字段。该参数有以下取值：true：表示内容分发网络会校验 Origin 字段。如果校验成功，内容分发网络会在响应头中包含 Access-Control-Allow-Origin 字段。字段值与 Origin 字段值相同。如果校验失败，响应头中不会包含 Access-Control-Allow-Origin 字段。false：表示内容分发网络不会校验 Origin 字段。在响应头中，内容分发网络会包含 Access-Control-Allow-Origin 字段。字段值是您配置的 Access-Control-Allow-Origin 的内容。该参数的默认值是 false。该参数仅在以下条件都满足的情况下有效：Action 是 set。Key 是 Access-Control-Allow-Origin。ValueType 是 constant。",
+											Description: "Indicates whether the Origin field in the request header is validated when the content delivery network responds to user requests. Valid values are: true: The content delivery network validates the Origin field. If validation succeeds, the response header includes the Access-Control-Allow-Origin field, with the value matching the Origin field. If validation fails, the response header does not include the Access-Control-Allow-Origin field. false: The content delivery network does not validate the Origin field. The response header includes the Access-Control-Allow-Origin field, with the value set to your configured Access-Control-Allow-Origin content. The default value is false. This parameter is only effective when all the following conditions are met: Action is set. Key is Access-Control-Allow-Origin. ValueType is constant.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Action
 										"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "指定对响应头的操作。该参数有以下取值：set：表示设置一个头部。设置操作包括添加与修改。如果源站响应中已包含该头部，该头部的值会被覆盖。如果源站响应中没有包含该头部，该头部会被添加。delete，表示删除一个头部。",
+											Description: "Specifies the operation on the response header. This parameter has the following values: set: sets a header. The set operation includes adding and modifying. If the header already exists in the origin response, its value will be overwritten. If the header does not exist in the origin response, it will be added. delete: deletes a header",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "指定一个头部的名称。名称不能超过 1,024个字符，不区分大小写，可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"），Delete（ASCII code 127）",
+											Description: "Specifies the name of a header. The name cannot exceed 1,024 characters, is case-insensitive, and can include any printable ASCII character except the following: underscore (_), space, double quotes (\"), and Delete (ASCII code 127)",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "表示 Key 的值。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。当 ValueType 是 constant 时，您需要指定一个固定字符串作为头部的值。头部值的长度不能超过 1,024 个字符，可以包含除了以下字符的可打印 ASCII 字符：美元符号（$）、Delete（ASCII code 127）",
+											Description: "Indicates the value of the Key. This parameter is valid only when Action is set. If Action is not set, this parameter is invalid. When ValueType is constant, you must specify a fixed string as the header value. The header value cannot exceed 1,024 characters and can include printable ASCII characters except for the following: dollar sign ($), Delete (ASCII code 127).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: ValueType
 										"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "指定 Key 的取值类型。该参数仅当 Action 是 set 的时候才有效。如果 Action 不是 set，该参数无效。该参数有以下取值：constant：表示 Key 的值是一个固定字符串。variable：表示 Key 的值来自一个变量。customize：表示 Key 的值是一个变量与固定字符串拼接后的字符串。",
+											Description: "Specifies the value type for Key. This parameter is only valid when Action is set. If Action is not set, this parameter is invalid. The parameter supports the following values: constant: Key is a fixed string. variable: Key is sourced from a variable. customize: Key is a string formed by concatenating a variable and a fixed string.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "表示一个响应头的配置规则列表。每个规则都包含一个头部的相关操作设置。您最多可以添加 50 条规则。",
+								Description: "Specifies a list of configuration rules for response headers Each rule includes settings for header-related operations You can add up to 50 rules",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "表示内容分发网络在响应用户请求的时候，对响应头的操作。",
+						Description: "Indicates operations on the response header performed by the Content Delivery Network when responding to user requests.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "表示 \"HTTP 响应头\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'HTTP response header' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RewriteHLS
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"标准 HLS 加密改写\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the \"Standard HLS Encryption Rewrite\" feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "SignName": {
-		//	      "description": "表示签名参数的名称，长度不能超过 100 个字符。参数名称区分大小写，可以包含字母、数字、下划线（_）、中划线（-）、逗号（,）、句号（.）、感叹号（!）。该参数的默认值是 DrmAuthToken。",
+		//	      "description": "Indicates the name of the signature parameter, which cannot exceed 100 characters. Parameter names are case-sensitive and can include letters, numbers, underscores (_), hyphens (-), commas (,), periods (.), and exclamation marks (!). The default value is DrmAuthToken.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+		//	      "description": "Indicates whether this feature is enabled. This parameter has the following options: true: Enable this feature. false: Disable this feature. The default value for this parameter is false.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -5108,79 +5108,79 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SignName
 				"sign_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示签名参数的名称，长度不能超过 100 个字符。参数名称区分大小写，可以包含字母、数字、下划线（_）、中划线（-）、逗号（,）、句号（.）、感叹号（!）。该参数的默认值是 DrmAuthToken。",
+					Description: "Indicates the name of the signature parameter, which cannot exceed 100 characters. Parameter names are case-sensitive and can include letters, numbers, underscores (_), hyphens (-), commas (,), periods (.), and exclamation marks (!). The default value is DrmAuthToken.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。该参数的默认值是 false。",
+					Description: "Indicates whether this feature is enabled. This parameter has the following options: true: Enable this feature. false: Disable this feature. The default value for this parameter is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"标准 HLS 加密改写\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the \"Standard HLS Encryption Rewrite\" feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceRegion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该加速域名的加速区域。该参数有以下取值：chinese_mainland：表示中国内地。global：表示全球。outside_chinese_mainland：表示全球（不含中国内地）。",
+		//	  "description": "Indicates the acceleration region for this accelerated domain name. The parameter values are: chinese_mainland: Chinese Mainland. global: Global. outside_chinese_mainland: Global (excluding Chinese Mainland).",
 		//	  "type": "string"
 		//	}
 		"service_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该加速域名的加速区域。该参数有以下取值：chinese_mainland：表示中国内地。global：表示全球。outside_chinese_mainland：表示全球（不含中国内地）。",
+			Description: "Indicates the acceleration region for this accelerated domain name. The parameter values are: chinese_mainland: Chinese Mainland. global: Global. outside_chinese_mainland: Global (excluding Chinese Mainland).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名的业务类型。该参数有以下取值：download：表示文件下载。web：表示网页。video：表示音视频点播。",
+		//	  "description": "Indicates the business type of the domain name. This parameter has the following options: download: File download. web: Web page. video: Audio and video on demand.",
 		//	  "type": "string"
 		//	}
 		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该域名的业务类型。该参数有以下取值：download：表示文件下载。web：表示网页。video：表示音视频点播。",
+			Description: "Indicates the business type of the domain name. This parameter has the following options: download: File download. web: Web page. video: Audio and video on demand.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SignedUrlAuth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"URL 鉴权\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'URL Authentication' feature. This feature is disabled by default",
 		//	  "properties": {
 		//	    "SignedUrlAuthRules": {
-		//	      "description": "表示 \"URL 鉴权\" 特性的配置模块。该特性默认为禁用。",
+		//	      "description": "Represents the configuration module for the 'URL authentication' feature. This feature is disabled by default.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示鉴权规则的配置规则，暂时仅支持配置一条。当 Switch 是 true 时，该参数为必填。",
+		//	        "description": "Indicates the configuration rule for authentication. Currently, only one rule can be configured. This parameter is required when Switch is true.",
 		//	        "properties": {
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -5190,42 +5190,42 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "SignedUrlAuthAction": {
-		//	            "description": "表示签名计算的配置。",
+		//	            "description": "Indicates the configuration for signature calculation.",
 		//	            "properties": {
 		//	              "AuthAlgorithm": {
-		//	                "description": "表示签名计算使用的算法。该配置有以下取值：md5：表示 MD5 算法。sha256：表示 SHA-256 算法。该参数的默认值是 md5。",
+		//	                "description": "Indicates the algorithm used for signature calculation. This configuration has the following values: md5: MD5 algorithm. sha256: SHA-256 algorithm. The default value for this parameter is md5.",
 		//	                "type": "string"
 		//	              },
 		//	              "BackupSecretKey": {
-		//	                "description": "表示备密钥。备密钥的长度为 6-40个字符可以包含除了 Delete（ASCII code 127）的可打印 ASCII 字符。",
+		//	                "description": "Indicates the backup secret key. The backup secret key must be 6–40 characters long and can contain any printable ASCII character except Delete (ASCII code 127).",
 		//	                "type": "string"
 		//	              },
 		//	              "CustomVariableRules": {
-		//	                "description": "表示自定义签算变量。",
+		//	                "description": "Indicates custom signature calculation variables.",
 		//	                "properties": {
 		//	                  "CustomVariableInstances": {
-		//	                    "description": "表示一个变量列表。",
+		//	                    "description": "Indicates a variable list",
 		//	                    "insertionOrder": false,
 		//	                    "items": {
-		//	                      "description": "表示一个变量列表。",
+		//	                      "description": "Indicates a variable list.",
 		//	                      "properties": {
 		//	                        "Operator": {
-		//	                          "description": "表示变量的匹配方式。该参数的取值只能是 match。",
+		//	                          "description": "Indicates the matching method for the variable. The value of this parameter can only be match.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Type": {
-		//	                          "description": "表示变量的类型。该参数有以下取值：queryString：表示该变量是请求中的一个查询参数。requestHeader：表示该变量是请求中的一个头部字段。",
+		//	                          "description": "Indicates the variable type. This parameter has the following values: queryString: indicates the variable is a query parameter in the request. requestHeader: indicates the variable is a header field in the request.",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
-		//	                          "description": "表示变量的名称，长度不超过 100 个字符。变量名称的要求如下：如果 Type 是 queryString，变量名称可以包含字母、数字、连字符（-）、逗号（,）、句号（.）、感叹号（!）。如果 Type 是 requestHeader，变量名称可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"）、冒号（:）、Delete（ASCII code 127）",
+		//	                          "description": "Specifies the variable name, with a maximum length of 100 characters. Variable name requirements are as follows: If Type is queryString, the variable name can include letters, numbers, hyphens (-), commas (,), periods (.), and exclamation marks (!). If Type is requestHeader, the variable name can include any printable ASCII character except: underscore (_), space, double quotes (\"), colon (:), and Delete (ASCII code 127).",
 		//	                          "type": "string"
 		//	                        }
 		//	                      },
@@ -5238,42 +5238,42 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "Duration": {
-		//	                "description": "签名的有效时间，单位是秒。该参数与请求中包含时间戳搭配使用，用来计算签名的过期时间。该参数的取值范围是 0-315,360,000。签名的过期时间 = 时间戳 + Duration。在内容分发网络收到某个请求时，如果签名的过期时间小于当前时间，内容分发网络判定签名已过期。",
+		//	                "description": "The validity period of the signature, in seconds. This parameter is used with the timestamp included in the request to calculate the expiration time of the signature. The value range for this parameter is 0–315,360,000. Signature expiration time = timestamp + Duration. When the content delivery network receives a request, if the signature expiration time is less than the current time, the content delivery network determines that the signature has expired.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              },
 		//	              "KeepOriginArg": {
-		//	                "description": "该参数暂不对外开放，请勿使用该参数。",
+		//	                "description": "This parameter is not currently available to external users. Do not use this parameter.",
 		//	                "type": "boolean"
 		//	              },
 		//	              "MasterSecretKey": {
-		//	                "description": "表示主密钥，长度为 6-40个字符，可以包含除了 Delete（ASCII code 127）的可打印 ASCII 字符。",
+		//	                "description": "Indicates the primary key, with a length of 6–40 characters. It can include printable ASCII characters except Delete (ASCII code 127)",
 		//	                "type": "string"
 		//	              },
 		//	              "RewriteM3u8": {
-		//	                "description": "表示在响应一个 .m3u8 文件的请求时，内容分发网络是否对 .m3u8 文件中每个分片文件的 URL 添加签名参数。每个分片 URL 的签名是基于改写后分片 URL，使用签名规则计算的。该参数有以下取值：true：表示启用。false：表示禁用。",
+		//	                "description": "Indicates whether the content delivery network adds signature parameters to the URL of each segment file in a .m3u8 file when responding to a .m3u8 file request. The signature for each segment URL is calculated based on the rewritten segment URL using the signature rules. The parameter values are as follows: true: enabled. false: disabled.",
 		//	                "type": "boolean"
 		//	              },
 		//	              "RewriteM3u8Rule": {
-		//	                "description": "表示 \"M3U8 改写\" 功能的配置。该配置仅当以下条件都满足时才有效：RewriteM3u8 是 true。URLAuthType 不是 typee。",
+		//	                "description": "Specifies the configuration for the 'M3U8 Rewrite' feature. This configuration is valid only when both of the following conditions are met: RewriteM3u8 is true; URLAuthType is not typee.",
 		//	                "properties": {
 		//	                  "DeleteParam": {
-		//	                    "description": "表示在改写分片 URL 时是否保留 URL 中原有的参数。该参数有以下取值：true：表示删除原有参数。false：表示保留原有参数。",
+		//	                    "description": "Indicates whether to retain the original parameters in the URL when rewriting the shard URL. This parameter has the following values: true: removes the original parameters. false: retains the original parameters.",
 		//	                    "type": "boolean"
 		//	                  },
 		//	                  "KeepM3u8Param": {
-		//	                    "description": "表示是否将来自该 M3U8 文件请求的不表示签名的查询参数添加到分片 URL 中。该参数有以下取值：true：表示在分片 URL 中添加查询参数。false：表示不添加查询参数。",
+		//	                    "description": "Indicates whether to add unsigned query parameters from the M3U8 file request to the segment URL. The parameter has the following options: true: add query parameters to the segment URL. false: do not add query parameters.",
 		//	                    "type": "boolean"
 		//	                  }
 		//	                },
 		//	                "type": "object"
 		//	              },
 		//	              "SignName": {
-		//	                "description": "表示签名参数的名称，长度不能超过 100 个字符。参数名称区分大小写，可以包含字母、数字、下划线（_）、中划线（-）、逗号（,）、句号（.）、感叹号（!）。",
+		//	                "description": "Indicates the name of the signature parameter. The length cannot exceed 100 characters. Parameter names are case-sensitive and can include letters, numbers, underscores (_), hyphens (-), commas (,), periods (.), and exclamation marks (!).",
 		//	                "type": "string"
 		//	              },
 		//	              "SignatureRule": {
-		//	                "description": "当 URLAuthType 为 typee 时，该参数为必填，表示需要纳入签名计算的字段。必须纳入签名计算的字段如下：key：秘钥，即MasterSecretKey或BackupSecretKey的传参内容。uri：表示用户请求资源的 URI。如果 URI 包含中文字符，您需要对 URI 编码。TimeName：表示时间戳参数的传参内容。可选择纳入签名计算的字段如下：domain：表示加速域名。referer：表示用户请求携带的 referer 值。ua：表示用户请求携带的 User-Agent 值。ip：表示用户请求的客户端 IP。origin：表示用户请求携带的 Origin 值。自定义变量：表示您在 CustomVariableInstances 中定义的变量名称。列表中填充的顺序即为签名计算时MD5()中各值顺序。",
+		//	                "description": "When URLAuthType is set to typee, this parameter is required and specifies the fields to be included in the signature calculation. The following fields must be included in the signature calculation: key: the secret key, which is the parameter value for MasterSecretKey or BackupSecretKey. uri: the URI of the resource requested by the user. If the URI contains Chinese characters, you need to encode the URI. TimeName: the parameter value for the timestamp. The following fields can optionally be included in the signature calculation: domain: the acceleration domain name. referer: the referer value carried in the user's request. ua: the User-Agent value carried in the user's request. ip: the client IP of the user's request. origin: the Origin value carried in the user's request. Custom variables: the variable names you define in CustomVariableInstances. The order in which the fields are listed determines the order of values in MD5() during signature calculation.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -5282,15 +5282,15 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "TimeFormat": {
-		//	                "description": "进制配置。该参数有以下取值：decimal：十进制。heximal：十六进制。当 URLAuthType 为 typed、typee 时，该参数为必填。当 URLAuthType 为 typec 时，无论您是否设置该参数，该参数的值会被强制设置为 heximal。对于 URLAuthType 的其他值，该参数不生效。",
+		//	                "description": "Numeral system configuration. This parameter has the following values: decimal: decimal system; hexadecimal: hexadecimal system. When URLAuthType is typed or typee, this parameter is required. When URLAuthType is typec, regardless of your setting, this parameter is forcibly set to hexadecimal. For other URLAuthType values, this parameter is not effective.",
 		//	                "type": "string"
 		//	              },
 		//	              "TimeName": {
-		//	                "description": "表示时间戳参数的名称。TimeName 的值可以包括英文字母、数字、下划线（_）、中划线（-）、句号（.）、逗号（,）、感叹号（!），长度为 1-100 个字符。TimenName 不能与 SignName 相同。当 URLAuthType 为 typed、typee 时，该参数为必填。对于其他类型，该参数不生效。",
+		//	                "description": "Indicates the name of the timestamp parameter. The value of TimeName can include English letters, numbers, underscores (_), hyphens (-), periods (.), commas (,), and exclamation marks (!), with a length of 1–100 characters. TimeName cannot be the same as SignName. When URLAuthType is typed or typee, this parameter is required. For other types, this parameter does not apply.",
 		//	                "type": "string"
 		//	              },
 		//	              "URLAuthType": {
-		//	                "description": "签名类型。",
+		//	                "description": "Signature type",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -5303,7 +5303,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+		//	      "description": "Indicates whether to enable this feature. This parameter has the following values: true: Enables this feature. false: Disables this feature.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -5324,41 +5324,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SignedUrlAuthAction
@@ -5366,12 +5366,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: AuthAlgorithm
 									"auth_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示签名计算使用的算法。该配置有以下取值：md5：表示 MD5 算法。sha256：表示 SHA-256 算法。该参数的默认值是 md5。",
+										Description: "Indicates the algorithm used for signature calculation. This configuration has the following values: md5: MD5 algorithm. sha256: SHA-256 algorithm. The default value for this parameter is md5.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: BackupSecretKey
 									"backup_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示备密钥。备密钥的长度为 6-40个字符可以包含除了 Delete（ASCII code 127）的可打印 ASCII 字符。",
+										Description: "Indicates the backup secret key. The backup secret key must be 6–40 characters long and can contain any printable ASCII character except Delete (ASCII code 127).",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: CustomVariableRules
@@ -5383,46 +5383,46 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Operator
 														"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示变量的匹配方式。该参数的取值只能是 match。",
+															Description: "Indicates the matching method for the variable. The value of this parameter can only be match.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Type
 														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示变量的类型。该参数有以下取值：queryString：表示该变量是请求中的一个查询参数。requestHeader：表示该变量是请求中的一个头部字段。",
+															Description: "Indicates the variable type. This parameter has the following values: queryString: indicates the variable is a query parameter in the request. requestHeader: indicates the variable is a header field in the request.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "表示变量的名称，长度不超过 100 个字符。变量名称的要求如下：如果 Type 是 queryString，变量名称可以包含字母、数字、连字符（-）、逗号（,）、句号（.）、感叹号（!）。如果 Type 是 requestHeader，变量名称可以包含除了以下字符的可打印 ASCII 字符：下划线（_）、空格、双引号（\"）、冒号（:）、Delete（ASCII code 127）",
+															Description: "Specifies the variable name, with a maximum length of 100 characters. Variable name requirements are as follows: If Type is queryString, the variable name can include letters, numbers, hyphens (-), commas (,), periods (.), and exclamation marks (!). If Type is requestHeader, the variable name can include any printable ASCII character except: underscore (_), space, double quotes (\"), colon (:), and Delete (ASCII code 127).",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												Description: "表示一个变量列表。",
+												Description: "Indicates a variable list",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示自定义签算变量。",
+										Description: "Indicates custom signature calculation variables.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Duration
 									"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "签名的有效时间，单位是秒。该参数与请求中包含时间戳搭配使用，用来计算签名的过期时间。该参数的取值范围是 0-315,360,000。签名的过期时间 = 时间戳 + Duration。在内容分发网络收到某个请求时，如果签名的过期时间小于当前时间，内容分发网络判定签名已过期。",
+										Description: "The validity period of the signature, in seconds. This parameter is used with the timestamp included in the request to calculate the expiration time of the signature. The value range for this parameter is 0–315,360,000. Signature expiration time = timestamp + Duration. When the content delivery network receives a request, if the signature expiration time is less than the current time, the content delivery network determines that the signature has expired.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: KeepOriginArg
 									"keep_origin_arg": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "该参数暂不对外开放，请勿使用该参数。",
+										Description: "This parameter is not currently available to external users. Do not use this parameter.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: MasterSecretKey
 									"master_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示主密钥，长度为 6-40个字符，可以包含除了 Delete（ASCII code 127）的可打印 ASCII 字符。",
+										Description: "Indicates the primary key, with a length of 6–40 characters. It can include printable ASCII characters except Delete (ASCII code 127)",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: RewriteM3u8
 									"rewrite_m3_u_8": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "表示在响应一个 .m3u8 文件的请求时，内容分发网络是否对 .m3u8 文件中每个分片文件的 URL 添加签名参数。每个分片 URL 的签名是基于改写后分片 URL，使用签名规则计算的。该参数有以下取值：true：表示启用。false：表示禁用。",
+										Description: "Indicates whether the content delivery network adds signature parameters to the URL of each segment file in a .m3u8 file when responding to a .m3u8 file request. The signature for each segment URL is calculated based on the rewritten segment URL using the signature rules. The parameter values are as follows: true: enabled. false: disabled.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: RewriteM3u8Rule
@@ -5430,88 +5430,88 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: DeleteParam
 											"delete_param": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Description: "表示在改写分片 URL 时是否保留 URL 中原有的参数。该参数有以下取值：true：表示删除原有参数。false：表示保留原有参数。",
+												Description: "Indicates whether to retain the original parameters in the URL when rewriting the shard URL. This parameter has the following values: true: removes the original parameters. false: retains the original parameters.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: KeepM3u8Param
 											"keep_m3_u_8_param": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Description: "表示是否将来自该 M3U8 文件请求的不表示签名的查询参数添加到分片 URL 中。该参数有以下取值：true：表示在分片 URL 中添加查询参数。false：表示不添加查询参数。",
+												Description: "Indicates whether to add unsigned query parameters from the M3U8 file request to the segment URL. The parameter has the following options: true: add query parameters to the segment URL. false: do not add query parameters.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "表示 \"M3U8 改写\" 功能的配置。该配置仅当以下条件都满足时才有效：RewriteM3u8 是 true。URLAuthType 不是 typee。",
+										Description: "Specifies the configuration for the 'M3U8 Rewrite' feature. This configuration is valid only when both of the following conditions are met: RewriteM3u8 is true; URLAuthType is not typee.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SignName
 									"sign_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示签名参数的名称，长度不能超过 100 个字符。参数名称区分大小写，可以包含字母、数字、下划线（_）、中划线（-）、逗号（,）、句号（.）、感叹号（!）。",
+										Description: "Indicates the name of the signature parameter. The length cannot exceed 100 characters. Parameter names are case-sensitive and can include letters, numbers, underscores (_), hyphens (-), commas (,), periods (.), and exclamation marks (!).",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SignatureRule
 									"signature_rule": schema.SetAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "当 URLAuthType 为 typee 时，该参数为必填，表示需要纳入签名计算的字段。必须纳入签名计算的字段如下：key：秘钥，即MasterSecretKey或BackupSecretKey的传参内容。uri：表示用户请求资源的 URI。如果 URI 包含中文字符，您需要对 URI 编码。TimeName：表示时间戳参数的传参内容。可选择纳入签名计算的字段如下：domain：表示加速域名。referer：表示用户请求携带的 referer 值。ua：表示用户请求携带的 User-Agent 值。ip：表示用户请求的客户端 IP。origin：表示用户请求携带的 Origin 值。自定义变量：表示您在 CustomVariableInstances 中定义的变量名称。列表中填充的顺序即为签名计算时MD5()中各值顺序。",
+										Description: "When URLAuthType is set to typee, this parameter is required and specifies the fields to be included in the signature calculation. The following fields must be included in the signature calculation: key: the secret key, which is the parameter value for MasterSecretKey or BackupSecretKey. uri: the URI of the resource requested by the user. If the URI contains Chinese characters, you need to encode the URI. TimeName: the parameter value for the timestamp. The following fields can optionally be included in the signature calculation: domain: the acceleration domain name. referer: the referer value carried in the user's request. ua: the User-Agent value carried in the user's request. ip: the client IP of the user's request. origin: the Origin value carried in the user's request. Custom variables: the variable names you define in CustomVariableInstances. The order in which the fields are listed determines the order of values in MD5() during signature calculation.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TimeFormat
 									"time_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "进制配置。该参数有以下取值：decimal：十进制。heximal：十六进制。当 URLAuthType 为 typed、typee 时，该参数为必填。当 URLAuthType 为 typec 时，无论您是否设置该参数，该参数的值会被强制设置为 heximal。对于 URLAuthType 的其他值，该参数不生效。",
+										Description: "Numeral system configuration. This parameter has the following values: decimal: decimal system; hexadecimal: hexadecimal system. When URLAuthType is typed or typee, this parameter is required. When URLAuthType is typec, regardless of your setting, this parameter is forcibly set to hexadecimal. For other URLAuthType values, this parameter is not effective.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TimeName
 									"time_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示时间戳参数的名称。TimeName 的值可以包括英文字母、数字、下划线（_）、中划线（-）、句号（.）、逗号（,）、感叹号（!），长度为 1-100 个字符。TimenName 不能与 SignName 相同。当 URLAuthType 为 typed、typee 时，该参数为必填。对于其他类型，该参数不生效。",
+										Description: "Indicates the name of the timestamp parameter. The value of TimeName can include English letters, numbers, underscores (_), hyphens (-), periods (.), commas (,), and exclamation marks (!), with a length of 1–100 characters. TimeName cannot be the same as SignName. When URLAuthType is typed or typee, this parameter is required. For other types, this parameter does not apply.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: URLAuthType
 									"url_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "签名类型。",
+										Description: "Signature type",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示签名计算的配置。",
+								Description: "Indicates the configuration for signature calculation.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示 \"URL 鉴权\" 特性的配置模块。该特性默认为禁用。",
+					Description: "Represents the configuration module for the 'URL authentication' feature. This feature is disabled by default.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用该特性。该参数有以下取值：true：表示启用该特性。false：表示禁用该特性。",
+					Description: "Indicates whether to enable this feature. This parameter has the following values: true: Enables this feature. false: Disables this feature.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"URL 鉴权\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'URL Authentication' feature. This feature is disabled by default",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该加速域名的状态。该参数有以下取值：online：表示状态是 正常运行。configuring：表示状态是 配置中。offline：表示状态是 已下线。",
+		//	  "description": "Indicates the status of the acceleration domain name. The parameter values are as follows: online: indicates normal operation. configuring: indicates configuration in progress. offline: indicates offline status.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该加速域名的状态。该参数有以下取值：online：表示状态是 正常运行。configuring：表示状态是 配置中。offline：表示状态是 已下线。",
+			Description: "Indicates the status of the acceleration domain name. The parameter values are as follows: online: indicates normal operation. configuring: indicates configuration in progress. offline: indicates offline status.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签信息。",
+		//	    "description": "Tag information.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -5525,62 +5525,62 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息",
+			Description: "Tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Timeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"回源超时时间\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the 'origin timeout' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "Switch": {
-		//	      "description": "指定是否启用回源超时时间的配置。该参数有以下取值：true：表示启用回源超时时间的配置。false：表示禁用回源超时时间的配置。此时，TCP 请求和 HTTP 请求的超时时间使用系统默认值，分别是 2 秒和 60 秒。",
+		//	      "description": "Specify whether to enable origin timeout configuration. This parameter has the following values: true: enables origin timeout configuration. false: disables origin timeout configuration. In this case, the system default timeout values are used for TCP and HTTP requests, which are 2 seconds and 60 seconds respectively.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "TimeoutRules": {
-		//	      "description": "表示一组超时时间的配置。当前您只能指定一个配置。当 Switch 是 true 时，该参数为必填。",
+		//	      "description": "Represents a set of timeout configurations. Currently, you can specify only one configuration. This parameter is required when Switch is true.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一组超时时间的配置。当前您只能指定一个配置",
+		//	        "description": "Indicates a set of timeout configurations. Currently, you can specify only one configuration.",
 		//	        "properties": {
 		//	          "Condition": {
-		//	            "description": "表示该配置模块的生效条件，由一组规则组成。",
+		//	            "description": "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 		//	            "properties": {
 		//	              "ConditionRule": {
-		//	                "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                "description": "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                "insertionOrder": false,
 		//	                "items": {
-		//	                  "description": "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+		//	                  "description": "Specifies a set of rules. When a user request is received, the content delivery network matches the rules to the request in the order they appear in the set. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+		//	                      "description": "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Object": {
-		//	                      "description": "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+		//	                      "description": "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Operator": {
-		//	                      "description": "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+		//	                      "description": "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Type": {
-		//	                      "description": "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+		//	                      "description": "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+		//	                      "description": "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -5590,22 +5590,22 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Connective": {
-		//	                "description": "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+		//	                "description": "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "TimeoutAction": {
-		//	            "description": "表示超时时间的配置。",
+		//	            "description": "Indicates the timeout configuration.",
 		//	            "properties": {
 		//	              "HttpTimeout": {
-		//	                "description": "表示 HTTP 请求的超时时间。该参数的取值范围是 5-60。",
+		//	                "description": "Indicates the timeout period for HTTP requests. The value range for this parameter is 5–60.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              },
 		//	              "TcpTimeout": {
-		//	                "description": "表示 TCP 请求的超时时间。该参数的取值范围是 2-60。",
+		//	                "description": "Indicates the timeout for TCP requests. The valid range for this parameter is 2–60.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              }
@@ -5625,7 +5625,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "指定是否启用回源超时时间的配置。该参数有以下取值：true：表示启用回源超时时间的配置。false：表示禁用回源超时时间的配置。此时，TCP 请求和 HTTP 请求的超时时间使用系统默认值，分别是 2 秒和 60 秒。",
+					Description: "Specify whether to enable origin timeout configuration. This parameter has the following values: true: enables origin timeout configuration. false: disables origin timeout configuration. In this case, the system default timeout values are used for TCP and HTTP requests, which are 2 seconds and 60 seconds respectively.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TimeoutRules
@@ -5641,41 +5641,41 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "当 Object 是 query_name 或者 customize 时，该参数有效。如果 Object 是 query_name，该参数表示一个查询参数的名称。如果 Object 是 customize，该参数表示一个自定义头部的名称。Name 的长度不能超过 256 个字符，可以包含数字、字母、百分号（%）、下划线（_）、中划线（-）。",
+													Description: "When Object is query_name or customize, this parameter is valid. If Object is query_name, this parameter indicates the name of a query parameter. If Object is customize, this parameter indicates the name of a custom header. The length of Name cannot exceed 256 characters and can include digits, letters, percent sign (%), underscore (_), and hyphen (-).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Object
 												"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配对象的类型。内容分发网络对目标中指定类型的对象匹配规则。该参数有以下取值：path：表示对目标中的路径进行匹配。directory：表示对目标中的目录进行匹配。filetype：表示对目标中的文件后缀进行匹配。",
+													Description: "Specifies the type of matching object. The content delivery network applies matching rules to objects of the specified type in the target. This parameter supports the following values: path: matches the path in the target. directory: matches the directory in the target. filetype: matches the file extension in the target.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Operator
 												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示匹配方式。该参数有以下取值：match：表示如果 Value 中某个值存在，就算匹配。",
+													Description: "Indicates the matching method. This parameter has the following value: match: If any value in Value exists, it is considered a match.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Type
 												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示目标类型。该参数取值是 url，表示目标是一个 URL。",
+													Description: "Specifies the target type. The value of this parameter is url, indicating the target is a URL.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "表示一个值的集合，多个值之间用分号（;）分隔，总长度不能超过 1,024 个字符，可以包含可打印 ASCII 字符，以下字符除外：连续斜杠（//）、空格、美元符号（$）、问号（?）、Delete（ASCII code 127）。如果集合中的任意一个值匹配了请求，就认为是匹配。当 Object 是 path 时，该参数表示一个或者多个路径。路径必须以斜杠（/）开头。您可以在路径中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 directory 时，该参数表示一个或者多个目录。目录必须以斜杠（/）开头和结尾。您可以在目录中使用一个或者多个星号（*），每个星号表示一个或者多个字符。当 Object 是 filetype 时，该参数表示一个或者多个文件后缀。后缀无需以句点（.）开头，",
+													Description: "Represents a set of values separated by semicolons (;). The total length must not exceed 1,024 characters. Printable ASCII characters are allowed, except for the following: consecutive slashes (//), spaces, dollar sign ($), question mark (?), and Delete (ASCII code 127). If any value in the set matches the request, it is considered a match. When Object is path, this parameter specifies one or more paths. Paths must start with a slash (/). You can use one or more asterisks (*) in the path, where each asterisk represents one or more characters. When Object is directory, this parameter specifies one or more directories. Directories must start and end with a slash (/). You can use one or more asterisks (*) in the directory, where each asterisk represents one or more characters. When Object is filetype, this parameter specifies one or more file extensions. Extensions do not need to start with a period (.).",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "表示一个规则集合。在收到一个用户请求时，内容分发网络按集合中规则的出现顺序将规则与请求匹配。如果一条规则匹配了请求，内容分发网络就停止匹配剩余规则。",
+										Description: "Indicates a rule set. When a user request is received, the content delivery network matches the rules in the set to the request in order. If a rule matches the request, the content delivery network stops matching the remaining rules.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Connective
 									"connective": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "表示多条ConditionRule 之间的逻辑关系。该参数有以下取值：AND: 表示逻辑关系是 \"AND\"。OR：表示逻辑关系是 \"OR\"。该参数的默认值是 OR。",
+										Description: "Represents the logical relationship between multiple ConditionRule entries. This parameter has the following values: AND: indicates the logical relationship is 'AND'. OR: indicates the logical relationship is 'OR'. The default value is OR.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示该配置模块的生效条件，由一组规则组成。",
+								Description: "Represents the conditions under which this configuration module takes effect, consisting of a set of rules.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: TimeoutAction
@@ -5683,51 +5683,51 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: HttpTimeout
 									"http_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示 HTTP 请求的超时时间。该参数的取值范围是 5-60。",
+										Description: "Indicates the timeout period for HTTP requests. The value range for this parameter is 5–60.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TcpTimeout
 									"tcp_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "表示 TCP 请求的超时时间。该参数的取值范围是 2-60。",
+										Description: "Indicates the timeout for TCP requests. The valid range for this parameter is 2–60.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "表示超时时间的配置。",
+								Description: "Indicates the timeout configuration.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "表示一组超时时间的配置。当前您只能指定一个配置。当 Switch 是 true 时，该参数为必填。",
+					Description: "Represents a set of timeout configurations. Currently, you can specify only one configuration. This parameter is required when Switch is true.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"回源超时时间\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the 'origin timeout' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UaAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"UA 黑白名单\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the \"UA allowlist and blocklist\" feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "AllowEmpty": {
-		//	      "description": "表示是否允许 UA 为空（\"\"）或者不包含 UA 字段的请求访问加速域名。该参数有以下取值：true：表示允许。false：表示不允许。该参数的默认值是 false。",
+		//	      "description": "Indicates whether requests with an empty UA (\"\") or without a UA field are allowed to access the acceleration domain. The parameter has the following values: true: allowed. false: not allowed. The default value is false.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "IgnoreCase": {
-		//	      "description": "表示 UA 字符串是否是大小写敏感的。该参数有以下取值：true: 表示 UA 字符串是大小写不敏感的。false: 表示 UA 字符串是大小写敏感的。该参数的默认值是 false。",
+		//	      "description": "Indicates whether the UA string is case-sensitive. The parameter has the following options: true: The UA string is case-insensitive. false: The UA string is case-sensitive. The default value for this parameter is false.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "RuleType": {
-		//	      "description": "表示指定的是黑名单还是白名单。当 Switch 是 true 时，该参数为必填。该参数有以下取值：deny: 表示指定的是黑名单。allow: 表示指定的是白名单。",
+		//	      "description": "Specifies whether a denylist or allowlist is used. When Switch is true, this parameter is required. The parameter values are as follows: deny: specifies a denylist. allow: specifies an allowlist.",
 		//	      "type": "string"
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示是否启用 UA 黑白名单功能。该参数有以下取值：true: 表示启用。false: 表示禁用。",
+		//	      "description": "Indicates whether the UA allowlist and blocklist feature is enabled. This parameter has the following values: true: enabled. false: disabled.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "UserAgent": {
-		//	      "description": "表示一个 UA 的列表。当 Switch 是 true 时，该参数为必填。该列表最多包含 1,000 个 UA。该参数的说明如下：该参数值的长度不能超过 30,000 个字符。如果 RuleType 是 allow，表示仅允许包含列表中的 UA 的请求访问加速域名。如果 RuleType 是 deny，表示如果访问请求包含列表中的 UA，则不允许访问加速域名。UA 能包含的字符有以下限制：UA 中可以使用 * 表示一个或者多个字符。* 仅可以出现在 UA 的开头和末尾。UA 不能只包含 *或者空格。UA 可以包含除了 Delete（ASCII code 127）的可打印 ASCII 字符。UA 如果包含符号，符号必须是被 HTML 编码的。",
+		//	      "description": "Represents a list of UAs. When Switch is true, this parameter is required. The list can contain up to 1,000 UAs. The parameter details are as follows: The value length cannot exceed 30,000 characters. If RuleType is allow, only requests containing UAs in the list are permitted to access the acceleration domain. If RuleType is deny, requests containing UAs in the list are not permitted to access the acceleration domain. UA character restrictions are as follows: You can use * in a UA to represent one or more characters. * can only appear at the beginning or end of the UA. A UA cannot consist only of * or spaces. A UA can contain printable ASCII characters except Delete (ASCII code 127). If a UA contains symbols, the symbols must be HTML encoded.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -5742,54 +5742,54 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowEmpty
 				"allow_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否允许 UA 为空（\"\"）或者不包含 UA 字段的请求访问加速域名。该参数有以下取值：true：表示允许。false：表示不允许。该参数的默认值是 false。",
+					Description: "Indicates whether requests with an empty UA (\"\") or without a UA field are allowed to access the acceleration domain. The parameter has the following values: true: allowed. false: not allowed. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IgnoreCase
 				"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示 UA 字符串是否是大小写敏感的。该参数有以下取值：true: 表示 UA 字符串是大小写不敏感的。false: 表示 UA 字符串是大小写敏感的。该参数的默认值是 false。",
+					Description: "Indicates whether the UA string is case-sensitive. The parameter has the following options: true: The UA string is case-insensitive. false: The UA string is case-sensitive. The default value for this parameter is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RuleType
 				"rule_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "表示指定的是黑名单还是白名单。当 Switch 是 true 时，该参数为必填。该参数有以下取值：deny: 表示指定的是黑名单。allow: 表示指定的是白名单。",
+					Description: "Specifies whether a denylist or allowlist is used. When Switch is true, this parameter is required. The parameter values are as follows: deny: specifies a denylist. allow: specifies an allowlist.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否启用 UA 黑白名单功能。该参数有以下取值：true: 表示启用。false: 表示禁用。",
+					Description: "Indicates whether the UA allowlist and blocklist feature is enabled. This parameter has the following values: true: enabled. false: disabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UserAgent
 				"user_agent": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示一个 UA 的列表。当 Switch 是 true 时，该参数为必填。该列表最多包含 1,000 个 UA。该参数的说明如下：该参数值的长度不能超过 30,000 个字符。如果 RuleType 是 allow，表示仅允许包含列表中的 UA 的请求访问加速域名。如果 RuleType 是 deny，表示如果访问请求包含列表中的 UA，则不允许访问加速域名。UA 能包含的字符有以下限制：UA 中可以使用 * 表示一个或者多个字符。* 仅可以出现在 UA 的开头和末尾。UA 不能只包含 *或者空格。UA 可以包含除了 Delete（ASCII code 127）的可打印 ASCII 字符。UA 如果包含符号，符号必须是被 HTML 编码的。",
+					Description: "Represents a list of UAs. When Switch is true, this parameter is required. The list can contain up to 1,000 UAs. The parameter details are as follows: The value length cannot exceed 30,000 characters. If RuleType is allow, only requests containing UAs in the list are permitted to access the acceleration domain. If RuleType is deny, requests containing UAs in the list are not permitted to access the acceleration domain. UA character restrictions are as follows: You can use * in a UA to represent one or more characters. * can only appear at the beginning or end of the UA. A UA cannot consist only of * or spaces. A UA can contain printable ASCII characters except Delete (ASCII code 127). If a UA contains symbols, the symbols must be HTML encoded.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"UA 黑白名单\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the \"UA allowlist and blocklist\" feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该域名配置的最近一次的更新时间，格式是 Unix 时间戳。",
+		//	  "description": "Indicates the most recent update time for this domain configuration, in Unix timestamp format.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "表示该域名配置的最近一次的更新时间，格式是 Unix 时间戳。",
+			Description: "Indicates the most recent update time for this domain configuration, in Unix timestamp format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UrlNormalize
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"URL 标准化\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Specifies the configuration module for the 'URL normalization' feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "NormalizeObject": {
-		//	      "description": "表示您需要启用的 URL 标准化选项列表。当 Switch 为 true 时，该参数为必填。列表中可以包含以下选项：dot_segments：表示将请求 URL 中的以下内容进行替换：/./：替换为单个斜杠（/）。/../：如果 /../ 前还有一个级别的目录，则删除 /../ 与该目录。如果 /../ 前没有目录，则保留原 URL。back_slashes：表示将请求 URL 中的反斜杠（\\）替换为单个斜杠（/）。successive_slashes：表示将请求 URL 中连续斜杠（//）替换为单个斜杠（/）。",
+		//	      "description": "This specifies the list of URL normalization options you need to enable. When Switch is true, this parameter is required. The list can include the following options: dot_segments: replaces the following in the request URL: /./: replaced with a single slash (/). /../: if there is a directory level before /../, removes /../ and that directory. If there is no directory before /../, the original URL is retained. back_slashes: replaces backslashes (\\) in the request URL with a single slash (/). successive_slashes: replaces consecutive slashes (//) in the request URL with a single slash (/).",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -5798,7 +5798,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Switch": {
-		//	      "description": "表示您需要启用的 URL 标准化选项列表。当 Switch 为 true 时，该参数为必填。列表中可以包含以下选项：dot_segments：表示将请求 URL 中的以下内容进行替换：/./：替换为单个斜杠（/）。/../：如果 /../ 前还有一个级别的目录，则删除 /../ 与该目录。如果 /../ 前没有目录，则保留原 URL。back_slashes：表示将请求 URL 中的反斜杠（\\）替换为单个斜杠（/）。successive_slashes：表示将请求 URL 中连续斜杠（//）替换为单个斜杠（/）。",
+		//	      "description": "This specifies the list of URL normalization options you need to enable. When Switch is true, this parameter is required. The list can include the following options: dot_segments: replaces the following in the request URL: /./: replaced with a single slash (/). /../: if there is a directory level before /../, removes /../ and that directory. If there is no directory before /../, the original URL is retained. back_slashes: replaces backslashes (\\) in the request URL with a single slash (/). successive_slashes: replaces consecutive slashes (//) in the request URL with a single slash (/).",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -5809,26 +5809,26 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: NormalizeObject
 				"normalize_object": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示您需要启用的 URL 标准化选项列表。当 Switch 为 true 时，该参数为必填。列表中可以包含以下选项：dot_segments：表示将请求 URL 中的以下内容进行替换：/./：替换为单个斜杠（/）。/../：如果 /../ 前还有一个级别的目录，则删除 /../ 与该目录。如果 /../ 前没有目录，则保留原 URL。back_slashes：表示将请求 URL 中的反斜杠（\\）替换为单个斜杠（/）。successive_slashes：表示将请求 URL 中连续斜杠（//）替换为单个斜杠（/）。",
+					Description: "This specifies the list of URL normalization options you need to enable. When Switch is true, this parameter is required. The list can include the following options: dot_segments: replaces the following in the request URL: /./: replaced with a single slash (/). /../: if there is a directory level before /../, removes /../ and that directory. If there is no directory before /../, the original URL is retained. back_slashes: replaces backslashes (\\) in the request URL with a single slash (/). successive_slashes: replaces consecutive slashes (//) in the request URL with a single slash (/).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示您需要启用的 URL 标准化选项列表。当 Switch 为 true 时，该参数为必填。列表中可以包含以下选项：dot_segments：表示将请求 URL 中的以下内容进行替换：/./：替换为单个斜杠（/）。/../：如果 /../ 前还有一个级别的目录，则删除 /../ 与该目录。如果 /../ 前没有目录，则保留原 URL。back_slashes：表示将请求 URL 中的反斜杠（\\）替换为单个斜杠（/）。successive_slashes：表示将请求 URL 中连续斜杠（//）替换为单个斜杠（/）。",
+					Description: "This specifies the list of URL normalization options you need to enable. When Switch is true, this parameter is required. The list can include the following options: dot_segments: replaces the following in the request URL: /./: replaced with a single slash (/). /../: if there is a directory level before /../, removes /../ and that directory. If there is no directory before /../, the original URL is retained. back_slashes: replaces backslashes (\\) in the request URL with a single slash (/). successive_slashes: replaces consecutive slashes (//) in the request URL with a single slash (/).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"URL 标准化\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Specifies the configuration module for the 'URL normalization' feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VideoDrag
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示 \"视频拖拽\" 特性的配置模块。该特性默认为禁用。",
+		//	  "description": "Indicates the configuration module for the \"Video Drag\" feature. This feature is disabled by default.",
 		//	  "properties": {
 		//	    "Switch": {
-		//	      "description": "智能压缩配置开关。该参数有以下取值：true：表示启用视频拖拽。false：表示禁用视频拖拽。",
+		//	      "description": "Smart compression configuration switch. The parameter has the following options: true: enable video seeking. false: disable video seeking.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -5838,11 +5838,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "智能压缩配置开关。该参数有以下取值：true：表示启用视频拖拽。false：表示禁用视频拖拽。",
+					Description: "Smart compression configuration switch. The parameter has the following options: true: enable video seeking. false: disable video seeking.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示 \"视频拖拽\" 特性的配置模块。该特性默认为禁用。",
+			Description: "Indicates the configuration module for the \"Video Drag\" feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

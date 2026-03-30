@@ -21,25 +21,25 @@ Data Source schema for Volcengine::CLB::ServerGroup
 
 ### Read-Only
 
-- `address_ip_version` (String) 后端服务器组的IP地址类型。ipv4：后端服务器组为IPv4类型。ipv6：后端服务器组为IPv6类型。
-- `any_port_enabled` (String) 是否开启全端口转发。on：开启全端口转发。off：关闭全端口转发。
-- `create_time` (String) 后端服务器组的创建时间。
-- `description` (String) 后端服务器组的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个符。不填则默认为空字符串。
-- `listeners` (Attributes Set) 后端服务器组关联的监听器信息。 (see [below for nested schema](#nestedatt--listeners))
-- `load_balancer_id` (String) 后端服务器组所属的CLB实例ID。
-- `server_group_id` (String) 后端服务器组的ID。
-- `server_group_name` (String) 后端服务器组的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。限制为1 ～ 128个字符。不填默认为后端服务器组ID。
-- `servers` (Attributes Set) 后端服务器组中服务器的信息。 (see [below for nested schema](#nestedatt--servers))
-- `tags` (Attributes Set) 标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `type` (String) 后端服务器组的类型。instance：表示该后端服务器组只能添加云服务器的主网卡或辅助网卡作为后端服务器。ip：表示该后端服务器组只能添加IP地址作为后端服务器。
-- `update_time` (String) 后端服务器组的最近操作时间。
+- `address_ip_version` (String) IP address type of the backend server group. ipv4: The backend server group is of IPv4 type. ipv6: The backend server group is of IPv6 type.
+- `any_port_enabled` (String) Whether to enable all-port forwarding. on: enable all-port forwarding. off: disable all-port forwarding.
+- `create_time` (String) Creation time of the backend server group.
+- `description` (String) Description of the backend server group. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.
+- `listeners` (Attributes Set) Listener information associated with the backend server group. (see [below for nested schema](#nestedatt--listeners))
+- `load_balancer_id` (String) CLB instance ID to which the backend server group belongs.
+- `server_group_id` (String) Backend server group ID.
+- `server_group_name` (String) Name of the backend server group. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Limit: 1–128 characters. If not specified, defaults to the backend server group ID.
+- `servers` (Attributes Set) Information about servers in the backend server group. (see [below for nested schema](#nestedatt--servers))
+- `tags` (Attributes Set) Tag information. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) Type of the backend server group. instance: This backend server group can only add the primary or auxiliary network card of a cloud server as backend servers. ip: This backend server group can only add IP addresses as backend servers.
+- `update_time` (String) Last operation time of the backend server group.
 
 <a id="nestedatt--listeners"></a>
 ### Nested Schema for `listeners`
 
 Read-Only:
 
-- `listener_id` (String) 监听器的ID。
+- `listener_id` (String) Listener ID.
 
 
 <a id="nestedatt--servers"></a>
@@ -47,14 +47,14 @@ Read-Only:
 
 Read-Only:
 
-- `any_port_enabled` (String) 是否开启全端口转发。on：开启。off（默认值）：关闭。
-- `description` (String) 后端服务器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255字符。不填则默认为空字符串。
-- `instance_id` (String) 后端服务器。取值情况如下：当 Type 取ecs时，传云服务器实例的ID。当Type 取eni时，传已挂载至云服务器的辅助网卡的ID。当 Type 取ip时，传IP地址作为后端服务器。
-- `ip` (String) 后端服务器的私网IP地址。多个后端服务器IP之间使用“&”分隔。
-- `port` (Number) 后端服务器接收请求的端口号。取值范围为1～65535。参数AnyPortEnabled为“off”，且需要同时添加后端服务器时，该参数必须传入；参数AnyPortEnabled为“on”时，该参数默认为0。
-- `server_id` (String) 后端服务器ID。
-- `type` (String) 后端服务器实例类型。当参数Type取instance时，取值如下：ecs：云服务器实例。eni：网卡。当参数Type取ip时，本参数取值为ip。
-- `weight` (Number) 后端服务器的权重，取值范围为0 ～ 100。不填则默认为0。0表示不会将请求转发给该后端服务器。
+- `any_port_enabled` (String) Enable all-port forwarding. on: enabled. off (default): disabled.
+- `description` (String) Backend server description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.
+- `instance_id` (String) Backend server. Value options: When Type is ecs, provide the cloud server instance ID. When Type is eni, provide the ID of the auxiliary network card attached to the cloud server. When Type is ip, provide the IP address as the backend server.
+- `ip` (String) Private IP address of the backend server. Use '&' to separate multiple backend server IP addresses.
+- `port` (Number) Port number on which the backend server receives requests. Value range: 1–65535. If the AnyPortEnabled parameter is 'off' and you need to add backend servers at the same time, this parameter must be provided. If AnyPortEnabled is 'on', this parameter defaults to 0.
+- `server_id` (String) Backend server ID.
+- `type` (String) Backend server instance type. When the Type parameter is instance, value options are: ecs: cloud server instance. eni: auxiliary network card. When the Type parameter is ip, this parameter value is ip.
+- `weight` (Number) Backend server weight, range: 0–100. If not specified, defaults to 0. 0 means requests will not be forwarded to this backend server.
 
 
 <a id="nestedatt--tags"></a>
@@ -62,5 +62,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 绑定的标签键信息。
-- `value` (String) 绑定的标签值信息。
+- `key` (String) Information about bound tag keys.
+- `value` (String) Bound tag value information.

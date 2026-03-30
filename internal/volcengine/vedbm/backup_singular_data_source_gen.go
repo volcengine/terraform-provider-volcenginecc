@@ -26,155 +26,155 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份的结束时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	  "description": "Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"backup_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份的结束时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+			Description: "Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupFileSize
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份文件大小，单位为 KiB。",
+		//	  "description": "Backup file size, unit: KiB",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"backup_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "备份文件大小，单位为 KiB。",
+			Description: "Backup file size, unit: KiB",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份 ID。",
+		//	  "description": "Backup ID",
 		//	  "type": "string"
 		//	}
 		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份 ID。",
+			Description: "Backup ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupMethod
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份方式，目前仅支持物理备份。",
+		//	  "description": "Backup method, currently only physical backup is supported",
 		//	  "type": "string"
 		//	}
 		"backup_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份方式，目前仅支持物理备份。",
+			Description: "Backup method, currently only physical backup is supported",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupRetentionPeriod
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据备份保留天数。",
+		//	  "description": "Data backup retention days",
 		//	  "type": "integer"
 		//	}
 		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "数据备份保留天数。",
+			Description: "Data backup retention days",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupStartTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份的开始时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	  "description": "Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"backup_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份的开始时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+			Description: "Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份状态。",
+		//	  "description": "Backup status",
 		//	  "type": "string"
 		//	}
 		"backup_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份状态。",
+			Description: "Backup status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "执行备份任务的时间，间隔窗口为两小时。格式：HH:mmZ-HH:mmZ（UTC 时间）。",
+		//	  "description": "Backup task execution time, interval window is two hours. Format: HH:mmZ-HH:mmZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"backup_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "执行备份任务的时间，间隔窗口为两小时。格式：HH:mmZ-HH:mmZ（UTC 时间）。",
+			Description: "Backup task execution time, interval window is two hours. Format: HH:mmZ-HH:mmZ (UTC time)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份类型，目前仅支持全量备份。",
+		//	  "description": "Backup type, currently only full backup is supported",
 		//	  "type": "string"
 		//	}
 		"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份类型，目前仅支持全量备份。",
+			Description: "Backup type, currently only full backup is supported",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConsistentTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "一致性备份的时间点，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	  "description": "Consistency backup timestamp, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"consistent_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "一致性备份的时间点，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+			Description: "Consistency backup timestamp, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ContinueBackup
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启持续备份，取值固定为 true。",
+		//	  "description": "Enable continuous backup, value is always true",
 		//	  "type": "boolean"
 		//	}
 		"continue_backup": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启持续备份，取值固定为 true。",
+			Description: "Enable continuous backup, value is always true",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建类型。",
+		//	  "description": "Creation type",
 		//	  "type": "string"
 		//	}
 		"create_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建类型。",
+			Description: "Creation type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FullBackupPeriod
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全量备份周期，多个取值用英文逗号（,）隔开。",
+		//	  "description": "Full backup cycle, use commas (,) to separate multiple values",
 		//	  "type": "string"
 		//	}
 		"full_backup_period": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "全量备份周期，多个取值用英文逗号（,）隔开。",
+			Description: "Full backup cycle, use commas (,) to separate multiple values",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID。",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

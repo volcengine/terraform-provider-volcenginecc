@@ -36,11 +36,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自动快照策略ID。",
+		//	  "description": "Automatic snapshot policy ID.",
 		//	  "type": "string"
 		//	}
 		"auto_snapshot_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自动快照策略ID。",
+			Description: "Automatic snapshot policy ID.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -51,11 +51,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自动快照策略名称。",
+		//	  "description": "Automatic snapshot policy name.",
 		//	  "type": "string"
 		//	}
 		"auto_snapshot_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自动快照策略名称。",
+			Description: "Automatic snapshot policy name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -65,14 +65,14 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "基本性能。",
+		//	  "description": "Baseline performance.",
 		//	  "properties": {
 		//	    "IOPS": {
-		//	      "description": "云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。",
+		//	      "description": "Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.",
 		//	      "type": "number"
 		//	    },
 		//	    "Throughput": {
-		//	      "description": "云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。",
+		//	      "description": "The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.",
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -82,16 +82,16 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: IOPS
 				"iops": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。",
+					Description: "Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Throughput
 				"throughput": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。",
+					Description: "The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "基本性能。",
+			Description: "Baseline performance.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -101,11 +101,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘创建时间。",
+		//	  "description": "Disk creation time.",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘创建时间。",
+			Description: "Disk creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -116,11 +116,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "释放实例时，该云盘是否随实例一起释放，取值说明如下：true：云盘随实例一起释放。false：云盘不随实例一起释放。",
+		//	  "description": "When releasing the instance, specify whether the disk is released along with the instance. Value description: true: The disk is released with the instance. false: The disk is not released with the instance.",
 		//	  "type": "boolean"
 		//	}
 		"delete_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "释放实例时，该云盘是否随实例一起释放，取值说明如下：true：云盘随实例一起释放。false：云盘不随实例一起释放。",
+			Description: "When releasing the instance, specify whether the disk is released along with the instance. Value description: true: The disk is released with the instance. false: The disk is not released with the instance.",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),
@@ -132,13 +132,13 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘的描述信息，默认为空，长度限制在1 ~ 255字符之间。",
+		//	  "description": "Disk description. Default is empty. Length must be between 1 and 255 characters.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘的描述信息，默认为空，长度限制在1 ~ 255字符之间。",
+			Description: "Disk description. Default is empty. Length must be between 1 and 255 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -152,11 +152,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "设备名称",
+		//	  "description": "Device name",
 		//	  "type": "string"
 		//	}
 		"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "设备名称",
+			Description: "Device name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -166,11 +166,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "具体错误",
+		//	  "description": "Specific error",
 		//	  "type": "string"
 		//	}
 		"error_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "具体错误",
+			Description: "Specific error",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -180,11 +180,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月到期时间。",
+		//	  "description": "Expiration time for yearly/monthly subscription.",
 		//	  "type": "string"
 		//	}
 		"expired_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "包年包月到期时间。",
+			Description: "Expiration time for yearly/monthly subscription.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -194,18 +194,18 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "额外性能。",
+		//	  "description": "Extra performance.",
 		//	  "properties": {
 		//	    "ExtraPerformanceTypeId": {
-		//	      "description": "额外性能的类型，取值如下：Balance：均衡型额外性能；IOPS：IOPS型额外性能；Throughput：吞吐量型额外性能。",
+		//	      "description": "Type of extra performance. Value description: Balance: Balanced extra performance; IOPS: IOPS extra performance; Throughput: Throughput extra performance.",
 		//	      "type": "string"
 		//	    },
 		//	    "IOPS": {
-		//	      "description": "云盘的额外IOPS。",
+		//	      "description": "Extra IOPS of the disk.",
 		//	      "type": "number"
 		//	    },
 		//	    "Throughput": {
-		//	      "description": "云盘的额外吞吐量。",
+		//	      "description": "Extra throughput of the disk.",
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -215,7 +215,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ExtraPerformanceTypeId
 				"extra_performance_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "额外性能的类型，取值如下：Balance：均衡型额外性能；IOPS：IOPS型额外性能；Throughput：吞吐量型额外性能。",
+					Description: "Type of extra performance. Value description: Balance: Balanced extra performance; IOPS: IOPS extra performance; Throughput: Throughput extra performance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -224,7 +224,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: IOPS
 				"iops": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "云盘的额外IOPS。",
+					Description: "Extra IOPS of the disk.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -233,7 +233,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Throughput
 				"throughput": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "云盘的额外吞吐量。",
+					Description: "Extra throughput of the disk.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -241,7 +241,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "额外性能。",
+			Description: "Extra performance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -252,11 +252,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘中的镜像ID。",
+		//	  "description": "Image ID in the disk.",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘中的镜像ID。",
+			Description: "Image ID in the disk.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -266,11 +266,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建云盘的同时挂载的ECS实例ID。",
+		//	  "description": "ECS instance ID mounted when creating the cloud disk.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建云盘的同时挂载的ECS实例ID。",
+			Description: "ECS instance ID mounted when creating the cloud disk.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -281,11 +281,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘属性，data表示数据盘。默认值为data。说明： 仅支持创建数据盘。",
+		//	  "description": "Disk attribute. data indicates a data disk. The default value is data. Note: Only data disks can be created.",
 		//	  "type": "string"
 		//	}
 		"kind": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘属性，data表示数据盘。默认值为data。说明： 仅支持创建数据盘。",
+			Description: "Disk attribute. data indicates a data disk. The default value is data. Note: Only data disks can be created.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -297,11 +297,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘欠费回收时间。",
+		//	  "description": "Disk overdue reclamation time.",
 		//	  "type": "string"
 		//	}
 		"overdue_reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘欠费回收时间。",
+			Description: "Disk overdue reclamation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -311,11 +311,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘欠费关停时间。",
+		//	  "description": "Disk overdue shutdown time.",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘欠费关停时间。",
+			Description: "Disk overdue shutdown time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -325,7 +325,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "付费类型，说明如下： Pre：预付费（包年包月） Post：后付费（按量计费）。",
+		//	  "description": "Payment type. Description: Pre: Prepaid (annual/monthly). Post: Postpaid (pay-as-you-go).",
 		//	  "enum": [
 		//	    "pre",
 		//	    "post"
@@ -333,7 +333,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"pay_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "付费类型，说明如下： Pre：预付费（包年包月） Post：后付费（按量计费）。",
+			Description: "Payment type. Description: Pre: Prepaid (annual/monthly). Post: Postpaid (pay-as-you-go).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -351,11 +351,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘所要加入的Project（项目）名称。",
+		//	  "description": "Project name to which the disk will be added.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘所要加入的Project（项目）名称。",
+			Description: "Project name to which the disk will be added.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -367,7 +367,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "续费方式 1：手动续费 2 ：自动续费 3 ：到期不续费。",
+		//	  "description": "Renewal method 1: Manual renewal 2: Automatic renewal 3: Do not renew upon expiration.",
 		//	  "enum": [
 		//	    0,
 		//	    1,
@@ -377,7 +377,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "number"
 		//	}
 		"renew_type": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "续费方式 1：手动续费 2 ：自动续费 3 ：到期不续费。",
+			Description: "Renewal method 1: Manual renewal 2: Automatic renewal 3: Do not renew upon expiration.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -387,22 +387,22 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Size，数据盘容量大小，单位为GiB。不同类型的数据盘容量范围如下：ESSD_PL0：10~65536 GiB；ESSD_FlexPL：10~65536 GiB；TSSD_TL0：40~65536 GiB",
+		//	  "description": "Size: data disk capacity in GiB. The capacity ranges for different types of data disks are as follows: ESSD_PL0: 10~65536 GiB; ESSD_FlexPL: 10~65536 GiB; TSSD_TL0: 40~65536 GiB",
 		//	  "type": "number"
 		//	}
 		"size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "Size，数据盘容量大小，单位为GiB。不同类型的数据盘容量范围如下：ESSD_PL0：10~65536 GiB；ESSD_FlexPL：10~65536 GiB；TSSD_TL0：40~65536 GiB",
+			Description: "Size: data disk capacity in GiB. The capacity ranges for different types of data disks are as follows: ESSD_PL0: 10~65536 GiB; ESSD_FlexPL: 10~65536 GiB; TSSD_TL0: 40~65536 GiB",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照计数",
+		//	  "description": "Snapshot count.",
 		//	  "type": "number"
 		//	}
 		"snapshot_count": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "快照计数",
+			Description: "Snapshot count.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -412,11 +412,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "源快照。",
+		//	  "description": "Source snapshot.",
 		//	  "type": "string"
 		//	}
 		"source_snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "源快照。",
+			Description: "Source snapshot.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -428,7 +428,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘状态，取值说明如下：available：可用。attaching：挂载中。attached：已挂载。detaching：卸载中。creating：创建中。deleting：删除中。error：错误。extending：扩容中。",
+		//	  "description": "Disk status. Value description: available: Available. mounting: Mounting. mounted: Mounted. unmounting: Unmounting. creating: Creating. deleting: Deleting. error: Error. expanding: Expanding.",
 		//	  "enum": [
 		//	    "available",
 		//	    "attaching",
@@ -442,7 +442,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘状态，取值说明如下：available：可用。attaching：挂载中。attached：已挂载。detaching：卸载中。creating：创建中。deleting：删除中。error：错误。extending：扩容中。",
+			Description: "Disk status. Value description: available: Available. mounting: Mounting. mounted: Mounted. unmounting: Unmounting. creating: Creating. deleting: Deleting. error: Error. expanding: Expanding.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -452,17 +452,17 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘的标签信息",
+		//	  "description": "Disk tag information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签",
+		//	    "description": "Tag",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -479,7 +479,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -491,7 +491,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -500,7 +500,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "云盘的标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Disk tag information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -511,14 +511,14 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "总性能。",
+		//	  "description": "Total performance.",
 		//	  "properties": {
 		//	    "IOPS": {
-		//	      "description": "云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。",
+		//	      "description": "Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.",
 		//	      "type": "number"
 		//	    },
 		//	    "Throughput": {
-		//	      "description": "云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。",
+		//	      "description": "The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.",
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -528,16 +528,16 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: IOPS
 				"iops": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。",
+					Description: "Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Throughput
 				"throughput": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。",
+					Description: "The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "总性能。",
+			Description: "Total performance.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -547,7 +547,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "交易状态 0：创建中 1：运行中 2：创建失败",
+		//	  "description": "Transaction status 0: Creating 1: Running 2: Creation failed",
 		//	  "enum": [
 		//	    -1,
 		//	    0,
@@ -557,7 +557,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "number"
 		//	}
 		"trade_status": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "交易状态 0：创建中 1：运行中 2：创建失败",
+			Description: "Transaction status 0: Creating 1: Running 2: Creation failed",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -567,11 +567,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘更新时间。",
+		//	  "description": "Disk update time.",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘更新时间。",
+			Description: "Disk update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -581,11 +581,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘id。",
+		//	  "description": "Disk ID.",
 		//	  "type": "string"
 		//	}
 		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘id。",
+			Description: "Disk ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -595,13 +595,13 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘显示名称。命名规则如下：首字符仅支持中文、字母或下划线（_）。可包含中文、字母、数字、下划线（_）或中划线（-）。长度限制在1~128字符之间。",
+		//	  "description": "Disk display name. Naming rules: The first character must be a Chinese character, a letter, or an underscore (_). Can contain Chinese characters, letters, numbers, underscores (_), or hyphens (-). Length must be between 1 and 128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"volume_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘显示名称。命名规则如下：首字符仅支持中文、字母或下划线（_）。可包含中文、字母、数字、下划线（_）或中划线（-）。长度限制在1~128字符之间。",
+			Description: "Disk display name. Naming rules: The first character must be a Chinese character, a letter, or an underscore (_). Can contain Chinese characters, letters, numbers, underscores (_), or hyphens (-). Length must be between 1 and 128 characters.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
@@ -611,7 +611,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云盘类型，取值说明如下：ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL: 极速型SSD云盘，FlexPL规格。TSSD_TL0: 吞吐型SSD云盘。",
+		//	  "description": "Disk type. Value description: ESSD_PL0: Ultra-fast SSD disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD disk, FlexPL specification. TSSD_TL0: Throughput SSD disk.",
 		//	  "enum": [
 		//	    "ESSD_PL0",
 		//	    "ESSD_FlexPL",
@@ -620,7 +620,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云盘类型，取值说明如下：ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL: 极速型SSD云盘，FlexPL规格。TSSD_TL0: 吞吐型SSD云盘。",
+			Description: "Disk type. Value description: ESSD_PL0: Ultra-fast SSD disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD disk, FlexPL specification. TSSD_TL0: Throughput SSD disk.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -634,11 +634,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区ID。",
+		//	  "description": "Availability zone ID.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区ID。",
+			Description: "Availability zone ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -656,7 +656,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "云盘是高可用、高可靠、高性能、弹性扩展的块存储设备，可以作为云服务器和弹性容器服务的可扩展硬盘使用。",
+		Description: "Cloud disk is a block storage device with high availability, high reliability, high performance, and elastic scalability. It can be used as a scalable disk for cloud servers and elastic container services.",
 		Version:     1,
 		Attributes:  attributes,
 	}

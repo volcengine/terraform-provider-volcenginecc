@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rabbitmq_instance Resource - terraform-provider-volcenginecc"
 subcategory: "RabbitMQ"
 description: |-
-  消息队列 RabbitMQ版是一款支持 AMQP（Advanced Message Queuing Protocol） 协议的分布式高可用消息队列产品，完全兼容 RabbitMQ 开源生态及多语言客户端，提供丰富的消息特性和灵活的消息路由，同时具备分布式、高吞吐、低延迟、灵活扩展的云消息服务优势，无需用户部署运维，能够轻松实现快速上云。
+  RabbitMQ Message Queue is a distributed, high-availability message queue product that supports the AMQP (Advanced Message Queuing Protocol) protocol. It is fully compatible with the RabbitMQ open-source ecosystem and multi-language clients, provides rich messaging features and flexible message routing, and offers the advantages of distributed architecture, high throughput, low latency, and flexible scalability as a cloud messaging service. No user deployment or maintenance is required, enabling easy and rapid cloud adoption.
 ---
 
 # volcenginecc_rabbitmq_instance (Resource)
 
-消息队列 RabbitMQ版是一款支持 AMQP（Advanced Message Queuing Protocol） 协议的分布式高可用消息队列产品，完全兼容 RabbitMQ 开源生态及多语言客户端，提供丰富的消息特性和灵活的消息路由，同时具备分布式、高吞吐、低延迟、灵活扩展的云消息服务优势，无需用户部署运维，能够轻松实现快速上云。
+RabbitMQ Message Queue is a distributed, high-availability message queue product that supports the AMQP (Advanced Message Queuing Protocol) protocol. It is fully compatible with the RabbitMQ open-source ecosystem and multi-language clients, provides rich messaging features and flexible message routing, and offers the advantages of distributed architecture, high throughput, low latency, and flexible scalability as a cloud messaging service. No user deployment or maintenance is required, enabling easy and rapid cloud adoption.
 
 ## Example Usage
 
@@ -41,58 +41,58 @@ resource "volcenginecc_rabbitmq_instance" "RabbitMQInstanceDemo" {
 
 ### Required
 
-- `compute_spec` (String) RabbitMQ实例的计算规格。
-- `storage_space` (Number) 实例总存储空间。单位为 GiB。
-- `subnet_id` (String) VPC的子网ID。
-- `user_name` (String) RabbitMQ WebUI管理员账号名。
-- `user_password` (String) RabbitMQ WebUI管理员密码。
-- `version` (String) 支持的 RabbitMQ 版本。当前支持的版本包括：3.8.18：RabbitMQ 3.8.18 版本。
-- `vpc_id` (String) 私有网络（VPC）ID。
-- `zone_id` (String) 实例所在的可用区 ID。对于跨 AZ 的高可用实例，此处会返回多个可用区 ID。
+- `compute_spec` (String) Compute specification of the RabbitMQ instance.
+- `storage_space` (Number) Total storage space of the instance, measured in GiB.
+- `subnet_id` (String) VPC subnet ID.
+- `user_name` (String) RabbitMQ WebUI administrator account name.
+- `user_password` (String) RabbitMQ WebUI administrator password.
+- `version` (String) Supported RabbitMQ versions. Currently supported versions include: 3.8.18: RabbitMQ version 3.8.18.
+- `vpc_id` (String) Private network (VPC) ID.
+- `zone_id` (String) Availability zone ID where the instance is located. For high-availability instances across AZs, multiple availability zone IDs are returned.
 
 ### Optional
 
-- `charge_detail` (Attributes) 实例的计费方式等计费信息。 (see [below for nested schema](#nestedatt--charge_detail))
-- `eip_id` (String) EIP的ID。
-- `instance_description` (String) 实例的简单描述。
-- `instance_name` (String) RabbitMQ 实例名称。
-- `project_name` (String) 实例所属的IAM项目。
-- `tags` (Attributes Set) 实例绑定的标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `charge_detail` (Attributes) Instance billing method and related billing information. (see [below for nested schema](#nestedatt--charge_detail))
+- `eip_id` (String) EIP ID.
+- `instance_description` (String) Brief description of the instance.
+- `instance_name` (String) RabbitMQ instance name.
+- `project_name` (String) IAM project to which the instance belongs.
+- `tags` (Attributes Set) Tags bound to the instance.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `account_id` (String) 创建实例的主账号ID。
-- `apply_private_dns_to_public` (Boolean) 是否已开启公网解析功能。true：已开启, false：已关闭
-- `arch_type` (String) 实例的类型，即集群版或单机版。
-- `created_time` (String) 实例的创建时间。
-- `endpoints` (Attributes Set) 实例的连接信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
+- `account_id` (String) Main account ID used to create the instance.
+- `apply_private_dns_to_public` (Boolean) Whether public DNS resolution is enabled. true: enabled, false: disabled.
+- `arch_type` (String) Instance type, either cluster or standalone.
+- `created_time` (String) Instance creation time.
+- `endpoints` (Attributes Set) Instance connection information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints))
 - `id` (String) Uniquely identifies the resource.
-- `instance_id` (String) RabbitMQ 实例 ID。
-- `instance_status` (String) 实例状态。
-- `is_encrypted` (Boolean) 是否开启了云盘加密。
-- `used_storage_space` (Number) 实例已用存储空间。单位为 GiB。
-- `zone_description` (String) 可用区的描述信息。
+- `instance_id` (String) RabbitMQ instance ID.
+- `instance_status` (String) Instance status.
+- `is_encrypted` (Boolean) Whether cloud disk encryption is enabled.
+- `used_storage_space` (Number) Used storage space of the instance, measured in GiB.
+- `zone_description` (String) Description of the availability zone.
 
 <a id="nestedatt--charge_detail"></a>
 ### Nested Schema for `charge_detail`
 
 Optional:
 
-- `auto_renew` (Boolean) 包年包月实例到期后是否自动续费。
-- `charge_type` (String) 实例的计费类型。支持的类型包括：PostPaid ：按量付费，PrePaid：包年包月。
-- `period` (Number) 包年包月类型实例的购买时长。PeriodUnit 指定为 Month 时，取值范围为 1~9。PeriodUnit 指定为 Year 时，取值范围为 1~3。
-- `period_unit` (String) 购买时长的单位，取值如下：MONTHLY：按月购买。YEARLY：按年购买。
+- `auto_renew` (Boolean) Whether to automatically renew the subscription instance after expiration.
+- `charge_type` (String) Instance billing type. Supported types include: PostPaid: pay-as-you-go, PrePaid: subscription.
+- `period` (Number) Subscription instance purchase duration. When PeriodUnit is set to Month, the value range is 1–9. When PeriodUnit is set to Year, the value range is 1–3.
+- `period_unit` (String) Unit for purchase duration. Values: MONTHLY: monthly purchase, YEARLY: annual purchase.
 
 Read-Only:
 
-- `charge_end_time` (String) 实例的结束计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。
-- `charge_expire_time` (String) 包年包月实例的到期时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。
-- `charge_start_time` (String) 实例的开始计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。
-- `charge_status` (String) 实例的计费状态。包括：Normal：正常，Overdue：按量计费欠费，Expired：包年包月到期。
-- `overdue_reclaim_time` (String) 实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。
-- `overdue_time` (String) 实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。
+- `charge_end_time` (String) Instance billing end time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.
+- `charge_expire_time` (String) Expiration time of the subscription instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.
+- `charge_start_time` (String) Instance billing start time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.
+- `charge_status` (String) Instance billing status. Includes: Normal: normal, Overdue: pay-as-you-go overdue, Expired: subscription expired.
+- `overdue_reclaim_time` (String) Estimated release time after the instance is suspended due to overdue payment. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.
+- `overdue_time` (String) Instance suspension time due to overdue payment. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.
 
 
 <a id="nestedatt--tags"></a>
@@ -100,8 +100,8 @@ Read-Only:
 
 Optional:
 
-- `key` (String) 标签的键。
-- `value` (String) 标签的值。
+- `key` (String) Tag key.
+- `value` (String) Tag value.
 
 
 <a id="nestedatt--endpoints"></a>
@@ -109,11 +109,11 @@ Optional:
 
 Read-Only:
 
-- `endpoint_type` (String) 实例的接入点类型。RabbitMQ实例提供的接入点类型包括：WEB：Web UI 接入点，AMQP0_9_1：AMQP 接入点，MQTT：MQTT接入点，WEB_MQTT：WEB ，MQTT 接入点，STOMP：STOMP 接入点。
-- `internal_endpoint` (String) 实例的私网访问域名。
-- `internal_ip_endpoint` (String) 公共服务区 IP 接入点。
-- `network_type` (String) 接入点的网络类型。PrivateNetwork 表示私有网络 VPC。
-- `public_endpoint` (String) 实例公网访问域名。仅在开启公网访问之后显示。
+- `endpoint_type` (String) Type of instance endpoint. RabbitMQ instances provide the following endpoint types: WEB: Web UI endpoint, AMQP0_9_1: AMQP endpoint, MQTT: MQTT endpoint, WEB_MQTT: WEB and MQTT endpoints, STOMP: STOMP endpoint.
+- `internal_endpoint` (String) Private network access domain name of the instance.
+- `internal_ip_endpoint` (String) Public service zone IP endpoint.
+- `network_type` (String) Network type of the endpoint. PrivateNetwork indicates a private network (VPC).
+- `public_endpoint` (String) Instance public access domain name. Displayed only after public access is enabled.
 
 ## Import
 

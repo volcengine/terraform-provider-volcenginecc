@@ -35,12 +35,12 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表关联的资源数量。",
+		//	  "description": "Number of resources associated with the prefix list.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"association_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表关联的资源数量。",
+			Description: "Number of resources associated with the prefix list.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -50,16 +50,16 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表关联的路由表信息。",
+		//	  "description": "Route table information associated with the prefix list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ResourceId": {
-		//	        "description": "关联资源的ID。",
+		//	        "description": "ID of the associated resource.",
 		//	        "type": "string"
 		//	      },
 		//	      "ResourceType": {
-		//	        "description": "关联资源的类型。VpcRouteTable：路由表；VpcSecurityGroup：安全组。",
+		//	        "description": "Type of associated resource. VpcRouteTable: route table; VpcSecurityGroup: security group.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -73,17 +73,17 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "关联资源的ID。",
+						Description: "ID of the associated resource.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceType
 					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "关联资源的类型。VpcRouteTable：路由表；VpcSecurityGroup：安全组。",
+						Description: "Type of associated resource. VpcRouteTable: route table; VpcSecurityGroup: security group.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "前缀列表关联的路由表信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Route table information associated with the prefix list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -93,16 +93,16 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表关联的安全组信息。",
+		//	  "description": "Security group information associated with the prefix list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ResourceId": {
-		//	        "description": "关联资源的ID。",
+		//	        "description": "ID of the associated resource.",
 		//	        "type": "string"
 		//	      },
 		//	      "ResourceType": {
-		//	        "description": "关联资源的类型。VpcRouteTable：路由表；VpcSecurityGroup：安全组。",
+		//	        "description": "Type of associated resource. VpcRouteTable: route table; VpcSecurityGroup: security group.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -116,17 +116,17 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "关联资源的ID。",
+						Description: "ID of the associated resource.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceType
 					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "关联资源的类型。VpcRouteTable：路由表；VpcSecurityGroup：安全组。",
+						Description: "Type of associated resource. VpcRouteTable: route table; VpcSecurityGroup: security group.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "前缀列表关联的安全组信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Security group information associated with the prefix list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -136,11 +136,11 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表的创建时间。",
+		//	  "description": "Creation time of the prefix list.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表的创建时间。",
+			Description: "Creation time of the prefix list.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -150,12 +150,12 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表的描述信息。长度限制为0~ 255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+		//	  "description": "Description of the prefix list. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表的描述信息。长度限制为0~ 255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+			Description: "Description of the prefix list. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -170,11 +170,11 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "IPv4",
-		//	  "description": "IP版本类型。取值：IPv4（默认值）：IPv4类型。IPv6：IPv6类型。",
+		//	  "description": "IP version type. Values: IPv4 (default): IPv4 type. IPv6: IPv6 type.",
 		//	  "type": "string"
 		//	}
 		"ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP版本类型。取值：IPv4（默认值）：IPv4类型。IPv6：IPv6类型。",
+			Description: "IP version type. Values: IPv4 (default): IPv4 type. IPv6: IPv6 type.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("IPv4"),
@@ -187,14 +187,14 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。",
+		//	  "description": "Maximum number of entries, that is, the maximum number of entries that can be added to the prefix list. Value range: 1–200.",
 		//	  "format": "int64",
 		//	  "maximum": 200,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_entries": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。",
+			Description: "Maximum number of entries, that is, the maximum number of entries that can be added to the prefix list. Value range: 1–200.",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(1, 200),
@@ -204,16 +204,16 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表条目的CIDR。",
+		//	  "description": "CIDR of the prefix list entry.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Cidr": {
-		//	        "description": "前缀列表条目的CIDR。",
+		//	        "description": "CIDR of the prefix list entry.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "前缀列表条目的描述。长度限制为0~255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+		//	        "description": "Description of the prefix list entry. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).",
 		//	        "maxLength": 255,
 		//	        "type": "string"
 		//	      }
@@ -231,7 +231,7 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Cidr
 					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表条目的CIDR。",
+						Description: "CIDR of the prefix list entry.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -243,7 +243,7 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表条目的描述。长度限制为0~255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+						Description: "Description of the prefix list entry. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -255,7 +255,7 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "前缀列表条目的CIDR。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "CIDR of the prefix list entry.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -266,11 +266,11 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表的ID。",
+		//	  "description": "Prefix list ID.",
 		//	  "type": "string"
 		//	}
 		"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表的ID。",
+			Description: "Prefix list ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -280,13 +280,13 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。",
+		//	  "description": "Name of the prefix list. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-).",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"prefix_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。",
+			Description: "Name of the prefix list. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -301,11 +301,11 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "前缀列表所属项目的名称，不填默认加入default项目。",
+		//	  "description": "Name of the project to which the prefix list belongs. If not specified, it is added to the default project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表所属项目的名称，不填默认加入default项目。",
+			Description: "Name of the project to which the prefix list belongs. If not specified, it is added to the default project.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -318,11 +318,11 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表的状态。取值：Available：可用；Creating：创建中；Deleting：删除中；Pending：修改中。",
+		//	  "description": "Status of the prefix list. Values: Available: available; Creating: creating; Deleting: deleting; Pending: modifying.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表的状态。取值：Available：可用；Creating：创建中；Deleting：删除中；Pending：修改中。",
+			Description: "Status of the prefix list. Values: Available: available; Creating: creating; Deleting: deleting; Pending: modifying.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -332,16 +332,16 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "Tag key of the user tag.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "Tag value of the user tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -358,7 +358,7 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "Tag key of the user tag.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -370,7 +370,7 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "Tag value of the user tag.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -379,7 +379,7 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -390,11 +390,11 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "前缀列表的最近一次修改时间。",
+		//	  "description": "Last modification time of the prefix list.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "前缀列表的最近一次修改时间。",
+			Description: "Last modification time of the prefix list.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -412,7 +412,7 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "前缀列表是一组CIDR地址块的集合，用于简化安全组规则、路由表条目的配置。当前缀列表修改时，所有关联它的资源均会同步修改。",
+		Description: "A prefix list is a collection of CIDR blocks used to simplify the configuration of security group rules and route table entries. When the prefix list is modified, all associated resources are updated synchronously.",
 		Version:     1,
 		Attributes:  attributes,
 	}

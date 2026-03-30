@@ -29,11 +29,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -43,11 +43,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户描述。",
+		//	  "description": "User Description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户描述。",
+			Description: "User Description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -58,11 +58,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户显示名。",
+		//	  "description": "User Display Name.",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户显示名。",
+			Description: "User Display Name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -73,11 +73,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "邮箱。",
+		//	  "description": "Email.",
 		//	  "type": "string"
 		//	}
 		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "邮箱。",
+			Description: "Email.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -88,11 +88,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "身份类型。",
+		//	  "description": "Identity Type.",
 		//	  "type": "string"
 		//	}
 		"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "身份类型。",
+			Description: "Identity Type.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -102,11 +102,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密码。密码长度8-32位字符,包含大写字母、小写字母、数字和物特殊符号至少3种。",
+		//	  "description": "Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.",
 		//	  "type": "string"
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密码。密码长度8-32位字符,包含大写字母、小写字母、数字和物特殊符号至少3种。",
+			Description: "Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -118,11 +118,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "首次登陆需不需要重置密码。",
+		//	  "description": "Is password reset required on first login?",
 		//	  "type": "boolean"
 		//	}
 		"password_reset_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "首次登陆需不需要重置密码。",
+			Description: "Is password reset required on first login?",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -134,11 +134,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "手机号。",
+		//	  "description": "Mobile Number.",
 		//	  "type": "string"
 		//	}
 		"phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "手机号。",
+			Description: "Mobile Number.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -149,11 +149,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户来源。",
+		//	  "description": "User Source.",
 		//	  "type": "string"
 		//	}
 		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户来源。",
+			Description: "User Source.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -163,11 +163,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -177,11 +177,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户id。",
+		//	  "description": "User ID.",
 		//	  "type": "string"
 		//	}
 		"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户id。",
+			Description: "User ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -191,11 +191,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户名。",
+		//	  "description": "Username.",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户名。",
+			Description: "Username.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -214,7 +214,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "云身份中心用户，与企业员工身份一一映射。云身份中心用户是一种身份类型，可与某个账号下的IAM用户身份进行唯一关联并单点登录。云身份中心提供企业员工身份全生命周期管理、权限管理能力，推荐您在本产品内统一管理员工身份。",
+		Description: "Cloud Identity Center users are mapped one-to-one with enterprise employee identities. A Cloud Identity Center user is an identity type that can be uniquely linked to an IAM user under an account for single sign-on. Cloud Identity Center provides full lifecycle management and permission management for enterprise employee identities. We recommend that you centrally manage employee identities within this product.",
 		Version:     1,
 		Attributes:  attributes,
 	}

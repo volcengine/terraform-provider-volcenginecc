@@ -28,11 +28,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -42,11 +42,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除策略。",
+		//	  "description": "Deletion Policy",
 		//	  "type": "string"
 		//	}
 		"deletion_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除策略。",
+			Description: "Deletion Policy",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -56,11 +56,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务描述。",
+		//	  "description": "Task Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "任务描述。",
+			Description: "Task Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -72,11 +72,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户名冲突策略。",
+		//	  "description": "Username Conflict Policy",
 		//	  "type": "string"
 		//	}
 		"duplication_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户名冲突策略。",
+			Description: "Username Conflict Policy",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -86,11 +86,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "本次同步IAM用户名称后缀。",
+		//	  "description": "Suffix for IAM user name in this synchronization",
 		//	  "type": "string"
 		//	}
 		"duplication_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "本次同步IAM用户名称后缀。",
+			Description: "Suffix for IAM user name in this synchronization",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -102,11 +102,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "身份源冲突策略。",
+		//	  "description": "Identity Source Conflict Policy",
 		//	  "type": "string"
 		//	}
 		"identity_source_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "身份源冲突策略。",
+			Description: "Identity Source Conflict Policy",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -116,11 +116,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "身份id。",
+		//	  "description": "Identity ID",
 		//	  "type": "string"
 		//	}
 		"principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "身份id。",
+			Description: "Identity ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -130,11 +130,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "目标名称。",
+		//	  "description": "Target Name",
 		//	  "type": "string"
 		//	}
 		"principal_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "目标名称。",
+			Description: "Target Name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -144,11 +144,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "身份类型。",
+		//	  "description": "Identity Type",
 		//	  "type": "string"
 		//	}
 		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "身份类型。",
+			Description: "Identity Type",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -158,11 +158,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权任务状态。Provisioned 授权成功，Provisioning 正在授权，DeleteProvisioning 授权解除中，DeleteProvisioned 授权解除成功",
+		//	  "description": "Authorization Task Status. Provisioned: authorization successful, Provisioning: authorizing, DeleteProvisioning: revoking authorization, DeleteProvisioned: authorization revoked successfully.",
 		//	  "type": "string"
 		//	}
 		"provision_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权任务状态。Provisioned 授权成功，Provisioning 正在授权，DeleteProvisioning 授权解除中，DeleteProvisioned 授权解除成功",
+			Description: "Authorization Task Status. Provisioned: authorization successful, Provisioning: authorizing, DeleteProvisioning: revoking authorization, DeleteProvisioned: authorization revoked successfully.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -172,11 +172,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "目标id。",
+		//	  "description": "Target ID",
 		//	  "type": "string"
 		//	}
 		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "目标id。",
+			Description: "Target ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -186,11 +186,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -200,11 +200,11 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IAM 用户同步任务ID。",
+		//	  "description": "IAM User Synchronization Task ID",
 		//	  "type": "string"
 		//	}
 		"user_provisioning_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IAM 用户同步任务ID。",
+			Description: "IAM User Synchronization Task ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -222,7 +222,7 @@ func userProvisioningResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。",
+		Description: "After you create a Cloud Identity Center user, you need to grant the user login access to each account.",
 		Version:     1,
 		Attributes:  attributes,
 	}

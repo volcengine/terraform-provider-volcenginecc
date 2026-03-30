@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cbr_backup_resource Resource - terraform-provider-volcenginecc"
 subcategory: "CBR"
 description: |-
-  指备份对象，是云备份操作的起点。它可以是备份源产品中的计算资源、服务实例或者一组协同工作的服务和资源的集合，例如 ECS 整机、云盘、对象存储 Bucket。
+  Refers to the backup object, which is the starting point for cloud backup operations. It can be a computing resource, service instance, or a group of collaborative services and resources from the backup source product, such as ECS full instance, cloud disk, or object storage bucket.
 ---
 
 # volcenginecc_cbr_backup_resource (Resource)
 
-指备份对象，是云备份操作的起点。它可以是备份源产品中的计算资源、服务实例或者一组协同工作的服务和资源的集合，例如 ECS 整机、云盘、对象存储 Bucket。
+Refers to the backup object, which is the starting point for cloud backup operations. It can be a computing resource, service instance, or a group of collaborative services and resources from the backup source product, such as ECS full instance, cloud disk, or object storage bucket.
 
 ## Example Usage
 
@@ -24,31 +24,31 @@ resource "volcenginecc_cbr_backup_resource" "CBRBackupResourceDemo" {
 
 ### Required
 
-- `instance_id` (String) 实例 ID。
-- `instance_name` (String) 实例名称。
-- `resource_type` (String) 备份源类型，取值说明如下：ECS：ECS 整机。vePFS：vePFS 文件系统。
+- `instance_id` (String) Instance ID
+- `instance_name` (String) Instance Name
+- `resource_type` (String) Backup source type. Value description: ECS: ECS full instance. vePFS: vePFS file system.
 
 ### Read-Only
 
-- `account_id` (String) 创建此备份源的账户 ID。
-- `created_time` (String) 创建时间。
+- `account_id` (String) Account ID that created this backup source
+- `created_time` (String) Creation Time
 - `id` (String) Uniquely identifies the resource.
-- `meta_information` (Attributes) 资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。 (see [below for nested schema](#nestedatt--meta_information))
-- `plans` (Attributes Set) 关联的备份计划列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--plans))
-- `recovery_point_number` (Number) 恢复点的数量
-- `resource_id` (String) 备份源 ID。
-- `status` (String) 备份源状态。可能的值为：AVAILABLE、REMOVING、BEING_BACKED_UP、RECOVERING、CREATING、ERROR、UNAVAILABLE。
-- `updated_time` (String) 更新时间
-- `used_capacity_in_bytes` (Number) 已经备份的字节数。
+- `meta_information` (Attributes) Resource meta information (used to store additional configuration when creating a backup plan). ECS full backup parameters: see the EcsBackupConfiguration structure. vePFS backup parameters: see the VePFSBackupConfiguration structure. (see [below for nested schema](#nestedatt--meta_information))
+- `plans` (Attributes Set) List of Associated Backup Plans
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--plans))
+- `recovery_point_number` (Number) Number of Restore Points
+- `resource_id` (String) Backup Source ID
+- `status` (String) Backup source status. Possible values: AVAILABLE, REMOVING, BEING_BACKED_UP, RECOVERING, CREATING, ERROR, UNAVAILABLE.
+- `updated_time` (String) Update Time
+- `used_capacity_in_bytes` (Number) Bytes Already Backed Up
 
 <a id="nestedatt--meta_information"></a>
 ### Nested Schema for `meta_information`
 
 Read-Only:
 
-- `ecs_meta` (String) ECS 的元数据，是一个 JSON string。格式见数据结构的 EcsBackupConfiguration 结构体。
-- `vepfs_meta` (String) vePFS 备份源元数据，是一个 JSON string。格式见数据结构的VePFSBackupConfiguration 结构体。
+- `ecs_meta` (String) ECS metadata, as a JSON string. For format, see the EcsBackupConfiguration structure in the data structure.
+- `vepfs_meta` (String) vePFS backup source metadata, as a JSON string. For format, see the VePFSBackupConfiguration structure in the data structure.
 
 
 <a id="nestedatt--plans"></a>
@@ -56,8 +56,8 @@ Read-Only:
 
 Read-Only:
 
-- `plan_id` (String) 备份计划 ID
-- `plan_name` (String) 备份计划名称
+- `plan_id` (String) Backup Plan ID
+- `plan_name` (String) Backup Plan Name
 
 ## Import
 

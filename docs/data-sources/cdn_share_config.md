@@ -21,24 +21,24 @@ Data Source schema for Volcengine::CDN::ShareConfig
 
 ### Read-Only
 
-- `allow_ip_access_rule` (Attributes) 表示一个 IP 白名单的配置，对应 ConfigType 是 allow_ip_access_rule。 (see [below for nested schema](#nestedatt--allow_ip_access_rule))
-- `allow_referer_access_rule` (Attributes) 表示一个 Referer 白名单的配置，对应 ConfigType 是 allow_referer_access_rule。 (see [below for nested schema](#nestedatt--allow_referer_access_rule))
-- `common_match_list` (Attributes) 表示一个通用列表的配置，对应 ConfigType 是 common_match_list。 (see [below for nested schema](#nestedatt--common_match_list))
-- `config_name` (String) 表示全局配置的名称。名称有以下要求：名称可以包含汉字、字母、数字、下划线（_），长度在 3-45 个字符之间。一个汉字占 3 个字符。名称不能与主账号下某个已有的全局配置的名称相同。
-- `config_type` (String) 表示该全局配置的类型。该参数有以下取值：deny_ip_access_rule：表示 IP 黑名单。allow_ip_access_rule：表示 IP 白名单。deny_referer_access_rule：表示 Referer 黑名单。allow_referer_access_rule：表示 Referer 白名单。common_match_list：表示通用列表。
-- `deny_ip_access_rule` (Attributes) 表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。 (see [below for nested schema](#nestedatt--deny_ip_access_rule))
-- `deny_referer_access_rule` (Attributes) 表示一个 Referer 黑名单的配置，对应 ConfigType 是 deny_referer_access_rule。 (see [below for nested schema](#nestedatt--deny_referer_access_rule))
-- `domain_count` (Number) 表示与该全局配置关联的加速域名的数量。
-- `project` (String) 表示该全局配置所归属的项目名称。
-- `rule_content` (String) 表示该自定义错误页面的 HTML 代码。
-- `updated_time` (Number) 表示该全局配置的最近修改时间，单位是 Unix 时间戳。
+- `allow_ip_access_rule` (Attributes) Specifies the configuration for an IP allowlist, where ConfigType is allow_ip_access_rule. (see [below for nested schema](#nestedatt--allow_ip_access_rule))
+- `allow_referer_access_rule` (Attributes) Indicates a configuration for a Referer allowlist. The corresponding ConfigType is allow_referer_access_rule. (see [below for nested schema](#nestedatt--allow_referer_access_rule))
+- `common_match_list` (Attributes) Specifies the configuration for a common list, where ConfigType is common_match_list. (see [below for nested schema](#nestedatt--common_match_list))
+- `config_name` (String) Specifies the name of the global configuration. Naming requirements: Names can include Chinese characters, letters, numbers, and underscores (_), and must be 3–45 characters long. One Chinese character counts as 3 characters. The name cannot be the same as any existing global configuration name under the primary account.
+- `config_type` (String) This parameter specifies the type of global configuration. Available values are: deny_ip_access_rule: indicates an IP denylist. allow_ip_access_rule: indicates an IP allowlist. deny_referer_access_rule: indicates a Referer denylist. allow_referer_access_rule: indicates a Referer allowlist. common_match_list: indicates a common list.
+- `deny_ip_access_rule` (Attributes) Specifies the configuration for an IP denylist, where ConfigType is deny_ip_access_rule. (see [below for nested schema](#nestedatt--deny_ip_access_rule))
+- `deny_referer_access_rule` (Attributes) Indicates a configuration for a Referer denylist. The corresponding ConfigType is deny_referer_access_rule. (see [below for nested schema](#nestedatt--deny_referer_access_rule))
+- `domain_count` (Number) Indicates the number of accelerated domains associated with this global configuration.
+- `project` (String) Specifies the project name to which the global configuration belongs.
+- `rule_content` (String) Specifies the HTML code for the custom error page.
+- `updated_time` (Number) Indicates the last modification time of this global configuration, in Unix timestamp.
 
 <a id="nestedatt--allow_ip_access_rule"></a>
 ### Nested Schema for `allow_ip_access_rule`
 
 Read-Only:
 
-- `rules` (Set of String) 表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。
+- `rules` (Set of String) Specifies a list of entries. Each entry in the list is an IP address or CIDR block. IP addresses and blocks can be in IPv4 or IPv6 format. List limits: For AddSharedConfig, the number of entries in the list cannot exceed 30,000.
 
 
 <a id="nestedatt--allow_referer_access_rule"></a>
@@ -46,16 +46,16 @@ Read-Only:
 
 Read-Only:
 
-- `allow_empty` (Boolean) 表示是否不允许 Referer 头部为空或者不包含 Referer 头部的请求。该参数有以下取值：true：表示不允许。如果请求的 Referer 头部为空或者不包含 Referer 头部，内容分发网络拒绝请求。false：表示允许。该参数的默认值是 false。
-- `common_type` (Attributes) 表示该通用列表的内容。 (see [below for nested schema](#nestedatt--allow_referer_access_rule--common_type))
+- `allow_empty` (Boolean) Indicates whether requests with an empty Referer header or without a Referer header are not allowed. This parameter has the following values: true: Not allowed. If the Referer header is empty or missing, the content delivery network rejects the request. false: Allowed. The default value is false.
+- `common_type` (Attributes) Specifies the contents of the common list. (see [below for nested schema](#nestedatt--allow_referer_access_rule--common_type))
 
 <a id="nestedatt--allow_referer_access_rule--common_type"></a>
 ### Nested Schema for `allow_referer_access_rule.common_type`
 
 Read-Only:
 
-- `ignore_case` (Boolean) 表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。
-- `rules` (Set of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
+- `ignore_case` (Boolean) Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.
+- `rules` (Set of String) Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.
 
 
 
@@ -64,15 +64,15 @@ Read-Only:
 
 Read-Only:
 
-- `common_type` (Attributes) 表示该通用列表的内容。 (see [below for nested schema](#nestedatt--common_match_list--common_type))
+- `common_type` (Attributes) Specifies the contents of the common list. (see [below for nested schema](#nestedatt--common_match_list--common_type))
 
 <a id="nestedatt--common_match_list--common_type"></a>
 ### Nested Schema for `common_match_list.common_type`
 
 Read-Only:
 
-- `ignore_case` (Boolean) 表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。
-- `rules` (Set of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
+- `ignore_case` (Boolean) Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.
+- `rules` (Set of String) Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.
 
 
 
@@ -81,7 +81,7 @@ Read-Only:
 
 Read-Only:
 
-- `rules` (Set of String) 表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。
+- `rules` (Set of String) Specifies the configuration for an IP denylist, where ConfigType is deny_ip_access_rule.
 
 
 <a id="nestedatt--deny_referer_access_rule"></a>
@@ -89,13 +89,13 @@ Read-Only:
 
 Read-Only:
 
-- `allow_empty` (Boolean) 表示是否允许 Referer 头部为空或者不包含 Referer 头部的请求。该参数有以下取值：true：表示允许。false：表示不允许。如果请求的 Referer 头部为空或者不包含 Referer 头部，内容分发网络拒绝请求。该参数的默认值是 true。
-- `common_type` (Attributes) 表示该通用列表的内容。 (see [below for nested schema](#nestedatt--deny_referer_access_rule--common_type))
+- `allow_empty` (Boolean) Indicates whether requests with an empty Referer header or without a Referer header are allowed. This parameter has the following values: true: Allowed. false: Not allowed. If the Referer header is empty or missing, the content delivery network rejects the request. The default value is true.
+- `common_type` (Attributes) Specifies the contents of the common list. (see [below for nested schema](#nestedatt--deny_referer_access_rule--common_type))
 
 <a id="nestedatt--deny_referer_access_rule--common_type"></a>
 ### Nested Schema for `deny_referer_access_rule.common_type`
 
 Read-Only:
 
-- `ignore_case` (Boolean) 表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。
-- `rules` (Set of String) 表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。
+- `ignore_case` (Boolean) Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.
+- `rules` (Set of String) Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.

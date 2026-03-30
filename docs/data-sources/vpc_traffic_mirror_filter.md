@@ -21,34 +21,34 @@ Data Source schema for Volcengine::VPC::TrafficMirrorFilter
 
 ### Read-Only
 
-- `created_time` (String) 筛选条件的创建时间。
-- `description` (String) 筛选条件实例描述。
-- `egress_filter_rules` (Attributes Set) 出方向筛选规则的详细信息。 (see [below for nested schema](#nestedatt--egress_filter_rules))
-- `ingress_filter_rules` (Attributes Set) 入方向筛选规则的详细信息。 (see [below for nested schema](#nestedatt--ingress_filter_rules))
-- `project_name` (String) 筛选条件所属项目的名称。
-- `status` (String) 筛选条件状态。
-- `tags` (Attributes Set) 标签信息 (see [below for nested schema](#nestedatt--tags))
-- `traffic_mirror_filter_id` (String) 筛选条件实例ID。
-- `traffic_mirror_filter_name` (String) 筛选条件名称。
+- `created_time` (String) Filter condition creation time
+- `description` (String) Filter condition instance description
+- `egress_filter_rules` (Attributes Set) Outbound filter rule details (see [below for nested schema](#nestedatt--egress_filter_rules))
+- `ingress_filter_rules` (Attributes Set) Inbound filter rule details (see [below for nested schema](#nestedatt--ingress_filter_rules))
+- `project_name` (String) Project name of the filter condition
+- `status` (String) Filter condition status
+- `tags` (Attributes Set) Tag information (see [below for nested schema](#nestedatt--tags))
+- `traffic_mirror_filter_id` (String) Filter condition instance ID
+- `traffic_mirror_filter_name` (String) Filter condition name
 
 <a id="nestedatt--egress_filter_rules"></a>
 ### Nested Schema for `egress_filter_rules`
 
 Read-Only:
 
-- `description` (String) 筛选规则实例描述。
-- `destination_cidr_block` (String) 筛选规则目的地址。
-- `destination_port_range` (String) 筛选规则目的端口范围。
-- `policy` (String) 筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。
-- `priority` (Number) 筛选规则优先级。
-- `project_name` (String) 所属项目的名称。
-- `protocol` (String) 筛选规则协议类型。
-- `source_cidr_block` (String) 筛选规则源地址。
-- `source_port_range` (String) 筛选规则源端口范围。
-- `status` (String) 筛选规则状态。
-- `traffic_direction` (String) 筛选规则方向。egress：出方向。ingress：入方向。
-- `traffic_mirror_filter_id` (String) 筛选条件实例ID。
-- `traffic_mirror_filter_rule_id` (String) 筛选规则实例ID。
+- `description` (String) Filter rule instance description
+- `destination_cidr_block` (String) Filter rule destination address
+- `destination_port_range` (String) Filter rule destination port range
+- `policy` (String) Filter rule action. accept: Enable traffic mirroring. reject: Do not enable traffic mirroring
+- `priority` (Number) Filter rule priority
+- `project_name` (String) Project name
+- `protocol` (String) Filter rule protocol type
+- `source_cidr_block` (String) Filter rule source address
+- `source_port_range` (String) Filter rule source port range
+- `status` (String) Filter rule status
+- `traffic_direction` (String) Filter rule direction. egress: Outbound. ingress: Inbound
+- `traffic_mirror_filter_id` (String) Filter condition instance ID
+- `traffic_mirror_filter_rule_id` (String) Filter rule instance ID
 
 
 <a id="nestedatt--ingress_filter_rules"></a>
@@ -56,19 +56,19 @@ Read-Only:
 
 Read-Only:
 
-- `description` (String) 筛选规则实例描述。
-- `destination_cidr_block` (String) 筛选规则目的地址。
-- `destination_port_range` (String) 筛选规则目的端口范围。
-- `policy` (String) 筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。
-- `priority` (Number) 筛选规则优先级。
-- `project_name` (String) 所属项目的名称。
-- `protocol` (String) 筛选规则协议类型。
-- `source_cidr_block` (String) 筛选规则源地址。
-- `source_port_range` (String) 筛选规则源端口范围。
-- `status` (String) 筛选规则状态。
-- `traffic_direction` (String) 筛选规则方向。egress：出方向。ingress：入方向。
-- `traffic_mirror_filter_id` (String) 筛选条件实例ID。
-- `traffic_mirror_filter_rule_id` (String) 筛选规则实例ID。
+- `description` (String) Filter rule instance description
+- `destination_cidr_block` (String) Filter rule destination address
+- `destination_port_range` (String) Filter rule destination port range
+- `policy` (String) Filter rule action. accept: Enable traffic mirroring. reject: Do not enable traffic mirroring
+- `priority` (Number) Filter rule priority
+- `project_name` (String) Project name
+- `protocol` (String) Filter rule protocol type
+- `source_cidr_block` (String) Filter rule source address
+- `source_port_range` (String) Filter rule source port range
+- `status` (String) Filter rule status
+- `traffic_direction` (String) Filter rule direction. egress: Outbound. ingress: Inbound
+- `traffic_mirror_filter_id` (String) Filter condition instance ID
+- `traffic_mirror_filter_rule_id` (String) Filter rule instance ID
 
 
 <a id="nestedatt--tags"></a>
@@ -76,5 +76,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

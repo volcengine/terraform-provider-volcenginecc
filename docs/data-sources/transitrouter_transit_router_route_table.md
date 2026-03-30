@@ -21,22 +21,22 @@ Data Source schema for Volcengine::TransitRouter::TransitRouterRouteTable
 
 ### Read-Only
 
-- `created_time` (String) TR路由表的创建时间
-- `description` (String) TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
-- `in_route_policy_table_id` (String) TR路由表关联的收方向路由策略的ID
-- `out_route_policy_table_id` (String) TR路由表关联的发方向路由策略的ID
-- `status` (String) TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用
-- `tags` (Attributes Set) TR路由表的标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `transit_router_id` (String) 中转路由器实例的ID
-- `transit_router_route_table_id` (String) TR路由表的ID
-- `transit_router_route_table_name` (String) TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID
-- `transit_router_route_table_type` (String) TR路由表的类型。System：系统路由表。Custom：自定义路由表。
-- `updated_time` (String) TR路由表的最近操作时间
+- `created_time` (String) Creation time of the TR routing table
+- `description` (String) Description of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.
+- `in_route_policy_table_id` (String) ID of the inbound routing policy associated with the TR routing table
+- `out_route_policy_table_id` (String) ID of the outbound routing policy associated with the TR routing table
+- `status` (String) Status of the TR routing table. Creating: creating. Deleting: deleting. Pending: configuring. Available: available
+- `tags` (Attributes Set) Tag information for the TR routing table (see [below for nested schema](#nestedatt--tags))
+- `transit_router_id` (String) Transit Router instance ID
+- `transit_router_route_table_id` (String) TR routing table ID
+- `transit_router_route_table_name` (String) Name of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the TR routing table ID
+- `transit_router_route_table_type` (String) Type of TR routing table. System: system routing table. Custom: custom routing table.
+- `updated_time` (String) Last operation time of the TR routing table
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键
-- `value` (String) 标签值
+- `key` (String) Tag key
+- `value` (String) Tag value

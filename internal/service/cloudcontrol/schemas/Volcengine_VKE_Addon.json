@@ -8,20 +8,20 @@
   ],
   "definitions": {
     "AddonCondition": {
-      "description": "组件状态条件。",
+      "description": "Component status condition.",
       "properties": {
         "Type": {
-          "description": "组件当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
+          "description": "Status conditions under the component's current primary state, indicating the reasons for entering this state. Multiple reasons are possible. Parameter values include: Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
           "type": "string"
         }
       },
       "type": "object"
     },
     "AddonStatus": {
-      "description": "组件状态信息。",
+      "description": "Component status information.",
       "properties": {
         "Conditions": {
-          "description": "组件当前主状态下的状态条件。",
+          "description": "Status conditions under the component's current primary state.",
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/AddonCondition"
@@ -30,14 +30,14 @@
           "uniqueItems": true
         },
         "Phase": {
-          "description": "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
+          "description": "Component status. Parameter values include: Running, Failed, Creating, Deleting, Updating",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。",
+  "description": "The cluster supports installation of various types of components, including network, storage, monitoring, DNS, security, image, GPU, and more, to meet your diverse business needs. You can deploy, upgrade, or uninstall components as needed.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ClusterId",
@@ -88,20 +88,20 @@
   ],
   "properties": {
     "ClusterId": {
-      "description": "组件所在集群 ID。",
+      "description": "Cluster ID where the component is located.",
       "type": "string"
     },
     "Config": {
-      "description": "组件配置。",
+      "description": "Component configuration.",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "description": "Component installation time. Standard RFC3339 format, UTC+0 time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "DeployMode": {
-      "description": "组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。",
+      "description": "Component deployment mode. Values: Unmanaged: deployed in unmanaged mode. Managed: deployed in managed mode.",
       "enum": [
         "Unmanaged",
         "Managed"
@@ -109,7 +109,7 @@
       "type": "string"
     },
     "DeployNodeType": {
-      "description": "部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。",
+      "description": "Type of deployment node. This parameter needs to be specified only when DeployModes=Unmanaged. Values: Node: deployed as a node. VirtualNode: deployed as a virtual node.",
       "enum": [
         "Node",
         "VirtualNode"
@@ -117,23 +117,23 @@
       "type": "string"
     },
     "Name": {
-      "description": "组件名称。",
+      "description": "Component name.",
       "semantic": "resourceId",
       "type": "string"
     },
     "Status": {
       "$ref": "#/definitions/AddonStatus",
-      "description": "组件状态。",
+      "description": "Component status.",
       "semantic": "status",
       "type": "object"
     },
     "UpdatedTime": {
-      "description": "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "description": "Component update time. Standard RFC3339 format, UTC+0 time.",
       "semantic": "updatedTime",
       "type": "string"
     },
     "Version": {
-      "description": "组件版本。",
+      "description": "Component version.",
       "type": "string"
     }
   },

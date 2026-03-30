@@ -21,26 +21,27 @@ Data Source schema for Volcengine::ALB::CustomizedCfg
 
 ### Read-Only
 
-- `created_time` (String) 个性化配置的创建时间。
-- `customized_cfg_content` (String) 个性化配置项内容。具体规则如下：长度不超过4096字符。空格和分号需要转义。不同的配置项之间通过";\r\n"分隔，配置项不能重复。当前支持的配置项有ssl_protocols、ssl_ciphers、client_max_body_size、keepalive_timeout、proxy_request_buffering、proxy_connect_timeout、add_header、client_header_timeout、proxy_read_timeout、proxy_send_timeout、client_body_timeout、send_timeout和ssl_verify_depth。详细信息参见官网文档。
-- `customized_cfg_id` (String) 个性化配置的 ID 。
-- `customized_cfg_name` (String) 个性化配置的名字。具体规则如下：不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。
-- `description` (String) 个性化配置的描述。具体规则如下：不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）长度限制为1 ～ 255个字符。不填默认为空字符串。
-- `listeners` (Attributes Set) 个性化配置关联的监听器列表。 (see [below for nested schema](#nestedatt--listeners))
-- `project_name` (String) 个性化配置所属项目名称。
-- `status` (String) 个性化配置状态。包括Active、Configuring、Creating或者Deleting。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) 个性化配置的最近操作时间。
+- `created_time` (String) Creation time of the personalized configuration.
+- `customized_cfg_content` (String) Content of the personalized configuration item. Specific rules: Length must not exceed 4096 characters. Spaces and semicolons must be escaped. Different configuration items are separated by ';
+  '. Configuration items cannot be duplicated. Currently supported configuration items include ssl_protocols, ssl_ciphers, client_max_body_size, keepalive_timeout, proxy_request_buffering, proxy_connect_timeout, add_header, client_header_timeout, proxy_read_timeout, proxy_send_timeout, client_body_timeout, send_timeout, and ssl_verify_depth. For details, see the official documentation.
+- `customized_cfg_id` (String) Personalized configuration ID.
+- `customized_cfg_name` (String) Name of the personalized configuration. Specific rules: Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters.
+- `description` (String) Description of the personalized configuration. Specific rules: Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.
+- `listeners` (Attributes Set) List of listeners associated with the personalized configuration. (see [below for nested schema](#nestedatt--listeners))
+- `project_name` (String) Project name to which the personalized configuration belongs.
+- `status` (String) Status of the personalized configuration. Includes Active, Configuring, Creating, or Deleting.
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Last operation time of the personalized configuration.
 
 <a id="nestedatt--listeners"></a>
 ### Nested Schema for `listeners`
 
 Read-Only:
 
-- `listener_id` (String) 监听器的 ID。
-- `listener_name` (String) 监听器的名称。
-- `port` (Number) 监听器的端口。
-- `protocol` (String) 监听器的协议。
+- `listener_id` (String) Listener ID.
+- `listener_name` (String) Listener name.
+- `port` (Number) Listener port.
+- `protocol` (String) Listener protocol.
 
 
 <a id="nestedatt--tags"></a>
@@ -48,5 +49,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.

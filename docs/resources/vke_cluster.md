@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vke_cluster Resource - terraform-provider-volcenginecc"
 subcategory: "VKE"
 description: |-
-  容器服务通过深度融合新一代云原生技术，提供以容器为核心的高性能 Kubernetes 容器集群管理服务。在云端一键构建高可用 Kubernetes 集群，并实现容器化应用的可视化全生命周期管理，助力用户快速构建容器化应用。
+  Container Service deeply integrates next-generation cloud-native technologies to provide high-performance Kubernetes cluster management centered on containers. Build highly available Kubernetes clusters in the cloud with one click and achieve visualized full lifecycle management of containerized applications, helping users quickly build containerized applications.
 ---
 
 # volcenginecc_vke_cluster (Resource)
 
-容器服务通过深度融合新一代云原生技术，提供以容器为核心的高性能 Kubernetes 容器集群管理服务。在云端一键构建高可用 Kubernetes 集群，并实现容器化应用的可视化全生命周期管理，助力用户快速构建容器化应用。
+Container Service deeply integrates next-generation cloud-native technologies to provide high-performance Kubernetes cluster management centered on containers. Build highly available Kubernetes clusters in the cloud with one click and achieve visualized full lifecycle management of containerized applications, helping users quickly build containerized applications.
 
 ## Example Usage
 
@@ -58,68 +58,68 @@ resource "volcenginecc_vke_cluster" "VKEClusterDemo" {
 
 ### Required
 
-- `name` (String) 集群名称。同一个地域下，名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。
+- `name` (String) Cluster name. Must be unique within the same region. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length must be 2–64 characters.
 
 ### Optional
 
-- `cluster_config` (Attributes) 集群控制面及部分节点的网络配置。 (see [below for nested schema](#nestedatt--cluster_config))
-- `delete_protection_enabled` (Boolean) 集群删除保护，取值：false：（默认值）关闭删除保护。true：开启删除保护，不允许直接删除集群。
-- `description` (String) 集群描述。长度限制为 300 个字符以内。
-- `irsa_config` (Attributes) IRSA（IAM Role for Service Account）能力相关参数配置。 (see [below for nested schema](#nestedatt--irsa_config))
-- `kubernetes_version_create` (String) 集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。(创建使用)
-- `logging_config` (Attributes) 集群的日志配置信息。 (see [below for nested schema](#nestedatt--logging_config))
-- `monitoring_config` (Attributes) 监控配置信息。 (see [below for nested schema](#nestedatt--monitoring_config))
-- `pods_config` (Attributes) Pod 的网络配置。 (see [below for nested schema](#nestedatt--pods_config))
-- `project_name` (String) 集群所属项目名称，一个集群只能归属于一个项目。只能包含英文字母、数字、下划线（_）、英文句点（.）和中划线（-）。长度限制在 64 个字符以内。默认值：default。
-- `services_config` (Attributes) 服务的网络配置。 (see [below for nested schema](#nestedatt--services_config))
-- `source_region` (String) 集群源地域。
-- `tags` (Attributes Set) 集群的标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `cluster_config` (Attributes) Network configuration for the cluster control plane and some nodes. (see [below for nested schema](#nestedatt--cluster_config))
+- `delete_protection_enabled` (Boolean) Cluster deletion protection. Values: false (default): Deletion protection is disabled. true: Deletion protection is enabled; the cluster cannot be deleted directly.
+- `description` (String) Cluster description. Maximum length is 300 characters.
+- `irsa_config` (Attributes) IRSA (IAM Role for Service Account) capability parameter configuration (see [below for nested schema](#nestedatt--irsa_config))
+- `kubernetes_version_create` (String) Kubernetes version of the cluster, in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version. (For creation)
+- `logging_config` (Attributes) Cluster log configuration information. (see [below for nested schema](#nestedatt--logging_config))
+- `monitoring_config` (Attributes) Monitoring configuration information. (see [below for nested schema](#nestedatt--monitoring_config))
+- `pods_config` (Attributes) Pod network configuration. (see [below for nested schema](#nestedatt--pods_config))
+- `project_name` (String) Project name to which the cluster belongs. A cluster can belong to only one project. Only English letters, numbers, underscores (_), periods (.), and hyphens (-) are allowed. Maximum length: 64 characters. Default: default.
+- `services_config` (Attributes) Network configuration for the service. (see [below for nested schema](#nestedatt--services_config))
+- `source_region` (String) Cluster source region
+- `tags` (Attributes Set) Cluster tags.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `cluster_id` (String) 集群 ID。
-- `created_time` (String) 集群创建时间。标准 RFC3339 格式的 UTC+0 时间。
+- `cluster_id` (String) Cluster ID.
+- `created_time` (String) Cluster creation time. Standard RFC3339 format, UTC+0.
 - `id` (String) Uniquely identifies the resource.
-- `kubernetes_version` (String) 集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）
-- `message` (String) 集群状态描述。
-- `node_statistics` (Attributes) 集群中各主状态下对应的节点数量统计。 (see [below for nested schema](#nestedatt--node_statistics))
-- `status` (Attributes) 集群状态。 (see [below for nested schema](#nestedatt--status))
-- `type` (String) 集群类型。
-- `updated_time` (String) 集群最近一次更新的时间。标准 RFC3339 格式的 UTC+0 时间。
+- `kubernetes_version` (String) Cluster Kubernetes version in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version (for query use)
+- `message` (String) Cluster status description.
+- `node_statistics` (Attributes) Statistics of node counts for each main status in the cluster. (see [below for nested schema](#nestedatt--node_statistics))
+- `status` (Attributes) Cluster status. (see [below for nested schema](#nestedatt--status))
+- `type` (String) Cluster type.
+- `updated_time` (String) Last update time of the cluster. Standard RFC3339 format, UTC+0.
 
 <a id="nestedatt--cluster_config"></a>
 ### Nested Schema for `cluster_config`
 
 Optional:
 
-- `api_server_public_access_config` (Attributes) 集群 API Server 公网访问配置信息。ApiServerPublicAccessEnable=true时才返回的参数。 (see [below for nested schema](#nestedatt--cluster_config--api_server_public_access_config))
-- `api_server_public_access_enabled` (Boolean) 节点公网访问配置，参数值说明：false：未开启。true：已开启。
-- `resource_public_access_default_enabled` (Boolean) 节点公网访问配置，参数值说明：false：未开启。true：已开启。
-- `subnet_ids` (Set of String) 集群控制面在私有网络内通信的子网 ID。
+- `api_server_public_access_config` (Attributes) Cluster API Server public access configuration. This parameter is returned only when ApiServerPublicAccessEnable=true (see [below for nested schema](#nestedatt--cluster_config--api_server_public_access_config))
+- `api_server_public_access_enabled` (Boolean) Node public access configuration. Parameter value description: false: Disabled. true: Enabled
+- `resource_public_access_default_enabled` (Boolean) Node public access configuration. Parameter value description: false: Disabled. true: Enabled
+- `subnet_ids` (Set of String) Subnet ID for cluster control plane communication within the private network.
 
 Read-Only:
 
-- `api_server_endpoints` (Attributes) 集群 API Server 访问的 IPv4 地址信息。 (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints))
-- `ip_family` (String) 集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。
-- `security_group_ids` (Set of String) 集群控制面及节点使用的的安全组。
-- `vpc_id` (String) 集群控制面及部分节点的网络所在的私有网络（VPC）ID。
+- `api_server_endpoints` (Attributes) Cluster API Server access IPv4 address information (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints))
+- `ip_family` (String) Cluster network protocol stack. Parameter value description: Ipv4: Ipv4 single stack. Ipv6: [Invitation test · Trial application] Ipv6 single stack. DualStack: [Invitation test · Trial application] Ipv4 and Ipv6 dual stack
+- `security_group_ids` (Set of String) Security group used by the cluster control plane and nodes.
+- `vpc_id` (String) Private network (VPC) ID where the cluster control plane and some nodes are located.
 
 <a id="nestedatt--cluster_config--api_server_public_access_config"></a>
 ### Nested Schema for `cluster_config.api_server_public_access_config`
 
 Optional:
 
-- `public_access_network_config` (Attributes) 公网访问网络配置。ApiServerPublicAccessEnable=true时才返回的参数。 (see [below for nested schema](#nestedatt--cluster_config--api_server_public_access_config--public_access_network_config))
+- `public_access_network_config` (Attributes) Public access network configuration. This parameter is returned only when ApiServerPublicAccessEnable=true (see [below for nested schema](#nestedatt--cluster_config--api_server_public_access_config--public_access_network_config))
 
 <a id="nestedatt--cluster_config--api_server_public_access_config--public_access_network_config"></a>
 ### Nested Schema for `cluster_config.api_server_public_access_config.public_access_network_config`
 
 Optional:
 
-- `bandwidth` (Number) 公网 IP 的带宽峰值，单位：Mbps。
-- `billing_type` (Number) 公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。
-- `isp` (String) 公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。
+- `bandwidth` (Number) Peak bandwidth of the public IP, unit: Mbps
+- `billing_type` (Number) Billing type for public IP: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic.
+- `isp` (String) Line type of the public IP. Parameter value description: BGP: BGP (multi-line)
 
 
 
@@ -128,15 +128,15 @@ Optional:
 
 Read-Only:
 
-- `private_ip` (Attributes) 集群 API Server 私网的 IPv4 地址。 (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints--private_ip))
-- `public_ip` (Attributes) 集群 API Server 公网的 IPv4 地址。 (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints--public_ip))
+- `private_ip` (Attributes) Cluster API Server private IPv4 address. (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints--private_ip))
+- `public_ip` (Attributes) Cluster API Server public IPv4 address (see [below for nested schema](#nestedatt--cluster_config--api_server_endpoints--public_ip))
 
 <a id="nestedatt--cluster_config--api_server_endpoints--private_ip"></a>
 ### Nested Schema for `cluster_config.api_server_endpoints.private_ip`
 
 Read-Only:
 
-- `ipv_4` (String) 私网 IP 的 IPv4 地址。
+- `ipv_4` (String) IPv4 address of the private network IP.
 
 
 <a id="nestedatt--cluster_config--api_server_endpoints--public_ip"></a>
@@ -144,7 +144,7 @@ Read-Only:
 
 Read-Only:
 
-- `ipv_4` (String) 公网 IP 的 IPv4 地址。
+- `ipv_4` (String) IPv4 address of the public IP.
 
 
 
@@ -154,15 +154,15 @@ Read-Only:
 
 Optional:
 
-- `enabled` (Boolean) 是否开启 IRSA 功能，参数值说明：true：开启,false：不开启
+- `enabled` (Boolean) Whether to enable IRSA feature. Parameter values: true: enabled; false: not enabled.
 
 Read-Only:
 
-- `audience` (String) 接受令牌的标识符。
-- `issuer` (String) OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。
-- `jwks_url` (String) JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。
-- `oidc_trn` (String) OIDC 提供商 TRN。
-- `open_id_config_url` (String) OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。
+- `audience` (String) Identifier for accepting tokens
+- `issuer` (String) OIDC (OpenID Connect) provider URL, the unique identifier for the OIDC provider.
+- `jwks_url` (String) JWKS (JSON Web Key Set) URL. The public keys in the file are used to verify any JWT (JSON Web Tokens) returned from the OIDC provider.
+- `oidc_trn` (String) OIDC provider TRN.
+- `open_id_config_url` (String) OIDC provider configuration document in JSON format, containing information about the OIDC provider.
 
 
 <a id="nestedatt--logging_config"></a>
@@ -170,18 +170,18 @@ Read-Only:
 
 Optional:
 
-- `log_project_id` (String) 集群的日志项目（Log Project）ID。 如果为空，表示集群的日志项目未被创建。
-- `log_setups` (Attributes Set) 集群的日志选项信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--logging_config--log_setups))
+- `log_project_id` (String) Cluster log project (Log Project) ID. If empty, the cluster log project has not been created.
+- `log_setups` (Attributes Set) Cluster log option information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--logging_config--log_setups))
 
 <a id="nestedatt--logging_config--log_setups"></a>
 ### Nested Schema for `logging_config.log_setups`
 
 Optional:
 
-- `enabled` (Boolean) 是否开启该日志选项，参数值说明：true：已开启。false：未开启。
-- `log_ttl` (Number) 日志在日志服务中的保存时间，单位为天。 3650 天表示永久存储。
-- `log_type` (String) 当前开启的日志类型，参数值说明：Audit：集群审计日志。KubeApiServer：kube-apiserver 组件日志。KubeScheduler：kube-scheduler 组件日志。KubeControllerManager：kube-controller-manager 组件日志。
+- `enabled` (Boolean) Whether to enable this log option. Parameter values: true: enabled; false: not enabled.
+- `log_ttl` (Number) Retention period of logs in log service, in days. 3650 days means permanent storage.
+- `log_type` (String) Currently enabled log types. Parameter values: Audit: cluster audit log; KubeApiServer: kube-apiserver component log; KubeScheduler: kube-scheduler component log; KubeControllerManager: kube-controller-manager component log.
 
 
 
@@ -190,18 +190,18 @@ Optional:
 
 Optional:
 
-- `component_configs` (Attributes Set) 监控组件的配置列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--monitoring_config--component_configs))
-- `enable_metrics_external_collection` (Boolean) 是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。
-- `workspace_id` (String) 监控数据所属的工作区 ID。
+- `component_configs` (Attributes Set) List of monitoring component configurations.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--monitoring_config--component_configs))
+- `enable_metrics_external_collection` (Boolean) Whether to enable external Prometheus to collect control plane component metrics for the cluster. Parameter values: true: enabled. false: not enabled.
+- `workspace_id` (String) Workspace ID to which the monitoring data belongs.
 
 <a id="nestedatt--monitoring_config--component_configs"></a>
 ### Nested Schema for `monitoring_config.component_configs`
 
 Optional:
 
-- `enabled` (Boolean) 是否启用该监控组件，true 表示启用，false 表示禁用。
-- `name` (String) 监控组件的名称，例如 'prometheus'、'grafana' 等。
+- `enabled` (Boolean) Whether to enable this monitoring component. true means enabled; false means disabled.
+- `name` (String) Name of the monitoring component, such as 'prometheus', 'grafana', etc.
 
 
 
@@ -210,18 +210,18 @@ Optional:
 
 Optional:
 
-- `flannel_config` (Attributes) Flannel 网络配置。 (see [below for nested schema](#nestedatt--pods_config--flannel_config))
-- `pod_network_mode` (String) 容器（Pod）网络模型（CNI），参数值说明：Flannel：Flannel 网络模型，独立的 Underlay 容器网络模型。VpcCniShared：VPC-CNI 网络模型，基于私有网络的弹性网卡 ENI 实现的 Underlay 容器网络模型。
-- `vpc_cni_config` (Attributes) VPC-CNI 网络配置。 (see [below for nested schema](#nestedatt--pods_config--vpc_cni_config))
+- `flannel_config` (Attributes) Flannel network configuration. (see [below for nested schema](#nestedatt--pods_config--flannel_config))
+- `pod_network_mode` (String) Container (Pod) network model (CNI). Parameter values: Flannel: Flannel network model, an independent underlay container network model. VpcCniShared: VPC-CNI network model, an underlay container network model implemented with ENI (Elastic Network Interface) on a private network.
+- `vpc_cni_config` (Attributes) VPC-CNI network configuration. (see [below for nested schema](#nestedatt--pods_config--vpc_cni_config))
 
 <a id="nestedatt--pods_config--flannel_config"></a>
 ### Nested Schema for `pods_config.flannel_config`
 
 Optional:
 
-- `max_pods_per_node` (Number) Flannel 模型容器网络的单节点 Pod 实例数量上限，取值：64（默认值）、16、32、128、256。
-- `pod_cidrs` (Set of String) Flannel 容器网络的 Pod CIDR。
-- `subnet_ids` (Set of String) Flannel 容器网络模型对应的 Pod 子网 ID 列表。
+- `max_pods_per_node` (Number) Maximum number of Pod instances per node for the Flannel container network model. Values: 64 (default), 16, 32, 128, 256.
+- `pod_cidrs` (Set of String) Pod CIDR for Flannel container network.
+- `subnet_ids` (Set of String) List of Pod subnet IDs for the Flannel container network model.
 
 
 <a id="nestedatt--pods_config--vpc_cni_config"></a>
@@ -229,8 +229,8 @@ Optional:
 
 Optional:
 
-- `subnet_ids` (Set of String) VPC-CNI 容器网络模型对应的 Pod 子网 ID 列表。
-- `trunk_eni_enabled` (Boolean) 是否开启 VPC-CNI 容器网络模型的 Trunk 模式。
+- `subnet_ids` (Set of String) List of Pod subnet IDs for the VPC-CNI container network model.
+- `trunk_eni_enabled` (Boolean) Whether to enable Trunk mode for the VPC-CNI container network model
 
 
 
@@ -239,7 +239,7 @@ Optional:
 
 Optional:
 
-- `service_cidrsv_4` (Set of String) Kubernetes 服务（Service）暴露的 IPv4 私有网络地址。
+- `service_cidrsv_4` (Set of String) IPv4 private network address exposed by Kubernetes Service.
 
 
 <a id="nestedatt--tags"></a>
@@ -247,8 +247,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key.
+- `value` (String) Tag value.
 
 
 <a id="nestedatt--node_statistics"></a>
@@ -256,12 +256,12 @@ Optional:
 
 Read-Only:
 
-- `creating_count` (Number) Phase=Creating的节点总数量。
-- `deleting_count` (Number) Phase=Deleting的节点总数量。
-- `failed_count` (Number) Phase=Failed的节点总数量。
-- `running_count` (Number) Phase=Running的节点总数量。
-- `total_count` (Number) 节点总数量。
-- `updating_count` (Number) Phase=Updating的节点总数量。
+- `creating_count` (Number) Total number of nodes in Phase=Creating.
+- `deleting_count` (Number) Total number of nodes with Phase=Deleting.
+- `failed_count` (Number) Total number of nodes with Phase=Failed.
+- `running_count` (Number) Total number of nodes with Phase=Running.
+- `total_count` (Number) Total number of nodes.
+- `updating_count` (Number) Total number of nodes in Phase=Updating.
 
 
 <a id="nestedatt--status"></a>
@@ -269,16 +269,16 @@ Read-Only:
 
 Read-Only:
 
-- `conditions` (Attributes Set) 状态条件列表
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
-- `phase` (String) 集群状态阶段
+- `conditions` (Attributes Set) Status condition list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--status--conditions))
+- `phase` (String) Cluster status phase.
 
 <a id="nestedatt--status--conditions"></a>
 ### Nested Schema for `status.conditions`
 
 Read-Only:
 
-- `type` (String) 条件类型
+- `type` (String) Condition type
 
 ## Import
 

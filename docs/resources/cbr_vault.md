@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cbr_vault Resource - terraform-provider-volcenginecc"
 subcategory: "CBR"
 description: |-
-  用于存放您的备份数据。
+  Used to store your backup data
 ---
 
 # volcenginecc_cbr_vault (Resource)
 
-用于存放您的备份数据。
+Used to store your backup data
 
 ## Example Usage
 
@@ -23,28 +23,28 @@ resource "volcenginecc_cbr_vault" "CBRVaultDemo" {
 
 ### Required
 
-- `vault_name` (String) 备份库名称。
+- `vault_name` (String) Backup Repository Name
 
 ### Optional
 
-- `project_name` (String) 项目名称。
+- `project_name` (String) Project Name
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `endpoint` (String) 访问域名。
+- `created_time` (String) Creation Time
+- `endpoint` (String) Access Domain Name
 - `id` (String) Uniquely identifies the resource.
-- `tags` (Attributes Set) 备份库标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `vault_id` (String) 备份库 ID。
+- `tags` (Attributes Set) Backup Repository Tag
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `vault_id` (String) Backup Repository ID
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag Key
+- `value` (String) Tag Value
 
 ## Import
 

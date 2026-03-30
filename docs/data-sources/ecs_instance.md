@@ -21,146 +21,149 @@ Data Source schema for Volcengine::ECS::Instance
 
 ### Read-Only
 
-- `affinity_group_id` (String) 亲和组ID。
-- `affinity_group_size` (Number) 亲和组规格，取值：2。
+- `affinity_group_id` (String) Affinity group ID.
+- `affinity_group_size` (Number) Affinity group specification. Value: 2.
   
   **提示:**
-    - 当前仅高性能计算NPU型hpcpci3实例（邀测）支持亲和组。
-    - 该功能正在邀测中，如需试用，请联系客户经理申请。
-- `auto_pay` (Boolean) 是否自动支付，取值：true：自动支付。您需要确保账户余额充足，如果账户余额不足会生成异常订单，计费方式转换失败。false（默认）：仅生成订单但不扣费，您可以在生成订单后，登录订单管理页面完成支付。
-- `auto_renew` (Boolean) 实例到期后是否自动续费，取值：
-    - true：自动续费。
-    - false（默认）：不自动续费。
+    - Currently, only high performance computing NPU-type hpcpci3 instances (by invitation) support affinity groups.
+    - This feature is in invitation testing. To try it, please contact your account manager.
+- `auto_pay` (Boolean) Auto payment option. Valid values: true: Auto payment. Ensure your account balance is sufficient; if the balance is insufficient, an exception order will be generated and the billing mode conversion will fail. false (default): Only generates the order without charging. You can log in to the order management page to complete payment after the order is generated.
+- `auto_renew` (Boolean) Whether the instance will be automatically renewed upon expiration. Values:
+    - true: Auto renewal
+    - false (default): No auto renewal
   
   **提示:**
-  仅当参数`InstanceChargeType`取值为`PrePaid`时生效。
-- `auto_renew_period` (Number) 每次自动续费的时长。
-    - 仅当参数`AutoRenew`取值为`True`时，该参数生效，默认值为1。
-    - `PeriodUnit`取值为`Month`时，该参数取值为1、2、3、6、12。
-- `cpu_max_frequency` (Number) 指定CPU最大频率，单位：GHz，取值范围：CPU的主频到睿频之间。
+  This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.
+- `auto_renew_period` (Number) Duration for each automatic renewal.
+    - This parameter takes effect only when `AutoRenew` is set to `True`. Default value is 1.
+    - When `PeriodUnit` is `Month`, valid values are 1, 2, 3, 6, 12.
+- `cpu_max_frequency` (Number) Specify the maximum CPU frequency, in GHz. Value range: between the CPU's base frequency and turbo frequency.
   
   **提示:**
-    - 当前仅g3al、c3al、r3al、g4i、c4i、r4i、g4ie、c4ie、r4ie实例支持设置该参数。规格的主频/睿频及更多信息，请参见[实例规格介绍](https://www.volcengine.com/docs/6396/70840)。
-    - 该功能正在邀测中，如需使用，请联系客户经理申请。
-- `cpu_memory` (Attributes) 实例的CPU选项。 (see [below for nested schema](#nestedatt--cpu_memory))
-- `created_at` (String) 实例的创建时间。
-- `credit_specification` (String) 突发性能实例的运行模式，取值：
-    - Standard：标准模式。
-    - Unlimited：无性能约束模式（暂不支持）。
+    - Currently, only g3al, c3al, r3al, g4i, c4i, r4i, g4ie, c4ie, r4ie instances support this parameter. For base/turbo frequencies and more information, see [Instance Specifications Introduction](https://www.volcengine.com/docs/6396/70840).
+    - This feature is in invitation-only testing. To use it, please contact your account manager.
+- `cpu_memory` (Attributes) The CPU options for the instance. (see [below for nested schema](#nestedatt--cpu_memory))
+- `created_at` (String) Instance creation time.
+- `credit_specification` (String) Burstable instance operating mode. Values:
+    - Standard: Standard mode.
+    - Unlimited: Unlimited performance mode (not supported yet).
   
   **提示:**
-    - 仅当`InstanceTypeId`取值为ecs.t2系列，即突发性能实例时该参数生效。
-    - 不传或传入空值时，突发性能实例默认为`Standard`标准模式。
-- `deletion_protection` (Boolean) 实例删除保护属性，指定是否支持通过控制台或API删除实例。取值：
-    - true：开启实例删除保护。
-    - false（默认）：关闭实例删除保护。
-  开启实例删除保护后，在控制台或调用API删除实例时，会收到删除失败的错误码。如需删除，请先关闭实例删除保护。
-- `deployment_set_group_number` (Number) 当ECS实例要加入或调整的部署集策略为部署集组高可用策略（AvailabilityGroup）时，可以通过该参数指定实例在部署集中的分组号，取值范围：1～7。
-- `deployment_set_id` (String) 实例需要加入的部署集ID。
-    - 您可以调用[DescribeDeploymentSets](https://www.volcengine.com/docs/6396/70873)接口，查询已创建的部署集。
-    - 关于部署集的更多信息，请参见[部署集](https://www.volcengine.com/docs/6396/70871)。
-- `description` (String) 实例的描述，默认为空字符串。
-    - 必须以字母或中文开头。
-    - 只能包含中文、字母、数字、点号“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”
-    - 长度限制在255个字符以内。
-- `eip_address` (Attributes) 实例的EIP地址。 (see [below for nested schema](#nestedatt--eip_address))
-- `elastic_scheduled_instance_type` (String) 弹性预约实例类型，取值：NoEsi：非弹性预约实例。Esi：弹性预约实例。Segmented：弹性预约实例-时段型。
-- `enable_jumbo_frame` (Boolean) 实例是否开启巨型帧。取值：false：不开启巨型帧，该实例的所有网卡MTU值为1500。true：开启巨型帧，该实例的所有网卡MTU值为8500。
-- `expired_at` (String) 实例的过期时间。
-- `hostname` (String) 实例主机名，即实例操作系统内部的计算机名。
-    - Linux实例：
-      - 允许使用字母、数字、点号“.”或中划线“-”。
-      - 不能以中划线、点号开头或结尾，且不能连续使用中划线和点号。
-      - Linux系统长度限制在2～63个字符之间。
-    - Windows实例：
-      - 允许使用字母、数字或中划线“-”，不能完全是数字。
-      - 不能以中划线开头或结尾，且不能连续使用中划线。
-      - Windows系统长度限制在2～15个字符之间。
-- `hpc_cluster_id` (String) 实例所属的高性能计算集群ID。
+    - This parameter is only effective when `InstanceTypeId` is set to ecs.t2 series, i.e., burstable instances.
+    - If not specified or left empty, burstable instances default to `Standard` mode.
+- `deletion_protection` (Boolean) Instance deletion protection attribute, specifies whether the instance can be deleted via the console or API. Values:
+    - true: Enable instance deletion protection
+    - false (default): Disable instance deletion protection
+  When deletion protection is enabled, attempts to delete the instance via the console or API will return a deletion failure error code. To delete the instance, disable deletion protection first
+- `deployment_set_group_number` (Number) When the deployment set policy for an ECS instance is set to Availability Group, you can use this parameter to specify the group number of the instance within the deployment set. Value range: 1–7.
+- `deployment_set_id` (String) The deployment set ID the instance needs to join.
+    - You can call the [DescribeDeploymentSets](https://www.volcengine.com/docs/6396/70873) API to query existing deployment sets.
+    - For more information about deployment sets, see [Deployment Set](https://www.volcengine.com/docs/6396/70871).
+- `description` (String) The description of the instance. Default is an empty string.
+    - Must start with a letter or Chinese character
+    - Can only contain Chinese characters, letters, numbers, period '.', space, underscore '_', hyphen '-', equals '=', English comma ',', Chinese comma '，', and Chinese period '。'
+    - Maximum length is 255 characters
+- `eip_address` (Attributes) The EIP address of the instance. (see [below for nested schema](#nestedatt--eip_address))
+- `elastic_scheduled_instance_type` (String) Elastic reservation instance type. Values: NoEsi: Non-elastic reservation instance. Esi: Elastic reservation instance. Segmented: Elastic reservation instance   - time segment type.
+- `enable_jumbo_frame` (Boolean) Whether jumbo frames are enabled for the instance. Values:
+    - false: Jumbo frames are disabled. All network interfaces have an MTU of 1500.
+    - true: Jumbo frames are enabled. All network interfaces have an MTU of 8500
+- `expired_at` (String) The expiration time of the instance.
+- `hostname` (String) Instance hostname, which is the computer name inside the instance operating system.
+    - Linux instances:
+      - Letters, numbers, periods ('.'), and hyphens ('-') are allowed.
+      - Cannot start or end with a hyphen or period, and cannot use consecutive hyphens and periods.
+      - Linux system hostname length must be between 2 and 63 characters.
+    - Windows instances:
+      - Letters, numbers, and hyphens ('-') are allowed, but the hostname cannot be all numbers.
+      - Cannot start or end with a hyphen, and cannot use consecutive hyphens.
+      - Windows system hostname length must be between 2 and 15 characters.
+- `hpc_cluster_id` (String) ID of the high performance computing cluster to which the instance belongs.
   
   **提示:**
-  仅当创建高性能计算GPU型实例时，该参数生效且为必填项。
-- `image` (Attributes) 实例的镜像。 (see [below for nested schema](#nestedatt--image))
-- `include_data_volumes` (Boolean) 是否将实例上挂载的所有按量计费数据盘转换为包年包月数据盘。true：转换。false （默认）：不转换。
-- `install_run_command_agent` (Boolean) 创建实例时是否安装云助手Agent，取值：true：创建时安装。false（默认）：创建时不安装。
-- `instance_charge_type` (String) 实例和云盘的计费类型，取值：
-    - PostPaid：按量计费。
-    - PrePaid：包年包月。请确认您的账号支持余额支付或者信控支付，否则将返回InvalidInstanceChargeType的错误提示。
-- `instance_id` (String) ECS实例的ID。
-- `instance_name` (String) 实例的名称。
-    - 以字母或中文开头。
-    - 只能包含中文、字母、数字、下划线“_”、中划线“-”和点号“.”。
-    - 长度限制为1～128个字符。
-- `instance_type` (String) 实例规格。
-    - 产品选型：您可以参考[实例规格介绍](https://www.volcengine.com/docs/6396/70840)或者调用[DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769)查看实例规格的性能数据，也可以参考[实例选型最佳实践](https://www.volcengine.com/docs/6396/74174)了解如何选择实例规格。
-    - 查询库存：您可以调用[DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279)查询可用区中计算资源的库存信息。
-- `key_pair` (Attributes) 实例的密钥对名称。 (see [below for nested schema](#nestedatt--key_pair))
-- `local_volumes` (Attributes Set) 实例对应的本地盘配置信息。 (see [below for nested schema](#nestedatt--local_volumes))
-- `operation_system` (Attributes) 实例的操作系统类型。 (see [below for nested schema](#nestedatt--operation_system))
-- `password` (String) 实例的密码。
-- `period` (Number) 购买资源的时长（N）。
-    - `PeriodUnit`为`Month`（默认）时，取值：1、2、3、4、5、6、7、8、9、12、24、36、48、60。
-    - `PeriodUnit`为`Year`时，取值：1、2、3、4、5。
+  This parameter is only effective and required when creating high performance computing GPU instances.
+- `image` (Attributes) The image of the instance. (see [below for nested schema](#nestedatt--image))
+- `include_data_volumes` (Boolean) Whether to convert all pay-as-you-go data disks attached to the instance to subscription data disks. true: Convert. false (default): Do not convert.
+- `install_run_command_agent` (Boolean) Whether to install Cloud Assistant Agent when creating the instance. Values: true: Install during creation. false (default): Do not install during creation.
+- `instance_charge_type` (String) The billing type for the instance and cloud disk. Values:
+    - PostPaid: Pay-as-you-go
+    - PrePaid: Subscription. Please ensure your account supports balance payment or credit payment, otherwise an InvalidInstanceChargeType error will be returned.
+- `instance_id` (String) The ECS instance ID.
+- `instance_name` (String) Instance name
+    - Must start with a letter or Chinese character
+    - Can only contain Chinese characters, letters, numbers, underscores "_", hyphens "-", and periods "."
+    - Length limit: 1–128 characters
+- `instance_type` (String) Instance specification.
+    - Product selection: You can refer to [Instance Specifications Introduction](https://www.volcengine.com/docs/6396/70840) or call [DescribeInstanceTypes](https://www.volcengine.com/docs/6396/92769) to view performance data, and refer to [Instance Selection Best Practices](https://www.volcengine.com/docs/6396/74174) to learn how to choose specifications.
+    - Inventory query: You can call [DescribeAvailableResource](https://www.volcengine.com/docs/6396/76279) to check available compute resources in the zone.
+- `key_pair` (Attributes) Instance key pair name (see [below for nested schema](#nestedatt--key_pair))
+- `local_volumes` (Attributes Set) Local disk configuration information for the instance (see [below for nested schema](#nestedatt--local_volumes))
+- `operation_system` (Attributes) The operating system type of the instance. (see [below for nested schema](#nestedatt--operation_system))
+- `password` (String) The password of the instance.
+- `period` (Number) Resource purchase duration (N).
+    - When `PeriodUnit` is `Month` (default), valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36, 48, 60.
+    - When `PeriodUnit` is `Year`, valid values are 1, 2, 3, 4, 5.
   
   **提示:**
-  仅当`InstanceChargeType`取值为`PrePaid`时生效，且为必填。
-- `period_unit` (String) 购买资源的时长单位。取值：
-    - Month（默认）：月。
-    - Year：年。
+  This parameter is valid and required only when `InstanceChargeType` is set to `PrePaid`.
+- `period_unit` (String) The unit for the duration of resource purchase. Values:
+    - Month (default): Month
+    - Year: Year
   
   **提示:**
-  仅当`InstanceChargeType`取值为`PrePaid`时生效。
-- `placement` (Attributes) 实例的部署信息。 (see [below for nested schema](#nestedatt--placement))
-- `primary_network_interface` (Attributes) 实例的主网卡。 (see [below for nested schema](#nestedatt--primary_network_interface))
-- `project_name` (String) 实例所属的项目名称。
-- `rdma_ip_addresses` (Set of String) 当查询高性能计算GPU型实例时，列表形式返回各网卡的RDMA IP地址。
-- `rdma_network_interface_details` (Attributes Set) 各网卡的RDMA 信息。 (see [below for nested schema](#nestedatt--rdma_network_interface_details))
-- `renew_info` (Attributes) 续费信息。 (see [below for nested schema](#nestedatt--renew_info))
-- `role_names` (Set of String) 实例绑定的IAM角色名称。
-- `secondary_network_interfaces` (Attributes List) 实例的辅助网卡。 (see [below for nested schema](#nestedatt--secondary_network_interfaces))
-- `spot_price_limit` (Number) 竞价实例的每小时最高价格。
-    - 支持小数点后3位的精度。
-    - 仅当`SpotStrategy`取值为`SpotWithPriceLimit`时生效。
-    - 当`SpotStrategy`取值为`SpotWithPriceLimit`时，您可以自定义设置竞价实例的价格上限，当市场价格高于您的出价时，实例会被释放；当`SpotStrategy`取值为`SpotAsPriceGo`时，则代表您接受系统自动出价，跟随当前市场实际价格，此时无需填写该参数。
-- `spot_strategy` (String) 竞价策略。取值：
-    - NoSpot（默认）：非竞价实例。
-    - SpotWithPriceLimit：设置价格上限的竞ga价实例。
-    - SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的竞价实例。
-- `status` (String) 实例的状态。实例的状态，取值：
-  CREATING：创建中
-  RUNNING：运行中
-  STOPPING：停止中
-  STOPPED：已停止
-  REBOOTING: 重启中
-  STARTING：启动中
-  REBUILDING：重装中
-  RESIZING：更配中
-  ERROR：错误
-  DELETING：删除中。
-- `stopped_mode` (String) StoppedMode string 可选 示例值：KeepCharging
-  停机模式，取值：
-  KeepCharging：普通停机模式。停机后实例及其相关资源仍被保留且持续计费，费用和停机前一致。
-  StopCharging：节省停机模式。停机后实例的计算资源（vCPU、GPU和内存）将被回收且停止计费，所挂载的云盘、镜像、公网IP仍被保留且持续计费。
-  有关节省停机的启用条件，请参见按量计费节省停机模式说明。
-  默认值：若您在云服务器控制台开启了默认节省停机模式，并且符合启用条件，则默认值为StopCharging。否则，默认值为KeepCharging。NotApplicable：表示本实例不支持节省停机功能。
-- `system_volume` (Attributes) 实例的系统卷。 (see [below for nested schema](#nestedatt--system_volume))
-- `tags` (Attributes Set) 标签 (see [below for nested schema](#nestedatt--tags))
-- `updated_at` (String) 实例的更新时间。
-- `user_data` (String) 实例的自定义数据，默认为空。最终传入的UserData会被Base64转码。
-    - Linux实例：脚本内容不能超过16KB，且必须经过Base64编码。
-    - Windows实例：脚本内容不能超过8KB，且无需Base64编码。
-- `vpc_id` (String) 实例所属的私有网络ID。您可以调用[DescribeVpcs](https://www.volcengine.com/docs/6563/66127)接口获取目标地域下的VPC信息。
-- `zone_id` (String) 实例所在的可用区ID。
+  This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.
+- `placement` (Attributes) The deployment information of the instance. (see [below for nested schema](#nestedatt--placement))
+- `primary_network_interface` (Attributes) Primary network interface card of the instance. (see [below for nested schema](#nestedatt--primary_network_interface))
+- `project_name` (String) Project name to which the instance belongs.
+- `rdma_ip_addresses` (Set of String) When querying high performance computing GPU instances, returns the RDMA IP addresses of each network interface card in a list.
+- `rdma_network_interface_details` (Attributes Set) RDMA information for each network interface. (see [below for nested schema](#nestedatt--rdma_network_interface_details))
+- `renew_info` (Attributes) Renewal information. (see [below for nested schema](#nestedatt--renew_info))
+- `role_names` (Set of String) IAM role name bound to the instance
+- `secondary_network_interfaces` (Attributes List) Auxiliary network interface card of the instance. (see [below for nested schema](#nestedatt--secondary_network_interfaces))
+- `spot_price_limit` (Number) Maximum hourly price for spot instances.
+    - Supports up to three decimal places.
+    - Only effective when `SpotStrategy` is set to `SpotWithPriceLimit`.
+    - When `SpotStrategy` is set to `SpotWithPriceLimit`, you can set a custom price limit for the spot instance. If the market price exceeds your bid, the instance will be released. When `SpotStrategy` is set to `SpotAsPriceGo`, you accept the system's automatic bidding, following the current market price, and this parameter does not need to be filled in.
+- `spot_strategy` (String) Spot strategy. Values:
+    - NoSpot (default): Non-spot instance.
+    - SpotWithPriceLimit: Spot instance with price limit.
+    - SpotAsPriceGo: System bids automatically, following the current market price for spot instances.
+- `status` (String) Instance status. Values:
+  CREATING: Creating
+  RUNNING: Running
+  STOPPING: Stopping
+  STOPPED: Stopped
+  REBOOTING: Rebooting
+  STARTING: Starting
+  REBUILDING: Rebuilding
+  RESIZING: Resizing
+  ERROR: Error
+  DELETING: Deleting
+- `stopped_mode` (String) StoppedMode string Optional Example value: KeepCharging
+  Stopped mode. Valid values:
+  KeepCharging: Standard stopped mode. After stopping, the instance and its associated resources are retained and continue to be billed. Charges remain the same as before stopping.
+  StopCharging: Cost-saving stopped mode. After stopping, the instance's computing resources (vCPU, GPU, and memory) are reclaimed and billing stops. Attached cloud disks, images, and public IPs are retained and continue to be billed.
+  For conditions to enable cost-saving stopped mode, see the description of cost-saving stopped mode for pay-as-you-go billing.
+  Default value: If you have enabled the default cost-saving stopped mode in the cloud server console and meet the conditions, the default value is StopCharging. Otherwise, the default value is KeepCharging.
+  NotApplicable: Indicates that this instance does not support cost-saving stopped mode.
+- `system_volume` (Attributes) The system volume of the instance. (see [below for nested schema](#nestedatt--system_volume))
+- `tags` (Attributes Set) Tags (see [below for nested schema](#nestedatt--tags))
+- `updated_at` (String) The update time of the instance.
+- `user_data` (String) Custom data for the instance. Default is empty. The final UserData passed will be Base64 encoded.
+    - Linux instances: Script content must not exceed 16 KB and must be Base64 encoded.
+    - Windows instances: Script content must not exceed 8 KB and does not require Base64 encoding
+- `vpc_id` (String) The private network ID to which the instance belongs. You can call the [DescribeVpcs](https://www.volcengine.com/docs/6563/66127) API to obtain VPC information for the target region.
+- `zone_id` (String) The availability zone ID where the instance is located.
 
 <a id="nestedatt--cpu_memory"></a>
 ### Nested Schema for `cpu_memory`
 
 Read-Only:
 
-- `core_count` (Number) 实例的核数。
-- `cpu_number` (Number) 实例的CPU数量。
-- `memory_size` (Number) 实例的内存大小，单位MB。
-- `threads_per_core` (Number) 实例的每核线程数。
+- `core_count` (Number) Number of instance cores.
+- `cpu_number` (Number) Number of vCPUs for the instance.
+- `memory_size` (Number) Instance memory size (MB).
+- `threads_per_core` (Number) Threads per core for the instance.
 
 
 <a id="nestedatt--eip_address"></a>
@@ -168,36 +171,36 @@ Read-Only:
 
 Read-Only:
 
-- `allocation_id` (String) 实例的分配ID。
-- `bandwidth_mbps` (Number) 公网IP的带宽上限，默认值为1，单位：Mbps。
-    - `ChargeType`传入`PayByBandwidth`：取值范围1～500。
-    - `ChargeType`传入`PayByTraffic`：取值范围1～200。
-- `bandwidth_package_id` (String) 共享带宽包的ID，表示将公网IP加入到共享带宽包。
-    - 您可以调用[DescribeBandwidthPackages](https://www.volcengine.com/docs/6623/100685)接口，查询共享带宽包的ID。
-    - 公网IP加入到共享带宽包必须同时满足如下条件：
-      - 二者的安全防护类型相同。
-      - 二者的地域相同。
-      - 公网IP的计费方式必须是按量计费。
-      - 共享带宽包为IPv4类型。
-- `charge_type` (String) 公网IP的计费方式，取值：
-    - PayByBandwidth（默认）：按量计费-按带宽上限计费。
-    - PayByTraffic：按量计费-按实际流量计费。
-    - PrePaid：包年包月。
+- `allocation_id` (String) Instance allocation ID
+- `bandwidth_mbps` (Number) Maximum bandwidth for public IP. Default value is 1, unit: Mbps.
+    - If `ChargeType` is `PayByBandwidth`: value range is 1–500.
+    - If `ChargeType` is `PayByTraffic`: value range is 1–200.
+- `bandwidth_package_id` (String) Shared bandwidth package ID, used to add a public IP to the shared bandwidth package.
+    - You can call the [DescribeBandwidthPackages](https://www.volcengine.com/docs/6623/100685) API to query the shared bandwidth package ID.
+    - To add a public IP to a shared bandwidth package, all of the following conditions must be met:
+      - Both must have the same security protection type.
+      - Both must be in the same region.
+      - The public IP must use pay-as-you-go billing.
+      - The shared bandwidth package must be IPv4 type.
+- `charge_type` (String) Public IP billing method. Values:
+    - PayByBandwidth (default): Pay-as-you-go—billed by bandwidth cap.
+    - PayByTraffic: Pay-as-you-go—billed by actual traffic.
+    - PrePaid: Subscription.
   
   **提示:**
-  实例的计费类型`InstanceChargeType`取值为`PostPaid`时，该参数取值不能为`PrePaid`。
-- `ip_address` (String) 实例的IP地址。
-- `isp` (String) 公网IP的线路类型，默认为BGP。取值：
-    - BGP：BGP（多线）。
-    - 若您的账号已申请并开通了静态单线权限，则可传入如下取值：
-      - ChinaMobile：中国移动静态单线。
-      - ChinaTelecom：中国电信静态单线。
-      - ChinaUnicom：中国联通静态单线。
-    - 若您的账号已申请并开通了BGP单线权限，则可传入SingleLine_BGP。
-    - 若您的账号已申请并开通了静态BGP权限，则可传入Static_BGP。
-- `release_with_instance` (Boolean) 实例是否随实例释放。
-- `security_protection_instance_id` (Number) DDoS原生防护（企业版）ID。
-- `security_protection_types` (Set of String) 公网IP的安全防护类型。
+  When `InstanceChargeType` is set to `PostPaid`, this parameter cannot be set to `PrePaid`.
+- `ip_address` (String) Instance IP address.
+- `isp` (String) Line type for the public IP. Default is BGP. Values:
+    - BGP: BGP (multi-line)
+    - If your account has applied for and enabled static single-line permissions, you can use the following values:
+      - ChinaMobile: China Mobile static single-line
+      - ChinaTelecom: China Telecom static single-line
+      - ChinaUnicom: China Unicom static single-line
+    - If your account has applied for and enabled BGP single-line permissions, you can use SingleLine_BGP.
+    - If your account has applied for and enabled static BGP permissions, you can use Static_BGP
+- `release_with_instance` (Boolean) Whether this resource is released when the instance is released.
+- `security_protection_instance_id` (Number) DDoS Native Protection (Enterprise Edition) ID.
+- `security_protection_types` (Set of String) Public IP security protection type.
 
 
 <a id="nestedatt--image"></a>
@@ -205,10 +208,10 @@ Read-Only:
 
 Read-Only:
 
-- `image_id` (String) 实例的镜像ID。
-- `image_release_version` (String) 实例的镜像发布版本。
-- `keep_image_credential` (Boolean) 实例是否保留镜像凭证。
-- `security_enhancement_strategy` (String) 实例的安全增强策略。Active：开启安全加固，仅对公共镜像生效。InActive：关闭安全加固，对所有镜像生效。
+- `image_id` (String) Instance image ID.
+- `image_release_version` (String) The image release version of the instance.
+- `keep_image_credential` (Boolean) Whether the instance retains image credentials
+- `security_enhancement_strategy` (String) Instance security enhancement policy. Active: Enable security hardening, applies only to public images. InActive: Disable security hardening, applies to all images
 
 
 <a id="nestedatt--key_pair"></a>
@@ -216,8 +219,8 @@ Read-Only:
 
 Read-Only:
 
-- `key_pair_id` (String) 实例的公钥。
-- `key_pair_name` (String) 实例的密钥对名称。
+- `key_pair_id` (String) Instance public key
+- `key_pair_name` (String) Instance key pair name
 
 
 <a id="nestedatt--local_volumes"></a>
@@ -225,9 +228,9 @@ Read-Only:
 
 Read-Only:
 
-- `count` (Number) 实例挂载的本地盘数量。
-- `size` (Number) 实例挂载的本地盘的单盘容量，单位GiB。
-- `volume_type` (String) 本地盘类型，取值：LOCAL_SSD：SSD本地盘。LOCAL_HDD：HDD本地盘。
+- `count` (Number) The number of local disks attached to the instance.
+- `size` (Number) Capacity of each local disk mounted to the instance (GiB).
+- `volume_type` (String) Local disk type. Values: LOCAL_SSD: SSD local disk. LOCAL_HDD: HDD local disk.
 
 
 <a id="nestedatt--operation_system"></a>
@@ -235,8 +238,8 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) 实例的操作系统名称。
-- `type` (String) 实例的操作系统类型。Linux：Linux系统。Windows：Windows系统。
+- `name` (String) Instance operating system name.
+- `type` (String) Operating system type of the instance. Linux: Linux system. Windows: Windows system.
 
 
 <a id="nestedatt--placement"></a>
@@ -244,10 +247,10 @@ Read-Only:
 
 Read-Only:
 
-- `affinity` (String) 针对节省停机模式的ECS实例，停止后会释放部分资源，本参数用于查看ECS实例重新启动时是否仍固定部署在原宿主机上。取值：Host：启用节省停机模式的实例重新启动时，仍会部署在原宿主机上。Default（默认）：启用节省停机模式的实例重新启动时，会优先迁移到支持自动部署的宿主机；若支持自动部署的宿主机资源不足，则在原宿主机上进行启动。
-- `dedicated_host_cluster_id` (String) 实例的专用主机集群ID。
-- `dedicated_host_id` (String) 实例的专用主机ID。
-- `tenancy` (String) 是否在专有宿主机上创建实例，取值：Default（默认）：创建普通云服务器实例。Host：创建专有宿主机实例。若您不指定DedicatedHostId，则由系统自动选择专有宿主机放置实例
+- `affinity` (String) For ECS instances in economy stop mode, some resources are released after stopping. This parameter indicates whether the ECS instance will remain deployed on the original host when restarted. Values: Host: When restarting an instance in economy stop mode, it will remain on the original host. Default: When restarting an instance in economy stop mode, it will preferentially migrate to a host that supports automatic deployment; if resources are insufficient, it will start on the original host.
+- `dedicated_host_cluster_id` (String) Instance dedicated host cluster ID.
+- `dedicated_host_id` (String) Dedicated host ID for the instance.
+- `tenancy` (String) Whether to create the instance on a dedicated host. Values: Default: Create a regular cloud server instance. Host: Create a dedicated host instance. If you do not specify DedicatedHostId, the system automatically selects a dedicated host to place the instance.
 
 
 <a id="nestedatt--primary_network_interface"></a>
@@ -255,15 +258,15 @@ Read-Only:
 
 Read-Only:
 
-- `ipv_6_address_count` (Number) 实例的IPv6地址数量。
-- `ipv_6_addresses` (Set of String) 实例的IPv6地址。
-- `mac_address` (String) 实例的MAC地址。
-- `network_interface_id` (String) 实例的网络接口ID。
-- `primary_ip_address` (String) 实例的主IP地址。
-- `private_ip_addresses` (Set of String) 实例的私有IP地址。
-- `security_group_ids` (Set of String) 实例的安全组ID。
-- `subnet_id` (String) 实例的子网ID。
-- `vpc_id` (String) 实例的VPC ID。
+- `ipv_6_address_count` (Number) The number of IPv6 addresses for the instance.
+- `ipv_6_addresses` (Set of String) IPv6 address of the instance.
+- `mac_address` (String) Instance MAC address.
+- `network_interface_id` (String) The network interface ID of the instance.
+- `primary_ip_address` (String) Instance primary IP address
+- `private_ip_addresses` (Set of String) Instance private IP address.
+- `security_group_ids` (Set of String) Instance security group ID
+- `subnet_id` (String) Instance subnet ID.
+- `vpc_id` (String) VPC ID of the instance.
 
 
 <a id="nestedatt--rdma_network_interface_details"></a>
@@ -271,11 +274,11 @@ Read-Only:
 
 Read-Only:
 
-- `gateway` (String) 网关地址。
-- `ip` (String) IP地址。
-- `mask` (String) 子网掩码。
-- `switch_name` (String) 交换机名称。
-- `switch_port` (String) 交换机端口。
+- `gateway` (String) Gateway address.
+- `ip` (String) IP address
+- `mask` (String) Subnet mask.
+- `switch_name` (String) Switch name.
+- `switch_port` (String) Switch port.
 
 
 <a id="nestedatt--renew_info"></a>
@@ -283,8 +286,8 @@ Read-Only:
 
 Read-Only:
 
-- `period` (Number) 续费的月数，取值：1、2、3、4、5、6、7、8、9、12、24、36。
-- `period_unit` (String) 续费时长的时间单位，即参数Period的单位。取值：Month（默认）。
+- `period` (Number) Number of months for renewal. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36.
+- `period_unit` (String) Time unit for renewal duration, i.e., the unit for the Period parameter. Value: Month (default)
 
 
 <a id="nestedatt--secondary_network_interfaces"></a>
@@ -292,15 +295,15 @@ Read-Only:
 
 Read-Only:
 
-- `ipv_6_address_count` (Number) 实例的IPv6地址数量。
-- `ipv_6_addresses` (Set of String) 实例的IPv6地址。
-- `mac_address` (String) 实例的MAC地址。
-- `network_interface_id` (String) 实例的网络接口ID。
-- `primary_ip_address` (String) 实例的主IP地址。
-- `private_ip_addresses` (Set of String) 实例的私有IP地址。
-- `security_group_ids` (Set of String) 实例的安全组ID。
-- `subnet_id` (String) 实例的子网ID。
-- `vpc_id` (String) 实例的VPC ID。
+- `ipv_6_address_count` (Number) The number of IPv6 addresses for the instance.
+- `ipv_6_addresses` (Set of String) IPv6 address of the instance.
+- `mac_address` (String) Instance MAC address.
+- `network_interface_id` (String) The network interface ID of the instance.
+- `primary_ip_address` (String) Instance primary IP address
+- `private_ip_addresses` (Set of String) Instance private IP address.
+- `security_group_ids` (Set of String) Instance security group ID
+- `subnet_id` (String) Instance subnet ID.
+- `vpc_id` (String) VPC ID of the instance.
 
 
 <a id="nestedatt--system_volume"></a>
@@ -308,14 +311,21 @@ Read-Only:
 
 Read-Only:
 
-- `delete_with_instance` (Boolean) 实例是否随实例删除。
-- `extra_performance_iops` (Number) 实例的额外性能IOPS。
-- `extra_performance_throughput_mb` (Number) 实例的额外性能吞吐量，单位MB。
-- `extra_performance_type_id` (String) 额外性能的类型，取值如下：Balance：均衡型额外性能。IOPS：IOPS型额外性能。Throughput：吞吐量型额外性能。
-- `size` (Number) 实例的大小，单位GiB。
-- `snapshot_id` (String) 实例的快照ID。
-- `volume_id` (String) 实例的卷ID。
-- `volume_type` (String) 云盘类型，取值说明如下：PTSSD：性能型SSD。ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL: 极速型SSD云盘，FlexPL规格。TSSD_TL0：吞吐型SSD云盘。
+- `delete_with_instance` (Boolean) Whether the attached resources are deleted along with the instance.
+- `extra_performance_iops` (Number) Additional performance IOPS for the instance
+- `extra_performance_throughput_mb` (Number) The additional performance throughput of the instance, in MB.
+- `extra_performance_type_id` (String) Type of additional performance. Values:
+  Balance: Balanced additional performance
+  IOPS: IOPS additional performance
+  Throughput: Throughput additional performance
+- `size` (Number) Instance size, in GiB
+- `snapshot_id` (String) Instance snapshot ID
+- `volume_id` (String) Instance volume ID.
+- `volume_type` (String) Cloud disk type. Values:
+  PTSSD: Performance SSD.
+  ESSD_PL0: Ultra SSD disk, PL0 specification.
+  ESSD_FlexPL: Ultra SSD disk, FlexPL specification.
+  TSSD_TL0: Throughput SSD disk.
 
 
 <a id="nestedatt--tags"></a>
@@ -323,5 +333,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 实例的键。
-- `value` (String) 实例的值。
+- `key` (String) Instance key.
+- `value` (String) Instance value.

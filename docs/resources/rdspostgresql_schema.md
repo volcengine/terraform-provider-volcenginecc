@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rdspostgresql_schema Resource - terraform-provider-volcenginecc"
 subcategory: "RDSPostgreSQL"
 description: |-
-  RDS PostgreSQL Schema 资源类型
+  RDS PostgreSQL Schema resource type
 ---
 
 # volcenginecc_rdspostgresql_schema (Resource)
 
-RDS PostgreSQL Schema 资源类型
+RDS PostgreSQL Schema resource type
 
 ## Example Usage
 
@@ -25,10 +25,10 @@ resource "volcenginecc_rdspostgresql_schema" "RDSPostgreSQLSchemaDemo" {
 
 ### Required
 
-- `db_name` (String) 数据库名称
-- `instance_id` (String) 实例 ID
-- `owner` (String) Schema 的 owner。说明实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为 Schema 的 owner。
-- `schema_name` (String) Schema 名称。长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。不能以 pg_ 开头
+- `db_name` (String) Database name
+- `instance_id` (String) Instance ID
+- `owner` (String) Schema owner. Note that instance read-only accounts, high-privilege accounts with DDL permissions disabled, or regular accounts with DDL permissions disabled cannot be set as the Schema owner.
+- `schema_name` (String) Schema name. Length: 2–63 characters. Can contain letters, numbers, underscores (_), or hyphens (-). Must start with a letter and end with a letter or number. Reserved keywords are not allowed; for all disabled keywords, see Disabled Keywords. Cannot start with pg_
 
 ### Read-Only
 

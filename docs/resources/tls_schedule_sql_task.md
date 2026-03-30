@@ -2,12 +2,12 @@
 page_title: "volcenginecc_tls_schedule_sql_task Resource - terraform-provider-volcenginecc"
 subcategory: "TLS"
 description: |-
-  定时 SQL 分析任务的资源定义。
+  Resource definition for the scheduled SQL analysis task.
 ---
 
 # volcenginecc_tls_schedule_sql_task (Resource)
 
-定时 SQL 分析任务的资源定义。
+Resource definition for the scheduled SQL analysis task.
 
 ## Example Usage
 
@@ -39,47 +39,47 @@ resource "volcenginecc_tls_schedule_sql_task" "TLSScheduleSqlTaskDemo" {
 
 ### Required
 
-- `dest_topic_id` (String) 用于存储定时 SQL 分析结果数据的目标日志主题 ID。
-- `process_start_time` (Number) 调度定时 SQL 分析任务的开始时间，即创建第一个实例的时间。格式为秒级时间戳。
-- `process_time_window` (String) SQL 时间窗口，即定时 SQL 分析任务运行时，日志检索与分析的时间范围，左闭右开格式。最大为 24 小时，最小为 1 分钟。
-- `query` (String) 定时 SQL 分析任务定期执行的检索与分析语句，应符合日志服务的检索与分析语法。
-- `request_cycle` (Attributes) 定时 SQL 分析任务的调度周期。调度周期决定每个实例的调度时间。建议调度周期不小于 SQL 时间窗口。 (see [below for nested schema](#nestedatt--request_cycle))
-- `source_topic_id` (String) 待进行定时 SQL 分析的原始日志所在的日志主题 ID。仅支持当前地域的日志主题。
-- `status` (Number) 完成任务配置后是否立即启动定时 SQL 分析任务。可选值：0 关闭；1 立即启动。
-- `task_name` (String) 定时 SQL 分析任务名称。命名规则请参考资源命名规则。
-- `task_type` (Number) 任务类型：0 表示日志到日志；1 表示日志到指标。
+- `dest_topic_id` (String) Target log topic ID for storing scheduled SQL analysis result data.
+- `process_start_time` (Number) Start time for scheduling the scheduled SQL analysis task, which is the time the first instance is created. Format: seconds-level timestamp.
+- `process_time_window` (String) SQL time window, which is the time range for log retrieval and analysis when scheduled SQL analysis tasks run, in left-closed, right-open format. Maximum is 24 hours, minimum is 1 minute.
+- `query` (String) The scheduled SQL analysis task periodically executes retrieval and analysis statements, which must comply with the log service's retrieval and analysis syntax.
+- `request_cycle` (Attributes) Scheduling period for the scheduled SQL analysis task. The scheduling period determines the scheduling time for each instance. It is recommended that the scheduling period is not less than the SQL time window. (see [below for nested schema](#nestedatt--request_cycle))
+- `source_topic_id` (String) ID of the log topic containing the original logs for scheduled SQL analysis. Only log topics in the current region are supported.
+- `status` (Number) Whether to start the scheduled SQL analysis task immediately after completing task configuration. Options: 0 Off; 1 Start immediately.
+- `task_name` (String) Name of the scheduled SQL analysis task. Refer to the resource naming rules for naming conventions.
+- `task_type` (Number) Task type: 0 means log to log; 1 means log to metric.
 
 ### Optional
 
-- `description` (String) 定时 SQL 分析任务的简单描述。不支持<>、'、\、\\。长度范围为 0～64 个字符。
-- `dest_region` (String) 目标日志主题所属地域。默认为当前地域。
-- `process_end_time` (Number) 调度定时 SQL 分析任务的结束时间，格式为秒级时间戳。如果不配置，表示持续运行定时 SQL 分析任务。到达结束时间后，日志服务不会再创建实例及执行定时 SQL 分析，但任务状态仍为运行中，直至手动暂停任务。
-- `process_sql_delay` (Number) 每次调度的延迟时间。取值范围为 0～120，单位为秒。如果不配置，则表示 0，即无延时。
+- `description` (String) Brief description of the scheduled SQL analysis task. Characters <>, ', \, and \\ are not supported. Length: 0–64 characters.
+- `dest_region` (String) Region of the target log topic. The default is the current region.
+- `process_end_time` (Number) End time for scheduling the scheduled SQL analysis task, in seconds-level timestamp format. If not configured, the scheduled SQL analysis task runs continuously. After the end time is reached, the log service will no longer create instances or execute scheduled SQL analysis, but the task status remains running until manually paused.
+- `process_sql_delay` (Number) Delay time for each schedule. Range: 0–120 seconds. If not configured, defaults to 0, meaning no delay.
 
 ### Read-Only
 
-- `created_time` (Number) 创建时间（秒级 Unix 时间戳）。
-- `dest_project_id` (String) 目标日志项目 ID。
-- `dest_topic_name` (String) 目标日志主题名称。
+- `created_time` (Number) Creation time (seconds-level Unix timestamp).
+- `dest_project_id` (String) Target log project ID.
+- `dest_topic_name` (String) Target log topic name.
 - `id` (String) Uniquely identifies the resource.
-- `source_project_id` (String) 源日志项目 ID。
-- `source_project_name` (String) 源日志项目名称。
-- `source_topic_name` (String) 源日志主题名称。
-- `task_id` (String) 任务 ID。
-- `updated_time` (Number) 修改时间（秒级 Unix 时间戳）。
+- `source_project_id` (String) Source log project ID.
+- `source_project_name` (String) Source log project name.
+- `source_topic_name` (String) Source log topic name.
+- `task_id` (String) Task ID.
+- `updated_time` (Number) Modification time (seconds-level Unix timestamp).
 
 <a id="nestedatt--request_cycle"></a>
 ### Nested Schema for `request_cycle`
 
 Required:
 
-- `time` (Number) 调度的周期或者定期执行的时间点（距离 00:00 的分钟数），取值范围为 1~1440，单位为分钟。
-- `type` (String) 调度周期类型。可选值：Period、Fixed、Cron。
+- `time` (Number) Scheduling period or the time point for periodic execution (minutes from 00:00). Range: 1–1440 minutes.
+- `type` (String) Scheduling period type. Options: Period, Fixed, Cron.
 
 Optional:
 
-- `cron_tab` (String) Cron 表达式，最小粒度为分钟，24 小时制。例如 0 18 * * * 表示每天 18 点整执行一次。
-- `cron_time_zone` (String) 设置 Type 为 Cron 时，还需设置时区。
+- `cron_tab` (String) Cron expression, with a minimum granularity of minutes, using 24-hour format. For example, 0 18 * * * means execution at 18:00 every day.
+- `cron_time_zone` (String) If Type is set to Cron, you must also set the time zone.
 
 ## Import
 

@@ -21,15 +21,15 @@ Data Source schema for Volcengine::CBR::BackupPolicy
 
 ### Read-Only
 
-- `account_id` (String) 创建此策略的账户 ID。
-- `backup_type` (String) 备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。
-- `created_time` (String) 创建时间。
-- `crontab` (String) 备份周期，采用 crontab 表达式。
-- `enable_policy` (Boolean) 策略是否启用，取值说明如下：true：启用策略。false：禁用策略。
-- `name` (String) 策略名称。
-- `plan_number` (Number) 该策略已关联的备份计划数量。
-- `policy_id` (String) 备份策略 ID。
-- `retention_day` (Number) 恢复点保留时间，-1 表示持续保留。其它合法取值的范围是[1, 999999]
-- `retention_num_max` (Number) 最大恢复点保留数量。
-- `retention_num_min` (Number) 最小恢复点保留数量下限。
-- `updated_time` (String) 更新时间。
+- `account_id` (String) Account ID that created this policy
+- `backup_type` (String) Backup type. Values are as follows: FULL: full backup; INCREMENTAL: incremental backup
+- `created_time` (String) Creation time
+- `crontab` (String) Backup cycle, using a crontab expression
+- `enable_policy` (Boolean) Whether the policy is enabled. Values are as follows: true: policy enabled; false: policy disabled
+- `name` (String) Policy Name
+- `plan_number` (Number) Number of backup plans associated with this policy
+- `policy_id` (String) Backup Policy ID
+- `retention_day` (Number) Restore point retention period. -1 means retain indefinitely. Other valid values range from [1, 999999]
+- `retention_num_max` (Number) Maximum number of restore points retained
+- `retention_num_min` (Number) Minimum restore point retention limit
+- `updated_time` (String) Update time

@@ -21,48 +21,48 @@ Data Source schema for Volcengine::TOS::Bucket
 
 ### Read-Only
 
-- `acl` (Attributes) 桶的访问控制权限。 (see [below for nested schema](#nestedatt--acl))
+- `acl` (Attributes) Bucket access control permissions (see [below for nested schema](#nestedatt--acl))
 - `acl_grant` (Attributes) (see [below for nested schema](#nestedatt--acl_grant))
-- `az_redundancy` (String) 桶的可用区冗余类型。包括single-az：单可用区冗余，multi-az：多可用区冗余。
-- `bucket_type` (String) 桶的类型。包括hns：获取所有分层桶列表，fns：获取所有扁平桶列表。
-- `creation_date` (String) 桶的创建时间。
-- `enable_version_status` (String) 存储桶的版本控制状态。Enabled：开启版本控制功能。Suspended：暂停版本控制功能。
-- `extranet_endpoint` (String) 存储桶的 TOS 协议公网访问域名。
-- `intranet_endpoint` (String) 存储桶的 TOS 协议私网访问域名
-- `lifecycle_config` (Attributes Set) 存储桶的声明周期。 (see [below for nested schema](#nestedatt--lifecycle_config))
-- `location` (String) 桶所在区域。
-- `name` (String) 桶名。
-- `policy` (String) JSON 格式的字符串，包含了桶策略的信息，但单个桶的所有桶策略 JSON 序列化后总大小不能超过 20KB。
-- `project_name` (String) 存储桶所属项目。
-- `storage_class` (String) 桶的默认存储类型。包括STANDARD：标准存储。IA：低频访问存储。INTELLIGENT_TIERING：智能分层存储。ARCHIVE_FR：归档闪回存储。ARCHIVE：归档存储。COLD_ARCHIVE：冷归档存储。DEEP_COLD_ARCHIVE：深度冷归档存储。
-- `tags` (Attributes Set) 存储桶的标签信息。 (see [below for nested schema](#nestedatt--tags))
+- `az_redundancy` (String) Bucket availability zone redundancy type. Includes single-az: single availability zone redundancy, multi-az: multi availability zone redundancy
+- `bucket_type` (String) Bucket type. Includes hns: hierarchical bucket type, fns: flat bucket type
+- `creation_date` (String) Bucket creation time
+- `enable_version_status` (String) Bucket versioning status. Enabled: Enable versioning. Suspended: Suspend versioning
+- `extranet_endpoint` (String) TOS protocol public access domain name for the bucket
+- `intranet_endpoint` (String) Private network access domain name for the bucket's TOS protocol
+- `lifecycle_config` (Attributes Set) Bucket lifecycle (see [below for nested schema](#nestedatt--lifecycle_config))
+- `location` (String) Bucket region
+- `name` (String) Bucket name
+- `policy` (String) String in JSON format containing bucket policy information. The total size of all bucket policy JSONs for a single bucket must not exceed 20KB
+- `project_name` (String) Project associated with the bucket
+- `storage_class` (String) Default storage class for the bucket. Includes STANDARD: Standard storage. IA: Infrequent access storage. INTELLIGENT_TIERING: Intelligent tiering storage. ARCHIVE_FR: Archive flashback storage. ARCHIVE: Archive storage. COLD_ARCHIVE: Cold archive storage. DEEP_COLD_ARCHIVE: Deep cold archive storage
+- `tags` (Attributes Set) Bucket tag information (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--acl"></a>
 ### Nested Schema for `acl`
 
 Read-Only:
 
-- `bucket_acl_delivered` (Boolean) 是否开启对象默认继承桶 ACL 功能。true：开启对象默认继承桶 ACL 功能。false：关闭对象默认继承桶 ACL 功能。
-- `grants` (Attributes Set) 对象的访问控制权限根节点。 (see [below for nested schema](#nestedatt--acl--grants))
-- `owner` (Attributes) 对象所有者。 (see [below for nested schema](#nestedatt--acl--owner))
+- `bucket_acl_delivered` (Boolean) Enable object default bucket ACL inheritance. true: Enable object default bucket ACL inheritance. false: Disable object default bucket ACL inheritance.
+- `grants` (Attributes Set) Root node for object access control permissions (see [below for nested schema](#nestedatt--acl--grants))
+- `owner` (Attributes) Object owner (see [below for nested schema](#nestedatt--acl--owner))
 
 <a id="nestedatt--acl--grants"></a>
 ### Nested Schema for `acl.grants`
 
 Read-Only:
 
-- `grantee` (Attributes) 被授权用户信息。 (see [below for nested schema](#nestedatt--acl--grants--grantee))
-- `permission` (String) 授权类型。包括READ、READ_NON_LIST、WRITE、READ_ACP、WRITE_ACP、FULL_CONTROL。
+- `grantee` (Attributes) Authorized user information (see [below for nested schema](#nestedatt--acl--grants--grantee))
+- `permission` (String) Permission type. Includes READ, READ_NON_LIST, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL
 
 <a id="nestedatt--acl--grants--grantee"></a>
 ### Nested Schema for `acl.grants.grantee`
 
 Read-Only:
 
-- `canned` (String) 预定义组。包括AllUsers、AuthenticatedUsers。
-- `display_name` (String) 展示名。
-- `grantee_id` (String) 账号ID。
-- `type` (String) 用户类型。包括Group、CanonicalUser。
+- `canned` (String) Predefined groups. Includes AllUsers, AuthenticatedUsers
+- `display_name` (String) Display name
+- `grantee_id` (String) Account ID
+- `type` (String) User type. Includes Group, CanonicalUser
 
 
 
@@ -71,8 +71,8 @@ Read-Only:
 
 Read-Only:
 
-- `display_name` (String) 展示名。
-- `owner_id` (String) 账号ID。
+- `display_name` (String) Display name
+- `owner_id` (String) Account ID
 
 
 
@@ -81,12 +81,12 @@ Read-Only:
 
 Read-Only:
 
-- `acl` (String) 桶的访问权限。包括private、public-read、public-read-write、authenticated-read、bucket-owner-read、bucket-owner-full-control、log-delivery-write、bucket-owner-entrusted、default。
-- `grant_full_control` (String) 授予指定用户所有权限。
-- `grant_read` (String) 授予指定用户读权限。
-- `grant_read_acp` (String) 授予指定用户查看桶 ACL 的权限。
-- `grant_write` (String) 授予指定用户写权限。
-- `grant_write_acp` (String) 授予指定用户修改和删除桶 ACL 的权限。
+- `acl` (String) Bucket access permissions. Includes private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write, bucket-owner-entrusted, default.
+- `grant_full_control` (String) Grant all permissions to the specified user
+- `grant_read` (String) Grant read permission to the specified user
+- `grant_read_acp` (String) Grant permission to specified user to view bucket ACL
+- `grant_write` (String) Grant write permission to specified user
+- `grant_write_acp` (String) Grant permission to the specified user to modify and delete bucket ACL
 
 
 <a id="nestedatt--lifecycle_config"></a>
@@ -94,23 +94,23 @@ Read-Only:
 
 Read-Only:
 
-- `abort_in_complete_multipart_upload` (Attributes) 指定未合并的分片任务（碎片）的过期属性。 (see [below for nested schema](#nestedatt--lifecycle_config--abort_in_complete_multipart_upload))
-- `expiration` (Attributes) 基于最后修改时间的生命周期规则中删除最新版本对象的过期属性。 (see [below for nested schema](#nestedatt--lifecycle_config--expiration))
-- `filter` (Attributes) 指定规则生效的过滤条件。 (see [below for nested schema](#nestedatt--lifecycle_config--filter))
-- `lifecycle_rule_id` (String) 规则 ID。
+- `abort_in_complete_multipart_upload` (Attributes) Specify expiration attributes for unmerged multipart tasks (fragments) (see [below for nested schema](#nestedatt--lifecycle_config--abort_in_complete_multipart_upload))
+- `expiration` (Attributes) Expiration attribute for deleting the latest version object in the lifecycle rule based on last modified time (see [below for nested schema](#nestedatt--lifecycle_config--expiration))
+- `filter` (Attributes) Filter conditions for applying the rule (see [below for nested schema](#nestedatt--lifecycle_config--filter))
+- `lifecycle_rule_id` (String) Rule ID
 - `no_current_version_expiration` (Attributes) (see [below for nested schema](#nestedatt--lifecycle_config--no_current_version_expiration))
-- `non_current_version_transitions` (Attributes Set) 基于最后修改时间的生命周期规则中沉降历史版本对象的的过期属性。 (see [below for nested schema](#nestedatt--lifecycle_config--non_current_version_transitions))
-- `prefix` (String) 规则所适用的前缀。
-- `status` (String) 是否启用规则。包括Enabled、Disabled。
-- `tags` (Attributes Set) 标签。 (see [below for nested schema](#nestedatt--lifecycle_config--tags))
-- `transitions` (Attributes Set) 基于最后修改时间的生命周期规则中沉降最新版本对象的的过期属性。 (see [below for nested schema](#nestedatt--lifecycle_config--transitions))
+- `non_current_version_transitions` (Attributes Set) Expiration attribute for transitioning historical version objects in the lifecycle rule based on last modified time (see [below for nested schema](#nestedatt--lifecycle_config--non_current_version_transitions))
+- `prefix` (String) Prefix to which the rule applies
+- `status` (String) Enable rule. Includes Enabled, Disabled.
+- `tags` (Attributes Set) Tag (see [below for nested schema](#nestedatt--lifecycle_config--tags))
+- `transitions` (Attributes Set) Expiration attribute for transitioning the latest version object in the lifecycle rule based on last modified time (see [below for nested schema](#nestedatt--lifecycle_config--transitions))
 
 <a id="nestedatt--lifecycle_config--abort_in_complete_multipart_upload"></a>
 ### Nested Schema for `lifecycle_config.abort_in_complete_multipart_upload`
 
 Read-Only:
 
-- `days_after_initiation` (Number) 指定未合并的分片任务（碎片）的生命周期规则，在分片任务初始化过后过期删除的天数。
+- `days_after_initiation` (Number) Specify lifecycle rule for unmerged multipart tasks (fragments), number of days to delete after task initialization
 
 
 <a id="nestedatt--lifecycle_config--expiration"></a>
@@ -118,8 +118,8 @@ Read-Only:
 
 Read-Only:
 
-- `date` (String) 基于最后修改时间的生命周期规则中最新版本对象过期删除的具体日期。
-- `days` (Number) 基于最后修改时间的生命周期规则中最新版本对象过期删除的天数。
+- `date` (String) Specific date for deleting the latest version object in the lifecycle rule based on last modified time
+- `days` (Number) Number of days for deleting the latest version object based on last modified time in lifecycle rules
 
 
 <a id="nestedatt--lifecycle_config--filter"></a>
@@ -127,10 +127,10 @@ Read-Only:
 
 Read-Only:
 
-- `greater_than_include_equal` (String) 是否启用相等条件。包括Enabled、Disabled。
-- `less_than_include_equal` (String) 是否启用相等条件。包括Enabled、Disabled。
-- `object_size_greater_than` (Number) 设置规则生效于大于指定大小的对象。
-- `object_size_less_than` (Number) 设置规则生效于小于指定大小的对象。
+- `greater_than_include_equal` (String) Equality condition status. Includes Enabled, Disabled
+- `less_than_include_equal` (String) Equality condition status. Includes Enabled, Disabled
+- `object_size_greater_than` (Number) Apply rule to objects larger than the specified size
+- `object_size_less_than` (Number) Apply rule to objects smaller than the specified size
 
 
 <a id="nestedatt--lifecycle_config--no_current_version_expiration"></a>
@@ -138,8 +138,8 @@ Read-Only:
 
 Read-Only:
 
-- `non_current_date` (String) 基于最后修改时间的生命周期规则中历史版本对象过期删除的具体日期。
-- `non_current_days` (Number) 基于最后修改时间的生命周期规则中历史版本对象过期删除的天数。
+- `non_current_date` (String) Specific date for deleting historical version objects in the lifecycle rule based on last modified time
+- `non_current_days` (Number) Number of days to delete historical version objects in the lifecycle rule based on last modified time
 
 
 <a id="nestedatt--lifecycle_config--non_current_version_transitions"></a>
@@ -147,9 +147,9 @@ Read-Only:
 
 Read-Only:
 
-- `non_current_date` (String) 基于最后修改时间的生命周期规则中历史版本对象沉降的具体日期。
-- `non_current_days` (Number) 基于最后修改时间的生命周期规则中历史版本对象沉降的天数。
-- `storage_class` (String) 存储类型。包括STANDARD、IA、ARCHIVE_FR、INTELLIGENT_TIERING、COLD_ARCHIVE、ARCHIVE、DEEP_COLD_ARCHIVE。
+- `non_current_date` (String) Specific date for historical version object transition in lifecycle rules based on last modified time
+- `non_current_days` (Number) Number of days to transition historical version objects in the lifecycle rule based on last modified time
+- `storage_class` (String) Storage class. Includes STANDARD, IA, ARCHIVE_FR, INTELLIGENT_TIERING, COLD_ARCHIVE, ARCHIVE, DEEP_COLD_ARCHIVE
 
 
 <a id="nestedatt--lifecycle_config--tags"></a>
@@ -157,8 +157,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 
 <a id="nestedatt--lifecycle_config--transitions"></a>
@@ -166,9 +166,9 @@ Read-Only:
 
 Read-Only:
 
-- `date` (String) 基于最后修改时间的生命周期规则中最新版本对象过期沉降的具体日期。
-- `days` (Number) 基于最后修改时间的生命周期规则中最新版本对象过期沉降的天数。
-- `storage_class` (String) 基于最后修改时间的生命周期规则中历史版本对象沉降的存储类型。包括STANDARD、IA、ARCHIVE_FR、INTELLIGENT_TIERING、COLD_ARCHIVE、ARCHIVE、DEEP_COLD_ARCHIVE。
+- `date` (String) Specific date for latest version object transition in lifecycle rules based on last modified time
+- `days` (Number) Number of days to transition the latest version object in the lifecycle rule based on last modified time
+- `storage_class` (String) Storage class for historical version object transition in lifecycle rules based on last modified time. Includes STANDARD, IA, ARCHIVE_FR, INTELLIGENT_TIERING, COLD_ARCHIVE, ARCHIVE, DEEP_COLD_ARCHIVE
 
 
 
@@ -177,5 +177,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

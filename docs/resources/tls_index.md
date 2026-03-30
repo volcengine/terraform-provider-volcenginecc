@@ -2,12 +2,12 @@
 page_title: "volcenginecc_tls_index Resource - terraform-provider-volcenginecc"
 subcategory: "TLS"
 description: |-
-  日志服务支持日志检索与分析功能，配置索引后才能进行日志检索和分析操作。配置索引时需要指定索引的类型和各个字段的数据类型，索引的配置决定了检索方式和检索结果的精度。
+  The log service supports log search and analysis. You must configure indexes to enable log search and analysis. When configuring indexes, specify the index type and the data type for each field. The index configuration determines the search method and the precision of search results.
 ---
 
 # volcenginecc_tls_index (Resource)
 
-日志服务支持日志检索与分析功能，配置索引后才能进行日志检索和分析操作。配置索引时需要指定索引的类型和各个字段的数据类型，索引的配置决定了检索方式和检索结果的精度。
+The log service supports log search and analysis. You must configure indexes to enable log search and analysis. When configuring indexes, specify the index type and the data type for each field. The index configuration determines the search method and the precision of search results.
 
 ## Example Usage
 
@@ -195,32 +195,32 @@ EOT
 
 ### Required
 
-- `topic_id` (String) 日志主题ID。
+- `topic_id` (String) Log topic ID.
 
 ### Optional
 
-- `enable_auto_index` (Boolean) 是否开启索引自动更新，开启后系统将根据新出现的字段自动添加到键值索引。true：开启自动更新。false：不开启自动更新。
-- `full_text` (Attributes) 全文索引配置。此字段为 null 或者未配置，表示不开启全文索引。全文索引配置和键值索引配置至少配置一项，即 FullText 和 KeyValue 之间应至少指定一个参数。 (see [below for nested schema](#nestedatt--full_text))
-- `key_value` (Attributes List) 键值索引配置。此字段数组长度为 0 或者未配置，表示不开启键值索引。全文索引配置和键值索引配置至少配置一项，即 FullText 和 KeyValue 之间应至少指定一个参数。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--key_value))
-- `max_text_len` (Number) 统计字段值的最大长度，默认为 2048，取值范围为 64~16384，单位为字节。说明单个字段值的长度超过您所指定的最大长度时，超出部分将被截断，不参与分析。字段最大长度更新后，只对增量数据有效。
-- `user_inner_key_value` (Attributes List) 预留字段索引配置。此字段数组长度为 0 或者未配置，表示不开启预留字段索引。不能同时开启全文索引和预留字段 __content__ 的键值索引，即如果通过 UserInnerKeyValue 参数设置__content__ 索引，则不能同时设置参数 FullText。预留字段中，目前仅支持为 __content__ 手动开启索引。其他预留字段的索引设置请参考预留字段。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--user_inner_key_value))
+- `enable_auto_index` (Boolean) Enable automatic index updates? When enabled, the system will automatically add newly detected fields to the key-value index. true: Enable automatic updates. false: Do not enable automatic updates.
+- `full_text` (Attributes) Full-text index configuration. If this field is null or not configured, full-text indexing is disabled. At least one of full-text index or key-value index must be configured; that is, at least one parameter between FullText and KeyValue must be specified. (see [below for nested schema](#nestedatt--full_text))
+- `key_value` (Attributes List) Key-value index configuration. If the length of this field array is 0 or not configured, key-value indexing is disabled. At least one of full-text index configuration or key-value index configuration must be set; that is, you must specify at least one parameter between FullText and KeyValue.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--key_value))
+- `max_text_len` (Number) Set the maximum length for field values. The default is 2048. The valid range is 64–16384 bytes. If a single field value exceeds the specified maximum length, the excess part will be truncated and excluded from analysis. After updating the maximum field length, only incremental data is affected.
+- `user_inner_key_value` (Attributes List) Reserved field index configuration. If the array length of this field is 0 or not configured, reserved field indexing is disabled. You cannot enable both full-text indexing and key-value indexing for the reserved field __content__ at the same time. If you set the __content__ index via the UserInnerKeyValue parameter, you cannot also set the FullText parameter. Among reserved fields, only manual indexing for __content__ is currently supported. For other reserved field index settings, refer to reserved fields.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--user_inner_key_value))
 
 ### Read-Only
 
-- `create_time` (String) 索引创建的时间。
+- `create_time` (String) Index creation time.
 - `id` (String) Uniquely identifies the resource.
-- `modify_time` (String) 索引最近修改的时间。
+- `modify_time` (String) Last modified time of the index.
 
 <a id="nestedatt--full_text"></a>
 ### Nested Schema for `full_text`
 
 Optional:
 
-- `case_sensitive` (Boolean) 是否大小写敏感。true：大小写敏感。false：大小写不敏感。
-- `delimiter` (String) 全文索引的分词符。字符串中每个字符代表一个分词符。长度为 1~256 字节。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}.。支持同时配置包含中文和分词符。
-- `include_chinese` (Boolean) 检索时，是否对日志的中文内容按照中文语法进行分词，默认为 false。true：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。false：按照分词符参数中指定的分词符对日志进行分词。
+- `case_sensitive` (Boolean) Case sensitivity. true: Case sensitive. false: Not case sensitive.
+- `delimiter` (String) Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\"', <>/?|;:	[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.
+- `include_chinese` (Boolean) When searching, specify whether to segment Chinese content in logs according to Chinese grammar. The default is false. true: For Chinese characters in logs, segment the log according to common Chinese grammar rules. Custom segmentation symbols for Chinese content are not supported. For non-Chinese characters in logs, segment the log using the segmentation symbols specified in the parameter. false: Segment the log using the segmentation symbols specified in the parameter.
 
 
 <a id="nestedatt--key_value"></a>
@@ -228,43 +228,43 @@ Optional:
 
 Optional:
 
-- `key` (String) 需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。
-- `value` (Attributes) 需要配置键值索引的字段描述信息。 (see [below for nested schema](#nestedatt--key_value--value))
+- `key` (String) Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.
+- `value` (Attributes) Field description information required for configuring key-value indexes. (see [below for nested schema](#nestedatt--key_value--value))
 
 <a id="nestedatt--key_value--value"></a>
 ### Nested Schema for `key_value.value`
 
 Optional:
 
-- `auto_index_flag` (Boolean) 该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。
-- `case_sensitive` (Boolean) 是否区分大小写。默认为 false。
-- `delimiter` (String) 字段的分词符。默认为空（""）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}.。支持同时配置包含中文和分词符。
-- `include_chinese` (Boolean) 检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。
-- `index_all` (Boolean) 是否为 JSON 字段中所有值为文本的字段创建索引。
-- `index_sql_all` (Boolean) 是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。
-- `json_keys` (Attributes List) 当 ValueType 为 json 时，可通过 JsonKeys 字段配置 JSON 子字段键值索引，其值为 KeyValueInfo 数组。JsonKeys 列表中每个元素为 KeyValueInfo，可进一步嵌套定义 text、long、double 类型子字段。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。JsonKeys 中定义的子字段键值索引的 SqlFlag 设置应与其父字段设置保持一致，即需要同时开启或关闭，默认为关闭状态。子字段不支持单独设置 Delimiter、CaseSensitive 和 IncludeChinese，对于 text 类型的字段，CaseSensitive、Delimiter 和 IncludeChinese 固定沿用父字段设置。仅当 ValueType 为 json 时设置。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--key_value--value--json_keys))
-- `sql_flag` (Boolean) 字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。
-- `value_type` (String) 字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。
+- `auto_index_flag` (Boolean) Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.
+- `case_sensitive` (Boolean) Whether to distinguish case. Default is false.
+- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\"', <>/?|;:	[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.
+- `include_chinese` (Boolean) When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.
+- `index_all` (Boolean) Create indexes for all fields with text values in the JSON field.
+- `index_sql_all` (Boolean) Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.
+- `json_keys` (Attributes List) When ValueType is json, you can configure key-value indexes for JSON subfields using the JsonKeys field, which is an array of KeyValueInfo. Each element in the JsonKeys list is a KeyValueInfo, and you can further nest text, long, and double type subfields. For subfields in JSON key-value indexes, use . to indicate the hierarchy between JSON fields. For example, the JSON field namelist contains a text-type subfield totalcount and a JSON-type info, which itself contains the field name. Each field name should be configured as totalcount and info.name, respectively. The SqlFlag setting for subfield key-value indexes defined in JsonKeys must match their parent field, meaning they must be enabled or disabled together. The default is disabled. Subfields do not support separate settings for Delimiter, CaseSensitive, or IncludeChinese. For text-type fields, CaseSensitive, Delimiter, and IncludeChinese always inherit the parent field settings. This is only set when ValueType is json.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--key_value--value--json_keys))
+- `sql_flag` (Boolean) Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.
+- `value_type` (String) Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.
 
 <a id="nestedatt--key_value--value--json_keys"></a>
 ### Nested Schema for `key_value.value.json_keys`
 
 Optional:
 
-- `key` (String) 需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。
-- `value` (Attributes) 需要配置键值索引的字段描述信息。 (see [below for nested schema](#nestedatt--key_value--value--json_keys--value))
+- `key` (String) Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.
+- `value` (Attributes) Field description information required for configuring key-value indexes. (see [below for nested schema](#nestedatt--key_value--value--json_keys--value))
 
 <a id="nestedatt--key_value--value--json_keys--value"></a>
 ### Nested Schema for `key_value.value.json_keys.value`
 
 Optional:
 
-- `auto_index_flag` (Boolean) 该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。
-- `index_all` (Boolean) 是否为 JSON 字段中所有值为文本的字段创建索引。
-- `index_sql_all` (Boolean) 是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。
-- `sql_flag` (Boolean) 字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。
-- `value_type` (String) 字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。
+- `auto_index_flag` (Boolean) Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.
+- `index_all` (Boolean) Create indexes for all fields with text values in the JSON field.
+- `index_sql_all` (Boolean) Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.
+- `sql_flag` (Boolean) Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.
+- `value_type` (String) Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.
 
 
 
@@ -275,43 +275,43 @@ Optional:
 
 Optional:
 
-- `key` (String) 需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。
-- `value` (Attributes) 需要配置键值索引的字段描述信息。 (see [below for nested schema](#nestedatt--user_inner_key_value--value))
+- `key` (String) Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.
+- `value` (Attributes) Field description information required for configuring key-value indexes. (see [below for nested schema](#nestedatt--user_inner_key_value--value))
 
 <a id="nestedatt--user_inner_key_value--value"></a>
 ### Nested Schema for `user_inner_key_value.value`
 
 Optional:
 
-- `auto_index_flag` (Boolean) 该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。
-- `case_sensitive` (Boolean) 是否区分大小写。默认为 false。
-- `delimiter` (String) 字段的分词符。默认为空（""）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}.。支持同时配置包含中文和分词符。
-- `include_chinese` (Boolean) 检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。
-- `index_all` (Boolean) 是否为 JSON 字段中所有值为文本的字段创建索引。
-- `index_sql_all` (Boolean) 是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。
-- `json_keys` (Attributes List) 当 ValueType 为 json 时，可通过 JsonKeys 字段配置 JSON 子字段键值索引，其值为 KeyValueInfo 数组。JsonKeys 列表中每个元素为 KeyValueInfo，可进一步嵌套定义 text、long、double 类型子字段。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。JsonKeys 中定义的子字段键值索引的 SqlFlag 设置应与其父字段设置保持一致，即需要同时开启或关闭，默认为关闭状态。子字段不支持单独设置 Delimiter、CaseSensitive 和 IncludeChinese，对于 text 类型的字段，CaseSensitive、Delimiter 和 IncludeChinese 固定沿用父字段设置。仅当 ValueType 为 json 时设置。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--user_inner_key_value--value--json_keys))
-- `sql_flag` (Boolean) 字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。
-- `value_type` (String) 字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。
+- `auto_index_flag` (Boolean) Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.
+- `case_sensitive` (Boolean) Whether to distinguish case. Default is false.
+- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\"', <>/?|;:	[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.
+- `include_chinese` (Boolean) When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.
+- `index_all` (Boolean) Create indexes for all fields with text values in the JSON field.
+- `index_sql_all` (Boolean) Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.
+- `json_keys` (Attributes List) When ValueType is json, you can configure key-value indexes for JSON subfields using the JsonKeys field, which is an array of KeyValueInfo. Each element in the JsonKeys list is a KeyValueInfo, and you can further nest text, long, and double type subfields. For subfields in JSON key-value indexes, use . to indicate the hierarchy between JSON fields. For example, the JSON field namelist contains a text-type subfield totalcount and a JSON-type info, which itself contains the field name. Each field name should be configured as totalcount and info.name, respectively. The SqlFlag setting for subfield key-value indexes defined in JsonKeys must match their parent field, meaning they must be enabled or disabled together. The default is disabled. Subfields do not support separate settings for Delimiter, CaseSensitive, or IncludeChinese. For text-type fields, CaseSensitive, Delimiter, and IncludeChinese always inherit the parent field settings. This is only set when ValueType is json.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--user_inner_key_value--value--json_keys))
+- `sql_flag` (Boolean) Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.
+- `value_type` (String) Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.
 
 <a id="nestedatt--user_inner_key_value--value--json_keys"></a>
 ### Nested Schema for `user_inner_key_value.value.json_keys`
 
 Optional:
 
-- `key` (String) 需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。
-- `value` (Attributes) 需要配置键值索引的字段描述信息。 (see [below for nested schema](#nestedatt--user_inner_key_value--value--json_keys--value))
+- `key` (String) Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.
+- `value` (Attributes) Field description information required for configuring key-value indexes. (see [below for nested schema](#nestedatt--user_inner_key_value--value--json_keys--value))
 
 <a id="nestedatt--user_inner_key_value--value--json_keys--value"></a>
 ### Nested Schema for `user_inner_key_value.value.json_keys.value`
 
 Optional:
 
-- `auto_index_flag` (Boolean) 该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。
-- `index_all` (Boolean) 是否为 JSON 字段中所有值为文本的字段创建索引。
-- `index_sql_all` (Boolean) 是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。
-- `sql_flag` (Boolean) 字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。
-- `value_type` (String) 字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。
+- `auto_index_flag` (Boolean) Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.
+- `index_all` (Boolean) Create indexes for all fields with text values in the JSON field.
+- `index_sql_all` (Boolean) Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.
+- `sql_flag` (Boolean) Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.
+- `value_type` (String) Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.
 
 ## Import
 

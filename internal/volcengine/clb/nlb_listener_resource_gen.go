@@ -35,11 +35,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。",
+		//	  "description": "TLS listener server certificate ID. Only SSL certificates from the certificate center are supported.",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TLS监听器服务器证书的ID，仅支持传入证书中心 SSL 证书。。",
+			Description: "TLS listener server certificate ID. Only SSL certificates from the certificate center are supported.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -51,12 +51,12 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的连接超时时间（秒）。",
+		//	  "description": "Listener connection timeout (seconds)",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"connection_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器的连接超时时间（秒）。",
+			Description: "Listener connection timeout (seconds)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -67,11 +67,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的创建时间。",
+		//	  "description": "Listener creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的创建时间。",
+			Description: "Listener creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -81,11 +81,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器描述信息。",
+		//	  "description": "Listener description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器描述信息。",
+			Description: "Listener description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -96,11 +96,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否启用监听器。true：开启；false：关闭。",
+		//	  "description": "Listener enabled: true (enabled); false (disabled)",
 		//	  "type": "boolean"
 		//	}
 		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否启用监听器。true：开启；false：关闭。",
+			Description: "Listener enabled: true (enabled); false (disabled)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -112,14 +112,14 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全端口监听的结束端口，仅当Port为0时有效。",
+		//	  "description": "End port for all-port listening. Valid only when Port is 0.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"end_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "全端口监听的结束端口，仅当Port为0时有效。",
+			Description: "End port for all-port listening. Valid only when Port is 0.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -134,31 +134,31 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端实例健康检查响应信息。",
+		//	  "description": "Backend instance health check response information",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "InstanceId": {
-		//	        "description": "后端服务器的实例 ID或IP地址。",
+		//	        "description": "Backend server instance ID or IP address",
 		//	        "type": "string"
 		//	      },
 		//	      "Ip": {
-		//	        "description": "后端服务器的IP地址。",
+		//	        "description": "Backend server IP address",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "后端服务器提供服务的端口。",
+		//	        "description": "Port on which the backend server provides services",
 		//	        "format": "int64",
 		//	        "maximum": 65535,
 		//	        "minimum": 1,
 		//	        "type": "integer"
 		//	      },
 		//	      "ServerId": {
-		//	        "description": "后端服务器ID。",
+		//	        "description": "Backend server ID",
 		//	        "type": "string"
 		//	      },
 		//	      "ServerType": {
-		//	        "description": "后端服务器的类型。ecs：云服务器实例（即主网卡）；eni：辅助网卡；ip：IP地址",
+		//	        "description": "Backend server type: ecs (cloud server instance, i.e., primary network interface); eni (secondary network interface); ip (IP address)",
 		//	        "enum": [
 		//	          "ecs",
 		//	          "eni",
@@ -167,7 +167,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "后端服务器的健康状态。Up：正常；Down：异常；Unused：未被使用（NLB实例已关闭跨可用区转发，且没有来自该后端服务器可用区的访问流量）。",
+		//	        "description": "Backend server health status: Up (normal); Down (abnormal); Unused (not in use—NLB instance has disabled cross-zone forwarding and there is no traffic from this backend server's zone)",
 		//	        "enum": [
 		//	          "Up",
 		//	          "Down",
@@ -176,11 +176,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "UpdatedTime": {
-		//	        "description": "健康状态最后更新时间。",
+		//	        "description": "Last update time of health status",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "后端服务器接收访问流量的可用区ID。",
+		//	        "description": "Zone ID where the backend server receives traffic",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -194,7 +194,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的实例 ID或IP地址。",
+						Description: "Backend server instance ID or IP address",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -203,7 +203,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Ip
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的IP地址。",
+						Description: "Backend server IP address",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -212,7 +212,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器提供服务的端口。",
+						Description: "Port on which the backend server provides services",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -224,7 +224,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ServerId
 					"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器ID。",
+						Description: "Backend server ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -233,7 +233,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ServerType
 					"server_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的类型。ecs：云服务器实例（即主网卡）；eni：辅助网卡；ip：IP地址",
+						Description: "Backend server type: ecs (cloud server instance, i.e., primary network interface); eni (secondary network interface); ip (IP address)",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -249,7 +249,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器的健康状态。Up：正常；Down：异常；Unused：未被使用（NLB实例已关闭跨可用区转发，且没有来自该后端服务器可用区的访问流量）。",
+						Description: "Backend server health status: Up (normal); Down (abnormal); Unused (not in use—NLB instance has disabled cross-zone forwarding and there is no traffic from this backend server's zone)",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -265,7 +265,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: UpdatedTime
 					"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "健康状态最后更新时间。",
+						Description: "Last update time of health status",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -274,7 +274,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端服务器接收访问流量的可用区ID。",
+						Description: "Zone ID where the backend server receives traffic",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -283,7 +283,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "后端实例健康检查响应信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Backend instance health check response information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -294,11 +294,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器唯一标识。",
+		//	  "description": "Listener unique identifier",
 		//	  "type": "string"
 		//	}
 		"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器唯一标识。",
+			Description: "Listener unique identifier",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -308,11 +308,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器名称。",
+		//	  "description": "Listener name",
 		//	  "type": "string"
 		//	}
 		"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器名称。",
+			Description: "Listener name",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -323,11 +323,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例ID。",
+		//	  "description": "Load balancer instance ID",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例ID。",
+			Description: "Load balancer instance ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -337,14 +337,14 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器接收请求的端口，0表示启用全端口监听。",
+		//	  "description": "Port on which the listener receives requests. 0 indicates all-port listening is enabled.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器接收请求的端口，0表示启用全端口监听。",
+			Description: "Port on which the listener receives requests. 0 indicates all-port listening is enabled.",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(0, 65535),
@@ -357,7 +357,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听协议类型。TCP,UDP,TLS",
+		//	  "description": "Listener protocol type: TCP, UDP, TLS",
 		//	  "enum": [
 		//	    "TCP",
 		//	    "UDP",
@@ -366,7 +366,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听协议类型。TCP,UDP,TLS",
+			Description: "Listener protocol type: TCP, UDP, TLS",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -383,11 +383,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS 安全策略ID，支持系统安全策略和自定义安全策略。系统安全策略取值：.tls_cipher_policy_1_0.tls_cipher_policy_1_1.tls_cipher_policy_1_2.tls_cipher_policy_1_2_strict.tls_cipher_policy_1_2_strict_with_1_3.自定义安全策略：输入自定义安全策略 ID。当Protocol为TLS 时，该参数为必填。。",
+		//	  "description": "TLS security policy ID. Supports both system security policies and custom security policies. System security policy values: .tls_cipher_policy_1_0 .tls_cipher_policy_1_1 .tls_cipher_policy_1_2 .tls_cipher_policy_1_2_strict .tls_cipher_policy_1_2_strict_with_1_3. For custom security policies, enter the custom security policy ID. This parameter is required when Protocol is TLS.",
 		//	  "type": "string"
 		//	}
 		"security_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TLS 安全策略ID，支持系统安全策略和自定义安全策略。系统安全策略取值：.tls_cipher_policy_1_0.tls_cipher_policy_1_1.tls_cipher_policy_1_2.tls_cipher_policy_1_2_strict.tls_cipher_policy_1_2_strict_with_1_3.自定义安全策略：输入自定义安全策略 ID。当Protocol为TLS 时，该参数为必填。。",
+			Description: "TLS security policy ID. Supports both system security policies and custom security policies. System security policy values: .tls_cipher_policy_1_0 .tls_cipher_policy_1_1 .tls_cipher_policy_1_2 .tls_cipher_policy_1_2_strict .tls_cipher_policy_1_2_strict_with_1_3. For custom security policies, enter the custom security policy ID. This parameter is required when Protocol is TLS.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -399,25 +399,25 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器关联的服务器组ID。",
+		//	  "description": "Server group ID associated with the listener",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器关联的服务器组ID。",
+			Description: "Server group ID associated with the listener",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StartPort
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全端口监听的起始端口，仅当Port为0时有效。",
+		//	  "description": "Start port for all-port listening. Valid only when Port is 0.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"start_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "全端口监听的起始端口，仅当Port为0时有效。",
+			Description: "Start port for all-port listening. Valid only when Port is 0.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -432,11 +432,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的状态。",
+		//	  "description": "Listener status",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的状态。",
+			Description: "Listener status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -446,16 +446,16 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源标签。",
+		//	  "description": "Resource tags",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -473,7 +473,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -485,7 +485,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -497,7 +497,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "资源标签。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Resource tags\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -508,11 +508,11 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器最近操作时间。",
+		//	  "description": "Listener's most recent operation time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器最近操作时间。",
+			Description: "Listener's most recent operation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -530,7 +530,7 @@ func nLBListenerResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "监听器负责根据指定的协议和端口，监听NLB实例接收到的用户访问请求。NLB将按照该监听器关联的服务器组配置的调度算法，将访问请求转发至该服务器组内健康的后端服务器。",
+		Description: "The listener monitors user access requests received by the NLB instance based on the specified protocol and port. NLB forwards requests to healthy backend servers in the associated server group according to the scheduling algorithm configured for that group.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -5,18 +5,64 @@
     "/properties/InstanceTypeId"
   ],
   "definitions": {
+    "CalChargeItem": {
+      "description": "Billing item.",
+      "properties": {
+        "AttrValue": {
+          "description": "Billing item attribute value.",
+          "type": "string"
+        },
+        "ChargeItemCode": {
+          "description": "Billing item code.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CalculatePriceParam": {
+      "description": "Billing parameter.",
+      "properties": {
+        "CalChargeItemList": {
+          "description": "Billing item list.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/CalChargeItem"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ConfigurationCode": {
+          "description": "Configuration item code.",
+          "type": "string"
+        },
+        "Period": {
+          "description": "Billing cycle.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "InstanceType": {
       "properties": {
         "ActiveSeries": {
-          "description": "最大活跃时序数。",
+          "description": "Maximum active time series count",
           "type": "integer"
         },
         "AvailabilityZoneReplicas": {
-          "description": "可用区（az）数。",
+          "description": "Number of availability zones (az)",
           "type": "integer"
         },
+        "CalculatePriceParams": {
+          "description": "Billing parameter list.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/CalculatePriceParam"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
         "DownsamplingPeriods": {
-          "description": "降采样策略。",
+          "description": "Downsampling policy",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -25,31 +71,31 @@
           "uniqueItems": true
         },
         "IngestSamplesPerSecond": {
-          "description": "最大每秒写入样本数。",
+          "description": "Maximum samples written per second",
           "type": "integer"
         },
         "QueryConcurrency": {
-          "description": "最大查询并发数。",
+          "description": "Maximum query concurrency",
           "type": "integer"
         },
         "QueryPerSecond": {
-          "description": "最大查询 QPS。",
+          "description": "Maximum query QPS",
           "type": "integer"
         },
         "ReplicasPerZone": {
-          "description": "每个可用区（az）的数据副本数。",
+          "description": "Number of data replicas per availability zone (az)",
           "type": "integer"
         },
         "RetentionPeriod": {
-          "description": "最长数据保留时间。",
+          "description": "Maximum data retention period",
           "type": "string"
         },
         "ScanSamplesPerSecond": {
-          "description": "最大每秒扫描样本数。",
+          "description": "Maximum samples scanned per second",
           "type": "integer"
         },
         "ScanSeriesPerSecond": {
-          "description": "最大每秒扫描时序数。",
+          "description": "Maximum time series scanned per second",
           "type": "integer"
         }
       },
@@ -58,37 +104,47 @@
     "Quota": {
       "properties": {
         "ActiveSeries": {
-          "description": "最大活跃时序数。整数形式，默认取值范围为 1～50000000。",
+          "description": "Maximum active time series count. Integer, default range is 1–50000000",
           "type": "integer"
         },
         "IngestSamplesPerSecond": {
-          "description": "指标摄入速率，即最大每秒写入样本数。整数形式，默认取值范围为 1～5000000。",
+          "description": "Metric ingestion rate, i.e., maximum samples written per second. Integer, default range is 1–5000000",
+          "type": "integer"
+        },
+        "PublicQueryBandwidth": {
+          "description": "Workspace public Query bandwidth (Mbps).",
+          "format": "int64",
+          "type": "integer"
+        },
+        "PublicWriteBandwidth": {
+          "description": "Workspace public RemoteWrite bandwidth (Mbps).",
+          "format": "int64",
           "type": "integer"
         },
         "QueryPerSecond": {
-          "description": "最大查询 QPS。整数形式，默认取值范围为 1～500。",
+          "description": "Maximum query QPS. Integer, default range is 1–500",
           "type": "integer"
         },
         "ScanSamplesPerSecond": {
-          "description": "最大每秒扫描样本数。整数形式，默认取值范围为 1～1000000000。",
+          "description": "Maximum samples scanned per second. Integer, default range is 1–1000000000",
           "type": "integer"
         },
         "ScanSeriesPerSecond": {
-          "description": "最大每秒扫描时序数。整数形式，默认取值范围为 1～200000。",
+          "description": "Maximum time series scanned per second. Integer, default range is 1–200000",
           "type": "integer"
         }
       },
       "type": "object"
     },
     "Tag": {
-      "description": "标签。",
+      "description": "Tags",
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value",
           "type": "string"
         }
       },
@@ -98,15 +154,15 @@
       "type": "object"
     },
     "Usage": {
-      "description": "工作区使用量。",
+      "description": "Workspace usage",
       "properties": {
         "ActiveSeries": {
-          "description": "活跃时序数。",
+          "description": "Active time series count",
           "format": "int64",
           "type": "integer"
         },
         "IngestedSamplesPerSecond": {
-          "description": "每秒写入样本数。",
+          "description": "Samples written per second",
           "format": "double",
           "type": "number"
         }
@@ -114,7 +170,7 @@
       "type": "object"
     }
   },
-  "description": "工作区（Workspace）是 VMP 服务中采集数据和规则的抽象整合，为用户提供物理隔离或逻辑隔离的 Prometheus 能力。在 VMP 服务中可创建不同的工作区，不同工作区中的数据彼此隔离。",
+  "description": "Workspace is an abstract integration of data collection and rules in the VMP service, providing users with physical or logical isolation for Prometheus capabilities. You can create different workspaces in the VMP service, and data in different workspaces is isolated from each other",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -163,73 +219,111 @@
     "/properties/WorkspaceId"
   ],
   "properties": {
+    "AuthType": {
+      "description": "Workspace authentication type. Options: BasicAuth: Basic authentication, requires Username and Password for authentication. BearerToken: Token authentication, requires BearerToken for authentication. None: No custom authentication required. Note: When the authentication type is set to None, AK/SK authentication is used by default.",
+      "type": "string"
+    },
+    "BearerToken": {
+      "description": "Workspace Bearer Token. Note: Configure this parameter only when the AuthType parameter is set to BearerToken.",
+      "type": "string"
+    },
     "CreateTime": {
-      "description": "工作区创建时间，RFC3339 格式。",
+      "description": "Workspace creation time, RFC3339 format",
       "semantic": "createdTime",
       "type": "string"
     },
     "DeleteProtectionEnabled": {
-      "description": "是否开启工作区删除保护,true：开启，false：关闭。",
+      "description": "Enable workspace deletion protection: true for enabled, false for disabled",
       "type": "boolean"
     },
     "Description": {
-      "description": "工作区描述信息，字符串形式，长度限制为 0～200。",
+      "description": "Workspace description, string, length limit 0–200",
       "semantic": "description",
       "type": "string"
     },
     "InstanceType": {
       "$ref": "#/definitions/InstanceType",
-      "description": "工作区规格详情。",
+      "description": "Workspace specification details",
       "type": "object"
     },
     "InstanceTypeId": {
-      "description": "工作区规格,vmp.standard.15d：15 天存储时长工作区。vmp.standard.30d：30 天存储时长工作区。vmp.standard.90d：90 天存储时长工作区。vmp.standard.180d：180 天存储时长工作区。vmp.standard.1y：1 年存储时长工作区。",
+      "description": "Workspace specifications: vmp.standard.15d: workspace with 15 days storage duration. vmp.standard.30d: workspace with 30 days storage duration. vmp.standard.90d: workspace with 90 days storage duration. vmp.standard.180d: workspace with 180 days storage duration. vmp.standard.1y: workspace with 1 year storage duration",
       "type": "string"
     },
     "Name": {
-      "description": "工作区名称，字符串形式，长度限制为 1～100。",
+      "description": "Workspace name, string, length limit 1–100",
       "maxLength": 100,
       "minLength": 1,
       "semantic": "resourceName",
       "type": "string"
     },
     "OverdueReclaimTime": {
-      "description": "工作区预期欠费回收时间，RFC3339 格式。",
+      "description": "Workspace expected overdue recovery time, RFC3339 format",
       "type": "string"
     },
     "Password": {
-      "description": "工作区 BasicAuth 密码。",
+      "description": "Workspace BasicAuth password",
       "type": "string"
     },
     "ProjectName": {
-      "description": "项目名称。",
+      "description": "Project name",
       "semantic": "projectName",
       "type": "string"
     },
+    "PrometheusPushEndpoint": {
+      "description": "Workspace public Push Gateway URL address.",
+      "type": "string"
+    },
     "PrometheusPushIntranetEndpoint": {
-      "description": "工作区 Push Gateway URL 地址。",
+      "description": "Workspace Push Gateway URL address",
+      "type": "string"
+    },
+    "PrometheusQueryEndpoint": {
+      "description": "Workspace public Query URL address.",
       "type": "string"
     },
     "PrometheusQueryIntranetEndpoint": {
-      "description": "工作区 Query URL 地址。",
+      "description": "Workspace Query URL address",
+      "type": "string"
+    },
+    "PrometheusWriteEndpoint": {
+      "description": "Workspace public RemoteWrite URL address.",
       "type": "string"
     },
     "PrometheusWriteIntranetEndpoint": {
-      "description": "工作区 RemoteWrite URL 地址。",
+      "description": "Workspace RemoteWrite URL address",
       "type": "string"
+    },
+    "PublicAccessEnabled": {
+      "description": "Whether to enable workspace public access capability. true: enabled, false: disabled.",
+      "type": "boolean"
+    },
+    "PublicQueryBandwidth": {
+      "description": "Workspace public Query bandwidth (Mbps).",
+      "format": "int64",
+      "type": "integer"
+    },
+    "PublicWriteBandwidth": {
+      "description": "Workspace public RemoteWrite bandwidth (Mbps).",
+      "format": "int64",
+      "type": "integer"
     },
     "Quota": {
       "$ref": "#/definitions/Quota",
-      "description": "工作区配额详情。",
+      "description": "Workspace quota details",
       "type": "object"
     },
+    "SearchLatencyOffset": {
+      "description": "Workspace public Query search latency offset.",
+      "type": "string"
+    },
     "Status": {
-      "description": "工作区状态，取值：Creating：创建中 Active：正常 Updating：更新中 Deleting：删除中 OverdueShutted：欠费关停 Resuming：恢复中 Error：错误。",
+      "description": "Workspace status. Values: Creating: creating Active: active Updating: updating Deleting: deleting OverdueShutted: overdue shutdown Resuming: resuming Error: error",
       "semantic": "status",
       "type": "string"
     },
     "Tags": {
-      "description": "工作区标签。",
+      "description": "Workspace tags",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -240,16 +334,16 @@
     },
     "Usage": {
       "$ref": "#/definitions/Usage",
-      "description": "工作区用量。",
+      "description": "Workspace usage",
       "type": "object"
     },
     "Username": {
-      "description": "工作区 BasicAuth 用户名。",
+      "description": "Workspace BasicAuth username",
       "pattern": "^[A-Za-z0-9_]+$",
       "type": "string"
     },
     "WorkspaceId": {
-      "description": "工作区Id。",
+      "description": "Workspace ID",
       "semantic": "resourceId",
       "type": "string"
     }
@@ -259,12 +353,14 @@
     "/properties/OverdueReclaimTime",
     "/properties/WorkspaceId",
     "/properties/Usage",
-    "/properties/Quota",
     "/properties/InstanceType",
     "/properties/Status",
     "/properties/PrometheusWriteIntranetEndpoint",
     "/properties/PrometheusQueryIntranetEndpoint",
-    "/properties/PrometheusPushIntranetEndpoint"
+    "/properties/PrometheusPushIntranetEndpoint",
+    "/properties/PrometheusPushEndpoint",
+    "/properties/PrometheusQueryEndpoint",
+    "/properties/PrometheusWriteEndpoint"
   ],
   "required": [
     "Name",
@@ -277,6 +373,9 @@
   },
   "typeName": "Volcengine::VMP::Workspace",
   "writeOnlyProperties": [
-    "/properties/Password"
+    "/properties/Password",
+    "/properties/BearerToken",
+    "/properties/Quota/PublicQueryBandwidth",
+    "/properties/Quota/PublicWriteBandwidth"
   ]
 }

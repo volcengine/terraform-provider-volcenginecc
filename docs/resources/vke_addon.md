@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vke_addon Resource - terraform-provider-volcenginecc"
 subcategory: "VKE"
 description: |-
-  集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。
+  The cluster supports installation of various types of components, including network, storage, monitoring, DNS, security, image, GPU, and more, to meet your diverse business needs. You can deploy, upgrade, or uninstall components as needed.
 ---
 
 # volcenginecc_vke_addon (Resource)
 
-集群中支持安装多种类型的组件，包括 网络、存储、监控、DNS、安全、镜像、GPU 等，满足您多种业务场景需求。您可按需部署、升级或卸载组件。
+The cluster supports installation of various types of components, including network, storage, monitoring, DNS, security, image, GPU, and more, to meet your diverse business needs. You can deploy, upgrade, or uninstall components as needed.
 
 ## Example Usage
 
@@ -27,31 +27,31 @@ resource "volcenginecc_vke_addon" "VKEAddonDemo" {
 
 ### Optional
 
-- `cluster_id` (String) 组件所在集群 ID。
-- `config` (String) 组件配置。
-- `deploy_mode` (String) 组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。
-- `deploy_node_type` (String) 部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。
-- `name` (String) 组件名称。
-- `status` (Attributes) 组件状态。 (see [below for nested schema](#nestedatt--status))
-- `version` (String) 组件版本。
+- `cluster_id` (String) Cluster ID where the component is located.
+- `config` (String) Component configuration.
+- `deploy_mode` (String) Component deployment mode. Values: Unmanaged: deployed in unmanaged mode. Managed: deployed in managed mode.
+- `deploy_node_type` (String) Type of deployment node. This parameter needs to be specified only when DeployModes=Unmanaged. Values: Node: deployed as a node. VirtualNode: deployed as a virtual node.
+- `name` (String) Component name.
+- `status` (Attributes) Component status. (see [below for nested schema](#nestedatt--status))
+- `version` (String) Component version.
 
 ### Read-Only
 
-- `created_time` (String) 安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。
+- `created_time` (String) Component installation time. Standard RFC3339 format, UTC+0 time.
 - `id` (String) Uniquely identifies the resource.
-- `updated_time` (String) 更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。
+- `updated_time` (String) Component update time. Standard RFC3339 format, UTC+0 time.
 
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`
 
 Optional:
 
-- `conditions` (Attributes Set) 组件当前主状态下的状态条件。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--status--conditions))
+- `conditions` (Attributes Set) Status conditions under the component's current primary state.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--status--conditions))
 
 Read-Only:
 
-- `phase` (String) 组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating
+- `phase` (String) Component status. Parameter values include: Running, Failed, Creating, Deleting, Updating
 
 <a id="nestedatt--status--conditions"></a>
 ### Nested Schema for `status.conditions`

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cen_grant_instance.example "instance_id|cen_id"

@@ -26,72 +26,72 @@ func hpcClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间，格式满足RFC3339。",
+		//	  "description": "Creation time, formatted according to RFC3339",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间，格式满足RFC3339。",
+			Description: "Creation time, formatted according to RFC3339",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高性能计算集群描述，默认为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0～255之间。",
+		//	  "description": "High performance compute cluster description. Defaults to an empty string. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 0 and 255 characters",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高性能计算集群描述，默认为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在0～255之间。",
+			Description: "High performance compute cluster description. Defaults to an empty string. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 0 and 255 characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HpcClusterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高性能计算集群ID。",
+		//	  "description": "High performance compute cluster ID",
 		//	  "type": "string"
 		//	}
 		"hpc_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高性能计算集群ID。",
+			Description: "High performance compute cluster ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高性能计算集群名称。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1～128之间。",
+		//	  "description": "High performance compute cluster name. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 1 and 128 characters",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高性能计算集群名称。必须以字母或中文开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1～128之间。",
+			Description: "High performance compute cluster name. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length must be between 1 and 128 characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息。",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签键值对。",
+		//	    "description": "Tag key-value pair",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -108,50 +108,50 @@ func hpcClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息。",
+			Description: "Tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间，格式满足RFC3339。",
+		//	  "description": "Update time, formatted according to RFC3339",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间，格式满足RFC3339。",
+			Description: "Update time, formatted according to RFC3339",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络ID。",
+		//	  "description": "Private network ID",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络ID。",
+			Description: "Private network ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高性能计算集群所属可用区ID。",
+		//	  "description": "Availability zone ID of the high performance compute cluster",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高性能计算集群所属可用区ID。",
+			Description: "Availability zone ID of the high performance compute cluster",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

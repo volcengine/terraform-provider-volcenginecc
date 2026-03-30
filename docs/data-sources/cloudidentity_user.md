@@ -21,15 +21,15 @@ Data Source schema for Volcengine::CloudIdentity::User
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `description` (String) 用户描述。
-- `display_name` (String) 用户显示名。
-- `email` (String) 邮箱。
-- `identity_type` (String) 身份类型。
-- `password` (String) 密码。密码长度8-32位字符,包含大写字母、小写字母、数字和物特殊符号至少3种。
-- `password_reset_required` (Boolean) 首次登陆需不需要重置密码。
-- `phone` (String) 手机号。
-- `source` (String) 用户来源。
-- `updated_time` (String) 更新时间。
-- `user_id` (String) 用户id。
-- `user_name` (String) 用户名。
+- `created_time` (String) Creation Time.
+- `description` (String) User Description.
+- `display_name` (String) User Display Name.
+- `email` (String) Email.
+- `identity_type` (String) Identity Type.
+- `password` (String) Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.
+- `password_reset_required` (Boolean) Is password reset required on first login?
+- `phone` (String) Mobile Number.
+- `source` (String) User Source.
+- `updated_time` (String) Update Time.
+- `user_id` (String) User ID.
+- `user_name` (String) Username.

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cloudidentity_group Resource - terraform-provider-volcenginecc"
 subcategory: "CloudIdentity"
 description: |-
-  当您需要批量为云身份中心用户进行SSO授权时，您可以先通过用户组进行批量的用户管理。
+  When you need to grant SSO authorization to Cloud Identity Center users in bulk, you can first manage users in bulk through user groups
 ---
 
 # volcenginecc_cloudidentity_group (Resource)
 
-当您需要批量为云身份中心用户进行SSO授权时，您可以先通过用户组进行批量的用户管理。
+When you need to grant SSO authorization to Cloud Identity Center users in bulk, you can first manage users in bulk through user groups
 
 ## Example Usage
 
@@ -33,30 +33,30 @@ resource "volcenginecc_cloudidentity_group" "CloudIdentityGroupDemo" {
 
 ### Required
 
-- `group_name` (String) 用户组名称。
-- `join_type` (String) 用户组类型。
+- `group_name` (String) User Group Name
+- `join_type` (String) User Group Type
 
 ### Optional
 
-- `description` (String) 描述。
-- `display_name` (String) 显示名。
-- `members` (Attributes Set) 用户组成员列表
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--members))
+- `description` (String) Description
+- `display_name` (String) Display Name
+- `members` (Attributes Set) User Group Member List
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--members))
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `group_id` (String) 用户组id。
+- `created_time` (String) Creation Time
+- `group_id` (String) User Group ID
 - `id` (String) Uniquely identifies the resource.
-- `source` (String) 用户组来源。
-- `updated_time` (String) 更新时间。
+- `source` (String) User Group Source
+- `updated_time` (String) Update Time
 
 <a id="nestedatt--members"></a>
 ### Nested Schema for `members`
 
 Optional:
 
-- `user_id` (String) 用户id。
+- `user_id` (String) User ID
 
 ## Import
 

@@ -30,11 +30,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号信息描述信息，长度不超过 256 个字符。",
+		//	  "description": "Account information description, maximum length 256 characters.",
 		//	  "type": "string"
 		//	}
 		"account_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号信息描述信息，长度不超过 256 个字符。",
+			Description: "Account information description, maximum length 256 characters.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -45,11 +45,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库账号名称。命名规则如下：长度为 2~32 个字符。以字母开头，以字母或数字结尾。由字母、数字、下划线（_）和中划线（-）组成。账号名称在实例内必须是唯一的。不能使用某些预留字，被禁用的预留字请参见禁用词列表。说明在高权限账号名称中可使用关键字 root 和 admin。",
+		//	  "description": "Database account name. Naming rules: Must be 2–32 characters long. Must start with a letter and end with a letter or number. Can contain letters, numbers, underscores (_), and hyphens (-). The account name must be unique within the instance. Certain reserved words cannot be used; for disabled reserved words, see the disabled word list. Note: The keywords root and admin can be used in high-privilege account names.",
 		//	  "type": "string"
 		//	}
 		"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库账号名称。命名规则如下：长度为 2~32 个字符。以字母开头，以字母或数字结尾。由字母、数字、下划线（_）和中划线（-）组成。账号名称在实例内必须是唯一的。不能使用某些预留字，被禁用的预留字请参见禁用词列表。说明在高权限账号名称中可使用关键字 root 和 admin。",
+			Description: "Database account name. Naming rules: Must be 2–32 characters long. Must start with a letter and end with a letter or number. Can contain letters, numbers, underscores (_), and hyphens (-). The account name must be unique within the instance. Certain reserved words cannot be used; for disabled reserved words, see the disabled word list. Note: The keywords root and admin can be used in high-privilege account names.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -59,11 +59,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库账号的密码。规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的至少三种组成。特殊字符为 !@#$%^\u0026*()_+-=,.\u0026?|/。",
+		//	  "description": "Database account password. Rules: Length must be 8–32 characters. Must include at least three of the following: uppercase letters, lowercase letters, numbers, special characters. Allowed special characters: !@#$%^\u0026*()_+-=,.\u0026?|/.",
 		//	  "type": "string"
 		//	}
 		"account_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库账号的密码。规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的至少三种组成。特殊字符为 !@#$%^&*()_+-=,.&?|/。",
+			Description: "Database account password. Rules: Length must be 8–32 characters. Must include at least three of the following: uppercase letters, lowercase letters, numbers, special characters. Allowed special characters: !@#$%^&*()_+-=,.&?|/.",
 			Required:    true,
 			// AccountPassword is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -71,17 +71,17 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号的指定数据库权限信息。说明当 AccountType 取值为 Super 时，无需为 AccountPrivileges 传值",
+		//	  "description": "Specified database privilege information for the account. Note: When AccountType is set to Super, AccountPrivileges does not need to be specified.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "账号的数据库权限信息。",
+		//	    "description": "Account database permission information.",
 		//	    "properties": {
 		//	      "AccountPrivilege": {
-		//	        "description": "数据库权限的类型。取值范围：ReadWrite：读写权限。ReadOnly：只读权限。DDLOnly：仅 DDL 权限。DMLOnly：仅 DML 权限。Custom：自定义权限。Global：全局权限。None：清除账号权限。说明该参数作为请求参数时，有以下注意事项：仅支持在作为请求参数时允许取值为 Global 和 None。权限类型为单选，传多个时会报错。仅 GrantDBAccountPrivilege 接口支持为 AccountPrivilege 取值 None。当 AccountPrivilege 取值 None 时，如果 DBName 的取值为空字符串，则清除账号的所有全局权限。如果 DBName 的取值为指定数据库，则清除账号在该数据库的所有权限。",
+		//	        "description": "Type of database permission. Value options: ReadWrite: read and write permission. ReadOnly: read-only permission. DDLOnly: DDL permission only. DMLOnly: DML permission only. Custom: custom permission. Global: global permission. None: clear account permission. Note: When used as a request parameter, pay attention to the following: Only Global and None are allowed as values when used as request parameters. Permission type is single-select; passing multiple values will result in an error. Only the GrantDBAccountPrivilege API supports None as a value for AccountPrivilege. When AccountPrivilege is set to None and DBName is an empty string, all global permissions for the account are cleared. If DBName is set to a specific database, all permissions for the account in that database are cleared.",
 		//	        "type": "string"
 		//	      },
 		//	      "AccountPrivilegeDetail": {
-		//	        "description": "账号的权限信息。当 AccountPrivilege 取值为 Custom 时，该字段的取值范围如下：SELECT INSERT UPDATE DELETE CREATE DROP REFERENCES INDEX ALTER CREATE TEMPORARY TABLES LOCK TABLES EXECUTE CREATE VIEW SHOW VIEW EVENT TRIGGER CREATE ROUTINE ALTER ROUTINE 当 AccountPrivilege 取值为 Global 时，该字段的取值范围如下：PROCESS REPLICATION SLAVE REPLICATION CLIENT SELECT INSERT UPDATE DELETE CREATE DROP RELOAD REFERENCES INDEX ALTER LOCK TABLES EXECUTE CREATE VIEW SHOW VIEW CREATE ROUTINE ALTER ROUTINE CREATE USER EVENT TRIGGER SHOW DATABASES CREATE TEMPORARY TABLES 说明  作为请求参数时，在 AccountPrivilege 取值为 Custom 时必填。 在 CreateDBAccount 接口中，会自动为账号赋予 REPLICATION SLAVE、PROCESS 和 REPLICATION CLIENT 全局权限。 可取多个值。使用英文逗号（,）分隔多个权限。写入方式为覆盖方式。",
+		//	        "description": "Account privilege information. When AccountPrivilege is set to Custom, the valid values for this field are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, EVENT, TRIGGER, CREATE ROUTINE, ALTER ROUTINE. When AccountPrivilege is set to Global, the valid values for this field are: PROCESS, REPLICATION SLAVE, REPLICATION CLIENT, SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER, SHOW DATABASES, CREATE TEMPORARY TABLES. Note: When used as a request parameter, this field is required if AccountPrivilege is set to Custom. In the CreateDBAccount API, REPLICATION SLAVE, PROCESS, and REPLICATION CLIENT global privileges are automatically granted to the account. Multiple values can be specified, separated by commas (,). The write mode is overwrite.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -90,7 +90,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "DBName": {
-		//	        "description": "需修改账号授权的或账号已有权限的数据库名称。说明在 CreateDBAccount 和 GrantDBAccountPrivilege 接口中作为请求参数时，需确认 DBName 对应的数据库已存在。进行全局授权的修改时，应为 DBName 传空字符。",
+		//	        "description": "The name of the database for which account authorization needs to be modified or for which the account already has privileges. Note: When used as a request parameter in the CreateDBAccount and GrantDBAccountPrivilege APIs, ensure that the database corresponding to DBName already exists. For global privilege modifications, set DBName to an empty string.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -104,7 +104,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccountPrivilege
 					"account_privilege": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "数据库权限的类型。取值范围：ReadWrite：读写权限。ReadOnly：只读权限。DDLOnly：仅 DDL 权限。DMLOnly：仅 DML 权限。Custom：自定义权限。Global：全局权限。None：清除账号权限。说明该参数作为请求参数时，有以下注意事项：仅支持在作为请求参数时允许取值为 Global 和 None。权限类型为单选，传多个时会报错。仅 GrantDBAccountPrivilege 接口支持为 AccountPrivilege 取值 None。当 AccountPrivilege 取值 None 时，如果 DBName 的取值为空字符串，则清除账号的所有全局权限。如果 DBName 的取值为指定数据库，则清除账号在该数据库的所有权限。",
+						Description: "Type of database permission. Value options: ReadWrite: read and write permission. ReadOnly: read-only permission. DDLOnly: DDL permission only. DMLOnly: DML permission only. Custom: custom permission. Global: global permission. None: clear account permission. Note: When used as a request parameter, pay attention to the following: Only Global and None are allowed as values when used as request parameters. Permission type is single-select; passing multiple values will result in an error. Only the GrantDBAccountPrivilege API supports None as a value for AccountPrivilege. When AccountPrivilege is set to None and DBName is an empty string, all global permissions for the account are cleared. If DBName is set to a specific database, all permissions for the account in that database are cleared.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -114,7 +114,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AccountPrivilegeDetail
 					"account_privilege_detail": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "账号的权限信息。当 AccountPrivilege 取值为 Custom 时，该字段的取值范围如下：SELECT INSERT UPDATE DELETE CREATE DROP REFERENCES INDEX ALTER CREATE TEMPORARY TABLES LOCK TABLES EXECUTE CREATE VIEW SHOW VIEW EVENT TRIGGER CREATE ROUTINE ALTER ROUTINE 当 AccountPrivilege 取值为 Global 时，该字段的取值范围如下：PROCESS REPLICATION SLAVE REPLICATION CLIENT SELECT INSERT UPDATE DELETE CREATE DROP RELOAD REFERENCES INDEX ALTER LOCK TABLES EXECUTE CREATE VIEW SHOW VIEW CREATE ROUTINE ALTER ROUTINE CREATE USER EVENT TRIGGER SHOW DATABASES CREATE TEMPORARY TABLES 说明  作为请求参数时，在 AccountPrivilege 取值为 Custom 时必填。 在 CreateDBAccount 接口中，会自动为账号赋予 REPLICATION SLAVE、PROCESS 和 REPLICATION CLIENT 全局权限。 可取多个值。使用英文逗号（,）分隔多个权限。写入方式为覆盖方式。",
+						Description: "Account privilege information. When AccountPrivilege is set to Custom, the valid values for this field are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, EVENT, TRIGGER, CREATE ROUTINE, ALTER ROUTINE. When AccountPrivilege is set to Global, the valid values for this field are: PROCESS, REPLICATION SLAVE, REPLICATION CLIENT, SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER, SHOW DATABASES, CREATE TEMPORARY TABLES. Note: When used as a request parameter, this field is required if AccountPrivilege is set to Custom. In the CreateDBAccount API, REPLICATION SLAVE, PROCESS, and REPLICATION CLIENT global privileges are automatically granted to the account. Multiple values can be specified, separated by commas (,). The write mode is overwrite.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -123,7 +123,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: DBName
 					"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "需修改账号授权的或账号已有权限的数据库名称。说明在 CreateDBAccount 和 GrantDBAccountPrivilege 接口中作为请求参数时，需确认 DBName 对应的数据库已存在。进行全局授权的修改时，应为 DBName 传空字符。",
+						Description: "The name of the database for which account authorization needs to be modified or for which the account already has privileges. Note: When used as a request parameter in the CreateDBAccount and GrantDBAccountPrivilege APIs, ensure that the database corresponding to DBName already exists. For global privilege modifications, set DBName to an empty string.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -132,7 +132,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "账号的指定数据库权限信息。说明当 AccountType 取值为 Super 时，无需为 AccountPrivileges 传值\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Specified database privilege information for the account. Note: When AccountType is set to Super, AccountPrivileges does not need to be specified.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -143,7 +143,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号的指定数据库权限信息的 SQL 语句。",
+		//	  "description": "SQL statement for the account's specified database permission information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -153,7 +153,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"account_privileges_sql": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "账号的指定数据库权限信息的 SQL 语句。",
+			Description: "SQL statement for the account's specified database permission information.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -163,11 +163,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号状态，取值为：Unavailable：不可用。Available：可用。",
+		//	  "description": "Account status. Values: Unavailable: unavailable. Available: available.",
 		//	  "type": "string"
 		//	}
 		"account_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号状态，取值为：Unavailable：不可用。Available：可用。",
+			Description: "Account status. Values: Unavailable: unavailable. Available: available.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -177,18 +177,18 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号类型，取值范围：Super：高权限账号。Normal：普通账号。",
+		//	  "description": "Account type. Value options: Super: high-privilege account. Normal: regular account.",
 		//	  "type": "string"
 		//	}
 		"account_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号类型，取值范围：Super：高权限账号。Normal：普通账号。",
+			Description: "Account type. Value options: Super: high-privilege account. Normal: regular account.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HasTableColumnPrivilegeDBNames
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号拥有的表列权限所属的数据库。说明如果账号没有表列权限，则不返回该字段。",
+		//	  "description": "The database to which the account's table/column privileges belong. Note: If the account does not have table/column privileges, this field will not be returned.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -198,7 +198,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"has_table_column_privilege_db_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "账号拥有的表列权限所属的数据库。说明如果账号没有表列权限，则不返回该字段。",
+			Description: "The database to which the account's table/column privileges belong. Note: If the account does not have table/column privileges, this field will not be returned.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -208,11 +208,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "指定的数据库账号可以访问数据库的 IP 地址。",
+		//	  "description": "IP address from which the specified database account can access the database.",
 		//	  "type": "string"
 		//	}
 		"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "指定的数据库账号可以访问数据库的 IP 地址。",
+			Description: "IP address from which the specified database account can access the database.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -224,11 +224,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -238,19 +238,19 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号的表列权限设置。",
+		//	  "description": "Account table column permission settings.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "账号的表列权限信息。",
+		//	    "description": "Table/column privilege information for the account.",
 		//	    "properties": {
 		//	      "ColumnPrivileges": {
-		//	        "description": "账号的列权限信息。",
+		//	        "description": "Account column permission information.",
 		//	        "insertionOrder": false,
 		//	        "items": {
-		//	          "description": "账号的列权限信息。",
+		//	          "description": "Account column permission information.",
 		//	          "properties": {
 		//	            "AccountPrivilegeDetail": {
-		//	              "description": "对账号进行列权限设置的权限信息。取值（可多选）：INSERT REFERENCES SELECT UPDATE说明多个权限之间使用英文逗号（,）分隔。",
+		//	              "description": "Permission information for setting column permissions for the account. Values (multiple selections allowed): INSERT, REFERENCES, SELECT, UPDATE. Note: Use commas (,) to separate multiple permissions.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -259,11 +259,11 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		//	              "uniqueItems": true
 		//	            },
 		//	            "ColumnName": {
-		//	              "description": "对账号进行列权限设置的列的名称。",
+		//	              "description": "Name of the column for setting column permissions for the account.",
 		//	              "type": "string"
 		//	            },
 		//	            "TableName": {
-		//	              "description": "对账号进行列权限设置的表所属的数据库的名称。",
+		//	              "description": "Name of the database to which the table belongs for setting column permissions for the account.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -273,17 +273,17 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "DBName": {
-		//	        "description": "对账号进行权限设置的表所属的数据库的名称。",
+		//	        "description": "Name of the database to which the table belongs for setting permissions for the account.",
 		//	        "type": "string"
 		//	      },
 		//	      "TablePrivileges": {
-		//	        "description": "账号的表权限信息。",
+		//	        "description": "Account table permission information.",
 		//	        "insertionOrder": false,
 		//	        "items": {
-		//	          "description": "账号的表权限信息。",
+		//	          "description": "Account table permission information.",
 		//	          "properties": {
 		//	            "AccountPrivilegeDetail": {
-		//	              "description": "账号的表权限。取值范围（可多选）：ALTER CREATE DELETE DROP INDEX INSERT SELECT SHOW VIEW TRIGGER UPDATE CREATE VIEW REFERENCES 说明多个权限之间使用英文逗号（,）分隔。",
+		//	              "description": "Account table permissions. Value options (multiple selections allowed): ALTER, CREATE, DELETE, DROP, INDEX, INSERT, SELECT, SHOW, VIEW, TRIGGER, UPDATE, CREATE VIEW, REFERENCES. Note: Use commas (,) to separate multiple permissions.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -292,7 +292,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 		//	              "uniqueItems": true
 		//	            },
 		//	            "TableName": {
-		//	              "description": "对账号进行权限设置的表的名称。",
+		//	              "description": "Name of the table for setting permissions for the account.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -317,7 +317,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 								// Property: AccountPrivilegeDetail
 								"account_privilege_detail": schema.SetAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "对账号进行列权限设置的权限信息。取值（可多选）：INSERT REFERENCES SELECT UPDATE说明多个权限之间使用英文逗号（,）分隔。",
+									Description: "Permission information for setting column permissions for the account. Values (multiple selections allowed): INSERT, REFERENCES, SELECT, UPDATE. Note: Use commas (,) to separate multiple permissions.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -326,7 +326,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ColumnName
 								"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "对账号进行列权限设置的列的名称。",
+									Description: "Name of the column for setting column permissions for the account.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -335,7 +335,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: TableName
 								"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "对账号进行列权限设置的表所属的数据库的名称。",
+									Description: "Name of the database to which the table belongs for setting column permissions for the account.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -344,7 +344,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "账号的列权限信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Account column permission information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -353,7 +353,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: DBName
 					"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "对账号进行权限设置的表所属的数据库的名称。",
+						Description: "Name of the database to which the table belongs for setting permissions for the account.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -367,7 +367,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 								// Property: AccountPrivilegeDetail
 								"account_privilege_detail": schema.SetAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "账号的表权限。取值范围（可多选）：ALTER CREATE DELETE DROP INDEX INSERT SELECT SHOW VIEW TRIGGER UPDATE CREATE VIEW REFERENCES 说明多个权限之间使用英文逗号（,）分隔。",
+									Description: "Account table permissions. Value options (multiple selections allowed): ALTER, CREATE, DELETE, DROP, INDEX, INSERT, SELECT, SHOW, VIEW, TRIGGER, UPDATE, CREATE VIEW, REFERENCES. Note: Use commas (,) to separate multiple permissions.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -376,7 +376,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: TableName
 								"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "对账号进行权限设置的表的名称。",
+									Description: "Name of the table for setting permissions for the account.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -385,7 +385,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "账号的表权限信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Account table permission information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -394,7 +394,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "账号的表列权限设置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Account table column permission settings.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -413,7 +413,7 @@ func dBAccountResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "数据库账号",
+		Description: "Database account.",
 		Version:     1,
 		Attributes:  attributes,
 	}

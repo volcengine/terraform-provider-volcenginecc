@@ -29,11 +29,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -43,11 +43,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述。",
+		//	  "description": "Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述。",
+			Description: "Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -58,11 +58,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "显示名。",
+		//	  "description": "Display Name",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "显示名。",
+			Description: "Display Name",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -73,11 +73,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组id。",
+		//	  "description": "User Group ID",
 		//	  "type": "string"
 		//	}
 		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组id。",
+			Description: "User Group ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -87,11 +87,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组名称。",
+		//	  "description": "User Group Name",
 		//	  "type": "string"
 		//	}
 		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组名称。",
+			Description: "User Group Name",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -101,11 +101,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组类型。",
+		//	  "description": "User Group Type",
 		//	  "type": "string"
 		//	}
 		"join_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组类型。",
+			Description: "User Group Type",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -115,45 +115,45 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组成员列表",
+		//	  "description": "User Group Member List",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "用户组成员信息",
+		//	    "description": "User Group Member Information",
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "用户描述信息",
+		//	        "description": "User Description",
 		//	        "type": "string"
 		//	      },
 		//	      "DisplayName": {
-		//	        "description": "用户显示名称。",
+		//	        "description": "User Display Name",
 		//	        "type": "string"
 		//	      },
 		//	      "Email": {
-		//	        "description": "用户邮箱。",
+		//	        "description": "User Email",
 		//	        "type": "string"
 		//	      },
 		//	      "IdentityType": {
-		//	        "description": "用户身份类型。",
+		//	        "description": "User Identity Type",
 		//	        "type": "string"
 		//	      },
 		//	      "JoinTime": {
-		//	        "description": "用户加入用户组的时间。",
+		//	        "description": "User Group Join Time",
 		//	        "type": "string"
 		//	      },
 		//	      "Phone": {
-		//	        "description": "用户手机号。",
+		//	        "description": "User Phone Number",
 		//	        "type": "string"
 		//	      },
 		//	      "Source": {
-		//	        "description": "用户来源。",
+		//	        "description": "User Source",
 		//	        "type": "string"
 		//	      },
 		//	      "UserId": {
-		//	        "description": "用户id。",
+		//	        "description": "User ID",
 		//	        "type": "string"
 		//	      },
 		//	      "UserName": {
-		//	        "description": "用户名。",
+		//	        "description": "Username",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -174,7 +174,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Source
 					// Property: UserId
 					"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户id。",
+						Description: "User ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -184,7 +184,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: UserName
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "用户组成员列表\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "User Group Member List\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -195,11 +195,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组来源。",
+		//	  "description": "User Group Source",
 		//	  "type": "string"
 		//	}
 		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组来源。",
+			Description: "User Group Source",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -209,11 +209,11 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -231,7 +231,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "当您需要批量为云身份中心用户进行SSO授权时，您可以先通过用户组进行批量的用户管理。",
+		Description: "When you need to grant SSO authorization to Cloud Identity Center users in bulk, you can first manage users in bulk through user groups",
 		Version:     1,
 		Attributes:  attributes,
 	}

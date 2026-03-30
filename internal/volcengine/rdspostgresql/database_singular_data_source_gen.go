@@ -26,77 +26,77 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "字符分类。取值范围： C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX。",
+		//	  "description": "Character classification. Supported values: C (default), C.UTF-8, en_US.utf8, zh_CN.utf8, and POSIX",
 		//	  "type": "string"
 		//	}
 		"c_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "字符分类。取值范围： C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX。",
+			Description: "Character classification. Supported values: C (default), C.UTF-8, en_US.utf8, zh_CN.utf8, and POSIX",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CharacterSetName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库字符集。目前支持的字符集包含：utf8（默认）、latin1、ascii",
+		//	  "description": "Database character set. Supported character sets: utf8 (default), latin1, ascii",
 		//	  "type": "string"
 		//	}
 		"character_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库字符集。目前支持的字符集包含：utf8（默认）、latin1、ascii",
+			Description: "Database character set. Supported character sets: utf8 (default), latin1, ascii",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Collate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "排序规则。取值范围：C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX",
+		//	  "description": "Collation. Supported values: C (default), C.UTF-8, en_US.utf8, zh_CN.utf8, and POSIX",
 		//	  "type": "string"
 		//	}
 		"collate": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "排序规则。取值范围：C（默认）、C.UTF-8、en_US.utf8、zh_CN.utf8 和 POSIX",
+			Description: "Collation. Supported values: C (default), C.UTF-8, en_US.utf8, zh_CN.utf8, and POSIX",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库名称。命名规则如下：长度 2~63 个字符。由字母、数字、下划线或中划线组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。",
+		//	  "description": "Database name. Naming rules: Length must be 2–63 characters. Can contain letters, numbers, underscores, or hyphens. Must start with a letter and end with a letter or number. Reserved keywords are not allowed. For a list of all disabled keywords, see Disabled Keywords.",
 		//	  "type": "string"
 		//	}
 		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库名称。命名规则如下：长度 2~63 个字符。由字母、数字、下划线或中划线组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。",
+			Description: "Database name. Naming rules: Length must be 2–63 characters. Can contain letters, numbers, underscores, or hyphens. Must start with a letter and end with a letter or number. Reserved keywords are not allowed. For a list of all disabled keywords, see Disabled Keywords.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库状态：Unavailable：不可用。Available：可用。",
+		//	  "description": "Database status: Unavailable: Not available. Available: Available.",
 		//	  "type": "string"
 		//	}
 		"db_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库状态：Unavailable：不可用。Available：可用。",
+			Description: "Database status: Unavailable: Not available. Available: Available.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库的 owner。说明：实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为数据库的 owner。不传值或传空值时，会为该字段取值为 rds superuser",
+		//	  "description": "Database owner. Note: Read-only instance accounts, high-privilege accounts with DDL permissions disabled, or regular accounts with DDL permissions disabled cannot be set as the database owner. If no value is provided or the value is empty, this field defaults to rds superuser",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库的 owner。说明：实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为数据库的 owner。不传值或传空值时，会为该字段取值为 rds superuser",
+			Description: "Database owner. Note: Read-only instance accounts, high-privilege accounts with DDL permissions disabled, or regular accounts with DDL permissions disabled cannot be set as the database owner. If no value is provided or the value is empty, this field defaults to rds superuser",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

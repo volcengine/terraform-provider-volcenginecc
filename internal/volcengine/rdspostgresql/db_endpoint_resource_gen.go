@@ -31,49 +31,49 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "地址列表。",
+		//	  "description": "Address list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "连接终端地址。",
+		//	    "description": "Connection endpoint address.",
 		//	    "properties": {
 		//	      "CrossRegionDomain": {
-		//	        "description": "可跨地域访问的私网地址。说明无此地址时则不返回该字段。",
+		//	        "description": "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
 		//	        "type": "string"
 		//	      },
 		//	      "DNSVisibility": {
-		//	        "description": "是否开启公网解析。取值为：false：默认值，私网解析。true：私网以及公网解析。",
+		//	        "description": "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Domain": {
-		//	        "description": "连接域名。",
+		//	        "description": "Connection domain name",
 		//	        "type": "string"
 		//	      },
 		//	      "DomainPrefix": {
-		//	        "description": "新的访问地址前缀。访问地址前缀应满足以下规则：由小写字母、数字和中划线（-）组成。至少包含 8 个字符，总长度（含后缀）不得超过 63 个字符。以小写字母开头，以小写字母或数字结尾。",
+		//	        "description": "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
 		//	        "type": "string"
 		//	      },
 		//	      "DomainVisibilitySetting": {
-		//	        "description": "私网地址类型。取值：LocalDomain：本地域域名。CrossRegionDomain：可跨地域访问域名。",
+		//	        "description": "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
 		//	        "type": "string"
 		//	      },
 		//	      "EipId": {
-		//	        "description": "EIP 的 ID，仅对 Public 地址有效。",
+		//	        "description": "EIP ID, valid only for Public addresses.",
 		//	        "type": "string"
 		//	      },
 		//	      "IPAddress": {
-		//	        "description": "IP 地址。",
+		//	        "description": "IP address",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkType": {
-		//	        "description": "网络地址类型，取值为：Private：私网连接地址。Public：公网连接地址。Inner：公共服务区地址。",
+		//	        "description": "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "端口号。",
+		//	        "description": "Port number.",
 		//	        "type": "string"
 		//	      },
 		//	      "SubnetId": {
-		//	        "description": "子网 ID。",
+		//	        "description": "Subnet ID",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -88,7 +88,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CrossRegionDomain
 					// Property: DNSVisibility
 					"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否开启公网解析。取值为：false：默认值，私网解析。true：私网以及公网解析。",
+						Description: "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -98,7 +98,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Domain
 					// Property: DomainPrefix
 					"domain_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "新的访问地址前缀。访问地址前缀应满足以下规则：由小写字母、数字和中划线（-）组成。至少包含 8 个字符，总长度（含后缀）不得超过 63 个字符。以小写字母开头，以小写字母或数字结尾。",
+						Description: "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -112,7 +112,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NetworkType
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "端口号。",
+						Description: "Port number.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -122,7 +122,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SubnetId
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "地址列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Address list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -133,11 +133,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：Enable：自动加入。Disable：不自动加入（默认）。",
+		//	  "description": "When the endpoint type is read/write or read-only, you can configure whether new nodes are automatically added. Values: Enable: Automatically add. Disable: Do not automatically add (default).",
 		//	  "type": "string"
 		//	}
 		"auto_add_new_nodes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：Enable：自动加入。Disable：不自动加入（默认）。",
+			Description: "When the endpoint type is read/write or read-only, you can configure whether new nodes are automatically added. Values: Enable: Automatically add. Disable: Do not automatically add (default).",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -147,11 +147,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "地址描述。",
+		//	  "description": "Address description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "地址描述。",
+			Description: "Address description",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -161,11 +161,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已开启全局只读。Enable：开启。Disable：未开启。",
+		//	  "description": "Whether global read-only is enabled. Enable: Enabled. Disable: Not enabled.",
 		//	  "type": "string"
 		//	}
 		"enable_read_only": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已开启全局只读。Enable：开启。Disable：未开启。",
+			Description: "Whether global read-only is enabled. Enable: Enabled. Disable: Not enabled.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -175,11 +175,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已开启读写分离，取值：Enable：开启。Disable：未开启。",
+		//	  "description": "Whether read/write splitting is enabled. Values: Enable: Enabled. Disable: Not enabled.",
 		//	  "type": "string"
 		//	}
 		"enable_read_write_splitting": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已开启读写分离，取值：Enable：开启。Disable：未开启。",
+			Description: "Whether read/write splitting is enabled. Values: Enable: Enabled. Disable: Not enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -190,11 +190,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例连接终端 ID。",
+		//	  "description": "Instance connection endpoint ID.",
 		//	  "type": "string"
 		//	}
 		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例连接终端 ID。",
+			Description: "Instance connection endpoint ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -204,11 +204,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例连接终端名称。",
+		//	  "description": "Instance connection endpoint name.",
 		//	  "type": "string"
 		//	}
 		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例连接终端名称。",
+			Description: "Instance connection endpoint name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -219,11 +219,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端类型：Cluster：默认终端（默认创建）。Custom：自定义终端。",
+		//	  "description": "Endpoint type: Cluster: default endpoint (created by default). Custom: custom endpoint.",
 		//	  "type": "string"
 		//	}
 		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端类型：Cluster：默认终端（默认创建）。Custom：自定义终端。",
+			Description: "Endpoint type: Cluster: default endpoint (created by default). Custom: custom endpoint.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -235,11 +235,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -251,11 +251,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端配置的节点列表。说明当 EndpointType 为 Custom 时必选。主节点无需传节点 ID，传入 Primary 字符串即可。",
+		//	  "description": "List of nodes configured for the connection endpoint. Note: Required when EndpointType is Custom. The primary node does not require a node ID; use the string 'Primary'.",
 		//	  "type": "string"
 		//	}
 		"nodes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "连接终端配置的节点列表。说明当 EndpointType 为 Custom 时必选。主节点无需传节点 ID，传入 Primary 字符串即可。",
+			Description: "List of nodes configured for the connection endpoint. Note: Required when EndpointType is Custom. The primary node does not require a node ID; use the string 'Primary'.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -268,11 +268,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "只读权重分配模式。取值：Default：标准权重分配（默认值）。Custom：自定义权重分配。",
+		//	  "description": "Read-only weight allocation mode. Values: Default: standard weight allocation (default). Custom: custom weight allocation.",
 		//	  "type": "string"
 		//	}
 		"read_only_node_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "只读权重分配模式。取值：Default：标准权重分配（默认值）。Custom：自定义权重分配。",
+			Description: "Read-only weight allocation mode. Values: Default: standard weight allocation (default). Custom: custom weight allocation.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -283,12 +283,12 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "只读节点的最大延迟阈值，当只读节点延迟时间超过该值时，读取流量不发往该节点，单位：秒。取值：0~3600。默认值：30。说明支持对开通了读写分离的默认终端设置此参数。",
+		//	  "description": "Maximum latency threshold for read-only nodes. When the latency of a read-only node exceeds this value, read traffic will not be sent to that node. Unit: seconds. Range: 0~3600. Default: 30. Note: This parameter can be set for default endpoints with read/write splitting enabled.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"read_only_node_max_delay_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "只读节点的最大延迟阈值，当只读节点延迟时间超过该值时，读取流量不发往该节点，单位：秒。取值：0~3600。默认值：30。说明支持对开通了读写分离的默认终端设置此参数。",
+			Description: "Maximum latency threshold for read-only nodes. When the latency of a read-only node exceeds this value, read traffic will not be sent to that node. Unit: seconds. Range: 0~3600. Default: 30. Note: This parameter can be set for default endpoints with read/write splitting enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -299,21 +299,21 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端配置的节点列表及对应的只读权重。",
+		//	  "description": "List of nodes configured for the connection endpoint and their corresponding read-only weights.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "只读节点权重。",
+		//	    "description": "Read-only node weight.",
 		//	    "properties": {
 		//	      "NodeId": {
-		//	        "description": "只读节点需要传入 NodeId。",
+		//	        "description": "Read-only nodes require the NodeId to be provided.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeType": {
-		//	        "description": "节点类型。取值：Primary：主节点。ReadOnly：只读节点。",
+		//	        "description": "Node type. Values: Primary: primary node. ReadOnly: read-only node.",
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {
-		//	        "description": "节点的读权重，以 100 递增，最大值为 40000。说明权重不可全部设置为 0。",
+		//	        "description": "Read weight of the node, increases in increments of 100, maximum value is 40000. Note: Weights cannot all be set to 0.",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      }
@@ -328,7 +328,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: NodeId
 					"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "只读节点需要传入 NodeId。",
+						Description: "Read-only nodes require the NodeId to be provided.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -337,7 +337,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: NodeType
 					"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点类型。取值：Primary：主节点。ReadOnly：只读节点。",
+						Description: "Node type. Values: Primary: primary node. ReadOnly: read-only node.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -346,7 +346,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "节点的读权重，以 100 递增，最大值为 40000。说明权重不可全部设置为 0。",
+						Description: "Read weight of the node, increases in increments of 100, maximum value is 40000. Note: Weights cannot all be set to 0.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -355,7 +355,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "连接终端配置的节点列表及对应的只读权重。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "List of nodes configured for the connection endpoint and their corresponding read-only weights.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -366,11 +366,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "读写模式：ReadWrite：读写。ReadOnly：只读。",
+		//	  "description": "Read/write mode: ReadWrite: read/write. ReadOnly: read-only.",
 		//	  "type": "string"
 		//	}
 		"read_write_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "读写模式：ReadWrite：读写。ReadOnly：只读。",
+			Description: "Read/write mode: ReadWrite: read/write. ReadOnly: read-only.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -382,12 +382,12 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端开启读写分离后，为终端设置的代理连接数。代理连接数的取值下限为 20。代理连接数的取值上限取决于实例主节点的规格，不同规格支持的代理连接数上限不同，详细信息请参见产品规格。",
+		//	  "description": "After enabling read/write splitting for the endpoint, set the number of proxy connections for the endpoint. The minimum value for proxy connections is 20. The maximum value depends on the specifications of the primary node; different specifications support different maximum proxy connections. For details, see product specifications.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"read_write_proxy_connection": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "终端开启读写分离后，为终端设置的代理连接数。代理连接数的取值下限为 20。代理连接数的取值上限取决于实例主节点的规格，不同规格支持的代理连接数上限不同，详细信息请参见产品规格。",
+			Description: "After enabling read/write splitting for the endpoint, set the number of proxy connections for the endpoint. The minimum value for proxy connections is 20. The maximum value depends on the specifications of the primary node; different specifications support different maximum proxy connections. For details, see product specifications.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -398,11 +398,11 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端是否将写请求发送给写节点（目前仅主节点为写节点）。取值：true：是。默认值。false：否。",
+		//	  "description": "Whether the endpoint sends write requests to the write node (currently only the primary node is the write node). Values: true: Yes (default). false: No.",
 		//	  "type": "boolean"
 		//	}
 		"write_node_halt_writing": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "终端是否将写请求发送给写节点（目前仅主节点为写节点）。取值：true：是。默认值。false：否。",
+			Description: "Whether the endpoint sends write requests to the write node (currently only the primary node is the write node). Values: true: Yes (default). false: No.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -421,7 +421,7 @@ func dBEndpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "连接终端是位于数据库和应用程序之间的网络代理服务，用于代理应用程序访问数据库时的所有请求，具有高可用、高性能、可运维、简单易用等特点，支持读写分离和负载均衡等高级功能。云数据库 PostgreSQL 版提供了默认终端和自定义只读终端两种类型。",
+		Description: "The connection endpoint is a network proxy service positioned between the database and the application, handling all requests from the application to the database. It features high availability, high performance, maintainability, and ease of use, and supports advanced functions such as read/write splitting and load balancing. The PostgreSQL cloud database provides two types of endpoints: default endpoint and custom read-only endpoint.",
 		Version:     1,
 		Attributes:  attributes,
 	}

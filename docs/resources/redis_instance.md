@@ -2,12 +2,12 @@
 page_title: "volcenginecc_redis_instance Resource - terraform-provider-volcenginecc"
 subcategory: "Redis"
 description: |-
-  缓存数据库 Redis 版的基本单位是实例。实例是独立的、虚拟化的数据库运行环境，是多个数据节点与代理节点的集合，数据节点上运行 Redis 引擎。
+  The basic unit of Redis cache database is the instance. An instance is an independent, virtualized database runtime environment, consisting of multiple data nodes and proxy nodes. The Redis engine runs on the data nodes.
 ---
 
 # volcenginecc_redis_instance (Resource)
 
-缓存数据库 Redis 版的基本单位是实例。实例是独立的、虚拟化的数据库运行环境，是多个数据节点与代理节点的集合，数据节点上运行 Redis 引擎。
+The basic unit of Redis cache database is the instance. An instance is an independent, virtualized database runtime environment, consisting of multiple data nodes and proxy nodes. The Redis engine runs on the data nodes.
 
 ## Example Usage
 
@@ -46,68 +46,68 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 
 ### Required
 
-- `configure_nodes` (Attributes List) 设置节点所属的可用区列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--configure_nodes))
-- `engine_version` (String) 数据库版本号。
-- `multi_az` (String) 设置实例的可用区部署方案。
-- `node_number` (Number) 每个分片中的节点数。取值范围为1~6。每个账号在每个地域下默认最多可创建4个256MiB规格的节点，若需要调整配额上限为10个，请参见账号配额。取值为1时表示创建单节点实例；取值大于1时表示创建主备实例。关于两种类型实例的功能特性差异详情，请参见功能特性差异。
-- `shard_capacity` (Number) 实例中每个分片的内存容量。单位：MiB。
-- `sharded_cluster` (Number) 是否启用分片集群。取值范围如下：0：不启用。1：启用。
-- `subnet_id` (String) 设置实例的子网ID。子网具有可用区属性，必须选择目标私有网络中与实例属于同一可用区下的子网。子网是私有网络内的IP地址块私有网络中的所有云资源都必须部署在子网内，子网为云资源分配私网IP地址，您可以调用CreateSubnet接口创建子网。您可以调用DescribeSubnets接口查询指定可用区内的所有子网列表信息，包括子网ID。
-- `vpc_id` (String) 设置实例的私有网络ID。建议Redis实例与需要连接的ECS实例在同一私有网络，否则它们无法通过内网互通来实现最佳性能。您可以调用CreateVpc接口创建私有网络。您可以调用DescribeVpcs接口查询符合指定条件的私有网络信息，包括私有网络ID。
+- `configure_nodes` (Attributes List) Set the list of availability zones to which the node belongs.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--configure_nodes))
+- `engine_version` (String) Database version number.
+- `multi_az` (String) Set the deployment scheme for the instance's availability zone.
+- `node_number` (Number) Number of nodes in each shard. Value range: 1–6. By default, each account can create up to 4 nodes of 256 MiB specification per region. To increase the quota limit to 10, see Account Quotas. A value of 1 creates a single-node instance; a value greater than 1 creates a primary-secondary instance. For details on the differences between these two types of instances, see Feature Differences.
+- `shard_capacity` (Number) Memory capacity of each shard in the instance. Unit: MiB.
+- `sharded_cluster` (Number) Whether to enable sharded cluster. Value options: 0: Disabled. 1: Enabled.
+- `subnet_id` (String) Set the subnet ID for the instance. Subnets have availability zone attributes; you must select a subnet in the target private network that belongs to the same availability zone as the instance. A subnet is an IP address block within a private network. All cloud resources in the private network must be deployed in a subnet. The subnet assigns private IP addresses to cloud resources. You can call the CreateSubnet API to create a subnet. You can call the DescribeSubnets API to query the list of all subnets in a specified availability zone, including subnet IDs.
+- `vpc_id` (String) Set the private network ID for the instance. It is recommended that the Redis instance and the ECS instance you want to connect to are in the same private network; otherwise, they cannot communicate optimally via the internal network. You can call the CreateVpc API to create a private network. You can call the DescribeVpcs API to query private network information that meets specified conditions, including the private network ID.
 
 ### Optional
 
-- `allow_list_ids` (Set of String) 白名单 ID 列表。若该参数留空，新建实例默认不加入任何白名单。您可以调用 DescribeAllowLists 接口查询当前账号下指定地域内的所有 IP 白名单信息，包括白名单 ID 信息。每个实例最多支持绑定 100 个白名单，每次可最多批量绑定 100 个白名单。每个实例最多支持绑定 1000 个 IP 地址或 CIDR 格式的 IP 地址段。
-- `auto_renew` (Boolean) 是否开启自动续费。取值范围如下：false（默认值）：不开启。true：开启。
-- `backup_point_name` (String) 为变更前创建的全量备份设置备份名称。
-- `charge_type` (String) 实例计费类型。取值范围如下：PrePaid：包年包月（也称预付费）。PostPaid：按量计费（也称后付费）。
-- `create_backup` (Boolean) 是否在变更前创建备份。
-- `deletion_protection` (String) 开启或关闭实例删除保护功能。
-- `instance_name` (String) 实例名称。命名规则：不能以数字、中划线（-）开头；只能包含中文、字母、数字、下划线（_）和中划线（-）；长度需要在1~128个字符内。
-- `no_auth_mode` (String) 为新建实例开启或关闭免密访问功能。取值范围如下：open：开启免密访问。close（默认值）：关闭免密访问。
-- `parameter_group_id` (String) 需要应用到新实例的参数模板。缓存数据库 Redis 版为每个数据库版本都创建了一份默认的系统参数模板，模板中包含了该版本支持设置的所有参数和默认参数值。若该参数留空，默认会根据您设置的数据库版本（即 EngineVersion）为新建实例选择并应用对应版本的系统参数模板。您可以调用 DescribeParameterGroups 接口查询当前账号和地域下的所有参数模板的基本信息，包括参数模板 ID。
-- `password` (String) 设置默认数据库 default 账号的密码。
-- `port` (Number) 自定义私网连接地址的端口号。取值范围：1024~65535。若该参数留空，私网连接地址默认使用6379端口。实例创建成功后，还可以修改私网地址的端口号，修改方法请参见修改端口号。
-- `project_name` (String) 实例所属的项目。
-- `purchase_months` (Number) 购买时长，单位：月。取值范围如下：按月购买：1，2，3，4，5，6，7，8，9。按年购买：12，24，36。当ChargeType为PrePaid时，该参数必填。
-- `reserve_additional_bandwidth` (Boolean) 设置是否保留额外带宽
-- `shard_number` (Number) 实例中的分片数量。取值范围为 2~256。仅当 ShardedCluster 取值为 1（即启用分片集群）时，需要指定该参数。
-- `tags` (Attributes Set) 设置实例的标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `allow_list_ids` (Set of String) Allowlist ID list. If left empty, the new instance will not be added to any allowlist by default. You can call the DescribeAllowLists API to query all IP allowlist information, including allowlist IDs, for the specified region under your account. Each instance supports binding up to 100 allowlists, and you can batch bind up to 100 allowlists at a time. Each instance supports binding up to 1000 IP addresses or CIDR-format IP address ranges.
+- `auto_renew` (Boolean) Whether to enable auto-renewal. Value options: false (default): Disabled; true: Enabled.
+- `backup_point_name` (String) Set a backup name for the full backup created before changes.
+- `charge_type` (String) Instance billing type. Value options: PrePaid: Subscription (also called prepaid). PostPaid: Pay-as-you-go (also called postpaid).
+- `create_backup` (Boolean) Whether to create a backup before making changes.
+- `deletion_protection` (String) Enable or disable instance deletion protection.
+- `instance_name` (String) Instance name. Naming rules: Cannot start with a digit or hyphen (-); can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-); length must be 1–128 characters.
+- `no_auth_mode` (String) Enable or disable password-free access for new instances. Valid values: open: enable password-free access; close (default): disable password-free access.
+- `parameter_group_id` (String) The parameter template to be applied to the new instance. Redis for Cache Database creates a default system parameter template for each database version, which includes all parameters supported by that version and their default values. If this parameter is left blank, the system will select and apply the corresponding version's system parameter template for the new instance based on the database version you set (i.e., EngineVersion). You can call the DescribeParameterGroups API to query basic information about all parameter templates under your account and region, including the parameter template ID.
+- `password` (String) Set the password for the default account of the default database.
+- `port` (Number) Custom port number for the private network connection address. Value range: 1024~65535. If this parameter is left blank, the private network connection address uses port 6379 by default. After the instance is created, you can also modify the port number of the private network address. For instructions, see Modify Port Number.
+- `project_name` (String) Project to which the instance belongs.
+- `purchase_months` (Number) Purchase duration, unit: month. Value options: Monthly purchase: 1, 2, 3, 4, 5, 6, 7, 8, 9. Annual purchase: 12, 24, 36. When ChargeType is PrePaid, this parameter is required.
+- `reserve_additional_bandwidth` (Boolean) Set whether to reserve additional bandwidth
+- `shard_number` (Number) Number of shards in the instance. Value range: 2–256. Specify this parameter only when ShardedCluster is set to 1 (enabled).
+- `tags` (Attributes Set) Set the tag list for the instance.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `blue_green_role` (String) 实例的蓝绿部署角色。取值范围如下：Blue：蓝色实例。Green： 绿色实例。仅使用过蓝绿部署功能的 Redis 实例会返回该参数。
-- `capacity` (Attributes) 实例的容量信息。 (see [below for nested schema](#nestedatt--capacity))
-- `create_time` (String) 实例的创建时间。
-- `data_layout` (String) 实例的数据存储形态。该参数仅对企业版（即ServiceType为Enterprise）实例有意义；社区版（即ServiceType为Basic）实例不涉及数据存储形态，DataLayout取值固定为RAM。若该参数留空，表示不使用数据存储形态进行筛选。
-- `expired_time` (String) 实例到期时间。
+- `blue_green_role` (String) Blue-green deployment role of the instance. Valid values: Blue: blue instance. Green: green instance. This parameter is returned only for Redis instances that have used the blue-green deployment feature.
+- `capacity` (Attributes) Capacity information of the instance. (see [below for nested schema](#nestedatt--capacity))
+- `create_time` (String) Creation time of the instance.
+- `data_layout` (String) Data storage type of the instance. This parameter is only relevant for Enterprise Edition instances (ServiceType=Enterprise). Community Edition instances (ServiceType=Basic) do not involve data storage type, and DataLayout is always set to RAM. If this parameter is left empty, data storage type is not used as a filter.
+- `expired_time` (String) Instance expiration time.
 - `id` (String) Uniquely identifies the resource.
-- `instance_class` (String) Redis 实例的类型。取值范围如下：PrimarySecondary：主备实例；Standalone：单节点实例。若该参数留空，表示不使用实例类型条件进行筛选。关于实例类型的更多信息，请参见产品架构。
-- `instance_id` (String) 实例 ID。
-- `instance_shards` (Attributes Set) 实例中所有 Shard 分片的详情列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_shards))
-- `maintenance_time` (String) 实例的可维护时间段，格式为HH:mm-HH:mm（UTC+8）。
-- `max_connections` (Number) 实例当前单分片最大连接数。每分片的默认连接数为10000，您也可以根据业务需要调用ModifyDBInstanceMaxConn接口修改单分片的最大连接数。
-- `node_ids` (Set of String) Proxy 和 Server 节点 ID 列表。
-- `private_address` (String) 实例私网连接地址的域名。
-- `private_port` (String) 实例私网连接地址的端口号。
-- `service_type` (String) 实例的服务类型
-- `status` (String) 实例的服务类型，取值范围如下：Basic（默认值）：社区版；Enterprise：企业版。
-- `vi_pv_6` (String) 实例私网连接地址所对应的 IPv6 地址。仅当实例使用了 IPv6 地址时才会返回该参数。
-- `vip` (String) 实例私网连接地址所对应的 IPv4 地址。
-- `visit_addrs` (Attributes Set) 连接地址信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--visit_addrs))
-- `vpc_auth_mode` (String) 开启或关闭免密访问功能。取值范围如下：open：开启免密访问；close：关闭免密访问。参数取值不区分大小写。
-- `zone_ids` (Set of String) 实例所在的可用区列表。
+- `instance_class` (String) Type of Redis instance. Valid values: PrimarySecondary: primary-secondary instance; Standalone: single-node instance. If this parameter is left empty, instance type is not used as a filter. For more information about instance types, see Product Architecture.
+- `instance_id` (String) Instance ID.
+- `instance_shards` (Attributes Set) Detailed list of all shards in the instance.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--instance_shards))
+- `maintenance_time` (String) Maintenance window for the instance, format: HH:mm-HH:mm (UTC+8).
+- `max_connections` (Number) Current maximum connections per shard for the instance. The default connection limit per shard is 10,000. You can also call the ModifyDBInstanceMaxConn API to adjust the maximum connections per shard based on your business needs.
+- `node_ids` (Set of String) List of Proxy and Server node IDs.
+- `private_address` (String) The domain name for the instance's private network connection address.
+- `private_port` (String) Port number for the instance's private network connection address.
+- `service_type` (String) Service type of the instance
+- `status` (String) Service type of the instance. Value options: Basic (default): Community Edition; Enterprise: Enterprise Edition.
+- `vi_pv_6` (String) The IPv6 address corresponding to the instance's private network connection address. This parameter is returned only if the instance uses an IPv6 address.
+- `vip` (String) IPv4 address corresponding to the instance's private network connection address.
+- `visit_addrs` (Attributes Set) Connection address information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--visit_addrs))
+- `vpc_auth_mode` (String) Enable or disable password-free access. Valid values: open: enable password-free access; close: disable password-free access. Values are case-insensitive.
+- `zone_ids` (Set of String) List of available zones where the instance is located.
 
 <a id="nestedatt--configure_nodes"></a>
 ### Nested Schema for `configure_nodes`
 
 Optional:
 
-- `az` (String) 每个节点所属的可用区。
+- `az` (String) The availability zone each node belongs to.
 
 
 <a id="nestedatt--tags"></a>
@@ -115,8 +115,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key.
+- `value` (String) Tag value.
 
 
 <a id="nestedatt--capacity"></a>
@@ -124,8 +124,8 @@ Optional:
 
 Read-Only:
 
-- `total` (Number) 当前实例的内存总容量。单位：MiB。
-- `used` (Number) 当前实例已用容量。单位：MiB。
+- `total` (Number) Total memory capacity of the current instance. Unit: MiB.
+- `used` (Number) Used capacity of the current instance. Unit: MiB.
 
 
 <a id="nestedatt--instance_shards"></a>
@@ -133,20 +133,20 @@ Read-Only:
 
 Read-Only:
 
-- `node_number` (Number) 分片中的节点数量
-- `server_nodes` (Attributes List) 分片中所有 Server 节点的详情列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_shards--server_nodes))
-- `shard_id` (String) 分片 ID。
+- `node_number` (Number) Number of nodes in each shard
+- `server_nodes` (Attributes List) Detailed list of all Server nodes in the shard.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--instance_shards--server_nodes))
+- `shard_id` (String) Shard ID.
 
 <a id="nestedatt--instance_shards--server_nodes"></a>
 ### Nested Schema for `instance_shards.server_nodes`
 
 Read-Only:
 
-- `current_role` (String) 节点当前的角色。取值范围如下：PrimaryNode：主节点。SecondaryNode：从节点。
-- `node_id` (String) 节点 ID。
-- `status` (String) 节点状态。取值范围如下：deploy：启动中。running：运行中。loading：数据加载中。error：错误。
-- `zone_id` (String) 节点所在的可用区。
+- `current_role` (String) Current role of the node. Valid values: PrimaryNode: primary node; SecondaryNode: secondary node.
+- `node_id` (String) Node ID.
+- `status` (String) Node status. Valid values: deploy: starting; running: running; loading: loading data; error: error.
+- `zone_id` (String) Availability zone where the node is located.
 
 
 
@@ -155,12 +155,12 @@ Read-Only:
 
 Read-Only:
 
-- `addr_type` (String) 连接地址类型，取值范围如下：Private：私网连接地址；Public：公网连接地址；DirectLink：直连地址。
-- `address` (String) IP 地址或者域名。
-- `eip_id` (String) 实例公网地址所绑定的EIP ID。仅当连接地址类型（即AddrType）为Public公网连接地址时，返回该参数。
-- `port` (String) 端口号。
-- `vi_pv_6` (String) 连接地址所对应的 IPv6 地址。
-- `vip` (String) 连接地址所对应的 IPv4 地址。
+- `addr_type` (String) Connection address type. Value options: Private: Private network connection address; Public: Public network connection address; DirectLink: Direct connection address.
+- `address` (String) IP address or domain name.
+- `eip_id` (String) EIP ID bound to the instance's public address. This parameter is returned only when the connection address type (AddrType) is Public.
+- `port` (String) Port number.
+- `vi_pv_6` (String) IPv6 address corresponding to the connection address.
+- `vip` (String) The IPv4 address corresponding to the connection address.
 
 ## Import
 

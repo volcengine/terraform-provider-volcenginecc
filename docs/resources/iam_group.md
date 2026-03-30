@@ -2,12 +2,12 @@
 page_title: "volcenginecc_iam_group Resource - terraform-provider-volcenginecc"
 subcategory: "IAM"
 description: |-
-  用户组是用户的集合。当用户组被关联上策略后，同一用户组里的所有用户会拥有对应的策略权限，同一个用户可存在于多个用户组中，可同时拥有多个用户组的权限。
+  A user group is a collection of users. When a user group is associated with a policy, all users in the group gain the corresponding policy permissions. A user can belong to multiple user groups and have permissions from each group.
 ---
 
 # volcenginecc_iam_group (Resource)
 
-用户组是用户的集合。当用户组被关联上策略后，同一用户组里的所有用户会拥有对应的策略权限，同一个用户可存在于多个用户组中，可同时拥有多个用户组的权限。
+A user group is a collection of users. When a user group is associated with a policy, all users in the group gain the corresponding policy permissions. A user can belong to multiple user groups and have permissions from each group.
 
 ## Example Usage
 
@@ -40,44 +40,44 @@ resource "volcenginecc_iam_group" "GroupDemo" {
 
 ### Required
 
-- `user_group_name` (String) 用户组名称。长度1~64，支持英文、数字和.-_符号。
+- `user_group_name` (String) User group name. Length: 1–64 characters. Supports English letters, numbers, and .-_ symbols.
 
 ### Optional
 
-- `attached_policies` (Attributes Set) 用户组绑定的策略信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attached_policies))
-- `description` (String) 用户组描述信息。长度不超过128。
-- `display_name` (String) 用户组显示名称。长度不超过64。
-- `users` (Attributes Set) 用户组内绑定的用户信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--users))
+- `attached_policies` (Attributes Set) Policy information bound to the user group.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--attached_policies))
+- `description` (String) User group description. Maximum length: 128 characters.
+- `display_name` (String) User group display name. Maximum length: 64 characters.
+- `users` (Attributes Set) User information associated with the user group.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--users))
 
 ### Read-Only
 
-- `account_id` (Number) 用户组所属主账号的ID。
-- `created_time` (String) 用户组的创建时间。
+- `account_id` (Number) ID of the primary account to which the user group belongs.
+- `created_time` (String) User group creation time.
 - `id` (String) Uniquely identifies the resource.
-- `updated_time` (String) 用户组的更新时间。
-- `user_group_id` (Number) 用户组ID。
+- `updated_time` (String) User group update time.
+- `user_group_id` (Number) User group ID.
 
 <a id="nestedatt--attached_policies"></a>
 ### Nested Schema for `attached_policies`
 
 Optional:
 
-- `policy_name` (String) 策略名。
-- `policy_scope` (Attributes Set) 策略授权的作用范围，特指项目范围。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attached_policies--policy_scope))
-- `policy_type` (String) 策略类型。System代表系统预设策略，Custom代表自定义策略。
+- `policy_name` (String) Policy name.
+- `policy_scope` (Attributes Set) Scope of policy authorization, specifically the project scope.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--attached_policies--policy_scope))
+- `policy_type` (String) Policy type. System indicates a system predefined policy; Custom indicates a custom policy.
 
 <a id="nestedatt--attached_policies--policy_scope"></a>
 ### Nested Schema for `attached_policies.policy_scope`
 
 Optional:
 
-- `attach_time` (String) 项目授权时间。
-- `policy_scope_type` (String) 授权类型。Global代表全局授权（不限制项目），Project代表按项目授权。
-- `project_display_name` (String) 按项目授权时的项目显示名。
-- `project_name` (String) 按项目授权时的项目名。
+- `attach_time` (String) Project authorization time.
+- `policy_scope_type` (String) Authorization type. Global indicates global authorization (not limited by project); Project indicates project-based authorization.
+- `project_display_name` (String) Project display name for project-based authorization.
+- `project_name` (String) Project name for project-based authorization.
 
 
 
@@ -86,7 +86,7 @@ Optional:
 
 Optional:
 
-- `user_name` (String) 用户名。
+- `user_name` (String) Username.
 
 ## Import
 

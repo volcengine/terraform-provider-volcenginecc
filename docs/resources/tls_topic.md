@@ -2,12 +2,12 @@
 page_title: "volcenginecc_tls_topic Resource - terraform-provider-volcenginecc"
 subcategory: "TLS"
 description: |-
-  日志主题是日志服务进行日志管理的基本单位，日志接入、检索分析、消费等功能都是基于日志主题的粒度进行操作。
+  Log topic is the basic unit for log management in the log service. Log ingestion, search and analysis, and consumption are all performed at the log topic level.
 ---
 
 # volcenginecc_tls_topic (Resource)
 
-日志主题是日志服务进行日志管理的基本单位，日志接入、检索分析、消费等功能都是基于日志主题的粒度进行操作。
+Log topic is the basic unit for log management in the log service. Log ingestion, search and analysis, and consumption are all performed at the log topic level.
 
 ## Example Usage
 
@@ -41,43 +41,43 @@ resource "volcenginecc_tls_topic" "TlsTopicDemo" {
 
 ### Required
 
-- `project_id` (String) 日志主题所属的日志项目 ID。
-- `shard_count` (Number) 日志分区的数量，默认创建 1 个分区，取值范围为 1～10。 每个分区提供的写入能力为 5MiB/s、500 次/s，读取能力为 20 MiB/s、100 次/s。请在创建日志主题时合理规划分区，创建后暂不支持修改分区数量。
-- `topic_name` (String) 日志主题名称。
+- `project_id` (String) Log project ID to which the log topic belongs.
+- `shard_count` (Number) Number of log partitions. By default, 1 partition is created; value range: 1–10. Each partition provides write capacity of 5 MiB/s, 500 ops/s, and read capacity of 20 MiB/s, 100 ops/s. Plan partitions appropriately when creating a log topic; partition count cannot be modified after creation.
+- `topic_name` (String) Log topic name.
 
 ### Optional
 
-- `allow_consume` (Boolean) 指定日志主题是否已开启了 Kafka 协议消费功能。true：已开启。false：未开启。
-- `archive_ttl` (Number) 归档存储时长。该时长取值范围为 60~3650。满足如下任一条件时，可实现归档存储。标准存储时长 30 天及以上。标准存储时长 7 天及以上且低频存储时长 30 天及以上。此参数仅在 EnableHotTtl 为 true 时生效。
-- `auto_split` (Boolean) 是否开启分区的自动分裂功能。true：当写入的数据量连续 5 分钟超过已有分区服务能力时，日志服务会根据数据量自动分裂分区以满足业务需求，但分裂后的分区数量不可超出最大分裂数。最近 15 分钟内分裂出来的新分区不会自动分裂。false：不开启分区的自动分裂。
-- `cold_ttl` (Number) 低频存储时长。该时长取值范围为 30~3650。标准存储时长 7 天及以上可实现低频存储。此参数仅在 EnableHotTtl 为 true 时生效。
-- `description` (String) 日志主题描述信息。不支持 <>、'、\、\\、所有 emoji 表情符号。长度为 0~64 个字符。
-- `enable_hot_ttl` (Boolean) 是否开启分层存储。开启后，日志服务支持标准存储、低频存储和归档存储。设置 HotTtl、ArchiveTtl、ColdTtl 后，如果数据存储时间超过对应时长，那么数据会自动沉降至低频存储、归档存储进行后续保存，直到日志采集到服务端的总时长达到 Ttl 时，被后端服务自动清理。
-- `enable_tracking` (Boolean) 是否开启 WebTracking 功能，开启后，可以通过 WebTracking 快速采集前端埋点数据。true：开启 WebTracking功能。false：（默认）关闭 WebTracking 功能。为日志主题开启 Web Tracking 后，通过 API 接口 WebTracks 写入数据时无需经过鉴权，相当于面向公网开放了匿名写入权限，可能产生脏数据。
-- `hot_ttl` (Number) 标准存储时长。该时长默认为 30 天，取值范围为 7~3650。此参数仅在 EnableHotTtl 为 true 时生效。
-- `log_public_ip` (Boolean) 是否开启记录外网 IP 功能。默认为开启状态。开启后日志服务会自动在日志内容中添加以下元数据字段。__tag____client_ip__：日志来源设备的公网 IP 地址。使用日志服务的私网域名写入日志数据时，则记录私网 IP 地址。__tag____receive_time__：日志达到服务端的时间，格式为 10 位的 Unixtime 时间戳。
-- `max_split_shard` (Number) 分区的最大分裂数，即分区分裂后，所有分区的最大数量。取值范围为 1~256，默认为 256。仅在开启自动分裂日志分区，即 AutoSplit 为 true 时必选。MaxSplitShard 必须大于指定的 ShardCount，否则日志服务无法自动分裂分区。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `time_format` (String) 时间格式
-- `time_key` (String) 时间字段名
-- `ttl` (Number) 日志在日志服务中的总保存时间，超过指定的日志存储时长后，此日志主题中的过期日志会被自动清除。单位为天，默认为 30 天。取值范围为 1～3650，指定为 3650 天表示永久存储。
+- `allow_consume` (Boolean) Indicates whether Kafka protocol consumption is enabled for the log topic. true: enabled. false: not enabled.
+- `archive_ttl` (Number) Archive storage duration. The value range is 60~3650. Archive storage can be enabled if any of the following conditions are met: Standard storage duration is 30 days or longer; standard storage duration is 7 days or longer and infrequent storage duration is 30 days or longer. This parameter is only effective when EnableHotTtl is set to true.
+- `auto_split` (Boolean) Enable automatic partition splitting. true: If the amount of data written exceeds the capacity of existing partitions for 5 consecutive minutes, the log service will automatically split partitions based on data volume to meet business needs, but the number of partitions after splitting cannot exceed the maximum split limit. New partitions created within the last 15 minutes will not be automatically split. false: Disable automatic partition splitting.
+- `cold_ttl` (Number) Low-frequency storage duration. Value range: 30–3650. Low-frequency storage is available when standard storage duration is 7 days or longer. This parameter is effective only when EnableHotTtl is true.
+- `description` (String) Log topic description. Does not support <>, ', \, \\, or any emoji symbols. Length: 0–64 characters.
+- `enable_hot_ttl` (Boolean) Enable tiered storage. When enabled, the log service supports standard storage, low-frequency storage, and archive storage. After setting HotTtl, ArchiveTtl, and ColdTtl, if data storage duration exceeds the corresponding value, data will automatically move to low-frequency or archive storage for continued retention until the total log retention duration reaches Ttl, after which backend services will automatically clean up the data.
+- `enable_tracking` (Boolean) Enable WebTracking. When enabled, you can quickly collect frontend tracking data using WebTracking. true: Enable WebTracking. false (default): Disable WebTracking. After enabling Web Tracking for the log topic, data written via the WebTracks API does not require authentication, which grants anonymous write access to the public network and may result in dirty data.
+- `hot_ttl` (Number) Standard storage duration. Default is 30 days; value range: 7–3650. This parameter is effective only when EnableHotTtl is true.
+- `log_public_ip` (Boolean) Enable external IP recording. Enabled by default. When enabled, the log service automatically adds the following metadata fields to the log content: __tag____client_ip__: Public IP address of the device sending the log. If logs are written using the log service's private domain name, the private IP address is recorded. __tag____receive_time__: Time when the log reaches the server, formatted as a 10-digit Unix timestamp.
+- `max_split_shard` (Number) Maximum partition split count, which is the maximum number of partitions after splitting. Value range: 1–256, default is 256. Required only when automatic log partition splitting is enabled (AutoSplit is true). MaxSplitShard must be greater than the specified ShardCount; otherwise, the log service cannot automatically split partitions.
+- `tags` (Attributes Set) Tag list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `time_format` (String) Time format
+- `time_key` (String) Time field name
+- `ttl` (Number) Total log retention time in the log service. After the specified log storage duration is exceeded, expired logs in this log topic will be automatically cleared. Unit: days. Default is 30 days. Value range is 1–3650. Setting to 3650 days means permanent storage.
 
 ### Read-Only
 
-- `consume_topic` (String) Kafka 协议消费主题 ID，格式为 out+日志主题 ID。通过 Kafka 协议消费此日志主题中的日志数据时，Topic 应指定为此 ID。
-- `created_time` (String) 日志主题创建时间。
+- `consume_topic` (String) Kafka protocol consumption topic ID, formatted as out+log topic ID. When consuming log data from this log topic via the Kafka protocol, set Topic to this ID.
+- `created_time` (String) Log topic creation time.
 - `id` (String) Uniquely identifies the resource.
-- `topic_id` (String) 日志主题 ID。
-- `updated_time` (String) 日志主题修改时间。
+- `topic_id` (String) Log topic ID.
+- `updated_time` (String) Log topic modification time.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.
 
 ## Import
 

@@ -35,11 +35,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的描述。",
+		//	  "description": "Forwarding rule description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的描述。",
+			Description: "Forwarding rule description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -50,11 +50,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的域名。",
+		//	  "description": "Domain name of the forwarding rule.",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的域名。",
+			Description: "Domain name of the forwarding rule.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -66,20 +66,20 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则服务器组配置",
+		//	  "description": "Forwarding rule server group configuration.",
 		//	  "properties": {
 		//	    "ServerGroupTuples": {
-		//	      "description": "转发到的目的服务器组列表。",
+		//	      "description": "Destination server group list.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "转发到的目的服务器组。",
+		//	        "description": "Destination server group.",
 		//	        "properties": {
 		//	          "ServerGroupId": {
-		//	            "description": "转发到的目的服务器组 ID。",
+		//	            "description": "Destination server group ID.",
 		//	            "type": "string"
 		//	          },
 		//	          "Weight": {
-		//	            "description": "服务器组权重。",
+		//	            "description": "Server group weight.",
 		//	            "format": "int64",
 		//	            "type": "integer"
 		//	          }
@@ -90,11 +90,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "StickySessionEnabled": {
-		//	      "description": "是否开启组间会话保持。on：开启。off：不开启。",
+		//	      "description": "Whether to enable inter-group session persistence. on: enabled. off: disabled.",
 		//	      "type": "string"
 		//	    },
 		//	    "StickySessionTimeout": {
-		//	      "description": "组件回话保持的超时时间。单位：秒。",
+		//	      "description": "Component session stickiness timeout. Unit: seconds.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    }
@@ -109,7 +109,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ServerGroupId
 							"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "转发到的目的服务器组 ID。",
+								Description: "Destination server group ID.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -118,7 +118,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Weight
 							"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "服务器组权重。",
+								Description: "Server group weight.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -127,7 +127,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "转发到的目的服务器组列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Destination server group list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -136,7 +136,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StickySessionEnabled
 				"sticky_session_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启组间会话保持。on：开启。off：不开启。",
+					Description: "Whether to enable inter-group session persistence. on: enabled. off: disabled.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -145,7 +145,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StickySessionTimeout
 				"sticky_session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "组件回话保持的超时时间。单位：秒。",
+					Description: "Component session stickiness timeout. Unit: seconds.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -153,7 +153,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "转发规则服务器组配置",
+			Description: "Forwarding rule server group configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -164,11 +164,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器ID。",
+		//	  "description": "Listener ID.",
 		//	  "type": "string"
 		//	}
 		"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器ID。",
+			Description: "Listener ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -178,12 +178,12 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标准版转发规则优先级。",
+		//	  "description": "Standard edition forwarding rule priority.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "标准版转发规则优先级。",
+			Description: "Standard edition forwarding rule priority.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -194,26 +194,26 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "重定向相关配置信息。",
+		//	  "description": "Redirect-related configuration information.",
 		//	  "properties": {
 		//	    "RedirectDomain": {
-		//	      "description": "重定向的域名。若创建/修改重定向类型的转发规则时，重定向域名设置为空，接口会返回${host}，该变量含义为重定向域名与请求域名保持一致，但不支持创建/修改时，将重定向域名设置为${host}.。",
+		//	      "description": "Redirect domain name. If the redirect domain name is left empty when creating or modifying a redirect forwarding rule, the API returns ${host}, which means the redirect domain matches the request domain. However, setting the redirect domain to ${host} is not supported when creating or modifying rules.",
 		//	      "type": "string"
 		//	    },
 		//	    "RedirectHttpCode": {
-		//	      "description": "重定向状态码。301、302、307、308。",
+		//	      "description": "Redirect status codes: 301, 302, 307, 308.",
 		//	      "type": "string"
 		//	    },
 		//	    "RedirectPort": {
-		//	      "description": "重定向的端口。若创建/修改重定向类型的转发规则时，重定向端口设置为空，接口会返回${port}，该变量含义为重定向端口与请求端口（监听器端口）保持一致，但不支持创建/修改时，将重定向端口设置为${port}.。",
+		//	      "description": "Redirect port. If the redirect port is left empty when creating or modifying a redirect forwarding rule, the API returns ${port}, which means the redirect port matches the request port (listener port). However, setting the redirect port to ${port} is not supported when creating or modifying rules.",
 		//	      "type": "string"
 		//	    },
 		//	    "RedirectProtocol": {
-		//	      "description": "重定向使用的协议。HTTP、HTTPS。",
+		//	      "description": "Protocol used for redirect. HTTP, HTTPS.",
 		//	      "type": "string"
 		//	    },
 		//	    "RedirectUri": {
-		//	      "description": "重定向的URI。若创建/修改重定向类型的转发规则时，重定向uri设置为空，接口会返回${request_uri}，该变量含义为重定向uri与请求uri保持一致，但不支持创建/修改时，将重定向uri设置为${request_uri}.。",
+		//	      "description": "Redirect URI. If the redirect URI is left empty when creating or modifying a redirect forwarding rule, the API returns ${request_uri}, which means the redirect URI matches the request URI. However, setting the redirect URI to ${request_uri} is not supported when creating or modifying rules.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -223,7 +223,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: RedirectDomain
 				"redirect_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重定向的域名。若创建/修改重定向类型的转发规则时，重定向域名设置为空，接口会返回${host}，该变量含义为重定向域名与请求域名保持一致，但不支持创建/修改时，将重定向域名设置为${host}.。",
+					Description: "Redirect domain name. If the redirect domain name is left empty when creating or modifying a redirect forwarding rule, the API returns ${host}, which means the redirect domain matches the request domain. However, setting the redirect domain to ${host} is not supported when creating or modifying rules.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -232,7 +232,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: RedirectHttpCode
 				"redirect_http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重定向状态码。301、302、307、308。",
+					Description: "Redirect status codes: 301, 302, 307, 308.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -241,7 +241,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: RedirectPort
 				"redirect_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重定向的端口。若创建/修改重定向类型的转发规则时，重定向端口设置为空，接口会返回${port}，该变量含义为重定向端口与请求端口（监听器端口）保持一致，但不支持创建/修改时，将重定向端口设置为${port}.。",
+					Description: "Redirect port. If the redirect port is left empty when creating or modifying a redirect forwarding rule, the API returns ${port}, which means the redirect port matches the request port (listener port). However, setting the redirect port to ${port} is not supported when creating or modifying rules.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -250,7 +250,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: RedirectProtocol
 				"redirect_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重定向使用的协议。HTTP、HTTPS。",
+					Description: "Protocol used for redirect. HTTP, HTTPS.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -259,7 +259,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: RedirectUri
 				"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重定向的URI。若创建/修改重定向类型的转发规则时，重定向uri设置为空，接口会返回${request_uri}，该变量含义为重定向uri与请求uri保持一致，但不支持创建/修改时，将重定向uri设置为${request_uri}.。",
+					Description: "Redirect URI. If the redirect URI is left empty when creating or modifying a redirect forwarding rule, the API returns ${request_uri}, which means the redirect URI matches the request URI. However, setting the redirect URI to ${request_uri} is not supported when creating or modifying rules.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -267,7 +267,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "重定向相关配置信息。",
+			Description: "Redirect-related configuration information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -278,10 +278,10 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "重定向相关配置信息。",
+		//	  "description": "Redirect-related configuration information.",
 		//	  "properties": {
 		//	    "RewritePath": {
-		//	      "description": "重写路径。",
+		//	      "description": "Rewrite path.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -291,7 +291,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: RewritePath
 				"rewrite_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "重写路径。",
+					Description: "Rewrite path.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -299,7 +299,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "重定向相关配置信息。",
+			Description: "Redirect-related configuration information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -310,11 +310,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则重写配置开关。on：开启。off：关闭。",
+		//	  "description": "Forwarding rule rewrite configuration switch. on: enabled. off: disabled.",
 		//	  "type": "string"
 		//	}
 		"rewrite_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则重写配置开关。on：开启。off：关闭。",
+			Description: "Forwarding rule rewrite configuration switch. on: enabled. off: disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -325,11 +325,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则动作。空：默认转发至服务器组。Redirect：重定向。",
+		//	  "description": "Forwarding rule action. Empty: default forward to server group. Redirect: redirect.",
 		//	  "type": "string"
 		//	}
 		"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则动作。空：默认转发至服务器组。Redirect：重定向。",
+			Description: "Forwarding rule action. Empty: default forward to server group. Redirect: redirect.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -340,24 +340,24 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标准版转发规则动作。",
+		//	  "description": "Standard edition forwarding rule action.",
 		//	  "insertionOrder": true,
 		//	  "items": {
-		//	    "description": "标准版转发规则动作。",
+		//	    "description": "Standard edition forwarding rule action.",
 		//	    "properties": {
 		//	      "FixedResponseConfig": {
 		//	        "description": "FixedResponseConfig",
 		//	        "properties": {
 		//	          "Content": {
-		//	            "description": "返回的固定内容。",
+		//	            "description": "Fixed response content.",
 		//	            "type": "string"
 		//	          },
 		//	          "ContentType": {
-		//	            "description": "返回的固定内容的格式。text/plain、text/css、text/html、application/javascript、application/json",
+		//	            "description": "Format of fixed response content. text/plain, text/css, text/html, application/javascript, application/json",
 		//	            "type": "string"
 		//	          },
 		//	          "HttpCode": {
-		//	            "description": "返回的 HTTP 状态码。",
+		//	            "description": "Returned HTTP status code.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -370,11 +370,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "ServerGroupStickySession",
 		//	            "properties": {
 		//	              "Enabled": {
-		//	                "description": "是否开启组间会话保持。on：开启。off：不开启。",
+		//	                "description": "Whether to enable inter-group session persistence. on: enabled. off: disabled.",
 		//	                "type": "string"
 		//	              },
 		//	              "Timeout": {
-		//	                "description": "组件回话保持的超时时间。单位：秒。",
+		//	                "description": "Component session stickiness timeout. Unit: seconds.",
 		//	                "format": "int64",
 		//	                "type": "integer"
 		//	              }
@@ -385,14 +385,14 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "ServerGroupTuples",
 		//	            "insertionOrder": false,
 		//	            "items": {
-		//	              "description": "转发到的目的服务器组。",
+		//	              "description": "Destination server group.",
 		//	              "properties": {
 		//	                "ServerGroupId": {
-		//	                  "description": "转发到的目的服务器组 ID。",
+		//	                  "description": "Destination server group ID.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Weight": {
-		//	                  "description": "服务器组权重。",
+		//	                  "description": "Server group weight.",
 		//	                  "format": "int64",
 		//	                  "type": "integer"
 		//	                }
@@ -409,23 +409,23 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "RedirectConfig",
 		//	        "properties": {
 		//	          "Host": {
-		//	            "description": "重定向域名，仅支持精确域名。",
+		//	            "description": "Redirect domain. Only exact domains are supported.",
 		//	            "type": "string"
 		//	          },
 		//	          "HttpCode": {
-		//	            "description": "重定向状态码，支持301，302，307，308。",
+		//	            "description": "Redirect status codes supported: 301, 302, 307, 308.",
 		//	            "type": "string"
 		//	          },
 		//	          "Path": {
-		//	            "description": "重定向 URI。。",
+		//	            "description": "Redirect URI..",
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
-		//	            "description": "重定向端口。",
+		//	            "description": "Redirect port.",
 		//	            "type": "string"
 		//	          },
 		//	          "Protocol": {
-		//	            "description": "重定向使用的协议，支持HTTP，HTTPS。",
+		//	            "description": "Protocol used for redirect. Supports HTTP and HTTPS.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -435,7 +435,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "RewriteConfig",
 		//	        "properties": {
 		//	          "Path": {
-		//	            "description": "重写路径。",
+		//	            "description": "Rewrite path.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -445,7 +445,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "TrafficLimitConfig",
 		//	        "properties": {
 		//	          "QPS": {
-		//	            "description": "每秒请求数。",
+		//	            "description": "Requests per second.",
 		//	            "format": "int64",
 		//	            "type": "integer"
 		//	          }
@@ -453,7 +453,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Type": {
-		//	        "description": "转发规则动作类型。ForwardGroup：转发至多个虚拟服务器组。Redirect： 重定向。Rewrite： 重写。TrafficLimit：流量限速。",
+		//	        "description": "Forwarding rule action types. ForwardGroup: forward to multiple virtual server groups. Redirect: redirect. Rewrite: rewrite. TrafficLimit: traffic limiting.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -470,7 +470,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Content
 							"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "返回的固定内容。",
+								Description: "Fixed response content.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -479,7 +479,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ContentType
 							"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "返回的固定内容的格式。text/plain、text/css、text/html、application/javascript、application/json",
+								Description: "Format of fixed response content. text/plain, text/css, text/html, application/javascript, application/json",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -488,7 +488,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: HttpCode
 							"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "返回的 HTTP 状态码。",
+								Description: "Returned HTTP status code.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -511,7 +511,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Enabled
 									"enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "是否开启组间会话保持。on：开启。off：不开启。",
+										Description: "Whether to enable inter-group session persistence. on: enabled. off: disabled.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -520,7 +520,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Timeout
 									"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "组件回话保持的超时时间。单位：秒。",
+										Description: "Component session stickiness timeout. Unit: seconds.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -541,7 +541,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: ServerGroupId
 										"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "转发到的目的服务器组 ID。",
+											Description: "Destination server group ID.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -550,7 +550,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Weight
 										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "服务器组权重。",
+											Description: "Server group weight.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -559,7 +559,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "ServerGroupTuples\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+								Description: "ServerGroupTuples\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -579,7 +579,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Host
 							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "重定向域名，仅支持精确域名。",
+								Description: "Redirect domain. Only exact domains are supported.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -588,7 +588,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: HttpCode
 							"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "重定向状态码，支持301，302，307，308。",
+								Description: "Redirect status codes supported: 301, 302, 307, 308.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -597,7 +597,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Path
 							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "重定向 URI。。",
+								Description: "Redirect URI..",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -606,7 +606,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "重定向端口。",
+								Description: "Redirect port.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -615,7 +615,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "重定向使用的协议，支持HTTP，HTTPS。",
+								Description: "Protocol used for redirect. Supports HTTP and HTTPS.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -635,7 +635,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Path
 							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "重写路径。",
+								Description: "Rewrite path.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -655,7 +655,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: QPS
 							"qps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "每秒请求数。",
+								Description: "Requests per second.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -672,7 +672,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "转发规则动作类型。ForwardGroup：转发至多个虚拟服务器组。Redirect： 重定向。Rewrite： 重写。TrafficLimit：流量限速。",
+						Description: "Forwarding rule action types. ForwardGroup: forward to multiple virtual server groups. Redirect: redirect. Rewrite: rewrite. TrafficLimit: traffic limiting.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -681,7 +681,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标准版转发规则动作。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Standard edition forwarding rule action.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -695,20 +695,20 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标准版转发规则条件。",
+		//	  "description": "Standard edition forwarding rule condition.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标准版转发规则条件。",
+		//	    "description": "Standard edition forwarding rule condition.",
 		//	    "properties": {
 		//	      "HeaderConfig": {
 		//	        "description": "HeaderConfig。",
 		//	        "properties": {
 		//	          "Key": {
-		//	            "description": "头字段键。",
+		//	            "description": "Header field key.",
 		//	            "type": "string"
 		//	          },
 		//	          "Values": {
-		//	            "description": "头字段值。",
+		//	            "description": "Header field value.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -723,7 +723,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "HostConfig。",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "转发规则的域名，支持泛域名和精确域名。",
+		//	            "description": "Domain name of the forwarding rule. Supports wildcard and exact domains.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -738,7 +738,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "MethodConfig。",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "请求方法。支持HEAD、GET、POST、OPTIONS、PUT、PATCH、DELETE。",
+		//	            "description": "Request method. Supports HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -753,7 +753,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "PathConfig。",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "转发规则的URL，仅支持绝对路径。",
+		//	            "description": "Forwarding rule URL. Only absolute paths are supported.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -774,11 +774,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "Value。",
 		//	              "properties": {
 		//	                "Key": {
-		//	                  "description": "查询字符串键。",
+		//	                  "description": "Query string key.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "查询字符串值。",
+		//	                  "description": "Query string value.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -791,7 +791,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Type": {
-		//	        "description": "标准版转发规则条件类型。Host： 域名。Path： 路径。Header：HTTP头字段。Method: 请求方法。QueryString: 查询参数。",
+		//	        "description": "Standard forwarding rule condition types. Host: domain name. Path: path. Header: HTTP header field. Method: request method. QueryString: query parameter.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -808,7 +808,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "头字段键。",
+								Description: "Header field key.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -818,7 +818,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "头字段值。",
+								Description: "Header field value.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -839,7 +839,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "转发规则的域名，支持泛域名和精确域名。",
+								Description: "Domain name of the forwarding rule. Supports wildcard and exact domains.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -860,7 +860,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "请求方法。支持HEAD、GET、POST、OPTIONS、PUT、PATCH、DELETE。",
+								Description: "Request method. Supports HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -881,7 +881,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "转发规则的URL，仅支持绝对路径。",
+								Description: "Forwarding rule URL. Only absolute paths are supported.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -905,7 +905,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "查询字符串键。",
+											Description: "Query string key.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -914,7 +914,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "查询字符串值。",
+											Description: "Query string value.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -923,7 +923,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "Values。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+								Description: "Values。\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -940,7 +940,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标准版转发规则条件类型。Host： 域名。Path： 路径。Header：HTTP头字段。Method: 请求方法。QueryString: 查询参数。",
+						Description: "Standard forwarding rule condition types. Host: domain name. Path: path. Header: HTTP header field. Method: request method. QueryString: query parameter.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -949,7 +949,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标准版转发规则条件。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Standard edition forwarding rule condition.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -960,11 +960,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则ID。",
+		//	  "description": "Forwarding rule ID.",
 		//	  "type": "string"
 		//	}
 		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则ID。",
+			Description: "Forwarding rule ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -974,11 +974,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则关联的后端服务器组ID。",
+		//	  "description": "Backend server group ID associated with the forwarding rule.",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则关联的后端服务器组ID。",
+			Description: "Backend server group ID associated with the forwarding rule.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -989,11 +989,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则 QPS 限速开关。on：开启。off：关闭。",
+		//	  "description": "Forwarding rule QPS throttling switch. on: enabled. off: disabled.",
 		//	  "type": "string"
 		//	}
 		"traffic_limit_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则 QPS 限速开关。on：开启。off：关闭。",
+			Description: "Forwarding rule QPS throttling switch. on: enabled. off: disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1004,12 +1004,12 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "每秒请求数。取值范围：100～100000。",
+		//	  "description": "Requests per second. Range: 100–100000.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"traffic_limit_qps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "每秒请求数。取值范围：100～100000。",
+			Description: "Requests per second. Range: 100–100000.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1020,11 +1020,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的URL。",
+		//	  "description": "Forwarding rule URL.",
 		//	  "type": "string"
 		//	}
 		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的URL。",
+			Description: "Forwarding rule URL.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1044,7 +1044,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "ALB 按照您设置的转发规则，对不同特征的访问流量进行分发。您可以为一个监听器配置多条转发规则。基础版 ALB 实例支持基于域名和路径的转发规则。标准版 ALB 实例支持基于域名、路径和 HTTP 标头的转发规则，并支持复合转发条件。",
+		Description: "ALB distributes incoming traffic based on the forwarding rules you set. You can configure multiple forwarding rules for a single listener. Basic edition ALB instances support forwarding rules based on domain and path. Standard edition ALB instances support forwarding rules based on domain, path, and HTTP headers, and support composite forwarding conditions.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vpc_security_group Resource - terraform-provider-volcenginecc"
 subcategory: "VPC"
 description: |-
-  安全组是一个逻辑意义上的分组，为同一个私有网络内具有相同安全保护需求并相互信任的网卡提供访问策略。您可以通过配置安全组规则，控制安全组关联网卡的出入流量。
+  A security group is a logical grouping that provides access policies for NICs within the same private network that share security requirements and mutual trust. You can control inbound and outbound traffic for associated NICs by configuring security group rules
 ---
 
 # volcenginecc_vpc_security_group (Resource)
 
-安全组是一个逻辑意义上的分组，为同一个私有网络内具有相同安全保护需求并相互信任的网卡提供访问策略。您可以通过配置安全组规则，控制安全组关联网卡的出入流量。
+A security group is a logical grouping that provides access policies for NICs within the same private network that share security requirements and mutual trust. You can control inbound and outbound traffic for associated NICs by configuring security group rules
 
 ## Example Usage
 
@@ -19,7 +19,7 @@ resource "volcenginecc_vpc_security_group" "SecurityGroupDemo" {
   project_name        = "default"
   ingress_permissions = [
     {
-      description     = "进的规则"
+      description     = "test-rule"
       policy          = "drop"
       port_end        = 1
       port_start      = 1
@@ -32,7 +32,7 @@ resource "volcenginecc_vpc_security_group" "SecurityGroupDemo" {
   ]
   egress_permissions = [
     {
-      description     = "出的规则"
+      description     = "test-rule"
       policy          = "drop"
       port_end        = -1
       port_start      = -1
@@ -57,44 +57,44 @@ resource "volcenginecc_vpc_security_group" "SecurityGroupDemo" {
 
 ### Required
 
-- `vpc_id` (String) 安全组所属的VPC ID。
+- `vpc_id` (String) VPC ID to which the security group belongs
 
 ### Optional
 
-- `description` (String) 安全组的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不填默认空字符串。
-- `egress_permissions` (Attributes Set) 安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--egress_permissions))
-- `ingress_permissions` (Attributes Set) 安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--ingress_permissions))
-- `project_name` (String) 安全组所属项目名称。不填默认项目为default。
-- `security_group_name` (String) 安全组的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认是安全组的ID。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Description of the security group. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). If not specified, defaults to an empty string
+- `egress_permissions` (Attributes Set) Description for outbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--egress_permissions))
+- `ingress_permissions` (Attributes Set) Description for inbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--ingress_permissions))
+- `project_name` (String) Project name to which the security group belongs. Default project is 'default' if not specified
+- `security_group_name` (String) Security group name. Length: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Default is security group ID if not specified
+- `tags` (Attributes Set) Tag list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `creation_time` (String) 安全组创建时间。
+- `creation_time` (String) Security group creation time
 - `id` (String) Uniquely identifies the resource.
-- `security_group_id` (String) 安全组ID。
-- `service_managed` (Boolean) 安全组是否为托管安全组。true为托管安全组，false为非托管安全组。
-- `status` (String) 安全组状态。Available为可用，Creating为创建中。
-- `type` (String) 安全组类型。1、default：默认安全组。2、normal：自定义安全组。3、VpnGW： VPN网关安全组。4、NatGW： Nat网关安全组。 5、cidr_only：CIDR-Only安全组。
+- `security_group_id` (String) Security group ID
+- `service_managed` (Boolean) Indicates whether the security group is managed. true means managed security group, false means unmanaged security group
+- `status` (String) Security group status. Available means available for use, Creating means being created
+- `type` (String) Security group type. 1. default: default security group. 2. normal: custom security group. 3. VpnGW: VPN gateway security group. 4. NatGW: NAT gateway security group. 5. cidr_only: CIDR-Only security group
 
 <a id="nestedatt--egress_permissions"></a>
 ### Nested Schema for `egress_permissions`
 
 Optional:
 
-- `cidr_ip` (String) 源地址的IPv4 CIDR或IPv6 CIDR
-- `description` (String) 安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。
-- `direction` (String) 安全组规则方向。ingress：入方向。egress：出方向
-- `policy` (String) 访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。
-- `port_end` (Number) 端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口
-- `port_start` (Number) 端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口
-- `prefix_list_id` (String) 前缀列表的ID
-- `priority` (Number) 安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1
-- `protocol` (String) 协议类型。tcp、udp、icmp、icmpv6、all
-- `source_group_id` (String) 源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。
+- `cidr_ip` (String) IPv4 CIDR or IPv6 CIDR of the source address
+- `description` (String) Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained
+- `direction` (String) Security group rule direction. ingress: inbound direction. egress: outbound direction
+- `policy` (String) Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)
+- `port_end` (Number) Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction
+- `port_start` (Number) Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction
+- `prefix_list_id` (String) Prefix list ID
+- `priority` (Number) Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified
+- `protocol` (String) Protocol type. tcp, udp, icmp, icmpv6, all
+- `source_group_id` (String) Source address security group ID. All NIC addresses in this security group are used as source addresses
 
 
 <a id="nestedatt--ingress_permissions"></a>
@@ -102,16 +102,16 @@ Optional:
 
 Optional:
 
-- `cidr_ip` (String) 源地址的IPv4 CIDR或IPv6 CIDR
-- `description` (String) 安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。
-- `direction` (String) 安全组规则方向。ingress：入方向。egress：出方向
-- `policy` (String) 访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。
-- `port_end` (Number) 端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口
-- `port_start` (Number) 端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口
-- `prefix_list_id` (String) 前缀列表的ID
-- `priority` (Number) 安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1
-- `protocol` (String) 协议类型。tcp、udp、icmp、icmpv6、all
-- `source_group_id` (String) 源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。
+- `cidr_ip` (String) IPv4 CIDR or IPv6 CIDR of the source address
+- `description` (String) Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained
+- `direction` (String) Security group rule direction. ingress: inbound direction. egress: outbound direction
+- `policy` (String) Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)
+- `port_end` (Number) Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction
+- `port_start` (Number) Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction
+- `prefix_list_id` (String) Prefix list ID
+- `priority` (Number) Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified
+- `protocol` (String) Protocol type. tcp, udp, icmp, icmpv6, all
+- `source_group_id` (String) Source address security group ID. All NIC addresses in this security group are used as source addresses
 
 
 <a id="nestedatt--tags"></a>
@@ -119,8 +119,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key
+- `value` (String) User tag value
 
 ## Import
 

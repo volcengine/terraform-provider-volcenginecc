@@ -26,47 +26,47 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账户ID。",
+		//	  "description": "Account ID.",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账户ID。",
+			Description: "Account ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Bandwidth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "vePFS 文件系统吞吐上限。",
+		//	  "description": "VePFS file system throughput limit.",
 		//	  "type": "integer"
 		//	}
 		"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "vePFS 文件系统吞吐上限。",
+			Description: "VePFS file system throughput limit.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Capacity
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统容量，单位为 TiB。",
+		//	  "description": "File system capacity, unit: TiB.",
 		//	  "type": "integer"
 		//	}
 		"capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "文件系统容量，单位为 TiB。",
+			Description: "File system capacity, unit: TiB.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CapacityInfo
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "容量信息。",
+		//	  "description": "Capacity information.",
 		//	  "properties": {
 		//	    "TotalTiB": {
-		//	      "description": "文件系统总容量，单位为 TiB。",
+		//	      "description": "Total file system capacity, unit: TiB. Note: Disk balancing time varies based on cluster capacity, cluster load, and other factors. For clusters above the PiB level, expansion typically requires day-level disk balancing time. The expansion capacity becomes effective (and is billed) only after disk balancing is complete.",
 		//	      "type": "integer"
 		//	    },
 		//	    "UsedGiB": {
-		//	      "description": "已使用容量（GiB）。",
+		//	      "description": "Used capacity (GiB).",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -76,109 +76,109 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: TotalTiB
 				"total_ti_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "文件系统总容量，单位为 TiB。",
+					Description: "Total file system capacity, unit: TiB. Note: Disk balancing time varies based on cluster capacity, cluster load, and other factors. For clusters above the PiB level, expansion typically requires day-level disk balancing time. The expansion capacity becomes effective (and is billed) only after disk balancing is complete.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UsedGiB
 				"used_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "已使用容量（GiB）。",
+					Description: "Used capacity (GiB).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "容量信息。",
+			Description: "Capacity information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费状态，默认为 Normal，表示正常计费。",
+		//	  "description": "Billing status. Default is Normal, indicating standard billing.",
 		//	  "type": "string"
 		//	}
 		"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计费状态，默认为 Normal，表示正常计费。",
+			Description: "Billing status. Default is Normal, indicating standard billing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费类型。取值说明如下：PayAsYouGo：按量计费。",
+		//	  "description": "Billing type. Value descriptions are as follows: PayAsYouGo: Pay-as-you-go billing.",
 		//	  "enum": [
 		//	    "PayAsYouGo"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计费类型。取值说明如下：PayAsYouGo：按量计费。",
+			Description: "Billing type. Value descriptions are as follows: PayAsYouGo: Pay-as-you-go billing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统描述信息。",
+		//	  "description": "File system description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统描述信息。",
+			Description: "File system description.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableRestripe
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "扩容后是否开启数据均衡，取值说明如下：true：扩容后立即开启数据均衡。false：扩容后不开启数据均衡。注意：仅 100MB/s/TiB 规格的文件系统支持数据均衡功能。由于数据均衡过程会消耗存储节点的网络和磁盘带宽，导致文件系统的性能下降，建议您评估业务需求，谨慎开启。数据均衡的时间主要受存量数据量的影响，如果您的存量数据较多，均衡的时间可能会较长，根据扩容容量大小和文件系统状态，此过程可能需要花费数小时至 2 天的时间，建议您在业务低峰期开启并耐心等待。",
+		//	  "description": "Whether to enable data balancing after expansion. Value description: true: Enable data balancing immediately after expansion. false: Do not enable data balancing after expansion. Note: Only file systems with a specification of 100MB/s/TiB support the data balancing feature. Because the data balancing process consumes the network and disk bandwidth of storage nodes and causes file system performance degradation, we recommend that you evaluate your business needs and enable with caution. The duration of data balancing mainly depends on the amount of existing data. If you have a large amount of existing data, the balancing process may take longer. Depending on the expansion size and file system status, this process may take several hours to up to 2 days. We recommend enabling it during off-peak hours and waiting patiently.",
 		//	  "type": "boolean"
 		//	}
 		"enable_restripe": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "扩容后是否开启数据均衡，取值说明如下：true：扩容后立即开启数据均衡。false：扩容后不开启数据均衡。注意：仅 100MB/s/TiB 规格的文件系统支持数据均衡功能。由于数据均衡过程会消耗存储节点的网络和磁盘带宽，导致文件系统的性能下降，建议您评估业务需求，谨慎开启。数据均衡的时间主要受存量数据量的影响，如果您的存量数据较多，均衡的时间可能会较长，根据扩容容量大小和文件系统状态，此过程可能需要花费数小时至 2 天的时间，建议您在业务低峰期开启并耐心等待。",
+			Description: "Whether to enable data balancing after expansion. Value description: true: Enable data balancing immediately after expansion. false: Do not enable data balancing after expansion. Note: Only file systems with a specification of 100MB/s/TiB support the data balancing feature. Because the data balancing process consumes the network and disk bandwidth of storage nodes and causes file system performance degradation, we recommend that you evaluate your business needs and enable with caution. The duration of data balancing mainly depends on the amount of existing data. If you have a large amount of existing data, the balancing process may take longer. Depending on the expansion size and file system status, this process may take several hours to up to 2 days. We recommend enabling it during off-peak hours and waiting patiently.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpireTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "过期时间。",
+		//	  "description": "Expiration time.",
 		//	  "type": "string"
 		//	}
 		"expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "过期时间。",
+			Description: "Expiration time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统 ID。",
+		//	  "description": "File system ID.",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统 ID。",
+			Description: "File system ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统名称。命名规范如下：只能以中文或英文开头。只能包含中文、字母、数字、半角句号（.）、下划线（_）或中划线（-）。长度需要在 1~128 个字符内。",
+		//	  "description": "File system name. Naming rules are as follows: Must start with a Chinese or English letter. Can only contain Chinese characters, letters, numbers, period (.), underscore (_), or hyphen (-). Length must be between 1 and 128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"file_system_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统名称。命名规范如下：只能以中文或英文开头。只能包含中文、字母、数字、半角句号（.）、下划线（_）或中划线（-）。长度需要在 1~128 个字符内。",
+			Description: "File system name. Naming rules are as follows: Must start with a Chinese or English letter. Can only contain Chinese characters, letters, numbers, period (.), underscore (_), or hyphen (-). Length must be between 1 and 128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemType
@@ -186,22 +186,22 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "VePFS",
-		//	  "description": "文件系统类型，默认为 VePFS。",
+		//	  "description": "File system type. Default is VePFS.",
 		//	  "type": "string"
 		//	}
 		"file_system_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统类型，默认为 VePFS。",
+			Description: "File system type. Default is VePFS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FreeTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统释放时间。",
+		//	  "description": "File system release time.",
 		//	  "type": "string"
 		//	}
 		"free_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统释放时间。",
+			Description: "File system release time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -209,11 +209,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "文件系统所属项目，默认为 default。",
+		//	  "description": "Project to which the file system belongs. Default is default.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统所属项目，默认为 default。",
+			Description: "Project to which the file system belongs. Default is default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProtocolType
@@ -221,62 +221,62 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "VePFS",
-		//	  "description": "协议类型，默认为 VePFS。",
+		//	  "description": "Protocol type. Default is VePFS.",
 		//	  "type": "string"
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "协议类型，默认为 VePFS。",
+			Description: "Protocol type. Default is VePFS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReadBandwidth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "读带宽值, 单位MB/s。",
+		//	  "description": "Read bandwidth value, unit: MB/s.",
 		//	  "type": "integer"
 		//	}
 		"read_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "读带宽值, 单位MB/s。",
+			Description: "Read bandwidth value, unit: MB/s.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "生成的辅助网卡所在的安全组ID。",
+		//	  "description": "Security group ID for the generated auxiliary NIC.",
 		//	  "type": "string"
 		//	}
 		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "生成的辅助网卡所在的安全组ID。",
+			Description: "Security group ID for the generated auxiliary NIC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统状态。取值说明如下：Running：实例运行中。Creating：实例创建中。CreateError：实例创建失败。Updating：实例更新中。UpdateError：实例更新失败。Expanding：实例扩容中。ExpandError：实例扩容失败。Deleting：实例删除中。DeleteError：实例删除失败。Stopped：实例已关停。Error：实例处于错误状态。",
+		//	  "description": "File system status. Value descriptions are as follows: Running: Instance is running. Creating: Instance is being created. CreateError: Instance creation failed. Updating: Instance is being updated. UpdateError: Instance update failed. Expanding: Instance is being expanded. ExpandError: Instance expansion failed. Deleting: Instance is being deleted. DeleteError: Instance deletion failed. Stopped: Instance is stopped. Error: Instance is in an error state.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统状态。取值说明如下：Running：实例运行中。Creating：实例创建中。CreateError：实例创建失败。Updating：实例更新中。UpdateError：实例更新失败。Expanding：实例扩容中。ExpandError：实例扩容失败。Deleting：实例删除中。DeleteError：实例删除失败。Stopped：实例已关停。Error：实例处于错误状态。",
+			Description: "File system status. Value descriptions are as follows: Running: Instance is running. Creating: Instance is being created. CreateError: Instance creation failed. Updating: Instance is being updated. UpdateError: Instance update failed. Expanding: Instance is being expanded. ExpandError: Instance expansion failed. Deleting: Instance is being deleted. DeleteError: Instance deletion failed. Stopped: Instance is stopped. Error: Instance is in an error state.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StopServiceTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统关停时间。",
+		//	  "description": "File system shutdown time.",
 		//	  "type": "string"
 		//	}
 		"stop_service_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统关停时间。",
+			Description: "File system shutdown time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StoreType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统规格，取值说明如下：Advance_100：100MB/s/TiB。Performance：性能版。Intelligent_Computing：智算版。",
+		//	  "description": "File system specification. Value descriptions are as follows: Advance_100: 100MB/s/TiB. Performance: Performance. Intelligent_Computing: Intelligent Computing.",
 		//	  "enum": [
 		//	    "Advance_100",
 		//	    "Performance",
@@ -285,60 +285,60 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"store_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统规格，取值说明如下：Advance_100：100MB/s/TiB。Performance：性能版。Intelligent_Computing：智算版。",
+			Description: "File system specification. Value descriptions are as follows: Advance_100: 100MB/s/TiB. Performance: Performance. Intelligent_Computing: Intelligent Computing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StoreTypeCN
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统规格中文名称，支持如下：100MB/s/TiB。性能版。智算版。",
+		//	  "description": "File system specification name in Chinese. Supported options: 100MB/s/TiB. Performance. Intelligent Computing.",
 		//	  "type": "string"
 		//	}
 		"store_type_cn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统规格中文名称，支持如下：100MB/s/TiB。性能版。智算版。",
+			Description: "File system specification name in Chinese. Supported options: 100MB/s/TiB. Performance. Intelligent Computing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StoreTypeEN
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储类型英文名。",
+		//	  "description": "Storage type English name.",
 		//	  "type": "string"
 		//	}
 		"store_type_en": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储类型英文名。",
+			Description: "Storage type English name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网 ID。子网必须属于所选的可用区。",
+		//	  "description": "Subnet ID. The subnet must belong to the selected availability zone.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网 ID。子网必须属于所选的可用区。",
+			Description: "Subnet ID. The subnet must belong to the selected availability zone.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "标签类型，说明如下：Custom: 用户自定义标签。System: 系统标签。",
+		//	        "description": "Tag type. Descriptions are as follows: Custom: User-defined tag. System: System tag.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -355,88 +355,88 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签类型，说明如下：Custom: 用户自定义标签。System: 系统标签。",
+						Description: "Tag type. Descriptions are as follows: Custom: User-defined tag. System: System tag.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统更新时间。",
+		//	  "description": "File system update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统更新时间。",
+			Description: "File system update time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VersionNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统版本号。",
+		//	  "description": "File system version number.",
 		//	  "type": "string"
 		//	}
 		"version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统版本号。",
+			Description: "File system version number.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络 ID。",
+		//	  "description": "Private network ID.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络 ID。",
+			Description: "Private network ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WriteBandwidth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "写带宽值, 单位MB/s。",
+		//	  "description": "Write bandwidth value, measured in MB/s.",
 		//	  "type": "integer"
 		//	}
 		"write_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "写带宽值, 单位MB/s。",
+			Description: "Write bandwidth value, measured in MB/s.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability zone ID.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability zone ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区名称。",
+		//	  "description": "Availability zone name.",
 		//	  "type": "string"
 		//	}
 		"zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区名称。",
+			Description: "Availability zone name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -26,99 +26,99 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+		//	  "description": "IP allowlist. Separate multiple IP addresses with commas (,). Duplicate entries are not allowed.",
 		//	  "type": "string"
 		//	}
 		"allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+			Description: "IP allowlist. Separate multiple IP addresses with commas (,). Duplicate entries are not allowed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListDesc
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单描述。",
+		//	  "description": "Allowlist description.",
 		//	  "type": "string"
 		//	}
 		"allow_list_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单描述。",
+			Description: "Allowlist description.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListIPNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单内的 IP 地址（或地址段）总数。",
+		//	  "description": "Total number of IP addresses (or address ranges) in the allowlist.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"allow_list_ip_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "白名单内的 IP 地址（或地址段）总数。",
+			Description: "Total number of IP addresses (or address ranges) in the allowlist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单的id。",
+		//	  "description": "Allowlist ID.",
 		//	  "type": "string"
 		//	}
 		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单的id。",
+			Description: "Allowlist ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单名称。",
+		//	  "description": "Allowlist name.",
 		//	  "type": "string"
 		//	}
 		"allow_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单名称。",
+			Description: "Allowlist name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单内的IP地址类型，当前仅支持IPv4。",
+		//	  "description": "IP address type in the allowlist. Only IPv4 is currently supported.",
 		//	  "type": "string"
 		//	}
 		"allow_list_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单内的IP地址类型，当前仅支持IPv4。",
+			Description: "IP address type in the allowlist. Only IPv4 is currently supported.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单下绑定的实例总数",
+		//	  "description": "Total number of instances bound to the allowlist.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"associated_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "白名单下绑定的实例总数",
+			Description: "Total number of instances bound to the allowlist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstances
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定的实例列表。",
+		//	  "description": "List of bound instances.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "properties": {
 		//	      "InstanceId": {
-		//	        "description": "实例ID。",
+		//	        "description": "Instance ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
-		//	        "description": "实例名称。",
+		//	        "description": "Instance name.",
 		//	        "type": "string"
 		//	      },
 		//	      "VPC": {
-		//	        "description": "实例所属VPC ID。",
+		//	        "description": "Instance VPC ID.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -132,44 +132,44 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例ID。",
+						Description: "Instance ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
 					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例名称。",
+						Description: "Instance name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VPC
 					"vpc": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例所属VPC ID。",
+						Description: "Instance VPC ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "绑定的实例列表。",
+			Description: "List of bound instances.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModifyMode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "修改白名单的方式，支持设置为：Cover（默认）：使用 AllowList 参数中的值覆盖原白名单。Append：在原白名单中增加 AllowList 参数中输入的 IP 地址。Delete：在原白名单中删除 AllowList 参数中输入的 IP 地址。至少需要保留一个 IP 地址。",
+		//	  "description": "How to modify the allowlist. Supported settings: Cover (default): Overwrite the original allowlist with the values in the AllowList parameter. Append: Add IP addresses entered in the AllowList parameter to the original allowlist. Delete: Remove IP addresses entered in the AllowList parameter from the original allowlist. At least one IP address must remain.",
 		//	  "type": "string"
 		//	}
 		"modify_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "修改白名单的方式，支持设置为：Cover（默认）：使用 AllowList 参数中的值覆盖原白名单。Append：在原白名单中增加 AllowList 参数中输入的 IP 地址。Delete：在原白名单中删除 AllowList 参数中输入的 IP 地址。至少需要保留一个 IP 地址。",
+			Description: "How to modify the allowlist. Supported settings: Cover (default): Overwrite the original allowlist with the values in the AllowList parameter. Append: Add IP addresses entered in the AllowList parameter to the original allowlist. Delete: Remove IP addresses entered in the AllowList parameter from the original allowlist. At least one IP address must remain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单所属的项目名称，当该参数留空时，新建的白名单默认加入 default 项目",
+		//	  "description": "Project name associated with the allowlist. If left blank, the new allowlist will be added to the default project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单所属的项目名称，当该参数留空时，新建的白名单默认加入 default 项目",
+			Description: "Project name associated with the allowlist. If left blank, the new allowlist will be added to the default project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -6,49 +6,49 @@
   ],
   "definitions": {
     "Member": {
-      "description": "用户组成员信息",
+      "description": "User Group Member Information",
       "properties": {
         "Description": {
-          "description": "用户描述信息",
+          "description": "User Description",
           "type": "string"
         },
         "DisplayName": {
-          "description": "用户显示名称。",
+          "description": "User Display Name",
           "type": "string"
         },
         "Email": {
-          "description": "用户邮箱。",
+          "description": "User Email",
           "type": "string"
         },
         "IdentityType": {
-          "description": "用户身份类型。",
+          "description": "User Identity Type",
           "type": "string"
         },
         "JoinTime": {
-          "description": "用户加入用户组的时间。",
+          "description": "User Group Join Time",
           "type": "string"
         },
         "Phone": {
-          "description": "用户手机号。",
+          "description": "User Phone Number",
           "type": "string"
         },
         "Source": {
-          "description": "用户来源。",
+          "description": "User Source",
           "type": "string"
         },
         "UserId": {
-          "description": "用户id。",
+          "description": "User ID",
           "type": "string"
         },
         "UserName": {
-          "description": "用户名。",
+          "description": "Username",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "当您需要批量为云身份中心用户进行SSO授权时，您可以先通过用户组进行批量的用户管理。",
+  "description": "When you need to grant SSO authorization to Cloud Identity Center users in bulk, you can first manage users in bulk through user groups",
   "filterProperties": {
     "filterableProperties": [
       "/properties/JoinType"
@@ -95,35 +95,35 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation Time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "描述。",
+      "description": "Description",
       "semantic": "description",
       "type": "string"
     },
     "DisplayName": {
-      "description": "显示名。",
+      "description": "Display Name",
       "type": "string"
     },
     "GroupId": {
-      "description": "用户组id。",
+      "description": "User Group ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "GroupName": {
-      "description": "用户组名称。",
+      "description": "User Group Name",
       "semantic": "resourceName",
       "type": "string"
     },
     "JoinType": {
-      "description": "用户组类型。",
+      "description": "User Group Type",
       "type": "string"
     },
     "Members": {
-      "description": "用户组成员列表",
+      "description": "User Group Member List",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Member"
@@ -132,11 +132,11 @@
       "uniqueItems": true
     },
     "Source": {
-      "description": "用户组来源。",
+      "description": "User Group Source",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "更新时间。",
+      "description": "Update Time",
       "semantic": "updatedTime",
       "type": "string"
     }

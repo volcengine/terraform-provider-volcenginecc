@@ -21,17 +21,17 @@ Data Source schema for Volcengine::PrivateZone::Record
 
 ### Read-Only
 
-- `created_at` (String) 解析记录的创建时间。
-- `enable` (Boolean) 解析记录是否被启用。
-- `host` (String) 子域名的域名前缀。
-- `last_operator` (String) 最近一次更新解析记录的账号 ID。
-- `line` (String) 解析记录的线路，只能是默认线路 default。
-- `record_id` (String) 解析记录 ID。
-- `remark` (String) 备注。支持 UTF-8 字符。不能超过 16 个字符。默认值为空字符串。
-- `ttl` (Number) 解析记录的过期时间。单位为秒。默认值为 600。
-- `type` (String) 解析记录类型。该参数的取值如下：A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。
-- `updated_at` (String) 解析记录最近一次的更新时间。
-- `value` (String) 记录值。
-- `weight` (Number) 记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。
-- `weight_enabled` (Boolean) 该记录集是否开启了负载均衡。
-- `zid` (Number) 域名 ID。
+- `created_at` (String) Creation time of the DNS record.
+- `enable` (Boolean) Indicates whether the DNS record is enabled.
+- `host` (String) Domain prefix for the subdomain.
+- `last_operator` (String) Account ID of the most recent update to the DNS record.
+- `line` (String) DNS record route, only the default route 'default' is supported.
+- `record_id` (String) DNS record ID.
+- `remark` (String) Remarks. Supports UTF-8 characters. Maximum 16 characters. Default is an empty string.
+- `ttl` (Number) DNS record TTL (time to live), in seconds. Default is 600.
+- `type` (String) DNS record type. Valid values are: A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record. A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record.
+- `updated_at` (String) Last update time of the DNS record.
+- `value` (String) Record value.
+- `weight` (Number) Record weight. The weight takes effect only when load balancing is enabled for the domain name.
+- `weight_enabled` (Boolean) Indicates whether load balancing is enabled for this record set.
+- `zid` (Number) Domain name ID.

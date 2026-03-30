@@ -38,7 +38,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入模式。10：CNAME 接入，11：负载均衡（CLB）7 层接入。",
+		//	  "description": "Access mode. 10: CNAME access, 11: Layer 7 load balancing (CLB) access.",
 		//	  "enum": [
 		//	    10,
 		//	    11
@@ -47,7 +47,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"access_mode": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "接入模式。10：CNAME 接入，11：负载均衡（CLB）7 层接入。",
+			Description: "Access mode. 10: CNAME access, 11: Layer 7 load balancing (CLB) access.",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.OneOf(
@@ -63,11 +63,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高防实例 IP。高防型 WAF 接入展示，否则为空。",
+		//	  "description": "High defense instance IP. Displayed for high-defense WAF access; otherwise blank.",
 		//	  "type": "string"
 		//	}
 		"advanced_defense_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高防实例 IP。高防型 WAF 接入展示，否则为空。",
+			Description: "High defense instance IP. Displayed for high-defense WAF access; otherwise blank.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -77,11 +77,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高防实例 Ipv6。高防型 WAF 接入展示，否则为空。",
+		//	  "description": "High defense instance IPv6. Displayed for high-defense WAF access; otherwise blank.",
 		//	  "type": "string"
 		//	}
 		"advanced_defense_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高防实例 Ipv6。高防型 WAF 接入展示，否则为空。",
+			Description: "High defense instance IPv6. Displayed for high-defense WAF access; otherwise blank.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -91,12 +91,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启了 API 防护策略。0：关闭，1：开启。",
+		//	  "description": "API protection policy enabled. 0: Off, 1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"api_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启了 API 防护策略。0：关闭，1：开启。",
+			Description: "API protection policy enabled. 0: Off, 1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -107,12 +107,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "攻击状态。0:未发现攻击,1:发现攻击。",
+		//	  "description": "Attack status. 0: No attack detected, 1: Attack detected.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"attack_status": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "攻击状态。0:未发现攻击,1:发现攻击。",
+			Description: "Attack status. 0: No attack detected, 1: Attack detected.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -122,12 +122,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启智能 CC 防护策略。0：关闭，1：开启。",
+		//	  "description": "Whether to enable intelligent CC protection policy. 0: Disabled, 1: Enabled.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"auto_cc_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启智能 CC 防护策略。0：关闭，1：开启。",
+			Description: "Whether to enable intelligent CC protection policy. 0: Disabled, 1: Enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -138,12 +138,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启自动封禁。0：关闭，1：开启。",
+		//	  "description": "Whether to enable automatic blocking. 0: Disabled, 1: Enabled.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"automatic_black_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启自动封禁。0：关闭，1：开启。",
+			Description: "Whether to enable automatic blocking. 0: Disabled, 1: Enabled.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -153,12 +153,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "源站配置。",
+		//	  "description": "Origin configuration.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccessPort": {
-		//	        "description": "接入的端口号。",
+		//	        "description": "Access port number.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "format": "int32",
@@ -168,25 +168,25 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Backends": {
-		//	        "description": "源站组详情。",
+		//	        "description": "Origin group details.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "IP": {
-		//	              "description": "源站 IP 地址。",
+		//	              "description": "Origin IP address",
 		//	              "type": "string"
 		//	            },
 		//	            "Port": {
-		//	              "description": "源站端口。",
+		//	              "description": "Origin port",
 		//	              "format": "int32",
 		//	              "type": "integer"
 		//	            },
 		//	            "Protocol": {
-		//	              "description": "源站协议。",
+		//	              "description": "Origin protocol.",
 		//	              "type": "string"
 		//	            },
 		//	            "Weight": {
-		//	              "description": "源站权重。",
+		//	              "description": "Origin weight",
 		//	              "format": "int32",
 		//	              "type": "integer"
 		//	            }
@@ -197,7 +197,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Name": {
-		//	        "description": "源站组名称。",
+		//	        "description": "Origin group name.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -212,7 +212,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AccessPort
 					"access_port": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.Int64Type,
-						Description: "接入的端口号。",
+						Description: "Access port number.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -225,7 +225,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: IP
 								"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "源站 IP 地址。",
+									Description: "Origin IP address",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -234,7 +234,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Port
 								"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "源站端口。",
+									Description: "Origin port",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -243,7 +243,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Protocol
 								"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "源站协议。",
+									Description: "Origin protocol.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -252,7 +252,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Weight
 								"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "源站权重。",
+									Description: "Origin weight",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -261,7 +261,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "源站组详情。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Origin group details.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -270,7 +270,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源站组名称。",
+						Description: "Origin group name.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -279,7 +279,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "源站配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Origin configuration.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -293,12 +293,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启了黑名单策略。0：关闭, 1：开启。",
+		//	  "description": "Denylist policy enabled. 0: Off, 1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"black_ip_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启了黑名单策略。0：关闭, 1：开启。",
+			Description: "Denylist policy enabled. 0: Off, 1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -309,12 +309,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启了区域封禁策略。0：关闭;1：开启。",
+		//	  "description": "Whether to enable regional blocking policy. 0: Disabled; 1: Enabled.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"black_lct_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启了区域封禁策略。0：关闭;1：开启。",
+			Description: "Whether to enable regional blocking policy. 0: Disabled; 1: Enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -325,12 +325,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启动态Token防护。",
+		//	  "description": "Dynamic token protection enabled",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"bot_dytoken_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启动态Token防护。",
+			Description: "Dynamic token protection enabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -342,12 +342,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启 bot 频率限制策略。\n0：关闭\n1：开启。",
+		//	  "description": "Bot rate limit policy enabled.\n0: Off\n1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"bot_frequency_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 bot 频率限制策略。\n  0：关闭\n  1：开启。",
+			Description: "Bot rate limit policy enabled.\n  0: Off\n  1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -358,12 +358,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启 bot 统计防护策略。\n0：关闭\n1：开启。",
+		//	  "description": "Bot statistics protection policy enabled.\n0: Off\n1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"bot_repeat_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 bot 统计防护策略。\n  0：关闭\n  1：开启。",
+			Description: "Bot statistics protection policy enabled.\n  0: Off\n  1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -375,7 +375,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 0,
-		//	  "description": "设置 bot 行为地图策略默认动作，当 BotSequenceEnable = 1 开启状态时生效。默认为 0 （观察）。\n0：观察\n2：拦截\n6：JS 挑战\n7：人机验证。",
+		//	  "description": "Set the default action for the bot behavior map policy. Effective when BotSequenceEnable = 1 is enabled. Default is 0 (Observe).\n0: Observe\n2: Intercept\n6: JS Challenge\n7: CAPTCHA.",
 		//	  "enum": [
 		//	    0,
 		//	    2,
@@ -386,7 +386,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"bot_sequence_default_action": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "设置 bot 行为地图策略默认动作，当 BotSequenceEnable = 1 开启状态时生效。默认为 0 （观察）。\n  0：观察\n  2：拦截\n  6：JS 挑战\n  7：人机验证。",
+			Description: "Set the default action for the bot behavior map policy. Effective when BotSequenceEnable = 1 is enabled. Default is 0 (Observe).\n  0: Observe\n  2: Intercept\n  6: JS Challenge\n  7: CAPTCHA.",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(0),
@@ -406,12 +406,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启 bot 行为地图。\n0：关闭\n1：开启。",
+		//	  "description": "Whether to enable bot behavior map.\n0: Off\n1: On.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"bot_sequence_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 bot 行为地图。\n  0：关闭\n  1：开启。",
+			Description: "Whether to enable bot behavior map.\n  0: Off\n  1: On.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -422,12 +422,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启 CC 防护策略。\n0：关闭\n1：开启。",
+		//	  "description": "Whether to enable CC protection policy.\n0: Disabled\n1: Enabled.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"cc_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 CC 防护策略。\n  0：关闭\n  1：开启。",
+			Description: "Whether to enable CC protection policy.\n  0: Disabled\n  1: Enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -438,11 +438,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "托管至证书中心的证书ID。",
+		//	  "description": "Certificate ID managed in Certificate Center",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "托管至证书中心的证书ID。",
+			Description: "Certificate ID managed in Certificate Center",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -453,11 +453,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书名称，协议类型包含 HTTPS 时显示。",
+		//	  "description": "Certificate name. Displayed when protocol type includes HTTPS.",
 		//	  "type": "string"
 		//	}
 		"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书名称，协议类型包含 HTTPS 时显示。",
+			Description: "Certificate name. Displayed when protocol type includes HTTPS.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -467,11 +467,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书托管平台:waf/certificate_service。",
+		//	  "description": "Certificate hosting platform: waf/certificate_service.",
 		//	  "type": "string"
 		//	}
 		"certificate_platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书托管平台:waf/certificate_service。",
+			Description: "Certificate hosting platform: waf/certificate_service.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -482,11 +482,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB实例ID。",
+		//	  "description": "CLB instance ID.",
 		//	  "type": "string"
 		//	}
 		"clb_instance_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB实例ID。",
+			Description: "CLB instance ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -496,11 +496,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB监听器ID。",
+		//	  "description": "CLB listener ID.",
 		//	  "type": "string"
 		//	}
 		"clb_listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB监听器ID。",
+			Description: "CLB listener ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -510,11 +510,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB后端服务器组ID。",
+		//	  "description": "CLB backend server group ID.",
 		//	  "type": "string"
 		//	}
 		"clb_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB后端服务器组ID。",
+			Description: "CLB backend server group ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -524,11 +524,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB后端服务器ID。",
+		//	  "description": "CLB backend server ID",
 		//	  "type": "string"
 		//	}
 		"clb_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB后端服务器ID。",
+			Description: "CLB backend server ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -538,12 +538,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "客户端IP获取方式。0:自定义Header字段,1:通过X-Forwarded-For(XFF)字段中第一个公网IP地址作为客户端真实IP地址。",
+		//	  "description": "Client IP acquisition method. 0: Custom header field, 1: Use the first public IP address in the X-Forwarded-For (XFF) field as the real client IP address.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"client_ip_location": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "客户端IP获取方式。0:自定义Header字段,1:通过X-Forwarded-For(XFF)字段中第一个公网IP地址作为客户端真实IP地址。",
+			Description: "Client IP acquisition method. 0: Custom header field, 1: Use the first public IP address in the X-Forwarded-For (XFF) field as the real client IP address.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -554,12 +554,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "客户端请求body最大值(MB)。",
+		//	  "description": "Maximum client request body size (MB).",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"client_max_body_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "客户端请求body最大值(MB)。",
+			Description: "Maximum client request body size (MB).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -570,42 +570,42 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "LB接入参数。",
+		//	  "description": "LB access parameters.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccessProtocol": {
-		//	        "description": "接入协议类型。",
+		//	        "description": "Access protocol type",
 		//	        "type": "string"
 		//	      },
 		//	      "DefenceMode": {
-		//	        "description": "防护模式。",
+		//	        "description": "Protection mode",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      },
 		//	      "InstanceID": {
-		//	        "description": "负载均衡实例 ID。",
+		//	        "description": "Load balancing instance ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
-		//	        "description": "负载均衡实例名称。",
+		//	        "description": "Load balancer instance name.",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerID": {
-		//	        "description": "负载均衡监听器 ID。",
+		//	        "description": "Load balancing listener ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "LostAssociationFromALB": {
-		//	        "description": "是否从 ALB 中丢失关联。",
+		//	        "description": "Disassociated from ALB",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      },
 		//	      "Port": {
-		//	        "description": "监听器转发规则的端口号。",
+		//	        "description": "Listener forwarding rule port number",
 		//	        "type": "string"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "监听器转发规则的协议类型。",
+		//	        "description": "Protocol type for listener forwarding rules.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -620,7 +620,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccessProtocol
 					"access_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "接入协议类型。",
+						Description: "Access protocol type",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -629,7 +629,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: DefenceMode
 					"defence_mode": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "防护模式。",
+						Description: "Protection mode",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -638,7 +638,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceID
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡实例 ID。",
+						Description: "Load balancing instance ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -647,7 +647,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
 					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡实例名称。",
+						Description: "Load balancer instance name.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -656,7 +656,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerID
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡监听器 ID。",
+						Description: "Load balancing listener ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -665,7 +665,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: LostAssociationFromALB
 					"lost_association_from_alb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "是否从 ALB 中丢失关联。",
+						Description: "Disassociated from ALB",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -674,7 +674,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器转发规则的端口号。",
+						Description: "Listener forwarding rule port number",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -683,7 +683,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器转发规则的协议类型。",
+						Description: "Protocol type for listener forwarding rules.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -692,7 +692,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "LB接入参数。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "LB access parameters.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -706,11 +706,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CNAME记录。",
+		//	  "description": "CNAME record.",
 		//	  "type": "string"
 		//	}
 		"cname": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CNAME记录。",
+			Description: "CNAME record.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -720,12 +720,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启自定义BOT防护。",
+		//	  "description": "Whether to enable custom bot protection.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"custom_bot_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启自定义BOT防护。",
+			Description: "Whether to enable custom bot protection.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -736,7 +736,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义Header。",
+		//	  "description": "Custom header.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -746,7 +746,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"custom_header": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "自定义Header。",
+			Description: "Custom header.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -757,12 +757,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启自定义响应。",
+		//	  "description": "Whether to enable custom response.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"custom_rsp_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启自定义响应。",
+			Description: "Whether to enable custom response.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -773,11 +773,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义SNI。",
+		//	  "description": "Custom SNI.",
 		//	  "type": "string"
 		//	}
 		"custom_sni": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义SNI。",
+			Description: "Custom SNI.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -789,12 +789,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "为例外 ALB 实例设置防护模式。\n1：启用防护，已配置的防护策略生效。\n2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。\n3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。\n设置例外防护实例后，域名可能还会存在以下防护状态：\n5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。\n6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。\n7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。",
+		//	  "description": "Set protection mode for exception ALB instances.\n1: Enable protection. The configured protection policies take effect.\n2: Pause protection. Only forwarding is performed without inspection; the configured protection policies do not take effect.\n3: Origin mode. Requests are sent directly to the origin server and are no longer forwarded to the WAF instance.\nAfter configuring exception protection instances, the domain may also have the following protection statuses:\n5: Partially enabled. The default protection mode is enabled, but some exception instances are in paused protection or origin mode.\n6: Partially paused. The default protection mode is paused, but some exception instances are in enabled protection or origin mode.\n7: Partially origin. The default protection mode is origin mode, but some exception instances are in enabled protection or paused protection.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"defence_mode": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "为例外 ALB 实例设置防护模式。\n  1：启用防护，已配置的防护策略生效。\n  2：暂停防护，仅执行转发而不检测，已配置的防护策略不生效。\n  3：回源模式，直接将请求解析至源站，不再转发至 WAF 实例。\n  设置例外防护实例后，域名可能还会存在以下防护状态：\n  5：部分启用，默认防护模式为启用防护，但存在例外实例为暂停防护或回源模式状态。\n  6：部分暂停，默认防护模式为暂停防护，但存在例外实例为启用防护或回源模式状态。\n  7：部分回源，默认防护模式为回源模式，但存在例外实例为启用防护或暂停防护状态。",
+			Description: "Set protection mode for exception ALB instances.\n  1: Enable protection. The configured protection policies take effect.\n  2: Pause protection. Only forwarding is performed without inspection; the configured protection policies do not take effect.\n  3: Origin mode. Requests are sent directly to the origin server and are no longer forwarded to the WAF instance.\n  After configuring exception protection instances, the domain may also have the following protection statuses:\n  5: Partially enabled. The default protection mode is enabled, but some exception instances are in paused protection or origin mode.\n  6: Partially paused. The default protection mode is paused, but some exception instances are in enabled protection or origin mode.\n  7: Partially origin. The default protection mode is origin mode, but some exception instances are in enabled protection or paused protection.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -805,12 +805,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启数据泄露防护。",
+		//	  "description": "Data leakage protection enabled",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"dlp_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启数据泄露防护。",
+			Description: "Data leakage protection enabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -821,11 +821,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "防护的域名信息，支持泛域名和精确域名。",
+		//	  "description": "Protected domain information. Supports wildcard and exact domains",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "防护的域名信息，支持泛域名和精确域名。",
+			Description: "Protected domain information. Supports wildcard and exact domains",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -835,12 +835,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启用户自定义重定向。0:关闭,1:开启。",
+		//	  "description": "User-defined redirection enabled. 0: Off, 1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"enable_custom_redirect": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启用户自定义重定向。0:关闭,1:开启。",
+			Description: "User-defined redirection enabled. 0: Off, 1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -852,12 +852,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启HTTP2.0。0:关闭,1:开启。",
+		//	  "description": "Whether to enable HTTP/2.0. 0: Disabled, 1: Enabled.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"enable_http2": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启HTTP2.0。0:关闭,1:开启。",
+			Description: "Whether to enable HTTP/2.0. 0: Disabled, 1: Enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -868,12 +868,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否支持防护Ipv6请求。0:关闭,1:开启。",
+		//	  "description": "IPv6 request protection supported. 0: Off, 1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"enable_ipv_6": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否支持防护Ipv6请求。0:关闭,1:开启。",
+			Description: "IPv6 request protection supported. 0: Off, 1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -884,12 +884,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启SNI配置。0:关闭,1:开启。",
+		//	  "description": "Whether to enable SNI configuration. 0: Off, 1: On.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"enable_sni": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启SNI配置。0:关闭,1:开启。",
+			Description: "Whether to enable SNI configuration. 0: Off, 1: On.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -901,12 +901,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "长连接复用个数。",
+		//	  "description": "Persistent connection reuse count",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"keep_alive_request": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "长连接复用个数。",
+			Description: "Persistent connection reuse count",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -917,12 +917,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "长连接保持时间(秒)。",
+		//	  "description": "Persistent connection keep-alive time (seconds)",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"keep_alive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "长连接保持时间(秒)。",
+			Description: "Persistent connection keep-alive time (seconds)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -933,11 +933,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡算法类型。wrr:加权轮询,wlc:加权最小连接数,sh:源地址哈希。",
+		//	  "description": "Load balancing algorithm type. wrr: Weighted round robin, wlc: Weighted least connections, sh: Source address hash.",
 		//	  "type": "string"
 		//	}
 		"lb_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡算法类型。wrr:加权轮询,wlc:加权最小连接数,sh:源地址哈希。",
+			Description: "Load balancing algorithm type. wrr: Weighted round robin, wlc: Weighted least connections, sh: Source address hash.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -948,12 +948,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "端口号。",
+		//	  "description": "Port number",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "端口号。",
+			Description: "Port number",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -963,11 +963,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project name.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -980,12 +980,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启协议跟随。0:关闭,1:开启。",
+		//	  "description": "Protocol following enabled. 0: Off, 1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"protocol_follow": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启协议跟随。0:关闭,1:开启。",
+			Description: "Protocol following enabled. 0: Off, 1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -996,10 +996,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入端口信息。",
+		//	  "description": "Access port information",
 		//	  "properties": {
 		//	    "HTTP": {
-		//	      "description": "HTTP 协议的端口号。",
+		//	      "description": "HTTP protocol port number",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "format": "int32",
@@ -1009,7 +1009,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "HTTPS": {
-		//	      "description": "HTTPS 协议的端口号。",
+		//	      "description": "HTTPS protocol port number",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "format": "int32",
@@ -1026,7 +1026,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				// Property: HTTP
 				"http": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.Int64Type,
-					Description: "HTTP 协议的端口号。",
+					Description: "HTTP protocol port number",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1036,7 +1036,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				// Property: HTTPS
 				"https": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.Int64Type,
-					Description: "HTTPS 协议的端口号。",
+					Description: "HTTPS protocol port number",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1044,7 +1044,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "接入端口信息。",
+			Description: "Access port information",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1055,7 +1055,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入协议类型,支持HTTP/HTTPS。",
+		//	  "description": "Access protocol type: supports HTTP/HTTPS",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -1065,7 +1065,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"protocols": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "接入协议类型,支持HTTP/HTTPS。",
+			Description: "Access protocol type: supports HTTP/HTTPS",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1076,12 +1076,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启代理配置。0:关闭,1:开启。",
+		//	  "description": "Proxy configuration enabled. 0: Off, 1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"proxy_config": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启代理配置。0:关闭,1:开启。",
+			Description: "Proxy configuration enabled. 0: Off, 1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1092,12 +1092,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF和后端服务器的建连超时时间(秒)。",
+		//	  "description": "Connection timeout between WAF and backend server (seconds).",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"proxy_connect_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "WAF和后端服务器的建连超时时间(秒)。",
+			Description: "Connection timeout between WAF and backend server (seconds).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1108,12 +1108,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF回源长连接可复用个数。",
+		//	  "description": "Number of reusable WAF origin persistent connections.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"proxy_keep_alive": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "WAF回源长连接可复用个数。",
+			Description: "Number of reusable WAF origin persistent connections.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1124,12 +1124,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "空闲长连接超时时间(秒)。",
+		//	  "description": "Idle persistent connection timeout (seconds)",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"proxy_keep_alive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "空闲长连接超时时间(秒)。",
+			Description: "Idle persistent connection timeout (seconds)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1140,12 +1140,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF从后端服务器读取响应的超时时间(秒)。",
+		//	  "description": "Timeout for WAF to read response from backend server (seconds).",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"proxy_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "WAF从后端服务器读取响应的超时时间(秒)。",
+			Description: "Timeout for WAF to read response from backend server (seconds).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1156,12 +1156,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF回源重试次数。",
+		//	  "description": "WAF origin retry count.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"proxy_retry": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "WAF回源重试次数。",
+			Description: "WAF origin retry count.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1172,12 +1172,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF将请求传输到后端服务器的超时时间(秒)。",
+		//	  "description": "Timeout for WAF to transmit request to backend server (seconds).",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"proxy_write_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "WAF将请求传输到后端服务器的超时时间(秒)。",
+			Description: "Timeout for WAF to transmit request to backend server (seconds).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1188,12 +1188,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CNAME接入回源方式。0:私网回源,1:公网回源。",
+		//	  "description": "CNAME access origin method. 0: Private network origin, 1: Public network origin.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"public_real_server": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "CNAME接入回源方式。0:私网回源,1:公网回源。",
+			Description: "CNAME access origin method. 0: Private network origin, 1: Public network origin.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1204,12 +1204,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启异常响应防护。",
+		//	  "description": "Whether to enable abnormal response protection.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"rsp_abnormal_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启异常响应防护。",
+			Description: "Whether to enable abnormal response protection.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1219,7 +1219,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "加密套件。",
+		//	  "description": "Cipher suite",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -1229,7 +1229,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ssl_ciphers": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "加密套件。",
+			Description: "Cipher suite",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1240,7 +1240,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS协议版本。如:TLSv1,TLSv1.1,TLSv1.2,TLSv1.3。",
+		//	  "description": "TLS protocol version. For example: TLSv1, TLSv1.1, TLSv1.2, TLSv1.3",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -1250,7 +1250,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ssl_protocols": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "TLS协议版本。如:TLSv1,TLSv1.1,TLSv1.2,TLSv1.3。",
+			Description: "TLS protocol version. For example: TLSv1, TLSv1.1, TLSv1.2, TLSv1.3",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1261,11 +1261,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务IP。",
+		//	  "description": "Service IP",
 		//	  "type": "string"
 		//	}
 		"server_ips": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务IP。",
+			Description: "Service IP",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1275,11 +1275,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF回源IP。",
+		//	  "description": "WAF origin IP.",
 		//	  "type": "string"
 		//	}
 		"src_ips": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "WAF回源IP。",
+			Description: "WAF origin IP.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1289,11 +1289,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "源站协议。",
+		//	  "description": "Origin protocol.",
 		//	  "type": "string"
 		//	}
 		"src_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "源站协议。",
+			Description: "Origin protocol.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1303,12 +1303,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接入状态。0:正常,1:DNS未解析,2:配置中,3:配置失败,4:配置未生效,5:更新中,6:实例已删除。",
+		//	  "description": "Access status. 0: Normal, 1: DNS not resolved, 2: Configuring, 3: Configuration failed, 4: Configuration not effective, 5: Updating, 6: Instance deleted.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"status": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "接入状态。0:正常,1:DNS未解析,2:配置中,3:配置失败,4:配置未生效,5:更新中,6:实例已删除。",
+			Description: "Access status. 0: Normal, 1: DNS not resolved, 2: Configuring, 3: Configuration failed, 4: Configuration not effective, 5: Updating, 6: Instance deleted.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1318,12 +1318,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启托管BOT防护。",
+		//	  "description": "Whether to enable managed bot protection.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"system_bot_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启托管BOT防护。",
+			Description: "Whether to enable managed bot protection.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1334,42 +1334,42 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TCP监听器配置。",
+		//	  "description": "TCP listener configuration.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccessProtocol": {
-		//	        "description": "接入协议类型。",
+		//	        "description": "Access protocol type",
 		//	        "type": "string"
 		//	      },
 		//	      "DefenceMode": {
-		//	        "description": "防护模式。",
+		//	        "description": "Protection mode",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      },
 		//	      "InstanceID": {
-		//	        "description": "实例 ID。",
+		//	        "description": "Instance ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
-		//	        "description": "实例名称。",
+		//	        "description": "Instance name.",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerID": {
-		//	        "description": "监听器 ID。",
+		//	        "description": "Listener ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "LostAssociationFromALB": {
-		//	        "description": "是否从 ALB 中丢失关联。",
+		//	        "description": "Disassociated from ALB",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      },
 		//	      "Port": {
-		//	        "description": "监听器的端口号。",
+		//	        "description": "Listener port number",
 		//	        "type": "string"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "监听器协议类型。",
+		//	        "description": "Listener protocol type.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1383,47 +1383,47 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccessProtocol
 					"access_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "接入协议类型。",
+						Description: "Access protocol type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DefenceMode
 					"defence_mode": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "防护模式。",
+						Description: "Protection mode",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceID
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例 ID。",
+						Description: "Instance ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
 					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例名称。",
+						Description: "Instance name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerID
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器 ID。",
+						Description: "Listener ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: LostAssociationFromALB
 					"lost_association_from_alb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "是否从 ALB 中丢失关联。",
+						Description: "Disassociated from ALB",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的端口号。",
+						Description: "Listener port number",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器协议类型。",
+						Description: "Listener protocol type.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "TCP监听器配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "TCP listener configuration.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -1433,12 +1433,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启日志服务。0:关闭,1:开启。",
+		//	  "description": "Log service enabled. 0: Off, 1: On",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"tls_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启日志服务。0:关闭,1:开启。",
+			Description: "Log service enabled. 0: Off, 1: On",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1449,17 +1449,17 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志字段配置详情。",
+		//	  "description": "Log field configuration details",
 		//	  "properties": {
 		//	    "HeadersConfig": {
 		//	      "properties": {
 		//	        "Enable": {
-		//	          "description": "是否记录全量 header。\n\n关闭，仅记录常见 header 字段。\n启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。",
+		//	          "description": "Record all header fields\n\nOff: Only common header fields are recorded\nOn: All header fields are recorded. Exception header fields and statistical header fields can be configured",
 		//	          "format": "int32",
 		//	          "type": "integer"
 		//	        },
 		//	        "ExcludedKeyList": {
-		//	          "description": "例外 header 字段，将对应字段从字段的 JSON 中排除，可帮助节约日志存储空间。",
+		//	          "description": "Exception header fields. Exclude the specified fields from the JSON to help save log storage space.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -1468,7 +1468,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "StatisticalKeyList": {
-		//	          "description": "统计 header 字段，将对应字段用于日志统计分析和告警。",
+		//	          "description": "Statistics header fields. Use the specified fields for log analysis and alerts.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -1489,7 +1489,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enable
 						"enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "是否记录全量 header。\n  \n  关闭，仅记录常见 header 字段。\n  启用，记录全量 header 字段，可配置例外 header 字段和统计 header 字段。",
+							Description: "Record all header fields\n  \n  Off: Only common header fields are recorded\n  On: All header fields are recorded. Exception header fields and statistical header fields can be configured",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1499,7 +1499,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ExcludedKeyList
 						"excluded_key_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "例外 header 字段，将对应字段从字段的 JSON 中排除，可帮助节约日志存储空间。",
+							Description: "Exception header fields. Exclude the specified fields from the JSON to help save log storage space.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1509,7 +1509,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 						// Property: StatisticalKeyList
 						"statistical_key_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "统计 header 字段，将对应字段用于日志统计分析和告警。",
+							Description: "Statistics header fields. Use the specified fields for log analysis and alerts.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1524,7 +1524,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "日志字段配置详情。",
+			Description: "Log field configuration details",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1536,12 +1536,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启防篡改。",
+		//	  "description": "Whether to enable anti-tampering.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"tamper_proof_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启防篡改。",
+			Description: "Whether to enable anti-tampering.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1552,11 +1552,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1581,12 +1581,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启WAF防护。",
+		//	  "description": "WAF protection enabled",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"waf_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启WAF防护。",
+			Description: "WAF protection enabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1597,12 +1597,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启白名单请求防护。",
+		//	  "description": "Allowlist request protection enabled",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"waf_white_req_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启白名单请求防护。",
+			Description: "Allowlist request protection enabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1613,12 +1613,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启白名单防护。",
+		//	  "description": "Whether to enable allowlist protection.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"white_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启白名单防护。",
+			Description: "Whether to enable allowlist protection.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1629,12 +1629,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启字段白名单防护。",
+		//	  "description": "Field allowlist protection enabled",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"white_field_enable": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否开启字段白名单防护。",
+			Description: "Field allowlist protection enabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1653,7 +1653,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "通过 CNAME 或是负载均衡方式接入防护网站，并配置接入能力和回源能力，将业务流量接入到 WAF 实例，实现防护。",
+		Description: "Connect the protected site via CNAME or load balancing, configure access and origin capabilities, and route business traffic to the WAF instance for protection",
 		Version:     1,
 		Attributes:  attributes,
 	}

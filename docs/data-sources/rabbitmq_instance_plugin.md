@@ -21,12 +21,12 @@ Data Source schema for Volcengine::RabbitMQ::InstancePlugin
 
 ### Read-Only
 
-- `description` (String) 插件描述。
-- `disable_prompt` (String) 关闭此插件的注意事项说明。
-- `enable_prompt` (String) 开启此插件的注意事项说明。
-- `enabled` (Boolean) 是否已开启插件。true：插件已开启。false：插件已关闭。
-- `instance_id` (String) 实例 ID。
-- `need_reboot_on_change` (Boolean) 开启或关闭插件是否会引发 RabbitMQ 实例重启。true：会重启实例。false：不会重启实例。
-- `plugin_name` (String) 插件名称。
-- `port` (Number) 插件监听的端口。
-- `version` (String) 插件版本。
+- `description` (String) Plugin description
+- `disable_prompt` (String) Notes for disabling this plugin
+- `enable_prompt` (String) Notes for enabling this plugin
+- `enabled` (Boolean) Whether the plugin is enabled. true: The plugin is enabled. false: The plugin is disabled
+- `instance_id` (String) Instance ID
+- `need_reboot_on_change` (Boolean) Whether enabling or disabling the plugin will cause a RabbitMQ instance restart. true: The instance will restart. false: The instance will not restart
+- `plugin_name` (String) Plugin name
+- `port` (Number) Plugin listening port
+- `version` (String) Plugin version

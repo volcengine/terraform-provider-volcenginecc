@@ -37,12 +37,12 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 64512,
-		//	  "description": "中转路由器的ASN号。取值范围为64512 ～ 65534 和 4200000000 ～ 4294967294，默认值为64512。",
+		//	  "description": "ASN of the transit router. Value range: 64512–65534 and 4200000000–4294967294. Default value: 64512",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器的ASN号。取值范围为64512 ～ 65534 和 4200000000 ～ 4294967294，默认值为64512。",
+			Description: "ASN of the transit router. Value range: 64512–65534 and 4200000000–4294967294. Default value: 64512",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(64512),
@@ -55,62 +55,62 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的详细信息。",
+		//	  "description": "Detailed information of the network instance connection",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AutoPublishRouteEnabled": {
-		//	        "description": "是否自动同步TR路由到网络实例路由表中。true：是。false：否。",
+		//	        "description": "Whether to automatically synchronize TR routes to the network instance route table. true: Yes. false: No.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "BusinessStatus": {
-		//	        "description": "网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。",
+		//	        "description": "Business status of the network instance connection. Values: Normal: Normal. FinancialLocked: Financially locked.",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {
-		//	        "description": "网络实例连接的创建时间。",
+		//	        "description": "Creation time of the network instance connection.",
 		//	        "type": "string"
 		//	      },
 		//	      "DeletedTime": {
-		//	        "description": "网络实例连接的删除时间。",
+		//	        "description": "Deletion time of the network instance connection.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "网络实例连接的描述信息。",
+		//	        "description": "Description of the network instance connection.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ipv6Enabled": {
-		//	        "description": "是否开启IPv6功能。true：是。false：否。",
+		//	        "description": "Whether IPv6 is enabled. true: yes. false: no",
 		//	        "type": "boolean"
 		//	      },
 		//	      "OverdueTime": {
-		//	        "description": "网络实例连接的欠费关停时间。",
+		//	        "description": "Shutdown time due to overdue payment for the network instance connection",
 		//	        "type": "string"
 		//	      },
 		//	      "ResourceId": {
-		//	        "description": "网络实例的ID。",
+		//	        "description": "ID of the network instance",
 		//	        "type": "string"
 		//	      },
 		//	      "ResourceType": {
-		//	        "description": "网络实例连接关联的网络实例类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。",
+		//	        "description": "Type of network instance associated with the network instance connection. VPC: Virtual Private Cloud. VPN: VPN connection. DirectConnectGateway: Direct Connect Gateway. TransitRouter: Transit Router",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "网络实例连接的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+		//	        "description": "Status of the network instance connection. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 		//	        "type": "string"
 		//	      },
 		//	      "Tags": {
-		//	        "description": "网络实例连接的标签信息",
+		//	        "description": "Tag information of the network instance connection",
 		//	        "insertionOrder": false,
 		//	        "items": {
-		//	          "description": "标签键值对。",
+		//	          "description": "Tag key-value pair.",
 		//	          "properties": {
 		//	            "Key": {
-		//	              "description": "标签键。",
+		//	              "description": "Tag key",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "description": "标签值。",
+		//	              "description": "Tag value.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -123,35 +123,35 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "TransitRouterAttachmentId": {
-		//	        "description": "网络实例连接的ID。",
+		//	        "description": "Network instance connection ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "TransitRouterAttachmentName": {
-		//	        "description": "网络实例连接的名称。",
+		//	        "description": "Name of the network instance connection",
 		//	        "type": "string"
 		//	      },
 		//	      "TransitRouterForwardPolicyTableId": {
-		//	        "description": "跨地域连接关联的转发策略的ID。",
+		//	        "description": "ID of the forwarding policy associated with the cross-region connection",
 		//	        "type": "string"
 		//	      },
 		//	      "TransitRouterId": {
-		//	        "description": "中转路由器实例的ID。",
+		//	        "description": "Transit router instance ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "TransitRouterRouteTableId": {
-		//	        "description": "网络实例连接关联转发的路由表ID。",
+		//	        "description": "Route table ID associated with the forwarding of the network instance connection.",
 		//	        "type": "string"
 		//	      },
 		//	      "TransitRouterTrafficQosMarkingPolicyId": {
-		//	        "description": "跨地域连接关联的流标记策略的ID。",
+		//	        "description": "ID of the flow marking policy associated with the cross-region connection",
 		//	        "type": "string"
 		//	      },
 		//	      "TransitRouterTrafficQosQueuePolicyId": {
-		//	        "description": "跨地域连接关联的流队列策略的ID。",
+		//	        "description": "ID of the flow queue policy associated with the cross-region connection",
 		//	        "type": "string"
 		//	      },
 		//	      "UpdateTime": {
-		//	        "description": "网络实例连接的最近操作时间。",
+		//	        "description": "Last operation time of the network instance connection",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -165,52 +165,52 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AutoPublishRouteEnabled
 					"auto_publish_route_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否自动同步TR路由到网络实例路由表中。true：是。false：否。",
+						Description: "Whether to automatically synchronize TR routes to the network instance route table. true: Yes. false: No.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: BusinessStatus
 					"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。",
+						Description: "Business status of the network instance connection. Values: Normal: Normal. FinancialLocked: Financially locked.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CreationTime
 					"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的创建时间。",
+						Description: "Creation time of the network instance connection.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DeletedTime
 					"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的删除时间。",
+						Description: "Deletion time of the network instance connection.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的描述信息。",
+						Description: "Description of the network instance connection.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv6Enabled
 					"ipv_6_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否开启IPv6功能。true：是。false：否。",
+						Description: "Whether IPv6 is enabled. true: yes. false: no",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OverdueTime
 					"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的欠费关停时间。",
+						Description: "Shutdown time due to overdue payment for the network instance connection",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例的ID。",
+						Description: "ID of the network instance",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceType
 					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接关联的网络实例类型。VPC：私有网络。VPN：VPN连接。DirectConnectGateway：专线网关。TransitRouter：中转路由器。",
+						Description: "Type of network instance associated with the network instance connection. VPC: Virtual Private Cloud. VPN: VPN connection. DirectConnectGateway: Direct Connect Gateway. TransitRouter: Transit Router",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+						Description: "Status of the network instance connection. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Tags
@@ -219,62 +219,62 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "标签键。",
+									Description: "Tag key",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "标签值。",
+									Description: "Tag value.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "网络实例连接的标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Tag information of the network instance connection\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterAttachmentId
 					"transit_router_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的ID。",
+						Description: "Network instance connection ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterAttachmentName
 					"transit_router_attachment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的名称。",
+						Description: "Name of the network instance connection",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterForwardPolicyTableId
 					"transit_router_forward_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "跨地域连接关联的转发策略的ID。",
+						Description: "ID of the forwarding policy associated with the cross-region connection",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterId
 					"transit_router_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "中转路由器实例的ID。",
+						Description: "Transit router instance ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterRouteTableId
 					"transit_router_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接关联转发的路由表ID。",
+						Description: "Route table ID associated with the forwarding of the network instance connection.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterTrafficQosMarkingPolicyId
 					"transit_router_traffic_qos_marking_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "跨地域连接关联的流标记策略的ID。",
+						Description: "ID of the flow marking policy associated with the cross-region connection",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TransitRouterTrafficQosQueuePolicyId
 					"transit_router_traffic_qos_queue_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "跨地域连接关联的流队列策略的ID。",
+						Description: "ID of the flow queue policy associated with the cross-region connection",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UpdateTime
 					"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例连接的最近操作时间。",
+						Description: "Last operation time of the network instance connection",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "网络实例连接的详细信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Detailed information of the network instance connection\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -284,11 +284,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。",
+		//	  "description": "Business status of the network instance connection. Values: Normal: Normal. FinancialLocked: Financially locked.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的业务状态。取值如下：Normal：正常。FinancialLocked：已冻结。",
+			Description: "Business status of the network instance connection. Values: Normal: Normal. FinancialLocked: Financially locked.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -298,11 +298,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的创建时间。",
+		//	  "description": "Creation time of the network instance connection.",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的创建时间。",
+			Description: "Creation time of the network instance connection.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -312,11 +312,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的删除时间。",
+		//	  "description": "Deletion time of the network instance connection.",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的删除时间。",
+			Description: "Deletion time of the network instance connection.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -326,12 +326,12 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+		//	  "description": "Description of the transit router instance. Must start with a letter, number, or Chinese character. Can contain letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is entered, the default is an empty string",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+			Description: "Description of the transit router instance. Must start with a letter, number, or Chinese character. Can contain letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is entered, the default is an empty string",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -345,11 +345,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。",
+		//	  "description": "Sharing method of the transit router instance. rs: Shared via platform resource sharing. tr: Shared via transit router instance sharing",
 		//	  "type": "string"
 		//	}
 		"grant_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的共享方式。rs：通过平台资源共享功能共享。tr：通过中转路由器实例共享功能共享。",
+			Description: "Sharing method of the transit router instance. rs: Shared via platform resource sharing. tr: Shared via transit router instance sharing",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -359,11 +359,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例共享的状态。Accepted：已接受。Initial：待接受。",
+		//	  "description": "Instance sharing status. Accepted: Received. Initial: Pending acceptance.",
 		//	  "type": "string"
 		//	}
 		"grant_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例共享的状态。Accepted：已接受。Initial：待接受。",
+			Description: "Instance sharing status. Accepted: Received. Initial: Pending acceptance.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -373,11 +373,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器是否开启组播。true：开启。false（默认值）：不开启",
+		//	  "description": "Whether multicast is enabled for the transit router. true: enabled. false (default): not enabled",
 		//	  "type": "boolean"
 		//	}
 		"multicast_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器是否开启组播。true：开启。false（默认值）：不开启",
+			Description: "Whether multicast is enabled for the transit router. true: enabled. false (default): not enabled",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -389,11 +389,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的欠费关停时间。",
+		//	  "description": "Shutdown time due to overdue payment for the transit router instance",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的欠费关停时间。",
+			Description: "Shutdown time due to overdue payment for the transit router instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -404,11 +404,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "中转路由器实例所属项目的名称。不传入该参数或该参数不传入数值时，默认为default。",
+		//	  "description": "Name of the project to which the transit router instance belongs. If this parameter is not provided or no value is entered, the default is 'default'",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例所属项目的名称。不传入该参数或该参数不传入数值时，默认为default。",
+			Description: "Name of the project to which the transit router instance belongs. If this parameter is not provided or no value is entered, the default is 'default'",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -421,11 +421,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+		//	  "description": "Status of the transit router instance. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+			Description: "Status of the transit router instance. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -435,17 +435,17 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签键值对。",
+		//	    "description": "Tag key-value pair.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -462,7 +462,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -474,7 +474,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -483,7 +483,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -494,11 +494,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的ID。",
+		//	  "description": "Transit router instance ID.",
 		//	  "type": "string"
 		//	}
 		"transit_router_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的ID。",
+			Description: "Transit router instance ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -508,13 +508,13 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为中转路由器实例的ID。",
+		//	  "description": "Name of the transit router instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the transit router instance ID.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"transit_router_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为中转路由器实例的ID。",
+			Description: "Name of the transit router instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the transit router instance ID.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -528,11 +528,11 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的最近操作时间。",
+		//	  "description": "Last operation time of the transit router instance",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的最近操作时间。",
+			Description: "Last operation time of the transit router instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -550,7 +550,7 @@ func transitRouterResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "中转路由器服务的运行载体。接受来自网络实例的流量，并根据关联转发路由表进行转发。",
+		Description: "Platform on which the transit router service runs. Receives traffic from network instances and forwards it according to the associated forwarding route table",
 		Version:     1,
 		Attributes:  attributes,
 	}

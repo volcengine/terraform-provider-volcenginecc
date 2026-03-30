@@ -26,122 +26,122 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+		//	  "description": "IP allowlist. Separate multiple IP addresses with commas (,). No duplicates allowed",
 		//	  "type": "string"
 		//	}
 		"allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+			Description: "IP allowlist. Separate multiple IP addresses with commas (,). No duplicates allowed",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListCategory
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单分类。",
+		//	  "description": "Allowlist category",
 		//	  "type": "string"
 		//	}
 		"allow_list_category": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单分类。",
+			Description: "Allowlist category",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListDesc
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单描述。",
+		//	  "description": "Allowlist description",
 		//	  "type": "string"
 		//	}
 		"allow_list_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单描述。",
+			Description: "Allowlist description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListIPNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "AllowListIP数量。",
+		//	  "description": "Allowlist IP count",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"allow_list_ip_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "AllowListIP数量。",
+			Description: "Allowlist IP count",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单的id。",
+		//	  "description": "Allowlist ID",
 		//	  "type": "string"
 		//	}
 		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单的id。",
+			Description: "Allowlist ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单名称。",
+		//	  "description": "Allowlist name",
 		//	  "type": "string"
 		//	}
 		"allow_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单名称。",
+			Description: "Allowlist name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单内的IP地址类型，当前仅支持IPv4。",
+		//	  "description": "IP address type in the allowlist. Only IPv4 is supported",
 		//	  "type": "string"
 		//	}
 		"allow_list_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单内的IP地址类型，当前仅支持IPv4。",
+			Description: "IP address type in the allowlist. Only IPv4 is supported",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定的实例数量。解绑实例的白名单时必传。",
+		//	  "description": "Number of bound instances. Required when unbinding an instance from the allowlist",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"associated_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "绑定的实例数量。解绑实例的白名单时必传。",
+			Description: "Number of bound instances. Required when unbinding an instance from the allowlist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstances
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定的实例列表。",
+		//	  "description": "Bound instance list",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "properties": {
 		//	      "InstanceId": {
-		//	        "description": "实例ID。",
+		//	        "description": "Instance ID",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
-		//	        "description": "实例名称。",
+		//	        "description": "Instance name",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceStatus": {
-		//	        "description": "实例状态。",
+		//	        "description": "Instance status",
 		//	        "type": "string"
 		//	      },
 		//	      "IsLatest": {
-		//	        "description": "是否同步最新白名单 IP",
+		//	        "description": "Sync latest allowlist IP",
 		//	        "type": "boolean"
 		//	      },
 		//	      "ProjectName": {
-		//	        "description": "实例所属项目名称。",
+		//	        "description": "Project name of the instance",
 		//	        "type": "string"
 		//	      },
 		//	      "VPC": {
-		//	        "description": "实例所属VPC ID。",
+		//	        "description": "VPC ID of the instance",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -155,70 +155,70 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例ID。",
+						Description: "Instance ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
 					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例名称。",
+						Description: "Instance name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceStatus
 					"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例状态。",
+						Description: "Instance status",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: IsLatest
 					"is_latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否同步最新白名单 IP",
+						Description: "Sync latest allowlist IP",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ProjectName
 					"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例所属项目名称。",
+						Description: "Project name of the instance",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VPC
 					"vpc": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例所属VPC ID。",
+						Description: "VPC ID of the instance",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "绑定的实例列表。",
+			Description: "Bound instance list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID。",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserAllowList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组之外的、需要加入白名单的IP地址，可输入IP地址或CIDR格式的IP地址段。如果该字段与AllowList同时指定，以AllowList为准。",
+		//	  "description": "IP addresses outside the security group that need to be added to the allowlist. Enter IP addresses or CIDR-formatted IP ranges. If both this field and AllowList are specified, AllowList takes precedence",
 		//	  "type": "string"
 		//	}
 		"user_allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组之外的、需要加入白名单的IP地址，可输入IP地址或CIDR格式的IP地址段。如果该字段与AllowList同时指定，以AllowList为准。",
+			Description: "IP addresses outside the security group that need to be added to the allowlist. Enter IP addresses or CIDR-formatted IP ranges. If both this field and AllowList are specified, AllowList takes precedence",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

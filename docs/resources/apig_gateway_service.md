@@ -2,12 +2,12 @@
 page_title: "volcenginecc_apig_gateway_service Resource - terraform-provider-volcenginecc"
 subcategory: "APIG"
 description: |-
-  服务是一组路由对外暴露的入口，用于区分流量的来源和协议，实现业务、环境、逻辑租户隔离。服务可以绑定独立的访问域名，以域名维度访问业务。
+  A service is a set of routes exposed as entry points to distinguish traffic sources and protocols, enabling business, environment, and logical tenant isolation. Services can bind independent access domains, allowing access by domain.
 ---
 
 # volcenginecc_apig_gateway_service (Resource)
 
-服务是一组路由对外暴露的入口，用于区分流量的来源和协议，实现业务、环境、逻辑租户隔离。服务可以绑定独立的访问域名，以域名维度访问业务。
+A service is a set of routes exposed as entry points to distinguish traffic sources and protocols, enabling business, environment, and logical tenant isolation. Services can bind independent access domains, allowing access by domain.
 
 ## Example Usage
 
@@ -34,38 +34,38 @@ resource "volcenginecc_apig_gateway_service" "ApigGatewayServiceDemo" {
 
 ### Required
 
-- `auth_spec` (Attributes) 认证配置。 (see [below for nested schema](#nestedatt--auth_spec))
-- `gateway_id` (String) 网关ID。
-- `protocol` (Set of String) 服务支持的协议。取值：HTTP：HTTP。HTTPS：HTTPS。
-- `service_name` (String) 服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。
+- `auth_spec` (Attributes) Authentication configuration. (see [below for nested schema](#nestedatt--auth_spec))
+- `gateway_id` (String) Gateway ID.
+- `protocol` (Set of String) Supported protocols. Options: HTTP: HTTP. HTTPS: HTTPS.
+- `service_name` (String) Service name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length must be 2–128 characters. Cannot start with a hyphen (-).
 
 ### Optional
 
-- `comments` (String) 备注，长度限制为0~253个字符。
-- `custom_domains` (Attributes Set) 自定义域名列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_domains))
-- `domain_type` (String) 域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。
-- `service_network_spec` (Attributes) 服务默认域名网络配置。。 (see [below for nested schema](#nestedatt--service_network_spec))
-- `service_type` (String) 服务类型，取值：AIProvider：AI模型代理。
+- `comments` (String) Remarks. Length must be 0–253 characters.
+- `custom_domains` (Attributes Set) Custom domain list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--custom_domains))
+- `domain_type` (String) Domain type. Options: DefaultDomain: Default domain. CustomDomain: Custom domain.
+- `service_network_spec` (Attributes) Default domain network configuration.. (see [below for nested schema](#nestedatt--service_network_spec))
+- `service_type` (String) Service type. Options: AIProvider: AI model proxy.
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `domain_spec` (Attributes) 域名详情。 (see [below for nested schema](#nestedatt--domain_spec))
-- `domains` (Attributes Set) 默认域名。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domains))
-- `gateway_name` (String) 网关名称。
+- `created_time` (String) Creation time.
+- `domain_spec` (Attributes) Domain details. (see [below for nested schema](#nestedatt--domain_spec))
+- `domains` (Attributes Set) Default domain.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--domains))
+- `gateway_name` (String) Gateway name.
 - `id` (String) Uniquely identifies the resource.
-- `message` (String) 服务创建失败、删除失败或异常时的错误信息。
-- `service_id` (String) 服务ID。
-- `status` (String) Creating：创建中。CreatedFailed：创建失败。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。
+- `message` (String) Error message for service creation failure, deletion failure, or abnormal status.
+- `service_id` (String) Service ID.
+- `status` (String) Creating: Creating. CreatedFailed: Creation failed. Running: Running. Deleting: Deleting. DeletedFailed: Deletion failed. Abnormal: Abnormal.
 
 <a id="nestedatt--auth_spec"></a>
 ### Nested Schema for `auth_spec`
 
 Optional:
 
-- `enable` (Boolean) 是否开启认证。
+- `enable` (Boolean) Whether authentication is enabled.
 
 
 <a id="nestedatt--custom_domains"></a>
@@ -77,9 +77,9 @@ Optional:
 
 Optional:
 
-- `enable_private_network` (Boolean) 开启私网。
-- `enable_public_network` (Boolean) 开启公网。
-- `private_network_ip` (Set of String) 私网域名解析的目标IP。
+- `enable_private_network` (Boolean) Enable private network.
+- `enable_public_network` (Boolean) Enable public network.
+- `private_network_ip` (Set of String) Target IP for private network domain resolution.
 
 
 <a id="nestedatt--domain_spec"></a>
@@ -87,7 +87,7 @@ Optional:
 
 Read-Only:
 
-- `enable_public_resolution` (Boolean) 开启私网域名公网解析。
+- `enable_public_resolution` (Boolean) Enable public resolution for private network domains.
 
 
 <a id="nestedatt--domains"></a>
@@ -95,8 +95,8 @@ Read-Only:
 
 Read-Only:
 
-- `domain` (String) 域名。
-- `type` (String) 域名类型。取值：public：公网。private：私网。
+- `domain` (String) Domain.
+- `type` (String) Domain type. Options: public: Public network. private: Private network.
 
 ## Import
 

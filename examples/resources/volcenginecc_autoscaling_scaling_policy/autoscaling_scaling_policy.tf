@@ -1,6 +1,6 @@
 resource "volcenginecc_autoscaling_scaling_policy" "AutoScalingScalingPolicyDemo" {
   scaling_group_id    = "scg-ye9vu9ztco9ht5lxxxxx"
-  scaling_policy_name = "AutoScalingScalingPolicyDemo-定时任务"
+  scaling_policy_name = "AutoScalingScalingPolicyDemo"
   scaling_policy_type = "Scheduled"
   adjustment_type     = "PercentChangeInCapacity"
   adjustment_value    = 1

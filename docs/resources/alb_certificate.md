@@ -2,12 +2,12 @@
 page_title: "volcenginecc_alb_certificate Resource - terraform-provider-volcenginecc"
 subcategory: "ALB"
 description: |-
-  ALB 支持上传服务器证书、CA 证书到控制台，对上传的证书单独管理。
+  ALB supports uploading server certificates and CA certificates to the console and manages uploaded certificates separately
 ---
 
 # volcenginecc_alb_certificate (Resource)
 
-ALB 支持上传服务器证书、CA 证书到控制台，对上传的证书单独管理。
+ALB supports uploading server certificates and CA certificates to the console and manages uploaded certificates separately
 
 ## Example Usage
 
@@ -31,36 +31,36 @@ resource "volcenginecc_alb_certificate" "ALBCertificateDemo" {
 
 ### Required
 
-- `certificate_type` (String) 证书类型，取值：CA：CA证书、Server：服务器证书。
-- `public_key` (String) 服务器证书的公钥。
+- `certificate_type` (String) Certificate type. Options: CA: CA certificate; Server: server certificate
+- `public_key` (String) Server certificate public key
 
 ### Optional
 
-- `certificate_name` (String) 证书名称，长度限制为1 ～ 128个字符，必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。
-- `description` (String) 证书描述。
-- `private_key` (String) 服务器证书的私钥，当证书类型为Server时必填。
-- `project_name` (String) 项目名称。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `certificate_name` (String) Certificate name. Length must be between 1 and 128 characters, start with a letter or Chinese character, and may include numbers, periods (.), underscores (_), and hyphens (-)
+- `description` (String) Certificate description
+- `private_key` (String) Server certificate private key. Required when certificate type is Server
+- `project_name` (String) Project name
+- `tags` (Attributes Set) Tag list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `certificate_id` (String) 证书ID。
-- `created_time` (String) 证书创建时间。
-- `domain_name` (String) 证书域名。
-- `expired_at` (String) 证书过期时间。
+- `certificate_id` (String) Certificate ID
+- `created_time` (String) Certificate creation time
+- `domain_name` (String) Certificate domain name
+- `expired_at` (String) Certificate expiration time
 - `id` (String) Uniquely identifies the resource.
-- `listeners` (Set of String) 证书关联的监听器列表。
-- `san` (String) 证书扩展域名列表，用英文',' 分隔多个域名， 包含(commonName,DnsName,IP)。
-- `status` (String) 证书的状态，取值为：Creating：创建中。Active：运行中。Deleting：删除中。
+- `listeners` (Set of String) List of listeners associated with the certificate
+- `san` (String) Certificate subject alternative name list. Use English ',' to separate multiple domain names. Includes (commonName, DnsName, IP)
+- `status` (String) Certificate status. Options: Creating: creating; Active: active; Deleting: deleting
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key
+- `value` (String) User tag value
 
 ## Import
 

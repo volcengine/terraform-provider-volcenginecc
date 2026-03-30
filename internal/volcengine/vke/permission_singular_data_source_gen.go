@@ -26,41 +26,41 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RBAC 权限策略资源被授权的时间。",
+		//	  "description": "Time when the RBAC policy resource was authorized.",
 		//	  "type": "string"
 		//	}
 		"authorized_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RBAC 权限策略资源被授权的时间。",
+			Description: "Time when the RBAC policy resource was authorized.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。",
+		//	  "description": "Grantor ID. Can be an IAM user ID or an IAM role ID.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"authorizer_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。",
+			Description: "Grantor ID. Can be an IAM user ID or an IAM role ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权者名称",
+		//	  "description": "Grantor name",
 		//	  "type": "string"
 		//	}
 		"authorizer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权者名称",
+			Description: "Grantor name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。",
+		//	  "description": "Type of grantor. Possible values: User: IAM user. Role: IAM role. Account: account.",
 		//	  "enum": [
 		//	    "User",
 		//	    "Role",
@@ -69,48 +69,48 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"authorizer_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。",
+			Description: "Type of grantor. Possible values: User: IAM user. Role: IAM role. Account: account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "需要授权给 IAM 用户或角色的集群 ID。roleDomain为namespace或cluster时必须填写该参数值。",
+		//	  "description": "Cluster ID to be authorized for the IAM user or role. This parameter is required when roleDomain is namespace or cluster.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "需要授权给 IAM 用户或角色的集群 ID。roleDomain为namespace或cluster时必须填写该参数值。",
+			Description: "Cluster ID to be authorized for the IAM user or role. This parameter is required when roleDomain is namespace or cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RBAC 权限策略资源创建的时间。",
+		//	  "description": "Time when the RBAC policy resource was created.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RBAC 权限策略资源创建的时间。",
+			Description: "Time when the RBAC policy resource was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GranteeId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "被授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。",
+		//	  "description": "Grantee ID. Can be an IAM user ID or an IAM role ID.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"grantee_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "被授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。",
+			Description: "Grantee ID. Can be an IAM user ID or an IAM role ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GranteeType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "被授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。",
+		//	  "description": "Type of grantee. Possible values: User: IAM user. Role: IAM role. Account: account.",
 		//	  "enum": [
 		//	    "User",
 		//	    "Role",
@@ -119,91 +119,91 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"grantee_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "被授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。",
+			Description: "Type of grantee. Possible values: User: IAM user. Role: IAM role. Account: account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsCustomRole
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "给被授权者授予的 RBAC 角色是否为自定义角色，取值如下：true：自定义角色。false：（默认值）系统预置的角色。",
+		//	  "description": "Whether the RBAC role granted to the grantee is a custom role. Possible values: true: custom role. false (default): system predefined role.",
 		//	  "type": "boolean"
 		//	}
 		"is_custom_role": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "给被授权者授予的 RBAC 角色是否为自定义角色，取值如下：true：自定义角色。false：（默认值）系统预置的角色。",
+			Description: "Whether the RBAC role granted to the grantee is a custom role. Possible values: true: custom role. false (default): system predefined role.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KubeRoleBindingName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RBAC 权限策略资源在 Kubernetes 中的对象名称。",
+		//	  "description": "The object name of the RBAC policy resource in Kubernetes.",
 		//	  "type": "string"
 		//	}
 		"kube_role_binding_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RBAC 权限策略资源在 Kubernetes 中的对象名称。",
+			Description: "The object name of the RBAC policy resource in Kubernetes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Message
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权详细消息。",
+		//	  "description": "Authorization details message.",
 		//	  "type": "string"
 		//	}
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权详细消息。",
+			Description: "Authorization details message.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "需要授权给 IAM 用户或角色的名空间名称。roleDomain等于namespace时必须填写该参数值。roleDomain不等于namespace时，填写该参数值不生效。",
+		//	  "description": "Namespace name to be authorized for the IAM user or role. This parameter is required when roleDomain equals namespace. If roleDomain does not equal namespace, this parameter is not effective.",
 		//	  "type": "string"
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "需要授权给 IAM 用户或角色的名空间名称。roleDomain等于namespace时必须填写该参数值。roleDomain不等于namespace时，填写该参数值不生效。",
+			Description: "Namespace name to be authorized for the IAM user or role. This parameter is required when roleDomain equals namespace. If roleDomain does not equal namespace, this parameter is not effective.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RBAC 权限策略资源 ID。",
+		//	  "description": "RBAC policy resource ID.",
 		//	  "type": "string"
 		//	}
 		"permission_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RBAC 权限策略资源 ID。",
+			Description: "RBAC policy resource ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectSelector
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目选择器",
+		//	  "description": "Project selector",
 		//	  "type": "string"
 		//	}
 		"project_selector": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目选择器",
+			Description: "Project selector",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RevokedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "撤销授权的时间。",
+		//	  "description": "Time when authorization is revoked.",
 		//	  "type": "string"
 		//	}
 		"revoked_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "撤销授权的时间。",
+			Description: "Time when authorization is revoked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "为 IAM 用户或角色授予的权限类型，取值如下：namespace：授予命名空间级别的权限。cluster：授予集群级别的权限。all_clusters：授予当前账号下全部集群级别的权限。",
+		//	  "description": "The permission type granted to an IAM user or role. Possible values: namespace: grants permissions at the namespace level. cluster: grants permissions at the cluster level. all_clusters: grants permissions at the cluster level for all clusters under the current account.",
 		//	  "enum": [
 		//	    "namespace",
 		//	    "cluster",
@@ -212,25 +212,25 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"role_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "为 IAM 用户或角色授予的权限类型，取值如下：namespace：授予命名空间级别的权限。cluster：授予集群级别的权限。all_clusters：授予当前账号下全部集群级别的权限。",
+			Description: "The permission type granted to an IAM user or role. Possible values: namespace: grants permissions at the namespace level. cluster: grants permissions at the cluster level. all_clusters: grants permissions at the cluster level for all clusters under the current account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "给被授权者授予的 RBAC 角色名称。目前必须填写该参数。当roleDomain为all_clusters时，不可以自定义角色名称。",
+		//	  "description": "Name of the RBAC role granted to the grantee. This parameter must be specified. When roleDomain is all_clusters, custom role names are not allowed.",
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "给被授权者授予的 RBAC 角色名称。目前必须填写该参数。当roleDomain为all_clusters时，不可以自定义角色名称。",
+			Description: "Name of the RBAC role granted to the grantee. This parameter must be specified. When roleDomain is all_clusters, custom role names are not allowed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RBAC 权限访问策略资源的状态，取值如下：Success：授权成功。Failed：授权失败。Pending：授权中。PartialSuccess：部分授权成功。",
+		//	  "description": "Status of the RBAC access policy resource. Possible values: Success: authorization succeeded. Failed: authorization failed. Pending: authorization in progress. PartialSuccess: partial authorization succeeded.",
 		//	  "enum": [
 		//	    "Success",
 		//	    "Failed",
@@ -240,7 +240,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RBAC 权限访问策略资源的状态，取值如下：Success：授权成功。Failed：授权失败。Pending：授权中。PartialSuccess：部分授权成功。",
+			Description: "Status of the RBAC access policy resource. Possible values: Success: authorization succeeded. Failed: authorization failed. Pending: authorization in progress. PartialSuccess: partial authorization succeeded.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

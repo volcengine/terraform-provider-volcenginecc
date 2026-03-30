@@ -35,11 +35,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "选择配置节点的数据盘并格式化挂载作为容器镜像和日志的存储目录，取值：false：（默认值）关闭。默认节点池：表示不挂载数据盘。自定义节点池：使用节点池的数据盘配置进行挂载，被添加到节点池的 ECS 实例数据盘必须包含目标节点池指定了挂载的数据盘（含本地盘），且盘类型和大小完全一致。true: 开启。此时必须同时配置 ContainerStoragePath 参数。节点通过 ContainerStoragePath参数中的配置进行挂载，而忽略节点池的数据盘配置，对被添加到节点池的 ECS 实例数据盘无特殊要求。",
+		//	  "description": "Select the data disk for the node, format and mount it as the storage directory for container images and logs. Values: false (default): Disabled. Default node pool: indicates no data disk is mounted. Custom node pool: mounts according to the node pool's data disk configuration. ECS instance data disks added to the node pool must include the data disk specified for mounting by the target node pool (including local disks), and the disk type and size must match exactly. true: Enabled. You must also configure the ContainerStoragePath parameter. The node mounts according to the configuration in the ContainerStoragePath parameter and ignores the node pool's data disk configuration. There are no special requirements for ECS instance data disks added to the node pool.",
 		//	  "type": "boolean"
 		//	}
 		"additional_container_storage_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "选择配置节点的数据盘并格式化挂载作为容器镜像和日志的存储目录，取值：false：（默认值）关闭。默认节点池：表示不挂载数据盘。自定义节点池：使用节点池的数据盘配置进行挂载，被添加到节点池的 ECS 实例数据盘必须包含目标节点池指定了挂载的数据盘（含本地盘），且盘类型和大小完全一致。true: 开启。此时必须同时配置 ContainerStoragePath 参数。节点通过 ContainerStoragePath参数中的配置进行挂载，而忽略节点池的数据盘配置，对被添加到节点池的 ECS 实例数据盘无特殊要求。",
+			Description: "Select the data disk for the node, format and mount it as the storage directory for container images and logs. Values: false (default): Disabled. Default node pool: indicates no data disk is mounted. Custom node pool: mounts according to the node pool's data disk configuration. ECS instance data disks added to the node pool must include the data disk specified for mounting by the target node pool (including local disks), and the disk type and size must match exactly. true: Enabled. You must also configure the ContainerStoragePath parameter. The node mounts according to the configuration in the ContainerStoragePath parameter and ignores the node pool's data disk configuration. There are no special requirements for ECS instance data disks added to the node pool.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -51,11 +51,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群的 ID。",
+		//	  "description": "Cluster ID.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群的 ID。",
+			Description: "Cluster ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -65,11 +65,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "使用该数据盘设备挂载容器和镜像存储目录/var/lib/containerd。\n仅当AdditionalContainerStorageEnabled=true时有效，且不能为空。须满足以下条件，否则将初始化失败：仅支持已挂载数据盘的 ECS 实例。指定数据盘设备名时，请确保该数据盘设备存在，否则会初始化失败。指定数据盘分区或逻辑卷名时，请确保该分区或逻辑卷存在，且为 ext4 文件系统。",
+		//	  "description": "Use this data disk device to mount the container and image storage directory /var/lib/containerd.\nValid only when AdditionalContainerStorageEnabled=true and cannot be empty. The following conditions must be met, otherwise initialization will fail: Only ECS instances with mounted data disks are supported. When specifying a data disk device name, ensure the device exists, otherwise initialization will fail. When specifying a data disk partition or logical volume name, ensure the partition or logical volume exists and uses the ext4 file system.",
 		//	  "type": "string"
 		//	}
 		"container_storage_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "使用该数据盘设备挂载容器和镜像存储目录/var/lib/containerd。\n  仅当AdditionalContainerStorageEnabled=true时有效，且不能为空。须满足以下条件，否则将初始化失败：仅支持已挂载数据盘的 ECS 实例。指定数据盘设备名时，请确保该数据盘设备存在，否则会初始化失败。指定数据盘分区或逻辑卷名时，请确保该分区或逻辑卷存在，且为 ext4 文件系统。",
+			Description: "Use this data disk device to mount the container and image storage directory /var/lib/containerd.\n  Valid only when AdditionalContainerStorageEnabled=true and cannot be empty. The following conditions must be met, otherwise initialization will fail: Only ECS instances with mounted data disks are supported. When specifying a data disk device name, ensure the device exists, otherwise initialization will fail. When specifying a data disk partition or logical volume name, ensure the partition or logical volume exists and uses the ext4 file system.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -81,11 +81,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -95,11 +95,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点对应的 ECS 实例使用的镜像 ID。",
+		//	  "description": "Image ID used by the ECS instance corresponding to the node.",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点对应的 ECS 实例使用的镜像 ID。",
+			Description: "Image ID used by the ECS instance corresponding to the node.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -111,11 +111,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建 ECS 节点并完成 Kubernetes 组件部署后执行的脚本。支持 Shell 格式，Base64 编码后长度不超过 1 KB。为空时，节点继承使用默认节点池配置的初始化脚本NodeConfig.InitializeScript。自定义填写脚本内容后，使用自定义的脚本，忽略默认节点池配置的初始化脚本。",
+		//	  "description": "Script executed after creating ECS nodes and deploying Kubernetes components. Supports Shell format. Base64-encoded length must not exceed 1 KB. If left empty, the node inherits the default node pool initialization script NodeConfig.InitializeScript. If you enter a custom script, the custom script will be used and the default node pool initialization script will be ignored.",
 		//	  "type": "string"
 		//	}
 		"initialize_script": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建 ECS 节点并完成 Kubernetes 组件部署后执行的脚本。支持 Shell 格式，Base64 编码后长度不超过 1 KB。为空时，节点继承使用默认节点池配置的初始化脚本NodeConfig.InitializeScript。自定义填写脚本内容后，使用自定义的脚本，忽略默认节点池配置的初始化脚本。",
+			Description: "Script executed after creating ECS nodes and deploying Kubernetes components. Supports Shell format. Base64-encoded length must not exceed 1 KB. If left empty, the node inherits the default node pool initialization script NodeConfig.InitializeScript. If you enter a custom script, the custom script will be used and the default node pool initialization script will be ignored.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -127,11 +127,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点对应的云服务器实例 ID。",
+		//	  "description": "Cloud server instance ID corresponding to the node.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点对应的云服务器实例 ID。",
+			Description: "Cloud server instance ID corresponding to the node.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -143,11 +143,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为虚拟节点，参数值说明：false：否 true：是。",
+		//	  "description": "Is it a virtual node? Parameter value description: false: No, true: Yes.",
 		//	  "type": "boolean"
 		//	}
 		"is_virtual": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为虚拟节点，参数值说明：false：否 true：是。",
+			Description: "Is it a virtual node? Parameter value description: false: No, true: Yes.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -157,11 +157,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否保留原 ECS 实例名称，取值：false：（默认值）不保留原 ECS 实例名称，由容器服务自动为其命名。true：保留原 ECS 实例名称。",
+		//	  "description": "Whether to retain the original ECS instance name. Options: false (default): do not retain the original ECS instance name; Container Service automatically assigns a name. true: retain the original ECS instance name.",
 		//	  "type": "boolean"
 		//	}
 		"keep_instance_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否保留原 ECS 实例名称，取值：false：（默认值）不保留原 ECS 实例名称，由容器服务自动为其命名。true：保留原 ECS 实例名称。",
+			Description: "Whether to retain the original ECS instance name. Options: false (default): do not retain the original ECS instance name; Container Service automatically assigns a name. true: retain the original ECS instance name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -174,24 +174,24 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点 Kubernetes 相关配置。为空时，节点继承使用默认节点池的 Kubernetes 配置KubernetesConfig.Labels/Taints/Cordon。自定义填写配置后，使用自定义配置内容，忽略默认节点池的 Kubernetes 配置。",
+		//	  "description": "Kubernetes-related configuration for the node. If empty, the node inherits the default node pool's Kubernetes configuration: KubernetesConfig.Labels/Taints/Cordon. If custom configuration is provided, the node uses the custom configuration and ignores the default node pool's Kubernetes configuration.",
 		//	  "properties": {
 		//	    "Cordon": {
-		//	      "description": "封锁节点配置，取值：false：（默认值）不封锁 true：封锁",
+		//	      "description": "Node lock configuration. Options: false (default): not locked; true: locked",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Labels": {
-		//	      "description": "节点池/节点的 Kubernetes 标签（Labels）信息。最多可传入 20 个标签。",
+		//	      "description": "Kubernetes label information for node pools/nodes. Up to 20 labels can be specified.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "节点池/节点的 Kubernetes 标签（Labels）信息。",
+		//	        "description": "Kubernetes label (Labels) information for the node pool/node.",
 		//	        "properties": {
 		//	          "Key": {
-		//	            "description": "标签键，有效的标签键有两个段：\u003c前缀\u003e和\u003c名称\u003e，用斜杠（/）分隔。\u003c名称\u003e是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。\u003c前缀\u003e是可选的。如果指定\u003c前缀\u003e，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。\u003c前缀\u003e和\u003c名称\u003e总长度不超过 82 个字符。",
+		//	            "description": "Label key. A valid label key consists of two parts: \u003cprefix\u003e and \u003cname\u003e, separated by a slash (/). \u003cname\u003e is required and supports uppercase and lowercase English letters, numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and must not exceed 63 characters. \u003cprefix\u003e is optional. If specified, \u003cprefix\u003e must be a DNS subdomain: a series of DNS labels separated by periods (.), with a maximum length of 253 characters. The total length of \u003cprefix\u003e and \u003cname\u003e must not exceed 82 characters.",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "标签值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。",
+		//	            "description": "Tag value, up to 63 characters (can be empty). Can start and end with an English letter (upper or lower case) or a digit. Supported special characters: hyphen (-), underscore (_), period (.).",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -201,14 +201,14 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Taints": {
-		//	      "description": "节点池/节点的 Kubernetes 污点（Taints）信息。最多可传入 20 个污点。",
+		//	      "description": "Kubernetes taint information for node pools/nodes. Up to 20 taints can be specified.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "节点池/节点的 Kubernetes 污点（Taints）信息。",
+		//	        "description": "Kubernetes taints information for the node pool/node.",
 		//	        "properties": {
 		//	          "Effect": {
 		//	            "default": "NoSchedule",
-		//	            "description": "污点效果，取值：NoSchedule：（默认值）不调度。NoExecute：驱逐没有容忍污点的 Pod。PreferNoSchedule：尽量避免调度。",
+		//	            "description": "Taint effect. Options: NoSchedule (default): Do not schedule. NoExecute: Evict Pods that do not tolerate the taint. PreferNoSchedule: Avoid scheduling if possible.",
 		//	            "enum": [
 		//	              "NoSchedule",
 		//	              "NoExecute",
@@ -217,11 +217,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Key": {
-		//	            "description": "污点键，有效的污点键有两个段：\u003c前缀\u003e和\u003c名称\u003e，用斜杠（/）分隔。\u003c名称\u003e是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。\u003c前缀\u003e是可选的。如果指定\u003c前缀\u003e，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。\u003c前缀\u003e和\u003c名称\u003e总长度不超过 82 个字符。",
+		//	            "description": "Taint key. A valid taint key has two segments: \u003cprefix\u003e and \u003cname\u003e, separated by a slash (/). \u003cname\u003e is required and supports English letters (case-sensitive), numbers, hyphen (-), underscore (_), and period (.), must start and end with a letter or number, and be no longer than 63 characters. \u003cprefix\u003e is optional. If specified, \u003cprefix\u003e must be a DNS subdomain: a series of DNS labels separated by periods (.), no longer than 253 characters. The total length of \u003cprefix\u003e and \u003cname\u003e must not exceed 82 characters.",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "污点值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。",
+		//	            "description": "Taint value, up to 63 characters (can be empty). Must start and end with an English letter or number. Supports special characters: hyphen (-), underscore (_), and period (.).",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -237,7 +237,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Cordon
 				"cordon": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "封锁节点配置，取值：false：（默认值）不封锁 true：封锁",
+					Description: "Node lock configuration. Options: false (default): not locked; true: locked",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -250,7 +250,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "标签键，有效的标签键有两个段：<前缀>和<名称>，用斜杠（/）分隔。<名称>是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。<前缀>是可选的。如果指定<前缀>，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。<前缀>和<名称>总长度不超过 82 个字符。",
+								Description: "Label key. A valid label key consists of two parts: <prefix> and <name>, separated by a slash (/). <name> is required and supports uppercase and lowercase English letters, numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and must not exceed 63 characters. <prefix> is optional. If specified, <prefix> must be a DNS subdomain: a series of DNS labels separated by periods (.), with a maximum length of 253 characters. The total length of <prefix> and <name> must not exceed 82 characters.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -259,7 +259,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "标签值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。",
+								Description: "Tag value, up to 63 characters (can be empty). Can start and end with an English letter (upper or lower case) or a digit. Supported special characters: hyphen (-), underscore (_), period (.).",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -268,7 +268,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点池/节点的 Kubernetes 标签（Labels）信息。最多可传入 20 个标签。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Kubernetes label information for node pools/nodes. Up to 20 labels can be specified.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -281,7 +281,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Effect
 							"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "污点效果，取值：NoSchedule：（默认值）不调度。NoExecute：驱逐没有容忍污点的 Pod。PreferNoSchedule：尽量避免调度。",
+								Description: "Taint effect. Options: NoSchedule (default): Do not schedule. NoExecute: Evict Pods that do not tolerate the taint. PreferNoSchedule: Avoid scheduling if possible.",
 								Optional:    true,
 								Computed:    true,
 								Default:     stringdefault.StaticString("NoSchedule"),
@@ -298,7 +298,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "污点键，有效的污点键有两个段：<前缀>和<名称>，用斜杠（/）分隔。<名称>是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。<前缀>是可选的。如果指定<前缀>，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。<前缀>和<名称>总长度不超过 82 个字符。",
+								Description: "Taint key. A valid taint key has two segments: <prefix> and <name>, separated by a slash (/). <name> is required and supports English letters (case-sensitive), numbers, hyphen (-), underscore (_), and period (.), must start and end with a letter or number, and be no longer than 63 characters. <prefix> is optional. If specified, <prefix> must be a DNS subdomain: a series of DNS labels separated by periods (.), no longer than 253 characters. The total length of <prefix> and <name> must not exceed 82 characters.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -307,7 +307,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "污点值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。",
+								Description: "Taint value, up to 63 characters (can be empty). Must start and end with an English letter or number. Supports special characters: hyphen (-), underscore (_), and period (.).",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -316,7 +316,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点池/节点的 Kubernetes 污点（Taints）信息。最多可传入 20 个污点。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Kubernetes taint information for node pools/nodes. Up to 20 taints can be specified.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -324,7 +324,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "节点 Kubernetes 相关配置。为空时，节点继承使用默认节点池的 Kubernetes 配置KubernetesConfig.Labels/Taints/Cordon。自定义填写配置后，使用自定义配置内容，忽略默认节点池的 Kubernetes 配置。",
+			Description: "Kubernetes-related configuration for the node. If empty, the node inherits the default node pool's Kubernetes configuration: KubernetesConfig.Labels/Taints/Cordon. If custom configuration is provided, the node uses the custom configuration and ignores the default node pool's Kubernetes configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -336,11 +336,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点名称。",
+		//	  "description": "Node name.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点名称。",
+			Description: "Node name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -350,11 +350,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点 ID。",
+		//	  "description": "Node ID.",
 		//	  "type": "string"
 		//	}
 		"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点 ID。",
+			Description: "Node ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -364,11 +364,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池 ID。不传入参数值：表示将已有 ECS 实例添加到默认节点池。传入参数值：表示将已有 ECS 实例添加到自定义节点池。",
+		//	  "description": "Node pool ID. If no parameter value is provided: add existing ECS instances to the default node pool. If a parameter value is provided: add existing ECS instances to a custom node pool.",
 		//	  "type": "string"
 		//	}
 		"node_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点池 ID。不传入参数值：表示将已有 ECS 实例添加到默认节点池。传入参数值：表示将已有 ECS 实例添加到自定义节点池。",
+			Description: "Node pool ID. If no parameter value is provided: add existing ECS instances to the default node pool. If a parameter value is provided: add existing ECS instances to a custom node pool.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -378,7 +378,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点角色，参数值说明：Worker：Worker节点。",
+		//	  "description": "Node role. Parameter value description: Worker: Worker node.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -388,7 +388,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"roles": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "节点角色，参数值说明：Worker：Worker节点。",
+			Description: "Node role. Parameter value description: Worker: Worker node.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -398,16 +398,16 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点状态。",
+		//	  "description": "Node status.",
 		//	  "properties": {
 		//	    "Conditions": {
-		//	      "description": "节点当前主状态下的状态条件，即进入该主状态的原因。",
+		//	      "description": "Status condition under the node's current primary state, indicating the reason for entering this primary state.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "节点当前主状态下的状态条件，即进入该主状态的原因。",
+		//	        "description": "Status condition under the node's current primary state, indicating the reason for entering this primary state.",
 		//	        "properties": {
 		//	          "Type": {
-		//	            "description": "节点当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing，Ok，Unschedulable，InitilizeFailed，NotReady，Balance，ResourceCleanupFailed，Unknown。",
+		//	            "description": "Status condition under the node's current primary state, indicating the reason for entering this primary state. There can be multiple reasons. Parameter values: Progressing, Ok, Unschedulable, InitilizeFailed, NotReady, Balance, ResourceCleanupFailed, Unknown.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -417,7 +417,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
-		//	      "description": "节点的状态，参数值有：Creating，Running，Deleting，Failed，Updating。",
+		//	      "description": "Node status. Parameter values: Creating, Running, Deleting, Failed, Updating.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -431,21 +431,21 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "节点当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing，Ok，Unschedulable，InitilizeFailed，NotReady，Balance，ResourceCleanupFailed，Unknown。",
+								Description: "Status condition under the node's current primary state, indicating the reason for entering this primary state. There can be multiple reasons. Parameter values: Progressing, Ok, Unschedulable, InitilizeFailed, NotReady, Balance, ResourceCleanupFailed, Unknown.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点当前主状态下的状态条件，即进入该主状态的原因。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Status condition under the node's current primary state, indicating the reason for entering this primary state.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点的状态，参数值有：Creating，Running，Deleting，Failed，Updating。",
+					Description: "Node status. Parameter values: Creating, Running, Deleting, Failed, Updating.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "节点状态。",
+			Description: "Node status.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -455,11 +455,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -469,11 +469,11 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability zone ID.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability zone ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -491,7 +491,7 @@ func nodeResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "对应 Kubernetes 中的 Node，是容器服务集群组成的基本元素。节点主要包括：Master 节点（控制节点）和 Worker 节点（计算节点/工作节点）。应用实际部署在 Worker 节点上，支持通过配置随机部署在 Worker 节点上或部署在指定的 Worker 节点上。容器服务中的 节点 一般指 Worker 节点。",
+		Description: "Corresponds to Node in Kubernetes, which is the basic element of a Container Service cluster. Nodes mainly include: Master nodes (control nodes) and Worker nodes (compute nodes/worker nodes). Applications are actually deployed on Worker nodes, supporting random deployment on Worker nodes or deployment on specified Worker nodes through configuration. In Container Service, node generally refers to Worker node.",
 		Version:     1,
 		Attributes:  attributes,
 	}

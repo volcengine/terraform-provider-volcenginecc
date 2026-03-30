@@ -26,132 +26,132 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户描述。",
+		//	  "description": "User Description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户描述。",
+			Description: "User Description.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户显示名。",
+		//	  "description": "User Display Name.",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户显示名。",
+			Description: "User Display Name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Email
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "邮箱。",
+		//	  "description": "Email.",
 		//	  "type": "string"
 		//	}
 		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "邮箱。",
+			Description: "Email.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IdentityType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "身份类型。",
+		//	  "description": "Identity Type.",
 		//	  "type": "string"
 		//	}
 		"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "身份类型。",
+			Description: "Identity Type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Password
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密码。密码长度8-32位字符,包含大写字母、小写字母、数字和物特殊符号至少3种。",
+		//	  "description": "Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.",
 		//	  "type": "string"
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密码。密码长度8-32位字符,包含大写字母、小写字母、数字和物特殊符号至少3种。",
+			Description: "Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PasswordResetRequired
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "首次登陆需不需要重置密码。",
+		//	  "description": "Is password reset required on first login?",
 		//	  "type": "boolean"
 		//	}
 		"password_reset_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "首次登陆需不需要重置密码。",
+			Description: "Is password reset required on first login?",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Phone
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "手机号。",
+		//	  "description": "Mobile Number.",
 		//	  "type": "string"
 		//	}
 		"phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "手机号。",
+			Description: "Mobile Number.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户来源。",
+		//	  "description": "User Source.",
 		//	  "type": "string"
 		//	}
 		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户来源。",
+			Description: "User Source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户id。",
+		//	  "description": "User ID.",
 		//	  "type": "string"
 		//	}
 		"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户id。",
+			Description: "User ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户名。",
+		//	  "description": "Username.",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户名。",
+			Description: "Username.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

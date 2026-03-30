@@ -21,48 +21,48 @@ Data Source schema for Volcengine::ALB::LoadBalancer
 
 ### Read-Only
 
-- `address_ip_version` (String) ALB 实例的 IP 类型。IPv4：IPv4 类型；DualStack：IPv4&IPv6 双栈类型。
-- `bandwidth_package_id` (String) 绑定的共享带宽包ID，可实现带宽共享。
-- `business_status` (String) ALB 实例的服务状态。Normal：正常；FinancialLocked：因欠费被锁定。
-- `create_time` (String) ALB 实例的创建时间。
-- `delete_protection` (String) 删除保护开关。on：开启；off：关闭。
-- `deleted_time` (String) ALB 实例的预期回收时间。该参数只有实例处于 FinancialLocked 状态时有返回值。
-- `description` (String) ALB 实例的描述。
-- `dns_name` (String) DNS域名。
-- `eip_billing_config` (Attributes) 公网IP的计费配置，仅适用于公网实例。 (see [below for nested schema](#nestedatt--eip_billing_config))
-- `global_accelerator` (Attributes) 全球加速器配置，用于提升跨地域访问速度。 (see [below for nested schema](#nestedatt--global_accelerator))
-- `ipv_6_bandwidth_package_id` (String) 创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。
-- `ipv_6_eip_billing_config` (Attributes) IPv6公网IP的计費配置，仅适用于公网实例。 (see [below for nested schema](#nestedatt--ipv_6_eip_billing_config))
-- `load_balancer_billing_type` (Number) ALB实例计费类型，当前仅支持按量计费（取值为1）。
-- `load_balancer_edition` (String) 应用型负载均衡的版本。Basic：基础版；Standard：标准版。
-- `load_balancer_id` (String) ALB 实例 ID。
-- `load_balancer_name` (String) ALB 实例的名称。
-- `lock_reason` (String) ALB 实例被冻结的原因，例如 Financial（欠费）或 Security（安全原因）。仅在实例被锁定时返回。
-- `modification_protection_reason` (String) 修改保护原因。仅在 ModificationProtectionStatus 为 ConsoleProtection 时，该参数有效且合法。
-- `modification_protection_status` (String) 修改保护状态。NonProtection：不保护；ConsoleProtection：控制台修改保护，通过控制台无法修改实例配置。
-- `overdue_time` (String) ALB 实例的冻结时间。该参数只有实例处于 FinancialLocked 状态时有返回值。
-- `project_name` (String) 实例所属项目名称。
-- `proxy_protocol_enabled` (String) ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。
-- `status` (String) ALB 实例状态：Active（运行中）、Provisioning（创建中）、Configuring（配置中）、Deleting（删除中）、CreateFailed（创建失败）、Inactive（已停止）。
-- `tags` (Attributes Set) 为实例绑定的标签列表，用于分类和计费。 (see [below for nested schema](#nestedatt--tags))
-- `type` (String) ALB 实例的类型。取值是 public 或 private 。public：表示创建一个公网负载均衡实例，系统会分配一个公网IP地址和一个私网IP地址，可用于转发公网请求和私网请求。private：表示创建一个私网负载均衡实例，系统会分配一个私网IP地址，仅用于转发私网请求。
-- `update_time` (String) ALB 实例的最后更新时间。
-- `vpc_id` (String) 负载均衡实例所属的私有网络（VPC）的ID。
-- `waf_instance_id` (String) ALB 实例绑定的 WAF 安全防护实例 ID。
-- `waf_protected_domain` (String) WAF防护的域名，用于精确匹配防护规则。
-- `waf_protection_enabled` (String) WAF 安全防护开关。on：开启；off：关闭。
-- `zone_mappings` (Attributes Set) 可用区映射列表，定义了实例在哪些可用区提供服务。 (see [below for nested schema](#nestedatt--zone_mappings))
+- `address_ip_version` (String) IP type of the ALB instance. IPv4: IPv4 type; DualStack: IPv4 & IPv6 dual stack type.
+- `bandwidth_package_id` (String) ID of the bound shared bandwidth package, enabling bandwidth sharing.
+- `business_status` (String) Service status of the ALB instance. Normal: normal; FinancialLocked: locked due to overdue payment.
+- `create_time` (String) Creation time of the ALB instance.
+- `delete_protection` (String) Delete protection switch. on: enabled; off: disabled.
+- `deleted_time` (String) Expected reclamation time of the ALB instance. This parameter is only returned when the instance is in the FinancialLocked state.
+- `description` (String) Description of the ALB instance.
+- `dns_name` (String) DNS domain name.
+- `eip_billing_config` (Attributes) Billing configuration for public IP, only applicable to public instances. (see [below for nested schema](#nestedatt--eip_billing_config))
+- `global_accelerator` (Attributes) Global accelerator configuration, used to improve cross-region access speed. (see [below for nested schema](#nestedatt--global_accelerator))
+- `ipv_6_bandwidth_package_id` (String) When creating a public ALB instance, specify the shared bandwidth package ID to which the IPv6 public bandwidth will be added.
+- `ipv_6_eip_billing_config` (Attributes) Billing configuration for IPv6 public IP, only applicable to public instances. (see [below for nested schema](#nestedatt--ipv_6_eip_billing_config))
+- `load_balancer_billing_type` (Number) ALB instance billing type. Currently, only pay-as-you-go is supported (value is 1).
+- `load_balancer_edition` (String) Version of the application load balancer. Basic: Basic version; Standard: Standard version.
+- `load_balancer_id` (String) ALB instance ID.
+- `load_balancer_name` (String) Name of the ALB instance.
+- `lock_reason` (String) Reason for ALB instance freeze, such as Financial (arrears) or Security (security reasons). Returned only when the instance is locked.
+- `modification_protection_reason` (String) Reason for modification protection. This parameter is valid and legitimate only when ModificationProtectionStatus is ConsoleProtection.
+- `modification_protection_status` (String) Modification protection status. NonProtection: Not protected; ConsoleProtection: Console modification protection, instance configuration cannot be modified through the console.
+- `overdue_time` (String) Freeze time of the ALB instance. This parameter is only returned when the instance is in the FinancialLocked state.
+- `project_name` (String) Name of the project to which the instance belongs.
+- `proxy_protocol_enabled` (String) ALB supports the Proxy Protocol and records the client's real IP.
+- `status` (String) ALB instance status: Active (running), Provisioning (creating), Configuring (configuring), Deleting (deleting), CreateFailed (creation failed), Inactive (stopped).
+- `tags` (Attributes Set) List of tags bound to the instance, used for categorization and billing. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) Type of ALB instance. Values are public or private. public: Creates a public load balancer instance. The system assigns a public IP address and a private IP address, which can forward both public and private network requests. private: Creates a private load balancer instance. The system assigns a private IP address, used only for forwarding private network requests.
+- `update_time` (String) Last update time of the ALB instance.
+- `vpc_id` (String) ID of the Virtual Private Cloud (VPC) to which the load balancer instance belongs.
+- `waf_instance_id` (String) ID of the WAF security protection instance bound to the ALB instance.
+- `waf_protected_domain` (String) Domain name protected by WAF, used for precise rule matching.
+- `waf_protection_enabled` (String) WAF security protection switch. on: enabled; off: disabled.
+- `zone_mappings` (Attributes Set) Availability zone mapping list, defines which availability zones the instance provides services in. (see [below for nested schema](#nestedatt--zone_mappings))
 
 <a id="nestedatt--eip_billing_config"></a>
 ### Nested Schema for `eip_billing_config`
 
 Read-Only:
 
-- `bandwidth` (Number) EIP的带宽峰值，单位为Mbps。
-- `billing_type` (Number) EIP的计费方式，2为按带宽计费，3为按流量计费。
-- `isp` (String) 公网IP的线路类型，BGP表示多线。
-- `security_protection_instance_id` (Number) 创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。
-- `security_protection_types` (String) 创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。
+- `bandwidth` (Number) Peak bandwidth of EIP, in Mbps.
+- `billing_type` (Number) EIP billing method: 2 for bandwidth-based, 3 for traffic-based.
+- `isp` (String) Line type of the public IP, BGP indicates multi-line.
+- `security_protection_instance_id` (Number) When creating an ALB public instance, if IP protection resources are used, you must specify a DDoS native protection instance ID.
+- `security_protection_types` (String) When creating a public ALB instance, ALB allows you to purchase multiple public IP protection resources. The rules for public IP protection resources are as follows: separate multiple protection resources with a comma (,). The values for protection resources are: AntiDDoS_Enhanced: You are requesting an enhanced protection type public IP, which can be added to a native DDoS protection instance. If not specified: You are requesting a basic protection type public IP.
 
 
 <a id="nestedatt--global_accelerator"></a>
@@ -70,10 +70,10 @@ Read-Only:
 
 Read-Only:
 
-- `accelerator_id` (String) 绑定的全球加速实例的ID。
-- `accelerator_listener_id` (String) 绑定的全球加速监听器的ID。
-- `endpoint_group_id` (String) 绑定的终端节点组的ID。
-- `weight` (Number) 后端服务器的权重，决定流量分发比例。
+- `accelerator_id` (String) ID of the bound Global Accelerator instance.
+- `accelerator_listener_id` (String) ID of the bound Global Accelerator listener.
+- `endpoint_group_id` (String) ID of the bound endpoint group.
+- `weight` (Number) Weight of the backend server, determines traffic distribution ratio.
 
 
 <a id="nestedatt--ipv_6_eip_billing_config"></a>
@@ -81,9 +81,9 @@ Read-Only:
 
 Read-Only:
 
-- `bandwidth` (Number) IPv6 EIP的带宽峰值，单位为Mbps。
-- `billing_type` (Number) IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。
-- `isp` (String) IPv6公网IP的线路类型，BGP表示多线。
+- `bandwidth` (Number) Peak bandwidth of IPv6 EIP, in Mbps.
+- `billing_type` (Number) Billing method for IPv6 EIP: 2 for bandwidth-based, 3 for traffic-based.
+- `isp` (String) Line type of IPv6 public IP; BGP indicates multi-line.
 
 
 <a id="nestedatt--tags"></a>
@@ -91,8 +91,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签的键，用于标识标签的类别。
-- `value` (String) 标签的值，用于标识具体的标签内容。
+- `key` (String) Tag key, used to identify the tag category.
+- `value` (String) Tag value used to identify the specific tag content.
 
 
 <a id="nestedatt--zone_mappings"></a>
@@ -100,44 +100,44 @@ Read-Only:
 
 Read-Only:
 
-- `load_balancer_addresses` (Attributes Set) 该可用区下负载均衡提供的IP地址列表。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses))
-- `subnet_id` (String) 可用区内提供服务的子网ID。
-- `zone_id` (String) 可用区的唯一标识符。
+- `load_balancer_addresses` (Attributes Set) List of IP addresses provided by the load balancer in this availability zone. (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses))
+- `subnet_id` (String) Subnet ID providing services within the availability zone.
+- `zone_id` (String) Unique identifier of the availability zone.
 
 <a id="nestedatt--zone_mappings--load_balancer_addresses"></a>
 ### Nested Schema for `zone_mappings.load_balancer_addresses`
 
 Read-Only:
 
-- `eip` (Attributes) 弹性公网IP（EIP）的详细信息。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--eip))
-- `eip_address` (String) 绑定的弹性公网IP（EIP）的地址。
-- `eip_id` (String) 绑定的弹性公网IP（EIP）的ID。
-- `eni_address` (String) 弹性网卡（ENI）上的私网IP地址。
-- `eni_id` (String) IP地址所属的弹性网卡（ENI）的ID。
-- `eni_ipv_6_address` (String) 弹性网卡（ENI）上的IPv6私网地址。
-- `ipv_6_eip` (Attributes) IPv6弹性公网IP的详细信息。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--ipv_6_eip))
-- `ipv_6_eip_id` (String) 绑定的IPv6 EIP的ID。
+- `eip` (Attributes) Detailed information of the Elastic Public IP (EIP). (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--eip))
+- `eip_address` (String) Address of the bound Elastic Public IP (EIP).
+- `eip_id` (String) ID of the bound Elastic IP (EIP).
+- `eni_address` (String) Private IP address on the Elastic Network Interface (ENI).
+- `eni_id` (String) ID of the Elastic Network Interface (ENI) to which the IP address belongs.
+- `eni_ipv_6_address` (String) IPv6 private address on the Elastic Network Interface (ENI).
+- `ipv_6_eip` (Attributes) Detailed information about the IPv6 Elastic Public IP. (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--ipv_6_eip))
+- `ipv_6_eip_id` (String) ID of the bound IPv6 EIP.
 
 <a id="nestedatt--zone_mappings--load_balancer_addresses--eip"></a>
 ### Nested Schema for `zone_mappings.load_balancer_addresses.eip`
 
 Read-Only:
 
-- `association_mode` (String) EIP的绑定模式，例如Default或Normal。
-- `bandwidth` (Number) EIP的带宽峰值，单位为Mbps。
-- `eip_address` (String) 弹性公网IP（EIP）的地址。
-- `eip_billing_type` (Number) EIP的计费方式，2为按带宽计费，3为按流量计费。
-- `eip_type` (String) EIP的类型，例如静态BGP。
-- `isp` (String) 公网IP的线路类型，BGP表示多线。
-- `pop_locations` (Attributes Set) EIP的接入点位置信息列表。 (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--eip--pop_locations))
+- `association_mode` (String) EIP binding mode, such as Default or Normal.
+- `bandwidth` (Number) Peak bandwidth of EIP, in Mbps.
+- `eip_address` (String) Address of the Elastic IP (EIP).
+- `eip_billing_type` (Number) EIP billing method: 2 for bandwidth-based, 3 for traffic-based.
+- `eip_type` (String) EIP type, such as static BGP.
+- `isp` (String) Line type of the public IP, BGP indicates multi-line.
+- `pop_locations` (Attributes Set) List of EIP access point location information. (see [below for nested schema](#nestedatt--zone_mappings--load_balancer_addresses--eip--pop_locations))
 
 <a id="nestedatt--zone_mappings--load_balancer_addresses--eip--pop_locations"></a>
 ### Nested Schema for `zone_mappings.load_balancer_addresses.eip.pop_locations`
 
 Read-Only:
 
-- `pop_id` (String) 接入点（PoP）的唯一ID。
-- `pop_name` (String) 接入点（PoP）的名称。
+- `pop_id` (String) Unique ID of the access point (PoP).
+- `pop_name` (String) Name of the access point (PoP).
 
 
 
@@ -146,6 +146,6 @@ Read-Only:
 
 Read-Only:
 
-- `bandwidth` (Number) IPv6 EIP的带宽峰值，单位为Mbps。
-- `billing_type` (Number) IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。
-- `isp` (String) IPv6公网IP的线路类型，BGP表示多线。
+- `bandwidth` (Number) Peak bandwidth of IPv6 EIP, in Mbps.
+- `billing_type` (Number) Billing method for IPv6 EIP: 2 for bandwidth-based, 3 for traffic-based.
+- `isp` (String) Line type of IPv6 public IP; BGP indicates multi-line.

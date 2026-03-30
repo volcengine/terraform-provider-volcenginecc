@@ -2,12 +2,12 @@
 page_title: "volcenginecc_ecs_image Resource - terraform-provider-volcenginecc"
 subcategory: "ECS"
 description: |-
-  镜像是包含了云服务器实例所需的基本操作系统、应用数据的特殊文件。创建实例时，必须选择镜像。
+  An image is a special file containing the basic operating system and application data required for a cloud server instance. You must select an image when creating an instance.
 ---
 
 # volcenginecc_ecs_image (Resource)
 
-镜像是包含了云服务器实例所需的基本操作系统、应用数据的特殊文件。创建实例时，必须选择镜像。
+An image is a special file containing the basic operating system and application data required for a cloud server instance. You must select an image when creating an instance.
 
 ## Example Usage
 
@@ -32,53 +32,66 @@ resource "volcenginecc_ecs_image" "ImageDemo" {
 
 ### Required
 
-- `image_name` (String) 镜像名称。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、英文句号“.”。长度限制为1 ~ 128个字符。
+- `image_name` (String) Image name. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, underscores "_", hyphens "-", and periods ".". Length: 1–128 characters
 
 ### Optional
 
-- `description` (String) 镜像描述。必须以字母、汉字开头。只能包含中文、字母、数字、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、英文句号“.”、中文逗号“，”、中文句号“。”和空格。长度限制为0～255个字符。不填默认为空。
-- `instance_id` (String) 实例ID。本参数与SnapshotId、SnapshotGroupId参数，三选一必填。
-- `project_name` (String) 资源所属项目。调用接口账号若仅拥有部分项目权限时必须传入有权限的项目信息。
-- `share_permission` (Set of String) 镜像共享的账户
-- `snapshot_group_id` (String) 快照一致性组ID，表示使用快照一致性组创建自定义镜像。本参数与SnapshotId、InstanceId参数，三选一必填。
-- `snapshot_id` (String) 系统盘快照ID，表示使用系统盘快照创建自定义镜像。本参数与InstanceId、SnapshotGroupId参数，三选一必填。
-- `tags` (Attributes Set) 镜像绑定的标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `architecture` (String) Image architecture type. Options: amd64 (x86 compute), arm64 (ARM compute).
+- `boot_mode` (String) Image boot mode. You can select BIOS or UEFI
+- `create_whole_image` (Boolean) Whether to create a full instance image. Values: false: Default, do not create a full instance image. true: Create a full instance image.
+- `description` (String) Image description. Must start with a letter or Chinese character. Can contain Chinese characters, letters, numbers, underscores "_", hyphens "-", equals signs "=", English commas ",", English periods ".", Chinese commas "，", Chinese periods "。", and spaces. Length: 0–255 characters. If left blank, defaults to empty.
+- `import_image` (Attributes) Imported image information (see [below for nested schema](#nestedatt--import_image))
+- `instance_id` (String) Instance ID. You must specify one of InstanceId, SnapshotId, or SnapshotGroupId.
+- `license_type` (String) Image license type. VolcanoEngine: Default, uses the official license based on your platform setting. BYOL: Bring Your Own License (BYOL)
+- `need_detection` (Boolean) Whether to perform image check. Values: true: Default, check enabled. false: Check disabled.
+- `os_type` (String) Operating system type
+- `platform` (String) Release version of the image operating system. Options: CentOS, Debian, veLinux, Windows Server, Fedora, OpenSUSE, Ubuntu.
+- `platform_version` (String) Image release version.
+- `project_name` (String) Project to which the resource belongs. If the API caller account only has permissions for certain projects, you must provide a project with the required permissions
+- `share_permission` (Set of String) Accounts with which the image is shared
+- `snapshot_group_id` (String) Snapshot consistency group ID, used to create a custom image from a snapshot consistency group. One of Snapshot consistency group ID, SnapshotId, or InstanceId must be provided
+- `snapshot_id` (String) System disk snapshot ID, used to create a custom image from a system disk snapshot. You must specify one of InstanceId, SnapshotId, or SnapshotGroupId.
+- `tags` (Attributes Set) List of tags bound to the image.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `architecture` (String) 镜像的架构类型。可以选择amd64（x86计算）、arm64（ARM计算）类型。
-- `boot_mode` (String) 镜像的启动模式。可以选择BIOS、UEFI类型。
-- `created_at` (String) 镜像创建时间
-- `detection_results` (Attributes) 镜像的检测结果。 (see [below for nested schema](#nestedatt--detection_results))
+- `created_at` (String) Image creation time
+- `detection_results` (Attributes) Image check result. (see [below for nested schema](#nestedatt--detection_results))
 - `id` (String) Uniquely identifies the resource.
-- `image_id` (String) 镜像ID。
-- `image_owner_id` (String) 镜像所属的账号ID。
-- `is_install_run_command_agent` (Boolean) 镜像中是否安装了云助手Agent。
-- `is_lts` (Boolean) 公共镜像是否长期维护。
-- `is_support_cloud_init` (Boolean) 镜像是否支持Cloud-init。
-- `kernel` (String) 镜像的内核版本。
-- `license_type` (String) 镜像许可证类型。VolcanoEngine：默认，根据您设置的platform，采用官方渠道的许可证。BYOL：自带许可证（BYOL）。
-- `os_name` (String) 镜像操作系统的名称。
-- `os_type` (String) 操作系统类型。
-- `platform` (String) 镜像操作系统的发行版本。可以选择CentOS、Debian、veLinux、Windows Server、Fedora、OpenSUSE、Ubuntu。
-- `platform_version` (String) 镜像的发行版本。
-- `share_status` (String) 镜像共享状态。HasShared：自定义镜像已被共享给其他用户。当自定义镜像未被共享或使用公共镜像时，ShareStatus返回为空。
-- `size` (Number) 镜像大小，单位为GiB。
-- `snapshots` (Attributes Set) 镜像关联快照的信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--snapshots))
-- `status` (String) 镜像的状态。
-- `updated_at` (String) 镜像更新时间
-- `virtual_size` (Number) 镜像大小，单位为Byte。
-- `visibility` (String) 镜像的可见性。public：公共镜像。private：私有镜像。shared：共享镜像。
+- `image_id` (String) Image ID
+- `image_owner_id` (String) Account ID to which the image belongs.
+- `is_install_run_command_agent` (Boolean) Whether Cloud Assistant Agent is installed in the image
+- `is_lts` (Boolean) Whether the public image is maintained long-term.
+- `is_support_cloud_init` (Boolean) Whether the image supports Cloud-init.
+- `kernel` (String) Image kernel version.
+- `os_name` (String) Name of the image operating system.
+- `product_code` (String) Product code for marketplace image
+- `share_status` (String) Image sharing status. HasShared: The custom image has been shared with other users. If the custom image is not shared or a public image is used, ShareStatus returns empty.
+- `size` (Number) Image size, in GiB.
+- `snapshots` (Attributes Set) Information about snapshots associated with the image.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--snapshots))
+- `status` (String) Image status.
+- `updated_at` (String) Image update time
+- `virtual_size` (Number) Image size, in Bytes.
+- `visibility` (String) Image visibility. public: Public image. private: Private image. shared: Shared image.
+
+<a id="nestedatt--import_image"></a>
+### Nested Schema for `import_image`
+
+Optional:
+
+- `import_data_volumes` (Set of String) Data disk files included in the custom image, at the TOS bucket URL.
+- `url` (String) System disk files included in the custom image, at the TOS bucket URL.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 镜像标签的标签键。
-- `value` (String) 镜像标签的值。
+- `key` (String) Tag key for the image label.
+- `value` (String) Image tag value
 
 
 <a id="nestedatt--detection_results"></a>
@@ -86,19 +99,19 @@ Optional:
 
 Read-Only:
 
-- `detection_status` (String) 检测状态。可以选择Finished（已完成）、Processing（处理中）类型。
-- `items` (Attributes List) 镜像检测项详情。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--detection_results--items))
+- `detection_status` (String) Check status. Options: Finished (completed), Processing (in progress).
+- `items` (Attributes List) Details of image check items.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--detection_results--items))
 
 <a id="nestedatt--detection_results--items"></a>
 ### Nested Schema for `detection_results.items`
 
 Read-Only:
 
-- `name` (String) 检测项名称。
-- `result` (String) 该检测项对应结果。
-- `risk_code` (String) 风险描述码。
-- `risk_level` (String) 风险等级。若该参数返回值为空，表示无风险。
+- `name` (String) Check item name
+- `result` (String) Result for this check item.
+- `risk_code` (String) Risk description code
+- `risk_level` (String) Risk level. If this parameter is empty, it means no risk
 
 
 
@@ -107,9 +120,9 @@ Read-Only:
 
 Read-Only:
 
-- `size` (Number) 快照大小。单位为GiB。
-- `snapshot_id` (String) 快照ID。
-- `volume_kind` (String) 云盘种类。system：系统盘。data：数据盘。
+- `size` (Number) Snapshot size (GiB)
+- `snapshot_id` (String) Snapshot ID
+- `volume_kind` (String) Cloud disk type. system: System disk. data: Data disk.
 
 ## Import
 

@@ -35,11 +35,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户网关所属账户的ID。",
+		//	  "description": "ID of the account to which the user gateway belongs",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户网关所属账户的ID。",
+			Description: "ID of the account to which the user gateway belongs",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -49,13 +49,13 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户网关的ASN（Autonomous System Number）。如需使用BGP功能，则此参数必须填写。ASN有效范围1～4294967295（137718 、150436、65533除外）。",
+		//	  "description": "User gateway ASN (Autonomous System Number). This parameter is required if you need to use BGP functionality. Valid ASN range is 1–4294967295 (excluding 137718, 150436, and 65533)",
 		//	  "format": "int64",
 		//	  "maximum": 4294967295,
 		//	  "type": "integer"
 		//	}
 		"asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "用户网关的ASN（Autonomous System Number）。如需使用BGP功能，则此参数必须填写。ASN有效范围1～4294967295（137718 、150436、65533除外）。",
+			Description: "User gateway ASN (Autonomous System Number). This parameter is required if you need to use BGP functionality. Valid ASN range is 1–4294967295 (excluding 137718, 150436, and 65533)",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -70,12 +70,12 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户网关关联的IPsec连接的数量。",
+		//	  "description": "Number of IPsec connections associated with the user gateway",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"connection_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "用户网关关联的IPsec连接的数量。",
+			Description: "Number of IPsec connections associated with the user gateway",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -85,11 +85,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建用户网关的时间。",
+		//	  "description": "Time when the user gateway was created",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建用户网关的时间。",
+			Description: "Time when the user gateway was created",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -99,11 +99,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关ID。",
+		//	  "description": "Gateway ID",
 		//	  "type": "string"
 		//	}
 		"customer_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关ID。",
+			Description: "Gateway ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -113,12 +113,12 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户网关的名称。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、下划线（_）和短划线（-）。长度限制为1 ~ 128个字符。不填默认为用户网关的ID。",
+		//	  "description": "User gateway name. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, defaults to the user gateway ID",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"customer_gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户网关的名称。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、下划线（_）和短划线（-）。长度限制为1 ~ 128个字符。不填默认为用户网关的ID。",
+			Description: "User gateway name. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, defaults to the user gateway ID",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -132,12 +132,12 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户网关的描述信息。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、空格（ ）、下划线（_）、中划线（-）、等号（=）、英文逗号（,）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不填默认为空字符串。",
+		//	  "description": "Description of the user gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space ( ), underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If not specified, defaults to an empty string",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户网关的描述信息。以中文、字母、数字开头，只能包含中文、字母、数字、点号（.）、空格（ ）、下划线（_）、中划线（-）、等号（=）、英文逗号（,）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不填默认为空字符串。",
+			Description: "Description of the user gateway. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space ( ), underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If not specified, defaults to an empty string",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -151,11 +151,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "对端本地数据中心网关的静态公网IP地址或其他VPC的VPN网关出口IP地址。若对端为非固定静态公网IP，此处需传入0.0.0.0。",
+		//	  "description": "Static public IP address of the peer local data center gateway or the VPN gateway egress IP address of another VPC. If the peer does not have a fixed static public IP, enter 0.0.0.0 here",
 		//	  "type": "string"
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "对端本地数据中心网关的静态公网IP地址或其他VPC的VPN网关出口IP地址。若对端为非固定静态公网IP，此处需传入0.0.0.0。",
+			Description: "Static public IP address of the peer local data center gateway or the VPN gateway egress IP address of another VPC. If the peer does not have a fixed static public IP, enter 0.0.0.0 here",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -166,7 +166,7 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "ipv4",
-		//	  "description": "VPN网关的IP地址协议类型，取值如下：ipv4 （默认值）ipv6",
+		//	  "description": "IP address protocol type for the VPN gateway. Options: ipv4 (default), ipv6",
 		//	  "enum": [
 		//	    "ipv4",
 		//	    "ipv6"
@@ -174,7 +174,7 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPN网关的IP地址协议类型，取值如下：ipv4 （默认值）ipv6",
+			Description: "IP address protocol type for the VPN gateway. Options: ipv4 (default), ipv6",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("ipv4"),
@@ -194,11 +194,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "用户网关所属的项目。不填默认为default，即创建的资源属于default项目。",
+		//	  "description": "Project to which the user gateway belongs. If not specified, defaults to 'default', meaning the created resource belongs to the default project",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户网关所属的项目。不填默认为default，即创建的资源属于default项目。",
+			Description: "Project to which the user gateway belongs. If not specified, defaults to 'default', meaning the created resource belongs to the default project",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -211,11 +211,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户网关的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+		//	  "description": "Status of the user gateway. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户网关的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+			Description: "Status of the user gateway. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -225,16 +225,16 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "Tag key for user tag",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "Tag value for user tag",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -251,7 +251,7 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "Tag key for user tag",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -263,7 +263,7 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "Tag value for user tag",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -272,7 +272,7 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -283,11 +283,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新用户网关的时间。",
+		//	  "description": "Time when the user gateway was updated",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新用户网关的时间。",
+			Description: "Time when the user gateway was updated",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -305,7 +305,7 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "用户网关是您本地网关侧的信息集合和抽象。通过用户网关，您可以把本地网关的信息注册到云上VPC之中。一个用户网关，可以对接多个VPN网关。",
+		Description: "The user gateway is a collection and abstraction of information on your local gateway side. With the user gateway, you can register local gateway information to the cloud VPC. One user gateway can connect to multiple VPN gateways",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -7,35 +7,35 @@
   ],
   "definitions": {
     "MetaInformation": {
-      "description": "资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。",
+      "description": "Resource meta information (used to store additional configuration when creating a backup plan). ECS full backup parameters: see the EcsBackupConfiguration structure. vePFS backup parameters: see the VePFSBackupConfiguration structure.",
       "properties": {
         "EcsMeta": {
-          "description": "ECS 的元数据，是一个 JSON string。格式见数据结构的 EcsBackupConfiguration 结构体。",
+          "description": "ECS metadata, as a JSON string. For format, see the EcsBackupConfiguration structure in the data structure.",
           "type": "string"
         },
         "VepfsMeta": {
-          "description": "vePFS 备份源元数据，是一个 JSON string。格式见数据结构的VePFSBackupConfiguration 结构体。",
+          "description": "vePFS backup source metadata, as a JSON string. For format, see the VePFSBackupConfiguration structure in the data structure.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "Plan": {
-      "description": "备份计划信息",
+      "description": "Backup Plan Information",
       "properties": {
         "PlanId": {
-          "description": "备份计划 ID",
+          "description": "Backup Plan ID",
           "type": "string"
         },
         "PlanName": {
-          "description": "备份计划名称",
+          "description": "Backup Plan Name",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "指备份对象，是云备份操作的起点。它可以是备份源产品中的计算资源、服务实例或者一组协同工作的服务和资源的集合，例如 ECS 整机、云盘、对象存储 Bucket。",
+  "description": "Refers to the backup object, which is the starting point for cloud backup operations. It can be a computing resource, service instance, or a group of collaborative services and resources from the backup source product, such as ECS full instance, cloud disk, or object storage bucket.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ResourceId",
@@ -74,29 +74,29 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "创建此备份源的账户 ID。",
+      "description": "Account ID that created this backup source",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation Time",
       "semantic": "createdTime",
       "type": "string"
     },
     "InstanceId": {
-      "description": "实例 ID。",
+      "description": "Instance ID",
       "type": "string"
     },
     "InstanceName": {
-      "description": "实例名称。",
+      "description": "Instance Name",
       "type": "string"
     },
     "MetaInformation": {
       "$ref": "#/definitions/MetaInformation",
-      "description": "资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。",
+      "description": "Resource meta information (used to store additional configuration when creating a backup plan). ECS full backup parameters: see the EcsBackupConfiguration structure. vePFS backup parameters: see the VePFSBackupConfiguration structure.",
       "type": "object"
     },
     "Plans": {
-      "description": "关联的备份计划列表。",
+      "description": "List of Associated Backup Plans",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Plan"
@@ -105,16 +105,16 @@
       "uniqueItems": true
     },
     "RecoveryPointNumber": {
-      "description": "恢复点的数量",
+      "description": "Number of Restore Points",
       "type": "integer"
     },
     "ResourceId": {
-      "description": "备份源 ID。",
+      "description": "Backup Source ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "ResourceType": {
-      "description": "备份源类型，取值说明如下：ECS：ECS 整机。vePFS：vePFS 文件系统。",
+      "description": "Backup source type. Value description: ECS: ECS full instance. vePFS: vePFS file system.",
       "enum": [
         "ECS",
         "vePFS"
@@ -122,17 +122,17 @@
       "type": "string"
     },
     "Status": {
-      "description": "备份源状态。可能的值为：AVAILABLE、REMOVING、BEING_BACKED_UP、RECOVERING、CREATING、ERROR、UNAVAILABLE。",
+      "description": "Backup source status. Possible values: AVAILABLE, REMOVING, BEING_BACKED_UP, RECOVERING, CREATING, ERROR, UNAVAILABLE.",
       "semantic": "status",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "更新时间",
+      "description": "Update Time",
       "semantic": "updatedTime",
       "type": "string"
     },
     "UsedCapacityInBytes": {
-      "description": "已经备份的字节数。",
+      "description": "Bytes Already Backed Up",
       "type": "integer"
     }
   },

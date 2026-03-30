@@ -21,37 +21,37 @@ Data Source schema for Volcengine::IAM::Group
 
 ### Read-Only
 
-- `account_id` (Number) 用户组所属主账号的ID。
-- `attached_policies` (Attributes Set) 用户组绑定的策略信息。 (see [below for nested schema](#nestedatt--attached_policies))
-- `created_time` (String) 用户组的创建时间。
-- `description` (String) 用户组描述信息。长度不超过128。
-- `display_name` (String) 用户组显示名称。长度不超过64。
-- `updated_time` (String) 用户组的更新时间。
-- `user_group_id` (Number) 用户组ID。
-- `user_group_name` (String) 用户组名称。长度1~64，支持英文、数字和.-_符号。
-- `users` (Attributes Set) 用户组内绑定的用户信息。 (see [below for nested schema](#nestedatt--users))
+- `account_id` (Number) ID of the primary account to which the user group belongs.
+- `attached_policies` (Attributes Set) Policy information bound to the user group. (see [below for nested schema](#nestedatt--attached_policies))
+- `created_time` (String) User group creation time.
+- `description` (String) User group description. Maximum length: 128 characters.
+- `display_name` (String) User group display name. Maximum length: 64 characters.
+- `updated_time` (String) User group update time.
+- `user_group_id` (Number) User group ID.
+- `user_group_name` (String) User group name. Length: 1–64 characters. Supports English letters, numbers, and .-_ symbols.
+- `users` (Attributes Set) User information associated with the user group. (see [below for nested schema](#nestedatt--users))
 
 <a id="nestedatt--attached_policies"></a>
 ### Nested Schema for `attached_policies`
 
 Read-Only:
 
-- `attach_time` (String) 策略绑定时间。
-- `description` (String) 策略描述。
-- `policy_name` (String) 策略名。
-- `policy_scope` (Attributes Set) 策略授权的作用范围，特指项目范围。 (see [below for nested schema](#nestedatt--attached_policies--policy_scope))
-- `policy_trn` (String) 策略TRN。
-- `policy_type` (String) 策略类型。System代表系统预设策略，Custom代表自定义策略。
+- `attach_time` (String) Policy binding time.
+- `description` (String) Policy description.
+- `policy_name` (String) Policy name.
+- `policy_scope` (Attributes Set) Scope of policy authorization, specifically the project scope. (see [below for nested schema](#nestedatt--attached_policies--policy_scope))
+- `policy_trn` (String) Policy TRN.
+- `policy_type` (String) Policy type. System indicates a system predefined policy; Custom indicates a custom policy.
 
 <a id="nestedatt--attached_policies--policy_scope"></a>
 ### Nested Schema for `attached_policies.policy_scope`
 
 Read-Only:
 
-- `attach_time` (String) 项目授权时间。
-- `policy_scope_type` (String) 授权类型。Global代表全局授权（不限制项目），Project代表按项目授权。
-- `project_display_name` (String) 按项目授权时的项目显示名。
-- `project_name` (String) 按项目授权时的项目名。
+- `attach_time` (String) Project authorization time.
+- `policy_scope_type` (String) Authorization type. Global indicates global authorization (not limited by project); Project indicates project-based authorization.
+- `project_display_name` (String) Project display name for project-based authorization.
+- `project_name` (String) Project name for project-based authorization.
 
 
 
@@ -60,8 +60,8 @@ Read-Only:
 
 Read-Only:
 
-- `description` (String) 用户描述。
-- `display_name` (String) 用户显示名。
-- `join_time` (String) 用户加入用户组的时间。
-- `user_id` (Number) 用户ID。
-- `user_name` (String) 用户名。
+- `description` (String) User description.
+- `display_name` (String) User display name.
+- `join_time` (String) Time when the user joined the user group.
+- `user_id` (Number) User ID.
+- `user_name` (String) Username.

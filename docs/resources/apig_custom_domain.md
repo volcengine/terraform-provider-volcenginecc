@@ -2,12 +2,12 @@
 page_title: "volcenginecc_apig_custom_domain Resource - terraform-provider-volcenginecc"
 subcategory: "APIG"
 description: |-
-  服务作为业务对外暴露的入口，可以通过绑定域名功能，将您的自定义域名绑定至服务。
+  The service serves as the entry point for external access. You can bind your custom domain to the service using the domain binding feature
 ---
 
 # volcenginecc_apig_custom_domain (Resource)
 
-服务作为业务对外暴露的入口，可以通过绑定域名功能，将您的自定义域名绑定至服务。
+The service serves as the entry point for external access. You can bind your custom domain to the service using the domain binding feature
 
 ## Example Usage
 
@@ -27,23 +27,23 @@ resource "volcenginecc_apig_custom_domain" "ApigCustomDomainDemo" {
 
 ### Required
 
-- `domain` (String) 自定义域名。
-- `protocol` (Set of String) 协议，取值：HTTP。HTTPS。
-- `service_id` (String) 服务ID。
+- `domain` (String) Custom Domain
+- `protocol` (Set of String) Protocol. Values: HTTP, HTTPS
+- `service_id` (String) Service ID
 
 ### Optional
 
-- `certificate_id` (String) 自定义域名证书ID。
-- `comments` (String) 备注。
-- `ssl_redirect` (Boolean) 重定向到HTTPS。
+- `certificate_id` (String) Custom Domain Certificate ID
+- `comments` (String) Remarks
+- `ssl_redirect` (Boolean) Redirect to HTTPS
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `custom_domain_id` (String) 自定义域名ID。
+- `created_time` (String) Creation Time
+- `custom_domain_id` (String) Custom Domain ID
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) 状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。
-- `updated_time` (String) 更新时间。
+- `status` (String) Status. Values: Creating: configuring; CreationFailed: configuration failed; Deleting: deleting; DeletionFailed: deletion failed; Verified: active
+- `updated_time` (String) Update Time
 
 ## Import
 

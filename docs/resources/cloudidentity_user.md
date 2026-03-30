@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cloudidentity_user Resource - terraform-provider-volcenginecc"
 subcategory: "CloudIdentity"
 description: |-
-  云身份中心用户，与企业员工身份一一映射。云身份中心用户是一种身份类型，可与某个账号下的IAM用户身份进行唯一关联并单点登录。云身份中心提供企业员工身份全生命周期管理、权限管理能力，推荐您在本产品内统一管理员工身份。
+  Cloud Identity Center users are mapped one-to-one with enterprise employee identities. A Cloud Identity Center user is an identity type that can be uniquely linked to an IAM user under an account for single sign-on. Cloud Identity Center provides full lifecycle management and permission management for enterprise employee identities. We recommend that you centrally manage employee identities within this product.
 ---
 
 # volcenginecc_cloudidentity_user (Resource)
 
-云身份中心用户，与企业员工身份一一映射。云身份中心用户是一种身份类型，可与某个账号下的IAM用户身份进行唯一关联并单点登录。云身份中心提供企业员工身份全生命周期管理、权限管理能力，推荐您在本产品内统一管理员工身份。
+Cloud Identity Center users are mapped one-to-one with enterprise employee identities. A Cloud Identity Center user is an identity type that can be uniquely linked to an IAM user under an account for single sign-on. Cloud Identity Center provides full lifecycle management and permission management for enterprise employee identities. We recommend that you centrally manage employee identities within this product.
 
 ## Example Usage
 
@@ -28,22 +28,22 @@ resource "volcenginecc_cloudidentity_user" "CloudIdentityUserDemo" {
 
 ### Optional
 
-- `description` (String) 用户描述。
-- `display_name` (String) 用户显示名。
-- `email` (String) 邮箱。
-- `password` (String) 密码。密码长度8-32位字符,包含大写字母、小写字母、数字和物特殊符号至少3种。
-- `password_reset_required` (Boolean) 首次登陆需不需要重置密码。
-- `phone` (String) 手机号。
-- `user_name` (String) 用户名。
+- `description` (String) User Description.
+- `display_name` (String) User Display Name.
+- `email` (String) Email.
+- `password` (String) Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.
+- `password_reset_required` (Boolean) Is password reset required on first login?
+- `phone` (String) Mobile Number.
+- `user_name` (String) Username.
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
+- `created_time` (String) Creation Time.
 - `id` (String) Uniquely identifies the resource.
-- `identity_type` (String) 身份类型。
-- `source` (String) 用户来源。
-- `updated_time` (String) 更新时间。
-- `user_id` (String) 用户id。
+- `identity_type` (String) Identity Type.
+- `source` (String) User Source.
+- `updated_time` (String) Update Time.
+- `user_id` (String) User ID.
 
 ## Import
 

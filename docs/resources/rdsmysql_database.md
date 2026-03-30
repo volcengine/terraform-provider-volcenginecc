@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rdsmysql_database Resource - terraform-provider-volcenginecc"
 subcategory: "RDSMySQL"
 description: |-
-  数据库
+  Database
 ---
 
 # volcenginecc_rdsmysql_database (Resource)
 
-数据库
+Database
 
 ## Example Usage
 
@@ -31,29 +31,29 @@ resource "volcenginecc_rdsmysql_database" "DatabaseDemo" {
 
 ### Required
 
-- `instance_id` (String) 数据库实例 ID。
-- `name` (String) 数据库名称。命名规则如下：名称唯一。长度为 2~64 个字符。以字母开头，以字母或数字结尾。由字母、数字、下划线（_）或中划线（-）组成。不能使用某些预留字，包括 root、admin 等。
+- `instance_id` (String) Database instance ID.
+- `name` (String) Database name. Naming rules: must be unique; length must be 2–64 characters; must start with a letter and end with a letter or number; can contain letters, numbers, underscores (_), or hyphens (-); certain reserved words, such as root and admin, cannot be used.
 
 ### Optional
 
-- `character_set_name` (String) 数据库字符集。目前支持的字符集包含：utf8、utf8mb4（默认）、latin1、ascii。
-- `database_privileges` (Attributes Set) 授权数据库权限信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--database_privileges))
-- `description` (String) 数据库的描述信息，长度不超过 256 个字符。该字段可选，若不设置该字段，或设置了该字段但描述信息长度为 0 ，则描述信息为空。
+- `character_set_name` (String) Database character set. Supported character sets: utf8, utf8mb4 (default), latin1, ascii.
+- `database_privileges` (Attributes Set) Database privilege authorization information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--database_privileges))
+- `description` (String) Database description, up to 256 characters. This field is optional. If not set, or if set with a description length of 0, the description will be empty.
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) 数据库状态。取值为：Unavailable：不可用。Available：可用。
+- `status` (String) Database status. Values: Unavailable (not available), Available (available).
 
 <a id="nestedatt--database_privileges"></a>
 ### Nested Schema for `database_privileges`
 
 Optional:
 
-- `account_name` (String) 数据库账号名称。
-- `account_privilege` (String) 授予的账号权限类型，取值：ReadWrite：读写权限。ReadOnly：只读权限。DDLOnly：仅 DDL 权限。DMLOnly：仅 DML 权限。Custom：自定义权限。
-- `host` (String) 指定的数据库账号可以访问数据库的 IP 地址。默认值为 %。若指定 Host 为 %，允许该账号从任意 IP 地址访问数据库。若指定 Host 为 192.10.10.%，则表示该账号可从 192.10.10.0~192.10.10.255 之间的 IP 地址访问数据库。指定的 Host 需要添加在实例所绑定的白名单中，
+- `account_name` (String) Database account name.
+- `account_privilege` (String) Granted account privilege type. Values: ReadWrite (read and write privileges), ReadOnly (read-only privileges), DDLOnly (DDL privileges only), DMLOnly (DML privileges only), Custom (custom privileges).
+- `host` (String) The specified database account can access the database from the IP address. Default value: %. If Host is set to %, the account can access the database from any IP address. If Host is set to 192.10.10.%, the account can access the database from IP addresses between 192.10.10.0 and 192.10.10.255. The specified Host must be added to the instance's allowlist.
 
 ## Import
 

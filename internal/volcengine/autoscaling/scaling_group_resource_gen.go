@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -41,11 +43,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组绑定的伸缩配置的ID。",
+		//	  "description": "ID of the scaling configuration bound to the scaling group",
 		//	  "type": "string"
 		//	}
 		"active_scaling_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组绑定的伸缩配置的ID。",
+			Description: "ID of the scaling configuration bound to the scaling group",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -56,11 +58,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组创建时间。",
+		//	  "description": "Scaling group creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组创建时间。",
+			Description: "Scaling group creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -70,7 +72,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RDS数据库实例的ID。",
+		//	  "description": "ID of the RDS database instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -80,7 +82,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"db_instance_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "RDS数据库实例的ID。",
+			Description: "ID of the RDS database instance.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -91,13 +93,13 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 300,
-		//	  "description": "执行一次伸缩活动（添加或移出ECS实例）结束后的冷却时间。冷却时间内，该伸缩组不执行其它的伸缩活动，仅针对云监控报警任务触发的伸缩活动和伸缩规则有效。取值范围：5 ~ 86400，单位：秒。默认值：300。",
+		//	  "description": "Cooldown period after a scaling activity (adding or removing ECS instances) completes. During the cooldown period, the scaling group does not perform other scaling activities; only scaling activities triggered by Cloud Monitoring alarms and scaling rules are effective. Value range: 5 ~ 86400 seconds. Default value: 300.",
 		//	  "maximum": 86400,
 		//	  "minimum": 5,
 		//	  "type": "integer"
 		//	}
 		"default_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "执行一次伸缩活动（添加或移出ECS实例）结束后的冷却时间。冷却时间内，该伸缩组不执行其它的伸缩活动，仅针对云监控报警任务触发的伸缩活动和伸缩规则有效。取值范围：5 ~ 86400，单位：秒。默认值：300。",
+			Description: "Cooldown period after a scaling activity (adding or removing ECS instances) completes. During the cooldown period, the scaling group does not perform other scaling activities; only scaling activities triggered by Cloud Monitoring alarms and scaling rules are effective. Value range: 5 ~ 86400 seconds. Default value: 300.",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(300),
@@ -113,11 +115,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": -1,
-		//	  "description": "伸缩组中期望运行的实例个数。1、不小于最小实例数MinInstanceNumber且不大于最大实例数MaxInstanceNumber。2、默认值：-1，表示不开启期望实例数能力。此时，伸缩组创建完成后会立即开始伸缩活动自动添加相应个数的实例。",
+		//	  "description": "Expected number of running instances in the scaling group. 1. Must be no less than MinInstanceNumber and no greater than MaxInstanceNumber. 2. Default value: -1, which means the expected instance count feature is disabled. In this case, after the scaling group is created, scaling activities will automatically add the corresponding number of instances.",
 		//	  "type": "integer"
 		//	}
 		"desire_instance_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组中期望运行的实例个数。1、不小于最小实例数MinInstanceNumber且不大于最大实例数MaxInstanceNumber。2、默认值：-1，表示不开启期望实例数能力。此时，伸缩组创建完成后会立即开始伸缩活动自动添加相应个数的实例。",
+			Description: "Expected number of running instances in the scaling group. 1. Must be no less than MinInstanceNumber and no greater than MaxInstanceNumber. 2. Default value: -1, which means the expected instance count feature is disabled. In this case, after the scaling group is created, scaling activities will automatically add the corresponding number of instances.",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(-1),
@@ -130,7 +132,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "ECS",
-		//	  "description": "伸缩组的健康检查方式。1、NONE：不做实例健康状态检查。2、ECS（默认）：对伸缩组内的ECS实例做健康检查。",
+		//	  "description": "Health check mode for the scaling group. 1. NONE: No instance health check. 2. ECS (default): Performs health checks on ECS instances in the scaling group.",
 		//	  "enum": [
 		//	    "NONE",
 		//	    "ECS"
@@ -138,7 +140,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"health_check_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组的健康检查方式。1、NONE：不做实例健康状态检查。2、ECS（默认）：对伸缩组内的ECS实例做健康检查。",
+			Description: "Health check mode for the scaling group. 1. NONE: No instance health check. 2. ECS (default): Performs health checks on ECS instances in the scaling group.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("ECS"),
@@ -152,12 +154,134 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceRemovePolicies
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance removal policy",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "description": "Instance removal policy",
+		//	    "properties": {
+		//	      "DecreaseDesiredCapacity": {
+		//	        "description": "Whether to decrease the desired instance count synchronously when DetachInstances or RemoveInstances is performed",
+		//	        "type": "boolean"
+		//	      },
+		//	      "DetachOption": {
+		//	        "description": "Instance removal policy for DetachInstances",
+		//	        "type": "string"
+		//	      },
+		//	      "ForceDelete": {
+		//	        "description": "Whether to force delete the instance when RemoveInstances is performed",
+		//	        "type": "boolean"
+		//	      },
+		//	      "InstanceId": {
+		//	        "description": "ECS instance ID, unique identifier of the subresource",
+		//	        "type": "string"
+		//	      },
+		//	      "LifecycleHook": {
+		//	        "description": "Whether to trigger lifecycle hooks when the instance is attached, detached, or removed",
+		//	        "type": "boolean"
+		//	      },
+		//	      "Mode": {
+		//	        "description": "Mode: How to handle an instance when it is removed from the scaling group: Detach means only remove from the scaling group, Remove means remove and delete the instance",
+		//	        "type": "string"
+		//	      },
+		//	      "RemoveMode": {
+		//	        "description": "Removal mode for RemoveInstances",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"instance_remove_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DecreaseDesiredCapacity
+					"decrease_desired_capacity": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to decrease the desired instance count synchronously when DetachInstances or RemoveInstances is performed",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DetachOption
+					"detach_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Instance removal policy for DetachInstances",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ForceDelete
+					"force_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to force delete the instance when RemoveInstances is performed",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceId
+					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ECS instance ID, unique identifier of the subresource",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: LifecycleHook
+					"lifecycle_hook": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to trigger lifecycle hooks when the instance is attached, detached, or removed",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Mode
+					"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Mode: How to handle an instance when it is removed from the scaling group: Detach means only remove from the scaling group, Remove means remove and delete the instance",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RemoveMode
+					"remove_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Removal mode for RemoveInstances",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Instance removal policy\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// InstanceRemovePolicies is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceTerminatePolicy
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "default": "OldestScalingConfigurationWithOldestInstance",
-		//	  "description": "实例移除策略，1、OldestInstance：移出最早加入 （包括自动创建和手动添加）伸缩组的实例。2、NewestInstance：移出最晚加入（包括自动创建和手动添加）伸缩组的实例。3、OldestScalingConfigurationWithOldestInstance（默认）：移出最早与伸缩组绑定的伸缩配置中，最早由伸缩组 自动创建 的实例。4、OldestScalingConfigurationWithNewestInstance：移出最早与伸缩组绑定的伸缩配置中，最晚由伸缩组 自动创建 的实例。",
+		//	  "description": "Instance removal policies: 1. OldestInstance: Removes the earliest instance added to the scaling group (including both automatically created and manually added instances). 2. NewestInstance: Removes the latest instance added to the scaling group (including both automatically created and manually added instances). 3. OldestScalingConfigurationWithOldestInstance (default): Removes the earliest automatically created instance in the scaling configuration that was first associated with the scaling group. 4. OldestScalingConfigurationWithNewestInstance: Removes the latest automatically created instance in the scaling configuration that was first associated with the scaling group.",
 		//	  "enum": [
 		//	    "OldestInstance",
 		//	    "NewestInstance",
@@ -167,7 +291,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"instance_terminate_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例移除策略，1、OldestInstance：移出最早加入 （包括自动创建和手动添加）伸缩组的实例。2、NewestInstance：移出最晚加入（包括自动创建和手动添加）伸缩组的实例。3、OldestScalingConfigurationWithOldestInstance（默认）：移出最早与伸缩组绑定的伸缩配置中，最早由伸缩组 自动创建 的实例。4、OldestScalingConfigurationWithNewestInstance：移出最早与伸缩组绑定的伸缩配置中，最晚由伸缩组 自动创建 的实例。",
+			Description: "Instance removal policies: 1. OldestInstance: Removes the earliest instance added to the scaling group (including both automatically created and manually added instances). 2. NewestInstance: Removes the latest instance added to the scaling group (including both automatically created and manually added instances). 3. OldestScalingConfigurationWithOldestInstance (default): Removes the earliest automatically created instance in the scaling configuration that was first associated with the scaling group. 4. OldestScalingConfigurationWithNewestInstance: Removes the latest automatically created instance in the scaling configuration that was first associated with the scaling group.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("OldestScalingConfigurationWithOldestInstance"),
@@ -183,30 +307,140 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Instances
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Collection of instance subresources managed manually within the scaling group (Attach / Detach / Remove)",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "description": "Scaling group instance subresource, represents an ECS instance managed manually",
+		//	    "properties": {
+		//	      "CreatedTime": {
+		//	        "description": "Time when the instance joined the scaling group",
+		//	        "type": "string"
+		//	      },
+		//	      "CreationType": {
+		//	        "description": "How the instance joined the scaling group (Attached / AutoCreated)",
+		//	        "type": "string"
+		//	      },
+		//	      "Entrusted": {
+		//	        "description": "Whether to enable managed mode for the instance when AttachInstances is performed",
+		//	        "type": "boolean"
+		//	      },
+		//	      "InstanceId": {
+		//	        "description": "ECS instance ID, unique identifier of the subresource",
+		//	        "type": "string"
+		//	      },
+		//	      "LaunchTemplateId": {
+		//	        "description": "Launch template ID used by the instance",
+		//	        "type": "string"
+		//	      },
+		//	      "LaunchTemplateVersion": {
+		//	        "description": "Launch template version used by the instance",
+		//	        "type": "string"
+		//	      },
+		//	      "LifecycleHook": {
+		//	        "description": "Whether to trigger lifecycle hooks when the instance is attached, detached, or removed",
+		//	        "type": "boolean"
+		//	      },
+		//	      "ScalingConfigurationId": {
+		//	        "description": "Scaling configuration ID associated with the instance",
+		//	        "type": "string"
+		//	      },
+		//	      "ScalingPolicyId": {
+		//	        "description": "Scaling policy ID associated with the instance",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "Current status of the instance in the scaling group",
+		//	        "type": "string"
+		//	      },
+		//	      "ZoneId": {
+		//	        "description": "Availability zone of the instance",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"instances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CreatedTime
+					// Property: CreationType
+					// Property: Entrusted
+					"entrusted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to enable managed mode for the instance when AttachInstances is performed",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceId
+					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "ECS instance ID, unique identifier of the subresource",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: LaunchTemplateId
+					// Property: LaunchTemplateVersion
+					// Property: LifecycleHook
+					"lifecycle_hook": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to trigger lifecycle hooks when the instance is attached, detached, or removed",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+						// LifecycleHook is a write-only property.
+					}, /*END ATTRIBUTE*/
+					// Property: ScalingConfigurationId
+					// Property: ScalingPolicyId
+					// Property: Status
+					// Property: ZoneId
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Collection of instance subresources managed manually within the scaling group (Attach / Detach / Remove)\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstancesDistribution
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例分布策略。",
+		//	  "description": "Instance distribution policy.",
 		//	  "properties": {
 		//	    "CompensateWithOnDemand": {
 		//	      "default": false,
-		//	      "description": "当因价格、库存等原因无法创建足够的抢占式实例时，是否允许使用按量实例补充抢占式容量。true: 允许。false（默认）: 不允许。",
+		//	      "description": "Whether pay-as-you-go instances are allowed to supplement spot capacity if spot instances cannot be created due to price or inventory constraints. true: allowed. false (default): not allowed.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "OnDemandBaseCapacity": {
-		//	      "description": "伸缩组中按量计费实例个数的最小值，取值范围：0~2000。当组中按量计费实例个数少于该值时，将优先创建按量计费的实例。",
+		//	      "description": "Minimum number of pay-as-you-go instances in the scaling group. Value range: 0~2000. If the number of pay-as-you-go instances in the group is less than this value, pay-as-you-go instances will be prioritized for creation.",
 		//	      "maximum": 2000,
 		//	      "type": "integer"
 		//	    },
 		//	    "OnDemandPercentageAboveBaseCapacity": {
-		//	      "description": "伸缩组满足最小按量实例数要求后，超出的实例中按量实例应占的比例，取值范围：0～100。",
+		//	      "description": "After the scaling group meets the minimum number of pay-as-you-go instances, the proportion of pay-as-you-go instances among the excess instances. Value range: 0–100.",
 		//	      "maximum": 100,
 		//	      "type": "integer"
 		//	    },
 		//	    "SpotInstanceRemedy": {
 		//	      "default": false,
-		//	      "description": "是否允许抢占式实例到期替换。开启则表示在抢占式实例被回收前5分钟左右，伸缩组将主动新建新的抢占式实例替换掉当前抢占式实例。true: 允许。false（默认）: 不允许。",
+		//	      "description": "Whether to allow preemptible instance replacement upon expiration. If enabled, the scaling group will proactively create a new preemptible instance to replace the current one about 5 minutes before the preemptible instance is reclaimed. true: allowed. false (default): not allowed.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -216,7 +450,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CompensateWithOnDemand
 				"compensate_with_on_demand": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "当因价格、库存等原因无法创建足够的抢占式实例时，是否允许使用按量实例补充抢占式容量。true: 允许。false（默认）: 不允许。",
+					Description: "Whether pay-as-you-go instances are allowed to supplement spot capacity if spot instances cannot be created due to price or inventory constraints. true: allowed. false (default): not allowed.",
 					Optional:    true,
 					Computed:    true,
 					Default:     booldefault.StaticBool(false),
@@ -226,7 +460,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: OnDemandBaseCapacity
 				"on_demand_base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "伸缩组中按量计费实例个数的最小值，取值范围：0~2000。当组中按量计费实例个数少于该值时，将优先创建按量计费的实例。",
+					Description: "Minimum number of pay-as-you-go instances in the scaling group. Value range: 0~2000. If the number of pay-as-you-go instances in the group is less than this value, pay-as-you-go instances will be prioritized for creation.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -238,7 +472,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: OnDemandPercentageAboveBaseCapacity
 				"on_demand_percentage_above_base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "伸缩组满足最小按量实例数要求后，超出的实例中按量实例应占的比例，取值范围：0～100。",
+					Description: "After the scaling group meets the minimum number of pay-as-you-go instances, the proportion of pay-as-you-go instances among the excess instances. Value range: 0–100.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -250,7 +484,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SpotInstanceRemedy
 				"spot_instance_remedy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否允许抢占式实例到期替换。开启则表示在抢占式实例被回收前5分钟左右，伸缩组将主动新建新的抢占式实例替换掉当前抢占式实例。true: 允许。false（默认）: 不允许。",
+					Description: "Whether to allow preemptible instance replacement upon expiration. If enabled, the scaling group will proactively create a new preemptible instance to replace the current one about 5 minutes before the preemptible instance is reclaimed. true: allowed. false (default): not allowed.",
 					Optional:    true,
 					Computed:    true,
 					Default:     booldefault.StaticBool(false),
@@ -259,7 +493,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例分布策略。",
+			Description: "Instance distribution policy.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -270,11 +504,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否启用伸缩组。true：启用。false：停止",
+		//	  "description": "Whether to enable the scaling group. true: enabled. false: stopped",
 		//	  "type": "boolean"
 		//	}
 		"is_enable_scaling_group": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否启用伸缩组。true：启用。false：停止",
+			Description: "Whether to enable the scaling group. true: enabled. false: stopped",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -286,11 +520,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例启动模板ID，配置后表示选择启动模版作为伸缩配置来源。",
+		//	  "description": "Instance launch template ID. When configured, it indicates that the launch template is used as the source for the scaling configuration.",
 		//	  "type": "string"
 		//	}
 		"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例启动模板ID，配置后表示选择启动模版作为伸缩配置来源。",
+			Description: "Instance launch template ID. When configured, it indicates that the launch template is used as the source for the scaling configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -301,20 +535,20 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例启动模版信息。",
+		//	  "description": "Instance launch template information",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "InstanceType": {
-		//	        "description": "指定实例规格。本参数仅当LaunchTemplateId参数存在取值时生有效。",
+		//	        "description": "Specify the instance type. This parameter is valid only when the LaunchTemplateId parameter is set.",
 		//	        "type": "string"
 		//	      },
 		//	      "PriceLimit": {
-		//	        "description": "指定抢占式实例规格每小时的最高价格。本参数仅当LaunchTemplateId参数存在取值，且启动模版的计费模式为设置出价上限的抢占式实例（即SpotWithPriceLimit）时有效。",
+		//	        "description": "Specify the maximum hourly price for spot instance types. This parameter is valid only when the LaunchTemplateId parameter is set and the launch template's billing mode is SpotWithPriceLimit.",
 		//	        "type": "number"
 		//	      },
 		//	      "WeightedCapacity": {
-		//	        "description": "实例规格的权重。",
+		//	        "description": "Instance type weight",
 		//	        "type": "integer"
 		//	      }
 		//	    },
@@ -328,7 +562,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceType
 					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "指定实例规格。本参数仅当LaunchTemplateId参数存在取值时生有效。",
+						Description: "Specify the instance type. This parameter is valid only when the LaunchTemplateId parameter is set.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -337,7 +571,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PriceLimit
 					"price_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "指定抢占式实例规格每小时的最高价格。本参数仅当LaunchTemplateId参数存在取值，且启动模版的计费模式为设置出价上限的抢占式实例（即SpotWithPriceLimit）时有效。",
+						Description: "Specify the maximum hourly price for spot instance types. This parameter is valid only when the LaunchTemplateId parameter is set and the launch template's billing mode is SpotWithPriceLimit.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -347,7 +581,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: WeightedCapacity
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例启动模版信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Instance launch template information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -359,11 +593,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "Default",
-		//	  "description": "实例启动模板的版本。1、模板的某个版本号。2、Default（默认）：始终使用模板默认版本。3、Latest：始终使用模板最新版本。",
+		//	  "description": "Instance launch template version. 1. A specific template version number. 2. Default: always use the default template version. 3. Latest: always use the latest template version.",
 		//	  "type": "string"
 		//	}
 		"launch_template_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例启动模板的版本。1、模板的某个版本号。2、Default（默认）：始终使用模板默认版本。3、Latest：始终使用模板最新版本。",
+			Description: "Instance launch template version. 1. A specific template version number. 2. Default: always use the default template version. 3. Latest: always use the latest template version.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("Default"),
@@ -375,11 +609,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组的状态。Active：已启用。InActive：未激活。Deleting：删除中。Locked: 已锁定。CoolingDown: 冷却中。Unknown: 未知状态。",
+		//	  "description": "Status of the scaling group. Active: enabled. InActive: not activated. Deleting: deleting. Locked: locked. CoolingDown: cooling down. Unknown: unknown status.",
 		//	  "type": "string"
 		//	}
 		"lifecycle_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组的状态。Active：已启用。InActive：未激活。Deleting：删除中。Locked: 已锁定。CoolingDown: 冷却中。Unknown: 未知状态。",
+			Description: "Status of the scaling group. Active: enabled. InActive: not activated. Deleting: deleting. Locked: locked. CoolingDown: cooling down. Unknown: unknown status.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -389,11 +623,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组实例CLB健康状况检查宽限期。",
+		//	  "description": "Grace period for CLB health checks on scaling group instances",
 		//	  "type": "integer"
 		//	}
 		"load_balancer_health_check_grace_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组实例CLB健康状况检查宽限期。",
+			Description: "Grace period for CLB health checks on scaling group instances",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -403,22 +637,22 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组中实例个数的最大值，默认取值0 ～ 100。您可以通过配额中心调整。",
+		//	  "description": "Maximum number of instances in the scaling group. Default value: 0 ~ 100. You can adjust this in the Quota Center.",
 		//	  "type": "integer"
 		//	}
 		"max_instance_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组中实例个数的最大值，默认取值0 ～ 100。您可以通过配额中心调整。",
+			Description: "Maximum number of instances in the scaling group. Default value: 0 ~ 100. You can adjust this in the Quota Center.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinInstanceNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组中实例个数的最小值，默认取值0 ～ 100。您可以通过配额中心调整。",
+		//	  "description": "Minimum number of instances in the scaling group. Default value: 0–100. You can adjust this in the quota center.",
 		//	  "type": "integer"
 		//	}
 		"min_instance_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组中实例个数的最小值，默认取值0 ～ 100。您可以通过配额中心调整。",
+			Description: "Minimum number of instances in the scaling group. Default value: 0–100. You can adjust this in the quota center.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MultiAZPolicy
@@ -426,7 +660,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "PRIORITY",
-		//	  "description": "扩缩容策略，如果您选择了多个子网，需配置本参数。1、PRIORITY（默认）：优先级策略。2、BALANCE：均衡分布策略。",
+		//	  "description": "Scaling strategy. If you select multiple subnets, you must configure this parameter. 1. PRIORITY (default): priority strategy. 2. BALANCE: balanced distribution strategy.",
 		//	  "enum": [
 		//	    "PRIORITY",
 		//	    "BALANCE"
@@ -434,7 +668,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"multi_az_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "扩缩容策略，如果您选择了多个子网，需配置本参数。1、PRIORITY（默认）：优先级策略。2、BALANCE：均衡分布策略。",
+			Description: "Scaling strategy. If you select multiple subnets, you must configure this parameter. 1. PRIORITY (default): priority strategy. 2. BALANCE: balanced distribution strategy.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("PRIORITY"),
@@ -453,12 +687,12 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "伸缩组所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+		//	  "description": "Project to which the scaling group belongs. Default is 'default'. A resource can belong to only one project. Only letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed. Maximum length: 64 characters.",
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+			Description: "Project to which the scaling group belongs. Default is 'default'. A resource can belong to only one project. Only letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed. Maximum length: 64 characters.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -474,11 +708,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组ID。",
+		//	  "description": "Scaling group ID.",
 		//	  "type": "string"
 		//	}
 		"scaling_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组ID。",
+			Description: "Scaling group ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -488,12 +722,12 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组名称，同一地域下伸缩组名称唯一。只能以中文、字母开头，只能包含中文、字母、数字、下划线和中划线 。长度限制为1 ~ 128个字符。暂不支持特殊字符。",
+		//	  "description": "Scaling group name, unique within the same region. Must start with a Chinese character or letter, and can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length limit: 1 ~ 128 characters. Special characters are not supported.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组名称，同一地域下伸缩组名称唯一。只能以中文、字母开头，只能包含中文、字母、数字、下划线和中划线 。长度限制为1 ~ 128个字符。暂不支持特殊字符。",
+			Description: "Scaling group name, unique within the same region. Must start with a Chinese character or letter, and can only contain Chinese characters, letters, numbers, underscores, and hyphens. Length limit: 1 ~ 128 characters. Special characters are not supported.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
@@ -504,7 +738,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "release",
-		//	  "description": "伸缩组的实例回收模式。1、release（默认）：释放模式。2、recycle：停机回收模式。",
+		//	  "description": "Instance recycling mode for the scaling group. 1. release (default): Release mode. 2. recycle: Stop-and-recycle mode.",
 		//	  "enum": [
 		//	    "release",
 		//	    "recycle"
@@ -512,7 +746,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"scaling_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组的实例回收模式。1、release（默认）：释放模式。2、recycle：停机回收模式。",
+			Description: "Instance recycling mode for the scaling group. 1. release (default): Release mode. 2. recycle: Stop-and-recycle mode.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("release"),
@@ -531,25 +765,25 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组关联的负载均衡信息。",
+		//	  "description": "Load balancer information associated with the scaling group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "LoadBalancerId": {
-		//	        "description": "负载均衡实例的ID。",
+		//	        "description": "ID of the load balancer instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "负载均衡后端服务器组中服务器的端口号。取值1 ～ 65535。",
+		//	        "description": "Port number of the server in the backend server group for load balancing. Range: 1–65535.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ServerGroupId": {
-		//	        "description": "负载均衡后端服务器组的ID。",
+		//	        "description": "Backend server group ID for load balancing.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
 		//	        "default": "CLB",
-		//	        "description": "负载均衡服务器组类型。单个CLB/ALB最多支持添加20个后端服务器组，所有CLB/ALB最多支持添加100个后端服务器。ALB：应用型负载均衡。CLB：传统型型负载均衡（默认）。",
+		//	        "description": "Load balancing server group type. A single CLB/ALB supports up to 20 backend server groups, and the total number of backend servers supported by all CLB/ALB is 100. ALB: Application Load Balancer. CLB: Classic Load Balancer (default).",
 		//	        "enum": [
 		//	          "ALB",
 		//	          "CLB"
@@ -557,7 +791,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {
-		//	        "description": "负载均衡后端服务器组中服务器的权重。",
+		//	        "description": "Weight of servers in the backend server group of the load balancer",
 		//	        "type": "integer"
 		//	      }
 		//	    },
@@ -572,7 +806,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: LoadBalancerId
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡后端服务器组中服务器的端口号。取值1 ～ 65535。",
+						Description: "Port number of the server in the backend server group for load balancing. Range: 1–65535.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -581,7 +815,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ServerGroupId
 					"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡后端服务器组的ID。",
+						Description: "Backend server group ID for load balancing.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -590,7 +824,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡服务器组类型。单个CLB/ALB最多支持添加20个后端服务器组，所有CLB/ALB最多支持添加100个后端服务器。ALB：应用型负载均衡。CLB：传统型型负载均衡（默认）。",
+						Description: "Load balancing server group type. A single CLB/ALB supports up to 20 backend server groups, and the total number of backend servers supported by all CLB/ALB is 100. ALB: Application Load Balancer. CLB: Classic Load Balancer (default).",
 						Optional:    true,
 						Computed:    true,
 						Default:     stringdefault.StaticString("CLB"),
@@ -606,7 +840,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "负载均衡后端服务器组中服务器的权重。",
+						Description: "Weight of servers in the backend server group of the load balancer",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -615,7 +849,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "伸缩组关联的负载均衡信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Load balancer information associated with the scaling group.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -626,11 +860,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组内处于停用中状态的实例数量。",
+		//	  "description": "Number of instances in the scaling group that are in the disabled state.",
 		//	  "type": "integer"
 		//	}
 		"stopped_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组内处于停用中状态的实例数量。",
+			Description: "Number of instances in the scaling group that are in the disabled state.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -640,7 +874,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组中实例主网卡的子网ID列表。",
+		//	  "description": "List of subnet IDs for the primary network interface of instances in the scaling group",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -650,14 +884,14 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "伸缩组中实例主网卡的子网ID列表。",
+			Description: "List of subnet IDs for the primary network interface of instances in the scaling group",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SuspendedProcesses
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "暂停中的流程，无暂停中流程则返回空值。ScaleIn：缩容流程。ScaleOut：扩容流程。HealthCheck：健康检查。AlarmNotification：报警任务。ScheduledAction：定时任务。",
+		//	  "description": "Paused processes. If there are no paused processes, returns an empty value. ScaleIn: scale-in process. ScaleOut: scale-out process. HealthCheck: health check. AlarmNotification: alarm task. ScheduledAction: scheduled task.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -667,7 +901,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"suspended_processes": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "暂停中的流程，无暂停中流程则返回空值。ScaleIn：缩容流程。ScaleOut：扩容流程。HealthCheck：健康检查。AlarmNotification：报警任务。ScheduledAction：定时任务。",
+			Description: "Paused processes. If there are no paused processes, returns an empty value. ScaleIn: scale-in process. ScaleOut: scale-out process. HealthCheck: health check. AlarmNotification: alarm task. ScheduledAction: scheduled task.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -678,16 +912,16 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User label tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "The value of the user tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -704,7 +938,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User label tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -716,7 +950,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "The value of the user tag.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -725,7 +959,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -736,11 +970,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前伸缩组内实例的个数。",
+		//	  "description": "Number of instances currently in the scaling group",
 		//	  "type": "integer"
 		//	}
 		"total_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "当前伸缩组内实例的个数。",
+			Description: "Number of instances currently in the scaling group",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -750,11 +984,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组更新时间。",
+		//	  "description": "Scaling group update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组更新时间。",
+			Description: "Scaling group update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -764,11 +998,11 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "伸缩组所属私有网络ID。",
+		//	  "description": "VPC ID to which the scaling group belongs",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "伸缩组所属私有网络ID。",
+			Description: "VPC ID to which the scaling group belongs",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -786,7 +1020,7 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "伸缩组用于管理一组云资源实例。通过伸缩组可以定义云资源池中的实例数/容量、冷却时间、负载均衡等信息。",
+		Description: "Scaling groups are used to manage a set of cloud resource instances. You can use scaling groups to define the number/capacity of instances in the resource pool, cooldown time, load balancing, and other information.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -799,50 +1033,67 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"active_scaling_configuration_id":          "ActiveScalingConfigurationId",
 		"compensate_with_on_demand":                "CompensateWithOnDemand",
 		"created_time":                             "CreatedTime",
+		"creation_type":                            "CreationType",
 		"db_instance_ids":                          "DBInstanceIds",
+		"decrease_desired_capacity":                "DecreaseDesiredCapacity",
 		"default_cooldown":                         "DefaultCooldown",
 		"desire_instance_number":                   "DesireInstanceNumber",
+		"detach_option":                            "DetachOption",
+		"entrusted":                                "Entrusted",
+		"force_delete":                             "ForceDelete",
 		"health_check_type":                        "HealthCheckType",
+		"instance_id":                              "InstanceId",
+		"instance_remove_policies":                 "InstanceRemovePolicies",
 		"instance_terminate_policy":                "InstanceTerminatePolicy",
 		"instance_type":                            "InstanceType",
+		"instances":                                "Instances",
 		"instances_distribution":                   "InstancesDistribution",
 		"is_enable_scaling_group":                  "IsEnableScalingGroup",
 		"key":                                      "Key",
 		"launch_template_id":                       "LaunchTemplateId",
 		"launch_template_overrides":                "LaunchTemplateOverrides",
 		"launch_template_version":                  "LaunchTemplateVersion",
+		"lifecycle_hook":                           "LifecycleHook",
 		"lifecycle_state":                          "LifecycleState",
 		"load_balancer_health_check_grace_period":  "LoadBalancerHealthCheckGracePeriod",
 		"load_balancer_id":                         "LoadBalancerId",
 		"max_instance_number":                      "MaxInstanceNumber",
 		"min_instance_number":                      "MinInstanceNumber",
+		"mode":                                     "Mode",
 		"multi_az_policy":                          "MultiAZPolicy",
 		"on_demand_base_capacity":                  "OnDemandBaseCapacity",
 		"on_demand_percentage_above_base_capacity": "OnDemandPercentageAboveBaseCapacity",
-		"port":                    "Port",
-		"price_limit":             "PriceLimit",
-		"project_name":            "ProjectName",
-		"scaling_group_id":        "ScalingGroupId",
-		"scaling_group_name":      "ScalingGroupName",
-		"scaling_mode":            "ScalingMode",
-		"server_group_attributes": "ServerGroupAttributes",
-		"server_group_id":         "ServerGroupId",
-		"spot_instance_remedy":    "SpotInstanceRemedy",
-		"stopped_instance_count":  "StoppedInstanceCount",
-		"subnet_ids":              "SubnetIds",
-		"suspended_processes":     "SuspendedProcesses",
-		"tags":                    "Tags",
-		"total_instance_count":    "TotalInstanceCount",
-		"type":                    "Type",
-		"updated_time":            "UpdatedTime",
-		"value":                   "Value",
-		"vpc_id":                  "VpcId",
-		"weight":                  "Weight",
-		"weighted_capacity":       "WeightedCapacity",
+		"port":                     "Port",
+		"price_limit":              "PriceLimit",
+		"project_name":             "ProjectName",
+		"remove_mode":              "RemoveMode",
+		"scaling_configuration_id": "ScalingConfigurationId",
+		"scaling_group_id":         "ScalingGroupId",
+		"scaling_group_name":       "ScalingGroupName",
+		"scaling_mode":             "ScalingMode",
+		"scaling_policy_id":        "ScalingPolicyId",
+		"server_group_attributes":  "ServerGroupAttributes",
+		"server_group_id":          "ServerGroupId",
+		"spot_instance_remedy":     "SpotInstanceRemedy",
+		"status":                   "Status",
+		"stopped_instance_count":   "StoppedInstanceCount",
+		"subnet_ids":               "SubnetIds",
+		"suspended_processes":      "SuspendedProcesses",
+		"tags":                     "Tags",
+		"total_instance_count":     "TotalInstanceCount",
+		"type":                     "Type",
+		"updated_time":             "UpdatedTime",
+		"value":                    "Value",
+		"vpc_id":                   "VpcId",
+		"weight":                   "Weight",
+		"weighted_capacity":        "WeightedCapacity",
+		"zone_id":                  "ZoneId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/IsEnableScalingGroup",
+		"/properties/InstanceRemovePolicies",
+		"/properties/Instances/*/LifecycleHook",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -857,6 +1108,14 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/DBInstanceIds",
 		"/properties/ServerGroupAttributes/*/LoadBalancerId",
 		"/properties/LaunchTemplateOverrides/*/WeightedCapacity",
+		"/properties/Instances/*/CreatedTime",
+		"/properties/Instances/*/CreationType",
+		"/properties/Instances/*/LaunchTemplateId",
+		"/properties/Instances/*/LaunchTemplateVersion",
+		"/properties/Instances/*/ScalingConfigurationId",
+		"/properties/Instances/*/ScalingPolicyId",
+		"/properties/Instances/*/Status",
+		"/properties/Instances/*/ZoneId",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

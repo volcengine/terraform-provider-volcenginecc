@@ -26,66 +26,66 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照创建时间。",
+		//	  "description": "Snapshot Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照创建时间。",
+			Description: "Snapshot Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照描述信息。",
+		//	  "description": "Snapshot Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照描述信息。",
+			Description: "Snapshot Description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统 ID。",
+		//	  "description": "File System ID",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统 ID。",
+			Description: "File System ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统名称。",
+		//	  "description": "File System Name",
 		//	  "type": "string"
 		//	}
 		"file_system_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统名称。",
+			Description: "File System Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsEncrypt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否加密，当前仅支持false，即不加密。",
+		//	  "description": "Is encryption enabled. Currently only false is supported (not encrypted)",
 		//	  "type": "boolean"
 		//	}
 		"is_encrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否加密，当前仅支持false，即不加密。",
+			Description: "Is encryption enabled. Currently only false is supported (not encrypted)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Progress
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照创建进度。",
+		//	  "description": "Snapshot Creation Progress",
 		//	  "type": "string"
 		//	}
 		"progress": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照创建进度。",
+			Description: "Snapshot Creation Progress",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RetentionDays
@@ -93,33 +93,33 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": 2147483647,
-		//	  "description": "快照保留时间，默认为2147483647，即永久保留。",
+		//	  "description": "Snapshot Retention Period. Default is 2147483647 (permanent retention)",
 		//	  "type": "integer"
 		//	}
 		"retention_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "快照保留时间，默认为2147483647，即永久保留。",
+			Description: "Snapshot Retention Period. Default is 2147483647 (permanent retention)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照 ID。",
+		//	  "description": "Snapshot ID",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照 ID。",
+			Description: "Snapshot ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照名称。",
+		//	  "description": "Snapshot Name",
 		//	  "type": "string"
 		//	}
 		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照名称。",
+			Description: "Snapshot Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotType
@@ -127,43 +127,43 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "Manual",
-		//	  "description": "快照类型，默认为Manual，即手动快照。",
+		//	  "description": "Snapshot Type. Default is Manual (manual snapshot)",
 		//	  "enum": [
 		//	    "Manual"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"snapshot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照类型，默认为Manual，即手动快照。",
+			Description: "Snapshot Type. Default is Manual (manual snapshot)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceSize
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统容量，单位为 GiB。",
+		//	  "description": "File System Capacity (GiB)",
 		//	  "type": "integer"
 		//	}
 		"source_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "文件系统容量，单位为 GiB。",
+			Description: "File System Capacity (GiB)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统版本。",
+		//	  "description": "File System Version",
 		//	  "type": "string"
 		//	}
 		"source_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统版本。",
+			Description: "File System Version",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照状态。说明如下：Progressing：正在创建。Accomplished：创建成功。Failed：创建失败。",
+		//	  "description": "Snapshot Status. Details: Progressing: Creating. Accomplished: Created successfully. Failed: Creation failed",
 		//	  "enum": [
 		//	    "Progressing",
 		//	    "Accomplished",
@@ -172,18 +172,18 @@ func snapshotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照状态。说明如下：Progressing：正在创建。Accomplished：创建成功。Failed：创建失败。",
+			Description: "Snapshot Status. Details: Progressing: Creating. Accomplished: Created successfully. Failed: Creation failed",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability Zone ID",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability Zone ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

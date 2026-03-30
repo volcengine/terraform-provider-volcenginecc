@@ -27,18 +27,18 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表所属账号的ID。",
+		//	  "description": "Account ID owning the route table",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表所属账号的ID。",
+			Description: "Account ID owning the route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociateType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建路由表输入的关联类型。1、Subnet：子网关联。2、Gateway：网关关联。",
+		//	  "description": "Association type for route table creation input. 1. Subnet: Subnet association 2. Gateway: Gateway association",
 		//	  "enum": [
 		//	    "Subnet",
 		//	    "Gateway"
@@ -46,55 +46,55 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"associate_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建路由表输入的关联类型。1、Subnet：子网关联。2、Gateway：网关关联。",
+			Description: "Association type for route table creation input. 1. Subnet: Subnet association 2. Gateway: Gateway association",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表创建时间。",
+		//	  "description": "Route Table Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表创建时间。",
+			Description: "Route Table Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomRouteEntries
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表关联的自定义路由条目列表。",
+		//	  "description": "List of custom route entries associated with the route table",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "路由条目描述。",
+		//	        "description": "Route Entry Description",
 		//	        "maxLength": 255,
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationCidrBlock": {
-		//	        "description": "路由条目的目标网段。",
+		//	        "description": "Destination CIDR of the route entry",
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationPrefixListId": {
-		//	        "description": "前缀列表ID。",
+		//	        "description": "Prefix List ID",
 		//	        "type": "string"
 		//	      },
 		//	      "NextHopId": {
-		//	        "description": "下一跳资源ID。",
+		//	        "description": "Next Hop Resource ID",
 		//	        "type": "string"
 		//	      },
 		//	      "NextHopName": {
-		//	        "description": "路由条目下一跳资源的名称。",
+		//	        "description": "Name of the next hop resource for the route entry",
 		//	        "type": "string"
 		//	      },
 		//	      "NextHopType": {
-		//	        "description": "自定义路由条目的下一跳的类型。1、Instance：ECS实例。2、HaVip：高可用虚拟IP。3、NetworkInterface：辅助网卡。4、NatGW：NAT网关。5、VpnGW：VPN网关。6、TransitRouter：中转路由器。7、IPv6GW：IPv6网关。8、CloudConnector：云连接器。9、GWLBEndpoint：网关负载均衡终端节点。",
+		//	        "description": "Next hop type for custom route entry. 1. Instance: ECS instance 2. HaVip: High availability virtual IP 3. NetworkInterface: Secondary network interface 4. NatGW: NAT gateway 5. VpnGW: VPN gateway 6. TransitRouter: Transit router 7. IPv6GW: IPv6 gateway 8. CloudConnector: Cloud connector 9. GWLBEndpoint: Gateway load balancer endpoint",
 		//	        "type": "string"
 		//	      },
 		//	      "PrefixListCidrBlocks": {
-		//	        "description": "前缀列表的CIDR。",
+		//	        "description": "Prefix List CIDR",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -103,23 +103,23 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "RouteEntryId": {
-		//	        "description": "路由条目ID。",
+		//	        "description": "Route Entry ID",
 		//	        "type": "string"
 		//	      },
 		//	      "RouteEntryName": {
-		//	        "description": "路由条目名称。",
+		//	        "description": "Route Entry Name",
 		//	        "type": "string"
 		//	      },
 		//	      "RouteTableId": {
-		//	        "description": "路由表ID。",
+		//	        "description": "Route Table ID",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "路由条目状态。1、Pending：待创建。2、Available：可用。",
+		//	        "description": "Route entry status. 1. Pending: Pending creation 2. Available: Available",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "路由条目类型。1、Custom：自定义路由条目。2、System：系统默认路由条目。",
+		//	        "description": "Route entry type. 1. Custom: Custom route entry 2. System: System default route entry",
 		//	        "enum": [
 		//	          "Custom",
 		//	          "System"
@@ -127,7 +127,7 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "VpcId": {
-		//	        "description": "路由条目所属私有网络的ID。",
+		//	        "description": "ID of the private network to which the route entry belongs",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -141,107 +141,107 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目描述。",
+						Description: "Route Entry Description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationCidrBlock
 					"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目的目标网段。",
+						Description: "Destination CIDR of the route entry",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationPrefixListId
 					"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表ID。",
+						Description: "Prefix List ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NextHopId
 					"next_hop_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "下一跳资源ID。",
+						Description: "Next Hop Resource ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NextHopName
 					"next_hop_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目下一跳资源的名称。",
+						Description: "Name of the next hop resource for the route entry",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NextHopType
 					"next_hop_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义路由条目的下一跳的类型。1、Instance：ECS实例。2、HaVip：高可用虚拟IP。3、NetworkInterface：辅助网卡。4、NatGW：NAT网关。5、VpnGW：VPN网关。6、TransitRouter：中转路由器。7、IPv6GW：IPv6网关。8、CloudConnector：云连接器。9、GWLBEndpoint：网关负载均衡终端节点。",
+						Description: "Next hop type for custom route entry. 1. Instance: ECS instance 2. HaVip: High availability virtual IP 3. NetworkInterface: Secondary network interface 4. NatGW: NAT gateway 5. VpnGW: VPN gateway 6. TransitRouter: Transit router 7. IPv6GW: IPv6 gateway 8. CloudConnector: Cloud connector 9. GWLBEndpoint: Gateway load balancer endpoint",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PrefixListCidrBlocks
 					"prefix_list_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "前缀列表的CIDR。",
+						Description: "Prefix List CIDR",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RouteEntryId
 					"route_entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目ID。",
+						Description: "Route Entry ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RouteEntryName
 					"route_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目名称。",
+						Description: "Route Entry Name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RouteTableId
 					"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由表ID。",
+						Description: "Route Table ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目状态。1、Pending：待创建。2、Available：可用。",
+						Description: "Route entry status. 1. Pending: Pending creation 2. Available: Available",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目类型。1、Custom：自定义路由条目。2、System：系统默认路由条目。",
+						Description: "Route entry type. 1. Custom: Custom route entry 2. System: System default route entry",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VpcId
 					"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目所属私有网络的ID。",
+						Description: "ID of the private network to which the route entry belongs",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "路由表关联的自定义路由条目列表。",
+			Description: "List of custom route entries associated with the route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表描述信息。",
+		//	  "description": "Route Table Description",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表描述信息。",
+			Description: "Route Table Description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4GatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联路由表的IPv4网关ID。",
+		//	  "description": "IPv4 Gateway ID associated with the route table",
 		//	  "type": "string"
 		//	}
 		"ipv_4_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "关联路由表的IPv4网关ID。",
+			Description: "IPv4 Gateway ID associated with the route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6GatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联路由表的IPv6网关ID。",
+		//	  "description": "IPv6 Gateway ID associated with the route table",
 		//	  "type": "string"
 		//	}
 		"ipv_6_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "关联路由表的IPv6网关ID。",
+			Description: "IPv6 Gateway ID associated with the route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -249,42 +249,42 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "路由表所属项目的名称。",
+		//	  "description": "Name of the project owning the route table",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表所属项目的名称。",
+			Description: "Name of the project owning the route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表ID。",
+		//	  "description": "Route Table ID",
 		//	  "type": "string"
 		//	}
 		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表ID。",
+			Description: "Route Table ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表名称。",
+		//	  "description": "Route Table Name",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"route_table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表名称。",
+			Description: "Route Table Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表类型。1、Custom：自定义路由表。2、System：系统路由表。",
+		//	  "description": "Route table type. 1. Custom: Custom route table 2. System: System route table",
 		//	  "enum": [
 		//	    "Custom",
 		//	    "System"
@@ -292,14 +292,14 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"route_table_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表类型。1、Custom：自定义路由表。2、System：系统路由表。",
+			Description: "Route table type. 1. Custom: Custom route table 2. System: System route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联的子网的ID列表。",
+		//	  "description": "List of associated subnet IDs",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -309,44 +309,44 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "关联的子网的ID列表。",
+			Description: "List of associated subnet IDs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SystemRouteEntries
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表关联的系统默认路由条目列表。",
+		//	  "description": "List of system default route entries associated with the route table",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "路由条目描述。",
+		//	        "description": "Route Entry Description",
 		//	        "maxLength": 255,
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationCidrBlock": {
-		//	        "description": "路由条目的目标网段。",
+		//	        "description": "Destination CIDR of the route entry",
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationPrefixListId": {
-		//	        "description": "前缀列表ID。",
+		//	        "description": "Prefix List ID",
 		//	        "type": "string"
 		//	      },
 		//	      "NextHopId": {
-		//	        "description": "下一跳资源ID。",
+		//	        "description": "Next Hop Resource ID",
 		//	        "type": "string"
 		//	      },
 		//	      "NextHopName": {
-		//	        "description": "路由条目下一跳资源的名称。",
+		//	        "description": "Name of the next hop resource for the route entry",
 		//	        "type": "string"
 		//	      },
 		//	      "NextHopType": {
-		//	        "description": "自定义路由条目的下一跳的类型。1、Instance：ECS实例。2、HaVip：高可用虚拟IP。3、NetworkInterface：辅助网卡。4、NatGW：NAT网关。5、VpnGW：VPN网关。6、TransitRouter：中转路由器。7、IPv6GW：IPv6网关。8、CloudConnector：云连接器。9、GWLBEndpoint：网关负载均衡终端节点。",
+		//	        "description": "Next hop type for custom route entry. 1. Instance: ECS instance 2. HaVip: High availability virtual IP 3. NetworkInterface: Secondary network interface 4. NatGW: NAT gateway 5. VpnGW: VPN gateway 6. TransitRouter: Transit router 7. IPv6GW: IPv6 gateway 8. CloudConnector: Cloud connector 9. GWLBEndpoint: Gateway load balancer endpoint",
 		//	        "type": "string"
 		//	      },
 		//	      "PrefixListCidrBlocks": {
-		//	        "description": "前缀列表的CIDR。",
+		//	        "description": "Prefix List CIDR",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -355,23 +355,23 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "RouteEntryId": {
-		//	        "description": "路由条目ID。",
+		//	        "description": "Route Entry ID",
 		//	        "type": "string"
 		//	      },
 		//	      "RouteEntryName": {
-		//	        "description": "路由条目名称。",
+		//	        "description": "Route Entry Name",
 		//	        "type": "string"
 		//	      },
 		//	      "RouteTableId": {
-		//	        "description": "路由表ID。",
+		//	        "description": "Route Table ID",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "路由条目状态。1、Pending：待创建。2、Available：可用。",
+		//	        "description": "Route entry status. 1. Pending: Pending creation 2. Available: Available",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "路由条目类型。1、Custom：自定义路由条目。2、System：系统默认路由条目。",
+		//	        "description": "Route entry type. 1. Custom: Custom route entry 2. System: System default route entry",
 		//	        "enum": [
 		//	          "Custom",
 		//	          "System"
@@ -379,7 +379,7 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "VpcId": {
-		//	        "description": "路由条目所属私有网络的ID。",
+		//	        "description": "ID of the private network to which the route entry belongs",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -393,89 +393,89 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目描述。",
+						Description: "Route Entry Description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationCidrBlock
 					"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目的目标网段。",
+						Description: "Destination CIDR of the route entry",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationPrefixListId
 					"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表ID。",
+						Description: "Prefix List ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NextHopId
 					"next_hop_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "下一跳资源ID。",
+						Description: "Next Hop Resource ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NextHopName
 					"next_hop_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目下一跳资源的名称。",
+						Description: "Name of the next hop resource for the route entry",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NextHopType
 					"next_hop_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义路由条目的下一跳的类型。1、Instance：ECS实例。2、HaVip：高可用虚拟IP。3、NetworkInterface：辅助网卡。4、NatGW：NAT网关。5、VpnGW：VPN网关。6、TransitRouter：中转路由器。7、IPv6GW：IPv6网关。8、CloudConnector：云连接器。9、GWLBEndpoint：网关负载均衡终端节点。",
+						Description: "Next hop type for custom route entry. 1. Instance: ECS instance 2. HaVip: High availability virtual IP 3. NetworkInterface: Secondary network interface 4. NatGW: NAT gateway 5. VpnGW: VPN gateway 6. TransitRouter: Transit router 7. IPv6GW: IPv6 gateway 8. CloudConnector: Cloud connector 9. GWLBEndpoint: Gateway load balancer endpoint",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PrefixListCidrBlocks
 					"prefix_list_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "前缀列表的CIDR。",
+						Description: "Prefix List CIDR",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RouteEntryId
 					"route_entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目ID。",
+						Description: "Route Entry ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RouteEntryName
 					"route_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目名称。",
+						Description: "Route Entry Name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RouteTableId
 					"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由表ID。",
+						Description: "Route Table ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目状态。1、Pending：待创建。2、Available：可用。",
+						Description: "Route entry status. 1. Pending: Pending creation 2. Available: Available",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目类型。1、Custom：自定义路由条目。2、System：系统默认路由条目。",
+						Description: "Route entry type. 1. Custom: Custom route entry 2. System: System default route entry",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VpcId
 					"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "路由条目所属私有网络的ID。",
+						Description: "ID of the private network to which the route entry belongs",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "路由表关联的系统默认路由条目列表。",
+			Description: "List of system default route entries associated with the route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag List",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -492,50 +492,50 @@ func routeTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag List",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表更新时间。",
+		//	  "description": "Route Table Last Updated Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表更新时间。",
+			Description: "Route Table Last Updated Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表所属VPC的ID。",
+		//	  "description": "ID of the VPC owning the route table",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "路由表所属VPC的ID。",
+			Description: "ID of the VPC owning the route table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的名称。",
+		//	  "description": "VPC Name",
 		//	  "type": "string"
 		//	}
 		"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的名称。",
+			Description: "VPC Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

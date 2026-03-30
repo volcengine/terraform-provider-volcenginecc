@@ -26,50 +26,50 @@ func vaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问域名。",
+		//	  "description": "Access Domain Name",
 		//	  "type": "string"
 		//	}
 		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问域名。",
+			Description: "Access Domain Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project Name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份库标签。",
+		//	  "description": "Backup Repository Tag",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "备份库标签。",
+		//	    "description": "Backup Repository Tag",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag Key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag Value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -87,39 +87,39 @@ func vaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag Key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag Value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "备份库标签。",
+			Description: "Backup Repository Tag",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VaultId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份库 ID。",
+		//	  "description": "Backup Repository ID",
 		//	  "type": "string"
 		//	}
 		"vault_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份库 ID。",
+			Description: "Backup Repository ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VaultName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份库名称。",
+		//	  "description": "Backup Repository Name",
 		//	  "type": "string"
 		//	}
 		"vault_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份库名称。",
+			Description: "Backup Repository Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

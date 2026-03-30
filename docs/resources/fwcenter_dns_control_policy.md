@@ -2,12 +2,12 @@
 page_title: "volcenginecc_fwcenter_dns_control_policy Resource - terraform-provider-volcenginecc"
 subcategory: "FWCenter"
 description: |-
-  域名黑名单访问控制策略。
+  Domain denylist access control policy.
 ---
 
 # volcenginecc_fwcenter_dns_control_policy (Resource)
 
-域名黑名单访问控制策略。
+Domain denylist access control policy.
 
 ## Example Usage
 
@@ -30,36 +30,36 @@ resource "volcenginecc_fwcenter_dns_control_policy" "FWCenterDnsControlPolicyDem
 
 ### Required
 
-- `destination` (String) 访问目的，可以是域名或域名地址簿的唯一标识ID。当前仅支持一个地址簿。
-- `destination_type` (String) 访问目的的类型。domain：域名；group：域名地址簿。
+- `destination` (String) Access target, which can be the unique identifier of a domain or domain address book. Currently, only one address book is supported.
+- `destination_type` (String) Type of access target. domain: domain; group: domain address book.
 
 ### Optional
 
-- `description` (String) 策略的描述信息。
-- `internet_firewall_id` (String) 互联网边界防火墙实例ID。
-- `sources` (Attributes Set) 访问源信息，包含VPC列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--sources))
-- `status` (Boolean) 域名黑名单访问控制策略的开关状态。false：关闭；true：开启。
+- `description` (String) Policy description information.
+- `internet_firewall_id` (String) Internet border firewall instance ID.
+- `sources` (Attributes Set) Access source information, including VPC list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--sources))
+- `status` (Boolean) Switch status of the domain denylist access control policy. false: Off; true: On.
 
 ### Read-Only
 
-- `account_id` (String) 用户的唯一标识ID。
-- `destination_group_list` (Set of String) 域名地址簿名称列表。
-- `domain_list` (Set of String) 域名列表。
-- `domain_list_v1` (Attributes Set) 域名地址簿的域名列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domain_list_v1))
-- `hit_cnt` (Number) 命中计数，表示该域名黑名单访问控制策略被触发的次数。
+- `account_id` (String) User's unique identifier.
+- `destination_group_list` (Set of String) Domain address book name list.
+- `domain_list` (Set of String) Domain list.
+- `domain_list_v1` (Attributes Set) Domain list in the domain address book.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--domain_list_v1))
+- `hit_cnt` (Number) Hit count, indicating the number of times the domain denylist access control policy was triggered.
 - `id` (String) Uniquely identifies the resource.
-- `last_hit_time` (Number) 最近命中时间戳，表示该域名黑名单访问控制策略最后一次被触发的时间。
-- `rule_id` (String) 访问控制策略的唯一标识ID。
-- `use_count` (Number) 该域名黑名单访问控制策略占用的策略数量。
+- `last_hit_time` (Number) Latest hit timestamp, indicating the last time the domain denylist access control policy was triggered.
+- `rule_id` (String) Unique identifier of the access control policy.
+- `use_count` (Number) Number of policies occupied by this domain denylist access control policy.
 
 <a id="nestedatt--sources"></a>
 ### Nested Schema for `sources`
 
 Optional:
 
-- `region` (String) VPC地域信息。
+- `region` (String) VPC region information.
 - `vpc_id` (String) VPC ID。
 
 
@@ -68,9 +68,9 @@ Optional:
 
 Read-Only:
 
-- `address` (String) 具体地址信息。
-- `description` (String) 描述信息。
-- `type` (String) 地址类型。支持的取值如下所示。ip：IPv4 地址；ipv6：IPv6 地址；domain：域名；port：端口。
+- `address` (String) Specific address information.
+- `description` (String) Description information.
+- `type` (String) Address type. Supported values are as follows. ip: IPv4 address; ipv6: IPv6 address; domain: domain name; port: port number.
 
 ## Import
 

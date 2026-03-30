@@ -32,12 +32,12 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间（秒级 Unix 时间戳）。",
+		//	  "description": "Creation time (seconds-level Unix timestamp).",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "创建时间（秒级 Unix 时间戳）。",
+			Description: "Creation time (seconds-level Unix timestamp).",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -47,12 +47,12 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "定时 SQL 分析任务的简单描述。不支持\u003c\u003e、'、\\、\\\\。长度范围为 0～64 个字符。",
+		//	  "description": "Brief description of the scheduled SQL analysis task. Characters \u003c\u003e, ', \\, and \\\\ are not supported. Length: 0–64 characters.",
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "定时 SQL 分析任务的简单描述。不支持<>、'、\\、\\\\。长度范围为 0～64 个字符。",
+			Description: "Brief description of the scheduled SQL analysis task. Characters <>, ', \\, and \\\\ are not supported. Length: 0–64 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -66,11 +66,11 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "目标日志项目 ID。",
+		//	  "description": "Target log project ID.",
 		//	  "type": "string"
 		//	}
 		"dest_project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "目标日志项目 ID。",
+			Description: "Target log project ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -80,11 +80,11 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "目标日志主题所属地域。默认为当前地域。",
+		//	  "description": "Region of the target log topic. The default is the current region.",
 		//	  "type": "string"
 		//	}
 		"dest_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "目标日志主题所属地域。默认为当前地域。",
+			Description: "Region of the target log topic. The default is the current region.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -95,22 +95,22 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用于存储定时 SQL 分析结果数据的目标日志主题 ID。",
+		//	  "description": "Target log topic ID for storing scheduled SQL analysis result data.",
 		//	  "type": "string"
 		//	}
 		"dest_topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用于存储定时 SQL 分析结果数据的目标日志主题 ID。",
+			Description: "Target log topic ID for storing scheduled SQL analysis result data.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestTopicName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "目标日志主题名称。",
+		//	  "description": "Target log topic name.",
 		//	  "type": "string"
 		//	}
 		"dest_topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "目标日志主题名称。",
+			Description: "Target log topic name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -120,12 +120,12 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "调度定时 SQL 分析任务的结束时间，格式为秒级时间戳。如果不配置，表示持续运行定时 SQL 分析任务。到达结束时间后，日志服务不会再创建实例及执行定时 SQL 分析，但任务状态仍为运行中，直至手动暂停任务。",
+		//	  "description": "End time for scheduling the scheduled SQL analysis task, in seconds-level timestamp format. If not configured, the scheduled SQL analysis task runs continuously. After the end time is reached, the log service will no longer create instances or execute scheduled SQL analysis, but the task status remains running until manually paused.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"process_end_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "调度定时 SQL 分析任务的结束时间，格式为秒级时间戳。如果不配置，表示持续运行定时 SQL 分析任务。到达结束时间后，日志服务不会再创建实例及执行定时 SQL 分析，但任务状态仍为运行中，直至手动暂停任务。",
+			Description: "End time for scheduling the scheduled SQL analysis task, in seconds-level timestamp format. If not configured, the scheduled SQL analysis task runs continuously. After the end time is reached, the log service will no longer create instances or execute scheduled SQL analysis, but the task status remains running until manually paused.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -137,12 +137,12 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "每次调度的延迟时间。取值范围为 0～120，单位为秒。如果不配置，则表示 0，即无延时。",
+		//	  "description": "Delay time for each schedule. Range: 0–120 seconds. If not configured, defaults to 0, meaning no delay.",
 		//	  "maximum": 120,
 		//	  "type": "integer"
 		//	}
 		"process_sql_delay": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "每次调度的延迟时间。取值范围为 0～120，单位为秒。如果不配置，则表示 0，即无延时。",
+			Description: "Delay time for each schedule. Range: 0–120 seconds. If not configured, defaults to 0, meaning no delay.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -156,12 +156,12 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "调度定时 SQL 分析任务的开始时间，即创建第一个实例的时间。格式为秒级时间戳。",
+		//	  "description": "Start time for scheduling the scheduled SQL analysis task, which is the time the first instance is created. Format: seconds-level timestamp.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"process_start_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "调度定时 SQL 分析任务的开始时间，即创建第一个实例的时间。格式为秒级时间戳。",
+			Description: "Start time for scheduling the scheduled SQL analysis task, which is the time the first instance is created. Format: seconds-level timestamp.",
 			Required:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
@@ -171,44 +171,44 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SQL 时间窗口，即定时 SQL 分析任务运行时，日志检索与分析的时间范围，左闭右开格式。最大为 24 小时，最小为 1 分钟。",
+		//	  "description": "SQL time window, which is the time range for log retrieval and analysis when scheduled SQL analysis tasks run, in left-closed, right-open format. Maximum is 24 hours, minimum is 1 minute.",
 		//	  "type": "string"
 		//	}
 		"process_time_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SQL 时间窗口，即定时 SQL 分析任务运行时，日志检索与分析的时间范围，左闭右开格式。最大为 24 小时，最小为 1 分钟。",
+			Description: "SQL time window, which is the time range for log retrieval and analysis when scheduled SQL analysis tasks run, in left-closed, right-open format. Maximum is 24 hours, minimum is 1 minute.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Query
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "定时 SQL 分析任务定期执行的检索与分析语句，应符合日志服务的检索与分析语法。",
+		//	  "description": "The scheduled SQL analysis task periodically executes retrieval and analysis statements, which must comply with the log service's retrieval and analysis syntax.",
 		//	  "type": "string"
 		//	}
 		"query": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "定时 SQL 分析任务定期执行的检索与分析语句，应符合日志服务的检索与分析语法。",
+			Description: "The scheduled SQL analysis task periodically executes retrieval and analysis statements, which must comply with the log service's retrieval and analysis syntax.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestCycle
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "定时 SQL 分析任务的调度周期。调度周期决定每个实例的调度时间。建议调度周期不小于 SQL 时间窗口。",
+		//	  "description": "Scheduling period for the scheduled SQL analysis task. The scheduling period determines the scheduling time for each instance. It is recommended that the scheduling period is not less than the SQL time window.",
 		//	  "properties": {
 		//	    "CronTab": {
-		//	      "description": "Cron 表达式，最小粒度为分钟，24 小时制。例如 0 18 * * * 表示每天 18 点整执行一次。",
+		//	      "description": "Cron expression, with a minimum granularity of minutes, using 24-hour format. For example, 0 18 * * * means execution at 18:00 every day.",
 		//	      "type": "string"
 		//	    },
 		//	    "CronTimeZone": {
-		//	      "description": "设置 Type 为 Cron 时，还需设置时区。",
+		//	      "description": "If Type is set to Cron, you must also set the time zone.",
 		//	      "type": "string"
 		//	    },
 		//	    "Time": {
-		//	      "description": "调度的周期或者定期执行的时间点（距离 00:00 的分钟数），取值范围为 1~1440，单位为分钟。",
+		//	      "description": "Scheduling period or the time point for periodic execution (minutes from 00:00). Range: 1–1440 minutes.",
 		//	      "type": "integer"
 		//	    },
 		//	    "Type": {
-		//	      "description": "调度周期类型。可选值：Period、Fixed、Cron。",
+		//	      "description": "Scheduling period type. Options: Period, Fixed, Cron.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -222,7 +222,7 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CronTab
 				"cron_tab": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Cron 表达式，最小粒度为分钟，24 小时制。例如 0 18 * * * 表示每天 18 点整执行一次。",
+					Description: "Cron expression, with a minimum granularity of minutes, using 24-hour format. For example, 0 18 * * * means execution at 18:00 every day.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -231,7 +231,7 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CronTimeZone
 				"cron_time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "设置 Type 为 Cron 时，还需设置时区。",
+					Description: "If Type is set to Cron, you must also set the time zone.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -240,27 +240,27 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Time
 				"time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "调度的周期或者定期执行的时间点（距离 00:00 的分钟数），取值范围为 1~1440，单位为分钟。",
+					Description: "Scheduling period or the time point for periodic execution (minutes from 00:00). Range: 1–1440 minutes.",
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "调度周期类型。可选值：Period、Fixed、Cron。",
+					Description: "Scheduling period type. Options: Period, Fixed, Cron.",
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "定时 SQL 分析任务的调度周期。调度周期决定每个实例的调度时间。建议调度周期不小于 SQL 时间窗口。",
+			Description: "Scheduling period for the scheduled SQL analysis task. The scheduling period determines the scheduling time for each instance. It is recommended that the scheduling period is not less than the SQL time window.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceProjectID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "源日志项目 ID。",
+		//	  "description": "Source log project ID.",
 		//	  "type": "string"
 		//	}
 		"source_project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "源日志项目 ID。",
+			Description: "Source log project ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -270,11 +270,11 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "源日志项目名称。",
+		//	  "description": "Source log project name.",
 		//	  "type": "string"
 		//	}
 		"source_project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "源日志项目名称。",
+			Description: "Source log project name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -284,11 +284,11 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "待进行定时 SQL 分析的原始日志所在的日志主题 ID。仅支持当前地域的日志主题。",
+		//	  "description": "ID of the log topic containing the original logs for scheduled SQL analysis. Only log topics in the current region are supported.",
 		//	  "type": "string"
 		//	}
 		"source_topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "待进行定时 SQL 分析的原始日志所在的日志主题 ID。仅支持当前地域的日志主题。",
+			Description: "ID of the log topic containing the original logs for scheduled SQL analysis. Only log topics in the current region are supported.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -298,11 +298,11 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "源日志主题名称。",
+		//	  "description": "Source log topic name.",
 		//	  "type": "string"
 		//	}
 		"source_topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "源日志主题名称。",
+			Description: "Source log topic name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -312,22 +312,22 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "完成任务配置后是否立即启动定时 SQL 分析任务。可选值：0 关闭；1 立即启动。",
+		//	  "description": "Whether to start the scheduled SQL analysis task immediately after completing task configuration. Options: 0 Off; 1 Start immediately.",
 		//	  "type": "integer"
 		//	}
 		"status": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "完成任务配置后是否立即启动定时 SQL 分析任务。可选值：0 关闭；1 立即启动。",
+			Description: "Whether to start the scheduled SQL analysis task immediately after completing task configuration. Options: 0 Off; 1 Start immediately.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TaskId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务 ID。",
+		//	  "description": "Task ID.",
 		//	  "type": "string"
 		//	}
 		"task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "任务 ID。",
+			Description: "Task ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -337,22 +337,22 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "定时 SQL 分析任务名称。命名规则请参考资源命名规则。",
+		//	  "description": "Name of the scheduled SQL analysis task. Refer to the resource naming rules for naming conventions.",
 		//	  "type": "string"
 		//	}
 		"task_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "定时 SQL 分析任务名称。命名规则请参考资源命名规则。",
+			Description: "Name of the scheduled SQL analysis task. Refer to the resource naming rules for naming conventions.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TaskType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务类型：0 表示日志到日志；1 表示日志到指标。",
+		//	  "description": "Task type: 0 means log to log; 1 means log to metric.",
 		//	  "type": "integer"
 		//	}
 		"task_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "任务类型：0 表示日志到日志；1 表示日志到指标。",
+			Description: "Task type: 0 means log to log; 1 means log to metric.",
 			Required:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
@@ -363,12 +363,12 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "修改时间（秒级 Unix 时间戳）。",
+		//	  "description": "Modification time (seconds-level Unix timestamp).",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "修改时间（秒级 Unix 时间戳）。",
+			Description: "Modification time (seconds-level Unix timestamp).",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -386,7 +386,7 @@ func scheduleSqlTaskResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "定时 SQL 分析任务的资源定义。",
+		Description: "Resource definition for the scheduled SQL analysis task.",
 		Version:     1,
 		Attributes:  attributes,
 	}

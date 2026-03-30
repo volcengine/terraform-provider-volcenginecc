@@ -27,16 +27,16 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前节点组可布局的组件名称列表。",
+		//	  "description": "List of component names that can be deployed in the current node group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ApplicationName": {
-		//	        "description": "应用名称。",
+		//	        "description": "Application name.",
 		//	        "type": "string"
 		//	      },
 		//	      "LayoutComponentNames": {
-		//	        "description": "组件的自定义配置参数列表。",
+		//	        "description": "Custom configuration parameter list for the component.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -55,36 +55,36 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ApplicationName
 					"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用名称。",
+						Description: "Application name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: LayoutComponentNames
 					"layout_component_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "组件的自定义配置参数列表。",
+						Description: "Custom configuration parameter list for the component.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "当前节点组可布局的组件名称列表。",
+			Description: "List of component names that can be deployed in the current node group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargePreConfig
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包周期付费配置。",
+		//	  "description": "Subscription payment configuration.",
 		//	  "properties": {
 		//	    "AutoRenew": {
-		//	      "description": "是否开启自动续费。",
+		//	      "description": "Whether to enable auto-renewal.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "AutoRenewPeriod": {
-		//	      "description": "自动续费触发时的续费时长，当autoRenew=true时，默认值=1。",
+		//	      "description": "Renewal duration when auto-renewal is triggered. When autoRenew=true, the default value is 1.",
 		//	      "type": "integer"
 		//	    },
 		//	    "AutoRenewPeriodUnit": {
-		//	      "description": "自动续费触发时的续费时长单位，当autoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。",
+		//	      "description": "Renewal duration unit when auto-renewal is triggered. When autoRenew=true, the default value is Month. Value range: Month: month. Year: year.",
 		//	      "enum": [
 		//	        "Month",
 		//	        "Year"
@@ -92,11 +92,11 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ChargePeriod": {
-		//	      "description": "chargeType=PRE默认值=1，包月的购买时长单位。",
+		//	      "description": "When chargeType=PRE, the default value is 1. The unit for the purchase duration when chargeType=PRE is monthly subscription.",
 		//	      "type": "integer"
 		//	    },
 		//	    "ChargePeriodUnit": {
-		//	      "description": "chargeType=PRE时，默认值=Month，包月的购买时长单位。取值范围：Month：月。Year：年。",
+		//	      "description": "When chargeType=PRE, the default value is Month. The unit for the purchase duration when chargeType=PRE is monthly subscription. Value range: Month (month), Year (year).",
 		//	      "enum": [
 		//	        "Month",
 		//	        "Year"
@@ -104,7 +104,7 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeType": {
-		//	      "description": "付费类型，枚举值：POST，PRE。",
+		//	      "description": "Payment type. Enum values: POST, PRE.",
 		//	      "enum": [
 		//	        "POST",
 		//	        "PRE"
@@ -118,43 +118,43 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启自动续费。",
+					Description: "Whether to enable auto-renewal.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenewPeriod
 				"auto_renew_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "自动续费触发时的续费时长，当autoRenew=true时，默认值=1。",
+					Description: "Renewal duration when auto-renewal is triggered. When autoRenew=true, the default value is 1.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenewPeriodUnit
 				"auto_renew_period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "自动续费触发时的续费时长单位，当autoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。",
+					Description: "Renewal duration unit when auto-renewal is triggered. When autoRenew=true, the default value is Month. Value range: Month: month. Year: year.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargePeriod
 				"charge_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "chargeType=PRE默认值=1，包月的购买时长单位。",
+					Description: "When chargeType=PRE, the default value is 1. The unit for the purchase duration when chargeType=PRE is monthly subscription.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargePeriodUnit
 				"charge_period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "chargeType=PRE时，默认值=Month，包月的购买时长单位。取值范围：Month：月。Year：年。",
+					Description: "When chargeType=PRE, the default value is Month. The unit for the purchase duration when chargeType=PRE is monthly subscription. Value range: Month (month), Year (year).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "付费类型，枚举值：POST，PRE。",
+					Description: "Payment type. Enum values: POST, PRE.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "包周期付费配置。",
+			Description: "Subscription payment configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "付费类型。PRE表示包月，POST表示按量计费。",
+		//	  "description": "Payment type. PRE indicates monthly subscription, POST indicates pay-as-you-go.",
 		//	  "enum": [
 		//	    "POST",
 		//	    "PRE"
@@ -162,50 +162,50 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "付费类型。PRE表示包月，POST表示按量计费。",
+			Description: "Payment type. PRE indicates monthly subscription, POST indicates pay-as-you-go.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群ID。",
+		//	  "description": "Cluster ID.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群ID。",
+			Description: "Cluster ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DataDisks
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据盘配置。",
+		//	  "description": "Data disk configuration.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Count": {
-		//	        "description": "磁盘块数，默认值4，最大15，最小1。",
+		//	        "description": "Number of disk blocks. Default value: 4. Maximum: 15. Minimum: 1.",
 		//	        "type": "integer"
 		//	      },
 		//	      "Size": {
-		//	        "description": "磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+		//	        "description": "Disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.",
 		//	        "type": "integer"
 		//	      },
 		//	      "VolumeType": {
-		//	        "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+		//	        "description": "Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -219,29 +219,29 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Count
 					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "磁盘块数，默认值4，最大15，最小1。",
+						Description: "Number of disk blocks. Default value: 4. Maximum: 15. Minimum: 1.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+						Description: "Disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeType
 					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+						Description: "Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "数据盘配置。",
+			Description: "Data disk configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EcsInstanceTypes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ECS实例规格列表。当前修改仅支持单个实例规格。",
+		//	  "description": "ECS instance specification list. Currently, only a single instance specification can be modified.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -251,14 +251,14 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"ecs_instance_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "ECS实例规格列表。当前修改仅支持单个实例规格。",
+			Description: "ECS instance specification list. Currently, only a single instance specification can be modified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LayoutComponentNames
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "返回的节点组组件的自定义配置参数列表。",
+		//	  "description": "Custom configuration parameter list for the returned node group components.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -268,113 +268,113 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"layout_component_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "返回的节点组组件的自定义配置参数列表。",
+			Description: "Custom configuration parameter list for the returned node group components.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点数量。取值范围：1~1000。",
+		//	  "description": "Node count. Value range: 1~1000.",
 		//	  "maximum": 1000,
 		//	  "type": "integer"
 		//	}
 		"node_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "节点数量。取值范围：1~1000。",
+			Description: "Node count. Value range: 1~1000.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点组ID。",
+		//	  "description": "Node group ID.",
 		//	  "type": "string"
 		//	}
 		"node_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点组ID。",
+			Description: "Node group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeGroupName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点组名称。",
+		//	  "description": "Node group name.",
 		//	  "type": "string"
 		//	}
 		"node_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点组名称。",
+			Description: "Node group name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeGroupState
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点组状态。RUNNING：运行中。EXTENDING：扩容中。REDUCING：缩容中。DISK_EXTENDING：磁盘扩容中。MODIFYING：变配中。",
+		//	  "description": "Node group status. RUNNING: Running. EXTENDING: Expanding. REDUCING: Shrinking. DISK_EXTENDING: Disk expansion. MODIFYING: Configuration modification in progress.",
 		//	  "type": "string"
 		//	}
 		"node_group_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点组状态。RUNNING：运行中。EXTENDING：扩容中。REDUCING：缩容中。DISK_EXTENDING：磁盘扩容中。MODIFYING：变配中。",
+			Description: "Node group status. RUNNING: Running. EXTENDING: Expanding. REDUCING: Shrinking. DISK_EXTENDING: Disk expansion. MODIFYING: Configuration modification in progress.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeGroupType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点组类型。",
+		//	  "description": "Node group type.",
 		//	  "type": "string"
 		//	}
 		"node_group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点组类型。",
+			Description: "Node group type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Nodes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点列表。",
+		//	  "description": "Node list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CreatedTime": {
-		//	        "description": "节点创建时间。",
+		//	        "description": "Node creation time.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "EcsInstanceType": {
-		//	        "description": "ecs实例规格。",
+		//	        "description": "ecs instance specification.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeFqdn": {
-		//	        "description": "节点FQDN。",
+		//	        "description": "Node FQDN.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeId": {
-		//	        "description": "节点ID。",
+		//	        "description": "Node ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeName": {
-		//	        "description": "节点名称。",
+		//	        "description": "Node name.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeState": {
-		//	        "description": "节点状态。UNKNOWN：未知状态。CREATING：创建中。RUNNING：运行中。STOPPING：停止中。STOPPED：已停止。REBOOTING：重启中。DELETED：已删除。",
+		//	        "description": "Node status. UNKNOWN: Unknown. CREATING: Creating. RUNNING: Running. STOPPING: Stopping. STOPPED: Stopped. REBOOTING: Rebooting. DELETED: Deleted.",
 		//	        "type": "string"
 		//	      },
 		//	      "PrivateIp": {
-		//	        "description": "私有IP。",
+		//	        "description": "Private IP.",
 		//	        "type": "string"
 		//	      },
 		//	      "PublicIp": {
-		//	        "description": "公网IP。",
+		//	        "description": "Public IP.",
 		//	        "type": "string"
 		//	      },
 		//	      "ReadyTime": {
-		//	        "description": "准备完毕时间。",
+		//	        "description": "Ready time.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "TerminateTime": {
-		//	        "description": "集群终止时间。",
+		//	        "description": "Cluster termination time.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      }
@@ -389,64 +389,64 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CreatedTime
 					"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "节点创建时间。",
+						Description: "Node creation time.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: EcsInstanceType
 					"ecs_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "ecs实例规格。",
+						Description: "ecs instance specification.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeFqdn
 					"node_fqdn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点FQDN。",
+						Description: "Node FQDN.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeId
 					"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点ID。",
+						Description: "Node ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeName
 					"node_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点名称。",
+						Description: "Node name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeState
 					"node_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点状态。UNKNOWN：未知状态。CREATING：创建中。RUNNING：运行中。STOPPING：停止中。STOPPED：已停止。REBOOTING：重启中。DELETED：已删除。",
+						Description: "Node status. UNKNOWN: Unknown. CREATING: Creating. RUNNING: Running. STOPPING: Stopping. STOPPED: Stopped. REBOOTING: Rebooting. DELETED: Deleted.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PrivateIp
 					"private_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "私有IP。",
+						Description: "Private IP.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PublicIp
 					"public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "公网IP。",
+						Description: "Public IP.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ReadyTime
 					"ready_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "准备完毕时间。",
+						Description: "Ready time.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TerminateTime
 					"terminate_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "集群终止时间。",
+						Description: "Cluster termination time.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "节点列表。",
+			Description: "Node list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网ID列表。",
+		//	  "description": "Subnet ID list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -456,21 +456,21 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "子网ID列表。",
+			Description: "Subnet ID list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SystemDisk
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "系统盘。",
+		//	  "description": "System disk.",
 		//	  "properties": {
 		//	    "Size": {
-		//	      "description": "系统盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+		//	      "description": "System disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.",
 		//	      "type": "integer"
 		//	    },
 		//	    "VolumeType": {
-		//	      "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+		//	      "description": "Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -480,61 +480,61 @@ func nodeGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Size
 				"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "系统盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+					Description: "System disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VolumeType
 				"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+					Description: "Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "系统盘。",
+			Description: "System disk.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TargetDiskSize
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "待扩容的目标磁盘大小，最小60GB，最大2048GB，单位GB。",
+		//	  "description": "Target disk size for expansion. Minimum 60GB, maximum 2048GB, unit: GB.",
 		//	  "maximum": 2048,
 		//	  "type": "integer"
 		//	}
 		"target_disk_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "待扩容的目标磁盘大小，最小60GB，最大2048GB，单位GB。",
+			Description: "Target disk size for expansion. Minimum 60GB, maximum 2048GB, unit: GB.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TerminateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群终止时间。",
+		//	  "description": "Cluster termination time.",
 		//	  "type": "string"
 		//	}
 		"terminate_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群终止时间。",
+			Description: "Cluster termination time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WithPublicIp
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ECS是否附带公网IP。",
+		//	  "description": "Whether the ECS instance includes a public IP.",
 		//	  "type": "boolean"
 		//	}
 		"with_public_ip": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "ECS是否附带公网IP。",
+			Description: "Whether the ECS instance includes a public IP.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "zoneId，为空时默认复用集群的zoneId。",
+		//	  "description": "zoneId. If empty, the cluster's zoneId is reused by default.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "zoneId，为空时默认复用集群的zoneId。",
+			Description: "zoneId. If empty, the cluster's zoneId is reused by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

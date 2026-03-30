@@ -27,31 +27,31 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书ID。",
+		//	  "description": "Certificate ID",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书ID。",
+			Description: "Certificate ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书名称，长度限制为1 ～ 128个字符，必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。",
+		//	  "description": "Certificate name. Length must be between 1 and 128 characters, start with a letter or Chinese character, and may include numbers, periods (.), underscores (_), and hyphens (-)",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书名称，长度限制为1 ～ 128个字符，必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。",
+			Description: "Certificate name. Length must be between 1 and 128 characters, start with a letter or Chinese character, and may include numbers, periods (.), underscores (_), and hyphens (-)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书类型，取值：CA：CA证书、Server：服务器证书。",
+		//	  "description": "Certificate type. Options: CA: CA certificate; Server: server certificate",
 		//	  "enum": [
 		//	    "CA",
 		//	    "Server"
@@ -59,58 +59,58 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"certificate_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书类型，取值：CA：CA证书、Server：服务器证书。",
+			Description: "Certificate type. Options: CA: CA certificate; Server: server certificate",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书创建时间。",
+		//	  "description": "Certificate creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书创建时间。",
+			Description: "Certificate creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书描述。",
+		//	  "description": "Certificate description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书描述。",
+			Description: "Certificate description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书域名。",
+		//	  "description": "Certificate domain name",
 		//	  "type": "string"
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书域名。",
+			Description: "Certificate domain name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书过期时间。",
+		//	  "description": "Certificate expiration time",
 		//	  "type": "string"
 		//	}
 		"expired_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书过期时间。",
+			Description: "Certificate expiration time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书关联的监听器列表。",
+		//	  "description": "List of listeners associated with the certificate",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -120,78 +120,78 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"listeners": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "证书关联的监听器列表。",
+			Description: "List of listeners associated with the certificate",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateKey
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器证书的私钥，当证书类型为Server时必填。",
+		//	  "description": "Server certificate private key. Required when certificate type is Server",
 		//	  "type": "string"
 		//	}
 		"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器证书的私钥，当证书类型为Server时必填。",
+			Description: "Server certificate private key. Required when certificate type is Server",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PublicKey
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务器证书的公钥。",
+		//	  "description": "Server certificate public key",
 		//	  "type": "string"
 		//	}
 		"public_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务器证书的公钥。",
+			Description: "Server certificate public key",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: San
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书扩展域名列表，用英文',' 分隔多个域名， 包含(commonName,DnsName,IP)。",
+		//	  "description": "Certificate subject alternative name list. Use English ',' to separate multiple domain names. Includes (commonName, DnsName, IP)",
 		//	  "type": "string"
 		//	}
 		"san": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书扩展域名列表，用英文',' 分隔多个域名， 包含(commonName,DnsName,IP)。",
+			Description: "Certificate subject alternative name list. Use English ',' to separate multiple domain names. Includes (commonName, DnsName, IP)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书的状态，取值为：Creating：创建中。Active：运行中。Deleting：删除中。",
+		//	  "description": "Certificate status. Options: Creating: creating; Active: active; Deleting: deleting",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书的状态，取值为：Creating：创建中。Active：运行中。Deleting：删除中。",
+			Description: "Certificate status. Options: Creating: creating; Active: active; Deleting: deleting",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -208,17 +208,17 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -21,27 +21,27 @@ Data Source schema for Volcengine::RDSMsSQL::AllowList
 
 ### Read-Only
 
-- `allow_list` (String) IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。
-- `allow_list_category` (String) 白名单分类。
-- `allow_list_desc` (String) 白名单描述。
-- `allow_list_id` (String) 白名单的id。
-- `allow_list_ip_num` (Number) AllowListIP数量。
-- `allow_list_name` (String) 白名单名称。
-- `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `associated_instance_num` (Number) 绑定的实例数量。解绑实例的白名单时必传。
-- `associated_instances` (Attributes List) 绑定的实例列表。 (see [below for nested schema](#nestedatt--associated_instances))
-- `instance_id` (String) 实例ID。
-- `project_name` (String) 项目名称。
-- `user_allow_list` (String) 安全组之外的、需要加入白名单的IP地址，可输入IP地址或CIDR格式的IP地址段。如果该字段与AllowList同时指定，以AllowList为准。
+- `allow_list` (String) IP allowlist. Separate multiple IP addresses with commas (,). No duplicates allowed
+- `allow_list_category` (String) Allowlist category
+- `allow_list_desc` (String) Allowlist description
+- `allow_list_id` (String) Allowlist ID
+- `allow_list_ip_num` (Number) Allowlist IP count
+- `allow_list_name` (String) Allowlist name
+- `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is supported
+- `associated_instance_num` (Number) Number of bound instances. Required when unbinding an instance from the allowlist
+- `associated_instances` (Attributes List) Bound instance list (see [below for nested schema](#nestedatt--associated_instances))
+- `instance_id` (String) Instance ID
+- `project_name` (String) Project name
+- `user_allow_list` (String) IP addresses outside the security group that need to be added to the allowlist. Enter IP addresses or CIDR-formatted IP ranges. If both this field and AllowList are specified, AllowList takes precedence
 
 <a id="nestedatt--associated_instances"></a>
 ### Nested Schema for `associated_instances`
 
 Read-Only:
 
-- `instance_id` (String) 实例ID。
-- `instance_name` (String) 实例名称。
-- `instance_status` (String) 实例状态。
-- `is_latest` (Boolean) 是否同步最新白名单 IP
-- `project_name` (String) 实例所属项目名称。
-- `vpc` (String) 实例所属VPC ID。
+- `instance_id` (String) Instance ID
+- `instance_name` (String) Instance name
+- `instance_status` (String) Instance status
+- `is_latest` (Boolean) Sync latest allowlist IP
+- `project_name` (String) Project name of the instance
+- `vpc` (String) VPC ID of the instance

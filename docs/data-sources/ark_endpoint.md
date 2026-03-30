@@ -21,39 +21,39 @@ Data Source schema for Volcengine::ARK::Endpoint
 
 ### Read-Only
 
-- `batch_only` (Boolean) 是否只支持 BatchChat。如果为true，只能访问 Batch 推理接口，否则只能访问在线推理接口。
-- `certificate` (Attributes) 证书信息。 (see [below for nested schema](#nestedatt--certificate))
-- `create_time` (String) 接入点创建时间，RFC3339格式。
-- `description` (String) 接入点描述。
-- `endpoint_id` (String) 推理接入点的ID。
-- `endpoint_model_type` (String) 接入点模型类型。取值:FoundationModel为基础模型;CustomModel为定制模型。
-- `model_reference` (Attributes) 接入点接入模型。 (see [below for nested schema](#nestedatt--model_reference))
-- `model_unit_id` (String) 模型单元，为空表示后付费；否则预付费。
-- `moderation` (Attributes) 内容护栏方案。 (see [below for nested schema](#nestedatt--moderation))
-- `name` (String) 接入点名称。
-- `project_name` (String) 资源所属的项目名称，默认值为default。
-- `rate_limit` (Attributes) 接入点限流。 (see [below for nested schema](#nestedatt--rate_limit))
-- `rolling_id` (String) 接入点切换的Id。
-- `scale_tier_id` (String) 如果存在 TPM 保障包，则为 TPM 保障包 ID。
-- `status` (String) 接入点状态。
-- `status_reason` (String) 状态附加说明信息。
-- `support_rolling` (Boolean) 是否支持接入点切换模型版本。
-- `support_scale_tier` (Boolean) 是否支持TPM保障包。
-- `tags` (Attributes Set) 接入点绑定的标签。 (see [below for nested schema](#nestedatt--tags))
-- `update_time` (String) 接入点更新时间，RFC3339格式。
+- `batch_only` (Boolean) Whether only BatchChat is supported. If true, only batch inference interfaces can be accessed; otherwise, only online inference interfaces can be accessed
+- `certificate` (Attributes) Certificate information (see [below for nested schema](#nestedatt--certificate))
+- `create_time` (String) Endpoint creation time, RFC3339 format
+- `description` (String) Endpoint description
+- `endpoint_id` (String) Inference access point ID.
+- `endpoint_model_type` (String) Access point model type. Options: FoundationModel for base model; CustomModel for custom model.
+- `model_reference` (Attributes) Endpoint access model (see [below for nested schema](#nestedatt--model_reference))
+- `model_unit_id` (String) Model unit. If empty, indicates postpaid; otherwise, prepaid.
+- `moderation` (Attributes) Content guardrail scheme (see [below for nested schema](#nestedatt--moderation))
+- `name` (String) Endpoint name
+- `project_name` (String) Project name the resource belongs to; default value is "default"
+- `rate_limit` (Attributes) Endpoint rate limiting (see [below for nested schema](#nestedatt--rate_limit))
+- `rolling_id` (String) Endpoint switch ID
+- `scale_tier_id` (String) If a TPM protection package exists, this is the TPM protection package ID.
+- `status` (String) Endpoint status
+- `status_reason` (String) Additional status information
+- `support_rolling` (Boolean) Whether endpoint supports switching model versions
+- `support_scale_tier` (Boolean) Whether TPM protection package is supported
+- `tags` (Attributes Set) Tags bound to the endpoint (see [below for nested schema](#nestedatt--tags))
+- `update_time` (String) Endpoint update time, RFC3339 format
 
 <a id="nestedatt--certificate"></a>
 ### Nested Schema for `certificate`
 
 Read-Only:
 
-- `not_after` (Number) X509私有证书过期的时间。使用秒级时间戳表示。
-- `not_before` (Number) X509私有证书开始生效的时间。使用秒级时间戳表示。
-- `pca_host` (String) 证书方。
-- `pca_instance_certificate` (String) PEM 格式的叶子证书。
-- `pca_name` (String) 证书名称。
-- `pca_root_ca_certificate` (String) PEM 格式的根证书。
-- `pca_sub_ca_certificate` (String) PEM 格式的中间根证书和根证书。
+- `not_after` (Number) X509 private certificate expiration time, represented as a timestamp in seconds
+- `not_before` (Number) X509 private certificate activation time, represented as a timestamp in seconds
+- `pca_host` (String) Certificate subject
+- `pca_instance_certificate` (String) PEM format leaf certificate
+- `pca_name` (String) Certificate name
+- `pca_root_ca_certificate` (String) PEM format root certificate
+- `pca_sub_ca_certificate` (String) Intermediate certificate and root certificate in PEM format
 
 
 <a id="nestedatt--model_reference"></a>
@@ -61,16 +61,16 @@ Read-Only:
 
 Read-Only:
 
-- `custom_model_id` (String) 定制模型的ID。
-- `foundation_model` (Attributes) 基础模型。 (see [below for nested schema](#nestedatt--model_reference--foundation_model))
+- `custom_model_id` (String) Custom model ID
+- `foundation_model` (Attributes) Base model (see [below for nested schema](#nestedatt--model_reference--foundation_model))
 
 <a id="nestedatt--model_reference--foundation_model"></a>
 ### Nested Schema for `model_reference.foundation_model`
 
 Read-Only:
 
-- `model_version` (String) 基础模型版本。
-- `name` (String) 基础模型名称。请注意模型名称为小写。doubao 1.5 代模型的模型名称格式为"doubao-1-5-**"。
+- `model_version` (String) Base model version
+- `name` (String) Base model name. Note: Model names are lowercase. The model name format for doubao 1.5 generation models is "doubao-1-5-**".
 
 
 
@@ -79,7 +79,7 @@ Read-Only:
 
 Read-Only:
 
-- `strategy` (String) 内容安全护栏方案。取值:Default: 默认方案。更低延迟，广泛覆盖内容安全通用需求;Basic：基本方案（公测中）。支持在接口响应中提供命中的风险分类，暂时只包含严重违规和激进行为两类风险。注意：如果是流式接口调用，不建议此方案，会导致吐出的每个分片的长度变长，延时变高。
+- `strategy` (String) Content safety guardrail scheme. Values: Default: default scheme. Lower latency, broadly covers general content safety requirements; Basic: basic scheme (public beta). Supports providing triggered risk categories in interface responses, currently only includes two risk types: severe violations and aggressive behavior. Note: If using streaming interface calls, this scheme is not recommended, as it will increase the length of each output fragment and raise latency
 
 
 <a id="nestedatt--rate_limit"></a>
@@ -87,8 +87,8 @@ Read-Only:
 
 Read-Only:
 
-- `rpm` (Number) Requests Per Minute，每分钟请求数。
-- `tpm` (Number) Tokens Per Minute，每分钟请求 token 数。
+- `rpm` (Number) Requests Per Minute, number of requests per minute
+- `tpm` (Number) Tokens Per Minute, number of tokens requested per minute
 
 
 <a id="nestedatt--tags"></a>
@@ -96,5 +96,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

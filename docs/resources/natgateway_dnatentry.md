@@ -2,12 +2,12 @@
 page_title: "volcenginecc_natgateway_dnatentry Resource - terraform-provider-volcenginecc"
 subcategory: "NatGateway"
 description: |-
-  目的地址转换。即当中转IP及端口被访问时，私网NAT网关将访问请求中的目的地址和端口替换成云服务器的私网IP及端口后，进行转发。
+  Destination address translation. When the transit IP and port are accessed, the private NAT gateway replaces the destination address and port in the request with the private IP and port of the cloud server, then forwards the request.
 ---
 
 # volcenginecc_natgateway_dnatentry (Resource)
 
-目的地址转换。即当中转IP及端口被访问时，私网NAT网关将访问请求中的目的地址和端口替换成云服务器的私网IP及端口后，进行转发。
+Destination address translation. When the transit IP and port are accessed, the private NAT gateway replaces the destination address and port in the request with the private IP and port of the cloud server, then forwards the request.
 
 ## Example Usage
 
@@ -29,23 +29,23 @@ resource "volcenginecc_natgateway_dnatentry" "NatGatewayDnatentryDemo" {
 
 ### Required
 
-- `external_ip` (String) NAT网关用于网络地址转换的IP地址。当NAT网关为公网NAT网关时，传入其绑定的公网IP地址。当NAT网关为私网NAT网关时，传入其中转IP地址。
-- `external_port` (String) 接收来自公网外部请求的端口或端口段。
-- `internal_ip` (String) 云服务器实例的私网IP。
-- `internal_port` (String) 云服务器实例私网IP的端口或端口段。
-- `nat_gateway_id` (String) DNAT规则所属NAT网关的ID。
-- `protocol` (String) 协议类型。tcp：转发TCP协议的报文。udp：转发UDP协议的报文。
+- `external_ip` (String) IP address used by the NAT gateway for network address translation. If the NAT gateway is a public NAT gateway, enter its bound public IP address. If the NAT gateway is a private NAT gateway, enter its transit IP address.
+- `external_port` (String) Port or port range that receives requests from the public network.
+- `internal_ip` (String) Private IP address of the cloud server instance.
+- `internal_port` (String) Port or port range of the private IP address of the cloud server instance.
+- `nat_gateway_id` (String) ID of the NAT gateway to which the DNAT rule belongs.
+- `protocol` (String) Protocol type. tcp: Forwards TCP protocol packets. udp: Forwards UDP protocol packets.
 
 ### Optional
 
-- `dnat_entry_name` (String) DNAT规则的名称。
-- `port_type` (String) DNAT规则的端口类型。specified：指定端口。any：任意端口。即IP映射。
+- `dnat_entry_name` (String) Name of the DNAT rule.
+- `port_type` (String) Port type of the DNAT rule. specified: Specified port. any: Any port, i.e., IP mapping.
 
 ### Read-Only
 
-- `dnat_entry_id` (String) DNAT规则的ID。
+- `dnat_entry_id` (String) ID of the DNAT rule.
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) DNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。
+- `status` (String) Status of the DNAT rule. Creating: Creating. Deleting: Deleting. Available: Available.
 
 ## Import
 

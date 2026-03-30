@@ -2,79 +2,79 @@
   "additionalProperties": false,
   "definitions": {
     "MetaInformation": {
-      "description": "资源的meta信息，创建备份计划时，用于存储额外的配置。",
+      "description": "Resource meta information, used to store additional configuration when creating a backup plan",
       "properties": {
         "EcsMeta": {
-          "description": "ECS 的元数据，是一个 JSON string。",
+          "description": "ECS metadata, which is a JSON string",
           "type": "string"
         },
         "VepfsMeta": {
-          "description": "vePFS 备份源元数据，是一个 JSON string。",
+          "description": "vePFS backup source metadata, which is a JSON string",
           "type": "string"
         }
       },
       "type": "object"
     },
     "Policy": {
-      "description": "备份策略。",
+      "description": "Backup Policy",
       "properties": {
         "AccountId": {
-          "description": "创建此策略的账户 ID。",
+          "description": "Account ID that created this policy",
           "type": "string"
         },
         "BackupType": {
-          "description": "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+          "description": "Backup type. Options: FULL: Full backup. INCREMENTAL: Incremental backup",
           "type": "string"
         },
         "CreatedTime": {
-          "description": "创建时间。",
+          "description": "Creation Time",
           "type": "string"
         },
         "Crontab": {
-          "description": "用于指定备份周期，支持标准 crontab 表达式配置。",
+          "description": "Specifies the backup schedule. Supports standard crontab expressions",
           "type": "string"
         },
         "EnablePolicy": {
-          "description": "是否启用策略，取值说明如下：true：启用策略。false：禁用策略。",
+          "description": "Whether the policy is enabled. Options: true: Enable policy. false: Disable policy",
           "type": "boolean"
         },
         "Name": {
-          "description": "策略名称。",
+          "description": "Policy Name",
           "type": "string"
         },
         "PlanNumber": {
-          "description": "该策略已关联的备份计划数量。",
+          "description": "Number of backup plans associated with this policy",
           "type": "integer"
         },
         "PolicyId": {
-          "description": "备份策略 ID。",
+          "description": "Backup Policy ID",
           "type": "string"
         },
         "RetentionDay": {
-          "description": "恢复点保留时间，-1 表示持续保留。",
+          "description": "Retention time for recovery points. -1 means retain indefinitely",
           "type": "integer"
         },
         "UpdatedTime": {
-          "description": "更新时间。",
+          "description": "Update Time",
           "type": "string"
         }
       },
       "type": "object"
     },
     "ResourceList": {
-      "description": "备份源列表项。",
+      "description": "Backup Source List Item",
       "properties": {
         "MetaInformation": {
           "$ref": "#/definitions/MetaInformation",
-          "description": "资源的meta信息，创建备份计划时，用于存储额外的配置。",
+          "description": "Resource meta information, used to store additional configuration when creating a backup plan",
           "type": "object"
         },
         "ResourceId": {
-          "description": "备份源 ID。",
+          "description": "Backup Source ID",
           "type": "string"
         },
         "ResourceType": {
-          "description": "备份源类型，取值如下：ECS：ECS 整机备份。vePFS：vePFS 文件系统备份。",
+          "description": "Backup source type. Options: ECS: ECS full machine backup. vePFS: vePFS file system backup",
           "type": "string"
         }
       },
@@ -86,7 +86,7 @@
       "type": "object"
     }
   },
-  "description": "当需要对备份源进行自动备份时，可以创建备份计划，在备份计划中关联备份源和备份策略，指定备份存储空间，并设置备份数据保留规则等。在创建备份计划后，系统将按照关联备份策略配置，对指定备份源进行统一自动备份。",
+  "description": "To enable automatic backup for backup sources, you can create a backup plan, associate backup sources and backup policies within the plan, specify backup storage space, and set backup data retention rules. After creating the backup plan, the system will automatically back up the specified sources in a unified manner according to the associated backup policy configuration",
   "filterProperties": {
     "filterableProperties": [
       "/properties/PlanId",
@@ -128,35 +128,35 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "创建此计划的账户 ID。",
+      "description": "Account ID that created this plan",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation Time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Name": {
-      "description": "备份计划名称。",
+      "description": "Backup Plan Name",
       "semantic": "resourceName",
       "type": "string"
     },
     "PlanId": {
-      "description": "备份计划 ID。",
+      "description": "Backup Plan ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "Policy": {
       "$ref": "#/definitions/Policy",
-      "description": "备份策略。",
+      "description": "Backup Policy",
       "type": "object"
     },
     "PolicyId": {
-      "description": "备份策略 ID。",
+      "description": "Backup Policy ID",
       "type": "string"
     },
     "ResourceList": {
-      "description": "备份源列表。",
+      "description": "Backup Source List",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/ResourceList"
@@ -165,7 +165,7 @@
       "uniqueItems": true
     },
     "UpdatedTime": {
-      "description": "更新时间。",
+      "description": "Update Time",
       "semantic": "updatedTime",
       "type": "string"
     }

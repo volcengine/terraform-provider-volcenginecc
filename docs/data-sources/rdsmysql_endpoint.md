@@ -21,48 +21,48 @@ Data Source schema for Volcengine::RDSMySQL::Endpoint
 
 ### Read-Only
 
-- `addresses` (Attributes Set) 终端节点地址列表。 (see [below for nested schema](#nestedatt--addresses))
-- `auto_add_new_nodes` (Boolean) 当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：true：自动加入。false：不自动加入（默认）。
-- `connect_all_slave_nodes` (Boolean) 是否关联所有的备节点。取值：true：是。默认值。false：否。说明仅多节点实例的只读终端支持该配置。仅在实例有两个或更多备节点时才能关闭此功能。
-- `connection_info_tags` (Set of String) 连接终端标签。
-- `connection_mode` (String) 连接终端类型。取值：Proxy：代理终端。Direct：直连终端。说明如实例的数据库代理功能已开启，可以取值为 Proxy 或 Direct。如实例的数据库代理功能未开启，仅可以取值为 Direct。可调用 DescribeDBInstanceDetail 接口查询实例数据库代理功能的开启状态。
-- `connection_pool_type` (String) 代理终端的连接池类型。取值：Transaction：事务级连接池。默认值。Direct：直连模式。说明单节点实例不支持该功能。
-- `custom_route_strategy` (Attributes) 连接终端的 SQL 转发规则。 (see [below for nested schema](#nestedatt--custom_route_strategy))
-- `description` (String) 备注。
-- `enable_connection_persistent` (Boolean) 是否开启连接终端的连接保持功能。取值：true：是。false：否。说明仅代理终端支持该设置。
-- `enable_read_only` (String) 是否已开启全局只读，取值：Enable：开启。Disable：未开启。
-- `endpoint_id` (String) 实例连接终端 ID。
-- `endpoint_name` (String) 实例连接终端名称。
-- `endpoint_type` (String) 终端类型。取值为 Custom，自定义终端。
-- `idle_connection_reclaim` (Boolean) 空闲连接回收功能是否开启。true：开启。false：不开启。说明仅代理终端会返回该字段。
-- `implicit_trans_split` (Boolean) 是否开启事务分离。取值：true：是。false：否。说明仅代理终端会返回该字段。
-- `instance_id` (String) 实例 ID。
-- `master_node_routing` (Boolean) 是否开启主节点路由。取值：true：是。false：否。说明仅代理终端会返回该字段。
-- `master_protector_timeout` (Number) 过载保护超时时间。取值范围为 60~7200 之间的整数，单位为秒。说明仅代理终端会返回该字段。
-- `multi_statements_mode` (String) 代理终端的 Multi-Statements 模式。取值：Strict：Strict 模式。默认值。Loose：Loose 模式。
-- `nodes` (String) 连接终端配置的节点 ID 列表。当 EndpointType 为 Custom 时必选。说明如需将主节点加入终端，不需填写主节点 ID，只需填写 Primary。多个节点 ID 之间用英文逗号（,）分隔。
-- `overload_protection` (Boolean) 是否开启过载保护。取值：true：是。false：否。说明仅代理终端会返回该字段。
-- `read_only_node_distribution_type` (String) 读权重分配模式。当开通读写分离设置为 true 时需要传入此参数。在 CreateDBEndpoint 和 ModifyDBEndpoint 接口中做请求参数时，取值范围如下：LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。在 DescribeDBInstanceDetail 接口中做返回参数时，取值范围如下：Default：按规格权重自动分配。Custom：自定义分配权重。RoundRobin：轮询调度。LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。
-- `read_only_node_max_delay_time` (Number) 只读节点延迟阈值。取值范围为 1~3600，默认为 30，单位为秒。
-- `read_only_node_weights` (Attributes Set) 连接终端配置的节点列表及对应的只读权重。 (see [below for nested schema](#nestedatt--read_only_node_weights))
-- `read_write_mode` (String) 读写模式：ReadWrite：读写。ReadOnly：只读。
-- `read_write_spliting` (Boolean) 是否开启读写分离。取值：true：是。默认值。false：否。
+- `addresses` (Attributes Set) Endpoint address list. (see [below for nested schema](#nestedatt--addresses))
+- `auto_add_new_nodes` (Boolean) When the endpoint type is read/write or read-only, you can set whether new nodes are automatically added. Values: true: automatically added. false: not automatically added (default).
+- `connect_all_slave_nodes` (Boolean) Associate all replica nodes. Values: true: enabled (default). false: disabled. Note: Only read-only endpoints of multi-node instances support this configuration. This feature can be disabled only if the instance has two or more replica nodes.
+- `connection_info_tags` (Set of String) Connection endpoint tags.
+- `connection_mode` (String) Endpoint type. Options: Proxy: proxy endpoint. Direct: direct endpoint. Note: If the database proxy feature is enabled for the instance, you can select Proxy or Direct. If the database proxy feature is not enabled, only Direct is available. You can call the DescribeDBInstanceDetail API to check the status of the database proxy feature for the instance.
+- `connection_pool_type` (String) Connection pool type for proxy endpoints. Options: Transaction: transaction-level connection pool (default). Direct: direct mode. Note: Single-node instances do not support this feature.
+- `custom_route_strategy` (Attributes) SQL forwarding rules for the connection endpoint. (see [below for nested schema](#nestedatt--custom_route_strategy))
+- `description` (String) Remarks.
+- `enable_connection_persistent` (Boolean) Enable connection keep-alive for the endpoint. Values: true: enabled. false: disabled. Note: Only proxy endpoints support this setting.
+- `enable_read_only` (String) Enable global read-only. Values: Enable: enabled. Disable: not enabled.
+- `endpoint_id` (String) Instance connection endpoint ID.
+- `endpoint_name` (String) Instance connection endpoint name.
+- `endpoint_type` (String) Endpoint type. Value: Custom (custom endpoint).
+- `idle_connection_reclaim` (Boolean) Enable idle connection recycling. true: enabled. false: not enabled. Note: This field is returned only for proxy endpoints.
+- `implicit_trans_split` (Boolean) Enable transaction separation. Options: true: yes. false: no. Note: Only proxy endpoints return this field.
+- `instance_id` (String) Instance ID.
+- `master_node_routing` (Boolean) Enable primary node routing. Values: true: enabled. false: disabled. Note: This field is returned only for proxy endpoints.
+- `master_protector_timeout` (Number) Overload protection timeout. Value range: integer between 60~7200. Unit: seconds. Note: This field is returned only for proxy endpoints.
+- `multi_statements_mode` (String) Multi-Statements mode for proxy endpoints. Options: Strict: strict mode (default). Loose: loose mode.
+- `nodes` (String) List of node IDs configured for the connection endpoint. Required when EndpointType is Custom. Note: To add the primary node to the endpoint, do not enter the primary node ID; just enter Primary. Separate multiple node IDs with commas (,).
+- `overload_protection` (Boolean) Enable overload protection. Options: true: enabled. false: disabled. Note: This field is returned only for proxy endpoints.
+- `read_only_node_distribution_type` (String) Read weight allocation mode. This parameter is required when read/write splitting is enabled (set to true). For request parameters in the CreateDBEndpoint and ModifyDBEndpoint APIs, the value range is: LoadSchedule: load scheduling. RoundRobinCustom: custom weight round-robin scheduling. RoundRobinAuto: automatic weight allocation round-robin scheduling. For response parameters in the DescribeDBInstanceDetail API, the value range is: Default: automatic allocation based on specification weight. Custom: custom weight allocation. RoundRobin: round-robin scheduling. LoadSchedule: load scheduling. RoundRobinCustom: custom weight round-robin scheduling. RoundRobinAuto: automatic weight allocation round-robin scheduling.
+- `read_only_node_max_delay_time` (Number) Read-only node latency threshold. Value range: 1~3600. Default: 30. Unit: seconds.
+- `read_only_node_weights` (Attributes Set) List of nodes configured for the connection endpoint and their corresponding read-only weights. (see [below for nested schema](#nestedatt--read_only_node_weights))
+- `read_write_mode` (String) Read/write mode: ReadWrite: read/write. ReadOnly: read-only.
+- `read_write_spliting` (Boolean) Enable read/write splitting. Values: true: enabled (default). false: disabled.
 
 <a id="nestedatt--addresses"></a>
 ### Nested Schema for `addresses`
 
 Read-Only:
 
-- `dns_visibility` (Boolean) false：火山引擎私网解析（默认）。true：火山引擎私网以及公网解析。
-- `domain` (String) 连接域名。
-- `domain_prefix` (String) 连接地址前缀。连接地址的前缀需满足以下规则：以小写字母开头，以小写字母或数字结尾。由小写字母、数字和中划线（-）中的至少两种组成。连接地址前缀应至少包含 8 个字符，连接地址总长度（前缀+后缀）不得超过 63个字符。
-- `eip_id` (String) EIP 的 ID，仅对 Public 地址有效。
-- `eip_locked` (Boolean) 连接终端使用的 EIP 是否因欠费关停。取值：true：是。false：否。
-- `internet_protocol` (String) IP 协议版本。取值为 IPv4。
-- `ip_address` (String) IP 地址。
-- `network_type` (String) 网络地址类型，取值为：Private：私网地址。Public：公网地址。
-- `port` (String) 端口。
-- `subnet_id` (String) 子网 ID，仅对 Private 地址有效。
+- `dns_visibility` (Boolean) false: Volcano Engine private network resolution (default). true: Volcano Engine private network and public network resolution.
+- `domain` (String) Connection domain name.
+- `domain_prefix` (String) Connection address prefix. The prefix must meet the following rules: start with a lowercase letter and end with a lowercase letter or digit; contain at least two of the following: lowercase letters, digits, or hyphens (-); be at least 8 characters long; and the total connection address length (prefix + suffix) must not exceed 63 characters.
+- `eip_id` (String) EIP ID, valid only for Public addresses.
+- `eip_locked` (Boolean) Whether the EIP used by the connection endpoint is suspended due to overdue payment. Options: true: yes. false: no.
+- `internet_protocol` (String) IP protocol version. Value: IPv4.
+- `ip_address` (String) IP address.
+- `network_type` (String) Network address type. Options: Private: private network address. Public: public network address.
+- `port` (String) Port.
+- `subnet_id` (String) Subnet ID, valid only for Private addresses.
 
 
 <a id="nestedatt--custom_route_strategy"></a>
@@ -70,15 +70,15 @@ Read-Only:
 
 Read-Only:
 
-- `keyword_route_strategy` (Attributes Set) 自定义路由策略列表。 (see [below for nested schema](#nestedatt--custom_route_strategy--keyword_route_strategy))
+- `keyword_route_strategy` (Attributes Set) Custom routing policy list. (see [below for nested schema](#nestedatt--custom_route_strategy--keyword_route_strategy))
 
 <a id="nestedatt--custom_route_strategy--keyword_route_strategy"></a>
 ### Nested Schema for `custom_route_strategy.keyword_route_strategy`
 
 Read-Only:
 
-- `node_type` (String) SQL 转发规则的转发目标。取值：Primary：主节点。Secondary：备节点。ReadOnly：只读节点。说明如实例为双节点实例，可选择主节点或只读节点。如实例为多节点实例，可选择主节点或备节点。
-- `sql_keyword` (String) 转发规则的关键字。SQL 关键字的设置规则如下：单个规则最多可包含 20 个关键字。最大长度为 64 个字符，可包含英文字母、数字、下划线 _、@、#、:= 和中文字符。
+- `node_type` (String) SQL forwarding rule target. Options: Primary: primary node. Secondary: secondary node. ReadOnly: read-only node. Note: For dual-node instances, you can select the primary node or read-only node. For multi-node instances, you can select the primary node or secondary node.
+- `sql_keyword` (String) Forwarding rule keywords. SQL keyword rules: Each rule can contain up to 20 keywords, with a maximum length of 64 characters. Allowed characters: English letters, digits, underscore (_), @, #, :=, and Chinese characters.
 
 
 
@@ -87,6 +87,6 @@ Read-Only:
 
 Read-Only:
 
-- `node_id` (String) 只读节点需要传入 NodeId，主节点无需传入。
-- `node_type` (String) 节点类型。Primary：主节点。ReadOnly：只读节点。
-- `weight` (Number) 节点的读权重，以 100 递增，最大值为 10000。说明权重不可全部设置为 0。
+- `node_id` (String) NodeId is required for read-only nodes; not required for primary nodes.
+- `node_type` (String) Node type. Primary: primary node. ReadOnly: read-only node.
+- `weight` (Number) Node read weight increases in increments of 100, up to a maximum of 10,000. Note: Not all weights can be set to 0.

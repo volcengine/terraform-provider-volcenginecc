@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vepfs_instance Resource - terraform-provider-volcenginecc"
 subcategory: "VEPFS"
 description: |-
-  文件存储 vePFS 是推出的一种高吞吐、低延时、可扩展并行的文件系统服务，满足高性能计算场景下高吞吐低延时的数据读写需求，可广泛应用于 HPC 高性能计算、AI 人工智能训练或推理、能源勘探、工业仿真、影视渲染、生命科学、气象分析等场景。同时，vePFS 提供一键化部署及配套监控报警能力，免去部署、维护费用的同时，最大化提升您的业务效率。
+  File storage vePFS is a newly launched high-throughput, low-latency, scalable parallel file system service designed to meet the high-throughput and low-latency data read/write requirements in high-performance computing scenarios. It can be widely used in HPC (high-performance computing), AI training or inference, energy exploration, industrial simulation, film rendering, life sciences, meteorological analysis, and other scenarios. vePFS also provides one-click deployment and integrated monitoring and alerting capabilities, eliminating deployment and maintenance costs while maximizing your business efficiency.
 ---
 
 # volcenginecc_vepfs_instance (Resource)
 
-文件存储 vePFS 是推出的一种高吞吐、低延时、可扩展并行的文件系统服务，满足高性能计算场景下高吞吐低延时的数据读写需求，可广泛应用于 HPC 高性能计算、AI 人工智能训练或推理、能源勘探、工业仿真、影视渲染、生命科学、气象分析等场景。同时，vePFS 提供一键化部署及配套监控报警能力，免去部署、维护费用的同时，最大化提升您的业务效率。
+File storage vePFS is a newly launched high-throughput, low-latency, scalable parallel file system service designed to meet the high-throughput and low-latency data read/write requirements in high-performance computing scenarios. It can be widely used in HPC (high-performance computing), AI training or inference, energy exploration, industrial simulation, film rendering, life sciences, meteorological analysis, and other scenarios. vePFS also provides one-click deployment and integrated monitoring and alerting capabilities, eliminating deployment and maintenance costs while maximizing your business efficiency.
 
 ## Example Usage
 
@@ -38,53 +38,53 @@ resource "volcenginecc_vepfs_instance" "VEPFSInstanceDemo" {
 
 ### Required
 
-- `capacity` (Number) 文件系统容量，单位为 TiB。
-- `file_system_name` (String) 文件系统名称。命名规范如下：只能以中文或英文开头。只能包含中文、字母、数字、半角句号（.）、下划线（_）或中划线（-）。长度需要在 1~128 个字符内。
-- `store_type` (String) 文件系统规格，取值说明如下：Advance_100：100MB/s/TiB。Performance：性能版。Intelligent_Computing：智算版。
-- `zone_id` (String) 可用区 ID。
+- `capacity` (Number) File system capacity, unit: TiB.
+- `file_system_name` (String) File system name. Naming rules are as follows: Must start with a Chinese or English letter. Can only contain Chinese characters, letters, numbers, period (.), underscore (_), or hyphen (-). Length must be between 1 and 128 characters.
+- `store_type` (String) File system specification. Value descriptions are as follows: Advance_100: 100MB/s/TiB. Performance: Performance. Intelligent_Computing: Intelligent Computing.
+- `zone_id` (String) Availability zone ID.
 
 ### Optional
 
-- `charge_type` (String) 计费类型。取值说明如下：PayAsYouGo：按量计费。
-- `description` (String) 文件系统描述信息。
-- `enable_restripe` (Boolean) 扩容后是否开启数据均衡，取值说明如下：true：扩容后立即开启数据均衡。false：扩容后不开启数据均衡。注意：仅 100MB/s/TiB 规格的文件系统支持数据均衡功能。由于数据均衡过程会消耗存储节点的网络和磁盘带宽，导致文件系统的性能下降，建议您评估业务需求，谨慎开启。数据均衡的时间主要受存量数据量的影响，如果您的存量数据较多，均衡的时间可能会较长，根据扩容容量大小和文件系统状态，此过程可能需要花费数小时至 2 天的时间，建议您在业务低峰期开启并耐心等待。
-- `file_system_type` (String) 文件系统类型，默认为 VePFS。
-- `project_name` (String) 文件系统所属项目，默认为 default。
-- `protocol_type` (String) 协议类型，默认为 VePFS。
-- `subnet_id` (String) 子网 ID。子网必须属于所选的可用区。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `version_number` (String) 文件系统版本号。
-- `vpc_id` (String) 私有网络 ID。
+- `charge_type` (String) Billing type. Value descriptions are as follows: PayAsYouGo: Pay-as-you-go billing.
+- `description` (String) File system description.
+- `enable_restripe` (Boolean) Whether to enable data balancing after expansion. Value description: true: Enable data balancing immediately after expansion. false: Do not enable data balancing after expansion. Note: Only file systems with a specification of 100MB/s/TiB support the data balancing feature. Because the data balancing process consumes the network and disk bandwidth of storage nodes and causes file system performance degradation, we recommend that you evaluate your business needs and enable with caution. The duration of data balancing mainly depends on the amount of existing data. If you have a large amount of existing data, the balancing process may take longer. Depending on the expansion size and file system status, this process may take several hours to up to 2 days. We recommend enabling it during off-peak hours and waiting patiently.
+- `file_system_type` (String) File system type. Default is VePFS.
+- `project_name` (String) Project to which the file system belongs. Default is default.
+- `protocol_type` (String) Protocol type. Default is VePFS.
+- `subnet_id` (String) Subnet ID. The subnet must belong to the selected availability zone.
+- `tags` (Attributes Set) Tag list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `version_number` (String) File system version number.
+- `vpc_id` (String) Private network ID.
 
 ### Read-Only
 
-- `account_id` (String) 账户ID。
-- `bandwidth` (Number) vePFS 文件系统吞吐上限。
-- `capacity_info` (Attributes) 容量信息。 (see [below for nested schema](#nestedatt--capacity_info))
-- `charge_status` (String) 计费状态，默认为 Normal，表示正常计费。
-- `created_time` (String) 创建时间。
-- `expire_time` (String) 过期时间。
-- `file_system_id` (String) 文件系统 ID。
-- `free_time` (String) 文件系统释放时间。
+- `account_id` (String) Account ID.
+- `bandwidth` (Number) VePFS file system throughput limit.
+- `capacity_info` (Attributes) Capacity information. (see [below for nested schema](#nestedatt--capacity_info))
+- `charge_status` (String) Billing status. Default is Normal, indicating standard billing.
+- `created_time` (String) Creation time.
+- `expire_time` (String) Expiration time.
+- `file_system_id` (String) File system ID.
+- `free_time` (String) File system release time.
 - `id` (String) Uniquely identifies the resource.
-- `read_bandwidth` (Number) 读带宽值, 单位MB/s。
-- `security_group_id` (String) 生成的辅助网卡所在的安全组ID。
-- `status` (String) 文件系统状态。取值说明如下：Running：实例运行中。Creating：实例创建中。CreateError：实例创建失败。Updating：实例更新中。UpdateError：实例更新失败。Expanding：实例扩容中。ExpandError：实例扩容失败。Deleting：实例删除中。DeleteError：实例删除失败。Stopped：实例已关停。Error：实例处于错误状态。
-- `stop_service_time` (String) 文件系统关停时间。
-- `store_type_cn` (String) 文件系统规格中文名称，支持如下：100MB/s/TiB。性能版。智算版。
-- `store_type_en` (String) 存储类型英文名。
-- `updated_time` (String) 文件系统更新时间。
-- `write_bandwidth` (Number) 写带宽值, 单位MB/s。
-- `zone_name` (String) 可用区名称。
+- `read_bandwidth` (Number) Read bandwidth value, unit: MB/s.
+- `security_group_id` (String) Security group ID for the generated auxiliary NIC.
+- `status` (String) File system status. Value descriptions are as follows: Running: Instance is running. Creating: Instance is being created. CreateError: Instance creation failed. Updating: Instance is being updated. UpdateError: Instance update failed. Expanding: Instance is being expanded. ExpandError: Instance expansion failed. Deleting: Instance is being deleted. DeleteError: Instance deletion failed. Stopped: Instance is stopped. Error: Instance is in an error state.
+- `stop_service_time` (String) File system shutdown time.
+- `store_type_cn` (String) File system specification name in Chinese. Supported options: 100MB/s/TiB. Performance. Intelligent Computing.
+- `store_type_en` (String) Storage type English name.
+- `updated_time` (String) File system update time.
+- `write_bandwidth` (Number) Write bandwidth value, measured in MB/s.
+- `zone_name` (String) Availability zone name.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.
 
 
 <a id="nestedatt--capacity_info"></a>
@@ -92,8 +92,8 @@ Optional:
 
 Read-Only:
 
-- `total_ti_b` (Number) 文件系统总容量，单位为 TiB。
-- `used_gi_b` (Number) 已使用容量（GiB）。
+- `total_ti_b` (Number) Total file system capacity, unit: TiB. Note: Disk balancing time varies based on cluster capacity, cluster load, and other factors. For clusters above the PiB level, expansion typically requires day-level disk balancing time. The expansion capacity becomes effective (and is billed) only after disk balancing is complete.
+- `used_gi_b` (Number) Used capacity (GiB).
 
 ## Import
 

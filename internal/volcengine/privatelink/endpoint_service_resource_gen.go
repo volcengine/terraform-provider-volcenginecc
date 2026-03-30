@@ -36,11 +36,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否自动接受终端节点连接。true：终端节点服务自动接受终端节点连接。false：终端节点服务不会自动接受终端节点连接，需要调用EnableVpcEndpointConnection接口手动接受。",
+		//	  "description": "Whether to automatically accept endpoint connections. true: The endpoint service automatically accepts endpoint connections. false: The endpoint service does not automatically accept endpoint connections; you must manually accept them by calling the EnableVpcEndpointConnection API.",
 		//	  "type": "boolean"
 		//	}
 		"auto_accept_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否自动接受终端节点连接。true：终端节点服务自动接受终端节点连接。false：终端节点服务不会自动接受终端节点连接，需要调用EnableVpcEndpointConnection接口手动接受。",
+			Description: "Whether to automatically accept endpoint connections. true: The endpoint service automatically accepts endpoint connections. false: The endpoint service does not automatically accept endpoint connections; you must manually accept them by calling the EnableVpcEndpointConnection API.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -51,11 +51,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的计费类型。0：不计费。3：按量计费。",
+		//	  "description": "Billing type of the endpoint service. 0: No charge. 3: Pay-as-you-go.",
 		//	  "type": "integer"
 		//	}
 		"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的计费类型。0：不计费。3：按量计费。",
+			Description: "Billing type of the endpoint service. 0: No charge. 3: Pay-as-you-go.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -65,11 +65,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务是否被锁定。Normal：正常。FinancialLocked：被锁定。说明该参数返回为空时，表示终端节点服务未锁定。",
+		//	  "description": "Whether the endpoint service is locked. Normal: normal. FinancialLocked: locked. If this parameter is empty, the endpoint service is not locked.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务是否被锁定。Normal：正常。FinancialLocked：被锁定。说明该参数返回为空时，表示终端节点服务未锁定。",
+			Description: "Whether the endpoint service is locked. Normal: normal. FinancialLocked: locked. If this parameter is empty, the endpoint service is not locked.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -79,11 +79,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的创建时间。",
+		//	  "description": "Creation time of the endpoint service.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的创建时间。",
+			Description: "Creation time of the endpoint service.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -93,11 +93,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的描述信息。",
+		//	  "description": "Description of the endpoint service.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的描述信息。",
+			Description: "Description of the endpoint service.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -108,7 +108,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的IP协议类型。返回值中仅包含ipv4时，说明该终端节点服务为IPv4类型，仅支持提供IPv4服务。返回值中同时包含ipv4和ipv6时，说明该终端节点服务为双栈类型，支持同时提供IPv4和IPv6服务。",
+		//	  "description": "IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -118,7 +118,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ip_address_versions": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "终端节点服务的IP协议类型。返回值中仅包含ipv4时，说明该终端节点服务为IPv4类型，仅支持提供IPv4服务。返回值中同时包含ipv4和ipv6时，说明该终端节点服务为双栈类型，支持同时提供IPv4和IPv6服务。",
+			Description: "IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -129,11 +129,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私网连接的付费账号。Endpoint：终端节点账号。EndpointService：终端节点服务账号。",
+		//	  "description": "Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.",
 		//	  "type": "string"
 		//	}
 		"payer": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私网连接的付费账号。Endpoint：终端节点账号。EndpointService：终端节点服务账号。",
+			Description: "Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -145,11 +145,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务是否启用私有DNS名称。false：未启用。true：已启用。",
+		//	  "description": "Whether the endpoint service enables private DNS name. false: Not enabled. true: Enabled.",
 		//	  "type": "boolean"
 		//	}
 		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务是否启用私有DNS名称。false：未启用。true：已启用。",
+			Description: "Whether the endpoint service enables private DNS name. false: Not enabled. true: Enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -160,11 +160,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的私有DNS名称。参数PrivateDNSEnabled返回值为false时，该参数返回空。",
+		//	  "description": "Private DNS name of the endpoint service. If the PrivateDNSEnabled parameter returns false, this parameter is empty.",
 		//	  "type": "string"
 		//	}
 		"private_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的私有DNS名称。参数PrivateDNSEnabled返回值为false时，该参数返回空。",
+			Description: "Private DNS name of the endpoint service. If the PrivateDNSEnabled parameter returns false, this parameter is empty.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -175,22 +175,22 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务私有DNS名称的配置信息。说明PrivateDNSType为private时，不返回该参数。",
+		//	  "description": "Configuration information for the private DNS name of the endpoint service. Note: If PrivateDNSType is private, this parameter is not returned.",
 		//	  "properties": {
 		//	    "Name": {
-		//	      "description": "域验证名称。",
+		//	      "description": "Domain verification name.",
 		//	      "type": "string"
 		//	    },
 		//	    "Status": {
-		//	      "description": "域验证状态。PendingVerification：待验证Verifying：验证中Verified：验证通过Failed：验证失败",
+		//	      "description": "Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.",
 		//	      "type": "string"
 		//	    },
 		//	    "Type": {
-		//	      "description": "域验证类型。TXT：TXT记录。",
+		//	      "description": "Domain verification type. TXT: TXT record.",
 		//	      "type": "string"
 		//	    },
 		//	    "Value": {
-		//	      "description": "域验证值。",
+		//	      "description": "Domain verification value.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -200,26 +200,26 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "域验证名称。",
+					Description: "Domain verification name.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "域验证状态。PendingVerification：待验证Verifying：验证中Verified：验证通过Failed：验证失败",
+					Description: "Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "域验证类型。TXT：TXT记录。",
+					Description: "Domain verification type. TXT: TXT record.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Value
 				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "域验证值。",
+					Description: "Domain verification value.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "终端节点服务私有DNS名称的配置信息。说明PrivateDNSType为private时，不返回该参数。",
+			Description: "Configuration information for the private DNS name of the endpoint service. Note: If PrivateDNSType is private, this parameter is not returned.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -229,11 +229,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有DNS名称的域名类型。public：公网。说明未开通自定义私网域名功能时，不返回该参数。",
+		//	  "description": "Domain name type of the private DNS name. public: public network. Note: If the custom private domain name feature is not enabled, this parameter is not returned.",
 		//	  "type": "string"
 		//	}
 		"private_dns_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有DNS名称的域名类型。public：公网。说明未开通自定义私网域名功能时，不返回该参数。",
+			Description: "Domain name type of the private DNS name. public: public network. Note: If the custom private domain name feature is not enabled, this parameter is not returned.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -244,11 +244,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务所属的项目名称。",
+		//	  "description": "Project name to which the endpoint service belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务所属的项目名称。",
+			Description: "Project name to which the endpoint service belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -260,20 +260,20 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务提供服务的资源。",
+		//	  "description": "Resources provided by the endpoint service.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "InstanceId": {
-		//	        "description": "终端节点服务ID。",
+		//	        "description": "Endpoint service ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "ResourceId": {
-		//	        "description": "待添加到终端节点服务中的服务资源ID。",
+		//	        "description": "Service resource ID to be added to the endpoint service.",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneIds": {
-		//	        "description": "负载均衡提供服务的可用区。",
+		//	        "description": "Availability zone where the load balancer provides service.",
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
@@ -290,7 +290,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "终端节点服务ID。",
+						Description: "Endpoint service ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -299,7 +299,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "待添加到终端节点服务中的服务资源ID。",
+						Description: "Service resource ID to be added to the endpoint service.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -309,7 +309,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ZoneIds
 					"zone_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "负载均衡提供服务的可用区。",
+						Description: "Availability zone where the load balancer provides service.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -318,7 +318,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "终端节点服务提供服务的资源。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Resources provided by the endpoint service.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -331,11 +331,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的服务域名。",
+		//	  "description": "Service domain name of the endpoint service.",
 		//	  "type": "string"
 		//	}
 		"service_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的服务域名。",
+			Description: "Service domain name of the endpoint service.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -345,11 +345,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的ID。",
+		//	  "description": "Endpoint service ID.",
 		//	  "type": "string"
 		//	}
 		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的ID。",
+			Description: "Endpoint service ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -359,11 +359,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的名称。",
+		//	  "description": "Name of the endpoint service.",
 		//	  "type": "string"
 		//	}
 		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的名称。",
+			Description: "Name of the endpoint service.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -373,11 +373,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为托管终端节点服务。false：非托管终端节点服务。true：托管终端节点服务。说明终端节点服务所属账号未开通托管终端节点服务功能时，不返回该参数。",
+		//	  "description": "Whether this is a managed endpoint service. false: not a managed endpoint service. true: managed endpoint service. If the account owning the endpoint service has not enabled managed endpoint service functionality, this parameter is not returned.",
 		//	  "type": "string"
 		//	}
 		"service_name_managed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为托管终端节点服务。false：非托管终端节点服务。true：托管终端节点服务。说明终端节点服务所属账号未开通托管终端节点服务功能时，不返回该参数。",
+			Description: "Whether this is a managed endpoint service. false: not a managed endpoint service. true: managed endpoint service. If the account owning the endpoint service has not enabled managed endpoint service functionality, this parameter is not returned.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -389,11 +389,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的名称后缀。设置名称后缀后，系统会按照com.volces.privatelink.\u003c地域ID\u003e.\u003c名称后缀\u003e的格式生成终端节点服务的名称。说明该参数正在邀测中，如需使用不同名称后缀区分业务，请联系客户经理。",
+		//	  "description": "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.\u003cregion ID\u003e.\u003cname suffix\u003e. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
 		//	  "type": "string"
 		//	}
 		"service_name_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的名称后缀。设置名称后缀后，系统会按照com.volces.privatelink.<地域ID>.<名称后缀>的格式生成终端节点服务的名称。说明该参数正在邀测中，如需使用不同名称后缀区分业务，请联系客户经理。",
+			Description: "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.<region ID>.<name suffix>. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -406,11 +406,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前服务主体。",
+		//	  "description": "Current service principal.",
 		//	  "type": "string"
 		//	}
 		"service_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "当前服务主体。",
+			Description: "Current service principal.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -422,11 +422,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务资源的类型。CLB：负载均衡CLB。ALB：应用型负载均衡ALB。RDSMySQL：云数据库 MySQL版。",
+		//	  "description": "Type of service resource. CLB: Load Balancer CLB. ALB: Application Load Balancer ALB. RDSMySQL: Cloud Database MySQL Edition.",
 		//	  "type": "string"
 		//	}
 		"service_resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务资源的类型。CLB：负载均衡CLB。ALB：应用型负载均衡ALB。RDSMySQL：云数据库 MySQL版。",
+			Description: "Type of service resource. CLB: Load Balancer CLB. ALB: Application Load Balancer ALB. RDSMySQL: Cloud Database MySQL Edition.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -438,11 +438,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的类型。Interface：接口终端节点服务。",
+		//	  "description": "Type of the endpoint service. Interface: Interface endpoint service.",
 		//	  "type": "string"
 		//	}
 		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的类型。Interface：接口终端节点服务。",
+			Description: "Type of the endpoint service. Interface: Interface endpoint service.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -454,11 +454,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的状态。Creating：创建中。Pending：配置修改中。Available：可用。Deleting：删除中。",
+		//	  "description": "Status of the endpoint service. Creating: being created. Pending: configuration being modified. Available: available. Deleting: being deleted.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的状态。Creating：创建中。Pending：配置修改中。Available：可用。Deleting：删除中。",
+			Description: "Status of the endpoint service. Creating: being created. Pending: configuration being modified. Available: available. Deleting: being deleted.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -468,17 +468,17 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的标签信息。",
+		//	  "description": "Tag information of the endpoint service.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "终端节点服务标签的键值对。",
+		//	    "description": "Key-value pairs for endpoint service tags.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "终端节点服务标签的标签键。",
+		//	        "description": "Tag keys for endpoint service tags.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "终端节点服务标签的标签值。",
+		//	        "description": "Tag value of the endpoint service tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -495,7 +495,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "终端节点服务标签的标签键。",
+						Description: "Tag keys for endpoint service tags.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -507,7 +507,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "终端节点服务标签的标签值。",
+						Description: "Tag value of the endpoint service tag.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -516,7 +516,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "终端节点服务的标签信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag information of the endpoint service.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -527,11 +527,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务的最近操作时间。",
+		//	  "description": "Most recent operation time of the endpoint service.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端节点服务的最近操作时间。",
+			Description: "Most recent operation time of the endpoint service.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -541,11 +541,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否启用通配符域名。true：启用。false：未启用。",
+		//	  "description": "Whether to enable wildcard domain name. true: Enabled. false: Not enabled.",
 		//	  "type": "boolean"
 		//	}
 		"wildcard_domain_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否启用通配符域名。true：启用。false：未启用。",
+			Description: "Whether to enable wildcard domain name. true: Enabled. false: Not enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -557,7 +557,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点服务提供服务的可用区。说明参数ServiceResourceType返回值为RDSMySQL时，该参数返回空值。",
+		//	  "description": "Availability zone where the endpoint service provides service. Note: If the ServiceResourceType parameter returns RDSMySQL, this parameter returns an empty value.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -567,7 +567,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"zone_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "终端节点服务提供服务的可用区。说明参数ServiceResourceType返回值为RDSMySQL时，该参数返回空值。",
+			Description: "Availability zone where the endpoint service provides service. Note: If the ServiceResourceType parameter returns RDSMySQL, this parameter returns an empty value.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -585,7 +585,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "终端节点服务是可以与其他VPC通过终端节点建立私网连接的服务。",
+		Description: "The endpoint service enables private network connections between VPCs via endpoints.",
 		Version:     1,
 		Attributes:  attributes,
 	}

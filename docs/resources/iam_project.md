@@ -2,12 +2,12 @@
 page_title: "volcenginecc_iam_project Resource - terraform-provider-volcenginecc"
 subcategory: "IAM"
 description: |-
-  资源项目（Project）是提供的一种资源分组管理的机制，帮助您达成逻辑层面的资源隔离，您能够通过资源项目进行项目制授权和分账等操作。
+  Resource project (Project) provides a mechanism for resource group management, helping you achieve logical resource isolation. You can use resource projects for project-based authorization, billing, and other operations.
 ---
 
 # volcenginecc_iam_project (Resource)
 
-资源项目（Project）是提供的一种资源分组管理的机制，帮助您达成逻辑层面的资源隔离，您能够通过资源项目进行项目制授权和分账等操作。
+Resource project (Project) provides a mechanism for resource group management, helping you achieve logical resource isolation. You can use resource projects for project-based authorization, billing, and other operations.
 
 ## Example Usage
 
@@ -25,23 +25,23 @@ resource "volcenginecc_iam_project" "IAMProjectDemo" {
 
 ### Required
 
-- `project_name` (String) 项目名称
+- `project_name` (String) Project Name
 
 ### Optional
 
-- `description` (String) 描述
-- `display_name` (String) 展示名
-- `parent_project_name` (String) 父项目名称
+- `description` (String) Description
+- `display_name` (String) Display Name
+- `parent_project_name` (String) Parent Project Name
 
 ### Read-Only
 
-- `account_id` (Number) 账号ID
-- `created_time` (String) 创建时间
-- `has_permission` (Boolean) 是否可见
+- `account_id` (Number) Account ID
+- `created_time` (String) Creation Time
+- `has_permission` (Boolean) Visible
 - `id` (String) Uniquely identifies the resource.
-- `path` (String) 项目路径
-- `status` (String) 启用状态
-- `updated_time` (String) 更新时间
+- `path` (String) Project Path
+- `status` (String) Enabled Status
+- `updated_time` (String) Update Time
 
 ## Import
 

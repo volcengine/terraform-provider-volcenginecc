@@ -38,11 +38,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令内容。",
+		//	  "description": "Command content.",
 		//	  "type": "string"
 		//	}
 		"command_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令内容。",
+			Description: "Command content.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -52,11 +52,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "被调用命令的描述。",
+		//	  "description": "Description of the invoked command.",
 		//	  "type": "string"
 		//	}
 		"command_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "被调用命令的描述。",
+			Description: "Description of the invoked command.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -66,11 +66,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令ID。",
+		//	  "description": "Command ID.",
 		//	  "type": "string"
 		//	}
 		"command_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令ID。",
+			Description: "Command ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -80,11 +80,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务触发时的命令名称。",
+		//	  "description": "Command name when the task is triggered.",
 		//	  "type": "string"
 		//	}
 		"command_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "任务触发时的命令名称。",
+			Description: "Command name when the task is triggered.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -94,11 +94,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "被调用命令的提供方。",
+		//	  "description": "Provider of the invoked command.",
 		//	  "type": "string"
 		//	}
 		"command_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "被调用命令的提供方。",
+			Description: "Provider of the invoked command.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -108,11 +108,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "作业触发的命令类型。",
+		//	  "description": "Command type triggered by the job.",
 		//	  "type": "string"
 		//	}
 		"command_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "作业触发的命令类型。",
+			Description: "Command type triggered by the job.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -122,11 +122,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "被调用命令是否使用自定义参数。true：已启用。false：未启用。",
+		//	  "description": "Whether the invoked command uses custom parameters. true: enabled. false: not enabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable_parameter": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "被调用命令是否使用自定义参数。true：已启用。false：未启用。",
+			Description: "Whether the invoked command uses custom parameters. true: enabled. false: not enabled.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -136,11 +136,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务结束时间。",
+		//	  "description": "Task end time.",
 		//	  "type": "string"
 		//	}
 		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "任务结束时间。",
+			Description: "Task end time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -150,11 +150,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "执行频率。RepeatMode=Rate 时本参数必填。格式：\u003c执行间隔数值\u003e\u003c执行间隔单位\u003e，执行间隔单位：支持分钟（5m-60m）、小时（1h-24h）和天（1d-7d）。执行间隔基于固定频率，与作业实际执行需要的时间无关。创建作业后基于LaunchTime执行一次，根据间隔设置确定下一次执行时间。",
+		//	  "description": "Execution frequency. This parameter is required when RepeatMode=Rate. Format: \u003cinterval value\u003e\u003cinterval unit\u003e. Interval units supported: minutes (5m–60m), hours (1h–24h), and days (1d–7d). The interval is based on a fixed frequency and is independent of the actual job execution time. After job creation, it executes once based on LaunchTime, and the next execution time is determined by the interval setting.",
 		//	  "type": "string"
 		//	}
 		"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "执行频率。RepeatMode=Rate 时本参数必填。格式：<执行间隔数值><执行间隔单位>，执行间隔单位：支持分钟（5m-60m）、小时（1h-24h）和天（1d-7d）。执行间隔基于固定频率，与作业实际执行需要的时间无关。创建作业后基于LaunchTime执行一次，根据间隔设置确定下一次执行时间。",
+			Description: "Execution frequency. This parameter is required when RepeatMode=Rate. Format: <interval value><interval unit>. Interval units supported: minutes (5m–60m), hours (1h–24h), and days (1d–7d). The interval is based on a fixed frequency and is independent of the actual job execution time. After job creation, it executes once based on LaunchTime, and the next execution time is determined by the interval setting.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -166,7 +166,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID列表，最多支持200个ID。",
+		//	  "description": "Instance ID list, supports up to 200 IDs.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -177,7 +177,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例ID列表，最多支持200个ID。",
+			Description: "Instance ID list, supports up to 200 IDs.",
 			Required:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(200),
@@ -191,11 +191,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "执行实例数量。",
+		//	  "description": "Number of instances executed.",
 		//	  "type": "integer"
 		//	}
 		"instance_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "执行实例数量。",
+			Description: "Number of instances executed.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -205,12 +205,12 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "作业描述，默认为空字符串，不超过256个字符。",
+		//	  "description": "Job description. Defaults to an empty string and must not exceed 256 characters.",
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
 		"invocation_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "作业描述，默认为空字符串，不超过256个字符。",
+			Description: "Job description. Defaults to an empty string and must not exceed 256 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -225,11 +225,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务执行 ID。",
+		//	  "description": "Task execution ID.",
 		//	  "type": "string"
 		//	}
 		"invocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "任务执行 ID。",
+			Description: "Task execution ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -239,12 +239,12 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "作业名称。不超过64个字符。暂不限制特殊字符。同地域下作业名称可重复。",
+		//	  "description": "Job name. Maximum 64 characters. No restriction on special characters. Job names can be duplicated within the same region.",
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
 		"invocation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "作业名称。不超过64个字符。暂不限制特殊字符。同地域下作业名称可重复。",
+			Description: "Job name. Maximum 64 characters. No restriction on special characters. Job names can be duplicated within the same region.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(64),
@@ -257,56 +257,56 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "单台实例执行命令的结果。",
+		//	  "description": "Result of command execution on a single instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CommandId": {
-		//	        "description": "命令ID。",
+		//	        "description": "Command ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "EndTime": {
-		//	        "description": "命令执行的完成时间。",
+		//	        "description": "Command execution completion time.",
 		//	        "type": "string"
 		//	      },
 		//	      "ErrorCode": {
-		//	        "description": "命令执行失败的错误码。TaskDeliveryTimeout：表示命令下发超时。TaskExecutionTimeout：表示命令执行超时。TaskExecutionFailed：表示命令执行失败。",
+		//	        "description": "Error codes for command execution failure. TaskDeliveryTimeout: Indicates command delivery timeout. TaskExecutionTimeout: Indicates command execution timeout. TaskExecutionFailed: Indicates command execution failure.",
 		//	        "type": "string"
 		//	      },
 		//	      "ErrorMessage": {
-		//	        "description": "命令执行失败的错误信息。",
+		//	        "description": "Error message for command execution failure.",
 		//	        "type": "string"
 		//	      },
 		//	      "ExitCode": {
-		//	        "description": "脚本执行后的退出状态码。",
+		//	        "description": "Exit status code after script execution.",
 		//	        "type": "integer"
 		//	      },
 		//	      "InstanceId": {
-		//	        "description": "实例ID。",
+		//	        "description": "Instance ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "InvocationId": {
-		//	        "description": "任务执行ID。",
+		//	        "description": "Task execution ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "InvocationResultId": {
-		//	        "description": "任务执行结果ID。",
+		//	        "description": "Task execution result ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "InvocationResultStatus": {
-		//	        "description": "单台实例的命令进度状态。",
+		//	        "description": "Command progress status for a single instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Output": {
-		//	        "description": "经过Base64编码的命令执行后输出信息。",
+		//	        "description": "Output information after command execution, encoded in Base64.",
 		//	        "type": "string"
 		//	      },
 		//	      "StartTime": {
-		//	        "description": "命令在实例中开始执行的时间。",
+		//	        "description": "Time when the command starts executing in the instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "Username": {
-		//	        "description": "在实例中执行命令的用户名称。",
+		//	        "description": "User name for executing the command in the instance.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -320,67 +320,67 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CommandId
 					"command_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "命令ID。",
+						Description: "Command ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: EndTime
 					"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "命令执行的完成时间。",
+						Description: "Command execution completion time.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ErrorCode
 					"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "命令执行失败的错误码。TaskDeliveryTimeout：表示命令下发超时。TaskExecutionTimeout：表示命令执行超时。TaskExecutionFailed：表示命令执行失败。",
+						Description: "Error codes for command execution failure. TaskDeliveryTimeout: Indicates command delivery timeout. TaskExecutionTimeout: Indicates command execution timeout. TaskExecutionFailed: Indicates command execution failure.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ErrorMessage
 					"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "命令执行失败的错误信息。",
+						Description: "Error message for command execution failure.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ExitCode
 					"exit_code": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "脚本执行后的退出状态码。",
+						Description: "Exit status code after script execution.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例ID。",
+						Description: "Instance ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InvocationId
 					"invocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "任务执行ID。",
+						Description: "Task execution ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InvocationResultId
 					"invocation_result_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "任务执行结果ID。",
+						Description: "Task execution result ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InvocationResultStatus
 					"invocation_result_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "单台实例的命令进度状态。",
+						Description: "Command progress status for a single instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Output
 					"output": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "经过Base64编码的命令执行后输出信息。",
+						Description: "Output information after command execution, encoded in Base64.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StartTime
 					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "命令在实例中开始执行的时间。",
+						Description: "Time when the command starts executing in the instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Username
 					"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "在实例中执行命令的用户名称。",
+						Description: "User name for executing the command in the instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "单台实例执行命令的结果。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Result of command execution on a single instance.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -390,11 +390,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令执行的总执行状态。",
+		//	  "description": "Overall execution status of the command.",
 		//	  "type": "string"
 		//	}
 		"invocation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令执行的总执行状态。",
+			Description: "Overall execution status of the command.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -404,11 +404,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "执行时间。",
+		//	  "description": "Execution time.",
 		//	  "type": "string"
 		//	}
 		"launch_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "执行时间。",
+			Description: "Execution time.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -420,50 +420,50 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务触发时的命令自定义参数定义。",
+		//	  "description": "Custom parameter definition for the command triggered by the task.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "DecimalPrecision": {
 		//	        "default": 0,
-		//	        "description": "自定义参数值（数字）允许的小数点后位数。",
+		//	        "description": "Allowed number of decimal places for custom parameter values (numeric).",
 		//	        "maximum": 10,
 		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "DefaultValue": {
-		//	        "description": "自定义参数默认值。",
+		//	        "description": "Default value for custom parameter.",
 		//	        "type": "string"
 		//	      },
 		//	      "MaxLength": {
-		//	        "description": "自定义参数值（字符串）的最大长度。",
+		//	        "description": "Maximum length for custom parameter value (string).",
 		//	        "maximum": 1000,
 		//	        "type": "integer"
 		//	      },
 		//	      "MaxValue": {
-		//	        "description": "自定义参数值（数字）的最大值。",
+		//	        "description": "Maximum value for custom parameter (numeric).",
 		//	        "type": "string"
 		//	      },
 		//	      "MinLength": {
-		//	        "description": "自定义参数值（字符串）的最小长度。",
+		//	        "description": "Minimum length for custom parameter values (string).",
 		//	        "maximum": 1000,
 		//	        "type": "integer"
 		//	      },
 		//	      "MinValue": {
-		//	        "description": "自定义参数值（数字）的最小值。",
+		//	        "description": "Minimum value for custom parameter (numeric).",
 		//	        "type": "string"
 		//	      },
 		//	      "Name": {
-		//	        "description": "自定义参数名称，需要在脚本中通过{{Param}}定义 。",
+		//	        "description": "Custom parameter name. Must be defined in the script using {{Param}}.",
 		//	        "maxLength": 64,
 		//	        "type": "string"
 		//	      },
 		//	      "Required": {
-		//	        "description": "是否必填。true：必填。false：非必填。",
+		//	        "description": "Required. true: Required. false: Optional.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Type": {
-		//	        "description": "自定义参数类型。String：表示自定义参数类型字符串类型。Digit：表示自定义参数类型为数值类型。",
+		//	        "description": "Custom parameter type. String: Indicates custom parameter type is string. Digit: Indicates custom parameter type is numeric.",
 		//	        "enum": [
 		//	          "String",
 		//	          "Digit"
@@ -481,53 +481,53 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DecimalPrecision
 					"decimal_precision": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（数字）允许的小数点后位数。",
+						Description: "Allowed number of decimal places for custom parameter values (numeric).",
 						Computed:    true,
 						Default:     int64default.StaticInt64(0),
 					}, /*END ATTRIBUTE*/
 					// Property: DefaultValue
 					"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数默认值。",
+						Description: "Default value for custom parameter.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MaxLength
 					"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（字符串）的最大长度。",
+						Description: "Maximum length for custom parameter value (string).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MaxValue
 					"max_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（数字）的最大值。",
+						Description: "Maximum value for custom parameter (numeric).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MinLength
 					"min_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（字符串）的最小长度。",
+						Description: "Minimum length for custom parameter values (string).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MinValue
 					"min_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（数字）的最小值。",
+						Description: "Minimum value for custom parameter (numeric).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数名称，需要在脚本中通过{{Param}}定义 。",
+						Description: "Custom parameter name. Must be defined in the script using {{Param}}.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Required
 					"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否必填。true：必填。false：非必填。",
+						Description: "Required. true: Required. false: Optional.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数类型。String：表示自定义参数类型字符串类型。Digit：表示自定义参数类型为数值类型。",
+						Description: "Custom parameter type. String: Indicates custom parameter type is string. Digit: Indicates custom parameter type is numeric.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "任务触发时的命令自定义参数定义。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Custom parameter definition for the command triggered by the task.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -537,11 +537,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令中包含自定义参数时，需通过本参数传入自定义参数的键值对。自定义参数个数范围为0~60。Key不允许为空字符串，最多支持64个字符。Value允许为空字符串。自定义参数与原始命令内容在Base64编码后，综合长度不能超过16KB。设置的自定义参数名集合必须为创建命令时定义的参数集的子集。对于未传入的参数，使用默认值代替。",
+		//	  "description": "When the command includes custom parameters, use this parameter to pass custom parameter key-value pairs. The number of custom parameters ranges from 0 to 60. Key cannot be an empty string and supports up to 64 characters. Value can be an empty string. The combined length of custom parameters and original command content after Base64 encoding must not exceed 16 KB. The set of custom parameter names must be a subset of the parameter set defined when creating the command. Default values are used for parameters not provided.",
 		//	  "type": "string"
 		//	}
 		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令中包含自定义参数时，需通过本参数传入自定义参数的键值对。自定义参数个数范围为0~60。Key不允许为空字符串，最多支持64个字符。Value允许为空字符串。自定义参数与原始命令内容在Base64编码后，综合长度不能超过16KB。设置的自定义参数名集合必须为创建命令时定义的参数集的子集。对于未传入的参数，使用默认值代替。",
+			Description: "When the command includes custom parameters, use this parameter to pass custom parameter key-value pairs. The number of custom parameters ranges from 0 to 60. Key cannot be an empty string and supports up to 64 characters. Value can be an empty string. The combined length of custom parameters and original command content after Base64 encoding must not exceed 16 KB. The set of custom parameter names must be a subset of the parameter set defined when creating the command. Default values are used for parameters not provided.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -553,11 +553,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源所属项目，一个资源只能归属于一个项目。",
+		//	  "description": "Project to which the resource belongs; each resource can belong to only one project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源所属项目，一个资源只能归属于一个项目。",
+			Description: "Project to which the resource belongs; each resource can belong to only one project.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -569,11 +569,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "周期结束时间，仅适用于周期任务（Rate）。",
+		//	  "description": "Cycle end time, applicable only to periodic tasks (Rate).",
 		//	  "type": "string"
 		//	}
 		"recurrence_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "周期结束时间，仅适用于周期任务（Rate）。",
+			Description: "Cycle end time, applicable only to periodic tasks (Rate).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -585,7 +585,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "设置命令执行的方式。Once：默认，表示立即执行命令。Rate：周期执行命令，需要通过Frequency参数传入Rate表达式指定执行周期。Fixed：定时执行命令，需要通过LaunchTime参数指定的执行时间。",
+		//	  "description": "Set the command execution mode. Once: Default, executes the command immediately. Rate: Executes the command periodically; specify the execution cycle using the Frequency parameter and Rate expression. Fixed: Executes the command at a scheduled time; specify the execution time using the LaunchTime parameter.",
 		//	  "enum": [
 		//	    "Once",
 		//	    "Rate",
@@ -594,7 +594,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"repeat_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "设置命令执行的方式。Once：默认，表示立即执行命令。Rate：周期执行命令，需要通过Frequency参数传入Rate表达式指定执行周期。Fixed：定时执行命令，需要通过LaunchTime参数指定的执行时间。",
+			Description: "Set the command execution mode. Once: Default, executes the command immediately. Rate: Executes the command periodically; specify the execution cycle using the Frequency parameter and Rate expression. Fixed: Executes the command at a scheduled time; specify the execution time using the LaunchTime parameter.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -613,11 +613,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "任务开始时间。",
+		//	  "description": "Task start time.",
 		//	  "type": "string"
 		//	}
 		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "任务开始时间。",
+			Description: "Task start time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -627,18 +627,18 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签键值对。",
+		//	  "description": "Tag key-value pair.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+		//	        "description": "Tag key for user tags. Naming rules: Cannot start with any combination of 'volc:' or 'sys:' in any case. Can only contain letters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+		//	        "description": "User tag value. Naming rules: Only letters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty; length must be between 0 and 256 characters.",
 		//	        "maxLength": 256,
 		//	        "type": "string"
 		//	      }
@@ -656,7 +656,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+						Description: "Tag key for user tags. Naming rules: Cannot start with any combination of 'volc:' or 'sys:' in any case. Can only contain letters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -669,7 +669,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+						Description: "User tag value. Naming rules: Only letters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty; length must be between 0 and 256 characters.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -681,7 +681,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签键值对。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag key-value pair.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -693,13 +693,13 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 60,
-		//	  "description": "创建的命令在ECS实例中执行时最大的超时时间，单位为秒。默认值：60。可选范围为：30~86400。",
+		//	  "description": "Maximum timeout for command execution in ECS instances, in seconds. Default: 60. Optional range: 30–86400.",
 		//	  "maximum": 86400,
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
 		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "创建的命令在ECS实例中执行时最大的超时时间，单位为秒。默认值：60。可选范围为：30~86400。",
+			Description: "Maximum timeout for command execution in ECS instances, in seconds. Default: 60. Optional range: 30–86400.",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(60),
@@ -715,11 +715,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "在ECS实例中执行命令的用户名称。",
+		//	  "description": "User name for executing the command in the ECS instance.",
 		//	  "type": "string"
 		//	}
 		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "在ECS实例中执行命令的用户名称。",
+			Description: "User name for executing the command in the ECS instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -731,11 +731,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义windows用户的密码。",
+		//	  "description": "Password for custom Windows user.",
 		//	  "type": "string"
 		//	}
 		"windows_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义windows用户的密码。",
+			Description: "Password for custom Windows user.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -748,11 +748,11 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建的命令在ECS实例中运行的目录。",
+		//	  "description": "Directory where the created command runs in the ECS instance.",
 		//	  "type": "string"
 		//	}
 		"working_dir": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建的命令在ECS实例中运行的目录。",
+			Description: "Directory where the created command runs in the ECS instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -772,7 +772,7 @@ func invocationResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "云助手是火山引擎打造的原生自动化运维工具。您可以创建立即执行、周期执行、定时执行的作业任务，创建完成后完，云助手客户端将按照执行模式自动开始执行。",
+		Description: "Cloud Assistant is a native automated operations tool developed by Volcano Engine. You can create jobs for immediate, periodic, or scheduled execution. After creation, the Cloud Assistant client automatically starts execution according to the execution mode.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -21,21 +21,21 @@ Data Source schema for Volcengine::VPC::TrafficMirrorTarget
 
 ### Read-Only
 
-- `created_at` (String) 镜像会话的创建时间。
-- `description` (String) 监听器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。不填则默认值为空字符串。
-- `instance_id` (String) 镜像目的的资源ID。
-- `instance_type` (String) 镜像目的的资源类型。NetworkInterface：弹性网卡。ClbInstance：传统型负载均衡。
-- `project_name` (String) 镜像目的所属项目的名称。不填默认加入default项目。
-- `status` (String) 镜像目的状态。Available：可用。Creating：创建中。
-- `tags` (Attributes Set) 镜像目的的标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `traffic_mirror_target_id` (String) 镜像目的的ID。
-- `traffic_mirror_target_name` (String) 监听器的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线_）和中划线（-）。长度限制在1～128字符之间。不填则默认将“协议-端口”作为监听器名称。
-- `updated_at` (String) 镜像会话的更新时间。
+- `created_at` (String) Creation time of the mirror session.
+- `description` (String) Listener description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If not specified, the default value is an empty string.
+- `instance_id` (String) Resource ID of the mirror target.
+- `instance_type` (String) Resource type of the mirror target. NetworkInterface: Elastic network interface. ClbInstance: Classic load balancer.
+- `project_name` (String) Name of the project to which the mirror target belongs. If not specified, it will be added to the default project.
+- `status` (String) Status of the mirror target. Available: Available. Creating: Creating.
+- `tags` (Attributes Set) Tag information of the mirror target. (see [below for nested schema](#nestedatt--tags))
+- `traffic_mirror_target_id` (String) ID of the mirror target.
+- `traffic_mirror_target_name` (String) Listener name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, the default is 'protocol-port' as the listener name.
+- `updated_at` (String) Update time of the mirror session.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。
-- `value` (String) 标签的标签值。长度取值范围为0～256字符，不填默认为空。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。
+- `key` (String) Tag key. Length must be between 1 and 128 characters. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system will automatically remove it.
+- `value` (String) Tag value. Length must be between 0 and 256 characters. If not specified, the default is empty. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.

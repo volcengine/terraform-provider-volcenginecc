@@ -8,34 +8,34 @@
     "Instance": {
       "properties": {
         "InstanceId": {
-          "description": "实例ID。",
+          "description": "Instance ID",
           "type": "string"
         },
         "InstanceName": {
-          "description": "实例名称。",
+          "description": "Instance name",
           "type": "string"
         },
         "InstanceStatus": {
-          "description": "实例状态。",
+          "description": "Instance status",
           "type": "string"
         },
         "IsLatest": {
-          "description": "是否同步最新白名单 IP",
+          "description": "Sync latest allowlist IP",
           "type": "boolean"
         },
         "ProjectName": {
-          "description": "实例所属项目名称。",
+          "description": "Project name of the instance",
           "type": "string"
         },
         "VPC": {
-          "description": "实例所属VPC ID。",
+          "description": "VPC ID of the instance",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "API请求参数 - 创建RDS SQL Server白名单（CreateAllowList）。",
+  "description": "API request parameter - Create RDS SQL Server allowlist (CreateAllowList)",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName"
@@ -81,44 +81,44 @@
   ],
   "properties": {
     "AllowList": {
-      "description": "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+      "description": "IP allowlist. Separate multiple IP addresses with commas (,). No duplicates allowed",
       "type": "string"
     },
     "AllowListCategory": {
-      "description": "白名单分类。",
+      "description": "Allowlist category",
       "type": "string"
     },
     "AllowListDesc": {
-      "description": "白名单描述。",
+      "description": "Allowlist description",
       "semantic": "description",
       "type": "string"
     },
     "AllowListIPNum": {
-      "description": "AllowListIP数量。",
+      "description": "Allowlist IP count",
       "format": "int64",
       "type": "integer"
     },
     "AllowListId": {
-      "description": "白名单的id。",
+      "description": "Allowlist ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "AllowListName": {
-      "description": "白名单名称。",
+      "description": "Allowlist name",
       "semantic": "resourceName",
       "type": "string"
     },
     "AllowListType": {
-      "description": "白名单内的IP地址类型，当前仅支持IPv4。",
+      "description": "IP address type in the allowlist. Only IPv4 is supported",
       "type": "string"
     },
     "AssociatedInstanceNum": {
-      "description": "绑定的实例数量。解绑实例的白名单时必传。",
+      "description": "Number of bound instances. Required when unbinding an instance from the allowlist",
       "format": "int64",
       "type": "integer"
     },
     "AssociatedInstances": {
-      "description": "绑定的实例列表。",
+      "description": "Bound instance list",
       "insertionOrder": true,
       "items": {
         "$ref": "#/definitions/Instance"
@@ -127,15 +127,15 @@
       "uniqueItems": true
     },
     "InstanceId": {
-      "description": "实例ID。",
+      "description": "Instance ID",
       "type": "string"
     },
     "ProjectName": {
-      "description": "项目名称。",
+      "description": "Project name",
       "type": "string"
     },
     "UserAllowList": {
-      "description": "安全组之外的、需要加入白名单的IP地址，可输入IP地址或CIDR格式的IP地址段。如果该字段与AllowList同时指定，以AllowList为准。",
+      "description": "IP addresses outside the security group that need to be added to the allowlist. Enter IP addresses or CIDR-formatted IP ranges. If both this field and AllowList are specified, AllowList takes precedence",
       "type": "string"
     }
   },

@@ -21,15 +21,15 @@ Data Source schema for Volcengine::Organization::Unit
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `delete_uk` (String) 删除标识。
-- `deleted_time` (String) 删除时间。
-- `depth` (Number) 深度。
-- `description` (String) 描述。
-- `name` (String) 组织单元名称。
-- `org_id` (String) 组织ID。
-- `org_type` (Number) 组织类型。企业组织： 1
-- `org_unit_id` (String) 组织单元ID。
-- `owner` (String) 管理员ID。
-- `parent_id` (String) 父单元Id。
-- `updated_time` (String) 更新时间。
+- `created_time` (String) Creation time.
+- `delete_uk` (String) Deletion flag.
+- `deleted_time` (String) Deletion time.
+- `depth` (Number) Depth.
+- `description` (String) Description.
+- `name` (String) Organizational unit name.
+- `org_id` (String) Organization ID.
+- `org_type` (Number) Organization type. Enterprise organization: 1
+- `org_unit_id` (String) Organizational unit ID.
+- `owner` (String) Administrator ID.
+- `parent_id` (String) Parent unit ID.
+- `updated_time` (String) Update time.

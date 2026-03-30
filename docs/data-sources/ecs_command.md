@@ -21,38 +21,38 @@ Data Source schema for Volcengine::ECS::Command
 
 ### Read-Only
 
-- `command_content` (String) 命令内容。请根据ContentEncoding参数传入相应命令内容。命令内容不能超过16KB。
-- `command_id` (String) 自定义命令ID。
-- `content_encoding` (String) 命令内容是否经过Base64编码处理。Base64（默认）：经过Base64编码处理。PlainText： 未进行编码处理。
-- `created_time` (String) 创建时间。
-- `description` (String) 命令描述，默认为空字符串。字符长度0~256。不限制特殊字符。
-- `enable_parameter` (Boolean) 创建的命令是否使用自定义参数。false：默认，表示不使用自定义参数。true：表示使用自定义参数。
-- `invocation_times` (Number) 命令被调用次数。
-- `name` (String) 命令名称。字符长度1~32。不限制特殊字符。
-- `parameter_definitions` (Attributes Set) 自定义参数定义信息。 (see [below for nested schema](#nestedatt--parameter_definitions))
-- `project_name` (String) 资源所属项目，一个资源只能归属于一个项目。
-- `provider_name` (String) 命令的提供方。
-- `tags` (Attributes Set) 标签键值对。 (see [below for nested schema](#nestedatt--tags))
-- `timeout` (Number) 创建的命令在ECS实例中执行时最大的超时时间，单位为秒。取值范围：30~86400。默认值：60。
-- `type` (String) 命令的类型。Shell：表示创建一个在Linux实例中运行的Shell脚本。Python：表示创建一个Python脚本。Bat：表示创建一个Bat脚本。PowerShell：表示创建一个PowerShell脚本。
-- `updated_time` (String) 更新时间。
-- `username` (String) 执行命令时的用户名。
-- `working_dir` (String) 创建的命令在ECS实例中运行的目录。
+- `command_content` (String) Command content. Enter the command content according to the ContentEncoding parameter. Command content must not exceed 16 KB.
+- `command_id` (String) Custom command ID.
+- `content_encoding` (String) Whether the command content is processed with Base64 encoding. Base64 (default): Processed with Base64 encoding. PlainText: Not encoded.
+- `created_time` (String) Creation time.
+- `description` (String) Command description. Defaults to an empty string. Character length: 0~256. No restriction on special characters.
+- `enable_parameter` (Boolean) Whether the created command uses custom parameters. false: Default, does not use custom parameters. true: Uses custom parameters.
+- `invocation_times` (Number) Number of times the command has been invoked.
+- `name` (String) Command name. Character length: 1~32. No restriction on special characters.
+- `parameter_definitions` (Attributes Set) Custom parameter definition information. (see [below for nested schema](#nestedatt--parameter_definitions))
+- `project_name` (String) Project to which the resource belongs. Each resource can belong to only one project.
+- `provider_name` (String) Command provider.
+- `tags` (Attributes Set) Tag key-value pair. (see [below for nested schema](#nestedatt--tags))
+- `timeout` (Number) Maximum timeout for executing the created command on ECS instances, in seconds. Value range: 30~86400. Default: 60.
+- `type` (String) Command type. Shell: Creates a Shell script for Linux instances. Python: Creates a Python script. Bat: Creates a Bat script. PowerShell: Creates a PowerShell script.
+- `updated_time` (String) Update time.
+- `username` (String) Username for executing the command.
+- `working_dir` (String) Directory where the created command runs on ECS instances.
 
 <a id="nestedatt--parameter_definitions"></a>
 ### Nested Schema for `parameter_definitions`
 
 Read-Only:
 
-- `decimal_precision` (Number) 自定义参数值（数字）允许的小数点后位数。
-- `default_value` (String) 自定义参数默认值。
-- `max_length` (Number) 自定义参数值（字符串）的最大长度。
-- `max_value` (String) 自定义参数值（数字）的最大值。
-- `min_length` (Number) 自定义参数值（字符串）的最小长度。
-- `min_value` (String) 自定义参数值（数字）的最小值。
-- `name` (String) 自定义参数名称，需要在脚本中通过{{Param}}定义 。单个参数名不能超过64字节。遵循Shell变量命名规则，a-zA-Z0-9-_的组合。首个字符不能以数字开头。中间不能有空格，可以使用下划线。
-- `required` (Boolean) 是否必填。
-- `type` (String) 自定义参数类型。取值：String：表示自定义参数类型为String（字符串）类型。Digit：表示自定义参数类型为Digit（数值）类型。
+- `decimal_precision` (Number) Allowed decimal places for custom parameter (number).
+- `default_value` (String) Default value for custom parameter.
+- `max_length` (Number) Maximum length for custom parameter (string).
+- `max_value` (String) Maximum value for custom parameter (number).
+- `min_length` (Number) Minimum length for custom parameter (string).
+- `min_value` (String) Minimum value for custom parameter (number).
+- `name` (String) Custom parameter name. Define it in the script using {{Param}}. Each parameter name must not exceed 64 bytes. Follow Shell variable naming rules: combinations of a-z, A-Z, 0-9, -, and _. The first character cannot be a digit. No spaces allowed; underscores can be used instead.
+- `required` (Boolean) Whether it is required.
+- `type` (String) Custom parameter type. Values: String: Indicates the custom parameter type is String (string type). Digit: Indicates the custom parameter type is Digit (numeric type).
 
 
 <a id="nestedatt--tags"></a>
@@ -60,5 +60,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。
-- `value` (String) 用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。
+- `key` (String) User tag key. Naming rules: must not start with any case combination of volc: or sys:. Only language characters, digits, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.
+- `value` (String) User tag value. Naming rules: only language characters, digits, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length must be between 0 and 256 characters.

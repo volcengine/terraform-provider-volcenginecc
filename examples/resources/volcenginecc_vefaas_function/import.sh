@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vefaas_function.example "function_id"

@@ -21,39 +21,39 @@ Data Source schema for Volcengine::ALB::Rule
 
 ### Read-Only
 
-- `description` (String) 转发规则的描述。
-- `domain` (String) 转发规则的域名。
-- `forward_group_config` (Attributes) 转发规则服务器组配置 (see [below for nested schema](#nestedatt--forward_group_config))
-- `listener_id` (String) 监听器ID。
-- `priority` (Number) 标准版转发规则优先级。
-- `redirect_config` (Attributes) 重定向相关配置信息。 (see [below for nested schema](#nestedatt--redirect_config))
-- `rewrite_config` (Attributes) 重定向相关配置信息。 (see [below for nested schema](#nestedatt--rewrite_config))
-- `rewrite_enabled` (String) 转发规则重写配置开关。on：开启。off：关闭。
-- `rule_action` (String) 转发规则动作。空：默认转发至服务器组。Redirect：重定向。
-- `rule_actions` (Attributes List) 标准版转发规则动作。 (see [below for nested schema](#nestedatt--rule_actions))
-- `rule_conditions` (Attributes Set) 标准版转发规则条件。 (see [below for nested schema](#nestedatt--rule_conditions))
-- `rule_id` (String) 转发规则ID。
-- `server_group_id` (String) 转发规则关联的后端服务器组ID。
-- `traffic_limit_enabled` (String) 转发规则 QPS 限速开关。on：开启。off：关闭。
-- `traffic_limit_qps` (Number) 每秒请求数。取值范围：100～100000。
-- `url` (String) 转发规则的URL。
+- `description` (String) Forwarding rule description.
+- `domain` (String) Domain name of the forwarding rule.
+- `forward_group_config` (Attributes) Forwarding rule server group configuration. (see [below for nested schema](#nestedatt--forward_group_config))
+- `listener_id` (String) Listener ID.
+- `priority` (Number) Standard edition forwarding rule priority.
+- `redirect_config` (Attributes) Redirect-related configuration information. (see [below for nested schema](#nestedatt--redirect_config))
+- `rewrite_config` (Attributes) Redirect-related configuration information. (see [below for nested schema](#nestedatt--rewrite_config))
+- `rewrite_enabled` (String) Forwarding rule rewrite configuration switch. on: enabled. off: disabled.
+- `rule_action` (String) Forwarding rule action. Empty: default forward to server group. Redirect: redirect.
+- `rule_actions` (Attributes List) Standard edition forwarding rule action. (see [below for nested schema](#nestedatt--rule_actions))
+- `rule_conditions` (Attributes Set) Standard edition forwarding rule condition. (see [below for nested schema](#nestedatt--rule_conditions))
+- `rule_id` (String) Forwarding rule ID.
+- `server_group_id` (String) Backend server group ID associated with the forwarding rule.
+- `traffic_limit_enabled` (String) Forwarding rule QPS throttling switch. on: enabled. off: disabled.
+- `traffic_limit_qps` (Number) Requests per second. Range: 100–100000.
+- `url` (String) Forwarding rule URL.
 
 <a id="nestedatt--forward_group_config"></a>
 ### Nested Schema for `forward_group_config`
 
 Read-Only:
 
-- `server_group_tuples` (Attributes Set) 转发到的目的服务器组列表。 (see [below for nested schema](#nestedatt--forward_group_config--server_group_tuples))
-- `sticky_session_enabled` (String) 是否开启组间会话保持。on：开启。off：不开启。
-- `sticky_session_timeout` (Number) 组件回话保持的超时时间。单位：秒。
+- `server_group_tuples` (Attributes Set) Destination server group list. (see [below for nested schema](#nestedatt--forward_group_config--server_group_tuples))
+- `sticky_session_enabled` (String) Whether to enable inter-group session persistence. on: enabled. off: disabled.
+- `sticky_session_timeout` (Number) Component session stickiness timeout. Unit: seconds.
 
 <a id="nestedatt--forward_group_config--server_group_tuples"></a>
 ### Nested Schema for `forward_group_config.server_group_tuples`
 
 Read-Only:
 
-- `server_group_id` (String) 转发到的目的服务器组 ID。
-- `weight` (Number) 服务器组权重。
+- `server_group_id` (String) Destination server group ID.
+- `weight` (Number) Server group weight.
 
 
 
@@ -62,11 +62,11 @@ Read-Only:
 
 Read-Only:
 
-- `redirect_domain` (String) 重定向的域名。若创建/修改重定向类型的转发规则时，重定向域名设置为空，接口会返回${host}，该变量含义为重定向域名与请求域名保持一致，但不支持创建/修改时，将重定向域名设置为${host}.。
-- `redirect_http_code` (String) 重定向状态码。301、302、307、308。
-- `redirect_port` (String) 重定向的端口。若创建/修改重定向类型的转发规则时，重定向端口设置为空，接口会返回${port}，该变量含义为重定向端口与请求端口（监听器端口）保持一致，但不支持创建/修改时，将重定向端口设置为${port}.。
-- `redirect_protocol` (String) 重定向使用的协议。HTTP、HTTPS。
-- `redirect_uri` (String) 重定向的URI。若创建/修改重定向类型的转发规则时，重定向uri设置为空，接口会返回${request_uri}，该变量含义为重定向uri与请求uri保持一致，但不支持创建/修改时，将重定向uri设置为${request_uri}.。
+- `redirect_domain` (String) Redirect domain name. If the redirect domain name is left empty when creating or modifying a redirect forwarding rule, the API returns ${host}, which means the redirect domain matches the request domain. However, setting the redirect domain to ${host} is not supported when creating or modifying rules.
+- `redirect_http_code` (String) Redirect status codes: 301, 302, 307, 308.
+- `redirect_port` (String) Redirect port. If the redirect port is left empty when creating or modifying a redirect forwarding rule, the API returns ${port}, which means the redirect port matches the request port (listener port). However, setting the redirect port to ${port} is not supported when creating or modifying rules.
+- `redirect_protocol` (String) Protocol used for redirect. HTTP, HTTPS.
+- `redirect_uri` (String) Redirect URI. If the redirect URI is left empty when creating or modifying a redirect forwarding rule, the API returns ${request_uri}, which means the redirect URI matches the request URI. However, setting the redirect URI to ${request_uri} is not supported when creating or modifying rules.
 
 
 <a id="nestedatt--rewrite_config"></a>
@@ -74,7 +74,7 @@ Read-Only:
 
 Read-Only:
 
-- `rewrite_path` (String) 重写路径。
+- `rewrite_path` (String) Rewrite path.
 
 
 <a id="nestedatt--rule_actions"></a>
@@ -87,16 +87,16 @@ Read-Only:
 - `redirect_config` (Attributes) RedirectConfig (see [below for nested schema](#nestedatt--rule_actions--redirect_config))
 - `rewrite_config` (Attributes) RewriteConfig (see [below for nested schema](#nestedatt--rule_actions--rewrite_config))
 - `traffic_limit_config` (Attributes) TrafficLimitConfig (see [below for nested schema](#nestedatt--rule_actions--traffic_limit_config))
-- `type` (String) 转发规则动作类型。ForwardGroup：转发至多个虚拟服务器组。Redirect： 重定向。Rewrite： 重写。TrafficLimit：流量限速。
+- `type` (String) Forwarding rule action types. ForwardGroup: forward to multiple virtual server groups. Redirect: redirect. Rewrite: rewrite. TrafficLimit: traffic limiting.
 
 <a id="nestedatt--rule_actions--fixed_response_config"></a>
 ### Nested Schema for `rule_actions.fixed_response_config`
 
 Read-Only:
 
-- `content` (String) 返回的固定内容。
-- `content_type` (String) 返回的固定内容的格式。text/plain、text/css、text/html、application/javascript、application/json
-- `http_code` (String) 返回的 HTTP 状态码。
+- `content` (String) Fixed response content.
+- `content_type` (String) Format of fixed response content. text/plain, text/css, text/html, application/javascript, application/json
+- `http_code` (String) Returned HTTP status code.
 
 
 <a id="nestedatt--rule_actions--forward_group_config"></a>
@@ -112,8 +112,8 @@ Read-Only:
 
 Read-Only:
 
-- `enabled` (String) 是否开启组间会话保持。on：开启。off：不开启。
-- `timeout` (Number) 组件回话保持的超时时间。单位：秒。
+- `enabled` (String) Whether to enable inter-group session persistence. on: enabled. off: disabled.
+- `timeout` (Number) Component session stickiness timeout. Unit: seconds.
 
 
 <a id="nestedatt--rule_actions--forward_group_config--server_group_tuples"></a>
@@ -121,8 +121,8 @@ Read-Only:
 
 Read-Only:
 
-- `server_group_id` (String) 转发到的目的服务器组 ID。
-- `weight` (Number) 服务器组权重。
+- `server_group_id` (String) Destination server group ID.
+- `weight` (Number) Server group weight.
 
 
 
@@ -131,11 +131,11 @@ Read-Only:
 
 Read-Only:
 
-- `host` (String) 重定向域名，仅支持精确域名。
-- `http_code` (String) 重定向状态码，支持301，302，307，308。
-- `path` (String) 重定向 URI。。
-- `port` (String) 重定向端口。
-- `protocol` (String) 重定向使用的协议，支持HTTP，HTTPS。
+- `host` (String) Redirect domain. Only exact domains are supported.
+- `http_code` (String) Redirect status codes supported: 301, 302, 307, 308.
+- `path` (String) Redirect URI..
+- `port` (String) Redirect port.
+- `protocol` (String) Protocol used for redirect. Supports HTTP and HTTPS.
 
 
 <a id="nestedatt--rule_actions--rewrite_config"></a>
@@ -143,7 +143,7 @@ Read-Only:
 
 Read-Only:
 
-- `path` (String) 重写路径。
+- `path` (String) Rewrite path.
 
 
 <a id="nestedatt--rule_actions--traffic_limit_config"></a>
@@ -151,7 +151,7 @@ Read-Only:
 
 Read-Only:
 
-- `qps` (Number) 每秒请求数。
+- `qps` (Number) Requests per second.
 
 
 
@@ -165,15 +165,15 @@ Read-Only:
 - `method_config` (Attributes) MethodConfig。 (see [below for nested schema](#nestedatt--rule_conditions--method_config))
 - `path_config` (Attributes) PathConfig。 (see [below for nested schema](#nestedatt--rule_conditions--path_config))
 - `query_string_config` (Attributes) QueryStringConfig。 (see [below for nested schema](#nestedatt--rule_conditions--query_string_config))
-- `type` (String) 标准版转发规则条件类型。Host： 域名。Path： 路径。Header：HTTP头字段。Method: 请求方法。QueryString: 查询参数。
+- `type` (String) Standard forwarding rule condition types. Host: domain name. Path: path. Header: HTTP header field. Method: request method. QueryString: query parameter.
 
 <a id="nestedatt--rule_conditions--header_config"></a>
 ### Nested Schema for `rule_conditions.header_config`
 
 Read-Only:
 
-- `key` (String) 头字段键。
-- `values` (Set of String) 头字段值。
+- `key` (String) Header field key.
+- `values` (Set of String) Header field value.
 
 
 <a id="nestedatt--rule_conditions--host_config"></a>
@@ -181,7 +181,7 @@ Read-Only:
 
 Read-Only:
 
-- `values` (Set of String) 转发规则的域名，支持泛域名和精确域名。
+- `values` (Set of String) Domain name of the forwarding rule. Supports wildcard and exact domains.
 
 
 <a id="nestedatt--rule_conditions--method_config"></a>
@@ -189,7 +189,7 @@ Read-Only:
 
 Read-Only:
 
-- `values` (Set of String) 请求方法。支持HEAD、GET、POST、OPTIONS、PUT、PATCH、DELETE。
+- `values` (Set of String) Request method. Supports HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE.
 
 
 <a id="nestedatt--rule_conditions--path_config"></a>
@@ -197,7 +197,7 @@ Read-Only:
 
 Read-Only:
 
-- `values` (Set of String) 转发规则的URL，仅支持绝对路径。
+- `values` (Set of String) Forwarding rule URL. Only absolute paths are supported.
 
 
 <a id="nestedatt--rule_conditions--query_string_config"></a>
@@ -212,5 +212,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 查询字符串键。
-- `value` (String) 查询字符串值。
+- `key` (String) Query string key.
+- `value` (String) Query string value.

@@ -10,11 +10,11 @@
     "DBTableInfo": {
       "properties": {
         "Database": {
-          "description": "数据库名。",
+          "description": "Database name",
           "type": "string"
         },
         "Tables": {
-          "description": "表名列表。",
+          "description": "Table name list",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -26,7 +26,7 @@
       "type": "object"
     }
   },
-  "description": "备份是数据库的重要运行时文件，基于备份文件，数据库能够实现容灾、恢复等功能。云数据库 MySQL 版提供了数据备份和日志备份两种备份能力：通过数据备份可将数据库恢复至某个备份集，通过日志备份可将数据库恢复至指定时间点。",
+  "description": "Backups are important runtime files for the database. Based on backup files, the database can achieve disaster recovery and restoration. MySQL Cloud Database provides two backup capabilities: data backup and log backup. Data backup allows you to restore the database to a specific backup set, while log backup enables restoration to a specified point in time",
   "filterProperties": {
     "filterableProperties": [
       "/properties/BackupEndTime",
@@ -74,26 +74,26 @@
   ],
   "properties": {
     "BackupEndTime": {
-      "description": "备份创建结束时间（UTC）。",
+      "description": "Backup creation end time (UTC)",
       "semantic": "updatedTime",
       "type": "string"
     },
     "BackupFileName": {
-      "description": "备份文件名。",
+      "description": "Backup file name",
       "type": "string"
     },
     "BackupFileSize": {
-      "description": "备份文件大小，单位为字节。",
+      "description": "Backup file size (bytes)",
       "format": "int64",
       "type": "integer"
     },
     "BackupId": {
-      "description": "备份 ID。",
+      "description": "Backup ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "BackupMeta": {
-      "description": "创建逻辑备份类型的库表备份时，用于指定要备份的库表信息。",
+      "description": "When creating a logical backup of database tables, this is used to specify the database and table information to be backed up",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/DBTableInfo"
@@ -102,7 +102,7 @@
       "uniqueItems": true
     },
     "BackupMethod": {
-      "description": "备份类型，取值：Physical（物理备份）、Logical（逻辑备份）、Snapshot（快照备份）。",
+      "description": "Backup type. Values: Physical (physical backup), Logical (logical backup), Snapshot (snapshot backup)",
       "enum": [
         "Physical",
         "Logical",
@@ -111,21 +111,21 @@
       "type": "string"
     },
     "BackupName": {
-      "description": "备份的名称。",
+      "description": "Backup name",
       "semantic": "resourceName",
       "type": "string"
     },
     "BackupRegion": {
-      "description": "备份所在区域。",
+      "description": "Backup region",
       "type": "string"
     },
     "BackupStartTime": {
-      "description": "备份创建开始时间（UTC）。",
+      "description": "Backup creation start time (UTC)",
       "semantic": "createdTime",
       "type": "string"
     },
     "BackupStatus": {
-      "description": "备份状态，取值：Success（成功）、Failed（失败）、Running（执行中）。",
+      "description": "Backup status. Values: Success, Failed, Running",
       "enum": [
         "Success",
         "Failed",
@@ -135,7 +135,7 @@
       "type": "string"
     },
     "BackupType": {
-      "description": "备份方式，取值：Full（全量/库表备）、Increment（增量备份）、DumpAll（全库备份）。",
+      "description": "Backup method. Values: Full (full/database table backup), Increment (incremental backup), DumpAll (full database backup)",
       "enum": [
         "Full",
         "Increment",
@@ -144,11 +144,11 @@
       "type": "string"
     },
     "ConsistentTime": {
-      "description": "一致性时间点。",
+      "description": "Consistency time point",
       "type": "string"
     },
     "CreateType": {
-      "description": "备份创建者，取值：System（系统）、User（用户）。",
+      "description": "Backup creator. Values: System (system), User (user)",
       "enum": [
         "System",
         "User"
@@ -156,11 +156,11 @@
       "type": "string"
     },
     "DBEngineVersion": {
-      "description": "兼容版本。取值：MySQL_5_7：MySQL 5.7 版本。MySQL_8_0：MySQL 8.0 版本。",
+      "description": "Compatible version. Values: MySQL_5_7: MySQL 5.7 version; MySQL_8_0: MySQL 8.0 version",
       "type": "string"
     },
     "DBTableInfos": {
-      "description": "库表信息列表。",
+      "description": "Database and table information list",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/DBTableInfo"
@@ -169,31 +169,31 @@
       "uniqueItems": true
     },
     "DownloadStatus": {
-      "description": "下载状态。",
+      "description": "Download status",
       "type": "string"
     },
     "EngineType": {
-      "description": "数据库引擎类型。取值：InnoDB：InnoDB 引擎。RocksDB：RocksDB 引擎。",
+      "description": "Database engine type. Values: InnoDB: InnoDB engine; RocksDB: RocksDB engine",
       "type": "string"
     },
     "ErrorMessage": {
-      "description": "备份失败的错误信息。",
+      "description": "Error message for backup failure",
       "type": "string"
     },
     "ExpiredTime": {
-      "description": "备份过期时间（UTC）。",
+      "description": "Backup expiration time (UTC)",
       "type": "string"
     },
     "InstanceId": {
-      "description": "实例 ID。",
+      "description": "Instance ID",
       "type": "string"
     },
     "IsEncrypted": {
-      "description": "是否加密。",
+      "description": "Whether encrypted",
       "type": "boolean"
     },
     "IsExpired": {
-      "description": "是否已过期。",
+      "description": "Whether expired",
       "type": "boolean"
     }
   },

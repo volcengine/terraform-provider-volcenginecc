@@ -21,13 +21,13 @@ Data Source schema for Volcengine::APIG::CustomDomain
 
 ### Read-Only
 
-- `certificate_id` (String) 自定义域名证书ID。
-- `comments` (String) 备注。
-- `created_time` (String) 创建时间。
-- `custom_domain_id` (String) 自定义域名ID。
-- `domain` (String) 自定义域名。
-- `protocol` (Set of String) 协议，取值：HTTP。HTTPS。
-- `service_id` (String) 服务ID。
-- `ssl_redirect` (Boolean) 重定向到HTTPS。
-- `status` (String) 状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。
-- `updated_time` (String) 更新时间。
+- `certificate_id` (String) Custom Domain Certificate ID
+- `comments` (String) Remarks
+- `created_time` (String) Creation Time
+- `custom_domain_id` (String) Custom Domain ID
+- `domain` (String) Custom Domain
+- `protocol` (Set of String) Protocol. Values: HTTP, HTTPS
+- `service_id` (String) Service ID
+- `ssl_redirect` (Boolean) Redirect to HTTPS
+- `status` (String) Status. Values: Creating: configuring; CreationFailed: configuration failed; Deleting: deleting; DeletionFailed: deletion failed; Verified: active
+- `updated_time` (String) Update Time

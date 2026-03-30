@@ -21,35 +21,35 @@ Data Source schema for Volcengine::RocketMQ::Group
 
 ### Read-Only
 
-- `consume_message_orderly` (Boolean) Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。
-- `consumed_clients` (Attributes Set) 消费客户端列表。 (see [below for nested schema](#nestedatt--consumed_clients))
-- `consumed_topics` (Attributes Set) 该 Group 下消费者实例群组订阅的 Topic 信息。 (see [below for nested schema](#nestedatt--consumed_topics))
-- `created_time` (String) Group 的创建时间。
-- `description` (String) Group 的简单描述。
-- `group_id` (String) Group 的 ID。长度限制为 7~120 个字符，只能包含字母、数字、短划线（-）和下划线（_）。推荐以 GID  - 或 GID_ 开头。创建 Group 后无法修改 ID，请谨慎设置。对于2023年6月5日及之前创建的 RocketMQ 实例，Group 名称不可超过 93 个字符。
-- `group_type` (String) Group 的协议标识，用于备注该 Group 的生产消费协议类型。可指定为 TCP。
-- `instance_id` (String) 实例 ID。
-- `is_sub_same` (Boolean) Group 内消费者实例群组的订阅关系是否一致。true：一致，false：不一致。
-- `last_update_timestamp` (String) 是否顺序消费。
-- `message_delay_time` (String) 消息延迟时间，消费者实例群组最早的一条未消费消息的生产时间与当前时间的差值。单位为毫秒。
-- `message_model` (String) 消息消费模式。默认为集群模式，请勿在同一 Group 下同时配置集群模式和广播模式。Clustering：集群消费模式，Broadcasting：广播消费模式。
-- `retry_max_times` (Number) 消费最大重试次数。
-- `rocketmq_version` (String) RocketMQ 版本。
-- `service_status` (String) 服务状态。Creating：创建中，Running：运行中，Deleting：删除中，Abnormal：异常，Updating：更新中。
-- `status` (String) 消费组状态。Online：消费中，Offline：未消费。
-- `total_consumed_rate` (String) 该 Group 下消费者实例群组接收消息的总 TPS，单位为条/秒。
-- `total_diff` (Number) 消费者实例群组的未消费消息的总量。此处显示的消息堆积量为未过滤 Tag 的总堆积量，包括 Topic 下所有 Tag 的消息。
+- `consume_message_orderly` (Boolean) Whether the subscription relationships of consumer instance groups within the Group are consistent. true: Consistent, false: Inconsistent.
+- `consumed_clients` (Attributes Set) Consumer client list. (see [below for nested schema](#nestedatt--consumed_clients))
+- `consumed_topics` (Attributes Set) Topic information subscribed by consumer instance groups under this Group. (see [below for nested schema](#nestedatt--consumed_topics))
+- `created_time` (String) Group creation time.
+- `description` (String) Brief description of the Group.
+- `group_id` (String) Group ID. Length must be between 7 and 120 characters and can only contain letters, numbers, hyphens (-), and underscores (_). It is recommended to start with GID  - or GID_. The ID cannot be changed after the Group is created, so set it carefully. For RocketMQ instances created on or before June 5, 2023, the Group name cannot exceed 93 characters.
+- `group_type` (String) Group protocol identifier, used to indicate the production and consumption protocol type for this Group. Can be set to TCP.
+- `instance_id` (String) Instance ID.
+- `is_sub_same` (Boolean) Whether the subscription relationships of consumer instance groups within the Group are consistent. true: Consistent, false: Inconsistent.
+- `last_update_timestamp` (String) Whether consumption is sequential.
+- `message_delay_time` (String) Message latency. The difference between the production time of the earliest unconsumed message in the consumer instance group and the current time, measured in milliseconds.
+- `message_model` (String) Message consumption mode. The default is clustering mode. Do not configure both clustering and broadcasting modes under the same Group. Clustering: Clustering consumption mode, Broadcasting: Broadcasting consumption mode.
+- `retry_max_times` (Number) Maximum number of consumption retries.
+- `rocketmq_version` (String) RocketMQ version.
+- `service_status` (String) Service status. Creating: Being created, Running: Running, Deleting: Being deleted, Abnormal: Abnormal, Updating: Being updated.
+- `status` (String) Consumer group status. Online: Consuming, Offline: Not consuming.
+- `total_consumed_rate` (String) Total TPS of consumer instance groups under this Group, measured in messages per second.
+- `total_diff` (Number) Total number of unconsumed messages in the consumer instance group. The message backlog shown here is the total backlog before Tag filtering, including messages for all Tags under the Topic.
 
 <a id="nestedatt--consumed_clients"></a>
 ### Nested Schema for `consumed_clients`
 
 Read-Only:
 
-- `client_address` (String) 该消费者实例的地址和端口。
-- `client_id` (String) 该消费者实例的 ID。
-- `diff` (Number) 消息堆积量。
-- `language` (String) 消费者应用的开发语言。
-- `version` (String) 消费端版本。
+- `client_address` (String) Address and port of this consumer instance.
+- `client_id` (String) ID of this consumer instance.
+- `diff` (Number) Message backlog.
+- `language` (String) Development language of the consumer application.
+- `version` (String) Consumer version.
 
 
 <a id="nestedatt--consumed_topics"></a>
@@ -57,6 +57,6 @@ Read-Only:
 
 Read-Only:
 
-- `queue_num` (Number) Topic 对应的队列数。每个 Topic 下有一到多个队列用于存储消息。
-- `sub_string` (String) 订阅规则。
-- `topic_name` (String) 客户端订阅的 Topic 名称。
+- `queue_num` (Number) Number of queues associated with the Topic. Each Topic contains one or more queues for storing messages.
+- `sub_string` (String) Subscription rules.
+- `topic_name` (String) Name of the Topic subscribed by the client.

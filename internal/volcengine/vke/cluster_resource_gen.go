@@ -39,26 +39,26 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群控制面及部分节点的网络配置。",
+		//	  "description": "Network configuration for the cluster control plane and some nodes.",
 		//	  "properties": {
 		//	    "ApiServerEndpoints": {
-		//	      "description": "集群 API Server 访问的 IPv4 地址信息。",
+		//	      "description": "Cluster API Server access IPv4 address information",
 		//	      "properties": {
 		//	        "PrivateIp": {
-		//	          "description": "集群 API Server 私网的 IPv4 地址。",
+		//	          "description": "Cluster API Server private IPv4 address.",
 		//	          "properties": {
 		//	            "Ipv4": {
-		//	              "description": "私网 IP 的 IPv4 地址。",
+		//	              "description": "IPv4 address of the private network IP.",
 		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "PublicIp": {
-		//	          "description": "集群 API Server 公网的 IPv4 地址。",
+		//	          "description": "Cluster API Server public IPv4 address",
 		//	          "properties": {
 		//	            "Ipv4": {
-		//	              "description": "公网 IP 的 IPv4 地址。",
+		//	              "description": "IPv4 address of the public IP.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -68,21 +68,21 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ApiServerPublicAccessConfig": {
-		//	      "description": "集群 API Server 公网访问配置信息。ApiServerPublicAccessEnable=true时才返回的参数。",
+		//	      "description": "Cluster API Server public access configuration. This parameter is returned only when ApiServerPublicAccessEnable=true",
 		//	      "properties": {
 		//	        "PublicAccessNetworkConfig": {
-		//	          "description": "公网访问网络配置。ApiServerPublicAccessEnable=true时才返回的参数。",
+		//	          "description": "Public access network configuration. This parameter is returned only when ApiServerPublicAccessEnable=true",
 		//	          "properties": {
 		//	            "Bandwidth": {
-		//	              "description": "公网 IP 的带宽峰值，单位：Mbps。",
+		//	              "description": "Peak bandwidth of the public IP, unit: Mbps",
 		//	              "type": "integer"
 		//	            },
 		//	            "BillingType": {
-		//	              "description": "公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。",
+		//	              "description": "Billing type for public IP: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic.",
 		//	              "type": "integer"
 		//	            },
 		//	            "Isp": {
-		//	              "description": "公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。",
+		//	              "description": "Line type of the public IP. Parameter value description: BGP: BGP (multi-line)",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -92,19 +92,19 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ApiServerPublicAccessEnabled": {
-		//	      "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+		//	      "description": "Node public access configuration. Parameter value description: false: Disabled. true: Enabled",
 		//	      "type": "boolean"
 		//	    },
 		//	    "IpFamily": {
-		//	      "description": "集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。",
+		//	      "description": "Cluster network protocol stack. Parameter value description: Ipv4: Ipv4 single stack. Ipv6: [Invitation test · Trial application] Ipv6 single stack. DualStack: [Invitation test · Trial application] Ipv4 and Ipv6 dual stack",
 		//	      "type": "string"
 		//	    },
 		//	    "ResourcePublicAccessDefaultEnabled": {
-		//	      "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+		//	      "description": "Node public access configuration. Parameter value description: false: Disabled. true: Enabled",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SecurityGroupIds": {
-		//	      "description": "集群控制面及节点使用的的安全组。",
+		//	      "description": "Security group used by the cluster control plane and nodes.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -113,7 +113,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "SubnetIds": {
-		//	      "description": "集群控制面在私有网络内通信的子网 ID。",
+		//	      "description": "Subnet ID for cluster control plane communication within the private network.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -122,7 +122,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "VpcId": {
-		//	      "description": "集群控制面及部分节点的网络所在的私有网络（VPC）ID。",
+		//	      "description": "Private network (VPC) ID where the cluster control plane and some nodes are located.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -141,11 +141,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Ipv4
 								"ipv_4": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "私网 IP 的 IPv4 地址。",
+									Description: "IPv4 address of the private network IP.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "集群 API Server 私网的 IPv4 地址。",
+							Description: "Cluster API Server private IPv4 address.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: PublicIp
@@ -153,15 +153,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Ipv4
 								"ipv_4": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "公网 IP 的 IPv4 地址。",
+									Description: "IPv4 address of the public IP.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "集群 API Server 公网的 IPv4 地址。",
+							Description: "Cluster API Server public IPv4 address",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "集群 API Server 访问的 IPv4 地址信息。",
+					Description: "Cluster API Server access IPv4 address information",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
@@ -175,7 +175,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Bandwidth
 								"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "公网 IP 的带宽峰值，单位：Mbps。",
+									Description: "Peak bandwidth of the public IP, unit: Mbps",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -184,7 +184,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: BillingType
 								"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。",
+									Description: "Billing type for public IP: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -193,7 +193,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Isp
 								"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。",
+									Description: "Line type of the public IP. Parameter value description: BGP: BGP (multi-line)",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -201,7 +201,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "公网访问网络配置。ApiServerPublicAccessEnable=true时才返回的参数。",
+							Description: "Public access network configuration. This parameter is returned only when ApiServerPublicAccessEnable=true",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -209,7 +209,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "集群 API Server 公网访问配置信息。ApiServerPublicAccessEnable=true时才返回的参数。",
+					Description: "Cluster API Server public access configuration. This parameter is returned only when ApiServerPublicAccessEnable=true",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -218,7 +218,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ApiServerPublicAccessEnabled
 				"api_server_public_access_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+					Description: "Node public access configuration. Parameter value description: false: Disabled. true: Enabled",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -227,7 +227,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: IpFamily
 				"ip_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。",
+					Description: "Cluster network protocol stack. Parameter value description: Ipv4: Ipv4 single stack. Ipv6: [Invitation test · Trial application] Ipv6 single stack. DualStack: [Invitation test · Trial application] Ipv4 and Ipv6 dual stack",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -235,7 +235,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ResourcePublicAccessDefaultEnabled
 				"resource_public_access_default_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+					Description: "Node public access configuration. Parameter value description: false: Disabled. true: Enabled",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -245,7 +245,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "集群控制面及节点使用的的安全组。",
+					Description: "Security group used by the cluster control plane and nodes.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
@@ -254,7 +254,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SubnetIds
 				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "集群控制面在私有网络内通信的子网 ID。",
+					Description: "Subnet ID for cluster control plane communication within the private network.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
@@ -266,14 +266,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VpcId
 				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "集群控制面及部分节点的网络所在的私有网络（VPC）ID。",
+					Description: "Private network (VPC) ID where the cluster control plane and some nodes are located.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "集群控制面及部分节点的网络配置。",
+			Description: "Network configuration for the cluster control plane and some nodes.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -284,11 +284,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群 ID。",
+		//	  "description": "Cluster ID.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群 ID。",
+			Description: "Cluster ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -298,11 +298,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群创建时间。标准 RFC3339 格式的 UTC+0 时间。",
+		//	  "description": "Cluster creation time. Standard RFC3339 format, UTC+0.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群创建时间。标准 RFC3339 格式的 UTC+0 时间。",
+			Description: "Cluster creation time. Standard RFC3339 format, UTC+0.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -313,11 +313,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "集群删除保护，取值：false：（默认值）关闭删除保护。true：开启删除保护，不允许直接删除集群。",
+		//	  "description": "Cluster deletion protection. Values: false (default): Deletion protection is disabled. true: Deletion protection is enabled; the cluster cannot be deleted directly.",
 		//	  "type": "boolean"
 		//	}
 		"delete_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "集群删除保护，取值：false：（默认值）关闭删除保护。true：开启删除保护，不允许直接删除集群。",
+			Description: "Cluster deletion protection. Values: false (default): Deletion protection is disabled. true: Deletion protection is enabled; the cluster cannot be deleted directly.",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),
@@ -329,13 +329,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群描述。长度限制为 300 个字符以内。",
+		//	  "description": "Cluster description. Maximum length is 300 characters.",
 		//	  "maxLength": 300,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群描述。长度限制为 300 个字符以内。",
+			Description: "Cluster description. Maximum length is 300 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -349,30 +349,30 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IRSA（IAM Role for Service Account）能力相关参数配置。",
+		//	  "description": "IRSA (IAM Role for Service Account) capability parameter configuration",
 		//	  "properties": {
 		//	    "Audience": {
-		//	      "description": "接受令牌的标识符。",
+		//	      "description": "Identifier for accepting tokens",
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
-		//	      "description": "是否开启 IRSA 功能，参数值说明：true：开启,false：不开启",
+		//	      "description": "Whether to enable IRSA feature. Parameter values: true: enabled; false: not enabled.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Issuer": {
-		//	      "description": "OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。",
+		//	      "description": "OIDC (OpenID Connect) provider URL, the unique identifier for the OIDC provider.",
 		//	      "type": "string"
 		//	    },
 		//	    "JwksUrl": {
-		//	      "description": "JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。",
+		//	      "description": "JWKS (JSON Web Key Set) URL. The public keys in the file are used to verify any JWT (JSON Web Tokens) returned from the OIDC provider.",
 		//	      "type": "string"
 		//	    },
 		//	    "OidcTrn": {
-		//	      "description": "OIDC 提供商 TRN。",
+		//	      "description": "OIDC provider TRN.",
 		//	      "type": "string"
 		//	    },
 		//	    "OpenIdConfigUrl": {
-		//	      "description": "OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。",
+		//	      "description": "OIDC provider configuration document in JSON format, containing information about the OIDC provider.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -382,7 +382,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Audience
 				"audience": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "接受令牌的标识符。",
+					Description: "Identifier for accepting tokens",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -390,7 +390,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启 IRSA 功能，参数值说明：true：开启,false：不开启",
+					Description: "Whether to enable IRSA feature. Parameter values: true: enabled; false: not enabled.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -399,7 +399,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Issuer
 				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。",
+					Description: "OIDC (OpenID Connect) provider URL, the unique identifier for the OIDC provider.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -407,7 +407,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: JwksUrl
 				"jwks_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。",
+					Description: "JWKS (JSON Web Key Set) URL. The public keys in the file are used to verify any JWT (JSON Web Tokens) returned from the OIDC provider.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -415,7 +415,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: OidcTrn
 				"oidc_trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "OIDC 提供商 TRN。",
+					Description: "OIDC provider TRN.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -423,14 +423,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: OpenIdConfigUrl
 				"open_id_config_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。",
+					Description: "OIDC provider configuration document in JSON format, containing information about the OIDC provider.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "IRSA（IAM Role for Service Account）能力相关参数配置。",
+			Description: "IRSA (IAM Role for Service Account) capability parameter configuration",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -441,11 +441,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）",
+		//	  "description": "Cluster Kubernetes version in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version (for query use)",
 		//	  "type": "string"
 		//	}
 		"kubernetes_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）",
+			Description: "Cluster Kubernetes version in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version (for query use)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -455,11 +455,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。(创建使用)",
+		//	  "description": "Kubernetes version of the cluster, in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version. (For creation)",
 		//	  "type": "string"
 		//	}
 		"kubernetes_version_create": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。(创建使用)",
+			Description: "Kubernetes version of the cluster, in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version. (For creation)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -472,34 +472,34 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群的日志配置信息。",
+		//	  "description": "Cluster log configuration information.",
 		//	  "properties": {
 		//	    "LogProjectId": {
-		//	      "description": "集群的日志项目（Log Project）ID。 如果为空，表示集群的日志项目未被创建。",
+		//	      "description": "Cluster log project (Log Project) ID. If empty, the cluster log project has not been created.",
 		//	      "type": "string"
 		//	    },
 		//	    "LogSetups": {
-		//	      "description": "集群的日志选项信息。",
+		//	      "description": "Cluster log option information.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Enabled": {
-		//	            "description": "是否开启该日志选项，参数值说明：true：已开启。false：未开启。",
+		//	            "description": "Whether to enable this log option. Parameter values: true: enabled; false: not enabled.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "LogTopicId": {
-		//	            "description": "采集目标的TLS日志主题ID。 如果为空，表示对应日志的主题未被创建。",
+		//	            "description": "TLS log topic ID for the collection target. If empty, the corresponding log topic has not been created.",
 		//	            "type": "string"
 		//	          },
 		//	          "LogTtl": {
 		//	            "default": 30,
-		//	            "description": "日志在日志服务中的保存时间，单位为天。 3650 天表示永久存储。",
+		//	            "description": "Retention period of logs in log service, in days. 3650 days means permanent storage.",
 		//	            "maximum": 3650,
 		//	            "minimum": 1,
 		//	            "type": "integer"
 		//	          },
 		//	          "LogType": {
-		//	            "description": "当前开启的日志类型，参数值说明：Audit：集群审计日志。KubeApiServer：kube-apiserver 组件日志。KubeScheduler：kube-scheduler 组件日志。KubeControllerManager：kube-controller-manager 组件日志。",
+		//	            "description": "Currently enabled log types. Parameter values: Audit: cluster audit log; KubeApiServer: kube-apiserver component log; KubeScheduler: kube-scheduler component log; KubeControllerManager: kube-controller-manager component log.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -515,7 +515,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: LogProjectId
 				"log_project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "集群的日志项目（Log Project）ID。 如果为空，表示集群的日志项目未被创建。",
+					Description: "Cluster log project (Log Project) ID. If empty, the cluster log project has not been created.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -529,7 +529,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Enabled
 							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否开启该日志选项，参数值说明：true：已开启。false：未开启。",
+								Description: "Whether to enable this log option. Parameter values: true: enabled; false: not enabled.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -540,7 +540,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							// Property: LogTopicId
 							// Property: LogTtl
 							"log_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "日志在日志服务中的保存时间，单位为天。 3650 天表示永久存储。",
+								Description: "Retention period of logs in log service, in days. 3650 days means permanent storage.",
 								Optional:    true,
 								Computed:    true,
 								Default:     int64default.StaticInt64(30),
@@ -554,7 +554,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: LogType
 							"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "当前开启的日志类型，参数值说明：Audit：集群审计日志。KubeApiServer：kube-apiserver 组件日志。KubeScheduler：kube-scheduler 组件日志。KubeControllerManager：kube-controller-manager 组件日志。",
+								Description: "Currently enabled log types. Parameter values: Audit: cluster audit log; KubeApiServer: kube-apiserver component log; KubeScheduler: kube-scheduler component log; KubeControllerManager: kube-controller-manager component log.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -564,7 +564,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "集群的日志选项信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Cluster log option information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -572,7 +572,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "集群的日志配置信息。",
+			Description: "Cluster log configuration information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -583,11 +583,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群状态描述。",
+		//	  "description": "Cluster status description.",
 		//	  "type": "string"
 		//	}
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群状态描述。",
+			Description: "Cluster status description.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -597,20 +597,20 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监控配置信息。",
+		//	  "description": "Monitoring configuration information.",
 		//	  "properties": {
 		//	    "ComponentConfigs": {
-		//	      "description": "监控组件的配置列表。",
+		//	      "description": "List of monitoring component configurations.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "单个监控组件的配置，用于控制组件是否启用。",
+		//	        "description": "Configuration for a single monitoring component, used to control whether the component is enabled.",
 		//	        "properties": {
 		//	          "Enabled": {
-		//	            "description": "是否启用该监控组件，true 表示启用，false 表示禁用。",
+		//	            "description": "Whether to enable this monitoring component. true means enabled; false means disabled.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Name": {
-		//	            "description": "监控组件的名称，例如 'prometheus'、'grafana' 等。",
+		//	            "description": "Name of the monitoring component, such as 'prometheus', 'grafana', etc.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -620,11 +620,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "EnableMetricsExternalCollection": {
-		//	      "description": "是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。",
+		//	      "description": "Whether to enable external Prometheus to collect control plane component metrics for the cluster. Parameter values: true: enabled. false: not enabled.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "WorkspaceId": {
-		//	      "description": "监控数据所属的工作区 ID。",
+		//	      "description": "Workspace ID to which the monitoring data belongs.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -638,7 +638,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Enabled
 							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否启用该监控组件，true 表示启用，false 表示禁用。",
+								Description: "Whether to enable this monitoring component. true means enabled; false means disabled.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -647,7 +647,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "监控组件的名称，例如 'prometheus'、'grafana' 等。",
+								Description: "Name of the monitoring component, such as 'prometheus', 'grafana', etc.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -656,7 +656,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "监控组件的配置列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "List of monitoring component configurations.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -665,7 +665,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: EnableMetricsExternalCollection
 				"enable_metrics_external_collection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。",
+					Description: "Whether to enable external Prometheus to collect control plane component metrics for the cluster. Parameter values: true: enabled. false: not enabled.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -674,7 +674,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: WorkspaceId
 				"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "监控数据所属的工作区 ID。",
+					Description: "Workspace ID to which the monitoring data belongs.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -682,7 +682,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "监控配置信息。",
+			Description: "Monitoring configuration information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -693,13 +693,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群名称。同一个地域下，名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。",
+		//	  "description": "Cluster name. Must be unique within the same region. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length must be 2–64 characters.",
 		//	  "maxLength": 64,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群名称。同一个地域下，名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。",
+			Description: "Cluster name. Must be unique within the same region. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length must be 2–64 characters.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(2, 64),
@@ -709,30 +709,30 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群中各主状态下对应的节点数量统计。",
+		//	  "description": "Statistics of node counts for each main status in the cluster.",
 		//	  "properties": {
 		//	    "CreatingCount": {
-		//	      "description": "Phase=Creating的节点总数量。",
+		//	      "description": "Total number of nodes in Phase=Creating.",
 		//	      "type": "integer"
 		//	    },
 		//	    "DeletingCount": {
-		//	      "description": "Phase=Deleting的节点总数量。",
+		//	      "description": "Total number of nodes with Phase=Deleting.",
 		//	      "type": "integer"
 		//	    },
 		//	    "FailedCount": {
-		//	      "description": "Phase=Failed的节点总数量。",
+		//	      "description": "Total number of nodes with Phase=Failed.",
 		//	      "type": "integer"
 		//	    },
 		//	    "RunningCount": {
-		//	      "description": "Phase=Running的节点总数量。",
+		//	      "description": "Total number of nodes with Phase=Running.",
 		//	      "type": "integer"
 		//	    },
 		//	    "TotalCount": {
-		//	      "description": "节点总数量。",
+		//	      "description": "Total number of nodes.",
 		//	      "type": "integer"
 		//	    },
 		//	    "UpdatingCount": {
-		//	      "description": "Phase=Updating的节点总数量。",
+		//	      "description": "Total number of nodes in Phase=Updating.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -742,36 +742,36 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CreatingCount
 				"creating_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Creating的节点总数量。",
+					Description: "Total number of nodes in Phase=Creating.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DeletingCount
 				"deleting_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Deleting的节点总数量。",
+					Description: "Total number of nodes with Phase=Deleting.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: FailedCount
 				"failed_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Failed的节点总数量。",
+					Description: "Total number of nodes with Phase=Failed.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RunningCount
 				"running_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Running的节点总数量。",
+					Description: "Total number of nodes with Phase=Running.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TotalCount
 				"total_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "节点总数量。",
+					Description: "Total number of nodes.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UpdatingCount
 				"updating_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Updating的节点总数量。",
+					Description: "Total number of nodes in Phase=Updating.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "集群中各主状态下对应的节点数量统计。",
+			Description: "Statistics of node counts for each main status in the cluster.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -781,13 +781,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Pod 的网络配置。",
+		//	  "description": "Pod network configuration.",
 		//	  "properties": {
 		//	    "FlannelConfig": {
-		//	      "description": "Flannel 网络配置。",
+		//	      "description": "Flannel network configuration.",
 		//	      "properties": {
 		//	        "MaxPodsPerNode": {
-		//	          "description": "Flannel 模型容器网络的单节点 Pod 实例数量上限，取值：64（默认值）、16、32、128、256。",
+		//	          "description": "Maximum number of Pod instances per node for the Flannel container network model. Values: 64 (default), 16, 32, 128, 256.",
 		//	          "enum": [
 		//	            16,
 		//	            32,
@@ -798,7 +798,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "integer"
 		//	        },
 		//	        "PodCidrs": {
-		//	          "description": "Flannel 容器网络的 Pod CIDR。",
+		//	          "description": "Pod CIDR for Flannel container network.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -807,7 +807,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "SubnetIds": {
-		//	          "description": "Flannel 容器网络模型对应的 Pod 子网 ID 列表。",
+		//	          "description": "List of Pod subnet IDs for the Flannel container network model.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -819,7 +819,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "PodNetworkMode": {
-		//	      "description": "容器（Pod）网络模型（CNI），参数值说明：Flannel：Flannel 网络模型，独立的 Underlay 容器网络模型。VpcCniShared：VPC-CNI 网络模型，基于私有网络的弹性网卡 ENI 实现的 Underlay 容器网络模型。",
+		//	      "description": "Container (Pod) network model (CNI). Parameter values: Flannel: Flannel network model, an independent underlay container network model. VpcCniShared: VPC-CNI network model, an underlay container network model implemented with ENI (Elastic Network Interface) on a private network.",
 		//	      "enum": [
 		//	        "Flannel",
 		//	        "VpcCniShared"
@@ -827,10 +827,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "VpcCniConfig": {
-		//	      "description": "VPC-CNI 网络配置。",
+		//	      "description": "VPC-CNI network configuration.",
 		//	      "properties": {
 		//	        "SubnetIds": {
-		//	          "description": "VPC-CNI 容器网络模型对应的 Pod 子网 ID 列表。",
+		//	          "description": "List of Pod subnet IDs for the VPC-CNI container network model.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -839,7 +839,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "TrunkEniEnabled": {
-		//	          "description": "是否开启 VPC-CNI 容器网络模型的 Trunk 模式。",
+		//	          "description": "Whether to enable Trunk mode for the VPC-CNI container network model",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
@@ -858,7 +858,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: MaxPodsPerNode
 						"max_pods_per_node": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Flannel 模型容器网络的单节点 Pod 实例数量上限，取值：64（默认值）、16、32、128、256。",
+							Description: "Maximum number of Pod instances per node for the Flannel container network model. Values: 64 (default), 16, 32, 128, 256.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -878,7 +878,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						// Property: PodCidrs
 						"pod_cidrs": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "Flannel 容器网络的 Pod CIDR。",
+							Description: "Pod CIDR for Flannel container network.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -889,7 +889,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SubnetIds
 						"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "Flannel 容器网络模型对应的 Pod 子网 ID 列表。",
+							Description: "List of Pod subnet IDs for the Flannel container network model.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -897,7 +897,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Flannel 网络配置。",
+					Description: "Flannel network configuration.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -906,7 +906,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PodNetworkMode
 				"pod_network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "容器（Pod）网络模型（CNI），参数值说明：Flannel：Flannel 网络模型，独立的 Underlay 容器网络模型。VpcCniShared：VPC-CNI 网络模型，基于私有网络的弹性网卡 ENI 实现的 Underlay 容器网络模型。",
+					Description: "Container (Pod) network model (CNI). Parameter values: Flannel: Flannel network model, an independent underlay container network model. VpcCniShared: VPC-CNI network model, an underlay container network model implemented with ENI (Elastic Network Interface) on a private network.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -927,7 +927,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SubnetIds
 						"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "VPC-CNI 容器网络模型对应的 Pod 子网 ID 列表。",
+							Description: "List of Pod subnet IDs for the VPC-CNI container network model.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -936,7 +936,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TrunkEniEnabled
 						"trunk_eni_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "是否开启 VPC-CNI 容器网络模型的 Trunk 模式。",
+							Description: "Whether to enable Trunk mode for the VPC-CNI container network model",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -945,7 +945,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "VPC-CNI 网络配置。",
+					Description: "VPC-CNI network configuration.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -953,7 +953,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Pod 的网络配置。",
+			Description: "Pod network configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -964,12 +964,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群所属项目名称，一个集群只能归属于一个项目。只能包含英文字母、数字、下划线（_）、英文句点（.）和中划线（-）。长度限制在 64 个字符以内。默认值：default。",
+		//	  "description": "Project name to which the cluster belongs. A cluster can belong to only one project. Only English letters, numbers, underscores (_), periods (.), and hyphens (-) are allowed. Maximum length: 64 characters. Default: default.",
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群所属项目名称，一个集群只能归属于一个项目。只能包含英文字母、数字、下划线（_）、英文句点（.）和中划线（-）。长度限制在 64 个字符以内。默认值：default。",
+			Description: "Project name to which the cluster belongs. A cluster can belong to only one project. Only English letters, numbers, underscores (_), periods (.), and hyphens (-) are allowed. Maximum length: 64 characters. Default: default.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -984,10 +984,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务的网络配置。",
+		//	  "description": "Network configuration for the service.",
 		//	  "properties": {
 		//	    "ServiceCidrsv4": {
-		//	      "description": "Kubernetes 服务（Service）暴露的 IPv4 私有网络地址。",
+		//	      "description": "IPv4 private network address exposed by Kubernetes Service.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1006,7 +1006,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ServiceCidrsv4
 				"service_cidrsv_4": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "Kubernetes 服务（Service）暴露的 IPv4 私有网络地址。",
+					Description: "IPv4 private network address exposed by Kubernetes Service.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
@@ -1017,7 +1017,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "服务的网络配置。",
+			Description: "Network configuration for the service.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1029,11 +1029,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群源地域。",
+		//	  "description": "Cluster source region",
 		//	  "type": "string"
 		//	}
 		"source_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群源地域。",
+			Description: "Cluster source region",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1044,15 +1044,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群状态。",
+		//	  "description": "Cluster status.",
 		//	  "properties": {
 		//	    "Conditions": {
-		//	      "description": "状态条件列表",
+		//	      "description": "Status condition list",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Type": {
-		//	            "description": "条件类型",
+		//	            "description": "Condition type",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1062,7 +1062,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
-		//	      "description": "集群状态阶段",
+		//	      "description": "Cluster status phase.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1076,21 +1076,21 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "条件类型",
+								Description: "Condition type",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "状态条件列表\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Status condition list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "集群状态阶段",
+					Description: "Cluster status phase.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "集群状态。",
+			Description: "Cluster status.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -1100,16 +1100,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群的标签。",
+		//	  "description": "Cluster tags.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1126,7 +1126,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1138,7 +1138,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1147,7 +1147,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "集群的标签。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Cluster tags.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1158,11 +1158,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群类型。",
+		//	  "description": "Cluster type.",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群类型。",
+			Description: "Cluster type.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1172,11 +1172,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群最近一次更新的时间。标准 RFC3339 格式的 UTC+0 时间。",
+		//	  "description": "Last update time of the cluster. Standard RFC3339 format, UTC+0.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群最近一次更新的时间。标准 RFC3339 格式的 UTC+0 时间。",
+			Description: "Last update time of the cluster. Standard RFC3339 format, UTC+0.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1194,7 +1194,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "容器服务通过深度融合新一代云原生技术，提供以容器为核心的高性能 Kubernetes 容器集群管理服务。在云端一键构建高可用 Kubernetes 集群，并实现容器化应用的可视化全生命周期管理，助力用户快速构建容器化应用。",
+		Description: "Container Service deeply integrates next-generation cloud-native technologies to provide high-performance Kubernetes cluster management centered on containers. Build highly available Kubernetes clusters in the cloud with one click and achieve visualized full lifecycle management of containerized applications, helping users quickly build containerized applications.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -30,24 +30,24 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "客户端信息。",
+		//	  "description": "Client information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "客户端信息。",
+		//	    "description": "Client information.",
 		//	    "properties": {
 		//	      "Ip": {
-		//	        "description": "客户端的私有网络 IP 地址。",
+		//	        "description": "Client's private network IP address.",
 		//	        "type": "string"
 		//	      },
 		//	      "ProtocolVersion": {
-		//	        "description": "挂载协议版本号。取值：NFSv3。",
+		//	        "description": "Mount protocol version. Value: NFSv3.",
 		//	        "enum": [
 		//	          "NFSv3"
 		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "VpcName": {
-		//	        "description": "私有网络名称。",
+		//	        "description": "Private network name.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -61,22 +61,22 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Ip
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "客户端的私有网络 IP 地址。",
+						Description: "Client's private network IP address.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ProtocolVersion
 					"protocol_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "挂载协议版本号。取值：NFSv3。",
+						Description: "Mount protocol version. Value: NFSv3.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VpcName
 					"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "私有网络名称。",
+						Description: "Private network name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "客户端信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Client information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -86,11 +86,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点创建时间。",
+		//	  "description": "Mount point creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "挂载点创建时间。",
+			Description: "Mount point creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -100,11 +100,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNS 地址。",
+		//	  "description": "DNS address.",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "DNS 地址。",
+			Description: "DNS address.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -114,11 +114,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统 ID。",
+		//	  "description": "File system ID.",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统 ID。",
+			Description: "File system ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -128,11 +128,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点地址。",
+		//	  "description": "Mount point address.",
 		//	  "type": "string"
 		//	}
 		"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "挂载点地址。",
+			Description: "Mount point address.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -142,11 +142,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点 ID。",
+		//	  "description": "Mount point ID.",
 		//	  "type": "string"
 		//	}
 		"mount_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "挂载点 ID。",
+			Description: "Mount point ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -156,33 +156,33 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点名称。",
+		//	  "description": "Mount point name.",
 		//	  "type": "string"
 		//	}
 		"mount_point_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "挂载点名称。",
+			Description: "Mount point name.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionGroup
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点绑定的权限组信息。",
+		//	  "description": "Permission group information bound to the mount point.",
 		//	  "properties": {
 		//	    "CreateTime": {
-		//	      "description": "权限组创建时间。",
+		//	      "description": "Permission group creation time.",
 		//	      "type": "string"
 		//	    },
 		//	    "Description": {
-		//	      "description": "权限组描述信息。",
+		//	      "description": "Permission group description information.",
 		//	      "type": "string"
 		//	    },
 		//	    "FileSystemCount": {
-		//	      "description": "关联该权限组的文件系统数量。",
+		//	      "description": "Number of file systems associated with this permission group.",
 		//	      "type": "integer"
 		//	    },
 		//	    "FileSystemType": {
-		//	      "description": "文件系统类型。取值说明如下：Extreme：NAS 极速型。Capacity：NAS 容量型。Cache：NAS 缓存型。",
+		//	      "description": "File system type. Value explanation: Extreme: NAS extreme type. Capacity: NAS capacity type. Cache: NAS cache type.",
 		//	      "enum": [
 		//	        "Extreme",
 		//	        "Capacity",
@@ -191,21 +191,21 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "MountPoints": {
-		//	      "description": "使用该权限组的挂载点信息。",
+		//	      "description": "Information about mount points that use this permission group.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "挂载点信息。",
+		//	        "description": "Mount point information.",
 		//	        "properties": {
 		//	          "FileSystemId": {
-		//	            "description": "文件系统 ID。",
+		//	            "description": "File system ID.",
 		//	            "type": "string"
 		//	          },
 		//	          "MountPointId": {
-		//	            "description": "挂载点 ID。",
+		//	            "description": "Mount point ID.",
 		//	            "type": "string"
 		//	          },
 		//	          "MountPointName": {
-		//	            "description": "挂载点名称。",
+		//	            "description": "Mount point name.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -215,11 +215,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "PermissionGroupName": {
-		//	      "description": "权限组名称。",
+		//	      "description": "Permission group name.",
 		//	      "type": "string"
 		//	    },
 		//	    "PermissionRuleCount": {
-		//	      "description": "权限规则数量。",
+		//	      "description": "Number of permission rules.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -229,22 +229,22 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CreateTime
 				"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "权限组创建时间。",
+					Description: "Permission group creation time.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "权限组描述信息。",
+					Description: "Permission group description information.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: FileSystemCount
 				"file_system_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "关联该权限组的文件系统数量。",
+					Description: "Number of file systems associated with this permission group.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: FileSystemType
 				"file_system_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "文件系统类型。取值说明如下：Extreme：NAS 极速型。Capacity：NAS 容量型。Cache：NAS 缓存型。",
+					Description: "File system type. Value explanation: Extreme: NAS extreme type. Capacity: NAS capacity type. Cache: NAS cache type.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MountPoints
@@ -253,36 +253,36 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: FileSystemId
 							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "文件系统 ID。",
+								Description: "File system ID.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: MountPointId
 							"mount_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "挂载点 ID。",
+								Description: "Mount point ID.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: MountPointName
 							"mount_point_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "挂载点名称。",
+								Description: "Mount point name.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "使用该权限组的挂载点信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Information about mount points that use this permission group.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PermissionGroupName
 				"permission_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "权限组名称。",
+					Description: "Permission group name.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PermissionRuleCount
 				"permission_rule_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "权限规则数量。",
+					Description: "Number of permission rules.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "挂载点绑定的权限组信息。",
+			Description: "Permission group information bound to the mount point.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -292,18 +292,18 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限组 ID。",
+		//	  "description": "Permission group ID.",
 		//	  "type": "string"
 		//	}
 		"permission_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限组 ID。",
+			Description: "Permission group ID.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点状态。取值：Running：运行中。Creating：创建中。Updating：更新中。Error：异常。Deleting：删除中。DeleteError：删除异常。Deleted：已删除。Stopped：已停止。",
+		//	  "description": "Mount point status. Values: Running: Running. Creating: Creating. Updating: Updating. Error: Error. Deleting: Deleting. DeleteError: Delete error. Deleted: Deleted. Stopped: Stopped.",
 		//	  "enum": [
 		//	    "Running",
 		//	    "Creating",
@@ -317,7 +317,7 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "挂载点状态。取值：Running：运行中。Creating：创建中。Updating：更新中。Error：异常。Deleting：删除中。DeleteError：删除异常。Deleted：已删除。Stopped：已停止。",
+			Description: "Mount point status. Values: Running: Running. Creating: Creating. Updating: Updating. Error: Error. Deleting: Deleting. DeleteError: Delete error. Deleted: Deleted. Stopped: Stopped.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -327,11 +327,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网 ID。",
+		//	  "description": "Subnet ID.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网 ID。",
+			Description: "Subnet ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -341,11 +341,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网名称。",
+		//	  "description": "Subnet name.",
 		//	  "type": "string"
 		//	}
 		"subnet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网名称。",
+			Description: "Subnet name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -355,11 +355,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "挂载点更新时间。",
+		//	  "description": "Mount point update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "挂载点更新时间。",
+			Description: "Mount point update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -369,11 +369,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络 ID。",
+		//	  "description": "Private network ID.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络 ID。",
+			Description: "Private network ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -383,11 +383,11 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络名称。",
+		//	  "description": "Private network name.",
 		//	  "type": "string"
 		//	}
 		"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络名称。",
+			Description: "Private network name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -405,7 +405,7 @@ func mountPointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "挂载点是 NAS 文件系统在网络环境中的连接点。NAS 文件系统需要挂载在计算节点中才能完成数据的访问与存储。挂载是将计算节点与 NAS 文件系统相连接的操作。",
+		Description: "Mount point is the connection point for the NAS file system in a network environment. The NAS file system must be mounted on a compute node to enable data access and storage. Mounting is the operation that connects the compute node to the NAS file system.",
 		Version:     1,
 		Attributes:  attributes,
 	}

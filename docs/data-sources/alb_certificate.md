@@ -21,25 +21,25 @@ Data Source schema for Volcengine::ALB::Certificate
 
 ### Read-Only
 
-- `certificate_id` (String) 证书ID。
-- `certificate_name` (String) 证书名称，长度限制为1 ～ 128个字符，必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。
-- `certificate_type` (String) 证书类型，取值：CA：CA证书、Server：服务器证书。
-- `created_time` (String) 证书创建时间。
-- `description` (String) 证书描述。
-- `domain_name` (String) 证书域名。
-- `expired_at` (String) 证书过期时间。
-- `listeners` (Set of String) 证书关联的监听器列表。
-- `private_key` (String) 服务器证书的私钥，当证书类型为Server时必填。
-- `project_name` (String) 项目名称。
-- `public_key` (String) 服务器证书的公钥。
-- `san` (String) 证书扩展域名列表，用英文',' 分隔多个域名， 包含(commonName,DnsName,IP)。
-- `status` (String) 证书的状态，取值为：Creating：创建中。Active：运行中。Deleting：删除中。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
+- `certificate_id` (String) Certificate ID
+- `certificate_name` (String) Certificate name. Length must be between 1 and 128 characters, start with a letter or Chinese character, and may include numbers, periods (.), underscores (_), and hyphens (-)
+- `certificate_type` (String) Certificate type. Options: CA: CA certificate; Server: server certificate
+- `created_time` (String) Certificate creation time
+- `description` (String) Certificate description
+- `domain_name` (String) Certificate domain name
+- `expired_at` (String) Certificate expiration time
+- `listeners` (Set of String) List of listeners associated with the certificate
+- `private_key` (String) Server certificate private key. Required when certificate type is Server
+- `project_name` (String) Project name
+- `public_key` (String) Server certificate public key
+- `san` (String) Certificate subject alternative name list. Use English ',' to separate multiple domain names. Includes (commonName, DnsName, IP)
+- `status` (String) Certificate status. Options: Creating: creating; Active: active; Deleting: deleting
+- `tags` (Attributes Set) Tag list (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key
+- `value` (String) User tag value

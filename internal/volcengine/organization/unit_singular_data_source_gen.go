@@ -26,132 +26,132 @@ func unitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeleteUk
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除标识。",
+		//	  "description": "Deletion flag.",
 		//	  "type": "string"
 		//	}
 		"delete_uk": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除标识。",
+			Description: "Deletion flag.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeletedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除时间。",
+		//	  "description": "Deletion time.",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除时间。",
+			Description: "Deletion time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Depth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "深度。",
+		//	  "description": "Depth.",
 		//	  "type": "integer"
 		//	}
 		"depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "深度。",
+			Description: "Depth.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述。",
+		//	  "description": "Description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述。",
+			Description: "Description.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织单元名称。",
+		//	  "description": "Organizational unit name.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织单元名称。",
+			Description: "Organizational unit name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OrgID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织ID。",
+		//	  "description": "Organization ID.",
 		//	  "type": "string"
 		//	}
 		"org_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织ID。",
+			Description: "Organization ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OrgType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织类型。企业组织： 1",
+		//	  "description": "Organization type. Enterprise organization: 1",
 		//	  "type": "integer"
 		//	}
 		"org_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "组织类型。企业组织： 1",
+			Description: "Organization type. Enterprise organization: 1",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OrgUnitId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织单元ID。",
+		//	  "description": "Organizational unit ID.",
 		//	  "type": "string"
 		//	}
 		"org_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织单元ID。",
+			Description: "Organizational unit ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "管理员ID。",
+		//	  "description": "Administrator ID.",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "管理员ID。",
+			Description: "Administrator ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ParentId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "父单元Id。",
+		//	  "description": "Parent unit ID.",
 		//	  "type": "string"
 		//	}
 		"parent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "父单元Id。",
+			Description: "Parent unit ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

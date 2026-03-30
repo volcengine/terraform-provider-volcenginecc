@@ -34,11 +34,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否启动路径一致模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是。开启后，TR转发流量至该VPC连接时，将选择相同的可用区连接点转发请求流量和返回流量。false：否。",
+		//	  "description": "Whether to enable path consistency mode. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. When enabled, TR forwarding traffic to this VPC connection will select the same availability zone connection point for both request and return traffic. false: No.",
 		//	  "type": "boolean"
 		//	}
 		"appliance_mode_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否启动路径一致模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是。开启后，TR转发流量至该VPC连接时，将选择相同的可用区连接点转发请求流量和返回流量。false：否。",
+			Description: "Whether to enable path consistency mode. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. When enabled, TR forwarding traffic to this VPC connection will select the same availability zone connection point for both request and return traffic. false: No.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -49,20 +49,20 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接列表。",
+		//	  "description": "Network instance connection list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "NetworkInterfaceId": {
-		//	        "description": "连接点的网卡ID。",
+		//	        "description": "Network interface card ID of the connection point.",
 		//	        "type": "string"
 		//	      },
 		//	      "SubnetId": {
-		//	        "description": "连接点的子网ID。",
+		//	        "description": "Subnet ID of the connection point.",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "连接点的可用区ID。",
+		//	        "description": "Availability zone ID of the connection point.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -81,28 +81,28 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NetworkInterfaceId
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接点的子网ID。",
+						Description: "Subnet ID of the connection point.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接点的可用区ID。",
+						Description: "Availability zone ID of the connection point.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "网络实例连接列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Network instance connection list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AutoPublishRouteEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否自动同步TR路由到网络实例路由表中。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是，表示系统会自动同步该网络实例连接关联转发的TR路由表中的路由条目到网络实例的路由表中，仅当该参数配置为true，且网络实例连接关联转发的TR路由表中存在路由条目时，系统才会自动同步TR路由到网络实例的路由表中。false（默认值）：否。",
+		//	  "description": "Whether to automatically synchronize TR routes to the network instance route table. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. The system will automatically synchronize route entries from the TR route table associated with this network instance connection to the network instance's route table. The system will only synchronize TR routes if this parameter is set to true and there are route entries in the associated TR route table. false (default): No.",
 		//	  "type": "boolean"
 		//	}
 		"auto_publish_route_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否自动同步TR路由到网络实例路由表中。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是，表示系统会自动同步该网络实例连接关联转发的TR路由表中的路由条目到网络实例的路由表中，仅当该参数配置为true，且网络实例连接关联转发的TR路由表中存在路由条目时，系统才会自动同步TR路由到网络实例的路由表中。false（默认值）：否。",
+			Description: "Whether to automatically synchronize TR routes to the network instance route table. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. The system will automatically synchronize route entries from the TR route table associated with this network instance connection to the network instance's route table. The system will only synchronize TR routes if this parameter is set to true and there are route entries in the associated TR route table. false (default): No.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -113,11 +113,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的带宽上限，单位为Gbps。",
+		//	  "description": "Maximum bandwidth for the network instance connection, in Gbps.",
 		//	  "type": "integer"
 		//	}
 		"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的带宽上限，单位为Gbps。",
+			Description: "Maximum bandwidth for the network instance connection, in Gbps.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -127,11 +127,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -141,12 +141,12 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+		//	  "description": "Description of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+			Description: "Description of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -160,11 +160,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启IPv6功能。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是。false：否。",
+		//	  "description": "Whether to enable IPv6. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. false: No.",
 		//	  "type": "boolean"
 		//	}
 		"ipv_6_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启IPv6功能。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是。false：否。",
+			Description: "Whether to enable IPv6. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. false: No.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -175,11 +175,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+		//	  "description": "Network instance connection status. Creating: Creating. Deleting: Deleting. Pending: Configuring. Available: Available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。",
+			Description: "Network instance connection status. Creating: Creating. Deleting: Deleting. Pending: Configuring. Available: Available.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -189,16 +189,16 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "Tag key for user tag.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "Tag value for user tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -215,7 +215,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "Tag key for user tag.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -227,7 +227,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "Tag value for user tag.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -236,7 +236,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -247,11 +247,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的ID。",
+		//	  "description": "Network instance connection ID.",
 		//	  "type": "string"
 		//	}
 		"transit_router_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的ID。",
+			Description: "Network instance connection ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -261,12 +261,12 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络实例连接的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为网络实例连接的ID。",
+		//	  "description": "Name of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, the default is the network instance connection ID.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"transit_router_attachment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络实例连接的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为网络实例连接的ID。",
+			Description: "Name of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, the default is the network instance connection ID.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -280,11 +280,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的ID。",
+		//	  "description": "Transit router instance ID.",
 		//	  "type": "string"
 		//	}
 		"transit_router_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的ID。",
+			Description: "Transit router instance ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -294,11 +294,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -308,11 +308,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络实例的ID。",
+		//	  "description": "Private network instance ID.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络实例的ID。",
+			Description: "Private network instance ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -330,7 +330,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "通过在私有网络和中转路由器之间建立连接，可以实现私有网络与中转路由器的私网互通。",
+		Description: "By establishing a connection between the private network and the transit router, you can enable private network communication between the private network and the transit router.",
 		Version:     1,
 		Attributes:  attributes,
 	}

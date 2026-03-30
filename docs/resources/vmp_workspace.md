@@ -2,24 +2,28 @@
 page_title: "volcenginecc_vmp_workspace Resource - terraform-provider-volcenginecc"
 subcategory: "VMP"
 description: |-
-  工作区（Workspace）是 VMP 服务中采集数据和规则的抽象整合，为用户提供物理隔离或逻辑隔离的 Prometheus 能力。在 VMP 服务中可创建不同的工作区，不同工作区中的数据彼此隔离。
+  Workspace is an abstract integration of data collection and rules in the VMP service, providing users with physical or logical isolation for Prometheus capabilities. You can create different workspaces in the VMP service, and data in different workspaces is isolated from each other
 ---
 
 # volcenginecc_vmp_workspace (Resource)
 
-工作区（Workspace）是 VMP 服务中采集数据和规则的抽象整合，为用户提供物理隔离或逻辑隔离的 Prometheus 能力。在 VMP 服务中可创建不同的工作区，不同工作区中的数据彼此隔离。
+Workspace is an abstract integration of data collection and rules in the VMP service, providing users with physical or logical isolation for Prometheus capabilities. You can create different workspaces in the VMP service, and data in different workspaces is isolated from each other
 
 ## Example Usage
 
 ```terraform
 resource "volcenginecc_vmp_workspace" "WorkspaceDemo" {
-  username                  = "WorkspaceDemo"
-  password                  = "***********"
-  name                      = "WorkspaceDemo"
-  description               = "WorkspaceDemo"
+  auth_type                 = "BearerToken"
+  bearer_token              = "M3cSN7gssM09-6wO8vdqo_xxxxxxxx"
   delete_protection_enabled = false
-  instance_type_id          = "vmp.standard.xxx"
+  description               = "test workspace"
+  instance_type_id          = "vmp.standard.30d"
+  name                      = "terraform_test_BearerToken"
   project_name              = "default"
+  public_access_enabled     = true
+  public_query_bandwidth    = 2
+  public_write_bandwidth    = 50
+  search_latency_offset     = "32s"
   tags = [
     {
       key   = "env"
@@ -34,40 +38,63 @@ resource "volcenginecc_vmp_workspace" "WorkspaceDemo" {
 
 ### Required
 
-- `instance_type_id` (String) 工作区规格,vmp.standard.15d：15 天存储时长工作区。vmp.standard.30d：30 天存储时长工作区。vmp.standard.90d：90 天存储时长工作区。vmp.standard.180d：180 天存储时长工作区。vmp.standard.1y：1 年存储时长工作区。
-- `name` (String) 工作区名称，字符串形式，长度限制为 1～100。
+- `instance_type_id` (String) Workspace specifications: vmp.standard.15d: workspace with 15 days storage duration. vmp.standard.30d: workspace with 30 days storage duration. vmp.standard.90d: workspace with 90 days storage duration. vmp.standard.180d: workspace with 180 days storage duration. vmp.standard.1y: workspace with 1 year storage duration
+- `name` (String) Workspace name, string, length limit 1–100
 
 ### Optional
 
-- `delete_protection_enabled` (Boolean) 是否开启工作区删除保护,true：开启，false：关闭。
-- `description` (String) 工作区描述信息，字符串形式，长度限制为 0～200。
-- `password` (String) 工作区 BasicAuth 密码。
-- `project_name` (String) 项目名称。
-- `tags` (Attributes Set) 工作区标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `username` (String) 工作区 BasicAuth 用户名。
+- `auth_type` (String) Workspace authentication type. Options: BasicAuth: Basic authentication, requires Username and Password for authentication. BearerToken: Token authentication, requires BearerToken for authentication. None: No custom authentication required. Note: When the authentication type is set to None, AK/SK authentication is used by default.
+- `bearer_token` (String) Workspace Bearer Token. Note: Configure this parameter only when the AuthType parameter is set to BearerToken.
+- `delete_protection_enabled` (Boolean) Enable workspace deletion protection: true for enabled, false for disabled
+- `description` (String) Workspace description, string, length limit 0–200
+- `password` (String) Workspace BasicAuth password
+- `project_name` (String) Project name
+- `public_access_enabled` (Boolean) Whether to enable workspace public access capability. true: enabled, false: disabled.
+- `public_query_bandwidth` (Number) Workspace public Query bandwidth (Mbps).
+- `public_write_bandwidth` (Number) Workspace public RemoteWrite bandwidth (Mbps).
+- `quota` (Attributes) Workspace quota details (see [below for nested schema](#nestedatt--quota))
+- `search_latency_offset` (String) Workspace public Query search latency offset.
+- `tags` (Attributes Set) Workspace tags
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `username` (String) Workspace BasicAuth username
 
 ### Read-Only
 
-- `create_time` (String) 工作区创建时间，RFC3339 格式。
+- `create_time` (String) Workspace creation time, RFC3339 format
 - `id` (String) Uniquely identifies the resource.
-- `instance_type` (Attributes) 工作区规格详情。 (see [below for nested schema](#nestedatt--instance_type))
-- `overdue_reclaim_time` (String) 工作区预期欠费回收时间，RFC3339 格式。
-- `prometheus_push_intranet_endpoint` (String) 工作区 Push Gateway URL 地址。
-- `prometheus_query_intranet_endpoint` (String) 工作区 Query URL 地址。
-- `prometheus_write_intranet_endpoint` (String) 工作区 RemoteWrite URL 地址。
-- `quota` (Attributes) 工作区配额详情。 (see [below for nested schema](#nestedatt--quota))
-- `status` (String) 工作区状态，取值：Creating：创建中 Active：正常 Updating：更新中 Deleting：删除中 OverdueShutted：欠费关停 Resuming：恢复中 Error：错误。
-- `usage` (Attributes) 工作区用量。 (see [below for nested schema](#nestedatt--usage))
-- `workspace_id` (String) 工作区Id。
+- `instance_type` (Attributes) Workspace specification details (see [below for nested schema](#nestedatt--instance_type))
+- `overdue_reclaim_time` (String) Workspace expected overdue recovery time, RFC3339 format
+- `prometheus_push_endpoint` (String) Workspace public Push Gateway URL address.
+- `prometheus_push_intranet_endpoint` (String) Workspace Push Gateway URL address
+- `prometheus_query_endpoint` (String) Workspace public Query URL address.
+- `prometheus_query_intranet_endpoint` (String) Workspace Query URL address
+- `prometheus_write_endpoint` (String) Workspace public RemoteWrite URL address.
+- `prometheus_write_intranet_endpoint` (String) Workspace RemoteWrite URL address
+- `status` (String) Workspace status. Values: Creating: creating Active: active Updating: updating Deleting: deleting OverdueShutted: overdue shutdown Resuming: resuming Error: error
+- `usage` (Attributes) Workspace usage (see [below for nested schema](#nestedatt--usage))
+- `workspace_id` (String) Workspace ID
+
+<a id="nestedatt--quota"></a>
+### Nested Schema for `quota`
+
+Optional:
+
+- `active_series` (Number) Maximum active time series count. Integer, default range is 1–50000000
+- `ingest_samples_per_second` (Number) Metric ingestion rate, i.e., maximum samples written per second. Integer, default range is 1–5000000
+- `public_query_bandwidth` (Number) Workspace public Query bandwidth (Mbps).
+- `public_write_bandwidth` (Number) Workspace public RemoteWrite bandwidth (Mbps).
+- `query_per_second` (Number) Maximum query QPS. Integer, default range is 1–500
+- `scan_samples_per_second` (Number) Maximum samples scanned per second. Integer, default range is 1–1000000000
+- `scan_series_per_second` (Number) Maximum time series scanned per second. Integer, default range is 1–200000
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 
 <a id="nestedatt--instance_type"></a>
@@ -75,28 +102,38 @@ Optional:
 
 Read-Only:
 
-- `active_series` (Number) 最大活跃时序数。
-- `availability_zone_replicas` (Number) 可用区（az）数。
-- `downsampling_periods` (Set of String) 降采样策略。
-- `ingest_samples_per_second` (Number) 最大每秒写入样本数。
-- `query_concurrency` (Number) 最大查询并发数。
-- `query_per_second` (Number) 最大查询 QPS。
-- `replicas_per_zone` (Number) 每个可用区（az）的数据副本数。
-- `retention_period` (String) 最长数据保留时间。
-- `scan_samples_per_second` (Number) 最大每秒扫描样本数。
-- `scan_series_per_second` (Number) 最大每秒扫描时序数。
+- `active_series` (Number) Maximum active time series count
+- `availability_zone_replicas` (Number) Number of availability zones (az)
+- `calculate_price_params` (Attributes Set) Billing parameter list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--instance_type--calculate_price_params))
+- `downsampling_periods` (Set of String) Downsampling policy
+- `ingest_samples_per_second` (Number) Maximum samples written per second
+- `query_concurrency` (Number) Maximum query concurrency
+- `query_per_second` (Number) Maximum query QPS
+- `replicas_per_zone` (Number) Number of data replicas per availability zone (az)
+- `retention_period` (String) Maximum data retention period
+- `scan_samples_per_second` (Number) Maximum samples scanned per second
+- `scan_series_per_second` (Number) Maximum time series scanned per second
 
-
-<a id="nestedatt--quota"></a>
-### Nested Schema for `quota`
+<a id="nestedatt--instance_type--calculate_price_params"></a>
+### Nested Schema for `instance_type.calculate_price_params`
 
 Read-Only:
 
-- `active_series` (Number) 最大活跃时序数。整数形式，默认取值范围为 1～50000000。
-- `ingest_samples_per_second` (Number) 指标摄入速率，即最大每秒写入样本数。整数形式，默认取值范围为 1～5000000。
-- `query_per_second` (Number) 最大查询 QPS。整数形式，默认取值范围为 1～500。
-- `scan_samples_per_second` (Number) 最大每秒扫描样本数。整数形式，默认取值范围为 1～1000000000。
-- `scan_series_per_second` (Number) 最大每秒扫描时序数。整数形式，默认取值范围为 1～200000。
+- `cal_charge_item_list` (Attributes Set) Billing item list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--instance_type--calculate_price_params--cal_charge_item_list))
+- `configuration_code` (String) Configuration item code.
+- `period` (String) Billing cycle.
+
+<a id="nestedatt--instance_type--calculate_price_params--cal_charge_item_list"></a>
+### Nested Schema for `instance_type.calculate_price_params.cal_charge_item_list`
+
+Read-Only:
+
+- `attr_value` (String) Billing item attribute value.
+- `charge_item_code` (String) Billing item code.
+
+
 
 
 <a id="nestedatt--usage"></a>
@@ -104,8 +141,8 @@ Read-Only:
 
 Read-Only:
 
-- `active_series` (Number) 活跃时序数。
-- `ingested_samples_per_second` (Number) 每秒写入样本数。
+- `active_series` (Number) Active time series count
+- `ingested_samples_per_second` (Number) Samples written per second
 
 ## Import
 

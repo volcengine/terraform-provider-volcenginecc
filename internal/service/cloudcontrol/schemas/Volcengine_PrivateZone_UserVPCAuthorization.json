@@ -1,0 +1,68 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AccountID",
+    "/properties/AuthType",
+    "/properties/VerifyCode"
+  ],
+  "description": "Account authorization management.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "private_zone:CreateAuthorizedUser",
+        "private_zone:ListAuthorizedUsers"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "private_zone:DeleteAuthorizedUser",
+        "private_zone:ListAuthorizedUsers"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "private_zone:ListAuthorizedUsers"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "private_zone:ListAuthorizedUsers"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AccountID"
+  ],
+  "properties": {
+    "AccountID": {
+      "description": "Account.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AuthType": {
+      "description": "Verification method. 0: Use enterprise organization verification. 1: Use verification code.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Status": {
+      "description": "Account status. Normal: The account is in the enterprise organization. Exited: The account has exited the enterprise organization.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "VerifyCode": {
+      "description": "Verification code. This parameter is required when AuthType is set to 1.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Status"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::PrivateZone::UserVPCAuthorization",
+  "writeOnlyProperties": [
+    "/properties/AuthType",
+    "/properties/VerifyCode"
+  ]
+}

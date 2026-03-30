@@ -26,202 +26,202 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥创建时间。",
+		//	  "description": "Key creation time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "密钥创建时间。",
+			Description: "Key creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥描述:长度为 0 - 8192 个字符。",
+		//	  "description": "Key description: Length 0–8192 characters.",
 		//	  "maxLength": 8192,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥描述:长度为 0   - 8192 个字符。",
+			Description: "Key description: Length 0–8192 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyArchiveOperation
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户主密钥归档操作（用户输入1=归档，2=取消归档）",
+		//	  "description": "User master key archive operation (enter 1 to archive, 2 to unarchive).",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"key_archive_operation": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "用户主密钥归档操作（用户输入1=归档，2=取消归档）",
+			Description: "User master key archive operation (enter 1 to archive, 2 to unarchive).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyEnableOperation
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户主密钥启用操作（用户输入1=启用，2=禁用）",
+		//	  "description": "User master key enable operation (enter 1 to enable, 2 to disable).",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"key_enable_operation": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "用户主密钥启用操作（用户输入1=启用，2=禁用）",
+			Description: "User master key enable operation (enter 1 to enable, 2 to disable).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥唯一标识符，UUID形式。",
+		//	  "description": "Key unique identifier in UUID format.",
 		//	  "type": "string"
 		//	}
 		"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥唯一标识符，UUID形式。",
+			Description: "Key unique identifier in UUID format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyMaterialExpireTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥材料过期时间，当值为空时表示不会过期。",
+		//	  "description": "Key material expiration time. If empty, the key does not expire.",
 		//	  "type": "string"
 		//	}
 		"key_material_expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥材料过期时间，当值为空时表示不会过期。",
+			Description: "Key material expiration time. If empty, the key does not expire.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "主密钥名称，长度为 2 - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+		//	  "description": "Master key name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].",
 		//	  "maxLength": 31,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "主密钥名称，长度为 2   - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+			Description: "Master key name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyRotationOperation
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户主密钥轮转操作（用户输入1=开启，2=关闭）",
+		//	  "description": "User master key rotation operation (enter 1 to enable, 2 to disable).",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"key_rotation_operation": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "用户主密钥轮转操作（用户输入1=开启，2=关闭）",
+			Description: "User master key rotation operation (enter 1 to enable, 2 to disable).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeySpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "对称密钥：SYMMETRIC_256，SYMMETRIC_128，非对称密钥：RSA_2048，RSA_3072，RSA_4096，EC_P256，EC_P256K，EC_P384，EC_P521，EC_SM2。",
+		//	  "description": "Symmetric keys: SYMMETRIC_256, SYMMETRIC_128; asymmetric keys: RSA_2048, RSA_3072, RSA_4096, EC_P256, EC_P256K, EC_P384, EC_P521, EC_SM2.",
 		//	  "type": "string"
 		//	}
 		"key_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "对称密钥：SYMMETRIC_256，SYMMETRIC_128，非对称密钥：RSA_2048，RSA_3072，RSA_4096，EC_P256，EC_P256K，EC_P384，EC_P521，EC_SM2。",
+			Description: "Symmetric keys: SYMMETRIC_256, SYMMETRIC_128; asymmetric keys: RSA_2048, RSA_3072, RSA_4096, EC_P256, EC_P256K, EC_P384, EC_P521, EC_SM2.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyState
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥状态：Enable，Disable，PendingDelete，Archived，PendingImport。",
+		//	  "description": "Key status: Enable, Disable, PendingDelete, Archived, PendingImport.",
 		//	  "type": "string"
 		//	}
 		"key_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥状态：Enable，Disable，PendingDelete，Archived，PendingImport。",
+			Description: "Key status: Enable, Disable, PendingDelete, Archived, PendingImport.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyUsage
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥用途，取值：ENCRYPT_DECRYPT，SIGN_VERIFY，GENERATE_VERIFY_MAC。",
+		//	  "description": "Key usage. Options: ENCRYPT_DECRYPT, SIGN_VERIFY, GENERATE_VERIFY_MAC.",
 		//	  "type": "string"
 		//	}
 		"key_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥用途，取值：ENCRYPT_DECRYPT，SIGN_VERIFY，GENERATE_VERIFY_MAC。",
+			Description: "Key usage. Options: ENCRYPT_DECRYPT, SIGN_VERIFY, GENERATE_VERIFY_MAC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyringName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环名称，长度为 2 - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+		//	  "description": "Key ring name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].",
 		//	  "maxLength": 31,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"keyring_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥环名称，长度为 2   - 31 个字符，合法字符：[a-zA-Z0-9-_]。",
+			Description: "Key ring name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastRotationTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥最后轮转时间。",
+		//	  "description": "Key last rotation time.",
 		//	  "type": "string"
 		//	}
 		"last_rotation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥最后轮转时间。",
+			Description: "Key last rotation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MultiRegion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为 Multi-region 类型的主密钥。",
+		//	  "description": "Is this a multi-region type master key.",
 		//	  "type": "boolean"
 		//	}
 		"multi_region": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为 Multi-region 类型的主密钥。",
+			Description: "Is this a multi-region type master key.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MultiRegionConfiguration
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Multi-region key 配置信息。",
+		//	  "description": "Multi-region key configuration information.",
 		//	  "properties": {
 		//	    "MultiRegionKeyType": {
-		//	      "description": "多区域密钥的类型。",
+		//	      "description": "Multi-region key type.",
 		//	      "type": "string"
 		//	    },
 		//	    "PrimaryKey": {
-		//	      "description": "主多区域键的事务识别号和区域 ID。",
+		//	      "description": "Primary multi-region key transaction identifier and region ID.",
 		//	      "properties": {
 		//	        "Region": {
-		//	          "description": "多区域密钥的区域 ID。",
+		//	          "description": "Multi-region key region ID.",
 		//	          "type": "string"
 		//	        },
 		//	        "Trn": {
-		//	          "description": "多区域密钥的 TRN。",
+		//	          "description": "Multi-region key TRN.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "ReplicaKeys": {
-		//	      "description": "副本多区域密钥的事务记录编号和区域 ID。",
+		//	      "description": "Replica multi-region key transaction record number and region ID.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "副本多区域密钥的事务记录编号和区域 ID。",
+		//	        "description": "Replica multi-region key transaction record number and region ID.",
 		//	        "properties": {
 		//	          "Region": {
-		//	            "description": "多区域密钥的区域 ID。",
+		//	            "description": "Multi-region key region ID.",
 		//	            "type": "string"
 		//	          },
 		//	          "Trn": {
-		//	            "description": "多区域密钥的转换。",
+		//	            "description": "Multi-region key conversion.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -237,7 +237,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MultiRegionKeyType
 				"multi_region_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "多区域密钥的类型。",
+					Description: "Multi-region key type.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PrimaryKey
@@ -245,16 +245,16 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Region
 						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "多区域密钥的区域 ID。",
+							Description: "Multi-region key region ID.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Trn
 						"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "多区域密钥的 TRN。",
+							Description: "Multi-region key TRN.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "主多区域键的事务识别号和区域 ID。",
+					Description: "Primary multi-region key transaction identifier and region ID.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ReplicaKeys
@@ -263,104 +263,104 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Region
 							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "多区域密钥的区域 ID。",
+								Description: "Multi-region key region ID.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Trn
 							"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "多区域密钥的转换。",
+								Description: "Multi-region key conversion.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "副本多区域密钥的事务记录编号和区域 ID。",
+					Description: "Replica multi-region key transaction record number and region ID.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Multi-region key 配置信息。",
+			Description: "Multi-region key configuration information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Origin
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥来源，取值：CloudKMS，External，ExternalKeyStore。",
+		//	  "description": "Key source. Options: CloudKMS, External, ExternalKeyStore.",
 		//	  "type": "string"
 		//	}
 		"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥来源，取值：CloudKMS，External，ExternalKeyStore。",
+			Description: "Key source. Options: CloudKMS, External, ExternalKeyStore.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProtectionLevel
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥保护级别，取值：SOFTWARE，HSM。",
+		//	  "description": "Key protection level. Options: SOFTWARE, HSM.",
 		//	  "type": "string"
 		//	}
 		"protection_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥保护级别，取值：SOFTWARE，HSM。",
+			Description: "Key protection level. Options: SOFTWARE, HSM.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RotateInterval
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥轮转周期，单位：天；取值范围：[90, 2560]。",
+		//	  "description": "Key rotation period (days). Range: [90, 2560].",
 		//	  "type": "integer"
 		//	}
 		"rotate_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "密钥轮转周期，单位：天；取值范围：[90, 2560]。",
+			Description: "Key rotation period (days). Range: [90, 2560].",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RotateState
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥轮转状态，取值：Enable，Disable。",
+		//	  "description": "Key rotation status. Options: Enable, Disable.",
 		//	  "type": "string"
 		//	}
 		"rotate_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥轮转状态，取值：Enable，Disable。",
+			Description: "Key rotation status. Options: Enable, Disable.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScheduleDeleteTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥删除时间。",
+		//	  "description": "Key deletion time.",
 		//	  "type": "string"
 		//	}
 		"schedule_delete_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥删除时间。",
+			Description: "Key deletion time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScheduleRotationTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥轮转时间。",
+		//	  "description": "Key rotation time.",
 		//	  "type": "string"
 		//	}
 		"schedule_rotation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥轮转时间。",
+			Description: "Key rotation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "KMS密钥的标签信息",
+		//	  "description": "KMS key label information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "KMS密钥的标签",
+		//	    "description": "KMS key label.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "KMS密钥的标签键",
+		//	        "description": "KMS key label key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "KMS密钥的标签值",
+		//	        "description": "KMS key label value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -378,40 +378,40 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "KMS密钥的标签键",
+						Description: "KMS key label key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "KMS密钥的标签值",
+						Description: "KMS key label value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "KMS密钥的标签信息",
+			Description: "KMS key label information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Trn
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源名称，格式应为 trn:${Service}:${Region}:${AccountID}:${ResourcePath}。",
+		//	  "description": "Resource name. Format should be trn:${Service}:${Region}:${AccountID}:${ResourcePath}.",
 		//	  "type": "string"
 		//	}
 		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源名称，格式应为 trn:${Service}:${Region}:${AccountID}:${ResourcePath}。",
+			Description: "Resource name. Format should be trn:${Service}:${Region}:${AccountID}:${ResourcePath}.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥更新时间。",
+		//	  "description": "Key update time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "密钥更新时间。",
+			Description: "Key update time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

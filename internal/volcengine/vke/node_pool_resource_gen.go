@@ -37,34 +37,34 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池伸缩策略配置。",
+		//	  "description": "Node pool scaling policy configuration.",
 		//	  "properties": {
 		//	    "DesiredReplicas": {
-		//	      "description": "配置节点池的期望节点数。",
+		//	      "description": "Configure the expected number of nodes in the node pool",
 		//	      "type": "integer"
 		//	    },
 		//	    "Enabled": {
-		//	      "description": "配置节点池弹性伸缩功能开关，参数值说明：false：关闭。true：开启。",
+		//	      "description": "Configure the node pool auto scaling feature switch. Parameter values: false: disabled. true: enabled.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "MaxReplicas": {
-		//	      "description": "配置节点池的最大节点数。",
+		//	      "description": "Configure the maximum number of nodes in the node pool",
 		//	      "type": "integer"
 		//	    },
 		//	    "MinReplicas": {
-		//	      "description": "配置节点池的最小节点数。",
+		//	      "description": "Minimum number of nodes configured for the node pool",
 		//	      "type": "integer"
 		//	    },
 		//	    "Priority": {
-		//	      "description": "优先级。",
+		//	      "description": "Priority",
 		//	      "type": "integer"
 		//	    },
 		//	    "ScalingGroupId": {
-		//	      "description": "伸缩组ID。",
+		//	      "description": "Scaling group ID",
 		//	      "type": "string"
 		//	    },
 		//	    "SubnetPolicy": {
-		//	      "description": "节点池的多子网调度策略，参数值说明：ZoneBalance：可用区均衡策略。Priority：子网优先级策略。",
+		//	      "description": "Multi-subnet scheduling strategy for the node pool. Parameter values: ZoneBalance: availability zone balancing strategy. Priority: subnet priority strategy.",
 		//	      "enum": [
 		//	        "ZoneBalance",
 		//	        "Priority"
@@ -78,7 +78,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DesiredReplicas
 				"desired_replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "配置节点池的期望节点数。",
+					Description: "Configure the expected number of nodes in the node pool",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -87,7 +87,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "配置节点池弹性伸缩功能开关，参数值说明：false：关闭。true：开启。",
+					Description: "Configure the node pool auto scaling feature switch. Parameter values: false: disabled. true: enabled.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -96,7 +96,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MaxReplicas
 				"max_replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "配置节点池的最大节点数。",
+					Description: "Configure the maximum number of nodes in the node pool",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -105,7 +105,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MinReplicas
 				"min_replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "配置节点池的最小节点数。",
+					Description: "Minimum number of nodes configured for the node pool",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -114,7 +114,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Priority
 				"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "优先级。",
+					Description: "Priority",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -123,7 +123,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ScalingGroupId
 				"scaling_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "伸缩组ID。",
+					Description: "Scaling group ID",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -132,7 +132,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetPolicy
 				"subnet_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点池的多子网调度策略，参数值说明：ZoneBalance：可用区均衡策略。Priority：子网优先级策略。",
+					Description: "Multi-subnet scheduling strategy for the node pool. Parameter values: ZoneBalance: availability zone balancing strategy. Priority: subnet priority strategy.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -146,7 +146,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "节点池伸缩策略配置。",
+			Description: "Node pool scaling policy configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -157,22 +157,22 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池所在集群的 ID。",
+		//	  "description": "ID of the cluster where the node pool is located",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点池所在集群的 ID。",
+			Description: "ID of the cluster where the node pool is located",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建节点池的时间。",
+		//	  "description": "Node pool creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建节点池的时间。",
+			Description: "Node pool creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -182,17 +182,17 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池 Kubernetes 相关配置。",
+		//	  "description": "Kubernetes-related configuration for the node pool",
 		//	  "properties": {
 		//	    "AutoSyncDisabled": {
-		//	      "description": "是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。",
+		//	      "description": "Disable automatic synchronization of labels and taints to existing nodes. Parameter values: true: disable (turn off automatic sync). false: do not disable (turn on automatic sync)",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ContainerdConfig": {
-		//	      "description": "节点池 Containerd 相关配置。",
+		//	      "description": "Node pool Containerd configuration",
 		//	      "properties": {
 		//	        "InsecureRegistries": {
-		//	          "description": "指定跳过证书认证的容器镜像仓库地址。",
+		//	          "description": "Specify the container image repository address to skip certificate verification.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -201,13 +201,13 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "RegistryProxyConfigs": {
-		//	          "description": "容器镜像仓库代理配置。",
+		//	          "description": "Container image repository proxy configuration",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "容器镜像仓库代理配置。",
+		//	            "description": "Container image repository proxy configuration",
 		//	            "properties": {
 		//	              "ProxyEndpoints": {
-		//	                "description": "代理地址。",
+		//	                "description": "Proxy address.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -216,7 +216,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Registry": {
-		//	                "description": "容器镜像仓库地址。",
+		//	                "description": "Container image repository address.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -229,24 +229,24 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Cordon": {
-		//	      "description": "封锁节点配置，参数值说明：false：不封锁。true：封锁。",
+		//	      "description": "Node blocking configuration. Parameter values: false: not blocked; true: blocked",
 		//	      "type": "boolean"
 		//	    },
 		//	    "KubeletConfig": {
-		//	      "description": "Kubelet 组件的相关配置",
+		//	      "description": "Kubelet component configuration",
 		//	      "properties": {
 		//	        "CpuManagerPolicy": {
-		//	          "description": "配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略",
+		//	          "description": "Configure kubelet CpuManagerPolicy. Supports none and static policies",
 		//	          "type": "string"
 		//	        },
 		//	        "EvictionHard": {
-		//	          "description": "触发 Pod 驱逐操作的一组硬性门限。",
+		//	          "description": "Set of hard thresholds for triggering Pod eviction",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "触发 Pod 驱逐操作的一组硬性门限。",
+		//	            "description": "Set of hard thresholds for triggering Pod eviction",
 		//	            "properties": {
 		//	              "Key": {
-		//	                "description": "硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available",
+		//	                "description": "Hard threshold name. Options: memory.available, nodefs.available, nodefs.inodesFree, imagefs.available",
 		//	                "enum": [
 		//	                  "memory.available",
 		//	                  "nodefs.available",
@@ -256,7 +256,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "Value": {
-		//	                "description": "硬性门限值。",
+		//	                "description": "Hard threshold value.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -270,42 +270,42 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "FeatureGates": {
-		//	          "description": "特性门控。",
+		//	          "description": "Feature gate",
 		//	          "properties": {
 		//	            "InPlacePodVerticalScaling": {
-		//	              "description": "是否开启特性开关本地垂直Pod伸缩",
+		//	              "description": "Enable local vertical Pod autoscaling feature toggle",
 		//	              "type": "boolean"
 		//	            },
 		//	            "QoSResourceManager": {
-		//	              "description": "是否开启 QoSResourceManager特性开关，取值：- true 开启。- false 关闭。",
+		//	              "description": "Whether to enable the QoSResourceManager feature switch. Values: - true enabled; - false disabled",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "KubeApiBurst": {
-		//	          "description": "每秒发送到 API 服务器的突发请求数量上限。不包括事件和节点心跳 API，其速率限制由一组不同的标志控制。",
+		//	          "description": "Maximum burst request rate sent to the API server per second. Excludes events and node heartbeat APIs, whose rate limits are controlled by a different set of flags",
 		//	          "maximum": 100,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "KubeApiQps": {
-		//	          "description": "与 apiserver 通信的每秒查询个数（QPS）。不包含事件和节点心跳 API，它们的速率限制是由一组不同的标志所控制。",
+		//	          "description": "Queries per second (QPS) for communication with apiserver. Events and node heartbeat APIs are not included; their rate limits are controlled by a different set of flags.",
 		//	          "maximum": 50,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "KubeReserved": {
-		//	          "description": "节点预留给 Kubernetes 系统组件的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。",
+		//	          "description": "Resources reserved for Kubernetes system components on the node. By default, half of the default value in the node reserved resource policy is reserved.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "properties": {
 		//	              "Name": {
-		//	                "description": "资源名称，取值为 cpu 或 memory。",
+		//	                "description": "Resource name. Valid values: cpu or memory.",
 		//	                "type": "string"
 		//	              },
 		//	              "Quantity": {
-		//	                "description": "指定资源的资源量。 - 当资源为 cpu 时，取值示例为 200m。 - 当资源为 memory 时，取值示例为 1G",
+		//	                "description": "Specify the resource quantity. - For cpu, example value: 200m - For memory, example value: 1G",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -315,36 +315,36 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "MaxPods": {
-		//	          "description": "配置 kubelet 支持的最大 Pod 数量",
+		//	          "description": "Configure the maximum number of Pods supported by kubelet",
 		//	          "type": "integer"
 		//	        },
 		//	        "RegistryBurst": {
-		//	          "description": "设置突发性镜像拉取的个数上限，在不超过 RegistryPullQps 设置值的前提下暂时允许此参数所给的镜像拉取个数。",
+		//	          "description": "Set the maximum number of burst image pulls. Temporarily allows the number of image pulls specified by this parameter, provided it does not exceed the RegistryPullQps setting",
 		//	          "maximum": 100,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "RegistryPullQps": {
-		//	          "description": "可用来限制镜像仓库的 QPS 上限",
+		//	          "description": "Used to limit the QPS cap for the image repository",
 		//	          "maximum": 50,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "SerializeImagePulls": {
-		//	          "description": "逐一拉取镜像。",
+		//	          "description": "Pull images sequentially",
 		//	          "type": "boolean"
 		//	        },
 		//	        "SystemReserved": {
-		//	          "description": "节点预留给操作系统的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。",
+		//	          "description": "Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is used for resource reservation.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "properties": {
 		//	              "Name": {
-		//	                "description": "资源名称，取值为 cpu 或 memory。",
+		//	                "description": "Resource name. Valid values: cpu or memory.",
 		//	                "type": "string"
 		//	              },
 		//	              "Quantity": {
-		//	                "description": "指定资源的资源量。 - 当资源为 cpu 时，取值示例为 200m。 - 当资源为 memory 时，取值示例为 1G。",
+		//	                "description": "Resource quantity for the specified resource. - For cpu, example value: 200m. - For memory, example value: 1G.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -354,7 +354,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "TopologyManagerPolicy": {
-		//	          "description": "拓扑管理策略，取值：none：（默认）禁用拓扑管理策略。restricted：kubelet 仅接受在所请求资源上实现最佳 NUMA（Non-Uniform Memory Access，非一致存储访问结构）的 Pod。best-effort：kubelet 会优先选择在 CPU 和设备资源上实现 NUMA 的 Pod。single-numa-node：kubelet 仅允许在同一个节点的 CPU 和设备资源上实现 NUMA 的 Pod。",
+		//	          "description": "Topology management policy. Values: none (default): disables topology management policy. restricted: kubelet only accepts Pods that achieve optimal NUMA (Non-Uniform Memory Access) on requested resources. best-effort: kubelet prioritizes Pods that achieve NUMA on CPU and device resources. single-numa-node: kubelet only allows Pods that achieve NUMA on CPU and device resources within the same node",
 		//	          "enum": [
 		//	            "none",
 		//	            "restricted",
@@ -364,7 +364,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "TopologyManagerScope": {
-		//	          "description": "拓扑管理策略的资源粒度，取值：container：表示资源对齐粒度为容器级。pod：表示资源对齐粒度为 Pod 级。",
+		//	          "description": "Resource granularity for topology management policy. Values: container: resource alignment at container level pod: resource alignment at Pod level",
 		//	          "enum": [
 		//	            "container",
 		//	            "pod"
@@ -375,17 +375,17 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Labels": {
-		//	      "description": "节点池/节点的 Kubernetes 标签（Labels）信息。",
+		//	      "description": "Kubernetes label information for node pools/nodes",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "节点池/节点的 Kubernetes 标签（Labels）信息。",
+		//	        "description": "Kubernetes label information for node pools/nodes",
 		//	        "properties": {
 		//	          "Key": {
-		//	            "description": "标签键。",
+		//	            "description": "Tag key.",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "标签值。",
+		//	            "description": "Label value.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -395,24 +395,24 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "NamePrefix": {
-		//	      "description": "Kubernetes 中节点对象的元数据名称前缀。",
+		//	      "description": "Prefix for node object metadata name in Kubernetes",
 		//	      "type": "string"
 		//	    },
 		//	    "NameSuffix": {
-		//	      "description": "Kubernetes 中节点对象的元数据名称后缀。",
+		//	      "description": "Suffix for node object metadata name in Kubernetes",
 		//	      "type": "string"
 		//	    },
 		//	    "NameUseHostname": {
-		//	      "description": "Kubernetes 中节点对象的元数据名称是否使用 ECS 主机名称，取值：true：使用 ECS 主机名称作为节点名称。false：不使用使用 ECS 主机名称作为节点名称。",
+		//	      "description": "Whether the node object metadata name in Kubernetes uses the ECS host name. Values: true: use ECS host name as node name; false: do not use ECS host name as node name",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Taints": {
-		//	      "description": "节点池/节点的 Kubernetes 污点（Taints）信息。",
+		//	      "description": "Kubernetes taint information for node pools/nodes",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Effect": {
-		//	            "description": "污点效果，取值：NoSchedule：（默认值）不调度。NoExecute：驱逐没有容忍污点的 Pod。PreferNoSchedule：尽量避免调度。",
+		//	            "description": "Taint effect. Values: NoSchedule: (default) Do not schedule. NoExecute: Evict pods that do not tolerate the taint. PreferNoSchedule: Prefer not to schedule.",
 		//	            "enum": [
 		//	              "NoSchedule",
 		//	              "NoExecute",
@@ -421,11 +421,11 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Key": {
-		//	            "description": "污点键。",
+		//	            "description": "Taint key.",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "污点值。",
+		//	            "description": "Taint value",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -441,7 +441,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoSyncDisabled
 				"auto_sync_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。",
+					Description: "Disable automatic synchronization of labels and taints to existing nodes. Parameter values: true: disable (turn off automatic sync). false: do not disable (turn on automatic sync)",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -454,7 +454,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						// Property: InsecureRegistries
 						"insecure_registries": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "指定跳过证书认证的容器镜像仓库地址。",
+							Description: "Specify the container image repository address to skip certificate verification.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -468,7 +468,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									// Property: ProxyEndpoints
 									"proxy_endpoints": schema.SetAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "代理地址。",
+										Description: "Proxy address.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -477,7 +477,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Registry
 									"registry": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "容器镜像仓库地址。",
+										Description: "Container image repository address.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -486,7 +486,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "容器镜像仓库代理配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Description: "Container image repository proxy configuration\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -494,7 +494,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "节点池 Containerd 相关配置。",
+					Description: "Node pool Containerd configuration",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -503,7 +503,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Cordon
 				"cordon": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "封锁节点配置，参数值说明：false：不封锁。true：封锁。",
+					Description: "Node blocking configuration. Parameter values: false: not blocked; true: blocked",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -515,7 +515,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CpuManagerPolicy
 						"cpu_manager_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略",
+							Description: "Configure kubelet CpuManagerPolicy. Supports none and static policies",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -528,7 +528,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "硬性门限名称。取值：memory.available、nodefs.available、nodefs.inodesFree、imagefs.available",
+										Description: "Hard threshold name. Options: memory.available, nodefs.available, nodefs.inodesFree, imagefs.available",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -546,7 +546,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "硬性门限值。",
+										Description: "Hard threshold value.",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -558,7 +558,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "触发 Pod 驱逐操作的一组硬性门限。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Description: "Set of hard thresholds for triggering Pod eviction\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -570,7 +570,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: InPlacePodVerticalScaling
 								"in_place_pod_vertical_scaling": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "是否开启特性开关本地垂直Pod伸缩",
+									Description: "Enable local vertical Pod autoscaling feature toggle",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -579,7 +579,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: QoSResourceManager
 								"qo_s_resource_manager": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "是否开启 QoSResourceManager特性开关，取值：  - true 开启。  - false 关闭。",
+									Description: "Whether to enable the QoSResourceManager feature switch. Values:   - true enabled;   - false disabled",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -587,7 +587,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "特性门控。",
+							Description: "Feature gate",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -596,7 +596,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: KubeApiBurst
 						"kube_api_burst": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "每秒发送到 API 服务器的突发请求数量上限。不包括事件和节点心跳 API，其速率限制由一组不同的标志控制。",
+							Description: "Maximum burst request rate sent to the API server per second. Excludes events and node heartbeat APIs, whose rate limits are controlled by a different set of flags",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -608,7 +608,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: KubeApiQps
 						"kube_api_qps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "与 apiserver 通信的每秒查询个数（QPS）。不包含事件和节点心跳 API，它们的速率限制是由一组不同的标志所控制。",
+							Description: "Queries per second (QPS) for communication with apiserver. Events and node heartbeat APIs are not included; their rate limits are controlled by a different set of flags.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -624,7 +624,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "资源名称，取值为 cpu 或 memory。",
+										Description: "Resource name. Valid values: cpu or memory.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -633,7 +633,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Quantity
 									"quantity": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "指定资源的资源量。   - 当资源为 cpu 时，取值示例为 200m。   - 当资源为 memory 时，取值示例为 1G",
+										Description: "Specify the resource quantity.   - For cpu, example value: 200m   - For memory, example value: 1G",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -642,7 +642,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "节点预留给 Kubernetes 系统组件的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Description: "Resources reserved for Kubernetes system components on the node. By default, half of the default value in the node reserved resource policy is reserved.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -651,7 +651,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: MaxPods
 						"max_pods": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "配置 kubelet 支持的最大 Pod 数量",
+							Description: "Configure the maximum number of Pods supported by kubelet",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -660,7 +660,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RegistryBurst
 						"registry_burst": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "设置突发性镜像拉取的个数上限，在不超过 RegistryPullQps 设置值的前提下暂时允许此参数所给的镜像拉取个数。",
+							Description: "Set the maximum number of burst image pulls. Temporarily allows the number of image pulls specified by this parameter, provided it does not exceed the RegistryPullQps setting",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -672,7 +672,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RegistryPullQps
 						"registry_pull_qps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "可用来限制镜像仓库的 QPS 上限",
+							Description: "Used to limit the QPS cap for the image repository",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -684,7 +684,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SerializeImagePulls
 						"serialize_image_pulls": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "逐一拉取镜像。",
+							Description: "Pull images sequentially",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -697,7 +697,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "资源名称，取值为 cpu 或 memory。",
+										Description: "Resource name. Valid values: cpu or memory.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -706,7 +706,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Quantity
 									"quantity": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "指定资源的资源量。   - 当资源为 cpu 时，取值示例为 200m。   - 当资源为 memory 时，取值示例为 1G。",
+										Description: "Resource quantity for the specified resource.   - For cpu, example value: 200m.   - For memory, example value: 1G.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -715,7 +715,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "节点预留给操作系统的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+							Description: "Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is used for resource reservation.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -724,7 +724,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TopologyManagerPolicy
 						"topology_manager_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "拓扑管理策略，取值：none：（默认）禁用拓扑管理策略。restricted：kubelet 仅接受在所请求资源上实现最佳 NUMA（Non-Uniform Memory Access，非一致存储访问结构）的 Pod。best-effort：kubelet 会优先选择在 CPU 和设备资源上实现 NUMA 的 Pod。single-numa-node：kubelet 仅允许在同一个节点的 CPU 和设备资源上实现 NUMA 的 Pod。",
+							Description: "Topology management policy. Values: none (default): disables topology management policy. restricted: kubelet only accepts Pods that achieve optimal NUMA (Non-Uniform Memory Access) on requested resources. best-effort: kubelet prioritizes Pods that achieve NUMA on CPU and device resources. single-numa-node: kubelet only allows Pods that achieve NUMA on CPU and device resources within the same node",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -741,7 +741,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: TopologyManagerScope
 						"topology_manager_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "拓扑管理策略的资源粒度，取值：container：表示资源对齐粒度为容器级。pod：表示资源对齐粒度为 Pod 级。",
+							Description: "Resource granularity for topology management policy. Values: container: resource alignment at container level pod: resource alignment at Pod level",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -755,7 +755,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Kubelet 组件的相关配置",
+					Description: "Kubelet component configuration",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -768,7 +768,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "标签键。",
+								Description: "Tag key.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -777,7 +777,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "标签值。",
+								Description: "Label value.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -786,7 +786,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点池/节点的 Kubernetes 标签（Labels）信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Kubernetes label information for node pools/nodes\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -795,7 +795,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NamePrefix
 				"name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Kubernetes 中节点对象的元数据名称前缀。",
+					Description: "Prefix for node object metadata name in Kubernetes",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -804,7 +804,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NameSuffix
 				"name_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Kubernetes 中节点对象的元数据名称后缀。",
+					Description: "Suffix for node object metadata name in Kubernetes",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -813,7 +813,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NameUseHostname
 				"name_use_hostname": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Kubernetes 中节点对象的元数据名称是否使用 ECS 主机名称，取值：true：使用 ECS 主机名称作为节点名称。false：不使用使用 ECS 主机名称作为节点名称。",
+					Description: "Whether the node object metadata name in Kubernetes uses the ECS host name. Values: true: use ECS host name as node name; false: do not use ECS host name as node name",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -826,7 +826,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Effect
 							"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "污点效果，取值：NoSchedule：（默认值）不调度。NoExecute：驱逐没有容忍污点的 Pod。PreferNoSchedule：尽量避免调度。",
+								Description: "Taint effect. Values: NoSchedule: (default) Do not schedule. NoExecute: Evict pods that do not tolerate the taint. PreferNoSchedule: Prefer not to schedule.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
@@ -842,7 +842,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "污点键。",
+								Description: "Taint key.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -851,7 +851,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "污点值。",
+								Description: "Taint value",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -860,7 +860,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点池/节点的 Kubernetes 污点（Taints）信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Kubernetes taint information for node pools/nodes\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -868,7 +868,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "节点池 Kubernetes 相关配置。",
+			Description: "Kubernetes-related configuration for the node pool",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -879,21 +879,21 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "托管节点池配置。",
+		//	  "description": "Managed node pool configuration",
 		//	  "properties": {
 		//	    "Enabled": {
-		//	      "description": "节点池是否开启托管。取值：- true：开启。- false：关闭。。",
+		//	      "description": "Enable managed mode for node pool. Options: - true: on - false: off",
 		//	      "type": "boolean"
 		//	    },
 		//	    "RemedyConfig": {
-		//	      "description": "检查自愈配置。",
+		//	      "description": "Check self-healing configuration.",
 		//	      "properties": {
 		//	        "Enabled": {
-		//	          "description": "是否开启检查自愈。",
+		//	          "description": "Enable self-healing check",
 		//	          "type": "boolean"
 		//	        },
 		//	        "RemedyId": {
-		//	          "description": "检查自愈规则ID。",
+		//	          "description": "Self-healing rule ID",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -906,7 +906,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "节点池是否开启托管。取值：  - true：开启。  - false：关闭。。",
+					Description: "Enable managed mode for node pool. Options:   - true: on   - false: off",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -918,7 +918,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "是否开启检查自愈。",
+							Description: "Enable self-healing check",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -927,7 +927,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RemedyId
 						"remedy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "检查自愈规则ID。",
+							Description: "Self-healing rule ID",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -935,7 +935,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "检查自愈配置。",
+					Description: "Check self-healing configuration.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -943,7 +943,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "托管节点池配置。",
+			Description: "Managed node pool configuration",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -954,13 +954,13 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池名称。同一个集群下，节点池名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。",
+		//	  "description": "Node pool name. The node pool name must be unique within the same cluster. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length limit: 2–64 characters.",
 		//	  "maxLength": 64,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点池名称。同一个集群下，节点池名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。",
+			Description: "Node pool name. The node pool name must be unique within the same cluster. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length limit: 2–64 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -974,51 +974,51 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池中云服务器（ECS）实例配置。",
+		//	  "description": "Cloud server (ECS) instance configuration in the node pool",
 		//	  "properties": {
 		//	    "AdditionalContainerStorageEnabled": {
-		//	      "description": "节点的第一块数据盘是否已配置并格式化挂载作为容器镜像和日志的存储目录，参数值说明：false：未配置并格式化。true：已配置并格式化。",
+		//	      "description": "Whether the first data disk of the node is configured, formatted, and mounted as the storage directory for container images and logs. Parameter values: false: not configured and formatted; true: configured and formatted",
 		//	      "type": "boolean"
 		//	    },
 		//	    "AutoRenew": {
-		//	      "description": "云服务器实例到期是否自动续费，参数值说明：true：自动续费false：不自动续费仅当InstanceChargeType=PrePaid时才返回的参数。",
+		//	      "description": "Whether the cloud server instance will be automatically renewed upon expiration. Parameter description: true: auto renewal false: no auto renewal This parameter is returned only when InstanceChargeType=PrePaid.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "AutoRenewPeriod": {
-		//	      "description": "云服务器实例每次自动续费时长，单位为月。仅当AutoRenew=true时才返回的参数。",
+		//	      "description": "Automatic renewal duration for cloud server instances, in months. This parameter is returned only when AutoRenew=true",
 		//	      "type": "integer"
 		//	    },
 		//	    "DataVolumes": {
-		//	      "description": "节点的数据盘配置。",
+		//	      "description": "Node data disk configuration.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "FileSystem": {
-		//	            "description": "文件系统，取值：- Ext4 (默认值)- Xfs",
+		//	            "description": "File system. Options: - Ext4 (default) - Xfs",
 		//	            "type": "string"
 		//	          },
 		//	          "MountPoint": {
-		//	            "description": "磁盘格式化后的目标挂载目录。",
+		//	            "description": "Target mount directory after disk formatting.",
 		//	            "type": "string"
 		//	          },
 		//	          "PlacementGroupId": {
-		//	            "description": "放置组Id",
+		//	            "description": "Placement group ID",
 		//	            "type": "string"
 		//	          },
 		//	          "Size": {
-		//	            "description": "磁盘容量，单位 GiB。",
+		//	            "description": "Disk capacity, in GiB.",
 		//	            "type": "integer"
 		//	          },
 		//	          "SnapshotId": {
-		//	            "description": "使用快照创建数据盘。您可以调用DescribeSnapshots接口查询快照ID。说明- 仅极速型SSD和高效性云盘支持通过快照创建云盘- 仅状态为“可用”(available)的快照支持创建新云盘，“创建中”、“回滚中”、“删除中”及“错误”状态下的快照不支持创建新云盘。",
+		//	            "description": "Create a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only Ultra SSD and High-performance Cloud Disk support creating disks from snapshots. Only snapshots in the 'available' status can be used to create new disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' status cannot be used to create new disks.",
 		//	            "type": "string"
 		//	          },
 		//	          "SubgroupNumber": {
-		//	            "description": "放置子组",
+		//	            "description": "Placement subgroup",
 		//	            "type": "integer"
 		//	          },
 		//	          "Type": {
-		//	            "description": "磁盘类型：ESSD_PL0：性能级别为 PL0 的极速型 SSD 云盘。ESSD_FlexPL：性能级别为 PL1 的极速型 SSD 云盘。",
+		//	            "description": "Disk type: ESSD_PL0: ultra-fast SSD disk with performance level PL0. ESSD_FlexPL: ultra-fast SSD disk with performance level PL1",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1028,19 +1028,19 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "DeploymentSetGroupNumber": {
-		//	      "description": "实例在部署集中的分组号，0表示未设置",
+		//	      "description": "Group number of the instance in the deployment set; 0 means not set",
 		//	      "type": "integer"
 		//	    },
 		//	    "DeploymentSetId": {
-		//	      "description": "实例需要加入的部署集ID",
+		//	      "description": "Deployment Set ID to be added to the instance",
 		//	      "type": "string"
 		//	    },
 		//	    "Hostname": {
-		//	      "description": "节点对应的主机名称。",
+		//	      "description": "The host name corresponding to the node.",
 		//	      "type": "string"
 		//	    },
 		//	    "HpcClusterIds": {
-		//	      "description": "高性能计算集群 ID。当节点池配置为高性能计算 GPU 型规格节点时，返回高性能计算集群 ID。",
+		//	      "description": "High performance computing cluster ID. When the node pool is configured with high performance computing GPU node types, returns the high performance computing cluster ID",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1049,15 +1049,15 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "ImageId": {
-		//	      "description": "节点对应云服务器所使用的镜像 ID。",
+		//	      "description": "Image ID used by the cloud server corresponding to the node",
 		//	      "type": "string"
 		//	    },
 		//	    "InitializeScript": {
-		//	      "description": "创建并初始化节点后执行的自定义脚本。Base64 编码后的 Shell 格式脚本。",
+		//	      "description": "Custom script executed after node creation and initialization. Shell script in Base64 encoding",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceChargeType": {
-		//	      "description": "云服务器实例计费类型，参数值说明：PostPaid：按量计费PrePaid：包年包月",
+		//	      "description": "Cloud server instance billing type. Parameter values: PostPaid: pay-as-you-go. PrePaid: subscription (annual/monthly).",
 		//	      "enum": [
 		//	        "PostPaid",
 		//	        "PrePaid"
@@ -1065,11 +1065,11 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceName": {
-		//	      "description": "节点（实例）名称。",
+		//	      "description": "Node (instance) name",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceTypeIds": {
-		//	      "description": "节点对应的云服务器实例规格 ID 列表。",
+		//	      "description": "List of cloud server instance type IDs corresponding to the nodes",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1078,60 +1078,60 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "InstancesDistribution": {
-		//	      "description": "设置抢占式实例和按量实例的混合策略。当SpotStrategy为SpotAsPriceGo时，该策略生效。。",
+		//	      "description": "Set the mixed strategy for spot and pay-as-you-go instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo.",
 		//	      "properties": {
 		//	        "CapacityRebalance": {
-		//	          "description": "容量重新平衡。取值范围：- true：开启该功能，当抢占式实例即将被回收前，主动创建新的抢占式实例进行补偿。- false（默认值）：不开启该功能，则等待抢占式实例被回收后才会去扩容补齐实例数",
+		//	          "description": "Capacity rebalancing. Value range: - true: enables this feature. When a preemptible instance is about to be reclaimed, proactively creates a new preemptible instance for compensation. - false (default): disables this feature. Waits until the preemptible instance is reclaimed before scaling out to make up the instance count",
 		//	          "type": "boolean"
 		//	        },
 		//	        "CompensateWithOnDemand": {
-		//	          "description": "按量实例替补功能。取值范围：- true：开启该功能，当所有抢占式实例因库存不足等原因全部购买失败后，尝试购买按量实例- false（默认值）：不开启该功能，在需要扩容抢占式实例时仅尝试所配置的抢占式实例",
+		//	          "description": "On-demand instance fallback feature. Value range: - true: enable this feature; when all preemptible instances fail to purchase due to insufficient inventory or other reasons, attempt to purchase on-demand instances - false (default): disable this feature; only attempt to purchase configured preemptible instances when scaling up",
 		//	          "type": "boolean"
 		//	        },
 		//	        "OnDemandBaseCapacity": {
-		//	          "description": "基础容量的大小，基础容量部分固定为按量计费实例。取值范围：[0,500]，默认值为0。",
+		//	          "description": "Size of the base capacity. The base capacity is always pay-as-you-go instances. Value range: [0,500], default is 0.",
 		//	          "type": "integer"
 		//	        },
 		//	        "OnDemandPercentageAboveBaseCapacity": {
-		//	          "description": "超出基础容量部分，按量计费实例所占的比例。取值范围[0, 100]，0代表超出基础容量的部分仅生产抢占式实例，100代表仅生产按量实例，默认值为0。",
+		//	          "description": "Proportion of pay-as-you-go instances in the part exceeding the base capacity. Value range: [0, 100]. 0 means only preemptible instances are produced for the part exceeding the base capacity; 100 means only pay-as-you-go instances are produced. Default value is 0.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "NamePrefix": {
-		//	      "description": "节点名称前缀，为空字符串或 nil 时表示未开启节点名称前缀策略。",
+		//	      "description": "Node name prefix. An empty string or nil means the node name prefix policy is not enabled.",
 		//	      "type": "string"
 		//	    },
 		//	    "NetworkTrafficMode": {
-		//	      "description": "节点间的网络通讯模式。",
+		//	      "description": "Network communication mode between nodes",
 		//	      "type": "string"
 		//	    },
 		//	    "Period": {
-		//	      "description": "云服务器实例购买时长，单位为月。仅当InstanceChargeType=PrePaid时才返回的参数。",
+		//	      "description": "Purchase duration for cloud server instances, in months. This parameter is returned only when InstanceChargeType=PrePaid",
 		//	      "type": "integer"
 		//	    },
 		//	    "PreScript": {
-		//	      "description": "部署节点前执行脚本。",
+		//	      "description": "Script to execute before deploying the node",
 		//	      "type": "string"
 		//	    },
 		//	    "ProjectName": {
-		//	      "description": "ECS所属项目，一个ECS只能归属于一个项目。",
+		//	      "description": "Project to which the ECS belongs. Each ECS can only belong to one project.",
 		//	      "type": "string"
 		//	    },
 		//	    "PublicAccessConfig": {
-		//	      "description": "节点自动开启公网访问的配置信息",
+		//	      "description": "Configuration for automatic public network access for nodes",
 		//	      "properties": {
 		//	        "Bandwidth": {
-		//	          "description": "公网 IP 的带宽峰值，单位：Mbps。",
+		//	          "description": "Peak bandwidth for public IP, unit: Mbps",
 		//	          "type": "integer"
 		//	        },
 		//	        "BillingType": {
-		//	          "description": "公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。",
+		//	          "description": "Billing type for public IP: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Isp": {
-		//	          "description": "公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。",
+		//	          "description": "Public IP line type. Parameter description: BGP: BGP (multi-line)",
 		//	          "enum": [
 		//	            "BGP"
 		//	          ],
@@ -1141,32 +1141,32 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "PublicAccessEnabled": {
-		//	      "description": "节点是否自动开启公网访问。取值：- false：关闭- true：开启",
+		//	      "description": "Enable public network access for nodes automatically. Options: - false: off - true: on",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Security": {
-		//	      "description": "节点安全配置。",
+		//	      "description": "Node security configuration",
 		//	      "properties": {
 		//	        "Login": {
-		//	          "description": "节点的访问方式配置。",
+		//	          "description": "Node access configuration.",
 		//	          "properties": {
 		//	            "Password": {
-		//	              "description": "Root 用户登录密码，使用 Base64 编码格式。请遵循云服务器对于实例密码的要求规范：长度为 8～30 个字符，不能以/和$6$开头，支持以下几项字符，且至少包含三项，小写字母a~z，大写字母A~Z，数字0~9，特殊字符( ) ` ~ ! @ # $ % ^ \u0026 * _ - + = | { } [ ] : ; ' \u003c \u003e , . ? /",
+		//	              "description": "Root user login password in Base64 encoding. Follow the cloud server's requirements for instance passwords: 8–30 characters in length, must not start with / or $6$, supports the following character types and must include at least three types: lowercase letters a–z, uppercase letters A–Z, numbers 0–9, special characters ( ) ` ~ ! @ # $ % ^ \u0026 * _ - + = | { } [ ] : ; ' \u003c \u003e , . ? /",
 		//	              "type": "string"
 		//	            },
 		//	            "SshKeyPairName": {
-		//	              "description": "SSH 密钥对名称。请确保该密钥对已在云服务器中创建或托管。",
+		//	              "description": "SSH key pair name. Ensure the key pair is already created or hosted in the cloud server",
 		//	              "type": "string"
 		//	            },
 		//	            "Type": {
-		//	              "description": "节点的访问登录方式，参数值说明：Password：密码登录。SshKeyPair：SSH 密钥对登录。",
+		//	              "description": "Node access login method. Parameter values: Password: password login; SshKeyPair: SSH key pair login",
 		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "SecurityGroupIds": {
-		//	          "description": "节点网络所在的安全组 ID 列表。",
+		//	          "description": "List of security group IDs for the node network",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -1175,7 +1175,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "SecurityStrategies": {
-		//	          "description": "节点的安全策略，参数值说明：Hids：主机安全加固。",
+		//	          "description": "Node security policy. Parameter description: Hids: Host security hardening.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -1184,14 +1184,14 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "SecurityStrategyEnabled": {
-		//	          "description": "节点是否启用了安全加固配置，参数值说明：true：已开启。false：未开启。",
+		//	          "description": "Whether the node has enabled security hardening configuration. Parameter values: true: enabled; false: not enabled",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "SpotStrategy": {
-		//	      "description": "按量计费的抢占式策略，当InstanceChargeType=PostPaid时NoSpot：正常按量计费实例。SpotAsPriceGo：系统自动出价，跟随当前市场实际价格。",
+		//	      "description": "Spot pricing strategy for pay-as-you-go billing. When InstanceChargeType=PostPaid: NoSpot: Standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, following the current market price.",
 		//	      "enum": [
 		//	        "NoSpot",
 		//	        "SpotAsPriceGo"
@@ -1199,7 +1199,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "SubnetIds": {
-		//	      "description": "节点网络所属的子网 ID 列表。",
+		//	      "description": "List of subnet IDs for the node network.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1208,22 +1208,22 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "SystemVolume": {
-		//	      "description": "节点的系统盘配置。",
+		//	      "description": "System disk configuration for the node",
 		//	      "properties": {
 		//	        "PlacementGroupId": {
-		//	          "description": "放置组Id",
+		//	          "description": "Placement group ID",
 		//	          "type": "string"
 		//	        },
 		//	        "Size": {
-		//	          "description": "云盘容量，单位 GiB，取值说明：默认值：40GiB。极速型 SSD（ESSD_PL0，ESSD_FlexPL）：40~2048GiB。",
+		//	          "description": "Disk capacity, in GiB. Value description: Default: 40 GiB. Ultra-fast SSD (ESSD_PL0, ESSD_FlexPL): 40–2048 GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "SubgroupNumber": {
-		//	          "description": "放置子组",
+		//	          "description": "Placement subgroup",
 		//	          "type": "integer"
 		//	        },
 		//	        "Type": {
-		//	          "description": "云盘类型：ESSD_PL0：（默认值）性能级别为 PL0 的极速型 SSD 云盘。ESSD_FlexPL：性能级别为 PL1 的极速型 SSD 云盘。",
+		//	          "description": "Cloud disk types: ESSD_PL0: (default) Ultra-fast SSD cloud disk with performance level PL0. ESSD_FlexPL: Ultra-fast SSD cloud disk with performance level PL1.",
 		//	          "enum": [
 		//	            "ESSD_PL0",
 		//	            "ESSD_FlexPL"
@@ -1234,17 +1234,17 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Tags": {
-		//	      "description": "节点池配置的标签信息",
+		//	      "description": "Label information configured for the node pool",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "节点池的标签信息。",
+		//	        "description": "Node pool tag information",
 		//	        "properties": {
 		//	          "Key": {
-		//	            "description": "标签键。",
+		//	            "description": "Label key",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "标签值。",
+		//	            "description": "Label value.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1263,7 +1263,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AdditionalContainerStorageEnabled
 				"additional_container_storage_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "节点的第一块数据盘是否已配置并格式化挂载作为容器镜像和日志的存储目录，参数值说明：false：未配置并格式化。true：已配置并格式化。",
+					Description: "Whether the first data disk of the node is configured, formatted, and mounted as the storage directory for container images and logs. Parameter values: false: not configured and formatted; true: configured and formatted",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1272,7 +1272,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "云服务器实例到期是否自动续费，参数值说明：true：自动续费false：不自动续费仅当InstanceChargeType=PrePaid时才返回的参数。",
+					Description: "Whether the cloud server instance will be automatically renewed upon expiration. Parameter description: true: auto renewal false: no auto renewal This parameter is returned only when InstanceChargeType=PrePaid.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1281,7 +1281,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenewPeriod
 				"auto_renew_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "云服务器实例每次自动续费时长，单位为月。仅当AutoRenew=true时才返回的参数。",
+					Description: "Automatic renewal duration for cloud server instances, in months. This parameter is returned only when AutoRenew=true",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1294,7 +1294,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: FileSystem
 							"file_system": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "文件系统，取值：  - Ext4 (默认值)  - Xfs",
+								Description: "File system. Options:   - Ext4 (default)   - Xfs",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1303,7 +1303,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: MountPoint
 							"mount_point": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "磁盘格式化后的目标挂载目录。",
+								Description: "Target mount directory after disk formatting.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1312,7 +1312,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: PlacementGroupId
 							"placement_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "放置组Id",
+								Description: "Placement group ID",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1321,7 +1321,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Size
 							"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "磁盘容量，单位 GiB。",
+								Description: "Disk capacity, in GiB.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1330,7 +1330,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: SnapshotId
 							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "使用快照创建数据盘。您可以调用DescribeSnapshots接口查询快照ID。说明  - 仅极速型SSD和高效性云盘支持通过快照创建云盘  - 仅状态为“可用”(available)的快照支持创建新云盘，“创建中”、“回滚中”、“删除中”及“错误”状态下的快照不支持创建新云盘。",
+								Description: "Create a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only Ultra SSD and High-performance Cloud Disk support creating disks from snapshots. Only snapshots in the 'available' status can be used to create new disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' status cannot be used to create new disks.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1339,7 +1339,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: SubgroupNumber
 							"subgroup_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "放置子组",
+								Description: "Placement subgroup",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1348,7 +1348,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "磁盘类型：ESSD_PL0：性能级别为 PL0 的极速型 SSD 云盘。ESSD_FlexPL：性能级别为 PL1 的极速型 SSD 云盘。",
+								Description: "Disk type: ESSD_PL0: ultra-fast SSD disk with performance level PL0. ESSD_FlexPL: ultra-fast SSD disk with performance level PL1",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1357,7 +1357,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点的数据盘配置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Node data disk configuration.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1366,7 +1366,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentSetGroupNumber
 				"deployment_set_group_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "实例在部署集中的分组号，0表示未设置",
+					Description: "Group number of the instance in the deployment set; 0 means not set",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1376,7 +1376,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentSetId
 				"deployment_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例需要加入的部署集ID",
+					Description: "Deployment Set ID to be added to the instance",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1386,7 +1386,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Hostname
 				"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点对应的主机名称。",
+					Description: "The host name corresponding to the node.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1397,7 +1397,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				// Property: HpcClusterIds
 				"hpc_cluster_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "高性能计算集群 ID。当节点池配置为高性能计算 GPU 型规格节点时，返回高性能计算集群 ID。",
+					Description: "High performance computing cluster ID. When the node pool is configured with high performance computing GPU node types, returns the high performance computing cluster ID",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1406,7 +1406,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ImageId
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点对应云服务器所使用的镜像 ID。",
+					Description: "Image ID used by the cloud server corresponding to the node",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1415,7 +1415,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InitializeScript
 				"initialize_script": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "创建并初始化节点后执行的自定义脚本。Base64 编码后的 Shell 格式脚本。",
+					Description: "Custom script executed after node creation and initialization. Shell script in Base64 encoding",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1424,7 +1424,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceChargeType
 				"instance_charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "云服务器实例计费类型，参数值说明：PostPaid：按量计费PrePaid：包年包月",
+					Description: "Cloud server instance billing type. Parameter values: PostPaid: pay-as-you-go. PrePaid: subscription (annual/monthly).",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -1439,7 +1439,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceName
 				"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点（实例）名称。",
+					Description: "Node (instance) name",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1450,7 +1450,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				// Property: InstanceTypeIds
 				"instance_type_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "节点对应的云服务器实例规格 ID 列表。",
+					Description: "List of cloud server instance type IDs corresponding to the nodes",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1462,7 +1462,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CapacityRebalance
 						"capacity_rebalance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "容量重新平衡。取值范围：  - true：开启该功能，当抢占式实例即将被回收前，主动创建新的抢占式实例进行补偿。  - false（默认值）：不开启该功能，则等待抢占式实例被回收后才会去扩容补齐实例数",
+							Description: "Capacity rebalancing. Value range:   - true: enables this feature. When a preemptible instance is about to be reclaimed, proactively creates a new preemptible instance for compensation.   - false (default): disables this feature. Waits until the preemptible instance is reclaimed before scaling out to make up the instance count",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1471,7 +1471,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: CompensateWithOnDemand
 						"compensate_with_on_demand": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "按量实例替补功能。取值范围：  - true：开启该功能，当所有抢占式实例因库存不足等原因全部购买失败后，尝试购买按量实例  - false（默认值）：不开启该功能，在需要扩容抢占式实例时仅尝试所配置的抢占式实例",
+							Description: "On-demand instance fallback feature. Value range:   - true: enable this feature; when all preemptible instances fail to purchase due to insufficient inventory or other reasons, attempt to purchase on-demand instances   - false (default): disable this feature; only attempt to purchase configured preemptible instances when scaling up",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1480,7 +1480,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: OnDemandBaseCapacity
 						"on_demand_base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "基础容量的大小，基础容量部分固定为按量计费实例。取值范围：[0,500]，默认值为0。",
+							Description: "Size of the base capacity. The base capacity is always pay-as-you-go instances. Value range: [0,500], default is 0.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1489,7 +1489,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: OnDemandPercentageAboveBaseCapacity
 						"on_demand_percentage_above_base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "超出基础容量部分，按量计费实例所占的比例。取值范围[0, 100]，0代表超出基础容量的部分仅生产抢占式实例，100代表仅生产按量实例，默认值为0。",
+							Description: "Proportion of pay-as-you-go instances in the part exceeding the base capacity. Value range: [0, 100]. 0 means only preemptible instances are produced for the part exceeding the base capacity; 100 means only pay-as-you-go instances are produced. Default value is 0.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1497,7 +1497,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "设置抢占式实例和按量实例的混合策略。当SpotStrategy为SpotAsPriceGo时，该策略生效。。",
+					Description: "Set the mixed strategy for spot and pay-as-you-go instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1506,7 +1506,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NamePrefix
 				"name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点名称前缀，为空字符串或 nil 时表示未开启节点名称前缀策略。",
+					Description: "Node name prefix. An empty string or nil means the node name prefix policy is not enabled.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1515,7 +1515,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NetworkTrafficMode
 				"network_traffic_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点间的网络通讯模式。",
+					Description: "Network communication mode between nodes",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1525,7 +1525,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "云服务器实例购买时长，单位为月。仅当InstanceChargeType=PrePaid时才返回的参数。",
+					Description: "Purchase duration for cloud server instances, in months. This parameter is returned only when InstanceChargeType=PrePaid",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1534,7 +1534,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PreScript
 				"pre_script": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "部署节点前执行脚本。",
+					Description: "Script to execute before deploying the node",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1543,7 +1543,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ProjectName
 				"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ECS所属项目，一个ECS只能归属于一个项目。",
+					Description: "Project to which the ECS belongs. Each ECS can only belong to one project.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1555,7 +1555,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Bandwidth
 						"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "公网 IP 的带宽峰值，单位：Mbps。",
+							Description: "Peak bandwidth for public IP, unit: Mbps",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1564,7 +1564,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: BillingType
 						"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。",
+							Description: "Billing type for public IP: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1573,7 +1573,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Isp
 						"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。",
+							Description: "Public IP line type. Parameter description: BGP: BGP (multi-line)",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -1586,7 +1586,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "节点自动开启公网访问的配置信息",
+					Description: "Configuration for automatic public network access for nodes",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1595,7 +1595,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PublicAccessEnabled
 				"public_access_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "节点是否自动开启公网访问。取值：  - false：关闭  - true：开启",
+					Description: "Enable public network access for nodes automatically. Options:   - false: off   - true: on",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1610,7 +1610,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Password
 								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Root 用户登录密码，使用 Base64 编码格式。请遵循云服务器对于实例密码的要求规范：长度为 8～30 个字符，不能以/和$6$开头，支持以下几项字符，且至少包含三项，小写字母a~z，大写字母A~Z，数字0~9，特殊字符( ) ` ~ ! @ # $ % ^ & * _   - + = | { } [ ] : ; ' < > , . ? /",
+									Description: "Root user login password in Base64 encoding. Follow the cloud server's requirements for instance passwords: 8–30 characters in length, must not start with / or $6$, supports the following character types and must include at least three types: lowercase letters a–z, uppercase letters A–Z, numbers 0–9, special characters ( ) ` ~ ! @ # $ % ^ & * _   - + = | { } [ ] : ; ' < > , . ? /",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1620,7 +1620,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: SshKeyPairName
 								"ssh_key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "SSH 密钥对名称。请确保该密钥对已在云服务器中创建或托管。",
+									Description: "SSH key pair name. Ensure the key pair is already created or hosted in the cloud server",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1629,14 +1629,14 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Type
 								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "节点的访问登录方式，参数值说明：Password：密码登录。SshKeyPair：SSH 密钥对登录。",
+									Description: "Node access login method. Parameter values: Password: password login; SshKeyPair: SSH key pair login",
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "节点的访问方式配置。",
+							Description: "Node access configuration.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1646,7 +1646,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SecurityGroupIds
 						"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "节点网络所在的安全组 ID 列表。",
+							Description: "List of security group IDs for the node network",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1656,7 +1656,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SecurityStrategies
 						"security_strategies": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "节点的安全策略，参数值说明：Hids：主机安全加固。",
+							Description: "Node security policy. Parameter description: Hids: Host security hardening.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1665,14 +1665,14 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SecurityStrategyEnabled
 						"security_strategy_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "节点是否启用了安全加固配置，参数值说明：true：已开启。false：未开启。",
+							Description: "Whether the node has enabled security hardening configuration. Parameter values: true: enabled; false: not enabled",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "节点安全配置。",
+					Description: "Node security configuration",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1681,7 +1681,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SpotStrategy
 				"spot_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "按量计费的抢占式策略，当InstanceChargeType=PostPaid时NoSpot：正常按量计费实例。SpotAsPriceGo：系统自动出价，跟随当前市场实际价格。",
+					Description: "Spot pricing strategy for pay-as-you-go billing. When InstanceChargeType=PostPaid: NoSpot: Standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, following the current market price.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -1698,7 +1698,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SubnetIds
 				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "节点网络所属的子网 ID 列表。",
+					Description: "List of subnet IDs for the node network.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1710,7 +1710,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PlacementGroupId
 						"placement_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "放置组Id",
+							Description: "Placement group ID",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1719,7 +1719,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "云盘容量，单位 GiB，取值说明：默认值：40GiB。极速型 SSD（ESSD_PL0，ESSD_FlexPL）：40~2048GiB。",
+							Description: "Disk capacity, in GiB. Value description: Default: 40 GiB. Ultra-fast SSD (ESSD_PL0, ESSD_FlexPL): 40–2048 GiB",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1728,7 +1728,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SubgroupNumber
 						"subgroup_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "放置子组",
+							Description: "Placement subgroup",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1737,7 +1737,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Type
 						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "云盘类型：ESSD_PL0：（默认值）性能级别为 PL0 的极速型 SSD 云盘。ESSD_FlexPL：性能级别为 PL1 的极速型 SSD 云盘。",
+							Description: "Cloud disk types: ESSD_PL0: (default) Ultra-fast SSD cloud disk with performance level PL0. ESSD_FlexPL: Ultra-fast SSD cloud disk with performance level PL1.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -1751,7 +1751,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "节点的系统盘配置。",
+					Description: "System disk configuration for the node",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1764,7 +1764,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "标签键。",
+								Description: "Label key",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
@@ -1776,7 +1776,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "标签值。",
+								Description: "Label value.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1785,7 +1785,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点池配置的标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Label information configured for the node pool\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1793,7 +1793,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "节点池中云服务器（ECS）实例配置。",
+			Description: "Cloud server (ECS) instance configuration in the node pool",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1804,11 +1804,11 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池 ID 。",
+		//	  "description": "Node pool ID",
 		//	  "type": "string"
 		//	}
 		"node_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "节点池 ID 。",
+			Description: "Node pool ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1818,30 +1818,30 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池中的节点统计。",
+		//	  "description": "Node statistics in the node pool.",
 		//	  "properties": {
 		//	    "CreatingCount": {
-		//	      "description": "Phase=Creating的节点总数量。",
+		//	      "description": "Total number of nodes in Phase=Creating.",
 		//	      "type": "integer"
 		//	    },
 		//	    "DeletingCount": {
-		//	      "description": "Phase=Deleting的节点总数量。",
+		//	      "description": "Total number of nodes with Phase=Deleting",
 		//	      "type": "integer"
 		//	    },
 		//	    "FailedCount": {
-		//	      "description": "Phase=Failed的节点总数量。",
+		//	      "description": "Total number of nodes with Phase=Failed",
 		//	      "type": "integer"
 		//	    },
 		//	    "RunningCount": {
-		//	      "description": "Phase=Running的节点总数量。",
+		//	      "description": "Total number of nodes with Phase=Running",
 		//	      "type": "integer"
 		//	    },
 		//	    "TotalCount": {
-		//	      "description": "节点池中的节点总数量。",
+		//	      "description": "Total number of nodes in the node pool",
 		//	      "type": "integer"
 		//	    },
 		//	    "UpdatingCount": {
-		//	      "description": "Phase=Updating的节点总数量。",
+		//	      "description": "Total number of nodes with Phase=Updating",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -1851,36 +1851,36 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CreatingCount
 				"creating_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Creating的节点总数量。",
+					Description: "Total number of nodes in Phase=Creating.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DeletingCount
 				"deleting_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Deleting的节点总数量。",
+					Description: "Total number of nodes with Phase=Deleting",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: FailedCount
 				"failed_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Failed的节点总数量。",
+					Description: "Total number of nodes with Phase=Failed",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RunningCount
 				"running_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Running的节点总数量。",
+					Description: "Total number of nodes with Phase=Running",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TotalCount
 				"total_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "节点池中的节点总数量。",
+					Description: "Total number of nodes in the node pool",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UpdatingCount
 				"updating_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Phase=Updating的节点总数量。",
+					Description: "Total number of nodes with Phase=Updating",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "节点池中的节点统计。",
+			Description: "Node statistics in the node pool.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -1890,7 +1890,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除节点池时，指定保留的相关资源，取值：取值为空：（默认值）删除关联资源。Ecs：删除节点池时，保留节点池中的云服务器（ECS）实例。若指定的节点池内存在包年包月的云服务器实例，且未选择保留云服务器，则该接口仅从节点池中移除云服务器实例，不会删除。您可以通过云服务器控制台或云服务器API查询到该实例，并按需执行后续操作。",
+		//	  "description": "When deleting a node pool, specify related resources to retain. Values: Empty value (default): delete associated resources Ecs: when deleting the node pool, retain ECS instances in the node pool. If the node pool contains prepaid ECS instances and retaining ECS is not selected, this API only removes the ECS instance from the node pool and does not delete it. You can query the instance via the ECS console or ECS API and perform subsequent operations as needed.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -1900,7 +1900,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"retain_resources": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "删除节点池时，指定保留的相关资源，取值：取值为空：（默认值）删除关联资源。Ecs：删除节点池时，保留节点池中的云服务器（ECS）实例。若指定的节点池内存在包年包月的云服务器实例，且未选择保留云服务器，则该接口仅从节点池中移除云服务器实例，不会删除。您可以通过云服务器控制台或云服务器API查询到该实例，并按需执行后续操作。",
+			Description: "When deleting a node pool, specify related resources to retain. Values: Empty value (default): delete associated resources Ecs: when deleting the node pool, retain ECS instances in the node pool. If the node pool contains prepaid ECS instances and retaining ECS is not selected, this API only removes the ECS instance from the node pool and does not delete it. You can query the instance via the ECS console or ECS API and perform subsequent operations as needed.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1911,15 +1911,15 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池状态。",
+		//	  "description": "Node pool status",
 		//	  "properties": {
 		//	    "Conditions": {
-		//	      "description": "节点池当前主状态下的状态条件，即进入该主状态的原因。",
+		//	      "description": "Status conditions for the current primary state of the node pool, i.e., the reason for entering this primary state",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Type": {
-		//	            "description": "节点池当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：ProgressingOk、ResourceCleanupFailed、Unknown、ClusterNotRunning。",
+		//	            "description": "Status conditions for the node pool in the current main state, i.e., the reasons for entering this main state. There can be multiple reasons. Parameter values: ProgressingOk, ResourceCleanupFailed, Unknown, ClusterNotRunning.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1929,7 +1929,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
-		//	      "description": "节点池的状态，参数值有：Creating、Running、Updating、Deleting、Failed、Scaling。",
+		//	      "description": "Status of the node pool. Parameter values: Creating, Running, Updating, Deleting, Failed, Scaling",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1943,21 +1943,21 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "节点池当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：ProgressingOk、ResourceCleanupFailed、Unknown、ClusterNotRunning。",
+								Description: "Status conditions for the node pool in the current main state, i.e., the reasons for entering this main state. There can be multiple reasons. Parameter values: ProgressingOk, ResourceCleanupFailed, Unknown, ClusterNotRunning.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "节点池当前主状态下的状态条件，即进入该主状态的原因。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Status conditions for the current primary state of the node pool, i.e., the reason for entering this primary state\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点池的状态，参数值有：Creating、Running、Updating、Deleting、Failed、Scaling。",
+					Description: "Status of the node pool. Parameter values: Creating, Running, Updating, Deleting, Failed, Scaling",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "节点池状态。",
+			Description: "Node pool status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -1967,17 +1967,17 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点池的标签信息",
+		//	  "description": "Node pool tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "节点池的标签信息。",
+		//	    "description": "Node pool tag information",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Label key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Label value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1994,7 +1994,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Label key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -2006,7 +2006,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Label value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2015,7 +2015,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "节点池的标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Node pool tag information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -2026,11 +2026,11 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新节点池的时间。",
+		//	  "description": "Node pool update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新节点池的时间。",
+			Description: "Node pool update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -2048,7 +2048,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "节点池是集群中具有相同配置的一组节点，一个节点池包含一个节点或多个节点。节点池的配置包含节点的属性，例如节点规格、可用区、标签、污点等。这些属性可以在创建节点池时指定，也可以在创建完成后进行编辑修改。",
+		Description: "A node pool is a group of nodes in a cluster with the same configuration. A node pool can contain one or more nodes. The node pool configuration includes node attributes such as node specifications, availability zones, labels, taints, and more. These attributes can be specified when creating the node pool or edited after creation.",
 		Version:     1,
 		Attributes:  attributes,
 	}

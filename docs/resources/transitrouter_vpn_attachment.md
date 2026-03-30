@@ -2,12 +2,12 @@
 page_title: "volcenginecc_transitrouter_vpn_attachment Resource - terraform-provider-volcenginecc"
 subcategory: "TransitRouter"
 description: |-
-  通过在VPN连接的IPsec连接和中转路由器之间建立连接，可以实现VPN连通的网络与中转路由器的私网互通。
+  By establishing a connection between the IPsec connection of the VPN and the transit router, you can enable communication between the VPN-connected network and the private network of the transit router.
 ---
 
 # volcenginecc_transitrouter_vpn_attachment (Resource)
 
-通过在VPN连接的IPsec连接和中转路由器之间建立连接，可以实现VPN连通的网络与中转路由器的私网互通。
+By establishing a connection between the IPsec connection of the VPN and the transit router, you can enable communication between the VPN-connected network and the private network of the transit router.
 
 ## Example Usage
 
@@ -32,36 +32,36 @@ resource "volcenginecc_transitrouter_vpn_attachment" "TransitRouterVpnAttachment
 
 ### Required
 
-- `transit_router_id` (String) 中转路由器实例的ID。
-- `vpn_connection_id` (String) IPsec连接的ID。
-- `zone_id` (String) IPsec连接所属可用区的ID。
+- `transit_router_id` (String) Transit router instance ID.
+- `vpn_connection_id` (String) IPsec connection ID.
+- `zone_id` (String) ID of the availability zone to which the IPsec connection belongs.
 
 ### Optional
 
-- `description` (String) 网络实例连接的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
-- `health_check_revoke_route_enabled` (Boolean) 是否开启健康检查收敛路由功能。true：是。仅当IPsec连接开启健康检查功能时生效，且只支持收敛静态路由，不支持收敛BGP路由。false：否。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `transit_router_attachment_name` (String) 网络实例连接的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为网络实例连接的ID。
-- `transit_router_route_table_id` (String) 关联的TR路由表ID。
+- `description` (String) Network instance connection description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.
+- `health_check_revoke_route_enabled` (Boolean) Whether to enable health check route convergence. true: Yes. Effective only when the IPsec connection has health check enabled; supports convergence of static routes only, not BGP routes. false: No.
+- `tags` (Attributes Set) Tag list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `transit_router_attachment_name` (String) Network instance connection name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the network instance connection ID.
+- `transit_router_route_table_id` (String) Associated TR route table ID.
 
 ### Read-Only
 
-- `auto_publish_route_enabled` (Boolean) 是否自动同步TR路由到网络实例路由表中。
-- `created_time` (String) 创建时间。
+- `auto_publish_route_enabled` (Boolean) Whether to automatically sync TR routes to the network instance route table.
+- `created_time` (String) Creation time.
 - `id` (String) Uniquely identifies the resource.
-- `ipv_6_enabled` (Boolean) 是否开启IPv6功能。
-- `status` (String) 网络实例连接的状态。Creating：创建中。Deleting：删除中。Pending：配置中。Available：可用。
-- `transit_router_attachment_id` (String) 网络实例连接的ID。
-- `updated_time` (String) 更新时间。
+- `ipv_6_enabled` (Boolean) Whether to enable IPv6.
+- `status` (String) Network instance connection status. Creating: being created. Deleting: being deleted. Pending: being configured. Available: available.
+- `transit_router_attachment_id` (String) Network instance connection ID.
+- `updated_time` (String) Update time.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.
 
 ## Import
 

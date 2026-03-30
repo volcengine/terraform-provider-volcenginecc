@@ -1,0 +1,544 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/CpuStrategy",
+    "/properties/Runtime",
+    "/properties/Command",
+    "/properties/Name",
+    "/properties/ProjectName",
+    "/properties/SourceType"
+  ],
+  "definitions": {
+    "AsyncTaskConfig": {
+      "description": "Asynchronous task configuration",
+      "properties": {
+        "DestinationConfig": {
+          "$ref": "#/definitions/DestinationConfig",
+          "description": "Asynchronous task callback target configuration",
+          "type": "object"
+        },
+        "EnableAsyncTask": {
+          "description": "Whether to enable asynchronous task",
+          "type": "boolean"
+        },
+        "MaxRetry": {
+          "description": "Number of retry attempts for asynchronous task failures. Available values: 0–3",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Credentials": {
+      "properties": {
+        "AccessKeyId": {
+          "description": "Account AccessKey ID",
+          "type": "string"
+        },
+        "SecretAccessKey": {
+          "description": "Account Secret Access Key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "AccessKeyId",
+        "SecretAccessKey"
+      ],
+      "type": "object"
+    },
+    "DestinationConfig": {
+      "description": "Asynchronous task callback target configuration",
+      "properties": {
+        "OnFailure": {
+          "$ref": "#/definitions/OnFailure",
+          "description": "Callback target configuration when the task fails",
+          "type": "object"
+        },
+        "OnSuccess": {
+          "$ref": "#/definitions/OnSuccess",
+          "description": "Callback target configuration when the task succeeds",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Env": {
+      "properties": {
+        "Key": {
+          "description": "Environment variable key. 1–63 characters; can include letters, numbers, and underscores (_), but cannot start with a number. Key must be unique within the same function",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Environment variable value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    },
+    "NasConfig": {
+      "description": "NAS storage configuration",
+      "properties": {
+        "FileSystemId": {
+          "description": "NAS file system ID.",
+          "type": "string"
+        },
+        "Gid": {
+          "description": "User group in the file system. Customization is not currently supported. If this parameter is provided, its value is 1000 (consistent with the function run user gid)",
+          "type": "integer"
+        },
+        "LocalMountPath": {
+          "description": "Function local mount directory. Length: 1–128 characters, must start with “/”, supports uppercase and lowercase letters, numbers, and special characters (- . _ ~ / : @ = + ? #).",
+          "type": "string"
+        },
+        "MountPointId": {
+          "description": "NAS mount point ID",
+          "type": "string"
+        },
+        "RemotePath": {
+          "description": "Remote directory in the file system. Length: 1–128 characters, must start with “/”, supports uppercase and lowercase letters, numbers, and special characters (- . _ ~ / : @ = + ? #)",
+          "type": "string"
+        },
+        "Uid": {
+          "description": "The user in the file system cannot be customized for now. If this parameter is provided, the value must be 1000 (consistent with the function run user uid).",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "RemotePath",
+        "FileSystemId",
+        "MountPointId",
+        "LocalMountPath"
+      ],
+      "type": "object"
+    },
+    "NasStorage": {
+      "properties": {
+        "EnableNas": {
+          "description": "Enable NAS storage mount. true: enabled, store data in NAS. false: disabled.",
+          "type": "boolean"
+        },
+        "NasConfigs": {
+          "description": "NAS storage configuration",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/NasConfig"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "EnableNas"
+      ],
+      "type": "object"
+    },
+    "OnFailure": {
+      "description": "Callback target configuration when the task fails",
+      "properties": {
+        "Destination": {
+          "description": "Specific callback target. Set the value to empty (\"\") to disable this callback",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OnSuccess": {
+      "description": "Callback target configuration when the task succeeds",
+      "properties": {
+        "Destination": {
+          "description": "Specific callback target. Set the value to empty (\"\") to disable this callback",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SourceAccessConfig": {
+      "properties": {
+        "Password": {
+          "description": "Image repository password",
+          "type": "string"
+        },
+        "Username": {
+          "description": "Image repository username",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Password",
+        "Username"
+      ],
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "Function tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Function tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    },
+    "TlsConfig": {
+      "properties": {
+        "EnableLog": {
+          "description": "TLS log feature toggle. true: enabled, function stdout/stderr logs will be collected to the specified log project and log topic in Log Service. false: disabled, logs will not be collected",
+          "type": "boolean"
+        },
+        "TlsProjectId": {
+          "description": "TLS log project ID",
+          "type": "string"
+        },
+        "TlsTopicId": {
+          "description": "TLS log topic ID.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "EnableLog"
+      ],
+      "type": "object"
+    },
+    "TosMountConfig": {
+      "description": "TOS object storage mount configuration",
+      "properties": {
+        "Credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "AKSK with TOS domain access permission.",
+          "type": "object"
+        },
+        "EnableTos": {
+          "description": "Enable TOS storage mount.",
+          "type": "boolean"
+        },
+        "MountPoints": {
+          "description": "TOS storage configuration list",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/TosMountPoint"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "EnableTos"
+      ],
+      "type": "object"
+    },
+    "TosMountPoint": {
+      "properties": {
+        "BucketName": {
+          "description": "TOS bucket name.",
+          "type": "string"
+        },
+        "BucketPath": {
+          "description": "Mounted TOS Bucket path.",
+          "type": "string"
+        },
+        "Endpoint": {
+          "description": "TOS access domain name.",
+          "type": "string"
+        },
+        "LocalMountPath": {
+          "description": "Function local mount directory.",
+          "type": "string"
+        },
+        "ReadOnly": {
+          "description": "Function local directory access permission. After mounting a TOS bucket, whether the function's local mount directory is read-only. true: read-only; false (default): read/write",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Endpoint",
+        "BucketName",
+        "BucketPath",
+        "LocalMountPath"
+      ],
+      "type": "object"
+    },
+    "VpcConfig": {
+      "properties": {
+        "EnableSharedInternetAccess": {
+          "description": "Function public network access switch. Whether to access the public network via veFaaS VPC shared NAT gateway. Values: true: enabled, access public network via default network interface. Public outbound traffic fees apply. false: disabled, function cannot access public network via default network interface.",
+          "type": "boolean"
+        },
+        "EnableVpc": {
+          "description": "Whether the function enables private network access",
+          "type": "boolean"
+        },
+        "SecurityGroupIds": {
+          "description": "Security group ID",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "SubnetIds": {
+          "description": "Subnet ID",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "VpcId": {
+          "description": "VPC ID. If the VPC ID is an empty string, it means the current VPC configuration will be deleted",
+          "type": "string"
+        }
+      },
+      "required": [
+        "EnableVpc"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "A function consists of function code and function configuration. It is the basic unit for scheduling and running function code.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/FunctionId",
+      "/properties/Name",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vefaas:CreateFunction",
+        "vefaas:GetFunction",
+        "tag:GetResources"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vefaas:DeleteFunction",
+        "vefaas:GetFunction"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vefaas:ListFunctions"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vefaas:GetFunction",
+        "tag:GetResources"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vefaas:UpdateFunction",
+        "vefaas:GetFunction",
+        "tag:GetResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FunctionId"
+  ],
+  "properties": {
+    "AsyncTaskConfig": {
+      "$ref": "#/definitions/AsyncTaskConfig",
+      "description": "Asynchronous task configuration",
+      "type": "object"
+    },
+    "CodeSize": {
+      "description": "Code package size (MB).",
+      "type": "integer"
+    },
+    "CodeSizeLimit": {
+      "description": "Code package size limit. SourceType=zip, CodeSizeLimit=15MB. SourceType=tos, CodeSizeLimit=256MB.",
+      "type": "integer"
+    },
+    "Command": {
+      "description": "Custom startup command for the instance (currently only supported in native/v1 runtime)",
+      "type": "string"
+    },
+    "CpuStrategy": {
+      "description": "Function CPU billing policy. When creating a microservice application type function, this field must be set to always, meaning at least one instance is running. Other function types do not support this field",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Function creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Function description. Up to 1000 Unicode characters",
+      "maxLength": 1000,
+      "semantic": "description",
+      "type": "string"
+    },
+    "EnableApmplus": {
+      "description": "Whether to enable application monitoring",
+      "type": "boolean"
+    },
+    "Envs": {
+      "description": "Environment variables.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Env"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ExclusiveMode": {
+      "default": false,
+      "description": "Exclusive mode switch. true: disables multi-concurrency per instance, i.e., exclusive mode where a single instance can only handle one request at a time. false (default): enables multi-concurrency per instance, i.e., non-exclusive mode where a single instance can handle multiple requests at the same time. You can set the maximum concurrent requests per instance using MaxConcurrency.",
+      "type": "boolean"
+    },
+    "FunctionId": {
+      "description": "Function ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InitializerSec": {
+      "description": "Function initialization timeout configuration",
+      "type": "integer"
+    },
+    "InstanceType": {
+      "description": "Instance type of the function instance. Null value: CPU instance. Non-null value: GPU instance.",
+      "type": "string"
+    },
+    "LastUpdateTime": {
+      "description": "Function update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "MaxConcurrency": {
+      "default": 100,
+      "description": "Maximum concurrency per instance. Effective when ExclusiveMode = false. Range: 1–1000",
+      "maximum": 1000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "MemoryMB": {
+      "default": 1024,
+      "description": "Maximum memory per instance, unit: MiB. Range: 512–4096, in increments of 512. Default: 1024",
+      "maximum": 4096,
+      "minimum": 512,
+      "type": "integer"
+    },
+    "Name": {
+      "description": "Function name. Function names must be unique within the same account. Function names support uppercase and lowercase English letters, numbers, hyphens (-), and underscores (_), with a length limit of 4–64 characters.",
+      "maxLength": 64,
+      "minLength": 4,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NasStorage": {
+      "$ref": "#/definitions/NasStorage",
+      "description": "NAS file storage mount configuration",
+      "type": "object"
+    },
+    "Owner": {
+      "description": "Function owner (Account Id).",
+      "type": "string"
+    },
+    "Port": {
+      "description": "Custom listening port for the instance (currently only supported in native/v1 runtime)",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "Project name associated with the function",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RequestTimeout": {
+      "default": 30,
+      "description": "Request timeout. Unit: seconds. Range: 1–900. Default: 30.",
+      "maximum": 900,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "Role": {
+      "description": "IAM role bound to the function instance",
+      "type": "string"
+    },
+    "Runtime": {
+      "description": "Function runtime. Values: golang/v1, native/v1, nativejava8/v1, node14/v1, node20/v1, nodeprime14/v1, python3.12/v1, python3.8/v1, python3.9/v1.",
+      "type": "string"
+    },
+    "Source": {
+      "description": "Code source. Values: zip: Base64-encoded binary ZIP file; tos: string in the format bucket_name:object_key; image: image address in the format host/namespace/repo:tag",
+      "type": "string"
+    },
+    "SourceAccessConfig": {
+      "$ref": "#/definitions/SourceAccessConfig",
+      "description": "Image repository access configuration.",
+      "type": "object"
+    },
+    "SourceType": {
+      "description": "Code source type. Values: tos: object storage (TOS); zip: local compressed file; image: image repository (CR), supports Basic and Enterprise editions",
+      "enum": [
+        "tos",
+        "zip",
+        "image"
+      ],
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Function tags",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TlsConfig": {
+      "$ref": "#/definitions/TlsConfig",
+      "description": "TLS configuration for Log Service",
+      "type": "object"
+    },
+    "TosMountConfig": {
+      "$ref": "#/definitions/TosMountConfig",
+      "description": "TOS object storage mount configuration",
+      "type": "object"
+    },
+    "TriggersCount": {
+      "description": "Number of triggers for this function.",
+      "type": "integer"
+    },
+    "VpcConfig": {
+      "$ref": "#/definitions/VpcConfig",
+      "description": "Private network VPC configuration.",
+      "type": "object"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/FunctionId",
+    "/properties/CodeSize",
+    "/properties/CodeSizeLimit",
+    "/properties/CreationTime",
+    "/properties/LastUpdateTime",
+    "/properties/TriggersCount",
+    "/properties/InstanceType",
+    "/properties/Owner"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VEFAAS::Function",
+  "writeOnlyProperties": [
+    "/properties/SourceAccessConfig",
+    "/properties/TosMountConfig/Credentials"
+  ]
+}

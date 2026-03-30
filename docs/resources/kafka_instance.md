@@ -2,12 +2,12 @@
 page_title: "volcenginecc_kafka_instance Resource - terraform-provider-volcenginecc"
 subcategory: "Kafka"
 description: |-
-  消息队列 Kafka版是一款基于 Apache Kafka 构建的分布式消息中间件服务，具备高吞吐、高可扩展性等特性，提供流式数据的发布/订阅和多副本存储机制，广泛应用于日志压缩收集、流式数据处理、消息解耦、流量削峰去谷等应用场景。
+  Kafka Message Queue is a distributed messaging middleware service built on Apache Kafka. It features high throughput and scalability, provides stream data publishing/subscription and multi-replica storage mechanisms, and is widely used in log compression and collection, stream data processing, message decoupling, and traffic peak shaving scenarios.
 ---
 
 # volcenginecc_kafka_instance (Resource)
 
-消息队列 Kafka版是一款基于 Apache Kafka 构建的分布式消息中间件服务，具备高吞吐、高可扩展性等特性，提供流式数据的发布/订阅和多副本存储机制，广泛应用于日志压缩收集、流式数据处理、消息解耦、流量削峰去谷等应用场景。
+Kafka Message Queue is a distributed messaging middleware service built on Apache Kafka. It features high throughput and scalability, provides stream data publishing/subscription and multi-replica storage mechanisms, and is widely used in log compression and collection, stream data processing, message decoupling, and traffic peak shaving scenarios.
 
 ## Example Usage
 
@@ -45,65 +45,65 @@ resource "volcenginecc_kafka_instance" "KafkaInstanceDemo" {
 
 ### Required
 
-- `compute_spec` (String) 实例的计算规格。
-- `subnet_id` (String) 实例所在的 VPC 子网 ID。
-- `version` (String) 支持的 Kafka 版本，当前支持的版本包括 2.2.2, 2.8.2。
-- `vpc_id` (String) 实例所在的私有网络 (VPC) ID。
-- `zone_id` (String) 实例所在的可用区 ID。消息队列 Kafka版实例支持跨 AZ 部署, 多个可用区ID之间以逗号间隔。
+- `compute_spec` (String) Instance compute specification.
+- `subnet_id` (String) VPC subnet ID where the instance is located.
+- `version` (String) Supported Kafka versions. Currently supported versions include 2.2.2 and 2.8.2.
+- `vpc_id` (String) Private network (VPC) ID where the instance is located.
+- `zone_id` (String) Availability zone ID where the instance is located. Message Queue for Kafka instances support cross-AZ deployment; separate multiple availability zone IDs with commas.
 
 ### Optional
 
-- `charge_info` (Attributes) Kafka 实例的计费类型等计费信息。 (see [below for nested schema](#nestedatt--charge_info))
-- `eip_id` (String) EIP 的 ID。
-- `instance_description` (String) Kafka 实例的简单描述。长度范围为 1~128 个字符。
-- `instance_name` (String) Kafka 实例的名称。只能包含中文、字母、数字、下划线（_）和连字符（-）。不能以数字和连字符（-）开头。长度范围为 1~128 个字符。
-- `ip_white_list` (Set of String) 实例绑定的白名单 ID 列表。绑定白名单后，仅配置在白名单中的 IP 地址与地址段才能访问此实例。若未设置此参数，新 Kafka 实例将绑定白名单 default，对应 IP 地址为 0.0.0.0，表示允许所有地址访问该 Kafka 实例。
-- `need_rebalance` (Boolean) 是否开启再均衡。
-- `parameters` (String) Kafka 实例的初始参数配置,格式为json,参数列表: 最大消息大小(MessageMaxByte)1-12MB 默认10, 消息保留时间(LogRetentionHours)0-2160Hour 默认72, 消费位点保留时长(OffsetRetentionMinutes)1-10080Min 默认4320 消息时间类型(MessageTimestampType)LogAppendTime/CreateTime 消息写入到服务端时间、producer创建消息时间。
-- `partition_number` (Number) 分区数量。
-- `project_name` (String) 当前创建的 Kafka 实例所属的 IAM 项目。
-- `storage_space` (Number) 实例的存储空间，单位为 GiB, 必须指定为 100 的倍数。
-- `storage_type` (String) Kafka 实例数据存储的云盘类型。可设置为 ESSD_FlexPL 或 ESSD_PL0，默认为 ESSD_FlexPL。
-- `tags` (Attributes Set) 云资源标签。可以将实例通过标签进行归类，便于实例的搜索和资源聚合。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `user_name` (String) SASL/PLAIN 用户名称，需要满足以下要求: 1.由小写字母、数字、连字符（-）或下划线组成。2.长度为 3~64 个字符。3.用户名不支持设置为 admin 或 monitor,且实例内用户名称唯一。
-- `user_password` (String) SASL/PLAIN 用户的密码，需要满足以下要求: 1.长度在8到32个字符 2.由大写字母、小写字母、数字、特殊字符中的任意三种组成 3.支持的特殊字符包括 !@#$%^&*()_+-=。
+- `charge_info` (Attributes) Billing type and related billing information for the Kafka instance. (see [below for nested schema](#nestedatt--charge_info))
+- `eip_id` (String) EIP ID.
+- `instance_description` (String) Brief description of the Kafka instance. Length must be between 1 and 128 characters.
+- `instance_name` (String) Name of the Kafka instance. Only Chinese characters, letters, numbers, underscores (_), and hyphens (-) are allowed. Cannot start with a number or hyphen (-). Length must be between 1 and 128 characters.
+- `ip_white_list` (Set of String) List of allowlist IDs bound to the instance. After binding an allowlist, only IP addresses and ranges configured in the allowlist can access this instance. If this parameter is not set, the new Kafka instance will bind the allowlist 'default', with IP address 0.0.0.0, allowing all addresses to access the Kafka instance.
+- `need_rebalance` (Boolean) Whether to enable rebalancing.
+- `parameters` (String) Initial parameter configuration for Kafka instances, formatted as JSON. Parameter list: Maximum message size (MessageMaxByte) 1–12 MB, default 10; message retention time (LogRetentionHours) 0–2160 hours, default 72; offset retention duration (OffsetRetentionMinutes) 1–10080 minutes, default 4320; message timestamp type (MessageTimestampType) LogAppendTime/CreateTime—time when the message is written to the server or when the producer creates the message.
+- `partition_number` (Number) Number of partitions.
+- `project_name` (String) IAM project to which the currently created Kafka instance belongs.
+- `storage_space` (Number) Instance storage space, measured in GiB, must be specified as a multiple of 100.
+- `storage_type` (String) Cloud disk type for Kafka instance data storage. Can be set to ESSD_FlexPL or ESSD_PL0; default is ESSD_FlexPL.
+- `tags` (Attributes Set) Cloud resource tags. You can categorize instances by tags for easier search and resource aggregation.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `user_name` (String) SASL/PLAIN username. Requirements: 1. Consists of lowercase letters, numbers, hyphens (-), or underscores. 2. Length: 3–64 characters. 3. Username cannot be set to admin or monitor, and must be unique within the instance.
+- `user_password` (String) Password for SASL/PLAIN users. Must meet the following requirements: 1. Length between 8 and 32 characters 2. Must contain any three of the following: uppercase letters, lowercase letters, numbers, special characters 3. Supported special characters: !@#$%^&*()_+-=
 
 ### Read-Only
 
-- `account_id` (String) 创建实例的主账号 ID。
-- `connection_info` (Attributes Set) Kafka 实例的连接信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--connection_info))
-- `created_time` (String) 实例的创建时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。
+- `account_id` (String) Main account ID for creating the instance.
+- `connection_info` (Attributes Set) Connection information for the Kafka instance.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--connection_info))
+- `created_time` (String) Instance creation time. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.
 - `id` (String) Uniquely identifies the resource.
-- `instance_id` (String) Kafka 实例的 ID。
-- `instance_status` (String) Kafka 实例的状态。Error：错误, Deleting：删除中, Creating：部署中, Upgrading：升级中, Updating：变更中, Running：运行中, Scaling：更配中, Rebuilding：重建中, Destroying：销毁中, Restarting：重启中, Migrating：迁移中, Restoring：恢复中, Importing：导入中, NetCreating：申请公网中, NetReleasing：释放公网中, Rollingback：回滚中, CreateFailed：创建失败, UpgradeFailed：升级失败, ScaleFailed：更配失败, RestartFailed：重启失败
-- `private_domain_on_public` (Boolean) 是否开启公网解析。
-- `topics` (Set of String) 一个 Kafka 实例下的 Topic 列表
-- `usable_group_number` (Number) 当前实例剩余可用消费组个数。
-- `usable_partition_number` (Number) 当前实例剩余可用分区数。
-- `used_group_number` (Number) 当前实例已经创建的消费组(Group)个数。
-- `used_partition_number` (Number) 当前实例已经使用的分区个数。
-- `used_storage_space` (Number) 实例已用储空间，单位为 GiB。
-- `used_topic_number` (Number) 当前实例已创建的 Topic 个数。
+- `instance_id` (String) Kafka instance ID.
+- `instance_status` (String) Status of the Kafka instance. Error: error, Deleting: deleting, Creating: deploying, Upgrading: upgrading, Updating: updating, Running: running, Scaling: scaling, Rebuilding: rebuilding, Destroying: destroying, Restarting: restarting, Migrating: migrating, Restoring: restoring, Importing: importing, NetCreating: applying for public network, NetReleasing: releasing public network, Rollingback: rolling back, CreateFailed: creation failed, UpgradeFailed: upgrade failed, ScaleFailed: scaling failed, RestartFailed: restart failed
+- `private_domain_on_public` (Boolean) Whether to enable public network domain resolution.
+- `topics` (Set of String) List of topics under a Kafka instance
+- `usable_group_number` (Number) The remaining number of available consumer groups for the current instance.
+- `usable_partition_number` (Number) Number of available partitions remaining for the current instance.
+- `used_group_number` (Number) Number of consumer groups (Group) currently created in the instance.
+- `used_partition_number` (Number) Number of partitions currently used by the instance.
+- `used_storage_space` (Number) Used storage space of the instance, measured in GiB.
+- `used_topic_number` (Number) Number of topics created in the current instance.
 
 <a id="nestedatt--charge_info"></a>
 ### Nested Schema for `charge_info`
 
 Optional:
 
-- `auto_renew` (Boolean) 包年包月实例到期后是否自动续费，true-自动续费 false(默认)-不自动续费,到期实例关停。
-- `charge_type` (String) 实例的计费类型，支持的类型包括: PostPaid-按量付费, PrePaid-包年包月。
-- `period` (Number) 包年包月类型实例的购买时长。
-- `period_unit` (String) 包年包月类型实例的生命周期单位，即指定以月（Month/Monthly）或以年（Year/Yearly）为单位购买。
+- `auto_renew` (Boolean) Whether to automatically renew the subscription instance after expiration. true   - auto renewal; false (default)   - no auto renewal, instance will be stopped upon expiration.
+- `charge_type` (String) Billing type for the instance. Supported types: PostPaid   - pay-as-you-go, PrePaid   - subscription.
+- `period` (Number) Purchase duration for subscription-based instances.
+- `period_unit` (String) The lifecycle unit for subscription-based instances, specifying purchase by month (Month/Monthly) or by year (Year/Yearly).
 
 Read-Only:
 
-- `charge_expire_time` (String) 包年包月实例的到期时间。
-- `charge_start_time` (String) 实例的计费开始时间。
-- `charge_status` (String) 实例的计费状态，支持的类型包括:  Normal-正常, Overdue-按量计费欠费, Expired-包年包月到期
-- `overdue_reclaim_time` (String) 实例欠费关停后的预计释放时间。
-- `overdue_time` (String) 实例的欠费关停时间。
+- `charge_expire_time` (String) Expiration time for the subscription instance.
+- `charge_start_time` (String) Instance billing start time.
+- `charge_status` (String) Billing status of the instance. Supported types: Normal   - normal, Overdue   - pay-as-you-go overdue, Expired   - subscription expired
+- `overdue_reclaim_time` (String) Estimated release time after the instance is stopped due to overdue payment.
+- `overdue_time` (String) Instance suspension time due to overdue payment.
 
 
 <a id="nestedatt--tags"></a>
@@ -111,8 +111,8 @@ Read-Only:
 
 Optional:
 
-- `key` (String) 标签的键。
-- `value` (String) 标签的值。
+- `key` (String) Tag key.
+- `value` (String) Tag value.
 
 
 <a id="nestedatt--connection_info"></a>
@@ -120,10 +120,10 @@ Optional:
 
 Read-Only:
 
-- `endpoint_type` (String) 实例的接入点类型。PLAINTEXT：默认接入点。SASL_PLAINTEXT：SASL接入点（私网）。SASL_SSL：SASL接入点（公网）。未开启公网访问时，不提供此接入点。
-- `internal_endpoint` (String) 实例私网访问域名。
-- `network_type` (String) 接入点的网络类型。统一为 PrivateNetwork。
-- `public_endpoint` (String) 实例公网访问域名。
+- `endpoint_type` (String) Instance endpoint type. PLAINTEXT: default endpoint. SASL_PLAINTEXT: SASL endpoint (private network). SASL_SSL: SASL endpoint (public network). If public access is not enabled, this endpoint is not provided.
+- `internal_endpoint` (String) Instance private network access domain name.
+- `network_type` (String) Network type for the access point. Unified as PrivateNetwork.
+- `public_endpoint` (String) Public access domain name for the instance.
 
 ## Import
 

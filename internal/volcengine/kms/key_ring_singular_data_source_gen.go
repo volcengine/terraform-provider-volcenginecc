@@ -26,102 +26,102 @@ func keyRingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环创建日期。",
+		//	  "description": "Keyring creation date",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"create_date": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "密钥环创建日期。",
+			Description: "Keyring creation date",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环描述，长度为 0 - 8192 个字符。",
+		//	  "description": "Keyring description, length: 0–8192 characters",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥环描述，长度为 0   - 8192 个字符。",
+			Description: "Keyring description, length: 0–8192 characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环密钥次数。",
+		//	  "description": "Number of keys in keyring",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"key_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "密钥环密钥次数。",
+			Description: "Number of keys in keyring",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyRingId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环唯一标识符，UUID形式。",
+		//	  "description": "Keyring unique identifier, in UUID format",
 		//	  "type": "string"
 		//	}
 		"key_ring_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥环唯一标识符，UUID形式。",
+			Description: "Keyring unique identifier, in UUID format",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyringName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环名称，长度为 2 - 31 个字符。合法字符：[a-zA-Z0-9-_]。",
+		//	  "description": "Keyring name, length: 2–31 characters. Valid characters: [a-zA-Z0-9-_]",
 		//	  "type": "string"
 		//	}
 		"keyring_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥环名称，长度为 2   - 31 个字符。合法字符：[a-zA-Z0-9-_]。",
+			Description: "Keyring name, length: 2–31 characters. Valid characters: [a-zA-Z0-9-_]",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyringType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环类型，取值：CustomKeyring。",
+		//	  "description": "Keyring type, value: CustomKeyring",
 		//	  "type": "string"
 		//	}
 		"keyring_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥环类型，取值：CustomKeyring。",
+			Description: "Keyring type, value: CustomKeyring",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称，默认值：default。",
+		//	  "description": "Project name, default value: default",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称，默认值：default。",
+			Description: "Project name, default value: default",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环租户ID。",
+		//	  "description": "Keyring tenant ID",
 		//	  "type": "string"
 		//	}
 		"uid": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥环租户ID。",
+			Description: "Keyring tenant ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥环更新日期。",
+		//	  "description": "Keyring update date",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"update_date": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "密钥环更新日期。",
+			Description: "Keyring update date",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

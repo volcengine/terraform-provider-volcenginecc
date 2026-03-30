@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rocketmq_allow_list Resource - terraform-provider-volcenginecc"
 subcategory: "RocketMQ"
 description: |-
-  RocketMQ访问白名单。
+  RocketMQ Access Allowlist
 ---
 
 # volcenginecc_rocketmq_allow_list (Resource)
 
-RocketMQ访问白名单。
+RocketMQ Access Allowlist
 
 ## Example Usage
 
@@ -28,23 +28,23 @@ resource "volcenginecc_rocketmq_allow_list" "RocketMQAllowListDemo" {
 
 ### Required
 
-- `allow_list_name` (String) 白名单名称。
+- `allow_list_name` (String) Allowlist Name
 
 ### Optional
 
-- `allow_list` (String) IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。
-- `allow_list_category` (String) 白名单分类。
-- `allow_list_desc` (String) 白名单描述。
-- `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `associated_instances` (Attributes List) 绑定的实例列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associated_instances))
-- `instance_id` (String) 实例ID。
+- `allow_list` (String) IP allowlist. Separate multiple IP addresses with commas (,) and do not repeat addresses
+- `allow_list_category` (String) Allowlist Category
+- `allow_list_desc` (String) Allowlist Description
+- `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is supported
+- `associated_instances` (Attributes List) Bound Instance List
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
+- `instance_id` (String) Instance ID
 
 ### Read-Only
 
-- `allow_list_id` (String) 白名单的id。
-- `allow_list_ip_num` (Number) 白名单内的 IP 地址（或地址段）总数。
-- `associated_instance_num` (Number) 白名单下绑定的实例总数
+- `allow_list_id` (String) Allowlist ID
+- `allow_list_ip_num` (Number) Total number of IP addresses (or address ranges) in the allowlist
+- `associated_instance_num` (Number) Total number of instances bound to the allowlist
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--associated_instances"></a>
@@ -52,7 +52,7 @@ resource "volcenginecc_rocketmq_allow_list" "RocketMQAllowListDemo" {
 
 Optional:
 
-- `instance_id` (String) 实例ID。
+- `instance_id` (String) Instance ID
 
 ## Import
 

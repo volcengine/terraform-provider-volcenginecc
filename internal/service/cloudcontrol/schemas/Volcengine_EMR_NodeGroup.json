@@ -14,11 +14,11 @@
     "ApplicationLayout": {
       "properties": {
         "ApplicationName": {
-          "description": "应用名称。",
+          "description": "Application name.",
           "type": "string"
         },
         "LayoutComponentNames": {
-          "description": "组件的自定义配置参数列表。",
+          "description": "Custom configuration parameter list for the component.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -32,15 +32,15 @@
     "ChargePreConfig": {
       "properties": {
         "AutoRenew": {
-          "description": "是否开启自动续费。",
+          "description": "Whether to enable auto-renewal.",
           "type": "boolean"
         },
         "AutoRenewPeriod": {
-          "description": "自动续费触发时的续费时长，当autoRenew=true时，默认值=1。",
+          "description": "Renewal duration when auto-renewal is triggered. When autoRenew=true, the default value is 1.",
           "type": "integer"
         },
         "AutoRenewPeriodUnit": {
-          "description": "自动续费触发时的续费时长单位，当autoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。",
+          "description": "Renewal duration unit when auto-renewal is triggered. When autoRenew=true, the default value is Month. Value range: Month: month. Year: year.",
           "enum": [
             "Month",
             "Year"
@@ -48,11 +48,11 @@
           "type": "string"
         },
         "ChargePeriod": {
-          "description": "chargeType=PRE默认值=1，包月的购买时长单位。",
+          "description": "When chargeType=PRE, the default value is 1. The unit for the purchase duration when chargeType=PRE is monthly subscription.",
           "type": "integer"
         },
         "ChargePeriodUnit": {
-          "description": "chargeType=PRE时，默认值=Month，包月的购买时长单位。取值范围：Month：月。Year：年。",
+          "description": "When chargeType=PRE, the default value is Month. The unit for the purchase duration when chargeType=PRE is monthly subscription. Value range: Month (month), Year (year).",
           "enum": [
             "Month",
             "Year"
@@ -60,7 +60,7 @@
           "type": "string"
         },
         "ChargeType": {
-          "description": "付费类型，枚举值：POST，PRE。",
+          "description": "Payment type. Enum values: POST, PRE.",
           "enum": [
             "POST",
             "PRE"
@@ -73,15 +73,15 @@
     "DataDisk": {
       "properties": {
         "Count": {
-          "description": "磁盘块数，默认值4，最大15，最小1。",
+          "description": "Number of disk blocks. Default value: 4. Maximum: 15. Minimum: 1.",
           "type": "integer"
         },
         "Size": {
-          "description": "磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+          "description": "Disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.",
           "type": "integer"
         },
         "VolumeType": {
-          "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+          "description": "Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
           "type": "string"
         }
       },
@@ -90,45 +90,45 @@
     "Node": {
       "properties": {
         "CreatedTime": {
-          "description": "节点创建时间。",
+          "description": "Node creation time.",
           "format": "int64",
           "type": "integer"
         },
         "EcsInstanceType": {
-          "description": "ecs实例规格。",
+          "description": "ecs instance specification.",
           "type": "string"
         },
         "NodeFqdn": {
-          "description": "节点FQDN。",
+          "description": "Node FQDN.",
           "type": "string"
         },
         "NodeId": {
-          "description": "节点ID。",
+          "description": "Node ID.",
           "type": "string"
         },
         "NodeName": {
-          "description": "节点名称。",
+          "description": "Node name.",
           "type": "string"
         },
         "NodeState": {
-          "description": "节点状态。UNKNOWN：未知状态。CREATING：创建中。RUNNING：运行中。STOPPING：停止中。STOPPED：已停止。REBOOTING：重启中。DELETED：已删除。",
+          "description": "Node status. UNKNOWN: Unknown. CREATING: Creating. RUNNING: Running. STOPPING: Stopping. STOPPED: Stopped. REBOOTING: Rebooting. DELETED: Deleted.",
           "type": "string"
         },
         "PrivateIp": {
-          "description": "私有IP。",
+          "description": "Private IP.",
           "type": "string"
         },
         "PublicIp": {
-          "description": "公网IP。",
+          "description": "Public IP.",
           "type": "string"
         },
         "ReadyTime": {
-          "description": "准备完毕时间。",
+          "description": "Ready time.",
           "format": "int64",
           "type": "integer"
         },
         "TerminateTime": {
-          "description": "集群终止时间。",
+          "description": "Cluster termination time.",
           "format": "int64",
           "type": "integer"
         }
@@ -138,18 +138,18 @@
     "SystemDisk": {
       "properties": {
         "Size": {
-          "description": "系统盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+          "description": "System disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.",
           "type": "integer"
         },
         "VolumeType": {
-          "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。",
+          "description": "Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "E-MapReduce集群由多个不同类型的实例节点组成，包括主实例节点（Master）、核心实例节点（Core）和计算实例节点（Task）。不同实例节点上部署的服务进程不同，负责完成的任务也不同。",
+  "description": "An E-MapReduce cluster consists of multiple types of instance nodes, including master instance nodes (Master), core instance nodes (Core), and task instance nodes (Task). Different service processes are deployed on each node type, and each is responsible for different tasks.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ClusterId",
@@ -205,7 +205,7 @@
   ],
   "properties": {
     "ApplicationLayouts": {
-      "description": "当前节点组可布局的组件名称列表。",
+      "description": "List of component names that can be deployed in the current node group.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/ApplicationLayout"
@@ -215,11 +215,11 @@
     },
     "ChargePreConfig": {
       "$ref": "#/definitions/ChargePreConfig",
-      "description": "包周期付费配置。",
+      "description": "Subscription payment configuration.",
       "type": "object"
     },
     "ChargeType": {
-      "description": "付费类型。PRE表示包月，POST表示按量计费。",
+      "description": "Payment type. PRE indicates monthly subscription, POST indicates pay-as-you-go.",
       "enum": [
         "POST",
         "PRE"
@@ -227,17 +227,17 @@
       "type": "string"
     },
     "ClusterId": {
-      "description": "集群ID。",
+      "description": "Cluster ID.",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation time.",
       "format": "int64",
       "semantic": "createdTime",
       "type": "integer"
     },
     "DataDisks": {
-      "description": "数据盘配置。",
+      "description": "Data disk configuration.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/DataDisk"
@@ -246,7 +246,7 @@
       "uniqueItems": true
     },
     "EcsInstanceTypes": {
-      "description": "ECS实例规格列表。当前修改仅支持单个实例规格。",
+      "description": "ECS instance specification list. Currently, only a single instance specification can be modified.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -255,7 +255,7 @@
       "uniqueItems": true
     },
     "LayoutComponentNames": {
-      "description": "返回的节点组组件的自定义配置参数列表。",
+      "description": "Custom configuration parameter list for the returned node group components.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -264,31 +264,31 @@
       "uniqueItems": true
     },
     "NodeCount": {
-      "description": "节点数量。取值范围：1~1000。",
+      "description": "Node count. Value range: 1~1000.",
       "maximum": 1000,
       "type": "integer"
     },
     "NodeGroupId": {
-      "description": "节点组ID。",
+      "description": "Node group ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "NodeGroupName": {
-      "description": "节点组名称。",
+      "description": "Node group name.",
       "semantic": "resourceName",
       "type": "string"
     },
     "NodeGroupState": {
-      "description": "节点组状态。RUNNING：运行中。EXTENDING：扩容中。REDUCING：缩容中。DISK_EXTENDING：磁盘扩容中。MODIFYING：变配中。",
+      "description": "Node group status. RUNNING: Running. EXTENDING: Expanding. REDUCING: Shrinking. DISK_EXTENDING: Disk expansion. MODIFYING: Configuration modification in progress.",
       "semantic": "status",
       "type": "string"
     },
     "NodeGroupType": {
-      "description": "节点组类型。",
+      "description": "Node group type.",
       "type": "string"
     },
     "Nodes": {
-      "description": "节点列表。",
+      "description": "Node list.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Node"
@@ -297,7 +297,7 @@
       "uniqueItems": true
     },
     "SubnetIds": {
-      "description": "子网ID列表。",
+      "description": "Subnet ID list.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -307,24 +307,24 @@
     },
     "SystemDisk": {
       "$ref": "#/definitions/SystemDisk",
-      "description": "系统盘。",
+      "description": "System disk.",
       "type": "object"
     },
     "TargetDiskSize": {
-      "description": "待扩容的目标磁盘大小，最小60GB，最大2048GB，单位GB。",
+      "description": "Target disk size for expansion. Minimum 60GB, maximum 2048GB, unit: GB.",
       "maximum": 2048,
       "type": "integer"
     },
     "TerminateTime": {
-      "description": "集群终止时间。",
+      "description": "Cluster termination time.",
       "type": "string"
     },
     "WithPublicIp": {
-      "description": "ECS是否附带公网IP。",
+      "description": "Whether the ECS instance includes a public IP.",
       "type": "boolean"
     },
     "ZoneId": {
-      "description": "zoneId，为空时默认复用集群的zoneId。",
+      "description": "zoneId. If empty, the cluster's zoneId is reused by default.",
       "type": "string"
     }
   },

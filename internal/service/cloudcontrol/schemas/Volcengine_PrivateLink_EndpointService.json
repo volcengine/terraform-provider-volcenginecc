@@ -13,22 +13,22 @@
   ],
   "definitions": {
     "PrivateDNSNameConfiguration": {
-      "description": "终端节点服务私有DNS名称的配置信息。说明PrivateDNSType为private时，不返回该参数。",
+      "description": "Configuration information for the private DNS name of the endpoint service. Note: If PrivateDNSType is private, this parameter is not returned.",
       "properties": {
         "Name": {
-          "description": "域验证名称。",
+          "description": "Domain verification name.",
           "type": "string"
         },
         "Status": {
-          "description": "域验证状态。PendingVerification：待验证Verifying：验证中Verified：验证通过Failed：验证失败",
+          "description": "Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.",
           "type": "string"
         },
         "Type": {
-          "description": "域验证类型。TXT：TXT记录。",
+          "description": "Domain verification type. TXT: TXT record.",
           "type": "string"
         },
         "Value": {
-          "description": "域验证值。",
+          "description": "Domain verification value.",
           "type": "string"
         }
       },
@@ -37,15 +37,15 @@
     "Resource": {
       "properties": {
         "InstanceId": {
-          "description": "终端节点服务ID。",
+          "description": "Endpoint service ID.",
           "type": "string"
         },
         "ResourceId": {
-          "description": "待添加到终端节点服务中的服务资源ID。",
+          "description": "Service resource ID to be added to the endpoint service.",
           "type": "string"
         },
         "ZoneIds": {
-          "description": "负载均衡提供服务的可用区。",
+          "description": "Availability zone where the load balancer provides service.",
           "items": {
             "type": "string"
           },
@@ -55,14 +55,14 @@
       "type": "object"
     },
     "Tag": {
-      "description": "终端节点服务标签的键值对。",
+      "description": "Key-value pairs for endpoint service tags.",
       "properties": {
         "Key": {
-          "description": "终端节点服务标签的标签键。",
+          "description": "Tag keys for endpoint service tags.",
           "type": "string"
         },
         "Value": {
-          "description": "终端节点服务标签的标签值。",
+          "description": "Tag value of the endpoint service tag.",
           "type": "string"
         }
       },
@@ -72,7 +72,7 @@
       "type": "object"
     }
   },
-  "description": "终端节点服务是可以与其他VPC通过终端节点建立私网连接的服务。",
+  "description": "The endpoint service enables private network connections between VPCs via endpoints.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -121,29 +121,29 @@
   ],
   "properties": {
     "AutoAcceptEnabled": {
-      "description": "是否自动接受终端节点连接。true：终端节点服务自动接受终端节点连接。false：终端节点服务不会自动接受终端节点连接，需要调用EnableVpcEndpointConnection接口手动接受。",
+      "description": "Whether to automatically accept endpoint connections. true: The endpoint service automatically accepts endpoint connections. false: The endpoint service does not automatically accept endpoint connections; you must manually accept them by calling the EnableVpcEndpointConnection API.",
       "type": "boolean"
     },
     "BillingType": {
-      "description": "终端节点服务的计费类型。0：不计费。3：按量计费。",
+      "description": "Billing type of the endpoint service. 0: No charge. 3: Pay-as-you-go.",
       "type": "integer"
     },
     "BusinessStatus": {
-      "description": "终端节点服务是否被锁定。Normal：正常。FinancialLocked：被锁定。说明该参数返回为空时，表示终端节点服务未锁定。",
+      "description": "Whether the endpoint service is locked. Normal: normal. FinancialLocked: locked. If this parameter is empty, the endpoint service is not locked.",
       "type": "string"
     },
     "CreateTime": {
-      "description": "终端节点服务的创建时间。",
+      "description": "Creation time of the endpoint service.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "终端节点服务的描述信息。",
+      "description": "Description of the endpoint service.",
       "semantic": "description",
       "type": "string"
     },
     "IpAddressVersions": {
-      "description": "终端节点服务的IP协议类型。返回值中仅包含ipv4时，说明该终端节点服务为IPv4类型，仅支持提供IPv4服务。返回值中同时包含ipv4和ipv6时，说明该终端节点服务为双栈类型，支持同时提供IPv4和IPv6服务。",
+      "description": "IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -152,33 +152,33 @@
       "uniqueItems": true
     },
     "Payer": {
-      "description": "私网连接的付费账号。Endpoint：终端节点账号。EndpointService：终端节点服务账号。",
+      "description": "Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.",
       "type": "string"
     },
     "PrivateDNSEnabled": {
-      "description": "终端节点服务是否启用私有DNS名称。false：未启用。true：已启用。",
+      "description": "Whether the endpoint service enables private DNS name. false: Not enabled. true: Enabled.",
       "type": "boolean"
     },
     "PrivateDNSName": {
-      "description": "终端节点服务的私有DNS名称。参数PrivateDNSEnabled返回值为false时，该参数返回空。",
+      "description": "Private DNS name of the endpoint service. If the PrivateDNSEnabled parameter returns false, this parameter is empty.",
       "type": "string"
     },
     "PrivateDNSNameConfiguration": {
       "$ref": "#/definitions/PrivateDNSNameConfiguration",
-      "description": "终端节点服务私有DNS名称的配置信息。说明PrivateDNSType为private时，不返回该参数。",
+      "description": "Configuration information for the private DNS name of the endpoint service. Note: If PrivateDNSType is private, this parameter is not returned.",
       "type": "object"
     },
     "PrivateDNSType": {
-      "description": "私有DNS名称的域名类型。public：公网。说明未开通自定义私网域名功能时，不返回该参数。",
+      "description": "Domain name type of the private DNS name. public: public network. Note: If the custom private domain name feature is not enabled, this parameter is not returned.",
       "type": "string"
     },
     "ProjectName": {
-      "description": "终端节点服务所属的项目名称。",
+      "description": "Project name to which the endpoint service belongs.",
       "semantic": "projectName",
       "type": "string"
     },
     "Resources": {
-      "description": "终端节点服务提供服务的资源。",
+      "description": "Resources provided by the endpoint service.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Resource"
@@ -187,46 +187,46 @@
       "uniqueItems": true
     },
     "ServiceDomain": {
-      "description": "终端节点服务的服务域名。",
+      "description": "Service domain name of the endpoint service.",
       "type": "string"
     },
     "ServiceId": {
-      "description": "终端节点服务的ID。",
+      "description": "Endpoint service ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "ServiceName": {
-      "description": "终端节点服务的名称。",
+      "description": "Name of the endpoint service.",
       "semantic": "resourceName",
       "type": "string"
     },
     "ServiceNameManaged": {
-      "description": "是否为托管终端节点服务。false：非托管终端节点服务。true：托管终端节点服务。说明终端节点服务所属账号未开通托管终端节点服务功能时，不返回该参数。",
+      "description": "Whether this is a managed endpoint service. false: not a managed endpoint service. true: managed endpoint service. If the account owning the endpoint service has not enabled managed endpoint service functionality, this parameter is not returned.",
       "type": "string"
     },
     "ServiceNameSuffix": {
-      "description": "终端节点服务的名称后缀。设置名称后缀后，系统会按照com.volces.privatelink.\u003c地域ID\u003e.\u003c名称后缀\u003e的格式生成终端节点服务的名称。说明该参数正在邀测中，如需使用不同名称后缀区分业务，请联系客户经理。",
+      "description": "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.\u003cregion ID\u003e.\u003cname suffix\u003e. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
       "type": "string"
     },
     "ServiceOwner": {
-      "description": "当前服务主体。",
+      "description": "Current service principal.",
       "type": "string"
     },
     "ServiceResourceType": {
-      "description": "服务资源的类型。CLB：负载均衡CLB。ALB：应用型负载均衡ALB。RDSMySQL：云数据库 MySQL版。",
+      "description": "Type of service resource. CLB: Load Balancer CLB. ALB: Application Load Balancer ALB. RDSMySQL: Cloud Database MySQL Edition.",
       "type": "string"
     },
     "ServiceType": {
-      "description": "终端节点服务的类型。Interface：接口终端节点服务。",
+      "description": "Type of the endpoint service. Interface: Interface endpoint service.",
       "type": "string"
     },
     "Status": {
-      "description": "终端节点服务的状态。Creating：创建中。Pending：配置修改中。Available：可用。Deleting：删除中。",
+      "description": "Status of the endpoint service. Creating: being created. Pending: configuration being modified. Available: available. Deleting: being deleted.",
       "semantic": "status",
       "type": "string"
     },
     "Tags": {
-      "description": "终端节点服务的标签信息。",
+      "description": "Tag information of the endpoint service.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -236,16 +236,16 @@
       "uniqueItems": true
     },
     "UpdateTime": {
-      "description": "终端节点服务的最近操作时间。",
+      "description": "Most recent operation time of the endpoint service.",
       "semantic": "updatedTime",
       "type": "string"
     },
     "WildcardDomainEnabled": {
-      "description": "是否启用通配符域名。true：启用。false：未启用。",
+      "description": "Whether to enable wildcard domain name. true: Enabled. false: Not enabled.",
       "type": "boolean"
     },
     "ZoneIds": {
-      "description": "终端节点服务提供服务的可用区。说明参数ServiceResourceType返回值为RDSMySQL时，该参数返回空值。",
+      "description": "Availability zone where the endpoint service provides service. Note: If the ServiceResourceType parameter returns RDSMySQL, this parameter returns an empty value.",
       "insertionOrder": false,
       "items": {
         "type": "string"

@@ -21,24 +21,24 @@ Data Source schema for Volcengine::APIG::Gateway
 
 ### Read-Only
 
-- `backend_spec` (Attributes) 后端服务配置信息。 (see [below for nested schema](#nestedatt--backend_spec))
-- `comments` (String) 网关备注信息。长度限制为0~253个字符。
-- `created_time` (String) 网关创建时间。
-- `custom_log` (Attributes) 自定义日志配置。 (see [below for nested schema](#nestedatt--custom_log))
-- `events` (Attributes Set) 事件。 (see [below for nested schema](#nestedatt--events))
-- `gateway_id` (String) 网关实例ID。
-- `log_spec` (Attributes) 日志配置。 (see [below for nested schema](#nestedatt--log_spec))
-- `message` (String) 网关创建失败、删除失败或异常时的错误信息。
-- `monitor_spec` (Attributes) 监控配置信息。 (see [below for nested schema](#nestedatt--monitor_spec))
-- `name` (String) 网关名称。
-- `network_spec` (Attributes) 网络配置信息。 (see [below for nested schema](#nestedatt--network_spec))
-- `project_name` (String) 项目名称。
-- `resource_spec` (Attributes) 资源规格配置信息。 (see [below for nested schema](#nestedatt--resource_spec))
-- `status` (String) 网关状态，取值：Creating：创建中。CreatedFailed：创建失败。Updating：更新中。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。
-- `subnet_ids` (Set of String) 子网ID列表。长度限制为1~2个。
-- `trace_spec` (Attributes) 链路追踪配置信息。 (see [below for nested schema](#nestedatt--trace_spec))
-- `type` (String) 网关类型，取值：standard：标准网关。serverless：Serverless网关（暂不支持）。
-- `version` (String) 网关版本。
+- `backend_spec` (Attributes) Backend service configuration information (see [below for nested schema](#nestedatt--backend_spec))
+- `comments` (String) Gateway remarks. Length limit: 0–253 characters.
+- `created_time` (String) Gateway creation time
+- `custom_log` (Attributes) Custom log configuration (see [below for nested schema](#nestedatt--custom_log))
+- `events` (Attributes Set) Event (see [below for nested schema](#nestedatt--events))
+- `gateway_id` (String) Gateway instance ID
+- `log_spec` (Attributes) Log configuration (see [below for nested schema](#nestedatt--log_spec))
+- `message` (String) Error message for gateway creation failure, deletion failure, or abnormal status
+- `monitor_spec` (Attributes) Monitoring configuration information (see [below for nested schema](#nestedatt--monitor_spec))
+- `name` (String) Gateway name
+- `network_spec` (Attributes) Network configuration information (see [below for nested schema](#nestedatt--network_spec))
+- `project_name` (String) Project name
+- `resource_spec` (Attributes) Resource specification configuration information (see [below for nested schema](#nestedatt--resource_spec))
+- `status` (String) Gateway status. Options: Creating: Creating; CreatedFailed: Creation failed; Updating: Updating; Running: Running; Deleting: Deleting; DeletedFailed: Deletion failed; Abnormal: Abnormal
+- `subnet_ids` (Set of String) Subnet ID list. Length limit: 1–2
+- `trace_spec` (Attributes) Link tracing configuration information. (see [below for nested schema](#nestedatt--trace_spec))
+- `type` (String) Gateway type. Options: standard: Standard gateway; serverless: Serverless gateway (not supported yet)
+- `version` (String) Gateway version.
 - `vpc_id` (String) VPC ID。
 
 <a id="nestedatt--backend_spec"></a>
@@ -46,7 +46,7 @@ Data Source schema for Volcengine::APIG::Gateway
 
 Read-Only:
 
-- `is_vke_with_flannel_cni_supported` (Boolean) 是否支持VKE Flannel CNI。
+- `is_vke_with_flannel_cni_supported` (Boolean) Whether VKE Flannel CNI is supported
 - `vke_pod_cidr` (String) VKE Pod CIDR。
 
 
@@ -55,17 +55,17 @@ Read-Only:
 
 Read-Only:
 
-- `custom_variables` (Attributes Set) 自定义变量信息。 (see [below for nested schema](#nestedatt--custom_log--custom_variables))
-- `request_headers` (Attributes Set) 请求头信息。 (see [below for nested schema](#nestedatt--custom_log--request_headers))
-- `response_headers` (Attributes Set) 响应头信息。 (see [below for nested schema](#nestedatt--custom_log--response_headers))
+- `custom_variables` (Attributes Set) Custom variable information (see [below for nested schema](#nestedatt--custom_log--custom_variables))
+- `request_headers` (Attributes Set) Request header information (see [below for nested schema](#nestedatt--custom_log--request_headers))
+- `response_headers` (Attributes Set) Response header information (see [below for nested schema](#nestedatt--custom_log--response_headers))
 
 <a id="nestedatt--custom_log--custom_variables"></a>
 ### Nested Schema for `custom_log.custom_variables`
 
 Read-Only:
 
-- `aliases_in_log` (String) 字段别名。
-- `key` (String) 请求头键。
+- `aliases_in_log` (String) Field alias
+- `key` (String) Request header key
 
 
 <a id="nestedatt--custom_log--request_headers"></a>
@@ -73,8 +73,8 @@ Read-Only:
 
 Read-Only:
 
-- `aliases_in_log` (String) 字段别名。
-- `key` (String) 请求头键。
+- `aliases_in_log` (String) Field alias
+- `key` (String) Request header key
 
 
 <a id="nestedatt--custom_log--response_headers"></a>
@@ -82,8 +82,8 @@ Read-Only:
 
 Read-Only:
 
-- `aliases_in_log` (String) 字段别名。
-- `key` (String) 请求头键。
+- `aliases_in_log` (String) Field alias
+- `key` (String) Request header key
 
 
 
@@ -92,10 +92,10 @@ Read-Only:
 
 Read-Only:
 
-- `code` (String) 事件代码。
-- `created_time` (String) 事件创建时间。
-- `data` (String) 附带信息。
-- `description` (String) 事件描述。
+- `code` (String) Event code
+- `created_time` (String) Event creation time
+- `data` (String) Additional information
+- `description` (String) Event description
 
 
 <a id="nestedatt--log_spec"></a>
@@ -103,9 +103,9 @@ Read-Only:
 
 Read-Only:
 
-- `enable` (Boolean) 是否开启日志服务。
-- `project_id` (String) 日志项目ID。
-- `topic_id` (String) 日志主题ID。ProjectId 指定项目里面的日志主题。
+- `enable` (Boolean) Whether to enable log service
+- `project_id` (String) Log project ID
+- `topic_id` (String) Log topic ID. ProjectId specifies the log topic within the project
 
 
 <a id="nestedatt--monitor_spec"></a>
@@ -113,8 +113,8 @@ Read-Only:
 
 Read-Only:
 
-- `enable` (Boolean) 托管Prometheus（VMP）服务。
-- `workspace_id` (String) Prometheus工作区ID。
+- `enable` (Boolean) Managed Prometheus (VMP) service
+- `workspace_id` (String) Prometheus workspace ID
 
 
 <a id="nestedatt--network_spec"></a>
@@ -122,18 +122,18 @@ Read-Only:
 
 Read-Only:
 
-- `subnets` (Attributes Set) 子网配置信息列表。 (see [below for nested schema](#nestedatt--network_spec--subnets))
+- `subnets` (Attributes Set) Subnet configuration information list (see [below for nested schema](#nestedatt--network_spec--subnets))
 - `vpc_id` (String) VPC ID。
-- `vpc_name` (String) VPC名称。
+- `vpc_name` (String) VPC name
 
 <a id="nestedatt--network_spec--subnets"></a>
 ### Nested Schema for `network_spec.subnets`
 
 Read-Only:
 
-- `az` (String) 可用区。
-- `subnet_id` (String) 子网ID。
-- `subnet_name` (String) 子网名称。
+- `az` (String) Availability zone
+- `subnet_id` (String) Subnet ID
+- `subnet_name` (String) Subnet name
 
 
 
@@ -142,20 +142,20 @@ Read-Only:
 
 Read-Only:
 
-- `clb_spec_code` (String) CLB规格编码。CLB规格，取值：small_1：小型 I。small_2：小型 II。medium_1：中型 I。medium_2：中型 II。large_1：大型 I。large_2：大型 II。
-- `instance_spec_code` (String) 节点规格，取值：1c2g。2c4g。4c8g。8c16g。
-- `network_type` (Attributes) 网络类型。默认值为开启公网，开启私网。 (see [below for nested schema](#nestedatt--resource_spec--network_type))
-- `public_network_bandwidth` (Number) 公网带宽上限，该字段仅用于“按带宽上限收费”公网网络计费方式。单位为Mbps。取值限制为0~500。默认值为0。
-- `public_network_billing_type` (String) 公网网络计费方式，取值：traffic：按实际流量计费。bandwidth：按带宽上限计费。
-- `replicas` (Number) 节点数量。取值限制为2~100。
+- `clb_spec_code` (String) CLB specification code. CLB specifications. Options: small_1: Small I; small_2: Small II; medium_1: Medium I; medium_2: Medium II; large_1: Large I; large_2: Large II
+- `instance_spec_code` (String) Node specifications. Options: 1c2g, 2c4g, 4c8g, 8c16g
+- `network_type` (Attributes) Network type. Default value: enable public network, enable private network (see [below for nested schema](#nestedatt--resource_spec--network_type))
+- `public_network_bandwidth` (Number) Public network bandwidth limit. This field is only used for the 'bandwidth limit billing' public network billing method. Unit: Mbps. Value range: 0–500. Default value: 0
+- `public_network_billing_type` (String) Public network billing method. Options: traffic: billed by actual traffic; bandwidth: billed by bandwidth limit
+- `replicas` (Number) Node count. Value range: 2–100
 
 <a id="nestedatt--resource_spec--network_type"></a>
 ### Nested Schema for `resource_spec.network_type`
 
 Read-Only:
 
-- `enable_private_network` (Boolean) 是否启用私网。
-- `enable_public_network` (Boolean) 是否启用公网。
+- `enable_private_network` (Boolean) Whether to enable private network
+- `enable_public_network` (Boolean) Whether to enable public network
 
 
 
@@ -164,10 +164,10 @@ Read-Only:
 
 Read-Only:
 
-- `apm_trace_spec` (Attributes) 应用性能监控全链路版链路追踪配置。 (see [below for nested schema](#nestedatt--trace_spec--apm_trace_spec))
-- `enable` (Boolean) 是否启用链路追踪。
-- `tls_trace_spec` (Attributes) 链路追踪配置信息。 (see [below for nested schema](#nestedatt--trace_spec--tls_trace_spec))
-- `trace_type` (String) 链路追踪类型，取值：tls：日志服务。apm：应用性能监控全链路版。
+- `apm_trace_spec` (Attributes) Application performance monitoring full-link trace configuration (see [below for nested schema](#nestedatt--trace_spec--apm_trace_spec))
+- `enable` (Boolean) Whether to enable trace
+- `tls_trace_spec` (Attributes) Link tracing configuration information. (see [below for nested schema](#nestedatt--trace_spec--tls_trace_spec))
+- `trace_type` (String) Link tracing type. Possible values: tls: Log Service. apm: Application Performance Monitoring (APM) end-to-end version.
 
 <a id="nestedatt--trace_spec--apm_trace_spec"></a>
 ### Nested Schema for `trace_spec.apm_trace_spec`
@@ -184,5 +184,5 @@ Read-Only:
 
 - `iam_user_ak` (String) Access key。
 - `iam_user_sk` (String) Secret key。
-- `project_id` (String) 日志项目ID。
+- `project_id` (String) Log project ID
 - `trace_id` (String) Trace ID。

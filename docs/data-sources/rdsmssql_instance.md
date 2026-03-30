@@ -21,57 +21,57 @@ Data Source schema for Volcengine::RDSMsSQL::Instance
 
 ### Read-Only
 
-- `advanced_features` (String) 需要修改的实例高级特性。该接口当前属于加白接口，如需使用，您可以联系技术支持。示例值：{"Key":"Value"}
-- `allow_list_ids` (Set of String) 允许访问的白名单ID列表。
-- `backup_use` (Number) 实例已用备份空间。单位：GiB。
-- `charge_info` (Attributes) 付费方式。 (see [below for nested schema](#nestedatt--charge_info))
-- `connection_info` (Attributes Set) 连接信息。 (see [below for nested schema](#nestedatt--connection_info))
-- `created_time` (String) 创建时间。
-- `db_engine_version` (String) 兼容版本。取值如下：SQLServer_2019_Std：表示 SQL Server 2019 标准版。SQLServer_2019_Ent：表示 SQL Server 2019 企业版。SQLServer_2019_Web：表示 SQL Server 2019 Web 版。SQLServer_2022_Std：表示 SQL Server 2022 标准版。SQLServer_2022_Ent：表示 SQL Server 2022 企业版。SQLServer_2022_Web：表示 SQL Server 2022 Web 版。
-- `inner_version` (String) 内核版本号。
-- `instance_category` (String) 实例分类。取值：Primary：主实例。ReadOnly：只读实例。
-- `instance_id` (String) 实例ID。
-- `instance_name` (String) 实例名称。实例名称的命名规则如下：不能以数字、中划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在 1~128 之间。
-- `instance_status` (String) 实例状态，取值：Running：运行中。Creating：创建中。CreateFailed：创建失败。Deleting：删除中。Restarting：重启中。Updating：变更中。MasterChanging：主节点切换中。Error：错误。
-- `instance_type` (String) 实例类型。取值如下：HA（高可用）、Basic（基础版）、Cluster（集群版）。不同引擎版本支持的类型不同：2019 Std 支持 HA/Basic；2019 Ent 支持 Cluster/Basic；2019 Web 支持 Basic。
-- `maintenance_time` (String) 实例的可维护时间段。格式：HH:mmZ-HH:mmZ（UTC时间）。默认取值为 UTC18:00Z-21:59Z（即北京时间 02:00-05:59）。说明：为保护云数据库的稳定性，系统会不定期对实例进行维护。可维护时间段建议设置在业务低峰期，避免对业务造成影响。在可维护时间段内，实例可能会出现 1~2 次的连接闪断，需确保应用程序具有自动重连机制。可维护时间段最小时间间隔 1 小时，最大时间间隔 24 小时，不允许跨天选择可维护时间段。
-- `master_node_id` (String) 主节点ID。手动切换主备节点时，该参数为必填项。
-- `memory` (Number) 内存大小，单位为 GiB。
-- `node_detail_info` (Attributes Set) 实例节点信息。 (see [below for nested schema](#nestedatt--node_detail_info))
-- `node_spec` (String) 实例规格代码。
-- `port` (String) 端口
-- `primary_instance_id` (String) 主实例ID。如果为空说明它是主实例。
-- `project_name` (String) 所属项目。
-- `read_only_number` (Number) 只读实例数量。
-- `server_collation` (String) 实例字符集排序规则，默认 Chinese_PRC_CI_AS。目前已支持大多数原生字符集具体取值如下：Latin1_General_CI_AS，Latin1_General_CS_AS，SQL_Latin1_General_CP1_CI_AS，SQL_Latin1_General_CP1_CS_AS，Chinese_PRC_CI_AS，Chinese_PRC_CS_AS，Chinese_PRC_BIN，Japanese_CI_AS，Japanese_CS_AS，Chinese_Taiwan_Stroke_CI_AS，Chinese_Taiwan_Stroke_CS_AS，Thai_CI_AS，Chinese_PRC_CI_AI，Chinese_PRC_BIN2，Cyrillic_General_CI_AS。
-- `slow_query_enable` (Boolean) 表示是否开启慢日志，取值如下：true：表示开启慢日志。false：表示不开启慢日志。
-- `slow_query_time` (String) 慢日志的阈值，取值范围为 [1~10]，单位：秒（s）。
-- `storage_space` (Number) 存储空间大小，单位为 GiB。取值范围：20GiB ~ 4000GiB，步长为 10GiB。
-- `storage_type` (String) 实例存储类型。
-- `storage_use` (Number) 实例已用储空间。单位：GiB。
-- `subnet_id` (String) 子网 ID。当主备节点不在同一个可用区时，主备节点的子网也需设置为对应可用区私有网络下的子网，多个可用区需使用英文分号（;）隔开。
-- `super_account_password` (String) 高权限账号的密码。密码规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的至少三种组成。特殊字符为 !@#$%^&*()_+-=。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `time_zone` (String) 时区。
-- `updated_time` (String) 更新时间。
-- `vcpu` (Number) CPU 大小。例如：1 表示 1核。
+- `advanced_features` (String) Advanced instance features to modify. This API currently requires allowlisting. To use it, contact technical support. Example value: {"Key":"Value"}
+- `allow_list_ids` (Set of String) Allowlist ID list permitted for access.
+- `backup_use` (Number) Used backup space for the instance, in GiB.
+- `charge_info` (Attributes) Payment method. (see [below for nested schema](#nestedatt--charge_info))
+- `connection_info` (Attributes Set) Connection information. (see [below for nested schema](#nestedatt--connection_info))
+- `created_time` (String) Creation time.
+- `db_engine_version` (String) Compatible version. Values: SQLServer_2019_Std: SQL Server 2019 Standard Edition. SQLServer_2019_Ent: SQL Server 2019 Enterprise Edition. SQLServer_2019_Web: SQL Server 2019 Web Edition. SQLServer_2022_Std: SQL Server 2022 Standard Edition. SQLServer_2022_Ent: SQL Server 2022 Enterprise Edition. SQLServer_2022_Web: SQL Server 2022 Web Edition.
+- `inner_version` (String) Kernel version number.
+- `instance_category` (String) Instance category. Values: Primary: primary instance. ReadOnly: read-only instance.
+- `instance_id` (String) Instance ID.
+- `instance_name` (String) Instance name. Naming rules: Cannot start with a digit or hyphen. Can only contain Chinese characters, letters, digits, underscores, and hyphens. Length must be between 1 and 128 characters.
+- `instance_status` (String) Instance status. Values: Running: running. Creating: creating. CreateFailed: creation failed. Deleting: deleting. Restarting: restarting. Updating: updating. MasterChanging: primary node switching. Error: error.
+- `instance_type` (String) Instance type. Available values: HA (High Availability), Basic, Cluster. Supported types vary by engine version: 2019 Std supports HA/Basic; 2019 Ent supports Cluster/Basic; 2019 Web supports Basic.
+- `maintenance_time` (String) Instance maintenance window. Format: HH:mmZ-HH:mmZ (UTC time). Default: UTC18:00Z-21:59Z (Beijing time 02:00-05:59). Note: To ensure cloud database stability, the system performs maintenance on instances periodically. It is recommended to set the maintenance window during off-peak hours to avoid business impact. During the maintenance window, the instance may experience 1–2 brief disconnections. Ensure your application supports automatic reconnection. The minimum maintenance window is 1 hour, the maximum is 24 hours, and cross-day maintenance windows are not allowed.
+- `master_node_id` (String) Primary node ID. This parameter is required when manually switching master and standby nodes.
+- `memory` (Number) Memory size, in GiB.
+- `node_detail_info` (Attributes Set) Instance node information. (see [below for nested schema](#nestedatt--node_detail_info))
+- `node_spec` (String) Instance specification code.
+- `port` (String) Port.
+- `primary_instance_id` (String) Primary instance ID. If this field is empty, this instance is the primary instance.
+- `project_name` (String) Project.
+- `read_only_number` (Number) Number of read-only instances.
+- `server_collation` (String) Instance collation. Default: Chinese_PRC_CI_AS. Most native collations are supported. Available values: Latin1_General_CI_AS, Latin1_General_CS_AS, SQL_Latin1_General_CP1_CI_AS, SQL_Latin1_General_CP1_CS_AS, Chinese_PRC_CI_AS, Chinese_PRC_CS_AS, Chinese_PRC_BIN, Japanese_CI_AS, Japanese_CS_AS, Chinese_Taiwan_Stroke_CI_AS, Chinese_Taiwan_Stroke_CS_AS, Thai_CI_AS, Chinese_PRC_CI_AI, Chinese_PRC_BIN2, Cyrillic_General_CI_AS.
+- `slow_query_enable` (Boolean) Indicates whether slow logs are enabled. Available values: true: slow logs enabled. false: slow logs disabled.
+- `slow_query_time` (String) Slow log threshold. Range: [1~10], unit: seconds (s).
+- `storage_space` (Number) Storage size, in GiB. Range: 20 GiB ~ 4000 GiB, increment: 10 GiB.
+- `storage_type` (String) Instance storage type.
+- `storage_use` (Number) Used storage space for the instance. Unit: GiB.
+- `subnet_id` (String) Subnet ID. If the primary and standby nodes are in different availability zones, their subnets must be set to the corresponding private network subnets for each zone. Use a semicolon (;) to separate multiple zones.
+- `super_account_password` (String) Password for the high-privilege account. Password rules: 8–32 characters; must include at least three of the following: uppercase letters, lowercase letters, numbers, special characters. Allowed special characters: !@#$%^&*()_+-=.
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
+- `time_zone` (String) Time zone.
+- `updated_time` (String) Update time.
+- `vcpu` (Number) CPU size. For example: 1 means 1 core.
 - `vpc_id` (String) VPC ID
-- `zone_id` (String) 节点所在可用区。当主备节点不在同一个可用区时，您可以使用英文分号（;）隔开，默认第一个为主节点可用区，第二个为备节点可用区。
+- `zone_id` (String) Availability zone of the node. If the primary and standby nodes are in different availability zones, use a semicolon (;) to separate them. The first is the primary node's zone by default, the second is the standby node's zone.
 
 <a id="nestedatt--charge_info"></a>
 ### Nested Schema for `charge_info`
 
 Read-Only:
 
-- `auto_renew` (Boolean) 预付费场景下是否自动续费。true：自动续费（默认）。false：不自动续费。
-- `charge_end_time` (String) 计费到期时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `charge_start_time` (String) 计费开始时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `charge_status` (String) 付费状态。取值：Normal：表示实例正常。Overdue：表示实例欠费。Unpaid：表示实例等待支付。
-- `charge_type` (String) 付费类型。取值：PostPaid：表示按量付费。PrePaid：表示包年包月。
-- `overdue_reclaim_time` (String) 欠费关停时预计释放时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `overdue_time` (String) 欠费关停时间，格式为 yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。
-- `period` (Number) 预付费场景下的购买时长。默认值：1。
-- `period_unit` (String) 预付费场景下的购买周期。Month：表示包月(默认值)。Year：表示包年。
+- `auto_renew` (Boolean) Auto-renewal for prepaid scenarios. true: auto-renew (default). false: do not auto-renew.
+- `charge_end_time` (String) Billing expiration time, in the format yyyy-MM-ddTHH:mm:ssZ (UTC time).
+- `charge_start_time` (String) Billing start time, in the format yyyy-MM-ddTHH:mm:ssZ (UTC time).
+- `charge_status` (String) Payment status. Possible values: Normal: instance is normal. Overdue: instance is overdue. Unpaid: instance is awaiting payment.
+- `charge_type` (String) Billing type. Values: PostPaid: pay-as-you-go. PrePaid: annual/monthly subscription.
+- `overdue_reclaim_time` (String) Estimated release time when service is suspended due to overdue payment. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time).
+- `overdue_time` (String) Shutdown time due to overdue payment, in the format yyyy-MM-ddTHH:mm:ssZ (UTC time).
+- `period` (Number) Purchase duration for prepaid scenarios. Default: 1 month.
+- `period_unit` (String) Purchase cycle for prepaid scenarios. Month: monthly subscription (default). Year: annual subscription.
 
 
 <a id="nestedatt--connection_info"></a>
@@ -79,24 +79,24 @@ Read-Only:
 
 Read-Only:
 
-- `address` (Attributes Set) 地址列表。 (see [below for nested schema](#nestedatt--connection_info--address))
-- `description` (String) 描述信息。
-- `endpoint_id` (String) 终端 ID。
-- `endpoint_name` (String) 终端名称。
-- `endpoint_type` (String) 终端类型。取值如下：Primary：表示主节点终端。ROCluster：表示只读集群终端。RO：表示只读节点终端。
+- `address` (Attributes Set) Address list. (see [below for nested schema](#nestedatt--connection_info--address))
+- `description` (String) Description.
+- `endpoint_id` (String) Terminal ID.
+- `endpoint_name` (String) Terminal name.
+- `endpoint_type` (String) Terminal type. Possible values: Primary: primary node terminal. ROCluster: read-only cluster terminal. RO: read-only node terminal.
 
 <a id="nestedatt--connection_info--address"></a>
 ### Nested Schema for `connection_info.address`
 
 Read-Only:
 
-- `dns_visibility` (Boolean) 表示是否开启私网到公网解析，取值如下：true：表示开启私网到公网解析。false：表示不开启私网到公网解析。
-- `domain` (String) 域名。
-- `eip_id` (String) EIP的ID，仅对公网地址有效。
-- `ip_address` (String) IP地址。
-- `network_type` (String) 网络地址类型。取值：Private：私网类型。Public：公网类型。
-- `port` (String) 端口。
-- `subnet_id` (String) 子网 ID，仅对私网地址有效。
+- `dns_visibility` (Boolean) Indicates whether private network to public network resolution is enabled. Available values: true: enabled. false: disabled.
+- `domain` (String) Domain name.
+- `eip_id` (String) EIP ID, valid only for public addresses.
+- `ip_address` (String) IP address.
+- `network_type` (String) Network address type. Possible values: Private: private network type. Public: public network type.
+- `port` (String) Port.
+- `subnet_id` (String) Subnet ID, valid only for private network addresses.
 
 
 
@@ -105,19 +105,19 @@ Read-Only:
 
 Read-Only:
 
-- `create_time` (String) 节点的创建时间。
-- `host_name` (String) 节点主机名。
-- `instance_id` (String) 实例ID。
-- `memory` (Number) 内存大小，单位为 GiB。
-- `node_id` (String) 节点ID。
-- `node_ip` (String) 节点IP。
-- `node_spec` (String) 节点规格。
-- `node_status` (String) 节点状态，取值为：Running：运行中。Creating：创建中。Deleting：删除中。Restarting：重启中。Updating：变更中。MasterChanging：主备切换中。Error：错误。
-- `node_type` (String) 节点类型。取值：Primary：表示主节点终端。ReadOnly：表示只读节点终端。Secondary：表示备节点终端。
-- `region_id` (String) 区域ID。
-- `update_time` (String) 更新时间。
-- `vcpu` (Number) vCPU 数量。
-- `zone_id` (String) 可用区ID。
+- `create_time` (String) Node creation time.
+- `host_name` (String) Node hostname.
+- `instance_id` (String) Instance ID.
+- `memory` (Number) Memory size, in GiB.
+- `node_id` (String) Node ID.
+- `node_ip` (String) Node IP.
+- `node_spec` (String) Node specification.
+- `node_status` (String) Node status. Possible values: Running: running. Creating: creating. Deleting: deleting. Restarting: restarting. Updating: updating. MasterChanging: master/standby switching. Error: error.
+- `node_type` (String) Node type. Possible values: Primary: primary node terminal. ReadOnly: read-only node terminal. Secondary: standby node terminal.
+- `region_id` (String) Region ID.
+- `update_time` (String) Update time.
+- `vcpu` (Number) vCPU count.
+- `zone_id` (String) Availability zone ID.
 
 
 <a id="nestedatt--tags"></a>
@@ -125,5 +125,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) Tag key for user tags.
+- `value` (String) User tag value.
