@@ -21,22 +21,22 @@ Data Source schema for Volcengine::CloudIdentity::PermissionSet
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `description` (String) 权限集描述。
-- `name` (String) 权限集名称。
-- `permission_policies` (Attributes Set) 权限集下的策略列表。 (see [below for nested schema](#nestedatt--permission_policies))
-- `permission_set_id` (String) 权限集 ID。
-- `relay_state` (String) 跳转控制台 URL。
-- `session_duration` (Number) session 过期时间，单位秒。
-- `status_notifications` (Set of String) 状态通知配置。
-- `updated_time` (String) 更新时间。
+- `created_time` (String) Creation Time
+- `description` (String) Permission Set Description
+- `name` (String) Permission Set Name
+- `permission_policies` (Attributes Set) Policy List Under Permission Set (see [below for nested schema](#nestedatt--permission_policies))
+- `permission_set_id` (String) Permission Set ID
+- `relay_state` (String) Console Redirect URL
+- `session_duration` (Number) Session Expiration Time (seconds)
+- `status_notifications` (Set of String) Status Notification Configuration
+- `updated_time` (String) Update Time
 
 <a id="nestedatt--permission_policies"></a>
 ### Nested Schema for `permission_policies`
 
 Read-Only:
 
-- `created_time` (String) 策略创建时间。
-- `permission_policy_document` (String) 策略语法内容。语法可参考 策略语法说明。
-- `permission_policy_name` (String) 策略名称。
-- `permission_policy_type` (String) 策略类型，System or Inline。
+- `created_time` (String) Policy Creation Time
+- `permission_policy_document` (String) Policy syntax content. Refer to policy syntax documentation
+- `permission_policy_name` (String) Policy Name
+- `permission_policy_type` (String) Policy Type: System or Inline

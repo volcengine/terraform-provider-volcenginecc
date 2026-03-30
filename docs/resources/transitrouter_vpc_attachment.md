@@ -2,12 +2,12 @@
 page_title: "volcenginecc_transitrouter_vpc_attachment Resource - terraform-provider-volcenginecc"
 subcategory: "TransitRouter"
 description: |-
-  通过在私有网络和中转路由器之间建立连接，可以实现私有网络与中转路由器的私网互通。
+  By establishing a connection between the private network and the transit router, you can enable private network communication between the private network and the transit router.
 ---
 
 # volcenginecc_transitrouter_vpc_attachment (Resource)
 
-通过在私有网络和中转路由器之间建立连接，可以实现私有网络与中转路由器的私网互通。
+By establishing a connection between the private network and the transit router, you can enable private network communication between the private network and the transit router.
 
 ## Example Usage
 
@@ -38,37 +38,37 @@ resource "volcenginecc_transitrouter_vpc_attachment" "TransitRouterVpcAttachment
 
 ### Required
 
-- `attach_points` (Attributes Set) 网络实例连接列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--attach_points))
-- `transit_router_id` (String) 中转路由器实例的ID。
-- `vpc_id` (String) 私有网络实例的ID。
+- `attach_points` (Attributes Set) Network instance connection list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--attach_points))
+- `transit_router_id` (String) Transit router instance ID.
+- `vpc_id` (String) Private network instance ID.
 
 ### Optional
 
-- `appliance_mode_enabled` (Boolean) 是否启动路径一致模式。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是。开启后，TR转发流量至该VPC连接时，将选择相同的可用区连接点转发请求流量和返回流量。false：否。
-- `auto_publish_route_enabled` (Boolean) 是否自动同步TR路由到网络实例路由表中。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是，表示系统会自动同步该网络实例连接关联转发的TR路由表中的路由条目到网络实例的路由表中，仅当该参数配置为true，且网络实例连接关联转发的TR路由表中存在路由条目时，系统才会自动同步TR路由到网络实例的路由表中。false（默认值）：否。
-- `description` (String) 网络实例连接的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。
-- `ipv_6_enabled` (Boolean) 是否开启IPv6功能。请严格按照以下枚举值的大小写输入，不要传入其他取值。true：是。false：否。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `transit_router_attachment_name` (String) 网络实例连接的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为网络实例连接的ID。
+- `appliance_mode_enabled` (Boolean) Whether to enable path consistency mode. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. When enabled, TR forwarding traffic to this VPC connection will select the same availability zone connection point for both request and return traffic. false: No.
+- `auto_publish_route_enabled` (Boolean) Whether to automatically synchronize TR routes to the network instance route table. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. The system will automatically synchronize route entries from the TR route table associated with this network instance connection to the network instance's route table. The system will only synchronize TR routes if this parameter is set to true and there are route entries in the associated TR route table. false (default): No.
+- `description` (String) Description of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If this parameter is not provided or no value is specified, the default is an empty string.
+- `ipv_6_enabled` (Boolean) Whether to enable IPv6. Enter the following enumerated values exactly as shown; do not use other values. true: Yes. false: No.
+- `tags` (Attributes Set) Tag list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `transit_router_attachment_name` (String) Name of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, the default is the network instance connection ID.
 
 ### Read-Only
 
-- `bandwidth` (Number) 网络实例连接的带宽上限，单位为Gbps。
-- `created_time` (String) 创建时间。
+- `bandwidth` (Number) Maximum bandwidth for the network instance connection, in Gbps.
+- `created_time` (String) Creation time.
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) 网络实例连接的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用。
-- `transit_router_attachment_id` (String) 网络实例连接的ID。
-- `updated_time` (String) 更新时间。
+- `status` (String) Network instance connection status. Creating: Creating. Deleting: Deleting. Pending: Configuring. Available: Available.
+- `transit_router_attachment_id` (String) Network instance connection ID.
+- `updated_time` (String) Update time.
 
 <a id="nestedatt--attach_points"></a>
 ### Nested Schema for `attach_points`
 
 Required:
 
-- `subnet_id` (String) 连接点的子网ID。
-- `zone_id` (String) 连接点的可用区ID。
+- `subnet_id` (String) Subnet ID of the connection point.
+- `zone_id` (String) Availability zone ID of the connection point.
 
 
 <a id="nestedatt--tags"></a>
@@ -76,8 +76,8 @@ Required:
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) Tag key for user tag.
+- `value` (String) Tag value for user tag.
 
 ## Import
 

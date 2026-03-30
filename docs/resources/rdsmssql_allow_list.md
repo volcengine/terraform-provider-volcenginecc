@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rdsmssql_allow_list Resource - terraform-provider-volcenginecc"
 subcategory: "RDSMsSQL"
 description: |-
-  API请求参数 - 创建RDS SQL Server白名单（CreateAllowList）。
+  API request parameter - Create RDS SQL Server allowlist (CreateAllowList)
 ---
 
 # volcenginecc_rdsmssql_allow_list (Resource)
 
-API请求参数 - 创建RDS SQL Server白名单（CreateAllowList）。
+API request parameter - Create RDS SQL Server allowlist (CreateAllowList)
 
 ## Example Usage
 
@@ -33,25 +33,25 @@ resource "volcenginecc_rdsmssql_allow_list" "RDSMsSQLAllowlistDemo" {
 
 ### Required
 
-- `allow_list_name` (String) 白名单名称。
+- `allow_list_name` (String) Allowlist name
 
 ### Optional
 
-- `allow_list` (String) IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。
-- `allow_list_category` (String) 白名单分类。
-- `allow_list_desc` (String) 白名单描述。
-- `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `associated_instance_num` (Number) 绑定的实例数量。解绑实例的白名单时必传。
-- `associated_instances` (Attributes List) 绑定的实例列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associated_instances))
-- `instance_id` (String) 实例ID。
-- `project_name` (String) 项目名称。
-- `user_allow_list` (String) 安全组之外的、需要加入白名单的IP地址，可输入IP地址或CIDR格式的IP地址段。如果该字段与AllowList同时指定，以AllowList为准。
+- `allow_list` (String) IP allowlist. Separate multiple IP addresses with commas (,). No duplicates allowed
+- `allow_list_category` (String) Allowlist category
+- `allow_list_desc` (String) Allowlist description
+- `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is supported
+- `associated_instance_num` (Number) Number of bound instances. Required when unbinding an instance from the allowlist
+- `associated_instances` (Attributes List) Bound instance list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
+- `instance_id` (String) Instance ID
+- `project_name` (String) Project name
+- `user_allow_list` (String) IP addresses outside the security group that need to be added to the allowlist. Enter IP addresses or CIDR-formatted IP ranges. If both this field and AllowList are specified, AllowList takes precedence
 
 ### Read-Only
 
-- `allow_list_id` (String) 白名单的id。
-- `allow_list_ip_num` (Number) AllowListIP数量。
+- `allow_list_id` (String) Allowlist ID
+- `allow_list_ip_num` (Number) Allowlist IP count
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--associated_instances"></a>
@@ -59,7 +59,7 @@ resource "volcenginecc_rdsmssql_allow_list" "RDSMsSQLAllowlistDemo" {
 
 Optional:
 
-- `instance_id` (String) 实例ID。
+- `instance_id` (String) Instance ID
 
 ## Import
 

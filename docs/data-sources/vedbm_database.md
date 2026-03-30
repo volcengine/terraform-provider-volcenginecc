@@ -21,17 +21,17 @@ Data Source schema for Volcengine::VEDBM::Database
 
 ### Read-Only
 
-- `character_set_name` (String) 数据库字符集，可选值：utf8mb4（默认）、utf8、latin1、ascii
-- `databases_privileges` (Attributes Set) 数据库的权限信息 (see [below for nested schema](#nestedatt--databases_privileges))
-- `db_desc` (String) 数据库描述信息，长度0~256字符，可包含数字、中文、英文、下划线(_)、中划线(-)
-- `db_name` (String) 数据库名称。命名规则：当前实例下唯一；长度2~64字符；以字母开头，字母/数字结尾；由字母、数字、下划线(_)、中划线(-)组成；不能使用预留字
-- `instance_id` (String) 实例ID。
+- `character_set_name` (String) Database character set. Options: utf8mb4 (default), utf8, latin1, ascii
+- `databases_privileges` (Attributes Set) Database permission information (see [below for nested schema](#nestedatt--databases_privileges))
+- `db_desc` (String) Database description, length 0–256 characters; can include numbers, Chinese and English characters, underscores (_), and hyphens (-)
+- `db_name` (String) Database name. Naming rules: Must be unique within the current instance; length 2–64 characters; starts with a letter, ends with a letter or number; can contain letters, numbers, underscores (_), and hyphens (-); reserved words are not allowed
+- `instance_id` (String) Instance ID
 
 <a id="nestedatt--databases_privileges"></a>
 ### Nested Schema for `databases_privileges`
 
 Read-Only:
 
-- `account_name` (String) 需授权的账号名称
-- `account_privilege` (String) 授权数据库权限类型：ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom
-- `account_privilege_detail` (Set of String) 具体SQL操作权限，多个用英文逗号分隔；Custom类型时必填
+- `account_name` (String) Account name to be authorized
+- `account_privilege` (String) Database permission type: ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom
+- `account_privilege_detail` (Set of String) Specific SQL operation permissions, separated by English commas; required for Custom type

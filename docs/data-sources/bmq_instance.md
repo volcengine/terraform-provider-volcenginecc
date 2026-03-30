@@ -21,55 +21,55 @@ Data Source schema for Volcengine::BMQ::Instance
 
 ### Read-Only
 
-- `auto_renew` (String) 是否开启自动续费，取值如下：true：开启自动续费。false：关闭自动续费。
-- `billing_period` (String) 购买时长的单位，取值如下：MONTHLY：按月购买。YEARLY：按年购买。
-- `billing_type` (String) 实例的计费方式，取值如下：POST：按量计费。MIX：包年包月。
-- `created_time` (String) 实例的创建时间。
-- `description` (String) 实例的描述语句。
-- `eip_id` (String) 实例是否开启公网访问。如果需要开启公网访问，请配置相同地域的公网 IP 的 ID。
-- `endpoints` (Attributes) 实例所有接入点响应数据。 (see [below for nested schema](#nestedatt--endpoints))
-- `expiration_time` (String) 实例过期时间。
-- `group_limit` (Number) 实例消费组数量上限。
-- `instance_id` (String) 实例ID。
-- `message_retention` (Number) 实例下所有 Topic 的消息保留时长，单位为小时。
-- `name` (String) 自定设置 BMQ 实例的名称，约束限制如下：由小写字母、数字和中划线（-）组成。长度为 1~64 字符。
-- `partition_limit` (Number) 实例分区数量上限。
-- `project_name` (String) 实例所属项目名称。
-- `resource_tags` (Attributes Set) 实例资源标签列表。 (see [below for nested schema](#nestedatt--resource_tags))
-- `resources` (Attributes) 实例资源统计响应数据。 (see [below for nested schema](#nestedatt--resources))
-- `security_group_id_list` (Set of String) 实例使用安全组列表。
-- `specification` (String) 实例规格。
-- `status` (String) 实例的状态。取值如下：INITIALIZING：初始化中，INITIALIZATION_FAILED：初始化失败，RUNNING：运行中，MODIFYING：更新中，MODIFY_FAILED：更新失败，RELEASING：释放中，STOPPING：停止中，STOPPED：停止，RECOVERING：恢复中，EXCEPTION：异常，CAPACITY_EXPAXION_FAILED：扩容失败，EXPANDING_CAPACITY：扩容中，CANCEL_EXPANDING_CAPACITY：扩容取消中，RESTARTING：重启中，UNPAID：未支付
-- `subnet_id_list` (Set of String) 实例使用的子网列表。
-- `tags` (Attributes Set) 实例资源标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `times` (Number) 包年包月类型实例的购买时长，单位为月。
-- `topic_limit` (Number) 实例Topic数量上限。
-- `vpc_id` (String) 实例所在VPC ID。
-- `zone_id_list` (Set of String) 实例所在可用区列表。
+- `auto_renew` (String) Enable auto-renewal. Possible values: true: Enable auto-renewal. false: Disable auto-renewal.
+- `billing_period` (String) Unit of purchase duration. Options: MONTHLY—monthly subscription; YEARLY—yearly subscription
+- `billing_type` (String) Instance billing method. Options: POST—pay-as-you-go; MIX—yearly/monthly subscription
+- `created_time` (String) Instance creation time
+- `description` (String) Instance description
+- `eip_id` (String) Whether public access is enabled for the instance. If public access is required, configure the ID of a public IP in the same region
+- `endpoints` (Attributes) Response data for all instance endpoints (see [below for nested schema](#nestedatt--endpoints))
+- `expiration_time` (String) Instance expiration time
+- `group_limit` (Number) Maximum number of consumer groups per instance
+- `instance_id` (String) Instance ID
+- `message_retention` (Number) Message retention period for all Topics under the instance, in hours
+- `name` (String) Custom BMQ instance name. Constraints: must consist of lowercase letters, numbers, and hyphens (-). Length: 1–64 characters
+- `partition_limit` (Number) Maximum number of partitions per instance
+- `project_name` (String) Project name associated with the instance
+- `resource_tags` (Attributes Set) Instance resource tag list (see [below for nested schema](#nestedatt--resource_tags))
+- `resources` (Attributes) Instance resource statistics response data (see [below for nested schema](#nestedatt--resources))
+- `security_group_id_list` (Set of String) Security group list used by the instance
+- `specification` (String) Instance specification
+- `status` (String) Instance status. Possible values: INITIALIZING: Initializing, INITIALIZATION_FAILED: Initialization failed, RUNNING: Running, MODIFYING: Updating, MODIFY_FAILED: Update failed, RELEASING: Releasing, STOPPING: Stopping, STOPPED: Stopped, RECOVERING: Recovering, EXCEPTION: Exception, CAPACITY_EXPAXION_FAILED: Capacity expansion failed, EXPANDING_CAPACITY: Expanding capacity, CANCEL_EXPANDING_CAPACITY: Canceling capacity expansion, RESTARTING: Restarting, UNPAID: Unpaid
+- `subnet_id_list` (Set of String) Subnet list used by the instance
+- `tags` (Attributes Set) Instance resource tag list (see [below for nested schema](#nestedatt--tags))
+- `times` (Number) Purchase duration for yearly/monthly subscription instances, in months
+- `topic_limit` (Number) Maximum number of Topics per instance
+- `vpc_id` (String) VPC ID where the instance is located
+- `zone_id_list` (Set of String) List of availability zones for the instance
 
 <a id="nestedatt--endpoints"></a>
 ### Nested Schema for `endpoints`
 
 Read-Only:
 
-- `overlay` (Attributes) 实例私网访问接入点响应数据。 (see [below for nested schema](#nestedatt--endpoints--overlay))
-- `public` (Attributes) 实例公网访问接入点响应数据。 (see [below for nested schema](#nestedatt--endpoints--public))
+- `overlay` (Attributes) Instance private network access endpoint response data (see [below for nested schema](#nestedatt--endpoints--overlay))
+- `public` (Attributes) Instance public access endpoint response data (see [below for nested schema](#nestedatt--endpoints--public))
 
 <a id="nestedatt--endpoints--overlay"></a>
 ### Nested Schema for `endpoints.overlay`
 
 Read-Only:
 
-- `address` (String) 域名映射地址。
-- `eip_id` (String) 实例绑定的EIP的ID。
-- `plain` (String) 私网Plain接入点。
-- `plain_port` (Number) 普通接入点端口。
-- `sasl` (String) 私网SASL认证接入点。
-- `sasl_port` (Number) 认证接入点端口。
-- `ssl` (String) 加密接入点。
-- `ssl_port` (Number) 加密接入点端口。
-- `status` (String) 接入点状态。
-- `vpc_ids` (Set of String) 售卖区网络关联的VPC ID列表。
+- `address` (String) Domain mapping address
+- `eip_id` (String) ID of the EIP bound to the instance
+- `plain` (String) Private network Plain access point
+- `plain_port` (Number) Standard endpoint port
+- `sasl` (String) Private network SASL authentication access point
+- `sasl_port` (Number) Authentication endpoint port
+- `ssl` (String) Encrypted endpoint
+- `ssl_port` (Number) Encrypted endpoint port
+- `status` (String) Endpoint status
+- `vpc_ids` (Set of String) List of VPC IDs associated with the sales zone network
 
 
 <a id="nestedatt--endpoints--public"></a>
@@ -77,16 +77,16 @@ Read-Only:
 
 Read-Only:
 
-- `address` (String) 域名映射地址。
-- `eip_id` (String) 实例绑定的EIP的ID。
-- `plain` (String) 私网Plain接入点。
-- `plain_port` (Number) 普通接入点端口。
-- `sasl` (String) 私网SASL认证接入点。
-- `sasl_port` (Number) 认证接入点端口。
-- `ssl` (String) 加密接入点。
-- `ssl_port` (Number) 加密接入点端口。
-- `status` (String) 接入点状态。
-- `vpc_ids` (Set of String) 售卖区网络关联的VPC ID列表。
+- `address` (String) Domain mapping address
+- `eip_id` (String) ID of the EIP bound to the instance
+- `plain` (String) Private network Plain access point
+- `plain_port` (Number) Standard endpoint port
+- `sasl` (String) Private network SASL authentication access point
+- `sasl_port` (Number) Authentication endpoint port
+- `ssl` (String) Encrypted endpoint
+- `ssl_port` (Number) Encrypted endpoint port
+- `status` (String) Endpoint status
+- `vpc_ids` (Set of String) List of VPC IDs associated with the sales zone network
 
 
 
@@ -95,17 +95,17 @@ Read-Only:
 
 Read-Only:
 
-- `tag_kvs` (Attributes Set) 标签键值对。 (see [below for nested schema](#nestedatt--resource_tags--tag_kvs))
-- `type` (String) 标签类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。
+- `tag_kvs` (Attributes Set) Tag key-value pair (see [below for nested schema](#nestedatt--resource_tags--tag_kvs))
+- `type` (String) Tag type. Options: CUSTOM—custom tag; SYSTEM—system tag
 
 <a id="nestedatt--resource_tags--tag_kvs"></a>
 ### Nested Schema for `resource_tags.tag_kvs`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `type` (String) 实例标签的类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `type` (String) Type of instance tag. Options: CUSTOM—custom tag; SYSTEM—system tag
+- `value` (String) Tag value
 
 
 
@@ -114,15 +114,15 @@ Read-Only:
 
 Read-Only:
 
-- `storage` (Attributes) 资源统计响应数据。 (see [below for nested schema](#nestedatt--resources--storage))
+- `storage` (Attributes) Resource statistics response data (see [below for nested schema](#nestedatt--resources--storage))
 
 <a id="nestedatt--resources--storage"></a>
 ### Nested Schema for `resources.storage`
 
 Read-Only:
 
-- `size` (Number) 资源大小。
-- `unit` (String) 资源单位。
+- `size` (Number) Resource size
+- `unit` (String) Resource unit
 
 
 
@@ -131,6 +131,6 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `type` (String) 实例标签的类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `type` (String) Type of instance tag. Options: CUSTOM—custom tag; SYSTEM—system tag
+- `value` (String) Tag value

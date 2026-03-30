@@ -27,18 +27,18 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的账号 ID。",
+		//	  "description": "Account ID to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的账号 ID。",
+			Description: "Account ID to which the instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例绑定的白名单 ID 列表。绑定白名单后，仅配置在白名单中的 IP 地址与地址段才能访问此实例。如果实例未绑定任何白名单，表示禁止所有 IP 地址访问该实例。",
+		//	  "description": "List of allowlist IDs bound to the instance. After binding an allowlist, only IP addresses and address ranges configured in the allowlist can access this instance. If no allowlist is bound to the instance, all IP addresses are denied access to the instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -48,62 +48,62 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"allow_list_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例绑定的白名单 ID 列表。绑定白名单后，仅配置在白名单中的 IP 地址与地址段才能访问此实例。如果实例未绑定任何白名单，表示禁止所有 IP 地址访问该实例。",
+			Description: "List of allowlist IDs bound to the instance. After binding an allowlist, only IP addresses and address ranges configured in the allowlist can access this instance. If no allowlist is bound to the instance, all IP addresses are denied access to the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ApplyPrivateDNSToPublic
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已开启私网域名支持公网解析功能。true：已开启false：已关闭",
+		//	  "description": "Whether private network domain name supports public resolution. true: enabled false: disabled",
 		//	  "type": "boolean"
 		//	}
 		"apply_private_dns_to_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已开启私网域名支持公网解析功能。true：已开启false：已关闭",
+			Description: "Whether private network domain name supports public resolution. true: enabled false: disabled",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AutoScaleQueue
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例规格更改时，是否自动创建队列。",
+		//	  "description": "Whether to automatically create queues when the instance specification changes.",
 		//	  "type": "boolean"
 		//	}
 		"auto_scale_queue": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例规格更改时，是否自动创建队列。",
+			Description: "Whether to automatically create queues when the instance specification changes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailableQueueNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "剩余可创建的分区数量。",
+		//	  "description": "Remaining number of partitions that can be created.",
 		//	  "type": "integer"
 		//	}
 		"available_queue_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "剩余可创建的分区数量。",
+			Description: "Remaining number of partitions that can be created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeDetail
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的计费方式等计费信息。",
+		//	  "description": "Billing method and related billing information for the instance.",
 		//	  "properties": {
 		//	    "AutoRenew": {
-		//	      "description": "包年包月实例到期后是否自动续费。true：自动续费。false：不自动续费。到期后需要手动续费，否则实例将被关停。",
+		//	      "description": "Whether the subscription instance is automatically renewed upon expiration. true: automatically renewed. false: not automatically renewed. Manual renewal is required after expiration; otherwise, the instance will be shut down.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ChargeExpireTime": {
-		//	      "description": "包年包月实例的到期时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。按量付费实例此字段默认显示为 1970-01-01T00:00:00Z。",
+		//	      "description": "Expiration time for yearly/monthly subscription instances. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'. For pay-as-you-go instances, this field defaults to 1970-01-01T00:00:00Z.",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeStartTime": {
-		//	      "description": "实例的开始计费时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Billing start time for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeStatus": {
-		//	      "description": "实例的计费状态。包括：Normal：正常Overdue：按量计费欠费Expired：包年包月到期",
+		//	      "description": "Instance billing status. Includes: Normal: normal Overdue: pay-as-you-go overdue Expired: subscription expired",
 		//	      "enum": [
 		//	        "Normal",
 		//	        "Overdue",
@@ -112,7 +112,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeType": {
-		//	      "description": "实例的计费类型。支持的类型包括：PostPaid ：按量付费PrePaid：包年包月",
+		//	      "description": "Billing type for the instance. Supported types include: PostPaid: pay-as-you-go; PrePaid: yearly/monthly subscription",
 		//	      "enum": [
 		//	        "PostPaid",
 		//	        "PrePaid"
@@ -120,19 +120,19 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "OverdueReclaimTime": {
-		//	      "description": "实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Estimated release time after the instance is suspended due to overdue payment. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "OverdueTime": {
-		//	      "description": "实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	      "description": "Suspension time due to overdue payment for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	      "type": "string"
 		//	    },
 		//	    "Period": {
-		//	      "description": "包年包月类型实例的购买时长。PeriodUnit 指定为 Monthly 时，取值范围为 1~9。PeriodUnit 指定为 Yearly 时，取值范围为 1~3。仅包年包月类型的实例需要指定，即 ChargeType 指定为 PrePaid 时必选。",
+		//	      "description": "Purchase duration for subscription instances. When PeriodUnit is set to Monthly, the value range is 1–9. When PeriodUnit is set to Yearly, the value range is 1–3. Only required for subscription instances, that is, when ChargeType is set to PrePaid.",
 		//	      "type": "integer"
 		//	    },
 		//	    "PeriodUnit": {
-		//	      "description": "包年包月类型实例的生命周期单位，即指定以月或以年为单位购买。其中：Monthly：（默认）包月Yearly：包年",
+		//	      "description": "Lifecycle unit for subscription-based instances, specifying whether to purchase by month or by year. Monthly: (default) monthly subscription Yearly: annual subscription",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -142,91 +142,91 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例到期后是否自动续费。true：自动续费。false：不自动续费。到期后需要手动续费，否则实例将被关停。",
+					Description: "Whether the subscription instance is automatically renewed upon expiration. true: automatically renewed. false: not automatically renewed. Manual renewal is required after expiration; otherwise, the instance will be shut down.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeExpireTime
 				"charge_expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例的到期时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。按量付费实例此字段默认显示为 1970-01-01T00:00:00Z。",
+					Description: "Expiration time for yearly/monthly subscription instances. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'. For pay-as-you-go instances, this field defaults to 1970-01-01T00:00:00Z.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeStartTime
 				"charge_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的开始计费时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Billing start time for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeStatus
 				"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的计费状态。包括：Normal：正常Overdue：按量计费欠费Expired：包年包月到期",
+					Description: "Instance billing status. Includes: Normal: normal Overdue: pay-as-you-go overdue Expired: subscription expired",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的计费类型。支持的类型包括：PostPaid ：按量付费PrePaid：包年包月",
+					Description: "Billing type for the instance. Supported types include: PostPaid: pay-as-you-go; PrePaid: yearly/monthly subscription",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OverdueReclaimTime
 				"overdue_reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Estimated release time after the instance is suspended due to overdue payment. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: OverdueTime
 				"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+					Description: "Suspension time due to overdue payment for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "包年包月类型实例的购买时长。PeriodUnit 指定为 Monthly 时，取值范围为 1~9。PeriodUnit 指定为 Yearly 时，取值范围为 1~3。仅包年包月类型的实例需要指定，即 ChargeType 指定为 PrePaid 时必选。",
+					Description: "Purchase duration for subscription instances. When PeriodUnit is set to Monthly, the value range is 1–9. When PeriodUnit is set to Yearly, the value range is 1–3. Only required for subscription instances, that is, when ChargeType is set to PrePaid.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PeriodUnit
 				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "包年包月类型实例的生命周期单位，即指定以月或以年为单位购买。其中：Monthly：（默认）包月Yearly：包年",
+					Description: "Lifecycle unit for subscription-based instances, specifying whether to purchase by month or by year. Monthly: (default) monthly subscription Yearly: annual subscription",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例的计费方式等计费信息。",
+			Description: "Billing method and related billing information for the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ComputeSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的计算规格。您可以在产品规格中查看目前在售的计算规格列表。",
+		//	  "description": "Instance compute specification. You can view the currently available compute specifications in the product specifications list.",
 		//	  "type": "string"
 		//	}
 		"compute_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的计算规格。您可以在产品规格中查看目前在售的计算规格列表。",
+			Description: "Instance compute specification. You can view the currently available compute specifications in the product specifications list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionInfo
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的连接信息。",
+		//	  "description": "Instance connection information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "实例的连接信息。",
+		//	    "description": "Instance connection information.",
 		//	    "properties": {
 		//	      "EndpointAddressIP": {
-		//	        "description": "实例的接入点 IP 地址。",
+		//	        "description": "Instance endpoint IP address.",
 		//	        "type": "string"
 		//	      },
 		//	      "EndpointType": {
-		//	        "description": "实例的接入点类型。",
+		//	        "description": "Instance access point type.",
 		//	        "type": "string"
 		//	      },
 		//	      "InternalEndpoint": {
-		//	        "description": "实例的私网接入点地址。",
+		//	        "description": "Private network endpoint address for the instance.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkType": {
-		//	        "description": "实例的接入点类型。",
+		//	        "description": "Instance access point type.",
 		//	        "type": "string"
 		//	      },
 		//	      "PublicEndpoint": {
-		//	        "description": "实例的公网接入点地址。",
+		//	        "description": "Public access point address of the instance.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -240,152 +240,152 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EndpointAddressIP
 					"endpoint_address_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的接入点 IP 地址。",
+						Description: "Instance endpoint IP address.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: EndpointType
 					"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的接入点类型。",
+						Description: "Instance access point type.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InternalEndpoint
 					"internal_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的私网接入点地址。",
+						Description: "Private network endpoint address for the instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkType
 					"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的接入点类型。",
+						Description: "Instance access point type.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PublicEndpoint
 					"public_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的公网接入点地址。",
+						Description: "Public access point address of the instance.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例的连接信息。",
+			Description: "Instance connection information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的创建时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。",
+		//	  "description": "Instance creation time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的创建时间。时间显示格式为YYYY-MM-DD'T'HH:MM:SS'Z'。",
+			Description: "Instance creation time. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "EIP 的 ID。指定 EipId 表示开启实例的公网访问。EIP 提供独立的公网 IP 资源，包括公网 IP 地址与公网出口带宽服务。指定此参数开启公网访问后，公网地址将绑定您的弹性公网IP（EIP），费用由EIP收取。",
+		//	  "description": "EIP ID. Specifying EipId enables public access for the instance. EIP provides independent public IP resources, including public IP addresses and outbound bandwidth services. After enabling public access by specifying this parameter, the public address will be bound to your Elastic IP (EIP), and fees will be charged for the EIP resource.",
 		//	  "type": "string"
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "EIP 的 ID。指定 EipId 表示开启实例的公网访问。EIP 提供独立的公网 IP 资源，包括公网 IP 地址与公网出口带宽服务。指定此参数开启公网访问后，公网地址将绑定您的弹性公网IP（EIP），费用由EIP收取。",
+			Description: "EIP ID. Specifying EipId enables public access for the instance. EIP provides independent public IP resources, including public IP addresses and outbound bandwidth services. After enabling public access by specifying this parameter, the public address will be bound to your Elastic IP (EIP), and fees will be charged for the EIP resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableSSL
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否使用 SSL 加密。",
+		//	  "description": "Whether to use SSL encryption.",
 		//	  "type": "boolean"
 		//	}
 		"enable_ssl": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否使用 SSL 加密。",
+			Description: "Whether to use SSL encryption.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileReservedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息在消息队列 RocketMQ版服务端的保留时长，超过保留时长的消息将被过期清理。单位为小时，取值范围为 1~72 小时。",
+		//	  "description": "Message retention period on the RocketMQ Message Queue server. Messages exceeding the retention period will be expired and cleaned up. Unit: hours. Value range: 1–72 hours.",
 		//	  "type": "integer"
 		//	}
 		"file_reserved_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "消息在消息队列 RocketMQ版服务端的保留时长，超过保留时长的消息将被过期清理。单位为小时，取值范围为 1~72 小时。",
+			Description: "Message retention period on the RocketMQ Message Queue server. Messages exceeding the retention period will be expired and cleaned up. Unit: hours. Value range: 1–72 hours.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IPVersionType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IP 版本， 可选直为 IPv4 或者 DualStack。",
+		//	  "description": "IP version. Options are IPv4 or DualStack.",
 		//	  "type": "string"
 		//	}
 		"ip_version_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP 版本， 可选直为 IPv4 或者 DualStack。",
+			Description: "IP version. Options are IPv4 or DualStack.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceDescription
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的简单描述。长度范围为 1~128 个字符。",
+		//	  "description": "Brief description of the instance. Length range: 1–128 characters.",
 		//	  "type": "string"
 		//	}
 		"instance_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的简单描述。长度范围为 1~128 个字符。",
+			Description: "Brief description of the instance. Length range: 1–128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的名称。 需满足以下要求：只能包含中文、字母、数字、下划线（_）和连字符（-）。不能以数字和连字符（-）开头。长度范围为 1~128 个字符。如果创建实例时未指定名称，则默认将实例 ID 作为实例名称。",
+		//	  "description": "Instance name. Must meet the following requirements: can only contain Chinese characters, letters, numbers, underscores (_), and hyphens (-); cannot start with a number or hyphen (-); length must be 1–128 characters. If no name is specified when creating the instance, the instance ID will be used as the default name.",
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的名称。 需满足以下要求：只能包含中文、字母、数字、下划线（_）和连字符（-）。不能以数字和连字符（-）开头。长度范围为 1~128 个字符。如果创建实例时未指定名称，则默认将实例 ID 作为实例名称。",
+			Description: "Instance name. Must meet the following requirements: can only contain Chinese characters, letters, numbers, underscores (_), and hyphens (-); cannot start with a number or hyphen (-); length must be 1–128 characters. If no name is specified when creating the instance, the instance ID will be used as the default name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例状态。",
+		//	  "description": "Instance status.",
 		//	  "type": "string"
 		//	}
 		"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例状态。",
+			Description: "Instance status.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkTypes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例网络类型，固定为 PrivateNetwork。",
+		//	  "description": "Instance network type, fixed as PrivateNetwork.",
 		//	  "type": "string"
 		//	}
 		"network_types": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例网络类型，固定为 PrivateNetwork。",
+			Description: "Instance network type, fixed as PrivateNetwork.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProductInfo
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "产品配置信息。说明仅 RocketMQ 5.x 版本实例支持调整实例的 TPS 占比。",
+		//	  "description": "Product configuration information. Note: Only RocketMQ 5.x instances support adjusting the TPS ratio for the instance.",
 		//	  "properties": {
 		//	    "SendReceiveRatio": {
-		//	      "description": "修改读写限流比例，默认读写比例各占 50%。假设设置为 40，表示发送的 TPS 比列为 40%，订阅比列为 60%。说明仅 RocketMQ 5.x 版本实例支持调整实例的 TPS 占比。",
+		//	      "description": "Edit the read/write throttling ratio. The default read/write ratio is 50% each. For example, if set to 40, the sending TPS ratio is 40% and the subscription ratio is 60%. Note: Only RocketMQ 5.x instances support adjusting the TPS ratio for the instance.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -395,83 +395,83 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SendReceiveRatio
 				"send_receive_ratio": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "修改读写限流比例，默认读写比例各占 50%。假设设置为 40，表示发送的 TPS 比列为 40%，订阅比列为 60%。说明仅 RocketMQ 5.x 版本实例支持调整实例的 TPS 占比。",
+					Description: "Edit the read/write throttling ratio. The default read/write ratio is 50% each. For example, if set to 40, the sending TPS ratio is 40% and the subscription ratio is 60%. Note: Only RocketMQ 5.x instances support adjusting the TPS ratio for the instance.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "产品配置信息。说明仅 RocketMQ 5.x 版本实例支持调整实例的 TPS 占比。",
+			Description: "Product configuration information. Note: Only RocketMQ 5.x instances support adjusting the TPS ratio for the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前创建的实例所属的 IAM 项目。若未设置，则会将新实例绑定到名为 default 的 IAM 项目中。",
+		//	  "description": "The IAM project to which the newly created instance belongs. If not set, the new instance will be bound to the IAM project named 'default'.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "当前创建的实例所属的 IAM 项目。若未设置，则会将新实例绑定到名为 default 的 IAM 项目中。",
+			Description: "The IAM project to which the newly created instance belongs. If not set, the new instance will be bound to the IAM project named 'default'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RegionId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在的地域 ID。",
+		//	  "description": "Region ID where the instance is located.",
 		//	  "type": "string"
 		//	}
 		"region_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所在的地域 ID。",
+			Description: "Region ID where the instance is located.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SSLMode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的公网连接策略，仅在开启公网访问时需要设置。支持设置为：enforcing：通过公网访问实例时，必须经由 SSL 认证。SSL 认证可实现数据的加密传输，相较于普通公网访问方式具备更高的安全性，但性能会有所下降。permissive：通过公网访问实例时，可以选择是否经由 SSL 认证。创建实例后，公网访问为开启状态时，不能修改 SSL 连接策略。如需修改，需要为实例关闭并重新开启公网访问，在重新开启时再次设置 SSL 连接策略。详细说明请参考设置公网访问与 SSL 认证策略。",
+		//	  "description": "The instance's public network connection policy only needs to be set when public access is enabled. Supported settings are: enforcing: When accessing the instance via the public network, SSL authentication is required. SSL authentication enables encrypted data transmission, offering higher security compared to standard public access, but may reduce performance. permissive: When accessing the instance via the public network, SSL authentication is optional. After the instance is created and public access is enabled, the SSL connection policy cannot be modified. To change it, you must disable and re-enable public access for the instance, and set the SSL connection policy again when re-enabling. For details, see Setting Public Access and SSL Authentication Policy.",
 		//	  "type": "string"
 		//	}
 		"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的公网连接策略，仅在开启公网访问时需要设置。支持设置为：enforcing：通过公网访问实例时，必须经由 SSL 认证。SSL 认证可实现数据的加密传输，相较于普通公网访问方式具备更高的安全性，但性能会有所下降。permissive：通过公网访问实例时，可以选择是否经由 SSL 认证。创建实例后，公网访问为开启状态时，不能修改 SSL 连接策略。如需修改，需要为实例关闭并重新开启公网访问，在重新开启时再次设置 SSL 连接策略。详细说明请参考设置公网访问与 SSL 认证策略。",
+			Description: "The instance's public network connection policy only needs to be set when public access is enabled. Supported settings are: enforcing: When accessing the instance via the public network, SSL authentication is required. SSL authentication enables encrypted data transmission, offering higher security compared to standard public access, but may reduce performance. permissive: When accessing the instance via the public network, SSL authentication is optional. After the instance is created and public access is enabled, the SSL connection policy cannot be modified. To change it, you must disable and re-enable public access for the instance, and set the SSL connection policy again when re-enabling. For details, see Setting Public Access and SSL Authentication Policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageSpace
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的存储空间。单位为 GiB，必须指定为 100 的倍数。取值范围取决于当前指定的计算规格。",
+		//	  "description": "Instance storage space, measured in GiB and must be specified in multiples of 100. The value range depends on the currently selected compute specification.",
 		//	  "type": "integer"
 		//	}
 		"storage_space": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例的存储空间。单位为 GiB，必须指定为 100 的倍数。取值范围取决于当前指定的计算规格。",
+			Description: "Instance storage space, measured in GiB and must be specified in multiples of 100. The value range depends on the currently selected compute specification.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在的 VPC 子网 ID。实例创建完成后，不可修改对应的私有网络和子网。创建实例时请谨慎操作。您可以调用私有网络（VPC）的 DescribeVpcs 接口查询可用的VPC和子网列表。",
+		//	  "description": "VPC subnet ID where the instance resides. After the instance is created, the associated VPC and subnet cannot be modified. Please operate carefully when creating the instance. You can call the DescribeVpcs API of the VPC to query the available VPC and subnet list.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所在的 VPC 子网 ID。实例创建完成后，不可修改对应的私有网络和子网。创建实例时请谨慎操作。您可以调用私有网络（VPC）的 DescribeVpcs 接口查询可用的VPC和子网列表。",
+			Description: "VPC subnet ID where the instance resides. After the instance is created, the associated VPC and subnet cannot be modified. Please operate carefully when creating the instance. You can call the DescribeVpcs API of the VPC to query the available VPC and subnet list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云资源标签。可以将实例通过标签进行归类，便于实例的搜索和资源聚合。详细说明请参考标签概述。",
+		//	  "description": "Cloud resource tags. You can categorize instances by tags for easier search and resource aggregation. For details, see Tag Overview.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "实例绑定的标签。",
+		//	    "description": "Tags bound to the instance.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -488,94 +488,94 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "云资源标签。可以将实例通过标签进行归类，便于实例的搜索和资源聚合。详细说明请参考标签概述。",
+			Description: "Cloud resource tags. You can categorize instances by tags for easier search and resource aggregation. For details, see Tag Overview.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsedGroupNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前实例已经创建的消费组（Group）个数。",
+		//	  "description": "Number of consumer groups (Group) currently created for the instance.",
 		//	  "type": "integer"
 		//	}
 		"used_group_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "当前实例已经创建的消费组（Group）个数。",
+			Description: "Number of consumer groups (Group) currently created for the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsedQueueNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例已经使用的队列数。",
+		//	  "description": "Number of queues already used by the instance.",
 		//	  "type": "integer"
 		//	}
 		"used_queue_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例已经使用的队列数。",
+			Description: "Number of queues already used by the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsedStorageSpace
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例已用储空间。单位为 GiB。",
+		//	  "description": "Used storage space for the instance, in GiB.",
 		//	  "type": "integer"
 		//	}
 		"used_storage_space": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例已用储空间。单位为 GiB。",
+			Description: "Used storage space for the instance, in GiB.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsedTopicNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前实例已创建的 Topic 个数。",
+		//	  "description": "Number of topics created in the current instance.",
 		//	  "type": "integer"
 		//	}
 		"used_topic_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "当前实例已创建的 Topic 个数。",
+			Description: "Number of topics created in the current instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "支持的 RocketMQ 版本。当前支持的版本包括：4.8：兼容 RocketMQ 4.x 版本系列。5.x：兼容 RocketMQ 5.x 版本系列。目前 5.x 版本处于加白阶段，如需使用请联系技术支持申请开白。",
+		//	  "description": "Supported RocketMQ versions. Currently supported versions include: 4.8: compatible with RocketMQ 4.x series. 5.x: compatible with RocketMQ 5.x series. The 5.x version is currently available by whitelist application. To use it, contact technical support to apply for access.",
 		//	  "type": "string"
 		//	}
 		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "支持的 RocketMQ 版本。当前支持的版本包括：4.8：兼容 RocketMQ 4.x 版本系列。5.x：兼容 RocketMQ 5.x 版本系列。目前 5.x 版本处于加白阶段，如需使用请联系技术支持申请开白。",
+			Description: "Supported RocketMQ versions. Currently supported versions include: 4.8: compatible with RocketMQ 4.x series. 5.x: compatible with RocketMQ 5.x series. The 5.x version is currently available by whitelist application. To use it, contact technical support to apply for access.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在的私有网络（VPC） ID。实例创建完成后，不可修改对应的私有网络和子网。创建实例时请谨慎操作。您可以调用私有网络（VPC）的 DescribeVpcs 接口查询可用的VPC和子网列表。",
+		//	  "description": "VPC ID where the instance resides. After the instance is created, the associated VPC and subnet cannot be modified. Please operate carefully when creating the instance. You can call the DescribeVpcs API of the VPC to query the available VPC and subnet list.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所在的私有网络（VPC） ID。实例创建完成后，不可修改对应的私有网络和子网。创建实例时请谨慎操作。您可以调用私有网络（VPC）的 DescribeVpcs 接口查询可用的VPC和子网列表。",
+			Description: "VPC ID where the instance resides. After the instance is created, the associated VPC and subnet cannot be modified. Please operate carefully when creating the instance. You can call the DescribeVpcs API of the VPC to query the available VPC and subnet list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在的可用区 ID。消息队列 RocketMQ版实例支持跨 AZ 部署，查看指定可用区下提供哪些计算规格时，可以指定多个可用区。多个可用区 ID 之间以逗号（,）间隔。您可以调用 DescribeAvailabilityZones 查询当前提供服务的可用区列表。",
+		//	  "description": "Availability zone ID where the instance is located. RocketMQ Message Queue instances support cross-AZ deployment. When viewing available compute specifications in a specified availability zone, you can specify multiple zones. Separate multiple availability zone IDs with commas (,). You can call DescribeAvailabilityZones to query the list of currently available zones.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所在的可用区 ID。消息队列 RocketMQ版实例支持跨 AZ 部署，查看指定可用区下提供哪些计算规格时，可以指定多个可用区。多个可用区 ID 之间以逗号（,）间隔。您可以调用 DescribeAvailabilityZones 查询当前提供服务的可用区列表。",
+			Description: "Availability zone ID where the instance is located. RocketMQ Message Queue instances support cross-AZ deployment. When viewing available compute specifications in a specified availability zone, you can specify multiple zones. Separate multiple availability zone IDs with commas (,). You can call DescribeAvailabilityZones to query the list of currently available zones.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

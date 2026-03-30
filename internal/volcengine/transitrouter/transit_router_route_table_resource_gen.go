@@ -32,11 +32,11 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的创建时间",
+		//	  "description": "Creation time of the TR routing table",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的创建时间",
+			Description: "Creation time of the TR routing table",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -46,12 +46,12 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+		//	  "description": "Description of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+			Description: "Description of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -65,11 +65,11 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表关联的收方向路由策略的ID",
+		//	  "description": "ID of the inbound routing policy associated with the TR routing table",
 		//	  "type": "string"
 		//	}
 		"in_route_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表关联的收方向路由策略的ID",
+			Description: "ID of the inbound routing policy associated with the TR routing table",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -79,11 +79,11 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表关联的发方向路由策略的ID",
+		//	  "description": "ID of the outbound routing policy associated with the TR routing table",
 		//	  "type": "string"
 		//	}
 		"out_route_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表关联的发方向路由策略的ID",
+			Description: "ID of the outbound routing policy associated with the TR routing table",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -93,7 +93,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用",
+		//	  "description": "Status of the TR routing table. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Deleting",
@@ -103,7 +103,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用",
+			Description: "Status of the TR routing table. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -113,17 +113,17 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的标签信息。",
+		//	  "description": "Tag information for the TR routing table",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "TR路由表的标签信息",
+		//	    "description": "Tag information for the TR routing table",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -140,7 +140,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -152,7 +152,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -161,7 +161,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "TR路由表的标签信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag information for the TR routing table\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -172,11 +172,11 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的ID",
+		//	  "description": "Transit Router instance ID",
 		//	  "type": "string"
 		//	}
 		"transit_router_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的ID",
+			Description: "Transit Router instance ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -186,11 +186,11 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的ID",
+		//	  "description": "TR routing table ID",
 		//	  "type": "string"
 		//	}
 		"transit_router_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的ID",
+			Description: "TR routing table ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -200,12 +200,12 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID",
+		//	  "description": "Name of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the TR routing table ID",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"transit_router_route_table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID",
+			Description: "Name of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the TR routing table ID",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -219,7 +219,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的类型。System：系统路由表。Custom：自定义路由表。",
+		//	  "description": "Type of TR routing table. System: system routing table. Custom: custom routing table.",
 		//	  "enum": [
 		//	    "System",
 		//	    "Custom"
@@ -227,7 +227,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		//	  "type": "string"
 		//	}
 		"transit_router_route_table_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的类型。System：系统路由表。Custom：自定义路由表。",
+			Description: "Type of TR routing table. System: system routing table. Custom: custom routing table.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -237,11 +237,11 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的最近操作时间",
+		//	  "description": "Last operation time of the TR routing table",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的最近操作时间",
+			Description: "Last operation time of the TR routing table",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -259,7 +259,7 @@ func transitRouterRouteTableResource(ctx context.Context) (resource.Resource, er
 	}
 
 	schema := schema.Schema{
-		Description: "中转路由器转发流量的依据，具有关联转发、静态路由、路由学习、路由同步等能力。每个TR实例下可以创建多个TR路由表，分别用于转发具有不同访问需求的网络实例的流量。多条网络实例连接可以关联同一个TR路由表。",
+		Description: "Basis for Transit Router to forward traffic, supporting associated forwarding, static routing, route learning, and route synchronization. Multiple TR routing tables can be created under each TR instance to forward traffic for network instances with different access requirements. Multiple network instance connections can be associated with the same TR routing table.",
 		Version:     1,
 		Attributes:  attributes,
 	}

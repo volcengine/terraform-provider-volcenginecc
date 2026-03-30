@@ -28,6 +28,7 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/provider/generators/shared"
 	"github.com/volcengine/volcengine-go-sdk/volcengine"
 	"github.com/volcengine/volcengine-go-sdk/volcengine/credentials"
+	"github.com/volcengine/volcengine-go-sdk/volcengine/request"
 	"github.com/volcengine/volcengine-go-sdk/volcengine/session"
 )
 
@@ -353,7 +354,9 @@ func (d *Downloader) ResourceSchema(client *cloudcontrol.CloudControl, schema Re
 		input := &cloudcontrol.DescribeResourceTypeInput{
 			TypeName: volcengine.String(schema.CloudControlTypeName),
 		}
-		output, err := client.DescribeResourceTypeWithContext(context.TODO(), input)
+		output, err := client.DescribeResourceTypeWithContext(context.TODO(), input, func(request *request.Request) {
+			request.HTTPRequest.Header.Set("Accept-Language", "en")
+		})
 
 		if err != nil {
 			return "", "", fmt.Errorf("describing Cloud Control type: %w", err)

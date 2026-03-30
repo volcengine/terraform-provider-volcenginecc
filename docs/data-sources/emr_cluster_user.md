@@ -21,12 +21,12 @@ Data Source schema for Volcengine::EMR::ClusterUser
 
 ### Read-Only
 
-- `cluster_id` (String) 集群ID。
-- `created_time` (Number) 创建时间。
-- `creator_name` (String) 创建者用户名。
-- `description` (String) 用户组描述。
-- `old_password` (String) 旧的用户的登录密码。修改密码时必填。
-- `password` (String) 新的用户的登录密码。密码的长度需在8-20个字符之间，支持数字，字母，-，_ 且 至少包含1个数字和1个字母。
-- `updated_time` (Number) 更新时间。
-- `user_group_names` (Set of String) 所属用户组名称。
-- `user_name` (String) 集群用户名。仅支持小写字母。
+- `cluster_id` (String) Cluster ID.
+- `created_time` (Number) Creation time.
+- `creator_name` (String) Creator username.
+- `description` (String) User group description.
+- `old_password` (String) Old user login password. Required when changing password.
+- `password` (String) New user login password. Password must be 8–20 characters long, support numbers, letters, -, _, and contain at least one number and one letter.
+- `updated_time` (Number) Last updated time.
+- `user_group_names` (Set of String) User group name.
+- `user_name` (String) Cluster username. Only lowercase letters are supported.

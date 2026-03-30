@@ -26,83 +26,83 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志项目创建时间。",
+		//	  "description": "Log project creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "日志项目创建时间。",
+			Description: "Log project creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志项目的简单描述。",
+		//	  "description": "Brief description of the log project",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "日志项目的简单描述。",
+			Description: "Brief description of the log project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IamProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志项目所属的 IAM 项目。",
+		//	  "description": "The IAM project associated with the log project",
 		//	  "type": "string"
 		//	}
 		"iam_project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "日志项目所属的 IAM 项目。",
+			Description: "The IAM project associated with the log project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InnerNetDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私网连接域名。",
+		//	  "description": "Private network connection domain name",
 		//	  "type": "string"
 		//	}
 		"inner_net_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私网连接域名。",
+			Description: "Private network connection domain name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志项目的 ID。",
+		//	  "description": "Log project ID",
 		//	  "type": "string"
 		//	}
 		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "日志项目的 ID。",
+			Description: "Log project ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志项目名称。",
+		//	  "description": "Log project name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "日志项目名称。",
+			Description: "Log project name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息。",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签信息。",
+		//	    "description": "Tag information",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -119,28 +119,28 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息。",
+			Description: "Tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TopicCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前日志项目下的日志主题数量。",
+		//	  "description": "Number of log topics in the current log project",
 		//	  "type": "integer"
 		//	}
 		"topic_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "当前日志项目下的日志主题数量。",
+			Description: "Number of log topics in the current log project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

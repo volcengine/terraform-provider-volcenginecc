@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vedbm_database Resource - terraform-provider-volcenginecc"
 subcategory: "VEDBM"
 description: |-
-  云数据库管理
+  Cloud Database Management
 ---
 
 # volcenginecc_vedbm_database (Resource)
 
-云数据库管理
+Cloud Database Management
 
 ## Example Usage
 
@@ -33,15 +33,15 @@ resource "volcenginecc_vedbm_database" "VEDBMDatabaseDemo" {
 
 ### Required
 
-- `instance_id` (String) 实例ID。
+- `instance_id` (String) Instance ID
 
 ### Optional
 
-- `character_set_name` (String) 数据库字符集，可选值：utf8mb4（默认）、utf8、latin1、ascii
-- `databases_privileges` (Attributes Set) 数据库的权限信息
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--databases_privileges))
-- `db_desc` (String) 数据库描述信息，长度0~256字符，可包含数字、中文、英文、下划线(_)、中划线(-)
-- `db_name` (String) 数据库名称。命名规则：当前实例下唯一；长度2~64字符；以字母开头，字母/数字结尾；由字母、数字、下划线(_)、中划线(-)组成；不能使用预留字
+- `character_set_name` (String) Database character set. Options: utf8mb4 (default), utf8, latin1, ascii
+- `databases_privileges` (Attributes Set) Database permission information
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--databases_privileges))
+- `db_desc` (String) Database description, length 0–256 characters; can include numbers, Chinese and English characters, underscores (_), and hyphens (-)
+- `db_name` (String) Database name. Naming rules: Must be unique within the current instance; length 2–64 characters; starts with a letter, ends with a letter or number; can contain letters, numbers, underscores (_), and hyphens (-); reserved words are not allowed
 
 ### Read-Only
 
@@ -52,9 +52,9 @@ resource "volcenginecc_vedbm_database" "VEDBMDatabaseDemo" {
 
 Optional:
 
-- `account_name` (String) 需授权的账号名称
-- `account_privilege` (String) 授权数据库权限类型：ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom
-- `account_privilege_detail` (Set of String) 具体SQL操作权限，多个用英文逗号分隔；Custom类型时必填
+- `account_name` (String) Account name to be authorized
+- `account_privilege` (String) Database permission type: ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom
+- `account_privilege_detail` (Set of String) Specific SQL operation permissions, separated by English commas; required for Custom type
 
 ## Import
 

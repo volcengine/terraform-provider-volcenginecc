@@ -164,6 +164,10 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_vedbm_allow_list -ccschema ../service/cloudcontrol/schemas/Volcengine_VEDBM_AllowList.json -package vedbm -- ../volcengine/vedbm/allow_list_resource_gen.go ../volcengine/vedbm/allow_list_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_kafka_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_Kafka_Instance.json -package kafka -- ../volcengine/kafka/instance_resource_gen.go ../volcengine/kafka/instance_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_emr_node_group -ccschema ../service/cloudcontrol/schemas/Volcengine_EMR_NodeGroup.json -package emr -- ../volcengine/emr/node_group_resource_gen.go ../volcengine/emr/node_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vefaas_function -ccschema ../service/cloudcontrol/schemas/Volcengine_VEFAAS_Function.json -package vefaas -- ../volcengine/vefaas/function_resource_gen.go ../volcengine/vefaas/function_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cen_grant_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_CEN_GrantInstance.json -package cen -- ../volcengine/cen/grant_instance_resource_gen.go ../volcengine/cen/grant_instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vpn_vpn_connection -ccschema ../service/cloudcontrol/schemas/Volcengine_VPN_VPNConnection.json -package vpn -- ../volcengine/vpn/vpn_connection_resource_gen.go ../volcengine/vpn/vpn_connection_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_privatezone_user_vpc_authorization -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateZone_UserVPCAuthorization.json -package privatezone -- ../volcengine/privatezone/user_vpc_authorization_resource_gen.go ../volcengine/privatezone/user_vpc_authorization_resource_gen_test.go
 
 package provider
 

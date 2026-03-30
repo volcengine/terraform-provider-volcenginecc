@@ -27,264 +27,264 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启 cerebro。true：开启 cerebrofalse：不开启 cerebro",
+		//	  "description": "Whether to enable cerebro. true: enable cerebro; false: do not enable cerebro.",
 		//	  "type": "boolean"
 		//	}
 		"cerebro_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启 cerebro。true：开启 cerebrofalse：不开启 cerebro",
+			Description: "Whether to enable cerebro. true: enable cerebro; false: do not enable cerebro.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CerebroPrivateDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "cerebro 私网访问地址。说明Cerebro 和 Kibana 共享域名。如果是历史实例，访问地址有可能是http(s)://kibana-***开头",
+		//	  "description": "Cerebro private network access address. Note: Cerebro and Kibana share the domain name. For legacy instances, the access address may start with http(s)://kibana-***",
 		//	  "type": "string"
 		//	}
 		"cerebro_private_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "cerebro 私网访问地址。说明Cerebro 和 Kibana 共享域名。如果是历史实例，访问地址有可能是http(s)://kibana-***开头",
+			Description: "Cerebro private network access address. Note: Cerebro and Kibana share the domain name. For legacy instances, the access address may start with http(s)://kibana-***",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CerebroPublicDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "erebro 公网访问地址。说明Cerebro 和 Kibana 共享域名。如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+		//	  "description": "Cerebro public access address. Note: Cerebro and Kibana share the same domain name. For legacy instances, the access address may start with http(s)://kibana-***",
 		//	  "type": "string"
 		//	}
 		"cerebro_public_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "erebro 公网访问地址。说明Cerebro 和 Kibana 共享域名。如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+			Description: "Cerebro public access address. Note: Cerebro and Kibana share the same domain name. For legacy instances, the access address may start with http(s)://kibana-***",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例是否开启了计费。取值说明如下：true：已开启计费false：未开启计费",
+		//	  "description": "Whether billing is enabled for the instance. Value description: true: Billing enabled false: Billing not enabled",
 		//	  "type": "boolean"
 		//	}
 		"charge_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例是否开启了计费。取值说明如下：true：已开启计费false：未开启计费",
+			Description: "Whether billing is enabled for the instance. Value description: true: Billing enabled false: Billing not enabled",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属集群的 ID。",
+		//	  "description": "ID of the cluster to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属集群的 ID。",
+			Description: "ID of the cluster to which the instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的创建时间。",
+		//	  "description": "Instance creation time.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的创建时间。",
+			Description: "Instance creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESEip
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所绑定的 EIP。",
+		//	  "description": "EIP bound to the instance.",
 		//	  "type": "string"
 		//	}
 		"es_eip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所绑定的 EIP。",
+			Description: "EIP bound to the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESEipId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所绑定的 EIP 的 ID。",
+		//	  "description": "ID of the EIP bound to the instance",
 		//	  "type": "string"
 		//	}
 		"es_eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所绑定的 EIP 的 ID。",
+			Description: "ID of the EIP bound to the instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESPrivateEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例私网访问地址。",
+		//	  "description": "Instance private network access address.",
 		//	  "type": "string"
 		//	}
 		"es_private_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例私网访问地址。",
+			Description: "Instance private network access address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESPrivateIpAllowList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例私网地址访问白名单。同 ESPrivateIpWhitelist",
+		//	  "description": "Instance private network address access allowlist. Same as ESPrivateIpWhitelist",
 		//	  "type": "string"
 		//	}
 		"es_private_ip_allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例私网地址访问白名单。同 ESPrivateIpWhitelist",
+			Description: "Instance private network address access allowlist. Same as ESPrivateIpWhitelist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESPrivateIpWhitelist
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例私网地址访问白名单。",
+		//	  "description": "Instance private network address access allowlist",
 		//	  "type": "string"
 		//	}
 		"es_private_ip_whitelist": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例私网地址访问白名单。",
+			Description: "Instance private network address access allowlist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESPublicEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例公网访问地址。",
+		//	  "description": "Instance public access address",
 		//	  "type": "string"
 		//	}
 		"es_public_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例公网访问地址。",
+			Description: "Instance public access address",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESPublicIpAllowList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例公网地址访问白名单。同 ESPublicIpWhitelist",
+		//	  "description": "Instance public IP address access allowlist. Same as ESPublicIpWhitelist",
 		//	  "type": "string"
 		//	}
 		"es_public_ip_allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例公网地址访问白名单。同 ESPublicIpWhitelist",
+			Description: "Instance public IP address access allowlist. Same as ESPublicIpWhitelist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ESPublicIpWhitelist
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例公网地址访问白名单。",
+		//	  "description": "Allowlist for instance public network address access.",
 		//	  "type": "string"
 		//	}
 		"es_public_ip_whitelist": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例公网地址访问白名单。",
+			Description: "Allowlist for instance public network address access.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableESPrivateDomainPublic
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例是否开启私网地址公网解析。true：已开启私网地址公网解析false：未开启私网地址公网解析",
+		//	  "description": "Whether the instance has enabled public resolution for private network addresses. true: Public resolution enabled for private network addresses false: Public resolution not enabled for private network addresses",
 		//	  "type": "boolean"
 		//	}
 		"enable_es_private_domain_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例是否开启私网地址公网解析。true：已开启私网地址公网解析false：未开启私网地址公网解析",
+			Description: "Whether the instance has enabled public resolution for private network addresses. true: Public resolution enabled for private network addresses false: Public resolution not enabled for private network addresses",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableESPrivateNetwork
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例是否开启了私网访问。true：默认值，开启私网访问false：未开启私网访问",
+		//	  "description": "Whether private network access is enabled for the instance. true: Default, private network access enabled; false: private network access not enabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable_es_private_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例是否开启了私网访问。true：默认值，开启私网访问false：未开启私网访问",
+			Description: "Whether private network access is enabled for the instance. true: Default, private network access enabled; false: private network access not enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableESPublicNetwork
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例是否开启了公网访问。true：已开启公网访问false：未开启公网访问",
+		//	  "description": "Whether the instance has enabled public access. true: Public access enabled. false: Public access not enabled",
 		//	  "type": "boolean"
 		//	}
 		"enable_es_public_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例是否开启了公网访问。true：已开启公网访问false：未开启公网访问",
+			Description: "Whether the instance has enabled public access. true: Public access enabled. false: Public access not enabled",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableKibanaPrivateDomainPublic
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 是否开启私网地址公网解析。true：已开启私网地址公网解析false：未开启私网地址公网解析",
+		//	  "description": "Whether Kibana has enabled public resolution for private network addresses. true: Public resolution enabled for private network addresses false: Public resolution not enabled for private network addresses",
 		//	  "type": "boolean"
 		//	}
 		"enable_kibana_private_domain_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 是否开启私网地址公网解析。true：已开启私网地址公网解析false：未开启私网地址公网解析",
+			Description: "Whether Kibana has enabled public resolution for private network addresses. true: Public resolution enabled for private network addresses false: Public resolution not enabled for private network addresses",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableKibanaPrivateNetwork
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 是否开启私网访问。true：默认值，已开启私网访问 false：未开启Kibana私网访问",
+		//	  "description": "Whether Kibana private network access is enabled. true: Default value, private network access enabled false: Kibana private network access not enabled",
 		//	  "type": "boolean"
 		//	}
 		"enable_kibana_private_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 是否开启私网访问。true：默认值，已开启私网访问 false：未开启Kibana私网访问",
+			Description: "Whether Kibana private network access is enabled. true: Default value, private network access enabled false: Kibana private network access not enabled",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableKibanaPublicNetwork
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 是否开启了公网访问。true：已开启公网访问 false：未开启公网访问",
+		//	  "description": "Whether Kibana has enabled public access. true: Public access enabled false: Public access not enabled",
 		//	  "type": "boolean"
 		//	}
 		"enable_kibana_public_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 是否开启了公网访问。true：已开启公网访问 false：未开启公网访问",
+			Description: "Whether Kibana has enabled public access. true: Public access enabled false: Public access not enabled",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EsPubBandwidth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ES公网带宽，单位:Mbps。",
+		//	  "description": "ES public network bandwidth, unit: Mbps.",
 		//	  "type": "integer"
 		//	}
 		"es_pub_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "ES公网带宽，单位:Mbps。",
+			Description: "ES public network bandwidth, unit: Mbps.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpireDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月实例的付费过期时间。",
+		//	  "description": "Expiration time for subscription instance payment",
 		//	  "type": "string"
 		//	}
 		"expire_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "包年包月实例的付费过期时间。",
+			Description: "Expiration time for subscription instance payment",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceConfiguration
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例配置详情信息。",
+		//	  "description": "Instance configuration details",
 		//	  "properties": {
 		//	    "AdminPassword": {
-		//	      "description": "管理员密码。",
+		//	      "description": "Administrator password.",
 		//	      "type": "string"
 		//	    },
 		//	    "AdminUserName": {
-		//	      "description": "管理员用户名。",
+		//	      "description": "Administrator username.",
 		//	      "type": "string"
 		//	    },
 		//	    "AutoRenew": {
-		//	      "description": "包年包月实例是否配置自动续费。true：自动续费，系统会在每次到期前自动为实例续费。false：未开启自动续费，需要在实例到期前进行手动续费。如需了解更多，请参见实例续费。",
+		//	      "description": "Whether the subscription instance is set to auto-renewal. true: Auto-renewal; the system will automatically renew the instance before each expiration. false: Auto-renewal is not enabled; manual renewal is required before the instance expires. For more information, see Instance renewal.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ChargeType": {
-		//	      "description": "实例计费类型。PostPaid：按量计费。PrePaid：包年包月。",
+		//	      "description": "Instance billing type. PostPaid: Pay-as-you-go. PrePaid: Subscription",
 		//	      "enum": [
 		//	        "PostPaid",
 		//	        "PrePaid"
@@ -292,316 +292,316 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ColdNodeNumber": {
-		//	      "description": "冷节点数量。",
+		//	      "description": "Number of cold nodes.",
 		//	      "type": "integer"
 		//	    },
 		//	    "ColdNodeResourceSpec": {
-		//	      "description": "冷节点的节点规格配置详情。",
+		//	      "description": "Node specification details for cold nodes",
 		//	      "properties": {
 		//	        "CPU": {
-		//	          "description": "节点规格的 CPU 资源，单位为核（Core）",
+		//	          "description": "CPU resources for node specification, measured in cores.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Description": {
-		//	          "description": "节点规格的描述信息",
+		//	          "description": "Description of node specifications",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "节点规格的显示名称",
+		//	          "description": "Display name of node specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "Memory": {
-		//	          "description": "节点规格的内存容量，单位 GiB",
+		//	          "description": "Memory capacity for node specification, measured in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "节点规格。如需了解节点规格类型和详情",
+		//	          "description": "Node specification. For details on node specification types and details.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "ColdNodeStorageSpec": {
-		//	      "description": "冷节点的存储规格配置详情。",
+		//	      "description": "Details of cold node storage specification configuration",
 		//	      "properties": {
 		//	        "Description": {
-		//	          "description": "存储规格的描述信息",
+		//	          "description": "Description of storage specification",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "存储规格的显示名称",
+		//	          "description": "Display name of storage specification",
 		//	          "type": "string"
 		//	        },
 		//	        "MaxSize": {
-		//	          "description": "存储规格的最大值，单位为 GiB",
+		//	          "description": "Maximum storage specification, measured in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "MinSize": {
-		//	          "description": "存储规格最小值，单位为 GiB",
+		//	          "description": "Minimum storage specification, measured in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+		//	          "description": "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition - High Performance Cloud Disk - pl0",
 		//	          "type": "string"
 		//	        },
 		//	        "Size": {
-		//	          "description": "当前存储规格值，单位为 GiB",
+		//	          "description": "Current storage specification value, in GiB.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "ConfigurationCode": {
-		//	      "description": "计费配置码，可以通过调用DescribeNodeAvailableSpecs接口获得。",
+		//	      "description": "Billing configuration code, obtainable via the DescribeNodeAvailableSpecs API.",
 		//	      "type": "string"
 		//	    },
 		//	    "CoordinatorNodeNumber": {
-		//	      "description": "协调节点数量。",
+		//	      "description": "Coordinator node count",
 		//	      "type": "integer"
 		//	    },
 		//	    "CoordinatorNodeResourceSpec": {
-		//	      "description": "协调节点的节点规格配置详情。",
+		//	      "description": "Node specification configuration details for coordinator node.",
 		//	      "properties": {
 		//	        "CPU": {
-		//	          "description": "节点规格的 CPU 资源，单位为核（Core）",
+		//	          "description": "CPU resources of node specification, unit: cores.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Description": {
-		//	          "description": "节点规格的描述信息",
+		//	          "description": "Description of node specifications",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "节点规格的显示名称",
+		//	          "description": "Display name of node specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "Memory": {
-		//	          "description": "节点规格的内存容量，单位 GiB",
+		//	          "description": "Memory capacity of node specification, unit: GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "节点规格。如需了解节点规格类型和详情",
+		//	          "description": "Node specification. For details on node specification types and details.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "CoordinatorNodeStorageSpec": {
-		//	      "description": "协调节点的存储规格配置详情。",
+		//	      "description": "Storage specification configuration details for coordinator node.",
 		//	      "properties": {
 		//	        "Description": {
-		//	          "description": "存储规格的描述信息",
+		//	          "description": "Description of storage specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "存储规格的显示名称",
+		//	          "description": "Display name of storage specification",
 		//	          "type": "string"
 		//	        },
 		//	        "MaxSize": {
-		//	          "description": "存储规格的最大值，单位为 GiB",
+		//	          "description": "Maximum storage specification, in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "MinSize": {
-		//	          "description": "存储规格最小值，单位为 GiB",
+		//	          "description": "Minimum value for storage specification, unit: GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+		//	          "description": "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition - High Performance Cloud Disk - pl0",
 		//	          "type": "string"
 		//	        },
 		//	        "Size": {
-		//	          "description": "当前存储规格值，单位为 GiB",
+		//	          "description": "Current storage specification value, in GiB.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "DeletionProtection": {
-		//	      "description": "是否开启实例删除保护功能，取值说明如下：true：开启实例删除保护。false：关闭实例删除保护。说明开启实例删除保护后，您将无法通过控制台或者 API 删除实例。",
+		//	      "description": "Enable instance deletion protection. Values: true: Enable instance deletion protection. false: Disable instance deletion protection. Note: After enabling deletion protection, you cannot delete the instance via console or API",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnableHttps": {
-		//	      "description": "是否启用 HTTPS 访问协议。true：启用 HTTPS 访问。false：不启用 HTTPS，使用 HTTP 访问。说明如果选择使用 HTTP 访问，将无需安全认证即可访问，并使用 HTTP 明文传输数据。您需要确保访问环境的安全性，且不要将访问接口暴露在公网环境上。实例创建完成后，支持根据业务需求修改传输协议。相关文档，请参见切换实例传输协议。",
+		//	      "description": "Enable HTTPS access protocol. true: Enable HTTPS access. false: Disable HTTPS, use HTTP access. Note: If you choose HTTP access, you can access without security authentication and transmit data in plain HTTP. Ensure the security of your access environment and do not expose the API to the public network. After the instance is created, you can modify the transmission protocol as needed. For related documentation, see Switch Instance Transmission Protocol",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnablePureMaster": {
-		//	      "description": "Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即使用 Hot 声明。",
+		//	      "description": "Whether the master node is dedicated. true: Master node is dedicated. false: Master node is combined with data node, that is, uses Hot node.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "HotNodeNumber": {
-		//	      "description": "数据节点数量。",
+		//	      "description": "Number of data nodes",
 		//	      "type": "integer"
 		//	    },
 		//	    "HotNodeResourceSpec": {
-		//	      "description": "数据节点的节点规格配置详情。",
+		//	      "description": "Node specification configuration details for data node.",
 		//	      "properties": {
 		//	        "CPU": {
-		//	          "description": "节点规格的 CPU 资源，单位为核（Core）。",
+		//	          "description": "CPU resources of node specification, measured in cores",
 		//	          "type": "integer"
 		//	        },
 		//	        "Description": {
-		//	          "description": "节点规格的描述信息。",
+		//	          "description": "Description of node specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "节点规格的显示名称。",
+		//	          "description": "Display name of node specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "Memory": {
-		//	          "description": "节点规格的内存容量，单位 GiB。",
+		//	          "description": "Memory capacity for node specification, measured in GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "节点规格。如需了解节点规格类型和详情，请参见产品规格。",
+		//	          "description": "Node specification. For details on node specification types and details, see Product Specifications.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "HotNodeStorageSpec": {
-		//	      "description": "数据节点的存储规格配置详情。",
+		//	      "description": "Data node storage specification configuration details",
 		//	      "properties": {
 		//	        "Description": {
-		//	          "description": "存储规格的描述信息。",
+		//	          "description": "Description of storage specification",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "存储规格的显示名称。",
+		//	          "description": "Display name of storage specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "MaxSize": {
-		//	          "description": "存储规格的最大值，单位为 GiB。",
+		//	          "description": "Maximum storage specification, in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "MinSize": {
-		//	          "description": "存储规格最小值，单位为 GiB。",
+		//	          "description": "Minimum storage specification, measured in GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+		//	          "description": "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition - High Performance Cloud Disk - pl0",
 		//	          "type": "string"
 		//	        },
 		//	        "Size": {
-		//	          "description": "配置的可用磁盘空间大小。",
+		//	          "description": "Configured available disk space size",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "InstanceName": {
-		//	      "description": "自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。",
+		//	      "description": "Set a custom instance name. Only Chinese characters, letters, numbers, hyphens (-), and underscores (_) are allowed. The name cannot start or end with a number or hyphen (-). Length must be between 1 and 128 characters.",
 		//	      "maxLength": 128,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "KibanaNodeNumber": {
-		//	      "description": "kibana 节点数量。",
+		//	      "description": "Number of Kibana nodes",
 		//	      "type": "integer"
 		//	    },
 		//	    "KibanaNodeResourceSpec": {
-		//	      "description": "Kibana 节点的节点规格配置详情。",
+		//	      "description": "Kibana node specification configuration details",
 		//	      "properties": {
 		//	        "CPU": {
-		//	          "description": "节点规格的 CPU 资源，单位为核（Core）",
+		//	          "description": "CPU resources for node specification, measured in cores.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Description": {
-		//	          "description": "节点规格的描述信息",
+		//	          "description": "Description of node specifications",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "节点规格的显示名称",
+		//	          "description": "Display name of node specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "Memory": {
-		//	          "description": "节点规格的内存容量，单位 GiB",
+		//	          "description": "Memory capacity for node specification, measured in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "节点规格。如需了解节点规格类型和详情",
+		//	          "description": "Node specification. For information about node specification types and details, please refer to the documentation.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "MasterNodeNumber": {
-		//	      "description": "master 节点数量。",
+		//	      "description": "Number of master nodes.",
 		//	      "type": "integer"
 		//	    },
 		//	    "MasterNodeResourceSpec": {
-		//	      "description": "Master 节点的节点规格配置详情。",
+		//	      "description": "Master node specification configuration details",
 		//	      "properties": {
 		//	        "CPU": {
-		//	          "description": "节点规格的 CPU 资源，单位为核（Core）",
+		//	          "description": "CPU resources of node specification, unit: cores.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Description": {
-		//	          "description": "节点规格的描述信息",
+		//	          "description": "Description of node specifications",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "节点规格的显示名称",
+		//	          "description": "Display name of node specification",
 		//	          "type": "string"
 		//	        },
 		//	        "Memory": {
-		//	          "description": "节点规格的内存容量，单位 GiB",
+		//	          "description": "Memory capacity of node specification, unit: GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "节点规格。如需了解节点规格类型和详情",
+		//	          "description": "Node specification. For information about node specification types and details, please refer to the documentation.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "MasterNodeStorageSpec": {
-		//	      "description": "Master 节点的存储规格配置详情。",
+		//	      "description": "Storage specification details for master node",
 		//	      "properties": {
 		//	        "Description": {
-		//	          "description": "存储规格的描述信息",
+		//	          "description": "Description of storage specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "存储规格的显示名称",
+		//	          "description": "Display name of storage specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "MaxSize": {
-		//	          "description": "存储规格的最大值，单位为 GiB",
+		//	          "description": "Maximum storage specification, measured in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "MinSize": {
-		//	          "description": "存储规格最小值，单位为 GiB",
+		//	          "description": "Minimum value for storage specification, unit: GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+		//	          "description": "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition - High Performance Cloud Disk - pl0",
 		//	          "type": "string"
 		//	        },
 		//	        "Size": {
-		//	          "description": "当前存储规格值，单位为 GiB",
+		//	          "description": "Current storage specification value, in GiB.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "NetworkSpecs": {
-		//	      "description": "实例公网规格配置。",
+		//	      "description": "Instance public network specification configuration",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Bandwidth": {
-		//	            "description": "公网IP的带宽上限，默认为“1”，单位：Mbps。",
+		//	            "description": "Public IP bandwidth limit. Default is '1', unit: Mbps.",
 		//	            "type": "integer"
 		//	          },
 		//	          "IsOpen": {
-		//	            "description": "开启/关闭",
+		//	            "description": "Enable/Disable",
 		//	            "type": "boolean"
 		//	          },
 		//	          "SpecName": {
-		//	            "description": "实例公网资源规格名称",
+		//	            "description": "Instance public resource specification name",
 		//	            "type": "string"
 		//	          },
 		//	          "Type": {
-		//	            "description": "公网应用类型 Elasticsearch：es实例使用。Kibana：Dashboard使用",
+		//	            "description": "Public network application types: Elasticsearch—for ES instance usage. Kibana—for Dashboard usage",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -611,38 +611,38 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "NodeSpecsAssigns": {
-		//	      "description": "实例中各种节点的数量和规格配置。",
+		//	      "description": "Configuration of node counts and specifications in the instance",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "ExtraPerformance": {
-		//	            "description": "磁盘额外性能包相关配置。",
+		//	            "description": "Disk extra performance package configuration.",
 		//	            "properties": {
 		//	              "Throughput": {
-		//	                "description": "当您的数据节点选择使用 FlexPL 存储类型，且存储规格配置为 500GiB 及以上时，支持购买带宽包增加磁盘带宽。单位为MiB，调整步长为10MiB。当前支持的存储规格及对应额外性能包吞吐量上限如下：es.volume.essd.flexpl-standard：650",
+		//	                "description": "When your data node uses the FlexPL storage type and the storage specification is 500 GiB or above, you can purchase a bandwidth package to increase disk bandwidth. Unit: MiB; adjustment step: 10 MiB. Supported storage specifications and corresponding maximum throughput for additional performance packages are as follows: es.volume.essd.flexpl-standard: 650.",
 		//	                "type": "integer"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Number": {
-		//	            "description": "节点数量。配置数据节点数量时，在不同部署方式下，需要注意以下信息：单可用区部署：建议生产环境至少配置 3 个数据节点，配置 2 个节点时存在脑裂风险。如果启用专有主节点，2 个数据节点不会脑裂。双可用区部署，默认启用专有主节点：建议生产环境至少配置 4 个数据节点，即每个可用区两个数据节点。三可用区部署，默认启用专有主节点：建议生产环境至少配置 6 个数据节点，即每个可用区两个数据节点。数据节点数量可设范围为 1~100，如果有更多数据节点的需求，可申请开白提升配额到 200。配置 Master 节点：如果没有启用专有主节点，那么 Master 节点的配置和数据节点相同，否则 Master 配置是独立的。配置专有主节点，如需启用专有主节点，数量默认配置为 3。配置 Kibana 节点，数量固定为 1。配置协调节点，如需启用，生产环境建议至少 2 个协调节点，可配范围为 2~50。温数据节点：如需启用，生产环境建议至少 3 个温数据节点，最多可配置 100 个。冷数据节点：如需启用，生产环境建议至少 2 个温数据节点，最多可配置 100 个。",
+		//	            "description": "Node count. When configuring the number of data nodes, note the following based on deployment mode: Single availability zone deployment: For production environments, configure at least 3 data nodes. Configuring 2 nodes poses a split-brain risk. If dedicated master nodes are enabled, 2 data nodes will not result in split-brain. Dual availability zone deployment, dedicated master nodes enabled by default: For production environments, configure at least 4 data nodes—2 per availability zone. Triple availability zone deployment, dedicated master nodes enabled by default: For production environments, configure at least 6 data nodes—2 per availability zone. You can set the number of data nodes from 1 to 100. If you need more, apply to increase the quota to 200. Master node configuration: If dedicated master nodes are not enabled, master node configuration matches data nodes; otherwise, master node configuration is independent. Dedicated master node configuration: If you need to enable dedicated master nodes, the default number is 3. Kibana node configuration: The number is fixed at 1. Coordinator node configuration: If enabled, configure at least 2 coordinator nodes for production environments. The configurable range is 2–50. Warm data nodes: If enabled, configure at least 3 warm data nodes for production environments, up to 100. Cold data nodes: If enabled, configure at least 2 cold data nodes for production environments, up to 100.",
 		//	            "type": "integer"
 		//	          },
 		//	          "ResourceSpecName": {
-		//	            "description": "计算资源规格名称。您可以通过调用DescribeNodeAvailableSpecs接口获取可用的节点规格列表。如需了解规格详情，请参见V2 实例规格",
+		//	            "description": "Compute resource specification name. You can call the DescribeNodeAvailableSpecs API to get the list of available node specifications. For details, see V2 instance specifications.",
 		//	            "type": "string"
 		//	          },
 		//	          "StorageSize": {
-		//	            "description": "存储容量，单位为 GiB。默认值为 100GiB，调整步长为 10GiB。说明Kibana 节点的 StorageSize 设置为0，即\"StorageSize\": 0。专有主节点和协调节点的 StorageSize 默认是 20。",
+		//	            "description": "Storage capacity, measured in GiB. Default value is 100 GiB, adjustment step is 10 GiB. Note: StorageSize for Kibana nodes is set to 0, i.e., \"StorageSize\": 0. StorageSize for dedicated master and coordinator nodes defaults to 20",
 		//	            "type": "integer"
 		//	          },
 		//	          "StorageSpecName": {
-		//	            "description": "存储规格名称，当前支持的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0。es.volume.essd.flexpl-standard：标准版-高性能云盘-flexpl。说明Kibana 节点的 StorageSpecName 设置为空，即\"StorageSpecName\": \"\"。",
+		//	            "description": "Storage specification name. Currently supported specifications: es.volume.essd.pl0: Standard Edition - High Performance Cloud Disk - pl0. es.volume.essd.flexpl-standard: Standard Edition - High Performance Cloud Disk - flexpl. Note: StorageSpecName for Kibana nodes is set to empty, i.e., \"StorageSpecName\": \"\"",
 		//	            "type": "string"
 		//	          },
 		//	          "Type": {
-		//	            "description": "节点类型。请先了解节点类型的作用，然后结合业务判断是否需要创建，详情请参见节点类型。Master：Master 节点。Hot：数据节点。Cold：冷数据节点。Warm：温数据节点。Kibana：Kibana 节点。Coordinator：协调节点。",
+		//	            "description": "Node type. Please understand the function of each node type first, then determine whether to create based on your business needs. For details, see node types. Master: Master node. Hot: Data node. Cold: Cold data node. Warm: Warm data node. Kibana: Kibana node. Coordinator: Coordinator node",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -652,44 +652,44 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Period": {
-		//	      "description": "包年包月实例的购买时长，单位：月。",
+		//	      "description": "Subscription instance purchase duration, in months.",
 		//	      "type": "integer"
 		//	    },
 		//	    "ProjectName": {
-		//	      "description": "按需设置云搜索实例所属的项目，有利于云资源的分组管理。项目是提供的一种资源管理方式，有利于维护资源独立、数据安全；同时可从项目维度查看资源消费账单，便于计算云资源使用成本。如需了解更多信息，请参见项目概述",
+		//	      "description": "Set the project for your cloud search instance as needed to facilitate grouping and management of cloud resources. Projects provide a resource management method that helps maintain resource independence and data security. You can also view resource consumption bills by project, making it easier to calculate cloud resource usage costs. For more information, see Project Overview",
 		//	      "type": "string"
 		//	    },
 		//	    "RegionId": {
-		//	      "description": "实例所在区域。",
+		//	      "description": "Instance region",
 		//	      "type": "string"
 		//	    },
 		//	    "Subnet": {
-		//	      "description": "设置实例的子网信息。说明设置的子网必须是主可用区中的子网。",
+		//	      "description": "Set subnet information for the instance. Note: The subnet must be in the primary zone.",
 		//	      "properties": {
 		//	        "SubnetId": {
 		//	          "description": "Subnet ID。",
 		//	          "type": "string"
 		//	        },
 		//	        "SubnetName": {
-		//	          "description": "Subnet 名称。",
+		//	          "description": "Subnet name",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "Tags": {
-		//	      "description": "标签信息。",
+		//	      "description": "Tag information",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "Key": {
-		//	            "description": "用户标签的标签键。长度限制为1～128个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复",
+		//	            "description": "Tag key for user labels. Length limit: 1–128 characters. Case-sensitive. Cannot start or end with a space. Letters, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), minus (-), and @ are allowed. Duplicate tag keys are not allowed for the same resource",
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "用户标签的标签值。长度限制为0～256个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@",
+		//	            "description": "Tag value for user tag. Length limit: 0–256 characters. Case-sensitive, cannot start or end with a space. Allowed characters: letters, numbers, spaces ( ), underscore (_), period (.), colon (:), slash (/), equals (=), plus (+), minus (-), and @",
 		//	            "maxLength": 256,
 		//	            "minLength": 0,
 		//	            "type": "string"
@@ -704,89 +704,89 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "VPC": {
-		//	      "description": "设置实例的私有网络 VPC 信息。",
+		//	      "description": "Set VPC information for the instance",
 		//	      "properties": {
 		//	        "VpcId": {
 		//	          "description": "VPC ID。",
 		//	          "type": "string"
 		//	        },
 		//	        "VpcName": {
-		//	          "description": "VPC 名称。",
+		//	          "description": "VPC name",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "Version": {
-		//	      "description": "API的版本，取值：2023-01-01。",
+		//	      "description": "API version. Value: 2023-01-01.",
 		//	      "type": "string"
 		//	    },
 		//	    "WarmNodeNumber": {
-		//	      "description": "温节点数量。",
+		//	      "description": "Warm node count.",
 		//	      "type": "integer"
 		//	    },
 		//	    "WarmNodeResourceSpec": {
-		//	      "description": "温节点的节点规格配置详情。",
+		//	      "description": "Warm node specification configuration details.",
 		//	      "properties": {
 		//	        "CPU": {
-		//	          "description": "节点规格的 CPU 资源，单位为核（Core）",
+		//	          "description": "CPU resources for node specification, measured in cores.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Description": {
-		//	          "description": "节点规格的描述信息",
+		//	          "description": "Description of node specification",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "节点规格的显示名称",
+		//	          "description": "Display name of node specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "Memory": {
-		//	          "description": "节点规格的内存容量，单位 GiB",
+		//	          "description": "Memory capacity for node specification, measured in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "节点规格。如需了解节点规格类型和详情",
+		//	          "description": "Node specification. For details on node specification types and details.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "WarmNodeStorageSpec": {
-		//	      "description": "温节点的存储规格配置详情。",
+		//	      "description": "Storage specification details for warm nodes",
 		//	      "properties": {
 		//	        "Description": {
-		//	          "description": "存储规格的描述信息",
+		//	          "description": "Description of storage specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "DisplayName": {
-		//	          "description": "存储规格的显示名称",
+		//	          "description": "Display name of storage specification.",
 		//	          "type": "string"
 		//	        },
 		//	        "MaxSize": {
-		//	          "description": "存储规格的最大值，单位为 GiB",
+		//	          "description": "Maximum storage specification, measured in GiB",
 		//	          "type": "integer"
 		//	        },
 		//	        "MinSize": {
-		//	          "description": "存储规格最小值，单位为 GiB",
+		//	          "description": "Minimum value for storage specification, unit: GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Name": {
-		//	          "description": "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+		//	          "description": "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition - High Performance Cloud Disk - pl0",
 		//	          "type": "string"
 		//	        },
 		//	        "Size": {
-		//	          "description": "当前存储规格值，单位为 GiB",
+		//	          "description": "Current storage specification value, in GiB.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "ZoneId": {
-		//	      "description": "实例所在可用区。说明如果是多可用区部署，则填写多个 ZoneId，使用英文逗号分隔，如cn-beijing-a,cn-beijing-c。最左侧的 ZoneId 为主可用区，其余为备可用区。",
+		//	      "description": "Zone where the instance is located. Note: For multi-zone deployment, enter multiple ZoneIds separated by commas, e.g., cn-beijing-a,cn-beijing-c. The leftmost ZoneId is the primary zone, others are backup zones.",
 		//	      "type": "string"
 		//	    },
 		//	    "ZoneNumber": {
-		//	      "description": "实例的可用区数量。",
+		//	      "description": "Number of instance availability zones.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -796,27 +796,27 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AdminPassword
 				"admin_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "管理员密码。",
+					Description: "Administrator password.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AdminUserName
 				"admin_user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "管理员用户名。",
+					Description: "Administrator username.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例是否配置自动续费。true：自动续费，系统会在每次到期前自动为实例续费。false：未开启自动续费，需要在实例到期前进行手动续费。如需了解更多，请参见实例续费。",
+					Description: "Whether the subscription instance is set to auto-renewal. true: Auto-renewal; the system will automatically renew the instance before each expiration. false: Auto-renewal is not enabled; manual renewal is required before the instance expires. For more information, see Instance renewal.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例计费类型。PostPaid：按量计费。PrePaid：包年包月。",
+					Description: "Instance billing type. PostPaid: Pay-as-you-go. PrePaid: Subscription",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ColdNodeNumber
 				"cold_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "冷节点数量。",
+					Description: "Number of cold nodes.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ColdNodeResourceSpec
@@ -824,31 +824,31 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CPU
 						"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的 CPU 资源，单位为核（Core）",
+							Description: "CPU resources for node specification, measured in cores.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的描述信息",
+							Description: "Description of node specifications",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的显示名称",
+							Description: "Display name of node specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Memory
 						"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的内存容量，单位 GiB",
+							Description: "Memory capacity for node specification, measured in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格。如需了解节点规格类型和详情",
+							Description: "Node specification. For details on node specification types and details.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "冷节点的节点规格配置详情。",
+					Description: "Node specification details for cold nodes",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ColdNodeStorageSpec
@@ -856,46 +856,46 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的描述信息",
+							Description: "Description of storage specification",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的显示名称",
+							Description: "Display name of storage specification",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MaxSize
 						"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的最大值，单位为 GiB",
+							Description: "Maximum storage specification, measured in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MinSize
 						"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格最小值，单位为 GiB",
+							Description: "Minimum storage specification, measured in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+							Description: "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition   - High Performance Cloud Disk   - pl0",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "当前存储规格值，单位为 GiB",
+							Description: "Current storage specification value, in GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "冷节点的存储规格配置详情。",
+					Description: "Details of cold node storage specification configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ConfigurationCode
 				"configuration_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "计费配置码，可以通过调用DescribeNodeAvailableSpecs接口获得。",
+					Description: "Billing configuration code, obtainable via the DescribeNodeAvailableSpecs API.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CoordinatorNodeNumber
 				"coordinator_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "协调节点数量。",
+					Description: "Coordinator node count",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CoordinatorNodeResourceSpec
@@ -903,31 +903,31 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CPU
 						"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的 CPU 资源，单位为核（Core）",
+							Description: "CPU resources of node specification, unit: cores.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的描述信息",
+							Description: "Description of node specifications",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的显示名称",
+							Description: "Display name of node specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Memory
 						"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的内存容量，单位 GiB",
+							Description: "Memory capacity of node specification, unit: GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格。如需了解节点规格类型和详情",
+							Description: "Node specification. For details on node specification types and details.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "协调节点的节点规格配置详情。",
+					Description: "Node specification configuration details for coordinator node.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CoordinatorNodeStorageSpec
@@ -935,56 +935,56 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的描述信息",
+							Description: "Description of storage specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的显示名称",
+							Description: "Display name of storage specification",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MaxSize
 						"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的最大值，单位为 GiB",
+							Description: "Maximum storage specification, in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MinSize
 						"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格最小值，单位为 GiB",
+							Description: "Minimum value for storage specification, unit: GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+							Description: "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition   - High Performance Cloud Disk   - pl0",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "当前存储规格值，单位为 GiB",
+							Description: "Current storage specification value, in GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "协调节点的存储规格配置详情。",
+					Description: "Storage specification configuration details for coordinator node.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DeletionProtection
 				"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启实例删除保护功能，取值说明如下：true：开启实例删除保护。false：关闭实例删除保护。说明开启实例删除保护后，您将无法通过控制台或者 API 删除实例。",
+					Description: "Enable instance deletion protection. Values: true: Enable instance deletion protection. false: Disable instance deletion protection. Note: After enabling deletion protection, you cannot delete the instance via console or API",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnableHttps
 				"enable_https": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否启用 HTTPS 访问协议。true：启用 HTTPS 访问。false：不启用 HTTPS，使用 HTTP 访问。说明如果选择使用 HTTP 访问，将无需安全认证即可访问，并使用 HTTP 明文传输数据。您需要确保访问环境的安全性，且不要将访问接口暴露在公网环境上。实例创建完成后，支持根据业务需求修改传输协议。相关文档，请参见切换实例传输协议。",
+					Description: "Enable HTTPS access protocol. true: Enable HTTPS access. false: Disable HTTPS, use HTTP access. Note: If you choose HTTP access, you can access without security authentication and transmit data in plain HTTP. Ensure the security of your access environment and do not expose the API to the public network. After the instance is created, you can modify the transmission protocol as needed. For related documentation, see Switch Instance Transmission Protocol",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnablePureMaster
 				"enable_pure_master": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即使用 Hot 声明。",
+					Description: "Whether the master node is dedicated. true: Master node is dedicated. false: Master node is combined with data node, that is, uses Hot node.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HotNodeNumber
 				"hot_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "数据节点数量。",
+					Description: "Number of data nodes",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HotNodeResourceSpec
@@ -992,31 +992,31 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CPU
 						"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的 CPU 资源，单位为核（Core）。",
+							Description: "CPU resources of node specification, measured in cores",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的描述信息。",
+							Description: "Description of node specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的显示名称。",
+							Description: "Display name of node specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Memory
 						"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的内存容量，单位 GiB。",
+							Description: "Memory capacity for node specification, measured in GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格。如需了解节点规格类型和详情，请参见产品规格。",
+							Description: "Node specification. For details on node specification types and details, see Product Specifications.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "数据节点的节点规格配置详情。",
+					Description: "Node specification configuration details for data node.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HotNodeStorageSpec
@@ -1024,46 +1024,46 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的描述信息。",
+							Description: "Description of storage specification",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的显示名称。",
+							Description: "Display name of storage specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MaxSize
 						"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的最大值，单位为 GiB。",
+							Description: "Maximum storage specification, in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MinSize
 						"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格最小值，单位为 GiB。",
+							Description: "Minimum storage specification, measured in GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+							Description: "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition   - High Performance Cloud Disk   - pl0",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "配置的可用磁盘空间大小。",
+							Description: "Configured available disk space size",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "数据节点的存储规格配置详情。",
+					Description: "Data node storage specification configuration details",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceName
 				"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "自定义设置实例名称。只能包含中文、字母、数字、短横线（-）和下划线（_），开头和结尾不能是数字和短横线（-）。长度在 1～128 个字符内。",
+					Description: "Set a custom instance name. Only Chinese characters, letters, numbers, hyphens (-), and underscores (_) are allowed. The name cannot start or end with a number or hyphen (-). Length must be between 1 and 128 characters.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KibanaNodeNumber
 				"kibana_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "kibana 节点数量。",
+					Description: "Number of Kibana nodes",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KibanaNodeResourceSpec
@@ -1071,36 +1071,36 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CPU
 						"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的 CPU 资源，单位为核（Core）",
+							Description: "CPU resources for node specification, measured in cores.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的描述信息",
+							Description: "Description of node specifications",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的显示名称",
+							Description: "Display name of node specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Memory
 						"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的内存容量，单位 GiB",
+							Description: "Memory capacity for node specification, measured in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格。如需了解节点规格类型和详情",
+							Description: "Node specification. For information about node specification types and details, please refer to the documentation.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Kibana 节点的节点规格配置详情。",
+					Description: "Kibana node specification configuration details",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MasterNodeNumber
 				"master_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "master 节点数量。",
+					Description: "Number of master nodes.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MasterNodeResourceSpec
@@ -1108,31 +1108,31 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CPU
 						"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的 CPU 资源，单位为核（Core）",
+							Description: "CPU resources of node specification, unit: cores.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的描述信息",
+							Description: "Description of node specifications",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的显示名称",
+							Description: "Display name of node specification",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Memory
 						"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的内存容量，单位 GiB",
+							Description: "Memory capacity of node specification, unit: GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格。如需了解节点规格类型和详情",
+							Description: "Node specification. For information about node specification types and details, please refer to the documentation.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Master 节点的节点规格配置详情。",
+					Description: "Master node specification configuration details",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MasterNodeStorageSpec
@@ -1140,36 +1140,36 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的描述信息",
+							Description: "Description of storage specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的显示名称",
+							Description: "Display name of storage specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MaxSize
 						"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的最大值，单位为 GiB",
+							Description: "Maximum storage specification, measured in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MinSize
 						"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格最小值，单位为 GiB",
+							Description: "Minimum value for storage specification, unit: GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+							Description: "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition   - High Performance Cloud Disk   - pl0",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "当前存储规格值，单位为 GiB",
+							Description: "Current storage specification value, in GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Master 节点的存储规格配置详情。",
+					Description: "Storage specification details for master node",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: NetworkSpecs
@@ -1178,27 +1178,27 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Bandwidth
 							"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "公网IP的带宽上限，默认为“1”，单位：Mbps。",
+								Description: "Public IP bandwidth limit. Default is '1', unit: Mbps.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IsOpen
 							"is_open": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "开启/关闭",
+								Description: "Enable/Disable",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SpecName
 							"spec_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "实例公网资源规格名称",
+								Description: "Instance public resource specification name",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "公网应用类型 Elasticsearch：es实例使用。Kibana：Dashboard使用",
+								Description: "Public network application types: Elasticsearch—for ES instance usage. Kibana—for Dashboard usage",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "实例公网规格配置。",
+					Description: "Instance public network specification configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: NodeSpecsAssigns
@@ -1210,56 +1210,56 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Throughput
 									"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "当您的数据节点选择使用 FlexPL 存储类型，且存储规格配置为 500GiB 及以上时，支持购买带宽包增加磁盘带宽。单位为MiB，调整步长为10MiB。当前支持的存储规格及对应额外性能包吞吐量上限如下：es.volume.essd.flexpl-standard：650",
+										Description: "When your data node uses the FlexPL storage type and the storage specification is 500 GiB or above, you can purchase a bandwidth package to increase disk bandwidth. Unit: MiB; adjustment step: 10 MiB. Supported storage specifications and corresponding maximum throughput for additional performance packages are as follows: es.volume.essd.flexpl-standard: 650.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "磁盘额外性能包相关配置。",
+								Description: "Disk extra performance package configuration.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Number
 							"number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "节点数量。配置数据节点数量时，在不同部署方式下，需要注意以下信息：单可用区部署：建议生产环境至少配置 3 个数据节点，配置 2 个节点时存在脑裂风险。如果启用专有主节点，2 个数据节点不会脑裂。双可用区部署，默认启用专有主节点：建议生产环境至少配置 4 个数据节点，即每个可用区两个数据节点。三可用区部署，默认启用专有主节点：建议生产环境至少配置 6 个数据节点，即每个可用区两个数据节点。数据节点数量可设范围为 1~100，如果有更多数据节点的需求，可申请开白提升配额到 200。配置 Master 节点：如果没有启用专有主节点，那么 Master 节点的配置和数据节点相同，否则 Master 配置是独立的。配置专有主节点，如需启用专有主节点，数量默认配置为 3。配置 Kibana 节点，数量固定为 1。配置协调节点，如需启用，生产环境建议至少 2 个协调节点，可配范围为 2~50。温数据节点：如需启用，生产环境建议至少 3 个温数据节点，最多可配置 100 个。冷数据节点：如需启用，生产环境建议至少 2 个温数据节点，最多可配置 100 个。",
+								Description: "Node count. When configuring the number of data nodes, note the following based on deployment mode: Single availability zone deployment: For production environments, configure at least 3 data nodes. Configuring 2 nodes poses a split-brain risk. If dedicated master nodes are enabled, 2 data nodes will not result in split-brain. Dual availability zone deployment, dedicated master nodes enabled by default: For production environments, configure at least 4 data nodes—2 per availability zone. Triple availability zone deployment, dedicated master nodes enabled by default: For production environments, configure at least 6 data nodes—2 per availability zone. You can set the number of data nodes from 1 to 100. If you need more, apply to increase the quota to 200. Master node configuration: If dedicated master nodes are not enabled, master node configuration matches data nodes; otherwise, master node configuration is independent. Dedicated master node configuration: If you need to enable dedicated master nodes, the default number is 3. Kibana node configuration: The number is fixed at 1. Coordinator node configuration: If enabled, configure at least 2 coordinator nodes for production environments. The configurable range is 2–50. Warm data nodes: If enabled, configure at least 3 warm data nodes for production environments, up to 100. Cold data nodes: If enabled, configure at least 2 cold data nodes for production environments, up to 100.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ResourceSpecName
 							"resource_spec_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "计算资源规格名称。您可以通过调用DescribeNodeAvailableSpecs接口获取可用的节点规格列表。如需了解规格详情，请参见V2 实例规格",
+								Description: "Compute resource specification name. You can call the DescribeNodeAvailableSpecs API to get the list of available node specifications. For details, see V2 instance specifications.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: StorageSize
 							"storage_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "存储容量，单位为 GiB。默认值为 100GiB，调整步长为 10GiB。说明Kibana 节点的 StorageSize 设置为0，即\"StorageSize\": 0。专有主节点和协调节点的 StorageSize 默认是 20。",
+								Description: "Storage capacity, measured in GiB. Default value is 100 GiB, adjustment step is 10 GiB. Note: StorageSize for Kibana nodes is set to 0, i.e., \"StorageSize\": 0. StorageSize for dedicated master and coordinator nodes defaults to 20",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: StorageSpecName
 							"storage_spec_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "存储规格名称，当前支持的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0。es.volume.essd.flexpl-standard：标准版-高性能云盘-flexpl。说明Kibana 节点的 StorageSpecName 设置为空，即\"StorageSpecName\": \"\"。",
+								Description: "Storage specification name. Currently supported specifications: es.volume.essd.pl0: Standard Edition   - High Performance Cloud Disk   - pl0. es.volume.essd.flexpl-standard: Standard Edition   - High Performance Cloud Disk   - flexpl. Note: StorageSpecName for Kibana nodes is set to empty, i.e., \"StorageSpecName\": \"\"",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "节点类型。请先了解节点类型的作用，然后结合业务判断是否需要创建，详情请参见节点类型。Master：Master 节点。Hot：数据节点。Cold：冷数据节点。Warm：温数据节点。Kibana：Kibana 节点。Coordinator：协调节点。",
+								Description: "Node type. Please understand the function of each node type first, then determine whether to create based on your business needs. For details, see node types. Master: Master node. Hot: Data node. Cold: Cold data node. Warm: Warm data node. Kibana: Kibana node. Coordinator: Coordinator node",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "实例中各种节点的数量和规格配置。",
+					Description: "Configuration of node counts and specifications in the instance",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "包年包月实例的购买时长，单位：月。",
+					Description: "Subscription instance purchase duration, in months.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ProjectName
 				"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "按需设置云搜索实例所属的项目，有利于云资源的分组管理。项目是提供的一种资源管理方式，有利于维护资源独立、数据安全；同时可从项目维度查看资源消费账单，便于计算云资源使用成本。如需了解更多信息，请参见项目概述",
+					Description: "Set the project for your cloud search instance as needed to facilitate grouping and management of cloud resources. Projects provide a resource management method that helps maintain resource independence and data security. You can also view resource consumption bills by project, making it easier to calculate cloud resource usage costs. For more information, see Project Overview",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RegionId
 				"region_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例所在区域。",
+					Description: "Instance region",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Subnet
@@ -1272,11 +1272,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SubnetName
 						"subnet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Subnet 名称。",
+							Description: "Subnet name",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "设置实例的子网信息。说明设置的子网必须是主可用区中的子网。",
+					Description: "Set subnet information for the instance. Note: The subnet must be in the primary zone.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
@@ -1285,17 +1285,17 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "用户标签的标签键。长度限制为1～128个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复",
+								Description: "Tag key for user labels. Length limit: 1–128 characters. Case-sensitive. Cannot start or end with a space. Letters, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), minus (-), and @ are allowed. Duplicate tag keys are not allowed for the same resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "用户标签的标签值。长度限制为0～256个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@",
+								Description: "Tag value for user tag. Length limit: 0–256 characters. Case-sensitive, cannot start or end with a space. Allowed characters: letters, numbers, spaces ( ), underscore (_), period (.), colon (:), slash (/), equals (=), plus (+), minus (-), and @",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "标签信息。",
+					Description: "Tag information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VPC
@@ -1308,21 +1308,21 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: VpcName
 						"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "VPC 名称。",
+							Description: "VPC name",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "设置实例的私有网络 VPC 信息。",
+					Description: "Set VPC information for the instance",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Version
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "API的版本，取值：2023-01-01。",
+					Description: "API version. Value: 2023-01-01.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: WarmNodeNumber
 				"warm_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "温节点数量。",
+					Description: "Warm node count.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: WarmNodeResourceSpec
@@ -1330,31 +1330,31 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CPU
 						"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的 CPU 资源，单位为核（Core）",
+							Description: "CPU resources for node specification, measured in cores.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的描述信息",
+							Description: "Description of node specification",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的显示名称",
+							Description: "Display name of node specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Memory
 						"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "节点规格的内存容量，单位 GiB",
+							Description: "Memory capacity for node specification, measured in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "节点规格。如需了解节点规格类型和详情",
+							Description: "Node specification. For details on node specification types and details.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "温节点的节点规格配置详情。",
+					Description: "Warm node specification configuration details.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: WarmNodeStorageSpec
@@ -1362,79 +1362,79 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Description
 						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的描述信息",
+							Description: "Description of storage specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DisplayName
 						"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的显示名称",
+							Description: "Display name of storage specification.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MaxSize
 						"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格的最大值，单位为 GiB",
+							Description: "Maximum storage specification, measured in GiB",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MinSize
 						"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "存储规格最小值，单位为 GiB",
+							Description: "Minimum value for storage specification, unit: GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "存储规格，当前的规格如下：es.volume.essd.pl0：标准版-高性能云盘-pl0",
+							Description: "Storage specification. Current specification: es.volume.essd.pl0: Standard Edition   - High Performance Cloud Disk   - pl0",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "当前存储规格值，单位为 GiB",
+							Description: "Current storage specification value, in GiB.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "温节点的存储规格配置详情。",
+					Description: "Storage specification details for warm nodes",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ZoneId
 				"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例所在可用区。说明如果是多可用区部署，则填写多个 ZoneId，使用英文逗号分隔，如cn-beijing-a,cn-beijing-c。最左侧的 ZoneId 为主可用区，其余为备可用区。",
+					Description: "Zone where the instance is located. Note: For multi-zone deployment, enter multiple ZoneIds separated by commas, e.g., cn-beijing-a,cn-beijing-c. The leftmost ZoneId is the primary zone, others are backup zones.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ZoneNumber
 				"zone_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "实例的可用区数量。",
+					Description: "Number of instance availability zones.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例配置详情信息。",
+			Description: "Instance configuration details",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaConfig
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 参数配置。",
+		//	  "description": "Kibana parameter configuration",
 		//	  "properties": {
 		//	    "RequestTimeout": {
-		//	      "description": "接口请求超时时长，默认为 30000 毫秒，即后端响应时长超过 30 秒时将出现503 Request timed out报错。如果需要正常获得响应、减少 503 报错，您可以选择增加请求超时时长。",
+		//	      "description": "API request timeout duration. Default is 30000 milliseconds. If the backend response exceeds 30 seconds, a 503 Request timed out error will occur. To receive responses normally and reduce 503 errors, you can increase the request timeout duration",
 		//	      "type": "integer"
 		//	    },
 		//	    "SessionKeepAlive": {
-		//	      "description": "是否主动延长会话有效期。true：默认值，表示每次页面请求都会延长会话有效期。false：不会主动延长会话有效期。此种配置下可以实现会话超时过期效果，当登录时长达到 Session 有效时长后，将会自动退出登录。",
+		//	      "description": "Whether to proactively extend session validity. true: Default value, session validity is extended with each page request. false: Session validity is not proactively extended. With this setting, session timeout can occur; when login duration reaches the session validity period, you will be automatically logged out.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SessionTTL": {
-		//	      "description": "会话有效时长，默认为 3600000 毫秒（1 小时）。如果您选择将 Session 活动保持设置为否，当登录时长达到 Session 有效时长后，将会自动退出登录。",
+		//	      "description": "Session validity duration. Default is 3600000 milliseconds (1 hour). If you set Session activity retention to No, you will be automatically logged out when the login duration reaches the session validity duration",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -1444,138 +1444,138 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: RequestTimeout
 				"request_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "接口请求超时时长，默认为 30000 毫秒，即后端响应时长超过 30 秒时将出现503 Request timed out报错。如果需要正常获得响应、减少 503 报错，您可以选择增加请求超时时长。",
+					Description: "API request timeout duration. Default is 30000 milliseconds. If the backend response exceeds 30 seconds, a 503 Request timed out error will occur. To receive responses normally and reduce 503 errors, you can increase the request timeout duration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SessionKeepAlive
 				"session_keep_alive": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否主动延长会话有效期。true：默认值，表示每次页面请求都会延长会话有效期。false：不会主动延长会话有效期。此种配置下可以实现会话超时过期效果，当登录时长达到 Session 有效时长后，将会自动退出登录。",
+					Description: "Whether to proactively extend session validity. true: Default value, session validity is extended with each page request. false: Session validity is not proactively extended. With this setting, session timeout can occur; when login duration reaches the session validity period, you will be automatically logged out.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SessionTTL
 				"session_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "会话有效时长，默认为 3600000 毫秒（1 小时）。如果您选择将 Session 活动保持设置为否，当登录时长达到 Session 有效时长后，将会自动退出登录。",
+					Description: "Session validity duration. Default is 3600000 milliseconds (1 hour). If you set Session activity retention to No, you will be automatically logged out when the login duration reaches the session validity duration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Kibana 参数配置。",
+			Description: "Kibana parameter configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaEip
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 所绑定的 EIP。",
+		//	  "description": "EIP bound to Kibana",
 		//	  "type": "string"
 		//	}
 		"kibana_eip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 所绑定的 EIP。",
+			Description: "EIP bound to Kibana",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaEipId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 所绑定的 EIP 的 ID。",
+		//	  "description": "ID of the EIP bound to Kibana.",
 		//	  "type": "string"
 		//	}
 		"kibana_eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 所绑定的 EIP 的 ID。",
+			Description: "ID of the EIP bound to Kibana.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaPrivateDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 私网访问地址。说明如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+		//	  "description": "Kibana private network access address. Note: For historical instances, the access address may start with http(s)://kibana-***.",
 		//	  "type": "string"
 		//	}
 		"kibana_private_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 私网访问地址。说明如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+			Description: "Kibana private network access address. Note: For historical instances, the access address may start with http(s)://kibana-***.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaPrivateIpAllowList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 私网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。同 KibanaPrivateIpWhitelist",
+		//	  "description": "Kibana private network allowlist. Only IP addresses added to the allowlist can access the visualization tool. Same as KibanaPrivateIpWhitelist.",
 		//	  "type": "string"
 		//	}
 		"kibana_private_ip_allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 私网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。同 KibanaPrivateIpWhitelist",
+			Description: "Kibana private network allowlist. Only IP addresses added to the allowlist can access the visualization tool. Same as KibanaPrivateIpWhitelist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaPrivateIpWhitelist
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 私网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。说明Cerebro 和 Kibana 共用一套白名单。",
+		//	  "description": "Kibana private network allowlist. Only IP addresses added to the allowlist can access the visualization tool. Note: Cerebro and Kibana share the same allowlist.",
 		//	  "type": "string"
 		//	}
 		"kibana_private_ip_whitelist": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 私网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。说明Cerebro 和 Kibana 共用一套白名单。",
+			Description: "Kibana private network allowlist. Only IP addresses added to the allowlist can access the visualization tool. Note: Cerebro and Kibana share the same allowlist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaPubBandwidth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana公网带宽，单位: Mbps",
+		//	  "description": "Kibana public network bandwidth, unit: Mbps",
 		//	  "type": "integer"
 		//	}
 		"kibana_pub_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Kibana公网带宽，单位: Mbps",
+			Description: "Kibana public network bandwidth, unit: Mbps",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaPublicDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 公网访问地址。说明如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+		//	  "description": "Kibana public access address. Note: For legacy instances, the access address may start with http(s)://kibana-***",
 		//	  "type": "string"
 		//	}
 		"kibana_public_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 公网访问地址。说明如果是历史实例，访问地址有可能是http(s)://kibana-***开头。",
+			Description: "Kibana public access address. Note: For legacy instances, the access address may start with http(s)://kibana-***",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaPublicIpAllowList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 公网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。同 KibanaPublicIpWhitelist",
+		//	  "description": "Kibana public allowlist. Only IP addresses added to the allowlist can access the visualization tool. Same as KibanaPublicIpWhitelist",
 		//	  "type": "string"
 		//	}
 		"kibana_public_ip_allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 公网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。同 KibanaPublicIpWhitelist",
+			Description: "Kibana public allowlist. Only IP addresses added to the allowlist can access the visualization tool. Same as KibanaPublicIpWhitelist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KibanaPublicIpWhitelist
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kibana 公网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。说明Cerebro 和 Kibana 共用一套白名单",
+		//	  "description": "Kibana public allowlist. Only IP addresses added to the allowlist can access the visualization tool. Note: Cerebro and Kibana share the same allowlist",
 		//	  "type": "string"
 		//	}
 		"kibana_public_ip_whitelist": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kibana 公网白名单。只有添加到白名单中的 IP 地址才可以访问可视化工具。说明Cerebro 和 Kibana 共用一套白名单",
+			Description: "Kibana public allowlist. Only IP addresses added to the allowlist can access the visualization tool. Note: Cerebro and Kibana share the same allowlist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MainZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "主可用区",
+		//	  "description": "Primary availability zone",
 		//	  "type": "string"
 		//	}
 		"main_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "主可用区",
+			Description: "Primary availability zone",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceDay
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的可维护日期。",
+		//	  "description": "Instance maintenance date.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -1585,60 +1585,60 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"maintenance_day": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例的可维护日期。",
+			Description: "Instance maintenance date.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的可维护时间段。",
+		//	  "description": "Instance maintenance window.",
 		//	  "type": "string"
 		//	}
 		"maintenance_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的可维护时间段。",
+			Description: "Instance maintenance window.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例当前状态。",
+		//	  "description": "Current instance status",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例当前状态。",
+			Description: "Current instance status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubInstanceEnable
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子实例开启情况。",
+		//	  "description": "Sub-instance activation status",
 		//	  "type": "string"
 		//	}
 		"sub_instance_enable": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子实例开启情况。",
+			Description: "Sub-instance activation status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubInstances
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "企业级 SQL 分析实例配置信息。",
+		//	  "description": "Enterprise SQL analytics instance configuration information",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "SubInstanceId": {
-		//	        "description": "企业级 SQL 分析实例 ID。",
+		//	        "description": "Enterprise-level SQL analysis instance ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "SubInstanceStatus": {
-		//	        "description": "实例状态。",
+		//	        "description": "Instance status",
 		//	        "type": "string"
 		//	      },
 		//	      "SubInstanceType": {
-		//	        "description": "实例类型。",
+		//	        "description": "Instance type",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1652,92 +1652,92 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: SubInstanceId
 					"sub_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "企业级 SQL 分析实例 ID。",
+						Description: "Enterprise-level SQL analysis instance ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SubInstanceStatus
 					"sub_instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例状态。",
+						Description: "Instance status",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SubInstanceType
 					"sub_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例类型。",
+						Description: "Instance type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "企业级 SQL 分析实例配置信息。",
+			Description: "Enterprise SQL analytics instance configuration information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SupportColdNode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否支持冷节点。",
+		//	  "description": "Whether cold nodes are supported",
 		//	  "type": "boolean"
 		//	}
 		"support_cold_node": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否支持冷节点。",
+			Description: "Whether cold nodes are supported",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TotalNodes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的总节点数。",
+		//	  "description": "Total number of nodes in the instance",
 		//	  "type": "integer"
 		//	}
 		"total_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例的总节点数。",
+			Description: "Total number of nodes in the instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransferInfo
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据迁移任务信息。",
+		//	  "description": "Data migration task information",
 		//	  "properties": {
 		//	    "ForbidStop": {
 		//	      "description": "ForbidStop",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ReduceSpecConfig": {
-		//	      "description": "资源信息。",
+		//	      "description": "Resource information",
 		//	      "properties": {
 		//	        "ColdNodeNum": {
-		//	          "description": "冷节点数量。",
+		//	          "description": "Number of cold nodes.",
 		//	          "type": "integer"
 		//	        },
 		//	        "DataNodeNum": {
-		//	          "description": "数据节点数量。",
+		//	          "description": "Number of data nodes",
 		//	          "type": "integer"
 		//	        },
 		//	        "EnablePureMaster": {
-		//	          "description": "Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即用 Hot 来声明。",
+		//	          "description": "Whether the master node is independent. true: Master node is independent. false: Master node overlaps with data node, declared as Hot",
 		//	          "type": "boolean"
 		//	        },
 		//	        "MasterNodeNum": {
-		//	          "description": "Master 节点数量。",
+		//	          "description": "Number of master nodes.",
 		//	          "type": "integer"
 		//	        },
 		//	        "WarmNodeNum": {
-		//	          "description": "温节点数量。",
+		//	          "description": "Number of warm nodes",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "TransferProgress": {
-		//	      "description": "数据迁移任务进度，百分制。",
+		//	      "description": "Data migration task progress, percentage",
 		//	      "type": "number"
 		//	    },
 		//	    "TransferStatus": {
-		//	      "description": "数据迁移任务状态。",
+		//	      "description": "Data migration task status",
 		//	      "type": "string"
 		//	    },
 		//	    "TransferTaskId": {
-		//	      "description": "数据迁移任务 ID。",
+		//	      "description": "Data migration task ID",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1755,61 +1755,61 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ColdNodeNum
 						"cold_node_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "冷节点数量。",
+							Description: "Number of cold nodes.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DataNodeNum
 						"data_node_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "数据节点数量。",
+							Description: "Number of data nodes",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: EnablePureMaster
 						"enable_pure_master": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Master 节点是否独立。true：Master 节点独立。false：Master 节点与数据节点重合，即用 Hot 来声明。",
+							Description: "Whether the master node is independent. true: Master node is independent. false: Master node overlaps with data node, declared as Hot",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MasterNodeNum
 						"master_node_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Master 节点数量。",
+							Description: "Number of master nodes.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: WarmNodeNum
 						"warm_node_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "温节点数量。",
+							Description: "Number of warm nodes",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "资源信息。",
+					Description: "Resource information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TransferProgress
 				"transfer_progress": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "数据迁移任务进度，百分制。",
+					Description: "Data migration task progress, percentage",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TransferStatus
 				"transfer_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "数据迁移任务状态。",
+					Description: "Data migration task status",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TransferTaskId
 				"transfer_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "数据迁移任务 ID。",
+					Description: "Data migration task ID",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "数据迁移任务信息。",
+			Description: "Data migration task information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所有者的用户 ID。",
+		//	  "description": "Instance owner's user ID",
 		//	  "type": "string"
 		//	}
 		"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所有者的用户 ID。",
+			Description: "Instance owner's user ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

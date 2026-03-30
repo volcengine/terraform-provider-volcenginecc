@@ -35,11 +35,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "Forward",
-		//	  "description": "转发规则的转发动作。取值如下：Forward：转发至。Redirect：重定向至。",
+		//	  "description": "Forwarding rule action. Options: Forward: Forward to. Redirect: Redirect to.",
 		//	  "type": "string"
 		//	}
 		"action_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的转发动作。取值如下：Forward：转发至。Redirect：重定向至。",
+			Description: "Forwarding rule action. Options: Forward: Forward to. Redirect: Redirect to.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("Forward"),
@@ -51,13 +51,13 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的描述，默认值为空字符串。规范如下：必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。",
+		//	  "description": "Description of the forwarding rule. Default value is an empty string. Specifications: Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length must be between 0 and 255 characters.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的描述，默认值为空字符串。规范如下：必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。",
+			Description: "Description of the forwarding rule. Default value is an empty string. Specifications: Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length must be between 0 and 255 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -71,11 +71,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的域名。",
+		//	  "description": "Domain name of the forwarding rule.",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的域名。",
+			Description: "Domain name of the forwarding rule.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -87,11 +87,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器ID。",
+		//	  "description": "Listener ID.",
 		//	  "type": "string"
 		//	}
 		"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器ID。",
+			Description: "Listener ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -101,34 +101,34 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "重定向相关配置信息。",
+		//	  "description": "Redirection-related configuration information.",
 		//	  "properties": {
 		//	    "Host": {
-		//	      "description": "转发规则重定向的域名，当前仅支持精确域名。规范如下：需至少包含一个‘.’，且不允许以‘.’开头或结尾。仅允许包含字母、数字、‘.’、‘-‘。长度限制为1 ～ 128个字符。符合域名规范的精确域名，例如：www.test.com。",
+		//	      "description": "The domain name for forwarding rule redirection currently supports only exact domain names. Specifications: Must contain at least one '.', and cannot start or end with '.'. Only letters, numbers, '.', and '-' are allowed. Length must be between 1 and 128 characters. Example of a valid exact domain name: www.test.com.",
 		//	      "maxLength": 128,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Path": {
-		//	      "description": "转发规则重定向的路径。规范如下：必须以正斜线“/”开头，字符‘/’不能连续出现。仅允许包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘\u0026’、‘＝’等字符。长度限制为1 ～ 128个字符。",
+		//	      "description": "Path for forwarding rule redirection. Specifications: Must start with a forward slash '/'. Consecutive '/' characters are not allowed. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '\u0026', '=', and other specified characters are allowed. Length must be between 1 and 128 characters.",
 		//	      "maxLength": 128,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Port": {
-		//	      "description": "转发规则重定向的端口，取值范围为 1~65535。",
+		//	      "description": "Port for forwarding rule redirection. Value range: 1~65535.",
 		//	      "maximum": 65535,
 		//	      "minimum": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Protocol": {
 		//	      "default": "HTTPS",
-		//	      "description": "转发规则重定向的协议。取值如下：HTTP。HTTPS（默认值）。",
+		//	      "description": "Protocol for forwarding rule redirection. Options: HTTP. HTTPS (default).",
 		//	      "type": "string"
 		//	    },
 		//	    "StatusCode": {
 		//	      "default": "301",
-		//	      "description": "转发规则重定向的状态码。取值如下：301（默认）：表示请求的资源已被永久移动到新的 URL，客户端应该使用新的 URL 进行后续请求。302：表示请求的资源被临时移动到新的 URL，但未来可能会再次更改，客户端应该使用新的 URL 进行后续请求。307：与 302 类似，但在重定向时要求客户端保持请求方法不变。例如，原来是 GET 请求，则重定向后仍然是 GET 请求。308：与 301 类似，但在重定向时要求客户端保持请求方法不变。",
+		//	      "description": "Status code for forwarding rule redirection. Options: 301 (default): Indicates the requested resource has been permanently moved to a new URL. The client should use the new URL for subsequent requests. 302: Indicates the requested resource has been temporarily moved to a new URL and may change again in the future. The client should use the new URL for subsequent requests. 307: Similar to 302, but requires the client to keep the request method unchanged during redirection. For example, if the original request is GET, the redirected request remains GET. 308: Similar to 301, but requires the client to keep the request method unchanged during redirection.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -138,7 +138,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Host
 				"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "转发规则重定向的域名，当前仅支持精确域名。规范如下：需至少包含一个‘.’，且不允许以‘.’开头或结尾。仅允许包含字母、数字、‘.’、‘-‘。长度限制为1 ～ 128个字符。符合域名规范的精确域名，例如：www.test.com。",
+					Description: "The domain name for forwarding rule redirection currently supports only exact domain names. Specifications: Must contain at least one '.', and cannot start or end with '.'. Only letters, numbers, '.', and '-' are allowed. Length must be between 1 and 128 characters. Example of a valid exact domain name: www.test.com.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -150,7 +150,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Path
 				"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "转发规则重定向的路径。规范如下：必须以正斜线“/”开头，字符‘/’不能连续出现。仅允许包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘&’、‘＝’等字符。长度限制为1 ～ 128个字符。",
+					Description: "Path for forwarding rule redirection. Specifications: Must start with a forward slash '/'. Consecutive '/' characters are not allowed. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '&', '=', and other specified characters are allowed. Length must be between 1 and 128 characters.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -162,7 +162,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Port
 				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "转发规则重定向的端口，取值范围为 1~65535。",
+					Description: "Port for forwarding rule redirection. Value range: 1~65535.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -171,7 +171,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "转发规则重定向的协议。取值如下：HTTP。HTTPS（默认值）。",
+					Description: "Protocol for forwarding rule redirection. Options: HTTP. HTTPS (default).",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("HTTPS"),
@@ -181,7 +181,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StatusCode
 				"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "转发规则重定向的状态码。取值如下：301（默认）：表示请求的资源已被永久移动到新的 URL，客户端应该使用新的 URL 进行后续请求。302：表示请求的资源被临时移动到新的 URL，但未来可能会再次更改，客户端应该使用新的 URL 进行后续请求。307：与 302 类似，但在重定向时要求客户端保持请求方法不变。例如，原来是 GET 请求，则重定向后仍然是 GET 请求。308：与 301 类似，但在重定向时要求客户端保持请求方法不变。",
+					Description: "Status code for forwarding rule redirection. Options: 301 (default): Indicates the requested resource has been permanently moved to a new URL. The client should use the new URL for subsequent requests. 302: Indicates the requested resource has been temporarily moved to a new URL and may change again in the future. The client should use the new URL for subsequent requests. 307: Similar to 302, but requires the client to keep the request method unchanged during redirection. For example, if the original request is GET, the redirected request remains GET. 308: Similar to 301, but requires the client to keep the request method unchanged during redirection.",
 					Optional:    true,
 					Computed:    true,
 					Default:     stringdefault.StaticString("301"),
@@ -190,7 +190,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "重定向相关配置信息。",
+			Description: "Redirection-related configuration information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -201,11 +201,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则ID。",
+		//	  "description": "Forwarding rule ID.",
 		//	  "type": "string"
 		//	}
 		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则ID。",
+			Description: "Forwarding rule ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -215,11 +215,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则关联的后端服务器组的ID。",
+		//	  "description": "ID of the backend server group associated with the forwarding rule.",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则关联的后端服务器组的ID。",
+			Description: "ID of the backend server group associated with the forwarding rule.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -230,17 +230,17 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "转发规则标签。",
+		//	    "description": "Forwarding rule tags.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -257,7 +257,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -269,7 +269,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -278,7 +278,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -289,11 +289,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "转发规则的URL。",
+		//	  "description": "URL of the forwarding rule.",
 		//	  "type": "string"
 		//	}
 		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "转发规则的URL。",
+			Description: "URL of the forwarding rule.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -313,7 +313,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "转发规则用于将指定域名和URL的请求引流至指定的后端服务器组。",
+		Description: "The forwarding rule directs requests for specified domain names and URLs to the designated backend server group.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -21,41 +21,41 @@ Data Source schema for Volcengine::VKE::Node
 
 ### Read-Only
 
-- `additional_container_storage_enabled` (Boolean) 选择配置节点的数据盘并格式化挂载作为容器镜像和日志的存储目录，取值：false：（默认值）关闭。默认节点池：表示不挂载数据盘。自定义节点池：使用节点池的数据盘配置进行挂载，被添加到节点池的 ECS 实例数据盘必须包含目标节点池指定了挂载的数据盘（含本地盘），且盘类型和大小完全一致。true: 开启。此时必须同时配置 ContainerStoragePath 参数。节点通过 ContainerStoragePath参数中的配置进行挂载，而忽略节点池的数据盘配置，对被添加到节点池的 ECS 实例数据盘无特殊要求。
-- `cluster_id` (String) 集群的 ID。
-- `container_storage_path` (String) 使用该数据盘设备挂载容器和镜像存储目录/var/lib/containerd。
-  仅当AdditionalContainerStorageEnabled=true时有效，且不能为空。须满足以下条件，否则将初始化失败：仅支持已挂载数据盘的 ECS 实例。指定数据盘设备名时，请确保该数据盘设备存在，否则会初始化失败。指定数据盘分区或逻辑卷名时，请确保该分区或逻辑卷存在，且为 ext4 文件系统。
-- `created_time` (String) 创建时间。
-- `image_id` (String) 节点对应的 ECS 实例使用的镜像 ID。
-- `initialize_script` (String) 创建 ECS 节点并完成 Kubernetes 组件部署后执行的脚本。支持 Shell 格式，Base64 编码后长度不超过 1 KB。为空时，节点继承使用默认节点池配置的初始化脚本NodeConfig.InitializeScript。自定义填写脚本内容后，使用自定义的脚本，忽略默认节点池配置的初始化脚本。
-- `instance_id` (String) 节点对应的云服务器实例 ID。
-- `is_virtual` (Boolean) 是否为虚拟节点，参数值说明：false：否 true：是。
-- `keep_instance_name` (Boolean) 是否保留原 ECS 实例名称，取值：false：（默认值）不保留原 ECS 实例名称，由容器服务自动为其命名。true：保留原 ECS 实例名称。
-- `kubernetes_config` (Attributes) 节点 Kubernetes 相关配置。为空时，节点继承使用默认节点池的 Kubernetes 配置KubernetesConfig.Labels/Taints/Cordon。自定义填写配置后，使用自定义配置内容，忽略默认节点池的 Kubernetes 配置。 (see [below for nested schema](#nestedatt--kubernetes_config))
-- `name` (String) 节点名称。
-- `node_id` (String) 节点 ID。
-- `node_pool_id` (String) 节点池 ID。不传入参数值：表示将已有 ECS 实例添加到默认节点池。传入参数值：表示将已有 ECS 实例添加到自定义节点池。
-- `roles` (Set of String) 节点角色，参数值说明：Worker：Worker节点。
-- `status` (Attributes) 节点状态。 (see [below for nested schema](#nestedatt--status))
-- `updated_time` (String) 更新时间。
-- `zone_id` (String) 可用区 ID。
+- `additional_container_storage_enabled` (Boolean) Select the data disk for the node, format and mount it as the storage directory for container images and logs. Values: false (default): Disabled. Default node pool: indicates no data disk is mounted. Custom node pool: mounts according to the node pool's data disk configuration. ECS instance data disks added to the node pool must include the data disk specified for mounting by the target node pool (including local disks), and the disk type and size must match exactly. true: Enabled. You must also configure the ContainerStoragePath parameter. The node mounts according to the configuration in the ContainerStoragePath parameter and ignores the node pool's data disk configuration. There are no special requirements for ECS instance data disks added to the node pool.
+- `cluster_id` (String) Cluster ID.
+- `container_storage_path` (String) Use this data disk device to mount the container and image storage directory /var/lib/containerd.
+  Valid only when AdditionalContainerStorageEnabled=true and cannot be empty. The following conditions must be met, otherwise initialization will fail: Only ECS instances with mounted data disks are supported. When specifying a data disk device name, ensure the device exists, otherwise initialization will fail. When specifying a data disk partition or logical volume name, ensure the partition or logical volume exists and uses the ext4 file system.
+- `created_time` (String) Creation time.
+- `image_id` (String) Image ID used by the ECS instance corresponding to the node.
+- `initialize_script` (String) Script executed after creating ECS nodes and deploying Kubernetes components. Supports Shell format. Base64-encoded length must not exceed 1 KB. If left empty, the node inherits the default node pool initialization script NodeConfig.InitializeScript. If you enter a custom script, the custom script will be used and the default node pool initialization script will be ignored.
+- `instance_id` (String) Cloud server instance ID corresponding to the node.
+- `is_virtual` (Boolean) Is it a virtual node? Parameter value description: false: No, true: Yes.
+- `keep_instance_name` (Boolean) Whether to retain the original ECS instance name. Options: false (default): do not retain the original ECS instance name; Container Service automatically assigns a name. true: retain the original ECS instance name.
+- `kubernetes_config` (Attributes) Kubernetes-related configuration for the node. If empty, the node inherits the default node pool's Kubernetes configuration: KubernetesConfig.Labels/Taints/Cordon. If custom configuration is provided, the node uses the custom configuration and ignores the default node pool's Kubernetes configuration. (see [below for nested schema](#nestedatt--kubernetes_config))
+- `name` (String) Node name.
+- `node_id` (String) Node ID.
+- `node_pool_id` (String) Node pool ID. If no parameter value is provided: add existing ECS instances to the default node pool. If a parameter value is provided: add existing ECS instances to a custom node pool.
+- `roles` (Set of String) Node role. Parameter value description: Worker: Worker node.
+- `status` (Attributes) Node status. (see [below for nested schema](#nestedatt--status))
+- `updated_time` (String) Update time.
+- `zone_id` (String) Availability zone ID.
 
 <a id="nestedatt--kubernetes_config"></a>
 ### Nested Schema for `kubernetes_config`
 
 Read-Only:
 
-- `cordon` (Boolean) 封锁节点配置，取值：false：（默认值）不封锁 true：封锁
-- `labels` (Attributes Set) 节点池/节点的 Kubernetes 标签（Labels）信息。最多可传入 20 个标签。 (see [below for nested schema](#nestedatt--kubernetes_config--labels))
-- `taints` (Attributes Set) 节点池/节点的 Kubernetes 污点（Taints）信息。最多可传入 20 个污点。 (see [below for nested schema](#nestedatt--kubernetes_config--taints))
+- `cordon` (Boolean) Node lock configuration. Options: false (default): not locked; true: locked
+- `labels` (Attributes Set) Kubernetes label information for node pools/nodes. Up to 20 labels can be specified. (see [below for nested schema](#nestedatt--kubernetes_config--labels))
+- `taints` (Attributes Set) Kubernetes taint information for node pools/nodes. Up to 20 taints can be specified. (see [below for nested schema](#nestedatt--kubernetes_config--taints))
 
 <a id="nestedatt--kubernetes_config--labels"></a>
 ### Nested Schema for `kubernetes_config.labels`
 
 Read-Only:
 
-- `key` (String) 标签键，有效的标签键有两个段：<前缀>和<名称>，用斜杠（/）分隔。<名称>是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。<前缀>是可选的。如果指定<前缀>，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。<前缀>和<名称>总长度不超过 82 个字符。
-- `value` (String) 标签值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。
+- `key` (String) Label key. A valid label key consists of two parts: <prefix> and <name>, separated by a slash (/). <name> is required and supports uppercase and lowercase English letters, numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and must not exceed 63 characters. <prefix> is optional. If specified, <prefix> must be a DNS subdomain: a series of DNS labels separated by periods (.), with a maximum length of 253 characters. The total length of <prefix> and <name> must not exceed 82 characters.
+- `value` (String) Tag value, up to 63 characters (can be empty). Can start and end with an English letter (upper or lower case) or a digit. Supported special characters: hyphen (-), underscore (_), period (.).
 
 
 <a id="nestedatt--kubernetes_config--taints"></a>
@@ -63,9 +63,9 @@ Read-Only:
 
 Read-Only:
 
-- `effect` (String) 污点效果，取值：NoSchedule：（默认值）不调度。NoExecute：驱逐没有容忍污点的 Pod。PreferNoSchedule：尽量避免调度。
-- `key` (String) 污点键，有效的污点键有两个段：<前缀>和<名称>，用斜杠（/）分隔。<名称>是必须的，支持英文大小写字母、数字、短划线（-）、下划线（_）、英文句号（ .），以字母或数字开头和结尾，长度不超过 63 个字符。<前缀>是可选的。如果指定<前缀>，则必须是 DNS 子域：由英文句号（.）分隔的一系列 DNS 标签，长度不超过 253 个字符。<前缀>和<名称>总长度不超过 82 个字符。
-- `value` (String) 污点值，长度不超过 63 个字符（可以为空）。支持以英文大小写字母、数字开头和结尾。支持特殊字符：短划线（-）、下划线（_）、英文句号（.）。
+- `effect` (String) Taint effect. Options: NoSchedule (default): Do not schedule. NoExecute: Evict Pods that do not tolerate the taint. PreferNoSchedule: Avoid scheduling if possible.
+- `key` (String) Taint key. A valid taint key has two segments: <prefix> and <name>, separated by a slash (/). <name> is required and supports English letters (case-sensitive), numbers, hyphen (-), underscore (_), and period (.), must start and end with a letter or number, and be no longer than 63 characters. <prefix> is optional. If specified, <prefix> must be a DNS subdomain: a series of DNS labels separated by periods (.), no longer than 253 characters. The total length of <prefix> and <name> must not exceed 82 characters.
+- `value` (String) Taint value, up to 63 characters (can be empty). Must start and end with an English letter or number. Supports special characters: hyphen (-), underscore (_), and period (.).
 
 
 
@@ -74,12 +74,12 @@ Read-Only:
 
 Read-Only:
 
-- `conditions` (Attributes Set) 节点当前主状态下的状态条件，即进入该主状态的原因。 (see [below for nested schema](#nestedatt--status--conditions))
-- `phase` (String) 节点的状态，参数值有：Creating，Running，Deleting，Failed，Updating。
+- `conditions` (Attributes Set) Status condition under the node's current primary state, indicating the reason for entering this primary state. (see [below for nested schema](#nestedatt--status--conditions))
+- `phase` (String) Node status. Parameter values: Creating, Running, Deleting, Failed, Updating.
 
 <a id="nestedatt--status--conditions"></a>
 ### Nested Schema for `status.conditions`
 
 Read-Only:
 
-- `type` (String) 节点当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing，Ok，Unschedulable，InitilizeFailed，NotReady，Balance，ResourceCleanupFailed，Unknown。
+- `type` (String) Status condition under the node's current primary state, indicating the reason for entering this primary state. There can be multiple reasons. Parameter values: Progressing, Ok, Unschedulable, InitilizeFailed, NotReady, Balance, ResourceCleanupFailed, Unknown.

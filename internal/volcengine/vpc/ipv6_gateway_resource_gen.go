@@ -31,11 +31,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关实例的创建时间。",
+		//	  "description": "Creation time of the IPv6 gateway instance",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关实例的创建时间。",
+			Description: "Creation time of the IPv6 gateway instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -45,11 +45,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关实例的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+		//	  "description": "Description of the IPv6 gateway instance. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。)",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关实例的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+			Description: "Description of the IPv6 gateway instance. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -60,11 +60,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关实例的ID。",
+		//	  "description": "IPv6 gateway instance ID",
 		//	  "type": "string"
 		//	}
 		"ipv_6_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关实例的ID。",
+			Description: "IPv6 gateway instance ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -74,11 +74,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关实例的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为IPv6网关ID。",
+		//	  "description": "Name of the IPv6 gateway instance. Length limit: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). If not specified, defaults to the IPv6 gateway ID",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关实例的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为IPv6网关ID。",
+			Description: "Name of the IPv6 gateway instance. Length limit: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). If not specified, defaults to the IPv6 gateway ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -89,11 +89,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关所属项目的名称。",
+		//	  "description": "Name of the project to which the IPv6 gateway belongs",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关所属项目的名称。",
+			Description: "Name of the project to which the IPv6 gateway belongs",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -105,11 +105,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关实例关联的路由表ID。",
+		//	  "description": "Route table ID associated with the IPv6 gateway instance",
 		//	  "type": "string"
 		//	}
 		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关实例关联的路由表ID。",
+			Description: "Route table ID associated with the IPv6 gateway instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -119,11 +119,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关实例的运行状态。取值如下：Creating：创建中。Deleting：删除中。Available：可用。",
+		//	  "description": "Operating status of the IPv6 gateway instance. Possible values: Creating: Creating. Deleting: Deleting. Available: Available",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关实例的运行状态。取值如下：Creating：创建中。Deleting：删除中。Available：可用。",
+			Description: "Operating status of the IPv6 gateway instance. Possible values: Creating: Creating. Deleting: Deleting. Available: Available",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -133,17 +133,17 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签信息。",
+		//	    "description": "Tag information",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -160,7 +160,7 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -172,7 +172,7 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -181,7 +181,7 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -192,11 +192,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关实例的修改时间。",
+		//	  "description": "Modification time of the IPv6 gateway instance",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关实例的修改时间。",
+			Description: "Modification time of the IPv6 gateway instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -206,11 +206,11 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "需关联IPv6网关实例的VPC ID。每个VPC只能关联一个IPv6网关实例，需确保待关联的VPC未关联其他IPv6网关实例。",
+		//	  "description": "VPC ID to be associated with the IPv6 gateway instance. Each VPC can only be associated with one IPv6 gateway instance. Ensure the VPC to be associated is not linked to another IPv6 gateway instance",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "需关联IPv6网关实例的VPC ID。每个VPC只能关联一个IPv6网关实例，需确保待关联的VPC未关联其他IPv6网关实例。",
+			Description: "VPC ID to be associated with the IPv6 gateway instance. Each VPC can only be associated with one IPv6 gateway instance. Ensure the VPC to be associated is not linked to another IPv6 gateway instance",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -228,7 +228,7 @@ func ipv6GatewayResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "IPv6网关服务的运行载体，创建IPv6网关实例是进行IPv6公网配置的前提。",
+		Description: "Carrier for the IPv6 gateway service. Creating an IPv6 gateway instance is required for IPv6 public network configuration",
 		Version:     1,
 		Attributes:  attributes,
 	}

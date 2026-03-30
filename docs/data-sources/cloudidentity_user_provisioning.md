@@ -21,16 +21,16 @@ Data Source schema for Volcengine::CloudIdentity::UserProvisioning
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `deletion_strategy` (String) 删除策略。
-- `description` (String) 任务描述。
-- `duplication_strategy` (String) 用户名冲突策略。
-- `duplication_suffix` (String) 本次同步IAM用户名称后缀。
-- `identity_source_strategy` (String) 身份源冲突策略。
-- `principal_id` (String) 身份id。
-- `principal_name` (String) 目标名称。
-- `principal_type` (String) 身份类型。
-- `provision_status` (String) 授权任务状态。Provisioned 授权成功，Provisioning 正在授权，DeleteProvisioning 授权解除中，DeleteProvisioned 授权解除成功
-- `target_id` (String) 目标id。
-- `updated_time` (String) 更新时间。
-- `user_provisioning_id` (String) IAM 用户同步任务ID。
+- `created_time` (String) Creation Time
+- `deletion_strategy` (String) Deletion Policy
+- `description` (String) Task Description
+- `duplication_strategy` (String) Username Conflict Policy
+- `duplication_suffix` (String) Suffix for IAM user name in this synchronization
+- `identity_source_strategy` (String) Identity Source Conflict Policy
+- `principal_id` (String) Identity ID
+- `principal_name` (String) Target Name
+- `principal_type` (String) Identity Type
+- `provision_status` (String) Authorization Task Status. Provisioned: authorization successful, Provisioning: authorizing, DeleteProvisioning: revoking authorization, DeleteProvisioned: authorization revoked successfully.
+- `target_id` (String) Target ID
+- `updated_time` (String) Update Time
+- `user_provisioning_id` (String) IAM User Synchronization Task ID

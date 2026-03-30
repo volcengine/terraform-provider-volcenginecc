@@ -27,10 +27,10 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "认证配置。",
+		//	  "description": "Authentication configuration.",
 		//	  "properties": {
 		//	    "Enable": {
-		//	      "description": "是否开启认证。",
+		//	      "description": "Whether authentication is enabled.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -40,50 +40,50 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启认证。",
+					Description: "Whether authentication is enabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "认证配置。",
+			Description: "Authentication configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Comments
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备注，长度限制为0~253个字符。",
+		//	  "description": "Remarks. Length must be 0–253 characters.",
 		//	  "maxLength": 253,
 		//	  "type": "string"
 		//	}
 		"comments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备注，长度限制为0~253个字符。",
+			Description: "Remarks. Length must be 0–253 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomDomains
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义域名列表。",
+		//	  "description": "Custom domain list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Domain": {
-		//	        "description": "自定义域名。",
+		//	        "description": "Custom domain.",
 		//	        "type": "string"
 		//	      },
 		//	      "DomainId": {
-		//	        "description": "自定义域名ID。",
+		//	        "description": "Custom domain ID.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -97,27 +97,27 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Domain
 					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义域名。",
+						Description: "Custom domain.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DomainId
 					"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义域名ID。",
+						Description: "Custom domain ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "自定义域名列表。",
+			Description: "Custom domain list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "域名详情。",
+		//	  "description": "Domain details.",
 		//	  "properties": {
 		//	    "EnablePublicResolution": {
-		//	      "description": "开启私网域名公网解析。",
+		//	      "description": "Enable public resolution for private network domains.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -127,38 +127,38 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnablePublicResolution
 				"enable_public_resolution": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "开启私网域名公网解析。",
+					Description: "Enable public resolution for private network domains.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "域名详情。",
+			Description: "Domain details.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。",
+		//	  "description": "Domain type. Options: DefaultDomain: Default domain. CustomDomain: Custom domain.",
 		//	  "type": "string"
 		//	}
 		"domain_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。",
+			Description: "Domain type. Options: DefaultDomain: Default domain. CustomDomain: Custom domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Domains
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "默认域名。",
+		//	  "description": "Default domain.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Domain": {
-		//	        "description": "域名。",
+		//	        "description": "Domain.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "域名类型。取值：public：公网。private：私网。",
+		//	        "description": "Domain type. Options: public: Public network. private: Private network.",
 		//	        "enum": [
 		//	          "public",
 		//	          "private"
@@ -176,57 +176,57 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Domain
 					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "域名。",
+						Description: "Domain.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "域名类型。取值：public：公网。private：私网。",
+						Description: "Domain type. Options: public: Public network. private: Private network.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "默认域名。",
+			Description: "Default domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关ID。",
+		//	  "description": "Gateway ID.",
 		//	  "type": "string"
 		//	}
 		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关ID。",
+			Description: "Gateway ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GatewayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关名称。",
+		//	  "description": "Gateway name.",
 		//	  "type": "string"
 		//	}
 		"gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关名称。",
+			Description: "Gateway name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Message
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务创建失败、删除失败或异常时的错误信息。",
+		//	  "description": "Error message for service creation failure, deletion failure, or abnormal status.",
 		//	  "type": "string"
 		//	}
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务创建失败、删除失败或异常时的错误信息。",
+			Description: "Error message for service creation failure, deletion failure, or abnormal status.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务支持的协议。取值：HTTP：HTTP。HTTPS：HTTPS。",
+		//	  "description": "Supported protocols. Options: HTTP: HTTP. HTTPS: HTTPS.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -236,48 +236,48 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"protocol": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "服务支持的协议。取值：HTTP：HTTP。HTTPS：HTTPS。",
+			Description: "Supported protocols. Options: HTTP: HTTP. HTTPS: HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务ID。",
+		//	  "description": "Service ID.",
 		//	  "type": "string"
 		//	}
 		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务ID。",
+			Description: "Service ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。",
+		//	  "description": "Service name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length must be 2–128 characters. Cannot start with a hyphen (-).",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。",
+			Description: "Service name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length must be 2–128 characters. Cannot start with a hyphen (-).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceNetworkSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务默认域名网络配置。。",
+		//	  "description": "Default domain network configuration..",
 		//	  "properties": {
 		//	    "EnablePrivateNetwork": {
-		//	      "description": "开启私网。",
+		//	      "description": "Enable private network.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnablePublicNetwork": {
-		//	      "description": "开启公网。",
+		//	      "description": "Enable public network.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "PrivateNetworkIP": {
-		//	      "description": "私网域名解析的目标IP。",
+		//	      "description": "Target IP for private network domain resolution.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -292,44 +292,44 @@ func gatewayServiceDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnablePrivateNetwork
 				"enable_private_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "开启私网。",
+					Description: "Enable private network.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnablePublicNetwork
 				"enable_public_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "开启公网。",
+					Description: "Enable public network.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PrivateNetworkIP
 				"private_network_ip": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "私网域名解析的目标IP。",
+					Description: "Target IP for private network domain resolution.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "服务默认域名网络配置。。",
+			Description: "Default domain network configuration..",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务类型，取值：AIProvider：AI模型代理。",
+		//	  "description": "Service type. Options: AIProvider: AI model proxy.",
 		//	  "type": "string"
 		//	}
 		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务类型，取值：AIProvider：AI模型代理。",
+			Description: "Service type. Options: AIProvider: AI model proxy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Creating：创建中。CreatedFailed：创建失败。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。",
+		//	  "description": "Creating: Creating. CreatedFailed: Creation failed. Running: Running. Deleting: Deleting. DeletedFailed: Deletion failed. Abnormal: Abnormal.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creating：创建中。CreatedFailed：创建失败。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。",
+			Description: "Creating: Creating. CreatedFailed: Creation failed. Running: Running. Deleting: Deleting. DeletedFailed: Deletion failed. Abnormal: Abnormal.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -33,48 +33,48 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端节点地址列表。",
+		//	  "description": "Endpoint address list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "DNSVisibility": {
-		//	        "description": "false：火山引擎私网解析（默认）。true：火山引擎私网以及公网解析。",
+		//	        "description": "false: Volcano Engine private network resolution (default). true: Volcano Engine private network and public network resolution.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Domain": {
-		//	        "description": "连接域名。",
+		//	        "description": "Connection domain name.",
 		//	        "type": "string"
 		//	      },
 		//	      "DomainPrefix": {
-		//	        "description": "连接地址前缀。连接地址的前缀需满足以下规则：以小写字母开头，以小写字母或数字结尾。由小写字母、数字和中划线（-）中的至少两种组成。连接地址前缀应至少包含 8 个字符，连接地址总长度（前缀+后缀）不得超过 63个字符。",
+		//	        "description": "Connection address prefix. The prefix must meet the following rules: start with a lowercase letter and end with a lowercase letter or digit; contain at least two of the following: lowercase letters, digits, or hyphens (-); be at least 8 characters long; and the total connection address length (prefix + suffix) must not exceed 63 characters.",
 		//	        "type": "string"
 		//	      },
 		//	      "EipId": {
-		//	        "description": "EIP 的 ID，仅对 Public 地址有效。",
+		//	        "description": "EIP ID, valid only for Public addresses.",
 		//	        "type": "string"
 		//	      },
 		//	      "EipLocked": {
-		//	        "description": "连接终端使用的 EIP 是否因欠费关停。取值：true：是。false：否。",
+		//	        "description": "Whether the EIP used by the connection endpoint is suspended due to overdue payment. Options: true: yes. false: no.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "IPAddress": {
-		//	        "description": "IP 地址。",
+		//	        "description": "IP address.",
 		//	        "type": "string"
 		//	      },
 		//	      "InternetProtocol": {
-		//	        "description": "IP 协议版本。取值为 IPv4。",
+		//	        "description": "IP protocol version. Value: IPv4.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkType": {
-		//	        "description": "网络地址类型，取值为：Private：私网地址。Public：公网地址。",
+		//	        "description": "Network address type. Options: Private: private network address. Public: public network address.",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "端口。",
+		//	        "description": "Port.",
 		//	        "type": "string"
 		//	      },
 		//	      "SubnetId": {
-		//	        "description": "子网 ID，仅对 Private 地址有效。",
+		//	        "description": "Subnet ID, valid only for Private addresses.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -88,7 +88,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DNSVisibility
 					"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "false：火山引擎私网解析（默认）。true：火山引擎私网以及公网解析。",
+						Description: "false: Volcano Engine private network resolution (default). true: Volcano Engine private network and public network resolution.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -98,7 +98,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Domain
 					// Property: DomainPrefix
 					"domain_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接地址前缀。连接地址的前缀需满足以下规则：以小写字母开头，以小写字母或数字结尾。由小写字母、数字和中划线（-）中的至少两种组成。连接地址前缀应至少包含 8 个字符，连接地址总长度（前缀+后缀）不得超过 63个字符。",
+						Description: "Connection address prefix. The prefix must meet the following rules: start with a lowercase letter and end with a lowercase letter or digit; contain at least two of the following: lowercase letters, digits, or hyphens (-); be at least 8 characters long; and the total connection address length (prefix + suffix) must not exceed 63 characters.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -113,7 +113,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NetworkType
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "端口。",
+						Description: "Port.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -123,7 +123,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SubnetId
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "终端节点地址列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Endpoint address list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -134,11 +134,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：true：自动加入。false：不自动加入（默认）。",
+		//	  "description": "When the endpoint type is read/write or read-only, you can set whether new nodes are automatically added. Values: true: automatically added. false: not automatically added (default).",
 		//	  "type": "boolean"
 		//	}
 		"auto_add_new_nodes": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：true：自动加入。false：不自动加入（默认）。",
+			Description: "When the endpoint type is read/write or read-only, you can set whether new nodes are automatically added. Values: true: automatically added. false: not automatically added (default).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -149,11 +149,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否关联所有的备节点。取值：true：是。默认值。false：否。说明仅多节点实例的只读终端支持该配置。仅在实例有两个或更多备节点时才能关闭此功能。",
+		//	  "description": "Associate all replica nodes. Values: true: enabled (default). false: disabled. Note: Only read-only endpoints of multi-node instances support this configuration. This feature can be disabled only if the instance has two or more replica nodes.",
 		//	  "type": "boolean"
 		//	}
 		"connect_all_slave_nodes": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否关联所有的备节点。取值：true：是。默认值。false：否。说明仅多节点实例的只读终端支持该配置。仅在实例有两个或更多备节点时才能关闭此功能。",
+			Description: "Associate all replica nodes. Values: true: enabled (default). false: disabled. Note: Only read-only endpoints of multi-node instances support this configuration. This feature can be disabled only if the instance has two or more replica nodes.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -165,7 +165,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端标签。",
+		//	  "description": "Connection endpoint tags.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -175,7 +175,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"connection_info_tags": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "连接终端标签。",
+			Description: "Connection endpoint tags.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -185,11 +185,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端类型。取值：Proxy：代理终端。Direct：直连终端。说明如实例的数据库代理功能已开启，可以取值为 Proxy 或 Direct。如实例的数据库代理功能未开启，仅可以取值为 Direct。可调用 DescribeDBInstanceDetail 接口查询实例数据库代理功能的开启状态。",
+		//	  "description": "Endpoint type. Options: Proxy: proxy endpoint. Direct: direct endpoint. Note: If the database proxy feature is enabled for the instance, you can select Proxy or Direct. If the database proxy feature is not enabled, only Direct is available. You can call the DescribeDBInstanceDetail API to check the status of the database proxy feature for the instance.",
 		//	  "type": "string"
 		//	}
 		"connection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "连接终端类型。取值：Proxy：代理终端。Direct：直连终端。说明如实例的数据库代理功能已开启，可以取值为 Proxy 或 Direct。如实例的数据库代理功能未开启，仅可以取值为 Direct。可调用 DescribeDBInstanceDetail 接口查询实例数据库代理功能的开启状态。",
+			Description: "Endpoint type. Options: Proxy: proxy endpoint. Direct: direct endpoint. Note: If the database proxy feature is enabled for the instance, you can select Proxy or Direct. If the database proxy feature is not enabled, only Direct is available. You can call the DescribeDBInstanceDetail API to check the status of the database proxy feature for the instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -201,11 +201,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "代理终端的连接池类型。取值：Transaction：事务级连接池。默认值。Direct：直连模式。说明单节点实例不支持该功能。",
+		//	  "description": "Connection pool type for proxy endpoints. Options: Transaction: transaction-level connection pool (default). Direct: direct mode. Note: Single-node instances do not support this feature.",
 		//	  "type": "string"
 		//	}
 		"connection_pool_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "代理终端的连接池类型。取值：Transaction：事务级连接池。默认值。Direct：直连模式。说明单节点实例不支持该功能。",
+			Description: "Connection pool type for proxy endpoints. Options: Transaction: transaction-level connection pool (default). Direct: direct mode. Note: Single-node instances do not support this feature.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -216,20 +216,20 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端的 SQL 转发规则。",
+		//	  "description": "SQL forwarding rules for the connection endpoint.",
 		//	  "properties": {
 		//	    "KeywordRouteStrategy": {
-		//	      "description": "自定义路由策略列表。",
+		//	      "description": "Custom routing policy list.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "自定义路由策略。",
+		//	        "description": "Custom routing policy.",
 		//	        "properties": {
 		//	          "NodeType": {
-		//	            "description": "SQL 转发规则的转发目标。取值：Primary：主节点。Secondary：备节点。ReadOnly：只读节点。说明如实例为双节点实例，可选择主节点或只读节点。如实例为多节点实例，可选择主节点或备节点。",
+		//	            "description": "SQL forwarding rule target. Options: Primary: primary node. Secondary: secondary node. ReadOnly: read-only node. Note: For dual-node instances, you can select the primary node or read-only node. For multi-node instances, you can select the primary node or secondary node.",
 		//	            "type": "string"
 		//	          },
 		//	          "SQLKeyword": {
-		//	            "description": "转发规则的关键字。SQL 关键字的设置规则如下：单个规则最多可包含 20 个关键字。最大长度为 64 个字符，可包含英文字母、数字、下划线 _、@、#、:= 和中文字符。",
+		//	            "description": "Forwarding rule keywords. SQL keyword rules: Each rule can contain up to 20 keywords, with a maximum length of 64 characters. Allowed characters: English letters, digits, underscore (_), @, #, :=, and Chinese characters.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -249,21 +249,21 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: NodeType
 							"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "SQL 转发规则的转发目标。取值：Primary：主节点。Secondary：备节点。ReadOnly：只读节点。说明如实例为双节点实例，可选择主节点或只读节点。如实例为多节点实例，可选择主节点或备节点。",
+								Description: "SQL forwarding rule target. Options: Primary: primary node. Secondary: secondary node. ReadOnly: read-only node. Note: For dual-node instances, you can select the primary node or read-only node. For multi-node instances, you can select the primary node or secondary node.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SQLKeyword
 							"sql_keyword": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "转发规则的关键字。SQL 关键字的设置规则如下：单个规则最多可包含 20 个关键字。最大长度为 64 个字符，可包含英文字母、数字、下划线 _、@、#、:= 和中文字符。",
+								Description: "Forwarding rule keywords. SQL keyword rules: Each rule can contain up to 20 keywords, with a maximum length of 64 characters. Allowed characters: English letters, digits, underscore (_), @, #, :=, and Chinese characters.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "自定义路由策略列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+					Description: "Custom routing policy list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "连接终端的 SQL 转发规则。",
+			Description: "SQL forwarding rules for the connection endpoint.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -273,11 +273,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备注。",
+		//	  "description": "Remarks.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备注。",
+			Description: "Remarks.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -288,11 +288,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启连接终端的连接保持功能。取值：true：是。false：否。说明仅代理终端支持该设置。",
+		//	  "description": "Enable connection keep-alive for the endpoint. Values: true: enabled. false: disabled. Note: Only proxy endpoints support this setting.",
 		//	  "type": "boolean"
 		//	}
 		"enable_connection_persistent": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启连接终端的连接保持功能。取值：true：是。false：否。说明仅代理终端支持该设置。",
+			Description: "Enable connection keep-alive for the endpoint. Values: true: enabled. false: disabled. Note: Only proxy endpoints support this setting.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -303,11 +303,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已开启全局只读，取值：Enable：开启。Disable：未开启。",
+		//	  "description": "Enable global read-only. Values: Enable: enabled. Disable: not enabled.",
 		//	  "type": "string"
 		//	}
 		"enable_read_only": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已开启全局只读，取值：Enable：开启。Disable：未开启。",
+			Description: "Enable global read-only. Values: Enable: enabled. Disable: not enabled.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -317,11 +317,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例连接终端 ID。",
+		//	  "description": "Instance connection endpoint ID.",
 		//	  "type": "string"
 		//	}
 		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例连接终端 ID。",
+			Description: "Instance connection endpoint ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -331,11 +331,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例连接终端名称。",
+		//	  "description": "Instance connection endpoint name.",
 		//	  "type": "string"
 		//	}
 		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例连接终端名称。",
+			Description: "Instance connection endpoint name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -346,11 +346,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "终端类型。取值为 Custom，自定义终端。",
+		//	  "description": "Endpoint type. Value: Custom (custom endpoint).",
 		//	  "type": "string"
 		//	}
 		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "终端类型。取值为 Custom，自定义终端。",
+			Description: "Endpoint type. Value: Custom (custom endpoint).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -362,11 +362,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "空闲连接回收功能是否开启。true：开启。false：不开启。说明仅代理终端会返回该字段。",
+		//	  "description": "Enable idle connection recycling. true: enabled. false: not enabled. Note: This field is returned only for proxy endpoints.",
 		//	  "type": "boolean"
 		//	}
 		"idle_connection_reclaim": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "空闲连接回收功能是否开启。true：开启。false：不开启。说明仅代理终端会返回该字段。",
+			Description: "Enable idle connection recycling. true: enabled. false: not enabled. Note: This field is returned only for proxy endpoints.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -377,11 +377,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启事务分离。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+		//	  "description": "Enable transaction separation. Options: true: yes. false: no. Note: Only proxy endpoints return this field.",
 		//	  "type": "boolean"
 		//	}
 		"implicit_trans_split": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启事务分离。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+			Description: "Enable transaction separation. Options: true: yes. false: no. Note: Only proxy endpoints return this field.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -392,11 +392,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -408,11 +408,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启主节点路由。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+		//	  "description": "Enable primary node routing. Values: true: enabled. false: disabled. Note: This field is returned only for proxy endpoints.",
 		//	  "type": "boolean"
 		//	}
 		"master_node_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启主节点路由。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+			Description: "Enable primary node routing. Values: true: enabled. false: disabled. Note: This field is returned only for proxy endpoints.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -423,12 +423,12 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "过载保护超时时间。取值范围为 60~7200 之间的整数，单位为秒。说明仅代理终端会返回该字段。",
+		//	  "description": "Overload protection timeout. Value range: integer between 60~7200. Unit: seconds. Note: This field is returned only for proxy endpoints.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"master_protector_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "过载保护超时时间。取值范围为 60~7200 之间的整数，单位为秒。说明仅代理终端会返回该字段。",
+			Description: "Overload protection timeout. Value range: integer between 60~7200. Unit: seconds. Note: This field is returned only for proxy endpoints.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -439,11 +439,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "代理终端的 Multi-Statements 模式。取值：Strict：Strict 模式。默认值。Loose：Loose 模式。",
+		//	  "description": "Multi-Statements mode for proxy endpoints. Options: Strict: strict mode (default). Loose: loose mode.",
 		//	  "type": "string"
 		//	}
 		"multi_statements_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "代理终端的 Multi-Statements 模式。取值：Strict：Strict 模式。默认值。Loose：Loose 模式。",
+			Description: "Multi-Statements mode for proxy endpoints. Options: Strict: strict mode (default). Loose: loose mode.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -454,11 +454,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端配置的节点 ID 列表。当 EndpointType 为 Custom 时必选。说明如需将主节点加入终端，不需填写主节点 ID，只需填写 Primary。多个节点 ID 之间用英文逗号（,）分隔。",
+		//	  "description": "List of node IDs configured for the connection endpoint. Required when EndpointType is Custom. Note: To add the primary node to the endpoint, do not enter the primary node ID; just enter Primary. Separate multiple node IDs with commas (,).",
 		//	  "type": "string"
 		//	}
 		"nodes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "连接终端配置的节点 ID 列表。当 EndpointType 为 Custom 时必选。说明如需将主节点加入终端，不需填写主节点 ID，只需填写 Primary。多个节点 ID 之间用英文逗号（,）分隔。",
+			Description: "List of node IDs configured for the connection endpoint. Required when EndpointType is Custom. Note: To add the primary node to the endpoint, do not enter the primary node ID; just enter Primary. Separate multiple node IDs with commas (,).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -470,11 +470,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启过载保护。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+		//	  "description": "Enable overload protection. Options: true: enabled. false: disabled. Note: This field is returned only for proxy endpoints.",
 		//	  "type": "boolean"
 		//	}
 		"overload_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启过载保护。取值：true：是。false：否。说明仅代理终端会返回该字段。",
+			Description: "Enable overload protection. Options: true: enabled. false: disabled. Note: This field is returned only for proxy endpoints.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -485,11 +485,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "读权重分配模式。当开通读写分离设置为 true 时需要传入此参数。在 CreateDBEndpoint 和 ModifyDBEndpoint 接口中做请求参数时，取值范围如下：LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。在 DescribeDBInstanceDetail 接口中做返回参数时，取值范围如下：Default：按规格权重自动分配。Custom：自定义分配权重。RoundRobin：轮询调度。LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。",
+		//	  "description": "Read weight allocation mode. This parameter is required when read/write splitting is enabled (set to true). For request parameters in the CreateDBEndpoint and ModifyDBEndpoint APIs, the value range is: LoadSchedule: load scheduling. RoundRobinCustom: custom weight round-robin scheduling. RoundRobinAuto: automatic weight allocation round-robin scheduling. For response parameters in the DescribeDBInstanceDetail API, the value range is: Default: automatic allocation based on specification weight. Custom: custom weight allocation. RoundRobin: round-robin scheduling. LoadSchedule: load scheduling. RoundRobinCustom: custom weight round-robin scheduling. RoundRobinAuto: automatic weight allocation round-robin scheduling.",
 		//	  "type": "string"
 		//	}
 		"read_only_node_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "读权重分配模式。当开通读写分离设置为 true 时需要传入此参数。在 CreateDBEndpoint 和 ModifyDBEndpoint 接口中做请求参数时，取值范围如下：LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。在 DescribeDBInstanceDetail 接口中做返回参数时，取值范围如下：Default：按规格权重自动分配。Custom：自定义分配权重。RoundRobin：轮询调度。LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。",
+			Description: "Read weight allocation mode. This parameter is required when read/write splitting is enabled (set to true). For request parameters in the CreateDBEndpoint and ModifyDBEndpoint APIs, the value range is: LoadSchedule: load scheduling. RoundRobinCustom: custom weight round-robin scheduling. RoundRobinAuto: automatic weight allocation round-robin scheduling. For response parameters in the DescribeDBInstanceDetail API, the value range is: Default: automatic allocation based on specification weight. Custom: custom weight allocation. RoundRobin: round-robin scheduling. LoadSchedule: load scheduling. RoundRobinCustom: custom weight round-robin scheduling. RoundRobinAuto: automatic weight allocation round-robin scheduling.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -500,12 +500,12 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "只读节点延迟阈值。取值范围为 1~3600，默认为 30，单位为秒。",
+		//	  "description": "Read-only node latency threshold. Value range: 1~3600. Default: 30. Unit: seconds.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"read_only_node_max_delay_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "只读节点延迟阈值。取值范围为 1~3600，默认为 30，单位为秒。",
+			Description: "Read-only node latency threshold. Value range: 1~3600. Default: 30. Unit: seconds.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -516,21 +516,21 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端配置的节点列表及对应的只读权重。",
+		//	  "description": "List of nodes configured for the connection endpoint and their corresponding read-only weights.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "自定义读权重分配策略。",
+		//	    "description": "Custom read weight allocation policy.",
 		//	    "properties": {
 		//	      "NodeId": {
-		//	        "description": "只读节点需要传入 NodeId，主节点无需传入。",
+		//	        "description": "NodeId is required for read-only nodes; not required for primary nodes.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeType": {
-		//	        "description": "节点类型。Primary：主节点。ReadOnly：只读节点。",
+		//	        "description": "Node type. Primary: primary node. ReadOnly: read-only node.",
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {
-		//	        "description": "节点的读权重，以 100 递增，最大值为 10000。说明权重不可全部设置为 0。",
+		//	        "description": "Node read weight increases in increments of 100, up to a maximum of 10,000. Note: Not all weights can be set to 0.",
 		//	        "format": "int32",
 		//	        "type": "integer"
 		//	      }
@@ -545,7 +545,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: NodeId
 					"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "只读节点需要传入 NodeId，主节点无需传入。",
+						Description: "NodeId is required for read-only nodes; not required for primary nodes.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -554,7 +554,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: NodeType
 					"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点类型。Primary：主节点。ReadOnly：只读节点。",
+						Description: "Node type. Primary: primary node. ReadOnly: read-only node.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -563,7 +563,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "节点的读权重，以 100 递增，最大值为 10000。说明权重不可全部设置为 0。",
+						Description: "Node read weight increases in increments of 100, up to a maximum of 10,000. Note: Not all weights can be set to 0.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -572,7 +572,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "连接终端配置的节点列表及对应的只读权重。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "List of nodes configured for the connection endpoint and their corresponding read-only weights.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -583,11 +583,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "读写模式：ReadWrite：读写。ReadOnly：只读。",
+		//	  "description": "Read/write mode: ReadWrite: read/write. ReadOnly: read-only.",
 		//	  "type": "string"
 		//	}
 		"read_write_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "读写模式：ReadWrite：读写。ReadOnly：只读。",
+			Description: "Read/write mode: ReadWrite: read/write. ReadOnly: read-only.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -598,11 +598,11 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启读写分离。取值：true：是。默认值。false：否。",
+		//	  "description": "Enable read/write splitting. Values: true: enabled (default). false: disabled.",
 		//	  "type": "boolean"
 		//	}
 		"read_write_spliting": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启读写分离。取值：true：是。默认值。false：否。",
+			Description: "Enable read/write splitting. Values: true: enabled (default). false: disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -621,7 +621,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "连接终端是云数据库 MySQL 版提供的位于数据库和应用程序之间的网络代理服务。根据连接终端的功能差异，连接终端可以分为代理终端和直连终端两种类型。通过代理终端的连接将经过代理，可使用代理相关的特性和功能，如读写分离、负载均衡、空闲连接回收和 Multi-Statements 等；通过直连终端的连接将直连到对应节点，不能使用代理相关特性。",
+		Description: "The endpoint is a network proxy service provided by Cloud Database MySQL Edition, located between the database and application. Based on endpoint functionality, endpoints are classified as proxy endpoints and direct endpoints. Connections via proxy endpoints pass through the proxy and support features such as read/write splitting, load balancing, idle connection recycling, and Multi-Statements. Connections via direct endpoints connect directly to the corresponding node and do not support proxy-related features.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -21,17 +21,17 @@ Data Source schema for Volcengine::FileNAS::Snapshot
 
 ### Read-Only
 
-- `created_time` (String) 快照创建时间。
-- `description` (String) 快照描述信息。
-- `file_system_id` (String) 文件系统 ID。
-- `file_system_name` (String) 文件系统名称。
-- `is_encrypt` (Boolean) 是否加密，当前仅支持false，即不加密。
-- `progress` (String) 快照创建进度。
-- `retention_days` (Number) 快照保留时间，默认为2147483647，即永久保留。
-- `snapshot_id` (String) 快照 ID。
-- `snapshot_name` (String) 快照名称。
-- `snapshot_type` (String) 快照类型，默认为Manual，即手动快照。
-- `source_size` (Number) 文件系统容量，单位为 GiB。
-- `source_version` (String) 文件系统版本。
-- `status` (String) 快照状态。说明如下：Progressing：正在创建。Accomplished：创建成功。Failed：创建失败。
-- `zone_id` (String) 可用区 ID。
+- `created_time` (String) Snapshot Creation Time
+- `description` (String) Snapshot Description
+- `file_system_id` (String) File System ID
+- `file_system_name` (String) File System Name
+- `is_encrypt` (Boolean) Is encryption enabled. Currently only false is supported (not encrypted)
+- `progress` (String) Snapshot Creation Progress
+- `retention_days` (Number) Snapshot Retention Period. Default is 2147483647 (permanent retention)
+- `snapshot_id` (String) Snapshot ID
+- `snapshot_name` (String) Snapshot Name
+- `snapshot_type` (String) Snapshot Type. Default is Manual (manual snapshot)
+- `source_size` (Number) File System Capacity (GiB)
+- `source_version` (String) File System Version
+- `status` (String) Snapshot Status. Details: Progressing: Creating. Accomplished: Created successfully. Failed: Creation failed
+- `zone_id` (String) Availability Zone ID

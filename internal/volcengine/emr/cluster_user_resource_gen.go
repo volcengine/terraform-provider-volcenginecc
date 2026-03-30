@@ -33,11 +33,11 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群ID。",
+		//	  "description": "Cluster ID.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群ID。",
+			Description: "Cluster ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -47,12 +47,12 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -62,11 +62,11 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建者用户名。",
+		//	  "description": "Creator username.",
 		//	  "type": "string"
 		//	}
 		"creator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建者用户名。",
+			Description: "Creator username.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -76,11 +76,11 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组描述。",
+		//	  "description": "User group description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组描述。",
+			Description: "User group description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -91,12 +91,12 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "旧的用户的登录密码。修改密码时必填。",
+		//	  "description": "Old user login password. Required when changing password.",
 		//	  "maxLength": 20,
 		//	  "type": "string"
 		//	}
 		"old_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "旧的用户的登录密码。修改密码时必填。",
+			Description: "Old user login password. Required when changing password.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -111,12 +111,12 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "新的用户的登录密码。密码的长度需在8-20个字符之间，支持数字，字母，-，_ 且 至少包含1个数字和1个字母。",
+		//	  "description": "New user login password. Password must be 8–20 characters long, support numbers, letters, -, _, and contain at least one number and one letter.",
 		//	  "maxLength": 20,
 		//	  "type": "string"
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "新的用户的登录密码。密码的长度需在8-20个字符之间，支持数字，字母，-，_ 且 至少包含1个数字和1个字母。",
+			Description: "New user login password. Password must be 8–20 characters long, support numbers, letters, -, _, and contain at least one number and one letter.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(20),
@@ -127,12 +127,12 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Last updated time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Last updated time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -142,7 +142,7 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "所属用户组名称。",
+		//	  "description": "User group name.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -152,7 +152,7 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"user_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "所属用户组名称。",
+			Description: "User group name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -163,11 +163,11 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群用户名。仅支持小写字母。",
+		//	  "description": "Cluster username. Only lowercase letters are supported.",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群用户名。仅支持小写字母。",
+			Description: "Cluster username. Only lowercase letters are supported.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -185,7 +185,7 @@ func clusterUserResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "E-MapReduce（EMR）集群中的用户分为普通用户和系统用户两类。其中:普通用户是您在用户管理模块手动通过导入、创建操作向集群中添加的用户；系统用户则是集群在初始化过程中为每个组件内置的管理用户，不支持编辑和删除操作。",
+		Description: "Users in an E-MapReduce (EMR) cluster are divided into regular users and system users. Regular users are added to the cluster manually through import or creation in the user management module. System users are built-in management users for each component created during cluster initialization and cannot be edited or deleted.",
 		Version:     1,
 		Attributes:  attributes,
 	}

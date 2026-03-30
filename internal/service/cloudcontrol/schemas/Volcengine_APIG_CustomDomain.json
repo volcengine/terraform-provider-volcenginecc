@@ -4,7 +4,7 @@
     "/properties/ServiceId",
     "/properties/Domain"
   ],
-  "description": "服务作为业务对外暴露的入口，可以通过绑定域名功能，将您的自定义域名绑定至服务。",
+  "description": "The service serves as the entry point for external access. You can bind your custom domain to the service using the domain binding feature",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ServiceId"
@@ -45,30 +45,31 @@
   ],
   "properties": {
     "CertificateId": {
-      "description": "自定义域名证书ID。",
-      "semantic": "resourceId",
+      "description": "Custom Domain Certificate ID",
       "type": "string"
     },
     "Comments": {
-      "description": "备注。",
+      "description": "Remarks",
       "semantic": "description",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation Time",
       "semantic": "createdTime",
       "type": "string"
     },
     "CustomDomainId": {
-      "description": "自定义域名ID。",
+      "description": "Custom Domain ID",
+      "semantic": "resourceId",
       "type": "string"
     },
     "Domain": {
-      "description": "自定义域名。",
+      "description": "Custom Domain",
+      "semantic": "resourceName",
       "type": "string"
     },
     "Protocol": {
-      "description": "协议，取值：HTTP。HTTPS。",
+      "description": "Protocol. Values: HTTP, HTTPS",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -77,20 +78,20 @@
       "uniqueItems": true
     },
     "SSLRedirect": {
-      "description": "重定向到HTTPS。",
+      "description": "Redirect to HTTPS",
       "type": "boolean"
     },
     "ServiceId": {
-      "description": "服务ID。",
+      "description": "Service ID",
       "type": "string"
     },
     "Status": {
-      "description": "状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。",
+      "description": "Status. Values: Creating: configuring; CreationFailed: configuration failed; Deleting: deleting; DeletionFailed: deletion failed; Verified: active",
       "semantic": "status",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "更新时间。",
+      "description": "Update Time",
       "semantic": "updatedTime",
       "type": "string"
     }

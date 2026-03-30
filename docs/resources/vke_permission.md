@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vke_permission Resource - terraform-provider-volcenginecc"
 subcategory: "VKE"
 description: |-
-  容器服务提供集群 RBAC 授权功能，为 IAM 用户或角色授予 RBAC 访问权限，包括可访问的资源、权限的作用范围、预置的角色类型等，从而更好地管理集群的安全访问控制，满足企业用户细粒度的资源访问权限控制需求。
+  Container Service provides cluster RBAC authorization, granting RBAC access permissions to IAM users or roles. This includes accessible resources, scope of permissions, and predefined role types, enabling better management of cluster security access control and meeting enterprise users' requirements for fine-grained resource access control.
 ---
 
 # volcenginecc_vke_permission (Resource)
 
-容器服务提供集群 RBAC 授权功能，为 IAM 用户或角色授予 RBAC 访问权限，包括可访问的资源、权限的作用范围、预置的角色类型等，从而更好地管理集群的安全访问控制，满足企业用户细粒度的资源访问权限控制需求。
+Container Service provides cluster RBAC authorization, granting RBAC access permissions to IAM users or roles. This includes accessible resources, scope of permissions, and predefined role types, enabling better management of cluster security access control and meeting enterprise users' requirements for fine-grained resource access control.
 
 ## Example Usage
 
@@ -28,28 +28,28 @@ resource "volcenginecc_vke_permission" "VKEPermissionDemo" {
 
 ### Optional
 
-- `authorizer_id` (Number) 授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。
-- `authorizer_type` (String) 授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。
-- `cluster_id` (String) 需要授权给 IAM 用户或角色的集群 ID。roleDomain为namespace或cluster时必须填写该参数值。
-- `grantee_id` (Number) 被授权者的 ID。可以是 IAM 用户 ID，也可以是 IAM 角色 ID。
-- `grantee_type` (String) 被授权者的类型，取值如下：User：IAM 用户。Role：IAM 角色。Account：账号。
-- `is_custom_role` (Boolean) 给被授权者授予的 RBAC 角色是否为自定义角色，取值如下：true：自定义角色。false：（默认值）系统预置的角色。
-- `namespace` (String) 需要授权给 IAM 用户或角色的名空间名称。roleDomain等于namespace时必须填写该参数值。roleDomain不等于namespace时，填写该参数值不生效。
-- `role_domain` (String) 为 IAM 用户或角色授予的权限类型，取值如下：namespace：授予命名空间级别的权限。cluster：授予集群级别的权限。all_clusters：授予当前账号下全部集群级别的权限。
-- `role_name` (String) 给被授权者授予的 RBAC 角色名称。目前必须填写该参数。当roleDomain为all_clusters时，不可以自定义角色名称。
+- `authorizer_id` (Number) Grantor ID. Can be an IAM user ID or an IAM role ID.
+- `authorizer_type` (String) Type of grantor. Possible values: User: IAM user. Role: IAM role. Account: account.
+- `cluster_id` (String) Cluster ID to be authorized for the IAM user or role. This parameter is required when roleDomain is namespace or cluster.
+- `grantee_id` (Number) Grantee ID. Can be an IAM user ID or an IAM role ID.
+- `grantee_type` (String) Type of grantee. Possible values: User: IAM user. Role: IAM role. Account: account.
+- `is_custom_role` (Boolean) Whether the RBAC role granted to the grantee is a custom role. Possible values: true: custom role. false (default): system predefined role.
+- `namespace` (String) Namespace name to be authorized for the IAM user or role. This parameter is required when roleDomain equals namespace. If roleDomain does not equal namespace, this parameter is not effective.
+- `role_domain` (String) The permission type granted to an IAM user or role. Possible values: namespace: grants permissions at the namespace level. cluster: grants permissions at the cluster level. all_clusters: grants permissions at the cluster level for all clusters under the current account.
+- `role_name` (String) Name of the RBAC role granted to the grantee. This parameter must be specified. When roleDomain is all_clusters, custom role names are not allowed.
 
 ### Read-Only
 
-- `authorized_at` (String) RBAC 权限策略资源被授权的时间。
-- `authorizer_name` (String) 授权者名称
-- `created_time` (String) RBAC 权限策略资源创建的时间。
+- `authorized_at` (String) Time when the RBAC policy resource was authorized.
+- `authorizer_name` (String) Grantor name
+- `created_time` (String) Time when the RBAC policy resource was created.
 - `id` (String) Uniquely identifies the resource.
-- `kube_role_binding_name` (String) RBAC 权限策略资源在 Kubernetes 中的对象名称。
-- `message` (String) 授权详细消息。
-- `permission_id` (String) RBAC 权限策略资源 ID。
-- `project_selector` (String) 项目选择器
-- `revoked_at` (String) 撤销授权的时间。
-- `status` (String) RBAC 权限访问策略资源的状态，取值如下：Success：授权成功。Failed：授权失败。Pending：授权中。PartialSuccess：部分授权成功。
+- `kube_role_binding_name` (String) The object name of the RBAC policy resource in Kubernetes.
+- `message` (String) Authorization details message.
+- `permission_id` (String) RBAC policy resource ID.
+- `project_selector` (String) Project selector
+- `revoked_at` (String) Time when authorization is revoked.
+- `status` (String) Status of the RBAC access policy resource. Possible values: Success: authorization succeeded. Failed: authorization failed. Pending: authorization in progress. PartialSuccess: partial authorization succeeded.
 
 ## Import
 

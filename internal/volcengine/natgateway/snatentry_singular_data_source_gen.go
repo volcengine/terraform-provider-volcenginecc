@@ -26,99 +26,99 @@ func snatentryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则关联的公网IP的IP地址。返回单个公网IP的IP地址。 返回多个公网IP的IP地址。",
+		//	  "description": "IP address of the public IP associated with the SNAT rule. Returns the IP address for a single public IP. Returns IP addresses for multiple public IPs.",
 		//	  "type": "string"
 		//	}
 		"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则关联的公网IP的IP地址。返回单个公网IP的IP地址。 返回多个公网IP的IP地址。",
+			Description: "IP address of the public IP associated with the SNAT rule. Returns the IP address for a single public IP. Returns IP addresses for multiple public IPs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则关联的公网IP的ID。返回单个公网IP的ID。 返回多个公网IP的ID。",
+		//	  "description": "ID of the public IP associated with the SNAT rule. Returns the ID for a single public IP. Returns IDs for multiple public IPs.",
 		//	  "type": "string"
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则关联的公网IP的ID。返回单个公网IP的ID。 返回多个公网IP的ID。",
+			Description: "ID of the public IP associated with the SNAT rule. Returns the ID for a single public IP. Returns IDs for multiple public IPs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则所属NAT网关的ID。",
+		//	  "description": "ID of the NAT gateway associated with the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则所属NAT网关的ID。",
+			Description: "ID of the NAT gateway associated with the SNAT rule",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatIpId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私网NAT网关的中转IP的ID。",
+		//	  "description": "ID of the transit IP for the private NAT gateway",
 		//	  "type": "string"
 		//	}
 		"nat_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私网NAT网关的中转IP的ID。",
+			Description: "ID of the transit IP for the private NAT gateway",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnatEntryId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则的ID。",
+		//	  "description": "ID of the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"snat_entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则的ID。",
+			Description: "ID of the SNAT rule",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnatEntryName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则的名称。",
+		//	  "description": "Name of the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"snat_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则的名称。",
+			Description: "Name of the SNAT rule",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceCidr
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则对应的网段。",
+		//	  "description": "Network segment corresponding to the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"source_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则对应的网段。",
+			Description: "Network segment corresponding to the SNAT rule",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+		//	  "description": "Status of the SNAT rule. Creating: being created. Deleting: being deleted. Available: available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+			Description: "Status of the SNAT rule. Creating: being created. Deleting: being deleted. Available: available.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则关联子网的ID。",
+		//	  "description": "ID of the subnet associated with the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则关联子网的ID。",
+			Description: "ID of the subnet associated with the SNAT rule",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

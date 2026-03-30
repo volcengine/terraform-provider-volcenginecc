@@ -20,7 +20,7 @@ resource "volcenginecc_rdsmysql_instance" "RDSMySQLInstanceDemo" {
   instance_type          = "DoubleNode"
   vpc_id                 = "vpc-rrco37ovjq4gv0x58xxxxx"
   subnet_id              = "subnet-rrwqhg3qzxfkv0x57xxxxx"
-  instance_name          = "RDSMySQLInstanceDemo-按量计费"
+  instance_name          = "RDSMySQLInstanceDemo"
   super_account_name     = "test_account"
   super_account_password = "***********"
   lower_case_table_names = "1"

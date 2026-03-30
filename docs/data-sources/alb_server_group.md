@@ -21,43 +21,43 @@ Data Source schema for Volcengine::ALB::ServerGroup
 
 ### Read-Only
 
-- `create_time` (String) 后端服务器组的创建时间。
-- `cross_zone_enabled` (String) 是否开启服务器组的跨可用区负载均衡功能。取值如下：on（默认值）：开启。off：不开启。
-- `description` (String) 后端服务器组的描述。
-- `health_check` (Attributes) 服务器组健康检查配置信息。 (see [below for nested schema](#nestedatt--health_check))
-- `ip_address_type` (String) 服务器组的IP地址类型。目前只支持 IPv4
-- `listeners` (Attributes Set) 后端服务器组关联的监听器信息。 (see [below for nested schema](#nestedatt--listeners))
-- `project_name` (String) 后端服务器组所属项目名称。
-- `protocol` (String) 后端协议：HTTP，HTTPS。
-- `scheduler` (String) 调度算法。取值：wrr：加权轮询。wlc：加权最小连接数。sh：源地址哈希。
-- `server_count` (Number) 服务器组内后端服务器的个数。
-- `server_group_id` (String) 后端服务器组的ID。
-- `server_group_name` (String) 后端服务器组的名称。
-- `server_group_type` (String) 后端服务器组的类型。instance：服务器类型，该类型服务器组支持添加 ecs、eni 实例作为后端服务器。ip：IP类型，该类型服务器组支持添加 IP 地址作为后端服务器。
-- `servers` (Attributes Set) 后端服务器组中服务器的信息。 (see [below for nested schema](#nestedatt--servers))
-- `status` (String) 服务器组状态。Creating：创建中。Active：运行中。Configuring：配置中。Deleting：删除中。
-- `sticky_session_config` (Attributes) 会话保持功能的参数信息。 (see [below for nested schema](#nestedatt--sticky_session_config))
-- `tags` (Attributes Set) 标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `update_time` (String) 后端服务器组的最近操作时间。
-- `vpc_id` (String) 后端服务器组所属 Vpc 的 ID。
+- `create_time` (String) Creation time of the backend server group.
+- `cross_zone_enabled` (String) Whether to enable cross-zone load balancing for the server group. Values: on (default): enabled, off: disabled.
+- `description` (String) Description of the backend server group.
+- `health_check` (Attributes) Server group health check configuration information. (see [below for nested schema](#nestedatt--health_check))
+- `ip_address_type` (String) IP address type of the server group. Only IPv4 is supported.
+- `listeners` (Attributes Set) Listener information associated with the backend server group. (see [below for nested schema](#nestedatt--listeners))
+- `project_name` (String) Name of the project to which the backend server group belongs.
+- `protocol` (String) Backend protocol: HTTP, HTTPS.
+- `scheduler` (String) Scheduling algorithm. Parameter values: wrr: Weighted round robin. wlc: Weighted least connections. sh: Source IP hash.
+- `server_count` (Number) Number of backend servers in the server group.
+- `server_group_id` (String) ID of the backend server group.
+- `server_group_name` (String) Name of the backend server group.
+- `server_group_type` (String) Type of backend server group. instance: Server type. This type of server group supports adding ECS and ENI instances as backend servers. ip: IP type. This type of server group supports adding IP addresses as backend servers.
+- `servers` (Attributes Set) Information about servers in the backend server group. (see [below for nested schema](#nestedatt--servers))
+- `status` (String) Server group status. Creating: creating. Active: running. Configuring: configuring. Deleting: deleting.
+- `sticky_session_config` (Attributes) Session persistence parameter information. (see [below for nested schema](#nestedatt--sticky_session_config))
+- `tags` (Attributes Set) Tag information. (see [below for nested schema](#nestedatt--tags))
+- `update_time` (String) Last operation time of the backend server group.
+- `vpc_id` (String) ID of the VPC to which the backend server group belongs.
 
 <a id="nestedatt--health_check"></a>
 ### Nested Schema for `health_check`
 
 Read-Only:
 
-- `domain` (String) 健康检查的域名，需配置为后端服务器上真实对外提供服务的地址。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。需至少包含一个‘.’，且不允许以‘.’开头或结尾。域名每一级由字母、数字、‘-’、‘.’字符组成，且‘-’不得出现在每一级的头部或尾部。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为空，表示负载均衡使用各后端服务器的私网IP地址进行健康检查。
-- `enabled` (String) 监听器是否开启健康检查功能。取值：on：开启（默认值）。off：不开启。
-- `healthy_threshold` (Number) 健康检查的健康阈值。表示连续执行指定次数的健康检查，结果均为正常的后端服务器将判定为健康检查正常。单位：次，取值：2~10，默认值为 3。
-- `http_code` (String) 健康检查正常的HTTP状态码，多个状态码间用半角逗号分隔。只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值如下：http_2xx（默认值）。http_3xx（默认值）。http_4xx 。http_5xx 。
-- `http_version` (String) 健康检查HTTP协议版本，只有 HealthCheck.Protocol 为 HTTP 时才存在该参数。取值：HTTP1.0（使用API时，HTTP协议版本默认值）。HTTP1.1。
-- `interval` (Number) 开启健康检查后，执行健康检查的时间间隔。 单位：秒，取值：1~300s，默认值为 2。
-- `method` (String) 开启健康检查后，健康检查的方法。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。取值如下：GET：服务器需支持GET方法。HEAD（默认）：服务器仅返回HEAD头部信息，可以降低后端性能消耗，但服务器需要支持HEAD方法。
-- `port` (Number) 健康检查端口。支持取值：0（默认值）：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。
-- `protocol` (String) 健康检查协议，当前支持HTTP、TCP。默认值为 HTTP。
-- `timeout` (Number) 健康检查的响应超时时间。表示如果后端服务器在指定的时间内没有正确响应，则判定为健康检查异常。单位：秒，取值：1~60，默认值为 2。
-- `unhealthy_threshold` (Number) 健康检查的不健康阈值。表示连续执行指定次数的健康检查，结果均为异常的后端服务器将判定为健康检查异常。单位：次，取值：2~10，默认值为 3。
-- `uri` (String) 健康检查的路径，需配置为后端服务器上真实对外提供的路径。只有 HealthCheck.Protocol 设置为 HTTP 时该参数生效。必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘&’、‘＝’ 字符。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为“/”。
+- `domain` (String) Domain name for health check. Configure this as the actual service address provided by the backend server. This parameter takes effect only when HealthCheck.Protocol is set to HTTP. The domain name must contain at least one '.', and cannot start or end with '.'. Each level of the domain name can contain letters, digits, '-', and '.' characters, and '-' cannot appear at the beginning or end of any level. Length: 1–128 characters. If this parameter is not specified or no value is provided, the default is empty, meaning the load balancer uses the private IP address of each backend server for health checks.
+- `enabled` (String) Whether the listener enables health check. Values: on: enabled (default), off: disabled.
+- `healthy_threshold` (Number) Health check threshold. Indicates the number of consecutive successful health checks required for a backend server to be considered healthy. Unit: times. Value range: 2–10. Default: 3.
+- `http_code` (String) HTTP status codes for a successful health check. Separate multiple codes with commas. This parameter is available only when HealthCheck.Protocol is HTTP. Valid values: http_2xx (default), http_3xx (default), http_4xx, http_5xx.
+- `http_version` (String) Health check HTTP protocol version. This parameter is available only when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default for API usage), HTTP1.1.
+- `interval` (Number) After health checks are enabled, the interval for performing health checks. Unit: seconds. Value range: 1–300s. Default: 2.
+- `method` (String) Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.
+- `port` (Number) Health check port. Supported values: 0 (default): Use the backend server port for health checks. 1–65535: Use the specified port for health checks.
+- `protocol` (String) Health check protocol. Currently supports HTTP and TCP. Default: HTTP.
+- `timeout` (Number) Health check response timeout. If the backend server does not respond correctly within the specified time, the health check is considered abnormal. Unit: seconds. Value range: 1–60. Default: 2.
+- `unhealthy_threshold` (Number) Unhealthy threshold for health checks. Indicates that a backend server is considered unhealthy if it fails the specified number of consecutive health checks. Unit: times. Range: 2–10. Default: 3.
+- `uri` (String) Health check path. Must be configured as the actual path provided by the backend server. This parameter is only effective when HealthCheck.Protocol is set to HTTP. Must start with '/'. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '&', '=' are allowed. Length: 1–128 characters. If this parameter is not specified or specified without a value, the default is '/'.
 
 
 <a id="nestedatt--listeners"></a>
@@ -65,7 +65,7 @@ Read-Only:
 
 Read-Only:
 
-- `listener_id` (String) 监听器的ID。
+- `listener_id` (String) Listener ID.
 
 
 <a id="nestedatt--servers"></a>
@@ -73,14 +73,14 @@ Read-Only:
 
 Read-Only:
 
-- `description` (String) 后端服务器的描述。
-- `instance_id` (String) 云服务器实例或网卡的ID。
-- `ip` (String) 后端服务器的私网IP地址。
-- `port` (Number) 后端服务器接收请求的端口号。
-- `remote_enabled` (String) 是否开启远端IP功能。当后端服务器实例类型为IP地址，即 Type 取值为 ip 时，此字段有效。取值：on：开启。off（默认值）：不开启。
-- `server_id` (String) 后端服务器ID。
-- `type` (String) 后端服务器实例类型。ecs：云服务器实例。eni：辅助网卡。ip：IP地址（仅 Ip 类型服务器组有效）。
-- `weight` (Number) 后端服务器的权重。
+- `description` (String) Description of the backend server.
+- `instance_id` (String) ID of the cloud server instance or network interface card.
+- `ip` (String) Private IP address of the backend server.
+- `port` (Number) Port number on which the backend server receives requests.
+- `remote_enabled` (String) Enable remote IP feature. This field is valid only when the backend server instance type is IP address, that is, when Type is set to ip. Parameter values: on: Enable. off (default): Disable.
+- `server_id` (String) Backend server ID.
+- `type` (String) Backend server instance type. ecs: ECS instance. eni: auxiliary ENI. ip: IP address (valid only for IP-type server groups).
+- `weight` (Number) Weight of the backend server.
 
 
 <a id="nestedatt--sticky_session_config"></a>
@@ -88,10 +88,10 @@ Read-Only:
 
 Read-Only:
 
-- `cookie` (String) 服务配置的会话保持 Cookie 名称。仅在开启会话保持功能并选择重写 Cookie 时有效。 具体规则如下：Cookie 名称长度为1~200个字符。名称只能包含 ASCII 英文字母和数字字符，不能包含半角逗号（,）、半角分号（;）或空格，也不能以美元符号（$）开头。当 tickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 server时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，该参数无效。
-- `cookie_timeout` (Number) 会话保持 Cookie 超时时间。仅在开启会话保持功能并选择植入 Cookie 时有效。 单位：秒。具体规则如下：超时时间的取值范围：1～86400。 默认值为：1000。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionConfig.StickySessionType 为 insert 时，此参数必填。当 StickySessionConfig.StickySessionEnabled 值为 on，且 StickySessionType 为 server 时，此参数无效。
-- `sticky_session_enabled` (String) 是否开启会话保持功能。on：开启；off（默认值）：关闭。
-- `sticky_session_type` (String) 对 Cookie 的处理方式。当 StickySessionConfig.StickySessionEnabled 值为 on 时，此字段参数必填。取值如下：insert：植入 Cookie；ALB 会记录客户端请求第一次转发到的后端服务器。ALB 在返回请求中植入 Cookie ，后续客户端请求携带此 Cookie，ALB 会将请求转发到之前记录的后端服务器上。server：重写 Cookie；开启重写 Cookie 的会话保持后，在客户端请求第一次转发到后端服务器后，ALB 在返回请求中发现您自定义的 Cookie 时，会对原来的 Cookie 进行重写。后续客户端请求携带改写后的 Cookie，ALB 会将请求转发到之前记录的后端服务器上。
+- `cookie` (String) Name of the session persistence Cookie for service configuration. This is only valid when session persistence is enabled and Cookie overwrite is selected. The specific rules are as follows: The Cookie name must be 1–200 characters long. The name can only contain ASCII letters and digits, cannot contain commas (,), semicolons (;), or spaces, and cannot start with a dollar sign ($). This parameter is required when tickySessionConfig.StickySessionEnabled is set to on and StickySessionConfig.StickySessionType is server. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert.
+- `cookie_timeout` (Number) Session persistence cookie timeout. Only valid when session persistence is enabled and the insert cookie option is selected. Unit: seconds. Rules: Timeout range: 1–86400. Default: 1000. This parameter is required when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionType is server.
+- `sticky_session_enabled` (String) Enable session persistence. on: Enable; off (default): Disable.
+- `sticky_session_type` (String) Cookie handling method. This field is required when StickySessionConfig.StickySessionEnabled is set to on. Parameter values: insert: Inserts a Cookie. ALB records the backend server to which the client's first request is forwarded. ALB inserts a Cookie in the response. Subsequent client requests carry this Cookie, and ALB forwards the requests to the previously recorded backend server. server: Overwrites the Cookie. When session persistence with Cookie overwrite is enabled, after the client's first request is forwarded to the backend server, if ALB detects your custom Cookie in the response, it overwrites the original Cookie. Subsequent client requests carry the overwritten Cookie, and ALB forwards the requests to the previously recorded backend server.
 
 
 <a id="nestedatt--tags"></a>
@@ -99,5 +99,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签的标签键。同一资源的标签键不允许重复。
-- `value` (String) 标签的标签值。
+- `key` (String) Tag key. Tag keys for the same resource must be unique.
+- `value` (String) Tag value of the tag.

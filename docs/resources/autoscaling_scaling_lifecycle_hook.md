@@ -2,12 +2,12 @@
 page_title: "volcenginecc_autoscaling_scaling_lifecycle_hook Resource - terraform-provider-volcenginecc"
 subcategory: "AutoScaling"
 description: |-
-  伸缩组触发伸缩规则、健康检查、实例数量检查后，生命周期挂钩可以将“加入中”、“移出中”、“停用中”实例的状态挂起，进入 加入/移出挂起中 状态，此时实例处于等待状态，您可以在这段时间内进行自定义操作，直至生命周期挂钩超时或您手动结束挂起。
+  After the scaling group triggers scaling rules, health checks, and instance count checks, the lifecycle hook can suspend instances that are in the 'joining', 'removing', or 'disabling' state, putting them into the joining/removing suspended state. The instances are now in a waiting state, and you can perform custom operations during this period until the lifecycle hook times out or you manually end the suspension.
 ---
 
 # volcenginecc_autoscaling_scaling_lifecycle_hook (Resource)
 
-伸缩组触发伸缩规则、健康检查、实例数量检查后，生命周期挂钩可以将“加入中”、“移出中”、“停用中”实例的状态挂起，进入 加入/移出挂起中 状态，此时实例处于等待状态，您可以在这段时间内进行自定义操作，直至生命周期挂钩超时或您手动结束挂起。
+After the scaling group triggers scaling rules, health checks, and instance count checks, the lifecycle hook can suspend instances that are in the 'joining', 'removing', or 'disabling' state, putting them into the joining/removing suspended state. The instances are now in a waiting state, and you can perform custom operations during this period until the lifecycle hook times out or you manually end the suspension.
 
 ## Example Usage
 
@@ -31,28 +31,28 @@ resource "volcenginecc_autoscaling_scaling_lifecycle_hook" "ScalingLifecycleHook
 
 ### Required
 
-- `lifecycle_hook_name` (String) 生命周期挂钩名称，创建后不可修改。取值：不能以数字、中划线、下划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制在1 ~ 128个字符之间。
-- `lifecycle_hook_policy` (String) 实例挂起状态结束后执行的策略。取值：CONTINUE：继续执行。REJECT：中止后续操作。ROLLBACK：针对弹性收缩活动，会拒绝释放ECS实例，进行回滚；针对弹性扩张活动，效果同REJECT一样。
-- `lifecycle_hook_timeout` (Number) ECS实例保持挂起状态的时间，超时后，自动结束挂起状态，根据执行策略继续执行扩缩容行为。 请您评估自定义操作的处理时间后，设置合适的超时时间。取值：30 ～ 21600（6小时），单位 s，且必须为整数。
-- `lifecycle_hook_type` (String) 伸缩活动的类型，发生指定类型的伸缩活动时，生命周期挂钩会被触发并挂起ECS实例。取值：SCALE_IN：弹性收缩活动。SCALE_OUT：弹性扩张活动。
-- `scaling_group_id` (String) 伸缩组ID。
+- `lifecycle_hook_name` (String) Lifecycle hook name, cannot be modified after creation. Values: Cannot start with a digit, hyphen, or underscore. Can only contain Chinese characters, letters, digits, underscores, and hyphens. Length must be between 1 and 128 characters.
+- `lifecycle_hook_policy` (String) Policy executed after the instance suspension ends. Values: CONTINUE: Continue execution. REJECT: Abort subsequent actions. ROLLBACK: For elastic scale-in activities, the release of ECS instances is rejected and rollback is performed; for elastic scale-out activities, the effect is the same as REJECT.
+- `lifecycle_hook_timeout` (Number) Duration for which the ECS instance remains suspended. After timeout, the suspended state ends automatically and scaling actions continue according to the execution policy. Please evaluate the processing time for custom operations and set an appropriate timeout. Values: 30 to 21600 (6 hours), unit: s, must be an integer.
+- `lifecycle_hook_type` (String) Type of scaling activity. When a specified type of scaling activity occurs, the lifecycle hook is triggered and the ECS instance is suspended. Values: SCALE_IN: Elastic scale-in activity. SCALE_OUT: Elastic scale-out activity.
+- `scaling_group_id` (String) Scaling group ID.
 
 ### Optional
 
-- `lifecycle_command` (Attributes) 云助手相关命令信息。 (see [below for nested schema](#nestedatt--lifecycle_command))
+- `lifecycle_command` (Attributes) Cloud Assistant command information. (see [below for nested schema](#nestedatt--lifecycle_command))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `lifecycle_hook_id` (String) 生命周期挂钩ID。
+- `lifecycle_hook_id` (String) Lifecycle hook ID.
 
 <a id="nestedatt--lifecycle_command"></a>
 ### Nested Schema for `lifecycle_command`
 
 Optional:
 
-- `command_id` (String) 云助手命令ID，表示触发生命周期挂钩后在实例中执行云助手命令。如果命令执行成功，则按照CONTINUE执行挂起结束后的策略。如果命令执行失败/超时或生命周期挂钩超时，则按照LifecycleHookPolicy参数的配置执行挂起结束后的策略。
-- `parameters` (String) 云助手命令中的参数和参数值。参数的个数范围为0~60，且需要注意：参数不允许为空字符串，最多支持64个字符。值允许为空字符串。参数与原始命令内容在Base64编码后，综合长度不能超过16KB。设置的参数名集合必须为创建命令时定义的参数集的子集。对于未传入的参数，使用默认值代替。
+- `command_id` (String) Cloud Assistant command ID, indicates that after the lifecycle hook is triggered, the Cloud Assistant command is executed on the instance. If the command executes successfully, the post-suspend policy is executed according to CONTINUE. If the command fails, times out, or the lifecycle hook times out, the post-suspend policy is executed according to the LifecycleHookPolicy parameter configuration.
+- `parameters` (String) Parameters and values in the Cloud Assistant command. The number of parameters ranges from 0 to 60. Note: Parameters cannot be empty strings and can have up to 64 characters. Values can be empty strings. After Base64 encoding, the combined length of parameters and the original command content must not exceed 16 KB. The set of parameter names must be a subset of the parameter set defined when creating the command. Default values are used for parameters not provided.
 
 ## Import
 

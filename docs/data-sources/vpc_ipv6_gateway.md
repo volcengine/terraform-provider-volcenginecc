@@ -21,21 +21,21 @@ Data Source schema for Volcengine::VPC::Ipv6Gateway
 
 ### Read-Only
 
-- `created_time` (String) IPv6网关实例的创建时间。
-- `description` (String) IPv6网关实例的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。
-- `ipv_6_gateway_id` (String) IPv6网关实例的ID。
-- `name` (String) IPv6网关实例的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为IPv6网关ID。
-- `project_name` (String) IPv6网关所属项目的名称。
-- `route_table_id` (String) IPv6网关实例关联的路由表ID。
-- `status` (String) IPv6网关实例的运行状态。取值如下：Creating：创建中。Deleting：删除中。Available：可用。
-- `tags` (Attributes Set) 标签信息 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) IPv6网关实例的修改时间。
-- `vpc_id` (String) 需关联IPv6网关实例的VPC ID。每个VPC只能关联一个IPv6网关实例，需确保待关联的VPC未关联其他IPv6网关实例。
+- `created_time` (String) Creation time of the IPv6 gateway instance
+- `description` (String) Description of the IPv6 gateway instance. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。)
+- `ipv_6_gateway_id` (String) IPv6 gateway instance ID
+- `name` (String) Name of the IPv6 gateway instance. Length limit: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). If not specified, defaults to the IPv6 gateway ID
+- `project_name` (String) Name of the project to which the IPv6 gateway belongs
+- `route_table_id` (String) Route table ID associated with the IPv6 gateway instance
+- `status` (String) Operating status of the IPv6 gateway instance. Possible values: Creating: Creating. Deleting: Deleting. Available: Available
+- `tags` (Attributes Set) Tag information (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Modification time of the IPv6 gateway instance
+- `vpc_id` (String) VPC ID to be associated with the IPv6 gateway instance. Each VPC can only be associated with one IPv6 gateway instance. Ensure the VPC to be associated is not linked to another IPv6 gateway instance
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

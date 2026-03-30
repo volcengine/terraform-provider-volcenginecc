@@ -2,59 +2,59 @@
   "additionalProperties": false,
   "definitions": {
     "OrganizationDetail": {
-      "description": "组织详情",
+      "description": "Organization Details",
       "properties": {
         "CreatedTime": {
-          "description": "创建时间",
+          "description": "Creation Time",
           "type": "string"
         },
         "Description": {
-          "description": "描述",
+          "description": "Description",
           "type": "string"
         },
         "Name": {
-          "description": "组织名称",
+          "description": "Organization Name",
           "type": "string"
         },
         "Owner": {
-          "description": "管理员ID",
+          "description": "Administrator ID",
           "type": "string"
         },
         "Status": {
-          "description": "状态",
+          "description": "Status",
           "type": "integer"
         },
         "Type": {
-          "description": "组织类型，企业组织固定是 1",
+          "description": "Organization type, enterprise organization is always 1",
           "type": "integer"
         },
         "UpdatedTime": {
-          "description": "更新时间",
+          "description": "Last Updated",
           "type": "string"
         }
       },
       "type": "object"
     },
     "OwnerDetail": {
-      "description": "管理员详情",
+      "description": "Administrator Details",
       "properties": {
         "AccountID": {
-          "description": "账号ID",
+          "description": "Account ID",
           "type": "integer"
         },
         "AccountName": {
-          "description": "账号名称",
+          "description": "Account Name",
           "type": "string"
         },
         "MainName": {
-          "description": "主体名称",
+          "description": "Entity Name",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "企业组织管理",
+  "description": "Enterprise Organization Management",
   "handlers": {
     "create": {
       "permissions": [
@@ -80,17 +80,17 @@
   "properties": {
     "Organization": {
       "$ref": "#/definitions/OrganizationDetail",
-      "description": "组织详情",
+      "description": "Organization Details",
       "type": "object"
     },
     "OrganizationID": {
-      "description": "组织ID",
+      "description": "Organization ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "Owner": {
       "$ref": "#/definitions/OwnerDetail",
-      "description": "管理员详情",
+      "description": "Administrator Details",
       "type": "object"
     }
   },

@@ -30,11 +30,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接地址类型，取值范围如下：Private：私网连接地址。Public：公网连接地址。DirectLink：直连地址。说明仅启用分片集群的 Redis 实例申请了直连地址后，才会返回直连地址信息。关于连接地址的更多信息，请参见连接地址类型。",
+		//	  "description": "Connection address type. Valid values: Private: Private network connection address. Public: Public network connection address. DirectLink: Direct connection address. Note: Direct connection address information is returned only when a sharded Redis cluster instance has applied for a direct connection address. For more information about connection address types, see Connection Address Types.",
 		//	  "type": "string"
 		//	}
 		"addr_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "连接地址类型，取值范围如下：Private：私网连接地址。Public：公网连接地址。DirectLink：直连地址。说明仅启用分片集群的 Redis 实例申请了直连地址后，才会返回直连地址信息。关于连接地址的更多信息，请参见连接地址类型。",
+			Description: "Connection address type. Valid values: Private: Private network connection address. Public: Public network connection address. DirectLink: Direct connection address. Note: Direct connection address information is returned only when a sharded Redis cluster instance has applied for a direct connection address. For more information about connection address types, see Connection Address Types.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -44,11 +44,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IP 地址或者域名。",
+		//	  "description": "IP address or domain name",
 		//	  "type": "string"
 		//	}
 		"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP 地址或者域名。",
+			Description: "IP address or domain name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -58,11 +58,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "弹性公网 IP 的 ID。",
+		//	  "description": "ID of the Elastic Public IP",
 		//	  "type": "string"
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "弹性公网 IP 的 ID。",
+			Description: "ID of the Elastic Public IP",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -72,11 +72,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -86,11 +86,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "修改后的连接地址前缀。连接地址前缀需同时满足如下要求：由小写字母、数字或连字符（-）组成。以字母开头，字母或数字结尾。长度为 8~53 个字符。修改后的连接地址需要保证全局唯一，不可以与火山引擎中任何地域下的任何连接地址重名。",
+		//	  "description": "Modified connection address prefix. The connection address prefix must meet the following requirements: Consist of lowercase letters, numbers, or hyphens (-). Start with a letter and end with a letter or number. Length must be 8–53 characters. The modified connection address must be globally unique and must not duplicate any connection address in any region of Volcano Engine.",
 		//	  "type": "string"
 		//	}
 		"new_address_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "修改后的连接地址前缀。连接地址前缀需同时满足如下要求：由小写字母、数字或连字符（-）组成。以字母开头，字母或数字结尾。长度为 8~53 个字符。修改后的连接地址需要保证全局唯一，不可以与火山引擎中任何地域下的任何连接地址重名。",
+			Description: "Modified connection address prefix. The connection address prefix must meet the following requirements: Consist of lowercase letters, numbers, or hyphens (-). Start with a letter and end with a letter or number. Length must be 8–53 characters. The modified connection address must be globally unique and must not duplicate any connection address in any region of Volcano Engine.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -102,12 +102,12 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "端口号。",
+		//	  "description": "Port number",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "端口号。",
+			Description: "Port number",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -118,11 +118,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否升级连接地址的域名后缀。取值范围如下：true：升级。false（默认值）：不升级。注意当需要升级域名后缀（即 UpgradeRegionDomain 为 true）时，必须同时传入连接地址前缀信息（即 Address 参数不允许为空。）升级域名后缀后，原有的连接会断开，请及时修改客户端的连接信息，使用新的连接地址来连接实例。连接实例的具体方法，请参见连接实例。连接地址域名后缀升级后不支持再降级回原来的后缀，请谨慎操作。升级后的连接地址域名后缀会自动包含实例所属地域信息，旧的连接地址会保留 12 小时，12 小时保留期到期后会被自动释放。更多详情，请参见升级域名后缀。",
+		//	  "description": "Whether to upgrade the domain suffix of the connection address. Valid values: true: Upgrade. false (default): Do not upgrade. Note: When upgrading the domain suffix (i.e., UpgradeRegionDomain is true), you must also provide the connection address prefix (i.e., the Address parameter cannot be empty). After upgrading the domain suffix, existing connections will be disconnected. Please promptly update your client connection information and use the new connection address to connect to the instance. For details on connecting to an instance, see Connect to Instance. Once the domain suffix of the connection address is upgraded, it cannot be downgraded to the original suffix. Please proceed with caution. The upgraded domain suffix will automatically include the region information of the instance. The old connection address will be retained for 12 hours and will be automatically released after the retention period expires. For more details, see Upgrade Domain Suffix.",
 		//	  "type": "boolean"
 		//	}
 		"upgrade_region_domain": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否升级连接地址的域名后缀。取值范围如下：true：升级。false（默认值）：不升级。注意当需要升级域名后缀（即 UpgradeRegionDomain 为 true）时，必须同时传入连接地址前缀信息（即 Address 参数不允许为空。）升级域名后缀后，原有的连接会断开，请及时修改客户端的连接信息，使用新的连接地址来连接实例。连接实例的具体方法，请参见连接实例。连接地址域名后缀升级后不支持再降级回原来的后缀，请谨慎操作。升级后的连接地址域名后缀会自动包含实例所属地域信息，旧的连接地址会保留 12 小时，12 小时保留期到期后会被自动释放。更多详情，请参见升级域名后缀。",
+			Description: "Whether to upgrade the domain suffix of the connection address. Valid values: true: Upgrade. false (default): Do not upgrade. Note: When upgrading the domain suffix (i.e., UpgradeRegionDomain is true), you must also provide the connection address prefix (i.e., the Address parameter cannot be empty). After upgrading the domain suffix, existing connections will be disconnected. Please promptly update your client connection information and use the new connection address to connect to the instance. For details on connecting to an instance, see Connect to Instance. Once the domain suffix of the connection address is upgraded, it cannot be downgraded to the original suffix. Please proceed with caution. The upgraded domain suffix will automatically include the region information of the instance. The old connection address will be retained for 12 hours and will be automatically released after the retention period expires. For more details, see Upgrade Domain Suffix.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -134,11 +134,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接地址所对应的 IPv4 地址。",
+		//	  "description": "IPv4 address corresponding to the connection address",
 		//	  "type": "string"
 		//	}
 		"vip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "连接地址所对应的 IPv4 地址。",
+			Description: "IPv4 address corresponding to the connection address",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -148,11 +148,11 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接地址所对应的 IPv6 地址。说明仅当实例使用了 IPv6 地址时才会返回该参数。仅私网地址和直连地址支持 IPv6 地址，公网地址不支持，因此当连接地址类型为公网地址（即 AddrType 为 Public）时，该参数值固定为空。",
+		//	  "description": "IPv6 address corresponding to the connection address. Note: This parameter is returned only if the instance uses an IPv6 address. Only private network addresses and direct connection addresses support IPv6; public network addresses do not. Therefore, when the connection address type is Public (i.e., AddrType is Public), this parameter is always empty.",
 		//	  "type": "string"
 		//	}
 		"vi_pv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "连接地址所对应的 IPv6 地址。说明仅当实例使用了 IPv6 地址时才会返回该参数。仅私网地址和直连地址支持 IPv6 地址，公网地址不支持，因此当连接地址类型为公网地址（即 AddrType 为 Public）时，该参数值固定为空。",
+			Description: "IPv6 address corresponding to the connection address. Note: This parameter is returned only if the instance uses an IPv6 address. Only private network addresses and direct connection addresses support IPv6; public network addresses do not. Therefore, when the connection address type is Public (i.e., AddrType is Public), this parameter is always empty.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -170,7 +170,7 @@ func endpointPublicAddressResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "开启公网访问，以便 VPC 外的设备来访问 Redis 实例。",
+		Description: "Enable public network access so that devices outside the VPC can access the Redis instance.",
 		Version:     1,
 		Attributes:  attributes,
 	}

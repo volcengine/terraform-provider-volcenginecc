@@ -21,13 +21,13 @@ Data Source schema for Volcengine::IAM::Project
 
 ### Read-Only
 
-- `account_id` (Number) 账号ID
-- `created_time` (String) 创建时间
-- `description` (String) 描述
-- `display_name` (String) 展示名
-- `has_permission` (Boolean) 是否可见
-- `parent_project_name` (String) 父项目名称
-- `path` (String) 项目路径
-- `project_name` (String) 项目名称
-- `status` (String) 启用状态
-- `updated_time` (String) 更新时间
+- `account_id` (Number) Account ID
+- `created_time` (String) Creation Time
+- `description` (String) Description
+- `display_name` (String) Display Name
+- `has_permission` (Boolean) Visible
+- `parent_project_name` (String) Parent Project Name
+- `path` (String) Project Path
+- `project_name` (String) Project Name
+- `status` (String) Enabled Status
+- `updated_time` (String) Update Time

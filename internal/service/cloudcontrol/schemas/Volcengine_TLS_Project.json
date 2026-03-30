@@ -5,14 +5,14 @@
   ],
   "definitions": {
     "Tag": {
-      "description": "标签信息。",
+      "description": "Tag information",
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value",
           "type": "string"
         }
       },
@@ -22,7 +22,7 @@
       "type": "object"
     }
   },
-  "description": "日志项目是数据的项目管理单元，用于租户资源隔离和控制，通常一个日志项目对应一个应用、业务或产品。",
+  "description": "A log project is a data management unit used for tenant resource isolation and control. Typically, each log project corresponds to an application, service, or product",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectID",
@@ -69,35 +69,35 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "日志项目创建时间。",
+      "description": "Log project creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "日志项目的简单描述。",
+      "description": "Brief description of the log project",
       "semantic": "description",
       "type": "string"
     },
     "IamProjectName": {
-      "description": "日志项目所属的 IAM 项目。",
+      "description": "The IAM project associated with the log project",
       "type": "string"
     },
     "InnerNetDomain": {
-      "description": "私网连接域名。",
+      "description": "Private network connection domain name",
       "type": "string"
     },
     "ProjectID": {
-      "description": "日志项目的 ID。",
+      "description": "Log project ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "ProjectName": {
-      "description": "日志项目名称。",
+      "description": "Log project name",
       "semantic": "resourceName",
       "type": "string"
     },
     "Tags": {
-      "description": "标签信息。",
+      "description": "Tag information",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -107,7 +107,7 @@
       "uniqueItems": true
     },
     "TopicCount": {
-      "description": "当前日志项目下的日志主题数量。",
+      "description": "Number of log topics in the current log project",
       "type": "integer"
     }
   },

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cloudidentity_user_provisioning Resource - terraform-provider-volcenginecc"
 subcategory: "CloudIdentity"
 description: |-
-  当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。
+  After you create a Cloud Identity Center user, you need to grant the user login access to each account.
 ---
 
 # volcenginecc_cloudidentity_user_provisioning (Resource)
 
-当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。
+After you create a Cloud Identity Center user, you need to grant the user login access to each account.
 
 ## Example Usage
 
@@ -29,26 +29,26 @@ resource "volcenginecc_cloudidentity_userprovisioning" "CloudIdentityUserProvisi
 
 ### Required
 
-- `deletion_strategy` (String) 删除策略。
-- `duplication_strategy` (String) 用户名冲突策略。
-- `identity_source_strategy` (String) 身份源冲突策略。
-- `principal_id` (String) 身份id。
-- `principal_type` (String) 身份类型。
-- `target_id` (String) 目标id。
+- `deletion_strategy` (String) Deletion Policy
+- `duplication_strategy` (String) Username Conflict Policy
+- `identity_source_strategy` (String) Identity Source Conflict Policy
+- `principal_id` (String) Identity ID
+- `principal_type` (String) Identity Type
+- `target_id` (String) Target ID
 
 ### Optional
 
-- `description` (String) 任务描述。
-- `duplication_suffix` (String) 本次同步IAM用户名称后缀。
+- `description` (String) Task Description
+- `duplication_suffix` (String) Suffix for IAM user name in this synchronization
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
+- `created_time` (String) Creation Time
 - `id` (String) Uniquely identifies the resource.
-- `principal_name` (String) 目标名称。
-- `provision_status` (String) 授权任务状态。Provisioned 授权成功，Provisioning 正在授权，DeleteProvisioning 授权解除中，DeleteProvisioned 授权解除成功
-- `updated_time` (String) 更新时间。
-- `user_provisioning_id` (String) IAM 用户同步任务ID。
+- `principal_name` (String) Target Name
+- `provision_status` (String) Authorization Task Status. Provisioned: authorization successful, Provisioning: authorizing, DeleteProvisioning: revoking authorization, DeleteProvisioned: authorization revoked successfully.
+- `updated_time` (String) Update Time
+- `user_provisioning_id` (String) IAM User Synchronization Task ID
 
 ## Import
 

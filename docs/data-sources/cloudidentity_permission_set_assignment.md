@@ -21,11 +21,11 @@ Data Source schema for Volcengine::CloudIdentity::PermissionSetAssignment
 
 ### Read-Only
 
-- `created_time` (String) 授权创建时间。
-- `permission_set_id` (String) 权限集 ID。
-- `permission_set_name` (String) 权限集名称。
-- `principal_id` (String) 云身份中心对象 ID
-- `principal_name` (String) 云身份中心对象名。
-- `principal_type` (String) 云身份中心对象类型，User 或者 Group。
-- `target_id` (String) 授权账号 ID。
-- `target_name` (String) 授权账号名。
+- `created_time` (String) Authorization creation time
+- `permission_set_id` (String) Permission set ID
+- `permission_set_name` (String) Permission set name
+- `principal_id` (String) Cloud Identity Center object ID
+- `principal_name` (String) Cloud Identity Center object name
+- `principal_type` (String) Cloud Identity Center object type: User or Group
+- `target_id` (String) Authorized account ID
+- `target_name` (String) Authorized account name

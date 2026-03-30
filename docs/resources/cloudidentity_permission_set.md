@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cloudidentity_permission_set Resource - terraform-provider-volcenginecc"
 subcategory: "CloudIdentity"
 description: |-
-  当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。
+  After you create a Cloud Identity Center user, you need to grant the user login access permissions to each account. When access permissions to Volcano Engine cloud resources share common characteristics, such as network operations permissions or security management permissions, you can predefine permission sets in the Cloud Identity Center as templates. You can achieve centralized authorization based on these permission sets. The Cloud Identity Center will synchronize and distribute permission sets to each account, reducing enterprise permission operation and maintenance costs
 ---
 
 # volcenginecc_cloudidentity_permission_set (Resource)
 
-当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。
+After you create a Cloud Identity Center user, you need to grant the user login access permissions to each account. When access permissions to Volcano Engine cloud resources share common characteristics, such as network operations permissions or security management permissions, you can predefine permission sets in the Cloud Identity Center as templates. You can achieve centralized authorization based on these permission sets. The Cloud Identity Center will synchronize and distribute permission sets to each account, reducing enterprise permission operation and maintenance costs
 
 ## Example Usage
 
@@ -42,32 +42,32 @@ resource "volcenginecc_cloudidentity_permission_set" "CloudIdentityPermissionSet
 
 ### Required
 
-- `name` (String) 权限集名称。
+- `name` (String) Permission Set Name
 
 ### Optional
 
-- `description` (String) 权限集描述。
-- `permission_policies` (Attributes Set) 权限集下的策略列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--permission_policies))
-- `relay_state` (String) 跳转控制台 URL。
-- `session_duration` (Number) session 过期时间，单位秒。
+- `description` (String) Permission Set Description
+- `permission_policies` (Attributes Set) Policy List Under Permission Set
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--permission_policies))
+- `relay_state` (String) Console Redirect URL
+- `session_duration` (Number) Session Expiration Time (seconds)
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
+- `created_time` (String) Creation Time
 - `id` (String) Uniquely identifies the resource.
-- `permission_set_id` (String) 权限集 ID。
-- `status_notifications` (Set of String) 状态通知配置。
-- `updated_time` (String) 更新时间。
+- `permission_set_id` (String) Permission Set ID
+- `status_notifications` (Set of String) Status Notification Configuration
+- `updated_time` (String) Update Time
 
 <a id="nestedatt--permission_policies"></a>
 ### Nested Schema for `permission_policies`
 
 Optional:
 
-- `permission_policy_document` (String) 策略语法内容。语法可参考 策略语法说明。
-- `permission_policy_name` (String) 策略名称。
-- `permission_policy_type` (String) 策略类型，System or Inline。
+- `permission_policy_document` (String) Policy syntax content. Refer to policy syntax documentation
+- `permission_policy_name` (String) Policy Name
+- `permission_policy_type` (String) Policy Type: System or Inline
 
 ## Import
 

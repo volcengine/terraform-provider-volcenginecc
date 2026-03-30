@@ -2,12 +2,12 @@
 page_title: "volcenginecc_clb_certificate Resource - terraform-provider-volcenginecc"
 subcategory: "CLB"
 description: |-
-  针对HTTPS协议，提供统一的证书管理服务，证书无需上传到后端服务器，支持在CLB实例上解密处理，降低了后端服务器的CPU开销。
+  Provides unified certificate management service for HTTPS protocol. Certificates do not need to be uploaded to backend servers. Supports decryption processing on CLB instances, reducing CPU overhead on backend servers.
 ---
 
 # volcenginecc_clb_certificate (Resource)
 
-针对HTTPS协议，提供统一的证书管理服务，证书无需上传到后端服务器，支持在CLB实例上解密处理，降低了后端服务器的CPU开销。
+Provides unified certificate management service for HTTPS protocol. Certificates do not need to be uploaded to backend servers. Supports decryption processing on CLB instances, reducing CPU overhead on backend servers.
 
 ## Example Usage
 
@@ -32,35 +32,35 @@ resource "volcenginecc_clb_certificate" "CertificatDemo" {
 
 ### Required
 
-- `private_key` (String) 证书的私钥。
-- `public_key` (String) 证书的公钥。
+- `private_key` (String) Certificate private key.
+- `public_key` (String) Certificate public key.
 
 ### Optional
 
-- `certificate_name` (String) 证书的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1 ～ 128个字符。
-- `description` (String) 证书的描述，默认值为空字符串。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。
-- `project_name` (String) 证书所属项目的名称。不填默认为default。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `certificate_name` (String) Certificate name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters.
+- `description` (String) Certificate description. Default value is an empty string. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters.
+- `project_name` (String) Name of the project the certificate belongs to. If not specified, defaults to 'default'.
+- `tags` (Attributes Set) Tag list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `certificate_id` (String) 证书的ID。
-- `created_time` (String) 证书的创建时间。
-- `domain_name` (String) 证书的主域名。
-- `expired_at` (String) 证书的过期时间。
+- `certificate_id` (String) Certificate ID.
+- `created_time` (String) Certificate creation time.
+- `domain_name` (String) Certificate primary domain name.
+- `expired_at` (String) Certificate expiration time.
 - `id` (String) Uniquely identifies the resource.
-- `listeners` (Set of String) 证书关联的监听器的ID。
-- `service_managed` (Boolean) 是否为托管资源。true：托管资源。false：非托管资源。
-- `subject_alternative_names` (Set of String) 证书的备用域名列表。
+- `listeners` (Set of String) ID of the listener associated with the certificate.
+- `service_managed` (Boolean) Managed resource status. true: managed resource. false: unmanaged resource.
+- `subject_alternative_names` (Set of String) List of alternate domain names for the certificate.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value.
 
 ## Import
 

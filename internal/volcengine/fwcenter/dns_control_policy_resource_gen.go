@@ -34,11 +34,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户的唯一标识ID。",
+		//	  "description": "User's unique identifier.",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户的唯一标识ID。",
+			Description: "User's unique identifier.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -48,11 +48,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "策略的描述信息。",
+		//	  "description": "Policy description information.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "策略的描述信息。",
+			Description: "Policy description information.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -63,18 +63,18 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问目的，可以是域名或域名地址簿的唯一标识ID。当前仅支持一个地址簿。",
+		//	  "description": "Access target, which can be the unique identifier of a domain or domain address book. Currently, only one address book is supported.",
 		//	  "type": "string"
 		//	}
 		"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问目的，可以是域名或域名地址簿的唯一标识ID。当前仅支持一个地址簿。",
+			Description: "Access target, which can be the unique identifier of a domain or domain address book. Currently, only one address book is supported.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationGroupList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "域名地址簿名称列表。",
+		//	  "description": "Domain address book name list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -84,7 +84,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"destination_group_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "域名地址簿名称列表。",
+			Description: "Domain address book name list.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -94,7 +94,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问目的的类型。domain：域名；group：域名地址簿。",
+		//	  "description": "Type of access target. domain: domain; group: domain address book.",
 		//	  "enum": [
 		//	    "domain",
 		//	    "group"
@@ -102,7 +102,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问目的的类型。domain：域名；group：域名地址簿。",
+			Description: "Type of access target. domain: domain; group: domain address book.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -115,7 +115,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "域名列表。",
+		//	  "description": "Domain list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -125,7 +125,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"domain_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "域名列表。",
+			Description: "Domain list.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -135,20 +135,20 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "域名地址簿的域名列表。",
+		//	  "description": "Domain list in the domain address book.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Address": {
-		//	        "description": "具体地址信息。",
+		//	        "description": "Specific address information.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "描述信息。",
+		//	        "description": "Description information.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "地址类型。支持的取值如下所示。ip：IPv4 地址；ipv6：IPv6 地址；domain：域名；port：端口。",
+		//	        "description": "Address type. Supported values are as follows. ip: IPv4 address; ipv6: IPv6 address; domain: domain name; port: port number.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -162,22 +162,22 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Address
 					"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "具体地址信息。",
+						Description: "Specific address information.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "描述信息。",
+						Description: "Description information.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "地址类型。支持的取值如下所示。ip：IPv4 地址；ipv6：IPv6 地址；domain：域名；port：端口。",
+						Description: "Address type. Supported values are as follows. ip: IPv4 address; ipv6: IPv6 address; domain: domain name; port: port number.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "域名地址簿的域名列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Domain list in the domain address book.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -187,11 +187,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命中计数，表示该域名黑名单访问控制策略被触发的次数。",
+		//	  "description": "Hit count, indicating the number of times the domain denylist access control policy was triggered.",
 		//	  "type": "integer"
 		//	}
 		"hit_cnt": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "命中计数，表示该域名黑名单访问控制策略被触发的次数。",
+			Description: "Hit count, indicating the number of times the domain denylist access control policy was triggered.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -201,11 +201,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "互联网边界防火墙实例ID。",
+		//	  "description": "Internet border firewall instance ID.",
 		//	  "type": "string"
 		//	}
 		"internet_firewall_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "互联网边界防火墙实例ID。",
+			Description: "Internet border firewall instance ID.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -217,11 +217,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最近命中时间戳，表示该域名黑名单访问控制策略最后一次被触发的时间。",
+		//	  "description": "Latest hit timestamp, indicating the last time the domain denylist access control policy was triggered.",
 		//	  "type": "integer"
 		//	}
 		"last_hit_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "最近命中时间戳，表示该域名黑名单访问控制策略最后一次被触发的时间。",
+			Description: "Latest hit timestamp, indicating the last time the domain denylist access control policy was triggered.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -231,11 +231,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略的唯一标识ID。",
+		//	  "description": "Unique identifier of the access control policy.",
 		//	  "type": "string"
 		//	}
 		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略的唯一标识ID。",
+			Description: "Unique identifier of the access control policy.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -245,12 +245,12 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问源信息，包含VPC列表。",
+		//	  "description": "Access source information, including VPC list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Region": {
-		//	        "description": "VPC地域信息。",
+		//	        "description": "VPC region information.",
 		//	        "type": "string"
 		//	      },
 		//	      "VpcId": {
@@ -268,7 +268,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC地域信息。",
+						Description: "VPC region information.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -286,7 +286,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "访问源信息，包含VPC列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Access source information, including VPC list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -297,11 +297,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "域名黑名单访问控制策略的开关状态。false：关闭；true：开启。",
+		//	  "description": "Switch status of the domain denylist access control policy. false: Off; true: On.",
 		//	  "type": "boolean"
 		//	}
 		"status": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "域名黑名单访问控制策略的开关状态。false：关闭；true：开启。",
+			Description: "Switch status of the domain denylist access control policy. false: Off; true: On.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -312,11 +312,11 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该域名黑名单访问控制策略占用的策略数量。",
+		//	  "description": "Number of policies occupied by this domain denylist access control policy.",
 		//	  "type": "integer"
 		//	}
 		"use_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "该域名黑名单访问控制策略占用的策略数量。",
+			Description: "Number of policies occupied by this domain denylist access control policy.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -334,7 +334,7 @@ func dnsControlPolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "域名黑名单访问控制策略。",
+		Description: "Domain denylist access control policy.",
 		Version:     1,
 		Attributes:  attributes,
 	}

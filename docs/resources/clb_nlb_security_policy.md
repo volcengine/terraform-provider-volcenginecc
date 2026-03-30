@@ -2,12 +2,12 @@
 page_title: "volcenginecc_clb_nlb_security_policy Resource - terraform-provider-volcenginecc"
 subcategory: "CLB"
 description: |-
-  基于一些常见的场景，为您预置了一些安全策略，若系统预置的策略不满足您的需求，您还可以自定义安全策略。
+  Some security policies are preset for common scenarios. If the system preset policies do not meet your needs, you can also customize security policies
 ---
 
 # volcenginecc_clb_nlb_security_policy (Resource)
 
-基于一些常见的场景，为您预置了一些安全策略，若系统预置的策略不满足您的需求，您还可以自定义安全策略。
+Some security policies are preset for common scenarios. If the system preset policies do not meet your needs, you can also customize security policies
 
 ## Example Usage
 
@@ -30,33 +30,33 @@ resource "volcenginecc_clb_nlb_security_policy" "CLBNLBSecurityPolicyDemo" {
 
 ### Required
 
-- `ciphers` (Set of String) TLS自定义安全策略的加密套件，不同的TLS协议版本支持的加密套件如下：TLSv1.0 & TLSv1.1：ECDHE-ECDSA-AES128-SHA，ECDHE-ECDSA-AES256-SHA，ECDHE-RSA-AES128-SHA，ECDHE-RSA-AES256-SHA，AES128-SHA，AES256-SHA，DES-CBC3-SHA。TLSv1.2：ECDHE-ECDSA-AES128-GCM-SHA256，ECDHE-ECDSA-AES256-GCM-SHA384，ECDHE-ECDSA-AES128-SHA256，ECDHE-ECDSA-AES256-SHA384，ECDHE-RSA-AES128-GCM-SHA256，ECDHE-RSA-AES256-GCM-SHA384，ECDHE-RSA-AES128-SHA256，ECDHE-RSA-AES256-SHA384，AES128-GCM-SHA256，AES256-GCM-SHA384，AES128-SHA256，AES256-SHA256。TLSv1.3：TLS_CHACHA20_POLY1305_SHA256，TLS_AES_256_GCM_SHA384，TLS_AES_128_GCM_SHA256，TLS_AES_128_CCM_8_SHA256，TLS_AES_128_CCM_SHA256，TLS_SM4_GCM_SM3，TLS_SM4_CCM_SM3。当传入此参数时，需要传入待支持的全部加密套件，不支持通过此接口仅新增/删除加密套件。仅传入Ciphers.N，未传入TlsVersions.N，则依据当前监听器支持的TLS 协议版本和请求中传入的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS 协议版本和加密套件做校验。TLS_SM4_GCM_SM3和TLS_SM4_CCM_SM3两个加密套件正在邀测中，如需试用，请联系客户经理。
-- `tls_versions` (Set of String) 更新TLS自定义安全策略的TLS 协议版本。取值：TLSv1.0，TLSv1.1，TLSv1.2，TLSv1.3。当传入此参数时，需要传入待支持的全部TLS版本，不支持通过此接口仅新增/删除TLS协议版本。仅传入TlsVersions.N，未传入Ciphers.N，则依据请求中传入的TLS协议版本和当前监听器支持的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS协议版本和加密套件做校验。
+- `ciphers` (Set of String) Cipher suites for the TLS custom security policy. Supported cipher suites for different TLS protocol versions are as follows: TLSv1.0 & TLSv1.1: ECDHE-ECDSA-AES128-SHA, ECDHE-ECDSA-AES256-SHA, ECDHE-RSA-AES128-SHA, ECDHE-RSA-AES256-SHA, AES128-SHA, AES256-SHA, DES-CBC3-SHA. TLSv1.2: ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-ECDSA-AES128-SHA256, ECDHE-ECDSA-AES256-SHA384, ECDHE-RSA-AES128-GCM-SHA256, ECDHE-RSA-AES256-GCM-SHA384, ECDHE-RSA-AES128-SHA256, ECDHE-RSA-AES256-SHA384, AES128-GCM-SHA256, AES256-GCM-SHA384, AES128-SHA256, AES256-SHA256. TLSv1.3: TLS_CHACHA20_POLY1305_SHA256, TLS_AES_256_GCM_SHA384, TLS_AES_128_GCM_SHA256, TLS_AES_128_CCM_8_SHA256, TLS_AES_128_CCM_SHA256, TLS_SM4_GCM_SM3, TLS_SM4_CCM_SM3. When specifying this parameter, you must provide all supported cipher suites. Adding or removing cipher suites individually is not supported via this interface. If only Ciphers.N is provided and TlsVersions.N is not, validation is based on the TLS protocol versions supported by the current listener and the cipher suites specified in the request. If both TlsVersions.N and Ciphers.N are provided, validation is based on the TLS protocol versions and cipher suites specified in the request. TLS_SM4_GCM_SM3 and TLS_SM4_CCM_SM3 are currently in pilot testing. To request access, please contact your account manager
+- `tls_versions` (Set of String) Update the TLS protocol versions for the TLS custom security policy. Valid values: TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3. When specifying this parameter, you must provide all supported TLS versions. Adding or removing TLS protocol versions individually is not supported via this interface. If only TlsVersions.N is provided and Ciphers.N is not, validation is based on the TLS protocol versions in the request and the cipher suites supported by the current listener. If both TlsVersions.N and Ciphers.N are provided, validation is based on the TLS protocol versions and cipher suites specified in the request
 
 ### Optional
 
-- `project_name` (String) TLS自定义安全策略所属项目的名称。不传则默认为defaul。
-- `security_policy_name` (String) 安全策略名称。必须以字母、数字或中文开头，可包含以下特殊字符：点（.）、下划线（_）和中划线（-）；长度限制为1 ～ 128个字符；该参数不传入，则默认为策略ID。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `project_name` (String) Name of the project to which the TLS custom security policy belongs. If not specified, defaults to default
+- `security_policy_name` (String) Security policy name. Must start with a letter, number, or Chinese character, and can include the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If this parameter is not specified, defaults to the policy ID
+- `tags` (Attributes Set) Tag list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `account_id` (String) TLS 安全策略所属的账号ID。
-- `created_time` (String) 创建时间。
+- `account_id` (String) Account ID associated with the TLS security policy
+- `created_time` (String) Creation time
 - `id` (String) Uniquely identifies the resource.
-- `related_listener_ids` (Set of String) TLS 安全策略关联的监听器。
-- `security_policy_id` (String) 安全策略ID。
-- `status` (String) TLS 自定义安全策略状态。Creating：创建中。Configuring：配置中。Active：正常。Deleting：删除中。
-- `updated_time` (String) 更新时间。
+- `related_listener_ids` (Set of String) Listener associated with the TLS security policy
+- `security_policy_id` (String) Security policy ID
+- `status` (String) TLS custom security policy status. Creating: Being created. Configuring: Being configured. Active: Active. Deleting: Being deleted.
+- `updated_time` (String) Update time
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key
+- `value` (String) User tag value
 
 ## Import
 

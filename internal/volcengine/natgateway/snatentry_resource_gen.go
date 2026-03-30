@@ -28,11 +28,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则关联的公网IP的IP地址。返回单个公网IP的IP地址。 返回多个公网IP的IP地址。",
+		//	  "description": "IP address of the public IP associated with the SNAT rule. Returns the IP address for a single public IP. Returns IP addresses for multiple public IPs.",
 		//	  "type": "string"
 		//	}
 		"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则关联的公网IP的IP地址。返回单个公网IP的IP地址。 返回多个公网IP的IP地址。",
+			Description: "IP address of the public IP associated with the SNAT rule. Returns the IP address for a single public IP. Returns IP addresses for multiple public IPs.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -42,11 +42,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则关联的公网IP的ID。返回单个公网IP的ID。 返回多个公网IP的ID。",
+		//	  "description": "ID of the public IP associated with the SNAT rule. Returns the ID for a single public IP. Returns IDs for multiple public IPs.",
 		//	  "type": "string"
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则关联的公网IP的ID。返回单个公网IP的ID。 返回多个公网IP的ID。",
+			Description: "ID of the public IP associated with the SNAT rule. Returns the ID for a single public IP. Returns IDs for multiple public IPs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -57,11 +57,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则所属NAT网关的ID。",
+		//	  "description": "ID of the NAT gateway associated with the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则所属NAT网关的ID。",
+			Description: "ID of the NAT gateway associated with the SNAT rule",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -71,11 +71,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私网NAT网关的中转IP的ID。",
+		//	  "description": "ID of the transit IP for the private NAT gateway",
 		//	  "type": "string"
 		//	}
 		"nat_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私网NAT网关的中转IP的ID。",
+			Description: "ID of the transit IP for the private NAT gateway",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -86,11 +86,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则的ID。",
+		//	  "description": "ID of the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"snat_entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则的ID。",
+			Description: "ID of the SNAT rule",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -100,11 +100,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则的名称。",
+		//	  "description": "Name of the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"snat_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则的名称。",
+			Description: "Name of the SNAT rule",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -115,11 +115,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则对应的网段。",
+		//	  "description": "Network segment corresponding to the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"source_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则对应的网段。",
+			Description: "Network segment corresponding to the SNAT rule",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -131,11 +131,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+		//	  "description": "Status of the SNAT rule. Creating: being created. Deleting: being deleted. Available: available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+			Description: "Status of the SNAT rule. Creating: being created. Deleting: being deleted. Available: available.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -145,11 +145,11 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "SNAT规则关联子网的ID。",
+		//	  "description": "ID of the subnet associated with the SNAT rule",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SNAT规则关联子网的ID。",
+			Description: "ID of the subnet associated with the SNAT rule",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -169,7 +169,7 @@ func snatentryResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "当私有网络内有多台云服务器实例需要访问公网时，为了节省公网IP且避免在公网上直接暴露云服务器IP，您可以使用公网NAT网关的SNAT规则，安全、便捷、高效地访问公网。SNAT规则支持私有网络、子网、云服务器、自定义网段等四种粒度，您可根据业务需求灵活配置。",
+		Description: "When multiple cloud server instances in a private network need to access the public network, you can use SNAT rules of the public NAT gateway to save public IPs and avoid exposing cloud server IPs directly to the public network for secure, convenient, and efficient access. SNAT rules support four granularities: private network, subnet, cloud server, and custom network segment. Configure flexibly based on your business needs.",
 		Version:     1,
 		Attributes:  attributes,
 	}

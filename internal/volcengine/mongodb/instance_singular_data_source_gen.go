@@ -27,10 +27,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单 ID 列表。新建实例会被绑定到指定白名单。",
+		//	  "description": "Allowlist ID list. New instances are bound to the specified allowlist.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "白名单 ID 列表。新建实例会被绑定到指定白名单。",
+		//	    "description": "Allowlist ID list. New instances are bound to the specified allowlist.",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -38,7 +38,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"allow_list_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "白名单 ID 列表。新建实例会被绑定到指定白名单。",
+			Description: "Allowlist ID list. New instances are bound to the specified allowlist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AutoRenew
@@ -46,18 +46,18 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "是否开启自动续费，取值范围如下：false（默认）：不开启自动续费。true：开启自动续费。",
+		//	  "description": "Enable auto-renewal. Options: false (default): auto-renewal disabled. true: auto-renewal enabled.",
 		//	  "type": "boolean"
 		//	}
 		"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启自动续费，取值范围如下：false（默认）：不开启自动续费。true：开启自动续费。",
+			Description: "Enable auto-renewal. Options: false (default): auto-renewal disabled. true: auto-renewal enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例计费状态，取值范围如下：Normal：正常。WaitingPaid：等待支付。ChangingPayType：计费变更中。Renewing：续费中。Overdue：已到期。Owing：欠费中。Unsubscribing：退订中。",
+		//	  "description": "Instance billing status. Valid values: Normal: normal. WaitingPaid: waiting for payment. ChangingPayType: changing billing type. Renewing: renewing. Overdue: overdue. Owing: owing. Unsubscribing: unsubscribing.",
 		//	  "enum": [
 		//	    "Normal",
 		//	    "WaitingPaid",
@@ -70,7 +70,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例计费状态，取值范围如下：Normal：正常。WaitingPaid：等待支付。ChangingPayType：计费变更中。Renewing：续费中。Overdue：已到期。Owing：欠费中。Unsubscribing：退订中。",
+			Description: "Instance billing status. Valid values: Normal: normal. WaitingPaid: waiting for payment. ChangingPayType: changing billing type. Renewing: renewing. Overdue: overdue. Owing: owing. Unsubscribing: unsubscribing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChargeType
@@ -78,7 +78,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "PostPaid",
-		//	  "description": "实例计费类型，取值范围如下：PostPaid（默认）：按量计费（也称后付费）。Prepaid：包年包月（也称预付费）。",
+		//	  "description": "Instance billing type. Options: PostPaid (default): pay-as-you-go (also called postpaid). Prepaid: subscription (also called prepaid).",
 		//	  "enum": [
 		//	    "PostPaid",
 		//	    "Prepaid"
@@ -86,56 +86,56 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例计费类型，取值范围如下：PostPaid（默认）：按量计费（也称后付费）。Prepaid：包年包月（也称预付费）。",
+			Description: "Instance billing type. Options: PostPaid (default): pay-as-you-go (also called postpaid). Prepaid: subscription (also called prepaid).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClosedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计划关停时间（UTC）。",
+		//	  "description": "Scheduled shutdown time (UTC).",
 		//	  "type": "string"
 		//	}
 		"closed_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计划关停时间（UTC）。",
+			Description: "Scheduled shutdown time (UTC).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigServerNodeSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "分片集群中 ConfigServer 节点的规格码。默认值为 mongo.config.1c2g。",
+		//	  "description": "ConfigServer node specification code in the sharded cluster. Default: mongo.config.1c2g.",
 		//	  "type": "string"
 		//	}
 		"config_server_node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "分片集群中 ConfigServer 节点的规格码。默认值为 mongo.config.1c2g。",
+			Description: "ConfigServer node specification code in the sharded cluster. Default: mongo.config.1c2g.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigServerStorageSpaceGB
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "分片集群中 ConfigServer 的存储空间，单位：GiB。步长为 10，默认值：20。",
+		//	  "description": "ConfigServer storage space in the sharded cluster, unit: GiB. Step size: 10. Default: 20.",
 		//	  "type": "integer"
 		//	}
 		"config_server_storage_space_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "分片集群中 ConfigServer 的存储空间，单位：GiB。步长为 10，默认值：20。",
+			Description: "ConfigServer storage space in the sharded cluster, unit: GiB. Step size: 10. Default: 20.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigServers
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ConfigServers 的信息列表。",
+		//	  "description": "ConfigServer information list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ConfigServerNodeId": {
-		//	        "description": "ConfigServer 的节点 ID。",
+		//	        "description": "ConfigServer node ID",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeRole": {
-		//	        "description": "节点角色，取值范围如下：Primary：主节点。Secondary：从节点。Hidden：隐藏节点。",
+		//	        "description": "Node role. Options: Primary: primary node. Secondary: secondary node. Hidden: hidden node.",
 		//	        "enum": [
 		//	          "Primary",
 		//	          "Secondary",
@@ -144,27 +144,27 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "NodeStatus": {
-		//	        "description": "节点状态。",
+		//	        "description": "Node status.",
 		//	        "type": "string"
 		//	      },
 		//	      "TotalMemoryGB": {
-		//	        "description": "总内存。单位：GiB。",
+		//	        "description": "Total memory. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "TotalvCPU": {
-		//	        "description": "总核数。",
+		//	        "description": "Total cores.",
 		//	        "type": "number"
 		//	      },
 		//	      "UsedMemoryGB": {
-		//	        "description": "已用内存。单位：GiB。",
+		//	        "description": "Used memory. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "UsedvCPU": {
-		//	        "description": "已用核数。",
+		//	        "description": "Used cores.",
 		//	        "type": "number"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "当前节点所属的可用区 ID。",
+		//	        "description": "Availability zone ID of the current node.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -178,83 +178,83 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ConfigServerNodeId
 					"config_server_node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "ConfigServer 的节点 ID。",
+						Description: "ConfigServer node ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeRole
 					"node_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点角色，取值范围如下：Primary：主节点。Secondary：从节点。Hidden：隐藏节点。",
+						Description: "Node role. Options: Primary: primary node. Secondary: secondary node. Hidden: hidden node.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeStatus
 					"node_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点状态。",
+						Description: "Node status.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TotalMemoryGB
 					"total_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "总内存。单位：GiB。",
+						Description: "Total memory. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TotalvCPU
 					"totalv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "总核数。",
+						Description: "Total cores.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedMemoryGB
 					"used_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "已用内存。单位：GiB。",
+						Description: "Used memory. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedvCPU
 					"usedv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "已用核数。",
+						Description: "Used cores.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "当前节点所属的可用区 ID。",
+						Description: "Availability zone ID of the current node.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "ConfigServers 的信息列表。",
+			Description: "ConfigServer information list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigServersId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ConfigServer 的 ID。",
+		//	  "description": "ConfigServer ID",
 		//	  "type": "string"
 		//	}
 		"config_servers_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ConfigServer 的 ID。",
+			Description: "ConfigServer ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例创建时间（UTC）。",
+		//	  "description": "Instance creation time (UTC).",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例创建时间（UTC）。",
+			Description: "Instance creation time (UTC).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBEngine
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库引擎。取值固定为 MongoDB",
+		//	  "description": "Database engine. The value is fixed as MongoDB",
 		//	  "enum": [
 		//	    "MongoDB"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"db_engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库引擎。取值固定为 MongoDB",
+			Description: "Database engine. The value is fixed as MongoDB",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBEngineVersion
@@ -262,7 +262,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "MongoDB_4_0",
-		//	  "description": "数据库引擎版本，取值范围如下：MongoDB_4_0（默认）：MongoDB 4.0 版本。MongoDB_4_2：MongoDB 4.2 版本。MongoDB_4_4：MongoDB 4.4 版本。MongoDB_5_0：MongoDB 5.0 版本。MongoDB_6_0：MongoDB 6.0 版本。MongoDB_7_0：MongoDB 7.0 版本。",
+		//	  "description": "Database engine version. Options: MongoDB_4_0 (default): MongoDB 4.0. MongoDB_4_2: MongoDB 4.2. MongoDB_4_4: MongoDB 4.4. MongoDB_5_0: MongoDB 5.0. MongoDB_6_0: MongoDB 6.0. MongoDB_7_0: MongoDB 7.0.",
 		//	  "enum": [
 		//	    "MongoDB_4_0",
 		//	    "MongoDB_4_2",
@@ -274,29 +274,29 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"db_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库引擎版本，取值范围如下：MongoDB_4_0（默认）：MongoDB 4.0 版本。MongoDB_4_2：MongoDB 4.2 版本。MongoDB_4_4：MongoDB 4.4 版本。MongoDB_5_0：MongoDB 5.0 版本。MongoDB_6_0：MongoDB 6.0 版本。MongoDB_7_0：MongoDB 7.0 版本。",
+			Description: "Database engine version. Options: MongoDB_4_0 (default): MongoDB 4.0. MongoDB_4_2: MongoDB 4.2. MongoDB_4_4: MongoDB 4.4. MongoDB_5_0: MongoDB 5.0. MongoDB_6_0: MongoDB 6.0. MongoDB_7_0: MongoDB 7.0.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBEngineVersionStr
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库引擎版本的字符串。",
+		//	  "description": "Database engine version string",
 		//	  "type": "string"
 		//	}
 		"db_engine_version_str": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库引擎版本的字符串。",
+			Description: "Database engine version string",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例到期时间（UTC）。",
+		//	  "description": "Instance expiration time (UTC).",
 		//	  "type": "string"
 		//	}
 		"expired_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例到期时间（UTC）。",
+			Description: "Instance expiration time (UTC).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceCount
@@ -304,42 +304,42 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": 1,
-		//	  "description": "需要创建的实例数量。取值为大于等于 1 的正整数，默认值为1。",
+		//	  "description": "Number of instances to create. Must be a positive integer greater than or equal to 1. Default is 1.",
 		//	  "type": "integer"
 		//	}
 		"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "需要创建的实例数量。取值为大于等于 1 的正整数，默认值为1。",
+			Description: "Number of instances to create. Must be a positive integer greater than or equal to 1. Default is 1.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例名称。名称需同时满足如下要求：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需为 2~64 个字符。",
+		//	  "description": "Instance name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 2–64 characters.",
 		//	  "maxLength": 64,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例名称。名称需同时满足如下要求：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需为 2~64 个字符。",
+			Description: "Instance name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 2–64 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例状态。创建中：Creating。运行中：Running。白名单维护中：AllowListMaintaining。变更配置中：Scaling。重启中：Restarting。网络维护中：NetworkMaintaining。恢复中：Restoring。升级版本中：Upgrading。不可用：Unavailable。关停中：Closing。删除中：Deleting。已关停：Closed。SSL SSL变更中：SSLUpdating。主节点切换中：SwitchMastering。角色切换中：RoleChanging。迁移中：Migrating。",
+		//	  "description": "Instance status. Creating: Creating. Running: Running. Allowlist maintenance: AllowListMaintaining. Scaling: Scaling. Restarting: Restarting. Network maintaining: NetworkMaintaining. Restoring: Restoring. Upgrading: Upgrading. Unavailable: Unavailable. Closing: Closing. Deleting: Deleting. Closed: Closed. SSL updating: SSLUpdating. Switch mastering: SwitchMastering. Role changing: RoleChanging. Migrating: Migrating.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Running",
@@ -361,7 +361,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例状态。创建中：Creating。运行中：Running。白名单维护中：AllowListMaintaining。变更配置中：Scaling。重启中：Restarting。网络维护中：NetworkMaintaining。恢复中：Restoring。升级版本中：Upgrading。不可用：Unavailable。关停中：Closing。删除中：Deleting。已关停：Closed。SSL SSL变更中：SSLUpdating。主节点切换中：SwitchMastering。角色切换中：RoleChanging。迁移中：Migrating。",
+			Description: "Instance status. Creating: Creating. Running: Running. Allowlist maintenance: AllowListMaintaining. Scaling: Scaling. Restarting: Restarting. Network maintaining: NetworkMaintaining. Restoring: Restoring. Upgrading: Upgrading. Unavailable: Unavailable. Closing: Closing. Deleting: Deleting. Closed: Closed. SSL updating: SSLUpdating. Switch mastering: SwitchMastering. Role changing: RoleChanging. Migrating: Migrating.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceType
@@ -369,7 +369,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "ReplicaSet",
-		//	  "description": "MongoDB 的实例类型，取值范围如下：ReplicaSet（默认）：副本集。ShardedCluster：分片集群 。",
+		//	  "description": "MongoDB instance type. Valid values: ReplicaSet (default): replica set. ShardedCluster: sharded cluster.",
 		//	  "enum": [
 		//	    "ReplicaSet",
 		//	    "ShardedCluster"
@@ -377,47 +377,47 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "MongoDB 的实例类型，取值范围如下：ReplicaSet（默认）：副本集。ShardedCluster：分片集群 。",
+			Description: "MongoDB instance type. Valid values: ReplicaSet (default): replica set. ShardedCluster: sharded cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Mongos
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Mongos 的信息列表。",
+		//	  "description": "Mongos information list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "MongosNodeId": {
-		//	        "description": "Mongos 的节点 ID。",
+		//	        "description": "Mongos node ID",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeSpec": {
-		//	        "description": "节点规格。",
+		//	        "description": "Node specification.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeStatus": {
-		//	        "description": "节点状态。",
+		//	        "description": "Node status.",
 		//	        "type": "string"
 		//	      },
 		//	      "TotalMemoryGB": {
-		//	        "description": "总内存。单位：GiB。",
+		//	        "description": "Total memory. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "TotalvCPU": {
-		//	        "description": "总核数。",
+		//	        "description": "Total cores.",
 		//	        "type": "number"
 		//	      },
 		//	      "UsedMemoryGB": {
-		//	        "description": "已用内存。单位：GiB。",
+		//	        "description": "Used memory. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "UsedvCPU": {
-		//	        "description": "已用核数。",
+		//	        "description": "Used cores.",
 		//	        "type": "number"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "当前节点所属的可用区 ID。",
+		//	        "description": "Availability zone ID of the current node.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -431,98 +431,98 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: MongosNodeId
 					"mongos_node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Mongos 的节点 ID。",
+						Description: "Mongos node ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeSpec
 					"node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点规格。",
+						Description: "Node specification.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeStatus
 					"node_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点状态。",
+						Description: "Node status.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TotalMemoryGB
 					"total_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "总内存。单位：GiB。",
+						Description: "Total memory. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TotalvCPU
 					"totalv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "总核数。",
+						Description: "Total cores.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedMemoryGB
 					"used_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "已用内存。单位：GiB。",
+						Description: "Used memory. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedvCPU
 					"usedv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "已用核数。",
+						Description: "Used cores.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "当前节点所属的可用区 ID。",
+						Description: "Availability zone ID of the current node.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Mongos 的信息列表。",
+			Description: "Mongos information list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MongosId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Mongos 的 ID。",
+		//	  "description": "Mongos ID.",
 		//	  "type": "string"
 		//	}
 		"mongos_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Mongos 的 ID。",
+			Description: "Mongos ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MongosNodeNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "分片集群中 Mongos 节点的数量。取值范围：2~32。",
+		//	  "description": "Number of Mongos nodes in the sharded cluster. Range: 2~32.",
 		//	  "maximum": 32,
 		//	  "minimum": 2,
 		//	  "type": "integer"
 		//	}
 		"mongos_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "分片集群中 Mongos 节点的数量。取值范围：2~32。",
+			Description: "Number of Mongos nodes in the sharded cluster. Range: 2~32.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MongosNodeSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "分片集群中 Mongos 节点的规格码。",
+		//	  "description": "Specification code for Mongos nodes in a sharded cluster.",
 		//	  "type": "string"
 		//	}
 		"mongos_node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "分片集群中 Mongos 节点的规格码。",
+			Description: "Specification code for Mongos nodes in a sharded cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeAvailabilityZone
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "添加只读节点信息，包括只读节点所在的可用区和数量。",
+		//	  "description": "Add read-only node information, including the availability zone and quantity of read-only nodes.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "NodeNumber": {
-		//	        "description": "当前可用区中需要添加的只读节点数量。当前仅副本集实例和分片集群实例中 Shard 分片支持添加只读节点。其中：当实例类型为副本集（即 InstanceType 取值为 ReplicaSet）时，该值表示单个副本集实例中的只读节点总数量。每个副本集实例最多支持添加 5 个只读节点。当实例类型为分片集群（即 InstanceType 取值为 ShardedCluster）时，该值表示每个 Shard 分片中的只读节点数量。每个 Shard 分片最多添加 5 个只读节点。",
+		//	        "description": "Number of read-only nodes to add in the current availability zone. Currently, only replica set instances and Shard nodes in sharded cluster instances support adding read-only nodes. When the instance type is ReplicaSet (InstanceType is ReplicaSet), this value indicates the total number of read-only nodes in a single replica set instance. Each replica set instance supports up to 5 read-only nodes. When the instance type is ShardedCluster (InstanceType is ShardedCluster), this value indicates the number of read-only nodes per Shard node. Each Shard node supports up to 5 read-only nodes.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "只读节点所在的可用区。",
+		//	        "description": "Availability zone of the read-only node.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -536,59 +536,59 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: NodeNumber
 					"node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "当前可用区中需要添加的只读节点数量。当前仅副本集实例和分片集群实例中 Shard 分片支持添加只读节点。其中：当实例类型为副本集（即 InstanceType 取值为 ReplicaSet）时，该值表示单个副本集实例中的只读节点总数量。每个副本集实例最多支持添加 5 个只读节点。当实例类型为分片集群（即 InstanceType 取值为 ShardedCluster）时，该值表示每个 Shard 分片中的只读节点数量。每个 Shard 分片最多添加 5 个只读节点。",
+						Description: "Number of read-only nodes to add in the current availability zone. Currently, only replica set instances and Shard nodes in sharded cluster instances support adding read-only nodes. When the instance type is ReplicaSet (InstanceType is ReplicaSet), this value indicates the total number of read-only nodes in a single replica set instance. Each replica set instance supports up to 5 read-only nodes. When the instance type is ShardedCluster (InstanceType is ShardedCluster), this value indicates the number of read-only nodes per Shard node. Each Shard node supports up to 5 read-only nodes.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "只读节点所在的可用区。",
+						Description: "Availability zone of the read-only node.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "添加只读节点信息，包括只读节点所在的可用区和数量。",
+			Description: "Add read-only node information, including the availability zone and quantity of read-only nodes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点数量，其中：当实例类型为副本集（即 InstanceType 取值为 ReplicaSet）时，该参数表示副本集实例的计算节点数量。当实例类型为分片集群（即 InstanceType 取值为 ShardedCluster）时，该参数表示每个 Shard 分片中的节点数量。",
+		//	  "description": "Node count. When the instance type is ReplicaSet, this parameter indicates the number of compute nodes in the replica set instance. When the instance type is ShardedCluster, it indicates the number of nodes in each shard.",
 		//	  "type": "integer"
 		//	}
 		"node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "节点数量，其中：当实例类型为副本集（即 InstanceType 取值为 ReplicaSet）时，该参数表示副本集实例的计算节点数量。当实例类型为分片集群（即 InstanceType 取值为 ShardedCluster）时，该参数表示每个 Shard 分片中的节点数量。",
+			Description: "Node count. When the instance type is ReplicaSet, this parameter indicates the number of compute nodes in the replica set instance. When the instance type is ShardedCluster, it indicates the number of nodes in each shard.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的规格码。其中：当实例类型为副本集（即 InstanceType 取值为 ReplicaSet）时，该参数表示副本集实例的计算节点规格。当实例类型为分片集群（即 InstanceType 取值为 ShardedCluster）时，该参数表示 Shard 节点的规格。",
+		//	  "description": "Instance specification code. When the instance type is ReplicaSet (InstanceType is ReplicaSet), this parameter specifies the compute node specification for the replica set instance. When the instance type is ShardedCluster (InstanceType is ShardedCluster), this parameter specifies the specification for Shard nodes.",
 		//	  "type": "string"
 		//	}
 		"node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的规格码。其中：当实例类型为副本集（即 InstanceType 取值为 ReplicaSet）时，该参数表示副本集实例的计算节点规格。当实例类型为分片集群（即 InstanceType 取值为 ShardedCluster）时，该参数表示 Shard 节点的规格。",
+			Description: "Instance specification code. When the instance type is ReplicaSet (InstanceType is ReplicaSet), this parameter specifies the compute node specification for the replica set instance. When the instance type is ShardedCluster (InstanceType is ShardedCluster), this parameter specifies the specification for Shard nodes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Nodes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "副本集实例中各节点或分片集群 Shard 分片中各节点的信息列表。",
+		//	  "description": "Information list for each node in the replica set instance or each node in the sharded cluster shard",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "NodeDelayTime": {
-		//	        "description": "节点延迟时间。单位：秒。",
+		//	        "description": "Node latency. Unit: seconds.",
 		//	        "type": "integer"
 		//	      },
 		//	      "NodeId": {
-		//	        "description": "节点 ID。",
+		//	        "description": "Node ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeRole": {
-		//	        "description": "节点角色，取值范围如下：Primary：主节点。Secondary：从节点。Hidden：隐藏节点。ReadOnly：只读节点。",
+		//	        "description": "Node role. Options: Primary: primary node. Secondary: secondary node. Hidden: hidden node. ReadOnly: read-only node.",
 		//	        "enum": [
 		//	          "Primary",
 		//	          "Secondary",
@@ -598,39 +598,39 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "NodeSpec": {
-		//	        "description": "节点规格。",
+		//	        "description": "Node specification.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeStatus": {
-		//	        "description": "节点状态。",
+		//	        "description": "Node status.",
 		//	        "type": "string"
 		//	      },
 		//	      "TotalMemoryGB": {
-		//	        "description": "总内存。单位：GiB。",
+		//	        "description": "Total memory. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "TotalStorageGB": {
-		//	        "description": "该节点的总存储空间。单位：GiB。",
+		//	        "description": "Total storage space for this node. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "TotalvCPU": {
-		//	        "description": "总核数。",
+		//	        "description": "Total cores.",
 		//	        "type": "number"
 		//	      },
 		//	      "UsedMemoryGB": {
-		//	        "description": "已用内存。单位：GiB。",
+		//	        "description": "Used memory. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "UsedStorageGB": {
-		//	        "description": "该节点已用的存储空间。单位：GiB。",
+		//	        "description": "Storage space used by this node. Unit: GiB.",
 		//	        "type": "number"
 		//	      },
 		//	      "UsedvCPU": {
-		//	        "description": "已用核数。",
+		//	        "description": "Used cores.",
 		//	        "type": "number"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "当前节点所属的可用区 ID。",
+		//	        "description": "Availability zone ID of the current node.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -644,87 +644,87 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: NodeDelayTime
 					"node_delay_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "节点延迟时间。单位：秒。",
+						Description: "Node latency. Unit: seconds.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeId
 					"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点 ID。",
+						Description: "Node ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeRole
 					"node_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点角色，取值范围如下：Primary：主节点。Secondary：从节点。Hidden：隐藏节点。ReadOnly：只读节点。",
+						Description: "Node role. Options: Primary: primary node. Secondary: secondary node. Hidden: hidden node. ReadOnly: read-only node.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeSpec
 					"node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点规格。",
+						Description: "Node specification.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeStatus
 					"node_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点状态。",
+						Description: "Node status.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TotalMemoryGB
 					"total_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "总内存。单位：GiB。",
+						Description: "Total memory. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TotalStorageGB
 					"total_storage_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "该节点的总存储空间。单位：GiB。",
+						Description: "Total storage space for this node. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TotalvCPU
 					"totalv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "总核数。",
+						Description: "Total cores.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedMemoryGB
 					"used_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "已用内存。单位：GiB。",
+						Description: "Used memory. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedStorageGB
 					"used_storage_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "该节点已用的存储空间。单位：GiB。",
+						Description: "Storage space used by this node. Unit: GiB.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UsedvCPU
 					"usedv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "已用核数。",
+						Description: "Used cores.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "当前节点所属的可用区 ID。",
+						Description: "Availability zone ID of the current node.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "副本集实例中各节点或分片集群 Shard 分片中各节点的信息列表。",
+			Description: "Information list for each node in the replica set instance or each node in the sharded cluster shard",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Period
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月实例的购买时长，其中：当 PeriodUnit 为 Year 时，Period 取值为 1~3。当 PeriodUnit 为 Month 时，Period 取值为 1~9。",
+		//	  "description": "Subscription instance purchase duration. When PeriodUnit is Year, Period can be 1–3. When PeriodUnit is Month, Period can be 1–9.",
 		//	  "maximum": 9,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "包年包月实例的购买时长，其中：当 PeriodUnit 为 Year 时，Period 取值为 1~3。当 PeriodUnit 为 Month 时，Period 取值为 1~9。",
+			Description: "Subscription instance purchase duration. When PeriodUnit is Year, Period can be 1–3. When PeriodUnit is Month, Period can be 1–9.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeriodUnit
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "指定包年包月实例为包年或者包月类型。取值如下：Year：包年。Month：包月。",
+		//	  "description": "Specify whether the subscription instance is yearly or monthly. Options: Year: yearly. Month: monthly.",
 		//	  "enum": [
 		//	    "Month",
 		//	    "Year"
@@ -732,18 +732,18 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "指定包年包月实例为包年或者包月类型。取值如下：Year：包年。Month：包月。",
+			Description: "Specify whether the subscription instance is yearly or monthly. Options: Year: yearly. Month: monthly.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例私网连接地址的字符串信息。",
+		//	  "description": "String information for the instance's private network connection address.",
 		//	  "type": "string"
 		//	}
 		"private_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例私网连接地址的字符串信息。",
+			Description: "String information for the instance's private network connection address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -751,71 +751,71 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "选择实例所属的项目。若该参数留空，新建实例会默认加入 default 项目。",
+		//	  "description": "Select the project for the instance. If left blank, the new instance will be added to the default project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "选择实例所属的项目。若该参数留空，新建实例会默认加入 default 项目。",
+			Description: "Select the project for the instance. If left blank, the new instance will be added to the default project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReadOnlyNodeNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的只读节点数量。",
+		//	  "description": "Number of read-only nodes in the instance",
 		//	  "type": "integer"
 		//	}
 		"read_only_node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例的只读节点数量。",
+			Description: "Number of read-only nodes in the instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReclaimTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的计划回收时间（UTC）。",
+		//	  "description": "Scheduled recycle time for the instance (UTC)",
 		//	  "type": "string"
 		//	}
 		"reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的计划回收时间（UTC）。",
+			Description: "Scheduled recycle time for the instance (UTC)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ShardNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "分片集群中 Shard 分片的数量。取值范围：2~32。",
+		//	  "description": "Number of shards in the sharded cluster. Range: 2–32.",
 		//	  "maximum": 32,
 		//	  "minimum": 2,
 		//	  "type": "integer"
 		//	}
 		"shard_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "分片集群中 Shard 分片的数量。取值范围：2~32。",
+			Description: "Number of shards in the sharded cluster. Range: 2–32.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Shards
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Shards 的信息列表。",
+		//	  "description": "Shard information list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Nodes": {
-		//	        "description": "Shard 分片中各节点的信息列表。",
+		//	        "description": "List of node information in each Shard.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "NodeDelayTime": {
-		//	              "description": "节点延迟时间。单位：秒。",
+		//	              "description": "Node latency. Unit: seconds.",
 		//	              "type": "integer"
 		//	            },
 		//	            "NodeId": {
-		//	              "description": "节点 ID。",
+		//	              "description": "Node ID.",
 		//	              "type": "string"
 		//	            },
 		//	            "NodeRole": {
-		//	              "description": "节点角色，取值范围如下：Primary：主节点。Secondary：从节点。Hidden：隐藏节点。ReadOnly：只读节点。",
+		//	              "description": "Node role. Options: Primary: primary node. Secondary: secondary node. Hidden: hidden node. ReadOnly: read-only node.",
 		//	              "enum": [
 		//	                "Primary",
 		//	                "Secondary",
@@ -825,39 +825,39 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "NodeSpec": {
-		//	              "description": "节点规格。",
+		//	              "description": "Node specification.",
 		//	              "type": "string"
 		//	            },
 		//	            "NodeStatus": {
-		//	              "description": "节点状态。",
+		//	              "description": "Node status.",
 		//	              "type": "string"
 		//	            },
 		//	            "TotalMemoryGB": {
-		//	              "description": "总内存。单位：GiB。",
+		//	              "description": "Total memory. Unit: GiB.",
 		//	              "type": "number"
 		//	            },
 		//	            "TotalStorageGB": {
-		//	              "description": "该节点的总存储空间。单位：GiB。",
+		//	              "description": "Total storage space for this node. Unit: GiB.",
 		//	              "type": "number"
 		//	            },
 		//	            "TotalvCPU": {
-		//	              "description": "总核数。",
+		//	              "description": "Total cores.",
 		//	              "type": "number"
 		//	            },
 		//	            "UsedMemoryGB": {
-		//	              "description": "已用内存。单位：GiB。",
+		//	              "description": "Used memory. Unit: GiB.",
 		//	              "type": "number"
 		//	            },
 		//	            "UsedStorageGB": {
-		//	              "description": "该节点已用的存储空间。单位：GiB。",
+		//	              "description": "Storage space used by this node. Unit: GiB.",
 		//	              "type": "number"
 		//	            },
 		//	            "UsedvCPU": {
-		//	              "description": "已用核数。",
+		//	              "description": "Used cores.",
 		//	              "type": "number"
 		//	            },
 		//	            "ZoneId": {
-		//	              "description": "当前节点所属的可用区 ID。",
+		//	              "description": "Availability zone ID of the current node.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -867,7 +867,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "ShardId": {
-		//	        "description": "Shard 节点的 ID。",
+		//	        "description": "Shard node ID.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -885,113 +885,113 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: NodeDelayTime
 								"node_delay_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "节点延迟时间。单位：秒。",
+									Description: "Node latency. Unit: seconds.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: NodeId
 								"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "节点 ID。",
+									Description: "Node ID.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: NodeRole
 								"node_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "节点角色，取值范围如下：Primary：主节点。Secondary：从节点。Hidden：隐藏节点。ReadOnly：只读节点。",
+									Description: "Node role. Options: Primary: primary node. Secondary: secondary node. Hidden: hidden node. ReadOnly: read-only node.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: NodeSpec
 								"node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "节点规格。",
+									Description: "Node specification.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: NodeStatus
 								"node_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "节点状态。",
+									Description: "Node status.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: TotalMemoryGB
 								"total_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "总内存。单位：GiB。",
+									Description: "Total memory. Unit: GiB.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: TotalStorageGB
 								"total_storage_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "该节点的总存储空间。单位：GiB。",
+									Description: "Total storage space for this node. Unit: GiB.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: TotalvCPU
 								"totalv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "总核数。",
+									Description: "Total cores.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: UsedMemoryGB
 								"used_memory_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "已用内存。单位：GiB。",
+									Description: "Used memory. Unit: GiB.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: UsedStorageGB
 								"used_storage_gb": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "该节点已用的存储空间。单位：GiB。",
+									Description: "Storage space used by this node. Unit: GiB.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: UsedvCPU
 								"usedv_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "已用核数。",
+									Description: "Used cores.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: ZoneId
 								"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "当前节点所属的可用区 ID。",
+									Description: "Availability zone ID of the current node.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "Shard 分片中各节点的信息列表。",
+						Description: "List of node information in each Shard.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ShardId
 					"shard_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Shard 节点的 ID。",
+						Description: "Shard node ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Shards 的信息列表。",
+			Description: "Shard information list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageSpaceGB
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "副本集实例的总存储空间，或分片集群中单个 Shard 分片的存储空间，单位：GiB，步长为 10。",
+		//	  "description": "Total storage space for replica set instances, or storage space for a single Shard in a sharded cluster. Unit: GiB, step size: 10.",
 		//	  "type": "integer"
 		//	}
 		"storage_space_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "副本集实例的总存储空间，或分片集群中单个 Shard 分片的存储空间，单位：GiB，步长为 10。",
+			Description: "Total storage space for replica set instances, or storage space for a single Shard in a sharded cluster. Unit: GiB, step size: 10.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的存储类型。当前仅支持本地 SSD 盘（即 LocalSSD）存储。",
+		//	  "description": "Instance storage type. Currently, only local SSD disks (LocalSSD) are supported.",
 		//	  "enum": [
 		//	    "LocalSSD"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的存储类型。当前仅支持本地 SSD 盘（即 LocalSSD）存储。",
+			Description: "Instance storage type. Currently, only local SSD disks (LocalSSD) are supported.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网 ID。",
+		//	  "description": "Subnet ID.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网 ID。",
+			Description: "Subnet ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SuperAccountName
@@ -999,39 +999,39 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "root",
-		//	  "description": "数据库账号名称。当前仅支持在创建实例时设置超级管理员账号，账号名称固定为 root。",
+		//	  "description": "Database account name. Currently, only the super administrator account can be set when creating an instance. The account name is fixed as root.",
 		//	  "type": "string"
 		//	}
 		"super_account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库账号名称。当前仅支持在创建实例时设置超级管理员账号，账号名称固定为 root。",
+			Description: "Database account name. Currently, only the super administrator account can be set when creating an instance. The account name is fixed as root.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SuperAccountPassword
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "root 账号的密码。密码需同时满足如下条件：只能为大小写字母、数字及以下特殊字符 _#!@$%^\u0026*()+=-。长度为 8~32 个字符。至少包含大写字母、小写字母、数字或特殊字符中的任意三种。不允许使用极易被破解的弱密码（如 Admin@123）。",
+		//	  "description": "Password for the root account. The password must meet the following requirements: Only uppercase and lowercase letters, digits, and the following special characters _#!@$%^\u0026*()+=-. Length: 8–32 characters. Must contain at least three of the following character types: uppercase letters, lowercase letters, digits, or special characters. Weak passwords that are easily cracked (such as Admin@123) are not allowed.",
 		//	  "type": "string"
 		//	}
 		"super_account_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "root 账号的密码。密码需同时满足如下条件：只能为大小写字母、数字及以下特殊字符 _#!@$%^&*()+=-。长度为 8~32 个字符。至少包含大写字母、小写字母、数字或特殊字符中的任意三种。不允许使用极易被破解的弱密码（如 Admin@123）。",
+			Description: "Password for the root account. The password must meet the following requirements: Only uppercase and lowercase letters, digits, and the following special characters _#!@$%^&*()+=-. Length: 8–32 characters. Must contain at least three of the following character types: uppercase letters, lowercase letters, digits, or special characters. Weak passwords that are easily cracked (such as Admin@123) are not allowed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "MongoDB实例的标签信息",
+		//	  "description": "MongoDB instance tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "MongoDB实例的标签。",
+		//	    "description": "MongoDB instance tags.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1048,50 +1048,50 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "MongoDB实例的标签信息",
+			Description: "MongoDB instance tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的更新时间（UTC）。",
+		//	  "description": "Instance update time (UTC).",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的更新时间（UTC）。",
+			Description: "Instance update time (UTC).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络 ID。",
+		//	  "description": "Private network ID.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络 ID。",
+			Description: "Private network ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在可用区的 ID。",
+		//	  "description": "Availability zone ID where the instance is located.",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所在可用区的 ID。",
+			Description: "Availability zone ID where the instance is located.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

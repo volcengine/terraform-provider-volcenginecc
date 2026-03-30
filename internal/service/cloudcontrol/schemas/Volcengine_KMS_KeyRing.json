@@ -5,7 +5,7 @@
     "/properties/KeyringType",
     "/properties/ProjectName"
   ],
-  "description": "用户管理密钥的集合，用户将相同类型或用途的密钥放在同一密钥环中以便于管理。",
+  "description": "A collection for managing user keys; users place keys of the same type or purpose in the same keyring for easier management",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -49,46 +49,46 @@
   ],
   "properties": {
     "CreateDate": {
-      "description": "密钥环创建日期。",
+      "description": "Keyring creation date",
       "format": "int64",
       "semantic": "createdTime",
       "type": "integer"
     },
     "Description": {
-      "description": "密钥环描述，长度为 0 - 8192 个字符。",
+      "description": "Keyring description, length: 0–8192 characters",
       "semantic": "description",
       "type": "string"
     },
     "KeyCount": {
-      "description": "密钥环密钥次数。",
+      "description": "Number of keys in keyring",
       "format": "int64",
       "type": "integer"
     },
     "KeyRingId": {
-      "description": "密钥环唯一标识符，UUID形式。",
+      "description": "Keyring unique identifier, in UUID format",
       "semantic": "resourceId",
       "type": "string"
     },
     "KeyringName": {
-      "description": "密钥环名称，长度为 2 - 31 个字符。合法字符：[a-zA-Z0-9-_]。",
+      "description": "Keyring name, length: 2–31 characters. Valid characters: [a-zA-Z0-9-_]",
       "semantic": "resourceName",
       "type": "string"
     },
     "KeyringType": {
-      "description": "密钥环类型，取值：CustomKeyring。",
+      "description": "Keyring type, value: CustomKeyring",
       "type": "string"
     },
     "ProjectName": {
-      "description": "项目名称，默认值：default。",
+      "description": "Project name, default value: default",
       "semantic": "projectName",
       "type": "string"
     },
     "UID": {
-      "description": "密钥环租户ID。",
+      "description": "Keyring tenant ID",
       "type": "string"
     },
     "UpdateDate": {
-      "description": "密钥环更新日期。",
+      "description": "Keyring update date",
       "format": "int64",
       "semantic": "updatedTime",
       "type": "integer"

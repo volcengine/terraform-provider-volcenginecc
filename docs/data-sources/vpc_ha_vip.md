@@ -21,27 +21,27 @@ Data Source schema for Volcengine::VPC::HAVIP
 
 ### Read-Only
 
-- `associated_eip_address` (String) HAVIP绑定的公网IP的IP地址。
-- `associated_eip_id` (String) HAVIP绑定的公网IP的ID。
-- `associated_instance_ids` (Set of String) 绑定HAVIP的实例ID列表。
-- `associated_instance_type` (String) 绑定HAVIP的实例类型。EcsInstance：云服务器实例。NetworkInterface：弹性网卡。
-- `created_at` (String) HAVIP的创建时间。
-- `description` (String) HAVIP的描述。长度限制为0～255个字符。
-- `ha_vip_id` (String) HAVIP的ID。
-- `ha_vip_name` (String) HAVIP的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制在0～128字符之间。
-- `ip_address` (String) HAVIP的IP地址。
-- `master_instance_id` (String) 与HAVIP绑定的主实例的ID。
-- `project_name` (String) HAVIP的项目名称。
-- `status` (String) HAVIP的状态。Available：可用。Creating：创建中。InUse：使用中。Deleting：删除中。
-- `subnet_id` (String) HAVIP所属的子网 ID。
-- `tags` (Attributes Set) HAVIP所属标签。 (see [below for nested schema](#nestedatt--tags))
-- `updated_at` (String) HAVIP最近一次的修改时间。
-- `vpc_id` (String) HAVIP所属的VPC ID。
+- `associated_eip_address` (String) IP address of the public IP bound to the HAVIP
+- `associated_eip_id` (String) ID of the public IP bound to the HAVIP
+- `associated_instance_ids` (Set of String) List of instance IDs bound to the HAVIP
+- `associated_instance_type` (String) Instance type bound to the HAVIP. EcsInstance: cloud server instance. NetworkInterface: elastic network interface
+- `created_at` (String) Creation time of the HAVIP
+- `description` (String) Description of the HAVIP. Length limit: 0–255 characters
+- `ha_vip_id` (String) ID of the HAVIP
+- `ha_vip_name` (String) Name of the HAVIP. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 0–128 characters
+- `ip_address` (String) IP address of the HAVIP
+- `master_instance_id` (String) ID of the primary instance bound to the HAVIP
+- `project_name` (String) Project name of the HAVIP
+- `status` (String) Status of the HAVIP. Available: available. Creating: creating. InUse: in use. Deleting: deleting
+- `subnet_id` (String) Subnet ID to which the HAVIP belongs
+- `tags` (Attributes Set) Tags associated with the HAVIP (see [below for nested schema](#nestedatt--tags))
+- `updated_at` (String) Last modification time of the HAVIP
+- `vpc_id` (String) VPC ID to which the HAVIP belongs
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。
-- `value` (String) 用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。
+- `key` (String) Tag key for user tags. Length range: 1–128 characters. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system automatically removes it
+- `value` (String) Tag value for user tags. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system automatically removes it

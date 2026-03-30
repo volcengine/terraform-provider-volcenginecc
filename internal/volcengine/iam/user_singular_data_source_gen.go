@@ -27,41 +27,41 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户的访问密钥。",
+		//	  "description": "Sub-user's access key.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "子用户的访问密钥。",
+		//	    "description": "Sub-user's access key.",
 		//	    "properties": {
 		//	      "AccessKeyId": {
-		//	        "description": "访问密钥ID。",
+		//	        "description": "Access key ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "CreateDate": {
-		//	        "description": "访问密钥创建时间。",
+		//	        "description": "Access key creation time.",
 		//	        "type": "string"
 		//	      },
 		//	      "Region": {
-		//	        "description": "最近一次使用的服务区域。",
+		//	        "description": "Most recently used service region.",
 		//	        "type": "string"
 		//	      },
 		//	      "RequestTime": {
-		//	        "description": "访问密钥最近一次使用时间。",
+		//	        "description": "Last used time of the access key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Service": {
-		//	        "description": "最近一次使用的服务名称。",
+		//	        "description": "Name of the most recently used service.",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "访问密钥状态。Active代表启用，Inactive代表禁用。",
+		//	        "description": "Access key status. 'Active' means enabled, 'Inactive' means disabled.",
 		//	        "type": "string"
 		//	      },
 		//	      "UpdateDate": {
-		//	        "description": "访问密钥更新时间。",
+		//	        "description": "Access key update time.",
 		//	        "type": "string"
 		//	      },
 		//	      "UserName": {
-		//	        "description": "访问密钥Secret。",
+		//	        "description": "Access key Secret.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -75,121 +75,121 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccessKeyId
 					"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥ID。",
+						Description: "Access key ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CreateDate
 					"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥创建时间。",
+						Description: "Access key creation time.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "最近一次使用的服务区域。",
+						Description: "Most recently used service region.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RequestTime
 					"request_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥最近一次使用时间。",
+						Description: "Last used time of the access key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Service
 					"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "最近一次使用的服务名称。",
+						Description: "Name of the most recently used service.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥状态。Active代表启用，Inactive代表禁用。",
+						Description: "Access key status. 'Active' means enabled, 'Inactive' means disabled.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UpdateDate
 					"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥更新时间。",
+						Description: "Access key update time.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UserName
 					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问密钥Secret。",
+						Description: "Access key Secret.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "子用户的访问密钥。",
+			Description: "Sub-user's access key.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户归属的主账号。",
+		//	  "description": "Main account to which the sub-user belongs.",
 		//	  "type": "number"
 		//	}
 		"account_id": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "子用户归属的主账号。",
+			Description: "Main account to which the sub-user belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的创建时间。",
+		//	  "description": "Sub-user's creation time.",
 		//	  "type": "string"
 		//	}
 		"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的创建时间。",
+			Description: "Sub-user's creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的描述信息，长度不超过255。",
+		//	  "description": "Description for the sub-user, up to 255 characters.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的描述信息，长度不超过255。",
+			Description: "Description for the sub-user, up to 255 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
+		//	  "description": "Display name for the sub-user, user display name. Length 1–128. Supports Chinese, English, numbers, spaces, and .-_@ characters only.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。",
+			Description: "Display name for the sub-user, user display name. Length 1–128. Supports Chinese, English, numbers, spaces, and .-_@ characters only.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Email
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的电子邮件地址。",
+		//	  "description": "Sub-user's email address.",
 		//	  "type": "string"
 		//	}
 		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的电子邮件地址。",
+			Description: "Sub-user's email address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EmailIsVerify
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
+		//	  "description": "Whether the sub-user's email address is verified. 'true' means verified, 'false' means not verified.",
 		//	  "type": "boolean"
 		//	}
 		"email_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。",
+			Description: "Whether the sub-user's email address is verified. 'true' means verified, 'false' means not verified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Groups
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户归属的用户组。",
+		//	  "description": "User group to which the sub-user belongs.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -199,73 +199,75 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"groups": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "子用户归属的用户组。",
+			Description: "User group to which the sub-user belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoginProfile
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户的登录配置。",
+		//	  "description": "Login configuration for the sub-user.",
 		//	  "properties": {
 		//	    "CreateDate": {
-		//	      "description": "登录配置创建时间。",
+		//	      "description": "Login configuration creation time.",
 		//	      "type": "string"
 		//	    },
 		//	    "LastLoginDate": {
-		//	      "description": "上次登录时间。",
+		//	      "description": "Last login time.",
 		//	      "type": "string"
 		//	    },
 		//	    "LastLoginIp": {
-		//	      "description": "上次登录IP。",
+		//	      "description": "Last login IP.",
 		//	      "type": "string"
 		//	    },
 		//	    "LastResetPasswordTime": {
-		//	      "description": "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
-		//	      "type": "number"
+		//	      "description": "Last password reset time. Last password reset time. 0 means no password has been set; a non-zero value means the timestamp when the password expires.",
+		//	      "format": "int64",
+		//	      "type": "integer"
 		//	    },
 		//	    "LoginAllowed": {
-		//	      "description": "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
+		//	      "description": "Whether login is allowed. 'true' means allowed, 'false' means not allowed. Default is 'false'.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "LoginLocked": {
-		//	      "description": "登录是否被锁定。true代表已锁定，false代表未锁定。管理员设置错误密码重试次数限制后，用户命中后登录会被锁定。",
+		//	      "description": "Whether login is locked. 'true' means locked, 'false' means not locked. After the administrator sets a limit for incorrect password retry attempts, login will be locked if the user exceeds the limit.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Password": {
-		//	      "description": "登录密码。",
+		//	      "description": "Login password.",
 		//	      "type": "string"
 		//	    },
 		//	    "PasswordExpireAt": {
-		//	      "description": "密码过期时间。0代表永不过期，非0代表过期时间的时间戳。",
-		//	      "type": "number"
+		//	      "description": "Password expiration time. '0' means never expires; non-zero means the expiration timestamp.",
+		//	      "format": "int64",
+		//	      "type": "integer"
 		//	    },
 		//	    "PasswordResetRequired": {
-		//	      "description": "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
+		//	      "description": "Whether password reset is required on next login. Whether password reset is required on next login. 'true' means password reset is required, 'false' means not required. Default is 'false'.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SafeAuthExemptDuration": {
-		//	      "description": "登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。",
+		//	      "description": "Login protection exemption duration. Supports setting 1 to 7 (days), 1 to 168 (hours), or 5 to 1440 (minutes). For unit settings, refer to the SafeAuthExemptUnit parameter.",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthExemptRequired": {
-		//	      "description": "是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。",
+		//	      "description": "Whether login protection exemption is enabled. Whether login protection exemption is enabled. 0 means disabled, 1 means enabled. When login protection exemption is enabled, after verification is completed, login will not require verification again within a certain period.",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthExemptUnit": {
-		//	      "description": "登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。",
+		//	      "description": "Login protection exemption time unit. Login protection exemption time unit. 0 represents minutes, 1 represents hours, 2 represents days.",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthFlag": {
-		//	      "description": "是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。",
+		//	      "description": "Whether login protection is enabled. 'true' means enabled, 'false' means disabled. Default is 'false'.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SafeAuthType": {
-		//	      "description": "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
+		//	      "description": "Login protection type. Login protection type. 'phone' represents mobile verification, 'email' represents email verification, 'vmfa' represents MFA device verification. Multiple login protection types can be set, separated by commas. Options: vmfa, phone, email, separated by commas.",
 		//	      "type": "string"
 		//	    },
 		//	    "UpdateDate": {
-		//	      "description": "登录配置更新时间。",
+		//	      "description": "Login configuration update time.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -275,121 +277,121 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CreateDate
 				"create_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "登录配置创建时间。",
+					Description: "Login configuration creation time.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastLoginDate
 				"last_login_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "上次登录时间。",
+					Description: "Last login time.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastLoginIp
 				"last_login_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "上次登录IP。",
+					Description: "Last login IP.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastResetPasswordTime
-				"last_reset_password_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。",
+				"last_reset_password_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Last password reset time. Last password reset time. 0 means no password has been set; a non-zero value means the timestamp when the password expires.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LoginAllowed
 				"login_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。",
+					Description: "Whether login is allowed. 'true' means allowed, 'false' means not allowed. Default is 'false'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LoginLocked
 				"login_locked": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "登录是否被锁定。true代表已锁定，false代表未锁定。管理员设置错误密码重试次数限制后，用户命中后登录会被锁定。",
+					Description: "Whether login is locked. 'true' means locked, 'false' means not locked. After the administrator sets a limit for incorrect password retry attempts, login will be locked if the user exceeds the limit.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "登录密码。",
+					Description: "Login password.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PasswordExpireAt
-				"password_expire_at": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "密码过期时间。0代表永不过期，非0代表过期时间的时间戳。",
+				"password_expire_at": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Password expiration time. '0' means never expires; non-zero means the expiration timestamp.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PasswordResetRequired
 				"password_reset_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。",
+					Description: "Whether password reset is required on next login. Whether password reset is required on next login. 'true' means password reset is required, 'false' means not required. Default is 'false'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptDuration
 				"safe_auth_exempt_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。",
+					Description: "Login protection exemption duration. Supports setting 1 to 7 (days), 1 to 168 (hours), or 5 to 1440 (minutes). For unit settings, refer to the SafeAuthExemptUnit parameter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptRequired
 				"safe_auth_exempt_required": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。",
+					Description: "Whether login protection exemption is enabled. Whether login protection exemption is enabled. 0 means disabled, 1 means enabled. When login protection exemption is enabled, after verification is completed, login will not require verification again within a certain period.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptUnit
 				"safe_auth_exempt_unit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。",
+					Description: "Login protection exemption time unit. Login protection exemption time unit. 0 represents minutes, 1 represents hours, 2 represents days.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthFlag
 				"safe_auth_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。",
+					Description: "Whether login protection is enabled. 'true' means enabled, 'false' means disabled. Default is 'false'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthType
 				"safe_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。",
+					Description: "Login protection type. Login protection type. 'phone' represents mobile verification, 'email' represents email verification, 'vmfa' represents MFA device verification. Multiple login protection types can be set, separated by commas. Options: vmfa, phone, email, separated by commas.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UpdateDate
 				"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "登录配置更新时间。",
+					Description: "Login configuration update time.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "子用户的登录配置。",
+			Description: "Login configuration for the sub-user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MobilePhone
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的手机号。",
+		//	  "description": "Sub-user's mobile number.",
 		//	  "maxLength": 20,
 		//	  "type": "string"
 		//	}
 		"mobile_phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的手机号。",
+			Description: "Sub-user's mobile number.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MobilePhoneIsVerify
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户手机号是否已验证。true代表已验证，false代表未验证。",
+		//	  "description": "Whether the sub-user's phone number is verified. 'true' means verified, 'false' means not verified.",
 		//	  "type": "boolean"
 		//	}
 		"mobile_phone_is_verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户手机号是否已验证。true代表已验证，false代表未验证。",
+			Description: "Whether the sub-user's phone number is verified. 'true' means verified, 'false' means not verified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policies
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的权限策略。",
+		//	  "description": "Sub-user's permission policy.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "权限策略。",
+		//	    "description": "Permission policy.",
 		//	    "properties": {
 		//	      "PolicyName": {
-		//	        "description": "权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。",
+		//	        "description": "Permission policy name. Length: 1–64 characters. Supports English letters, numbers, and +=,.@-_ symbols.",
 		//	        "type": "string"
 		//	      },
 		//	      "PolicyType": {
-		//	        "description": "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
+		//	        "description": "Permission policy type. 'System' indicates system preset policy, 'Custom' indicates custom policy.",
 		//	        "enum": [
 		//	          "System",
 		//	          "Custom"
@@ -411,35 +413,35 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PolicyName
 					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。",
+						Description: "Permission policy name. Length: 1–64 characters. Supports English letters, numbers, and +=,.@-_ symbols.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PolicyType
 					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。",
+						Description: "Permission policy type. 'System' indicates system preset policy, 'Custom' indicates custom policy.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "子用户对应的权限策略。",
+			Description: "Sub-user's permission policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityConfig
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户的操作保护配置。",
+		//	  "description": "Operation protection configuration for the sub-user.",
 		//	  "properties": {
 		//	    "SafeAuthClose": {
-		//	      "description": "是否开启操作保护。0代表开启，1代表关闭。",
+		//	      "description": "Whether operation protection is enabled. 0 means enabled, 1 means disabled.",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthExemptDuration": {
-		//	      "description": "操作保护的豁免时间，完成验证后在豁免时间内将不再进行验证。支持设置5至30，默认值为10。单位为分钟。",
+		//	      "description": "Operation protection exemption time. After verification is completed, no further verification is required within the exemption period. Supports values from 5 to 30; the default value is 10. Unit: minutes.",
 		//	      "type": "number"
 		//	    },
 		//	    "SafeAuthType": {
-		//	      "description": "操作保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。",
+		//	      "description": "Operation protection type. 'phone' indicates phone verification, 'email' indicates email verification, 'vmfa' indicates MFA device verification. Multiple operation protection types can be set, separated by commas.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -449,38 +451,38 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SafeAuthClose
 				"safe_auth_close": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "是否开启操作保护。0代表开启，1代表关闭。",
+					Description: "Whether operation protection is enabled. 0 means enabled, 1 means disabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthExemptDuration
 				"safe_auth_exempt_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "操作保护的豁免时间，完成验证后在豁免时间内将不再进行验证。支持设置5至30，默认值为10。单位为分钟。",
+					Description: "Operation protection exemption time. After verification is completed, no further verification is required within the exemption period. Supports values from 5 to 30; the default value is 10. Unit: minutes.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SafeAuthType
 				"safe_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "操作保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。",
+					Description: "Operation protection type. 'phone' indicates phone verification, 'email' indicates email verification, 'vmfa' indicates MFA device verification. Multiple operation protection types can be set, separated by commas.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "子用户的操作保护配置。",
+			Description: "Operation protection configuration for the sub-user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的资源标签。",
+		//	  "description": "Sub-user's resource tags.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "资源标签。",
+		//	    "description": "Resource tag.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -498,64 +500,64 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "子用户对应的资源标签。",
+			Description: "Sub-user's resource tags.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Trn
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的Trn表达式。",
+		//	  "description": "TRN expression for the sub-user.",
 		//	  "type": "string"
 		//	}
 		"trn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的Trn表达式。",
+			Description: "TRN expression for the sub-user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户对应的更新时间。",
+		//	  "description": "Update time for the sub-user.",
 		//	  "type": "string"
 		//	}
 		"update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户对应的更新时间。",
+			Description: "Update time for the sub-user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户的ID。",
+		//	  "description": "Sub-user's ID.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"user_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "子用户的ID。",
+			Description: "Sub-user's ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
+		//	  "description": "Sub-user name, username. Length 1–64. Supports English, numbers, underscores, and .-@ characters.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。",
+			Description: "Sub-user name, username. Length 1–64. Supports English, numbers, underscores, and .-@ characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

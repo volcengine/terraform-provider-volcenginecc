@@ -2,12 +2,12 @@
 page_title: "volcenginecc_alb_health_check_template Resource - terraform-provider-volcenginecc"
 subcategory: "ALB"
 description: |-
-  健康检查是确保应用程序是否可用的关键功能。ALB 通过定期对后端服务器进行健康检查，来验证这些服务器是否可以接受新的请求。当一个后端服务器不能正常响应 ALB 的健康检查请求时，来自客户端的流量不会被路由到该服务器。ALB 会将流量转发至其他状态为正常的服务器上。从而保证了服务的连续性和可靠性。ALB 健康检查是基于服务器组进行的。服务器组启用健康检查后，ALB 定期检查服务器组内的后端服务器状态。
+  Health checks are essential for ensuring application availability. ALB regularly performs health checks on backend servers to verify whether they can accept new requests. If a backend server fails to respond properly to ALB's health check requests, client traffic will not be routed to that server. ALB forwards traffic to other servers with a healthy status, ensuring service continuity and reliability. ALB health checks are performed based on server groups. Once health checks are enabled for a server group, ALB periodically checks the status of backend servers within the group.
 ---
 
 # volcenginecc_alb_health_check_template (Resource)
 
-健康检查是确保应用程序是否可用的关键功能。ALB 通过定期对后端服务器进行健康检查，来验证这些服务器是否可以接受新的请求。当一个后端服务器不能正常响应 ALB 的健康检查请求时，来自客户端的流量不会被路由到该服务器。ALB 会将流量转发至其他状态为正常的服务器上。从而保证了服务的连续性和可靠性。ALB 健康检查是基于服务器组进行的。服务器组启用健康检查后，ALB 定期检查服务器组内的后端服务器状态。
+Health checks are essential for ensuring application availability. ALB regularly performs health checks on backend servers to verify whether they can accept new requests. If a backend server fails to respond properly to ALB's health check requests, client traffic will not be routed to that server. ALB forwards traffic to other servers with a healthy status, ensuring service continuity and reliability. ALB health checks are performed based on server groups. Once health checks are enabled for a server group, ALB periodically checks the status of backend servers within the group.
 
 ## Example Usage
 
@@ -41,40 +41,40 @@ resource "volcenginecc_alb_health_check_template" "ALBHealthCheckTemplateDemo" {
 
 ### Required
 
-- `health_check_template_name` (String) 健康检查模板的名称。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点（.）、下划线（_）和短横线（-）。长度限制在1～128字符之间。
+- `health_check_template_name` (String) Name of the health check template. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can contain numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters.
 
 ### Optional
 
-- `description` (String) 健康检查描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。
-- `health_check_domain` (String) 健康检查的域名。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：需至少包含一个‘.’，且不允许以‘.’开头结尾。单个字符串由字母、数字、‘-’、‘.’字符组成，‘-’不得出现在字符串的头部或尾部。长度限制为1 ～ 128个字符。不填则此参数为空，负载均衡默认使用各后端服务器的私网IP地址进行健康检查。
-- `health_check_http_code` (String) 健康检查正常的HTTP状态码。多个状态码用以半角逗号分隔，只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：http_2xx（默认）。http_3xx（默认） 。http_4xx 。http_5xx 。
-- `health_check_http_version` (String) 健康检查HTTP协议版本。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：HTTP1.0（默认值）。HTTP1.1。
-- `health_check_interval` (Number) 执行健康检查的时间间隔，默认为2，取值1-300s 。
-- `health_check_method` (String) 健康检查的方法。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：GETHEAD（默认方法）
-- `health_check_port` (Number) 健康检查端口。取值如下：0：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。
-- `health_check_protocol` (String) 健康检查的协议。HTTPTCP。
-- `health_check_timeout` (Number) 健康检查的响应超时时间，默认为2，取值1-60s 。
-- `health_check_uri` (String) 健康检查的路径。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘&’、‘＝’字符。长度限制为1 ～ 128个字符。不填默认为“/”。
-- `healthy_threshold` (Number) 健康检查的健康阈值，默认为3，取值2-10次。
-- `project_name` (String) 健康检查模板所属项目名称。
-- `tags` (Attributes Set) 健康检查模板关联的标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `unhealthy_threshold` (Number) 健康检查的不健康阈值，默认为3，取值2-10次。
+- `description` (String) Description of the health check. Cannot start with http:// or https://. Must begin with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be 1–255 characters. If not specified, defaults to an empty string.
+- `health_check_domain` (String) Domain name for the health check. This parameter is only effective when HealthCheckProtocol is set to HTTP. Requirements: Must contain at least one '.', and cannot start or end with '.'. The string can contain letters, numbers, '-', and '.' characters. '-' cannot appear at the beginning or end of the string. Length must be between 1 and 128 characters. If not specified, this parameter is empty and the load balancer uses the private IP address of each backend server for health checks.
+- `health_check_http_code` (String) HTTP status codes indicating a successful health check. Separate multiple codes with commas. This parameter is only effective when HealthCheckProtocol is set to HTTP. Options: http_2xx (default), http_3xx (default), http_4xx, http_5xx.
+- `health_check_http_version` (String) HTTP protocol version for health checks. This parameter is effective only when HealthCheckProtocol is set to HTTP. Options: HTTP1.0 (default), HTTP1.1.
+- `health_check_interval` (Number) Interval for performing health checks. Default is 2 seconds. Range: 1–300 seconds.
+- `health_check_method` (String) Health check method. This parameter is effective only when HealthCheckProtocol is set to HTTP. Options: GETHEAD (default method)
+- `health_check_port` (Number) Port for the health check. Options: 0: Use the backend server port for health checks. 1–65535: Use the specified port for health checks.
+- `health_check_protocol` (String) Protocol for the health check. HTTP or TCP.
+- `health_check_timeout` (Number) Response timeout for the health check. Default is 2 seconds. Range: 1–60 seconds.
+- `health_check_uri` (String) Path for the health check. This parameter is only effective when HealthCheckProtocol is set to HTTP. Requirements: Must start with '/'. Can only contain letters, numbers, '-', '_', '/', '.', '%', '?', '#', '&', '=' characters. Length must be between 1 and 128 characters. If not specified, defaults to '/'.
+- `healthy_threshold` (Number) Health threshold for the health check. Default is 3. Range: 2–10 times.
+- `project_name` (String) Project name to which the health check template belongs.
+- `tags` (Attributes Set) List of tags associated with the health check template.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `unhealthy_threshold` (Number) Unhealthy threshold for health checks. Default is 3; range is 2–10 times.
 
 ### Read-Only
 
-- `create_time` (String) 健康检查模版的创建时间。
-- `health_check_template_id` (String) 健康检查模板 ID。
+- `create_time` (String) Creation time of the health check template.
+- `health_check_template_id` (String) Health check template ID.
 - `id` (String) Uniquely identifies the resource.
-- `update_time` (String) 健康检查模版最近一次的操作时间。
+- `update_time` (String) Last operation time of the health check template.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。具体规则如下：长度限制为1～128个字符。大小写敏感。不能以sys:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。
-- `value` (String) 用户标签的标签值。如果传入该参数，则必须先传入Tags.N.Key。具体规则如下：长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。
+- `key` (String) Tag key for user tags. Rules: Length must be 1–128 characters. Case-sensitive. Cannot start with any case combination of sys:. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique.
+- `value` (String) Tag value for the user tag. If you specify this parameter, you must first specify Tags.N.Key. Rules: Length must be between 0 and 256 characters. Case-sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @.
 
 ## Import
 

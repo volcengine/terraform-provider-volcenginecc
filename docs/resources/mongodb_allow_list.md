@@ -2,12 +2,12 @@
 page_title: "volcenginecc_mongodb_allow_list Resource - terraform-provider-volcenginecc"
 subcategory: "MongoDB"
 description: |-
-  文档数据库 MongoDB 版实例创建成功后，您可以为实例设置白名单，以允许外部设备访问该实例。本文介绍如何通过控制台设置白名单。
+  After you create a MongoDB document database instance, you can set an allowlist for the instance to permit external devices to access it. This article describes how to set an allowlist in the console.
 ---
 
 # volcenginecc_mongodb_allow_list (Resource)
 
-文档数据库 MongoDB 版实例创建成功后，您可以为实例设置白名单，以允许外部设备访问该实例。本文介绍如何通过控制台设置白名单。
+After you create a MongoDB document database instance, you can set an allowlist for the instance to permit external devices to access it. This article describes how to set an allowlist in the console.
 
 ## Example Usage
 
@@ -35,23 +35,23 @@ resource "volcenginecc_mongodb_allow_list" "MongoDBAllowListDemo" {
 
 ### Required
 
-- `allow_list` (Set of String) 输入 IP 地址或 CIDR 格式的 IP 地址段。
-- `allow_list_name` (String) 白名单名称，名称需同时满足如下要求：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需为 1~128 个字符。
+- `allow_list` (Set of String) Enter an IP address or a CIDR-format IP address range.
+- `allow_list_name` (String) Allowlist name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 1–128 characters.
 
 ### Optional
 
-- `allow_list_category` (String) 白名单类型。取值范围如下：Ordinary：普通白名单；Default：默认白名单。
-- `allow_list_desc` (String) 白名单的备注信息，长度不可超过 200 个字符。
-- `allow_list_type` (String) 白名单内的 IP 地址类型。当前仅支持 IPv4 地址。
-- `associated_instances` (Attributes Set) 已绑定当前白名单的实例信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associated_instances))
-- `project_name` (String) 当前白名单所属的项目。
+- `allow_list_category` (String) Allowlist type. Valid values: Ordinary: ordinary allowlist; Default: default allowlist.
+- `allow_list_desc` (String) Allowlist remarks. Maximum length: 200 characters.
+- `allow_list_type` (String) IP address type in the allowlist. Only IPv4 addresses are currently supported.
+- `associated_instances` (Attributes Set) Instance information bound to the current allowlist.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
+- `project_name` (String) Project to which the current allowlist belongs.
 
 ### Read-Only
 
-- `allow_list_id` (String) 白名单 ID。
-- `allow_list_ip_num` (Number) 白名单内的 IP 地址（或地址段）总数。
-- `associated_instance_num` (Number) 已绑定当前白名单的实例总数。
+- `allow_list_id` (String) Allowlist ID.
+- `allow_list_ip_num` (Number) Total number of IP addresses (or address ranges) in the allowlist.
+- `associated_instance_num` (Number) Total number of instances bound to the current allowlist.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--associated_instances"></a>
@@ -59,10 +59,10 @@ resource "volcenginecc_mongodb_allow_list" "MongoDBAllowListDemo" {
 
 Optional:
 
-- `instance_id` (String) 已绑定当前白名单的实例 ID。
-- `instance_name` (String) 已绑定当前白名单的实例名称。
-- `project_name` (String) 实例所属的项目名称。
-- `vpc` (String) 实例所属的私有网络 ID。
+- `instance_id` (String) Instance ID bound to the current allowlist.
+- `instance_name` (String) Instance name bound to the current allowlist.
+- `project_name` (String) Project name of the instance.
+- `vpc` (String) Private network ID of the instance.
 
 ## Import
 

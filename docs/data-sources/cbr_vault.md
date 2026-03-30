@@ -21,17 +21,17 @@ Data Source schema for Volcengine::CBR::Vault
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `endpoint` (String) 访问域名。
-- `project_name` (String) 项目名称。
-- `tags` (Attributes Set) 备份库标签。 (see [below for nested schema](#nestedatt--tags))
-- `vault_id` (String) 备份库 ID。
-- `vault_name` (String) 备份库名称。
+- `created_time` (String) Creation Time
+- `endpoint` (String) Access Domain Name
+- `project_name` (String) Project Name
+- `tags` (Attributes Set) Backup Repository Tag (see [below for nested schema](#nestedatt--tags))
+- `vault_id` (String) Backup Repository ID
+- `vault_name` (String) Backup Repository Name
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag Key
+- `value` (String) Tag Value

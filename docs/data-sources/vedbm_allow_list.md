@@ -21,22 +21,22 @@ Data Source schema for Volcengine::VEDBM::AllowList
 
 ### Read-Only
 
-- `allow_list` (String) IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。
-- `allow_list_desc` (String) 白名单描述。
-- `allow_list_id` (String) 白名单的id。
-- `allow_list_ip_num` (Number) 白名单内的 IP 地址（或地址段）总数。
-- `allow_list_name` (String) 白名单名称。
-- `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `associated_instance_num` (Number) 白名单下绑定的实例总数
-- `associated_instances` (Attributes List) 绑定的实例列表。 (see [below for nested schema](#nestedatt--associated_instances))
-- `modify_mode` (String) 修改白名单的方式，支持设置为：Cover（默认）：使用 AllowList 参数中的值覆盖原白名单。Append：在原白名单中增加 AllowList 参数中输入的 IP 地址。Delete：在原白名单中删除 AllowList 参数中输入的 IP 地址。至少需要保留一个 IP 地址。
-- `project_name` (String) 白名单所属的项目名称，当该参数留空时，新建的白名单默认加入 default 项目
+- `allow_list` (String) IP allowlist. Separate multiple IP addresses with commas (,). Duplicate entries are not allowed.
+- `allow_list_desc` (String) Allowlist description.
+- `allow_list_id` (String) Allowlist ID.
+- `allow_list_ip_num` (Number) Total number of IP addresses (or address ranges) in the allowlist.
+- `allow_list_name` (String) Allowlist name.
+- `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is currently supported.
+- `associated_instance_num` (Number) Total number of instances bound to the allowlist.
+- `associated_instances` (Attributes List) List of bound instances. (see [below for nested schema](#nestedatt--associated_instances))
+- `modify_mode` (String) How to modify the allowlist. Supported settings: Cover (default): Overwrite the original allowlist with the values in the AllowList parameter. Append: Add IP addresses entered in the AllowList parameter to the original allowlist. Delete: Remove IP addresses entered in the AllowList parameter from the original allowlist. At least one IP address must remain.
+- `project_name` (String) Project name associated with the allowlist. If left blank, the new allowlist will be added to the default project.
 
 <a id="nestedatt--associated_instances"></a>
 ### Nested Schema for `associated_instances`
 
 Read-Only:
 
-- `instance_id` (String) 实例ID。
-- `instance_name` (String) 实例名称。
-- `vpc` (String) 实例所属VPC ID。
+- `instance_id` (String) Instance ID.
+- `instance_name` (String) Instance name.
+- `vpc` (String) Instance VPC ID.

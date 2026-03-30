@@ -26,24 +26,24 @@ func nameSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命名空间的创建时间。",
+		//	  "description": "Namespace creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命名空间的创建时间。",
+			Description: "Namespace creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命名空间名称。支持小写英文、数字、英文句号（.）、短划线（-）、下划线（_），标点符号不能出现在首位或末位，也不能连续输入。长度限制为 2～90 个字符。标准版实例：同一个镜像仓库实例下，名称必须唯一。体验版实例：同一地域下，所有账号范围内的命名空间名称需要保持唯一。如果您设置的命名空间名称已被占用，请尝试其他名称或者 购买标准版实例。",
+		//	  "description": "Namespace name. Supports lowercase English letters, numbers, periods (.), hyphens (-), and underscores (_). Punctuation cannot appear at the beginning or end, nor be used consecutively. Length must be between 2 and 90 characters. Standard edition instance: The name must be unique within the same image repository instance. Trial edition instance: The namespace name must be unique across all accounts within the same region. If the namespace name you set is already taken, try another name or purchase a standard edition instance.",
 		//	  "maxLength": 90,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命名空间名称。支持小写英文、数字、英文句号（.）、短划线（-）、下划线（_），标点符号不能出现在首位或末位，也不能连续输入。长度限制为 2～90 个字符。标准版实例：同一个镜像仓库实例下，名称必须唯一。体验版实例：同一地域下，所有账号范围内的命名空间名称需要保持唯一。如果您设置的命名空间名称已被占用，请尝试其他名称或者 购买标准版实例。",
+			Description: "Namespace name. Supports lowercase English letters, numbers, periods (.), hyphens (-), and underscores (_). Punctuation cannot appear at the beginning or end, nor be used consecutively. Length must be between 2 and 90 characters. Standard edition instance: The name must be unique within the same image repository instance. Trial edition instance: The namespace name must be unique across all accounts within the same region. If the namespace name you set is already taken, try another name or purchase a standard edition instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Project
@@ -51,24 +51,24 @@ func nameSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "命名空间所属项目的名称。参数值大小写敏感，不得超过 64 个字符。参数为空时，命名空间关联默认的 default项目。",
+		//	  "description": "Name of the project to which the namespace belongs. This parameter is case-sensitive and must not exceed 64 characters. If the parameter is empty, the namespace is associated with the default project.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"project": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命名空间所属项目的名称。参数值大小写敏感，不得超过 64 个字符。参数为空时，命名空间关联默认的 default项目。",
+			Description: "Name of the project to which the namespace belongs. This parameter is case-sensitive and must not exceed 64 characters. If the parameter is empty, the namespace is associated with the default project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Registry
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "指定的镜像仓库实例名称。通过 ListRegistries 或在 镜像仓库控制台 的 实例列表页面获取。",
+		//	  "description": "Specify the image repository instance name. Obtain it via ListRegistries or from the instance list page in the image repository console.",
 		//	  "type": "string"
 		//	}
 		"registry": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "指定的镜像仓库实例名称。通过 ListRegistries 或在 镜像仓库控制台 的 实例列表页面获取。",
+			Description: "Specify the image repository instance name. Obtain it via ListRegistries or from the instance list page in the image repository console.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

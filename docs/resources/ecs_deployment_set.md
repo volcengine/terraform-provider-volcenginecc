@@ -2,12 +2,12 @@
 page_title: "volcenginecc_ecs_deployment_set Resource - terraform-provider-volcenginecc"
 subcategory: "ECS"
 description: |-
-  部署集是在底层硬件维度上控制实例分散部署的策略，可以实现物理层级的安全隔离。您可以通过创建部署集，使实例分散部署在不同的底层硬件上，用于保障业务的底层容灾能力及高可用性。
+  A deployment set is a strategy that controls the distribution of instances at the underlying hardware level, enabling physical-level security isolation. By creating deployment sets, you can distribute instances across different underlying hardware to ensure disaster recovery and high availability for your business.
 ---
 
 # volcenginecc_ecs_deployment_set (Resource)
 
-部署集是在底层硬件维度上控制实例分散部署的策略，可以实现物理层级的安全隔离。您可以通过创建部署集，使实例分散部署在不同的底层硬件上，用于保障业务的底层容灾能力及高可用性。
+A deployment set is a strategy that controls the distribution of instances at the underlying hardware level, enabling physical-level security isolation. By creating deployment sets, you can distribute instances across different underlying hardware to ensure disaster recovery and high availability for your business.
 
 ## Example Usage
 
@@ -27,34 +27,34 @@ resource "volcenginecc_ecs_deployment_set" "EcsDeploymentSetDemo" {
 
 ### Required
 
-- `deployment_set_name` (String) 部署集名称。不能以数字、中划线、下划线开头。只能包含中文、字母、数字、下划线和中划线。长度限制为1～128个字符。
+- `deployment_set_name` (String) Deployment set name. Cannot start with a digit, hyphen, or underscore. Can only contain Chinese characters, letters, digits, underscores, and hyphens. Length limit: 1–128 characters.
 
 ### Optional
 
-- `deployment_set_group_number` (Number) 部署集组的序号，取值范围：1～7。
-- `description` (String) 部署集的描述信息。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”。长度限制在255个字符以内。
-- `granularity` (String) 部署粒度，取值：host：物理机。rack：机架。switch：交换机。
-- `group_count` (Number) 部署集组数量。为部署集组高可用策略设置分组数量。取值范围：1～7。默认值：7。
-- `instance_ids` (Set of String) 部署集内的ECS实例ID列表。
-- `strategy` (String) 部署策略，取值：Availability（默认）：高可用策略。AvailabilityGroup：部署集组高可用策略。
+- `deployment_set_group_number` (Number) Deployment set group index. Value range: 1–7.
+- `description` (String) Deployment set description. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, digits, period '.', space, underscore '_', hyphen '-', equals '=', English comma ',', Chinese comma '，', and Chinese period '。'. Length limit: within 255 characters.
+- `granularity` (String) Deployment granularity. Options: host: physical machine. rack: rack. switch: switch.
+- `group_count` (Number) Number of deployment set groups. Set the group count for the deployment set group high availability policy. Value range: 1–7. Default: 7.
+- `instance_ids` (Set of String) List of ECS instance IDs in the deployment set.
+- `strategy` (String) Deployment policy. Options: Availability (default): high availability policy. AvailabilityGroup: deployment set group high availability policy.
 
 ### Read-Only
 
-- `capacities` (Attributes Set) 实例启动模板版本信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--capacities))
-- `created_at` (String) 部署集的创建时间。
-- `deployment_set_id` (String) 部署集ID。
+- `capacities` (Attributes Set) Instance launch template version information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--capacities))
+- `created_at` (String) Deployment set creation time.
+- `deployment_set_id` (String) Deployment set ID.
 - `id` (String) Uniquely identifies the resource.
-- `instance_amount` (Number) 部署集内的ECS实例数量。
+- `instance_amount` (Number) Number of ECS instances in the deployment set.
 
 <a id="nestedatt--capacities"></a>
 ### Nested Schema for `capacities`
 
 Read-Only:
 
-- `available_count` (Number) 该可用区内，还可以加入当前部署集的ECS实例数量。
-- `used_count` (Number) 部署集内属于该可用区的ECS实例数量。
-- `zone_id` (String) 可用区ID。只返回部署集内存量ECS实例所属的可用区ID。
+- `available_count` (Number) You can also include the number of ECS instances in the current deployment set within this availability zone.
+- `used_count` (Number) Number of ECS instances in the deployment set that belong to this availability zone.
+- `zone_id` (String) Availability zone ID. Only returns the availability zone ID for ECS instances in the deployment set.
 
 ## Import
 

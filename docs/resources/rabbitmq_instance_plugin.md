@@ -2,12 +2,12 @@
 page_title: "volcenginecc_rabbitmq_instance_plugin Resource - terraform-provider-volcenginecc"
 subcategory: "RabbitMQ"
 description: |-
-  在消息队列 RabbitMQ版控制台中创建实例之后，实例插件默认为关闭状态，您可以手动为实例开启/关闭插件。开启/关闭部分插件会导致集群滚动重启，建议避开业务运行时段执行该操作。集群滚动重启时会造成未持久化的消息丢失，也会出现短暂的连接不稳定现象，例如连接断开，断开后会根据客户端配置决定是否自动重连。
+  After you create an instance in the RabbitMQ console, plugins are disabled by default. You can manually enable or disable plugins for the instance. Enabling or disabling certain plugins will cause a rolling restart of the cluster. It is recommended to perform this operation outside of business hours. A rolling restart may result in the loss of non-persistent messages and temporary connection instability, such as connection drops. After a connection drop, whether the client automatically reconnects depends on its configuration
 ---
 
 # volcenginecc_rabbitmq_instance_plugin (Resource)
 
-在消息队列 RabbitMQ版控制台中创建实例之后，实例插件默认为关闭状态，您可以手动为实例开启/关闭插件。开启/关闭部分插件会导致集群滚动重启，建议避开业务运行时段执行该操作。集群滚动重启时会造成未持久化的消息丢失，也会出现短暂的连接不稳定现象，例如连接断开，断开后会根据客户端配置决定是否自动重连。
+After you create an instance in the RabbitMQ console, plugins are disabled by default. You can manually enable or disable plugins for the instance. Enabling or disabling certain plugins will cause a rolling restart of the cluster. It is recommended to perform this operation outside of business hours. A rolling restart may result in the loss of non-persistent messages and temporary connection instability, such as connection drops. After a connection drop, whether the client automatically reconnects depends on its configuration
 
 ## Example Usage
 
@@ -23,22 +23,22 @@ resource "volcenginecc_rabbitmq_instance_plugin" "instancepluginDemo" {
 
 ### Required
 
-- `instance_id` (String) 实例 ID。
+- `instance_id` (String) Instance ID
 
 ### Optional
 
-- `plugin_name` (String) 插件名称。
+- `plugin_name` (String) Plugin name
 
 ### Read-Only
 
-- `description` (String) 插件描述。
-- `disable_prompt` (String) 关闭此插件的注意事项说明。
-- `enable_prompt` (String) 开启此插件的注意事项说明。
-- `enabled` (Boolean) 是否已开启插件。true：插件已开启。false：插件已关闭。
+- `description` (String) Plugin description
+- `disable_prompt` (String) Notes for disabling this plugin
+- `enable_prompt` (String) Notes for enabling this plugin
+- `enabled` (Boolean) Whether the plugin is enabled. true: The plugin is enabled. false: The plugin is disabled
 - `id` (String) Uniquely identifies the resource.
-- `need_reboot_on_change` (Boolean) 开启或关闭插件是否会引发 RabbitMQ 实例重启。true：会重启实例。false：不会重启实例。
-- `port` (Number) 插件监听的端口。
-- `version` (String) 插件版本。
+- `need_reboot_on_change` (Boolean) Whether enabling or disabling the plugin will cause a RabbitMQ instance restart. true: The instance will restart. false: The instance will not restart
+- `port` (Number) Plugin listening port
+- `version` (String) Plugin version
 
 ## Import
 

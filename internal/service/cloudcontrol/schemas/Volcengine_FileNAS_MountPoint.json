@@ -7,61 +7,61 @@
   ],
   "definitions": {
     "Client": {
-      "description": "客户端信息。",
+      "description": "Client information.",
       "properties": {
         "Ip": {
-          "description": "客户端的私有网络 IP 地址。",
+          "description": "Client's private network IP address.",
           "type": "string"
         },
         "ProtocolVersion": {
-          "description": "挂载协议版本号。取值：NFSv3。",
+          "description": "Mount protocol version. Value: NFSv3.",
           "enum": [
             "NFSv3"
           ],
           "type": "string"
         },
         "VpcName": {
-          "description": "私有网络名称。",
+          "description": "Private network name.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "MountPoint": {
-      "description": "挂载点信息。",
+      "description": "Mount point information.",
       "properties": {
         "FileSystemId": {
-          "description": "文件系统 ID。",
+          "description": "File system ID.",
           "type": "string"
         },
         "MountPointId": {
-          "description": "挂载点 ID。",
+          "description": "Mount point ID.",
           "type": "string"
         },
         "MountPointName": {
-          "description": "挂载点名称。",
+          "description": "Mount point name.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "PermissionGroup": {
-      "description": "权限组信息。",
+      "description": "Permission group information.",
       "properties": {
         "CreateTime": {
-          "description": "权限组创建时间。",
+          "description": "Permission group creation time.",
           "type": "string"
         },
         "Description": {
-          "description": "权限组描述信息。",
+          "description": "Permission group description information.",
           "type": "string"
         },
         "FileSystemCount": {
-          "description": "关联该权限组的文件系统数量。",
+          "description": "Number of file systems associated with this permission group.",
           "type": "integer"
         },
         "FileSystemType": {
-          "description": "文件系统类型。取值说明如下：Extreme：NAS 极速型。Capacity：NAS 容量型。Cache：NAS 缓存型。",
+          "description": "File system type. Value explanation: Extreme: NAS extreme type. Capacity: NAS capacity type. Cache: NAS cache type.",
           "enum": [
             "Extreme",
             "Capacity",
@@ -70,7 +70,7 @@
           "type": "string"
         },
         "MountPoints": {
-          "description": "使用该权限组的挂载点信息。",
+          "description": "Information about mount points that use this permission group.",
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/MountPoint",
@@ -80,18 +80,18 @@
           "uniqueItems": true
         },
         "PermissionGroupName": {
-          "description": "权限组名称。",
+          "description": "Permission group name.",
           "type": "string"
         },
         "PermissionRuleCount": {
-          "description": "权限规则数量。",
+          "description": "Number of permission rules.",
           "type": "integer"
         }
       },
       "type": "object"
     }
   },
-  "description": "挂载点是 NAS 文件系统在网络环境中的连接点。NAS 文件系统需要挂载在计算节点中才能完成数据的访问与存储。挂载是将计算节点与 NAS 文件系统相连接的操作。",
+  "description": "Mount point is the connection point for the NAS file system in a network environment. The NAS file system must be mounted on a compute node to enable data access and storage. Mounting is the operation that connects the compute node to the NAS file system.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/FileSystemId",
@@ -143,7 +143,7 @@
   ],
   "properties": {
     "Clients": {
-      "description": "客户端信息。",
+      "description": "Client information.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Client",
@@ -153,43 +153,43 @@
       "uniqueItems": true
     },
     "CreatedTime": {
-      "description": "挂载点创建时间。",
+      "description": "Mount point creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Domain": {
-      "description": "DNS 地址。",
+      "description": "DNS address.",
       "type": "string"
     },
     "FileSystemId": {
-      "description": "文件系统 ID。",
+      "description": "File system ID.",
       "type": "string"
     },
     "Ip": {
-      "description": "挂载点地址。",
+      "description": "Mount point address.",
       "type": "string"
     },
     "MountPointId": {
-      "description": "挂载点 ID。",
+      "description": "Mount point ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "MountPointName": {
-      "description": "挂载点名称。",
+      "description": "Mount point name.",
       "semantic": "resourceName",
       "type": "string"
     },
     "PermissionGroup": {
       "$ref": "#/definitions/PermissionGroup",
-      "description": "挂载点绑定的权限组信息。",
+      "description": "Permission group information bound to the mount point.",
       "type": "object"
     },
     "PermissionGroupId": {
-      "description": "权限组 ID。",
+      "description": "Permission group ID.",
       "type": "string"
     },
     "Status": {
-      "description": "挂载点状态。取值：Running：运行中。Creating：创建中。Updating：更新中。Error：异常。Deleting：删除中。DeleteError：删除异常。Deleted：已删除。Stopped：已停止。",
+      "description": "Mount point status. Values: Running: Running. Creating: Creating. Updating: Updating. Error: Error. Deleting: Deleting. DeleteError: Delete error. Deleted: Deleted. Stopped: Stopped.",
       "enum": [
         "Running",
         "Creating",
@@ -204,24 +204,24 @@
       "type": "string"
     },
     "SubnetId": {
-      "description": "子网 ID。",
+      "description": "Subnet ID.",
       "type": "string"
     },
     "SubnetName": {
-      "description": "子网名称。",
+      "description": "Subnet name.",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "挂载点更新时间。",
+      "description": "Mount point update time.",
       "semantic": "updatedTime",
       "type": "string"
     },
     "VpcId": {
-      "description": "私有网络 ID。",
+      "description": "Private network ID.",
       "type": "string"
     },
     "VpcName": {
-      "description": "私有网络名称。",
+      "description": "Private network name.",
       "type": "string"
     }
   },

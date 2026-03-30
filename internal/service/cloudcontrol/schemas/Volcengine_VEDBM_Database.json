@@ -10,15 +10,15 @@
     "DatabasesPrivilege": {
       "properties": {
         "AccountName": {
-          "description": "需授权的账号名称",
+          "description": "Account name to be authorized",
           "type": "string"
         },
         "AccountPrivilege": {
-          "description": "授权数据库权限类型：ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom",
+          "description": "Database permission type: ReadWrite/ReadOnly/DDLOnly/DMLOnly/Custom",
           "type": "string"
         },
         "AccountPrivilegeDetail": {
-          "description": "具体SQL操作权限，多个用英文逗号分隔；Custom类型时必填",
+          "description": "Specific SQL operation permissions, separated by English commas; required for Custom type",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -30,7 +30,7 @@
       "type": "object"
     }
   },
-  "description": "云数据库管理",
+  "description": "Cloud Database Management",
   "filterProperties": {
     "filterableProperties": [
       "/properties/InstanceId",
@@ -76,19 +76,19 @@
   ],
   "properties": {
     "CharacterSetName": {
-      "description": "数据库字符集，可选值：utf8mb4（默认）、utf8、latin1、ascii",
+      "description": "Database character set. Options: utf8mb4 (default), utf8, latin1, ascii",
       "type": "string"
     },
     "DBDesc": {
-      "description": "数据库描述信息，长度0~256字符，可包含数字、中文、英文、下划线(_)、中划线(-)",
+      "description": "Database description, length 0–256 characters; can include numbers, Chinese and English characters, underscores (_), and hyphens (-)",
       "type": "string"
     },
     "DBName": {
-      "description": "数据库名称。命名规则：当前实例下唯一；长度2~64字符；以字母开头，字母/数字结尾；由字母、数字、下划线(_)、中划线(-)组成；不能使用预留字",
+      "description": "Database name. Naming rules: Must be unique within the current instance; length 2–64 characters; starts with a letter, ends with a letter or number; can contain letters, numbers, underscores (_), and hyphens (-); reserved words are not allowed",
       "type": "string"
     },
     "DatabasesPrivileges": {
-      "description": "数据库的权限信息",
+      "description": "Database permission information",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/DatabasesPrivilege"
@@ -97,7 +97,7 @@
       "uniqueItems": true
     },
     "InstanceId": {
-      "description": "实例ID。",
+      "description": "Instance ID",
       "semantic": "resourceId",
       "type": "string"
     }

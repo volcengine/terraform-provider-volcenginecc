@@ -26,40 +26,40 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组件所在集群 ID。",
+		//	  "description": "Cluster ID where the component is located.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组件所在集群 ID。",
+			Description: "Cluster ID where the component is located.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Config
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组件配置。",
+		//	  "description": "Component configuration.",
 		//	  "type": "string"
 		//	}
 		"config": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组件配置。",
+			Description: "Component configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+		//	  "description": "Component installation time. Standard RFC3339 format, UTC+0 time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安装组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+			Description: "Component installation time. Standard RFC3339 format, UTC+0 time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeployMode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。",
+		//	  "description": "Component deployment mode. Values: Unmanaged: deployed in unmanaged mode. Managed: deployed in managed mode.",
 		//	  "enum": [
 		//	    "Unmanaged",
 		//	    "Managed"
@@ -67,14 +67,14 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"deploy_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组件部署模式，取值：Unmanaged：非托管模式部署。Managed：托管模式部署。",
+			Description: "Component deployment mode. Values: Unmanaged: deployed in unmanaged mode. Managed: deployed in managed mode.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeployNodeType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。",
+		//	  "description": "Type of deployment node. This parameter needs to be specified only when DeployModes=Unmanaged. Values: Node: deployed as a node. VirtualNode: deployed as a virtual node.",
 		//	  "enum": [
 		//	    "Node",
 		//	    "VirtualNode"
@@ -82,34 +82,34 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"deploy_node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署节点的类型。仅DeployModes=Unmanaged时，才需要指定该参数。取值：Node：以节点方式部署。VirtualNode：以虚拟节点方式部署。",
+			Description: "Type of deployment node. This parameter needs to be specified only when DeployModes=Unmanaged. Values: Node: deployed as a node. VirtualNode: deployed as a virtual node.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组件名称。",
+		//	  "description": "Component name.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组件名称。",
+			Description: "Component name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组件状态。",
+		//	  "description": "Component status.",
 		//	  "properties": {
 		//	    "Conditions": {
-		//	      "description": "组件当前主状态下的状态条件。",
+		//	      "description": "Status conditions under the component's current primary state.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "组件状态条件。",
+		//	        "description": "Component status condition.",
 		//	        "properties": {
 		//	          "Type": {
-		//	            "description": "组件当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
+		//	            "description": "Status conditions under the component's current primary state, indicating the reasons for entering this state. Multiple reasons are possible. Parameter values include: Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -119,7 +119,7 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
-		//	      "description": "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
+		//	      "description": "Component status. Parameter values include: Running, Failed, Creating, Deleting, Updating",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -133,43 +133,43 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "组件当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
+								Description: "Status conditions under the component's current primary state, indicating the reasons for entering this state. Multiple reasons are possible. Parameter values include: Progressing, ClusterVersionUpgrading, Unknown, Degraded, NameConflict, ClusterNotRunning, CrashLoopBackOff, SchedulingFailed, ResourceCleanupFailed",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "组件当前主状态下的状态条件。",
+					Description: "Status conditions under the component's current primary state.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "组件的状态，参数值有：Running, Failed, Creating, Deleting, Updating",
+					Description: "Component status. Parameter values include: Running, Failed, Creating, Deleting, Updating",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "组件状态。",
+			Description: "Component status.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+		//	  "description": "Component update time. Standard RFC3339 format, UTC+0 time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新组件的时间。标准 RFC3339 格式的 UTC+0 时间。",
+			Description: "Component update time. Standard RFC3339 format, UTC+0 time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组件版本。",
+		//	  "description": "Component version.",
 		//	  "type": "string"
 		//	}
 		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组件版本。",
+			Description: "Component version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

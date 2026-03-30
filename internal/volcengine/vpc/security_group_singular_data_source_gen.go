@@ -27,65 +27,65 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组创建时间。",
+		//	  "description": "Security group creation time",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组创建时间。",
+			Description: "Security group creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不填默认空字符串。",
+		//	  "description": "Description of the security group. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). If not specified, defaults to an empty string",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不填默认空字符串。",
+			Description: "Description of the security group. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). If not specified, defaults to an empty string",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EgressPermissions
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+		//	  "description": "Description for outbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "源地址的IPv4 CIDR或IPv6 CIDR",
+		//	        "description": "IPv4 CIDR or IPv6 CIDR of the source address",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {
-		//	        "description": "安全组规则创建时间。",
+		//	        "description": "Security group rule creation time",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+		//	        "description": "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 		//	        "type": "string"
 		//	      },
 		//	      "Direction": {
-		//	        "description": "安全组规则方向。ingress：入方向。egress：出方向",
+		//	        "description": "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+		//	        "description": "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 		//	        "type": "string"
 		//	      },
 		//	      "PortEnd": {
-		//	        "description": "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PortStart": {
-		//	        "description": "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PrefixListCidrs": {
-		//	        "description": "前缀列表的CIDR。",
+		//	        "description": "Prefix list CIDR",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -94,24 +94,24 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "uniqueItems": true
 		//	      },
 		//	      "PrefixListId": {
-		//	        "description": "前缀列表的ID",
+		//	        "description": "Prefix list ID",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+		//	        "description": "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp、udp、icmp、icmpv6、all",
+		//	        "description": "Protocol type. tcp, udp, icmp, icmpv6, all",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceGroupId": {
-		//	        "description": "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+		//	        "description": "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 		//	        "type": "string"
 		//	      },
 		//	      "UpdateTime": {
-		//	        "description": "安全组规则更新时间。",
+		//	        "description": "Security group rule update time",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -133,115 +133,115 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址的IPv4 CIDR或IPv6 CIDR",
+						Description: "IPv4 CIDR or IPv6 CIDR of the source address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CreationTime
 					"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则创建时间。",
+						Description: "Security group rule creation time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+						Description: "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Direction
 					"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则方向。ingress：入方向。egress：出方向",
+						Description: "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+						Description: "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PortEnd
 					"port_end": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PortStart
 					"port_start": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PrefixListCidrs
 					"prefix_list_cidrs": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "前缀列表的CIDR。",
+						Description: "Prefix list CIDR",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PrefixListId
 					"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表的ID",
+						Description: "Prefix list ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+						Description: "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp、udp、icmp、icmpv6、all",
+						Description: "Protocol type. tcp, udp, icmp, icmpv6, all",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SourceGroupId
 					"source_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+						Description: "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UpdateTime
 					"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则更新时间。",
+						Description: "Security group rule update time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "安全组出向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+			Description: "Description for outbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IngressPermissions
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+		//	  "description": "Description for inbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "源地址的IPv4 CIDR或IPv6 CIDR",
+		//	        "description": "IPv4 CIDR or IPv6 CIDR of the source address",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {
-		//	        "description": "安全组规则创建时间。",
+		//	        "description": "Security group rule creation time",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+		//	        "description": "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 		//	        "type": "string"
 		//	      },
 		//	      "Direction": {
-		//	        "description": "安全组规则方向。ingress：入方向。egress：出方向",
+		//	        "description": "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+		//	        "description": "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 		//	        "type": "string"
 		//	      },
 		//	      "PortEnd": {
-		//	        "description": "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PortStart": {
-		//	        "description": "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+		//	        "description": "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "PrefixListCidrs": {
-		//	        "description": "前缀列表的CIDR。",
+		//	        "description": "Prefix list CIDR",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -250,24 +250,24 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "uniqueItems": true
 		//	      },
 		//	      "PrefixListId": {
-		//	        "description": "前缀列表的ID",
+		//	        "description": "Prefix list ID",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+		//	        "description": "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp、udp、icmp、icmpv6、all",
+		//	        "description": "Protocol type. tcp, udp, icmp, icmpv6, all",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceGroupId": {
-		//	        "description": "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+		//	        "description": "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 		//	        "type": "string"
 		//	      },
 		//	      "UpdateTime": {
-		//	        "description": "安全组规则更新时间。",
+		//	        "description": "Security group rule update time",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -289,73 +289,73 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址的IPv4 CIDR或IPv6 CIDR",
+						Description: "IPv4 CIDR or IPv6 CIDR of the source address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CreationTime
 					"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则创建时间。",
+						Description: "Security group rule creation time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则的描述信息。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1~ 255个字符。不填保持原有配置。",
+						Description: "Description for the security group rule. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1–255 characters. If not specified, the original configuration is retained",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Direction
 					"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则方向。ingress：入方向。egress：出方向",
+						Description: "Security group rule direction. ingress: inbound direction. egress: outbound direction",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "访问策略。即CidrIp 、SourceGroupId 或 PrefixListId 对应的资源访问安全组内的网卡。取值如下：accept：允许；drop：拒绝。",
+						Description: "Access policy. For resources specified by CidrIp, SourceGroupId, or PrefixListId, refers to the NICs in the security group. Values: accept (allow), drop (deny)",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PortEnd
 					"port_end": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围结束值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range end value. 1. When Protocol is set to tcp or udp, the valid range is 1–65535. 2. When Protocol is set to icmp, icmpv6, or all, only -1 is supported, indicating no port restriction",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PortStart
 					"port_start": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "端口范围起始值。1、当Protocol 传入tcp或udp时，取值范围为1~65535。2、当Protocol 传入icmp、icmpv6或all时，仅支持传入-1，表示不限制端口",
+						Description: "Port range start value. 1. When Protocol is tcp or udp, range is 1–65535. 2. When Protocol is icmp, icmpv6, or all, only -1 is supported, meaning no port restriction",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PrefixListCidrs
 					"prefix_list_cidrs": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "前缀列表的CIDR。",
+						Description: "Prefix list CIDR",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PrefixListId
 					"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "前缀列表的ID",
+						Description: "Prefix list ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则优先级，数字越小，代表优先级越高。取值范围：1～100。不填默认值：1",
+						Description: "Security group rule priority. Lower numbers indicate higher priority. Value range: 1–100. Default: 1 if not specified",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp、udp、icmp、icmpv6、all",
+						Description: "Protocol type. tcp, udp, icmp, icmpv6, all",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SourceGroupId
 					"source_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "源地址安全组ID。即该安全组中的所有网卡的地址作为源地址。",
+						Description: "Source address security group ID. All NIC addresses in this security group are used as source addresses",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UpdateTime
 					"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组规则更新时间。",
+						Description: "Security group rule update time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "安全组入向规则描述信息。未改动的信息按照原信息返回，未填或者变动的内容视为修改，请按需填写。",
+			Description: "Description for inbound security group rule. Unchanged information is returned as original; unfilled or changed content is considered modified. Please fill in as needed",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -363,73 +363,73 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "安全组所属项目名称。不填默认项目为default。",
+		//	  "description": "Project name to which the security group belongs. Default project is 'default' if not specified",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组所属项目名称。不填默认项目为default。",
+			Description: "Project name to which the security group belongs. Default project is 'default' if not specified",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组ID。",
+		//	  "description": "Security group ID",
 		//	  "type": "string"
 		//	}
 		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组ID。",
+			Description: "Security group ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认是安全组的ID。",
+		//	  "description": "Security group name. Length: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Default is security group ID if not specified",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"security_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认是安全组的ID。",
+			Description: "Security group name. Length: 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Default is security group ID if not specified",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceManaged
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组是否为托管安全组。true为托管安全组，false为非托管安全组。",
+		//	  "description": "Indicates whether the security group is managed. true means managed security group, false means unmanaged security group",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组是否为托管安全组。true为托管安全组，false为非托管安全组。",
+			Description: "Indicates whether the security group is managed. true means managed security group, false means unmanaged security group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组状态。Available为可用，Creating为创建中。",
+		//	  "description": "Security group status. Available means available for use, Creating means being created",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组状态。Available为可用，Creating为创建中。",
+			Description: "Security group status. Available means available for use, Creating means being created",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -446,39 +446,39 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组类型。1、default：默认安全组。2、normal：自定义安全组。3、VpnGW： VPN网关安全组。4、NatGW： Nat网关安全组。 5、cidr_only：CIDR-Only安全组。",
+		//	  "description": "Security group type. 1. default: default security group. 2. normal: custom security group. 3. VpnGW: VPN gateway security group. 4. NatGW: NAT gateway security group. 5. cidr_only: CIDR-Only security group",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组类型。1、default：默认安全组。2、normal：自定义安全组。3、VpnGW： VPN网关安全组。4、NatGW： Nat网关安全组。 5、cidr_only：CIDR-Only安全组。",
+			Description: "Security group type. 1. default: default security group. 2. normal: custom security group. 3. VpnGW: VPN gateway security group. 4. NatGW: NAT gateway security group. 5. cidr_only: CIDR-Only security group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组所属的VPC ID。",
+		//	  "description": "VPC ID to which the security group belongs",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组所属的VPC ID。",
+			Description: "VPC ID to which the security group belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

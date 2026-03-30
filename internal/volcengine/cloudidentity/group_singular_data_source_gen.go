@@ -26,111 +26,111 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述。",
+		//	  "description": "Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述。",
+			Description: "Description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "显示名。",
+		//	  "description": "Display Name",
 		//	  "type": "string"
 		//	}
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "显示名。",
+			Description: "Display Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组id。",
+		//	  "description": "User Group ID",
 		//	  "type": "string"
 		//	}
 		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组id。",
+			Description: "User Group ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组名称。",
+		//	  "description": "User Group Name",
 		//	  "type": "string"
 		//	}
 		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组名称。",
+			Description: "User Group Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: JoinType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组类型。",
+		//	  "description": "User Group Type",
 		//	  "type": "string"
 		//	}
 		"join_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组类型。",
+			Description: "User Group Type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Members
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组成员列表",
+		//	  "description": "User Group Member List",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "用户组成员信息",
+		//	    "description": "User Group Member Information",
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "用户描述信息",
+		//	        "description": "User Description",
 		//	        "type": "string"
 		//	      },
 		//	      "DisplayName": {
-		//	        "description": "用户显示名称。",
+		//	        "description": "User Display Name",
 		//	        "type": "string"
 		//	      },
 		//	      "Email": {
-		//	        "description": "用户邮箱。",
+		//	        "description": "User Email",
 		//	        "type": "string"
 		//	      },
 		//	      "IdentityType": {
-		//	        "description": "用户身份类型。",
+		//	        "description": "User Identity Type",
 		//	        "type": "string"
 		//	      },
 		//	      "JoinTime": {
-		//	        "description": "用户加入用户组的时间。",
+		//	        "description": "User Group Join Time",
 		//	        "type": "string"
 		//	      },
 		//	      "Phone": {
-		//	        "description": "用户手机号。",
+		//	        "description": "User Phone Number",
 		//	        "type": "string"
 		//	      },
 		//	      "Source": {
-		//	        "description": "用户来源。",
+		//	        "description": "User Source",
 		//	        "type": "string"
 		//	      },
 		//	      "UserId": {
-		//	        "description": "用户id。",
+		//	        "description": "User ID",
 		//	        "type": "string"
 		//	      },
 		//	      "UserName": {
-		//	        "description": "用户名。",
+		//	        "description": "Username",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -144,74 +144,74 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户描述信息",
+						Description: "User Description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DisplayName
 					"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户显示名称。",
+						Description: "User Display Name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Email
 					"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户邮箱。",
+						Description: "User Email",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: IdentityType
 					"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户身份类型。",
+						Description: "User Identity Type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: JoinTime
 					"join_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户加入用户组的时间。",
+						Description: "User Group Join Time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Phone
 					"phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户手机号。",
+						Description: "User Phone Number",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Source
 					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户来源。",
+						Description: "User Source",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UserId
 					"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户id。",
+						Description: "User ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UserName
 					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户名。",
+						Description: "Username",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "用户组成员列表",
+			Description: "User Group Member List",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "用户组来源。",
+		//	  "description": "User Group Source",
 		//	  "type": "string"
 		//	}
 		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "用户组来源。",
+			Description: "User Group Source",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

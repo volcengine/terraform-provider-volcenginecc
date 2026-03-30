@@ -21,31 +21,31 @@ Data Source schema for Volcengine::FileNAS::Instance
 
 ### Read-Only
 
-- `cache_performance` (Attributes) 缓存型性能信息。 (see [below for nested schema](#nestedatt--cache_performance))
-- `capacity` (Attributes) 文件系统容量。 (see [below for nested schema](#nestedatt--capacity))
-- `charge_type` (String) 计费类型，取值 PayAsYouGo，表示按量计费。
-- `create_time` (String) 创建时间
-- `description` (String) 描述信息。
-- `file_system_id` (String) 文件系统 ID。
-- `file_system_name` (String) 文件系统名称。
-- `file_system_type` (String) 文件系统类型。取值说明：Extreme：NAS 极速型；Capacity：NAS 容量型；Cache：NAS 缓存型。
-- `project_name` (String) 所属项目，默认值为 default 项目。
-- `protocol_type` (String) 文件系统协议类型。取值 NFS，表示 NFS 协议，常用于 Linux 客户端。
-- `snapshot_count` (Number) 快照数量
-- `snapshot_id` (String) 创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。
-- `status` (String) 文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。
-- `storage_type` (String) 存储类型，取值Standard，表示标准型。
-- `tags` (Attributes Set) 文件系统的标签信息 (see [below for nested schema](#nestedatt--tags))
-- `update_time` (String) 更新时间
-- `zone_id` (String) 可用区 ID。
-- `zone_name` (String) 可用区名称。
+- `cache_performance` (Attributes) Cache performance information (see [below for nested schema](#nestedatt--cache_performance))
+- `capacity` (Attributes) File system capacity (see [below for nested schema](#nestedatt--capacity))
+- `charge_type` (String) Billing type. Value: PayAsYouGo, indicates pay-as-you-go billing
+- `create_time` (String) Creation time
+- `description` (String) Description
+- `file_system_id` (String) File system ID
+- `file_system_name` (String) File system name
+- `file_system_type` (String) File system type. Possible values: Extreme: NAS Extreme type; Capacity: NAS Capacity type; Cache: NAS Cache type
+- `project_name` (String) Project, default value is the Default project
+- `protocol_type` (String) File system protocol type. Value: NFS, indicates NFS protocol, commonly used for Linux clients
+- `snapshot_count` (Number) Number of snapshots
+- `snapshot_id` (String) Snapshot ID used at creation. If this parameter is provided, the file system will be created from the snapshot
+- `status` (String) File system status. Possible values: Unknown: Status unknown. Running: File system running. Creating: File system being created. Expanding: File system being upgraded. Error: File system error. Deleting: File system being deleted. DeleteError: File system deletion failed. Deleted: File system deleted. Stopped: File system stopped.
+- `storage_type` (String) Storage type. Value: Standard, indicates standard type
+- `tags` (Attributes Set) File system tag information (see [below for nested schema](#nestedatt--tags))
+- `update_time` (String) Update time
+- `zone_id` (String) Availability Zone ID
+- `zone_name` (String) Availability Zone name
 
 <a id="nestedatt--cache_performance"></a>
 ### Nested Schema for `cache_performance`
 
 Read-Only:
 
-- `cache_bandwidth` (Number) 预配置带宽，用于增加文件系统带宽。
+- `cache_bandwidth` (Number) Provisioned bandwidth, used to increase file system bandwidth
 
 
 <a id="nestedatt--capacity"></a>
@@ -53,8 +53,8 @@ Read-Only:
 
 Read-Only:
 
-- `total` (Number) 文件系统可用总容量，单位为 GiB。
-- `used` (Number) 文件系统已使用容量，单位为 MiB。
+- `total` (Number) Total available file system capacity, in GiB
+- `used` (Number) Used file system capacity, in MiB
 
 
 <a id="nestedatt--tags"></a>
@@ -62,6 +62,6 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `type` (String) 标签类型。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `type` (String) Tag type
+- `value` (String) Tag value

@@ -27,61 +27,61 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份创建结束时间（UTC）。",
+		//	  "description": "Backup creation end time (UTC)",
 		//	  "type": "string"
 		//	}
 		"backup_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份创建结束时间（UTC）。",
+			Description: "Backup creation end time (UTC)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupFileName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份文件名。",
+		//	  "description": "Backup file name",
 		//	  "type": "string"
 		//	}
 		"backup_file_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份文件名。",
+			Description: "Backup file name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupFileSize
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份文件大小，单位为字节。",
+		//	  "description": "Backup file size (bytes)",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"backup_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "备份文件大小，单位为字节。",
+			Description: "Backup file size (bytes)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份 ID。",
+		//	  "description": "Backup ID",
 		//	  "type": "string"
 		//	}
 		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份 ID。",
+			Description: "Backup ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupMeta
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建逻辑备份类型的库表备份时，用于指定要备份的库表信息。",
+		//	  "description": "When creating a logical backup of database tables, this is used to specify the database and table information to be backed up",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Database": {
-		//	        "description": "数据库名。",
+		//	        "description": "Database name",
 		//	        "type": "string"
 		//	      },
 		//	      "Tables": {
-		//	        "description": "表名列表。",
+		//	        "description": "Table name list",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -100,25 +100,25 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Database
 					"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "数据库名。",
+						Description: "Database name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Tables
 					"tables": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "表名列表。",
+						Description: "Table name list",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "创建逻辑备份类型的库表备份时，用于指定要备份的库表信息。",
+			Description: "When creating a logical backup of database tables, this is used to specify the database and table information to be backed up",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupMethod
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份类型，取值：Physical（物理备份）、Logical（逻辑备份）、Snapshot（快照备份）。",
+		//	  "description": "Backup type. Values: Physical (physical backup), Logical (logical backup), Snapshot (snapshot backup)",
 		//	  "enum": [
 		//	    "Physical",
 		//	    "Logical",
@@ -127,47 +127,47 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"backup_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份类型，取值：Physical（物理备份）、Logical（逻辑备份）、Snapshot（快照备份）。",
+			Description: "Backup type. Values: Physical (physical backup), Logical (logical backup), Snapshot (snapshot backup)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份的名称。",
+		//	  "description": "Backup name",
 		//	  "type": "string"
 		//	}
 		"backup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份的名称。",
+			Description: "Backup name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupRegion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份所在区域。",
+		//	  "description": "Backup region",
 		//	  "type": "string"
 		//	}
 		"backup_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份所在区域。",
+			Description: "Backup region",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupStartTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份创建开始时间（UTC）。",
+		//	  "description": "Backup creation start time (UTC)",
 		//	  "type": "string"
 		//	}
 		"backup_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份创建开始时间（UTC）。",
+			Description: "Backup creation start time (UTC)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份状态，取值：Success（成功）、Failed（失败）、Running（执行中）。",
+		//	  "description": "Backup status. Values: Success, Failed, Running",
 		//	  "enum": [
 		//	    "Success",
 		//	    "Failed",
@@ -176,14 +176,14 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"backup_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份状态，取值：Success（成功）、Failed（失败）、Running（执行中）。",
+			Description: "Backup status. Values: Success, Failed, Running",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份方式，取值：Full（全量/库表备）、Increment（增量备份）、DumpAll（全库备份）。",
+		//	  "description": "Backup method. Values: Full (full/database table backup), Increment (incremental backup), DumpAll (full database backup)",
 		//	  "enum": [
 		//	    "Full",
 		//	    "Increment",
@@ -192,25 +192,25 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份方式，取值：Full（全量/库表备）、Increment（增量备份）、DumpAll（全库备份）。",
+			Description: "Backup method. Values: Full (full/database table backup), Increment (incremental backup), DumpAll (full database backup)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConsistentTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "一致性时间点。",
+		//	  "description": "Consistency time point",
 		//	  "type": "string"
 		//	}
 		"consistent_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "一致性时间点。",
+			Description: "Consistency time point",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份创建者，取值：System（系统）、User（用户）。",
+		//	  "description": "Backup creator. Values: System (system), User (user)",
 		//	  "enum": [
 		//	    "System",
 		//	    "User"
@@ -218,34 +218,34 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"create_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份创建者，取值：System（系统）、User（用户）。",
+			Description: "Backup creator. Values: System (system), User (user)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBEngineVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "兼容版本。取值：MySQL_5_7：MySQL 5.7 版本。MySQL_8_0：MySQL 8.0 版本。",
+		//	  "description": "Compatible version. Values: MySQL_5_7: MySQL 5.7 version; MySQL_8_0: MySQL 8.0 version",
 		//	  "type": "string"
 		//	}
 		"db_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "兼容版本。取值：MySQL_5_7：MySQL 5.7 版本。MySQL_8_0：MySQL 8.0 版本。",
+			Description: "Compatible version. Values: MySQL_5_7: MySQL 5.7 version; MySQL_8_0: MySQL 8.0 version",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBTableInfos
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "库表信息列表。",
+		//	  "description": "Database and table information list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Database": {
-		//	        "description": "数据库名。",
+		//	        "description": "Database name",
 		//	        "type": "string"
 		//	      },
 		//	      "Tables": {
-		//	        "description": "表名列表。",
+		//	        "description": "Table name list",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -264,95 +264,95 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Database
 					"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "数据库名。",
+						Description: "Database name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Tables
 					"tables": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "表名列表。",
+						Description: "Table name list",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "库表信息列表。",
+			Description: "Database and table information list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DownloadStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "下载状态。",
+		//	  "description": "Download status",
 		//	  "type": "string"
 		//	}
 		"download_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "下载状态。",
+			Description: "Download status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EngineType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库引擎类型。取值：InnoDB：InnoDB 引擎。RocksDB：RocksDB 引擎。",
+		//	  "description": "Database engine type. Values: InnoDB: InnoDB engine; RocksDB: RocksDB engine",
 		//	  "type": "string"
 		//	}
 		"engine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库引擎类型。取值：InnoDB：InnoDB 引擎。RocksDB：RocksDB 引擎。",
+			Description: "Database engine type. Values: InnoDB: InnoDB engine; RocksDB: RocksDB engine",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ErrorMessage
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份失败的错误信息。",
+		//	  "description": "Error message for backup failure",
 		//	  "type": "string"
 		//	}
 		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份失败的错误信息。",
+			Description: "Error message for backup failure",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份过期时间（UTC）。",
+		//	  "description": "Backup expiration time (UTC)",
 		//	  "type": "string"
 		//	}
 		"expired_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份过期时间（UTC）。",
+			Description: "Backup expiration time (UTC)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsEncrypted
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否加密。",
+		//	  "description": "Whether encrypted",
 		//	  "type": "boolean"
 		//	}
 		"is_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否加密。",
+			Description: "Whether encrypted",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsExpired
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已过期。",
+		//	  "description": "Whether expired",
 		//	  "type": "boolean"
 		//	}
 		"is_expired": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已过期。",
+			Description: "Whether expired",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

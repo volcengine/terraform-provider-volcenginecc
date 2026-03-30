@@ -26,217 +26,217 @@ func ipv6AddressBandwidthDataSource(ctx context.Context) (datasource.DataSource,
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的ID。",
+		//	  "description": "IPv6 public bandwidth ID",
 		//	  "type": "string"
 		//	}
 		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的ID。",
+			Description: "IPv6 public bandwidth ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Bandwidth
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的带宽上限。",
+		//	  "description": "IPv6 public bandwidth cap",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的带宽上限。",
+			Description: "IPv6 public bandwidth cap",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6共享带宽包的ID。",
+		//	  "description": "IPv6 shared bandwidth package ID",
 		//	  "type": "string"
 		//	}
 		"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6共享带宽包的ID。",
+			Description: "IPv6 shared bandwidth package ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BillingType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的计费类型。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+		//	  "description": "IPv6 public bandwidth billing type. 2: Pay-as-you-go - billed by bandwidth cap. 3: Pay-as-you-go - billed by actual traffic.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的计费类型。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+			Description: "IPv6 public bandwidth billing type. 2: Pay-as-you-go   - billed by bandwidth cap. 3: Pay-as-you-go   - billed by actual traffic.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BusinessStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽是否被锁定。Normal：正常。FinancialLocked：被锁定。",
+		//	  "description": "Whether IPv6 public bandwidth is locked. Normal: Normal. FinancialLocked: Locked.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽是否被锁定。Normal：正常。FinancialLocked：被锁定。",
+			Description: "Whether IPv6 public bandwidth is locked. Normal: Normal. FinancialLocked: Locked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的开通时间。",
+		//	  "description": "IPv6 public bandwidth activation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的开通时间。",
+			Description: "IPv6 public bandwidth activation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeletedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的删除时间。",
+		//	  "description": "IPv6 public bandwidth deletion time",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的删除时间。",
+			Description: "IPv6 public bandwidth deletion time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ISP
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的线路类型。BGP：BGP（多线）。",
+		//	  "description": "IPv6 public bandwidth line type. BGP: BGP (multi-line).",
 		//	  "type": "string"
 		//	}
 		"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的线路类型。BGP：BGP（多线）。",
+			Description: "IPv6 public bandwidth line type. BGP: BGP (multi-line).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽关联的实例ID。",
+		//	  "description": "Instance ID associated with IPv6 public bandwidth",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽关联的实例ID。",
+			Description: "Instance ID associated with IPv6 public bandwidth",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽关联的实例类型。EcsInstance：云服务器实例。ClbInstance：负载均衡。",
+		//	  "description": "Instance type associated with IPv6 public bandwidth. EcsInstance: Cloud server instance. ClbInstance: Load balancer.",
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽关联的实例类型。EcsInstance：云服务器实例。ClbInstance：负载均衡。",
+			Description: "Instance type associated with IPv6 public bandwidth. EcsInstance: Cloud server instance. ClbInstance: Load balancer.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Address
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6地址。",
+		//	  "description": "IPv6 address",
 		//	  "type": "string"
 		//	}
 		"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6地址。",
+			Description: "IPv6 address",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6GatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6网关的ID。",
+		//	  "description": "IPv6 gateway ID",
 		//	  "type": "string"
 		//	}
 		"ipv_6_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6网关的ID。",
+			Description: "IPv6 gateway ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽被锁定的原因。该参数只有IPv6公网带宽处于FinancialLocked状态时才有返回值。Financial：因欠费被锁定。Security：因安全被锁定。",
+		//	  "description": "Reason for IPv6 public bandwidth lock. This parameter is returned only when IPv6 public bandwidth is in FinancialLocked status. Financial: Locked due to overdue payment. Security: Locked due to security reasons.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽被锁定的原因。该参数只有IPv6公网带宽处于FinancialLocked状态时才有返回值。Financial：因欠费被锁定。Security：因安全被锁定。",
+			Description: "Reason for IPv6 public bandwidth lock. This parameter is returned only when IPv6 public bandwidth is in FinancialLocked status. Financial: Locked due to overdue payment. Security: Locked due to security reasons.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6地址的通信类型。Private：私网通信类型。Public：公网通信类型。",
+		//	  "description": "IPv6 address communication type. Private: Private network communication type. Public: Public network communication type.",
 		//	  "type": "string"
 		//	}
 		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6地址的通信类型。Private：私网通信类型。Public：公网通信类型。",
+			Description: "IPv6 address communication type. Private: Private network communication type. Public: Public network communication type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽欠费关停的时间。",
+		//	  "description": "IPv6 public bandwidth deactivation time due to overdue payment",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽欠费关停的时间。",
+			Description: "IPv6 public bandwidth deactivation time due to overdue payment",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的项目。",
+		//	  "description": "IPv6 public bandwidth project",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的项目。",
+			Description: "IPv6 public bandwidth project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceManaged
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为服务托管。",
+		//	  "description": "Service hosting status",
 		//	  "type": "boolean"
 		//	}
 		"service_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为服务托管。",
+			Description: "Service hosting status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的状态。Creating：创建中。Available：可用。",
+		//	  "description": "IPv6 public bandwidth status. Creating: Creating. Available: Available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的状态。Creating：创建中。Available：可用。",
+			Description: "IPv6 public bandwidth status. Creating: Creating. Available: Available.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签信息。",
+		//	    "description": "Tag information",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -253,28 +253,28 @@ func ipv6AddressBandwidthDataSource(ctx context.Context) (datasource.DataSource,
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息",
+			Description: "Tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网带宽的最近操作时间。",
+		//	  "description": "IPv6 public bandwidth last operation time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6公网带宽的最近操作时间。",
+			Description: "IPv6 public bandwidth last operation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

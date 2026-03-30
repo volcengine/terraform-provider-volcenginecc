@@ -7,22 +7,22 @@
     "Instance": {
       "properties": {
         "InstanceId": {
-          "description": "实例ID。",
+          "description": "Instance ID",
           "type": "string"
         },
         "InstanceName": {
-          "description": "实例名称。",
+          "description": "Instance Name",
           "type": "string"
         },
         "VPC": {
-          "description": "实例所属VPC ID。",
+          "description": "VPC ID of the instance",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "RocketMQ访问白名单。",
+  "description": "RocketMQ Access Allowlist",
   "handlers": {
     "create": {
       "permissions": [
@@ -64,44 +64,44 @@
   ],
   "properties": {
     "AllowList": {
-      "description": "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+      "description": "IP allowlist. Separate multiple IP addresses with commas (,) and do not repeat addresses",
       "type": "string"
     },
     "AllowListCategory": {
-      "description": "白名单分类。",
+      "description": "Allowlist Category",
       "type": "string"
     },
     "AllowListDesc": {
-      "description": "白名单描述。",
+      "description": "Allowlist Description",
       "semantic": "description",
       "type": "string"
     },
     "AllowListIPNum": {
-      "description": "白名单内的 IP 地址（或地址段）总数。",
+      "description": "Total number of IP addresses (or address ranges) in the allowlist",
       "format": "int64",
       "type": "integer"
     },
     "AllowListId": {
-      "description": "白名单的id。",
+      "description": "Allowlist ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "AllowListName": {
-      "description": "白名单名称。",
+      "description": "Allowlist Name",
       "semantic": "resourceName",
       "type": "string"
     },
     "AllowListType": {
-      "description": "白名单内的IP地址类型，当前仅支持IPv4。",
+      "description": "IP address type in the allowlist. Only IPv4 is supported",
       "type": "string"
     },
     "AssociatedInstanceNum": {
-      "description": "白名单下绑定的实例总数",
+      "description": "Total number of instances bound to the allowlist",
       "format": "int64",
       "type": "integer"
     },
     "AssociatedInstances": {
-      "description": "绑定的实例列表。",
+      "description": "Bound Instance List",
       "insertionOrder": true,
       "items": {
         "$ref": "#/definitions/Instance"
@@ -110,7 +110,7 @@
       "uniqueItems": true
     },
     "InstanceId": {
-      "description": "实例ID。",
+      "description": "Instance ID",
       "type": "string"
     }
   },

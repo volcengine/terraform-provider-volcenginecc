@@ -26,22 +26,22 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令内容。请根据ContentEncoding参数传入相应命令内容。命令内容不能超过16KB。",
+		//	  "description": "Command content. Enter the command content according to the ContentEncoding parameter. Command content must not exceed 16 KB.",
 		//	  "type": "string"
 		//	}
 		"command_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令内容。请根据ContentEncoding参数传入相应命令内容。命令内容不能超过16KB。",
+			Description: "Command content. Enter the command content according to the ContentEncoding parameter. Command content must not exceed 16 KB.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CommandId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义命令ID。",
+		//	  "description": "Custom command ID.",
 		//	  "type": "string"
 		//	}
 		"command_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义命令ID。",
+			Description: "Custom command ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ContentEncoding
@@ -49,7 +49,7 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "Base64",
-		//	  "description": "命令内容是否经过Base64编码处理。Base64（默认）：经过Base64编码处理。PlainText： 未进行编码处理。",
+		//	  "description": "Whether the command content is processed with Base64 encoding. Base64 (default): Processed with Base64 encoding. PlainText: Not encoded.",
 		//	  "enum": [
 		//	    "Base64",
 		//	    "PlainText"
@@ -57,30 +57,30 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"content_encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令内容是否经过Base64编码处理。Base64（默认）：经过Base64编码处理。PlainText： 未进行编码处理。",
+			Description: "Whether the command content is processed with Base64 encoding. Base64 (default): Processed with Base64 encoding. PlainText: Not encoded.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令描述，默认为空字符串。字符长度0~256。不限制特殊字符。",
+		//	  "description": "Command description. Defaults to an empty string. Character length: 0~256. No restriction on special characters.",
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令描述，默认为空字符串。字符长度0~256。不限制特殊字符。",
+			Description: "Command description. Defaults to an empty string. Character length: 0~256. No restriction on special characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableParameter
@@ -88,84 +88,84 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "创建的命令是否使用自定义参数。false：默认，表示不使用自定义参数。true：表示使用自定义参数。",
+		//	  "description": "Whether the created command uses custom parameters. false: Default, does not use custom parameters. true: Uses custom parameters.",
 		//	  "type": "boolean"
 		//	}
 		"enable_parameter": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "创建的命令是否使用自定义参数。false：默认，表示不使用自定义参数。true：表示使用自定义参数。",
+			Description: "Whether the created command uses custom parameters. false: Default, does not use custom parameters. true: Uses custom parameters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InvocationTimes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令被调用次数。",
+		//	  "description": "Number of times the command has been invoked.",
 		//	  "type": "integer"
 		//	}
 		"invocation_times": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "命令被调用次数。",
+			Description: "Number of times the command has been invoked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令名称。字符长度1~32。不限制特殊字符。",
+		//	  "description": "Command name. Character length: 1~32. No restriction on special characters.",
 		//	  "maxLength": 32,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令名称。字符长度1~32。不限制特殊字符。",
+			Description: "Command name. Character length: 1~32. No restriction on special characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ParameterDefinitions
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义参数定义信息。",
+		//	  "description": "Custom parameter definition information.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "DecimalPrecision": {
 		//	        "default": 0,
-		//	        "description": "自定义参数值（数字）允许的小数点后位数。",
+		//	        "description": "Allowed decimal places for custom parameter (number).",
 		//	        "maximum": 10,
 		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "DefaultValue": {
-		//	        "description": "自定义参数默认值。",
+		//	        "description": "Default value for custom parameter.",
 		//	        "type": "string"
 		//	      },
 		//	      "MaxLength": {
-		//	        "description": "自定义参数值（字符串）的最大长度。",
+		//	        "description": "Maximum length for custom parameter (string).",
 		//	        "maximum": 1000,
 		//	        "type": "integer"
 		//	      },
 		//	      "MaxValue": {
-		//	        "description": "自定义参数值（数字）的最大值。",
+		//	        "description": "Maximum value for custom parameter (number).",
 		//	        "type": "string"
 		//	      },
 		//	      "MinLength": {
-		//	        "description": "自定义参数值（字符串）的最小长度。",
+		//	        "description": "Minimum length for custom parameter (string).",
 		//	        "maximum": 1000,
 		//	        "type": "integer"
 		//	      },
 		//	      "MinValue": {
-		//	        "description": "自定义参数值（数字）的最小值。",
+		//	        "description": "Minimum value for custom parameter (number).",
 		//	        "type": "string"
 		//	      },
 		//	      "Name": {
-		//	        "description": "自定义参数名称，需要在脚本中通过{{Param}}定义 。单个参数名不能超过64字节。遵循Shell变量命名规则，a-zA-Z0-9-_的组合。首个字符不能以数字开头。中间不能有空格，可以使用下划线。",
+		//	        "description": "Custom parameter name. Define it in the script using {{Param}}. Each parameter name must not exceed 64 bytes. Follow Shell variable naming rules: combinations of a-z, A-Z, 0-9, -, and _. The first character cannot be a digit. No spaces allowed; underscores can be used instead.",
 		//	        "maxLength": 64,
 		//	        "type": "string"
 		//	      },
 		//	      "Required": {
-		//	        "description": "是否必填。",
+		//	        "description": "Whether it is required.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Type": {
-		//	        "description": "自定义参数类型。取值：String：表示自定义参数类型为String（字符串）类型。Digit：表示自定义参数类型为Digit（数值）类型。",
+		//	        "description": "Custom parameter type. Values: String: Indicates the custom parameter type is String (string type). Digit: Indicates the custom parameter type is Digit (numeric type).",
 		//	        "enum": [
 		//	          "String",
 		//	          "Digit"
@@ -183,92 +183,92 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DecimalPrecision
 					"decimal_precision": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（数字）允许的小数点后位数。",
+						Description: "Allowed decimal places for custom parameter (number).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DefaultValue
 					"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数默认值。",
+						Description: "Default value for custom parameter.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MaxLength
 					"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（字符串）的最大长度。",
+						Description: "Maximum length for custom parameter (string).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MaxValue
 					"max_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（数字）的最大值。",
+						Description: "Maximum value for custom parameter (number).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MinLength
 					"min_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（字符串）的最小长度。",
+						Description: "Minimum length for custom parameter (string).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MinValue
 					"min_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数值（数字）的最小值。",
+						Description: "Minimum value for custom parameter (number).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数名称，需要在脚本中通过{{Param}}定义 。单个参数名不能超过64字节。遵循Shell变量命名规则，a-zA-Z0-9-_的组合。首个字符不能以数字开头。中间不能有空格，可以使用下划线。",
+						Description: "Custom parameter name. Define it in the script using {{Param}}. Each parameter name must not exceed 64 bytes. Follow Shell variable naming rules: combinations of a-z, A-Z, 0-9, -, and _. The first character cannot be a digit. No spaces allowed; underscores can be used instead.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Required
 					"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否必填。",
+						Description: "Whether it is required.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "自定义参数类型。取值：String：表示自定义参数类型为String（字符串）类型。Digit：表示自定义参数类型为Digit（数值）类型。",
+						Description: "Custom parameter type. Values: String: Indicates the custom parameter type is String (string type). Digit: Indicates the custom parameter type is Digit (numeric type).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "自定义参数定义信息。",
+			Description: "Custom parameter definition information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源所属项目，一个资源只能归属于一个项目。",
+		//	  "description": "Project to which the resource belongs. Each resource can belong to only one project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源所属项目，一个资源只能归属于一个项目。",
+			Description: "Project to which the resource belongs. Each resource can belong to only one project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Provider
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令的提供方。",
+		//	  "description": "Command provider.",
 		//	  "type": "string"
 		//	}
 		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令的提供方。",
+			Description: "Command provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签键值对。",
+		//	  "description": "Tag key-value pair.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+		//	        "description": "User tag key. Naming rules: must not start with any case combination of volc: or sys:. Only language characters, digits, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+		//	        "description": "User tag value. Naming rules: only language characters, digits, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length must be between 0 and 256 characters.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -288,17 +288,17 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+						Description: "User tag key. Naming rules: must not start with any case combination of volc: or sys:. Only language characters, digits, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+						Description: "User tag value. Naming rules: only language characters, digits, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length must be between 0 and 256 characters.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签键值对。",
+			Description: "Tag key-value pair.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Timeout
@@ -306,20 +306,20 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": 60,
-		//	  "description": "创建的命令在ECS实例中执行时最大的超时时间，单位为秒。取值范围：30~86400。默认值：60。",
+		//	  "description": "Maximum timeout for executing the created command on ECS instances, in seconds. Value range: 30~86400. Default: 60.",
 		//	  "maximum": 86400,
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
 		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "创建的命令在ECS实例中执行时最大的超时时间，单位为秒。取值范围：30~86400。默认值：60。",
+			Description: "Maximum timeout for executing the created command on ECS instances, in seconds. Value range: 30~86400. Default: 60.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "命令的类型。Shell：表示创建一个在Linux实例中运行的Shell脚本。Python：表示创建一个Python脚本。Bat：表示创建一个Bat脚本。PowerShell：表示创建一个PowerShell脚本。",
+		//	  "description": "Command type. Shell: Creates a Shell script for Linux instances. Python: Creates a Python script. Bat: Creates a Bat script. PowerShell: Creates a PowerShell script.",
 		//	  "enum": [
 		//	    "Shell",
 		//	    "Python",
@@ -329,40 +329,40 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "命令的类型。Shell：表示创建一个在Linux实例中运行的Shell脚本。Python：表示创建一个Python脚本。Bat：表示创建一个Bat脚本。PowerShell：表示创建一个PowerShell脚本。",
+			Description: "Command type. Shell: Creates a Shell script for Linux instances. Python: Creates a Python script. Bat: Creates a Bat script. PowerShell: Creates a PowerShell script.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "执行命令时的用户名。",
+		//	  "description": "Username for executing the command.",
 		//	  "type": "string"
 		//	}
 		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "执行命令时的用户名。",
+			Description: "Username for executing the command.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WorkingDir
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建的命令在ECS实例中运行的目录。",
+		//	  "description": "Directory where the created command runs on ECS instances.",
 		//	  "type": "string"
 		//	}
 		"working_dir": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建的命令在ECS实例中运行的目录。",
+			Description: "Directory where the created command runs on ECS instances.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

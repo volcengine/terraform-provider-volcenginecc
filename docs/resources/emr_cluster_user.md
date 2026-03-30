@@ -2,12 +2,12 @@
 page_title: "volcenginecc_emr_cluster_user Resource - terraform-provider-volcenginecc"
 subcategory: "EMR"
 description: |-
-  E-MapReduce（EMR）集群中的用户分为普通用户和系统用户两类。其中:普通用户是您在用户管理模块手动通过导入、创建操作向集群中添加的用户；系统用户则是集群在初始化过程中为每个组件内置的管理用户，不支持编辑和删除操作。
+  Users in an E-MapReduce (EMR) cluster are divided into regular users and system users. Regular users are added to the cluster manually through import or creation in the user management module. System users are built-in management users for each component created during cluster initialization and cannot be edited or deleted.
 ---
 
 # volcenginecc_emr_cluster_user (Resource)
 
-E-MapReduce（EMR）集群中的用户分为普通用户和系统用户两类。其中:普通用户是您在用户管理模块手动通过导入、创建操作向集群中添加的用户；系统用户则是集群在初始化过程中为每个组件内置的管理用户，不支持编辑和删除操作。
+Users in an E-MapReduce (EMR) cluster are divided into regular users and system users. Regular users are added to the cluster manually through import or creation in the user management module. System users are built-in management users for each component created during cluster initialization and cannot be edited or deleted.
 
 ## Example Usage
 
@@ -26,22 +26,22 @@ resource "volcenginecc_emr_cluster_user" "EMRClusterUserDemo" {
 
 ### Required
 
-- `cluster_id` (String) 集群ID。
-- `password` (String) 新的用户的登录密码。密码的长度需在8-20个字符之间，支持数字，字母，-，_ 且 至少包含1个数字和1个字母。
-- `user_name` (String) 集群用户名。仅支持小写字母。
+- `cluster_id` (String) Cluster ID.
+- `password` (String) New user login password. Password must be 8–20 characters long, support numbers, letters, -, _, and contain at least one number and one letter.
+- `user_name` (String) Cluster username. Only lowercase letters are supported.
 
 ### Optional
 
-- `description` (String) 用户组描述。
-- `old_password` (String) 旧的用户的登录密码。修改密码时必填。
-- `user_group_names` (Set of String) 所属用户组名称。
+- `description` (String) User group description.
+- `old_password` (String) Old user login password. Required when changing password.
+- `user_group_names` (Set of String) User group name.
 
 ### Read-Only
 
-- `created_time` (Number) 创建时间。
-- `creator_name` (String) 创建者用户名。
+- `created_time` (Number) Creation time.
+- `creator_name` (String) Creator username.
 - `id` (String) Uniquely identifies the resource.
-- `updated_time` (Number) 更新时间。
+- `updated_time` (Number) Last updated time.
 
 ## Import
 

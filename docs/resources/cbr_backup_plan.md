@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cbr_backup_plan Resource - terraform-provider-volcenginecc"
 subcategory: "CBR"
 description: |-
-  当需要对备份源进行自动备份时，可以创建备份计划，在备份计划中关联备份源和备份策略，指定备份存储空间，并设置备份数据保留规则等。在创建备份计划后，系统将按照关联备份策略配置，对指定备份源进行统一自动备份。
+  To enable automatic backup for backup sources, you can create a backup plan, associate backup sources and backup policies within the plan, specify backup storage space, and set backup data retention rules. After creating the backup plan, the system will automatically back up the specified sources in a unified manner according to the associated backup policy configuration
 ---
 
 # volcenginecc_cbr_backup_plan (Resource)
 
-当需要对备份源进行自动备份时，可以创建备份计划，在备份计划中关联备份源和备份策略，指定备份存储空间，并设置备份数据保留规则等。在创建备份计划后，系统将按照关联备份策略配置，对指定备份源进行统一自动备份。
+To enable automatic backup for backup sources, you can create a backup plan, associate backup sources and backup policies within the plan, specify backup storage space, and set backup data retention rules. After creating the backup plan, the system will automatically back up the specified sources in a unified manner according to the associated backup policy configuration
 
 ## Example Usage
 
@@ -33,39 +33,39 @@ resource "volcenginecc_cbr_backup_plan" "CBRBackupPlanDemo" {
 
 ### Required
 
-- `name` (String) 备份计划名称。
-- `resource_list` (Attributes Set) 备份源列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--resource_list))
+- `name` (String) Backup Plan Name
+- `resource_list` (Attributes Set) Backup Source List
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--resource_list))
 
 ### Optional
 
-- `policy_id` (String) 备份策略 ID。
+- `policy_id` (String) Backup Policy ID
 
 ### Read-Only
 
-- `account_id` (String) 创建此计划的账户 ID。
-- `created_time` (String) 创建时间。
+- `account_id` (String) Account ID that created this plan
+- `created_time` (String) Creation Time
 - `id` (String) Uniquely identifies the resource.
-- `plan_id` (String) 备份计划 ID。
-- `policy` (Attributes) 备份策略。 (see [below for nested schema](#nestedatt--policy))
-- `updated_time` (String) 更新时间。
+- `plan_id` (String) Backup Plan ID
+- `policy` (Attributes) Backup Policy (see [below for nested schema](#nestedatt--policy))
+- `updated_time` (String) Update Time
 
 <a id="nestedatt--resource_list"></a>
 ### Nested Schema for `resource_list`
 
 Required:
 
-- `meta_information` (Attributes) 资源的meta信息，创建备份计划时，用于存储额外的配置。 (see [below for nested schema](#nestedatt--resource_list--meta_information))
-- `resource_id` (String) 备份源 ID。
-- `resource_type` (String) 备份源类型，取值如下：ECS：ECS 整机备份。vePFS：vePFS 文件系统备份。
+- `meta_information` (Attributes) Resource meta information, used to store additional configuration when creating a backup plan (see [below for nested schema](#nestedatt--resource_list--meta_information))
+- `resource_id` (String) Backup Source ID
+- `resource_type` (String) Backup source type. Options: ECS: ECS full machine backup. vePFS: vePFS file system backup
 
 <a id="nestedatt--resource_list--meta_information"></a>
 ### Nested Schema for `resource_list.meta_information`
 
 Optional:
 
-- `ecs_meta` (String) ECS 的元数据，是一个 JSON string。
-- `vepfs_meta` (String) vePFS 备份源元数据，是一个 JSON string。
+- `ecs_meta` (String) ECS metadata, which is a JSON string
+- `vepfs_meta` (String) vePFS backup source metadata, which is a JSON string
 
 
 
@@ -74,16 +74,16 @@ Optional:
 
 Read-Only:
 
-- `account_id` (String) 创建此策略的账户 ID。
-- `backup_type` (String) 备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。
-- `created_time` (String) 创建时间。
-- `crontab` (String) 用于指定备份周期，支持标准 crontab 表达式配置。
-- `enable_policy` (Boolean) 是否启用策略，取值说明如下：true：启用策略。false：禁用策略。
-- `name` (String) 策略名称。
-- `plan_number` (Number) 该策略已关联的备份计划数量。
-- `policy_id` (String) 备份策略 ID。
-- `retention_day` (Number) 恢复点保留时间，-1 表示持续保留。
-- `updated_time` (String) 更新时间。
+- `account_id` (String) Account ID that created this policy
+- `backup_type` (String) Backup type. Options: FULL: Full backup. INCREMENTAL: Incremental backup
+- `created_time` (String) Creation Time
+- `crontab` (String) Specifies the backup schedule. Supports standard crontab expressions
+- `enable_policy` (Boolean) Whether the policy is enabled. Options: true: Enable policy. false: Disable policy
+- `name` (String) Policy Name
+- `plan_number` (Number) Number of backup plans associated with this policy
+- `policy_id` (String) Backup Policy ID
+- `retention_day` (Number) Retention time for recovery points. -1 means retain indefinitely
+- `updated_time` (String) Update Time
 
 ## Import
 

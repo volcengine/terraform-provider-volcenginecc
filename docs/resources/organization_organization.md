@@ -2,12 +2,12 @@
 page_title: "volcenginecc_organization_organization Resource - terraform-provider-volcenginecc"
 subcategory: "Organization"
 description: |-
-  企业组织管理
+  Enterprise Organization Management
 ---
 
 # volcenginecc_organization_organization (Resource)
 
-企业组织管理
+Enterprise Organization Management
 
 ## Example Usage
 
@@ -22,26 +22,26 @@ resource "volcenginecc_organization_organization" "organizationDemo" {
 
 ### Optional
 
-- `organization` (Attributes) 组织详情 (see [below for nested schema](#nestedatt--organization))
-- `owner` (Attributes) 管理员详情 (see [below for nested schema](#nestedatt--owner))
+- `organization` (Attributes) Organization Details (see [below for nested schema](#nestedatt--organization))
+- `owner` (Attributes) Administrator Details (see [below for nested schema](#nestedatt--owner))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `organization_id` (String) 组织ID
+- `organization_id` (String) Organization ID
 
 <a id="nestedatt--organization"></a>
 ### Nested Schema for `organization`
 
 Read-Only:
 
-- `created_time` (String) 创建时间
-- `description` (String) 描述
-- `name` (String) 组织名称
-- `owner` (String) 管理员ID
-- `status` (Number) 状态
-- `type` (Number) 组织类型，企业组织固定是 1
-- `updated_time` (String) 更新时间
+- `created_time` (String) Creation Time
+- `description` (String) Description
+- `name` (String) Organization Name
+- `owner` (String) Administrator ID
+- `status` (Number) Status
+- `type` (Number) Organization type, enterprise organization is always 1
+- `updated_time` (String) Last Updated
 
 
 <a id="nestedatt--owner"></a>
@@ -49,9 +49,9 @@ Read-Only:
 
 Read-Only:
 
-- `account_id` (Number) 账号ID
-- `account_name` (String) 账号名称
-- `main_name` (String) 主体名称
+- `account_id` (Number) Account ID
+- `account_name` (String) Account Name
+- `main_name` (String) Entity Name
 
 ## Import
 

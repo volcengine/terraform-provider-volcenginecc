@@ -21,34 +21,34 @@ Data Source schema for Volcengine::VPC::Subnet
 
 ### Read-Only
 
-- `account_id` (String) 子网所属账户的ID。
-- `available_ip_address_count` (Number) 子网中可用的IP地址数量。
-- `cidr_block` (String) 子网的IPv4网段。
-- `created_time` (String) 子网的创建时间。
-- `description` (String) 子网的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。），不能以http://或https://开头。
-- `enable_ipv_6` (Boolean) 开启/关闭IPv6功能。仅当子网所属的VPC开通IPv6功能时，可配置此参数。1、true：开启。2、false：关闭。仅当子网内没有分配IPv6地址的云资源时，可配置此取值。
-- `ipv_6_cidr_block` (String) 子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。
-- `is_default` (Boolean) 该子网是否为默认子网。1、true：默认子网，表示该子网是创建ECS实例时系统自动创建的子网。2、false：非默认子网，表示该子网是用户手动创建的。
-- `network_acl_id` (String) 子网关联的网络ACL的ID。
-- `project_name` (String) 子网所在VPC实例所属项目的名称。
-- `read_ipv_6_cidr_block` (String) 只读字段，子网IPv6网段。
-- `route_table` (Attributes) 路由表信息。 (see [below for nested schema](#nestedatt--route_table))
-- `status` (String) 子网的状态。1、Pending：表示配置中。2、Available：表示可用。
-- `subnet_id` (String) 待修改信息的子网的ID。
-- `subnet_name` (String) 子网的名称，长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-），不能以http://或https://开头，不填默认是子网的ID。
-- `tags` (Attributes Set) 子网的标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `total_ipv_4_count` (Number) 子网下可用IP总数。
-- `updated_time` (String) 子网的更新时间。
-- `vpc_id` (String) 子网所属VPC的ID。
-- `zone_id` (String) 要创建的子网所属的可用区ID，更多可用区信息请参见地域和可用区。
+- `account_id` (String) ID of the account to which the subnet belongs
+- `available_ip_address_count` (Number) Number of available IP addresses in the subnet
+- `cidr_block` (String) Subnet IPv4 CIDR block
+- `created_time` (String) Subnet creation time
+- `description` (String) Subnet description. Limited to 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Cannot start with http:// or https://
+- `enable_ipv_6` (Boolean) Enable or disable IPv6. This parameter can be configured only if the VPC to which the subnet belongs has IPv6 enabled. 1. true: Enable. 2. false: Disable. This value can be configured only if no cloud resources in the subnet have assigned IPv6 addresses
+- `ipv_6_cidr_block` (String) Subnet IPv6 CIDR block. 1. When creating or modifying, enter the last 8 bits of the subnet IPv6 CIDR block (subnet mask is fixed at /64). 2. This parameter is supported only when EnableIpv6 is set to true. 3. Value range: 0–255. Mask is fixed at /64
+- `is_default` (Boolean) Whether the subnet is a default subnet. 1. true: Default subnet, created automatically when an ECS instance is created. 2. false: Non-default subnet, created manually by the user
+- `network_acl_id` (String) ID of the network ACL associated with the subnet
+- `project_name` (String) Name of the project associated with the VPC instance where the subnet resides
+- `read_ipv_6_cidr_block` (String) Read-only field, subnet IPv6 CIDR block
+- `route_table` (Attributes) Route table information (see [below for nested schema](#nestedatt--route_table))
+- `status` (String) Subnet status. 1. Pending: Configuring. 2. Available: Available
+- `subnet_id` (String) ID of the subnet whose information is to be modified
+- `subnet_name` (String) Subnet name, limited to 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Cannot start with http:// or https://. If not specified, defaults to the subnet ID
+- `tags` (Attributes Set) Subnet tag information (see [below for nested schema](#nestedatt--tags))
+- `total_ipv_4_count` (Number) Total number of available IPs in the subnet
+- `updated_time` (String) Subnet update time
+- `vpc_id` (String) ID of the VPC to which the subnet belongs
+- `zone_id` (String) Availability zone ID for the subnet to be created. For more information, see Regions and Availability Zones
 
 <a id="nestedatt--route_table"></a>
 ### Nested Schema for `route_table`
 
 Read-Only:
 
-- `route_table_id` (String) 子网关联的路由表ID。
-- `route_table_type` (String) 子网关联的路由表的类型。1、System：表示系统路由表。2、Custom：表示自定义路由表。
+- `route_table_id` (String) ID of the route table associated with the subnet
+- `route_table_type` (String) Type of route table associated with the subnet. 1. System: System route table. 2. Custom: Custom route table
 
 
 <a id="nestedatt--tags"></a>
@@ -56,5 +56,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key
+- `value` (String) User tag value

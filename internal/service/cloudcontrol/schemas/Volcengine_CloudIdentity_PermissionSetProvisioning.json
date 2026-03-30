@@ -4,7 +4,7 @@
     "/properties/PermissionSetId",
     "/properties/TargetId"
   ],
-  "description": "给指定的账号部署权限集。",
+  "description": "Deploy permission set to the specified account",
   "filterProperties": {
     "filterableProperties": [
       "/properties/PermissionSetId",
@@ -42,35 +42,35 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "PermissionSetId": {
-      "description": "权限集 ID。",
+      "description": "Permission set ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "PermissionSetName": {
-      "description": "权限集名。",
+      "description": "Permission set name",
       "semantic": "resourceName",
       "type": "string"
     },
     "ProvisioningStatus": {
-      "description": "权限集状态 Running：运行中,Reprovision Required：需要重新部署,Provision Failed：部署失败,Provisioned：已部署",
+      "description": "Permission set status Running: In progress, Reprovision Required: Redeployment required, Provision Failed: Deployment failed, Provisioned: Deployed",
       "semantic": "status",
       "type": "string"
     },
     "TargetId": {
-      "description": "授权的账号 ID。",
+      "description": "Authorized account ID",
       "type": "string"
     },
     "TargetName": {
-      "description": "账号名。",
+      "description": "Account name",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "更新时间。",
+      "description": "Update time",
       "semantic": "updatedTime",
       "type": "string"
     }

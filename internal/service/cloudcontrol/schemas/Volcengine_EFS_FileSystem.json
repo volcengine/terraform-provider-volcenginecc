@@ -9,65 +9,65 @@
   ],
   "definitions": {
     "ChargeConfig": {
-      "description": "文件系统计费配置。",
+      "description": "File system billing configuration.",
       "properties": {
         "ChargeStatus": {
-          "description": "计费状态，取值说明如下：WaitingPaid：等待支付,Pending：创建中,Modifying：更配中,Failed：失败,Normal：正常,Expired：过期,Overdue：欠费,Reclaimed：回收,Terminated：退订。",
+          "description": "Billing status. Value description: WaitingPaid: Waiting for payment, Pending: Creating, Modifying: Reconfiguring, Failed: Failed, Normal: Normal, Expired: Expired, Overdue: Overdue, Reclaimed: Reclaimed, Terminated: Unsubscribed.",
           "type": "string"
         },
         "ChargeType": {
-          "description": "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+          "description": "Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.",
           "type": "string"
         },
         "ExpireTime": {
-          "description": "到期时间。",
+          "description": "Expiration time.",
           "type": "string"
         },
         "ReclaimTime": {
-          "description": "回收时间。",
+          "description": "Recycle time.",
           "type": "string"
         },
         "StopTime": {
-          "description": "关停时间。",
+          "description": "Shutdown time.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "Performance": {
-      "description": "文件系统性能信息。",
+      "description": "File system performance information.",
       "properties": {
         "BandwidthMode": {
-          "description": "带宽模式，取值说明如下：Baseline：基线带宽模式,Provisioned：预置带宽模式",
+          "description": "Bandwidth mode. Value description: Baseline: Baseline bandwidth mode, Provisioned: Provisioned bandwidth mode.",
           "type": "string"
         },
         "BaselineBandwidth": {
-          "description": "基准带宽。",
+          "description": "Baseline bandwidth.",
           "format": "int32",
           "type": "integer"
         },
         "BaselineIops": {
-          "description": "基准 IOPS。",
+          "description": "Baseline IOPS.",
           "format": "int32",
           "type": "integer"
         },
         "BurstBandwidth": {
-          "description": "突发带宽。",
+          "description": "Burst bandwidth.",
           "format": "int32",
           "type": "integer"
         },
         "BurstIops": {
-          "description": "突发 IOPS。",
+          "description": "Burst IOPS.",
           "format": "int32",
           "type": "integer"
         },
         "ProvisionedBandwidth": {
-          "description": "预置带宽。",
+          "description": "Provisioned bandwidth.",
           "format": "int32",
           "type": "integer"
         },
         "ProvisionedIops": {
-          "description": "预置 IOPS。",
+          "description": "Provisioned IOPS.",
           "format": "int32",
           "type": "integer"
         }
@@ -78,25 +78,25 @@
       "type": "object"
     },
     "Storage": {
-      "description": "文件系统容量信息。",
+      "description": "File system capacity information.",
       "properties": {
         "CapacityLimit": {
-          "description": "容量上限，单位为 MiB。",
+          "description": "Capacity limit, in MiB.",
           "format": "int64",
           "type": "integer"
         },
         "CapacityUsed": {
-          "description": "已用容量，单位为 MiB。",
+          "description": "Used capacity, in MiB.",
           "format": "int64",
           "type": "integer"
         },
         "InodeLimit": {
-          "description": "文件数上限。",
+          "description": "File count limit.",
           "format": "int64",
           "type": "integer"
         },
         "InodeUsed": {
-          "description": "已用文件数。",
+          "description": "Used file count.",
           "format": "int64",
           "type": "integer"
         }
@@ -104,25 +104,25 @@
       "type": "object"
     },
     "Tag": {
-      "description": "标签键值对。",
+      "description": "Tag key-value pair.",
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key.",
           "type": "string"
         },
         "Type": {
-          "description": "标签类型。取值说明如下：System：系统标签,Custom：自定义标签。",
+          "description": "Tag type. Value description: System: System tag, Custom: Custom tag.",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value.",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "文件系统是一种通过目录树结构管理文件的存储系统，分为本地文件系统和远程文件系统，此处特指远程文件系统，支持多个计算节点并发访问，共享数据集。",
+  "description": "A file system is a storage system that manages files through a directory tree structure. It is divided into local file systems and remote file systems. This refers specifically to remote file systems, which support concurrent access by multiple compute nodes and shared datasets.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ChargeType",
@@ -175,67 +175,67 @@
   ],
   "properties": {
     "AccessPointLimit": {
-      "description": "接入点上限。",
+      "description": "Access point limit.",
       "format": "int32",
       "type": "integer"
     },
     "ChargeConfig": {
       "$ref": "#/definitions/ChargeConfig",
-      "description": "文件系统计费配置。",
+      "description": "File system billing configuration.",
       "type": "object"
     },
     "ChargeType": {
-      "description": "计费类型。仅支持取值为PayAsYouGo，表示按量计费。",
+      "description": "Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.",
       "type": "string"
     },
     "CreateTime": {
-      "description": "文件系统创建时间。",
+      "description": "File system creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "描述信息。",
+      "description": "Description.",
       "type": "string"
     },
     "DowngradeUnlockTime": {
-      "description": "文件系统带宽可以降配的时间。",
+      "description": "Time when file system bandwidth can be downgraded.",
       "type": "string"
     },
     "FileSystemId": {
-      "description": "文件系统 ID。",
+      "description": "File system ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "FileSystemName": {
-      "description": "文件系统名称。",
+      "description": "File system name.",
       "semantic": "resourceName",
       "type": "string"
     },
     "InstanceType": {
-      "description": "Basic：基础型,Premium：高级型",
+      "description": "Basic: Basic type, Premium: Premium type.",
       "type": "string"
     },
     "MountPointLimit": {
-      "description": "挂载点上限。",
+      "description": "Mount point limit.",
       "format": "int32",
       "type": "integer"
     },
     "Performance": {
       "$ref": "#/definitions/Performance",
-      "description": "文件系统性能信息。",
+      "description": "File system performance information.",
       "type": "object"
     },
     "PerformanceDensity": {
-      "description": "文件系统性能密度，取值说明如下：Basic_50：基础型 50MB/s/TiB,Premium_125：高级型 125MB/s/TiB。",
+      "description": "File system performance density. Value description: Basic_50: Basic type 50MB/s/TiB, Premium_125: Premium type 125MB/s/TiB.",
       "type": "string"
     },
     "ProjectName": {
-      "description": "项目名称。",
+      "description": "Project name.",
       "semantic": "projectName",
       "type": "string"
     },
     "ProtocolTypes": {
-      "description": "协议类型",
+      "description": "Protocol type.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -244,17 +244,17 @@
       "uniqueItems": true
     },
     "Status": {
-      "description": "文件系统状态。取值说明如下：Creating：创建中。CreateError：创建失败。Running：运行中。Updating：更新中。Deleting：删除中。DeleteError：删除失败。Deleted：已删除。Stopped：已关停。",
+      "description": "File system status. Value description: Creating: Creating. CreateError: Creation failed. Running: Running. Updating: Updating. Deleting: Deleting. DeleteError: Deletion failed. Deleted: Deleted. Stopped: Stopped.",
       "semantic": "status",
       "type": "string"
     },
     "Storage": {
       "$ref": "#/definitions/Storage",
-      "description": "文件系统容量信息。",
+      "description": "File system capacity information.",
       "type": "object"
     },
     "Tags": {
-      "description": "标签列表。",
+      "description": "Tag list.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -264,16 +264,16 @@
       "uniqueItems": true
     },
     "UpdateTime": {
-      "description": "文件系统更新时间。",
+      "description": "File system update time.",
       "semantic": "updatedTime",
       "type": "string"
     },
     "ZoneId": {
-      "description": "可用区 ID。",
+      "description": "Availability zone ID.",
       "type": "string"
     },
     "ZoneName": {
-      "description": "可用区名称。",
+      "description": "Availability zone name.",
       "type": "string"
     }
   },

@@ -1,0 +1,512 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AttachType",
+    "/properties/ProjectName",
+    "/properties/Spec"
+  ],
+  "definitions": {
+    "BgpInfo": {
+      "properties": {
+        "EnableBgp": {
+          "description": "Enable dynamic route propagation. false (default): No, use static routing mode. true: Yes, use BGP routing mode.",
+          "type": "boolean"
+        },
+        "LocalAsn": {
+          "description": "The ASN of the VPN gateway.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "LocalBgpIp": {
+          "description": "The local tunnel IP, which is the BGP address configured on the VPN gateway and defaults to the first host address of BgpConfig.TunnelCidr. This address must be an IP address within the IPsec tunnel subnet. If BgpConfig.EnableBgp is set to true, this parameter must be provided.",
+          "type": "string"
+        },
+        "PeerAsn": {
+          "description": "ASN of the customer gateway.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "PeerBgpIp": {
+          "description": "BGP peer IP, that is, the BGP address on the customer gateway side.",
+          "type": "string"
+        },
+        "SessionStatus": {
+          "description": "Status of the BGP connection. Up: BGP connection is normal. Down: BGP connection is not working.",
+          "enum": [
+            "Up",
+            "Down"
+          ],
+          "type": "string"
+        },
+        "TunnelCidr": {
+          "description": "CIDR address range for the local and peer IPs of the BGP session.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "HealthChecker": {
+      "properties": {
+        "CheckInterval": {
+          "description": "Interval for performing health checks",
+          "format": "int64",
+          "type": "integer"
+        },
+        "CheckResult": {
+          "description": "Health check result. Up: Normal. Down: Abnormal.",
+          "enum": [
+            "Up",
+            "Down"
+          ],
+          "type": "string"
+        },
+        "CheckerId": {
+          "description": "ID of the IPsec connection health check",
+          "type": "string"
+        },
+        "DownTime": {
+          "description": "Health check unhealthy threshold. If the health check result is 'abnormal' for the specified number of consecutive times, the IPsec connection is considered unhealthy.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "LocalIp": {
+          "description": "Health check source IP.",
+          "type": "string"
+        },
+        "RemoteIp": {
+          "description": "Health check target IP.",
+          "type": "string"
+        },
+        "Timeout": {
+          "description": "Health check response timeout. If the IPsec connection does not respond correctly within the specified response time, it is considered 'abnormal' for health check.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "UpTime": {
+          "description": "Health check threshold. If the specified number of consecutive health checks are all 'healthy', the IPsec connection is considered 'healthy' by health check.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "IkeConfig": {
+      "properties": {
+        "AuthAlg": {
+          "description": "Authentication algorithm for phase one.",
+          "type": "string"
+        },
+        "DhGroup": {
+          "description": "DH (Diffie-Hellman) key exchange algorithm used in phase 1 negotiation. Valid values: group1, group2 (default), group5, group14",
+          "type": "string"
+        },
+        "EncAlg": {
+          "description": "Encryption algorithm for phase 1 negotiation.",
+          "type": "string"
+        },
+        "Lifetime": {
+          "description": "Lifetime of the SA for phase 1 negotiation. After the lifetime is exceeded, negotiation restarts. Value range: 900~86400, unit: seconds. Default: 86400.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "LocalId": {
+          "description": "Identifier of the VPN gateway, used for phase 1 negotiation. Supports IP format and FQDN (Fully Qualified Domain Name) format. If not specified, defaults to the current VPN gateway's egress IP address. If you manually set it to FQDN format, it is recommended to set the negotiation mode to 'aggressive'. Maximum length is 100 characters. Only uppercase and lowercase letters, special characters ~ ` | ! @ # $ % ^ ( ) - _ + = [ ] { } \\ , . / : ; and digits are allowed.",
+          "type": "string"
+        },
+        "Mode": {
+          "description": "Negotiation mode for phase 1. This parameter is required only when IkeConfig.Version is ikev1. Valid values: main (default), aggressive",
+          "type": "string"
+        },
+        "Psk": {
+          "description": "Pre-shared key used for identity authentication between the VPN gateway and the user gateway in phase 1. Must not exceed 100 characters and can only contain uppercase and lowercase letters, special symbols ~ ` | ! @ # $ % ^ ( ) - _ + = [ ] { } \\ , . / : ;, and numbers.",
+          "type": "string"
+        },
+        "RemoteId": {
+          "description": "Identifier of the customer gateway, used for phase one negotiation. Supports IP format and FQDN (Fully Qualified Domain Name) format. If not specified, defaults to the public IP address of the currently selected customer gateway. If you manually set it to FQDN format, it is recommended to set the negotiation mode to 'aggressive'. Maximum length is 100 characters. Only uppercase and lowercase letters, special characters ~ ` | ! @ # $ % ^ ( ) - _ + = [ ] { } \\ , . / : ;, and digits are allowed.",
+          "type": "string"
+        },
+        "Version": {
+          "default": "ikev2",
+          "description": "Version of the IKE key exchange protocol. Valid values: ikev1, ikev2 (default).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IpsecConfig": {
+      "properties": {
+        "AuthAlg": {
+          "description": "Authentication algorithm for phase 2 negotiation",
+          "type": "string"
+        },
+        "DhGroup": {
+          "description": "DH (Diffie-Hellman) key exchange algorithm used in phase 2",
+          "type": "string"
+        },
+        "EncAlg": {
+          "description": "Encryption algorithm for phase 2 negotiation",
+          "type": "string"
+        },
+        "Lifetime": {
+          "description": "Lifetime of the SA for phase 2 negotiation. Negotiation will be re-initiated after the lifetime expires.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "Tag key.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TunnelBgpInfo": {
+      "description": "BGP session information.",
+      "properties": {
+        "EnableBgp": {
+          "description": "Enable dynamic route propagation. false (default): No, use static routing mode. true: Yes, use BGP routing mode.",
+          "type": "boolean"
+        },
+        "LocalAsn": {
+          "description": "The ASN of the VPN gateway.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "LocalBgpIp": {
+          "description": "BGP address. Defaults to the first host address of TunnelOptions.N.BGPConfig.TunnelCidr. This address must be an IP address within the IPsec tunnel CIDR block. If EnableTunnelsBgp is set to true, this parameter must be specified.",
+          "type": "string"
+        },
+        "PeerAsn": {
+          "description": "ASN of the customer gateway.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "PeerBgpIp": {
+          "description": "BGP peer IP, that is, the BGP address on the customer gateway side.",
+          "type": "string"
+        },
+        "SessionStatus": {
+          "description": "Status of the BGP connection. Up: BGP connection is normal. Down: BGP connection is not working.",
+          "type": "string"
+        },
+        "TunnelCidr": {
+          "description": "The CIDR address range for the local and peer IPs of the BGP session. This range must be within the 169.254.0.0/16 subnet with a subnet mask length of 30. If EnableTunnelsBgp is set to true, this parameter must be provided.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TunnelOption": {
+      "properties": {
+        "ConnectStatus": {
+          "description": "IPsec tunnel status. ike_sa_negotiation_failed: Phase one negotiation failed; nike_sa_negotiation_completed: Phase one negotiation succeeded; nipsec_sa_negotiation_failed: Phase two negotiation failed; nipsec_sa_negotiation_completed: Phase two negotiation succeeded.",
+          "type": "string"
+        },
+        "CustomerGatewayId": {
+          "description": "ID of the customer gateway associated with the IPsec connection.",
+          "type": "string"
+        },
+        "DpdAction": {
+          "description": "Status of the DPD feature.",
+          "type": "string"
+        },
+        "IkeConfig": {
+          "$ref": "#/definitions/IkeConfig",
+          "description": "IKE configuration information for the IPsec connection."
+        },
+        "IpsecConfig": {
+          "$ref": "#/definitions/IpsecConfig",
+          "description": "Information about the IPsec configuration in the IPsec connection."
+        },
+        "NatTraversal": {
+          "description": "Whether to enable NAT traversal",
+          "type": "boolean"
+        },
+        "Role": {
+          "description": "The role of the tunnel.",
+          "type": "string"
+        },
+        "TunnelBgpInfo": {
+          "$ref": "#/definitions/TunnelBgpInfo",
+          "description": "BGP session information.",
+          "type": "object"
+        },
+        "TunnelId": {
+          "description": "Tunnel ID of the IPsec connection.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "The IPsec connection is based on the Internet and establishes an IPsec VPN communication tunnel between the VPN gateway and the user gateway. Data is encrypted using the IKE and IPsec protocols to ensure secure transmission through the tunnel.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AttachStatus",
+      "/properties/AttachType",
+      "/properties/CustomerGatewayId",
+      "/properties/ProjectName",
+      "/properties/Spec",
+      "/properties/Status",
+      "/properties/TransitRouterId",
+      "/properties/VpnConnectionId",
+      "/properties/VpnConnectionName",
+      "/properties/VpnGatewayId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpn:CreateVpnConnection",
+        "vpn:DescribeVpnConnectionAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpn:DeleteVpnConnection",
+        "vpn:DescribeVpnConnections"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpn:DescribeVpnConnections"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpn:DescribeVpnConnectionAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpn:ModifyVpnConnectionAttributes",
+        "vpn:DescribeVpnConnectionAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/VpnConnectionId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "ID of the account to which the IPsec connection belongs.",
+      "type": "string"
+    },
+    "AttachStatus": {
+      "description": "IPsec connection status, VpnGateway: Attached: Bound; TransitRouter: Attached: Bound; Attaching: Binding; Detached: Unbound; Detaching: Unbinding.",
+      "type": "string"
+    },
+    "AttachType": {
+      "description": "Type of gateway associated with the IPsec connection. VpnGateway: VPN gateway; TransitRouter: transit router.",
+      "type": "string"
+    },
+    "BgpInfo": {
+      "$ref": "#/definitions/BgpInfo",
+      "description": "BGP information for the IPsec connection."
+    },
+    "BusinessStatus": {
+      "description": "Billing status of the IPsec connection. This parameter is returned only when AttachType is 'TransitRouter'. Normal: Normal. FinancialLocked: Financially locked.",
+      "type": "string"
+    },
+    "ConnectStatus": {
+      "description": "Status of the tunnel connection. ike_sa_negotiation_failed: Phase 1 negotiation failed. ike_sa_negotiation_completed: Phase 1 negotiation succeeded. ipsec_sa_negotiation_failed: Phase 2 negotiation failed. ipsec_sa_negotiation_completed: Phase 2 negotiation succeeded.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Time when the IPsec connection was created.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CustomerGatewayId": {
+      "description": "ID of the customer gateway associated with the IPsec connection. This parameter is required when creating a single-tunnel IPsec connection. If the customer gateway IP address is 0.0.0.0, NegotiateInstantly can only be set to false, IkeConfig.Version can only be set to ikev1, and IkeConfig.Mode can only be set to aggressive in IkeConfig.",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "Expected resource forced reclamation time. This parameter is returned only when AttachType is 'TransitRouter', and only when the resource is frozen due to overdue payment. Otherwise, the value is empty.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the IPsec connection. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space ( ), underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DpdAction": {
+      "description": "Status of the DPD feature. none: DPD feature disabled. clear (default): DPD feature enabled; IKE SA is cleared after DPD timeout. hold: DPD feature enabled; current state is maintained after DPD timeout; the connection is re-established when new traffic is detected. restart: DPD feature enabled; reconnect immediately after DPD timeout.",
+      "type": "string"
+    },
+    "DualTunnelEnabled": {
+      "description": "Enable dual tunnel feature. true: Enabled. false: Not enabled.",
+      "type": "boolean"
+    },
+    "EnableTunnelsBgp": {
+      "description": "Whether to enable BGP. Valid values: false (default): No, use static routing mode. true: Yes, use BGP routing mode.",
+      "type": "boolean"
+    },
+    "HealthCheckers": {
+      "description": "Health check information for the IPsec connection",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HealthChecker"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "IkeConfig": {
+      "$ref": "#/definitions/IkeConfig",
+      "description": "IKE configuration information for the IPsec connection"
+    },
+    "IpAddress": {
+      "description": "Public IP address of the transit router. This parameter is returned only when AttachType is 'TransitRouter'.",
+      "type": "string"
+    },
+    "IpsecConfig": {
+      "$ref": "#/definitions/IpsecConfig",
+      "description": "IPsec configuration information for the IPsec connection."
+    },
+    "IsBlocked": {
+      "description": "Whether the current resource is blocked. true: Blocked; false: Not blocked",
+      "type": "boolean"
+    },
+    "LocalSubnet": {
+      "description": "Local network segment of the IPsec connection.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "LogEnabled": {
+      "description": "Enable connection logs. After connection logs are enabled, you can view and download IPsec connection logs and troubleshoot IPsec connection issues using the log information. true: Enabled. false: Not enabled.",
+      "type": "boolean"
+    },
+    "NatTraversal": {
+      "description": "Enable NAT traversal. true: Enabled. When NAT traversal is enabled, IKE negotiation does not verify UDP port numbers and can detect NAT gateway devices in the VPN connection tunnel. false (default): Not enabled.",
+      "type": "boolean"
+    },
+    "NegotiateInstantly": {
+      "default": false,
+      "description": "Whether to initiate negotiation mode immediately. true: The system actively initiates negotiation after the IPsec connection is configured. false (default): The system does not actively initiate negotiation after configuration; negotiation is initiated passively when traffic passes through.",
+      "type": "boolean"
+    },
+    "OverdueTime": {
+      "description": "Resource freeze time. This parameter is returned only when AttachType is 'TransitRouter', and only when the resource is frozen due to overdue payment. Otherwise, this parameter is empty.",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "Project to which the IPsec connection belongs.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RemoteSubnet": {
+      "description": "Peer CIDR block of the IPsec connection",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Spec": {
+      "description": "IPsec connection instance specification. Only effective for IPsec associated with TR instances; ineffective for IPsec associated with VPN gateway instances. This parameter takes effect only when AttachType is set to TransitRouter. default (default): Default specification, bandwidth limit is 200 Mbps. large: Large specification, bandwidth limit is 1 Gbps. xlarge: Extra large specification, bandwidth limit is 3 Gbps.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the IPsec connection. Creating: Creating. Deleting: Deleting. Pending: Configuring. Available: Available.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "All tag information added to the IPsec connection.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TransitRouterId": {
+      "description": "The ID of the transit router. This parameter is returned only when AttachType is 'TransitRouter'.",
+      "type": "string"
+    },
+    "TunnelOptions": {
+      "description": "Tunnel configuration information for the IPsec connection.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TunnelOption"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "UpdateTime": {
+      "description": "The time when the IPsec connection was updated.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpnConnectionId": {
+      "description": "ID of the IPsec connection",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "VpnConnectionName": {
+      "description": "Name of the IPsec connection. Must start with a Chinese character, English letter, or number, and can only contain Chinese characters, English letters, numbers, dot (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, defaults to the IPsec connection ID.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "VpnGatewayId": {
+      "description": "The ID of the VPN gateway associated with the IPsec connection. If AttachType is not specified or set to VpnGateway, this parameter must be provided. If AttachType is set to TransitRouter, this parameter is not required.",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "Availability zone of the transit router attachment point. This parameter is returned only when AttachType is 'TransitRouter'.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/AttachStatus",
+    "/properties/ConnectStatus",
+    "/properties/CreationTime",
+    "/properties/UpdateTime",
+    "/properties/DeletedTime",
+    "/properties/IsBlocked",
+    "/properties/Status",
+    "/properties/VpnConnectionId",
+    "/properties/DualTunnelEnabled",
+    "/properties/ZoneId",
+    "/properties/Tags",
+    "/properties/OverdueTime",
+    "/properties/IpAddress",
+    "/properties/BusinessStatus",
+    "/properties/TransitRouterId",
+    "/properties/TunnelOptions/*/TunnelBgpInfo/PeerBgpIp",
+    "/properties/TunnelOptions/*/TunnelBgpInfo/SessionStatus",
+    "/properties/TunnelOptions/*/TunnelBgpInfo/LocalAsn",
+    "/properties/TunnelOptions/*/TunnelBgpInfo/PeerAsn",
+    "/properties/TunnelOptions/*/TunnelBgpInfo/EnableBgp",
+    "/properties/TunnelOptions/*/ConnectStatus"
+  ],
+  "required": [
+    "LocalSubnet",
+    "RemoteSubnet"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VPN::VPNConnection",
+  "writeOnlyProperties": [
+    "/properties/Spec"
+  ]
+}

@@ -17,19 +17,19 @@
     "IpConfig": {
       "properties": {
         "AzID": {
-          "description": "终端节点 IP 地址所在的可用区。为了保证高可用，建议您至少添加 2 个可用区。",
+          "description": "Availability zone for the endpoint IP address. To ensure high availability, it is recommended to add at least 2 availability zones",
           "type": "string"
         },
         "IP": {
-          "description": "终端节点的 IPv4 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+          "description": "IPv4 address of the endpoint. If you do not set this parameter, the system automatically assigns an IP address. You can add up to 6 IP addresses",
           "type": "string"
         },
         "Ipv6": {
-          "description": "终端节点的 IPv6 地址。如果您不设置该参数，系统会自动分配一个 IP 地址。您最多只能添加 6 个 IP 地址。",
+          "description": "IPv6 address of the endpoint. If you do not set this parameter, the system automatically assigns an IP address. You can add up to 6 IP addresses",
           "type": "string"
         },
         "SubnetID": {
-          "description": "终端节点 IP 地址所在的子网 ID。",
+          "description": "Subnet ID for the endpoint IP address",
           "type": "string"
         }
       },
@@ -38,11 +38,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "用户标签的标签键。",
+          "description": "User tag key",
           "type": "string"
         },
         "Value": {
-          "description": "用户标签的标签值。",
+          "description": "User tag value",
           "type": "string"
         }
       },
@@ -52,7 +52,7 @@
       "type": "object"
     }
   },
-  "description": "在把外部的 DNS 查询请求转发到解析器的场景中，您需要创建终端节点。收到解析器转发的 DNS 查询请求后，终端节点出站终端节点会把 DNS 查询请求转发到外部的 DNS 服务器。收到来自外部的 DNS 查询请求后，入站终端节点会把 DNS 查询请求转发到解析器。",
+  "description": "In scenarios where external DNS query requests are forwarded to the resolver, you need to create an endpoint. After receiving DNS query requests forwarded by the resolver, outbound endpoints forward DNS queries to external DNS servers. After receiving DNS query requests from external sources, inbound endpoints forward DNS queries to the resolver",
   "filterProperties": {
     "filterableProperties": [
       "/properties/Direction",
@@ -101,13 +101,13 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "创建时间",
+      "description": "Creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Direction": {
       "default": "OUTBOUND",
-      "description": "终端节点的 DNS 请求转发方向。OUTBOUND：（默认）出站终端节点，把来自 VPC 内的 DNS 查询请求转发到外部的 DNS 服务器。INBOUND：入站终端节点，把来自外部的 DNS 查询请求转发到解析器。",
+      "description": "DNS request forwarding direction for the endpoint. OUTBOUND (default): outbound endpoint forwards DNS queries from within the VPC to external DNS servers. INBOUND: inbound endpoint forwards DNS queries from external sources to the resolver",
       "enum": [
         "OUTBOUND",
         "INBOUND"
@@ -115,12 +115,12 @@
       "type": "string"
     },
     "EndpointID": {
-      "description": "终端节点的 ID。",
+      "description": "Endpoint ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "EndpointType": {
-      "description": "终端节点类型。IPv4：IPv4 节点。DualStack：双栈节点。",
+      "description": "Endpoint type. IPv4: IPv4 endpoint. DualStack: dual-stack endpoint",
       "enum": [
         "IPv4",
         "DualStack"
@@ -128,7 +128,7 @@
       "type": "string"
     },
     "IpConfigs": {
-      "description": "终端节点的可用区、子网和 IP 配置。",
+      "description": "Availability zone, subnet, and IP configuration for the endpoint",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/IpConfig"
@@ -137,22 +137,22 @@
       "uniqueItems": true
     },
     "Name": {
-      "description": "终端节点的名称。支持 UTF-8 格式。",
+      "description": "Endpoint name. Supports UTF-8 format",
       "semantic": "resourceName",
       "type": "string"
     },
     "ProjectName": {
       "default": "default",
-      "description": "终端节点所属的项目名称。默认为 default。",
+      "description": "Project name to which the endpoint belongs. Default is default",
       "semantic": "projectName",
       "type": "string"
     },
     "SecurityGroupID": {
-      "description": "适用于终端节点 IP 地址的安全组 ID。终端节点默认会使用预设安全组：对于出站终端节点：入方向拒绝流量通行；出方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口。对于入站终端节点：入方向放通 0.0.0.0/0 的 TCP 53 端口和 UDP 53 端口；出方向拒绝流量通行。",
+      "description": "Security group ID for the endpoint IP address. The endpoint uses a default security group: For outbound endpoints, inbound traffic is denied; outbound traffic allows TCP port 53 and UDP port 53 to 0.0.0.0/0. For inbound endpoints, inbound traffic allows TCP port 53 and UDP port 53 to 0.0.0.0/0; outbound traffic is denied",
       "type": "string"
     },
     "Status": {
-      "description": "终端节点的状态。Creating：创建中。Running：运行中。Updating：更新中。Error：运行异常。",
+      "description": "Endpoint status. Creating: creating. Running: running. Updating: updating. Error: abnormal operation",
       "enum": [
         "Creating",
         "Running",
@@ -163,7 +163,7 @@
       "type": "string"
     },
     "Tags": {
-      "description": "标签列表。",
+      "description": "Tag list",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -173,16 +173,16 @@
       "uniqueItems": true
     },
     "UpdatedTime": {
-      "description": "更新时间",
+      "description": "Update time",
       "semantic": "updatedTime",
       "type": "string"
     },
     "VpcID": {
-      "description": "终端节点所在的 VPC 的 ID。",
+      "description": "VPC ID where the endpoint is located",
       "type": "string"
     },
     "VpcRegion": {
-      "description": "终端节点所在的 VPC 的地域。",
+      "description": "Region of the VPC where the endpoint is located",
       "type": "string"
     }
   },

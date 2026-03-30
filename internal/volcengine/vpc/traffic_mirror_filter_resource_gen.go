@@ -31,11 +31,11 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "筛选条件的创建时间。",
+		//	  "description": "Filter condition creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "筛选条件的创建时间。",
+			Description: "Filter condition creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -45,11 +45,11 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "筛选条件实例描述。",
+		//	  "description": "Filter condition instance description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "筛选条件实例描述。",
+			Description: "Filter condition instance description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -60,62 +60,62 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "出方向筛选规则的详细信息。",
+		//	  "description": "Outbound filter rule details",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "出方向筛选规则的详细信息。",
+		//	    "description": "Outbound filter rule details",
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "筛选规则实例描述。",
+		//	        "description": "Filter rule instance description",
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationCidrBlock": {
-		//	        "description": "筛选规则目的地址。",
+		//	        "description": "Filter rule destination address",
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationPortRange": {
-		//	        "description": "筛选规则目的端口范围。",
+		//	        "description": "Filter rule destination port range",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。",
+		//	        "description": "Filter rule action. accept: Enable traffic mirroring. reject: Do not enable traffic mirroring",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "筛选规则优先级。",
+		//	        "description": "Filter rule priority",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "ProjectName": {
-		//	        "description": "所属项目的名称。",
+		//	        "description": "Project name",
 		//	        "type": "string"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "筛选规则协议类型。",
+		//	        "description": "Filter rule protocol type",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceCidrBlock": {
-		//	        "description": "筛选规则源地址。",
+		//	        "description": "Filter rule source address",
 		//	        "type": "string"
 		//	      },
 		//	      "SourcePortRange": {
-		//	        "description": "筛选规则源端口范围。",
+		//	        "description": "Filter rule source port range",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "筛选规则状态。",
+		//	        "description": "Filter rule status",
 		//	        "type": "string"
 		//	      },
 		//	      "TrafficDirection": {
-		//	        "description": "筛选规则方向。egress：出方向。ingress：入方向。",
+		//	        "description": "Filter rule direction. egress: Outbound. ingress: Inbound",
 		//	        "type": "string"
 		//	      },
 		//	      "TrafficMirrorFilterId": {
-		//	        "description": "筛选条件实例ID。",
+		//	        "description": "Filter condition instance ID",
 		//	        "type": "string"
 		//	      },
 		//	      "TrafficMirrorFilterRuleId": {
-		//	        "description": "筛选规则实例ID。",
+		//	        "description": "Filter rule instance ID",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -129,72 +129,72 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则实例描述。",
+						Description: "Filter rule instance description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationCidrBlock
 					"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则目的地址。",
+						Description: "Filter rule destination address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationPortRange
 					"destination_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则目的端口范围。",
+						Description: "Filter rule destination port range",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。",
+						Description: "Filter rule action. accept: Enable traffic mirroring. reject: Do not enable traffic mirroring",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则优先级。",
+						Description: "Filter rule priority",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ProjectName
 					"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "所属项目的名称。",
+						Description: "Project name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则协议类型。",
+						Description: "Filter rule protocol type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SourceCidrBlock
 					"source_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则源地址。",
+						Description: "Filter rule source address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SourcePortRange
 					"source_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则源端口范围。",
+						Description: "Filter rule source port range",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则状态。",
+						Description: "Filter rule status",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TrafficDirection
 					"traffic_direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则方向。egress：出方向。ingress：入方向。",
+						Description: "Filter rule direction. egress: Outbound. ingress: Inbound",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TrafficMirrorFilterId
 					"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选条件实例ID。",
+						Description: "Filter condition instance ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TrafficMirrorFilterRuleId
 					"traffic_mirror_filter_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则实例ID。",
+						Description: "Filter rule instance ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "出方向筛选规则的详细信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Outbound filter rule details\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -204,62 +204,62 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "入方向筛选规则的详细信息。",
+		//	  "description": "Inbound filter rule details",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "入方向筛选规则的详细信息。",
+		//	    "description": "Inbound filter rule details",
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "筛选规则实例描述。",
+		//	        "description": "Filter rule instance description",
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationCidrBlock": {
-		//	        "description": "筛选规则目的地址。",
+		//	        "description": "Filter rule destination address",
 		//	        "type": "string"
 		//	      },
 		//	      "DestinationPortRange": {
-		//	        "description": "筛选规则目的端口范围。",
+		//	        "description": "Filter rule destination port range",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。",
+		//	        "description": "Filter rule action. accept: Enable traffic mirroring. reject: Do not enable traffic mirroring",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "筛选规则优先级。",
+		//	        "description": "Filter rule priority",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "ProjectName": {
-		//	        "description": "所属项目的名称。",
+		//	        "description": "Project name",
 		//	        "type": "string"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "筛选规则协议类型。",
+		//	        "description": "Filter rule protocol type",
 		//	        "type": "string"
 		//	      },
 		//	      "SourceCidrBlock": {
-		//	        "description": "筛选规则源地址。",
+		//	        "description": "Filter rule source address",
 		//	        "type": "string"
 		//	      },
 		//	      "SourcePortRange": {
-		//	        "description": "筛选规则源端口范围。",
+		//	        "description": "Filter rule source port range",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "筛选规则状态。",
+		//	        "description": "Filter rule status",
 		//	        "type": "string"
 		//	      },
 		//	      "TrafficDirection": {
-		//	        "description": "筛选规则方向。egress：出方向。ingress：入方向。",
+		//	        "description": "Filter rule direction. egress: Outbound. ingress: Inbound",
 		//	        "type": "string"
 		//	      },
 		//	      "TrafficMirrorFilterId": {
-		//	        "description": "筛选条件实例ID。",
+		//	        "description": "Filter condition instance ID",
 		//	        "type": "string"
 		//	      },
 		//	      "TrafficMirrorFilterRuleId": {
-		//	        "description": "筛选规则实例ID。",
+		//	        "description": "Filter rule instance ID",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -273,72 +273,72 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则实例描述。",
+						Description: "Filter rule instance description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationCidrBlock
 					"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则目的地址。",
+						Description: "Filter rule destination address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DestinationPortRange
 					"destination_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则目的端口范围。",
+						Description: "Filter rule destination port range",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则行为。accept：采集流量镜像。reject：不采集流量镜像。",
+						Description: "Filter rule action. accept: Enable traffic mirroring. reject: Do not enable traffic mirroring",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则优先级。",
+						Description: "Filter rule priority",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ProjectName
 					"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "所属项目的名称。",
+						Description: "Project name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则协议类型。",
+						Description: "Filter rule protocol type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SourceCidrBlock
 					"source_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则源地址。",
+						Description: "Filter rule source address",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SourcePortRange
 					"source_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则源端口范围。",
+						Description: "Filter rule source port range",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则状态。",
+						Description: "Filter rule status",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TrafficDirection
 					"traffic_direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则方向。egress：出方向。ingress：入方向。",
+						Description: "Filter rule direction. egress: Outbound. ingress: Inbound",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TrafficMirrorFilterId
 					"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选条件实例ID。",
+						Description: "Filter condition instance ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TrafficMirrorFilterRuleId
 					"traffic_mirror_filter_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "筛选规则实例ID。",
+						Description: "Filter rule instance ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "入方向筛选规则的详细信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Inbound filter rule details\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -348,11 +348,11 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "筛选条件所属项目的名称。",
+		//	  "description": "Project name of the filter condition",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "筛选条件所属项目的名称。",
+			Description: "Project name of the filter condition",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -364,11 +364,11 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "筛选条件状态。",
+		//	  "description": "Filter condition status",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "筛选条件状态。",
+			Description: "Filter condition status",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -378,17 +378,17 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签信息。",
+		//	    "description": "Tag information",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -405,7 +405,7 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -417,7 +417,7 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -426,7 +426,7 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -438,11 +438,11 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "筛选条件实例ID。",
+		//	  "description": "Filter condition instance ID",
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "筛选条件实例ID。",
+			Description: "Filter condition instance ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -452,11 +452,11 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "筛选条件名称。",
+		//	  "description": "Filter condition name",
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_filter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "筛选条件名称。",
+			Description: "Filter condition name",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -475,7 +475,7 @@ func trafficMirrorFilterResource(ctx context.Context) (resource.Resource, error)
 	}
 
 	schema := schema.Schema{
-		Description: "通过流量镜像，您可以按自己设定的筛选条件复制网卡的流量，并将复制的流量私网转发到目标服务进行监控分析。",
+		Description: "With traffic mirroring, you can mirror network interface traffic based on your filter conditions and forward the mirrored traffic over the private network to a target service for monitoring and analysis",
 		Version:     1,
 		Attributes:  attributes,
 	}

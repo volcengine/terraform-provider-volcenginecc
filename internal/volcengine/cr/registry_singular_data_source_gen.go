@@ -27,67 +27,67 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像仓库实例的付费类型，目前仅支持 PostCharge按量付费模式。",
+		//	  "description": "Billing type for the container registry instance. Currently, only PostCharge pay-as-you-go mode is supported",
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像仓库实例的付费类型，目前仅支持 PostCharge按量付费模式。",
+			Description: "Billing type for the container registry instance. Currently, only PostCharge pay-as-you-go mode is supported",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建镜像仓库实例的时间。",
+		//	  "description": "Creation time of the container registry instance",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建镜像仓库实例的时间。",
+			Description: "Creation time of the container registry instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpireTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "仅计费类型为HybridCharge有值，实例到期时间",
+		//	  "description": "Instance expiration time is only available for HybridCharge billing type",
 		//	  "type": "string"
 		//	}
 		"expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "仅计费类型为HybridCharge有值，实例到期时间",
+			Description: "Instance expiration time is only available for HybridCharge billing type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标准版实例名称，同一个地域下，名称必须唯一。支持小写英文字母、数字、短划线（-）且数字不能在首位，短划线（-）不能在首位或末位，长度限制为 3～30 个字符。",
+		//	  "description": "Standard edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be 3–30 characters",
 		//	  "maxLength": 30,
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "标准版实例名称，同一个地域下，名称必须唯一。支持小写英文字母、数字、短划线（-）且数字不能在首位，短划线（-）不能在首位或末位，长度限制为 3～30 个字符。",
+			Description: "Standard edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be 3–30 characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Project
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "填写实例需要关联的项目。一个实例仅支持关联一个项目",
+		//	  "description": "Enter the project to associate with the instance. Each instance can only be associated with one project",
 		//	  "type": "string"
 		//	}
 		"project": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "填写实例需要关联的项目。一个实例仅支持关联一个项目",
+			Description: "Enter the project to associate with the instance. Each instance can only be associated with one project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyCache
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ProxyCache配置，设置为ProxyCache时必填",
+		//	  "description": "ProxyCache configuration. Required when set as ProxyCache",
 		//	  "properties": {
 		//	    "Type": {
-		//	      "description": "ProxyCache支持的镜像仓库实例类型，参数值说明如下：DockerHub：dockerhub 镜像仓库。",
+		//	      "description": "Instance types supported by ProxyCache for container registry. Parameter values are as follows: DockerHub: DockerHub container registry",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -97,43 +97,43 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ProxyCache支持的镜像仓库实例类型，参数值说明如下：DockerHub：dockerhub 镜像仓库。",
+					Description: "Instance types supported by ProxyCache for container registry. Parameter values are as follows: DockerHub: DockerHub container registry",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "ProxyCache配置，设置为ProxyCache时必填",
+			Description: "ProxyCache configuration. Required when set as ProxyCache",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyCacheEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否设置为ProxyCache实例",
+		//	  "description": "Set as ProxyCache instance",
 		//	  "type": "boolean"
 		//	}
 		"proxy_cache_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否设置为ProxyCache实例",
+			Description: "Set as ProxyCache instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RenewType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "仅计费类型为HybridCharge有值，实例自动续费类型",
+		//	  "description": "Instance auto-renewal type is only available for HybridCharge billing type",
 		//	  "type": "string"
 		//	}
 		"renew_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "仅计费类型为HybridCharge有值，实例自动续费类型",
+			Description: "Instance auto-renewal type is only available for HybridCharge billing type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像仓库实例状态，由 Phase 和 Conditions 组成。合法的 Phase 和 Conditions 组合如下所示：{Creating, [Progressing]}：创建中,{Running, [Ok]}：运行中,{Running, [Degraded]}：运行中,{Stopped, [Balance]}：欠费关停,{Stopped, [Released]}：待回收,{Stopped, [Released, Balance]}：欠费关停,{Starting, [Progressing]}：启动中,{Deleting, [Progressing]}：销毁中,{Failed, [Unknown]}：异常",
+		//	  "description": "Container registry instance status consists of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to insufficient balance, {Stopped, [Released]}: Pending reclamation, {Stopped, [Released, Balance]}: Suspended due to insufficient balance, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Abnormal",
 		//	  "properties": {
 		//	    "Conditions": {
-		//	      "description": "Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。",
+		//	      "description": "Creating, [ Progressing ]: Creating\nRunning, [ Ok ]: Running\nRunning, [ Degraded ]: Running\nStopped, [ Balance ]: Suspended due to insufficient balance\nStopped, [ Released ]: Pending reclamation\nStopped, [ Released, Balance ]: Suspended due to insufficient balance\nStarting, [ Progressing ]: Starting\nDeleting, [ Progressing ]: Deleting\nFailed, [ Unknown ]: Abnormal",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -142,7 +142,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
-		//	      "description": "Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。",
+		//	      "description": "Creating, [ Progressing ]: Creating\nRunning, [ Ok ]: Running\nRunning, [ Degraded ]: Running\nStopped, [ Balance ]: Suspended due to insufficient balance\nStopped, [ Released ]: Pending reclamation\nStopped, [ Released, Balance ]: Suspended due to insufficient balance\nStarting, [ Progressing ]: Starting\nDeleting, [ Progressing ]: Deleting\nFailed, [ Unknown ]: Abnormal",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -153,32 +153,32 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Conditions
 				"conditions": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。",
+					Description: "Creating, [ Progressing ]: Creating\n  Running, [ Ok ]: Running\n  Running, [ Degraded ]: Running\n  Stopped, [ Balance ]: Suspended due to insufficient balance\n  Stopped, [ Released ]: Pending reclamation\n  Stopped, [ Released, Balance ]: Suspended due to insufficient balance\n  Starting, [ Progressing ]: Starting\n  Deleting, [ Progressing ]: Deleting\n  Failed, [ Unknown ]: Abnormal",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。",
+					Description: "Creating, [ Progressing ]: Creating\n  Running, [ Ok ]: Running\n  Running, [ Degraded ]: Running\n  Stopped, [ Balance ]: Suspended due to insufficient balance\n  Stopped, [ Released ]: Pending reclamation\n  Stopped, [ Released, Balance ]: Suspended due to insufficient balance\n  Starting, [ Progressing ]: Starting\n  Deleting, [ Progressing ]: Deleting\n  Failed, [ Unknown ]: Abnormal",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "镜像仓库实例状态，由 Phase 和 Conditions 组成。合法的 Phase 和 Conditions 组合如下所示：{Creating, [Progressing]}：创建中,{Running, [Ok]}：运行中,{Running, [Degraded]}：运行中,{Stopped, [Balance]}：欠费关停,{Stopped, [Released]}：待回收,{Stopped, [Released, Balance]}：欠费关停,{Starting, [Progressing]}：启动中,{Deleting, [Progressing]}：销毁中,{Failed, [Unknown]}：异常",
+			Description: "Container registry instance status consists of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to insufficient balance, {Stopped, [Released]}: Pending reclamation, {Stopped, [Released, Balance]}: Suspended due to insufficient balance, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Abnormal",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的标签",
+		//	  "description": "Instance tags",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签的 Key 值。",
+		//	        "description": "Tag key values",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签的 Value 值列表。",
+		//	        "description": "List of tag values",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -192,28 +192,28 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的 Key 值。",
+						Description: "Tag key values",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的 Value 值列表。",
+						Description: "List of tag values",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例的标签",
+			Description: "Instance tags",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "不填写默认创建标准版实例。Enterprise：标准版，Micro：小微版",
+		//	  "description": "If not specified, a standard edition instance will be created by default. Enterprise: Standard edition, Micro: Micro edition",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "不填写默认创建标准版实例。Enterprise：标准版，Micro：小微版",
+			Description: "If not specified, a standard edition instance will be created by default. Enterprise: Standard edition, Micro: Micro edition",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -23,55 +23,117 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::VMP::Workspace resource.
 func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AuthType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace authentication type. Options: BasicAuth: Basic authentication, requires Username and Password for authentication. BearerToken: Token authentication, requires BearerToken for authentication. None: No custom authentication required. Note: When the authentication type is set to None, AK/SK authentication is used by default.",
+		//	  "type": "string"
+		//	}
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workspace authentication type. Options: BasicAuth: Basic authentication, requires Username and Password for authentication. BearerToken: Token authentication, requires BearerToken for authentication. None: No custom authentication required. Note: When the authentication type is set to None, AK/SK authentication is used by default.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: BearerToken
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace Bearer Token. Note: Configure this parameter only when the AuthType parameter is set to BearerToken.",
+		//	  "type": "string"
+		//	}
+		"bearer_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workspace Bearer Token. Note: Configure this parameter only when the AuthType parameter is set to BearerToken.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区创建时间，RFC3339 格式。",
+		//	  "description": "Workspace creation time, RFC3339 format",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区创建时间，RFC3339 格式。",
+			Description: "Workspace creation time, RFC3339 format",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeleteProtectionEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启工作区删除保护,true：开启，false：关闭。",
+		//	  "description": "Enable workspace deletion protection: true for enabled, false for disabled",
 		//	  "type": "boolean"
 		//	}
 		"delete_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启工作区删除保护,true：开启，false：关闭。",
+			Description: "Enable workspace deletion protection: true for enabled, false for disabled",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区描述信息，字符串形式，长度限制为 0～200。",
+		//	  "description": "Workspace description, string, length limit 0–200",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区描述信息，字符串形式，长度限制为 0～200。",
+			Description: "Workspace description, string, length limit 0–200",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区规格详情。",
+		//	  "description": "Workspace specification details",
 		//	  "properties": {
 		//	    "ActiveSeries": {
-		//	      "description": "最大活跃时序数。",
+		//	      "description": "Maximum active time series count",
 		//	      "type": "integer"
 		//	    },
 		//	    "AvailabilityZoneReplicas": {
-		//	      "description": "可用区（az）数。",
+		//	      "description": "Number of availability zones (az)",
 		//	      "type": "integer"
 		//	    },
+		//	    "CalculatePriceParams": {
+		//	      "description": "Billing parameter list.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Billing parameter.",
+		//	        "properties": {
+		//	          "CalChargeItemList": {
+		//	            "description": "Billing item list.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Billing item.",
+		//	              "properties": {
+		//	                "AttrValue": {
+		//	                  "description": "Billing item attribute value.",
+		//	                  "type": "string"
+		//	                },
+		//	                "ChargeItemCode": {
+		//	                  "description": "Billing item code.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ConfigurationCode": {
+		//	            "description": "Configuration item code.",
+		//	            "type": "string"
+		//	          },
+		//	          "Period": {
+		//	            "description": "Billing cycle.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "DownsamplingPeriods": {
-		//	      "description": "降采样策略。",
+		//	      "description": "Downsampling policy",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -80,31 +142,31 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "IngestSamplesPerSecond": {
-		//	      "description": "最大每秒写入样本数。",
+		//	      "description": "Maximum samples written per second",
 		//	      "type": "integer"
 		//	    },
 		//	    "QueryConcurrency": {
-		//	      "description": "最大查询并发数。",
+		//	      "description": "Maximum query concurrency",
 		//	      "type": "integer"
 		//	    },
 		//	    "QueryPerSecond": {
-		//	      "description": "最大查询 QPS。",
+		//	      "description": "Maximum query QPS",
 		//	      "type": "integer"
 		//	    },
 		//	    "ReplicasPerZone": {
-		//	      "description": "每个可用区（az）的数据副本数。",
+		//	      "description": "Number of data replicas per availability zone (az)",
 		//	      "type": "integer"
 		//	    },
 		//	    "RetentionPeriod": {
-		//	      "description": "最长数据保留时间。",
+		//	      "description": "Maximum data retention period",
 		//	      "type": "string"
 		//	    },
 		//	    "ScanSamplesPerSecond": {
-		//	      "description": "最大每秒扫描样本数。",
+		//	      "description": "Maximum samples scanned per second",
 		//	      "type": "integer"
 		//	    },
 		//	    "ScanSeriesPerSecond": {
-		//	      "description": "最大每秒扫描时序数。",
+		//	      "description": "Maximum time series scanned per second",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -114,173 +176,289 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ActiveSeries
 				"active_series": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大活跃时序数。",
+					Description: "Maximum active time series count",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AvailabilityZoneReplicas
 				"availability_zone_replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "可用区（az）数。",
+					Description: "Number of availability zones (az)",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CalculatePriceParams
+				"calculate_price_params": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CalChargeItemList
+							"cal_charge_item_list": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AttrValue
+										"attr_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Billing item attribute value.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ChargeItemCode
+										"charge_item_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Billing item code.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Billing item list.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ConfigurationCode
+							"configuration_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Configuration item code.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Period
+							"period": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Billing cycle.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Billing parameter list.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DownsamplingPeriods
 				"downsampling_periods": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "降采样策略。",
+					Description: "Downsampling policy",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IngestSamplesPerSecond
 				"ingest_samples_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大每秒写入样本数。",
+					Description: "Maximum samples written per second",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: QueryConcurrency
 				"query_concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大查询并发数。",
+					Description: "Maximum query concurrency",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: QueryPerSecond
 				"query_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大查询 QPS。",
+					Description: "Maximum query QPS",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ReplicasPerZone
 				"replicas_per_zone": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "每个可用区（az）的数据副本数。",
+					Description: "Number of data replicas per availability zone (az)",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RetentionPeriod
 				"retention_period": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "最长数据保留时间。",
+					Description: "Maximum data retention period",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ScanSamplesPerSecond
 				"scan_samples_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大每秒扫描样本数。",
+					Description: "Maximum samples scanned per second",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ScanSeriesPerSecond
 				"scan_series_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大每秒扫描时序数。",
+					Description: "Maximum time series scanned per second",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "工作区规格详情。",
+			Description: "Workspace specification details",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceTypeId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区规格,vmp.standard.15d：15 天存储时长工作区。vmp.standard.30d：30 天存储时长工作区。vmp.standard.90d：90 天存储时长工作区。vmp.standard.180d：180 天存储时长工作区。vmp.standard.1y：1 年存储时长工作区。",
+		//	  "description": "Workspace specifications: vmp.standard.15d: workspace with 15 days storage duration. vmp.standard.30d: workspace with 30 days storage duration. vmp.standard.90d: workspace with 90 days storage duration. vmp.standard.180d: workspace with 180 days storage duration. vmp.standard.1y: workspace with 1 year storage duration",
 		//	  "type": "string"
 		//	}
 		"instance_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区规格,vmp.standard.15d：15 天存储时长工作区。vmp.standard.30d：30 天存储时长工作区。vmp.standard.90d：90 天存储时长工作区。vmp.standard.180d：180 天存储时长工作区。vmp.standard.1y：1 年存储时长工作区。",
+			Description: "Workspace specifications: vmp.standard.15d: workspace with 15 days storage duration. vmp.standard.30d: workspace with 30 days storage duration. vmp.standard.90d: workspace with 90 days storage duration. vmp.standard.180d: workspace with 180 days storage duration. vmp.standard.1y: workspace with 1 year storage duration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区名称，字符串形式，长度限制为 1～100。",
+		//	  "description": "Workspace name, string, length limit 1–100",
 		//	  "maxLength": 100,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区名称，字符串形式，长度限制为 1～100。",
+			Description: "Workspace name, string, length limit 1–100",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueReclaimTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区预期欠费回收时间，RFC3339 格式。",
+		//	  "description": "Workspace expected overdue recovery time, RFC3339 format",
 		//	  "type": "string"
 		//	}
 		"overdue_reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区预期欠费回收时间，RFC3339 格式。",
+			Description: "Workspace expected overdue recovery time, RFC3339 format",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Password
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区 BasicAuth 密码。",
+		//	  "description": "Workspace BasicAuth password",
 		//	  "type": "string"
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区 BasicAuth 密码。",
+			Description: "Workspace BasicAuth password",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PrometheusPushEndpoint
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace public Push Gateway URL address.",
+		//	  "type": "string"
+		//	}
+		"prometheus_push_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workspace public Push Gateway URL address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrometheusPushIntranetEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区 Push Gateway URL 地址。",
+		//	  "description": "Workspace Push Gateway URL address",
 		//	  "type": "string"
 		//	}
 		"prometheus_push_intranet_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区 Push Gateway URL 地址。",
+			Description: "Workspace Push Gateway URL address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PrometheusQueryEndpoint
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace public Query URL address.",
+		//	  "type": "string"
+		//	}
+		"prometheus_query_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workspace public Query URL address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrometheusQueryIntranetEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区 Query URL 地址。",
+		//	  "description": "Workspace Query URL address",
 		//	  "type": "string"
 		//	}
 		"prometheus_query_intranet_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区 Query URL 地址。",
+			Description: "Workspace Query URL address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PrometheusWriteEndpoint
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace public RemoteWrite URL address.",
+		//	  "type": "string"
+		//	}
+		"prometheus_write_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workspace public RemoteWrite URL address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrometheusWriteIntranetEndpoint
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区 RemoteWrite URL 地址。",
+		//	  "description": "Workspace RemoteWrite URL address",
 		//	  "type": "string"
 		//	}
 		"prometheus_write_intranet_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区 RemoteWrite URL 地址。",
+			Description: "Workspace RemoteWrite URL address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PublicAccessEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to enable workspace public access capability. true: enabled, false: disabled.",
+		//	  "type": "boolean"
+		//	}
+		"public_access_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to enable workspace public access capability. true: enabled, false: disabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PublicQueryBandwidth
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace public Query bandwidth (Mbps).",
+		//	  "format": "int64",
+		//	  "type": "integer"
+		//	}
+		"public_query_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Workspace public Query bandwidth (Mbps).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PublicWriteBandwidth
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace public RemoteWrite bandwidth (Mbps).",
+		//	  "format": "int64",
+		//	  "type": "integer"
+		//	}
+		"public_write_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Workspace public RemoteWrite bandwidth (Mbps).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Quota
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区配额详情。",
+		//	  "description": "Workspace quota details",
 		//	  "properties": {
 		//	    "ActiveSeries": {
-		//	      "description": "最大活跃时序数。整数形式，默认取值范围为 1～50000000。",
+		//	      "description": "Maximum active time series count. Integer, default range is 1–50000000",
 		//	      "type": "integer"
 		//	    },
 		//	    "IngestSamplesPerSecond": {
-		//	      "description": "指标摄入速率，即最大每秒写入样本数。整数形式，默认取值范围为 1～5000000。",
+		//	      "description": "Metric ingestion rate, i.e., maximum samples written per second. Integer, default range is 1–5000000",
+		//	      "type": "integer"
+		//	    },
+		//	    "PublicQueryBandwidth": {
+		//	      "description": "Workspace public Query bandwidth (Mbps).",
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    },
+		//	    "PublicWriteBandwidth": {
+		//	      "description": "Workspace public RemoteWrite bandwidth (Mbps).",
+		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "QueryPerSecond": {
-		//	      "description": "最大查询 QPS。整数形式，默认取值范围为 1～500。",
+		//	      "description": "Maximum query QPS. Integer, default range is 1–500",
 		//	      "type": "integer"
 		//	    },
 		//	    "ScanSamplesPerSecond": {
-		//	      "description": "最大每秒扫描样本数。整数形式，默认取值范围为 1～1000000000。",
+		//	      "description": "Maximum samples scanned per second. Integer, default range is 1–1000000000",
 		//	      "type": "integer"
 		//	    },
 		//	    "ScanSeriesPerSecond": {
-		//	      "description": "最大每秒扫描时序数。整数形式，默认取值范围为 1～200000。",
+		//	      "description": "Maximum time series scanned per second. Integer, default range is 1–200000",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -290,59 +468,80 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ActiveSeries
 				"active_series": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大活跃时序数。整数形式，默认取值范围为 1～50000000。",
+					Description: "Maximum active time series count. Integer, default range is 1–50000000",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IngestSamplesPerSecond
 				"ingest_samples_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "指标摄入速率，即最大每秒写入样本数。整数形式，默认取值范围为 1～5000000。",
+					Description: "Metric ingestion rate, i.e., maximum samples written per second. Integer, default range is 1–5000000",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicQueryBandwidth
+				"public_query_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Workspace public Query bandwidth (Mbps).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicWriteBandwidth
+				"public_write_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Workspace public RemoteWrite bandwidth (Mbps).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: QueryPerSecond
 				"query_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大查询 QPS。整数形式，默认取值范围为 1～500。",
+					Description: "Maximum query QPS. Integer, default range is 1–500",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ScanSamplesPerSecond
 				"scan_samples_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大每秒扫描样本数。整数形式，默认取值范围为 1～1000000000。",
+					Description: "Maximum samples scanned per second. Integer, default range is 1–1000000000",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ScanSeriesPerSecond
 				"scan_series_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大每秒扫描时序数。整数形式，默认取值范围为 1～200000。",
+					Description: "Maximum time series scanned per second. Integer, default range is 1–200000",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "工作区配额详情。",
+			Description: "Workspace quota details",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SearchLatencyOffset
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Workspace public Query search latency offset.",
+		//	  "type": "string"
+		//	}
+		"search_latency_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Workspace public Query search latency offset.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区状态，取值：Creating：创建中 Active：正常 Updating：更新中 Deleting：删除中 OverdueShutted：欠费关停 Resuming：恢复中 Error：错误。",
+		//	  "description": "Workspace status. Values: Creating: creating Active: active Updating: updating Deleting: deleting OverdueShutted: overdue shutdown Resuming: resuming Error: error",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区状态，取值：Creating：创建中 Active：正常 Updating：更新中 Deleting：删除中 OverdueShutted：欠费关停 Resuming：恢复中 Error：错误。",
+			Description: "Workspace status. Values: Creating: creating Active: active Updating: updating Deleting: deleting OverdueShutted: overdue shutdown Resuming: resuming Error: error",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区标签。",
+		//	  "description": "Workspace tags",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签。",
+		//	    "description": "Tags",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -359,32 +558,32 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "工作区标签。",
+			Description: "Workspace tags",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Usage
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区用量。",
+		//	  "description": "Workspace usage",
 		//	  "properties": {
 		//	    "ActiveSeries": {
-		//	      "description": "活跃时序数。",
+		//	      "description": "Active time series count",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "IngestedSamplesPerSecond": {
-		//	      "description": "每秒写入样本数。",
+		//	      "description": "Samples written per second",
 		//	      "format": "double",
 		//	      "type": "number"
 		//	    }
@@ -395,39 +594,39 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ActiveSeries
 				"active_series": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "活跃时序数。",
+					Description: "Active time series count",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IngestedSamplesPerSecond
 				"ingested_samples_per_second": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "每秒写入样本数。",
+					Description: "Samples written per second",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "工作区用量。",
+			Description: "Workspace usage",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区 BasicAuth 用户名。",
+		//	  "description": "Workspace BasicAuth username",
 		//	  "pattern": "^[A-Za-z0-9_]+$",
 		//	  "type": "string"
 		//	}
 		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区 BasicAuth 用户名。",
+			Description: "Workspace BasicAuth username",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WorkspaceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "工作区Id。",
+		//	  "description": "Workspace ID",
 		//	  "type": "string"
 		//	}
 		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "工作区Id。",
+			Description: "Workspace ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -448,7 +647,14 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"active_series":                      "ActiveSeries",
+		"attr_value":                         "AttrValue",
+		"auth_type":                          "AuthType",
 		"availability_zone_replicas":         "AvailabilityZoneReplicas",
+		"bearer_token":                       "BearerToken",
+		"cal_charge_item_list":               "CalChargeItemList",
+		"calculate_price_params":             "CalculatePriceParams",
+		"charge_item_code":                   "ChargeItemCode",
+		"configuration_code":                 "ConfigurationCode",
 		"create_time":                        "CreateTime",
 		"delete_protection_enabled":          "DeleteProtectionEnabled",
 		"description":                        "Description",
@@ -461,10 +667,17 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name":                               "Name",
 		"overdue_reclaim_time":               "OverdueReclaimTime",
 		"password":                           "Password",
+		"period":                             "Period",
 		"project_name":                       "ProjectName",
+		"prometheus_push_endpoint":           "PrometheusPushEndpoint",
 		"prometheus_push_intranet_endpoint":  "PrometheusPushIntranetEndpoint",
+		"prometheus_query_endpoint":          "PrometheusQueryEndpoint",
 		"prometheus_query_intranet_endpoint": "PrometheusQueryIntranetEndpoint",
+		"prometheus_write_endpoint":          "PrometheusWriteEndpoint",
 		"prometheus_write_intranet_endpoint": "PrometheusWriteIntranetEndpoint",
+		"public_access_enabled":              "PublicAccessEnabled",
+		"public_query_bandwidth":             "PublicQueryBandwidth",
+		"public_write_bandwidth":             "PublicWriteBandwidth",
 		"query_concurrency":                  "QueryConcurrency",
 		"query_per_second":                   "QueryPerSecond",
 		"quota":                              "Quota",
@@ -472,6 +685,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"retention_period":                   "RetentionPeriod",
 		"scan_samples_per_second":            "ScanSamplesPerSecond",
 		"scan_series_per_second":             "ScanSeriesPerSecond",
+		"search_latency_offset":              "SearchLatencyOffset",
 		"status":                             "Status",
 		"tags":                               "Tags",
 		"usage":                              "Usage",

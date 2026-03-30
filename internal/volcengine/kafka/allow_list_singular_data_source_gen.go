@@ -26,94 +26,94 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单规则列表。支持指定为 IP 地址或者 IP 网段。多个 IP 地址或网段之间使用英文逗号（,）分隔。每个白名单最多可配置 300 个 IP 地址或网段。",
+		//	  "description": "Allowlist rule list. Supports specifying IP addresses or IP ranges. Separate multiple IP addresses or ranges with commas (,). Each allowlist can contain up to 300 IP addresses or ranges",
 		//	  "type": "string"
 		//	}
 		"allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单规则列表。支持指定为 IP 地址或者 IP 网段。多个 IP 地址或网段之间使用英文逗号（,）分隔。每个白名单最多可配置 300 个 IP 地址或网段。",
+			Description: "Allowlist rule list. Supports specifying IP addresses or IP ranges. Separate multiple IP addresses or ranges with commas (,). Each allowlist can contain up to 300 IP addresses or ranges",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListDesc
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单描述。长度不超过200个字符。",
+		//	  "description": "Allowlist description. Maximum length: 200 characters",
 		//	  "type": "string"
 		//	}
 		"allow_list_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单描述。长度不超过200个字符。",
+			Description: "Allowlist description. Maximum length: 200 characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单 ID。",
+		//	  "description": "Allowlist ID",
 		//	  "type": "string"
 		//	}
 		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单 ID。",
+			Description: "Allowlist ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListIpNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单指定的规则个数。",
+		//	  "description": "Number of rules specified in the allowlist",
 		//	  "type": "integer"
 		//	}
 		"allow_list_ip_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "白名单指定的规则个数。",
+			Description: "Number of rules specified in the allowlist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单规则名称。长度为 1～128 个字符。只能包含中文、字母、数字、下划线和连字符（-）。不能以数字或连字符（-）开头。白名单名称在当前地域下唯一。",
+		//	  "description": "Allowlist rule name. Length: 1–128 characters. Can only contain Chinese characters, letters, numbers, underscores, and hyphens (-). Cannot start with a number or hyphen (-). The allowlist name must be unique within the current region",
 		//	  "type": "string"
 		//	}
 		"allow_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单规则名称。长度为 1～128 个字符。只能包含中文、字母、数字、下划线和连字符（-）。不能以数字或连字符（-）开头。白名单名称在当前地域下唯一。",
+			Description: "Allowlist rule name. Length: 1–128 characters. Can only contain Chinese characters, letters, numbers, underscores, and hyphens (-). Cannot start with a number or hyphen (-). The allowlist name must be unique within the current region",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ApplyInstanceNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "此白名单已绑定的实例数量。若指定 AllowList 参数，则此字段必填，用于指定规则修改后预期将会影响到的实例个数。若预期影响个数与实际影响个数不符，则请求失败。",
+		//	  "description": "Number of instances already bound to this allowlist. If the AllowList parameter is specified, this field is required to indicate the expected number of instances affected after rule modification. If the expected number does not match the actual number, the request fails",
 		//	  "type": "integer"
 		//	}
 		"apply_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "此白名单已绑定的实例数量。若指定 AllowList 参数，则此字段必填，用于指定规则修改后预期将会影响到的实例个数。若预期影响个数与实际影响个数不符，则请求失败。",
+			Description: "Number of instances already bound to this allowlist. If the AllowList parameter is specified, this field is required to indicate the expected number of instances affected after rule modification. If the expected number does not match the actual number, the request fails",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单绑定的实例个数。",
+		//	  "description": "Number of instances bound to the allowlist",
 		//	  "type": "integer"
 		//	}
 		"associated_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "白名单绑定的实例个数。",
+			Description: "Number of instances bound to the allowlist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstances
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单绑定的实例信息。",
+		//	  "description": "Information about the instance bound to the allowlist",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "白名单绑定的实例信息。",
+		//	    "description": "Information about the instance bound to the allowlist",
 		//	    "properties": {
 		//	      "InstanceId": {
-		//	        "description": "白名单绑定的实例ID。",
+		//	        "description": "ID of the instance bound to the allowlist",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
-		//	        "description": "白名单绑定的实例名称。",
+		//	        "description": "Name of the instance bound to the allowlist",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -127,17 +127,17 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "白名单绑定的实例ID。",
+						Description: "ID of the instance bound to the allowlist",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
 					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "白名单绑定的实例名称。",
+						Description: "Name of the instance bound to the allowlist",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "白名单绑定的实例信息。",
+			Description: "Information about the instance bound to the allowlist",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

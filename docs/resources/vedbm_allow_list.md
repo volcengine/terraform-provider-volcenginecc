@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vedbm_allow_list Resource - terraform-provider-volcenginecc"
 subcategory: "VEDBM"
 description: |-
-  vedbm访问白名单。
+  vedbm access allowlist.
 ---
 
 # volcenginecc_vedbm_allow_list (Resource)
 
-vedbm访问白名单。
+vedbm access allowlist.
 
 ## Example Usage
 
@@ -33,23 +33,23 @@ resource "volcenginecc_vedbm_allow_list" "VEDBMAllowListDemo" {
 
 ### Required
 
-- `allow_list_name` (String) 白名单名称。
+- `allow_list_name` (String) Allowlist name.
 
 ### Optional
 
-- `allow_list` (String) IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。
-- `allow_list_desc` (String) 白名单描述。
-- `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `associated_instances` (Attributes List) 绑定的实例列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associated_instances))
-- `modify_mode` (String) 修改白名单的方式，支持设置为：Cover（默认）：使用 AllowList 参数中的值覆盖原白名单。Append：在原白名单中增加 AllowList 参数中输入的 IP 地址。Delete：在原白名单中删除 AllowList 参数中输入的 IP 地址。至少需要保留一个 IP 地址。
-- `project_name` (String) 白名单所属的项目名称，当该参数留空时，新建的白名单默认加入 default 项目
+- `allow_list` (String) IP allowlist. Separate multiple IP addresses with commas (,). Duplicate entries are not allowed.
+- `allow_list_desc` (String) Allowlist description.
+- `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is currently supported.
+- `associated_instances` (Attributes List) List of bound instances.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
+- `modify_mode` (String) How to modify the allowlist. Supported settings: Cover (default): Overwrite the original allowlist with the values in the AllowList parameter. Append: Add IP addresses entered in the AllowList parameter to the original allowlist. Delete: Remove IP addresses entered in the AllowList parameter from the original allowlist. At least one IP address must remain.
+- `project_name` (String) Project name associated with the allowlist. If left blank, the new allowlist will be added to the default project.
 
 ### Read-Only
 
-- `allow_list_id` (String) 白名单的id。
-- `allow_list_ip_num` (Number) 白名单内的 IP 地址（或地址段）总数。
-- `associated_instance_num` (Number) 白名单下绑定的实例总数
+- `allow_list_id` (String) Allowlist ID.
+- `allow_list_ip_num` (Number) Total number of IP addresses (or address ranges) in the allowlist.
+- `associated_instance_num` (Number) Total number of instances bound to the allowlist.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--associated_instances"></a>
@@ -57,7 +57,7 @@ resource "volcenginecc_vedbm_allow_list" "VEDBMAllowListDemo" {
 
 Optional:
 
-- `instance_id` (String) 实例ID。
+- `instance_id` (String) Instance ID.
 
 ## Import
 

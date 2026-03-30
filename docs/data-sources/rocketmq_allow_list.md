@@ -21,22 +21,22 @@ Data Source schema for Volcengine::RocketMQ::AllowList
 
 ### Read-Only
 
-- `allow_list` (String) IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。
-- `allow_list_category` (String) 白名单分类。
-- `allow_list_desc` (String) 白名单描述。
-- `allow_list_id` (String) 白名单的id。
-- `allow_list_ip_num` (Number) 白名单内的 IP 地址（或地址段）总数。
-- `allow_list_name` (String) 白名单名称。
-- `allow_list_type` (String) 白名单内的IP地址类型，当前仅支持IPv4。
-- `associated_instance_num` (Number) 白名单下绑定的实例总数
-- `associated_instances` (Attributes List) 绑定的实例列表。 (see [below for nested schema](#nestedatt--associated_instances))
-- `instance_id` (String) 实例ID。
+- `allow_list` (String) IP allowlist. Separate multiple IP addresses with commas (,) and do not repeat addresses
+- `allow_list_category` (String) Allowlist Category
+- `allow_list_desc` (String) Allowlist Description
+- `allow_list_id` (String) Allowlist ID
+- `allow_list_ip_num` (Number) Total number of IP addresses (or address ranges) in the allowlist
+- `allow_list_name` (String) Allowlist Name
+- `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is supported
+- `associated_instance_num` (Number) Total number of instances bound to the allowlist
+- `associated_instances` (Attributes List) Bound Instance List (see [below for nested schema](#nestedatt--associated_instances))
+- `instance_id` (String) Instance ID
 
 <a id="nestedatt--associated_instances"></a>
 ### Nested Schema for `associated_instances`
 
 Read-Only:
 
-- `instance_id` (String) 实例ID。
-- `instance_name` (String) 实例名称。
-- `vpc` (String) 实例所属VPC ID。
+- `instance_id` (String) Instance ID
+- `instance_name` (String) Instance Name
+- `vpc` (String) VPC ID of the instance

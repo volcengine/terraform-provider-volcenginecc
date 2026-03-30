@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vpc_vpc Resource - terraform-provider-volcenginecc"
 subcategory: "VPC"
 description: |-
-  私有网络为云上资源构建隔离的、自主配置的虚拟网络环境。可以在私有网络中自定义IP地址段、安全组、路由策略等网络特性，简单高效安全地管理云上资源。
+  A private network creates an isolated, self-configurable virtual network environment for cloud resources. You can customize IP address ranges, security groups, routing policies, and other network features within the private network to manage cloud resources simply, efficiently, and securely.
 ---
 
 # volcenginecc_vpc_vpc (Resource)
 
-私有网络为云上资源构建隔离的、自主配置的虚拟网络环境。可以在私有网络中自定义IP地址段、安全组、路由策略等网络特性，简单高效安全地管理云上资源。
+A private network creates an isolated, self-configurable virtual network environment for cloud resources. You can customize IP address ranges, security groups, routing policies, and other network features within the private network to manage cloud resources simply, efficiently, and securely.
 
 ## Example Usage
 
@@ -52,44 +52,44 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
 
 ### Optional
 
-- `cidr_block` (String) VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24、10.0.0.0/8 ~ 24、172.16.0.0/12 ~ 24。
-- `description` (String) VPC的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不能以http://或https://开头。
-- `dns_servers` (Set of String) VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用&分隔。不填则配置为默认DNS服务器地址。
-- `enable_ipv_6` (Boolean) 是否开启IPv6网段。false（默认值）：不开启。true：开启。
-- `ipv_4_gateway_id` (String) VPC 绑定的 IPv4 网关的 ID。
-- `ipv_6_cidr_block` (String) VPC的IPv6网段。传入此参数后，参数Ipv6MaskLen不生效。参数Ipv6Isp传入非BGP后，参数Ipv6MaskLen和参数Ipv6CidrBlock二者必须传入一个。参数Ipv6Isp未传或传入BGP，此参数未传，则由系统自动分配IPv6网段。
-- `nat_gateway_ids` (Set of String) VPC中创建的NAT网关的ID。
-- `project_name` (String) VPC所属项目的名称。不填默认加入default项目。
-- `secondary_cidr_blocks` (Set of String) VPC的辅助网段。
-- `subnet_ids` (Set of String) VPC中子网的列表。
-- `support_ipv_4_gateway` (Boolean) VPC 是否启用 IPv4 网关。false（默认值）：不启用。true：启用。
-- `tags` (Attributes Set) 私有网络绑定的标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `vpc_name` (String) VPC的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为VPC实例的ID。不能以http://或https://开头。
+- `cidr_block` (String) IPv4 CIDR block of the VPC. You can use the following CIDR blocks or their subsets as the VPC's IPv4 CIDR block: 192.168.0.0/16 ~ 24, 10.0.0.0/8 ~ 24, 172.16.0.0/12 ~ 24.
+- `description` (String) Description of the VPC. Length must be between 0 and 255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Cannot start with http:// or https://.
+- `dns_servers` (Set of String) DNS server addresses of the VPC. Maximum of 5 per request. Each DnsServer must be a valid IP address. Use & to separate multiple IPs. If not specified, defaults to the system DNS server addresses.
+- `enable_ipv_6` (Boolean) Whether to enable IPv6 CIDR block. false (default): not enabled. true: enabled.
+- `ipv_4_gateway_id` (String) ID of the IPv4 gateway bound to the VPC.
+- `ipv_6_cidr_block` (String) IPv6 CIDR block of the VPC. If this parameter is provided, the Ipv6MaskLen parameter is ignored. If the Ipv6Isp parameter is set to a value other than BGP, either the Ipv6MaskLen or Ipv6CidrBlock parameter must be provided. If the Ipv6Isp parameter is not provided or set to BGP and this parameter is not provided, the system automatically assigns an IPv6 CIDR block.
+- `nat_gateway_ids` (Set of String) ID of the NAT gateway created in the VPC.
+- `project_name` (String) Name of the project to which the VPC belongs. If not specified, it is added to the default project.
+- `secondary_cidr_blocks` (Set of String) Secondary CIDR block of the VPC.
+- `subnet_ids` (Set of String) List of subnets in the VPC.
+- `support_ipv_4_gateway` (Boolean) Whether the VPC enables the IPv4 gateway. false (default): not enabled. true: enabled.
+- `tags` (Attributes Set) Tags bound to the private network.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `vpc_name` (String) Name of the VPC. Length must be between 1 and 128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-). If not specified, defaults to the VPC instance ID. Cannot start with http:// or https://.
 
 ### Read-Only
 
-- `account_id` (String) VPC所属账号的ID。
-- `associate_cens` (Attributes Set) VPC关联的CEN信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--associate_cens))
-- `creation_time` (String) 创建VPC的时间。
+- `account_id` (String) ID of the account to which the VPC belongs.
+- `associate_cens` (Attributes Set) CEN information associated with the VPC.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associate_cens))
+- `creation_time` (String) Time when the VPC was created.
 - `id` (String) Uniquely identifies the resource.
-- `is_default` (Boolean) 该VPC是否为默认VPC。true：默认VPC，表示该VPC是创建ECS实例时系统自动创建的VPC。false：非默认VPC，表示该VPC是用户手动创建的。
-- `network_acl_num` (String) VPC中的网络ACL的数量。
-- `route_table_ids` (Set of String) VPC关联的路由表ID。
-- `security_group_ids` (Set of String) VPC中安全组的列表。
-- `status` (String) VPC的状态。Creating：创建中。Pending：已创建。Available：可用。
-- `update_time` (String) 更新VPC的时间。
-- `user_cidr_blocks` (Set of String) VPC的用户网段。
-- `vpc_id` (String) VPC的ID。
+- `is_default` (Boolean) Whether this VPC is the default VPC. true: default VPC, meaning the VPC was automatically created by the system when creating an ECS instance. false: non-default VPC, meaning the VPC was manually created by the user.
+- `network_acl_num` (String) Number of network ACLs in the VPC.
+- `route_table_ids` (Set of String) ID of the route table associated with the VPC.
+- `security_group_ids` (Set of String) List of security groups in the VPC.
+- `status` (String) Status of the VPC. Creating: being created. Created: created. Available: available.
+- `update_time` (String) Time when the VPC was updated.
+- `user_cidr_blocks` (Set of String) User CIDR block of the VPC.
+- `vpc_id` (String) ID of the VPC.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key.
+- `value` (String) Tag value.
 
 
 <a id="nestedatt--associate_cens"></a>
@@ -97,9 +97,9 @@ Optional:
 
 Read-Only:
 
-- `cen_id` (String) CEN的ID。
-- `cen_owner_id` (String) CEN的用户ID。
-- `cen_status` (String) VPC在CEN中的状态。Attaching：加载中，Attached：已加载
+- `cen_id` (String) ID of the CEN.
+- `cen_owner_id` (String) User ID of the CEN.
+- `cen_status` (String) Status of the VPC in the CEN. Loading: loading, Loaded: loaded
 
 ## Import
 

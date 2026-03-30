@@ -26,18 +26,18 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组中IP条目的详细信息。",
+		//	  "description": "Details of IP entries in the access control policy group",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "IP条目的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+		//	        "description": "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string",
 		//	        "maxLength": 255,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
 		//	      "Entry": {
-		//	        "description": "IP条目的地址段，只支持CIDR地址。",
+		//	        "description": "IP entry address range; only CIDR addresses are supported",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -54,89 +54,89 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "IP条目的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+						Description: "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Entry
 					"entry": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "IP条目的地址段，只支持CIDR地址。",
+						Description: "IP entry address range; only CIDR addresses are supported",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "访问控制策略组中IP条目的详细信息。",
+			Description: "Details of IP entries in the access control policy group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclEntryCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组包含的IP条目数量。",
+		//	  "description": "Number of IP entries in the access control policy group",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"acl_entry_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组包含的IP条目数量。",
+			Description: "Number of IP entries in the access control policy group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组的ID。",
+		//	  "description": "Access control policy group ID",
 		//	  "type": "string"
 		//	}
 		"acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组的ID。",
+			Description: "Access control policy group ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组的名字。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。不填默认为访问控制策略组ID。",
+		//	  "description": "Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"acl_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组的名字。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点号（.）、下划线（_）和短横线（-）。长度限制为1 ～ 128个字符。不填默认为访问控制策略组ID。",
+			Description: "Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组的创建时间。",
+		//	  "description": "Creation time of the access control policy group",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组的创建时间。",
+			Description: "Creation time of the access control policy group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+		//	  "description": "Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+			Description: "Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组关联的监听器详细信息。",
+		//	  "description": "Details of listeners associated with the access control policy group",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AclType": {
-		//	        "description": "监听器对本访问控制策略组的控制方式。white：白名单方式；black：黑名单方式",
+		//	        "description": "Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode",
 		//	        "enum": [
 		//	          "white",
 		//	          "black"
@@ -144,20 +144,20 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerId": {
-		//	        "description": "监听器的ID",
+		//	        "description": "Listener ID",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerName": {
-		//	        "description": "监听器的名称",
+		//	        "description": "Listener name",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "监听器的端口",
+		//	        "description": "Listener port",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "监听器的协议",
+		//	        "description": "Listener protocol",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -177,50 +177,50 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AclType
 					"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器对本访问控制策略组的控制方式。white：白名单方式；black：黑名单方式",
+						Description: "Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerId
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的ID",
+						Description: "Listener ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerName
 					"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的名称",
+						Description: "Listener name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "监听器的端口",
+						Description: "Listener port",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "监听器的协议",
+						Description: "Listener protocol",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "访问控制策略组关联的监听器详细信息。",
+			Description: "Details of listeners associated with the access control policy group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组所属项目名称。",
+		//	  "description": "Project name to which the access control policy group belongs",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组所属项目名称。",
+			Description: "Project name to which the access control policy group belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组的状态。Creating：创建中。Active：正常可用。Configuring：配置中。Deleting：删除中。",
+		//	  "description": "Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Active",
@@ -230,25 +230,25 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组的状态。Creating：创建中。Active：正常可用。Configuring：配置中。Deleting：删除中。",
+			Description: "Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组绑定的标签。",
+		//	  "description": "Tags bound to the access control policy group",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。长度限制为1～128个字符。大小写敏感。不能以volc:和sys:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。",
+		//	        "description": "User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。",
+		//	        "description": "User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -267,28 +267,28 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。长度限制为1～128个字符。大小写敏感。不能以volc:和sys:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。",
+						Description: "User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。",
+						Description: "User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "访问控制策略组绑定的标签。",
+			Description: "Tags bound to the access control policy group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制策略组的最近操作时间。",
+		//	  "description": "Last operation time of the access control policy group",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制策略组的最近操作时间。",
+			Description: "Last operation time of the access control policy group",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

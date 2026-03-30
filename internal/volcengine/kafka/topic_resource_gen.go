@@ -38,16 +38,16 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义权限配置，即为某些用户设置对于此 Topic 的自定义权限。仅在 AllAuthority 为 False 时需要设置。",
+		//	  "description": "Custom permission configuration, which sets custom permissions for certain users on this Topic. Only required when AllAuthority is False.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AccessPolicy": {
-		//	        "description": "SASL 用户对于当前 Topic 的访问权限。PubSub：拥有发布、订阅权限。Pub：拥有发布权限。Sub：拥有订阅权限。",
+		//	        "description": "SASL user access permissions for the current Topic. PubSub: publish and subscribe permissions. Pub: publish permission. Sub: subscribe permission.",
 		//	        "type": "string"
 		//	      },
 		//	      "UserName": {
-		//	        "description": "SASL 用户名称。",
+		//	        "description": "SASL username.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -61,7 +61,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AccessPolicy
 					"access_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "SASL 用户对于当前 Topic 的访问权限。PubSub：拥有发布、订阅权限。Pub：拥有发布权限。Sub：拥有订阅权限。",
+						Description: "SASL user access permissions for the current Topic. PubSub: publish and subscribe permissions. Pub: publish permission. Sub: subscribe permission.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -70,7 +70,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: UserName
 					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "SASL 用户名称。",
+						Description: "SASL username.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -79,7 +79,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "自定义权限配置，即为某些用户设置对于此 Topic 的自定义权限。仅在 AllAuthority 为 False 时需要设置。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Custom permission configuration, which sets custom permissions for certain users on this Topic. Only required when AllAuthority is False.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -91,11 +91,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": true,
-		//	  "description": "待创建的Topic默认是否对所有用户都开启读写权限。true：（默认）所有用户都具备此 Topic 的读写权限。false：并非所有用户都具备此 Topic 的读写权限。默认情况下，用户对于此 Topic 的权限沿用用户的默认权限，如果默认权限不满足需求，您也可以通过 AccessPolicies 指定某个用户对于此 Topic 的自定义权限。",
+		//	  "description": "Whether read/write permissions are enabled by default for all users on the Topic to be created. true: (default) All users have read/write permissions for this Topic. false: Not all users have read/write permissions for this Topic. By default, users inherit their default permissions for this Topic. If the default permissions do not meet your requirements, you can specify custom permissions for a user on this Topic through AccessPolicies.",
 		//	  "type": "boolean"
 		//	}
 		"all_authority": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "待创建的Topic默认是否对所有用户都开启读写权限。true：（默认）所有用户都具备此 Topic 的读写权限。false：并非所有用户都具备此 Topic 的读写权限。默认情况下，用户对于此 Topic 的权限沿用用户的默认权限，如果默认权限不满足需求，您也可以通过 AccessPolicies 指定某个用户对于此 Topic 的自定义权限。",
+			Description: "Whether read/write permissions are enabled by default for all users on the Topic to be created. true: (default) All users have read/write permissions for this Topic. false: Not all users have read/write permissions for this Topic. By default, users inherit their default permissions for this Topic. If the default permissions do not meet your requirements, you can specify custom permissions for a user on this Topic through AccessPolicies.",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(true),
@@ -107,7 +107,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 的消息清理策略，支持以下三种取值方式：[delete]：默认的消息清理策略。在磁盘容量充足的情况下，保留在最长保留时间范围内的消息；在磁盘容量不足时，将提前删除旧消息，以保证服务可用性。[compact]：COMPACT 消息清理策略针对每个消息的 Key 进行整合，对于有相同 Key 的消息，只保留最新的 value 值，旧的记录则会被清除。[delete,compact]：同时配置 DELETE 和 COMPACT 两种消息清理策略。只要消息满足任一条清理策略时，都将被清除。",
+		//	  "description": "Topic message cleanup policy supports the following three options: [delete]: The default message cleanup policy. When disk space is sufficient, messages are retained within the maximum retention period; when disk space is insufficient, old messages are deleted early to ensure service availability. [compact]: The COMPACT message cleanup policy consolidates messages by Key, retaining only the latest value for messages with the same Key, and removing older records. [delete,compact]: Configures both DELETE and COMPACT message cleanup policies. Messages will be deleted as soon as they meet any of the cleanup criteria.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -117,7 +117,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"cleanup_policy": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "Topic 的消息清理策略，支持以下三种取值方式：[delete]：默认的消息清理策略。在磁盘容量充足的情况下，保留在最长保留时间范围内的消息；在磁盘容量不足时，将提前删除旧消息，以保证服务可用性。[compact]：COMPACT 消息清理策略针对每个消息的 Key 进行整合，对于有相同 Key 的消息，只保留最新的 value 值，旧的记录则会被清除。[delete,compact]：同时配置 DELETE 和 COMPACT 两种消息清理策略。只要消息满足任一条清理策略时，都将被清除。",
+			Description: "Topic message cleanup policy supports the following three options: [delete]: The default message cleanup policy. When disk space is sufficient, messages are retained within the maximum retention period; when disk space is insufficient, old messages are deleted early to ensure service availability. [compact]: The COMPACT message cleanup policy consolidates messages by Key, retaining only the latest value for messages with the same Key, and removing older records. [delete,compact]: Configures both DELETE and COMPACT message cleanup policies. Messages will be deleted as soon as they meet any of the cleanup criteria.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -129,11 +129,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 的创建时间。",
+		//	  "description": "Topic creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Topic 的创建时间。",
+			Description: "Topic creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -143,13 +143,13 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 的描述信息。长度不超过 128 个字符。",
+		//	  "description": "Topic description. Maximum length: 128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Topic 的描述信息。长度不超过 128 个字符。",
+			Description: "Topic description. Maximum length: 128 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -163,11 +163,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -177,11 +177,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息保留时长，单位小时。Topic维度的消息保留时长，取值范围：1 - 2160小时（90天）。",
+		//	  "description": "Message retention period, in hours. The retention period at the Topic level ranges from 1 to 2160 hours (90 days).",
 		//	  "type": "integer"
 		//	}
 		"log_retention_hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "消息保留时长，单位小时。Topic维度的消息保留时长，取值范围：1   - 2160小时（90天）。",
+			Description: "Message retention period, in hours. The retention period at the Topic level ranges from 1 to 2160 hours (90 days).",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -191,11 +191,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 级别的参数配置。Parameters 参数说明 MinInsyncReplicaNumber:2：最小同步副本个数。当同步副本个数小于配置值时，消息将无法写入对应 Topic。配置值越大，数据可靠性增加，但是可用性将会降低。默认值为副本数减 1。考虑到 Topic 的可用性，建议设置为副本数减 1。MessageMaxByte:12：最大消息大小。单位为 MB，取值范围为 1～12。默认沿用实例的最大消息大小设置。LogRetentionHours:72：消息保留时长。单位为小时，取值范围为 0～2160，即消息最久保留 90 天。默认沿用实例的消息保留时长设置。",
+		//	  "description": "Topic-level parameter configuration. Parameters description MinInsyncReplicaNumber:2: Minimum number of in-sync replicas. If the number of in-sync replicas is less than the configured value, messages cannot be written to the Topic. Higher values increase data reliability but reduce availability. The default is replica count minus 1. For Topic availability, it is recommended to set this to replica count minus 1. MessageMaxByte:12: Maximum message size, in MB, range 1–12. By default, inherits the instance's maximum message size setting. LogRetentionHours:72: Message retention period, in hours, range 0–2160 (up to 90 days). By default, inherits the instance's message retention period setting.",
 		//	  "type": "string"
 		//	}
 		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Topic 级别的参数配置。Parameters 参数说明 MinInsyncReplicaNumber:2：最小同步副本个数。当同步副本个数小于配置值时，消息将无法写入对应 Topic。配置值越大，数据可靠性增加，但是可用性将会降低。默认值为副本数减 1。考虑到 Topic 的可用性，建议设置为副本数减 1。MessageMaxByte:12：最大消息大小。单位为 MB，取值范围为 1～12。默认沿用实例的最大消息大小设置。LogRetentionHours:72：消息保留时长。单位为小时，取值范围为 0～2160，即消息最久保留 90 天。默认沿用实例的消息保留时长设置。",
+			Description: "Topic-level parameter configuration. Parameters description MinInsyncReplicaNumber:2: Minimum number of in-sync replicas. If the number of in-sync replicas is less than the configured value, messages cannot be written to the Topic. Higher values increase data reliability but reduce availability. The default is replica count minus 1. For Topic availability, it is recommended to set this to replica count minus 1. MessageMaxByte:12: Maximum message size, in MB, range 1–12. By default, inherits the instance's maximum message size setting. LogRetentionHours:72: Message retention period, in hours, range 0–2160 (up to 90 days). By default, inherits the instance's message retention period setting.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -206,11 +206,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 分区数。取值范围为 1~300，如果实例中已创建了其他 Topic，则所有 Topic 的分区数之和不超过该实例的分区数上限。如果分区数无法满足业务需求，您可以购买更多分区，提升实例的分区数量上限。",
+		//	  "description": "Number of Topic partitions. The range is 1–300. If other Topics have already been created in the instance, the total number of partitions across all Topics must not exceed the partition limit of the instance. If the number of partitions does not meet your business needs, you can purchase more partitions to increase the partition limit of the instance.",
 		//	  "type": "integer"
 		//	}
 		"partition_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Topic 分区数。取值范围为 1~300，如果实例中已创建了其他 Topic，则所有 Topic 的分区数之和不超过该实例的分区数上限。如果分区数无法满足业务需求，您可以购买更多分区，提升实例的分区数量上限。",
+			Description: "Number of Topic partitions. The range is 1–300. If other Topics have already been created in the instance, the total number of partitions across all Topics must not exceed the partition limit of the instance. If the number of partitions does not meet your business needs, you can purchase more partitions to increase the partition limit of the instance.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReplicaNumber
@@ -218,11 +218,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 3,
-		//	  "description": "Topic 副本个数。可设置为为 2 或 3，默认值为 3。",
+		//	  "description": "Number of Topic replicas. Can be set to 2 or 3; the default is 3.",
 		//	  "type": "integer"
 		//	}
 		"replica_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Topic 副本个数。可设置为为 2 或 3，默认值为 3。",
+			Description: "Number of Topic replicas. Can be set to 2 or 3; the default is 3.",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(3),
@@ -234,11 +234,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 的状态。",
+		//	  "description": "Topic status.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Topic 的状态。",
+			Description: "Topic status.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -248,17 +248,17 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Topic 的标签信息",
+		//	  "description": "Topic label information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "Topic 的标签信息。",
+		//	    "description": "Topic label information.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Label key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -276,7 +276,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Label key.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -288,7 +288,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -300,7 +300,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Topic 的标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Topic label information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -311,13 +311,13 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "待创建的 Topic 名称。3～64 个字符。必须以英文或数字开头。支持的字符包括英文、数字、连字符（-）、下划线（_）和英文句号（.）。",
+		//	  "description": "Name of the Topic to be created. 3–64 characters. Must start with a letter or number. Supported characters include letters, numbers, hyphens (-), underscores (_), and periods (.).",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
 		"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "待创建的 Topic 名称。3～64 个字符。必须以英文或数字开头。支持的字符包括英文、数字、连字符（-）、下划线（_）和英文句号（.）。",
+			Description: "Name of the Topic to be created. 3–64 characters. Must start with a letter or number. Supported characters include letters, numbers, hyphens (-), underscores (_), and periods (.).",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 64),
@@ -330,12 +330,12 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前 Topic 总数据量占实例总存储空间的比例，控制台页面显示为保留两位小数的百分数。",
+		//	  "description": "The current Topic data size as a percentage of the instance's total storage space. Displayed on the console as a percentage with two decimal places.",
 		//	  "format": "double",
 		//	  "type": "number"
 		//	}
 		"used_storage_percentage_in_instance": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "当前 Topic 总数据量占实例总存储空间的比例，控制台页面显示为保留两位小数的百分数。",
+			Description: "The current Topic data size as a percentage of the instance's total storage space. Displayed on the console as a percentage with two decimal places.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -345,12 +345,12 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当前 Topic 已使用的总存储空间大小。",
+		//	  "description": "Total storage space currently used by the Topic.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"used_storage_space_in_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "当前 Topic 已使用的总存储空间大小。",
+			Description: "Total storage space currently used by the Topic.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -368,7 +368,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Topic即消息的主题，用于分类消息。支持 Topic 级别的资源管理，即 Topic 的创建、查看与删除等操作。",
+		Description: "Topic refers to the message subject and is used to categorize messages. Supports resource management at the Topic level, including creating, viewing, and deleting Topics.",
 		Version:     1,
 		Attributes:  attributes,
 	}

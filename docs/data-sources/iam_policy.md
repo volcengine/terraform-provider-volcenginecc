@@ -21,41 +21,41 @@ Data Source schema for Volcengine::IAM::Policy
 
 ### Read-Only
 
-- `attachment_count` (Number) 策略绑定的身份数量。
-- `category` (String) 系统预设策略所属的分类，通常为服务代码，对于自定义策略该字段不会返回值。
-- `created_time` (String) 策略创建时间。
-- `description` (String) 策略描述，长度不超过128。
-- `is_service_role_policy` (Number) 是否是服务关联角色的策略，0代表否，1代表是。
-- `policy_document` (String) 策略语法内容，例如：{"Statement":[{"Effect":"Allow","Action":["iam:","tag:"],"Resource":["*"]}]}
-- `policy_name` (String) 策略名，长度1~64，支持英文、数字和+=,.@-_符号。
-- `policy_roles` (Attributes Set) 策略绑定的角色列表。 (see [below for nested schema](#nestedatt--policy_roles))
-- `policy_trn` (String) 策略的TRN。
-- `policy_type` (String) 策略类型。System代表系统预设策略，Custom代表自定义策略。
-- `policy_user_groups` (Attributes Set) 策略绑定的用户组列表。 (see [below for nested schema](#nestedatt--policy_user_groups))
-- `policy_users` (Attributes Set) 策略绑定的用户列表。 (see [below for nested schema](#nestedatt--policy_users))
-- `updated_time` (String) 策略更新时间。
+- `attachment_count` (Number) Number of identities bound to the policy.
+- `category` (String) Category of the system preset policy, usually the service code. This field is not returned for custom policies.
+- `created_time` (String) Policy creation time.
+- `description` (String) Policy description, no more than 128 characters.
+- `is_service_role_policy` (Number) Indicates whether the policy is for a service-linked role. 0 means no; 1 means yes.
+- `policy_document` (String) Policy syntax content, for example: {"Statement":[{"Effect":"Allow","Action":["iam:","tag:"],"Resource":["*"]}]}
+- `policy_name` (String) Policy name, 1–64 characters. Supports English letters, numbers, and +=,.@-_ symbols.
+- `policy_roles` (Attributes Set) List of roles bound to the policy. (see [below for nested schema](#nestedatt--policy_roles))
+- `policy_trn` (String) Policy TRN.
+- `policy_type` (String) Policy type. System indicates a system preset policy; Custom indicates a custom policy.
+- `policy_user_groups` (Attributes Set) List of user groups bound to the policy. (see [below for nested schema](#nestedatt--policy_user_groups))
+- `policy_users` (Attributes Set) List of users bound to the policy. (see [below for nested schema](#nestedatt--policy_users))
+- `updated_time` (String) Policy update time.
 
 <a id="nestedatt--policy_roles"></a>
 ### Nested Schema for `policy_roles`
 
 Read-Only:
 
-- `created_time` (String) 策略绑定时间。
-- `description` (String) 策略描述。
-- `display_name` (String) 显示名称。
-- `entities_id` (Number) 唯一标识。
-- `name` (String) 对应用户、角色、用户组的名称。
-- `policy_scope` (Attributes Set) 策略绑定的项目列表。 (see [below for nested schema](#nestedatt--policy_roles--policy_scope))
+- `created_time` (String) Policy binding time.
+- `description` (String) Policy description.
+- `display_name` (String) Display name.
+- `entities_id` (Number) Unique identifier.
+- `name` (String) Name of the corresponding user, role, or user group.
+- `policy_scope` (Attributes Set) List of projects bound to the policy. (see [below for nested schema](#nestedatt--policy_roles--policy_scope))
 
 <a id="nestedatt--policy_roles--policy_scope"></a>
 ### Nested Schema for `policy_roles.policy_scope`
 
 Read-Only:
 
-- `created_time` (String) 项目授权时间。
-- `policy_scope_type` (String) 授权类型。Global代表全局授权，Project代表按项目授权。
-- `project_display_name` (String) 项目显示名。
-- `project_name` (String) 项目名。
+- `created_time` (String) Project authorization time.
+- `policy_scope_type` (String) Authorization type. Global indicates global authorization; Project indicates project-based authorization.
+- `project_display_name` (String) Project display name.
+- `project_name` (String) Project name.
 
 
 
@@ -64,22 +64,22 @@ Read-Only:
 
 Read-Only:
 
-- `created_time` (String) 策略绑定时间。
-- `description` (String) 策略描述。
-- `display_name` (String) 显示名称。
-- `entities_id` (Number) 唯一标识。
-- `name` (String) 对应用户、角色、用户组的名称。
-- `policy_scope` (Attributes Set) 策略绑定的项目列表。 (see [below for nested schema](#nestedatt--policy_user_groups--policy_scope))
+- `created_time` (String) Policy binding time.
+- `description` (String) Policy description.
+- `display_name` (String) Display name.
+- `entities_id` (Number) Unique identifier.
+- `name` (String) Name of the corresponding user, role, or user group.
+- `policy_scope` (Attributes Set) List of projects bound to the policy. (see [below for nested schema](#nestedatt--policy_user_groups--policy_scope))
 
 <a id="nestedatt--policy_user_groups--policy_scope"></a>
 ### Nested Schema for `policy_user_groups.policy_scope`
 
 Read-Only:
 
-- `created_time` (String) 项目授权时间。
-- `policy_scope_type` (String) 授权类型。Global代表全局授权，Project代表按项目授权。
-- `project_display_name` (String) 项目显示名。
-- `project_name` (String) 项目名。
+- `created_time` (String) Project authorization time.
+- `policy_scope_type` (String) Authorization type. Global indicates global authorization; Project indicates project-based authorization.
+- `project_display_name` (String) Project display name.
+- `project_name` (String) Project name.
 
 
 
@@ -88,19 +88,19 @@ Read-Only:
 
 Read-Only:
 
-- `created_time` (String) 策略绑定时间。
-- `description` (String) 策略描述。
-- `display_name` (String) 显示名称。
-- `entities_id` (Number) 唯一标识。
-- `name` (String) 对应用户、角色、用户组的名称。
-- `policy_scope` (Attributes Set) 策略绑定的项目列表。 (see [below for nested schema](#nestedatt--policy_users--policy_scope))
+- `created_time` (String) Policy binding time.
+- `description` (String) Policy description.
+- `display_name` (String) Display name.
+- `entities_id` (Number) Unique identifier.
+- `name` (String) Name of the corresponding user, role, or user group.
+- `policy_scope` (Attributes Set) List of projects bound to the policy. (see [below for nested schema](#nestedatt--policy_users--policy_scope))
 
 <a id="nestedatt--policy_users--policy_scope"></a>
 ### Nested Schema for `policy_users.policy_scope`
 
 Read-Only:
 
-- `created_time` (String) 项目授权时间。
-- `policy_scope_type` (String) 授权类型。Global代表全局授权，Project代表按项目授权。
-- `project_display_name` (String) 项目显示名。
-- `project_name` (String) 项目名。
+- `created_time` (String) Project authorization time.
+- `policy_scope_type` (String) Authorization type. Global indicates global authorization; Project indicates project-based authorization.
+- `project_display_name` (String) Project display name.
+- `project_name` (String) Project name.

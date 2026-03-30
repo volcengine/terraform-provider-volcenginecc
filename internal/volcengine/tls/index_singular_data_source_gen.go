@@ -26,41 +26,41 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "索引创建的时间。",
+		//	  "description": "Index creation time.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "索引创建的时间。",
+			Description: "Index creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableAutoIndex
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启索引自动更新，开启后系统将根据新出现的字段自动添加到键值索引。true：开启自动更新。false：不开启自动更新。",
+		//	  "description": "Enable automatic index updates? When enabled, the system will automatically add newly detected fields to the key-value index. true: Enable automatic updates. false: Do not enable automatic updates.",
 		//	  "type": "boolean"
 		//	}
 		"enable_auto_index": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启索引自动更新，开启后系统将根据新出现的字段自动添加到键值索引。true：开启自动更新。false：不开启自动更新。",
+			Description: "Enable automatic index updates? When enabled, the system will automatically add newly detected fields to the key-value index. true: Enable automatic updates. false: Do not enable automatic updates.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FullText
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全文索引配置。此字段为 null 或者未配置，表示不开启全文索引。全文索引配置和键值索引配置至少配置一项，即 FullText 和 KeyValue 之间应至少指定一个参数。",
+		//	  "description": "Full-text index configuration. If this field is null or not configured, full-text indexing is disabled. At least one of full-text index or key-value index must be configured; that is, at least one parameter between FullText and KeyValue must be specified.",
 		//	  "properties": {
 		//	    "CaseSensitive": {
-		//	      "description": "是否大小写敏感。true：大小写敏感。false：大小写不敏感。",
+		//	      "description": "Case sensitivity. true: Case sensitive. false: Not case sensitive.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Delimiter": {
-		//	      "description": "全文索引的分词符。字符串中每个字符代表一个分词符。长度为 1~256 字节。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+		//	      "description": "Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 		//	      "maxLength": 256,
 		//	      "type": "string"
 		//	    },
 		//	    "IncludeChinese": {
-		//	      "description": "检索时，是否对日志的中文内容按照中文语法进行分词，默认为 false。true：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。false：按照分词符参数中指定的分词符对日志进行分词。",
+		//	      "description": "When searching, specify whether to segment Chinese content in logs according to Chinese grammar. The default is false. true: For Chinese characters in logs, segment the log according to common Chinese grammar rules. Custom segmentation symbols for Chinese content are not supported. For non-Chinese characters in logs, segment the log using the segmentation symbols specified in the parameter. false: Segment the log using the segmentation symbols specified in the parameter.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -70,106 +70,106 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CaseSensitive
 				"case_sensitive": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否大小写敏感。true：大小写敏感。false：大小写不敏感。",
+					Description: "Case sensitivity. true: Case sensitive. false: Not case sensitive.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Delimiter
 				"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "全文索引的分词符。字符串中每个字符代表一个分词符。长度为 1~256 字节。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+					Description: "Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeChinese
 				"include_chinese": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "检索时，是否对日志的中文内容按照中文语法进行分词，默认为 false。true：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。false：按照分词符参数中指定的分词符对日志进行分词。",
+					Description: "When searching, specify whether to segment Chinese content in logs according to Chinese grammar. The default is false. true: For Chinese characters in logs, segment the log according to common Chinese grammar rules. Custom segmentation symbols for Chinese content are not supported. For non-Chinese characters in logs, segment the log using the segmentation symbols specified in the parameter. false: Segment the log using the segmentation symbols specified in the parameter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "全文索引配置。此字段为 null 或者未配置，表示不开启全文索引。全文索引配置和键值索引配置至少配置一项，即 FullText 和 KeyValue 之间应至少指定一个参数。",
+			Description: "Full-text index configuration. If this field is null or not configured, full-text indexing is disabled. At least one of full-text index or key-value index must be configured; that is, at least one parameter between FullText and KeyValue must be specified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyValue
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "键值索引配置。此字段数组长度为 0 或者未配置，表示不开启键值索引。全文索引配置和键值索引配置至少配置一项，即 FullText 和 KeyValue 之间应至少指定一个参数。",
+		//	  "description": "Key-value index configuration. If the length of this field array is 0 or not configured, key-value indexing is disabled. At least one of full-text index configuration or key-value index configuration must be set; that is, you must specify at least one parameter between FullText and KeyValue.",
 		//	  "insertionOrder": true,
 		//	  "items": {
-		//	    "description": "键值索引配置。",
+		//	    "description": "Key-value index configuration.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+		//	        "description": "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "需要配置键值索引的字段描述信息。",
+		//	        "description": "Field description information required for configuring key-value indexes.",
 		//	        "properties": {
 		//	          "AutoIndexFlag": {
-		//	            "description": "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+		//	            "description": "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "CaseSensitive": {
-		//	            "description": "是否区分大小写。默认为 false。",
+		//	            "description": "Whether to distinguish case. Default is false.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Delimiter": {
-		//	            "description": "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+		//	            "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 		//	            "type": "string"
 		//	          },
 		//	          "IncludeChinese": {
-		//	            "description": "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+		//	            "description": "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "IndexAll": {
-		//	            "description": "是否为 JSON 字段中所有值为文本的字段创建索引。",
+		//	            "description": "Create indexes for all fields with text values in the JSON field.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "IndexSQLAll": {
-		//	            "description": "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+		//	            "description": "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "JsonKeys": {
-		//	            "description": "当 ValueType 为 json 时，可通过 JsonKeys 字段配置 JSON 子字段键值索引，其值为 KeyValueInfo 数组。JsonKeys 列表中每个元素为 KeyValueInfo，可进一步嵌套定义 text、long、double 类型子字段。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。JsonKeys 中定义的子字段键值索引的 SqlFlag 设置应与其父字段设置保持一致，即需要同时开启或关闭，默认为关闭状态。子字段不支持单独设置 Delimiter、CaseSensitive 和 IncludeChinese，对于 text 类型的字段，CaseSensitive、Delimiter 和 IncludeChinese 固定沿用父字段设置。仅当 ValueType 为 json 时设置。",
+		//	            "description": "When ValueType is json, you can configure key-value indexes for JSON subfields using the JsonKeys field, which is an array of KeyValueInfo. Each element in the JsonKeys list is a KeyValueInfo, and you can further nest text, long, and double type subfields. For subfields in JSON key-value indexes, use . to indicate the hierarchy between JSON fields. For example, the JSON field namelist contains a text-type subfield totalcount and a JSON-type info, which itself contains the field name. Each field name should be configured as totalcount and info.name, respectively. The SqlFlag setting for subfield key-value indexes defined in JsonKeys must match their parent field, meaning they must be enabled or disabled together. The default is disabled. Subfields do not support separate settings for Delimiter, CaseSensitive, or IncludeChinese. For text-type fields, CaseSensitive, Delimiter, and IncludeChinese always inherit the parent field settings. This is only set when ValueType is json.",
 		//	            "insertionOrder": true,
 		//	            "items": {
-		//	              "description": "键值索引配置。",
+		//	              "description": "Key-value index configuration.",
 		//	              "properties": {
 		//	                "Key": {
-		//	                  "description": "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+		//	                  "description": "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "需要配置键值索引的字段描述信息。",
+		//	                  "description": "Field description information required for configuring key-value indexes.",
 		//	                  "properties": {
 		//	                    "AutoIndexFlag": {
-		//	                      "description": "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+		//	                      "description": "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "CaseSensitive": {
-		//	                      "description": "是否区分大小写。默认为 false。",
+		//	                      "description": "Whether to distinguish case. Default is false.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "Delimiter": {
-		//	                      "description": "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+		//	                      "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "IncludeChinese": {
-		//	                      "description": "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+		//	                      "description": "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "IndexAll": {
-		//	                      "description": "是否为 JSON 字段中所有值为文本的字段创建索引。",
+		//	                      "description": "Create indexes for all fields with text values in the JSON field.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "IndexSQLAll": {
-		//	                      "description": "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+		//	                      "description": "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "SqlFlag": {
-		//	                      "description": "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+		//	                      "description": "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "ValueType": {
-		//	                      "description": "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+		//	                      "description": "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -182,11 +182,11 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "SqlFlag": {
-		//	            "description": "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+		//	            "description": "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "ValueType": {
-		//	            "description": "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+		//	            "description": "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -203,7 +203,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+						Description: "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -211,32 +211,32 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AutoIndexFlag
 							"auto_index_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+								Description: "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: CaseSensitive
 							"case_sensitive": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否区分大小写。默认为 false。",
+								Description: "Whether to distinguish case. Default is false.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Delimiter
 							"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+								Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IncludeChinese
 							"include_chinese": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+								Description: "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IndexAll
 							"index_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否为 JSON 字段中所有值为文本的字段创建索引。",
+								Description: "Create indexes for all fields with text values in the JSON field.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IndexSQLAll
 							"index_sql_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+								Description: "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: JsonKeys
@@ -245,7 +245,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+											Description: "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
@@ -253,189 +253,189 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: AutoIndexFlag
 												"auto_index_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+													Description: "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: CaseSensitive
 												"case_sensitive": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "是否区分大小写。默认为 false。",
+													Description: "Whether to distinguish case. Default is false.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Delimiter
 												"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+													Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: IncludeChinese
 												"include_chinese": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+													Description: "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: IndexAll
 												"index_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "是否为 JSON 字段中所有值为文本的字段创建索引。",
+													Description: "Create indexes for all fields with text values in the JSON field.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: IndexSQLAll
 												"index_sql_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+													Description: "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: SqlFlag
 												"sql_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+													Description: "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: ValueType
 												"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+													Description: "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Description: "需要配置键值索引的字段描述信息。",
+											Description: "Field description information required for configuring key-value indexes.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "当 ValueType 为 json 时，可通过 JsonKeys 字段配置 JSON 子字段键值索引，其值为 KeyValueInfo 数组。JsonKeys 列表中每个元素为 KeyValueInfo，可进一步嵌套定义 text、long、double 类型子字段。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。JsonKeys 中定义的子字段键值索引的 SqlFlag 设置应与其父字段设置保持一致，即需要同时开启或关闭，默认为关闭状态。子字段不支持单独设置 Delimiter、CaseSensitive 和 IncludeChinese，对于 text 类型的字段，CaseSensitive、Delimiter 和 IncludeChinese 固定沿用父字段设置。仅当 ValueType 为 json 时设置。",
+								Description: "When ValueType is json, you can configure key-value indexes for JSON subfields using the JsonKeys field, which is an array of KeyValueInfo. Each element in the JsonKeys list is a KeyValueInfo, and you can further nest text, long, and double type subfields. For subfields in JSON key-value indexes, use . to indicate the hierarchy between JSON fields. For example, the JSON field namelist contains a text-type subfield totalcount and a JSON-type info, which itself contains the field name. Each field name should be configured as totalcount and info.name, respectively. The SqlFlag setting for subfield key-value indexes defined in JsonKeys must match their parent field, meaning they must be enabled or disabled together. The default is disabled. Subfields do not support separate settings for Delimiter, CaseSensitive, or IncludeChinese. For text-type fields, CaseSensitive, Delimiter, and IncludeChinese always inherit the parent field settings. This is only set when ValueType is json.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SqlFlag
 							"sql_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+								Description: "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ValueType
 							"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+								Description: "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "需要配置键值索引的字段描述信息。",
+						Description: "Field description information required for configuring key-value indexes.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "键值索引配置。此字段数组长度为 0 或者未配置，表示不开启键值索引。全文索引配置和键值索引配置至少配置一项，即 FullText 和 KeyValue 之间应至少指定一个参数。",
+			Description: "Key-value index configuration. If the length of this field array is 0 or not configured, key-value indexing is disabled. At least one of full-text index configuration or key-value index configuration must be set; that is, you must specify at least one parameter between FullText and KeyValue.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxTextLen
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "统计字段值的最大长度，默认为 2048，取值范围为 64~16384，单位为字节。说明单个字段值的长度超过您所指定的最大长度时，超出部分将被截断，不参与分析。字段最大长度更新后，只对增量数据有效。",
+		//	  "description": "Set the maximum length for field values. The default is 2048. The valid range is 64–16384 bytes. If a single field value exceeds the specified maximum length, the excess part will be truncated and excluded from analysis. After updating the maximum field length, only incremental data is affected.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"max_text_len": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "统计字段值的最大长度，默认为 2048，取值范围为 64~16384，单位为字节。说明单个字段值的长度超过您所指定的最大长度时，超出部分将被截断，不参与分析。字段最大长度更新后，只对增量数据有效。",
+			Description: "Set the maximum length for field values. The default is 2048. The valid range is 64–16384 bytes. If a single field value exceeds the specified maximum length, the excess part will be truncated and excluded from analysis. After updating the maximum field length, only incremental data is affected.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModifyTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "索引最近修改的时间。",
+		//	  "description": "Last modified time of the index.",
 		//	  "type": "string"
 		//	}
 		"modify_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "索引最近修改的时间。",
+			Description: "Last modified time of the index.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TopicId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志主题ID。",
+		//	  "description": "Log topic ID.",
 		//	  "type": "string"
 		//	}
 		"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "日志主题ID。",
+			Description: "Log topic ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserInnerKeyValue
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "预留字段索引配置。此字段数组长度为 0 或者未配置，表示不开启预留字段索引。不能同时开启全文索引和预留字段 __content__ 的键值索引，即如果通过 UserInnerKeyValue 参数设置__content__ 索引，则不能同时设置参数 FullText。预留字段中，目前仅支持为 __content__ 手动开启索引。其他预留字段的索引设置请参考预留字段。",
+		//	  "description": "Reserved field index configuration. If the array length of this field is 0 or not configured, reserved field indexing is disabled. You cannot enable both full-text indexing and key-value indexing for the reserved field __content__ at the same time. If you set the __content__ index via the UserInnerKeyValue parameter, you cannot also set the FullText parameter. Among reserved fields, only manual indexing for __content__ is currently supported. For other reserved field index settings, refer to reserved fields.",
 		//	  "insertionOrder": true,
 		//	  "items": {
-		//	    "description": "键值索引配置。",
+		//	    "description": "Key-value index configuration.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+		//	        "description": "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "需要配置键值索引的字段描述信息。",
+		//	        "description": "Field description information required for configuring key-value indexes.",
 		//	        "properties": {
 		//	          "AutoIndexFlag": {
-		//	            "description": "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+		//	            "description": "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "CaseSensitive": {
-		//	            "description": "是否区分大小写。默认为 false。",
+		//	            "description": "Whether to distinguish case. Default is false.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Delimiter": {
-		//	            "description": "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+		//	            "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 		//	            "type": "string"
 		//	          },
 		//	          "IncludeChinese": {
-		//	            "description": "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+		//	            "description": "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "IndexAll": {
-		//	            "description": "是否为 JSON 字段中所有值为文本的字段创建索引。",
+		//	            "description": "Create indexes for all fields with text values in the JSON field.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "IndexSQLAll": {
-		//	            "description": "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+		//	            "description": "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "JsonKeys": {
-		//	            "description": "当 ValueType 为 json 时，可通过 JsonKeys 字段配置 JSON 子字段键值索引，其值为 KeyValueInfo 数组。JsonKeys 列表中每个元素为 KeyValueInfo，可进一步嵌套定义 text、long、double 类型子字段。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。JsonKeys 中定义的子字段键值索引的 SqlFlag 设置应与其父字段设置保持一致，即需要同时开启或关闭，默认为关闭状态。子字段不支持单独设置 Delimiter、CaseSensitive 和 IncludeChinese，对于 text 类型的字段，CaseSensitive、Delimiter 和 IncludeChinese 固定沿用父字段设置。仅当 ValueType 为 json 时设置。",
+		//	            "description": "When ValueType is json, you can configure key-value indexes for JSON subfields using the JsonKeys field, which is an array of KeyValueInfo. Each element in the JsonKeys list is a KeyValueInfo, and you can further nest text, long, and double type subfields. For subfields in JSON key-value indexes, use . to indicate the hierarchy between JSON fields. For example, the JSON field namelist contains a text-type subfield totalcount and a JSON-type info, which itself contains the field name. Each field name should be configured as totalcount and info.name, respectively. The SqlFlag setting for subfield key-value indexes defined in JsonKeys must match their parent field, meaning they must be enabled or disabled together. The default is disabled. Subfields do not support separate settings for Delimiter, CaseSensitive, or IncludeChinese. For text-type fields, CaseSensitive, Delimiter, and IncludeChinese always inherit the parent field settings. This is only set when ValueType is json.",
 		//	            "insertionOrder": true,
 		//	            "items": {
-		//	              "description": "键值索引配置。",
+		//	              "description": "Key-value index configuration.",
 		//	              "properties": {
 		//	                "Key": {
-		//	                  "description": "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+		//	                  "description": "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
-		//	                  "description": "需要配置键值索引的字段描述信息。",
+		//	                  "description": "Field description information required for configuring key-value indexes.",
 		//	                  "properties": {
 		//	                    "AutoIndexFlag": {
-		//	                      "description": "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+		//	                      "description": "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "CaseSensitive": {
-		//	                      "description": "是否区分大小写。默认为 false。",
+		//	                      "description": "Whether to distinguish case. Default is false.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "Delimiter": {
-		//	                      "description": "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+		//	                      "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "IncludeChinese": {
-		//	                      "description": "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+		//	                      "description": "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "IndexAll": {
-		//	                      "description": "是否为 JSON 字段中所有值为文本的字段创建索引。",
+		//	                      "description": "Create indexes for all fields with text values in the JSON field.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "IndexSQLAll": {
-		//	                      "description": "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+		//	                      "description": "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "SqlFlag": {
-		//	                      "description": "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+		//	                      "description": "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "ValueType": {
-		//	                      "description": "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+		//	                      "description": "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -448,11 +448,11 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "SqlFlag": {
-		//	            "description": "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+		//	            "description": "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "ValueType": {
-		//	            "description": "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+		//	            "description": "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -469,7 +469,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+						Description: "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -477,32 +477,32 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AutoIndexFlag
 							"auto_index_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+								Description: "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: CaseSensitive
 							"case_sensitive": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否区分大小写。默认为 false。",
+								Description: "Whether to distinguish case. Default is false.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Delimiter
 							"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+								Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IncludeChinese
 							"include_chinese": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+								Description: "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IndexAll
 							"index_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否为 JSON 字段中所有值为文本的字段创建索引。",
+								Description: "Create indexes for all fields with text values in the JSON field.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IndexSQLAll
 							"index_sql_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+								Description: "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: JsonKeys
@@ -511,7 +511,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "需要配置键值索引的字段名称，最多添加 100 个字段。仅支持字母、数字、空格、下划线（_）、连字符（-）和斜线（/），并且不支持以空格开头或结尾。同一个索引中 key 名称唯一。长度为 1~128 字符。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。 ",
+											Description: "Specify the field names for key-value indexing. Up to 100 fields can be added. Only letters, numbers, spaces, underscores (_), hyphens (-), and slashes (/) are supported, and field names cannot start or end with a space. Each key name must be unique within the same index. Length: 1–128 characters. For subfields in JSON-type key-value indexes, use a dot (.) to indicate the hierarchy between JSON fields. For example, if the JSON field 'namelist' contains a text-type subfield 'totalcount' and a JSON-type subfield 'info', and 'info' contains the field 'name', the field names should be configured as 'totalcount' and 'info.name' respectively.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
@@ -519,70 +519,70 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: AutoIndexFlag
 												"auto_index_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "该索引是否是自动索引添加。true：该索引为自动添加。false：该索引非自动添加。",
+													Description: "Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: CaseSensitive
 												"case_sensitive": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "是否区分大小写。默认为 false。",
+													Description: "Whether to distinguish case. Default is false.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Delimiter
 												"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "字段的分词符。默认为空（\"\"）。字符串中每个字符代表一个分词符。长度为 0~256 字节，长度为 0 时表示不分词。仅支持以下字符中的一种或者多种：大小写字母、数字以及 !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}.。支持同时配置包含中文和分词符。",
+													Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: IncludeChinese
 												"include_chinese": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "检索时，是否对日志的中文内容按照中文语法进行分词。启用：日志内的中文字符：根据常见的中文语法对日志进行分词，不支持自定义中文内容的分词符。日志内的非中文字符：按照分词符参数中指定的分词符对日志进行分词。未启用：按照分词符参数中指定的分词符对日志进行分词。",
+													Description: "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: IndexAll
 												"index_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "是否为 JSON 字段中所有值为文本的字段创建索引。",
+													Description: "Create indexes for all fields with text values in the JSON field.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: IndexSQLAll
 												"index_sql_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "是否为 JSON 字段开启自动索引和统计功能。true：开启自动索引和统计功能。false：不开启自动索引和统计功能。",
+													Description: "Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: SqlFlag
 												"sql_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+													Description: "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: ValueType
 												"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+													Description: "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Description: "需要配置键值索引的字段描述信息。",
+											Description: "Field description information required for configuring key-value indexes.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "当 ValueType 为 json 时，可通过 JsonKeys 字段配置 JSON 子字段键值索引，其值为 KeyValueInfo 数组。JsonKeys 列表中每个元素为 KeyValueInfo，可进一步嵌套定义 text、long、double 类型子字段。对于 JSON 类型键值索引的子字段，需要通过.表示 JSON 字段之间的层级关系，例如 JSON 字段 namelist 中包含 text 类型的子字段 totalcount 和 JSON 类型的 info，info 中又包含字段 name，各个字段名称应分别配置为totalcount 和 info.name。JsonKeys 中定义的子字段键值索引的 SqlFlag 设置应与其父字段设置保持一致，即需要同时开启或关闭，默认为关闭状态。子字段不支持单独设置 Delimiter、CaseSensitive 和 IncludeChinese，对于 text 类型的字段，CaseSensitive、Delimiter 和 IncludeChinese 固定沿用父字段设置。仅当 ValueType 为 json 时设置。",
+								Description: "When ValueType is json, you can configure key-value indexes for JSON subfields using the JsonKeys field, which is an array of KeyValueInfo. Each element in the JsonKeys list is a KeyValueInfo, and you can further nest text, long, and double type subfields. For subfields in JSON key-value indexes, use . to indicate the hierarchy between JSON fields. For example, the JSON field namelist contains a text-type subfield totalcount and a JSON-type info, which itself contains the field name. Each field name should be configured as totalcount and info.name, respectively. The SqlFlag setting for subfield key-value indexes defined in JsonKeys must match their parent field, meaning they must be enabled or disabled together. The default is disabled. Subfields do not support separate settings for Delimiter, CaseSensitive, or IncludeChinese. For text-type fields, CaseSensitive, Delimiter, and IncludeChinese always inherit the parent field settings. This is only set when ValueType is json.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SqlFlag
 							"sql_flag": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "字段是否开启分析功能。默认为 false。开启统计分析功能后，支持配置分词符和包含中文。",
+								Description: "Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ValueType
 							"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "字段类型。目前支持 long、double、text 和 json。long 和 double 类型不支持配置分词符、包含中文、大小写敏感。仅 json 类型支持进一步配置 JsonKeys 子字段。",
+								Description: "Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "需要配置键值索引的字段描述信息。",
+						Description: "Field description information required for configuring key-value indexes.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "预留字段索引配置。此字段数组长度为 0 或者未配置，表示不开启预留字段索引。不能同时开启全文索引和预留字段 __content__ 的键值索引，即如果通过 UserInnerKeyValue 参数设置__content__ 索引，则不能同时设置参数 FullText。预留字段中，目前仅支持为 __content__ 手动开启索引。其他预留字段的索引设置请参考预留字段。",
+			Description: "Reserved field index configuration. If the array length of this field is 0 or not configured, reserved field indexing is disabled. You cannot enable both full-text indexing and key-value indexing for the reserved field __content__ at the same time. If you set the __content__ index via the UserInnerKeyValue parameter, you cannot also set the FullText parameter. Among reserved fields, only manual indexing for __content__ is currently supported. For other reserved field index settings, refer to reserved fields.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

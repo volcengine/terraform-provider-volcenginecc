@@ -2,12 +2,12 @@
 page_title: "volcenginecc_emr_cluster_user_group Resource - terraform-provider-volcenginecc"
 subcategory: "EMR"
 description: |-
-  E-MapReduce（EMR）集群中支持对用户进行组管理，允许您创建、编辑和删除用户组。
+  User group management is supported in E-MapReduce (EMR) clusters, allowing you to create, edit, and delete user groups.
 ---
 
 # volcenginecc_emr_cluster_user_group (Resource)
 
-E-MapReduce（EMR）集群中支持对用户进行组管理，允许您创建、编辑和删除用户组。
+User group management is supported in E-MapReduce (EMR) clusters, allowing you to create, edit, and delete user groups.
 
 ## Example Usage
 
@@ -25,13 +25,13 @@ resource "volcenginecc_emr_cluster_user_group" "EMRClusterUserGroupDemo" {
 
 ### Required
 
-- `cluster_id` (String) 集群ID。
-- `user_group_name` (String) 用户组名称。
+- `cluster_id` (String) Cluster ID.
+- `user_group_name` (String) User group name.
 
 ### Optional
 
-- `description` (String) 用户组描述。
-- `members` (Set of String) 用户组成员。不支持操作特殊用户，如admin等。
+- `description` (String) User group description.
+- `members` (Set of String) Operations on special users, such as admin, are not supported.
 
 ### Read-Only
 

@@ -26,52 +26,52 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的创建时间",
+		//	  "description": "Creation time of the TR routing table",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的创建时间",
+			Description: "Creation time of the TR routing table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+		//	  "description": "Description of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ~ 255个字符。不传入该参数或该参数不传入数值时，默认为空字符串。",
+			Description: "Description of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InRoutePolicyTableId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表关联的收方向路由策略的ID",
+		//	  "description": "ID of the inbound routing policy associated with the TR routing table",
 		//	  "type": "string"
 		//	}
 		"in_route_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表关联的收方向路由策略的ID",
+			Description: "ID of the inbound routing policy associated with the TR routing table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OutRoutePolicyTableId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表关联的发方向路由策略的ID",
+		//	  "description": "ID of the outbound routing policy associated with the TR routing table",
 		//	  "type": "string"
 		//	}
 		"out_route_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表关联的发方向路由策略的ID",
+			Description: "ID of the outbound routing policy associated with the TR routing table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用",
+		//	  "description": "Status of the TR routing table. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Deleting",
@@ -81,24 +81,24 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的状态。Creating: 创建中。Deleting: 删除中。Pending：配置中。Available：可用",
+			Description: "Status of the TR routing table. Creating: creating. Deleting: deleting. Pending: configuring. Available: available",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的标签信息。",
+		//	  "description": "Tag information for the TR routing table",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "TR路由表的标签信息",
+		//	    "description": "Tag information for the TR routing table",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -115,58 +115,58 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "TR路由表的标签信息。",
+			Description: "Tag information for the TR routing table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转路由器实例的ID",
+		//	  "description": "Transit Router instance ID",
 		//	  "type": "string"
 		//	}
 		"transit_router_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转路由器实例的ID",
+			Description: "Transit Router instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterRouteTableId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的ID",
+		//	  "description": "TR routing table ID",
 		//	  "type": "string"
 		//	}
 		"transit_router_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的ID",
+			Description: "TR routing table ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterRouteTableName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID",
+		//	  "description": "Name of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the TR routing table ID",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"transit_router_route_table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和短横线（-）。长度限制为1 ~ 128个字符。不传入该参数或该参数不传入数值时，默认为TR路由表的ID",
+			Description: "Name of the TR routing table. Must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the TR routing table ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitRouterRouteTableType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的类型。System：系统路由表。Custom：自定义路由表。",
+		//	  "description": "Type of TR routing table. System: system routing table. Custom: custom routing table.",
 		//	  "enum": [
 		//	    "System",
 		//	    "Custom"
@@ -174,18 +174,18 @@ func transitRouterRouteTableDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "string"
 		//	}
 		"transit_router_route_table_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的类型。System：系统路由表。Custom：自定义路由表。",
+			Description: "Type of TR routing table. System: system routing table. Custom: custom routing table.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TR路由表的最近操作时间",
+		//	  "description": "Last operation time of the TR routing table",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TR路由表的最近操作时间",
+			Description: "Last operation time of the TR routing table",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

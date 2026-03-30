@@ -8,35 +8,35 @@
     "ChargeDetail": {
       "properties": {
         "AutoRenew": {
-          "description": "包年包月实例到期后是否自动续费。",
+          "description": "Whether subscription instances are automatically renewed after expiration.",
           "type": "boolean"
         },
         "ChargeEndTime": {
-          "description": "实例的结束计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "description": "Instance billing end time. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
           "type": "string"
         },
         "ChargeExpireTime": {
-          "description": "包年包月实例的到期时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "description": "Expiration time for subscription instances. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
           "type": "string"
         },
         "ChargeStartTime": {
-          "description": "实例的开始计费时间，时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "description": "Instance billing start time. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
           "type": "string"
         },
         "ChargeStatus": {
-          "description": "实例的计费状态。包括：Normal：正常，Overdue：按量计费欠费，Expired：包年包月到期。",
+          "description": "Instance billing status. Includes: Normal: normal, Overdue: pay-as-you-go overdue, Expired: subscription expired.",
           "type": "string"
         },
         "ChargeType": {
-          "description": "实例的计费类型。支持的类型包括：PostPaid ：按量付费，PrePaid：包年包月。",
+          "description": "Instance billing type. Supported types: PostPaid: pay-as-you-go, PrePaid: subscription.",
           "type": "string"
         },
         "OverdueReclaimTime": {
-          "description": "实例欠费关停后的预计释放时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "description": "Estimated release time after instance is stopped due to overdue payment. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
           "type": "string"
         },
         "OverdueTime": {
-          "description": "实例的欠费关停时间。时间显示格式为 YYYY-MM-DD'T'HH:MM:SS'Z'。",
+          "description": "Instance overdue shutdown time. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'.",
           "type": "string"
         }
       },
@@ -45,23 +45,23 @@
     "Endpoint": {
       "properties": {
         "EndpointType": {
-          "description": "实例的接入点类型。RabbitMQ实例提供的接入点类型包括：WEB：Web UI 接入点，AMQP0_9_1：AMQP 接入点，MQTT：MQTT接入点，WEB_MQTT：WEB ，MQTT 接入点，STOMP：STOMP 接入点。",
+          "description": "Access point type of the instance. RabbitMQ instance provides the following access point types: WEB: Web UI access point, AMQP0_9_1: AMQP access point, MQTT: MQTT access point, WEB_MQTT: WEB and MQTT access point, STOMP: STOMP access point.",
           "type": "string"
         },
         "InternalEndpoint": {
-          "description": "实例的私网访问域名。",
+          "description": "Instance private network access domain name.",
           "type": "string"
         },
         "InternalIpEndpoint": {
-          "description": "公共服务区 IP 接入点。",
+          "description": "Public service zone IP access point.",
           "type": "string"
         },
         "NetworkType": {
-          "description": "接入点的网络类型。PrivateNetwork 表示私有网络 VPC。",
+          "description": "Network type of the access point. PrivateNetwork indicates private VPC network.",
           "type": "string"
         },
         "PublicEndpoint": {
-          "description": "实例公网访问域名。仅在开启公网访问之后显示。",
+          "description": "Instance public access domain name. Displayed only after public access is enabled.",
           "type": "string"
         }
       },
@@ -70,11 +70,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "标签的键。",
+          "description": "Tag key.",
           "type": "string"
         },
         "Value": {
-          "description": "标签的值。",
+          "description": "Tag value.",
           "type": "string"
         }
       },
@@ -84,7 +84,7 @@
       "type": "object"
     }
   },
-  "description": "消息队列 RabbitMQ版支持开启公网访问，开启后，您可以通过公网访问 RabbitMQ 实例。",
+  "description": "RabbitMQ supports enabling public access. Once enabled, you can access the RabbitMQ instance via the public network.",
   "handlers": {
     "create": {
       "permissions": [
@@ -109,37 +109,37 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "创建实例的主账号ID。",
+      "description": "Main account ID that created the instance.",
       "type": "string"
     },
     "ApplyPrivateDNSToPublic": {
-      "description": "是否已开启公网解析功能。true：已开启, false：已关闭。",
+      "description": "Whether public DNS resolution is enabled. true: enabled, false: disabled.",
       "type": "boolean"
     },
     "ArchType": {
-      "description": "实例的类型，即集群版或单机版。",
+      "description": "Instance type: cluster or standalone.",
       "type": "string"
     },
     "ChargeDetail": {
       "$ref": "#/definitions/ChargeDetail",
-      "description": "实例的计费方式等计费信息。",
+      "description": "Instance billing method and related billing information.",
       "type": "object"
     },
     "ComputeSpec": {
-      "description": "RabbitMQ实例的计算规格。",
+      "description": "RabbitMQ instance compute specification.",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "实例的创建时间。",
+      "description": "Instance creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "EipId": {
-      "description": "EIP的ID。",
+      "description": "EIP ID.",
       "type": "string"
     },
     "Endpoints": {
-      "description": "实例的连接信息。",
+      "description": "Instance connection information.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Endpoint"
@@ -148,44 +148,44 @@
       "uniqueItems": true
     },
     "InstanceDescription": {
-      "description": "实例的简单描述。",
+      "description": "Brief description of the instance.",
       "semantic": "description",
       "type": "string"
     },
     "InstanceId": {
-      "description": "RabbitMQ 实例 ID。",
+      "description": "RabbitMQ instance ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "InstanceName": {
-      "description": "RabbitMQ 实例名称。",
+      "description": "RabbitMQ instance name.",
       "semantic": "resourceName",
       "type": "string"
     },
     "InstanceStatus": {
-      "description": "实例状态。",
+      "description": "Instance status.",
       "semantic": "status",
       "type": "string"
     },
     "IsEncrypted": {
-      "description": "是否开启了云盘加密。",
+      "description": "Whether cloud disk encryption is enabled.",
       "type": "boolean"
     },
     "ProjectName": {
-      "description": "实例所属的IAM项目。",
+      "description": "IAM project the instance belongs to.",
       "semantic": "projectName",
       "type": "string"
     },
     "StorageSpace": {
-      "description": "实例总存储空间。单位为 GiB。",
+      "description": "Total storage space of the instance, in GiB.",
       "type": "integer"
     },
     "SubnetId": {
-      "description": "VPC的子网ID。",
+      "description": "VPC subnet ID.",
       "type": "string"
     },
     "Tags": {
-      "description": "实例绑定的标签。",
+      "description": "Tags bound to the instance.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -195,27 +195,27 @@
       "uniqueItems": true
     },
     "UsedStorageSpace": {
-      "description": "实例已用存储空间。单位为 GiB。",
+      "description": "Used storage space of the instance, in GiB.",
       "type": "integer"
     },
     "UserName": {
-      "description": "RabbitMQ WebUI管理员账号名。",
+      "description": "RabbitMQ WebUI administrator account name.",
       "type": "string"
     },
     "Version": {
-      "description": "支持的 RabbitMQ 版本。当前支持的版本包括：3.8.18：RabbitMQ 3.8.18 版本。",
+      "description": "Supported RabbitMQ versions. Currently supported versions include: 3.8.18: RabbitMQ version 3.8.18.",
       "type": "string"
     },
     "VpcId": {
-      "description": "私有网络（VPC）ID。",
+      "description": "Private network (VPC) ID.",
       "type": "string"
     },
     "ZoneDescription": {
-      "description": "可用区的描述信息。",
+      "description": "Description of the availability zone.",
       "type": "string"
     },
     "ZoneId": {
-      "description": "实例所在的可用区 ID。对于跨 AZ 的高可用实例，此处会返回多个可用区 ID。",
+      "description": "Availability zone ID where the instance is located. For high availability instances across AZs, multiple availability zone IDs are returned.",
       "type": "string"
     }
   },

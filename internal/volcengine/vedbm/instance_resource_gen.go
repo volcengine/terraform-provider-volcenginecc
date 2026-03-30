@@ -41,26 +41,26 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费详细信息。",
+		//	  "description": "Billing details.",
 		//	  "properties": {
 		//	    "AutoRenew": {
-		//	      "description": "预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。",
+		//	      "description": "Whether to enable auto-renewal in prepaid scenarios. Values: true: auto-renewal. false: no auto-renewal.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ChargeEndTime": {
-		//	      "description": "预付费场景下计费到期的时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	      "description": "Billing expiration time for prepaid scenarios, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeStartTime": {
-		//	      "description": "计费开始的时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	      "description": "Billing start time. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeStatus": {
-		//	      "description": "付费状态：Normal：正常。Overdue：欠费。Shutdown：关停。",
+		//	      "description": "Payment status: Normal: Normal. Overdue: Overdue. Shutdown: Shutdown",
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeType": {
-		//	      "description": "计费类型。PostPaid：按量计费；PrePaid：包年包月。",
+		//	      "description": "Billing type. PostPaid: Pay-as-you-go. PrePaid: yearly/monthly subscription",
 		//	      "enum": [
 		//	        "PostPaid",
 		//	        "PrePaid"
@@ -68,19 +68,19 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "OverdueReclaimTime": {
-		//	      "description": "欠费关停时预计释放时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	      "description": "Estimated release time when shut down due to overdue payment. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 		//	      "type": "string"
 		//	    },
 		//	    "OverdueTime": {
-		//	      "description": "欠费关停时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+		//	      "description": "Shutdown time for overdue payments. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time).",
 		//	      "type": "string"
 		//	    },
 		//	    "Period": {
-		//	      "description": "预付费场景下的购买时长。",
+		//	      "description": "Purchase duration for prepaid scenarios.",
 		//	      "type": "integer"
 		//	    },
 		//	    "PeriodUnit": {
-		//	      "description": "预付费场景下的购买周期。Month：包月。Year：包年。",
+		//	      "description": "Purchase period for prepaid scenarios. Month: monthly subscription. Year: annual subscription.",
 		//	      "enum": [
 		//	        "Month",
 		//	        "Year"
@@ -94,7 +94,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。",
+					Description: "Whether to enable auto-renewal in prepaid scenarios. Values: true: auto-renewal. false: no auto-renewal.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -103,7 +103,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeEndTime
 				"charge_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "预付费场景下计费到期的时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+					Description: "Billing expiration time for prepaid scenarios, format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -111,7 +111,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeStartTime
 				"charge_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "计费开始的时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+					Description: "Billing start time. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -119,7 +119,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeStatus
 				"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "付费状态：Normal：正常。Overdue：欠费。Shutdown：关停。",
+					Description: "Payment status: Normal: Normal. Overdue: Overdue. Shutdown: Shutdown",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -127,7 +127,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "计费类型。PostPaid：按量计费；PrePaid：包年包月。",
+					Description: "Billing type. PostPaid: Pay-as-you-go. PrePaid: yearly/monthly subscription",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -142,7 +142,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: OverdueReclaimTime
 				"overdue_reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "欠费关停时预计释放时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+					Description: "Estimated release time when shut down due to overdue payment. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time)",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -150,7 +150,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: OverdueTime
 				"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "欠费关停时间，格式：yyyy-MM-ddTHH:mm:ssZ（UTC 时间）。",
+					Description: "Shutdown time for overdue payments. Format: yyyy-MM-ddTHH:mm:ssZ (UTC time).",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -158,7 +158,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "预付费场景下的购买时长。",
+					Description: "Purchase duration for prepaid scenarios.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -168,7 +168,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PeriodUnit
 				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "预付费场景下的购买周期。Month：包月。Year：包年。",
+					Description: "Purchase period for prepaid scenarios. Month: monthly subscription. Year: annual subscription.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -183,7 +183,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					// PeriodUnit is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "计费详细信息。",
+			Description: "Billing details.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -194,11 +194,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的创建时间，格式：YYYY-MM-DDTHH:MM:SSZ（UTC 时间）。",
+		//	  "description": "Instance creation time, format: YYYY-MM-DDTHH:MM:SSZ (UTC time)",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的创建时间，格式：YYYY-MM-DDTHH:MM:SSZ（UTC 时间）。",
+			Description: "Instance creation time, format: YYYY-MM-DDTHH:MM:SSZ (UTC time)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -208,7 +208,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例兼容版本。取值范围：MySQL_8_0：表示兼容社区 MySQL 8.0 版本。MySQL_5_7：表示兼容社区 MySQL 5.7 版本。",
+		//	  "description": "Instance compatible version. Options: MySQL_8_0: Compatible with community MySQL 8.0. MySQL_5_7: Compatible with community MySQL 5.7",
 		//	  "enum": [
 		//	    "MySQL_8_0",
 		//	    "MySQL_5_7"
@@ -216,7 +216,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"db_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例兼容版本。取值范围：MySQL_8_0：表示兼容社区 MySQL 8.0 版本。MySQL_5_7：表示兼容社区 MySQL 5.7 版本。",
+			Description: "Instance compatible version. Options: MySQL_8_0: Compatible with community MySQL 8.0. MySQL_5_7: Compatible with community MySQL 5.7",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -232,11 +232,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "根据兼容版本，选择 veDB MySQL 小版本。当 DBEngineVersion 取值为 MySQL_5_7 时，该参数取值默认为 2.0。当 DBEngineVersion 取值为 MySQL_8_0 时，该参数取值范围如下：3.0（默认）：veDB MySQL 稳定版，100% 兼容 MySQL 8.0。3.1：原生支持 HTAP 应用场景，加速复杂查询。3.2：原生支持 HTAP 应用场景，加速复杂查询。",
+		//	  "description": "Select the veDB MySQL minor version based on compatibility. When DBEngineVersion is set to MySQL_5_7, the default value for this parameter is 2.0. When DBEngineVersion is set to MySQL_8_0, the parameter value options are as follows: 3.0 (default): veDB MySQL stable version, 100% compatible with MySQL 8.0. 3.1: Native support for HTAP scenarios, accelerates complex queries. 3.2: Native support for HTAP scenarios, accelerates complex queries.",
 		//	  "type": "string"
 		//	}
 		"db_minor_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "根据兼容版本，选择 veDB MySQL 小版本。当 DBEngineVersion 取值为 MySQL_5_7 时，该参数取值默认为 2.0。当 DBEngineVersion 取值为 MySQL_8_0 时，该参数取值范围如下：3.0（默认）：veDB MySQL 稳定版，100% 兼容 MySQL 8.0。3.1：原生支持 HTAP 应用场景，加速复杂查询。3.2：原生支持 HTAP 应用场景，加速复杂查询。",
+			Description: "Select the veDB MySQL minor version based on compatibility. When DBEngineVersion is set to MySQL_5_7, the default value for this parameter is 2.0. When DBEngineVersion is set to MySQL_8_0, the parameter value options are as follows: 3.0 (default): veDB MySQL stable version, 100% compatible with MySQL 8.0. 3.1: Native support for HTAP scenarios, accelerates complex queries. 3.2: Native support for HTAP scenarios, accelerates complex queries.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -248,11 +248,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的内核版本。",
+		//	  "description": "Instance kernel version.",
 		//	  "type": "string"
 		//	}
 		"db_revision_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的内核版本。",
+			Description: "Instance kernel version.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -262,11 +262,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例是否开启了删除保护功能。取值范围：enabled：开启。disabled：关闭。",
+		//	  "description": "Whether deletion protection is enabled for the instance. Value range: enabled: enabled. disabled: disabled.",
 		//	  "type": "string"
 		//	}
 		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例是否开启了删除保护功能。取值范围：enabled：开启。disabled：关闭。",
+			Description: "Whether deletion protection is enabled for the instance. Value range: enabled: enabled. disabled: disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -277,43 +277,43 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接终端的详细信息。",
+		//	  "description": "Endpoint details",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "连接终端的详细信息。",
+		//	    "description": "Endpoint details",
 		//	    "properties": {
 		//	      "Addresses": {
-		//	        "description": "连接地址信息。",
+		//	        "description": "Connection address information.",
 		//	        "insertionOrder": false,
 		//	        "items": {
-		//	          "description": "连接地址信息。",
+		//	          "description": "Connection address information.",
 		//	          "properties": {
 		//	            "DNSVisibility": {
-		//	              "description": "解析方式。当前返回值只能为 false。",
+		//	              "description": "Parsing method. The current return value can only be false.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "Domain": {
-		//	              "description": "实例内网访问域名。",
+		//	              "description": "Instance private access domain name.",
 		//	              "type": "string"
 		//	            },
 		//	            "EipId": {
-		//	              "description": "公网 ID。",
+		//	              "description": "Public network ID.",
 		//	              "type": "string"
 		//	            },
 		//	            "IpAddress": {
-		//	              "description": "IP 地址。",
+		//	              "description": "IP address.",
 		//	              "type": "string"
 		//	            },
 		//	            "NetworkType": {
-		//	              "description": "网络类型：Private：私有网络 VPC。Public：公网访问。",
+		//	              "description": "Network type: Private: private network VPC. Public: public access.",
 		//	              "type": "string"
 		//	            },
 		//	            "Port": {
-		//	              "description": "实例内网访问端口。",
+		//	              "description": "Instance private network access port.",
 		//	              "type": "string"
 		//	            },
 		//	            "SubnetId": {
-		//	              "description": "子网 ID。子网必须属于所选的可用区。",
+		//	              "description": "Subnet ID. The subnet must belong to the selected availability zone.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -323,47 +323,47 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "AutoAddNewNodes": {
-		//	        "description": "是否允许自动加入新节点，取值：true：是。false：否。",
+		//	        "description": "Whether to allow automatic addition of new nodes. Values: true: yes. false: no.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "ConsistLevel": {
-		//	        "description": "一致性级别，仅对读写模式的连接终端有效。取值：Eventual：最终一致性。Session：会话一致性。Global：全局一致性。",
+		//	        "description": "Consistency level, applicable only to read-write mode connection endpoints. Values: Eventual: eventual consistency. Session: session consistency. Global: global consistency.",
 		//	        "type": "string"
 		//	      },
 		//	      "ConsistTimeout": {
-		//	        "description": "延迟很大时，只读节点同步最新数据的超时时间，单位为 us，取值范围为 1us~100000000us。",
+		//	        "description": "When latency is high, the timeout for read-only nodes to synchronize the latest data, in microseconds (us). Range: 1us~100000000us",
 		//	        "type": "integer"
 		//	      },
 		//	      "ConsistTimeoutAction": {
-		//	        "description": "只读节点同步数据超时后的超时策略，支持以下两种策略：ReturnError：返回 SQL 报错（wait replication complete timeout, please retry）。ReadMaster：发送请求到主节点。",
+		//	        "description": "Timeout policy for read-only node data synchronization. Supports the following two policies: ReturnError: Returns SQL error (wait replication complete timeout, please retry). ReadMaster: Sends request to the primary node.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "地址描述。",
+		//	        "description": "Address description",
 		//	        "type": "string"
 		//	      },
 		//	      "DistributedTransaction": {
-		//	        "description": "是否开启事务拆分，仅对读写模式的连接终端有效。取值：true：是。false：否。",
+		//	        "description": "Whether to enable transaction splitting. Only effective for read-write mode endpoints. Values: true: yes. false: no.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "EndpointId": {
-		//	        "description": "实例连接终端 ID。",
+		//	        "description": "Instance connection endpoint ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "EndpointName": {
-		//	        "description": "实例连接终端名称。",
+		//	        "description": "Instance connection endpoint name.",
 		//	        "type": "string"
 		//	      },
 		//	      "EndpointType": {
-		//	        "description": "连接终端类型，取值：Cluster：默认终端。Primary：主节点终端。Custom：自定义终端。",
+		//	        "description": "Connection endpoint type. Values: Cluster: default endpoint. Primary: primary node endpoint. Custom: custom endpoint.",
 		//	        "type": "string"
 		//	      },
 		//	      "MasterAcceptReadRequests": {
-		//	        "description": "主节点是否接受读请求。仅对读写模式的连接终端有效。true：是。false：否。",
+		//	        "description": "Whether the primary node accepts read requests. Applies only to read/write mode endpoints. true: Yes. false: No",
 		//	        "type": "boolean"
 		//	      },
 		//	      "NodeIds": {
-		//	        "description": "连接终端配置的节点列表。",
+		//	        "description": "Node list configured for the connection endpoint.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -372,7 +372,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "ReadWriteMode": {
-		//	        "description": "连接终端的读写模式，取值：ReadWrite: 读写。ReadOnly: 只读。",
+		//	        "description": "Endpoint read/write mode. Options: ReadWrite: Read/write. ReadOnly: Read-only",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -390,108 +390,108 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: DNSVisibility
 								"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "解析方式。当前返回值只能为 false。",
+									Description: "Parsing method. The current return value can only be false.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Domain
 								"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "实例内网访问域名。",
+									Description: "Instance private access domain name.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EipId
 								"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "公网 ID。",
+									Description: "Public network ID.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: IpAddress
 								"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "IP 地址。",
+									Description: "IP address.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: NetworkType
 								"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "网络类型：Private：私有网络 VPC。Public：公网访问。",
+									Description: "Network type: Private: private network VPC. Public: public access.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Port
 								"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "实例内网访问端口。",
+									Description: "Instance private network access port.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: SubnetId
 								"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "子网 ID。子网必须属于所选的可用区。",
+									Description: "Subnet ID. The subnet must belong to the selected availability zone.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "连接地址信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Connection address information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: AutoAddNewNodes
 					"auto_add_new_nodes": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否允许自动加入新节点，取值：true：是。false：否。",
+						Description: "Whether to allow automatic addition of new nodes. Values: true: yes. false: no.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ConsistLevel
 					"consist_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "一致性级别，仅对读写模式的连接终端有效。取值：Eventual：最终一致性。Session：会话一致性。Global：全局一致性。",
+						Description: "Consistency level, applicable only to read-write mode connection endpoints. Values: Eventual: eventual consistency. Session: session consistency. Global: global consistency.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ConsistTimeout
 					"consist_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "延迟很大时，只读节点同步最新数据的超时时间，单位为 us，取值范围为 1us~100000000us。",
+						Description: "When latency is high, the timeout for read-only nodes to synchronize the latest data, in microseconds (us). Range: 1us~100000000us",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ConsistTimeoutAction
 					"consist_timeout_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "只读节点同步数据超时后的超时策略，支持以下两种策略：ReturnError：返回 SQL 报错（wait replication complete timeout, please retry）。ReadMaster：发送请求到主节点。",
+						Description: "Timeout policy for read-only node data synchronization. Supports the following two policies: ReturnError: Returns SQL error (wait replication complete timeout, please retry). ReadMaster: Sends request to the primary node.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "地址描述。",
+						Description: "Address description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DistributedTransaction
 					"distributed_transaction": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否开启事务拆分，仅对读写模式的连接终端有效。取值：true：是。false：否。",
+						Description: "Whether to enable transaction splitting. Only effective for read-write mode endpoints. Values: true: yes. false: no.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: EndpointId
 					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例连接终端 ID。",
+						Description: "Instance connection endpoint ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: EndpointName
 					"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例连接终端名称。",
+						Description: "Instance connection endpoint name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: EndpointType
 					"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接终端类型，取值：Cluster：默认终端。Primary：主节点终端。Custom：自定义终端。",
+						Description: "Connection endpoint type. Values: Cluster: default endpoint. Primary: primary node endpoint. Custom: custom endpoint.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MasterAcceptReadRequests
 					"master_accept_read_requests": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "主节点是否接受读请求。仅对读写模式的连接终端有效。true：是。false：否。",
+						Description: "Whether the primary node accepts read requests. Applies only to read/write mode endpoints. true: Yes. false: No",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NodeIds
 					"node_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "连接终端配置的节点列表。",
+						Description: "Node list configured for the connection endpoint.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ReadWriteMode
 					"read_write_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接终端的读写模式，取值：ReadWrite: 读写。ReadOnly: 只读。",
+						Description: "Endpoint read/write mode. Options: ReadWrite: Read/write. ReadOnly: Read-only",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "连接终端的详细信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Endpoint details\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -501,11 +501,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -515,13 +515,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例名称。命名规则：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需在 1~128 个字符内。",
+		//	  "description": "Instance name. Naming rules: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be between 1 and 128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例名称。命名规则：不能以数字、中划线（-）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度需在 1~128 个字符内。",
+			Description: "Instance name. Naming rules: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be between 1 and 128 characters.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -535,11 +535,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例状态。",
+		//	  "description": "Instance status.",
 		//	  "type": "string"
 		//	}
 		"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例状态。",
+			Description: "Instance status.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -549,11 +549,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表名是否区分大小写。取值范围：0：表名称大小写敏感，后端根据实际表名存储。1：表名称不区分大小写，后端存储时将表名称统一为小写字母。",
+		//	  "description": "Whether table names are case-sensitive. Value range: 0: table names are case-sensitive; backend stores according to actual table name. 1: table names are not case-sensitive; backend stores table names in lowercase.",
 		//	  "type": "string"
 		//	}
 		"lower_case_table_names": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表名是否区分大小写。取值范围：0：表名称大小写敏感，后端根据实际表名存储。1：表名称不区分大小写，后端存储时将表名称统一为小写字母。",
+			Description: "Whether table names are case-sensitive. Value range: 0: table names are case-sensitive; backend stores according to actual table name. 1: table names are not case-sensitive; backend stores table names in lowercase.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -565,14 +565,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的可维护时间窗口信息。",
+		//	  "description": "Instance maintenance window information",
 		//	  "properties": {
 		//	    "DayKind": {
-		//	      "description": "可维护周期粒度，默认取值为：Week（周）。",
+		//	      "description": "Maintenance cycle granularity. Default value: Week.",
 		//	      "type": "string"
 		//	    },
 		//	    "DayOfMonth": {
-		//	      "description": "指定每月哪一天为可维护时间段，默认为空，表示每天都指定。",
+		//	      "description": "Specify which day of the month is the maintenance window. Default is empty, meaning every day is specified.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "integer"
@@ -581,7 +581,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "DayOfWeek": {
-		//	      "description": "每周的哪一天为可维护时间段，默认取值为每一天：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。",
+		//	      "description": "Which day of the week is the maintenance window. Default value is every day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -590,7 +590,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "MaintenanceTime": {
-		//	      "description": "实例的可维护时间段。格式：HH:mmZ-HH:mmZ（UTC 时间）。",
+		//	      "description": "Instance maintenance window. Format: HH:mmZ-HH:mmZ (UTC time).",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -600,7 +600,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DayKind
 				"day_kind": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "可维护周期粒度，默认取值为：Week（周）。",
+					Description: "Maintenance cycle granularity. Default value: Week.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -609,7 +609,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: DayOfMonth
 				"day_of_month": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.Int64Type,
-					Description: "指定每月哪一天为可维护时间段，默认为空，表示每天都指定。",
+					Description: "Specify which day of the month is the maintenance window. Default is empty, meaning every day is specified.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
@@ -618,7 +618,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: DayOfWeek
 				"day_of_week": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "每周的哪一天为可维护时间段，默认取值为每一天：Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。",
+					Description: "Which day of the week is the maintenance window. Default value is every day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
@@ -626,7 +626,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MaintenanceTime
 				"maintenance_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "实例的可维护时间段。格式：HH:mmZ-HH:mmZ（UTC 时间）。",
+					Description: "Instance maintenance window. Format: HH:mmZ-HH:mmZ (UTC time).",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -634,7 +634,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例的可维护时间窗口信息。",
+			Description: "Instance maintenance window information",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -645,13 +645,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例节点数量。取值范围为 2~16 个。",
+		//	  "description": "Number of instance nodes. Value range: 2–16.",
 		//	  "maximum": 16,
 		//	  "minimum": 2,
 		//	  "type": "integer"
 		//	}
 		"node_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例节点数量。取值范围为 2~16 个。",
+			Description: "Number of instance nodes. Value range: 2–16.",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(2, 16),
@@ -662,11 +662,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的节点规格代码。",
+		//	  "description": "Instance node specification code.",
 		//	  "type": "string"
 		//	}
 		"node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的节点规格代码。",
+			Description: "Instance node specification code.",
 			Required:    true,
 			// NodeSpec is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -674,37 +674,37 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例节点的详细信息。",
+		//	  "description": "Instance node details",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "实例节点的详细信息。",
+		//	    "description": "Instance node details",
 		//	    "properties": {
 		//	      "FailoverPriority": {
-		//	        "description": "节点切主的优先级，取值范围为 0~15。数值越大，优先级越高。",
+		//	        "description": "Node failover priority. Range: 0~15. Higher values indicate higher priority",
 		//	        "type": "integer"
 		//	      },
 		//	      "Memory": {
-		//	        "description": "内存大小，单位为 GiB。",
+		//	        "description": "Memory size, in GiB.",
 		//	        "type": "integer"
 		//	      },
 		//	      "NodeId": {
-		//	        "description": "节点 ID。",
+		//	        "description": "Node ID",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeSpec": {
-		//	        "description": "节点规格。",
+		//	        "description": "Node specification.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeType": {
-		//	        "description": "节点类型。取值：Primary：主节点。ReadOnly：只读节点。",
+		//	        "description": "Node type. Values: Primary: primary node. ReadOnly: read-only node.",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "可用区 ID。",
+		//	        "description": "Availability zone ID",
 		//	        "type": "string"
 		//	      },
 		//	      "vCPU": {
-		//	        "description": "CPU 大小，例如当取值为 1 时表示 CPU 大小为 1U。",
+		//	        "description": "CPU size. For example, a value of 1 indicates a CPU size of 1U.",
 		//	        "type": "integer"
 		//	      }
 		//	    },
@@ -718,7 +718,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: FailoverPriority
 					"failover_priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "节点切主的优先级，取值范围为 0~15。数值越大，优先级越高。",
+						Description: "Node failover priority. Range: 0~15. Higher values indicate higher priority",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -730,7 +730,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NodeSpec
 					// Property: NodeType
 					"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点类型。取值：Primary：主节点。ReadOnly：只读节点。",
+						Description: "Node type. Values: Primary: primary node. ReadOnly: read-only node.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -741,7 +741,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: vCPU
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例节点的详细信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Instance node details\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -754,13 +754,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 1,
-		//	  "description": "创建的实例数量，取值范围 1~50，默认值为 1。",
+		//	  "description": "Number of instances to create. Range: 1~50. Default: 1",
 		//	  "maximum": 50,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "创建的实例数量，取值范围 1~50，默认值为 1。",
+			Description: "Number of instances to create. Range: 1~50. Default: 1",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(1),
@@ -778,13 +778,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 3306,
-		//	  "description": "为实例默认创建的连接终端指定私网端口号。默认取值为 3306，取值范围为 1000~65534。",
+		//	  "description": "Specify the private network port number for the default connection endpoint created for the instance. Default value is 3306. Value range: 1000–65534.",
 		//	  "maximum": 65534,
 		//	  "minimum": 1000,
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "为实例默认创建的连接终端指定私网端口号。默认取值为 3306，取值范围为 1000~65534。",
+			Description: "Specify the private network port number for the default connection endpoint created for the instance. Default value is 3306. Value range: 1000–65534.",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(3306),
@@ -801,11 +801,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "预付费的存储总容量大小，单位 GiB。",
+		//	  "description": "Total prepaid storage capacity, in GiB",
 		//	  "type": "integer"
 		//	}
 		"pre_paid_storage_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "预付费的存储总容量大小，单位 GiB。",
+			Description: "Total prepaid storage capacity, in GiB",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -816,11 +816,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的项目名称。",
+		//	  "description": "Project name to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的项目名称。",
+			Description: "Project name to which the instance belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -832,7 +832,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例规格类型，取值：General：通用型。Exclusive：独享型。",
+		//	  "description": "Instance specification type. Values: General: general purpose. Exclusive: dedicated.",
 		//	  "enum": [
 		//	    "General",
 		//	    "Exclusive"
@@ -840,7 +840,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"spec_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例规格类型，取值：General：通用型。Exclusive：独享型。",
+			Description: "Instance specification type. Values: General: general purpose. Exclusive: dedicated.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -850,7 +850,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储计费类型，不传入该参数时，存储计费类型默认与计算计费类型取值一致。取值：PostPaid：按量计费（后付费）。PrePaid：包年包月（预付费）。",
+		//	  "description": "Storage billing type. If this parameter is not specified, the storage billing type defaults to the same value as the compute billing type. Values: PostPaid: pay-as-you-go. PrePaid: annual/monthly subscription (prepaid).",
 		//	  "enum": [
 		//	    "PostPaid",
 		//	    "PrePaid"
@@ -858,7 +858,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"storage_charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储计费类型，不传入该参数时，存储计费类型默认与计算计费类型取值一致。取值：PostPaid：按量计费（后付费）。PrePaid：包年包月（预付费）。",
+			Description: "Storage billing type. If this parameter is not specified, the storage billing type defaults to the same value as the compute billing type. Values: PostPaid: pay-as-you-go. PrePaid: annual/monthly subscription (prepaid).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -875,11 +875,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "已使用存储空间大小，单位 GiB。",
+		//	  "description": "Used storage space, in GiB",
 		//	  "type": "number"
 		//	}
 		"storage_used_gi_b": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "已使用存储空间大小，单位 GiB。",
+			Description: "Used storage space, in GiB",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -889,11 +889,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网 ID。子网必须属于所选的可用区。",
+		//	  "description": "Subnet ID. The subnet must belong to the selected availability zone.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网 ID。子网必须属于所选的可用区。",
+			Description: "Subnet ID. The subnet must belong to the selected availability zone.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -903,11 +903,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高权限用户的账号名称。账号名称需满足以下要求：名称唯一，且长度在 2~32 个字符内。由字母、数字、中划线（-）、下划线（_）组成。以字母开头，以字母或数字结尾。名称内不能包含禁用关键词。",
+		//	  "description": "Account name for privileged user. Requirements: Must be unique, 2–32 characters. Letters, numbers, hyphens (-), and underscores (_) only. Must start with a letter and end with a letter or number. Cannot contain prohibited keywords",
 		//	  "type": "string"
 		//	}
 		"super_account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高权限用户的账号名称。账号名称需满足以下要求：名称唯一，且长度在 2~32 个字符内。由字母、数字、中划线（-）、下划线（_）组成。以字母开头，以字母或数字结尾。名称内不能包含禁用关键词。",
+			Description: "Account name for privileged user. Requirements: Must be unique, 2–32 characters. Letters, numbers, hyphens (-), and underscores (_) only. Must start with a letter and end with a letter or number. Cannot contain prohibited keywords",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -920,11 +920,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "高权限账号的密码。账号密码需满足以下要求：只能包含大小写字母、数字和特殊字符（如 ~!@#$%^\u0026*_-+=`|\\(){}[]:;'\u003c\u003e,.?/）。长度需在 8~32 个字符内。至少包含大写字母、小写字母、数字或特殊字符中的 3 种。",
+		//	  "description": "Password for high-privilege account. The password must meet the following requirements: can only contain uppercase and lowercase letters, numbers, and special characters (such as ~!@#$%^\u0026*_-+=`|\\(){}[]:;'\u003c\u003e,.?/). Length must be between 8 and 32 characters. Must include at least three of the following: uppercase letters, lowercase letters, numbers, or special characters.",
 		//	  "type": "string"
 		//	}
 		"super_account_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "高权限账号的密码。账号密码需满足以下要求：只能包含大小写字母、数字和特殊字符（如 ~!@#$%^&*_-+=`|\\(){}[]:;'<>,.?/）。长度需在 8~32 个字符内。至少包含大写字母、小写字母、数字或特殊字符中的 3 种。",
+			Description: "Password for high-privilege account. The password must meet the following requirements: can only contain uppercase and lowercase letters, numbers, and special characters (such as ~!@#$%^&*_-+=`|\\(){}[]:;'<>,.?/). Length must be between 8 and 32 characters. Must include at least three of the following: uppercase letters, lowercase letters, numbers, or special characters.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -937,18 +937,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例绑定的标签键和标签值数组对象。",
+		//	  "description": "Array object of tag keys and tag values bound to the instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "User tag key. Length range: 1~128 characters. Allows input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system will automatically remove it",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "User tag value. Allows input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), hyphens (-), and @ (@). Case-sensitive. If the tag value starts or ends with a space, the system will automatically remove it",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -968,7 +968,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+						Description: "User tag key. Length range: 1~128 characters. Allows input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system will automatically remove it",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -981,7 +981,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+						Description: "User tag value. Allows input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), hyphens (-), and @ (@). Case-sensitive. If the tag value starts or ends with a space, the system will automatically remove it",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -993,7 +993,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例绑定的标签键和标签值数组对象。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Array object of tag keys and tag values bound to the instance.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -1007,11 +1007,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "参数模板 ID。",
+		//	  "description": "Parameter template ID",
 		//	  "type": "string"
 		//	}
 		"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "参数模板 ID。",
+			Description: "Parameter template ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1024,11 +1024,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的时区。国内所有地域默认时区为 UTC +08:00。",
+		//	  "description": "Instance time zone. The default time zone for all regions in China is UTC +08:00.",
 		//	  "type": "string"
 		//	}
 		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的时区。国内所有地域默认时区为 UTC +08:00。",
+			Description: "Instance time zone. The default time zone for all regions in China is UTC +08:00.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1040,11 +1040,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络（VPC） ID。",
+		//	  "description": "Private network (VPC) ID.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络（VPC） ID。",
+			Description: "Private network (VPC) ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -1054,11 +1054,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability zone ID",
 		//	  "type": "string"
 		//	}
 		"zone_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability zone ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -1076,7 +1076,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "云数据库 veDB MySQL 版是火山引擎自研新一代云原生关系型数据库。云数据库 veDB MySQL 版 100% 兼容 MySQL，适用于企业多样化的数据库应用场景。",
+		Description: "veDB MySQL Edition is Volcano Engine's self-developed next-generation cloud-native relational database. veDB MySQL Edition is fully compatible with MySQL and supports diverse enterprise database application scenarios.",
 		Version:     1,
 		Attributes:  attributes,
 	}

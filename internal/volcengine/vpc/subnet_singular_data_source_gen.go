@@ -26,139 +26,139 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网所属账户的ID。",
+		//	  "description": "ID of the account to which the subnet belongs",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网所属账户的ID。",
+			Description: "ID of the account to which the subnet belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailableIpAddressCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网中可用的IP地址数量。",
+		//	  "description": "Number of available IP addresses in the subnet",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"available_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "子网中可用的IP地址数量。",
+			Description: "Number of available IP addresses in the subnet",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网的IPv4网段。",
+		//	  "description": "Subnet IPv4 CIDR block",
 		//	  "type": "string"
 		//	}
 		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网的IPv4网段。",
+			Description: "Subnet IPv4 CIDR block",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网的创建时间。",
+		//	  "description": "Subnet creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网的创建时间。",
+			Description: "Subnet creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。），不能以http://或https://开头。",
+		//	  "description": "Subnet description. Limited to 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Cannot start with http:// or https://",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网的描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。），不能以http://或https://开头。",
+			Description: "Subnet description. Limited to 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Cannot start with http:// or https://",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableIpv6
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "开启/关闭IPv6功能。仅当子网所属的VPC开通IPv6功能时，可配置此参数。1、true：开启。2、false：关闭。仅当子网内没有分配IPv6地址的云资源时，可配置此取值。",
+		//	  "description": "Enable or disable IPv6. This parameter can be configured only if the VPC to which the subnet belongs has IPv6 enabled. 1. true: Enable. 2. false: Disable. This value can be configured only if no cloud resources in the subnet have assigned IPv6 addresses",
 		//	  "type": "boolean"
 		//	}
 		"enable_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "开启/关闭IPv6功能。仅当子网所属的VPC开通IPv6功能时，可配置此参数。1、true：开启。2、false：关闭。仅当子网内没有分配IPv6地址的云资源时，可配置此取值。",
+			Description: "Enable or disable IPv6. This parameter can be configured only if the VPC to which the subnet belongs has IPv6 enabled. 1. true: Enable. 2. false: Disable. This value can be configured only if no cloud resources in the subnet have assigned IPv6 addresses",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。",
+		//	  "description": "Subnet IPv6 CIDR block. 1. When creating or modifying, enter the last 8 bits of the subnet IPv6 CIDR block (subnet mask is fixed at /64). 2. This parameter is supported only when EnableIpv6 is set to true. 3. Value range: 0–255. Mask is fixed at /64",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网IPv6网段。1、创建/修改时请输入子网IPv6网段的最后8比特位（子网的掩码固定为/64）。2、仅当EnableIpv6设置为true时，支持配置本参数。3、取值范围：0～255。掩码固定为/64。",
+			Description: "Subnet IPv6 CIDR block. 1. When creating or modifying, enter the last 8 bits of the subnet IPv6 CIDR block (subnet mask is fixed at /64). 2. This parameter is supported only when EnableIpv6 is set to true. 3. Value range: 0–255. Mask is fixed at /64",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsDefault
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该子网是否为默认子网。1、true：默认子网，表示该子网是创建ECS实例时系统自动创建的子网。2、false：非默认子网，表示该子网是用户手动创建的。",
+		//	  "description": "Whether the subnet is a default subnet. 1. true: Default subnet, created automatically when an ECS instance is created. 2. false: Non-default subnet, created manually by the user",
 		//	  "type": "boolean"
 		//	}
 		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "该子网是否为默认子网。1、true：默认子网，表示该子网是创建ECS实例时系统自动创建的子网。2、false：非默认子网，表示该子网是用户手动创建的。",
+			Description: "Whether the subnet is a default subnet. 1. true: Default subnet, created automatically when an ECS instance is created. 2. false: Non-default subnet, created manually by the user",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkAclId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网关联的网络ACL的ID。",
+		//	  "description": "ID of the network ACL associated with the subnet",
 		//	  "type": "string"
 		//	}
 		"network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网关联的网络ACL的ID。",
+			Description: "ID of the network ACL associated with the subnet",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网所在VPC实例所属项目的名称。",
+		//	  "description": "Name of the project associated with the VPC instance where the subnet resides",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网所在VPC实例所属项目的名称。",
+			Description: "Name of the project associated with the VPC instance where the subnet resides",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReadIpv6CidrBlock
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "只读字段，子网IPv6网段。",
+		//	  "description": "Read-only field, subnet IPv6 CIDR block",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"read_ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "只读字段，子网IPv6网段。",
+			Description: "Read-only field, subnet IPv6 CIDR block",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTable
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由表信息。",
+		//	  "description": "Route table information",
 		//	  "properties": {
 		//	    "RouteTableId": {
-		//	      "description": "子网关联的路由表ID。",
+		//	      "description": "ID of the route table associated with the subnet",
 		//	      "type": "string"
 		//	    },
 		//	    "RouteTableType": {
-		//	      "description": "子网关联的路由表的类型。1、System：表示系统路由表。2、Custom：表示自定义路由表。",
+		//	      "description": "Type of route table associated with the subnet. 1. System: System route table. 2. Custom: Custom route table",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -168,67 +168,67 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: RouteTableId
 				"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "子网关联的路由表ID。",
+					Description: "ID of the route table associated with the subnet",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RouteTableType
 				"route_table_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "子网关联的路由表的类型。1、System：表示系统路由表。2、Custom：表示自定义路由表。",
+					Description: "Type of route table associated with the subnet. 1. System: System route table. 2. Custom: Custom route table",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "路由表信息。",
+			Description: "Route table information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网的状态。1、Pending：表示配置中。2、Available：表示可用。",
+		//	  "description": "Subnet status. 1. Pending: Configuring. 2. Available: Available",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网的状态。1、Pending：表示配置中。2、Available：表示可用。",
+			Description: "Subnet status. 1. Pending: Configuring. 2. Available: Available",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "待修改信息的子网的ID。",
+		//	  "description": "ID of the subnet whose information is to be modified",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "待修改信息的子网的ID。",
+			Description: "ID of the subnet whose information is to be modified",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网的名称，长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-），不能以http://或https://开头，不填默认是子网的ID。",
+		//	  "description": "Subnet name, limited to 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Cannot start with http:// or https://. If not specified, defaults to the subnet ID",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"subnet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网的名称，长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-），不能以http://或https://开头，不填默认是子网的ID。",
+			Description: "Subnet name, limited to 1–128 characters. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Cannot start with http:// or https://. If not specified, defaults to the subnet ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网的标签信息。",
+		//	  "description": "Subnet tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -245,62 +245,62 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "子网的标签信息。",
+			Description: "Subnet tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TotalIpv4Count
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网下可用IP总数。",
+		//	  "description": "Total number of available IPs in the subnet",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"total_ipv_4_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "子网下可用IP总数。",
+			Description: "Total number of available IPs in the subnet",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网的更新时间。",
+		//	  "description": "Subnet update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网的更新时间。",
+			Description: "Subnet update time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网所属VPC的ID。",
+		//	  "description": "ID of the VPC to which the subnet belongs",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子网所属VPC的ID。",
+			Description: "ID of the VPC to which the subnet belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "要创建的子网所属的可用区ID，更多可用区信息请参见地域和可用区。",
+		//	  "description": "Availability zone ID for the subnet to be created. For more information, see Regions and Availability Zones",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "要创建的子网所属的可用区ID，更多可用区信息请参见地域和可用区。",
+			Description: "Availability zone ID for the subnet to be created. For more information, see Regions and Availability Zones",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

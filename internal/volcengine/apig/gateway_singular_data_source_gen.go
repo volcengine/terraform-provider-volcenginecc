@@ -27,10 +27,10 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务配置信息。",
+		//	  "description": "Backend service configuration information",
 		//	  "properties": {
 		//	    "IsVkeWithFlannelCNISupported": {
-		//	      "description": "是否支持VKE Flannel CNI。",
+		//	      "description": "Whether VKE Flannel CNI is supported",
 		//	      "type": "boolean"
 		//	    },
 		//	    "VkePodCidr": {
@@ -44,7 +44,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: IsVkeWithFlannelCNISupported
 				"is_vke_with_flannel_cni_supported": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否支持VKE Flannel CNI。",
+					Description: "Whether VKE Flannel CNI is supported",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VkePodCidr
@@ -53,50 +53,50 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "后端服务配置信息。",
+			Description: "Backend service configuration information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Comments
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关备注信息。长度限制为0~253个字符。",
+		//	  "description": "Gateway remarks. Length limit: 0–253 characters.",
 		//	  "maxLength": 253,
 		//	  "type": "string"
 		//	}
 		"comments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关备注信息。长度限制为0~253个字符。",
+			Description: "Gateway remarks. Length limit: 0–253 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关创建时间。",
+		//	  "description": "Gateway creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关创建时间。",
+			Description: "Gateway creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomLog
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义日志配置。",
+		//	  "description": "Custom log configuration",
 		//	  "properties": {
 		//	    "CustomVariables": {
-		//	      "description": "自定义变量信息。",
+		//	      "description": "Custom variable information",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "请求头信息。",
+		//	        "description": "Request header information",
 		//	        "properties": {
 		//	          "AliasesInLog": {
-		//	            "description": "字段别名。",
+		//	            "description": "Field alias",
 		//	            "type": "string"
 		//	          },
 		//	          "Key": {
-		//	            "description": "请求头键。",
+		//	            "description": "Request header key",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -107,17 +107,17 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "RequestHeaders": {
-		//	      "description": "请求头信息。",
+		//	      "description": "Request header information",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "请求头信息。",
+		//	        "description": "Request header information",
 		//	        "properties": {
 		//	          "AliasesInLog": {
-		//	            "description": "字段别名。",
+		//	            "description": "Field alias",
 		//	            "type": "string"
 		//	          },
 		//	          "Key": {
-		//	            "description": "请求头键。",
+		//	            "description": "Request header key",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -128,17 +128,17 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "ResponseHeaders": {
-		//	      "description": "响应头信息。",
+		//	      "description": "Response header information",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "请求头信息。",
+		//	        "description": "Request header information",
 		//	        "properties": {
 		//	          "AliasesInLog": {
-		//	            "description": "字段别名。",
+		//	            "description": "Field alias",
 		//	            "type": "string"
 		//	          },
 		//	          "Key": {
-		//	            "description": "请求头键。",
+		//	            "description": "Request header key",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -159,17 +159,17 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AliasesInLog
 							"aliases_in_log": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "字段别名。",
+								Description: "Field alias",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "请求头键。",
+								Description: "Request header key",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "自定义变量信息。",
+					Description: "Custom variable information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RequestHeaders
@@ -178,17 +178,17 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AliasesInLog
 							"aliases_in_log": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "字段别名。",
+								Description: "Field alias",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "请求头键。",
+								Description: "Request header key",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "请求头信息。",
+					Description: "Request header information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ResponseHeaders
@@ -197,46 +197,46 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AliasesInLog
 							"aliases_in_log": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "字段别名。",
+								Description: "Field alias",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "请求头键。",
+								Description: "Request header key",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "响应头信息。",
+					Description: "Response header information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "自定义日志配置。",
+			Description: "Custom log configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Events
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "事件。",
+		//	  "description": "Event",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "事件信息。",
+		//	    "description": "Event information",
 		//	    "properties": {
 		//	      "Code": {
-		//	        "description": "事件代码。",
+		//	        "description": "Event code",
 		//	        "type": "string"
 		//	      },
 		//	      "CreatedTime": {
-		//	        "description": "事件创建时间。",
+		//	        "description": "Event creation time",
 		//	        "type": "string"
 		//	      },
 		//	      "Data": {
-		//	        "description": "附带信息。",
+		//	        "description": "Additional information",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "事件描述。",
+		//	        "description": "Event description",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -250,56 +250,56 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Code
 					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "事件代码。",
+						Description: "Event code",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CreatedTime
 					"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "事件创建时间。",
+						Description: "Event creation time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Data
 					"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "附带信息。",
+						Description: "Additional information",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "事件描述。",
+						Description: "Event description",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "事件。",
+			Description: "Event",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GatewayID
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关实例ID。",
+		//	  "description": "Gateway instance ID",
 		//	  "type": "string"
 		//	}
 		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关实例ID。",
+			Description: "Gateway instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "日志配置。",
+		//	  "description": "Log configuration",
 		//	  "properties": {
 		//	    "Enable": {
-		//	      "description": "是否开启日志服务。",
+		//	      "description": "Whether to enable log service",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ProjectId": {
-		//	      "description": "日志项目ID。",
+		//	      "description": "Log project ID",
 		//	      "type": "string"
 		//	    },
 		//	    "TopicId": {
-		//	      "description": "日志主题ID。ProjectId 指定项目里面的日志主题。",
+		//	      "description": "Log topic ID. ProjectId specifies the log topic within the project",
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    }
@@ -315,46 +315,46 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启日志服务。",
+					Description: "Whether to enable log service",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ProjectId
 				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "日志项目ID。",
+					Description: "Log project ID",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TopicId
 				"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "日志主题ID。ProjectId 指定项目里面的日志主题。",
+					Description: "Log topic ID. ProjectId specifies the log topic within the project",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "日志配置。",
+			Description: "Log configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Message
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关创建失败、删除失败或异常时的错误信息。",
+		//	  "description": "Error message for gateway creation failure, deletion failure, or abnormal status",
 		//	  "type": "string"
 		//	}
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关创建失败、删除失败或异常时的错误信息。",
+			Description: "Error message for gateway creation failure, deletion failure, or abnormal status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MonitorSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监控配置信息。",
+		//	  "description": "Monitoring configuration information",
 		//	  "properties": {
 		//	    "Enable": {
-		//	      "description": "托管Prometheus（VMP）服务。",
+		//	      "description": "Managed Prometheus (VMP) service",
 		//	      "type": "boolean"
 		//	    },
 		//	    "WorkspaceID": {
-		//	      "description": "Prometheus工作区ID。",
+		//	      "description": "Prometheus workspace ID",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -364,51 +364,51 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "托管Prometheus（VMP）服务。",
+					Description: "Managed Prometheus (VMP) service",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: WorkspaceID
 				"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Prometheus工作区ID。",
+					Description: "Prometheus workspace ID",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "监控配置信息。",
+			Description: "Monitoring configuration information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关名称。",
+		//	  "description": "Gateway name",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关名称。",
+			Description: "Gateway name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络配置信息。",
+		//	  "description": "Network configuration information",
 		//	  "properties": {
 		//	    "Subnets": {
-		//	      "description": "子网配置信息列表。",
+		//	      "description": "Subnet configuration information list",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "子网配置信息。",
+		//	        "description": "Subnet configuration information",
 		//	        "properties": {
 		//	          "AZ": {
-		//	            "description": "可用区。",
+		//	            "description": "Availability zone",
 		//	            "type": "string"
 		//	          },
 		//	          "SubnetId": {
-		//	            "description": "子网ID。",
+		//	            "description": "Subnet ID",
 		//	            "type": "string"
 		//	          },
 		//	          "SubnetName": {
-		//	            "description": "子网名称。",
+		//	            "description": "Subnet name",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -422,7 +422,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "VpcName": {
-		//	      "description": "VPC名称。",
+		//	      "description": "VPC name",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -436,22 +436,22 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AZ
 							"az": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "可用区。",
+								Description: "Availability zone",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetId
 							"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "子网ID。",
+								Description: "Subnet ID",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetName
 							"subnet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "子网名称。",
+								Description: "Subnet name",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "子网配置信息列表。",
+					Description: "Subnet configuration information list",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VpcId
@@ -461,32 +461,32 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VpcName
 				"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "VPC名称。",
+					Description: "VPC name",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "网络配置信息。",
+			Description: "Network configuration information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "项目名称。",
+		//	  "description": "Project name",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "项目名称。",
+			Description: "Project name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源规格配置信息。",
+		//	  "description": "Resource specification configuration information",
 		//	  "properties": {
 		//	    "CLBSpecCode": {
-		//	      "description": "CLB规格编码。CLB规格，取值：small_1：小型 I。small_2：小型 II。medium_1：中型 I。medium_2：中型 II。large_1：大型 I。large_2：大型 II。",
+		//	      "description": "CLB specification code. CLB specifications. Options: small_1: Small I; small_2: Small II; medium_1: Medium I; medium_2: Medium II; large_1: Large I; large_2: Large II",
 		//	      "enum": [
 		//	        "small_1",
 		//	        "small_2",
@@ -499,7 +499,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceSpecCode": {
-		//	      "description": "节点规格，取值：1c2g。2c4g。4c8g。8c16g。",
+		//	      "description": "Node specifications. Options: 1c2g, 2c4g, 4c8g, 8c16g",
 		//	      "enum": [
 		//	        "1c2g",
 		//	        "2c4g",
@@ -509,27 +509,27 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "NetworkType": {
-		//	      "description": "网络类型。默认值为开启公网，开启私网。",
+		//	      "description": "Network type. Default value: enable public network, enable private network",
 		//	      "properties": {
 		//	        "EnablePrivateNetwork": {
-		//	          "description": "是否启用私网。",
+		//	          "description": "Whether to enable private network",
 		//	          "type": "boolean"
 		//	        },
 		//	        "EnablePublicNetwork": {
-		//	          "description": "是否启用公网。",
+		//	          "description": "Whether to enable public network",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "PublicNetworkBandwidth": {
-		//	      "description": "公网带宽上限，该字段仅用于“按带宽上限收费”公网网络计费方式。单位为Mbps。取值限制为0~500。默认值为0。",
+		//	      "description": "Public network bandwidth limit. This field is only used for the 'bandwidth limit billing' public network billing method. Unit: Mbps. Value range: 0–500. Default value: 0",
 		//	      "maximum": 500,
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "PublicNetworkBillingType": {
-		//	      "description": "公网网络计费方式，取值：traffic：按实际流量计费。bandwidth：按带宽上限计费。",
+		//	      "description": "Public network billing method. Options: traffic: billed by actual traffic; bandwidth: billed by bandwidth limit",
 		//	      "enum": [
 		//	        "traffic",
 		//	        "bandwidth",
@@ -538,7 +538,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Replicas": {
-		//	      "description": "节点数量。取值限制为2~100。",
+		//	      "description": "Node count. Value range: 2–100",
 		//	      "maximum": 100,
 		//	      "minimum": 2,
 		//	      "type": "integer"
@@ -550,12 +550,12 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CLBSpecCode
 				"clb_spec_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "CLB规格编码。CLB规格，取值：small_1：小型 I。small_2：小型 II。medium_1：中型 I。medium_2：中型 II。large_1：大型 I。large_2：大型 II。",
+					Description: "CLB specification code. CLB specifications. Options: small_1: Small I; small_2: Small II; medium_1: Medium I; medium_2: Medium II; large_1: Large I; large_2: Large II",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceSpecCode
 				"instance_spec_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "节点规格，取值：1c2g。2c4g。4c8g。8c16g。",
+					Description: "Node specifications. Options: 1c2g, 2c4g, 4c8g, 8c16g",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: NetworkType
@@ -563,53 +563,53 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: EnablePrivateNetwork
 						"enable_private_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "是否启用私网。",
+							Description: "Whether to enable private network",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: EnablePublicNetwork
 						"enable_public_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "是否启用公网。",
+							Description: "Whether to enable public network",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "网络类型。默认值为开启公网，开启私网。",
+					Description: "Network type. Default value: enable public network, enable private network",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PublicNetworkBandwidth
 				"public_network_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "公网带宽上限，该字段仅用于“按带宽上限收费”公网网络计费方式。单位为Mbps。取值限制为0~500。默认值为0。",
+					Description: "Public network bandwidth limit. This field is only used for the 'bandwidth limit billing' public network billing method. Unit: Mbps. Value range: 0–500. Default value: 0",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PublicNetworkBillingType
 				"public_network_billing_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "公网网络计费方式，取值：traffic：按实际流量计费。bandwidth：按带宽上限计费。",
+					Description: "Public network billing method. Options: traffic: billed by actual traffic; bandwidth: billed by bandwidth limit",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Replicas
 				"replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "节点数量。取值限制为2~100。",
+					Description: "Node count. Value range: 2–100",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "资源规格配置信息。",
+			Description: "Resource specification configuration information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关状态，取值：Creating：创建中。CreatedFailed：创建失败。Updating：更新中。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。",
+		//	  "description": "Gateway status. Options: Creating: Creating; CreatedFailed: Creation failed; Updating: Updating; Running: Running; Deleting: Deleting; DeletedFailed: Deletion failed; Abnormal: Abnormal",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关状态，取值：Creating：创建中。CreatedFailed：创建失败。Updating：更新中。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。",
+			Description: "Gateway status. Options: Creating: Creating; CreatedFailed: Creation failed; Updating: Updating; Running: Running; Deleting: Deleting; DeletedFailed: Deletion failed; Abnormal: Abnormal",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子网ID列表。长度限制为1~2个。",
+		//	  "description": "Subnet ID list. Length limit: 1–2",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -621,17 +621,17 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "子网ID列表。长度限制为1~2个。",
+			Description: "Subnet ID list. Length limit: 1–2",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TraceSpec
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "链路追踪配置信息。",
+		//	  "description": "Link tracing configuration information.",
 		//	  "properties": {
 		//	    "APMTraceSpec": {
-		//	      "description": "应用性能监控全链路版链路追踪配置。",
+		//	      "description": "Application performance monitoring full-link trace configuration",
 		//	      "properties": {
 		//	        "ApiKey": {
 		//	          "description": "API Key。",
@@ -641,11 +641,11 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Enable": {
-		//	      "description": "是否启用链路追踪。",
+		//	      "description": "Whether to enable trace",
 		//	      "type": "boolean"
 		//	    },
 		//	    "TLSTraceSpec": {
-		//	      "description": "链路追踪配置信息。",
+		//	      "description": "Link tracing configuration information.",
 		//	      "properties": {
 		//	        "IamUserAK": {
 		//	          "description": "Access key。",
@@ -656,7 +656,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "ProjectId": {
-		//	          "description": "日志项目ID。",
+		//	          "description": "Log project ID",
 		//	          "type": "string"
 		//	        },
 		//	        "TraceId": {
@@ -667,7 +667,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "TraceType": {
-		//	      "description": "链路追踪类型，取值：tls：日志服务。apm：应用性能监控全链路版。",
+		//	      "description": "Link tracing type. Possible values: tls: Log Service. apm: Application Performance Monitoring (APM) end-to-end version.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -684,12 +684,12 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "应用性能监控全链路版链路追踪配置。",
+					Description: "Application performance monitoring full-link trace configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否启用链路追踪。",
+					Description: "Whether to enable trace",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TLSTraceSpec
@@ -707,7 +707,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: ProjectId
 						"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "日志项目ID。",
+							Description: "Log project ID",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TraceId
@@ -716,41 +716,41 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "链路追踪配置信息。",
+					Description: "Link tracing configuration information.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TraceType
 				"trace_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "链路追踪类型，取值：tls：日志服务。apm：应用性能监控全链路版。",
+					Description: "Link tracing type. Possible values: tls: Log Service. apm: Application Performance Monitoring (APM) end-to-end version.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "链路追踪配置信息。",
+			Description: "Link tracing configuration information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关类型，取值：standard：标准网关。serverless：Serverless网关（暂不支持）。",
+		//	  "description": "Gateway type. Options: standard: Standard gateway; serverless: Serverless gateway (not supported yet)",
 		//	  "enum": [
 		//	    "standard"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关类型，取值：standard：标准网关。serverless：Serverless网关（暂不支持）。",
+			Description: "Gateway type. Options: standard: Standard gateway; serverless: Serverless gateway (not supported yet)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关版本。",
+		//	  "description": "Gateway version.",
 		//	  "type": "string"
 		//	}
 		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关版本。",
+			Description: "Gateway version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId

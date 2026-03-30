@@ -20,51 +20,51 @@
     "InvocationResult": {
       "properties": {
         "CommandId": {
-          "description": "命令ID。",
+          "description": "Command ID.",
           "type": "string"
         },
         "EndTime": {
-          "description": "命令执行的完成时间。",
+          "description": "Command execution completion time.",
           "type": "string"
         },
         "ErrorCode": {
-          "description": "命令执行失败的错误码。TaskDeliveryTimeout：表示命令下发超时。TaskExecutionTimeout：表示命令执行超时。TaskExecutionFailed：表示命令执行失败。",
+          "description": "Error codes for command execution failure. TaskDeliveryTimeout: Indicates command delivery timeout. TaskExecutionTimeout: Indicates command execution timeout. TaskExecutionFailed: Indicates command execution failure.",
           "type": "string"
         },
         "ErrorMessage": {
-          "description": "命令执行失败的错误信息。",
+          "description": "Error message for command execution failure.",
           "type": "string"
         },
         "ExitCode": {
-          "description": "脚本执行后的退出状态码。",
+          "description": "Exit status code after script execution.",
           "type": "integer"
         },
         "InstanceId": {
-          "description": "实例ID。",
+          "description": "Instance ID.",
           "type": "string"
         },
         "InvocationId": {
-          "description": "任务执行ID。",
+          "description": "Task execution ID.",
           "type": "string"
         },
         "InvocationResultId": {
-          "description": "任务执行结果ID。",
+          "description": "Task execution result ID.",
           "type": "string"
         },
         "InvocationResultStatus": {
-          "description": "单台实例的命令进度状态。",
+          "description": "Command progress status for a single instance.",
           "type": "string"
         },
         "Output": {
-          "description": "经过Base64编码的命令执行后输出信息。",
+          "description": "Output information after command execution, encoded in Base64.",
           "type": "string"
         },
         "StartTime": {
-          "description": "命令在实例中开始执行的时间。",
+          "description": "Time when the command starts executing in the instance.",
           "type": "string"
         },
         "Username": {
-          "description": "在实例中执行命令的用户名称。",
+          "description": "User name for executing the command in the instance.",
           "type": "string"
         }
       },
@@ -74,44 +74,44 @@
       "properties": {
         "DecimalPrecision": {
           "default": 0,
-          "description": "自定义参数值（数字）允许的小数点后位数。",
+          "description": "Allowed number of decimal places for custom parameter values (numeric).",
           "maximum": 10,
           "minimum": 0,
           "type": "integer"
         },
         "DefaultValue": {
-          "description": "自定义参数默认值。",
+          "description": "Default value for custom parameter.",
           "type": "string"
         },
         "MaxLength": {
-          "description": "自定义参数值（字符串）的最大长度。",
+          "description": "Maximum length for custom parameter value (string).",
           "maximum": 1000,
           "type": "integer"
         },
         "MaxValue": {
-          "description": "自定义参数值（数字）的最大值。",
+          "description": "Maximum value for custom parameter (numeric).",
           "type": "string"
         },
         "MinLength": {
-          "description": "自定义参数值（字符串）的最小长度。",
+          "description": "Minimum length for custom parameter values (string).",
           "maximum": 1000,
           "type": "integer"
         },
         "MinValue": {
-          "description": "自定义参数值（数字）的最小值。",
+          "description": "Minimum value for custom parameter (numeric).",
           "type": "string"
         },
         "Name": {
-          "description": "自定义参数名称，需要在脚本中通过{{Param}}定义 。",
+          "description": "Custom parameter name. Must be defined in the script using {{Param}}.",
           "maxLength": 64,
           "type": "string"
         },
         "Required": {
-          "description": "是否必填。true：必填。false：非必填。",
+          "description": "Required. true: Required. false: Optional.",
           "type": "boolean"
         },
         "Type": {
-          "description": "自定义参数类型。String：表示自定义参数类型字符串类型。Digit：表示自定义参数类型为数值类型。",
+          "description": "Custom parameter type. String: Indicates custom parameter type is string. Digit: Indicates custom parameter type is numeric.",
           "enum": [
             "String",
             "Digit"
@@ -124,13 +124,13 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+          "description": "Tag key for user tags. Naming rules: Cannot start with any combination of 'volc:' or 'sys:' in any case. Can only contain letters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.",
           "maxLength": 128,
           "minLength": 1,
           "type": "string"
         },
         "Value": {
-          "description": "用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+          "description": "User tag value. Naming rules: Only letters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty; length must be between 0 and 256 characters.",
           "maxLength": 256,
           "type": "string"
         }
@@ -141,7 +141,7 @@
       "type": "object"
     }
   },
-  "description": "云助手是火山引擎打造的原生自动化运维工具。您可以创建立即执行、周期执行、定时执行的作业任务，创建完成后完，云助手客户端将按照执行模式自动开始执行。",
+  "description": "Cloud Assistant is a native automated operations tool developed by Volcano Engine. You can create jobs for immediate, periodic, or scheduled execution. After creation, the Cloud Assistant client automatically starts execution according to the execution mode.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/CommandId",
@@ -202,43 +202,43 @@
   ],
   "properties": {
     "CommandContent": {
-      "description": "命令内容。",
+      "description": "Command content.",
       "type": "string"
     },
     "CommandDescription": {
-      "description": "被调用命令的描述。",
+      "description": "Description of the invoked command.",
       "type": "string"
     },
     "CommandId": {
-      "description": "命令ID。",
+      "description": "Command ID.",
       "type": "string"
     },
     "CommandName": {
-      "description": "任务触发时的命令名称。",
+      "description": "Command name when the task is triggered.",
       "type": "string"
     },
     "CommandProvider": {
-      "description": "被调用命令的提供方。",
+      "description": "Provider of the invoked command.",
       "type": "string"
     },
     "CommandType": {
-      "description": "作业触发的命令类型。",
+      "description": "Command type triggered by the job.",
       "type": "string"
     },
     "EnableParameter": {
-      "description": "被调用命令是否使用自定义参数。true：已启用。false：未启用。",
+      "description": "Whether the invoked command uses custom parameters. true: enabled. false: not enabled.",
       "type": "boolean"
     },
     "EndTime": {
-      "description": "任务结束时间。",
+      "description": "Task end time.",
       "type": "string"
     },
     "Frequency": {
-      "description": "执行频率。RepeatMode=Rate 时本参数必填。格式：\u003c执行间隔数值\u003e\u003c执行间隔单位\u003e，执行间隔单位：支持分钟（5m-60m）、小时（1h-24h）和天（1d-7d）。执行间隔基于固定频率，与作业实际执行需要的时间无关。创建作业后基于LaunchTime执行一次，根据间隔设置确定下一次执行时间。",
+      "description": "Execution frequency. This parameter is required when RepeatMode=Rate. Format: \u003cinterval value\u003e\u003cinterval unit\u003e. Interval units supported: minutes (5m–60m), hours (1h–24h), and days (1d–7d). The interval is based on a fixed frequency and is independent of the actual job execution time. After job creation, it executes once based on LaunchTime, and the next execution time is determined by the interval setting.",
       "type": "string"
     },
     "InstanceIds": {
-      "description": "实例ID列表，最多支持200个ID。",
+      "description": "Instance ID list, supports up to 200 IDs.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -248,28 +248,28 @@
       "uniqueItems": true
     },
     "InstanceNumber": {
-      "description": "执行实例数量。",
+      "description": "Number of instances executed.",
       "type": "integer"
     },
     "InvocationDescription": {
-      "description": "作业描述，默认为空字符串，不超过256个字符。",
+      "description": "Job description. Defaults to an empty string and must not exceed 256 characters.",
       "maxLength": 256,
       "semantic": "description",
       "type": "string"
     },
     "InvocationId": {
-      "description": "任务执行 ID。",
+      "description": "Task execution ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "InvocationName": {
-      "description": "作业名称。不超过64个字符。暂不限制特殊字符。同地域下作业名称可重复。",
+      "description": "Job name. Maximum 64 characters. No restriction on special characters. Job names can be duplicated within the same region.",
       "maxLength": 64,
       "semantic": "resourceName",
       "type": "string"
     },
     "InvocationResults": {
-      "description": "单台实例执行命令的结果。",
+      "description": "Result of command execution on a single instance.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/InvocationResult"
@@ -278,16 +278,16 @@
       "uniqueItems": true
     },
     "InvocationStatus": {
-      "description": "命令执行的总执行状态。",
+      "description": "Overall execution status of the command.",
       "semantic": "status",
       "type": "string"
     },
     "LaunchTime": {
-      "description": "执行时间。",
+      "description": "Execution time.",
       "type": "string"
     },
     "ParameterDefinitions": {
-      "description": "任务触发时的命令自定义参数定义。",
+      "description": "Custom parameter definition for the command triggered by the task.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/ParameterDefinition"
@@ -296,20 +296,20 @@
       "uniqueItems": true
     },
     "Parameters": {
-      "description": "命令中包含自定义参数时，需通过本参数传入自定义参数的键值对。自定义参数个数范围为0~60。Key不允许为空字符串，最多支持64个字符。Value允许为空字符串。自定义参数与原始命令内容在Base64编码后，综合长度不能超过16KB。设置的自定义参数名集合必须为创建命令时定义的参数集的子集。对于未传入的参数，使用默认值代替。",
+      "description": "When the command includes custom parameters, use this parameter to pass custom parameter key-value pairs. The number of custom parameters ranges from 0 to 60. Key cannot be an empty string and supports up to 64 characters. Value can be an empty string. The combined length of custom parameters and original command content after Base64 encoding must not exceed 16 KB. The set of custom parameter names must be a subset of the parameter set defined when creating the command. Default values are used for parameters not provided.",
       "type": "string"
     },
     "ProjectName": {
-      "description": "资源所属项目，一个资源只能归属于一个项目。",
+      "description": "Project to which the resource belongs; each resource can belong to only one project.",
       "semantic": "projectName",
       "type": "string"
     },
     "RecurrenceEndTime": {
-      "description": "周期结束时间，仅适用于周期任务（Rate）。",
+      "description": "Cycle end time, applicable only to periodic tasks (Rate).",
       "type": "string"
     },
     "RepeatMode": {
-      "description": "设置命令执行的方式。Once：默认，表示立即执行命令。Rate：周期执行命令，需要通过Frequency参数传入Rate表达式指定执行周期。Fixed：定时执行命令，需要通过LaunchTime参数指定的执行时间。",
+      "description": "Set the command execution mode. Once: Default, executes the command immediately. Rate: Executes the command periodically; specify the execution cycle using the Frequency parameter and Rate expression. Fixed: Executes the command at a scheduled time; specify the execution time using the LaunchTime parameter.",
       "enum": [
         "Once",
         "Rate",
@@ -318,12 +318,12 @@
       "type": "string"
     },
     "StartTime": {
-      "description": "任务开始时间。",
+      "description": "Task start time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Tags": {
-      "description": "标签键值对。",
+      "description": "Tag key-value pair.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -334,21 +334,21 @@
     },
     "Timeout": {
       "default": 60,
-      "description": "创建的命令在ECS实例中执行时最大的超时时间，单位为秒。默认值：60。可选范围为：30~86400。",
+      "description": "Maximum timeout for command execution in ECS instances, in seconds. Default: 60. Optional range: 30–86400.",
       "maximum": 86400,
       "minimum": 30,
       "type": "integer"
     },
     "Username": {
-      "description": "在ECS实例中执行命令的用户名称。",
+      "description": "User name for executing the command in the ECS instance.",
       "type": "string"
     },
     "WindowsPassword": {
-      "description": "自定义windows用户的密码。",
+      "description": "Password for custom Windows user.",
       "type": "string"
     },
     "WorkingDir": {
-      "description": "创建的命令在ECS实例中运行的目录。",
+      "description": "Directory where the created command runs in the ECS instance.",
       "type": "string"
     }
   },

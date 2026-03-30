@@ -21,12 +21,12 @@ Data Source schema for Volcengine::KMS::KeyRing
 
 ### Read-Only
 
-- `create_date` (Number) 密钥环创建日期。
-- `description` (String) 密钥环描述，长度为 0   - 8192 个字符。
-- `key_count` (Number) 密钥环密钥次数。
-- `key_ring_id` (String) 密钥环唯一标识符，UUID形式。
-- `keyring_name` (String) 密钥环名称，长度为 2   - 31 个字符。合法字符：[a-zA-Z0-9-_]。
-- `keyring_type` (String) 密钥环类型，取值：CustomKeyring。
-- `project_name` (String) 项目名称，默认值：default。
-- `uid` (String) 密钥环租户ID。
-- `update_date` (Number) 密钥环更新日期。
+- `create_date` (Number) Keyring creation date
+- `description` (String) Keyring description, length: 0–8192 characters
+- `key_count` (Number) Number of keys in keyring
+- `key_ring_id` (String) Keyring unique identifier, in UUID format
+- `keyring_name` (String) Keyring name, length: 2–31 characters. Valid characters: [a-zA-Z0-9-_]
+- `keyring_type` (String) Keyring type, value: CustomKeyring
+- `project_name` (String) Project name, default value: default
+- `uid` (String) Keyring tenant ID
+- `update_date` (Number) Keyring update date

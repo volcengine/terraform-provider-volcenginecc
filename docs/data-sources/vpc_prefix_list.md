@@ -21,28 +21,28 @@ Data Source schema for Volcengine::VPC::PrefixList
 
 ### Read-Only
 
-- `association_count` (Number) 前缀列表关联的资源数量。
-- `associations_route_tables` (Attributes Set) 前缀列表关联的路由表信息。 (see [below for nested schema](#nestedatt--associations_route_tables))
-- `associations_security_groups` (Attributes Set) 前缀列表关联的安全组信息。 (see [below for nested schema](#nestedatt--associations_security_groups))
-- `created_time` (String) 前缀列表的创建时间。
-- `description` (String) 前缀列表的描述信息。长度限制为0~ 255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。
-- `ip_version` (String) IP版本类型。取值：IPv4（默认值）：IPv4类型。IPv6：IPv6类型。
-- `max_entries` (Number) 最大条目数，即前缀列表最多可添加条目的数量。取值范围为1～200。
-- `prefix_list_entries` (Attributes Set) 前缀列表条目的CIDR。 (see [below for nested schema](#nestedatt--prefix_list_entries))
-- `prefix_list_id` (String) 前缀列表的ID。
-- `prefix_list_name` (String) 前缀列表的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。
-- `project_name` (String) 前缀列表所属项目的名称，不填默认加入default项目。
-- `status` (String) 前缀列表的状态。取值：Available：可用；Creating：创建中；Deleting：删除中；Pending：修改中。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) 前缀列表的最近一次修改时间。
+- `association_count` (Number) Number of resources associated with the prefix list.
+- `associations_route_tables` (Attributes Set) Route table information associated with the prefix list. (see [below for nested schema](#nestedatt--associations_route_tables))
+- `associations_security_groups` (Attributes Set) Security group information associated with the prefix list. (see [below for nested schema](#nestedatt--associations_security_groups))
+- `created_time` (String) Creation time of the prefix list.
+- `description` (String) Description of the prefix list. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).
+- `ip_version` (String) IP version type. Values: IPv4 (default): IPv4 type. IPv6: IPv6 type.
+- `max_entries` (Number) Maximum number of entries, that is, the maximum number of entries that can be added to the prefix list. Value range: 1–200.
+- `prefix_list_entries` (Attributes Set) CIDR of the prefix list entry. (see [below for nested schema](#nestedatt--prefix_list_entries))
+- `prefix_list_id` (String) Prefix list ID.
+- `prefix_list_name` (String) Name of the prefix list. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-).
+- `project_name` (String) Name of the project to which the prefix list belongs. If not specified, it is added to the default project.
+- `status` (String) Status of the prefix list. Values: Available: available; Creating: creating; Deleting: deleting; Pending: modifying.
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Last modification time of the prefix list.
 
 <a id="nestedatt--associations_route_tables"></a>
 ### Nested Schema for `associations_route_tables`
 
 Read-Only:
 
-- `resource_id` (String) 关联资源的ID。
-- `resource_type` (String) 关联资源的类型。VpcRouteTable：路由表；VpcSecurityGroup：安全组。
+- `resource_id` (String) ID of the associated resource.
+- `resource_type` (String) Type of associated resource. VpcRouteTable: route table; VpcSecurityGroup: security group.
 
 
 <a id="nestedatt--associations_security_groups"></a>
@@ -50,8 +50,8 @@ Read-Only:
 
 Read-Only:
 
-- `resource_id` (String) 关联资源的ID。
-- `resource_type` (String) 关联资源的类型。VpcRouteTable：路由表；VpcSecurityGroup：安全组。
+- `resource_id` (String) ID of the associated resource.
+- `resource_type` (String) Type of associated resource. VpcRouteTable: route table; VpcSecurityGroup: security group.
 
 
 <a id="nestedatt--prefix_list_entries"></a>
@@ -59,8 +59,8 @@ Read-Only:
 
 Read-Only:
 
-- `cidr` (String) 前缀列表条目的CIDR。
-- `description` (String) 前缀列表条目的描述。长度限制为0~255个字符，需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。
+- `cidr` (String) CIDR of the prefix list entry.
+- `description` (String) Description of the prefix list entry. Length limit: 0–255 characters. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).
 
 
 <a id="nestedatt--tags"></a>
@@ -68,5 +68,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) Tag key of the user tag.
+- `value` (String) Tag value of the user tag.

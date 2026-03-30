@@ -21,24 +21,24 @@ Data Source schema for Volcengine::CR::Registry
 
 ### Read-Only
 
-- `charge_type` (String) 镜像仓库实例的付费类型，目前仅支持 PostCharge按量付费模式。
-- `created_time` (String) 创建镜像仓库实例的时间。
-- `expire_time` (String) 仅计费类型为HybridCharge有值，实例到期时间
-- `name` (String) 标准版实例名称，同一个地域下，名称必须唯一。支持小写英文字母、数字、短划线（-）且数字不能在首位，短划线（-）不能在首位或末位，长度限制为 3～30 个字符。
-- `project` (String) 填写实例需要关联的项目。一个实例仅支持关联一个项目
-- `proxy_cache` (Attributes) ProxyCache配置，设置为ProxyCache时必填 (see [below for nested schema](#nestedatt--proxy_cache))
-- `proxy_cache_enabled` (Boolean) 是否设置为ProxyCache实例
-- `renew_type` (String) 仅计费类型为HybridCharge有值，实例自动续费类型
-- `status` (Attributes) 镜像仓库实例状态，由 Phase 和 Conditions 组成。合法的 Phase 和 Conditions 组合如下所示：{Creating, [Progressing]}：创建中,{Running, [Ok]}：运行中,{Running, [Degraded]}：运行中,{Stopped, [Balance]}：欠费关停,{Stopped, [Released]}：待回收,{Stopped, [Released, Balance]}：欠费关停,{Starting, [Progressing]}：启动中,{Deleting, [Progressing]}：销毁中,{Failed, [Unknown]}：异常 (see [below for nested schema](#nestedatt--status))
-- `tags` (Attributes Set) 实例的标签 (see [below for nested schema](#nestedatt--tags))
-- `type` (String) 不填写默认创建标准版实例。Enterprise：标准版，Micro：小微版
+- `charge_type` (String) Billing type for the container registry instance. Currently, only PostCharge pay-as-you-go mode is supported
+- `created_time` (String) Creation time of the container registry instance
+- `expire_time` (String) Instance expiration time is only available for HybridCharge billing type
+- `name` (String) Standard edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be 3–30 characters
+- `project` (String) Enter the project to associate with the instance. Each instance can only be associated with one project
+- `proxy_cache` (Attributes) ProxyCache configuration. Required when set as ProxyCache (see [below for nested schema](#nestedatt--proxy_cache))
+- `proxy_cache_enabled` (Boolean) Set as ProxyCache instance
+- `renew_type` (String) Instance auto-renewal type is only available for HybridCharge billing type
+- `status` (Attributes) Container registry instance status consists of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to insufficient balance, {Stopped, [Released]}: Pending reclamation, {Stopped, [Released, Balance]}: Suspended due to insufficient balance, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Abnormal (see [below for nested schema](#nestedatt--status))
+- `tags` (Attributes Set) Instance tags (see [below for nested schema](#nestedatt--tags))
+- `type` (String) If not specified, a standard edition instance will be created by default. Enterprise: Standard edition, Micro: Micro edition
 
 <a id="nestedatt--proxy_cache"></a>
 ### Nested Schema for `proxy_cache`
 
 Read-Only:
 
-- `type` (String) ProxyCache支持的镜像仓库实例类型，参数值说明如下：DockerHub：dockerhub 镜像仓库。
+- `type` (String) Instance types supported by ProxyCache for container registry. Parameter values are as follows: DockerHub: DockerHub container registry
 
 
 <a id="nestedatt--status"></a>
@@ -46,8 +46,24 @@ Read-Only:
 
 Read-Only:
 
-- `conditions` (Set of String) Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。
-- `phase` (String) Creating, [ Progressing ] ：创建中。Running, [ Ok ] ：运行中。Running, [ Degraded ] ：运行中。Stopped, [ Balance ] ： 欠费关停。Stopped, [ Released ] ：待回收。Stopped, [ Released, Balance ] ：欠费关停。Starting, [ Progressing ] ：启动中。Deleting, [ Progressing ] ：销毁中。Failed, [ Unknown ] ：异常。
+- `conditions` (Set of String) Creating, [ Progressing ]: Creating
+  Running, [ Ok ]: Running
+  Running, [ Degraded ]: Running
+  Stopped, [ Balance ]: Suspended due to insufficient balance
+  Stopped, [ Released ]: Pending reclamation
+  Stopped, [ Released, Balance ]: Suspended due to insufficient balance
+  Starting, [ Progressing ]: Starting
+  Deleting, [ Progressing ]: Deleting
+  Failed, [ Unknown ]: Abnormal
+- `phase` (String) Creating, [ Progressing ]: Creating
+  Running, [ Ok ]: Running
+  Running, [ Degraded ]: Running
+  Stopped, [ Balance ]: Suspended due to insufficient balance
+  Stopped, [ Released ]: Pending reclamation
+  Stopped, [ Released, Balance ]: Suspended due to insufficient balance
+  Starting, [ Progressing ]: Starting
+  Deleting, [ Progressing ]: Deleting
+  Failed, [ Unknown ]: Abnormal
 
 
 <a id="nestedatt--tags"></a>
@@ -55,5 +71,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签的 Key 值。
-- `value` (String) 标签的 Value 值列表。
+- `key` (String) Tag key values
+- `value` (String) List of tag values

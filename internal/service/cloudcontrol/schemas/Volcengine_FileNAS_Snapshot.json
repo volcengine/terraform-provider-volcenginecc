@@ -3,7 +3,7 @@
   "createOnlyProperties": [
     "/properties/FileSystemId"
   ],
-  "description": "快照是一种备份方式，每个快照都是文件存储在某个时间点的备份。当数据丢失或故障时，您可以通过快照恢复文件存储数据，找回丢失的数据。",
+  "description": "A snapshot is a backup method. Each snapshot is a backup of file storage at a specific point in time. If data is lost or a failure occurs, you can use snapshots to restore file storage and recover lost data",
   "filterProperties": {
     "filterableProperties": [
       "/properties/FileSystemId",
@@ -48,64 +48,64 @@
   ],
   "properties": {
     "CreatedTime": {
-      "description": "快照创建时间。",
+      "description": "Snapshot Creation Time",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "快照描述信息。",
+      "description": "Snapshot Description",
       "semantic": "description",
       "type": "string"
     },
     "FileSystemId": {
-      "description": "文件系统 ID。",
+      "description": "File System ID",
       "type": "string"
     },
     "FileSystemName": {
-      "description": "文件系统名称。",
+      "description": "File System Name",
       "type": "string"
     },
     "IsEncrypt": {
-      "description": "是否加密，当前仅支持false，即不加密。",
+      "description": "Is encryption enabled. Currently only false is supported (not encrypted)",
       "type": "boolean"
     },
     "Progress": {
-      "description": "快照创建进度。",
+      "description": "Snapshot Creation Progress",
       "type": "string"
     },
     "RetentionDays": {
       "default": 2147483647,
-      "description": "快照保留时间，默认为2147483647，即永久保留。",
+      "description": "Snapshot Retention Period. Default is 2147483647 (permanent retention)",
       "type": "integer"
     },
     "SnapshotId": {
-      "description": "快照 ID。",
+      "description": "Snapshot ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "SnapshotName": {
-      "description": "快照名称。",
+      "description": "Snapshot Name",
       "semantic": "resourceName",
       "type": "string"
     },
     "SnapshotType": {
       "default": "Manual",
-      "description": "快照类型，默认为Manual，即手动快照。",
+      "description": "Snapshot Type. Default is Manual (manual snapshot)",
       "enum": [
         "Manual"
       ],
       "type": "string"
     },
     "SourceSize": {
-      "description": "文件系统容量，单位为 GiB。",
+      "description": "File System Capacity (GiB)",
       "type": "integer"
     },
     "SourceVersion": {
-      "description": "文件系统版本。",
+      "description": "File System Version",
       "type": "string"
     },
     "Status": {
-      "description": "快照状态。说明如下：Progressing：正在创建。Accomplished：创建成功。Failed：创建失败。",
+      "description": "Snapshot Status. Details: Progressing: Creating. Accomplished: Created successfully. Failed: Creation failed",
       "enum": [
         "Progressing",
         "Accomplished",
@@ -115,7 +115,7 @@
       "type": "string"
     },
     "ZoneId": {
-      "description": "可用区 ID。",
+      "description": "Availability Zone ID",
       "type": "string"
     }
   },

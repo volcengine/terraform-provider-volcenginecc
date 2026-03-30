@@ -26,42 +26,42 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话的创建时间。",
+		//	  "description": "Creation time of the mirror session.",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话的创建时间。",
+			Description: "Creation time of the mirror session.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。不填则默认值为空字符串。",
+		//	  "description": "Listener description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If not specified, the default value is an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。不填则默认值为空字符串。",
+			Description: "Listener description. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters. If not specified, the default value is an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像目的的资源ID。",
+		//	  "description": "Resource ID of the mirror target.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像目的的资源ID。",
+			Description: "Resource ID of the mirror target.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像目的的资源类型。NetworkInterface：弹性网卡。ClbInstance：传统型负载均衡。",
+		//	  "description": "Resource type of the mirror target. NetworkInterface: Elastic network interface. ClbInstance: Classic load balancer.",
 		//	  "enum": [
 		//	    "NetworkInterface",
 		//	    "ClbInstance"
@@ -69,25 +69,25 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像目的的资源类型。NetworkInterface：弹性网卡。ClbInstance：传统型负载均衡。",
+			Description: "Resource type of the mirror target. NetworkInterface: Elastic network interface. ClbInstance: Classic load balancer.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像目的所属项目的名称。不填默认加入default项目。",
+		//	  "description": "Name of the project to which the mirror target belongs. If not specified, it will be added to the default project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像目的所属项目的名称。不填默认加入default项目。",
+			Description: "Name of the project to which the mirror target belongs. If not specified, it will be added to the default project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像目的状态。Available：可用。Creating：创建中。",
+		//	  "description": "Status of the mirror target. Available: Available. Creating: Creating.",
 		//	  "enum": [
 		//	    "Available",
 		//	    "Creating"
@@ -95,23 +95,23 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像目的状态。Available：可用。Creating：创建中。",
+			Description: "Status of the mirror target. Available: Available. Creating: Creating.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像目的的标签信息。",
+		//	  "description": "Tag information of the mirror target.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "Tag key. Length must be between 1 and 128 characters. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system will automatically remove it.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签的标签值。长度取值范围为0～256字符，不填默认为空。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "Tag value. Length must be between 0 and 256 characters. If not specified, the default is empty. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -129,52 +129,52 @@ func trafficMirrorTargetDataSource(ctx context.Context) (datasource.DataSource, 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+						Description: "Tag key. Length must be between 1 and 128 characters. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system will automatically remove it.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的标签值。长度取值范围为0～256字符，不填默认为空。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+						Description: "Tag value. Length must be between 0 and 256 characters. If not specified, the default is empty. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "镜像目的的标签信息。",
+			Description: "Tag information of the mirror target.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorTargetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像目的的ID。",
+		//	  "description": "ID of the mirror target.",
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像目的的ID。",
+			Description: "ID of the mirror target.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficMirrorTargetName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线_）和中划线（-）。长度限制在1～128字符之间。不填则默认将“协议-端口”作为监听器名称。",
+		//	  "description": "Listener name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, the default is 'protocol-port' as the listener name.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"traffic_mirror_target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线_）和中划线（-）。长度限制在1～128字符之间。不填则默认将“协议-端口”作为监听器名称。",
+			Description: "Listener name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, the default is 'protocol-port' as the listener name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像会话的更新时间。",
+		//	  "description": "Update time of the mirror session.",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像会话的更新时间。",
+			Description: "Update time of the mirror session.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

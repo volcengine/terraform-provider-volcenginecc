@@ -32,11 +32,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对创建时间。",
+		//	  "description": "Creation time of the key pair.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对创建时间。",
+			Description: "Creation time of the key pair.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -46,11 +46,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对的描述，默认值为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”长度限制在255个字符以内。",
+		//	  "description": "Description of the key pair. The default value is an empty string. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, period ('.'), space, underscore ('_'), hyphen ('-'), equals sign ('='), English comma (','), Chinese comma ('，'), and Chinese period ('。'). Length must not exceed 255 characters.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对的描述，默认值为空字符串。必须以字母或中文开头。只能包含中文、字母、数字、点“.”、空格、下划线“_”、中划线“-”、等号“=”、英文逗号“,”、中文逗号“，”和中文句号“。”长度限制在255个字符以内。",
+			Description: "Description of the key pair. The default value is an empty string. Must start with a letter or Chinese character. Can only contain Chinese characters, letters, numbers, period ('.'), space, underscore ('_'), hyphen ('-'), equals sign ('='), English comma (','), Chinese comma ('，'), and Chinese period ('。'). Length must not exceed 255 characters.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -61,11 +61,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对的指纹。根据RFC4716定义的公钥指纹格式，采用MD5信息摘要算法。",
+		//	  "description": "Fingerprint of the key pair. The public key fingerprint format is defined by RFC4716 and uses the MD5 hash algorithm.",
 		//	  "type": "string"
 		//	}
 		"finger_print": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对的指纹。根据RFC4716定义的公钥指纹格式，采用MD5信息摘要算法。",
+			Description: "Fingerprint of the key pair. The public key fingerprint format is defined by RFC4716 and uses the MD5 hash algorithm.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -75,7 +75,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "操作的实例ID。",
+		//	  "description": "Instance ID for the operation.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -85,7 +85,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "操作的实例ID。",
+			Description: "Instance ID for the operation.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -96,11 +96,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对唯一ID。",
+		//	  "description": "Unique ID of the key pair.",
 		//	  "type": "string"
 		//	}
 		"key_pair_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对唯一ID。",
+			Description: "Unique ID of the key pair.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -110,11 +110,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对名称。不可与已有名称重复。长度限制在 2～64 个字符之间。允许使用点号“.”分隔字符成多段，每段允许使用大小写字母、数字或连字符“-”。不能以“-”和“.”开头或结尾，不能连续使用“-”或者“.”。",
+		//	  "description": "Key pair name. Must not duplicate existing names. Length must be between 2 and 64 characters. Periods ('.') can be used to separate the name into segments. Each segment can contain uppercase and lowercase letters, numbers, or hyphens ('-'). The name cannot start or end with '-' or '.', and cannot contain consecutive '-' or '.'.",
 		//	  "type": "string"
 		//	}
 		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对名称。不可与已有名称重复。长度限制在 2～64 个字符之间。允许使用点号“.”分隔字符成多段，每段允许使用大小写字母、数字或连字符“-”。不能以“-”和“.”开头或结尾，不能连续使用“-”或者“.”。",
+			Description: "Key pair name. Must not duplicate existing names. Length must be between 2 and 64 characters. Periods ('.') can be used to separate the name into segments. Each segment can contain uppercase and lowercase letters, numbers, or hyphens ('-'). The name cannot start or end with '-' or '.', and cannot contain consecutive '-' or '.'.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -124,11 +124,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源所属项目，一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+		//	  "description": "Project to which the resource belongs. Each resource can belong to only one project. Can only contain letters, numbers, underscore ('_'), period ('.'), and hyphen ('-'). Length must not exceed 64 characters.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源所属项目，一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+			Description: "Project to which the resource belongs. Each resource can belong to only one project. Can only contain letters, numbers, underscore ('_'), period ('.'), and hyphen ('-'). Length must not exceed 64 characters.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -140,11 +140,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对的公钥信息。",
+		//	  "description": "Public key information of the key pair.",
 		//	  "type": "string"
 		//	}
 		"public_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对的公钥信息。",
+			Description: "Public key information of the key pair.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -157,16 +157,16 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对的标签。",
+		//	  "description": "Tags of the key pair.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -183,7 +183,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -195,7 +195,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -204,7 +204,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "密钥对的标签。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tags of the key pair.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -215,11 +215,11 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "密钥对更新时间。",
+		//	  "description": "Update time of the key pair.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "密钥对更新时间。",
+			Description: "Update time of the key pair.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -237,7 +237,7 @@ func keypairResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "ECS 密钥对（Keypair）默认采用 RSA 2048 位加密算法生成一对关联密钥，包含公钥（public key）和私钥（private key）。其中，公钥用于对数据进行加密处理，可将明文转换为不可直接读取的密文；私钥则作为解密的唯一凭证，能将密文还原为原始明文，实现安全的身份验证与数据传输。",
+		Description: "ECS key pair (Keypair) is generated by default using the RSA 2048-bit encryption algorithm, producing a pair of associated keys: a public key and a private key. The public key is used to encrypt data, converting plaintext into unreadable ciphertext. The private key is the sole credential for decryption, restoring ciphertext to its original plaintext, ensuring secure authentication and data transmission.",
 		Version:     1,
 		Attributes:  attributes,
 	}

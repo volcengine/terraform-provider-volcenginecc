@@ -35,10 +35,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "缓存型性能信息。",
+		//	  "description": "Cache performance information",
 		//	  "properties": {
 		//	    "CacheBandwidth": {
-		//	      "description": "预配置带宽，用于增加文件系统带宽。",
+		//	      "description": "Provisioned bandwidth, used to increase file system bandwidth",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -48,7 +48,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CacheBandwidth
 				"cache_bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "预配置带宽，用于增加文件系统带宽。",
+					Description: "Provisioned bandwidth, used to increase file system bandwidth",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -56,7 +56,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "缓存型性能信息。",
+			Description: "Cache performance information",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -67,14 +67,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统容量。",
+		//	  "description": "File system capacity",
 		//	  "properties": {
 		//	    "Total": {
-		//	      "description": "文件系统可用总容量，单位为 GiB。",
+		//	      "description": "Total available file system capacity, in GiB",
 		//	      "type": "number"
 		//	    },
 		//	    "Used": {
-		//	      "description": "文件系统已使用容量，单位为 MiB。",
+		//	      "description": "Used file system capacity, in MiB",
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -87,7 +87,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Total
 				"total": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "文件系统可用总容量，单位为 GiB。",
+					Description: "Total available file system capacity, in GiB",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Float64{ /*START VALIDATORS*/
@@ -99,14 +99,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Used
 				"used": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "文件系统已使用容量，单位为 MiB。",
+					Description: "Used file system capacity, in MiB",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "文件系统容量。",
+			Description: "File system capacity",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -117,11 +117,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费类型，取值 PayAsYouGo，表示按量计费。",
+		//	  "description": "Billing type. Value: PayAsYouGo, indicates pay-as-you-go billing",
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计费类型，取值 PayAsYouGo，表示按量计费。",
+			Description: "Billing type. Value: PayAsYouGo, indicates pay-as-you-go billing",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -131,11 +131,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间",
+			Description: "Creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -145,11 +145,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述信息。",
+		//	  "description": "Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述信息。",
+			Description: "Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -160,11 +160,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统 ID。",
+		//	  "description": "File system ID",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统 ID。",
+			Description: "File system ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -174,18 +174,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统名称。",
+		//	  "description": "File system name",
 		//	  "type": "string"
 		//	}
 		"file_system_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统名称。",
+			Description: "File system name",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FileSystemType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统类型。取值说明：Extreme：NAS 极速型；Capacity：NAS 容量型；Cache：NAS 缓存型。",
+		//	  "description": "File system type. Possible values: Extreme: NAS Extreme type; Capacity: NAS Capacity type; Cache: NAS Cache type",
 		//	  "enum": [
 		//	    "Extreme",
 		//	    "Capacity",
@@ -194,7 +194,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"file_system_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统类型。取值说明：Extreme：NAS 极速型；Capacity：NAS 容量型；Cache：NAS 缓存型。",
+			Description: "File system type. Possible values: Extreme: NAS Extreme type; Capacity: NAS Capacity type; Cache: NAS Cache type",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -211,11 +211,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "所属项目，默认值为 default 项目。",
+		//	  "description": "Project, default value is the Default project",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "所属项目，默认值为 default 项目。",
+			Description: "Project, default value is the Default project",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -227,11 +227,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统协议类型。取值 NFS，表示 NFS 协议，常用于 Linux 客户端。",
+		//	  "description": "File system protocol type. Value: NFS, indicates NFS protocol, commonly used for Linux clients",
 		//	  "type": "string"
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统协议类型。取值 NFS，表示 NFS 协议，常用于 Linux 客户端。",
+			Description: "File system protocol type. Value: NFS, indicates NFS protocol, commonly used for Linux clients",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -241,11 +241,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照数量",
+		//	  "description": "Number of snapshots",
 		//	  "type": "integer"
 		//	}
 		"snapshot_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "快照数量",
+			Description: "Number of snapshots",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -255,11 +255,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。",
+		//	  "description": "Snapshot ID used at creation. If this parameter is provided, the file system will be created from the snapshot",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时使用的快照 ID。传入该参数后，将使用该快照新建文件系统。",
+			Description: "Snapshot ID used at creation. If this parameter is provided, the file system will be created from the snapshot",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -272,7 +272,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
+		//	  "description": "File system status. Possible values: Unknown: Status unknown. Running: File system running. Creating: File system being created. Expanding: File system being upgraded. Error: File system error. Deleting: File system being deleted. DeleteError: File system deletion failed. Deleted: File system deleted. Stopped: File system stopped.",
 		//	  "enum": [
 		//	    "Unknown",
 		//	    "Running",
@@ -287,7 +287,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统状态。取值说明如下：Unknown：状态未知。Running：文件系统运行中。Creating：文件系统创建中。Expanding：文件系统升级中。Error：文件系统错误。Deleting：文件系统删除中。DeleteError：文件系统删除失败。Deleted：文件系统已删除。Stopped：文件系统已停服。",
+			Description: "File system status. Possible values: Unknown: Status unknown. Running: File system running. Creating: File system being created. Expanding: File system being upgraded. Error: File system error. Deleting: File system being deleted. DeleteError: File system deletion failed. Deleted: File system deleted. Stopped: File system stopped.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -297,11 +297,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "存储类型，取值Standard，表示标准型。",
+		//	  "description": "Storage type. Value: Standard, indicates standard type",
 		//	  "type": "string"
 		//	}
 		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "存储类型，取值Standard，表示标准型。",
+			Description: "Storage type. Value: Standard, indicates standard type",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -313,21 +313,21 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统的标签信息",
+		//	  "description": "File system tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "资源标签。",
+		//	    "description": "Resource tags",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "标签类型。",
+		//	        "description": "Tag type",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -344,7 +344,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -356,7 +356,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签类型。",
+						Description: "Tag type",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -365,7 +365,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -374,7 +374,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "文件系统的标签信息\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "File system tag information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -385,11 +385,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间",
+			Description: "Update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -399,11 +399,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability Zone ID",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability Zone ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -413,11 +413,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区名称。",
+		//	  "description": "Availability Zone name",
 		//	  "type": "string"
 		//	}
 		"zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区名称。",
+			Description: "Availability Zone name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -435,7 +435,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "文件系统通过标准的 NFS 协议为您提供文件存储服务，用于网络文件远程访问，通过管理控制台创建挂载地址后，即可按需在客户端中通过标准的 POSIX 接口对文件系统进行访问。",
+		Description: "The file system provides file storage services through the standard NFS protocol for remote network file access. After creating a mount point in the management console, you can access the file system on your client as needed using the standard POSIX interface",
 		Version:     1,
 		Attributes:  attributes,
 	}

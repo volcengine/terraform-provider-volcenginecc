@@ -1,0 +1,88 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/CenId",
+    "/properties/CenOwnerId",
+    "/properties/InstanceId",
+    "/properties/InstanceRegionId",
+    "/properties/InstanceType"
+  ],
+  "description": "Authorize this account's network instance for use by the specified account's Cloud Enterprise Network instance",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/InstanceRegionId",
+      "/properties/InstanceType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cen:GrantInstanceToCen",
+        "cen:DescribeInstanceGrantedRules"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cen:RevokeInstanceFromCen",
+        "cen:DescribeInstanceGrantedRules"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cen:DescribeInstanceGrantedRules"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cen:DescribeInstanceGrantedRules"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/CenId"
+  ],
+  "properties": {
+    "CenId": {
+      "description": "Cloud Enterprise Network instance ID of the other party's account",
+      "type": "string"
+    },
+    "CenOwnerId": {
+      "description": "Other party's account",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Network instance authorization time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "ID of the network instance to be authorized",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceRegionId": {
+      "description": "Region where the network instance is located",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "Network instance type. Options: VPC: Virtual Private Cloud. DCGW: Direct Connect Gateway",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreationTime"
+  ],
+  "required": [
+    "CenId",
+    "CenOwnerId",
+    "InstanceId",
+    "InstanceRegionId",
+    "InstanceType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CEN::GrantInstance"
+}

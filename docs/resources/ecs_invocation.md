@@ -2,12 +2,12 @@
 page_title: "volcenginecc_ecs_invocation Resource - terraform-provider-volcenginecc"
 subcategory: "ECS"
 description: |-
-  云助手是火山引擎打造的原生自动化运维工具。您可以创建立即执行、周期执行、定时执行的作业任务，创建完成后完，云助手客户端将按照执行模式自动开始执行。
+  Cloud Assistant is a native automated operations tool developed by Volcano Engine. You can create jobs for immediate, periodic, or scheduled execution. After creation, the Cloud Assistant client automatically starts execution according to the execution mode.
 ---
 
 # volcenginecc_ecs_invocation (Resource)
 
-云助手是火山引擎打造的原生自动化运维工具。您可以创建立即执行、周期执行、定时执行的作业任务，创建完成后完，云助手客户端将按照执行模式自动开始执行。
+Cloud Assistant is a native automated operations tool developed by Volcano Engine. You can create jobs for immediate, periodic, or scheduled execution. After creation, the Cloud Assistant client automatically starts execution according to the execution mode.
 
 ## Example Usage
 
@@ -40,52 +40,52 @@ resource "volcenginecc_ecs_invocation" "InvocationDemo" {
 
 ### Required
 
-- `command_id` (String) 命令ID。
-- `instance_ids` (Set of String) 实例ID列表，最多支持200个ID。
-- `invocation_name` (String) 作业名称。不超过64个字符。暂不限制特殊字符。同地域下作业名称可重复。
+- `command_id` (String) Command ID.
+- `instance_ids` (Set of String) Instance ID list, supports up to 200 IDs.
+- `invocation_name` (String) Job name. Maximum 64 characters. No restriction on special characters. Job names can be duplicated within the same region.
 
 ### Optional
 
-- `frequency` (String) 执行频率。RepeatMode=Rate 时本参数必填。格式：<执行间隔数值><执行间隔单位>，执行间隔单位：支持分钟（5m-60m）、小时（1h-24h）和天（1d-7d）。执行间隔基于固定频率，与作业实际执行需要的时间无关。创建作业后基于LaunchTime执行一次，根据间隔设置确定下一次执行时间。
-- `invocation_description` (String) 作业描述，默认为空字符串，不超过256个字符。
-- `launch_time` (String) 执行时间。
-- `parameters` (String) 命令中包含自定义参数时，需通过本参数传入自定义参数的键值对。自定义参数个数范围为0~60。Key不允许为空字符串，最多支持64个字符。Value允许为空字符串。自定义参数与原始命令内容在Base64编码后，综合长度不能超过16KB。设置的自定义参数名集合必须为创建命令时定义的参数集的子集。对于未传入的参数，使用默认值代替。
-- `project_name` (String) 资源所属项目，一个资源只能归属于一个项目。
-- `recurrence_end_time` (String) 周期结束时间，仅适用于周期任务（Rate）。
-- `repeat_mode` (String) 设置命令执行的方式。Once：默认，表示立即执行命令。Rate：周期执行命令，需要通过Frequency参数传入Rate表达式指定执行周期。Fixed：定时执行命令，需要通过LaunchTime参数指定的执行时间。
-- `tags` (Attributes Set) 标签键值对。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `timeout` (Number) 创建的命令在ECS实例中执行时最大的超时时间，单位为秒。默认值：60。可选范围为：30~86400。
-- `username` (String) 在ECS实例中执行命令的用户名称。
-- `windows_password` (String) 自定义windows用户的密码。
-- `working_dir` (String) 创建的命令在ECS实例中运行的目录。
+- `frequency` (String) Execution frequency. This parameter is required when RepeatMode=Rate. Format: <interval value><interval unit>. Interval units supported: minutes (5m–60m), hours (1h–24h), and days (1d–7d). The interval is based on a fixed frequency and is independent of the actual job execution time. After job creation, it executes once based on LaunchTime, and the next execution time is determined by the interval setting.
+- `invocation_description` (String) Job description. Defaults to an empty string and must not exceed 256 characters.
+- `launch_time` (String) Execution time.
+- `parameters` (String) When the command includes custom parameters, use this parameter to pass custom parameter key-value pairs. The number of custom parameters ranges from 0 to 60. Key cannot be an empty string and supports up to 64 characters. Value can be an empty string. The combined length of custom parameters and original command content after Base64 encoding must not exceed 16 KB. The set of custom parameter names must be a subset of the parameter set defined when creating the command. Default values are used for parameters not provided.
+- `project_name` (String) Project to which the resource belongs; each resource can belong to only one project.
+- `recurrence_end_time` (String) Cycle end time, applicable only to periodic tasks (Rate).
+- `repeat_mode` (String) Set the command execution mode. Once: Default, executes the command immediately. Rate: Executes the command periodically; specify the execution cycle using the Frequency parameter and Rate expression. Fixed: Executes the command at a scheduled time; specify the execution time using the LaunchTime parameter.
+- `tags` (Attributes Set) Tag key-value pair.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `timeout` (Number) Maximum timeout for command execution in ECS instances, in seconds. Default: 60. Optional range: 30–86400.
+- `username` (String) User name for executing the command in the ECS instance.
+- `windows_password` (String) Password for custom Windows user.
+- `working_dir` (String) Directory where the created command runs in the ECS instance.
 
 ### Read-Only
 
-- `command_content` (String) 命令内容。
-- `command_description` (String) 被调用命令的描述。
-- `command_name` (String) 任务触发时的命令名称。
-- `command_provider` (String) 被调用命令的提供方。
-- `command_type` (String) 作业触发的命令类型。
-- `enable_parameter` (Boolean) 被调用命令是否使用自定义参数。true：已启用。false：未启用。
-- `end_time` (String) 任务结束时间。
+- `command_content` (String) Command content.
+- `command_description` (String) Description of the invoked command.
+- `command_name` (String) Command name when the task is triggered.
+- `command_provider` (String) Provider of the invoked command.
+- `command_type` (String) Command type triggered by the job.
+- `enable_parameter` (Boolean) Whether the invoked command uses custom parameters. true: enabled. false: not enabled.
+- `end_time` (String) Task end time.
 - `id` (String) Uniquely identifies the resource.
-- `instance_number` (Number) 执行实例数量。
-- `invocation_id` (String) 任务执行 ID。
-- `invocation_results` (Attributes Set) 单台实例执行命令的结果。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--invocation_results))
-- `invocation_status` (String) 命令执行的总执行状态。
-- `parameter_definitions` (Attributes Set) 任务触发时的命令自定义参数定义。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--parameter_definitions))
-- `start_time` (String) 任务开始时间。
+- `instance_number` (Number) Number of instances executed.
+- `invocation_id` (String) Task execution ID.
+- `invocation_results` (Attributes Set) Result of command execution on a single instance.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--invocation_results))
+- `invocation_status` (String) Overall execution status of the command.
+- `parameter_definitions` (Attributes Set) Custom parameter definition for the command triggered by the task.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--parameter_definitions))
+- `start_time` (String) Task start time.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 用户标签的标签键。命名规则如下：不能以volc:或sys:的任意大小写组合开头。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。
-- `value` (String) 用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。
+- `key` (String) Tag key for user tags. Naming rules: Cannot start with any combination of 'volc:' or 'sys:' in any case. Can only contain letters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.
+- `value` (String) User tag value. Naming rules: Only letters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty; length must be between 0 and 256 characters.
 
 
 <a id="nestedatt--invocation_results"></a>
@@ -93,18 +93,18 @@ Optional:
 
 Read-Only:
 
-- `command_id` (String) 命令ID。
-- `end_time` (String) 命令执行的完成时间。
-- `error_code` (String) 命令执行失败的错误码。TaskDeliveryTimeout：表示命令下发超时。TaskExecutionTimeout：表示命令执行超时。TaskExecutionFailed：表示命令执行失败。
-- `error_message` (String) 命令执行失败的错误信息。
-- `exit_code` (Number) 脚本执行后的退出状态码。
-- `instance_id` (String) 实例ID。
-- `invocation_id` (String) 任务执行ID。
-- `invocation_result_id` (String) 任务执行结果ID。
-- `invocation_result_status` (String) 单台实例的命令进度状态。
-- `output` (String) 经过Base64编码的命令执行后输出信息。
-- `start_time` (String) 命令在实例中开始执行的时间。
-- `username` (String) 在实例中执行命令的用户名称。
+- `command_id` (String) Command ID.
+- `end_time` (String) Command execution completion time.
+- `error_code` (String) Error codes for command execution failure. TaskDeliveryTimeout: Indicates command delivery timeout. TaskExecutionTimeout: Indicates command execution timeout. TaskExecutionFailed: Indicates command execution failure.
+- `error_message` (String) Error message for command execution failure.
+- `exit_code` (Number) Exit status code after script execution.
+- `instance_id` (String) Instance ID.
+- `invocation_id` (String) Task execution ID.
+- `invocation_result_id` (String) Task execution result ID.
+- `invocation_result_status` (String) Command progress status for a single instance.
+- `output` (String) Output information after command execution, encoded in Base64.
+- `start_time` (String) Time when the command starts executing in the instance.
+- `username` (String) User name for executing the command in the instance.
 
 
 <a id="nestedatt--parameter_definitions"></a>
@@ -112,15 +112,15 @@ Read-Only:
 
 Read-Only:
 
-- `decimal_precision` (Number) 自定义参数值（数字）允许的小数点后位数。
-- `default_value` (String) 自定义参数默认值。
-- `max_length` (Number) 自定义参数值（字符串）的最大长度。
-- `max_value` (String) 自定义参数值（数字）的最大值。
-- `min_length` (Number) 自定义参数值（字符串）的最小长度。
-- `min_value` (String) 自定义参数值（数字）的最小值。
-- `name` (String) 自定义参数名称，需要在脚本中通过{{Param}}定义 。
-- `required` (Boolean) 是否必填。true：必填。false：非必填。
-- `type` (String) 自定义参数类型。String：表示自定义参数类型字符串类型。Digit：表示自定义参数类型为数值类型。
+- `decimal_precision` (Number) Allowed number of decimal places for custom parameter values (numeric).
+- `default_value` (String) Default value for custom parameter.
+- `max_length` (Number) Maximum length for custom parameter value (string).
+- `max_value` (String) Maximum value for custom parameter (numeric).
+- `min_length` (Number) Minimum length for custom parameter values (string).
+- `min_value` (String) Minimum value for custom parameter (numeric).
+- `name` (String) Custom parameter name. Must be defined in the script using {{Param}}.
+- `required` (Boolean) Required. true: Required. false: Optional.
+- `type` (String) Custom parameter type. String: Indicates custom parameter type is string. Digit: Indicates custom parameter type is numeric.
 
 ## Import
 

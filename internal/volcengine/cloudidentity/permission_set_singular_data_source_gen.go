@@ -27,58 +27,58 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集描述。",
+		//	  "description": "Permission Set Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集描述。",
+			Description: "Permission Set Description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集名称。",
+		//	  "description": "Permission Set Name",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集名称。",
+			Description: "Permission Set Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionPolicies
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集下的策略列表。",
+		//	  "description": "Policy List Under Permission Set",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "权限策略定义。",
+		//	    "description": "Permission Policy Definition",
 		//	    "properties": {
 		//	      "CreatedTime": {
-		//	        "description": "策略创建时间。",
+		//	        "description": "Policy Creation Time",
 		//	        "type": "string"
 		//	      },
 		//	      "PermissionPolicyDocument": {
-		//	        "description": "策略语法内容。语法可参考 策略语法说明。",
+		//	        "description": "Policy syntax content. Refer to policy syntax documentation",
 		//	        "type": "string"
 		//	      },
 		//	      "PermissionPolicyName": {
-		//	        "description": "策略名称。",
+		//	        "description": "Policy Name",
 		//	        "type": "string"
 		//	      },
 		//	      "PermissionPolicyType": {
-		//	        "description": "策略类型，System or Inline。",
+		//	        "description": "Policy Type: System or Inline",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -92,71 +92,71 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CreatedTime
 					"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略创建时间。",
+						Description: "Policy Creation Time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PermissionPolicyDocument
 					"permission_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略语法内容。语法可参考 策略语法说明。",
+						Description: "Policy syntax content. Refer to policy syntax documentation",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PermissionPolicyName
 					"permission_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略名称。",
+						Description: "Policy Name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PermissionPolicyType
 					"permission_policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "策略类型，System or Inline。",
+						Description: "Policy Type: System or Inline",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "权限集下的策略列表。",
+			Description: "Policy List Under Permission Set",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionSetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集 ID。",
+		//	  "description": "Permission Set ID",
 		//	  "type": "string"
 		//	}
 		"permission_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集 ID。",
+			Description: "Permission Set ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RelayState
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "跳转控制台 URL。",
+		//	  "description": "Console Redirect URL",
 		//	  "type": "string"
 		//	}
 		"relay_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "跳转控制台 URL。",
+			Description: "Console Redirect URL",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SessionDuration
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "session 过期时间，单位秒。",
+		//	  "description": "Session Expiration Time (seconds)",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"session_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "session 过期时间，单位秒。",
+			Description: "Session Expiration Time (seconds)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StatusNotifications
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "状态通知配置。",
+		//	  "description": "Status Notification Configuration",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "状态通知配置项。",
+		//	    "description": "Status Notification Configuration Item",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -164,18 +164,18 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"status_notifications": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "状态通知配置。",
+			Description: "Status Notification Configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

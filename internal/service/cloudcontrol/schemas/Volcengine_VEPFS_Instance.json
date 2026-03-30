@@ -15,11 +15,11 @@
     "CapacityInfo": {
       "properties": {
         "TotalTiB": {
-          "description": "文件系统总容量，单位为 TiB。",
+          "description": "Total file system capacity, unit: TiB. Note: Disk balancing time varies based on cluster capacity, cluster load, and other factors. For clusters above the PiB level, expansion typically requires day-level disk balancing time. The expansion capacity becomes effective (and is billed) only after disk balancing is complete.",
           "type": "integer"
         },
         "UsedGiB": {
-          "description": "已使用容量（GiB）。",
+          "description": "Used capacity (GiB).",
           "type": "integer"
         }
       },
@@ -28,15 +28,15 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "用户标签的标签键。",
+          "description": "User tag key.",
           "type": "string"
         },
         "Type": {
-          "description": "标签类型，说明如下：Custom: 用户自定义标签。System: 系统标签。",
+          "description": "Tag type. Descriptions are as follows: Custom: User-defined tag. System: System tag.",
           "type": "string"
         },
         "Value": {
-          "description": "用户标签的标签值。",
+          "description": "User tag value.",
           "type": "string"
         }
       },
@@ -46,7 +46,7 @@
       "type": "object"
     }
   },
-  "description": "文件存储 vePFS 是推出的一种高吞吐、低延时、可扩展并行的文件系统服务，满足高性能计算场景下高吞吐低延时的数据读写需求，可广泛应用于 HPC 高性能计算、AI 人工智能训练或推理、能源勘探、工业仿真、影视渲染、生命科学、气象分析等场景。同时，vePFS 提供一键化部署及配套监控报警能力，免去部署、维护费用的同时，最大化提升您的业务效率。",
+  "description": "File storage vePFS is a newly launched high-throughput, low-latency, scalable parallel file system service designed to meet the high-throughput and low-latency data read/write requirements in high-performance computing scenarios. It can be widely used in HPC (high-performance computing), AI training or inference, energy exploration, industrial simulation, film rendering, life sciences, meteorological analysis, and other scenarios. vePFS also provides one-click deployment and integrated monitoring and alerting capabilities, eliminating deployment and maintenance costs while maximizing your business efficiency.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/FileSystemId",
@@ -99,58 +99,58 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "账户ID。",
+      "description": "Account ID.",
       "type": "string"
     },
     "Bandwidth": {
-      "description": "vePFS 文件系统吞吐上限。",
+      "description": "VePFS file system throughput limit.",
       "type": "integer"
     },
     "Capacity": {
-      "description": "文件系统容量，单位为 TiB。",
+      "description": "File system capacity, unit: TiB.",
       "type": "integer"
     },
     "CapacityInfo": {
       "$ref": "#/definitions/CapacityInfo",
-      "description": "容量信息。",
+      "description": "Capacity information.",
       "type": "object"
     },
     "ChargeStatus": {
-      "description": "计费状态，默认为 Normal，表示正常计费。",
+      "description": "Billing status. Default is Normal, indicating standard billing.",
       "type": "string"
     },
     "ChargeType": {
-      "description": "计费类型。取值说明如下：PayAsYouGo：按量计费。",
+      "description": "Billing type. Value descriptions are as follows: PayAsYouGo: Pay-as-you-go billing.",
       "enum": [
         "PayAsYouGo"
       ],
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "文件系统描述信息。",
+      "description": "File system description.",
       "semantic": "description",
       "type": "string"
     },
     "EnableRestripe": {
-      "description": "扩容后是否开启数据均衡，取值说明如下：true：扩容后立即开启数据均衡。false：扩容后不开启数据均衡。注意：仅 100MB/s/TiB 规格的文件系统支持数据均衡功能。由于数据均衡过程会消耗存储节点的网络和磁盘带宽，导致文件系统的性能下降，建议您评估业务需求，谨慎开启。数据均衡的时间主要受存量数据量的影响，如果您的存量数据较多，均衡的时间可能会较长，根据扩容容量大小和文件系统状态，此过程可能需要花费数小时至 2 天的时间，建议您在业务低峰期开启并耐心等待。",
+      "description": "Whether to enable data balancing after expansion. Value description: true: Enable data balancing immediately after expansion. false: Do not enable data balancing after expansion. Note: Only file systems with a specification of 100MB/s/TiB support the data balancing feature. Because the data balancing process consumes the network and disk bandwidth of storage nodes and causes file system performance degradation, we recommend that you evaluate your business needs and enable with caution. The duration of data balancing mainly depends on the amount of existing data. If you have a large amount of existing data, the balancing process may take longer. Depending on the expansion size and file system status, this process may take several hours to up to 2 days. We recommend enabling it during off-peak hours and waiting patiently.",
       "type": "boolean"
     },
     "ExpireTime": {
-      "description": "过期时间。",
+      "description": "Expiration time.",
       "type": "string"
     },
     "FileSystemId": {
-      "description": "文件系统 ID。",
+      "description": "File system ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "FileSystemName": {
-      "description": "文件系统名称。命名规范如下：只能以中文或英文开头。只能包含中文、字母、数字、半角句号（.）、下划线（_）或中划线（-）。长度需要在 1~128 个字符内。",
+      "description": "File system name. Naming rules are as follows: Must start with a Chinese or English letter. Can only contain Chinese characters, letters, numbers, period (.), underscore (_), or hyphen (-). Length must be between 1 and 128 characters.",
       "maxLength": 128,
       "minLength": 1,
       "semantic": "resourceName",
@@ -158,43 +158,43 @@
     },
     "FileSystemType": {
       "default": "VePFS",
-      "description": "文件系统类型，默认为 VePFS。",
+      "description": "File system type. Default is VePFS.",
       "type": "string"
     },
     "FreeTime": {
-      "description": "文件系统释放时间。",
+      "description": "File system release time.",
       "type": "string"
     },
     "ProjectName": {
       "default": "default",
-      "description": "文件系统所属项目，默认为 default。",
+      "description": "Project to which the file system belongs. Default is default.",
       "semantic": "projectName",
       "type": "string"
     },
     "ProtocolType": {
       "default": "VePFS",
-      "description": "协议类型，默认为 VePFS。",
+      "description": "Protocol type. Default is VePFS.",
       "type": "string"
     },
     "ReadBandwidth": {
-      "description": "读带宽值, 单位MB/s。",
+      "description": "Read bandwidth value, unit: MB/s.",
       "type": "integer"
     },
     "SecurityGroupId": {
-      "description": "生成的辅助网卡所在的安全组ID。",
+      "description": "Security group ID for the generated auxiliary NIC.",
       "type": "string"
     },
     "Status": {
-      "description": "文件系统状态。取值说明如下：Running：实例运行中。Creating：实例创建中。CreateError：实例创建失败。Updating：实例更新中。UpdateError：实例更新失败。Expanding：实例扩容中。ExpandError：实例扩容失败。Deleting：实例删除中。DeleteError：实例删除失败。Stopped：实例已关停。Error：实例处于错误状态。",
+      "description": "File system status. Value descriptions are as follows: Running: Instance is running. Creating: Instance is being created. CreateError: Instance creation failed. Updating: Instance is being updated. UpdateError: Instance update failed. Expanding: Instance is being expanded. ExpandError: Instance expansion failed. Deleting: Instance is being deleted. DeleteError: Instance deletion failed. Stopped: Instance is stopped. Error: Instance is in an error state.",
       "semantic": "status",
       "type": "string"
     },
     "StopServiceTime": {
-      "description": "文件系统关停时间。",
+      "description": "File system shutdown time.",
       "type": "string"
     },
     "StoreType": {
-      "description": "文件系统规格，取值说明如下：Advance_100：100MB/s/TiB。Performance：性能版。Intelligent_Computing：智算版。",
+      "description": "File system specification. Value descriptions are as follows: Advance_100: 100MB/s/TiB. Performance: Performance. Intelligent_Computing: Intelligent Computing.",
       "enum": [
         "Advance_100",
         "Performance",
@@ -203,19 +203,19 @@
       "type": "string"
     },
     "StoreTypeCN": {
-      "description": "文件系统规格中文名称，支持如下：100MB/s/TiB。性能版。智算版。",
+      "description": "File system specification name in Chinese. Supported options: 100MB/s/TiB. Performance. Intelligent Computing.",
       "type": "string"
     },
     "StoreTypeEN": {
-      "description": "存储类型英文名。",
+      "description": "Storage type English name.",
       "type": "string"
     },
     "SubnetId": {
-      "description": "子网 ID。子网必须属于所选的可用区。",
+      "description": "Subnet ID. The subnet must belong to the selected availability zone.",
       "type": "string"
     },
     "Tags": {
-      "description": "标签列表。",
+      "description": "Tag list.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -225,28 +225,28 @@
       "uniqueItems": true
     },
     "UpdatedTime": {
-      "description": "文件系统更新时间。",
+      "description": "File system update time.",
       "semantic": "updatedTime",
       "type": "string"
     },
     "VersionNumber": {
-      "description": "文件系统版本号。",
+      "description": "File system version number.",
       "type": "string"
     },
     "VpcId": {
-      "description": "私有网络 ID。",
+      "description": "Private network ID.",
       "type": "string"
     },
     "WriteBandwidth": {
-      "description": "写带宽值, 单位MB/s。",
+      "description": "Write bandwidth value, measured in MB/s.",
       "type": "integer"
     },
     "ZoneId": {
-      "description": "可用区 ID。",
+      "description": "Availability zone ID.",
       "type": "string"
     },
     "ZoneName": {
-      "description": "可用区名称。",
+      "description": "Availability zone name.",
       "type": "string"
     }
   },

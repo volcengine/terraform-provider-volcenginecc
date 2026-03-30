@@ -2,12 +2,12 @@
 page_title: "volcenginecc_tls_project Resource - terraform-provider-volcenginecc"
 subcategory: "TLS"
 description: |-
-  日志项目是数据的项目管理单元，用于租户资源隔离和控制，通常一个日志项目对应一个应用、业务或产品。
+  A log project is a data management unit used for tenant resource isolation and control. Typically, each log project corresponds to an application, service, or product
 ---
 
 # volcenginecc_tls_project (Resource)
 
-日志项目是数据的项目管理单元，用于租户资源隔离和控制，通常一个日志项目对应一个应用、业务或产品。
+A log project is a data management unit used for tenant resource isolation and control. Typically, each log project corresponds to an application, service, or product
 
 ## Example Usage
 
@@ -30,30 +30,30 @@ resource "volcenginecc_tls_project" "TLSProjectDemo" {
 
 ### Required
 
-- `project_name` (String) 日志项目名称。
+- `project_name` (String) Log project name
 
 ### Optional
 
-- `description` (String) 日志项目的简单描述。
-- `iam_project_name` (String) 日志项目所属的 IAM 项目。
-- `tags` (Attributes Set) 标签信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Brief description of the log project
+- `iam_project_name` (String) The IAM project associated with the log project
+- `tags` (Attributes Set) Tag information
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `created_time` (String) 日志项目创建时间。
+- `created_time` (String) Log project creation time
 - `id` (String) Uniquely identifies the resource.
-- `inner_net_domain` (String) 私网连接域名。
-- `project_id` (String) 日志项目的 ID。
-- `topic_count` (Number) 当前日志项目下的日志主题数量。
+- `inner_net_domain` (String) Private network connection domain name
+- `project_id` (String) Log project ID
+- `topic_count` (Number) Number of log topics in the current log project
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 ## Import
 

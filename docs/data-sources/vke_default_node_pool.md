@@ -21,31 +21,31 @@ Data Source schema for Volcengine::VKE::DefaultNodePool
 
 ### Read-Only
 
-- `auto_scaling` (Attributes) 节点池伸缩策略配置。 (see [below for nested schema](#nestedatt--auto_scaling))
-- `cluster_id` (String) 节点池所在集群的 ID。
-- `created_time` (String) 创建节点池的时间。
-- `kubernetes_config` (Attributes) 节点池 Kubernetes 相关配置。 (see [below for nested schema](#nestedatt--kubernetes_config))
-- `management` (Attributes) 托管节点池配置。 (see [below for nested schema](#nestedatt--management))
-- `name` (String) 节点池名称。同一个集群下，节点池名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。
-- `node_config` (Attributes) 节点池中云服务器（ECS）实例配置。 (see [below for nested schema](#nestedatt--node_config))
-- `node_pool_id` (String) 节点池 ID 。
-- `node_statistics` (Attributes) 节点池中的节点统计。 (see [below for nested schema](#nestedatt--node_statistics))
-- `status` (Attributes) 节点池状态。 (see [below for nested schema](#nestedatt--status))
-- `tags` (Attributes Set) 节点池的标签信息 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) 更新节点池的时间。
+- `auto_scaling` (Attributes) Node pool scaling policy configuration (see [below for nested schema](#nestedatt--auto_scaling))
+- `cluster_id` (String) Cluster ID where the node pool is located
+- `created_time` (String) Node pool creation time
+- `kubernetes_config` (Attributes) Kubernetes-related configuration for the node pool (see [below for nested schema](#nestedatt--kubernetes_config))
+- `management` (Attributes) Managed node pool configuration (see [below for nested schema](#nestedatt--management))
+- `name` (String) Node pool name. Must be unique within the same cluster. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length: 2–64 characters
+- `node_config` (Attributes) Cloud server (ECS) instance configuration in the node pool (see [below for nested schema](#nestedatt--node_config))
+- `node_pool_id` (String) Node pool ID
+- `node_statistics` (Attributes) Node statistics in the node pool. (see [below for nested schema](#nestedatt--node_statistics))
+- `status` (Attributes) Node pool status (see [below for nested schema](#nestedatt--status))
+- `tags` (Attributes Set) Node pool tag information (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Time when the node pool was updated
 
 <a id="nestedatt--auto_scaling"></a>
 ### Nested Schema for `auto_scaling`
 
 Read-Only:
 
-- `desired_replicas` (Number) 配置节点池的期望节点数。
-- `enabled` (Boolean) 配置节点池弹性伸缩功能开关，参数值说明：false：关闭。true：开启。
-- `max_replicas` (Number) 配置节点池的最大节点数。
-- `min_replicas` (Number) 配置节点池的最小节点数。
-- `priority` (Number) 优先级。
-- `scaling_group_id` (String) 伸缩组ID。
-- `subnet_policy` (String) 节点池的多子网调度策略，参数值说明：ZoneBalance：可用区均衡策略。Priority：子网优先级策略。
+- `desired_replicas` (Number) Configure the desired number of nodes in the node pool.
+- `enabled` (Boolean) Configure the switch for node pool auto scaling. Parameter values: false: disabled true: enabled
+- `max_replicas` (Number) Configure the maximum number of nodes in the node pool
+- `min_replicas` (Number) Configure the minimum number of nodes in the node pool
+- `priority` (Number) Priority
+- `scaling_group_id` (String) Scaling group ID
+- `subnet_policy` (String) Multi-subnet scheduling policy for the node pool. Parameter value description: ZoneBalance: availability zone balancing policy. Priority: subnet priority policy.
 
 
 <a id="nestedatt--kubernetes_config"></a>
@@ -53,40 +53,40 @@ Read-Only:
 
 Read-Only:
 
-- `auto_sync_disabled` (Boolean) 是否禁用自动同步标签污点到存量节点的功能，参数值说明：true：禁用，即关闭自动同步。false：不禁用，即开启自动同步。
-- `cordon` (Boolean) 封锁节点配置，参数值说明：false：不封锁。true：封锁。
-- `kubelet_config` (Attributes) Kubelet 组件的相关配置 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config))
-- `labels` (Attributes Set) 节点池/节点的 Kubernetes 标签（Labels）信息。 (see [below for nested schema](#nestedatt--kubernetes_config--labels))
-- `name_prefix` (String) Kubernetes 中节点对象的元数据名称前缀。
-- `name_suffix` (String) Kubernetes 中节点对象的元数据名称后缀。
-- `name_use_hostname` (Boolean) Kubernetes 中节点对象的元数据名称是否使用 ECS 主机名称，取值：true：使用 ECS 主机名称作为节点名称。false：不使用使用 ECS 主机名称作为节点名称。
-- `taints` (Attributes Set) 节点池/节点的 Kubernetes 污点（Taints）信息。 (see [below for nested schema](#nestedatt--kubernetes_config--taints))
+- `auto_sync_disabled` (Boolean) Whether to disable the automatic synchronization of label taints to existing nodes. Parameter value description: true: disabled, automatic synchronization is turned off. false: not disabled, automatic synchronization is turned on.
+- `cordon` (Boolean) Node blocking configuration. Parameter value description: false: not blocked. true: blocked
+- `kubelet_config` (Attributes) Kubelet component configuration (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config))
+- `labels` (Attributes Set) Kubernetes label information for node pool/node (see [below for nested schema](#nestedatt--kubernetes_config--labels))
+- `name_prefix` (String) Prefix of the metadata name for node objects in Kubernetes.
+- `name_suffix` (String) Suffix of the metadata name for node objects in Kubernetes.
+- `name_use_hostname` (Boolean) Whether the metadata name of the node object in Kubernetes uses the ECS host name. Values: true: use ECS host name as node name. false: do not use ECS host name as node name
+- `taints` (Attributes Set) Kubernetes taint information for the node pool/node (see [below for nested schema](#nestedatt--kubernetes_config--taints))
 
 <a id="nestedatt--kubernetes_config--kubelet_config"></a>
 ### Nested Schema for `kubernetes_config.kubelet_config`
 
 Read-Only:
 
-- `cpu_manager_policy` (String) 配置 kubelet 的 CpuManagerPolicy 策略，包含 none 和 static 两种策略
-- `feature_gates` (Attributes) 特性门控。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--feature_gates))
-- `kube_api_burst` (Number) 每秒发送到 API 服务器的突发请求数量上限。不包括事件和节点心跳 API，其速率限制由一组不同的标志控制。
-- `kube_api_qps` (Number) 与 apiserver 通信的每秒查询个数（QPS）。不包含事件和节点心跳 API，它们的速率限制是由一组不同的标志所控制。
-- `kube_reserved` (Attributes Set) 节点预留给 Kubernetes 系统组件的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--kube_reserved))
-- `max_pods` (Number) 配置 kubelet 支持的最大 Pod 数量
-- `registry_burst` (Number) 设置突发性镜像拉取的个数上限，在不超过 RegistryPullQps 设置值的前提下暂时允许此参数所给的镜像拉取个数。
-- `registry_pull_qps` (Number) 可用来限制镜像仓库的 QPS 上限
-- `serialize_image_pulls` (Boolean) 逐一拉取镜像。
-- `system_reserved` (Attributes Set) 节点预留给操作系统的资源。默认按照 节点预留资源策略 中默认值的一半进行资源预留。 (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
-- `topology_manager_policy` (String) 拓扑管理策略，取值：none：（默认）禁用拓扑管理策略。restricted：kubelet 仅接受在所请求资源上实现最佳 NUMA（Non-Uniform Memory Access，非一致存储访问结构）的 Pod。best-effort：kubelet 会优先选择在 CPU 和设备资源上实现 NUMA 的 Pod。single-numa-node：kubelet 仅允许在同一个节点的 CPU 和设备资源上实现 NUMA 的 Pod。
-- `topology_manager_scope` (String) 拓扑管理策略的资源粒度，取值：container：表示资源对齐粒度为容器级。pod：表示资源对齐粒度为 Pod 级。
+- `cpu_manager_policy` (String) Configure kubelet's CpuManagerPolicy. Includes none and static strategies
+- `feature_gates` (Attributes) Feature gate. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--feature_gates))
+- `kube_api_burst` (Number) Maximum number of burst requests sent to the API server per second. Does not include events and node heartbeat APIs, whose rate limits are controlled by a different set of flags.
+- `kube_api_qps` (Number) Queries per second (QPS) for communication with apiserver. Does not include event and node heartbeat APIs; their rate limits are controlled by a different set of flags
+- `kube_reserved` (Attributes Set) Resources reserved for Kubernetes system components on the node. By default, half of the default value in the node reserved resource policy is reserved (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--kube_reserved))
+- `max_pods` (Number) Configure the maximum number of Pods supported by kubelet
+- `registry_burst` (Number) Set the maximum number of burst image pulls. Temporarily allow the number of image pulls specified by this parameter, provided it does not exceed the RegistryPullQps setting
+- `registry_pull_qps` (Number) Can be used to limit the QPS cap for the image repository
+- `serialize_image_pulls` (Boolean) Pull images one by one
+- `system_reserved` (Attributes Set) Resources reserved for the operating system on the node. By default, resources are reserved at half the default value specified in the node reserved resource policy. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
+- `topology_manager_policy` (String) Topology management policy. Values: none: (default) topology management policy disabled. restricted: kubelet only accepts Pods that achieve optimal NUMA (Non-Uniform Memory Access) on requested resources. best-effort: kubelet prioritizes Pods that achieve NUMA on CPU and device resources. single-numa-node: kubelet only allows Pods that achieve NUMA on CPU and device resources within the same node.
+- `topology_manager_scope` (String) Resource granularity for topology management strategy. Values: container: resource alignment at container level. pod: resource alignment at Pod level
 
 <a id="nestedatt--kubernetes_config--kubelet_config--feature_gates"></a>
 ### Nested Schema for `kubernetes_config.kubelet_config.feature_gates`
 
 Read-Only:
 
-- `in_place_pod_vertical_scaling` (Boolean) 是否开启特性开关本地垂直Pod伸缩
-- `qo_s_resource_manager` (Boolean) 是否开启 QoSResourceManager特性开关，取值：  - true 开启。  - false 关闭。
+- `in_place_pod_vertical_scaling` (Boolean) Whether to enable the feature switch for local vertical Pod autoscaling
+- `qo_s_resource_manager` (Boolean) Enable QoSResourceManager feature switch. Options:   - true to enable   - false to disable
 
 
 <a id="nestedatt--kubernetes_config--kubelet_config--kube_reserved"></a>
@@ -94,8 +94,8 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) 资源名称，取值为 cpu 或 memory。
-- `quantity` (String) 指定资源的资源量。   - 当资源为 cpu 时，取值示例为 200m。   - 当资源为 memory 时，取值示例为 1G
+- `name` (String) Resource name. Values: cpu or memory
+- `quantity` (String) Specify the resource quantity.   - For cpu, example value: 200m   - For memory, example value: 1G
 
 
 <a id="nestedatt--kubernetes_config--kubelet_config--system_reserved"></a>
@@ -103,8 +103,8 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) 资源名称，取值为 cpu 或 memory。
-- `quantity` (String) 指定资源的资源量。   - 当资源为 cpu 时，取值示例为 200m。   - 当资源为 memory 时，取值示例为 1G。
+- `name` (String) Resource name. Values: cpu or memory.
+- `quantity` (String) Resource quantity for the specified resource.   - For cpu, example value: 200m   - For memory, example value: 1G
 
 
 
@@ -113,8 +113,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Label key.
+- `value` (String) Label value
 
 
 <a id="nestedatt--kubernetes_config--taints"></a>
@@ -122,9 +122,9 @@ Read-Only:
 
 Read-Only:
 
-- `effect` (String) 污点效果，取值：NoSchedule：（默认值）不调度。NoExecute：驱逐没有容忍污点的 Pod。PreferNoSchedule：尽量避免调度。
-- `key` (String) 污点键。
-- `value` (String) 污点值。
+- `effect` (String) Taint effect. Values: NoSchedule (default): do not schedule. NoExecute: evict pods that do not tolerate the taint. PreferNoSchedule: avoid scheduling if possible.
+- `key` (String) Taint key
+- `value` (String) Taint value
 
 
 
@@ -133,16 +133,16 @@ Read-Only:
 
 Read-Only:
 
-- `enabled` (Boolean) 节点池是否开启托管。取值：  - true：开启。  - false：关闭。。
-- `remedy_config` (Attributes) 检查自愈配置。 (see [below for nested schema](#nestedatt--management--remedy_config))
+- `enabled` (Boolean) Whether managed mode is enabled for the node pool. Values:   - true: enabled   - false: disabled
+- `remedy_config` (Attributes) Check self-healing configuration. (see [below for nested schema](#nestedatt--management--remedy_config))
 
 <a id="nestedatt--management--remedy_config"></a>
 ### Nested Schema for `management.remedy_config`
 
 Read-Only:
 
-- `enabled` (Boolean) 是否开启检查自愈。
-- `remedy_id` (String) 检查自愈规则ID。
+- `enabled` (Boolean) Enable self-healing check
+- `remedy_id` (String) Self-healing rule ID
 
 
 
@@ -151,45 +151,45 @@ Read-Only:
 
 Read-Only:
 
-- `additional_container_storage_enabled` (Boolean) 节点的第一块数据盘是否已配置并格式化挂载作为容器镜像和日志的存储目录，参数值说明：false：未配置并格式化。true：已配置并格式化。
-- `auto_renew` (Boolean) 云服务器实例到期是否自动续费，参数值说明：true：自动续费false：不自动续费仅当InstanceChargeType=PrePaid时才返回的参数。
-- `auto_renew_period` (Number) 云服务器实例每次自动续费时长，单位为月。仅当AutoRenew=true时才返回的参数。
-- `data_volumes` (Attributes Set) 节点的数据盘配置。 (see [below for nested schema](#nestedatt--node_config--data_volumes))
-- `deployment_set_group_number` (Number) 实例在部署集中的分组号，0表示未设置
-- `deployment_set_id` (String) 实例需要加入的部署集ID
-- `hostname` (String) 节点对应的主机名称。
-- `hpc_cluster_ids` (Set of String) 高性能计算集群 ID。当节点池配置为高性能计算 GPU 型规格节点时，返回高性能计算集群 ID。
-- `image_id` (String) 节点对应云服务器所使用的镜像 ID。
-- `initialize_script` (String) 创建并初始化节点后执行的自定义脚本。Base64 编码后的 Shell 格式脚本。
-- `instance_charge_type` (String) 云服务器实例计费类型，参数值说明：PostPaid：按量计费PrePaid：包年包月
-- `instance_name` (String) 节点（实例）名称。
-- `instance_type_ids` (Set of String) 节点对应的云服务器实例规格 ID 列表。
-- `instances_distribution` (Attributes) 设置抢占式实例和按量实例的混合策略。当SpotStrategy为SpotAsPriceGo时，该策略生效。。 (see [below for nested schema](#nestedatt--node_config--instances_distribution))
-- `name_prefix` (String) 节点名称前缀，为空字符串或 nil 时表示未开启节点名称前缀策略。
-- `network_traffic_mode` (String) 节点间的网络通讯模式。
-- `period` (Number) 云服务器实例购买时长，单位为月。仅当InstanceChargeType=PrePaid时才返回的参数。
-- `pre_script` (String) 部署节点前执行脚本。
-- `project_name` (String) ECS所属项目，一个ECS只能归属于一个项目。
-- `public_access_config` (Attributes) 节点自动开启公网访问的配置信息 (see [below for nested schema](#nestedatt--node_config--public_access_config))
-- `public_access_enabled` (Boolean) 节点是否自动开启公网访问。取值：  - false：关闭  - true：开启
-- `security` (Attributes) 节点安全配置。 (see [below for nested schema](#nestedatt--node_config--security))
-- `spot_strategy` (String) 按量计费的抢占式策略，当InstanceChargeType=PostPaid时NoSpot：正常按量计费实例。SpotAsPriceGo：系统自动出价，跟随当前市场实际价格。
-- `subnet_ids` (Set of String) 节点网络所属的子网 ID 列表。
-- `system_volume` (Attributes) 节点的系统盘配置。 (see [below for nested schema](#nestedatt--node_config--system_volume))
-- `tags` (Attributes Set) 节点池配置的标签信息 (see [below for nested schema](#nestedatt--node_config--tags))
+- `additional_container_storage_enabled` (Boolean) Whether the first data disk on the node has been configured, formatted, and mounted as the storage directory for container images and logs. Parameter values: false: not configured and formatted true: configured and formatted
+- `auto_renew` (Boolean) Whether the cloud server instance is automatically renewed upon expiration. Parameter values: true: auto renewal false: no auto renewal This parameter is returned only when InstanceChargeType=PrePaid.
+- `auto_renew_period` (Number) Automatic renewal duration for cloud server instance, in months. This parameter is returned only when AutoRenew=true.
+- `data_volumes` (Attributes Set) Data disk configuration for the node (see [below for nested schema](#nestedatt--node_config--data_volumes))
+- `deployment_set_group_number` (Number) Group number of the instance in the deployment set. 0 means not set
+- `deployment_set_id` (String) Deployment set ID to be added to the instance
+- `hostname` (String) Host name corresponding to the node
+- `hpc_cluster_ids` (Set of String) High performance computing cluster ID. When the node pool is configured with high performance computing GPU node types, returns the high performance computing cluster ID
+- `image_id` (String) Image ID used by the cloud server corresponding to the node
+- `initialize_script` (String) Custom script executed after creating and initializing the node. Shell script in Base64 encoding
+- `instance_charge_type` (String) Billing type for cloud server instance. Parameter value description: PostPaid: pay-as-you-go. PrePaid: subscription (annual/monthly).
+- `instance_name` (String) Node (instance) name
+- `instance_type_ids` (Set of String) List of cloud server instance type IDs corresponding to the node
+- `instances_distribution` (Attributes) Configure the mixed strategy for spot and pay-as-you-go instances. This strategy takes effect when SpotStrategy is set to SpotAsPriceGo (see [below for nested schema](#nestedatt--node_config--instances_distribution))
+- `name_prefix` (String) Node name prefix. An empty string or nil means the node name prefix policy is not enabled
+- `network_traffic_mode` (String) Network communication mode between nodes
+- `period` (Number) Duration for purchasing cloud server instance, in months. This parameter is returned only when InstanceChargeType=PrePaid
+- `pre_script` (String) Script executed before deploying nodes
+- `project_name` (String) The project to which the ECS belongs. Each ECS can only belong to one project.
+- `public_access_config` (Attributes) Configuration for automatic public network access for nodes (see [below for nested schema](#nestedatt--node_config--public_access_config))
+- `public_access_enabled` (Boolean) Whether the node automatically enables public network access. Values:   - false: disabled   - true: enabled
+- `security` (Attributes) Node security configuration. (see [below for nested schema](#nestedatt--node_config--security))
+- `spot_strategy` (String) Preemptive policy for pay-as-you-go billing. When InstanceChargeType=PostPaid: NoSpot: regular pay-as-you-go instance. SpotAsPriceGo: system auto-bidding, follows current market price.
+- `subnet_ids` (Set of String) List of subnet IDs to which the node network belongs.
+- `system_volume` (Attributes) System disk configuration for the node (see [below for nested schema](#nestedatt--node_config--system_volume))
+- `tags` (Attributes Set) Label information configured for the node pool (see [below for nested schema](#nestedatt--node_config--tags))
 
 <a id="nestedatt--node_config--data_volumes"></a>
 ### Nested Schema for `node_config.data_volumes`
 
 Read-Only:
 
-- `file_system` (String) 文件系统，取值：  - Ext4 (默认值)  - Xfs
-- `mount_point` (String) 磁盘格式化后的目标挂载目录。
-- `placement_group_id` (String) 放置组Id
-- `size` (Number) 磁盘容量，单位 GiB。
-- `snapshot_id` (String) 使用快照创建数据盘。您可以调用DescribeSnapshots接口查询快照ID。说明  - 仅极速型SSD和高效性云盘支持通过快照创建云盘  - 仅状态为“可用”(available)的快照支持创建新云盘，“创建中”、“回滚中”、“删除中”及“错误”状态下的快照不支持创建新云盘。
-- `subgroup_number` (Number) 放置子组
-- `type` (String) 磁盘类型：ESSD_PL0：性能级别为 PL0 的极速型 SSD 云盘。ESSD_FlexPL：性能级别为 PL1 的极速型 SSD 云盘。
+- `file_system` (String) File system. Options:   - Ext4 (default)   - Xfs
+- `mount_point` (String) Target mount directory after disk formatting.
+- `placement_group_id` (String) Placement group ID
+- `size` (Number) Disk capacity, in GiB
+- `snapshot_id` (String) Create a data disk using a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only ultra-fast SSD and efficient cloud disks support creating disks from snapshots. Only snapshots in 'available' status can be used to create new disks; snapshots in 'creating', 'rolling back', 'deleting', or 'error' status cannot be used to create new disks
+- `subgroup_number` (Number) Placement subgroup
+- `type` (String) Disk type: ESSD_PL0: ultra-fast SSD cloud disk with performance level PL0. ESSD_FlexPL: ultra-fast SSD cloud disk with performance level PL1.
 
 
 <a id="nestedatt--node_config--instances_distribution"></a>
@@ -197,10 +197,10 @@ Read-Only:
 
 Read-Only:
 
-- `capacity_rebalance` (Boolean) 容量重新平衡。取值范围：  - true：开启该功能，当抢占式实例即将被回收前，主动创建新的抢占式实例进行补偿。  - false（默认值）：不开启该功能，则等待抢占式实例被回收后才会去扩容补齐实例数
-- `compensate_with_on_demand` (Boolean) 按量实例替补功能。取值范围：  - true：开启该功能，当所有抢占式实例因库存不足等原因全部购买失败后，尝试购买按量实例  - false（默认值）：不开启该功能，在需要扩容抢占式实例时仅尝试所配置的抢占式实例
-- `on_demand_base_capacity` (Number) 基础容量的大小，基础容量部分固定为按量计费实例。取值范围：[0,500]，默认值为0。
-- `on_demand_percentage_above_base_capacity` (Number) 超出基础容量部分，按量计费实例所占的比例。取值范围[0, 100]，0代表超出基础容量的部分仅生产抢占式实例，100代表仅生产按量实例，默认值为0。
+- `capacity_rebalance` (Boolean) Capacity rebalancing. Value range:   - true: enables this feature. When a preemptible instance is about to be reclaimed, a new preemptible instance is proactively created for compensation.   - false (default): disables this feature. Waits until the preemptible instance is reclaimed before scaling out to make up the instance count.
+- `compensate_with_on_demand` (Boolean) Pay-as-you-go instance fallback feature. Value range:   - true: enables this feature. If all preemptible instances fail to purchase due to insufficient inventory, pay-as-you-go instances will be attempted   - false (default): disables this feature. When scaling preemptible instances, only the configured preemptible instances are attempted
+- `on_demand_base_capacity` (Number) Base capacity size. The base capacity is always pay-as-you-go instances. Value range: [0,500], default: 0
+- `on_demand_percentage_above_base_capacity` (Number) Proportion of pay-as-you-go instances for capacity exceeding the base capacity. Value range [0, 100]. 0 means only preemptible instances are produced for excess capacity; 100 means only pay-as-you-go instances are produced. Default is 0.
 
 
 <a id="nestedatt--node_config--public_access_config"></a>
@@ -208,9 +208,9 @@ Read-Only:
 
 Read-Only:
 
-- `bandwidth` (Number) 公网 IP 的带宽峰值，单位：Mbps。
-- `billing_type` (Number) 公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。
-- `isp` (String) 公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。
+- `bandwidth` (Number) Peak bandwidth for the public IP, unit: Mbps
+- `billing_type` (Number) Billing type for public IP: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic.
+- `isp` (String) Public IP line type. Parameter description: BGP: BGP (multi-line)
 
 
 <a id="nestedatt--node_config--security"></a>
@@ -218,19 +218,19 @@ Read-Only:
 
 Read-Only:
 
-- `login` (Attributes) 节点的访问方式配置。 (see [below for nested schema](#nestedatt--node_config--security--login))
-- `security_group_ids` (Set of String) 节点网络所在的安全组 ID 列表。
-- `security_strategies` (Set of String) 节点的安全策略，参数值说明：Hids：主机安全加固。
-- `security_strategy_enabled` (Boolean) 节点是否启用了安全加固配置，参数值说明：true：已开启。false：未开启。
+- `login` (Attributes) Node access configuration (see [below for nested schema](#nestedatt--node_config--security--login))
+- `security_group_ids` (Set of String) List of security group IDs for the node network
+- `security_strategies` (Set of String) Node security policy. Parameter value description: Hids: host security hardening
+- `security_strategy_enabled` (Boolean) Whether security hardening is enabled for the node. Parameter value description: true: enabled. false: not enabled.
 
 <a id="nestedatt--node_config--security--login"></a>
 ### Nested Schema for `node_config.security.login`
 
 Read-Only:
 
-- `password` (String) Root 用户登录密码，使用 Base64 编码格式。请遵循云服务器对于实例密码的要求规范：长度为 8～30 个字符，不能以/和$6$开头，支持以下几项字符，且至少包含三项，小写字母a~z，大写字母A~Z，数字0~9，特殊字符( ) ` ~ ! @ # $ % ^ & * _   - + = | { } [ ] : ; ' < > , . ? /
-- `ssh_key_pair_name` (String) SSH 密钥对名称。请确保该密钥对已在云服务器中创建或托管。
-- `type` (String) 节点的访问登录方式，参数值说明：Password：密码登录。SshKeyPair：SSH 密钥对登录。
+- `password` (String) Root user login password in Base64 encoding. Follow the cloud server password requirements: 8–30 characters, cannot start with / or $6$, must include at least three of the following: lowercase letters a–z, uppercase letters A–Z, numbers 0–9, special characters ( ) ` ~ ! @ # $ % ^ & * _   - + = | { } [ ] : ; ' < > , . ? /
+- `ssh_key_pair_name` (String) SSH key pair name. Please ensure the key pair is already created or hosted in the cloud server
+- `type` (String) Node access login method. Parameter value description: Password: password login. SshKeyPair: SSH key pair login.
 
 
 
@@ -239,10 +239,10 @@ Read-Only:
 
 Read-Only:
 
-- `placement_group_id` (String) 放置组Id
-- `size` (Number) 云盘容量，单位 GiB，取值说明：默认值：40GiB。极速型 SSD（ESSD_PL0，ESSD_FlexPL）：40~2048GiB。
-- `subgroup_number` (Number) 放置子组
-- `type` (String) 云盘类型：ESSD_PL0：（默认值）性能级别为 PL0 的极速型 SSD 云盘。ESSD_FlexPL：性能级别为 PL1 的极速型 SSD 云盘。
+- `placement_group_id` (String) Placement group ID
+- `size` (Number) Cloud disk capacity, in GiB. Value description: default: 40 GiB. Ultra-fast SSD (ESSD_PL0, ESSD_FlexPL): 40–2048 GiB
+- `subgroup_number` (Number) Placement subgroup
+- `type` (String) Cloud disk type: ESSD_PL0: (default) Ultra SSD with performance level PL0. ESSD_FlexPL: Ultra SSD with performance level PL1
 
 
 <a id="nestedatt--node_config--tags"></a>
@@ -250,8 +250,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Label key.
+- `value` (String) Tag value
 
 
 
@@ -260,12 +260,12 @@ Read-Only:
 
 Read-Only:
 
-- `creating_count` (Number) Phase=Creating的节点总数量。
-- `deleting_count` (Number) Phase=Deleting的节点总数量。
-- `failed_count` (Number) Phase=Failed的节点总数量。
-- `running_count` (Number) Phase=Running的节点总数量。
-- `total_count` (Number) 节点池中的节点总数量。
-- `updating_count` (Number) Phase=Updating的节点总数量。
+- `creating_count` (Number) Total number of nodes with Phase=Creating.
+- `deleting_count` (Number) Total number of nodes with Phase=Deleting.
+- `failed_count` (Number) Total number of nodes with Phase=Failed
+- `running_count` (Number) Total number of nodes with Phase=Running
+- `total_count` (Number) Total number of nodes in the node pool.
+- `updating_count` (Number) Total number of nodes with Phase=Updating
 
 
 <a id="nestedatt--status"></a>
@@ -273,15 +273,15 @@ Read-Only:
 
 Read-Only:
 
-- `conditions` (Attributes Set) 节点池当前主状态下的状态条件，即进入该主状态的原因。 (see [below for nested schema](#nestedatt--status--conditions))
-- `phase` (String) 节点池的状态，参数值有：Creating、Running、Updating、Deleting、Failed、Scaling。
+- `conditions` (Attributes Set) Status conditions of the node pool in its current primary state, indicating the reason for entering this state (see [below for nested schema](#nestedatt--status--conditions))
+- `phase` (String) Status of the node pool. Parameter values: Creating, Running, Updating, Deleting, Failed, Scaling.
 
 <a id="nestedatt--status--conditions"></a>
 ### Nested Schema for `status.conditions`
 
 Read-Only:
 
-- `type` (String) 节点池当前主状态下的状态条件，即进入该主状态的原因，可以有多个原因，参数值有：ProgressingOk、ResourceCleanupFailed、Unknown、ClusterNotRunning。
+- `type` (String) Status conditions under the current primary state of the node pool, indicating the reasons for entering this state. There can be multiple reasons. Parameter values: ProgressingOk, ResourceCleanupFailed, Unknown, ClusterNotRunning.
 
 
 
@@ -290,5 +290,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Label key.
+- `value` (String) Tag value

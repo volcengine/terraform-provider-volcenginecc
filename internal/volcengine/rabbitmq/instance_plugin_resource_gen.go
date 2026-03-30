@@ -30,11 +30,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件描述。",
+		//	  "description": "Plugin description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "插件描述。",
+			Description: "Plugin description",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -44,11 +44,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关闭此插件的注意事项说明。",
+		//	  "description": "Notes for disabling this plugin",
 		//	  "type": "string"
 		//	}
 		"disable_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "关闭此插件的注意事项说明。",
+			Description: "Notes for disabling this plugin",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -58,11 +58,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "开启此插件的注意事项说明。",
+		//	  "description": "Notes for enabling this plugin",
 		//	  "type": "string"
 		//	}
 		"enable_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "开启此插件的注意事项说明。",
+			Description: "Notes for enabling this plugin",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -72,11 +72,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否已开启插件。true：插件已开启。false：插件已关闭。",
+		//	  "description": "Whether the plugin is enabled. true: The plugin is enabled. false: The plugin is disabled",
 		//	  "type": "boolean"
 		//	}
 		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否已开启插件。true：插件已开启。false：插件已关闭。",
+			Description: "Whether the plugin is enabled. true: The plugin is enabled. false: The plugin is disabled",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -86,11 +86,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -100,11 +100,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "开启或关闭插件是否会引发 RabbitMQ 实例重启。true：会重启实例。false：不会重启实例。",
+		//	  "description": "Whether enabling or disabling the plugin will cause a RabbitMQ instance restart. true: The instance will restart. false: The instance will not restart",
 		//	  "type": "boolean"
 		//	}
 		"need_reboot_on_change": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "开启或关闭插件是否会引发 RabbitMQ 实例重启。true：会重启实例。false：不会重启实例。",
+			Description: "Whether enabling or disabling the plugin will cause a RabbitMQ instance restart. true: The instance will restart. false: The instance will not restart",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -114,11 +114,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件名称。",
+		//	  "description": "Plugin name",
 		//	  "type": "string"
 		//	}
 		"plugin_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "插件名称。",
+			Description: "Plugin name",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -130,11 +130,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件监听的端口。",
+		//	  "description": "Plugin listening port",
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "插件监听的端口。",
+			Description: "Plugin listening port",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -144,11 +144,11 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "插件版本。",
+		//	  "description": "Plugin version",
 		//	  "type": "string"
 		//	}
 		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "插件版本。",
+			Description: "Plugin version",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -166,7 +166,7 @@ func instancePluginResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "在消息队列 RabbitMQ版控制台中创建实例之后，实例插件默认为关闭状态，您可以手动为实例开启/关闭插件。开启/关闭部分插件会导致集群滚动重启，建议避开业务运行时段执行该操作。集群滚动重启时会造成未持久化的消息丢失，也会出现短暂的连接不稳定现象，例如连接断开，断开后会根据客户端配置决定是否自动重连。",
+		Description: "After you create an instance in the RabbitMQ console, plugins are disabled by default. You can manually enable or disable plugins for the instance. Enabling or disabling certain plugins will cause a rolling restart of the cluster. It is recommended to perform this operation outside of business hours. A rolling restart may result in the loss of non-persistent messages and temporary connection instability, such as connection drops. After a connection drop, whether the client automatically reconnects depends on its configuration",
 		Version:     1,
 		Attributes:  attributes,
 	}

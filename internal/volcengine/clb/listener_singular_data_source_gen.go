@@ -27,7 +27,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器绑定的访问控制策略组ID。仅AclStatus参数为on时返回。",
+		//	  "description": "ID of the access control policy group bound to the listener. Returned only when the AclStatus parameter is set to on.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -37,7 +37,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"acl_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "监听器绑定的访问控制策略组ID。仅AclStatus参数为on时返回。",
+			Description: "ID of the access control policy group bound to the listener. Returned only when the AclStatus parameter is set to on.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclStatus
@@ -45,7 +45,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "off",
-		//	  "description": "是否开启访问控制功能。取值如下：on：开启。off（默认值）：不开启。",
+		//	  "description": "Enable access control. Values: on: enabled. off (default): disabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -53,14 +53,14 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"acl_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启访问控制功能。取值如下：on：开启。off（默认值）：不开启。",
+			Description: "Enable access control. Values: on: enabled. off (default): disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制的方式。white：白名单。black：黑名单。仅AclStatus参数为on时，本参数有效。",
+		//	  "description": "Access control mode. white: Allowlist. black: Denylist. This parameter is valid only when the AclStatus parameter is on.",
 		//	  "enum": [
 		//	    "white",
 		//	    "black"
@@ -68,7 +68,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制的方式。white：白名单。black：黑名单。仅AclStatus参数为on时，本参数有效。",
+			Description: "Access control mode. white: Allowlist. black: Denylist. This parameter is valid only when the AclStatus parameter is on.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Bandwidth
@@ -76,30 +76,30 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": -1,
-		//	  "description": "监听器的带宽上限，即此监听器独占CLB实例的带宽，单位为Mbps。-1（默认值）：此监听器不独占CLB的带，与其他监听器共享CLB实例未被独占的带宽。取值范围：1～CLB实例未被独占的带宽。",
+		//	  "description": "Bandwidth limit for the listener, which means this listener exclusively uses the bandwidth of the CLB instance. Unit: Mbps. -1 (default): This listener does not exclusively use CLB bandwidth and shares the non-exclusive bandwidth of the CLB instance with other listeners. Value range: 1 to the non-exclusive bandwidth of the CLB instance.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器的带宽上限，即此监听器独占CLB实例的带宽，单位为Mbps。-1（默认值）：此监听器不独占CLB的带，与其他监听器共享CLB实例未被独占的带宽。取值范围：1～CLB实例未被独占的带宽。",
+			Description: "Bandwidth limit for the listener, which means this listener exclusively uses the bandwidth of the CLB instance. Unit: Mbps. -1 (default): This listener does not exclusively use CLB bandwidth and shares the non-exclusive bandwidth of the CLB instance with other listeners. Value range: 1 to the non-exclusive bandwidth of the CLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CACertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "双向认证的CA证书。",
+		//	  "description": "CA certificate for mutual authentication.",
 		//	  "type": "string"
 		//	}
 		"ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "双向认证的CA证书。",
+			Description: "CA certificate for mutual authentication.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CAEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启双向认证。on：开启。off（默认值）：不开启。",
+		//	  "description": "Enable mutual authentication. on: enabled. off (default): disabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off",
@@ -108,36 +108,36 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"ca_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启双向认证。on：开启。off（默认值）：不开启。",
+			Description: "Enable mutual authentication. on: enabled. off (default): disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertCenterCertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书中心的证书的ID。",
+		//	  "description": "Certificate ID from Certificate Center.",
 		//	  "type": "string"
 		//	}
 		"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书中心的证书的ID。",
+			Description: "Certificate ID from Certificate Center.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB侧证书管理模块的证书的ID。",
+		//	  "description": "Certificate ID from the CLB certificate management module.",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB侧证书管理模块的证书的ID。",
+			Description: "Certificate ID from the CLB certificate management module.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateSource
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "证书的来源。clb (默认)：CLB上传的证书。cert_center：证书中心上传的证书。user：用户上传的证书。",
+		//	  "description": "Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.",
 		//	  "enum": [
 		//	    "clb",
 		//	    "cert_center",
@@ -146,42 +146,42 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "证书的来源。clb (默认)：CLB上传的证书。cert_center：证书中心上传的证书。user：用户上传的证书。",
+			Description: "Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClientBodyTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "读取客户端请求正文的超时时间。此超时时间仅针对两个连续的读操作之间设置，而非整个请求的传输过程。取值范围为 30-120秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效",
+		//	  "description": "Timeout for reading the client request body. This timeout applies only between two consecutive read operations, not the entire request transmission. Range: 30–120 seconds, default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 		//	  "format": "int64",
 		//	  "maximum": 120,
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
 		"client_body_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "读取客户端请求正文的超时时间。此超时时间仅针对两个连续的读操作之间设置，而非整个请求的传输过程。取值范围为 30-120秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效",
+			Description: "Timeout for reading the client request body. This timeout applies only between two consecutive read operations, not the entire request transmission. Range: 30–120 seconds, default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClientHeaderTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "读取客户端请求头的超时时间。取值范围为30-120秒。默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+		//	  "description": "Timeout for reading the client request header. Value range: 30–120 seconds. Default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 		//	  "format": "int64",
 		//	  "maximum": 120,
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
 		"client_header_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "读取客户端请求头的超时时间。取值范围为30-120秒。默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+			Description: "Timeout for reading the client request header. Value range: 30–120 seconds. Default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionDrainEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器是否开启连接优雅中断功能。on：开启。off：不开启。参数Protocol返回为HTTP或HTTPS时，该参数固定返回off。",
+		//	  "description": "Whether the listener enables graceful connection termination. on: enabled. off: not enabled. When Protocol returns HTTP or HTTPS, this parameter always returns off.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -189,67 +189,67 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"connection_drain_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器是否开启连接优雅中断功能。on：开启。off：不开启。参数Protocol返回为HTTP或HTTPS时，该参数固定返回off。",
+			Description: "Whether the listener enables graceful connection termination. on: enabled. off: not enabled. When Protocol returns HTTP or HTTPS, this parameter always returns off.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionDrainTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接优雅中断的超时时间，单位为秒。参数ConnectionDrainEnabled返回为off时，该参数返回0。",
+		//	  "description": "Timeout for graceful connection termination, in seconds. If ConnectionDrainEnabled returns off, this parameter returns 0.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"connection_drain_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "连接优雅中断的超时时间，单位为秒。参数ConnectionDrainEnabled返回为off时，该参数返回0。",
+			Description: "Timeout for graceful connection termination, in seconds. If ConnectionDrainEnabled returns off, this parameter returns 0.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Cookie
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端服务器配置的会话保持的Cookie名称。仅参数PersistenceType取server时，本参数有效且必填。只能包含字母、数字、下划线（_）和中划线（-）。长度限制在1～200字符之间。",
+		//	  "description": "Name of the session persistence cookie configured on the backend server. This parameter is valid and required only when PersistenceType is set to server. Only letters, numbers, underscores (_), and hyphens (-) are allowed. Length must be between 1 and 200 characters.",
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
 		"cookie": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "后端服务器配置的会话保持的Cookie名称。仅参数PersistenceType取server时，本参数有效且必填。只能包含字母、数字、下划线（_）和中划线（-）。长度限制在1～200字符之间。",
+			Description: "Name of the session persistence cookie configured on the backend server. This parameter is valid and required only when PersistenceType is set to server. Only letters, numbers, underscores (_), and hyphens (-) are allowed. Length must be between 1 and 200 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Cps
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "每秒新建连接数的上限。-1（默认值）：不限制，即CLB实例的新建连接数上限。取值范围：1～CLB实例的新连接数上限。",
+		//	  "description": "Maximum number of new connections per second. -1 (default): No limit, which means the maximum number of new connections allowed by the CLB instance. Value range: 1 to the maximum number of new connections allowed by the CLB instance.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"cps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "每秒新建连接数的上限。-1（默认值）：不限制，即CLB实例的新建连接数上限。取值范围：1～CLB实例的新连接数上限。",
+			Description: "Maximum number of new connections per second. -1 (default): No limit, which means the maximum number of new connections allowed by the CLB instance. Value range: 1 to the maximum number of new connections allowed by the CLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的创建时间。",
+		//	  "description": "Creation time of the listener.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的创建时间。",
+			Description: "Creation time of the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。不填则默认值为空字符串。",
+		//	  "description": "Listener description. Must start with a letter, digit, or Chinese character. Can include letters, digits, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 0–255 characters. If not specified, the default is an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。不填则默认值为空字符串。",
+			Description: "Listener description. Must start with a letter, digit, or Chinese character. Can include letters, digits, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 0–255 characters. If not specified, the default is an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
@@ -257,7 +257,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "on",
-		//	  "description": "是否启用监听器。on（默认值）：开启。off：不开启。",
+		//	  "description": "Enable listener. on (default): enabled. off: disabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -265,49 +265,49 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否启用监听器。on（默认值）：开启。off：不开启。",
+			Description: "Enable listener. on (default): enabled. off: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EndPort
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全端口监听的结束端口，取值范围为1-65535。参数Port为“0”时，该参数必须传入，且该参数取值应大于tartPort。",
+		//	  "description": "End port for all-port listening. Range: 1–65535. When Port is '0', this parameter is required and must be greater than startPort.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"end_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "全端口监听的结束端口，取值范围为1-65535。参数Port为“0”时，该参数必须传入，且该参数取值应大于tartPort。",
+			Description: "End port for all-port listening. Range: 1–65535. When Port is '0', this parameter is required and must be greater than startPort.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EstablishedTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的连接超时时间。仅参数Protocol取TCP或UDP时，本参数有效。取值如下：TCP协议：10-900秒，默认为900秒。UDP协议：1-300秒，默认为90秒。",
+		//	  "description": "Listener connection timeout. This parameter is valid only when Protocol is set to TCP or UDP. Values: TCP protocol: 10–900 seconds, default is 900 seconds. UDP protocol: 1–300 seconds, default is 90 seconds.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"established_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器的连接超时时间。仅参数Protocol取TCP或UDP时，本参数有效。取值如下：TCP协议：10-900秒，默认为900秒。UDP协议：1-300秒，默认为90秒。",
+			Description: "Listener connection timeout. This parameter is valid only when Protocol is set to TCP or UDP. Values: TCP protocol: 10–900 seconds, default is 900 seconds. UDP protocol: 1–300 seconds, default is 90 seconds.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HealthCheck
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查相关信息。",
+		//	  "description": "Health check information.",
 		//	  "properties": {
 		//	    "Domain": {
-		//	      "description": "健康检查的域名，需配置为后端服务器上真实对外提供服务的地址。当参数Protocol取HTTP或HTTPS，HealthCheck.Enabled取on时，本参数生效。需至少包含一个点号（.），且不允许以点号（.）开头或结尾。单个字符串由母、数字、中划线（-）、点号（.）字符组成，中划线（-）不得出现在字符串的头部或尾部。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为空，表示CLB使用各后端服务器的私网IP地址进行健康检查。",
+		//	      "description": "Domain name for health check. Must be set to the actual address provided by the backend server. This parameter takes effect when Protocol is set to HTTP or HTTPS and HealthCheck.Enabled is on. Must contain at least one period (.), and cannot start or end with a period (.). Each string can include letters, numbers, hyphens (-), and periods (.), with hyphens (-) not allowed at the beginning or end of the string. Length limit: 1 to 128 characters. If this parameter is not provided or no value is specified, the default is empty, meaning CLB uses the private IP address of each backend server for health checks.",
 		//	      "maxLength": 128,
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
 		//	      "default": "on",
-		//	      "description": "监听器是否开启健康检查功能。on（默认值）：开启。off：不开启。",
+		//	      "description": "Whether health check is enabled for the listener. on (default): enabled. off: disabled.",
 		//	      "enum": [
 		//	        "on",
 		//	        "off"
@@ -316,26 +316,26 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "HealthyThreshold": {
 		//	      "default": 3,
-		//	      "description": "健康阈值，即连续健康检查成功的次数。取值范围为2 ～ 10，默认值为3，单位为次。",
+		//	      "description": "Health threshold, i.e., the number of consecutive successful health checks. Range: 2–10, default is 3, unit: times.",
 		//	      "format": "int64",
 		//	      "maximum": 10,
 		//	      "minimum": 2,
 		//	      "type": "integer"
 		//	    },
 		//	    "HttpCode": {
-		//	      "description": "健康检查正常的HTTP状态码。当参数Protocol取HTTP或HTTPS，且HealthCheck.Enabled取on时，参数生效。取值如下：http_2xx （默认值）、http_3xx、http_4xx、http_5xx。多个状态码间用半角逗号“,”分隔。",
+		//	      "description": "HTTP status codes for healthy checks. This parameter is effective when Protocol is HTTP or HTTPS and HealthCheck.Enabled is on. Values: http_2xx (default), http_3xx, http_4xx, http_5xx. Separate multiple status codes with a comma (,).",
 		//	      "type": "string"
 		//	    },
 		//	    "Interval": {
 		//	      "default": 2,
-		//	      "description": "执行健康检查的时间间隔，取值范围为1 ～ 300 ，默认值为2，单位为秒。",
+		//	      "description": "Interval for performing health checks. Range: 1–300, default is 2, in seconds.",
 		//	      "format": "int64",
 		//	      "maximum": 300,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "Method": {
-		//	      "description": "监听器健康检查的方法。GET：服务器需支持GET方法。HEAD：服务器仅返回HEAD头部信息，可以降低后端开销，但要求服务器支持HEAD方法。",
+		//	      "description": "Listener health check method. GET: server must support the GET method. HEAD: server returns only HEAD header information, which reduces backend overhead, but requires server support for the HEAD method.",
 		//	      "enum": [
 		//	        "GET",
 		//	        "HEAD"
@@ -343,7 +343,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Port": {
-		//	      "description": "健康检查的端口，取值范围为1-65535。",
+		//	      "description": "Health check port. Value range: 1–65535.",
 		//	      "format": "int64",
 		//	      "maximum": 65535,
 		//	      "minimum": 0,
@@ -351,32 +351,32 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "Timeout": {
 		//	      "default": 2,
-		//	      "description": "健康检查的响应超时时间，表示如果后端服务器在指定的时间内没有正确响应，则判定为健康检查“异常”。取值范围为1 ～ 60，默认值为2，单位为秒。",
+		//	      "description": "Health check response timeout. If the backend server does not respond correctly within the specified time, the health check is considered 'abnormal'. Value range: 1 to 60. Default: 2. Unit: seconds.",
 		//	      "format": "int64",
 		//	      "maximum": 60,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "UdpExpect": {
-		//	      "description": "健康检查的预期响应字符串。只允许包含字母和数字，最大长度限制为64个字符。当参数Protocol配置UDP，且参数HealthCheck.Enabled配置为on时，该参数生效。参数HealthCheck.UdpRequest和HealthCheck.UdpExpect的取值只能同时为空或同时不为空。",
+		//	      "description": "Expected response string for health check. Only letters and numbers are allowed, with a maximum length of 64 characters. This parameter takes effect when Protocol is set to UDP and HealthCheck.Enabled is set to on. HealthCheck.UdpRequest and HealthCheck.UdpExpect must either both be empty or both be non-empty.",
 		//	      "maxLength": 64,
 		//	      "type": "string"
 		//	    },
 		//	    "UdpRequest": {
-		//	      "description": "执行健康检查的请求字符串。只允许包含字母和数字，最大长度限制为64个字。当参数Protocol配置为UDP，且参数HealthCheck.Enabled配置为on时，该参数生效。参数HealthCheck.UdpRequest和HealthCheck.UdpExpect的取值只能同时为空或同时不为空。",
+		//	      "description": "Request string for performing health checks. Only letters and numbers are allowed, with a maximum length of 64 characters. This parameter takes effect when Protocol is set to UDP and HealthCheck.Enabled is set to on. The values of HealthCheck.UdpRequest and HealthCheck.UdpExpect must either both be empty or both be non-empty.",
 		//	      "maxLength": 64,
 		//	      "type": "string"
 		//	    },
 		//	    "UnhealthyThreshold": {
 		//	      "default": 3,
-		//	      "description": "不健康阈值，即连续健康检查失败的次数。取值范围为2 ～ 10，默认值为3，单位为次。",
+		//	      "description": "Unhealthy threshold, which is the number of consecutive health check failures. Value range: 2–10. Default: 3. Unit: occurrences.",
 		//	      "format": "int64",
 		//	      "maximum": 10,
 		//	      "minimum": 2,
 		//	      "type": "integer"
 		//	    },
 		//	    "Uri": {
-		//	      "description": "健康检查的路径，需配置为后端服务器上真实对外提供服务的地址。当参数Protocol取HTTP或HTTPS，HealthCheck.Enabled取on时，本参数生效。必须以字符‘/’开头。仅包含字母、数字、中划线（-）、下划线（_）、斜线/）、点号（.）、百分号（%）、英文问号（?）、#、\u0026、等号（＝）字符。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为“/”。",
+		//	      "description": "Health check path. Must be configured as the actual address provided by the backend server. This parameter takes effect when Protocol is set to HTTP or HTTPS and HealthCheck.Enabled is on. Must start with '/'. Only letters, digits, hyphens (-), underscores (_), slashes (/), periods (.), percent signs (%), question marks (?), #, \u0026, and equals signs (=) are allowed. Length: 1–128 characters. If not specified or no value is provided, the default is '/'.",
 		//	      "maxLength": 128,
 		//	      "type": "string"
 		//	    }
@@ -387,73 +387,73 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Domain
 				"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的域名，需配置为后端服务器上真实对外提供服务的地址。当参数Protocol取HTTP或HTTPS，HealthCheck.Enabled取on时，本参数生效。需至少包含一个点号（.），且不允许以点号（.）开头或结尾。单个字符串由母、数字、中划线（-）、点号（.）字符组成，中划线（-）不得出现在字符串的头部或尾部。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为空，表示CLB使用各后端服务器的私网IP地址进行健康检查。",
+					Description: "Domain name for health check. Must be set to the actual address provided by the backend server. This parameter takes effect when Protocol is set to HTTP or HTTPS and HealthCheck.Enabled is on. Must contain at least one period (.), and cannot start or end with a period (.). Each string can include letters, numbers, hyphens (-), and periods (.), with hyphens (-) not allowed at the beginning or end of the string. Length limit: 1 to 128 characters. If this parameter is not provided or no value is specified, the default is empty, meaning CLB uses the private IP address of each backend server for health checks.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "监听器是否开启健康检查功能。on（默认值）：开启。off：不开启。",
+					Description: "Whether health check is enabled for the listener. on (default): enabled. off: disabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HealthyThreshold
 				"healthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "健康阈值，即连续健康检查成功的次数。取值范围为2 ～ 10，默认值为3，单位为次。",
+					Description: "Health threshold, i.e., the number of consecutive successful health checks. Range: 2–10, default is 3, unit: times.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HttpCode
 				"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查正常的HTTP状态码。当参数Protocol取HTTP或HTTPS，且HealthCheck.Enabled取on时，参数生效。取值如下：http_2xx （默认值）、http_3xx、http_4xx、http_5xx。多个状态码间用半角逗号“,”分隔。",
+					Description: "HTTP status codes for healthy checks. This parameter is effective when Protocol is HTTP or HTTPS and HealthCheck.Enabled is on. Values: http_2xx (default), http_3xx, http_4xx, http_5xx. Separate multiple status codes with a comma (,).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Interval
 				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "执行健康检查的时间间隔，取值范围为1 ～ 300 ，默认值为2，单位为秒。",
+					Description: "Interval for performing health checks. Range: 1–300, default is 2, in seconds.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Method
 				"method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "监听器健康检查的方法。GET：服务器需支持GET方法。HEAD：服务器仅返回HEAD头部信息，可以降低后端开销，但要求服务器支持HEAD方法。",
+					Description: "Listener health check method. GET: server must support the GET method. HEAD: server returns only HEAD header information, which reduces backend overhead, but requires server support for the HEAD method.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Port
 				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的端口，取值范围为1-65535。",
+					Description: "Health check port. Value range: 1–65535.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Timeout
 				"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的响应超时时间，表示如果后端服务器在指定的时间内没有正确响应，则判定为健康检查“异常”。取值范围为1 ～ 60，默认值为2，单位为秒。",
+					Description: "Health check response timeout. If the backend server does not respond correctly within the specified time, the health check is considered 'abnormal'. Value range: 1 to 60. Default: 2. Unit: seconds.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UdpExpect
 				"udp_expect": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的预期响应字符串。只允许包含字母和数字，最大长度限制为64个字符。当参数Protocol配置UDP，且参数HealthCheck.Enabled配置为on时，该参数生效。参数HealthCheck.UdpRequest和HealthCheck.UdpExpect的取值只能同时为空或同时不为空。",
+					Description: "Expected response string for health check. Only letters and numbers are allowed, with a maximum length of 64 characters. This parameter takes effect when Protocol is set to UDP and HealthCheck.Enabled is set to on. HealthCheck.UdpRequest and HealthCheck.UdpExpect must either both be empty or both be non-empty.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UdpRequest
 				"udp_request": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "执行健康检查的请求字符串。只允许包含字母和数字，最大长度限制为64个字。当参数Protocol配置为UDP，且参数HealthCheck.Enabled配置为on时，该参数生效。参数HealthCheck.UdpRequest和HealthCheck.UdpExpect的取值只能同时为空或同时不为空。",
+					Description: "Request string for performing health checks. Only letters and numbers are allowed, with a maximum length of 64 characters. This parameter takes effect when Protocol is set to UDP and HealthCheck.Enabled is set to on. The values of HealthCheck.UdpRequest and HealthCheck.UdpExpect must either both be empty or both be non-empty.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UnhealthyThreshold
 				"unhealthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "不健康阈值，即连续健康检查失败的次数。取值范围为2 ～ 10，默认值为3，单位为次。",
+					Description: "Unhealthy threshold, which is the number of consecutive health check failures. Value range: 2–10. Default: 3. Unit: occurrences.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Uri
 				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "健康检查的路径，需配置为后端服务器上真实对外提供服务的地址。当参数Protocol取HTTP或HTTPS，HealthCheck.Enabled取on时，本参数生效。必须以字符‘/’开头。仅包含字母、数字、中划线（-）、下划线（_）、斜线/）、点号（.）、百分号（%）、英文问号（?）、#、&、等号（＝）字符。长度限制为1 ～ 128个字符。不传入该参数或该参数不传入数值时，默认为“/”。",
+					Description: "Health check path. Must be configured as the actual address provided by the backend server. This parameter takes effect when Protocol is set to HTTP or HTTPS and HealthCheck.Enabled is on. Must start with '/'. Only letters, digits, hyphens (-), underscores (_), slashes (/), periods (.), percent signs (%), question marks (?), #, &, and equals signs (=) are allowed. Length: 1–128 characters. If not specified or no value is provided, the default is '/'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "健康检查相关信息。",
+			Description: "Health check information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Http2Enabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器是否开启前端HTTP 2.0协议。仅参数`Protocol取HTTPS时，本参数有效。取值如下：|on：开启。off（默认值）：不开启。",
+		//	  "description": "Whether the listener enables frontend HTTP 2.0 protocol. This parameter is valid only when Protocol is set to HTTPS. Values: on: enabled. off (default): disabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -461,80 +461,80 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"http_2_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器是否开启前端HTTP 2.0协议。仅参数`Protocol取HTTPS时，本参数有效。取值如下：|on：开启。off（默认值）：不开启。",
+			Description: "Whether the listener enables frontend HTTP 2.0 protocol. This parameter is valid only when Protocol is set to HTTPS. Values: on: enabled. off (default): disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeepaliveTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "客户端与CLB之间的长连接超时时间。取值范围为 0-900秒，默认为75秒。0表示禁用长连接。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+		//	  "description": "Keep-alive timeout between the client and CLB. Range: 0–900 seconds, default is 75 seconds. 0 disables keep-alive. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 		//	  "format": "int64",
 		//	  "maximum": 900,
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
 		"keepalive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "客户端与CLB之间的长连接超时时间。取值范围为 0-900秒，默认为75秒。0表示禁用长连接。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+			Description: "Keep-alive timeout between the client and CLB. Range: 0–900 seconds, default is 75 seconds. 0 disables keep-alive. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ListenerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的ID。",
+		//	  "description": "Listener ID.",
 		//	  "type": "string"
 		//	}
 		"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的ID。",
+			Description: "Listener ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ListenerName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线_）和中划线（-）。长度限制在1～128字符之间。不填则默认将“协议-端口”作为监听器名称。",
+		//	  "description": "Listener name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If left blank, 'Protocol-Port' will be used as the default listener name.",
 		//	  "maxLength": 128,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线_）和中划线（-）。长度限制在1～128字符之间。不填则默认将“协议-端口”作为监听器名称。",
+			Description: "Listener name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If left blank, 'Protocol-Port' will be used as the default listener name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB实例的ID。",
+		//	  "description": "ID of the CLB instance.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CLB实例的ID。",
+			Description: "ID of the CLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxConnections
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最大并发连接数的上限。-1（默认值）：不限制，CLB实例的最大并发连接数上限。取值范围：1～CLB实例的最大并发连接数上限。",
+		//	  "description": "Maximum concurrent connections limit. -1 (default): unlimited (up to the maximum concurrent connections supported by the CLB instance). Value range: 1 to the maximum concurrent connections limit of the CLB instance.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"max_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "最大并发连接数的上限。-1（默认值）：不限制，CLB实例的最大并发连接数上限。取值范围：1～CLB实例的最大并发连接数上限。",
+			Description: "Maximum concurrent connections limit. -1 (default): unlimited (up to the maximum concurrent connections supported by the CLB instance). Value range: 1 to the maximum concurrent connections limit of the CLB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PersistenceTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "会话保持的超时时间，单位为秒。取值范围根据参数PersistenceType取值有所不同。PersistenceType置为source_ip时，取值范围为1～3600。PersistenceType配置为insert时，取值范围为1～86400。",
+		//	  "description": "Session persistence timeout, in seconds. The value range depends on the PersistenceType parameter. When PersistenceType is set to source_ip, the range is 1–3600. When PersistenceType is set to insert, the range is 1–86400.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"persistence_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "会话保持的超时时间，单位为秒。取值范围根据参数PersistenceType取值有所不同。PersistenceType置为source_ip时，取值范围为1～3600。PersistenceType配置为insert时，取值范围为1～86400。",
+			Description: "Session persistence timeout, in seconds. The value range depends on the PersistenceType parameter. When PersistenceType is set to source_ip, the range is 1–3600. When PersistenceType is set to insert, the range is 1–86400.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PersistenceType
@@ -542,7 +542,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "off",
-		//	  "description": "会话保持的类型。取值如下：off（默认值）：不启用会话保持。source_ip：源地址IP，仅参数ProtocolTCP或UDP时，本取值有效。insert：植入Cookie，仅参数Protocol取HTTP或HTTPS且Scheduler取wrr时，本取值生效。server：重写Cookie，仅参数Protocol取HTTP或HTTPS且Scheduler取wrr时，本取值生效。。",
+		//	  "description": "Session persistence type. Values: off (default): session persistence disabled. source_ip: source IP address, valid only when Protocol is TCP or UDP. insert: insert Cookie, valid only when Protocol is HTTP or HTTPS and Scheduler is wrr. server: rewrite Cookie, valid only when Protocol is HTTP or HTTPS and Scheduler is wrr.",
 		//	  "enum": [
 		//	    "off",
 		//	    "source_ip",
@@ -552,28 +552,28 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"persistence_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "会话保持的类型。取值如下：off（默认值）：不启用会话保持。source_ip：源地址IP，仅参数ProtocolTCP或UDP时，本取值有效。insert：植入Cookie，仅参数Protocol取HTTP或HTTPS且Scheduler取wrr时，本取值生效。server：重写Cookie，仅参数Protocol取HTTP或HTTPS且Scheduler取wrr时，本取值生效。。",
+			Description: "Session persistence type. Values: off (default): session persistence disabled. source_ip: source IP address, valid only when Protocol is TCP or UDP. insert: insert Cookie, valid only when Protocol is HTTP or HTTPS and Scheduler is wrr. server: rewrite Cookie, valid only when Protocol is HTTP or HTTPS and Scheduler is wrr.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器接收请求使用的端口。取值范围为 0～65535。参数Protocol为“TCP”或“UDP”时，支持传入0，表示用全端口监听。",
+		//	  "description": "Port used by the listener to receive requests. Value range: 0–65535. When the Protocol parameter is 'TCP' or 'UDP', 0 is supported, which enables listening on all ports.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器接收请求使用的端口。取值范围为 0～65535。参数Protocol为“TCP”或“UDP”时，支持传入0，表示用全端口监听。",
+			Description: "Port used by the listener to receive requests. Value range: 0–65535. When the Protocol parameter is 'TCP' or 'UDP', 0 is supported, which enables listening on all ports.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的协议。包括：TCP、UDP、HTTP、HTTPS。",
+		//	  "description": "Listener protocol. Includes: TCP, UDP, HTTP, HTTPS.",
 		//	  "enum": [
 		//	    "TCP",
 		//	    "UDP",
@@ -583,28 +583,28 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的协议。包括：TCP、UDP、HTTP、HTTPS。",
+			Description: "Listener protocol. Includes: TCP, UDP, HTTP, HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyConnectTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB与后端服务器之间的连接建立超时时间。建议大于健康检查超时时间。取值范围为 4-120秒，默认为4。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+		//	  "description": "Connection establishment timeout between CLB and backend server. Recommended to be greater than the health check timeout. Range: 4–120 seconds, default is 4. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 		//	  "format": "int64",
 		//	  "maximum": 120,
 		//	  "minimum": 4,
 		//	  "type": "integer"
 		//	}
 		"proxy_connect_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "CLB与后端服务器之间的连接建立超时时间。建议大于健康检查超时时间。取值范围为 4-120秒，默认为4。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+			Description: "Connection establishment timeout between CLB and backend server. Recommended to be greater than the health check timeout. Range: 4–120 seconds, default is 4. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyProtocolType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否启用Proxy-Protocol协议。仅参数Protocol取TCP或UDP时，本参数有效。取值如下：off（默认值）：关闭。standard：开启。",
+		//	  "description": "Enable Proxy-Protocol. This parameter is valid only when Protocol is TCP or UDP. Values: off (default): disabled. standard: enabled.",
 		//	  "enum": [
 		//	    "off",
 		//	    "standard"
@@ -612,42 +612,42 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"proxy_protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否启用Proxy-Protocol协议。仅参数Protocol取TCP或UDP时，本参数有效。取值如下：off（默认值）：关闭。standard：开启。",
+			Description: "Enable Proxy-Protocol. This parameter is valid only when Protocol is TCP or UDP. Values: off (default): disabled. standard: enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyReadTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB从后端服务器读取响应的超时时间。此超时时间仅针对两个连续的读操作之间设置，而非整个响应的传输过程。取值范围为30-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+		//	  "description": "Timeout for CLB to read responses from backend servers. This timeout applies only between two consecutive read operations, not for the entire response transmission. Value range: 30–3600 seconds. Default: 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 		//	  "format": "int64",
 		//	  "maximum": 3600,
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
 		"proxy_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "CLB从后端服务器读取响应的超时时间。此超时时间仅针对两个连续的读操作之间设置，而非整个响应的传输过程。取值范围为30-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+			Description: "Timeout for CLB to read responses from backend servers. This timeout applies only between two consecutive read operations, not for the entire response transmission. Value range: 30–3600 seconds. Default: 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxySendTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB将请求传输到后端服务器的超时时间。此超时仅针对两个连续的写操作之间设置，而非整个请求的传输过程。取值范围为30-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+		//	  "description": "Timeout for CLB to transmit requests to backend servers. This timeout applies only between two consecutive write operations, not the entire request transmission process. Value range: 30–3600 seconds. Default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 		//	  "format": "int64",
 		//	  "maximum": 3600,
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
 		"proxy_send_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "CLB将请求传输到后端服务器的超时时间。此超时仅针对两个连续的写操作之间设置，而非整个请求的传输过程。取值范围为30-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+			Description: "Timeout for CLB to transmit requests to backend servers. This timeout applies only between two consecutive write operations, not the entire request transmission process. Value range: 30–3600 seconds. Default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RuleIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器绑定的规则ID列表。",
+		//	  "description": "List of rule IDs bound to the listener.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -657,7 +657,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"rule_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "监听器绑定的规则ID列表。",
+			Description: "List of rule IDs bound to the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Scheduler
@@ -665,7 +665,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "wrr",
-		//	  "description": "监听器使用的调度算法。wrr（默认值）：加权轮询。wlc：加权最小连接数。sh：源地址哈希。",
+		//	  "description": "Scheduling algorithm used by the listener. wrr (default): Weighted round robin. wlc: Weighted least connections. sh: Source address hash.",
 		//	  "enum": [
 		//	    "wrr",
 		//	    "wlc",
@@ -674,64 +674,64 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"scheduler": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器使用的调度算法。wrr（默认值）：加权轮询。wlc：加权最小连接数。sh：源地址哈希。",
+			Description: "Scheduling algorithm used by the listener. wrr (default): Weighted round robin. wlc: Weighted least connections. sh: Source address hash.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityPolicyId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS监听器的TLS安全策略。仅参数Protocol取HTTPS时，本参数有效。 取值如下：default_policy（默认值）：支持SSL v3、TLS v1.0、TLS v1.1、TLS v1.2。tls_cipher_policy_1_0：支持TLS v1.0、TLS v1.1、TLS v1.2。tls_cipher_policy_1_1：支持TLS v1.1、TLS v1.2。tls_cipher_policy_1_2：支持TLS v1.2。tls_cipher_policy_1_2_strict：支持TLS v1.2。",
+		//	  "description": "TLS security policy for HTTPS listeners. This parameter is valid only when Protocol is set to HTTPS. Values: default_policy (default): supports SSL v3, TLS v1.0, TLS v1.1, TLS v1.2. tls_cipher_policy_1_0: supports TLS v1.0, TLS v1.1, TLS v1.2. tls_cipher_policy_1_1: supports TLS v1.1, TLS v1.2. tls_cipher_policy_1_2: supports TLS v1.2. tls_cipher_policy_1_2_strict: supports TLS v1.2.",
 		//	  "type": "string"
 		//	}
 		"security_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS监听器的TLS安全策略。仅参数Protocol取HTTPS时，本参数有效。 取值如下：default_policy（默认值）：支持SSL v3、TLS v1.0、TLS v1.1、TLS v1.2。tls_cipher_policy_1_0：支持TLS v1.0、TLS v1.1、TLS v1.2。tls_cipher_policy_1_1：支持TLS v1.1、TLS v1.2。tls_cipher_policy_1_2：支持TLS v1.2。tls_cipher_policy_1_2_strict：支持TLS v1.2。",
+			Description: "TLS security policy for HTTPS listeners. This parameter is valid only when Protocol is set to HTTPS. Values: default_policy (default): supports SSL v3, TLS v1.0, TLS v1.1, TLS v1.2. tls_cipher_policy_1_0: supports TLS v1.0, TLS v1.1, TLS v1.2. tls_cipher_policy_1_1: supports TLS v1.1, TLS v1.2. tls_cipher_policy_1_2: supports TLS v1.2. tls_cipher_policy_1_2_strict: supports TLS v1.2.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SendTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CLB向客户端发送响应的超时时间。此超时仅针对两个连续的写操作之间设置，而非整响应的传输过程。取值范围为 1-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+		//	  "description": "Timeout for CLB to send responses to the client. This timeout applies only between two consecutive write operations, not the entire response transmission. Range: 1–3600 seconds, default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 		//	  "format": "int64",
 		//	  "maximum": 3600,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"send_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "CLB向客户端发送响应的超时时间。此超时仅针对两个连续的写操作之间设置，而非整响应的传输过程。取值范围为 1-3600秒，默认为60秒。仅参数Protocol取HTTP或HTTPS时，本参数有效。",
+			Description: "Timeout for CLB to send responses to the client. This timeout applies only between two consecutive write operations, not the entire response transmission. Range: 1–3600 seconds, default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器关联的后端服务器组 ID。",
+		//	  "description": "ID of the backend server group associated with the listener.",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器关联的后端服务器组 ID。",
+			Description: "ID of the backend server group associated with the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StartPort
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全端口监听的起始端口，取值范围为1-65535。参数Port为“0”时，该参数必须传入。",
+		//	  "description": "Start port for all-port listening. Range: 1–65535. When Port is '0', this parameter is required.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"start_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "全端口监听的起始端口，取值范围为1-65535。参数Port为“0”时，该参数必须传入。",
+			Description: "Start port for all-port listening. Range: 1–65535. When Port is '0', this parameter is required.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的状态。Creating：创建中。Active：运行中。Deleting: 删除中。Disabled: 已停用。",
+		//	  "description": "Listener status. Creating: being created. Active: running. Deleting: being deleted. Disabled: disabled.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Active",
@@ -741,25 +741,25 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的状态。Creating：创建中。Active：运行中。Deleting: 删除中。Disabled: 已停用。",
+			Description: "Listener status. Creating: being created. Active: running. Deleting: being deleted. Disabled: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器所属标签。",
+		//	  "description": "Tag associated with the listener.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "Tag key for user tags. Length range: 1–128 characters. Supports input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system automatically removes it.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "Tag value for user tags. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -779,35 +779,35 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+						Description: "Tag key for user tags. Length range: 1–128 characters. Supports input of characters from all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system automatically removes it.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+						Description: "Tag value for user tags. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "监听器所属标签。",
+			Description: "Tag associated with the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器最近一次的操作时间。",
+		//	  "description": "Last operation time of the listener.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器最近一次的操作时间。",
+			Description: "Last operation time of the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WafProtectionEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否将经过七层监听器的流量送至Web应用防火墙进行检测和过滤。on：是。off：否。",
+		//	  "description": "Send traffic passing through the Layer 7 listener to the Web Application Firewall for inspection and filtering. on: yes. off: no.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -815,7 +815,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"waf_protection_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否将经过七层监听器的流量送至Web应用防火墙进行检测和过滤。on：是。off：否。",
+			Description: "Send traffic passing through the Layer 7 listener to the Web Application Firewall for inspection and filtering. on: yes. off: no.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

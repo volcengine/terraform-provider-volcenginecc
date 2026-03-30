@@ -36,11 +36,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "火山账号ID。",
+		//	  "description": "Volcano account ID",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "火山账号ID。",
+			Description: "Volcano account ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -50,13 +50,13 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账户名称。5-20个字符。",
+		//	  "description": "Account name. 5–20 characters",
 		//	  "maxLength": 20,
 		//	  "minLength": 5,
 		//	  "type": "string"
 		//	}
 		"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账户名称。5-20个字符。",
+			Description: "Account name. 5–20 characters",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(5, 20),
@@ -66,7 +66,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "允许控制台访问，1: 允许，2: 不允许。",
+		//	  "description": "Allow console access: 1. Allowed, 2. Not allowed",
 		//	  "enum": [
 		//	    1,
 		//	    2
@@ -74,7 +74,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"allow_console": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "允许控制台访问，1: 允许，2: 不允许。",
+			Description: "Allow console access: 1. Allowed, 2. Not allowed",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -91,7 +91,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "允许退出，1: 允许，2: 不允许。",
+		//	  "description": "Allow exit: 1. Allowed, 2. Not allowed",
 		//	  "enum": [
 		//	    1,
 		//	    2
@@ -99,7 +99,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"allow_exit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "允许退出，1: 允许，2: 不允许。",
+			Description: "Allow exit: 1. Allowed, 2. Not allowed",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -116,11 +116,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -130,11 +130,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除标记。",
+		//	  "description": "Deletion flag",
 		//	  "type": "string"
 		//	}
 		"delete_uk": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除标记。",
+			Description: "Deletion flag",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -145,11 +145,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "删除时间。",
+		//	  "description": "Deletion time",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除时间。",
+			Description: "Deletion time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -159,11 +159,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "描述。",
+		//	  "description": "Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "描述。",
+			Description: "Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -174,11 +174,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IAM角色名称。",
+		//	  "description": "IAM role name",
 		//	  "type": "string"
 		//	}
 		"iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IAM角色名称。",
+			Description: "IAM role name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -188,7 +188,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否是管理员，0.非管理员，1.管理员。",
+		//	  "description": "Administrator status: 0. Non-administrator, 1. Administrator",
 		//	  "enum": [
 		//	    0,
 		//	    1
@@ -196,7 +196,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"is_owner": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "是否是管理员，0.非管理员，1.管理员。",
+			Description: "Administrator status: 0. Non-administrator, 1. Administrator",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -206,7 +206,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "加入类型，1: 创建，2: 邀请。",
+		//	  "description": "Join type: 1. Create, 2. Invite",
 		//	  "enum": [
 		//	    1,
 		//	    2
@@ -214,7 +214,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "integer"
 		//	}
 		"join_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "加入类型，1: 创建，2: 邀请。",
+			Description: "Join type: 1. Create, 2. Invite",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -224,11 +224,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "主体名称。",
+		//	  "description": "Subject name",
 		//	  "type": "string"
 		//	}
 		"main_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "主体名称。",
+			Description: "Subject name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -238,11 +238,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织成员账号ID。",
+		//	  "description": "Organization member account ID",
 		//	  "type": "string"
 		//	}
 		"member_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织成员账号ID。",
+			Description: "Organization member account ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -252,11 +252,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织ID。",
+		//	  "description": "Organization ID",
 		//	  "type": "string"
 		//	}
 		"org_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织ID。",
+			Description: "Organization ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -266,14 +266,14 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织类型，1.企业组织。",
+		//	  "description": "Organization type: 1. Enterprise organization",
 		//	  "enum": [
 		//	    1
 		//	  ],
 		//	  "type": "integer"
 		//	}
 		"org_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "组织类型，1.企业组织。",
+			Description: "Organization type: 1. Enterprise organization",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -283,11 +283,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织单元ID。传入 0 加入到 root 单元。",
+		//	  "description": "Organizational unit ID. Enter 0 to join the root unit",
 		//	  "type": "string"
 		//	}
 		"org_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织单元ID。传入 0 加入到 root 单元。",
+			Description: "Organizational unit ID. Enter 0 to join the root unit",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -298,11 +298,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "组织单元名称。",
+		//	  "description": "Organizational unit name",
 		//	  "type": "string"
 		//	}
 		"org_unit_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "组织单元名称。",
+			Description: "Organizational unit name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -312,11 +312,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "认证主体ID。",
+		//	  "description": "Authentication subject ID",
 		//	  "type": "string"
 		//	}
 		"org_verification_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "认证主体ID。",
+			Description: "Authentication subject ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -326,11 +326,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "管理员ID。",
+		//	  "description": "Administrator ID",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "管理员ID。",
+			Description: "Administrator ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -340,13 +340,13 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账户密码。",
+		//	  "description": "Account password",
 		//	  "maxLength": 32,
 		//	  "minLength": 8,
 		//	  "type": "string"
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账户密码。",
+			Description: "Account password",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -361,14 +361,14 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全联系信息。",
+		//	  "description": "Security contact information",
 		//	  "properties": {
 		//	    "Email": {
-		//	      "description": "安全邮箱。",
+		//	      "description": "Security email",
 		//	      "type": "string"
 		//	    },
 		//	    "EmailVerified": {
-		//	      "description": "安全邮箱是否验证，1: 未验证，2: 已验证。",
+		//	      "description": "Security email verification status: 1. Not verified, 2. Verified",
 		//	      "enum": [
 		//	        1,
 		//	        2
@@ -376,19 +376,19 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "NewEmail": {
-		//	      "description": "变更中的新邮箱。",
+		//	      "description": "New email being changed",
 		//	      "type": "string"
 		//	    },
 		//	    "NewPhone": {
-		//	      "description": "变更中的新手机号。",
+		//	      "description": "New mobile number being changed",
 		//	      "type": "string"
 		//	    },
 		//	    "Phone": {
-		//	      "description": "安全手机号。",
+		//	      "description": "Security mobile number",
 		//	      "type": "string"
 		//	    },
 		//	    "PhoneVerified": {
-		//	      "description": "安全手机号是否验证，1: 未验证，2: 已验证。",
+		//	      "description": "Security mobile number verification status: 1. Not verified, 2. Verified",
 		//	      "enum": [
 		//	        1,
 		//	        2
@@ -402,7 +402,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Email
 				"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "安全邮箱。",
+					Description: "Security email",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -410,7 +410,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: EmailVerified
 				"email_verified": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "安全邮箱是否验证，1: 未验证，2: 已验证。",
+					Description: "Security email verification status: 1. Not verified, 2. Verified",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -418,7 +418,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NewEmail
 				"new_email": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "变更中的新邮箱。",
+					Description: "New email being changed",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -427,7 +427,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NewPhone
 				"new_phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "变更中的新手机号。",
+					Description: "New mobile number being changed",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -436,7 +436,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Phone
 				"phone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "安全手机号。",
+					Description: "Security mobile number",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -444,14 +444,14 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PhoneVerified
 				"phone_verified": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "安全手机号是否验证，1: 未验证，2: 已验证。",
+					Description: "Security mobile number verification status: 1. Not verified, 2. Verified",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "安全联系信息。",
+			Description: "Security contact information",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -462,27 +462,27 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "显示名称。",
+		//	  "description": "Display name",
 		//	  "type": "string"
 		//	}
 		"show_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "显示名称。",
+			Description: "Display name",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -501,7 +501,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -513,7 +513,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -525,7 +525,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -539,11 +539,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -553,11 +553,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "被继承认证主体的账号ID，给非管理员认证主体创建账号时需要，账号需已加入企业组织。默认不传，则继承企业组织管理员的认证主体。",
+		//	  "description": "Inherited authentication subject account ID, required when creating an account for a non-administrator authentication subject. The account must have joined the enterprise organization. If not specified, the authentication subject of the enterprise organization administrator is inherited by default",
 		//	  "type": "string"
 		//	}
 		"verification_relation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "被继承认证主体的账号ID，给非管理员认证主体创建账号时需要，账号需已加入企业组织。默认不传，则继承企业组织管理员的认证主体。",
+			Description: "Inherited authentication subject account ID, required when creating an account for a non-administrator authentication subject. The account must have joined the enterprise organization. If not specified, the authentication subject of the enterprise organization administrator is inherited by default",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -577,7 +577,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "查看和管理您组织内的所有账号。每个账号可以直接放在根节点中，也可以移动到您创建的任意组织节点层级结构中，每个账号只能归属于一个节点。您可以分层树状结构管理您的组织结构以及成员账号。",
+		Description: "View and manage all accounts in your organization. Each account can be placed directly in the root node or moved to any organizational node hierarchy you create. Each account can belong to only one node. You can manage your organizational structure and member accounts in a layered tree structure",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_clb_acl Resource - terraform-provider-volcenginecc"
 subcategory: "CLB"
 description: |-
-  CLB提供监听级别的访问控制，如果您希望仅允许某些IP、或仅拒绝某些IP通过监听端口访问CLB实例，可以对该监听器设置访问控制策略。
+  CLB provides listener-level access control. If you want to allow only certain IPs or deny only certain IPs from accessing the CLB instance through the listener port, you can set an access control policy for the listener.
 ---
 
 # volcenginecc_clb_acl (Resource)
 
-CLB提供监听级别的访问控制，如果您希望仅允许某些IP、或仅拒绝某些IP通过监听端口访问CLB实例，可以对该监听器设置访问控制策略。
+CLB provides listener-level access control. If you want to allow only certain IPs or deny only certain IPs from accessing the CLB instance through the listener port, you can set an access control policy for the listener.
 
 ## Example Usage
 
@@ -38,33 +38,33 @@ resource "volcenginecc_clb_acl" "AclDemo" {
 
 ### Optional
 
-- `acl_entries` (Attributes Set) 访问控制策略组中IP条目的详细信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--acl_entries))
-- `acl_name` (String) 访问控制策略组的名称。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填默认为访问控制策略组ID。
-- `description` (String) 访问控制策略组的描述。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255字符。不填则默认为空字符串。
-- `project_name` (String) 访问控制策略组所属项目的名称。不填默认为default。
-- `tags` (Attributes Set) 访问控制策略组标签的详细信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `acl_entries` (Attributes Set) Detailed information about IP entries in the access control policy group.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--acl_entries))
+- `acl_name` (String) Name of the access control policy group. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, defaults to the access control policy group ID.
+- `description` (String) Description of the access control policy group. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.
+- `project_name` (String) Name of the project to which the access control policy group belongs. If not specified, defaults to 'default'.
+- `tags` (Attributes Set) Detailed information about access control policy group tags
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `acl_entry_count` (Number) 访问控制策略组包含的IP条目数量。
-- `acl_id` (String) 访问控制策略组的ID。
-- `create_time` (String) 访问控制策略组的创建时间。
+- `acl_entry_count` (Number) Number of IP entries contained in the access control policy group.
+- `acl_id` (String) Access control policy group ID
+- `create_time` (String) Creation time of the access control policy group
 - `id` (String) Uniquely identifies the resource.
-- `listeners` (Attributes Set) 访问控制策略组关联的监听器的详细信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--listeners))
-- `service_managed` (Boolean) 是否为托管资源。true：是。false：否。
-- `status` (String) 访问控制策略组的状态。Creating：创建中。Active：正常可用。Configuring：配置中。Deleting：删除中。
-- `update_time` (String) 访问控制策略组的最近操作时间。
+- `listeners` (Attributes Set) Detailed information about listeners associated with the access control policy group
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--listeners))
+- `service_managed` (Boolean) Is this a managed resource. true: yes. false: no.
+- `status` (String) Status of the access control policy group. Creating: creating. Active: available. Configuring: configuring. Deleting: deleting.
+- `update_time` (String) Last operation time of the access control policy group
 
 <a id="nestedatt--acl_entries"></a>
 ### Nested Schema for `acl_entries`
 
 Optional:
 
-- `description` (String) IP条目的描述，默认值为空字符串。必须以字母、数字或中文开头，可包含字母、数字、中文及以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0 ～ 255个字符。
-- `entry` (String) IP条目的地址段，只支持CIDR地址。支持同时传入IPv4和IPv6条目。
+- `description` (String) Description of the IP entry. Default value is an empty string. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters.
+- `entry` (String) Address range of the IP entry. Only CIDR addresses are supported. Both IPv4 and IPv6 entries can be provided.
 
 
 <a id="nestedatt--tags"></a>
@@ -72,8 +72,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。
-- `value` (String) 用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。
+- `key` (String) User tag key. Length must be 1–128 characters. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). If the tag key starts or ends with a space, the system automatically removes it.
+- `value` (String) User tag value. Supports input of characters in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system automatically removes it.
 
 
 <a id="nestedatt--listeners"></a>
@@ -81,11 +81,11 @@ Optional:
 
 Read-Only:
 
-- `acl_type` (String) 监听器对本访问控制策略组的控制方式。white：白名单。监听器监听CLB的流量时，CLB仅转发其白名单关联访问控制策略组中IP地址的请求。black：黑名单。监听器监听CLB的流量时，对于黑名单关联访问控制策略组中IP地址的请求，CLB拒绝转发。
-- `listener_id` (String) 监听器的ID。
-- `listener_name` (String) 监听器的名称。
-- `port` (Number) 监听器的端口。
-- `protocol` (String) 监听器的协议。包括 TCP、UDP、HTTP、HTTPS。
+- `acl_type` (String) Listener control mode for this access control policy group. white: allowlist. When the listener monitors CLB traffic, CLB only forwards requests from IP addresses associated with the allowlist access control policy group. black: denylist. When the listener monitors CLB traffic, CLB rejects requests from IP addresses associated with the denylist access control policy group.
+- `listener_id` (String) Listener ID
+- `listener_name` (String) Listener name
+- `port` (Number) Listener port
+- `protocol` (String) Listener protocol. Includes TCP, UDP, HTTP, HTTPS.
 
 ## Import
 

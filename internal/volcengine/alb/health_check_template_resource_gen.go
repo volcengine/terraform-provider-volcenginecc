@@ -32,11 +32,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查模版的创建时间。",
+		//	  "description": "Creation time of the health check template.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查模版的创建时间。",
+			Description: "Creation time of the health check template.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -46,11 +46,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+		//	  "description": "Description of the health check. Cannot start with http:// or https://. Must begin with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be 1–255 characters. If not specified, defaults to an empty string.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+			Description: "Description of the health check. Cannot start with http:// or https://. Must begin with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be 1–255 characters. If not specified, defaults to an empty string.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -61,11 +61,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查的域名。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：需至少包含一个‘.’，且不允许以‘.’开头结尾。单个字符串由字母、数字、‘-’、‘.’字符组成，‘-’不得出现在字符串的头部或尾部。长度限制为1 ～ 128个字符。不填则此参数为空，负载均衡默认使用各后端服务器的私网IP地址进行健康检查。",
+		//	  "description": "Domain name for the health check. This parameter is only effective when HealthCheckProtocol is set to HTTP. Requirements: Must contain at least one '.', and cannot start or end with '.'. The string can contain letters, numbers, '-', and '.' characters. '-' cannot appear at the beginning or end of the string. Length must be between 1 and 128 characters. If not specified, this parameter is empty and the load balancer uses the private IP address of each backend server for health checks.",
 		//	  "type": "string"
 		//	}
 		"health_check_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查的域名。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：需至少包含一个‘.’，且不允许以‘.’开头结尾。单个字符串由字母、数字、‘-’、‘.’字符组成，‘-’不得出现在字符串的头部或尾部。长度限制为1 ～ 128个字符。不填则此参数为空，负载均衡默认使用各后端服务器的私网IP地址进行健康检查。",
+			Description: "Domain name for the health check. This parameter is only effective when HealthCheckProtocol is set to HTTP. Requirements: Must contain at least one '.', and cannot start or end with '.'. The string can contain letters, numbers, '-', and '.' characters. '-' cannot appear at the beginning or end of the string. Length must be between 1 and 128 characters. If not specified, this parameter is empty and the load balancer uses the private IP address of each backend server for health checks.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -76,11 +76,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查正常的HTTP状态码。多个状态码用以半角逗号分隔，只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：http_2xx（默认）。http_3xx（默认） 。http_4xx 。http_5xx 。",
+		//	  "description": "HTTP status codes indicating a successful health check. Separate multiple codes with commas. This parameter is only effective when HealthCheckProtocol is set to HTTP. Options: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
 		//	  "type": "string"
 		//	}
 		"health_check_http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查正常的HTTP状态码。多个状态码用以半角逗号分隔，只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：http_2xx（默认）。http_3xx（默认） 。http_4xx 。http_5xx 。",
+			Description: "HTTP status codes indicating a successful health check. Separate multiple codes with commas. This parameter is only effective when HealthCheckProtocol is set to HTTP. Options: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -91,11 +91,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查HTTP协议版本。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：HTTP1.0（默认值）。HTTP1.1。",
+		//	  "description": "HTTP protocol version for health checks. This parameter is effective only when HealthCheckProtocol is set to HTTP. Options: HTTP1.0 (default), HTTP1.1.",
 		//	  "type": "string"
 		//	}
 		"health_check_http_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查HTTP协议版本。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：HTTP1.0（默认值）。HTTP1.1。",
+			Description: "HTTP protocol version for health checks. This parameter is effective only when HealthCheckProtocol is set to HTTP. Options: HTTP1.0 (default), HTTP1.1.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -106,12 +106,12 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "执行健康检查的时间间隔，默认为2，取值1-300s 。",
+		//	  "description": "Interval for performing health checks. Default is 2 seconds. Range: 1–300 seconds.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"health_check_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "执行健康检查的时间间隔，默认为2，取值1-300s 。",
+			Description: "Interval for performing health checks. Default is 2 seconds. Range: 1–300 seconds.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -122,11 +122,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查的方法。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：GETHEAD（默认方法）",
+		//	  "description": "Health check method. This parameter is effective only when HealthCheckProtocol is set to HTTP. Options: GETHEAD (default method)",
 		//	  "type": "string"
 		//	}
 		"health_check_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查的方法。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。取值如下：GETHEAD（默认方法）",
+			Description: "Health check method. This parameter is effective only when HealthCheckProtocol is set to HTTP. Options: GETHEAD (default method)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -137,12 +137,12 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查端口。取值如下：0：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。",
+		//	  "description": "Port for the health check. Options: 0: Use the backend server port for health checks. 1–65535: Use the specified port for health checks.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"health_check_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "健康检查端口。取值如下：0：使用后端服务器端口进行健康检查。1-65535：使用您指定的端口进行健康检查。",
+			Description: "Port for the health check. Options: 0: Use the backend server port for health checks. 1–65535: Use the specified port for health checks.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -153,11 +153,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查的协议。HTTPTCP。",
+		//	  "description": "Protocol for the health check. HTTP or TCP.",
 		//	  "type": "string"
 		//	}
 		"health_check_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查的协议。HTTPTCP。",
+			Description: "Protocol for the health check. HTTP or TCP.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -168,11 +168,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查模板 ID。",
+		//	  "description": "Health check template ID.",
 		//	  "type": "string"
 		//	}
 		"health_check_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查模板 ID。",
+			Description: "Health check template ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -182,23 +182,23 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查模板的名称。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点（.）、下划线（_）和短横线（-）。长度限制在1～128字符之间。",
+		//	  "description": "Name of the health check template. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can contain numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters.",
 		//	  "type": "string"
 		//	}
 		"health_check_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查模板的名称。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点（.）、下划线（_）和短横线（-）。长度限制在1～128字符之间。",
+			Description: "Name of the health check template. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can contain numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查的响应超时时间，默认为2，取值1-60s 。",
+		//	  "description": "Response timeout for the health check. Default is 2 seconds. Range: 1–60 seconds.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"health_check_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "健康检查的响应超时时间，默认为2，取值1-60s 。",
+			Description: "Response timeout for the health check. Default is 2 seconds. Range: 1–60 seconds.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -209,11 +209,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查的路径。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘\u0026’、‘＝’字符。长度限制为1 ～ 128个字符。不填默认为“/”。",
+		//	  "description": "Path for the health check. This parameter is only effective when HealthCheckProtocol is set to HTTP. Requirements: Must start with '/'. Can only contain letters, numbers, '-', '_', '/', '.', '%', '?', '#', '\u0026', '=' characters. Length must be between 1 and 128 characters. If not specified, defaults to '/'.",
 		//	  "type": "string"
 		//	}
 		"health_check_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查的路径。只有 HealthCheckProtocol 设置为 HTTP 时，该参数才生效。要求如下：必须以字符‘/’开头。仅包含字母、数字、‘-’、‘_’、‘/’、‘.’、‘%’、‘?’、‘#’、‘&’、‘＝’字符。长度限制为1 ～ 128个字符。不填默认为“/”。",
+			Description: "Path for the health check. This parameter is only effective when HealthCheckProtocol is set to HTTP. Requirements: Must start with '/'. Can only contain letters, numbers, '-', '_', '/', '.', '%', '?', '#', '&', '=' characters. Length must be between 1 and 128 characters. If not specified, defaults to '/'.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -224,12 +224,12 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查的健康阈值，默认为3，取值2-10次。",
+		//	  "description": "Health threshold for the health check. Default is 3. Range: 2–10 times.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"healthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "健康检查的健康阈值，默认为3，取值2-10次。",
+			Description: "Health threshold for the health check. Default is 3. Range: 2–10 times.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -240,11 +240,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查模板所属项目名称。",
+		//	  "description": "Project name to which the health check template belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查模板所属项目名称。",
+			Description: "Project name to which the health check template belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -256,17 +256,17 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查模板关联的标签列表。",
+		//	  "description": "List of tags associated with the health check template.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "健康检查模板关联的标签。",
+		//	    "description": "Tags associated with the health check template.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。具体规则如下：长度限制为1～128个字符。大小写敏感。不能以sys:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。",
+		//	        "description": "Tag key for user tags. Rules: Length must be 1–128 characters. Case-sensitive. Cannot start with any case combination of sys:. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。如果传入该参数，则必须先传入Tags.N.Key。具体规则如下：长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。",
+		//	        "description": "Tag value for the user tag. If you specify this parameter, you must first specify Tags.N.Key. Rules: Length must be between 0 and 256 characters. Case-sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -283,7 +283,7 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。具体规则如下：长度限制为1～128个字符。大小写敏感。不能以sys:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。",
+						Description: "Tag key for user tags. Rules: Length must be 1–128 characters. Case-sensitive. Cannot start with any case combination of sys:. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -295,7 +295,7 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。如果传入该参数，则必须先传入Tags.N.Key。具体规则如下：长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。",
+						Description: "Tag value for the user tag. If you specify this parameter, you must first specify Tags.N.Key. Rules: Length must be between 0 and 256 characters. Case-sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -304,7 +304,7 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "健康检查模板关联的标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "List of tags associated with the health check template.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -315,12 +315,12 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查的不健康阈值，默认为3，取值2-10次。",
+		//	  "description": "Unhealthy threshold for health checks. Default is 3; range is 2–10 times.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"unhealthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "健康检查的不健康阈值，默认为3，取值2-10次。",
+			Description: "Unhealthy threshold for health checks. Default is 3; range is 2–10 times.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -331,11 +331,11 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "健康检查模版最近一次的操作时间。",
+		//	  "description": "Last operation time of the health check template.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "健康检查模版最近一次的操作时间。",
+			Description: "Last operation time of the health check template.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -353,7 +353,7 @@ func healthCheckTemplateResource(ctx context.Context) (resource.Resource, error)
 	}
 
 	schema := schema.Schema{
-		Description: "健康检查是确保应用程序是否可用的关键功能。ALB 通过定期对后端服务器进行健康检查，来验证这些服务器是否可以接受新的请求。当一个后端服务器不能正常响应 ALB 的健康检查请求时，来自客户端的流量不会被路由到该服务器。ALB 会将流量转发至其他状态为正常的服务器上。从而保证了服务的连续性和可靠性。ALB 健康检查是基于服务器组进行的。服务器组启用健康检查后，ALB 定期检查服务器组内的后端服务器状态。",
+		Description: "Health checks are essential for ensuring application availability. ALB regularly performs health checks on backend servers to verify whether they can accept new requests. If a backend server fails to respond properly to ALB's health check requests, client traffic will not be routed to that server. ALB forwards traffic to other servers with a healthy status, ensuring service continuity and reliability. ALB health checks are performed based on server groups. Once health checks are enabled for a server group, ALB periodically checks the status of backend servers within the group.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -18,12 +18,12 @@
       "properties": {
         "PrivateIp": {
           "$ref": "#/definitions/PrivateIp",
-          "description": "集群 API Server 私网的 IPv4 地址。",
+          "description": "Cluster API Server private IPv4 address.",
           "type": "object"
         },
         "PublicIp": {
           "$ref": "#/definitions/PublicIp",
-          "description": "集群 API Server 公网的 IPv4 地址。",
+          "description": "Cluster API Server public IPv4 address",
           "type": "object"
         }
       },
@@ -33,7 +33,7 @@
       "properties": {
         "PublicAccessNetworkConfig": {
           "$ref": "#/definitions/PublicAccessNetworkConfig",
-          "description": "公网访问网络配置。ApiServerPublicAccessEnable=true时才返回的参数。",
+          "description": "Public access network configuration. This parameter is returned only when ApiServerPublicAccessEnable=true",
           "type": "object"
         }
       },
@@ -43,28 +43,28 @@
       "properties": {
         "ApiServerEndpoints": {
           "$ref": "#/definitions/ApiServerEndpoints",
-          "description": "集群 API Server 访问的 IPv4 地址信息。",
+          "description": "Cluster API Server access IPv4 address information",
           "type": "object"
         },
         "ApiServerPublicAccessConfig": {
           "$ref": "#/definitions/ApiServerPublicAccessConfig",
-          "description": "集群 API Server 公网访问配置信息。ApiServerPublicAccessEnable=true时才返回的参数。",
+          "description": "Cluster API Server public access configuration. This parameter is returned only when ApiServerPublicAccessEnable=true",
           "type": "object"
         },
         "ApiServerPublicAccessEnabled": {
-          "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+          "description": "Node public access configuration. Parameter value description: false: Disabled. true: Enabled",
           "type": "boolean"
         },
         "IpFamily": {
-          "description": "集群网络协议栈，参数值说明：Ipv4：Ipv4 单栈。Ipv6：【邀测·申请试用】Ipv6 单栈。DualStack：【邀测·申请试用】Ipv4 和 Ipv6 双栈。",
+          "description": "Cluster network protocol stack. Parameter value description: Ipv4: Ipv4 single stack. Ipv6: [Invitation test · Trial application] Ipv6 single stack. DualStack: [Invitation test · Trial application] Ipv4 and Ipv6 dual stack",
           "type": "string"
         },
         "ResourcePublicAccessDefaultEnabled": {
-          "description": "节点公网访问配置，参数值说明：false：未开启。true：已开启。",
+          "description": "Node public access configuration. Parameter value description: false: Disabled. true: Enabled",
           "type": "boolean"
         },
         "SecurityGroupIds": {
-          "description": "集群控制面及节点使用的的安全组。",
+          "description": "Security group used by the cluster control plane and nodes.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -73,7 +73,7 @@
           "uniqueItems": true
         },
         "SubnetIds": {
-          "description": "集群控制面在私有网络内通信的子网 ID。",
+          "description": "Subnet ID for cluster control plane communication within the private network.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -82,7 +82,7 @@
           "uniqueItems": true
         },
         "VpcId": {
-          "description": "集群控制面及部分节点的网络所在的私有网络（VPC）ID。",
+          "description": "Private network (VPC) ID where the cluster control plane and some nodes are located.",
           "type": "string"
         }
       },
@@ -92,14 +92,14 @@
       "type": "object"
     },
     "ComponentConfig": {
-      "description": "单个监控组件的配置，用于控制组件是否启用。",
+      "description": "Configuration for a single monitoring component, used to control whether the component is enabled.",
       "properties": {
         "Enabled": {
-          "description": "是否启用该监控组件，true 表示启用，false 表示禁用。",
+          "description": "Whether to enable this monitoring component. true means enabled; false means disabled.",
           "type": "boolean"
         },
         "Name": {
-          "description": "监控组件的名称，例如 'prometheus'、'grafana' 等。",
+          "description": "Name of the monitoring component, such as 'prometheus', 'grafana', etc.",
           "type": "string"
         }
       },
@@ -108,7 +108,7 @@
     "Condition": {
       "properties": {
         "Type": {
-          "description": "条件类型",
+          "description": "Condition type",
           "type": "string"
         }
       },
@@ -117,7 +117,7 @@
     "FlannelConfig": {
       "properties": {
         "MaxPodsPerNode": {
-          "description": "Flannel 模型容器网络的单节点 Pod 实例数量上限，取值：64（默认值）、16、32、128、256。",
+          "description": "Maximum number of Pod instances per node for the Flannel container network model. Values: 64 (default), 16, 32, 128, 256.",
           "enum": [
             16,
             32,
@@ -128,7 +128,7 @@
           "type": "integer"
         },
         "PodCidrs": {
-          "description": "Flannel 容器网络的 Pod CIDR。",
+          "description": "Pod CIDR for Flannel container network.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -137,7 +137,7 @@
           "uniqueItems": true
         },
         "SubnetIds": {
-          "description": "Flannel 容器网络模型对应的 Pod 子网 ID 列表。",
+          "description": "List of Pod subnet IDs for the Flannel container network model.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -149,30 +149,30 @@
       "type": "object"
     },
     "IrsaConfig": {
-      "description": "IRSA（IAM Role for Service Account）能力相关参数配置。",
+      "description": "IRSA (IAM Role for Service Account) capability parameter configuration",
       "properties": {
         "Audience": {
-          "description": "接受令牌的标识符。",
+          "description": "Identifier for accepting tokens",
           "type": "string"
         },
         "Enabled": {
-          "description": "是否开启 IRSA 功能，参数值说明：true：开启,false：不开启",
+          "description": "Whether to enable IRSA feature. Parameter values: true: enabled; false: not enabled.",
           "type": "boolean"
         },
         "Issuer": {
-          "description": "OIDC（OpenID Connect）提供商 URL 地址，OIDC 提供商的唯一标识。",
+          "description": "OIDC (OpenID Connect) provider URL, the unique identifier for the OIDC provider.",
           "type": "string"
         },
         "JwksUrl": {
-          "description": "JWKS（JSON Web Key Set）的 URL。文件内的公钥被用来验证从 OIDC 提供者返回的任何 JWT（JSON Web Tokens）。",
+          "description": "JWKS (JSON Web Key Set) URL. The public keys in the file are used to verify any JWT (JSON Web Tokens) returned from the OIDC provider.",
           "type": "string"
         },
         "OidcTrn": {
-          "description": "OIDC 提供商 TRN。",
+          "description": "OIDC provider TRN.",
           "type": "string"
         },
         "OpenIdConfigUrl": {
-          "description": "OIDC 提供商的 JSON 格式配置文档，包含了有关 OIDC 提供商的信息。",
+          "description": "OIDC provider configuration document in JSON format, containing information about the OIDC provider.",
           "type": "string"
         }
       },
@@ -181,22 +181,22 @@
     "LogSetup": {
       "properties": {
         "Enabled": {
-          "description": "是否开启该日志选项，参数值说明：true：已开启。false：未开启。",
+          "description": "Whether to enable this log option. Parameter values: true: enabled; false: not enabled.",
           "type": "boolean"
         },
         "LogTopicId": {
-          "description": "采集目标的TLS日志主题ID。 如果为空，表示对应日志的主题未被创建。",
+          "description": "TLS log topic ID for the collection target. If empty, the corresponding log topic has not been created.",
           "type": "string"
         },
         "LogTtl": {
           "default": 30,
-          "description": "日志在日志服务中的保存时间，单位为天。 3650 天表示永久存储。",
+          "description": "Retention period of logs in log service, in days. 3650 days means permanent storage.",
           "maximum": 3650,
           "minimum": 1,
           "type": "integer"
         },
         "LogType": {
-          "description": "当前开启的日志类型，参数值说明：Audit：集群审计日志。KubeApiServer：kube-apiserver 组件日志。KubeScheduler：kube-scheduler 组件日志。KubeControllerManager：kube-controller-manager 组件日志。",
+          "description": "Currently enabled log types. Parameter values: Audit: cluster audit log; KubeApiServer: kube-apiserver component log; KubeScheduler: kube-scheduler component log; KubeControllerManager: kube-controller-manager component log.",
           "type": "string"
         }
       },
@@ -205,11 +205,11 @@
     "LoggingConfig": {
       "properties": {
         "LogProjectId": {
-          "description": "集群的日志项目（Log Project）ID。 如果为空，表示集群的日志项目未被创建。",
+          "description": "Cluster log project (Log Project) ID. If empty, the cluster log project has not been created.",
           "type": "string"
         },
         "LogSetups": {
-          "description": "集群的日志选项信息。",
+          "description": "Cluster log option information.",
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/LogSetup"
@@ -221,10 +221,10 @@
       "type": "object"
     },
     "MonitoringConfig": {
-      "description": "集群监控配置，用于定义监控组件和工作区信息。",
+      "description": "Cluster monitoring configuration, used to define monitoring components and workspace information.",
       "properties": {
         "ComponentConfigs": {
-          "description": "监控组件的配置列表。",
+          "description": "List of monitoring component configurations.",
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/ComponentConfig"
@@ -233,11 +233,11 @@
           "uniqueItems": true
         },
         "EnableMetricsExternalCollection": {
-          "description": "是否开启外部 Promtheus 采集集群控制面组件指标，参数值说明：true：开启。false：不开启。",
+          "description": "Whether to enable external Prometheus to collect control plane component metrics for the cluster. Parameter values: true: enabled. false: not enabled.",
           "type": "boolean"
         },
         "WorkspaceId": {
-          "description": "监控数据所属的工作区 ID。",
+          "description": "Workspace ID to which the monitoring data belongs.",
           "type": "string"
         }
       },
@@ -246,27 +246,27 @@
     "NodeStatistics": {
       "properties": {
         "CreatingCount": {
-          "description": "Phase=Creating的节点总数量。",
+          "description": "Total number of nodes in Phase=Creating.",
           "type": "integer"
         },
         "DeletingCount": {
-          "description": "Phase=Deleting的节点总数量。",
+          "description": "Total number of nodes with Phase=Deleting.",
           "type": "integer"
         },
         "FailedCount": {
-          "description": "Phase=Failed的节点总数量。",
+          "description": "Total number of nodes with Phase=Failed.",
           "type": "integer"
         },
         "RunningCount": {
-          "description": "Phase=Running的节点总数量。",
+          "description": "Total number of nodes with Phase=Running.",
           "type": "integer"
         },
         "TotalCount": {
-          "description": "节点总数量。",
+          "description": "Total number of nodes.",
           "type": "integer"
         },
         "UpdatingCount": {
-          "description": "Phase=Updating的节点总数量。",
+          "description": "Total number of nodes in Phase=Updating.",
           "type": "integer"
         }
       },
@@ -276,11 +276,11 @@
       "properties": {
         "FlannelConfig": {
           "$ref": "#/definitions/FlannelConfig",
-          "description": "Flannel 网络配置。",
+          "description": "Flannel network configuration.",
           "type": "object"
         },
         "PodNetworkMode": {
-          "description": "容器（Pod）网络模型（CNI），参数值说明：Flannel：Flannel 网络模型，独立的 Underlay 容器网络模型。VpcCniShared：VPC-CNI 网络模型，基于私有网络的弹性网卡 ENI 实现的 Underlay 容器网络模型。",
+          "description": "Container (Pod) network model (CNI). Parameter values: Flannel: Flannel network model, an independent underlay container network model. VpcCniShared: VPC-CNI network model, an underlay container network model implemented with ENI (Elastic Network Interface) on a private network.",
           "enum": [
             "Flannel",
             "VpcCniShared"
@@ -289,7 +289,7 @@
         },
         "VpcCniConfig": {
           "$ref": "#/definitions/VpcCniConfig",
-          "description": "VPC-CNI 网络配置。",
+          "description": "VPC-CNI network configuration.",
           "type": "object"
         }
       },
@@ -301,7 +301,7 @@
     "PrivateIp": {
       "properties": {
         "Ipv4": {
-          "description": "私网 IP 的 IPv4 地址。",
+          "description": "IPv4 address of the private network IP.",
           "type": "string"
         }
       },
@@ -310,15 +310,15 @@
     "PublicAccessNetworkConfig": {
       "properties": {
         "Bandwidth": {
-          "description": "公网 IP 的带宽峰值，单位：Mbps。",
+          "description": "Peak bandwidth of the public IP, unit: Mbps",
           "type": "integer"
         },
         "BillingType": {
-          "description": "公网 IP 的计费类型：2：按量计费-按带宽上限。3：按量计费-按实际流量。",
+          "description": "Billing type for public IP: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic.",
           "type": "integer"
         },
         "Isp": {
-          "description": "公网 IP 的线路类型，参数值说明： BGP：BGP（多线）。",
+          "description": "Line type of the public IP. Parameter value description: BGP: BGP (multi-line)",
           "type": "string"
         }
       },
@@ -327,7 +327,7 @@
     "PublicIp": {
       "properties": {
         "Ipv4": {
-          "description": "公网 IP 的 IPv4 地址。",
+          "description": "IPv4 address of the public IP.",
           "type": "string"
         }
       },
@@ -336,7 +336,7 @@
     "ServicesConfig": {
       "properties": {
         "ServiceCidrsv4": {
-          "description": "Kubernetes 服务（Service）暴露的 IPv4 私有网络地址。",
+          "description": "IPv4 private network address exposed by Kubernetes Service.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -353,7 +353,7 @@
     "Status": {
       "properties": {
         "Conditions": {
-          "description": "状态条件列表",
+          "description": "Status condition list",
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/Condition"
@@ -362,7 +362,7 @@
           "uniqueItems": true
         },
         "Phase": {
-          "description": "集群状态阶段",
+          "description": "Cluster status phase.",
           "type": "string"
         }
       },
@@ -371,11 +371,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key.",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value.",
           "type": "string"
         }
       },
@@ -387,7 +387,7 @@
     "VpcCniConfig": {
       "properties": {
         "SubnetIds": {
-          "description": "VPC-CNI 容器网络模型对应的 Pod 子网 ID 列表。",
+          "description": "List of Pod subnet IDs for the VPC-CNI container network model.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -396,14 +396,14 @@
           "uniqueItems": true
         },
         "TrunkEniEnabled": {
-          "description": "是否开启 VPC-CNI 容器网络模型的 Trunk 模式。",
+          "description": "Whether to enable Trunk mode for the VPC-CNI container network model",
           "type": "boolean"
         }
       },
       "type": "object"
     }
   },
-  "description": "容器服务通过深度融合新一代云原生技术，提供以容器为核心的高性能 Kubernetes 容器集群管理服务。在云端一键构建高可用 Kubernetes 集群，并实现容器化应用的可视化全生命周期管理，助力用户快速构建容器化应用。",
+  "description": "Container Service deeply integrates next-generation cloud-native technologies to provide high-performance Kubernetes cluster management centered on containers. Build highly available Kubernetes clusters in the cloud with one click and achieve visualized full lifecycle management of containerized applications, helping users quickly build containerized applications.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -457,26 +457,26 @@
   "properties": {
     "ClusterConfig": {
       "$ref": "#/definitions/ClusterConfig",
-      "description": "集群控制面及部分节点的网络配置。",
+      "description": "Network configuration for the cluster control plane and some nodes.",
       "type": "object"
     },
     "ClusterId": {
-      "description": "集群 ID。",
+      "description": "Cluster ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "集群创建时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "description": "Cluster creation time. Standard RFC3339 format, UTC+0.",
       "semantic": "createdTime",
       "type": "string"
     },
     "DeleteProtectionEnabled": {
       "default": false,
-      "description": "集群删除保护，取值：false：（默认值）关闭删除保护。true：开启删除保护，不允许直接删除集群。",
+      "description": "Cluster deletion protection. Values: false (default): Deletion protection is disabled. true: Deletion protection is enabled; the cluster cannot be deleted directly.",
       "type": "boolean"
     },
     "Description": {
-      "description": "集群描述。长度限制为 300 个字符以内。",
+      "description": "Cluster description. Maximum length is 300 characters.",
       "maxLength": 300,
       "minLength": 0,
       "semantic": "description",
@@ -484,33 +484,33 @@
     },
     "IrsaConfig": {
       "$ref": "#/definitions/IrsaConfig",
-      "description": "IRSA（IAM Role for Service Account）能力相关参数配置。",
+      "description": "IRSA (IAM Role for Service Account) capability parameter configuration",
       "type": "object"
     },
     "KubernetesVersion": {
-      "description": "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。（查询使用）",
+      "description": "Cluster Kubernetes version in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version (for query use)",
       "type": "string"
     },
     "KubernetesVersionCreate": {
-      "description": "集群的 Kubernetes 版本，格式为x.xx。创建集群时，系统自动匹配该 Kubernetes 版本对应的最新 VKE 版本。(创建使用)",
+      "description": "Kubernetes version of the cluster, in the format x.xx. When creating a cluster, the system automatically matches the latest VKE version corresponding to this Kubernetes version. (For creation)",
       "type": "string"
     },
     "LoggingConfig": {
       "$ref": "#/definitions/LoggingConfig",
-      "description": "集群的日志配置信息。",
+      "description": "Cluster log configuration information.",
       "type": "object"
     },
     "Message": {
-      "description": "集群状态描述。",
+      "description": "Cluster status description.",
       "type": "string"
     },
     "MonitoringConfig": {
       "$ref": "#/definitions/MonitoringConfig",
-      "description": "监控配置信息。",
+      "description": "Monitoring configuration information.",
       "type": "object"
     },
     "Name": {
-      "description": "集群名称。同一个地域下，名称必须唯一。支持大小写英文字母、汉字、数字、短划线（-），长度限制为 2～64 个字符。",
+      "description": "Cluster name. Must be unique within the same region. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length must be 2–64 characters.",
       "maxLength": 64,
       "minLength": 2,
       "semantic": "resourceName",
@@ -518,36 +518,36 @@
     },
     "NodeStatistics": {
       "$ref": "#/definitions/NodeStatistics",
-      "description": "集群中各主状态下对应的节点数量统计。",
+      "description": "Statistics of node counts for each main status in the cluster.",
       "type": "object"
     },
     "PodsConfig": {
       "$ref": "#/definitions/PodsConfig",
-      "description": "Pod 的网络配置。",
+      "description": "Pod network configuration.",
       "type": "object"
     },
     "ProjectName": {
-      "description": "集群所属项目名称，一个集群只能归属于一个项目。只能包含英文字母、数字、下划线（_）、英文句点（.）和中划线（-）。长度限制在 64 个字符以内。默认值：default。",
+      "description": "Project name to which the cluster belongs. A cluster can belong to only one project. Only English letters, numbers, underscores (_), periods (.), and hyphens (-) are allowed. Maximum length: 64 characters. Default: default.",
       "maxLength": 64,
       "semantic": "projectName",
       "type": "string"
     },
     "ServicesConfig": {
       "$ref": "#/definitions/ServicesConfig",
-      "description": "服务的网络配置。",
+      "description": "Network configuration for the service.",
       "type": "object"
     },
     "SourceRegion": {
-      "description": "集群源地域。",
+      "description": "Cluster source region",
       "type": "string"
     },
     "Status": {
       "$ref": "#/definitions/Status",
-      "description": "集群状态。",
+      "description": "Cluster status.",
       "type": "object"
     },
     "Tags": {
-      "description": "集群的标签。",
+      "description": "Cluster tags.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -557,11 +557,11 @@
       "uniqueItems": true
     },
     "Type": {
-      "description": "集群类型。",
+      "description": "Cluster type.",
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "集群最近一次更新的时间。标准 RFC3339 格式的 UTC+0 时间。",
+      "description": "Last update time of the cluster. Standard RFC3339 format, UTC+0.",
       "semantic": "updatedTime",
       "type": "string"
     }

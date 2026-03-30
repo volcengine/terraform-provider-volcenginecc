@@ -21,39 +21,39 @@ Data Source schema for Volcengine::AutoScaling::ScalingPolicy
 
 ### Read-Only
 
-- `adjustment_type` (String) 伸缩规则的伸缩行为，适用于简单规则和步进规则，QuantityChangeInCapacity：增加或减少指定数量的实例。PercentChangeInCapacity：增加或减少指定比例的实例。TotalCapacity： 将当前伸缩组的实例数量调整到指定数量。
-- `adjustment_value` (Number) 伸缩行为的调整数值，适用于简单规则和步进规则，当AdjustmentType参数取值为QuantityChangeInCapacity时：-100   - 100，不允许为0，单位：个。当AdjustmentType参数取值为PercentChangeInCapacity时：-100   - 10000，不允许为0，单位：%。当AdjustmentType参数取值为TotalCapacity时：默认为0   - 100，单位：个。
-- `alarm_policy` (Attributes) 报警任务的详细信息。 (see [below for nested schema](#nestedatt--alarm_policy))
-- `cooldown` (Number) 伸缩规则的冷却时间。 取值：0-86400，单位：秒，不填则默认使用伸缩组的冷却时间。
-- `is_enabled_policy` (Boolean) 伸缩规则的状态。取值：true：启用。false：停用。需保证伸缩组的状态为Active。
-- `scaling_group_id` (String) 伸缩组ID。
-- `scaling_policy_id` (String) 伸缩规则ID。
-- `scaling_policy_name` (String) 伸缩规则名称。
-- `scaling_policy_type` (String) 伸缩规则的类型，取值：Scheduled：定时任务。Recurrence：周期任务。Alarm：报警任务。
-- `scheduled_policy` (Attributes) 定时任务/周期任务的详细信息。 (see [below for nested schema](#nestedatt--scheduled_policy))
-- `status` (String) 伸缩规则的状态。取值：Active：已启用。InActive：已停用。需保证伸缩组的状态为Active。
+- `adjustment_type` (String) Scaling actions for the scaling rule, applicable to simple and step rules. QuantityChangeInCapacity: increase or decrease a specified number of instances. PercentChangeInCapacity: increase or decrease a specified percentage of instances. TotalCapacity: adjust the number of instances in the current scaling group to the specified value.
+- `adjustment_value` (Number) Adjustment value for scaling actions, applicable to simple and step rules. When AdjustmentType is set to QuantityChangeInCapacity: -100 to 100, cannot be 0, unit: instances. When AdjustmentType is set to PercentChangeInCapacity: -100 to 10000, cannot be 0, unit: %. When AdjustmentType is set to TotalCapacity: defaults to 0 to 100, unit: instances.
+- `alarm_policy` (Attributes) Detailed information about the alarm task. (see [below for nested schema](#nestedatt--alarm_policy))
+- `cooldown` (Number) Cooldown time for scaling rules. Value: 0–86400, unit: seconds. If not specified, the scaling group's cooldown time is used by default.
+- `is_enabled_policy` (Boolean) Status of the scaling rule. Options: true: enabled. false: disabled. The scaling group must be in Active status.
+- `scaling_group_id` (String) Scaling group ID.
+- `scaling_policy_id` (String) Scaling rule ID.
+- `scaling_policy_name` (String) Name of the scaling rule.
+- `scaling_policy_type` (String) Type of scaling rule. Options: Scheduled: scheduled task. Recurrence: recurring task. Alarm: alarm task.
+- `scheduled_policy` (Attributes) Detailed information for scheduled/recurring tasks. (see [below for nested schema](#nestedatt--scheduled_policy))
+- `status` (String) Status of the scaling rule. Options: Active: enabled. Inactive: disabled. The scaling group must be in Active status.
 
 <a id="nestedatt--alarm_policy"></a>
 ### Nested Schema for `alarm_policy`
 
 Read-Only:
 
-- `condition` (Attributes) 单指标监控时的监控指标详细信息。仅当ScalingPolicyType取值为Alarm时有效。 (see [below for nested schema](#nestedatt--alarm_policy--condition))
-- `condition_operator` (String) 多指标告警时的判定条件。&&：多个指标同时成立才判定为触发告警。||（默认）：任意指标满足条件就判定为触发告警。
-- `conditions` (Attributes Set) 多指标监控时的监控指标详细信息。仅当ScalingPolicyType取值为Alarm时有效，且必须配置AlarmPolicy.Condition.x或AlarmPolicy.Conditions.x相关参数，当二者同时配置时，仅AlarmPolicy.Conditions.x生效。 (see [below for nested schema](#nestedatt--alarm_policy--conditions))
-- `effective` (String) 报警任务的生效时间段。
-- `evaluation_count` (Number) 当监控指标数据连续几次达到阈值时，即触发伸缩行为。仅当ScalingPolicyType取值为Alarm时有效且为必填项。
-- `rule_type` (String) 报警任务的类型，取值：Static：表示由agent采集的静态监控。仅当ScalingPolicyType取值为Alarm时有效且为必填项。
+- `condition` (Attributes) Detailed monitoring metric information for single-metric monitoring. Valid only when ScalingPolicyType is set to Alarm. (see [below for nested schema](#nestedatt--alarm_policy--condition))
+- `condition_operator` (String) Determination conditions for multi-metric alarms. &&: Alarm is triggered only when all metrics meet the conditions. || (default): Alarm is triggered when any metric meets the condition.
+- `conditions` (Attributes Set) Detailed information about monitoring metrics for multi-metric monitoring. Valid only when ScalingPolicyType is set to Alarm. You must configure either AlarmPolicy.Condition.x or AlarmPolicy.Conditions.x parameters. If both are configured, only AlarmPolicy.Conditions.x takes effect. (see [below for nested schema](#nestedatt--alarm_policy--conditions))
+- `effective` (String) The effective period for the alarm task.
+- `evaluation_count` (Number) Scaling actions are triggered when monitoring metric data reaches the threshold for several consecutive times. Valid only when ScalingPolicyType is set to Alarm and required.
+- `rule_type` (String) Type of alarm task. Options: Static: static monitoring collected by agent. Valid only when ScalingPolicyType is set to Alarm and required.
 
 <a id="nestedatt--alarm_policy--condition"></a>
 ### Nested Schema for `alarm_policy.condition`
 
 Read-Only:
 
-- `comparison_operator` (String) 指标告警时的规则表达式对象。>：大于。<：小于。=：等于。
-- `metric_name` (String) 指标告警时的监控指标名称。CpuTotal_Max：带内CPU使用率最大值。CpuTotal_Min：带内CPU使用率最小值。CpuTotal_Avg：带内CPU使用率平均值。MemoryUsedUtilization_Max：带内内存使用率最大值。MemoryUsedUtilization_Min：带内内存使用率最小值。MemoryUsedUtilization_Avg：带内内存使用率平均值。Instance_CpuBusy_Max：带外CPU利用率最大值。Instance_CpuBusy_Min：带外CPU利用率最小值。Instance_CpuBusy_Avg：带外CPU利用率平均值。Instance_NetTxBits_Avg: 带外网络流出速率平均值。Instance_NetRxBits_Avg: 带外网络流入速率平均值。Instance_NetTxPackets_Avg: 带外网络发送包速率平均值。Instance_NetRxPackets_Avg: 带外网络接收包速率平均值。SystemDiskReadBytes_Avg: 带内系统盘读带宽平均值。SystemDiskWriteBytes_Avg: 带内系统盘写带宽平均值。SystemDiskReadIOPS_Avg: 带内系统盘读IOPS平均值。SystemDiskWriteIOPS_Avg: 带内系统盘写IOPS平均值。NetTcpConnection_Avg: 带内TCP连接数平均值。
-- `metric_unit` (String) 指标告警时的监控指标阈值的单位。当AlarmPolicy.Conditions.MetricName参数取值为CPU/内存使用率时: Percent。当AlarmPolicy.Conditions.MetricName参数取值为系统盘读/写带宽时: Bytes/Second(IEC)。当AlarmPolicy.Conditions.MetricName参数取值为系统盘读/写IOPS时: Count/Second。当AlarmPolicy.Conditions.MetricName参数取值为TCP连接数时: Count。当AlarmPolicy.Condition.MetricName参数取值为网络流入/流出速率时: Bits/Second(IEC)。当AlarmPolicy.Condition.MetricName参数取值为网络收发包速率时: Packet/Second。
-- `threshold` (String) 指标告警时的监控指标的阈值。当AlarmPolicy.Conditions.MetricUnit取值为Percent时：1 ～ 100。当AlarmPolicy.Conditions.MetricUnit取值为Bytes/Second(IEC)时：大于0的整数。当AlarmPolicy.Conditions.MetricUnit取值为Count/Second时：大于0的整数。当AlarmPolicy.Conditions.MetricUnit取值为Count时：大于0的整数。当AlarmPolicy.Condition.MetricUnit取值为Bits/Second(IEC)时：大于0的整数。当AlarmPolicy.Condition.MetricUnit取值为Packet/Second时：大于0的整数。
+- `comparison_operator` (String) Rule expression object for metric alarms. >: Greater than. <: Less than. =: Equal to.
+- `metric_name` (String) Monitoring metric names for metric alarms. CpuTotal_Max: Maximum in-band CPU usage. CpuTotal_Min: Minimum in-band CPU usage. CpuTotal_Avg: Average in-band CPU usage. MemoryUsedUtilization_Max: Maximum in-band memory usage. MemoryUsedUtilization_Min: Minimum in-band memory usage. MemoryUsedUtilization_Avg: Average in-band memory usage. Instance_CpuBusy_Max: Maximum out-of-band CPU utilization. Instance_CpuBusy_Min: Minimum out-of-band CPU utilization. Instance_CpuBusy_Avg: Average out-of-band CPU utilization. Instance_NetTxBits_Avg: Average out-of-band network outbound rate. Instance_NetRxBits_Avg: Average out-of-band network inbound rate. Instance_NetTxPackets_Avg: Average out-of-band network packet send rate. Instance_NetRxPackets_Avg: Average out-of-band network packet receive rate. SystemDiskReadBytes_Avg: Average in-band system disk read bandwidth. SystemDiskWriteBytes_Avg: Average in-band system disk write bandwidth. SystemDiskReadIOPS_Avg: Average in-band system disk read IOPS. SystemDiskWriteIOPS_Avg: Average in-band system disk write IOPS. NetTcpConnection_Avg: Average in-band TCP connection count.
+- `metric_unit` (String) The unit for the monitoring metric threshold when an alarm is triggered. When the AlarmPolicy.Conditions.MetricName parameter is set to CPU/memory usage: Percent. When the AlarmPolicy.Conditions.MetricName parameter is set to system disk read/write bandwidth: Bytes/Second(IEC). When the AlarmPolicy.Conditions.MetricName parameter is set to system disk read/write IOPS: Count/Second. When the AlarmPolicy.Conditions.MetricName parameter is set to TCP connections: Count. When the AlarmPolicy.Condition.MetricName parameter is set to network inbound/outbound rate: Bits/Second(IEC). When the AlarmPolicy.Condition.MetricName parameter is set to network packet transmission rate: Packet/Second.
+- `threshold` (String) The threshold value for the monitoring metric when an alarm is triggered. When AlarmPolicy.Conditions.MetricUnit is set to Percent: 1–100. When AlarmPolicy.Conditions.MetricUnit is set to Bytes/Second(IEC): an integer greater than 0. When AlarmPolicy.Conditions.MetricUnit is set to Count/Second: an integer greater than 0. When AlarmPolicy.Conditions.MetricUnit is set to Count: an integer greater than 0. When AlarmPolicy.Condition.MetricUnit is set to Bits/Second(IEC): an integer greater than 0. When AlarmPolicy.Condition.MetricUnit is set to Packet/Second: an integer greater than 0.
 
 
 <a id="nestedatt--alarm_policy--conditions"></a>
@@ -61,10 +61,10 @@ Read-Only:
 
 Read-Only:
 
-- `comparison_operator` (String) 指标告警时的规则表达式对象。>：大于。<：小于。=：等于。
-- `metric_name` (String) 指标告警时的监控指标名称。CpuTotal_Max：带内CPU使用率最大值。CpuTotal_Min：带内CPU使用率最小值。CpuTotal_Avg：带内CPU使用率平均值。MemoryUsedUtilization_Max：带内内存使用率最大值。MemoryUsedUtilization_Min：带内内存使用率最小值。MemoryUsedUtilization_Avg：带内内存使用率平均值。Instance_CpuBusy_Max：带外CPU利用率最大值。Instance_CpuBusy_Min：带外CPU利用率最小值。Instance_CpuBusy_Avg：带外CPU利用率平均值。Instance_NetTxBits_Avg: 带外网络流出速率平均值。Instance_NetRxBits_Avg: 带外网络流入速率平均值。Instance_NetTxPackets_Avg: 带外网络发送包速率平均值。Instance_NetRxPackets_Avg: 带外网络接收包速率平均值。SystemDiskReadBytes_Avg: 带内系统盘读带宽平均值。SystemDiskWriteBytes_Avg: 带内系统盘写带宽平均值。SystemDiskReadIOPS_Avg: 带内系统盘读IOPS平均值。SystemDiskWriteIOPS_Avg: 带内系统盘写IOPS平均值。NetTcpConnection_Avg: 带内TCP连接数平均值。
-- `metric_unit` (String) 指标告警时的监控指标阈值的单位。当AlarmPolicy.Conditions.MetricName参数取值为CPU/内存使用率时: Percent。当AlarmPolicy.Conditions.MetricName参数取值为系统盘读/写带宽时: Bytes/Second(IEC)。当AlarmPolicy.Conditions.MetricName参数取值为系统盘读/写IOPS时: Count/Second。当AlarmPolicy.Conditions.MetricName参数取值为TCP连接数时: Count。当AlarmPolicy.Condition.MetricName参数取值为网络流入/流出速率时: Bits/Second(IEC)。当AlarmPolicy.Condition.MetricName参数取值为网络收发包速率时: Packet/Second。
-- `threshold` (String) 指标告警时的监控指标的阈值。当AlarmPolicy.Conditions.MetricUnit取值为Percent时：1 ～ 100。当AlarmPolicy.Conditions.MetricUnit取值为Bytes/Second(IEC)时：大于0的整数。当AlarmPolicy.Conditions.MetricUnit取值为Count/Second时：大于0的整数。当AlarmPolicy.Conditions.MetricUnit取值为Count时：大于0的整数。当AlarmPolicy.Condition.MetricUnit取值为Bits/Second(IEC)时：大于0的整数。当AlarmPolicy.Condition.MetricUnit取值为Packet/Second时：大于0的整数。
+- `comparison_operator` (String) Rule expression object for metric alarms. >: Greater than. <: Less than. =: Equal to.
+- `metric_name` (String) Monitoring metric names for metric alarms. CpuTotal_Max: Maximum in-band CPU usage. CpuTotal_Min: Minimum in-band CPU usage. CpuTotal_Avg: Average in-band CPU usage. MemoryUsedUtilization_Max: Maximum in-band memory usage. MemoryUsedUtilization_Min: Minimum in-band memory usage. MemoryUsedUtilization_Avg: Average in-band memory usage. Instance_CpuBusy_Max: Maximum out-of-band CPU utilization. Instance_CpuBusy_Min: Minimum out-of-band CPU utilization. Instance_CpuBusy_Avg: Average out-of-band CPU utilization. Instance_NetTxBits_Avg: Average out-of-band network outbound rate. Instance_NetRxBits_Avg: Average out-of-band network inbound rate. Instance_NetTxPackets_Avg: Average out-of-band network packet send rate. Instance_NetRxPackets_Avg: Average out-of-band network packet receive rate. SystemDiskReadBytes_Avg: Average in-band system disk read bandwidth. SystemDiskWriteBytes_Avg: Average in-band system disk write bandwidth. SystemDiskReadIOPS_Avg: Average in-band system disk read IOPS. SystemDiskWriteIOPS_Avg: Average in-band system disk write IOPS. NetTcpConnection_Avg: Average in-band TCP connection count.
+- `metric_unit` (String) The unit for the monitoring metric threshold when an alarm is triggered. When the AlarmPolicy.Conditions.MetricName parameter is set to CPU/memory usage: Percent. When the AlarmPolicy.Conditions.MetricName parameter is set to system disk read/write bandwidth: Bytes/Second(IEC). When the AlarmPolicy.Conditions.MetricName parameter is set to system disk read/write IOPS: Count/Second. When the AlarmPolicy.Conditions.MetricName parameter is set to TCP connections: Count. When the AlarmPolicy.Condition.MetricName parameter is set to network inbound/outbound rate: Bits/Second(IEC). When the AlarmPolicy.Condition.MetricName parameter is set to network packet transmission rate: Packet/Second.
+- `threshold` (String) The threshold value for the monitoring metric when an alarm is triggered. When AlarmPolicy.Conditions.MetricUnit is set to Percent: 1–100. When AlarmPolicy.Conditions.MetricUnit is set to Bytes/Second(IEC): an integer greater than 0. When AlarmPolicy.Conditions.MetricUnit is set to Count/Second: an integer greater than 0. When AlarmPolicy.Conditions.MetricUnit is set to Count: an integer greater than 0. When AlarmPolicy.Condition.MetricUnit is set to Bits/Second(IEC): an integer greater than 0. When AlarmPolicy.Condition.MetricUnit is set to Packet/Second: an integer greater than 0.
 
 
 
@@ -73,10 +73,10 @@ Read-Only:
 
 Read-Only:
 
-- `launch_time` (String) 表示任务的触发时间，默认为此刻。当ScalingPolicyType值为Scheduled时，表示定时任务的触发时间。当ScalingPolicyType值为Recurrence时：如果ScheduledPolicy.RecurrenceType为空，则表示仅按照此处指定的日期和时间执行一次。如果ScheduledPolicy.RecurrenceType不为空，则表示周期任务开始时间。
-- `launch_time_read` (String) 表示任务的触发时间。只读字段，修改或创建使用LaunchTime。
-- `recurrence_end_time` (String) 表示周期任务的结束时间。仅支持选择自创建当日起365日内的时间。若不配置，则根据重复周期（ScheduledPolicy.RecurrenceType）默认为此刻后的一天/周/月。设置为空，表示本任务永不停止。当ScalingPolicyType取值为Recurrence时有效且为必填项。
-- `recurrence_end_time_read` (String) 表示周期任务的结束时间。只读字段，修改或创建使用RecurrenceEndTime。
-- `recurrence_start_time` (String) 表示周期任务的开始执行时间。当ScalingPolicyType取值为Recurrence时有效。
-- `recurrence_type` (String) 表示周期任务的重复周期，取值：Daily：每XX天执行一次。Weekly：选择每周中的几天，每天执行一次。Monthly：选择每月中XX号到XX号，每天执行一次。Cron：按照指定的Cron表达式执行。当ScalingPolicyType取值为Recurrence时有效且为必填项。
-- `recurrence_value` (String) 表示重复执行周期任务的数值。当ScheduledPolicy.RecurrenceType参数取值为Daily时，只能填写一个值，取值：1   - 31。当ScheduledPolicy.RecurrenceType参数取值为Weekly时，可以填入多个值，使用英文逗号（,）分隔。星期一到星期日的取值依次为：1,2,3,4,5,6,7。当ScheduledPolicy.RecurrenceType参数取值为Monthly时，格式为A-B。A、B的取值范围均为1-31，且B必须大于等于A。当ScheduledPolicy.RecurrenceType参数取值为Cron 时，表示UTC+8时间，支持分、时、日、月、星期的5域表达式，支持通配符英文逗号（,）、英文问号（?）、连词符（-）、星号（*）、井号（#）、斜线（/）、L和W。当ScalingPolicyType取值为Recurrence时有效且为必填项。
+- `launch_time` (String) Indicates the trigger time for the task. The default is the current time. When ScalingPolicyType is set to Scheduled, this specifies the trigger time for the scheduled task. When ScalingPolicyType is set to Recurrence: If ScheduledPolicy.RecurrenceType is empty, the task is executed only once at the specified date and time. If ScheduledPolicy.RecurrenceType is not empty, this specifies the start time for the recurring task.
+- `launch_time_read` (String) Indicates the task trigger time. This is a read-only field; use LaunchTime to modify or create.
+- `recurrence_end_time` (String) Indicates the end time for the recurring task. Only supports selecting a time within 365 days from the creation date. If not configured, defaults to one day/week/month after the current time based on the recurrence cycle (ScheduledPolicy.RecurrenceType). If set to empty, the task never stops. Valid only when ScalingPolicyType is set to Recurrence and required.
+- `recurrence_end_time_read` (String) Indicates the end time for the recurring task. Read-only field; use RecurrenceEndTime for modification or creation.
+- `recurrence_start_time` (String) Indicates the start time for the recurring task. Valid only when ScalingPolicyType is set to Recurrence.
+- `recurrence_type` (String) Indicates the recurrence cycle for scheduled tasks. Values: Daily: Executes once every XX days. Weekly: Select specific days of the week, executes once per day. Monthly: Select XX to XX days of the month, executes once per day. Cron: Executes according to the specified Cron expression. Required and valid only when ScalingPolicyType is set to Recurrence.
+- `recurrence_value` (String) Specifies the value for recurring tasks. When the ScheduledPolicy.RecurrenceType parameter is set to Daily, only one value can be entered: 1–31. When the ScheduledPolicy.RecurrenceType parameter is set to Weekly, multiple values can be entered, separated by commas (,). Values for Monday to Sunday are: 1 (Monday), 2 (Tuesday), 3 (Wednesday), 4 (Thursday), 5 (Friday), 6 (Saturday), 7 (Sunday). When the ScheduledPolicy.RecurrenceType parameter is set to Monthly, the format is A-B. Both A and B range from 1–31, and B must be greater than or equal to A. When the ScheduledPolicy.RecurrenceType parameter is set to Cron, it uses UTC+8 time and supports a five-field expression for minute, hour, day, month, and week. Wildcards supported include comma (,), question mark (?), hyphen (-), asterisk (*), hash (#), slash (/), L, and W. This field is valid and required when ScalingPolicyType is set to Recurrence.

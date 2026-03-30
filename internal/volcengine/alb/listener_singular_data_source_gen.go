@@ -27,7 +27,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器是否已开启“在访问日志中记录自定义header”的功能：on：表示该功能已开启。off：表示该功能未开启。",
+		//	  "description": "Whether the listener has enabled the 'Log custom header in access logs' feature: on: Feature is enabled. off: Feature is not enabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -35,14 +35,14 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"access_log_record_customized_headers_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器是否已开启“在访问日志中记录自定义header”的功能：on：表示该功能已开启。off：表示该功能未开启。",
+			Description: "Whether the listener has enabled the 'Log custom header in access logs' feature: on: Feature is enabled. off: Feature is not enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器绑定的访问控制策略组 ID。当AclStatus参数配置为 on 时，AclIds为必填参数。",
+		//	  "description": "Access control policy group ID bound to the listener. When the AclStatus parameter is set to on, AclIds is required.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -53,7 +53,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"acl_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "监听器绑定的访问控制策略组 ID。当AclStatus参数配置为 on 时，AclIds为必填参数。",
+			Description: "Access control policy group ID bound to the listener. When the AclStatus parameter is set to on, AclIds is required.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclStatus
@@ -61,7 +61,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "off",
-		//	  "description": "是否开启访问控制功能。取值如下：on：开启。off ：不开启（默认）。",
+		//	  "description": "Enable access control. Values: on: enabled. off: disabled (default).",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -69,14 +69,14 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"acl_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启访问控制功能。取值如下：on：开启。off ：不开启（默认）。",
+			Description: "Enable access control. Values: on: enabled. off: disabled (default).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "访问控制的方式，取值如下：white：白名单方式。表示监听器仅转发来自所选访问控制策略组中设置的IP地址或地址段的请求。 如果所选策略组中没有添加任何IP，则监听器不会转发任何请求。black：黑名单方式。表示仅拒绝来自所选访问控制策略组中设置的IP地址或地址段的请求。 如果所选策略组中没有添加任何IP，则监听器会转发全部请求。当AclStatus参数配置为 on 时，AclType为必填参数。",
+		//	  "description": "Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.",
 		//	  "enum": [
 		//	    "white",
 		//	    "black",
@@ -85,25 +85,25 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "访问控制的方式，取值如下：white：白名单方式。表示监听器仅转发来自所选访问控制策略组中设置的IP地址或地址段的请求。 如果所选策略组中没有添加任何IP，则监听器不会转发任何请求。black：黑名单方式。表示仅拒绝来自所选访问控制策略组中设置的IP地址或地址段的请求。 如果所选策略组中没有添加任何IP，则监听器会转发全部请求。当AclStatus参数配置为 on 时，AclType为必填参数。",
+			Description: "Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CACertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 alb 时，必须指定 CACertificateId 参数。",
+		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication in HTTPS listeners. If the certificate source is alb, you must specify the CACertificateId parameter.",
 		//	  "type": "string"
 		//	}
 		"ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 alb 时，必须指定 CACertificateId 参数。",
+			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication in HTTPS listeners. If the certificate source is alb, you must specify the CACertificateId parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CACertificateSource
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS 监听器关联的 CA 证书的来源，用于双向认证。alb（默认）：表示通过 ALB 上传的证书。标准版 ALB 实例不支持此来源的证书。pca_root：表示通过火山引擎证书中心购买或上传的私有根 CA 证书。pca_sub：表示通过火山引擎证书中心购买或上传的私有子 CA 证书。",
+		//	  "description": "Source of the CA certificate associated with the HTTPS listener, used for mutual authentication. alb (default): Certificate uploaded via ALB. Standard ALB instances do not support certificates from this source. pca_root: Private root CA certificate purchased or uploaded via Volcano Engine Certificate Center. pca_sub: Private subordinate CA certificate purchased or uploaded via Volcano Engine Certificate Center.",
 		//	  "enum": [
 		//	    "alb",
 		//	    "pca_root",
@@ -113,36 +113,36 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"ca_certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS 监听器关联的 CA 证书的来源，用于双向认证。alb（默认）：表示通过 ALB 上传的证书。标准版 ALB 实例不支持此来源的证书。pca_root：表示通过火山引擎证书中心购买或上传的私有根 CA 证书。pca_sub：表示通过火山引擎证书中心购买或上传的私有子 CA 证书。",
+			Description: "Source of the CA certificate associated with the HTTPS listener, used for mutual authentication. alb (default): Certificate uploaded via ALB. Standard ALB instances do not support certificates from this source. pca_root: Private root CA certificate purchased or uploaded via Volcano Engine Certificate Center. pca_sub: Private subordinate CA certificate purchased or uploaded via Volcano Engine Certificate Center.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertCenterCertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS监听器关联的证书 ID。创建 HTTPS 监听器且证书来源为 cert_center 时必传。",
+		//	  "description": "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener with the certificate source set to cert_center.",
 		//	  "type": "string"
 		//	}
 		"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS监听器关联的证书 ID。创建 HTTPS 监听器且证书来源为 cert_center 时必传。",
+			Description: "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener with the certificate source set to cert_center.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS监听器关联的证书 ID。创建 HTTPS 监听器且证书来源为 alb 时必传。",
+		//	  "description": "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is alb.",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS监听器关联的证书 ID。创建 HTTPS 监听器且证书来源为 alb 时必传。",
+			Description: "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is alb.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateSource
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS监听器关联的默认证书的来源，取值：alb：表示通过 ALB 上传的证书。cert_center：表示通过火山引擎证书中心购买或上传的 SSL 证书。pca_leaf：表示通过火山引擎证书中心购买或上传的私有叶子证书。",
+		//	  "description": "The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.",
 		//	  "enum": [
 		//	    "alb",
 		//	    "cert_center",
@@ -151,29 +151,29 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS监听器关联的默认证书的来源，取值：alb：表示通过 ALB 上传的证书。cert_center：表示通过火山引擎证书中心购买或上传的 SSL 证书。pca_leaf：表示通过火山引擎证书中心购买或上传的私有叶子证书。",
+			Description: "The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的创建时间。",
+		//	  "description": "Listener creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的创建时间。",
+			Description: "Listener creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomizedCfgId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "个性化配置ID，未绑定时值为空字符串。",
+		//	  "description": "Personalized configuration ID. If not bound, the value is an empty string.",
 		//	  "type": "string"
 		//	}
 		"customized_cfg_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "个性化配置ID，未绑定时值为空字符串。",
+			Description: "Personalized configuration ID. If not bound, the value is an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -181,33 +181,33 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "",
-		//	  "description": "监听器的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+		//	  "description": "Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。",
+			Description: "Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainExtensions
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS监听器关联的扩展域名列表。一个HTTPS监听器能关联的扩展域名上限为20个。",
+		//	  "description": "List of additional domain names associated with the HTTPS listener. A single HTTPS listener can be associated with up to 20 additional domain names.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CertCenterCertificateId": {
-		//	        "description": "域名使用的服务器证书 ID 。当证书来源为 cert_center 时生效。",
+		//	        "description": "Server certificate ID used by the domain. Effective when the certificate source is cert_center.",
 		//	        "type": "string"
 		//	      },
 		//	      "CertificateId": {
-		//	        "description": "域名使用的服务器证书 ID。当证书来源为 alb 时生效。",
+		//	        "description": "Server certificate ID used by the domain. Effective when the certificate source is alb.",
 		//	        "type": "string"
 		//	      },
 		//	      "CertificateSource": {
-		//	        "description": "域名使用的服务器证书的来源，取值：alb：表示通过 ALB 上传的证书。cert_center：表示通过火山引擎证书中心购买或上传的 SSL 证书。",
+		//	        "description": "Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center.",
 		//	        "enum": [
 		//	          "alb",
 		//	          "cert_center"
@@ -215,25 +215,25 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Domain": {
-		//	        "description": "域名。通常不能为空，若实例支持自动选择扩展证书，即SniAutoMatch为on，则Domain需传入空字符串。需至少包含一个‘.’，且不允许以‘.’开头或结尾。仅允许包含小写字、字、‘.’、‘-‘、‘*’。长度限制为1 ～ 128个字符。泛域名：使用“*”代替1个或多个字符。“*”必须在域名开头或结尾。同一条域名中“*”不能出现两次。“*”前后不能有除了.以外的字符。精确域名：符合域名规范的精确域名。同一HTTPS监听器下的域名不能重复。匹配域名时，对域名的大小写不敏感。",
+		//	        "description": "Domain name. Usually cannot be empty. If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain must be an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length must be between 1 and 128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters except '.' can be before or after '*'. Exact domain: a domain name that meets domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain matching is case-insensitive.",
 		//	        "maxLength": 128,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
 		//	      "DomainExtensionId": {
-		//	        "description": "扩展域名 ID 。",
+		//	        "description": "Extended domain name ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerId": {
-		//	        "description": "扩展域名所属的监听器 ID。",
+		//	        "description": "Listener ID to which the extended domain name belongs.",
 		//	        "type": "string"
 		//	      },
 		//	      "PcaLeafCertificateId": {
-		//	        "description": "HTTPS监听器关联的私有叶子证书 ID。创建 HTTPS 监听器且证书来源为 pca_leaf 时必传。",
+		//	        "description": "Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.",
 		//	        "type": "string"
 		//	      },
 		//	      "San": {
-		//	        "description": "若实例支持自动选择扩展证书，即SniAutoMatch为on时，则Domain是空字符串。San为证书的扩展域名，用英文,分隔多个域名。",
+		//	        "description": "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -248,54 +248,54 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CertCenterCertificateId
 					"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "域名使用的服务器证书 ID 。当证书来源为 cert_center 时生效。",
+						Description: "Server certificate ID used by the domain. Effective when the certificate source is cert_center.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CertificateId
 					"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "域名使用的服务器证书 ID。当证书来源为 alb 时生效。",
+						Description: "Server certificate ID used by the domain. Effective when the certificate source is alb.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CertificateSource
 					"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "域名使用的服务器证书的来源，取值：alb：表示通过 ALB 上传的证书。cert_center：表示通过火山引擎证书中心购买或上传的 SSL 证书。",
+						Description: "Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Domain
 					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "域名。通常不能为空，若实例支持自动选择扩展证书，即SniAutoMatch为on，则Domain需传入空字符串。需至少包含一个‘.’，且不允许以‘.’开头或结尾。仅允许包含小写字、字、‘.’、‘-‘、‘*’。长度限制为1 ～ 128个字符。泛域名：使用“*”代替1个或多个字符。“*”必须在域名开头或结尾。同一条域名中“*”不能出现两次。“*”前后不能有除了.以外的字符。精确域名：符合域名规范的精确域名。同一HTTPS监听器下的域名不能重复。匹配域名时，对域名的大小写不敏感。",
+						Description: "Domain name. Usually cannot be empty. If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain must be an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length must be between 1 and 128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters except '.' can be before or after '*'. Exact domain: a domain name that meets domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain matching is case-insensitive.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DomainExtensionId
 					"domain_extension_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "扩展域名 ID 。",
+						Description: "Extended domain name ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerId
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "扩展域名所属的监听器 ID。",
+						Description: "Listener ID to which the extended domain name belongs.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PcaLeafCertificateId
 					"pca_leaf_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "HTTPS监听器关联的私有叶子证书 ID。创建 HTTPS 监听器且证书来源为 pca_leaf 时必传。",
+						Description: "Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: San
 					"san": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "若实例支持自动选择扩展证书，即SniAutoMatch为on时，则Domain是空字符串。San为证书的扩展域名，用英文,分隔多个域名。",
+						Description: "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "HTTPS监听器关联的扩展域名列表。一个HTTPS监听器能关联的扩展域名上限为20个。",
+			Description: "List of additional domain names associated with the HTTPS listener. A single HTTPS listener can be associated with up to 20 additional domain names.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableHttp2
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTP2.0 特性开关，该参数仅对 HTTPS 监听器有效。取值如下：on：开启。off：关闭（默认）。",
+		//	  "description": "HTTP2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default).",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -303,14 +303,14 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enable_http_2": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTP2.0 特性开关，该参数仅对 HTTPS 监听器有效。取值如下：on：开启。off：关闭（默认）。",
+			Description: "HTTP2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableQuic
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "QUIC 特性开关，该参数仅对 HTTPS 监听器有效，取值如下：on：开启。off：关闭（默认）。只有标准版 ALB 实例支持 QUIC。",
+		//	  "description": "QUIC feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default). Only standard ALB instances support QUIC.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -318,7 +318,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enable_quic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "QUIC 特性开关，该参数仅对 HTTPS 监听器有效，取值如下：on：开启。off：关闭（默认）。只有标准版 ALB 实例支持 QUIC。",
+			Description: "QUIC feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default). Only standard ALB instances support QUIC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
@@ -326,7 +326,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "on",
-		//	  "description": "监听器开启/关闭，取值如下：on：开启（默认）。off：关闭。",
+		//	  "description": "Listener on/off status. Values: on: On (default). off: Off.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -334,107 +334,107 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器开启/关闭，取值如下：on：开启（默认）。off：关闭。",
+			Description: "Listener on/off status. Values: on: On (default). off: Off.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ListenerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器 ID。",
+		//	  "description": "Listener ID.",
 		//	  "type": "string"
 		//	}
 		"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器 ID。",
+			Description: "Listener ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ListenerName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的名字。不填写时以“协议-端口”格式命名。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点（.）、下划线（_）和短横线（-）。长度限制在1-128字符之间。",
+		//	  "description": "Listener name. If not specified, named in the format 'protocol-port'. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, dot (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的名字。不填写时以“协议-端口”格式命名。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点（.）、下划线（_）和短横线（-）。长度限制在1-128字符之间。",
+			Description: "Listener name. If not specified, named in the format 'protocol-port'. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, dot (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器所属的负载均衡实例 ID。",
+		//	  "description": "Load balancer instance ID to which the listener belongs.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器所属的负载均衡实例 ID。",
+			Description: "Load balancer instance ID to which the listener belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PcaLeafCertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS监听器关联的私有叶子证书 ID。创建 HTTPS 监听器且证书来源为 pca_leaf 时必传。",
+		//	  "description": "Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.",
 		//	  "type": "string"
 		//	}
 		"pca_leaf_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS监听器关联的私有叶子证书 ID。创建 HTTPS 监听器且证书来源为 pca_leaf 时必传。",
+			Description: "Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PcaRootCACertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_root 时，必须指定 PcaRootCACertificateId 参数。",
+		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.",
 		//	  "type": "string"
 		//	}
 		"pca_root_ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_root 时，必须指定 PcaRootCACertificateId 参数。",
+			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PcaSubCACertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_sub 时，必须指定 PcaSubCACertificateId 参数。",
+		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.",
 		//	  "type": "string"
 		//	}
 		"pca_sub_ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_sub 时，必须指定 PcaSubCACertificateId 参数。",
+			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的监听端口，取值：1 - 65535 。",
+		//	  "description": "The listener port. Values: 1 - 65535.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "监听器的监听端口，取值：1   - 65535 。",
+			Description: "The listener port. Values: 1   - 65535.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器所属项目名称。",
+		//	  "description": "Name of the project to which the listener belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器所属项目名称。",
+			Description: "Name of the project to which the listener belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的协议，支持 HTTP 协议和 HTTPS 协议。",
+		//	  "description": "Listener protocol. Supports HTTP and HTTPS protocols.",
 		//	  "enum": [
 		//	    "HTTP",
 		//	    "HTTPS"
@@ -442,34 +442,34 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的协议，支持 HTTP 协议和 HTTPS 协议。",
+			Description: "Listener protocol. Supports HTTP and HTTPS protocols.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroupId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的默认服务器组。",
+		//	  "description": "Default server group for the listener.",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的默认服务器组。",
+			Description: "Default server group for the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroups
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联监听器的所有服务器组。",
+		//	  "description": "All server groups associated with the listener.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ServerGroupId": {
-		//	        "description": "服务器组 ID 。",
+		//	        "description": "Server group ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "ServerGroupName": {
-		//	        "description": "服务器组名称。",
+		//	        "description": "Server group name.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -484,24 +484,24 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ServerGroupId
 					"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "服务器组 ID 。",
+						Description: "Server group ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ServerGroupName
 					"server_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "服务器组名称。",
+						Description: "Server group name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "关联监听器的所有服务器组。",
+			Description: "All server groups associated with the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器的状态。取值如下：Creating：创建中。Active： 运行中。Pending： 变配中。Disabled：已停止。Deleting：删除中。",
+		//	  "description": "Listener status. Values: Creating: Creating. Active: Running. Pending: Changing configuration. Disabled: Stopped. Deleting: Deleting.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Active",
@@ -512,25 +512,25 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器的状态。取值如下：Creating：创建中。Active： 运行中。Pending： 变配中。Disabled：已停止。Deleting：删除中。",
+			Description: "Listener status. Values: Creating: Creating. Active: Running. Pending: Changing configuration. Disabled: Stopped. Deleting: Deleting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器所属标签。",
+		//	  "description": "Listener tags.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。具体规则如下：长度限制为1～128个字符。大小写敏感。不能以volc:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。",
+		//	        "description": "Tag key for user tags. Rules are as follows: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。具体规则如下：长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。",
+		//	        "description": "The value of the user tag. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -550,28 +550,28 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。具体规则如下：长度限制为1～128个字符。大小写敏感。不能以volc:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。",
+						Description: "Tag key for user tags. Rules are as follows: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。具体规则如下：长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。",
+						Description: "The value of the user tag. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "监听器所属标签。",
+			Description: "Listener tags.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "监听器最近一次的操作时间。",
+		//	  "description": "Time of the listener's most recent operation.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "监听器最近一次的操作时间。",
+			Description: "Time of the listener's most recent operation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

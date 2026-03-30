@@ -1,6 +1,6 @@
 {
   "additionalProperties": false,
-  "description": "解析记录是域名与 VPC 内资源信息的映射。",
+  "description": "A DNS record maps a domain name to resource information within a VPC.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/Host",
@@ -50,63 +50,63 @@
   ],
   "properties": {
     "CreatedAt": {
-      "description": "解析记录的创建时间。",
+      "description": "Creation time of the DNS record.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Enable": {
-      "description": "解析记录是否被启用。",
+      "description": "Indicates whether the DNS record is enabled.",
       "type": "boolean"
     },
     "Host": {
-      "description": "子域名的域名前缀。",
+      "description": "Domain prefix for the subdomain.",
       "type": "string"
     },
     "LastOperator": {
-      "description": "最近一次更新解析记录的账号 ID。",
+      "description": "Account ID of the most recent update to the DNS record.",
       "type": "string"
     },
     "Line": {
-      "description": "解析记录的线路，只能是默认线路 default。",
+      "description": "DNS record route, only the default route 'default' is supported.",
       "type": "string"
     },
     "RecordId": {
-      "description": "解析记录 ID。",
+      "description": "DNS record ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "Remark": {
-      "description": "备注。支持 UTF-8 字符。不能超过 16 个字符。默认值为空字符串。",
+      "description": "Remarks. Supports UTF-8 characters. Maximum 16 characters. Default is an empty string.",
       "semantic": "description",
       "type": "string"
     },
     "TTL": {
-      "description": "解析记录的过期时间。单位为秒。默认值为 600。",
+      "description": "DNS record TTL (time to live), in seconds. Default is 600.",
       "type": "integer"
     },
     "Type": {
-      "description": "解析记录类型。该参数的取值如下：A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。",
+      "description": "DNS record type. Valid values are: A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record. A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record.",
       "type": "string"
     },
     "UpdatedAt": {
-      "description": "解析记录最近一次的更新时间。",
+      "description": "Last update time of the DNS record.",
       "semantic": "updatedTime",
       "type": "string"
     },
     "Value": {
-      "description": "记录值。",
+      "description": "Record value.",
       "type": "string"
     },
     "Weight": {
-      "description": "记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。",
+      "description": "Record weight. The weight takes effect only when load balancing is enabled for the domain name.",
       "type": "integer"
     },
     "WeightEnabled": {
-      "description": "该记录集是否开启了负载均衡。",
+      "description": "Indicates whether load balancing is enabled for this record set.",
       "type": "boolean"
     },
     "ZID": {
-      "description": "域名 ID。",
+      "description": "Domain name ID.",
       "type": "integer"
     }
   },

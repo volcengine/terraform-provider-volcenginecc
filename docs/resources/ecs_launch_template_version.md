@@ -2,12 +2,12 @@
 page_title: "volcenginecc_ecs_launch_template_version Resource - terraform-provider-volcenginecc"
 subcategory: "ECS"
 description: |-
-  实例启动模板版本是一系列实例配置信息的集合，用于快速购买实例。在模板中，您可以存储除密码外的全部配置信息，包括密钥对、计算规格、云盘、网络等，如果配置信息均有效，便可以一键成功购买实例，无需进行重复配置。
+  Instance launch template version is a collection of instance configuration information used for quick instance purchase. In the template, you can store all configuration information except passwords, including key pairs, compute specifications, disks, network, etc. If all configuration information is valid, you can purchase an instance with one click without repeated configuration
 ---
 
 # volcenginecc_ecs_launch_template_version (Resource)
 
-实例启动模板版本是一系列实例配置信息的集合，用于快速购买实例。在模板中，您可以存储除密码外的全部配置信息，包括密钥对、计算规格、云盘、网络等，如果配置信息均有效，便可以一键成功购买实例，无需进行重复配置。
+Instance launch template version is a collection of instance configuration information used for quick instance purchase. In the template, you can store all configuration information except passwords, including key pairs, compute specifications, disks, network, etc. If all configuration information is valid, you can purchase an instance with one click without repeated configuration
 
 ## Example Usage
 
@@ -75,55 +75,55 @@ resource "volcenginecc_ecs_launch_template_version" "EcsLaunchTemplateVersionDem
 
 ### Optional
 
-- `deployment_set_group_number` (Number) 当ECS实例要加入或调整的部署集策略为部署集组高可用策略（AvailabilityGroup）时，可以通过该参数指定实例在部署集中的分组号。
-- `deployment_set_id` (String) 实例需要加入的部署集ID。
-- `description` (String) 实例的描述。
-- `eip` (Attributes) 实例绑定的公网IP信息。 (see [below for nested schema](#nestedatt--eip))
-- `host_name` (String) 实例的主机名。Linux系统的主机名长度限制为2～59个字符。Windows系统的主机名长度限制为2～10个字符。
-- `hpc_cluster_id` (String) 当创建高性能计算GPU型实例时，请指定高性能计算集群ID。
-- `image_id` (String) 镜像ID。
-- `image_name` (String) 镜像名称。
-- `instance_charge_type` (String) 实例和云盘的计费类型，取值：PostPaid：按量计费。PrePaid：包年包月。Esi：弹性预约实例。Segmented：时段型弹性预约实例。
-- `instance_name` (String) 实例的名称。
-- `instance_type_id` (String) 实例的规格。
-- `keep_image_credential` (Boolean) 是否保留镜像设置，取值：true：保留镜像设置，保留后将使用镜像预设的密码或密钥对登录实例。false（默认）：不保留镜像设置。
-- `key_pair_name` (String) 实例绑定的密钥对。
-- `launch_template_id` (String) 实例启动模板 ID。
-- `network_interfaces` (Attributes Set) 实例挂载的网卡信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--network_interfaces))
-- `project_name` (String) 实例所属项目。
-- `scheduled_instance` (Attributes) 弹性预约单信息。 (see [below for nested schema](#nestedatt--scheduled_instance))
-- `security_enhancement_strategy` (String) 是否开启安全加固。Active:开启安全加固，仅对公共镜像生效。InActive:关闭安全加固，对所有镜像生效。
-- `spot_price_limit` (Number) 抢占式实例的每小时最高价格。
-- `spot_strategy` (String) 按量计费的抢占式策略。取值：NoSpot：表示创建正常按量计费实例。SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的抢占式实例。SpotWithPriceLimit：设置出价上限的抢占式实例。
-- `suffix_index` (Number) 有序后缀的起始序号。
-- `tags` (Attributes Set) 实例的标签信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `unique_suffix` (Boolean) 表示当创建多台实例时，是否为Hostname和InstanceName自动添加有序后缀。
-- `user_data` (String) 实例的自定义数据。
-- `version_description` (String) 模版版本描述。
-- `volumes` (Attributes Set) 实例绑定的云盘信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--volumes))
-- `vpc_id` (String) 私有网络ID。
-- `zone_id` (String) 实例所属可用区ID。
+- `deployment_set_group_number` (Number) When the deployment set policy for an ECS instance is set to AvailabilityGroup, use this parameter to specify the group number within the deployment set.
+- `deployment_set_id` (String) Deployment set ID to join for the instance.
+- `description` (String) Instance description.
+- `eip` (Attributes) Public IP information bound to the instance. (see [below for nested schema](#nestedatt--eip))
+- `host_name` (String) Instance hostname. Linux hostname length: 2–59 characters. Windows hostname length: 2–10 characters
+- `hpc_cluster_id` (String) Specify the high-performance computing cluster ID when creating a high-performance computing GPU instance.
+- `image_id` (String) Image ID
+- `image_name` (String) Image name.
+- `instance_charge_type` (String) Billing type for the instance and cloud disk. Value: PostPaid: Pay-as-you-go. PrePaid: Subscription. Esi: Elastic reservation instance. Segmented: Time-segmented elastic reservation instance.
+- `instance_name` (String) Instance name.
+- `instance_type_id` (String) Instance specifications
+- `keep_image_credential` (Boolean) Retain image settings. Value: true: Retain image settings. If retained, the preset password or key pair in the image will be used to log in to the instance. false (default): Do not retain image settings.
+- `key_pair_name` (String) Key pair bound to the instance.
+- `launch_template_id` (String) Instance launch template ID.
+- `network_interfaces` (Attributes Set) Network interface information attached to the instance
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--network_interfaces))
+- `project_name` (String) Project to which the instance belongs.
+- `scheduled_instance` (Attributes) Elastic reservation order information (see [below for nested schema](#nestedatt--scheduled_instance))
+- `security_enhancement_strategy` (String) Enable security hardening. Active: Enable security hardening, effective only for public images. InActive: Disable security hardening, effective for all images.
+- `spot_price_limit` (Number) Maximum hourly price for preemptible instances.
+- `spot_strategy` (String) Preemptive strategy for pay-as-you-go billing. Values: NoSpot: Creates a standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, creating a preemptive instance that follows the current market price. SpotWithPriceLimit: Creates a preemptive instance with a bid limit
+- `suffix_index` (Number) Starting sequence number for the ordered suffix.
+- `tags` (Attributes Set) Instance tag information
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `unique_suffix` (Boolean) Indicates whether to automatically add an ordered suffix to Hostname and InstanceName when creating multiple instances.
+- `user_data` (String) Custom data for the instance.
+- `version_description` (String) Template version description.
+- `volumes` (Attributes Set) Disk information bound to the instance
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--volumes))
+- `vpc_id` (String) Private network ID
+- `zone_id` (String) Availability zone ID of the instance
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `version_number` (String) 模板版本号。
+- `version_number` (String) Template version number.
 
 <a id="nestedatt--eip"></a>
 ### Nested Schema for `eip`
 
 Optional:
 
-- `bandwidth` (Number) 公网IP的带宽上限，单位：Mbps。取值范围：1～200。默认值：1。
-- `bandwidth_package_id` (String) 共享带宽包的ID，表示将公网IP加入到共享带宽包。
-- `billing_type` (Number) 公网IP的计费方式，取值：2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。
-- `isp` (String) 公网IP的线路类型，取值：BGP：BGP（多线）。ChinaMobile：中国移动静态单线。ChinaTelecom：国电信静态单线。ChinaUnicom：中国联通静态单线。
-- `release_with_instance` (Boolean) 公网IP是否随实例删除，仅按量计费公网IP生效。
-- `security_protection_instance_id` (Number) 安全防护包ID。
-- `security_protection_types` (Set of String) 公网IP的安全防护类型。取值：AntiDDoS_Enhanced：申请增强防护类型的公网IP，可加入到DDoS原生防护（企业版）实例。
+- `bandwidth` (Number) Maximum bandwidth for the public IP, measured in Mbps. Value range: 1–200. Default: 1
+- `bandwidth_package_id` (String) Shared bandwidth package ID, indicating that the public IP is added to the shared bandwidth package
+- `billing_type` (Number) Billing method for the public IP. Values: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic
+- `isp` (String) Line type of the public IP. Values: BGP: BGP (multi-line). ChinaMobile: China Mobile static single line. ChinaTelecom: China Telecom static single line. ChinaUnicom: China Unicom static single line
+- `release_with_instance` (Boolean) Whether the public IP is released with the instance. Only applies to pay-as-you-go public IPs.
+- `security_protection_instance_id` (Number) Security protection package ID.
+- `security_protection_types` (Set of String) Security protection type for public IP. Value: AntiDDoS_Enhanced: Apply for a public IP with enhanced protection, which can be added to a DDoS native protection (Enterprise Edition) instance.
 
 
 <a id="nestedatt--network_interfaces"></a>
@@ -131,8 +131,8 @@ Optional:
 
 Optional:
 
-- `security_group_ids` (Set of String) 网卡关联的安全组ID。
-- `subnet_id` (String) 实例的私有网络子网ID。
+- `security_group_ids` (Set of String) Security group ID associated with the network interface.
+- `subnet_id` (String) Private network subnet ID of the instance.
 
 
 <a id="nestedatt--scheduled_instance"></a>
@@ -140,8 +140,8 @@ Optional:
 
 Optional:
 
-- `scheduled_instance_description` (String) 弹性预约单的描述。
-- `scheduled_instance_name` (String) 弹性预约单的名称。
+- `scheduled_instance_description` (String) Description of the elastic reservation order
+- `scheduled_instance_name` (String) Name of the elastic reservation order
 
 
 <a id="nestedatt--tags"></a>
@@ -149,8 +149,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 给资源添加的用户标签的标签键。
-- `value` (String) 给资源添加的用户标签的标签值。
+- `key` (String) Tag key for user tags added to the resource.
+- `value` (String) Tag value for user tags added to the resource
 
 
 <a id="nestedatt--volumes"></a>
@@ -158,13 +158,13 @@ Optional:
 
 Optional:
 
-- `delete_with_instance` (Boolean) 云盘是否随实例释放。
-- `extra_performance_iops` (Number) 云盘额外IOPS性能大小，仅ESSD FlexPL数据盘支持，单位为次/秒。 ExtraPerformanceTypeId为Balance或IOPS时需设置该参数。各个类型的额外性能取值范围如下：IOPS型：1～50000。Balance型：1～50000。
-- `extra_performance_throughput_mb` (Number) 云盘额外吞吐性能大小，单位MB/s，仅ESSD FlexPL数据盘支持。 ExtraPerformanceTypeId为Throughput时需设置该参数。 取值范围：1～650。
-- `extra_performance_type_id` (String) 云盘额外性能的类型，仅ESSD FlexPL数据盘支持。关于额外性能的更多介绍，请参见云盘额外性能。取值：Balance：均衡型额外性能。IOPS：IOPS型额外性能。Throughput：吞吐量型额外性能。
-- `size` (Number) 云盘大小，单位为GB。系统盘：ESSD_PL0：20~2048 PTSSD：10~500。数据盘：ESSD_PL0：10~32768 PTSSD：20~8192
-- `snapshot_id` (String) 使用快照创建云盘，仅支持创建数据盘。您可以调用DescribeSnapshots接口查询快照ID。
-- `volume_type` (String) 云盘类型。ESSD_PL0：极速型SSD PL0。PTSSD：性能型SSD。
+- `delete_with_instance` (Boolean) Whether the disk is released with the instance
+- `extra_performance_iops` (Number) Extra IOPS performance size for the disk, supported only by ESSD FlexPL data disks, measured in operations per second. This parameter must be set when ExtraPerformanceTypeId is Balance or IOPS. Value ranges for each type: IOPS: 1–50000. Balance: 1–50000
+- `extra_performance_throughput_mb` (Number) Additional disk throughput performance in MB/s. Supported only by ESSD FlexPL data disks. Set this parameter when ExtraPerformanceTypeId is Throughput. Value range: 1–650.
+- `extra_performance_type_id` (String) Type of extra disk performance, supported only by ESSD FlexPL data disks. For more information about extra performance, see Extra Disk Performance. Values: Balance: Balanced extra performance. IOPS: IOPS extra performance. Throughput: Throughput extra performance
+- `size` (Number) Disk size, measured in GB. System disk: ESSD_PL0: 20–2048, PTSSD: 10–500. Data disk: ESSD_PL0: 10–32768, PTSSD: 20–8192
+- `snapshot_id` (String) Create a cloud disk from a snapshot. Only data disks are supported. You can call the DescribeSnapshots API to query the snapshot ID.
+- `volume_type` (String) Cloud disk type. ESSD_PL0: Ultra-fast SSD PL0. PTSSD: Performance SSD.
 
 ## Import
 

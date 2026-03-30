@@ -10,7 +10,7 @@
     "AuthSpec": {
       "properties": {
         "Enable": {
-          "description": "是否开启认证。",
+          "description": "Whether authentication is enabled.",
           "type": "boolean"
         }
       },
@@ -19,11 +19,11 @@
     "CustomDomain": {
       "properties": {
         "Domain": {
-          "description": "自定义域名。",
+          "description": "Custom domain.",
           "type": "string"
         },
         "DomainId": {
-          "description": "自定义域名ID。",
+          "description": "Custom domain ID.",
           "type": "string"
         }
       },
@@ -32,11 +32,11 @@
     "Domain": {
       "properties": {
         "Domain": {
-          "description": "域名。",
+          "description": "Domain.",
           "type": "string"
         },
         "Type": {
-          "description": "域名类型。取值：public：公网。private：私网。",
+          "description": "Domain type. Options: public: Public network. private: Private network.",
           "enum": [
             "public",
             "private"
@@ -49,7 +49,7 @@
     "DomainSpec": {
       "properties": {
         "EnablePublicResolution": {
-          "description": "开启私网域名公网解析。",
+          "description": "Enable public resolution for private network domains.",
           "type": "boolean"
         }
       },
@@ -58,15 +58,15 @@
     "ServiceNetworkSpec": {
       "properties": {
         "EnablePrivateNetwork": {
-          "description": "开启私网。",
+          "description": "Enable private network.",
           "type": "boolean"
         },
         "EnablePublicNetwork": {
-          "description": "开启公网。",
+          "description": "Enable public network.",
           "type": "boolean"
         },
         "PrivateNetworkIP": {
-          "description": "私网域名解析的目标IP。",
+          "description": "Target IP for private network domain resolution.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -78,7 +78,7 @@
       "type": "object"
     }
   },
-  "description": "服务是一组路由对外暴露的入口，用于区分流量的来源和协议，实现业务、环境、逻辑租户隔离。服务可以绑定独立的访问域名，以域名维度访问业务。",
+  "description": "A service is a set of routes exposed as entry points to distinguish traffic sources and protocols, enabling business, environment, and logical tenant isolation. Services can bind independent access domains, allowing access by domain.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/GatewayId",
@@ -123,22 +123,22 @@
   "properties": {
     "AuthSpec": {
       "$ref": "#/definitions/AuthSpec",
-      "description": "认证配置。",
+      "description": "Authentication configuration.",
       "type": "object"
     },
     "Comments": {
-      "description": "备注，长度限制为0~253个字符。",
+      "description": "Remarks. Length must be 0–253 characters.",
       "maxLength": 253,
       "semantic": "description",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "CustomDomains": {
-      "description": "自定义域名列表。",
+      "description": "Custom domain list.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/CustomDomain"
@@ -148,15 +148,15 @@
     },
     "DomainSpec": {
       "$ref": "#/definitions/DomainSpec",
-      "description": "域名详情。",
+      "description": "Domain details.",
       "type": "object"
     },
     "DomainType": {
-      "description": "域名类型，取值：DefaultDomain：默认域名。CustomDomain：自定义域名。",
+      "description": "Domain type. Options: DefaultDomain: Default domain. CustomDomain: Custom domain.",
       "type": "string"
     },
     "Domains": {
-      "description": "默认域名。",
+      "description": "Default domain.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Domain"
@@ -165,19 +165,19 @@
       "uniqueItems": true
     },
     "GatewayId": {
-      "description": "网关ID。",
+      "description": "Gateway ID.",
       "type": "string"
     },
     "GatewayName": {
-      "description": "网关名称。",
+      "description": "Gateway name.",
       "type": "string"
     },
     "Message": {
-      "description": "服务创建失败、删除失败或异常时的错误信息。",
+      "description": "Error message for service creation failure, deletion failure, or abnormal status.",
       "type": "string"
     },
     "Protocol": {
-      "description": "服务支持的协议。取值：HTTP：HTTP。HTTPS：HTTPS。",
+      "description": "Supported protocols. Options: HTTP: HTTP. HTTPS: HTTPS.",
       "insertionOrder": false,
       "items": {
         "type": "string"
@@ -186,27 +186,27 @@
       "uniqueItems": true
     },
     "ServiceId": {
-      "description": "服务ID。",
+      "description": "Service ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "ServiceName": {
-      "description": "服务名称。支持大小写字母、数字和中划线（-），长度限制为2~128个字符。不能以中划线（-）开头。",
+      "description": "Service name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length must be 2–128 characters. Cannot start with a hyphen (-).",
       "maxLength": 128,
       "semantic": "resourceName",
       "type": "string"
     },
     "ServiceNetworkSpec": {
       "$ref": "#/definitions/ServiceNetworkSpec",
-      "description": "服务默认域名网络配置。。",
+      "description": "Default domain network configuration..",
       "type": "object"
     },
     "ServiceType": {
-      "description": "服务类型，取值：AIProvider：AI模型代理。",
+      "description": "Service type. Options: AIProvider: AI model proxy.",
       "type": "string"
     },
     "Status": {
-      "description": "Creating：创建中。CreatedFailed：创建失败。Running：运行中。Deleting：删除中。DeletedFailed：删除失败。Abnormal：异常。",
+      "description": "Creating: Creating. CreatedFailed: Creation failed. Running: Running. Deleting: Deleting. DeletedFailed: Deletion failed. Abnormal: Abnormal.",
       "semantic": "status",
       "type": "string"
     }

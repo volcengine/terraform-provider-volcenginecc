@@ -21,7 +21,7 @@ Data Source schema for Volcengine::EMR::ClusterUserGroup
 
 ### Read-Only
 
-- `cluster_id` (String) 集群ID。
-- `description` (String) 用户组描述。
-- `members` (Set of String) 用户组成员。不支持操作特殊用户，如admin等。
-- `user_group_name` (String) 用户组名称。
+- `cluster_id` (String) Cluster ID.
+- `description` (String) User group description.
+- `members` (Set of String) Operations on special users, such as admin, are not supported.
+- `user_group_name` (String) User group name.

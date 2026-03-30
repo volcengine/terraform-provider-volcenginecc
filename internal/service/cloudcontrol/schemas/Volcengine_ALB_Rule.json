@@ -28,26 +28,26 @@
       "type": "object"
     },
     "ConvertRedirectConfig": {
-      "description": "重定向相关配置信息。",
+      "description": "Redirect-related configuration information.",
       "properties": {
         "Host": {
-          "description": "重定向域名，仅支持精确域名。",
+          "description": "Redirect domain. Only exact domains are supported.",
           "type": "string"
         },
         "HttpCode": {
-          "description": "重定向状态码，支持301，302，307，308。",
+          "description": "Redirect status codes supported: 301, 302, 307, 308.",
           "type": "string"
         },
         "Path": {
-          "description": "重定向 URI。。",
+          "description": "Redirect URI..",
           "type": "string"
         },
         "Port": {
-          "description": "重定向端口。",
+          "description": "Redirect port.",
           "type": "string"
         },
         "Protocol": {
-          "description": "重定向使用的协议，支持HTTP，HTTPS。",
+          "description": "Protocol used for redirect. Supports HTTP and HTTPS.",
           "type": "string"
         }
       },
@@ -57,7 +57,7 @@
       "description": "RewriteConfig",
       "properties": {
         "Path": {
-          "description": "重写路径。",
+          "description": "Rewrite path.",
           "type": "string"
         }
       },
@@ -67,25 +67,25 @@
       "description": "FixedResponseConfig",
       "properties": {
         "Content": {
-          "description": "返回的固定内容。",
+          "description": "Fixed response content.",
           "type": "string"
         },
         "ContentType": {
-          "description": "返回的固定内容的格式。text/plain、text/css、text/html、application/javascript、application/json",
+          "description": "Format of fixed response content. text/plain, text/css, text/html, application/javascript, application/json",
           "type": "string"
         },
         "HttpCode": {
-          "description": "返回的 HTTP 状态码。",
+          "description": "Returned HTTP status code.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "ForwardGroupConfig": {
-      "description": "转发规则服务器组配置",
+      "description": "Forwarding rule server group configuration.",
       "properties": {
         "ServerGroupTuples": {
-          "description": "转发到的目的服务器组列表。",
+          "description": "Destination server group list.",
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/ServerGroupTuple",
@@ -95,11 +95,11 @@
           "uniqueItems": true
         },
         "StickySessionEnabled": {
-          "description": "是否开启组间会话保持。on：开启。off：不开启。",
+          "description": "Whether to enable inter-group session persistence. on: enabled. off: disabled.",
           "type": "string"
         },
         "StickySessionTimeout": {
-          "description": "组件回话保持的超时时间。单位：秒。",
+          "description": "Component session stickiness timeout. Unit: seconds.",
           "format": "int64",
           "type": "integer"
         }
@@ -110,11 +110,11 @@
       "description": "HeaderConfig。",
       "properties": {
         "Key": {
-          "description": "头字段键。",
+          "description": "Header field key.",
           "type": "string"
         },
         "Values": {
-          "description": "头字段值。",
+          "description": "Header field value.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -129,7 +129,7 @@
       "description": "HostConfig。",
       "properties": {
         "Values": {
-          "description": "转发规则的域名，支持泛域名和精确域名。",
+          "description": "Domain name of the forwarding rule. Supports wildcard and exact domains.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -144,7 +144,7 @@
       "description": "MethodConfig。",
       "properties": {
         "Values": {
-          "description": "请求方法。支持HEAD、GET、POST、OPTIONS、PUT、PATCH、DELETE。",
+          "description": "Request method. Supports HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -159,7 +159,7 @@
       "description": "PathConfig。",
       "properties": {
         "Values": {
-          "description": "转发规则的URL，仅支持绝对路径。",
+          "description": "Forwarding rule URL. Only absolute paths are supported.",
           "insertionOrder": false,
           "items": {
             "type": "string"
@@ -187,43 +187,43 @@
       "type": "object"
     },
     "RedirectConfig": {
-      "description": "重定向相关配置信息。",
+      "description": "Redirect-related configuration information.",
       "properties": {
         "RedirectDomain": {
-          "description": "重定向的域名。若创建/修改重定向类型的转发规则时，重定向域名设置为空，接口会返回${host}，该变量含义为重定向域名与请求域名保持一致，但不支持创建/修改时，将重定向域名设置为${host}.。",
+          "description": "Redirect domain name. If the redirect domain name is left empty when creating or modifying a redirect forwarding rule, the API returns ${host}, which means the redirect domain matches the request domain. However, setting the redirect domain to ${host} is not supported when creating or modifying rules.",
           "type": "string"
         },
         "RedirectHttpCode": {
-          "description": "重定向状态码。301、302、307、308。",
+          "description": "Redirect status codes: 301, 302, 307, 308.",
           "type": "string"
         },
         "RedirectPort": {
-          "description": "重定向的端口。若创建/修改重定向类型的转发规则时，重定向端口设置为空，接口会返回${port}，该变量含义为重定向端口与请求端口（监听器端口）保持一致，但不支持创建/修改时，将重定向端口设置为${port}.。",
+          "description": "Redirect port. If the redirect port is left empty when creating or modifying a redirect forwarding rule, the API returns ${port}, which means the redirect port matches the request port (listener port). However, setting the redirect port to ${port} is not supported when creating or modifying rules.",
           "type": "string"
         },
         "RedirectProtocol": {
-          "description": "重定向使用的协议。HTTP、HTTPS。",
+          "description": "Protocol used for redirect. HTTP, HTTPS.",
           "type": "string"
         },
         "RedirectUri": {
-          "description": "重定向的URI。若创建/修改重定向类型的转发规则时，重定向uri设置为空，接口会返回${request_uri}，该变量含义为重定向uri与请求uri保持一致，但不支持创建/修改时，将重定向uri设置为${request_uri}.。",
+          "description": "Redirect URI. If the redirect URI is left empty when creating or modifying a redirect forwarding rule, the API returns ${request_uri}, which means the redirect URI matches the request URI. However, setting the redirect URI to ${request_uri} is not supported when creating or modifying rules.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "RewriteConfig": {
-      "description": "重定向相关配置信息。",
+      "description": "Redirect-related configuration information.",
       "properties": {
         "RewritePath": {
-          "description": "重写路径。",
+          "description": "Rewrite path.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "RuleAction": {
-      "description": "标准版转发规则动作。",
+      "description": "Standard edition forwarding rule action.",
       "properties": {
         "FixedResponseConfig": {
           "$ref": "#/definitions/FixedResponseConfig",
@@ -251,14 +251,14 @@
           "type": "object"
         },
         "Type": {
-          "description": "转发规则动作类型。ForwardGroup：转发至多个虚拟服务器组。Redirect： 重定向。Rewrite： 重写。TrafficLimit：流量限速。",
+          "description": "Forwarding rule action types. ForwardGroup: forward to multiple virtual server groups. Redirect: redirect. Rewrite: rewrite. TrafficLimit: traffic limiting.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "RuleCondition": {
-      "description": "标准版转发规则条件。",
+      "description": "Standard edition forwarding rule condition.",
       "properties": {
         "HeaderConfig": {
           "$ref": "#/definitions/HeaderConfig",
@@ -286,7 +286,7 @@
           "type": "object"
         },
         "Type": {
-          "description": "标准版转发规则条件类型。Host： 域名。Path： 路径。Header：HTTP头字段。Method: 请求方法。QueryString: 查询参数。",
+          "description": "Standard forwarding rule condition types. Host: domain name. Path: path. Header: HTTP header field. Method: request method. QueryString: query parameter.",
           "type": "string"
         }
       },
@@ -296,11 +296,11 @@
       "description": "ServerGroupStickySession",
       "properties": {
         "Enabled": {
-          "description": "是否开启组间会话保持。on：开启。off：不开启。",
+          "description": "Whether to enable inter-group session persistence. on: enabled. off: disabled.",
           "type": "string"
         },
         "Timeout": {
-          "description": "组件回话保持的超时时间。单位：秒。",
+          "description": "Component session stickiness timeout. Unit: seconds.",
           "format": "int64",
           "type": "integer"
         }
@@ -308,14 +308,14 @@
       "type": "object"
     },
     "ServerGroupTuple": {
-      "description": "转发到的目的服务器组。",
+      "description": "Destination server group.",
       "properties": {
         "ServerGroupId": {
-          "description": "转发到的目的服务器组 ID。",
+          "description": "Destination server group ID.",
           "type": "string"
         },
         "Weight": {
-          "description": "服务器组权重。",
+          "description": "Server group weight.",
           "format": "int64",
           "type": "integer"
         }
@@ -326,7 +326,7 @@
       "description": "TrafficLimitConfig",
       "properties": {
         "QPS": {
-          "description": "每秒请求数。",
+          "description": "Requests per second.",
           "format": "int64",
           "type": "integer"
         }
@@ -337,18 +337,18 @@
       "description": "Value。",
       "properties": {
         "Key": {
-          "description": "查询字符串键。",
+          "description": "Query string key.",
           "type": "string"
         },
         "Value": {
-          "description": "查询字符串值。",
+          "description": "Query string value.",
           "type": "string"
         }
       },
       "type": "object"
     }
   },
-  "description": "ALB 按照您设置的转发规则，对不同特征的访问流量进行分发。您可以为一个监听器配置多条转发规则。基础版 ALB 实例支持基于域名和路径的转发规则。标准版 ALB 实例支持基于域名、路径和 HTTP 标头的转发规则，并支持复合转发条件。",
+  "description": "ALB distributes incoming traffic based on the forwarding rules you set. You can configure multiple forwarding rules for a single listener. Basic edition ALB instances support forwarding rules based on domain and path. Standard edition ALB instances support forwarding rules based on domain, path, and HTTP headers, and support composite forwarding conditions.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ListenerId"
@@ -393,48 +393,48 @@
   ],
   "properties": {
     "Description": {
-      "description": "转发规则的描述。",
+      "description": "Forwarding rule description.",
       "semantic": "description",
       "type": "string"
     },
     "Domain": {
-      "description": "转发规则的域名。",
+      "description": "Domain name of the forwarding rule.",
       "type": "string"
     },
     "ForwardGroupConfig": {
       "$ref": "#/definitions/ForwardGroupConfig",
-      "description": "转发规则服务器组配置",
+      "description": "Forwarding rule server group configuration.",
       "type": "object"
     },
     "ListenerId": {
-      "description": "监听器ID。",
+      "description": "Listener ID.",
       "type": "string"
     },
     "Priority": {
-      "description": "标准版转发规则优先级。",
+      "description": "Standard edition forwarding rule priority.",
       "format": "int64",
       "type": "integer"
     },
     "RedirectConfig": {
       "$ref": "#/definitions/RedirectConfig",
-      "description": "重定向相关配置信息。",
+      "description": "Redirect-related configuration information.",
       "type": "object"
     },
     "RewriteConfig": {
       "$ref": "#/definitions/RewriteConfig",
-      "description": "重定向相关配置信息。",
+      "description": "Redirect-related configuration information.",
       "type": "object"
     },
     "RewriteEnabled": {
-      "description": "转发规则重写配置开关。on：开启。off：关闭。",
+      "description": "Forwarding rule rewrite configuration switch. on: enabled. off: disabled.",
       "type": "string"
     },
     "RuleAction": {
-      "description": "转发规则动作。空：默认转发至服务器组。Redirect：重定向。",
+      "description": "Forwarding rule action. Empty: default forward to server group. Redirect: redirect.",
       "type": "string"
     },
     "RuleActions": {
-      "description": "标准版转发规则动作。",
+      "description": "Standard edition forwarding rule action.",
       "insertionOrder": true,
       "items": {
         "$ref": "#/definitions/RuleAction",
@@ -444,7 +444,7 @@
       "uniqueItems": true
     },
     "RuleConditions": {
-      "description": "标准版转发规则条件。",
+      "description": "Standard edition forwarding rule condition.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/RuleCondition",
@@ -454,25 +454,25 @@
       "uniqueItems": true
     },
     "RuleId": {
-      "description": "转发规则ID。",
+      "description": "Forwarding rule ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "ServerGroupId": {
-      "description": "转发规则关联的后端服务器组ID。",
+      "description": "Backend server group ID associated with the forwarding rule.",
       "type": "string"
     },
     "TrafficLimitEnabled": {
-      "description": "转发规则 QPS 限速开关。on：开启。off：关闭。",
+      "description": "Forwarding rule QPS throttling switch. on: enabled. off: disabled.",
       "type": "string"
     },
     "TrafficLimitQPS": {
-      "description": "每秒请求数。取值范围：100～100000。",
+      "description": "Requests per second. Range: 100–100000.",
       "format": "int64",
       "type": "integer"
     },
     "Url": {
-      "description": "转发规则的URL。",
+      "description": "Forwarding rule URL.",
       "type": "string"
     }
   },

@@ -21,27 +21,27 @@ Data Source schema for Volcengine::CloudIdentity::Group
 
 ### Read-Only
 
-- `created_time` (String) 创建时间。
-- `description` (String) 描述。
-- `display_name` (String) 显示名。
-- `group_id` (String) 用户组id。
-- `group_name` (String) 用户组名称。
-- `join_type` (String) 用户组类型。
-- `members` (Attributes Set) 用户组成员列表 (see [below for nested schema](#nestedatt--members))
-- `source` (String) 用户组来源。
-- `updated_time` (String) 更新时间。
+- `created_time` (String) Creation Time
+- `description` (String) Description
+- `display_name` (String) Display Name
+- `group_id` (String) User Group ID
+- `group_name` (String) User Group Name
+- `join_type` (String) User Group Type
+- `members` (Attributes Set) User Group Member List (see [below for nested schema](#nestedatt--members))
+- `source` (String) User Group Source
+- `updated_time` (String) Update Time
 
 <a id="nestedatt--members"></a>
 ### Nested Schema for `members`
 
 Read-Only:
 
-- `description` (String) 用户描述信息
-- `display_name` (String) 用户显示名称。
-- `email` (String) 用户邮箱。
-- `identity_type` (String) 用户身份类型。
-- `join_time` (String) 用户加入用户组的时间。
-- `phone` (String) 用户手机号。
-- `source` (String) 用户来源。
-- `user_id` (String) 用户id。
-- `user_name` (String) 用户名。
+- `description` (String) User Description
+- `display_name` (String) User Display Name
+- `email` (String) User Email
+- `identity_type` (String) User Identity Type
+- `join_time` (String) User Group Join Time
+- `phone` (String) User Phone Number
+- `source` (String) User Source
+- `user_id` (String) User ID
+- `user_name` (String) Username

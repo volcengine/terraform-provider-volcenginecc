@@ -21,44 +21,44 @@ Data Source schema for Volcengine::StorageEBS::Volume
 
 ### Read-Only
 
-- `auto_snapshot_policy_id` (String) 自动快照策略ID。
-- `auto_snapshot_policy_name` (String) 自动快照策略名称。
-- `baseline_performance` (Attributes) 基本性能。 (see [below for nested schema](#nestedatt--baseline_performance))
-- `created_at` (String) 云盘创建时间。
-- `delete_with_instance` (Boolean) 释放实例时，该云盘是否随实例一起释放，取值说明如下：true：云盘随实例一起释放。false：云盘不随实例一起释放。
-- `description` (String) 云盘的描述信息，默认为空，长度限制在1 ~ 255字符之间。
-- `device_name` (String) 设备名称
-- `error_detail` (String) 具体错误
-- `expired_time` (String) 包年包月到期时间。
-- `extra_performance` (Attributes) 额外性能。 (see [below for nested schema](#nestedatt--extra_performance))
-- `image_id` (String) 云盘中的镜像ID。
-- `instance_id` (String) 创建云盘的同时挂载的ECS实例ID。
-- `kind` (String) 云盘属性，data表示数据盘。默认值为data。说明： 仅支持创建数据盘。
-- `overdue_reclaim_time` (String) 云盘欠费回收时间。
-- `overdue_time` (String) 云盘欠费关停时间。
-- `pay_type` (String) 付费类型，说明如下： Pre：预付费（包年包月） Post：后付费（按量计费）。
-- `project_name` (String) 云盘所要加入的Project（项目）名称。
-- `renew_type` (Number) 续费方式 1：手动续费 2 ：自动续费 3 ：到期不续费。
-- `size` (Number) Size，数据盘容量大小，单位为GiB。不同类型的数据盘容量范围如下：ESSD_PL0：10~65536 GiB；ESSD_FlexPL：10~65536 GiB；TSSD_TL0：40~65536 GiB
-- `snapshot_count` (Number) 快照计数
-- `source_snapshot_id` (String) 源快照。
-- `status` (String) 云盘状态，取值说明如下：available：可用。attaching：挂载中。attached：已挂载。detaching：卸载中。creating：创建中。deleting：删除中。error：错误。extending：扩容中。
-- `tags` (Attributes Set) 云盘的标签信息 (see [below for nested schema](#nestedatt--tags))
-- `total_performance` (Attributes) 总性能。 (see [below for nested schema](#nestedatt--total_performance))
-- `trade_status` (Number) 交易状态 0：创建中 1：运行中 2：创建失败
-- `updated_at` (String) 云盘更新时间。
-- `volume_id` (String) 云盘id。
-- `volume_name` (String) 云盘显示名称。命名规则如下：首字符仅支持中文、字母或下划线（_）。可包含中文、字母、数字、下划线（_）或中划线（-）。长度限制在1~128字符之间。
-- `volume_type` (String) 云盘类型，取值说明如下：ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL: 极速型SSD云盘，FlexPL规格。TSSD_TL0: 吞吐型SSD云盘。
-- `zone_id` (String) 可用区ID。
+- `auto_snapshot_policy_id` (String) Automatic snapshot policy ID.
+- `auto_snapshot_policy_name` (String) Automatic snapshot policy name.
+- `baseline_performance` (Attributes) Baseline performance. (see [below for nested schema](#nestedatt--baseline_performance))
+- `created_at` (String) Disk creation time.
+- `delete_with_instance` (Boolean) When releasing the instance, specify whether the disk is released along with the instance. Value description: true: The disk is released with the instance. false: The disk is not released with the instance.
+- `description` (String) Disk description. Default is empty. Length must be between 1 and 255 characters.
+- `device_name` (String) Device name
+- `error_detail` (String) Specific error
+- `expired_time` (String) Expiration time for yearly/monthly subscription.
+- `extra_performance` (Attributes) Extra performance. (see [below for nested schema](#nestedatt--extra_performance))
+- `image_id` (String) Image ID in the disk.
+- `instance_id` (String) ECS instance ID mounted when creating the cloud disk.
+- `kind` (String) Disk attribute. data indicates a data disk. The default value is data. Note: Only data disks can be created.
+- `overdue_reclaim_time` (String) Disk overdue reclamation time.
+- `overdue_time` (String) Disk overdue shutdown time.
+- `pay_type` (String) Payment type. Description: Pre: Prepaid (annual/monthly). Post: Postpaid (pay-as-you-go).
+- `project_name` (String) Project name to which the disk will be added.
+- `renew_type` (Number) Renewal method 1: Manual renewal 2: Automatic renewal 3: Do not renew upon expiration.
+- `size` (Number) Size: data disk capacity in GiB. The capacity ranges for different types of data disks are as follows: ESSD_PL0: 10~65536 GiB; ESSD_FlexPL: 10~65536 GiB; TSSD_TL0: 40~65536 GiB
+- `snapshot_count` (Number) Snapshot count.
+- `source_snapshot_id` (String) Source snapshot.
+- `status` (String) Disk status. Value description: available: Available. mounting: Mounting. mounted: Mounted. unmounting: Unmounting. creating: Creating. deleting: Deleting. error: Error. expanding: Expanding.
+- `tags` (Attributes Set) Disk tag information. (see [below for nested schema](#nestedatt--tags))
+- `total_performance` (Attributes) Total performance. (see [below for nested schema](#nestedatt--total_performance))
+- `trade_status` (Number) Transaction status 0: Creating 1: Running 2: Creation failed
+- `updated_at` (String) Disk update time.
+- `volume_id` (String) Disk ID.
+- `volume_name` (String) Disk display name. Naming rules: The first character must be a Chinese character, a letter, or an underscore (_). Can contain Chinese characters, letters, numbers, underscores (_), or hyphens (-). Length must be between 1 and 128 characters.
+- `volume_type` (String) Disk type. Value description: ESSD_PL0: Ultra-fast SSD disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD disk, FlexPL specification. TSSD_TL0: Throughput SSD disk.
+- `zone_id` (String) Availability zone ID.
 
 <a id="nestedatt--baseline_performance"></a>
 ### Nested Schema for `baseline_performance`
 
 Read-Only:
 
-- `iops` (Number) 云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。
-- `throughput` (Number) 云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。
+- `iops` (Number) Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.
+- `throughput` (Number) The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.
 
 
 <a id="nestedatt--extra_performance"></a>
@@ -66,9 +66,9 @@ Read-Only:
 
 Read-Only:
 
-- `extra_performance_type_id` (String) 额外性能的类型，取值如下：Balance：均衡型额外性能；IOPS：IOPS型额外性能；Throughput：吞吐量型额外性能。
-- `iops` (Number) 云盘的额外IOPS。
-- `throughput` (Number) 云盘的额外吞吐量。
+- `extra_performance_type_id` (String) Type of extra performance. Value description: Balance: Balanced extra performance; IOPS: IOPS extra performance; Throughput: Throughput extra performance.
+- `iops` (Number) Extra IOPS of the disk.
+- `throughput` (Number) Extra throughput of the disk.
 
 
 <a id="nestedatt--tags"></a>
@@ -76,8 +76,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key.
+- `value` (String) Tag value.
 
 
 <a id="nestedatt--total_performance"></a>
@@ -85,5 +85,5 @@ Read-Only:
 
 Read-Only:
 
-- `iops` (Number) 云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。
-- `throughput` (Number) 云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。
+- `iops` (Number) Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.
+- `throughput` (Number) The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.

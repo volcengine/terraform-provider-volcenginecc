@@ -2,12 +2,12 @@
 page_title: "volcenginecc_iam_user Resource - terraform-provider-volcenginecc"
 subcategory: "IAM"
 description: |-
-  IAM子用户是访问控制的一种身份，由账号或是拥有权限的用户创建。用户被授予权限后，可登录控制台或使用访问密钥调用API访问云资源。
+  An IAM sub-user is an identity for access control, created by an account or a user with permissions. After permissions are granted, the user can log in to the console or use the access key to call APIs to access cloud resources.
 ---
 
 # volcenginecc_iam_user (Resource)
 
-IAM子用户是访问控制的一种身份，由账号或是拥有权限的用户创建。用户被授予权限后，可登录控制台或使用访问密钥调用API访问云资源。
+An IAM sub-user is an identity for access control, created by an account or a user with permissions. After permissions are granted, the user can log in to the console or use the access key to call APIs to access cloud resources.
 
 ## Example Usage
 
@@ -38,55 +38,58 @@ resource "volcenginecc_iam_user" "UserDemo" {
 
 ### Required
 
-- `user_name` (String) 子用户名称，用户名。长度1~64，支持英文、数字、下划线、和.-@符号。
+- `user_name` (String) Sub-user name, username. Length 1–64. Supports English, numbers, underscores, and .-@ characters.
 
 ### Optional
 
-- `description` (String) 子用户对应的描述信息，长度不超过255。
-- `display_name` (String) 子用户对应的展示名称，用户显示名。长度1~128，仅支持中文、英文、数字、空格和.-_@符号。
-- `email` (String) 子用户对应的电子邮件地址。
-- `email_is_verify` (Boolean) 子用户电子邮件地址是否已验证。true代表已验证，false代表未验证。
-- `groups` (Set of String) 子用户归属的用户组。
-- `login_profile` (Attributes) 子用户的登录配置。 (see [below for nested schema](#nestedatt--login_profile))
-- `mobile_phone` (String) 子用户对应的手机号。
-- `mobile_phone_is_verify` (Boolean) 子用户手机号是否已验证。true代表已验证，false代表未验证。
-- `policies` (Attributes Set) 子用户对应的权限策略。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--policies))
-- `security_config` (Attributes) 子用户的操作保护配置。 (see [below for nested schema](#nestedatt--security_config))
-- `tags` (Attributes Set) 子用户对应的资源标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Description for the sub-user, up to 255 characters.
+- `display_name` (String) Display name for the sub-user, user display name. Length 1–128. Supports Chinese, English, numbers, spaces, and .-_@ characters only.
+- `email` (String) Sub-user's email address.
+- `email_is_verify` (Boolean) Whether the sub-user's email address is verified. 'true' means verified, 'false' means not verified.
+- `groups` (Set of String) User group to which the sub-user belongs.
+- `login_profile` (Attributes) Login configuration for the sub-user. (see [below for nested schema](#nestedatt--login_profile))
+- `mobile_phone` (String) Sub-user's mobile number.
+- `policies` (Attributes Set) Sub-user's permission policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policies))
+- `security_config` (Attributes) Operation protection configuration for the sub-user. (see [below for nested schema](#nestedatt--security_config))
+- `tags` (Attributes Set) Sub-user's resource tags.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `access_key` (Attributes Set) 子用户的访问密钥。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--access_key))
-- `account_id` (Number) 子用户归属的主账号。
-- `create_date` (String) 子用户对应的创建时间。
+- `access_key` (Attributes Set) Sub-user's access key.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--access_key))
+- `account_id` (Number) Main account to which the sub-user belongs.
+- `create_date` (String) Sub-user's creation time.
 - `id` (String) Uniquely identifies the resource.
-- `trn` (String) 子用户对应的Trn表达式。
-- `update_date` (String) 子用户对应的更新时间。
-- `user_id` (Number) 子用户的ID。
+- `mobile_phone_is_verify` (Boolean) Whether the sub-user's phone number is verified. 'true' means verified, 'false' means not verified.
+- `trn` (String) TRN expression for the sub-user.
+- `update_date` (String) Update time for the sub-user.
+- `user_id` (Number) Sub-user's ID.
 
 <a id="nestedatt--login_profile"></a>
 ### Nested Schema for `login_profile`
 
 Optional:
 
-- `create_date` (String) 登录配置创建时间。
-- `last_login_date` (String) 上次登录时间。
-- `last_login_ip` (String) 上次登录IP。
-- `last_reset_password_time` (Number) 上次重置密码的时间，上次重置密码的时间。0代表未设置过密码，非0代表过期时间的时间戳。
-- `login_allowed` (Boolean) 是否允许登录，是否允许登录。true代表允许，false代表不允许，默认为false。
-- `login_locked` (Boolean) 登录是否被锁定。true代表已锁定，false代表未锁定。管理员设置错误密码重试次数限制后，用户命中后登录会被锁定。
-- `password` (String) 登录密码。
-- `password_expire_at` (Number) 密码过期时间。0代表永不过期，非0代表过期时间的时间戳。
-- `password_reset_required` (Boolean) 下次登录是否需要重设密码，下次登录是否需要重设密码。true代表允许，false代表不允许，默认为false。
-- `safe_auth_exempt_duration` (Number) 登录保护豁免时长，登录保护豁免时长。支持设置1至7（天），或1至168（小时），或5至1440（分钟）。单位设置请参考SafeAuthExemptUnit参数。
-- `safe_auth_exempt_required` (Number) 是否开启登录保护豁免，是否开启登录保护豁免。0代表不开启，1代表开启。开启登录保护豁免后，验证完成后一定时间内登录将不再进行验证。
-- `safe_auth_exempt_unit` (Number) 登录保护豁免的时间单位，登录保护豁免的时间单位。0代表分钟，1代表小时，2代表天。
-- `safe_auth_flag` (Boolean) 是否开启登录保护，是否开启登录保护。true代表开启，false代表不开启，默认为false。
-- `safe_auth_type` (String) 登录保护类型，登录保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。可选vmfa, phone, email, 多个选项逗号隔开。
-- `update_date` (String) 登录配置更新时间。
+- `login_allowed` (Boolean) Whether login is allowed. 'true' means allowed, 'false' means not allowed. Default is 'false'.
+- `password` (String) Login password.
+- `password_reset_required` (Boolean) Whether password reset is required on next login. Whether password reset is required on next login. 'true' means password reset is required, 'false' means not required. Default is 'false'.
+- `safe_auth_exempt_duration` (Number) Login protection exemption duration. Supports setting 1 to 7 (days), 1 to 168 (hours), or 5 to 1440 (minutes). For unit settings, refer to the SafeAuthExemptUnit parameter.
+- `safe_auth_exempt_required` (Number) Whether login protection exemption is enabled. Whether login protection exemption is enabled. 0 means disabled, 1 means enabled. When login protection exemption is enabled, after verification is completed, login will not require verification again within a certain period.
+- `safe_auth_exempt_unit` (Number) Login protection exemption time unit. Login protection exemption time unit. 0 represents minutes, 1 represents hours, 2 represents days.
+- `safe_auth_flag` (Boolean) Whether login protection is enabled. 'true' means enabled, 'false' means disabled. Default is 'false'.
+- `safe_auth_type` (String) Login protection type. Login protection type. 'phone' represents mobile verification, 'email' represents email verification, 'vmfa' represents MFA device verification. Multiple login protection types can be set, separated by commas. Options: vmfa, phone, email, separated by commas.
+
+Read-Only:
+
+- `create_date` (String) Login configuration creation time.
+- `last_login_date` (String) Last login time.
+- `last_login_ip` (String) Last login IP.
+- `last_reset_password_time` (Number) Last password reset time. Last password reset time. 0 means no password has been set; a non-zero value means the timestamp when the password expires.
+- `login_locked` (Boolean) Whether login is locked. 'true' means locked, 'false' means not locked. After the administrator sets a limit for incorrect password retry attempts, login will be locked if the user exceeds the limit.
+- `password_expire_at` (Number) Password expiration time. '0' means never expires; non-zero means the expiration timestamp.
+- `update_date` (String) Login configuration update time.
 
 
 <a id="nestedatt--policies"></a>
@@ -94,8 +97,8 @@ Optional:
 
 Optional:
 
-- `policy_name` (String) 权限策略名称，长度1~64，支持英文、数字和+=,.@-_符号。
-- `policy_type` (String) 权限策略类型，策略类型。System代表系统预设策略，Custom代表自定义策略。
+- `policy_name` (String) Permission policy name. Length: 1–64 characters. Supports English letters, numbers, and +=,.@-_ symbols.
+- `policy_type` (String) Permission policy type. 'System' indicates system preset policy, 'Custom' indicates custom policy.
 
 
 <a id="nestedatt--security_config"></a>
@@ -103,12 +106,12 @@ Optional:
 
 Optional:
 
-- `safe_auth_type` (String) 操作保护类型。phone代表手机验证，email代表邮箱验证，vmfa代表验证MFA设备验证。支持设置多种操作保护类型，以英文逗号分隔。
+- `safe_auth_type` (String) Operation protection type. 'phone' indicates phone verification, 'email' indicates email verification, 'vmfa' indicates MFA device verification. Multiple operation protection types can be set, separated by commas.
 
 Read-Only:
 
-- `safe_auth_close` (Number) 是否开启操作保护。0代表开启，1代表关闭。
-- `safe_auth_exempt_duration` (Number) 操作保护的豁免时间，完成验证后在豁免时间内将不再进行验证。支持设置5至30，默认值为10。单位为分钟。
+- `safe_auth_close` (Number) Whether operation protection is enabled. 0 means enabled, 1 means disabled.
+- `safe_auth_exempt_duration` (Number) Operation protection exemption time. After verification is completed, no further verification is required within the exemption period. Supports values from 5 to 30; the default value is 10. Unit: minutes.
 
 
 <a id="nestedatt--tags"></a>
@@ -116,8 +119,8 @@ Read-Only:
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key.
+- `value` (String) Tag value.
 
 
 <a id="nestedatt--access_key"></a>
@@ -125,14 +128,14 @@ Optional:
 
 Read-Only:
 
-- `access_key_id` (String) 访问密钥ID。
-- `create_date` (String) 访问密钥创建时间。
-- `region` (String) 最近一次使用的服务区域。
-- `request_time` (String) 访问密钥最近一次使用时间。
-- `service` (String) 最近一次使用的服务名称。
-- `status` (String) 访问密钥状态。Active代表启用，Inactive代表禁用。
-- `update_date` (String) 访问密钥更新时间。
-- `user_name` (String) 访问密钥Secret。
+- `access_key_id` (String) Access key ID.
+- `create_date` (String) Access key creation time.
+- `region` (String) Most recently used service region.
+- `request_time` (String) Last used time of the access key.
+- `service` (String) Name of the most recently used service.
+- `status` (String) Access key status. 'Active' means enabled, 'Inactive' means disabled.
+- `update_date` (String) Access key update time.
+- `user_name` (String) Access key Secret.
 
 ## Import
 

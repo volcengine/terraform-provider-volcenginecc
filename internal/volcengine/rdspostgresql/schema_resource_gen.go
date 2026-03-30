@@ -28,11 +28,11 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "数据库名称",
+		//	  "description": "Database name",
 		//	  "type": "string"
 		//	}
 		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "数据库名称",
+			Description: "Database name",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -42,11 +42,11 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID",
+			Description: "Instance ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -56,22 +56,22 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Schema 的 owner。说明实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为 Schema 的 owner。",
+		//	  "description": "Schema owner. Note that instance read-only accounts, high-privilege accounts with DDL permissions disabled, or regular accounts with DDL permissions disabled cannot be set as the Schema owner.",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Schema 的 owner。说明实例只读账号、被禁用了 DDL 权限的高权限账号或被禁用了 DDL 权限的普通账号不能作为 Schema 的 owner。",
+			Description: "Schema owner. Note that instance read-only accounts, high-privilege accounts with DDL permissions disabled, or regular accounts with DDL permissions disabled cannot be set as the Schema owner.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SchemaName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Schema 名称。长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。不能以 pg_ 开头",
+		//	  "description": "Schema name. Length: 2–63 characters. Can contain letters, numbers, underscores (_), or hyphens (-). Must start with a letter and end with a letter or number. Reserved keywords are not allowed; for all disabled keywords, see Disabled Keywords. Cannot start with pg_",
 		//	  "type": "string"
 		//	}
 		"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Schema 名称。长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。不能以 pg_ 开头",
+			Description: "Schema name. Length: 2–63 characters. Can contain letters, numbers, underscores (_), or hyphens (-). Must start with a letter and end with a letter or number. Reserved keywords are not allowed; for all disabled keywords, see Disabled Keywords. Cannot start with pg_",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -89,7 +89,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "RDS PostgreSQL Schema 资源类型",
+		Description: "RDS PostgreSQL Schema resource type",
 		Version:     1,
 		Attributes:  attributes,
 	}

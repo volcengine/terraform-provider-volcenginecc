@@ -41,11 +41,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当ECS实例要加入或调整的部署集策略为部署集组高可用策略（AvailabilityGroup）时，可以通过该参数指定实例在部署集中的分组号。",
+		//	  "description": "When the deployment set policy for an ECS instance is set to AvailabilityGroup, use this parameter to specify the group number within the deployment set.",
 		//	  "type": "integer"
 		//	}
 		"deployment_set_group_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "当ECS实例要加入或调整的部署集策略为部署集组高可用策略（AvailabilityGroup）时，可以通过该参数指定实例在部署集中的分组号。",
+			Description: "When the deployment set policy for an ECS instance is set to AvailabilityGroup, use this parameter to specify the group number within the deployment set.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -57,11 +57,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例需要加入的部署集ID。",
+		//	  "description": "Deployment set ID to join for the instance.",
 		//	  "type": "string"
 		//	}
 		"deployment_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例需要加入的部署集ID。",
+			Description: "Deployment set ID to join for the instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -73,12 +73,12 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的描述。",
+		//	  "description": "Instance description.",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的描述。",
+			Description: "Instance description.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -93,35 +93,35 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例绑定的公网IP信息。",
+		//	  "description": "Public IP information bound to the instance.",
 		//	  "properties": {
 		//	    "Bandwidth": {
-		//	      "description": "公网IP的带宽上限，单位：Mbps。取值范围：1～200。默认值：1。",
+		//	      "description": "Maximum bandwidth for the public IP, measured in Mbps. Value range: 1–200. Default: 1",
 		//	      "maximum": 200,
 		//	      "type": "integer"
 		//	    },
 		//	    "BandwidthPackageId": {
-		//	      "description": "共享带宽包的ID，表示将公网IP加入到共享带宽包。",
+		//	      "description": "Shared bandwidth package ID, indicating that the public IP is added to the shared bandwidth package",
 		//	      "type": "string"
 		//	    },
 		//	    "BillingType": {
-		//	      "description": "公网IP的计费方式，取值：2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+		//	      "description": "Billing method for the public IP. Values: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic",
 		//	      "type": "integer"
 		//	    },
 		//	    "ISP": {
-		//	      "description": "公网IP的线路类型，取值：BGP：BGP（多线）。ChinaMobile：中国移动静态单线。ChinaTelecom：国电信静态单线。ChinaUnicom：中国联通静态单线。",
+		//	      "description": "Line type of the public IP. Values: BGP: BGP (multi-line). ChinaMobile: China Mobile static single line. ChinaTelecom: China Telecom static single line. ChinaUnicom: China Unicom static single line",
 		//	      "type": "string"
 		//	    },
 		//	    "ReleaseWithInstance": {
-		//	      "description": "公网IP是否随实例删除，仅按量计费公网IP生效。",
+		//	      "description": "Whether the public IP is released with the instance. Only applies to pay-as-you-go public IPs.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "SecurityProtectionInstanceId": {
-		//	      "description": "安全防护包ID。",
+		//	      "description": "Security protection package ID.",
 		//	      "type": "integer"
 		//	    },
 		//	    "SecurityProtectionTypes": {
-		//	      "description": "公网IP的安全防护类型。取值：AntiDDoS_Enhanced：申请增强防护类型的公网IP，可加入到DDoS原生防护（企业版）实例。",
+		//	      "description": "Security protection type for public IP. Value: AntiDDoS_Enhanced: Apply for a public IP with enhanced protection, which can be added to a DDoS native protection (Enterprise Edition) instance.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -136,7 +136,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bandwidth
 				"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的带宽上限，单位：Mbps。取值范围：1～200。默认值：1。",
+					Description: "Maximum bandwidth for the public IP, measured in Mbps. Value range: 1–200. Default: 1",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -148,7 +148,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: BandwidthPackageId
 				"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "共享带宽包的ID，表示将公网IP加入到共享带宽包。",
+					Description: "Shared bandwidth package ID, indicating that the public IP is added to the shared bandwidth package",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -157,7 +157,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: BillingType
 				"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的计费方式，取值：2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。",
+					Description: "Billing method for the public IP. Values: 2: Pay-as-you-go by bandwidth cap. 3: Pay-as-you-go by actual traffic",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -166,7 +166,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
 				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的线路类型，取值：BGP：BGP（多线）。ChinaMobile：中国移动静态单线。ChinaTelecom：国电信静态单线。ChinaUnicom：中国联通静态单线。",
+					Description: "Line type of the public IP. Values: BGP: BGP (multi-line). ChinaMobile: China Mobile static single line. ChinaTelecom: China Telecom static single line. ChinaUnicom: China Unicom static single line",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -175,7 +175,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: ReleaseWithInstance
 				"release_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "公网IP是否随实例删除，仅按量计费公网IP生效。",
+					Description: "Whether the public IP is released with the instance. Only applies to pay-as-you-go public IPs.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -184,7 +184,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityProtectionInstanceId
 				"security_protection_instance_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "安全防护包ID。",
+					Description: "Security protection package ID.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -194,7 +194,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				// Property: SecurityProtectionTypes
 				"security_protection_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "公网IP的安全防护类型。取值：AntiDDoS_Enhanced：申请增强防护类型的公网IP，可加入到DDoS原生防护（企业版）实例。",
+					Description: "Security protection type for public IP. Value: AntiDDoS_Enhanced: Apply for a public IP with enhanced protection, which can be added to a DDoS native protection (Enterprise Edition) instance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -202,7 +202,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例绑定的公网IP信息。",
+			Description: "Public IP information bound to the instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -214,11 +214,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的主机名。Linux系统的主机名长度限制为2～59个字符。Windows系统的主机名长度限制为2～10个字符。",
+		//	  "description": "Instance hostname. Linux hostname length: 2–59 characters. Windows hostname length: 2–10 characters",
 		//	  "type": "string"
 		//	}
 		"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的主机名。Linux系统的主机名长度限制为2～59个字符。Windows系统的主机名长度限制为2～10个字符。",
+			Description: "Instance hostname. Linux hostname length: 2–59 characters. Windows hostname length: 2–10 characters",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -230,11 +230,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "当创建高性能计算GPU型实例时，请指定高性能计算集群ID。",
+		//	  "description": "Specify the high-performance computing cluster ID when creating a high-performance computing GPU instance.",
 		//	  "type": "string"
 		//	}
 		"hpc_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "当创建高性能计算GPU型实例时，请指定高性能计算集群ID。",
+			Description: "Specify the high-performance computing cluster ID when creating a high-performance computing GPU instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -246,11 +246,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像ID。",
+		//	  "description": "Image ID",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像ID。",
+			Description: "Image ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -262,11 +262,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "镜像名称。",
+		//	  "description": "Image name.",
 		//	  "type": "string"
 		//	}
 		"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "镜像名称。",
+			Description: "Image name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -280,11 +280,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "default": "PostPaid",
-		//	  "description": "实例和云盘的计费类型，取值：PostPaid：按量计费。PrePaid：包年包月。Esi：弹性预约实例。Segmented：时段型弹性预约实例。",
+		//	  "description": "Billing type for the instance and cloud disk. Value: PostPaid: Pay-as-you-go. PrePaid: Subscription. Esi: Elastic reservation instance. Segmented: Time-segmented elastic reservation instance.",
 		//	  "type": "string"
 		//	}
 		"instance_charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例和云盘的计费类型，取值：PostPaid：按量计费。PrePaid：包年包月。Esi：弹性预约实例。Segmented：时段型弹性预约实例。",
+			Description: "Billing type for the instance and cloud disk. Value: PostPaid: Pay-as-you-go. PrePaid: Subscription. Esi: Elastic reservation instance. Segmented: Time-segmented elastic reservation instance.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("PostPaid"),
@@ -297,12 +297,12 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的名称。",
+		//	  "description": "Instance name.",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的名称。",
+			Description: "Instance name.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -317,11 +317,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的规格。",
+		//	  "description": "Instance specifications",
 		//	  "type": "string"
 		//	}
 		"instance_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的规格。",
+			Description: "Instance specifications",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -333,11 +333,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否保留镜像设置，取值：true：保留镜像设置，保留后将使用镜像预设的密码或密钥对登录实例。false（默认）：不保留镜像设置。",
+		//	  "description": "Retain image settings. Value: true: Retain image settings. If retained, the preset password or key pair in the image will be used to log in to the instance. false (default): Do not retain image settings.",
 		//	  "type": "boolean"
 		//	}
 		"keep_image_credential": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否保留镜像设置，取值：true：保留镜像设置，保留后将使用镜像预设的密码或密钥对登录实例。false（默认）：不保留镜像设置。",
+			Description: "Retain image settings. Value: true: Retain image settings. If retained, the preset password or key pair in the image will be used to log in to the instance. false (default): Do not retain image settings.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -349,11 +349,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例绑定的密钥对。",
+		//	  "description": "Key pair bound to the instance.",
 		//	  "type": "string"
 		//	}
 		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例绑定的密钥对。",
+			Description: "Key pair bound to the instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -365,11 +365,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例启动模板 ID。",
+		//	  "description": "Instance launch template ID.",
 		//	  "type": "string"
 		//	}
 		"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例启动模板 ID。",
+			Description: "Instance launch template ID.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -381,12 +381,12 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例挂载的网卡信息。",
+		//	  "description": "Network interface information attached to the instance",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "SecurityGroupIds": {
-		//	        "description": "网卡关联的安全组ID。",
+		//	        "description": "Security group ID associated with the network interface.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -395,7 +395,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		//	        "uniqueItems": true
 		//	      },
 		//	      "SubnetId": {
-		//	        "description": "实例的私有网络子网ID。",
+		//	        "description": "Private network subnet ID of the instance.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -410,7 +410,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					// Property: SecurityGroupIds
 					"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "网卡关联的安全组ID。",
+						Description: "Security group ID associated with the network interface.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -419,7 +419,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例的私有网络子网ID。",
+						Description: "Private network subnet ID of the instance.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -428,7 +428,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例挂载的网卡信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Network interface information attached to the instance\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -440,11 +440,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属项目。",
+		//	  "description": "Project to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属项目。",
+			Description: "Project to which the instance belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -456,14 +456,14 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "弹性预约单信息。",
+		//	  "description": "Elastic reservation order information",
 		//	  "properties": {
 		//	    "ScheduledInstanceDescription": {
-		//	      "description": "弹性预约单的描述。",
+		//	      "description": "Description of the elastic reservation order",
 		//	      "type": "string"
 		//	    },
 		//	    "ScheduledInstanceName": {
-		//	      "description": "弹性预约单的名称。",
+		//	      "description": "Name of the elastic reservation order",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -473,7 +473,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ScheduledInstanceDescription
 				"scheduled_instance_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "弹性预约单的描述。",
+					Description: "Description of the elastic reservation order",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -482,7 +482,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: ScheduledInstanceName
 				"scheduled_instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "弹性预约单的名称。",
+					Description: "Name of the elastic reservation order",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -490,7 +490,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "弹性预约单信息。",
+			Description: "Elastic reservation order information",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -502,7 +502,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启安全加固。Active:开启安全加固，仅对公共镜像生效。InActive:关闭安全加固，对所有镜像生效。",
+		//	  "description": "Enable security hardening. Active: Enable security hardening, effective only for public images. InActive: Disable security hardening, effective for all images.",
 		//	  "enum": [
 		//	    "Active",
 		//	    "InActive"
@@ -510,7 +510,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "string"
 		//	}
 		"security_enhancement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启安全加固。Active:开启安全加固，仅对公共镜像生效。InActive:关闭安全加固，对所有镜像生效。",
+			Description: "Enable security hardening. Active: Enable security hardening, effective only for public images. InActive: Disable security hardening, effective for all images.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -528,11 +528,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "抢占式实例的每小时最高价格。",
+		//	  "description": "Maximum hourly price for preemptible instances.",
 		//	  "type": "number"
 		//	}
 		"spot_price_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "抢占式实例的每小时最高价格。",
+			Description: "Maximum hourly price for preemptible instances.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -544,11 +544,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "按量计费的抢占式策略。取值：NoSpot：表示创建正常按量计费实例。SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的抢占式实例。SpotWithPriceLimit：设置出价上限的抢占式实例。",
+		//	  "description": "Preemptive strategy for pay-as-you-go billing. Values: NoSpot: Creates a standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, creating a preemptive instance that follows the current market price. SpotWithPriceLimit: Creates a preemptive instance with a bid limit",
 		//	  "type": "string"
 		//	}
 		"spot_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "按量计费的抢占式策略。取值：NoSpot：表示创建正常按量计费实例。SpotAsPriceGo：系统自动出价，跟随当前市场实际价格的抢占式实例。SpotWithPriceLimit：设置出价上限的抢占式实例。",
+			Description: "Preemptive strategy for pay-as-you-go billing. Values: NoSpot: Creates a standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, creating a preemptive instance that follows the current market price. SpotWithPriceLimit: Creates a preemptive instance with a bid limit",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -561,13 +561,13 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "default": 1,
-		//	  "description": "有序后缀的起始序号。",
+		//	  "description": "Starting sequence number for the ordered suffix.",
 		//	  "maximum": 999,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"suffix_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "有序后缀的起始序号。",
+			Description: "Starting sequence number for the ordered suffix.",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(1),
@@ -583,16 +583,16 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的标签信息。",
+		//	  "description": "Instance tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "给资源添加的用户标签的标签键。",
+		//	        "description": "Tag key for user tags added to the resource.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "给资源添加的用户标签的标签值。",
+		//	        "description": "Tag value for user tags added to the resource",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -609,7 +609,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "给资源添加的用户标签的标签键。",
+						Description: "Tag key for user tags added to the resource.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -621,7 +621,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "给资源添加的用户标签的标签值。",
+						Description: "Tag value for user tags added to the resource",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -630,7 +630,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例的标签信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Instance tag information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -643,11 +643,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "表示当创建多台实例时，是否为Hostname和InstanceName自动添加有序后缀。",
+		//	  "description": "Indicates whether to automatically add an ordered suffix to Hostname and InstanceName when creating multiple instances.",
 		//	  "type": "boolean"
 		//	}
 		"unique_suffix": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "表示当创建多台实例时，是否为Hostname和InstanceName自动添加有序后缀。",
+			Description: "Indicates whether to automatically add an ordered suffix to Hostname and InstanceName when creating multiple instances.",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),
@@ -660,11 +660,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的自定义数据。",
+		//	  "description": "Custom data for the instance.",
 		//	  "type": "string"
 		//	}
 		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的自定义数据。",
+			Description: "Custom data for the instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -676,11 +676,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "模版版本描述。",
+		//	  "description": "Template version description.",
 		//	  "type": "string"
 		//	}
 		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "模版版本描述。",
+			Description: "Template version description.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -692,11 +692,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "模板版本号。",
+		//	  "description": "Template version number.",
 		//	  "type": "string"
 		//	}
 		"version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "模板版本号。",
+			Description: "Template version number.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -706,36 +706,36 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例绑定的云盘信息。",
+		//	  "description": "Disk information bound to the instance",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "DeleteWithInstance": {
-		//	        "description": "云盘是否随实例释放。",
+		//	        "description": "Whether the disk is released with the instance",
 		//	        "type": "boolean"
 		//	      },
 		//	      "ExtraPerformanceIOPS": {
-		//	        "description": "云盘额外IOPS性能大小，仅ESSD FlexPL数据盘支持，单位为次/秒。 ExtraPerformanceTypeId为Balance或IOPS时需设置该参数。各个类型的额外性能取值范围如下：IOPS型：1～50000。Balance型：1～50000。",
+		//	        "description": "Extra IOPS performance size for the disk, supported only by ESSD FlexPL data disks, measured in operations per second. This parameter must be set when ExtraPerformanceTypeId is Balance or IOPS. Value ranges for each type: IOPS: 1–50000. Balance: 1–50000",
 		//	        "type": "integer"
 		//	      },
 		//	      "ExtraPerformanceThroughputMB": {
-		//	        "description": "云盘额外吞吐性能大小，单位MB/s，仅ESSD FlexPL数据盘支持。 ExtraPerformanceTypeId为Throughput时需设置该参数。 取值范围：1～650。",
+		//	        "description": "Additional disk throughput performance in MB/s. Supported only by ESSD FlexPL data disks. Set this parameter when ExtraPerformanceTypeId is Throughput. Value range: 1–650.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ExtraPerformanceTypeId": {
-		//	        "description": "云盘额外性能的类型，仅ESSD FlexPL数据盘支持。关于额外性能的更多介绍，请参见云盘额外性能。取值：Balance：均衡型额外性能。IOPS：IOPS型额外性能。Throughput：吞吐量型额外性能。",
+		//	        "description": "Type of extra disk performance, supported only by ESSD FlexPL data disks. For more information about extra performance, see Extra Disk Performance. Values: Balance: Balanced extra performance. IOPS: IOPS extra performance. Throughput: Throughput extra performance",
 		//	        "type": "string"
 		//	      },
 		//	      "Size": {
-		//	        "description": "云盘大小，单位为GB。系统盘：ESSD_PL0：20~2048 PTSSD：10~500。数据盘：ESSD_PL0：10~32768 PTSSD：20~8192",
+		//	        "description": "Disk size, measured in GB. System disk: ESSD_PL0: 20–2048, PTSSD: 10–500. Data disk: ESSD_PL0: 10–32768, PTSSD: 20–8192",
 		//	        "type": "integer"
 		//	      },
 		//	      "SnapshotId": {
-		//	        "description": "使用快照创建云盘，仅支持创建数据盘。您可以调用DescribeSnapshots接口查询快照ID。",
+		//	        "description": "Create a cloud disk from a snapshot. Only data disks are supported. You can call the DescribeSnapshots API to query the snapshot ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "VolumeType": {
-		//	        "description": "云盘类型。ESSD_PL0：极速型SSD PL0。PTSSD：性能型SSD。",
+		//	        "description": "Cloud disk type. ESSD_PL0: Ultra-fast SSD PL0. PTSSD: Performance SSD.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -749,7 +749,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DeleteWithInstance
 					"delete_with_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘是否随实例释放。",
+						Description: "Whether the disk is released with the instance",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -758,7 +758,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: ExtraPerformanceIOPS
 					"extra_performance_iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘额外IOPS性能大小，仅ESSD FlexPL数据盘支持，单位为次/秒。 ExtraPerformanceTypeId为Balance或IOPS时需设置该参数。各个类型的额外性能取值范围如下：IOPS型：1～50000。Balance型：1～50000。",
+						Description: "Extra IOPS performance size for the disk, supported only by ESSD FlexPL data disks, measured in operations per second. This parameter must be set when ExtraPerformanceTypeId is Balance or IOPS. Value ranges for each type: IOPS: 1–50000. Balance: 1–50000",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -767,7 +767,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: ExtraPerformanceThroughputMB
 					"extra_performance_throughput_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘额外吞吐性能大小，单位MB/s，仅ESSD FlexPL数据盘支持。 ExtraPerformanceTypeId为Throughput时需设置该参数。 取值范围：1～650。",
+						Description: "Additional disk throughput performance in MB/s. Supported only by ESSD FlexPL data disks. Set this parameter when ExtraPerformanceTypeId is Throughput. Value range: 1–650.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -776,7 +776,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: ExtraPerformanceTypeId
 					"extra_performance_type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘额外性能的类型，仅ESSD FlexPL数据盘支持。关于额外性能的更多介绍，请参见云盘额外性能。取值：Balance：均衡型额外性能。IOPS：IOPS型额外性能。Throughput：吞吐量型额外性能。",
+						Description: "Type of extra disk performance, supported only by ESSD FlexPL data disks. For more information about extra performance, see Extra Disk Performance. Values: Balance: Balanced extra performance. IOPS: IOPS extra performance. Throughput: Throughput extra performance",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -785,7 +785,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: Size
 					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "云盘大小，单位为GB。系统盘：ESSD_PL0：20~2048 PTSSD：10~500。数据盘：ESSD_PL0：10~32768 PTSSD：20~8192",
+						Description: "Disk size, measured in GB. System disk: ESSD_PL0: 20–2048, PTSSD: 10–500. Data disk: ESSD_PL0: 10–32768, PTSSD: 20–8192",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -794,7 +794,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: SnapshotId
 					"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "使用快照创建云盘，仅支持创建数据盘。您可以调用DescribeSnapshots接口查询快照ID。",
+						Description: "Create a cloud disk from a snapshot. Only data disks are supported. You can call the DescribeSnapshots API to query the snapshot ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -803,7 +803,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeType
 					"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云盘类型。ESSD_PL0：极速型SSD PL0。PTSSD：性能型SSD。",
+						Description: "Cloud disk type. ESSD_PL0: Ultra-fast SSD PL0. PTSSD: Performance SSD.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -812,7 +812,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例绑定的云盘信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Disk information bound to the instance\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -824,11 +824,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络ID。",
+		//	  "description": "Private network ID",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络ID。",
+			Description: "Private network ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -840,11 +840,11 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属可用区ID。",
+		//	  "description": "Availability zone ID of the instance",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属可用区ID。",
+			Description: "Availability zone ID of the instance",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -864,7 +864,7 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "实例启动模板版本是一系列实例配置信息的集合，用于快速购买实例。在模板中，您可以存储除密码外的全部配置信息，包括密钥对、计算规格、云盘、网络等，如果配置信息均有效，便可以一键成功购买实例，无需进行重复配置。",
+		Description: "Instance launch template version is a collection of instance configuration information used for quick instance purchase. In the template, you can store all configuration information except passwords, including key pairs, compute specifications, disks, network, etc. If all configuration information is valid, you can purchase an instance with one click without repeated configuration",
 		Version:     1,
 		Attributes:  attributes,
 	}

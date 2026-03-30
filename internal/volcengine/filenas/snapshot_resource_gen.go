@@ -32,11 +32,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照创建时间。",
+		//	  "description": "Snapshot Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照创建时间。",
+			Description: "Snapshot Creation Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -46,11 +46,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照描述信息。",
+		//	  "description": "Snapshot Description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照描述信息。",
+			Description: "Snapshot Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -61,11 +61,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统 ID。",
+		//	  "description": "File System ID",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统 ID。",
+			Description: "File System ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -75,11 +75,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统名称。",
+		//	  "description": "File System Name",
 		//	  "type": "string"
 		//	}
 		"file_system_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统名称。",
+			Description: "File System Name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -89,11 +89,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否加密，当前仅支持false，即不加密。",
+		//	  "description": "Is encryption enabled. Currently only false is supported (not encrypted)",
 		//	  "type": "boolean"
 		//	}
 		"is_encrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否加密，当前仅支持false，即不加密。",
+			Description: "Is encryption enabled. Currently only false is supported (not encrypted)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -103,11 +103,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照创建进度。",
+		//	  "description": "Snapshot Creation Progress",
 		//	  "type": "string"
 		//	}
 		"progress": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照创建进度。",
+			Description: "Snapshot Creation Progress",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -118,11 +118,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 2147483647,
-		//	  "description": "快照保留时间，默认为2147483647，即永久保留。",
+		//	  "description": "Snapshot Retention Period. Default is 2147483647 (permanent retention)",
 		//	  "type": "integer"
 		//	}
 		"retention_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "快照保留时间，默认为2147483647，即永久保留。",
+			Description: "Snapshot Retention Period. Default is 2147483647 (permanent retention)",
 			Computed:    true,
 			Default:     int64default.StaticInt64(2147483647),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -133,11 +133,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照 ID。",
+		//	  "description": "Snapshot ID",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照 ID。",
+			Description: "Snapshot ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -147,11 +147,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照名称。",
+		//	  "description": "Snapshot Name",
 		//	  "type": "string"
 		//	}
 		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照名称。",
+			Description: "Snapshot Name",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotType
@@ -159,14 +159,14 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "Manual",
-		//	  "description": "快照类型，默认为Manual，即手动快照。",
+		//	  "description": "Snapshot Type. Default is Manual (manual snapshot)",
 		//	  "enum": [
 		//	    "Manual"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"snapshot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照类型，默认为Manual，即手动快照。",
+			Description: "Snapshot Type. Default is Manual (manual snapshot)",
 			Computed:    true,
 			Default:     stringdefault.StaticString("Manual"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -177,11 +177,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统容量，单位为 GiB。",
+		//	  "description": "File System Capacity (GiB)",
 		//	  "type": "integer"
 		//	}
 		"source_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "文件系统容量，单位为 GiB。",
+			Description: "File System Capacity (GiB)",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -191,11 +191,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "文件系统版本。",
+		//	  "description": "File System Version",
 		//	  "type": "string"
 		//	}
 		"source_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "文件系统版本。",
+			Description: "File System Version",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -205,7 +205,7 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "快照状态。说明如下：Progressing：正在创建。Accomplished：创建成功。Failed：创建失败。",
+		//	  "description": "Snapshot Status. Details: Progressing: Creating. Accomplished: Created successfully. Failed: Creation failed",
 		//	  "enum": [
 		//	    "Progressing",
 		//	    "Accomplished",
@@ -214,7 +214,7 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "快照状态。说明如下：Progressing：正在创建。Accomplished：创建成功。Failed：创建失败。",
+			Description: "Snapshot Status. Details: Progressing: Creating. Accomplished: Created successfully. Failed: Creation failed",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -224,11 +224,11 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区 ID。",
+		//	  "description": "Availability Zone ID",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "可用区 ID。",
+			Description: "Availability Zone ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -246,7 +246,7 @@ func snapshotResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "快照是一种备份方式，每个快照都是文件存储在某个时间点的备份。当数据丢失或故障时，您可以通过快照恢复文件存储数据，找回丢失的数据。",
+		Description: "A snapshot is a backup method. Each snapshot is a backup of file storage at a specific point in time. If data is lost or a failure occurs, you can use snapshots to restore file storage and recover lost data",
 		Version:     1,
 		Attributes:  attributes,
 	}

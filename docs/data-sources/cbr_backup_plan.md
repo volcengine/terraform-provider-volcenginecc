@@ -21,30 +21,30 @@ Data Source schema for Volcengine::CBR::BackupPlan
 
 ### Read-Only
 
-- `account_id` (String) 创建此计划的账户 ID。
-- `created_time` (String) 创建时间。
-- `name` (String) 备份计划名称。
-- `plan_id` (String) 备份计划 ID。
-- `policy` (Attributes) 备份策略。 (see [below for nested schema](#nestedatt--policy))
-- `policy_id` (String) 备份策略 ID。
-- `resource_list` (Attributes Set) 备份源列表。 (see [below for nested schema](#nestedatt--resource_list))
-- `updated_time` (String) 更新时间。
+- `account_id` (String) Account ID that created this plan
+- `created_time` (String) Creation Time
+- `name` (String) Backup Plan Name
+- `plan_id` (String) Backup Plan ID
+- `policy` (Attributes) Backup Policy (see [below for nested schema](#nestedatt--policy))
+- `policy_id` (String) Backup Policy ID
+- `resource_list` (Attributes Set) Backup Source List (see [below for nested schema](#nestedatt--resource_list))
+- `updated_time` (String) Update Time
 
 <a id="nestedatt--policy"></a>
 ### Nested Schema for `policy`
 
 Read-Only:
 
-- `account_id` (String) 创建此策略的账户 ID。
-- `backup_type` (String) 备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。
-- `created_time` (String) 创建时间。
-- `crontab` (String) 用于指定备份周期，支持标准 crontab 表达式配置。
-- `enable_policy` (Boolean) 是否启用策略，取值说明如下：true：启用策略。false：禁用策略。
-- `name` (String) 策略名称。
-- `plan_number` (Number) 该策略已关联的备份计划数量。
-- `policy_id` (String) 备份策略 ID。
-- `retention_day` (Number) 恢复点保留时间，-1 表示持续保留。
-- `updated_time` (String) 更新时间。
+- `account_id` (String) Account ID that created this policy
+- `backup_type` (String) Backup type. Options: FULL: Full backup. INCREMENTAL: Incremental backup
+- `created_time` (String) Creation Time
+- `crontab` (String) Specifies the backup schedule. Supports standard crontab expressions
+- `enable_policy` (Boolean) Whether the policy is enabled. Options: true: Enable policy. false: Disable policy
+- `name` (String) Policy Name
+- `plan_number` (Number) Number of backup plans associated with this policy
+- `policy_id` (String) Backup Policy ID
+- `retention_day` (Number) Retention time for recovery points. -1 means retain indefinitely
+- `updated_time` (String) Update Time
 
 
 <a id="nestedatt--resource_list"></a>
@@ -52,14 +52,14 @@ Read-Only:
 
 Read-Only:
 
-- `meta_information` (Attributes) 资源的meta信息，创建备份计划时，用于存储额外的配置。 (see [below for nested schema](#nestedatt--resource_list--meta_information))
-- `resource_id` (String) 备份源 ID。
-- `resource_type` (String) 备份源类型，取值如下：ECS：ECS 整机备份。vePFS：vePFS 文件系统备份。
+- `meta_information` (Attributes) Resource meta information, used to store additional configuration when creating a backup plan (see [below for nested schema](#nestedatt--resource_list--meta_information))
+- `resource_id` (String) Backup Source ID
+- `resource_type` (String) Backup source type. Options: ECS: ECS full machine backup. vePFS: vePFS file system backup
 
 <a id="nestedatt--resource_list--meta_information"></a>
 ### Nested Schema for `resource_list.meta_information`
 
 Read-Only:
 
-- `ecs_meta` (String) ECS 的元数据，是一个 JSON string。
-- `vepfs_meta` (String) vePFS 备份源元数据，是一个 JSON string。
+- `ecs_meta` (String) ECS metadata, which is a JSON string
+- `vepfs_meta` (String) vePFS backup source metadata, which is a JSON string

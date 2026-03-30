@@ -6,16 +6,16 @@
   ],
   "definitions": {
     "Tag": {
-      "description": "快照的标签信息",
+      "description": "Snapshot tag information",
       "properties": {
         "Key": {
-          "description": "为资源添加的用户标签的标签键。命名规则如下：不能以任何大小写形式的volc:或sys:开头。volc:或sys:开头为系统预留标签键禁止创建。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。",
+          "description": "User tag key added to the resource. Naming rules: Cannot start with volc: or sys: in any case. Keys starting with volc: or sys: are reserved system tag keys and cannot be created. Only language characters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.",
           "maxLength": 128,
           "minLength": 0,
           "type": "string"
         },
         "Value": {
-          "description": "为资源添加的用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。",
+          "description": "User tag value added to the resource. Naming rules: Only language characters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length must be between 0 and 256 characters.",
           "maxLength": 256,
           "minLength": 0,
           "type": "string"
@@ -28,7 +28,7 @@
       "type": "object"
     }
   },
-  "description": "快照是一种备份方式，每个快照都是云盘数据在某个时间点的备份文件。当数据丢失或故障时，您可以通过快照回滚云盘数据，找回丢失的数据。",
+  "description": "A snapshot is a backup method. Each snapshot is a backup file of cloud disk data at a specific point in time. When data is lost or a failure occurs, you can roll back cloud disk data using the snapshot to recover lost data.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/SnapshotId",
@@ -78,59 +78,59 @@
   ],
   "properties": {
     "CreationTime": {
-      "description": "快照创建时间。",
+      "description": "Snapshot creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "default": "",
-      "description": "快照描述信息，默认为空，长度限制为0~255个字符。",
+      "description": "Snapshot description. Default is empty. Length must be between 0 and 255 characters.",
       "maxLength": 255,
       "minLength": 0,
       "semantic": "description",
       "type": "string"
     },
     "ImageId": {
-      "description": "镜像ID",
+      "description": "Image ID",
       "type": "string"
     },
     "InstantAccess": {
-      "description": "快照是否开启极速可用能力，取值说明如下：true：已开启极速可用能力。false：未开启极速可用能力。",
+      "description": "Whether the snapshot has enabled ultra-fast availability. Value options: true: ultra-fast availability enabled. false: ultra-fast availability not enabled.",
       "type": "boolean"
     },
     "Progress": {
-      "description": "快照转储进度。",
+      "description": "Snapshot dump progress.",
       "type": "integer"
     },
     "ProjectName": {
-      "description": "快照所要加入的Project（项目）名称。注意快照不会继承云盘的项目，即快照与云盘可以所属不同的项目。如果您在创建快照时未设置ProjectName，快照会默认加入default项目。",
+      "description": "Name of the Project to which the snapshot will be added. Note: snapshots do not inherit the project of the cloud disk, so snapshots and cloud disks can belong to different projects. If you do not set ProjectName when creating the snapshot, it will be added to the default project.",
       "semantic": "projectName",
       "type": "string"
     },
     "RetentionDays": {
-      "description": "快照保留时间，单位为天，取值说明如下：空：永久保留快照 。1~65536：指定保存天数。默认为空，即默认永久保留快照。说明快照保留时间从快照创建时刻开始计算。",
+      "description": "Snapshot retention period, in days. Value options: empty: retain snapshot permanently. 1~65536: specify retention days. Default is empty, which means retain snapshot permanently. Snapshot retention period is calculated from the snapshot creation time.",
       "type": "integer"
     },
     "Shared": {
-      "description": "快照是否共享。",
+      "description": "Whether the snapshot is shared.",
       "type": "boolean"
     },
     "SnapshotGroupId": {
-      "description": "快照一致性组ID。",
+      "description": "Snapshot consistency group ID.",
       "type": "string"
     },
     "SnapshotId": {
-      "description": "快照ID。",
+      "description": "Snapshot ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "SnapshotName": {
-      "description": "创建的快照名称。命名规范如下：长度限制为1~128个字符。只能包含中文、字母、数字、下划线（_）、中划线（-）和英文句号（.）。为防止和自动快照的名称冲突，不能以“auto”开头。",
+      "description": "Name of the created snapshot. Naming rules: length must be between 1 and 128 characters. Only Chinese characters, letters, numbers, underscores (_), hyphens (-), and periods (.) are allowed. To avoid conflicts with automatic snapshot names, the name cannot start with 'auto'.",
       "semantic": "resourceName",
       "type": "string"
     },
     "SnapshotType": {
-      "description": "快照类型，取值说明如下：user：查询手动快照。auto：查询自动快照。share：查询共享快照。默认查询所有快照。",
+      "description": "Snapshot type. The available values are: user: query manual snapshots. auto: query automatic snapshots. share: query shared snapshots. By default, all snapshots are queried.",
       "enum": [
         "user",
         "auto",
@@ -139,7 +139,7 @@
       "type": "string"
     },
     "Status": {
-      "description": "快照状态，取值说明如下：available：可用。creating：创建中。rollbacking：回滚中。deleted：已删除。failed：错误。",
+      "description": "Snapshot status. Value options: available: available. creating: creating. rollbacking: rolling back. deleted: deleted. failed: error.",
       "enum": [
         "available",
         "creating",
@@ -151,7 +151,7 @@
       "type": "string"
     },
     "Tags": {
-      "description": "快照的标签信息。",
+      "description": "Snapshot tag information.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -161,24 +161,24 @@
       "uniqueItems": true
     },
     "VolumeId": {
-      "description": "快照相关的云盘ID。",
+      "description": "Cloud disk ID associated with the snapshot.",
       "type": "string"
     },
     "VolumeKind": {
-      "description": "云盘种类，取值说明如下：system：系统盘。data：数据盘。",
+      "description": "Cloud disk category. Value options: system: system disk. data: data disk.",
       "type": "string"
     },
     "VolumeName": {
-      "description": "云盘名称。",
+      "description": "Cloud disk name.",
       "type": "string"
     },
     "VolumeSize": {
-      "description": "云盘大小，单位为GiB。",
+      "description": "Cloud disk size, in GiB.",
       "format": "int64",
       "type": "integer"
     },
     "VolumeStatus": {
-      "description": "云盘状态，取值说明如下：available：可用, attaching：挂载中, attached：已挂载, detaching：卸载中, creating：创建中, deleting：删除中, error：错误, extending：扩容中, \"\"：云盘被删除。 ",
+      "description": "Cloud disk status. Value options: available: available, attaching: attaching, attached: attached, detaching: detaching, creating: creating, deleting: deleting, error: error, extending: expanding, \"\": cloud disk deleted.",
       "enum": [
         "available",
         "attaching",
@@ -193,7 +193,7 @@
       "type": "string"
     },
     "VolumeType": {
-      "description": "云盘类型，取值说明如下：ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL：极速型SSD云盘，FlexPL规格。TSSD_TL0：吞吐型SSD云盘",
+      "description": "Cloud disk type. Value options: ESSD_PL0: Ultra-fast SSD cloud disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD cloud disk, FlexPL specification. TSSD_TL0: Throughput SSD cloud disk",
       "enum": [
         "ESSD_PL0",
         "ESSD_FlexPL",
@@ -202,7 +202,7 @@
       "type": "string"
     },
     "ZoneId": {
-      "description": "快照所在的可用区ID。",
+      "description": "Availability zone ID where the snapshot is located.",
       "type": "string"
     }
   },

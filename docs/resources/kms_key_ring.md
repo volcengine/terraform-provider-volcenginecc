@@ -2,12 +2,12 @@
 page_title: "volcenginecc_kms_key_ring Resource - terraform-provider-volcenginecc"
 subcategory: "KMS"
 description: |-
-  用户管理密钥的集合，用户将相同类型或用途的密钥放在同一密钥环中以便于管理。
+  A collection for managing user keys; users place keys of the same type or purpose in the same keyring for easier management
 ---
 
 # volcenginecc_kms_key_ring (Resource)
 
-用户管理密钥的集合，用户将相同类型或用途的密钥放在同一密钥环中以便于管理。
+A collection for managing user keys; users place keys of the same type or purpose in the same keyring for easier management
 
 ## Example Usage
 
@@ -25,22 +25,22 @@ resource "volcenginecc_kms_key_ring" "kmskeyringDemo" {
 
 ### Required
 
-- `keyring_name` (String) 密钥环名称，长度为 2   - 31 个字符。合法字符：[a-zA-Z0-9-_]。
+- `keyring_name` (String) Keyring name, length: 2–31 characters. Valid characters: [a-zA-Z0-9-_]
 
 ### Optional
 
-- `description` (String) 密钥环描述，长度为 0   - 8192 个字符。
-- `keyring_type` (String) 密钥环类型，取值：CustomKeyring。
-- `project_name` (String) 项目名称，默认值：default。
+- `description` (String) Keyring description, length: 0–8192 characters
+- `keyring_type` (String) Keyring type, value: CustomKeyring
+- `project_name` (String) Project name, default value: default
 
 ### Read-Only
 
-- `create_date` (Number) 密钥环创建日期。
+- `create_date` (Number) Keyring creation date
 - `id` (String) Uniquely identifies the resource.
-- `key_count` (Number) 密钥环密钥次数。
-- `key_ring_id` (String) 密钥环唯一标识符，UUID形式。
-- `uid` (String) 密钥环租户ID。
-- `update_date` (Number) 密钥环更新日期。
+- `key_count` (Number) Number of keys in keyring
+- `key_ring_id` (String) Keyring unique identifier, in UUID format
+- `uid` (String) Keyring tenant ID
+- `update_date` (Number) Keyring update date
 
 ## Import
 

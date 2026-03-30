@@ -35,11 +35,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。",
+		//	  "description": "Whether auto-renewal is enabled for subscription scenarios. Values: true: auto-renewal enabled. false: auto-renewal not enabled.",
 		//	  "type": "boolean"
 		//	}
 		"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。",
+			Description: "Whether auto-renewal is enabled for subscription scenarios. Values: true: auto-renewal enabled. false: auto-renewal not enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -50,7 +50,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费状态。取值：Normal：正常。Overdue：欠费。Shutdown：关停。",
+		//	  "description": "Billing status. Values: Normal: normal. Overdue: overdue. Shutdown: shutdown.",
 		//	  "enum": [
 		//	    "Normal",
 		//	    "Overdue",
@@ -59,7 +59,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计费状态。取值：Normal：正常。Overdue：欠费。Shutdown：关停。",
+			Description: "Billing status. Values: Normal: normal. Overdue: overdue. Shutdown: shutdown.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -69,7 +69,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "计费类型，取值：PostPaid：按量计费（后付费）。PrePaid：包年包月（预付费）。",
+		//	  "description": "Billing type. Values: PostPaid: pay-as-you-go (postpaid). PrePaid: subscription (prepaid, yearly/monthly).",
 		//	  "enum": [
 		//	    "PostPaid",
 		//	    "PrePaid"
@@ -77,7 +77,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "计费类型，取值：PostPaid：按量计费（后付费）。PrePaid：包年包月（预付费）。",
+			Description: "Billing type. Values: PostPaid: pay-as-you-go (postpaid). PrePaid: subscription (prepaid, yearly/monthly).",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -90,12 +90,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例总容量型存储空间大小，单位 GiB。",
+		//	  "description": "Total capacity-type storage space for the instance, in GiB.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"cold_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例总容量型存储空间大小，单位 GiB。",
+			Description: "Total capacity-type storage space for the instance, in GiB.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -107,11 +107,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例创建时间（UTC 时间）。",
+		//	  "description": "Instance creation time (UTC).",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例创建时间（UTC 时间）。",
+			Description: "Instance creation time (UTC).",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -121,11 +121,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例删除保护功能开关状态。取值范围：enabled：已开启。disabled：未开启。说明关于实例删除保护的更多信息，请参见实例删除保护。",
+		//	  "description": "Instance deletion protection switch status. Value range: enabled: enabled. disabled: not enabled. For more information about instance deletion protection, see Instance Deletion Protection.",
 		//	  "type": "string"
 		//	}
 		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例删除保护功能开关状态。取值范围：enabled：已开启。disabled：未开启。说明关于实例删除保护的更多信息，请参见实例删除保护。",
+			Description: "Instance deletion protection switch status. Value range: enabled: enabled. disabled: not enabled. For more information about instance deletion protection, see Instance Deletion Protection.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -136,11 +136,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启登录认证。取值：true：已开启登录认证。false：未开启登录认证。",
+		//	  "description": "Whether login authentication is enabled. Values: true: login authentication enabled. false: login authentication disabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable_auth": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启登录认证。取值：true：已开启登录认证。false：未开启登录认证。",
+			Description: "Whether login authentication is enabled. Values: true: login authentication enabled. false: login authentication disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -152,11 +152,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开通存储型容量，取值：true：开通容量型存储。false：不开通容量型存储。说明容量型存储的详细介绍，请参见冷热分离介绍。仅当 MultiAZ（部署方式）取值为 false（单可用区部署）时，支持冷热分离功能。",
+		//	  "description": "Whether capacity-type storage is enabled. Values: true: capacity-type storage enabled. false: capacity-type storage not enabled. For details about capacity-type storage, see Hot and Cold Data Separation. The hot and cold data separation feature is supported only when MultiAZ (deployment mode) is set to false (single availability zone deployment).",
 		//	  "type": "boolean"
 		//	}
 		"enable_cloud_storage": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开通存储型容量，取值：true：开通容量型存储。false：不开通容量型存储。说明容量型存储的详细介绍，请参见冷热分离介绍。仅当 MultiAZ（部署方式）取值为 false（单可用区部署）时，支持冷热分离功能。",
+			Description: "Whether capacity-type storage is enabled. Values: true: capacity-type storage enabled. false: capacity-type storage not enabled. For details about capacity-type storage, see Hot and Cold Data Separation. The hot and cold data separation feature is supported only when MultiAZ (deployment mode) is set to false (single availability zone deployment).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -169,33 +169,33 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接地址信息列表。",
+		//	  "description": "Connection address information list",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "连接地址信息。",
+		//	    "description": "Connection address information",
 		//	    "properties": {
 		//	      "AddressType": {
-		//	        "description": "连接地址类型，关于连接地址的更多信息，请参见连接地址类型。取值范围如下：Zk：ZK 地址。Thrift：Thrift2 地址。HBaseReUsedEipId：当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示实例中其他组件（如 RS 节点、Master 节点等）共享绑定使用的 EIP ID 信息。",
+		//	        "description": "Connection address type. For more information about connection addresses, see Connection Address Types. The value range is as follows: Zk: ZK address. Thrift: Thrift2 address. HBaseReUsedEipId: When public access is enabled for the ZK or Thrift2 connection address, this parameter is returned, indicating the EIP ID information shared and used by other components in the instance (such as RS nodes, Master nodes, etc.)",
 		//	        "type": "string"
 		//	      },
 		//	      "EipId": {
-		//	        "description": "当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示 EIP ID。",
+		//	        "description": "When the ZK connection address or Thrift2 connection address enables public access, this parameter is returned, indicating the EIP ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "EndpointId": {
-		//	        "description": "连接地址 ID。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的 ID。当连接地址类型为 HBaseReUsedEipId 时，连接地址 ID 也固定为 HBaseReUsedEipId。",
+		//	        "description": "Connection address ID. By default, only the ZK private network connection address is returned. If you apply for a Thrift2 connection address or enable public access for the ZK or Thrift2 connection address, the corresponding connection address ID will also be returned. When the connection address type is HBaseReUsedEipId, the connection address ID is fixed as HBaseReUsedEipId",
 		//	        "type": "string"
 		//	      },
 		//	      "EndpointStr": {
-		//	        "description": "连接地址的连接串。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的连接串。当连接地址类型为 HBaseReUsedEipId 时，连接地址的连接串也固定为 HBaseReUsedEipId。",
+		//	        "description": "Connection string for the connection address. By default, only the ZK private network connection address is returned. If you have requested a Thrift2 connection address, or enabled public access for ZK or Thrift2 connection addresses, the corresponding connection string will also be provided. When the connection address type is HBaseReUsedEipId, the connection string is always set to HBaseReUsedEipId.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkType": {
-		//	        "description": "连接地址网络类型。取值范围如下：Public：公网访问地址。Private：私网访问地址。",
+		//	        "description": "Connection address network type. Value range: Public: public access address. Private: private access address.",
 		//	        "type": "string"
 		//	      },
 		//	      "PrivateDNSVisibility": {
-		//	        "description": "私网域名是否开启公网解析。",
+		//	        "description": "Whether public DNS resolution is enabled for the private network domain name.",
 		//	        "type": "boolean"
 		//	      }
 		//	    },
@@ -209,7 +209,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AddressType
 					"address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接地址类型，关于连接地址的更多信息，请参见连接地址类型。取值范围如下：Zk：ZK 地址。Thrift：Thrift2 地址。HBaseReUsedEipId：当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示实例中其他组件（如 RS 节点、Master 节点等）共享绑定使用的 EIP ID 信息。",
+						Description: "Connection address type. For more information about connection addresses, see Connection Address Types. The value range is as follows: Zk: ZK address. Thrift: Thrift2 address. HBaseReUsedEipId: When public access is enabled for the ZK or Thrift2 connection address, this parameter is returned, indicating the EIP ID information shared and used by other components in the instance (such as RS nodes, Master nodes, etc.)",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -218,7 +218,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: EipId
 					"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示 EIP ID。",
+						Description: "When the ZK connection address or Thrift2 connection address enables public access, this parameter is returned, indicating the EIP ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -227,7 +227,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: EndpointId
 					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接地址 ID。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的 ID。当连接地址类型为 HBaseReUsedEipId 时，连接地址 ID 也固定为 HBaseReUsedEipId。",
+						Description: "Connection address ID. By default, only the ZK private network connection address is returned. If you apply for a Thrift2 connection address or enable public access for the ZK or Thrift2 connection address, the corresponding connection address ID will also be returned. When the connection address type is HBaseReUsedEipId, the connection address ID is fixed as HBaseReUsedEipId",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -236,7 +236,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: EndpointStr
 					"endpoint_str": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接地址的连接串。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的连接串。当连接地址类型为 HBaseReUsedEipId 时，连接地址的连接串也固定为 HBaseReUsedEipId。",
+						Description: "Connection string for the connection address. By default, only the ZK private network connection address is returned. If you have requested a Thrift2 connection address, or enabled public access for ZK or Thrift2 connection addresses, the corresponding connection string will also be provided. When the connection address type is HBaseReUsedEipId, the connection string is always set to HBaseReUsedEipId.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -245,7 +245,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkType
 					"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "连接地址网络类型。取值范围如下：Public：公网访问地址。Private：私网访问地址。",
+						Description: "Connection address network type. Value range: Public: public access address. Private: private access address.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -254,7 +254,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PrivateDNSVisibility
 					"private_dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "私网域名是否开启公网解析。",
+						Description: "Whether public DNS resolution is enabled for the private network domain name.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -263,7 +263,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "连接地址信息列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Connection address information list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -274,11 +274,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HBase 数据库引擎版本。当前仅支持 HBase 2.0 版本，取值默认为 HBase_2.0。",
+		//	  "description": "HBase database engine version. Currently, only HBase 2.0 is supported. The default value is HBase_2.0",
 		//	  "type": "string"
 		//	}
 		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HBase 数据库引擎版本。当前仅支持 HBase 2.0 版本，取值默认为 HBase_2.0。",
+			Description: "HBase database engine version. Currently, only HBase 2.0 is supported. The default value is HBase_2.0",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -288,11 +288,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -302,11 +302,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例名称。",
+		//	  "description": "Instance name",
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例名称。",
+			Description: "Instance name",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -317,11 +317,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例类型。当前仅支持标准型，取值默认为 Standard。",
+		//	  "description": "Instance type. Currently, only Standard is supported. The default value is Standard",
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例类型。当前仅支持标准型，取值默认为 Standard。",
+			Description: "Instance type. Currently, only Standard is supported. The default value is Standard",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -333,11 +333,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Master 节点个数。单可用区部署，默认包含 2 个 Master 节点。",
+		//	  "description": "Number of Master nodes. For single-zone deployment, 2 Master nodes are included by default",
 		//	  "type": "integer"
 		//	}
 		"master_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Master 节点个数。单可用区部署，默认包含 2 个 Master 节点。",
+			Description: "Number of Master nodes. For single-zone deployment, 2 Master nodes are included by default",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -347,11 +347,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Master 节点的规格码。说明关于 Master 节点所支持的规格信息，请参见实例规格。Master 节点数量为固定值，不支持增减。",
+		//	  "description": "Master node specification code. For information about supported specifications for Master nodes, see Instance Specifications. The number of Master nodes is fixed and cannot be changed.",
 		//	  "type": "string"
 		//	}
 		"master_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Master 节点的规格码。说明关于 Master 节点所支持的规格信息，请参见实例规格。Master 节点数量为固定值，不支持增减。",
+			Description: "Master node specification code. For information about supported specifications for Master nodes, see Instance Specifications. The number of Master nodes is fixed and cannot be changed.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -361,11 +361,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的部署方式，取值：true：多可用区部署。false：单可用区部署。目前仅支持单可用区部署。",
+		//	  "description": "Instance deployment mode. Values: true: multi-availability zone deployment. false: single availability zone deployment. Currently, only single availability zone deployment is supported.",
 		//	  "type": "boolean"
 		//	}
 		"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的部署方式，取值：true：多可用区部署。false：单可用区部署。目前仅支持单可用区部署。",
+			Description: "Instance deployment mode. Values: true: multi-availability zone deployment. false: single availability zone deployment. Currently, only single availability zone deployment is supported.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -377,11 +377,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实时主可用区子网 ID。",
+		//	  "description": "Real-time primary availability zone subnet ID.",
 		//	  "type": "string"
 		//	}
 		"primary_subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实时主可用区子网 ID。",
+			Description: "Real-time primary availability zone subnet ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -391,11 +391,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实时主可用区 ID。",
+		//	  "description": "Real-time primary zone ID",
 		//	  "type": "string"
 		//	}
 		"primary_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实时主可用区 ID。",
+			Description: "Real-time primary zone ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -405,11 +405,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的项目名称。",
+		//	  "description": "Project name of the instance",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的项目名称。",
+			Description: "Project name of the instance",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -421,11 +421,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "购买时长，单位：月。取值范围如下：1，2，3，4，5，6，7，8，9，12，24，36。说明当 ChargeType 为 PrePaid时，该参数必填。",
+		//	  "description": "Purchase duration, in months. The value range is: 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36. When ChargeType is PrePaid, this parameter is required",
 		//	  "type": "integer"
 		//	}
 		"purchase_months": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "购买时长，单位：月。取值范围如下：1，2，3，4，5，6，7，8，9，12，24，36。说明当 ChargeType 为 PrePaid时，该参数必填。",
+			Description: "Purchase duration, in months. The value range is: 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36. When ChargeType is PrePaid, this parameter is required",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -437,11 +437,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RegionServer 节点的数量。",
+		//	  "description": "Number of RegionServer nodes",
 		//	  "type": "integer"
 		//	}
 		"rs_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "RegionServer 节点的数量。",
+			Description: "Number of RegionServer nodes",
 			Required:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
@@ -451,11 +451,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "RegionServer 节点的规格码。",
+		//	  "description": "RegionServer node specification code.",
 		//	  "type": "string"
 		//	}
 		"rs_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RegionServer 节点的规格码。",
+			Description: "RegionServer node specification code.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -465,11 +465,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的地域 ID。",
+		//	  "description": "Region ID of the instance.",
 		//	  "type": "string"
 		//	}
 		"region_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的地域 ID。",
+			Description: "Region ID of the instance.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -479,11 +479,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实时备可用区子网 ID。",
+		//	  "description": "Real-time standby availability zone subnet ID.",
 		//	  "type": "string"
 		//	}
 		"standby_subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实时备可用区子网 ID。",
+			Description: "Real-time standby availability zone subnet ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -493,11 +493,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实时备可用区 ID。",
+		//	  "description": "Real-time standby zone ID",
 		//	  "type": "string"
 		//	}
 		"standby_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实时备可用区 ID。",
+			Description: "Real-time standby zone ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -507,11 +507,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例当前状态。关于实例状态的更多说明，请参见实例状态说明。",
+		//	  "description": "Current status of the instance. For more details about instance status, see Instance Status Description",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例当前状态。关于实例状态的更多说明，请参见实例状态说明。",
+			Description: "Current status of the instance. For more details about instance status, see Instance Status Description",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -521,11 +521,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例总存储容量，单位：GiB。",
+		//	  "description": "Total storage capacity of the instance, unit: GiB.",
 		//	  "type": "integer"
 		//	}
 		"storage_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例总存储容量，单位：GiB。",
+			Description: "Total storage capacity of the instance, unit: GiB.",
 			Required:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
@@ -535,11 +535,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的存储类型，取值：HdfsHdd：HDD 文件存储。HdfsSsd：SSD 文件存储。",
+		//	  "description": "Instance storage type. Values: HdfsHdd: HDD file storage. HdfsSsd: SSD file storage.",
 		//	  "type": "string"
 		//	}
 		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的存储类型，取值：HdfsHdd：HDD 文件存储。HdfsSsd：SSD 文件存储。",
+			Description: "Instance storage type. Values: HdfsHdd: HDD file storage. HdfsSsd: SSD file storage.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -549,11 +549,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的子网 ID。单可用区实例，仅包含一个可用区的子网 ID。",
+		//	  "description": "Subnet ID of the instance. For single-zone instances, only one subnet ID for the zone is included",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的子网 ID。单可用区实例，仅包含一个可用区的子网 ID。",
+			Description: "Subnet ID of the instance. For single-zone instances, only one subnet ID for the zone is included",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -563,17 +563,17 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "需要绑定的标签键和标签值数组对象。说明支持一次传入多组标签键值对象，多组标签键值对象间用英文逗号（,）分隔。单次最多同时传入 20 组标签键值对，单个实例最多绑定 50 个标签。标签键值需满足设置规则，具体规则请参见标签设置规则。",
+		//	  "description": "Array of tag keys and tag values to bind. Supports passing multiple sets of tag key-value objects at once, separated by commas (,). Up to 20 tag key-value pairs can be passed at a time, and up to 50 tags can be bound to a single instance. Tag keys and values must comply with the setting rules. For details, see Tag Setting Rules",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "标签键值对对象。",
+		//	    "description": "Tag key-value pair object",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "实例所绑定标签的标签键。",
+		//	        "description": "Tag key of the tags bound to the instance",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "实例所绑定标签的标签值。",
+		//	        "description": "Tag values bound to the instance.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -590,7 +590,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例所绑定标签的标签键。",
+						Description: "Tag key of the tags bound to the instance",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -602,7 +602,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例所绑定标签的标签值。",
+						Description: "Tag values bound to the instance.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -611,7 +611,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "需要绑定的标签键和标签值数组对象。说明支持一次传入多组标签键值对象，多组标签键值对象间用英文逗号（,）分隔。单次最多同时传入 20 组标签键值对，单个实例最多绑定 50 个标签。标签键值需满足设置规则，具体规则请参见标签设置规则。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Array of tag keys and tag values to bind. Supports passing multiple sets of tag key-value objects at once, separated by commas (,). Up to 20 tag key-value pairs can be passed at a time, and up to 50 tags can be bound to a single instance. Tag keys and values must comply with the setting rules. For details, see Tag Setting Rules\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -623,11 +623,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例已使用的容量型存储空间大小，单位 MiB。",
+		//	  "description": "Capacity-type storage space used by the instance, in MiB",
 		//	  "type": "integer"
 		//	}
 		"used_cold_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例已使用的容量型存储空间大小，单位 MiB。",
+			Description: "Capacity-type storage space used by the instance, in MiB",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -637,11 +637,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "主实例已使用的存储容量，单位：MiB。",
+		//	  "description": "Storage capacity used by the primary instance, in MiB",
 		//	  "type": "number"
 		//	}
 		"used_storage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "主实例已使用的存储容量，单位：MiB。",
+			Description: "Storage capacity used by the primary instance, in MiB",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -651,11 +651,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络 ID。说明您可以调用 DescribeVpcs 接口查询可创建 HBase 实例的私有网络信息，包括私有网络 ID。",
+		//	  "description": "Private network ID. You can call the DescribeVpcs API to query information about private networks available for HBase instance creation, including the private network ID.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私有网络 ID。说明您可以调用 DescribeVpcs 接口查询可创建 HBase 实例的私有网络信息，包括私有网络 ID。",
+			Description: "Private network ID. You can call the DescribeVpcs API to query information about private networks available for HBase instance creation, including the private network ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -665,11 +665,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的私有网络名称。",
+		//	  "description": "Name of the private network to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的私有网络名称。",
+			Description: "Name of the private network to which the instance belongs.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -679,11 +679,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的可用区 ID。",
+		//	  "description": "Zone ID of the instance",
 		//	  "type": "string"
 		//	}
 		"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的可用区 ID。",
+			Description: "Zone ID of the instance",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -693,11 +693,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属的可用区名称。",
+		//	  "description": "Name of the availability zone to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属的可用区名称。",
+			Description: "Name of the availability zone to which the instance belongs.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -715,7 +715,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "表格数据库 HBase 版是基于 Apache HBase 提供的全托管 NoSQL 服务，兼容标准 HBase 访问协议，具备低成本存储、高扩展吞吐等优势。",
+		Description: "Table Database HBase Edition is a fully managed NoSQL service based on Apache HBase, compatible with the standard HBase access protocol, offering advantages such as low-cost storage and high scalability throughput.",
 		Version:     1,
 		Attributes:  attributes,
 	}

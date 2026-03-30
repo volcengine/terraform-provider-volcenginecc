@@ -29,11 +29,11 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否为默认中转IP。true：是。false：否。",
+		//	  "description": "Whether this is the default transit IP. true: Yes. false: No.",
 		//	  "type": "boolean"
 		//	}
 		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否为默认中转IP。true：是。false：否。",
+			Description: "Whether this is the default transit IP. true: Yes. false: No.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
@@ -43,11 +43,11 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私网NAT网关ID。",
+		//	  "description": "Private NAT gateway ID.",
 		//	  "type": "string"
 		//	}
 		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "私网NAT网关ID。",
+			Description: "Private NAT gateway ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -57,11 +57,11 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转IP的地址。若不填，则系统自动从私网NAT网关所在子网随机分配一个空闲的IP地址。",
+		//	  "description": "Transit IP address. If not specified, the system automatically randomly assigns an available IP address from the subnet of the private NAT gateway.",
 		//	  "type": "string"
 		//	}
 		"nat_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转IP的地址。若不填，则系统自动从私网NAT网关所在子网随机分配一个空闲的IP地址。",
+			Description: "Transit IP address. If not specified, the system automatically randomly assigns an available IP address from the subnet of the private NAT gateway.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -73,11 +73,11 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转IP的描述。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+		//	  "description": "Description of the transit IP. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).",
 		//	  "type": "string"
 		//	}
 		"nat_ip_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转IP的描述。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+			Description: "Description of the transit IP. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -88,11 +88,11 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转IP的ID。",
+		//	  "description": "Transit IP ID.",
 		//	  "type": "string"
 		//	}
 		"nat_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转IP的ID。",
+			Description: "Transit IP ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -102,11 +102,11 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转IP的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。不填默认为中转IP的ID。",
+		//	  "description": "Name of the transit IP. Length limit: 1–128 characters. Must start with a letter, Chinese character, or number; can include period (.), underscore (_), and hyphen (-). If not specified, defaults to the transit IP ID.",
 		//	  "type": "string"
 		//	}
 		"nat_ip_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转IP的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。不填默认为中转IP的ID。",
+			Description: "Name of the transit IP. Length limit: 1–128 characters. Must start with a letter, Chinese character, or number; can include period (.), underscore (_), and hyphen (-). If not specified, defaults to the transit IP ID.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -117,11 +117,11 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转IP的状态。Creating：创建中。Available：可用。Deleting：删除中。Deleted：已删除。",
+		//	  "description": "Status of the transit IP. Creating: Being created. Available: Available. Deleting: Being deleted. Deleted: Deleted.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转IP的状态。Creating：创建中。Available：可用。Deleting：删除中。Deleted：已删除。",
+			Description: "Status of the transit IP. Creating: Being created. Available: Available. Deleting: Being deleted. Deleted: Deleted.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -131,7 +131,7 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "中转IP的使用状态。Idle：未使用。UsedBySnat：被SNAT规则使用。UsedByDnat：被DNAT规则使用。UsedByNat：被SNAT/DNAT规则同时使用。",
+		//	  "description": "Usage status of the transit IP. Idle: Not used. UsedBySnat: Used by SNAT rule. UsedByDnat: Used by DNAT rule. UsedByNat: Used by both SNAT and DNAT rules.",
 		//	  "enum": [
 		//	    "Idle",
 		//	    "UsedBySnat",
@@ -141,7 +141,7 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"using_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "中转IP的使用状态。Idle：未使用。UsedBySnat：被SNAT规则使用。UsedByDnat：被DNAT规则使用。UsedByNat：被SNAT/DNAT规则同时使用。",
+			Description: "Usage status of the transit IP. Idle: Not used. UsedBySnat: Used by SNAT rule. UsedByDnat: Used by DNAT rule. UsedByNat: Used by both SNAT and DNAT rules.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -159,7 +159,7 @@ func natIpResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "从私网NAT网关所属子网分配，用于IP地址转换。",
+		Description: "Allocated from the subnet associated with the private NAT gateway for IP address translation.",
 		Version:     1,
 		Attributes:  attributes,
 	}

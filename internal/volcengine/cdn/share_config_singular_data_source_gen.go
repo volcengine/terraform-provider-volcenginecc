@@ -27,10 +27,10 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示一个 IP 白名单的配置，对应 ConfigType 是 allow_ip_access_rule。",
+		//	  "description": "Specifies the configuration for an IP allowlist, where ConfigType is allow_ip_access_rule.",
 		//	  "properties": {
 		//	    "Rules": {
-		//	      "description": "表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。",
+		//	      "description": "Specifies a list of entries. Each entry in the list is an IP address or CIDR block. IP addresses and blocks can be in IPv4 or IPv6 format. List limits: For AddSharedConfig, the number of entries in the list cannot exceed 30,000.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -46,32 +46,32 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Rules
 				"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。",
+					Description: "Specifies a list of entries. Each entry in the list is an IP address or CIDR block. IP addresses and blocks can be in IPv4 or IPv6 format. List limits: For AddSharedConfig, the number of entries in the list cannot exceed 30,000.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示一个 IP 白名单的配置，对应 ConfigType 是 allow_ip_access_rule。",
+			Description: "Specifies the configuration for an IP allowlist, where ConfigType is allow_ip_access_rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowRefererAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示一个 Referer 白名单的配置，对应 ConfigType 是 allow_referer_access_rule。",
+		//	  "description": "Indicates a configuration for a Referer allowlist. The corresponding ConfigType is allow_referer_access_rule.",
 		//	  "properties": {
 		//	    "AllowEmpty": {
-		//	      "description": "表示是否不允许 Referer 头部为空或者不包含 Referer 头部的请求。该参数有以下取值：true：表示不允许。如果请求的 Referer 头部为空或者不包含 Referer 头部，内容分发网络拒绝请求。false：表示允许。该参数的默认值是 false。",
+		//	      "description": "Indicates whether requests with an empty Referer header or without a Referer header are not allowed. This parameter has the following values: true: Not allowed. If the Referer header is empty or missing, the content delivery network rejects the request. false: Allowed. The default value is false.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "CommonType": {
-		//	      "description": "表示该通用列表的内容。",
+		//	      "description": "Specifies the contents of the common list.",
 		//	      "properties": {
 		//	        "IgnoreCase": {
-		//	          "description": "表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。",
+		//	          "description": "Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "Rules": {
-		//	          "description": "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+		//	          "description": "Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -89,7 +89,7 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowEmpty
 				"allow_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否不允许 Referer 头部为空或者不包含 Referer 头部的请求。该参数有以下取值：true：表示不允许。如果请求的 Referer 头部为空或者不包含 Referer 头部，内容分发网络拒绝请求。false：表示允许。该参数的默认值是 false。",
+					Description: "Indicates whether requests with an empty Referer header or without a Referer header are not allowed. This parameter has the following values: true: Not allowed. If the Referer header is empty or missing, the content delivery network rejects the request. false: Allowed. The default value is false.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CommonType
@@ -97,38 +97,38 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: IgnoreCase
 						"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。",
+							Description: "Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
 						"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+							Description: "Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示该通用列表的内容。",
+					Description: "Specifies the contents of the common list.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示一个 Referer 白名单的配置，对应 ConfigType 是 allow_referer_access_rule。",
+			Description: "Indicates a configuration for a Referer allowlist. The corresponding ConfigType is allow_referer_access_rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CommonMatchList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示一个通用列表的配置，对应 ConfigType 是 common_match_list。",
+		//	  "description": "Specifies the configuration for a common list, where ConfigType is common_match_list.",
 		//	  "properties": {
 		//	    "CommonType": {
-		//	      "description": "表示该通用列表的内容。",
+		//	      "description": "Specifies the contents of the common list.",
 		//	      "properties": {
 		//	        "IgnoreCase": {
-		//	          "description": "表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。",
+		//	          "description": "Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "Rules": {
-		//	          "description": "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+		//	          "description": "Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -149,56 +149,56 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: IgnoreCase
 						"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。",
+							Description: "Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
 						"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+							Description: "Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示该通用列表的内容。",
+					Description: "Specifies the contents of the common list.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示一个通用列表的配置，对应 ConfigType 是 common_match_list。",
+			Description: "Specifies the configuration for a common list, where ConfigType is common_match_list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示全局配置的名称。名称有以下要求：名称可以包含汉字、字母、数字、下划线（_），长度在 3-45 个字符之间。一个汉字占 3 个字符。名称不能与主账号下某个已有的全局配置的名称相同。",
+		//	  "description": "Specifies the name of the global configuration. Naming requirements: Names can include Chinese characters, letters, numbers, and underscores (_), and must be 3–45 characters long. One Chinese character counts as 3 characters. The name cannot be the same as any existing global configuration name under the primary account.",
 		//	  "type": "string"
 		//	}
 		"config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示全局配置的名称。名称有以下要求：名称可以包含汉字、字母、数字、下划线（_），长度在 3-45 个字符之间。一个汉字占 3 个字符。名称不能与主账号下某个已有的全局配置的名称相同。",
+			Description: "Specifies the name of the global configuration. Naming requirements: Names can include Chinese characters, letters, numbers, and underscores (_), and must be 3–45 characters long. One Chinese character counts as 3 characters. The name cannot be the same as any existing global configuration name under the primary account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该全局配置的类型。该参数有以下取值：deny_ip_access_rule：表示 IP 黑名单。allow_ip_access_rule：表示 IP 白名单。deny_referer_access_rule：表示 Referer 黑名单。allow_referer_access_rule：表示 Referer 白名单。common_match_list：表示通用列表。",
+		//	  "description": "This parameter specifies the type of global configuration. Available values are: deny_ip_access_rule: indicates an IP denylist. allow_ip_access_rule: indicates an IP allowlist. deny_referer_access_rule: indicates a Referer denylist. allow_referer_access_rule: indicates a Referer allowlist. common_match_list: indicates a common list.",
 		//	  "type": "string"
 		//	}
 		"config_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该全局配置的类型。该参数有以下取值：deny_ip_access_rule：表示 IP 黑名单。allow_ip_access_rule：表示 IP 白名单。deny_referer_access_rule：表示 Referer 黑名单。allow_referer_access_rule：表示 Referer 白名单。common_match_list：表示通用列表。",
+			Description: "This parameter specifies the type of global configuration. Available values are: deny_ip_access_rule: indicates an IP denylist. allow_ip_access_rule: indicates an IP allowlist. deny_referer_access_rule: indicates a Referer denylist. allow_referer_access_rule: indicates a Referer allowlist. common_match_list: indicates a common list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DenyIpAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。",
+		//	  "description": "Specifies the configuration for an IP denylist, where ConfigType is deny_ip_access_rule.",
 		//	  "properties": {
 		//	    "Rules": {
-		//	      "description": "表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。",
+		//	      "description": "Specifies the configuration for an IP denylist, where ConfigType is deny_ip_access_rule.",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "表示一个条目列表。列表中的每个条目是一个 IP 地址或 CIDR 网段。IP 地址和网段可以是 IPv4 和 IPv6 格式。列表的额度如下：对于 AddSharedConfig，列表中条目的数量不能超过 30,000 个。",
+		//	        "description": "Specifies a list of entries. Each entry in the list is an IP address or CIDR block. IP addresses and blocks can be in IPv4 or IPv6 format. List limits: For AddSharedConfig, the number of entries in the list cannot exceed 30,000.",
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array",
@@ -212,32 +212,32 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Rules
 				"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。",
+					Description: "Specifies the configuration for an IP denylist, where ConfigType is deny_ip_access_rule.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示一个 IP 黑名单的配置，对应 ConfigType 是 deny_ip_access_rule。",
+			Description: "Specifies the configuration for an IP denylist, where ConfigType is deny_ip_access_rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DenyRefererAccessRule
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示一个 Referer 黑名单的配置，对应 ConfigType 是 deny_referer_access_rule。",
+		//	  "description": "Indicates a configuration for a Referer denylist. The corresponding ConfigType is deny_referer_access_rule.",
 		//	  "properties": {
 		//	    "AllowEmpty": {
-		//	      "description": "表示是否允许 Referer 头部为空或者不包含 Referer 头部的请求。该参数有以下取值：true：表示允许。false：表示不允许。如果请求的 Referer 头部为空或者不包含 Referer 头部，内容分发网络拒绝请求。该参数的默认值是 true。",
+		//	      "description": "Indicates whether requests with an empty Referer header or without a Referer header are allowed. This parameter has the following values: true: Allowed. false: Not allowed. If the Referer header is empty or missing, the content delivery network rejects the request. The default value is true.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "CommonType": {
-		//	      "description": "表示该通用列表的内容。",
+		//	      "description": "Specifies the contents of the common list.",
 		//	      "properties": {
 		//	        "IgnoreCase": {
-		//	          "description": "表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。",
+		//	          "description": "Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "Rules": {
-		//	          "description": "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+		//	          "description": "Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -255,7 +255,7 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowEmpty
 				"allow_empty": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "表示是否允许 Referer 头部为空或者不包含 Referer 头部的请求。该参数有以下取值：true：表示允许。false：表示不允许。如果请求的 Referer 头部为空或者不包含 Referer 头部，内容分发网络拒绝请求。该参数的默认值是 true。",
+					Description: "Indicates whether requests with an empty Referer header or without a Referer header are allowed. This parameter has the following values: true: Allowed. false: Not allowed. If the Referer header is empty or missing, the content delivery network rejects the request. The default value is true.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CommonType
@@ -263,67 +263,67 @@ func shareConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: IgnoreCase
 						"ignore_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "表示 Rules 中的条目是否区分大小写。该参数有以下取值：true：表示不区分大小写。false：表示区分大小写。该参数的默认值是 true。",
+							Description: "Indicates whether entries in Rules are case-sensitive. This parameter has the following values: true: Not case-sensitive. false: Case-sensitive. The default value is true.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
 						"rules": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "表示一个条目列表，列表中的每个条目是一个字符串。列表的额度如下：列表最多可以包含 4,000 个条目。所有条目的总长度不能超过 200,000 个字符。CDN 在创建该全局配置时，会将列表中重复的条目删除。重复条目不占额度。",
+							Description: "Indicates an entry list, where each entry is a string. List quotas are as follows: The list can contain up to 4,000 entries. The total length of all entries cannot exceed 200,000 characters. When the CDN creates this global configuration, duplicate entries in the list are removed. Duplicate entries do not count toward the quota.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "表示该通用列表的内容。",
+					Description: "Specifies the contents of the common list.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "表示一个 Referer 黑名单的配置，对应 ConfigType 是 deny_referer_access_rule。",
+			Description: "Indicates a configuration for a Referer denylist. The corresponding ConfigType is deny_referer_access_rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示与该全局配置关联的加速域名的数量。",
+		//	  "description": "Indicates the number of accelerated domains associated with this global configuration.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"domain_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "表示与该全局配置关联的加速域名的数量。",
+			Description: "Indicates the number of accelerated domains associated with this global configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Project
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该全局配置所归属的项目名称。",
+		//	  "description": "Specifies the project name to which the global configuration belongs.",
 		//	  "type": "string"
 		//	}
 		"project": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该全局配置所归属的项目名称。",
+			Description: "Specifies the project name to which the global configuration belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RuleContent
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该自定义错误页面的 HTML 代码。",
+		//	  "description": "Specifies the HTML code for the custom error page.",
 		//	  "type": "string"
 		//	}
 		"rule_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "表示该自定义错误页面的 HTML 代码。",
+			Description: "Specifies the HTML code for the custom error page.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "表示该全局配置的最近修改时间，单位是 Unix 时间戳。",
+		//	  "description": "Indicates the last modification time of this global configuration, in Unix timestamp.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "表示该全局配置的最近修改时间，单位是 Unix 时间戳。",
+			Description: "Indicates the last modification time of this global configuration, in Unix timestamp.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

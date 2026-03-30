@@ -28,11 +28,11 @@ func dnatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNAT规则的ID。",
+		//	  "description": "ID of the DNAT rule.",
 		//	  "type": "string"
 		//	}
 		"dnat_entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "DNAT规则的ID。",
+			Description: "ID of the DNAT rule.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -42,11 +42,11 @@ func dnatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNAT规则的名称。",
+		//	  "description": "Name of the DNAT rule.",
 		//	  "type": "string"
 		//	}
 		"dnat_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "DNAT规则的名称。",
+			Description: "Name of the DNAT rule.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -57,55 +57,55 @@ func dnatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "NAT网关用于网络地址转换的IP地址。当NAT网关为公网NAT网关时，传入其绑定的公网IP地址。当NAT网关为私网NAT网关时，传入其中转IP地址。",
+		//	  "description": "IP address used by the NAT gateway for network address translation. If the NAT gateway is a public NAT gateway, enter its bound public IP address. If the NAT gateway is a private NAT gateway, enter its transit IP address.",
 		//	  "type": "string"
 		//	}
 		"external_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "NAT网关用于网络地址转换的IP地址。当NAT网关为公网NAT网关时，传入其绑定的公网IP地址。当NAT网关为私网NAT网关时，传入其中转IP地址。",
+			Description: "IP address used by the NAT gateway for network address translation. If the NAT gateway is a public NAT gateway, enter its bound public IP address. If the NAT gateway is a private NAT gateway, enter its transit IP address.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExternalPort
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "接收来自公网外部请求的端口或端口段。",
+		//	  "description": "Port or port range that receives requests from the public network.",
 		//	  "type": "string"
 		//	}
 		"external_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "接收来自公网外部请求的端口或端口段。",
+			Description: "Port or port range that receives requests from the public network.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InternalIp
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云服务器实例的私网IP。",
+		//	  "description": "Private IP address of the cloud server instance.",
 		//	  "type": "string"
 		//	}
 		"internal_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云服务器实例的私网IP。",
+			Description: "Private IP address of the cloud server instance.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InternalPort
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "云服务器实例私网IP的端口或端口段。",
+		//	  "description": "Port or port range of the private IP address of the cloud server instance.",
 		//	  "type": "string"
 		//	}
 		"internal_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "云服务器实例私网IP的端口或端口段。",
+			Description: "Port or port range of the private IP address of the cloud server instance.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNAT规则所属NAT网关的ID。",
+		//	  "description": "ID of the NAT gateway to which the DNAT rule belongs.",
 		//	  "type": "string"
 		//	}
 		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "DNAT规则所属NAT网关的ID。",
+			Description: "ID of the NAT gateway to which the DNAT rule belongs.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -115,11 +115,11 @@ func dnatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNAT规则的端口类型。specified：指定端口。any：任意端口。即IP映射。",
+		//	  "description": "Port type of the DNAT rule. specified: Specified port. any: Any port, i.e., IP mapping.",
 		//	  "type": "string"
 		//	}
 		"port_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "DNAT规则的端口类型。specified：指定端口。any：任意端口。即IP映射。",
+			Description: "Port type of the DNAT rule. specified: Specified port. any: Any port, i.e., IP mapping.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -131,22 +131,22 @@ func dnatentryResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "协议类型。tcp：转发TCP协议的报文。udp：转发UDP协议的报文。",
+		//	  "description": "Protocol type. tcp: Forwards TCP protocol packets. udp: Forwards UDP protocol packets.",
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "协议类型。tcp：转发TCP协议的报文。udp：转发UDP协议的报文。",
+			Description: "Protocol type. tcp: Forwards TCP protocol packets. udp: Forwards UDP protocol packets.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+		//	  "description": "Status of the DNAT rule. Creating: Creating. Deleting: Deleting. Available: Available.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "DNAT规则的状态。Creating：创建中。Deleting：删除中。Available：可用。",
+			Description: "Status of the DNAT rule. Creating: Creating. Deleting: Deleting. Available: Available.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -164,7 +164,7 @@ func dnatentryResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "目的地址转换。即当中转IP及端口被访问时，私网NAT网关将访问请求中的目的地址和端口替换成云服务器的私网IP及端口后，进行转发。",
+		Description: "Destination address translation. When the transit IP and port are accessed, the private NAT gateway replaces the destination address and port in the request with the private IP and port of the cloud server, then forwards the request.",
 		Version:     1,
 		Attributes:  attributes,
 	}

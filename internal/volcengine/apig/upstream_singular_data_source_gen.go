@@ -26,21 +26,21 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "后端节点，Upstream来源类型为VeFaas时无效。",
+		//	  "description": "Backend node. Not valid when the upstream source type is VeFaas",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "后端节点，Upstream来源类型为VeFaas时无效。",
+		//	    "description": "Backend node. Not valid when the upstream source type is VeFaas",
 		//	    "properties": {
 		//	      "HealthStatus": {
-		//	        "description": "健康检查状态。",
+		//	        "description": "Health Check Status",
 		//	        "type": "string"
 		//	      },
 		//	      "IP": {
-		//	        "description": "后端节点IP。",
+		//	        "description": "Backend node IP",
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "后端节点端口。",
+		//	        "description": "Backend node port",
 		//	        "type": "integer"
 		//	      }
 		//	    },
@@ -54,60 +54,60 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: HealthStatus
 					"health_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "健康检查状态。",
+						Description: "Health Check Status",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: IP
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "后端节点IP。",
+						Description: "Backend node IP",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "后端节点端口。",
+						Description: "Backend node port",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "后端节点，Upstream来源类型为VeFaas时无效。",
+			Description: "Backend node. Not valid when the upstream source type is VeFaas",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CircuitBreakingSettings
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务熔断配置。",
+		//	  "description": "Service circuit breaking configuration",
 		//	  "properties": {
 		//	    "BaseEjectionTime": {
 		//	      "default": 30,
-		//	      "description": "最小弹出时间。单位为毫秒。取值限制为1~86400000。默认值为30秒。",
+		//	      "description": "Minimum pop time, in milliseconds. Value range: 1–86400000. Default: 30 seconds",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "ConsecutiveErrors": {
-		//	      "description": "连续失败次数。取值限制为1~100。默认值为5。",
+		//	      "description": "Consecutive failure count. Value range: 1~100. Default: 5",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "Enable": {
-		//	      "description": "开启。",
+		//	      "description": "Enable",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Interval": {
 		//	      "default": 10,
-		//	      "description": "计算周期。单位为毫秒。取值限制为1~86400000。默认值为10秒。",
+		//	      "description": "Calculation cycle, in milliseconds. Value range: 1–86400000. Default: 10 seconds",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxEjectionPercent": {
 		//	      "default": 20,
-		//	      "description": "最大熔断比例。取值限制为1~100。默认值为20%。",
+		//	      "description": "Maximum circuit breaking ratio. Value range: 1~100. Default: 20%",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "MinHealthPercent": {
 		//	      "default": 60,
-		//	      "description": "最小健康比例。取值限制为0~100。默认值为60%。",
+		//	      "description": "Minimum health ratio. Value range: 0~100. Default: 60%",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    }
@@ -118,69 +118,69 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BaseEjectionTime
 				"base_ejection_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最小弹出时间。单位为毫秒。取值限制为1~86400000。默认值为30秒。",
+					Description: "Minimum pop time, in milliseconds. Value range: 1–86400000. Default: 30 seconds",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ConsecutiveErrors
 				"consecutive_errors": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "连续失败次数。取值限制为1~100。默认值为5。",
+					Description: "Consecutive failure count. Value range: 1~100. Default: 5",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "开启。",
+					Description: "Enable",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Interval
 				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "计算周期。单位为毫秒。取值限制为1~86400000。默认值为10秒。",
+					Description: "Calculation cycle, in milliseconds. Value range: 1–86400000. Default: 10 seconds",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MaxEjectionPercent
 				"max_ejection_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最大熔断比例。取值限制为1~100。默认值为20%。",
+					Description: "Maximum circuit breaking ratio. Value range: 1~100. Default: 20%",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MinHealthPercent
 				"min_health_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "最小健康比例。取值限制为0~100。默认值为60%。",
+					Description: "Minimum health ratio. Value range: 0~100. Default: 60%",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "服务熔断配置。",
+			Description: "Service circuit breaking configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Comments
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备注。",
+		//	  "description": "Remarks",
 		//	  "type": "string"
 		//	}
 		"comments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备注。",
+			Description: "Remarks",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionPoolSettings
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "连接池配置。",
+		//	  "description": "Connection Pool Configuration",
 		//	  "properties": {
 		//	    "Enable": {
-		//	      "description": "开启。",
+		//	      "description": "Enable",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Http1MaxPendingRequests": {
-		//	      "description": "HTTP/1最大等待请求数。取值限制为0~2^31-1，0为不限制。",
+		//	      "description": "Maximum HTTP/1 pending requests. Value range: 0~2^31-1. 0 means unlimited",
 		//	      "type": "integer"
 		//	    },
 		//	    "IdleTimeout": {
-		//	      "description": "空闲超时时间。单位为秒。取值限制为0~2^31-1，0为不限制。",
+		//	      "description": "Idle timeout, in seconds. Value range: 0–2^31-1. 0 means no limit",
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxConnections": {
-		//	      "description": "TCP最大连接数。取值限制为0~2^31-1，0为不限制。",
+		//	      "description": "Maximum TCP connections. Value range: 0~2^31-1. 0 means unlimited",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -190,112 +190,112 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "开启。",
+					Description: "Enable",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Http1MaxPendingRequests
 				"http_1_max_pending_requests": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "HTTP/1最大等待请求数。取值限制为0~2^31-1，0为不限制。",
+					Description: "Maximum HTTP/1 pending requests. Value range: 0~2^31-1. 0 means unlimited",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IdleTimeout
 				"idle_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "空闲超时时间。单位为秒。取值限制为0~2^31-1，0为不限制。",
+					Description: "Idle timeout, in seconds. Value range: 0–2^31-1. 0 means no limit",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MaxConnections
 				"max_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "TCP最大连接数。取值限制为0~2^31-1，0为不限制。",
+					Description: "Maximum TCP connections. Value range: 0~2^31-1. 0 means unlimited",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "连接池配置。",
+			Description: "Connection Pool Configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream创建时间。",
+		//	  "description": "Upstream creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Upstream创建时间。",
+			Description: "Upstream creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关实例ID。",
+		//	  "description": "Gateway Instance ID",
 		//	  "type": "string"
 		//	}
 		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关实例ID。",
+			Description: "Gateway Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerSettings
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡配置。",
+		//	  "description": "Load Balancing Configuration",
 		//	  "properties": {
 		//	    "ConsistentHashLB": {
-		//	      "description": "一致性哈希负载均衡。",
+		//	      "description": "Consistent Hash Load Balancing",
 		//	      "properties": {
 		//	        "HTTPCookie": {
 		//	          "description": "Cookie。",
 		//	          "properties": {
 		//	            "Name": {
-		//	              "description": "名称。支持ASCII可打印字符，长度限制为0~256个字符。",
+		//	              "description": "Name. Supports printable ASCII characters. Length: 0~256 characters",
 		//	              "maxLength": 256,
 		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },
 		//	            "Path": {
-		//	              "description": "路径。支持ASCII可打印字符，长度限制为1~256个字符。",
+		//	              "description": "Path. Supports printable ASCII characters. Length: 1~256 characters",
 		//	              "type": "string"
 		//	            },
 		//	            "Ttl": {
-		//	              "description": "有效期。单位为秒。",
+		//	              "description": "Validity period, in seconds",
 		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "HashBalanceFactor": {
-		//	          "description": "过载保护参数。取值限制为100~200。当取值为120时，upstream节点当前活跃请求数超过平均活跃请求数的120%时，将触发过载保护。当触发过载保护时，即使请求的hash命中某一upstream节点，负载均衡器也会随机选择upstream节点。",
+		//	          "description": "Overload protection parameter. Value range: 100–200. When set to 120, overload protection is triggered if the current active request count of an upstream node exceeds 120% of the average active request count. When overload protection is triggered, even if the request hash matches a specific upstream node, the load balancer will randomly select an upstream node",
 		//	          "type": "integer"
 		//	        },
 		//	        "HashKey": {
-		//	          "description": "一致性哈希方式，取值：UseSourceIp：基于源IP地址。HttpQueryParameterName：基于参数。HttpHeaderName：基于头。HTTPCookie：基于cookie。",
+		//	          "description": "Consistent hash method. Options: UseSourceIp: based on source IP address. HttpQueryParameterName: based on parameter. HttpHeaderName: based on header. HTTPCookie: based on cookie",
 		//	          "type": "string"
 		//	        },
 		//	        "HttpHeaderName": {
-		//	          "description": "参数。支持ASCII可打印字符，长度限制为1~256个字符。",
+		//	          "description": "Parameter. Supports printable ASCII characters, length: 1–256 characters",
 		//	          "type": "string"
 		//	        },
 		//	        "HttpQueryParameterName": {
-		//	          "description": "参数。支持ASCII可打印字符，长度限制为1~256个字符。",
+		//	          "description": "Parameter. Supports printable ASCII characters, length: 1–256 characters",
 		//	          "type": "string"
 		//	        },
 		//	        "UseSourceIp": {
-		//	          "description": "源IP地址。",
+		//	          "description": "Source IP address",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "LbPolicy": {
-		//	      "description": "负载均衡策略，取值：SimpleLB：简单负载均衡。ConsistentHashLB：一致性哈希负载均衡。",
+		//	      "description": "Load balancing policy. Options: SimpleLB: simple load balancing. ConsistentHashLB: consistent hash load balancing",
 		//	      "type": "string"
 		//	    },
 		//	    "SimpleLB": {
-		//	      "description": "简单负载均衡，取值：ROUND_ROBIN：轮询。LEAST_CONN：最小连接数。RANDOM：随机。",
+		//	      "description": "Simple load balancing. Options: ROUND_ROBIN: round robin. LEAST_CONN: least connections. RANDOM: random",
 		//	      "type": "string"
 		//	    },
 		//	    "WarmupDuration": {
-		//	      "description": "预热时间。单位为秒。",
+		//	      "description": "Warm-up time (seconds)",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    }
@@ -312,17 +312,17 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "名称。支持ASCII可打印字符，长度限制为0~256个字符。",
+									Description: "Name. Supports printable ASCII characters. Length: 0~256 characters",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Path
 								"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "路径。支持ASCII可打印字符，长度限制为1~256个字符。",
+									Description: "Path. Supports printable ASCII characters. Length: 1~256 characters",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Ttl
 								"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "有效期。单位为秒。",
+									Description: "Validity period, in seconds",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -331,97 +331,97 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: HashBalanceFactor
 						"hash_balance_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "过载保护参数。取值限制为100~200。当取值为120时，upstream节点当前活跃请求数超过平均活跃请求数的120%时，将触发过载保护。当触发过载保护时，即使请求的hash命中某一upstream节点，负载均衡器也会随机选择upstream节点。",
+							Description: "Overload protection parameter. Value range: 100–200. When set to 120, overload protection is triggered if the current active request count of an upstream node exceeds 120% of the average active request count. When overload protection is triggered, even if the request hash matches a specific upstream node, the load balancer will randomly select an upstream node",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: HashKey
 						"hash_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "一致性哈希方式，取值：UseSourceIp：基于源IP地址。HttpQueryParameterName：基于参数。HttpHeaderName：基于头。HTTPCookie：基于cookie。",
+							Description: "Consistent hash method. Options: UseSourceIp: based on source IP address. HttpQueryParameterName: based on parameter. HttpHeaderName: based on header. HTTPCookie: based on cookie",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: HttpHeaderName
 						"http_header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "参数。支持ASCII可打印字符，长度限制为1~256个字符。",
+							Description: "Parameter. Supports printable ASCII characters, length: 1–256 characters",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: HttpQueryParameterName
 						"http_query_parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "参数。支持ASCII可打印字符，长度限制为1~256个字符。",
+							Description: "Parameter. Supports printable ASCII characters, length: 1–256 characters",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: UseSourceIp
 						"use_source_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "源IP地址。",
+							Description: "Source IP address",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "一致性哈希负载均衡。",
+					Description: "Consistent Hash Load Balancing",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LbPolicy
 				"lb_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "负载均衡策略，取值：SimpleLB：简单负载均衡。ConsistentHashLB：一致性哈希负载均衡。",
+					Description: "Load balancing policy. Options: SimpleLB: simple load balancing. ConsistentHashLB: consistent hash load balancing",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SimpleLB
 				"simple_lb": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "简单负载均衡，取值：ROUND_ROBIN：轮询。LEAST_CONN：最小连接数。RANDOM：随机。",
+					Description: "Simple load balancing. Options: ROUND_ROBIN: round robin. LEAST_CONN: least connections. RANDOM: random",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: WarmupDuration
 				"warmup_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "预热时间。单位为秒。",
+					Description: "Warm-up time (seconds)",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "负载均衡配置。",
+			Description: "Load Balancing Configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream名称。",
+		//	  "description": "Upstream name",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Upstream名称。",
+			Description: "Upstream name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Protocol
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "协议，取值：HTTP：HTTP/1.1。HTTP2：HTTP/2。GRPC：GRPC。",
+		//	  "description": "Protocol. Options: HTTP: HTTP/1.1; HTTP2: HTTP/2; GRPC: GRPC",
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "协议，取值：HTTP：HTTP/1.1。HTTP2：HTTP/2。GRPC：GRPC。",
+			Description: "Protocol. Options: HTTP: HTTP/1.1; HTTP2: HTTP/2; GRPC: GRPC",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream来源类型，取值：VeFaas：函数服务。ECS：云服务器。K8S：容器服务。Nacos：注册中心。AIProvider：AI模型代理。",
+		//	  "description": "Upstream source type. Options: VeFaas: function service. ECS: cloud server. K8S: container service. Nacos: registry. AIProvider: AI model proxy",
 		//	  "type": "string"
 		//	}
 		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Upstream来源类型，取值：VeFaas：函数服务。ECS：云服务器。K8S：容器服务。Nacos：注册中心。AIProvider：AI模型代理。",
+			Description: "Upstream source type. Options: VeFaas: function service. ECS: cloud server. K8S: container service. Nacos: registry. AIProvider: AI model proxy",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TlsSettings
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS配置。",
+		//	  "description": "TLS Configuration",
 		//	  "properties": {
 		//	    "Sni": {
-		//	      "description": "SNI。留空时会将访问网关的域名透传到upstream。",
+		//	      "description": "SNI. If left blank, the domain name accessed by the gateway will be passed through to the upstream",
 		//	      "type": "string"
 		//	    },
 		//	    "TlsMode": {
-		//	      "description": "TLS模式，取值：DISABLE：关闭TLS。SIMPLE：单向TLS。",
+		//	      "description": "TLS mode. Options: DISABLE: disable TLS. SIMPLE: one-way TLS",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -431,27 +431,27 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Sni
 				"sni": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "SNI。留空时会将访问网关的域名透传到upstream。",
+					Description: "SNI. If left blank, the domain name accessed by the gateway will be passed through to the upstream",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TlsMode
 				"tls_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "TLS模式，取值：DISABLE：关闭TLS。SIMPLE：单向TLS。",
+					Description: "TLS mode. Options: DISABLE: disable TLS. SIMPLE: one-way TLS",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "TLS配置。",
+			Description: "TLS Configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream更新时间。",
+		//	  "description": "Upstream update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Upstream更新时间。",
+			Description: "Upstream update time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpstreamId
@@ -469,59 +469,59 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream配置。",
+		//	  "description": "Upstream Configuration",
 		//	  "properties": {
 		//	    "AIProvider": {
-		//	      "description": "AI模型代理。",
+		//	      "description": "AI model proxy",
 		//	      "properties": {
 		//	        "BaseUrl": {
-		//	          "description": "模型地址。",
+		//	          "description": "Model address",
 		//	          "type": "string"
 		//	        },
 		//	        "CustomModelService": {
-		//	          "description": "火山自部署模型服务。",
+		//	          "description": "Volcano Engine self-hosted model service",
 		//	          "properties": {
 		//	            "Name": {
-		//	              "description": "模型服务名称。",
+		//	              "description": "Model Service Name",
 		//	              "type": "string"
 		//	            },
 		//	            "Namespace": {
-		//	              "description": "命名空间。",
+		//	              "description": "Namespace",
 		//	              "type": "string"
 		//	            },
 		//	            "Port": {
-		//	              "description": "端口。",
+		//	              "description": "Port",
 		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "Name": {
-		//	          "description": "模型服务商名称。",
+		//	          "description": "Model Service Provider Name",
 		//	          "type": "string"
 		//	        },
 		//	        "Token": {
-		//	          "description": "模型API key。",
+		//	          "description": "Model API key",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "Domain": {
-		//	      "description": "固定域名。",
+		//	      "description": "Fixed domain name",
 		//	      "properties": {
 		//	        "DomainList": {
-		//	          "description": "域名列表。",
+		//	          "description": "Domain name list",
 		//	          "insertionOrder": false,
 		//	          "items": {
-		//	            "description": "固定域名。",
+		//	            "description": "Fixed domain name",
 		//	            "properties": {
 		//	              "Domain": {
-		//	                "description": "域名。",
+		//	                "description": "Domain name",
 		//	                "type": "string"
 		//	              },
 		//	              "Port": {
-		//	                "description": "端口。协议类型为HTTP时，默认值为80。协议类型为HTTPS时，默认值为443。",
+		//	                "description": "Port. Default: 80 for HTTP, 443 for HTTPS",
 		//	                "type": "integer"
 		//	              }
 		//	            },
@@ -537,21 +537,21 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "EcsInstances": {
-		//	      "description": "云服务器。",
+		//	      "description": "Cloud server",
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "description": "云服务器。",
+		//	        "description": "Cloud server",
 		//	        "properties": {
 		//	          "EcsId": {
-		//	            "description": "云服务器ID。",
+		//	            "description": "Cloud server ID",
 		//	            "type": "string"
 		//	          },
 		//	          "IP": {
-		//	            "description": "IP地址。",
+		//	            "description": "IP address",
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
-		//	            "description": "端口。",
+		//	            "description": "Port",
 		//	            "type": "integer"
 		//	          }
 		//	        },
@@ -561,54 +561,54 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "K8SService": {
-		//	      "description": "容器服务。",
+		//	      "description": "Container Service",
 		//	      "properties": {
 		//	        "Name": {
-		//	          "description": "容器服务名称。长度限制为2~63个字符。",
+		//	          "description": "Container Service Name. Length: 2–63 characters",
 		//	          "type": "string"
 		//	        },
 		//	        "Namespace": {
-		//	          "description": "命名空间。长度限制为2~63个字符。",
+		//	          "description": "Namespace. Length: 2~63 characters",
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
-		//	          "description": "端口。",
+		//	          "description": "Port",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "NacosService": {
-		//	      "description": "注册中心。",
+		//	      "description": "Registry Center",
 		//	      "properties": {
 		//	        "Group": {
-		//	          "description": "分组。",
+		//	          "description": "Group",
 		//	          "type": "string"
 		//	        },
 		//	        "Namespace": {
-		//	          "description": "命名空间。",
+		//	          "description": "Namespace",
 		//	          "type": "string"
 		//	        },
 		//	        "NamespaceId": {
-		//	          "description": "命名空间ID。",
+		//	          "description": "Namespace ID",
 		//	          "type": "string"
 		//	        },
 		//	        "Service": {
-		//	          "description": "服务。",
+		//	          "description": "Service",
 		//	          "type": "string"
 		//	        },
 		//	        "UpstreamSourceId": {
-		//	          "description": "Upstream来源ID。",
+		//	          "description": "Upstream source ID",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "VeFaas": {
-		//	      "description": "函数服务。",
+		//	      "description": "Function service",
 		//	      "properties": {
 		//	        "FunctionId": {
-		//	          "description": "函数ID。",
+		//	          "description": "Function ID",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -624,7 +624,7 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: BaseUrl
 						"base_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "模型地址。",
+							Description: "Model address",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: CustomModelService
@@ -632,35 +632,35 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "模型服务名称。",
+									Description: "Model Service Name",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Namespace
 								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "命名空间。",
+									Description: "Namespace",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Port
 								"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "端口。",
+									Description: "Port",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "火山自部署模型服务。",
+							Description: "Volcano Engine self-hosted model service",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "模型服务商名称。",
+							Description: "Model Service Provider Name",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Token
 						"token": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "模型API key。",
+							Description: "Model API key",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "AI模型代理。",
+					Description: "AI model proxy",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Domain
@@ -672,21 +672,21 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Domain
 									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "域名。",
+										Description: "Domain name",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Port
 									"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "端口。协议类型为HTTP时，默认值为80。协议类型为HTTPS时，默认值为443。",
+										Description: "Port. Default: 80 for HTTP, 443 for HTTPS",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "域名列表。",
+							Description: "Domain name list",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "固定域名。",
+					Description: "Fixed domain name",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcsInstances
@@ -695,22 +695,22 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: EcsId
 							"ecs_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "云服务器ID。",
+								Description: "Cloud server ID",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IP
 							"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "IP地址。",
+								Description: "IP address",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "端口。",
+								Description: "Port",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "云服务器。",
+					Description: "Cloud server",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: K8SService
@@ -718,21 +718,21 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "容器服务名称。长度限制为2~63个字符。",
+							Description: "Container Service Name. Length: 2–63 characters",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Namespace
 						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "命名空间。长度限制为2~63个字符。",
+							Description: "Namespace. Length: 2~63 characters",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "端口。",
+							Description: "Port",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "容器服务。",
+					Description: "Container Service",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: NacosService
@@ -740,31 +740,31 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Group
 						"group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "分组。",
+							Description: "Group",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Namespace
 						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "命名空间。",
+							Description: "Namespace",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: NamespaceId
 						"namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "命名空间ID。",
+							Description: "Namespace ID",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Service
 						"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "服务。",
+							Description: "Service",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: UpstreamSourceId
 						"upstream_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Upstream来源ID。",
+							Description: "Upstream source ID",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "注册中心。",
+					Description: "Registry Center",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VeFaas
@@ -772,38 +772,38 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: FunctionId
 						"function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "函数ID。",
+							Description: "Function ID",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "函数服务。",
+					Description: "Function service",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Upstream配置。",
+			Description: "Upstream Configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VersionDetails
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream版本，仅在Upstream来源类型为K8S时有效。",
+		//	  "description": "Upstream version, only valid when the upstream source type is K8S",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "版本详情。",
+		//	    "description": "Version Details",
 		//	    "properties": {
 		//	      "Labels": {
-		//	        "description": "标签。",
+		//	        "description": "Tag",
 		//	        "insertionOrder": false,
 		//	        "items": {
-		//	          "description": "标签。",
+		//	          "description": "Tag",
 		//	          "properties": {
 		//	            "Key": {
-		//	              "description": "键。",
+		//	              "description": "Key",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "description": "值。",
+		//	              "description": "Value",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -813,11 +813,11 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Name": {
-		//	        "description": "版本名称。支持大小写字母、数字和中划线（-），长度限制为2~63个字符。不能以中划线（-）开头。",
+		//	        "description": "Version name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length: 2~63 characters. Cannot start with a hyphen (-)",
 		//	        "type": "string"
 		//	      },
 		//	      "UpdateTime": {
-		//	        "description": "更新时间。",
+		//	        "description": "Update time",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -835,32 +835,32 @@ func upstreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "键。",
+									Description: "Key",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "值。",
+									Description: "Value",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "标签。",
+						Description: "Tag",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "版本名称。支持大小写字母、数字和中划线（-），长度限制为2~63个字符。不能以中划线（-）开头。",
+						Description: "Version name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length: 2~63 characters. Cannot start with a hyphen (-)",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UpdateTime
 					"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "更新时间。",
+						Description: "Update time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Upstream版本，仅在Upstream来源类型为K8S时有效。",
+			Description: "Upstream version, only valid when the upstream source type is K8S",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

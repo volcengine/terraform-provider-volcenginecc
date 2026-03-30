@@ -30,11 +30,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "解析记录的创建时间。",
+		//	  "description": "Creation time of the DNS record.",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "解析记录的创建时间。",
+			Description: "Creation time of the DNS record.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -44,11 +44,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "解析记录是否被启用。",
+		//	  "description": "Indicates whether the DNS record is enabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "解析记录是否被启用。",
+			Description: "Indicates whether the DNS record is enabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -59,22 +59,22 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "子域名的域名前缀。",
+		//	  "description": "Domain prefix for the subdomain.",
 		//	  "type": "string"
 		//	}
 		"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "子域名的域名前缀。",
+			Description: "Domain prefix for the subdomain.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastOperator
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "最近一次更新解析记录的账号 ID。",
+		//	  "description": "Account ID of the most recent update to the DNS record.",
 		//	  "type": "string"
 		//	}
 		"last_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "最近一次更新解析记录的账号 ID。",
+			Description: "Account ID of the most recent update to the DNS record.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -84,11 +84,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "解析记录的线路，只能是默认线路 default。",
+		//	  "description": "DNS record route, only the default route 'default' is supported.",
 		//	  "type": "string"
 		//	}
 		"line": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "解析记录的线路，只能是默认线路 default。",
+			Description: "DNS record route, only the default route 'default' is supported.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -99,11 +99,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "解析记录 ID。",
+		//	  "description": "DNS record ID.",
 		//	  "type": "string"
 		//	}
 		"record_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "解析记录 ID。",
+			Description: "DNS record ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -113,11 +113,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备注。支持 UTF-8 字符。不能超过 16 个字符。默认值为空字符串。",
+		//	  "description": "Remarks. Supports UTF-8 characters. Maximum 16 characters. Default is an empty string.",
 		//	  "type": "string"
 		//	}
 		"remark": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备注。支持 UTF-8 字符。不能超过 16 个字符。默认值为空字符串。",
+			Description: "Remarks. Supports UTF-8 characters. Maximum 16 characters. Default is an empty string.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -128,11 +128,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "解析记录的过期时间。单位为秒。默认值为 600。",
+		//	  "description": "DNS record TTL (time to live), in seconds. Default is 600.",
 		//	  "type": "integer"
 		//	}
 		"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "解析记录的过期时间。单位为秒。默认值为 600。",
+			Description: "DNS record TTL (time to live), in seconds. Default is 600.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -143,22 +143,22 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "解析记录类型。该参数的取值如下：A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。",
+		//	  "description": "DNS record type. Valid values are: A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record. A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record.",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "解析记录类型。该参数的取值如下：A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。A：A 记录。AAAA：AAAA 记录。CNAME：CNAME 记录。TXT：TXT 记录。MX：MX 记录。PTR：PTR 记录。",
+			Description: "DNS record type. Valid values are: A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record. A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "解析记录最近一次的更新时间。",
+		//	  "description": "Last update time of the DNS record.",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "解析记录最近一次的更新时间。",
+			Description: "Last update time of the DNS record.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -168,22 +168,22 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "记录值。",
+		//	  "description": "Record value.",
 		//	  "type": "string"
 		//	}
 		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "记录值。",
+			Description: "Record value.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Weight
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。",
+		//	  "description": "Record weight. The weight takes effect only when load balancing is enabled for the domain name.",
 		//	  "type": "integer"
 		//	}
 		"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "记录的权重。只有域名开启了负载均衡后，记录值的权重才会生效。",
+			Description: "Record weight. The weight takes effect only when load balancing is enabled for the domain name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -194,11 +194,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该记录集是否开启了负载均衡。",
+		//	  "description": "Indicates whether load balancing is enabled for this record set.",
 		//	  "type": "boolean"
 		//	}
 		"weight_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "该记录集是否开启了负载均衡。",
+			Description: "Indicates whether load balancing is enabled for this record set.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -210,11 +210,11 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "域名 ID。",
+		//	  "description": "Domain name ID.",
 		//	  "type": "integer"
 		//	}
 		"zid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "域名 ID。",
+			Description: "Domain name ID.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -229,7 +229,7 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "解析记录是域名与 VPC 内资源信息的映射。",
+		Description: "A DNS record maps a domain name to resource information within a VPC.",
 		Version:     1,
 		Attributes:  attributes,
 	}

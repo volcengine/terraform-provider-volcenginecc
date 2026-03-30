@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cen_cen Resource - terraform-provider-volcenginecc"
 subcategory: "CEN"
 description: |-
-  云企业网（Cloud Enterprise Network，CEN）提供一种能够快速构建跨地域私有网络（VPC）与云下数据中心（IDC）之间高速、优质、稳定的网络能力，帮助您打造一张具有企业级规模和通信能力的全球云上网络。
+  Cloud Enterprise Network (CEN) provides fast, high-quality, and stable networking capabilities to quickly build private networks (VPC) across regions and between on-premises data centers (IDC), helping you create a global cloud network with enterprise-scale and communication capabilities
 ---
 
 # volcenginecc_cen_cen (Resource)
 
-云企业网（Cloud Enterprise Network，CEN）提供一种能够快速构建跨地域私有网络（VPC）与云下数据中心（IDC）之间高速、优质、稳定的网络能力，帮助您打造一张具有企业级规模和通信能力的全球云上网络。
+Cloud Enterprise Network (CEN) provides fast, high-quality, and stable networking capabilities to quickly build private networks (VPC) across regions and between on-premises data centers (IDC), helping you create a global cloud network with enterprise-scale and communication capabilities
 
 ## Example Usage
 
@@ -37,33 +37,33 @@ resource "volcenginecc_cen_cen" "CENCENDemo" {
 
 ### Optional
 
-- `cen_name` (String) CEN实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填则默认为CEN实例的ID。
-- `description` (String) CEN实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255个字符。不填则默认为空。
-- `instances` (Attributes Set) 已关联的网络实例列表
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instances))
-- `project_name` (String) CEN实例所属项目的名称。不填则默认为default。
-- `tags` (Attributes Set) 标签信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `cen_name` (String) Name of the CEN instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If not specified, defaults to the CEN instance ID
+- `description` (String) Description for the CEN instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to empty
+- `instances` (Attributes Set) List of associated network instances
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--instances))
+- `project_name` (String) Name of the project to which the CEN instance belongs. If not specified, defaults to 'default'
+- `tags` (Attributes Set) Tag information
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `account_id` (String) CEN实例所属的账号ID。
-- `cen_bandwidth_package_ids` (Set of String) 带宽包ID。
-- `cen_id` (String) CEN实例的ID。
-- `creation_time` (String) 创建CEN实例的时间。
+- `account_id` (String) Account ID to which the CEN instance belongs
+- `cen_bandwidth_package_ids` (Set of String) Bandwidth package ID
+- `cen_id` (String) CEN instance ID
+- `creation_time` (String) Time when the CEN instance was created
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) CEN实例的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用
-- `update_time` (String) 更新CEN实例的时间。
+- `status` (String) Status of the CEN instance. Creating: Creating Deleting: Deleting Pending: Configuring Available: Available
+- `update_time` (String) Time when the CEN instance was updated
 
 <a id="nestedatt--instances"></a>
 ### Nested Schema for `instances`
 
 Optional:
 
-- `instance_id` (String) 网络实例的ID。
-- `instance_owner_id` (String) 网络实例所属账号的ID。
-- `instance_region_id` (String) 网络实例所在的地域。
-- `instance_type` (String) 网络实例的类型。
+- `instance_id` (String) Network instance ID
+- `instance_owner_id` (String) Account ID for the network instance
+- `instance_region_id` (String) Region where the network instance is located
+- `instance_type` (String) Type of the network instance
 
 
 <a id="nestedatt--tags"></a>
@@ -71,8 +71,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 用户标签的标签键。长度限制为1～128个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复
-- `value` (String) 用户标签的标签值。长度限制为0～256个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@
+- `key` (String) Tag key for user labels. Length limit: 1–128 characters. Case sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Duplicate tag keys are not allowed for the same resource
+- `value` (String) Tag value for user labels. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @
 
 ## Import
 

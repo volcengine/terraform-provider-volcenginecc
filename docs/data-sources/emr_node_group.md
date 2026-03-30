@@ -21,34 +21,34 @@ Data Source schema for Volcengine::EMR::NodeGroup
 
 ### Read-Only
 
-- `application_layouts` (Attributes Set) 当前节点组可布局的组件名称列表。 (see [below for nested schema](#nestedatt--application_layouts))
-- `charge_pre_config` (Attributes) 包周期付费配置。 (see [below for nested schema](#nestedatt--charge_pre_config))
-- `charge_type` (String) 付费类型。PRE表示包月，POST表示按量计费。
-- `cluster_id` (String) 集群ID。
-- `created_time` (Number) 创建时间。
-- `data_disks` (Attributes Set) 数据盘配置。 (see [below for nested schema](#nestedatt--data_disks))
-- `ecs_instance_types` (Set of String) ECS实例规格列表。当前修改仅支持单个实例规格。
-- `layout_component_names` (Set of String) 返回的节点组组件的自定义配置参数列表。
-- `node_count` (Number) 节点数量。取值范围：1~1000。
-- `node_group_id` (String) 节点组ID。
-- `node_group_name` (String) 节点组名称。
-- `node_group_state` (String) 节点组状态。RUNNING：运行中。EXTENDING：扩容中。REDUCING：缩容中。DISK_EXTENDING：磁盘扩容中。MODIFYING：变配中。
-- `node_group_type` (String) 节点组类型。
-- `nodes` (Attributes Set) 节点列表。 (see [below for nested schema](#nestedatt--nodes))
-- `subnet_ids` (Set of String) 子网ID列表。
-- `system_disk` (Attributes) 系统盘。 (see [below for nested schema](#nestedatt--system_disk))
-- `target_disk_size` (Number) 待扩容的目标磁盘大小，最小60GB，最大2048GB，单位GB。
-- `terminate_time` (String) 集群终止时间。
-- `with_public_ip` (Boolean) ECS是否附带公网IP。
-- `zone_id` (String) zoneId，为空时默认复用集群的zoneId。
+- `application_layouts` (Attributes Set) List of component names that can be deployed in the current node group. (see [below for nested schema](#nestedatt--application_layouts))
+- `charge_pre_config` (Attributes) Subscription payment configuration. (see [below for nested schema](#nestedatt--charge_pre_config))
+- `charge_type` (String) Payment type. PRE indicates monthly subscription, POST indicates pay-as-you-go.
+- `cluster_id` (String) Cluster ID.
+- `created_time` (Number) Creation time.
+- `data_disks` (Attributes Set) Data disk configuration. (see [below for nested schema](#nestedatt--data_disks))
+- `ecs_instance_types` (Set of String) ECS instance specification list. Currently, only a single instance specification can be modified.
+- `layout_component_names` (Set of String) Custom configuration parameter list for the returned node group components.
+- `node_count` (Number) Node count. Value range: 1~1000.
+- `node_group_id` (String) Node group ID.
+- `node_group_name` (String) Node group name.
+- `node_group_state` (String) Node group status. RUNNING: Running. EXTENDING: Expanding. REDUCING: Shrinking. DISK_EXTENDING: Disk expansion. MODIFYING: Configuration modification in progress.
+- `node_group_type` (String) Node group type.
+- `nodes` (Attributes Set) Node list. (see [below for nested schema](#nestedatt--nodes))
+- `subnet_ids` (Set of String) Subnet ID list.
+- `system_disk` (Attributes) System disk. (see [below for nested schema](#nestedatt--system_disk))
+- `target_disk_size` (Number) Target disk size for expansion. Minimum 60GB, maximum 2048GB, unit: GB.
+- `terminate_time` (String) Cluster termination time.
+- `with_public_ip` (Boolean) Whether the ECS instance includes a public IP.
+- `zone_id` (String) zoneId. If empty, the cluster's zoneId is reused by default.
 
 <a id="nestedatt--application_layouts"></a>
 ### Nested Schema for `application_layouts`
 
 Read-Only:
 
-- `application_name` (String) 应用名称。
-- `layout_component_names` (Set of String) 组件的自定义配置参数列表。
+- `application_name` (String) Application name.
+- `layout_component_names` (Set of String) Custom configuration parameter list for the component.
 
 
 <a id="nestedatt--charge_pre_config"></a>
@@ -56,12 +56,12 @@ Read-Only:
 
 Read-Only:
 
-- `auto_renew` (Boolean) 是否开启自动续费。
-- `auto_renew_period` (Number) 自动续费触发时的续费时长，当autoRenew=true时，默认值=1。
-- `auto_renew_period_unit` (String) 自动续费触发时的续费时长单位，当autoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。
-- `charge_period` (Number) chargeType=PRE默认值=1，包月的购买时长单位。
-- `charge_period_unit` (String) chargeType=PRE时，默认值=Month，包月的购买时长单位。取值范围：Month：月。Year：年。
-- `charge_type` (String) 付费类型，枚举值：POST，PRE。
+- `auto_renew` (Boolean) Whether to enable auto-renewal.
+- `auto_renew_period` (Number) Renewal duration when auto-renewal is triggered. When autoRenew=true, the default value is 1.
+- `auto_renew_period_unit` (String) Renewal duration unit when auto-renewal is triggered. When autoRenew=true, the default value is Month. Value range: Month: month. Year: year.
+- `charge_period` (Number) When chargeType=PRE, the default value is 1. The unit for the purchase duration when chargeType=PRE is monthly subscription.
+- `charge_period_unit` (String) When chargeType=PRE, the default value is Month. The unit for the purchase duration when chargeType=PRE is monthly subscription. Value range: Month (month), Year (year).
+- `charge_type` (String) Payment type. Enum values: POST, PRE.
 
 
 <a id="nestedatt--data_disks"></a>
@@ -69,9 +69,9 @@ Read-Only:
 
 Read-Only:
 
-- `count` (Number) 磁盘块数，默认值4，最大15，最小1。
-- `size` (Number) 磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。
-- `volume_type` (String) 磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。
+- `count` (Number) Number of disk blocks. Default value: 4. Maximum: 15. Minimum: 1.
+- `size` (Number) Disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.
+- `volume_type` (String) Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.
 
 
 <a id="nestedatt--nodes"></a>
@@ -79,16 +79,16 @@ Read-Only:
 
 Read-Only:
 
-- `created_time` (Number) 节点创建时间。
-- `ecs_instance_type` (String) ecs实例规格。
-- `node_fqdn` (String) 节点FQDN。
-- `node_id` (String) 节点ID。
-- `node_name` (String) 节点名称。
-- `node_state` (String) 节点状态。UNKNOWN：未知状态。CREATING：创建中。RUNNING：运行中。STOPPING：停止中。STOPPED：已停止。REBOOTING：重启中。DELETED：已删除。
-- `private_ip` (String) 私有IP。
-- `public_ip` (String) 公网IP。
-- `ready_time` (Number) 准备完毕时间。
-- `terminate_time` (Number) 集群终止时间。
+- `created_time` (Number) Node creation time.
+- `ecs_instance_type` (String) ecs instance specification.
+- `node_fqdn` (String) Node FQDN.
+- `node_id` (String) Node ID.
+- `node_name` (String) Node name.
+- `node_state` (String) Node status. UNKNOWN: Unknown. CREATING: Creating. RUNNING: Running. STOPPING: Stopping. STOPPED: Stopped. REBOOTING: Rebooting. DELETED: Deleted.
+- `private_ip` (String) Private IP.
+- `public_ip` (String) Public IP.
+- `ready_time` (Number) Ready time.
+- `terminate_time` (Number) Cluster termination time.
 
 
 <a id="nestedatt--system_disk"></a>
@@ -96,5 +96,5 @@ Read-Only:
 
 Read-Only:
 
-- `size` (Number) 系统盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。
-- `volume_type` (String) 磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV。
+- `size` (Number) System disk size. Default value: 80GB. Minimum: 60GB. Maximum: 2048GB. Unit: GB.
+- `volume_type` (String) Disk type. ESSD_PL0: Ultra-fast SSD_PL0. ESSD_PL1: Ultra-fast SSD_PL1. ESSD_PL2: Ultra-fast SSD_PL2. ESSD_PL3: Ultra-fast SSD_PL3. ESSD_FLEXPL: Ultra-fast SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.

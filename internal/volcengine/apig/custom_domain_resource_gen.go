@@ -30,11 +30,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义域名证书ID。",
+		//	  "description": "Custom Domain Certificate ID",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义域名证书ID。",
+			Description: "Custom Domain Certificate ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -45,11 +45,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备注。",
+		//	  "description": "Remarks",
 		//	  "type": "string"
 		//	}
 		"comments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备注。",
+			Description: "Remarks",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -60,11 +60,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -74,11 +74,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义域名ID。",
+		//	  "description": "Custom Domain ID",
 		//	  "type": "string"
 		//	}
 		"custom_domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义域名ID。",
+			Description: "Custom Domain ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -88,11 +88,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定义域名。",
+		//	  "description": "Custom Domain",
 		//	  "type": "string"
 		//	}
 		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定义域名。",
+			Description: "Custom Domain",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -102,7 +102,7 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "协议，取值：HTTP。HTTPS。",
+		//	  "description": "Protocol. Values: HTTP, HTTPS",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -112,18 +112,18 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"protocol": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "协议，取值：HTTP。HTTPS。",
+			Description: "Protocol. Values: HTTP, HTTPS",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SSLRedirect
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "重定向到HTTPS。",
+		//	  "description": "Redirect to HTTPS",
 		//	  "type": "boolean"
 		//	}
 		"ssl_redirect": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "重定向到HTTPS。",
+			Description: "Redirect to HTTPS",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -134,11 +134,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "服务ID。",
+		//	  "description": "Service ID",
 		//	  "type": "string"
 		//	}
 		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "服务ID。",
+			Description: "Service ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -148,11 +148,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。",
+		//	  "description": "Status. Values: Creating: configuring; CreationFailed: configuration failed; Deleting: deleting; DeletionFailed: deletion failed; Verified: active",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "状态，取值：Creating：配置中。CreationFailed：配置失败。Deleting：删除中。DeletionFailed：删除失败。Verified：正常。",
+			Description: "Status. Values: Creating: configuring; CreationFailed: configuration failed; Deleting: deleting; DeletionFailed: deletion failed; Verified: active",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -162,11 +162,11 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -184,7 +184,7 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "服务作为业务对外暴露的入口，可以通过绑定域名功能，将您的自定义域名绑定至服务。",
+		Description: "The service serves as the entry point for external access. You can bind your custom domain to the service using the domain binding feature",
 		Version:     1,
 		Attributes:  attributes,
 	}

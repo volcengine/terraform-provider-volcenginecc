@@ -27,7 +27,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "default": "IPv4",
-		//	  "description": "ALB 实例的 IP 类型。IPv4：IPv4 类型；DualStack：IPv4\u0026IPv6 双栈类型。",
+		//	  "description": "IP type of the ALB instance. IPv4: IPv4 type; DualStack: IPv4 \u0026 IPv6 dual stack type.",
 		//	  "enum": [
 		//	    "IPv4",
 		//	    "DualStack"
@@ -35,25 +35,25 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"address_ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的 IP 类型。IPv4：IPv4 类型；DualStack：IPv4&IPv6 双栈类型。",
+			Description: "IP type of the ALB instance. IPv4: IPv4 type; DualStack: IPv4 & IPv6 dual stack type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定的共享带宽包ID，可实现带宽共享。",
+		//	  "description": "ID of the bound shared bandwidth package, enabling bandwidth sharing.",
 		//	  "type": "string"
 		//	}
 		"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "绑定的共享带宽包ID，可实现带宽共享。",
+			Description: "ID of the bound shared bandwidth package, enabling bandwidth sharing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BusinessStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的服务状态。Normal：正常；FinancialLocked：因欠费被锁定。",
+		//	  "description": "Service status of the ALB instance. Normal: normal; FinancialLocked: locked due to overdue payment.",
 		//	  "enum": [
 		//	    "Normal",
 		//	    "FinancialLocked",
@@ -62,18 +62,18 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的服务状态。Normal：正常；FinancialLocked：因欠费被锁定。",
+			Description: "Service status of the ALB instance. Normal: normal; FinancialLocked: locked due to overdue payment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的创建时间。",
+		//	  "description": "Creation time of the ALB instance.",
 		//	  "type": "string"
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的创建时间。",
+			Description: "Creation time of the ALB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeleteProtection
@@ -81,7 +81,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "default": "off",
-		//	  "description": "删除保护开关。on：开启；off：关闭。",
+		//	  "description": "Delete protection switch. on: enabled; off: disabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -89,51 +89,51 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"delete_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "删除保护开关。on：开启；off：关闭。",
+			Description: "Delete protection switch. on: enabled; off: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeletedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的预期回收时间。该参数只有实例处于 FinancialLocked 状态时有返回值。",
+		//	  "description": "Expected reclamation time of the ALB instance. This parameter is only returned when the instance is in the FinancialLocked state.",
 		//	  "type": "string"
 		//	}
 		"deleted_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的预期回收时间。该参数只有实例处于 FinancialLocked 状态时有返回值。",
+			Description: "Expected reclamation time of the ALB instance. This parameter is only returned when the instance is in the FinancialLocked state.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的描述。",
+		//	  "description": "Description of the ALB instance.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的描述。",
+			Description: "Description of the ALB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DnsName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "DNS域名。",
+		//	  "description": "DNS domain name.",
 		//	  "type": "string"
 		//	}
 		"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "DNS域名。",
+			Description: "DNS domain name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EipBillingConfig
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "公网IP的计费配置，仅适用于公网实例。",
+		//	  "description": "Billing configuration for public IP, only applicable to public instances.",
 		//	  "properties": {
 		//	    "Bandwidth": {
 		//	      "default": 1,
-		//	      "description": "EIP的带宽峰值，单位为Mbps。",
+		//	      "description": "Peak bandwidth of EIP, in Mbps.",
 		//	      "format": "int64",
 		//	      "maximum": 500,
 		//	      "minimum": 1,
@@ -141,7 +141,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "BillingType": {
 		//	      "default": 2,
-		//	      "description": "EIP的计费方式，2为按带宽计费，3为按流量计费。",
+		//	      "description": "EIP billing method: 2 for bandwidth-based, 3 for traffic-based.",
 		//	      "enum": [
 		//	        2,
 		//	        3
@@ -151,19 +151,19 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "ISP": {
 		//	      "default": "BGP",
-		//	      "description": "公网IP的线路类型，BGP表示多线。",
+		//	      "description": "Line type of the public IP, BGP indicates multi-line.",
 		//	      "enum": [
 		//	        "BGP"
 		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "SecurityProtectionInstanceId": {
-		//	      "description": "创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。",
+		//	      "description": "When creating an ALB public instance, if IP protection resources are used, you must specify a DDoS native protection instance ID.",
 		//	      "format": "int64",
 		//	      "type": "integer"
 		//	    },
 		//	    "SecurityProtectionTypes": {
-		//	      "description": "创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。",
+		//	      "description": "When creating a public ALB instance, ALB allows you to purchase multiple public IP protection resources. The rules for public IP protection resources are as follows: separate multiple protection resources with a comma (,). The values for protection resources are: AntiDDoS_Enhanced: You are requesting an enhanced protection type public IP, which can be added to a native DDoS protection instance. If not specified: You are requesting a basic protection type public IP.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -173,53 +173,53 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bandwidth
 				"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "EIP的带宽峰值，单位为Mbps。",
+					Description: "Peak bandwidth of EIP, in Mbps.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BillingType
 				"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "EIP的计费方式，2为按带宽计费，3为按流量计费。",
+					Description: "EIP billing method: 2 for bandwidth-based, 3 for traffic-based.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
 				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "公网IP的线路类型，BGP表示多线。",
+					Description: "Line type of the public IP, BGP indicates multi-line.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityProtectionInstanceId
 				"security_protection_instance_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "创建ALB公网实例时，如果使用了IP防护资源，则需要指定一个DDoS原生防护实例的ID。",
+					Description: "When creating an ALB public instance, if IP protection resources are used, you must specify a DDoS native protection instance ID.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityProtectionTypes
 				"security_protection_types": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "创建 ALB 公网实例时，ALB 允许购买多个公网IP防护资源。公网 IP 防护资源的具体规则如下：多个防护资源之间用半角逗号（,）分隔。防护资源的取值如下：AntiDDoS_Enhanced：您申请的是增强防护类型的公网 IP，可以将此 IP 加入到 DDoS 原生防护实例。不填：您申请的是基础防护类型的公网 IP 。",
+					Description: "When creating a public ALB instance, ALB allows you to purchase multiple public IP protection resources. The rules for public IP protection resources are as follows: separate multiple protection resources with a comma (,). The values for protection resources are: AntiDDoS_Enhanced: You are requesting an enhanced protection type public IP, which can be added to a native DDoS protection instance. If not specified: You are requesting a basic protection type public IP.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "公网IP的计费配置，仅适用于公网实例。",
+			Description: "Billing configuration for public IP, only applicable to public instances.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GlobalAccelerator
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "全球加速器配置，用于提升跨地域访问速度。",
+		//	  "description": "Global accelerator configuration, used to improve cross-region access speed.",
 		//	  "properties": {
 		//	    "AcceleratorId": {
-		//	      "description": "绑定的全球加速实例的ID。",
+		//	      "description": "ID of the bound Global Accelerator instance.",
 		//	      "type": "string"
 		//	    },
 		//	    "AcceleratorListenerId": {
-		//	      "description": "绑定的全球加速监听器的ID。",
+		//	      "description": "ID of the bound Global Accelerator listener.",
 		//	      "type": "string"
 		//	    },
 		//	    "EndpointGroupId": {
-		//	      "description": "绑定的终端节点组的ID。",
+		//	      "description": "ID of the bound endpoint group.",
 		//	      "type": "string"
 		//	    },
 		//	    "Weight": {
-		//	      "description": "后端服务器的权重，决定流量分发比例。",
+		//	      "description": "Weight of the backend server, determines traffic distribution ratio.",
 		//	      "format": "int64",
 		//	      "maximum": 100,
 		//	      "minimum": 1,
@@ -232,48 +232,48 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AcceleratorId
 				"accelerator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "绑定的全球加速实例的ID。",
+					Description: "ID of the bound Global Accelerator instance.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AcceleratorListenerId
 				"accelerator_listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "绑定的全球加速监听器的ID。",
+					Description: "ID of the bound Global Accelerator listener.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EndpointGroupId
 				"endpoint_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "绑定的终端节点组的ID。",
+					Description: "ID of the bound endpoint group.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Weight
 				"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "后端服务器的权重，决定流量分发比例。",
+					Description: "Weight of the backend server, determines traffic distribution ratio.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "全球加速器配置，用于提升跨地域访问速度。",
+			Description: "Global accelerator configuration, used to improve cross-region access speed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。",
+		//	  "description": "When creating a public ALB instance, specify the shared bandwidth package ID to which the IPv6 public bandwidth will be added.",
 		//	  "type": "string"
 		//	}
 		"ipv_6_bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建 ALB 公网实例时，指定 Ipv6公网带宽要加入的共享带宽包 ID。",
+			Description: "When creating a public ALB instance, specify the shared bandwidth package ID to which the IPv6 public bandwidth will be added.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6EipBillingConfig
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IPv6公网IP的计費配置，仅适用于公网实例。",
+		//	  "description": "Billing configuration for IPv6 public IP, only applicable to public instances.",
 		//	  "properties": {
 		//	    "Bandwidth": {
 		//	      "default": 1,
-		//	      "description": "IPv6 EIP的带宽峰值，单位为Mbps。",
+		//	      "description": "Peak bandwidth of IPv6 EIP, in Mbps.",
 		//	      "format": "int64",
 		//	      "maximum": 500,
 		//	      "minimum": 1,
@@ -281,7 +281,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "BillingType": {
 		//	      "default": 3,
-		//	      "description": "IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。",
+		//	      "description": "Billing method for IPv6 EIP: 2 for bandwidth-based, 3 for traffic-based.",
 		//	      "enum": [
 		//	        2,
 		//	        3
@@ -291,7 +291,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "ISP": {
 		//	      "default": "BGP",
-		//	      "description": "IPv6公网IP的线路类型，BGP表示多线。",
+		//	      "description": "Line type of IPv6 public IP; BGP indicates multi-line.",
 		//	      "enum": [
 		//	        "BGP"
 		//	      ],
@@ -304,21 +304,21 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bandwidth
 				"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "IPv6 EIP的带宽峰值，单位为Mbps。",
+					Description: "Peak bandwidth of IPv6 EIP, in Mbps.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BillingType
 				"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。",
+					Description: "Billing method for IPv6 EIP: 2 for bandwidth-based, 3 for traffic-based.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
 				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "IPv6公网IP的线路类型，BGP表示多线。",
+					Description: "Line type of IPv6 public IP; BGP indicates multi-line.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "IPv6公网IP的计費配置，仅适用于公网实例。",
+			Description: "Billing configuration for IPv6 public IP, only applicable to public instances.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerBillingType
@@ -326,7 +326,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "default": 1,
-		//	  "description": "ALB实例计费类型，当前仅支持按量计费（取值为1）。",
+		//	  "description": "ALB instance billing type. Currently, only pay-as-you-go is supported (value is 1).",
 		//	  "enum": [
 		//	    1
 		//	  ],
@@ -334,7 +334,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "integer"
 		//	}
 		"load_balancer_billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "ALB实例计费类型，当前仅支持按量计费（取值为1）。",
+			Description: "ALB instance billing type. Currently, only pay-as-you-go is supported (value is 1).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerEdition
@@ -342,7 +342,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "default": "Basic",
-		//	  "description": "应用型负载均衡的版本。Basic：基础版；Standard：标准版。",
+		//	  "description": "Version of the application load balancer. Basic: Basic version; Standard: Standard version.",
 		//	  "enum": [
 		//	    "Basic",
 		//	    "Standard"
@@ -350,51 +350,51 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"load_balancer_edition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "应用型负载均衡的版本。Basic：基础版；Standard：标准版。",
+			Description: "Version of the application load balancer. Basic: Basic version; Standard: Standard version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例 ID。",
+		//	  "description": "ALB instance ID.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例 ID。",
+			Description: "ALB instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的名称。",
+		//	  "description": "Name of the ALB instance.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的名称。",
+			Description: "Name of the ALB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例被冻结的原因，例如 Financial（欠费）或 Security（安全原因）。仅在实例被锁定时返回。",
+		//	  "description": "Reason for ALB instance freeze, such as Financial (arrears) or Security (security reasons). Returned only when the instance is locked.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例被冻结的原因，例如 Financial（欠费）或 Security（安全原因）。仅在实例被锁定时返回。",
+			Description: "Reason for ALB instance freeze, such as Financial (arrears) or Security (security reasons). Returned only when the instance is locked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModificationProtectionReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "修改保护原因。仅在 ModificationProtectionStatus 为 ConsoleProtection 时，该参数有效且合法。",
+		//	  "description": "Reason for modification protection. This parameter is valid and legitimate only when ModificationProtectionStatus is ConsoleProtection.",
 		//	  "type": "string"
 		//	}
 		"modification_protection_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "修改保护原因。仅在 ModificationProtectionStatus 为 ConsoleProtection 时，该参数有效且合法。",
+			Description: "Reason for modification protection. This parameter is valid and legitimate only when ModificationProtectionStatus is ConsoleProtection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModificationProtectionStatus
@@ -402,7 +402,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "default": "NonProtection",
-		//	  "description": "修改保护状态。NonProtection：不保护；ConsoleProtection：控制台修改保护，通过控制台无法修改实例配置。",
+		//	  "description": "Modification protection status. NonProtection: Not protected; ConsoleProtection: Console modification protection, instance configuration cannot be modified through the console.",
 		//	  "enum": [
 		//	    "",
 		//	    "NonProtection",
@@ -411,47 +411,47 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"modification_protection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "修改保护状态。NonProtection：不保护；ConsoleProtection：控制台修改保护，通过控制台无法修改实例配置。",
+			Description: "Modification protection status. NonProtection: Not protected; ConsoleProtection: Console modification protection, instance configuration cannot be modified through the console.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OverdueTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的冻结时间。该参数只有实例处于 FinancialLocked 状态时有返回值。",
+		//	  "description": "Freeze time of the ALB instance. This parameter is only returned when the instance is in the FinancialLocked state.",
 		//	  "type": "string"
 		//	}
 		"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的冻结时间。该参数只有实例处于 FinancialLocked 状态时有返回值。",
+			Description: "Freeze time of the ALB instance. This parameter is only returned when the instance is in the FinancialLocked state.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属项目名称。",
+		//	  "description": "Name of the project to which the instance belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属项目名称。",
+			Description: "Name of the project to which the instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyProtocolEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。",
+		//	  "description": "ALB supports the Proxy Protocol and records the client's real IP.",
 		//	  "type": "string"
 		//	}
 		"proxy_protocol_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 可支持 Proxy Protocol 协议并记录客户端真实 IP。",
+			Description: "ALB supports the Proxy Protocol and records the client's real IP.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例状态：Active（运行中）、Provisioning（创建中）、Configuring（配置中）、Deleting（删除中）、CreateFailed（创建失败）、Inactive（已停止）。",
+		//	  "description": "ALB instance status: Active (running), Provisioning (creating), Configuring (configuring), Deleting (deleting), CreateFailed (creation failed), Inactive (stopped).",
 		//	  "enum": [
 		//	    "Active",
 		//	    "Provisioning",
@@ -463,24 +463,24 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例状态：Active（运行中）、Provisioning（创建中）、Configuring（配置中）、Deleting（删除中）、CreateFailed（创建失败）、Inactive（已停止）。",
+			Description: "ALB instance status: Active (running), Provisioning (creating), Configuring (configuring), Deleting (deleting), CreateFailed (creation failed), Inactive (stopped).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "为实例绑定的标签列表，用于分类和计费。",
+		//	  "description": "List of tags bound to the instance, used for categorization and billing.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "资源的标签，由键值对组成。",
+		//	    "description": "Resource tags, consisting of key-value pairs.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签的键，用于标识标签的类别。",
+		//	        "description": "Tag key, used to identify the tag category.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签的值，用于标识具体的标签内容。",
+		//	        "description": "Tag value used to identify the specific tag content.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -497,24 +497,24 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的键，用于标识标签的类别。",
+						Description: "Tag key, used to identify the tag category.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签的值，用于标识具体的标签内容。",
+						Description: "Tag value used to identify the specific tag content.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "为实例绑定的标签列表，用于分类和计费。",
+			Description: "List of tags bound to the instance, used for categorization and billing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的类型。取值是 public 或 private 。public：表示创建一个公网负载均衡实例，系统会分配一个公网IP地址和一个私网IP地址，可用于转发公网请求和私网请求。private：表示创建一个私网负载均衡实例，系统会分配一个私网IP地址，仅用于转发私网请求。",
+		//	  "description": "Type of ALB instance. Values are public or private. public: Creates a public load balancer instance. The system assigns a public IP address and a private IP address, which can forward both public and private network requests. private: Creates a private load balancer instance. The system assigns a private IP address, used only for forwarding private network requests.",
 		//	  "enum": [
 		//	    "public",
 		//	    "private"
@@ -522,58 +522,58 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的类型。取值是 public 或 private 。public：表示创建一个公网负载均衡实例，系统会分配一个公网IP地址和一个私网IP地址，可用于转发公网请求和私网请求。private：表示创建一个私网负载均衡实例，系统会分配一个私网IP地址，仅用于转发私网请求。",
+			Description: "Type of ALB instance. Values are public or private. public: Creates a public load balancer instance. The system assigns a public IP address and a private IP address, which can forward both public and private network requests. private: Creates a private load balancer instance. The system assigns a private IP address, used only for forwarding private network requests.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例的最后更新时间。",
+		//	  "description": "Last update time of the ALB instance.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例的最后更新时间。",
+			Description: "Last update time of the ALB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "负载均衡实例所属的私有网络（VPC）的ID。",
+		//	  "description": "ID of the Virtual Private Cloud (VPC) to which the load balancer instance belongs.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "负载均衡实例所属的私有网络（VPC）的ID。",
+			Description: "ID of the Virtual Private Cloud (VPC) to which the load balancer instance belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WafInstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ALB 实例绑定的 WAF 安全防护实例 ID。",
+		//	  "description": "ID of the WAF security protection instance bound to the ALB instance.",
 		//	  "type": "string"
 		//	}
 		"waf_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALB 实例绑定的 WAF 安全防护实例 ID。",
+			Description: "ID of the WAF security protection instance bound to the ALB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WafProtectedDomain
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF防护的域名，用于精确匹配防护规则。",
+		//	  "description": "Domain name protected by WAF, used for precise rule matching.",
 		//	  "type": "string"
 		//	}
 		"waf_protected_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "WAF防护的域名，用于精确匹配防护规则。",
+			Description: "Domain name protected by WAF, used for precise rule matching.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WafProtectionEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "WAF 安全防护开关。on：开启；off：关闭。",
+		//	  "description": "WAF security protection switch. on: enabled; off: disabled.",
 		//	  "enum": [
 		//	    "off",
 		//	    "on"
@@ -581,29 +581,29 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"waf_protection_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "WAF 安全防护开关。on：开启；off：关闭。",
+			Description: "WAF security protection switch. on: enabled; off: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ZoneMappings
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "可用区映射列表，定义了实例在哪些可用区提供服务。",
+		//	  "description": "Availability zone mapping list, defines which availability zones the instance provides services in.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "可用区和子网的映射关系定义。",
+		//	    "description": "Definition of the mapping between availability zones and subnets.",
 		//	    "properties": {
 		//	      "LoadBalancerAddresses": {
-		//	        "description": "该可用区下负载均衡提供的IP地址列表。",
+		//	        "description": "List of IP addresses provided by the load balancer in this availability zone.",
 		//	        "insertionOrder": false,
 		//	        "items": {
-		//	          "description": "负载均衡提供的IP地址的详细信息。",
+		//	          "description": "Detailed information about the IP addresses provided by the load balancer.",
 		//	          "properties": {
 		//	            "Eip": {
-		//	              "description": "弹性公网IP（EIP）的详细信息。",
+		//	              "description": "Detailed information of the Elastic Public IP (EIP).",
 		//	              "properties": {
 		//	                "AssociationMode": {
-		//	                  "description": "EIP的绑定模式，例如Default或Normal。",
+		//	                  "description": "EIP binding mode, such as Default or Normal.",
 		//	                  "enum": [
 		//	                    "Default",
 		//	                    "Normal",
@@ -612,16 +612,16 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                  "type": "string"
 		//	                },
 		//	                "Bandwidth": {
-		//	                  "description": "EIP的带宽峰值，单位为Mbps。",
+		//	                  "description": "Peak bandwidth of EIP, in Mbps.",
 		//	                  "format": "int64",
 		//	                  "type": "integer"
 		//	                },
 		//	                "EipAddress": {
-		//	                  "description": "弹性公网IP（EIP）的地址。",
+		//	                  "description": "Address of the Elastic IP (EIP).",
 		//	                  "type": "string"
 		//	                },
 		//	                "EipBillingType": {
-		//	                  "description": "EIP的计费方式，2为按带宽计费，3为按流量计费。",
+		//	                  "description": "EIP billing method: 2 for bandwidth-based, 3 for traffic-based.",
 		//	                  "enum": [
 		//	                    2,
 		//	                    3
@@ -630,28 +630,28 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                  "type": "integer"
 		//	                },
 		//	                "EipType": {
-		//	                  "description": "EIP的类型，例如静态BGP。",
+		//	                  "description": "EIP type, such as static BGP.",
 		//	                  "type": "string"
 		//	                },
 		//	                "ISP": {
-		//	                  "description": "公网IP的线路类型，BGP表示多线。",
+		//	                  "description": "Line type of the public IP, BGP indicates multi-line.",
 		//	                  "enum": [
 		//	                    "BGP"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
 		//	                "PopLocations": {
-		//	                  "description": "EIP的接入点位置信息列表。",
+		//	                  "description": "List of EIP access point location information.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
-		//	                    "description": "公网IP的接入点（PoP）位置信息。",
+		//	                    "description": "Access point (PoP) location information for the public IP.",
 		//	                    "properties": {
 		//	                      "PopId": {
-		//	                        "description": "接入点（PoP）的唯一ID。",
+		//	                        "description": "Unique ID of the access point (PoP).",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "PopName": {
-		//	                        "description": "接入点（PoP）的名称。",
+		//	                        "description": "Name of the access point (PoP).",
 		//	                        "type": "string"
 		//	                      }
 		//	                    },
@@ -664,35 +664,35 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "type": "object"
 		//	            },
 		//	            "EipAddress": {
-		//	              "description": "绑定的弹性公网IP（EIP）的地址。",
+		//	              "description": "Address of the bound Elastic Public IP (EIP).",
 		//	              "type": "string"
 		//	            },
 		//	            "EipId": {
-		//	              "description": "绑定的弹性公网IP（EIP）的ID。",
+		//	              "description": "ID of the bound Elastic IP (EIP).",
 		//	              "type": "string"
 		//	            },
 		//	            "EniAddress": {
-		//	              "description": "弹性网卡（ENI）上的私网IP地址。",
+		//	              "description": "Private IP address on the Elastic Network Interface (ENI).",
 		//	              "type": "string"
 		//	            },
 		//	            "EniId": {
-		//	              "description": "IP地址所属的弹性网卡（ENI）的ID。",
+		//	              "description": "ID of the Elastic Network Interface (ENI) to which the IP address belongs.",
 		//	              "type": "string"
 		//	            },
 		//	            "EniIpv6Address": {
-		//	              "description": "弹性网卡（ENI）上的IPv6私网地址。",
+		//	              "description": "IPv6 private address on the Elastic Network Interface (ENI).",
 		//	              "type": "string"
 		//	            },
 		//	            "Ipv6Eip": {
-		//	              "description": "IPv6弹性公网IP的详细信息。",
+		//	              "description": "Detailed information about the IPv6 Elastic Public IP.",
 		//	              "properties": {
 		//	                "Bandwidth": {
-		//	                  "description": "IPv6 EIP的带宽峰值，单位为Mbps。",
+		//	                  "description": "Peak bandwidth of IPv6 EIP, in Mbps.",
 		//	                  "format": "int64",
 		//	                  "type": "integer"
 		//	                },
 		//	                "BillingType": {
-		//	                  "description": "IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。",
+		//	                  "description": "Billing method for IPv6 EIP: 2 for bandwidth-based, 3 for traffic-based.",
 		//	                  "enum": [
 		//	                    2,
 		//	                    3
@@ -701,7 +701,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                  "type": "integer"
 		//	                },
 		//	                "ISP": {
-		//	                  "description": "IPv6公网IP的线路类型，BGP表示多线。",
+		//	                  "description": "Line type of IPv6 public IP; BGP indicates multi-line.",
 		//	                  "enum": [
 		//	                    "BGP"
 		//	                  ],
@@ -711,7 +711,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "type": "object"
 		//	            },
 		//	            "Ipv6EipId": {
-		//	              "description": "绑定的IPv6 EIP的ID。",
+		//	              "description": "ID of the bound IPv6 EIP.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -721,11 +721,11 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "uniqueItems": true
 		//	      },
 		//	      "SubnetId": {
-		//	        "description": "可用区内提供服务的子网ID。",
+		//	        "description": "Subnet ID providing services within the availability zone.",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "可用区的唯一标识符。",
+		//	        "description": "Unique identifier of the availability zone.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -750,32 +750,32 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: AssociationMode
 										"association_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "EIP的绑定模式，例如Default或Normal。",
+											Description: "EIP binding mode, such as Default or Normal.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Bandwidth
 										"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "EIP的带宽峰值，单位为Mbps。",
+											Description: "Peak bandwidth of EIP, in Mbps.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: EipAddress
 										"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "弹性公网IP（EIP）的地址。",
+											Description: "Address of the Elastic IP (EIP).",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: EipBillingType
 										"eip_billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "EIP的计费方式，2为按带宽计费，3为按流量计费。",
+											Description: "EIP billing method: 2 for bandwidth-based, 3 for traffic-based.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: EipType
 										"eip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "EIP的类型，例如静态BGP。",
+											Description: "EIP type, such as static BGP.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: ISP
 										"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "公网IP的线路类型，BGP表示多线。",
+											Description: "Line type of the public IP, BGP indicates multi-line.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: PopLocations
@@ -784,46 +784,46 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: PopId
 													"pop_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "接入点（PoP）的唯一ID。",
+														Description: "Unique ID of the access point (PoP).",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: PopName
 													"pop_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "接入点（PoP）的名称。",
+														Description: "Name of the access point (PoP).",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
-											Description: "EIP的接入点位置信息列表。",
+											Description: "List of EIP access point location information.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "弹性公网IP（EIP）的详细信息。",
+									Description: "Detailed information of the Elastic Public IP (EIP).",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EipAddress
 								"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "绑定的弹性公网IP（EIP）的地址。",
+									Description: "Address of the bound Elastic Public IP (EIP).",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EipId
 								"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "绑定的弹性公网IP（EIP）的ID。",
+									Description: "ID of the bound Elastic IP (EIP).",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EniAddress
 								"eni_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "弹性网卡（ENI）上的私网IP地址。",
+									Description: "Private IP address on the Elastic Network Interface (ENI).",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EniId
 								"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "IP地址所属的弹性网卡（ENI）的ID。",
+									Description: "ID of the Elastic Network Interface (ENI) to which the IP address belongs.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EniIpv6Address
 								"eni_ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "弹性网卡（ENI）上的IPv6私网地址。",
+									Description: "IPv6 private address on the Elastic Network Interface (ENI).",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Ipv6Eip
@@ -831,46 +831,46 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Bandwidth
 										"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "IPv6 EIP的带宽峰值，单位为Mbps。",
+											Description: "Peak bandwidth of IPv6 EIP, in Mbps.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: BillingType
 										"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "IPv6 EIP的计费方式，2为按带宽计费，3为按流量计费。",
+											Description: "Billing method for IPv6 EIP: 2 for bandwidth-based, 3 for traffic-based.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: ISP
 										"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "IPv6公网IP的线路类型，BGP表示多线。",
+											Description: "Line type of IPv6 public IP; BGP indicates multi-line.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "IPv6弹性公网IP的详细信息。",
+									Description: "Detailed information about the IPv6 Elastic Public IP.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Ipv6EipId
 								"ipv_6_eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "绑定的IPv6 EIP的ID。",
+									Description: "ID of the bound IPv6 EIP.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "该可用区下负载均衡提供的IP地址列表。",
+						Description: "List of IP addresses provided by the load balancer in this availability zone.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "可用区内提供服务的子网ID。",
+						Description: "Subnet ID providing services within the availability zone.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "可用区的唯一标识符。",
+						Description: "Unique identifier of the availability zone.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "可用区映射列表，定义了实例在哪些可用区提供服务。",
+			Description: "Availability zone mapping list, defines which availability zones the instance provides services in.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

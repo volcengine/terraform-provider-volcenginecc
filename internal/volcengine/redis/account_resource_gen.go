@@ -28,11 +28,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号名称。名称需同时满足如下要求：以小写字母开头，由小写字母或者数字结尾。长度为 2~16 个字符。由小写字母、数字、下划线（_）组成。",
+		//	  "description": "Account name. The name must meet the following requirements: It must start with a lowercase letter. It must end with a lowercase letter or number. The length must be 2–16 characters. It can only contain lowercase letters, numbers, and underscores (_).",
 		//	  "type": "string"
 		//	}
 		"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号名称。名称需同时满足如下要求：以小写字母开头，由小写字母或者数字结尾。长度为 2~16 个字符。由小写字母、数字、下划线（_）组成。",
+			Description: "Account name. The name must meet the following requirements: It must start with a lowercase letter. It must end with a lowercase letter or number. The length must be 2–16 characters. It can only contain lowercase letters, numbers, and underscores (_).",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -42,11 +42,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号状态。取值范围如下：Available：可用。Unavailable：不可用。",
+		//	  "description": "Account status. The value range is as follows: Available: Available. Unavailable: Unavailable.",
 		//	  "type": "string"
 		//	}
 		"account_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号状态。取值范围如下：Available：可用。Unavailable：不可用。",
+			Description: "Account status. The value range is as follows: Available: Available. Unavailable: Unavailable.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -56,11 +56,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号描述，长度不超过 256 个字符。说明若该参数为空，表示不设置账号描述。",
+		//	  "description": "Account description, up to 256 characters. Note: If this parameter is empty, no account description is set.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号描述，长度不超过 256 个字符。说明若该参数为空，表示不设置账号描述。",
+			Description: "Account description, up to 256 characters. Note: If this parameter is empty, no account description is set.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -71,11 +71,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -85,11 +85,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号密码。密码需同时满足如下要求：长度为 8~32 个字符。至少包含大写字母、小写字母、数字或特殊字符中的任意 2 种。支持如下特殊字符：()`~!@#$%^\u0026*-+=_|{}[];\u003c\u003e,.?",
+		//	  "description": "Account password. The password must meet the following requirements: Length of 8–32 characters. Must include at least two of the following: uppercase letters, lowercase letters, numbers, or special characters. Supported special characters: ()`~!@#$%^\u0026*-+=_|{}[];\u003c\u003e,.?",
 		//	  "type": "string"
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号密码。密码需同时满足如下要求：长度为 8~32 个字符。至少包含大写字母、小写字母、数字或特殊字符中的任意 2 种。支持如下特殊字符：()`~!@#$%^&*-+=_|{}[];<>,.?",
+			Description: "Account password. The password must meet the following requirements: Length of 8–32 characters. Must include at least two of the following: uppercase letters, lowercase letters, numbers, or special characters. Supported special characters: ()`~!@#$%^&*-+=_|{}[];<>,.?",
 			Required:    true,
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -97,11 +97,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号所属角色。支持如下默认角色：Administrator：允许对所有 Key 使用所有 Redis 实例已支持的命令。ReadWrite：允许对所有 Key 使用除 admin 类之外的所有命令。ReadOnly：允许对所有 Key 使用 read 类中的所有命令。NotDangerous：允许对所有 Key 使用除 dangerous 类之外的所有命令。说明关于各角色对应 ACL 规则支持的具体命令详情，请参见 ACL 语法。",
+		//	  "description": "Account role. The following default roles are supported: Administrator: Allows all Redis instance-supported commands on all Keys. ReadWrite: Allows all commands except admin class commands on all Keys. ReadOnly: Allows all read class commands on all Keys. NotDangerous: Allows all commands except dangerous class commands on all Keys. Note: For details on the specific commands supported by each role's ACL rules, see ACL syntax.",
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号所属角色。支持如下默认角色：Administrator：允许对所有 Key 使用所有 Redis 实例已支持的命令。ReadWrite：允许对所有 Key 使用除 admin 类之外的所有命令。ReadOnly：允许对所有 Key 使用 read 类中的所有命令。NotDangerous：允许对所有 Key 使用除 dangerous 类之外的所有命令。说明关于各角色对应 ACL 规则支持的具体命令详情，请参见 ACL 语法。",
+			Description: "Account role. The following default roles are supported: Administrator: Allows all Redis instance-supported commands on all Keys. ReadWrite: Allows all commands except admin class commands on all Keys. ReadOnly: Allows all read class commands on all Keys. NotDangerous: Allows all commands except dangerous class commands on all Keys. Note: For details on the specific commands supported by each role's ACL rules, see ACL syntax.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -116,7 +116,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "缓存数据库 Redis 版支持创建多个账号，您可以在创建账号时选择不同的角色，不同的角色支持的权限不同，帮助您实现数据库的精细化管理，提升数据安全性。",
+		Description: "Redis Cache Database supports creating multiple accounts. You can select different roles when creating an account. Each role grants different permissions, helping you manage the database with greater precision and enhance data security.",
 		Version:     1,
 		Attributes:  attributes,
 	}

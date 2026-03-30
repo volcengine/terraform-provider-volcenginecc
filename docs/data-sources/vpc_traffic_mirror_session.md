@@ -21,27 +21,27 @@ Data Source schema for Volcengine::VPC::TrafficMirrorSession
 
 ### Read-Only
 
-- `business_status` (String) 会话计费状态。Normal：正常计费中。  - FinancialLocked：欠费锁定。
-- `created_time` (String) 创建时间。
-- `description` (String) 镜像会话实例描述。
-- `lock_reason` (String) 锁定原因。
-- `network_interface_id` (String) 镜像源实例ID，当前只支持ECS的主网卡和辅助网卡。
-- `packet_length` (Number) 镜像会话MTU，超过被截断，取值范围：64～9600。
-- `priority` (Number) 镜像会话优先级，取值范围1 ～ 32766，同一账户下镜像会话优先级不能重复。
-- `project_name` (String) 所属项目的名称
-- `status` (String) 会话状态。
-- `tags` (Attributes Set) 标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `traffic_mirror_filter_id` (String) 筛选条件实例ID。
-- `traffic_mirror_session_id` (String) 镜像会话实例ID。
-- `traffic_mirror_session_name` (String) 镜像会话名称。
-- `traffic_mirror_source_ids` (Set of String) 镜像源实例列表。
-- `traffic_mirror_target_id` (String) 镜像目的实例ID。
-- `virtual_network_id` (Number) 镜像会话VNI，取值范围1 ～ 16777215。
+- `business_status` (String) Session billing status. Normal: Billing in progress.   - FinancialLocked: Locked due to overdue payment
+- `created_time` (String) Creation time
+- `description` (String) Mirror session instance description
+- `lock_reason` (String) Lock reason
+- `network_interface_id` (String) Mirror source instance ID. Currently, only ECS primary and secondary network interfaces are supported
+- `packet_length` (Number) Mirror session MTU. Values exceeding this will be truncated. Range: 64–9600
+- `priority` (Number) Mirror session priority. Range: 1–32766. Priority values must be unique within the same account
+- `project_name` (String) Name of the associated project
+- `status` (String) Session status
+- `tags` (Attributes Set) Tag information (see [below for nested schema](#nestedatt--tags))
+- `traffic_mirror_filter_id` (String) Filter condition instance ID
+- `traffic_mirror_session_id` (String) Mirror session instance ID
+- `traffic_mirror_session_name` (String) Mirror session name
+- `traffic_mirror_source_ids` (Set of String) Mirror source instance list
+- `traffic_mirror_target_id` (String) Mirror destination instance ID
+- `virtual_network_id` (Number) Mirror session VNI. Range: 1–16777215
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

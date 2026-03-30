@@ -7,11 +7,11 @@
     "SecureContactInfo": {
       "properties": {
         "Email": {
-          "description": "安全邮箱。",
+          "description": "Security email",
           "type": "string"
         },
         "EmailVerified": {
-          "description": "安全邮箱是否验证，1: 未验证，2: 已验证。",
+          "description": "Security email verification status: 1. Not verified, 2. Verified",
           "enum": [
             1,
             2
@@ -19,19 +19,19 @@
           "type": "integer"
         },
         "NewEmail": {
-          "description": "变更中的新邮箱。",
+          "description": "New email being changed",
           "type": "string"
         },
         "NewPhone": {
-          "description": "变更中的新手机号。",
+          "description": "New mobile number being changed",
           "type": "string"
         },
         "Phone": {
-          "description": "安全手机号。",
+          "description": "Security mobile number",
           "type": "string"
         },
         "PhoneVerified": {
-          "description": "安全手机号是否验证，1: 未验证，2: 已验证。",
+          "description": "Security mobile number verification status: 1. Not verified, 2. Verified",
           "enum": [
             1,
             2
@@ -44,11 +44,11 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value",
           "type": "string"
         }
       },
@@ -59,7 +59,7 @@
       "type": "object"
     }
   },
-  "description": "查看和管理您组织内的所有账号。每个账号可以直接放在根节点中，也可以移动到您创建的任意组织节点层级结构中，每个账号只能归属于一个节点。您可以分层树状结构管理您的组织结构以及成员账号。",
+  "description": "View and manage all accounts in your organization. Each account can be placed directly in the root node or moved to any organizational node hierarchy you create. Each account can belong to only one node. You can manage your organizational structure and member accounts in a layered tree structure",
   "filterProperties": {
     "filterableProperties": [
       "/properties/OrgUnitID",
@@ -117,19 +117,19 @@
   ],
   "properties": {
     "AccountId": {
-      "description": "火山账号ID。",
+      "description": "Volcano account ID",
       "semantic": "resourceId",
       "type": "string"
     },
     "AccountName": {
-      "description": "账户名称。5-20个字符。",
+      "description": "Account name. 5–20 characters",
       "maxLength": 20,
       "minLength": 5,
       "semantic": "resourceName",
       "type": "string"
     },
     "AllowConsole": {
-      "description": "允许控制台访问，1: 允许，2: 不允许。",
+      "description": "Allow console access: 1. Allowed, 2. Not allowed",
       "enum": [
         1,
         2
@@ -137,7 +137,7 @@
       "type": "integer"
     },
     "AllowExit": {
-      "description": "允许退出，1: 允许，2: 不允许。",
+      "description": "Allow exit: 1. Allowed, 2. Not allowed",
       "enum": [
         1,
         2
@@ -145,29 +145,29 @@
       "type": "integer"
     },
     "CreatedTime": {
-      "description": "创建时间。",
+      "description": "Creation time",
       "semantic": "createdTime",
       "type": "string"
     },
     "DeleteUk": {
-      "description": "删除标记。",
+      "description": "Deletion flag",
       "type": "string"
     },
     "DeletedTime": {
-      "description": "删除时间。",
+      "description": "Deletion time",
       "type": "string"
     },
     "Description": {
-      "description": "描述。",
+      "description": "Description",
       "semantic": "description",
       "type": "string"
     },
     "IamRole": {
-      "description": "IAM角色名称。",
+      "description": "IAM role name",
       "type": "string"
     },
     "IsOwner": {
-      "description": "是否是管理员，0.非管理员，1.管理员。",
+      "description": "Administrator status: 0. Non-administrator, 1. Administrator",
       "enum": [
         0,
         1
@@ -175,7 +175,7 @@
       "type": "integer"
     },
     "JoinType": {
-      "description": "加入类型，1: 创建，2: 邀请。",
+      "description": "Join type: 1. Create, 2. Invite",
       "enum": [
         1,
         2
@@ -183,57 +183,57 @@
       "type": "integer"
     },
     "MainName": {
-      "description": "主体名称。",
+      "description": "Subject name",
       "type": "string"
     },
     "MemberAccountId": {
-      "description": "组织成员账号ID。",
+      "description": "Organization member account ID",
       "type": "string"
     },
     "OrgID": {
-      "description": "组织ID。",
+      "description": "Organization ID",
       "type": "string"
     },
     "OrgType": {
-      "description": "组织类型，1.企业组织。",
+      "description": "Organization type: 1. Enterprise organization",
       "enum": [
         1
       ],
       "type": "integer"
     },
     "OrgUnitID": {
-      "description": "组织单元ID。传入 0 加入到 root 单元。",
+      "description": "Organizational unit ID. Enter 0 to join the root unit",
       "type": "string"
     },
     "OrgUnitName": {
-      "description": "组织单元名称。",
+      "description": "Organizational unit name",
       "type": "string"
     },
     "OrgVerificationID": {
-      "description": "认证主体ID。",
+      "description": "Authentication subject ID",
       "type": "string"
     },
     "Owner": {
-      "description": "管理员ID。",
+      "description": "Administrator ID",
       "type": "string"
     },
     "Password": {
-      "description": "账户密码。",
+      "description": "Account password",
       "maxLength": 32,
       "minLength": 8,
       "type": "string"
     },
     "SecureContactInfo": {
       "$ref": "#/definitions/SecureContactInfo",
-      "description": "安全联系信息。",
+      "description": "Security contact information",
       "type": "object"
     },
     "ShowName": {
-      "description": "显示名称。",
+      "description": "Display name",
       "type": "string"
     },
     "Tags": {
-      "description": "标签列表。",
+      "description": "Tag list",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -244,12 +244,12 @@
       "uniqueItems": true
     },
     "UpdatedTime": {
-      "description": "更新时间。",
+      "description": "Update time",
       "semantic": "updatedTime",
       "type": "string"
     },
     "VerificationRelationId": {
-      "description": "被继承认证主体的账号ID，给非管理员认证主体创建账号时需要，账号需已加入企业组织。默认不传，则继承企业组织管理员的认证主体。",
+      "description": "Inherited authentication subject account ID, required when creating an account for a non-administrator authentication subject. The account must have joined the enterprise organization. If not specified, the authentication subject of the enterprise organization administrator is inherited by default",
       "type": "string"
     }
   },

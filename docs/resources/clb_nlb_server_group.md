@@ -2,12 +2,12 @@
 page_title: "volcenginecc_clb_nlb_server_group Resource - terraform-provider-volcenginecc"
 subcategory: "CLB"
 description: |-
-  服务器组是一组后端服务器。
+  A server group is a set of backend servers.
 ---
 
 # volcenginecc_clb_nlb_server_group (Resource)
 
-服务器组是一组后端服务器。
+A server group is a set of backend servers.
 
 ## Example Usage
 
@@ -57,61 +57,61 @@ resource "volcenginecc_clb_nlb_server_group" "NLBServerGroupDemo" {
 
 ### Required
 
-- `protocol` (String) NLB转发流量到后端服务器时使用的通信协议。取值如下：TCP。UDP。
-- `vpc_id` (String) 服务器组所属私有网络的ID。
+- `protocol` (String) Communication protocol used by NLB to forward traffic to backend servers. Options: TCP. UDP.
+- `vpc_id` (String) ID of the private network to which the server group belongs
 
 ### Optional
 
-- `any_port_enabled` (Boolean) 是否开启全端口转发。
-- `bypass_security_group_enabled` (Boolean) 是否开启放通后端安全组功能。仅参数Type为“instance”时，可以配置此参数。
-- `connection_drain_enabled` (Boolean) 是否开启连接优雅中断。
-- `connection_drain_timeout` (Number) 连接优雅中断超时时间，取值范围为0～900秒。参数ConnectionDrainEnabled为“true”时，该参数为必填。
-- `description` (String) 后端服务器组的描述,服务器组的描述。必须以字母、数字或中文开头，可包含以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）长度限制为0 ～ 255个字符。该参数不传入，则默认为空字符串。
-- `health_check` (Attributes) 健康检查相关参数。 (see [below for nested schema](#nestedatt--health_check))
-- `ip_address_version` (String) 服务器组的IP地址类型。取值如下：ipv4（默认值）：表示该服务器组仅支持添加IPv4类型的后端服务器。ipv6：表示该服务器组仅支持添加IPv6类型的后端服务器。
-- `preserve_client_ip_enabled` (Boolean) 是否开启源地址保持。
-- `project_name` (String) 项目名称。
-- `proxy_protocol_type` (String) 是否开启Proxy-Protocol协议。取值如下：off（默认值）：关闭。standard：开启。NLB将通过Proxy-Protocol协议携带客户端源IP地址转发至后端服务器，还需要在后端服务器上配置Proxy-Protocol。
-- `scheduler` (String) NLB转发流量时遵循的规则。取值如下：wrr（默认值）：加权轮询，权重值越高的后端服务器，被轮询到的次数（概率）越高。wlc：加权最小连接数，在最少连接数的基础上，根据后端服务器的不同处理能力，给每个服务器分配不同的权重，使其能够接受相应权值数的服务请求。sh：源地址哈希，基于源IP地址的一致性哈希，相同的源地址会调度到相同的后端服务器。
-- `server_group_name` (String) 服务器组名称, 必须以字母、数字或中文开头，可包含以下特殊字符：点号（.）、下划线（_）和中划线（-）。限制为1 ～ 128个字符。该参数不传入，则默认为服务器组ID。
-- `servers` (Attributes Set) 服务器组中待添加后端服务器的信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--servers))
-- `session_persistence_enabled` (Boolean) 是否开启会话保持。
-- `session_persistence_timeout` (Number) 会话保持的超时时间，取值范围为1～3600秒，默认1000秒。
-- `tags` (Attributes Set) 标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `timestamp_remove_enabled` (Boolean) 是否开启清除TCP/HTTP/HTTPS报文的timestamp（即时间戳）的功能。
-- `type` (String) 服务器组的类型。取值如下：instance（默认值）：服务器类型。支持添加云服务器实例和已绑定云服务器实例的辅助网卡作为后端服务器。ip：IP地址类型。支持添加任何网络可达的VPC或IDC中的服务器作为后端服务器。
+- `any_port_enabled` (Boolean) Enable all-port forwarding
+- `bypass_security_group_enabled` (Boolean) Enable backend security group pass-through. This parameter can only be configured when Type is 'instance'.
+- `connection_drain_enabled` (Boolean) Enable graceful connection termination.
+- `connection_drain_timeout` (Number) Connection graceful shutdown timeout, range: 0–900 seconds. If ConnectionDrainEnabled is 'true', this parameter is required.
+- `description` (String) Description of the backend server group, description of the server group. Must start with a letter, number, or Chinese character, and can include the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period（。）. Length limit: 0–255 characters. If this parameter is not provided, the default is an empty string.
+- `health_check` (Attributes) Health check parameters (see [below for nested schema](#nestedatt--health_check))
+- `ip_address_version` (String) IP address type of the server group. Options: ipv4 (default): The server group only supports adding IPv4 type backend servers. ipv6: The server group only supports adding IPv6 type backend servers.
+- `preserve_client_ip_enabled` (Boolean) Enable source address persistence
+- `project_name` (String) Project name
+- `proxy_protocol_type` (String) Enable Proxy-Protocol. Available values: off (default): disabled. standard: enabled. NLB forwards the client source IP address to the backend server via Proxy-Protocol. Proxy-Protocol must also be configured on the backend server.
+- `scheduler` (String) Rules followed by NLB when forwarding traffic. Options: wrr (default): Weighted round robin. Backend servers with higher weights are selected more frequently (higher probability). wlc: Weighted least connections. Based on the least number of connections, assigns different weights to backend servers according to their processing capabilities, allowing each server to handle a corresponding number of service requests. sh: Source address hash. Uses consistent hashing based on the source IP address; requests from the same source address are routed to the same backend server.
+- `server_group_name` (String) Server group name. Must start with a letter, number, or Chinese character, and can include the following special characters: period (.), underscore (_), and hyphen (-). Limit: 1–128 characters. If not specified, defaults to the server group ID
+- `servers` (Attributes Set) Information about backend servers to be added to the server group
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--servers))
+- `session_persistence_enabled` (Boolean) Enable session persistence.
+- `session_persistence_timeout` (Number) Session persistence timeout. Range: 1–3600 seconds, default: 1000 seconds
+- `tags` (Attributes Set) Tag
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `timestamp_remove_enabled` (Boolean) Enable removal of TCP/HTTP/HTTPS packet timestamps
+- `type` (String) Server group type. Available values: instance (default): server type. Supports adding cloud server instances and auxiliary network interfaces bound to cloud server instances as backend servers. ip: IP address type. Supports adding any network-accessible server in a VPC or IDC as a backend server.
 
 ### Read-Only
 
-- `account_id` (String) 账号ID。
-- `created_time` (String) 后端服务器组的创建时间。
+- `account_id` (String) Account ID
+- `created_time` (String) Backend server group creation time
 - `id` (String) Uniquely identifies the resource.
-- `related_load_balancer_ids` (Set of String) 服务器组关联的NLB实例。
-- `server_count` (Number) 服务器组中后端服务器的数量。
-- `server_group_id` (String) 服务器组ID。
-- `status` (String) 服务器组的状态。
-- `updated_time` (String) 后端服务器组的更新时间。
+- `related_load_balancer_ids` (Set of String) NLB instance associated with the server group.
+- `server_count` (Number) Number of backend servers in the server group.
+- `server_group_id` (String) Server group ID
+- `status` (String) Server group status
+- `updated_time` (String) Last update time of the backend server group.
 
 <a id="nestedatt--health_check"></a>
 ### Nested Schema for `health_check`
 
 Optional:
 
-- `domain` (String) 健康检查的域名。
-- `enabled` (Boolean) 是否开启健康检查。
-- `healthy_threshold` (Number) 健康检查的健康阈值，取值范围为2 ～ 10次，默认值为3次。连续执行指定次数的健康检查，结果均为“正常”的后端服务器将被判定为健康检查“正常”。
-- `http_code` (String) 健康检查正常的HTTP状态码。
-- `interval` (Number) 健康检查的时间间隔，取值范围为1 ～ 300秒，默认值为10秒。
-- `method` (String) 健康检查的请求方法。
-- `port` (Number) 健康检查的端口，取值范围 1～65535。服务器组未开启全端口转发时，该参数默认为0，表示使用后端服务器的端口进行健康检查。服务器组开启全端口转发时，必须指定该参数。
-- `timeout` (Number) 健康检查的响应超时时间，取值范围为1 ～ 60秒，默认值为3秒。如果后端服务器在指定时间内没有正确响应，则判定为健康检查“异常”。
-- `type` (String) 健康检查的协议类型。取值如下：取值如下：TCP（默认值）、HTTP、UDP
-- `udp_expect` (String) UDP健康检查的请求字符串。只允许包含字母和数字，最大长度限制为64个字符。
-- `udp_request` (String) UDP健康检查的预期响应字符串。
-- `unhealthy_threshold` (Number) 健康检查的不健康阈值，取值范围为2 ～ 10次，默认值为3次。连续执行指定次数的健康检查，结果均为“异常”的后端服务器将被判定为健康检查异常。
-- `uri` (String) 健康检查的路径。
+- `domain` (String) Health check domain name
+- `enabled` (Boolean) Enable health check
+- `healthy_threshold` (Number) Health check healthy threshold. Range: 2–10 times, default: 3 times. If the backend server passes the specified number of consecutive health checks with 'normal' results, it is considered health check 'normal'
+- `http_code` (String) HTTP status codes indicating a healthy health check.
+- `interval` (Number) Health check interval, range: 1–300 seconds, default: 10 seconds.
+- `method` (String) Health check request method
+- `port` (Number) Health check port. Range: 1–65535. If full port forwarding is not enabled for the server group, this parameter defaults to 0, meaning the backend server's port is used for health checks. If full port forwarding is enabled, this parameter must be specified
+- `timeout` (Number) Health check response timeout. Range: 1–60 seconds, default: 3 seconds. If the backend server does not respond correctly within the specified time, it is considered health check 'abnormal'
+- `type` (String) Health check protocol type. Options: TCP (default), HTTP, UDP
+- `udp_expect` (String) UDP health check request string. Only letters and numbers are allowed, with a maximum length of 64 characters.
+- `udp_request` (String) Expected response string for UDP health check
+- `unhealthy_threshold` (Number) Health check unhealthy threshold. Range: 2–10 times, default: 3 times. If the backend server fails the specified number of consecutive health checks with 'abnormal' results, it is considered health check abnormal
+- `uri` (String) Health check path
 
 
 <a id="nestedatt--servers"></a>
@@ -119,14 +119,14 @@ Optional:
 
 Optional:
 
-- `description` (String) 后端服务器的描述，默认值为空字符串。
-- `instance_id` (String) 服务器实例的ID或IP地址。服务器类型为“ecs”时，传入云服务器实例的ID。您可以调用DescribeInstances接口云服务器实例ID。服务器类型为“eni”时，传入已绑定云服务器实例的网卡ID。您可以调用DescribeNetworkInterfaces接口获取网卡ID。服务器类型为“ip”时，传入后端服务器的IP地址。
-- `ip` (String) 后端服务器的私网IP地址。您可以调用DescribeInstances接口获取“ecs”类型后端服务器的私网IP地址。您可以调用DescribeNetworkInterfaces接口获取“eni”类型后端服务器的私网IP地址。
-- `port` (Number) 后端服务器接收请求的端口号，取值范围为 1～65535。参数AnyPortEnabled为“false”，即服务器组未开启全端口转发时，该参数为必填。参数AnyPortEnabled为“true”，即服务器组开启全端口转发时，该参数默认为0。
-- `server_id` (String) 后端服务器 ID。
-- `type` (String) 后端服务器的类型。取值如下：ecs：云服务器实例（即主网卡）。eni：辅助网卡。ip：IP地址。
-- `weight` (Number) 后端服务器的权重，取值范围为0 ～ 100。权重为0，表示不会将请求转发给该服务器。该参数不传入，则默认为0。
-- `zone_id` (String) 指定后端服务器关联的NLB实例可用区。当参数Servers.N.Type为ip时，此参数必填。NLB实例开启跨可用区转发功能时，该后端服务器可以接收来自NLB实例所有可用区的流量。NLB实例关闭跨可用区转发功能时，则该后端服务器仅接收来自指定可用区的流量。
+- `description` (String) Description of the backend server, default is an empty string.
+- `instance_id` (String) Server instance ID or IP address. If the server type is 'ecs', enter the cloud server instance ID. You can call the DescribeInstances API to obtain the cloud server instance ID. If the server type is 'eni', enter the network interface card ID bound to the cloud server instance. You can call the DescribeNetworkInterfaces API to obtain the network interface card ID. If the server type is 'ip', enter the backend server's IP address.
+- `ip` (String) Private IP address of the backend server. You can call the DescribeInstances API to obtain the private IP address of an 'ecs' type backend server. You can call the DescribeNetworkInterfaces API to obtain the private IP address of an 'eni' type backend server.
+- `port` (Number) Port number on which the backend server receives requests, range: 1–65535. If AnyPortEnabled is 'false' (all-port forwarding is disabled), this parameter is required. If AnyPortEnabled is 'true' (all-port forwarding is enabled), the default value is 0.
+- `server_id` (String) Backend server ID
+- `type` (String) Backend server type. Available values: ecs: cloud server instance (primary network interface). eni: auxiliary network interface. ip: IP address.
+- `weight` (Number) Backend server weight, range: 0–100. Weight of 0 means requests will not be forwarded to this server. If not specified, the default is 0.
+- `zone_id` (String) Specify the availability zone of the NLB instance associated with the backend server. This parameter is required when Servers.N.Type is ip. If the NLB instance enables cross-zone forwarding, the backend server can receive traffic from all availability zones of the NLB instance. If cross-zone forwarding is disabled, the backend server only receives traffic from the specified availability zone
 
 
 <a id="nestedatt--tags"></a>
@@ -134,8 +134,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 ## Import
 

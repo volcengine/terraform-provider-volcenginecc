@@ -32,11 +32,11 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+		//	  "description": "IP allowlist. Separate multiple IP addresses with commas (,) and do not repeat addresses",
 		//	  "type": "string"
 		//	}
 		"allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP 白名单，多个 IP 地址请以英文逗号（,）隔开，不可重复。",
+			Description: "IP allowlist. Separate multiple IP addresses with commas (,) and do not repeat addresses",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -47,11 +47,11 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单分类。",
+		//	  "description": "Allowlist Category",
 		//	  "type": "string"
 		//	}
 		"allow_list_category": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单分类。",
+			Description: "Allowlist Category",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -62,11 +62,11 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单描述。",
+		//	  "description": "Allowlist Description",
 		//	  "type": "string"
 		//	}
 		"allow_list_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单描述。",
+			Description: "Allowlist Description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -77,12 +77,12 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单内的 IP 地址（或地址段）总数。",
+		//	  "description": "Total number of IP addresses (or address ranges) in the allowlist",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"allow_list_ip_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "白名单内的 IP 地址（或地址段）总数。",
+			Description: "Total number of IP addresses (or address ranges) in the allowlist",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -92,11 +92,11 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单的id。",
+		//	  "description": "Allowlist ID",
 		//	  "type": "string"
 		//	}
 		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单的id。",
+			Description: "Allowlist ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -106,22 +106,22 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单名称。",
+		//	  "description": "Allowlist Name",
 		//	  "type": "string"
 		//	}
 		"allow_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单名称。",
+			Description: "Allowlist Name",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单内的IP地址类型，当前仅支持IPv4。",
+		//	  "description": "IP address type in the allowlist. Only IPv4 is supported",
 		//	  "type": "string"
 		//	}
 		"allow_list_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单内的IP地址类型，当前仅支持IPv4。",
+			Description: "IP address type in the allowlist. Only IPv4 is supported",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -133,12 +133,12 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单下绑定的实例总数",
+		//	  "description": "Total number of instances bound to the allowlist",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"associated_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "白名单下绑定的实例总数",
+			Description: "Total number of instances bound to the allowlist",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -148,20 +148,20 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "绑定的实例列表。",
+		//	  "description": "Bound Instance List",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "properties": {
 		//	      "InstanceId": {
-		//	        "description": "实例ID。",
+		//	        "description": "Instance ID",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
-		//	        "description": "实例名称。",
+		//	        "description": "Instance Name",
 		//	        "type": "string"
 		//	      },
 		//	      "VPC": {
-		//	        "description": "实例所属VPC ID。",
+		//	        "description": "VPC ID of the instance",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -175,7 +175,7 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例ID。",
+						Description: "Instance ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -186,7 +186,7 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 					// Property: VPC
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "绑定的实例列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Bound Instance List\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -200,11 +200,11 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID。",
+			Description: "Instance ID",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -223,7 +223,7 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "RocketMQ访问白名单。",
+		Description: "RocketMQ Access Allowlist",
 		Version:     1,
 		Attributes:  attributes,
 	}

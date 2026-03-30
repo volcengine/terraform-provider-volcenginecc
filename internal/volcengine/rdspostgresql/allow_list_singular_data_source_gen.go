@@ -27,7 +27,7 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单中包含的 IP 地址。支持以下两种格式：IP 地址格式。例如：10.23.12.24。CIDR 的 IP 地址段格式。例如：10.23.12.0/24（无类别域间路由，24 表示了地址中前缀的长度，范围为 1~32）。说明每个白名单最多可添加 300 个 IP 或 IP 地址段，当 IP 较多时，建议合并为 IP 段填入，例如10.23.12.0/24。禁止将 0.0.0.0/0 之外的形如 x.x.x.x/0 结尾的 IP 地址加入白名单。该字段不能与 UserAllowList 字段同时使用。",
+		//	  "description": "IP addresses included in the allowlist. Supports the following two formats: IP address format, for example: 10.23.12.24. CIDR IP address range format, for example: 10.23.12.0/24 (Classless Inter-Domain Routing, 24 indicates the prefix length, range is 1–32). Note: Each allowlist can add up to 300 IP addresses or IP ranges. If there are many IPs, it is recommended to merge them into IP ranges, such as 10.23.12.0/24. Do not add IP addresses ending with x.x.x.x/0 except for 0.0.0.0/0 to the allowlist. This field cannot be used together with the UserAllowList field.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -37,106 +37,106 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"allow_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "白名单中包含的 IP 地址。支持以下两种格式：IP 地址格式。例如：10.23.12.24。CIDR 的 IP 地址段格式。例如：10.23.12.0/24（无类别域间路由，24 表示了地址中前缀的长度，范围为 1~32）。说明每个白名单最多可添加 300 个 IP 或 IP 地址段，当 IP 较多时，建议合并为 IP 段填入，例如10.23.12.0/24。禁止将 0.0.0.0/0 之外的形如 x.x.x.x/0 结尾的 IP 地址加入白名单。该字段不能与 UserAllowList 字段同时使用。",
+			Description: "IP addresses included in the allowlist. Supports the following two formats: IP address format, for example: 10.23.12.24. CIDR IP address range format, for example: 10.23.12.0/24 (Classless Inter-Domain Routing, 24 indicates the prefix length, range is 1–32). Note: Each allowlist can add up to 300 IP addresses or IP ranges. If there are many IPs, it is recommended to merge them into IP ranges, such as 10.23.12.0/24. Do not add IP addresses ending with x.x.x.x/0 except for 0.0.0.0/0 to the allowlist. This field cannot be used together with the UserAllowList field.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListCategory
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单分类。取值：Ordinary：普通白名单。Default：默认白名单。说明该参数作为请求参数时无默认值，不传入时则查询所有类别的白名单。",
+		//	  "description": "Allowlist category. Values: Ordinary: ordinary allowlist; Default: default allowlist. Note: This parameter has no default value when used as a request parameter. If not provided, all categories of allowlists are queried.",
 		//	  "type": "string"
 		//	}
 		"allow_list_category": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单分类。取值：Ordinary：普通白名单。Default：默认白名单。说明该参数作为请求参数时无默认值，不传入时则查询所有类别的白名单。",
+			Description: "Allowlist category. Values: Ordinary: ordinary allowlist; Default: default allowlist. Note: This parameter has no default value when used as a request parameter. If not provided, all categories of allowlists are queried.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListDesc
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单的描述信息。长度在 200 字符以内。默认值为空字符串。",
+		//	  "description": "Description of the allowlist. Up to 200 characters. Default value is an empty string.",
 		//	  "type": "string"
 		//	}
 		"allow_list_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单的描述信息。长度在 200 字符以内。默认值为空字符串。",
+			Description: "Description of the allowlist. Up to 200 characters. Default value is an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListIPNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单中 IP 地址或 IP 地址段的数量。",
+		//	  "description": "Number of IP addresses or IP segments in the allowlist.",
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"allow_list_ip_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "白名单中 IP 地址或 IP 地址段的数量。",
+			Description: "Number of IP addresses or IP segments in the allowlist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单 ID。",
+		//	  "description": "Allowlist ID.",
 		//	  "type": "string"
 		//	}
 		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单 ID。",
+			Description: "Allowlist ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单名称的命名规则如下：在当前地域内，白名单名称唯一。以中文、字母或下划线（_）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度为 1~128 个字符。",
+		//	  "description": "Allowlist naming rules: The allowlist name must be unique within the current region. It must start with a Chinese character, letter, or underscore (_). It can only contain Chinese characters, letters, numbers, underscores (_), and hyphens (-). Length must be 1–128 characters.",
 		//	  "type": "string"
 		//	}
 		"allow_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单名称的命名规则如下：在当前地域内，白名单名称唯一。以中文、字母或下划线（_）开头。只能包含中文、字母、数字、下划线（_）和中划线（-）。长度为 1~128 个字符。",
+			Description: "Allowlist naming rules: The allowlist name must be unique within the current region. It must start with a Chinese character, letter, or underscore (_). It can only contain Chinese characters, letters, numbers, underscores (_), and hyphens (-). Length must be 1–128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllowListType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "白名单采用的网络协议类型。取值为 IPv4（默认值）。",
+		//	  "description": "Network protocol type used by the allowlist. Value: IPv4 (default).",
 		//	  "type": "string"
 		//	}
 		"allow_list_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "白名单采用的网络协议类型。取值为 IPv4（默认值）。",
+			Description: "Network protocol type used by the allowlist. Value: IPv4 (default).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该白名单绑定的实例数量。",
+		//	  "description": "Number of instances bound to this allowlist.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"associated_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "该白名单绑定的实例数量。",
+			Description: "Number of instances bound to this allowlist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstances
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该白名单绑定的实例列表，包含实例 ID 和实例名称信息。",
+		//	  "description": "List of instances bound to this allowlist, including instance ID and instance name.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "InstanceId": {
-		//	        "description": "实例 ID。",
+		//	        "description": "Instance ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceName": {
-		//	        "description": "实例名称。",
+		//	        "description": "Instance name.",
 		//	        "type": "string"
 		//	      },
 		//	      "VPC": {
-		//	        "description": "实例所属的 VPC ID。",
+		//	        "description": "VPC ID to which the instance belongs.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -150,74 +150,74 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例 ID。",
+						Description: "Instance ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
 					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例名称。",
+						Description: "Instance name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VPC
 					"vpc": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例所属的 VPC ID。",
+						Description: "VPC ID to which the instance belongs.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "该白名单绑定的实例列表，包含实例 ID 和实例名称信息。",
+			Description: "List of instances bound to this allowlist, including instance ID and instance name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IPAddress
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "按 IP 地址查询白名单。支持传入多个 IP 地址，多个 IP 地址使用英文逗号（,）分隔。说明如果白名单包含了多个 IP 地址的任意子集，该白名单就会被返回。",
+		//	  "description": "Query allowlist by IP address. Supports multiple IP addresses separated by commas (,). Note: If the allowlist contains any subset of the provided IP addresses, that allowlist will be returned.",
 		//	  "type": "string"
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "按 IP 地址查询白名单。支持传入多个 IP 地址，多个 IP 地址使用英文逗号（,）分隔。说明如果白名单包含了多个 IP 地址的任意子集，该白名单就会被返回。",
+			Description: "Query allowlist by IP address. Supports multiple IP addresses separated by commas (,). Note: If the allowlist contains any subset of the provided IP addresses, that allowlist will be returned.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModifyMode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "修改白名单的方式。取值：Cover：覆盖，即使用 AllowList 字段的值覆盖原白名单。默认值。Append：追加，即在原白名单中增加 AllowList 字段包含的 IP 地址。Delete：删除，即在原白名单中删除 AllowList 字段包含的 IP 地址。至少需要保留一个 IP 地址。注意如需修改的白名单绑定有安全组，或需要在修改白名单时为白名单绑定安全组，则 ModifyMode 只能取值为 Cover。",
+		//	  "description": "Allowlist modification mode. Values: Cover (default): overwrite, use the value of the AllowList field to overwrite the original allowlist. Append: add, add the IP addresses in the AllowList field to the original allowlist. Delete: remove, remove the IP addresses in the AllowList field from the original allowlist. At least one IP address must remain. Note: If the allowlist to be modified is bound to a security group, or if you need to bind a security group when modifying the allowlist, ModifyMode can only be set to Cover.",
 		//	  "type": "string"
 		//	}
 		"modify_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "修改白名单的方式。取值：Cover：覆盖，即使用 AllowList 字段的值覆盖原白名单。默认值。Append：追加，即在原白名单中增加 AllowList 字段包含的 IP 地址。Delete：删除，即在原白名单中删除 AllowList 字段包含的 IP 地址。至少需要保留一个 IP 地址。注意如需修改的白名单绑定有安全组，或需要在修改白名单时为白名单绑定安全组，则 ModifyMode 只能取值为 Cover。",
+			Description: "Allowlist modification mode. Values: Cover (default): overwrite, use the value of the AllowList field to overwrite the original allowlist. Append: add, add the IP addresses in the AllowList field to the original allowlist. Delete: remove, remove the IP addresses in the AllowList field from the original allowlist. At least one IP address must remain. Note: If the allowlist to be modified is bound to a security group, or if you need to bind a security group when modifying the allowlist, ModifyMode can only be set to Cover.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupBindInfos
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该白名单绑定的安全组列表。",
+		//	  "description": "List of security groups bound to this allowlist.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "BindMode": {
-		//	        "description": "关联安全组的模式。取值：IngressDirectionIp：入方向 IP。AssociateEcsIp：关联 ECSIP。",
+		//	        "description": "Mode for associating security groups. Values: IngressDirectionIp: inbound IP. AssociateEcsIp: associate ECS IP.",
 		//	        "type": "string"
 		//	      },
 		//	      "IpList": {
-		//	        "description": "安全组中的 IP 列表。",
+		//	        "description": "IP address list in the security group.",
 		//	        "insertionOrder": false,
 		//	        "items": {
-		//	          "description": "安全组中的 IP。",
+		//	          "description": "IP address in the security group.",
 		//	          "type": "string"
 		//	        },
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
 		//	      "SecurityGroupId": {
-		//	        "description": "安全组 ID。",
+		//	        "description": "Security group ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "SecurityGroupName": {
-		//	        "description": "安全组名称。",
+		//	        "description": "Security group name.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -231,50 +231,50 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: BindMode
 					"bind_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "关联安全组的模式。取值：IngressDirectionIp：入方向 IP。AssociateEcsIp：关联 ECSIP。",
+						Description: "Mode for associating security groups. Values: IngressDirectionIp: inbound IP. AssociateEcsIp: associate ECS IP.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: IpList
 					"ip_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "安全组中的 IP 列表。",
+						Description: "IP address list in the security group.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SecurityGroupId
 					"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组 ID。",
+						Description: "Security group ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SecurityGroupName
 					"security_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "安全组名称。",
+						Description: "Security group name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "该白名单绑定的安全组列表。",
+			Description: "List of security groups bound to this allowlist.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateSecurityGroup
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否更新白名单所绑定的安全组。取值：true：更新。false：不更新。默认值。",
+		//	  "description": "Whether to update the security group bound to the allowlist. Values: true: update; false: do not update. Default value.",
 		//	  "type": "boolean"
 		//	}
 		"update_security_group": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否更新白名单所绑定的安全组。取值：true：更新。false：不更新。默认值。",
+			Description: "Whether to update the security group bound to the allowlist. Values: true: update; false: do not update. Default value.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserAllowList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全组之外的、需要加入白名单的 IP 地址。可输入 IP 地址或 CIDR 格式的 IP 地址段。说明该字段不能与 AllowList 字段同时使用。",
+		//	  "description": "IP addresses outside the security group that need to be added to the allowlist. You can enter IP addresses or CIDR IP ranges. Note: This field cannot be used together with the AllowList field.",
 		//	  "type": "string"
 		//	}
 		"user_allow_list": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全组之外的、需要加入白名单的 IP 地址。可输入 IP 地址或 CIDR 格式的 IP 地址段。说明该字段不能与 AllowList 字段同时使用。",
+			Description: "IP addresses outside the security group that need to be added to the allowlist. You can enter IP addresses or CIDR IP ranges. Note: This field cannot be used together with the AllowList field.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

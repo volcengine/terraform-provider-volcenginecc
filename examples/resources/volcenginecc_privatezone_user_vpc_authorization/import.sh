@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_privatezone_user_vpc_authorization.example "account_id"

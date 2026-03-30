@@ -21,43 +21,43 @@ Data Source schema for Volcengine::Organization::Account
 
 ### Read-Only
 
-- `account_id` (String) 火山账号ID。
-- `account_name` (String) 账户名称。5-20个字符。
-- `allow_console` (Number) 允许控制台访问，1: 允许，2: 不允许。
-- `allow_exit` (Number) 允许退出，1: 允许，2: 不允许。
-- `created_time` (String) 创建时间。
-- `delete_uk` (String) 删除标记。
-- `deleted_time` (String) 删除时间。
-- `description` (String) 描述。
-- `iam_role` (String) IAM角色名称。
-- `is_owner` (Number) 是否是管理员，0.非管理员，1.管理员。
-- `join_type` (Number) 加入类型，1: 创建，2: 邀请。
-- `main_name` (String) 主体名称。
-- `member_account_id` (String) 组织成员账号ID。
-- `org_id` (String) 组织ID。
-- `org_type` (Number) 组织类型，1.企业组织。
-- `org_unit_id` (String) 组织单元ID。传入 0 加入到 root 单元。
-- `org_unit_name` (String) 组织单元名称。
-- `org_verification_id` (String) 认证主体ID。
-- `owner` (String) 管理员ID。
-- `password` (String) 账户密码。
-- `secure_contact_info` (Attributes) 安全联系信息。 (see [below for nested schema](#nestedatt--secure_contact_info))
-- `show_name` (String) 显示名称。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) 更新时间。
-- `verification_relation_id` (String) 被继承认证主体的账号ID，给非管理员认证主体创建账号时需要，账号需已加入企业组织。默认不传，则继承企业组织管理员的认证主体。
+- `account_id` (String) Volcano account ID
+- `account_name` (String) Account name. 5–20 characters
+- `allow_console` (Number) Allow console access: 1. Allowed, 2. Not allowed
+- `allow_exit` (Number) Allow exit: 1. Allowed, 2. Not allowed
+- `created_time` (String) Creation time
+- `delete_uk` (String) Deletion flag
+- `deleted_time` (String) Deletion time
+- `description` (String) Description
+- `iam_role` (String) IAM role name
+- `is_owner` (Number) Administrator status: 0. Non-administrator, 1. Administrator
+- `join_type` (Number) Join type: 1. Create, 2. Invite
+- `main_name` (String) Subject name
+- `member_account_id` (String) Organization member account ID
+- `org_id` (String) Organization ID
+- `org_type` (Number) Organization type: 1. Enterprise organization
+- `org_unit_id` (String) Organizational unit ID. Enter 0 to join the root unit
+- `org_unit_name` (String) Organizational unit name
+- `org_verification_id` (String) Authentication subject ID
+- `owner` (String) Administrator ID
+- `password` (String) Account password
+- `secure_contact_info` (Attributes) Security contact information (see [below for nested schema](#nestedatt--secure_contact_info))
+- `show_name` (String) Display name
+- `tags` (Attributes Set) Tag list (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Update time
+- `verification_relation_id` (String) Inherited authentication subject account ID, required when creating an account for a non-administrator authentication subject. The account must have joined the enterprise organization. If not specified, the authentication subject of the enterprise organization administrator is inherited by default
 
 <a id="nestedatt--secure_contact_info"></a>
 ### Nested Schema for `secure_contact_info`
 
 Read-Only:
 
-- `email` (String) 安全邮箱。
-- `email_verified` (Number) 安全邮箱是否验证，1: 未验证，2: 已验证。
-- `new_email` (String) 变更中的新邮箱。
-- `new_phone` (String) 变更中的新手机号。
-- `phone` (String) 安全手机号。
-- `phone_verified` (Number) 安全手机号是否验证，1: 未验证，2: 已验证。
+- `email` (String) Security email
+- `email_verified` (Number) Security email verification status: 1. Not verified, 2. Verified
+- `new_email` (String) New email being changed
+- `new_phone` (String) New mobile number being changed
+- `phone` (String) Security mobile number
+- `phone_verified` (Number) Security mobile number verification status: 1. Not verified, 2. Verified
 
 
 <a id="nestedatt--tags"></a>
@@ -65,5 +65,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

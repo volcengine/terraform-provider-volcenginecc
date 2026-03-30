@@ -27,89 +27,89 @@ func kafkaTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "default": 1000,
-		//	  "description": "触发器批量消费的最长等待时间。单位为毫秒（ms），取值范围为 1000 ~ 60000 ms，默认值为 1000 ms。",
+		//	  "description": "Maximum wait time for batch consumption by the trigger. Unit: milliseconds (ms). Valid range: 1000–60000 ms. Default: 1000 ms.",
 		//	  "maximum": 60000,
 		//	  "type": "integer"
 		//	}
 		"batch_flush_duration_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "触发器批量消费的最长等待时间。单位为毫秒（ms），取值范围为 1000 ~ 60000 ms，默认值为 1000 ms。",
+			Description: "Maximum wait time for batch consumption by the trigger. Unit: milliseconds (ms). Valid range: 1000–60000 ms. Default: 1000 ms.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BatchSize
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "触发器批量消费的每批次消息数。",
+		//	  "description": "Number of messages per batch for trigger batch consumption.",
 		//	  "type": "integer"
 		//	}
 		"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "触发器批量消费的每批次消息数。",
+			Description: "Number of messages per batch for trigger batch consumption.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConsumerGroup
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息队列 Kafka 实例的消费组名字。",
+		//	  "description": "Consumer group name of the Kafka message queue instance.",
 		//	  "type": "string"
 		//	}
 		"consumer_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "消息队列 Kafka 实例的消费组名字。",
+			Description: "Consumer group name of the Kafka message queue instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kafka 触发器创建时间。",
+		//	  "description": "Kafka trigger creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kafka 触发器创建时间。",
+			Description: "Kafka trigger creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kafka 触发器描述。长度限制为 200 个字符以内。",
+		//	  "description": "Description of the Kafka trigger. Limited to 200 characters.",
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kafka 触发器描述。长度限制为 200 个字符以内。",
+			Description: "Description of the Kafka trigger. Limited to 200 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否在创建触发器的同时启用触发器。取值：true：启用。false：关闭。",
+		//	  "description": "Enable the trigger when creating it. Options: true—enable. false—disable.",
 		//	  "type": "boolean"
 		//	}
 		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否在创建触发器的同时启用触发器。取值：true：启用。false：关闭。",
+			Description: "Enable the trigger when creating it. Options: true—enable. false—disable.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "函数 ID。",
+		//	  "description": "Function ID.",
 		//	  "type": "string"
 		//	}
 		"function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "函数 ID。",
+			Description: "Function ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KafkaCredentials
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kafka 身份认证。函数服务将通过 Kafka ACL 权限策略，对 PLAIN 和 SCRAM-SHA-256 两种类型的 SASL 用户进行消息消费鉴权。",
+		//	  "description": "Kafka identity authentication. Function service uses Kafka ACL permission policies to authenticate message consumption for SASL users of types PLAIN and SCRAM-SHA-256.",
 		//	  "properties": {
 		//	    "Mechanism": {
-		//	      "description": "Kafka 认证机制。取值：PLAIN，SCRAM-SHA-256。",
+		//	      "description": "Kafka authentication mechanism. Options: PLAIN, SCRAM-SHA-256.",
 		//	      "enum": [
 		//	        "PLAIN",
 		//	        "SCRAM-SHA-256"
@@ -117,11 +117,11 @@ func kafkaTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "type": "string"
 		//	    },
 		//	    "Password": {
-		//	      "description": "创建 Kafka 实例时设置的 SASL/PLAIN 用户密码。",
+		//	      "description": "SASL/PLAIN password set when creating the Kafka instance.",
 		//	      "type": "string"
 		//	    },
 		//	    "Username": {
-		//	      "description": "创建 Kafka 实例时设置的 SASL/PLAIN 用户名称。",
+		//	      "description": "SASL/PLAIN username set when creating the Kafka instance.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -136,75 +136,75 @@ func kafkaTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Mechanism
 				"mechanism": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Kafka 认证机制。取值：PLAIN，SCRAM-SHA-256。",
+					Description: "Kafka authentication mechanism. Options: PLAIN, SCRAM-SHA-256.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Password
 				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "创建 Kafka 实例时设置的 SASL/PLAIN 用户密码。",
+					Description: "SASL/PLAIN password set when creating the Kafka instance.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Username
 				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "创建 Kafka 实例时设置的 SASL/PLAIN 用户名称。",
+					Description: "SASL/PLAIN username set when creating the Kafka instance.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Kafka 身份认证。函数服务将通过 Kafka ACL 权限策略，对 PLAIN 和 SCRAM-SHA-256 两种类型的 SASL 用户进行消息消费鉴权。",
+			Description: "Kafka identity authentication. Function service uses Kafka ACL permission policies to authenticate message consumption for SASL users of types PLAIN and SCRAM-SHA-256.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KafkaTriggerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kafka 触发器 ID。",
+		//	  "description": "Kafka trigger ID.",
 		//	  "type": "string"
 		//	}
 		"kafka_trigger_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kafka 触发器 ID。",
+			Description: "Kafka trigger ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaximumRetryAttempts
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "函数发生运行错误（包括用户代码错误和 Runtime 错误）时的最大重试次数。取值范围为 0～100 的正整数。",
+		//	  "description": "Maximum number of retries when the function encounters a runtime error (including user code errors and runtime errors). Valid values: positive integers from 0 to 100.",
 		//	  "maximum": 100,
 		//	  "type": "integer"
 		//	}
 		"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "函数发生运行错误（包括用户代码错误和 Runtime 错误）时的最大重试次数。取值范围为 0～100 的正整数。",
+			Description: "Maximum number of retries when the function encounters a runtime error (including user code errors and runtime errors). Valid values: positive integers from 0 to 100.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MqInstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息队列 Kafka 实例 ID。",
+		//	  "description": "Kafka message queue instance ID.",
 		//	  "type": "string"
 		//	}
 		"mq_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "消息队列 Kafka 实例 ID。",
+			Description: "Kafka message queue instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kafka 触发器名字。同一函数下，触发器名称不可重复。只能包含大小写字母、数字、下划线，并且以字母开头，长度限制为 4~63 个字符。",
+		//	  "description": "Kafka trigger name. Trigger names must be unique within the same function. Only uppercase and lowercase letters, numbers, and underscores are allowed, must start with a letter, and be 4–63 characters long.",
 		//	  "maxLength": 63,
 		//	  "minLength": 4,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kafka 触发器名字。同一函数下，触发器名称不可重复。只能包含大小写字母、数字、下划线，并且以字母开头，长度限制为 4~63 个字符。",
+			Description: "Kafka trigger name. Trigger names must be unique within the same function. Only uppercase and lowercase letters, numbers, and underscores are allowed, must start with a letter, and be 4–63 characters long.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StartingPosition
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "指定开始消费 Topic 中消息的位置。取值：Latest：只消费订阅 Topic 后产生的消息。Earliest：从 Topic 中生产的第一条消息开始消费。",
+		//	  "description": "Specify the starting position for consuming messages in the Topic. Options: Latest—consume only messages produced after subscribing to the Topic. Earliest—consume from the first message produced in the Topic.",
 		//	  "enum": [
 		//	    "Latest",
 		//	    "Earliest"
@@ -212,40 +212,40 @@ func kafkaTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "指定开始消费 Topic 中消息的位置。取值：Latest：只消费订阅 Topic 后产生的消息。Earliest：从 Topic 中生产的第一条消息开始消费。",
+			Description: "Specify the starting position for consuming messages in the Topic. Options: Latest—consume only messages produced after subscribing to the Topic. Earliest—consume from the first message produced in the Topic.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kafka 触发器状态。参数值说明：ready：运行，failed：失败，pending：启动中",
+		//	  "description": "Kafka trigger status. Parameter values: ready—running, failed—failed, pending—starting.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kafka 触发器状态。参数值说明：ready：运行，failed：失败，pending：启动中",
+			Description: "Kafka trigger status. Parameter values: ready—running, failed—failed, pending—starting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TopicName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "消息队列 Kafka 实例的 Topic 名称。",
+		//	  "description": "Topic name of the Kafka message queue instance.",
 		//	  "type": "string"
 		//	}
 		"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "消息队列 Kafka 实例的 Topic 名称。",
+			Description: "Topic name of the Kafka message queue instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Kafka 触发器最近一次更新时间。",
+		//	  "description": "Last update time of the Kafka trigger.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Kafka 触发器最近一次更新时间。",
+			Description: "Last update time of the Kafka trigger.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

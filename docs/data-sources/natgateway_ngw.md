@@ -21,44 +21,44 @@ Data Source schema for Volcengine::NatGateway::NGW
 
 ### Read-Only
 
-- `billing_type` (Number) NAT网关的计费方式。取值如下：1 ：包年包月。2（默认值）：按量计费-按规格计费。3：按量计费-按使用量计费。当NetworkType传入intranet时，本参数仅支持且必须传入3。
-- `business_status` (String) NAT网关是否被锁定。空值：正常未被锁定。Normal：正常未被锁定。FinancialLocked：因欠费被锁定。
-- `created_time` (String) 创建时间
-- `deleted_time` (String) 删除时间
-- `description` (String) NAT网关的描述。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。长度限制为1 ～ 255个字符。不填默认空字符串。
-- `direct_mode` (Boolean) 标识该nat是直通还是非直通。   - true（默认）：EIP直通nat网关。   - false：非EIP直通nat网关。
-- `dnat_entry_ids` (Set of String) DNAT规则ID列表。
-- `eip_addresses` (Attributes Set) NAT网关绑定公网IP的信息。 (see [below for nested schema](#nestedatt--eip_addresses))
-- `expired_time` (String) 包年包月NAT网关到期时间。仅包年包月计费类型的NAT网关会返回此参数。
-- `lock_reason` (String) NAT被锁定的原因。financial：因欠费被锁定。security：因安全原因被锁定。
-- `nat_gateway_id` (String) NAT网关ID。
-- `nat_gateway_name` (String) NAT网关的名称。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短划线（-）。长度限制为1 ~ 128个字符。不填默认是NAT网关实例的ID。
-- `nat_ip_addresses` (Attributes Set) 私网NAT实例的中转IP列表。 (see [below for nested schema](#nestedatt--nat_ip_addresses))
-- `network_interface_id` (String) NAT网关占用的网卡ID。
-- `network_type` (String) NAT网关类型。internet：公网NAT网关。intranet：私网NAT网关。
-- `overdue_time` (String) 资源冻结时间。仅当资源因为欠费冻结，此参数才会有返回值。
-- `period` (Number) 购买包年包月NAT网关的时长，默认1。当PeriodUnit传入Month，Period取值范围：1 ~ 9、12、24、36。当PeriodUnit传入Year，Period取值范围：1 ~ 3。
-- `period_unit` (String) 购买包年包月NAT网关时长的单位，默认Month。Month ：月。Year ：年。
-- `project_name` (String) NAT网关所属项目的名称。不填默认加入default项目。
-- `smart_schedule_enabled` (Boolean) 是否开启智能调度。
-- `smart_schedule_rule` (String) 智能调度策略规则。ChinaMobile：中国移动。ChinaUnicom：中国联通。ChinaTelecom：中国电信。BGP：BGP多线。
-- `snat_entry_ids` (Set of String) SNAT规则ID列表。
-- `spec` (String) NAT网关的规格。Small（默认）：小型。Medium：中型。Large：大型。Extra_Large_1：超大型-1。Extra_Large_2：超大型-2。
-- `status` (String) NAT网关的状态。Available：可用。Creating：创建中。Pending：操作中。Deleting：删除中。
-- `subnet_id` (String) NAT网关所在子网的ID。传入的子网，必须是VpcId传入的私有网络的子网。子网内至少有一个可用的私网IP。系统自动生成的NAT网关网卡将占用该子网一个私网IP。子网所在的可用区需要已部署NAT网关资源。子网所在可用区将作为NAT网关的主可用区，并自动关联备可用区。当主可用区发生故障时，NAT网关自动切换到备可用区。
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) NAT网关的最后操作时间。
-- `vpc_id` (String) NAT网关所在私有网络的ID。
-- `zone_id` (String) NAT网关所属主可用区的ID。
+- `billing_type` (Number) NAT Gateway billing mode. Possible values: 1: Subscription. 2 (default): Pay-as-you-go by specification. 3: Pay-as-you-go by usage. When NetworkType is set to intranet, only 3 is supported and required for this parameter.
+- `business_status` (String) Indicates whether the NAT gateway is locked. Empty: Normal, not locked. Normal: Normal, not locked. FinancialLocked: Locked due to overdue payment.
+- `created_time` (String) Creation time
+- `deleted_time` (String) Deletion time
+- `description` (String) Description of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1 to 255 characters. If not specified, defaults to an empty string.
+- `direct_mode` (Boolean) Indicates whether the NAT is direct or non-direct.   - true (default): EIP direct NAT gateway.   - false: Non-EIP direct NAT gateway.
+- `dnat_entry_ids` (Set of String) DNAT rule ID list.
+- `eip_addresses` (Attributes Set) Information about the public IP bound to the NAT Gateway (see [below for nested schema](#nestedatt--eip_addresses))
+- `expired_time` (String) Expiration time for subscription NAT Gateway. Only NAT Gateways with subscription billing return this parameter.
+- `lock_reason` (String) Reason for NAT lock. financial: Locked due to overdue payment. security: Locked for security reasons.
+- `nat_gateway_id` (String) NAT gateway ID.
+- `nat_gateway_name` (String) Name of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Length: 1 to 128 characters. If not specified, defaults to the NAT Gateway instance ID.
+- `nat_ip_addresses` (Attributes Set) Transit IP list for private NAT instance (see [below for nested schema](#nestedatt--nat_ip_addresses))
+- `network_interface_id` (String) Network interface ID occupied by the NAT gateway.
+- `network_type` (String) NAT Gateway type. internet: Public NAT Gateway. intranet: Private NAT Gateway.
+- `overdue_time` (String) Resource freeze time. This parameter is returned only when the resource is frozen due to overdue payment.
+- `period` (Number) Duration for purchasing a subscription NAT Gateway, default is 1. If PeriodUnit is Month, Period can be 1 ~ 9, 12, 24, 36. If PeriodUnit is Year, Period can be 1 ~ 3.
+- `period_unit` (String) Unit for subscription NAT Gateway duration, default is Month. Month: month. Year: year.
+- `project_name` (String) Name of the project the NAT Gateway belongs to. If not specified, defaults to the 'default' project.
+- `smart_schedule_enabled` (Boolean) Whether to enable intelligent scheduling
+- `smart_schedule_rule` (String) Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.
+- `snat_entry_ids` (Set of String) SNAT rule ID list
+- `spec` (String) NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.
+- `status` (String) Status of the NAT Gateway. Available: Available. Creating: Creating. Pending: In progress. Deleting: Deleting.
+- `subnet_id` (String) ID of the subnet where the NAT gateway is located. The input subnet must be a subnet of the private network specified by VpcId. There must be at least one available private IP in the subnet. The system automatically generates a NAT gateway network interface that will occupy one private IP in this subnet. The availability zone of the subnet must have deployed NAT gateway resources. The availability zone of the subnet will be used as the primary availability zone for the NAT gateway and will automatically associate with a backup availability zone. When the primary availability zone fails, the NAT gateway automatically switches to the backup availability zone.
+- `tags` (Attributes Set) Tag list (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) Last operation time of the NAT Gateway
+- `vpc_id` (String) ID of the private network where the NAT Gateway is located
+- `zone_id` (String) ID of the primary availability zone the NAT Gateway belongs to
 
 <a id="nestedatt--eip_addresses"></a>
 ### Nested Schema for `eip_addresses`
 
 Read-Only:
 
-- `allocation_id` (String) 公网IP的ID。
-- `eip_address` (String) 公网IP的地址。
-- `using_status` (String) 公网IP的使用状态。Idle：未使用。UsedBySnat：被SNAT规则使用。UsedByDnat：被DNAT规则使用。UsedByNat：被SNAT/DNAT规则同时使用。
+- `allocation_id` (String) Public IP ID
+- `eip_address` (String) Public IP address
+- `using_status` (String) Usage status of the public IP. Idle: Not used. UsedBySnat: Used by SNAT rule. UsedByDnat: Used by DNAT rule. UsedByNat: Used by both SNAT and DNAT rules.
 
 
 <a id="nestedatt--nat_ip_addresses"></a>
@@ -66,8 +66,8 @@ Read-Only:
 
 Read-Only:
 
-- `nat_ip_address` (String) 中转Ip地址。
-- `nat_ip_id` (String) 中转Ip id。
+- `nat_ip_address` (String) Transit IP address
+- `nat_ip_id` (String) Transit IP ID
 
 
 <a id="nestedatt--tags"></a>
@@ -75,5 +75,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key.
+- `value` (String) User tag value

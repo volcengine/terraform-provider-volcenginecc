@@ -34,12 +34,12 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备注，长度限制为0~253个字符。",
+		//	  "description": "Remarks, length limit: 0–253 characters",
 		//	  "maxLength": 253,
 		//	  "type": "string"
 		//	}
 		"comments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备注，长度限制为0~253个字符。",
+			Description: "Remarks, length limit: 0–253 characters",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -53,11 +53,11 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -67,11 +67,11 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网关实例ID。",
+		//	  "description": "Gateway instance ID",
 		//	  "type": "string"
 		//	}
 		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网关实例ID。",
+			Description: "Gateway instance ID",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -81,26 +81,26 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "路由同步。开启后，API网关会自动监听Ingress资源的变化，并将Ingress资源转义为服务，域名，Upstream等资源合并至当前网关。由Ingress转义的资源不支持在控制台操作。仅支持容器集群来源类型。",
+		//	  "description": "Route synchronization. When enabled, the API Gateway automatically monitors changes to Ingress resources and converts them into services, domains, Upstream, and other resources, merging them into the current gateway. Resources converted from Ingress cannot be managed in the console. Only supported for container cluster source type",
 		//	  "properties": {
 		//	    "EnableAllIngressClasses": {
-		//	      "description": "是否启用所有Ingress类。",
+		//	      "description": "Whether to enable all Ingress classes",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnableAllNamespaces": {
-		//	      "description": "是否全部命名空间。",
+		//	      "description": "Whether all namespaces",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnableIngress": {
-		//	      "description": "是否开启。",
+		//	      "description": "Whether enabled",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnableIngressWithoutIngressClass": {
-		//	      "description": "是否监听IngressClass为空的资源。",
+		//	      "description": "Whether to monitor resources with empty IngressClass",
 		//	      "type": "boolean"
 		//	    },
 		//	    "IngressClasses": {
-		//	      "description": "指定IngressClass。",
+		//	      "description": "Specify IngressClass",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -109,11 +109,11 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "UpdateStatus": {
-		//	      "description": "流量入口切换。开启后，当前集群Ingress中Status的IP地址会被修改为当前网关的IP地址。",
+		//	      "description": "Traffic entry switch. When enabled, the IP address in the Status of the current cluster's Ingress will be updated to the current gateway's IP address",
 		//	      "type": "boolean"
 		//	    },
 		//	    "WatchNamespaces": {
-		//	      "description": "指定命名空间。",
+		//	      "description": "Specify namespace",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -128,7 +128,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnableAllIngressClasses
 				"enable_all_ingress_classes": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否启用所有Ingress类。",
+					Description: "Whether to enable all Ingress classes",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -137,7 +137,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: EnableAllNamespaces
 				"enable_all_namespaces": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否全部命名空间。",
+					Description: "Whether all namespaces",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -146,7 +146,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: EnableIngress
 				"enable_ingress": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启。",
+					Description: "Whether enabled",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -155,7 +155,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: EnableIngressWithoutIngressClass
 				"enable_ingress_without_ingress_class": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否监听IngressClass为空的资源。",
+					Description: "Whether to monitor resources with empty IngressClass",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -165,7 +165,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: IngressClasses
 				"ingress_classes": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "指定IngressClass。",
+					Description: "Specify IngressClass",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -174,7 +174,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: UpdateStatus
 				"update_status": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "流量入口切换。开启后，当前集群Ingress中Status的IP地址会被修改为当前网关的IP地址。",
+					Description: "Traffic entry switch. When enabled, the IP address in the Status of the current cluster's Ingress will be updated to the current gateway's IP address",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -184,7 +184,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: WatchNamespaces
 				"watch_namespaces": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "指定命名空间。",
+					Description: "Specify namespace",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -192,7 +192,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "路由同步。开启后，API网关会自动监听Ingress资源的变化，并将Ingress资源转义为服务，域名，Upstream等资源合并至当前网关。由Ingress转义的资源不支持在控制台操作。仅支持容器集群来源类型。",
+			Description: "Route synchronization. When enabled, the API Gateway automatically monitors changes to Ingress resources and converts them into services, domains, Upstream, and other resources, merging them into the current gateway. Resources converted from Ingress cannot be managed in the console. Only supported for container cluster source type",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -203,37 +203,37 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream来源配置。",
+		//	  "description": "Upstream source configuration",
 		//	  "properties": {
 		//	    "K8SSource": {
-		//	      "description": "容器集群来源。",
+		//	      "description": "Container cluster source",
 		//	      "properties": {
 		//	        "ClusterId": {
-		//	          "description": "集群ID。",
+		//	          "description": "Cluster ID",
 		//	          "type": "string"
 		//	        },
 		//	        "ClusterType": {
-		//	          "description": "集群类型。",
+		//	          "description": "Cluster type",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "NacosSource": {
-		//	      "description": "注册中心来源。",
+		//	      "description": "Registry source",
 		//	      "properties": {
 		//	        "AuthConfig": {
-		//	          "description": "认证配置。",
+		//	          "description": "Authentication configuration",
 		//	          "properties": {
 		//	            "Basic": {
-		//	              "description": "Basic认证。",
+		//	              "description": "Basic authentication",
 		//	              "properties": {
 		//	                "Password": {
-		//	                  "description": "密码。",
+		//	                  "description": "Password",
 		//	                  "type": "string"
 		//	                },
 		//	                "Username": {
-		//	                  "description": "用户名。",
+		//	                  "description": "Username",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -247,7 +247,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "NacosName": {
-		//	          "description": "Nacos名称。",
+		//	          "description": "Nacos name",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -263,7 +263,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ClusterId
 						"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "集群ID。",
+							Description: "Cluster ID",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -272,7 +272,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: ClusterType
 						"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "集群类型。",
+							Description: "Cluster type",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -280,7 +280,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "容器集群来源。",
+					Description: "Container cluster source",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -299,7 +299,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Password
 										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "密码。",
+											Description: "Password",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -308,7 +308,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Username
 										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "用户名。",
+											Description: "Username",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -316,7 +316,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "Basic认证。",
+									Description: "Basic authentication",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -324,7 +324,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "认证配置。",
+							Description: "Authentication configuration",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -345,14 +345,14 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: NacosName
 						"nacos_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Nacos名称。",
+							Description: "Nacos name",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "注册中心来源。",
+					Description: "Registry source",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -360,14 +360,14 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Upstream来源配置。",
+			Description: "Upstream source configuration",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream来源类型，取值：K8S：容器集群。Nacos：注册中心。",
+		//	  "description": "Upstream source type. Options: K8S: Container cluster. Nacos: Registry",
 		//	  "enum": [
 		//	    "K8S",
 		//	    "Nacos"
@@ -375,7 +375,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Upstream来源类型，取值：K8S：容器集群。Nacos：注册中心。",
+			Description: "Upstream source type. Options: K8S: Container cluster. Nacos: Registry",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -391,11 +391,11 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "导入状态，取值：Syncing：导入中。SyncedSucceed：导入成功。SyncedFailed：导入失败。",
+		//	  "description": "Import status. Options: Syncing: Importing. SyncedSucceed: Import successful. SyncedFailed: Import failed",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "导入状态，取值：Syncing：导入中。SyncedSucceed：导入成功。SyncedFailed：导入失败。",
+			Description: "Import status. Options: Syncing: Importing. SyncedSucceed: Import successful. SyncedFailed: Import failed",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -405,11 +405,11 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "导入状态信息，取值：ConnectionFailed：Nacos集群无法连接。AuthenticationFailed：认证失败。PermissionFailed：Nacos集群无法连接。",
+		//	  "description": "Import status information. Options: ConnectionFailed: Unable to connect to Nacos cluster. AuthenticationFailed: Authentication failed. PermissionFailed: Unable to connect to Nacos cluster",
 		//	  "type": "string"
 		//	}
 		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "导入状态信息，取值：ConnectionFailed：Nacos集群无法连接。AuthenticationFailed：认证失败。PermissionFailed：Nacos集群无法连接。",
+			Description: "Import status information. Options: ConnectionFailed: Unable to connect to Nacos cluster. AuthenticationFailed: Authentication failed. PermissionFailed: Unable to connect to Nacos cluster",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -419,11 +419,11 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -433,11 +433,11 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Upstream来源ID。",
+		//	  "description": "Upstream source ID",
 		//	  "type": "string"
 		//	}
 		"upstream_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Upstream来源ID。",
+			Description: "Upstream source ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -447,7 +447,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "指定命名空间。",
+		//	  "description": "Specify namespace",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -457,7 +457,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"watch_namespaces": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "指定命名空间。",
+			Description: "Specify namespace",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -476,7 +476,7 @@ func upstreamSourceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "API 网关支持基于容器服务（VKE）集和容器服务的注册集群功能，将集群导入到 API 网关实例，将其作为网关的 Upstream 来源，以便网关获取集群中的 Service 列表。",
+		Description: "The API Gateway supports cluster registration based on container services (VKE) and container service clusters. Import clusters into the API Gateway instance to use them as Upstream sources, allowing the gateway to retrieve the Service list from the cluster",
 		Version:     1,
 		Attributes:  attributes,
 	}

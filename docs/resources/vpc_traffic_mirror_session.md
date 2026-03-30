@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vpc_traffic_mirror_session Resource - terraform-provider-volcenginecc"
 subcategory: "VPC"
 description: |-
-  镜像会话关联镜像源、镜像目的、筛选条件，使从镜像源复制的流量私网转发到镜像目的，是流量镜像的载体。
+  The mirror session links the mirror source, mirror destination, and filter conditions, enabling private network forwarding of traffic copied from the mirror source to the mirror destination. It serves as the carrier for traffic mirroring
 ---
 
 # volcenginecc_vpc_traffic_mirror_session (Resource)
 
-镜像会话关联镜像源、镜像目的、筛选条件，使从镜像源复制的流量私网转发到镜像目的，是流量镜像的载体。
+The mirror session links the mirror source, mirror destination, and filter conditions, enabling private network forwarding of traffic copied from the mirror source to the mirror destination. It serves as the carrier for traffic mirroring
 
 ## Example Usage
 
@@ -35,38 +35,38 @@ resource "volcenginecc_vpc_traffic_mirror_session" "VPCTrafficMirrorSessionDemo"
 
 ### Required
 
-- `network_interface_id` (String) 镜像源实例ID，当前只支持ECS的主网卡和辅助网卡。
-- `priority` (Number) 镜像会话优先级，取值范围1 ～ 32766，同一账户下镜像会话优先级不能重复。
-- `traffic_mirror_filter_id` (String) 筛选条件实例ID。
-- `traffic_mirror_target_id` (String) 镜像目的实例ID。
+- `network_interface_id` (String) Mirror source instance ID. Currently, only ECS primary and secondary network interfaces are supported
+- `priority` (Number) Mirror session priority. Range: 1–32766. Priority values must be unique within the same account
+- `traffic_mirror_filter_id` (String) Filter condition instance ID
+- `traffic_mirror_target_id` (String) Mirror destination instance ID
 
 ### Optional
 
-- `description` (String) 镜像会话实例描述。
-- `packet_length` (Number) 镜像会话MTU，超过被截断，取值范围：64～9600。
-- `project_name` (String) 所属项目的名称
-- `tags` (Attributes Set) 标签信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `traffic_mirror_session_name` (String) 镜像会话名称。
-- `virtual_network_id` (Number) 镜像会话VNI，取值范围1 ～ 16777215。
+- `description` (String) Mirror session instance description
+- `packet_length` (Number) Mirror session MTU. Values exceeding this will be truncated. Range: 64–9600
+- `project_name` (String) Name of the associated project
+- `tags` (Attributes Set) Tag information
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `traffic_mirror_session_name` (String) Mirror session name
+- `virtual_network_id` (Number) Mirror session VNI. Range: 1–16777215
 
 ### Read-Only
 
-- `business_status` (String) 会话计费状态。Normal：正常计费中。  - FinancialLocked：欠费锁定。
-- `created_time` (String) 创建时间。
+- `business_status` (String) Session billing status. Normal: Billing in progress.   - FinancialLocked: Locked due to overdue payment
+- `created_time` (String) Creation time
 - `id` (String) Uniquely identifies the resource.
-- `lock_reason` (String) 锁定原因。
-- `status` (String) 会话状态。
-- `traffic_mirror_session_id` (String) 镜像会话实例ID。
-- `traffic_mirror_source_ids` (Set of String) 镜像源实例列表。
+- `lock_reason` (String) Lock reason
+- `status` (String) Session status
+- `traffic_mirror_session_id` (String) Mirror session instance ID
+- `traffic_mirror_source_ids` (Set of String) Mirror source instance list
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 ## Import
 

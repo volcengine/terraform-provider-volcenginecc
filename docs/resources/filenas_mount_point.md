@@ -2,12 +2,12 @@
 page_title: "volcenginecc_filenas_mount_point Resource - terraform-provider-volcenginecc"
 subcategory: "FileNAS"
 description: |-
-  挂载点是 NAS 文件系统在网络环境中的连接点。NAS 文件系统需要挂载在计算节点中才能完成数据的访问与存储。挂载是将计算节点与 NAS 文件系统相连接的操作。
+  Mount point is the connection point for the NAS file system in a network environment. The NAS file system must be mounted on a compute node to enable data access and storage. Mounting is the operation that connects the compute node to the NAS file system.
 ---
 
 # volcenginecc_filenas_mount_point (Resource)
 
-挂载点是 NAS 文件系统在网络环境中的连接点。NAS 文件系统需要挂载在计算节点中才能完成数据的访问与存储。挂载是将计算节点与 NAS 文件系统相连接的操作。
+Mount point is the connection point for the NAS file system in a network environment. The NAS file system must be mounted on a compute node to enable data access and storage. Mounting is the operation that connects the compute node to the NAS file system.
 
 ## Example Usage
 
@@ -26,35 +26,35 @@ resource "volcenginecc_filenas_mount_point" "FileNASMountPointDemo" {
 
 ### Required
 
-- `file_system_id` (String) 文件系统 ID。
-- `mount_point_name` (String) 挂载点名称。
-- `permission_group_id` (String) 权限组 ID。
-- `subnet_id` (String) 子网 ID。
-- `vpc_id` (String) 私有网络 ID。
+- `file_system_id` (String) File system ID.
+- `mount_point_name` (String) Mount point name.
+- `permission_group_id` (String) Permission group ID.
+- `subnet_id` (String) Subnet ID.
+- `vpc_id` (String) Private network ID.
 
 ### Read-Only
 
-- `clients` (Attributes Set) 客户端信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--clients))
-- `created_time` (String) 挂载点创建时间。
-- `domain` (String) DNS 地址。
+- `clients` (Attributes Set) Client information.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--clients))
+- `created_time` (String) Mount point creation time.
+- `domain` (String) DNS address.
 - `id` (String) Uniquely identifies the resource.
-- `ip` (String) 挂载点地址。
-- `mount_point_id` (String) 挂载点 ID。
-- `permission_group` (Attributes) 挂载点绑定的权限组信息。 (see [below for nested schema](#nestedatt--permission_group))
-- `status` (String) 挂载点状态。取值：Running：运行中。Creating：创建中。Updating：更新中。Error：异常。Deleting：删除中。DeleteError：删除异常。Deleted：已删除。Stopped：已停止。
-- `subnet_name` (String) 子网名称。
-- `updated_time` (String) 挂载点更新时间。
-- `vpc_name` (String) 私有网络名称。
+- `ip` (String) Mount point address.
+- `mount_point_id` (String) Mount point ID.
+- `permission_group` (Attributes) Permission group information bound to the mount point. (see [below for nested schema](#nestedatt--permission_group))
+- `status` (String) Mount point status. Values: Running: Running. Creating: Creating. Updating: Updating. Error: Error. Deleting: Deleting. DeleteError: Delete error. Deleted: Deleted. Stopped: Stopped.
+- `subnet_name` (String) Subnet name.
+- `updated_time` (String) Mount point update time.
+- `vpc_name` (String) Private network name.
 
 <a id="nestedatt--clients"></a>
 ### Nested Schema for `clients`
 
 Read-Only:
 
-- `ip` (String) 客户端的私有网络 IP 地址。
-- `protocol_version` (String) 挂载协议版本号。取值：NFSv3。
-- `vpc_name` (String) 私有网络名称。
+- `ip` (String) Client's private network IP address.
+- `protocol_version` (String) Mount protocol version. Value: NFSv3.
+- `vpc_name` (String) Private network name.
 
 
 <a id="nestedatt--permission_group"></a>
@@ -62,23 +62,23 @@ Read-Only:
 
 Read-Only:
 
-- `create_time` (String) 权限组创建时间。
-- `description` (String) 权限组描述信息。
-- `file_system_count` (Number) 关联该权限组的文件系统数量。
-- `file_system_type` (String) 文件系统类型。取值说明如下：Extreme：NAS 极速型。Capacity：NAS 容量型。Cache：NAS 缓存型。
-- `mount_points` (Attributes Set) 使用该权限组的挂载点信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--permission_group--mount_points))
-- `permission_group_name` (String) 权限组名称。
-- `permission_rule_count` (Number) 权限规则数量。
+- `create_time` (String) Permission group creation time.
+- `description` (String) Permission group description information.
+- `file_system_count` (Number) Number of file systems associated with this permission group.
+- `file_system_type` (String) File system type. Value explanation: Extreme: NAS extreme type. Capacity: NAS capacity type. Cache: NAS cache type.
+- `mount_points` (Attributes Set) Information about mount points that use this permission group.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--permission_group--mount_points))
+- `permission_group_name` (String) Permission group name.
+- `permission_rule_count` (Number) Number of permission rules.
 
 <a id="nestedatt--permission_group--mount_points"></a>
 ### Nested Schema for `permission_group.mount_points`
 
 Read-Only:
 
-- `file_system_id` (String) 文件系统 ID。
-- `mount_point_id` (String) 挂载点 ID。
-- `mount_point_name` (String) 挂载点名称。
+- `file_system_id` (String) File system ID.
+- `mount_point_id` (String) Mount point ID.
+- `mount_point_name` (String) Mount point name.
 
 ## Import
 

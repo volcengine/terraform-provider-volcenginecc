@@ -21,37 +21,37 @@ Data Source schema for Volcengine::EFS::FileSystem
 
 ### Read-Only
 
-- `access_point_limit` (Number) 接入点上限。
-- `charge_config` (Attributes) 文件系统计费配置。 (see [below for nested schema](#nestedatt--charge_config))
-- `charge_type` (String) 计费类型。仅支持取值为PayAsYouGo，表示按量计费。
-- `create_time` (String) 文件系统创建时间。
-- `description` (String) 描述信息。
-- `downgrade_unlock_time` (String) 文件系统带宽可以降配的时间。
-- `file_system_id` (String) 文件系统 ID。
-- `file_system_name` (String) 文件系统名称。
-- `instance_type` (String) Basic：基础型,Premium：高级型
-- `mount_point_limit` (Number) 挂载点上限。
-- `performance` (Attributes) 文件系统性能信息。 (see [below for nested schema](#nestedatt--performance))
-- `performance_density` (String) 文件系统性能密度，取值说明如下：Basic_50：基础型 50MB/s/TiB,Premium_125：高级型 125MB/s/TiB。
-- `project_name` (String) 项目名称。
-- `protocol_types` (Set of String) 协议类型
-- `status` (String) 文件系统状态。取值说明如下：Creating：创建中。CreateError：创建失败。Running：运行中。Updating：更新中。Deleting：删除中。DeleteError：删除失败。Deleted：已删除。Stopped：已关停。
-- `storage` (Attributes) 文件系统容量信息。 (see [below for nested schema](#nestedatt--storage))
-- `tags` (Attributes Set) 标签列表。 (see [below for nested schema](#nestedatt--tags))
-- `update_time` (String) 文件系统更新时间。
-- `zone_id` (String) 可用区 ID。
-- `zone_name` (String) 可用区名称。
+- `access_point_limit` (Number) Access point limit.
+- `charge_config` (Attributes) File system billing configuration. (see [below for nested schema](#nestedatt--charge_config))
+- `charge_type` (String) Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.
+- `create_time` (String) File system creation time.
+- `description` (String) Description.
+- `downgrade_unlock_time` (String) Time when file system bandwidth can be downgraded.
+- `file_system_id` (String) File system ID.
+- `file_system_name` (String) File system name.
+- `instance_type` (String) Basic: Basic type, Premium: Premium type.
+- `mount_point_limit` (Number) Mount point limit.
+- `performance` (Attributes) File system performance information. (see [below for nested schema](#nestedatt--performance))
+- `performance_density` (String) File system performance density. Value description: Basic_50: Basic type 50MB/s/TiB, Premium_125: Premium type 125MB/s/TiB.
+- `project_name` (String) Project name.
+- `protocol_types` (Set of String) Protocol type.
+- `status` (String) File system status. Value description: Creating: Creating. CreateError: Creation failed. Running: Running. Updating: Updating. Deleting: Deleting. DeleteError: Deletion failed. Deleted: Deleted. Stopped: Stopped.
+- `storage` (Attributes) File system capacity information. (see [below for nested schema](#nestedatt--storage))
+- `tags` (Attributes Set) Tag list. (see [below for nested schema](#nestedatt--tags))
+- `update_time` (String) File system update time.
+- `zone_id` (String) Availability zone ID.
+- `zone_name` (String) Availability zone name.
 
 <a id="nestedatt--charge_config"></a>
 ### Nested Schema for `charge_config`
 
 Read-Only:
 
-- `charge_status` (String) 计费状态，取值说明如下：WaitingPaid：等待支付,Pending：创建中,Modifying：更配中,Failed：失败,Normal：正常,Expired：过期,Overdue：欠费,Reclaimed：回收,Terminated：退订。
-- `charge_type` (String) 计费类型。仅支持取值为PayAsYouGo，表示按量计费。
-- `expire_time` (String) 到期时间。
-- `reclaim_time` (String) 回收时间。
-- `stop_time` (String) 关停时间。
+- `charge_status` (String) Billing status. Value description: WaitingPaid: Waiting for payment, Pending: Creating, Modifying: Reconfiguring, Failed: Failed, Normal: Normal, Expired: Expired, Overdue: Overdue, Reclaimed: Reclaimed, Terminated: Unsubscribed.
+- `charge_type` (String) Billing type. Only supports PayAsYouGo, which means pay-as-you-go billing.
+- `expire_time` (String) Expiration time.
+- `reclaim_time` (String) Recycle time.
+- `stop_time` (String) Shutdown time.
 
 
 <a id="nestedatt--performance"></a>
@@ -59,13 +59,13 @@ Read-Only:
 
 Read-Only:
 
-- `bandwidth_mode` (String) 带宽模式，取值说明如下：Baseline：基线带宽模式,Provisioned：预置带宽模式
-- `baseline_bandwidth` (Number) 基准带宽。
-- `baseline_iops` (Number) 基准 IOPS。
-- `burst_bandwidth` (Number) 突发带宽。
-- `burst_iops` (Number) 突发 IOPS。
-- `provisioned_bandwidth` (Number) 预置带宽。
-- `provisioned_iops` (Number) 预置 IOPS。
+- `bandwidth_mode` (String) Bandwidth mode. Value description: Baseline: Baseline bandwidth mode, Provisioned: Provisioned bandwidth mode.
+- `baseline_bandwidth` (Number) Baseline bandwidth.
+- `baseline_iops` (Number) Baseline IOPS.
+- `burst_bandwidth` (Number) Burst bandwidth.
+- `burst_iops` (Number) Burst IOPS.
+- `provisioned_bandwidth` (Number) Provisioned bandwidth.
+- `provisioned_iops` (Number) Provisioned IOPS.
 
 
 <a id="nestedatt--storage"></a>
@@ -73,10 +73,10 @@ Read-Only:
 
 Read-Only:
 
-- `capacity_limit` (Number) 容量上限，单位为 MiB。
-- `capacity_used` (Number) 已用容量，单位为 MiB。
-- `inode_limit` (Number) 文件数上限。
-- `inode_used` (Number) 已用文件数。
+- `capacity_limit` (Number) Capacity limit, in MiB.
+- `capacity_used` (Number) Used capacity, in MiB.
+- `inode_limit` (Number) File count limit.
+- `inode_used` (Number) Used file count.
 
 
 <a id="nestedatt--tags"></a>
@@ -84,6 +84,6 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `type` (String) 标签类型。取值说明如下：System：系统标签,Custom：自定义标签。
-- `value` (String) 标签值。
+- `key` (String) Tag key.
+- `type` (String) Tag type. Value description: System: System tag, Custom: Custom tag.
+- `value` (String) Tag value.

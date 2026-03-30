@@ -2,12 +2,12 @@
 page_title: "volcenginecc_privatezone_resolver_rule Resource - terraform-provider-volcenginecc"
 subcategory: "PrivateZone"
 description: |-
-  转发规则详细信息
+  Forwarding rule details
 ---
 
 # volcenginecc_privatezone_resolver_rule (Resource)
 
-转发规则详细信息
+Forwarding rule details
 
 ## Example Usage
 
@@ -38,38 +38,38 @@ resource "volcenginecc_privatezone_resolver_rule" "PrivateZoneResolverRuleDemo" 
 
 ### Required
 
-- `name` (String) 转发规则的名称。支持 UTF-8 格式。
-- `type` (String) 转发规则类型。OUTBOUND：转发到外部的 DNS 服务器。LINE：自定义公网递归 DNS 服务器的出口 IP 地址的运营商。
+- `name` (String) Name of the forwarding rule. Supports UTF-8 format
+- `type` (String) Forwarding rule type. OUTBOUND: Forward to external DNS server. LINE: Carrier for the outbound IP address of the custom public recursive DNS server
 
 ### Optional
 
-- `endpoint_id` (Number) 终端节点的 ID。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。
-- `forward_i_ps` (Attributes Set) 外部的 DNS 服务器的 IP 地址和端口。您最多只能添加 10 个 IP 地址。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--forward_i_ps))
-- `line` (String) 递归 DNS 服务器的出口 IP 地址的运营商。该参数仅在 Type 参数是 LINE 时有效。支持的取值：移动：中国移动，电信：中国电信，联通：中国联通
-- `project_name` (String) 转发规则所属的项目名称。默认为 default。
-- `tags` (Attributes Set) 转发规则所属的一个或多个标签
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `vp_cs` (Attributes Set) 转发规则所关联的 VPC。转发规则在关联的 VPC 中生效。Type 参数是 OUTBOUND 时，VPC 的地域必须和终端节点所在的地域相同。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--vp_cs))
-- `zone_name` (String) 转发规则转发规则所关联的域名。您可以输入一个或多个域名。多个域名之间使用英文逗号, 分隔。最多支持输入 500 个域名。该参数仅在 Type 参数是 OUTBOUND 时有效且为必选参数。如果您把该参数设置为 *，则转发规则适用于 VPC 关联的所有域名。
+- `endpoint_id` (Number) Endpoint ID. This parameter is only valid and required when the Type parameter is OUTBOUND
+- `forward_i_ps` (Attributes Set) IP address and port of the external DNS server. You can add up to 10 IP addresses. This parameter is only valid and required when the Type parameter is OUTBOUND
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--forward_i_ps))
+- `line` (String) Carrier for the outbound IP address of the recursive DNS server. This parameter is only valid when the Type parameter is LINE. Supported values: Mobile: China Mobile, Telecom: China Telecom, Unicom: China Unicom
+- `project_name` (String) Project name associated with the forwarding rule. Default is default
+- `tags` (Attributes Set) One or more tags associated with the forwarding rule
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `vp_cs` (Attributes Set) VPC associated with the forwarding rule. The forwarding rule takes effect in the associated VPC. When the Type parameter is OUTBOUND, the VPC region must match the region of the endpoint
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--vp_cs))
+- `zone_name` (String) Domain name(s) associated with the forwarding rule. You can enter one or more domain names. Separate multiple domain names with English commas. Up to 500 domain names are supported. This parameter is only valid and required when the Type parameter is OUTBOUND. If you set this parameter to *, the forwarding rule applies to all domain names associated with the VPC
 
 ### Read-Only
 
-- `created_time` (String) 转发规则的创建时间
-- `enable` (Boolean) 转发规则是否被启用。true：启用。false：禁用。
+- `created_time` (String) Creation time of the forwarding rule
+- `enable` (Boolean) Whether the forwarding rule is enabled. true: enabled. false: disabled
 - `id` (String) Uniquely identifies the resource.
-- `last_operator` (String) 最近一次更新转发规则的账号的 ID
-- `rule_id` (String) 转发规则的 ID。
-- `updated_time` (String) 转发规则的更新时间
+- `last_operator` (String) Account ID of the last update to the forwarding rule
+- `rule_id` (String) Forwarding rule ID
+- `updated_time` (String) Update time of the forwarding rule
 
 <a id="nestedatt--forward_i_ps"></a>
 ### Nested Schema for `forward_i_ps`
 
 Optional:
 
-- `ip` (String) VPC 外部的 DNS 服务器的 IP 地址。
-- `port` (Number) VPC 外部的 DNS 服务器的端口。
+- `ip` (String) IP address of the external DNS server for the VPC
+- `port` (Number) Port of the external DNS server for the VPC
 
 
 <a id="nestedatt--tags"></a>
@@ -77,8 +77,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) Tag key for the user tag
+- `value` (String) Tag value for the user tag
 
 
 <a id="nestedatt--vp_cs"></a>
@@ -86,8 +86,8 @@ Optional:
 
 Optional:
 
-- `region` (String) VPC 的地域。
-- `vpc_id` (String) VPC 的 ID。
+- `region` (String) Region of the VPC
+- `vpc_id` (String) VPC ID
 
 ## Import
 

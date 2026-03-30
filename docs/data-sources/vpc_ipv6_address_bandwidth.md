@@ -21,31 +21,31 @@ Data Source schema for Volcengine::VPC::Ipv6AddressBandwidth
 
 ### Read-Only
 
-- `allocation_id` (String) IPv6公网带宽的ID。
-- `bandwidth` (Number) IPv6公网带宽的带宽上限。
-- `bandwidth_package_id` (String) IPv6共享带宽包的ID。
-- `billing_type` (Number) IPv6公网带宽的计费类型。2：按量计费-按带宽上限计费。3：按量计费-按实际流量计费。
-- `business_status` (String) IPv6公网带宽是否被锁定。Normal：正常。FinancialLocked：被锁定。
-- `created_time` (String) IPv6公网带宽的开通时间。
-- `deleted_time` (String) IPv6公网带宽的删除时间。
-- `instance_id` (String) IPv6公网带宽关联的实例ID。
-- `instance_type` (String) IPv6公网带宽关联的实例类型。EcsInstance：云服务器实例。ClbInstance：负载均衡。
-- `ipv_6_address` (String) IPv6地址。
-- `ipv_6_gateway_id` (String) IPv6网关的ID。
-- `isp` (String) IPv6公网带宽的线路类型。BGP：BGP（多线）。
-- `lock_reason` (String) IPv6公网带宽被锁定的原因。该参数只有IPv6公网带宽处于FinancialLocked状态时才有返回值。Financial：因欠费被锁定。Security：因安全被锁定。
-- `network_type` (String) IPv6地址的通信类型。Private：私网通信类型。Public：公网通信类型。
-- `overdue_time` (String) IPv6公网带宽欠费关停的时间。
-- `project_name` (String) IPv6公网带宽的项目。
-- `service_managed` (Boolean) 是否为服务托管。
-- `status` (String) IPv6公网带宽的状态。Creating：创建中。Available：可用。
-- `tags` (Attributes Set) 标签信息 (see [below for nested schema](#nestedatt--tags))
-- `updated_time` (String) IPv6公网带宽的最近操作时间。
+- `allocation_id` (String) IPv6 public bandwidth ID
+- `bandwidth` (Number) IPv6 public bandwidth cap
+- `bandwidth_package_id` (String) IPv6 shared bandwidth package ID
+- `billing_type` (Number) IPv6 public bandwidth billing type. 2: Pay-as-you-go   - billed by bandwidth cap. 3: Pay-as-you-go   - billed by actual traffic.
+- `business_status` (String) Whether IPv6 public bandwidth is locked. Normal: Normal. FinancialLocked: Locked.
+- `created_time` (String) IPv6 public bandwidth activation time
+- `deleted_time` (String) IPv6 public bandwidth deletion time
+- `instance_id` (String) Instance ID associated with IPv6 public bandwidth
+- `instance_type` (String) Instance type associated with IPv6 public bandwidth. EcsInstance: Cloud server instance. ClbInstance: Load balancer.
+- `ipv_6_address` (String) IPv6 address
+- `ipv_6_gateway_id` (String) IPv6 gateway ID
+- `isp` (String) IPv6 public bandwidth line type. BGP: BGP (multi-line).
+- `lock_reason` (String) Reason for IPv6 public bandwidth lock. This parameter is returned only when IPv6 public bandwidth is in FinancialLocked status. Financial: Locked due to overdue payment. Security: Locked due to security reasons.
+- `network_type` (String) IPv6 address communication type. Private: Private network communication type. Public: Public network communication type.
+- `overdue_time` (String) IPv6 public bandwidth deactivation time due to overdue payment
+- `project_name` (String) IPv6 public bandwidth project
+- `service_managed` (Boolean) Service hosting status
+- `status` (String) IPv6 public bandwidth status. Creating: Creating. Available: Available.
+- `tags` (Attributes Set) Tag information (see [below for nested schema](#nestedatt--tags))
+- `updated_time` (String) IPv6 public bandwidth last operation time
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value

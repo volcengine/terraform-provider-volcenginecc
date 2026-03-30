@@ -2,12 +2,12 @@
 page_title: "volcenginecc_alb_listener Resource - terraform-provider-volcenginecc"
 subcategory: "ALB"
 description: |-
-  每个 ALB 实例至少要有一个监听器才能正常工作。监听器接收客户端请求，并根据您配置的转发规则和负载均衡算法将请求分发到后端服务器上。您可以在一个 ALB 实例下创建多个监听器，并为监听器配置不同的监听协议，以处理使用不同协议的客户端请求。
+  Each ALB instance must have at least one listener to function properly. The listener receives client requests and distributes them to backend servers based on your configured forwarding rules and load balancing algorithm. You can create multiple listeners under one ALB instance and configure different protocols for each listener to handle client requests using different protocols.
 ---
 
 # volcenginecc_alb_listener (Resource)
 
-每个 ALB 实例至少要有一个监听器才能正常工作。监听器接收客户端请求，并根据您配置的转发规则和负载均衡算法将请求分发到后端服务器上。您可以在一个 ALB 实例下创建多个监听器，并为监听器配置不同的监听协议，以处理使用不同协议的客户端请求。
+Each ALB instance must have at least one listener to function properly. The listener receives client requests and distributes them to backend servers based on your configured forwarding rules and load balancing algorithm. You can create multiple listeners under one ALB instance and configure different protocols for each listener to handle client requests using different protocols.
 
 ## Example Usage
 
@@ -52,58 +52,58 @@ resource "volcenginecc_alb_listener" "ALBListenerDemo" {
 
 ### Required
 
-- `load_balancer_id` (String) 监听器所属的负载均衡实例 ID。
-- `port` (Number) 监听器的监听端口，取值：1   - 65535 。
-- `protocol` (String) 监听器的协议，支持 HTTP 协议和 HTTPS 协议。
-- `server_group_id` (String) 监听器的默认服务器组。
+- `load_balancer_id` (String) Load balancer instance ID to which the listener belongs.
+- `port` (Number) The listener port. Values: 1   - 65535.
+- `protocol` (String) Listener protocol. Supports HTTP and HTTPS protocols.
+- `server_group_id` (String) Default server group for the listener.
 
 ### Optional
 
-- `access_log_record_customized_headers_enabled` (String) 监听器是否已开启“在访问日志中记录自定义header”的功能：on：表示该功能已开启。off：表示该功能未开启。
-- `acl_ids` (Set of String) 监听器绑定的访问控制策略组 ID。当AclStatus参数配置为 on 时，AclIds为必填参数。
-- `acl_status` (String) 是否开启访问控制功能。取值如下：on：开启。off ：不开启（默认）。
-- `acl_type` (String) 访问控制的方式，取值如下：white：白名单方式。表示监听器仅转发来自所选访问控制策略组中设置的IP地址或地址段的请求。 如果所选策略组中没有添加任何IP，则监听器不会转发任何请求。black：黑名单方式。表示仅拒绝来自所选访问控制策略组中设置的IP地址或地址段的请求。 如果所选策略组中没有添加任何IP，则监听器会转发全部请求。当AclStatus参数配置为 on 时，AclType为必填参数。
-- `ca_certificate_id` (String) HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 alb 时，必须指定 CACertificateId 参数。
-- `ca_certificate_source` (String) HTTPS 监听器关联的 CA 证书的来源，用于双向认证。alb（默认）：表示通过 ALB 上传的证书。标准版 ALB 实例不支持此来源的证书。pca_root：表示通过火山引擎证书中心购买或上传的私有根 CA 证书。pca_sub：表示通过火山引擎证书中心购买或上传的私有子 CA 证书。
-- `cert_center_certificate_id` (String) HTTPS监听器关联的证书 ID。创建 HTTPS 监听器且证书来源为 cert_center 时必传。
-- `certificate_id` (String) HTTPS监听器关联的证书 ID。创建 HTTPS 监听器且证书来源为 alb 时必传。
-- `certificate_source` (String) HTTPS监听器关联的默认证书的来源，取值：alb：表示通过 ALB 上传的证书。cert_center：表示通过火山引擎证书中心购买或上传的 SSL 证书。pca_leaf：表示通过火山引擎证书中心购买或上传的私有叶子证书。
-- `customized_cfg_id` (String) 个性化配置ID，未绑定时值为空字符串。
-- `description` (String) 监听器的描述。不能以http://或https://开头。必须以字母或中文开头，可包含数字、英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。） 。长度限制为1 ～ 255个字符。不填默认为空字符串。
-- `domain_extensions` (Attributes Set) HTTPS监听器关联的扩展域名列表。一个HTTPS监听器能关联的扩展域名上限为20个。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--domain_extensions))
-- `enable_http_2` (String) HTTP2.0 特性开关，该参数仅对 HTTPS 监听器有效。取值如下：on：开启。off：关闭（默认）。
-- `enable_quic` (String) QUIC 特性开关，该参数仅对 HTTPS 监听器有效，取值如下：on：开启。off：关闭（默认）。只有标准版 ALB 实例支持 QUIC。
-- `enabled` (String) 监听器开启/关闭，取值如下：on：开启（默认）。off：关闭。
-- `listener_name` (String) 监听器的名字。不填写时以“协议-端口”格式命名。不能以http://或https://开头。必须以字母或中文开头，可包含数字、点（.）、下划线（_）和短横线（-）。长度限制在1-128字符之间。
-- `pca_leaf_certificate_id` (String) HTTPS监听器关联的私有叶子证书 ID。创建 HTTPS 监听器且证书来源为 pca_leaf 时必传。
-- `pca_root_ca_certificate_id` (String) HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_root 时，必须指定 PcaRootCACertificateId 参数。
-- `pca_sub_ca_certificate_id` (String) HTTPS 监听器关联的 CA 证书 ID。该参数用于 HTTPS 监听器的双向认证。当证书来源是 pca_sub 时，必须指定 PcaSubCACertificateId 参数。
-- `server_groups` (Attributes Set) 关联监听器的所有服务器组。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--server_groups))
-- `tags` (Attributes Set) 监听器所属标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `access_log_record_customized_headers_enabled` (String) Whether the listener has enabled the 'Log custom header in access logs' feature: on: Feature is enabled. off: Feature is not enabled.
+- `acl_ids` (Set of String) Access control policy group ID bound to the listener. When the AclStatus parameter is set to on, AclIds is required.
+- `acl_status` (String) Enable access control. Values: on: enabled. off: disabled (default).
+- `acl_type` (String) Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.
+- `ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication in HTTPS listeners. If the certificate source is alb, you must specify the CACertificateId parameter.
+- `ca_certificate_source` (String) Source of the CA certificate associated with the HTTPS listener, used for mutual authentication. alb (default): Certificate uploaded via ALB. Standard ALB instances do not support certificates from this source. pca_root: Private root CA certificate purchased or uploaded via Volcano Engine Certificate Center. pca_sub: Private subordinate CA certificate purchased or uploaded via Volcano Engine Certificate Center.
+- `cert_center_certificate_id` (String) Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener with the certificate source set to cert_center.
+- `certificate_id` (String) Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is alb.
+- `certificate_source` (String) The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.
+- `customized_cfg_id` (String) Personalized configuration ID. If not bound, the value is an empty string.
+- `description` (String) Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.
+- `domain_extensions` (Attributes Set) List of additional domain names associated with the HTTPS listener. A single HTTPS listener can be associated with up to 20 additional domain names.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--domain_extensions))
+- `enable_http_2` (String) HTTP2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default).
+- `enable_quic` (String) QUIC feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default). Only standard ALB instances support QUIC.
+- `enabled` (String) Listener on/off status. Values: on: On (default). off: Off.
+- `listener_name` (String) Listener name. If not specified, named in the format 'protocol-port'. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, dot (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters.
+- `pca_leaf_certificate_id` (String) Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.
+- `pca_root_ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.
+- `pca_sub_ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.
+- `server_groups` (Attributes Set) All server groups associated with the listener.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--server_groups))
+- `tags` (Attributes Set) Listener tags.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `created_time` (String) 监听器的创建时间。
+- `created_time` (String) Listener creation time.
 - `id` (String) Uniquely identifies the resource.
-- `listener_id` (String) 监听器 ID。
-- `project_name` (String) 监听器所属项目名称。
-- `status` (String) 监听器的状态。取值如下：Creating：创建中。Active： 运行中。Pending： 变配中。Disabled：已停止。Deleting：删除中。
-- `updated_time` (String) 监听器最近一次的操作时间。
+- `listener_id` (String) Listener ID.
+- `project_name` (String) Name of the project to which the listener belongs.
+- `status` (String) Listener status. Values: Creating: Creating. Active: Running. Pending: Changing configuration. Disabled: Stopped. Deleting: Deleting.
+- `updated_time` (String) Time of the listener's most recent operation.
 
 <a id="nestedatt--domain_extensions"></a>
 ### Nested Schema for `domain_extensions`
 
 Optional:
 
-- `cert_center_certificate_id` (String) 域名使用的服务器证书 ID 。当证书来源为 cert_center 时生效。
-- `certificate_id` (String) 域名使用的服务器证书 ID。当证书来源为 alb 时生效。
-- `certificate_source` (String) 域名使用的服务器证书的来源，取值：alb：表示通过 ALB 上传的证书。cert_center：表示通过火山引擎证书中心购买或上传的 SSL 证书。
-- `domain` (String) 域名。通常不能为空，若实例支持自动选择扩展证书，即SniAutoMatch为on，则Domain需传入空字符串。需至少包含一个‘.’，且不允许以‘.’开头或结尾。仅允许包含小写字、字、‘.’、‘-‘、‘*’。长度限制为1 ～ 128个字符。泛域名：使用“*”代替1个或多个字符。“*”必须在域名开头或结尾。同一条域名中“*”不能出现两次。“*”前后不能有除了.以外的字符。精确域名：符合域名规范的精确域名。同一HTTPS监听器下的域名不能重复。匹配域名时，对域名的大小写不敏感。
-- `pca_leaf_certificate_id` (String) HTTPS监听器关联的私有叶子证书 ID。创建 HTTPS 监听器且证书来源为 pca_leaf 时必传。
-- `san` (String) 若实例支持自动选择扩展证书，即SniAutoMatch为on时，则Domain是空字符串。San为证书的扩展域名，用英文,分隔多个域名。
+- `cert_center_certificate_id` (String) Server certificate ID used by the domain. Effective when the certificate source is cert_center.
+- `certificate_id` (String) Server certificate ID used by the domain. Effective when the certificate source is alb.
+- `certificate_source` (String) Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center.
+- `domain` (String) Domain name. Usually cannot be empty. If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain must be an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length must be between 1 and 128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters except '.' can be before or after '*'. Exact domain: a domain name that meets domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain matching is case-insensitive.
+- `pca_leaf_certificate_id` (String) Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.
+- `san` (String) If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.
 
 
 <a id="nestedatt--server_groups"></a>
@@ -111,8 +111,8 @@ Optional:
 
 Optional:
 
-- `server_group_id` (String) 服务器组 ID 。
-- `server_group_name` (String) 服务器组名称。
+- `server_group_id` (String) Server group ID.
+- `server_group_name` (String) Server group name.
 
 
 <a id="nestedatt--tags"></a>
@@ -120,8 +120,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 用户标签的标签键。具体规则如下：长度限制为1～128个字符。大小写敏感。不能以volc:的任意大小写组合开头。不能以空格开头或结尾。允许包含各国语言文字、数字、空格）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复。
-- `value` (String) 用户标签的标签值。具体规则如下：长度限制为0～256个字符。大小写敏感。不能以空格开头或结尾。允许包含各国语言文字、数字、空格（）、下划线（_）、点号（.）、半角冒（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。
+- `key` (String) Tag key for user tags. Rules are as follows: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.
+- `value` (String) The value of the user tag. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.
 
 ## Import
 

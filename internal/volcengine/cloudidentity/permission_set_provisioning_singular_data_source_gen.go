@@ -26,77 +26,77 @@ func permissionSetProvisioningDataSource(ctx context.Context) (datasource.DataSo
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionSetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集 ID。",
+		//	  "description": "Permission set ID",
 		//	  "type": "string"
 		//	}
 		"permission_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集 ID。",
+			Description: "Permission set ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionSetName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集名。",
+		//	  "description": "Permission set name",
 		//	  "type": "string"
 		//	}
 		"permission_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集名。",
+			Description: "Permission set name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProvisioningStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "权限集状态 Running：运行中,Reprovision Required：需要重新部署,Provision Failed：部署失败,Provisioned：已部署",
+		//	  "description": "Permission set status Running: In progress, Reprovision Required: Redeployment required, Provision Failed: Deployment failed, Provisioned: Deployed",
 		//	  "type": "string"
 		//	}
 		"provisioning_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "权限集状态 Running：运行中,Reprovision Required：需要重新部署,Provision Failed：部署失败,Provisioned：已部署",
+			Description: "Permission set status Running: In progress, Reprovision Required: Redeployment required, Provision Failed: Deployment failed, Provisioned: Deployed",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TargetId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "授权的账号 ID。",
+		//	  "description": "Authorized account ID",
 		//	  "type": "string"
 		//	}
 		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "授权的账号 ID。",
+			Description: "Authorized account ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TargetName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号名。",
+		//	  "description": "Account name",
 		//	  "type": "string"
 		//	}
 		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "账号名。",
+			Description: "Account name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

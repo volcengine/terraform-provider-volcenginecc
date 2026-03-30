@@ -35,11 +35,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启自动续费，取值如下：true：开启自动续费。false：关闭自动续费。",
+		//	  "description": "Enable auto-renewal. Possible values: true: Enable auto-renewal. false: Disable auto-renewal.",
 		//	  "type": "string"
 		//	}
 		"auto_renew": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启自动续费，取值如下：true：开启自动续费。false：关闭自动续费。",
+			Description: "Enable auto-renewal. Possible values: true: Enable auto-renewal. false: Disable auto-renewal.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -52,11 +52,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "购买时长的单位，取值如下：MONTHLY：按月购买。YEARLY：按年购买。",
+		//	  "description": "Unit of purchase duration. Options: MONTHLY—monthly subscription; YEARLY—yearly subscription",
 		//	  "type": "string"
 		//	}
 		"billing_period": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "购买时长的单位，取值如下：MONTHLY：按月购买。YEARLY：按年购买。",
+			Description: "Unit of purchase duration. Options: MONTHLY—monthly subscription; YEARLY—yearly subscription",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -69,7 +69,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的计费方式，取值如下：POST：按量计费。MIX：包年包月。",
+		//	  "description": "Instance billing method. Options: POST—pay-as-you-go; MIX—yearly/monthly subscription",
 		//	  "enum": [
 		//	    "POST",
 		//	    "MIX"
@@ -77,7 +77,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"billing_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的计费方式，取值如下：POST：按量计费。MIX：包年包月。",
+			Description: "Instance billing method. Options: POST—pay-as-you-go; MIX—yearly/monthly subscription",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -93,11 +93,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的创建时间。",
+		//	  "description": "Instance creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的创建时间。",
+			Description: "Instance creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -107,11 +107,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的描述语句。",
+		//	  "description": "Instance description",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的描述语句。",
+			Description: "Instance description",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -123,11 +123,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例是否开启公网访问。如果需要开启公网访问，请配置相同地域的公网 IP 的 ID。",
+		//	  "description": "Whether public access is enabled for the instance. If public access is required, configure the ID of a public IP in the same region",
 		//	  "type": "string"
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例是否开启公网访问。如果需要开启公网访问，请配置相同地域的公网 IP 的 ID。",
+			Description: "Whether public access is enabled for the instance. If public access is required, configure the ID of a public IP in the same region",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -140,49 +140,49 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所有接入点响应数据。",
+		//	  "description": "Response data for all instance endpoints",
 		//	  "properties": {
 		//	    "Overlay": {
-		//	      "description": "实例私网访问接入点响应数据。",
+		//	      "description": "Instance private network access endpoint response data",
 		//	      "properties": {
 		//	        "Address": {
-		//	          "description": "域名映射地址。",
+		//	          "description": "Domain mapping address",
 		//	          "type": "string"
 		//	        },
 		//	        "EipId": {
-		//	          "description": "实例绑定的EIP的ID。",
+		//	          "description": "ID of the EIP bound to the instance",
 		//	          "type": "string"
 		//	        },
 		//	        "Plain": {
-		//	          "description": "私网Plain接入点。",
+		//	          "description": "Private network Plain access point",
 		//	          "type": "string"
 		//	        },
 		//	        "PlainPort": {
-		//	          "description": "普通接入点端口。",
+		//	          "description": "Standard endpoint port",
 		//	          "type": "integer"
 		//	        },
 		//	        "Sasl": {
-		//	          "description": "私网SASL认证接入点。",
+		//	          "description": "Private network SASL authentication access point",
 		//	          "type": "string"
 		//	        },
 		//	        "SaslPort": {
-		//	          "description": "认证接入点端口。",
+		//	          "description": "Authentication endpoint port",
 		//	          "type": "integer"
 		//	        },
 		//	        "Ssl": {
-		//	          "description": "加密接入点。",
+		//	          "description": "Encrypted endpoint",
 		//	          "type": "string"
 		//	        },
 		//	        "SslPort": {
-		//	          "description": "加密接入点端口。",
+		//	          "description": "Encrypted endpoint port",
 		//	          "type": "integer"
 		//	        },
 		//	        "Status": {
-		//	          "description": "接入点状态。",
+		//	          "description": "Endpoint status",
 		//	          "type": "string"
 		//	        },
 		//	        "VpcIds": {
-		//	          "description": "售卖区网络关联的VPC ID列表。",
+		//	          "description": "List of VPC IDs associated with the sales zone network",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -194,46 +194,46 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Public": {
-		//	      "description": "实例公网访问接入点响应数据。",
+		//	      "description": "Instance public access endpoint response data",
 		//	      "properties": {
 		//	        "Address": {
-		//	          "description": "域名映射地址。",
+		//	          "description": "Domain mapping address",
 		//	          "type": "string"
 		//	        },
 		//	        "EipId": {
-		//	          "description": "实例绑定的EIP的ID。",
+		//	          "description": "ID of the EIP bound to the instance",
 		//	          "type": "string"
 		//	        },
 		//	        "Plain": {
-		//	          "description": "私网Plain接入点。",
+		//	          "description": "Private network Plain access point",
 		//	          "type": "string"
 		//	        },
 		//	        "PlainPort": {
-		//	          "description": "普通接入点端口。",
+		//	          "description": "Standard endpoint port",
 		//	          "type": "integer"
 		//	        },
 		//	        "Sasl": {
-		//	          "description": "私网SASL认证接入点。",
+		//	          "description": "Private network SASL authentication access point",
 		//	          "type": "string"
 		//	        },
 		//	        "SaslPort": {
-		//	          "description": "认证接入点端口。",
+		//	          "description": "Authentication endpoint port",
 		//	          "type": "integer"
 		//	        },
 		//	        "Ssl": {
-		//	          "description": "加密接入点。",
+		//	          "description": "Encrypted endpoint",
 		//	          "type": "string"
 		//	        },
 		//	        "SslPort": {
-		//	          "description": "加密接入点端口。",
+		//	          "description": "Encrypted endpoint port",
 		//	          "type": "integer"
 		//	        },
 		//	        "Status": {
-		//	          "description": "接入点状态。",
+		//	          "description": "Endpoint status",
 		//	          "type": "string"
 		//	        },
 		//	        "VpcIds": {
-		//	          "description": "售卖区网络关联的VPC ID列表。",
+		//	          "description": "List of VPC IDs associated with the sales zone network",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -254,7 +254,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Address
 						"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "域名映射地址。",
+							Description: "Domain mapping address",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -262,7 +262,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: EipId
 						"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "实例绑定的EIP的ID。",
+							Description: "ID of the EIP bound to the instance",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -270,7 +270,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Plain
 						"plain": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "私网Plain接入点。",
+							Description: "Private network Plain access point",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -278,7 +278,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: PlainPort
 						"plain_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "普通接入点端口。",
+							Description: "Standard endpoint port",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -286,7 +286,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Sasl
 						"sasl": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "私网SASL认证接入点。",
+							Description: "Private network SASL authentication access point",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -294,7 +294,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SaslPort
 						"sasl_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "认证接入点端口。",
+							Description: "Authentication endpoint port",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -302,7 +302,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Ssl
 						"ssl": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "加密接入点。",
+							Description: "Encrypted endpoint",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -310,7 +310,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SslPort
 						"ssl_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "加密接入点端口。",
+							Description: "Encrypted endpoint port",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -318,7 +318,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Status
 						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "接入点状态。",
+							Description: "Endpoint status",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -327,7 +327,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: VpcIds
 						"vpc_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "售卖区网络关联的VPC ID列表。",
+							Description: "List of VPC IDs associated with the sales zone network",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -335,7 +335,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "实例私网访问接入点响应数据。",
+					Description: "Instance private network access endpoint response data",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -347,7 +347,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Address
 						"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "域名映射地址。",
+							Description: "Domain mapping address",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -355,7 +355,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: EipId
 						"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "实例绑定的EIP的ID。",
+							Description: "ID of the EIP bound to the instance",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -364,7 +364,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Plain
 						"plain": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "私网Plain接入点。",
+							Description: "Private network Plain access point",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -372,7 +372,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: PlainPort
 						"plain_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "普通接入点端口。",
+							Description: "Standard endpoint port",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -380,7 +380,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Sasl
 						"sasl": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "私网SASL认证接入点。",
+							Description: "Private network SASL authentication access point",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -388,7 +388,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SaslPort
 						"sasl_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "认证接入点端口。",
+							Description: "Authentication endpoint port",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -396,7 +396,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Ssl
 						"ssl": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "加密接入点。",
+							Description: "Encrypted endpoint",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -404,7 +404,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SslPort
 						"ssl_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "加密接入点端口。",
+							Description: "Encrypted endpoint port",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -412,7 +412,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Status
 						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "接入点状态。",
+							Description: "Endpoint status",
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -421,14 +421,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: VpcIds
 						"vpc_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "售卖区网络关联的VPC ID列表。",
+							Description: "List of VPC IDs associated with the sales zone network",
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 								setplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "实例公网访问接入点响应数据。",
+					Description: "Instance public access endpoint response data",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -436,7 +436,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例所有接入点响应数据。",
+			Description: "Response data for all instance endpoints",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -447,11 +447,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例过期时间。",
+		//	  "description": "Instance expiration time",
 		//	  "type": "string"
 		//	}
 		"expiration_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例过期时间。",
+			Description: "Instance expiration time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -461,11 +461,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例消费组数量上限。",
+		//	  "description": "Maximum number of consumer groups per instance",
 		//	  "type": "integer"
 		//	}
 		"group_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例消费组数量上限。",
+			Description: "Maximum number of consumer groups per instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -475,11 +475,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例ID。",
+			Description: "Instance ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -489,11 +489,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例下所有 Topic 的消息保留时长，单位为小时。",
+		//	  "description": "Message retention period for all Topics under the instance, in hours",
 		//	  "type": "integer"
 		//	}
 		"message_retention": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例下所有 Topic 的消息保留时长，单位为小时。",
+			Description: "Message retention period for all Topics under the instance, in hours",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -504,13 +504,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "自定设置 BMQ 实例的名称，约束限制如下：由小写字母、数字和中划线（-）组成。长度为 1~64 字符。",
+		//	  "description": "Custom BMQ instance name. Constraints: must consist of lowercase letters, numbers, and hyphens (-). Length: 1–64 characters",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "自定设置 BMQ 实例的名称，约束限制如下：由小写字母、数字和中划线（-）组成。长度为 1~64 字符。",
+			Description: "Custom BMQ instance name. Constraints: must consist of lowercase letters, numbers, and hyphens (-). Length: 1–64 characters",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
@@ -523,11 +523,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例分区数量上限。",
+		//	  "description": "Maximum number of partitions per instance",
 		//	  "type": "integer"
 		//	}
 		"partition_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例分区数量上限。",
+			Description: "Maximum number of partitions per instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -537,11 +537,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所属项目名称。",
+		//	  "description": "Project name associated with the instance",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所属项目名称。",
+			Description: "Project name associated with the instance",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -551,25 +551,25 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例资源标签列表。",
+		//	  "description": "Instance resource tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "TagKvs": {
-		//	        "description": "标签键值对。",
+		//	        "description": "Tag key-value pair",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "Key": {
-		//	              "description": "标签键。",
+		//	              "description": "Tag key",
 		//	              "type": "string"
 		//	            },
 		//	            "Type": {
-		//	              "description": "实例标签的类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+		//	              "description": "Type of instance tag. Options: CUSTOM—custom tag; SYSTEM—system tag",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "description": "标签值。",
+		//	              "description": "Tag value",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -582,7 +582,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Type": {
-		//	        "description": "标签类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+		//	        "description": "Tag type. Options: CUSTOM—custom tag; SYSTEM—system tag",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -600,32 +600,32 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "标签键。",
+									Description: "Tag key",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Type
 								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "实例标签的类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+									Description: "Type of instance tag. Options: CUSTOM—custom tag; SYSTEM—system tag",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "标签值。",
+									Description: "Tag value",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "标签键值对。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Tag key-value pair\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+						Description: "Tag type. Options: CUSTOM—custom tag; SYSTEM—system tag",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例资源标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Instance resource tag list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -635,18 +635,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例资源统计响应数据。",
+		//	  "description": "Instance resource statistics response data",
 		//	  "properties": {
 		//	    "Storage": {
-		//	      "description": "资源统计响应数据。",
+		//	      "description": "Resource statistics response data",
 		//	      "properties": {
 		//	        "Size": {
-		//	          "description": "资源大小。",
+		//	          "description": "Resource size",
 		//	          "format": "int64",
 		//	          "type": "integer"
 		//	        },
 		//	        "Unit": {
-		//	          "description": "资源单位。",
+		//	          "description": "Resource unit",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -662,20 +662,20 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "资源大小。",
+							Description: "Resource size",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Unit
 						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "资源单位。",
+							Description: "Resource unit",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "资源统计响应数据。",
+					Description: "Resource statistics response data",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "实例资源统计响应数据。",
+			Description: "Instance resource statistics response data",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -685,7 +685,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例使用安全组列表。",
+		//	  "description": "Security group list used by the instance",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -695,7 +695,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"security_group_id_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例使用安全组列表。",
+			Description: "Security group list used by the instance",
 			Required:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.RequiresReplace(),
@@ -705,11 +705,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例规格。",
+		//	  "description": "Instance specification",
 		//	  "type": "string"
 		//	}
 		"specification": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例规格。",
+			Description: "Instance specification",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -719,11 +719,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例的状态。取值如下：INITIALIZING：初始化中，INITIALIZATION_FAILED：初始化失败，RUNNING：运行中，MODIFYING：更新中，MODIFY_FAILED：更新失败，RELEASING：释放中，STOPPING：停止中，STOPPED：停止，RECOVERING：恢复中，EXCEPTION：异常，CAPACITY_EXPAXION_FAILED：扩容失败，EXPANDING_CAPACITY：扩容中，CANCEL_EXPANDING_CAPACITY：扩容取消中，RESTARTING：重启中，UNPAID：未支付",
+		//	  "description": "Instance status. Possible values: INITIALIZING: Initializing, INITIALIZATION_FAILED: Initialization failed, RUNNING: Running, MODIFYING: Updating, MODIFY_FAILED: Update failed, RELEASING: Releasing, STOPPING: Stopping, STOPPED: Stopped, RECOVERING: Recovering, EXCEPTION: Exception, CAPACITY_EXPAXION_FAILED: Capacity expansion failed, EXPANDING_CAPACITY: Expanding capacity, CANCEL_EXPANDING_CAPACITY: Canceling capacity expansion, RESTARTING: Restarting, UNPAID: Unpaid",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例的状态。取值如下：INITIALIZING：初始化中，INITIALIZATION_FAILED：初始化失败，RUNNING：运行中，MODIFYING：更新中，MODIFY_FAILED：更新失败，RELEASING：释放中，STOPPING：停止中，STOPPED：停止，RECOVERING：恢复中，EXCEPTION：异常，CAPACITY_EXPAXION_FAILED：扩容失败，EXPANDING_CAPACITY：扩容中，CANCEL_EXPANDING_CAPACITY：扩容取消中，RESTARTING：重启中，UNPAID：未支付",
+			Description: "Instance status. Possible values: INITIALIZING: Initializing, INITIALIZATION_FAILED: Initialization failed, RUNNING: Running, MODIFYING: Updating, MODIFY_FAILED: Update failed, RELEASING: Releasing, STOPPING: Stopping, STOPPED: Stopped, RECOVERING: Recovering, EXCEPTION: Exception, CAPACITY_EXPAXION_FAILED: Capacity expansion failed, EXPANDING_CAPACITY: Expanding capacity, CANCEL_EXPANDING_CAPACITY: Canceling capacity expansion, RESTARTING: Restarting, UNPAID: Unpaid",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -733,7 +733,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例使用的子网列表。",
+		//	  "description": "Subnet list used by the instance",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -743,7 +743,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subnet_id_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例使用的子网列表。",
+			Description: "Subnet list used by the instance",
 			Required:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.RequiresReplace(),
@@ -753,20 +753,20 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例资源标签列表。",
+		//	  "description": "Instance resource tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "实例标签的类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+		//	        "description": "Type of instance tag. Options: CUSTOM—custom tag; SYSTEM—system tag",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -783,7 +783,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -795,7 +795,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "实例标签的类型，取值如下：CUSTOM：自定义设置标签。SYSTEM：系统标签。",
+						Description: "Type of instance tag. Options: CUSTOM—custom tag; SYSTEM—system tag",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -804,7 +804,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -813,7 +813,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "实例资源标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Instance resource tag list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -824,11 +824,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包年包月类型实例的购买时长，单位为月。",
+		//	  "description": "Purchase duration for yearly/monthly subscription instances, in months",
 		//	  "type": "integer"
 		//	}
 		"times": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "包年包月类型实例的购买时长，单位为月。",
+			Description: "Purchase duration for yearly/monthly subscription instances, in months",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -841,11 +841,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例Topic数量上限。",
+		//	  "description": "Maximum number of Topics per instance",
 		//	  "type": "integer"
 		//	}
 		"topic_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "实例Topic数量上限。",
+			Description: "Maximum number of Topics per instance",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -855,11 +855,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在VPC ID。",
+		//	  "description": "VPC ID where the instance is located",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例所在VPC ID。",
+			Description: "VPC ID where the instance is located",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -869,7 +869,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例所在可用区列表。",
+		//	  "description": "List of availability zones for the instance",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -879,7 +879,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"zone_id_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "实例所在可用区列表。",
+			Description: "List of availability zones for the instance",
 			Required:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.RequiresReplace(),
@@ -897,7 +897,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "云原生消息引擎 100% 兼容 Apache Kafka 协议，基于云原生的全托管、高吞吐、低时延、高可用、高可扩展性、高稳定性的分布式消息引擎服务，支持灵活动态扩缩容和流批一体计算，提供企业级大数据量级的实时流数据处理能力，帮助您构建数据处理的“中枢神经系统”，广泛应用于日志收集、数据聚合、离线数据分析等业务场景。",
+		Description: "The cloud-native messaging engine is 100% compatible with the Apache Kafka protocol. It offers a fully managed, high-throughput, low-latency, highly available, highly scalable, and highly stable distributed messaging engine service based on cloud-native architecture. Supports flexible and dynamic scaling, integrated stream and batch processing, and provides enterprise-grade real-time stream data processing capabilities for large-scale data. Helps you build the 'central nervous system' for data processing, widely used in scenarios such as log collection, data aggregation, and offline data analysis.",
 		Version:     1,
 		Attributes:  attributes,
 	}

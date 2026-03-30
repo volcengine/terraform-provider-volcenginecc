@@ -27,18 +27,18 @@ func nLBSecurityPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS 安全策略所属的账号ID。",
+		//	  "description": "Account ID associated with the TLS security policy",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TLS 安全策略所属的账号ID。",
+			Description: "Account ID associated with the TLS security policy",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ciphers
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS自定义安全策略的加密套件，不同的TLS协议版本支持的加密套件如下：TLSv1.0 \u0026 TLSv1.1：ECDHE-ECDSA-AES128-SHA，ECDHE-ECDSA-AES256-SHA，ECDHE-RSA-AES128-SHA，ECDHE-RSA-AES256-SHA，AES128-SHA，AES256-SHA，DES-CBC3-SHA。TLSv1.2：ECDHE-ECDSA-AES128-GCM-SHA256，ECDHE-ECDSA-AES256-GCM-SHA384，ECDHE-ECDSA-AES128-SHA256，ECDHE-ECDSA-AES256-SHA384，ECDHE-RSA-AES128-GCM-SHA256，ECDHE-RSA-AES256-GCM-SHA384，ECDHE-RSA-AES128-SHA256，ECDHE-RSA-AES256-SHA384，AES128-GCM-SHA256，AES256-GCM-SHA384，AES128-SHA256，AES256-SHA256。TLSv1.3：TLS_CHACHA20_POLY1305_SHA256，TLS_AES_256_GCM_SHA384，TLS_AES_128_GCM_SHA256，TLS_AES_128_CCM_8_SHA256，TLS_AES_128_CCM_SHA256，TLS_SM4_GCM_SM3，TLS_SM4_CCM_SM3。当传入此参数时，需要传入待支持的全部加密套件，不支持通过此接口仅新增/删除加密套件。仅传入Ciphers.N，未传入TlsVersions.N，则依据当前监听器支持的TLS 协议版本和请求中传入的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS 协议版本和加密套件做校验。TLS_SM4_GCM_SM3和TLS_SM4_CCM_SM3两个加密套件正在邀测中，如需试用，请联系客户经理。",
+		//	  "description": "Cipher suites for the TLS custom security policy. Supported cipher suites for different TLS protocol versions are as follows: TLSv1.0 \u0026 TLSv1.1: ECDHE-ECDSA-AES128-SHA, ECDHE-ECDSA-AES256-SHA, ECDHE-RSA-AES128-SHA, ECDHE-RSA-AES256-SHA, AES128-SHA, AES256-SHA, DES-CBC3-SHA. TLSv1.2: ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-ECDSA-AES128-SHA256, ECDHE-ECDSA-AES256-SHA384, ECDHE-RSA-AES128-GCM-SHA256, ECDHE-RSA-AES256-GCM-SHA384, ECDHE-RSA-AES128-SHA256, ECDHE-RSA-AES256-SHA384, AES128-GCM-SHA256, AES256-GCM-SHA384, AES128-SHA256, AES256-SHA256. TLSv1.3: TLS_CHACHA20_POLY1305_SHA256, TLS_AES_256_GCM_SHA384, TLS_AES_128_GCM_SHA256, TLS_AES_128_CCM_8_SHA256, TLS_AES_128_CCM_SHA256, TLS_SM4_GCM_SM3, TLS_SM4_CCM_SM3. When specifying this parameter, you must provide all supported cipher suites. Adding or removing cipher suites individually is not supported via this interface. If only Ciphers.N is provided and TlsVersions.N is not, validation is based on the TLS protocol versions supported by the current listener and the cipher suites specified in the request. If both TlsVersions.N and Ciphers.N are provided, validation is based on the TLS protocol versions and cipher suites specified in the request. TLS_SM4_GCM_SM3 and TLS_SM4_CCM_SM3 are currently in pilot testing. To request access, please contact your account manager",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -48,18 +48,18 @@ func nLBSecurityPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"ciphers": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "TLS自定义安全策略的加密套件，不同的TLS协议版本支持的加密套件如下：TLSv1.0 & TLSv1.1：ECDHE-ECDSA-AES128-SHA，ECDHE-ECDSA-AES256-SHA，ECDHE-RSA-AES128-SHA，ECDHE-RSA-AES256-SHA，AES128-SHA，AES256-SHA，DES-CBC3-SHA。TLSv1.2：ECDHE-ECDSA-AES128-GCM-SHA256，ECDHE-ECDSA-AES256-GCM-SHA384，ECDHE-ECDSA-AES128-SHA256，ECDHE-ECDSA-AES256-SHA384，ECDHE-RSA-AES128-GCM-SHA256，ECDHE-RSA-AES256-GCM-SHA384，ECDHE-RSA-AES128-SHA256，ECDHE-RSA-AES256-SHA384，AES128-GCM-SHA256，AES256-GCM-SHA384，AES128-SHA256，AES256-SHA256。TLSv1.3：TLS_CHACHA20_POLY1305_SHA256，TLS_AES_256_GCM_SHA384，TLS_AES_128_GCM_SHA256，TLS_AES_128_CCM_8_SHA256，TLS_AES_128_CCM_SHA256，TLS_SM4_GCM_SM3，TLS_SM4_CCM_SM3。当传入此参数时，需要传入待支持的全部加密套件，不支持通过此接口仅新增/删除加密套件。仅传入Ciphers.N，未传入TlsVersions.N，则依据当前监听器支持的TLS 协议版本和请求中传入的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS 协议版本和加密套件做校验。TLS_SM4_GCM_SM3和TLS_SM4_CCM_SM3两个加密套件正在邀测中，如需试用，请联系客户经理。",
+			Description: "Cipher suites for the TLS custom security policy. Supported cipher suites for different TLS protocol versions are as follows: TLSv1.0 & TLSv1.1: ECDHE-ECDSA-AES128-SHA, ECDHE-ECDSA-AES256-SHA, ECDHE-RSA-AES128-SHA, ECDHE-RSA-AES256-SHA, AES128-SHA, AES256-SHA, DES-CBC3-SHA. TLSv1.2: ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-ECDSA-AES128-SHA256, ECDHE-ECDSA-AES256-SHA384, ECDHE-RSA-AES128-GCM-SHA256, ECDHE-RSA-AES256-GCM-SHA384, ECDHE-RSA-AES128-SHA256, ECDHE-RSA-AES256-SHA384, AES128-GCM-SHA256, AES256-GCM-SHA384, AES128-SHA256, AES256-SHA256. TLSv1.3: TLS_CHACHA20_POLY1305_SHA256, TLS_AES_256_GCM_SHA384, TLS_AES_128_GCM_SHA256, TLS_AES_128_CCM_8_SHA256, TLS_AES_128_CCM_SHA256, TLS_SM4_GCM_SM3, TLS_SM4_CCM_SM3. When specifying this parameter, you must provide all supported cipher suites. Adding or removing cipher suites individually is not supported via this interface. If only Ciphers.N is provided and TlsVersions.N is not, validation is based on the TLS protocol versions supported by the current listener and the cipher suites specified in the request. If both TlsVersions.N and Ciphers.N are provided, validation is based on the TLS protocol versions and cipher suites specified in the request. TLS_SM4_GCM_SM3 and TLS_SM4_CCM_SM3 are currently in pilot testing. To request access, please contact your account manager",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -67,18 +67,18 @@ func nLBSecurityPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "TLS自定义安全策略所属项目的名称。不传则默认为defaul。",
+		//	  "description": "Name of the project to which the TLS custom security policy belongs. If not specified, defaults to default",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TLS自定义安全策略所属项目的名称。不传则默认为defaul。",
+			Description: "Name of the project to which the TLS custom security policy belongs. If not specified, defaults to default",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RelatedListenerIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS 安全策略关联的监听器。",
+		//	  "description": "Listener associated with the TLS security policy",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -88,57 +88,57 @@ func nLBSecurityPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"related_listener_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "TLS 安全策略关联的监听器。",
+			Description: "Listener associated with the TLS security policy",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityPolicyId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全策略ID。",
+		//	  "description": "Security policy ID",
 		//	  "type": "string"
 		//	}
 		"security_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全策略ID。",
+			Description: "Security policy ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityPolicyName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全策略名称。必须以字母、数字或中文开头，可包含以下特殊字符：点（.）、下划线（_）和中划线（-）；长度限制为1 ～ 128个字符；该参数不传入，则默认为策略ID。",
+		//	  "description": "Security policy name. Must start with a letter, number, or Chinese character, and can include the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If this parameter is not specified, defaults to the policy ID",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"security_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全策略名称。必须以字母、数字或中文开头，可包含以下特殊字符：点（.）、下划线（_）和中划线（-）；长度限制为1 ～ 128个字符；该参数不传入，则默认为策略ID。",
+			Description: "Security policy name. Must start with a letter, number, or Chinese character, and can include the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If this parameter is not specified, defaults to the policy ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "TLS 自定义安全策略状态。Creating：创建中。Configuring：配置中。Active：正常。Deleting：删除中。",
+		//	  "description": "TLS custom security policy status. Creating: Being created. Configuring: Being configured. Active: Active. Deleting: Being deleted.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TLS 自定义安全策略状态。Creating：创建中。Configuring：配置中。Active：正常。Deleting：删除中。",
+			Description: "TLS custom security policy status. Creating: Being created. Configuring: Being configured. Active: Active. Deleting: Being deleted.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -155,24 +155,24 @@ func nLBSecurityPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。",
+			Description: "Tag list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TlsVersions
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新TLS自定义安全策略的TLS 协议版本。取值：TLSv1.0，TLSv1.1，TLSv1.2，TLSv1.3。当传入此参数时，需要传入待支持的全部TLS版本，不支持通过此接口仅新增/删除TLS协议版本。仅传入TlsVersions.N，未传入Ciphers.N，则依据请求中传入的TLS协议版本和当前监听器支持的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS协议版本和加密套件做校验。",
+		//	  "description": "Update the TLS protocol versions for the TLS custom security policy. Valid values: TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3. When specifying this parameter, you must provide all supported TLS versions. Adding or removing TLS protocol versions individually is not supported via this interface. If only TlsVersions.N is provided and Ciphers.N is not, validation is based on the TLS protocol versions in the request and the cipher suites supported by the current listener. If both TlsVersions.N and Ciphers.N are provided, validation is based on the TLS protocol versions and cipher suites specified in the request",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -182,18 +182,18 @@ func nLBSecurityPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"tls_versions": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "更新TLS自定义安全策略的TLS 协议版本。取值：TLSv1.0，TLSv1.1，TLSv1.2，TLSv1.3。当传入此参数时，需要传入待支持的全部TLS版本，不支持通过此接口仅新增/删除TLS协议版本。仅传入TlsVersions.N，未传入Ciphers.N，则依据请求中传入的TLS协议版本和当前监听器支持的加密套件做校验。传入TlsVersions.N和Ciphers.N，则依据请求中传入的TLS协议版本和加密套件做校验。",
+			Description: "Update the TLS protocol versions for the TLS custom security policy. Valid values: TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3. When specifying this parameter, you must provide all supported TLS versions. Adding or removing TLS protocol versions individually is not supported via this interface. If only TlsVersions.N is provided and Ciphers.N is not, validation is based on the TLS protocol versions in the request and the cipher suites supported by the current listener. If both TlsVersions.N and Ciphers.N are provided, validation is based on the TLS protocol versions and cipher suites specified in the request",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

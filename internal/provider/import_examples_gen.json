@@ -808,5 +808,25 @@
         "resource": "volcenginecc_emr_node_group",
         "identifier": ["ClusterId","NodeGroupId"],
         "path": "./examples/resources/volcenginecc_emr_node_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vefaas_function",
+        "identifier": ["FunctionId"],
+        "path": "./examples/resources/volcenginecc_vefaas_function/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cen_grant_instance",
+        "identifier": ["InstanceId","CenId"],
+        "path": "./examples/resources/volcenginecc_cen_grant_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpn_vpn_connection",
+        "identifier": ["VpnConnectionId"],
+        "path": "./examples/resources/volcenginecc_vpn_vpn_connection/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatezone_user_vpc_authorization",
+        "identifier": ["AccountID"],
+        "path": "./examples/resources/volcenginecc_privatezone_user_vpc_authorization/import.sh"
     }
 ]

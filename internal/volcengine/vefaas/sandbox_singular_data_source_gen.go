@@ -26,50 +26,50 @@ func sandboxDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例所在可用区 ID。",
+		//	  "description": "Availability zone ID of the sandbox instance",
 		//	  "type": "string"
 		//	}
 		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例所在可用区 ID。",
+			Description: "Availability zone ID of the sandbox instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CpuMilli
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例 CPU 规格：单位：milli cpu取值范围：250~16000,默认值：1000。",
+		//	  "description": "Sandbox instance CPU specification: Unit: milli CPU, range: 250~16000, default: 1000",
 		//	  "maximum": 16000,
 		//	  "type": "integer"
 		//	}
 		"cpu_milli": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例 CPU 规格：单位：milli cpu取值范围：250~16000,默认值：1000。",
+			Description: "Sandbox instance CPU specification: Unit: milli CPU, range: 250~16000, default: 1000",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例创建时间。",
+		//	  "description": "Sandbox instance creation time.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例创建时间。",
+			Description: "Sandbox instance creation time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Envs
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例环境变量。",
+		//	  "description": "Sandbox instance environment variables",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "环境变量键。",
+		//	        "description": "Environment variable key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "环境变量值。",
+		//	        "description": "Environment variable value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -87,83 +87,83 @@ func sandboxDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "环境变量键。",
+						Description: "Environment variable key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "环境变量值。",
+						Description: "Environment variable value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "沙箱实例环境变量。",
+			Description: "Sandbox instance environment variables",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ErrorCode
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例启动失败错误码。参数值说明：internal_load_request_error：系统内部错误，function_initialize_failed：业务进程初始化错误，function_health_check_failed：健康检查错误，route_terminating：路由删除中，正常启动沙箱实例时，该字段为空。",
+		//	  "description": "Sandbox instance startup failure error code. Parameter description: internal_load_request_error: internal system error, function_initialize_failed: business process initialization error, function_health_check_failed: health check error, route_terminating: route deletion in progress. This field is empty when the sandbox instance starts normally",
 		//	  "type": "string"
 		//	}
 		"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例启动失败错误码。参数值说明：internal_load_request_error：系统内部错误，function_initialize_failed：业务进程初始化错误，function_health_check_failed：健康检查错误，route_terminating：路由删除中，正常启动沙箱实例时，该字段为空。",
+			Description: "Sandbox instance startup failure error code. Parameter description: internal_load_request_error: internal system error, function_initialize_failed: business process initialization error, function_health_check_failed: health check error, route_terminating: route deletion in progress. This field is empty when the sandbox instance starts normally",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ErrorMessage
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例启动失败的错误码详情。正常启动沙箱实例时，该字段为空。",
+		//	  "description": "Details of the error code when the sandbox instance fails to start. This field is empty when the sandbox instance starts normally.",
 		//	  "type": "string"
 		//	}
 		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例启动失败的错误码详情。正常启动沙箱实例时，该字段为空。",
+			Description: "Details of the error code when the sandbox instance fails to start. This field is empty when the sandbox instance starts normally.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpireAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例存活时长。",
+		//	  "description": "Sandbox instance uptime.",
 		//	  "type": "string"
 		//	}
 		"expire_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例存活时长。",
+			Description: "Sandbox instance uptime.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例所属的沙箱应用 ID。",
+		//	  "description": "Sandbox application ID to which the sandbox instance belongs",
 		//	  "type": "string"
 		//	}
 		"function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例所属的沙箱应用 ID。",
+			Description: "Sandbox application ID to which the sandbox instance belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceImageInfo
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例镜像信息，包括镜像地址、启动命令、监听端口。",
+		//	  "description": "Sandbox instance image information, including image address, startup command, and listening port.",
 		//	  "properties": {
 		//	    "Command": {
-		//	      "description": "沙箱实例程序的启动命令。如需指定脚本文件，请使用绝对路径，并确保脚本具有相应的可执行权限。",
+		//	      "description": "Startup command for the sandbox instance program. To specify a script file, use an absolute path and ensure the script has executable permissions",
 		//	      "type": "string"
 		//	    },
 		//	    "Image": {
-		//	      "description": "沙箱实例使用的已预热镜像地址。",
+		//	      "description": "Preheated image address used by the sandbox instance",
 		//	      "type": "string"
 		//	    },
 		//	    "ImageId": {
-		//	      "description": "沙箱实例使用的已预热镜像 ID。",
+		//	      "description": "Pre-warmed image ID used by the sandbox instance.",
 		//	      "type": "string"
 		//	    },
 		//	    "Port": {
-		//	      "description": "沙箱实例镜像监听端口。",
+		//	      "description": "Listening port of the sandbox instance image.",
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -173,49 +173,49 @@ func sandboxDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Command
 				"command": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "沙箱实例程序的启动命令。如需指定脚本文件，请使用绝对路径，并确保脚本具有相应的可执行权限。",
+					Description: "Startup command for the sandbox instance program. To specify a script file, use an absolute path and ensure the script has executable permissions",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Image
 				"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "沙箱实例使用的已预热镜像地址。",
+					Description: "Preheated image address used by the sandbox instance",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ImageId
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "沙箱实例使用的已预热镜像 ID。",
+					Description: "Pre-warmed image ID used by the sandbox instance.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Port
 				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "沙箱实例镜像监听端口。",
+					Description: "Listening port of the sandbox instance image.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "沙箱实例镜像信息，包括镜像地址、启动命令、监听端口。",
+			Description: "Sandbox instance image information, including image address, startup command, and listening port.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceTosMountConfig
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例级别对象存储（TOS）存储挂载配置。",
+		//	  "description": "Instance-level object storage (TOS) mount configuration for the sandbox instance",
 		//	  "properties": {
 		//	    "Enable": {
-		//	      "description": "沙箱实例是否启用了实例级别的 TOS 挂载，参数值说明：true：是，false：否。",
+		//	      "description": "Whether instance-level TOS mount is enabled for the sandbox instance. Parameter description: true: yes, false: no",
 		//	      "type": "boolean"
 		//	    },
 		//	    "TosMountPoints": {
-		//	      "description": "启用了实例级别 TOS 挂载的沙箱实例具体 TOS 挂载目录信息。",
+		//	      "description": "Detailed TOS mount directory information for sandbox instances with instance-level TOS mount enabled",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "BucketPath": {
-		//	            "description": "沙箱实例挂载的 TOS 远端目录。",
+		//	            "description": "TOS remote directory mounted by the sandbox instance",
 		//	            "type": "string"
 		//	          },
 		//	          "LocalMountPath": {
-		//	            "description": "沙箱实例挂载的 TOS 存储桶本地目录。该目录为沙箱应用已配置的 TOS 存储挂载的本地目录时，系统根据指定的本地目录，修改与之对应的 TOS BucketPath。",
+		//	            "description": "Local directory of the TOS bucket mounted by the sandbox instance. If this directory is the local directory configured for TOS storage mount in the sandbox application, the system modifies the corresponding TOS BucketPath based on the specified local directory",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -239,7 +239,7 @@ func sandboxDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enable
 				"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "沙箱实例是否启用了实例级别的 TOS 挂载，参数值说明：true：是，false：否。",
+					Description: "Whether instance-level TOS mount is enabled for the sandbox instance. Parameter description: true: yes, false: no",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TosMountPoints
@@ -248,72 +248,72 @@ func sandboxDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: BucketPath
 							"bucket_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "沙箱实例挂载的 TOS 远端目录。",
+								Description: "TOS remote directory mounted by the sandbox instance",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: LocalMountPath
 							"local_mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "沙箱实例挂载的 TOS 存储桶本地目录。该目录为沙箱应用已配置的 TOS 存储挂载的本地目录时，系统根据指定的本地目录，修改与之对应的 TOS BucketPath。",
+								Description: "Local directory of the TOS bucket mounted by the sandbox instance. If this directory is the local directory configured for TOS storage mount in the sandbox application, the system modifies the corresponding TOS BucketPath based on the specified local directory",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "启用了实例级别 TOS 挂载的沙箱实例具体 TOS 挂载目录信息。",
+					Description: "Detailed TOS mount directory information for sandbox instances with instance-level TOS mount enabled",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "沙箱实例级别对象存储（TOS）存储挂载配置。",
+			Description: "Instance-level object storage (TOS) mount configuration for the sandbox instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例类型 。参数值说明：elastic：弹性实例，frozen：冻结实例，activated：激活实例，reserved：预留实例。",
+		//	  "description": "Sandbox instance type. Parameter description: elastic: elastic instance, frozen: frozen instance, activated: activated instance, reserved: reserved instance",
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例类型 。参数值说明：elastic：弹性实例，frozen：冻结实例，activated：激活实例，reserved：预留实例。",
+			Description: "Sandbox instance type. Parameter description: elastic: elastic instance, frozen: frozen instance, activated: activated instance, reserved: reserved instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxConcurrency
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "单实例请求最大并发数：取值范围：10~1000,默认值：100。",
+		//	  "description": "Maximum concurrent requests per instance: range: 10~1000, default: 100",
 		//	  "maximum": 1000,
 		//	  "type": "integer"
 		//	}
 		"max_concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "单实例请求最大并发数：取值范围：10~1000,默认值：100。",
+			Description: "Maximum concurrent requests per instance: range: 10~1000, default: 100",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MemoryMB
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例内存规格：单位：MiB，取值范围：512~131072，默认值：2048",
+		//	  "description": "Sandbox instance memory specification: Unit: MiB, range: 512~131072, default: 2048",
 		//	  "maximum": 131072,
 		//	  "type": "integer"
 		//	}
 		"memory_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例内存规格：单位：MiB，取值范围：512~131072，默认值：2048",
+			Description: "Sandbox instance memory specification: Unit: MiB, range: 512~131072, default: 2048",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Metadata
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例标签（Label）元信息，用于标记、筛选实例。格式为\u003c\"key\":\"value\"\u003e。",
+		//	  "description": "Sandbox instance label metadata used to tag and filter instances. Format: \u003c\"key\":\"value\"\u003e",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -331,85 +331,85 @@ func sandboxDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "沙箱实例标签（Label）元信息，用于标记、筛选实例。格式为<\"key\":\"value\">。",
+			Description: "Sandbox instance label metadata used to tag and filter instances. Format: <\"key\":\"value\">",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Pending
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例是否处于 Pending 状态。参数值说明：true：是，false：否。",
+		//	  "description": "Whether the sandbox instance is in Pending status. Parameter description: true: yes, false: no",
 		//	  "type": "boolean"
 		//	}
 		"pending": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例是否处于 Pending 状态。参数值说明：true：是，false：否。",
+			Description: "Whether the sandbox instance is in Pending status. Parameter description: true: yes, false: no",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestTimeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "请求超时时间：单位：秒，取值范围：1~900，正整数。默认值：30。",
+		//	  "description": "Request timeout: Unit: seconds, range: 1~900, positive integer. Default: 30",
 		//	  "maximum": 900,
 		//	  "type": "integer"
 		//	}
 		"request_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "请求超时时间：单位：秒，取值范围：1~900，正整数。默认值：30。",
+			Description: "Request timeout: Unit: seconds, range: 1~900, positive integer. Default: 30",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RevisionNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "函数实例版本编号。",
+		//	  "description": "Function instance version number",
 		//	  "type": "integer"
 		//	}
 		"revision_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "函数实例版本编号。",
+			Description: "Function instance version number",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SandboxId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例 ID。",
+		//	  "description": "Sandbox instance ID",
 		//	  "type": "string"
 		//	}
 		"sandbox_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例 ID。",
+			Description: "Sandbox instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例状态。 参数值说明：Starting：开始启动，Ready：启动完成，Failed：启动失败，Terminating：终止中。",
+		//	  "description": "Sandbox instance status. Parameter description: Starting: starting, Ready: startup completed, Failed: startup failed, Terminating: terminating",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例状态。 参数值说明：Starting：开始启动，Ready：启动完成，Failed：启动失败，Terminating：终止中。",
+			Description: "Sandbox instance status. Parameter description: Starting: starting, Ready: startup completed, Failed: startup failed, Terminating: terminating",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Timeout
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "沙箱实例存活时长：单位：分钟，取值范围：3～1440，默认值：60。",
+		//	  "description": "Sandbox instance lifespan: Unit: minutes, range: 3~1440, default: 60",
 		//	  "maximum": 1440,
 		//	  "type": "integer"
 		//	}
 		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "沙箱实例存活时长：单位：分钟，取值范围：3～1440，默认值：60。",
+			Description: "Sandbox instance lifespan: Unit: minutes, range: 3~1440, default: 60",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

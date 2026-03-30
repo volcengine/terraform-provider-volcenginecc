@@ -27,18 +27,18 @@ func cENDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CEN实例所属的账号ID。",
+		//	  "description": "Account ID to which the CEN instance belongs",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CEN实例所属的账号ID。",
+			Description: "Account ID to which the CEN instance belongs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CenBandwidthPackageIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "带宽包ID。",
+		//	  "description": "Bandwidth package ID",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -48,92 +48,92 @@ func cENDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"cen_bandwidth_package_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "带宽包ID。",
+			Description: "Bandwidth package ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CenId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CEN实例的ID。",
+		//	  "description": "CEN instance ID",
 		//	  "type": "string"
 		//	}
 		"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CEN实例的ID。",
+			Description: "CEN instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CenName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CEN实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填则默认为CEN实例的ID。",
+		//	  "description": "Name of the CEN instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If not specified, defaults to the CEN instance ID",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"cen_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CEN实例的名称。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：点号（.）、下划线（_）和中划线（-）。长度限制为1～128个字符。不填则默认为CEN实例的ID。",
+			Description: "Name of the CEN instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If not specified, defaults to the CEN instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建CEN实例的时间。",
+		//	  "description": "Time when the CEN instance was created",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建CEN实例的时间。",
+			Description: "Time when the CEN instance was created",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CEN实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255个字符。不填则默认为空。",
+		//	  "description": "Description for the CEN instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to empty",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CEN实例的描述信息。必须以字母、数字或中文开头，可包含字母、数字、中文和以下特殊字符：英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、中划线（-）、中文逗号（，）、中文句号（。）。长度限制为0～255个字符。不填则默认为空。",
+			Description: "Description for the CEN instance. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to empty",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Instances
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "已关联的网络实例列表",
+		//	  "description": "List of associated network instances",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "CEN关联的网络实例",
+		//	    "description": "Network instance associated with CEN",
 		//	    "properties": {
 		//	      "CenId": {
-		//	        "description": "云企业网实例的ID。",
+		//	        "description": "CEN instance ID",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {
-		//	        "description": "网络实例的创建时间。",
+		//	        "description": "Creation time of the network instance",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceId": {
-		//	        "description": "网络实例的ID。",
+		//	        "description": "Network instance ID",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceOwnerId": {
-		//	        "description": "网络实例所属账号的ID。",
+		//	        "description": "Account ID for the network instance",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceRegionId": {
-		//	        "description": "网络实例所在的地域。",
+		//	        "description": "Region where the network instance is located",
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceType": {
-		//	        "description": "网络实例的类型。",
+		//	        "description": "Type of the network instance",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "网络实例的加载状态。Attaching：加载中Available：可用",
+		//	        "description": "Loading status of the network instance. Attaching: Loading; Available: Available",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -150,60 +150,60 @@ func cENDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CenId
 					"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "云企业网实例的ID。",
+						Description: "CEN instance ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CreationTime
 					"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例的创建时间。",
+						Description: "Creation time of the network instance",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例的ID。",
+						Description: "Network instance ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceOwnerId
 					"instance_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例所属账号的ID。",
+						Description: "Account ID for the network instance",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceRegionId
 					"instance_region_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例所在的地域。",
+						Description: "Region where the network instance is located",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceType
 					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例的类型。",
+						Description: "Type of the network instance",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "网络实例的加载状态。Attaching：加载中Available：可用",
+						Description: "Loading status of the network instance. Attaching: Loading; Available: Available",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "已关联的网络实例列表",
+			Description: "List of associated network instances",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CEN实例所属项目的名称。不填则默认为default。",
+		//	  "description": "Name of the project to which the CEN instance belongs. If not specified, defaults to 'default'",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CEN实例所属项目的名称。不填则默认为default。",
+			Description: "Name of the project to which the CEN instance belongs. If not specified, defaults to 'default'",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CEN实例的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用",
+		//	  "description": "Status of the CEN instance. Creating: Creating Deleting: Deleting Pending: Configuring Available: Available",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Deleting",
@@ -213,25 +213,25 @@ func cENDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CEN实例的状态。Creating: 创建中Deleting: 删除中Pending：配置中Available：可用",
+			Description: "Status of the CEN instance. Creating: Creating Deleting: Deleting Pending: Configuring Available: Available",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签信息。",
+		//	  "description": "Tag information",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。长度限制为1～128个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复",
+		//	        "description": "Tag key for user labels. Length limit: 1–128 characters. Case sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Duplicate tag keys are not allowed for the same resource",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。长度限制为0～256个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@",
+		//	        "description": "Tag value for user labels. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -250,28 +250,28 @@ func cENDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。长度限制为1～128个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@。同一资源的标签键不允许重复",
+						Description: "Tag key for user labels. Length limit: 1–128 characters. Case sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Duplicate tag keys are not allowed for the same resource",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。长度限制为0～256个字符。大小写敏感，不能以空格开头或结尾。允许包含字母、数字、空格（）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、减号（-）和@",
+						Description: "Tag value for user labels. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签信息。",
+			Description: "Tag information",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新CEN实例的时间。",
+		//	  "description": "Time when the CEN instance was updated",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新CEN实例的时间。",
+			Description: "Time when the CEN instance was updated",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_organization_account Resource - terraform-provider-volcenginecc"
 subcategory: "Organization"
 description: |-
-  查看和管理您组织内的所有账号。每个账号可以直接放在根节点中，也可以移动到您创建的任意组织节点层级结构中，每个账号只能归属于一个节点。您可以分层树状结构管理您的组织结构以及成员账号。
+  View and manage all accounts in your organization. Each account can be placed directly in the root node or moved to any organizational node hierarchy you create. Each account can belong to only one node. You can manage your organizational structure and member accounts in a layered tree structure
 ---
 
 # volcenginecc_organization_account (Resource)
 
-查看和管理您组织内的所有账号。每个账号可以直接放在根节点中，也可以移动到您创建的任意组织节点层级结构中，每个账号只能归属于一个节点。您可以分层树状结构管理您的组织结构以及成员账号。
+View and manage all accounts in your organization. Each account can be placed directly in the root node or moved to any organizational node hierarchy you create. Each account can belong to only one node. You can manage your organizational structure and member accounts in a layered tree structure
 
 ## Example Usage
 
@@ -35,54 +35,54 @@ resource "volcenginecc_organization_account" "OrganizationAccountDemo" {
 
 ### Required
 
-- `account_name` (String) 账户名称。5-20个字符。
-- `show_name` (String) 显示名称。
+- `account_name` (String) Account name. 5–20 characters
+- `show_name` (String) Display name
 
 ### Optional
 
-- `allow_console` (Number) 允许控制台访问，1: 允许，2: 不允许。
-- `allow_exit` (Number) 允许退出，1: 允许，2: 不允许。
-- `delete_uk` (String) 删除标记。
-- `description` (String) 描述。
-- `org_unit_id` (String) 组织单元ID。传入 0 加入到 root 单元。
-- `password` (String) 账户密码。
-- `secure_contact_info` (Attributes) 安全联系信息。 (see [below for nested schema](#nestedatt--secure_contact_info))
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
-- `verification_relation_id` (String) 被继承认证主体的账号ID，给非管理员认证主体创建账号时需要，账号需已加入企业组织。默认不传，则继承企业组织管理员的认证主体。
+- `allow_console` (Number) Allow console access: 1. Allowed, 2. Not allowed
+- `allow_exit` (Number) Allow exit: 1. Allowed, 2. Not allowed
+- `delete_uk` (String) Deletion flag
+- `description` (String) Description
+- `org_unit_id` (String) Organizational unit ID. Enter 0 to join the root unit
+- `password` (String) Account password
+- `secure_contact_info` (Attributes) Security contact information (see [below for nested schema](#nestedatt--secure_contact_info))
+- `tags` (Attributes Set) Tag list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `verification_relation_id` (String) Inherited authentication subject account ID, required when creating an account for a non-administrator authentication subject. The account must have joined the enterprise organization. If not specified, the authentication subject of the enterprise organization administrator is inherited by default
 
 ### Read-Only
 
-- `account_id` (String) 火山账号ID。
-- `created_time` (String) 创建时间。
-- `deleted_time` (String) 删除时间。
-- `iam_role` (String) IAM角色名称。
+- `account_id` (String) Volcano account ID
+- `created_time` (String) Creation time
+- `deleted_time` (String) Deletion time
+- `iam_role` (String) IAM role name
 - `id` (String) Uniquely identifies the resource.
-- `is_owner` (Number) 是否是管理员，0.非管理员，1.管理员。
-- `join_type` (Number) 加入类型，1: 创建，2: 邀请。
-- `main_name` (String) 主体名称。
-- `member_account_id` (String) 组织成员账号ID。
-- `org_id` (String) 组织ID。
-- `org_type` (Number) 组织类型，1.企业组织。
-- `org_unit_name` (String) 组织单元名称。
-- `org_verification_id` (String) 认证主体ID。
-- `owner` (String) 管理员ID。
-- `updated_time` (String) 更新时间。
+- `is_owner` (Number) Administrator status: 0. Non-administrator, 1. Administrator
+- `join_type` (Number) Join type: 1. Create, 2. Invite
+- `main_name` (String) Subject name
+- `member_account_id` (String) Organization member account ID
+- `org_id` (String) Organization ID
+- `org_type` (Number) Organization type: 1. Enterprise organization
+- `org_unit_name` (String) Organizational unit name
+- `org_verification_id` (String) Authentication subject ID
+- `owner` (String) Administrator ID
+- `updated_time` (String) Update time
 
 <a id="nestedatt--secure_contact_info"></a>
 ### Nested Schema for `secure_contact_info`
 
 Optional:
 
-- `new_email` (String) 变更中的新邮箱。
-- `new_phone` (String) 变更中的新手机号。
+- `new_email` (String) New email being changed
+- `new_phone` (String) New mobile number being changed
 
 Read-Only:
 
-- `email` (String) 安全邮箱。
-- `email_verified` (Number) 安全邮箱是否验证，1: 未验证，2: 已验证。
-- `phone` (String) 安全手机号。
-- `phone_verified` (Number) 安全手机号是否验证，1: 未验证，2: 已验证。
+- `email` (String) Security email
+- `email_verified` (Number) Security email verification status: 1. Not verified, 2. Verified
+- `phone` (String) Security mobile number
+- `phone_verified` (Number) Security mobile number verification status: 1. Not verified, 2. Verified
 
 
 <a id="nestedatt--tags"></a>
@@ -90,8 +90,8 @@ Read-Only:
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 ## Import
 

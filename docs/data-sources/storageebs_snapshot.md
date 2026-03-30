@@ -21,32 +21,32 @@ Data Source schema for Volcengine::StorageEBS::Snapshot
 
 ### Read-Only
 
-- `creation_time` (String) 快照创建时间。
-- `description` (String) 快照描述信息，默认为空，长度限制为0~255个字符。
-- `image_id` (String) 镜像ID
-- `instant_access` (Boolean) 快照是否开启极速可用能力，取值说明如下：true：已开启极速可用能力。false：未开启极速可用能力。
-- `progress` (Number) 快照转储进度。
-- `project_name` (String) 快照所要加入的Project（项目）名称。注意快照不会继承云盘的项目，即快照与云盘可以所属不同的项目。如果您在创建快照时未设置ProjectName，快照会默认加入default项目。
-- `retention_days` (Number) 快照保留时间，单位为天，取值说明如下：空：永久保留快照 。1~65536：指定保存天数。默认为空，即默认永久保留快照。说明快照保留时间从快照创建时刻开始计算。
-- `shared` (Boolean) 快照是否共享。
-- `snapshot_group_id` (String) 快照一致性组ID。
-- `snapshot_id` (String) 快照ID。
-- `snapshot_name` (String) 创建的快照名称。命名规范如下：长度限制为1~128个字符。只能包含中文、字母、数字、下划线（_）、中划线（-）和英文句号（.）。为防止和自动快照的名称冲突，不能以“auto”开头。
-- `snapshot_type` (String) 快照类型，取值说明如下：user：查询手动快照。auto：查询自动快照。share：查询共享快照。默认查询所有快照。
-- `status` (String) 快照状态，取值说明如下：available：可用。creating：创建中。rollbacking：回滚中。deleted：已删除。failed：错误。
-- `tags` (Attributes Set) 快照的标签信息。 (see [below for nested schema](#nestedatt--tags))
-- `volume_id` (String) 快照相关的云盘ID。
-- `volume_kind` (String) 云盘种类，取值说明如下：system：系统盘。data：数据盘。
-- `volume_name` (String) 云盘名称。
-- `volume_size` (Number) 云盘大小，单位为GiB。
-- `volume_status` (String) 云盘状态，取值说明如下：available：可用, attaching：挂载中, attached：已挂载, detaching：卸载中, creating：创建中, deleting：删除中, error：错误, extending：扩容中, ""：云盘被删除。
-- `volume_type` (String) 云盘类型，取值说明如下：ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL：极速型SSD云盘，FlexPL规格。TSSD_TL0：吞吐型SSD云盘
-- `zone_id` (String) 快照所在的可用区ID。
+- `creation_time` (String) Snapshot creation time.
+- `description` (String) Snapshot description. Default is empty. Length must be between 0 and 255 characters.
+- `image_id` (String) Image ID
+- `instant_access` (Boolean) Whether the snapshot has enabled ultra-fast availability. Value options: true: ultra-fast availability enabled. false: ultra-fast availability not enabled.
+- `progress` (Number) Snapshot dump progress.
+- `project_name` (String) Name of the Project to which the snapshot will be added. Note: snapshots do not inherit the project of the cloud disk, so snapshots and cloud disks can belong to different projects. If you do not set ProjectName when creating the snapshot, it will be added to the default project.
+- `retention_days` (Number) Snapshot retention period, in days. Value options: empty: retain snapshot permanently. 1~65536: specify retention days. Default is empty, which means retain snapshot permanently. Snapshot retention period is calculated from the snapshot creation time.
+- `shared` (Boolean) Whether the snapshot is shared.
+- `snapshot_group_id` (String) Snapshot consistency group ID.
+- `snapshot_id` (String) Snapshot ID.
+- `snapshot_name` (String) Name of the created snapshot. Naming rules: length must be between 1 and 128 characters. Only Chinese characters, letters, numbers, underscores (_), hyphens (-), and periods (.) are allowed. To avoid conflicts with automatic snapshot names, the name cannot start with 'auto'.
+- `snapshot_type` (String) Snapshot type. The available values are: user: query manual snapshots. auto: query automatic snapshots. share: query shared snapshots. By default, all snapshots are queried.
+- `status` (String) Snapshot status. Value options: available: available. creating: creating. rollbacking: rolling back. deleted: deleted. failed: error.
+- `tags` (Attributes Set) Snapshot tag information. (see [below for nested schema](#nestedatt--tags))
+- `volume_id` (String) Cloud disk ID associated with the snapshot.
+- `volume_kind` (String) Cloud disk category. Value options: system: system disk. data: data disk.
+- `volume_name` (String) Cloud disk name.
+- `volume_size` (Number) Cloud disk size, in GiB.
+- `volume_status` (String) Cloud disk status. Value options: available: available, attaching: attaching, attached: attached, detaching: detaching, creating: creating, deleting: deleting, error: error, extending: expanding, "": cloud disk deleted.
+- `volume_type` (String) Cloud disk type. Value options: ESSD_PL0: Ultra-fast SSD cloud disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD cloud disk, FlexPL specification. TSSD_TL0: Throughput SSD cloud disk
+- `zone_id` (String) Availability zone ID where the snapshot is located.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) 为资源添加的用户标签的标签键。命名规则如下：不能以任何大小写形式的volc:或sys:开头。volc:或sys:开头为系统预留标签键禁止创建。只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。长度限制在1～128个字符之间。
-- `value` (String) 为资源添加的用户标签的标签值。命名规则如下：只能包含语言字符、数字、空格和英文符号“_”、“.”、“:”、“/”、“=”、“+”、“-”、“@”。允许为空，长度限制在0～256个字符之间。
+- `key` (String) User tag key added to the resource. Naming rules: Cannot start with volc: or sys: in any case. Keys starting with volc: or sys: are reserved system tag keys and cannot be created. Only language characters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1 and 128 characters.
+- `value` (String) User tag value added to the resource. Naming rules: Only language characters, numbers, spaces, and the following English symbols are allowed: '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty. Length must be between 0 and 256 characters.

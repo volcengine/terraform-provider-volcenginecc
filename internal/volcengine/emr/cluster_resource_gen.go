@@ -39,12 +39,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "账号ID。",
+		//	  "description": "Account ID.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"account_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "账号ID。",
+			Description: "Account ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -54,24 +54,24 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群服务的扩展信息列表，包括服务的自定义配置项、服务组件的自定义部署拓扑设置，以及服务的元数据连接配置信息。",
+		//	  "description": "Cluster service extension information list, including custom configuration items for services, custom deployment topology settings for service components, and metadata connection configuration information for services.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ApplicationComponentLayouts": {
-		//	        "description": "服务组件的自定义部署拓扑列表。",
+		//	        "description": "Custom deployment topology list for service components.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "ComponentName": {
-		//	              "description": "组件名称。",
+		//	              "description": "Component name.",
 		//	              "type": "string"
 		//	            },
 		//	            "EffectiveScope": {
-		//	              "description": "组件的布局范围。",
+		//	              "description": "Component layout scope.",
 		//	              "properties": {
 		//	                "ComponentNames": {
-		//	                  "description": "组件名列表，当EffectiveType=COMPONENT_NAME，必选。",
+		//	                  "description": "Component name list. Required when EffectiveType=COMPONENT_NAME.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -80,7 +80,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "EffectiveType": {
-		//	                  "description": "生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。",
+		//	                  "description": "Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.",
 		//	                  "enum": [
 		//	                    "CLUSTER",
 		//	                    "NODE_GROUP_NAME",
@@ -93,7 +93,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "type": "string"
 		//	                },
 		//	                "NodeGroupIds": {
-		//	                  "description": "节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。",
+		//	                  "description": "Node group ID list. Required when EffectiveType=NODE_GROUP_ID.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -102,7 +102,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeGroupNames": {
-		//	                  "description": "节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。",
+		//	                  "description": "Node group name list. Required when EffectiveType=NODE_GROUP_NAME.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -111,7 +111,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeGroupTypes": {
-		//	                  "description": "节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。",
+		//	                  "description": "Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -120,7 +120,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeIds": {
-		//	                  "description": "节点ID列表，EffectiveType=NODE_ID时，必选。",
+		//	                  "description": "Node ID list. Required when EffectiveType=NODE_ID.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -129,7 +129,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeNames": {
-		//	                  "description": "节点名列表，EffectiveType=NODE_NAME时，必选。",
+		//	                  "description": "Node name list. Required when EffectiveType=NODE_NAME.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -147,39 +147,39 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "ApplicationConfigs": {
-		//	        "description": "服务的自定义配置参数列表。",
+		//	        "description": "Custom configuration parameter list for services.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "ComponentInstanceName": {
-		//	              "description": "组件实例名称。",
+		//	              "description": "Component instance name.",
 		//	              "type": "string"
 		//	            },
 		//	            "ComponentName": {
-		//	              "description": "组件名称。",
+		//	              "description": "Component name.",
 		//	              "type": "string"
 		//	            },
 		//	            "ConfigFileName": {
-		//	              "description": "配置文件名。",
+		//	              "description": "Configuration file name.",
 		//	              "type": "string"
 		//	            },
 		//	            "ConfigItemKey": {
-		//	              "description": "配置项名称。",
+		//	              "description": "Configuration item name.",
 		//	              "type": "string"
 		//	            },
 		//	            "ConfigItemValue": {
-		//	              "description": "配置项值。",
+		//	              "description": "Configuration item value.",
 		//	              "type": "string"
 		//	            },
 		//	            "Deleted": {
-		//	              "description": "是否删除。",
+		//	              "description": "Whether to delete.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "EffectiveScope": {
-		//	              "description": "影响组件。",
+		//	              "description": "Affected component.",
 		//	              "properties": {
 		//	                "ComponentNames": {
-		//	                  "description": "组件名列表，当EffectiveType=COMPONENT_NAME，必选。",
+		//	                  "description": "Component name list. Required when EffectiveType=COMPONENT_NAME.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -188,7 +188,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "EffectiveType": {
-		//	                  "description": "生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。",
+		//	                  "description": "Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.",
 		//	                  "enum": [
 		//	                    "CLUSTER",
 		//	                    "NODE_GROUP_NAME",
@@ -201,7 +201,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "type": "string"
 		//	                },
 		//	                "NodeGroupIds": {
-		//	                  "description": "节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。",
+		//	                  "description": "Node group ID list. Required when EffectiveType=NODE_GROUP_ID.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -210,7 +210,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeGroupNames": {
-		//	                  "description": "节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。",
+		//	                  "description": "Node group name list. Required when EffectiveType=NODE_GROUP_NAME.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -219,7 +219,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeGroupTypes": {
-		//	                  "description": "节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。",
+		//	                  "description": "Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -228,7 +228,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeIds": {
-		//	                  "description": "节点ID列表，EffectiveType=NODE_ID时，必选。",
+		//	                  "description": "Node ID list. Required when EffectiveType=NODE_ID.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -237,7 +237,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "uniqueItems": true
 		//	                },
 		//	                "NodeNames": {
-		//	                  "description": "节点名列表，EffectiveType=NODE_NAME时，必选。",
+		//	                  "description": "Node name list. Required when EffectiveType=NODE_NAME.",
 		//	                  "insertionOrder": false,
 		//	                  "items": {
 		//	                    "type": "string"
@@ -255,15 +255,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "ApplicationName": {
-		//	        "description": "应用名称。",
+		//	        "description": "Application name.",
 		//	        "type": "string"
 		//	      },
 		//	      "ConnectionId": {
-		//	        "description": "元数据连接id。",
+		//	        "description": "Metadata connection ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "ConnectionType": {
-		//	        "description": "元数据连接类型。BUILT_IN_MYSQL：内置数据库。EXTERNAL_MYSQL：外置数据库。HIVE_METASTORE：HMS。",
+		//	        "description": "Metadata connection type. BUILT_IN_MYSQL: built-in database. EXTERNAL_MYSQL: external database. HIVE_METASTORE: HMS.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -281,7 +281,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ComponentName
 								"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "组件名称。",
+									Description: "Component name.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -294,7 +294,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ComponentNames
 										"component_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "组件名列表，当EffectiveType=COMPONENT_NAME，必选。",
+											Description: "Component name list. Required when EffectiveType=COMPONENT_NAME.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -303,7 +303,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: EffectiveType
 										"effective_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。",
+											Description: "Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
@@ -324,7 +324,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeGroupIds
 										"node_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。",
+											Description: "Node group ID list. Required when EffectiveType=NODE_GROUP_ID.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -334,7 +334,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeGroupNames
 										"node_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。",
+											Description: "Node group name list. Required when EffectiveType=NODE_GROUP_NAME.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -344,7 +344,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeGroupTypes
 										"node_group_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。",
+											Description: "Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -354,7 +354,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeIds
 										"node_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点ID列表，EffectiveType=NODE_ID时，必选。",
+											Description: "Node ID list. Required when EffectiveType=NODE_ID.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -364,7 +364,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeNames
 										"node_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点名列表，EffectiveType=NODE_NAME时，必选。",
+											Description: "Node name list. Required when EffectiveType=NODE_NAME.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -372,7 +372,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "组件的布局范围。",
+									Description: "Component layout scope.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -381,7 +381,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "服务组件的自定义部署拓扑列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Custom deployment topology list for service components.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -394,7 +394,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ComponentInstanceName
 								"component_instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "组件实例名称。",
+									Description: "Component instance name.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -403,7 +403,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ComponentName
 								"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "组件名称。",
+									Description: "Component name.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -412,7 +412,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ConfigFileName
 								"config_file_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "配置文件名。",
+									Description: "Configuration file name.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -421,7 +421,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ConfigItemKey
 								"config_item_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "配置项名称。",
+									Description: "Configuration item name.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -430,7 +430,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ConfigItemValue
 								"config_item_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "配置项值。",
+									Description: "Configuration item value.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -439,7 +439,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Deleted
 								"deleted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "是否删除。",
+									Description: "Whether to delete.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -452,7 +452,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ComponentNames
 										"component_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "组件名列表，当EffectiveType=COMPONENT_NAME，必选。",
+											Description: "Component name list. Required when EffectiveType=COMPONENT_NAME.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -461,7 +461,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: EffectiveType
 										"effective_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。",
+											Description: "Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
@@ -482,7 +482,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeGroupIds
 										"node_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。",
+											Description: "Node group ID list. Required when EffectiveType=NODE_GROUP_ID.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -492,7 +492,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeGroupNames
 										"node_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。",
+											Description: "Node group name list. Required when EffectiveType=NODE_GROUP_NAME.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -502,7 +502,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeGroupTypes
 										"node_group_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。",
+											Description: "Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -512,7 +512,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeIds
 										"node_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点ID列表，EffectiveType=NODE_ID时，必选。",
+											Description: "Node ID list. Required when EffectiveType=NODE_ID.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -522,7 +522,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 										// Property: NodeNames
 										"node_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "节点名列表，EffectiveType=NODE_NAME时，必选。",
+											Description: "Node name list. Required when EffectiveType=NODE_NAME.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -530,7 +530,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Description: "影响组件。",
+									Description: "Affected component.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -539,7 +539,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "服务的自定义配置参数列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Custom configuration parameter list for services.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -549,7 +549,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ApplicationName
 					"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用名称。",
+						Description: "Application name.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -558,7 +558,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ConnectionId
 					"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "元数据连接id。",
+						Description: "Metadata connection ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -567,7 +567,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ConnectionType
 					"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "元数据连接类型。BUILT_IN_MYSQL：内置数据库。EXTERNAL_MYSQL：外置数据库。HIVE_METASTORE：HMS。",
+						Description: "Metadata connection type. BUILT_IN_MYSQL: built-in database. EXTERNAL_MYSQL: external database. HIVE_METASTORE: HMS.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -576,7 +576,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "集群服务的扩展信息列表，包括服务的自定义配置项、服务组件的自定义部署拓扑设置，以及服务的元数据连接配置信息。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Cluster service extension information list, including custom configuration items for services, custom deployment topology settings for service components, and metadata connection configuration information for services.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -590,7 +590,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群安装的服务名称列表。创建字段。",
+		//	  "description": "List of service names installed in the cluster. Creation-related field.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -600,7 +600,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"application_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "集群安装的服务名称列表。创建字段。",
+			Description: "List of service names installed in the cluster. Creation-related field.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -613,40 +613,40 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群安装的服务列表。只读字段。",
+		//	  "description": "Installed service list for cluster. Read-only field.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ApplicationConfigHome": {
-		//	        "description": "应用配置路径。",
+		//	        "description": "Application configuration path.",
 		//	        "type": "string"
 		//	      },
 		//	      "ApplicationHome": {
-		//	        "description": "应用安装路径。",
+		//	        "description": "Application installation path.",
 		//	        "type": "string"
 		//	      },
 		//	      "ApplicationName": {
-		//	        "description": "应用名称。",
+		//	        "description": "Application name.",
 		//	        "type": "string"
 		//	      },
 		//	      "ApplicationState": {
-		//	        "description": "服务状态。NORMAL：正常；WARNING：告警；STOPPED：已停止；INIT：初始化中；INSTALLING：安装中；INSTALLED：已安装；STARTING：启动中；STARTED：已启动；STOPPING：停止中；UNINSTALLING：卸载中；UNINSTALLED：已卸载；EXCEPTION：异常。",
+		//	        "description": "Service status. NORMAL: normal; WARNING: alert; STOPPED: stopped; INIT: initializing; INSTALLING: installing; INSTALLED: installed; STARTING: starting; STARTED: started; STOPPING: stopping; UNINSTALLING: uninstalling; UNINSTALLED: uninstalled; EXCEPTION: exception.",
 		//	        "type": "string"
 		//	      },
 		//	      "ApplicationVersion": {
-		//	        "description": "应用版本。",
+		//	        "description": "Application version.",
 		//	        "type": "string"
 		//	      },
 		//	      "Group": {
-		//	        "description": "应用用户组。",
+		//	        "description": "Application user group.",
 		//	        "type": "string"
 		//	      },
 		//	      "SupportClient": {
-		//	        "description": "是否支持客户端。",
+		//	        "description": "Whether client is supported.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "User": {
-		//	        "description": "应用用户。",
+		//	        "description": "Application user.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -660,47 +660,47 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ApplicationConfigHome
 					"application_config_home": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用配置路径。",
+						Description: "Application configuration path.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ApplicationHome
 					"application_home": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用安装路径。",
+						Description: "Application installation path.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ApplicationName
 					"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用名称。",
+						Description: "Application name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ApplicationState
 					"application_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "服务状态。NORMAL：正常；WARNING：告警；STOPPED：已停止；INIT：初始化中；INSTALLING：安装中；INSTALLED：已安装；STARTING：启动中；STARTED：已启动；STOPPING：停止中；UNINSTALLING：卸载中；UNINSTALLED：已卸载；EXCEPTION：异常。",
+						Description: "Service status. NORMAL: normal; WARNING: alert; STOPPED: stopped; INIT: initializing; INSTALLING: installing; INSTALLED: installed; STARTING: starting; STARTED: started; STOPPING: stopping; UNINSTALLING: uninstalling; UNINSTALLED: uninstalled; EXCEPTION: exception.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ApplicationVersion
 					"application_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用版本。",
+						Description: "Application version.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Group
 					"group": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用用户组。",
+						Description: "Application user group.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SupportClient
 					"support_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否支持客户端。",
+						Description: "Whether client is supported.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: User
 					"user": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "应用用户。",
+						Description: "Application user.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "集群安装的服务列表。只读字段。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Installed service list for cluster. Read-only field.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -710,15 +710,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群的引导脚本列表。",
+		//	  "description": "Cluster bootstrap script list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "EffectiveScope": {
-		//	        "description": "脚本执行范围。",
+		//	        "description": "Script execution scope.",
 		//	        "properties": {
 		//	          "ComponentNames": {
-		//	            "description": "组件名列表，当EffectiveType=COMPONENT_NAME，必选。",
+		//	            "description": "Component name list. Required when EffectiveType=COMPONENT_NAME.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -727,7 +727,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "EffectiveType": {
-		//	            "description": "生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。",
+		//	            "description": "Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.",
 		//	            "enum": [
 		//	              "CLUSTER",
 		//	              "NODE_GROUP_NAME",
@@ -740,7 +740,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "NodeGroupIds": {
-		//	            "description": "节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。",
+		//	            "description": "Node group ID list. Required when EffectiveType=NODE_GROUP_ID.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -749,7 +749,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "NodeGroupNames": {
-		//	            "description": "节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。",
+		//	            "description": "Node group name list. Required when EffectiveType=NODE_GROUP_NAME.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -758,7 +758,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "NodeGroupTypes": {
-		//	            "description": "节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。",
+		//	            "description": "Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -767,7 +767,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "NodeIds": {
-		//	            "description": "节点ID列表，EffectiveType=NODE_ID时，必选。",
+		//	            "description": "Node ID list. Required when EffectiveType=NODE_ID.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -776,7 +776,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "NodeNames": {
-		//	            "description": "节点名列表，EffectiveType=NODE_NAME时，必选。",
+		//	            "description": "Node name list. Required when EffectiveType=NODE_NAME.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -788,7 +788,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "ExecutionFailStrategy": {
-		//	        "description": "执行失败策略。取值范围：FAILED_CONTINUE：失败后继续执行其他任务。FAILED_BLOCK：失败后中断，不再继续执行后续任务。当脚本为BOOTSTRAP时，会导致创建集群、扩容节点组操作中断并失败。默认值：FAILED_BLOCK。",
+		//	        "description": "Execution failure policy. Range: FAILED_CONTINUE: Continue with other tasks after failure. FAILED_BLOCK: Stop and do not execute subsequent tasks after failure. If the script is BOOTSTRAP, this will interrupt and fail cluster creation or node group expansion. Default: FAILED_BLOCK.",
 		//	        "enum": [
 		//	          "FAILED_CONTINUE",
 		//	          "FAILED_BLOCK"
@@ -796,7 +796,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "ExecutionMoment": {
-		//	        "description": "脚本的执行时机。仅scriptType=BOOTSTRAP时生效。BEFORE_APPLICATION_INSTALL：应用安装前。AFTER_APPLICATION_STARTED：应用启动后。默认值：BEFORE_APP_INSTALL",
+		//	        "description": "Script execution timing. Only effective when scriptType=BOOTSTRAP. BEFORE_APPLICATION_INSTALL: before application installation. AFTER_APPLICATION_STARTED: after application startup. Default: BEFORE_APP_INSTALL.",
 		//	        "enum": [
 		//	          "BEFORE_APPLICATION_INSTALL",
 		//	          "AFTER_APPLICATION_STARTED"
@@ -804,25 +804,25 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "脚本执行优先级。取值范围：1~1000。默认值1。",
+		//	        "description": "Script execution priority. Range: 1~1000. Default: 1.",
 		//	        "maxLength": 1000,
 		//	        "type": "string"
 		//	      },
 		//	      "ScriptArgs": {
-		//	        "description": "脚本参数。",
+		//	        "description": "Script parameters.",
 		//	        "type": "string"
 		//	      },
 		//	      "ScriptName": {
-		//	        "description": "脚本名称。必填。长度为1~128个字符，必须以大小字母或中文开头，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。",
+		//	        "description": "Script name (required). Length: 1–128 characters. Must start with an uppercase or lowercase letter or Chinese character. Cannot start with http: or https:. Can include Chinese, English, numbers, underscores (_), or hyphens (-).",
 		//	        "maxLength": 128,
 		//	        "type": "string"
 		//	      },
 		//	      "ScriptPath": {
-		//	        "description": "脚本所在TOS路径。必填。以 tos:： 开头。",
+		//	        "description": "Script TOS path. Required. Must start with 'tos:'.",
 		//	        "type": "string"
 		//	      },
 		//	      "ScriptType": {
-		//	        "description": "脚本类型。NORMAL：普通脚本。BOOTSTRAP：引导脚本。",
+		//	        "description": "Script type. NORMAL: normal script. BOOTSTRAP: bootstrap script.",
 		//	        "enum": [
 		//	          "NORMAL",
 		//	          "BOOTSTRAP"
@@ -844,7 +844,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ComponentNames
 							"component_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "组件名列表，当EffectiveType=COMPONENT_NAME，必选。",
+								Description: "Component name list. Required when EffectiveType=COMPONENT_NAME.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -853,7 +853,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: EffectiveType
 							"effective_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "生效类型。CLUSTER，NODE_GROUP_NAME，NODE_GROUP_ID，NODE_GROUP_TYPE，NODE_NAME，NODE_ID，COMPONENT_NAME。",
+								Description: "Effective type. CLUSTER, NODE_GROUP_NAME, NODE_GROUP_ID, NODE_GROUP_TYPE, NODE_NAME, NODE_ID, COMPONENT_NAME.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
@@ -874,7 +874,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							// Property: NodeGroupIds
 							"node_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "节点组ID列表，EffectiveType=NODE_GROUP_ID时，必选。",
+								Description: "Node group ID list. Required when EffectiveType=NODE_GROUP_ID.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -884,7 +884,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							// Property: NodeGroupNames
 							"node_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "节点组名称列表，EffectiveType=NODE_GROUP_NAME时，必选。",
+								Description: "Node group name list. Required when EffectiveType=NODE_GROUP_NAME.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -894,7 +894,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							// Property: NodeGroupTypes
 							"node_group_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "节点组类型列表，EffectiveType=NODE_GROUP_TYPE时，必选。目前包括MASTER、CORE、TASK。",
+								Description: "Node group type list. Required when EffectiveType=NODE_GROUP_TYPE. Currently includes MASTER, CORE, TASK.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -904,7 +904,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							// Property: NodeIds
 							"node_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "节点ID列表，EffectiveType=NODE_ID时，必选。",
+								Description: "Node ID list. Required when EffectiveType=NODE_ID.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -914,7 +914,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							// Property: NodeNames
 							"node_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "节点名列表，EffectiveType=NODE_NAME时，必选。",
+								Description: "Node name list. Required when EffectiveType=NODE_NAME.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -922,7 +922,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "脚本执行范围。",
+						Description: "Script execution scope.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -931,7 +931,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ExecutionFailStrategy
 					"execution_fail_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "执行失败策略。取值范围：FAILED_CONTINUE：失败后继续执行其他任务。FAILED_BLOCK：失败后中断，不再继续执行后续任务。当脚本为BOOTSTRAP时，会导致创建集群、扩容节点组操作中断并失败。默认值：FAILED_BLOCK。",
+						Description: "Execution failure policy. Range: FAILED_CONTINUE: Continue with other tasks after failure. FAILED_BLOCK: Stop and do not execute subsequent tasks after failure. If the script is BOOTSTRAP, this will interrupt and fail cluster creation or node group expansion. Default: FAILED_BLOCK.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -946,7 +946,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ExecutionMoment
 					"execution_moment": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "脚本的执行时机。仅scriptType=BOOTSTRAP时生效。BEFORE_APPLICATION_INSTALL：应用安装前。AFTER_APPLICATION_STARTED：应用启动后。默认值：BEFORE_APP_INSTALL",
+						Description: "Script execution timing. Only effective when scriptType=BOOTSTRAP. BEFORE_APPLICATION_INSTALL: before application installation. AFTER_APPLICATION_STARTED: after application startup. Default: BEFORE_APP_INSTALL.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -961,7 +961,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "脚本执行优先级。取值范围：1~1000。默认值1。",
+						Description: "Script execution priority. Range: 1~1000. Default: 1.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -973,7 +973,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ScriptArgs
 					"script_args": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "脚本参数。",
+						Description: "Script parameters.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -982,7 +982,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ScriptName
 					"script_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "脚本名称。必填。长度为1~128个字符，必须以大小字母或中文开头，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。",
+						Description: "Script name (required). Length: 1–128 characters. Must start with an uppercase or lowercase letter or Chinese character. Cannot start with http: or https:. Can include Chinese, English, numbers, underscores (_), or hyphens (-).",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -994,7 +994,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ScriptPath
 					"script_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "脚本所在TOS路径。必填。以 tos:： 开头。",
+						Description: "Script TOS path. Required. Must start with 'tos:'.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1003,7 +1003,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ScriptType
 					"script_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "脚本类型。NORMAL：普通脚本。BOOTSTRAP：引导脚本。",
+						Description: "Script type. NORMAL: normal script. BOOTSTRAP: bootstrap script.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1018,7 +1018,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "集群的引导脚本列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Cluster bootstrap script list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1031,18 +1031,18 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "包月的配置参数，当chargeType=PRE时，必选。",
+		//	  "description": "Monthly subscription configuration parameters. Required when chargeType=PRE.",
 		//	  "properties": {
 		//	    "AutoRenew": {
-		//	      "description": "是否开启自动续费。取值范围：true：开启。false：不开启。",
+		//	      "description": "Enable auto-renewal. Options: true (enabled), false (disabled).",
 		//	      "type": "boolean"
 		//	    },
 		//	    "AutoRenewPeriod": {
-		//	      "description": "自动续费触发时的续费时长，当AutoRenew=true时，默认值=1。",
+		//	      "description": "Renewal duration when auto-renewal is triggered. When AutoRenew=true, the default value is 1.",
 		//	      "type": "integer"
 		//	    },
 		//	    "AutoRenewPeriodUnit": {
-		//	      "description": "自动续费触发时的续费时长单位，当AutoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。",
+		//	      "description": "Renewal duration unit when auto-renewal is triggered. When AutoRenew=true, default is Month. Options: Month, Year.",
 		//	      "enum": [
 		//	        "Month",
 		//	        "Year"
@@ -1050,11 +1050,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ChargePeriod": {
-		//	      "description": "chargeType=PRE默认值=1，包月的购买时长单位。",
+		//	      "description": "When chargeType=PRE, default value=1. Unit for monthly subscription duration.",
 		//	      "type": "integer"
 		//	    },
 		//	    "ChargePeriodUnit": {
-		//	      "description": "chargeType=PRE时，默认值=Month，包月的购买时长单位，取值范围：Month：月。Year：年。",
+		//	      "description": "When chargeType=PRE, default value=Month. Unit for monthly subscription duration. Range: Month: month. Year: year.",
 		//	      "enum": [
 		//	        "Month",
 		//	        "Year"
@@ -1062,7 +1062,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ChargeType": {
-		//	      "description": "付费类型，取值范围：PRE，POST。",
+		//	      "description": "Payment type. Options: PRE, POST.",
 		//	      "enum": [
 		//	        "PRE",
 		//	        "POST"
@@ -1076,7 +1076,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否开启自动续费。取值范围：true：开启。false：不开启。",
+					Description: "Enable auto-renewal. Options: true (enabled), false (disabled).",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
@@ -1084,7 +1084,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenewPeriod
 				"auto_renew_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "自动续费触发时的续费时长，当AutoRenew=true时，默认值=1。",
+					Description: "Renewal duration when auto-renewal is triggered. When AutoRenew=true, the default value is 1.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -1092,7 +1092,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenewPeriodUnit
 				"auto_renew_period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "自动续费触发时的续费时长单位，当AutoRenew=true时，默认值=Month。取值范围：Month：月。Year：年。",
+					Description: "Renewal duration unit when auto-renewal is triggered. When AutoRenew=true, default is Month. Options: Month, Year.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1100,7 +1100,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargePeriod
 				"charge_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "chargeType=PRE默认值=1，包月的购买时长单位。",
+					Description: "When chargeType=PRE, default value=1. Unit for monthly subscription duration.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1110,7 +1110,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargePeriodUnit
 				"charge_period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "chargeType=PRE时，默认值=Month，包月的购买时长单位，取值范围：Month：月。Year：年。",
+					Description: "When chargeType=PRE, default value=Month. Unit for monthly subscription duration. Range: Month: month. Year: year.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -1126,14 +1126,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "付费类型，取值范围：PRE，POST。",
+					Description: "Payment type. Options: PRE, POST.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "包月的配置参数，当chargeType=PRE时，必选。",
+			Description: "Monthly subscription configuration parameters. Required when chargeType=PRE.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1144,11 +1144,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "付费类型，PRE表示包月，POST表示按量计费。",
+		//	  "description": "Payment type. PRE means monthly subscription, POST means pay-as-you-go.",
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "付费类型，PRE表示包月，POST表示按量计费。",
+			Description: "Payment type. PRE means monthly subscription, POST means pay-as-you-go.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -1158,7 +1158,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群dns域名后缀列表。",
+		//	  "description": "Cluster DNS domain suffix list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -1168,7 +1168,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"cluster_domain_names": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "集群dns域名后缀列表。",
+			Description: "Cluster DNS domain suffix list.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -1178,11 +1178,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群ID。",
+		//	  "description": "Cluster ID.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群ID。",
+			Description: "Cluster ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1192,22 +1192,22 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群名称。",
+		//	  "description": "Cluster name.",
 		//	  "type": "string"
 		//	}
 		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群名称。",
+			Description: "Cluster name.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterState
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群状态。",
+		//	  "description": "Cluster status.",
 		//	  "type": "string"
 		//	}
 		"cluster_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群状态。",
+			Description: "Cluster status.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1217,11 +1217,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群类型。",
+		//	  "description": "Cluster type.",
 		//	  "type": "string"
 		//	}
 		"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群类型。",
+			Description: "Cluster type.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -1231,12 +1231,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群创建时间。",
+		//	  "description": "Cluster creation time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "集群创建时间。",
+			Description: "Cluster creation time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1246,12 +1246,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建者ID。",
+		//	  "description": "Creator ID.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"creator_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "创建者ID。",
+			Description: "Creator ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1261,11 +1261,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建者名称。",
+		//	  "description": "Creator name.",
 		//	  "type": "string"
 		//	}
 		"creator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建者名称。",
+			Description: "Creator name.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1275,11 +1275,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "部署模式。SIMPLE表示简单模式，HIGH_AVAILABLE表示高可用模式。",
+		//	  "description": "Deployment mode. SIMPLE means simple mode, HIGH_AVAILABLE means high availability mode.",
 		//	  "type": "string"
 		//	}
 		"deploy_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "部署模式。SIMPLE表示简单模式，HIGH_AVAILABLE表示高可用模式。",
+			Description: "Deployment mode. SIMPLE means simple mode, HIGH_AVAILABLE means high availability mode.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1291,11 +1291,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ECS镜像ID。",
+		//	  "description": "ECS image ID.",
 		//	  "type": "string"
 		//	}
 		"ecs_image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ECS镜像ID。",
+			Description: "ECS image ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1305,12 +1305,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群过期时间。",
+		//	  "description": "Cluster expiration time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"expire_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "集群过期时间。",
+			Description: "Cluster expiration time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1320,11 +1320,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HistoryServer模式，LOCAL将活动数据存储于集群内，PHS将活动数据存储于集群外。",
+		//	  "description": "HistoryServer mode: LOCAL stores active data within the cluster, PHS stores active data outside the cluster.",
 		//	  "type": "string"
 		//	}
 		"history_server_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HistoryServer模式，LOCAL将活动数据存储于集群内，PHS将活动数据存储于集群外。",
+			Description: "HistoryServer mode: LOCAL stores active data within the cluster, PHS stores active data outside the cluster.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1336,14 +1336,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群全局的节点信息。",
+		//	  "description": "Cluster global node information.",
 		//	  "properties": {
 		//	    "EcsIamRole": {
-		//	      "description": "ECS实例角色。",
+		//	      "description": "ECS instance role.",
 		//	      "type": "string"
 		//	    },
 		//	    "ZoneId": {
-		//	      "description": "可用区ID。",
+		//	      "description": "Zone ID.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1353,7 +1353,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EcsIamRole
 				"ecs_iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ECS实例角色。",
+					Description: "ECS instance role.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1362,7 +1362,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ZoneId
 				"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "可用区ID。",
+					Description: "Zone ID.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1370,7 +1370,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "集群全局的节点信息。",
+			Description: "Cluster global node information.",
 			Required:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
@@ -1380,40 +1380,40 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "节点组属性列表。",
+		//	  "description": "Node group property list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Bandwidth": {
-		//	        "description": "公网带宽。默认值 8M。后续如果用户侧调整了，emr侧需要同步该信息。",
+		//	        "description": "Public bandwidth. Default is 8M. If the user changes it later, EMR needs to synchronize this information.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ChargeType": {
-		//	        "description": "节点组付费类型。为空时，复用集群的chargeType。Master、Core组必须复用集群维度的付费类型。当集群的chargeType为PRE时，task节点组的chargeType允许设置为POST；当集群的chargeType为POST时，节点组的chargeType默认为POST，节点组上的此参数设置无效。",
+		//	        "description": "Node group billing type. If empty, reuses the cluster's chargeType. Master and Core groups must reuse the cluster-level billing type. When the cluster's chargeType is PRE, the task node group's chargeType can be set to POST. When the cluster's chargeType is POST, the node group's chargeType defaults to POST, and this parameter setting on the node group is invalid.",
 		//	        "type": "string"
 		//	      },
 		//	      "CreateTime": {
-		//	        "description": "节点组创建时间。",
+		//	        "description": "Node group creation time.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "DataDisks": {
-		//	        "description": "数据盘配置。当前单个节点组内只支持同规格的数据盘。即List的长度限制为1。",
+		//	        "description": "Data disk configuration. Only disks of the same specification are supported within a single node group. The list length is limited to 1.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "Count": {
-		//	              "description": "磁盘块数，默认值4，最大15，最小1。",
+		//	              "description": "Number of disk blocks. Default is 4, maximum is 15, minimum is 1.",
 		//	              "maximum": 15,
 		//	              "type": "integer"
 		//	            },
 		//	            "Size": {
-		//	              "description": "磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+		//	              "description": "Disk size. Default is 80GB, minimum is 60GB, maximum is 2048GB, unit: GB.",
 		//	              "maximum": 2048,
 		//	              "type": "integer"
 		//	            },
 		//	            "VolumeType": {
-		//	              "description": "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV",
+		//	              "description": "Disk type. ESSD_PL0: Ultra SSD_PL0. ESSD_PL1: Ultra SSD_PL1. ESSD_PL2: Ultra SSD_PL2. ESSD_PL3: Ultra SSD_PL3. ESSD_FLEXPL: Ultra SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1427,7 +1427,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "EcsInstanceTypes": {
-		//	        "description": "节点组的ecs机型列表。当前只支持设置1个机型。即List的长度限制为1。",
+		//	        "description": "Node group's ECS instance type list. Only one instance type can be set. The list length is limited to 1.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -1436,15 +1436,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "EcsKeyPairName": {
-		//	        "description": "ecs的密钥对名称。",
+		//	        "description": "ECS key pair name.",
 		//	        "type": "string"
 		//	      },
 		//	      "EcsPassword": {
-		//	        "description": "Ecs root账号的密码。",
+		//	        "description": "Password for ECS root account.",
 		//	        "type": "string"
 		//	      },
 		//	      "LayoutComponentNames": {
-		//	        "description": "部署的组件名称列表。",
+		//	        "description": "List of deployed component names.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -1453,28 +1453,28 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "NodeCount": {
-		//	        "description": "节点组当前期望购买的节点数量。",
+		//	        "description": "Current expected number of nodes to purchase for the node group.",
 		//	        "type": "integer"
 		//	      },
 		//	      "NodeGroupId": {
-		//	        "description": "节点组ID。",
+		//	        "description": "Node group ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeGroupName": {
-		//	        "description": "长度为1~128个字符，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。",
+		//	        "description": "Length: 1–128 characters. Cannot start with http: or https:. Can include Chinese, English, numbers, underscores (_), or hyphens (-).",
 		//	        "maxLength": 128,
 		//	        "type": "string"
 		//	      },
 		//	      "NodeGroupState": {
-		//	        "description": "节点组状态。RUNNING,运行中。EXTENDING，扩容中。REDUCING，缩容中。DISK_EXTENDING，磁盘扩容中。MODIFYING，变配中",
+		//	        "description": "Node group status. RUNNING: running. EXTENDING: scaling out. REDUCING: scaling in. DISK_EXTENDING: disk scaling out. MODIFYING: configuration change.",
 		//	        "type": "string"
 		//	      },
 		//	      "NodeGroupType": {
-		//	        "description": "节点组类型。",
+		//	        "description": "Node group type.",
 		//	        "type": "string"
 		//	      },
 		//	      "SubnetIds": {
-		//	        "description": "子网Id列表，目前只能传递一个参数，且各节点组的子网Id都是相同的。",
+		//	        "description": "Subnet ID list. Currently, only one parameter can be passed, and all node groups must use the same subnet ID.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -1483,25 +1483,25 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "SystemDisk": {
-		//	        "description": "系统盘配置。",
+		//	        "description": "System disk configuration.",
 		//	        "properties": {
 		//	          "Size": {
-		//	            "description": "磁盘大小。",
+		//	            "description": "Disk size.",
 		//	            "type": "integer"
 		//	          },
 		//	          "VolumeType": {
-		//	            "description": "磁盘类型。",
+		//	            "description": "Disk type.",
 		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "WithPublicIp": {
-		//	        "description": "是否挂载公网ip。",
+		//	        "description": "Whether to attach public IP.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "可用区ID。",
+		//	        "description": "Availability zone ID.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1524,7 +1524,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Bandwidth
 					"bandwidth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "公网带宽。默认值 8M。后续如果用户侧调整了，emr侧需要同步该信息。",
+						Description: "Public bandwidth. Default is 8M. If the user changes it later, EMR needs to synchronize this information.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1533,7 +1533,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ChargeType
 					"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点组付费类型。为空时，复用集群的chargeType。Master、Core组必须复用集群维度的付费类型。当集群的chargeType为PRE时，task节点组的chargeType允许设置为POST；当集群的chargeType为POST时，节点组的chargeType默认为POST，节点组上的此参数设置无效。",
+						Description: "Node group billing type. If empty, reuses the cluster's chargeType. Master and Core groups must reuse the cluster-level billing type. When the cluster's chargeType is PRE, the task node group's chargeType can be set to POST. When the cluster's chargeType is POST, the node group's chargeType defaults to POST, and this parameter setting on the node group is invalid.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1547,7 +1547,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Count
 								"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "磁盘块数，默认值4，最大15，最小1。",
+									Description: "Number of disk blocks. Default is 4, maximum is 15, minimum is 1.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -1560,7 +1560,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Size
 								"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "磁盘大小，默认值80GB，最小60GB，最大2048GB，单位GB。",
+									Description: "Disk size. Default is 80GB, minimum is 60GB, maximum is 2048GB, unit: GB.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -1573,7 +1573,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: VolumeType
 								"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "磁盘类型。ESSD_PL0 ：极速型SSD_PL0。ESSD_PL1 ：极速型SSD_PL1。ESSD_PL2 ：极速型SSD_PL2。ESSD_PL3 ：极速型SSD_PL3。ESSD_FLEXPL ：极速型SSD_FlexPL。ULTRA_DISK ：高效云盘。PTSSD ：性能型SSD。SSD ：通用型SSD。EHDD ：高效云盘。ZENYA_SSD ：Zenya。LOCAL_HDD ：大数据型HDD。LOCAL_SSD ：本地SSD型。LOCAL_SSD_SRIOV ：本地SSD型SRIOV",
+									Description: "Disk type. ESSD_PL0: Ultra SSD_PL0. ESSD_PL1: Ultra SSD_PL1. ESSD_PL2: Ultra SSD_PL2. ESSD_PL3: Ultra SSD_PL3. ESSD_FLEXPL: Ultra SSD_FlexPL. ULTRA_DISK: Efficient cloud disk. PTSSD: Performance SSD. SSD: General SSD. EHDD: Efficient cloud disk. ZENYA_SSD: Zenya. LOCAL_HDD: Big data HDD. LOCAL_SSD: Local SSD. LOCAL_SSD_SRIOV: Local SSD SRIOV.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1582,7 +1582,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "数据盘配置。当前单个节点组内只支持同规格的数据盘。即List的长度限制为1。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+						Description: "Data disk configuration. Only disks of the same specification are supported within a single node group. The list length is limited to 1.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
@@ -1595,7 +1595,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EcsInstanceTypes
 					"ecs_instance_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "节点组的ecs机型列表。当前只支持设置1个机型。即List的长度限制为1。",
+						Description: "Node group's ECS instance type list. Only one instance type can be set. The list length is limited to 1.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
@@ -1607,7 +1607,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: EcsKeyPairName
 					"ecs_key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "ecs的密钥对名称。",
+						Description: "ECS key pair name.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1616,7 +1616,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: EcsPassword
 					"ecs_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Ecs root账号的密码。",
+						Description: "Password for ECS root account.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1626,7 +1626,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: LayoutComponentNames
 					// Property: NodeCount
 					"node_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "节点组当前期望购买的节点数量。",
+						Description: "Current expected number of nodes to purchase for the node group.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -1639,7 +1639,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NodeGroupId
 					// Property: NodeGroupName
 					"node_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "长度为1~128个字符，不能以 http:： 和 https:： 开头。可以包含中文、英文、数字、下划线（_）、或者短划线（-）。",
+						Description: "Length: 1–128 characters. Cannot start with http: or https:. Can include Chinese, English, numbers, underscores (_), or hyphens (-).",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1653,7 +1653,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NodeGroupState
 					// Property: NodeGroupType
 					"node_group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "节点组类型。",
+						Description: "Node group type.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1666,7 +1666,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SubnetIds
 					"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "子网Id列表，目前只能传递一个参数，且各节点组的子网Id都是相同的。",
+						Description: "Subnet ID list. Currently, only one parameter can be passed, and all node groups must use the same subnet ID.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
@@ -1681,7 +1681,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Size
 							"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "磁盘大小。",
+								Description: "Disk size.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1690,7 +1690,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: VolumeType
 							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "磁盘类型。",
+								Description: "Disk type.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1698,7 +1698,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "系统盘配置。",
+						Description: "System disk configuration.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Object{ /*START VALIDATORS*/
@@ -1710,7 +1710,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: WithPublicIp
 					"with_public_ip": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "是否挂载公网ip。",
+						Description: "Whether to attach public IP.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1719,7 +1719,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "可用区ID。",
+						Description: "Availability zone ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1728,7 +1728,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "节点组属性列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Node group property list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1742,12 +1742,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "资源所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+		//	  "description": "Project to which the resource belongs. Default is 'default'. Each resource can belong to only one project. Only letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed. Maximum length is 64 characters.",
 		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "资源所属项目，默认为default。一个资源只能归属于一个项目。只能包含字母、数字、下划线“_”、点“.”和中划线“-”。长度限制在64个字符以内。",
+			Description: "Project to which the resource belongs. Default is 'default'. Each resource can belong to only one project. Only letters, numbers, underscores '_', dots '.', and hyphens '-' are allowed. Maximum length is 64 characters.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -1763,12 +1763,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群创建完成时间。",
+		//	  "description": "Cluster creation completion time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"ready_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "集群创建完成时间。",
+			Description: "Cluster creation completion time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1778,11 +1778,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群版本。",
+		//	  "description": "Cluster version.",
 		//	  "type": "string"
 		//	}
 		"release_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群版本。",
+			Description: "Cluster version.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -1792,11 +1792,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群全局安全组ID，所有节点组下的ecs都会加入该安全组。",
+		//	  "description": "Cluster global security group ID. All ECS in node groups will join this security group.",
 		//	  "type": "string"
 		//	}
 		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "集群全局安全组ID，所有节点组下的ecs都会加入该安全组。",
+			Description: "Cluster global security group ID. All ECS in node groups will join this security group.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -1806,11 +1806,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "安全模式。",
+		//	  "description": "Security mode.",
 		//	  "type": "string"
 		//	}
 		"security_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "安全模式。",
+			Description: "Security mode.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1822,14 +1822,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "状态变更原因。",
+		//	  "description": "Status change reason.",
 		//	  "properties": {
 		//	    "Code": {
-		//	      "description": "状态更新码。",
+		//	      "description": "Status update code.",
 		//	      "type": "string"
 		//	    },
 		//	    "Reason": {
-		//	      "description": "状态更新原因。",
+		//	      "description": "Status update reason.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1839,16 +1839,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Code
 				"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "状态更新码。",
+					Description: "Status update code.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Reason
 				"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "状态更新原因。",
+					Description: "Status update reason.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "状态变更原因。",
+			Description: "Status change reason.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -1858,16 +1858,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1884,7 +1884,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -1896,7 +1896,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1905,7 +1905,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1916,12 +1916,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "集群终止时间。",
+		//	  "description": "Cluster termination time.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"terminate_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "集群终止时间。",
+			Description: "Cluster termination time.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1953,7 +1953,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "E-MapReduce（EMR）是开源 Hadoop 生态的企业级大数据分析系统，完全兼容开源，为您提供 Hadoop、Spark、Hive、Hudi、Iceberg 等生态组件集成和管理。",
+		Description: "E-MapReduce (EMR) is an enterprise-grade big data analytics system based on the open-source Hadoop ecosystem. It is fully compatible with open source and provides integration and management for ecosystem components such as Hadoop, Spark, Hive, Hudi, and Iceberg.",
 		Version:     1,
 		Attributes:  attributes,
 	}

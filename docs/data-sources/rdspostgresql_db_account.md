@@ -21,9 +21,9 @@ Data Source schema for Volcengine::RDSPostgreSQL::DBAccount
 
 ### Read-Only
 
-- `account_name` (String) 数据库账号名称。账号名称的设置规则如下：长度 2~63 个字符。由字母、数字、下划线（_）或中划线（-）组成。以字母开头，字母或数字结尾。不能以 pg_ 开头。不能使用保留关键字，所有被禁用的关键词请参见禁用关键词。
-- `account_password` (String) 数据库账号的密码。数据库账号密码的设置规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的任意三种组成。特殊字符为 !@#$%^*()&_+-=。
-- `account_privileges` (String) 账号权限信息。多个权限中间以英文逗号（,）分隔。取值：Login：登录权限。Inherit：继承权限。CreateRole：创建角色权限。CreateDB：创建数据库权限。说明当账号类型为高权限账号时，无需传入该参数，默认支持全部权限。当账号类型为普通账号时，支持传入该参数，默认值为 Login 和 Inherit。账号类型为实例只读账号时，即 AccountType 取值为 InstanceReadOnly 时，不支持传入该参数
-- `account_type` (String) 数据库账号类型，取值范围如下：Super：高权限账号。Normal：普通账号。InstanceReadOnly：实例只读账号。
-- `instance_id` (String) 实例 ID
-- `not_allow_privileges` (Set of String) 为账号禁用的权限。当前仅支持取值为 DDL。说明仅支持为高权限账号或普通账号传入此字段，即 AccountType 取值为 Super 或 Normal 时。
+- `account_name` (String) Database account name. The account name rules are as follows: Length must be 2–63 characters. Can contain letters, numbers, underscores (_), or hyphens (-). Must start with a letter and end with a letter or number. Cannot start with pg_. Reserved keywords cannot be used. For all disabled keywords, see Disabled Keywords.
+- `account_password` (String) Database account password. The password rules are as follows: Length must be 8–32 characters. Must contain any three of the following: uppercase letters, lowercase letters, numbers, special characters. Supported special characters: !@#$%^*()&_+-=.
+- `account_privileges` (String) Account permission information. Separate multiple permissions with commas (,). Valid values: Login: Login permission. Inherit: Inherit permission. CreateRole: Create role permission. CreateDB: Create database permission. Note: If the account type is high privilege, you do not need to provide this parameter; all permissions are supported by default. If the account type is normal, you can provide this parameter; the default values are Login and Inherit. If the account type is instance read-only, that is, AccountType is set to InstanceReadOnly, this parameter is not supported.
+- `account_type` (String) Database account type. Valid values: Super: High privilege account. Normal: Normal account. InstanceReadOnly: Instance read-only account.
+- `instance_id` (String) Instance ID
+- `not_allow_privileges` (Set of String) Permissions disabled for the account. Currently, only DDL is supported. Note: This field can only be provided for high privilege or normal accounts, that is, when AccountType is set to Super or Normal.

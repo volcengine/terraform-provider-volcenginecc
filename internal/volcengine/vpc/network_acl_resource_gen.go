@@ -33,11 +33,11 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络ACL的创建时间。",
+		//	  "description": "Creation time of the network ACL.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL的创建时间。",
+			Description: "Creation time of the network ACL.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -47,28 +47,28 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "默认出向ACL规则列表。",
+		//	  "description": "Default outbound ACL rule list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+		//	        "description": "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "规则的描述信息。",
+		//	        "description": "Rule description.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryId": {
-		//	        "description": "规则的ID。",
+		//	        "description": "Rule ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryName": {
-		//	        "description": "规则的名称。",
+		//	        "description": "Rule name.",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+		//	        "description": "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 		//	        "enum": [
 		//	          "accept",
 		//	          "drop"
@@ -76,16 +76,16 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+		//	        "description": "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。",
+		//	        "description": "Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+		//	        "description": "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 		//	        "enum": [
 		//	          "tcp",
 		//	          "udp",
@@ -114,47 +114,47 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+						Description: "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的描述信息。",
+						Description: "Rule description.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkAclEntryId
 					"network_acl_entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的ID。",
+						Description: "Rule ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkAclEntryName
 					"network_acl_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的名称。",
+						Description: "Rule name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+						Description: "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+						Description: "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。",
+						Description: "Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+						Description: "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "默认出向ACL规则列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Default outbound ACL rule list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -164,28 +164,28 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "默认入向ACL规则列表。",
+		//	  "description": "Default inbound ACL rule list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+		//	        "description": "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "规则的描述信息。",
+		//	        "description": "Rule description.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryId": {
-		//	        "description": "规则的ID。",
+		//	        "description": "Rule ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryName": {
-		//	        "description": "规则的名称。",
+		//	        "description": "Rule name.",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+		//	        "description": "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 		//	        "enum": [
 		//	          "accept",
 		//	          "drop"
@@ -193,16 +193,16 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+		//	        "description": "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。",
+		//	        "description": "Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+		//	        "description": "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 		//	        "enum": [
 		//	          "tcp",
 		//	          "udp",
@@ -231,47 +231,47 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+						Description: "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的描述信息。",
+						Description: "Rule description.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkAclEntryId
 					"network_acl_entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的ID。",
+						Description: "Rule ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkAclEntryName
 					"network_acl_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的名称。",
+						Description: "Rule name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+						Description: "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+						Description: "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。",
+						Description: "Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+						Description: "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "默认入向ACL规则列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Default inbound ACL rule list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -281,12 +281,12 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络ACL描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+		//	  "description": "Network ACL description. Length must be 0–255 characters. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。).",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL描述信息。长度限制为0~ 255个字符。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+			Description: "Network ACL description. Length must be 0–255 characters. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -300,28 +300,28 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "出向ACL规则列表。",
+		//	  "description": "Outbound ACL rule list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+		//	        "description": "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "规则的描述信息。",
+		//	        "description": "Rule description.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryId": {
-		//	        "description": "规则的ID。",
+		//	        "description": "Rule ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryName": {
-		//	        "description": "规则的名称。",
+		//	        "description": "Rule name.",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+		//	        "description": "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 		//	        "enum": [
 		//	          "accept",
 		//	          "drop"
@@ -329,16 +329,16 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+		//	        "description": "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。",
+		//	        "description": "Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+		//	        "description": "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 		//	        "enum": [
 		//	          "tcp",
 		//	          "udp",
@@ -367,7 +367,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+						Description: "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -379,7 +379,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的描述信息。",
+						Description: "Rule description.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -389,7 +389,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NetworkAclEntryId
 					// Property: NetworkAclEntryName
 					"network_acl_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的名称。",
+						Description: "Rule name.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -401,7 +401,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+						Description: "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -417,7 +417,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+						Description: "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -430,7 +430,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Priority
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+						Description: "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -450,7 +450,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "出向ACL规则列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Outbound ACL rule list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -461,28 +461,28 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "入向ACL规则列表。",
+		//	  "description": "Inbound ACL rule list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CidrIp": {
-		//	        "description": "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+		//	        "description": "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 		//	        "type": "string"
 		//	      },
 		//	      "Description": {
-		//	        "description": "规则的描述信息。",
+		//	        "description": "Rule description.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryId": {
-		//	        "description": "规则的ID。",
+		//	        "description": "Rule ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkAclEntryName": {
-		//	        "description": "规则的名称。",
+		//	        "description": "Rule name.",
 		//	        "type": "string"
 		//	      },
 		//	      "Policy": {
-		//	        "description": "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+		//	        "description": "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 		//	        "enum": [
 		//	          "accept",
 		//	          "drop"
@@ -490,16 +490,16 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Port": {
-		//	        "description": "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+		//	        "description": "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 		//	        "type": "string"
 		//	      },
 		//	      "Priority": {
-		//	        "description": "方向规则的优先级，数字越小，代表优先级越高。不填默认值：1。",
+		//	        "description": "Priority of direction rules. Lower numbers indicate higher priority. Default value if not specified: 1.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+		//	        "description": "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 		//	        "enum": [
 		//	          "tcp",
 		//	          "udp",
@@ -528,7 +528,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CidrIp
 					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "入向规则时为源地址的网段。出向规则时为目标地址的网段。支持CIDR格式和IPv4格式的IP地址范围。默认值：无。",
+						Description: "For inbound rules, specifies the source address range. For outbound rules, specifies the destination address range. Supports CIDR and IPv4 address ranges. Default value: none.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -540,7 +540,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的描述信息。",
+						Description: "Rule description.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -550,7 +550,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					// Property: NetworkAclEntryId
 					// Property: NetworkAclEntryName
 					"network_acl_entry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的名称。",
+						Description: "Rule name.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -562,7 +562,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Policy
 					"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "授权策略。accept：允许访问。drop：拒绝访问，不返回拒绝访问的信息，仅表现出发起端请求超时或类似无法建立连接的信息。",
+						Description: "Authorization policy. accept: Allow access. drop: Deny access. No denial message is returned; the requester only experiences a timeout or similar connection failure.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -578,7 +578,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "规则的目的端口范围。当方向规则的Protocol为all、icmp或gre时，端口范围为-1/-1，表示不限制端口。当方向规则的Protocol为tcp或udp时，端口范围为1~65535，格式为1/200、80/80，表示端口1到端口200、端口80。",
+						Description: "Destination port range for the rule. If the direction rule protocol is all, icmp, or gre, the port range is -1/-1, meaning no port restriction. If the protocol is tcp or udp, the port range is 1–65535, formatted as 1/200, 80/80, indicating ports 1 to 200, or port 80.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -591,7 +591,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Priority
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "协议类型。tcp：TCP协议。udp：UDP协议。icmp：ICMP协议。icmpv6：ICMPV6协议。gre：GRE协议。all：支持所有协议。",
+						Description: "Protocol type. tcp: TCP protocol. udp: UDP protocol. icmp: ICMP protocol. icmpv6: ICMPV6 protocol. gre: GRE protocol. all: Supports all protocols.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -611,7 +611,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "入向ACL规则列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Inbound ACL rule list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -622,11 +622,11 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络ACL的ID。",
+		//	  "description": "Network ACL ID.",
 		//	  "type": "string"
 		//	}
 		"network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL的ID。",
+			Description: "Network ACL ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -636,13 +636,13 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络ACL名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。",
+		//	  "description": "Network ACL name. Length must be 1–128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-).",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"network_acl_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。",
+			Description: "Network ACL name. Length must be 1–128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-).",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -657,11 +657,11 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "default",
-		//	  "description": "网络ACL所属项目的名称。不填默认加入default项目。",
+		//	  "description": "Name of the project associated with the network ACL. If not specified, added to the default project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL所属项目的名称。不填默认加入default项目。",
+			Description: "Name of the project associated with the network ACL. If not specified, added to the default project.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("default"),
@@ -674,16 +674,16 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联资源列表。",
+		//	  "description": "Associated resource list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "ResourceId": {
-		//	        "description": "关联资源的ID。",
+		//	        "description": "Associated resource ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
-		//	        "description": "网络ACL关联资源的状态。BINDED：已绑定。BINDING：绑定中。UNBINDING：解绑中。",
+		//	        "description": "Status of resources associated with the network ACL. BINDED: Bound. BINDING: Binding. UNBINDING: Unbinding.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -697,7 +697,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "关联资源的ID。",
+						Description: "Associated resource ID.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -707,7 +707,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Status
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "关联资源列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Associated resource list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -718,11 +718,11 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络ACL的状态。Available：可用，Creating：创建中",
+		//	  "description": "Status of the network ACL. Available: Available. Creating: Creating.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL的状态。Available：可用，Creating：创建中",
+			Description: "Status of the network ACL. Available: Available. Creating: Creating.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -732,16 +732,16 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "标签列表。",
+		//	  "description": "Tag list.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。",
+		//	        "description": "User tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。",
+		//	        "description": "User tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -758,7 +758,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。",
+						Description: "User tag key.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -770,7 +770,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。",
+						Description: "User tag value.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -779,7 +779,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "标签列表。\n 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。",
+			Description: "Tag list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -790,11 +790,11 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络ACL的更新时间。",
+		//	  "description": "Last updated time of the network ACL.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL的更新时间。",
+			Description: "Last updated time of the network ACL.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -804,11 +804,11 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "网络ACL所属VPC的ID。",
+		//	  "description": "ID of the VPC associated with the network ACL.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "网络ACL所属VPC的ID。",
+			Description: "ID of the VPC associated with the network ACL.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -826,7 +826,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "网络ACL用于控制子网的出入流量，其基于白名单原理设计，出入子网的流量必须被网络ACL规则允许才能放通。",
+		Description: "The network ACL controls inbound and outbound traffic for subnets. It is designed based on the allowlist principle: traffic entering or leaving a subnet must be permitted by a network ACL rule to pass through.",
 		Version:     1,
 		Attributes:  attributes,
 	}

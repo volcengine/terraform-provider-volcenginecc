@@ -21,90 +21,90 @@ Data Source schema for Volcengine::RDSMySQL::Instance
 
 ### Read-Only
 
-- `address_objects` (Attributes Set) 默认终端的连接信息。 (see [below for nested schema](#nestedatt--address_objects))
-- `allow_list_ids` (Set of String) 白名单 ID。如需绑定多个白名单，白名单 ID 用英文逗号（,）分隔。一个实例最多可绑定 100 个白名单。
-- `allow_list_version` (String) 白名单版本。
-- `auto_storage_scaling_config` (Attributes) 自动扩容配置。 (see [below for nested schema](#nestedatt--auto_storage_scaling_config))
-- `auto_upgrade_minor_version` (String) 实例内核小版本的升级策略。取值：Auto：自动升级。Manual：手动升级。
-- `backup_audit_log_size` (Number) 备份中审计日志使用的空间。
-- `backup_bin_log_size` (Number) 备份中 Binlog 日志使用的空间。
-- `backup_data_size` (Number) 备份中数据使用的空间。
-- `backup_error_log_size` (Number) 备份中错误日志使用的空间。
-- `backup_free_quota_size` (Number) 免费的备份存储空间，单位为 GB。
-- `backup_log_size` (Number) 备份中日志使用的空间。
-- `backup_slow_log_size` (Number) 备份中慢日志使用的空间。
-- `backup_use` (Number) 实例的备份已使用的空间，单位为 GB。
-- `basic_backup_binlog_size` (Number) 基础备份中 Binlog 日志使用的空间。
-- `basic_backup_data_size` (Number) 基础备份中数据使用的空间。
-- `charge_detail` (Attributes) 付费方式。 (see [below for nested schema](#nestedatt--charge_detail))
-- `cpu_num` (Number) 实例数据库代理服务的 CPU 核数。
-- `created_time` (String) 实例创建本地时间。
-- `current_kernel_version` (String) 实例的内核小版本。
-- `db_engine_version` (String) 兼容版本。取值：MySQL_5_7：MySQL 5.7 版本。MySQL_8_0：MySQL 8.0 版本。
-- `db_param_group_id` (String) 参数模板 ID。默认值为数据库引擎版本对应的默认参数模板。
-- `db_time_zone` (String) 时区。支持 UTC -12:00 ~ +13:00。默认值为 Region 所在的 TimeZone。
-- `deletion_protection` (String) 是否启用实例的删除保护功能。取值：Enabled：是。Disabled：否。默认值。
-- `disaster_recovery_instances` (Attributes Set) 实例的灾备实例的信息。 (see [below for nested schema](#nestedatt--disaster_recovery_instances))
-- `dr_dts_task_id` (String) 主实例与灾备实例之间的数据同步链路在 DTS 数据同步任务的 ID。
-- `dr_dts_task_name` (String) 主实例与灾备实例之间同步任务的名称。
-- `dr_dts_task_status` (String) 主实例与灾备实例之间同步任务的状态。
-- `dr_seconds_behind_master` (Number) 灾备实例与主实例之间的时延。
-- `endpoints` (Attributes Set) 实例的连接信息。 (see [below for nested schema](#nestedatt--endpoints))
-- `global_read_only` (Boolean) 是否开启全局只读。取值：true：是。false：否。默认值为 false。
-- `has_disaster_recovery_instances` (Boolean) 实例是否有灾备实例。取值：true：是。false：否。
-- `has_green_instance` (Boolean) 实例是否处于蓝绿部署中。取值：true：是。false：否。
-- `instance_id` (String) 实例 ID。
-- `instance_name` (String) 实例名称。
-- `instance_status` (String) 实例状态。
-- `instance_type` (String) 实例类型。取值：DoubleNode，双节点类型。MultiNode，多节点类型。
-- `lower_case_table_names` (String) 表名是否区分大小写，默认取值为 true。取值：false：表名被存储成固定且表名称大小写敏感。true：表名将被存储成小写且表名称大小写不敏感。
-- `maintenance_window` (Attributes) 在创建实例时指定实例的可维护时间段。该字段为可选，不设置时默认为一周内每一天的 UTC18:00Z-21:59Z（即北京时间 02:00-05:59）。 (see [below for nested schema](#nestedatt--maintenance_window))
-- `master_instance_id` (String) 主实例的 ID。
-- `master_instance_name` (String) 主实例的名称。
-- `memory` (Number) 内存大小。单位：GB。
-- `node_cpu_used_percentage` (Number) 实例主节点 CPU 使用率近一分钟的平均值。
-- `node_memory_used_percentage` (Number) 实例主节点内存使用率近一分钟的平均值。
-- `node_number` (String) 节点数量。
-- `node_space_used_percentage` (Number) 实例主节点磁盘使用率近一分钟的平均值。
-- `node_spec` (String) 节点规格。
-- `nodes` (Attributes Set) 实例节点信息。 (see [below for nested schema](#nestedatt--nodes))
-- `port` (Number) 默认终端的私网端口。端口号的取值范围为 1000~65534，默认值为 3306。创建新的连接终端或开启新地址时，将使用默认终端的私网端口实时配置为默认端口。
-- `project_name` (String) 所属项目。
-- `proxy_detail` (Attributes) proxy信息 (see [below for nested schema](#nestedatt--proxy_detail))
-- `storage_audit_log_size` (Number) 实例存储空间中审计日志使用的空间。
-- `storage_bin_log_size` (Number) 实例存储空间中 Binlog 使用的空间。
-- `storage_data_size` (Number) 实例存储空间中数据使用的空间。
-- `storage_error_log_size` (Number) 实例存储空间中错误日志使用的空间。
-- `storage_log_size` (Number) 实例存储空间中日志使用的空间。
-- `storage_slow_log_size` (Number) 实例存储空间中慢日志使用的空间。
-- `storage_space` (Number) 实例总存储空间。单位为 GB。
-- `storage_type` (String) 实例的存储类型。取值范围：LocalSSD：本地盘。CloudESSD_FlexPL：FlexPL 云盘。CloudESSD_PL0：PL0 云盘。
-- `storage_use` (Number) 实例已使用用存储空间，单位为 GB。
-- `subnet_id` (String) 子网 ID。
-- `super_account_name` (String) 高权限账号名称。不传此参数默认不创建高权限账号。
-- `super_account_password` (String) 高权限账号的密码。密码规则如下：长度为 8~32 个字符。由大写字母、小写字母、数字、特殊字符中的至少三种组成。特殊字符为 !@#$%^&*()_+-=,.&?|/。
-- `sync_mode` (String) 数据同步方式：SemiSync：半同步。Async：异步。
-- `tags` (Attributes Set) RDS MySQL 实例的标签信息 (see [below for nested schema](#nestedatt--tags))
-- `time_zone` (String) 时区。
-- `updated_time` (String) 实例更新本地时间。
-- `vcpu` (Number) CPU 大小。例如：1 表示 1U。
-- `vpc_id` (String) 专有网络（VPC） ID。
-- `zone_id` (String) 实例主节点所在可用区。
-- `zone_ids` (Set of String) 实例各节点所在的可用区列表。
+- `address_objects` (Attributes Set) Connection information for the default endpoint (see [below for nested schema](#nestedatt--address_objects))
+- `allow_list_ids` (Set of String) Allowlist ID. To bind multiple allowlists, separate allowlist IDs with commas (,). Each instance can bind up to 100 allowlists
+- `allow_list_version` (String) Allowlist version
+- `auto_storage_scaling_config` (Attributes) Auto scaling configuration (see [below for nested schema](#nestedatt--auto_storage_scaling_config))
+- `auto_upgrade_minor_version` (String) Instance kernel minor version upgrade policy. Values: Auto: Automatic upgrade. Manual: Manual upgrade.
+- `backup_audit_log_size` (Number) Space used by audit logs in backup.
+- `backup_bin_log_size` (Number) Space used by binlog logs in backup.
+- `backup_data_size` (Number) Space used by data in backup.
+- `backup_error_log_size` (Number) Space used by error logs in backups.
+- `backup_free_quota_size` (Number) Free backup storage space, in GB
+- `backup_log_size` (Number) Space used by logs in backups.
+- `backup_slow_log_size` (Number) Space used by slow logs in backups.
+- `backup_use` (Number) Backup space used by the instance, in GB
+- `basic_backup_binlog_size` (Number) Space used by Binlog logs in basic backups.
+- `basic_backup_data_size` (Number) Space used by data in the base backup
+- `charge_detail` (Attributes) Billing method (see [below for nested schema](#nestedatt--charge_detail))
+- `cpu_num` (Number) Number of CPU cores for the database proxy service of the instance
+- `created_time` (String) Instance creation local time.
+- `current_kernel_version` (String) Instance kernel minor version.
+- `db_engine_version` (String) Compatible versions. Values: MySQL_5_7: MySQL 5.7 version. MySQL_8_0: MySQL 8.0 version
+- `db_param_group_id` (String) Parameter template ID. Default value is the default parameter template for the database engine version
+- `db_time_zone` (String) Time zone. Supports UTC -12:00 ~ +13:00. Default is the time zone of the region.
+- `deletion_protection` (String) Whether to enable instance deletion protection. Values: Enabled: Yes. Disabled: No. Default value.
+- `disaster_recovery_instances` (Attributes Set) Disaster recovery instance information for the instance. (see [below for nested schema](#nestedatt--disaster_recovery_instances))
+- `dr_dts_task_id` (String) ID of the data synchronization link between the primary and disaster recovery instances in the DTS data synchronization task.
+- `dr_dts_task_name` (String) Name of synchronization tasks between primary and disaster recovery instances.
+- `dr_dts_task_status` (String) Status of synchronization tasks between primary and disaster recovery instances.
+- `dr_seconds_behind_master` (Number) Latency between the disaster recovery instance and the primary instance.
+- `endpoints` (Attributes Set) Instance connection information. (see [below for nested schema](#nestedatt--endpoints))
+- `global_read_only` (Boolean) Enable global read-only mode. Values: true: enabled. false: disabled (default is false)
+- `has_disaster_recovery_instances` (Boolean) Whether the instance has a disaster recovery instance. Values: true: Yes. false: No.
+- `has_green_instance` (Boolean) Is the instance in blue-green deployment? Values: true: yes. false: no.
+- `instance_id` (String) Instance ID.
+- `instance_name` (String) Instance name.
+- `instance_status` (String) Instance status.
+- `instance_type` (String) Instance type. Values: DoubleNode: dual-node type. MultiNode: multi-node type
+- `lower_case_table_names` (String) Whether table names are case-sensitive. Default value is true. Values: false: Table names are stored as fixed and are case-sensitive. true: Table names are stored in lowercase and are case-insensitive.
+- `maintenance_window` (Attributes) Specify the maintenance window for the instance when creating it. This field is optional. If not set, the default is UTC18:00Z-21:59Z every day of the week (Beijing time 02:00-05:59). (see [below for nested schema](#nestedatt--maintenance_window))
+- `master_instance_id` (String) Primary instance ID
+- `master_instance_name` (String) Primary instance name.
+- `memory` (Number) Memory size. Unit: GB.
+- `node_cpu_used_percentage` (Number) Average CPU usage of the primary node in the instance over the past minute.
+- `node_memory_used_percentage` (Number) Average memory usage of the primary node over the past minute
+- `node_number` (String) Number of nodes.
+- `node_space_used_percentage` (Number) Average disk usage of the primary node over the past minute
+- `node_spec` (String) Node specifications.
+- `nodes` (Attributes Set) Instance node information. (see [below for nested schema](#nestedatt--nodes))
+- `port` (Number) Default endpoint private network port. Port range: 1000~65534, default is 3306. When creating a new connection endpoint or enabling a new address, the default endpoint private network port is used for real-time configuration as the default port.
+- `project_name` (String) Project.
+- `proxy_detail` (Attributes) proxy information (see [below for nested schema](#nestedatt--proxy_detail))
+- `storage_audit_log_size` (Number) Space used by audit logs in instance storage
+- `storage_bin_log_size` (Number) Binlog space usage in the instance storage
+- `storage_data_size` (Number) Space used by data in instance storage.
+- `storage_error_log_size` (Number) Space used by error logs in instance storage.
+- `storage_log_size` (Number) Space used by logs in the instance storage
+- `storage_slow_log_size` (Number) Space used by slow logs in instance storage
+- `storage_space` (Number) Total storage space of the instance, in GB
+- `storage_type` (String) Instance storage type. Value range: LocalSSD: local disk. CloudESSD_FlexPL: FlexPL cloud disk. CloudESSD_PL0: PL0 cloud disk.
+- `storage_use` (Number) Storage space used by the instance, in GB
+- `subnet_id` (String) Subnet ID.
+- `super_account_name` (String) High-privilege account name. If this parameter is not provided, a high-privilege account will not be created by default.
+- `super_account_password` (String) Password for high-privilege account. Password rules: 8–32 characters in length. Must contain at least three of the following: uppercase letters, lowercase letters, numbers, special characters. Special characters: !@#$%^&*()_+-=,.&?|/.
+- `sync_mode` (String) Data synchronization mode: SemiSync: semi-synchronous. Async: asynchronous
+- `tags` (Attributes Set) RDS MySQL instance tag information (see [below for nested schema](#nestedatt--tags))
+- `time_zone` (String) Time zone
+- `updated_time` (String) Instance updates local time.
+- `vcpu` (Number) CPU size. For example: 1 means 1U.
+- `vpc_id` (String) VPC (Virtual Private Cloud) ID.
+- `zone_id` (String) Availability zone of the instance's primary node.
+- `zone_ids` (Set of String) List of availability zones for each node in the instance.
 
 <a id="nestedatt--address_objects"></a>
 ### Nested Schema for `address_objects`
 
 Read-Only:
 
-- `dns_visibility` (Boolean) false：私网解析（默认）。true：私网以及公网解析。
-- `domain` (String) 连接域名。
-- `eip_id` (String) EIP 的 ID，仅对 Public 地址有效。
-- `internet_protocol` (String) IP 协议版本。取值为 IPv4。
-- `ip_address` (String) IP 地址。
-- `network_type` (String) 网络地址类型，取值为：Private：私网地址。Public：公网地址。
-- `port` (String) 端口。
-- `subnet_id` (String) 子网 ID，仅对 Private 地址有效。
+- `dns_visibility` (Boolean) false: private network resolution (default). true: private and public network resolution.
+- `domain` (String) Connection domain name
+- `eip_id` (String) EIP ID, valid only for Public addresses.
+- `internet_protocol` (String) IP protocol version. Value: IPv4.
+- `ip_address` (String) IP address.
+- `network_type` (String) Network address type. Values: Private: private address. Public: public address
+- `port` (String) Port
+- `subnet_id` (String) Subnet ID, valid only for Private addresses
 
 
 <a id="nestedatt--auto_storage_scaling_config"></a>
@@ -112,9 +112,9 @@ Read-Only:
 
 Read-Only:
 
-- `enable_storage_auto_scale` (Boolean) 是否开启实例的自动扩容功能。取值：true：是。false：否。
-- `storage_threshold` (Number) 触发自动扩容的可用存储空间占比。取值范围为 10~50，默认值为 10，单位为 %。
-- `storage_upper_bound` (Number) 可自动扩容的存储空间上限。该字段的取值下限为实例存储空间+20GB；取值上限为实例主节点规格对应的存储空间取值范围的上限，单位为 GB。关于不同规格可选择存储空间取值范围的详细信息。
+- `enable_storage_auto_scale` (Boolean) Whether to enable automatic scaling for the instance. Values: true: Yes. false: No.
+- `storage_threshold` (Number) Percentage of available storage space that triggers automatic scaling. Value range: 10–50, default: 10, unit: %
+- `storage_upper_bound` (Number) Maximum storage space for automatic expansion. The minimum value is instance storage space + 20 GB; the maximum value is the upper limit of the storage space range for the primary node specification, in GB. See details about selectable storage space ranges for different specifications.
 
 
 <a id="nestedatt--charge_detail"></a>
@@ -122,18 +122,18 @@ Read-Only:
 
 Read-Only:
 
-- `auto_renew` (Boolean) 预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。
-- `charge_end_time` (String) 包年包月实例的计费结束时间（UTC 时间）。格式为 yyyy-MM-ddTHH:mm:ss.sssZ。
-- `charge_start_time` (String) 实例的计费开始时间（UTC 时间）。格式为 yyyy-MM-ddTHH:mm:ss.sssZ。
-- `charge_status` (String) 实例的计费状态。取值：Normal：正常。Overdue：欠费。Unpaid：等待支付。
-- `charge_type` (String) 付费类型。取值为：PrePaid：包年包月。PostPaid：按量计费。
-- `number` (Number) 实例购买数量。取值范围为 1~50。默认值为 1。
-- `overdue_reclaim_time` (String) 实例欠费关停（按量付费）或到期关停（包年包月）后，预计被释放的时间（UTC 时间）。格式为 yyyy-MM-ddTHH:mm:ss.sssZ。
-- `overdue_time` (String) 实例欠费关停（按量付费）或到期关停（包年包月）的时间（UTC 时间）。格式为 yyyy-MM-ddTHH:mm:ss.sssZ。
-- `period` (Number) 预付费场景下的购买时长。
-- `period_unit` (String) 预付费场景下的购买周期。Month：购买周期为月。默认。Year：购买周期为年。
-- `temp_modify_end_time` (String) 临时升配的还原时间（UTC 时间）。格式为 yyyy-MM-ddTHH:mm:ss.sssZ。
-- `temp_modify_start_time` (String) 临时升配的开始时间（UTC 时间）。格式为 yyyy-MM-ddTHH:mm:ss.sssZ。
+- `auto_renew` (Boolean) Enable auto-renewal for prepaid scenarios. Values: true: auto-renewal. false: do not auto-renew
+- `charge_end_time` (String) Billing end time for subscription instance (UTC). Format: yyyy-MM-ddTHH:mm:ss.sssZ.
+- `charge_start_time` (String) Billing start time for the instance (UTC). Format: yyyy-MM-ddTHH:mm:ss.sssZ
+- `charge_status` (String) Instance billing status. Values: Normal: normal. Overdue: overdue. Unpaid: pending payment.
+- `charge_type` (String) Billing type. Options: PrePaid: subscription. PostPaid: pay-as-you-go
+- `number` (Number) Number of instances to purchase. Value range: 1–50. Default: 1
+- `overdue_reclaim_time` (String) Estimated release time after the instance is stopped due to overdue payment (pay-as-you-go) or expiration (subscription), in UTC. Format: yyyy-MM-ddTHH:mm:ss.sssZ
+- `overdue_time` (String) Time when the instance is stopped due to overdue payment (pay-as-you-go) or expiration (subscription) (UTC). Format: yyyy-MM-ddTHH:mm:ss.sssZ.
+- `period` (Number) Purchase duration in prepaid scenarios.
+- `period_unit` (String) Purchase cycle in prepaid scenarios. Month: monthly purchase cycle (default). Year: yearly purchase cycle.
+- `temp_modify_end_time` (String) Restore time for temporary scaling (UTC). Format: yyyy-MM-ddTHH:mm:ss.sssZ.
+- `temp_modify_start_time` (String) Start time for temporary scaling (UTC). Format: yyyy-MM-ddTHH:mm:ss.sssZ
 
 
 <a id="nestedatt--disaster_recovery_instances"></a>
@@ -141,12 +141,12 @@ Read-Only:
 
 Read-Only:
 
-- `dts_task_id` (String) 主实例与灾备实例之间同步任务的 ID。
-- `dts_task_name` (String) 主实例与灾备实例之间同步任务的名称。
-- `dts_task_status` (String) 主实例与灾备实例之间同步任务的状态。
-- `instance_id` (String) 灾备实例的 ID。
-- `instance_name` (String) 灾备实例的名称。
-- `seconds_behind_master` (Number) 灾备实例与主实例之间的时延。
+- `dts_task_id` (String) ID of synchronization tasks between primary and disaster recovery instances.
+- `dts_task_name` (String) Name of the synchronization task between the primary instance and the disaster recovery instance
+- `dts_task_status` (String) Status of synchronization tasks between the primary instance and the disaster recovery instance
+- `instance_id` (String) Disaster recovery instance ID.
+- `instance_name` (String) Name of disaster recovery instance.
+- `seconds_behind_master` (Number) Latency between the disaster recovery instance and the primary instance.
 
 
 <a id="nestedatt--endpoints"></a>
@@ -154,36 +154,36 @@ Read-Only:
 
 Read-Only:
 
-- `auto_add_new_nodes` (String) 当终端类型为读写终端或只读终端时，支持设置新节点是否自动加入。取值：Enable：自动加入Disable：不自动加入（默认）。
-- `connection_info_tags` (Set of String) 连接终端标签。
-- `connection_mode` (String) 连接终端类型。取值：Proxy：代理终端。Direct：直连终端。
-- `connection_pool_type` (String) 代理终端的连接池类型。取值：Transaction：事务级连接池。默认值。Direct：直连模式。
-- `description` (String) 连接终端的描述信息。
-- `enable_connection_persistent` (Boolean) 是否启用连接保持。取值：true：是。false：否。
-- `enable_read_only` (String) 是否已开启全局只读，取值：Enable：开启。Disable：未开启。
-- `enable_read_write_splitting` (String) 是否已开启读写分离，取值：Enable：开启。Disable：未开启。
-- `endpoint_id` (String) 实例连接终端 ID。
-- `endpoint_name` (String) 实例连接终端名称。
-- `endpoint_type` (String) 终端类型。取值为 Custom，自定义终端。
-- `idle_connection_reclaim` (Boolean) 空闲连接回收功能是否开启。true：开启。false：不开启。
-- `implicit_trans_split` (Boolean) 是否开启事务分离。取值：true：是。false：否。
-- `master_node_routing` (Boolean) 是否开启主节点路由。取值：true：是。false：否。
-- `master_protector_timeout` (Number) 过载保护超时时间。取值范围为 60~7200 之间的整数，单位为秒。
-- `multi_statements_mode` (String) 代理终端的 Multi-Statements 模式。取值：Strict：Strict 模式。默认值。Loose：Loose 模式。
-- `overload_protection` (Boolean) 是否开启过载保护。取值：true：是。false：否。
-- `read_only_node_distribution_type` (String) 读权重分配模式。当开通读写分离设置为 true 时需要传入此参数。在 CreateDBEndpoint 和 ModifyDBEndpoint 接口中做请求参数时，取值范围如下：LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。在 DescribeDBInstanceDetail 接口中做返回参数时，取值范围如下：Default：按规格权重自动分配。Custom：自定义分配权重。RoundRobin：轮询调度。LoadSchedule：负载调度。RoundRobinCustom：自定义权重的轮询调度。RoundRobinAuto：自动分配权重的轮询调度。
-- `read_only_node_max_delay_time` (Number) 只读节点延迟阈值。取值范围为 1~3600，默认为 30，单位为秒。
-- `read_only_node_weight` (Attributes Set) 连接终端配置的节点列表及对应的只读权重。 (see [below for nested schema](#nestedatt--endpoints--read_only_node_weight))
-- `read_write_mode` (String) 读写模式：ReadWrite：读写。ReadOnly：只读。
+- `auto_add_new_nodes` (String) When the endpoint type is read/write or read-only, you can set whether new nodes join automatically. Values: Enable: auto join. Disable: do not auto join (default)
+- `connection_info_tags` (Set of String) Connection endpoint tag.
+- `connection_mode` (String) Connection endpoint type. Values: Proxy: proxy endpoint. Direct: direct endpoint
+- `connection_pool_type` (String) Connection pool type for proxy terminal. Values: Transaction: Transaction-level connection pool. Default value. Direct: Direct mode.
+- `description` (String) Description of the connection endpoint
+- `enable_connection_persistent` (Boolean) Enable connection keep-alive. Options: true: yes. false: no
+- `enable_read_only` (String) Is global read-only enabled? Values: Enable: enabled. Disable: not enabled.
+- `enable_read_write_splitting` (String) Whether to enable read/write separation. Values: Enable: Enabled. Disable: Not enabled.
+- `endpoint_id` (String) Instance connection endpoint ID.
+- `endpoint_name` (String) Instance connection endpoint name.
+- `endpoint_type` (String) Endpoint type. Value: Custom, custom endpoint.
+- `idle_connection_reclaim` (Boolean) Whether the idle connection recycling feature is enabled. true: Enabled. false: Not enabled.
+- `implicit_trans_split` (Boolean) Whether to enable transaction separation. Values: true: Yes. false: No.
+- `master_node_routing` (Boolean) Whether to enable primary node routing. Values: true: Yes. false: No.
+- `master_protector_timeout` (Number) Overload protection timeout. Value range: integer between 60 and 7200, in seconds.
+- `multi_statements_mode` (String) Multi-Statements mode for proxy endpoints. Values: Strict: strict mode (default). Loose: loose mode
+- `overload_protection` (Boolean) Overload protection enabled. Values: true: yes. false: no
+- `read_only_node_distribution_type` (String) Read weight allocation mode. This parameter is required when read/write splitting is enabled (set to true). For request parameters in the CreateDBEndpoint and ModifyDBEndpoint APIs, valid values are: LoadSchedule: load scheduling. RoundRobinCustom: custom weighted round-robin scheduling. RoundRobinAuto: automatic weighted round-robin scheduling. For response parameters in the DescribeDBInstanceDetail API, valid values are: Default: automatic allocation based on specification weights. Custom: custom weight allocation. RoundRobin: round-robin scheduling. LoadSchedule: load scheduling. RoundRobinCustom: custom weighted round-robin scheduling. RoundRobinAuto: automatic weighted round-robin scheduling.
+- `read_only_node_max_delay_time` (Number) Read-only node latency threshold. Value range: 1~3600, default is 30, unit: seconds.
+- `read_only_node_weight` (Attributes Set) List of nodes configured for the connection endpoint and their corresponding read-only weights. (see [below for nested schema](#nestedatt--endpoints--read_only_node_weight))
+- `read_write_mode` (String) Read/write mode: ReadWrite: read/write. ReadOnly: read-only
 
 <a id="nestedatt--endpoints--read_only_node_weight"></a>
 ### Nested Schema for `endpoints.read_only_node_weight`
 
 Read-Only:
 
-- `node_id` (String) 只读节点需要传入 NodeId，主节点无需传入。
-- `node_type` (String) 节点类型。Primary：主节点。ReadOnly：只读节点。
-- `weight` (Number) 节点的读权重，以 100 递增，最大值为 10000。
+- `node_id` (String) Read-only nodes require NodeId. Primary nodes do not require it
+- `node_type` (String) Node type. Primary: primary node. ReadOnly: read-only node
+- `weight` (Number) Node read weight, increments of 100, maximum value is 10000.
 
 
 
@@ -192,9 +192,9 @@ Read-Only:
 
 Read-Only:
 
-- `day_kind` (String) 可维护周期粒度，取值为 Week，周。
-- `day_of_week` (Set of String) 指定可维护时间段在每周生效的日期。可多选。Monday：周一。Tuesday：周二。Wednesday：周三。Thursday：周四。Friday：周五。Saturday：周六。Sunday：周日。
-- `maintenance_time` (String) 实例的可维护时间段。格式：HH:mmZ-HH:mmZ（UTC 时间）。说明
+- `day_kind` (String) Maintenance cycle granularity. Value: Week.
+- `day_of_week` (Set of String) Specify the days of the week when the maintenance window is active. Multiple selections allowed. Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday.
+- `maintenance_time` (String) Instance maintenance window. Format: HH:mmZ-HH:mmZ (UTC). Note: Specifies the time period during which maintenance can be performed.
 
 
 <a id="nestedatt--nodes"></a>
@@ -202,17 +202,17 @@ Read-Only:
 
 Read-Only:
 
-- `create_time` (String) 节点的创建时间（UTC 时间）。格式为 yyyy-MM-ddTHH:mm:ss.sssZ。
-- `delay_replication_time` (Number) 只读节点的延迟复制时间，取值为 0~604800，单位为秒。
-- `memory` (Number) 内存大小，单位为 GB。
-- `node_id` (String) 节点 ID。
-- `node_spec` (String) 节点规格。
-- `node_status` (String) 节点状态，取值：Running：运行中。Creating：创建中。Deleting：删除中。Restarting：重启中。Restoring：恢复中。Updating：变更中。Upgrading：升级中。Error：错误。
-- `node_type` (String) 节点类型。取值：Primary：主节点。Secondary：备节点。ReadOnly：只读节点。
-- `sync_delay` (Number) 节点与主节点之间的延迟时间。单位为毫秒（ms）。
-- `update_time` (String) 节点更新本地时间。
-- `vcpu` (Number) 节点的 CPU 核数。
-- `zone_id` (String) 可用区 ID。
+- `create_time` (String) Node creation time (UTC). Format: yyyy-MM-ddTHH:mm:ss.sssZ.
+- `delay_replication_time` (Number) Replication delay time for read-only nodes. Value range: 0–604800, unit: seconds
+- `memory` (Number) Memory size, in GB.
+- `node_id` (String) Node ID.
+- `node_spec` (String) Node specification.
+- `node_status` (String) Node status. Values: Running: running. Creating: creating. Deleting: deleting. Restarting: restarting. Restoring: restoring. Updating: updating. Upgrading: upgrading. Error: error
+- `node_type` (String) Node type. Values: Primary: primary node. Secondary: secondary node. ReadOnly: read-only node.
+- `sync_delay` (Number) Latency between node and primary node, in milliseconds (ms).
+- `update_time` (String) Node updates local time.
+- `vcpu` (Number) Number of CPU cores for the node
+- `zone_id` (String) Availability zone ID
 
 
 <a id="nestedatt--proxy_detail"></a>
@@ -220,17 +220,17 @@ Read-Only:
 
 Read-Only:
 
-- `db_proxy_status` (String) 实例的数据库代理功能状态。取值：Creating：代理开启中。Running：代理运行中。Shutdown：代理已关闭。Deleting：代理关闭中
-- `proxy_resource_info` (Attributes) 实例的数据库代理服务的资源信息。 (see [below for nested schema](#nestedatt--proxy_detail--proxy_resource_info))
+- `db_proxy_status` (String) Status of the instance database proxy feature. Values: Creating: proxy enabling. Running: proxy running. Shutdown: proxy disabled. Deleting: proxy disabling
+- `proxy_resource_info` (Attributes) Resource information for the instance's database proxy service (see [below for nested schema](#nestedatt--proxy_detail--proxy_resource_info))
 
 <a id="nestedatt--proxy_detail--proxy_resource_info"></a>
 ### Nested Schema for `proxy_detail.proxy_resource_info`
 
 Read-Only:
 
-- `current_proxy_cpu_num` (Number) 实例数据库代理服务当前的核数。
-- `max_proxy_cpu_num` (Number) 用户可为数据库代理服务配置的最多核数。
-- `min_proxy_cpu_num` (Number) 用户可为数据库代理服务配置的最少核数。
+- `current_proxy_cpu_num` (Number) Current number of cores for the instance database proxy service
+- `max_proxy_cpu_num` (Number) Maximum number of cores configurable for database proxy service.
+- `min_proxy_cpu_num` (Number) Minimum number of CPU cores configurable for the database proxy service
 
 
 
@@ -239,5 +239,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value.

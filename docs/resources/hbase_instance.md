@@ -2,12 +2,12 @@
 page_title: "volcenginecc_hbase_instance Resource - terraform-provider-volcenginecc"
 subcategory: "HBase"
 description: |-
-  表格数据库 HBase 版是基于 Apache HBase 提供的全托管 NoSQL 服务，兼容标准 HBase 访问协议，具备低成本存储、高扩展吞吐等优势。
+  Table Database HBase Edition is a fully managed NoSQL service based on Apache HBase, compatible with the standard HBase access protocol, offering advantages such as low-cost storage and high scalability throughput.
 ---
 
 # volcenginecc_hbase_instance (Resource)
 
-表格数据库 HBase 版是基于 Apache HBase 提供的全托管 NoSQL 服务，兼容标准 HBase 访问协议，具备低成本存储、高扩展吞吐等优势。
+Table Database HBase Edition is a fully managed NoSQL service based on Apache HBase, compatible with the standard HBase access protocol, offering advantages such as low-cost storage and high scalability throughput.
 
 ## Example Usage
 
@@ -46,63 +46,63 @@ resource "volcenginecc_hbase_instance" "HBaseInstanceDemo" {
 
 ### Required
 
-- `charge_type` (String) 计费类型，取值：PostPaid：按量计费（后付费）。PrePaid：包年包月（预付费）。
-- `engine_version` (String) HBase 数据库引擎版本。当前仅支持 HBase 2.0 版本，取值默认为 HBase_2.0。
-- `master_spec` (String) Master 节点的规格码。说明关于 Master 节点所支持的规格信息，请参见实例规格。Master 节点数量为固定值，不支持增减。
-- `region_id` (String) 实例所属的地域 ID。
-- `rs_count` (Number) RegionServer 节点的数量。
-- `rs_spec` (String) RegionServer 节点的规格码。
-- `storage_capacity` (Number) 实例总存储容量，单位：GiB。
-- `storage_type` (String) 实例的存储类型，取值：HdfsHdd：HDD 文件存储。HdfsSsd：SSD 文件存储。
-- `subnet_id` (String) 实例所属的子网 ID。单可用区实例，仅包含一个可用区的子网 ID。
-- `vpc_id` (String) 私有网络 ID。说明您可以调用 DescribeVpcs 接口查询可创建 HBase 实例的私有网络信息，包括私有网络 ID。
-- `zone_id` (String) 实例所属的可用区 ID。
+- `charge_type` (String) Billing type. Values: PostPaid: pay-as-you-go (postpaid). PrePaid: subscription (prepaid, yearly/monthly).
+- `engine_version` (String) HBase database engine version. Currently, only HBase 2.0 is supported. The default value is HBase_2.0
+- `master_spec` (String) Master node specification code. For information about supported specifications for Master nodes, see Instance Specifications. The number of Master nodes is fixed and cannot be changed.
+- `region_id` (String) Region ID of the instance.
+- `rs_count` (Number) Number of RegionServer nodes
+- `rs_spec` (String) RegionServer node specification code.
+- `storage_capacity` (Number) Total storage capacity of the instance, unit: GiB.
+- `storage_type` (String) Instance storage type. Values: HdfsHdd: HDD file storage. HdfsSsd: SSD file storage.
+- `subnet_id` (String) Subnet ID of the instance. For single-zone instances, only one subnet ID for the zone is included
+- `vpc_id` (String) Private network ID. You can call the DescribeVpcs API to query information about private networks available for HBase instance creation, including the private network ID.
+- `zone_id` (String) Zone ID of the instance
 
 ### Optional
 
-- `auto_renew` (Boolean) 预付费场景下是否自动续费。取值：true：自动续费。false：不自动续费。
-- `cold_storage` (Number) 实例总容量型存储空间大小，单位 GiB。
-- `deletion_protection` (String) 实例删除保护功能开关状态。取值范围：enabled：已开启。disabled：未开启。说明关于实例删除保护的更多信息，请参见实例删除保护。
-- `enable_auth` (Boolean) 是否开启登录认证。取值：true：已开启登录认证。false：未开启登录认证。
-- `enable_cloud_storage` (Boolean) 是否开通存储型容量，取值：true：开通容量型存储。false：不开通容量型存储。说明容量型存储的详细介绍，请参见冷热分离介绍。仅当 MultiAZ（部署方式）取值为 false（单可用区部署）时，支持冷热分离功能。
-- `endpoints` (Attributes Set) 连接地址信息列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--endpoints))
-- `instance_name` (String) 实例名称。
-- `instance_type` (String) 实例类型。当前仅支持标准型，取值默认为 Standard。
-- `multi_az` (Boolean) 实例的部署方式，取值：true：多可用区部署。false：单可用区部署。目前仅支持单可用区部署。
-- `project_name` (String) 实例所属的项目名称。
-- `purchase_months` (Number) 购买时长，单位：月。取值范围如下：1，2，3，4，5，6，7，8，9，12，24，36。说明当 ChargeType 为 PrePaid时，该参数必填。
-- `tags` (Attributes Set) 需要绑定的标签键和标签值数组对象。说明支持一次传入多组标签键值对象，多组标签键值对象间用英文逗号（,）分隔。单次最多同时传入 20 组标签键值对，单个实例最多绑定 50 个标签。标签键值需满足设置规则，具体规则请参见标签设置规则。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `auto_renew` (Boolean) Whether auto-renewal is enabled for subscription scenarios. Values: true: auto-renewal enabled. false: auto-renewal not enabled.
+- `cold_storage` (Number) Total capacity-type storage space for the instance, in GiB.
+- `deletion_protection` (String) Instance deletion protection switch status. Value range: enabled: enabled. disabled: not enabled. For more information about instance deletion protection, see Instance Deletion Protection.
+- `enable_auth` (Boolean) Whether login authentication is enabled. Values: true: login authentication enabled. false: login authentication disabled.
+- `enable_cloud_storage` (Boolean) Whether capacity-type storage is enabled. Values: true: capacity-type storage enabled. false: capacity-type storage not enabled. For details about capacity-type storage, see Hot and Cold Data Separation. The hot and cold data separation feature is supported only when MultiAZ (deployment mode) is set to false (single availability zone deployment).
+- `endpoints` (Attributes Set) Connection address information list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints))
+- `instance_name` (String) Instance name
+- `instance_type` (String) Instance type. Currently, only Standard is supported. The default value is Standard
+- `multi_az` (Boolean) Instance deployment mode. Values: true: multi-availability zone deployment. false: single availability zone deployment. Currently, only single availability zone deployment is supported.
+- `project_name` (String) Project name of the instance
+- `purchase_months` (Number) Purchase duration, in months. The value range is: 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36. When ChargeType is PrePaid, this parameter is required
+- `tags` (Attributes Set) Array of tag keys and tag values to bind. Supports passing multiple sets of tag key-value objects at once, separated by commas (,). Up to 20 tag key-value pairs can be passed at a time, and up to 50 tags can be bound to a single instance. Tag keys and values must comply with the setting rules. For details, see Tag Setting Rules
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `charge_status` (String) 计费状态。取值：Normal：正常。Overdue：欠费。Shutdown：关停。
-- `create_time` (String) 实例创建时间（UTC 时间）。
+- `charge_status` (String) Billing status. Values: Normal: normal. Overdue: overdue. Shutdown: shutdown.
+- `create_time` (String) Instance creation time (UTC).
 - `id` (String) Uniquely identifies the resource.
-- `instance_id` (String) 实例 ID。
-- `master_count` (Number) Master 节点个数。单可用区部署，默认包含 2 个 Master 节点。
-- `primary_subnet_id` (String) 实时主可用区子网 ID。
-- `primary_zone_id` (String) 实时主可用区 ID。
-- `standby_subnet_id` (String) 实时备可用区子网 ID。
-- `standby_zone_id` (String) 实时备可用区 ID。
-- `status` (String) 实例当前状态。关于实例状态的更多说明，请参见实例状态说明。
-- `used_cold_storage` (Number) 实例已使用的容量型存储空间大小，单位 MiB。
-- `used_storage` (Number) 主实例已使用的存储容量，单位：MiB。
-- `vpc_name` (String) 实例所属的私有网络名称。
-- `zone_name` (String) 实例所属的可用区名称。
+- `instance_id` (String) Instance ID
+- `master_count` (Number) Number of Master nodes. For single-zone deployment, 2 Master nodes are included by default
+- `primary_subnet_id` (String) Real-time primary availability zone subnet ID.
+- `primary_zone_id` (String) Real-time primary zone ID
+- `standby_subnet_id` (String) Real-time standby availability zone subnet ID.
+- `standby_zone_id` (String) Real-time standby zone ID
+- `status` (String) Current status of the instance. For more details about instance status, see Instance Status Description
+- `used_cold_storage` (Number) Capacity-type storage space used by the instance, in MiB
+- `used_storage` (Number) Storage capacity used by the primary instance, in MiB
+- `vpc_name` (String) Name of the private network to which the instance belongs.
+- `zone_name` (String) Name of the availability zone to which the instance belongs.
 
 <a id="nestedatt--endpoints"></a>
 ### Nested Schema for `endpoints`
 
 Optional:
 
-- `address_type` (String) 连接地址类型，关于连接地址的更多信息，请参见连接地址类型。取值范围如下：Zk：ZK 地址。Thrift：Thrift2 地址。HBaseReUsedEipId：当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示实例中其他组件（如 RS 节点、Master 节点等）共享绑定使用的 EIP ID 信息。
-- `eip_id` (String) 当 ZK 连接地址或 Thrift2 连接地址开启了公网访问时，会返回该参数，表示 EIP ID。
-- `endpoint_id` (String) 连接地址 ID。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的 ID。当连接地址类型为 HBaseReUsedEipId 时，连接地址 ID 也固定为 HBaseReUsedEipId。
-- `endpoint_str` (String) 连接地址的连接串。说明默认仅返回 ZK 私网连接地址。若您申请了 Thrift2 连接地址，或者为 ZK 或 Thrift2 连接地址开启了公网访问，那么还会同时对应连接地址的连接串。当连接地址类型为 HBaseReUsedEipId 时，连接地址的连接串也固定为 HBaseReUsedEipId。
-- `network_type` (String) 连接地址网络类型。取值范围如下：Public：公网访问地址。Private：私网访问地址。
-- `private_dns_visibility` (Boolean) 私网域名是否开启公网解析。
+- `address_type` (String) Connection address type. For more information about connection addresses, see Connection Address Types. The value range is as follows: Zk: ZK address. Thrift: Thrift2 address. HBaseReUsedEipId: When public access is enabled for the ZK or Thrift2 connection address, this parameter is returned, indicating the EIP ID information shared and used by other components in the instance (such as RS nodes, Master nodes, etc.)
+- `eip_id` (String) When the ZK connection address or Thrift2 connection address enables public access, this parameter is returned, indicating the EIP ID.
+- `endpoint_id` (String) Connection address ID. By default, only the ZK private network connection address is returned. If you apply for a Thrift2 connection address or enable public access for the ZK or Thrift2 connection address, the corresponding connection address ID will also be returned. When the connection address type is HBaseReUsedEipId, the connection address ID is fixed as HBaseReUsedEipId
+- `endpoint_str` (String) Connection string for the connection address. By default, only the ZK private network connection address is returned. If you have requested a Thrift2 connection address, or enabled public access for ZK or Thrift2 connection addresses, the corresponding connection string will also be provided. When the connection address type is HBaseReUsedEipId, the connection string is always set to HBaseReUsedEipId.
+- `network_type` (String) Connection address network type. Value range: Public: public access address. Private: private access address.
+- `private_dns_visibility` (Boolean) Whether public DNS resolution is enabled for the private network domain name.
 
 
 <a id="nestedatt--tags"></a>
@@ -110,8 +110,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 实例所绑定标签的标签键。
-- `value` (String) 实例所绑定标签的标签值。
+- `key` (String) Tag key of the tags bound to the instance
+- `value` (String) Tag values bound to the instance.
 
 ## Import
 

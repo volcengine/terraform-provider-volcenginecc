@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vefaas_sandbox Resource - terraform-provider-volcenginecc"
 subcategory: "VEFAAS"
 description: |-
-  沙箱实例是云沙箱中实际执行沙箱镜像的安全且隔离的容器运行环境。
+  A sandbox instance is a secure and isolated container runtime environment that actually runs the sandbox image in the cloud sandbox
 ---
 
 # volcenginecc_vefaas_sandbox (Resource)
 
-沙箱实例是云沙箱中实际执行沙箱镜像的安全且隔离的容器运行环境。
+A sandbox instance is a secure and isolated container runtime environment that actually runs the sandbox image in the cloud sandbox
 
 ## Example Usage
 
@@ -51,43 +51,43 @@ resource "volcenginecc_vefaas_sandbox" "VefaasSandboxDemo" {
 
 ### Required
 
-- `function_id` (String) 沙箱实例所属的沙箱应用 ID。
+- `function_id` (String) Sandbox application ID to which the sandbox instance belongs
 
 ### Optional
 
-- `cpu_milli` (Number) 沙箱实例 CPU 规格：单位：milli cpu取值范围：250~16000,默认值：1000。
-- `envs` (Attributes Set) 沙箱实例环境变量。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--envs))
-- `instance_image_info` (Attributes) 沙箱实例镜像信息，包括镜像地址、启动命令、监听端口。 (see [below for nested schema](#nestedatt--instance_image_info))
-- `instance_tos_mount_config` (Attributes) 沙箱实例级别对象存储（TOS）存储挂载配置。 (see [below for nested schema](#nestedatt--instance_tos_mount_config))
-- `max_concurrency` (Number) 单实例请求最大并发数：取值范围：10~1000,默认值：100。
-- `memory_mb` (Number) 沙箱实例内存规格：单位：MiB，取值范围：512~131072，默认值：2048
-- `metadata` (Attributes Set) 沙箱实例标签（Label）元信息，用于标记、筛选实例。格式为<"key":"value">。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--metadata))
-- `request_timeout` (Number) 请求超时时间：单位：秒，取值范围：1~900，正整数。默认值：30。
-- `timeout` (Number) 沙箱实例存活时长：单位：分钟，取值范围：3～1440，默认值：60。
+- `cpu_milli` (Number) Sandbox instance CPU specification: Unit: milli CPU, range: 250~16000, default: 1000
+- `envs` (Attributes Set) Sandbox instance environment variables
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--envs))
+- `instance_image_info` (Attributes) Sandbox instance image information, including image address, startup command, and listening port. (see [below for nested schema](#nestedatt--instance_image_info))
+- `instance_tos_mount_config` (Attributes) Instance-level object storage (TOS) mount configuration for the sandbox instance (see [below for nested schema](#nestedatt--instance_tos_mount_config))
+- `max_concurrency` (Number) Maximum concurrent requests per instance: range: 10~1000, default: 100
+- `memory_mb` (Number) Sandbox instance memory specification: Unit: MiB, range: 512~131072, default: 2048
+- `metadata` (Attributes Set) Sandbox instance label metadata used to tag and filter instances. Format: <"key":"value">
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--metadata))
+- `request_timeout` (Number) Request timeout: Unit: seconds, range: 1~900, positive integer. Default: 30
+- `timeout` (Number) Sandbox instance lifespan: Unit: minutes, range: 3~1440, default: 60
 
 ### Read-Only
 
-- `availability_zone` (String) 沙箱实例所在可用区 ID。
-- `created_time` (String) 沙箱实例创建时间。
-- `error_code` (String) 沙箱实例启动失败错误码。参数值说明：internal_load_request_error：系统内部错误，function_initialize_failed：业务进程初始化错误，function_health_check_failed：健康检查错误，route_terminating：路由删除中，正常启动沙箱实例时，该字段为空。
-- `error_message` (String) 沙箱实例启动失败的错误码详情。正常启动沙箱实例时，该字段为空。
-- `expire_at` (String) 沙箱实例存活时长。
+- `availability_zone` (String) Availability zone ID of the sandbox instance
+- `created_time` (String) Sandbox instance creation time.
+- `error_code` (String) Sandbox instance startup failure error code. Parameter description: internal_load_request_error: internal system error, function_initialize_failed: business process initialization error, function_health_check_failed: health check error, route_terminating: route deletion in progress. This field is empty when the sandbox instance starts normally
+- `error_message` (String) Details of the error code when the sandbox instance fails to start. This field is empty when the sandbox instance starts normally.
+- `expire_at` (String) Sandbox instance uptime.
 - `id` (String) Uniquely identifies the resource.
-- `instance_type` (String) 沙箱实例类型 。参数值说明：elastic：弹性实例，frozen：冻结实例，activated：激活实例，reserved：预留实例。
-- `pending` (Boolean) 沙箱实例是否处于 Pending 状态。参数值说明：true：是，false：否。
-- `revision_number` (Number) 函数实例版本编号。
-- `sandbox_id` (String) 沙箱实例 ID。
-- `status` (String) 沙箱实例状态。 参数值说明：Starting：开始启动，Ready：启动完成，Failed：启动失败，Terminating：终止中。
+- `instance_type` (String) Sandbox instance type. Parameter description: elastic: elastic instance, frozen: frozen instance, activated: activated instance, reserved: reserved instance
+- `pending` (Boolean) Whether the sandbox instance is in Pending status. Parameter description: true: yes, false: no
+- `revision_number` (Number) Function instance version number
+- `sandbox_id` (String) Sandbox instance ID
+- `status` (String) Sandbox instance status. Parameter description: Starting: starting, Ready: startup completed, Failed: startup failed, Terminating: terminating
 
 <a id="nestedatt--envs"></a>
 ### Nested Schema for `envs`
 
 Optional:
 
-- `key` (String) 环境变量键。
-- `value` (String) 环境变量值。
+- `key` (String) Environment variable key
+- `value` (String) Environment variable value
 
 
 <a id="nestedatt--instance_image_info"></a>
@@ -95,10 +95,10 @@ Optional:
 
 Optional:
 
-- `command` (String) 沙箱实例程序的启动命令。如需指定脚本文件，请使用绝对路径，并确保脚本具有相应的可执行权限。
-- `image` (String) 沙箱实例使用的已预热镜像地址。
-- `image_id` (String) 沙箱实例使用的已预热镜像 ID。
-- `port` (Number) 沙箱实例镜像监听端口。
+- `command` (String) Startup command for the sandbox instance program. To specify a script file, use an absolute path and ensure the script has executable permissions
+- `image` (String) Preheated image address used by the sandbox instance
+- `image_id` (String) Pre-warmed image ID used by the sandbox instance.
+- `port` (Number) Listening port of the sandbox instance image.
 
 
 <a id="nestedatt--instance_tos_mount_config"></a>
@@ -106,17 +106,17 @@ Optional:
 
 Optional:
 
-- `enable` (Boolean) 沙箱实例是否启用了实例级别的 TOS 挂载，参数值说明：true：是，false：否。
-- `tos_mount_points` (Attributes Set) 启用了实例级别 TOS 挂载的沙箱实例具体 TOS 挂载目录信息。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--instance_tos_mount_config--tos_mount_points))
+- `enable` (Boolean) Whether instance-level TOS mount is enabled for the sandbox instance. Parameter description: true: yes, false: no
+- `tos_mount_points` (Attributes Set) Detailed TOS mount directory information for sandbox instances with instance-level TOS mount enabled
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--instance_tos_mount_config--tos_mount_points))
 
 <a id="nestedatt--instance_tos_mount_config--tos_mount_points"></a>
 ### Nested Schema for `instance_tos_mount_config.tos_mount_points`
 
 Optional:
 
-- `bucket_path` (String) 沙箱实例挂载的 TOS 远端目录。
-- `local_mount_path` (String) 沙箱实例挂载的 TOS 存储桶本地目录。该目录为沙箱应用已配置的 TOS 存储挂载的本地目录时，系统根据指定的本地目录，修改与之对应的 TOS BucketPath。
+- `bucket_path` (String) TOS remote directory mounted by the sandbox instance
+- `local_mount_path` (String) Local directory of the TOS bucket mounted by the sandbox instance. If this directory is the local directory configured for TOS storage mount in the sandbox application, the system modifies the corresponding TOS BucketPath based on the specified local directory
 
 
 
@@ -125,8 +125,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 标签键。
-- `value` (String) 标签值。
+- `key` (String) Tag key
+- `value` (String) Tag value
 
 ## Import
 

@@ -2,14 +2,14 @@
 page_title: "volcenginecc_cloudidentity_permission_set_assignment Resource - terraform-provider-volcenginecc"
 subcategory: "CloudIdentity"
 description: |-
-  当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。
-  当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。
+  After you create a Cloud Identity Center user, you need to grant the user login access to each account.
+  When users require access to Volcano Engine cloud resources with permissions that share abstractable characteristics, such as network operations permissions or security management permissions, you can predefine permission sets in the Cloud Identity Center as templates. You can achieve centralized authorization based on these permission sets. The Cloud Identity Center will synchronize and distribute permission sets to each account, reducing enterprise permission management costs.
 ---
 
 # volcenginecc_cloudidentity_permission_set_assignment (Resource)
 
-当您创建好云身份中心用户后，需要授予用户访问到各账号的登录访问权限。
-当用户访问火山引擎云资源的权限访问具备可抽象的共性时，如：网络运维权限、安全管理权限等，您可以在云身份中心预置访问权限集作为权限模版，最终基于访问权限集来实现中心化授权。云身份中心将会为您同步分发访问权限集到各个账号，减少企业权限的运维成本。
+After you create a Cloud Identity Center user, you need to grant the user login access to each account.
+When users require access to Volcano Engine cloud resources with permissions that share abstractable characteristics, such as network operations permissions or security management permissions, you can predefine permission sets in the Cloud Identity Center as templates. You can achieve centralized authorization based on these permission sets. The Cloud Identity Center will synchronize and distribute permission sets to each account, reducing enterprise permission management costs.
 
 ## Example Usage
 
@@ -27,18 +27,18 @@ resource "volcenginecc_cloudidentity_permission_set_assignment" "CloudIdentityPe
 
 ### Required
 
-- `permission_set_id` (String) 权限集 ID。
-- `principal_id` (String) 云身份中心对象 ID
-- `principal_type` (String) 云身份中心对象类型，User 或者 Group。
-- `target_id` (String) 授权账号 ID。
+- `permission_set_id` (String) Permission set ID
+- `principal_id` (String) Cloud Identity Center object ID
+- `principal_type` (String) Cloud Identity Center object type: User or Group
+- `target_id` (String) Authorized account ID
 
 ### Read-Only
 
-- `created_time` (String) 授权创建时间。
+- `created_time` (String) Authorization creation time
 - `id` (String) Uniquely identifies the resource.
-- `permission_set_name` (String) 权限集名称。
-- `principal_name` (String) 云身份中心对象名。
-- `target_name` (String) 授权账号名。
+- `permission_set_name` (String) Permission set name
+- `principal_name` (String) Cloud Identity Center object name
+- `target_name` (String) Authorized account name
 
 ## Import
 

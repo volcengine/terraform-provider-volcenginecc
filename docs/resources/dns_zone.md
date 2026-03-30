@@ -2,12 +2,12 @@
 page_title: "volcenginecc_dns_zone Resource - terraform-provider-volcenginecc"
 subcategory: "DNS"
 description: |-
-  资源里的zone就是域名，可以是主域名 例如 example.com，也可以是子域名 例如 abc.example.com
+  The zone in the resource is the domain name, which can be a primary domain such as example.com or a subdomain such as abc.example.com
 ---
 
 # volcenginecc_dns_zone (Resource)
 
-资源里的zone就是域名，可以是主域名 例如 example.com，也可以是子域名 例如 abc.example.com
+The zone in the resource is the domain name, which can be a primary domain such as example.com or a subdomain such as abc.example.com
 
 ## Example Usage
 
@@ -29,44 +29,44 @@ resource "volcenginecc_dns_zone" "DnsZoneDemo" {
 
 ### Required
 
-- `zone_name` (String) 域名。
+- `zone_name` (String) Domain name.
 
 ### Optional
 
-- `project_name` (String) 域名的项目。
-- `remark` (String) 域名的备注。
-- `tags` (Attributes Set) 该域名的标签。默认为空。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `project_name` (String) Domain project.
+- `remark` (String) Domain notes
+- `tags` (Attributes Set) Tags for the domain. Default is empty.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `allocate_dns_server_list` (Set of String) 云解析 DNS 分配给域名的 DNS 服务器列表。
-- `auto_renew` (Boolean) 是否开启域名自动续费。true：开启域名自动续费。false：关闭域名自动续费。
-- `cache_stage` (Number) 域名所有权的状态。该参数有以下取值：0：表示您是域名的所有者。您添加此域名后，就可以管理该域名的 DNS 解析。1：表示您不是域名的所有者。您添加此域名后，该域名的状态是 域名待找回。如果您要管理该域名的 DNS 解析，您需要在控制台根据提示验证您的域名所有权。
-- `created_time` (String) 域名的创建时间。
-- `dns_security` (String) DNS DDoS 防护服务的版本。dns_security_standard_inner：安全防护标准版。""：无安全防护版。
-- `expired_time` (Number) 实例的过期时间。格式是 Unix 时间戳。对于云解析 DNS 免费版，该字段的值为 null。
+- `allocate_dns_server_list` (Set of String) List of DNS servers assigned to the domain by Cloud DNS
+- `auto_renew` (Boolean) Whether domain auto-renewal is enabled. true: Auto-renewal enabled. false: Auto-renewal disabled.
+- `cache_stage` (Number) Domain ownership status. This parameter has the following values: 0: You are the domain owner. After adding this domain, you can manage its DNS resolution. 1: You are not the domain owner. After adding this domain, its status is 'domain reclaim pending.' To manage DNS resolution, you must verify domain ownership in the console as prompted.
+- `created_time` (String) Domain creation time.
+- `dns_security` (String) Version of DNS DDoS protection service. dns_security_standard_inner: Standard protection edition. "": No protection edition.
+- `expired_time` (Number) Instance expiration time. Format is Unix timestamp. For Cloud DNS Free Edition, this field is null.
 - `id` (String) Uniquely identifies the resource.
-- `instance_id` (String) 实例的 ID。对于云解析 DNS 免费版，该字段的值为 null。
-- `instance_no` (String) 实例的 ID。对于云解析 DNS 免费版，该字段的值为 null。
-- `is_ns_correct` (Boolean) DNS 服务器的配置是否正确。如果配置正确，该域名在云解析 DNS 中的状态是 正常。该参数有以下取值：true： RealDNSServerList的 DNS 服务器列表包含所有 AllocateDNSServerList中的 DNS 服务器。此时，DNS 服务器的配置是正确的。false： RealDNSServerList的 DNS 服务器列表包含部分或者未包含 AllocateDNSServerList中的 DNS 服务器。此时，DNS 服务器的配置是不正确的。
-- `is_sub_domain` (Boolean) 是否是子域名。true：子域名。false：主域名。
-- `last_operator` (String) 创建该域名的用户的账号的 ID。
-- `real_dns_server_list` (Set of String) 域名实际使用的 DNS 服务器列表。
-- `record_count` (Number) 域名所包含的解析记录的总数。
-- `stage` (Number) 域名的状态。该参数有以下取值：0：正常。在该状态下，该域名的解析记录处于生效状态。1：域名待找回。在该状态下，该域名的解析记录不生效。该状态表示您不是该域名的所有者。如果您需要管理域名解析，您需要验证您的域名所有权。2：未使用TrafficRoute解析。在该状态下，该域名的解析记录不生效。该状态表示分配给该域名的 DNS 服务器不是云解析 DNS 的 DNS 服务器。3：异常。在该状态下，该域名的解析记录不生效。引起该状态的常见原因如下：域名未实名认证导致域名被注册局或注册商停用。域名未配置 DNS 服务器。域名未注册。API 在查询域名时超时。超时原因可能是网络问题。5：请变更DNS服务器。该状态表示由于云解析 DNS 的服务升级或变更，您需要把域名的 DNS 服务器更新为云解析 DNS 新分配的 DNS 服务器。
-- `sub_domain_host` (String) 子域名的域名前缀。如果该域名不是子域名，那么该参数为 null。
-- `trade_code` (String) 域名的功能版本。该参数有以下取值：free_inner：免费版。professional_inner：专业版。enterprise_inner：企业版。ultimate_inner：旗舰版。ultimate_exclusive_inner：尊享版。
-- `updated_time` (String) 域名最近一次的更新时间。更新操作包括：更新域名备注在域名下创建解析记录。
-- `zid` (String) 域名的 ID。
+- `instance_id` (String) Instance ID. For Cloud DNS Free Edition, this field is null.
+- `instance_no` (String) Instance ID. For Cloud DNS Free Edition, this field is null.
+- `is_ns_correct` (Boolean) Whether the DNS server configuration is correct. If configured correctly, the domain status in Cloud DNS is Normal. This parameter has the following values: true: The DNS server list in RealDNSServerList includes all DNS servers in AllocateDNSServerList. In this case, the DNS server configuration is correct. false: The DNS server list in RealDNSServerList includes only some or none of the DNS servers in AllocateDNSServerList. In this case, the DNS server configuration is incorrect.
+- `is_sub_domain` (Boolean) Whether it is a subdomain. true: Subdomain. false: Primary domain.
+- `last_operator` (String) ID of the account that created the domain.
+- `real_dns_server_list` (Set of String) List of DNS servers actually used by the domain.
+- `record_count` (Number) Total number of DNS records contained in the domain.
+- `stage` (Number) Domain status. This parameter has the following values: 0: Normal. In this state, the domain's DNS resolution records are active. 1: Domain reclaim pending. In this state, the domain's DNS resolution records are inactive. This status indicates you are not the owner of the domain. If you need to manage DNS resolution, you must verify domain ownership. 2: TrafficRoute not used for resolution. In this state, the domain's DNS resolution records are inactive. This status means the DNS server assigned to the domain is not a Cloud DNS server. 3: Abnormal. In this state, the domain's DNS resolution records are inactive. Common causes for this status include: the domain is disabled by the registry or registrar due to lack of real-name verification; DNS server not configured; domain not registered; API timeout when querying the domain, possibly due to network issues. 5: Please change DNS server. This status means you need to update the domain's DNS server to the newly assigned Cloud DNS server due to service upgrade or change.
+- `sub_domain_host` (String) Prefix of the subdomain. If the domain is not a subdomain, this parameter is null.
+- `trade_code` (String) Domain feature version. This parameter has the following values: free_inner: Free Edition; professional_inner: Professional Edition; enterprise_inner: Enterprise Edition; ultimate_inner: Flagship Edition; ultimate_exclusive_inner: Premium Edition.
+- `updated_time` (String) Last update time for the domain. Update operations include: updating domain remarks, creating DNS records under the domain.
+- `zid` (String) Domain ID.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String) 标签的键。
-- `value` (String) 标签的值。
+- `key` (String) Tag key
+- `value` (String) Tag value.
 
 ## Import
 

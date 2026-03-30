@@ -26,58 +26,58 @@ func backupResourceDataSource(ctx context.Context) (datasource.DataSource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建此备份源的账户 ID。",
+		//	  "description": "Account ID that created this backup source",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建此备份源的账户 ID。",
+			Description: "Account ID that created this backup source",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例 ID。",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例 ID。",
+			Description: "Instance ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "实例名称。",
+		//	  "description": "Instance Name",
 		//	  "type": "string"
 		//	}
 		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "实例名称。",
+			Description: "Instance Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MetaInformation
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。",
+		//	  "description": "Resource meta information (used to store additional configuration when creating a backup plan). ECS full backup parameters: see the EcsBackupConfiguration structure. vePFS backup parameters: see the VePFSBackupConfiguration structure.",
 		//	  "properties": {
 		//	    "EcsMeta": {
-		//	      "description": "ECS 的元数据，是一个 JSON string。格式见数据结构的 EcsBackupConfiguration 结构体。",
+		//	      "description": "ECS metadata, as a JSON string. For format, see the EcsBackupConfiguration structure in the data structure.",
 		//	      "type": "string"
 		//	    },
 		//	    "VepfsMeta": {
-		//	      "description": "vePFS 备份源元数据，是一个 JSON string。格式见数据结构的VePFSBackupConfiguration 结构体。",
+		//	      "description": "vePFS backup source metadata, as a JSON string. For format, see the VePFSBackupConfiguration structure in the data structure.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -87,33 +87,33 @@ func backupResourceDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EcsMeta
 				"ecs_meta": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ECS 的元数据，是一个 JSON string。格式见数据结构的 EcsBackupConfiguration 结构体。",
+					Description: "ECS metadata, as a JSON string. For format, see the EcsBackupConfiguration structure in the data structure.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VepfsMeta
 				"vepfs_meta": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "vePFS 备份源元数据，是一个 JSON string。格式见数据结构的VePFSBackupConfiguration 结构体。",
+					Description: "vePFS backup source metadata, as a JSON string. For format, see the VePFSBackupConfiguration structure in the data structure.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "资源的meta信息(创建备份计划时，用于存储额外的配置)ECS 整机备份参数：见 EcsBackupConfiguration 结构体。vePFS 备份参数：见 VePFSBackupConfiguration 结构体。",
+			Description: "Resource meta information (used to store additional configuration when creating a backup plan). ECS full backup parameters: see the EcsBackupConfiguration structure. vePFS backup parameters: see the VePFSBackupConfiguration structure.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Plans
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "关联的备份计划列表。",
+		//	  "description": "List of Associated Backup Plans",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "备份计划信息",
+		//	    "description": "Backup Plan Information",
 		//	    "properties": {
 		//	      "PlanId": {
-		//	        "description": "备份计划 ID",
+		//	        "description": "Backup Plan ID",
 		//	        "type": "string"
 		//	      },
 		//	      "PlanName": {
-		//	        "description": "备份计划名称",
+		//	        "description": "Backup Plan Name",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -127,46 +127,46 @@ func backupResourceDataSource(ctx context.Context) (datasource.DataSource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PlanId
 					"plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "备份计划 ID",
+						Description: "Backup Plan ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PlanName
 					"plan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "备份计划名称",
+						Description: "Backup Plan Name",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "关联的备份计划列表。",
+			Description: "List of Associated Backup Plans",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RecoveryPointNumber
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "恢复点的数量",
+		//	  "description": "Number of Restore Points",
 		//	  "type": "integer"
 		//	}
 		"recovery_point_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "恢复点的数量",
+			Description: "Number of Restore Points",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份源 ID。",
+		//	  "description": "Backup Source ID",
 		//	  "type": "string"
 		//	}
 		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份源 ID。",
+			Description: "Backup Source ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份源类型，取值说明如下：ECS：ECS 整机。vePFS：vePFS 文件系统。",
+		//	  "description": "Backup source type. Value description: ECS: ECS full instance. vePFS: vePFS file system.",
 		//	  "enum": [
 		//	    "ECS",
 		//	    "vePFS"
@@ -174,40 +174,40 @@ func backupResourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "string"
 		//	}
 		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份源类型，取值说明如下：ECS：ECS 整机。vePFS：vePFS 文件系统。",
+			Description: "Backup source type. Value description: ECS: ECS full instance. vePFS: vePFS file system.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份源状态。可能的值为：AVAILABLE、REMOVING、BEING_BACKED_UP、RECOVERING、CREATING、ERROR、UNAVAILABLE。",
+		//	  "description": "Backup source status. Possible values: AVAILABLE, REMOVING, BEING_BACKED_UP, RECOVERING, CREATING, ERROR, UNAVAILABLE.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份源状态。可能的值为：AVAILABLE、REMOVING、BEING_BACKED_UP、RECOVERING、CREATING、ERROR、UNAVAILABLE。",
+			Description: "Backup source status. Possible values: AVAILABLE, REMOVING, BEING_BACKED_UP, RECOVERING, CREATING, ERROR, UNAVAILABLE.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间",
+			Description: "Update Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsedCapacityInBytes
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "已经备份的字节数。",
+		//	  "description": "Bytes Already Backed Up",
 		//	  "type": "integer"
 		//	}
 		"used_capacity_in_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "已经备份的字节数。",
+			Description: "Bytes Already Backed Up",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

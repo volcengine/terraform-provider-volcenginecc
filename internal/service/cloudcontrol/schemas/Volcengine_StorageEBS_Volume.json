@@ -9,46 +9,46 @@
   ],
   "definitions": {
     "BaselinePerformance": {
-      "description": "基本性能",
+      "description": "Baseline performance.",
       "properties": {
         "IOPS": {
-          "description": "云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。",
+          "description": "Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.",
           "type": "number"
         },
         "Throughput": {
-          "description": "云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。",
+          "description": "The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.",
           "type": "number"
         }
       },
       "type": "object"
     },
     "Performance": {
-      "description": "额外性能",
+      "description": "Extra performance.",
       "properties": {
         "ExtraPerformanceTypeId": {
-          "description": "额外性能的类型，取值如下：Balance：均衡型额外性能；IOPS：IOPS型额外性能；Throughput：吞吐量型额外性能。",
+          "description": "Type of extra performance. Value description: Balance: Balanced extra performance; IOPS: IOPS extra performance; Throughput: Throughput extra performance.",
           "type": "string"
         },
         "IOPS": {
-          "description": "云盘的额外IOPS。",
+          "description": "Extra IOPS of the disk.",
           "type": "number"
         },
         "Throughput": {
-          "description": "云盘的额外吞吐量。",
+          "description": "Extra throughput of the disk.",
           "type": "number"
         }
       },
       "type": "object"
     },
     "Tag": {
-      "description": "标签",
+      "description": "Tag",
       "properties": {
         "Key": {
-          "description": "标签键。",
+          "description": "Tag key.",
           "type": "string"
         },
         "Value": {
-          "description": "标签值。",
+          "description": "Tag value.",
           "type": "string"
         }
       },
@@ -58,21 +58,21 @@
       "type": "object"
     },
     "TotalPerformance": {
-      "description": "总性能。",
+      "description": "Total performance.",
       "properties": {
         "IOPS": {
-          "description": "云盘的总IOPS，即云盘的基准IOPS和额外IOPS之和。",
+          "description": "Total IOPS of the disk, which is the sum of the baseline IOPS and extra IOPS.",
           "type": "number"
         },
         "Throughput": {
-          "description": "云盘的总吞吐量，即云盘的基准吞吐量和额外吞吐量之和。",
+          "description": "The total throughput of the cloud disk is the sum of its baseline throughput and additional throughput.",
           "type": "number"
         }
       },
       "type": "object"
     }
   },
-  "description": "云盘是高可用、高可靠、高性能、弹性扩展的块存储设备，可以作为云服务器和弹性容器服务的可扩展硬盘使用。",
+  "description": "Cloud disk is a block storage device with high availability, high reliability, high performance, and elastic scalability. It can be used as a scalable disk for cloud servers and elastic container services.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/ProjectName",
@@ -134,74 +134,74 @@
   ],
   "properties": {
     "AutoSnapshotPolicyId": {
-      "description": "自动快照策略ID。",
+      "description": "Automatic snapshot policy ID.",
       "type": "string"
     },
     "AutoSnapshotPolicyName": {
-      "description": "自动快照策略名称。",
+      "description": "Automatic snapshot policy name.",
       "type": "string"
     },
     "BaselinePerformance": {
       "$ref": "#/definitions/BaselinePerformance",
-      "description": "基本性能。",
+      "description": "Baseline performance.",
       "type": "object"
     },
     "CreatedAt": {
-      "description": "云盘创建时间。",
+      "description": "Disk creation time.",
       "semantic": "createdTime",
       "type": "string"
     },
     "DeleteWithInstance": {
       "default": false,
-      "description": "释放实例时，该云盘是否随实例一起释放，取值说明如下：true：云盘随实例一起释放。false：云盘不随实例一起释放。",
+      "description": "When releasing the instance, specify whether the disk is released along with the instance. Value description: true: The disk is released with the instance. false: The disk is not released with the instance.",
       "type": "boolean"
     },
     "Description": {
-      "description": "云盘的描述信息，默认为空，长度限制在1 ~ 255字符之间。",
+      "description": "Disk description. Default is empty. Length must be between 1 and 255 characters.",
       "maxLength": 255,
       "minLength": 0,
       "semantic": "description",
       "type": "string"
     },
     "DeviceName": {
-      "description": "设备名称",
+      "description": "Device name",
       "type": "string"
     },
     "ErrorDetail": {
-      "description": "具体错误",
+      "description": "Specific error",
       "type": "string"
     },
     "ExpiredTime": {
-      "description": "包年包月到期时间。",
+      "description": "Expiration time for yearly/monthly subscription.",
       "type": "string"
     },
     "ExtraPerformance": {
       "$ref": "#/definitions/Performance",
-      "description": "额外性能。",
+      "description": "Extra performance.",
       "type": "object"
     },
     "ImageId": {
-      "description": "云盘中的镜像ID。",
+      "description": "Image ID in the disk.",
       "type": "string"
     },
     "InstanceId": {
-      "description": "创建云盘的同时挂载的ECS实例ID。",
+      "description": "ECS instance ID mounted when creating the cloud disk.",
       "type": "string"
     },
     "Kind": {
-      "description": "云盘属性，data表示数据盘。默认值为data。说明： 仅支持创建数据盘。",
+      "description": "Disk attribute. data indicates a data disk. The default value is data. Note: Only data disks can be created.",
       "type": "string"
     },
     "OverdueReclaimTime": {
-      "description": "云盘欠费回收时间。",
+      "description": "Disk overdue reclamation time.",
       "type": "string"
     },
     "OverdueTime": {
-      "description": "云盘欠费关停时间。",
+      "description": "Disk overdue shutdown time.",
       "type": "string"
     },
     "PayType": {
-      "description": "付费类型，说明如下： Pre：预付费（包年包月） Post：后付费（按量计费）。",
+      "description": "Payment type. Description: Pre: Prepaid (annual/monthly). Post: Postpaid (pay-as-you-go).",
       "enum": [
         "pre",
         "post"
@@ -209,12 +209,12 @@
       "type": "string"
     },
     "ProjectName": {
-      "description": "云盘所要加入的Project（项目）名称。",
+      "description": "Project name to which the disk will be added.",
       "semantic": "projectName",
       "type": "string"
     },
     "RenewType": {
-      "description": "续费方式 1：手动续费 2 ：自动续费 3 ：到期不续费。",
+      "description": "Renewal method 1: Manual renewal 2: Automatic renewal 3: Do not renew upon expiration.",
       "enum": [
         0,
         1,
@@ -224,19 +224,19 @@
       "type": "number"
     },
     "Size": {
-      "description": "Size，数据盘容量大小，单位为GiB。不同类型的数据盘容量范围如下：ESSD_PL0：10~65536 GiB；ESSD_FlexPL：10~65536 GiB；TSSD_TL0：40~65536 GiB",
+      "description": "Size: data disk capacity in GiB. The capacity ranges for different types of data disks are as follows: ESSD_PL0: 10~65536 GiB; ESSD_FlexPL: 10~65536 GiB; TSSD_TL0: 40~65536 GiB",
       "type": "number"
     },
     "SnapshotCount": {
-      "description": "快照计数",
+      "description": "Snapshot count.",
       "type": "number"
     },
     "SourceSnapshotId": {
-      "description": "源快照。",
+      "description": "Source snapshot.",
       "type": "string"
     },
     "Status": {
-      "description": "云盘状态，取值说明如下：available：可用。attaching：挂载中。attached：已挂载。detaching：卸载中。creating：创建中。deleting：删除中。error：错误。extending：扩容中。",
+      "description": "Disk status. Value description: available: Available. mounting: Mounting. mounted: Mounted. unmounting: Unmounting. creating: Creating. deleting: Deleting. error: Error. expanding: Expanding.",
       "enum": [
         "available",
         "attaching",
@@ -251,7 +251,7 @@
       "type": "string"
     },
     "Tags": {
-      "description": "云盘的标签信息",
+      "description": "Disk tag information.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -262,11 +262,11 @@
     },
     "TotalPerformance": {
       "$ref": "#/definitions/TotalPerformance",
-      "description": "总性能。",
+      "description": "Total performance.",
       "type": "object"
     },
     "TradeStatus": {
-      "description": "交易状态 0：创建中 1：运行中 2：创建失败",
+      "description": "Transaction status 0: Creating 1: Running 2: Creation failed",
       "enum": [
         -1,
         0,
@@ -276,24 +276,24 @@
       "type": "number"
     },
     "UpdatedAt": {
-      "description": "云盘更新时间。",
+      "description": "Disk update time.",
       "semantic": "updatedTime",
       "type": "string"
     },
     "VolumeId": {
-      "description": "云盘id。",
+      "description": "Disk ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "VolumeName": {
-      "description": "云盘显示名称。命名规则如下：首字符仅支持中文、字母或下划线（_）。可包含中文、字母、数字、下划线（_）或中划线（-）。长度限制在1~128字符之间。",
+      "description": "Disk display name. Naming rules: The first character must be a Chinese character, a letter, or an underscore (_). Can contain Chinese characters, letters, numbers, underscores (_), or hyphens (-). Length must be between 1 and 128 characters.",
       "maxLength": 128,
       "minLength": 1,
       "semantic": "resourceName",
       "type": "string"
     },
     "VolumeType": {
-      "description": "云盘类型，取值说明如下：ESSD_PL0：极速型SSD云盘，PL0规格。ESSD_FlexPL: 极速型SSD云盘，FlexPL规格。TSSD_TL0: 吞吐型SSD云盘。",
+      "description": "Disk type. Value description: ESSD_PL0: Ultra-fast SSD disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD disk, FlexPL specification. TSSD_TL0: Throughput SSD disk.",
       "enum": [
         "ESSD_PL0",
         "ESSD_FlexPL",
@@ -302,7 +302,7 @@
       "type": "string"
     },
     "ZoneId": {
-      "description": "可用区ID。",
+      "description": "Availability zone ID.",
       "type": "string"
     }
   },

@@ -2,12 +2,12 @@
 page_title: "volcenginecc_apig_upstream Resource - terraform-provider-volcenginecc"
 subcategory: "APIG"
 description: |-
-  Upstream 是对 API 网关实例后端的抽象。您可以将具有相同功能的后端应用抽象为一个 Upstream，实现路由和后端应用解耦，更灵活地支持后端应用的灰度发布、多版本管理等场景。本文为您介绍 Upstream 的概念及作用。
+  Upstream is an abstraction of the backend for API gateway instances. You can group backend applications with the same functionality into an upstream, which decouples routing from backend applications and provides flexible support for scenarios such as canary releases and multi-version management. This article introduces the concept and purpose of upstream
 ---
 
 # volcenginecc_apig_upstream (Resource)
 
-Upstream 是对 API 网关实例后端的抽象。您可以将具有相同功能的后端应用抽象为一个 Upstream，实现路由和后端应用解耦，更灵活地支持后端应用的灰度发布、多版本管理等场景。本文为您介绍 Upstream 的概念及作用。
+Upstream is an abstraction of the backend for API gateway instances. You can group backend applications with the same functionality into an upstream, which decouples routing from backend applications and provides flexible support for scenarios such as canary releases and multi-version management. This article introduces the concept and purpose of upstream
 
 ## Example Usage
 
@@ -58,62 +58,62 @@ resource "volcenginecc_apig_upstream" "APIGUpstreamAIProviderDemo" {
 
 ### Required
 
-- `gateway_id` (String) 网关实例ID。
-- `name` (String) Upstream名称。
-- `source_type` (String) Upstream来源类型，取值：VeFaas：函数服务。ECS：云服务器。K8S：容器服务。Nacos：注册中心。AIProvider：AI模型代理。
-- `upstream_spec` (Attributes) Upstream配置。 (see [below for nested schema](#nestedatt--upstream_spec))
+- `gateway_id` (String) Gateway Instance ID
+- `name` (String) Upstream name
+- `source_type` (String) Upstream source type. Options: VeFaas: function service. ECS: cloud server. K8S: container service. Nacos: registry. AIProvider: AI model proxy
+- `upstream_spec` (Attributes) Upstream Configuration (see [below for nested schema](#nestedatt--upstream_spec))
 
 ### Optional
 
-- `circuit_breaking_settings` (Attributes) 服务熔断配置。 (see [below for nested schema](#nestedatt--circuit_breaking_settings))
-- `comments` (String) 备注。
-- `connection_pool_settings` (Attributes) 连接池配置。 (see [below for nested schema](#nestedatt--connection_pool_settings))
-- `load_balancer_settings` (Attributes) 负载均衡配置。 (see [below for nested schema](#nestedatt--load_balancer_settings))
-- `protocol` (String) 协议，取值：HTTP：HTTP/1.1。HTTP2：HTTP/2。GRPC：GRPC。
-- `tls_settings` (Attributes) TLS配置。 (see [below for nested schema](#nestedatt--tls_settings))
+- `circuit_breaking_settings` (Attributes) Service circuit breaking configuration (see [below for nested schema](#nestedatt--circuit_breaking_settings))
+- `comments` (String) Remarks
+- `connection_pool_settings` (Attributes) Connection Pool Configuration (see [below for nested schema](#nestedatt--connection_pool_settings))
+- `load_balancer_settings` (Attributes) Load Balancing Configuration (see [below for nested schema](#nestedatt--load_balancer_settings))
+- `protocol` (String) Protocol. Options: HTTP: HTTP/1.1; HTTP2: HTTP/2; GRPC: GRPC
+- `tls_settings` (Attributes) TLS Configuration (see [below for nested schema](#nestedatt--tls_settings))
 
 ### Read-Only
 
-- `backend_targets` (Attributes Set) 后端节点，Upstream来源类型为VeFaas时无效。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--backend_targets))
-- `created_time` (String) Upstream创建时间。
+- `backend_targets` (Attributes Set) Backend node. Not valid when the upstream source type is VeFaas
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--backend_targets))
+- `created_time` (String) Upstream creation time
 - `id` (String) Uniquely identifies the resource.
-- `updated_time` (String) Upstream更新时间。
+- `updated_time` (String) Upstream update time
 - `upstream_id` (String) Upstream ID。
-- `version_details` (Attributes Set) Upstream版本，仅在Upstream来源类型为K8S时有效。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--version_details))
+- `version_details` (Attributes Set) Upstream version, only valid when the upstream source type is K8S
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--version_details))
 
 <a id="nestedatt--upstream_spec"></a>
 ### Nested Schema for `upstream_spec`
 
 Optional:
 
-- `ai_provider` (Attributes) AI模型代理。 (see [below for nested schema](#nestedatt--upstream_spec--ai_provider))
-- `domain` (Attributes) 固定域名。 (see [below for nested schema](#nestedatt--upstream_spec--domain))
-- `ecs_instances` (Attributes Set) 云服务器。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--upstream_spec--ecs_instances))
-- `k8_s_service` (Attributes) 容器服务。 (see [below for nested schema](#nestedatt--upstream_spec--k8_s_service))
-- `nacos_service` (Attributes) 注册中心。 (see [below for nested schema](#nestedatt--upstream_spec--nacos_service))
-- `ve_faas` (Attributes) 函数服务。 (see [below for nested schema](#nestedatt--upstream_spec--ve_faas))
+- `ai_provider` (Attributes) AI model proxy (see [below for nested schema](#nestedatt--upstream_spec--ai_provider))
+- `domain` (Attributes) Fixed domain name (see [below for nested schema](#nestedatt--upstream_spec--domain))
+- `ecs_instances` (Attributes Set) Cloud server
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--upstream_spec--ecs_instances))
+- `k8_s_service` (Attributes) Container Service (see [below for nested schema](#nestedatt--upstream_spec--k8_s_service))
+- `nacos_service` (Attributes) Registry Center (see [below for nested schema](#nestedatt--upstream_spec--nacos_service))
+- `ve_faas` (Attributes) Function service (see [below for nested schema](#nestedatt--upstream_spec--ve_faas))
 
 <a id="nestedatt--upstream_spec--ai_provider"></a>
 ### Nested Schema for `upstream_spec.ai_provider`
 
 Optional:
 
-- `base_url` (String) 模型地址。
-- `custom_model_service` (Attributes) 火山自部署模型服务。 (see [below for nested schema](#nestedatt--upstream_spec--ai_provider--custom_model_service))
-- `name` (String) 模型服务商名称。
-- `token` (String) 模型API key。
+- `base_url` (String) Model address
+- `custom_model_service` (Attributes) Volcano Engine self-hosted model service (see [below for nested schema](#nestedatt--upstream_spec--ai_provider--custom_model_service))
+- `name` (String) Model Service Provider Name
+- `token` (String) Model API key
 
 <a id="nestedatt--upstream_spec--ai_provider--custom_model_service"></a>
 ### Nested Schema for `upstream_spec.ai_provider.custom_model_service`
 
 Optional:
 
-- `name` (String) 模型服务名称。
-- `namespace` (String) 命名空间。
-- `port` (Number) 端口。
+- `name` (String) Model Service Name
+- `namespace` (String) Namespace
+- `port` (Number) Port
 
 
 
@@ -122,16 +122,16 @@ Optional:
 
 Optional:
 
-- `domain_list` (Attributes Set) 域名列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--upstream_spec--domain--domain_list))
+- `domain_list` (Attributes Set) Domain name list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--upstream_spec--domain--domain_list))
 
 <a id="nestedatt--upstream_spec--domain--domain_list"></a>
 ### Nested Schema for `upstream_spec.domain.domain_list`
 
 Optional:
 
-- `domain` (String) 域名。
-- `port` (Number) 端口。协议类型为HTTP时，默认值为80。协议类型为HTTPS时，默认值为443。
+- `domain` (String) Domain name
+- `port` (Number) Port. Default: 80 for HTTP, 443 for HTTPS
 
 
 
@@ -140,9 +140,9 @@ Optional:
 
 Optional:
 
-- `ecs_id` (String) 云服务器ID。
-- `ip` (String) IP地址。
-- `port` (Number) 端口。
+- `ecs_id` (String) Cloud server ID
+- `ip` (String) IP address
+- `port` (Number) Port
 
 
 <a id="nestedatt--upstream_spec--k8_s_service"></a>
@@ -150,9 +150,9 @@ Optional:
 
 Optional:
 
-- `name` (String) 容器服务名称。长度限制为2~63个字符。
-- `namespace` (String) 命名空间。长度限制为2~63个字符。
-- `port` (Number) 端口。
+- `name` (String) Container Service Name. Length: 2–63 characters
+- `namespace` (String) Namespace. Length: 2~63 characters
+- `port` (Number) Port
 
 
 <a id="nestedatt--upstream_spec--nacos_service"></a>
@@ -160,11 +160,11 @@ Optional:
 
 Optional:
 
-- `group` (String) 分组。
-- `namespace` (String) 命名空间。
-- `namespace_id` (String) 命名空间ID。
-- `service` (String) 服务。
-- `upstream_source_id` (String) Upstream来源ID。
+- `group` (String) Group
+- `namespace` (String) Namespace
+- `namespace_id` (String) Namespace ID
+- `service` (String) Service
+- `upstream_source_id` (String) Upstream source ID
 
 
 <a id="nestedatt--upstream_spec--ve_faas"></a>
@@ -172,7 +172,7 @@ Optional:
 
 Optional:
 
-- `function_id` (String) 函数ID。
+- `function_id` (String) Function ID
 
 
 
@@ -181,12 +181,12 @@ Optional:
 
 Optional:
 
-- `base_ejection_time` (Number) 最小弹出时间。单位为毫秒。取值限制为1~86400000。默认值为30秒。
-- `consecutive_errors` (Number) 连续失败次数。取值限制为1~100。默认值为5。
-- `enable` (Boolean) 开启。
-- `interval` (Number) 计算周期。单位为毫秒。取值限制为1~86400000。默认值为10秒。
-- `max_ejection_percent` (Number) 最大熔断比例。取值限制为1~100。默认值为20%。
-- `min_health_percent` (Number) 最小健康比例。取值限制为0~100。默认值为60%。
+- `base_ejection_time` (Number) Minimum pop time, in milliseconds. Value range: 1–86400000. Default: 30 seconds
+- `consecutive_errors` (Number) Consecutive failure count. Value range: 1~100. Default: 5
+- `enable` (Boolean) Enable
+- `interval` (Number) Calculation cycle, in milliseconds. Value range: 1–86400000. Default: 10 seconds
+- `max_ejection_percent` (Number) Maximum circuit breaking ratio. Value range: 1~100. Default: 20%
+- `min_health_percent` (Number) Minimum health ratio. Value range: 0~100. Default: 60%
 
 
 <a id="nestedatt--connection_pool_settings"></a>
@@ -194,10 +194,10 @@ Optional:
 
 Optional:
 
-- `enable` (Boolean) 开启。
-- `http_1_max_pending_requests` (Number) HTTP/1最大等待请求数。取值限制为0~2^31-1，0为不限制。
-- `idle_timeout` (Number) 空闲超时时间。单位为秒。取值限制为0~2^31-1，0为不限制。
-- `max_connections` (Number) TCP最大连接数。取值限制为0~2^31-1，0为不限制。
+- `enable` (Boolean) Enable
+- `http_1_max_pending_requests` (Number) Maximum HTTP/1 pending requests. Value range: 0~2^31-1. 0 means unlimited
+- `idle_timeout` (Number) Idle timeout, in seconds. Value range: 0–2^31-1. 0 means no limit
+- `max_connections` (Number) Maximum TCP connections. Value range: 0~2^31-1. 0 means unlimited
 
 
 <a id="nestedatt--load_balancer_settings"></a>
@@ -205,31 +205,31 @@ Optional:
 
 Optional:
 
-- `consistent_hash_lb` (Attributes) 一致性哈希负载均衡。 (see [below for nested schema](#nestedatt--load_balancer_settings--consistent_hash_lb))
-- `lb_policy` (String) 负载均衡策略，取值：SimpleLB：简单负载均衡。ConsistentHashLB：一致性哈希负载均衡。
-- `simple_lb` (String) 简单负载均衡，取值：ROUND_ROBIN：轮询。LEAST_CONN：最小连接数。RANDOM：随机。
-- `warmup_duration` (Number) 预热时间。单位为秒。
+- `consistent_hash_lb` (Attributes) Consistent Hash Load Balancing (see [below for nested schema](#nestedatt--load_balancer_settings--consistent_hash_lb))
+- `lb_policy` (String) Load balancing policy. Options: SimpleLB: simple load balancing. ConsistentHashLB: consistent hash load balancing
+- `simple_lb` (String) Simple load balancing. Options: ROUND_ROBIN: round robin. LEAST_CONN: least connections. RANDOM: random
+- `warmup_duration` (Number) Warm-up time (seconds)
 
 <a id="nestedatt--load_balancer_settings--consistent_hash_lb"></a>
 ### Nested Schema for `load_balancer_settings.consistent_hash_lb`
 
 Optional:
 
-- `hash_balance_factor` (Number) 过载保护参数。取值限制为100~200。当取值为120时，upstream节点当前活跃请求数超过平均活跃请求数的120%时，将触发过载保护。当触发过载保护时，即使请求的hash命中某一upstream节点，负载均衡器也会随机选择upstream节点。
-- `hash_key` (String) 一致性哈希方式，取值：UseSourceIp：基于源IP地址。HttpQueryParameterName：基于参数。HttpHeaderName：基于头。HTTPCookie：基于cookie。
+- `hash_balance_factor` (Number) Overload protection parameter. Value range: 100–200. When set to 120, overload protection is triggered if the current active request count of an upstream node exceeds 120% of the average active request count. When overload protection is triggered, even if the request hash matches a specific upstream node, the load balancer will randomly select an upstream node
+- `hash_key` (String) Consistent hash method. Options: UseSourceIp: based on source IP address. HttpQueryParameterName: based on parameter. HttpHeaderName: based on header. HTTPCookie: based on cookie
 - `http_cookie` (Attributes) Cookie。 (see [below for nested schema](#nestedatt--load_balancer_settings--consistent_hash_lb--http_cookie))
-- `http_header_name` (String) 参数。支持ASCII可打印字符，长度限制为1~256个字符。
-- `http_query_parameter_name` (String) 参数。支持ASCII可打印字符，长度限制为1~256个字符。
-- `use_source_ip` (String) 源IP地址。
+- `http_header_name` (String) Parameter. Supports printable ASCII characters, length: 1–256 characters
+- `http_query_parameter_name` (String) Parameter. Supports printable ASCII characters, length: 1–256 characters
+- `use_source_ip` (String) Source IP address
 
 <a id="nestedatt--load_balancer_settings--consistent_hash_lb--http_cookie"></a>
 ### Nested Schema for `load_balancer_settings.consistent_hash_lb.http_cookie`
 
 Optional:
 
-- `name` (String) 名称。支持ASCII可打印字符，长度限制为0~256个字符。
-- `path` (String) 路径。支持ASCII可打印字符，长度限制为1~256个字符。
-- `ttl` (Number) 有效期。单位为秒。
+- `name` (String) Name. Supports printable ASCII characters. Length: 0~256 characters
+- `path` (String) Path. Supports printable ASCII characters. Length: 1~256 characters
+- `ttl` (Number) Validity period, in seconds
 
 
 
@@ -239,8 +239,8 @@ Optional:
 
 Optional:
 
-- `sni` (String) SNI。留空时会将访问网关的域名透传到upstream。
-- `tls_mode` (String) TLS模式，取值：DISABLE：关闭TLS。SIMPLE：单向TLS。
+- `sni` (String) SNI. If left blank, the domain name accessed by the gateway will be passed through to the upstream
+- `tls_mode` (String) TLS mode. Options: DISABLE: disable TLS. SIMPLE: one-way TLS
 
 
 <a id="nestedatt--backend_targets"></a>
@@ -248,9 +248,9 @@ Optional:
 
 Read-Only:
 
-- `health_status` (String) 健康检查状态。
-- `ip` (String) 后端节点IP。
-- `port` (Number) 后端节点端口。
+- `health_status` (String) Health Check Status
+- `ip` (String) Backend node IP
+- `port` (Number) Backend node port
 
 
 <a id="nestedatt--version_details"></a>
@@ -258,18 +258,18 @@ Read-Only:
 
 Read-Only:
 
-- `labels` (Attributes Set) 标签。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--version_details--labels))
-- `name` (String) 版本名称。支持大小写字母、数字和中划线（-），长度限制为2~63个字符。不能以中划线（-）开头。
-- `update_time` (String) 更新时间。
+- `labels` (Attributes Set) Tag
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--version_details--labels))
+- `name` (String) Version name. Supports uppercase and lowercase letters, numbers, and hyphens (-). Length: 2~63 characters. Cannot start with a hyphen (-)
+- `update_time` (String) Update time
 
 <a id="nestedatt--version_details--labels"></a>
 ### Nested Schema for `version_details.labels`
 
 Read-Only:
 
-- `key` (String) 键。
-- `value` (String) 值。
+- `key` (String) Key
+- `value` (String) Value
 
 ## Import
 

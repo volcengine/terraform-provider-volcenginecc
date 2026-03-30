@@ -2,12 +2,12 @@
 page_title: "volcenginecc_vpc_route_table Resource - terraform-provider-volcenginecc"
 subcategory: "VPC"
 description: |-
-  路由表由一系列路由条目组成，为私有网络的流量指定下一跳的云资源，每个子网必须且仅支持关联一个路由表，使子网内的资源通过路由表转发流量。
+  A route table consists of a series of route entries that specify the next hop cloud resource for private network traffic. Each subnet must be associated with only one route table, allowing resources within the subnet to forward traffic via the route table
 ---
 
 # volcenginecc_vpc_route_table (Resource)
 
-路由表由一系列路由条目组成，为私有网络的流量指定下一跳的云资源，每个子网必须且仅支持关联一个路由表，使子网内的资源通过路由表转发流量。
+A route table consists of a series of route entries that specify the next hop cloud resource for private network traffic. Each subnet must be associated with only one route table, allowing resources within the subnet to forward traffic via the route table
 
 ## Example Usage
 
@@ -39,46 +39,46 @@ resource "volcenginecc_vpc_route_table" "RouteTableDemo" {
 
 ### Required
 
-- `vpc_id` (String) 路由表所属VPC的ID。
+- `vpc_id` (String) ID of the VPC owning the route table
 
 ### Optional
 
-- `associate_type` (String) 创建路由表输入的关联类型。1、Subnet：子网关联。2、Gateway：网关关联。
-- `custom_route_entries` (Attributes Set) 路由表关联的自定义路由条目列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--custom_route_entries))
-- `description` (String) 路由表描述信息。
-- `ipv_4_gateway_id` (String) 关联路由表的IPv4网关ID。
-- `ipv_6_gateway_id` (String) 关联路由表的IPv6网关ID。
-- `project_name` (String) 路由表所属项目的名称。
-- `route_table_name` (String) 路由表名称。
-- `subnet_ids` (Set of String) 关联的子网的ID列表。
-- `tags` (Attributes Set) 标签列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--tags))
+- `associate_type` (String) Association type for route table creation input. 1. Subnet: Subnet association 2. Gateway: Gateway association
+- `custom_route_entries` (Attributes Set) List of custom route entries associated with the route table
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--custom_route_entries))
+- `description` (String) Route Table Description
+- `ipv_4_gateway_id` (String) IPv4 Gateway ID associated with the route table
+- `ipv_6_gateway_id` (String) IPv6 Gateway ID associated with the route table
+- `project_name` (String) Name of the project owning the route table
+- `route_table_name` (String) Route Table Name
+- `subnet_ids` (Set of String) List of associated subnet IDs
+- `tags` (Attributes Set) Tag List
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `account_id` (String) 路由表所属账号的ID。
-- `created_time` (String) 路由表创建时间。
+- `account_id` (String) Account ID owning the route table
+- `created_time` (String) Route Table Creation Time
 - `id` (String) Uniquely identifies the resource.
-- `route_table_id` (String) 路由表ID。
-- `route_table_type` (String) 路由表类型。1、Custom：自定义路由表。2、System：系统路由表。
-- `system_route_entries` (Attributes Set) 路由表关联的系统默认路由条目列表。
- 特别提示: 在使用 SetNestedAttribute 时，必须完整定义其嵌套结构体的所有属性。若定义不完整，Terraform 在执行计划对比时可能会检测到意料之外的差异，从而触发不必要的资源更新，影响资源的稳定性与可预测性。 (see [below for nested schema](#nestedatt--system_route_entries))
-- `updated_time` (String) 路由表更新时间。
-- `vpc_name` (String) VPC的名称。
+- `route_table_id` (String) Route Table ID
+- `route_table_type` (String) Route table type. 1. Custom: Custom route table 2. System: System route table
+- `system_route_entries` (Attributes Set) List of system default route entries associated with the route table
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--system_route_entries))
+- `updated_time` (String) Route Table Last Updated Time
+- `vpc_name` (String) VPC Name
 
 <a id="nestedatt--custom_route_entries"></a>
 ### Nested Schema for `custom_route_entries`
 
 Optional:
 
-- `description` (String) 路由条目描述。
-- `destination_cidr_block` (String) 路由条目的目标网段。
-- `destination_prefix_list_id` (String) 前缀列表ID。
-- `next_hop_id` (String) 下一跳资源ID。
-- `next_hop_name` (String) 路由条目下一跳资源的名称。
-- `next_hop_type` (String) 自定义路由条目的下一跳的类型。1、Instance：ECS实例。2、HaVip：高可用虚拟IP。3、NetworkInterface：辅助网卡。4、NatGW：NAT网关。5、VpnGW：VPN网关。6、TransitRouter：中转路由器。7、IPv6GW：IPv6网关。8、CloudConnector：云连接器。9、GWLBEndpoint：网关负载均衡终端节点。
-- `route_entry_name` (String) 路由条目名称。
+- `description` (String) Route Entry Description
+- `destination_cidr_block` (String) Destination CIDR of the route entry
+- `destination_prefix_list_id` (String) Prefix List ID
+- `next_hop_id` (String) Next Hop Resource ID
+- `next_hop_name` (String) Name of the next hop resource for the route entry
+- `next_hop_type` (String) Next hop type for custom route entry. 1. Instance: ECS instance 2. HaVip: High availability virtual IP 3. NetworkInterface: Secondary network interface 4. NatGW: NAT gateway 5. VpnGW: VPN gateway 6. TransitRouter: Transit router 7. IPv6GW: IPv6 gateway 8. CloudConnector: Cloud connector 9. GWLBEndpoint: Gateway load balancer endpoint
+- `route_entry_name` (String) Route Entry Name
 
 
 <a id="nestedatt--tags"></a>
@@ -86,8 +86,8 @@ Optional:
 
 Optional:
 
-- `key` (String) 用户标签的标签键。
-- `value` (String) 用户标签的标签值。
+- `key` (String) User tag key
+- `value` (String) User tag value
 
 
 <a id="nestedatt--system_route_entries"></a>
@@ -95,19 +95,19 @@ Optional:
 
 Read-Only:
 
-- `description` (String) 路由条目描述。
-- `destination_cidr_block` (String) 路由条目的目标网段。
-- `destination_prefix_list_id` (String) 前缀列表ID。
-- `next_hop_id` (String) 下一跳资源ID。
-- `next_hop_name` (String) 路由条目下一跳资源的名称。
-- `next_hop_type` (String) 自定义路由条目的下一跳的类型。1、Instance：ECS实例。2、HaVip：高可用虚拟IP。3、NetworkInterface：辅助网卡。4、NatGW：NAT网关。5、VpnGW：VPN网关。6、TransitRouter：中转路由器。7、IPv6GW：IPv6网关。8、CloudConnector：云连接器。9、GWLBEndpoint：网关负载均衡终端节点。
-- `prefix_list_cidr_blocks` (Set of String) 前缀列表的CIDR。
-- `route_entry_id` (String) 路由条目ID。
-- `route_entry_name` (String) 路由条目名称。
-- `route_table_id` (String) 路由表ID。
-- `status` (String) 路由条目状态。1、Pending：待创建。2、Available：可用。
-- `type` (String) 路由条目类型。1、Custom：自定义路由条目。2、System：系统默认路由条目。
-- `vpc_id` (String) 路由条目所属私有网络的ID。
+- `description` (String) Route Entry Description
+- `destination_cidr_block` (String) Destination CIDR of the route entry
+- `destination_prefix_list_id` (String) Prefix List ID
+- `next_hop_id` (String) Next Hop Resource ID
+- `next_hop_name` (String) Name of the next hop resource for the route entry
+- `next_hop_type` (String) Next hop type for custom route entry. 1. Instance: ECS instance 2. HaVip: High availability virtual IP 3. NetworkInterface: Secondary network interface 4. NatGW: NAT gateway 5. VpnGW: VPN gateway 6. TransitRouter: Transit router 7. IPv6GW: IPv6 gateway 8. CloudConnector: Cloud connector 9. GWLBEndpoint: Gateway load balancer endpoint
+- `prefix_list_cidr_blocks` (Set of String) Prefix List CIDR
+- `route_entry_id` (String) Route Entry ID
+- `route_entry_name` (String) Route Entry Name
+- `route_table_id` (String) Route Table ID
+- `status` (String) Route entry status. 1. Pending: Pending creation 2. Available: Available
+- `type` (String) Route entry type. 1. Custom: Custom route entry 2. System: System default route entry
+- `vpc_id` (String) ID of the private network to which the route entry belongs
 
 ## Import
 

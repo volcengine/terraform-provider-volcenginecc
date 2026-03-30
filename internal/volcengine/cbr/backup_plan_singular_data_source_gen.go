@@ -26,90 +26,90 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建此计划的账户 ID。",
+		//	  "description": "Account ID that created this plan",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建此计划的账户 ID。",
+			Description: "Account ID that created this plan",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建时间。",
+		//	  "description": "Creation Time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建时间。",
+			Description: "Creation Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份计划名称。",
+		//	  "description": "Backup Plan Name",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份计划名称。",
+			Description: "Backup Plan Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PlanId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份计划 ID。",
+		//	  "description": "Backup Plan ID",
 		//	  "type": "string"
 		//	}
 		"plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份计划 ID。",
+			Description: "Backup Plan ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份策略。",
+		//	  "description": "Backup Policy",
 		//	  "properties": {
 		//	    "AccountId": {
-		//	      "description": "创建此策略的账户 ID。",
+		//	      "description": "Account ID that created this policy",
 		//	      "type": "string"
 		//	    },
 		//	    "BackupType": {
-		//	      "description": "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+		//	      "description": "Backup type. Options: FULL: Full backup. INCREMENTAL: Incremental backup",
 		//	      "type": "string"
 		//	    },
 		//	    "CreatedTime": {
-		//	      "description": "创建时间。",
+		//	      "description": "Creation Time",
 		//	      "type": "string"
 		//	    },
 		//	    "Crontab": {
-		//	      "description": "用于指定备份周期，支持标准 crontab 表达式配置。",
+		//	      "description": "Specifies the backup schedule. Supports standard crontab expressions",
 		//	      "type": "string"
 		//	    },
 		//	    "EnablePolicy": {
-		//	      "description": "是否启用策略，取值说明如下：true：启用策略。false：禁用策略。",
+		//	      "description": "Whether the policy is enabled. Options: true: Enable policy. false: Disable policy",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Name": {
-		//	      "description": "策略名称。",
+		//	      "description": "Policy Name",
 		//	      "type": "string"
 		//	    },
 		//	    "PlanNumber": {
-		//	      "description": "该策略已关联的备份计划数量。",
+		//	      "description": "Number of backup plans associated with this policy",
 		//	      "type": "integer"
 		//	    },
 		//	    "PolicyId": {
-		//	      "description": "备份策略 ID。",
+		//	      "description": "Backup Policy ID",
 		//	      "type": "string"
 		//	    },
 		//	    "RetentionDay": {
-		//	      "description": "恢复点保留时间，-1 表示持续保留。",
+		//	      "description": "Retention time for recovery points. -1 means retain indefinitely",
 		//	      "type": "integer"
 		//	    },
 		//	    "UpdatedTime": {
-		//	      "description": "更新时间。",
+		//	      "description": "Update Time",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -119,98 +119,98 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AccountId
 				"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "创建此策略的账户 ID。",
+					Description: "Account ID that created this policy",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BackupType
 				"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "备份类型，取值说明如下：FULL：全量备份。INCREMENTAL：增量备份。",
+					Description: "Backup type. Options: FULL: Full backup. INCREMENTAL: Incremental backup",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreatedTime
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "创建时间。",
+					Description: "Creation Time",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Crontab
 				"crontab": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "用于指定备份周期，支持标准 crontab 表达式配置。",
+					Description: "Specifies the backup schedule. Supports standard crontab expressions",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnablePolicy
 				"enable_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "是否启用策略，取值说明如下：true：启用策略。false：禁用策略。",
+					Description: "Whether the policy is enabled. Options: true: Enable policy. false: Disable policy",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "策略名称。",
+					Description: "Policy Name",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PlanNumber
 				"plan_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "该策略已关联的备份计划数量。",
+					Description: "Number of backup plans associated with this policy",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PolicyId
 				"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "备份策略 ID。",
+					Description: "Backup Policy ID",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RetentionDay
 				"retention_day": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "恢复点保留时间，-1 表示持续保留。",
+					Description: "Retention time for recovery points. -1 means retain indefinitely",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UpdatedTime
 				"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "更新时间。",
+					Description: "Update Time",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "备份策略。",
+			Description: "Backup Policy",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份策略 ID。",
+		//	  "description": "Backup Policy ID",
 		//	  "type": "string"
 		//	}
 		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "备份策略 ID。",
+			Description: "Backup Policy ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceList
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "备份源列表。",
+		//	  "description": "Backup Source List",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "备份源列表项。",
+		//	    "description": "Backup Source List Item",
 		//	    "properties": {
 		//	      "MetaInformation": {
-		//	        "description": "资源的meta信息，创建备份计划时，用于存储额外的配置。",
+		//	        "description": "Resource meta information, used to store additional configuration when creating a backup plan",
 		//	        "properties": {
 		//	          "EcsMeta": {
-		//	            "description": "ECS 的元数据，是一个 JSON string。",
+		//	            "description": "ECS metadata, which is a JSON string",
 		//	            "type": "string"
 		//	          },
 		//	          "VepfsMeta": {
-		//	            "description": "vePFS 备份源元数据，是一个 JSON string。",
+		//	            "description": "vePFS backup source metadata, which is a JSON string",
 		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "ResourceId": {
-		//	        "description": "备份源 ID。",
+		//	        "description": "Backup Source ID",
 		//	        "type": "string"
 		//	      },
 		//	      "ResourceType": {
-		//	        "description": "备份源类型，取值如下：ECS：ECS 整机备份。vePFS：vePFS 文件系统备份。",
+		//	        "description": "Backup source type. Options: ECS: ECS full machine backup. vePFS: vePFS file system backup",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -232,42 +232,42 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: EcsMeta
 							"ecs_meta": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "ECS 的元数据，是一个 JSON string。",
+								Description: "ECS metadata, which is a JSON string",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: VepfsMeta
 							"vepfs_meta": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "vePFS 备份源元数据，是一个 JSON string。",
+								Description: "vePFS backup source metadata, which is a JSON string",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "资源的meta信息，创建备份计划时，用于存储额外的配置。",
+						Description: "Resource meta information, used to store additional configuration when creating a backup plan",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "备份源 ID。",
+						Description: "Backup Source ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceType
 					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "备份源类型，取值如下：ECS：ECS 整机备份。vePFS：vePFS 文件系统备份。",
+						Description: "Backup source type. Options: ECS: ECS full machine backup. vePFS: vePFS file system backup",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "备份源列表。",
+			Description: "Backup Source List",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新时间。",
+		//	  "description": "Update Time",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新时间。",
+			Description: "Update Time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

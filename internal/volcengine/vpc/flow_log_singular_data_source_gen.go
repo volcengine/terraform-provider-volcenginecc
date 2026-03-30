@@ -26,170 +26,170 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的采样间隔。取值如下。1：1分钟。5：5分钟。10（默认值）：10分钟。",
+		//	  "description": "Stream log sampling interval. Options: 1: 1 minute. 5: 5 minutes. 10 (default): 10 minutes.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"aggregation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "流日志的采样间隔。取值如下。1：1分钟。5：5分钟。10（默认值）：10分钟。",
+			Description: "Stream log sampling interval. Options: 1: 1 minute. 5: 5 minutes. 10 (default): 10 minutes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BusinessStatus
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志是否被锁定。Normal: 正常。FinancialLocked: 被锁定。",
+		//	  "description": "Whether the flow log is locked. Normal: normal. FinancialLocked: locked.",
 		//	  "type": "string"
 		//	}
 		"business_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志是否被锁定。Normal: 正常。FinancialLocked: 被锁定。",
+			Description: "Whether the flow log is locked. Normal: normal. FinancialLocked: locked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的创建时间。",
+		//	  "description": "Creation time of the flow log.",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志的创建时间。",
+			Description: "Creation time of the flow log.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+		//	  "description": "Description of the stream log. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。).",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。",
+			Description: "Description of the stream log. Length limit: 0–255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableIndex
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否自动配置索引。索引用于检索分析数据，流日志在检索分析之前，必须先配置索引。true：是。false（默认值）：否。",
+		//	  "description": "Whether to automatically configure indexes. Indexes are used for retrieving and analyzing data. Stream logs must have indexes configured before retrieval and analysis. true: Yes. false (default): No.",
 		//	  "type": "boolean"
 		//	}
 		"enable_index": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否自动配置索引。索引用于检索分析数据，流日志在检索分析之前，必须先配置索引。true：是。false（默认值）：否。",
+			Description: "Whether to automatically configure indexes. Indexes are used for retrieving and analyzing data. Stream logs must have indexes configured before retrieval and analysis. true: Yes. false (default): No.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FlowLogId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的ID。",
+		//	  "description": "Stream log ID.",
 		//	  "type": "string"
 		//	}
 		"flow_log_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志的ID。",
+			Description: "Stream log ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FlowLogName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为流日志实例的ID。",
+		//	  "description": "Name of the flow log. Length must be 1–128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-). If not specified, defaults to the flow log instance ID.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"flow_log_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为流日志实例的ID。",
+			Description: "Name of the flow log. Length must be 1–128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-). If not specified, defaults to the flow log instance ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LockReason
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志被锁定的原因。financial: 因欠费被锁定。unlock：欠费关停后充值恢复过程中。空值 : 没有被锁定。",
+		//	  "description": "Reason for stream log lock. financial: Locked due to overdue payment. unlock: In the process of restoring after payment following suspension due to overdue payment. Empty value: Not locked.",
 		//	  "type": "string"
 		//	}
 		"lock_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志被锁定的原因。financial: 因欠费被锁定。unlock：欠费关停后充值恢复过程中。空值 : 没有被锁定。",
+			Description: "Reason for stream log lock. financial: Locked due to overdue payment. unlock: In the process of restoring after payment following suspension due to overdue payment. Empty value: Not locked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogProjectId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志项目的ID。",
+		//	  "description": "Flow log project ID.",
 		//	  "type": "string"
 		//	}
 		"log_project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志项目的ID。",
+			Description: "Flow log project ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志项目的名称。名称只能由小写字母、数字和连字符（-）组成。必须以小写字母或者数字开头和结尾。名称的长度范围为 3~63 个字符。",
+		//	  "description": "Name of the flow log project. The name can only contain lowercase letters, numbers, and hyphens (-). It must start and end with a lowercase letter or number. The name must be 3–63 characters long.",
 		//	  "maxLength": 63,
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
 		"log_project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志项目的名称。名称只能由小写字母、数字和连字符（-）组成。必须以小写字母或者数字开头和结尾。名称的长度范围为 3~63 个字符。",
+			Description: "Name of the flow log project. The name can only contain lowercase letters, numbers, and hyphens (-). It must start and end with a lowercase letter or number. The name must be 3–63 characters long.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogTopicId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志主题的ID。",
+		//	  "description": "Flow log topic ID.",
 		//	  "type": "string"
 		//	}
 		"log_topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志主题的ID。",
+			Description: "Flow log topic ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogTopicName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志项目的名称。名称只能由小写字母、数字和连字符（-）组成。必须以小写字母或者数字开头和结尾。名称的长度范围为 3~63 个字符。",
+		//	  "description": "Name of the flow log project. The name can only contain lowercase letters, numbers, and hyphens (-). It must start and end with a lowercase letter or number. The name must be 3–63 characters long.",
 		//	  "maxLength": 63,
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
 		"log_topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志项目的名称。名称只能由小写字母、数字和连字符（-）组成。必须以小写字母或者数字开头和结尾。名称的长度范围为 3~63 个字符。",
+			Description: "Name of the flow log project. The name can only contain lowercase letters, numbers, and hyphens (-). It must start and end with a lowercase letter or number. The name must be 3–63 characters long.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流流日志所属项目的名称。",
+		//	  "description": "Name of the project to which the flow log belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流流日志所属项目的名称。",
+			Description: "Name of the project to which the flow log belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "要捕获流量的资源ID。",
+		//	  "description": "Resource ID for traffic capture.",
 		//	  "type": "string"
 		//	}
 		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "要捕获流量的资源ID。",
+			Description: "Resource ID for traffic capture.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "要采集流量的资源类型，取值如下：vpc：私有网络。subnet：子网。eni：网卡。",
+		//	  "description": "Resource type for traffic collection. Values: vpc: Virtual Private Cloud. subnet: subnet. eni: network interface.",
 		//	  "enum": [
 		//	    "vpc",
 		//	    "subnet",
@@ -198,36 +198,36 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "要采集流量的资源类型，取值如下：vpc：私有网络。subnet：子网。eni：网卡。",
+			Description: "Resource type for traffic collection. Values: vpc: Virtual Private Cloud. subnet: subnet. eni: network interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的状态。取值如下：Active：启动状态。Pending：正在操作中。Inactive：未启动状态。Creating：正在创建中。Deleting：正在删除中。",
+		//	  "description": "Status of the flow log. Values: Active: active. Pending: pending. Inactive: inactive. Creating: creating. Deleting: deleting.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志的状态。取值如下：Active：启动状态。Pending：正在操作中。Inactive：未启动状态。Creating：正在创建中。Deleting：正在删除中。",
+			Description: "Status of the flow log. Values: Active: active. Pending: pending. Inactive: inactive. Creating: creating. Deleting: deleting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的标签信息。",
+		//	  "description": "Tag information for the flow log.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "User label tag key. Length must be 1–128 characters. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ symbols (@). If the tag key starts or ends with a space, the system automatically removes it.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+		//	        "description": "User tag value. Supports input in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -247,24 +247,24 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签键。长度取值范围为1~128字符，允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。若标签键开头或结尾存在空格，系统会自动为其去除。",
+						Description: "User label tag key. Length must be 1–128 characters. Supports input of characters from any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ symbols (@). If the tag key starts or ends with a space, the system automatically removes it.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "用户标签的标签值。允许输入各国语言文字、数字、空格（ ）、下划线（_）、点号（.）、半角冒号（:）、斜杠（/）、等号（=）、加号（+）、中划线（-）和@（@）。大小写敏感。若标签值开头或结尾存在空格，系统会自动为其去除。",
+						Description: "User tag value. Supports input in any language, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case sensitive. If the tag value starts or ends with a space, the system will automatically remove it.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "流日志的标签信息。",
+			Description: "Tag information for the flow log.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "采集的流量类型。取值如下：All：全部流量。Allow：网络ACL和安全组允许的流量。Drop：网络ACL和安全组拒绝的流量。",
+		//	  "description": "Type of traffic collected. Values: All: all traffic. Allow: traffic allowed by network ACLs and security groups. Drop: traffic denied by network ACLs and security groups.",
 		//	  "enum": [
 		//	    "All",
 		//	    "Allow",
@@ -273,29 +273,29 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"traffic_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "采集的流量类型。取值如下：All：全部流量。Allow：网络ACL和安全组允许的流量。Drop：网络ACL和安全组拒绝的流量。",
+			Description: "Type of traffic collected. Values: All: all traffic. Allow: traffic allowed by network ACLs and security groups. Drop: traffic denied by network ACLs and security groups.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新流日志的时间。",
+		//	  "description": "Time when the stream log was updated.",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新流日志的时间。",
+			Description: "Time when the stream log was updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "流日志的VPC的ID。",
+		//	  "description": "VPC ID for the flow log.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "流日志的VPC的ID。",
+			Description: "VPC ID for the flow log.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

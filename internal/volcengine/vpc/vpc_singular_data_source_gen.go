@@ -27,32 +27,32 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC所属账号的ID。",
+		//	  "description": "ID of the account to which the VPC belongs.",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC所属账号的ID。",
+			Description: "ID of the account to which the VPC belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociateCens
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC关联的CEN信息。",
+		//	  "description": "CEN information associated with the VPC.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "VPC关联的CEN信息。",
+		//	    "description": "CEN information associated with the VPC.",
 		//	    "properties": {
 		//	      "CenId": {
-		//	        "description": "CEN的ID。",
+		//	        "description": "ID of the CEN.",
 		//	        "type": "string"
 		//	      },
 		//	      "CenOwnerId": {
-		//	        "description": "CEN的用户ID。",
+		//	        "description": "User ID of the CEN.",
 		//	        "type": "string"
 		//	      },
 		//	      "CenStatus": {
-		//	        "description": "VPC在CEN中的状态。Attaching：加载中，Attached：已加载",
+		//	        "description": "Status of the VPC in the CEN. Loading: loading, Loaded: loaded",
 		//	        "enum": [
 		//	          "Attaching",
 		//	          "Attached"
@@ -70,64 +70,64 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CenId
 					"cen_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "CEN的ID。",
+						Description: "ID of the CEN.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CenOwnerId
 					"cen_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "CEN的用户ID。",
+						Description: "User ID of the CEN.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CenStatus
 					"cen_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC在CEN中的状态。Attaching：加载中，Attached：已加载",
+						Description: "Status of the VPC in the CEN. Loading: loading, Loaded: loaded",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "VPC关联的CEN信息。",
+			Description: "CEN information associated with the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24、10.0.0.0/8 ~ 24、172.16.0.0/12 ~ 24。",
+		//	  "description": "IPv4 CIDR block of the VPC. You can use the following CIDR blocks or their subsets as the VPC's IPv4 CIDR block: 192.168.0.0/16 ~ 24, 10.0.0.0/8 ~ 24, 172.16.0.0/12 ~ 24.",
 		//	  "type": "string"
 		//	}
 		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的IPv4网段。您可以使用以下网段或其子集作为VPC的IPv4网段：192.168.0.0/16 ~ 24、10.0.0.0/8 ~ 24、172.16.0.0/12 ~ 24。",
+			Description: "IPv4 CIDR block of the VPC. You can use the following CIDR blocks or their subsets as the VPC's IPv4 CIDR block: 192.168.0.0/16 ~ 24, 10.0.0.0/8 ~ 24, 172.16.0.0/12 ~ 24.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建VPC的时间。",
+		//	  "description": "Time when the VPC was created.",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建VPC的时间。",
+			Description: "Time when the VPC was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不能以http://或https://开头。",
+		//	  "description": "Description of the VPC. Length must be between 0 and 255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Cannot start with http:// or https://.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的描述信息。长度限制为0~ 255个字符。不填默认为空字符串。需要以字母、中文或数字开头。可包含英文逗号（,）、点号（.）、下划线（_）、空格（ ）、等号（=）、短横线（-）、中文逗号（，）、中文句号（。）。不能以http://或https://开头。",
+			Description: "Description of the VPC. Length must be between 0 and 255 characters. If not specified, defaults to an empty string. Must start with a letter, Chinese character, or number. Can include English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Cannot start with http:// or https://.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DnsServers
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用\u0026分隔。不填则配置为默认DNS服务器地址。",
+		//	  "description": "DNS server addresses of the VPC. Maximum of 5 per request. Each DnsServer must be a valid IP address. Use \u0026 to separate multiple IPs. If not specified, defaults to the system DNS server addresses.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -138,58 +138,58 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"dns_servers": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC的DNS服务器地址。单次调用数量上限为5个，每个DnsServer必须以合法IP形式给出。多个IP之间用&分隔。不填则配置为默认DNS服务器地址。",
+			Description: "DNS server addresses of the VPC. Maximum of 5 per request. Each DnsServer must be a valid IP address. Use & to separate multiple IPs. If not specified, defaults to the system DNS server addresses.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableIpv6
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
+		//	  "description": "Whether to enable IPv6 CIDR block. false (default): not enabled. true: enabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "是否开启IPv6网段。false（默认值）：不开启。true：开启。",
+			Description: "Whether to enable IPv6 CIDR block. false (default): not enabled. true: enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4GatewayId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC 绑定的 IPv4 网关的 ID。",
+		//	  "description": "ID of the IPv4 gateway bound to the VPC.",
 		//	  "type": "string"
 		//	}
 		"ipv_4_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC 绑定的 IPv4 网关的 ID。",
+			Description: "ID of the IPv4 gateway bound to the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的IPv6网段。传入此参数后，参数Ipv6MaskLen不生效。参数Ipv6Isp传入非BGP后，参数Ipv6MaskLen和参数Ipv6CidrBlock二者必须传入一个。参数Ipv6Isp未传或传入BGP，此参数未传，则由系统自动分配IPv6网段。",
+		//	  "description": "IPv6 CIDR block of the VPC. If this parameter is provided, the Ipv6MaskLen parameter is ignored. If the Ipv6Isp parameter is set to a value other than BGP, either the Ipv6MaskLen or Ipv6CidrBlock parameter must be provided. If the Ipv6Isp parameter is not provided or set to BGP and this parameter is not provided, the system automatically assigns an IPv6 CIDR block.",
 		//	  "type": "string"
 		//	}
 		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的IPv6网段。传入此参数后，参数Ipv6MaskLen不生效。参数Ipv6Isp传入非BGP后，参数Ipv6MaskLen和参数Ipv6CidrBlock二者必须传入一个。参数Ipv6Isp未传或传入BGP，此参数未传，则由系统自动分配IPv6网段。",
+			Description: "IPv6 CIDR block of the VPC. If this parameter is provided, the Ipv6MaskLen parameter is ignored. If the Ipv6Isp parameter is set to a value other than BGP, either the Ipv6MaskLen or Ipv6CidrBlock parameter must be provided. If the Ipv6Isp parameter is not provided or set to BGP and this parameter is not provided, the system automatically assigns an IPv6 CIDR block.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IsDefault
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "该VPC是否为默认VPC。true：默认VPC，表示该VPC是创建ECS实例时系统自动创建的VPC。false：非默认VPC，表示该VPC是用户手动创建的。",
+		//	  "description": "Whether this VPC is the default VPC. true: default VPC, meaning the VPC was automatically created by the system when creating an ECS instance. false: non-default VPC, meaning the VPC was manually created by the user.",
 		//	  "type": "boolean"
 		//	}
 		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "该VPC是否为默认VPC。true：默认VPC，表示该VPC是创建ECS实例时系统自动创建的VPC。false：非默认VPC，表示该VPC是用户手动创建的。",
+			Description: "Whether this VPC is the default VPC. true: default VPC, meaning the VPC was automatically created by the system when creating an ECS instance. false: non-default VPC, meaning the VPC was manually created by the user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中创建的NAT网关的ID。",
+		//	  "description": "ID of the NAT gateway created in the VPC.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -199,36 +199,36 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"nat_gateway_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC中创建的NAT网关的ID。",
+			Description: "ID of the NAT gateway created in the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkAclNum
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中的网络ACL的数量。",
+		//	  "description": "Number of network ACLs in the VPC.",
 		//	  "type": "string"
 		//	}
 		"network_acl_num": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC中的网络ACL的数量。",
+			Description: "Number of network ACLs in the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC所属项目的名称。不填默认加入default项目。",
+		//	  "description": "Name of the project to which the VPC belongs. If not specified, it is added to the default project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC所属项目的名称。不填默认加入default项目。",
+			Description: "Name of the project to which the VPC belongs. If not specified, it is added to the default project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC关联的路由表ID。",
+		//	  "description": "ID of the route table associated with the VPC.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -238,14 +238,14 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"route_table_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC关联的路由表ID。",
+			Description: "ID of the route table associated with the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryCidrBlocks
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的辅助网段。",
+		//	  "description": "Secondary CIDR block of the VPC.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -255,14 +255,14 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"secondary_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC的辅助网段。",
+			Description: "Secondary CIDR block of the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中安全组的列表。",
+		//	  "description": "List of security groups in the VPC.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -272,14 +272,14 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC中安全组的列表。",
+			Description: "List of security groups in the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的状态。Creating：创建中。Pending：已创建。Available：可用。",
+		//	  "description": "Status of the VPC. Creating: being created. Created: created. Available: available.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Pending",
@@ -288,14 +288,14 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的状态。Creating：创建中。Pending：已创建。Available：可用。",
+			Description: "Status of the VPC. Creating: being created. Created: created. Available: available.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC中子网的列表。",
+		//	  "description": "List of subnets in the VPC.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -305,35 +305,35 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC中子网的列表。",
+			Description: "List of subnets in the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SupportIpv4Gateway
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC 是否启用 IPv4 网关。false（默认值）：不启用。true：启用。",
+		//	  "description": "Whether the VPC enables the IPv4 gateway. false (default): not enabled. true: enabled.",
 		//	  "type": "boolean"
 		//	}
 		"support_ipv_4_gateway": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC 是否启用 IPv4 网关。false（默认值）：不启用。true：启用。",
+			Description: "Whether the VPC enables the IPv4 gateway. false (default): not enabled. true: enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "私有网络绑定的标签。",
+		//	  "description": "Tags bound to the private network.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "资源标签。",
+		//	    "description": "Resource tag.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "标签键。",
+		//	        "description": "Tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "标签值。",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -350,35 +350,35 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签键。",
+						Description: "Tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "标签值。",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "私有网络绑定的标签。",
+			Description: "Tags bound to the private network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "更新VPC的时间。",
+		//	  "description": "Time when the VPC was updated.",
 		//	  "type": "string"
 		//	}
 		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "更新VPC的时间。",
+			Description: "Time when the VPC was updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserCidrBlocks
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的用户网段。",
+		//	  "description": "User CIDR block of the VPC.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -388,31 +388,31 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"user_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "VPC的用户网段。",
+			Description: "User CIDR block of the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的ID。",
+		//	  "description": "ID of the VPC.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的ID。",
+			Description: "ID of the VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "VPC的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为VPC实例的ID。不能以http://或https://开头。",
+		//	  "description": "Name of the VPC. Length must be between 1 and 128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-). If not specified, defaults to the VPC instance ID. Cannot start with http:// or https://.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"vpc_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC的名称。长度限制为1 ~ 128个字符。需要以字母、中文或数字开头，可包含点号（.）、下划线（_）和短横线（-）。不填默认为VPC实例的ID。不能以http://或https://开头。",
+			Description: "Name of the VPC. Length must be between 1 and 128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-). If not specified, defaults to the VPC instance ID. Cannot start with http:// or https://.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
