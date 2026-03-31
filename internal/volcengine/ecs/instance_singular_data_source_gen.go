@@ -43,7 +43,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"affinity_group_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Affinity group specification. Value: 2.\n  \n  **提示:**\n    - Currently, only high performance computing NPU-type hpcpci3 instances (by invitation) support affinity groups.\n    - This feature is in invitation testing. To try it, please contact your account manager.\n  ",
+			Description: "Affinity group specification. Value: 2.\n  \n  **Note:**\n    - Currently, only high performance computing NPU-type hpcpci3 instances (by invitation) support affinity groups.\n    - This feature is in invitation testing. To try it, please contact your account manager.\n  ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AutoPay
@@ -65,7 +65,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "boolean"
 		//	}
 		"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the instance will be automatically renewed upon expiration. Values:\n    - true: Auto renewal\n    - false (default): No auto renewal\n  \n  **提示:**\n  This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.\n  ",
+			Description: "Whether the instance will be automatically renewed upon expiration. Values:\n    - true: Auto renewal\n    - false (default): No auto renewal\n  \n  **Note:**\n  This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.\n  ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AutoRenewPeriod
@@ -94,7 +94,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "number"
 		//	}
 		"cpu_max_frequency": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "Specify the maximum CPU frequency, in GHz. Value range: between the CPU's base frequency and turbo frequency.\n  \n  **提示:**\n    - Currently, only g3al, c3al, r3al, g4i, c4i, r4i, g4ie, c4ie, r4ie instances support this parameter. For base/turbo frequencies and more information, see [Instance Specifications Introduction](https://www.volcengine.com/docs/6396/70840).\n    - This feature is in invitation-only testing. To use it, please contact your account manager.\n  ",
+			Description: "Specify the maximum CPU frequency, in GHz. Value range: between the CPU's base frequency and turbo frequency.\n  \n  **Note:**\n    - Currently, only g3al, c3al, r3al, g4i, c4i, r4i, g4ie, c4ie, r4ie instances support this parameter. For base/turbo frequencies and more information, see [Instance Specifications Introduction](https://www.volcengine.com/docs/6396/70840).\n    - This feature is in invitation-only testing. To use it, please contact your account manager.\n  ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CpuMemory
@@ -173,7 +173,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"credit_specification": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Burstable instance operating mode. Values:\n    - Standard: Standard mode.\n    - Unlimited: Unlimited performance mode (not supported yet).\n  \n  **提示:**\n    - This parameter is only effective when `InstanceTypeId` is set to ecs.t2 series, i.e., burstable instances.\n    - If not specified or left empty, burstable instances default to `Standard` mode.\n  ",
+			Description: "Burstable instance operating mode. Values:\n    - Standard: Standard mode.\n    - Unlimited: Unlimited performance mode (not supported yet).\n  \n  **Note:**\n    - This parameter is only effective when `InstanceTypeId` is set to ecs.t2 series, i.e., burstable instances.\n    - If not specified or left empty, burstable instances default to `Standard` mode.\n  ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
@@ -308,7 +308,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChargeType
 				"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Public IP billing method. Values:\n    - PayByBandwidth (default): Pay-as-you-go—billed by bandwidth cap.\n    - PayByTraffic: Pay-as-you-go—billed by actual traffic.\n    - PrePaid: Subscription.\n  \n  **提示:**\n  When `InstanceChargeType` is set to `PostPaid`, this parameter cannot be set to `PrePaid`.\n  ",
+					Description: "Public IP billing method. Values:\n    - PayByBandwidth (default): Pay-as-you-go—billed by bandwidth cap.\n    - PayByTraffic: Pay-as-you-go—billed by actual traffic.\n    - PrePaid: Subscription.\n  \n  **Note:**\n  When `InstanceChargeType` is set to `PostPaid`, this parameter cannot be set to `PrePaid`.\n  ",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ISP
@@ -396,7 +396,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"hpc_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the high performance computing cluster to which the instance belongs.\n  \n  **提示:**\n  This parameter is only effective and required when creating high performance computing GPU instances.\n  ",
+			Description: "ID of the high performance computing cluster to which the instance belongs.\n  \n  **Note:**\n  This parameter is only effective and required when creating high performance computing GPU instances.\n  ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Image
@@ -686,7 +686,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Resource purchase duration (N).\n    - When `PeriodUnit` is `Month` (default), valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36, 48, 60.\n    - When `PeriodUnit` is `Year`, valid values are 1, 2, 3, 4, 5.\n  \n  **提示:**\n  This parameter is valid and required only when `InstanceChargeType` is set to `PrePaid`.\n  ",
+			Description: "Resource purchase duration (N).\n    - When `PeriodUnit` is `Month` (default), valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36, 48, 60.\n    - When `PeriodUnit` is `Year`, valid values are 1, 2, 3, 4, 5.\n  \n  **Note:**\n  This parameter is valid and required only when `InstanceChargeType` is set to `PrePaid`.\n  ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeriodUnit
@@ -700,7 +700,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unit for the duration of resource purchase. Values:\n    - Month (default): Month\n    - Year: Year\n  \n  **提示:**\n  This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.",
+			Description: "The unit for the duration of resource purchase. Values:\n    - Month (default): Month\n    - Year: Year\n  \n  **Note:**\n  This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Placement
