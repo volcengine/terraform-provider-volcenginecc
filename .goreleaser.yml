@@ -50,6 +50,7 @@ signs:
       - "--output"
       - "${signature}"
       - "--detach-sign"
+      - "--armor"
       - "${artifact}"
 release:
   extra_files:

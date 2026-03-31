@@ -712,7 +712,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 	if description := property.Description; description != nil {
 		replacer := strings.NewReplacer(
-			":::tip", "\n  **提示:**",
+			":::tip", "\n  **Note:**",
 			":::", "",
 			"- ", "  - ",
 			"\n", "\n  ",

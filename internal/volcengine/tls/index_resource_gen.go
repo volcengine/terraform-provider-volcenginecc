@@ -71,7 +71,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "boolean"
 		//	    },
 		//	    "Delimiter": {
-		//	      "description": "Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+		//	      "description": "Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 		//	      "maxLength": 256,
 		//	      "type": "string"
 		//	    },
@@ -95,7 +95,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Delimiter
 				"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+					Description: "Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -147,7 +147,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "boolean"
 		//	          },
 		//	          "Delimiter": {
-		//	            "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+		//	            "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 		//	            "type": "string"
 		//	          },
 		//	          "IncludeChinese": {
@@ -184,7 +184,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "Delimiter": {
-		//	                      "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+		//	                      "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "IncludeChinese": {
@@ -268,7 +268,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Delimiter
 							"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+								Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -493,7 +493,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "boolean"
 		//	          },
 		//	          "Delimiter": {
-		//	            "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+		//	            "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 		//	            "type": "string"
 		//	          },
 		//	          "IncludeChinese": {
@@ -530,7 +530,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "Delimiter": {
-		//	                      "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\"', \u003c\u003e/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+		//	                      "description": "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^\u0026*()-_=\\\\\\\"', \u003c\u003e/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "IncludeChinese": {
@@ -614,7 +614,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Delimiter
 							"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\t\r[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.",
+								Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
