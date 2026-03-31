@@ -81,7 +81,7 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
 
 - `affinity_group_size` (Number) Affinity group specification. Value: 2.
   
-  **提示:**
+  **Note:**
     - Currently, only high performance computing NPU-type hpcpci3 instances (by invitation) support affinity groups.
     - This feature is in invitation testing. To try it, please contact your account manager.
 - `auto_pay` (Boolean) Auto payment option. Valid values: true: Auto payment. Ensure your account balance is sufficient; if the balance is insufficient, an exception order will be generated and the billing mode conversion will fail. false (default): Only generates the order without charging. You can log in to the order management page to complete payment after the order is generated.
@@ -89,21 +89,21 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
     - true: Auto renewal
     - false (default): No auto renewal
   
-  **提示:**
+  **Note:**
   This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.
 - `auto_renew_period` (Number) Duration for each automatic renewal.
     - This parameter takes effect only when `AutoRenew` is set to `True`. Default value is 1.
     - When `PeriodUnit` is `Month`, valid values are 1, 2, 3, 6, 12.
 - `cpu_max_frequency` (Number) Specify the maximum CPU frequency, in GHz. Value range: between the CPU's base frequency and turbo frequency.
   
-  **提示:**
+  **Note:**
     - Currently, only g3al, c3al, r3al, g4i, c4i, r4i, g4ie, c4ie, r4ie instances support this parameter. For base/turbo frequencies and more information, see [Instance Specifications Introduction](https://www.volcengine.com/docs/6396/70840).
     - This feature is in invitation-only testing. To use it, please contact your account manager.
 - `credit_specification` (String) Burstable instance operating mode. Values:
     - Standard: Standard mode.
     - Unlimited: Unlimited performance mode (not supported yet).
   
-  **提示:**
+  **Note:**
     - This parameter is only effective when `InstanceTypeId` is set to ecs.t2 series, i.e., burstable instances.
     - If not specified or left empty, burstable instances default to `Standard` mode.
 - `deletion_protection` (Boolean) Instance deletion protection attribute, specifies whether the instance can be deleted via the console or API. Values:
@@ -133,7 +133,7 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
       - Windows system hostname length must be between 2 and 15 characters.
 - `hpc_cluster_id` (String) ID of the high performance computing cluster to which the instance belongs.
   
-  **提示:**
+  **Note:**
   This parameter is only effective and required when creating high performance computing GPU instances.
 - `include_data_volumes` (Boolean) Whether to convert all pay-as-you-go data disks attached to the instance to subscription data disks. true: Convert. false (default): Do not convert.
 - `install_run_command_agent` (Boolean) Whether to install Cloud Assistant Agent when creating the instance. Values: true: Install during creation. false (default): Do not install during creation.
@@ -146,13 +146,13 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
     - When `PeriodUnit` is `Month` (default), valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36, 48, 60.
     - When `PeriodUnit` is `Year`, valid values are 1, 2, 3, 4, 5.
   
-  **提示:**
+  **Note:**
   This parameter is valid and required only when `InstanceChargeType` is set to `PrePaid`.
 - `period_unit` (String) The unit for the duration of resource purchase. Values:
     - Month (default): Month
     - Year: Year
   
-  **提示:**
+  **Note:**
   This parameter is effective only when `InstanceChargeType` is set to `PrePaid`.
 - `placement` (Attributes) The deployment information of the instance. (see [below for nested schema](#nestedatt--placement))
 - `project_name` (String) Project name to which the instance belongs.
@@ -288,7 +288,7 @@ Optional:
     - PayByTraffic: Pay-as-you-go—billed by actual traffic.
     - PrePaid: Subscription.
   
-  **提示:**
+  **Note:**
   When `InstanceChargeType` is set to `PostPaid`, this parameter cannot be set to `PrePaid`.
 - `isp` (String) Line type for the public IP. Default is BGP. Values:
     - BGP: BGP (multi-line)
