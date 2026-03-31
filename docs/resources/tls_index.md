@@ -219,7 +219,7 @@ EOT
 Optional:
 
 - `case_sensitive` (Boolean) Case sensitivity. true: Case sensitive. false: Not case sensitive.
-- `delimiter` (String) Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\"', <>/?|;:	[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.
+- `delimiter` (String) Token separators for the full-text index. Each character in the string represents a token separator. Length: 1–256 bytes. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.
 - `include_chinese` (Boolean) When searching, specify whether to segment Chinese content in logs according to Chinese grammar. The default is false. true: For Chinese characters in logs, segment the log according to common Chinese grammar rules. Custom segmentation symbols for Chinese content are not supported. For non-Chinese characters in logs, segment the log using the segmentation symbols specified in the parameter. false: Segment the log using the segmentation symbols specified in the parameter.
 
 
@@ -238,7 +238,7 @@ Optional:
 
 - `auto_index_flag` (Boolean) Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.
 - `case_sensitive` (Boolean) Whether to distinguish case. Default is false.
-- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\"', <>/?|;:	[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.
+- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.
 - `include_chinese` (Boolean) When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.
 - `index_all` (Boolean) Create indexes for all fields with text values in the JSON field.
 - `index_sql_all` (Boolean) Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.
@@ -285,7 +285,7 @@ Optional:
 
 - `auto_index_flag` (Boolean) Indicates whether the index was added automatically. true: The index was added automatically. false: The index was not added automatically.
 - `case_sensitive` (Boolean) Whether to distinguish case. Default is false.
-- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\"', <>/?|;:	[]{}.。 Supports configuring both Chinese characters and token separators simultaneously.
+- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.
 - `include_chinese` (Boolean) When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.
 - `index_all` (Boolean) Create indexes for all fields with text values in the JSON field.
 - `index_sql_all` (Boolean) Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.
