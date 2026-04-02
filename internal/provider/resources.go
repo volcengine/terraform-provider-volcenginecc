@@ -168,6 +168,7 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_cen_grant_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_CEN_GrantInstance.json -package cen -- ../volcengine/cen/grant_instance_resource_gen.go ../volcengine/cen/grant_instance_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_vpn_vpn_connection -ccschema ../service/cloudcontrol/schemas/Volcengine_VPN_VPNConnection.json -package vpn -- ../volcengine/vpn/vpn_connection_resource_gen.go ../volcengine/vpn/vpn_connection_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_privatezone_user_vpc_authorization -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateZone_UserVPCAuthorization.json -package privatezone -- ../volcengine/privatezone/user_vpc_authorization_resource_gen.go ../volcengine/privatezone/user_vpc_authorization_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vedbm_account -ccschema ../service/cloudcontrol/schemas/Volcengine_VEDBM_Account.json -package vedbm -- ../volcengine/vedbm/account_resource_gen.go ../volcengine/vedbm/account_resource_gen_test.go
 
 package provider
 

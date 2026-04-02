@@ -828,5 +828,10 @@
         "resource": "volcenginecc_privatezone_user_vpc_authorization",
         "identifier": ["AccountID"],
         "path": "./examples/resources/volcenginecc_privatezone_user_vpc_authorization/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vedbm_account",
+        "identifier": ["InstanceId","AccountName"],
+        "path": "./examples/resources/volcenginecc_vedbm_account/import.sh"
     }
 ]
