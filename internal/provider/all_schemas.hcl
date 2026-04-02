@@ -680,3 +680,7 @@ resource_schema "volcengine_vpn_vpn_connection" {
 resource_schema "volcengine_privatezone_user_vpc_authorization" {
   cloudcontrol_type_name = "Volcengine::PrivateZone::UserVPCAuthorization"
 }
+
+resource_schema "volcengine_vedbm_account" {
+  cloudcontrol_type_name = "Volcengine::VEDBM::Account"
+}

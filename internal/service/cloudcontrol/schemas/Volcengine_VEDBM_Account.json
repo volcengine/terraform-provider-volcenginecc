@@ -1,0 +1,89 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/AccountType",
+    "/properties/AccountName"
+  ],
+  "description": "Database Account Management",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/AccountName"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vedbm:CreateDBAccount",
+        "vedbm:DescribeDBAccounts"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vedbm:DeleteDBAccount",
+        "vedbm:DescribeDBAccounts"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vedbm:DescribeDBAccounts"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vedbm:DescribeDBAccounts"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vedbm:DescribeDBAccounts",
+        "vedbm:ResetAccount",
+        "vedbm:ResetDBAccount",
+        "vedbm:ModifyDBAccountDescription"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/AccountName"
+  ],
+  "properties": {
+    "AccountDesc": {
+      "description": "Account Description",
+      "type": "string"
+    },
+    "AccountName": {
+      "description": "Account Name",
+      "type": "string"
+    },
+    "AccountPassword": {
+      "description": "Database Account Password",
+      "type": "string"
+    },
+    "AccountType": {
+      "description": "Account Type",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ResetPrivilege": {
+      "description": "Reset high-privilege account permissions. Only applicable to Super accounts. If users modify high-privilege account permissions via SQL on the backend, subsequent features may become unavailable. Therefore, this function is provided to restore all permissions with one click.",
+      "type": "boolean"
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEDBM::Account",
+  "writeOnlyProperties": [
+    "/properties/ResetPrivilege",
+    "/properties/AccountPassword"
+  ]
+}
