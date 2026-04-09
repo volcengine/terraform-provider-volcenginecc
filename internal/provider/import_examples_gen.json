@@ -833,5 +833,25 @@
         "resource": "volcenginecc_vedbm_account",
         "identifier": ["InstanceId","AccountName"],
         "path": "./examples/resources/volcenginecc_vedbm_account/import.sh"
+    },
+    {
+        "resource": "volcenginecc_iam_oidc_provider",
+        "identifier": ["OIDCProviderName"],
+        "path": "./examples/resources/volcenginecc_iam_oidc_provider/import.sh"
+    },
+    {
+        "resource": "volcenginecc_iam_saml_provider",
+        "identifier": ["SAMLProviderName"],
+        "path": "./examples/resources/volcenginecc_iam_saml_provider/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vefaas_timer",
+        "identifier": ["FunctionId","TimerId"],
+        "path": "./examples/resources/volcenginecc_vefaas_timer/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vmp_alerting_rule",
+        "identifier": ["AlertingRuleId"],
+        "path": "./examples/resources/volcenginecc_vmp_alerting_rule/import.sh"
     }
 ]

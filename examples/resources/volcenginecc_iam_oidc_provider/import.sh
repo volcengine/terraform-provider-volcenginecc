@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_iam_oidc_provider.example "oidc_provider_name"

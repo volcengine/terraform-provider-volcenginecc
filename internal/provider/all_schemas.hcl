@@ -684,3 +684,19 @@ resource_schema "volcengine_privatezone_user_vpc_authorization" {
 resource_schema "volcengine_vedbm_account" {
   cloudcontrol_type_name = "Volcengine::VEDBM::Account"
 }
+
+resource_schema "volcengine_iam_oidc_provider" {
+  cloudcontrol_type_name = "Volcengine::IAM::OidcProvider"
+}
+
+resource_schema "volcengine_iam_saml_provider" {
+  cloudcontrol_type_name = "Volcengine::IAM::SamlProvider"
+}
+
+resource_schema "volcengine_vefaas_timer" {
+  cloudcontrol_type_name = "Volcengine::VEFAAS::Timer"
+}
+
+resource_schema "volcengine_vmp_alerting_rule" {
+  cloudcontrol_type_name = "Volcengine::VMP::AlertingRule"
+}
