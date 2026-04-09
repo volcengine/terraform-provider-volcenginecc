@@ -169,6 +169,10 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpn_vpn_connections -cctype Volcengine::VPN::VPNConnection -package vpn ../volcengine/vpn/vpn_connection_plural_data_source_gen.go ../volcengine/vpn/vpn_connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_privatezone_user_vpc_authorizations -cctype Volcengine::PrivateZone::UserVPCAuthorization -package privatezone ../volcengine/privatezone/user_vpc_authorization_plural_data_source_gen.go ../volcengine/privatezone/user_vpc_authorization_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vedbm_accounts -cctype Volcengine::VEDBM::Account -package vedbm ../volcengine/vedbm/account_plural_data_source_gen.go ../volcengine/vedbm/account_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_iam_oidc_providers -cctype Volcengine::IAM::OidcProvider -package iam ../volcengine/iam/oidc_provider_plural_data_source_gen.go ../volcengine/iam/oidc_provider_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_iam_saml_providers -cctype Volcengine::IAM::SamlProvider -package iam ../volcengine/iam/saml_provider_plural_data_source_gen.go ../volcengine/iam/saml_provider_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vefaas_timers -cctype Volcengine::VEFAAS::Timer -package vefaas ../volcengine/vefaas/timer_plural_data_source_gen.go ../volcengine/vefaas/timer_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vmp_alerting_rules -cctype Volcengine::VMP::AlertingRule -package vmp ../volcengine/vmp/alerting_rule_plural_data_source_gen.go ../volcengine/vmp/alerting_rule_plural_data_source_gen_test.go
 
 package provider
 

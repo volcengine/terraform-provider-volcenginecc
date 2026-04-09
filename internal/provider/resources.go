@@ -169,6 +169,10 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_vpn_vpn_connection -ccschema ../service/cloudcontrol/schemas/Volcengine_VPN_VPNConnection.json -package vpn -- ../volcengine/vpn/vpn_connection_resource_gen.go ../volcengine/vpn/vpn_connection_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_privatezone_user_vpc_authorization -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateZone_UserVPCAuthorization.json -package privatezone -- ../volcengine/privatezone/user_vpc_authorization_resource_gen.go ../volcengine/privatezone/user_vpc_authorization_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_vedbm_account -ccschema ../service/cloudcontrol/schemas/Volcengine_VEDBM_Account.json -package vedbm -- ../volcengine/vedbm/account_resource_gen.go ../volcengine/vedbm/account_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_iam_oidc_provider -ccschema ../service/cloudcontrol/schemas/Volcengine_IAM_OidcProvider.json -package iam -- ../volcengine/iam/oidc_provider_resource_gen.go ../volcengine/iam/oidc_provider_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_iam_saml_provider -ccschema ../service/cloudcontrol/schemas/Volcengine_IAM_SamlProvider.json -package iam -- ../volcengine/iam/saml_provider_resource_gen.go ../volcengine/iam/saml_provider_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vefaas_timer -ccschema ../service/cloudcontrol/schemas/Volcengine_VEFAAS_Timer.json -package vefaas -- ../volcengine/vefaas/timer_resource_gen.go ../volcengine/vefaas/timer_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vmp_alerting_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_VMP_AlertingRule.json -package vmp -- ../volcengine/vmp/alerting_rule_resource_gen.go ../volcengine/vmp/alerting_rule_resource_gen_test.go
 
 package provider
 

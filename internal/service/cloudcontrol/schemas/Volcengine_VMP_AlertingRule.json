@@ -1,0 +1,225 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Type"
+  ],
+  "definitions": {
+    "AlertingRuleLevel": {
+      "description": "Alert severity configuration",
+      "properties": {
+        "Comparator": {
+          "description": "Alert rule comparison condition. Options: \u003e, \u003e=, \u003c, \u003c=, ==, !=",
+          "type": "string"
+        },
+        "For": {
+          "description": "Alert duration. Possible values: 0s, 1m, 2m, 5m, 10m",
+          "type": "string"
+        },
+        "Level": {
+          "description": "Alert rule severity. Currently supports P0, P1, or P2",
+          "type": "string"
+        },
+        "Threshold": {
+          "description": "Alert rule threshold",
+          "type": "number"
+        }
+      },
+      "required": [
+        "Level",
+        "For",
+        "Comparator"
+      ],
+      "type": "object"
+    },
+    "AlertingRuleQuery": {
+      "description": "Alert query configuration",
+      "properties": {
+        "PromQL": {
+          "description": "Query statement",
+          "type": "string"
+        },
+        "WorkspaceId": {
+          "description": "Workspace ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "WorkspaceId"
+      ],
+      "type": "object"
+    },
+    "TagsObj": {
+      "description": "Tag/annotation key-value pair configuration",
+      "properties": {
+        "Key": {
+          "description": "Tag or annotation key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag or annotation value. If set to empty, the key will be deleted",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TemplateKV": {
+      "description": "Tag/annotation key-value pair configuration",
+      "properties": {
+        "Name": {
+          "description": "Tag or annotation key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag or annotation value. If set to empty, the key will be deleted",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "VMP alert rule configuration",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AlertingRuleId",
+      "/properties/Name",
+      "/properties/Type",
+      "/properties/Query/WorkspaceId",
+      "/properties/NotifyPolicyId",
+      "/properties/Status",
+      "/properties/NotifyGroupPolicyId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vmp:CreateAlertingRule",
+        "vmp:ListAlertingRules",
+        "vmp:DisableAlertingRules"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vmp:DeleteAlertingRules",
+        "vmp:ListAlertingRules"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vmp:ListAlertingRules"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vmp:ListAlertingRules"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vmp:ListAlertingRules",
+        "vmp:UpdateAlertingRule",
+        "vmp:EnableAlertingRules",
+        "vmp:DisableAlertingRules"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AlertingRuleId"
+  ],
+  "properties": {
+    "AlertingRuleId": {
+      "description": "Alert rule ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Annotations": {
+      "description": "Annotation attached to the alert",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TemplateKV"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreateTime": {
+      "description": "Alert rule creation time",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Alert rule description",
+      "type": "string"
+    },
+    "Labels": {
+      "description": "Tags attached to the alert",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TemplateKV"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Levels": {
+      "description": "Alert severity",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/AlertingRuleLevel"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Name": {
+      "description": "Alert rule name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NotifyGroupPolicyId": {
+      "description": "Alert aggregation policy ID",
+      "type": "string"
+    },
+    "NotifyPolicyId": {
+      "description": "Alert notification policy ID",
+      "type": "string"
+    },
+    "Query": {
+      "$ref": "#/definitions/AlertingRuleQuery",
+      "description": "Alert configuration",
+      "type": "object"
+    },
+    "Status": {
+      "description": "Alert rule status: Running (monitoring), Disabled (disabled)",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TagsObj"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Type": {
+      "description": "Alert rule type. Allowed values: vmp/PromQL",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Alert rule update time",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AlertingRuleId",
+    "/properties/CreateTime",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "Name",
+    "Type"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VMP::AlertingRule"
+}

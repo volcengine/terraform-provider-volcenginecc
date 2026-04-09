@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vmp_alerting_rule.example "alerting_rule_id"

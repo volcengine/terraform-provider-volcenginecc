@@ -1,0 +1,169 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/SAMLProviderName",
+    "/properties/SSOType"
+  ],
+  "definitions": {
+    "Certificate": {
+      "description": "SAML Certificate",
+      "properties": {
+        "CertificateId": {
+          "description": "Certificate ID",
+          "type": "string"
+        },
+        "CreateDate": {
+          "description": "Certificate Upload Time",
+          "type": "string"
+        },
+        "Issuer": {
+          "description": "Certificate Authority",
+          "type": "string"
+        },
+        "NotAfter": {
+          "description": "Certificate Expiration Time",
+          "type": "string"
+        },
+        "NotBefore": {
+          "description": "Certificate Validity Period",
+          "type": "string"
+        },
+        "SerialNumber": {
+          "description": "Certificate Serial Number",
+          "type": "string"
+        },
+        "SignatureAlgorithm": {
+          "description": "Certificate Signature Algorithm",
+          "type": "string"
+        },
+        "Subject": {
+          "description": "Certificate Subject",
+          "type": "string"
+        },
+        "UpdateDate": {
+          "description": "Certificate Update Time",
+          "type": "string"
+        },
+        "Version": {
+          "description": "Certificate Version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "SAML identity provider is a user authentication service provider responsible for collecting and storing user identity data such as usernames and passwords. In access control (IAM), it is an entity that contains external identity provider metadata and provides identity management services.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateSAMLProvider",
+        "iam:GetSAMLProvider",
+        "iam:ListSAMLProviderCertificates"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeleteSAMLProvider",
+        "iam:GetSAMLProvider"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListSAMLProviders"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetSAMLProvider",
+        "iam:ListSAMLProviderCertificates"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateSAMLProvider",
+        "iam:ListSAMLProviderCertificates",
+        "iam:GetSAMLProvider"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SAMLProviderName"
+  ],
+  "properties": {
+    "CertificateExpireTime": {
+      "description": "SAML Certificate Expiration Reminder Time",
+      "type": "string"
+    },
+    "Certificates": {
+      "description": "Certificate List",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Certificate"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreateDate": {
+      "description": "Creation Time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "SAML Identity Provider Description",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EncodedSAMLMetadataDocument": {
+      "description": "Base64 Encoded SAML Identity Provider Metadata File",
+      "type": "string"
+    },
+    "SAMLProviderName": {
+      "description": "SAML Identity Provider Name",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SSOType": {
+      "description": "Identity Provider SSO Type\n1. Role SSO\n2. User SSO",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "Status": {
+      "description": "Identity Provider Status (User SSO Only)\n1. Enabled\n2. Enabled and other login methods disabled\n3. Disabled",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "semantic": "status",
+      "type": "integer"
+    },
+    "Trn": {
+      "description": "Identity Provider Trn",
+      "type": "string"
+    },
+    "UpdateDate": {
+      "description": "Update Time",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Trn",
+    "/properties/CreateDate",
+    "/properties/UpdateDate",
+    "/properties/CertificateExpireTime",
+    "/properties/Certificates"
+  ],
+  "required": [
+    "SAMLProviderName",
+    "SSOType",
+    "EncodedSAMLMetadataDocument"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::SamlProvider"
+}

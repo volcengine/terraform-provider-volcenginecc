@@ -1,0 +1,112 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/OIDCProviderName",
+    "/properties/IssuerURL"
+  ],
+  "description": "OIDC identity provider is a user authentication service provider responsible for collecting and storing user identity data such as usernames and passwords. In access control (IAM), it is an entity containing external identity provider metadata and provides identity management services.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateOIDCProvider",
+        "iam:GetOIDCProvider"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeleteOIDCProvider",
+        "iam:GetOIDCProvider"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListOIDCProviders"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetOIDCProvider"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateOIDCProvider",
+        "iam:AddClientIDToOIDCProvider",
+        "iam:RemoveClientIDFromOIDCProvider",
+        "iam:AddThumbprintToOIDCProvider",
+        "iam:RemoveThumbprintFromOIDCProvider",
+        "iam:GetOIDCProvider"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/OIDCProviderName"
+  ],
+  "properties": {
+    "ClientIds": {
+      "description": "Client ID list. Provided by external IdP.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreateDate": {
+      "description": "Creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Identity provider description.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "IssuanceLimitTime": {
+      "description": "Earliest issuance time allowed for external IdP to issue ID Token.",
+      "type": "integer"
+    },
+    "IssuerURL": {
+      "description": "OIDC issuer URL.",
+      "type": "string"
+    },
+    "OIDCProviderName": {
+      "description": "OIDC identity provider name.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Thumbprints": {
+      "description": "HTTPS certificate verification fingerprint (SHA256).",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Trn": {
+      "description": "Identity provider Trn.",
+      "type": "string"
+    },
+    "UpdateDate": {
+      "description": "Update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Trn",
+    "/properties/CreateDate",
+    "/properties/UpdateDate"
+  ],
+  "required": [
+    "OIDCProviderName",
+    "IssuerURL",
+    "ClientIds",
+    "Thumbprints"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::OidcProvider"
+}

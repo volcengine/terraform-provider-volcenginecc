@@ -1,0 +1,98 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/FunctionId",
+    "/properties/Name"
+  ],
+  "description": "Trigger management",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vefaas:CreateTimer",
+        "vefaas:GetTimer"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vefaas:DeleteTimer",
+        "vefaas:GetTimer"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vefaas:GetTimer"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vefaas:UpdateTimer",
+        "vefaas:GetTimer"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FunctionId",
+    "/properties/TimerId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "Timer trigger creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Crontab": {
+      "description": "Timer trigger time, formatted as a crontab expression",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Timer trigger remarks",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EnableConcurrency": {
+      "description": "Allow timer trigger concurrency; true means concurrency is allowed",
+      "type": "boolean"
+    },
+    "Enabled": {
+      "description": "Timer trigger enabled; true means enabled",
+      "semantic": "status",
+      "type": "boolean"
+    },
+    "FunctionId": {
+      "description": "Function ID",
+      "type": "string"
+    },
+    "LastUpdateTime": {
+      "description": "Timer trigger update time",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Timer trigger name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Payload": {
+      "description": "Payload sent by timer trigger, that is, the trigger message",
+      "type": "string"
+    },
+    "Retries": {
+      "description": "Timer trigger retry count",
+      "type": "integer"
+    },
+    "TimerId": {
+      "description": "Timer trigger ID",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TimerId",
+    "/properties/CreationTime",
+    "/properties/LastUpdateTime"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEFAAS::Timer"
+}
