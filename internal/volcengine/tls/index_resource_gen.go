@@ -328,8 +328,29 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: CaseSensitive
+												"case_sensitive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Whether to distinguish case. Default is false.",
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Delimiter
+												"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: IncludeChinese
+												"include_chinese": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: IndexAll
 												"index_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "Create indexes for all fields with text values in the JSON field.",
@@ -674,8 +695,29 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: CaseSensitive
+												"case_sensitive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Whether to distinguish case. Default is false.",
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Delimiter
+												"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Token separators for the field. Default is empty (\"\"). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\\\\\"', <>/?|;:\\\t\\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.",
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: IncludeChinese
+												"include_chinese": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.",
+													Computed:    true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: IndexAll
 												"index_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "Create indexes for all fields with text values in the JSON field.",

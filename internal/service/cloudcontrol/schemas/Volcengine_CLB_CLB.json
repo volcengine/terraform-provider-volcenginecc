@@ -324,6 +324,11 @@
       "description": "Expiration time of the load balancer instance",
       "type": "string"
     },
+    "Ipv6AddressBandwidth": {
+      "$ref": "#/definitions/Ipv6AddressBandwidth",
+      "description": "IPv6 public bandwidth information for the load balancing instance",
+      "type": "object"
+    },
     "Listeners": {
       "description": "Listener information in the load balancer instance",
       "insertionOrder": false,
@@ -474,7 +479,8 @@
     "/properties/CreateTime",
     "/properties/UpdateTime",
     "/properties/TimestampRemoveEnabled",
-    "/properties/EniIpv6Address"
+    "/properties/EniIpv6Address",
+    "/properties/Ipv6AddressBandwidth"
   ],
   "tagging": {
     "tagOnCreate": true,

@@ -79,7 +79,7 @@ type Emitter struct {
 type parent struct {
 	computedAndOptional bool
 	computedOnly        bool
-	parentIfSetList     bool //是否为数组或者Set下的嵌套属性,会结合该属性+readOnly属性，在ListNestedAttribute或者SetNestedAttribute进行属性过滤
+	parentIfSetList     bool //是否为Set下的嵌套属性,会结合该属性+readOnly属性，在SetNestedAttribute进行属性过滤
 	path                []string
 	reqd                interface {
 		IsRequired(name string) bool
@@ -421,7 +421,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						computedOnly:        computedOnly,
 						path:                path,
 						reqd:                property.Items,
-						parentIfSetList:     true,
+						parentIfSetList:     false,
 					},
 					property.Items.Properties)
 

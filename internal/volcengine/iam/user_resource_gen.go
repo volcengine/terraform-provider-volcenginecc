@@ -207,6 +207,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Email is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EmailIsVerify
 		// Cloud Control resource type schema:
@@ -472,6 +473,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// MobilePhone is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MobilePhoneIsVerify
 		// Cloud Control resource type schema:
@@ -806,6 +808,8 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/LoginProfile/Password",
+		"/properties/MobilePhone",
+		"/properties/Email",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

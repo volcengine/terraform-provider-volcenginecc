@@ -211,7 +211,9 @@
       "permissions": [
         "vmp:GetWorkspace",
         "vmp:ListWorkspaceStatus",
-        "vmp:UpdateWorkspace"
+        "vmp:UpdateWorkspace",
+        "vmp:UntagResources",
+        "vmp:TagResources"
       ]
     }
   },

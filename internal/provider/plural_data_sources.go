@@ -173,6 +173,12 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_iam_saml_providers -cctype Volcengine::IAM::SamlProvider -package iam ../volcengine/iam/saml_provider_plural_data_source_gen.go ../volcengine/iam/saml_provider_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vefaas_timers -cctype Volcengine::VEFAAS::Timer -package vefaas ../volcengine/vefaas/timer_plural_data_source_gen.go ../volcengine/vefaas/timer_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vmp_alerting_rules -cctype Volcengine::VMP::AlertingRule -package vmp ../volcengine/vmp/alerting_rule_plural_data_source_gen.go ../volcengine/vmp/alerting_rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_import_tasks -cctype Volcengine::TLS::ImportTask -package tls ../volcengine/tls/import_task_plural_data_source_gen.go ../volcengine/tls/import_task_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cen_bandwidth_packages -cctype Volcengine::CEN::BandwidthPackage -package cen ../volcengine/cen/bandwidth_package_plural_data_source_gen.go ../volcengine/cen/bandwidth_package_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vedbm_endpoints -cctype Volcengine::VEDBM::Endpoint -package vedbm ../volcengine/vedbm/endpoint_plural_data_source_gen.go ../volcengine/vedbm/endpoint_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdspostgresql_instances -cctype Volcengine::RDSPostgreSQL::Instance -package rdspostgresql ../volcengine/rdspostgresql/instance_plural_data_source_gen.go ../volcengine/rdspostgresql/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_privatelink_vpc_endpoints -cctype Volcengine::PrivateLink::VpcEndpoint -package privatelink ../volcengine/privatelink/vpc_endpoint_plural_data_source_gen.go ../volcengine/privatelink/vpc_endpoint_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_consumer_groups -cctype Volcengine::TLS::ConsumerGroup -package tls ../volcengine/tls/consumer_group_plural_data_source_gen.go ../volcengine/tls/consumer_group_plural_data_source_gen_test.go
 
 package provider
 

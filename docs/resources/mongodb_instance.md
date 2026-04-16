@@ -51,7 +51,7 @@ resource "volcenginecc_mongodb_instance" "MongoDBInstanceDemo" {
 - `storage_space_gb` (Number) Total storage space for replica set instances, or storage space for a single Shard in a sharded cluster. Unit: GiB, step size: 10.
 - `subnet_id` (String) Subnet ID.
 - `vpc_id` (String) Private network ID.
-- `zone_id` (String) Availability zone ID where the instance is located.
+- `zone_id` (String) The ID of the availability zone where the instance is located. If you want to deploy a new instance across multiple availability zones, you can provide three availability zone IDs, separated by English commas (,).
 
 ### Optional
 

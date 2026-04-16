@@ -371,6 +371,8 @@
   },
   "typeName": "Volcengine::IAM::User",
   "writeOnlyProperties": [
-    "/properties/LoginProfile/Password"
+    "/properties/LoginProfile/Password",
+    "/properties/MobilePhone",
+    "/properties/Email"
   ]
 }

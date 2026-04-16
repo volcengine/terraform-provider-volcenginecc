@@ -64,7 +64,7 @@ Data Source schema for Volcengine::MongoDB::Instance
 - `tags` (Attributes Set) MongoDB instance tag information (see [below for nested schema](#nestedatt--tags))
 - `updated_time` (String) Instance update time (UTC).
 - `vpc_id` (String) Private network ID.
-- `zone_id` (String) Availability zone ID where the instance is located.
+- `zone_id` (String) The ID of the availability zone where the instance is located. If you want to deploy a new instance across multiple availability zones, you can provide three availability zone IDs, separated by English commas (,).
 
 <a id="nestedatt--config_servers"></a>
 ### Nested Schema for `config_servers`

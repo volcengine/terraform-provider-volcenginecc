@@ -7,6 +7,9 @@
   "filterProperties": {
     "filterableProperties": [
       "/properties/UserName"
+    ],
+    "required": [
+      "/properties/UserName"
     ]
   },
   "handlers": {
@@ -108,13 +111,10 @@
     "/properties/RequestTime",
     "/properties/Service",
     "/properties/UpdatedTime",
-    "/properties/LastLoginDate"
+    "/properties/SecretAccessKey"
   ],
   "tagging": {
     "taggable": false
   },
-  "typeName": "Volcengine::IAM::Accesskey",
-  "writeOnlyProperties": [
-    "/properties/SecretAccessKey"
-  ]
+  "typeName": "Volcengine::IAM::Accesskey"
 }

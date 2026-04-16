@@ -505,7 +505,9 @@
         "rds_mysql:DescribeDBDisasterRecoveryInstances",
         "rds_mysql:DescribeDBProxy",
         "rds_mysql:DescribeDBProxyConfig",
-        "rds_mysql:DescribeDBInstances"
+        "rds_mysql:DescribeDBInstances",
+        "rds_mysql:RemoveTagsFromResource",
+        "rds_mysql:AddTagsToResource"
       ]
     }
   },

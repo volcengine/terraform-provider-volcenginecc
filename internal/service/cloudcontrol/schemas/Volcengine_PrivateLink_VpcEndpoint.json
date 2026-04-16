@@ -1,0 +1,290 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/ServiceId",
+    "/properties/ServiceManaged",
+    "/properties/ServiceName",
+    "/properties/VpcId"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Endpoint node user tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key of the endpoint user tag. Length limit: 1–128 characters. Case sensitive. Cannot start with 'or' or 'sys:' in any case combination. Cannot start or end with a space. Allowed characters: letters, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equal signs (=), plus signs (+), hyphens (-), and @.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value of the endpoint user tag. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equal signs (=), plus signs (+), hyphens (-), and @",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    },
+    "Zone": {
+      "description": "Availability zone information",
+      "properties": {
+        "Ipv6ServiceStatus": {
+          "description": "Service status of the endpoint node's IPv6 address. Active: normal. Inactive: abnormal.",
+          "type": "string"
+        },
+        "NetworkInterfaceId": {
+          "description": "ID of the endpoint NIC used to connect to new service resources. If not in the process of seamless service resource replacement, this parameter returns empty.",
+          "type": "string"
+        },
+        "PrivateIpAddress": {
+          "description": "The private IPv4 address of the endpoint node's network interface must belong to the subnet's IPv4 CIDR block. You can call the DescribeSubnets API to obtain the subnet's CIDR block. Parameter -N: indicates the sequence number of the private IPv4 address, with a value range of 1–10. Use \u0026 to separate multiple private IPv4 addresses.",
+          "type": "string"
+        },
+        "PrivateIpv6Address": {
+          "description": "The private IPv6 address of the endpoint node's network interface must belong to the subnet's IPv6 CIDR block. You can call the DescribeSubnets API to obtain the subnet's CIDR block. Parameter -N: indicates the sequence number of the private IPv6 address, with a value range of 1–10. Use \u0026 to separate multiple private IPv6 addresses. If not specified, an IPv6 address will be randomly assigned within the subnet's IPv6 CIDR block by default.",
+          "type": "string"
+        },
+        "ServiceStatus": {
+          "description": "Service status of the endpoint IPv4 address. Active: Normal. Inactive: Abnormal.",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "ID of the subnet to which the NIC of the endpoint to be created belongs. You can call the DescribeSubnets API to obtain the subnet ID. Parameter -N: Indicates the sequence number of the subnet ID, value range: 1–10. Separate multiple subnet IDs with \u0026.",
+          "type": "string"
+        },
+        "ZoneDomain": {
+          "description": "Domain name of the endpoint availability zone.",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "ID of the availability zone to which the NIC of the endpoint to be created belongs. For more information about availability zones, see Regions and Availability Zones. Parameter -N: Indicates the sequence number of the availability zone, value range: 1–10. Separate multiple availability zone IDs with \u0026.",
+          "type": "string"
+        },
+        "ZoneStatus": {
+          "description": "Status of the endpoint node's availability zone. PendingAcceptance: waiting for connection. Connecting: connecting. Connected: connected. Disconnecting: disconnecting. Rejected: connection rejected. Failed: connection failed.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "The endpoint node is a private network service access point deployed by the service user in their own VPC, used to access the service provider's services via the private network.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/EndpointId",
+      "/properties/EndpointName",
+      "/properties/EndpointIndex",
+      "/properties/EndpointType",
+      "/properties/ProjectName",
+      "/properties/ServiceId",
+      "/properties/ServiceName",
+      "/properties/Status",
+      "/properties/VpcId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "privatelink:CreateVpcEndpoint",
+        "privatelink:DescribeVpcEndpointAttributes",
+        "privatelink:DescribeVpcEndpointZones",
+        "privatelink:DescribeVpcEndpointSecurityGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "privatelink:DeleteVpcEndpoint",
+        "privatelink:DescribeVpcEndpointAttributes",
+        "privatelink:DescribeVpcEndpointZones",
+        "privatelink:DescribeVpcEndpointSecurityGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "privatelink:DescribeVpcEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "privatelink:DescribeVpcEndpointAttributes",
+        "privatelink:DescribeVpcEndpointZones",
+        "privatelink:DescribeVpcEndpointSecurityGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "privatelink:ModifyVpcEndpointAttributes",
+        "privatelink:UntagResources",
+        "privatelink:TagResources",
+        "privatelink:RemoveZoneFromVpcEndpoint",
+        "privatelink:AddZoneToVpcEndpoint",
+        "privatelink:DetachSecurityGroupFromVpcEndpoint",
+        "privatelink:AttachSecurityGroupToVpcEndpoint",
+        "privatelink:DescribeVpcEndpointAttributes",
+        "privatelink:DescribeVpcEndpointZones",
+        "privatelink:DescribeVpcEndpointSecurityGroups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/EndpointId"
+  ],
+  "properties": {
+    "Bps": {
+      "description": "Maximum bandwidth limit for the endpoint node connection, in Mbps.",
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "Whether the endpoint is locked. Normal: Normal. FinancialLocked: Locked. If this parameter is empty, the endpoint is not locked.",
+      "type": "string"
+    },
+    "ConnectionStatus": {
+      "description": "Status of the endpoint node connection. PendingAcceptance: waiting for connection. Connecting: connecting. Connected: connected. Disconnecting: disconnecting. Rejected: connection rejected. Failed: connection failed. PartialFailed: partial connection failure. ServiceDeleted: service deleted.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Creation time of the endpoint.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "Deletion time of the endpoint.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the endpoint node. The default value is an empty string. It must start with a letter, number, or Chinese character, and can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EndpointDomain": {
+      "description": "Domain name of the endpoint.",
+      "type": "string"
+    },
+    "EndpointId": {
+      "description": "ID of the endpoint node.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "EndpointIndex": {
+      "description": "Endpoint index",
+      "type": "integer"
+    },
+    "EndpointName": {
+      "description": "Endpoint name. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, defaults to the endpoint ID.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "EndpointType": {
+      "description": "Type of the endpoint node. Interface: interface endpoint node.",
+      "type": "string"
+    },
+    "IpAddressVersions": {
+      "description": "IP protocol type for the interface endpoint. Options are ipv4 and ipv6. The default for interface endpoints is ipv4. If only ipv4 is used, do not provide this parameter. If the interface endpoint is dual stack (ipv4 \u0026 ipv6), you must provide this parameter. Before providing it, ensure the following: your account has enabled IPv6 for private network connections; the subnet associated with the interface endpoint has enabled the IPv6 segment; the endpoint service associated with the interface endpoint is dual stack. Parameter -N: indicates the sequence number of the IP protocol type for the interface endpoint, with a range of 1–2. Use \u0026 to separate the sequence numbers of the two IP protocol types. Currently, only providing IPv6 is not supported.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Payer": {
+      "description": "Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.",
+      "type": "string"
+    },
+    "PrivateDNSEnabled": {
+      "description": "Enable private DNS name. false (default): disabled. true: enabled.",
+      "type": "boolean"
+    },
+    "PrivateDNSName": {
+      "description": "The private DNS name of the endpoint node. If the parameter PrivateDNSEnabled returns false, this parameter is empty.",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Name of the project to which the endpoint node belongs.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "SecurityGroupIds": {
+      "description": "ID of the security group to be bound to the endpoint. You can call the DescribeSecurityGroups API to obtain the security group ID. Parameter -N: Indicates the sequence number of the security group ID, value range: 1–5. Separate multiple security group IDs with \u0026.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceId": {
+      "description": "ID of the endpoint service to be associated. You can call the DescribeVpcEndpointServices API to obtain the endpoint service ID.",
+      "type": "string"
+    },
+    "ServiceManaged": {
+      "description": "Whether the endpoint is managed. false: Unmanaged endpoint. true: Managed endpoint.",
+      "type": "boolean"
+    },
+    "ServiceName": {
+      "description": "Name of the endpoint service to be associated.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the endpoint. Creating: Creating. Pending: Modifying configuration. Available: Available. Deleting: Deleting.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Endpoint user tag.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Most recent operation time of the endpoint.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "ID of the VPC to which the endpoint belongs. You can call the DescribeVpcs API to obtain the VPC ID.",
+      "type": "string"
+    },
+    "Zones": {
+      "description": "Availability zone of the endpoint node.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Zone"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Bps",
+    "/properties/BusinessStatus",
+    "/properties/ConnectionStatus",
+    "/properties/CreationTime",
+    "/properties/DeletedTime",
+    "/properties/EndpointDomain",
+    "/properties/EndpointId",
+    "/properties/EndpointIndex",
+    "/properties/EndpointType",
+    "/properties/Payer",
+    "/properties/PrivateDNSName",
+    "/properties/Status",
+    "/properties/UpdateTime",
+    "/properties/Zones/*/Ipv6ServiceStatus",
+    "/properties/Zones/*/NetworkInterfaceId",
+    "/properties/Zones/*/ServiceStatus",
+    "/properties/Zones/*/ZoneDomain",
+    "/properties/Zones/*/ZoneStatus"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::PrivateLink::VpcEndpoint"
+}

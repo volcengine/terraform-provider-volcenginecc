@@ -853,5 +853,35 @@
         "resource": "volcenginecc_vmp_alerting_rule",
         "identifier": ["AlertingRuleId"],
         "path": "./examples/resources/volcenginecc_vmp_alerting_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_import_task",
+        "identifier": ["TaskID"],
+        "path": "./examples/resources/volcenginecc_tls_import_task/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cen_bandwidth_package",
+        "identifier": ["CenBandwidthPackageId"],
+        "path": "./examples/resources/volcenginecc_cen_bandwidth_package/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vedbm_endpoint",
+        "identifier": ["InstanceId","EndpointId"],
+        "path": "./examples/resources/volcenginecc_vedbm_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdspostgresql_instance",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_rdspostgresql_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatelink_vpc_endpoint",
+        "identifier": ["EndpointId"],
+        "path": "./examples/resources/volcenginecc_privatelink_vpc_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_consumer_group",
+        "identifier": ["ProjectID","ConsumerGroupName"],
+        "path": "./examples/resources/volcenginecc_tls_consumer_group/import.sh"
     }
 ]

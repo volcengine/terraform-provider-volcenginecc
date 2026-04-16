@@ -59,6 +59,11 @@ Optional:
 
 - `instance_id` (String) Instance ID.
 
+Read-Only:
+
+- `instance_name` (String) Instance name.
+- `vpc` (String) Instance VPC ID.
+
 ## Import
 
 Import is supported using the following syntax:

@@ -132,6 +132,8 @@
       "permissions": [
         "kms:UpdateKey",
         "kms:CancelKeyDeletion",
+        "kms:UntagResources",
+        "kms:TagResources",
         "kms:DescribeKey",
         "kms:ArchiveKey",
         "kms:CancelArchiveKey",

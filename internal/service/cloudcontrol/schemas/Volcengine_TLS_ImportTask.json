@@ -1,0 +1,404 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/SourceType",
+    "/properties/TopicID",
+    "/properties/ProjectID"
+  ],
+  "definitions": {
+    "ExtractRuleItem": {
+      "properties": {
+        "BeginRegex": {
+          "description": "Regular expression for identifying the first line of each log. The matched part is treated as the start of the log. When LogType is set to multiline_log, you must configure a log sample",
+          "type": "string"
+        },
+        "Delimiter": {
+          "description": "Delimiter. Only valid when LogType is delimiter_log.",
+          "type": "string"
+        },
+        "EnableNanosecond": {
+          "description": "Enable nanoseconds.",
+          "type": "boolean"
+        },
+        "FilterKeyRegex": {
+          "description": "Filter key regular expression.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/FilterKeyRegex"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Keys": {
+          "description": "List of log field names (Key). Valid only when LogType is delimiter_log. Supports up to 100 field names. Duplicate field names are not allowed, and all field names cannot be left blank",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "LogRegex": {
+          "description": "Log regular expression",
+          "type": "string"
+        },
+        "LogTemplate": {
+          "$ref": "#/definitions/LogTemplate",
+          "description": "Log template.",
+          "type": "object"
+        },
+        "Quote": {
+          "description": "Quotation mark. Content enclosed by the quotation mark will not be separated and will be parsed as a complete field. Only valid when LogType is delimiter_log.",
+          "type": "string"
+        },
+        "TimeFormat": {
+          "description": "Parsing format for the time field. If you use a specified time field in the log as the log timestamp, you must fill in TimeKey and TimeFormat. TimeKey and TimeFormat must be paired. For configuration details, see time format.",
+          "type": "string"
+        },
+        "TimeKey": {
+          "description": "Name of the log time field. If you use a specific time field in the log as the log timestamp, you must provide both TimeKey and TimeFormat. TimeKey and TimeFormat must appear in pairs",
+          "type": "string"
+        },
+        "TimeSample": {
+          "description": "Time sample. Used to verify whether the entered time parsing format is correct",
+          "type": "string"
+        },
+        "UnMatchLogKey": {
+          "description": "When uploading logs that failed to parse, specify the key name for the failed logs. UnMatchUpLoadSwitch=true and UnMatchLogKey must be used together.",
+          "type": "string"
+        },
+        "UnMatchUpLoadSwitch": {
+          "description": "Whether to upload logs that failed to parse. UnMatchUpLoadSwitch=true and UnMatchLogKey must be paired. true: Upload logs that failed to parse. false: Do not upload logs that failed to parse.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "FilterKeyRegex": {
+      "properties": {
+        "Key": {
+          "description": "Key.",
+          "type": "string"
+        },
+        "Regex": {
+          "description": "Regular expression.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ImportExtractRule": {
+      "properties": {
+        "ExtractRule": {
+          "$ref": "#/definitions/ExtractRuleItem",
+          "description": "Basic content of log extraction rules.",
+          "type": "object"
+        },
+        "SkipLineCount": {
+          "description": "Number of skipped rows. Only valid when the log type is delimiter_log and the import type is tos.",
+          "type": "integer"
+        },
+        "TimeExtractRegex": {
+          "description": "Time extraction regular expression, used to extract the time value from the TimeKey field and parse it as the collection time",
+          "type": "string"
+        },
+        "TimeZone": {
+          "description": "Time zone. Supports machine time zone (default) and custom time zone. Custom time zone supports GMT and UTC. GMT format: GMT+08:00. UTC format: Asia/Shanghai.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ImportSourceInfo": {
+      "properties": {
+        "KafkaSourceInfo": {
+          "$ref": "#/definitions/KafkaSourceInfo",
+          "description": "Kafka data source information. When sourceType is kafka, the KafkaSourceInfo field is required",
+          "type": "object"
+        },
+        "TosSourceInfo": {
+          "$ref": "#/definitions/TosSourceInfo",
+          "description": "TOS data source information. When sourceType is tos, the TosSourceInfo field is required.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "KafkaSourceInfo": {
+      "properties": {
+        "Encode": {
+          "description": "Data encoding format. Available options: UTF-8, GBK.",
+          "type": "string"
+        },
+        "Group": {
+          "description": "Kafka consumer group. If not specified, the system will automatically create a Kafka consumer group.",
+          "type": "string"
+        },
+        "Host": {
+          "description": "The service addresses for different types of Kafka clusters vary. Details are as follows: Message Queue Kafka Edition: Use the access point of the Kafka instance. For more information, see Access Point. If the Kafka instance and the Log Service Project are in the same region, you can use private network access; otherwise, use public network access. Self-hosted Kafka clusters: Use the IP address and port number or the domain name and port number of the Kafka Broker. Only public network access is supported. Separate multiple service addresses with a comma (,).",
+          "type": "string"
+        },
+        "InitialOffset": {
+          "description": "Starting position for data import. Options: 0: Earliest time, start importing from the first record in the specified Kafka Topic. 1: Latest time, start importing from the most recently generated record in the specified Kafka Topic.",
+          "type": "integer"
+        },
+        "InstanceID": {
+          "description": "If you are using Message Queue Kafka Edition, set this to the Kafka instance ID.",
+          "type": "string"
+        },
+        "IsNeedAuth": {
+          "description": "Whether to enable authentication. If you use a public service address, it is recommended to enable authentication.",
+          "type": "boolean"
+        },
+        "Mechanism": {
+          "description": "Password authentication mechanism. Available options: PLAIN, SCRAM-SHA-256, and SCRAM-SHA-512.",
+          "type": "string"
+        },
+        "Password": {
+          "description": "Kafka SASL user password for authentication.",
+          "type": "string"
+        },
+        "Protocol": {
+          "description": "Secure transmission protocol. Options include plaintext, sasl_ssl, ssl, and sasl_plaintext",
+          "type": "string"
+        },
+        "TimeSourceDefault": {
+          "description": "Specify log time. Options: 0: Use Kafka message timestamp. 1: Use current system time.",
+          "type": "integer"
+        },
+        "Topic": {
+          "description": "Kafka Topic name. Separate multiple Kafka Topics with commas (,).",
+          "type": "string"
+        },
+        "Username": {
+          "description": "Kafka SASL username for authentication.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LogTemplate": {
+      "properties": {
+        "Format": {
+          "description": "Format.",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Type",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TargetInfo": {
+      "properties": {
+        "ExtractRule": {
+          "$ref": "#/definitions/ImportExtractRule",
+          "description": "Log extraction rule.",
+          "type": "object"
+        },
+        "LogSample": {
+          "description": "Log sample. When LogType is set to multiline_log, you must configure log samples. It is recommended to provide more than two log entries as examples to ensure the regular expression matches the first line of each log. Use real samples from the production environment.",
+          "type": "string"
+        },
+        "LogType": {
+          "description": "Specify log parsing type during import. delimiter_log: CSV type. multiline_log: multiline full text type. minimalist_log: single line full text type. json_log: JSON type.",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Region",
+        "LogType"
+      ],
+      "type": "object"
+    },
+    "TaskStatistics": {
+      "properties": {
+        "BytesTotal": {
+          "description": "Total resource bytes enumerated",
+          "type": "integer"
+        },
+        "BytesTransferred": {
+          "description": "Bytes transferred.",
+          "type": "integer"
+        },
+        "Failed": {
+          "description": "Number of resources failed to import.",
+          "type": "integer"
+        },
+        "NotExist": {
+          "description": "Number of resources not found.",
+          "type": "integer"
+        },
+        "Skipped": {
+          "description": "Number of resources skipped during import",
+          "type": "integer"
+        },
+        "TaskStatus": {
+          "description": "Task status. Status of the import task. Preparing: Preparing for import. Importing: Importing data. Success: Import completed successfully. Failed: Import failed. Stopped: Import paused.",
+          "type": "string"
+        },
+        "Total": {
+          "description": "Total number of resources enumerated.",
+          "type": "integer"
+        },
+        "Transferred": {
+          "description": "Number of records transferred.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "TosSourceInfo": {
+      "properties": {
+        "Bucket": {
+          "description": "TOS bucket name",
+          "type": "string"
+        },
+        "CompressType": {
+          "description": "Compression mode for data in the TOS bucket. none: No compression. snappy: Compress using snappy. gzip: Compress using gzip. lz4: Compress using lz4.",
+          "type": "string"
+        },
+        "Prefix": {
+          "description": "Path of the file to be imported in the TOS bucket.",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region where the TOS bucket is located. Cross-region data import is supported",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Log Service supports data import, allowing you to structure data stored in sources such as TOS and Kafka and save it in Log Service",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectID",
+      "/properties/ProjectName",
+      "/properties/TaskName",
+      "/properties/TaskID",
+      "/properties/TopicID",
+      "/properties/TopicName",
+      "/properties/SourceType",
+      "/properties/Status"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateImportTask",
+        "TLS:DescribeImportTask"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DescribeImportTask",
+        "TLS:DeleteImportTask"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeImportTasks"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeImportTask"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:DescribeImportTask",
+        "TLS:ModifyImportTask"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TaskID"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "Creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Task description.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "ImportSourceInfo": {
+      "$ref": "#/definitions/ImportSourceInfo",
+      "description": "Import data source information",
+      "type": "object"
+    },
+    "ProjectID": {
+      "description": "Log project ID for storing data.",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Log project name.",
+      "type": "string"
+    },
+    "SourceType": {
+      "description": "Data source type. Options: tos, kafka.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the data import task. 0: Importing. 1: Import completed. 2: Import error. 3: Stopping. 4: Stopped. 5: Restarting",
+      "semantic": "status",
+      "type": "integer"
+    },
+    "TargetInfo": {
+      "$ref": "#/definitions/TargetInfo",
+      "description": "Output information for the data import task.",
+      "type": "object"
+    },
+    "TaskID": {
+      "description": "Import task ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TaskName": {
+      "description": "Import task name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "TaskStatistics": {
+      "$ref": "#/definitions/TaskStatistics",
+      "description": "Progress of the data import task.",
+      "type": "object"
+    },
+    "TopicID": {
+      "description": "Log topic ID used to store data",
+      "type": "string"
+    },
+    "TopicName": {
+      "description": "Log topic name.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TaskID",
+    "/properties/CreateTime",
+    "/properties/ProjectName",
+    "/properties/TopicName",
+    "/properties/TaskStatistics"
+  ],
+  "required": [
+    "TopicID",
+    "TaskName",
+    "SourceType",
+    "ImportSourceInfo",
+    "TargetInfo"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::ImportTask"
+}

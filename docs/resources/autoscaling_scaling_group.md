@@ -129,6 +129,17 @@ Optional:
 - `instance_id` (String) ECS instance ID, unique identifier of the subresource
 - `lifecycle_hook` (Boolean) Whether to trigger lifecycle hooks when the instance is attached, detached, or removed
 
+Read-Only:
+
+- `created_time` (String) Time when the instance joined the scaling group
+- `creation_type` (String) How the instance joined the scaling group (Attached / AutoCreated)
+- `launch_template_id` (String) Launch template ID used by the instance
+- `launch_template_version` (String) Launch template version used by the instance
+- `scaling_configuration_id` (String) Scaling configuration ID associated with the instance
+- `scaling_policy_id` (String) Scaling policy ID associated with the instance
+- `status` (String) Current status of the instance in the scaling group
+- `zone_id` (String) Availability zone of the instance
+
 
 <a id="nestedatt--instances_distribution"></a>
 ### Nested Schema for `instances_distribution`

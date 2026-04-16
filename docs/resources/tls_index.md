@@ -266,6 +266,12 @@ Optional:
 - `sql_flag` (Boolean) Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.
 - `value_type` (String) Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.
 
+Read-Only:
+
+- `case_sensitive` (Boolean) Whether to distinguish case. Default is false.
+- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.
+- `include_chinese` (Boolean) When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.
+
 
 
 
@@ -312,6 +318,12 @@ Optional:
 - `index_sql_all` (Boolean) Enable automatic indexing and statistics for JSON fields. true: Enable automatic indexing and statistics. false: Disable automatic indexing and statistics.
 - `sql_flag` (Boolean) Whether analysis is enabled for the field. Default is false. After enabling statistical analysis, you can configure token delimiters and whether to include Chinese content.
 - `value_type` (String) Field type. Currently supports long, double, text, and json. The long and double types do not support configuring delimiters, including Chinese, or case sensitivity. Only the json type supports further configuration of JsonKeys subfields.
+
+Read-Only:
+
+- `case_sensitive` (Boolean) Whether to distinguish case. Default is false.
+- `delimiter` (String) Token separators for the field. Default is empty (""). Each character in the string represents a token separator. Length: 0–256 bytes. If the length is 0, segmentation is disabled. Only one or more of the following characters are supported: letters, numbers, and !@#%^&*()-_=\\\"', <>/?|;:\	\r[]{}. . Supports configuring both Chinese characters and token separators simultaneously.
+- `include_chinese` (Boolean) When searching, determines whether to segment Chinese log content according to Chinese syntax. Enabled: Chinese characters in logs are segmented based on common Chinese syntax; custom segmentation for Chinese content is not supported. Non-Chinese characters in logs are segmented using the token separators specified in the parameter. Disabled: Logs are segmented using the token separators specified in the parameter.
 
 ## Import
 

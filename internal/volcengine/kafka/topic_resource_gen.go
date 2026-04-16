@@ -305,6 +305,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TopicName
@@ -411,6 +412,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/InstanceId",
 		"/properties/TopicName",
 		"/properties/CleanupPolicy",
+		"/properties/Tags",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

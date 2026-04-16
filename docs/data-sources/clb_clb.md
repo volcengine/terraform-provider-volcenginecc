@@ -41,6 +41,7 @@ Data Source schema for Volcengine::CLB::CLB
 - `enis` (Attributes) List of private IPv4 addresses for the load balancer instance, specified by EniAddressNum during creation (see [below for nested schema](#nestedatt--enis))
 - `exclusive_cluster_id` (String) Dedicated cluster ID
 - `expired_time` (String) Expiration time of the load balancer instance
+- `ipv_6_address_bandwidth` (Attributes) IPv6 public bandwidth information for the load balancing instance (see [below for nested schema](#nestedatt--ipv_6_address_bandwidth))
 - `listeners` (Attributes Set) Listener information in the load balancer instance (see [below for nested schema](#nestedatt--listeners))
 - `load_balancer_billing_type` (Number) CLB instance billing method. Available values: 1: Annual/monthly subscription. 2 (default): Pay-as-you-go (by specification). 3: Pay-as-you-go (by usage)
 - `load_balancer_id` (String) Load balancer instance ID
@@ -109,6 +110,18 @@ Read-Only:
 
 - `eni_address` (String) Private IP address of the load balancer instance
 - `eni_id` (String) Network interface ID occupied by the load balancer instance
+
+
+<a id="nestedatt--ipv_6_address_bandwidth"></a>
+### Nested Schema for `ipv_6_address_bandwidth`
+
+Read-Only:
+
+- `bandwidth` (Number) Peak bandwidth of IPv6 public bandwidth, in Mbps
+- `bandwidth_package_id` (String) Shared bandwidth package ID associated with IPv6 public bandwidth
+- `billing_type` (Number) Billing type for IPv6 public bandwidth
+- `isp` (String) Line type of IPv6 public bandwidth
+- `network_type` (String) Network type of the load balancer instance's IPv6 address
 
 
 <a id="nestedatt--listeners"></a>

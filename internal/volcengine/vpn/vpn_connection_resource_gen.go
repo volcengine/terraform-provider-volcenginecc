@@ -1059,6 +1059,13 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ConnectStatus
+					"connect_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "IPsec tunnel status. ike_sa_negotiation_failed: Phase one negotiation failed; nike_sa_negotiation_completed: Phase one negotiation succeeded; nipsec_sa_negotiation_failed: Phase two negotiation failed; nipsec_sa_negotiation_completed: Phase two negotiation succeeded.",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: CustomerGatewayId
 					"customer_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "ID of the customer gateway associated with the IPsec connection.",
@@ -1239,7 +1246,21 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 					"tunnel_bgp_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: EnableBgp
+							"enable_bgp": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Enable dynamic route propagation. false (default): No, use static routing mode. true: Yes, use BGP routing mode.",
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: LocalAsn
+							"local_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The ASN of the VPN gateway.",
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: LocalBgpIp
 							"local_bgp_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "BGP address. Defaults to the first host address of TunnelOptions.N.BGPConfig.TunnelCidr. This address must be an IP address within the IPsec tunnel CIDR block. If EnableTunnelsBgp is set to true, this parameter must be specified.",
@@ -1250,8 +1271,29 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: PeerAsn
+							"peer_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "ASN of the customer gateway.",
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: PeerBgpIp
+							"peer_bgp_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "BGP peer IP, that is, the BGP address on the customer gateway side.",
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: SessionStatus
+							"session_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the BGP connection. Up: BGP connection is normal. Down: BGP connection is not working.",
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: TunnelCidr
 							"tunnel_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The CIDR address range for the local and peer IPs of the BGP session. This range must be within the 169.254.0.0/16 subnet with a subnet mask length of 30. If EnableTunnelsBgp is set to true, this parameter must be provided.",
