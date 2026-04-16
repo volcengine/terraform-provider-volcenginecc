@@ -1,0 +1,236 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BillingType",
+    "/properties/LineOperator",
+    "/properties/LocalGeographicRegionSetId",
+    "/properties/PeerGeographicRegionSetId",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "Tag key for user tags. Parameter - N: indicates the tag key index, value range: 1–20. Use \u0026 to separate multiple tag keys. Cannot start with sys:, in any case. Length range: 1–128 characters. Supports all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), hyphens (-), and @ (@). If a tag key starts or ends with a space, the system automatically removes it.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value for user tags. Parameter - N indicates the tag value index, range: 1–20. Use \u0026 to separate multiple tag values. Length range: 0–256 characters. If not specified, defaults to empty. Supports all languages, numbers, spaces ( ), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @ (@). Case-sensitive. If the tag value starts or ends with a space, the system automatically removes it.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Provides cross-region communication bandwidth for Cloud Enterprise Network instances. You can allocate bandwidth to different inter-region connections. By creating a bandwidth package and assigning inter-region bandwidth, you enable connectivity between network instances in different regions.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/CenBandwidthPackageId",
+      "/properties/CenBandwidthPackageName",
+      "/properties/CenIds",
+      "/properties/LocalGeographicRegionSetId",
+      "/properties/PeerGeographicRegionSetId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cen:CreateCenBandwidthPackage",
+        "cen:DescribeCenBandwidthPackageAttributes",
+        "cen:DescribeCenBandwidthPackagesBilling"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cen:DeleteCenBandwidthPackage",
+        "cen:DescribeCenBandwidthPackageAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cen:DescribeCenBandwidthPackages"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cen:DescribeCenBandwidthPackageAttributes",
+        "cen:DescribeCenBandwidthPackagesBilling"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cen:ModifyCenBandwidthPackageAttributes",
+        "cen:UntagResources",
+        "cen:TagResources",
+        "cen:AssociateCenBandwidthPackage",
+        "cen:DisassociateCenBandwidthPackage",
+        "cen:SetCenBandwidthPackageRenewal",
+        "cen:RenewCenBandwidthPackage",
+        "cen:DescribeCenBandwidthPackageAttributes",
+        "cen:DescribeCenBandwidthPackagesBilling"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CenBandwidthPackageId"
+  ],
+  "properties": {
+    "Bandwidth": {
+      "description": "Bandwidth peak of the bandwidth package. Value range: 2–10000 Mbps. Default: 2 Mbps.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BillingStatus": {
+      "description": "Billing status of the bandwidth package instance. 0: Creating 1: Running 3: Unsubscribed 4: Expired and stopped 5: Expired and recycled 8: Unsubscribed and stopped",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BillingType": {
+      "description": "Billing method of the bandwidth package. Valid values: 1 (default): yearly/monthly subscription. 4: pay-as-you-go—95th percentile billing.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "Frozen status of the bandwidth package. Normal: normal. FinancialLocked: frozen.",
+      "type": "string"
+    },
+    "CenBandwidthPackageId": {
+      "description": "Bandwidth package ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CenBandwidthPackageName": {
+      "description": "Name of the bandwidth package. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters. If not specified, defaults to the bandwidth package ID.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "CenIds": {
+      "description": "List of associated CEN instance IDs.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreationTime": {
+      "description": "Creation time of the bandwidth package.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "Deletion time of the bandwidth package.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the bandwidth package. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If not specified, defaults to an empty string.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "ExpiredTime": {
+      "description": "Expiration time of the bandwidth package.",
+      "type": "string"
+    },
+    "LineOperator": {
+      "description": "Carrier for cross-border bandwidth package lines. If LocalGeographicRegionSetId and PeerGeographicRegionSetId are the same, this parameter is not supported. If LocalGeographicRegionSetId and PeerGeographicRegionSetId are different, available values are: ChinaUnicom (default): China Unicom.",
+      "type": "string"
+    },
+    "LocalGeographicRegionSetId": {
+      "description": "Local geographic region ID for Cloud Enterprise Network communication. Available values: China: Chinese mainland. Asia: Asia-Pacific.",
+      "type": "string"
+    },
+    "PeerGeographicRegionSetId": {
+      "description": "Peer geographic region ID for Cloud Enterprise Network interconnection. Valid values: China: Chinese mainland. Asia: Asia-Pacific.",
+      "type": "string"
+    },
+    "Period": {
+      "description": "Purchase duration of the bandwidth package. Default is 1. Valid values: If PeriodUnit is Month, range is 1–9, 12, 24, and 36. If PeriodUnit is Year, range is 1–3.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "PeriodUnit": {
+      "description": "Billing cycle of the bandwidth package. Valid values: Month (default): month. Year: year.",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Name of the project to which the bandwidth package belongs. If not specified, defaults to 'default'.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ReclaimTime": {
+      "description": "Recycle time after the bandwidth package instance expires.",
+      "type": "string"
+    },
+    "RemainRenewTimes": {
+      "description": "Number of automatic renewals. Values include -1 and 1–100. Default is -1, which means unlimited automatic renewals.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "RemainingBandwidth": {
+      "description": "Remaining bandwidth, measured in Mbps.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "RenewPeriod": {
+      "description": "Duration of each automatic renewal, in months. Valid values: 1–3, 6, and 12. Default is 1.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "RenewType": {
+      "description": "Renewal type of the bandwidth package instance. Manual: Manual renewal. Auto: Automatic renewal. NoRenew: No renewal.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the bandwidth package. Creating: Being created. Deleting: Being deleted. Pending: In progress. Available: Unbound. InUse: Bound.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag list",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Update time of the bandwidth package.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BillingStatus",
+    "/properties/BusinessStatus",
+    "/properties/CenBandwidthPackageId",
+    "/properties/CreationTime",
+    "/properties/DeletedTime",
+    "/properties/ExpiredTime",
+    "/properties/ReclaimTime",
+    "/properties/RemainingBandwidth",
+    "/properties/Status",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "LocalGeographicRegionSetId",
+    "PeerGeographicRegionSetId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::CEN::BandwidthPackage",
+  "writeOnlyProperties": [
+    "/properties/Period",
+    "/properties/PeriodUnit",
+    "/properties/RenewPeriod"
+  ]
+}

@@ -1,0 +1,573 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AllowListIds",
+    "/properties/ProjectName",
+    "/properties/DBEngineVersion",
+    "/properties/VpcId",
+    "/properties/SubnetId",
+    "/properties/StorageType"
+  ],
+  "definitions": {
+    "Address": {
+      "description": "Address list",
+      "properties": {
+        "CrossRegionDomain": {
+          "description": "Private network address accessible across regions",
+          "type": "string"
+        },
+        "DNSVisibility": {
+          "description": "Enable public network resolution. Values: - false: default, private network resolution - true: private and public network resolution",
+          "type": "boolean"
+        },
+        "Domain": {
+          "description": "Connection domain name",
+          "type": "string"
+        },
+        "DomainVisibilitySetting": {
+          "description": "Private network address type. Values: LocalDomain: local region domain name CrossRegionDomain: cross-region accessible domain name",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "EIP ID, valid only for Public addresses",
+          "type": "string"
+        },
+        "IPAddress": {
+          "description": "IP address",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "Network address type. Value: - `Private`: Private network address - `Public`: Public network address - `Inner`: Public service zone address",
+          "type": "string"
+        },
+        "Port": {
+          "description": "Port.",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "Subnet ID",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ChargeDetail": {
+      "description": "Payment method",
+      "properties": {
+        "AutoRenew": {
+          "description": "Enable auto-renewal for prepaid scenarios",
+          "type": "boolean"
+        },
+        "ChargeEndTime": {
+          "description": "Billing expiration time for yearly/monthly instances",
+          "type": "string"
+        },
+        "ChargeStartTime": {
+          "description": "Instance billing start time",
+          "type": "string"
+        },
+        "ChargeStatus": {
+          "description": "Payment status. Value: - `Normal`: Normal - `Overdue`: Overdue and suspended - `Unpaid`: Unpaid",
+          "enum": [
+            "Normal",
+            "Overdue",
+            "Unpaid"
+          ],
+          "type": "string"
+        },
+        "ChargeType": {
+          "description": "Payment type. Value: - `PostPaid`: Postpaid - `PrePaid`: Prepaid",
+          "enum": [
+            "PostPaid",
+            "PrePaid"
+          ],
+          "type": "string"
+        },
+        "OverdueReclaimTime": {
+          "description": "Estimated release time after instance suspension due to overdue payment",
+          "type": "string"
+        },
+        "OverdueTime": {
+          "description": "Instance shutdown time due to overdue payment",
+          "type": "string"
+        },
+        "Period": {
+          "description": "Purchase duration for prepaid scenarios",
+          "type": "number"
+        },
+        "PeriodUnit": {
+          "description": "Purchase period for prepaid scenarios. Values: - `Month`: month - `Year`: year",
+          "enum": [
+            "Month",
+            "Year"
+          ],
+          "type": "string"
+        },
+        "TempModifyEndTime": {
+          "description": "Rollback time for temporary upgrade",
+          "type": "string"
+        },
+        "TempModifyStartTime": {
+          "description": "Start time of temporary scaling",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ChargeType"
+      ],
+      "type": "object"
+    },
+    "DayOfWeekMaintenanceTime": {
+      "description": "Detailed information about the instance's maintenance window.",
+      "properties": {
+        "DayOfWeek": {
+          "description": "Specify maintenance days for the instance each week. Multiple selections allowed. Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday. Note: If not specified or left blank, all seven days are enabled by default.",
+          "type": "string"
+        },
+        "MaintenanceWindowStartTime": {
+          "description": "Start time of the maintenance window on the maintenance day. Format: HH:mmZ (UTC time). Currently, only start times between 16:00Z and 20:00Z are supported.",
+          "type": "string"
+        },
+        "Period": {
+          "description": "Duration of the maintenance window on the maintenance day. Minimum duration is 2 hours, maximum is 6 hours.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Endpoint": {
+      "description": "Instance connection information",
+      "properties": {
+        "Address": {
+          "description": "Address list.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Address"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AutoAddNewNodes": {
+          "description": "When the terminal type is read-write or read-only, you can set whether new nodes join automatically. Values: - `Enable`: join automatically - `Disable`: do not join automatically (default)",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Address description.",
+          "type": "string"
+        },
+        "EnableReadOnly": {
+          "description": "Enable global read-only mode. - `Enable`: enabled - `Disable`: not enabled",
+          "type": "string"
+        },
+        "EnableReadWriteSplitting": {
+          "description": "Enable read-write separation. Values: - `Enable`: enabled - `Disable`: not enabled",
+          "type": "string"
+        },
+        "EndpointId": {
+          "description": "Instance connection terminal ID",
+          "type": "string"
+        },
+        "EndpointName": {
+          "description": "Instance connection terminal name",
+          "type": "string"
+        },
+        "EndpointType": {
+          "description": "Endpoint type: - `Cluster`: Default endpoint (created by default) - `Custom`: Custom endpoint",
+          "type": "string"
+        },
+        "ReadOnlyNodeDistributionType": {
+          "description": "Read-only weight allocation mode. Options: - `Default`: Standard weight allocation (default). - `Custom`: Custom weight allocation",
+          "type": "string"
+        },
+        "ReadOnlyNodeMaxDelayTime": {
+          "description": "Maximum latency threshold for read-only nodes. If a read-only node's latency exceeds this value, read traffic will not be sent to that node. Unit: seconds. Range: 0~3600. Default: 30. :::tip This parameter can be set for the default endpoint when read/write splitting is enabled.:::",
+          "type": "number"
+        },
+        "ReadOnlyNodeWeight": {
+          "description": "List of nodes configured for the endpoint and their corresponding read-only weights.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ReadOnlyNodeWeight"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ReadWriteMode": {
+          "description": "Read/write mode: - `ReadWrite`: Read/write - `ReadOnly`: Read-only",
+          "type": "string"
+        },
+        "ReadWriteProxyConnection": {
+          "description": "After read/write splitting is enabled for the terminal, set the number of proxy connections for the terminal. - The minimum value for proxy connections is 20. - The maximum value depends on the specification of the instance's primary node. Different specifications support different maximum proxy connections. For details, see [Product Specifications]",
+          "type": "number"
+        },
+        "WriteNodeHaltWriting": {
+          "description": "Whether the endpoint sends write requests to the write node (currently, only the primary node is the write node). Value: - `true`: Yes. (Default) - `false`: No",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "MaintenanceWindow": {
+      "description": "Instance maintenance window",
+      "properties": {
+        "DayKind": {
+          "description": "Granularity of the maintenance cycle. Value: Week (week)",
+          "type": "string"
+        },
+        "DayOfWeekMaintenanceTime": {
+          "description": "Detailed information about the instance's maintenance window.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeekMaintenanceTime"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "NodeInfo": {
+      "description": "Instance specification configuration. There must be exactly 1 Primary node, exactly 1 Secondary node, and 0–10 Read-Only nodes",
+      "properties": {
+        "CreateTime": {
+          "description": "Node creation time. Format: yyyy-MM-ddTHH:mm:ss.sssZ (UTC time)",
+          "type": "string"
+        },
+        "InstanceId": {
+          "description": "Instance ID",
+          "type": "string"
+        },
+        "Memory": {
+          "description": "Memory size, unit: GB",
+          "type": "number"
+        },
+        "NodeId": {
+          "description": "Node ID",
+          "type": "string"
+        },
+        "NodeSpec": {
+          "description": "Node specification",
+          "type": "string"
+        },
+        "NodeStatus": {
+          "description": "Node status",
+          "type": "string"
+        },
+        "NodeType": {
+          "description": "Node type",
+          "type": "string"
+        },
+        "RegionId": {
+          "description": "Region ID",
+          "type": "string"
+        },
+        "UpdateTime": {
+          "description": "Node update time. Format: yyyy-MM-ddTHH:mm:ss.sssZ (UTC time)",
+          "type": "string"
+        },
+        "VCPU": {
+          "description": "CPU size. For example: 1 means 1U",
+          "type": "number"
+        },
+        "ZoneId": {
+          "description": "Availability zone of the node",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ZoneId",
+        "NodeType",
+        "NodeSpec"
+      ],
+      "type": "object"
+    },
+    "ReadOnlyNodeWeight": {
+      "description": "List of nodes configured for the endpoint and their corresponding read-only weights",
+      "properties": {
+        "NodeId": {
+          "description": "Read-only nodes require NodeId",
+          "type": "string"
+        },
+        "NodeType": {
+          "description": "Node type",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "Node read weight, increases by 100, maximum value is 10000",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Resource tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Cloud database instance management",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/InstanceName",
+      "/properties/InstanceStatus",
+      "/properties/DBEngineVersion",
+      "/properties/ZoneId",
+      "/properties/ChargeDetail/ChargeType",
+      "/properties/ProjectName",
+      "/properties/StorageType",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:CreateDBInstance"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:DeleteDBInstance"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:AddTagsToResource",
+        "rds_postgresql:ModifyDBInstanceAvailabilityZone",
+        "rds_postgresql:ModifyDBInstanceChargeType",
+        "rds_postgresql:ModifyDBInstanceName",
+        "rds_postgresql:ModifyDBInstanceSpec",
+        "rds_postgresql:RemoveTagsFromResource",
+        "rds_postgresql:ModifyDBInstanceMaintenanceWindow"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AllowListIds": {
+      "description": "Allowlist ID. To bind multiple allowlists, separate allowlist IDs with commas (,). An instance can bind up to 100 allowlists.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ChargeDetail": {
+      "$ref": "#/definitions/ChargeDetail",
+      "description": "Payment method",
+      "type": "object"
+    },
+    "CreateTime": {
+      "description": "Instance creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DBEngineVersion": {
+      "description": "Compatible version",
+      "type": "string"
+    },
+    "DataSyncMode": {
+      "description": "Synchronization mode. Value: Async (asynchronous synchronization)",
+      "type": "string"
+    },
+    "Endpoints": {
+      "description": "Instance connection information",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Endpoint"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceId": {
+      "description": "Instance ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "Instance name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceStatus": {
+      "description": "Instance status",
+      "semantic": "status",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "Instance type. Value: HA (high availability edition)",
+      "type": "string"
+    },
+    "MaintenanceWindow": {
+      "$ref": "#/definitions/MaintenanceWindow",
+      "description": "Instance maintenance window",
+      "type": "object"
+    },
+    "Memory": {
+      "description": "Memory size, unit: GB",
+      "type": "number"
+    },
+    "NodeInfo": {
+      "description": "Instance specification configuration",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NodeInfo"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "NodeNumber": {
+      "description": "Number of nodes",
+      "type": "number"
+    },
+    "NodeSpec": {
+      "description": "Primary node specification",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project. Default value: default project",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "StorageDataUse": {
+      "description": "Data file space used by the primary node. Unit: Byte",
+      "type": "number"
+    },
+    "StorageLogUse": {
+      "description": "Log file space used by the primary node. Unit: Byte",
+      "type": "number"
+    },
+    "StorageSpace": {
+      "description": "Instance storage space. Value range: [20, 3000], unit: GB, increment: 10GB. Default value is 100",
+      "maximum": 3000,
+      "minimum": 20,
+      "type": "number"
+    },
+    "StorageTempUse": {
+      "description": "Temporary file space used by the primary node. Unit: Byte",
+      "type": "number"
+    },
+    "StorageType": {
+      "description": "Instance storage type, fixed value LocalSSD (local SSD disk)",
+      "type": "string"
+    },
+    "StorageUse": {
+      "description": "Used storage space of the instance. Unit: Byte",
+      "type": "number"
+    },
+    "StorageWALUse": {
+      "description": "Used WAL file space of the instance's primary node. Unit: Byte",
+      "type": "number"
+    },
+    "SubnetId": {
+      "description": "Subnet ID",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag information of the cloud disk",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Instance update time",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VCPU": {
+      "description": "CPU size. For example: 1 means 1U",
+      "type": "number"
+    },
+    "VpcId": {
+      "description": "Use this parameter to specify the private network for the instance",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "Availability zone ID",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/DataSyncMode",
+    "/properties/InstanceId",
+    "/properties/CreateTime",
+    "/properties/InstanceStatus",
+    "/properties/StorageDataUse",
+    "/properties/StorageLogUse",
+    "/properties/StorageTempUse",
+    "/properties/StorageUse",
+    "/properties/StorageWALUse",
+    "/properties/NodeInfo/*/NodeId",
+    "/properties/NodeInfo/*/InstanceId",
+    "/properties/NodeInfo/*/RegionId",
+    "/properties/NodeInfo/*/NodeStatus",
+    "/properties/NodeInfo/*/VCPU",
+    "/properties/NodeInfo/*/Memory",
+    "/properties/NodeInfo/*/CreateTime",
+    "/properties/NodeInfo/*/UpdateTime",
+    "/properties/ChargeDetail/ChargeStatus",
+    "/properties/ChargeDetail/ChargeStartTime",
+    "/properties/ChargeDetail/ChargeEndTime",
+    "/properties/ChargeDetail/OverdueTime",
+    "/properties/ChargeDetail/OverdueReclaimTime",
+    "/properties/ChargeDetail/TempModifyStartTime",
+    "/properties/ChargeDetail/TempModifyEndTime",
+    "/properties/UpdateTime",
+    "/properties/InstanceType",
+    "/properties/Memory",
+    "/properties/NodeNumber",
+    "/properties/NodeSpec",
+    "/properties/VCPU",
+    "/properties/ZoneId",
+    "/properties/Endpoints"
+  ],
+  "required": [
+    "DBEngineVersion",
+    "NodeInfo",
+    "StorageType",
+    "VpcId",
+    "SubnetId",
+    "ChargeDetail"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::Instance",
+  "writeOnlyProperties": [
+    "/properties/AllowListIds"
+  ]
+}

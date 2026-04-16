@@ -700,3 +700,27 @@ resource_schema "volcengine_vefaas_timer" {
 resource_schema "volcengine_vmp_alerting_rule" {
   cloudcontrol_type_name = "Volcengine::VMP::AlertingRule"
 }
+
+resource_schema "volcengine_tls_import_task" {
+  cloudcontrol_type_name = "Volcengine::TLS::ImportTask"
+}
+
+resource_schema "volcengine_cen_bandwidth_package" {
+  cloudcontrol_type_name = "Volcengine::CEN::BandwidthPackage"
+}
+
+resource_schema "volcengine_vedbm_endpoint" {
+  cloudcontrol_type_name = "Volcengine::VEDBM::Endpoint"
+}
+
+resource_schema "volcengine_rdspostgresql_instance" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::Instance"
+}
+
+resource_schema "volcengine_privatelink_vpc_endpoint" {
+  cloudcontrol_type_name = "Volcengine::PrivateLink::VpcEndpoint"
+}
+
+resource_schema "volcengine_tls_consumer_group" {
+  cloudcontrol_type_name = "Volcengine::TLS::ConsumerGroup"
+}

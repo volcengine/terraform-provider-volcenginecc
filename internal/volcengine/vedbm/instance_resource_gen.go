@@ -726,8 +726,29 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Memory
+					"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Memory size, in GiB.",
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: NodeId
+					"node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Node ID",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: NodeSpec
+					"node_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Node specification.",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: NodeType
 					"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Node type. Values: Primary: primary node. ReadOnly: read-only node.",
@@ -738,7 +759,21 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
+					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Availability zone ID",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: vCPU
+					"v_cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "CPU size. For example, a value of 1 indicates a CPU size of 1U.",
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Instance node details\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",

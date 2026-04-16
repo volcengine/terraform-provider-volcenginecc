@@ -1,0 +1,192 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/EndpointType"
+  ],
+  "definitions": {
+    "AddressObject": {
+      "description": "Connection address object",
+      "properties": {
+        "DNSVisibility": {
+          "description": "Resolution method, fixed as false",
+          "type": "boolean"
+        },
+        "Domain": {
+          "description": "Instance intranet access domain name",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "Public network ID",
+          "type": "string"
+        },
+        "IPAddress": {
+          "description": "IP address",
+          "type": "string"
+        },
+        "NetworkType": {
+          "description": "Network type",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "Subnet ID",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Database connection terminal management",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/EndpointId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vedbm:CreateDBEndpoint",
+        "vedbm:DescribeDBEndpoint",
+        "vedbm:CreateDBEndpointPublicAddress"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vedbm:DeleteDBEndpoint",
+        "vedbm:DescribeDBEndpoint"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vedbm:DescribeDBEndpoint"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vedbm:DescribeDBEndpoint"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vedbm:ModifyDBEndpoint",
+        "vedbm:DescribeDBEndpoint",
+        "vedbm:ModifyDBEndpointAddress",
+        "vedbm:ModifyDBEndpointDNS",
+        "vedbm:CreateDBEndpointPublicAddress",
+        "vedbm:DeleteDBEndpointPublicAddress"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/EndpointId"
+  ],
+  "properties": {
+    "AutoAddNewNodes": {
+      "description": "Whether new read-only nodes are automatically added to this terminal",
+      "type": "boolean"
+    },
+    "ConsistLevel": {
+      "description": "Consistency level",
+      "type": "string"
+    },
+    "ConsistTimeout": {
+      "description": "Data synchronization timeout",
+      "type": "integer"
+    },
+    "ConsistTimeoutAction": {
+      "description": "Policy after synchronization timeout",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the connection terminal",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DistributedTransaction": {
+      "description": "Enable transaction splitting",
+      "type": "boolean"
+    },
+    "DomainPrefix": {
+      "description": "New private network address prefix",
+      "type": "string"
+    },
+    "EndpointId": {
+      "description": "ID of the created connection terminal",
+      "type": "string"
+    },
+    "EndpointName": {
+      "description": "Connection terminal name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "EndpointType": {
+      "description": "Connection terminal type, fixed as Custom",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "MasterAcceptReadRequests": {
+      "description": "Whether the primary node accepts read requests",
+      "type": "boolean"
+    },
+    "NodeIds": {
+      "description": "Node list configured for the connection terminal",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Port": {
+      "description": "Instance access port",
+      "type": "string"
+    },
+    "PrivateAddresses": {
+      "$ref": "#/definitions/AddressObject",
+      "description": "Private address information",
+      "type": "object"
+    },
+    "PublicAddresses": {
+      "$ref": "#/definitions/AddressObject",
+      "description": "Public address information",
+      "type": "object"
+    },
+    "ReadWriteMode": {
+      "description": "Terminal read/write mode",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/EndpointId",
+    "/properties/PublicAddresses/IPAddress",
+    "/properties/PublicAddresses/NetworkType",
+    "/properties/PublicAddresses/Domain",
+    "/properties/PublicAddresses/SubnetId",
+    "/properties/PublicAddresses/DNSVisibility",
+    "/properties/PrivateAddresses/DNSVisibility",
+    "/properties/PrivateAddresses/EipId",
+    "/properties/PrivateAddresses/SubnetId",
+    "/properties/PrivateAddresses/Domain",
+    "/properties/PrivateAddresses/IPAddress",
+    "/properties/PrivateAddresses/NetworkType"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEDBM::Endpoint",
+  "writeOnlyProperties": [
+    "/properties/DomainPrefix"
+  ]
+}

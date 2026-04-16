@@ -61,6 +61,14 @@ Optional:
 
 - `instance_id` (String) Instance ID
 
+Read-Only:
+
+- `instance_name` (String) Instance name
+- `instance_status` (String) Instance status
+- `is_latest` (Boolean) Sync latest allowlist IP
+- `project_name` (String) Project name of the instance
+- `vpc` (String) VPC ID of the instance
+
 ## Import
 
 Import is supported using the following syntax:

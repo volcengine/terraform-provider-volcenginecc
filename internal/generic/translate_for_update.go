@@ -35,10 +35,10 @@ func translateMap(data interface{}, attribute map[string]schema.Attribute, ccToT
 			}
 			if attributeValue, ok := attribute[ccKey]; ok {
 				//if readonly attribute delete
-				if attributeValue.IsComputed() && !attributeValue.IsRequired() && !attributeValue.IsOptional() {
-					delete(v, key)
-					continue
-				}
+				//if attributeValue.IsComputed() && !attributeValue.IsRequired() && !attributeValue.IsOptional() {
+				//	delete(v, key)
+				//	continue
+				//}
 				switch attributeValue.GetType().(type) {
 				case types.ListType:
 					convert, ok := attributeValue.(schema.ListNestedAttribute)

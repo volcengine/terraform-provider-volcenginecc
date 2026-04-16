@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_consumer_group.example "project_id|consumer_group_name"

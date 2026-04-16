@@ -370,7 +370,21 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CreatedTime
+					"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Time when the instance joined the scaling group",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: CreationType
+					"creation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "How the instance joined the scaling group (Attached / AutoCreated)",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Entrusted
 					"entrusted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "Whether to enable managed mode for the instance when AttachInstances is performed",
@@ -390,7 +404,21 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: LaunchTemplateId
+					"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Launch template ID used by the instance",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: LaunchTemplateVersion
+					"launch_template_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Launch template version used by the instance",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: LifecycleHook
 					"lifecycle_hook": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "Whether to trigger lifecycle hooks when the instance is attached, detached, or removed",
@@ -402,9 +430,37 @@ func scalingGroupResource(ctx context.Context) (resource.Resource, error) {
 						// LifecycleHook is a write-only property.
 					}, /*END ATTRIBUTE*/
 					// Property: ScalingConfigurationId
+					"scaling_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Scaling configuration ID associated with the instance",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: ScalingPolicyId
+					"scaling_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Scaling policy ID associated with the instance",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Current status of the instance in the scaling group",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
+					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Availability zone of the instance",
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Collection of instance subresources managed manually within the scaling group (Attach / Detach / Remove)\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",

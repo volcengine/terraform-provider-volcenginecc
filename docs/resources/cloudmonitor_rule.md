@@ -214,6 +214,10 @@ Optional:
 - `statistics` (String) Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.
 - `threshold` (String) Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.
 
+Read-Only:
+
+- `display_name` (String) Metric display name.
+
 
 
 <a id="nestedatt--no_data"></a>

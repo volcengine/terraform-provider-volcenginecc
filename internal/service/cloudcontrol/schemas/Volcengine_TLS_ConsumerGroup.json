@@ -1,0 +1,96 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectID",
+    "/properties/ConsumerGroupName"
+  ],
+  "description": "A virtual collection of multiple consumers. When consuming log data at the consumer group level, all consumers in the group subscribe to the same log topic and jointly consume data from that log topic. Each consumer consumes data from one or more Shards in the log topic, and there is no duplicate consumption of data among consumers.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectID",
+      "/properties/ProjectName",
+      "/properties/ConsumerGroupName",
+      "/properties/TopicIDList"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateConsumerGroup",
+        "TLS:DescribeConsumerGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteConsumerGroup",
+        "TLS:DescribeConsumerGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeConsumerGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeConsumerGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:ModifyConsumerGroup",
+        "TLS:DescribeConsumerGroups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ProjectID",
+    "/properties/ConsumerGroupName"
+  ],
+  "properties": {
+    "ConsumerGroupName": {
+      "description": "Consumer group name.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "HeartbeatTTL": {
+      "description": "Heartbeat timeout in seconds. Value range: 1~300.",
+      "type": "integer"
+    },
+    "OrderedConsume": {
+      "description": "Whether to consume in order. true: Consume in order within the Shard. After a Shard splits, finish consuming data from the original Shard first, then consume data from the new Shards created by the split in parallel. After a Shard merges, finish consuming data from the original Shard first, then consume data from the new Shard created by the merge. false: Do not consume in order. All Shards are consumed simultaneously, and any new Shards created by splitting or merging are also consumed immediately.",
+      "type": "boolean"
+    },
+    "ProjectID": {
+      "description": "ID of the log project to which the consumer group belongs.",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Name of the log project to which the consumer group belongs.",
+      "type": "string"
+    },
+    "TopicIDList": {
+      "description": "List of log topic IDs to be consumed by the consumer group.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "required": [
+    "ProjectID",
+    "TopicIDList",
+    "ConsumerGroupName",
+    "HeartbeatTTL",
+    "OrderedConsume"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::ConsumerGroup"
+}

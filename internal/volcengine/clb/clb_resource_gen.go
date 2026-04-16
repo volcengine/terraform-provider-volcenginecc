@@ -562,6 +562,69 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Ipv6AddressBandwidth
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "IPv6 public bandwidth information for the load balancing instance",
+		//	  "properties": {
+		//	    "Bandwidth": {
+		//	      "description": "Peak bandwidth of IPv6 public bandwidth, in Mbps",
+		//	      "type": "number"
+		//	    },
+		//	    "BandwidthPackageId": {
+		//	      "description": "Shared bandwidth package ID associated with IPv6 public bandwidth",
+		//	      "type": "string"
+		//	    },
+		//	    "BillingType": {
+		//	      "description": "Billing type for IPv6 public bandwidth",
+		//	      "type": "number"
+		//	    },
+		//	    "ISP": {
+		//	      "description": "Line type of IPv6 public bandwidth",
+		//	      "type": "string"
+		//	    },
+		//	    "NetworkType": {
+		//	      "description": "Network type of the load balancer instance's IPv6 address",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ipv_6_address_bandwidth": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bandwidth
+				"bandwidth": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Peak bandwidth of IPv6 public bandwidth, in Mbps",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BandwidthPackageId
+				"bandwidth_package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Shared bandwidth package ID associated with IPv6 public bandwidth",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BillingType
+				"billing_type": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Billing type for IPv6 public bandwidth",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ISP
+				"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Line type of IPv6 public bandwidth",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkType
+				"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Network type of the load balancer instance's IPv6 address",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "IPv6 public bandwidth information for the load balancing instance",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Listeners
 		// Cloud Control resource type schema:
 		//
@@ -1132,6 +1195,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"auto_renewal":                    "AutoRenewal",
 		"bandwidth":                       "Bandwidth",
 		"bandwidth_package_id":            "BandwidthPackageId",
+		"billing_type":                    "BillingType",
 		"bucket_name":                     "BucketName",
 		"business_status":                 "BusinessStatus",
 		"bypass_security_group_enabled":   "BypassSecurityGroupEnabled",
@@ -1152,6 +1216,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"enis":                            "Enis",
 		"exclusive_cluster_id":            "ExclusiveClusterId",
 		"expired_time":                    "ExpiredTime",
+		"ipv_6_address_bandwidth":         "Ipv6AddressBandwidth",
 		"isp":                             "ISP",
 		"key":                             "Key",
 		"listener_id":                     "ListenerId",
@@ -1165,6 +1230,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"master_zone_id":                  "MasterZoneId",
 		"modification_protection_reason":  "ModificationProtectionReason",
 		"modification_protection_status":  "ModificationProtectionStatus",
+		"network_type":                    "NetworkType",
 		"new_arch":                        "NewArch",
 		"order_id":                        "OrderId",
 		"overdue_time":                    "OverdueTime",
@@ -1213,6 +1279,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/UpdateTime",
 		"/properties/TimestampRemoveEnabled",
 		"/properties/EniIpv6Address",
+		"/properties/Ipv6AddressBandwidth",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

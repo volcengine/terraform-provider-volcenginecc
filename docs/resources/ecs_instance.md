@@ -351,6 +351,13 @@ Optional:
 - `security_group_ids` (Set of String) Instance security group ID
 - `subnet_id` (String) Instance subnet ID.
 
+Read-Only:
+
+- `ipv_6_addresses` (Set of String) IPv6 address of the instance.
+- `mac_address` (String) Instance MAC address.
+- `network_interface_id` (String) The network interface ID of the instance.
+- `vpc_id` (String) VPC ID of the instance.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

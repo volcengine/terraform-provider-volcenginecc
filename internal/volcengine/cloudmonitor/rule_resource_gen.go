@@ -645,6 +645,13 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: DisplayName
+								"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Metric display name.",
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: MetricName
 								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",

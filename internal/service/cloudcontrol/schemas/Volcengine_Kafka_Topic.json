@@ -3,7 +3,8 @@
   "createOnlyProperties": [
     "/properties/InstanceId",
     "/properties/TopicName",
-    "/properties/CleanupPolicy"
+    "/properties/CleanupPolicy",
+    "/properties/Tags"
   ],
   "definitions": {
     "AccessPolicy": {
@@ -201,7 +202,6 @@
   ],
   "tagging": {
     "tagOnCreate": true,
-    "tagUpdatable": true,
     "taggable": true
   },
   "typeName": "Volcengine::Kafka::Topic"

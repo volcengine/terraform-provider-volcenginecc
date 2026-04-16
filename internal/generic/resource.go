@@ -618,14 +618,22 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	// Clear any write-only values.
-	// This forces patch document generation to always add values.
+	// Write-only attributes (e.g. passwords) are never returned by the API, so they need special
+	// handling during Update to generate correct patch documents:
+	// 1. If the write-only attribute value has NOT changed (plan == current state), set it to nil
+	//    in planRaw so the patch document won't include a redundant update for it.
+	// 2. If the value HAS changed but the attribute is also create-only, set it to nil because
+	//    create-only attributes cannot be modified after resource creation.
+	// 3. If the value HAS changed and the attribute is NOT create-only, keep the plan value so
+	//    the patch document will include the update.
 	currentStateRaw := currentState.Raw
 	planRaw := request.Plan.Raw
 	copyPlan := planRaw.Copy()
 
 	if len(r.writeOnlyAttributePaths) > 0 {
+		// Transform planRaw: for each write-only attribute, decide whether to include it in the patch.
 		planRaw, err = tftypes.Transform(planRaw, func(tfPath *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
+			// Skip the root object itself.
 			if len(tfPath.Steps()) < 1 {
 				return val, nil
 			}
@@ -637,7 +645,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 
 			for _, woPath := range r.writeOnlyAttributePaths {
 				if woPath.Equal(path) {
-					//if write only value not change,set the val nil
+					// Case 1: Value unchanged — set to nil to exclude from patch.
 					var currentValue attr.Value
 					getCurrentDiags := currentState.GetAttribute(context.Background(), path, &currentValue)
 					if !getCurrentDiags.HasError() {
@@ -648,6 +656,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 							}
 						}
 					}
+					// Case 2 & 3: Value changed — check if it's also a create-only attribute.
 					createOnly := false
 					for _, createOnlyPath := range r.createOnlyAttributePaths {
 						if createOnlyPath.Equal(path) {
@@ -656,17 +665,44 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 						}
 					}
 					if createOnly {
+						// Case 2: Create-only — cannot update after creation, set to nil.
 						return tftypes.NewValue(val.Type(), nil), nil
 					} else {
+						// Case 3: Updatable — keep the new value for the patch.
 						return val, nil
 					}
 				}
 
 			}
+			// Not a write-only attribute — keep original value.
 			return val, nil
 		})
 		if err != nil {
 			response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
+			return
+		}
+
+		currentStateRaw, err = tftypes.Transform(currentStateRaw, func(tfPath *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
+			if len(tfPath.Steps()) < 1 {
+				return val, nil
+			}
+
+			path, diags := attributePath(ctx, tfPath, currentState.Schema)
+			if diags.HasError() {
+				return val, ccdiag.DiagnosticsError(diags)
+			}
+
+			for _, woPath := range r.writeOnlyAttributePaths {
+				if woPath.Equal(path) {
+					return tftypes.NewValue(val.Type(), nil), nil
+				}
+			}
+
+			return val, nil
+		})
+		if err != nil {
+			response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
+
 			return
 		}
 	}
@@ -705,7 +741,12 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	tflog.Debug(ctx, "Cloud Control API GetResource", map[string]interface{}{
 		"value": util.ToString(description.ResourceDescription.Properties),
 	})
-	currentDesiredState = util.ToString(description.ResourceDescription.Properties)
+	remoteDesiredState := util.ToString(description.ResourceDescription.Properties)
+	currentDesiredState, err = mergeLocalWithRemoteForSets(currentDesiredState, remoteDesiredState, r.tfSchema.Attributes, r.ccToTfNameMap)
+	if err != nil {
+		response.Diagnostics.Append(DesiredStateErrorDiag("Merge State", err))
+		return
+	}
 
 	currentDesiredState, err = translateForUpdate(currentDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
 	plannedDesiredState, err = translateForUpdate(plannedDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)

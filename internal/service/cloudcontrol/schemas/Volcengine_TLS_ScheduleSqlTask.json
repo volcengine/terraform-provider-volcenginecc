@@ -71,9 +71,7 @@
     "update": {
       "permissions": [
         "TLS:ModifyScheduleSqlTask",
-        "TLS:DescribeScheduleSqlTask",
-        "TLS:AddTagsToResource",
-        "TLS:RemoveTagsFromResource"
+        "TLS:DescribeScheduleSqlTask"
       ]
     }
   },

@@ -22,7 +22,7 @@ resource "volcenginecc_iam_accesskey" "AccesskeyDemo" {
 
 ### Optional
 
-- `secret_access_key` (String) Secret Access Key.
+- `last_login_date` (String) Last login time.
 - `status` (String) Key status. active means enabled, inactive means disabled.
 - `user_name` (String) User name. Used to create a key for the specified IAM user. If no user name is specified, a key is created for the current request identity (that is, if the primary account makes the request, the key is created for the primary account itself; if an IAM user makes the request, the key is created for the IAM user. Note: Roles do not support creating keys for themselves). If the IAM user has the AccessKeySelfManageAccess permission and needs to create a key for themselves, they must include their own UserName in the request.
 
@@ -31,9 +31,9 @@ resource "volcenginecc_iam_accesskey" "AccesskeyDemo" {
 - `access_key_id` (String) Access Key Id.
 - `created_time` (String) Key creation time. The time format is ISO8601.
 - `id` (String) Uniquely identifies the resource.
-- `last_login_date` (String) Last login time.
 - `region` (String) The last region accessed by the API key.
 - `request_time` (String) The last time the API key was used.
+- `secret_access_key` (String) Secret Access Key.
 - `service` (String) The English abbreviation of the last service accessed by the API key.
 - `updated_time` (String) Key update time. The time format is ISO8601.
 

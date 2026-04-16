@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vedbm_endpoint.example "instance_id|endpoint_id"

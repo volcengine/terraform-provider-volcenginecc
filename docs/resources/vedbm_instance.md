@@ -127,6 +127,14 @@ Optional:
 - `failover_priority` (Number) Node failover priority. Range: 0~15. Higher values indicate higher priority
 - `node_type` (String) Node type. Values: Primary: primary node. ReadOnly: read-only node.
 
+Read-Only:
+
+- `memory` (Number) Memory size, in GiB.
+- `node_id` (String) Node ID
+- `node_spec` (String) Node specification.
+- `v_cpu` (Number) CPU size. For example, a value of 1 indicates a CPU size of 1U.
+- `zone_id` (String) Availability zone ID
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
