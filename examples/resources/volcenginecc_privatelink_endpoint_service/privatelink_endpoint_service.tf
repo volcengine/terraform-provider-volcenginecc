@@ -4,7 +4,6 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
   service_resource_type = "CLB"
   resources = [
     {
-      instance_id = ""
       resource_id = "clb-rr0o8ni4dxxxx58wxxxxx"
       zone_ids    = []
     }

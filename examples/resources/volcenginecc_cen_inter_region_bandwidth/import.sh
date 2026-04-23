@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cen_inter_region_bandwidth.example "inter_region_bandwidth_id"

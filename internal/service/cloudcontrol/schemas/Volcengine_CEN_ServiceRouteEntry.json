@@ -1,0 +1,135 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ServiceVpcId",
+    "/properties/CenId",
+    "/properties/DestinationCidrBlock"
+  ],
+  "definitions": {
+    "PublishToInstance": {
+      "properties": {
+        "InstanceId": {
+          "description": "Network instance ID for published cloud service access route.",
+          "type": "string"
+        },
+        "InstanceRegionId": {
+          "description": "Region for published cloud service access route.",
+          "type": "string"
+        },
+        "InstanceType": {
+          "description": "Network instance type for published cloud service access route.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "InstanceId",
+        "InstanceRegionId",
+        "InstanceType"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Cloud service access.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/CenId",
+      "/properties/DestinationCidrBlock",
+      "/properties/ServiceRegionId",
+      "/properties/ServiceVpcId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cen:CreateCenServiceRouteEntry",
+        "cen:DescribeCenServiceRouteEntries"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cen:DeleteCenServiceRouteEntry",
+        "cen:DescribeCenServiceRouteEntries"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cen:DescribeCenServiceRouteEntries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cen:DescribeCenServiceRouteEntries"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cen:ModifyCenServiceRouteEntryAttributes",
+        "cen:DescribeCenServiceRouteEntries"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CenId",
+    "/properties/DestinationCidrBlock"
+  ],
+  "properties": {
+    "CenId": {
+      "description": "Cloud Enterprise Network instance ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Resource creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Custom remarks for the route.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DestinationCidrBlock": {
+      "description": "Address range where the cloud service is deployed.",
+      "type": "string"
+    },
+    "PublishMode": {
+      "description": "Route publishing scope mode.",
+      "type": "string"
+    },
+    "PublishToInstances": {
+      "description": "List of network instances associated with batch route publishing.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PublishToInstance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceRegionId": {
+      "description": "Region where the cloud service is located.",
+      "type": "string"
+    },
+    "ServiceVpcId": {
+      "description": "Private network ID bound to the backend cloud service.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Cloud service access route status.",
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ServiceRegionId",
+    "/properties/Status"
+  ],
+  "required": [
+    "CenId",
+    "DestinationCidrBlock",
+    "ServiceVpcId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CEN::ServiceRouteEntry"
+}

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_mongodb_ssl_state.example "instance_id"

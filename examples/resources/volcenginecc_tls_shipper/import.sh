@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_shipper.example "shipper_id"

@@ -883,5 +883,85 @@
         "resource": "volcenginecc_tls_consumer_group",
         "identifier": ["ProjectID","ConsumerGroupName"],
         "path": "./examples/resources/volcenginecc_tls_consumer_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatelink_vpc_endpoint_connection",
+        "identifier": ["ServiceId","EndpointId"],
+        "path": "./examples/resources/volcenginecc_privatelink_vpc_endpoint_connection/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_alarm_notify_group",
+        "identifier": ["AlarmNotifyGroupId"],
+        "path": "./examples/resources/volcenginecc_tls_alarm_notify_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_shipper",
+        "identifier": ["ShipperId"],
+        "path": "./examples/resources/volcenginecc_tls_shipper/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_encryption",
+        "identifier": ["Name"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_encryption/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_inventory",
+        "identifier": ["BucketName","InventoryId"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_inventory/import.sh"
+    },
+    {
+        "resource": "volcenginecc_redis_allow_list",
+        "identifier": ["AllowListId"],
+        "path": "./examples/resources/volcenginecc_redis_allow_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cen_route_entry",
+        "identifier": ["CenId","DestinationCidrBlock","InstanceId"],
+        "path": "./examples/resources/volcenginecc_cen_route_entry/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vefaas_release",
+        "identifier": ["FunctionId"],
+        "path": "./examples/resources/volcenginecc_vefaas_release/import.sh"
+    },
+    {
+        "resource": "volcenginecc_storageebs_snapshot_group",
+        "identifier": ["SnapshotGroupId"],
+        "path": "./examples/resources/volcenginecc_storageebs_snapshot_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_kubeconfig",
+        "identifier": ["ClusterId","KubeconfigId"],
+        "path": "./examples/resources/volcenginecc_vke_kubeconfig/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vepfs_mount_service",
+        "identifier": ["MountServiceId"],
+        "path": "./examples/resources/volcenginecc_vepfs_mount_service/import.sh"
+    },
+    {
+        "resource": "volcenginecc_mongodb_ssl_state",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_mongodb_ssl_state/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cen_service_route_entry",
+        "identifier": ["CenId","DestinationCidrBlock"],
+        "path": "./examples/resources/volcenginecc_cen_service_route_entry/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cen_inter_region_bandwidth",
+        "identifier": ["InterRegionBandwidthId"],
+        "path": "./examples/resources/volcenginecc_cen_inter_region_bandwidth/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rabbitmq_allow_list",
+        "identifier": ["AllowListId"],
+        "path": "./examples/resources/volcenginecc_rabbitmq_allow_list/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_rule",
+        "identifier": ["RuleId"],
+        "path": "./examples/resources/volcenginecc_tls_rule/import.sh"
     }
 ]

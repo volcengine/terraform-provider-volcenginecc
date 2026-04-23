@@ -8,8 +8,7 @@
     "/properties/ServiceOwner",
     "/properties/ServiceResourceType",
     "/properties/ServiceType",
-    "/properties/WildcardDomainEnabled",
-    "/properties/Resources"
+    "/properties/WildcardDomainEnabled"
   ],
   "definitions": {
     "PrivateDNSNameConfiguration": {
@@ -36,12 +35,12 @@
     },
     "Resource": {
       "properties": {
-        "InstanceId": {
-          "description": "Endpoint service ID.",
-          "type": "string"
-        },
         "ResourceId": {
           "description": "Service resource ID to be added to the endpoint service.",
+          "type": "string"
+        },
+        "ResourceType": {
+          "description": "Type of service resource.",
           "type": "string"
         },
         "ZoneIds": {
@@ -88,13 +87,17 @@
     "create": {
       "permissions": [
         "privatelink:CreateVpcEndpointService",
-        "privatelink:DescribeVpcEndpointServiceAttributes"
+        "privatelink:DescribeVpcEndpointServiceAttributes",
+        "privatelink:DescribeVpcEndpointServicePermissions",
+        "privatelink:DescribeVpcEndpointServiceResources"
       ]
     },
     "delete": {
       "permissions": [
         "privatelink:DeleteVpcEndpointService",
-        "privatelink:DescribeVpcEndpointServiceAttributes"
+        "privatelink:DescribeVpcEndpointServiceAttributes",
+        "privatelink:DescribeVpcEndpointServicePermissions",
+        "privatelink:DescribeVpcEndpointServiceResources"
       ]
     },
     "list": {
@@ -104,7 +107,9 @@
     },
     "read": {
       "permissions": [
-        "privatelink:DescribeVpcEndpointServiceAttributes"
+        "privatelink:DescribeVpcEndpointServiceAttributes",
+        "privatelink:DescribeVpcEndpointServicePermissions",
+        "privatelink:DescribeVpcEndpointServiceResources"
       ]
     },
     "update": {
@@ -112,7 +117,14 @@
         "privatelink:ModifyVpcEndpointServiceAttributes",
         "privatelink:UntagResources",
         "privatelink:TagResources",
-        "privatelink:DescribeVpcEndpointServiceAttributes"
+        "privatelink:RemovePermissionFromVpcEndpointService",
+        "privatelink:AddPermissionToVpcEndpointService",
+        "privatelink:AttachResourceToVpcEndpointService",
+        "privatelink:DetachResourceFromVpcEndpointService",
+        "privatelink:ModifyVpcEndpointServiceResourceAttributes",
+        "privatelink:DescribeVpcEndpointServiceAttributes",
+        "privatelink:DescribeVpcEndpointServicePermissions",
+        "privatelink:DescribeVpcEndpointServiceResources"
       ]
     }
   },
@@ -154,6 +166,15 @@
     "Payer": {
       "description": "Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.",
       "type": "string"
+    },
+    "PermitAccountIds": {
+      "description": "Details of authorized allowlist accounts.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
     },
     "PrivateDNSEnabled": {
       "description": "Whether the endpoint service enables private DNS name. false: Not enabled. true: Enabled.",
@@ -205,7 +226,7 @@
       "type": "string"
     },
     "ServiceNameSuffix": {
-      "description": "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.\u003cregion ID\u003e.\u003cname suffix\u003e. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
+      "description": "Suffix for the endpoint service name. This parameter is currently in beta testing. If you need to use different name suffixes to distinguish business scenarios, please contact your account manager.",
       "type": "string"
     },
     "ServiceOwner": {
@@ -264,7 +285,8 @@
     "/properties/ServiceName",
     "/properties/Status",
     "/properties/UpdateTime",
-    "/properties/ZoneIds"
+    "/properties/ZoneIds",
+    "/properties/Resources/*/ResourceType"
   ],
   "tagging": {
     "tagOnCreate": true,
@@ -273,7 +295,6 @@
   },
   "typeName": "Volcengine::PrivateLink::EndpointService",
   "writeOnlyProperties": [
-    "/properties/ServiceNameSuffix",
-    "/properties/Resources"
+    "/properties/ServiceNameSuffix"
   ]
 }

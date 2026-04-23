@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cen_service_route_entry.example "cen_id|destination_cidr_block"

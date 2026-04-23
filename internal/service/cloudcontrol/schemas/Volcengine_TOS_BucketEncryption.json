@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "description": "Set server-side encryption for the bucket. After server-side encryption is set for the bucket, if you upload a file to this bucket without specifying a server-side encryption method for the file, the file will inherit the bucket's server-side encryption method by default",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tos:PutBucketEncryption",
+        "tos:GetBucketEncryption"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tos:DeleteBucketEncryption",
+        "tos:GetBucketEncryption"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tos:GetBucketEncryption"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tos:PutBucketEncryption",
+        "tos:GetBucketEncryption"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "properties": {
+    "KMSMasterKeyID": {
+      "description": "The master key used for SSE-KMS encryption",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Bucket name",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SSEAlgorithm": {
+      "description": "Default server-side encryption method. The values are explained as follows: kms: uses SSE-KMS encryption. AES256: uses SSE-TOS encryption with the AES256 algorithm. SM4: uses SSE-TOS encryption with the SM4 algorithm",
+      "type": "string"
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TOS::BucketEncryption"
+}

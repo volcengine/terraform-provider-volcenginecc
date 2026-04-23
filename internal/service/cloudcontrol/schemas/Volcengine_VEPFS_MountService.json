@@ -1,0 +1,221 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ZoneId",
+    "/properties/VpcId",
+    "/properties/SubnetId",
+    "/properties/NodeType",
+    "/properties/Project"
+  ],
+  "definitions": {
+    "AttachFileSystem": {
+      "properties": {
+        "AccountId": {
+          "description": "Account ID.",
+          "type": "string"
+        },
+        "CustomerPath": {
+          "description": "User mount path.",
+          "type": "string"
+        },
+        "FileSystemId": {
+          "description": "File system ID.",
+          "type": "string"
+        },
+        "FileSystemName": {
+          "description": "File system name.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Binding status. Details: Attaching: Attaching. AttachError: Attachment failed. Attached: Attached. Detaching: Detaching. DetachError: Detachment failed.",
+          "enum": [
+            "Attaching",
+            "AttachError",
+            "Attached",
+            "Detaching",
+            "DetachError"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "CustomerPath",
+        "FileSystemId"
+      ],
+      "type": "object"
+    },
+    "MountServiceManagerNode": {
+      "properties": {
+        "DefaultPassword": {
+          "description": "Node initial password.",
+          "type": "string"
+        },
+        "NodeId": {
+          "description": "Node instance ID.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "The mount service is the connection point for the file system in a network environment. The file system must be mounted on compute nodes to enable data access and storage.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Project",
+      "/properties/Status",
+      "/properties/MountServiceName",
+      "/properties/MountServiceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vepfs:CreateMountService",
+        "vepfs:AttachMountServiceToSelfFileSystem",
+        "vepfs:DescribeMountServices"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vepfs:DeleteMountService",
+        "vepfs:DescribeMountServices"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vepfs:DescribeMountServices"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vepfs:DescribeMountServices"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vepfs:UpdateMountService",
+        "vepfs:AttachMountServiceToSelfFileSystem",
+        "vepfs:DetachMountServiceFromSelfFileSystem",
+        "vepfs:DescribeMountServices"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/MountServiceId"
+  ],
+  "properties": {
+    "AttachFileSystems": {
+      "description": "Mount instance information.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AttachFileSystem"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "CreateTime": {
+      "description": "Creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "MountServiceId": {
+      "description": "Mount service ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "MountServiceName": {
+      "description": "Mount service name. Naming rules: Must start with a Chinese or English character. Only Chinese characters, letters, numbers, periods (.), underscores (_), or hyphens (-) are allowed. Length must be between 1 and 128 characters. The mount service name must be unique within each region and account; duplicates are not allowed.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "NodeType": {
+      "description": "Client management node type.",
+      "type": "string"
+    },
+    "Nodes": {
+      "description": "Client management node list.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/MountServiceManagerNode"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "Project": {
+      "description": "Project.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "SecurityGroupId": {
+      "description": "Client NIC security group ID.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Mount service status. Details: Creating: Creating. CreateError: Creation failed. Running: Running. Updating: Updating. UpdateError: Update failed. Deleting: Deleting. DeleteError: Deletion failed. Deleted: Deleted. Attaching: Attaching. AttachError: Attachment failed. Detaching: Detaching. DetachError: Detachment failed. Stopped: Stopped. Error: Error.",
+      "enum": [
+        "Creating",
+        "CreateError",
+        "Running",
+        "Updating",
+        "UpdateError",
+        "Deleting",
+        "DeleteError",
+        "Deleted",
+        "Attaching",
+        "AttachError",
+        "Detaching",
+        "DetachError",
+        "Stopped",
+        "Error"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "Subnet ID.",
+      "type": "string"
+    },
+    "VersionNumber": {
+      "description": "Mount service version.",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "Private network ID.",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "Availability zone ID.",
+      "type": "string"
+    },
+    "ZoneName": {
+      "description": "Availability zone name.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/MountServiceId",
+    "/properties/SecurityGroupId",
+    "/properties/VersionNumber",
+    "/properties/CreateTime",
+    "/properties/Nodes",
+    "/properties/ZoneName",
+    "/properties/Status",
+    "/properties/AttachFileSystems/*/Status",
+    "/properties/AttachFileSystems/*/AccountId",
+    "/properties/AttachFileSystems/*/FileSystemName"
+  ],
+  "required": [
+    "MountServiceName",
+    "ZoneId",
+    "VpcId",
+    "SubnetId",
+    "NodeType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEPFS::MountService",
+  "writeOnlyProperties": [
+    "/properties/NodeType"
+  ]
+}

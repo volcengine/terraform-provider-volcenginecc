@@ -106,6 +106,23 @@ func endpointServiceDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PermitAccountIds
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Details of authorized allowlist accounts.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"permit_account_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Details of authorized allowlist accounts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateDNSEnabled
 		// Cloud Control resource type schema:
 		//
@@ -209,12 +226,12 @@ func endpointServiceDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
-		//	      "InstanceId": {
-		//	        "description": "Endpoint service ID.",
-		//	        "type": "string"
-		//	      },
 		//	      "ResourceId": {
 		//	        "description": "Service resource ID to be added to the endpoint service.",
+		//	        "type": "string"
+		//	      },
+		//	      "ResourceType": {
+		//	        "description": "Type of service resource.",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneIds": {
@@ -233,14 +250,14 @@ func endpointServiceDataSource(ctx context.Context) (datasource.DataSource, erro
 		"resources": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InstanceId
-					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Endpoint service ID.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Service resource ID to be added to the endpoint service.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Type of service resource.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneIds
@@ -302,11 +319,11 @@ func endpointServiceDataSource(ctx context.Context) (datasource.DataSource, erro
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.\u003cregion ID\u003e.\u003cname suffix\u003e. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
+		//	  "description": "Suffix for the endpoint service name. This parameter is currently in beta testing. If you need to use different name suffixes to distinguish business scenarios, please contact your account manager.",
 		//	  "type": "string"
 		//	}
 		"service_name_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.<region ID>.<name suffix>. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
+			Description: "Suffix for the endpoint service name. This parameter is currently in beta testing. If you need to use different name suffixes to distinguish business scenarios, please contact your account manager.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceOwner
@@ -458,17 +475,18 @@ func endpointServiceDataSource(ctx context.Context) (datasource.DataSource, erro
 		"business_status":                "BusinessStatus",
 		"create_time":                    "CreateTime",
 		"description":                    "Description",
-		"instance_id":                    "InstanceId",
 		"ip_address_versions":            "IpAddressVersions",
 		"key":                            "Key",
 		"name":                           "Name",
 		"payer":                          "Payer",
+		"permit_account_ids":             "PermitAccountIds",
 		"private_dns_enabled":            "PrivateDNSEnabled",
 		"private_dns_name":               "PrivateDNSName",
 		"private_dns_name_configuration": "PrivateDNSNameConfiguration",
 		"private_dns_type":               "PrivateDNSType",
 		"project_name":                   "ProjectName",
 		"resource_id":                    "ResourceId",
+		"resource_type":                  "ResourceType",
 		"resources":                      "Resources",
 		"service_domain":                 "ServiceDomain",
 		"service_id":                     "ServiceId",

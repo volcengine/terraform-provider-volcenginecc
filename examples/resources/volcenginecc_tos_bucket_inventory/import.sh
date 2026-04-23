@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tos_bucket_inventory.example "bucket_name|inventory_id"

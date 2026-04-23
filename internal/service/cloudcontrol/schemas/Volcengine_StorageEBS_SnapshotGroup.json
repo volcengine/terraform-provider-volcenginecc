@@ -1,0 +1,254 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/VolumeIds",
+    "/properties/ProjectName",
+    "/properties/InstanceId"
+  ],
+  "definitions": {
+    "Snapshot": {
+      "description": "Snapshot information",
+      "properties": {
+        "CreationTime": {
+          "description": "Snapshot creation time",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Snapshot description",
+          "type": "string"
+        },
+        "ImageId": {
+          "description": "Image ID",
+          "type": "string"
+        },
+        "InstantAccess": {
+          "description": "Whether the snapshot has enabled ultra-fast availability. Values are as follows: - true: Ultra-fast availability enabled - false: Ultra-fast availability not enabled",
+          "type": "boolean"
+        },
+        "Progress": {
+          "description": "Dump progress",
+          "type": "integer"
+        },
+        "ProjectName": {
+          "description": "Project of the snapshot",
+          "type": "string"
+        },
+        "RetentionDays": {
+          "description": "Retention days for automatic snapshots",
+          "type": "integer"
+        },
+        "Shared": {
+          "description": "Whether the snapshot is shared with others. Values are as follows: - true: Snapshot is shared with others - false: Snapshot is not shared with others",
+          "type": "boolean"
+        },
+        "SnapshotGroupId": {
+          "description": "Snapshot consistency group ID",
+          "type": "string"
+        },
+        "SnapshotId": {
+          "description": "Snapshot ID",
+          "type": "string"
+        },
+        "SnapshotName": {
+          "description": "Snapshot name",
+          "type": "string"
+        },
+        "SnapshotType": {
+          "description": "Snapshot type. Values are as follows: - user: Manual snapshot - auto: Automatic snapshot",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Snapshot status. Values are as follows: - available: Available - creating: Creating - rollbacking: Rolling back - deleted: Deleted - failed: Error",
+          "type": "string"
+        },
+        "Tags": {
+          "description": "Tag information",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "VolumeId": {
+          "description": "Cloud disk ID",
+          "type": "string"
+        },
+        "VolumeKind": {
+          "description": "Cloud disk category. Values are as follows: - system: System disk - data: Data disk",
+          "type": "string"
+        },
+        "VolumeName": {
+          "description": "Cloud disk name",
+          "type": "string"
+        },
+        "VolumeSize": {
+          "description": "Cloud disk size (GiB)",
+          "format": "int64",
+          "type": "integer"
+        },
+        "VolumeStatus": {
+          "description": "Cloud disk status. Values are as follows: - available: Available - attaching: Attaching - attached: Attached - detaching: Detaching - creating: Creating - deleting: Deleting - error: Error - extending: Expanding",
+          "type": "string"
+        },
+        "VolumeType": {
+          "description": "Cloud disk type. Values are as follows: - ESSD_PL0: Ultra-fast SSD cloud disk, PL0 specification - ESSD_FlexPL: Ultra-fast SSD cloud disk, FlexPL specification - TSSD_TL0: Throughput SSD cloud disk",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "Zone ID. If ultra-fast availability is enabled for the snapshot, you can create a cloud disk in this zone using the ultra-fast available snapshot",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "A snapshot consistency group is a combination of snapshots from multiple cloud disks. In scenarios where business systems span multiple cloud disks, you can use a snapshot consistency group to ensure write order consistency and crash consistency for data written to the disks",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/SnapshotGroupId",
+      "/properties/Name",
+      "/properties/Status",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "storage_ebs:CreateSnapshotGroup",
+        "storage_ebs:DescribeSnapshotGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "storage_ebs:DeleteSnapshotGroup",
+        "storage_ebs:DescribeSnapshotGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "storage_ebs:DescribeSnapshotGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "storage_ebs:DescribeSnapshotGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "storage_ebs:ModifySnapshotGroup",
+        "storage_ebs:DescribeSnapshotGroups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SnapshotGroupId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "Snapshot consistency group creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Snapshot consistency group description",
+      "semantic": "description",
+      "type": "string"
+    },
+    "ImageId": {
+      "description": "Image ID of the snapshot consistency group",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "ECS instance ID of the snapshot consistency group",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Snapshot consistency group name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project name",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "SnapshotGroupId": {
+      "description": "Snapshot consistency group ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Snapshots": {
+      "description": "Snapshot details",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Snapshot"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Status": {
+      "description": "Snapshot consistency group status",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tags of the snapshot consistency group",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "VolumeIds": {
+      "description": "Cloud disk ID. Note: The cloud disk must be in 'attached' status. If multiple cloud disks are set, they must be attached to the same ECS instance",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/SnapshotGroupId",
+    "/properties/Status",
+    "/properties/CreationTime",
+    "/properties/ImageId",
+    "/properties/Snapshots"
+  ],
+  "required": [
+    "VolumeIds"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::StorageEBS::SnapshotGroup",
+  "writeOnlyProperties": [
+    "/properties/VolumeIds"
+  ]
+}

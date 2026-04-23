@@ -1,0 +1,304 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TopicId",
+    "/properties/ShipperType",
+    "/properties/ShipperStartTime",
+    "/properties/ShipperEndTime"
+  ],
+  "definitions": {
+    "ContentInfo": {
+      "properties": {
+        "CsvInfo": {
+          "$ref": "#/definitions/CsvInfo",
+          "description": "CSV format log content configuration.",
+          "type": "object"
+        },
+        "Format": {
+          "description": "Log content parsing format. Delivery to TOS supports json, jsonl, csv; delivery to Kafka supports original, json.",
+          "type": "string"
+        },
+        "JsonInfo": {
+          "$ref": "#/definitions/JsonInfo",
+          "description": "JSON/JSONL format log content configuration.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "CsvInfo": {
+      "properties": {
+        "Delimiter": {
+          "description": "Delimiter. Supports comma, tab, pipe, semicolon, space.",
+          "type": "string"
+        },
+        "EscapeChar": {
+          "description": "Escape character. When field content contains a delimiter, use an escape character to enclose it. Supports single quote, double quote, or empty character.",
+          "type": "string"
+        },
+        "Keys": {
+          "description": "Fields to be delivered. Supports letters, numbers, and _-./. Cannot start with an underscore. Length: 1–128.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NonFieldContent": {
+          "description": "Content for invalid field padding. Length: 0–128.",
+          "maxLength": 128,
+          "type": "string"
+        },
+        "PrintHeader": {
+          "description": "Whether to print the key in the first row.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Keys",
+        "Delimiter",
+        "EscapeChar",
+        "PrintHeader",
+        "NonFieldContent"
+      ],
+      "type": "object"
+    },
+    "JsonInfo": {
+      "properties": {
+        "Enable": {
+          "description": "Enable flag.",
+          "type": "boolean"
+        },
+        "Escape": {
+          "description": "Whether to enable escaping. Must be set to true.",
+          "type": "boolean"
+        },
+        "Keys": {
+          "description": "Delivery field list; if not configured, all fields will be delivered. When delivering in JSON/JSONL format, if this parameter is not set, all fields will be delivered, including __content__ (required), __source__, __path__, __time__, __image_name__, __container_name__, __pod_name__, __pod_uid__, namespace, __tag____client_ip__, and __tag____receive_time__.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "Enable"
+      ],
+      "type": "object"
+    },
+    "KafkaShipperInfo": {
+      "properties": {
+        "Compress": {
+          "description": "Compression format; supports snappy, gzip, lz4, none.",
+          "type": "string"
+        },
+        "EndTime": {
+          "description": "Delivery end time, in milliseconds. If not set, delivery continues indefinitely. Note: Milliseconds will be truncated. For example, if 1776761323455 is entered, it will become 1776761323000; if 1776761323 is entered, it will become 1776761323000.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Instance": {
+          "description": "Kafka instance.",
+          "type": "string"
+        },
+        "KafkaTopic": {
+          "description": "Kafka topic name. All log data delivered through this configuration will be sent to this topic.",
+          "type": "string"
+        },
+        "StartTime": {
+          "description": "Start time. If not configured, defaults to the current time. Note: Millisecond data will be ignored. For example, if 1776761323455 is entered, the result will be 1776761323000; if 1776761323 is entered, the result will be 1776761323000.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Instance",
+        "KafkaTopic",
+        "Compress"
+      ],
+      "type": "object"
+    },
+    "TosShipperInfo": {
+      "properties": {
+        "Bucket": {
+          "description": "Select a TOS bucket. Must be in the same region as the source log topic. Can only contain numbers, hyphens (-), and letters a–z. Must start and end with a number or letter. Length: 3–63 characters.",
+          "maxLength": 63,
+          "minLength": 3,
+          "type": "string"
+        },
+        "Compress": {
+          "description": "Compression format; supports snappy, gzip, lz4, none.",
+          "type": "string"
+        },
+        "Interval": {
+          "description": "Delivery interval in seconds, range: 300–900.",
+          "maximum": 900,
+          "type": "integer"
+        },
+        "MaxSize": {
+          "description": "Maximum raw file size per partition for delivery, in MiB. Range: 5–256.",
+          "maximum": 256,
+          "type": "integer"
+        },
+        "PartitionFormat": {
+          "description": "Partition rule for log delivery. Subdirectory naming format supports strftime syntax. Default: %Y/%m/%d/%H/%M.",
+          "type": "string"
+        },
+        "Prefix": {
+          "description": "Top-level directory name for the bucket. Cannot start with / or \\, and cannot use consecutive /. Cannot use .. as a folder name. Duplicate names are not allowed within the same bucket.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Bucket"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Log delivery refers to sending data collected by the log service to TOS or other products for scenarios such as long-term storage of infrequently accessed data, integration with other systems for consumption, or data analysis.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectId",
+      "/properties/ProjectName",
+      "/properties/ShipperName",
+      "/properties/ShipperId",
+      "/properties/TopicId",
+      "/properties/TopicName",
+      "/properties/ShipperType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateShipper",
+        "TLS:DescribeShipper"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DescribeShipper",
+        "TLS:DeleteShipper"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeShippers"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeShipper"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:DescribeShipper",
+        "TLS:ModifyShipper"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ShipperId"
+  ],
+  "properties": {
+    "ContentInfo": {
+      "$ref": "#/definitions/ContentInfo",
+      "description": "Log content delivery format configuration.",
+      "type": "object"
+    },
+    "CreatedTime": {
+      "description": "Creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DashboardId": {
+      "description": "Default built-in dashboard ID for delivery.",
+      "type": "string"
+    },
+    "KafkaShipperInfo": {
+      "$ref": "#/definitions/KafkaShipperInfo",
+      "description": "Kafka delivery configuration.",
+      "type": "object"
+    },
+    "ProjectId": {
+      "description": "Log project ID.",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Log project name.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ShipperEndTime": {
+      "description": "Delivery end time, in milliseconds. Note: Millisecond data will be ignored. For example, if 1776761323455 is entered, the result will be 1776761323000; if 1776761323 is entered, the result will be 1776761323000.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ShipperId": {
+      "description": "Delivery configuration ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ShipperName": {
+      "description": "Delivery configuration name, unique within a log project.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ShipperStartTime": {
+      "description": "Delivery start time, in milliseconds. When delivering to Kafka, it is recommended to use the ShipperStartTime and ShipperEndTime fields to configure the delivery time range, and leave the StartTime and EndTime fields empty. Note: Millisecond data will be ignored. For example, if 1776761323455 is entered, the result will be 1776761323000; if 1776761323 is entered, the result will be 1776761323000.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ShipperType": {
+      "default": "tos",
+      "description": "Type of data source for delivery. Options: tos, kafka. Default is tos.",
+      "type": "string"
+    },
+    "Status": {
+      "default": true,
+      "description": "Whether to enable delivery configuration. Default is true.",
+      "semantic": "status",
+      "type": "boolean"
+    },
+    "TopicId": {
+      "description": "Log topic ID.",
+      "type": "string"
+    },
+    "TopicName": {
+      "description": "Log topic name.",
+      "type": "string"
+    },
+    "TosShipperInfo": {
+      "$ref": "#/definitions/TosShipperInfo",
+      "description": "Information related to delivery to TOS object storage.",
+      "type": "object"
+    },
+    "UpdatedTime": {
+      "description": "Update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ShipperId",
+    "/properties/ProjectId",
+    "/properties/ProjectName",
+    "/properties/TopicName",
+    "/properties/DashboardId",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "TopicId",
+    "ShipperName",
+    "ShipperType",
+    "ContentInfo"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::Shipper"
+}
