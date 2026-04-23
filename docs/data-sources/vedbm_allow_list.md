@@ -28,7 +28,7 @@ Data Source schema for Volcengine::VEDBM::AllowList
 - `allow_list_name` (String) Allowlist name.
 - `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is currently supported.
 - `associated_instance_num` (Number) Total number of instances bound to the allowlist.
-- `associated_instances` (Attributes List) List of bound instances. (see [below for nested schema](#nestedatt--associated_instances))
+- `associated_instances` (Attributes Set) List of bound instances. (see [below for nested schema](#nestedatt--associated_instances))
 - `modify_mode` (String) How to modify the allowlist. Supported settings: Cover (default): Overwrite the original allowlist with the values in the AllowList parameter. Append: Add IP addresses entered in the AllowList parameter to the original allowlist. Delete: Remove IP addresses entered in the AllowList parameter from the original allowlist. At least one IP address must remain.
 - `project_name` (String) Project name associated with the allowlist. If left blank, the new allowlist will be added to the default project.
 

@@ -1,0 +1,130 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AllowListType"
+  ],
+  "definitions": {
+    "Instance": {
+      "properties": {
+        "InstanceId": {
+          "description": "Instance ID",
+          "type": "string"
+        },
+        "InstanceName": {
+          "description": "Instance Name",
+          "type": "string"
+        },
+        "VPC": {
+          "description": "VPC ID of the instance",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "RabbitMQ access allowlist",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "RabbitMQ:CreateAllowList",
+        "RabbitMQ:AssociateAllowList",
+        "RabbitMQ:DescribeAllowListDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "RabbitMQ:DeleteAllowList",
+        "RabbitMQ:DescribeAllowListDetail",
+        "RabbitMQ:DisassociateAllowList"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "RabbitMQ:DescribeAllowLists"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "RabbitMQ:DescribeAllowListDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "RabbitMQ:ModifyAllowList",
+        "RabbitMQ:AssociateAllowList",
+        "RabbitMQ:DescribeAllowListDetail",
+        "RabbitMQ:DisassociateAllowList"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllowListId"
+  ],
+  "properties": {
+    "AllowList": {
+      "description": "IP allowlist. Separate multiple IP addresses with commas (,). No duplicates allowed",
+      "type": "string"
+    },
+    "AllowListDesc": {
+      "description": "Allowlist Description",
+      "semantic": "description",
+      "type": "string"
+    },
+    "AllowListIPNum": {
+      "description": "Total number of IP addresses (or address ranges) in the allowlist",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AllowListId": {
+      "description": "Allowlist ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AllowListName": {
+      "description": "Allowlist Name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AllowListType": {
+      "description": "IP address type in the allowlist. Only IPv4 is currently supported",
+      "type": "string"
+    },
+    "AssociatedInstanceNum": {
+      "description": "Total number of instances bound to the allowlist",
+      "format": "int64",
+      "type": "integer"
+    },
+    "AssociatedInstances": {
+      "description": "List of bound instances",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Instance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ModifyMode": {
+      "description": "Allowlist modification method. Default is Cover",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllowListId",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstanceNum",
+    "/properties/AssociatedInstances/*/InstanceName",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "required": [
+    "AllowListName",
+    "AllowListType",
+    "AllowList"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RabbitMQ::AllowList",
+  "writeOnlyProperties": [
+    "/properties/ModifyMode"
+  ]
+}

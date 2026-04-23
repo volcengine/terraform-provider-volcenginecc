@@ -1,0 +1,187 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Description",
+    "/properties/FunctionId",
+    "/properties/MaxInstance",
+    "/properties/RevisionNumber",
+    "/properties/RollingStep"
+  ],
+  "description": "Function to release",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/FunctionId",
+      "/properties/ReleaseRecordId",
+      "/properties/Status",
+      "/properties/SourceRevisionNumber",
+      "/properties/TargetRevisionNumber"
+    ],
+    "required": [
+      "/properties/FunctionId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vefaas:Release",
+        "vefaas:GetReleaseStatus"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vefaas:AbortRelease",
+        "vefaas:GetReleaseStatus"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vefaas:ListReleaseRecords"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vefaas:GetReleaseStatus"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vefaas:UpdateRelease",
+        "vefaas:GetReleaseStatus"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FunctionId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "Creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CurrentTrafficWeight": {
+      "description": "Current release traffic percentage. Valid values: 1–100, indicates the proportion of traffic assigned to the currently releasing version. Returned only when status is inprogress or failed",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "Description for this release",
+      "semantic": "description",
+      "type": "string"
+    },
+    "ErrorCode": {
+      "description": "Error codes for release failures: function_start_failed: function startup failed function_start_timeout: function startup timed out function_health_check_failed: function health check failed system_internal_error: internal system error",
+      "type": "string"
+    },
+    "FailedInstanceLogs": {
+      "description": "Download link for logs of failed release instances",
+      "type": "string"
+    },
+    "FinishTime": {
+      "description": "Completion time",
+      "type": "string"
+    },
+    "FunctionId": {
+      "description": "Function ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "LastUpdateTime": {
+      "description": "Update time",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "MaxInstance": {
+      "description": "Maximum number of function instances. Valid range: [0 ~ remaining available account resources/single instance maximum memory]",
+      "format": "int32",
+      "type": "integer"
+    },
+    "NewRevisionNumber": {
+      "description": "Version number of the new version being released. Not returned when status is pending; returned when status is inprogress, failed, or done",
+      "format": "int32",
+      "type": "integer"
+    },
+    "OldRevisionNumber": {
+      "description": "Version number of the old version. Not returned when status is pending; returned when status is inprogress, failed, or done",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ReleaseRecordId": {
+      "description": "Release record ID",
+      "type": "string"
+    },
+    "RevisionNumber": {
+      "description": "Version number to release. When RevisionNumber = 0, the latest code (Latest) is released and a new version is created",
+      "format": "int32",
+      "type": "integer"
+    },
+    "RollingStep": {
+      "description": "Canary step percentage. Valid values: 1–100, default: 10",
+      "format": "int32",
+      "type": "integer"
+    },
+    "SourceRevisionNumber": {
+      "description": "Released historical version number",
+      "format": "int32",
+      "type": "integer"
+    },
+    "StableRevisionNumber": {
+      "description": "Version number currently running stably online. Generated after the first successful release. Before the first release (status == pending), StableRevisionNumber is -1",
+      "format": "int32",
+      "type": "integer"
+    },
+    "StartTime": {
+      "description": "Start time of the current release. Not returned when status is pending; returned when status is inprogress, failed, or done",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Function release status: pending: never released, inprogress: releasing, done: release successful, failed: release failed",
+      "semantic": "status",
+      "type": "string"
+    },
+    "StatusMessage": {
+      "description": "Detailed function release status. Supplementary information for release status",
+      "type": "string"
+    },
+    "TargetRevisionNumber": {
+      "description": "Target version number for release",
+      "format": "int32",
+      "type": "integer"
+    },
+    "TargetTrafficWeight": {
+      "description": "Target release traffic percentage. Valid range: [0, 100], indicates the proportion of traffic assigned to the released version. 100 means full release",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreationTime",
+    "/properties/CurrentTrafficWeight",
+    "/properties/ErrorCode",
+    "/properties/FailedInstanceLogs",
+    "/properties/FinishTime",
+    "/properties/LastUpdateTime",
+    "/properties/NewRevisionNumber",
+    "/properties/OldRevisionNumber",
+    "/properties/ReleaseRecordId",
+    "/properties/SourceRevisionNumber",
+    "/properties/StableRevisionNumber",
+    "/properties/StartTime",
+    "/properties/Status",
+    "/properties/StatusMessage",
+    "/properties/TargetRevisionNumber"
+  ],
+  "required": [
+    "FunctionId",
+    "RevisionNumber"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEFAAS::Release",
+  "writeOnlyProperties": [
+    "/properties/MaxInstance",
+    "/properties/RevisionNumber",
+    "/properties/RollingStep"
+  ]
+}

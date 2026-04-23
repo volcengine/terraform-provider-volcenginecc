@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_alarm_notify_group.example "alarm_notify_group_id"

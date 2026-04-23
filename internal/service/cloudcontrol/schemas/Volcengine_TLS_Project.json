@@ -80,6 +80,7 @@
     },
     "IamProjectName": {
       "description": "The IAM project associated with the log project",
+      "semantic": "projectName",
       "type": "string"
     },
     "InnerNetDomain": {

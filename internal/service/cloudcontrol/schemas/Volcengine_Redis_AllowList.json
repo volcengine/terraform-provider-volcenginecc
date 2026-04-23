@@ -1,0 +1,181 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "AssociatedInstance": {
+      "description": "Instance information bound to the current allowlist",
+      "properties": {
+        "InstanceId": {
+          "description": "Instance ID bound to the current allowlist",
+          "type": "string"
+        },
+        "InstanceName": {
+          "description": "Instance names bound to the current allowlist",
+          "type": "string"
+        },
+        "ProjectName": {
+          "description": "Project name associated with the instance",
+          "type": "string"
+        },
+        "VPC": {
+          "description": "Private network ID associated with the instance",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SecurityGroupBindInfo": {
+      "description": "Information about security groups associated with the allowlist",
+      "properties": {
+        "BindMode": {
+          "description": "Security group association mode. The value range is as follows: IngressDirectionIp: ingress IP, which allows IPs involved in TCP and ALL protocols in the source address of the security group ingress direction to access the database. If the source address is configured as a security group, it will be ignored. AssociateEcsIp: associate ECS IP, which allows cloud servers within the security group to access the database. Currently, only importing IP information of the primary network interface is supported",
+          "type": "string"
+        },
+        "IpList": {
+          "description": "IP list of security groups associated with the allowlist",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "SecurityGroupId": {
+          "description": "Associated security group ID",
+          "type": "string"
+        },
+        "SecurityGroupName": {
+          "description": "Name of the associated security group",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "After a Redis cache database instance is created, you can set an allowlist for the instance to permit devices to access it.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AssociatedInstances/*/InstanceId",
+      "/properties/ProjectName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "Redis:CreateAllowList",
+        "Redis:AssociateAllowList",
+        "Redis:DescribeAllowListDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Redis:DeleteAllowList",
+        "Redis:DisassociateAllowList",
+        "Redis:DescribeAllowListDetail"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Redis:DescribeAllowLists"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Redis:DescribeAllowListDetail"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Redis:ModifyAllowList",
+        "Redis:DescribeAllowListDetail",
+        "Redis:AssociateAllowList",
+        "Redis:DisassociateAllowList"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AllowListId"
+  ],
+  "properties": {
+    "AllowList": {
+      "description": "Enter an IP address or an address range in CIDR format. Note: The AllowList and SecurityGroupBindInfos parameters cannot both be empty. Duplicate addresses are not allowed. Separate multiple addresses with commas (,). Setting 0.0.0.0/0 allows access from all addresses. Setting 127.0.0.1 denies access from all addresses. Setting both 0.0.0.0/0 and 127.0.0.1 allows access from all addresses. Setting CIDR 192.168.1.0/24 allows access from IP addresses within that subnet. Setting 192.168.1.1 allows access only from that IP address.",
+      "type": "string"
+    },
+    "AllowListCategory": {
+      "description": "Type of allowlist. The value range is as follows: Ordinary (default): ordinary allowlist. Default: default allowlist. Note: Each account can set at most one default allowlist per region. When a new default allowlist is set, it automatically replaces the original default allowlist, and the original default allowlist becomes a non-default allowlist. For more details, see Constraints and Limitations",
+      "type": "string"
+    },
+    "AllowListDesc": {
+      "description": "Allowlist remarks. The length cannot exceed 200 characters. Note: If this parameter is not set, the remarks for the new allowlist will be empty by default",
+      "semantic": "description",
+      "type": "string"
+    },
+    "AllowListIPNum": {
+      "description": "Number of IP addresses in the allowlist",
+      "format": "int32",
+      "type": "integer"
+    },
+    "AllowListId": {
+      "description": "Allowlist ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AllowListName": {
+      "description": "Allowlist name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 1–128 characters",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AssociatedInstanceNum": {
+      "description": "Total number of instances bound to the allowlist",
+      "format": "int32",
+      "type": "integer"
+    },
+    "AssociatedInstances": {
+      "description": "List of instances currently bound to this allowlist.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AssociatedInstance"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "InstanceIds": {
+      "description": "List of instance IDs bound to the current allowlist",
+      "insertionOrder": false,
+      "items": {
+        "description": "Instance ID bound to the current allowlist",
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProjectName": {
+      "description": "Project name associated with the allowlist",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "SecurityGroupBindInfos": {
+      "description": "Information about the security groups associated with the allowlist. Note: This parameter is returned only if the allowlist contains associated security groups.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SecurityGroupBindInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AllowListIPNum",
+    "/properties/AllowListId",
+    "/properties/AssociatedInstanceNum",
+    "/properties/AssociatedInstances",
+    "/properties/SecurityGroupBindInfos/*/IpList",
+    "/properties/SecurityGroupBindInfos/*/SecurityGroupName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Redis::AllowList"
+}

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vke_kubeconfig.example "cluster_id|kubeconfig_id"

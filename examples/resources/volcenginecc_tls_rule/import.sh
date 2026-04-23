@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_rule.example "rule_id"

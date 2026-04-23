@@ -1,0 +1,106 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/CenId",
+    "/properties/LocalRegionId",
+    "/properties/PeerRegionId"
+  ],
+  "description": "CEN inter-region bandwidth, used to allocate cross-region connectivity bandwidth for Cloud Enterprise Network instances.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/CenId",
+      "/properties/InterRegionBandwidthId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cen:CreateCenInterRegionBandwidth",
+        "cen:DescribeCenInterRegionBandwidthAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cen:DeleteCenInterRegionBandwidth",
+        "cen:DescribeCenInterRegionBandwidthAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cen:DescribeCenInterRegionBandwidths"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cen:DescribeCenInterRegionBandwidthAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cen:ModifyCenInterRegionBandwidthAttributes",
+        "cen:DescribeCenInterRegionBandwidthAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InterRegionBandwidthId"
+  ],
+  "properties": {
+    "Bandwidth": {
+      "description": "Peak bandwidth of CEN inter-region bandwidth, measured in Mbps. The value cannot exceed the bandwidth that can be allocated by the associated bandwidth package.",
+      "type": "integer"
+    },
+    "CenBandwidthPackageId": {
+      "description": "Instance ID of the bandwidth package.",
+      "type": "string"
+    },
+    "CenId": {
+      "description": "ID of the Cloud Enterprise Network instance.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Time when the CEN inter-region bandwidth was created.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "InterRegionBandwidthId": {
+      "description": "ID of the CEN inter-region bandwidth.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "LocalRegionId": {
+      "description": "ID of the local region for CEN inter-region bandwidth.",
+      "type": "string"
+    },
+    "PeerRegionId": {
+      "description": "ID of the remote region for CEN inter-region bandwidth.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of CEN inter-region bandwidth. Creating: Being created. Deleting: Being deleted. Pending: Configuring. Available: Available.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Time when the CEN inter-region bandwidth was updated.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/InterRegionBandwidthId",
+    "/properties/Status",
+    "/properties/CreationTime",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "Bandwidth",
+    "CenId",
+    "LocalRegionId",
+    "PeerRegionId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CEN::InterRegionBandwidth"
+}

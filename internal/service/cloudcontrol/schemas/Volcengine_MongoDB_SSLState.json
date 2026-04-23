@@ -1,0 +1,83 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId"
+  ],
+  "description": "SSL encryption settings for the MongoDB instance, including whether the feature is enabled, SSL certificate expiration time, and other information.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mongodb:ModifyDBInstanceSSL",
+        "mongodb:DescribeDBInstanceSSL",
+        "mongodb:DescribeDBInstanceDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mongodb:ModifyDBInstanceSSL",
+        "mongodb:DescribeDBInstanceSSL",
+        "mongodb:DescribeDBInstanceDetail"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mongodb:DescribeDBInstanceSSL"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mongodb:ModifyDBInstanceSSL",
+        "mongodb:DescribeDBInstanceSSL",
+        "mongodb:DescribeDBInstanceDetail"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "InstanceId": {
+      "description": "Instance ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "IsValid": {
+      "description": "Whether the SSL certificate is valid. Possible values: - true: Valid - false: Invalid",
+      "semantic": "status",
+      "type": "boolean"
+    },
+    "SSLAction": {
+      "description": "Perform operations on the SSL encryption feature. Possible values: - Open (default): Enable SSL encryption - Close: Disable SSL encryption - Update: Update SSL certificate validity period. You can update the SSL certificate validity period only after SSL encryption is enabled.",
+      "enum": [
+        "Open",
+        "Close",
+        "Update"
+      ],
+      "type": "string"
+    },
+    "SSLEnable": {
+      "description": "Whether SSL encryption is enabled. Possible values: - true: Enabled - false: Disabled",
+      "type": "boolean"
+    },
+    "SSLExpiredTime": {
+      "description": "SSL certificate expiration time, formatted as yyyy-MM-ddTHH:mm:ssZ (UTC). This parameter is returned only when the SSL certificate is valid (that is, IsValid is true).",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/IsValid",
+    "/properties/SSLEnable",
+    "/properties/SSLExpiredTime"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::MongoDB::SSLState",
+  "writeOnlyProperties": [
+    "/properties/SSLAction"
+  ]
+}

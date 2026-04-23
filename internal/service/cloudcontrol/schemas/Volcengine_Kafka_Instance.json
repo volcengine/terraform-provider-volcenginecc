@@ -5,7 +5,6 @@
     "/properties/ChargeInfo/ChargeType",
     "/properties/ChargeInfo/PeriodUnit",
     "/properties/ChargeInfo/Period",
-    "/properties/EipId",
     "/properties/UserName",
     "/properties/UserPassword",
     "/properties/StorageType",
@@ -163,7 +162,9 @@
         "Kafka:DescribeInstances",
         "Kafka:ModifyInstanceParameters",
         "Kafka:DescribeInstanceDetail",
-        "Kafka:DescribeTopics"
+        "Kafka:DescribeTopics",
+        "Kafka:CreatePublicAddress",
+        "Kafka:DeletePublicAddress"
       ]
     }
   },

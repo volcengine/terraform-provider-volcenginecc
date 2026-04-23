@@ -317,7 +317,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceDescription
@@ -898,7 +897,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ChargeInfo/ChargeType",
 		"/properties/ChargeInfo/PeriodUnit",
 		"/properties/ChargeInfo/Period",
-		"/properties/EipId",
 		"/properties/UserName",
 		"/properties/UserPassword",
 		"/properties/StorageType",

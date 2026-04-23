@@ -1,0 +1,251 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/IamProjectName"
+  ],
+  "definitions": {
+    "GeneralWebhookHeaderKV": {
+      "properties": {
+        "key": {
+          "description": "Custom request header key.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Custom request header value.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NoticeRule": {
+      "properties": {
+        "HasEndNode": {
+          "description": "Whether there is an end node afterwards.",
+          "type": "boolean"
+        },
+        "HasNext": {
+          "description": "Condition for whether to proceed to the next level.",
+          "type": "boolean"
+        },
+        "ReceiverInfos": {
+          "description": "Notification channel information.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Receiver"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "RuleNode": {
+          "description": "Rule node. JSON format.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Receiver": {
+      "properties": {
+        "AlarmContentTemplateId": {
+          "description": "Alarm content template ID.",
+          "type": "string"
+        },
+        "AlarmWebhookAtGroups": {
+          "description": "User group name to notify when sending notifications to Feishu, DingTalk, or WeCom via Webhook integration.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AlarmWebhookAtUsers": {
+          "description": "Username to notify when sending notifications to Feishu, DingTalk, or WeCom via Webhook integration.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AlarmWebhookIntegrationId": {
+          "description": "Alarm webhook integration configuration ID.",
+          "type": "string"
+        },
+        "AlarmWebhookIntegrationName": {
+          "description": "Name of the alarm Webhook integration configuration.",
+          "type": "string"
+        },
+        "AlarmWebhookIsAtAll": {
+          "description": "Whether to notify everyone when sending notifications to Feishu, DingTalk, or WeCom via Webhook integration.",
+          "type": "boolean"
+        },
+        "EndTime": {
+          "description": "End time for receiving alarm notifications. Uses 24-hour format: HH:mm:ss, with a valid range of 00:00:00–23:59:59. StartTime cannot be greater than EndTime.",
+          "type": "string"
+        },
+        "GeneralWebhookBody": {
+          "description": "Custom WebHook request body. It is recommended to set the request body according to the callback interface requirements of the corresponding service.",
+          "type": "string"
+        },
+        "GeneralWebhookHeaders": {
+          "description": "Custom callback request headers for the interface.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/GeneralWebhookHeaderKV"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "GeneralWebhookMethod": {
+          "description": "Custom callback method for the interface. Only POST or PUT is supported.",
+          "enum": [
+            "POST",
+            "PUT",
+            ""
+          ],
+          "type": "string"
+        },
+        "GeneralWebhookUrl": {
+          "description": "Custom callback URL for the interface.",
+          "type": "string"
+        },
+        "ReceiverChannels": {
+          "description": "Notification channels. Supports one or more channels. Options: Email, Sms, Phone, GeneralWebhook, Lark, DingTalk, WeChat.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ReceiverNames": {
+          "description": "IAM user or user group name.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ReceiverType": {
+          "description": "Recipient type. Options: User: IAM user; UserGroup: IAM user group.",
+          "type": "string"
+        },
+        "StartTime": {
+          "description": "Alarm notification start time. Uses 24-hour format (HH:mm:ss), valid range is 00:00:00–23:59:59. StartTime cannot be later than EndTime.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "The logging service notification group is a collection of alarm notification channels used to specify the action strategy after an alarm is triggered. You can add notification rules, and the logging service will intelligently assign different alarm notification channels based on these rules.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AlarmNotifyGroupName",
+      "/properties/AlarmNotifyGroupId",
+      "/properties/IamProjectName",
+      "/properties/Receivers/*/ReceiverNames/*"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateAlarmNotifyGroup",
+        "TLS:DescribeAlarmNotifyGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteAlarmNotifyGroup",
+        "TLS:DescribeAlarmNotifyGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeAlarmNotifyGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeAlarmNotifyGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:ModifyAlarmNotifyGroup",
+        "TLS:DescribeAlarmNotifyGroups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AlarmNotifyGroupId"
+  ],
+  "properties": {
+    "AlarmNotifyGroupId": {
+      "description": "Alarm notification group ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AlarmNotifyGroupName": {
+      "description": "Alarm notification group name. Refer to the resource naming rules.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "Time when the alarm notification group was created.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "IamProjectName": {
+      "default": "default",
+      "description": "Name of the IAM project to which the alarm group belongs. If not specified, the logging service adds the alarm group to the IAM project named default.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "NoticeRules": {
+      "description": "Alarm notification group configuration. Note: If the NoticeRules parameter is configured, leave the NotifyType and Receivers parameters empty. If NoticeRules is empty, you must configure the NotifyType and Receivers parameters. When modifying, do not change NoticeRules, NotifyType, and Receivers at the same time, as some fields may not take effect.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NoticeRule"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "NotifyType": {
+      "description": "Type of alarm notification. Trigger: alarm triggered. Recovery: alarm recovered.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Receivers": {
+      "description": "IAM user list to receive alarms. You can set 1–10 IAM users.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Receiver"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedTime": {
+      "description": "Time when the alarm notification group was modified.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AlarmNotifyGroupId",
+    "/properties/CreatedTime",
+    "/properties/UpdatedTime"
+  ],
+  "required": [
+    "AlarmNotifyGroupName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::AlarmNotifyGroup"
+}

@@ -115,24 +115,12 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.",
-		//	  "enum": [
-		//	    "white",
-		//	    "black",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"white",
-					"black",
-					"",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -157,26 +145,12 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Source of the CA certificate associated with the HTTPS listener, used for mutual authentication. alb (default): Certificate uploaded via ALB. Standard ALB instances do not support certificates from this source. pca_root: Private root CA certificate purchased or uploaded via Volcano Engine Certificate Center. pca_sub: Private subordinate CA certificate purchased or uploaded via Volcano Engine Certificate Center.",
-		//	  "enum": [
-		//	    "alb",
-		//	    "pca_root",
-		//	    "pca_sub",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"ca_certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Source of the CA certificate associated with the HTTPS listener, used for mutual authentication. alb (default): Certificate uploaded via ALB. Standard ALB instances do not support certificates from this source. pca_root: Private root CA certificate purchased or uploaded via Volcano Engine Certificate Center. pca_sub: Private subordinate CA certificate purchased or uploaded via Volcano Engine Certificate Center.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"alb",
-					"pca_root",
-					"pca_sub",
-					"",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -216,24 +190,12 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.",
-		//	  "enum": [
-		//	    "alb",
-		//	    "cert_center",
-		//	    "pca_leaf"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"alb",
-					"cert_center",
-					"pca_leaf",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -722,13 +684,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Listener status. Values: Creating: Creating. Active: Running. Pending: Changing configuration. Disabled: Stopped. Deleting: Deleting.",
-		//	  "enum": [
-		//	    "Creating",
-		//	    "Active",
-		//	    "Pending",
-		//	    "Disabled",
-		//	    "Deleting"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/

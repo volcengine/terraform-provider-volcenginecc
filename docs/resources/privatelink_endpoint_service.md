@@ -18,7 +18,6 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
   service_resource_type = "CLB"
   resources = [
     {
-      instance_id = ""
       resource_id = "clb-rr0o8ni4dxxxx58wxxxxx"
       zone_ids    = []
     }
@@ -46,6 +45,7 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
 - `description` (String) Description of the endpoint service.
 - `ip_address_versions` (Set of String) IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.
 - `payer` (String) Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.
+- `permit_account_ids` (Set of String) Details of authorized allowlist accounts.
 - `private_dns_enabled` (Boolean) Whether the endpoint service enables private DNS name. false: Not enabled. true: Enabled.
 - `private_dns_name` (String) Private DNS name of the endpoint service. If the PrivateDNSEnabled parameter returns false, this parameter is empty.
 - `private_dns_type` (String) Domain name type of the private DNS name. public: public network. Note: If the custom private domain name feature is not enabled, this parameter is not returned.
@@ -53,7 +53,7 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
 - `resources` (Attributes Set) Resources provided by the endpoint service.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--resources))
 - `service_name_managed` (String) Whether this is a managed endpoint service. false: not a managed endpoint service. true: managed endpoint service. If the account owning the endpoint service has not enabled managed endpoint service functionality, this parameter is not returned.
-- `service_name_suffix` (String) Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.<region ID>.<name suffix>. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.
+- `service_name_suffix` (String) Suffix for the endpoint service name. This parameter is currently in beta testing. If you need to use different name suffixes to distinguish business scenarios, please contact your account manager.
 - `service_owner` (String) Current service principal.
 - `service_resource_type` (String) Type of service resource. CLB: Load Balancer CLB. ALB: Application Load Balancer ALB. RDSMySQL: Cloud Database MySQL Edition.
 - `service_type` (String) Type of the endpoint service. Interface: Interface endpoint service.
@@ -80,7 +80,6 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
 
 Optional:
 
-- `instance_id` (String) Endpoint service ID.
 - `resource_id` (String) Service resource ID to be added to the endpoint service.
 - `zone_ids` (List of String) Availability zone where the load balancer provides service.
 

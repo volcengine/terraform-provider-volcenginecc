@@ -724,3 +724,66 @@ resource_schema "volcengine_privatelink_vpc_endpoint" {
 resource_schema "volcengine_tls_consumer_group" {
   cloudcontrol_type_name = "Volcengine::TLS::ConsumerGroup"
 }
+
+resource_schema "volcengine_privatelink_vpc_endpoint_connection" {
+  cloudcontrol_type_name = "Volcengine::PrivateLink::VpcEndpointConnection"
+}
+
+resource_schema "volcengine_tls_alarm_notify_group" {
+  cloudcontrol_type_name = "Volcengine::TLS::AlarmNotifyGroup"
+}
+
+resource_schema "volcengine_tls_shipper" {
+  cloudcontrol_type_name = "Volcengine::TLS::Shipper"
+}
+
+resource_schema "volcengine_tos_bucket_encryption" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketEncryption"
+}
+
+resource_schema "volcengine_tos_bucket_inventory" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketInventory"
+}
+
+resource_schema "volcengine_redis_allow_list" {
+  cloudcontrol_type_name = "Volcengine::Redis::AllowList"
+}
+
+resource_schema "volcengine_cen_route_entry" {
+  cloudcontrol_type_name = "Volcengine::CEN::RouteEntry"
+}
+
+resource_schema "volcengine_vefaas_release" {
+  cloudcontrol_type_name = "Volcengine::VEFAAS::Release"
+}
+
+resource_schema "volcengine_storageebs_snapshot_group" {
+  cloudcontrol_type_name = "Volcengine::StorageEBS::SnapshotGroup"
+}
+
+resource_schema "volcengine_vke_kubeconfig" {
+  cloudcontrol_type_name = "Volcengine::VKE::Kubeconfig"
+}
+
+resource_schema "volcengine_vepfs_mount_service" {
+  cloudcontrol_type_name = "Volcengine::VEPFS::MountService"
+}
+
+resource_schema "volcengine_mongodb_ssl_state" {
+  cloudcontrol_type_name = "Volcengine::MongoDB::SSLState"
+}
+resource_schema "volcengine_cen_service_route_entry" {
+  cloudcontrol_type_name = "Volcengine::CEN::ServiceRouteEntry"
+}
+
+resource_schema "volcengine_cen_inter_region_bandwidth" {
+  cloudcontrol_type_name = "Volcengine::CEN::InterRegionBandwidth"
+}
+
+resource_schema "volcengine_rabbitmq_allow_list" {
+  cloudcontrol_type_name = "Volcengine::RabbitMQ::AllowList"
+}
+
+resource_schema "volcengine_tls_rule" {
+  cloudcontrol_type_name = "Volcengine::TLS::Rule"
+}

@@ -1,0 +1,110 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/CenId",
+    "/properties/DestinationCidrBlock",
+    "/properties/InstanceId"
+  ],
+  "description": "Cloud enterprise network route entry, used to publish the route entry of a network instance to the cloud enterprise network",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/CenId",
+      "/properties/DestinationCidrBlock",
+      "/properties/InstanceId",
+      "/properties/InstanceRegionId",
+      "/properties/InstanceType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cen:PublishCenRouteEntry",
+        "cen:DescribeCenRouteEntries"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cen:WithdrawCenRouteEntry"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cen:DescribeCenRouteEntries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cen:DescribeCenRouteEntries"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/CenId",
+    "/properties/DestinationCidrBlock",
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "AsPath": {
+      "description": "AS path",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CenId": {
+      "description": "Cloud enterprise network instance ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "DestinationCidrBlock": {
+      "description": "Destination CIDR of the route entry",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Network instance ID",
+      "type": "string"
+    },
+    "InstanceRegionId": {
+      "description": "Region ID of the network instance",
+      "type": "string"
+    },
+    "InstanceType": {
+      "description": "Network instance type",
+      "type": "string"
+    },
+    "PublishStatus": {
+      "description": "Publish status of the route entry",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Effective status of the route entry",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Type": {
+      "description": "Route entry type",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Status",
+    "/properties/PublishStatus",
+    "/properties/Type",
+    "/properties/AsPath",
+    "/properties/InstanceRegionId",
+    "/properties/InstanceType"
+  ],
+  "required": [
+    "CenId",
+    "DestinationCidrBlock",
+    "InstanceId",
+    "InstanceRegionId",
+    "InstanceType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CEN::RouteEntry"
+}

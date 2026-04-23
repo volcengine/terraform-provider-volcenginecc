@@ -40,7 +40,7 @@ resource "volcenginecc_vedbm_allow_list" "VEDBMAllowListDemo" {
 - `allow_list` (String) IP allowlist. Separate multiple IP addresses with commas (,). Duplicate entries are not allowed.
 - `allow_list_desc` (String) Allowlist description.
 - `allow_list_type` (String) IP address type in the allowlist. Only IPv4 is currently supported.
-- `associated_instances` (Attributes List) List of bound instances.
+- `associated_instances` (Attributes Set) List of bound instances.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
 - `modify_mode` (String) How to modify the allowlist. Supported settings: Cover (default): Overwrite the original allowlist with the values in the AllowList parameter. Append: Add IP addresses entered in the AllowList parameter to the original allowlist. Delete: Remove IP addresses entered in the AllowList parameter from the original allowlist. At least one IP address must remain.
 - `project_name` (String) Project name associated with the allowlist. If left blank, the new allowlist will be added to the default project.
@@ -58,11 +58,6 @@ resource "volcenginecc_vedbm_allow_list" "VEDBMAllowListDemo" {
 Optional:
 
 - `instance_id` (String) Instance ID.
-
-Read-Only:
-
-- `instance_name` (String) Instance name.
-- `vpc` (String) Instance VPC ID.
 
 ## Import
 

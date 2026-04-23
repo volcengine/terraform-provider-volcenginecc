@@ -88,22 +88,12 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Access control mode. white: Allowlist. black: Denylist. This parameter is valid only when the AclStatus parameter is on.",
-		//	  "enum": [
-		//	    "white",
-		//	    "black"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Access control mode. white: Allowlist. black: Denylist. This parameter is valid only when the AclStatus parameter is on.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"white",
-					"black",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -146,24 +136,12 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Enable mutual authentication. on: enabled. off (default): disabled.",
-		//	  "enum": [
-		//	    "on",
-		//	    "off",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"ca_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Enable mutual authentication. on: enabled. off (default): disabled.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"on",
-					"off",
-					"",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -203,24 +181,12 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.",
-		//	  "enum": [
-		//	    "clb",
-		//	    "cert_center",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"clb",
-					"cert_center",
-					"",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -375,6 +341,85 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainExtensions
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "List of extended domain names associated with the HTTPS listener. Each HTTPS listener can be associated with up to 20 extended domain names.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "properties": {
+		//	      "CertCenterCertificateId": {
+		//	        "description": "Certificate ID of the extended domain name.",
+		//	        "type": "string"
+		//	      },
+		//	      "CertificateSource": {
+		//	        "description": "Certificate source for the extended domain name to be added. Value: cert_center: SSL certificate from Volcano Engine Certificate Center. This parameter is required when adding an extended domain name.",
+		//	        "type": "string"
+		//	      },
+		//	      "Domain": {
+		//	        "description": "Domain name. Supports both wildcard and exact domain names. Specifications: 1. Must contain at least one '.', and cannot start or end with '.'. 2. Only letters, numbers, '.', '-', and '*' are allowed. 3. Length must be between 1 and 128 characters. 4. Wildcard domain: Use '*' to replace one or more characters. 5. Exact domain: A domain name that strictly follows domain name specifications.",
+		//	        "maxLength": 128,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      },
+		//	      "DomainExtensionId": {
+		//	        "description": "Extended domain name ID.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"domain_extensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertCenterCertificateId
+					"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Certificate ID of the extended domain name.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CertificateSource
+					"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Certificate source for the extended domain name to be added. Value: cert_center: SSL certificate from Volcano Engine Certificate Center. This parameter is required when adding an extended domain name.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Domain
+					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Domain name. Supports both wildcard and exact domain names. Specifications: 1. Must contain at least one '.', and cannot start or end with '.'. 2. Only letters, numbers, '.', '-', and '*' are allowed. 3. Length must be between 1 and 128 characters. 4. Wildcard domain: Use '*' to replace one or more characters. 5. Exact domain: A domain name that strictly follows domain name specifications.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 128),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DomainExtensionId
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of extended domain names associated with the HTTPS listener. Each HTTPS listener can be associated with up to 20 extended domain names.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(20),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
@@ -1266,6 +1311,8 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"created_time":               "CreatedTime",
 		"description":                "Description",
 		"domain":                     "Domain",
+		"domain_extension_id":        "DomainExtensionId",
+		"domain_extensions":          "DomainExtensions",
 		"enabled":                    "Enabled",
 		"end_port":                   "EndPort",
 		"established_timeout":        "EstablishedTimeout",
@@ -1314,6 +1361,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Status",
 		"/properties/WafProtectionEnabled",
 		"/properties/RuleIds",
+		"/properties/DomainExtensions/*/DomainExtensionId",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

@@ -8,6 +8,29 @@
     "/properties/EndPort"
   ],
   "definitions": {
+    "DomainExtension": {
+      "properties": {
+        "CertCenterCertificateId": {
+          "description": "Certificate ID of the extended domain name.",
+          "type": "string"
+        },
+        "CertificateSource": {
+          "description": "Certificate source for the extended domain name to be added. Value: cert_center: SSL certificate from Volcano Engine Certificate Center. This parameter is required when adding an extended domain name.",
+          "type": "string"
+        },
+        "Domain": {
+          "description": "Domain name. Supports both wildcard and exact domain names. Specifications: 1. Must contain at least one '.', and cannot start or end with '.'. 2. Only letters, numbers, '.', '-', and '*' are allowed. 3. Length must be between 1 and 128 characters. 4. Wildcard domain: Use '*' to replace one or more characters. 5. Exact domain: A domain name that strictly follows domain name specifications.",
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "DomainExtensionId": {
+          "description": "Extended domain name ID.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "HealthCheck": {
       "description": "Health check information.",
       "properties": {
@@ -130,6 +153,7 @@
     "create": {
       "permissions": [
         "clb:CreateListener",
+        "clb:ModifyListenerDomainExtensions",
         "clb:DescribeListenerAttributes",
         "clb:DescribeRules"
       ]
@@ -154,6 +178,7 @@
     "update": {
       "permissions": [
         "clb:ModifyListenerAttributes",
+        "clb:ModifyListenerDomainExtensions",
         "clb:DescribeListenerAttributes",
         "clb:TagResources",
         "clb:UntagResources",
@@ -185,10 +210,6 @@
     },
     "AclType": {
       "description": "Access control mode. white: Allowlist. black: Denylist. This parameter is valid only when the AclStatus parameter is on.",
-      "enum": [
-        "white",
-        "black"
-      ],
       "type": "string"
     },
     "Bandwidth": {
@@ -203,11 +224,6 @@
     },
     "CAEnabled": {
       "description": "Enable mutual authentication. on: enabled. off (default): disabled.",
-      "enum": [
-        "on",
-        "off",
-        ""
-      ],
       "type": "string"
     },
     "CertCenterCertificateId": {
@@ -220,11 +236,6 @@
     },
     "CertificateSource": {
       "description": "Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.",
-      "enum": [
-        "clb",
-        "cert_center",
-        ""
-      ],
       "type": "string"
     },
     "ClientBodyTimeout": {
@@ -275,6 +286,16 @@
       "minLength": 0,
       "semantic": "description",
       "type": "string"
+    },
+    "DomainExtensions": {
+      "description": "List of extended domain names associated with the HTTPS listener. Each HTTPS listener can be associated with up to 20 extended domain names.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DomainExtension"
+      },
+      "maxItems": 20,
+      "type": "array",
+      "uniqueItems": true
     },
     "Enabled": {
       "default": "on",
@@ -483,7 +504,8 @@
     "/properties/UpdatedTime",
     "/properties/Status",
     "/properties/WafProtectionEnabled",
-    "/properties/RuleIds"
+    "/properties/RuleIds",
+    "/properties/DomainExtensions/*/DomainExtensionId"
   ],
   "required": [
     "Protocol",

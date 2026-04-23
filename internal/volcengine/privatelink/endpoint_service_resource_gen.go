@@ -141,6 +141,27 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PermitAccountIds
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Details of authorized allowlist accounts.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"permit_account_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Details of authorized allowlist accounts.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateDNSEnabled
 		// Cloud Control resource type schema:
 		//
@@ -264,12 +285,12 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
-		//	      "InstanceId": {
-		//	        "description": "Endpoint service ID.",
-		//	        "type": "string"
-		//	      },
 		//	      "ResourceId": {
 		//	        "description": "Service resource ID to be added to the endpoint service.",
+		//	        "type": "string"
+		//	      },
+		//	      "ResourceType": {
+		//	        "description": "Type of service resource.",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneIds": {
@@ -288,15 +309,6 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		"resources": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InstanceId
-					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Endpoint service ID.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Service resource ID to be added to the endpoint service.",
@@ -306,6 +318,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ResourceType
 					// Property: ZoneIds
 					"zone_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
@@ -323,9 +336,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Resources is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceDomain
 		// Cloud Control resource type schema:
@@ -389,11 +400,11 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.\u003cregion ID\u003e.\u003cname suffix\u003e. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
+		//	  "description": "Suffix for the endpoint service name. This parameter is currently in beta testing. If you need to use different name suffixes to distinguish business scenarios, please contact your account manager.",
 		//	  "type": "string"
 		//	}
 		"service_name_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Suffix of the endpoint service name. After setting the name suffix, the system generates the endpoint service name in the format com.volces.privatelink.<region ID>.<name suffix>. Note: This parameter is currently in invitation-only testing. To use different name suffixes to distinguish businesses, contact your account manager.",
+			Description: "Suffix for the endpoint service name. This parameter is currently in beta testing. If you need to use different name suffixes to distinguish business scenarios, please contact your account manager.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -600,17 +611,18 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		"business_status":                "BusinessStatus",
 		"create_time":                    "CreateTime",
 		"description":                    "Description",
-		"instance_id":                    "InstanceId",
 		"ip_address_versions":            "IpAddressVersions",
 		"key":                            "Key",
 		"name":                           "Name",
 		"payer":                          "Payer",
+		"permit_account_ids":             "PermitAccountIds",
 		"private_dns_enabled":            "PrivateDNSEnabled",
 		"private_dns_name":               "PrivateDNSName",
 		"private_dns_name_configuration": "PrivateDNSNameConfiguration",
 		"private_dns_type":               "PrivateDNSType",
 		"project_name":                   "ProjectName",
 		"resource_id":                    "ResourceId",
+		"resource_type":                  "ResourceType",
 		"resources":                      "Resources",
 		"service_domain":                 "ServiceDomain",
 		"service_id":                     "ServiceId",
@@ -631,7 +643,6 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServiceNameSuffix",
-		"/properties/Resources",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -645,6 +656,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Status",
 		"/properties/UpdateTime",
 		"/properties/ZoneIds",
+		"/properties/Resources/*/ResourceType",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -656,7 +668,6 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ServiceResourceType",
 		"/properties/ServiceType",
 		"/properties/WildcardDomainEnabled",
-		"/properties/Resources",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -105,7 +105,7 @@
     },
     "AssociatedInstances": {
       "description": "List of bound instances.",
-      "insertionOrder": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Instance"
       },
