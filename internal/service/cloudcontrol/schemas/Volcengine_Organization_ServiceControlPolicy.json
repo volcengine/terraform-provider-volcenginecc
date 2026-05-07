@@ -1,0 +1,137 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "Target": {
+      "description": "Bound target object.",
+      "properties": {
+        "AttachedTime": {
+          "description": "Binding time.",
+          "type": "string"
+        },
+        "TargetID": {
+          "description": "Target ID.",
+          "type": "string"
+        },
+        "TargetName": {
+          "description": "Target name.",
+          "type": "string"
+        },
+        "TargetType": {
+          "description": "Target type: 1. OU 2. Account.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "TargetID",
+        "TargetType"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Control policy.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/PolicyName",
+      "/properties/PolicyType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "organization:CreateServiceControlPolicy",
+        "organization:AttachServiceControlPolicy",
+        "organization:GetServiceControlPolicy",
+        "organization:ListTargetsForPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "organization:DeleteServiceControlPolicy",
+        "organization:DetachServiceControlPolicy",
+        "organization:GetServiceControlPolicy",
+        "organization:ListTargetsForPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "organization:ListServiceControlPolicies"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "organization:GetServiceControlPolicy",
+        "organization:ListTargetsForPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "organization:UpdateServiceControlPolicy",
+        "organization:DetachServiceControlPolicy",
+        "organization:AttachServiceControlPolicy",
+        "organization:GetServiceControlPolicy",
+        "organization:ListTargetsForPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/PolicyID"
+  ],
+  "properties": {
+    "CreateDate": {
+      "description": "Creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description.",
+      "type": "string"
+    },
+    "PolicyID": {
+      "description": "Policy ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "PolicyName": {
+      "description": "Policy name.",
+      "type": "string"
+    },
+    "PolicyType": {
+      "description": "Policy type.",
+      "type": "string"
+    },
+    "Statement": {
+      "description": "Policy expression.",
+      "type": "string"
+    },
+    "Targets": {
+      "description": "List of bound target objects.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Target"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateDate": {
+      "description": "Update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/PolicyID",
+    "/properties/CreateDate",
+    "/properties/UpdateDate",
+    "/properties/Targets/*/AttachedTime",
+    "/properties/Targets/*/TargetName",
+    "/properties/PolicyType"
+  ],
+  "required": [
+    "PolicyName",
+    "Statement"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Organization::ServiceControlPolicy"
+}

@@ -1,0 +1,78 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Entry",
+    "/properties/Registry",
+    "/properties/Type"
+  ],
+  "description": "Adding access addresses to the allowlist for public network access can effectively enhance information security",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Registry"
+    ],
+    "required": [
+      "/properties/Registry"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cr:CreateEndpointAclPolicies",
+        "cr:GetPublicEndpoint"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cr:DeleteEndpointAclPolicies",
+        "cr:GetPublicEndpoint"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cr:GetPublicEndpoint"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cr:GetPublicEndpoint"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Registry",
+    "/properties/Entry"
+  ],
+  "properties": {
+    "Description": {
+      "description": "Description of the allowlist IPs",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Entry": {
+      "description": "Allowlist IPs to be added",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Registry": {
+      "description": "Name of the image repository instance. On the Instance List page in the Image Repository Console, obtain the instance name",
+      "maxLength": 30,
+      "minLength": 3,
+      "type": "string"
+    },
+    "Type": {
+      "description": "Network type of the allowlist; currently only Public is supported",
+      "type": "string"
+    }
+  },
+  "required": [
+    "Registry",
+    "Type"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CR::EndpointAclPolicy",
+  "writeOnlyProperties": [
+    "/properties/Type"
+  ]
+}

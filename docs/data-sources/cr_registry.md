@@ -21,24 +21,44 @@ Data Source schema for Volcengine::CR::Registry
 
 ### Read-Only
 
-- `charge_type` (String) Billing type for the container registry instance. Currently, only PostCharge pay-as-you-go mode is supported
-- `created_time` (String) Creation time of the container registry instance
-- `expire_time` (String) Instance expiration time is only available for HybridCharge billing type
-- `name` (String) Standard edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be 3–30 characters
-- `project` (String) Enter the project to associate with the instance. Each instance can only be associated with one project
-- `proxy_cache` (Attributes) ProxyCache configuration. Required when set as ProxyCache (see [below for nested schema](#nestedatt--proxy_cache))
-- `proxy_cache_enabled` (Boolean) Set as ProxyCache instance
-- `renew_type` (String) Instance auto-renewal type is only available for HybridCharge billing type
-- `status` (Attributes) Container registry instance status consists of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to insufficient balance, {Stopped, [Released]}: Pending reclamation, {Stopped, [Released, Balance]}: Suspended due to insufficient balance, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Abnormal (see [below for nested schema](#nestedatt--status))
+- `charge_type` (String) Container registry instance billing type. Currently, only the PostCharge pay-as-you-go mode is supported.
+- `created_time` (String) Time when the container registry instance was created.
+- `endpoint` (Attributes) Public endpoint information for the image repository instance (see [below for nested schema](#nestedatt--endpoint))
+- `expire_time` (String) Only applicable when the billing type is HybridCharge. Instance expiration time
+- `name` (String) Standard Edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be between 3 and 30 characters.
+- `project` (String) Specify the project to associate with the instance. Each instance can only be associated with one project
+- `proxy_cache` (Attributes) ProxyCache configuration. Required when set to ProxyCache (see [below for nested schema](#nestedatt--proxy_cache))
+- `proxy_cache_enabled` (Boolean) Whether to set as ProxyCache instance
+- `renew_type` (String) Only applicable when the billing type is HybridCharge. Instance auto-renewal type
+- `status` (Attributes) Container registry instance status, composed of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to overdue payment, {Stopped, [Released]}: Pending recycle, {Stopped, [Released, Balance]}: Suspended due to overdue payment, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Error (see [below for nested schema](#nestedatt--status))
 - `tags` (Attributes Set) Instance tags (see [below for nested schema](#nestedatt--tags))
-- `type` (String) If not specified, a standard edition instance will be created by default. Enterprise: Standard edition, Micro: Micro edition
+- `type` (String) If not specified, a Standard Edition instance will be created by default. Enterprise: Standard Edition, Micro: Micro Edition
+
+<a id="nestedatt--endpoint"></a>
+### Nested Schema for `endpoint`
+
+Read-Only:
+
+- `acl_policies` (Attributes Set) Public IP allowlist (see [below for nested schema](#nestedatt--endpoint--acl_policies))
+- `enabled` (Boolean) Whether to enable the public endpoint. Options: false: not enabled; true: enabled. Default is false
+- `status` (String) Current status of the public endpoint. Parameter values: Enabling: enabling; Enabled: enabled; Disabling: disabling; Updating: updating; Failed: failed; Disabled: disabled
+
+<a id="nestedatt--endpoint--acl_policies"></a>
+### Nested Schema for `endpoint.acl_policies`
+
+Read-Only:
+
+- `description` (String) IP entry address
+- `entry` (String) IP entry description
+
+
 
 <a id="nestedatt--proxy_cache"></a>
 ### Nested Schema for `proxy_cache`
 
 Read-Only:
 
-- `type` (String) Instance types supported by ProxyCache for container registry. Parameter values are as follows: DockerHub: DockerHub container registry
+- `type` (String) Instance types supported by ProxyCache. Parameter value description: DockerHub: DockerHub image repository.
 
 
 <a id="nestedatt--status"></a>
@@ -46,24 +66,8 @@ Read-Only:
 
 Read-Only:
 
-- `conditions` (Set of String) Creating, [ Progressing ]: Creating
-  Running, [ Ok ]: Running
-  Running, [ Degraded ]: Running
-  Stopped, [ Balance ]: Suspended due to insufficient balance
-  Stopped, [ Released ]: Pending reclamation
-  Stopped, [ Released, Balance ]: Suspended due to insufficient balance
-  Starting, [ Progressing ]: Starting
-  Deleting, [ Progressing ]: Deleting
-  Failed, [ Unknown ]: Abnormal
-- `phase` (String) Creating, [ Progressing ]: Creating
-  Running, [ Ok ]: Running
-  Running, [ Degraded ]: Running
-  Stopped, [ Balance ]: Suspended due to insufficient balance
-  Stopped, [ Released ]: Pending reclamation
-  Stopped, [ Released, Balance ]: Suspended due to insufficient balance
-  Starting, [ Progressing ]: Starting
-  Deleting, [ Progressing ]: Deleting
-  Failed, [ Unknown ]: Abnormal
+- `conditions` (Set of String) Creating, [ Progressing ]: Creating. Running, [ Ok ]: Running. Running, [ Degraded ]: Running. Stopped, [ Balance ]: Suspended due to overdue payment. Stopped, [ Released ]: Pending recycle. Stopped, [ Released, Balance ]: Suspended due to overdue payment. Starting, [ Progressing ]: Starting. Deleting, [ Progressing ]: Deleting. Failed, [ Unknown ]: Error.
+- `phase` (String) Creating, [ Progressing ]: Creating. Running, [ Ok ]: Running. Running, [ Degraded ]: Running. Stopped, [ Balance ]: Suspended due to overdue payment. Stopped, [ Released ]: Pending recycle. Stopped, [ Released, Balance ]: Suspended due to overdue payment. Starting, [ Progressing ]: Starting. Deleting, [ Progressing ]: Deleting. Failed, [ Unknown ]: Error.
 
 
 <a id="nestedatt--tags"></a>
@@ -71,5 +75,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) Tag key values
+- `key` (String) Tag key
 - `value` (String) List of tag values

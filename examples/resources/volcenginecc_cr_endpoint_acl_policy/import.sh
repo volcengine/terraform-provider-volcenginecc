@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cr_endpoint_acl_policy.example "registry|entry"

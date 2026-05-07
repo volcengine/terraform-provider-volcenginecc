@@ -2,12 +2,12 @@
 page_title: "volcenginecc_alb_listener Resource - terraform-provider-volcenginecc"
 subcategory: "ALB"
 description: |-
-  Each ALB instance must have at least one listener to function properly. The listener receives client requests and distributes them to backend servers based on your configured forwarding rules and load balancing algorithm. You can create multiple listeners under one ALB instance and configure different protocols for each listener to handle client requests using different protocols.
+  Each ALB instance requires at least one listener to function properly. The listener receives client requests and distributes them to backend servers based on your configured forwarding rules and load balancing algorithm. You can create multiple listeners under a single ALB instance and configure different listening protocols for each listener to handle client requests using different protocols.
 ---
 
 # volcenginecc_alb_listener (Resource)
 
-Each ALB instance must have at least one listener to function properly. The listener receives client requests and distributes them to backend servers based on your configured forwarding rules and load balancing algorithm. You can create multiple listeners under one ALB instance and configure different protocols for each listener to handle client requests using different protocols.
+Each ALB instance requires at least one listener to function properly. The listener receives client requests and distributes them to backend servers based on your configured forwarding rules and load balancing algorithm. You can create multiple listeners under a single ALB instance and configure different listening protocols for each listener to handle client requests using different protocols.
 
 ## Example Usage
 
@@ -52,36 +52,36 @@ resource "volcenginecc_alb_listener" "ALBListenerDemo" {
 
 ### Required
 
-- `load_balancer_id` (String) Load balancer instance ID to which the listener belongs.
-- `port` (Number) The listener port. Values: 1   - 65535.
+- `load_balancer_id` (String) Load balancer instance ID associated with the listener.
+- `port` (Number) Listener port. Value range: 1   - 65535.
 - `protocol` (String) Listener protocol. Supports HTTP and HTTPS protocols.
 - `server_group_id` (String) Default server group for the listener.
 
 ### Optional
 
-- `access_log_record_customized_headers_enabled` (String) Whether the listener has enabled the 'Log custom header in access logs' feature: on: Feature is enabled. off: Feature is not enabled.
+- `access_log_record_customized_headers_enabled` (String) Whether the listener has enabled 'Record custom header in access logs': on: enabled. off: not enabled.
 - `acl_ids` (Set of String) Access control policy group ID bound to the listener. When the AclStatus parameter is set to on, AclIds is required.
-- `acl_status` (String) Enable access control. Values: on: enabled. off: disabled (default).
-- `acl_type` (String) Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.
-- `ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication in HTTPS listeners. If the certificate source is alb, you must specify the CACertificateId parameter.
+- `acl_status` (String) Whether access control is enabled. Values: on: enabled. off: not enabled (default).
+- `acl_type` (String) Access control mode. Available values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges specified in the selected access control policy group. If no IP addresses are added to the selected policy group, the listener will not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges specified in the selected access control policy group. If no IP addresses are added to the selected policy group, the listener will forward all requests. When the AclStatus parameter is set to on, AclType is a required parameter.
+- `ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication of the HTTPS listener. When the certificate source is alb, you must specify the CACertificateId parameter.
 - `ca_certificate_source` (String) Source of the CA certificate associated with the HTTPS listener, used for mutual authentication. alb (default): Certificate uploaded via ALB. Standard ALB instances do not support certificates from this source. pca_root: Private root CA certificate purchased or uploaded via Volcano Engine Certificate Center. pca_sub: Private subordinate CA certificate purchased or uploaded via Volcano Engine Certificate Center.
-- `cert_center_certificate_id` (String) Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener with the certificate source set to cert_center.
+- `cert_center_certificate_id` (String) Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is cert_center.
 - `certificate_id` (String) Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is alb.
-- `certificate_source` (String) The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.
+- `certificate_source` (String) Source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB; cert_center: SSL certificate purchased or uploaded via Volcano Engine Certificate Center; pca_leaf: private leaf certificate purchased or uploaded via Volcano Engine Certificate Center.
 - `customized_cfg_id` (String) Personalized configuration ID. If not bound, the value is an empty string.
-- `description` (String) Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.
-- `domain_extensions` (Attributes Set) List of additional domain names associated with the HTTPS listener. A single HTTPS listener can be associated with up to 20 additional domain names.
+- `description` (String) Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1 to 255 characters. If not specified, defaults to an empty string.
+- `domain_extensions` (Attributes Set) List of extension domains associated with the HTTPS listener. An HTTPS listener can be associated with up to 20 extension domains.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--domain_extensions))
-- `enable_http_2` (String) HTTP2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default).
-- `enable_quic` (String) QUIC feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default). Only standard ALB instances support QUIC.
-- `enabled` (String) Listener on/off status. Values: on: On (default). off: Off.
-- `listener_name` (String) Listener name. If not specified, named in the format 'protocol-port'. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, dot (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters.
+- `enable_http_2` (String) HTTP 2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled; off: disabled (default).
+- `enable_quic` (String) QUIC feature switch. This parameter is only valid for HTTPS listeners. Available values: on: enabled. off: disabled (default). Only Standard ALB instances support QUIC.
+- `enabled` (String) Listener on/off status. Values: on: enabled (default); off: disabled.
+- `listener_name` (String) Listener name. If not specified, it is named in the "protocol-port" format. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, periods (.), underscores (_), and hyphens (-). Length limit: 1-128 characters.
 - `pca_leaf_certificate_id` (String) Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.
-- `pca_root_ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.
-- `pca_sub_ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.
+- `pca_root_ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication of the HTTPS listener. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.
+- `pca_sub_ca_certificate_id` (String) CA certificate ID associated with the HTTPS listener. This parameter is used for two-way authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.
 - `server_groups` (Attributes Set) All server groups associated with the listener.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--server_groups))
-- `tags` (Attributes Set) Listener tags.
+- `tags` (Attributes Set) Tags associated with the listener.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -89,21 +89,21 @@ resource "volcenginecc_alb_listener" "ALBListenerDemo" {
 - `created_time` (String) Listener creation time.
 - `id` (String) Uniquely identifies the resource.
 - `listener_id` (String) Listener ID.
-- `project_name` (String) Name of the project to which the listener belongs.
-- `status` (String) Listener status. Values: Creating: Creating. Active: Running. Pending: Changing configuration. Disabled: Stopped. Deleting: Deleting.
-- `updated_time` (String) Time of the listener's most recent operation.
+- `project_name` (String) Project name to which the listener belongs.
+- `status` (String) Listener status. Values: Creating: creating. Active: running. Pending: configuration changing. Disabled: stopped. Deleting: deleting.
+- `updated_time` (String) The most recent operation time of the listener.
 
 <a id="nestedatt--domain_extensions"></a>
 ### Nested Schema for `domain_extensions`
 
 Optional:
 
-- `cert_center_certificate_id` (String) Server certificate ID used by the domain. Effective when the certificate source is cert_center.
+- `cert_center_certificate_id` (String) Server certificate ID used by the domain name. Effective when the certificate source is cert_center.
 - `certificate_id` (String) Server certificate ID used by the domain. Effective when the certificate source is alb.
-- `certificate_source` (String) Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center.
-- `domain` (String) Domain name. Usually cannot be empty. If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain must be an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length must be between 1 and 128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters except '.' can be before or after '*'. Exact domain: a domain name that meets domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain matching is case-insensitive.
+- `certificate_source` (String) Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded via Volcano Engine Certificate Center.
+- `domain` (String) Domain name. Usually cannot be empty. If the instance supports automatic selection of extension certificates (SniAutoMatch is on), Domain must be set to an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length limit: 1–128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters other than '.' can appear before or after '*'. Exact domain: an exact domain name that complies with domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain name matching is case-insensitive.
 - `pca_leaf_certificate_id` (String) Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.
-- `san` (String) If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.
+- `san` (String) If the instance supports automatic selection of extension certificates, that is, when SniAutoMatch is set to on, Domain is an empty string. San refers to the certificate's extension domain names, separated by commas.
 
 
 <a id="nestedatt--server_groups"></a>
@@ -120,8 +120,8 @@ Optional:
 
 Optional:
 
-- `key` (String) Tag key for user tags. Rules are as follows: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.
-- `value` (String) The value of the user tag. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.
+- `key` (String) User tag key. Rules: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Allowed characters include all languages, numbers, spaces, parentheses (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource cannot be duplicated.
+- `value` (String) User tag value. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Allowed characters include all languages, numbers, spaces, parentheses (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @.
 
 ## Import
 

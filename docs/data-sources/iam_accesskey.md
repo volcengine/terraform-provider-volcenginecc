@@ -21,13 +21,13 @@ Data Source schema for Volcengine::IAM::Accesskey
 
 ### Read-Only
 
-- `access_key_id` (String) Access Key Id.
-- `created_time` (String) Key creation time. The time format is ISO8601.
-- `last_login_date` (String) Last login time.
-- `region` (String) The last region accessed by the API key.
-- `request_time` (String) The last time the API key was used.
-- `secret_access_key` (String) Secret Access Key.
-- `service` (String) The English abbreviation of the last service accessed by the API key.
-- `status` (String) Key status. active means enabled, inactive means disabled.
-- `updated_time` (String) Key update time. The time format is ISO8601.
-- `user_name` (String) User name. Used to create a key for the specified IAM user. If no user name is specified, a key is created for the current request identity (that is, if the primary account makes the request, the key is created for the primary account itself; if an IAM user makes the request, the key is created for the IAM user. Note: Roles do not support creating keys for themselves). If the IAM user has the AccessKeySelfManageAccess permission and needs to create a key for themselves, they must include their own UserName in the request.
+- `access_key_id` (String) Key ID (Access Key Id)
+- `created_time` (String) Key creation time (ISO8601 format)
+- `last_login_date` (String) Last login time
+- `region` (String) Last accessed region by the API key
+- `request_time` (String) Last usage time of the API key
+- `secret_access_key` (String) Secret Access Key
+- `service` (String) English abbreviation of the last accessed service by the API key
+- `status` (String) Key status. "active" means enabled, "inactive" means disabled
+- `updated_time` (String) Key update time (ISO8601 format)
+- `user_name` (String) User name. Used to create a key for a specified IAM user. If no user name is specified, the key is created for the current request identity (that is, if the main account requests, the key is created for the main account; if an IAM user requests, the key is created for that IAM user. Note: Roles cannot create keys for themselves). When an IAM user has the AccessKeySelfManageAccess permission, to create a key for themselves, they must include their own UserName in the request

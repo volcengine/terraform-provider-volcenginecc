@@ -7,13 +7,13 @@
     "AclEntry": {
       "properties": {
         "Description": {
-          "description": "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string",
+          "description": "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
           "maxLength": 255,
           "minLength": 0,
           "type": "string"
         },
         "Entry": {
-          "description": "IP entry address range; only CIDR addresses are supported",
+          "description": "IP entry address range. Only CIDR addresses are supported.",
           "type": "string"
         }
       },
@@ -25,7 +25,7 @@
     "Listener": {
       "properties": {
         "AclType": {
-          "description": "Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode",
+          "description": "Listener control mode for this access control policy group. white: allowlist mode; black: denylist mode",
           "enum": [
             "white",
             "black"
@@ -61,13 +61,13 @@
     "Tag": {
       "properties": {
         "Key": {
-          "description": "User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique",
+          "description": "Tag key for user tags. Length must be between 1 and 128 characters. Case sensitive. Cannot start with any combination of volc: or sys: in any case. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
           "maxLength": 128,
           "minLength": 1,
           "type": "string"
         },
         "Value": {
-          "description": "User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @",
+          "description": "User tag value. Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
           "maxLength": 256,
           "minLength": 0,
           "type": "string"
@@ -79,7 +79,7 @@
       "type": "object"
     }
   },
-  "description": "ALB provides listener-level access control. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance through the listener port, you can set an access control policy for this listener. You can configure access control when creating the listener, or modify or reconfigure access control after the listener is created",
+  "description": "ALB provides access control at the listener level. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance via the listener port, you can set an access control policy for the listener. You can configure access control when creating the listener or modify/reconfigure it after the listener is created.",
   "filterProperties": {
     "filterableProperties": [
       "/properties/AclId",
@@ -129,7 +129,7 @@
   ],
   "properties": {
     "AclEntries": {
-      "description": "Details of IP entries in the access control policy group",
+      "description": "Detailed information about IP entries in the access control policy group.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/AclEntry"
@@ -138,36 +138,36 @@
       "uniqueItems": true
     },
     "AclEntryCount": {
-      "description": "Number of IP entries in the access control policy group",
+      "description": "Number of IP entries in the access control policy group.",
       "format": "int64",
       "type": "integer"
     },
     "AclId": {
-      "description": "Access control policy group ID",
+      "description": "Access control policy group ID.",
       "semantic": "resourceId",
       "type": "string"
     },
     "AclName": {
-      "description": "Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.",
+      "description": "Name of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If not specified, defaults to the access control policy group ID.",
       "maxLength": 128,
       "minLength": 1,
       "semantic": "resourceName",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "Creation time of the access control policy group",
+      "description": "Creation time of the access control policy group.",
       "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
-      "description": "Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.",
+      "description": "Description of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
       "maxLength": 255,
       "minLength": 0,
       "semantic": "description",
       "type": "string"
     },
     "Listeners": {
-      "description": "Details of listeners associated with the access control policy group",
+      "description": "Detailed information about listeners associated with the access control policy group.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Listener"
@@ -176,12 +176,12 @@
       "uniqueItems": true
     },
     "ProjectName": {
-      "description": "Project name to which the access control policy group belongs",
+      "description": "Name of the project to which the access control policy group belongs.",
       "semantic": "projectName",
       "type": "string"
     },
     "Status": {
-      "description": "Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting",
+      "description": "Status of the access control policy group. Creating: being created. Active: available. Configuring: being configured. Deleting: being deleted.",
       "enum": [
         "Creating",
         "Active",
@@ -192,7 +192,7 @@
       "type": "string"
     },
     "Tags": {
-      "description": "Tags bound to the access control policy group",
+      "description": "Tags bound to the access control policy group.",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -202,7 +202,7 @@
       "uniqueItems": true
     },
     "UpdatedTime": {
-      "description": "Last operation time of the access control policy group",
+      "description": "Most recent operation time for the access control policy group.",
       "semantic": "updatedTime",
       "type": "string"
     }
@@ -213,10 +213,7 @@
     "/properties/CreatedTime",
     "/properties/UpdatedTime",
     "/properties/Status",
-    "/properties/Listeners/*/ListenerId",
-    "/properties/Listeners/*/ListenerName",
-    "/properties/Listeners/*/Protocol",
-    "/properties/Listeners/*/Port"
+    "/properties/Listeners"
   ],
   "tagging": {
     "tagOnCreate": true,

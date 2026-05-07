@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_transitrouter_peer_attachment.example "transit_router_attachment_id"

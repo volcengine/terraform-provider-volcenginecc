@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_organization_service_control_policy.example "policy_id"

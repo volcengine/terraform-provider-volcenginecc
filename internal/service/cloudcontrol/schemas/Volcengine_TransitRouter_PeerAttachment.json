@@ -1,0 +1,183 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/PeerTransitRouterId",
+    "/properties/PeerTransitRouterRegionId",
+    "/properties/TransitRouterId"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Tags for the cross-region connection.",
+      "properties": {
+        "Key": {
+          "description": "Tag key for cross-region connection user tags. Length must be between 1 and 128 characters. Case-sensitive; cannot start with any case combination of sys:. Cannot start or end with a space character. Allowed characters include letters, numbers, space character, underscore (_), period (.), colon (:), slash (/), equals sign (=), plus sign (+), minus sign (-), and @. Note: Tag keys for the same resource must be unique. If this parameter is not provided or no value is specified, the default is empty.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value for the cross-region connection user tag. Length limit: 0–255 characters. Case-sensitive. Cannot start or end with a space. Allowed characters: letters, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Note: If this parameter is provided, Tags.N.Key must be provided first.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "A connection established between TR instances in two different regions enables cross-region communication.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/PeerTransitRouterId",
+      "/properties/PeerTransitRouterRegionId",
+      "/properties/TransitRouterAttachmentId",
+      "/properties/TransitRouterAttachmentName",
+      "/properties/TransitRouterId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:CreateTransitRouterPeerAttachment",
+        "transitrouter:DescribeTransitRouterPeerAttachments"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DeleteTransitRouterPeerAttachment",
+        "transitrouter:DescribeTransitRouterPeerAttachments"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterPeerAttachments"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterPeerAttachments"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterPeerAttachments",
+        "transitrouter:ModifyTransitRouterPeerAttachmentAttributes",
+        "transitrouter:UntagResources",
+        "transitrouter:TagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterAttachmentId"
+  ],
+  "properties": {
+    "AutoPublishRouteEnabled": {
+      "description": "Automatically synchronize TR routes to the network instance route table. true: Yes. false: No.",
+      "type": "boolean"
+    },
+    "Bandwidth": {
+      "description": "Bandwidth for cross-region connection, measured in Mbps. The maximum bandwidth cannot exceed the remaining unallocated bandwidth limit of the specified transit router bandwidth package.",
+      "type": "integer"
+    },
+    "CreationTime": {
+      "description": "Creation time of the cross-region connection.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the cross-region connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length limit: 0–255 characters. If this parameter is not provided or no value is specified, the default is an empty string.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Ipv6Enabled": {
+      "description": "Enable IPv6. true: Yes. false: No.",
+      "type": "boolean"
+    },
+    "PeerTransitRouterId": {
+      "description": "ID of the peer transit router instance. You can call the DescribeTransitRouters API to obtain the transit router instance ID.",
+      "type": "string"
+    },
+    "PeerTransitRouterRegionId": {
+      "description": "Region ID of the peer transit router instance. Refer to the region documentation to obtain the region ID.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the cross-region connection. Creating: In progress. Deleting: In progress. Pending: Configuring. Available: Available.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag list for the cross-region connection.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TransitRouterAttachmentId": {
+      "description": "ID of the cross-region connection.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterAttachmentName": {
+      "description": "Name of the cross-region connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length limit: 1–128 characters. If this parameter is not provided or no value is specified, the default is the transit router instance ID.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "TransitRouterBandwidthPackageId": {
+      "description": "ID of the transit router bandwidth package. You can call the DescribeTransitRouters API to obtain the transit router instance ID. If this parameter is provided, the Bandwidth parameter must also be provided. If this parameter is not provided, the Bandwidth parameter is not required.",
+      "type": "string"
+    },
+    "TransitRouterForwardPolicyTableId": {
+      "description": "ID of the forwarding policy associated with the cross-region connection.",
+      "type": "string"
+    },
+    "TransitRouterId": {
+      "description": "ID of the local transit router instance.",
+      "type": "string"
+    },
+    "TransitRouterRouteTableId": {
+      "description": "Associated forwarding route table for the cross-region connection.",
+      "type": "string"
+    },
+    "TransitRouterTrafficQosMarkingPolicyId": {
+      "description": "ID of the traffic marking policy associated with the cross-region connection.",
+      "type": "string"
+    },
+    "TransitRouterTrafficQosQueuePolicyId": {
+      "description": "ID of the flow queue policy associated with the cross-region connection.",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Last operation time of the cross-region connection.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AutoPublishRouteEnabled",
+    "/properties/CreationTime",
+    "/properties/Ipv6Enabled",
+    "/properties/Status",
+    "/properties/TransitRouterAttachmentId",
+    "/properties/TransitRouterForwardPolicyTableId",
+    "/properties/TransitRouterRouteTableId",
+    "/properties/TransitRouterTrafficQosMarkingPolicyId",
+    "/properties/TransitRouterTrafficQosQueuePolicyId",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "PeerTransitRouterId",
+    "PeerTransitRouterRegionId",
+    "TransitRouterId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TransitRouter::PeerAttachment"
+}

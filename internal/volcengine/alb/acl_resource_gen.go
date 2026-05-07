@@ -33,18 +33,18 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Details of IP entries in the access control policy group",
+		//	  "description": "Detailed information about IP entries in the access control policy group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string",
+		//	        "description": "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 		//	        "maxLength": 255,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
 		//	      "Entry": {
-		//	        "description": "IP entry address range; only CIDR addresses are supported",
+		//	        "description": "IP entry address range. Only CIDR addresses are supported.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -61,7 +61,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string",
+						Description: "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -73,7 +73,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Entry
 					"entry": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "IP entry address range; only CIDR addresses are supported",
+						Description: "IP entry address range. Only CIDR addresses are supported.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -85,7 +85,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Details of IP entries in the access control policy group\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Description: "Detailed information about IP entries in the access control policy group.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -96,12 +96,12 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Number of IP entries in the access control policy group",
+		//	  "description": "Number of IP entries in the access control policy group.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"acl_entry_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Number of IP entries in the access control policy group",
+			Description: "Number of IP entries in the access control policy group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -111,11 +111,11 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Access control policy group ID",
+		//	  "description": "Access control policy group ID.",
 		//	  "type": "string"
 		//	}
 		"acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Access control policy group ID",
+			Description: "Access control policy group ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -125,13 +125,13 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.",
+		//	  "description": "Name of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If not specified, defaults to the access control policy group ID.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"acl_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.",
+			Description: "Name of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If not specified, defaults to the access control policy group ID.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -145,11 +145,11 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Creation time of the access control policy group",
+		//	  "description": "Creation time of the access control policy group.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creation time of the access control policy group",
+			Description: "Creation time of the access control policy group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -159,13 +159,13 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.",
+		//	  "description": "Description of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.",
+			Description: "Description of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -179,12 +179,12 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Details of listeners associated with the access control policy group",
+		//	  "description": "Detailed information about listeners associated with the access control policy group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AclType": {
-		//	        "description": "Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode",
+		//	        "description": "Listener control mode for this access control policy group. white: allowlist mode; black: denylist mode",
 		//	        "enum": [
 		//	          "white",
 		//	          "black"
@@ -225,28 +225,32 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AclType
 					"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode",
-						Optional:    true,
+						Description: "Listener control mode for this access control policy group. white: allowlist mode; black: denylist mode",
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"white",
-								"black",
-							),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerId
+					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Listener ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: ListenerName
+					"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Listener name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Port
+					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Listener port",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Protocol
+					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Listener protocol",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Details of listeners associated with the access control policy group\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
-			Optional:    true,
+			Description: "Detailed information about listeners associated with the access control policy group.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -256,11 +260,11 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Project name to which the access control policy group belongs",
+		//	  "description": "Name of the project to which the access control policy group belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Project name to which the access control policy group belongs",
+			Description: "Name of the project to which the access control policy group belongs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -272,7 +276,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting",
+		//	  "description": "Status of the access control policy group. Creating: being created. Active: available. Configuring: being configured. Deleting: being deleted.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Active",
@@ -282,7 +286,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting",
+			Description: "Status of the access control policy group. Creating: being created. Active: available. Configuring: being configured. Deleting: being deleted.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -292,18 +296,18 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Tags bound to the access control policy group",
+		//	  "description": "Tags bound to the access control policy group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique",
+		//	        "description": "Tag key for user tags. Length must be between 1 and 128 characters. Case sensitive. Cannot start with any combination of volc: or sys: in any case. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @",
+		//	        "description": "User tag value. Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -322,7 +326,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique",
+						Description: "Tag key for user tags. Length must be between 1 and 128 characters. Case sensitive. Cannot start with any combination of volc: or sys: in any case. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -335,7 +339,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @",
+						Description: "User tag value. Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -347,7 +351,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Tags bound to the access control policy group\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Description: "Tags bound to the access control policy group.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -358,11 +362,11 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Last operation time of the access control policy group",
+		//	  "description": "Most recent operation time for the access control policy group.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last operation time of the access control policy group",
+			Description: "Most recent operation time for the access control policy group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -380,7 +384,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "ALB provides listener-level access control. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance through the listener port, you can set an access control policy for this listener. You can configure access control when creating the listener, or modify or reconfigure access control after the listener is created",
+		Description: "ALB provides access control at the listener level. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance via the listener port, you can set an access control policy for the listener. You can configure access control when creating the listener or modify/reconfigure it after the listener is created.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -417,10 +421,7 @@ func aCLResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CreatedTime",
 		"/properties/UpdatedTime",
 		"/properties/Status",
-		"/properties/Listeners/*/ListenerId",
-		"/properties/Listeners/*/ListenerName",
-		"/properties/Listeners/*/Protocol",
-		"/properties/Listeners/*/Port",
+		"/properties/Listeners",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

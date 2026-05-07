@@ -27,67 +27,139 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Billing type for the container registry instance. Currently, only PostCharge pay-as-you-go mode is supported",
+		//	  "description": "Container registry instance billing type. Currently, only the PostCharge pay-as-you-go mode is supported.",
 		//	  "type": "string"
 		//	}
 		"charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Billing type for the container registry instance. Currently, only PostCharge pay-as-you-go mode is supported",
+			Description: "Container registry instance billing type. Currently, only the PostCharge pay-as-you-go mode is supported.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Creation time of the container registry instance",
+		//	  "description": "Time when the container registry instance was created.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creation time of the container registry instance",
+			Description: "Time when the container registry instance was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Public endpoint information for the image repository instance",
+		//	  "properties": {
+		//	    "AclPolicies": {
+		//	      "description": "Public IP allowlist",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Public IP allowlist entry",
+		//	        "properties": {
+		//	          "Description": {
+		//	            "description": "IP entry address",
+		//	            "type": "string"
+		//	          },
+		//	          "Entry": {
+		//	            "description": "IP entry description",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Enabled": {
+		//	      "description": "Whether to enable the public endpoint. Options: false: not enabled; true: enabled. Default is false",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Status": {
+		//	      "description": "Current status of the public endpoint. Parameter values: Enabling: enabling; Enabled: enabled; Disabling: disabling; Updating: updating; Failed: failed; Disabled: disabled",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AclPolicies
+				"acl_policies": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "IP entry address",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Entry
+							"entry": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "IP entry description",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Public IP allowlist",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable the public endpoint. Options: false: not enabled; true: enabled. Default is false",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Current status of the public endpoint. Parameter values: Enabling: enabling; Enabled: enabled; Disabling: disabling; Updating: updating; Failed: failed; Disabled: disabled",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Public endpoint information for the image repository instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpireTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Instance expiration time is only available for HybridCharge billing type",
+		//	  "description": "Only applicable when the billing type is HybridCharge. Instance expiration time",
 		//	  "type": "string"
 		//	}
 		"expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Instance expiration time is only available for HybridCharge billing type",
+			Description: "Only applicable when the billing type is HybridCharge. Instance expiration time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Standard edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be 3–30 characters",
+		//	  "description": "Standard Edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be between 3 and 30 characters.",
 		//	  "maxLength": 30,
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Standard edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be 3–30 characters",
+			Description: "Standard Edition instance name. Names must be unique within the same region. Supports lowercase English letters, numbers, and hyphens (-). Numbers cannot be the first character, and hyphens (-) cannot be the first or last character. Length must be between 3 and 30 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Project
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Enter the project to associate with the instance. Each instance can only be associated with one project",
+		//	  "description": "Specify the project to associate with the instance. Each instance can only be associated with one project",
 		//	  "type": "string"
 		//	}
 		"project": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enter the project to associate with the instance. Each instance can only be associated with one project",
+			Description: "Specify the project to associate with the instance. Each instance can only be associated with one project",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyCache
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ProxyCache configuration. Required when set as ProxyCache",
+		//	  "description": "ProxyCache configuration. Required when set to ProxyCache",
 		//	  "properties": {
 		//	    "Type": {
-		//	      "description": "Instance types supported by ProxyCache for container registry. Parameter values are as follows: DockerHub: DockerHub container registry",
+		//	      "description": "Instance types supported by ProxyCache. Parameter value description: DockerHub: DockerHub image repository.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -97,43 +169,43 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Instance types supported by ProxyCache for container registry. Parameter values are as follows: DockerHub: DockerHub container registry",
+					Description: "Instance types supported by ProxyCache. Parameter value description: DockerHub: DockerHub image repository.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "ProxyCache configuration. Required when set as ProxyCache",
+			Description: "ProxyCache configuration. Required when set to ProxyCache",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProxyCacheEnabled
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Set as ProxyCache instance",
+		//	  "description": "Whether to set as ProxyCache instance",
 		//	  "type": "boolean"
 		//	}
 		"proxy_cache_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Set as ProxyCache instance",
+			Description: "Whether to set as ProxyCache instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RenewType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Instance auto-renewal type is only available for HybridCharge billing type",
+		//	  "description": "Only applicable when the billing type is HybridCharge. Instance auto-renewal type",
 		//	  "type": "string"
 		//	}
 		"renew_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Instance auto-renewal type is only available for HybridCharge billing type",
+			Description: "Only applicable when the billing type is HybridCharge. Instance auto-renewal type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Container registry instance status consists of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to insufficient balance, {Stopped, [Released]}: Pending reclamation, {Stopped, [Released, Balance]}: Suspended due to insufficient balance, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Abnormal",
+		//	  "description": "Container registry instance status, composed of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to overdue payment, {Stopped, [Released]}: Pending recycle, {Stopped, [Released, Balance]}: Suspended due to overdue payment, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Error",
 		//	  "properties": {
 		//	    "Conditions": {
-		//	      "description": "Creating, [ Progressing ]: Creating\nRunning, [ Ok ]: Running\nRunning, [ Degraded ]: Running\nStopped, [ Balance ]: Suspended due to insufficient balance\nStopped, [ Released ]: Pending reclamation\nStopped, [ Released, Balance ]: Suspended due to insufficient balance\nStarting, [ Progressing ]: Starting\nDeleting, [ Progressing ]: Deleting\nFailed, [ Unknown ]: Abnormal",
+		//	      "description": "Creating, [ Progressing ]: Creating. Running, [ Ok ]: Running. Running, [ Degraded ]: Running. Stopped, [ Balance ]: Suspended due to overdue payment. Stopped, [ Released ]: Pending recycle. Stopped, [ Released, Balance ]: Suspended due to overdue payment. Starting, [ Progressing ]: Starting. Deleting, [ Progressing ]: Deleting. Failed, [ Unknown ]: Error.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -142,7 +214,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
-		//	      "description": "Creating, [ Progressing ]: Creating\nRunning, [ Ok ]: Running\nRunning, [ Degraded ]: Running\nStopped, [ Balance ]: Suspended due to insufficient balance\nStopped, [ Released ]: Pending reclamation\nStopped, [ Released, Balance ]: Suspended due to insufficient balance\nStarting, [ Progressing ]: Starting\nDeleting, [ Progressing ]: Deleting\nFailed, [ Unknown ]: Abnormal",
+		//	      "description": "Creating, [ Progressing ]: Creating. Running, [ Ok ]: Running. Running, [ Degraded ]: Running. Stopped, [ Balance ]: Suspended due to overdue payment. Stopped, [ Released ]: Pending recycle. Stopped, [ Released, Balance ]: Suspended due to overdue payment. Starting, [ Progressing ]: Starting. Deleting, [ Progressing ]: Deleting. Failed, [ Unknown ]: Error.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -153,16 +225,16 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Conditions
 				"conditions": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "Creating, [ Progressing ]: Creating\n  Running, [ Ok ]: Running\n  Running, [ Degraded ]: Running\n  Stopped, [ Balance ]: Suspended due to insufficient balance\n  Stopped, [ Released ]: Pending reclamation\n  Stopped, [ Released, Balance ]: Suspended due to insufficient balance\n  Starting, [ Progressing ]: Starting\n  Deleting, [ Progressing ]: Deleting\n  Failed, [ Unknown ]: Abnormal",
+					Description: "Creating, [ Progressing ]: Creating. Running, [ Ok ]: Running. Running, [ Degraded ]: Running. Stopped, [ Balance ]: Suspended due to overdue payment. Stopped, [ Released ]: Pending recycle. Stopped, [ Released, Balance ]: Suspended due to overdue payment. Starting, [ Progressing ]: Starting. Deleting, [ Progressing ]: Deleting. Failed, [ Unknown ]: Error.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Creating, [ Progressing ]: Creating\n  Running, [ Ok ]: Running\n  Running, [ Degraded ]: Running\n  Stopped, [ Balance ]: Suspended due to insufficient balance\n  Stopped, [ Released ]: Pending reclamation\n  Stopped, [ Released, Balance ]: Suspended due to insufficient balance\n  Starting, [ Progressing ]: Starting\n  Deleting, [ Progressing ]: Deleting\n  Failed, [ Unknown ]: Abnormal",
+					Description: "Creating, [ Progressing ]: Creating. Running, [ Ok ]: Running. Running, [ Degraded ]: Running. Stopped, [ Balance ]: Suspended due to overdue payment. Stopped, [ Released ]: Pending recycle. Stopped, [ Released, Balance ]: Suspended due to overdue payment. Starting, [ Progressing ]: Starting. Deleting, [ Progressing ]: Deleting. Failed, [ Unknown ]: Error.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Container registry instance status consists of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to insufficient balance, {Stopped, [Released]}: Pending reclamation, {Stopped, [Released, Balance]}: Suspended due to insufficient balance, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Abnormal",
+			Description: "Container registry instance status, composed of Phase and Conditions. Valid Phase and Conditions combinations are as follows: {Creating, [Progressing]}: Creating, {Running, [Ok]}: Running, {Running, [Degraded]}: Running, {Stopped, [Balance]}: Suspended due to overdue payment, {Stopped, [Released]}: Pending recycle, {Stopped, [Released, Balance]}: Suspended due to overdue payment, {Starting, [Progressing]}: Starting, {Deleting, [Progressing]}: Deleting, {Failed, [Unknown]}: Error",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -174,7 +246,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "Tag key values",
+		//	        "description": "Tag key",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
@@ -192,7 +264,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag key values",
+						Description: "Tag key",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -209,11 +281,11 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "If not specified, a standard edition instance will be created by default. Enterprise: Standard edition, Micro: Micro edition",
+		//	  "description": "If not specified, a Standard Edition instance will be created by default. Enterprise: Standard Edition, Micro: Micro Edition",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "If not specified, a standard edition instance will be created by default. Enterprise: Standard edition, Micro: Micro edition",
+			Description: "If not specified, a Standard Edition instance will be created by default. Enterprise: Standard Edition, Micro: Micro Edition",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -233,9 +305,14 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::CR::Registry").WithTerraformTypeName("volcenginecc_cr_registry")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"acl_policies":        "AclPolicies",
 		"charge_type":         "ChargeType",
 		"conditions":          "Conditions",
 		"created_time":        "CreatedTime",
+		"description":         "Description",
+		"enabled":             "Enabled",
+		"endpoint":            "Endpoint",
+		"entry":               "Entry",
 		"expire_time":         "ExpireTime",
 		"key":                 "Key",
 		"name":                "Name",
