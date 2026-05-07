@@ -787,3 +787,19 @@ resource_schema "volcengine_rabbitmq_allow_list" {
 resource_schema "volcengine_tls_rule" {
   cloudcontrol_type_name = "Volcengine::TLS::Rule"
 }
+
+resource_schema "volcengine_cr_endpoint_acl_policy" {
+  cloudcontrol_type_name = "Volcengine::CR::EndpointAclPolicy"
+}
+
+resource_schema "volcengine_vpn_ssl_vpn_client_cert" {
+  cloudcontrol_type_name = "Volcengine::VPN::SslVpnClientCert"
+}
+
+resource_schema "volcengine_transitrouter_peer_attachment" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::PeerAttachment"
+}
+
+resource_schema "volcengine_organization_service_control_policy" {
+  cloudcontrol_type_name = "Volcengine::Organization::ServiceControlPolicy"
+}

@@ -26,18 +26,18 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Details of IP entries in the access control policy group",
+		//	  "description": "Detailed information about IP entries in the access control policy group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Description": {
-		//	        "description": "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string",
+		//	        "description": "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 		//	        "maxLength": 255,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
 		//	      "Entry": {
-		//	        "description": "IP entry address range; only CIDR addresses are supported",
+		//	        "description": "IP entry address range. Only CIDR addresses are supported.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -54,89 +54,89 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string",
+						Description: "Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Entry
 					"entry": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "IP entry address range; only CIDR addresses are supported",
+						Description: "IP entry address range. Only CIDR addresses are supported.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Details of IP entries in the access control policy group",
+			Description: "Detailed information about IP entries in the access control policy group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclEntryCount
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Number of IP entries in the access control policy group",
+		//	  "description": "Number of IP entries in the access control policy group.",
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"acl_entry_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Number of IP entries in the access control policy group",
+			Description: "Number of IP entries in the access control policy group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Access control policy group ID",
+		//	  "description": "Access control policy group ID.",
 		//	  "type": "string"
 		//	}
 		"acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Access control policy group ID",
+			Description: "Access control policy group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.",
+		//	  "description": "Name of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If not specified, defaults to the access control policy group ID.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"acl_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.",
+			Description: "Name of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If not specified, defaults to the access control policy group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Creation time of the access control policy group",
+		//	  "description": "Creation time of the access control policy group.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creation time of the access control policy group",
+			Description: "Creation time of the access control policy group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.",
+		//	  "description": "Description of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.",
+			Description: "Description of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Details of listeners associated with the access control policy group",
+		//	  "description": "Detailed information about listeners associated with the access control policy group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "AclType": {
-		//	        "description": "Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode",
+		//	        "description": "Listener control mode for this access control policy group. white: allowlist mode; black: denylist mode",
 		//	        "enum": [
 		//	          "white",
 		//	          "black"
@@ -177,7 +177,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AclType
 					"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode",
+						Description: "Listener control mode for this access control policy group. white: allowlist mode; black: denylist mode",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerId
@@ -202,25 +202,25 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Details of listeners associated with the access control policy group",
+			Description: "Detailed information about listeners associated with the access control policy group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Project name to which the access control policy group belongs",
+		//	  "description": "Name of the project to which the access control policy group belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Project name to which the access control policy group belongs",
+			Description: "Name of the project to which the access control policy group belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting",
+		//	  "description": "Status of the access control policy group. Creating: being created. Active: available. Configuring: being configured. Deleting: being deleted.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Active",
@@ -230,25 +230,25 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting",
+			Description: "Status of the access control policy group. Creating: being created. Active: available. Configuring: being configured. Deleting: being deleted.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Tags bound to the access control policy group",
+		//	  "description": "Tags bound to the access control policy group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique",
+		//	        "description": "Tag key for user tags. Length must be between 1 and 128 characters. Case sensitive. Cannot start with any combination of volc: or sys: in any case. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @",
+		//	        "description": "User tag value. Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -267,28 +267,28 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique",
+						Description: "Tag key for user tags. Length must be between 1 and 128 characters. Case sensitive. Cannot start with any combination of volc: or sys: in any case. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @",
+						Description: "User tag value. Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Tags bound to the access control policy group",
+			Description: "Tags bound to the access control policy group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Last operation time of the access control policy group",
+		//	  "description": "Most recent operation time for the access control policy group.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last operation time of the access control policy group",
+			Description: "Most recent operation time for the access control policy group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

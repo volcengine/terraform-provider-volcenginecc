@@ -963,5 +963,25 @@
         "resource": "volcenginecc_tls_rule",
         "identifier": ["RuleId"],
         "path": "./examples/resources/volcenginecc_tls_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cr_endpoint_acl_policy",
+        "identifier": ["Registry","Entry"],
+        "path": "./examples/resources/volcenginecc_cr_endpoint_acl_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpn_ssl_vpn_client_cert",
+        "identifier": ["SslVpnClientCertId"],
+        "path": "./examples/resources/volcenginecc_vpn_ssl_vpn_client_cert/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_peer_attachment",
+        "identifier": ["TransitRouterAttachmentId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_peer_attachment/import.sh"
+    },
+    {
+        "resource": "volcenginecc_organization_service_control_policy",
+        "identifier": ["PolicyID"],
+        "path": "./examples/resources/volcenginecc_organization_service_control_policy/import.sh"
     }
 ]

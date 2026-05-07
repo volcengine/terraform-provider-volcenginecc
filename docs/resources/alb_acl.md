@@ -2,12 +2,12 @@
 page_title: "volcenginecc_alb_acl Resource - terraform-provider-volcenginecc"
 subcategory: "ALB"
 description: |-
-  ALB provides listener-level access control. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance through the listener port, you can set an access control policy for this listener. You can configure access control when creating the listener, or modify or reconfigure access control after the listener is created
+  ALB provides access control at the listener level. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance via the listener port, you can set an access control policy for the listener. You can configure access control when creating the listener or modify/reconfigure it after the listener is created.
 ---
 
 # volcenginecc_alb_acl (Resource)
 
-ALB provides listener-level access control. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance through the listener port, you can set an access control policy for this listener. You can configure access control when creating the listener, or modify or reconfigure access control after the listener is created
+ALB provides access control at the listener level. If you want to allow only certain IPs or deny only certain IPs from accessing the ALB instance via the listener port, you can set an access control policy for the listener. You can configure access control when creating the listener or modify/reconfigure it after the listener is created.
 
 ## Example Usage
 
@@ -34,40 +34,32 @@ resource "volcenginecc_alb_acl" "AlbAclDemo" {
 
 ### Optional
 
-- `acl_entries` (Attributes Set) Details of IP entries in the access control policy group
+- `acl_entries` (Attributes Set) Detailed information about IP entries in the access control policy group.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--acl_entries))
-- `acl_name` (String) Name of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If left blank, defaults to the Access Control Policy Group ID.
-- `description` (String) Description of the Access Control Policy Group. Cannot start with http:// or https://. Must begin with a letter or Chinese character and may include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If left blank, defaults to an empty string.
-- `listeners` (Attributes Set) Details of listeners associated with the access control policy group
- Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--listeners))
-- `project_name` (String) Project name to which the access control policy group belongs
-- `tags` (Attributes Set) Tags bound to the access control policy group
+- `acl_name` (String) Name of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, periods (.), underscores (_), and hyphens (-). Length must be between 1 and 128 characters. If not specified, defaults to the access control policy group ID.
+- `description` (String) Description of the access control policy group. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.
+- `project_name` (String) Name of the project to which the access control policy group belongs.
+- `tags` (Attributes Set) Tags bound to the access control policy group.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `acl_entry_count` (Number) Number of IP entries in the access control policy group
-- `acl_id` (String) Access control policy group ID
-- `created_time` (String) Creation time of the access control policy group
+- `acl_entry_count` (Number) Number of IP entries in the access control policy group.
+- `acl_id` (String) Access control policy group ID.
+- `created_time` (String) Creation time of the access control policy group.
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) Status of the access control policy group. Creating: Creating. Active: Available. Configuring: Configuring. Deleting: Deleting
-- `updated_time` (String) Last operation time of the access control policy group
+- `listeners` (Attributes Set) Detailed information about listeners associated with the access control policy group.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--listeners))
+- `status` (String) Status of the access control policy group. Creating: being created. Active: available. Configuring: being configured. Deleting: being deleted.
+- `updated_time` (String) Most recent operation time for the access control policy group.
 
 <a id="nestedatt--acl_entries"></a>
 ### Nested Schema for `acl_entries`
 
 Optional:
 
-- `description` (String) Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1–255 characters. If not specified, defaults to an empty string
-- `entry` (String) IP entry address range; only CIDR addresses are supported
-
-
-<a id="nestedatt--listeners"></a>
-### Nested Schema for `listeners`
-
-Optional:
-
-- `acl_type` (String) Control mode of the listener for this access control policy group. white: Allowlist mode; black: Denylist mode
+- `description` (String) Description of the IP entry. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, English commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.
+- `entry` (String) IP entry address range. Only CIDR addresses are supported.
 
 
 <a id="nestedatt--tags"></a>
@@ -75,8 +67,20 @@ Optional:
 
 Optional:
 
-- `key` (String) User tag key. Length limit: 1–128 characters. Case sensitive. Cannot start with any combination of volc: or sys: (case insensitive). Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @. Tag keys for the same resource must be unique
-- `value` (String) User tag value. Length limit: 0–256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @
+- `key` (String) Tag key for user tags. Length must be between 1 and 128 characters. Case sensitive. Cannot start with any combination of volc: or sys: in any case. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.
+- `value` (String) User tag value. Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Supports characters from all languages, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.
+
+
+<a id="nestedatt--listeners"></a>
+### Nested Schema for `listeners`
+
+Read-Only:
+
+- `acl_type` (String) Listener control mode for this access control policy group. white: allowlist mode; black: denylist mode
+- `listener_id` (String) Listener ID
+- `listener_name` (String) Listener name
+- `port` (Number) Listener port
+- `protocol` (String) Listener protocol
 
 ## Import
 

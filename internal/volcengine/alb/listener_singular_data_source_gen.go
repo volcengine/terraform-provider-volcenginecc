@@ -27,7 +27,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Whether the listener has enabled the 'Log custom header in access logs' feature: on: Feature is enabled. off: Feature is not enabled.",
+		//	  "description": "Whether the listener has enabled 'Record custom header in access logs': on: enabled. off: not enabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -35,7 +35,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"access_log_record_customized_headers_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the listener has enabled the 'Log custom header in access logs' feature: on: Feature is enabled. off: Feature is not enabled.",
+			Description: "Whether the listener has enabled 'Record custom header in access logs': on: enabled. off: not enabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclIds
@@ -61,7 +61,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "off",
-		//	  "description": "Enable access control. Values: on: enabled. off: disabled (default).",
+		//	  "description": "Whether access control is enabled. Values: on: enabled. off: not enabled (default).",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -69,29 +69,29 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"acl_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enable access control. Values: on: enabled. off: disabled (default).",
+			Description: "Whether access control is enabled. Values: on: enabled. off: not enabled (default).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AclType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.",
+		//	  "description": "Access control mode. Available values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges specified in the selected access control policy group. If no IP addresses are added to the selected policy group, the listener will not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges specified in the selected access control policy group. If no IP addresses are added to the selected policy group, the listener will forward all requests. When the AclStatus parameter is set to on, AclType is a required parameter.",
 		//	  "type": "string"
 		//	}
 		"acl_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Access control method. Values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener does not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges set in the selected access control policy group. If no IP is added to the selected policy group, the listener forwards all requests. When the AclStatus parameter is set to on, AclType is required.",
+			Description: "Access control mode. Available values: white: allowlist mode. The listener only forwards requests from IP addresses or address ranges specified in the selected access control policy group. If no IP addresses are added to the selected policy group, the listener will not forward any requests. black: denylist mode. The listener only rejects requests from IP addresses or address ranges specified in the selected access control policy group. If no IP addresses are added to the selected policy group, the listener will forward all requests. When the AclStatus parameter is set to on, AclType is a required parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CACertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication in HTTPS listeners. If the certificate source is alb, you must specify the CACertificateId parameter.",
+		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication of the HTTPS listener. When the certificate source is alb, you must specify the CACertificateId parameter.",
 		//	  "type": "string"
 		//	}
 		"ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication in HTTPS listeners. If the certificate source is alb, you must specify the CACertificateId parameter.",
+			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication of the HTTPS listener. When the certificate source is alb, you must specify the CACertificateId parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CACertificateSource
@@ -109,11 +109,11 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener with the certificate source set to cert_center.",
+		//	  "description": "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is cert_center.",
 		//	  "type": "string"
 		//	}
 		"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener with the certificate source set to cert_center.",
+			Description: "Certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is cert_center.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateId
@@ -131,11 +131,11 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.",
+		//	  "description": "Source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB; cert_center: SSL certificate purchased or uploaded via Volcano Engine Certificate Center; pca_leaf: private leaf certificate purchased or uploaded via Volcano Engine Certificate Center.",
 		//	  "type": "string"
 		//	}
 		"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center. pca_leaf: private leaf certificate purchased or uploaded through Volcano Engine Certificate Center.",
+			Description: "Source of the default certificate associated with the HTTPS listener. Values: alb: certificate uploaded via ALB; cert_center: SSL certificate purchased or uploaded via Volcano Engine Certificate Center; pca_leaf: private leaf certificate purchased or uploaded via Volcano Engine Certificate Center.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
@@ -165,25 +165,25 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "",
-		//	  "description": "Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
+		//	  "description": "Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1 to 255 characters. If not specified, defaults to an empty string.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. May include numbers, English commas (,), periods (.), underscores (_), spaces ( ), equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length must be between 1 and 255 characters. If not specified, defaults to an empty string.",
+			Description: "Listener description. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, commas (,), periods (.), underscores (_), spaces, equals signs (=), hyphens (-), Chinese commas (，), and Chinese periods (。). Length limit: 1 to 255 characters. If not specified, defaults to an empty string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainExtensions
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "List of additional domain names associated with the HTTPS listener. A single HTTPS listener can be associated with up to 20 additional domain names.",
+		//	  "description": "List of extension domains associated with the HTTPS listener. An HTTPS listener can be associated with up to 20 extension domains.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "CertCenterCertificateId": {
-		//	        "description": "Server certificate ID used by the domain. Effective when the certificate source is cert_center.",
+		//	        "description": "Server certificate ID used by the domain name. Effective when the certificate source is cert_center.",
 		//	        "type": "string"
 		//	      },
 		//	      "CertificateId": {
@@ -191,7 +191,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "CertificateSource": {
-		//	        "description": "Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center.",
+		//	        "description": "Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded via Volcano Engine Certificate Center.",
 		//	        "enum": [
 		//	          "alb",
 		//	          "cert_center"
@@ -199,17 +199,17 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Domain": {
-		//	        "description": "Domain name. Usually cannot be empty. If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain must be an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length must be between 1 and 128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters except '.' can be before or after '*'. Exact domain: a domain name that meets domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain matching is case-insensitive.",
+		//	        "description": "Domain name. Usually cannot be empty. If the instance supports automatic selection of extension certificates (SniAutoMatch is on), Domain must be set to an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length limit: 1–128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters other than '.' can appear before or after '*'. Exact domain: an exact domain name that complies with domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain name matching is case-insensitive.",
 		//	        "maxLength": 128,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
 		//	      "DomainExtensionId": {
-		//	        "description": "Extended domain name ID.",
+		//	        "description": "Extension domain name ID.",
 		//	        "type": "string"
 		//	      },
 		//	      "ListenerId": {
-		//	        "description": "Listener ID to which the extended domain name belongs.",
+		//	        "description": "Listener ID associated with the extended domain name.",
 		//	        "type": "string"
 		//	      },
 		//	      "PcaLeafCertificateId": {
@@ -217,7 +217,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "San": {
-		//	        "description": "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
+		//	        "description": "If the instance supports automatic selection of extension certificates, that is, when SniAutoMatch is set to on, Domain is an empty string. San refers to the certificate's extension domain names, separated by commas.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -232,7 +232,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CertCenterCertificateId
 					"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Server certificate ID used by the domain. Effective when the certificate source is cert_center.",
+						Description: "Server certificate ID used by the domain name. Effective when the certificate source is cert_center.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CertificateId
@@ -242,22 +242,22 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: CertificateSource
 					"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center.",
+						Description: "Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded via Volcano Engine Certificate Center.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Domain
 					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Domain name. Usually cannot be empty. If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain must be an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length must be between 1 and 128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters except '.' can be before or after '*'. Exact domain: a domain name that meets domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain matching is case-insensitive.",
+						Description: "Domain name. Usually cannot be empty. If the instance supports automatic selection of extension certificates (SniAutoMatch is on), Domain must be set to an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length limit: 1–128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters other than '.' can appear before or after '*'. Exact domain: an exact domain name that complies with domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain name matching is case-insensitive.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DomainExtensionId
 					"domain_extension_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Extended domain name ID.",
+						Description: "Extension domain name ID.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ListenerId
 					"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Listener ID to which the extended domain name belongs.",
+						Description: "Listener ID associated with the extended domain name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PcaLeafCertificateId
@@ -267,19 +267,19 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: San
 					"san": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
+						Description: "If the instance supports automatic selection of extension certificates, that is, when SniAutoMatch is set to on, Domain is an empty string. San refers to the certificate's extension domain names, separated by commas.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "List of additional domain names associated with the HTTPS listener. A single HTTPS listener can be associated with up to 20 additional domain names.",
+			Description: "List of extension domains associated with the HTTPS listener. An HTTPS listener can be associated with up to 20 extension domains.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableHttp2
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "HTTP2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default).",
+		//	  "description": "HTTP 2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled; off: disabled (default).",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -287,14 +287,14 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enable_http_2": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "HTTP2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default).",
+			Description: "HTTP 2.0 feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled; off: disabled (default).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableQuic
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "QUIC feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default). Only standard ALB instances support QUIC.",
+		//	  "description": "QUIC feature switch. This parameter is only valid for HTTPS listeners. Available values: on: enabled. off: disabled (default). Only Standard ALB instances support QUIC.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -302,7 +302,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enable_quic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "QUIC feature switch. This parameter is only valid for HTTPS listeners. Values: on: enabled. off: disabled (default). Only standard ALB instances support QUIC.",
+			Description: "QUIC feature switch. This parameter is only valid for HTTPS listeners. Available values: on: enabled. off: disabled (default). Only Standard ALB instances support QUIC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Enabled
@@ -310,7 +310,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "on",
-		//	  "description": "Listener on/off status. Values: on: On (default). off: Off.",
+		//	  "description": "Listener on/off status. Values: on: enabled (default); off: disabled.",
 		//	  "enum": [
 		//	    "on",
 		//	    "off"
@@ -318,7 +318,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Listener on/off status. Values: on: On (default). off: Off.",
+			Description: "Listener on/off status. Values: on: enabled (default); off: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ListenerId
@@ -336,24 +336,24 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Listener name. If not specified, named in the format 'protocol-port'. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, dot (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters.",
+		//	  "description": "Listener name. If not specified, it is named in the \"protocol-port\" format. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, periods (.), underscores (_), and hyphens (-). Length limit: 1-128 characters.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"listener_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Listener name. If not specified, named in the format 'protocol-port'. Cannot start with http:// or https://. Must start with a letter or Chinese character and can include numbers, dot (.), underscore (_), and hyphen (-). Length must be between 1 and 128 characters.",
+			Description: "Listener name. If not specified, it is named in the \"protocol-port\" format. Cannot start with http:// or https://. Must start with a letter or Chinese character. Can include numbers, periods (.), underscores (_), and hyphens (-). Length limit: 1-128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Load balancer instance ID to which the listener belongs.",
+		//	  "description": "Load balancer instance ID associated with the listener.",
 		//	  "type": "string"
 		//	}
 		"load_balancer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Load balancer instance ID to which the listener belongs.",
+			Description: "Load balancer instance ID associated with the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PcaLeafCertificateId
@@ -371,47 +371,47 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.",
+		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication of the HTTPS listener. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.",
 		//	  "type": "string"
 		//	}
 		"pca_root_ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.",
+			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication of the HTTPS listener. When the certificate source is pca_root, you must specify the PcaRootCACertificateId parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PcaSubCACertificateId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.",
+		//	  "description": "CA certificate ID associated with the HTTPS listener. This parameter is used for two-way authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.",
 		//	  "type": "string"
 		//	}
 		"pca_sub_ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for mutual authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.",
+			Description: "CA certificate ID associated with the HTTPS listener. This parameter is used for two-way authentication on HTTPS listeners. When the certificate source is pca_sub, you must specify the PcaSubCACertificateId parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "The listener port. Values: 1 - 65535.",
+		//	  "description": "Listener port. Value range: 1 - 65535.",
 		//	  "format": "int64",
 		//	  "maximum": 65535,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The listener port. Values: 1   - 65535.",
+			Description: "Listener port. Value range: 1   - 65535.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Name of the project to which the listener belongs.",
+		//	  "description": "Project name to which the listener belongs.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the project to which the listener belongs.",
+			Description: "Project name to which the listener belongs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Protocol
@@ -485,29 +485,29 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Listener status. Values: Creating: Creating. Active: Running. Pending: Changing configuration. Disabled: Stopped. Deleting: Deleting.",
+		//	  "description": "Listener status. Values: Creating: creating. Active: running. Pending: configuration changing. Disabled: stopped. Deleting: deleting.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Listener status. Values: Creating: Creating. Active: Running. Pending: Changing configuration. Disabled: Stopped. Deleting: Deleting.",
+			Description: "Listener status. Values: Creating: creating. Active: running. Pending: configuration changing. Disabled: stopped. Deleting: deleting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Listener tags.",
+		//	  "description": "Tags associated with the listener.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "Tag key for user tags. Rules are as follows: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
+		//	        "description": "User tag key. Rules: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Allowed characters include all languages, numbers, spaces, parentheses (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource cannot be duplicated.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value of the user tag. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
+		//	        "description": "User tag value. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Allowed characters include all languages, numbers, spaces, parentheses (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -527,28 +527,28 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag key for user tags. Rules are as follows: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Can include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource must be unique.",
+						Description: "User tag key. Rules: Length must be between 1 and 128 characters. Case sensitive. Cannot start with any case combination of volc:. Cannot start or end with a space. Allowed characters include all languages, numbers, spaces, parentheses (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @. Tag keys for the same resource cannot be duplicated.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the user tag. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. May include characters from any language, numbers, spaces, underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), hyphens (-), and @.",
+						Description: "User tag value. Rules: Length must be between 0 and 256 characters. Case sensitive. Cannot start or end with a space. Allowed characters include all languages, numbers, spaces, parentheses (), underscores (_), periods (.), colons (:), slashes (/), equals signs (=), plus signs (+), minus signs (-), and @.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Listener tags.",
+			Description: "Tags associated with the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Time of the listener's most recent operation.",
+		//	  "description": "The most recent operation time of the listener.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Time of the listener's most recent operation.",
+			Description: "The most recent operation time of the listener.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

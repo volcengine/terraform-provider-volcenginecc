@@ -3,7 +3,7 @@
   "createOnlyProperties": [
     "/properties/UserName"
   ],
-  "description": "Access control (Identity and Access Management, abbreviated as IAM) is a permission management system provided by Volcano Engine for customers to control access to cloud resources by different identities.",
+  "description": "Access control (Identity and Access Management, IAM) is a permission management system provided by Volcano Engine to help customers control access to cloud resources for different identities",
   "filterProperties": {
     "filterableProperties": [
       "/properties/UserName"
@@ -55,37 +55,37 @@
   ],
   "properties": {
     "AccessKeyId": {
-      "description": "Access Key Id.",
+      "description": "Key ID (Access Key Id)",
       "semantic": "resourceId",
       "type": "string"
     },
     "CreatedTime": {
-      "description": "Key creation time. The time format is ISO8601.",
+      "description": "Key creation time (ISO8601 format)",
       "semantic": "createdTime",
       "type": "string"
     },
     "LastLoginDate": {
-      "description": "Last login time.",
+      "description": "Last login time",
       "type": "string"
     },
     "Region": {
-      "description": "The last region accessed by the API key.",
+      "description": "Last accessed region by the API key",
       "type": "string"
     },
     "RequestTime": {
-      "description": "The last time the API key was used.",
+      "description": "Last usage time of the API key",
       "type": "string"
     },
     "SecretAccessKey": {
-      "description": "Secret Access Key.",
+      "description": "Secret Access Key",
       "type": "string"
     },
     "Service": {
-      "description": "The English abbreviation of the last service accessed by the API key.",
+      "description": "English abbreviation of the last accessed service by the API key",
       "type": "string"
     },
     "Status": {
-      "description": "Key status. active means enabled, inactive means disabled.",
+      "description": "Key status. \"active\" means enabled, \"inactive\" means disabled",
       "enum": [
         "active",
         "inactive"
@@ -94,12 +94,12 @@
       "type": "string"
     },
     "UpdatedTime": {
-      "description": "Key update time. The time format is ISO8601.",
+      "description": "Key update time (ISO8601 format)",
       "semantic": "updatedTime",
       "type": "string"
     },
     "UserName": {
-      "description": "User name. Used to create a key for the specified IAM user. If no user name is specified, a key is created for the current request identity (that is, if the primary account makes the request, the key is created for the primary account itself; if an IAM user makes the request, the key is created for the IAM user. Note: Roles do not support creating keys for themselves). If the IAM user has the AccessKeySelfManageAccess permission and needs to create a key for themselves, they must include their own UserName in the request.",
+      "description": "User name. Used to create a key for a specified IAM user. If no user name is specified, the key is created for the current request identity (that is, if the main account requests, the key is created for the main account; if an IAM user requests, the key is created for that IAM user. Note: Roles cannot create keys for themselves). When an IAM user has the AccessKeySelfManageAccess permission, to create a key for themselves, they must include their own UserName in the request",
       "semantic": "resourceName",
       "type": "string"
     }
@@ -111,6 +111,7 @@
     "/properties/RequestTime",
     "/properties/Service",
     "/properties/UpdatedTime",
+    "/properties/LastLoginDate",
     "/properties/SecretAccessKey"
   ],
   "tagging": {

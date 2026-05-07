@@ -37,11 +37,11 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Whether to enable cross-zone load balancing for the server group. Values: on (default): enabled, off: disabled.",
+		//	  "description": "Enable cross-availability zone load balancing for the server group. Options: on (default): enabled; off: disabled.",
 		//	  "type": "string"
 		//	}
 		"cross_zone_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to enable cross-zone load balancing for the server group. Values: on (default): enabled, off: disabled.",
+			Description: "Enable cross-availability zone load balancing for the server group. Options: on (default): enabled; off: disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -59,15 +59,15 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Server group health check configuration information.",
+		//	  "description": "Health check configuration information for the server group.",
 		//	  "properties": {
 		//	    "Domain": {
-		//	      "description": "Domain name for health check. Configure this as the actual service address provided by the backend server. This parameter takes effect only when HealthCheck.Protocol is set to HTTP. The domain name must contain at least one '.', and cannot start or end with '.'. Each level of the domain name can contain letters, digits, '-', and '.' characters, and '-' cannot appear at the beginning or end of any level. Length: 1–128 characters. If this parameter is not specified or no value is provided, the default is empty, meaning the load balancer uses the private IP address of each backend server for health checks.",
+		//	      "description": "The domain name for health checks must be configured as the actual address used by the backend server to provide external services. This parameter is only effective when HealthCheck.Protocol is set to HTTP. The domain name must contain at least one '.', and cannot start or end with a '.'. Each level of the domain name can include letters, numbers, '-', and '.' characters, but '-' cannot appear at the beginning or end of any level. Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, it defaults to empty, meaning the load balancer uses the private IP address of each backend server for health checks.",
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
 		//	      "default": "on",
-		//	      "description": "Whether the listener enables health check. Values: on: enabled (default), off: disabled.",
+		//	      "description": "Whether the listener has enabled health check. Values: on: enabled (default), off: disabled.",
 		//	      "enum": [
 		//	        "on",
 		//	        "off"
@@ -76,19 +76,19 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "HealthyThreshold": {
 		//	      "default": 3,
-		//	      "description": "Health check threshold. Indicates the number of consecutive successful health checks required for a backend server to be considered healthy. Unit: times. Value range: 2–10. Default: 3.",
+		//	      "description": "Health check threshold. Indicates that a backend server is considered healthy if it passes the specified number of consecutive health checks. Unit: checks. Range: 2–10. Default: 3.",
 		//	      "format": "int64",
 		//	      "maximum": 10,
 		//	      "minimum": 2,
 		//	      "type": "integer"
 		//	    },
 		//	    "HttpCode": {
-		//	      "description": "HTTP status codes for a successful health check. Separate multiple codes with commas. This parameter is available only when HealthCheck.Protocol is HTTP. Valid values: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
+		//	      "description": "HTTP status codes indicating a successful health check. Use commas to separate multiple codes. This parameter is only available when HealthCheck.Protocol is set to HTTP. Valid values: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
 		//	      "type": "string"
 		//	    },
 		//	    "HttpVersion": {
 		//	      "default": "HTTP1.0",
-		//	      "description": "Health check HTTP protocol version. This parameter is available only when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default for API usage), HTTP1.1.",
+		//	      "description": "HTTP protocol version for health checks. This parameter is only available when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default when using API), HTTP1.1.",
 		//	      "enum": [
 		//	        "HTTP1.0",
 		//	        "HTTP1.1"
@@ -97,7 +97,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "Interval": {
 		//	      "default": 2,
-		//	      "description": "After health checks are enabled, the interval for performing health checks. Unit: seconds. Value range: 1–300s. Default: 2.",
+		//	      "description": "After enabling health check, the interval for performing health checks. Unit: seconds. Range: 1–300s. Default: 2.",
 		//	      "format": "int64",
 		//	      "maximum": 300,
 		//	      "minimum": 1,
@@ -105,7 +105,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "Method": {
 		//	      "default": "HEAD",
-		//	      "description": "Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.",
+		//	      "description": "After enabling health check, the health check method. This parameter is effective only when HealthCheck.Protocol is set to HTTP. Values: GET: server must support the GET method. HEAD (default): server returns only HEAD header information, which can reduce backend performance consumption, but the server must support the HEAD method.",
 		//	      "enum": [
 		//	        "GET",
 		//	        "HEAD"
@@ -128,19 +128,19 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "Timeout": {
 		//	      "default": 2,
-		//	      "description": "Health check response timeout. If the backend server does not respond correctly within the specified time, the health check is considered abnormal. Unit: seconds. Value range: 1–60. Default: 2.",
+		//	      "description": "Health check response timeout. If the backend server does not respond correctly within the specified time, it is considered a health check failure. Unit: seconds; range: 1~60; default: 2.",
 		//	      "format": "int64",
 		//	      "maximum": 60,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "URI": {
-		//	      "description": "Health check path. Must be configured as the actual path provided by the backend server. This parameter is only effective when HealthCheck.Protocol is set to HTTP. Must start with '/'. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '\u0026', '=' are allowed. Length: 1–128 characters. If this parameter is not specified or specified without a value, the default is '/'.",
+		//	      "description": "Health check path, which must be configured as the actual path provided by the backend server. This parameter is effective only when HealthCheck.Protocol is set to HTTP. Must start with '/'. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '\u0026', '=' are allowed. Length must be between 1 and 128 characters. If this parameter is not specified or no value is provided, the default is '/'.",
 		//	      "type": "string"
 		//	    },
 		//	    "UnhealthyThreshold": {
 		//	      "default": 3,
-		//	      "description": "Unhealthy threshold for health checks. Indicates that a backend server is considered unhealthy if it fails the specified number of consecutive health checks. Unit: times. Range: 2–10. Default: 3.",
+		//	      "description": "Unhealthy threshold for health checks. If a backend server fails the specified number of consecutive health checks, it will be considered unhealthy. Unit: times. Value range: 2–10. Default: 3.",
 		//	      "format": "int64",
 		//	      "maximum": 10,
 		//	      "minimum": 2,
@@ -156,37 +156,37 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Domain
 				"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Domain name for health check. Configure this as the actual service address provided by the backend server. This parameter takes effect only when HealthCheck.Protocol is set to HTTP. The domain name must contain at least one '.', and cannot start or end with '.'. Each level of the domain name can contain letters, digits, '-', and '.' characters, and '-' cannot appear at the beginning or end of any level. Length: 1–128 characters. If this parameter is not specified or no value is provided, the default is empty, meaning the load balancer uses the private IP address of each backend server for health checks.",
+					Description: "The domain name for health checks must be configured as the actual address used by the backend server to provide external services. This parameter is only effective when HealthCheck.Protocol is set to HTTP. The domain name must contain at least one '.', and cannot start or end with a '.'. Each level of the domain name can include letters, numbers, '-', and '.' characters, but '-' cannot appear at the beginning or end of any level. Length must be between 1 and 128 characters. If this parameter is not provided or no value is specified, it defaults to empty, meaning the load balancer uses the private IP address of each backend server for health checks.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the listener enables health check. Values: on: enabled (default), off: disabled.",
+					Description: "Whether the listener has enabled health check. Values: on: enabled (default), off: disabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HealthyThreshold
 				"healthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Health check threshold. Indicates the number of consecutive successful health checks required for a backend server to be considered healthy. Unit: times. Value range: 2–10. Default: 3.",
+					Description: "Health check threshold. Indicates that a backend server is considered healthy if it passes the specified number of consecutive health checks. Unit: checks. Range: 2–10. Default: 3.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HttpCode
 				"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "HTTP status codes for a successful health check. Separate multiple codes with commas. This parameter is available only when HealthCheck.Protocol is HTTP. Valid values: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
+					Description: "HTTP status codes indicating a successful health check. Use commas to separate multiple codes. This parameter is only available when HealthCheck.Protocol is set to HTTP. Valid values: http_2xx (default), http_3xx (default), http_4xx, http_5xx.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: HttpVersion
 				"http_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Health check HTTP protocol version. This parameter is available only when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default for API usage), HTTP1.1.",
+					Description: "HTTP protocol version for health checks. This parameter is only available when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default when using API), HTTP1.1.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Interval
 				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "After health checks are enabled, the interval for performing health checks. Unit: seconds. Value range: 1–300s. Default: 2.",
+					Description: "After enabling health check, the interval for performing health checks. Unit: seconds. Range: 1–300s. Default: 2.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Method
 				"method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.",
+					Description: "After enabling health check, the health check method. This parameter is effective only when HealthCheck.Protocol is set to HTTP. Values: GET: server must support the GET method. HEAD (default): server returns only HEAD header information, which can reduce backend performance consumption, but the server must support the HEAD method.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Port
@@ -201,32 +201,32 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Timeout
 				"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Health check response timeout. If the backend server does not respond correctly within the specified time, the health check is considered abnormal. Unit: seconds. Value range: 1–60. Default: 2.",
+					Description: "Health check response timeout. If the backend server does not respond correctly within the specified time, it is considered a health check failure. Unit: seconds; range: 1~60; default: 2.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: URI
 				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Health check path. Must be configured as the actual path provided by the backend server. This parameter is only effective when HealthCheck.Protocol is set to HTTP. Must start with '/'. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '&', '=' are allowed. Length: 1–128 characters. If this parameter is not specified or specified without a value, the default is '/'.",
+					Description: "Health check path, which must be configured as the actual path provided by the backend server. This parameter is effective only when HealthCheck.Protocol is set to HTTP. Must start with '/'. Only letters, numbers, '-', '_', '/', '.', '%', '?', '#', '&', '=' are allowed. Length must be between 1 and 128 characters. If this parameter is not specified or no value is provided, the default is '/'.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: UnhealthyThreshold
 				"unhealthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Unhealthy threshold for health checks. Indicates that a backend server is considered unhealthy if it fails the specified number of consecutive health checks. Unit: times. Range: 2–10. Default: 3.",
+					Description: "Unhealthy threshold for health checks. If a backend server fails the specified number of consecutive health checks, it will be considered unhealthy. Unit: times. Value range: 2–10. Default: 3.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Server group health check configuration information.",
+			Description: "Health check configuration information for the server group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IPAddressType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "IP address type of the server group. Only IPv4 is supported.",
+		//	  "description": "IP address type of the server group. Currently, only IPv4 is supported.",
 		//	  "type": "string"
 		//	}
 		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP address type of the server group. Only IPv4 is supported.",
+			Description: "IP address type of the server group. Currently, only IPv4 is supported.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Listeners
@@ -294,7 +294,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "wrr",
-		//	  "description": "Scheduling algorithm. Parameter values: wrr: Weighted round robin. wlc: Weighted least connections. sh: Source IP hash.",
+		//	  "description": "Scheduling algorithm. Options: wrr: weighted round robin; wlc: weighted least connection; sh: source address hash.",
 		//	  "enum": [
 		//	    "wrr",
 		//	    "wlc",
@@ -303,7 +303,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"scheduler": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Scheduling algorithm. Parameter values: wrr: Weighted round robin. wlc: Weighted least connections. sh: Source IP hash.",
+			Description: "Scheduling algorithm. Options: wrr: weighted round robin; wlc: weighted least connection; sh: source address hash.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerCount
@@ -322,22 +322,22 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ID of the backend server group.",
+		//	  "description": "Backend server group ID.",
 		//	  "type": "string"
 		//	}
 		"server_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the backend server group.",
+			Description: "Backend server group ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroupName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Name of the backend server group.",
+		//	  "description": "Backend server group name.",
 		//	  "type": "string"
 		//	}
 		"server_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the backend server group.",
+			Description: "Backend server group name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServerGroupType
@@ -345,7 +345,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "instance",
-		//	  "description": "Type of backend server group. instance: Server type. This type of server group supports adding ECS and ENI instances as backend servers. ip: IP type. This type of server group supports adding IP addresses as backend servers.",
+		//	  "description": "Type of backend server group. instance: server type, supports adding ECS and ENI instances as backend servers. ip: IP type, supports adding IP addresses as backend servers.",
 		//	  "enum": [
 		//	    "instance",
 		//	    "ip"
@@ -353,14 +353,14 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"server_group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Type of backend server group. instance: Server type. This type of server group supports adding ECS and ENI instances as backend servers. ip: IP type. This type of server group supports adding IP addresses as backend servers.",
+			Description: "Type of backend server group. instance: server type, supports adding ECS and ENI instances as backend servers. ip: IP type, supports adding IP addresses as backend servers.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Servers
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Information about servers in the backend server group.",
+		//	  "description": "Information about the servers in the backend server group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
@@ -369,7 +369,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "InstanceId": {
-		//	        "description": "ID of the cloud server instance or network interface card.",
+		//	        "description": "ID of the cloud server instance or network interface.",
 		//	        "type": "string"
 		//	      },
 		//	      "Ip": {
@@ -383,7 +383,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "RemoteEnabled": {
 		//	        "default": "off",
-		//	        "description": "Enable remote IP feature. This field is valid only when the backend server instance type is IP address, that is, when Type is set to ip. Parameter values: on: Enable. off (default): Disable.",
+		//	        "description": "Enable remote IP feature. This field is valid when the backend server instance type is IP address, that is, when Type is set to ip. Values: on: enabled. off (default): disabled.",
 		//	        "enum": [
 		//	          "on",
 		//	          "off"
@@ -395,7 +395,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "Backend server instance type. ecs: ECS instance. eni: auxiliary ENI. ip: IP address (valid only for IP-type server groups).",
+		//	        "description": "Backend server instance type. ECS: cloud server instance; ENI: secondary network interface; IP: IP address (only valid for IP-type server groups).",
 		//	        "enum": [
 		//	          "ecs",
 		//	          "eni",
@@ -404,7 +404,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {
-		//	        "description": "Weight of the backend server.",
+		//	        "description": "Backend server weight.",
 		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      }
@@ -431,7 +431,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "ID of the cloud server instance or network interface card.",
+						Description: "ID of the cloud server instance or network interface.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ip
@@ -446,7 +446,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RemoteEnabled
 					"remote_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Enable remote IP feature. This field is valid only when the backend server instance type is IP address, that is, when Type is set to ip. Parameter values: on: Enable. off (default): Disable.",
+						Description: "Enable remote IP feature. This field is valid when the backend server instance type is IP address, that is, when Type is set to ip. Values: on: enabled. off (default): disabled.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ServerId
@@ -456,24 +456,24 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Backend server instance type. ecs: ECS instance. eni: auxiliary ENI. ip: IP address (valid only for IP-type server groups).",
+						Description: "Backend server instance type. ECS: cloud server instance; ENI: secondary network interface; IP: IP address (only valid for IP-type server groups).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "Weight of the backend server.",
+						Description: "Backend server weight.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Information about servers in the backend server group.",
+			Description: "Information about the servers in the backend server group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Server group status. Creating: creating. Active: running. Configuring: configuring. Deleting: deleting.",
+		//	  "description": "Server group status. Creating: Being created. Active: Running. Configuring: Being configured. Deleting: Being deleted.",
 		//	  "enum": [
 		//	    "Creating",
 		//	    "Active",
@@ -483,7 +483,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Server group status. Creating: creating. Active: running. Configuring: configuring. Deleting: deleting.",
+			Description: "Server group status. Creating: Being created. Active: Running. Configuring: Being configured. Deleting: Being deleted.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StickySessionConfig
@@ -493,14 +493,14 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Session persistence parameter information.",
 		//	  "properties": {
 		//	    "Cookie": {
-		//	      "description": "Name of the session persistence Cookie for service configuration. This is only valid when session persistence is enabled and Cookie overwrite is selected. The specific rules are as follows: The Cookie name must be 1–200 characters long. The name can only contain ASCII letters and digits, cannot contain commas (,), semicolons (;), or spaces, and cannot start with a dollar sign ($). This parameter is required when tickySessionConfig.StickySessionEnabled is set to on and StickySessionConfig.StickySessionType is server. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert.",
+		//	      "description": "Session persistence cookie name configured for the service. Only valid when session persistence is enabled and cookie rewrite is selected. Rules: Cookie name length must be 1–200 characters. The name can only contain ASCII letters and numbers, cannot include commas (,), semicolons (;), or spaces, and cannot start with a dollar sign ($). When stickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is server, this parameter is required. When StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert, this parameter is invalid.",
 		//	      "maxLength": 200,
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
 		//	    "CookieTimeout": {
 		//	      "default": 1000,
-		//	      "description": "Session persistence cookie timeout. Only valid when session persistence is enabled and the insert cookie option is selected. Unit: seconds. Rules: Timeout range: 1–86400. Default: 1000. This parameter is required when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionType is server.",
+		//	      "description": "Session persistence cookie timeout. Only effective when session persistence is enabled and cookie insertion is selected. Unit: seconds. Rules: timeout range: 1~86400; default: 1000. This parameter is required when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionType is server.",
 		//	      "format": "int64",
 		//	      "maximum": 86400,
 		//	      "minimum": 0,
@@ -516,7 +516,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "StickySessionType": {
-		//	      "description": "Cookie handling method. This field is required when StickySessionConfig.StickySessionEnabled is set to on. Parameter values: insert: Inserts a Cookie. ALB records the backend server to which the client's first request is forwarded. ALB inserts a Cookie in the response. Subsequent client requests carry this Cookie, and ALB forwards the requests to the previously recorded backend server. server: Overwrites the Cookie. When session persistence with Cookie overwrite is enabled, after the client's first request is forwarded to the backend server, if ALB detects your custom Cookie in the response, it overwrites the original Cookie. Subsequent client requests carry the overwritten Cookie, and ALB forwards the requests to the previously recorded backend server.",
+		//	      "description": "Cookie handling method. When StickySessionConfig.StickySessionEnabled is set to on, this field is required. Values: insert: Insert a Cookie. ALB records the backend server to which the client's first request is forwarded. ALB inserts a Cookie in the response, and subsequent client requests carrying this Cookie are forwarded to the previously recorded backend server. server: Rewrite the Cookie. When session persistence with Cookie rewriting is enabled, after the client's first request is forwarded to the backend server, if ALB finds your custom Cookie in the response, it rewrites the original Cookie. Subsequent client requests carrying the rewritten Cookie are forwarded to the previously recorded backend server.",
 		//	      "enum": [
 		//	        "insert",
 		//	        "server"
@@ -530,12 +530,12 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Cookie
 				"cookie": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Name of the session persistence Cookie for service configuration. This is only valid when session persistence is enabled and Cookie overwrite is selected. The specific rules are as follows: The Cookie name must be 1–200 characters long. The name can only contain ASCII letters and digits, cannot contain commas (,), semicolons (;), or spaces, and cannot start with a dollar sign ($). This parameter is required when tickySessionConfig.StickySessionEnabled is set to on and StickySessionConfig.StickySessionType is server. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert.",
+					Description: "Session persistence cookie name configured for the service. Only valid when session persistence is enabled and cookie rewrite is selected. Rules: Cookie name length must be 1–200 characters. The name can only contain ASCII letters and numbers, cannot include commas (,), semicolons (;), or spaces, and cannot start with a dollar sign ($). When stickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is server, this parameter is required. When StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert, this parameter is invalid.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CookieTimeout
 				"cookie_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Session persistence cookie timeout. Only valid when session persistence is enabled and the insert cookie option is selected. Unit: seconds. Rules: Timeout range: 1–86400. Default: 1000. This parameter is required when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionType is server.",
+					Description: "Session persistence cookie timeout. Only effective when session persistence is enabled and cookie insertion is selected. Unit: seconds. Rules: timeout range: 1~86400; default: 1000. This parameter is required when StickySessionConfig.StickySessionEnabled is on and StickySessionConfig.StickySessionType is insert. This parameter is invalid when StickySessionConfig.StickySessionEnabled is on and StickySessionType is server.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StickySessionEnabled
@@ -545,7 +545,7 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StickySessionType
 				"sticky_session_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Cookie handling method. This field is required when StickySessionConfig.StickySessionEnabled is set to on. Parameter values: insert: Inserts a Cookie. ALB records the backend server to which the client's first request is forwarded. ALB inserts a Cookie in the response. Subsequent client requests carry this Cookie, and ALB forwards the requests to the previously recorded backend server. server: Overwrites the Cookie. When session persistence with Cookie overwrite is enabled, after the client's first request is forwarded to the backend server, if ALB detects your custom Cookie in the response, it overwrites the original Cookie. Subsequent client requests carry the overwritten Cookie, and ALB forwards the requests to the previously recorded backend server.",
+					Description: "Cookie handling method. When StickySessionConfig.StickySessionEnabled is set to on, this field is required. Values: insert: Insert a Cookie. ALB records the backend server to which the client's first request is forwarded. ALB inserts a Cookie in the response, and subsequent client requests carrying this Cookie are forwarded to the previously recorded backend server. server: Rewrite the Cookie. When session persistence with Cookie rewriting is enabled, after the client's first request is forwarded to the backend server, if ALB finds your custom Cookie in the response, it rewrites the original Cookie. Subsequent client requests carrying the rewritten Cookie are forwarded to the previously recorded backend server.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -561,11 +561,11 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "Tag key. Tag keys for the same resource must be unique.",
+		//	        "description": "Tag key. Duplicate tag keys are not allowed for the same resource.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "Tag value of the tag.",
+		//	        "description": "Tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -583,12 +583,12 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag key. Tag keys for the same resource must be unique.",
+						Description: "Tag key. Duplicate tag keys are not allowed for the same resource.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag value of the tag.",
+						Description: "Tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

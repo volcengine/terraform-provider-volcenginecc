@@ -195,6 +195,10 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cen_inter_region_bandwidths -cctype Volcengine::CEN::InterRegionBandwidth -package cen ../volcengine/cen/inter_region_bandwidth_plural_data_source_gen.go ../volcengine/cen/inter_region_bandwidth_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rabbitmq_allow_lists -cctype Volcengine::RabbitMQ::AllowList -package rabbitmq ../volcengine/rabbitmq/allow_list_plural_data_source_gen.go ../volcengine/rabbitmq/allow_list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_rules -cctype Volcengine::TLS::Rule -package tls ../volcengine/tls/rule_plural_data_source_gen.go ../volcengine/tls/rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cr_endpoint_acl_policies -cctype Volcengine::CR::EndpointAclPolicy -package cr ../volcengine/cr/endpoint_acl_policy_plural_data_source_gen.go ../volcengine/cr/endpoint_acl_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpn_ssl_vpn_client_certs -cctype Volcengine::VPN::SslVpnClientCert -package vpn ../volcengine/vpn/ssl_vpn_client_cert_plural_data_source_gen.go ../volcengine/vpn/ssl_vpn_client_cert_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_transitrouter_peer_attachments -cctype Volcengine::TransitRouter::PeerAttachment -package transitrouter ../volcengine/transitrouter/peer_attachment_plural_data_source_gen.go ../volcengine/transitrouter/peer_attachment_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_service_control_policies -cctype Volcengine::Organization::ServiceControlPolicy -package organization ../volcengine/organization/service_control_policy_plural_data_source_gen.go ../volcengine/organization/service_control_policy_plural_data_source_gen_test.go
 
 package provider
 

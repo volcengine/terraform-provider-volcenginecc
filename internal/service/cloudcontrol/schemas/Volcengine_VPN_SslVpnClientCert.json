@@ -1,0 +1,159 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/SslVpnServerId",
+    "/properties/Tags"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Tag information.",
+      "properties": {
+        "Key": {
+          "description": "Tag key (Key) for SSL client certificate tags. Parameter - N: indicates the sequence number of the tag key, range: 1–20. Multiple tag keys are separated by \u0026. Naming rules: Cannot start with any combination of 'sys:' in any case. Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Length must be between 1–128 characters. Note: Duplicate tag keys are not allowed for the same resource.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value (Value) for SSL client certificate tags. Parameter - N: indicates the sequence number of the tag value, range: 1–20. Multiple tag values are separated by \u0026. Naming rules: Can only contain language characters, numbers, spaces, and English symbols '_', '.', ':', '/', '=', '+', '-', '@'. Can be empty, length must be between 0–256 characters. Case-sensitive, cannot start or end with a space. Note: If Tags.N.Value is provided, Tags.N.Key must also be provided.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "SSL client certificate is a sub-resource of the SSL server.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/SslVpnClientCertId",
+      "/properties/SslVpnClientCertName",
+      "/properties/SslVpnServerId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpn:CreateSslVpnClientCert",
+        "vpn:DescribeSslVpnClientCertAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpn:DeleteSslVpnClientCert",
+        "vpn:DescribeSslVpnClientCertAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpn:DescribeSslVpnClientCerts"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpn:DescribeSslVpnClientCertAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpn:ModifySslVpnClientCert",
+        "vpn:DescribeSslVpnClientCertAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SslVpnClientCertId"
+  ],
+  "properties": {
+    "CaCertificate": {
+      "description": "CA certificate information.",
+      "type": "string"
+    },
+    "CertificateStatus": {
+      "description": "SSL client certificate status. Available: available; Expiring: expiring, displays this status when the expiration time is less than or equal to one week; Expired: expired.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "ClientCertificate": {
+      "description": "Client certificate information.",
+      "type": "string"
+    },
+    "ClientKey": {
+      "description": "Client key information.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Creation time of the SSL client certificate.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the SSL client certificate. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space ( ), underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), and Chinese period (。). Length must be between 0–255 characters. If not specified, defaults to an empty string.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "ExpiredTime": {
+      "description": "Expiration time of the SSL client certificate.",
+      "type": "string"
+    },
+    "OpenVpnClientConfig": {
+      "description": "OpenVPN client configuration.",
+      "type": "string"
+    },
+    "SslVpnClientCertId": {
+      "description": "SSL client certificate ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SslVpnClientCertName": {
+      "description": "Name of the SSL client certificate. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), underscore (_), and hyphen (-). Length must be between 1–128 characters. If not specified, defaults to the SSL client certificate ID.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "SslVpnServerId": {
+      "description": "ID of the SSL server used to create the SSL client certificate. You can call DescribeSslVpnServers to query the SSL server ID information.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "SSL client status. Creating: being created; Deleting: being deleted; Pending: being configured; Available: available.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "SSL client certificate tags.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Modification time of the SSL client certificate.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CaCertificate",
+    "/properties/CertificateStatus",
+    "/properties/ClientCertificate",
+    "/properties/ClientKey",
+    "/properties/CreationTime",
+    "/properties/ExpiredTime",
+    "/properties/OpenVpnClientConfig",
+    "/properties/SslVpnClientCertId",
+    "/properties/Status",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "SslVpnServerId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPN::SslVpnClientCert"
+}
