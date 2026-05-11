@@ -24,10 +24,12 @@ Data Source schema for Volcengine::Redis::Instance
 - `allow_list_ids` (Set of String) Allowlist ID list. If left empty, the new instance will not be added to any allowlist by default. You can call the DescribeAllowLists API to query all IP allowlist information, including allowlist IDs, for the specified region under your account. Each instance supports binding up to 100 allowlists, and you can batch bind up to 100 allowlists at a time. Each instance supports binding up to 1000 IP addresses or CIDR-format IP address ranges.
 - `auto_renew` (Boolean) Whether to enable auto-renewal. Value options: false (default): Disabled; true: Enabled.
 - `backup_point_name` (String) Set a backup name for the full backup created before changes.
+- `backup_restore` (Attributes) Restore data from the backup set to the original Redis instance. (see [below for nested schema](#nestedatt--backup_restore))
 - `blue_green_role` (String) Blue-green deployment role of the instance. Valid values: Blue: blue instance. Green: green instance. This parameter is returned only for Redis instances that have used the blue-green deployment feature.
 - `capacity` (Attributes) Capacity information of the instance. (see [below for nested schema](#nestedatt--capacity))
 - `charge_type` (String) Instance billing type. Value options: PrePaid: Subscription (also called prepaid). PostPaid: Pay-as-you-go (also called postpaid).
 - `configure_nodes` (Attributes List) Set the list of availability zones to which the node belongs. (see [below for nested schema](#nestedatt--configure_nodes))
+- `continuous_backup` (Boolean) Enable data flashback
 - `create_backup` (Boolean) Whether to create a backup before making changes.
 - `create_time` (String) Creation time of the instance.
 - `data_layout` (String) Data storage type of the instance. This parameter is only relevant for Enterprise Edition instances (ServiceType=Enterprise). Community Edition instances (ServiceType=Basic) do not involve data storage type, and DataLayout is always set to RAM. If this parameter is left empty, data storage type is not used as a filter.
@@ -65,6 +67,16 @@ Data Source schema for Volcengine::Redis::Instance
 - `vpc_auth_mode` (String) Enable or disable password-free access. Valid values: open: enable password-free access; close: disable password-free access. Values are case-insensitive.
 - `vpc_id` (String) Set the private network ID for the instance. It is recommended that the Redis instance and the ECS instance you want to connect to are in the same private network; otherwise, they cannot communicate optimally via the internal network. You can call the CreateVpc API to create a private network. You can call the DescribeVpcs API to query private network information that meets specified conditions, including the private network ID.
 - `zone_ids` (Set of String) List of available zones where the instance is located.
+
+<a id="nestedatt--backup_restore"></a>
+### Nested Schema for `backup_restore`
+
+Read-Only:
+
+- `backup_point_id` (String) Backup ID, used to specify which backup to use when restoring from a backup set
+- `backup_type` (String) Recovery method
+- `time_point` (String) Used to specify the point in time for point-in-time recovery
+
 
 <a id="nestedatt--capacity"></a>
 ### Nested Schema for `capacity`

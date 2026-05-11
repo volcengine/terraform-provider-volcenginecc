@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
@@ -107,6 +108,85 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RecordSets
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Record set list",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "properties": {
+		//	      "FQDN": {
+		//	        "description": "Full domain name",
+		//	        "type": "string"
+		//	      },
+		//	      "Host": {
+		//	        "description": "Subdomain prefix",
+		//	        "type": "string"
+		//	      },
+		//	      "ID": {
+		//	        "description": "Record set ID",
+		//	        "type": "string"
+		//	      },
+		//	      "Line": {
+		//	        "description": "Resolution line",
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "description": "Record type",
+		//	        "type": "string"
+		//	      },
+		//	      "WeightEnabled": {
+		//	        "description": "Load balancing enabled",
+		//	        "type": "boolean"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"record_sets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FQDN
+					"fqdn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Full domain name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Host
+					"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Subdomain prefix",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ID
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Record set ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Line
+					"line": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Resolution line",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Record type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: WeightEnabled
+					"weight_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Load balancing enabled",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Record set list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Remark
@@ -241,10 +321,13 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":     "CreatedAt",
 		"enable":         "Enable",
+		"fqdn":           "FQDN",
 		"host":           "Host",
+		"id":             "ID",
 		"last_operator":  "LastOperator",
 		"line":           "Line",
 		"record_id":      "RecordId",
+		"record_sets":    "RecordSets",
 		"remark":         "Remark",
 		"ttl":            "TTL",
 		"type":           "Type",
@@ -264,6 +347,7 @@ func recordResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CreatedAt",
 		"/properties/UpdatedAt",
 		"/properties/LastOperator",
+		"/properties/RecordSets",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

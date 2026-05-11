@@ -199,6 +199,9 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpn_ssl_vpn_client_certs -cctype Volcengine::VPN::SslVpnClientCert -package vpn ../volcengine/vpn/ssl_vpn_client_cert_plural_data_source_gen.go ../volcengine/vpn/ssl_vpn_client_cert_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_transitrouter_peer_attachments -cctype Volcengine::TransitRouter::PeerAttachment -package transitrouter ../volcengine/transitrouter/peer_attachment_plural_data_source_gen.go ../volcengine/transitrouter/peer_attachment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_service_control_policies -cctype Volcengine::Organization::ServiceControlPolicy -package organization ../volcengine/organization/service_control_policy_plural_data_source_gen.go ../volcengine/organization/service_control_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tos_bucket_notifications -cctype Volcengine::TOS::BucketNotification -package tos ../volcengine/tos/bucket_notification_plural_data_source_gen.go ../volcengine/tos/bucket_notification_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tos_bucket_realtime_logs -cctype Volcengine::TOS::BucketRealtimeLog -package tos ../volcengine/tos/bucket_realtime_log_plural_data_source_gen.go ../volcengine/tos/bucket_realtime_log_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmysql_parameter_templates -cctype Volcengine::RDSMySQL::ParameterTemplate -package rdsmysql ../volcengine/rdsmysql/parameter_template_plural_data_source_gen.go ../volcengine/rdsmysql/parameter_template_plural_data_source_gen_test.go
 
 package provider
 

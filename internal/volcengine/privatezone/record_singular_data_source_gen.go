@@ -88,6 +88,82 @@ func recordDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "DNS record ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RecordSets
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Record set list",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "properties": {
+		//	      "FQDN": {
+		//	        "description": "Full domain name",
+		//	        "type": "string"
+		//	      },
+		//	      "Host": {
+		//	        "description": "Subdomain prefix",
+		//	        "type": "string"
+		//	      },
+		//	      "ID": {
+		//	        "description": "Record set ID",
+		//	        "type": "string"
+		//	      },
+		//	      "Line": {
+		//	        "description": "Resolution line",
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "description": "Record type",
+		//	        "type": "string"
+		//	      },
+		//	      "WeightEnabled": {
+		//	        "description": "Load balancing enabled",
+		//	        "type": "boolean"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"record_sets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FQDN
+					"fqdn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Full domain name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Host
+					"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Subdomain prefix",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ID
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Record set ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Line
+					"line": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Resolution line",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Record type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: WeightEnabled
+					"weight_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Load balancing enabled",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Record set list",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Remark
 		// Cloud Control resource type schema:
 		//
@@ -195,10 +271,13 @@ func recordDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":     "CreatedAt",
 		"enable":         "Enable",
+		"fqdn":           "FQDN",
 		"host":           "Host",
+		"id":             "ID",
 		"last_operator":  "LastOperator",
 		"line":           "Line",
 		"record_id":      "RecordId",
+		"record_sets":    "RecordSets",
 		"remark":         "Remark",
 		"ttl":            "TTL",
 		"type":           "Type",

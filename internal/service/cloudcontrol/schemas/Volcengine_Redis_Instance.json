@@ -2,6 +2,8 @@
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/AllowListIds",
+    "/properties/MultiAZ",
+    "/properties/Password",
     "/properties/EngineVersion",
     "/properties/Port",
     "/properties/ProjectName",
@@ -14,6 +16,23 @@
     "/properties/NodeNumber"
   ],
   "definitions": {
+    "BackupRestore": {
+      "properties": {
+        "BackupPointId": {
+          "description": "Backup ID, used to specify which backup to use when restoring from a backup set",
+          "type": "string"
+        },
+        "BackupType": {
+          "description": "Recovery method",
+          "type": "string"
+        },
+        "TimePoint": {
+          "description": "Used to specify the point in time for point-in-time recovery",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Capacity": {
       "properties": {
         "Total": {
@@ -163,7 +182,8 @@
         "Redis:DescribeDBInstances",
         "Redis:DescribeDBInstanceDetail",
         "Redis:DescribeNodeIds",
-        "Redis:DescribeDBInstanceShards"
+        "Redis:DescribeDBInstanceShards",
+        "Redis:StartContinuousBackup"
       ]
     },
     "delete": {
@@ -196,6 +216,9 @@
         "Redis:ModifyDBInstanceShardNumber",
         "Redis:ModifyDBInstanceChargeType",
         "Redis:DescribeDBInstances",
+        "Redis:RestoreDBInstance",
+        "Redis:StartContinuousBackup",
+        "Redis:StopContinuousBackup",
         "Redis:DescribeNodeIds",
         "Redis:DescribeDBInstanceShards"
       ]
@@ -223,6 +246,11 @@
       "description": "Set a backup name for the full backup created before changes.",
       "type": "string"
     },
+    "BackupRestore": {
+      "$ref": "#/definitions/BackupRestore",
+      "description": "Restore data from the backup set to the original Redis instance.",
+      "type": "object"
+    },
     "BlueGreenRole": {
       "description": "Blue-green deployment role of the instance. Valid values: Blue: blue instance. Green: green instance. This parameter is returned only for Redis instances that have used the blue-green deployment feature.",
       "type": "string"
@@ -247,6 +275,10 @@
       },
       "type": "array",
       "uniqueItems": false
+    },
+    "ContinuousBackup": {
+      "description": "Enable data flashback",
+      "type": "boolean"
     },
     "CreateBackup": {
       "description": "Whether to create a backup before making changes.",
@@ -376,7 +408,6 @@
       "type": "string"
     },
     "ProjectName": {
-      "default": "default",
       "description": "Project to which the instance belongs.",
       "semantic": "projectName",
       "type": "string"
@@ -526,6 +557,8 @@
     "/properties/Password",
     "/properties/Port",
     "/properties/PurchaseMonths",
+    "/properties/BackupRestore",
+    "/properties/ContinuousBackup",
     "/properties/ReserveAdditionalBandwidth"
   ]
 }

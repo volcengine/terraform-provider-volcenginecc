@@ -803,3 +803,20 @@ resource_schema "volcengine_transitrouter_peer_attachment" {
 resource_schema "volcengine_organization_service_control_policy" {
   cloudcontrol_type_name = "Volcengine::Organization::ServiceControlPolicy"
 }
+
+resource_schema "volcengine_tos_bucket_notification" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketNotification"
+}
+
+resource_schema "volcengine_tos_bucket_realtime_log" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketRealtimeLog"
+}
+
+resource_schema "volcengine_tos_bucket_cors" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketCors"
+  suppress_plural_data_source_generation= true
+}
+
+resource_schema "volcengine_rdsmysql_parameter_template" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::ParameterTemplate"
+}

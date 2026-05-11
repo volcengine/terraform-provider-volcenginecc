@@ -1,0 +1,77 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BucketName",
+    "/properties/RealTimeLog"
+  ],
+  "definitions": {
+    "RealTimeLog": {
+      "properties": {
+        "Role": {
+          "description": "Role name. Used to grant TOS Object Storage permission to create resources such as projects and topics in Log Service TLS and to write logs",
+          "type": "string"
+        },
+        "TLSProjectID": {
+          "description": "Log project ID",
+          "type": "string"
+        },
+        "TLSTopicID": {
+          "description": "Log topic ID",
+          "type": "string"
+        },
+        "UseServiceTopic": {
+          "description": "For topics created using the TOS service, only \"true\" is allowed as a value",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Role",
+        "UseServiceTopic"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Log analysis feature",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tos:PutBucketRealTimeLog",
+        "tos:GetBucketRealTimeLog"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tos:DeleteBucketRealTimeLog",
+        "tos:GetBucketRealTimeLog"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tos:GetBucketRealTimeLog"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/BucketName"
+  ],
+  "properties": {
+    "BucketName": {
+      "description": "Bucket name",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RealTimeLog": {
+      "$ref": "#/definitions/RealTimeLog",
+      "description": "Log analysis feature for the bucket",
+      "type": "object"
+    }
+  },
+  "required": [
+    "BucketName",
+    "RealTimeLog"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TOS::BucketRealtimeLog"
+}

@@ -63,6 +63,48 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Set a backup name for the full backup created before changes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BackupRestore
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Restore data from the backup set to the original Redis instance.",
+		//	  "properties": {
+		//	    "BackupPointId": {
+		//	      "description": "Backup ID, used to specify which backup to use when restoring from a backup set",
+		//	      "type": "string"
+		//	    },
+		//	    "BackupType": {
+		//	      "description": "Recovery method",
+		//	      "type": "string"
+		//	    },
+		//	    "TimePoint": {
+		//	      "description": "Used to specify the point in time for point-in-time recovery",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"backup_restore": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BackupPointId
+				"backup_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Backup ID, used to specify which backup to use when restoring from a backup set",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BackupType
+				"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Recovery method",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimePoint
+				"time_point": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Used to specify the point in time for point-in-time recovery",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Restore data from the backup set to the original Redis instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlueGreenRole
 		// Cloud Control resource type schema:
 		//
@@ -153,6 +195,17 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Set the list of availability zones to which the node belongs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ContinuousBackup
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Enable data flashback",
+		//	  "type": "boolean"
+		//	}
+		"continuous_backup": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable data flashback",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateBackup
@@ -522,7 +575,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "default",
 		//	  "description": "Project to which the instance belongs.",
 		//	  "type": "string"
 		//	}
@@ -841,11 +893,15 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"allow_list_ids":               "AllowListIds",
 		"auto_renew":                   "AutoRenew",
 		"az":                           "AZ",
+		"backup_point_id":              "BackupPointId",
 		"backup_point_name":            "BackupPointName",
+		"backup_restore":               "BackupRestore",
+		"backup_type":                  "BackupType",
 		"blue_green_role":              "BlueGreenRole",
 		"capacity":                     "Capacity",
 		"charge_type":                  "ChargeType",
 		"configure_nodes":              "ConfigureNodes",
+		"continuous_backup":            "ContinuousBackup",
 		"create_backup":                "CreateBackup",
 		"create_time":                  "CreateTime",
 		"current_role":                 "CurrentRole",
@@ -883,6 +939,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status":                       "Status",
 		"subnet_id":                    "SubnetId",
 		"tags":                         "Tags",
+		"time_point":                   "TimePoint",
 		"total":                        "Total",
 		"used":                         "Used",
 		"value":                        "Value",

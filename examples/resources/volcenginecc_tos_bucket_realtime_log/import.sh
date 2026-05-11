@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tos_bucket_realtime_log.example "bucket_name"
