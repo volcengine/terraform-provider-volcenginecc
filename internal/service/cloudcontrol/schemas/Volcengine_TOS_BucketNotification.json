@@ -1,0 +1,221 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BucketName"
+  ],
+  "definitions": {
+    "DestinationKafka": {
+      "description": "Event delivery target is Kafka message queue.",
+      "properties": {
+        "InstanceId": {
+          "description": "Kafka instance ID.",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region where the Kafka instance is located.",
+          "type": "string"
+        },
+        "Role": {
+          "description": "Role TRN, used to authorize TOS to access Kafka service.",
+          "type": "string"
+        },
+        "Topic": {
+          "description": "Name of the Kafka topic.",
+          "type": "string"
+        },
+        "User": {
+          "description": "Kafka username.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DestinationRocketMQ": {
+      "description": "Event delivery target is RocketMQ message queue.",
+      "properties": {
+        "AccessKeyId": {
+          "description": "RocketMQ AccessKey。",
+          "type": "string"
+        },
+        "InstanceId": {
+          "description": "RocketMQ instance ID.",
+          "type": "string"
+        },
+        "Role": {
+          "description": "Role TRN, used to authorize TOS to access RocketMQ service.",
+          "type": "string"
+        },
+        "Topic": {
+          "description": "Name of the RocketMQ topic.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DestinationVeFaaS": {
+      "description": "Event delivery target is Function Service.",
+      "properties": {
+        "FunctionId": {
+          "description": "Function ID for event delivery.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NotificationDestination": {
+      "properties": {
+        "Kafka": {
+          "description": "Event delivery target is Kafka message queue.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/DestinationKafka",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "RocketMQ": {
+          "description": "Event delivery target is RocketMQ message queue.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/DestinationRocketMQ",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "VeFaaS": {
+          "description": "Event delivery target is Function Service.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/DestinationVeFaaS",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "NotificationFilterRule": {
+      "description": "Filter rules the object must match.",
+      "properties": {
+        "Name": {
+          "description": "Matching conditions. The values are as follows: prefix: prefix; suffix: suffix.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Matched prefix and suffix information.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NotificationRule": {
+      "properties": {
+        "Destination": {
+          "$ref": "#/definitions/NotificationDestination",
+          "description": "Event notification delivery targets. Must include at least one target and supports up to five different targets.",
+          "type": "object"
+        },
+        "Events": {
+          "description": "Event type. List of events supported by TOS.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Filter": {
+          "$ref": "#/definitions/NotificationRuleFilter",
+          "description": "Filter rules.",
+          "type": "object"
+        },
+        "RuleId": {
+          "description": "Event notification rule name. Naming rules: Event names created under the same bucket must be unique. Maximum length is 255 characters. If not set, TOS will automatically generate a rule name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NotificationRuleFilter": {
+      "properties": {
+        "TOSKey": {
+          "$ref": "#/definitions/TOSKey",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TOSKey": {
+      "description": "Object filter information.",
+      "properties": {
+        "FilterRules": {
+          "description": "Object filter information.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/NotificationFilterRule",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Set event notification rules. Use event notification to receive alerts when resources in the bucket change.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tos:PutBucketNotificationType2",
+        "tos:GetBucketNotificationType2"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tos:PutBucketNotificationType2",
+        "tos:GetBucketNotificationType2"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tos:GetBucketNotificationType2"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tos:PutBucketNotificationType2",
+        "tos:GetBucketNotificationType2"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/BucketName"
+  ],
+  "properties": {
+    "BucketName": {
+      "description": "Bucket name.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "NotificationRules": {
+      "description": "Event notification rule information.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NotificationRule",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "BucketName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TOS::BucketNotification"
+}

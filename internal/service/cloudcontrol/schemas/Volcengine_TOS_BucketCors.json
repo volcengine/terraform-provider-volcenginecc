@@ -1,0 +1,115 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BucketName"
+  ],
+  "definitions": {
+    "CorsRule": {
+      "properties": {
+        "AllowedHeaders": {
+          "description": "Specify the response headers allowed for cross-origin requests.",
+          "insertionOrder": false,
+          "items": {
+            "description": "Specify the response headers allowed for cross-origin requests. Constraints: You can enter multiple headers, one per line, separated by line breaks. If there are no special requirements, it is recommended to set to *, which allows all.",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AllowedMethods": {
+          "description": "Specify the allowed methods for cross-origin requests.",
+          "insertionOrder": false,
+          "items": {
+            "description": "Specify the allowed methods for cross-origin requests. You can specify one or more, including PUT, GET, POST, DELETE, HEAD.",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AllowedOrigins": {
+          "description": "Specify the allowed origins for cross-origin requests.",
+          "insertionOrder": false,
+          "items": {
+            "description": "Specify the allowed origins for cross-origin requests. Constraints: Use IP address or domain name format; port numbers are allowed. Must include https:// or http://. You can enter multiple origins, one per line, separated by line breaks. Only one wildcard * is allowed per line.",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ExposeHeaders": {
+          "description": "Specify additional headers to include in the CORS response to provide extra information to the client.",
+          "insertionOrder": false,
+          "items": {
+            "description": "Specify additional headers to include in the CORS response to provide extra information to the client. Constraints: You can enter multiple headers, one per line, separated by line breaks. Wildcard * is not allowed.",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "MaxAgeSeconds": {
+          "description": "Specify the cache duration for OPTIONS request responses on the client side, in seconds. Default is 3600.",
+          "type": "integer"
+        },
+        "ResponseVary": {
+          "description": "Whether to return the Vary: Origin header",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Set CORS (Cross-Origin Resource Sharing) rules for the bucket.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tos:PutBucketCORS",
+        "tos:GetBucketCORS"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tos:DeleteBucketCORS",
+        "tos:GetBucketCORS"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tos:GetBucketCORS"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tos:PutBucketCORS",
+        "tos:GetBucketCORS"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/BucketName"
+  ],
+  "properties": {
+    "BucketName": {
+      "description": "Bucket name.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CorsRules": {
+      "description": "CORS rule information.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/CorsRule",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "BucketName",
+    "CorsRules"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TOS::BucketCors"
+}

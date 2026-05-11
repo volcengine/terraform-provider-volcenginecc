@@ -1,5 +1,36 @@
 {
   "additionalProperties": false,
+  "definitions": {
+    "RecordSet": {
+      "properties": {
+        "FQDN": {
+          "description": "Full domain name",
+          "type": "string"
+        },
+        "Host": {
+          "description": "Subdomain prefix",
+          "type": "string"
+        },
+        "ID": {
+          "description": "Record set ID",
+          "type": "string"
+        },
+        "Line": {
+          "description": "Resolution line",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Record type",
+          "type": "string"
+        },
+        "WeightEnabled": {
+          "description": "Load balancing enabled",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
   "description": "A DNS record maps a domain name to resource information within a VPC.",
   "filterProperties": {
     "filterableProperties": [
@@ -35,13 +66,16 @@
     },
     "read": {
       "permissions": [
-        "private_zone:QueryRecord"
+        "private_zone:QueryRecord",
+        "private_zone:ListRecordSets"
       ]
     },
     "update": {
       "permissions": [
         "private_zone:UpdateRecord",
-        "private_zone:QueryRecord"
+        "private_zone:QueryRecord",
+        "private_zone:UpdateRecordSet",
+        "private_zone:ListRecordSets"
       ]
     }
   },
@@ -74,6 +108,15 @@
       "description": "DNS record ID.",
       "semantic": "resourceId",
       "type": "string"
+    },
+    "RecordSets": {
+      "description": "Record set list",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RecordSet"
+      },
+      "type": "array",
+      "uniqueItems": true
     },
     "Remark": {
       "description": "Remarks. Supports UTF-8 characters. Maximum 16 characters. Default is an empty string.",
@@ -114,7 +157,8 @@
     "/properties/RecordId",
     "/properties/CreatedAt",
     "/properties/UpdatedAt",
-    "/properties/LastOperator"
+    "/properties/LastOperator",
+    "/properties/RecordSets"
   ],
   "required": [
     "Host",

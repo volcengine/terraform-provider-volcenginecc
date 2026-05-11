@@ -13,31 +13,39 @@ The basic unit of Redis cache database is the instance. An instance is an indepe
 
 ```terraform
 resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
-  instance_name       = "RedisInstance"
-  sharded_cluster     = 1
-  password            = "********"
-  node_number         = 2
-  shard_capacity      = 512
-  shard_number        = 2
-  engine_version      = "5.0"
-  vpc_id              = "vpc-13f8xxxx"
-  subnet_id           = "vpc_subnet-xxxx"
-  deletion_protection = "disabled"
-  charge_type         = "PostPaid"
-  port                = 6381
-  project_name        = "default"
-  tags = [
-    {
-      key = "env"
-    value = "test" }
-  ]
-  multi_az = "enabled"
   configure_nodes = [
     {
-    az = "cn-beijing-a" },
+      az = "cn-beijing-a"
+    },
     {
-    az = "cn-beijing-b" }
+      az = "cn-beijing-b"
+    }
   ]
+  multi_az = "enabled"
+  tags = [
+    {
+      key   = "env"
+      value = "test"
+    }
+  ]
+  project_name        = "default"
+  vpc_id              = "vpc-xxxxx"
+  subnet_id           = "subnet-xxxxx"
+  deletion_protection = "enabled"
+  port                = 9999
+  auto_renew          = false
+  charge_type         = "PostPaid"
+  engine_version      = "6.0"
+  shard_capacity      = 512
+  shard_number        = 2
+  node_number         = 2
+  allow_list_ids      = ["acl-cnlfwmfaqdefxxxxx"]
+  password            = "********"
+  sharded_cluster     = 1
+  instance_name       = "ccapi-auto-test"
+  no_auth_mode        = "open"
+  parameter_group_id  = "DefaultParamGroupId-6.0"
+  continuous_backup   = true
 }
 ```
 
@@ -61,7 +69,9 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `allow_list_ids` (Set of String) Allowlist ID list. If left empty, the new instance will not be added to any allowlist by default. You can call the DescribeAllowLists API to query all IP allowlist information, including allowlist IDs, for the specified region under your account. Each instance supports binding up to 100 allowlists, and you can batch bind up to 100 allowlists at a time. Each instance supports binding up to 1000 IP addresses or CIDR-format IP address ranges.
 - `auto_renew` (Boolean) Whether to enable auto-renewal. Value options: false (default): Disabled; true: Enabled.
 - `backup_point_name` (String) Set a backup name for the full backup created before changes.
+- `backup_restore` (Attributes) Restore data from the backup set to the original Redis instance. (see [below for nested schema](#nestedatt--backup_restore))
 - `charge_type` (String) Instance billing type. Value options: PrePaid: Subscription (also called prepaid). PostPaid: Pay-as-you-go (also called postpaid).
+- `continuous_backup` (Boolean) Enable data flashback
 - `create_backup` (Boolean) Whether to create a backup before making changes.
 - `deletion_protection` (String) Enable or disable instance deletion protection.
 - `instance_name` (String) Instance name. Naming rules: Cannot start with a digit or hyphen (-); can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-); length must be 1–128 characters.
@@ -108,6 +118,16 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 Optional:
 
 - `az` (String) The availability zone each node belongs to.
+
+
+<a id="nestedatt--backup_restore"></a>
+### Nested Schema for `backup_restore`
+
+Optional:
+
+- `backup_point_id` (String) Backup ID, used to specify which backup to use when restoring from a backup set
+- `backup_type` (String) Recovery method
+- `time_point` (String) Used to specify the point in time for point-in-time recovery
 
 
 <a id="nestedatt--tags"></a>

@@ -50,7 +50,21 @@ resource "volcenginecc_privatezone_record" "PrivateZoneRecordDemo" {
 - `id` (String) Uniquely identifies the resource.
 - `last_operator` (String) Account ID of the most recent update to the DNS record.
 - `record_id` (String) DNS record ID.
+- `record_sets` (Attributes Set) Record set list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--record_sets))
 - `updated_at` (String) Last update time of the DNS record.
+
+<a id="nestedatt--record_sets"></a>
+### Nested Schema for `record_sets`
+
+Read-Only:
+
+- `fqdn` (String) Full domain name
+- `host` (String) Subdomain prefix
+- `id` (String) Record set ID
+- `line` (String) Resolution line
+- `type` (String) Record type
+- `weight_enabled` (Boolean) Load balancing enabled
 
 ## Import
 

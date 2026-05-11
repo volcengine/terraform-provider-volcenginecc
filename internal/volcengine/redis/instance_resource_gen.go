@@ -92,6 +92,65 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// BackupPointName is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: BackupRestore
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Restore data from the backup set to the original Redis instance.",
+		//	  "properties": {
+		//	    "BackupPointId": {
+		//	      "description": "Backup ID, used to specify which backup to use when restoring from a backup set",
+		//	      "type": "string"
+		//	    },
+		//	    "BackupType": {
+		//	      "description": "Recovery method",
+		//	      "type": "string"
+		//	    },
+		//	    "TimePoint": {
+		//	      "description": "Used to specify the point in time for point-in-time recovery",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"backup_restore": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BackupPointId
+				"backup_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Backup ID, used to specify which backup to use when restoring from a backup set",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BackupType
+				"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Recovery method",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TimePoint
+				"time_point": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Used to specify the point in time for point-in-time recovery",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Restore data from the backup set to the original Redis instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// BackupRestore is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: BlueGreenRole
 		// Cloud Control resource type schema:
 		//
@@ -206,6 +265,22 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ContinuousBackup
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Enable data flashback",
+		//	  "type": "boolean"
+		//	}
+		"continuous_backup": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable data flashback",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ContinuousBackup is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreateBackup
 		// Cloud Control resource type schema:
@@ -526,6 +601,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					"enabled",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NoAuthMode
 		// Cloud Control resource type schema:
@@ -626,6 +704,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -684,7 +763,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "default",
 		//	  "description": "Project to which the instance belongs.",
 		//	  "type": "string"
 		//	}
@@ -692,7 +770,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Project to which the instance belongs.",
 			Optional:    true,
 			Computed:    true,
-			Default:     stringdefault.StaticString("default"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -1085,11 +1162,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"allow_list_ids":               "AllowListIds",
 		"auto_renew":                   "AutoRenew",
 		"az":                           "AZ",
+		"backup_point_id":              "BackupPointId",
 		"backup_point_name":            "BackupPointName",
+		"backup_restore":               "BackupRestore",
+		"backup_type":                  "BackupType",
 		"blue_green_role":              "BlueGreenRole",
 		"capacity":                     "Capacity",
 		"charge_type":                  "ChargeType",
 		"configure_nodes":              "ConfigureNodes",
+		"continuous_backup":            "ContinuousBackup",
 		"create_backup":                "CreateBackup",
 		"create_time":                  "CreateTime",
 		"current_role":                 "CurrentRole",
@@ -1127,6 +1208,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"status":                       "Status",
 		"subnet_id":                    "SubnetId",
 		"tags":                         "Tags",
+		"time_point":                   "TimePoint",
 		"total":                        "Total",
 		"used":                         "Used",
 		"value":                        "Value",
@@ -1148,6 +1230,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Password",
 		"/properties/Port",
 		"/properties/PurchaseMonths",
+		"/properties/BackupRestore",
+		"/properties/ContinuousBackup",
 		"/properties/ReserveAdditionalBandwidth",
 	})
 
@@ -1176,6 +1260,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/AllowListIds",
+		"/properties/MultiAZ",
+		"/properties/Password",
 		"/properties/EngineVersion",
 		"/properties/Port",
 		"/properties/ProjectName",

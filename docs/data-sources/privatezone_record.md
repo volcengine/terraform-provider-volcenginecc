@@ -27,6 +27,7 @@ Data Source schema for Volcengine::PrivateZone::Record
 - `last_operator` (String) Account ID of the most recent update to the DNS record.
 - `line` (String) DNS record route, only the default route 'default' is supported.
 - `record_id` (String) DNS record ID.
+- `record_sets` (Attributes Set) Record set list (see [below for nested schema](#nestedatt--record_sets))
 - `remark` (String) Remarks. Supports UTF-8 characters. Maximum 16 characters. Default is an empty string.
 - `ttl` (Number) DNS record TTL (time to live), in seconds. Default is 600.
 - `type` (String) DNS record type. Valid values are: A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record. A: A record. AAAA: AAAA record. CNAME: CNAME record. TXT: TXT record. MX: MX record. PTR: PTR record.
@@ -35,3 +36,15 @@ Data Source schema for Volcengine::PrivateZone::Record
 - `weight` (Number) Record weight. The weight takes effect only when load balancing is enabled for the domain name.
 - `weight_enabled` (Boolean) Indicates whether load balancing is enabled for this record set.
 - `zid` (Number) Domain name ID.
+
+<a id="nestedatt--record_sets"></a>
+### Nested Schema for `record_sets`
+
+Read-Only:
+
+- `fqdn` (String) Full domain name
+- `host` (String) Subdomain prefix
+- `id` (String) Record set ID
+- `line` (String) Resolution line
+- `type` (String) Record type
+- `weight_enabled` (Boolean) Load balancing enabled

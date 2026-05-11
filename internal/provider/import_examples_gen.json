@@ -983,5 +983,25 @@
         "resource": "volcenginecc_organization_service_control_policy",
         "identifier": ["PolicyID"],
         "path": "./examples/resources/volcenginecc_organization_service_control_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_notification",
+        "identifier": ["BucketName"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_notification/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_realtime_log",
+        "identifier": ["BucketName"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_realtime_log/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_cors",
+        "identifier": ["BucketName"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_cors/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_parameter_template",
+        "identifier": ["TemplateId"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_parameter_template/import.sh"
     }
 ]
