@@ -81,8 +81,9 @@ resource "volcenginecc_vefaas_function" "VefaasFunctionDemo" {
     tls_project_id = "9248d829-21b0-43e2-a2f6-xxxxxxxxx"
     tls_topic_id   = "84baf7cf-0f60-44e0-a5f6-xxxxxxxxx"
   }
-  source      = "https://vefaas-prod-xxxxxxxxxPAYLOAD&X-Tos-Credential=AKxxxxxxxxxxxxFtos-cn-beijing.volces.com%2Ftos%2Frequest&X-Tos-Date=20260327T080542Z&X-Tos-Expires=1800&X-Tos-SignedHeaders=host&X-Tos-Signature=5a60f816def2be59baxxxxxxxxxxxxx"
-  source_type = "tos"
+  source                    = "https://vefaas-prod-xxxxxxxxxPAYLOAD&X-Tos-Credential=AKxxxxxxxxxxxxFtos-cn-beijing.volces.com%2Ftos%2Frequest&X-Tos-Date=20260327T080542Z&X-Tos-Expires=1800&X-Tos-SignedHeaders=host&X-Tos-Signature=5a60f816def2be59baxxxxxxxxxxxxx"
+  source_type               = "tos"
+  enable_dependency_install = true
 }
 ```
 
@@ -96,6 +97,7 @@ resource "volcenginecc_vefaas_function" "VefaasFunctionDemo" {
 - `cpu_strategy` (String) Function CPU billing policy. When creating a microservice application type function, this field must be set to always, meaning at least one instance is running. Other function types do not support this field
 - `description` (String) Function description. Up to 1000 Unicode characters
 - `enable_apmplus` (Boolean) Whether to enable application monitoring
+- `enable_dependency_install` (Boolean) Enable function dependency installation. true: Enabled. The function installs dependencies after creation. false: Disabled. The function does not automatically install dependencies.
 - `envs` (Attributes Set) Environment variables.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--envs))
 - `exclusive_mode` (Boolean) Exclusive mode switch. true: disables multi-concurrency per instance, i.e., exclusive mode where a single instance can only handle one request at a time. false (default): enables multi-concurrency per instance, i.e., non-exclusive mode where a single instance can handle multiple requests at the same time. You can set the maximum concurrent requests per instance using MaxConcurrency.
@@ -123,6 +125,7 @@ resource "volcenginecc_vefaas_function" "VefaasFunctionDemo" {
 - `code_size` (Number) Code package size (MB).
 - `code_size_limit` (Number) Code package size limit. SourceType=zip, CodeSizeLimit=15MB. SourceType=tos, CodeSizeLimit=256MB.
 - `creation_time` (String) Function creation time
+- `dependency_install_status` (Attributes) Dependency installation task status. (see [below for nested schema](#nestedatt--dependency_install_status))
 - `function_id` (String) Function ID
 - `id` (String) Uniquely identifies the resource.
 - `instance_type` (String) Instance type of the function instance. Null value: CPU instance. Non-null value: GPU instance.
@@ -267,6 +270,16 @@ Optional:
 - `security_group_ids` (Set of String) Security group ID
 - `subnet_ids` (Set of String) Subnet ID
 - `vpc_id` (String) VPC ID. If the VPC ID is an empty string, it means the current VPC configuration will be deleted
+
+
+<a id="nestedatt--dependency_install_status"></a>
+### Nested Schema for `dependency_install_status`
+
+Read-Only:
+
+- `create_time` (String) Task creation time.
+- `finish_time` (String) Task completion time. The task is considered complete when it is in one of the following statuses: Canceled: Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.
+- `status` (String) Task status. Possible values are as follows: Enqueued: Queued. Dequeued: Dequeued. InProgress: In progress. Canceling/Canceled: Canceling/Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.
 
 ## Import
 

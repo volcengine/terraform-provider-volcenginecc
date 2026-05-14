@@ -1003,5 +1003,15 @@
         "resource": "volcenginecc_rdsmysql_parameter_template",
         "identifier": ["TemplateId"],
         "path": "./examples/resources/volcenginecc_rdsmysql_parameter_template/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdspostgresql_backup",
+        "identifier": ["BackupId","InstanceId"],
+        "path": "./examples/resources/volcenginecc_rdspostgresql_backup/import.sh"
+    },
+    {
+        "resource": "volcenginecc_redis_parameter_group",
+        "identifier": ["ParameterGroupId"],
+        "path": "./examples/resources/volcenginecc_redis_parameter_group/import.sh"
     }
 ]

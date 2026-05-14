@@ -447,6 +447,112 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceParameters
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance parameter list",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Instance parameter",
+		//	    "properties": {
+		//	      "CheckingCode": {
+		//	        "description": "Parameter validation rule",
+		//	        "type": "string"
+		//	      },
+		//	      "ForceModify": {
+		//	        "description": "Whether to force modification",
+		//	        "type": "boolean"
+		//	      },
+		//	      "ForceRestart": {
+		//	        "description": "Requires instance restart to take effect after modification",
+		//	        "type": "boolean"
+		//	      },
+		//	      "ParameterDefaultValue": {
+		//	        "description": "Parameter default value",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterDescription": {
+		//	        "description": "Parameter description",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterName": {
+		//	        "description": "Parameter name",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterRole": {
+		//	        "description": "Parameter role. Optional values: Node, Shard, ConfigServer, Mongos",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterType": {
+		//	        "description": "Parameter type. Optional values: String, Integer, Boolean, List, Float",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterValue": {
+		//	        "description": "Parameter value",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ParameterName",
+		//	      "ParameterValue"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"instance_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CheckingCode
+					// Property: ForceModify
+					// Property: ForceRestart
+					// Property: ParameterDefaultValue
+					// Property: ParameterDescription
+					// Property: ParameterName
+					"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter name",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterRole
+					"parameter_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter role. Optional values: Node, Shard, ConfigServer, Mongos",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterType
+					// Property: ParameterValue
+					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter value",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Instance parameter list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceStatus
 		// Cloud Control resource type schema:
 		//
@@ -1381,6 +1487,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"auto_renew":                     "AutoRenew",
 		"charge_status":                  "ChargeStatus",
 		"charge_type":                    "ChargeType",
+		"checking_code":                  "CheckingCode",
 		"closed_time":                    "ClosedTime",
 		"config_server_node_id":          "ConfigServerNodeId",
 		"config_server_node_spec":        "ConfigServerNodeSpec",
@@ -1392,9 +1499,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"db_engine_version":              "DBEngineVersion",
 		"db_engine_version_str":          "DBEngineVersionStr",
 		"expired_time":                   "ExpiredTime",
+		"force_modify":                   "ForceModify",
+		"force_restart":                  "ForceRestart",
 		"instance_count":                 "InstanceCount",
 		"instance_id":                    "InstanceId",
 		"instance_name":                  "InstanceName",
+		"instance_parameters":            "InstanceParameters",
 		"instance_status":                "InstanceStatus",
 		"instance_type":                  "InstanceType",
 		"key":                            "Key",
@@ -1411,6 +1521,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"node_spec":                      "NodeSpec",
 		"node_status":                    "NodeStatus",
 		"nodes":                          "Nodes",
+		"parameter_default_value":        "ParameterDefaultValue",
+		"parameter_description":          "ParameterDescription",
+		"parameter_name":                 "ParameterName",
+		"parameter_role":                 "ParameterRole",
+		"parameter_type":                 "ParameterType",
+		"parameter_value":                "ParameterValue",
 		"period":                         "Period",
 		"period_unit":                    "PeriodUnit",
 		"private_endpoint":               "PrivateEndpoint",
@@ -1474,6 +1590,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Shards",
 		"/properties/StorageType",
 		"/properties/UpdatedTime",
+		"/properties/InstanceParameters/*/ParameterType",
+		"/properties/InstanceParameters/*/ParameterDescription",
+		"/properties/InstanceParameters/*/ParameterDefaultValue",
+		"/properties/InstanceParameters/*/CheckingCode",
+		"/properties/InstanceParameters/*/ForceModify",
+		"/properties/InstanceParameters/*/ForceRestart",
 		"/properties/ReadOnlyNodeNumber",
 	})
 

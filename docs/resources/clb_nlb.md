@@ -44,7 +44,7 @@ resource "volcenginecc_clb_nlb" "NLBDemo" {
 - `ipv_4_network_type` (String) IPv4 network type of the NLB instance. internet: public network type. intranet: private network type.
 - `security_group_ids` (Set of String) List of security group IDs associated with the NLB instance.
 - `vpc_id` (String) VPC ID to which the NLB instance belongs.
-- `zone_mappings` (Attributes Set) Availability zone information for the NLB instance.
+- `zone_mappings` (Attributes List) Availability zone information for the NLB instance.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--zone_mappings))
 
 ### Optional

@@ -27,6 +27,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/cloudcontrol"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/common"
+	"github.com/volcengine/terraform-provider-volcenginecc/internal/customresources"
 	baselogging "github.com/volcengine/terraform-provider-volcenginecc/internal/logging"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 	"github.com/volcengine/volcengine-go-sdk/volcengine"
@@ -293,6 +294,20 @@ func (p *VolcengineCCProvider) Resources(ctx context.Context) []func() resource.
 			)
 
 			continue
+		}
+
+		// Allow hand-written code to wrap or replace the auto-generated
+		// resource without modifying the generated `*_resource_gen.go`.
+		// See internal/customresources for details.
+		if wrap, ok := customresources.Lookup(name); ok {
+			v, err = wrap(ctx, v)
+			if err != nil {
+				diags.AddError(
+					"Error wrapping Resource",
+					fmt.Sprintf("Error applying custom override for the %s Resource.\n%s\n", name, err),
+				)
+				continue
+			}
 		}
 
 		resources = append(resources, func() resource.Resource {

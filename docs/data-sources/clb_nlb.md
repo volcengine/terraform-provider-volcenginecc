@@ -47,7 +47,7 @@ Data Source schema for Volcengine::CLB::NLB
 - `tags` (Attributes Set) Tag information of the NLB instance. (see [below for nested schema](#nestedatt--tags))
 - `updated_time` (String) Update time of the NLB instance.
 - `vpc_id` (String) VPC ID to which the NLB instance belongs.
-- `zone_mappings` (Attributes Set) Availability zone information for the NLB instance. (see [below for nested schema](#nestedatt--zone_mappings))
+- `zone_mappings` (Attributes List) Availability zone information for the NLB instance. (see [below for nested schema](#nestedatt--zone_mappings))
 
 <a id="nestedatt--access_log"></a>
 ### Nested Schema for `access_log`

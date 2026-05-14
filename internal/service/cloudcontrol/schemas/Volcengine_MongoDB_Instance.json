@@ -64,6 +64,52 @@
       },
       "type": "object"
     },
+    "InstanceParameter": {
+      "description": "Instance parameter",
+      "properties": {
+        "CheckingCode": {
+          "description": "Parameter validation rule",
+          "type": "string"
+        },
+        "ForceModify": {
+          "description": "Whether to force modification",
+          "type": "boolean"
+        },
+        "ForceRestart": {
+          "description": "Requires instance restart to take effect after modification",
+          "type": "boolean"
+        },
+        "ParameterDefaultValue": {
+          "description": "Parameter default value",
+          "type": "string"
+        },
+        "ParameterDescription": {
+          "description": "Parameter description",
+          "type": "string"
+        },
+        "ParameterName": {
+          "description": "Parameter name",
+          "type": "string"
+        },
+        "ParameterRole": {
+          "description": "Parameter role. Optional values: Node, Shard, ConfigServer, Mongos",
+          "type": "string"
+        },
+        "ParameterType": {
+          "description": "Parameter type. Optional values: String, Integer, Boolean, List, Float",
+          "type": "string"
+        },
+        "ParameterValue": {
+          "description": "Parameter value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ParameterName",
+        "ParameterValue"
+      ],
+      "type": "object"
+    },
     "Mongo": {
       "properties": {
         "MongosNodeId": {
@@ -229,7 +275,9 @@
     "create": {
       "permissions": [
         "mongodb:CreateDBInstance",
-        "mongodb:DescribeDBInstanceDetail"
+        "mongodb:DescribeDBInstanceDetail",
+        "mongodb:DescribeDBInstanceParameters",
+        "mongodb:ModifyMultiDBInstanceParameters"
       ]
     },
     "delete": {
@@ -245,7 +293,8 @@
     },
     "read": {
       "permissions": [
-        "mongodb:DescribeDBInstanceDetail"
+        "mongodb:DescribeDBInstanceDetail",
+        "mongodb:DescribeDBInstanceParameters"
       ]
     },
     "update": {
@@ -253,6 +302,8 @@
         "mongodb:ModifyDBInstanceName",
         "mongodb:ModifyDBInstanceSpec",
         "mongodb:DescribeDBInstanceDetail",
+        "mongodb:DescribeDBInstanceParameters",
+        "mongodb:ModifyMultiDBInstanceParameters",
         "mongodb:AddTagsToResource",
         "mongodb:RemoveTagsFromResource"
       ]
@@ -373,6 +424,15 @@
       "minLength": 2,
       "semantic": "resourceName",
       "type": "string"
+    },
+    "InstanceParameters": {
+      "description": "Instance parameter list",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/InstanceParameter"
+      },
+      "type": "array",
+      "uniqueItems": true
     },
     "InstanceStatus": {
       "description": "Instance status. Creating: Creating. Running: Running. Allowlist maintenance: AllowListMaintaining. Scaling: Scaling. Restarting: Restarting. Network maintaining: NetworkMaintaining. Restoring: Restoring. Upgrading: Upgrading. Unavailable: Unavailable. Closing: Closing. Deleting: Deleting. Closed: Closed. SSL updating: SSLUpdating. Switch mastering: SwitchMastering. Role changing: RoleChanging. Migrating: Migrating.",
@@ -568,6 +628,12 @@
     "/properties/Shards",
     "/properties/StorageType",
     "/properties/UpdatedTime",
+    "/properties/InstanceParameters/*/ParameterType",
+    "/properties/InstanceParameters/*/ParameterDescription",
+    "/properties/InstanceParameters/*/ParameterDefaultValue",
+    "/properties/InstanceParameters/*/CheckingCode",
+    "/properties/InstanceParameters/*/ForceModify",
+    "/properties/InstanceParameters/*/ForceRestart",
     "/properties/ReadOnlyNodeNumber"
   ],
   "required": [

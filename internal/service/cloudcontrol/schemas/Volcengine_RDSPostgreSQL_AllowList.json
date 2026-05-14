@@ -63,12 +63,14 @@
     "create": {
       "permissions": [
         "rds_postgresql:CreateAllowList",
+        "rds_postgresql:AssociateAllowList",
         "rds_postgresql:DescribeAllowListDetail"
       ]
     },
     "delete": {
       "permissions": [
         "rds_postgresql:DeleteAllowList",
+        "rds_postgresql:DisassociateAllowList",
         "rds_postgresql:DescribeAllowListDetail"
       ]
     },
@@ -85,6 +87,8 @@
     "update": {
       "permissions": [
         "rds_postgresql:ModifyAllowList",
+        "rds_postgresql:AssociateAllowList",
+        "rds_postgresql:DisassociateAllowList",
         "rds_postgresql:DescribeAllowListDetail"
       ]
     }
@@ -172,8 +176,10 @@
   },
   "readOnlyProperties": [
     "/properties/AllowListIPNum",
+    "/properties/AssociatedInstanceNum",
     "/properties/AllowListId",
-    "/properties/AssociatedInstances"
+    "/properties/AssociatedInstances/*/InstanceName",
+    "/properties/AssociatedInstances/*/VPC"
   ],
   "tagging": {
     "taggable": false

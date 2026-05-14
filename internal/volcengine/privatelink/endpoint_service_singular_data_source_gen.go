@@ -78,6 +78,17 @@ func endpointServiceDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "Description of the endpoint service.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnableVerifyPrivateDNS
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Verify the DNS name of the specified endpoint service. Only verification of public domain names is supported. true: enabled. false: not enabled.",
+		//	  "type": "boolean"
+		//	}
+		"enable_verify_private_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Verify the DNS name of the specified endpoint service. Only verification of public domain names is supported. true: enabled. false: not enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressVersions
 		// Cloud Control resource type schema:
 		//
@@ -475,6 +486,7 @@ func endpointServiceDataSource(ctx context.Context) (datasource.DataSource, erro
 		"business_status":                "BusinessStatus",
 		"create_time":                    "CreateTime",
 		"description":                    "Description",
+		"enable_verify_private_dns":      "EnableVerifyPrivateDNS",
 		"ip_address_versions":            "IpAddressVersions",
 		"key":                            "Key",
 		"name":                           "Name",

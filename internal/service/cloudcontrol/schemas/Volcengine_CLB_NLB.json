@@ -321,7 +321,7 @@
     },
     "ZoneMappings": {
       "description": "Availability zone information for the NLB instance.",
-      "insertionOrder": false,
+      "insertionOrder": true,
       "items": {
         "$ref": "#/definitions/ZoneMapping"
       },

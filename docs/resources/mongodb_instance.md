@@ -64,6 +64,8 @@ resource "volcenginecc_mongodb_instance" "MongoDBInstanceDemo" {
 - `db_engine_version` (String) Database engine version. Options: MongoDB_4_0 (default): MongoDB 4.0. MongoDB_4_2: MongoDB 4.2. MongoDB_4_4: MongoDB 4.4. MongoDB_5_0: MongoDB 5.0. MongoDB_6_0: MongoDB 6.0. MongoDB_7_0: MongoDB 7.0.
 - `instance_count` (Number) Number of instances to create. Must be a positive integer greater than or equal to 1. Default is 1.
 - `instance_name` (String) Instance name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 2–64 characters.
+- `instance_parameters` (Attributes Set) Instance parameter list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--instance_parameters))
 - `instance_type` (String) MongoDB instance type. Valid values: ReplicaSet (default): replica set. ShardedCluster: sharded cluster.
 - `mongos_node_number` (Number) Number of Mongos nodes in the sharded cluster. Range: 2~32.
 - `mongos_node_spec` (String) Specification code for Mongos nodes in a sharded cluster.
@@ -104,6 +106,16 @@ resource "volcenginecc_mongodb_instance" "MongoDBInstanceDemo" {
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--shards))
 - `storage_type` (String) Instance storage type. Currently, only local SSD disks (LocalSSD) are supported.
 - `updated_time` (String) Instance update time (UTC).
+
+<a id="nestedatt--instance_parameters"></a>
+### Nested Schema for `instance_parameters`
+
+Optional:
+
+- `parameter_name` (String) Parameter name
+- `parameter_role` (String) Parameter role. Optional values: Node, Shard, ConfigServer, Mongos
+- `parameter_value` (String) Parameter value
+
 
 <a id="nestedatt--node_availability_zone"></a>
 ### Nested Schema for `node_availability_zone`

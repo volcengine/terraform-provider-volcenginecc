@@ -19,7 +19,7 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
   resources = [
     {
       resource_id = "clb-rr0o8ni4dxxxx58wxxxxx"
-      zone_ids    = []
+      zone_ids    = ["cn-beijing-c"]
     }
   ]
   auto_accept_enabled = true
@@ -33,6 +33,8 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
       key = "env"
     value = "test" }
   ]
+  payer                     = "Endpoint"
+  enable_verify_private_dns = true
 }
 ```
 
@@ -43,6 +45,7 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
 
 - `auto_accept_enabled` (Boolean) Whether to automatically accept endpoint connections. true: The endpoint service automatically accepts endpoint connections. false: The endpoint service does not automatically accept endpoint connections; you must manually accept them by calling the EnableVpcEndpointConnection API.
 - `description` (String) Description of the endpoint service.
+- `enable_verify_private_dns` (Boolean) Verify the DNS name of the specified endpoint service. Only verification of public domain names is supported. true: enabled. false: not enabled.
 - `ip_address_versions` (Set of String) IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.
 - `payer` (String) Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.
 - `permit_account_ids` (Set of String) Details of authorized allowlist accounts.

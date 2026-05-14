@@ -67,6 +67,7 @@ resource "volcenginecc_vefaas_function" "VefaasFunctionDemo" {
     tls_project_id = "9248d829-21b0-43e2-a2f6-xxxxxxxxx"
     tls_topic_id   = "84baf7cf-0f60-44e0-a5f6-xxxxxxxxx"
   }
-  source      = "https://vefaas-prod-xxxxxxxxxPAYLOAD&X-Tos-Credential=AKxxxxxxxxxxxxFtos-cn-beijing.volces.com%2Ftos%2Frequest&X-Tos-Date=20260327T080542Z&X-Tos-Expires=1800&X-Tos-SignedHeaders=host&X-Tos-Signature=5a60f816def2be59baxxxxxxxxxxxxx"
-  source_type = "tos"
+  source                    = "https://vefaas-prod-xxxxxxxxxPAYLOAD&X-Tos-Credential=AKxxxxxxxxxxxxFtos-cn-beijing.volces.com%2Ftos%2Frequest&X-Tos-Date=20260327T080542Z&X-Tos-Expires=1800&X-Tos-SignedHeaders=host&X-Tos-Signature=5a60f816def2be59baxxxxxxxxxxxxx"
+  source_type               = "tos"
+  enable_dependency_install = true
 }

@@ -5,7 +5,7 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
   resources = [
     {
       resource_id = "clb-rr0o8ni4dxxxx58wxxxxx"
-      zone_ids    = []
+      zone_ids    = ["cn-beijing-c"]
     }
   ]
   auto_accept_enabled = true
@@ -19,4 +19,6 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
       key = "env"
     value = "test" }
   ]
+  payer                     = "Endpoint"
+  enable_verify_private_dns = true
 }
