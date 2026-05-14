@@ -149,7 +149,6 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"associated_instance_num": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Number of instances bound to this allowlist.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -187,21 +186,18 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Instance ID.",
+						Optional:    true,
 						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
-					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Instance name.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: VPC
-					"vpc": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "VPC ID to which the instance belongs.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "List of instances bound to this allowlist, including instance ID and instance name.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -406,8 +402,10 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/AllowListIPNum",
+		"/properties/AssociatedInstanceNum",
 		"/properties/AllowListId",
-		"/properties/AssociatedInstances",
+		"/properties/AssociatedInstances/*/InstanceName",
+		"/properties/AssociatedInstances/*/VPC",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

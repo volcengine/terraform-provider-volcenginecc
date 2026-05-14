@@ -13,11 +13,22 @@ An allowlist is a security measure for database connections. Only IP addresses i
 
 ```terraform
 resource "volcenginecc_rdspostgresql_allow_list" "RdsPostgresqlAllowListDemo" {
-  allow_list          = ["1.2.3.4/32", "5.6.7.8/32"]
-  allow_list_category = "Ordinary"
+  allow_list_category = "Default"
   allow_list_desc     = "test"
-  allow_list_name     = "ccapi-test-1"
+  allow_list_name     = "ccapi-dx-2"
   allow_list_type     = "IPv4"
+  security_group_bind_infos = [{
+    bind_mode         = "AssociateEcsIp"
+    security_group_id = "sg-w06pxxxxx5yk9xgrubx"
+    }, {
+    bind_mode         = "IngressDirectionIp"
+    ip_list           = ["100.70.0.0/16", "100.72.0.0/16", "100.73.0.0/16"]
+    security_group_id = "sg-1v9zvjxxxxxj8e73vhtg8"
+  }]
+  user_allow_list = "1.2.4.0/24"
+  associated_instances = [{
+    instance_id = "postgres-cxxxx3b95"
+  }]
 }
 ```
 
@@ -31,7 +42,8 @@ resource "volcenginecc_rdspostgresql_allow_list" "RdsPostgresqlAllowListDemo" {
 - `allow_list_desc` (String) Description of the allowlist. Up to 200 characters. Default value is an empty string.
 - `allow_list_name` (String) Allowlist naming rules: The allowlist name must be unique within the current region. It must start with a Chinese character, letter, or underscore (_). It can only contain Chinese characters, letters, numbers, underscores (_), and hyphens (-). Length must be 1–128 characters.
 - `allow_list_type` (String) Network protocol type used by the allowlist. Value: IPv4 (default).
-- `associated_instance_num` (Number) Number of instances bound to this allowlist.
+- `associated_instances` (Attributes Set) List of instances bound to this allowlist, including instance ID and instance name.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
 - `ip_address` (String) Query allowlist by IP address. Supports multiple IP addresses separated by commas (,). Note: If the allowlist contains any subset of the provided IP addresses, that allowlist will be returned.
 - `modify_mode` (String) Allowlist modification mode. Values: Cover (default): overwrite, use the value of the AllowList field to overwrite the original allowlist. Append: add, add the IP addresses in the AllowList field to the original allowlist. Delete: remove, remove the IP addresses in the AllowList field from the original allowlist. At least one IP address must remain. Note: If the allowlist to be modified is bound to a security group, or if you need to bind a security group when modifying the allowlist, ModifyMode can only be set to Cover.
 - `security_group_bind_infos` (Attributes Set) List of security groups bound to this allowlist.
@@ -43,9 +55,16 @@ resource "volcenginecc_rdspostgresql_allow_list" "RdsPostgresqlAllowListDemo" {
 
 - `allow_list_id` (String) Allowlist ID.
 - `allow_list_ip_num` (Number) Number of IP addresses or IP segments in the allowlist.
-- `associated_instances` (Attributes Set) List of instances bound to this allowlist, including instance ID and instance name.
- Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
+- `associated_instance_num` (Number) Number of instances bound to this allowlist.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--associated_instances"></a>
+### Nested Schema for `associated_instances`
+
+Optional:
+
+- `instance_id` (String) Instance ID.
+
 
 <a id="nestedatt--security_group_bind_infos"></a>
 ### Nested Schema for `security_group_bind_infos`
@@ -56,16 +75,6 @@ Optional:
 - `ip_list` (Set of String) IP address list in the security group.
 - `security_group_id` (String) Security group ID.
 - `security_group_name` (String) Security group name.
-
-
-<a id="nestedatt--associated_instances"></a>
-### Nested Schema for `associated_instances`
-
-Read-Only:
-
-- `instance_id` (String) Instance ID.
-- `instance_name` (String) Instance name.
-- `vpc` (String) VPC ID to which the instance belongs.
 
 ## Import
 

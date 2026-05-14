@@ -202,6 +202,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tos_bucket_notifications -cctype Volcengine::TOS::BucketNotification -package tos ../volcengine/tos/bucket_notification_plural_data_source_gen.go ../volcengine/tos/bucket_notification_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tos_bucket_realtime_logs -cctype Volcengine::TOS::BucketRealtimeLog -package tos ../volcengine/tos/bucket_realtime_log_plural_data_source_gen.go ../volcengine/tos/bucket_realtime_log_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdsmysql_parameter_templates -cctype Volcengine::RDSMySQL::ParameterTemplate -package rdsmysql ../volcengine/rdsmysql/parameter_template_plural_data_source_gen.go ../volcengine/rdsmysql/parameter_template_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rdspostgresql_backups -cctype Volcengine::RDSPostgreSQL::Backup -package rdspostgresql ../volcengine/rdspostgresql/backup_plural_data_source_gen.go ../volcengine/rdspostgresql/backup_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_redis_parameter_groups -cctype Volcengine::Redis::ParameterGroup -package redis ../volcengine/redis/parameter_group_plural_data_source_gen.go ../volcengine/redis/parameter_group_plural_data_source_gen_test.go
 
 package provider
 

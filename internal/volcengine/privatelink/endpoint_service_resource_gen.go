@@ -104,6 +104,22 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnableVerifyPrivateDNS
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Verify the DNS name of the specified endpoint service. Only verification of public domain names is supported. true: enabled. false: not enabled.",
+		//	  "type": "boolean"
+		//	}
+		"enable_verify_private_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Verify the DNS name of the specified endpoint service. Only verification of public domain names is supported. true: enabled. false: not enabled.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EnableVerifyPrivateDNS is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressVersions
 		// Cloud Control resource type schema:
 		//
@@ -611,6 +627,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		"business_status":                "BusinessStatus",
 		"create_time":                    "CreateTime",
 		"description":                    "Description",
+		"enable_verify_private_dns":      "EnableVerifyPrivateDNS",
 		"ip_address_versions":            "IpAddressVersions",
 		"key":                            "Key",
 		"name":                           "Name",
@@ -643,6 +660,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServiceNameSuffix",
+		"/properties/EnableVerifyPrivateDNS",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

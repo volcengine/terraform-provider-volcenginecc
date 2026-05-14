@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_redis_parameter_group.example "parameter_group_id"

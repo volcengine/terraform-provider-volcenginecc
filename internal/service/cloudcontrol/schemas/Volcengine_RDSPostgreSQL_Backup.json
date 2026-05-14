@@ -1,0 +1,227 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/BackupType",
+    "/properties/BackupMethod",
+    "/properties/BackupScope",
+    "/properties/BackupMeta",
+    "/properties/DownloadBackup",
+    "/properties/BackupDescription"
+  ],
+  "definitions": {
+    "BackupMeta": {
+      "description": "Backup metadata information.",
+      "properties": {
+        "DBName": {
+          "description": "Database name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BackupPolicy": {
+      "description": "Backup policy configuration.",
+      "properties": {
+        "BackupRetentionPeriod": {
+          "description": "Backup retention days.",
+          "type": "integer"
+        },
+        "DataIncrBackupPeriods": {
+          "description": "Data incremental backup schedule.",
+          "type": "string"
+        },
+        "FullBackupPeriod": {
+          "description": "Full backup schedule, such as Monday,Tuesday.",
+          "type": "string"
+        },
+        "FullBackupTime": {
+          "description": "Full backup time window, such as 00:00Z-01:00Z.",
+          "type": "string"
+        },
+        "HourlyIncrBackupEnable": {
+          "description": "Enable hourly incremental backup.",
+          "type": "boolean"
+        },
+        "IncrementBackupFrequency": {
+          "description": "Incremental backup frequency (hours).",
+          "type": "integer"
+        },
+        "WALLogSpaceLimitEnable": {
+          "description": "Enable WAL log space limit.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "RDS PostgreSQL backup resources support both physical and logical backups. Physical backups can be created and queried; logical backups can be created, deleted, downloaded, and queried.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/BackupId",
+      "/properties/InstanceId",
+      "/properties/BackupMethod",
+      "/properties/BackupScope",
+      "/properties/BackupStatus",
+      "/properties/BackupType",
+      "/properties/CreateType",
+      "/properties/DownloadStatus"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:CreateBackup",
+        "rds_postgresql:DescribeBackups",
+        "rds_postgresql:DownloadBackup",
+        "rds_postgresql:GetBackupDownloadLink",
+        "rds_postgresql:ModifyBackupPolicy",
+        "rds_postgresql:DescribeBackupPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:DescribeBackups",
+        "rds_postgresql:DeleteBackup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_postgresql:DescribeBackups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeBackups",
+        "rds_postgresql:GetBackupDownloadLink",
+        "rds_postgresql:DescribeBackupPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:ModifyBackupPolicy",
+        "rds_postgresql:DescribeBackups",
+        "rds_postgresql:GetBackupDownloadLink",
+        "rds_postgresql:DescribeBackupPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/BackupId",
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "BackupDataSize": {
+      "description": "Backup data size (bytes).",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BackupDescription": {
+      "description": "Backup description.",
+      "type": "string"
+    },
+    "BackupEndTime": {
+      "description": "Backup end time.",
+      "type": "string"
+    },
+    "BackupFileName": {
+      "description": "Backup file name.",
+      "type": "string"
+    },
+    "BackupFileSize": {
+      "description": "Backup file size (bytes).",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BackupId": {
+      "description": "Backup ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "BackupMeta": {
+      "description": "Backup metadata, used to specify the database list for logical backups.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/BackupMeta"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BackupMethod": {
+      "description": "Backup method: Physical for physical backup, Logical for logical backup.",
+      "type": "string"
+    },
+    "BackupPolicy": {
+      "$ref": "#/definitions/BackupPolicy",
+      "description": "Backup policy configuration information."
+    },
+    "BackupProgress": {
+      "description": "Backup progress percentage.",
+      "type": "integer"
+    },
+    "BackupScope": {
+      "description": "Backup scope: Instance for instance-level backup, Database for database-level backup.",
+      "type": "string"
+    },
+    "BackupStartTime": {
+      "description": "Backup start time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "BackupStatus": {
+      "description": "Backup status, such as Success, Running, Failed.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "BackupType": {
+      "description": "Backup type: Full for full backup, Increment for incremental backup.",
+      "type": "string"
+    },
+    "CreateType": {
+      "description": "Creation method: Manual for manual creation, Automated for automatic creation.",
+      "type": "string"
+    },
+    "DownloadBackup": {
+      "description": "Download logical backup file after creation. Only valid for logical backups.",
+      "type": "boolean"
+    },
+    "DownloadProgress": {
+      "description": "Download preparation progress percentage.",
+      "type": "integer"
+    },
+    "DownloadStatus": {
+      "description": "Download status.",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "RDS PostgreSQL instance ID.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BackupId",
+    "/properties/BackupStatus",
+    "/properties/BackupStartTime",
+    "/properties/BackupEndTime",
+    "/properties/BackupFileSize",
+    "/properties/BackupFileName",
+    "/properties/BackupDataSize",
+    "/properties/BackupProgress",
+    "/properties/CreateType",
+    "/properties/DownloadStatus",
+    "/properties/DownloadProgress"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::Backup",
+  "writeOnlyProperties": [
+    "/properties/DownloadBackup"
+  ]
+}

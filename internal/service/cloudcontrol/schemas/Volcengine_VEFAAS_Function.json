@@ -45,6 +45,24 @@
       ],
       "type": "object"
     },
+    "DependencyInstallStatus": {
+      "description": "Dependency installation task status.",
+      "properties": {
+        "CreateTime": {
+          "description": "Task creation time.",
+          "type": "string"
+        },
+        "FinishTime": {
+          "description": "Task completion time. The task is considered complete when it is in one of the following statuses: Canceled: Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Task status. Possible values are as follows: Enqueued: Queued. Dequeued: Dequeued. InProgress: In progress. Canceling/Canceled: Canceling/Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "DestinationConfig": {
       "description": "Asynchronous task callback target configuration",
       "properties": {
@@ -319,13 +337,18 @@
       "permissions": [
         "vefaas:CreateFunction",
         "vefaas:GetFunction",
+        "vefaas:ListFunctions",
+        "vefaas:CreateDependencyInstallTask",
+        "vefaas:GetDependencyInstallTaskStatus",
         "tag:GetResources"
       ]
     },
     "delete": {
       "permissions": [
         "vefaas:DeleteFunction",
-        "vefaas:GetFunction"
+        "vefaas:GetFunction",
+        "vefaas:GetDependencyInstallTaskStatus",
+        "vefaas:ListFunctions"
       ]
     },
     "list": {
@@ -336,6 +359,8 @@
     "read": {
       "permissions": [
         "vefaas:GetFunction",
+        "vefaas:ListFunctions",
+        "vefaas:GetDependencyInstallTaskStatus",
         "tag:GetResources"
       ]
     },
@@ -343,6 +368,9 @@
       "permissions": [
         "vefaas:UpdateFunction",
         "vefaas:GetFunction",
+        "vefaas:ListFunctions",
+        "vefaas:CreateDependencyInstallTask",
+        "vefaas:GetDependencyInstallTaskStatus",
         "tag:GetResources"
       ]
     }
@@ -377,6 +405,11 @@
       "semantic": "createdTime",
       "type": "string"
     },
+    "DependencyInstallStatus": {
+      "$ref": "#/definitions/DependencyInstallStatus",
+      "description": "Dependency installation task status.",
+      "type": "object"
+    },
     "Description": {
       "description": "Function description. Up to 1000 Unicode characters",
       "maxLength": 1000,
@@ -385,6 +418,10 @@
     },
     "EnableApmplus": {
       "description": "Whether to enable application monitoring",
+      "type": "boolean"
+    },
+    "EnableDependencyInstall": {
+      "description": "Enable function dependency installation. true: Enabled. The function installs dependencies after creation. false: Disabled. The function does not automatically install dependencies.",
       "type": "boolean"
     },
     "Envs": {
@@ -526,6 +563,7 @@
     "/properties/CodeSize",
     "/properties/CodeSizeLimit",
     "/properties/CreationTime",
+    "/properties/DependencyInstallStatus",
     "/properties/LastUpdateTime",
     "/properties/TriggersCount",
     "/properties/InstanceType",
@@ -539,6 +577,7 @@
   "typeName": "Volcengine::VEFAAS::Function",
   "writeOnlyProperties": [
     "/properties/SourceAccessConfig",
+    "/properties/EnableDependencyInstall",
     "/properties/TosMountConfig/Credentials"
   ]
 }

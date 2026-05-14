@@ -820,3 +820,11 @@ resource_schema "volcengine_tos_bucket_cors" {
 resource_schema "volcengine_rdsmysql_parameter_template" {
   cloudcontrol_type_name = "Volcengine::RDSMySQL::ParameterTemplate"
 }
+
+resource_schema "volcengine_rdspostgresql_backup" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::Backup"
+}
+
+resource_schema "volcengine_redis_parameter_group" {
+  cloudcontrol_type_name = "Volcengine::Redis::ParameterGroup"
+}

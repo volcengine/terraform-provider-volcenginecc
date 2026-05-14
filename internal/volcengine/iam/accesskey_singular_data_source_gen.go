@@ -26,84 +26,84 @@ func accesskeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Key ID (Access Key Id)",
+		//	  "description": "Access Key Id.",
 		//	  "type": "string"
 		//	}
 		"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Key ID (Access Key Id)",
+			Description: "Access Key Id.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Key creation time (ISO8601 format)",
+		//	  "description": "Key creation time. The time format is ISO8601.",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Key creation time (ISO8601 format)",
+			Description: "Key creation time. The time format is ISO8601.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastLoginDate
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Last login time",
+		//	  "description": "Last login time.",
 		//	  "type": "string"
 		//	}
 		"last_login_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last login time",
+			Description: "Last login time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Region
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Last accessed region by the API key",
+		//	  "description": "The last region accessed by the API key.",
 		//	  "type": "string"
 		//	}
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last accessed region by the API key",
+			Description: "The last region accessed by the API key.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Last usage time of the API key",
+		//	  "description": "The last time the API key was used.",
 		//	  "type": "string"
 		//	}
 		"request_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last usage time of the API key",
+			Description: "The last time the API key was used.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecretAccessKey
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Secret Access Key",
+		//	  "description": "Secret Access Key.",
 		//	  "type": "string"
 		//	}
 		"secret_access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Secret Access Key",
+			Description: "Secret Access Key.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Service
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "English abbreviation of the last accessed service by the API key",
+		//	  "description": "The English abbreviation of the last service accessed by the API key.",
 		//	  "type": "string"
 		//	}
 		"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "English abbreviation of the last accessed service by the API key",
+			Description: "The English abbreviation of the last service accessed by the API key.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Key status. \"active\" means enabled, \"inactive\" means disabled",
+		//	  "description": "Key status. active means enabled, inactive means disabled.",
 		//	  "enum": [
 		//	    "active",
 		//	    "inactive"
@@ -111,29 +111,29 @@ func accesskeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Key status. \"active\" means enabled, \"inactive\" means disabled",
+			Description: "Key status. active means enabled, inactive means disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedTime
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Key update time (ISO8601 format)",
+		//	  "description": "Key update time. The time format is ISO8601.",
 		//	  "type": "string"
 		//	}
 		"updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Key update time (ISO8601 format)",
+			Description: "Key update time. The time format is ISO8601.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "User name. Used to create a key for a specified IAM user. If no user name is specified, the key is created for the current request identity (that is, if the main account requests, the key is created for the main account; if an IAM user requests, the key is created for that IAM user. Note: Roles cannot create keys for themselves). When an IAM user has the AccessKeySelfManageAccess permission, to create a key for themselves, they must include their own UserName in the request",
+		//	  "description": "User name. Used to create a key for the specified IAM user. If no user name is specified, a key is created for the current request identity (that is, if the primary account makes the request, the key is created for the primary account itself; if an IAM user makes the request, the key is created for the IAM user. Note: Roles do not support creating keys for themselves). If the IAM user has the AccessKeySelfManageAccess permission and needs to create a key for themselves, they must include their own UserName in the request.",
 		//	  "type": "string"
 		//	}
 		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "User name. Used to create a key for a specified IAM user. If no user name is specified, the key is created for the current request identity (that is, if the main account requests, the key is created for the main account; if an IAM user requests, the key is created for that IAM user. Note: Roles cannot create keys for themselves). When an IAM user has the AccessKeySelfManageAccess permission, to create a key for themselves, they must include their own UserName in the request",
+			Description: "User name. Used to create a key for the specified IAM user. If no user name is specified, a key is created for the current request identity (that is, if the primary account makes the request, the key is created for the primary account itself; if an IAM user makes the request, the key is created for the IAM user. Note: Roles do not support creating keys for themselves). If the IAM user has the AccessKeySelfManageAccess permission and needs to create a key for themselves, they must include their own UserName in the request.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

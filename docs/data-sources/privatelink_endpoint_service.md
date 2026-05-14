@@ -26,6 +26,7 @@ Data Source schema for Volcengine::PrivateLink::EndpointService
 - `business_status` (String) Whether the endpoint service is locked. Normal: normal. FinancialLocked: locked. If this parameter is empty, the endpoint service is not locked.
 - `create_time` (String) Creation time of the endpoint service.
 - `description` (String) Description of the endpoint service.
+- `enable_verify_private_dns` (Boolean) Verify the DNS name of the specified endpoint service. Only verification of public domain names is supported. true: enabled. false: not enabled.
 - `ip_address_versions` (Set of String) IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.
 - `payer` (String) Billing account for the private network connection. Endpoint: endpoint account. EndpointService: endpoint service account.
 - `permit_account_ids` (Set of String) Details of authorized allowlist accounts.

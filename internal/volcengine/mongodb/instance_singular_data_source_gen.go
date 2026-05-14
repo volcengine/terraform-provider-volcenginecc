@@ -335,6 +335,114 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Instance name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 2–64 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceParameters
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance parameter list",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Instance parameter",
+		//	    "properties": {
+		//	      "CheckingCode": {
+		//	        "description": "Parameter validation rule",
+		//	        "type": "string"
+		//	      },
+		//	      "ForceModify": {
+		//	        "description": "Whether to force modification",
+		//	        "type": "boolean"
+		//	      },
+		//	      "ForceRestart": {
+		//	        "description": "Requires instance restart to take effect after modification",
+		//	        "type": "boolean"
+		//	      },
+		//	      "ParameterDefaultValue": {
+		//	        "description": "Parameter default value",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterDescription": {
+		//	        "description": "Parameter description",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterName": {
+		//	        "description": "Parameter name",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterRole": {
+		//	        "description": "Parameter role. Optional values: Node, Shard, ConfigServer, Mongos",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterType": {
+		//	        "description": "Parameter type. Optional values: String, Integer, Boolean, List, Float",
+		//	        "type": "string"
+		//	      },
+		//	      "ParameterValue": {
+		//	        "description": "Parameter value",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ParameterName",
+		//	      "ParameterValue"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"instance_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CheckingCode
+					"checking_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter validation rule",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ForceModify
+					"force_modify": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether to force modification",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ForceRestart
+					"force_restart": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Requires instance restart to take effect after modification",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterDefaultValue
+					"parameter_default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter default value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterDescription
+					"parameter_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter description",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterName
+					"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterRole
+					"parameter_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter role. Optional values: Node, Shard, ConfigServer, Mongos",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterType
+					"parameter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter type. Optional values: String, Integer, Boolean, List, Float",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParameterValue
+					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Parameter value",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Instance parameter list",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceStatus
 		// Cloud Control resource type schema:
 		//
@@ -1115,6 +1223,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_renew":                     "AutoRenew",
 		"charge_status":                  "ChargeStatus",
 		"charge_type":                    "ChargeType",
+		"checking_code":                  "CheckingCode",
 		"closed_time":                    "ClosedTime",
 		"config_server_node_id":          "ConfigServerNodeId",
 		"config_server_node_spec":        "ConfigServerNodeSpec",
@@ -1126,9 +1235,12 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"db_engine_version":              "DBEngineVersion",
 		"db_engine_version_str":          "DBEngineVersionStr",
 		"expired_time":                   "ExpiredTime",
+		"force_modify":                   "ForceModify",
+		"force_restart":                  "ForceRestart",
 		"instance_count":                 "InstanceCount",
 		"instance_id":                    "InstanceId",
 		"instance_name":                  "InstanceName",
+		"instance_parameters":            "InstanceParameters",
 		"instance_status":                "InstanceStatus",
 		"instance_type":                  "InstanceType",
 		"key":                            "Key",
@@ -1145,6 +1257,12 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"node_spec":                      "NodeSpec",
 		"node_status":                    "NodeStatus",
 		"nodes":                          "Nodes",
+		"parameter_default_value":        "ParameterDefaultValue",
+		"parameter_description":          "ParameterDescription",
+		"parameter_name":                 "ParameterName",
+		"parameter_role":                 "ParameterRole",
+		"parameter_type":                 "ParameterType",
+		"parameter_value":                "ParameterValue",
 		"period":                         "Period",
 		"period_unit":                    "PeriodUnit",
 		"private_endpoint":               "PrivateEndpoint",

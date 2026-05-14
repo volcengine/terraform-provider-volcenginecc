@@ -89,7 +89,8 @@
         "privatelink:CreateVpcEndpointService",
         "privatelink:DescribeVpcEndpointServiceAttributes",
         "privatelink:DescribeVpcEndpointServicePermissions",
-        "privatelink:DescribeVpcEndpointServiceResources"
+        "privatelink:DescribeVpcEndpointServiceResources",
+        "privatelink:VerifyVpcEndpointServicePrivateDNS"
       ]
     },
     "delete": {
@@ -122,6 +123,7 @@
         "privatelink:AttachResourceToVpcEndpointService",
         "privatelink:DetachResourceFromVpcEndpointService",
         "privatelink:ModifyVpcEndpointServiceResourceAttributes",
+        "privatelink:VerifyVpcEndpointServicePrivateDNS",
         "privatelink:DescribeVpcEndpointServiceAttributes",
         "privatelink:DescribeVpcEndpointServicePermissions",
         "privatelink:DescribeVpcEndpointServiceResources"
@@ -153,6 +155,10 @@
       "description": "Description of the endpoint service.",
       "semantic": "description",
       "type": "string"
+    },
+    "EnableVerifyPrivateDNS": {
+      "description": "Verify the DNS name of the specified endpoint service. Only verification of public domain names is supported. true: enabled. false: not enabled.",
+      "type": "boolean"
     },
     "IpAddressVersions": {
       "description": "IP protocol type of the endpoint service. If the return value only contains ipv4, the endpoint service is IPv4 type and only supports IPv4 services. If the return value contains both ipv4 and ipv6, the endpoint service is dual-stack and supports both IPv4 and IPv6 services.",
@@ -295,6 +301,7 @@
   },
   "typeName": "Volcengine::PrivateLink::EndpointService",
   "writeOnlyProperties": [
-    "/properties/ServiceNameSuffix"
+    "/properties/ServiceNameSuffix",
+    "/properties/EnableVerifyPrivateDNS"
   ]
 }

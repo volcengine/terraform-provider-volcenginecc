@@ -8,6 +8,7 @@ package clb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -555,7 +556,7 @@ func nLBResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Availability zone information for the NLB instance.",
-		//	  "insertionOrder": false,
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "properties": {
 		//	      "EniId": {
@@ -622,7 +623,7 @@ func nLBResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"zone_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"zone_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EniId
@@ -739,6 +740,9 @@ func nLBResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Description: "Availability zone information for the NLB instance.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

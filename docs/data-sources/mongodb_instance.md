@@ -38,6 +38,7 @@ Data Source schema for Volcengine::MongoDB::Instance
 - `instance_count` (Number) Number of instances to create. Must be a positive integer greater than or equal to 1. Default is 1.
 - `instance_id` (String) Instance ID.
 - `instance_name` (String) Instance name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 2–64 characters.
+- `instance_parameters` (Attributes Set) Instance parameter list (see [below for nested schema](#nestedatt--instance_parameters))
 - `instance_status` (String) Instance status. Creating: Creating. Running: Running. Allowlist maintenance: AllowListMaintaining. Scaling: Scaling. Restarting: Restarting. Network maintaining: NetworkMaintaining. Restoring: Restoring. Upgrading: Upgrading. Unavailable: Unavailable. Closing: Closing. Deleting: Deleting. Closed: Closed. SSL updating: SSLUpdating. Switch mastering: SwitchMastering. Role changing: RoleChanging. Migrating: Migrating.
 - `instance_type` (String) MongoDB instance type. Valid values: ReplicaSet (default): replica set. ShardedCluster: sharded cluster.
 - `mongos` (Attributes Set) Mongos information list (see [below for nested schema](#nestedatt--mongos))
@@ -79,6 +80,22 @@ Read-Only:
 - `used_memory_gb` (Number) Used memory. Unit: GiB.
 - `usedv_cpu` (Number) Used cores.
 - `zone_id` (String) Availability zone ID of the current node.
+
+
+<a id="nestedatt--instance_parameters"></a>
+### Nested Schema for `instance_parameters`
+
+Read-Only:
+
+- `checking_code` (String) Parameter validation rule
+- `force_modify` (Boolean) Whether to force modification
+- `force_restart` (Boolean) Requires instance restart to take effect after modification
+- `parameter_default_value` (String) Parameter default value
+- `parameter_description` (String) Parameter description
+- `parameter_name` (String) Parameter name
+- `parameter_role` (String) Parameter role. Optional values: Node, Shard, ConfigServer, Mongos
+- `parameter_type` (String) Parameter type. Optional values: String, Integer, Boolean, List, Float
+- `parameter_value` (String) Parameter value
 
 
 <a id="nestedatt--mongos"></a>

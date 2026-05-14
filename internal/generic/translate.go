@@ -58,6 +58,17 @@ func (t toCloudControl) AsString(ctx context.Context, schema typeAtTerraformPath
 	return string(desiredState), nil
 }
 
+// ToCloudControlString translates a Terraform Value (typically a plan or state Raw)
+// to the Cloud Control desired-state JSON string. Exported so that resources which
+// need to customize the Create flow (e.g. to capture create-only response fields)
+// can reuse the same translation logic as the generic resource.
+//
+// The schema argument should be a value implementing TypeAtTerraformPath
+// (such as schema.Schema from terraform-plugin-framework).
+func ToCloudControlString(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value, tfToCcNameMap map[string]string) (string, error) {
+	return toCloudControl{tfToCfNameMap: tfToCcNameMap}.AsString(ctx, schema, val)
+}
+
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
 func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) {

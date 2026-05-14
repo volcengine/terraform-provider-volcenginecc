@@ -168,6 +168,48 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Function creation time",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DependencyInstallStatus
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Dependency installation task status.",
+		//	  "properties": {
+		//	    "CreateTime": {
+		//	      "description": "Task creation time.",
+		//	      "type": "string"
+		//	    },
+		//	    "FinishTime": {
+		//	      "description": "Task completion time. The task is considered complete when it is in one of the following statuses: Canceled: Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.",
+		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "description": "Task status. Possible values are as follows: Enqueued: Queued. Dequeued: Dequeued. InProgress: In progress. Canceling/Canceled: Canceling/Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dependency_install_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CreateTime
+				"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Task creation time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FinishTime
+				"finish_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Task completion time. The task is considered complete when it is in one of the following statuses: Canceled: Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Task status. Possible values are as follows: Enqueued: Queued. Dequeued: Dequeued. InProgress: In progress. Canceling/Canceled: Canceling/Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Dependency installation task status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// Cloud Control resource type schema:
 		//
@@ -189,6 +231,17 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"enable_apmplus": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to enable application monitoring",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnableDependencyInstall
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Enable function dependency installation. true: Enabled. The function installs dependencies after creation. false: Disabled. The function does not automatically install dependencies.",
+		//	  "type": "boolean"
+		//	}
+		"enable_dependency_install": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable function dependency installation. true: Enabled. The function installs dependencies after creation. false: Disabled. The function does not automatically install dependencies.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Envs
@@ -905,13 +958,16 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"code_size_limit":               "CodeSizeLimit",
 		"command":                       "Command",
 		"cpu_strategy":                  "CpuStrategy",
+		"create_time":                   "CreateTime",
 		"creation_time":                 "CreationTime",
 		"credentials":                   "Credentials",
+		"dependency_install_status":     "DependencyInstallStatus",
 		"description":                   "Description",
 		"destination":                   "Destination",
 		"destination_config":            "DestinationConfig",
 		"enable_apmplus":                "EnableApmplus",
 		"enable_async_task":             "EnableAsyncTask",
+		"enable_dependency_install":     "EnableDependencyInstall",
 		"enable_log":                    "EnableLog",
 		"enable_nas":                    "EnableNas",
 		"enable_shared_internet_access": "EnableSharedInternetAccess",
@@ -921,6 +977,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"envs":                          "Envs",
 		"exclusive_mode":                "ExclusiveMode",
 		"file_system_id":                "FileSystemId",
+		"finish_time":                   "FinishTime",
 		"function_id":                   "FunctionId",
 		"gid":                           "Gid",
 		"initializer_sec":               "InitializerSec",
@@ -952,6 +1009,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source":                        "Source",
 		"source_access_config":          "SourceAccessConfig",
 		"source_type":                   "SourceType",
+		"status":                        "Status",
 		"subnet_ids":                    "SubnetIds",
 		"tags":                          "Tags",
 		"tls_config":                    "TlsConfig",

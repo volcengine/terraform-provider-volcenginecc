@@ -203,6 +203,8 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_tos_bucket_realtime_log -ccschema ../service/cloudcontrol/schemas/Volcengine_TOS_BucketRealtimeLog.json -package tos -- ../volcengine/tos/bucket_realtime_log_resource_gen.go ../volcengine/tos/bucket_realtime_log_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_tos_bucket_cors -ccschema ../service/cloudcontrol/schemas/Volcengine_TOS_BucketCors.json -package tos -- ../volcengine/tos/bucket_cors_resource_gen.go ../volcengine/tos/bucket_cors_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_rdsmysql_parameter_template -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSMySQL_ParameterTemplate.json -package rdsmysql -- ../volcengine/rdsmysql/parameter_template_resource_gen.go ../volcengine/rdsmysql/parameter_template_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_rdspostgresql_backup -ccschema ../service/cloudcontrol/schemas/Volcengine_RDSPostgreSQL_Backup.json -package rdspostgresql -- ../volcengine/rdspostgresql/backup_resource_gen.go ../volcengine/rdspostgresql/backup_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_redis_parameter_group -ccschema ../service/cloudcontrol/schemas/Volcengine_Redis_ParameterGroup.json -package redis -- ../volcengine/redis/parameter_group_resource_gen.go ../volcengine/redis/parameter_group_resource_gen_test.go
 
 package provider
 

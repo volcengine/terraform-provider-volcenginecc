@@ -420,7 +420,7 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Availability zone information for the NLB instance.",
-		//	  "insertionOrder": false,
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "properties": {
 		//	      "EniId": {
@@ -487,7 +487,7 @@ func nLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"zone_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		"zone_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: EniId

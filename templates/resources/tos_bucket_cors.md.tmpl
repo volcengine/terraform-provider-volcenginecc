@@ -1,24 +1,25 @@
 ---
-page_title: "{.Name} {.Type} - {.ProviderName}"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
 subcategory: "TOS"
 description: |-
-{ .Description | plainmarkdown | trimspace | prefixlines "  " }
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# {.Name} ({.Type})
+# {{.Name}} ({{.Type}})
 
-{ .Description | trimspace }
+{{ .Description | trimspace }}
 
 ## Example Usage
 
-{ tffile (printf "examples/resources/%s/tos_bucket_cors.tf" .Name)}
+{{ tffile (printf "examples/resources/%s/tos_bucket_cors.tf" .Name)}}
 
-{ .SchemaMarkdown | trimspace }
-{- if .HasImport }
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
 
 ## Import
 
 Import is supported using the following syntax:
 
-{ codefile "shell" .ImportFile }
-{- end }
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

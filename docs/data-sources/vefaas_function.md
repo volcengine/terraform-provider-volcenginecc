@@ -27,8 +27,10 @@ Data Source schema for Volcengine::VEFAAS::Function
 - `command` (String) Custom startup command for the instance (currently only supported in native/v1 runtime)
 - `cpu_strategy` (String) Function CPU billing policy. When creating a microservice application type function, this field must be set to always, meaning at least one instance is running. Other function types do not support this field
 - `creation_time` (String) Function creation time
+- `dependency_install_status` (Attributes) Dependency installation task status. (see [below for nested schema](#nestedatt--dependency_install_status))
 - `description` (String) Function description. Up to 1000 Unicode characters
 - `enable_apmplus` (Boolean) Whether to enable application monitoring
+- `enable_dependency_install` (Boolean) Enable function dependency installation. true: Enabled. The function installs dependencies after creation. false: Disabled. The function does not automatically install dependencies.
 - `envs` (Attributes Set) Environment variables. (see [below for nested schema](#nestedatt--envs))
 - `exclusive_mode` (Boolean) Exclusive mode switch. true: disables multi-concurrency per instance, i.e., exclusive mode where a single instance can only handle one request at a time. false (default): enables multi-concurrency per instance, i.e., non-exclusive mode where a single instance can handle multiple requests at the same time. You can set the maximum concurrent requests per instance using MaxConcurrency.
 - `function_id` (String) Function ID
@@ -87,6 +89,16 @@ Read-Only:
 - `destination` (String) Specific callback target. Set the value to empty ("") to disable this callback
 
 
+
+
+<a id="nestedatt--dependency_install_status"></a>
+### Nested Schema for `dependency_install_status`
+
+Read-Only:
+
+- `create_time` (String) Task creation time.
+- `finish_time` (String) Task completion time. The task is considered complete when it is in one of the following statuses: Canceled: Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.
+- `status` (String) Task status. Possible values are as follows: Enqueued: Queued. Dequeued: Dequeued. InProgress: In progress. Canceling/Canceled: Canceling/Canceled. Timeout: Timed out. Failed: Failed. Succeeded: Succeeded.
 
 
 <a id="nestedatt--envs"></a>
