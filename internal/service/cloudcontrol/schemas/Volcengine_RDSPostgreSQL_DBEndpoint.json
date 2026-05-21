@@ -86,12 +86,14 @@
     "create": {
       "permissions": [
         "rds_postgresql:CreateDBEndpoint",
+        "rds_postgresql:CreateDBEndpointPublicAddress",
         "rds_postgresql:DescribeDBInstanceDetail"
       ]
     },
     "delete": {
       "permissions": [
         "rds_postgresql:DeleteDBEndpoint",
+        "rds_postgresql:DeleteDBEndpointPublicAddress",
         "rds_postgresql:DescribeDBInstanceDetail"
       ]
     },
@@ -114,7 +116,9 @@
         "rds_postgresql:ModifyDBEndpointReadWriteDelayThreshold",
         "rds_postgresql:ModifyDBEndpointProxyConfig",
         "rds_postgresql:ModifyDBEndpointAddress",
-        "rds_postgresql:ModifyDBEndpointDNS"
+        "rds_postgresql:ModifyDBEndpointDNS",
+        "rds_postgresql:CreateDBEndpointPublicAddress",
+        "rds_postgresql:DeleteDBEndpointPublicAddress"
       ]
     }
   },
@@ -123,15 +127,6 @@
     "/properties/EndpointId"
   ],
   "properties": {
-    "Addresses": {
-      "description": "Address list.",
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/Address"
-      },
-      "type": "array",
-      "uniqueItems": true
-    },
     "AutoAddNewNodes": {
       "description": "When the endpoint type is read/write or read-only, you can configure whether new nodes are automatically added. Values: Enable: Automatically add. Disable: Do not automatically add (default).",
       "type": "string"
@@ -163,6 +158,11 @@
       "description": "Endpoint type: Cluster: default endpoint (created by default). Custom: custom endpoint.",
       "type": "string"
     },
+    "InnerAddresses": {
+      "$ref": "#/definitions/Address",
+      "description": "Public service zone connection address",
+      "type": "object"
+    },
     "InstanceId": {
       "description": "Instance ID.",
       "type": "string"
@@ -170,6 +170,16 @@
     "Nodes": {
       "description": "List of nodes configured for the connection endpoint. Note: Required when EndpointType is Custom. The primary node does not require a node ID; use the string 'Primary'.",
       "type": "string"
+    },
+    "PrivateAddresses": {
+      "$ref": "#/definitions/Address",
+      "description": "Private network connection address",
+      "type": "object"
+    },
+    "PublicAddresses": {
+      "$ref": "#/definitions/Address",
+      "description": "Public network connection address",
+      "type": "object"
     },
     "ReadOnlyNodeDistributionType": {
       "description": "Read-only weight allocation mode. Values: Default: standard weight allocation (default). Custom: custom weight allocation.",
@@ -204,13 +214,30 @@
     }
   },
   "readOnlyProperties": [
-    "/properties/Addresses/*/CrossRegionDomain",
-    "/properties/Addresses/*/Domain",
-    "/properties/Addresses/*/DomainVisibilitySetting",
-    "/properties/Addresses/*/EipId",
-    "/properties/Addresses/*/IPAddress",
-    "/properties/Addresses/*/NetworkType",
-    "/properties/Addresses/*/SubnetId",
+    "/properties/PublicAddresses/CrossRegionDomain",
+    "/properties/PublicAddresses/DNSVisibility",
+    "/properties/PublicAddresses/Domain",
+    "/properties/PublicAddresses/DomainVisibilitySetting",
+    "/properties/PublicAddresses/IPAddress",
+    "/properties/PublicAddresses/NetworkType",
+    "/properties/PublicAddresses/Port",
+    "/properties/PublicAddresses/SubnetId",
+    "/properties/PrivateAddresses/CrossRegionDomain",
+    "/properties/PrivateAddresses/Domain",
+    "/properties/PrivateAddresses/DomainVisibilitySetting",
+    "/properties/PrivateAddresses/EipId",
+    "/properties/PrivateAddresses/IPAddress",
+    "/properties/PrivateAddresses/NetworkType",
+    "/properties/PrivateAddresses/SubnetId",
+    "/properties/InnerAddresses/CrossRegionDomain",
+    "/properties/InnerAddresses/DNSVisibility",
+    "/properties/InnerAddresses/Domain",
+    "/properties/InnerAddresses/DomainVisibilitySetting",
+    "/properties/InnerAddresses/EipId",
+    "/properties/InnerAddresses/IPAddress",
+    "/properties/InnerAddresses/NetworkType",
+    "/properties/InnerAddresses/Port",
+    "/properties/InnerAddresses/SubnetId",
     "/properties/AutoAddNewNodes",
     "/properties/Description",
     "/properties/EnableReadOnly",
@@ -222,6 +249,6 @@
   "typeName": "Volcengine::RDSPostgreSQL::DBEndpoint",
   "writeOnlyProperties": [
     "/properties/Nodes",
-    "/properties/Addresses/*/DomainPrefix"
+    "/properties/PrivateAddresses/DomainPrefix"
   ]
 }

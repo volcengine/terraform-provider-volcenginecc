@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_privatezone_private_zone.example "zid"

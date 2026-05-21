@@ -18,6 +18,9 @@ resource "volcenginecc_rdspostgresql_db_endpoint" "RdsPostgresqlDbEndpointDemo" 
   instance_id     = "postgres-9dxxxxxd"
   nodes           = "Primary"
   read_write_mode = "ReadWrite"
+  public_addresses = {
+    eip_id = "eip-0xxxxx8c45"
+  }
 }
 ```
 
@@ -26,13 +29,14 @@ resource "volcenginecc_rdspostgresql_db_endpoint" "RdsPostgresqlDbEndpointDemo" 
 
 ### Optional
 
-- `addresses` (Attributes Set) Address list.
- Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--addresses))
 - `enable_read_write_splitting` (String) Whether read/write splitting is enabled. Values: Enable: Enabled. Disable: Not enabled.
 - `endpoint_name` (String) Instance connection endpoint name.
 - `endpoint_type` (String) Endpoint type: Cluster: default endpoint (created by default). Custom: custom endpoint.
+- `inner_addresses` (Attributes) Public service zone connection address (see [below for nested schema](#nestedatt--inner_addresses))
 - `instance_id` (String) Instance ID.
 - `nodes` (String) List of nodes configured for the connection endpoint. Note: Required when EndpointType is Custom. The primary node does not require a node ID; use the string 'Primary'.
+- `private_addresses` (Attributes) Private network connection address (see [below for nested schema](#nestedatt--private_addresses))
+- `public_addresses` (Attributes) Public network connection address (see [below for nested schema](#nestedatt--public_addresses))
 - `read_only_node_distribution_type` (String) Read-only weight allocation mode. Values: Default: standard weight allocation (default). Custom: custom weight allocation.
 - `read_only_node_max_delay_time` (Number) Maximum latency threshold for read-only nodes. When the latency of a read-only node exceeds this value, read traffic will not be sent to that node. Unit: seconds. Range: 0~3600. Default: 30. Note: This parameter can be set for default endpoints with read/write splitting enabled.
 - `read_only_node_weights` (Attributes Set) List of nodes configured for the connection endpoint and their corresponding read-only weights.
@@ -49,14 +53,64 @@ resource "volcenginecc_rdspostgresql_db_endpoint" "RdsPostgresqlDbEndpointDemo" 
 - `endpoint_id` (String) Instance connection endpoint ID.
 - `id` (String) Uniquely identifies the resource.
 
-<a id="nestedatt--addresses"></a>
-### Nested Schema for `addresses`
+<a id="nestedatt--inner_addresses"></a>
+### Nested Schema for `inner_addresses`
+
+Optional:
+
+- `domain_prefix` (String) New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.
+
+Read-Only:
+
+- `cross_region_domain` (String) Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.
+- `dns_visibility` (Boolean) Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.
+- `domain` (String) Connection domain name
+- `domain_visibility_setting` (String) Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.
+- `eip_id` (String) EIP ID, valid only for Public addresses.
+- `ip_address` (String) IP address
+- `network_type` (String) Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.
+- `port` (String) Port number.
+- `subnet_id` (String) Subnet ID
+
+
+<a id="nestedatt--private_addresses"></a>
+### Nested Schema for `private_addresses`
 
 Optional:
 
 - `dns_visibility` (Boolean) Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.
 - `domain_prefix` (String) New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.
 - `port` (String) Port number.
+
+Read-Only:
+
+- `cross_region_domain` (String) Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.
+- `domain` (String) Connection domain name
+- `domain_visibility_setting` (String) Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.
+- `eip_id` (String) EIP ID, valid only for Public addresses.
+- `ip_address` (String) IP address
+- `network_type` (String) Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.
+- `subnet_id` (String) Subnet ID
+
+
+<a id="nestedatt--public_addresses"></a>
+### Nested Schema for `public_addresses`
+
+Optional:
+
+- `domain_prefix` (String) New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.
+- `eip_id` (String) EIP ID, valid only for Public addresses.
+
+Read-Only:
+
+- `cross_region_domain` (String) Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.
+- `dns_visibility` (Boolean) Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.
+- `domain` (String) Connection domain name
+- `domain_visibility_setting` (String) Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.
+- `ip_address` (String) IP address
+- `network_type` (String) Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.
+- `port` (String) Port number.
+- `subnet_id` (String) Subnet ID
 
 
 <a id="nestedatt--read_only_node_weights"></a>

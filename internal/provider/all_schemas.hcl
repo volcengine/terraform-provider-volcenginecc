@@ -705,20 +705,12 @@ resource_schema "volcengine_tls_import_task" {
   cloudcontrol_type_name = "Volcengine::TLS::ImportTask"
 }
 
-resource_schema "volcengine_cen_bandwidth_package" {
-  cloudcontrol_type_name = "Volcengine::CEN::BandwidthPackage"
-}
-
 resource_schema "volcengine_vedbm_endpoint" {
   cloudcontrol_type_name = "Volcengine::VEDBM::Endpoint"
 }
 
 resource_schema "volcengine_rdspostgresql_instance" {
   cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::Instance"
-}
-
-resource_schema "volcengine_privatelink_vpc_endpoint" {
-  cloudcontrol_type_name = "Volcengine::PrivateLink::VpcEndpoint"
 }
 
 resource_schema "volcengine_tls_consumer_group" {
@@ -827,4 +819,16 @@ resource_schema "volcengine_rdspostgresql_backup" {
 
 resource_schema "volcengine_redis_parameter_group" {
   cloudcontrol_type_name = "Volcengine::Redis::ParameterGroup"
+}
+
+resource_schema "volcengine_cen_bandwidth_package" {
+  cloudcontrol_type_name = "Volcengine::CEN::BandwidthPackage"
+}
+
+resource_schema "volcengine_privatelink_vpc_endpoint" {
+  cloudcontrol_type_name = "Volcengine::PrivateLink::VPCEndpoint"
+}
+
+resource_schema "volcengine_privatezone_private_zone" {
+  cloudcontrol_type_name = "Volcengine::PrivateZone::PrivateZone"
 }
