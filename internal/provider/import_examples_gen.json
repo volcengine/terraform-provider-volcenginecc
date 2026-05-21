@@ -860,11 +860,6 @@
         "path": "./examples/resources/volcenginecc_tls_import_task/import.sh"
     },
     {
-        "resource": "volcenginecc_cen_bandwidth_package",
-        "identifier": ["CenBandwidthPackageId"],
-        "path": "./examples/resources/volcenginecc_cen_bandwidth_package/import.sh"
-    },
-    {
         "resource": "volcenginecc_vedbm_endpoint",
         "identifier": ["InstanceId","EndpointId"],
         "path": "./examples/resources/volcenginecc_vedbm_endpoint/import.sh"
@@ -873,11 +868,6 @@
         "resource": "volcenginecc_rdspostgresql_instance",
         "identifier": ["InstanceId"],
         "path": "./examples/resources/volcenginecc_rdspostgresql_instance/import.sh"
-    },
-    {
-        "resource": "volcenginecc_privatelink_vpc_endpoint",
-        "identifier": ["EndpointId"],
-        "path": "./examples/resources/volcenginecc_privatelink_vpc_endpoint/import.sh"
     },
     {
         "resource": "volcenginecc_tls_consumer_group",
@@ -1013,5 +1003,20 @@
         "resource": "volcenginecc_redis_parameter_group",
         "identifier": ["ParameterGroupId"],
         "path": "./examples/resources/volcenginecc_redis_parameter_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cen_bandwidth_package",
+        "identifier": ["CenBandwidthPackageId"],
+        "path": "./examples/resources/volcenginecc_cen_bandwidth_package/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatelink_vpc_endpoint",
+        "identifier": ["EndpointId"],
+        "path": "./examples/resources/volcenginecc_privatelink_vpc_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatezone_private_zone",
+        "identifier": ["ZID"],
+        "path": "./examples/resources/volcenginecc_privatezone_private_zone/import.sh"
     }
 ]

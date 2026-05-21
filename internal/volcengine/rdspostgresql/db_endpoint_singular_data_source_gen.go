@@ -22,119 +22,6 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::RDSPostgreSQL::DBEndpoint resource.
 func dBEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: Addresses
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "Address list.",
-		//	  "insertionOrder": false,
-		//	  "items": {
-		//	    "description": "Connection endpoint address.",
-		//	    "properties": {
-		//	      "CrossRegionDomain": {
-		//	        "description": "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
-		//	        "type": "string"
-		//	      },
-		//	      "DNSVisibility": {
-		//	        "description": "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
-		//	        "type": "boolean"
-		//	      },
-		//	      "Domain": {
-		//	        "description": "Connection domain name",
-		//	        "type": "string"
-		//	      },
-		//	      "DomainPrefix": {
-		//	        "description": "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
-		//	        "type": "string"
-		//	      },
-		//	      "DomainVisibilitySetting": {
-		//	        "description": "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
-		//	        "type": "string"
-		//	      },
-		//	      "EipId": {
-		//	        "description": "EIP ID, valid only for Public addresses.",
-		//	        "type": "string"
-		//	      },
-		//	      "IPAddress": {
-		//	        "description": "IP address",
-		//	        "type": "string"
-		//	      },
-		//	      "NetworkType": {
-		//	        "description": "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
-		//	        "type": "string"
-		//	      },
-		//	      "Port": {
-		//	        "description": "Port number.",
-		//	        "type": "string"
-		//	      },
-		//	      "SubnetId": {
-		//	        "description": "Subnet ID",
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array",
-		//	  "uniqueItems": true
-		//	}
-		"addresses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CrossRegionDomain
-					"cross_region_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DNSVisibility
-					"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Domain
-					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Connection domain name",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DomainPrefix
-					"domain_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DomainVisibilitySetting
-					"domain_visibility_setting": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EipId
-					"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "EIP ID, valid only for Public addresses.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: IPAddress
-					"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "IP address",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: NetworkType
-					"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Port
-					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Port number.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SubnetId
-					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Subnet ID",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Address list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: AutoAddNewNodes
 		// Cloud Control resource type schema:
 		//
@@ -212,6 +99,111 @@ func dBEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Endpoint type: Cluster: default endpoint (created by default). Custom: custom endpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InnerAddresses
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Public service zone connection address",
+		//	  "properties": {
+		//	    "CrossRegionDomain": {
+		//	      "description": "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
+		//	      "type": "string"
+		//	    },
+		//	    "DNSVisibility": {
+		//	      "description": "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Domain": {
+		//	      "description": "Connection domain name",
+		//	      "type": "string"
+		//	    },
+		//	    "DomainPrefix": {
+		//	      "description": "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
+		//	      "type": "string"
+		//	    },
+		//	    "DomainVisibilitySetting": {
+		//	      "description": "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
+		//	      "type": "string"
+		//	    },
+		//	    "EipId": {
+		//	      "description": "EIP ID, valid only for Public addresses.",
+		//	      "type": "string"
+		//	    },
+		//	    "IPAddress": {
+		//	      "description": "IP address",
+		//	      "type": "string"
+		//	    },
+		//	    "NetworkType": {
+		//	      "description": "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "description": "Port number.",
+		//	      "type": "string"
+		//	    },
+		//	    "SubnetId": {
+		//	      "description": "Subnet ID",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"inner_addresses": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossRegionDomain
+				"cross_region_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DNSVisibility
+				"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Domain
+				"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Connection domain name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DomainPrefix
+				"domain_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DomainVisibilitySetting
+				"domain_visibility_setting": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EipId
+				"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "EIP ID, valid only for Public addresses.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IPAddress
+				"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IP address",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkType
+				"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Port number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetId
+				"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Subnet ID",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Public service zone connection address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
@@ -232,6 +224,216 @@ func dBEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"nodes": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "List of nodes configured for the connection endpoint. Note: Required when EndpointType is Custom. The primary node does not require a node ID; use the string 'Primary'.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateAddresses
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Private network connection address",
+		//	  "properties": {
+		//	    "CrossRegionDomain": {
+		//	      "description": "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
+		//	      "type": "string"
+		//	    },
+		//	    "DNSVisibility": {
+		//	      "description": "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Domain": {
+		//	      "description": "Connection domain name",
+		//	      "type": "string"
+		//	    },
+		//	    "DomainPrefix": {
+		//	      "description": "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
+		//	      "type": "string"
+		//	    },
+		//	    "DomainVisibilitySetting": {
+		//	      "description": "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
+		//	      "type": "string"
+		//	    },
+		//	    "EipId": {
+		//	      "description": "EIP ID, valid only for Public addresses.",
+		//	      "type": "string"
+		//	    },
+		//	    "IPAddress": {
+		//	      "description": "IP address",
+		//	      "type": "string"
+		//	    },
+		//	    "NetworkType": {
+		//	      "description": "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "description": "Port number.",
+		//	      "type": "string"
+		//	    },
+		//	    "SubnetId": {
+		//	      "description": "Subnet ID",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"private_addresses": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossRegionDomain
+				"cross_region_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DNSVisibility
+				"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Domain
+				"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Connection domain name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DomainPrefix
+				"domain_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DomainVisibilitySetting
+				"domain_visibility_setting": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EipId
+				"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "EIP ID, valid only for Public addresses.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IPAddress
+				"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IP address",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkType
+				"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Port number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetId
+				"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Subnet ID",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Private network connection address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PublicAddresses
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Public network connection address",
+		//	  "properties": {
+		//	    "CrossRegionDomain": {
+		//	      "description": "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
+		//	      "type": "string"
+		//	    },
+		//	    "DNSVisibility": {
+		//	      "description": "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Domain": {
+		//	      "description": "Connection domain name",
+		//	      "type": "string"
+		//	    },
+		//	    "DomainPrefix": {
+		//	      "description": "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
+		//	      "type": "string"
+		//	    },
+		//	    "DomainVisibilitySetting": {
+		//	      "description": "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
+		//	      "type": "string"
+		//	    },
+		//	    "EipId": {
+		//	      "description": "EIP ID, valid only for Public addresses.",
+		//	      "type": "string"
+		//	    },
+		//	    "IPAddress": {
+		//	      "description": "IP address",
+		//	      "type": "string"
+		//	    },
+		//	    "NetworkType": {
+		//	      "description": "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "description": "Port number.",
+		//	      "type": "string"
+		//	    },
+		//	    "SubnetId": {
+		//	      "description": "Subnet ID",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"public_addresses": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossRegionDomain
+				"cross_region_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Private network address accessible across regions. Note: If this address is unavailable, this field will not be returned.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DNSVisibility
+				"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether public network resolution is enabled. Values: false: Default, private network resolution. true: Both private and public network resolution.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Domain
+				"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Connection domain name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DomainPrefix
+				"domain_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "New access address prefix. The access address prefix must meet the following rules: consists of lowercase letters, numbers, and hyphens (-). Must contain at least 8 characters. The total length (including suffix) must not exceed 63 characters. Must start with a lowercase letter and end with a lowercase letter or number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DomainVisibilitySetting
+				"domain_visibility_setting": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Type of private network address. Values: LocalDomain: Local region domain name. CrossRegionDomain: Domain name accessible across regions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EipId
+				"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "EIP ID, valid only for Public addresses.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IPAddress
+				"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "IP address",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkType
+				"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Network address type. Values: Private: private network connection address. Public: public network connection address. Inner: public service zone address.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Port number.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetId
+				"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Subnet ID",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Public network connection address",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReadOnlyNodeDistributionType
@@ -359,7 +561,6 @@ func dBEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::RDSPostgreSQL::DBEndpoint").WithTerraformTypeName("volcenginecc_rdspostgresql_db_endpoint")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"addresses":                        "Addresses",
 		"auto_add_new_nodes":               "AutoAddNewNodes",
 		"cross_region_domain":              "CrossRegionDomain",
 		"description":                      "Description",
@@ -373,6 +574,7 @@ func dBEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint_id":                      "EndpointId",
 		"endpoint_name":                    "EndpointName",
 		"endpoint_type":                    "EndpointType",
+		"inner_addresses":                  "InnerAddresses",
 		"instance_id":                      "InstanceId",
 		"ip_address":                       "IPAddress",
 		"network_type":                     "NetworkType",
@@ -380,6 +582,8 @@ func dBEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"node_type":                        "NodeType",
 		"nodes":                            "Nodes",
 		"port":                             "Port",
+		"private_addresses":                "PrivateAddresses",
+		"public_addresses":                 "PublicAddresses",
 		"read_only_node_distribution_type": "ReadOnlyNodeDistributionType",
 		"read_only_node_max_delay_time":    "ReadOnlyNodeMaxDelayTime",
 		"read_only_node_weights":           "ReadOnlyNodeWeights",

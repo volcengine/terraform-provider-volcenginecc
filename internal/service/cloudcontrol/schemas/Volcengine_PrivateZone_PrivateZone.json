@@ -1,0 +1,185 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ZoneName",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Resource tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    },
+    "Vpc": {
+      "description": "Associated VPC information",
+      "properties": {
+        "AccountID": {
+          "description": "Account ID to which the VPC belongs",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region where the VPC is located",
+          "type": "string"
+        },
+        "RegionName": {
+          "description": "Name of the region where the VPC is located",
+          "type": "string"
+        },
+        "VpcId": {
+          "description": "VPC ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "VpcId",
+        "Region"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Private network resolution",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ZoneName",
+      "/properties/ProjectName",
+      "/properties/RecursionMode",
+      "/properties/LineMode"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "private_zone:CreatePrivateZone",
+        "private_zone:QueryPrivateZone",
+        "private_zone:ListBindVPC"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "private_zone:DeletePrivateZone",
+        "private_zone:QueryPrivateZone"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "private_zone:ListPrivateZones"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "private_zone:QueryPrivateZone",
+        "private_zone:ListBindVPC"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "private_zone:UpdatePrivateZone",
+        "private_zone:QueryPrivateZone",
+        "private_zone:ListBindVPC",
+        "private_zone:UpdateBindVPC",
+        "private_zone:TagResources",
+        "private_zone:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ZID"
+  ],
+  "properties": {
+    "CreatedAt": {
+      "description": "Domain creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "LastOperator": {
+      "description": "Most recent operator",
+      "type": "string"
+    },
+    "LineMode": {
+      "description": "Enable load balancing: 0 to disable, 1 to enable. Default is 0",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "Name of the project the domain belongs to. Default is default",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RecordCount": {
+      "description": "Number of DNS records under the domain name",
+      "type": "integer"
+    },
+    "RecursionMode": {
+      "description": "Enable recursive resolution: true to enable, false to disable. Default is false",
+      "type": "boolean"
+    },
+    "Remark": {
+      "description": "Remarks. Default is an empty string",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "One or more tags associated with the domain. A resource can be associated with up to 50 tags",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedAt": {
+      "description": "Most recent update time of the domain",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Vpcs": {
+      "description": "One or more VPCs associated with the domain. Domain resolution is only effective within the associated VPCs",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Vpc"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ZID": {
+      "description": "Unique ID identifying the domain name",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ZoneName": {
+      "description": "Domain name, can be a second-level or multi-level domain",
+      "semantic": "resourceName",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ZID",
+    "/properties/Vpcs/*/AccountID",
+    "/properties/Vpcs/*/RegionName",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/RecordCount",
+    "/properties/LastOperator"
+  ],
+  "required": [
+    "ZoneName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::PrivateZone::PrivateZone"
+}
