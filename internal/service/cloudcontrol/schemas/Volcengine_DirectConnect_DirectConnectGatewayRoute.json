@@ -1,0 +1,104 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/DestinationCidrBlock",
+    "/properties/DirectConnectGatewayId",
+    "/properties/NextHopId"
+  ],
+  "description": "Add a static route to the dedicated gateway.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/DestinationCidrBlock",
+      "/properties/DirectConnectGatewayId",
+      "/properties/DirectConnectGatewayRouteId",
+      "/properties/NextHopId",
+      "/properties/NextHopType",
+      "/properties/RouteType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "directconnect:CreateDirectConnectGatewayRoute",
+        "directconnect:DescribeDirectConnectGatewayRouteAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "directconnect:DeleteDirectConnectGatewayRoute",
+        "directconnect:DescribeDirectConnectGatewayRouteAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectGatewayRoutes"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectGatewayRouteAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/DirectConnectGatewayRouteId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Account ID to which the dedicated gateway route belongs.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Time when the dedicated gateway route was created.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DestinationCidrBlock": {
+      "description": "Destination network segment of the dedicated gateway route.",
+      "type": "string"
+    },
+    "DirectConnectGatewayId": {
+      "description": "Dedicated gateway ID.",
+      "type": "string"
+    },
+    "DirectConnectGatewayRouteId": {
+      "description": "Dedicated gateway route ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "NextHopId": {
+      "description": "Next hop instance ID for the dedicated gateway route.",
+      "type": "string"
+    },
+    "NextHopType": {
+      "description": "Type of the next hop instance for the dedicated gateway route. Valid values: VIF: Virtual Interface CEN: Cloud Enterprise Network TransitRouter: Transit Router.",
+      "type": "string"
+    },
+    "RouteType": {
+      "description": "Type of the dedicated gateway route. Valid values: BGP: BGP dynamic route Static: Static route CEN: Cloud Enterprise Network route, that is, after the dedicated gateway joins the Cloud Enterprise Network, routes synchronized from the Cloud Enterprise Network.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the dedicated gateway route. Creating: Creating Deleting: Deleting Pending: Configuring Available: Available.",
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/CreationTime",
+    "/properties/DirectConnectGatewayRouteId",
+    "/properties/NextHopType",
+    "/properties/RouteType",
+    "/properties/Status"
+  ],
+  "required": [
+    "DestinationCidrBlock",
+    "DirectConnectGatewayId",
+    "NextHopId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::DirectConnect::DirectConnectGatewayRoute"
+}

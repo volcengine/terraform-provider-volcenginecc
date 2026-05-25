@@ -1,0 +1,216 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/DirectConnectConnectionId",
+    "/properties/DirectConnectGatewayId",
+    "/properties/LocalIp",
+    "/properties/PeerIp",
+    "/properties/RouteType",
+    "/properties/VlanId"
+  ],
+  "definitions": {
+    "Tag": {
+      "properties": {
+        "Key": {
+          "description": "Tag key (Key) of the virtual interface tag. Parameter - N - indicates the sequence number of the tag key (Key), with a range of 1, 2, 3, …, 49, 50. N must be in continuous ascending order. Multiple tag keys (Key) are separated by \u0026. Cannot start with sys: in any case. sys: is reserved for system tags and cannot be created. Length range: 1–128 characters. Supports input in any language, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equal signs (=), plus signs (+), hyphens (-), and at signs (@).",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value (Value) of the virtual interface tag. Parameter - N - indicates the sequence number of the tag value (Value), with a range of 1, 2, 3, …, 49, 50. N must be in continuous ascending order. Multiple tag values (Value) are separated by \u0026. Length range: 0–256 characters. If not specified, the default is empty. Supports input in any language, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equal signs (=), plus signs (+), hyphens (-), and at signs (@). Case sensitive. Cannot start or end with a space. Note: If Tags.N.Value is provided, Tags.N.Key must also be provided.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "The virtual interface is built on top of a physical dedicated line. It is a logical interface that enables the local data center (IDC) to connect to different private networks in the cloud via the physical dedicated line. Supports both static routing and BGP routing. This operation uses BGP routing.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/DirectConnectGatewayId",
+      "/properties/DirectConnectConnectionId",
+      "/properties/LocalIp",
+      "/properties/PeerIp",
+      "/properties/RouteType",
+      "/properties/Status",
+      "/properties/VirtualInterfaceId",
+      "/properties/VirtualInterfaceName",
+      "/properties/VlanId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "directconnect:CreateDirectConnectVirtualInterface",
+        "directconnect:DescribeDirectConnectVirtualInterfaceAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "directconnect:DeleteDirectConnectVirtualInterface",
+        "directconnect:DescribeDirectConnectVirtualInterfaceAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectVirtualInterfaces"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectVirtualInterfaceAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "directconnect:ModifyDirectConnectVirtualInterfaceAttributes",
+        "directconnect:UntagResources",
+        "directconnect:TagResources",
+        "directconnect:DescribeDirectConnectVirtualInterfaceAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/VirtualInterfaceId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "ID of the account to which the dedicated line gateway belongs.",
+      "type": "string"
+    },
+    "Bandwidth": {
+      "description": "Bandwidth limit of the virtual interface, in Mbps.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BfdDetectInterval": {
+      "description": "BFD detection interval (ms).",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BfdDetectMultiplier": {
+      "description": "BFD detection count.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "CreationTime": {
+      "description": "Time when the virtual interface was created.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the virtual interface.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DirectConnectConnectionId": {
+      "description": "ID of the physical dedicated line associated with the virtual interface.",
+      "type": "string"
+    },
+    "DirectConnectGatewayId": {
+      "description": "ID of the dedicated gateway associated with the virtual interface.",
+      "type": "string"
+    },
+    "EnableBfd": {
+      "description": "Enable BFD detection. true: enabled false: disabled.",
+      "type": "boolean"
+    },
+    "EnableBfdEcho": {
+      "description": "Enable BFD detection echo packet mode. true: enabled false: disabled.",
+      "type": "boolean"
+    },
+    "EnableNqa": {
+      "description": "Is NQA detection enabled? true: enabled false: not enabled.",
+      "type": "boolean"
+    },
+    "LocalIp": {
+      "description": "Local gateway interconnection IP address of the virtual interface.",
+      "type": "string"
+    },
+    "LocalIpv6Ip": {
+      "description": "IPv6 address of the local gateway interconnection IP for the virtual interface.",
+      "type": "string"
+    },
+    "NqaDetectInterval": {
+      "description": "Interval for sending consecutive probe packets in NQA detection.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "NqaDetectMultiplier": {
+      "description": "NQA detection count. If the number of consecutive NQA detection failures reaches the set count, the link is considered faulty.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "PeerIp": {
+      "description": "Peer gateway interconnection IP address of the virtual interface.",
+      "type": "string"
+    },
+    "PeerIpv6Ip": {
+      "description": "IPv6 address of the peer gateway interconnection IP for the virtual interface.",
+      "type": "string"
+    },
+    "RouteType": {
+      "description": "Route type of the virtual interface.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the virtual interface. Creating: creating Deleting: deleting Pending: configuring Available: available.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "All tag information added to the virtual interface.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Time when the virtual interface was updated.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VirtualInterfaceId": {
+      "description": "ID of the virtual interface.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "VirtualInterfaceName": {
+      "description": "Name of the virtual interface.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "VlanId": {
+      "description": "VLAN ID of the virtual interface.",
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/CreationTime",
+    "/properties/Status",
+    "/properties/UpdateTime",
+    "/properties/VirtualInterfaceId"
+  ],
+  "required": [
+    "DirectConnectConnectionId",
+    "DirectConnectGatewayId",
+    "LocalIp",
+    "PeerIp",
+    "VlanId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::DirectConnect::VirtualInterface"
+}

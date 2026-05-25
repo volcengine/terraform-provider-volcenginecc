@@ -206,6 +206,13 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_cen_bandwidth_package -ccschema ../service/cloudcontrol/schemas/Volcengine_CEN_BandwidthPackage.json -package cen -- ../volcengine/cen/bandwidth_package_resource_gen.go ../volcengine/cen/bandwidth_package_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_privatelink_vpc_endpoint -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateLink_VPCEndpoint.json -package privatelink -- ../volcengine/privatelink/vpc_endpoint_resource_gen.go ../volcengine/privatelink/vpc_endpoint_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_privatezone_private_zone -ccschema ../service/cloudcontrol/schemas/Volcengine_PrivateZone_PrivateZone.json -package privatezone -- ../volcengine/privatezone/private_zone_resource_gen.go ../volcengine/privatezone/private_zone_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_directconnect_gateway_route -ccschema ../service/cloudcontrol/schemas/Volcengine_DirectConnect_DirectConnectGatewayRoute.json -package directconnect -- ../volcengine/directconnect/gateway_route_resource_gen.go ../volcengine/directconnect/gateway_route_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vpn_ssl_vpn_server -ccschema ../service/cloudcontrol/schemas/Volcengine_VPN_SslVpnServer.json -package vpn -- ../volcengine/vpn/ssl_vpn_server_resource_gen.go ../volcengine/vpn/ssl_vpn_server_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vpn_vpn_gateway_route -ccschema ../service/cloudcontrol/schemas/Volcengine_VPN_VpnGatewayRoute.json -package vpn -- ../volcengine/vpn/vpn_gateway_route_resource_gen.go ../volcengine/vpn/vpn_gateway_route_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tls_alarm -ccschema ../service/cloudcontrol/schemas/Volcengine_TLS_Alarm.json -package tls -- ../volcengine/tls/alarm_resource_gen.go ../volcengine/tls/alarm_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_directconnect_virtual_interface -ccschema ../service/cloudcontrol/schemas/Volcengine_DirectConnect_VirtualInterface.json -package directconnect -- ../volcengine/directconnect/virtual_interface_resource_gen.go ../volcengine/directconnect/virtual_interface_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_kms_secret -ccschema ../service/cloudcontrol/schemas/Volcengine_KMS_Secret.json -package kms -- ../volcengine/kms/secret_resource_gen.go ../volcengine/kms/secret_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_gtm_pool -ccschema ../service/cloudcontrol/schemas/Volcengine_GTM_Pool.json -package gtm -- ../volcengine/gtm/pool_resource_gen.go ../volcengine/gtm/pool_resource_gen_test.go
 
 package provider
 
@@ -230,6 +237,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/fwcenter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/gtm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/hbase"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"

@@ -219,7 +219,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Status": {
-		//	      "description": "Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.",
+		//	      "description": "Domain verification status. PendingVerification: Pending verification, Verifying: In progress, Verified: Verified, Failed: Verification failed",
 		//	      "type": "string"
 		//	    },
 		//	    "Type": {
@@ -242,7 +242,7 @@ func endpointServiceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.",
+					Description: "Domain verification status. PendingVerification: Pending verification, Verifying: In progress, Verified: Verified, Failed: Verification failed",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Type

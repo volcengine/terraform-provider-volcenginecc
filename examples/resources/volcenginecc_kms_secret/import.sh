@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_kms_secret.example "secret_name"

@@ -19,7 +19,7 @@
           "type": "string"
         },
         "Status": {
-          "description": "Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.",
+          "description": "Domain verification status. PendingVerification: Pending verification, Verifying: In progress, Verified: Verified, Failed: Verification failed",
           "type": "string"
         },
         "Type": {
@@ -87,6 +87,7 @@
     "create": {
       "permissions": [
         "privatelink:CreateVpcEndpointService",
+        "privatelink:AddPermissionToVpcEndpointService",
         "privatelink:DescribeVpcEndpointServiceAttributes",
         "privatelink:DescribeVpcEndpointServicePermissions",
         "privatelink:DescribeVpcEndpointServiceResources",
