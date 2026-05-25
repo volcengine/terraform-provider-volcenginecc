@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpn_ssl_vpn_server.example "ssl_vpn_server_id"

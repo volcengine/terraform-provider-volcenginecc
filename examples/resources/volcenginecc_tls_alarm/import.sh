@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_alarm.example "alarm_id"

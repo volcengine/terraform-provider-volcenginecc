@@ -1,0 +1,163 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GtmId"
+  ],
+  "definitions": {
+    "Address": {
+      "description": "Target address configuration in the address pool",
+      "properties": {
+        "Capacity": {
+          "description": "Address capacity",
+          "type": "integer"
+        },
+        "Geo": {
+          "description": "Geographic location of the address, returned only in queries",
+          "type": "string"
+        },
+        "Mode": {
+          "description": "Address availability mode",
+          "type": "string"
+        },
+        "RectifiedGeos": {
+          "description": "List of geographic route codes to be corrected",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "Value": {
+          "description": "Target address value",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "Address weight",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "GTM address pool resource, belongs to a GTM instance and is used to carry the target address set and routing capacity configuration",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/GtmId",
+      "/properties/PoolId",
+      "/properties/Name",
+      "/properties/Remark",
+      "/properties/AddrType"
+    ],
+    "required": [
+      "/properties/GtmId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "gtm:CreatePool",
+        "gtm:GetPool"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "gtm:DeletePool",
+        "gtm:ListPools"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "gtm:ListPools"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "gtm:GetPool"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "gtm:UpdatePool",
+        "gtm:GetPool"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GtmId",
+    "/properties/PoolId"
+  ],
+  "properties": {
+    "AddrType": {
+      "description": "Target address type of the address pool. If you do not set this parameter, Cloud Scheduling GTM will automatically determine the target address type. ipv4: IPv4 address. ipv6: IPv6 address. cname: Domain name",
+      "type": "string"
+    },
+    "Addresses": {
+      "description": "List of target addresses in the address pool",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Address"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Capacity": {
+      "description": "Address pool capacity",
+      "type": "integer"
+    },
+    "CapacityMode": {
+      "description": "Capacity mode, indicates whether to configure address pool capacity or address capacity",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Deletable": {
+      "description": "Whether the address pool can be deleted. true: The address pool is not referenced by any routing rule and can be deleted. false: The address pool is referenced by one or more routing rules and cannot be deleted",
+      "type": "boolean"
+    },
+    "GtmId": {
+      "description": "UUID of the associated GTM instance",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Address pool name. UTF-8 format. Maximum length is 64 UTF-8 characters",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PoolId": {
+      "description": "Address pool ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Remark": {
+      "description": "Address pool remarks. Default is an empty string. UTF-8 format. Maximum length is 128 UTF-8 characters",
+      "semantic": "description",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Update time",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/PoolId",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/Deletable",
+    "/properties/Addresses/*/Geo"
+  ],
+  "required": [
+    "GtmId",
+    "Name",
+    "Addresses"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::GTM::Pool"
+}

@@ -56,7 +56,7 @@ Data Source schema for Volcengine::PrivateLink::EndpointService
 Read-Only:
 
 - `name` (String) Domain verification name.
-- `status` (String) Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.
+- `status` (String) Domain verification status. PendingVerification: Pending verification, Verifying: In progress, Verified: Verified, Failed: Verification failed
 - `type` (String) Domain verification type. TXT: TXT record.
 - `value` (String) Domain verification value.
 

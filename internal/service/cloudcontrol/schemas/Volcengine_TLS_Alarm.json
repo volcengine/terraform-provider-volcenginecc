@@ -1,0 +1,490 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectId"
+  ],
+  "definitions": {
+    "AlarmPeriodSetting": {
+      "description": "Alert notification sending interval.",
+      "properties": {
+        "Email": {
+          "description": "Email alert interval, in minutes. Value range: 1–1440",
+          "type": "integer"
+        },
+        "GeneralWebhook": {
+          "description": "Custom Webhook alert interval, in minutes. Value range: 1–1440.",
+          "type": "integer"
+        },
+        "Phone": {
+          "description": "Phone alert cycle, in minutes. Value range: 10–1440.",
+          "type": "integer"
+        },
+        "SMS": {
+          "description": "SMS alert interval, in minutes. Value range: 10–1440",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "GeneralWebhookHeader": {
+      "description": "Custom interface callback request header.",
+      "properties": {
+        "Key": {
+          "description": "Key of the custom request header.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Value of the custom request header.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "JoinConfig": {
+      "description": "Configuration related to set operations on alert query analysis results.",
+      "properties": {
+        "Condition": {
+          "description": "Expression used for left join or right join.",
+          "type": "string"
+        },
+        "SetOperationType": {
+          "description": "Set operation type. Optional values: CrossJoin: Cartesian product. LeftJoin: Left join. RightJoin: Right join. InnerJoin: Inner join. FullJoin: Full join.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NoticeRule": {
+      "description": "Configuration related to set operations on alert query analysis results.",
+      "properties": {
+        "HasEndNode": {
+          "description": "Whether a subsequent end node exists.",
+          "type": "boolean"
+        },
+        "HasNext": {
+          "description": "Whether to continue to the next level of condition evaluation",
+          "type": "boolean"
+        },
+        "ReceiverInfos": {
+          "description": "Notification group rule",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Receiver"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "RuleNode": {
+          "description": "Rule node, in JSON format.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NotifyGroup": {
+      "description": "Notification list for the alert",
+      "properties": {
+        "AlarmNotifyGroupId": {
+          "description": "Alert notification group ID.",
+          "type": "string"
+        },
+        "AlarmNotifyGroupName": {
+          "description": "Alert notification group name.",
+          "type": "string"
+        },
+        "CreateTime": {
+          "description": "Alert notification group creation time.",
+          "type": "string"
+        },
+        "IamProjectName": {
+          "description": "IAM project to which the alert group belongs.",
+          "type": "string"
+        },
+        "ModifyTime": {
+          "description": "Time when the alert notification group was modified.",
+          "type": "string"
+        },
+        "NoticeRules": {
+          "description": "Notification group rule",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/NoticeRule"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NotifyType": {
+          "description": "Type of alert notification. Optional values, select one or more: Trigger - when an alert is triggered. Recovery - when an alert is recovered.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Receivers": {
+          "description": "List of IAM users who receive alerts.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Receiver"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
+    "QueryRequest": {
+      "description": "Monitoring task execution statement.",
+      "properties": {
+        "EndTimeOffset": {
+          "description": "Query end time, relative to the current time, in minutes. Value must be a non-positive integer and greater than StartTimeOffset. Maximum: 0, minimum: -1440",
+          "type": "integer"
+        },
+        "EndTimeOffsetUnit": {
+          "description": "Unit for the end time range of the query. Default is minutes. Supports second/minute/hour (Second, Minute, Hour).",
+          "type": "string"
+        },
+        "Number": {
+          "description": "Alert object sequence number, starting from 1 and incrementing by 1",
+          "type": "integer"
+        },
+        "Query": {
+          "description": "Query analysis statement, with a maximum supported length of 1024 characters.",
+          "type": "string"
+        },
+        "StartTimeOffset": {
+          "description": "Query start time, relative to the current time, in minutes. Value must be a non-positive integer. Maximum: 0, minimum: -1440",
+          "type": "integer"
+        },
+        "StartTimeOffsetUnit": {
+          "description": "Unit for the query start time range. The default is minutes. Supports seconds/minutes/hours (Second, Minute, Hour).",
+          "type": "string"
+        },
+        "TimeSpanType": {
+          "description": "Whether to use on-the-hour time for the query. If left blank, defaults to Relative.",
+          "type": "string"
+        },
+        "TopicId": {
+          "description": "Log topic ID monitored by the alert policy.",
+          "type": "string"
+        },
+        "TopicName": {
+          "description": "Name of the log topic monitored by the alert policy.",
+          "type": "string"
+        },
+        "TruncatedTime": {
+          "description": "Round time values, i.e., round to the nearest minute or hour (Second, Minute, Hour).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Receiver": {
+      "description": "Configuration related to set operations on alert query analysis results.",
+      "properties": {
+        "AlarmContentTemplateId": {
+          "description": "Alert content template ID.",
+          "type": "string"
+        },
+        "AlarmWebhookAtGroups": {
+          "description": "Name of the user group to be notified when sending notifications to 飞书, DingTalk, or WeCom via Webhook integration configuration.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AlarmWebhookAtUsers": {
+          "description": "Username to notify when sending notifications to Feishu, DingTalk, or WeCom via Webhook integration configuration.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AlarmWebhookIntegrationId": {
+          "description": "ID of the alert Webhook integration configuration. When you configure parameters starting with AlarmWebhook, it means you choose to manage the Webhook address using the Webhook integration configuration. In this case, leave parameters starting with GeneralWebhook empty; no configuration is required.",
+          "type": "string"
+        },
+        "AlarmWebhookIntegrationName": {
+          "description": "Name of the alert Webhook integration configuration. When parameters starting with AlarmWebhook are configured, it means you choose to manage Webhook addresses using the Webhook integration configuration. In this case, leave parameters starting with GeneralWebhook empty; no configuration is required.",
+          "type": "string"
+        },
+        "AlarmWebhookIsAtAll": {
+          "description": "Whether to notify all users when sending notifications to Feishu, DingTalk, or WeCom via Webhook integration configuration. true: notify all users. false: do not notify all users.",
+          "type": "boolean"
+        },
+        "EndTime": {
+          "description": "End time for receiving alert notifications. 24-hour format, HH:mm:ss, range: 00:00:00–23:59:59. StartTime cannot be later than EndTime",
+          "type": "string"
+        },
+        "GeneralWebhookBody": {
+          "description": "Custom WebHook request body. It is recommended to set the request body content according to the callback interface format requirements of the corresponding service.",
+          "type": "string"
+        },
+        "GeneralWebhookHeaders": {
+          "description": "Custom interface callback request header.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/GeneralWebhookHeader"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "GeneralWebhookMethod": {
+          "description": "Custom interface callback method. Only POST or PUT is supported.",
+          "type": "string"
+        },
+        "GeneralWebhookUrl": {
+          "description": "Custom callback URL for the interface",
+          "type": "string"
+        },
+        "ReceiverChannels": {
+          "description": "Notification receiving channels. You can set one or more channels. Options: Email: Email. Sms: SMS. Phone: Phone call. GeneralWebhook: Custom Webhook address. 飞书: 飞书. DingTalk: DingTalk. WeCom: WeCom.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ReceiverNames": {
+          "description": "IAM user or user group name",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ReceiverType": {
+          "description": "Recipient type. Options: User: IAM user. UserGroup: IAM user group.",
+          "type": "string"
+        },
+        "StartTime": {
+          "description": "Start time for receiving alert notifications. 24-hour format, HH:mm:ss, range: 00:00:00–23:59:59. StartTime cannot be later than EndTime.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RequestCycle": {
+      "description": "Execution cycle of the monitoring task.",
+      "properties": {
+        "CronTab": {
+          "description": "Cron expression. Log Service uses a Cron expression to specify the scheduled execution of alert tasks. The minimum granularity is one minute, using a 24-hour format. For example, 0 18 * * * means the alert task runs once daily at 18:00.",
+          "type": "string"
+        },
+        "CronTimeZone": {
+          "description": "Time zone in which the Cron expression takes effect.",
+          "type": "string"
+        },
+        "Time": {
+          "description": "Scheduling cycle or the specific time point for periodic execution (minutes from 00:00). Value range: 1–1440, in minutes.",
+          "type": "integer"
+        },
+        "Type": {
+          "description": "Scheduling interval type. Options: Period: schedule at regular intervals. Fixed: schedule at a fixed time each day. Cron: use a Cron expression.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TriggerCondition": {
+      "description": "Configuration related to set operations on alert query analysis results.",
+      "properties": {
+        "Condition": {
+          "description": "Alert trigger condition expression.",
+          "type": "string"
+        },
+        "CountCondition": {
+          "description": "Numerical expression for scenarios with data or specific entries, implemented using __count__.",
+          "type": "string"
+        },
+        "NoData": {
+          "description": "When enabled, if the result after set operations is an empty set, a separate no-data alert is triggered.",
+          "type": "boolean"
+        },
+        "Severity": {
+          "description": "Alert notification level, indicating the severity of the alert. Supports notice, warning, or critical, with severity increasing in that order. The default is notice.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Alert policy. The logging service periodically analyzes data and sends alerts that meet the trigger conditions to the specified notification objects",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectId",
+      "/properties/AlarmName",
+      "/properties/AlarmId",
+      "/properties/QueryRequests/0/TopicId",
+      "/properties/QueryRequests/0/TopicName",
+      "/properties/Severity",
+      "/properties/Status"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateAlarm",
+        "TLS:DescribeAlarms"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteAlarm",
+        "TLS:DescribeAlarms"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeAlarms"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeAlarms"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:ModifyAlarm",
+        "TLS:DescribeAlarms"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AlarmId"
+  ],
+  "properties": {
+    "AlarmId": {
+      "description": "Alert policy ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AlarmName": {
+      "description": "Alert policy name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AlarmNotifyGroups": {
+      "description": "List of notification groups corresponding to the alert.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/NotifyGroup"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AlarmPeriod": {
+      "description": "Alert notification sending interval. When the alert is triggered continuously and reaches the specified TriggerPeriod limit, the log service sends alert notifications at the specified interval. Value range: 10–1440, unit: minutes. This parameter sets the sending interval for alert notifications across all channels. AlarmPeriod and AlarmPeriodDetail cannot both be empty. If both are specified, AlarmPeriodDetail takes precedence.",
+      "type": "integer"
+    },
+    "AlarmPeriodDetail": {
+      "$ref": "#/definitions/AlarmPeriodSetting",
+      "description": "Alert notification sending interval. When the alert is triggered continuously and reaches the specified TriggerPeriod, the logging service sends alert notifications according to the specified interval. Value range: 10–1440, in minutes. This parameter is used to set the sending interval for each channel. AlarmPeriod and AlarmPeriodDetail cannot both be empty. If both are specified, AlarmPeriodDetail takes precedence",
+      "type": "object"
+    },
+    "Condition": {
+      "description": "Alert trigger conditions. Alert policies support referencing query analysis results using the $N.keyname expression. If you configure the TriggerConditions field, the Condition and Severity fields will be ignored. If you do not configure the TriggerConditions field, both Condition and Severity fields are required.",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Alert policy creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "JoinConfigurations": {
+      "description": "Configuration for set operations on alert query analysis results. Log Service treats each query analysis result as a set and determines whether to trigger an alert based on the set result. When multiple execution statements (QueryRequest) are configured, multi-set association monitoring is supported. Supported set operations include Cartesian product, left join, and right join.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/JoinConfig"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ModifyTime": {
+      "description": "Last modified time of the alert policy.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "ProjectId": {
+      "description": "ID of the log project where the monitored log topic resides",
+      "type": "string"
+    },
+    "QueryRequests": {
+      "description": "Monitoring task execution statement.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/QueryRequest"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RequestCycle": {
+      "$ref": "#/definitions/RequestCycle",
+      "description": "Monitoring task execution statement.",
+      "type": "object"
+    },
+    "SendResolved": {
+      "description": "Enable alert policy. Default is true (enabled)",
+      "type": "boolean"
+    },
+    "Severity": {
+      "description": "Alert notification level, indicating the severity of the alert. Supported values: notice, warning, or critical. Default is notice",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Enable alert policy. Default is true (enabled)",
+      "semantic": "status",
+      "type": "boolean"
+    },
+    "TriggerConditions": {
+      "description": "Alert trigger condition list. You can configure up to 10 alert trigger conditions. If you configure the TriggerConditions field, the Condition and Severity fields will be ignored. If you do not configure the TriggerConditions field, the Condition and Severity fields are required",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TriggerCondition"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TriggerPeriod": {
+      "description": "Duration period. An alert is triggered after the trigger condition is continuously met for TriggerPeriod cycles. Minimum value: 1, maximum value: 10, default is 1.",
+      "type": "integer"
+    },
+    "UserDefineMsg": {
+      "description": "Customize alert notification content. You can insert content variables and functions. For details, see the documentation for content variables and content functions. To display this content in the actual alert notification, reference it in the content template using the NotifyMsg variable.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AlarmId",
+    "/properties/CreateTime",
+    "/properties/ModifyTime",
+    "/properties/AlarmNotifyGroups/*/Receivers",
+    "/properties/AlarmNotifyGroups/*/CreateTime",
+    "/properties/AlarmNotifyGroups/*/ModifyTime",
+    "/properties/AlarmNotifyGroups/*/NotifyType",
+    "/properties/AlarmNotifyGroups/*/NoticeRules",
+    "/properties/AlarmNotifyGroups/*/IamProjectName",
+    "/properties/AlarmNotifyGroups/*/AlarmNotifyGroupName",
+    "/properties/QueryRequests/*/Number"
+  ],
+  "required": [
+    "AlarmName",
+    "ProjectId",
+    "QueryRequests",
+    "RequestCycle",
+    "TriggerPeriod",
+    "AlarmNotifyGroups"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::Alarm"
+}

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_directconnect_gateway_route.example "direct_connect_gateway_route_id"

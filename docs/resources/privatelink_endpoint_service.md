@@ -35,6 +35,7 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
   ]
   payer                     = "Endpoint"
   enable_verify_private_dns = true
+  permit_account_ids        = ["*"]
 }
 ```
 
@@ -102,7 +103,7 @@ Optional:
 Read-Only:
 
 - `name` (String) Domain verification name.
-- `status` (String) Domain verification status. PendingVerification: Pending verification. Verifying: In progress. Verified: Verified. Failed: Verification failed.
+- `status` (String) Domain verification status. PendingVerification: Pending verification, Verifying: In progress, Verified: Verified, Failed: Verification failed
 - `type` (String) Domain verification type. TXT: TXT record.
 - `value` (String) Domain verification value.
 

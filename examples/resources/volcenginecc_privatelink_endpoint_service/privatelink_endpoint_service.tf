@@ -21,4 +21,5 @@ resource "volcenginecc_privatelink_endpoint_service" "PrivateLinkEndpointService
   ]
   payer                     = "Endpoint"
   enable_verify_private_dns = true
+  permit_account_ids        = ["*"]
 }

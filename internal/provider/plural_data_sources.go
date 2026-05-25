@@ -205,6 +205,13 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cen_bandwidth_packages -cctype Volcengine::CEN::BandwidthPackage -package cen ../volcengine/cen/bandwidth_package_plural_data_source_gen.go ../volcengine/cen/bandwidth_package_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_privatelink_vpc_endpoints -cctype Volcengine::PrivateLink::VpcEndpoint -package privatelink ../volcengine/privatelink/vpc_endpoint_plural_data_source_gen.go ../volcengine/privatelink/vpc_endpoint_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_privatezone_private_zones -cctype Volcengine::PrivateZone::PrivateZone -package privatezone ../volcengine/privatezone/private_zone_plural_data_source_gen.go ../volcengine/privatezone/private_zone_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_directconnect_gateway_routes -cctype Volcengine::DirectConnect::DirectConnectGatewayRoute -package directconnect ../volcengine/directconnect/gateway_route_plural_data_source_gen.go ../volcengine/directconnect/gateway_route_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpn_ssl_vpn_servers -cctype Volcengine::VPN::SslVpnServer -package vpn ../volcengine/vpn/ssl_vpn_server_plural_data_source_gen.go ../volcengine/vpn/ssl_vpn_server_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpn_vpn_gateway_routes -cctype Volcengine::VPN::VpnGatewayRoute -package vpn ../volcengine/vpn/vpn_gateway_route_plural_data_source_gen.go ../volcengine/vpn/vpn_gateway_route_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_alarms -cctype Volcengine::TLS::Alarm -package tls ../volcengine/tls/alarm_plural_data_source_gen.go ../volcengine/tls/alarm_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_directconnect_virtual_interfaces -cctype Volcengine::DirectConnect::VirtualInterface -package directconnect ../volcengine/directconnect/virtual_interface_plural_data_source_gen.go ../volcengine/directconnect/virtual_interface_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_kms_secrets -cctype Volcengine::KMS::Secret -package kms ../volcengine/kms/secret_plural_data_source_gen.go ../volcengine/kms/secret_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_gtm_pools -cctype Volcengine::GTM::Pool -package gtm ../volcengine/gtm/pool_plural_data_source_gen.go ../volcengine/gtm/pool_plural_data_source_gen_test.go
 
 package provider
 
@@ -229,6 +236,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/escloud"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/filenas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/fwcenter"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/gtm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/hbase"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"

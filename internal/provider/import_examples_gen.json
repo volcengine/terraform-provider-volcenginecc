@@ -1018,5 +1018,40 @@
         "resource": "volcenginecc_privatezone_private_zone",
         "identifier": ["ZID"],
         "path": "./examples/resources/volcenginecc_privatezone_private_zone/import.sh"
+    },
+    {
+        "resource": "volcenginecc_directconnect_gateway_route",
+        "identifier": ["DirectConnectGatewayRouteId"],
+        "path": "./examples/resources/volcenginecc_directconnect_gateway_route/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpn_ssl_vpn_server",
+        "identifier": ["SslVpnServerId"],
+        "path": "./examples/resources/volcenginecc_vpn_ssl_vpn_server/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpn_vpn_gateway_route",
+        "identifier": ["VpnGatewayRouteId"],
+        "path": "./examples/resources/volcenginecc_vpn_vpn_gateway_route/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_alarm",
+        "identifier": ["AlarmId"],
+        "path": "./examples/resources/volcenginecc_tls_alarm/import.sh"
+    },
+    {
+        "resource": "volcenginecc_directconnect_virtual_interface",
+        "identifier": ["VirtualInterfaceId"],
+        "path": "./examples/resources/volcenginecc_directconnect_virtual_interface/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kms_secret",
+        "identifier": ["SecretName"],
+        "path": "./examples/resources/volcenginecc_kms_secret/import.sh"
+    },
+    {
+        "resource": "volcenginecc_gtm_pool",
+        "identifier": ["GtmId","PoolId"],
+        "path": "./examples/resources/volcenginecc_gtm_pool/import.sh"
     }
 ]

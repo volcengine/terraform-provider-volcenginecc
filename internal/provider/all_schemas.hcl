@@ -832,3 +832,31 @@ resource_schema "volcengine_privatelink_vpc_endpoint" {
 resource_schema "volcengine_privatezone_private_zone" {
   cloudcontrol_type_name = "Volcengine::PrivateZone::PrivateZone"
 }
+
+resource_schema "volcengine_directconnect_gateway_route" {
+  cloudcontrol_type_name = "Volcengine::DirectConnect::DirectConnectGatewayRoute"
+}
+
+resource_schema "volcengine_vpn_ssl_vpn_server" {
+  cloudcontrol_type_name = "Volcengine::VPN::SslVpnServer"
+}
+
+resource_schema "volcengine_vpn_vpn_gateway_route" {
+  cloudcontrol_type_name = "Volcengine::VPN::VpnGatewayRoute"
+}
+
+resource_schema "volcengine_tls_alarm" {
+  cloudcontrol_type_name = "Volcengine::TLS::Alarm"
+}
+
+resource_schema "volcengine_directconnect_virtual_interface" {
+  cloudcontrol_type_name = "Volcengine::DirectConnect::VirtualInterface"
+}
+
+resource_schema "volcengine_kms_secret" {
+  cloudcontrol_type_name = "Volcengine::KMS::Secret"
+}
+
+resource_schema "volcengine_gtm_pool" {
+  cloudcontrol_type_name = "Volcengine::GTM::Pool"
+}
