@@ -10,6 +10,64 @@
     "/properties/KeyringName"
   ],
   "definitions": {
+    "AsymmetricCiphertext": {
+      "description": "Asymmetric encryption action parameters and results.",
+      "properties": {
+        "Algorithm": {
+          "description": "Encryption algorithm. Optional values: RSAES_OAEP_SHA_256, SM2PKE.",
+          "type": "string"
+        },
+        "CiphertextBlob": {
+          "description": "Ciphertext of encryption result, Base64-encoded.",
+          "type": "string"
+        },
+        "Plaintext": {
+          "description": "Plaintext to be encrypted, Base64-encoded.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AsymmetricSignature": {
+      "description": "Asymmetric signature action parameters and results.",
+      "properties": {
+        "Algorithm": {
+          "description": "Signature algorithm, for example: RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, ECDSA_SHA_256, SM2_DSA.",
+          "type": "string"
+        },
+        "Message": {
+          "description": "Message to be signed, Base64-encoded.",
+          "type": "string"
+        },
+        "MessageType": {
+          "description": "Message type. Optional values: RAW, DIGEST.",
+          "type": "string"
+        },
+        "Signature": {
+          "description": "Signature result, Base64-encoded.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Ciphertext": {
+      "description": "Symmetric encryption action parameters and results.",
+      "properties": {
+        "CiphertextBlob": {
+          "description": "Ciphertext of encryption result, Base64-encoded.",
+          "type": "string"
+        },
+        "EncryptionContext": {
+          "description": "Encryption context JSON string.",
+          "type": "string"
+        },
+        "Plaintext": {
+          "description": "Plaintext to be encrypted, Base64-encoded.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "MultiRegionConfiguration": {
       "properties": {
         "MultiRegionKeyType": {
@@ -47,6 +105,40 @@
       },
       "type": "object"
     },
+    "ReEncrypt": {
+      "description": "Re-encryption action parameters and results.",
+      "properties": {
+        "CiphertextBlob": {
+          "description": "Re-encrypted ciphertext, Base64-encoded.",
+          "type": "string"
+        },
+        "NewEncryptionContext": {
+          "description": "New encryption context JSON string.",
+          "type": "string"
+        },
+        "NewKeyID": {
+          "description": "Target key ID. If not specified, you must provide NewKeyringName and NewKeyName.",
+          "type": "string"
+        },
+        "NewKeyName": {
+          "description": "Target key name.",
+          "type": "string"
+        },
+        "NewKeyringName": {
+          "description": "Name of the keyring to which the target key belongs.",
+          "type": "string"
+        },
+        "OldEncryptionContext": {
+          "description": "Old encryption context JSON string.",
+          "type": "string"
+        },
+        "SourceCiphertextBlob": {
+          "description": "Source ciphertext to be re-encrypted, Base64-encoded.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ReplicaKey": {
       "description": "Replica multi-region key transaction record number and region ID.",
       "properties": {
@@ -57,6 +149,33 @@
         "Trn": {
           "description": "Multi-region key conversion.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReplicateKeyOperation": {
+      "description": "Replicate key action parameters and results.",
+      "properties": {
+        "Description": {
+          "description": "Replica key description.",
+          "type": "string"
+        },
+        "ReplicaKeyID": {
+          "description": "Replica key ID.",
+          "type": "string"
+        },
+        "ReplicaRegion": {
+          "description": "Target region of the replica key.",
+          "type": "string"
+        },
+        "Tags": {
+          "description": "Replica key label.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "type": "object"
@@ -109,7 +228,13 @@
         "kms:EnableKey",
         "kms:DisableKey",
         "kms:EnableKeyRotation",
-        "kms:DisableKeyRotation"
+        "kms:DisableKeyRotation",
+        "kms:Encrypt",
+        "kms:AsymmetricEncrypt",
+        "kms:AsymmetricSign",
+        "kms:ReEncrypt",
+        "kms:ReplicateKey",
+        "kms:UpdatePrimaryRegion"
       ]
     },
     "delete": {
@@ -131,7 +256,6 @@
     "update": {
       "permissions": [
         "kms:UpdateKey",
-        "kms:CancelKeyDeletion",
         "kms:UntagResources",
         "kms:TagResources",
         "kms:DescribeKey",
@@ -140,7 +264,13 @@
         "kms:EnableKey",
         "kms:DisableKey",
         "kms:EnableKeyRotation",
-        "kms:DisableKeyRotation"
+        "kms:DisableKeyRotation",
+        "kms:Encrypt",
+        "kms:AsymmetricEncrypt",
+        "kms:AsymmetricSign",
+        "kms:ReEncrypt",
+        "kms:ReplicateKey",
+        "kms:UpdatePrimaryRegion"
       ]
     }
   },
@@ -149,6 +279,21 @@
     "/properties/KeyID"
   ],
   "properties": {
+    "AsymmetricCiphertext": {
+      "$ref": "#/definitions/AsymmetricCiphertext",
+      "description": "Asymmetric encryption action parameters and results. AsymmetricEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+      "type": "object"
+    },
+    "AsymmetricSignature": {
+      "$ref": "#/definitions/AsymmetricSignature",
+      "description": "Asymmetric signature action parameters and results. AsymmetricSign can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+      "type": "object"
+    },
+    "Ciphertext": {
+      "$ref": "#/definitions/Ciphertext",
+      "description": "Symmetric encryption action parameters and results. Encrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+      "type": "object"
+    },
     "CreatedTime": {
       "description": "Key creation time.",
       "format": "int64",
@@ -186,6 +331,10 @@
       "maxLength": 31,
       "minLength": 2,
       "semantic": "resourceName",
+      "type": "string"
+    },
+    "KeyPrimaryRegion": {
+      "description": "Primary region of the multi-region key. Set the target primary region during the Create/Update phase; the current primary region is returned during the Read phase.",
       "type": "string"
     },
     "KeyRotationOperation": {
@@ -232,6 +381,16 @@
     "ProtectionLevel": {
       "description": "Key protection level. Options: SOFTWARE, HSM.",
       "type": "string"
+    },
+    "ReEncrypt": {
+      "$ref": "#/definitions/ReEncrypt",
+      "description": "Re-encryption action parameters and results. ReEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+      "type": "object"
+    },
+    "ReplicateKey": {
+      "$ref": "#/definitions/ReplicateKeyOperation",
+      "description": "Replicate key action parameters and results. ReplicateKey can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+      "type": "object"
     },
     "RotateInterval": {
       "description": "Key rotation period (days). Range: [90, 2560].",
@@ -281,7 +440,12 @@
     "/properties/ScheduleRotationTime",
     "/properties/Trn",
     "/properties/RotateState",
-    "/properties/UpdatedTime"
+    "/properties/UpdatedTime",
+    "/properties/Ciphertext/CiphertextBlob",
+    "/properties/AsymmetricCiphertext/CiphertextBlob",
+    "/properties/AsymmetricSignature/Signature",
+    "/properties/ReEncrypt/CiphertextBlob",
+    "/properties/ReplicateKey/ReplicaKeyID"
   ],
   "required": [
     "KeyringName",
@@ -297,6 +461,22 @@
     "/properties/KeyRotationOperation",
     "/properties/KeyArchiveOperation",
     "/properties/KeyEnableOperation",
-    "/properties/RotateInterval"
+    "/properties/RotateInterval",
+    "/properties/Ciphertext/Plaintext",
+    "/properties/Ciphertext/EncryptionContext",
+    "/properties/AsymmetricCiphertext/Plaintext",
+    "/properties/AsymmetricCiphertext/Algorithm",
+    "/properties/AsymmetricSignature/Message",
+    "/properties/AsymmetricSignature/MessageType",
+    "/properties/AsymmetricSignature/Algorithm",
+    "/properties/ReEncrypt/NewKeyringName",
+    "/properties/ReEncrypt/NewKeyName",
+    "/properties/ReEncrypt/NewKeyID",
+    "/properties/ReEncrypt/SourceCiphertextBlob",
+    "/properties/ReEncrypt/OldEncryptionContext",
+    "/properties/ReEncrypt/NewEncryptionContext",
+    "/properties/ReplicateKey/ReplicaRegion",
+    "/properties/ReplicateKey/Description",
+    "/properties/ReplicateKey/Tags"
   ]
 }

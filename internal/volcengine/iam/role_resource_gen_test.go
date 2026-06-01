@@ -6,7 +6,6 @@
 package iam_test
 
 import (
-	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -18,8 +17,30 @@ func TestAccVolcengineIAMRole_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config:      td.EmptyConfig(),
-			ExpectError: regexp.MustCompile("Missing required argument"),
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInVolcengine(),
+			),
+		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
+	})
+}
+
+func TestAccVolcengineIAMRole_disappears(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::IAM::Role", "volcenginecc_iam_role", "test")
+
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInVolcengine(),
+				td.DeleteResource(),
+			),
+			ExpectNonEmptyPlan: true,
 		},
 	})
 }

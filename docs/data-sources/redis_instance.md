@@ -33,8 +33,8 @@ Data Source schema for Volcengine::Redis::Instance
 - `create_backup` (Boolean) Whether to create a backup before making changes.
 - `create_time` (String) Creation time of the instance.
 - `data_layout` (String) Data storage type of the instance. This parameter is only relevant for Enterprise Edition instances (ServiceType=Enterprise). Community Edition instances (ServiceType=Basic) do not involve data storage type, and DataLayout is always set to RAM. If this parameter is left empty, data storage type is not used as a filter.
-- `deletion_protection` (String) Enable or disable instance deletion protection.
-- `engine_version` (String) Database version number.
+- `deletion_protection` (String) Enable or disable instance deletion protection. disabled: Off. enabled: On.
+- `engine_version` (String) Database version number. Valid values: 5.0: Version 5.0. 6.0: Version 6.0. 7.0: Version 7.0.
 - `expired_time` (String) Instance expiration time.
 - `instance_class` (String) Type of Redis instance. Valid values: PrimarySecondary: primary-secondary instance; Standalone: single-node instance. If this parameter is left empty, instance type is not used as a filter. For more information about instance types, see Product Architecture.
 - `instance_id` (String) Instance ID.
@@ -42,7 +42,7 @@ Data Source schema for Volcengine::Redis::Instance
 - `instance_shards` (Attributes Set) Detailed list of all shards in the instance. (see [below for nested schema](#nestedatt--instance_shards))
 - `maintenance_time` (String) Maintenance window for the instance, format: HH:mm-HH:mm (UTC+8).
 - `max_connections` (Number) Current maximum connections per shard for the instance. The default connection limit per shard is 10,000. You can also call the ModifyDBInstanceMaxConn API to adjust the maximum connections per shard based on your business needs.
-- `multi_az` (String) Set the deployment scheme for the instance's availability zone.
+- `multi_az` (String) Set the instance's availability zone deployment scheme. Valid values: enabled: Multi-availability zone deployment. disabled: Single availability zone deployment.
 - `no_auth_mode` (String) Enable or disable password-free access for new instances. Valid values: open: enable password-free access; close (default): disable password-free access.
 - `node_ids` (Set of String) List of Proxy and Server node IDs.
 - `node_number` (Number) Number of nodes in each shard. Value range: 1–6. By default, each account can create up to 4 nodes of 256 MiB specification per region. To increase the quota limit to 10, see Account Quotas. A value of 1 creates a single-node instance; a value greater than 1 creates a primary-secondary instance. For details on the differences between these two types of instances, see Feature Differences.
@@ -54,11 +54,12 @@ Data Source schema for Volcengine::Redis::Instance
 - `project_name` (String) Project to which the instance belongs.
 - `purchase_months` (Number) Purchase duration, unit: month. Value options: Monthly purchase: 1, 2, 3, 4, 5, 6, 7, 8, 9. Annual purchase: 12, 24, 36. When ChargeType is PrePaid, this parameter is required.
 - `reserve_additional_bandwidth` (Boolean) Set whether to reserve additional bandwidth
-- `service_type` (String) Service type of the instance
+- `restart_instance` (Boolean) Restart instance? Only instances with the status Running support restart operations. During the restart process, access to some services may be temporarily affected. Proceed with caution. It is recommended to restart during off-peak hours and ensure your application supports automatic reconnection.
+- `service_type` (String) Instance service type. Valid values: Basic: Community Edition. Enterprise: Enterprise Edition.
 - `shard_capacity` (Number) Memory capacity of each shard in the instance. Unit: MiB.
 - `shard_number` (Number) Number of shards in the instance. Value range: 2–256. Specify this parameter only when ShardedCluster is set to 1 (enabled).
 - `sharded_cluster` (Number) Whether to enable sharded cluster. Value options: 0: Disabled. 1: Enabled.
-- `status` (String) Service type of the instance. Value options: Basic (default): Community Edition; Enterprise: Enterprise Edition.
+- `status` (String) Current status of the instance.
 - `subnet_id` (String) Set the subnet ID for the instance. Subnets have availability zone attributes; you must select a subnet in the target private network that belongs to the same availability zone as the instance. A subnet is an IP address block within a private network. All cloud resources in the private network must be deployed in a subnet. The subnet assigns private IP addresses to cloud resources. You can call the CreateSubnet API to create a subnet. You can call the DescribeSubnets API to query the list of all subnets in a specified availability zone, including subnet IDs.
 - `tags` (Attributes Set) Set the tag list for the instance. (see [below for nested schema](#nestedatt--tags))
 - `vi_pv_6` (String) The IPv6 address corresponding to the instance's private network connection address. This parameter is returned only if the instance uses an IPv6 address.

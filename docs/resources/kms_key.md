@@ -30,6 +30,24 @@ resource "volcenginecc_kms_key" "KMSKeyDemo" {
       key = "env"
     value = "test" }
   ]
+  ciphertext = {
+    plaintext = "tWB54tTvEu47YjRjuuj+fAt5PskpUaxxxxxx"
+    encryption_context = jsonencode({
+      "user" : "alice",
+      "path" : "path/to/alice/plaintext.txt"
+    })
+  }
+  re_encrypt = {
+    new_keyring_name       = "terraform-test"
+    new_key_name           = "ccapi-terraform"
+    new_key_id             = "677a846d-a685-4219-b8c6-xxxxxxxx"
+    source_ciphertext_blob = "jrPUHmpTQaiWWtwU8z9JvwAA6TR2e5xxxxxxxx"
+    old_encryption_context = ""
+    new_encryption_context = jsonencode({
+      "user" : "alice",
+      "path" : "path/to/alice/ccapi.txt"
+    })
+  }
 }
 ```
 
@@ -43,15 +61,21 @@ resource "volcenginecc_kms_key" "KMSKeyDemo" {
 
 ### Optional
 
+- `asymmetric_ciphertext` (Attributes) Asymmetric encryption action parameters and results. AsymmetricEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--asymmetric_ciphertext))
+- `asymmetric_signature` (Attributes) Asymmetric signature action parameters and results. AsymmetricSign can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--asymmetric_signature))
+- `ciphertext` (Attributes) Symmetric encryption action parameters and results. Encrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--ciphertext))
 - `description` (String) Key description: Length 0–8192 characters.
 - `key_archive_operation` (Number) User master key archive operation (enter 1 to archive, 2 to unarchive).
 - `key_enable_operation` (Number) User master key enable operation (enter 1 to enable, 2 to disable).
+- `key_primary_region` (String) Primary region of the multi-region key. Set the target primary region during the Create/Update phase; the current primary region is returned during the Read phase.
 - `key_rotation_operation` (Number) User master key rotation operation (enter 1 to enable, 2 to disable).
 - `key_spec` (String) Symmetric keys: SYMMETRIC_256, SYMMETRIC_128; asymmetric keys: RSA_2048, RSA_3072, RSA_4096, EC_P256, EC_P256K, EC_P384, EC_P521, EC_SM2.
 - `key_usage` (String) Key usage. Options: ENCRYPT_DECRYPT, SIGN_VERIFY, GENERATE_VERIFY_MAC.
 - `multi_region` (Boolean) Is this a multi-region type master key.
 - `origin` (String) Key source. Options: CloudKMS, External, ExternalKeyStore.
 - `protection_level` (String) Key protection level. Options: SOFTWARE, HSM.
+- `re_encrypt` (Attributes) Re-encryption action parameters and results. ReEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--re_encrypt))
+- `replicate_key` (Attributes) Replicate key action parameters and results. ReplicateKey can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--replicate_key))
 - `rotate_interval` (Number) Key rotation period (days). Range: [90, 2560].
 - `tags` (Attributes Set) KMS key label information.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
@@ -70,6 +94,87 @@ resource "volcenginecc_kms_key" "KMSKeyDemo" {
 - `schedule_rotation_time` (String) Key rotation time.
 - `trn` (String) Resource name. Format should be trn:${Service}:${Region}:${AccountID}:${ResourcePath}.
 - `updated_time` (Number) Key update time.
+
+<a id="nestedatt--asymmetric_ciphertext"></a>
+### Nested Schema for `asymmetric_ciphertext`
+
+Optional:
+
+- `algorithm` (String) Encryption algorithm. Optional values: RSAES_OAEP_SHA_256, SM2PKE.
+- `plaintext` (String) Plaintext to be encrypted, Base64-encoded.
+
+Read-Only:
+
+- `ciphertext_blob` (String) Ciphertext of encryption result, Base64-encoded.
+
+
+<a id="nestedatt--asymmetric_signature"></a>
+### Nested Schema for `asymmetric_signature`
+
+Optional:
+
+- `algorithm` (String) Signature algorithm, for example: RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, ECDSA_SHA_256, SM2_DSA.
+- `message` (String) Message to be signed, Base64-encoded.
+- `message_type` (String) Message type. Optional values: RAW, DIGEST.
+
+Read-Only:
+
+- `signature` (String) Signature result, Base64-encoded.
+
+
+<a id="nestedatt--ciphertext"></a>
+### Nested Schema for `ciphertext`
+
+Optional:
+
+- `encryption_context` (String) Encryption context JSON string.
+- `plaintext` (String) Plaintext to be encrypted, Base64-encoded.
+
+Read-Only:
+
+- `ciphertext_blob` (String) Ciphertext of encryption result, Base64-encoded.
+
+
+<a id="nestedatt--re_encrypt"></a>
+### Nested Schema for `re_encrypt`
+
+Optional:
+
+- `new_encryption_context` (String) New encryption context JSON string.
+- `new_key_id` (String) Target key ID. If not specified, you must provide NewKeyringName and NewKeyName.
+- `new_key_name` (String) Target key name.
+- `new_keyring_name` (String) Name of the keyring to which the target key belongs.
+- `old_encryption_context` (String) Old encryption context JSON string.
+- `source_ciphertext_blob` (String) Source ciphertext to be re-encrypted, Base64-encoded.
+
+Read-Only:
+
+- `ciphertext_blob` (String) Re-encrypted ciphertext, Base64-encoded.
+
+
+<a id="nestedatt--replicate_key"></a>
+### Nested Schema for `replicate_key`
+
+Optional:
+
+- `description` (String) Replica key description.
+- `replica_region` (String) Target region of the replica key.
+- `tags` (Attributes Set) Replica key label.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--replicate_key--tags))
+
+Read-Only:
+
+- `replica_key_id` (String) Replica key ID.
+
+<a id="nestedatt--replicate_key--tags"></a>
+### Nested Schema for `replicate_key.tags`
+
+Optional:
+
+- `key` (String) KMS key label key.
+- `value` (String) KMS key label value.
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

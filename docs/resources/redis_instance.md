@@ -56,8 +56,8 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 
 - `configure_nodes` (Attributes List) Set the list of availability zones to which the node belongs.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--configure_nodes))
-- `engine_version` (String) Database version number.
-- `multi_az` (String) Set the deployment scheme for the instance's availability zone.
+- `engine_version` (String) Database version number. Valid values: 5.0: Version 5.0. 6.0: Version 6.0. 7.0: Version 7.0.
+- `multi_az` (String) Set the instance's availability zone deployment scheme. Valid values: enabled: Multi-availability zone deployment. disabled: Single availability zone deployment.
 - `node_number` (Number) Number of nodes in each shard. Value range: 1–6. By default, each account can create up to 4 nodes of 256 MiB specification per region. To increase the quota limit to 10, see Account Quotas. A value of 1 creates a single-node instance; a value greater than 1 creates a primary-secondary instance. For details on the differences between these two types of instances, see Feature Differences.
 - `shard_capacity` (Number) Memory capacity of each shard in the instance. Unit: MiB.
 - `sharded_cluster` (Number) Whether to enable sharded cluster. Value options: 0: Disabled. 1: Enabled.
@@ -73,7 +73,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `charge_type` (String) Instance billing type. Value options: PrePaid: Subscription (also called prepaid). PostPaid: Pay-as-you-go (also called postpaid).
 - `continuous_backup` (Boolean) Enable data flashback
 - `create_backup` (Boolean) Whether to create a backup before making changes.
-- `deletion_protection` (String) Enable or disable instance deletion protection.
+- `deletion_protection` (String) Enable or disable instance deletion protection. disabled: Off. enabled: On.
 - `instance_name` (String) Instance name. Naming rules: Cannot start with a digit or hyphen (-); can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-); length must be 1–128 characters.
 - `no_auth_mode` (String) Enable or disable password-free access for new instances. Valid values: open: enable password-free access; close (default): disable password-free access.
 - `parameter_group_id` (String) The parameter template to be applied to the new instance. Redis for Cache Database creates a default system parameter template for each database version, which includes all parameters supported by that version and their default values. If this parameter is left blank, the system will select and apply the corresponding version's system parameter template for the new instance based on the database version you set (i.e., EngineVersion). You can call the DescribeParameterGroups API to query basic information about all parameter templates under your account and region, including the parameter template ID.
@@ -82,6 +82,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `project_name` (String) Project to which the instance belongs.
 - `purchase_months` (Number) Purchase duration, unit: month. Value options: Monthly purchase: 1, 2, 3, 4, 5, 6, 7, 8, 9. Annual purchase: 12, 24, 36. When ChargeType is PrePaid, this parameter is required.
 - `reserve_additional_bandwidth` (Boolean) Set whether to reserve additional bandwidth
+- `restart_instance` (Boolean) Restart instance? Only instances with the status Running support restart operations. During the restart process, access to some services may be temporarily affected. Proceed with caution. It is recommended to restart during off-peak hours and ensure your application supports automatic reconnection.
 - `shard_number` (Number) Number of shards in the instance. Value range: 2–256. Specify this parameter only when ShardedCluster is set to 1 (enabled).
 - `tags` (Attributes Set) Set the tag list for the instance.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
@@ -103,8 +104,8 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 - `node_ids` (Set of String) List of Proxy and Server node IDs.
 - `private_address` (String) The domain name for the instance's private network connection address.
 - `private_port` (String) Port number for the instance's private network connection address.
-- `service_type` (String) Service type of the instance
-- `status` (String) Service type of the instance. Value options: Basic (default): Community Edition; Enterprise: Enterprise Edition.
+- `service_type` (String) Instance service type. Valid values: Basic: Community Edition. Enterprise: Enterprise Edition.
+- `status` (String) Current status of the instance.
 - `vi_pv_6` (String) The IPv6 address corresponding to the instance's private network connection address. This parameter is returned only if the instance uses an IPv6 address.
 - `vip` (String) IPv4 address corresponding to the instance's private network connection address.
 - `visit_addrs` (Attributes Set) Connection address information.

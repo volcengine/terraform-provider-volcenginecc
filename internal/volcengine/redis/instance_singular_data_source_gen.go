@@ -245,7 +245,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Enable or disable instance deletion protection.",
+		//	  "description": "Enable or disable instance deletion protection. disabled: Off. enabled: On.",
 		//	  "enum": [
 		//	    "disabled",
 		//	    "enabled"
@@ -253,14 +253,14 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enable or disable instance deletion protection.",
+			Description: "Enable or disable instance deletion protection. disabled: Off. enabled: On.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Database version number.",
+		//	  "description": "Database version number. Valid values: 5.0: Version 5.0. 6.0: Version 6.0. 7.0: Version 7.0.",
 		//	  "enum": [
 		//	    "5.0",
 		//	    "6.0",
@@ -269,7 +269,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Database version number.",
+			Description: "Database version number. Valid values: 5.0: Version 5.0. 6.0: Version 6.0. 7.0: Version 7.0.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExpiredTime
@@ -455,7 +455,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Set the deployment scheme for the instance's availability zone.",
+		//	  "description": "Set the instance's availability zone deployment scheme. Valid values: enabled: Multi-availability zone deployment. disabled: Single availability zone deployment.",
 		//	  "enum": [
 		//	    "disabled",
 		//	    "enabled"
@@ -463,7 +463,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"multi_az": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Set the deployment scheme for the instance's availability zone.",
+			Description: "Set the instance's availability zone deployment scheme. Valid values: enabled: Multi-availability zone deployment. disabled: Single availability zone deployment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NoAuthMode
@@ -607,11 +607,22 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Set whether to reserve additional bandwidth",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RestartInstance
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Restart instance? Only instances with the status Running support restart operations. During the restart process, access to some services may be temporarily affected. Proceed with caution. It is recommended to restart during off-peak hours and ensure your application supports automatic reconnection.",
+		//	  "type": "boolean"
+		//	}
+		"restart_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Restart instance? Only instances with the status Running support restart operations. During the restart process, access to some services may be temporarily affected. Proceed with caution. It is recommended to restart during off-peak hours and ensure your application supports automatic reconnection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Service type of the instance",
+		//	  "description": "Instance service type. Valid values: Basic: Community Edition. Enterprise: Enterprise Edition.",
 		//	  "enum": [
 		//	    "Basic",
 		//	    "Enterprise"
@@ -619,7 +630,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Service type of the instance",
+			Description: "Instance service type. Valid values: Basic: Community Edition. Enterprise: Enterprise Edition.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ShardCapacity
@@ -668,11 +679,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Service type of the instance. Value options: Basic (default): Community Edition; Enterprise: Enterprise Edition.",
+		//	  "description": "Current status of the instance.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Service type of the instance. Value options: Basic (default): Community Edition; Enterprise: Enterprise Edition.",
+			Description: "Current status of the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
@@ -930,6 +941,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"project_name":                 "ProjectName",
 		"purchase_months":              "PurchaseMonths",
 		"reserve_additional_bandwidth": "ReserveAdditionalBandwidth",
+		"restart_instance":             "RestartInstance",
 		"server_nodes":                 "ServerNodes",
 		"service_type":                 "ServiceType",
 		"shard_capacity":               "ShardCapacity",

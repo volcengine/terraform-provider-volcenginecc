@@ -330,7 +330,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Enable or disable instance deletion protection.",
+		//	  "description": "Enable or disable instance deletion protection. disabled: Off. enabled: On.",
 		//	  "enum": [
 		//	    "disabled",
 		//	    "enabled"
@@ -338,7 +338,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enable or disable instance deletion protection.",
+			Description: "Enable or disable instance deletion protection. disabled: Off. enabled: On.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -355,7 +355,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Database version number.",
+		//	  "description": "Database version number. Valid values: 5.0: Version 5.0. 6.0: Version 6.0. 7.0: Version 7.0.",
 		//	  "enum": [
 		//	    "5.0",
 		//	    "6.0",
@@ -364,7 +364,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Database version number.",
+			Description: "Database version number. Valid values: 5.0: Version 5.0. 6.0: Version 6.0. 7.0: Version 7.0.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -585,7 +585,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Set the deployment scheme for the instance's availability zone.",
+		//	  "description": "Set the instance's availability zone deployment scheme. Valid values: enabled: Multi-availability zone deployment. disabled: Single availability zone deployment.",
 		//	  "enum": [
 		//	    "disabled",
 		//	    "enabled"
@@ -593,7 +593,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"multi_az": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Set the deployment scheme for the instance's availability zone.",
+			Description: "Set the instance's availability zone deployment scheme. Valid values: enabled: Multi-availability zone deployment. disabled: Single availability zone deployment.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -813,11 +813,27 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// ReserveAdditionalBandwidth is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: RestartInstance
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Restart instance? Only instances with the status Running support restart operations. During the restart process, access to some services may be temporarily affected. Proceed with caution. It is recommended to restart during off-peak hours and ensure your application supports automatic reconnection.",
+		//	  "type": "boolean"
+		//	}
+		"restart_instance": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Restart instance? Only instances with the status Running support restart operations. During the restart process, access to some services may be temporarily affected. Proceed with caution. It is recommended to restart during off-peak hours and ensure your application supports automatic reconnection.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// RestartInstance is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceType
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Service type of the instance",
+		//	  "description": "Instance service type. Valid values: Basic: Community Edition. Enterprise: Enterprise Edition.",
 		//	  "enum": [
 		//	    "Basic",
 		//	    "Enterprise"
@@ -825,7 +841,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Service type of the instance",
+			Description: "Instance service type. Valid values: Basic: Community Edition. Enterprise: Enterprise Edition.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -893,11 +909,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Service type of the instance. Value options: Basic (default): Community Edition; Enterprise: Enterprise Edition.",
+		//	  "description": "Current status of the instance.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Service type of the instance. Value options: Basic (default): Community Edition; Enterprise: Enterprise Edition.",
+			Description: "Current status of the instance.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1199,6 +1215,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"project_name":                 "ProjectName",
 		"purchase_months":              "PurchaseMonths",
 		"reserve_additional_bandwidth": "ReserveAdditionalBandwidth",
+		"restart_instance":             "RestartInstance",
 		"server_nodes":                 "ServerNodes",
 		"service_type":                 "ServiceType",
 		"shard_capacity":               "ShardCapacity",
@@ -1233,6 +1250,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/BackupRestore",
 		"/properties/ContinuousBackup",
 		"/properties/ReserveAdditionalBandwidth",
+		"/properties/RestartInstance",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
