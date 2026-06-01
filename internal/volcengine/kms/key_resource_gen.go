@@ -31,6 +31,197 @@ func init() {
 // This Terraform resource corresponds to the Cloud Control Volcengine::KMS::Key resource.
 func keyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AsymmetricCiphertext
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Asymmetric encryption action parameters and results. AsymmetricEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+		//	  "properties": {
+		//	    "Algorithm": {
+		//	      "description": "Encryption algorithm. Optional values: RSAES_OAEP_SHA_256, SM2PKE.",
+		//	      "type": "string"
+		//	    },
+		//	    "CiphertextBlob": {
+		//	      "description": "Ciphertext of encryption result, Base64-encoded.",
+		//	      "type": "string"
+		//	    },
+		//	    "Plaintext": {
+		//	      "description": "Plaintext to be encrypted, Base64-encoded.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"asymmetric_ciphertext": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Algorithm
+				"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Encryption algorithm. Optional values: RSAES_OAEP_SHA_256, SM2PKE.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Algorithm is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: CiphertextBlob
+				"ciphertext_blob": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Ciphertext of encryption result, Base64-encoded.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Plaintext
+				"plaintext": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Plaintext to be encrypted, Base64-encoded.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Plaintext is a write-only property.
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Asymmetric encryption action parameters and results. AsymmetricEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AsymmetricSignature
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Asymmetric signature action parameters and results. AsymmetricSign can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+		//	  "properties": {
+		//	    "Algorithm": {
+		//	      "description": "Signature algorithm, for example: RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, ECDSA_SHA_256, SM2_DSA.",
+		//	      "type": "string"
+		//	    },
+		//	    "Message": {
+		//	      "description": "Message to be signed, Base64-encoded.",
+		//	      "type": "string"
+		//	    },
+		//	    "MessageType": {
+		//	      "description": "Message type. Optional values: RAW, DIGEST.",
+		//	      "type": "string"
+		//	    },
+		//	    "Signature": {
+		//	      "description": "Signature result, Base64-encoded.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"asymmetric_signature": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Algorithm
+				"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Signature algorithm, for example: RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, ECDSA_SHA_256, SM2_DSA.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Algorithm is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Message to be signed, Base64-encoded.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Message is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: MessageType
+				"message_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Message type. Optional values: RAW, DIGEST.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// MessageType is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: Signature
+				"signature": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Signature result, Base64-encoded.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Asymmetric signature action parameters and results. AsymmetricSign can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Ciphertext
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Symmetric encryption action parameters and results. Encrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+		//	  "properties": {
+		//	    "CiphertextBlob": {
+		//	      "description": "Ciphertext of encryption result, Base64-encoded.",
+		//	      "type": "string"
+		//	    },
+		//	    "EncryptionContext": {
+		//	      "description": "Encryption context JSON string.",
+		//	      "type": "string"
+		//	    },
+		//	    "Plaintext": {
+		//	      "description": "Plaintext to be encrypted, Base64-encoded.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ciphertext": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CiphertextBlob
+				"ciphertext_blob": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Ciphertext of encryption result, Base64-encoded.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionContext
+				"encryption_context": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Encryption context JSON string.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// EncryptionContext is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: Plaintext
+				"plaintext": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Plaintext to be encrypted, Base64-encoded.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Plaintext is a write-only property.
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Symmetric encryption action parameters and results. Encrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// Cloud Control resource type schema:
 		//
@@ -143,6 +334,21 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(2, 31),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KeyPrimaryRegion
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Primary region of the multi-region key. Set the target primary region during the Create/Update phase; the current primary region is returned during the Read phase.",
+		//	  "type": "string"
+		//	}
+		"key_primary_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Primary region of the multi-region key. Set the target primary region during the Create/Update phase; the current primary region is returned during the Read phase.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KeyRotationOperation
 		// Cloud Control resource type schema:
@@ -385,6 +591,242 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ReEncrypt
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Re-encryption action parameters and results. ReEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+		//	  "properties": {
+		//	    "CiphertextBlob": {
+		//	      "description": "Re-encrypted ciphertext, Base64-encoded.",
+		//	      "type": "string"
+		//	    },
+		//	    "NewEncryptionContext": {
+		//	      "description": "New encryption context JSON string.",
+		//	      "type": "string"
+		//	    },
+		//	    "NewKeyID": {
+		//	      "description": "Target key ID. If not specified, you must provide NewKeyringName and NewKeyName.",
+		//	      "type": "string"
+		//	    },
+		//	    "NewKeyName": {
+		//	      "description": "Target key name.",
+		//	      "type": "string"
+		//	    },
+		//	    "NewKeyringName": {
+		//	      "description": "Name of the keyring to which the target key belongs.",
+		//	      "type": "string"
+		//	    },
+		//	    "OldEncryptionContext": {
+		//	      "description": "Old encryption context JSON string.",
+		//	      "type": "string"
+		//	    },
+		//	    "SourceCiphertextBlob": {
+		//	      "description": "Source ciphertext to be re-encrypted, Base64-encoded.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"re_encrypt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CiphertextBlob
+				"ciphertext_blob": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Re-encrypted ciphertext, Base64-encoded.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NewEncryptionContext
+				"new_encryption_context": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "New encryption context JSON string.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// NewEncryptionContext is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: NewKeyID
+				"new_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Target key ID. If not specified, you must provide NewKeyringName and NewKeyName.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// NewKeyID is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: NewKeyName
+				"new_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Target key name.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// NewKeyName is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: NewKeyringName
+				"new_keyring_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Name of the keyring to which the target key belongs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// NewKeyringName is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: OldEncryptionContext
+				"old_encryption_context": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Old encryption context JSON string.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// OldEncryptionContext is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: SourceCiphertextBlob
+				"source_ciphertext_blob": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Source ciphertext to be re-encrypted, Base64-encoded.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// SourceCiphertextBlob is a write-only property.
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Re-encryption action parameters and results. ReEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicateKey
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Replicate key action parameters and results. ReplicateKey can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+		//	  "properties": {
+		//	    "Description": {
+		//	      "description": "Replica key description.",
+		//	      "type": "string"
+		//	    },
+		//	    "ReplicaKeyID": {
+		//	      "description": "Replica key ID.",
+		//	      "type": "string"
+		//	    },
+		//	    "ReplicaRegion": {
+		//	      "description": "Target region of the replica key.",
+		//	      "type": "string"
+		//	    },
+		//	    "Tags": {
+		//	      "description": "Replica key label.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "KMS key label.",
+		//	        "properties": {
+		//	          "Key": {
+		//	            "description": "KMS key label key.",
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "description": "KMS key label value.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Key",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"replicate_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Replica key description.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Description is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: ReplicaKeyID
+				"replica_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Replica key ID.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ReplicaRegion
+				"replica_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Target region of the replica key.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// ReplicaRegion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "KMS key label key.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "KMS key label value.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Replica key label.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// Tags is a write-only property.
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Replicate key action parameters and results. ReplicateKey can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RotateInterval
 		// Cloud Control resource type schema:
 		//
@@ -558,32 +1000,53 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::KMS::Key").WithTerraformTypeName("volcenginecc_kms_key")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                  "Algorithm",
+		"asymmetric_ciphertext":      "AsymmetricCiphertext",
+		"asymmetric_signature":       "AsymmetricSignature",
+		"ciphertext":                 "Ciphertext",
+		"ciphertext_blob":            "CiphertextBlob",
 		"created_time":               "CreatedTime",
 		"description":                "Description",
+		"encryption_context":         "EncryptionContext",
 		"key":                        "Key",
 		"key_archive_operation":      "KeyArchiveOperation",
 		"key_enable_operation":       "KeyEnableOperation",
 		"key_id":                     "KeyID",
 		"key_material_expire_time":   "KeyMaterialExpireTime",
 		"key_name":                   "KeyName",
+		"key_primary_region":         "KeyPrimaryRegion",
 		"key_rotation_operation":     "KeyRotationOperation",
 		"key_spec":                   "KeySpec",
 		"key_state":                  "KeyState",
 		"key_usage":                  "KeyUsage",
 		"keyring_name":               "KeyringName",
 		"last_rotation_time":         "LastRotationTime",
+		"message":                    "Message",
+		"message_type":               "MessageType",
 		"multi_region":               "MultiRegion",
 		"multi_region_configuration": "MultiRegionConfiguration",
 		"multi_region_key_type":      "MultiRegionKeyType",
+		"new_encryption_context":     "NewEncryptionContext",
+		"new_key_id":                 "NewKeyID",
+		"new_key_name":               "NewKeyName",
+		"new_keyring_name":           "NewKeyringName",
+		"old_encryption_context":     "OldEncryptionContext",
 		"origin":                     "Origin",
+		"plaintext":                  "Plaintext",
 		"primary_key":                "PrimaryKey",
 		"protection_level":           "ProtectionLevel",
+		"re_encrypt":                 "ReEncrypt",
 		"region":                     "Region",
+		"replica_key_id":             "ReplicaKeyID",
 		"replica_keys":               "ReplicaKeys",
+		"replica_region":             "ReplicaRegion",
+		"replicate_key":              "ReplicateKey",
 		"rotate_interval":            "RotateInterval",
 		"rotate_state":               "RotateState",
 		"schedule_delete_time":       "ScheduleDeleteTime",
 		"schedule_rotation_time":     "ScheduleRotationTime",
+		"signature":                  "Signature",
+		"source_ciphertext_blob":     "SourceCiphertextBlob",
 		"tags":                       "Tags",
 		"trn":                        "Trn",
 		"updated_time":               "UpdatedTime",
@@ -595,6 +1058,22 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/KeyArchiveOperation",
 		"/properties/KeyEnableOperation",
 		"/properties/RotateInterval",
+		"/properties/Ciphertext/Plaintext",
+		"/properties/Ciphertext/EncryptionContext",
+		"/properties/AsymmetricCiphertext/Plaintext",
+		"/properties/AsymmetricCiphertext/Algorithm",
+		"/properties/AsymmetricSignature/Message",
+		"/properties/AsymmetricSignature/MessageType",
+		"/properties/AsymmetricSignature/Algorithm",
+		"/properties/ReEncrypt/NewKeyringName",
+		"/properties/ReEncrypt/NewKeyName",
+		"/properties/ReEncrypt/NewKeyID",
+		"/properties/ReEncrypt/SourceCiphertextBlob",
+		"/properties/ReEncrypt/OldEncryptionContext",
+		"/properties/ReEncrypt/NewEncryptionContext",
+		"/properties/ReplicateKey/ReplicaRegion",
+		"/properties/ReplicateKey/Description",
+		"/properties/ReplicateKey/Tags",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -609,6 +1088,11 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Trn",
 		"/properties/RotateState",
 		"/properties/UpdatedTime",
+		"/properties/Ciphertext/CiphertextBlob",
+		"/properties/AsymmetricCiphertext/CiphertextBlob",
+		"/properties/AsymmetricSignature/Signature",
+		"/properties/ReEncrypt/CiphertextBlob",
+		"/properties/ReplicateKey/ReplicaKeyID",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

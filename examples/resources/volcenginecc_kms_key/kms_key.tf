@@ -16,4 +16,22 @@ resource "volcenginecc_kms_key" "KMSKeyDemo" {
       key = "env"
     value = "test" }
   ]
+  ciphertext = {
+    plaintext = "tWB54tTvEu47YjRjuuj+fAt5PskpUaxxxxxx"
+    encryption_context = jsonencode({
+      "user" : "alice",
+      "path" : "path/to/alice/plaintext.txt"
+    })
+  }
+  re_encrypt = {
+    new_keyring_name       = "terraform-test"
+    new_key_name           = "ccapi-terraform"
+    new_key_id             = "677a846d-a685-4219-b8c6-xxxxxxxx"
+    source_ciphertext_blob = "jrPUHmpTQaiWWtwU8z9JvwAA6TR2e5xxxxxxxx"
+    old_encryption_context = ""
+    new_encryption_context = jsonencode({
+      "user" : "alice",
+      "path" : "path/to/alice/ccapi.txt"
+    })
+  }
 }

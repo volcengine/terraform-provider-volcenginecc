@@ -821,6 +821,10 @@ resource_schema "volcengine_redis_parameter_group" {
   cloudcontrol_type_name = "Volcengine::Redis::ParameterGroup"
 }
 
+resource_schema "volcengine_rdspostgresql_parameter_template" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::ParameterTemplate"
+}
+
 resource_schema "volcengine_cen_bandwidth_package" {
   cloudcontrol_type_name = "Volcengine::CEN::BandwidthPackage"
 }

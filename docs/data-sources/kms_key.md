@@ -21,6 +21,9 @@ Data Source schema for Volcengine::KMS::Key
 
 ### Read-Only
 
+- `asymmetric_ciphertext` (Attributes) Asymmetric encryption action parameters and results. AsymmetricEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--asymmetric_ciphertext))
+- `asymmetric_signature` (Attributes) Asymmetric signature action parameters and results. AsymmetricSign can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--asymmetric_signature))
+- `ciphertext` (Attributes) Symmetric encryption action parameters and results. Encrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--ciphertext))
 - `created_time` (Number) Key creation time.
 - `description` (String) Key description: Length 0–8192 characters.
 - `key_archive_operation` (Number) User master key archive operation (enter 1 to archive, 2 to unarchive).
@@ -28,6 +31,7 @@ Data Source schema for Volcengine::KMS::Key
 - `key_id` (String) Key unique identifier in UUID format.
 - `key_material_expire_time` (String) Key material expiration time. If empty, the key does not expire.
 - `key_name` (String) Master key name. Length 2–31 characters. Valid characters: [a-zA-Z0-9-_].
+- `key_primary_region` (String) Primary region of the multi-region key. Set the target primary region during the Create/Update phase; the current primary region is returned during the Read phase.
 - `key_rotation_operation` (Number) User master key rotation operation (enter 1 to enable, 2 to disable).
 - `key_spec` (String) Symmetric keys: SYMMETRIC_256, SYMMETRIC_128; asymmetric keys: RSA_2048, RSA_3072, RSA_4096, EC_P256, EC_P256K, EC_P384, EC_P521, EC_SM2.
 - `key_state` (String) Key status: Enable, Disable, PendingDelete, Archived, PendingImport.
@@ -38,6 +42,8 @@ Data Source schema for Volcengine::KMS::Key
 - `multi_region_configuration` (Attributes) Multi-region key configuration information. (see [below for nested schema](#nestedatt--multi_region_configuration))
 - `origin` (String) Key source. Options: CloudKMS, External, ExternalKeyStore.
 - `protection_level` (String) Key protection level. Options: SOFTWARE, HSM.
+- `re_encrypt` (Attributes) Re-encryption action parameters and results. ReEncrypt can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--re_encrypt))
+- `replicate_key` (Attributes) Replicate key action parameters and results. ReplicateKey can be triggered during the Create/Update phase; the result is only guaranteed to be returned in the current response. (see [below for nested schema](#nestedatt--replicate_key))
 - `rotate_interval` (Number) Key rotation period (days). Range: [90, 2560].
 - `rotate_state` (String) Key rotation status. Options: Enable, Disable.
 - `schedule_delete_time` (String) Key deletion time.
@@ -45,6 +51,37 @@ Data Source schema for Volcengine::KMS::Key
 - `tags` (Attributes Set) KMS key label information. (see [below for nested schema](#nestedatt--tags))
 - `trn` (String) Resource name. Format should be trn:${Service}:${Region}:${AccountID}:${ResourcePath}.
 - `updated_time` (Number) Key update time.
+
+<a id="nestedatt--asymmetric_ciphertext"></a>
+### Nested Schema for `asymmetric_ciphertext`
+
+Read-Only:
+
+- `algorithm` (String) Encryption algorithm. Optional values: RSAES_OAEP_SHA_256, SM2PKE.
+- `ciphertext_blob` (String) Ciphertext of encryption result, Base64-encoded.
+- `plaintext` (String) Plaintext to be encrypted, Base64-encoded.
+
+
+<a id="nestedatt--asymmetric_signature"></a>
+### Nested Schema for `asymmetric_signature`
+
+Read-Only:
+
+- `algorithm` (String) Signature algorithm, for example: RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, ECDSA_SHA_256, SM2_DSA.
+- `message` (String) Message to be signed, Base64-encoded.
+- `message_type` (String) Message type. Optional values: RAW, DIGEST.
+- `signature` (String) Signature result, Base64-encoded.
+
+
+<a id="nestedatt--ciphertext"></a>
+### Nested Schema for `ciphertext`
+
+Read-Only:
+
+- `ciphertext_blob` (String) Ciphertext of encryption result, Base64-encoded.
+- `encryption_context` (String) Encryption context JSON string.
+- `plaintext` (String) Plaintext to be encrypted, Base64-encoded.
+
 
 <a id="nestedatt--multi_region_configuration"></a>
 ### Nested Schema for `multi_region_configuration`
@@ -71,6 +108,40 @@ Read-Only:
 
 - `region` (String) Multi-region key region ID.
 - `trn` (String) Multi-region key conversion.
+
+
+
+<a id="nestedatt--re_encrypt"></a>
+### Nested Schema for `re_encrypt`
+
+Read-Only:
+
+- `ciphertext_blob` (String) Re-encrypted ciphertext, Base64-encoded.
+- `new_encryption_context` (String) New encryption context JSON string.
+- `new_key_id` (String) Target key ID. If not specified, you must provide NewKeyringName and NewKeyName.
+- `new_key_name` (String) Target key name.
+- `new_keyring_name` (String) Name of the keyring to which the target key belongs.
+- `old_encryption_context` (String) Old encryption context JSON string.
+- `source_ciphertext_blob` (String) Source ciphertext to be re-encrypted, Base64-encoded.
+
+
+<a id="nestedatt--replicate_key"></a>
+### Nested Schema for `replicate_key`
+
+Read-Only:
+
+- `description` (String) Replica key description.
+- `replica_key_id` (String) Replica key ID.
+- `replica_region` (String) Target region of the replica key.
+- `tags` (Attributes Set) Replica key label. (see [below for nested schema](#nestedatt--replicate_key--tags))
+
+<a id="nestedatt--replicate_key--tags"></a>
+### Nested Schema for `replicate_key.tags`
+
+Read-Only:
+
+- `key` (String) KMS key label key.
+- `value` (String) KMS key label value.
 
 
 

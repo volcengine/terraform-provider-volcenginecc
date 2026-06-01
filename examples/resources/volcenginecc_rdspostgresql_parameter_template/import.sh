@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rdspostgresql_parameter_template.example "template_id"
