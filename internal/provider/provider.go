@@ -90,6 +90,10 @@ func (p *VolcengineCCProvider) Schema(ctx context.Context, request provider.Sche
 				Description: "he Secret Key for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_SECRET_KEY` environment variable",
 				Optional:    true,
 			},
+			"session_token": schema.StringAttribute{
+				Description: "The Session Token for Volcengine Provider. It can also be sourced from the `VOLCENGINE_SESSION_TOKEN` environment variable",
+				Optional:    true,
+			},
 			"region": schema.StringAttribute{
 				Description: "The Region for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_REGION` environment variable",
 				Optional:    true,
@@ -156,6 +160,7 @@ func (p *VolcengineCCProvider) Schema(ctx context.Context, request provider.Sche
 type configModel struct {
 	AccessKey        types.String    `tfsdk:"access_key"`
 	SecretKey        types.String    `tfsdk:"secret_key"`
+	SessionToken     types.String    `tfsdk:"session_token"`
 	Region           types.String    `tfsdk:"region"`
 	DisableSSL       types.Bool      `tfsdk:"disable_ssl"`
 	CustomerHeaders  types.String    `tfsdk:"customer_headers"`
@@ -195,6 +200,9 @@ func (p *VolcengineCCProvider) Configure(ctx context.Context, request provider.C
 	}
 	if config.SecretKey.IsNull() || config.SecretKey.IsUnknown() {
 		config.SecretKey = types.StringValue(os.Getenv("VOLCENGINE_SECRET_KEY"))
+	}
+	if config.SessionToken.IsNull() || config.SessionToken.IsUnknown() {
+		config.SessionToken = types.StringValue(os.Getenv("VOLCENGINE_SESSION_TOKEN"))
 	}
 	if config.Profile.IsNull() || config.Profile.IsUnknown() {
 		config.Profile = types.StringValue(os.Getenv("VOLCENGINE_PROFILE"))
@@ -356,7 +364,7 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 	if c.AccessKey.ValueString() != "" && c.SecretKey.ValueString() != "" {
 		config = volcengine.NewConfig().
 			WithRegion(c.Region.ValueString()).
-			WithCredentials(credentials.NewStaticCredentials(c.AccessKey.ValueString(), c.SecretKey.ValueString(), "")).
+			WithCredentials(credentials.NewStaticCredentials(c.AccessKey.ValueString(), c.SecretKey.ValueString(), c.SessionToken.ValueString())).
 			WithDisableSSL(c.DisableSSL.ValueBool()).
 			WithExtendHttpRequest(func(ctx context.Context, request *http.Request) {
 				request.Header.Set("user-agent", version)
@@ -424,11 +432,14 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 			SecurityKey:     c.SecretKey.ValueString(),
 			RoleName:        roleName, // 扮演角色名称
 			AccountId:       accountId,
+			Schema:          "https",
 			Region:          c.Region.ValueString(),
 			DurationSeconds: int(c.AssumeRole.Duration.ValueInt32()),
 		}
-		if c.Endpoints != nil && !c.Endpoints.STS.IsNull() {
+		if c.Endpoints != nil && !c.Endpoints.STS.IsNull() && c.Endpoints.STS.ValueString() != "" {
 			stsValue.Host = c.Endpoints.STS.ValueString()
+		} else {
+			stsValue.Host = "sts.volcengineapi.com"
 		}
 		if c.DisableSSL.ValueBool() {
 			stsValue.Schema = "http"

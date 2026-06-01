@@ -109,6 +109,7 @@ Usage:
 provider "volcenginecc" {
    access_key = "your ak"
    secret_key = "your sk"
+   session_token = "your session token" # optional, used for STS temporary credentials
    region = "cn-beijing"
    profile = "your profile"
    file_path = "" # if empty, default path is ~/.volcengine
@@ -117,7 +118,7 @@ provider "volcenginecc" {
 
 ### Environment variables
 
-You can provide your credentials via VOLCENGINE_ACCESS_KEY and VOLCENGINE_SECRET_KEY environment variables, representing your volcengine public key and private key respectively. VOLCENGINE_REGION, VOLCENGINE_PROFILE, and VOLCENGINE_FILE_PATH are also used, if applicable:
+You can provide your credentials via VOLCENGINE_ACCESS_KEY and VOLCENGINE_SECRET_KEY environment variables, representing your volcengine public key and private key respectively. VOLCENGINE_SESSION_TOKEN (optional, used for STS temporary credentials), VOLCENGINE_REGION, VOLCENGINE_PROFILE, and VOLCENGINE_FILE_PATH are also used, if applicable:
 
 ```shell
 provider "volcenginecc" {
@@ -130,6 +131,7 @@ Usage:
 ```shell
 $ export VOLCENGINE_ACCESS_KEY="your_public_key"
 $ export VOLCENGINE_SECRET_KEY="your_private_key"
+$ export VOLCENGINE_SESSION_TOKEN="your_session_token" # optional, used for STS temporary credentials
 $ export VOLCENGINE_REGION="cn-beijing"
 $ export VOLCENGINE_PROFILE="your_profile"
 $ export VOLCENGINE_FILE_PATH="your_file_path" # if empty, default path is ~/.volcengine
@@ -143,6 +145,7 @@ $ export VOLCENGINE_FILE_PATH="your_file_path" # if empty, default path is ~/.vo
 
 - `access_key` (String) The Access Key for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_ACCESS_KEY` environment variable
 - `secret_key` (String) he Secret Key for Volcengine Provider. It must be provided, but it can also be sourced from the `VOLCENGINE_SECRET_KEY` environment variable
+- `session_token` (String) The Session Token for Volcengine Provider. It can also be sourced from the `VOLCENGINE_SESSION_TOKEN` environment variable
 - `profile` (String) The Profile for Volcengine Provider. It can be used as an alternative authentication method to AK/SK, and can also be sourced from the `VOLCENGINE_PROFILE` environment variable
 - `file_path` (String) The File Path for Volcengine Provider. It specifies the path to the profile configuration file. If not specified, the default path `~/.volcengine` will be used, and can also be sourced from the `VOLCENGINE_FILE_PATH` environment variable
 - `assume_role` (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
@@ -174,7 +177,7 @@ Optional:
 Optional:
 
 - `cloudcontrolapi` (String) Use this to override the default Cloud Control API service endpoint URL
-- `sts` (String) Use this to override the default STS service endpoint URL
+- `sts` (String) Use this to override the default STS service endpoint URL. When `assume_role` is configured and this field is not specified, it defaults to `sts.volcengineapi.com`.
 
 ## Warning：
 The current version has a known issue when modifying the SetNestedAttribute and ListNestedAttribute of nested ReadOnly/WriteOnly properties, which may cause abnormal plan/apply results. It is recommended that you consider the above limitations and be cautious when changing related data.
