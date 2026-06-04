@@ -1,0 +1,422 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ServiceName",
+    "/properties/PermissionSpaceId",
+    "/properties/PermissionSpaceName",
+    "/properties/ProjectName",
+    "/properties/Backend",
+    "/properties/Routes"
+  ],
+  "definitions": {
+    "ApiSpec": {
+      "description": "API specification configuration",
+      "properties": {
+        "ActionType": {
+          "description": "Operation type, for example READ",
+          "type": "string"
+        },
+        "ActionValue": {
+          "description": "Operation value, for example search",
+          "type": "string"
+        },
+        "Extractors": {
+          "description": "Attribute extractor list",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Extractor"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "IdentifierType": {
+          "description": "Resource identifier type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "IdentifierValue": {
+          "description": "Resource identifier value, for example JSON Pointer",
+          "type": "string"
+        },
+        "ResponseFilters": {
+          "description": "Response filter list",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ResponseFilter"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "ActionType",
+        "ActionValue",
+        "IdentifierType",
+        "IdentifierValue"
+      ],
+      "type": "object"
+    },
+    "Attribute": {
+      "description": "Mapping from response fields to resource attributes",
+      "properties": {
+        "Field": {
+          "description": "Source field path JSON Pointer",
+          "type": "string"
+        },
+        "Target": {
+          "description": "Target attribute name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Field",
+        "Target"
+      ],
+      "type": "object"
+    },
+    "Backend": {
+      "description": "Backend service configuration",
+      "properties": {
+        "BackendDomain": {
+          "description": "Backend service domain name, for example api.example.com",
+          "type": "string"
+        },
+        "BackendPort": {
+          "description": "Backend service port, default is 443",
+          "format": "int32",
+          "type": "integer"
+        },
+        "EnableTls": {
+          "description": "Whether to enable TLS",
+          "type": "boolean"
+        },
+        "Protocol": {
+          "description": "Communication protocol, for example HTTP or HTTPS",
+          "type": "string"
+        },
+        "TimeoutSeconds": {
+          "description": "Request timeout in seconds, default is 30 seconds",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "EnableTls",
+        "BackendDomain"
+      ],
+      "type": "object"
+    },
+    "Extractor": {
+      "description": "Attribute extractor definition",
+      "properties": {
+        "IsAuth": {
+          "description": "Whether used for authentication",
+          "type": "boolean"
+        },
+        "Path": {
+          "description": "JSON Pointer expression",
+          "type": "string"
+        },
+        "ResourceType": {
+          "description": "Extracted resource type",
+          "type": "string"
+        },
+        "Source": {
+          "description": "Extraction source enumeration value",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Path",
+        "IsAuth",
+        "Source",
+        "ResourceType"
+      ],
+      "type": "object"
+    },
+    "ResponseFilter": {
+      "description": "Response filter definition",
+      "properties": {
+        "Attributes": {
+          "description": "Attribute mapping list",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "FilterPath": {
+          "description": "Array path JSON Pointer",
+          "type": "string"
+        },
+        "IdField": {
+          "description": "ID field name",
+          "type": "string"
+        },
+        "IsAuth": {
+          "description": "Whether used for authentication",
+          "type": "boolean"
+        },
+        "Mode": {
+          "description": "Filter mode enumeration value",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ResourcePath": {
+          "description": "Resource path JSON Pointer",
+          "type": "string"
+        },
+        "ResourceType": {
+          "description": "Filtered resource type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Mode",
+        "IsAuth",
+        "ResourceType"
+      ],
+      "type": "object"
+    },
+    "Route": {
+      "description": "Route definition",
+      "properties": {
+        "ApiSpec": {
+          "$ref": "#/definitions/ApiSpec",
+          "description": "API specification configuration"
+        },
+        "AuthResourceType": {
+          "description": "Authentication resource type",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Route description",
+          "type": "string"
+        },
+        "Method": {
+          "description": "HTTP methods, separated by commas",
+          "type": "string"
+        },
+        "Path": {
+          "description": "Request path, 1–256 characters",
+          "type": "string"
+        },
+        "PathMatchType": {
+          "description": "Path match type, for example Exact, Prefix",
+          "type": "string"
+        },
+        "PermissionPool": {
+          "description": "Permission pool name",
+          "type": "string"
+        },
+        "Priority": {
+          "description": "Route priority, lower values indicate higher priority",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ResourceType": {
+          "description": "Resource type, for example Collection",
+          "type": "string"
+        },
+        "RouteName": {
+          "description": "Route name, 1–64 characters",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Path",
+        "Method",
+        "RouteName",
+        "ResourceType"
+      ],
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Service tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "ID Permission Gateway Service is used to define backend service access configuration, permission space binding, and optional route rules for unified management of service access by the agent identity and permission management platform",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/BackendType",
+      "/properties/PermissionSpaceId",
+      "/properties/ProjectName",
+      "/properties/Status",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "id:CreateService",
+        "id:GetService"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "id:ListRoutes",
+        "id:DisableRoute",
+        "id:DeleteRoute",
+        "id:DeleteService",
+        "id:GetService"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "id:ListServices"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "id:ListRoutes",
+        "id:GetService"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "id:UpdateService",
+        "id:UntagResources",
+        "id:TagResources",
+        "id:PublishService",
+        "id:GetService"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ServiceId"
+  ],
+  "properties": {
+    "Backend": {
+      "$ref": "#/definitions/Backend",
+      "description": "Backend service configuration"
+    },
+    "BackendType": {
+      "description": "Backend service type, for example custom, viking, agentkit-mcp",
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "Creation time, Unix timestamp in milliseconds",
+      "format": "int64",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "Service description, up to 256 characters",
+      "semantic": "description",
+      "type": "string"
+    },
+    "HijackDomainPrivate": {
+      "description": "Private domain name",
+      "type": "string"
+    },
+    "HijackDomainPublic": {
+      "description": "Public domain name",
+      "type": "string"
+    },
+    "PermissionSpaceId": {
+      "description": "Permission space ID, for example ps_123456",
+      "type": "string"
+    },
+    "PermissionSpaceName": {
+      "description": "Permission space name",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project name. Optional at creation, default value is \"default\"",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RouteCount": {
+      "description": "Number of routes",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Routes": {
+      "description": "List of routes created simultaneously. This field is only written at creation, not returned by read interface",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Route"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceId": {
+      "description": "Service ID. Generated after system creation, for example svc-1234567890",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ServiceName": {
+      "description": "Service name, 1–64 characters, unique within the account",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Service status. inactive: not enabled. active: enabled (configuration synced to APIGateway). draft: draft status (changes not synced to APIGateway)",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Service tag list",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TemplateId": {
+      "description": "Template ID associated with built-in service",
+      "type": "string"
+    },
+    "Trn": {
+      "description": "Resource TRN",
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "description": "Update time, Unix timestamp in milliseconds",
+      "format": "int64",
+      "semantic": "updatedTime",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ServiceId",
+    "/properties/BackendType",
+    "/properties/RouteCount",
+    "/properties/TemplateId",
+    "/properties/HijackDomainPublic",
+    "/properties/HijackDomainPrivate",
+    "/properties/Trn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "required": [
+    "ServiceName",
+    "PermissionSpaceId",
+    "Backend"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::ID::Service"
+}

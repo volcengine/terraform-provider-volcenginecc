@@ -1,0 +1,125 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "Contact": {
+      "description": "联系组中的联系信息。",
+      "properties": {
+        "ContactId": {
+          "description": "联系人ID。",
+          "type": "string"
+        },
+        "Email": {
+          "description": "联系人邮箱地址。",
+          "type": "string"
+        },
+        "Name": {
+          "description": "联系人名称。",
+          "type": "string"
+        },
+        "Phone": {
+          "description": "联系人手机号码。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "符合条件的联系组的详细信息。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Name"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudmonitor:CreateContactGroup",
+        "cloudmonitor:ListContactGroupByIds"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudmonitor:DeleteContactGroupByIds",
+        "cloudmonitor:ListContactGroupByIds"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudmonitor:ListContactGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudmonitor:ListContactGroupByIds"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudmonitor:UpdateContactGroup",
+        "cloudmonitor:UpdateContactGroupWithContacts",
+        "cloudmonitor:ListContactGroupByIds"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ContactGroupId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "创建本联系组的账号ID。",
+      "type": "string"
+    },
+    "ContactGroupId": {
+      "description": "联系组的ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Contacts": {
+      "description": "联系组中的联系信息。",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Contact"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreatedAt": {
+      "description": "联系组的创建时间。",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "联系组的描述。若不填，默认为空字符串。长度限制在 1～255 字符之间。允许包含中文、英文、下划线等特殊字符。",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "Name": {
+      "description": "联系组名称。不能以数字、中划线开头。只能包含中文、字母、数字、下划线_和中划线-。长度限制在 1～128 字符之间。",
+      "maxLength": 128,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "description": "联系组的更新时间。",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ContactGroupId",
+    "/properties/AccountId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Contacts/*/Email",
+    "/properties/Contacts/*/Name",
+    "/properties/Contacts/*/Phone"
+  ],
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudMonitor::ContactGroup"
+}

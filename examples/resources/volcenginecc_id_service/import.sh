@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_id_service.example "service_id"

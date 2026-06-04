@@ -1009,6 +1009,7 @@
         "identifier": ["TemplateId"],
         "path": "./examples/resources/volcenginecc_rdspostgresql_parameter_template/import.sh"
     },
+    {
         "resource": "volcenginecc_cen_bandwidth_package",
         "identifier": ["CenBandwidthPackageId"],
         "path": "./examples/resources/volcenginecc_cen_bandwidth_package/import.sh"
@@ -1057,5 +1058,15 @@
         "resource": "volcenginecc_gtm_pool",
         "identifier": ["GtmId","PoolId"],
         "path": "./examples/resources/volcenginecc_gtm_pool/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudmonitor_contact_group",
+        "identifier": ["ContactGroupId"],
+        "path": "./examples/resources/volcenginecc_cloudmonitor_contact_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_id_service",
+        "identifier": ["ServiceId"],
+        "path": "./examples/resources/volcenginecc_id_service/import.sh"
     }
 ]

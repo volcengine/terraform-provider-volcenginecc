@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cloudmonitor_contact_group.example "contact_group_id"
