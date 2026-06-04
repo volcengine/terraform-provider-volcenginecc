@@ -175,3 +175,8 @@ Optional:
 
 - `cloudcontrolapi` (String) Use this to override the default Cloud Control API service endpoint URL
 - `sts` (String) Use this to override the default STS service endpoint URL
+
+## Security and privacy
+
+This project takes security seriously.
+For vulnerability reporting and supported versions, see [SECURITY.md](SECURITY.md)

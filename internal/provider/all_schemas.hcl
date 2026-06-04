@@ -864,3 +864,11 @@ resource_schema "volcengine_kms_secret" {
 resource_schema "volcengine_gtm_pool" {
   cloudcontrol_type_name = "Volcengine::GTM::Pool"
 }
+
+resource_schema "volcengine_cloudmonitor_contact_group" {
+  cloudcontrol_type_name = "Volcengine::CloudMonitor::ContactGroup"
+}
+
+resource_schema "volcengine_id_service" {
+  cloudcontrol_type_name = "Volcengine::ID::Service"
+}

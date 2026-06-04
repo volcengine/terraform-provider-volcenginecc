@@ -214,6 +214,8 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_directconnect_virtual_interface -ccschema ../service/cloudcontrol/schemas/Volcengine_DirectConnect_VirtualInterface.json -package directconnect ../volcengine/directconnect/virtual_interface_singular_data_source_gen.go ../volcengine/directconnect/virtual_interface_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_kms_secret -ccschema ../service/cloudcontrol/schemas/Volcengine_KMS_Secret.json -package kms ../volcengine/kms/secret_singular_data_source_gen.go ../volcengine/kms/secret_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_gtm_pool -ccschema ../service/cloudcontrol/schemas/Volcengine_GTM_Pool.json -package gtm ../volcengine/gtm/pool_singular_data_source_gen.go ../volcengine/gtm/pool_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_cloudmonitor_contact_group -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_ContactGroup.json -package cloudmonitor ../volcengine/cloudmonitor/contact_group_singular_data_source_gen.go ../volcengine/cloudmonitor/contact_group_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_id_service -ccschema ../service/cloudcontrol/schemas/Volcengine_ID_Service.json -package id ../volcengine/id/service_singular_data_source_gen.go ../volcengine/id/service_singular_data_source_gen_test.go
 
 package provider
 
@@ -241,6 +243,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/gtm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/hbase"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/id"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kms"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/mongodb"

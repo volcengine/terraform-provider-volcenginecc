@@ -213,6 +213,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_directconnect_virtual_interfaces -cctype Volcengine::DirectConnect::VirtualInterface -package directconnect ../volcengine/directconnect/virtual_interface_plural_data_source_gen.go ../volcengine/directconnect/virtual_interface_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_kms_secrets -cctype Volcengine::KMS::Secret -package kms ../volcengine/kms/secret_plural_data_source_gen.go ../volcengine/kms/secret_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_gtm_pools -cctype Volcengine::GTM::Pool -package gtm ../volcengine/gtm/pool_plural_data_source_gen.go ../volcengine/gtm/pool_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_contact_groups -cctype Volcengine::CloudMonitor::ContactGroup -package cloudmonitor ../volcengine/cloudmonitor/contact_group_plural_data_source_gen.go ../volcengine/cloudmonitor/contact_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_id_services -cctype Volcengine::ID::Service -package id ../volcengine/id/service_plural_data_source_gen.go ../volcengine/id/service_plural_data_source_gen_test.go
 
 package provider
 
@@ -240,6 +242,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/gtm"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/hbase"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/iam"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/id"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kafka"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/kms"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/mongodb"
