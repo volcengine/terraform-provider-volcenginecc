@@ -233,6 +233,24 @@
       },
       "type": "object"
     },
+    "Log": {
+      "description": "Log information in the ALB instance",
+      "properties": {
+        "Enabled": {
+          "description": "Whether to enable access log",
+          "type": "boolean"
+        },
+        "ProjectId": {
+          "description": "TLS project ID bound to access log",
+          "type": "string"
+        },
+        "TopicId": {
+          "description": "TLS subject ID bound to access log",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "PopLocation": {
       "description": "Access point (PoP) location information for the public IP.",
       "properties": {
@@ -398,6 +416,10 @@
       "$ref": "#/definitions/GlobalAccelerator",
       "description": "Global accelerator configuration, used to improve cross-region access speed."
     },
+    "HealthLog": {
+      "$ref": "#/definitions/Log",
+      "description": "Health check log information in the ALB instance"
+    },
     "Ipv6BandwidthPackageId": {
       "description": "When creating a public ALB instance, specify the shared bandwidth package ID to which the IPv6 public bandwidth will be added.",
       "type": "string"
@@ -477,6 +499,10 @@
       ],
       "semantic": "status",
       "type": "string"
+    },
+    "TLSAccessLog": {
+      "$ref": "#/definitions/Log",
+      "description": "Access log information in the ALB instance"
     },
     "Tags": {
       "description": "List of tags bound to the instance, used for categorization and billing.",

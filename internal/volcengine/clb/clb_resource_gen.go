@@ -9,7 +9,6 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -43,16 +42,12 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Name of the object storage bucket for storing Layer 7 access logs",
 		//	      "type": "string"
 		//	    },
-		//	    "DeliveryType": {
-		//	      "description": "Log delivery type. Available values: tos (default): Deliver logs to object storage service TOS. tls: Deliver logs to log service TLS",
-		//	      "enum": [
-		//	        "tos",
-		//	        "tls"
-		//	      ],
-		//	      "type": "string"
-		//	    },
 		//	    "Enabled": {
-		//	      "description": "Enable access log (Layer 7) delivery to object storage TOS",
+		//	      "description": "Enable access log TOS feature?",
+		//	      "type": "boolean"
+		//	    },
+		//	    "TlsEnabled": {
+		//	      "description": "Enable access log TLS feature?",
 		//	      "type": "boolean"
 		//	    },
 		//	    "TlsProjectId": {
@@ -77,25 +72,17 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
-				// Property: DeliveryType
-				"delivery_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Log delivery type. Available values: tos (default): Deliver logs to object storage service TOS. tls: Deliver logs to log service TLS",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"tos",
-							"tls",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enable access log (Layer 7) delivery to object storage TOS",
-					Optional:    true,
+					Description: "Enable access log TOS feature?",
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TlsEnabled
+				"tls_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enable access log TLS feature?",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
@@ -387,7 +374,6 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"eip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Public IP address",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -402,7 +388,6 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Public IP ID",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1201,7 +1186,6 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"bypass_security_group_enabled":   "BypassSecurityGroupEnabled",
 		"create_time":                     "CreateTime",
 		"deleted_time":                    "DeletedTime",
-		"delivery_type":                   "DeliveryType",
 		"description":                     "Description",
 		"eip":                             "Eip",
 		"eip_address":                     "EipAddress",
@@ -1248,6 +1232,7 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_id":                       "SubnetId",
 		"tags":                            "Tags",
 		"timestamp_remove_enabled":        "TimestampRemoveEnabled",
+		"tls_enabled":                     "TlsEnabled",
 		"tls_project_id":                  "TlsProjectId",
 		"tls_topic_id":                    "TlsTopicId",
 		"type":                            "Type",
@@ -1280,6 +1265,10 @@ func cLBResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/TimestampRemoveEnabled",
 		"/properties/EniIpv6Address",
 		"/properties/Ipv6AddressBandwidth",
+		"/properties/EipAddress",
+		"/properties/EipID",
+		"/properties/AccessLog/Enabled",
+		"/properties/AccessLog/TlsEnabled",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

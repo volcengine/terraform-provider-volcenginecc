@@ -923,6 +923,266 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ReplicationSlots
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Replication slot list for the instance",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Replication slot information",
+		//	    "properties": {
+		//	      "Database": {
+		//	        "description": "Database associated with the slot",
+		//	        "type": "string"
+		//	      },
+		//	      "IPAddress": {
+		//	        "description": "Connected client IP address",
+		//	        "type": "string"
+		//	      },
+		//	      "Plugin": {
+		//	        "description": "Plugin used by the slot",
+		//	        "type": "string"
+		//	      },
+		//	      "SlotName": {
+		//	        "description": "Slot name",
+		//	        "type": "string"
+		//	      },
+		//	      "SlotStatus": {
+		//	        "description": "Slot status",
+		//	        "type": "string"
+		//	      },
+		//	      "SlotType": {
+		//	        "description": "Slot type",
+		//	        "type": "string"
+		//	      },
+		//	      "Temporary": {
+		//	        "description": "Whether it is a temporary slot",
+		//	        "type": "boolean"
+		//	      },
+		//	      "WalDelay": {
+		//	        "description": "WAL delay size",
+		//	        "format": "int64",
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"replication_slots": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Database
+					"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Database associated with the slot",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IPAddress
+					"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Connected client IP address",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Plugin
+					"plugin": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Plugin used by the slot",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SlotName
+					"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Slot name",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SlotStatus
+					"slot_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Slot status",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SlotType
+					"slot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Slot type",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Temporary
+					"temporary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Whether it is a temporary slot",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: WalDelay
+					"wal_delay": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "WAL delay size",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Replication slot list for the instance\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RestoreToExistedInstance
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Restore backup data to the current instance",
+		//	  "properties": {
+		//	    "BackupId": {
+		//	      "description": "Backup set ID",
+		//	      "type": "string"
+		//	    },
+		//	    "Databases": {
+		//	      "description": "List of databases to restore",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Restored database information",
+		//	        "properties": {
+		//	          "DBName": {
+		//	            "description": "Source database name",
+		//	            "type": "string"
+		//	          },
+		//	          "NewDBName": {
+		//	            "description": "Name of the new database after restoration",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SourceDBInstanceId": {
+		//	      "description": "Source instance ID",
+		//	      "type": "string"
+		//	    },
+		//	    "TargetDBInstanceAccount": {
+		//	      "description": "Database account for the target instance",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BackupId",
+		//	    "SourceDBInstanceId",
+		//	    "Databases",
+		//	    "TargetDBInstanceAccount"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"restore_to_existed_instance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BackupId
+				"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Backup set ID",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Databases
+				"databases": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DBName
+							"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Source database name",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NewDBName
+							"new_db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the new database after restoration",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of databases to restore\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SourceDBInstanceId
+				"source_db_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Source instance ID",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TargetDBInstanceAccount
+				"target_db_instance_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Database account for the target instance",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Restore backup data to the current instance",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// RestoreToExistedInstance is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: StorageDataUse
 		// Cloud Control resource type schema:
 		//
@@ -1182,6 +1442,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"allow_list_ids":                   "AllowListIds",
 		"auto_add_new_nodes":               "AutoAddNewNodes",
 		"auto_renew":                       "AutoRenew",
+		"backup_id":                        "BackupId",
 		"charge_detail":                    "ChargeDetail",
 		"charge_end_time":                  "ChargeEndTime",
 		"charge_start_time":                "ChargeStartTime",
@@ -1190,10 +1451,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"create_time":                      "CreateTime",
 		"cross_region_domain":              "CrossRegionDomain",
 		"data_sync_mode":                   "DataSyncMode",
+		"database":                         "Database",
+		"databases":                        "Databases",
 		"day_kind":                         "DayKind",
 		"day_of_week":                      "DayOfWeek",
 		"day_of_week_maintenance_time":     "DayOfWeekMaintenanceTime",
 		"db_engine_version":                "DBEngineVersion",
+		"db_name":                          "DBName",
 		"description":                      "Description",
 		"dns_visibility":                   "DNSVisibility",
 		"domain":                           "Domain",
@@ -1215,6 +1479,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"maintenance_window_start_time":    "MaintenanceWindowStartTime",
 		"memory":                           "Memory",
 		"network_type":                     "NetworkType",
+		"new_db_name":                      "NewDBName",
 		"node_id":                          "NodeId",
 		"node_info":                        "NodeInfo",
 		"node_number":                      "NodeNumber",
@@ -1225,6 +1490,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"overdue_time":                     "OverdueTime",
 		"period":                           "Period",
 		"period_unit":                      "PeriodUnit",
+		"plugin":                           "Plugin",
 		"port":                             "Port",
 		"project_name":                     "ProjectName",
 		"read_only_node_distribution_type": "ReadOnlyNodeDistributionType",
@@ -1233,6 +1499,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"read_write_mode":                  "ReadWriteMode",
 		"read_write_proxy_connection":      "ReadWriteProxyConnection",
 		"region_id":                        "RegionId",
+		"replication_slots":                "ReplicationSlots",
+		"restore_to_existed_instance":      "RestoreToExistedInstance",
+		"slot_name":                        "SlotName",
+		"slot_status":                      "SlotStatus",
+		"slot_type":                        "SlotType",
+		"source_db_instance_id":            "SourceDBInstanceId",
 		"storage_data_use":                 "StorageDataUse",
 		"storage_log_use":                  "StorageLogUse",
 		"storage_space":                    "StorageSpace",
@@ -1242,12 +1514,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"storage_wal_use":                  "StorageWALUse",
 		"subnet_id":                        "SubnetId",
 		"tags":                             "Tags",
+		"target_db_instance_account":       "TargetDBInstanceAccount",
 		"temp_modify_end_time":             "TempModifyEndTime",
 		"temp_modify_start_time":           "TempModifyStartTime",
+		"temporary":                        "Temporary",
 		"update_time":                      "UpdateTime",
 		"value":                            "Value",
 		"vcpu":                             "VCPU",
 		"vpc_id":                           "VpcId",
+		"wal_delay":                        "WalDelay",
 		"weight":                           "Weight",
 		"write_node_halt_writing":          "WriteNodeHaltWriting",
 		"zone_id":                          "ZoneId",
@@ -1255,6 +1530,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AllowListIds",
+		"/properties/RestoreToExistedInstance",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

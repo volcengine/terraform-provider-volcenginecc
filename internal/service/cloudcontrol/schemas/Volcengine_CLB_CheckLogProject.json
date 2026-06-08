@@ -1,0 +1,40 @@
+{
+  "additionalProperties": false,
+  "description": "CLB provides health check log capabilities and allows you to create a log topic to store and manage CLB health check logs.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "clb:CreateHealthCheckLogProject",
+        "clb:DescribeHealthCheckLogProjectAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "clb:DeleteHealthCheckLogProject",
+        "clb:DescribeHealthCheckLogProjectAttributes"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "clb:DescribeHealthCheckLogProjectAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/LogProjectId"
+  ],
+  "properties": {
+    "LogProjectId": {
+      "description": "Log Project ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/LogProjectId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CLB::CheckLogProject"
+}

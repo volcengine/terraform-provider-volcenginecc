@@ -872,3 +872,15 @@ resource_schema "volcengine_cloudmonitor_contact_group" {
 resource_schema "volcengine_id_service" {
   cloudcontrol_type_name = "Volcengine::ID::Service"
 }
+
+resource_schema "volcengine_clb_check_log_project" {
+  cloudcontrol_type_name = "Volcengine::CLB::CheckLogProject"
+}
+
+resource_schema "volcengine_clb_check_log_topic" {
+  cloudcontrol_type_name = "Volcengine::CLB::CheckLogTopic"
+}
+
+resource_schema "volcengine_transitrouter_route_table_propagation" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::RouteTablePropagation"
+}

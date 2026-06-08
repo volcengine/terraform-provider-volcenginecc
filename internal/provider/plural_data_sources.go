@@ -215,6 +215,9 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_gtm_pools -cctype Volcengine::GTM::Pool -package gtm ../volcengine/gtm/pool_plural_data_source_gen.go ../volcengine/gtm/pool_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_contact_groups -cctype Volcengine::CloudMonitor::ContactGroup -package cloudmonitor ../volcengine/cloudmonitor/contact_group_plural_data_source_gen.go ../volcengine/cloudmonitor/contact_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_id_services -cctype Volcengine::ID::Service -package id ../volcengine/id/service_plural_data_source_gen.go ../volcengine/id/service_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_check_log_projects -cctype Volcengine::CLB::CheckLogProject -package clb ../volcengine/clb/check_log_project_plural_data_source_gen.go ../volcengine/clb/check_log_project_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_clb_check_log_topics -cctype Volcengine::CLB::CheckLogTopic -package clb ../volcengine/clb/check_log_topic_plural_data_source_gen.go ../volcengine/clb/check_log_topic_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_transitrouter_route_table_propagations -cctype Volcengine::TransitRouter::RouteTablePropagation -package transitrouter ../volcengine/transitrouter/route_table_propagation_plural_data_source_gen.go ../volcengine/transitrouter/route_table_propagation_plural_data_source_gen_test.go
 
 package provider
 

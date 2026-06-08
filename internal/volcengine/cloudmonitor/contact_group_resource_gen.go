@@ -31,11 +31,11 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "创建本联系组的账号ID。",
+		//	  "description": "Account ID that created this contact group",
 		//	  "type": "string"
 		//	}
 		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "创建本联系组的账号ID。",
+			Description: "Account ID that created this contact group",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -45,11 +45,11 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "联系组的ID。",
+		//	  "description": "Contact group ID",
 		//	  "type": "string"
 		//	}
 		"contact_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "联系组的ID。",
+			Description: "Contact group ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -59,25 +59,25 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "联系组中的联系信息。",
+		//	  "description": "Contact information in the contact group",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "联系组中的联系信息。",
+		//	    "description": "Contact information in the contact group",
 		//	    "properties": {
 		//	      "ContactId": {
-		//	        "description": "联系人ID。",
+		//	        "description": "Contact ID",
 		//	        "type": "string"
 		//	      },
 		//	      "Email": {
-		//	        "description": "联系人邮箱地址。",
+		//	        "description": "Contact email address",
 		//	        "type": "string"
 		//	      },
 		//	      "Name": {
-		//	        "description": "联系人名称。",
+		//	        "description": "Contact name",
 		//	        "type": "string"
 		//	      },
 		//	      "Phone": {
-		//	        "description": "联系人手机号码。",
+		//	        "description": "Contact mobile number",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -91,7 +91,7 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ContactId
 					"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "联系人ID。",
+						Description: "Contact ID",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -103,7 +103,7 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Phone
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "联系组中的联系信息。\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Description: "Contact information in the contact group\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -114,11 +114,11 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "联系组的创建时间。",
+		//	  "description": "Contact group creation time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "联系组的创建时间。",
+			Description: "Contact group creation time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -128,12 +128,12 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "联系组的描述。若不填，默认为空字符串。长度限制在 1～255 字符之间。允许包含中文、英文、下划线等特殊字符。",
+		//	  "description": "Contact group description. If left blank, defaults to an empty string. Length must be between 1 and 255 characters. Chinese, English, underscores, and other special characters are allowed",
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "联系组的描述。若不填，默认为空字符串。长度限制在 1～255 字符之间。允许包含中文、英文、下划线等特殊字符。",
+			Description: "Contact group description. If left blank, defaults to an empty string. Length must be between 1 and 255 characters. Chinese, English, underscores, and other special characters are allowed",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -147,12 +147,12 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "联系组名称。不能以数字、中划线开头。只能包含中文、字母、数字、下划线_和中划线-。长度限制在 1～128 字符之间。",
+		//	  "description": "Contact group name. Cannot start with a digit or hyphen. Can only contain Chinese characters, letters, digits, underscores _, and hyphens -. Length must be between 1 and 128 characters",
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "联系组名称。不能以数字、中划线开头。只能包含中文、字母、数字、下划线_和中划线-。长度限制在 1～128 字符之间。",
+			Description: "Contact group name. Cannot start with a digit or hyphen. Can only contain Chinese characters, letters, digits, underscores _, and hyphens -. Length must be between 1 and 128 characters",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
@@ -162,11 +162,11 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "联系组的更新时间。",
+		//	  "description": "Contact group update time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "联系组的更新时间。",
+			Description: "Contact group update time",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -184,7 +184,7 @@ func contactGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "符合条件的联系组的详细信息。",
+		Description: "Details of contact groups that meet the criteria",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -377,6 +378,64 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// GlobalAccelerator is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: HealthLog
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Health check log information in the ALB instance",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Whether to enable access log",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ProjectId": {
+		//	      "description": "TLS project ID bound to access log",
+		//	      "type": "string"
+		//	    },
+		//	    "TopicId": {
+		//	      "description": "TLS subject ID bound to access log",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"health_log": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable access log",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProjectId
+				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS project ID bound to access log",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopicId
+				"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS subject ID bound to access log",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Health check log information in the ALB instance",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
@@ -693,6 +752,64 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TLSAccessLog
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Access log information in the ALB instance",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Whether to enable access log",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ProjectId": {
+		//	      "description": "TLS project ID bound to access log",
+		//	      "type": "string"
+		//	    },
+		//	    "TopicId": {
+		//	      "description": "TLS subject ID bound to access log",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tls_access_log": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable access log",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProjectId
+				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS project ID bound to access log",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopicId
+				"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS subject ID bound to access log",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Access log information in the ALB instance",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1090,8 +1207,10 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"description":                     "Description",
 		"dns_name":                        "DnsName",
 		"eip_billing_config":              "EipBillingConfig",
+		"enabled":                         "Enabled",
 		"endpoint_group_id":               "EndpointGroupId",
 		"global_accelerator":              "GlobalAccelerator",
+		"health_log":                      "HealthLog",
 		"ipv_6_bandwidth_package_id":      "Ipv6BandwidthPackageId",
 		"ipv_6_eip_billing_config":        "Ipv6EipBillingConfig",
 		"isp":                             "ISP",
@@ -1105,6 +1224,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"modification_protection_reason":  "ModificationProtectionReason",
 		"modification_protection_status":  "ModificationProtectionStatus",
 		"overdue_time":                    "OverdueTime",
+		"project_id":                      "ProjectId",
 		"project_name":                    "ProjectName",
 		"proxy_protocol_enabled":          "ProxyProtocolEnabled",
 		"security_protection_instance_id": "SecurityProtectionInstanceId",
@@ -1112,6 +1232,8 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"status":                          "Status",
 		"subnet_id":                       "SubnetId",
 		"tags":                            "Tags",
+		"tls_access_log":                  "TLSAccessLog",
+		"topic_id":                        "TopicId",
 		"type":                            "Type",
 		"update_time":                     "UpdateTime",
 		"value":                           "Value",

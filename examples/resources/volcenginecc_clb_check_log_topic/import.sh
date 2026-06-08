@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_clb_check_log_topic.example "load_balancer_id|log_topic_id"

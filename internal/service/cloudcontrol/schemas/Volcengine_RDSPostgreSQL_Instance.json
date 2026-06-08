@@ -298,6 +298,91 @@
       },
       "type": "object"
     },
+    "ReplicationSlot": {
+      "description": "Replication slot information",
+      "properties": {
+        "Database": {
+          "description": "Database associated with the slot",
+          "type": "string"
+        },
+        "IPAddress": {
+          "description": "Connected client IP address",
+          "type": "string"
+        },
+        "Plugin": {
+          "description": "Plugin used by the slot",
+          "type": "string"
+        },
+        "SlotName": {
+          "description": "Slot name",
+          "type": "string"
+        },
+        "SlotStatus": {
+          "description": "Slot status",
+          "type": "string"
+        },
+        "SlotType": {
+          "description": "Slot type",
+          "type": "string"
+        },
+        "Temporary": {
+          "description": "Whether it is a temporary slot",
+          "type": "boolean"
+        },
+        "WalDelay": {
+          "description": "WAL delay size",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "RestoreDatabase": {
+      "description": "Restored database information",
+      "properties": {
+        "DBName": {
+          "description": "Source database name",
+          "type": "string"
+        },
+        "NewDBName": {
+          "description": "Name of the new database after restoration",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RestoreToExistedInstance": {
+      "description": "Restore backup data to the current instance",
+      "properties": {
+        "BackupId": {
+          "description": "Backup set ID",
+          "type": "string"
+        },
+        "Databases": {
+          "description": "List of databases to restore",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/RestoreDatabase"
+          },
+          "type": "array"
+        },
+        "SourceDBInstanceId": {
+          "description": "Source instance ID",
+          "type": "string"
+        },
+        "TargetDBInstanceAccount": {
+          "description": "Database account for the target instance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "BackupId",
+        "SourceDBInstanceId",
+        "Databases",
+        "TargetDBInstanceAccount"
+      ],
+      "type": "object"
+    },
     "Tag": {
       "description": "Resource tag",
       "properties": {
@@ -335,13 +420,15 @@
     "create": {
       "permissions": [
         "rds_postgresql:DescribeDBInstanceDetail",
-        "rds_postgresql:CreateDBInstance"
+        "rds_postgresql:CreateDBInstance",
+        "rds_postgresql:DescribeSlots"
       ]
     },
     "delete": {
       "permissions": [
         "rds_postgresql:DescribeDBInstanceDetail",
-        "rds_postgresql:DeleteDBInstance"
+        "rds_postgresql:DeleteDBInstance",
+        "rds_postgresql:DescribeSlots"
       ]
     },
     "list": {
@@ -351,7 +438,8 @@
     },
     "read": {
       "permissions": [
-        "rds_postgresql:DescribeDBInstanceDetail"
+        "rds_postgresql:DescribeDBInstanceDetail",
+        "rds_postgresql:DescribeSlots"
       ]
     },
     "update": {
@@ -363,7 +451,10 @@
         "rds_postgresql:ModifyDBInstanceName",
         "rds_postgresql:ModifyDBInstanceSpec",
         "rds_postgresql:RemoveTagsFromResource",
-        "rds_postgresql:ModifyDBInstanceMaintenanceWindow"
+        "rds_postgresql:ModifyDBInstanceMaintenanceWindow",
+        "rds_postgresql:DescribeSlots",
+        "rds_postgresql:DeleteSlot",
+        "rds_postgresql:RestoreToExistedInstance"
       ]
     }
   },
@@ -456,6 +547,20 @@
       "description": "Project. Default value: default project",
       "semantic": "projectName",
       "type": "string"
+    },
+    "ReplicationSlots": {
+      "description": "Replication slot list for the instance",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ReplicationSlot"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RestoreToExistedInstance": {
+      "$ref": "#/definitions/RestoreToExistedInstance",
+      "description": "Restore backup data to the current instance",
+      "type": "object"
     },
     "StorageDataUse": {
       "description": "Data file space used by the primary node. Unit: Byte",
@@ -568,6 +673,7 @@
   },
   "typeName": "Volcengine::RDSPostgreSQL::Instance",
   "writeOnlyProperties": [
-    "/properties/AllowListIds"
+    "/properties/AllowListIds",
+    "/properties/RestoreToExistedInstance"
   ]
 }

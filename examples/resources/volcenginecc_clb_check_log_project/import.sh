@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_clb_check_log_project.example "log_project_id"

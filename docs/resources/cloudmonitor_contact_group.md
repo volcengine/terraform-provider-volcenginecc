@@ -2,12 +2,12 @@
 page_title: "volcenginecc_cloudmonitor_contact_group Resource - terraform-provider-volcenginecc"
 subcategory: "CloudMonitor"
 description: |-
-  符合条件的联系组的详细信息。
+  Details of contact groups that meet the criteria
 ---
 
 # volcenginecc_cloudmonitor_contact_group (Resource)
 
-符合条件的联系组的详细信息。
+Details of contact groups that meet the criteria
 
 ## Example Usage
 
@@ -34,28 +34,28 @@ resource "volcenginecc_cloudmonitor_contact_group" "CloudMonitorContactGroupDemo
 
 ### Required
 
-- `name` (String) 联系组名称。不能以数字、中划线开头。只能包含中文、字母、数字、下划线_和中划线-。长度限制在 1～128 字符之间。
+- `name` (String) Contact group name. Cannot start with a digit or hyphen. Can only contain Chinese characters, letters, digits, underscores _, and hyphens -. Length must be between 1 and 128 characters
 
 ### Optional
 
-- `contacts` (Attributes Set) 联系组中的联系信息。
+- `contacts` (Attributes Set) Contact information in the contact group
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--contacts))
-- `description` (String) 联系组的描述。若不填，默认为空字符串。长度限制在 1～255 字符之间。允许包含中文、英文、下划线等特殊字符。
+- `description` (String) Contact group description. If left blank, defaults to an empty string. Length must be between 1 and 255 characters. Chinese, English, underscores, and other special characters are allowed
 
 ### Read-Only
 
-- `account_id` (String) 创建本联系组的账号ID。
-- `contact_group_id` (String) 联系组的ID。
-- `created_at` (String) 联系组的创建时间。
+- `account_id` (String) Account ID that created this contact group
+- `contact_group_id` (String) Contact group ID
+- `created_at` (String) Contact group creation time
 - `id` (String) Uniquely identifies the resource.
-- `updated_at` (String) 联系组的更新时间。
+- `updated_at` (String) Contact group update time
 
 <a id="nestedatt--contacts"></a>
 ### Nested Schema for `contacts`
 
 Optional:
 
-- `contact_id` (String) 联系人ID。
+- `contact_id` (String) Contact ID
 
 ## Import
 

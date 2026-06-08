@@ -51,6 +51,16 @@ resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
       key = "test"
     value = "env" }
   ]
+  tls_access_log = {
+    enabled = true
+    project_id = "90xxxx7774-01ee-4948-89af-90xxxx7774"
+    topic_id = "90xxxx7774-a776-4925-a3ca-90xxxx7774"
+  }
+  health_log = {
+    enabled = true
+    project_id = "90xxxx7774-34af-4ce5-866e-90xxxx7774"
+    topic_id = "90xxxx7774-7f7e-462e-8afb-90xxxx7774"
+  }
 }
 ```
 
@@ -70,6 +80,7 @@ resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
 - `description` (String) Description of the ALB instance.
 - `eip_billing_config` (Attributes) Billing configuration for public IP, only applicable to public instances. (see [below for nested schema](#nestedatt--eip_billing_config))
 - `global_accelerator` (Attributes) Global accelerator configuration, used to improve cross-region access speed. (see [below for nested schema](#nestedatt--global_accelerator))
+- `health_log` (Attributes) Health check log information in the ALB instance (see [below for nested schema](#nestedatt--health_log))
 - `ipv_6_bandwidth_package_id` (String) When creating a public ALB instance, specify the shared bandwidth package ID to which the IPv6 public bandwidth will be added.
 - `ipv_6_eip_billing_config` (Attributes) Billing configuration for IPv6 public IP, only applicable to public instances. (see [below for nested schema](#nestedatt--ipv_6_eip_billing_config))
 - `load_balancer_billing_type` (Number) ALB instance billing type. Currently, only pay-as-you-go is supported (value is 1).
@@ -81,6 +92,7 @@ resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
 - `proxy_protocol_enabled` (String) ALB supports the Proxy Protocol and records the client's real IP.
 - `tags` (Attributes Set) List of tags bound to the instance, used for categorization and billing.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `tls_access_log` (Attributes) Access log information in the ALB instance (see [below for nested schema](#nestedatt--tls_access_log))
 - `waf_instance_id` (String) ID of the WAF security protection instance bound to the ALB instance.
 - `waf_protected_domain` (String) Domain name protected by WAF, used for precise rule matching.
 - `waf_protection_enabled` (String) WAF security protection switch. on: enabled; off: disabled.
@@ -123,6 +135,16 @@ Optional:
 - `weight` (Number) Weight of the backend server, determines traffic distribution ratio.
 
 
+<a id="nestedatt--health_log"></a>
+### Nested Schema for `health_log`
+
+Optional:
+
+- `enabled` (Boolean) Whether to enable access log
+- `project_id` (String) TLS project ID bound to access log
+- `topic_id` (String) TLS subject ID bound to access log
+
+
 <a id="nestedatt--ipv_6_eip_billing_config"></a>
 ### Nested Schema for `ipv_6_eip_billing_config`
 
@@ -140,6 +162,16 @@ Optional:
 
 - `key` (String) Tag key, used to identify the tag category.
 - `value` (String) Tag value used to identify the specific tag content.
+
+
+<a id="nestedatt--tls_access_log"></a>
+### Nested Schema for `tls_access_log`
+
+Optional:
+
+- `enabled` (Boolean) Whether to enable access log
+- `project_id` (String) TLS project ID bound to access log
+- `topic_id` (String) TLS subject ID bound to access log
 
 
 <a id="nestedatt--zone_mappings"></a>

@@ -2,7 +2,8 @@
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/ServiceId",
-    "/properties/Domain"
+    "/properties/Domain",
+    "/properties/Comments"
   ],
   "description": "The service serves as the entry point for external access. You can bind your custom domain to the service using the domain binding feature",
   "filterProperties": {
