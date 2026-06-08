@@ -37,6 +37,8 @@ Data Source schema for Volcengine::RDSPostgreSQL::Instance
 - `node_number` (Number) Number of nodes
 - `node_spec` (String) Primary node specification
 - `project_name` (String) Project. Default value: default project
+- `replication_slots` (Attributes Set) Replication slot list for the instance (see [below for nested schema](#nestedatt--replication_slots))
+- `restore_to_existed_instance` (Attributes) Restore backup data to the current instance (see [below for nested schema](#nestedatt--restore_to_existed_instance))
 - `storage_data_use` (Number) Data file space used by the primary node. Unit: Byte
 - `storage_log_use` (Number) Log file space used by the primary node. Unit: Byte
 - `storage_space` (Number) Instance storage space. Value range: [20, 3000], unit: GB, increment: 10GB. Default value is 100
@@ -152,6 +154,41 @@ Read-Only:
 - `update_time` (String) Node update time. Format: yyyy-MM-ddTHH:mm:ss.sssZ (UTC time)
 - `vcpu` (Number) CPU size. For example: 1 means 1U
 - `zone_id` (String) Availability zone of the node
+
+
+<a id="nestedatt--replication_slots"></a>
+### Nested Schema for `replication_slots`
+
+Read-Only:
+
+- `database` (String) Database associated with the slot
+- `ip_address` (String) Connected client IP address
+- `plugin` (String) Plugin used by the slot
+- `slot_name` (String) Slot name
+- `slot_status` (String) Slot status
+- `slot_type` (String) Slot type
+- `temporary` (Boolean) Whether it is a temporary slot
+- `wal_delay` (Number) WAL delay size
+
+
+<a id="nestedatt--restore_to_existed_instance"></a>
+### Nested Schema for `restore_to_existed_instance`
+
+Read-Only:
+
+- `backup_id` (String) Backup set ID
+- `databases` (Attributes List) List of databases to restore (see [below for nested schema](#nestedatt--restore_to_existed_instance--databases))
+- `source_db_instance_id` (String) Source instance ID
+- `target_db_instance_account` (String) Database account for the target instance
+
+<a id="nestedatt--restore_to_existed_instance--databases"></a>
+### Nested Schema for `restore_to_existed_instance.databases`
+
+Read-Only:
+
+- `db_name` (String) Source database name
+- `new_db_name` (String) Name of the new database after restoration
+
 
 
 <a id="nestedatt--tags"></a>

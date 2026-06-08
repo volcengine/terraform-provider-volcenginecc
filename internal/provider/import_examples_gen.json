@@ -1068,5 +1068,20 @@
         "resource": "volcenginecc_id_service",
         "identifier": ["ServiceId"],
         "path": "./examples/resources/volcenginecc_id_service/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_check_log_project",
+        "identifier": ["LogProjectId"],
+        "path": "./examples/resources/volcenginecc_clb_check_log_project/import.sh"
+    },
+    {
+        "resource": "volcenginecc_clb_check_log_topic",
+        "identifier": ["LoadBalancerId","LogTopicId"],
+        "path": "./examples/resources/volcenginecc_clb_check_log_topic/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_route_table_propagation",
+        "identifier": ["TransitRouterRouteTableId","TransitRouterAttachmentId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_route_table_propagation/import.sh"
     }
 ]

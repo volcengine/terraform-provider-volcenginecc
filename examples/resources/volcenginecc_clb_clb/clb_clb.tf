@@ -26,4 +26,9 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
       key = "env"
     value = "test" }
   ]
+  access_log = {
+    bucket_name    = "ccapi-test"
+    tls_project_id = "5554e74f-0413-4375-ad99-e544xxxxx"
+    tls_topic_id   = "7f3bc374-5e1d-4984-83fc-0e5a5xxxxx"
+  }
 }

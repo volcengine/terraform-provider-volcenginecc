@@ -75,8 +75,8 @@ Data Source schema for Volcengine::CLB::CLB
 Read-Only:
 
 - `bucket_name` (String) Name of the object storage bucket for storing Layer 7 access logs
-- `delivery_type` (String) Log delivery type. Available values: tos (default): Deliver logs to object storage service TOS. tls: Deliver logs to log service TLS
-- `enabled` (Boolean) Enable access log (Layer 7) delivery to object storage TOS
+- `enabled` (Boolean) Enable access log TOS feature?
+- `tls_enabled` (Boolean) Enable access log TLS feature?
 - `tls_project_id` (String) Log project
 - `tls_topic_id` (String) Log topic
 

@@ -254,6 +254,48 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "Global accelerator configuration, used to improve cross-region access speed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HealthLog
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Health check log information in the ALB instance",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Whether to enable access log",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ProjectId": {
+		//	      "description": "TLS project ID bound to access log",
+		//	      "type": "string"
+		//	    },
+		//	    "TopicId": {
+		//	      "description": "TLS subject ID bound to access log",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"health_log": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable access log",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProjectId
+				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS project ID bound to access log",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicId
+				"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS subject ID bound to access log",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Health check log information in the ALB instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6BandwidthPackageId
 		// Cloud Control resource type schema:
 		//
@@ -464,6 +506,48 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ALB instance status: Active (running), Provisioning (creating), Configuring (configuring), Deleting (deleting), CreateFailed (creation failed), Inactive (stopped).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TLSAccessLog
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Access log information in the ALB instance",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Whether to enable access log",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ProjectId": {
+		//	      "description": "TLS project ID bound to access log",
+		//	      "type": "string"
+		//	    },
+		//	    "TopicId": {
+		//	      "description": "TLS subject ID bound to access log",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tls_access_log": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable access log",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProjectId
+				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS project ID bound to access log",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicId
+				"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TLS subject ID bound to access log",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Access log information in the ALB instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -909,11 +993,13 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"eip_billing_type":                "EipBillingType",
 		"eip_id":                          "EipId",
 		"eip_type":                        "EipType",
+		"enabled":                         "Enabled",
 		"endpoint_group_id":               "EndpointGroupId",
 		"eni_address":                     "EniAddress",
 		"eni_id":                          "EniId",
 		"eni_ipv_6_address":               "EniIpv6Address",
 		"global_accelerator":              "GlobalAccelerator",
+		"health_log":                      "HealthLog",
 		"ipv_6_bandwidth_package_id":      "Ipv6BandwidthPackageId",
 		"ipv_6_eip":                       "Ipv6Eip",
 		"ipv_6_eip_billing_config":        "Ipv6EipBillingConfig",
@@ -932,6 +1018,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"pop_id":                          "PopId",
 		"pop_locations":                   "PopLocations",
 		"pop_name":                        "PopName",
+		"project_id":                      "ProjectId",
 		"project_name":                    "ProjectName",
 		"proxy_protocol_enabled":          "ProxyProtocolEnabled",
 		"security_protection_instance_id": "SecurityProtectionInstanceId",
@@ -939,6 +1026,8 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"status":                          "Status",
 		"subnet_id":                       "SubnetId",
 		"tags":                            "Tags",
+		"tls_access_log":                  "TLSAccessLog",
+		"topic_id":                        "TopicId",
 		"type":                            "Type",
 		"update_time":                     "UpdateTime",
 		"value":                           "Value",

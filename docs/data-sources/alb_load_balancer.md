@@ -31,6 +31,7 @@ Data Source schema for Volcengine::ALB::LoadBalancer
 - `dns_name` (String) DNS domain name.
 - `eip_billing_config` (Attributes) Billing configuration for public IP, only applicable to public instances. (see [below for nested schema](#nestedatt--eip_billing_config))
 - `global_accelerator` (Attributes) Global accelerator configuration, used to improve cross-region access speed. (see [below for nested schema](#nestedatt--global_accelerator))
+- `health_log` (Attributes) Health check log information in the ALB instance (see [below for nested schema](#nestedatt--health_log))
 - `ipv_6_bandwidth_package_id` (String) When creating a public ALB instance, specify the shared bandwidth package ID to which the IPv6 public bandwidth will be added.
 - `ipv_6_eip_billing_config` (Attributes) Billing configuration for IPv6 public IP, only applicable to public instances. (see [below for nested schema](#nestedatt--ipv_6_eip_billing_config))
 - `load_balancer_billing_type` (Number) ALB instance billing type. Currently, only pay-as-you-go is supported (value is 1).
@@ -45,6 +46,7 @@ Data Source schema for Volcengine::ALB::LoadBalancer
 - `proxy_protocol_enabled` (String) ALB supports the Proxy Protocol and records the client's real IP.
 - `status` (String) ALB instance status: Active (running), Provisioning (creating), Configuring (configuring), Deleting (deleting), CreateFailed (creation failed), Inactive (stopped).
 - `tags` (Attributes Set) List of tags bound to the instance, used for categorization and billing. (see [below for nested schema](#nestedatt--tags))
+- `tls_access_log` (Attributes) Access log information in the ALB instance (see [below for nested schema](#nestedatt--tls_access_log))
 - `type` (String) Type of ALB instance. Values are public or private. public: Creates a public load balancer instance. The system assigns a public IP address and a private IP address, which can forward both public and private network requests. private: Creates a private load balancer instance. The system assigns a private IP address, used only for forwarding private network requests.
 - `update_time` (String) Last update time of the ALB instance.
 - `vpc_id` (String) ID of the Virtual Private Cloud (VPC) to which the load balancer instance belongs.
@@ -76,6 +78,16 @@ Read-Only:
 - `weight` (Number) Weight of the backend server, determines traffic distribution ratio.
 
 
+<a id="nestedatt--health_log"></a>
+### Nested Schema for `health_log`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether to enable access log
+- `project_id` (String) TLS project ID bound to access log
+- `topic_id` (String) TLS subject ID bound to access log
+
+
 <a id="nestedatt--ipv_6_eip_billing_config"></a>
 ### Nested Schema for `ipv_6_eip_billing_config`
 
@@ -93,6 +105,16 @@ Read-Only:
 
 - `key` (String) Tag key, used to identify the tag category.
 - `value` (String) Tag value used to identify the specific tag content.
+
+
+<a id="nestedatt--tls_access_log"></a>
+### Nested Schema for `tls_access_log`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether to enable access log
+- `project_id` (String) TLS project ID bound to access log
+- `topic_id` (String) TLS subject ID bound to access log
 
 
 <a id="nestedatt--zone_mappings"></a>

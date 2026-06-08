@@ -1,0 +1,84 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TransitRouterRouteTableId",
+    "/properties/TransitRouterAttachmentId"
+  ],
+  "description": "Details of route learning that meet the criteria.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TransitRouterRouteTableId",
+      "/properties/TransitRouterAttachmentId"
+    ],
+    "required": [
+      "/properties/TransitRouterRouteTableId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:EnableTransitRouterRouteTablePropagation",
+        "transitrouter:DescribeTransitRouterRouteTablePropagations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DisableTransitRouterRouteTablePropagation",
+        "transitrouter:DescribeTransitRouterRouteTablePropagations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterRouteTablePropagations"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterRouteTablePropagations"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterRouteTableId",
+    "/properties/TransitRouterAttachmentId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "Route learning creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Route learning status. Available: Available. Creating: Creating. Pending: Pending. Deleting: Deleting.",
+      "enum": [
+        "Available",
+        "Creating",
+        "Pending",
+        "Deleting"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "TransitRouterAttachmentId": {
+      "description": "ID of the network instance connection.",
+      "type": "string"
+    },
+    "TransitRouterRouteTableId": {
+      "description": "ID of the route table associated with the transit router instance.",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Status",
+    "/properties/CreationTime"
+  ],
+  "required": [
+    "TransitRouterRouteTableId",
+    "TransitRouterAttachmentId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TransitRouter::RouteTablePropagation"
+}

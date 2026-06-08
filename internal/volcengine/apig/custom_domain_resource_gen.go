@@ -54,6 +54,7 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
@@ -216,6 +217,7 @@ func customDomainResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
 		"/properties/ServiceId",
 		"/properties/Domain",
+		"/properties/Comments",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

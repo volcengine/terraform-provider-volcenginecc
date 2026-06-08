@@ -54,6 +54,9 @@ resource "volcenginecc_rdspostgresql_instance" "RDSPostgreSQLInstanceDemo" {
 - `instance_name` (String) Instance name
 - `maintenance_window` (Attributes) Instance maintenance window (see [below for nested schema](#nestedatt--maintenance_window))
 - `project_name` (String) Project. Default value: default project
+- `replication_slots` (Attributes Set) Replication slot list for the instance
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--replication_slots))
+- `restore_to_existed_instance` (Attributes) Restore backup data to the current instance (see [below for nested schema](#nestedatt--restore_to_existed_instance))
 - `storage_space` (Number) Instance storage space. Value range: [20, 3000], unit: GB, increment: 10GB. Default value is 100
 - `tags` (Attributes Set) Tag information of the cloud disk
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
@@ -142,6 +145,42 @@ Optional:
 - `day_of_week` (String) Specify maintenance days for the instance each week. Multiple selections allowed. Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday. Note: If not specified or left blank, all seven days are enabled by default.
 - `maintenance_window_start_time` (String) Start time of the maintenance window on the maintenance day. Format: HH:mmZ (UTC time). Currently, only start times between 16:00Z and 20:00Z are supported.
 - `period` (Number) Duration of the maintenance window on the maintenance day. Minimum duration is 2 hours, maximum is 6 hours.
+
+
+
+<a id="nestedatt--replication_slots"></a>
+### Nested Schema for `replication_slots`
+
+Optional:
+
+- `database` (String) Database associated with the slot
+- `ip_address` (String) Connected client IP address
+- `plugin` (String) Plugin used by the slot
+- `slot_name` (String) Slot name
+- `slot_status` (String) Slot status
+- `slot_type` (String) Slot type
+- `temporary` (Boolean) Whether it is a temporary slot
+- `wal_delay` (Number) WAL delay size
+
+
+<a id="nestedatt--restore_to_existed_instance"></a>
+### Nested Schema for `restore_to_existed_instance`
+
+Optional:
+
+- `backup_id` (String) Backup set ID
+- `databases` (Attributes List) List of databases to restore
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--restore_to_existed_instance--databases))
+- `source_db_instance_id` (String) Source instance ID
+- `target_db_instance_account` (String) Database account for the target instance
+
+<a id="nestedatt--restore_to_existed_instance--databases"></a>
+### Nested Schema for `restore_to_existed_instance.databases`
+
+Optional:
+
+- `db_name` (String) Source database name
+- `new_db_name` (String) Name of the new database after restoration
 
 
 

@@ -40,6 +40,11 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
       key = "env"
     value = "test" }
   ]
+  access_log = {
+    bucket_name    = "ccapi-test"
+    tls_project_id = "5554e74f-0413-4375-ad99-e544xxxxx"
+    tls_topic_id   = "7f3bc374-5e1d-4984-83fc-0e5a5xxxxx"
+  }
 }
 ```
 
@@ -55,8 +60,6 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
 - `bypass_security_group_enabled` (String) Whether to enable bypass security group feature
 - `description` (String) Description of the load balancer instance
 - `eip` (Attributes) Public IP information of the load balancer instance (see [below for nested schema](#nestedatt--eip))
-- `eip_address` (String) Public IP address
-- `eip_id` (String) Public IP ID
 - `eni_address_num` (Number) Number of private IPv4 addresses for the load balancer instance. This parameter cannot be used together with EniAddress. If this parameter is provided, EniAddress is not required
 - `enis` (Attributes) List of private IPv4 addresses for the load balancer instance, specified by EniAddressNum during creation (see [below for nested schema](#nestedatt--enis))
 - `exclusive_cluster_id` (String) Dedicated cluster ID
@@ -89,6 +92,8 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
 - `business_status` (String) Whether the load balancer instance is locked
 - `create_time` (String) Creation time of the load balancer instance
 - `deleted_time` (String) Expected recycling time of the load balancer instance
+- `eip_address` (String) Public IP address
+- `eip_id` (String) Public IP ID
 - `enabled` (Boolean) Enable status of the load balancer instance
 - `eni` (Attributes) Private IPv4 address information of the load balancer instance (see [below for nested schema](#nestedatt--eni))
 - `eni_ipv_6_address` (String) Private IPv6 address of the load balancer instance
@@ -109,10 +114,13 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
 Optional:
 
 - `bucket_name` (String) Name of the object storage bucket for storing Layer 7 access logs
-- `delivery_type` (String) Log delivery type. Available values: tos (default): Deliver logs to object storage service TOS. tls: Deliver logs to log service TLS
-- `enabled` (Boolean) Enable access log (Layer 7) delivery to object storage TOS
 - `tls_project_id` (String) Log project
 - `tls_topic_id` (String) Log topic
+
+Read-Only:
+
+- `enabled` (Boolean) Enable access log TOS feature?
+- `tls_enabled` (Boolean) Enable access log TLS feature?
 
 
 <a id="nestedatt--eip"></a>

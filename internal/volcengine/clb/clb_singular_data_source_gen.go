@@ -33,16 +33,12 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "Name of the object storage bucket for storing Layer 7 access logs",
 		//	      "type": "string"
 		//	    },
-		//	    "DeliveryType": {
-		//	      "description": "Log delivery type. Available values: tos (default): Deliver logs to object storage service TOS. tls: Deliver logs to log service TLS",
-		//	      "enum": [
-		//	        "tos",
-		//	        "tls"
-		//	      ],
-		//	      "type": "string"
-		//	    },
 		//	    "Enabled": {
-		//	      "description": "Enable access log (Layer 7) delivery to object storage TOS",
+		//	      "description": "Enable access log TOS feature?",
+		//	      "type": "boolean"
+		//	    },
+		//	    "TlsEnabled": {
+		//	      "description": "Enable access log TLS feature?",
 		//	      "type": "boolean"
 		//	    },
 		//	    "TlsProjectId": {
@@ -63,14 +59,14 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Name of the object storage bucket for storing Layer 7 access logs",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
-				// Property: DeliveryType
-				"delivery_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Log delivery type. Available values: tos (default): Deliver logs to object storage service TOS. tls: Deliver logs to log service TLS",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enable access log (Layer 7) delivery to object storage TOS",
+					Description: "Enable access log TOS feature?",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TlsEnabled
+				"tls_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enable access log TLS feature?",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TlsProjectId
@@ -898,7 +894,6 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bypass_security_group_enabled":   "BypassSecurityGroupEnabled",
 		"create_time":                     "CreateTime",
 		"deleted_time":                    "DeletedTime",
-		"delivery_type":                   "DeliveryType",
 		"description":                     "Description",
 		"eip":                             "Eip",
 		"eip_address":                     "EipAddress",
@@ -945,6 +940,7 @@ func cLBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_id":                       "SubnetId",
 		"tags":                            "Tags",
 		"timestamp_remove_enabled":        "TimestampRemoveEnabled",
+		"tls_enabled":                     "TlsEnabled",
 		"tls_project_id":                  "TlsProjectId",
 		"tls_topic_id":                    "TlsTopicId",
 		"type":                            "Type",

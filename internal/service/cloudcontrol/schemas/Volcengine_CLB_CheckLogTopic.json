@@ -1,0 +1,50 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/LogTopicId",
+    "/properties/LoadBalancerId"
+  ],
+  "description": "Binding relationship between the health check log topic and the CLB instance.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "clb:AttachHealthCheckLogTopic",
+        "clb:DescribeHealthCheckLogTopicAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "clb:DetachHealthCheckLogTopic",
+        "clb:DescribeHealthCheckLogTopicAttributes"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "clb:DescribeHealthCheckLogTopicAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/LoadBalancerId",
+    "/properties/LogTopicId"
+  ],
+  "properties": {
+    "LoadBalancerId": {
+      "description": "CLB ID information that meets the criteria.",
+      "type": "string"
+    },
+    "LogTopicId": {
+      "description": "ID of the created log topic. You can call the DescribeTopics API to query the log topic ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "required": [
+    "LogTopicId",
+    "LoadBalancerId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CLB::CheckLogTopic"
+}
