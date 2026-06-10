@@ -944,5 +944,5 @@ func TestTranslateForUpdate(t *testing.T) {
 		ccToTf[value] = key
 	}
 	result, _ := translateForUpdate(json, "", schema.Attributes, ccToTf)
-	fmt.Printf(result)
+	fmt.Print(result)
 }
