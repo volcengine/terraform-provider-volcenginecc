@@ -1,0 +1,361 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GtmId",
+    "/properties/PolicyType"
+  ],
+  "definitions": {
+    "AddressInfo": {
+      "description": "Address information.",
+      "properties": {
+        "Active": {
+          "description": "Whether the address is available. true: The address is available. false: The address is unavailable.",
+          "type": "boolean"
+        },
+        "Capacity": {
+          "description": "The capacity of the address. For addresses without a set capacity value, this parameter returns the default capacity value of 1000.",
+          "type": "integer"
+        },
+        "Geo": {
+          "description": "This parameter has no practical significance. You can ignore this parameter.",
+          "type": "string"
+        },
+        "Latency": {
+          "description": "Latency (ms) for health check probe accessing the target address.",
+          "type": "integer"
+        },
+        "Mode": {
+          "description": "The mechanism for determining whether an address is available. auto: automatic mode. Cloud Scheduling GTM determines address availability based on health check results. always_on: address is always available. always_off: address is always unavailable.",
+          "type": "string"
+        },
+        "RectifiedGeos": {
+          "description": "The assigned region for the target address. See line codes for the mapping between line codes and specific regions (i.e., lines).",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Value": {
+          "description": "Address.",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "Address weight. For addresses without a specified weight, this parameter returns the default weight value of 1.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "HttpUsabilityCode": {
+      "description": "Customize a range of HTTP status codes. After a probe initiates a health check, if the target address returns an HTTP status code outside this range, the health check at that probe is considered failed. If you do not set the HttpUsabilityCodes parameter for the routing rule, this parameter will not be returned.",
+      "properties": {
+        "Codes": {
+          "description": "HTTP status code list.",
+          "insertionOrder": false,
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Operator": {
+          "description": "Operator. interval: Matches values within the range. include: Matches specified values. exclude: Matches values other than the specified values.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Pool": {
+      "description": "Address pool information.",
+      "properties": {
+        "Address": {
+          "description": "Address information under the address pool.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AddressInfo"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "InactiveAddrCount": {
+          "description": "The number of unavailable addresses in the address pool.",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Address pool name.",
+          "type": "string"
+        },
+        "PoolId": {
+          "description": "Address pool ID.",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "Address pool weight.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "PoolSet": {
+      "description": "Address pool collection.",
+      "properties": {
+        "Active": {
+          "description": "Whether the address pool is available. true: address is available. false: address is unavailable.",
+          "type": "boolean"
+        },
+        "ActiveAddrThr": {
+          "description": "Minimum number of available addresses required for the address pool collection to be considered available.",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "Address pool name.",
+          "type": "string"
+        },
+        "PoolSetId": {
+          "description": "Address pool set ID.",
+          "type": "string"
+        },
+        "Pools": {
+          "description": "Address pool list.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Pool"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "Probe": {
+      "description": "Health check parameters for the route rule.",
+      "properties": {
+        "AdvisedNodeCount": {
+          "description": "Recommended number of health check probe points.",
+          "type": "integer"
+        },
+        "Disable": {
+          "description": "Whether health checks are disabled. true: disabled. false: not disabled.",
+          "type": "boolean"
+        },
+        "FailedCount": {
+          "description": "The threshold for the number of health check failures before a single target address is considered faulty. For example, if you set this parameter to 3, a target address is marked as faulty after 3 consecutive health check failures. The default value is 3.",
+          "type": "integer"
+        },
+        "Host": {
+          "description": "Domain name of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+          "type": "string"
+        },
+        "HttpMethod": {
+          "description": "HTTP request method. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+          "type": "string"
+        },
+        "HttpUsabilityCodes": {
+          "description": "Customize a range of HTTP status codes. After a probe initiates a health check, if the target address returns an HTTP status code outside this range, the health check at that probe is considered failed. If you do not set the HttpUsabilityCodes parameter for the routing rule, this parameter will not be returned.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/HttpUsabilityCode"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Interval": {
+          "description": "The interval between each health check, in seconds.",
+          "type": "integer"
+        },
+        "IsManualNodes": {
+          "description": "Whether to manually configure the health check probe. true: Manually configure the health check probe. false: Use recommended health check probe.",
+          "type": "boolean"
+        },
+        "Nodes": {
+          "description": "Health check probe point.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "PingCount": {
+          "description": "Packet count. If you set this parameter to 10, each ping check sends 10 packets simultaneously. This parameter is only valid when the health check protocol is set to ping.",
+          "type": "integer"
+        },
+        "PingLossPercent": {
+          "description": "Packet loss rate, expressed as a percentage. If the packet loss rate exceeds this parameter, the result is considered abnormal. For example, if this parameter is set to 10 and the packet loss rate during the health check is 11%, the result is considered abnormal. This parameter is only valid when the health check protocol is set to ping.",
+          "type": "integer"
+        },
+        "Port": {
+          "description": "Port of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+          "type": "integer"
+        },
+        "Protocol": {
+          "description": "Protocol used for health checks. ping: ICMP protocol. tcp: TCP protocol. http: HTTP protocol. https: HTTPS protocol.",
+          "type": "string"
+        },
+        "Timeout": {
+          "description": "The timeout period for the health check task, in seconds. ping: If the latency exceeds the value of Timeout, it is considered packet loss. http/https: If the latency exceeds the value of Timeout, it is considered an abnormal result.",
+          "type": "integer"
+        },
+        "Url": {
+          "description": "Path part of the health check target address, starting with /. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "GTM routing rule resource, which defines the address pool set, health checks, and effective policies for a specific line.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/GtmId",
+      "/properties/PolicyType",
+      "/properties/Name",
+      "/properties/Line"
+    ],
+    "required": [
+      "/properties/GtmId",
+      "/properties/PolicyType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "gtm:CreateRule",
+        "gtm:GetRule",
+        "gtm:ListRules"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "gtm:GetGtm",
+        "gtm:DeleteRule",
+        "gtm:GetRule",
+        "gtm:ListRules"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "gtm:ListRules"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "gtm:GetRule",
+        "gtm:ListRules"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "gtm:GetGtm",
+        "gtm:UpdateRule",
+        "gtm:GetRule",
+        "gtm:ListRules"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GtmId",
+    "/properties/PolicyType",
+    "/properties/RuleId"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "Route rule creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Disable": {
+      "description": "Whether this route rule is disabled. true: The route rule is disabled. false: The route rule is enabled.",
+      "type": "boolean"
+    },
+    "EffectivePoolSetIndex": {
+      "description": "Index of the effective address pool set.",
+      "type": "integer"
+    },
+    "GtmId": {
+      "description": "UUID of the GTM instance.",
+      "type": "string"
+    },
+    "Line": {
+      "description": "Route rule applicable lines.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Route rule name.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PolicyType": {
+      "description": "The policy type corresponding to the routing rule. geo: basic routing. perf: intelligent routing.",
+      "type": "string"
+    },
+    "PoolSetMode": {
+      "description": "Address pool set effective mode. auto: Automatically sets the effective address pool set. The highest-priority available address pool becomes effective automatically. If all address pools are unavailable, the highest-priority address pool becomes effective. manual: Manually sets the effective address pool set. In this mode, you need to set the index of the effective address pool set in the EffectivePoolSetIndex parameter.",
+      "type": "string"
+    },
+    "PoolSets": {
+      "description": "Address pool collection list.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PoolSet"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Probe": {
+      "$ref": "#/definitions/Probe",
+      "description": "Health check parameters for the route rule.",
+      "type": "object"
+    },
+    "ProbeMode": {
+      "description": "Health check mode.",
+      "type": "string"
+    },
+    "Remark": {
+      "description": "Route rule remarks.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "RuleId": {
+      "description": "Routing rule ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Route rule update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UsePolicyProbeNodes": {
+      "description": "Whether to inherit instance-level health check nodes.",
+      "type": "boolean"
+    },
+    "UseRuleProbeConfig": {
+      "description": "Whether to use route rule-level probe configuration.",
+      "type": "boolean"
+    },
+    "Weight": {
+      "description": "Routing rule weight.",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RuleId",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/ProbeMode",
+    "/properties/PoolSets/*/Active",
+    "/properties/PoolSets/*/PoolSetId"
+  ],
+  "required": [
+    "GtmId",
+    "PolicyType",
+    "Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::GTM::Rule"
+}

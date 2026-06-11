@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_gtm_routing.example "gtm_id"

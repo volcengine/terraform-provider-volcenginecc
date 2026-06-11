@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_iam_oauth_provider.example "oauth_provider_name"

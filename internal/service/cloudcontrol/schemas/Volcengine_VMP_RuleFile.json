@@ -1,0 +1,117 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/WorkspaceId",
+    "/properties/Name"
+  ],
+  "description": "Rule file.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Name",
+      "/properties/RuleFileId",
+      "/properties/Status",
+      "/properties/WorkspaceId"
+    ],
+    "required": [
+      "/properties/WorkspaceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vmp:CreateRuleFile",
+        "vmp:GetRuleFile"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vmp:DeleteRuleFile",
+        "vmp:GetRuleFile"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vmp:ListRuleFiles"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vmp:GetRuleFile"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vmp:UpdateRuleFile",
+        "vmp:GetRuleFile"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/WorkspaceId",
+    "/properties/RuleFileId"
+  ],
+  "properties": {
+    "Content": {
+      "description": "Rule file content in YAML format. Content length limits:\n- Each `expr` must not exceed 16 KB.\n- Each `record` must not exceed 2,048 bytes.\n- Each `labelname` must not exceed 256 bytes.\n- Each `labelvalue` must not exceed 2,048 bytes.",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Rule file creation time in RFC3339 format.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Rule file description, limited to 0–200 characters.\n\n:::tip Note\nEach English letter, Chinese character, or symbol counts as one character.\n:::",
+      "semantic": "description",
+      "type": "string"
+    },
+    "LastUpdateTime": {
+      "description": "Last updated time of the rule file in RFC3339 format.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Rule file name:\n\n- Must be a valid Linux file name and less than 255 characters.\n- Must be unique within the workspace.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "RuleCount": {
+      "description": "Number of rules in the rule file.",
+      "type": "integer"
+    },
+    "RuleFileId": {
+      "description": "Rule file ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Rule file status:\n\n- **Creating**: Creating\n- **Running**: Running\n- **Updating**: Updating\n- **OverdueSuspended**: Suspended due to overdue payment\n- **Resuming**: Resuming",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TargetWorkspaceId": {
+      "description": "Target workspace ID to write to. If empty, writes to the source workspace.",
+      "type": "string"
+    },
+    "WorkspaceId": {
+      "description": "Workspace ID.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RuleFileId",
+    "/properties/Status",
+    "/properties/RuleCount",
+    "/properties/CreateTime",
+    "/properties/LastUpdateTime"
+  ],
+  "required": [
+    "WorkspaceId",
+    "Name",
+    "Content"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VMP::RuleFile"
+}

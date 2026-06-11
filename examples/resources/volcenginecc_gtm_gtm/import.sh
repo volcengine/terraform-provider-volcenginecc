@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_gtm_gtm.example "gtm_id"

@@ -1,0 +1,114 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/EndpointId",
+    "/properties/EipId"
+  ],
+  "description": "Instance connection endpoint public address.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_mysql:CreateDBEndpointPublicAddress",
+        "rds_mysql:DescribeDBInstanceAttribute",
+        "rds_mysql:DescribeDBInstanceEndpoints",
+        "rds_mysql:DescribeDBInstances"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_mysql:DeleteDBEndpointPublicAddress",
+        "rds_mysql:DescribeDBInstanceAttribute",
+        "rds_mysql:DescribeDBInstanceEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_mysql:DescribeDBInstanceEndpoints"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_mysql:ModifyDBEndpointAddress",
+        "rds_mysql:DescribeDBInstanceAttribute",
+        "rds_mysql:DescribeDBInstanceEndpoints"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/EndpointId"
+  ],
+  "properties": {
+    "DNSVisibility": {
+      "description": "- false: private network resolution (default)\n- true: private and public network resolution",
+      "type": "boolean"
+    },
+    "Domain": {
+      "description": "Connection domain name.",
+      "type": "string"
+    },
+    "DomainPrefix": {
+      "description": "Connection address prefix. The prefix must meet the following rules: start with a lowercase letter, end with a lowercase letter or digit, and must include at least two types among lowercase letters, digits, and hyphens (-). The prefix must be at least 8 characters long, and the total connection address length (prefix + suffix) must not exceed 63 characters.",
+      "type": "string"
+    },
+    "EipId": {
+      "description": "EIP ID, valid only for Public addresses.",
+      "type": "string"
+    },
+    "EipLocked": {
+      "description": "Whether the EIP used by the connection endpoint is suspended due to overdue payment. Values:\n- true: Yes\n- false: No",
+      "type": "boolean"
+    },
+    "EndpointId": {
+      "description": "Instance connection endpoint ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "IPAddress": {
+      "description": "IP address.",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID.",
+      "type": "string"
+    },
+    "InternetProtocol": {
+      "description": "IP protocol version. Value: IPv4.",
+      "type": "string"
+    },
+    "NetworkType": {
+      "description": "Network address type. Valid values: Private: Private address. Public: Public address.",
+      "type": "string"
+    },
+    "Port": {
+      "description": "Port.",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "Subnet ID, valid only for Private addresses.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/DNSVisibility",
+    "/properties/Domain",
+    "/properties/EipLocked",
+    "/properties/IPAddress",
+    "/properties/InternetProtocol",
+    "/properties/NetworkType",
+    "/properties/SubnetId"
+  ],
+  "required": [
+    "InstanceId",
+    "EndpointId",
+    "EipId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSMySQL::EndpointPublicAddress",
+  "writeOnlyProperties": [
+    "/properties/DomainPrefix"
+  ]
+}

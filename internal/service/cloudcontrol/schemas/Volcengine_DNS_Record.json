@@ -1,0 +1,162 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ZID"
+  ],
+  "description": "DNS record resource, used to create, query, update, delete, and list a single DNS record under a specified domain name.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ZID",
+      "/properties/Host",
+      "/properties/Line",
+      "/properties/Type",
+      "/properties/Value"
+    ],
+    "required": [
+      "/properties/ZID"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dns:CreateRecord",
+        "dns:UpdateRecordStatus",
+        "dns:QueryRecord"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dns:DeleteRecord",
+        "dns:QueryRecord"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dns:ListRecords"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dns:QueryRecord"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dns:UpdateRecord",
+        "dns:UpdateRecordStatus",
+        "dns:QueryRecord"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ZID",
+    "/properties/RecordID"
+  ],
+  "properties": {
+    "CreatedAt": {
+      "description": "Creation time of the DNS record.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Enable": {
+      "description": "Whether the DNS record is enabled; if disabled, the record is inactive.",
+      "type": "boolean"
+    },
+    "FQDN": {
+      "description": "Host name included in the DNS record, using FQDN (Fully Qualified Domain Name) format; this field is deprecated.",
+      "type": "string"
+    },
+    "Host": {
+      "description": "Host record, the prefix of the subdomain; `@` represents the root domain itself.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Line": {
+      "description": "Line code corresponding to the DNS record, such as `default`.",
+      "type": "string"
+    },
+    "Operators": {
+      "description": "List of account IDs that recently operated on this DNS record.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PQDN": {
+      "description": "Host name included in the DNS record, using PQDN (Partially Qualified Domain Name) format.",
+      "type": "string"
+    },
+    "RecordID": {
+      "description": "Unique ID of the DNS record.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RecordSetID": {
+      "description": "ID of the record set containing the DNS record; returned only for A, AAAA, and CNAME types.",
+      "type": "string"
+    },
+    "Remark": {
+      "description": "Remarks for the DNS record, supports UTF-8 encoding and up to 16 characters.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "TTL": {
+      "description": "Expiration time of the DNS record, in seconds.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "Tags": {
+      "description": "Tag information for the DNS record; if it contains `GTMLock`, the record is associated with a GTM instance.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Type": {
+      "description": "Record type, such as `A`, `AAAA`, `CNAME`, `NS`, `MX`, `SRV`, `TXT`.",
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "description": "Last updated time of the DNS record.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Value": {
+      "description": "Record value of the DNS record.",
+      "type": "string"
+    },
+    "Weight": {
+      "description": "Weight of the DNS record, effective only when load balancing is enabled for the record set.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "ZID": {
+      "description": "Domain name ID, can be obtained via interfaces such as `ListZones`.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RecordID",
+    "/properties/PQDN",
+    "/properties/FQDN",
+    "/properties/RecordSetID",
+    "/properties/Operators",
+    "/properties/Tags",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "required": [
+    "ZID",
+    "Host",
+    "Type",
+    "Value"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::DNS::Record"
+}

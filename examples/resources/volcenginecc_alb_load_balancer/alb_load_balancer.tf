@@ -38,13 +38,13 @@ resource "volcenginecc_alb_load_balancer" "ALBLoadBalancerDemo" {
     value = "env" }
   ]
   tls_access_log = {
-    enabled = true
+    enabled    = true
     project_id = "90xxxx7774-01ee-4948-89af-90xxxx7774"
-    topic_id = "90xxxx7774-a776-4925-a3ca-90xxxx7774"
+    topic_id   = "90xxxx7774-a776-4925-a3ca-90xxxx7774"
   }
   health_log = {
-    enabled = true
+    enabled    = true
     project_id = "90xxxx7774-34af-4ce5-866e-90xxxx7774"
-    topic_id = "90xxxx7774-7f7e-462e-8afb-90xxxx7774"
+    topic_id   = "90xxxx7774-7f7e-462e-8afb-90xxxx7774"
   }
 }
