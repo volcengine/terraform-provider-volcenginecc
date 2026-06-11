@@ -884,3 +884,51 @@ resource_schema "volcengine_clb_check_log_topic" {
 resource_schema "volcengine_transitrouter_route_table_propagation" {
   cloudcontrol_type_name = "Volcengine::TransitRouter::RouteTablePropagation"
 }
+
+resource_schema "volcengine_directconnect_bgp_peer" {
+  cloudcontrol_type_name = "Volcengine::DirectConnect::BgpPeer"
+}
+
+resource_schema "volcengine_mongodb_account" {
+  cloudcontrol_type_name = "Volcengine::MongoDB::Account"
+}
+
+resource_schema "volcengine_rdsmysql_endpoint_public_address" {
+  cloudcontrol_type_name = "Volcengine::RDSMySQL::EndpointPublicAddress"
+}
+
+resource_schema "volcengine_tos_bucket_access_monitor" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketAccessMonitor"
+}
+
+resource_schema "volcengine_vepfs_fileset" {
+  cloudcontrol_type_name = "Volcengine::VEPFS::Fileset"
+}
+
+resource_schema "volcengine_kafka_user" {
+  cloudcontrol_type_name = "Volcengine::Kafka::User"
+}
+
+resource_schema "volcengine_dns_record" {
+  cloudcontrol_type_name = "Volcengine::DNS::Record"
+}
+
+resource_schema "volcengine_iam_oauth_provider" {
+  cloudcontrol_type_name = "Volcengine::IAM::OauthProvider"
+}
+
+resource_schema "volcengine_vmp_rule_file" {
+  cloudcontrol_type_name = "Volcengine::VMP::RuleFile"
+}
+
+resource_schema "volcengine_gtm_gtm" {
+  cloudcontrol_type_name = "Volcengine::GTM::GTM"
+}
+
+resource_schema "volcengine_gtm_rule" {
+  cloudcontrol_type_name = "Volcengine::GTM::Rule"
+}
+
+resource_schema "volcengine_gtm_routing" {
+  cloudcontrol_type_name = "Volcengine::GTM::Routing"
+}

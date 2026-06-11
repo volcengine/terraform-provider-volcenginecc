@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_gtm_rule.example "gtm_id|policy_type|rule_id"

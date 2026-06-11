@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_directconnect_bgp_peer.example "bgp_peer_id"

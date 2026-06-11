@@ -1,0 +1,212 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/AccountName",
+    "/properties/AuthDB"
+  ],
+  "definitions": {
+    "AccountDBPrivilegeForInput": {
+      "description": "List of databases and permissions granted to the account.",
+      "properties": {
+        "DBName": {
+          "description": "Database name.",
+          "type": "string"
+        },
+        "RoleNames": {
+          "description": "Role name.",
+          "insertionOrder": false,
+          "items": {
+            "description": "Role name.",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "DBName",
+        "RoleNames"
+      ],
+      "type": "object"
+    },
+    "AccountDBPrivilegeForUpdate": {
+      "description": "List of database permissions to be modified for the account.",
+      "properties": {
+        "DBName": {
+          "description": "Name of the database to grant permissions to the account.",
+          "type": "string"
+        },
+        "RoleNames": {
+          "description": "Database permissions to be granted to the account.",
+          "insertionOrder": false,
+          "items": {
+            "description": "Permission name.",
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "DBName",
+        "RoleNames"
+      ],
+      "type": "object"
+    },
+    "AccountPrivilege": {
+      "description": "List of database permissions currently owned by the account.",
+      "properties": {
+        "DBName": {
+          "description": "Databases for which the account has permissions.",
+          "type": "string"
+        },
+        "RoleName": {
+          "description": "Permissions the account has in the current database.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "DBName",
+        "RoleName"
+      ],
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Tag.",
+      "properties": {
+        "Key": {
+          "description": "Tag key.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "MongoDB instance database account.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AccountName",
+      "/properties/AuthDB",
+      "/properties/InstanceId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mongodb:CreateDBAccount",
+        "mongodb:DescribeDBAccounts"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mongodb:DeleteDBAccount",
+        "mongodb:DescribeDBAccounts"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mongodb:DescribeDBAccounts"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mongodb:DescribeDBAccounts"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mongodb:UpdateDBAccountPrivilege",
+        "mongodb:ResetDBAccount",
+        "mongodb:DescribeDBAccounts"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/AccountName"
+  ],
+  "properties": {
+    "AccountDesc": {
+      "description": "Account remarks.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "AccountName": {
+      "description": "Account name.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AccountPassword": {
+      "description": "Account password.",
+      "type": "string"
+    },
+    "AccountPrivileges": {
+      "description": "List of database permissions currently owned by the account.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AccountPrivilege"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AccountType": {
+      "description": "Account type. Value options: Super: Super administrator account, that is, root account; UserAdmin: High-privilege account, that is, an account with any permissions on the admin database; Normal: Regular account, that is, an account with no permissions on the admin database.",
+      "enum": [
+        "Super",
+        "UserAdmin",
+        "Normal"
+      ],
+      "type": "string"
+    },
+    "AuthDB": {
+      "description": "Database associated with the account.",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Account creation time. Format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID.",
+      "type": "string"
+    },
+    "ModifyTime": {
+      "description": "Last update time of the account. Format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "ResetDBAccount": {
+      "description": "Whether to reset the root account permissions to the initial state (that is, restore all permissions that can be granted to the super administrator account). Value options: false (default): Do not reset. true: Reset. Note: This parameter only applies to the root account in the admin database (that is, AuthDB is admin and AccountName is root).",
+      "type": "boolean"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountType",
+    "/properties/CreateTime",
+    "/properties/ModifyTime"
+  ],
+  "required": [
+    "InstanceId",
+    "AccountName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::MongoDB::Account",
+  "writeOnlyProperties": [
+    "/properties/AccountPassword",
+    "/properties/ResetDBAccount"
+  ]
+}

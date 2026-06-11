@@ -1083,5 +1083,65 @@
         "resource": "volcenginecc_transitrouter_route_table_propagation",
         "identifier": ["TransitRouterRouteTableId","TransitRouterAttachmentId"],
         "path": "./examples/resources/volcenginecc_transitrouter_route_table_propagation/import.sh"
+    },
+    {
+        "resource": "volcenginecc_directconnect_bgp_peer",
+        "identifier": ["BgpPeerId"],
+        "path": "./examples/resources/volcenginecc_directconnect_bgp_peer/import.sh"
+    },
+    {
+        "resource": "volcenginecc_mongodb_account",
+        "identifier": ["InstanceId","AccountName"],
+        "path": "./examples/resources/volcenginecc_mongodb_account/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmysql_endpoint_public_address",
+        "identifier": ["InstanceId","EndpointId"],
+        "path": "./examples/resources/volcenginecc_rdsmysql_endpoint_public_address/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_access_monitor",
+        "identifier": ["Bucket"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_access_monitor/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vepfs_fileset",
+        "identifier": ["FileSystemId","FilesetId"],
+        "path": "./examples/resources/volcenginecc_vepfs_fileset/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kafka_user",
+        "identifier": ["InstanceId","UserName"],
+        "path": "./examples/resources/volcenginecc_kafka_user/import.sh"
+    },
+    {
+        "resource": "volcenginecc_dns_record",
+        "identifier": ["ZID","RecordID"],
+        "path": "./examples/resources/volcenginecc_dns_record/import.sh"
+    },
+    {
+        "resource": "volcenginecc_iam_oauth_provider",
+        "identifier": ["OauthProviderName"],
+        "path": "./examples/resources/volcenginecc_iam_oauth_provider/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vmp_rule_file",
+        "identifier": ["WorkspaceId","RuleFileId"],
+        "path": "./examples/resources/volcenginecc_vmp_rule_file/import.sh"
+    },
+    {
+        "resource": "volcenginecc_gtm_gtm",
+        "identifier": ["GtmId"],
+        "path": "./examples/resources/volcenginecc_gtm_gtm/import.sh"
+    },
+    {
+        "resource": "volcenginecc_gtm_rule",
+        "identifier": ["GtmId","PolicyType","RuleId"],
+        "path": "./examples/resources/volcenginecc_gtm_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_gtm_routing",
+        "identifier": ["GtmId"],
+        "path": "./examples/resources/volcenginecc_gtm_routing/import.sh"
     }
 ]

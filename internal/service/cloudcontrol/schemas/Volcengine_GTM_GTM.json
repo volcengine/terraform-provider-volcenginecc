@@ -1,0 +1,144 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AccessMode",
+    "/properties/Cname",
+    "/properties/Domain",
+    "/properties/ProjectName",
+    "/properties/SpecName"
+  ],
+  "description": "The GTM instance is the core resource in Cloud Scheduling GTM for hosting scheduling domain names, routing policies, and health check configurations. After creating a GTM instance, you can use it to configure global traffic scheduling, failover, and health check capabilities for your business domain name",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Domain",
+      "/properties/Cname",
+      "/properties/ProjectName",
+      "/properties/Remark",
+      "/properties/SpecName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "gtm:CreateGtm",
+        "gtm:UpdateGtm",
+        "gtm:GetGtm"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "gtm:DeleteGtm",
+        "gtm:GetGtm"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "gtm:ListGtms"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "gtm:GetGtm"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "gtm:UpdateGtm",
+        "gtm:GetGtm"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GtmId"
+  ],
+  "properties": {
+    "AccessMode": {
+      "description": "Access method for the GTM instance. `cname` means a scheduling domain name is generated and you configure CNAME at your DNS provider; `domain` means Cloud DNS directly resolves the business domain name to the target address",
+      "type": "string"
+    },
+    "AlarmId": {
+      "description": "Alarm rule ID associated with the GTM instance",
+      "type": "string"
+    },
+    "Cname": {
+      "description": "Scheduling domain name of the GTM instance",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Creation time of the GTM instance. Accurate to milliseconds, formatted according to ISO 8601 standard",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Domain": {
+      "description": "Domain name of the GTM instance, such as `www.example.com`",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "GtmId": {
+      "description": "UUID of the GTM instance",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "LastOperator": {
+      "description": "Account that last operated the GTM instance",
+      "type": "string"
+    },
+    "Owner": {
+      "description": "Account that created the GTM instance",
+      "type": "string"
+    },
+    "PolicyType": {
+      "description": "Routing policy type. `geo` indicates basic routing policy, `perf` indicates intelligent routing policy",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project name to which the GTM instance belongs",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Remark": {
+      "description": "Remark information for the GTM instance",
+      "semantic": "description",
+      "type": "string"
+    },
+    "SpecName": {
+      "description": "Feature version of the GTM instance. `ultimate` indicates flagship edition, `standard` indicates standard edition",
+      "type": "string"
+    },
+    "State": {
+      "description": "Current lifecycle status of the GTM instance, such as `init`: indicates the GTM instance has been successfully created but not yet configured. `configuring_address`: indicates basic rule configuration is complete but target address configuration is not yet finished. `editing`: indicates both basic configuration and target address are completed but the instance is not yet enabled. `running`: indicates the instance is officially enabled",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Ttl": {
+      "description": "Expiration time of the DNS record, in seconds",
+      "type": "integer"
+    },
+    "UpdateTime": {
+      "description": "Most recent modification time of the GTM instance. Accurate to milliseconds, formatted according to ISO 8601 standard",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "ZoneType": {
+      "description": "This parameter has no practical significance and can be ignored",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/GtmId",
+    "/properties/State",
+    "/properties/Owner",
+    "/properties/LastOperator",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/ZoneType"
+  ],
+  "required": [
+    "AccessMode",
+    "Domain"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::GTM::GTM"
+}

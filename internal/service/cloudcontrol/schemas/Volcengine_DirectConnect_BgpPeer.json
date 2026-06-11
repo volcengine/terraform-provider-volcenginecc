@@ -1,0 +1,140 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/VirtualInterfaceId",
+    "/properties/RemoteAsn",
+    "/properties/AuthKey",
+    "/properties/IpVersion"
+  ],
+  "description": "BGP neighbor",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/BgpPeerId",
+      "/properties/BgpPeerName",
+      "/properties/VirtualInterfaceId",
+      "/properties/RemoteAsn"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "directconnect:CreateBgpPeer",
+        "directconnect:DescribeBgpPeerAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "directconnect:DeleteBgpPeer",
+        "directconnect:DescribeBgpPeerAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "directconnect:DescribeBgpPeers"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "directconnect:DescribeBgpPeerAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "directconnect:ModifyBgpPeerAttributes",
+        "directconnect:DescribeBgpPeerAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/BgpPeerId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "ID of the account to which the BGP neighbor belongs.",
+      "type": "string"
+    },
+    "AuthKey": {
+      "description": "Authentication key of the BGP neighbor.",
+      "type": "string"
+    },
+    "BgpPeerId": {
+      "description": "ID of the BGP neighbor.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "BgpPeerName": {
+      "description": "Name of the BGP neighbor.",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Time when the BGP neighbor was created.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the BGP neighbor.",
+      "maxLength": 255,
+      "minLength": 1,
+      "semantic": "description",
+      "type": "string"
+    },
+    "IpVersion": {
+      "description": "IP type of the BGP neighbor. IPv4 indicates IPv4 type, IPv6 indicates IPv6 type.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "type": "string"
+    },
+    "LocalAsn": {
+      "description": "ASN of the Volcano side.",
+      "type": "integer"
+    },
+    "RemoteAsn": {
+      "description": "Peer ASN of the BGP neighbor.",
+      "type": "integer"
+    },
+    "SessionStatus": {
+      "description": "Session status of the BGP neighbor. Up indicates normal, Down indicates not operational.",
+      "enum": [
+        "Up",
+        "Down"
+      ],
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the BGP neighbor. Creating means the neighbor is being created, Deleting means it is being deleted, Pending means it is being configured, Available means it is available.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Time when the BGP neighbor was updated.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VirtualInterfaceId": {
+      "description": "ID of the virtual interface where the BGP neighbor is located.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BgpPeerId",
+    "/properties/AccountId",
+    "/properties/Status",
+    "/properties/SessionStatus",
+    "/properties/CreationTime",
+    "/properties/UpdateTime",
+    "/properties/LocalAsn"
+  ],
+  "required": [
+    "VirtualInterfaceId",
+    "RemoteAsn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::DirectConnect::BgpPeer"
+}

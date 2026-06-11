@@ -1,0 +1,134 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/OauthProviderName",
+    "/properties/SSOType"
+  ],
+  "description": "OAuth Identity Provider Resource",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateOAuthProvider",
+        "iam:GetOAuthProvider"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeleteOAuthProvider",
+        "iam:GetOAuthProvider"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetOAuthProvider"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateOAuthProvider",
+        "iam:GetOAuthProvider"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/OauthProviderName"
+  ],
+  "properties": {
+    "AuthorizeTemplate": {
+      "description": "OAuth Authorization Access Template",
+      "type": "string"
+    },
+    "AuthorizeURL": {
+      "description": "OAuth Authorization Endpoint Address",
+      "type": "string"
+    },
+    "ClientId": {
+      "description": "OAuth Application Client Id",
+      "type": "string"
+    },
+    "ClientSecret": {
+      "description": "OAuth Authorization Application Secret",
+      "type": "string"
+    },
+    "CreateDate": {
+      "description": "Creation Time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Identity Provider Description",
+      "semantic": "description",
+      "type": "string"
+    },
+    "IdentityMapType": {
+      "description": "OAuth User Info Sub-User Mapping Method\n1. Map Sub-User Name\n2. Map Sub-User Secure Mobile Number",
+      "type": "integer"
+    },
+    "IdpIdentityKey": {
+      "description": "OAuth User Info Mapping Field",
+      "type": "string"
+    },
+    "OauthProviderName": {
+      "description": "OAuth Identity Provider Name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProviderId": {
+      "description": "Identity Provider ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SSOType": {
+      "description": "Identity Provider SSO Type\n1. Role SSO (not supported yet)\n2. User SSO",
+      "type": "integer"
+    },
+    "Scope": {
+      "description": "OAuth Authorization Service Scope (separate multiple scopes with spaces)",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Identity Provider Status (User SSO Only)\n1. Enabled\n2. Enabled (other login methods disabled)\n3. Disabled",
+      "semantic": "status",
+      "type": "integer"
+    },
+    "TokenURL": {
+      "description": "OAuth Authorization Service AccessToken Endpoint Address",
+      "type": "string"
+    },
+    "Trn": {
+      "description": "Identity Provider Trn",
+      "type": "string"
+    },
+    "UpdateDate": {
+      "description": "Update Time",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UserInfoURL": {
+      "description": "OAuth Authorization Service User Info Endpoint Address",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ProviderId",
+    "/properties/Trn",
+    "/properties/CreateDate",
+    "/properties/UpdateDate"
+  ],
+  "required": [
+    "OauthProviderName",
+    "SSOType",
+    "ClientId",
+    "ClientSecret",
+    "UserInfoURL",
+    "TokenURL",
+    "AuthorizeURL",
+    "AuthorizeTemplate",
+    "IdentityMapType",
+    "IdpIdentityKey"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::OauthProvider"
+}

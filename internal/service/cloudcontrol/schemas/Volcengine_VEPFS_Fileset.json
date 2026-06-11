@@ -1,0 +1,149 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/FileSystemId",
+    "/properties/FilesetPathOnCreate"
+  ],
+  "description": "Fileset details",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/FileSystemId",
+      "/properties/FilesetName",
+      "/properties/FilesetPath",
+      "/properties/Status"
+    ],
+    "required": [
+      "/properties/FileSystemId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vepfs:CreateFileset",
+        "vepfs:DescribeFilesets"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vepfs:DeleteFileset",
+        "vepfs:DescribeFilesets"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vepfs:DescribeFilesets"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vepfs:DescribeFilesets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vepfs:UpdateFileset",
+        "vepfs:SetFilesetQuota",
+        "vepfs:SetFilesetQos",
+        "vepfs:DescribeFilesets"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/FileSystemId",
+    "/properties/FilesetId"
+  ],
+  "properties": {
+    "BandwidthQos": {
+      "description": "Bandwidth Qos",
+      "type": "integer"
+    },
+    "CapacityLimit": {
+      "description": "Capacity quota limit (GiB)",
+      "type": "integer"
+    },
+    "CapacityUsed": {
+      "description": "Used capacity (GiB)",
+      "type": "integer"
+    },
+    "CreateTime": {
+      "description": "Fileset creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "FileLimit": {
+      "description": "File or directory quota. A value of `0` means no file or directory quota is set",
+      "type": "integer"
+    },
+    "FileSystemId": {
+      "description": "File system ID",
+      "type": "string"
+    },
+    "FileUsed": {
+      "description": "Used file count",
+      "type": "integer"
+    },
+    "FilesetId": {
+      "description": "Fileset ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "FilesetName": {
+      "description": "Fileset name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "FilesetPath": {
+      "description": "Fileset absolute path",
+      "type": "string"
+    },
+    "FilesetPathOnCreate": {
+      "description": "Fileset absolute path at creation",
+      "type": "string"
+    },
+    "IOPSQos": {
+      "description": "IOPS Qos。",
+      "type": "integer"
+    },
+    "MaxInodeNum": {
+      "description": "Fileset inode limit",
+      "type": "integer"
+    },
+    "Status": {
+      "description": "Fileset status. The possible values are:\n\n- `Creating`: Creating\n- `CreateError`: Creation failed\n- `Running`: Running\n- `Updating`: Updating\n- `UpdateError`: Update failed\n- `Deleting`: Deleting\n- `DeleteError`: Deletion failed\n- `Deleted`: Deleted\n- `Error`: Error",
+      "enum": [
+        "Creating",
+        "CreateError",
+        "Running",
+        "Updating",
+        "UpdateError",
+        "Deleting",
+        "DeleteError",
+        "Deleted",
+        "Error"
+      ],
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/FilesetId",
+    "/properties/CreateTime",
+    "/properties/Status",
+    "/properties/FileUsed",
+    "/properties/CapacityUsed",
+    "/properties/MaxInodeNum",
+    "/properties/FilesetPath"
+  ],
+  "required": [
+    "FileSystemId",
+    "FilesetName",
+    "FilesetPathOnCreate"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::VEPFS::Fileset",
+  "writeOnlyProperties": [
+    "/properties/FilesetPathOnCreate"
+  ]
+}

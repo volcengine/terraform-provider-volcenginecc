@@ -1,0 +1,105 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/UserName",
+    "/properties/PasswordType"
+  ],
+  "description": "SASL user details",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/UserName"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "Kafka:CreateUser",
+        "Kafka:DescribeUsers"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Kafka:DeleteUser",
+        "Kafka:DescribeUsers"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Kafka:DescribeUsers"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Kafka:DescribeUsers"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Kafka:ModifyUserAuthority",
+        "Kafka:DescribeUsers"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/UserName"
+  ],
+  "properties": {
+    "AllAuthority": {
+      "description": "Whether the user has default read and write permissions for all Topics\n- true: This user has read and write permissions for all Topics\n- false: This user does not have read and write permissions for all Topics",
+      "type": "boolean"
+    },
+    "CreateTime": {
+      "description": "SASL user creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "SASL user description",
+      "semantic": "description",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID to which the user belongs",
+      "type": "string"
+    },
+    "PasswordType": {
+      "description": "SASL user type (password type). Supported types:\n- Scram: SASL user of SCRAM type\n- Plain: SASL user of PLAIN type\n:::tip\nIf you create a PLAIN type user, it takes effect after a 1-minute delay. Please wait after creation.\n:::",
+      "enum": [
+        "Scram",
+        "Plain"
+      ],
+      "type": "string"
+    },
+    "UserName": {
+      "description": "SASL username. Must meet the following requirements:\n\n- Consists of letters, numbers, hyphens (-), or underscores (_)\n- Length: 3–64 characters\n- Username cannot be set to admin or monitor, and must be unique within the instance",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "UserPassword": {
+      "description": "SASL user password. Must meet the following requirements:\n\n- Length: 8–32 characters\n- Must include at least three of the following: uppercase letters, lowercase letters, numbers, special characters\n- Supported special characters: `!@#$%^\u0026*()_+-=`",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CreateTime"
+  ],
+  "required": [
+    "InstanceId",
+    "UserName",
+    "UserPassword",
+    "AllAuthority"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Kafka::User",
+  "writeOnlyProperties": [
+    "/properties/UserPassword"
+  ]
+}

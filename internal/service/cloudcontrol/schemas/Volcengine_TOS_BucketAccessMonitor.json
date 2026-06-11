@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Bucket"
+  ],
+  "description": "This API is used to set access tracking for the storage bucket. You must enable access tracking before creating lifecycle rules for last access time. Once enabled, TOS automatically checks and records the last access time for all objects in the bucket.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tos:PutBucketAccessMonitor",
+        "tos:GetBucketAccessMonitor"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tos:PutBucketAccessMonitor",
+        "tos:GetBucketAccessMonitor"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tos:GetBucketAccessMonitor"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Bucket"
+  ],
+  "properties": {
+    "Bucket": {
+      "description": "Bucket name.",
+      "maxLength": 63,
+      "minLength": 3,
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Whether to enable access tracking. Value descriptions: Enabled: Access tracking is enabled. Disabled: Access tracking is disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Status"
+  ],
+  "required": [
+    "Bucket"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TOS::BucketAccessMonitor"
+}

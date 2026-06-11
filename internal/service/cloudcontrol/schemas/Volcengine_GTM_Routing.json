@@ -1,0 +1,56 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GtmId",
+    "/properties/RoutingEnabled"
+  ],
+  "description": "Used to start or stop a GTM instance. After starting, the GTM instance configures DNS resolution for the scheduling domain, and initiates health checks and failover. After stopping, health checks and failover for the GTM instance also stop. However, DNS resolution from the scheduling domain to the target address does not stop. If you need to delete DNS resolution from the scheduling domain to the target address, you can call the DeleteGtm API to delete the GTM instance.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "gtm:StartRouting",
+        "gtm:GetGtm"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "gtm:StopRouting",
+        "gtm:GetGtm"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "gtm:GetGtm"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GtmId"
+  ],
+  "properties": {
+    "GtmId": {
+      "description": "UUID of the GTM instance. You can obtain GtmId via the ListGtms API.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RoutingEnabled": {
+      "description": "Start/stop GTM instance. true: Start GTM instance. false: Stop GTM instance.",
+      "type": "boolean"
+    },
+    "RoutingStatus": {
+      "description": "Indicates the current lifecycle state of the GTM instance. Value description: init: The GTM instance has been successfully created but not yet configured. configuring_address: Basic rule configuration for GTM is complete, but target address configuration is not yet finished. editing: Both basic configuration and target address have been completed, but the instance is not yet enabled. running: The instance is officially enabled.",
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RoutingStatus"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::GTM::Routing",
+  "writeOnlyProperties": [
+    "/properties/RoutingEnabled"
+  ]
+}
