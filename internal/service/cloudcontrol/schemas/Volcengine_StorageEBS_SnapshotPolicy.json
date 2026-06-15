@@ -1,0 +1,183 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Automatic snapshot policy",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AutoSnapshotPolicyId",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "storage_ebs:CreateAutoSnapshotPolicy",
+        "storage_ebs:ApplyAutoSnapshotPolicy",
+        "storage_ebs:DescribeAutoSnapshotPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "storage_ebs:DeleteAutoSnapshotPolicy",
+        "storage_ebs:DescribeAutoSnapshotPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "storage_ebs:DescribeAutoSnapshotPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "storage_ebs:DescribeAutoSnapshotPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "storage_ebs:ModifyAutoSnapshotPolicy",
+        "storage_ebs:ApplyAutoSnapshotPolicy",
+        "storage_ebs:CancelAutoSnapshotPolicy",
+        "storage_ebs:DescribeAutoSnapshotPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AutoSnapshotPolicyId"
+  ],
+  "properties": {
+    "AddVolumeIds": {
+      "description": "List of cloud disk IDs to associate with the automatic snapshot policy.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AutoSnapshotPolicyId": {
+      "description": "Automatic snapshot policy ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AutoSnapshotPolicyName": {
+      "description": "Automatic snapshot policy name. Naming rules: The first character must be Chinese, a letter, or an underscore (_). It can include Chinese, letters, numbers, underscores (_), hyphens (-), or periods (.). Length must be between 1 and 128 characters.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "Creation time of the automatic snapshot policy.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "ProjectName": {
+      "default": "default",
+      "description": "Project associated with the automatic snapshot policy.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RemoveVolumeIds": {
+      "description": "List of cloud disk IDs to disassociate from the automatic snapshot policy.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RepeatDays": {
+      "description": "Create snapshots on a daily basis, with a specified interval in days. The value range is [1, 30]. When repeating snapshot creation daily, the day you create the automatic snapshot policy is considered Day 1. Snapshots will not be created for past time points. If all scheduled snapshot times for the day have passed, the day is still counted as Day 1.",
+      "type": "integer"
+    },
+    "RepeatWeekdays": {
+      "description": "Create snapshots on a weekly basis by selecting one or more days from Monday to Sunday. The value range is 1–7. When creating an automatic snapshot policy, you must set either the RepeatWeekdays.N or RepeatDays parameter. Setting both parameters at the same time is not supported.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RetentionDays": {
+      "description": "Retention period for automatic snapshots, in days. -1: Save permanently; 1–65536: Specify number of days to retain.",
+      "type": "integer"
+    },
+    "Status": {
+      "description": "Reserved parameter.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TimePoints": {
+      "description": "Snapshot creation time points, using UTC +8 time. Unit: hour. Value range: 0–23.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdatedAt": {
+      "description": "Update time of the automatic snapshot policy.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VolumeNums": {
+      "description": "Total number of cloud disks.",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AutoSnapshotPolicyId",
+    "/properties/VolumeNums",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "required": [
+    "AutoSnapshotPolicyName",
+    "RetentionDays",
+    "TimePoints"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::StorageEBS::SnapshotPolicy",
+  "writeOnlyProperties": [
+    "/properties/AddVolumeIds",
+    "/properties/RemoveVolumeIds"
+  ]
+}

@@ -15,4 +15,6 @@ resource "volcenginecc_rdspostgresql_allow_list" "RdsPostgresqlAllowListDemo" {
   associated_instances = [{
     instance_id = "postgres-cxxxx3b95"
   }]
+  instance_id                = "postgres-60xxxxx5ed9"
+  upgrade_allow_list_version = true
 }

@@ -1,7 +1,6 @@
 resource "volcenginecc_kafka_instance" "KafkaInstanceDemo" {
   charge_info = {
     charge_type = "PostPaid"
-    auto_renew  = false
   }
   compute_spec         = "kafka.20xrate.hw"
   eip_id               = "eip-****"
@@ -9,10 +8,21 @@ resource "volcenginecc_kafka_instance" "KafkaInstanceDemo" {
   instance_name        = "CCAPI-TEST"
   subnet_id            = "subnet-****"
   ip_white_list        = ["acl-****"]
-  parameters           = "{\"LogRetentionHours\":\"1\",\"MessageMaxByte\":\"2\",\"MessageTimestampType\":\"CreateTime\",\"OffsetRetentionMinutes\":\"10\",\"AutoDeleteGroup\":\"False\"}"
-  partition_number     = 350
-  storage_space        = 300
-  storage_type         = "ESSD_PL0"
+  parameters = jsonencode(
+    {
+      "MessageMaxByte" : "10",
+      "LogRetentionHours" : "72",
+      "OffsetRetentionMinutes" : "4320",
+      "MessageTimestampType" : "CreateTime",
+      "AutoDeleteGroup" : "true",
+      "LogAutoDeletion" : "true",
+      "LogAutoDeletionPercent" : "90",
+      "TransactionDisabled" : "false"
+    }
+  )
+  partition_number = 350
+  storage_space    = 300
+  storage_type     = "ESSD_PL0"
   tags = [
     {
       key   = "env"

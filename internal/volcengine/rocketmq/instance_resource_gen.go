@@ -181,7 +181,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ChargeExpireTime
 				"charge_expire_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Expiration time for yearly/monthly subscription instances. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'. For pay-as-you-go instances, this field defaults to 1970-01-01T00:00:00Z.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -190,7 +189,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ChargeStartTime
 				"charge_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Billing start time for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -199,15 +197,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ChargeStatus
 				"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Instance billing status. Includes: Normal: normal Overdue: pay-as-you-go overdue Expired: subscription expired",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"Normal",
-							"Overdue",
-							"Expired",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -230,7 +220,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: OverdueReclaimTime
 				"overdue_reclaim_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Estimated release time after the instance is suspended due to overdue payment. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -239,7 +228,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: OverdueTime
 				"overdue_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Suspension time due to overdue payment for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -253,6 +241,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Period is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: PeriodUnit
 				"period_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -376,7 +365,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnableSSL
@@ -575,7 +563,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StorageSpace
@@ -839,6 +826,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/NetworkTypes",
 		"/properties/AutoScaleQueue",
 		"/properties/ProductInfo",
+		"/properties/ChargeDetail/Period",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -854,21 +842,24 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/UsedQueueNumber",
 		"/properties/UsedStorageSpace",
 		"/properties/UsedTopicNumber",
+		"/properties/ChargeDetail/ChargeExpireTime",
+		"/properties/ChargeDetail/ChargeStartTime",
+		"/properties/ChargeDetail/ChargeStatus",
+		"/properties/ChargeDetail/OverdueReclaimTime",
+		"/properties/ChargeDetail/OverdueTime",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/EipId",
+		"/properties/AllowListIds",
 		"/properties/EnableSSL",
 		"/properties/FileReservedTime",
+		"/properties/IPVersionType",
+		"/properties/NetworkTypes",
 		"/properties/ProjectName",
-		"/properties/SSLMode",
 		"/properties/SubnetId",
 		"/properties/Version",
 		"/properties/VpcId",
 		"/properties/ZoneId",
-		"/properties/AllowListIds",
-		"/properties/IPVersionType",
-		"/properties/NetworkTypes",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

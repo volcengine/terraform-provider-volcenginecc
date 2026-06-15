@@ -50,7 +50,6 @@ func nLBServerGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": false,
 		//	  "description": "Enable backend security group pass-through. This parameter can only be configured when Type is 'instance'.",
 		//	  "type": "boolean"
 		//	}
@@ -138,7 +137,6 @@ func nLBServerGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "type": "integer"
 		//	    },
 		//	    "Method": {
-		//	      "default": "GET",
 		//	      "description": "Health check request method",
 		//	      "type": "string"
 		//	    },
@@ -262,7 +260,6 @@ func nLBServerGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "ipv4",
 		//	  "description": "IP address type of the server group. Options: ipv4 (default): The server group only supports adding IPv4 type backend servers. ipv6: The server group only supports adding IPv6 type backend servers.",
 		//	  "enum": [
 		//	    "ipv4",
@@ -515,7 +512,6 @@ func nLBServerGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": 1000,
 		//	  "description": "Session persistence timeout. Range: 1–3600 seconds, default: 1000 seconds",
 		//	  "format": "int64",
 		//	  "type": "integer"

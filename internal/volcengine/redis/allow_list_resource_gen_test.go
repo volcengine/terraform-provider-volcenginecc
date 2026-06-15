@@ -6,6 +6,7 @@
 package redis_test
 
 import (
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -17,30 +18,8 @@ func TestAccVolcengineRedisAllowList_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInVolcengine(),
-			),
-		},
-		{
-			ResourceName:      td.ResourceName,
-			ImportState:       true,
-			ImportStateVerify: true,
-		},
-	})
-}
-
-func TestAccVolcengineRedisAllowList_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::Redis::AllowList", "volcenginecc_redis_allow_list", "test")
-
-	td.ResourceTest(t, []resource.TestStep{
-		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInVolcengine(),
-				td.DeleteResource(),
-			),
-			ExpectNonEmptyPlan: true,
+			Config:      td.EmptyConfig(),
+			ExpectError: regexp.MustCompile("Missing required argument"),
 		},
 	})
 }

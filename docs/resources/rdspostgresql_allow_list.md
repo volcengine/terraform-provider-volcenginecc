@@ -29,6 +29,8 @@ resource "volcenginecc_rdspostgresql_allow_list" "RdsPostgresqlAllowListDemo" {
   associated_instances = [{
     instance_id = "postgres-cxxxx3b95"
   }]
+  instance_id                = "postgres-60xxxxx5ed9"
+  upgrade_allow_list_version = true
 }
 ```
 
@@ -44,11 +46,13 @@ resource "volcenginecc_rdspostgresql_allow_list" "RdsPostgresqlAllowListDemo" {
 - `allow_list_type` (String) Network protocol type used by the allowlist. Value: IPv4 (default).
 - `associated_instances` (Attributes Set) List of instances bound to this allowlist, including instance ID and instance name.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
+- `instance_id` (String) Instance ID. When UpgradeAllowListVersion is set to true, you must provide this field to specify the instance for upgrading the allowlist version.
 - `ip_address` (String) Query allowlist by IP address. Supports multiple IP addresses separated by commas (,). Note: If the allowlist contains any subset of the provided IP addresses, that allowlist will be returned.
 - `modify_mode` (String) Allowlist modification mode. Values: Cover (default): overwrite, use the value of the AllowList field to overwrite the original allowlist. Append: add, add the IP addresses in the AllowList field to the original allowlist. Delete: remove, remove the IP addresses in the AllowList field from the original allowlist. At least one IP address must remain. Note: If the allowlist to be modified is bound to a security group, or if you need to bind a security group when modifying the allowlist, ModifyMode can only be set to Cover.
 - `security_group_bind_infos` (Attributes Set) List of security groups bound to this allowlist.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--security_group_bind_infos))
 - `update_security_group` (Boolean) Whether to update the security group bound to the allowlist. Values: true: update; false: do not update. Default value.
+- `upgrade_allow_list_version` (Boolean) Whether to upgrade the allowlist version. Values: true: upgrade; false: do not upgrade (default). You must also provide the InstanceId field.
 - `user_allow_list` (String) IP addresses outside the security group that need to be added to the allowlist. You can enter IP addresses or CIDR IP ranges. Note: This field cannot be used together with the AllowList field.
 
 ### Read-Only

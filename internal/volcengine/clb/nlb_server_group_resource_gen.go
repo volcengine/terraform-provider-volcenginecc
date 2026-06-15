@@ -71,7 +71,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": false,
 		//	  "description": "Enable backend security group pass-through. This parameter can only be configured when Type is 'instance'.",
 		//	  "type": "boolean"
 		//	}
@@ -79,7 +78,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Enable backend security group pass-through. This parameter can only be configured when Type is 'instance'.",
 			Optional:    true,
 			Computed:    true,
-			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -183,7 +181,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "Method": {
-		//	      "default": "GET",
 		//	      "description": "Health check request method",
 		//	      "type": "string"
 		//	    },
@@ -287,7 +284,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Health check request method",
 					Optional:    true,
 					Computed:    true,
-					Default:     stringdefault.StaticString("GET"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -386,7 +382,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": "ipv4",
 		//	  "description": "IP address type of the server group. Options: ipv4 (default): The server group only supports adding IPv4 type backend servers. ipv6: The server group only supports adding IPv6 type backend servers.",
 		//	  "enum": [
 		//	    "ipv4",
@@ -398,7 +393,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "IP address type of the server group. Options: ipv4 (default): The server group only supports adding IPv4 type backend servers. ipv6: The server group only supports adding IPv6 type backend servers.",
 			Optional:    true,
 			Computed:    true,
-			Default:     stringdefault.StaticString("ipv4"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ipv4",
@@ -759,7 +753,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "default": 1000,
 		//	  "description": "Session persistence timeout. Range: 1–3600 seconds, default: 1000 seconds",
 		//	  "format": "int64",
 		//	  "type": "integer"
@@ -768,7 +761,6 @@ func nLBServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Session persistence timeout. Range: 1–3600 seconds, default: 1000 seconds",
 			Optional:    true,
 			Computed:    true,
-			Default:     int64default.StaticInt64(1000),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

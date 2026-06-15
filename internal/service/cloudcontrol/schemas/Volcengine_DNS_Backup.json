@@ -1,0 +1,75 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ZID"
+  ],
+  "description": "Backup Information",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ZID"
+    ],
+    "required": [
+      "/properties/ZID"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dns:CreateUserZoneBackup",
+        "dns:ListUserZoneBackups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dns:DeleteUserZoneBackup",
+        "dns:ListUserZoneBackups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dns:ListUserZoneBackups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dns:ListUserZoneBackups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ZID",
+    "/properties/BackupID"
+  ],
+  "properties": {
+    "BackupID": {
+      "description": "Backup ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "BackupTime": {
+      "description": "Backup creation time. Time zone is UTC+8.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "RecordCount": {
+      "description": "Number of DNS records in the backup.",
+      "type": "integer"
+    },
+    "ZID": {
+      "description": "The domain ID for which you need to manually create a backup. You can call the ListZones API to obtain the domain ID.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BackupID",
+    "/properties/BackupTime",
+    "/properties/RecordCount"
+  ],
+  "required": [
+    "ZID"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::DNS::Backup"
+}

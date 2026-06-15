@@ -1,0 +1,78 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TransitRouterAttachmentId",
+    "/properties/TransitRouterRouteTableId"
+  ],
+  "description": "Forwarding association of the transit router route table.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TransitRouterRouteTableId",
+      "/properties/TransitRouterAttachmentId"
+    ],
+    "required": [
+      "/properties/TransitRouterRouteTableId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:AssociateTransitRouterAttachmentToRouteTable",
+        "transitrouter:DescribeTransitRouterRouteTableAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DissociateTransitRouterAttachmentFromRouteTable",
+        "transitrouter:DescribeTransitRouterRouteTableAssociations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterRouteTableAssociations"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterRouteTableAssociations"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterRouteTableId",
+    "/properties/TransitRouterAttachmentId"
+  ],
+  "properties": {
+    "Status": {
+      "description": "Status of the forwarding association. Available: Available. Creating: Creating. Configuring: Being configured. Deleting: Deleting.",
+      "enum": [
+        "Available",
+        "Creating",
+        "Pending",
+        "Deleting"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "TransitRouterAttachmentId": {
+      "description": "ID of the network instance connection.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterRouteTableId": {
+      "description": "ID of the route table associated with the transit router instance.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Status"
+  ],
+  "required": [
+    "TransitRouterAttachmentId",
+    "TransitRouterRouteTableId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TransitRouter::TransitRouterRouteTableAssociation"
+}

@@ -1,0 +1,174 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/EipIds",
+    "/properties/MongosNodeIds",
+    "/properties/NetworkType",
+    "/properties/ObjectId"
+  ],
+  "definitions": {
+    "DBAddress": {
+      "description": "List of connection address strings",
+      "properties": {
+        "AddressDomain": {
+          "description": "Domain name of the connection address",
+          "type": "string"
+        },
+        "AddressIP": {
+          "description": "IP corresponding to the connection address\n\n:::tip\nIt is not recommended to connect to the instance using the `IP:port` format, as the IP address may change after switching subnets. If the client code is not updated in time, instance connection failures may occur. We recommend accessing the MongoDB instance using the `domain:port` format to avoid connection issues caused by IP address changes. For detailed steps to connect to a MongoDB instance, see [Connect to an Instance Using the Mongo Shell Tool](../6447/70381).\n:::",
+          "type": "string"
+        },
+        "AddressPort": {
+          "description": "Port number of the connection address",
+          "type": "string"
+        },
+        "AddressType": {
+          "description": "Connection address type of the node. Possible values:\n\nPrimary: Primary node connection address\nSecondary: Secondary node connection address\nHidden: Hidden node connection address\nReadOnly: Read-only node connection address\n\n:::tip\nHidden node connection address information is returned only when the connection address type is a private connection address (that is, when `NetworkType` is set to `Private`).\n:::",
+          "type": "string"
+        },
+        "EipId": {
+          "description": "EIP ID bound to the instance's public address\n\n:::tip\nThis parameter is returned only when the connection address type is a public connection address (that is, when `NetworkType` is set to `Public`).\n:::",
+          "type": "string"
+        },
+        "NodeId": {
+          "description": "Node ID associated with the connection address",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "AZ of the node; all nodes are consistent for single-AZ instances, while nodes differ for multi-AZ instances",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "List of connection address information",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mongodb:CreateDBEndpoint",
+        "mongodb:DescribeDBEndpoint"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mongodb:DeleteDBEndpoint",
+        "mongodb:DescribeDBEndpoint"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mongodb:DescribeDBEndpoint"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mongodb:DescribeDBEndpoint"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/EndpointId"
+  ],
+  "properties": {
+    "DBAddresses": {
+      "description": "List of connection address strings",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DBAddress"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "EipIds": {
+      "description": "List of EIP IDs to bind when applying for a public address",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "EndpointId": {
+      "description": "Connection address ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "EndpointStr": {
+      "description": "String information of the connection address.",
+      "type": "string"
+    },
+    "EndpointType": {
+      "description": "Node type corresponding to the connection address. Possible values:\n\n- Replica set instances only support the `ReplicaSet` (replica set) connection address type\n- Sharded cluster instances support three connection address types: `Mongos` (Mongos node), `ConfigServer` (ConfigServer node), and `Shard` (Shard node)",
+      "enum": [
+        "ReplicaSet",
+        "Shard",
+        "ConfigServer",
+        "Mongos"
+      ],
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID\n\n:::tip\nYou can call the [DescribeDBInstances](https://www.volcengine.com/docs/6447/100741) API to query basic information for all MongoDB instances in the target region, including the instance ID.\n:::",
+      "type": "string"
+    },
+    "MongosNodeIds": {
+      "description": "ID of the Mongos node that requires a public connection address",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "NetworkType": {
+      "description": "Network type of the connection address. Possible values:\n\n- `Private`: Private connection address\n- `Public`: Public connection address",
+      "enum": [
+        "Private",
+        "Public"
+      ],
+      "type": "string"
+    },
+    "ObjectId": {
+      "description": "ID of the component associated with the current connection address\n\n:::tip\nThis parameter is returned only when `EndpointType` is set to `Mongos`, `ConfigServer`, or `Shard`.\n:::",
+      "type": "string"
+    },
+    "SubnetId": {
+      "description": "Subnet ID of the current instance",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "VPC ID of the current instance",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/EndpointId",
+    "/properties/EndpointType",
+    "/properties/EndpointStr",
+    "/properties/VpcId",
+    "/properties/SubnetId",
+    "/properties/DBAddresses"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::MongoDB::Endpoint",
+  "writeOnlyProperties": [
+    "/properties/EipIds",
+    "/properties/MongosNodeIds"
+  ]
+}

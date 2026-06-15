@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_privatelink_gateway_endpoint.example "endpoint_id"

@@ -1,18 +1,16 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/EipId",
+    "/properties/AllowListIds",
     "/properties/EnableSSL",
     "/properties/FileReservedTime",
+    "/properties/IPVersionType",
+    "/properties/NetworkTypes",
     "/properties/ProjectName",
-    "/properties/SSLMode",
     "/properties/SubnetId",
     "/properties/Version",
     "/properties/VpcId",
-    "/properties/ZoneId",
-    "/properties/AllowListIds",
-    "/properties/IPVersionType",
-    "/properties/NetworkTypes"
+    "/properties/ZoneId"
   ],
   "definitions": {
     "ChargeDetail": {
@@ -166,7 +164,9 @@
         "RocketMQ:ModifyInstanceChargeType",
         "RocketMQ:DescribeInstanceDetail",
         "RocketMQ:RemoveTagsFromResource",
-        "RocketMQ:AddTagsToResource"
+        "RocketMQ:AddTagsToResource",
+        "RocketMQ:DeletePublicAddress",
+        "RocketMQ:CreatePublicAddress"
       ]
     }
   },
@@ -339,7 +339,12 @@
     "/properties/UsedGroupNumber",
     "/properties/UsedQueueNumber",
     "/properties/UsedStorageSpace",
-    "/properties/UsedTopicNumber"
+    "/properties/UsedTopicNumber",
+    "/properties/ChargeDetail/ChargeExpireTime",
+    "/properties/ChargeDetail/ChargeStartTime",
+    "/properties/ChargeDetail/ChargeStatus",
+    "/properties/ChargeDetail/OverdueReclaimTime",
+    "/properties/ChargeDetail/OverdueTime"
   ],
   "required": [
     "Version",
@@ -363,6 +368,7 @@
     "/properties/IPVersionType",
     "/properties/NetworkTypes",
     "/properties/AutoScaleQueue",
-    "/properties/ProductInfo"
+    "/properties/ProductInfo",
+    "/properties/ChargeDetail/Period"
   ]
 }

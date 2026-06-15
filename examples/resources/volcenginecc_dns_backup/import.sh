@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_dns_backup.example "zid|backup_id"

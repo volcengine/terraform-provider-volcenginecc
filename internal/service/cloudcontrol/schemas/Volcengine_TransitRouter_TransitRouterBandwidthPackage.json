@@ -1,0 +1,291 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/LocalGeographicRegionSetId",
+    "/properties/PeerGeographicRegionSetId",
+    "/properties/LineOperator",
+    "/properties/BillingType",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "AllocationAttributes": {
+      "description": "Details of the cross-region connection associated with the bandwidth package.",
+      "properties": {
+        "AllocateTime": {
+          "description": "Time when the bandwidth package was associated with the cross-region connection.",
+          "type": "string"
+        },
+        "Bandwidth": {
+          "description": "Bandwidth peak of the cross-region connection, in Mbps.",
+          "type": "integer"
+        },
+        "LocalRegionId": {
+          "description": "Region ID of the local transit router instance in the cross-region connection.",
+          "type": "string"
+        },
+        "PeerRegionId": {
+          "description": "Region ID of the peer transit router instance in the cross-region connection.",
+          "type": "string"
+        },
+        "TransitRouterPeerAttachmentId": {
+          "description": "ID of the cross-region connection.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key of the tag.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Transit router bandwidth package resources.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TransitRouterBandwidthPackageId",
+      "/properties/TransitRouterBandwidthPackageName",
+      "/properties/LocalGeographicRegionSetId",
+      "/properties/PeerGeographicRegionSetId",
+      "/properties/ProjectName",
+      "/properties/Allocations/*/TransitRouterPeerAttachmentId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:CreateTransitRouterBandwidthPackage",
+        "transitrouter:DescribeTransitRouterBandwidthPackages"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DeleteTransitRouterBandwidthPackage",
+        "transitrouter:DescribeTransitRouterBandwidthPackages"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterBandwidthPackages"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterBandwidthPackages",
+        "transitrouter:DescribeTransitRouterBandwidthPackagesBilling"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transitrouter:ModifyTransitRouterBandwidthPackageAttributes",
+        "transitrouter:SetTransitRouterBandwidthPackageRenewal",
+        "transitrouter:RenewTransitRouterBandwidthPackage",
+        "transitrouter:DescribeTransitRouterBandwidthPackages",
+        "transitrouter:DescribeTransitRouterBandwidthPackagesBilling",
+        "transitrouter:TagResources",
+        "transitrouter:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterBandwidthPackageId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Account ID to which the bandwidth package belongs.",
+      "type": "string"
+    },
+    "Allocations": {
+      "description": "Details of the cross-region connection associated with the bandwidth package.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AllocationAttributes"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "Bandwidth": {
+      "description": "Bandwidth peak of the transit router bandwidth package, in Mbps.",
+      "maximum": 10000,
+      "minimum": 2,
+      "type": "integer"
+    },
+    "BillingStatus": {
+      "description": "Billing status of the transit router bandwidth package. 0: creating. 1: running. 3: unsubscribed. 4: expired and stopped. 5: expired and recycled. 8: unsubscribed and stopped.",
+      "type": "integer"
+    },
+    "BillingType": {
+      "description": "Billing method of the transit router bandwidth package. 1: subscription (yearly/monthly).",
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "Business status of the transit router bandwidth package. Normal: normal. FinancialLocked: frozen.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Creation time of the transit router bandwidth package.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "Deletion time of the transit router bandwidth package.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the transit router bandwidth package.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "ExpiredTime": {
+      "description": "Expiration time of the transit router bandwidth package.",
+      "type": "string"
+    },
+    "LineOperator": {
+      "description": "Carrier for cross-border bandwidth package. ChinaUnicom: China Unicom ChinaTelecom: China Telecom",
+      "enum": [
+        "ChinaUnicom",
+        "ChinaTelecom",
+        ""
+      ],
+      "type": "string"
+    },
+    "LocalGeographicRegionSetId": {
+      "description": "Local geographic region ID for transit router bandwidth package interconnection. China: Chinese mainland Asia: Asia-Pacific",
+      "enum": [
+        "China",
+        "Asia"
+      ],
+      "type": "string"
+    },
+    "PeerGeographicRegionSetId": {
+      "description": "Peer geographic region ID for transit router bandwidth package interconnection. China: Chinese mainland. Asia: Asia-Pacific.",
+      "enum": [
+        "China",
+        "Asia"
+      ],
+      "type": "string"
+    },
+    "Period": {
+      "description": "Purchase duration of the transit router bandwidth package.",
+      "type": "integer"
+    },
+    "PeriodUnit": {
+      "description": "Billing cycle of the transit router bandwidth package. Month: billed monthly. Year: billed yearly.",
+      "enum": [
+        "Month",
+        "Year"
+      ],
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Name of the project to which the transit router bandwidth package belongs.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ReclaimTime": {
+      "description": "Recycle time after the transit router bandwidth package expires. Returned when BillingType is 1.",
+      "type": "string"
+    },
+    "RemainRenewTimes": {
+      "description": "Number of auto-renewals. Value can be -1 or 1–100. Default is -1, which means unlimited auto-renewals.",
+      "type": "integer"
+    },
+    "RemainingBandwidth": {
+      "description": "Remaining unallocated bandwidth of the transit router bandwidth package, in Mbps.",
+      "type": "integer"
+    },
+    "RenewPeriod": {
+      "description": "Duration of each auto-renewal, in months.",
+      "type": "integer"
+    },
+    "RenewType": {
+      "description": "Renewal type for transit router bandwidth package. Manual: Manual renewal Auto: Automatic renewal NoRenew: Do not renew",
+      "enum": [
+        "Manual",
+        "Auto",
+        "NoRenew"
+      ],
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the transit router bandwidth package. Creating: creating. Deleting: deleting. Pending: configuring. Available: available.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Pending",
+        "Available"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag information of the transit router bandwidth package.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TransitRouterBandwidthPackageId": {
+      "description": "Transit router bandwidth package ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterBandwidthPackageName": {
+      "description": "Name of the transit router bandwidth package.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Last operation time of the transit router bandwidth package.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TransitRouterBandwidthPackageId",
+    "/properties/RemainingBandwidth",
+    "/properties/Status",
+    "/properties/BusinessStatus",
+    "/properties/CreationTime",
+    "/properties/UpdateTime",
+    "/properties/DeletedTime",
+    "/properties/ExpiredTime",
+    "/properties/AccountId",
+    "/properties/Allocations",
+    "/properties/ReclaimTime",
+    "/properties/BillingStatus"
+  ],
+  "required": [
+    "LocalGeographicRegionSetId",
+    "PeerGeographicRegionSetId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TransitRouter::TransitRouterBandwidthPackage",
+  "writeOnlyProperties": [
+    "/properties/RenewPeriod",
+    "/properties/PeriodUnit",
+    "/properties/Period"
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ServiceId",
+    "/properties/VpcId",
+    "/properties/ProjectName"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Tag information of the endpoint",
+      "properties": {
+        "Key": {
+          "description": "Tag key of the endpoint tag",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value of the endpoint tag",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Gateway endpoint",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/EndpointId",
+      "/properties/EndpointName",
+      "/properties/VpcId",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "privatelink:CreateVpcGatewayEndpoint",
+        "privatelink:DescribeVpcGatewayEndpointAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "privatelink:DeleteVpcGatewayEndpoint",
+        "privatelink:DescribeVpcGatewayEndpointAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "privatelink:DescribeVpcGatewayEndpoints"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "privatelink:DescribeVpcGatewayEndpointAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "privatelink:ModifyVpcGatewayEndpointAttributes",
+        "privatelink:DescribeVpcGatewayEndpointAttributes",
+        "privatelink:TagResources",
+        "privatelink:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/EndpointId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "Creation time of the gateway endpoint",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the gateway endpoint",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "EndpointId": {
+      "description": "ID of the gateway endpoint",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "EndpointName": {
+      "description": "Name of the gateway endpoint",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Name of the project to which the gateway endpoint belongs",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ServiceId": {
+      "description": "ID of the gateway endpoint service",
+      "type": "string"
+    },
+    "ServiceName": {
+      "description": "Name of the gateway endpoint service",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the gateway endpoint. Creating: Being created. Pending: Configuration being modified. Available: Available. Deleting: Being deleted.",
+      "enum": [
+        "Creating",
+        "Pending",
+        "Available",
+        "Deleting"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag information of the endpoint. Length limit: 1–128 characters. Case sensitive. Key cannot start with volc: or sys: in any combination of uppercase or lowercase letters. Cannot start or end with a space. Letters, numbers, spaces (), underscores (_), periods (.), colons (:), slashes (/), equals (=), plus (+), minus (-), and @ are allowed.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Most recent operation time of the gateway endpoint",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "ID of the VPC to which the gateway endpoint belongs",
+      "type": "string"
+    },
+    "VpcPolicy": {
+      "description": "Access policy of the gateway endpoint. If not specified, the default policy is used. The default policy allows the gateway endpoint to access all bucket resources in the object storage service.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/EndpointId",
+    "/properties/ServiceName",
+    "/properties/CreationTime",
+    "/properties/UpdateTime",
+    "/properties/Status"
+  ],
+  "required": [
+    "ServiceId",
+    "VpcId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::PrivateLink::GatewayEndpoint"
+}
