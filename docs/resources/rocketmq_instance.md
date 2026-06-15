@@ -96,14 +96,17 @@ resource "volcenginecc_rocketmq_instance" "RocketMQInstanceDemo" {
 Optional:
 
 - `auto_renew` (Boolean) Whether the subscription instance is automatically renewed upon expiration. true: automatically renewed. false: not automatically renewed. Manual renewal is required after expiration; otherwise, the instance will be shut down.
+- `charge_type` (String) Billing type for the instance. Supported types include: PostPaid: pay-as-you-go; PrePaid: yearly/monthly subscription
+- `period` (Number) Purchase duration for subscription instances. When PeriodUnit is set to Monthly, the value range is 1–9. When PeriodUnit is set to Yearly, the value range is 1–3. Only required for subscription instances, that is, when ChargeType is set to PrePaid.
+- `period_unit` (String) Lifecycle unit for subscription-based instances, specifying whether to purchase by month or by year. Monthly: (default) monthly subscription Yearly: annual subscription
+
+Read-Only:
+
 - `charge_expire_time` (String) Expiration time for yearly/monthly subscription instances. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'. For pay-as-you-go instances, this field defaults to 1970-01-01T00:00:00Z.
 - `charge_start_time` (String) Billing start time for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.
 - `charge_status` (String) Instance billing status. Includes: Normal: normal Overdue: pay-as-you-go overdue Expired: subscription expired
-- `charge_type` (String) Billing type for the instance. Supported types include: PostPaid: pay-as-you-go; PrePaid: yearly/monthly subscription
 - `overdue_reclaim_time` (String) Estimated release time after the instance is suspended due to overdue payment. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.
 - `overdue_time` (String) Suspension time due to overdue payment for the instance. The time format is YYYY-MM-DD'T'HH:MM:SS'Z'.
-- `period` (Number) Purchase duration for subscription instances. When PeriodUnit is set to Monthly, the value range is 1–9. When PeriodUnit is set to Yearly, the value range is 1–3. Only required for subscription instances, that is, when ChargeType is set to PrePaid.
-- `period_unit` (String) Lifecycle unit for subscription-based instances, specifying whether to purchase by month or by year. Monthly: (default) monthly subscription Yearly: annual subscription
 
 
 <a id="nestedatt--product_info"></a>

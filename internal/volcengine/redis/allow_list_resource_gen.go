@@ -110,11 +110,7 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"allow_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Allowlist name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 1–128 characters",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedInstanceNum
 		// Cloud Control resource type schema:

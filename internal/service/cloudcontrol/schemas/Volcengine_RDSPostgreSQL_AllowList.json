@@ -64,7 +64,8 @@
       "permissions": [
         "rds_postgresql:CreateAllowList",
         "rds_postgresql:AssociateAllowList",
-        "rds_postgresql:DescribeAllowListDetail"
+        "rds_postgresql:DescribeAllowListDetail",
+        "rds_postgresql:UpgradeAllowListVersion"
       ]
     },
     "delete": {
@@ -89,7 +90,8 @@
         "rds_postgresql:ModifyAllowList",
         "rds_postgresql:AssociateAllowList",
         "rds_postgresql:DisassociateAllowList",
-        "rds_postgresql:DescribeAllowListDetail"
+        "rds_postgresql:DescribeAllowListDetail",
+        "rds_postgresql:UpgradeAllowListVersion"
       ]
     }
   },
@@ -152,6 +154,10 @@
       "description": "Query allowlist by IP address. Supports multiple IP addresses separated by commas (,). Note: If the allowlist contains any subset of the provided IP addresses, that allowlist will be returned.",
       "type": "string"
     },
+    "InstanceId": {
+      "description": "Instance ID. When UpgradeAllowListVersion is set to true, you must provide this field to specify the instance for upgrading the allowlist version.",
+      "type": "string"
+    },
     "ModifyMode": {
       "description": "Allowlist modification mode. Values: Cover (default): overwrite, use the value of the AllowList field to overwrite the original allowlist. Append: add, add the IP addresses in the AllowList field to the original allowlist. Delete: remove, remove the IP addresses in the AllowList field from the original allowlist. At least one IP address must remain. Note: If the allowlist to be modified is bound to a security group, or if you need to bind a security group when modifying the allowlist, ModifyMode can only be set to Cover.",
       "type": "string"
@@ -167,6 +173,10 @@
     },
     "UpdateSecurityGroup": {
       "description": "Whether to update the security group bound to the allowlist. Values: true: update; false: do not update. Default value.",
+      "type": "boolean"
+    },
+    "UpgradeAllowListVersion": {
+      "description": "Whether to upgrade the allowlist version. Values: true: upgrade; false: do not upgrade (default). You must also provide the InstanceId field.",
       "type": "boolean"
     },
     "UserAllowList": {
@@ -187,6 +197,8 @@
   "typeName": "Volcengine::RDSPostgreSQL::AllowList",
   "writeOnlyProperties": [
     "/properties/ModifyMode",
-    "/properties/UpdateSecurityGroup"
+    "/properties/UpdateSecurityGroup",
+    "/properties/UpgradeAllowListVersion",
+    "/properties/InstanceId"
   ]
 }

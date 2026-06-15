@@ -932,3 +932,43 @@ resource_schema "volcengine_gtm_rule" {
 resource_schema "volcengine_gtm_routing" {
   cloudcontrol_type_name = "Volcengine::GTM::Routing"
 }
+
+resource_schema "volcengine_transitrouter_transit_router_bandwidth_package" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::TransitRouterBandwidthPackage"
+}
+
+resource_schema "volcengine_transitrouter_direct_connect_gateway_attachment" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::DirectConnectGatewayAttachment"
+}
+
+resource_schema "volcengine_transitrouter_transit_router_route_table_association" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::TransitRouterRouteTableAssociation"
+}
+
+resource_schema "volcengine_mongodb_endpoint" {
+  cloudcontrol_type_name = "Volcengine::MongoDB::Endpoint"
+}
+
+resource_schema "volcengine_rdspostgresql_instance_ssl" {
+  cloudcontrol_type_name = "Volcengine::RDSPostgreSQL::InstanceSSL"
+}
+
+resource_schema "volcengine_storageebs_snapshot_policy" {
+  cloudcontrol_type_name = "Volcengine::StorageEBS::SnapshotPolicy"
+}
+
+resource_schema "volcengine_dns_backup" {
+  cloudcontrol_type_name = "Volcengine::DNS::Backup"
+}
+
+resource_schema "volcengine_iam_allowed_ip_address" {
+  cloudcontrol_type_name = "Volcengine::IAM::AllowedIpAddress"
+}
+
+resource_schema "volcengine_privatelink_gateway_endpoint" {
+  cloudcontrol_type_name = "Volcengine::PrivateLink::GatewayEndpoint"
+}
+
+resource_schema "volcengine_rdsmssql_backup" {
+  cloudcontrol_type_name = "Volcengine::RDSMsSQL::Backup"
+}

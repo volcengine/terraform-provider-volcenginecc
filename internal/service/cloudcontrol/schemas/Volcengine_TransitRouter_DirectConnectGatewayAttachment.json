@@ -1,0 +1,160 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TransitRouterId",
+    "/properties/DirectConnectGatewayId"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Tag",
+      "properties": {
+        "Key": {
+          "description": "Tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Direct connect gateway type network instance connection resource",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TransitRouterId",
+      "/properties/DirectConnectGatewayId",
+      "/properties/TransitRouterAttachmentId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ],
+    "required": [
+      "/properties/TransitRouterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:CreateTransitRouterDirectConnectGatewayAttachment",
+        "transitrouter:DescribeTransitRouterDirectConnectGatewayAttachments"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DeleteTransitRouterDirectConnectGatewayAttachment",
+        "transitrouter:DescribeTransitRouterDirectConnectGatewayAttachments"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterDirectConnectGatewayAttachments"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterDirectConnectGatewayAttachments"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transitrouter:ModifyTransitRouterDirectConnectGatewayAttachmentAttributes",
+        "transitrouter:DescribeTransitRouterDirectConnectGatewayAttachments",
+        "transitrouter:TagResources",
+        "transitrouter:UntagResources"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterId",
+    "/properties/TransitRouterAttachmentId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Account ID to which the network instance connection belongs",
+      "type": "string"
+    },
+    "AutoPublishRouteEnabled": {
+      "description": "Whether to automatically synchronize TR routes to the network instance route table",
+      "type": "boolean"
+    },
+    "Bandwidth": {
+      "description": "Maximum bandwidth of the network instance connection, in Gbps",
+      "type": "integer"
+    },
+    "CreationTime": {
+      "description": "Creation time of the network instance connection",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), Chinese period (。). Length can be 0–255 characters. If this parameter is not provided or no value is passed, the default is an empty string",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DirectConnectGatewayId": {
+      "description": "Direct connect gateway ID. You can call the DescribeDirectConnectGateways API to obtain the direct connect gateway ID",
+      "type": "string"
+    },
+    "Ipv6Enabled": {
+      "description": "Whether to enable IPv6",
+      "type": "boolean"
+    },
+    "Status": {
+      "description": "Status of the network instance connection. Creating means being created, Deleting means being deleted, Pending means being configured, Available means available",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag information of the network instance connection",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TransitRouterAttachmentId": {
+      "description": "Network instance connection ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterAttachmentName": {
+      "description": "Name of the network instance connection. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: period (.), underscore (_), and hyphen (-). Length can be 1–128 characters. If this parameter is not provided or no value is passed, the default is the network instance connection ID",
+      "type": "string"
+    },
+    "TransitRouterId": {
+      "description": "Transit router instance ID. You can call the DescribeTransitRouters API to obtain the transit router instance ID",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Most recent operation time of the network instance connection",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TransitRouterAttachmentId",
+    "/properties/CreationTime",
+    "/properties/UpdateTime",
+    "/properties/AccountId",
+    "/properties/AutoPublishRouteEnabled",
+    "/properties/Status",
+    "/properties/Bandwidth",
+    "/properties/Ipv6Enabled"
+  ],
+  "required": [
+    "TransitRouterId",
+    "DirectConnectGatewayId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TransitRouter::DirectConnectGatewayAttachment"
+}

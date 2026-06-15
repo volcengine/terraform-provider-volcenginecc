@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_storageebs_snapshot_policy.example "auto_snapshot_policy_id"

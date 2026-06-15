@@ -1143,5 +1143,55 @@
         "resource": "volcenginecc_gtm_routing",
         "identifier": ["GtmId"],
         "path": "./examples/resources/volcenginecc_gtm_routing/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_transit_router_bandwidth_package",
+        "identifier": ["TransitRouterBandwidthPackageId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_transit_router_bandwidth_package/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_direct_connect_gateway_attachment",
+        "identifier": ["TransitRouterId","TransitRouterAttachmentId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_direct_connect_gateway_attachment/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_transit_router_route_table_association",
+        "identifier": ["TransitRouterRouteTableId","TransitRouterAttachmentId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_transit_router_route_table_association/import.sh"
+    },
+    {
+        "resource": "volcenginecc_mongodb_endpoint",
+        "identifier": ["InstanceId","EndpointId"],
+        "path": "./examples/resources/volcenginecc_mongodb_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdspostgresql_instance_ssl",
+        "identifier": ["InstanceId"],
+        "path": "./examples/resources/volcenginecc_rdspostgresql_instance_ssl/import.sh"
+    },
+    {
+        "resource": "volcenginecc_storageebs_snapshot_policy",
+        "identifier": ["AutoSnapshotPolicyId"],
+        "path": "./examples/resources/volcenginecc_storageebs_snapshot_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_dns_backup",
+        "identifier": ["ZID","BackupID"],
+        "path": "./examples/resources/volcenginecc_dns_backup/import.sh"
+    },
+    {
+        "resource": "volcenginecc_iam_allowed_ip_address",
+        "identifier": ["UserId"],
+        "path": "./examples/resources/volcenginecc_iam_allowed_ip_address/import.sh"
+    },
+    {
+        "resource": "volcenginecc_privatelink_gateway_endpoint",
+        "identifier": ["EndpointId"],
+        "path": "./examples/resources/volcenginecc_privatelink_gateway_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rdsmssql_backup",
+        "identifier": ["InstanceId","BackupId"],
+        "path": "./examples/resources/volcenginecc_rdsmssql_backup/import.sh"
     }
 ]

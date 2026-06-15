@@ -1,0 +1,92 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/UserId"
+  ],
+  "definitions": {
+    "IPInfo": {
+      "description": "IP Allowlist",
+      "properties": {
+        "Description": {
+          "description": "Description",
+          "type": "string"
+        },
+        "IP": {
+          "description": "IP address",
+          "type": "string"
+        }
+      },
+      "required": [
+        "IP",
+        "Description"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "IP allowlist configuration",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:UpdateAllowedIPAddresses",
+        "iam:GetAllowedIPAddresses"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:UpdateAllowedIPAddresses",
+        "iam:GetAllowedIPAddresses"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetAllowedIPAddresses"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateAllowedIPAddresses",
+        "iam:GetAllowedIPAddresses"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/UserId"
+  ],
+  "properties": {
+    "EnableIPList": {
+      "description": "Enable IP allowlist",
+      "type": "boolean"
+    },
+    "IPList": {
+      "description": "IP allowlist list",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/IPInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Quota": {
+      "description": "IP allowlist quota for current identity",
+      "type": "integer"
+    },
+    "UserId": {
+      "description": "Sub-user ID",
+      "maxLength": 10,
+      "minLength": 10,
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/EnableIPList"
+  ],
+  "required": [
+    "IPList",
+    "UserId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::AllowedIpAddress"
+}

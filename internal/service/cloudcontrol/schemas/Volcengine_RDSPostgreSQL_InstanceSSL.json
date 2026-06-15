@@ -1,0 +1,97 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId"
+  ],
+  "description": "Instance SSL configuration.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_postgresql:ModifyDBInstanceSSL",
+        "rds_postgresql:DescribeDBInstanceSSL"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_postgresql:ModifyDBInstanceSSL",
+        "rds_postgresql:DescribeDBInstanceSSL"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_postgresql:DescribeDBInstanceSSL"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds_postgresql:ModifyDBInstanceSSL",
+        "rds_postgresql:DescribeDBInstanceSSL"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId"
+  ],
+  "properties": {
+    "Address": {
+      "description": "Protected address.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ForceEncryption": {
+      "description": "Is force encryption enabled? Value: true: Yes. false: No.",
+      "type": "boolean"
+    },
+    "InstanceId": {
+      "description": "Instance ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "IsValid": {
+      "description": "Is the SSL certificate valid? Value: true: Yes. false: No.",
+      "type": "boolean"
+    },
+    "ReloadSSLCertificate": {
+      "description": "If set to true, the SSL certificate validity period will be updated.",
+      "type": "boolean"
+    },
+    "SSLEnable": {
+      "description": "Is SSL functionality enabled? Value: true: Yes. false: No.",
+      "type": "boolean"
+    },
+    "SSLExpireTime": {
+      "description": "SSL certificate expiration time. Format: yyyy-MM-ddTHH:mm:ss (UTC).",
+      "type": "string"
+    },
+    "TLSVersion": {
+      "description": "Supported TLS versions.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Address",
+    "/properties/SSLEnable",
+    "/properties/IsValid",
+    "/properties/SSLExpireTime",
+    "/properties/TLSVersion"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSPostgreSQL::InstanceSSL",
+  "writeOnlyProperties": [
+    "/properties/ReloadSSLCertificate"
+  ]
+}

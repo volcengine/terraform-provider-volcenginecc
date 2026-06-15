@@ -1,0 +1,202 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/BackupMeta",
+    "/properties/BackupType"
+  ],
+  "definitions": {
+    "BackupDatabaseDetailObject": {
+      "description": "Backup details.",
+      "properties": {
+        "BackupDownloadLinkEIP": {
+          "description": "External network backup download link.",
+          "type": "string"
+        },
+        "BackupDownloadLinkInner": {
+          "description": "Internal network backup download link.",
+          "type": "string"
+        },
+        "BackupEndTime": {
+          "description": "Backup end time. Format: yyyy-MM-ddTHH:mm:ss.sZ (UTC time).",
+          "type": "string"
+        },
+        "BackupFileName": {
+          "description": "Backup file name.",
+          "type": "string"
+        },
+        "BackupFileSize": {
+          "description": "Backup file size (Bytes).",
+          "type": "integer"
+        },
+        "BackupStartTime": {
+          "description": "Backup start time. Format: yyyy-MM-ddTHH:mm:ss.sZ (UTC time).",
+          "type": "string"
+        },
+        "BackupType": {
+          "description": "Backup type. Values: Full (full backup), Diff (differential backup).",
+          "type": "string"
+        },
+        "DatabaseName": {
+          "description": "Database name.",
+          "type": "string"
+        },
+        "DownloadProgress": {
+          "description": "Backup file preparation progress (%).",
+          "type": "integer"
+        },
+        "DownloadStatus": {
+          "description": "Backup file preparation status. Values: Success (preparation completed), Failed (preparation failed), Running (preparing), NotDownload (not downloaded).",
+          "type": "string"
+        },
+        "LinkExpiredTime": {
+          "description": "Download link expiration time. Format: yyyy-MM-ddTHH:mm:sssZ (UTC time).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BackupMetaObject": {
+      "description": "Backup database information.",
+      "properties": {
+        "DBName": {
+          "description": "Backup database name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "DBName"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Backup list.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/BackupStartTime",
+      "/properties/BackupEndTime",
+      "/properties/BackupType",
+      "/properties/BackupId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds_mssql:CreateBackup",
+        "rds_mssql:DescribeBackupDetail"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds_mssql:DeleteBackup",
+        "rds_mssql:DescribeBackups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds_mssql:DescribeBackups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds_mssql:DescribeBackupDetail"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/BackupId"
+  ],
+  "properties": {
+    "BackupDatabaseDetail": {
+      "description": "Backup information.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/BackupDatabaseDetailObject"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BackupEndTime": {
+      "description": "Backup end time. Format: yyyy-MM-ddTHH:mm:sssZ (UTC time).",
+      "type": "string"
+    },
+    "BackupFileSize": {
+      "description": "Backup file size (Bytes).",
+      "type": "integer"
+    },
+    "BackupId": {
+      "description": "Backup ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "BackupMeta": {
+      "description": "Backup database information.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/BackupMetaObject"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BackupMethod": {
+      "description": "Backup method. Values: Logical (logical backup), Physical (physical backup), Snapshot (snapshot backup).",
+      "type": "string"
+    },
+    "BackupStartTime": {
+      "description": "Backup start time. Format: yyyy-MM-ddTHH:mm:sssZ (UTC time).",
+      "type": "string"
+    },
+    "BackupStatus": {
+      "description": "Backup status. Values: Success (successful), Failed (failed), Running (in progress).",
+      "semantic": "status",
+      "type": "string"
+    },
+    "BackupType": {
+      "description": "Backup type. Values: Full (full backup), Diff (incremental/differential backup), Log (log backup).",
+      "type": "string"
+    },
+    "CreateType": {
+      "description": "Creation type. Values: System (system), User (user).",
+      "type": "string"
+    },
+    "DownloadProgress": {
+      "description": "Backup file preparation progress (%).",
+      "type": "integer"
+    },
+    "DownloadStatus": {
+      "description": "Backup file preparation status. Values: Success (preparation completed), Failed (preparation failed), Running (preparing), NotDownload (not downloaded).",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BackupId",
+    "/properties/BackupStartTime",
+    "/properties/BackupEndTime",
+    "/properties/BackupMethod",
+    "/properties/BackupStatus",
+    "/properties/CreateType",
+    "/properties/BackupFileSize",
+    "/properties/DownloadProgress",
+    "/properties/DownloadStatus",
+    "/properties/BackupDatabaseDetail"
+  ],
+  "required": [
+    "InstanceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RDSMsSQL::Backup",
+  "writeOnlyProperties": [
+    "/properties/BackupMeta"
+  ]
+}

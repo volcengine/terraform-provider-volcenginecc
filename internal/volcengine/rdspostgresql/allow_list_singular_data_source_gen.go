@@ -179,6 +179,17 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Query allowlist by IP address. Supports multiple IP addresses separated by commas (,). Note: If the allowlist contains any subset of the provided IP addresses, that allowlist will be returned.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance ID. When UpgradeAllowListVersion is set to true, you must provide this field to specify the instance for upgrading the allowlist version.",
+		//	  "type": "string"
+		//	}
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Instance ID. When UpgradeAllowListVersion is set to true, you must provide this field to specify the instance for upgrading the allowlist version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifyMode
 		// Cloud Control resource type schema:
 		//
@@ -266,6 +277,17 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Whether to update the security group bound to the allowlist. Values: true: update; false: do not update. Default value.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UpgradeAllowListVersion
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to upgrade the allowlist version. Values: true: upgrade; false: do not upgrade (default). You must also provide the InstanceId field.",
+		//	  "type": "boolean"
+		//	}
+		"upgrade_allow_list_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to upgrade the allowlist version. Values: true: upgrade; false: do not upgrade (default). You must also provide the InstanceId field.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserAllowList
 		// Cloud Control resource type schema:
 		//
@@ -294,27 +316,28 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::RDSPostgreSQL::AllowList").WithTerraformTypeName("volcenginecc_rdspostgresql_allow_list")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allow_list":                "AllowList",
-		"allow_list_category":       "AllowListCategory",
-		"allow_list_desc":           "AllowListDesc",
-		"allow_list_id":             "AllowListId",
-		"allow_list_ip_num":         "AllowListIPNum",
-		"allow_list_name":           "AllowListName",
-		"allow_list_type":           "AllowListType",
-		"associated_instance_num":   "AssociatedInstanceNum",
-		"associated_instances":      "AssociatedInstances",
-		"bind_mode":                 "BindMode",
-		"instance_id":               "InstanceId",
-		"instance_name":             "InstanceName",
-		"ip_address":                "IPAddress",
-		"ip_list":                   "IpList",
-		"modify_mode":               "ModifyMode",
-		"security_group_bind_infos": "SecurityGroupBindInfos",
-		"security_group_id":         "SecurityGroupId",
-		"security_group_name":       "SecurityGroupName",
-		"update_security_group":     "UpdateSecurityGroup",
-		"user_allow_list":           "UserAllowList",
-		"vpc":                       "VPC",
+		"allow_list":                 "AllowList",
+		"allow_list_category":        "AllowListCategory",
+		"allow_list_desc":            "AllowListDesc",
+		"allow_list_id":              "AllowListId",
+		"allow_list_ip_num":          "AllowListIPNum",
+		"allow_list_name":            "AllowListName",
+		"allow_list_type":            "AllowListType",
+		"associated_instance_num":    "AssociatedInstanceNum",
+		"associated_instances":       "AssociatedInstances",
+		"bind_mode":                  "BindMode",
+		"instance_id":                "InstanceId",
+		"instance_name":              "InstanceName",
+		"ip_address":                 "IPAddress",
+		"ip_list":                    "IpList",
+		"modify_mode":                "ModifyMode",
+		"security_group_bind_infos":  "SecurityGroupBindInfos",
+		"security_group_id":          "SecurityGroupId",
+		"security_group_name":        "SecurityGroupName",
+		"update_security_group":      "UpdateSecurityGroup",
+		"upgrade_allow_list_version": "UpgradeAllowListVersion",
+		"user_allow_list":            "UserAllowList",
+		"vpc":                        "VPC",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
