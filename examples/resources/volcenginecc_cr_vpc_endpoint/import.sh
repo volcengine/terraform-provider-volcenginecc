@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cr_vpc_endpoint.example "registry"

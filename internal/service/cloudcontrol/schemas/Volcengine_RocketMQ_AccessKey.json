@@ -1,0 +1,140 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/Description"
+  ],
+  "definitions": {
+    "TopicPermission": {
+      "description": "Custom permission list for the key. If there are no custom permissions, displays as null",
+      "properties": {
+        "Permission": {
+          "description": "Permission type. AccessKey has permissions for this Topic. ALL: Publish and subscribe permissions. PUB: Publish permission. SUB: Subscribe permission. DENY: No publish or subscribe permissions",
+          "type": "string"
+        },
+        "TopicName": {
+          "description": "Topic name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "RocketMQ key",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId",
+      "/properties/AccessKey"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "RocketMQ:CreateAccessKey",
+        "RocketMQ:ModifyAccessKeyAuthority",
+        "RocketMQ:DescribeAccessKeyDetail",
+        "RocketMQ:DescribeAccessKeys"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "RocketMQ:DeleteAccessKey",
+        "RocketMQ:DescribeAccessKeys"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "RocketMQ:DescribeAccessKeys"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "RocketMQ:DescribeAccessKeyDetail",
+        "RocketMQ:DescribeAccessKeys"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "RocketMQ:ModifyAccessKeyAllAuthority",
+        "RocketMQ:ModifyAccessKeyAuthority",
+        "RocketMQ:DescribeAccessKeyDetail",
+        "RocketMQ:DescribeAccessKeys"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/AccessKey"
+  ],
+  "properties": {
+    "AccessKey": {
+      "description": "AccessKey ID for the RocketMQ key",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AclConfigJson": {
+      "description": "All ACL configuration information for the RocketMQ key",
+      "type": "string"
+    },
+    "Actived": {
+      "description": "Enable status for the RocketMQ key. - `true`: Enabled - `false`: Not enabled",
+      "type": "boolean"
+    },
+    "AllAuthority": {
+      "description": "Default permissions for the RocketMQ key. - `ALL`: Publish and subscribe permissions - `PUB`: Publish permission - `SUB`: Subscribe permission - `DENY`: No publish or subscribe permissions",
+      "enum": [
+        "ALL",
+        "PUB",
+        "SUB",
+        "DENY"
+      ],
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Creation time for the RocketMQ key. Time format: YYYY-MM-DD'T'HH:MM:SS'Z'",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description for the RocketMQ key, used to distinguish and manage keys effectively. Length limit: 0–128 characters",
+      "maxLength": 128,
+      "semantic": "description",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID",
+      "type": "string"
+    },
+    "SecretKey": {
+      "description": "RocketMQ key. Returned only after creation",
+      "type": "string"
+    },
+    "TopicPermissions": {
+      "description": "Custom permissions for the key. Sets the permissions this AccessKey has for a specific Topic. If there are no custom permissions, displays as null",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TopicPermission"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Actived",
+    "/properties/AclConfigJson",
+    "/properties/CreateTime",
+    "/properties/AccessKey",
+    "/properties/SecretKey"
+  ],
+  "required": [
+    "InstanceId",
+    "AllAuthority"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::RocketMQ::AccessKey"
+}

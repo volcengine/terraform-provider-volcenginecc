@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tos_bucket_mirror_back.example "bucket"

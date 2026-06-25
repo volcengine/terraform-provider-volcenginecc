@@ -1,0 +1,423 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Bucket"
+  ],
+  "definitions": {
+    "CommonSourceEndpoint": {
+      "description": "Configuration for primary and backup nodes of private origins.",
+      "properties": {
+        "Follower": {
+          "description": "Backup private origin node list.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EndpointCredentialProvider",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Primary": {
+          "description": "Origin address for requests. Supports up to 5 origin fetch addresses. Required when the origin is a private bucket.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EndpointCredentialProvider",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "CommonStaticCredential": {
+      "description": "Static key credentials.",
+      "properties": {
+        "AK": {
+          "description": "AccessKey ID of the origin bucket. Required when using AK/SK authentication.",
+          "type": "string"
+        },
+        "SK": {
+          "description": "SecretKey for the back-to-origin bucket. Required when using AK/SK authentication.",
+          "type": "string"
+        },
+        "SKEncryptType": {
+          "description": "Encryption method used for SecretKey. Values:\nEmpty: SecretKey is in plaintext. After receiving the SecretKey, the server will encrypt and store it.\nAES256: SecretKey has been encrypted using the AES256 algorithm on the server side. After receiving the SecretKey, the server will parse and encrypt it for storage.\nNote: When a back-to-origin rule is created for the first time, the SecretKey is encrypted with AES256. If you modify the back-to-origin rule without changing the SecretKey parameter, you must first decrypt the SecretKey and then re-encrypt it for storage. Therefore, when calling the PutBucketMirrorBack API to modify the back-to-origin rule and only changing other parameters (not the SecretKey), you can set SKEncryptType to AES256.",
+          "type": "string"
+        },
+        "StorageVendor": {
+          "description": "Origin service provider. Values: BOS: Baidu Cloud. S3: Other cloud providers using the S3 storage protocol.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Condition": {
+      "description": "Conditions that trigger the back-to-origin function.",
+      "properties": {
+        "AllowHost": {
+          "description": "Supports triggering origin fetch only for specified domains. The domain must be able to access the bucket; it is recommended to use a custom domain bound to the bucket. Limit: supports up to 30 domains.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "HttpCode": {
+          "description": "Error code that triggers origin fetch. When a download request returns this error code, origin fetch is triggered. Limit: currently only supports 404.",
+          "type": "integer"
+        },
+        "HttpMethod": {
+          "description": "Request types that trigger back-to-origin. Value description:\n[\"GET\",\"HEAD\"]: Both GetObject and HeadObject requests can trigger back-to-origin.\n[\"GET\"]: Only GetObject requests can trigger back-to-origin.\nDefault is [\"GET\"].",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "KeyPrefix": {
+          "description": "Object name prefix for matching origin fetch objects. Limit: supports up to 512 characters.",
+          "type": "string"
+        },
+        "KeySuffix": {
+          "description": "Object name suffix for matching origin fetch objects. Limit: supports up to 512 characters.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CredentialProvider": {
+      "description": "Private back-to-origin authentication method. Required when the origin server is a private bucket.",
+      "properties": {
+        "Region": {
+          "description": "Region where the origin fetch bucket is located. Required when using AK/SK authentication.",
+          "type": "string"
+        },
+        "Role": {
+          "description": "Name of AssumeRole. Only when fetching from a private TOS bucket can AssumeRole be used for authentication. Role authentication and AK/SK authentication are mutually exclusive and cannot be set simultaneously.",
+          "type": "string"
+        },
+        "StaticCredential": {
+          "$ref": "#/definitions/CommonStaticCredential",
+          "description": "Authenticate using AK/SK.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointCredentialProvider": {
+      "description": "Single private origin server node and its access credentials.",
+      "properties": {
+        "BucketName": {
+          "description": "Name of the origin fetch bucket. Required when the origin is a private bucket.",
+          "type": "string"
+        },
+        "CredentialProvider": {
+          "$ref": "#/definitions/CredentialProvider",
+          "description": "Private back-to-origin authentication method. Required when the origin server is a private bucket.",
+          "type": "object"
+        },
+        "Endpoint": {
+          "description": "Access domain name of the origin service provider, excluding bucket name, maximum length 255. Required for private buckets.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "FetchHeaderToMetaDataRule": {
+      "description": "Mapping rules from origin response headers to object metadata.",
+      "properties": {
+        "MetaDataSuffix": {
+          "description": "Suffix appended when writing object metadata.",
+          "type": "string"
+        },
+        "SourceHeader": {
+          "description": "Origin response header name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MirrorBackRule": {
+      "description": "Single origin fetch rule.",
+      "properties": {
+        "Condition": {
+          "$ref": "#/definitions/Condition",
+          "description": "Conditions that trigger the back-to-origin function.",
+          "type": "object"
+        },
+        "ID": {
+          "description": "Rule ID. The unique identifier for the back-to-origin rule configured on the current bucket. You can set this yourself to distinguish between multiple rules. Restrictions:\nCharacters supported: letters, numbers, - and _.\nMaximum length: 32 characters.",
+          "type": "string"
+        },
+        "Redirect": {
+          "$ref": "#/definitions/Redirect",
+          "description": "Back-to-origin redirect configuration.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "MirrorHeader": {
+      "description": "Specify the headers to include when mirroring back to origin.",
+      "properties": {
+        "Pass": {
+          "description": "Pass the specified headers to the origin server. Limit: up to 64.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "PassAll": {
+          "description": "Whether to forward all HTTP headers to the origin. Values: true: forwards all HTTP headers to the origin. false: does not forward all HTTP headers to the origin. The following HTTP header types are not supported for forwarding: Host, Content-Length, Date, Authorization.",
+          "type": "boolean"
+        },
+        "Remove": {
+          "description": "Prohibit forwarding specified headers to the origin. Limit: maximum 64.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Set": {
+          "description": "List of request headers to add or overwrite during origin fetch.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/MirrorHeaderKeyValue"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "MirrorHeaderKeyValue": {
+      "description": "Single request header key-value pair.",
+      "properties": {
+        "Key": {
+          "description": "Request header name.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Request header value.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PrivateSource": {
+      "description": "Back-to-origin address configuration when the origin server is a private bucket.",
+      "properties": {
+        "SourceEndpoint": {
+          "$ref": "#/definitions/CommonSourceEndpoint",
+          "description": "Back-to-origin address configuration when the origin server is a private bucket.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "PublicSource": {
+      "description": "Back-to-origin address configuration when the origin server is a public bucket.",
+      "properties": {
+        "FixedEndpoint": {
+          "description": "Whether to always use the configured origin address.",
+          "type": "boolean"
+        },
+        "SourceEndpoint": {
+          "$ref": "#/definitions/SourceEndpoint",
+          "description": "Publicly accessible origin address.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Redirect": {
+      "description": "Action to execute after matching this rule.",
+      "properties": {
+        "FetchHeaderToMetaDataRules": {
+          "description": "List of rules for writing origin response headers to object metadata.",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/FetchHeaderToMetaDataRule"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "FetchSourceOnRedirect": {
+          "description": "Whether to fetch data from the configured origin after redirection. Value description: true: Fetch data from the configured origin after redirection. false: Do not fetch data from the configured origin after redirection.",
+          "type": "boolean"
+        },
+        "FetchSourceOnRedirectWithQuery": {
+          "description": "Whether to include request parameters when fetching data after redirection. If not configured, inherits PassQuery settings: true: includes request parameters. false: does not include request parameters.",
+          "type": "boolean"
+        },
+        "FollowRedirect": {
+          "description": "If the result of mirror origin fetch is 3xx, whether to continue redirecting to the specified Location to fetch data. Value description: true: TOS will continue to request the address corresponding to Location. false: TOS will return 302.",
+          "type": "boolean"
+        },
+        "MirrorHeader": {
+          "$ref": "#/definitions/MirrorHeader",
+          "description": "Specify the headers to include when mirroring back to origin.",
+          "type": "object"
+        },
+        "PassHeaderFromSource": {
+          "description": "List of origin response headers allowed to be passed through directly.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "PassQuery": {
+          "description": "Whether to include request parameters when performing redirect or mirror back-to-origin rules. Value description:\ntrue: Include request parameters.\nfalse: Do not include request parameters.",
+          "type": "boolean"
+        },
+        "PassStatusCodeFromSource": {
+          "description": "List of origin response status codes allowed to be passed through directly.",
+          "insertionOrder": false,
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "PrivateSource": {
+          "$ref": "#/definitions/PrivateSource",
+          "description": "Back-to-origin address configuration when the origin server is a private bucket.",
+          "type": "object"
+        },
+        "PublicSource": {
+          "$ref": "#/definitions/PublicSource",
+          "description": "Back-to-origin address configuration when the origin server is a public bucket.",
+          "type": "object"
+        },
+        "RedirectType": {
+          "description": "Specify redirect type. Value range: Mirror: Mirror origin fetch. Async: Redirect origin fetch.",
+          "type": "string"
+        },
+        "Transform": {
+          "$ref": "#/definitions/Transform",
+          "description": "Define transformations for the object name when requesting the origin server.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ReplaceKeyPrefix": {
+      "description": "Object name prefix to be replaced when requesting the origin.",
+      "properties": {
+        "KeyPrefix": {
+          "description": "Object name prefix to be replaced when requesting the origin. Limit: Supports up to 512 characters.",
+          "type": "string"
+        },
+        "ReplaceWith": {
+          "description": "Value of the object name prefix after replacement when requesting the origin. Limit: Supports up to 512 characters.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SourceEndpoint": {
+      "description": "Primary and secondary public origin server address configuration.",
+      "properties": {
+        "Follower": {
+          "description": "Origin address. Limit: Maximum length 255, supports up to 5 origin fetch addresses. When all origin fetches fail in Primary, an origin is selected from this configuration.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Primary": {
+          "description": "Origin address. Limit: Maximum length 255, supports up to 5 origin fetch addresses.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "Transform": {
+      "description": "Define transformations for the object name when requesting the origin server.",
+      "properties": {
+        "ReplaceKeyPrefix": {
+          "$ref": "#/definitions/ReplaceKeyPrefix",
+          "description": "Object name prefix to be replaced when requesting the origin.",
+          "type": "object"
+        },
+        "WithKeyPrefix": {
+          "description": "Prefix added before the object name when requesting the origin server. Limit: up to 512 characters.",
+          "type": "string"
+        },
+        "WithKeySuffix": {
+          "description": "Prefix added before the object name when requesting the origin server. Limit: up to 512 characters.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Configure origin fetch rules for the specified TOS bucket. When an object request meets the specified conditions, TOS can fetch the object from a public or private origin according to the rules.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tos:PutBucketMirrorBack",
+        "tos:GetBucketMirrorBack"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tos:DeleteBucketMirrorBack",
+        "tos:GetBucketMirrorBack"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tos:GetBucketMirrorBack"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tos:PutBucketMirrorBack",
+        "tos:GetBucketMirrorBack"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Bucket"
+  ],
+  "properties": {
+    "Bucket": {
+      "description": "Bucket name requiring origin fetch rule configuration.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Rules": {
+      "description": "Array of origin fetch policy rules.",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/MirrorBackRule"
+      },
+      "type": "array",
+      "uniqueItems": false
+    }
+  },
+  "required": [
+    "Bucket"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TOS::BucketMirrorBack"
+}

@@ -1193,5 +1193,60 @@
         "resource": "volcenginecc_rdsmssql_backup",
         "identifier": ["InstanceId","BackupId"],
         "path": "./examples/resources/volcenginecc_rdsmssql_backup/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cr_vpc_endpoint",
+        "identifier": ["Registry"],
+        "path": "./examples/resources/volcenginecc_cr_vpc_endpoint/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_mirror_back",
+        "identifier": ["Bucket"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_mirror_back/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_rename",
+        "identifier": ["Bucket"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_rename/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_etl",
+        "identifier": ["TaskID"],
+        "path": "./examples/resources/volcenginecc_tls_etl/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_host",
+        "identifier": ["HostGroupID","IP"],
+        "path": "./examples/resources/volcenginecc_tls_host/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_host_group",
+        "identifier": ["HostGroupID"],
+        "path": "./examples/resources/volcenginecc_tls_host_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_kafka_group",
+        "identifier": ["InstanceId","GroupId"],
+        "path": "./examples/resources/volcenginecc_kafka_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_dns_backup_schedule",
+        "identifier": ["ZID"],
+        "path": "./examples/resources/volcenginecc_dns_backup_schedule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_rocketmq_access_key",
+        "identifier": ["InstanceId","AccessKey"],
+        "path": "./examples/resources/volcenginecc_rocketmq_access_key/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudmonitor_event_rule",
+        "identifier": ["RuleId"],
+        "path": "./examples/resources/volcenginecc_cloudmonitor_event_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_gtm_policy",
+        "identifier": ["GtmId","PolicyType"],
+        "path": "./examples/resources/volcenginecc_gtm_policy/import.sh"
     }
 ]

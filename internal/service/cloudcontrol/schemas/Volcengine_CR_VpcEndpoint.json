@@ -1,0 +1,103 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Registry"
+  ],
+  "definitions": {
+    "Vpc": {
+      "properties": {
+        "AccountId": {
+          "description": "Primary account ID for the VPC",
+          "format": "int64",
+          "type": "integer"
+        },
+        "CreateTime": {
+          "description": "Creation time",
+          "type": "string"
+        },
+        "Ip": {
+          "description": "IP address of the image repository within the VPC",
+          "type": "string"
+        },
+        "Region": {
+          "description": "VPC region",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Access endpoint status: Enabling: in progress. Enabled: enabled. Disabling: in progress. Failed: failed.",
+          "type": "string"
+        },
+        "SubnetId": {
+          "description": "Subnet ID",
+          "type": "string"
+        },
+        "VpcId": {
+          "description": "VPC ID。",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "VPC access endpoint",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cr:UpdateVpcEndpoint",
+        "cr:GetVpcEndpoint"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cr:UpdateVpcEndpoint",
+        "cr:GetVpcEndpoint"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cr:GetVpcEndpoint"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cr:UpdateVpcEndpoint",
+        "cr:GetVpcEndpoint"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Registry"
+  ],
+  "properties": {
+    "Registry": {
+      "description": "Image repository instance name",
+      "maxLength": 30,
+      "minLength": 3,
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Vpcs": {
+      "description": "Specify which VPCs can access this Standard Edition image repository instance",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Vpc"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Vpcs/*/CreateTime",
+    "/properties/Vpcs/*/Ip",
+    "/properties/Vpcs/*/Region",
+    "/properties/Vpcs/*/Status"
+  ],
+  "required": [
+    "Registry",
+    "Vpcs"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CR::VpcEndpoint"
+}

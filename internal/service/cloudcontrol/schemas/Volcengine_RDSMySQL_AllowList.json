@@ -68,7 +68,8 @@
     "create": {
       "permissions": [
         "rds_mysql:CreateAllowList",
-        "rds_mysql:DescribeAllowListDetail"
+        "rds_mysql:DescribeAllowListDetail",
+        "rds_mysql:AssociateAllowList"
       ]
     },
     "delete": {
@@ -90,7 +91,9 @@
     "update": {
       "permissions": [
         "rds_mysql:ModifyAllowList",
-        "rds_mysql:DescribeAllowListDetail"
+        "rds_mysql:DescribeAllowListDetail",
+        "rds_mysql:AssociateAllowList",
+        "rds_mysql:DisassociateAllowList"
       ]
     }
   },
@@ -208,8 +211,12 @@
   "readOnlyProperties": [
     "/properties/AllowListIPNum",
     "/properties/AllowListId",
-    "/properties/AssociatedInstances",
-    "/properties/IpList"
+    "/properties/IpList",
+    "/properties/AssociatedInstances/*/InstanceName",
+    "/properties/AssociatedInstances/*/InstanceStatus",
+    "/properties/AssociatedInstances/*/IsLatest",
+    "/properties/AssociatedInstances/*/VPC",
+    "/properties/SecurityGroupBindInfos/*/IpList"
   ],
   "tagging": {
     "taggable": false

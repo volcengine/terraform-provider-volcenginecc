@@ -1029,6 +1029,113 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ObjectLockConfiguration
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Bucket object lock (WORM retention policy) configuration. After configuring the bucket retention policy, if no object retention time is specified when uploading an object, the newly uploaded object will inherit the bucket retention time",
+		//	  "properties": {
+		//	    "ObjectLockEnabled": {
+		//	      "description": "Enable retention policy Only Enabled is supported, which means the retention policy is enabled",
+		//	      "type": "string"
+		//	    },
+		//	    "Rule": {
+		//	      "description": "Bucket retention policy rules",
+		//	      "properties": {
+		//	        "DefaultRetention": {
+		//	          "description": "Default bucket retention policy",
+		//	          "properties": {
+		//	            "Days": {
+		//	              "description": "Object lock days Objects cannot be deleted or overwritten during the specified number of days. Measured in days",
+		//	              "format": "int64",
+		//	              "type": "integer"
+		//	            },
+		//	            "Mode": {
+		//	              "description": "Retention policy mode Only COMPLIANCE is supported, which means compliance mode. In this mode, no user can delete or overwrite locked objects during the retention period",
+		//	              "type": "string"
+		//	            },
+		//	            "Years": {
+		//	              "description": "Object lock years Objects cannot be deleted or overwritten during the specified number of years. Measured in years, with one year equal to 365 days",
+		//	              "format": "int64",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"object_lock_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ObjectLockEnabled
+				"object_lock_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Enable retention policy Only Enabled is supported, which means the retention policy is enabled",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Rule
+				"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultRetention
+						"default_retention": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Days
+								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Object lock days Objects cannot be deleted or overwritten during the specified number of days. Measured in days",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Mode
+								"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Retention policy mode Only COMPLIANCE is supported, which means compliance mode. In this mode, no user can delete or overwrite locked objects during the retention period",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Years
+								"years": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Object lock years Objects cannot be deleted or overwritten during the specified number of years. Measured in years, with one year equal to 365 days",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Default bucket retention policy",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Bucket retention policy rules",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Bucket object lock (WORM retention policy) configuration. After configuring the bucket retention policy, if no object retention time is specified when uploading an object, the newly uploaded object will inherit the bucket retention time",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// Cloud Control resource type schema:
 		//
@@ -1190,6 +1297,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"date":                               "Date",
 		"days":                               "Days",
 		"days_after_initiation":              "DaysAfterInitiation",
+		"default_retention":                  "DefaultRetention",
 		"display_name":                       "DisplayName",
 		"enable_version_status":              "EnableVersionStatus",
 		"expiration":                         "Expiration",
@@ -1210,11 +1318,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"lifecycle_config":                   "Lifecycle",
 		"lifecycle_rule_id":                  "LifecycleRuleId",
 		"location":                           "Location",
+		"mode":                               "Mode",
 		"name":                               "Name",
 		"no_current_version_expiration":      "NoCurrentVersionExpiration",
 		"non_current_date":                   "NonCurrentDate",
 		"non_current_days":                   "NonCurrentDays",
 		"non_current_version_transitions":    "NonCurrentVersionTransitions",
+		"object_lock_configuration":          "ObjectLockConfiguration",
+		"object_lock_enabled":                "ObjectLockEnabled",
 		"object_size_greater_than":           "ObjectSizeGreaterThan",
 		"object_size_less_than":              "ObjectSizeLessThan",
 		"owner":                              "Owner",
@@ -1223,12 +1334,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"policy":                             "Policy",
 		"prefix":                             "Prefix",
 		"project_name":                       "ProjectName",
+		"rule":                               "Rule",
 		"status":                             "Status",
 		"storage_class":                      "StorageClass",
 		"tags":                               "Tags",
 		"transitions":                        "Transitions",
 		"type":                               "Type",
 		"value":                              "Value",
+		"years":                              "Years",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

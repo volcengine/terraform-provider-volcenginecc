@@ -185,7 +185,6 @@ resource_schema "volcengine_redis_instance" {
   cloudcontrol_type_name = "Volcengine::Redis::Instance"
 }
 
-
 resource_schema "volcengine_clb_listener" {
   cloudcontrol_type_name = "Volcengine::CLB::Listener"
 }
@@ -971,4 +970,48 @@ resource_schema "volcengine_privatelink_gateway_endpoint" {
 
 resource_schema "volcengine_rdsmssql_backup" {
   cloudcontrol_type_name = "Volcengine::RDSMsSQL::Backup"
+}
+
+resource_schema "volcengine_cr_vpc_endpoint" {
+  cloudcontrol_type_name = "Volcengine::CR::VpcEndpoint"
+}
+
+resource_schema "volcengine_tos_bucket_mirror_back" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketMirrorBack"
+}
+
+resource_schema "volcengine_tos_bucket_rename" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketRename"
+}
+
+resource_schema "volcengine_tls_etl" {
+  cloudcontrol_type_name = "Volcengine::TLS::Etl"
+}
+
+resource_schema "volcengine_tls_host" {
+  cloudcontrol_type_name = "Volcengine::TLS::Host"
+}
+
+resource_schema "volcengine_tls_host_group" {
+  cloudcontrol_type_name = "Volcengine::TLS::HostGroup"
+}
+
+resource_schema "volcengine_kafka_group" {
+  cloudcontrol_type_name = "Volcengine::Kafka::Group"
+}
+
+resource_schema "volcengine_dns_backup_schedule" {
+  cloudcontrol_type_name = "Volcengine::DNS::BackupSchedule"
+}
+
+resource_schema "volcengine_rocketmq_access_key" {
+  cloudcontrol_type_name = "Volcengine::RocketMQ::AccessKey"
+}
+
+resource_schema "volcengine_cloudmonitor_event_rule" {
+  cloudcontrol_type_name = "Volcengine::CloudMonitor::EventRule"
+}
+
+resource_schema "volcengine_gtm_policy" {
+  cloudcontrol_type_name = "Volcengine::GTM::Policy"
 }

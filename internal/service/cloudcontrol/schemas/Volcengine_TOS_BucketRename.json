@@ -1,0 +1,52 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Bucket"
+  ],
+  "description": "Bucket RenameObject feature configuration. When enabled, you can call the RenameObject API to rename objects; this feature is mutually exclusive with versioning",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tos:PutBucketRename",
+        "tos:GetBucketRename"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tos:DeleteBucketRename",
+        "tos:GetBucketRename"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tos:GetBucketRename"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Bucket"
+  ],
+  "properties": {
+    "Bucket": {
+      "description": "Bucket name",
+      "maxLength": 63,
+      "minLength": 3,
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RenameEnable": {
+      "description": "Whether to enable RenameObject feature. true means enabled",
+      "type": "boolean"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RenameEnable"
+  ],
+  "required": [
+    "Bucket"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TOS::BucketRename"
+}

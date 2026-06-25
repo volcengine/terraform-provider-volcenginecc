@@ -193,31 +193,20 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 					// Property: InstanceId
 					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Instance ID bound to the current allowlist.",
+						Optional:    true,
 						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceName
-					"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Instance name bound to the current allowlist.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: InstanceStatus
-					"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Instance status.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: IsLatest
-					"is_latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Has the latest allowlist been synchronized? Values: true: Yes. false: No. Note: When modifying the allowlist, if the instance is not running, changes to the allowlist will not be immediately synchronized to the instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: VPC
-					"vpc": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Private network ID of the instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Instance information bound to the current allowlist.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -355,15 +344,6 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: IpList
-					"ip_list": schema.SetAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Security group IP address list.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-							setplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 					// Property: SecurityGroupId
 					"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Security group ID.",
@@ -510,8 +490,12 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/AllowListIPNum",
 		"/properties/AllowListId",
-		"/properties/AssociatedInstances",
 		"/properties/IpList",
+		"/properties/AssociatedInstances/*/InstanceName",
+		"/properties/AssociatedInstances/*/InstanceStatus",
+		"/properties/AssociatedInstances/*/IsLatest",
+		"/properties/AssociatedInstances/*/VPC",
+		"/properties/SecurityGroupBindInfos/*/IpList",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

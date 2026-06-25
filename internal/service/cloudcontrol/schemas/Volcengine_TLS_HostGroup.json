@@ -1,0 +1,672 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/IamProjectName"
+  ],
+  "definitions": {
+    "Advanced": {
+      "properties": {
+        "CloseEOF": {
+          "description": "After reading to the end of the log file, whether to release the file handle. Default is false.",
+          "type": "boolean"
+        },
+        "CloseInactive": {
+          "description": "Wait time before releasing log file handles. If no new logs are written to a log file for the specified duration, the handle for that log file is released. Unit: seconds. Range: 1–300 seconds. Default: 60 seconds.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "CloseRemoved": {
+          "description": "Whether to release the handle of the log file after it is removed. Default is false.",
+          "type": "boolean"
+        },
+        "CloseRenamed": {
+          "description": "Whether to release the handle of the log file after it is renamed. Default is false.",
+          "type": "boolean"
+        },
+        "CloseTimeout": {
+          "description": "Maximum duration for LogCollector to monitor log files, in seconds. The default is 0 seconds, meaning LogCollector does not limit the monitoring duration. Timing starts when LogCollector begins monitoring the log file. After the specified duration is exceeded, regardless of whether the log file has been fully read, LogCollector immediately releases the file handle and stops monitoring.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "NoLineTerminatorEOFMaxTime": {
+          "description": "Maximum wait time when LogCollector does not read a line break. Unit: seconds. Default: 5s. LogCollector starts timing when it begins reading log file content. If no line break is read within the specified time, it will send the buffered logs. If the file write interval is large, a complete log entry may be split into two parts and written separately. Adjust this parameter based on your log write interval.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ContainerRule": {
+      "properties": {
+        "ContainerNameRegex": {
+          "description": "Container name to collect. If no container name is specified, all containers in the machine group are collected. Supports regular expressions. For example, setting the container name to ^(container-test)$ collects all containers named container-test.",
+          "type": "string"
+        },
+        "EnvTag": {
+          "description": "Whether to add environment variables as log tags to the raw log data. When enabled, Log Service adds container environment variable fields to logs. Setting multiple key-value pairs adds multiple fields. For example, set Key to source and Value to data_source. If the container has the environment variable source=DC, Log Service adds the field __tag__data_source__: DC to the log.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ExcludeContainerEnvRegex": {
+          "description": "Container environment variable denylist/blocklist specifies containers to exclude from collection. If the denylist/blocklist is not enabled, all containers are collected. If enabled, Key is required and Value is optional. If Value is empty, all containers with the specified Key in their environment variables are excluded. If Value is not empty, only containers matching the key-value pair are excluded—that is, containers with the specified Key and a Value matching the given pattern. Value supports regex matching. For example, set Key to module and Value to ^(tcp|udp)$ to exclude containers with module:tcp or module:udp in their environment variables. Multiple key-value pairs use logical OR: any container matching any pair is excluded from collection. When the denylist/blocklist is enabled, Keys cannot be duplicated.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ExcludeContainerLabelRegex": {
+          "description": "The container Label denylist specifies which containers to exclude from collection. If not enabled, all containers are collected. If the container Label denylist is enabled, Key is required and Value is optional. If Value is empty, all containers with the specified Key in the container Label are excluded. If Value is not empty, only containers matching the Key-Value pair are excluded, meaning only containers with the specified Key and a Value matching the pattern are excluded. Value supports regex matching. For example, set Key to app and Value to ^(test1|test2)$ to exclude containers with app:test1 or app:test2 in the container Label. The logical relationship between multiple Key-Value pairs is OR, meaning any container Label matching any pair will be excluded from collection. When enabling the container Label denylist, Keys must not be duplicated.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "IncludeContainerEnvRegex": {
+          "description": "The container environment variable allowlist specifies which containers to collect by using environment variables as criteria. If the allowlist is not enabled, all containers are collected. When the container environment variable allowlist is enabled, you must enter key-value pairs. Key is required; Value is optional. If Value is empty: collect all containers that contain the Key in their environment variables. If Value is not empty: only collect containers where the Key exists and its value matches Value. Value supports regex matching. For example, set Key to module and Value to ^(tcp|udp)$ to collect only containers with module:tcp or module:udp in their environment variables. Multiple key-value pairs use logical OR; any container environment variable matching any key-value pair will be included in the collection scope. When the container environment variable allowlist is enabled, Keys must not be duplicated.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "IncludeContainerLabelRegex": {
+          "description": "The container Label allowlist specifies which containers to collect based on container Labels. If the allowlist is not enabled, all containers are collected. When the container Label allowlist is enabled, you must enter key-value pairs. Key is required; Value is optional. If Value is empty, all containers with the specified Key in their container Label are collected. If Value is not empty, only containers with the specified Key and a Value matching the Value field are collected. Value supports regular expressions. For example, set Key to app and Value to ^(test1|test2)$ to collect only containers with app:test1 or app:test2 in their container Label. The logical relationship between multiple key-value pairs is OR; any container Label matching any key-value pair will be included in the collection scope. When the container Label allowlist is enabled, Keys must not be duplicated.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "KubernetesRule": {
+          "$ref": "#/definitions/KubernetesRule",
+          "description": "Kubernetes container collection rules.",
+          "type": "object"
+        },
+        "Stream": {
+          "description": "Collection information. stdout: Container standard output (stdout). stderr: Container standard error (stderr). all: Both container standard output (stdout) and standard error (stderr).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ExcludePath": {
+      "description": "Denylist for data collection",
+      "properties": {
+        "Type": {
+          "description": "Collection path type. File: file name. Path: directory.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Collection path. Must be specified as an absolute path. When Type is Path, Value indicates a directory. When Type is File, Value indicates a file name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ExtractRule": {
+      "description": "Extraction rules",
+      "properties": {
+        "BeginRegex": {
+          "description": "The regex pattern required to match the first line of the log. This is valid only when LogType is multiline_log or fullregex_log. The pattern must be a valid regular expression.",
+          "type": "string"
+        },
+        "Delimiter": {
+          "description": "Log delimiter. Valid only when LogType is delimiter_log.",
+          "type": "string"
+        },
+        "EnableNanosecond": {
+          "description": "Enable nanosecond precision time. When enabled, log time parsing will report time with nanosecond precision. true: Enable nanosecond precision time. false: Disable nanosecond precision time.",
+          "type": "boolean"
+        },
+        "FilterKeyRegex": {
+          "description": "Filter rule list.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/FilterKeyRegex"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Keys": {
+          "description": "List of log field names (Keys).",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "LogRegex": {
+          "description": "The entire log entry must match the regular expression. This is only valid when the log type is fullregex_log. The regular expression must be valid.",
+          "type": "string"
+        },
+        "LogTemplate": {
+          "$ref": "#/definitions/LogTemplate",
+          "description": "Automatically extract log fields based on the specified log template.",
+          "type": "object"
+        },
+        "Quote": {
+          "description": "Quotation mark. Content enclosed by quotation marks is parsed as a complete field and not separated. Only valid when LogType is delimiter_log.",
+          "type": "string"
+        },
+        "TimeExtractRegex": {
+          "description": "Regular expression for extracting time, used to extract the time value from the TimeKey field and parse it as the collection time.",
+          "type": "string"
+        },
+        "TimeFormat": {
+          "description": "Parsing format for the time field. If a specified time field in the log is used as the log timestamp, you must provide TimeKey and TimeFormat.",
+          "type": "string"
+        },
+        "TimeKey": {
+          "description": "Field name for the log time field. If a specified time field in the log is used as the log timestamp, you must provide TimeKey and TimeFormat.",
+          "type": "string"
+        },
+        "TimeSample": {
+          "description": "Sample time. Used to verify whether the specified time parsing format is correct.",
+          "type": "string"
+        },
+        "TimeZone": {
+          "description": "Time zone. Supports machine time zone (default) and custom time zone. Custom time zone supports GMT and UTC.",
+          "type": "string"
+        },
+        "UnMatchLogKey": {
+          "description": "Key name for logs that failed to parse when uploading",
+          "type": "string"
+        },
+        "UnMatchUpLoadSwitch": {
+          "description": "Upload logs that failed to parse. UnMatchUpLoadSwitch=true and UnMatchLogKey must be used together. true: Upload logs that failed to parse. false: Do not upload logs that failed to parse.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "FilterKeyRegex": {
+      "properties": {
+        "Key": {
+          "description": "Name of the filter field.",
+          "type": "string"
+        },
+        "Regex": {
+          "description": "The log content of the filter field must match the specified regular expression.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "KeyValPair": {
+      "properties": {
+        "Key": {
+          "description": "Key.",
+          "type": "string"
+        },
+        "Val": {
+          "description": "Value.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "KubernetesRule": {
+      "properties": {
+        "AnnotationTag": {
+          "description": "Whether to add Kubernetes Annotations as log tags to the raw log data. When enabled, the log service adds Kubernetes Pod Annotation fields to the logs. Setting multiple key-value pairs adds multiple fields. For example, set Key to sink and Value to data_sink. If the Pod contains the Annotation sink=ck, the log will include the field __tag__data_sink__: ck.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "EnableAllLabelTag": {
+          "description": "Whether to add all Kubernetes Labels as log tags to the raw log data. When enabled, the log service adds fields for all Labels in the Kubernetes Pod to the log. For example, if the Pod has Label source=DC and destination=CS, the log will include fields __tag__source__: DC and __tag__destination__: CS.",
+          "type": "boolean"
+        },
+        "ExcludePodAnnotationRegex": {
+          "description": "Pod Annotation denylist is used to specify containers that are not collected. If you need to set a Pod Annotation denylist, Key is required and Value is optional. If Value is empty, all containers under Pods whose Pod Annotation contains the Key will be excluded. If Value is not empty, only containers under Pods whose Pod Annotation contains the Key and whose value matches the Value will be excluded. By default, Value uses string matching, meaning only when Value and the Pod Annotation value are exactly the same will it match. If the value starts with ^ and ends with $, it is treated as a regular expression match. For example, set Key to app and Value to ^(test1|test2)$ to match containers under Pods whose Pod Annotation contains app:test1 or app:test2. Note: The logical relationship between multiple Key-Value pairs is OR, meaning as long as the Pod Annotation matches any pair, it will be included in the collection scope. When enabling the Pod Annotation denylist, Keys must not be duplicated. For fuzzy regular expression matching, you must add .*. For example, ^(http.*)$ matches strings that start with http",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ExcludePodLabelRegex": {
+          "description": "Specify containers to exclude from collection using the Pod Label denylist. If not enabled, all containers are collected. To set a Pod Label denylist, Key is required and Value is optional. If Value is empty, all containers with the specified Key in the Pod Label are excluded from collection. If Value is not empty, only containers with the specified Key and a Value matching the pattern are excluded. Value supports regex matching. For example, set Key to module and Value to ^(tcp|udp)$ to exclude containers with module:tcp or module:udp in the Pod Label. Note: The logical relationship between multiple Key-Value pairs is OR, meaning any Pod Label matching any pair will be excluded from collection. When enabling the Pod Label denylist, Keys must not be duplicated. For fuzzy regex matching, you must add .*. For example, ^(http.*)$ matches any string starting with http.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "IncludePodAnnotationRegex": {
+          "description": "Pod Annotation Allowlist specifies which containers to collect. If you need to set a Pod Annotation Allowlist, Key is required and Value is optional. If Value is empty, all containers in Pods with the specified Key in their Pod Annotation are matched. If Value is not empty, only containers in Pods where the Pod Annotation contains the Key and its value matches Value are matched. By default, Value uses string matching, meaning only exact matches between Value and the Pod Annotation value are considered. If Value starts with ^ and ends with $, it uses regex matching. For example, set Key to app and Value to ^(test1|test2)$ to match containers in Pods with Pod Annotation app:test1 or app:test2. Note: Multiple Key-Value pairs use logical OR, so any Pod Annotation matching any pair will be included in the collection scope. When enabling the Pod Annotation Allowlist, Keys must not be duplicated. For regex fuzzy matching, you must add .*. For example, ^(http.*)$ matches values starting with http",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "IncludePodLabelRegex": {
+          "description": "Pod label allowlist specifies which containers to collect. If the Pod label allowlist is not enabled, all containers are collected. To set a Pod label allowlist, Key is required. If Value is empty, all containers with the Key in their Pod label are collected. If Value is not empty, only containers with the Key in their Pod label and a Value matching the specified pattern are collected. Value supports regex matching. For example, set Key to module and Value to ^(tcp|udp)$ to collect only containers with module:tcp or module:udp in their Pod label. Note: The logical relationship between multiple key-value pairs is OR, meaning any matching pair will include the Pod in the collection scope. When the Pod label allowlist is enabled, Keys must be unique. For fuzzy regex matching, you must add .*. For example, ^(http.*)$ matches strings starting with http.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "LabelTag": {
+          "description": "Choose whether to add Kubernetes labels as log tags to the original log data. When enabled, the log service adds Kubernetes Pod label fields to the logs. Setting multiple key-value pairs adds multiple fields. For example, set Key to source and Value to data_source. If the Pod contains the label source=DC, the log will include the field __tag__data_source__: DC.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "NamespaceNameRegex": {
+          "description": "Name of the Kubernetes Namespace to be collected. If not specified, all containers are collected. Namespace names support regular expression matching. For example, setting the Namespace name to ^(tcp|udp)$ collects all containers under the tcp and udp namespaces.",
+          "type": "string"
+        },
+        "PodNameRegex": {
+          "description": "Pod name is used to specify the Pod(s) to be collected. If the Pod name is not specified, all containers are collected. Pod name supports regex matching. For example, setting the Pod name to ^(http.*)$ collects all containers under Pods whose names start with http.",
+          "type": "string"
+        },
+        "WorkloadNameRegex": {
+          "description": "Specify the container to collect by workload name. If no workload name is specified, all containers are collected. Workload names support regular expressions. For example, setting the workload name to ^(http.*)$ collects all containers under workloads starting with http.",
+          "type": "string"
+        },
+        "WorkloadType": {
+          "description": "Specify containers to collect by workload type. Only one type can be selected. If no type is specified, containers of all types will be collected. Supported workload types are: Deployment: stateless workload StatefulSet: stateful workload DaemonSet: daemon process Job: job CronJob: scheduled job",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LogTemplate": {
+      "properties": {
+        "Format": {
+          "description": "Log template format",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Log template type. Supported types: Nginx (Nginx log template type).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ParsePathRule": {
+      "properties": {
+        "Keys": {
+          "description": "List of field names. Log Service parses PathSample into multiple fields using regular expressions (Regex). Keys specify the name of each field. You can configure up to 100 field names. Field names cannot be empty or duplicated.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "PathSample": {
+          "description": "Sample collection path for actual scenarios. The sample path must be an absolute path. Wildcards *, ?, ** are not allowed in the sample path.",
+          "type": "string"
+        },
+        "Regex": {
+          "description": "Regular expression used to extract the path field. It must match the example collection path; otherwise, extraction will fail.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Plugin": {
+      "properties": {
+        "Processors": {
+          "description": "LogCollector plugins. For supported plugin lists and parameter descriptions, see LogCollector plugin overview.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RuleInfo": {
+      "description": "Collection configuration information.",
+      "properties": {
+        "ContainerRule": {
+          "$ref": "#/definitions/ContainerRule",
+          "description": "Container collection rules",
+          "type": "object"
+        },
+        "CreateTime": {
+          "description": "Time when the collection configuration was created.",
+          "type": "string"
+        },
+        "ExcludePaths": {
+          "description": "Extraction rule list.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ExcludePath"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ExtractRule": {
+          "$ref": "#/definitions/ExtractRule",
+          "description": "Extraction rules",
+          "type": "object"
+        },
+        "InputType": {
+          "description": "Collection type. 0: Host log file. 1: K8s container standard output. 2: Log file inside K8s container.",
+          "type": "integer"
+        },
+        "LogSample": {
+          "description": "Log sample.",
+          "type": "string"
+        },
+        "LogType": {
+          "description": "Collection modes. minimalist_log: single-line full mode. json_log: JSON mode. delimiter_log: delimiter mode. multiline_log: multi-line full mode. fullregex_log: full regex mode.",
+          "type": "string"
+        },
+        "ModifyTime": {
+          "description": "Time when the collection configuration was modified.",
+          "type": "string"
+        },
+        "Paths": {
+          "description": "Data collection path list",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Pause": {
+          "description": "Running status of the collection configuration. 0: Running. 1: Paused.",
+          "type": "integer"
+        },
+        "RuleId": {
+          "description": "Collection configuration ID.",
+          "type": "string"
+        },
+        "RuleName": {
+          "description": "Name of the collection configuration.",
+          "type": "string"
+        },
+        "TopicId": {
+          "description": "ID of the log topic to which the collection configuration belongs.",
+          "type": "string"
+        },
+        "TopicName": {
+          "description": "Name of the log topic associated with the collection configuration",
+          "type": "string"
+        },
+        "UserDefineRule": {
+          "$ref": "#/definitions/UserDefineRule",
+          "description": "User-defined collection rules.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ShardHashKey": {
+      "properties": {
+        "HashKey": {
+          "description": "The HashKey of the log group specifies the shard where the current log group will be written. The valid range for this parameter is [00000000000000000000000000000000-ffffffffffffffffffffffffffffffff).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UserDefineRule": {
+      "properties": {
+        "Advanced": {
+          "$ref": "#/definitions/Advanced",
+          "description": "Advanced parameters are used for extended configuration. After enabling extended configuration, you can customize advanced behaviors of LogCollector, such as when to release file handles. Note: If multiple conditions for releasing handles are specified, the handle will be released and log file monitoring will end as soon as any condition is met.",
+          "type": "object"
+        },
+        "EnableHostGroupLabel": {
+          "description": "Whether to upload the Label information of the host group to the log service. Disabled by default. true: LogCollector uploads the Label information of the host group to the specified field. You can specify the field name in the HostGroupLabelKey parameter. false (default): LogCollector does not upload the Label information of the host group.",
+          "type": "boolean"
+        },
+        "EnableHostname": {
+          "description": "Whether to upload the hostname field. Default is disabled. true: Adds a field to the original log to record the log source's hostname. Specify the hostname field name using HostnameKey. false (default): Does not add the hostname field.",
+          "type": "boolean"
+        },
+        "EnableRawLog": {
+          "description": "Whether to upload raw logs. true: Upload raw logs. false (default): Do not upload raw logs.",
+          "type": "boolean"
+        },
+        "Fields": {
+          "description": "Add constant fields to logs. Constant fields must follow these restrictions: Up to 5 constant fields can be uploaded. Field name (Key) must be unique and not empty. Length: 1–128 characters, including letters, numbers, and special characters (-_./), and cannot start with an underscore. Field value (Value) must not be empty, maximum length is 512 KiB.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/KeyValPair"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "HostGroupLabelKey": {
+          "description": "Field name used to store machine group label information.",
+          "type": "string"
+        },
+        "HostnameKey": {
+          "description": "hostname field name. Only required when EnableHostname is set to true.",
+          "type": "string"
+        },
+        "IgnoreOlder": {
+          "description": "Ignore log files that have not been updated for a specified duration, in hours.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "MultiCollectsType": {
+          "description": "Allows multiple log file collections. Empty: Uses the log file ID (including file inode, device, and checksum of the first N bytes) to uniquely identify the log file. RuleID: Uses the collection rule ID and log file ID to uniquely identify the log file. TopicIDRuleName: Uses the log topic ID, collection rule Name, and log file ID to uniquely identify the log file.",
+          "type": "string"
+        },
+        "ParsePathRule": {
+          "$ref": "#/definitions/ParsePathRule",
+          "description": "Rules for parsing the collection path. After setting the rule, fields in the collection path are extracted using the specified regex and added as metadata to the log data. Note: This parameter is not supported when collecting container standard output.",
+          "type": "object"
+        },
+        "Plugin": {
+          "$ref": "#/definitions/Plugin",
+          "description": "LogCollector plugin configuration. After enabling plugin configuration, you can add one or more LogCollector processor plugins to parse logs with complex or variable structures.",
+          "type": "object"
+        },
+        "RawLogKey": {
+          "description": "Original log field name. Only effective when EnableRawLog is set to true. RawLogKey defaults to __raw__, meaning the original log data will be encapsulated in the __raw__ field and uploaded to the log service together with the parsed log data",
+          "type": "string"
+        },
+        "ShardHashKey": {
+          "$ref": "#/definitions/ShardHashKey",
+          "description": "Rules for routing log partitions. If this parameter is not set, logs are written using the default load balancing mode, and packets are written to any available Shard. If set, logs are collected using the HashKey routing Shard mode, and the log service writes data to the Shard containing the specified Key value.",
+          "type": "object"
+        },
+        "TailFiles": {
+          "description": "LogCollector collection strategy, specifying whether LogCollector collects incremental logs or full logs. The default is false, which means full log collection. true: incremental collection. When LogCollector collects logs, it only collects newly added content in the file. When a monitored log file receives new log entries, LogCollector is triggered to collect logs. For log files being collected for the first time, LogCollector automatically determines the collection position based on the incremental threshold TailSizeKb you specify. If the new file size does not exceed the incremental threshold, collection starts from the beginning of the new file. If the new file size exceeds the incremental threshold, collection starts from the position at the end of the file minus the incremental threshold, meaning only incremental logs are collected. For log files that are not being collected for the first time, LogCollector determines the collection position based on the Checkpoint and continues collecting. false: (default) full collection. LogCollector collects logs from the beginning of each file, including historical log data.",
+          "type": "boolean"
+        },
+        "TailSizeKb": {
+          "description": "Incremental collection backtracking threshold, in KiB. When LogCollector uses incremental collection, for the first collection of a log file: if the new log file size does not exceed the TailSizeKb value, collection starts from the beginning of the file. If the new log file size exceeds the TailSizeKb value, collection starts from the position TailSizeKb from the end of the file.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Machine group in Log Service, used to manage a group of log collection machines.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/HostGroupID",
+      "/properties/HostGroupName",
+      "/properties/HostIdentifier",
+      "/properties/AutoUpdate",
+      "/properties/ServiceLogging",
+      "/properties/IamProjectName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateHostGroup",
+        "TLS:DescribeHostGroupsV2",
+        "TLS:DescribeHostGroupRules"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteHostGroup",
+        "TLS:DescribeHostGroupsV2"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeHostGroupsV2"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeHostGroupsV2",
+        "TLS:DescribeHostGroupRules"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:DeleteAbnormalHosts",
+        "TLS:ModifyHostGroup",
+        "TLS:DescribeHostGroupsV2",
+        "TLS:DescribeHostGroupRules"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/HostGroupID"
+  ],
+  "properties": {
+    "AbnormalHeartbeatStatusNumber": {
+      "description": "Number of abnormal machines.",
+      "type": "integer"
+    },
+    "AgentLatestVersion": {
+      "description": "Latest agent version.",
+      "type": "string"
+    },
+    "AutoUpdate": {
+      "description": "Whether LogCollector installed on machine group servers enables automatic upgrade. true: Log Service will check for upgrade conditions during the specified time period each day. If conditions are met, LogCollector upgrades automatically without manual intervention. false: (default) LogCollector does not upgrade automatically. Only LogCollector V1.0.8 and later versions support automatic upgrade.",
+      "type": "boolean"
+    },
+    "CreateTime": {
+      "description": "Creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DeleteAbnormalHosts": {
+      "description": "Clean all machines with abnormal heartbeat in the machine group with one click. Machines without heartbeat records cannot be deleted currently",
+      "type": "boolean"
+    },
+    "HostCount": {
+      "description": "Number of machines.",
+      "type": "integer"
+    },
+    "HostGroupID": {
+      "description": "Host group ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "HostGroupName": {
+      "description": "Host group name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "HostGroupType": {
+      "description": "Type of machine group. Includes: IP: machine IP. Set the machine IP list using the HostIpList parameter. Label: machine identifier. Set the machine identifier using the HostIdentifier parameter.",
+      "type": "string"
+    },
+    "HostIPList": {
+      "description": "List of IP addresses for the host group. Required when HostGroupType is IP.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "HostIdentifier": {
+      "description": "Machine identifier. Required when HostGroupType is Label.",
+      "type": "string"
+    },
+    "IamProjectName": {
+      "default": "default",
+      "description": "IAM project name. If this parameter is not specified, Log Service adds the machine group to the IAM project named default.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ModifyTime": {
+      "description": "Modification time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "NormalHeartbeatStatusNumber": {
+      "description": "Number of healthy machines.",
+      "type": "integer"
+    },
+    "RuleCount": {
+      "description": "Number of rules",
+      "type": "integer"
+    },
+    "Rules": {
+      "description": "Collection configuration information list.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RuleInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ServiceLogging": {
+      "description": "Enable Logcollector service log feature. true: enabled. false: (default) disabled.",
+      "type": "boolean"
+    },
+    "UpdateEndTime": {
+      "description": "Auto upgrade end time in HH:MM format. Required only when AutoUpdate is set to true. It is recommended to schedule auto upgrade during off-peak business hours. LogCollector may restart during the auto upgrade, but logs will not be lost.",
+      "type": "string"
+    },
+    "UpdateStartTime": {
+      "description": "Automatic upgrade start time, in HH:MM format. Only required when AutoUpdate is set to true. It is recommended to schedule automatic upgrades during off-peak hours. LogCollector may restart during the upgrade, but logs will not be lost.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/HostGroupID",
+    "/properties/HostCount",
+    "/properties/NormalHeartbeatStatusNumber",
+    "/properties/AbnormalHeartbeatStatusNumber",
+    "/properties/RuleCount",
+    "/properties/CreateTime",
+    "/properties/ModifyTime",
+    "/properties/AgentLatestVersion",
+    "/properties/Rules"
+  ],
+  "required": [
+    "HostGroupName",
+    "HostGroupType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::HostGroup",
+  "writeOnlyProperties": [
+    "/properties/HostIPList",
+    "/properties/DeleteAbnormalHosts"
+  ]
+}

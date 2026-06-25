@@ -1,0 +1,61 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ZID"
+  ],
+  "description": "Domain backup plan configuration.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dns:UpdateBackupSchedule",
+        "dns:QueryBackupSchedule"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dns:UpdateBackupSchedule",
+        "dns:QueryBackupSchedule"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dns:QueryBackupSchedule"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dns:UpdateBackupSchedule",
+        "dns:QueryBackupSchedule"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ZID"
+  ],
+  "properties": {
+    "CountLimit": {
+      "description": "Backup quantity limit.",
+      "type": "integer"
+    },
+    "Schedule": {
+      "description": "Backup plan: - 0: Disable automatic backup. - 1: Automatically back up every hour. - 2: Automatically back up every day. - 3: Automatically back up every month.",
+      "type": "integer"
+    },
+    "ZID": {
+      "description": "You need to obtain the ID of the domain name for the backup plan. You can call the ListZones API to get the domain name ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/CountLimit"
+  ],
+  "required": [
+    "ZID",
+    "Schedule"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::DNS::BackupSchedule"
+}

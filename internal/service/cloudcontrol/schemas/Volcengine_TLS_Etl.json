@@ -1,0 +1,211 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/DSLType",
+    "/properties/TaskType",
+    "/properties/SourceTopicId",
+    "/properties/FromTime",
+    "/properties/ToTime"
+  ],
+  "definitions": {
+    "TargetResource": {
+      "properties": {
+        "Alias": {
+          "description": "Name of the custom output target. You must use this name to refer to the output target in the data processing rules",
+          "type": "string"
+        },
+        "ProjectId": {
+          "description": "Log project ID for storing processed logs",
+          "type": "string"
+        },
+        "ProjectName": {
+          "description": "Log project name for storing processed logs",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region of the log topic for storing processed logs",
+          "type": "string"
+        },
+        "RoleTrn": {
+          "description": "Cross-account authorization role name",
+          "type": "string"
+        },
+        "TopicId": {
+          "description": "Log topic ID for storing processed logs",
+          "type": "string"
+        },
+        "TopicName": {
+          "description": "Log topic name for storing processed logs",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Alias",
+        "TopicId",
+        "Region"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "The data processing task cleanses, transforms, and distributes log data in the log service, processing data from the source log topic and outputting it to the target log topic",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectId",
+      "/properties/ProjectName",
+      "/properties/SourceTopicId",
+      "/properties/SourceTopicName",
+      "/properties/TaskID",
+      "/properties/Name",
+      "/properties/ETLStatus"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateETLTask",
+        "TLS:DescribeETLTask"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteETLTask",
+        "TLS:DescribeETLTask"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeETLTasks"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeETLTask"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:ModifyETLTask",
+        "TLS:ModifyETLTaskStatus",
+        "TLS:DescribeETLTask"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TaskID"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "Creation time of the data processing task",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DSLType": {
+      "description": "Syntax type of the processing rule. Fixed as NORMAL",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Brief description of the data processing task. Does not support \u003c\u003e, ', \\, or \\\\. Length: 0–64 characters",
+      "semantic": "description",
+      "type": "string"
+    },
+    "ETLStatus": {
+      "description": "Task scheduling status. WAITING: Preparing. RUNNING: Running. STOPPING: Stopping. STOPPED: Stopped. RESTARTING: Restarting",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Enable": {
+      "description": "Whether the data processing task is enabled. true: Enabled. false: Disabled",
+      "type": "boolean"
+    },
+    "FromTime": {
+      "description": "The processing start time of the data processing task, in seconds as a Unix timestamp",
+      "format": "int64",
+      "type": "integer"
+    },
+    "LastEnableTime": {
+      "description": "The most recent activation time of the data processing task",
+      "type": "string"
+    },
+    "ModifyTime": {
+      "description": "Modification time of the data processing task",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Data processing task name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProjectId": {
+      "description": "Log project ID to which the data processing task belongs",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Log project name to which the data processing task belongs",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Script": {
+      "description": "Processing rule script used by the data processing task",
+      "type": "string"
+    },
+    "SourceTopicId": {
+      "description": "Source log topic ID of the data processing task",
+      "type": "string"
+    },
+    "SourceTopicName": {
+      "description": "Source log topic name of the data processing task",
+      "type": "string"
+    },
+    "TargetResources": {
+      "description": "Information about the output target",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TargetResource"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "TaskID": {
+      "description": "Data processing task ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TaskType": {
+      "description": "Type of the data processing task. Fixed as Resident",
+      "type": "string"
+    },
+    "ToTime": {
+      "description": "The processing end time of the data processing task, in seconds as a Unix timestamp",
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TaskID",
+    "/properties/SourceTopicName",
+    "/properties/ProjectId",
+    "/properties/ProjectName",
+    "/properties/ETLStatus",
+    "/properties/LastEnableTime",
+    "/properties/CreateTime",
+    "/properties/ModifyTime",
+    "/properties/TargetResources/*/TopicName",
+    "/properties/TargetResources/*/ProjectId",
+    "/properties/TargetResources/*/ProjectName"
+  ],
+  "required": [
+    "Name",
+    "DSLType",
+    "TaskType",
+    "Script",
+    "SourceTopicId",
+    "TargetResources",
+    "Enable"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::Etl"
+}

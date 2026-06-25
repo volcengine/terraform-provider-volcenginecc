@@ -8,12 +8,10 @@ resource "volcenginecc_rdsmysql_allow_list" "RdsMysqlAllowListDemo" {
   security_group_bind_infos = [
     {
       bind_mode         = "AssociateEcsIp"
-      ip_list           = null
       security_group_id = "sg-1a10axxxxxvepkdgqgnu"
     security_group_name = "Default" },
     {
       bind_mode         = "IngressDirectionIp"
-      ip_list           = ["100.70.0.0/16", "100.72.0.0/16", "0.0.0.0/0"]
       security_group_id = "sg-3nqt4kwxxxxx931ebkntmrc"
     security_group_name = "Default" }
   ]

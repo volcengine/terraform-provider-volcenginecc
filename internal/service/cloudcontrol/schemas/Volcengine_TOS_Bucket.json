@@ -80,6 +80,26 @@
       },
       "type": "object"
     },
+    "DefaultRetention": {
+      "description": "Default bucket retention policy",
+      "properties": {
+        "Days": {
+          "description": "Object lock days Objects cannot be deleted or overwritten during the specified number of days. Measured in days",
+          "format": "int64",
+          "type": "integer"
+        },
+        "Mode": {
+          "description": "Retention policy mode Only COMPLIANCE is supported, which means compliance mode. In this mode, no user can delete or overwrite locked objects during the retention period",
+          "type": "string"
+        },
+        "Years": {
+          "description": "Object lock years Objects cannot be deleted or overwritten during the specified number of years. Measured in years, with one year equal to 365 days",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "Expiration": {
       "properties": {
         "Date": {
@@ -284,6 +304,21 @@
       },
       "type": "object"
     },
+    "ObjectLockConfiguration": {
+      "description": "Bucket-level object lock (WORM retention policy) configuration",
+      "properties": {
+        "ObjectLockEnabled": {
+          "description": "Enable retention policy Only Enabled is supported, which means the retention policy is enabled",
+          "type": "string"
+        },
+        "Rule": {
+          "$ref": "#/definitions/RetentionRule",
+          "description": "Bucket retention policy rules",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "Owner": {
       "description": "Object owner",
       "properties": {
@@ -294,6 +329,17 @@
         "OwnerId": {
           "description": "Account ID",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RetentionRule": {
+      "description": "Bucket retention policy",
+      "properties": {
+        "DefaultRetention": {
+          "$ref": "#/definitions/DefaultRetention",
+          "description": "Default bucket retention policy",
+          "type": "object"
         }
       },
       "type": "object"
@@ -343,6 +389,12 @@
     }
   },
   "description": "A bucket is a container for storing objects. All objects must belong to a bucket. Buckets have various configuration properties, including region and access permissions. You can create different types of buckets to store different data based on your needs.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/BucketType"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -358,7 +410,9 @@
         "tos:GetBucketTagging",
         "tos:GetBucketLifecycle",
         "tos:PutBucketPolicy",
-        "tos:GetBucketPolicy"
+        "tos:GetBucketPolicy",
+        "tos:PutBucketObjectLock",
+        "tos:GetBucketObjectLock"
       ]
     },
     "delete": {
@@ -380,7 +434,8 @@
         "tos:GetBucketVersioning",
         "tos:GetBucketTagging",
         "tos:GetBucketLifecycle",
-        "tos:GetBucketPolicy"
+        "tos:GetBucketPolicy",
+        "tos:GetBucketObjectLock"
       ]
     },
     "update": {
@@ -398,7 +453,9 @@
         "tos:GetBucketLifecycle",
         "tos:PutBucketPolicy",
         "tos:GetBucketPolicy",
-        "tos:DeleteBucketPolicy"
+        "tos:DeleteBucketPolicy",
+        "tos:PutBucketObjectLock",
+        "tos:GetBucketObjectLock"
       ]
     }
   },
@@ -472,6 +529,11 @@
       "minLength": 3,
       "semantic": "resourceId",
       "type": "string"
+    },
+    "ObjectLockConfiguration": {
+      "$ref": "#/definitions/ObjectLockConfiguration",
+      "description": "Bucket object lock (WORM retention policy) configuration. After configuring the bucket retention policy, if no object retention time is specified when uploading an object, the newly uploaded object will inherit the bucket retention time",
+      "type": "object"
     },
     "Policy": {
       "description": "String in JSON format containing bucket policy information. The total size of all bucket policy JSONs for a single bucket must not exceed 20KB",
