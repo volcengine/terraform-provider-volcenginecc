@@ -25,4 +25,13 @@ resource "volcenginecc_tos_bucket" "BucketDemo" {
       prefix            = "prefix"
     status = "Enabled" }
   ]
+  object_lock_configuration = {
+    object_lock_enabled = "Enabled"
+    rule = {
+      default_retention = {
+        mode = "COMPLIANCE"
+        days = 21
+      }
+    }
+  }
 }

@@ -1,0 +1,146 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/EventBusName",
+    "/properties/EventSource"
+  ],
+  "description": "Event rule details",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/RuleName",
+      "/properties/EventSource",
+      "/properties/EnableState"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudmonitor:CreateEventRule",
+        "cloudmonitor:ListEventRules"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudmonitor:DeleteEventRule",
+        "cloudmonitor:ListEventRules"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudmonitor:ListEventRules"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudmonitor:ListEventRules"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudmonitor:UpdateEventRule",
+        "cloudmonitor:EnableEventRule",
+        "cloudmonitor:DisableEventRule",
+        "cloudmonitor:ListEventRules"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/RuleId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Main account ID",
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "Event rule creation time",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "Rule description\nMust not start with a digit, hyphen (-), or Chinese punctuation\nCan only contain Chinese characters, letters, digits, underscore (_), hyphen (-), or Chinese punctuation\nLength limit: 0–255 characters",
+      "semantic": "description",
+      "type": "string"
+    },
+    "EnableState": {
+      "description": "Rule status\n\nenable: Rule enabled\ndisable: Rule disabled",
+      "semantic": "status",
+      "type": "string"
+    },
+    "EventBusName": {
+      "description": "Event bus name. Currently, only 'default' can be entered",
+      "enum": [
+        "default"
+      ],
+      "type": "string"
+    },
+    "EventSource": {
+      "description": "Event source",
+      "type": "string"
+    },
+    "EventType": {
+      "description": "Event type",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "FilterPattern": {
+      "description": "Filter mode, also known as event matching rule. Read-only",
+      "type": "string"
+    },
+    "FilterPatternInput": {
+      "description": "Filter mode, also known as event matching rule. Used for creation and modification. Format: {\"Data\":{\"autoscaling\":[\"1\",\"3\"],\"ecs\":[\"2\"]}}",
+      "type": "string"
+    },
+    "Level": {
+      "description": "Alert rule severity\n\nnotice: Notification\nwarning: Warning\ncritical: Critical",
+      "type": "string"
+    },
+    "NotificationId": {
+      "description": "Policy ID",
+      "type": "string"
+    },
+    "RuleId": {
+      "description": "Event rule ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RuleName": {
+      "description": "Rule name\nLength limit: 1–128 characters\nMust not start with a digit or hyphen (-)",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "description": "Event rule update time",
+      "semantic": "updatedTime",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RuleId",
+    "/properties/AccountId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/FilterPattern"
+  ],
+  "required": [
+    "RuleName",
+    "EventBusName",
+    "EventSource",
+    "Level",
+    "EventType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudMonitor::EventRule",
+  "writeOnlyProperties": [
+    "/properties/FilterPatternInput"
+  ]
+}

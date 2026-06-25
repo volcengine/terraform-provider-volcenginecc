@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_rocketmq_access_key.example "instance_id|access_key"

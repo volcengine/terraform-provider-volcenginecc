@@ -1,0 +1,112 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GtmId",
+    "/properties/PolicyType"
+  ],
+  "definitions": {
+    "Statistics": {
+      "description": "Statistical information about address status",
+      "properties": {
+        "ActiveAddr": {
+          "description": "Number of available addresses",
+          "type": "integer"
+        },
+        "InactiveAddr": {
+          "description": "Number of unavailable addresses",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Target": {
+      "description": "Traffic target for intelligent routing strategy",
+      "properties": {
+        "PoolId": {
+          "description": "Address pool ID.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Scheduling policy configuration under the GTM instance, identified by GtmId and PolicyType, and maintained via UpdatePolicy.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "gtm:UpdatePolicy",
+        "gtm:GetPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "gtm:UpdatePolicy",
+        "gtm:GetPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "gtm:GetPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "gtm:UpdatePolicy",
+        "gtm:GetPolicy"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GtmId",
+    "/properties/PolicyType"
+  ],
+  "properties": {
+    "AlarmOnly": {
+      "description": "If the current address pool set is unavailable, Cloud Scheduling GTM only triggers an alert notification and does not automatically switch to an available address pool. true: Cloud Scheduling GTM only triggers an alert notification. false: Cloud Scheduling GTM automatically switches to an available address pool",
+      "type": "boolean"
+    },
+    "GtmId": {
+      "description": "UUID of the GTM instance. You can obtain GtmId through the ListGtms API",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "PerfMode": {
+      "description": "Routing mode for intelligent routing strategy. perf: Performance first. capacity: Capacity first. feedback: Load feedback",
+      "type": "string"
+    },
+    "PolicyType": {
+      "description": "Strategy type. geo: Basic routing. perf: Intelligent routing",
+      "type": "string"
+    },
+    "RoutingMode": {
+      "description": "Routing mode. The parameter values are: lb: Based on load balancing, user traffic is routed proportionally to different IDCs. geo: Based on the user's geographic location and operator, user traffic is routed to the nearest IDC on the same operator's network. geo-lb (default): First, based on the user's geographic location and operator, user traffic is routed to the nearest IDC access line on the same operator's network. Then, based on load balancing, user traffic is routed proportionally to multiple IDCs",
+      "type": "string"
+    },
+    "Statistics": {
+      "$ref": "#/definitions/Statistics",
+      "description": "Statistical information about address status",
+      "type": "object"
+    },
+    "Targets": {
+      "description": "Traffic target for intelligent routing strategy",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Target"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/PerfMode",
+    "/properties/Statistics"
+  ],
+  "required": [
+    "GtmId",
+    "PolicyType"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::GTM::Policy"
+}

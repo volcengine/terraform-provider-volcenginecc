@@ -1,0 +1,130 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/GroupId",
+    "/properties/Tags"
+  ],
+  "definitions": {
+    "TagObject": {
+      "description": "Tag details",
+      "properties": {
+        "Key": {
+          "description": "Tag key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Group basic information",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/GroupId",
+      "/properties/InstanceId",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "Kafka:CreateGroup",
+        "Kafka:DescribeGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Kafka:DeleteGroup",
+        "Kafka:DescribeGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Kafka:DescribeGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Kafka:DescribeGroups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Kafka:ModifyGroup",
+        "Kafka:DescribeGroups"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/GroupId"
+  ],
+  "properties": {
+    "BalanceAlgorithm": {
+      "description": "Algorithm for assigning partitions to consumers, specified by the consumer client. If using custom partition consumption, this field may be empty",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Consumer group description, up to 128 characters",
+      "maxLength": 128,
+      "semantic": "description",
+      "type": "string"
+    },
+    "GroupId": {
+      "description": "Consumer group ID to be created - Length: 3–128 characters - Can contain uppercase and lowercase letters, numbers, hyphens (-), special character (@), and underscores (_) - Must include at least one letter or number",
+      "maxLength": 128,
+      "minLength": 3,
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID",
+      "type": "string"
+    },
+    "ProtocolType": {
+      "description": "Consumer group protocol type - If using the standard Kafka consumer protocol, displays as consumer - If using another protocol type, displays the corresponding protocol name, for example, connect when using Kafka-Connector - If using custom partition consumption, this field may be empty",
+      "type": "string"
+    },
+    "State": {
+      "description": "Consumer group status - PreparingRebalance: preparing for consumption - CompletingRebalance: assigning partitions - Stable: consuming - Empty: not consuming - Dead: expired",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Group tags",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TagObject"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/State",
+    "/properties/ProtocolType",
+    "/properties/BalanceAlgorithm"
+  ],
+  "required": [
+    "InstanceId",
+    "GroupId"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::Kafka::Group"
+}

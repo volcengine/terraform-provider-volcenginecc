@@ -22,12 +22,10 @@ resource "volcenginecc_rdsmysql_allow_list" "RdsMysqlAllowListDemo" {
   security_group_bind_infos = [
     {
       bind_mode         = "AssociateEcsIp"
-      ip_list           = null
       security_group_id = "sg-1a10axxxxxvepkdgqgnu"
     security_group_name = "Default" },
     {
       bind_mode         = "IngressDirectionIp"
-      ip_list           = ["100.70.0.0/16", "100.72.0.0/16", "0.0.0.0/0"]
       security_group_id = "sg-3nqt4kwxxxxx931ebkntmrc"
     security_group_name = "Default" }
   ]
@@ -45,6 +43,8 @@ resource "volcenginecc_rdsmysql_allow_list" "RdsMysqlAllowListDemo" {
 - `allow_list_name` (String) Allowlist name.
 - `allow_list_type` (String) IP address types in the allowlist. Only IPv4 addresses are currently supported.
 - `associated_instance_num` (Number) Total number of instances bound to the allowlist.
+- `associated_instances` (Attributes Set) Instance information bound to the current allowlist.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
 - `ignore_instance_status` (Boolean) Ignore instance status check. Values: true: Yes. false: No. Default value.
 - `instance_id` (String) Instance ID.
 - `modify_mode` (String) Modification method. Available values: Cover (default): Overwrite the original allowlist with the values from the AllowList parameter. Append: Add the IP addresses entered in the AllowList parameter to the original allowlist. Delete: Remove the IP addresses entered in the AllowList parameter from the original allowlist. At least one IP address must remain.
@@ -59,10 +59,16 @@ resource "volcenginecc_rdsmysql_allow_list" "RdsMysqlAllowListDemo" {
 
 - `allow_list_id` (String) Allowlist ID.
 - `allow_list_ip_num` (Number) Total number of IP addresses (or ranges) in the allowlist.
-- `associated_instances` (Attributes Set) Instance information bound to the current allowlist.
- Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--associated_instances))
 - `id` (String) Uniquely identifies the resource.
 - `ip_list` (Set of String) List of IP addresses and IP ranges included in the allowlist. Returned when the WithIpList request parameter is set to true; returns null when set to false or not specified.
+
+<a id="nestedatt--associated_instances"></a>
+### Nested Schema for `associated_instances`
+
+Optional:
+
+- `instance_id` (String) Instance ID bound to the current allowlist.
+
 
 <a id="nestedatt--security_group_bind_infos"></a>
 ### Nested Schema for `security_group_bind_infos`
@@ -70,21 +76,8 @@ resource "volcenginecc_rdsmysql_allow_list" "RdsMysqlAllowListDemo" {
 Optional:
 
 - `bind_mode` (String) Mode for associating security groups. Values: IngressDirectionIp: Inbound IP. AssociateEcsIp: Associate ECS IP. Note: In the CreateAllowList API, the BindMode and SecurityGroupId fields of SecurityGroupBindInfoObject are required.
-- `ip_list` (Set of String) Security group IP address list.
 - `security_group_id` (String) Security group ID.
 - `security_group_name` (String) Security group name.
-
-
-<a id="nestedatt--associated_instances"></a>
-### Nested Schema for `associated_instances`
-
-Read-Only:
-
-- `instance_id` (String) Instance ID bound to the current allowlist.
-- `instance_name` (String) Instance name bound to the current allowlist.
-- `instance_status` (String) Instance status.
-- `is_latest` (Boolean) Has the latest allowlist been synchronized? Values: true: Yes. false: No. Note: When modifying the allowlist, if the instance is not running, changes to the allowlist will not be immediately synchronized to the instance.
-- `vpc` (String) Private network ID of the instance.
 
 ## Import
 

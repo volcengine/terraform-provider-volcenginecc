@@ -39,6 +39,15 @@ resource "volcenginecc_tos_bucket" "BucketDemo" {
       prefix            = "prefix"
     status = "Enabled" }
   ]
+  object_lock_configuration = {
+    object_lock_enabled = "Enabled"
+    rule = {
+      default_retention = {
+        mode = "COMPLIANCE"
+        days = 21
+      }
+    }
+  }
 }
 ```
 
@@ -58,6 +67,7 @@ resource "volcenginecc_tos_bucket" "BucketDemo" {
 - `enable_version_status` (String) Bucket versioning status. Enabled: Enable versioning. Suspended: Suspend versioning
 - `lifecycle_config` (Attributes Set) Bucket lifecycle
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--lifecycle_config))
+- `object_lock_configuration` (Attributes) Bucket object lock (WORM retention policy) configuration. After configuring the bucket retention policy, if no object retention time is specified when uploading an object, the newly uploaded object will inherit the bucket retention time (see [below for nested schema](#nestedatt--object_lock_configuration))
 - `policy` (String) String in JSON format containing bucket policy information. The total size of all bucket policy JSONs for a single bucket must not exceed 20KB
 - `project_name` (String) Project associated with the bucket
 - `storage_class` (String) Default storage class for the bucket. Includes STANDARD: Standard storage. IA: Infrequent access storage. INTELLIGENT_TIERING: Intelligent tiering storage. ARCHIVE_FR: Archive flashback storage. ARCHIVE: Archive storage. COLD_ARCHIVE: Cold archive storage. DEEP_COLD_ARCHIVE: Deep cold archive storage
@@ -208,6 +218,33 @@ Optional:
 - `date` (String) Specific date for latest version object transition in lifecycle rules based on last modified time
 - `days` (Number) Number of days to transition the latest version object in the lifecycle rule based on last modified time
 - `storage_class` (String) Storage class for historical version object transition in lifecycle rules based on last modified time. Includes STANDARD, IA, ARCHIVE_FR, INTELLIGENT_TIERING, COLD_ARCHIVE, ARCHIVE, DEEP_COLD_ARCHIVE
+
+
+
+<a id="nestedatt--object_lock_configuration"></a>
+### Nested Schema for `object_lock_configuration`
+
+Optional:
+
+- `object_lock_enabled` (String) Enable retention policy Only Enabled is supported, which means the retention policy is enabled
+- `rule` (Attributes) Bucket retention policy rules (see [below for nested schema](#nestedatt--object_lock_configuration--rule))
+
+<a id="nestedatt--object_lock_configuration--rule"></a>
+### Nested Schema for `object_lock_configuration.rule`
+
+Optional:
+
+- `default_retention` (Attributes) Default bucket retention policy (see [below for nested schema](#nestedatt--object_lock_configuration--rule--default_retention))
+
+<a id="nestedatt--object_lock_configuration--rule--default_retention"></a>
+### Nested Schema for `object_lock_configuration.rule.default_retention`
+
+Optional:
+
+- `days` (Number) Object lock days Objects cannot be deleted or overwritten during the specified number of days. Measured in days
+- `mode` (String) Retention policy mode Only COMPLIANCE is supported, which means compliance mode. In this mode, no user can delete or overwrite locked objects during the retention period
+- `years` (Number) Object lock years Objects cannot be deleted or overwritten during the specified number of years. Measured in years, with one year equal to 365 days
+
 
 
 

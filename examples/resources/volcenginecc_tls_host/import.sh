@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_host.example "host_group_id|ip"

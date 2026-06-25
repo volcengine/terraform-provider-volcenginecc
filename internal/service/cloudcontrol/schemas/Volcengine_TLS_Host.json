@@ -1,0 +1,76 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/HostGroupID",
+    "/properties/IP"
+  ],
+  "description": "Host in the log service, used to manage server nodes for log collection",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/HostGroupID",
+      "/properties/IP"
+    ],
+    "required": [
+      "/properties/HostGroupID"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:ModifyHostGroup",
+        "TLS:DescribeHosts"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteHost",
+        "TLS:DescribeHosts"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeHosts"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeHosts"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/HostGroupID",
+    "/properties/IP"
+  ],
+  "properties": {
+    "HeartbeatStatus": {
+      "description": "Agent heartbeat status. 0: Heartbeat normal 1: Heartbeat abnormal",
+      "type": "integer"
+    },
+    "HostGroupID": {
+      "description": "Machine group ID to which the host belongs",
+      "type": "string"
+    },
+    "IP": {
+      "description": "Host IP address",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "LogCollectorVersion": {
+      "description": "Log collector version",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/LogCollectorVersion",
+    "/properties/HeartbeatStatus"
+  ],
+  "required": [
+    "HostGroupID",
+    "IP"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::Host"
+}
