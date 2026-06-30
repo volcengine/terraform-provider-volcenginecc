@@ -559,7 +559,8 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 	tflog.Debug(ctx, "Cloud Control API GetResource", map[string]interface{}{
-		"value": util.ToString(description.ResourceDescription.Properties),
+		"identifier": util.ToString(description.ResourceDescription.Identifier),
+		"value":      util.ToString(description.ResourceDescription.Properties),
 	})
 	translator := toTerraform{cfToTfNameMap: r.ccToTfNameMap}
 	schema := currentState.Schema
@@ -739,7 +740,8 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 	tflog.Debug(ctx, "Cloud Control API GetResource", map[string]interface{}{
-		"value": util.ToString(description.ResourceDescription.Properties),
+		"identifier": util.ToString(description.ResourceDescription.Identifier),
+		"value":      util.ToString(description.ResourceDescription.Properties),
 	})
 	remoteDesiredState := util.ToString(description.ResourceDescription.Properties)
 	currentDesiredState, err = mergeLocalWithRemoteForSets(currentDesiredState, remoteDesiredState, r.tfSchema.Attributes, r.ccToTfNameMap)
