@@ -1015,3 +1015,39 @@ resource_schema "volcengine_cloudmonitor_event_rule" {
 resource_schema "volcengine_gtm_policy" {
   cloudcontrol_type_name = "Volcengine::GTM::Policy"
 }
+
+resource_schema "volcengine_directconnect_connection" {
+  cloudcontrol_type_name = "Volcengine::DirectConnect::Connection"
+}
+
+resource_schema "volcengine_tos_bucket_website" {
+  cloudcontrol_type_name = "Volcengine::TOS::BucketWebsite"
+}
+
+resource_schema "volcengine_veenedge_vpc" {
+  cloudcontrol_type_name = "Volcengine::VeenEdge::VPC"
+}
+
+resource_schema "volcengine_organization_service_control_policy_enabler" {
+  cloudcontrol_type_name = "Volcengine::Organization::ServiceControlPolicyEnabler"
+}
+
+resource_schema "volcengine_waf_host_group" {
+  cloudcontrol_type_name = "Volcengine::WAF::HostGroup"
+}
+
+resource_schema "volcengine_fwcenter_address_book" {
+  cloudcontrol_type_name = "Volcengine::FWCenter::AddressBook"
+}
+
+resource_schema "volcengine_fwcenter_control_policy" {
+  cloudcontrol_type_name = "Volcengine::FWCenter::ControlPolicy"
+}
+
+resource_schema "volcengine_tls_alarm_webhook_integration_type" {
+  cloudcontrol_type_name = "Volcengine::TLS::AlarmWebhookIntegrationType"
+}
+
+resource_schema "volcengine_fwcenter_vpc_fire_wall_acl_rule" {
+  cloudcontrol_type_name = "Volcengine::FWCenter::VpcFireWallAclRule"
+}

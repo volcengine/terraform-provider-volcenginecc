@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 )
@@ -110,6 +111,109 @@ func gTMDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Account that created the GTM instance",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Detailed configuration of the scheduling policy for the GTM instance.",
+		//	  "properties": {
+		//	    "AlarmOnly": {
+		//	      "description": "If the current address pool set is unavailable, does Cloud Scheduling GTM only trigger an alert notification without automatically switching to an available address pool? true: Cloud Scheduling GTM only triggers an alert notification. false: Cloud Scheduling GTM automatically switches to an available address pool.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "PerfMode": {
+		//	      "description": "Routing mode for intelligent routing policies. perf: Performance first. capacity: Capacity first. feedback: Load feedback.",
+		//	      "type": "string"
+		//	    },
+		//	    "RoutingMode": {
+		//	      "description": "Routing mode. The parameter values are: lb: Routes user traffic proportionally to different IDC data centers based on load balancing. geo: Routes user traffic to the nearest IDC data center on the same carrier line based on the user's geographic location and carrier. geo-lb (default): First routes user traffic to the nearest IDC data center access line on the same carrier based on the user's geographic location and carrier, then distributes user traffic proportionally to multiple IDC data centers based on load balancing.",
+		//	      "type": "string"
+		//	    },
+		//	    "Statistics": {
+		//	      "description": "Statistics for addresses associated with the scheduling policy.",
+		//	      "properties": {
+		//	        "ActiveAddr": {
+		//	          "description": "Number of available addresses.",
+		//	          "type": "integer"
+		//	        },
+		//	        "InactiveAddr": {
+		//	          "description": "Number of unavailable addresses.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Targets": {
+		//	      "description": "List of target address pools associated with the scheduling policy.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Target address pool configuration associated with the scheduling policy.",
+		//	        "properties": {
+		//	          "PoolId": {
+		//	            "description": "Target address pool ID.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmOnly
+				"alarm_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If the current address pool set is unavailable, does Cloud Scheduling GTM only trigger an alert notification without automatically switching to an available address pool? true: Cloud Scheduling GTM only triggers an alert notification. false: Cloud Scheduling GTM automatically switches to an available address pool.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PerfMode
+				"perf_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Routing mode for intelligent routing policies. perf: Performance first. capacity: Capacity first. feedback: Load feedback.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoutingMode
+				"routing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Routing mode. The parameter values are: lb: Routes user traffic proportionally to different IDC data centers based on load balancing. geo: Routes user traffic to the nearest IDC data center on the same carrier line based on the user's geographic location and carrier. geo-lb (default): First routes user traffic to the nearest IDC data center access line on the same carrier based on the user's geographic location and carrier, then distributes user traffic proportionally to multiple IDC data centers based on load balancing.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Statistics
+				"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ActiveAddr
+						"active_addr": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Number of available addresses.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InactiveAddr
+						"inactive_addr": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Number of unavailable addresses.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Statistics for addresses associated with the scheduling policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Targets
+				"targets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PoolId
+							"pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Target address pool ID.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of target address pools associated with the scheduling policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Detailed configuration of the scheduling policy for the GTM instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyType
 		// Cloud Control resource type schema:
 		//
@@ -119,6 +223,215 @@ func gTMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Routing policy type. `geo` indicates basic routing policy, `perf` indicates intelligent routing policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Probe
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Detailed configuration of the health check for the GTM instance.",
+		//	  "properties": {
+		//	    "AdvisedNodeCount": {
+		//	      "description": "Recommended number of health check probe points.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Disable": {
+		//	      "description": "Whether health check is disabled. true: disabled. false: enabled.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "DnsRecordType": {
+		//	      "description": "DNS record type for the health check.",
+		//	      "type": "string"
+		//	    },
+		//	    "FailedCount": {
+		//	      "description": "Threshold for the number of health check failures before a single target address is considered faulty. For example, if you set this parameter to 3, a target address will be marked as faulty after 3 consecutive health check failures. Default value: 3.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Host": {
+		//	      "description": "Full domain name of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+		//	      "type": "string"
+		//	    },
+		//	    "HttpMethod": {
+		//	      "description": "HTTP request method. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+		//	      "type": "string"
+		//	    },
+		//	    "HttpUsabilityCodes": {
+		//	      "description": "Customize a range of HTTP status codes. After a probe initiates a health check, if the target address returns an HTTP status code outside the specified range, the health check at that probe is considered failed. If you do not set the HttpUsabilityCodes parameter for the policy, this parameter will not be returned.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "properties": {
+		//	          "Codes": {
+		//	            "description": "List of HTTP status codes.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "integer"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Operator": {
+		//	            "description": "Operator. interval: matches values within the range. include: matches specified values. exclude: matches values other than the specified ones.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Interval": {
+		//	      "description": "Interval between each health check, in seconds.",
+		//	      "type": "integer"
+		//	    },
+		//	    "IsManualNodes": {
+		//	      "description": "Whether to manually configure health check probe points. true: Manually configure health check probe points. false: Use recommended health check probe points.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Nodes": {
+		//	      "description": "List of probe nodes used for health checks.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "PingCount": {
+		//	      "description": "Number of packets sent. If you set this parameter to 10, each ping check sends 10 packets simultaneously. This parameter is only valid when the health check protocol is set to ping.",
+		//	      "type": "integer"
+		//	    },
+		//	    "PingLossPercent": {
+		//	      "description": "Packet loss rate. Unit: percent. If the packet loss rate exceeds this parameter value, the result is considered abnormal. For example, if this parameter is set to 10 and the packet loss rate during a health check is greater than 10, the result is considered abnormal. This parameter is only valid when the health check protocol is set to ping.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Port": {
+		//	      "description": "Port of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Protocol": {
+		//	      "description": "Protocol used for health checks. ping: ICMP protocol. tcp: TCP protocol. http: HTTP protocol. https: HTTPS protocol.",
+		//	      "type": "string"
+		//	    },
+		//	    "TcpConnTimeout": {
+		//	      "description": "Timeout for establishing a single TCP connection. For example, if you set this parameter to 2 seconds, a TCP connection will be considered failed if it is not established within 2 seconds during a health check. This parameter is only valid when the health check protocol is set to tcp.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Timeout": {
+		//	      "description": "Timeout for the health check task. Unit: seconds.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Url": {
+		//	      "description": "Path part of the health check target address, starting with /. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"probe": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdvisedNodeCount
+				"advised_node_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Recommended number of health check probe points.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Disable
+				"disable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether health check is disabled. true: disabled. false: enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DnsRecordType
+				"dns_record_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "DNS record type for the health check.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FailedCount
+				"failed_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Threshold for the number of health check failures before a single target address is considered faulty. For example, if you set this parameter to 3, a target address will be marked as faulty after 3 consecutive health check failures. Default value: 3.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Host
+				"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Full domain name of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpMethod
+				"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "HTTP request method. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpUsabilityCodes
+				"http_usability_codes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Codes
+							"codes": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.Int64Type,
+								Description: "List of HTTP status codes.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Operator
+							"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Operator. interval: matches values within the range. include: matches specified values. exclude: matches values other than the specified ones.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Customize a range of HTTP status codes. After a probe initiates a health check, if the target address returns an HTTP status code outside the specified range, the health check at that probe is considered failed. If you do not set the HttpUsabilityCodes parameter for the policy, this parameter will not be returned.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Interval
+				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Interval between each health check, in seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IsManualNodes
+				"is_manual_nodes": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to manually configure health check probe points. true: Manually configure health check probe points. false: Use recommended health check probe points.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Nodes
+				"nodes": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of probe nodes used for health checks.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PingCount
+				"ping_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Number of packets sent. If you set this parameter to 10, each ping check sends 10 packets simultaneously. This parameter is only valid when the health check protocol is set to ping.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PingLossPercent
+				"ping_loss_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Packet loss rate. Unit: percent. If the packet loss rate exceeds this parameter value, the result is considered abnormal. For example, if this parameter is set to 10 and the packet loss rate during a health check is greater than 10, the result is considered abnormal. This parameter is only valid when the health check protocol is set to ping.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Port of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Protocol used for health checks. ping: ICMP protocol. tcp: TCP protocol. http: HTTP protocol. https: HTTPS protocol.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TcpConnTimeout
+				"tcp_conn_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Timeout for establishing a single TCP connection. For example, if you set this parameter to 2 seconds, a TCP connection will be considered failed if it is not established within 2 seconds during a health check. This parameter is only valid when the health check protocol is set to tcp.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Timeout
+				"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Timeout for the health check task. Unit: seconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Url
+				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Path part of the health check target address, starting with /. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Detailed configuration of the health check for the GTM instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -215,22 +528,51 @@ func gTMDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::GTM::GTM").WithTerraformTypeName("volcenginecc_gtm_gtm")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_mode":   "AccessMode",
-		"alarm_id":      "AlarmId",
-		"cname":         "Cname",
-		"create_time":   "CreateTime",
-		"domain":        "Domain",
-		"gtm_id":        "GtmId",
-		"last_operator": "LastOperator",
-		"owner":         "Owner",
-		"policy_type":   "PolicyType",
-		"project_name":  "ProjectName",
-		"remark":        "Remark",
-		"spec_name":     "SpecName",
-		"state":         "State",
-		"ttl":           "Ttl",
-		"update_time":   "UpdateTime",
-		"zone_type":     "ZoneType",
+		"access_mode":          "AccessMode",
+		"active_addr":          "ActiveAddr",
+		"advised_node_count":   "AdvisedNodeCount",
+		"alarm_id":             "AlarmId",
+		"alarm_only":           "AlarmOnly",
+		"cname":                "Cname",
+		"codes":                "Codes",
+		"create_time":          "CreateTime",
+		"disable":              "Disable",
+		"dns_record_type":      "DnsRecordType",
+		"domain":               "Domain",
+		"failed_count":         "FailedCount",
+		"gtm_id":               "GtmId",
+		"host":                 "Host",
+		"http_method":          "HttpMethod",
+		"http_usability_codes": "HttpUsabilityCodes",
+		"inactive_addr":        "InactiveAddr",
+		"interval":             "Interval",
+		"is_manual_nodes":      "IsManualNodes",
+		"last_operator":        "LastOperator",
+		"nodes":                "Nodes",
+		"operator":             "Operator",
+		"owner":                "Owner",
+		"perf_mode":            "PerfMode",
+		"ping_count":           "PingCount",
+		"ping_loss_percent":    "PingLossPercent",
+		"policy":               "Policy",
+		"policy_type":          "PolicyType",
+		"pool_id":              "PoolId",
+		"port":                 "Port",
+		"probe":                "Probe",
+		"project_name":         "ProjectName",
+		"protocol":             "Protocol",
+		"remark":               "Remark",
+		"routing_mode":         "RoutingMode",
+		"spec_name":            "SpecName",
+		"state":                "State",
+		"statistics":           "Statistics",
+		"targets":              "Targets",
+		"tcp_conn_timeout":     "TcpConnTimeout",
+		"timeout":              "Timeout",
+		"ttl":                  "Ttl",
+		"update_time":          "UpdateTime",
+		"url":                  "Url",
+		"zone_type":            "ZoneType",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

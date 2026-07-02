@@ -27,11 +27,11 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Certificate ID",
+		//	  "description": "Certificate ID. When the replacement mode is stock, this refers to the existing certificate ID used for replacement.",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate ID",
+			Description: "Certificate ID. When the replacement mode is stock, this refers to the existing certificate ID used for replacement.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateName
@@ -121,6 +121,17 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"listeners": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "List of listeners associated with the certificate",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OldCertificateId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Old certificate ID to be replaced. Setting this field indicates that the certificate is created in replacement mode.",
+		//	  "type": "string"
+		//	}
+		"old_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Old certificate ID to be replaced. Setting this field indicates that the certificate is created in replacement mode.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateKey
@@ -238,22 +249,23 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::ALB::Certificate").WithTerraformTypeName("volcenginecc_alb_certificate")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"certificate_id":   "CertificateId",
-		"certificate_name": "CertificateName",
-		"certificate_type": "CertificateType",
-		"created_time":     "CreatedTime",
-		"description":      "Description",
-		"domain_name":      "DomainName",
-		"expired_at":       "ExpiredAt",
-		"key":              "Key",
-		"listeners":        "Listeners",
-		"private_key":      "PrivateKey",
-		"project_name":     "ProjectName",
-		"public_key":       "PublicKey",
-		"san":              "San",
-		"status":           "Status",
-		"tags":             "Tags",
-		"value":            "Value",
+		"certificate_id":     "CertificateId",
+		"certificate_name":   "CertificateName",
+		"certificate_type":   "CertificateType",
+		"created_time":       "CreatedTime",
+		"description":        "Description",
+		"domain_name":        "DomainName",
+		"expired_at":         "ExpiredAt",
+		"key":                "Key",
+		"listeners":          "Listeners",
+		"old_certificate_id": "OldCertificateId",
+		"private_key":        "PrivateKey",
+		"project_name":       "ProjectName",
+		"public_key":         "PublicKey",
+		"san":                "San",
+		"status":             "Status",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

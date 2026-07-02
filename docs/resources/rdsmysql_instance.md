@@ -89,17 +89,21 @@ resource "volcenginecc_rdsmysql_instance" "RDSMySQLInstanceDemo" {
 - `allow_list_ids` (Set of String) Allowlist ID. To bind multiple allowlists, separate allowlist IDs with commas (,). Each instance can bind up to 100 allowlists
 - `auto_storage_scaling_config` (Attributes) Auto scaling configuration (see [below for nested schema](#nestedatt--auto_storage_scaling_config))
 - `auto_upgrade_minor_version` (String) Instance kernel minor version upgrade policy. Values: Auto: Automatic upgrade. Manual: Manual upgrade.
+- `backup_policy` (Attributes) Instance backup policy configuration. (see [below for nested schema](#nestedatt--backup_policy))
 - `cpu_num` (Number) Number of CPU cores for the database proxy service of the instance
 - `db_param_group_id` (String) Parameter template ID. Default value is the default parameter template for the database engine version
 - `db_time_zone` (String) Time zone. Supports UTC -12:00 ~ +13:00. Default is the time zone of the region.
 - `deletion_protection` (String) Whether to enable instance deletion protection. Values: Enabled: Yes. Disabled: No. Default value.
+- `engine_type` (String) Database engine type. Values: InnoDB: InnoDB engine. RocksDB: RocksDB engine.
 - `global_read_only` (Boolean) Enable global read-only mode. Values: true: enabled. false: disabled (default is false)
 - `instance_name` (String) Instance name.
 - `instance_type` (String) Instance type. Values: DoubleNode: dual-node type. MultiNode: multi-node type
 - `lower_case_table_names` (String) Whether table names are case-sensitive. Default value is true. Values: false: Table names are stored as fixed and are case-sensitive. true: Table names are stored in lowercase and are case-insensitive.
 - `maintenance_window` (Attributes) Specify the maintenance window for the instance when creating it. This field is optional. If not set, the default is UTC18:00Z-21:59Z every day of the week (Beijing time 02:00-05:59). (see [below for nested schema](#nestedatt--maintenance_window))
 - `node_spec` (String) Node specifications.
+- `parameter_template_id` (String) Parameter template ID.
 - `port` (Number) Default endpoint private network port. Port range: 1000~65534, default is 3306. When creating a new connection endpoint or enabling a new address, the default endpoint private network port is used for real-time configuration as the default port.
+- `private_ip_address` (String) Specify the default terminal IP address of the instance within the designated private network and subnet. Note: If not set, the default terminal IP address will be automatically assigned within the specified private network and subnet.
 - `project_name` (String) Project.
 - `super_account_name` (String) High-privilege account name. If this parameter is not provided, a high-privilege account will not be created by default.
 - `super_account_password` (String) Password for high-privilege account. Password rules: 8–32 characters in length. Must contain at least three of the following: uppercase letters, lowercase letters, numbers, special characters. Special characters: !@#$%^&*()_+-=,.&?|/.
@@ -199,8 +203,74 @@ Required:
 Optional:
 
 - `enable_storage_auto_scale` (Boolean) Whether to enable automatic scaling for the instance. Values: true: Yes. false: No.
+- `scaling_detect_node` (String) Node range for automatic scaling detection. Values: MasterNode: primary node. MasterSlaveNodes: primary and secondary nodes. AllNodes: all nodes. Note: When used as a request parameter, the default is MasterNode. For multi-node instances, MasterSlaveNodes and AllNodes have the same effect. For single-node instances, MasterNode, MasterSlaveNodes, and AllNodes have the same effect.
 - `storage_threshold` (Number) Percentage of available storage space that triggers automatic scaling. Value range: 10–50, default: 10, unit: %
 - `storage_upper_bound` (Number) Maximum storage space for automatic expansion. The minimum value is instance storage space + 20 GB; the maximum value is the upper limit of the storage space range for the primary node specification, in GB. See details about selectable storage space ranges for different specifications.
+
+
+<a id="nestedatt--backup_policy"></a>
+### Nested Schema for `backup_policy`
+
+Optional:
+
+- `backup_policy_base` (Attributes) Basic backup policy. (see [below for nested schema](#nestedatt--backup_policy--backup_policy_base))
+- `cross_backup_policy` (Attributes) Cross-region backup policy. (see [below for nested schema](#nestedatt--backup_policy--cross_backup_policy))
+
+Read-Only:
+
+- `available_cross_regions` (Set of String) List of destination regions available for cross-region backup.
+
+<a id="nestedatt--backup_policy--backup_policy_base"></a>
+### Nested Schema for `backup_policy.backup_policy_base`
+
+Optional:
+
+- `binlog_backup_all_retention` (Boolean) Retain all log backups before releasing the instance. Values: true: yes. false: no.
+- `binlog_backup_enabled` (Boolean) Enable log backup feature. Values: true: yes. false: no.
+- `binlog_backup_encryption_enabled` (Boolean) Whether to enable encryption for log backups. Values: true: Yes. false: No.
+- `binlog_file_counts_enable` (Boolean) Enable local Binlog retention limit. Values: true: enabled. false: disabled.
+- `binlog_limit_count` (Number) Number of local Binlog files to retain, values range from 6 to 1000. Files exceeding the retention count are automatically deleted.
+- `binlog_local_retention_hour` (Number) Local Binlog retention period. Value: 0–168. Unit: hours. Local logs exceeding the retention period are automatically deleted. When set to 0, local logs are not deleted automatically.
+- `binlog_space_limit_enable` (Boolean) Enable automatic Binlog cleanup when storage is excessive. When total instance storage usage exceeds 80% or available space is less than 5 GiB, the system automatically deletes the oldest local Binlog files until usage drops below 80% and available space exceeds 5 GiB. true: enabled. false: disabled.
+- `binlog_storage_percentage` (Number) Maximum storage space usage. Can be set to 20%–50%. When exceeded, the earliest Binlog files are automatically deleted until usage falls below this threshold. Note: Local Binlog space usage = local Binlog size / total available (purchased) instance space.
+- `data_backup_all_retention` (Boolean) Retain all data backups before releasing the instance. Values: true: yes. false: no.
+- `data_backup_encryption_enabled` (Boolean) Enable encryption for data backups of local disk instances. Values: true: yes. false: no. Note: This feature is not supported for cloud disk instances.
+- `data_backup_retention_day` (Number) Number of days to retain data backups. Valid values: 7–3650 days. Default: 7 days.
+- `data_full_backup_periods` (Set of String) Full backup cycle. Values: Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday.
+- `data_full_backup_start_utc_hour` (Number) Start time of the full backup task time window (UTC). The time window is 1 hour. Note: Both DataFullBackupStartUTCHour and DataFullBackupTime can be used to specify the full backup time period for the instance. DataFullBackupStartUTCHour has higher priority. If both fields are returned, DataFullBackupStartUTCHour takes precedence.
+- `data_full_backup_time` (String) Time window for executing backup tasks, with a duration of 1 hour. Format: HH:mmZ-HH:mmZ (UTC). Note: Both DataFullBackupStartUTCHour and DataFullBackupTime can be used to specify the full backup time period for the instance. DataFullBackupStartUTCHour has higher priority. If both fields are returned, DataFullBackupStartUTCHour takes precedence.
+- `data_incr_backup_periods` (Set of String) Incremental backup cycle for local disk instances. Values: Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday. Note: When high-frequency incremental backup is enabled (that is, when HourlyIncrBackupEnable is set to true), this field is not returned.
+- `data_keep_days_after_released` (Number) Number of days to retain data after instance release.
+- `data_keep_policy_after_released` (String) Policy for retaining instance backups after the instance is released. Values: Last: retain the last backup (default). All: retain all backups of the instance.
+- `high_frequency_snapshot_backup_enable` (Boolean) Whether high-frequency incremental snapshot backup is enabled for cloud disk instances. Values: true: Yes. false: No. Note: For local disk instances, this field returns false.
+- `high_frequency_snapshot_backup_second_period` (Number) Frequency of high-frequency incremental snapshot backups for cloud disk instances, in seconds. Values: 3600: every 1 hour. 7200: every 2 hours. 10800: every 3 hours. 14400: every 4 hours. 19200: every 6 hours. 28800: every 8 hours. 38400: every 12 hours. Note: If the instance is a local disk instance or the high-frequency incremental snapshot backup feature for the cloud disk instance is not enabled, this field returns 0.
+- `hourly_incr_backup_enable` (Boolean) Whether to enable high-frequency backup for local disk instances. Values: true: Yes. false: No.
+- `incr_backup_hour_period` (Number) Frequency of high-frequency incremental backups for local disk instances. Values: 0: no high-frequency incremental backup. In this case, HourlyIncrBackupEnable is false. 2: incremental backup every 2 hours. 4: incremental backup every 4 hours. 6: incremental backup every 6 hours. 12: incremental backup every 12 hours.
+- `keep_cross_backup_enable_after_released` (Boolean) Whether to retain cross-region backups. Values: true: Yes. false: No. Note: This feature is not supported for cloud disk instances.
+- `lock_ddl_time` (Number) Maximum DDL wait time. Default value is 30, minimum is 10, maximum is 1440, in minutes.
+- `log_backup_retention_day` (Number) Binlog backup retention period. Value range: 7–3650 days. Default retention is 7 days. Note: This parameter is not returned when RetentionPolicySynced is set to true.
+- `public_download_enable` (Boolean) Whether to allow downloading instance backup data from a public network environment. Values: true: Yes. false: No.
+- `retention_policy_synced` (Boolean) Whether the retention policy for log backups is the same as that for data backups. Values: true: Yes. false: No.
+
+Read-Only:
+
+- `lock_ddl_time_second` (Number) Maximum DDL wait time. Default value: 1800. Minimum: 1. Maximum: 86400. Unit: seconds. Note: The backup process will block DDL. If the blocking time exceeds the specified value, the backup will stop automatically. Only MySQL 8.0 instances support this setting.
+
+
+<a id="nestedatt--backup_policy--cross_backup_policy"></a>
+### Nested Schema for `backup_policy.cross_backup_policy`
+
+Optional:
+
+- `backup_enabled` (Boolean) Enable cross-region backup. true: enabled. false: disabled. Default value (unspecified).
+- `cross_backup_region` (String) Destination region ID for cross-region backups. This parameter is required when BackupEnabled is true.
+- `log_backup_enabled` (Boolean) Whether to enable cross-region log backup. true: Enable. false: Disable (default). Note: Cross-region log backup can only be enabled when cross-region backup is enabled.
+- `retention` (Number) Cross-region backup retention days. Value range: 7–3650. Default: 7. Unit: days. Note: When CrossBackupAllRetention is set to true, this field does not need to be set.
+
+Read-Only:
+
+- `cross_backup_all_retention` (Boolean) Retain cross-region backups long-term before instance release. Values: true: yes. false: no.
+
 
 
 <a id="nestedatt--maintenance_window"></a>
@@ -255,10 +325,14 @@ Read-Only:
 
 Read-Only:
 
+- `addresses` (Attributes Set) Address list.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints--addresses))
 - `auto_add_new_nodes` (String) When the endpoint type is read/write or read-only, you can set whether new nodes join automatically. Values: Enable: auto join. Disable: do not auto join (default)
 - `connection_info_tags` (Set of String) Connection endpoint tag.
 - `connection_mode` (String) Connection endpoint type. Values: Proxy: proxy endpoint. Direct: direct endpoint
 - `connection_pool_type` (String) Connection pool type for proxy terminal. Values: Transaction: Transaction-level connection pool. Default value. Direct: Direct mode.
+- `custom_route_strategy` (Attributes Set) Custom routing and forwarding rules for connected terminals.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints--custom_route_strategy))
 - `description` (String) Description of the connection endpoint
 - `enable_connection_persistent` (Boolean) Enable connection keep-alive. Options: true: yes. false: no
 - `enable_read_only` (String) Is global read-only enabled? Values: Enable: enabled. Disable: not enabled.
@@ -277,6 +351,31 @@ Read-Only:
 - `read_only_node_weight` (Attributes Set) List of nodes configured for the connection endpoint and their corresponding read-only weights.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints--read_only_node_weight))
 - `read_write_mode` (String) Read/write mode: ReadWrite: read/write. ReadOnly: read-only
+
+<a id="nestedatt--endpoints--addresses"></a>
+### Nested Schema for `endpoints.addresses`
+
+Read-Only:
+
+- `dns_visibility` (Boolean) false: Private network resolution (default). true: Private and public network resolution.
+- `domain` (String) Connection domain name.
+- `eip_id` (String) EIP ID, valid only for Public addresses.
+- `eip_locked` (Boolean) Whether the EIP used by the connected terminal is suspended due to overdue payment. Values: true: Yes. false: No.
+- `internet_protocol` (String) IP protocol version. Value: IPv4.
+- `ip_address` (String) IP address.
+- `network_type` (String) Network address type. Values: Private: private address. Public: public address.
+- `port` (String) Port.
+- `subnet_id` (String) Subnet ID, valid only for Private addresses.
+
+
+<a id="nestedatt--endpoints--custom_route_strategy"></a>
+### Nested Schema for `endpoints.custom_route_strategy`
+
+Read-Only:
+
+- `node_type` (String) SQL forwarding rule target. Values: Primary: primary node. Secondary: secondary node. ReadOnly: read-only node. Note: For dual-node instances, you can select the primary node or read-only node. For multi-node instances, you can select the primary node or secondary node.
+- `sql_keyword` (String) Forwarding rule keywords. SQL keyword setting rules are as follows: Each rule can contain up to 20 keywords. Maximum length is 64 characters. Can include English letters, numbers, underscores (_), @, #, :=, and Chinese characters.
+
 
 <a id="nestedatt--endpoints--read_only_node_weight"></a>
 ### Nested Schema for `endpoints.read_only_node_weight`

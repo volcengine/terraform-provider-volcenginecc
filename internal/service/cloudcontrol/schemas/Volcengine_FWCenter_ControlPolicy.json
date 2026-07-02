@@ -1,0 +1,347 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Direction"
+  ],
+  "definitions": {
+    "AddressInfo": {
+      "description": "Structured address entry.",
+      "properties": {
+        "Address": {
+          "description": "Detailed address information.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Description",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Address type. ip: IPv4; ipv6: IPv6; domain: domain name; port: port",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Internet boundary firewall access control policy",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/RuleId",
+      "/properties/Direction",
+      "/properties/Source",
+      "/properties/Destination",
+      "/properties/Proto",
+      "/properties/Action",
+      "/properties/Status",
+      "/properties/RepeatType",
+      "/properties/Description",
+      "/properties/IpType"
+    ],
+    "required": [
+      "/properties/Direction"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fw_center:AddControlPolicy",
+        "fw_center:DescribeControlPolicyByRuleId"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fw_center:DeleteControlPolicy",
+        "fw_center:DescribeControlPolicyByRuleId"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fw_center:DescribeControlPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fw_center:DescribeControlPolicyByRuleId"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fw_center:ModifyControlPolicy",
+        "fw_center:ModifyControlPolicyPosition",
+        "fw_center:DescribeControlPolicyByRuleId"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/RuleId",
+    "/properties/Direction"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Unique user ID.",
+      "type": "string"
+    },
+    "Action": {
+      "description": "Action of the access control policy. accept: allow; deny: block; monitor: observe.",
+      "enum": [
+        "accept",
+        "deny",
+        "monitor"
+      ],
+      "type": "string"
+    },
+    "Description": {
+      "description": "Policy description.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DestPort": {
+      "description": "Destination port. Format is a single port or port range. If protocol type is ICMP/ALL, value is empty; if DestPortType is group, use port address book UUID list; if DestPortType is port, use port range.",
+      "type": "string"
+    },
+    "DestPortGroupType": {
+      "description": "Destination port book type",
+      "type": "string"
+    },
+    "DestPortList": {
+      "description": "Destination port list.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DestPortListV1": {
+      "description": "Destination port list (structured)",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AddressInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DestPortType": {
+      "description": "Destination port type. port: port; group: port address book.",
+      "type": "string"
+    },
+    "Destination": {
+      "description": "Destination address of the access control policy. When DestinationType is net, use CIDR; when group, use address book UUID list; when location, use region code; when domain, use domain name.",
+      "type": "string"
+    },
+    "DestinationCidrList": {
+      "description": "Destination CIDR list.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DestinationCidrListV1": {
+      "description": "Destination CIDR list (structured)",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AddressInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DestinationDomainList": {
+      "description": "Destination domain name list.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "DestinationGroupType": {
+      "description": "Destination address book type.",
+      "type": "string"
+    },
+    "DestinationType": {
+      "description": "Destination address type. net: destination subnet (CIDR); group: destination address book; location: destination region; domain: destination domain name",
+      "enum": [
+        "net",
+        "location",
+        "group",
+        "domain"
+      ],
+      "type": "string"
+    },
+    "Direction": {
+      "description": "Direction of the access control policy, indicating the direction of traffic transmission. in: inbound direction; out: outbound direction.",
+      "enum": [
+        "in",
+        "out"
+      ],
+      "type": "string"
+    },
+    "EffectStatus": {
+      "description": "Access control policy status. 1: Inactive; 2: Deploying; 3: Active",
+      "type": "integer"
+    },
+    "EndTime": {
+      "description": "Policy expiration date, Unix timestamp. If RepeatType is Permanent (always active), this field is not required. If RepeatType is Once (active for a single period) or Daily, Weekly, Monthly (repeatedly active), this field must be filled in.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "HitCnt": {
+      "description": "Number of matches.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "InternetFirewallId": {
+      "description": "Internet border firewall instance ID.",
+      "type": "string"
+    },
+    "IpType": {
+      "description": "IP version. v4: IPv4; v6: IPv6",
+      "type": "string"
+    },
+    "IsEffected": {
+      "description": "Whether the access control policy is active. true: active; false: inactive.",
+      "type": "boolean"
+    },
+    "Prio": {
+      "description": "Policy priority. The lower the value, the higher the priority. 0: lowest priority; 1: highest priority; other values: other priorities. Default value is 0 (lowest priority). When modifying, this parameter represents the policy's position in the policy list (cannot be set to 0).",
+      "format": "int64",
+      "type": "integer"
+    },
+    "Proto": {
+      "description": "Protocol type. ICMP, TCP, UDP, ANY (any protocol). When DestinationType is domain, protocol type must be TCP.",
+      "enum": [
+        "ICMP",
+        "TCP",
+        "UDP",
+        "ANY"
+      ],
+      "type": "string"
+    },
+    "RepeatDays": {
+      "description": "Recurring effective period. Required when RepeatType is Weekly or Monthly. Weekly value range: [0,6]; Monthly value range: [1,31]",
+      "insertionOrder": false,
+      "items": {
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RepeatEndTime": {
+      "description": "Repeat expiration time. Accurate to the minute, format is hh:mm.",
+      "type": "string"
+    },
+    "RepeatStartTime": {
+      "description": "Repeat start time. Accurate to the minute, format is hh:mm. Required when RepeatType is Daily, Weekly, or Monthly (repeatedly active).",
+      "type": "string"
+    },
+    "RepeatType": {
+      "description": "Repeat type. Permanent: always active; Once: active once; Daily: repeats daily; Weekly: repeats weekly; Monthly: repeats monthly.",
+      "enum": [
+        "Permanent",
+        "Once",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "type": "string"
+    },
+    "RuleId": {
+      "description": "Unique ID of the access control policy, used to uniquely identify an access control policy.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Source": {
+      "description": "Source address. When SourceType is net, use CIDR; when group, use address book UUID list; when location, use region code.",
+      "type": "string"
+    },
+    "SourceCidrList": {
+      "description": "Source CIDR list",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SourceCidrListV1": {
+      "description": "Source CIDR list (structured).",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AddressInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "SourceGroupType": {
+      "description": "Source address book type",
+      "type": "string"
+    },
+    "SourceType": {
+      "description": "Source address type. net: subnet (CIDR); group: address book; location: region",
+      "enum": [
+        "net",
+        "location",
+        "group"
+      ],
+      "type": "string"
+    },
+    "StartTime": {
+      "description": "Policy effective start date, Unix timestamp. Not required when RepeatType is Permanent (always effective). Required when RepeatType is Once (single period effective) or Daily, Weekly, Monthly (recurring effective)",
+      "format": "int64",
+      "type": "integer"
+    },
+    "Status": {
+      "description": "Policy enable status. true: Enabled; false: Disabled",
+      "semantic": "status",
+      "type": "boolean"
+    },
+    "UpdateTime": {
+      "description": "Last update time of the access control policy, Unix timestamp.",
+      "format": "int64",
+      "semantic": "updatedTime",
+      "type": "integer"
+    },
+    "UseCount": {
+      "description": "Number of policies in use.",
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RuleId",
+    "/properties/AccountId",
+    "/properties/HitCnt",
+    "/properties/UseCount",
+    "/properties/UpdateTime",
+    "/properties/EffectStatus",
+    "/properties/IsEffected",
+    "/properties/DestPortGroupType",
+    "/properties/DestPortList",
+    "/properties/DestPortListV1",
+    "/properties/DestinationCidrList",
+    "/properties/DestinationCidrListV1",
+    "/properties/DestinationDomainList",
+    "/properties/DestinationGroupType",
+    "/properties/SourceCidrList",
+    "/properties/SourceCidrListV1",
+    "/properties/SourceGroupType"
+  ],
+  "required": [
+    "Direction",
+    "Source",
+    "SourceType",
+    "Destination",
+    "DestinationType",
+    "Proto",
+    "Action"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::FWCenter::ControlPolicy",
+  "writeOnlyProperties": [
+    "/properties/InternetFirewallId"
+  ]
+}

@@ -50,9 +50,73 @@ resource "volcenginecc_gtm_gtm" "GTMGTMDemo" {
 - `id` (String) Uniquely identifies the resource.
 - `last_operator` (String) Account that last operated the GTM instance
 - `owner` (String) Account that created the GTM instance
+- `policy` (Attributes) Detailed configuration of the scheduling policy for the GTM instance. (see [below for nested schema](#nestedatt--policy))
+- `probe` (Attributes) Detailed configuration of the health check for the GTM instance. (see [below for nested schema](#nestedatt--probe))
 - `state` (String) Current lifecycle status of the GTM instance, such as `init`: indicates the GTM instance has been successfully created but not yet configured. `configuring_address`: indicates basic rule configuration is complete but target address configuration is not yet finished. `editing`: indicates both basic configuration and target address are completed but the instance is not yet enabled. `running`: indicates the instance is officially enabled
 - `update_time` (String) Most recent modification time of the GTM instance. Accurate to milliseconds, formatted according to ISO 8601 standard
 - `zone_type` (String) This parameter has no practical significance and can be ignored
+
+<a id="nestedatt--policy"></a>
+### Nested Schema for `policy`
+
+Read-Only:
+
+- `alarm_only` (Boolean) If the current address pool set is unavailable, does Cloud Scheduling GTM only trigger an alert notification without automatically switching to an available address pool? true: Cloud Scheduling GTM only triggers an alert notification. false: Cloud Scheduling GTM automatically switches to an available address pool.
+- `perf_mode` (String) Routing mode for intelligent routing policies. perf: Performance first. capacity: Capacity first. feedback: Load feedback.
+- `routing_mode` (String) Routing mode. The parameter values are: lb: Routes user traffic proportionally to different IDC data centers based on load balancing. geo: Routes user traffic to the nearest IDC data center on the same carrier line based on the user's geographic location and carrier. geo-lb (default): First routes user traffic to the nearest IDC data center access line on the same carrier based on the user's geographic location and carrier, then distributes user traffic proportionally to multiple IDC data centers based on load balancing.
+- `statistics` (Attributes) Statistics for addresses associated with the scheduling policy. (see [below for nested schema](#nestedatt--policy--statistics))
+- `targets` (Attributes Set) List of target address pools associated with the scheduling policy.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--policy--targets))
+
+<a id="nestedatt--policy--statistics"></a>
+### Nested Schema for `policy.statistics`
+
+Read-Only:
+
+- `active_addr` (Number) Number of available addresses.
+- `inactive_addr` (Number) Number of unavailable addresses.
+
+
+<a id="nestedatt--policy--targets"></a>
+### Nested Schema for `policy.targets`
+
+Read-Only:
+
+- `pool_id` (String) Target address pool ID.
+
+
+
+<a id="nestedatt--probe"></a>
+### Nested Schema for `probe`
+
+Read-Only:
+
+- `advised_node_count` (Number) Recommended number of health check probe points.
+- `disable` (Boolean) Whether health check is disabled. true: disabled. false: enabled.
+- `dns_record_type` (String) DNS record type for the health check.
+- `failed_count` (Number) Threshold for the number of health check failures before a single target address is considered faulty. For example, if you set this parameter to 3, a target address will be marked as faulty after 3 consecutive health check failures. Default value: 3.
+- `host` (String) Full domain name of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.
+- `http_method` (String) HTTP request method. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.
+- `http_usability_codes` (Attributes Set) Customize a range of HTTP status codes. After a probe initiates a health check, if the target address returns an HTTP status code outside the specified range, the health check at that probe is considered failed. If you do not set the HttpUsabilityCodes parameter for the policy, this parameter will not be returned.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--probe--http_usability_codes))
+- `interval` (Number) Interval between each health check, in seconds.
+- `is_manual_nodes` (Boolean) Whether to manually configure health check probe points. true: Manually configure health check probe points. false: Use recommended health check probe points.
+- `nodes` (Set of String) List of probe nodes used for health checks.
+- `ping_count` (Number) Number of packets sent. If you set this parameter to 10, each ping check sends 10 packets simultaneously. This parameter is only valid when the health check protocol is set to ping.
+- `ping_loss_percent` (Number) Packet loss rate. Unit: percent. If the packet loss rate exceeds this parameter value, the result is considered abnormal. For example, if this parameter is set to 10 and the packet loss rate during a health check is greater than 10, the result is considered abnormal. This parameter is only valid when the health check protocol is set to ping.
+- `port` (Number) Port of the health check target address. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.
+- `protocol` (String) Protocol used for health checks. ping: ICMP protocol. tcp: TCP protocol. http: HTTP protocol. https: HTTPS protocol.
+- `tcp_conn_timeout` (Number) Timeout for establishing a single TCP connection. For example, if you set this parameter to 2 seconds, a TCP connection will be considered failed if it is not established within 2 seconds during a health check. This parameter is only valid when the health check protocol is set to tcp.
+- `timeout` (Number) Timeout for the health check task. Unit: seconds.
+- `url` (String) Path part of the health check target address, starting with /. This parameter is only valid when the health check protocol is set to HTTP or HTTPS.
+
+<a id="nestedatt--probe--http_usability_codes"></a>
+### Nested Schema for `probe.http_usability_codes`
+
+Read-Only:
+
+- `codes` (Set of Number) List of HTTP status codes.
+- `operator` (String) Operator. interval: matches values within the range. include: matches specified values. exclude: matches values other than the specified ones.
 
 ## Import
 

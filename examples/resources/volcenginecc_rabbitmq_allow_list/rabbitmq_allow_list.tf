@@ -1,4 +1,4 @@
-resource "volcenginecc_rabbitmq_allowlist" "RabbitMQAllowListDemo" {
+resource "volcenginecc_rabbitmq_allow_list" "RabbitMQAllowListDemo" {
   allow_list_type = "IPv4"
   allow_list      = "192.x.0.0/24"
   allow_list_name = "ccapi-test"

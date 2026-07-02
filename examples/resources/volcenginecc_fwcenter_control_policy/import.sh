@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_fwcenter_control_policy.example "rule_id|direction"

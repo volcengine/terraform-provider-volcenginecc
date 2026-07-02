@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_veenedge_vpc.example "vpc_identity"

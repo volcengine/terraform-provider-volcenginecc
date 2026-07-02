@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_waf_host_group.example "host_group_id"

@@ -1,10 +1,12 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/PublicKey",
-    "/properties/PrivateKey",
+    "/properties/CertificateType",
+    "/properties/OldCertificateId",
+    "/properties/CertificateId",
     "/properties/ProjectName",
-    "/properties/CertificateType"
+    "/properties/PublicKey",
+    "/properties/PrivateKey"
   ],
   "definitions": {
     "Tag": {
@@ -40,6 +42,8 @@
       "permissions": [
         "alb:UploadCertificate",
         "alb:UploadCACertificate",
+        "alb:ReplaceCertificate",
+        "alb:ReplaceCACertificate",
         "alb:DescribeAllCertificates"
       ]
     },
@@ -77,7 +81,7 @@
   ],
   "properties": {
     "CertificateId": {
-      "description": "Certificate ID",
+      "description": "Certificate ID. When the replacement mode is stock, this refers to the existing certificate ID used for replacement.",
       "semantic": "resourceId",
       "type": "string"
     },
@@ -123,6 +127,10 @@
       "type": "array",
       "uniqueItems": true
     },
+    "OldCertificateId": {
+      "description": "Old certificate ID to be replaced. Setting this field indicates that the certificate is created in replacement mode.",
+      "type": "string"
+    },
     "PrivateKey": {
       "description": "Server certificate private key. Required when certificate type is Server",
       "type": "string"
@@ -157,7 +165,6 @@
     }
   },
   "readOnlyProperties": [
-    "/properties/CertificateId",
     "/properties/CreatedTime",
     "/properties/DomainName",
     "/properties/ExpiredAt",
@@ -166,8 +173,7 @@
     "/properties/Status"
   ],
   "required": [
-    "CertificateType",
-    "PublicKey"
+    "CertificateType"
   ],
   "tagging": {
     "tagOnCreate": true,
@@ -177,6 +183,7 @@
   "typeName": "Volcengine::ALB::Certificate",
   "writeOnlyProperties": [
     "/properties/PublicKey",
-    "/properties/PrivateKey"
+    "/properties/PrivateKey",
+    "/properties/OldCertificateId"
   ]
 }

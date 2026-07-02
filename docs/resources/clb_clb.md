@@ -26,7 +26,6 @@ resource "volcenginecc_clb_clb" "CLBDemo" {
   period                         = 1
   period_unit                    = "Month"
   project_name                   = "default"
-  region_id                      = "cn-beijing"
   subnet_id                      = "subnet-rrwqhg3qzxfkv0x57g3xxxx"
   type                           = "public"
   vpc_id                         = "vpc-rrco37ovjq4gv0x58zfxxxx"

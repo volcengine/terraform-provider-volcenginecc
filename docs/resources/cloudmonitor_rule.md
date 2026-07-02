@@ -75,13 +75,13 @@ resource "volcenginecc_cloudmonitor_rule" "CloudMonitorRuleDemo" {
 
 ### Required
 
-- `effect_end_at` (String) Policy expiration time, in HH:MM format.
-- `effect_start_at` (String) Policy start time, in HH:MM format.
+- `effect_end_at` (String) End time for the alert policy to take effect, in HH:MM format, for example: 23:59. Note: EffectEndAt must be later than EffectStartAt.
+- `effect_start_at` (String) Start time for the alert policy to take effect, in HH:MM format, for example: 00:00.
 - `enable_state` (String) Alert policy status. enable: enabled, disable: disabled
-- `evaluation_count` (Number) Duration required to trigger an alert, in minutes.
+- `evaluation_count` (Number) Duration required to trigger an alert. Unit: minutes. Supported values: 1, 3, 5, 10, 15, 30, 60, 120.
 - `level` (String) Alert level. critical: critical, warning: warning, notice: notification
-- `namespace` (String) Cloud product associated with the monitoring metric. For details, see Namespace for each product in Cloud Product Monitoring Metrics.
-- `rule_name` (String) Alert policy name.
+- `namespace` (String) The cloud product to which the monitoring metric of this policy belongs. For details, see Namespace for each product under Cloud Product Monitoring Metrics.
+- `rule_name` (String) Alert policy name. Length must be between 1 and 128 characters. Cannot start with a digit or hyphen -.
 - `rule_type` (String) Alert policy type. static: manual selection, dynamic: select by resource name, project, and tag.
 - `silence_time` (Number) Alert sending interval, in minutes. Supported values: 5, 10, 15, 30, 60, 180, 360, 720, 1440.
 - `sub_namespace` (String) Dimension of the metric referenced by this policy. For details, see SubNamespace for each product in Cloud Product Monitoring Metrics.
@@ -92,20 +92,20 @@ resource "volcenginecc_cloudmonitor_rule" "CloudMonitorRuleDemo" {
 - `condition_operator` (String) Multi-metric determination condition. &&: Alert is triggered only if all metrics meet the condition; ||: Alert is triggered if any metric meets the condition.
 - `conditions` (Attributes Set) Alert conditions. Array format; supports multiple metric evaluation statements, up to 10.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--conditions))
-- `contact_group_ids` (Set of String) Alert notification group ID bound to the alert policy.
-- `description` (String) Alert policy description.
-- `dimension_conditions` (Attributes) Dimension configuration. (see [below for nested schema](#nestedatt--dimension_conditions))
+- `contact_group_ids` (Set of String) When AlertMethods is set to Email, Phone, or SMS, specify the alert contact group ID. You can call the ListContactGroups API to obtain the contact group ID. Note: Up to 5 contact groups can be configured.
+- `description` (String) Alert policy description information. Cannot start with a digit, hyphen, or Chinese symbol. Only Chinese characters, letters, digits, underscore _, hyphen -, and Chinese symbols are allowed. Length must be between 0 and 255 characters.
+- `dimension_conditions` (Attributes) Dimension configuration. Only valid when RuleType is set to dynamic. Supports three matching methods: project, tag, and meta. (see [below for nested schema](#nestedatt--dimension_conditions))
 - `level_conditions` (Attributes Set) Alert severity configuration.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--level_conditions))
 - `multiple_conditions` (Boolean) Does the alert policy use multiple metrics? true: multiple metrics, false: single metric (default).
 - `no_data` (Attributes) No data alert. (see [below for nested schema](#nestedatt--no_data))
-- `notification_id` (String) Notification policy ID.
+- `notification_id` (String) Notification policy ID. You can call the ListNotifications API to obtain the notification policy ID. Note: This parameter has higher priority than AlertMethods. When you specify the alert notification policy ID using this parameter, other alert notification configurations (AlertMethods, ContactGroupIds, WebhookIds, EffectStartAt, EffectEndAt, etc.) will become invalid.
 - `notify_templates` (Attributes Set) Notification template configuration.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--notify_templates))
 - `original_dimensions` (Attributes) Resource ID detected by the alert policy. (see [below for nested schema](#nestedatt--original_dimensions))
-- `project_name` (String) Project to which the alert policy belongs.
+- `project_name` (String) Project name to which the alert policy belongs. If not specified, it defaults to the default project.
 - `recovery_notify` (Attributes) Alert recovery notification. (see [below for nested schema](#nestedatt--recovery_notify))
-- `regions` (Set of String) Availability zone ID of the cloud product.
+- `regions` (Set of String) Availability Zone ID of the cloud product. When RuleType is static, only one Availability Zone ID can be configured. When RuleType is dynamic, multiple Availability Zone IDs can be configured. Separate multiple Availability Zone IDs with commas. Note: If set to ALL, all availability zones of the cloud product are selected.
 - `tags` (Attributes Set) Bind alert policy to Tag.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 - `webhook` (String) Alarm callback URL bound to the alarm policy.
@@ -150,7 +150,7 @@ Optional:
 
 - `all_dimensions` (Boolean) Whether all resources are included. true: All resources. false: Partial resources.
 - `condition` (String) Condition. and: All conditions met. or: Any condition met.
-- `metas` (Attributes List) Condition. and: All conditions met. or: Any condition met.
+- `metas` (Attributes List) Resource list. Up to 10 resource names can be configured. When Comparator is equal or not_equal, there is no limit on the length of the resource name. When Comparator is contain, not_contain, prefix_match, or suffix_match, the resource name cannot exceed 100 characters.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--dimension_conditions--meta_condition--metas))
 
 <a id="nestedatt--dimension_conditions--meta_condition--metas"></a>
@@ -158,7 +158,7 @@ Optional:
 
 Optional:
 
-- `comparator` (String) Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.
+- `comparator` (String) Comparator for tag matching. contain: Contains. not_contain: Does not contain. prefix_match: Prefix match. suffix_match: Suffix match. equal: Equals. not_equal: Does not equal. exist: Exists.
 - `key` (String) Tag key.
 - `values` (Set of String) Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.
 
@@ -186,7 +186,7 @@ Optional:
 
 Optional:
 
-- `comparator` (String) Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.
+- `comparator` (String) Comparator for tag matching. contain: Contains. not_contain: Does not contain. prefix_match: Prefix match. suffix_match: Suffix match. equal: Equals. not_equal: Does not equal. exist: Exists.
 - `key` (String) Tag key.
 - `values` (Set of String) Tag value (Value). When Comparator is exist, includes all Values corresponding to the Key and does not support input. When Comparator is equal or not_equal, supports multiple Value inputs. When Comparator is contain, not_contain, prefix_match, or suffix_match, only one Value can be entered.
 
@@ -234,7 +234,7 @@ Optional:
 
 Optional:
 
-- `channel` (String) Notification channel. Options: email: Email sms: SMS phone: Phone feishu: Feishu dingtalk: DingTalk wecom: WeCom slack: Slack api: Callback URL.
+- `channel` (String) Notification channels. Values: email: Email, sms: SMS, phone: Phone, lark: Lark, dingtalk: DingTalk, wecom: WeCom, slack: Slack, api: Callback URL.
 - `notify_template_id` (String) Notification template ID. Note: Each notification channel supports only one notification template ID.
 
 

@@ -12,7 +12,7 @@ The backup policy defines information such as backup cycle and backup type. Subs
 ## Example Usage
 
 ```terraform
-resource "volcenginecc_cbr_backuppolicy" "CBRBackupPolicyDemo" {
+resource "volcenginecc_cbr_backup_policy" "CBRBackupPolicyDemo" {
   backup_type       = "INCREMENTAL"
   crontab           = "0 2,1,0 * * 1,2"
   enable_policy     = false

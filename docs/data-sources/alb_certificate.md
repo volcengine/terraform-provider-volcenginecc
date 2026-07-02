@@ -21,7 +21,7 @@ Data Source schema for Volcengine::ALB::Certificate
 
 ### Read-Only
 
-- `certificate_id` (String) Certificate ID
+- `certificate_id` (String) Certificate ID. When the replacement mode is stock, this refers to the existing certificate ID used for replacement.
 - `certificate_name` (String) Certificate name. Length must be between 1 and 128 characters, start with a letter or Chinese character, and may include numbers, periods (.), underscores (_), and hyphens (-)
 - `certificate_type` (String) Certificate type. Options: CA: CA certificate; Server: server certificate
 - `created_time` (String) Certificate creation time
@@ -29,6 +29,7 @@ Data Source schema for Volcengine::ALB::Certificate
 - `domain_name` (String) Certificate domain name
 - `expired_at` (String) Certificate expiration time
 - `listeners` (Set of String) List of listeners associated with the certificate
+- `old_certificate_id` (String) Old certificate ID to be replaced. Setting this field indicates that the certificate is created in replacement mode.
 - `private_key` (String) Server certificate private key. Required when certificate type is Server
 - `project_name` (String) Project name
 - `public_key` (String) Server certificate public key

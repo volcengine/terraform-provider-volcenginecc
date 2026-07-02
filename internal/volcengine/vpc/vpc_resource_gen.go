@@ -494,6 +494,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"user_cidr_blocks": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "User CIDR block of the VPC.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -601,7 +602,6 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AssociateCens",
 		"/properties/RouteTableIds",
 		"/properties/SecurityGroupIds",
-		"/properties/UserCidrBlocks",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

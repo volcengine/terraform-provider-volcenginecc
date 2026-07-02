@@ -55,9 +55,9 @@ Read-Only:
 
 Read-Only:
 
-- `custom_variables` (Attributes Set) Custom variable information (see [below for nested schema](#nestedatt--custom_log--custom_variables))
-- `request_headers` (Attributes Set) Request header information (see [below for nested schema](#nestedatt--custom_log--request_headers))
-- `response_headers` (Attributes Set) Response header information (see [below for nested schema](#nestedatt--custom_log--response_headers))
+- `custom_variables` (Attributes Set) Custom Variable Information (see [below for nested schema](#nestedatt--custom_log--custom_variables))
+- `request_headers` (Attributes Set) Request Header Information (see [below for nested schema](#nestedatt--custom_log--request_headers))
+- `response_headers` (Attributes Set) Response Header Information (see [below for nested schema](#nestedatt--custom_log--response_headers))
 
 <a id="nestedatt--custom_log--custom_variables"></a>
 ### Nested Schema for `custom_log.custom_variables`

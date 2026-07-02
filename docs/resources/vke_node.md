@@ -28,7 +28,6 @@ resource "volcenginecc_vke_node" "VkeNodeDemo" {
 ### Required
 
 - `cluster_id` (String) Cluster ID.
-- `node_pool_id` (String) Node pool ID. If no parameter value is provided: add existing ECS instances to the default node pool. If a parameter value is provided: add existing ECS instances to a custom node pool.
 
 ### Optional
 
@@ -40,6 +39,7 @@ resource "volcenginecc_vke_node" "VkeNodeDemo" {
 - `instance_id` (String) Cloud server instance ID corresponding to the node.
 - `keep_instance_name` (Boolean) Whether to retain the original ECS instance name. Options: false (default): do not retain the original ECS instance name; Container Service automatically assigns a name. true: retain the original ECS instance name.
 - `kubernetes_config` (Attributes) Kubernetes-related configuration for the node. If empty, the node inherits the default node pool's Kubernetes configuration: KubernetesConfig.Labels/Taints/Cordon. If custom configuration is provided, the node uses the custom configuration and ignores the default node pool's Kubernetes configuration. (see [below for nested schema](#nestedatt--kubernetes_config))
+- `node_pool_id` (String) Node pool ID. If no parameter value is provided: add existing ECS instances to the default node pool. If a parameter value is provided: add existing ECS instances to a custom node pool.
 
 ### Read-Only
 

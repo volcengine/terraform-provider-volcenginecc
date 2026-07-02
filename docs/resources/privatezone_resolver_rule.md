@@ -29,7 +29,6 @@ resource "volcenginecc_privatezone_resolver_rule" "PrivateZoneResolverRuleDemo" 
       region = "cn-beijing"
     vpc_id = "vpc-1a10aeq5vr2tc8nvepkauwljx****" }
   ]
-  vpc_trns = ["trn:vpc:cn-beijing:********:vpc/vpc-3nqt4kq87xn2893xxxxx", "trn:vpc:cn-beijing:********:vpc/vpc-1a10aeq5vr2tc8nvepxxxxx"]
 }
 ```
 

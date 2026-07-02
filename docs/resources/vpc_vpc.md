@@ -37,7 +37,8 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
   security_group_ids = [
     "sg-29mkx39jb80741e1hgj2bxxx"
   ]
-  project_name = "default"
+  project_name     = "default"
+  user_cidr_blocks = ["10.0.0.0/8"]
   tags = [
     {
       key   = "env"
@@ -65,6 +66,7 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
 - `support_ipv_4_gateway` (Boolean) Whether the VPC enables the IPv4 gateway. false (default): not enabled. true: enabled.
 - `tags` (Attributes Set) Tags bound to the private network.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `user_cidr_blocks` (Set of String) User CIDR block of the VPC.
 - `vpc_name` (String) Name of the VPC. Length must be between 1 and 128 characters. Must start with a letter, Chinese character, or number, and can include periods (.), underscores (_), and hyphens (-). If not specified, defaults to the VPC instance ID. Cannot start with http:// or https://.
 
 ### Read-Only
@@ -80,7 +82,6 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
 - `security_group_ids` (Set of String) List of security groups in the VPC.
 - `status` (String) Status of the VPC. Creating: being created. Created: created. Available: available.
 - `update_time` (String) Time when the VPC was updated.
-- `user_cidr_blocks` (Set of String) User CIDR block of the VPC.
 - `vpc_id` (String) ID of the VPC.
 
 <a id="nestedatt--tags"></a>

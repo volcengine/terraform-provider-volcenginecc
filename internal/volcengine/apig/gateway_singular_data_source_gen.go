@@ -86,7 +86,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Custom log configuration",
 		//	  "properties": {
 		//	    "CustomVariables": {
-		//	      "description": "Custom variable information",
+		//	      "description": "Custom Variable Information",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Request header information",
@@ -107,7 +107,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "RequestHeaders": {
-		//	      "description": "Request header information",
+		//	      "description": "Request Header Information",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Request header information",
@@ -128,7 +128,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "ResponseHeaders": {
-		//	      "description": "Response header information",
+		//	      "description": "Response Header Information",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Request header information",
@@ -169,7 +169,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Custom variable information",
+					Description: "Custom Variable Information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RequestHeaders
@@ -188,7 +188,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Request header information",
+					Description: "Request Header Information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ResponseHeaders
@@ -207,7 +207,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Response header information",
+					Description: "Response Header Information",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

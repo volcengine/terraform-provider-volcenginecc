@@ -1,0 +1,121 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "GeneralWebhookHeaderKV": {
+      "description": "Webhook header key-value pair",
+      "properties": {
+        "Key": {
+          "description": "Key for custom request header",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Value for custom request header",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Webhook integration configuration is used to manage alert notification channels such as DingTalk, Feishu, WeCom, and custom Webhooks",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/WebhookID",
+      "/properties/WebhookName",
+      "/properties/WebhookType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "TLS:CreateAlarmWebhookIntegration",
+        "TLS:DescribeAlarmWebhookIntegrations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "TLS:DeleteAlarmWebhookIntegration",
+        "TLS:DescribeAlarmWebhookIntegrations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "TLS:DescribeAlarmWebhookIntegrations"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "TLS:DescribeAlarmWebhookIntegrations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "TLS:ModifyAlarmWebhookIntegration",
+        "TLS:DescribeAlarmWebhookIntegrations"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/WebhookID"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "Webhook integration configuration creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "ModifyTime": {
+      "description": "Webhook integration configuration last modified time",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "WebhookHeaders": {
+      "description": "Custom Webhook request headers. Required when WebhookType is set to custom",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/GeneralWebhookHeaderKV"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "WebhookID": {
+      "description": "Webhook integration configuration ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "WebhookMethod": {
+      "description": "Custom Webhook request methods; only POST and PUT are supported",
+      "type": "string"
+    },
+    "WebhookName": {
+      "description": "Webhook integration configuration name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "WebhookSecret": {
+      "description": "Webhook encryption key. If WebhookType is set to lark and signature verification is enabled in the Feishu bot security settings, enter the Feishu bot signature key here. For details, refer to the custom bot usage guide. If WebhookType is set to dingtalk and a signature value is configured in the DingTalk bot, enter the DingTalk bot signature value here. For details, refer to bot development documentation",
+      "type": "string"
+    },
+    "WebhookType": {
+      "description": "Webhook type. custom: custom Webhook address. lark: Feishu. dingtalk: DingTalk. wechat: WeCom",
+      "type": "string"
+    },
+    "WebhookUrl": {
+      "description": "Webhook request URL",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/WebhookID",
+    "/properties/CreateTime",
+    "/properties/ModifyTime"
+  ],
+  "required": [
+    "WebhookName",
+    "WebhookType",
+    "WebhookUrl"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TLS::AlarmWebhookIntegrationType"
+}

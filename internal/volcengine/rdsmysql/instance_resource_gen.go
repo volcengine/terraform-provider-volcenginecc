@@ -180,6 +180,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Whether to enable automatic scaling for the instance. Values: true: Yes. false: No.",
 		//	      "type": "boolean"
 		//	    },
+		//	    "ScalingDetectNode": {
+		//	      "description": "Node range for automatic scaling detection. Values: MasterNode: primary node. MasterSlaveNodes: primary and secondary nodes. AllNodes: all nodes. Note: When used as a request parameter, the default is MasterNode. For multi-node instances, MasterSlaveNodes and AllNodes have the same effect. For single-node instances, MasterNode, MasterSlaveNodes, and AllNodes have the same effect.",
+		//	      "type": "string"
+		//	    },
 		//	    "StorageThreshold": {
 		//	      "description": "Percentage of available storage space that triggers automatic scaling. Value range: 10–50, default: 10, unit: %",
 		//	      "type": "integer"
@@ -208,6 +212,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScalingDetectNode
+				"scaling_detect_node": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Node range for automatic scaling detection. Values: MasterNode: primary node. MasterSlaveNodes: primary and secondary nodes. AllNodes: all nodes. Note: When used as a request parameter, the default is MasterNode. For multi-node instances, MasterSlaveNodes and AllNodes have the same effect. For single-node instances, MasterNode, MasterSlaveNodes, and AllNodes have the same effect.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: StorageThreshold
@@ -242,7 +255,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// AutoStorageScalingConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AutoUpgradeMinorVersion
 		// Cloud Control resource type schema:
@@ -349,6 +361,503 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BackupPolicy
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance backup policy configuration.",
+		//	  "properties": {
+		//	    "AvailableCrossRegions": {
+		//	      "description": "List of destination regions available for cross-region backup.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "BackupPolicyBase": {
+		//	      "description": "Basic backup policy.",
+		//	      "properties": {
+		//	        "BinlogBackupAllRetention": {
+		//	          "description": "Retain all log backups before releasing the instance. Values: true: yes. false: no.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "BinlogBackupEnabled": {
+		//	          "description": "Enable log backup feature. Values: true: yes. false: no.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "BinlogBackupEncryptionEnabled": {
+		//	          "description": "Whether to enable encryption for log backups. Values: true: Yes. false: No.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "BinlogFileCountsEnable": {
+		//	          "description": "Enable local Binlog retention limit. Values: true: enabled. false: disabled.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "BinlogLimitCount": {
+		//	          "description": "Number of local Binlog files to retain, values range from 6 to 1000. Files exceeding the retention count are automatically deleted.",
+		//	          "type": "integer"
+		//	        },
+		//	        "BinlogLocalRetentionHour": {
+		//	          "description": "Local Binlog retention period. Value: 0–168. Unit: hours. Local logs exceeding the retention period are automatically deleted. When set to 0, local logs are not deleted automatically.",
+		//	          "type": "integer"
+		//	        },
+		//	        "BinlogSpaceLimitEnable": {
+		//	          "description": "Enable automatic Binlog cleanup when storage is excessive. When total instance storage usage exceeds 80% or available space is less than 5 GiB, the system automatically deletes the oldest local Binlog files until usage drops below 80% and available space exceeds 5 GiB. true: enabled. false: disabled.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "BinlogStoragePercentage": {
+		//	          "description": "Maximum storage space usage. Can be set to 20%–50%. When exceeded, the earliest Binlog files are automatically deleted until usage falls below this threshold. Note: Local Binlog space usage = local Binlog size / total available (purchased) instance space.",
+		//	          "type": "integer"
+		//	        },
+		//	        "DataBackupAllRetention": {
+		//	          "description": "Retain all data backups before releasing the instance. Values: true: yes. false: no.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "DataBackupEncryptionEnabled": {
+		//	          "description": "Enable encryption for data backups of local disk instances. Values: true: yes. false: no. Note: This feature is not supported for cloud disk instances.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "DataBackupRetentionDay": {
+		//	          "description": "Number of days to retain data backups. Valid values: 7–3650 days. Default: 7 days.",
+		//	          "type": "integer"
+		//	        },
+		//	        "DataFullBackupPeriods": {
+		//	          "description": "Full backup cycle. Values: Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "DataFullBackupStartUTCHour": {
+		//	          "description": "Start time of the full backup task time window (UTC). The time window is 1 hour. Note: Both DataFullBackupStartUTCHour and DataFullBackupTime can be used to specify the full backup time period for the instance. DataFullBackupStartUTCHour has higher priority. If both fields are returned, DataFullBackupStartUTCHour takes precedence.",
+		//	          "type": "integer"
+		//	        },
+		//	        "DataFullBackupTime": {
+		//	          "description": "Time window for executing backup tasks, with a duration of 1 hour. Format: HH:mmZ-HH:mmZ (UTC). Note: Both DataFullBackupStartUTCHour and DataFullBackupTime can be used to specify the full backup time period for the instance. DataFullBackupStartUTCHour has higher priority. If both fields are returned, DataFullBackupStartUTCHour takes precedence.",
+		//	          "type": "string"
+		//	        },
+		//	        "DataIncrBackupPeriods": {
+		//	          "description": "Incremental backup cycle for local disk instances. Values: Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday. Note: When high-frequency incremental backup is enabled (that is, when HourlyIncrBackupEnable is set to true), this field is not returned.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "DataKeepDaysAfterReleased": {
+		//	          "description": "Number of days to retain data after instance release.",
+		//	          "type": "integer"
+		//	        },
+		//	        "DataKeepPolicyAfterReleased": {
+		//	          "description": "Policy for retaining instance backups after the instance is released. Values: Last: retain the last backup (default). All: retain all backups of the instance.",
+		//	          "type": "string"
+		//	        },
+		//	        "HighFrequencySnapshotBackupEnable": {
+		//	          "description": "Whether high-frequency incremental snapshot backup is enabled for cloud disk instances. Values: true: Yes. false: No. Note: For local disk instances, this field returns false.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "HighFrequencySnapshotBackupSecondPeriod": {
+		//	          "description": "Frequency of high-frequency incremental snapshot backups for cloud disk instances, in seconds. Values: 3600: every 1 hour. 7200: every 2 hours. 10800: every 3 hours. 14400: every 4 hours. 19200: every 6 hours. 28800: every 8 hours. 38400: every 12 hours. Note: If the instance is a local disk instance or the high-frequency incremental snapshot backup feature for the cloud disk instance is not enabled, this field returns 0.",
+		//	          "type": "integer"
+		//	        },
+		//	        "HourlyIncrBackupEnable": {
+		//	          "description": "Whether to enable high-frequency backup for local disk instances. Values: true: Yes. false: No.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "IncrBackupHourPeriod": {
+		//	          "description": "Frequency of high-frequency incremental backups for local disk instances. Values: 0: no high-frequency incremental backup. In this case, HourlyIncrBackupEnable is false. 2: incremental backup every 2 hours. 4: incremental backup every 4 hours. 6: incremental backup every 6 hours. 12: incremental backup every 12 hours.",
+		//	          "type": "integer"
+		//	        },
+		//	        "KeepCrossBackupEnableAfterReleased": {
+		//	          "description": "Whether to retain cross-region backups. Values: true: Yes. false: No. Note: This feature is not supported for cloud disk instances.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "LockDDLTime": {
+		//	          "description": "Maximum DDL wait time. Default value is 30, minimum is 10, maximum is 1440, in minutes.",
+		//	          "type": "integer"
+		//	        },
+		//	        "LockDDLTimeSecond": {
+		//	          "description": "Maximum DDL wait time. Default value: 1800. Minimum: 1. Maximum: 86400. Unit: seconds. Note: The backup process will block DDL. If the blocking time exceeds the specified value, the backup will stop automatically. Only MySQL 8.0 instances support this setting.",
+		//	          "type": "integer"
+		//	        },
+		//	        "LogBackupRetentionDay": {
+		//	          "description": "Binlog backup retention period. Value range: 7–3650 days. Default retention is 7 days. Note: This parameter is not returned when RetentionPolicySynced is set to true.",
+		//	          "type": "integer"
+		//	        },
+		//	        "PublicDownloadEnable": {
+		//	          "description": "Whether to allow downloading instance backup data from a public network environment. Values: true: Yes. false: No.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "RetentionPolicySynced": {
+		//	          "description": "Whether the retention policy for log backups is the same as that for data backups. Values: true: Yes. false: No.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CrossBackupPolicy": {
+		//	      "description": "Cross-region backup policy.",
+		//	      "properties": {
+		//	        "BackupEnabled": {
+		//	          "description": "Enable cross-region backup. true: enabled. false: disabled. Default value (unspecified).",
+		//	          "type": "boolean"
+		//	        },
+		//	        "CrossBackupAllRetention": {
+		//	          "description": "Retain cross-region backups long-term before instance release. Values: true: yes. false: no.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "CrossBackupRegion": {
+		//	          "description": "Destination region ID for cross-region backups. This parameter is required when BackupEnabled is true.",
+		//	          "type": "string"
+		//	        },
+		//	        "LogBackupEnabled": {
+		//	          "description": "Whether to enable cross-region log backup. true: Enable. false: Disable (default). Note: Cross-region log backup can only be enabled when cross-region backup is enabled.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "Retention": {
+		//	          "description": "Cross-region backup retention days. Value range: 7–3650. Default: 7. Unit: days. Note: When CrossBackupAllRetention is set to true, this field does not need to be set.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"backup_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailableCrossRegions
+				"available_cross_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of destination regions available for cross-region backup.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BackupPolicyBase
+				"backup_policy_base": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BinlogBackupAllRetention
+						"binlog_backup_all_retention": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Retain all log backups before releasing the instance. Values: true: yes. false: no.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BinlogBackupEnabled
+						"binlog_backup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable log backup feature. Values: true: yes. false: no.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BinlogBackupEncryptionEnabled
+						"binlog_backup_encryption_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to enable encryption for log backups. Values: true: Yes. false: No.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BinlogFileCountsEnable
+						"binlog_file_counts_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable local Binlog retention limit. Values: true: enabled. false: disabled.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BinlogLimitCount
+						"binlog_limit_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Number of local Binlog files to retain, values range from 6 to 1000. Files exceeding the retention count are automatically deleted.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BinlogLocalRetentionHour
+						"binlog_local_retention_hour": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Local Binlog retention period. Value: 0–168. Unit: hours. Local logs exceeding the retention period are automatically deleted. When set to 0, local logs are not deleted automatically.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BinlogSpaceLimitEnable
+						"binlog_space_limit_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable automatic Binlog cleanup when storage is excessive. When total instance storage usage exceeds 80% or available space is less than 5 GiB, the system automatically deletes the oldest local Binlog files until usage drops below 80% and available space exceeds 5 GiB. true: enabled. false: disabled.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BinlogStoragePercentage
+						"binlog_storage_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Maximum storage space usage. Can be set to 20%–50%. When exceeded, the earliest Binlog files are automatically deleted until usage falls below this threshold. Note: Local Binlog space usage = local Binlog size / total available (purchased) instance space.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataBackupAllRetention
+						"data_backup_all_retention": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Retain all data backups before releasing the instance. Values: true: yes. false: no.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataBackupEncryptionEnabled
+						"data_backup_encryption_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable encryption for data backups of local disk instances. Values: true: yes. false: no. Note: This feature is not supported for cloud disk instances.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataBackupRetentionDay
+						"data_backup_retention_day": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Number of days to retain data backups. Valid values: 7–3650 days. Default: 7 days.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataFullBackupPeriods
+						"data_full_backup_periods": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Full backup cycle. Values: Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataFullBackupStartUTCHour
+						"data_full_backup_start_utc_hour": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Start time of the full backup task time window (UTC). The time window is 1 hour. Note: Both DataFullBackupStartUTCHour and DataFullBackupTime can be used to specify the full backup time period for the instance. DataFullBackupStartUTCHour has higher priority. If both fields are returned, DataFullBackupStartUTCHour takes precedence.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataFullBackupTime
+						"data_full_backup_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Time window for executing backup tasks, with a duration of 1 hour. Format: HH:mmZ-HH:mmZ (UTC). Note: Both DataFullBackupStartUTCHour and DataFullBackupTime can be used to specify the full backup time period for the instance. DataFullBackupStartUTCHour has higher priority. If both fields are returned, DataFullBackupStartUTCHour takes precedence.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataIncrBackupPeriods
+						"data_incr_backup_periods": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Incremental backup cycle for local disk instances. Values: Monday: Monday. Tuesday: Tuesday. Wednesday: Wednesday. Thursday: Thursday. Friday: Friday. Saturday: Saturday. Sunday: Sunday. Note: When high-frequency incremental backup is enabled (that is, when HourlyIncrBackupEnable is set to true), this field is not returned.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataKeepDaysAfterReleased
+						"data_keep_days_after_released": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Number of days to retain data after instance release.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataKeepPolicyAfterReleased
+						"data_keep_policy_after_released": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Policy for retaining instance backups after the instance is released. Values: Last: retain the last backup (default). All: retain all backups of the instance.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HighFrequencySnapshotBackupEnable
+						"high_frequency_snapshot_backup_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether high-frequency incremental snapshot backup is enabled for cloud disk instances. Values: true: Yes. false: No. Note: For local disk instances, this field returns false.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HighFrequencySnapshotBackupSecondPeriod
+						"high_frequency_snapshot_backup_second_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Frequency of high-frequency incremental snapshot backups for cloud disk instances, in seconds. Values: 3600: every 1 hour. 7200: every 2 hours. 10800: every 3 hours. 14400: every 4 hours. 19200: every 6 hours. 28800: every 8 hours. 38400: every 12 hours. Note: If the instance is a local disk instance or the high-frequency incremental snapshot backup feature for the cloud disk instance is not enabled, this field returns 0.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HourlyIncrBackupEnable
+						"hourly_incr_backup_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to enable high-frequency backup for local disk instances. Values: true: Yes. false: No.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IncrBackupHourPeriod
+						"incr_backup_hour_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Frequency of high-frequency incremental backups for local disk instances. Values: 0: no high-frequency incremental backup. In this case, HourlyIncrBackupEnable is false. 2: incremental backup every 2 hours. 4: incremental backup every 4 hours. 6: incremental backup every 6 hours. 12: incremental backup every 12 hours.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KeepCrossBackupEnableAfterReleased
+						"keep_cross_backup_enable_after_released": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to retain cross-region backups. Values: true: Yes. false: No. Note: This feature is not supported for cloud disk instances.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LockDDLTime
+						"lock_ddl_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Maximum DDL wait time. Default value is 30, minimum is 10, maximum is 1440, in minutes.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LockDDLTimeSecond
+						"lock_ddl_time_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Maximum DDL wait time. Default value: 1800. Minimum: 1. Maximum: 86400. Unit: seconds. Note: The backup process will block DDL. If the blocking time exceeds the specified value, the backup will stop automatically. Only MySQL 8.0 instances support this setting.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LogBackupRetentionDay
+						"log_backup_retention_day": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Binlog backup retention period. Value range: 7–3650 days. Default retention is 7 days. Note: This parameter is not returned when RetentionPolicySynced is set to true.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PublicDownloadEnable
+						"public_download_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to allow downloading instance backup data from a public network environment. Values: true: Yes. false: No.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RetentionPolicySynced
+						"retention_policy_synced": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the retention policy for log backups is the same as that for data backups. Values: true: Yes. false: No.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Basic backup policy.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CrossBackupPolicy
+				"cross_backup_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BackupEnabled
+						"backup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable cross-region backup. true: enabled. false: disabled. Default value (unspecified).",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CrossBackupAllRetention
+						"cross_backup_all_retention": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Retain cross-region backups long-term before instance release. Values: true: yes. false: no.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CrossBackupRegion
+						"cross_backup_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Destination region ID for cross-region backups. This parameter is required when BackupEnabled is true.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LogBackupEnabled
+						"log_backup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to enable cross-region log backup. true: Enable. false: Disable (default). Note: Cross-region log backup can only be enabled when cross-region backup is enabled.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Retention
+						"retention": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Cross-region backup retention days. Value range: 7–3650. Default: 7. Unit: days. Note: When CrossBackupAllRetention is set to true, this field does not need to be set.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Cross-region backup policy.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Instance backup policy configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BackupSlowLogSize
@@ -832,6 +1341,54 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "description": "Instance connection information.",
 		//	    "properties": {
+		//	      "Addresses": {
+		//	        "description": "Address list.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "Address list.",
+		//	          "properties": {
+		//	            "DNSVisibility": {
+		//	              "description": "false: Private network resolution (default). true: Private and public network resolution.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "Domain": {
+		//	              "description": "Connection domain name.",
+		//	              "type": "string"
+		//	            },
+		//	            "EipId": {
+		//	              "description": "EIP ID, valid only for Public addresses.",
+		//	              "type": "string"
+		//	            },
+		//	            "EipLocked": {
+		//	              "description": "Whether the EIP used by the connected terminal is suspended due to overdue payment. Values: true: Yes. false: No.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "IPAddress": {
+		//	              "description": "IP address.",
+		//	              "type": "string"
+		//	            },
+		//	            "InternetProtocol": {
+		//	              "description": "IP protocol version. Value: IPv4.",
+		//	              "type": "string"
+		//	            },
+		//	            "NetworkType": {
+		//	              "description": "Network address type. Values: Private: private address. Public: public address.",
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "description": "Port.",
+		//	              "type": "string"
+		//	            },
+		//	            "SubnetId": {
+		//	              "description": "Subnet ID, valid only for Private addresses.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
 		//	      "AutoAddNewNodes": {
 		//	        "description": "When the endpoint type is read/write or read-only, you can set whether new nodes join automatically. Values: Enable: auto join. Disable: do not auto join (default)",
 		//	        "type": "string"
@@ -852,6 +1409,26 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "ConnectionPoolType": {
 		//	        "description": "Connection pool type for proxy terminal. Values: Transaction: Transaction-level connection pool. Default value. Direct: Direct mode.",
 		//	        "type": "string"
+		//	      },
+		//	      "CustomRouteStrategy": {
+		//	        "description": "Custom routing and forwarding rules for connected terminals.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "Keyword routing policy information.",
+		//	          "properties": {
+		//	            "NodeType": {
+		//	              "description": "SQL forwarding rule target. Values: Primary: primary node. Secondary: secondary node. ReadOnly: read-only node. Note: For dual-node instances, you can select the primary node or read-only node. For multi-node instances, you can select the primary node or secondary node.",
+		//	              "type": "string"
+		//	            },
+		//	            "SQLKeyword": {
+		//	              "description": "Forwarding rule keywords. SQL keyword setting rules are as follows: Each rule can contain up to 20 keywords. Maximum length is 64 characters. Can include English letters, numbers, underscores (_), @, #, :=, and Chinese characters.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
 		//	      },
 		//	      "Description": {
 		//	        "description": "Description of the connection endpoint",
@@ -950,6 +1527,60 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"endpoints": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Addresses
+					"addresses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DNSVisibility
+								"dns_visibility": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "false: Private network resolution (default). true: Private and public network resolution.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Domain
+								"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Connection domain name.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EipId
+								"eip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "EIP ID, valid only for Public addresses.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EipLocked
+								"eip_locked": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether the EIP used by the connected terminal is suspended due to overdue payment. Values: true: Yes. false: No.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IPAddress
+								"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "IP address.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InternetProtocol
+								"internet_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "IP protocol version. Value: IPv4.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NetworkType
+								"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Network address type. Values: Private: private address. Public: public address.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Port
+								"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Port.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SubnetId
+								"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Subnet ID, valid only for Private addresses.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Address list.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: AutoAddNewNodes
 					"auto_add_new_nodes": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "When the endpoint type is read/write or read-only, you can set whether new nodes join automatically. Values: Enable: auto join. Disable: do not auto join (default)",
@@ -969,6 +1600,25 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ConnectionPoolType
 					"connection_pool_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Connection pool type for proxy terminal. Values: Transaction: Transaction-level connection pool. Default value. Direct: Direct mode.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CustomRouteStrategy
+					"custom_route_strategy": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: NodeType
+								"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "SQL forwarding rule target. Values: Primary: primary node. Secondary: secondary node. ReadOnly: read-only node. Note: For dual-node instances, you can select the primary node or read-only node. For multi-node instances, you can select the primary node or secondary node.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SQLKeyword
+								"sql_keyword": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Forwarding rule keywords. SQL keyword setting rules are as follows: Each rule can contain up to 20 keywords. Maximum length is 64 characters. Can include English letters, numbers, underscores (_), @, #, :=, and Chinese characters.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Custom routing and forwarding rules for connected terminals.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
@@ -1081,6 +1731,22 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EngineType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Database engine type. Values: InnoDB: InnoDB engine. RocksDB: RocksDB engine.",
+		//	  "type": "string"
+		//	}
+		"engine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Database engine type. Values: InnoDB: InnoDB engine. RocksDB: RocksDB engine.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: GlobalReadOnly
@@ -1485,6 +2151,23 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Instance node information.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ParameterTemplateId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Parameter template ID.",
+		//	  "type": "string"
+		//	}
+		"parameter_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Parameter template ID.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ParameterTemplateId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// Cloud Control resource type schema:
 		//
@@ -1501,6 +2184,23 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Port is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateIpAddress
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Specify the default terminal IP address of the instance within the designated private network and subnet. Note: If not set, the default terminal IP address will be automatically assigned within the specified private network and subnet.",
+		//	  "type": "string"
+		//	}
+		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specify the default terminal IP address of the instance within the designated private network and subnet. Note: If not set, the default terminal IP address will be automatically assigned within the specified private network and subnet.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// PrivateIpAddress is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
@@ -1951,76 +2651,113 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::RDSMySQL::Instance").WithTerraformTypeName("volcenginecc_rdsmysql_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address_objects":                  "AddressObjects",
-		"allow_list_ids":                   "AllowListIds",
-		"allow_list_version":               "AllowListVersion",
-		"auto_add_new_nodes":               "AutoAddNewNodes",
-		"auto_renew":                       "AutoRenew",
-		"auto_storage_scaling_config":      "AutoStorageScalingConfig",
-		"auto_upgrade_minor_version":       "AutoUpgradeMinorVersion",
-		"backup_audit_log_size":            "BackupAuditLogSize",
-		"backup_bin_log_size":              "BackupBinLogSize",
-		"backup_data_size":                 "BackupDataSize",
-		"backup_error_log_size":            "BackupErrorLogSize",
-		"backup_free_quota_size":           "BackupFreeQuotaSize",
-		"backup_log_size":                  "BackupLogSize",
-		"backup_slow_log_size":             "BackupSlowLogSize",
-		"backup_use":                       "BackupUse",
-		"basic_backup_binlog_size":         "BasicBackupBinlogSize",
-		"basic_backup_data_size":           "BasicBackupDataSize",
-		"charge_detail":                    "ChargeDetail",
-		"charge_end_time":                  "ChargeEndTime",
-		"charge_start_time":                "ChargeStartTime",
-		"charge_status":                    "ChargeStatus",
-		"charge_type":                      "ChargeType",
-		"connection_info_tags":             "ConnectionInfoTags",
-		"connection_mode":                  "ConnectionMode",
-		"connection_pool_type":             "ConnectionPoolType",
-		"cpu_num":                          "CpuNum",
-		"create_time":                      "CreateTime",
-		"created_time":                     "CreatedTime",
-		"current_kernel_version":           "CurrentKernelVersion",
-		"current_proxy_cpu_num":            "CurrentProxyCpuNum",
-		"day_kind":                         "DayKind",
-		"day_of_week":                      "DayOfWeek",
-		"db_engine_version":                "DBEngineVersion",
-		"db_param_group_id":                "DBParamGroupId",
-		"db_proxy_status":                  "DBProxyStatus",
-		"db_time_zone":                     "DBTimeZone",
-		"delay_replication_time":           "DelayReplicationTime",
-		"deletion_protection":              "DeletionProtection",
-		"description":                      "Description",
-		"disaster_recovery_instances":      "DisasterRecoveryInstances",
-		"dns_visibility":                   "DNSVisibility",
-		"domain":                           "Domain",
-		"dr_dts_task_id":                   "DrDtsTaskId",
-		"dr_dts_task_name":                 "DrDtsTaskName",
-		"dr_dts_task_status":               "DrDtsTaskStatus",
-		"dr_seconds_behind_master":         "DrSecondsBehindMaster",
-		"dts_task_id":                      "DtsTaskId",
-		"dts_task_name":                    "DtsTaskName",
-		"dts_task_status":                  "DtsTaskStatus",
-		"eip_id":                           "EipId",
-		"enable_connection_persistent":     "EnableConnectionPersistent",
-		"enable_read_only":                 "EnableReadOnly",
-		"enable_read_write_splitting":      "EnableReadWriteSplitting",
-		"enable_storage_auto_scale":        "EnableStorageAutoScale",
-		"endpoint_id":                      "EndpointId",
-		"endpoint_name":                    "EndpointName",
-		"endpoint_type":                    "EndpointType",
-		"endpoints":                        "Endpoints",
-		"global_read_only":                 "GlobalReadOnly",
-		"has_disaster_recovery_instances":  "HasDisasterRecoveryInstances",
-		"has_green_instance":               "HasGreenInstance",
-		"idle_connection_reclaim":          "IdleConnectionReclaim",
-		"implicit_trans_split":             "ImplicitTransSplit",
-		"instance_id":                      "InstanceId",
-		"instance_name":                    "InstanceName",
-		"instance_status":                  "InstanceStatus",
-		"instance_type":                    "InstanceType",
-		"internet_protocol":                "InternetProtocol",
-		"ip_address":                       "IPAddress",
+		"address_objects":                              "AddressObjects",
+		"addresses":                                    "Addresses",
+		"allow_list_ids":                               "AllowListIds",
+		"allow_list_version":                           "AllowListVersion",
+		"auto_add_new_nodes":                           "AutoAddNewNodes",
+		"auto_renew":                                   "AutoRenew",
+		"auto_storage_scaling_config":                  "AutoStorageScalingConfig",
+		"auto_upgrade_minor_version":                   "AutoUpgradeMinorVersion",
+		"available_cross_regions":                      "AvailableCrossRegions",
+		"backup_audit_log_size":                        "BackupAuditLogSize",
+		"backup_bin_log_size":                          "BackupBinLogSize",
+		"backup_data_size":                             "BackupDataSize",
+		"backup_enabled":                               "BackupEnabled",
+		"backup_error_log_size":                        "BackupErrorLogSize",
+		"backup_free_quota_size":                       "BackupFreeQuotaSize",
+		"backup_log_size":                              "BackupLogSize",
+		"backup_policy":                                "BackupPolicy",
+		"backup_policy_base":                           "BackupPolicyBase",
+		"backup_slow_log_size":                         "BackupSlowLogSize",
+		"backup_use":                                   "BackupUse",
+		"basic_backup_binlog_size":                     "BasicBackupBinlogSize",
+		"basic_backup_data_size":                       "BasicBackupDataSize",
+		"binlog_backup_all_retention":                  "BinlogBackupAllRetention",
+		"binlog_backup_enabled":                        "BinlogBackupEnabled",
+		"binlog_backup_encryption_enabled":             "BinlogBackupEncryptionEnabled",
+		"binlog_file_counts_enable":                    "BinlogFileCountsEnable",
+		"binlog_limit_count":                           "BinlogLimitCount",
+		"binlog_local_retention_hour":                  "BinlogLocalRetentionHour",
+		"binlog_space_limit_enable":                    "BinlogSpaceLimitEnable",
+		"binlog_storage_percentage":                    "BinlogStoragePercentage",
+		"charge_detail":                                "ChargeDetail",
+		"charge_end_time":                              "ChargeEndTime",
+		"charge_start_time":                            "ChargeStartTime",
+		"charge_status":                                "ChargeStatus",
+		"charge_type":                                  "ChargeType",
+		"connection_info_tags":                         "ConnectionInfoTags",
+		"connection_mode":                              "ConnectionMode",
+		"connection_pool_type":                         "ConnectionPoolType",
+		"cpu_num":                                      "CpuNum",
+		"create_time":                                  "CreateTime",
+		"created_time":                                 "CreatedTime",
+		"cross_backup_all_retention":                   "CrossBackupAllRetention",
+		"cross_backup_policy":                          "CrossBackupPolicy",
+		"cross_backup_region":                          "CrossBackupRegion",
+		"current_kernel_version":                       "CurrentKernelVersion",
+		"current_proxy_cpu_num":                        "CurrentProxyCpuNum",
+		"custom_route_strategy":                        "CustomRouteStrategy",
+		"data_backup_all_retention":                    "DataBackupAllRetention",
+		"data_backup_encryption_enabled":               "DataBackupEncryptionEnabled",
+		"data_backup_retention_day":                    "DataBackupRetentionDay",
+		"data_full_backup_periods":                     "DataFullBackupPeriods",
+		"data_full_backup_start_utc_hour":              "DataFullBackupStartUTCHour",
+		"data_full_backup_time":                        "DataFullBackupTime",
+		"data_incr_backup_periods":                     "DataIncrBackupPeriods",
+		"data_keep_days_after_released":                "DataKeepDaysAfterReleased",
+		"data_keep_policy_after_released":              "DataKeepPolicyAfterReleased",
+		"day_kind":                                     "DayKind",
+		"day_of_week":                                  "DayOfWeek",
+		"db_engine_version":                            "DBEngineVersion",
+		"db_param_group_id":                            "DBParamGroupId",
+		"db_proxy_status":                              "DBProxyStatus",
+		"db_time_zone":                                 "DBTimeZone",
+		"delay_replication_time":                       "DelayReplicationTime",
+		"deletion_protection":                          "DeletionProtection",
+		"description":                                  "Description",
+		"disaster_recovery_instances":                  "DisasterRecoveryInstances",
+		"dns_visibility":                               "DNSVisibility",
+		"domain":                                       "Domain",
+		"dr_dts_task_id":                               "DrDtsTaskId",
+		"dr_dts_task_name":                             "DrDtsTaskName",
+		"dr_dts_task_status":                           "DrDtsTaskStatus",
+		"dr_seconds_behind_master":                     "DrSecondsBehindMaster",
+		"dts_task_id":                                  "DtsTaskId",
+		"dts_task_name":                                "DtsTaskName",
+		"dts_task_status":                              "DtsTaskStatus",
+		"eip_id":                                       "EipId",
+		"eip_locked":                                   "EipLocked",
+		"enable_connection_persistent":                 "EnableConnectionPersistent",
+		"enable_read_only":                             "EnableReadOnly",
+		"enable_read_write_splitting":                  "EnableReadWriteSplitting",
+		"enable_storage_auto_scale":                    "EnableStorageAutoScale",
+		"endpoint_id":                                  "EndpointId",
+		"endpoint_name":                                "EndpointName",
+		"endpoint_type":                                "EndpointType",
+		"endpoints":                                    "Endpoints",
+		"engine_type":                                  "EngineType",
+		"global_read_only":                             "GlobalReadOnly",
+		"has_disaster_recovery_instances":              "HasDisasterRecoveryInstances",
+		"has_green_instance":                           "HasGreenInstance",
+		"high_frequency_snapshot_backup_enable":        "HighFrequencySnapshotBackupEnable",
+		"high_frequency_snapshot_backup_second_period": "HighFrequencySnapshotBackupSecondPeriod",
+		"hourly_incr_backup_enable":                    "HourlyIncrBackupEnable",
+		"idle_connection_reclaim":                      "IdleConnectionReclaim",
+		"implicit_trans_split":                         "ImplicitTransSplit",
+		"incr_backup_hour_period":                      "IncrBackupHourPeriod",
+		"instance_id":                                  "InstanceId",
+		"instance_name":                                "InstanceName",
+		"instance_status":                              "InstanceStatus",
+		"instance_type":                                "InstanceType",
+		"internet_protocol":                            "InternetProtocol",
+		"ip_address":                                   "IPAddress",
+		"keep_cross_backup_enable_after_released":      "KeepCrossBackupEnableAfterReleased",
 		"key":                              "Key",
+		"lock_ddl_time":                    "LockDDLTime",
+		"lock_ddl_time_second":             "LockDDLTimeSecond",
+		"log_backup_enabled":               "LogBackupEnabled",
+		"log_backup_retention_day":         "LogBackupRetentionDay",
 		"lower_case_table_names":           "LowerCaseTableNames",
 		"maintenance_time":                 "MaintenanceTime",
 		"maintenance_window":               "MaintenanceWindow",
@@ -2046,17 +2783,24 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"overdue_reclaim_time":             "OverdueReclaimTime",
 		"overdue_time":                     "OverdueTime",
 		"overload_protection":              "OverloadProtection",
+		"parameter_template_id":            "ParameterTemplateId",
 		"period":                           "Period",
 		"period_unit":                      "PeriodUnit",
 		"port":                             "Port",
+		"private_ip_address":               "PrivateIpAddress",
 		"project_name":                     "ProjectName",
 		"proxy_detail":                     "ProxyDetail",
 		"proxy_resource_info":              "ProxyResourceInfo",
+		"public_download_enable":           "PublicDownloadEnable",
 		"read_only_node_distribution_type": "ReadOnlyNodeDistributionType",
 		"read_only_node_max_delay_time":    "ReadOnlyNodeMaxDelayTime",
 		"read_only_node_weight":            "ReadOnlyNodeWeight",
 		"read_write_mode":                  "ReadWriteMode",
+		"retention":                        "Retention",
+		"retention_policy_synced":          "RetentionPolicySynced",
+		"scaling_detect_node":              "ScalingDetectNode",
 		"seconds_behind_master":            "SecondsBehindMaster",
+		"sql_keyword":                      "SQLKeyword",
 		"storage_audit_log_size":           "StorageAuditLogSize",
 		"storage_bin_log_size":             "StorageBinLogSize",
 		"storage_data_size":                "StorageDataSize",
@@ -2090,13 +2834,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Port",
 		"/properties/AllowListIds",
-		"/properties/AutoStorageScalingConfig",
 		"/properties/ChargeDetail/Number",
 		"/properties/DBParamGroupId",
 		"/properties/DBTimeZone",
 		"/properties/CpuNum",
 		"/properties/SuperAccountName",
 		"/properties/SuperAccountPassword",
+		"/properties/PrivateIpAddress",
+		"/properties/ParameterTemplateId",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -2159,6 +2904,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Endpoints",
 		"/properties/ProxyDetail",
 		"/properties/DisasterRecoveryInstances",
+		"/properties/BackupPolicy/BackupPolicyBase/LockDDLTimeSecond",
+		"/properties/BackupPolicy/CrossBackupPolicy/CrossBackupAllRetention",
+		"/properties/BackupPolicy/AvailableCrossRegions",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -2182,6 +2930,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CpuNum",
 		"/properties/SuperAccountName",
 		"/properties/SuperAccountPassword",
+		"/properties/PrivateIpAddress",
+		"/properties/ParameterTemplateId",
+		"/properties/EngineType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

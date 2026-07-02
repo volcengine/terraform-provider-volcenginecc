@@ -132,6 +132,7 @@
     },
     "ProjectName": {
       "description": "Project name",
+      "semantic": "projectName",
       "type": "string"
     },
     "UserAllowList": {

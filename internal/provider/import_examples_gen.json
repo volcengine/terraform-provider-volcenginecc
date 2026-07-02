@@ -1248,5 +1248,50 @@
         "resource": "volcenginecc_gtm_policy",
         "identifier": ["GtmId","PolicyType"],
         "path": "./examples/resources/volcenginecc_gtm_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_directconnect_connection",
+        "identifier": ["DirectConnectConnectionId"],
+        "path": "./examples/resources/volcenginecc_directconnect_connection/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tos_bucket_website",
+        "identifier": ["Bucket"],
+        "path": "./examples/resources/volcenginecc_tos_bucket_website/import.sh"
+    },
+    {
+        "resource": "volcenginecc_veenedge_vpc",
+        "identifier": ["VpcIdentity"],
+        "path": "./examples/resources/volcenginecc_veenedge_vpc/import.sh"
+    },
+    {
+        "resource": "volcenginecc_organization_service_control_policy_enabler",
+        "identifier": ["OrganizationID"],
+        "path": "./examples/resources/volcenginecc_organization_service_control_policy_enabler/import.sh"
+    },
+    {
+        "resource": "volcenginecc_waf_host_group",
+        "identifier": ["HostGroupId"],
+        "path": "./examples/resources/volcenginecc_waf_host_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_fwcenter_address_book",
+        "identifier": ["GroupUuid"],
+        "path": "./examples/resources/volcenginecc_fwcenter_address_book/import.sh"
+    },
+    {
+        "resource": "volcenginecc_fwcenter_control_policy",
+        "identifier": ["RuleId","Direction"],
+        "path": "./examples/resources/volcenginecc_fwcenter_control_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tls_alarm_webhook_integration_type",
+        "identifier": ["WebhookID"],
+        "path": "./examples/resources/volcenginecc_tls_alarm_webhook_integration_type/import.sh"
+    },
+    {
+        "resource": "volcenginecc_fwcenter_vpc_fire_wall_acl_rule",
+        "identifier": ["VpcFirewallId","RuleId"],
+        "path": "./examples/resources/volcenginecc_fwcenter_vpc_fire_wall_acl_rule/import.sh"
     }
 ]

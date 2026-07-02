@@ -12,7 +12,7 @@ When creating a Kafka instance, you can bind an allowlist as needed. After bindi
 ## Example Usage
 
 ```terraform
-resource "volcenginecc_kafka_allowlist" "KafkaAllowListDemo" {
+resource "volcenginecc_kafka_allow_list" "KafkaAllowListDemo" {
   allow_list      = "127.0.0.2"
   allow_list_desc = "test"
   allow_list_name = "ccapi-text"

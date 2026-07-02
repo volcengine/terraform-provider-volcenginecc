@@ -110,7 +110,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Custom log configuration",
 		//	  "properties": {
 		//	    "CustomVariables": {
-		//	      "description": "Custom variable information",
+		//	      "description": "Custom Variable Information",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Request header information",
@@ -131,7 +131,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "RequestHeaders": {
-		//	      "description": "Request header information",
+		//	      "description": "Request Header Information",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Request header information",
@@ -152,7 +152,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "ResponseHeaders": {
-		//	      "description": "Response header information",
+		//	      "description": "Response Header Information",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Request header information",
@@ -201,7 +201,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Custom variable information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Description: "Custom Variable Information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
@@ -235,7 +235,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Request header information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Description: "Request Header Information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
@@ -269,7 +269,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Response header information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Description: "Response Header Information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/

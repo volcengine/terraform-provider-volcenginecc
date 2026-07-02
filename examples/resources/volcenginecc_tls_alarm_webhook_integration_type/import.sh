@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tls_alarm_webhook_integration_type.example "webhook_id"

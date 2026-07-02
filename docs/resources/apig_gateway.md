@@ -88,11 +88,11 @@ resource "volcenginecc_apig_gateway" "APIGGatewayDemo" {
 
 Optional:
 
-- `custom_variables` (Attributes Set) Custom variable information
+- `custom_variables` (Attributes Set) Custom Variable Information
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--custom_log--custom_variables))
-- `request_headers` (Attributes Set) Request header information
+- `request_headers` (Attributes Set) Request Header Information
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--custom_log--request_headers))
-- `response_headers` (Attributes Set) Response header information
+- `response_headers` (Attributes Set) Response Header Information
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--custom_log--response_headers))
 
 <a id="nestedatt--custom_log--custom_variables"></a>

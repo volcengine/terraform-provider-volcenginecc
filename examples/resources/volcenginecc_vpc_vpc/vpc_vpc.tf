@@ -23,7 +23,8 @@ resource "volcenginecc_vpc_vpc" "VPCDemo" {
   security_group_ids = [
     "sg-29mkx39jb80741e1hgj2bxxx"
   ]
-  project_name = "default"
+  project_name     = "default"
+  user_cidr_blocks = ["10.0.0.0/8"]
   tags = [
     {
       key   = "env"

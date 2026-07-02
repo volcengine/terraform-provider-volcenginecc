@@ -1,0 +1,204 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/GroupType"
+  ],
+  "definitions": {
+    "AddressDetail": {
+      "description": "Detailed information about a single address in the address book.",
+      "properties": {
+        "Address": {
+          "description": "Detailed information about the address in the address book. The specific content depends on the address book type. If GroupType is ip, enter an IPv4 address or CIDRv4; if ipv6, enter an IPv6 address or CIDRv6; if port, enter port information (a single port such as 22 or a port range such as 100/200); if domain, enter domain information.",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Detailed description of a single address in the address book, used to explain the specific purpose or other relevant information for that address.",
+          "maxLength": 32,
+          "type": "string"
+        },
+        "Type": {
+          "description": "Address type, returned during queries. `ip`: IPv4 address; `ipv6`: IPv6 address; `domain`: domain name; `port`: port.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Address"
+      ],
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Resource tag, consisting of key-value pairs.",
+      "properties": {
+        "Key": {
+          "description": "Tag key.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value.",
+          "maxLength": 256,
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Cloud firewall access control address book, used to centrally manage a group of IPv4/IPv6 addresses, ports, or domain names. Can be referenced as source or destination in access control policies.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/GroupType"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "fw_center:AddAddressBook",
+        "fw_center:DescribeAddressBook"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "fw_center:DeleteAddressBook",
+        "fw_center:DescribeAddressBook"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "fw_center:DescribeAddressBook"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "fw_center:DescribeAddressBook"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "fw_center:ModifyAddressBook",
+        "fw_center:DescribeAddressBook"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/GroupUuid"
+  ],
+  "properties": {
+    "AddressDetailList": {
+      "description": "Address list with detailed address information. Effective when `AutoUpdateType` is `Manual`.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AddressDetail"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AddressList": {
+      "description": "Address list in the address book. The specific content depends on the address book type. Effective when `AutoUpdateType` is `Manual` and `AddressDetailList` is not empty. If GroupType is ip, enter an IPv4 address or CIDRv4; if ipv6, enter an IPv6 address or CIDRv6; if port, enter port information (a single port such as 22 or a port range such as 100/200); if domain, enter domain information.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AutoUpdateType": {
+      "description": "Address book auto-update type. Default is `Manual`. `Manual`: manual update; `Tag`: tag address book. Assets with new matching tags are automatically added to the current address book. This feature is currently only supported for the internet boundary.",
+      "enum": [
+        "Manual",
+        "Tag"
+      ],
+      "type": "string"
+    },
+    "CloudFirewallId": {
+      "description": "The unique identifier of the cloud firewall instance, used to specify which cloud firewall instance the address book belongs to.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Detailed description of the address book, used to explain its purpose or other relevant information.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "GroupName": {
+      "description": "Name of the address book. Supports Chinese characters, uppercase and lowercase English letters, `-`, and `_`, with a maximum length of 64 characters.",
+      "maxLength": 64,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "GroupType": {
+      "description": "The type of the address book, used to specify the type of addresses stored in the address book. `ip`: IPv4 address; `ipv6`: IPv6 address; `port`: port information; `domain`: domain name information.",
+      "enum": [
+        "ip",
+        "ipv6",
+        "domain",
+        "port"
+      ],
+      "type": "string"
+    },
+    "GroupUuid": {
+      "description": "Unique identifier for the address book, generated by the system after the address book is created. Used to uniquely identify the address book within the system.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceTypeList": {
+      "description": "Asset type list, used to specify the types of assets included in the address book. Takes effect when `AutoUpdateType` is set to `Tag`. Supported values: `EcsInstance` (cloud server), `NetworkInterface` (network interface), `HaVip` (high-availability virtual IP), `Nat` (NAT gateway), `ClbInstance` (load balancer), `AlbInstance` (application load balancer), `VpnGateway` (VPN gateway).",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RefCnt": {
+      "description": "Reference count for the address book, indicating how many times it has been referenced.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ResourceType": {
+      "description": "Tag type, used to specify the resource type in the address book. Effective when `AutoUpdateType` is `Tag`. `Eip`: public IP; `InternetAsset`: public asset.",
+      "type": "string"
+    },
+    "TagRelation": {
+      "description": "Logical relationship between tags, used to specify how multiple tags are combined. Effective when `AutoUpdateType` is `Tag`. `And`: all tags must be satisfied; `Or`: any tag can be satisfied.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag list for the address book, used for categorization or marking. Effective when `AutoUpdateType` is `Tag`.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Updated": {
+      "description": "Last update timestamp for the address book, represented in Unix timestamp format.",
+      "format": "int64",
+      "semantic": "updatedTime",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/GroupUuid",
+    "/properties/RefCnt",
+    "/properties/Updated",
+    "/properties/AddressDetailList/*/Type"
+  ],
+  "required": [
+    "GroupName",
+    "GroupType"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::FWCenter::AddressBook",
+  "writeOnlyProperties": [
+    "/properties/CloudFirewallId"
+  ]
+}

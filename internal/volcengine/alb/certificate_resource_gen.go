@@ -33,14 +33,16 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Certificate ID",
+		//	  "description": "Certificate ID. When the replacement mode is stock, this refers to the existing certificate ID used for replacement.",
 		//	  "type": "string"
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate ID",
+			Description: "Certificate ID. When the replacement mode is stock, this refers to the existing certificate ID used for replacement.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateName
@@ -164,6 +166,23 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OldCertificateId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Old certificate ID to be replaced. Setting this field indicates that the certificate is created in replacement mode.",
+		//	  "type": "string"
+		//	}
+		"old_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Old certificate ID to be replaced. Setting this field indicates that the certificate is created in replacement mode.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// OldCertificateId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: PrivateKey
 		// Cloud Control resource type schema:
 		//
@@ -206,9 +225,11 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"public_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Server certificate public key",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// PublicKey is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -320,31 +341,32 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::ALB::Certificate").WithTerraformTypeName("volcenginecc_alb_certificate")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"certificate_id":   "CertificateId",
-		"certificate_name": "CertificateName",
-		"certificate_type": "CertificateType",
-		"created_time":     "CreatedTime",
-		"description":      "Description",
-		"domain_name":      "DomainName",
-		"expired_at":       "ExpiredAt",
-		"key":              "Key",
-		"listeners":        "Listeners",
-		"private_key":      "PrivateKey",
-		"project_name":     "ProjectName",
-		"public_key":       "PublicKey",
-		"san":              "San",
-		"status":           "Status",
-		"tags":             "Tags",
-		"value":            "Value",
+		"certificate_id":     "CertificateId",
+		"certificate_name":   "CertificateName",
+		"certificate_type":   "CertificateType",
+		"created_time":       "CreatedTime",
+		"description":        "Description",
+		"domain_name":        "DomainName",
+		"expired_at":         "ExpiredAt",
+		"key":                "Key",
+		"listeners":          "Listeners",
+		"old_certificate_id": "OldCertificateId",
+		"private_key":        "PrivateKey",
+		"project_name":       "ProjectName",
+		"public_key":         "PublicKey",
+		"san":                "San",
+		"status":             "Status",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/PublicKey",
 		"/properties/PrivateKey",
+		"/properties/OldCertificateId",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
-		"/properties/CertificateId",
 		"/properties/CreatedTime",
 		"/properties/DomainName",
 		"/properties/ExpiredAt",
@@ -354,10 +376,12 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
+		"/properties/CertificateType",
+		"/properties/OldCertificateId",
+		"/properties/CertificateId",
+		"/properties/ProjectName",
 		"/properties/PublicKey",
 		"/properties/PrivateKey",
-		"/properties/ProjectName",
-		"/properties/CertificateType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
