@@ -1,4 +1,4 @@
-resource "volcenginecc_redis_parametergroup" "RedisParameterGroupDemo" {
+resource "volcenginecc_redis_parameter_group" "RedisParameterGroupDemo" {
   engine_version = "6.0"
   description    = "用于测试的Redis 6.0自定义参数组"
   param_values = [

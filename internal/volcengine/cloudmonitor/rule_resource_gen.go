@@ -195,7 +195,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Alert notification group ID bound to the alert policy.",
+		//	  "description": "When AlertMethods is set to Email, Phone, or SMS, specify the alert contact group ID. You can call the ListContactGroups API to obtain the contact group ID. Note: Up to 5 contact groups can be configured.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -205,7 +205,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"contact_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "Alert notification group ID bound to the alert policy.",
+			Description: "When AlertMethods is set to Email, Phone, or SMS, specify the alert contact group ID. You can call the ListContactGroups API to obtain the contact group ID. Note: Up to 5 contact groups can be configured.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -230,11 +230,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Alert policy description.",
+		//	  "description": "Alert policy description information. Cannot start with a digit, hyphen, or Chinese symbol. Only Chinese characters, letters, digits, underscore _, hyphen -, and Chinese symbols are allowed. Length must be between 0 and 255 characters.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Alert policy description.",
+			Description: "Alert policy description information. Cannot start with a digit, hyphen, or Chinese symbol. Only Chinese characters, letters, digits, underscore _, hyphen -, and Chinese symbols are allowed. Length must be between 0 and 255 characters.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -245,7 +245,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Dimension configuration.",
+		//	  "description": "Dimension configuration. Only valid when RuleType is set to dynamic. Supports three matching methods: project, tag, and meta.",
 		//	  "properties": {
 		//	    "MetaCondition": {
 		//	      "description": "Condition for selecting alert objects based on resource name. Required when Type is meta.",
@@ -259,11 +259,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Metas": {
-		//	          "description": "Condition. and: All conditions met. or: Any condition met.",
+		//	          "description": "Resource list. Up to 10 resource names can be configured. When Comparator is equal or not_equal, there is no limit on the length of the resource name. When Comparator is contain, not_contain, prefix_match, or suffix_match, the resource name cannot exceed 100 characters.",
 		//	          "items": {
 		//	            "properties": {
 		//	              "Comparator": {
-		//	                "description": "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
+		//	                "description": "Comparator for tag matching. contain: Contains. not_contain: Does not contain. prefix_match: Prefix match. suffix_match: Suffix match. equal: Equals. not_equal: Does not equal. exist: Exists.",
 		//	                "type": "string"
 		//	              },
 		//	              "Key": {
@@ -315,7 +315,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	          "items": {
 		//	            "properties": {
 		//	              "Comparator": {
-		//	                "description": "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
+		//	                "description": "Comparator for tag matching. contain: Contains. not_contain: Does not contain. prefix_match: Prefix match. suffix_match: Suffix match. equal: Equals. not_equal: Does not equal. exist: Exists.",
 		//	                "type": "string"
 		//	              },
 		//	              "Key": {
@@ -376,7 +376,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparator
 									"comparator": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
+										Description: "Comparator for tag matching. contain: Contains. not_contain: Does not contain. prefix_match: Prefix match. suffix_match: Suffix match. equal: Equals. not_equal: Does not equal. exist: Exists.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -404,7 +404,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "Condition. and: All conditions met. or: Any condition met.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+							Description: "Resource list. Up to 10 resource names can be configured. When Comparator is equal or not_equal, there is no limit on the length of the resource name. When Comparator is contain, not_contain, prefix_match, or suffix_match, the resource name cannot exceed 100 characters.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -458,7 +458,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparator
 									"comparator": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Tag match operator. contain: Contains not_contain: Does not contain prefix_match: Prefix match suffix_match: Suffix match equal: Equals not_equal: Does not equal exist: Exists.",
+										Description: "Comparator for tag matching. contain: Contains. not_contain: Does not contain. prefix_match: Prefix match. suffix_match: Suffix match. equal: Equals. not_equal: Does not equal. exist: Exists.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -511,7 +511,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Dimension configuration.",
+			Description: "Dimension configuration. Only valid when RuleType is set to dynamic. Supports three matching methods: project, tag, and meta.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -522,22 +522,22 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Policy expiration time, in HH:MM format.",
+		//	  "description": "End time for the alert policy to take effect, in HH:MM format, for example: 23:59. Note: EffectEndAt must be later than EffectStartAt.",
 		//	  "type": "string"
 		//	}
 		"effect_end_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Policy expiration time, in HH:MM format.",
+			Description: "End time for the alert policy to take effect, in HH:MM format, for example: 23:59. Note: EffectEndAt must be later than EffectStartAt.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EffectStartAt
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Policy start time, in HH:MM format.",
+		//	  "description": "Start time for the alert policy to take effect, in HH:MM format, for example: 00:00.",
 		//	  "type": "string"
 		//	}
 		"effect_start_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Policy start time, in HH:MM format.",
+			Description: "Start time for the alert policy to take effect, in HH:MM format, for example: 00:00.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableState
@@ -555,11 +555,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Duration required to trigger an alert, in minutes.",
+		//	  "description": "Duration required to trigger an alert. Unit: minutes. Supported values: 1, 3, 5, 10, 15, 30, 60, 120.",
 		//	  "type": "integer"
 		//	}
 		"evaluation_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Duration required to trigger an alert, in minutes.",
+			Description: "Duration required to trigger an alert. Unit: minutes. Supported values: 1, 3, 5, 10, 15, 30, 60, 120.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Level
@@ -743,11 +743,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Cloud product associated with the monitoring metric. For details, see Namespace for each product in Cloud Product Monitoring Metrics.",
+		//	  "description": "The cloud product to which the monitoring metric of this policy belongs. For details, see Namespace for each product under Cloud Product Monitoring Metrics.",
 		//	  "type": "string"
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Cloud product associated with the monitoring metric. For details, see Namespace for each product in Cloud Product Monitoring Metrics.",
+			Description: "The cloud product to which the monitoring metric of this policy belongs. For details, see Namespace for each product under Cloud Product Monitoring Metrics.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NoData
@@ -800,11 +800,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Notification policy ID.",
+		//	  "description": "Notification policy ID. You can call the ListNotifications API to obtain the notification policy ID. Note: This parameter has higher priority than AlertMethods. When you specify the alert notification policy ID using this parameter, other alert notification configurations (AlertMethods, ContactGroupIds, WebhookIds, EffectStartAt, EffectEndAt, etc.) will become invalid.",
 		//	  "type": "string"
 		//	}
 		"notification_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Notification policy ID.",
+			Description: "Notification policy ID. You can call the ListNotifications API to obtain the notification policy ID. Note: This parameter has higher priority than AlertMethods. When you specify the alert notification policy ID using this parameter, other alert notification configurations (AlertMethods, ContactGroupIds, WebhookIds, EffectStartAt, EffectEndAt, etc.) will become invalid.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -820,7 +820,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "properties": {
 		//	      "Channel": {
-		//	        "description": "Notification channel. Options: email: Email sms: SMS phone: Phone feishu: Feishu dingtalk: DingTalk wecom: WeCom slack: Slack api: Callback URL.",
+		//	        "description": "Notification channels. Values: email: Email, sms: SMS, phone: Phone, lark: Lark, dingtalk: DingTalk, wecom: WeCom, slack: Slack, api: Callback URL.",
 		//	        "type": "string"
 		//	      },
 		//	      "NotifyTemplateId": {
@@ -838,7 +838,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Channel
 					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Notification channel. Options: email: Email sms: SMS phone: Phone feishu: Feishu dingtalk: DingTalk wecom: WeCom slack: Slack api: Callback URL.",
+						Description: "Notification channels. Values: email: Email, sms: SMS, phone: Phone, lark: Lark, dingtalk: DingTalk, wecom: WeCom, slack: Slack, api: Callback URL.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -918,11 +918,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Project to which the alert policy belongs.",
+		//	  "description": "Project name to which the alert policy belongs. If not specified, it defaults to the default project.",
 		//	  "type": "string"
 		//	}
 		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Project to which the alert policy belongs.",
+			Description: "Project name to which the alert policy belongs. If not specified, it defaults to the default project.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -966,7 +966,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Availability zone ID of the cloud product.",
+		//	  "description": "Availability Zone ID of the cloud product. When RuleType is static, only one Availability Zone ID can be configured. When RuleType is dynamic, multiple Availability Zone IDs can be configured. Separate multiple Availability Zone IDs with commas. Note: If set to ALL, all availability zones of the cloud product are selected.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -976,7 +976,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "Availability zone ID of the cloud product.",
+			Description: "Availability Zone ID of the cloud product. When RuleType is static, only one Availability Zone ID can be configured. When RuleType is dynamic, multiple Availability Zone IDs can be configured. Separate multiple Availability Zone IDs with commas. Note: If set to ALL, all availability zones of the cloud product are selected.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1015,11 +1015,11 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Alert policy name.",
+		//	  "description": "Alert policy name. Length must be between 1 and 128 characters. Cannot start with a digit or hyphen -.",
 		//	  "type": "string"
 		//	}
 		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Alert policy name.",
+			Description: "Alert policy name. Length must be between 1 and 128 characters. Cannot start with a digit or hyphen -.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RuleType

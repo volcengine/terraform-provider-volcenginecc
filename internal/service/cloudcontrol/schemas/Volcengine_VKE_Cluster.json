@@ -422,6 +422,7 @@
     "create": {
       "permissions": [
         "vke:CreateCluster",
+        "vke:UpdateClusterConfig",
         "vke:ListClusters",
         "vke:DeleteCluster"
       ]

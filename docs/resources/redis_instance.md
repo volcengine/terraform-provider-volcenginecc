@@ -46,6 +46,7 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
   no_auth_mode        = "open"
   parameter_group_id  = "DefaultParamGroupId-6.0"
   continuous_backup   = true
+  create_backup       = true
 }
 ```
 
@@ -89,6 +90,8 @@ resource "volcenginecc_redis_instance" "RedisInstanceDemo" {
 
 ### Read-Only
 
+- `backups` (Attributes List) Backup list information for the instance
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--backups))
 - `blue_green_role` (String) Blue-green deployment role of the instance. Valid values: Blue: blue instance. Green: green instance. This parameter is returned only for Redis instances that have used the blue-green deployment feature.
 - `capacity` (Attributes) Capacity information of the instance. (see [below for nested schema](#nestedatt--capacity))
 - `create_time` (String) Creation time of the instance.
@@ -138,6 +141,22 @@ Optional:
 
 - `key` (String) Tag key.
 - `value` (String) Tag value.
+
+
+<a id="nestedatt--backups"></a>
+### Nested Schema for `backups`
+
+Read-Only:
+
+- `backup_point_id` (String) Backup point ID
+- `backup_point_name` (String) Backup point name
+- `backup_strategy` (String) Backup policy
+- `backup_type` (String) Backup type
+- `end_time` (String) Backup end time
+- `instance_id` (String) Instance ID
+- `size` (Number) Backup size (unit: Byte)
+- `start_time` (String) Backup start time
+- `status` (String) Backup status
 
 
 <a id="nestedatt--capacity"></a>

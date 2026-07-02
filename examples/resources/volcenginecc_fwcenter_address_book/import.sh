@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_fwcenter_address_book.example "group_uuid"

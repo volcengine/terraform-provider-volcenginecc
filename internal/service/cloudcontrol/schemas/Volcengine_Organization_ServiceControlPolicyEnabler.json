@@ -1,0 +1,54 @@
+{
+  "additionalProperties": false,
+  "description": "Service control policy activation status",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "organization:EnableServiceControlPolicy",
+        "organization:GetServiceControlPolicyEnablement",
+        "organization:DescribeOrganization"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "organization:DisableServiceControlPolicy",
+        "organization:GetServiceControlPolicyEnablement",
+        "organization:DescribeOrganization"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "organization:GetServiceControlPolicyEnablement",
+        "organization:DescribeOrganization"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/OrganizationID"
+  ],
+  "properties": {
+    "CanFullAccessDetach": {
+      "description": "Can the FullAccess policy be unbound?",
+      "type": "boolean"
+    },
+    "OrganizationID": {
+      "description": "Organization ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Activation status, Enabled Disabled PendingEnable PendingDisable",
+      "semantic": "status",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/OrganizationID",
+    "/properties/Status",
+    "/properties/CanFullAccessDetach"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Organization::ServiceControlPolicyEnabler"
+}

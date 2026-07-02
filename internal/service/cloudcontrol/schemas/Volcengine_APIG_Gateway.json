@@ -40,29 +40,37 @@
       "description": "Custom log output",
       "properties": {
         "CustomVariables": {
-          "$ref": "#/definitions/CustomVariables",
-          "type": "object"
+          "description": "Custom Variable Information",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/HeaderInfo"
+          },
+          "maxItems": 20,
+          "type": "array",
+          "uniqueItems": true
         },
         "RequestHeaders": {
-          "$ref": "#/definitions/RequestHeaders",
-          "type": "object"
+          "description": "Request Header Information",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/HeaderInfo"
+          },
+          "maxItems": 20,
+          "type": "array",
+          "uniqueItems": true
         },
         "ResponseHeaders": {
-          "$ref": "#/definitions/ResponseHeaders",
-          "type": "object"
+          "description": "Response Header Information",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/HeaderInfo"
+          },
+          "maxItems": 20,
+          "type": "array",
+          "uniqueItems": true
         }
       },
       "type": "object"
-    },
-    "CustomVariables": {
-      "description": "Custom variable information",
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/HeaderInfo"
-      },
-      "maxItems": 20,
-      "type": "array",
-      "uniqueItems": true
     },
     "Event": {
       "description": "Event information",
@@ -174,16 +182,6 @@
       },
       "type": "object"
     },
-    "RequestHeaders": {
-      "description": "Request header information",
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/HeaderInfo"
-      },
-      "maxItems": 20,
-      "type": "array",
-      "uniqueItems": true
-    },
     "ResourceSpec": {
       "description": "Resource specification configuration information",
       "properties": {
@@ -238,16 +236,6 @@
         }
       },
       "type": "object"
-    },
-    "ResponseHeaders": {
-      "description": "Response header information",
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/HeaderInfo"
-      },
-      "maxItems": 20,
-      "type": "array",
-      "uniqueItems": true
     },
     "Subnet": {
       "description": "Subnet configuration information",

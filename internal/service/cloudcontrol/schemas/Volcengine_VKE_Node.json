@@ -246,8 +246,7 @@
     "/properties/ZoneId"
   ],
   "required": [
-    "ClusterId",
-    "NodePoolId"
+    "ClusterId"
   ],
   "tagging": {
     "taggable": false

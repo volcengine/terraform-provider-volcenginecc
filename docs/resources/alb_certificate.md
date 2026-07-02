@@ -32,20 +32,21 @@ resource "volcenginecc_alb_certificate" "ALBCertificateDemo" {
 ### Required
 
 - `certificate_type` (String) Certificate type. Options: CA: CA certificate; Server: server certificate
-- `public_key` (String) Server certificate public key
 
 ### Optional
 
+- `certificate_id` (String) Certificate ID. When the replacement mode is stock, this refers to the existing certificate ID used for replacement.
 - `certificate_name` (String) Certificate name. Length must be between 1 and 128 characters, start with a letter or Chinese character, and may include numbers, periods (.), underscores (_), and hyphens (-)
 - `description` (String) Certificate description
+- `old_certificate_id` (String) Old certificate ID to be replaced. Setting this field indicates that the certificate is created in replacement mode.
 - `private_key` (String) Server certificate private key. Required when certificate type is Server
 - `project_name` (String) Project name
+- `public_key` (String) Server certificate public key
 - `tags` (Attributes Set) Tag list
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `certificate_id` (String) Certificate ID
 - `created_time` (String) Certificate creation time
 - `domain_name` (String) Certificate domain name
 - `expired_at` (String) Certificate expiration time

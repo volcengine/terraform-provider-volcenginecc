@@ -25,6 +25,7 @@ Data Source schema for Volcengine::Redis::Instance
 - `auto_renew` (Boolean) Whether to enable auto-renewal. Value options: false (default): Disabled; true: Enabled.
 - `backup_point_name` (String) Set a backup name for the full backup created before changes.
 - `backup_restore` (Attributes) Restore data from the backup set to the original Redis instance. (see [below for nested schema](#nestedatt--backup_restore))
+- `backups` (Attributes List) Backup list information for the instance (see [below for nested schema](#nestedatt--backups))
 - `blue_green_role` (String) Blue-green deployment role of the instance. Valid values: Blue: blue instance. Green: green instance. This parameter is returned only for Redis instances that have used the blue-green deployment feature.
 - `capacity` (Attributes) Capacity information of the instance. (see [below for nested schema](#nestedatt--capacity))
 - `charge_type` (String) Instance billing type. Value options: PrePaid: Subscription (also called prepaid). PostPaid: Pay-as-you-go (also called postpaid).
@@ -77,6 +78,22 @@ Read-Only:
 - `backup_point_id` (String) Backup ID, used to specify which backup to use when restoring from a backup set
 - `backup_type` (String) Recovery method
 - `time_point` (String) Used to specify the point in time for point-in-time recovery
+
+
+<a id="nestedatt--backups"></a>
+### Nested Schema for `backups`
+
+Read-Only:
+
+- `backup_point_id` (String) Backup point ID
+- `backup_point_name` (String) Backup point name
+- `backup_strategy` (String) Backup policy
+- `backup_type` (String) Backup type
+- `end_time` (String) Backup end time
+- `instance_id` (String) Instance ID
+- `size` (Number) Backup size (unit: Byte)
+- `start_time` (String) Backup start time
+- `status` (String) Backup status
 
 
 <a id="nestedatt--capacity"></a>

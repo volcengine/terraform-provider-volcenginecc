@@ -1,0 +1,240 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/DirectConnectAccessPointId",
+    "/properties/LineOperator",
+    "/properties/PortType",
+    "/properties/PortSpec",
+    "/properties/Bandwidth",
+    "/properties/PeerLocation"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Resource tags",
+      "properties": {
+        "Key": {
+          "description": "Tag key. Cannot start with volc: or sys:. Length range: 1 ~ 128 characters",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value. Length range: 0 ~ 256 characters. If not specified, defaults to empty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "The physical connection is a dedicated physical connection resource in the dedicated connection service, used to connect the local IDC to the Volcano Engine access point",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/DirectConnectConnectionId",
+      "/properties/DirectConnectConnectionName",
+      "/properties/LineOperator",
+      "/properties/DirectConnectAccessPointId",
+      "/properties/PeerLocation",
+      "/properties/ConnectionType",
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "directconnect:CreateDirectConnectConnection",
+        "directconnect:DescribeDirectConnectConnectionAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "directconnect:DeleteDirectConnectConnection",
+        "directconnect:DescribeDirectConnectConnectionAttributes"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectConnections"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectConnectionAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "directconnect:ModifyDirectConnectConnectionAttributes",
+        "directconnect:TagResources",
+        "directconnect:UntagResources",
+        "directconnect:DescribeDirectConnectConnectionAttributes"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/DirectConnectConnectionId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Account ID of the physical connection owner",
+      "type": "string"
+    },
+    "Bandwidth": {
+      "description": "Line bandwidth in Mbps. If not specified, defaults to the port specification bandwidth. 1000Base specification range: 1 ~ 1000; 10GBase specification range: 1 ~ 10000; 40GBase specification range: 1 ~ 40000; 100GBase specification range: 1 ~ 100000",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BillingType": {
+      "description": "Connection billing type. Currently only 1 is supported, indicating annual/monthly subscription billing",
+      "format": "int64",
+      "type": "integer"
+    },
+    "BusinessStatus": {
+      "description": "Billing status of the connection. Normal: normal; FinancialLocked: locked",
+      "type": "string"
+    },
+    "ConnectionType": {
+      "description": "Type of the physical connection. DedicatedConnection: dedicated connection; SharedConnection: shared connection",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Time when the physical connection was created",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CustomerContactEmail": {
+      "description": "Email address of the dedicated connection contact",
+      "type": "string"
+    },
+    "CustomerContactPhone": {
+      "description": "Phone number of the dedicated connection contact",
+      "type": "string"
+    },
+    "CustomerName": {
+      "description": "Name of the dedicated connection contact",
+      "type": "string"
+    },
+    "DeletedTime": {
+      "description": "Expected resource forced reclaim time",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the physical connection. Length limit: 0 ~ 255 characters",
+      "semantic": "description",
+      "type": "string"
+    },
+    "DirectConnectAccessPointId": {
+      "description": "ID of the physical connection access point. You can call DescribeDirectConnectAccessPoints to query access point information",
+      "type": "string"
+    },
+    "DirectConnectConnectionId": {
+      "description": "ID of the physical dedicated line.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "DirectConnectConnectionName": {
+      "description": "Name of the physical connection. Must start with a Chinese character, letter, or number, and can only contain Chinese characters, letters, numbers, period (.), space, underscore (_), hyphen (-), equals sign (=), English comma (,), Chinese comma (，), Chinese period (。). Length limit: 1 ~ 128 characters",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ExpectBandwidth": {
+      "description": "Expected bandwidth of the physical connection in Mbps",
+      "format": "int64",
+      "type": "integer"
+    },
+    "ExpiredTime": {
+      "description": "Connection expiration time",
+      "type": "string"
+    },
+    "LineOperator": {
+      "description": "Operator of the physical dedicated line. ChinaTelecom refers to China Telecom, ChinaMobile refers to China Mobile, ChinaUnicom refers to China Unicom, ChinaOther refers to other operators in China with the required telecom business qualifications. Only international operators are allowed in bp environments.",
+      "type": "string"
+    },
+    "ParentConnectionAccountId": {
+      "description": "Account ID of the physical connection associated with the shared connection. If the physical connection type is DedicatedConnection, this parameter returns empty",
+      "type": "string"
+    },
+    "ParentConnectionId": {
+      "description": "ID of the physical dedicated line to which the shared dedicated line belongs. If the physical dedicated line type is dedicated, this parameter returns empty.",
+      "type": "string"
+    },
+    "PeerLocation": {
+      "description": "Local IDC address or the remote access point of the physical dedicated line.",
+      "type": "string"
+    },
+    "PortSpec": {
+      "description": "Port specification of the physical dedicated line. Dedicated lines support 1G, 10G, 40G, and 100G. 40G and 100G are not enabled by default; contact your account manager to request a trial.",
+      "type": "string"
+    },
+    "PortType": {
+      "description": "Port type of the physical connection. 1000Base: 1G optical port; 10GBase: 10G optical port; 40GBase: 40G optical port; 100GBase: 100G optical port. 40GBase and 100GBase are not open by default; contact your account manager to request a trial",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project to which the physical dedicated line belongs. If left blank, the default project is used.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the physical connection. Creating: being created; Deleting: being deleted; Pending: being configured; Available: available; Initial: applying; Allocated: under construction; Rejected: application rejected; UnConfirmed: waiting for acceptance; NoPayment: pending payment",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "All tag information added to the physical connection",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Time when the physical dedicated line was updated.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VlanId": {
+      "description": "VLAN ID of the shared connection. If the physical connection type is DedicatedConnection, returns 0",
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/DirectConnectConnectionId",
+    "/properties/AccountId",
+    "/properties/ConnectionType",
+    "/properties/CreationTime",
+    "/properties/UpdateTime",
+    "/properties/Status",
+    "/properties/VlanId",
+    "/properties/ParentConnectionId",
+    "/properties/ParentConnectionAccountId",
+    "/properties/BillingType",
+    "/properties/BusinessStatus",
+    "/properties/DeletedTime",
+    "/properties/ExpiredTime",
+    "/properties/ExpectBandwidth"
+  ],
+  "required": [
+    "DirectConnectAccessPointId",
+    "LineOperator",
+    "PortType",
+    "PortSpec",
+    "Bandwidth",
+    "PeerLocation",
+    "CustomerName",
+    "CustomerContactPhone",
+    "CustomerContactEmail"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::DirectConnect::Connection"
+}

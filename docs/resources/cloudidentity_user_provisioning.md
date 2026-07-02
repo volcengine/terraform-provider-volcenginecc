@@ -12,7 +12,7 @@ After you create a Cloud Identity Center user, you need to grant the user login 
 ## Example Usage
 
 ```terraform
-resource "volcenginecc_cloudidentity_userprovisioning" "CloudIdentityUserProvisioningDemo" {
+resource "volcenginecc_cloudidentity_user_provisioning" "CloudIdentityUserProvisioningDemo" {
   target_id                = "2103612***"
   principal_type           = "Group"
   principal_id             = "8990752****"

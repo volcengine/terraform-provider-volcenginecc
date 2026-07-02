@@ -65,7 +65,8 @@
         "vpc:CreateVpc",
         "vpc:DescribeVpcAttributes",
         "vpc:DisassociateVpcCidrBlock",
-        "vpc:AssociateVpcCidrBlock"
+        "vpc:AssociateVpcCidrBlock",
+        "vpc:AssociateVpcUserCidrBlock"
       ]
     },
     "delete": {
@@ -89,6 +90,8 @@
         "vpc:DescribeVpcAttributes",
         "vpc:DisassociateVpcCidrBlock",
         "vpc:AssociateVpcCidrBlock",
+        "vpc:DisassociateVpcUserCidrBlock",
+        "vpc:AssociateVpcUserCidrBlock",
         "vpc:UntagResources",
         "vpc:TagResources",
         "vpc:ModifyVpcAttributes"
@@ -269,8 +272,7 @@
     "/properties/NetworkAclNum",
     "/properties/AssociateCens",
     "/properties/RouteTableIds",
-    "/properties/SecurityGroupIds",
-    "/properties/UserCidrBlocks"
+    "/properties/SecurityGroupIds"
   ],
   "tagging": {
     "tagOnCreate": true,

@@ -251,6 +251,15 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_rocketmq_access_keys -cctype Volcengine::RocketMQ::AccessKey -package rocketmq ../volcengine/rocketmq/access_key_plural_data_source_gen.go ../volcengine/rocketmq/access_key_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_event_rules -cctype Volcengine::CloudMonitor::EventRule -package cloudmonitor ../volcengine/cloudmonitor/event_rule_plural_data_source_gen.go ../volcengine/cloudmonitor/event_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_gtm_policies -cctype Volcengine::GTM::Policy -package gtm ../volcengine/gtm/policy_plural_data_source_gen.go ../volcengine/gtm/policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_directconnect_connections -cctype Volcengine::DirectConnect::Connection -package directconnect ../volcengine/directconnect/connection_plural_data_source_gen.go ../volcengine/directconnect/connection_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tos_bucket_websites -cctype Volcengine::TOS::BucketWebsite -package tos ../volcengine/tos/bucket_website_plural_data_source_gen.go ../volcengine/tos/bucket_website_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_veenedge_vpcs -cctype Volcengine::VeenEdge::VPC -package veenedge ../volcengine/veenedge/vpc_plural_data_source_gen.go ../volcengine/veenedge/vpc_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_service_control_policy_enablers -cctype Volcengine::Organization::ServiceControlPolicyEnabler -package organization ../volcengine/organization/service_control_policy_enabler_plural_data_source_gen.go ../volcengine/organization/service_control_policy_enabler_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_waf_host_groups -cctype Volcengine::WAF::HostGroup -package waf ../volcengine/waf/host_group_plural_data_source_gen.go ../volcengine/waf/host_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_fwcenter_address_books -cctype Volcengine::FWCenter::AddressBook -package fwcenter ../volcengine/fwcenter/address_book_plural_data_source_gen.go ../volcengine/fwcenter/address_book_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_fwcenter_control_policies -cctype Volcengine::FWCenter::ControlPolicy -package fwcenter ../volcengine/fwcenter/control_policy_plural_data_source_gen.go ../volcengine/fwcenter/control_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tls_alarm_webhook_integration_types -cctype Volcengine::TLS::AlarmWebhookIntegrationType -package tls ../volcengine/tls/alarm_webhook_integration_type_plural_data_source_gen.go ../volcengine/tls/alarm_webhook_integration_type_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_fwcenter_vpc_fire_wall_acl_rules -cctype Volcengine::FWCenter::VpcFirewallAclRule -package fwcenter ../volcengine/fwcenter/vpc_fire_wall_acl_rule_plural_data_source_gen.go ../volcengine/fwcenter/vpc_fire_wall_acl_rule_plural_data_source_gen_test.go
 
 package provider
 
@@ -297,6 +306,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vedbm"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/veenedge"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vepfs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"

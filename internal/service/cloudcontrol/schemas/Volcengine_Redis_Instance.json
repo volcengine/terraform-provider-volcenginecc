@@ -16,6 +16,49 @@
     "/properties/NodeNumber"
   ],
   "definitions": {
+    "Backup": {
+      "description": "Backup information",
+      "properties": {
+        "BackupPointId": {
+          "description": "Backup point ID",
+          "type": "string"
+        },
+        "BackupPointName": {
+          "description": "Backup point name",
+          "type": "string"
+        },
+        "BackupStrategy": {
+          "description": "Backup policy",
+          "type": "string"
+        },
+        "BackupType": {
+          "description": "Backup type",
+          "type": "string"
+        },
+        "EndTime": {
+          "description": "Backup end time",
+          "type": "string"
+        },
+        "InstanceId": {
+          "description": "Instance ID",
+          "type": "string"
+        },
+        "Size": {
+          "description": "Backup size (unit: Byte)",
+          "format": "int64",
+          "type": "integer"
+        },
+        "StartTime": {
+          "description": "Backup start time",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Backup status",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "BackupRestore": {
       "properties": {
         "BackupPointId": {
@@ -183,6 +226,8 @@
         "Redis:DescribeDBInstanceDetail",
         "Redis:DescribeNodeIds",
         "Redis:DescribeDBInstanceShards",
+        "Redis:DescribeBackups",
+        "Redis:CreateBackup",
         "Redis:StartContinuousBackup"
       ]
     },
@@ -202,7 +247,8 @@
         "Redis:DescribeDBInstances",
         "Redis:DescribeDBInstanceDetail",
         "Redis:DescribeNodeIds",
-        "Redis:DescribeDBInstanceShards"
+        "Redis:DescribeDBInstanceShards",
+        "Redis:DescribeBackups"
       ]
     },
     "update": {
@@ -221,6 +267,7 @@
         "Redis:StopContinuousBackup",
         "Redis:DescribeNodeIds",
         "Redis:DescribeDBInstanceShards",
+        "Redis:DescribeBackups",
         "Redis:RestartDBInstance"
       ]
     }
@@ -251,6 +298,15 @@
       "$ref": "#/definitions/BackupRestore",
       "description": "Restore data from the backup set to the original Redis instance.",
       "type": "object"
+    },
+    "Backups": {
+      "description": "Backup list information for the instance",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Backup"
+      },
+      "type": "array",
+      "uniqueItems": false
     },
     "BlueGreenRole": {
       "description": "Blue-green deployment role of the instance. Valid values: Blue: blue instance. Green: green instance. This parameter is returned only for Redis instances that have used the blue-green deployment feature.",
@@ -516,6 +572,7 @@
     }
   },
   "readOnlyProperties": [
+    "/properties/Backups",
     "/properties/BlueGreenRole",
     "/properties/Capacity",
     "/properties/CreateTime",

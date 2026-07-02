@@ -145,10 +145,12 @@
     },
     "CreateTime": {
       "description": "Alert rule creation time",
+      "semantic": "createdTime",
       "type": "string"
     },
     "Description": {
       "description": "Alert rule description",
+      "semantic": "description",
       "type": "string"
     },
     "Labels": {
@@ -189,6 +191,7 @@
     },
     "Status": {
       "description": "Alert rule status: Running (monitoring), Disabled (disabled)",
+      "semantic": "status",
       "type": "string"
     },
     "Tags": {
@@ -197,6 +200,7 @@
       "items": {
         "$ref": "#/definitions/TagsObj"
       },
+      "semantic": "tags",
       "type": "array",
       "uniqueItems": true
     },
@@ -206,6 +210,7 @@
     },
     "UpdateTime": {
       "description": "Alert rule update time",
+      "semantic": "updatedTime",
       "type": "string"
     }
   },

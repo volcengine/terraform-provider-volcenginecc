@@ -1,0 +1,132 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "RelatedRule": {
+      "description": "Associated rule information.",
+      "properties": {
+        "RuleName": {
+          "description": "Rule name.",
+          "type": "string"
+        },
+        "RuleTag": {
+          "description": "Rule ID.",
+          "type": "string"
+        },
+        "RuleType": {
+          "description": "Rule type. Allow indicates an allowlist, Block indicates a blocklist.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Domain groups are used for centralized management of multiple domains. You can batch associate rules and manage them collectively.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ProjectName",
+      "/properties/HostList",
+      "/properties/Name",
+      "/properties/HostGroupId",
+      "/properties/RelatedRules/*/RuleTag"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "waf:AddHostGroup",
+        "waf:ListHostGroup"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "waf:DeleteHostGroup",
+        "waf:ListHostGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "waf:ListHostGroup"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "waf:ListHostGroup"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "waf:UpdateHostGroup",
+        "waf:ListHostGroup"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/HostGroupId"
+  ],
+  "properties": {
+    "Description": {
+      "description": "Domain group description.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "HostCount": {
+      "description": "Number of domains in the domain group.",
+      "type": "integer"
+    },
+    "HostGroupId": {
+      "description": "Domain group ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "HostList": {
+      "description": "Domains in the domain group. The list can be filtered by the first element.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Name": {
+      "description": "Domain group name.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project name.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RelatedRules": {
+      "description": "Associated rule list.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RelatedRule"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "UpdateTime": {
+      "description": "Domain group update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/HostGroupId",
+    "/properties/HostCount",
+    "/properties/RelatedRules",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "Name",
+    "HostList"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::WAF::HostGroup",
+  "writeOnlyProperties": [
+    "/properties/ProjectName"
+  ]
+}

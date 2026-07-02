@@ -252,6 +252,15 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_rocketmq_access_key -ccschema ../service/cloudcontrol/schemas/Volcengine_RocketMQ_AccessKey.json -package rocketmq -- ../volcengine/rocketmq/access_key_resource_gen.go ../volcengine/rocketmq/access_key_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_cloudmonitor_event_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_EventRule.json -package cloudmonitor -- ../volcengine/cloudmonitor/event_rule_resource_gen.go ../volcengine/cloudmonitor/event_rule_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_gtm_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_GTM_Policy.json -package gtm -- ../volcengine/gtm/policy_resource_gen.go ../volcengine/gtm/policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_directconnect_connection -ccschema ../service/cloudcontrol/schemas/Volcengine_DirectConnect_Connection.json -package directconnect -- ../volcengine/directconnect/connection_resource_gen.go ../volcengine/directconnect/connection_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tos_bucket_website -ccschema ../service/cloudcontrol/schemas/Volcengine_TOS_BucketWebsite.json -package tos -- ../volcengine/tos/bucket_website_resource_gen.go ../volcengine/tos/bucket_website_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_veenedge_vpc -ccschema ../service/cloudcontrol/schemas/Volcengine_VeenEdge_VPC.json -package veenedge -- ../volcengine/veenedge/vpc_resource_gen.go ../volcengine/veenedge/vpc_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_organization_service_control_policy_enabler -ccschema ../service/cloudcontrol/schemas/Volcengine_Organization_ServiceControlPolicyEnabler.json -package organization -- ../volcengine/organization/service_control_policy_enabler_resource_gen.go ../volcengine/organization/service_control_policy_enabler_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_waf_host_group -ccschema ../service/cloudcontrol/schemas/Volcengine_WAF_HostGroup.json -package waf -- ../volcengine/waf/host_group_resource_gen.go ../volcengine/waf/host_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_fwcenter_address_book -ccschema ../service/cloudcontrol/schemas/Volcengine_FWCenter_AddressBook.json -package fwcenter -- ../volcengine/fwcenter/address_book_resource_gen.go ../volcengine/fwcenter/address_book_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_fwcenter_control_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_FWCenter_ControlPolicy.json -package fwcenter -- ../volcengine/fwcenter/control_policy_resource_gen.go ../volcengine/fwcenter/control_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tls_alarm_webhook_integration_type -ccschema ../service/cloudcontrol/schemas/Volcengine_TLS_AlarmWebhookIntegrationType.json -package tls -- ../volcengine/tls/alarm_webhook_integration_type_resource_gen.go ../volcengine/tls/alarm_webhook_integration_type_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_fwcenter_vpc_fire_wall_acl_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_FWCenter_VpcFireWallAclRule.json -package fwcenter -- ../volcengine/fwcenter/vpc_fire_wall_acl_rule_resource_gen.go ../volcengine/fwcenter/vpc_fire_wall_acl_rule_resource_gen_test.go
 
 package provider
 
@@ -298,6 +307,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vedbm"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/veenedge"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vefaas"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vepfs"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/vke"

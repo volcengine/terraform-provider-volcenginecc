@@ -1,0 +1,240 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ClusterName",
+    "/properties/Segment",
+    "/properties/Project",
+    "/properties/Subnets/*/Name",
+    "/properties/Subnets/*/Cidr",
+    "/properties/Subnets/*/Desc"
+  ],
+  "definitions": {
+    "Subnet": {
+      "description": "Subnet Configuration",
+      "properties": {
+        "Cidr": {
+          "description": "Subnet CIDR Block, e.g. 10.1.0.0/16",
+          "type": "string"
+        },
+        "CidrIp": {
+          "description": "Subnet IP Segment, e.g. 10.1.0.0",
+          "type": "string"
+        },
+        "CidrMask": {
+          "description": "Subnet Mask Length, e.g. 16",
+          "type": "integer"
+        },
+        "CreateTime": {
+          "description": "Subnet Creation Time, Unix Timestamp",
+          "type": "integer"
+        },
+        "Desc": {
+          "description": "Subnet Description",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Subnet Name",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Subnet Status",
+          "type": "string"
+        },
+        "SubnetIdentity": {
+          "description": "Unique Identifier of Subnet",
+          "type": "string"
+        },
+        "UpdateTime": {
+          "description": "Subnet Update Time, Unix Timestamp",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Resource Tag",
+      "properties": {
+        "Key": {
+          "description": "Tag Key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Edge computing custom VPC instance, used to create independent virtual network environments on edge nodes",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/VpcIdentity",
+      "/properties/ClusterName",
+      "/properties/Project",
+      "/properties/IsVlan",
+      "/properties/IsDefault",
+      "/properties/IsCustom",
+      "/properties/Tags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "veenedge:CreateCustomVPCInstance",
+        "veenedge:ListVPCInstances"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "veenedge:DeleteSubnetsForCustomVPC",
+        "veenedge:DeleteCustomVPCInstances",
+        "veenedge:ListVPCInstances"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "veenedge:ListVPCInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "veenedge:ListVPCInstances"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "veenedge:SetVPCInstanceName",
+        "veenedge:SetVPCInstanceDesc",
+        "veenedge:TagResourcesV2",
+        "veenedge:UntagResourcesV2",
+        "veenedge:ListVPCInstances"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/VpcIdentity"
+  ],
+  "properties": {
+    "ClusterName": {
+      "description": "Cluster Name of VPC Instance",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "VPC Instance Creation Time, Unix Timestamp",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "CrossAccountVgwNum": {
+      "description": "Number of Cross-Account Virtual Gateways",
+      "type": "integer"
+    },
+    "Desc": {
+      "description": "Description of VPC Instance",
+      "semantic": "description",
+      "type": "string"
+    },
+    "IsCustom": {
+      "description": "Is Custom VPC",
+      "type": "boolean"
+    },
+    "IsDefault": {
+      "description": "Is Default VPC",
+      "type": "boolean"
+    },
+    "IsVlan": {
+      "description": "Is VLAN Type VPC",
+      "type": "boolean"
+    },
+    "LocalAccountVgwNum": {
+      "description": "Number of Virtual Gateways for This Account",
+      "type": "integer"
+    },
+    "Project": {
+      "description": "Project Name of VPC Instance",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Segment": {
+      "description": "VPC Instance CIDR Block, e.g. 10.0.0.0/16",
+      "type": "string"
+    },
+    "Status": {
+      "description": "VPC Instance Status: available (available), modifying (modifying), deleting (deleting)",
+      "enum": [
+        "available",
+        "modifying",
+        "deleting"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "Subnets": {
+      "description": "List of subnets created when creating the VPC",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Subnet"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Tags": {
+      "description": "Tag List of VPC Instance",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "VPC Instance Update Time, Unix Timestamp",
+      "semantic": "updatedTime",
+      "type": "integer"
+    },
+    "VpcIdentity": {
+      "description": "Unique Identifier of VPC Instance",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "VpcName": {
+      "description": "VPC Instance Name",
+      "semantic": "resourceName",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/VpcIdentity",
+    "/properties/Status",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/IsCustom",
+    "/properties/IsDefault",
+    "/properties/IsVlan",
+    "/properties/CrossAccountVgwNum",
+    "/properties/LocalAccountVgwNum",
+    "/properties/Subnets/*/SubnetIdentity",
+    "/properties/Subnets/*/CidrIp",
+    "/properties/Subnets/*/CidrMask",
+    "/properties/Subnets/*/Status",
+    "/properties/Subnets/*/CreateTime",
+    "/properties/Subnets/*/UpdateTime"
+  ],
+  "required": [
+    "ClusterName",
+    "Desc",
+    "Segment",
+    "VpcName"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VeenEdge::VPC"
+}

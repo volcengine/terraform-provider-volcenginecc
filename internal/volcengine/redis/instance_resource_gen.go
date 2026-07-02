@@ -151,6 +151,115 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// BackupRestore is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: Backups
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Backup list information for the instance",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Backup information",
+		//	    "properties": {
+		//	      "BackupPointId": {
+		//	        "description": "Backup point ID",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupPointName": {
+		//	        "description": "Backup point name",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupStrategy": {
+		//	        "description": "Backup policy",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupType": {
+		//	        "description": "Backup type",
+		//	        "type": "string"
+		//	      },
+		//	      "EndTime": {
+		//	        "description": "Backup end time",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceId": {
+		//	        "description": "Instance ID",
+		//	        "type": "string"
+		//	      },
+		//	      "Size": {
+		//	        "description": "Backup size (unit: Byte)",
+		//	        "format": "int64",
+		//	        "type": "integer"
+		//	      },
+		//	      "StartTime": {
+		//	        "description": "Backup start time",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "Backup status",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"backups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BackupPointId
+					"backup_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup point ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupPointName
+					"backup_point_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup point name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupStrategy
+					"backup_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup policy",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupType
+					"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup type",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EndTime
+					"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup end time",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceId
+					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Instance ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Size
+					"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Backup size (unit: Byte)",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StartTime
+					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup start time",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup status",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Backup list information for the instance\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: BlueGreenRole
 		// Cloud Control resource type schema:
 		//
@@ -1181,7 +1290,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"backup_point_id":              "BackupPointId",
 		"backup_point_name":            "BackupPointName",
 		"backup_restore":               "BackupRestore",
+		"backup_strategy":              "BackupStrategy",
 		"backup_type":                  "BackupType",
+		"backups":                      "Backups",
 		"blue_green_role":              "BlueGreenRole",
 		"capacity":                     "Capacity",
 		"charge_type":                  "ChargeType",
@@ -1193,6 +1304,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"data_layout":                  "DataLayout",
 		"deletion_protection":          "DeletionProtection",
 		"eip_id":                       "EipId",
+		"end_time":                     "EndTime",
 		"engine_version":               "EngineVersion",
 		"expired_time":                 "ExpiredTime",
 		"instance_class":               "InstanceClass",
@@ -1222,6 +1334,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"shard_id":                     "ShardId",
 		"shard_number":                 "ShardNumber",
 		"sharded_cluster":              "ShardedCluster",
+		"size":                         "Size",
+		"start_time":                   "StartTime",
 		"status":                       "Status",
 		"subnet_id":                    "SubnetId",
 		"tags":                         "Tags",
@@ -1254,6 +1368,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
+		"/properties/Backups",
 		"/properties/BlueGreenRole",
 		"/properties/Capacity",
 		"/properties/CreateTime",
