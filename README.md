@@ -1,5 +1,12 @@
 # Volcengine Cloud Control Provider
 
+---
+[![Volcengine SKILL & CLI Survey](img.png)](https://www.volcengine.com/survey/q/v2/7662656599489085475/q36U8r81/5ffc/channel=doc)
+
+To improve your experience with Volcengine skill, we invite you to participate in our [Survey with Prizes](https://www.volcengine.com/survey/q/v2/7662656599489085475/q36U8r81/5ffc/channel=doc) .
+
+---
+
 The Volcengine Cloud Control Provider enables interaction with various Volcengine-supported resources through the Cloud Control API. Prior to usage, you must configure the provider with appropriate credentials.
 
 Use the left navigation panel to explore available resource documentation. If you cannot find the desired resource, please submit an issue report for assistance.
