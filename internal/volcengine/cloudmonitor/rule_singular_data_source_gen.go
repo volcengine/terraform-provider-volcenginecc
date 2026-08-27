@@ -78,6 +78,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "Metric display name.",
 		//	        "type": "string"
 		//	      },
+		//	      "EvaluationWindow": {
+		//	        "description": "Evaluation window (minutes)",
+		//	        "type": "integer"
+		//	      },
 		//	      "MetricName": {
 		//	        "description": "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",
 		//	        "type": "string"
@@ -92,6 +96,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Statistics": {
 		//	        "description": "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
+		//	        "type": "string"
+		//	      },
+		//	      "SubNamespace": {
+		//	        "description": "Sub-namespace",
 		//	        "type": "string"
 		//	      },
 		//	      "Threshold": {
@@ -117,6 +125,11 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "Metric display name.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: EvaluationWindow
+					"evaluation_window": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Evaluation window (minutes)",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: MetricName
 					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",
@@ -135,6 +148,11 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: Statistics
 					"statistics": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SubNamespace
+					"sub_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Sub-namespace",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Threshold
@@ -439,6 +457,17 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Duration required to trigger an alert. Unit: minutes. Supported values: 1, 3, 5, 10, 15, 30, 60, 120.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EvaluationInterval
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Evaluation interval (minutes)",
+		//	  "type": "integer"
+		//	}
+		"evaluation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Evaluation interval (minutes)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Level
 		// Cloud Control resource type schema:
 		//
@@ -460,6 +489,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "Conditions": {
 		//	        "description": "Alert severity configuration.",
+		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "properties": {
 		//	            "ComparisonOperator": {
@@ -469,6 +499,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "DisplayName": {
 		//	              "description": "Metric display name.",
 		//	              "type": "string"
+		//	            },
+		//	            "EvaluationWindow": {
+		//	              "description": "Evaluation window (minutes)",
+		//	              "type": "integer"
 		//	            },
 		//	            "MetricName": {
 		//	              "description": "Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.",
@@ -486,6 +520,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
 		//	              "type": "string"
 		//	            },
+		//	            "SubNamespace": {
+		//	              "description": "Sub-namespace",
+		//	              "type": "string"
+		//	            },
 		//	            "Threshold": {
 		//	              "description": "Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.",
 		//	              "type": "string"
@@ -493,7 +531,8 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "type": "object"
 		//	        },
-		//	        "type": "array"
+		//	        "type": "array",
+		//	        "uniqueItems": true
 		//	      },
 		//	      "Level": {
 		//	        "description": "Alert notification level. Options: notice: notification, warning: warning, critical: critical, recovery: recovery.",
@@ -509,7 +548,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Conditions
-					"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					"conditions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ComparisonOperator
@@ -520,6 +559,11 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: DisplayName
 								"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Metric display name.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EvaluationWindow
+								"evaluation_window": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Evaluation window (minutes)",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: MetricName
@@ -540,6 +584,11 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: Statistics
 								"statistics": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SubNamespace
+								"sub_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Sub-namespace",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Threshold
@@ -597,6 +646,10 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "EvaluationCount": {
 		//	      "description": "No data alert trigger threshold. If no data is reported within the configured threshold period, a no data alert will be triggered. When Enable is set to true, this field is required. Integer format; value range is 3–20.",
 		//	      "type": "integer"
+		//	    },
+		//	    "Level": {
+		//	      "description": "No data alert level (critical, warning, notice)",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -611,6 +664,11 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: EvaluationCount
 				"evaluation_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "No data alert trigger threshold. If no data is reported within the configured threshold period, a no data alert will be triggered. When Enable is set to true, this field is required. Integer format; value range is 3–20.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Level
+				"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "No data alert level (critical, warning, notice)",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -666,6 +724,17 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Notification template configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ObjectGroupId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Object group ID",
+		//	  "type": "string"
+		//	}
+		"object_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Object group ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OriginalDimensions
@@ -944,6 +1013,8 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable":               "Enable",
 		"enable_state":         "EnableState",
 		"evaluation_count":     "EvaluationCount",
+		"evaluation_interval":  "EvaluationInterval",
+		"evaluation_window":    "EvaluationWindow",
 		"key":                  "Key",
 		"level":                "Level",
 		"level_conditions":     "LevelConditions",
@@ -957,6 +1028,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"notification_id":      "NotificationId",
 		"notify_template_id":   "NotifyTemplateId",
 		"notify_templates":     "NotifyTemplates",
+		"object_group_id":      "ObjectGroupId",
 		"original_dimensions":  "OriginalDimensions",
 		"period":               "Period",
 		"project_condition":    "ProjectCondition",

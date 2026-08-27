@@ -125,7 +125,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "CA certificate for mutual authentication.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -155,7 +154,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate ID from Certificate Center.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -170,7 +168,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate ID from the CLB certificate management module.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -185,7 +182,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -469,6 +465,32 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnhancedSchedulerEnable
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Enable weighted extension for the scheduling algorithm?",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"enhanced_scheduler_enable": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable weighted extension for the scheduling algorithm?",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"on",
+					"off",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EstablishedTimeout
@@ -1031,6 +1053,24 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResponseCheckEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Enable response validation?",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"response_check_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable response validation?",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RuleIds
 		// Cloud Control resource type schema:
 		//
@@ -1057,11 +1097,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "default": "wrr",
 		//	  "description": "Scheduling algorithm used by the listener. wrr (default): Weighted round robin. wlc: Weighted least connections. sh: Source address hash.",
-		//	  "enum": [
-		//	    "wrr",
-		//	    "wlc",
-		//	    "sh"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"scheduler": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1069,13 +1104,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("wrr"),
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"wrr",
-					"wlc",
-					"sh",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1315,6 +1343,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"domain_extensions":          "DomainExtensions",
 		"enabled":                    "Enabled",
 		"end_port":                   "EndPort",
+		"enhanced_scheduler_enable":  "EnhancedSchedulerEnable",
 		"established_timeout":        "EstablishedTimeout",
 		"health_check":               "HealthCheck",
 		"healthy_threshold":          "HealthyThreshold",
@@ -1336,6 +1365,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"proxy_protocol_type":        "ProxyProtocolType",
 		"proxy_read_timeout":         "ProxyReadTimeout",
 		"proxy_send_timeout":         "ProxySendTimeout",
+		"response_check_enabled":     "ResponseCheckEnabled",
 		"rule_ids":                   "RuleIds",
 		"scheduler":                  "Scheduler",
 		"security_policy_id":         "SecurityPolicyId",
@@ -1362,6 +1392,11 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/WafProtectionEnabled",
 		"/properties/RuleIds",
 		"/properties/DomainExtensions/*/DomainExtensionId",
+		"/properties/ResponseCheckEnabled",
+		"/properties/CACertificateId",
+		"/properties/CertCenterCertificateId",
+		"/properties/CertificateId",
+		"/properties/CertificateSource",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -1370,6 +1405,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Port",
 		"/properties/StartPort",
 		"/properties/EndPort",
+		"/properties/EnhancedSchedulerEnable",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

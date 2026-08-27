@@ -33,6 +33,7 @@ Data Source schema for Volcengine::CloudMonitor::Rule
 - `effect_start_at` (String) Start time for the alert policy to take effect, in HH:MM format, for example: 00:00.
 - `enable_state` (String) Alert policy status. enable: enabled, disable: disabled
 - `evaluation_count` (Number) Duration required to trigger an alert. Unit: minutes. Supported values: 1, 3, 5, 10, 15, 30, 60, 120.
+- `evaluation_interval` (Number) Evaluation interval (minutes)
 - `level` (String) Alert level. critical: critical, warning: warning, notice: notification
 - `level_conditions` (Attributes Set) Alert severity configuration. (see [below for nested schema](#nestedatt--level_conditions))
 - `multiple_conditions` (Boolean) Does the alert policy use multiple metrics? true: multiple metrics, false: single metric (default).
@@ -40,6 +41,7 @@ Data Source schema for Volcengine::CloudMonitor::Rule
 - `no_data` (Attributes) No data alert. (see [below for nested schema](#nestedatt--no_data))
 - `notification_id` (String) Notification policy ID. You can call the ListNotifications API to obtain the notification policy ID. Note: This parameter has higher priority than AlertMethods. When you specify the alert notification policy ID using this parameter, other alert notification configurations (AlertMethods, ContactGroupIds, WebhookIds, EffectStartAt, EffectEndAt, etc.) will become invalid.
 - `notify_templates` (Attributes Set) Notification template configuration. (see [below for nested schema](#nestedatt--notify_templates))
+- `object_group_id` (String) Object group ID
 - `original_dimensions` (Attributes) Resource ID detected by the alert policy. (see [below for nested schema](#nestedatt--original_dimensions))
 - `project_name` (String) Project name to which the alert policy belongs. If not specified, it defaults to the default project.
 - `recovery_notify` (Attributes) Alert recovery notification. (see [below for nested schema](#nestedatt--recovery_notify))
@@ -62,10 +64,12 @@ Read-Only:
 
 - `comparison_operator` (String) Comparison operators. Supports standard threshold alerting: >, >=, <, <=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.
 - `display_name` (String) Metric display name.
+- `evaluation_window` (Number) Evaluation window (minutes)
 - `metric_name` (String) Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.
 - `metric_unit` (String) Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to "Percent." Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.
 - `period` (String) Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.
 - `statistics` (String) Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.
+- `sub_namespace` (String) Sub-namespace
 - `threshold` (String) Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.
 
 
@@ -132,7 +136,7 @@ Read-Only:
 
 Read-Only:
 
-- `conditions` (Attributes List) Alert severity configuration. (see [below for nested schema](#nestedatt--level_conditions--conditions))
+- `conditions` (Attributes Set) Alert severity configuration. (see [below for nested schema](#nestedatt--level_conditions--conditions))
 - `level` (String) Alert notification level. Options: notice: notification, warning: warning, critical: critical, recovery: recovery.
 
 <a id="nestedatt--level_conditions--conditions"></a>
@@ -142,10 +146,12 @@ Read-Only:
 
 - `comparison_operator` (String) Comparison operators. Supports standard threshold alerting: >, >=, <, <=, !=, =, as well as the following period-over-period alerting: last_period_increase_pct: Increased compared to last period. last_period_decrease_pct: Decreased compared to last period. last_period_abs_pct: Increased or decreased compared to last period. last_day_increase_pct: Increased compared to the same period yesterday. last_day_decrease_pct: Decreased compared to the same period yesterday. last_day_abs_pct: Increased or decreased compared to the same period yesterday. last_week_increase_pct: Increased compared to the same period last week. last_week_decrease_pct: Decreased compared to the same period last week. last_week_abs_pct: Increased or decreased compared to the same period last week.
 - `display_name` (String) Metric display name.
+- `evaluation_window` (Number) Evaluation window (minutes)
 - `metric_name` (String) Monitoring metric name. For details, see MetricName for each product in Cloud Monitoring Metric Query.
 - `metric_unit` (String) Unit of the monitoring metric. For details, see MetricUnit for each product in Cloud Monitoring Metric Query. For period-over-period alerting, MetricUnit must be set to "Percent." Whether IEC is included in MetricUnit indicates different base values: With IEC: base is 1024; Without IEC: base is 1000.
 - `period` (String) Statistical period for monitoring metrics. For details, see Period for each product in Cloud Monitoring Metric Query.
 - `statistics` (String) Statistical method. Options: avg: average, max: maximum, min: minimum. The statistical method is applied to data within the detection time period. For example, the default detection time span is 1 minute. If the statistical method is avg, the average value of data within 1 minute is used.
+- `sub_namespace` (String) Sub-namespace
 - `threshold` (String) Metric threshold. Supports positive numbers or 0. Up to three decimal places allowed.
 
 
@@ -157,6 +163,7 @@ Read-Only:
 
 - `enable` (Boolean) Enable no data alert. Values: true: enable no data alert. false (default): disable no data alert.
 - `evaluation_count` (Number) No data alert trigger threshold. If no data is reported within the configured threshold period, a no data alert will be triggered. When Enable is set to true, this field is required. Integer format; value range is 3–20.
+- `level` (String) No data alert level (critical, warning, notice)
 
 
 <a id="nestedatt--notify_templates"></a>

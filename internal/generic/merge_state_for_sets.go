@@ -55,8 +55,14 @@ func mergeMapForSets(local, remote map[string]interface{}, attributes map[string
 
 		switch attrSchema.GetType().(type) {
 		case types.SetType:
-			// Use remote value for Set types to preserve correct ordering
-			result[key] = remoteVal
+			// Read-only (Computed-only) Set: keep the local value already copied
+			// above so the plan side (which inherits prior state ordering) stays
+			// in sync with the current side; this avoids a spurious patch op for
+			// the read-only field.
+			// Writable Set: use the remote value to align ordering with CCAPI.
+			if !(attrSchema.IsComputed() && !attrSchema.IsRequired() && !attrSchema.IsOptional()) {
+				result[key] = remoteVal
+			}
 
 		case types.ListType:
 			if nested, ok := attrSchema.(schema.ListNestedAttribute); ok {

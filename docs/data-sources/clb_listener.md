@@ -41,6 +41,7 @@ Data Source schema for Volcengine::CLB::Listener
 - `domain_extensions` (Attributes Set) List of extended domain names associated with the HTTPS listener. Each HTTPS listener can be associated with up to 20 extended domain names. (see [below for nested schema](#nestedatt--domain_extensions))
 - `enabled` (String) Enable listener. on (default): enabled. off: disabled.
 - `end_port` (Number) End port for all-port listening. Range: 1–65535. When Port is '0', this parameter is required and must be greater than startPort.
+- `enhanced_scheduler_enable` (String) Enable weighted extension for the scheduling algorithm?
 - `established_timeout` (Number) Listener connection timeout. This parameter is valid only when Protocol is set to TCP or UDP. Values: TCP protocol: 10–900 seconds, default is 900 seconds. UDP protocol: 1–300 seconds, default is 90 seconds.
 - `health_check` (Attributes) Health check information. (see [below for nested schema](#nestedatt--health_check))
 - `http_2_enabled` (String) Whether the listener enables frontend HTTP 2.0 protocol. This parameter is valid only when Protocol is set to HTTPS. Values: on: enabled. off (default): disabled.
@@ -57,6 +58,7 @@ Data Source schema for Volcengine::CLB::Listener
 - `proxy_protocol_type` (String) Enable Proxy-Protocol. This parameter is valid only when Protocol is TCP or UDP. Values: off (default): disabled. standard: enabled.
 - `proxy_read_timeout` (Number) Timeout for CLB to read responses from backend servers. This timeout applies only between two consecutive read operations, not for the entire response transmission. Value range: 30–3600 seconds. Default: 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.
 - `proxy_send_timeout` (Number) Timeout for CLB to transmit requests to backend servers. This timeout applies only between two consecutive write operations, not the entire request transmission process. Value range: 30–3600 seconds. Default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.
+- `response_check_enabled` (String) Enable response validation?
 - `rule_ids` (Set of String) List of rule IDs bound to the listener.
 - `scheduler` (String) Scheduling algorithm used by the listener. wrr (default): Weighted round robin. wlc: Weighted least connections. sh: Source address hash.
 - `security_policy_id` (String) TLS security policy for HTTPS listeners. This parameter is valid only when Protocol is set to HTTPS. Values: default_policy (default): supports SSL v3, TLS v1.0, TLS v1.1, TLS v1.2. tls_cipher_policy_1_0: supports TLS v1.0, TLS v1.1, TLS v1.2. tls_cipher_policy_1_1: supports TLS v1.1, TLS v1.2. tls_cipher_policy_1_2: supports TLS v1.2. tls_cipher_policy_1_2_strict: supports TLS v1.2.

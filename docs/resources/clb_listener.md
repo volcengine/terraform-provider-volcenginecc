@@ -65,11 +65,7 @@ resource "volcenginecc_clb_listener" "ClbListenerDemo" {
 - `acl_status` (String) Enable access control. Values: on: enabled. off (default): disabled.
 - `acl_type` (String) Access control mode. white: Allowlist. black: Denylist. This parameter is valid only when the AclStatus parameter is on.
 - `bandwidth` (Number) Bandwidth limit for the listener, which means this listener exclusively uses the bandwidth of the CLB instance. Unit: Mbps. -1 (default): This listener does not exclusively use CLB bandwidth and shares the non-exclusive bandwidth of the CLB instance with other listeners. Value range: 1 to the non-exclusive bandwidth of the CLB instance.
-- `ca_certificate_id` (String) CA certificate for mutual authentication.
 - `ca_enabled` (String) Enable mutual authentication. on: enabled. off (default): disabled.
-- `cert_center_certificate_id` (String) Certificate ID from Certificate Center.
-- `certificate_id` (String) Certificate ID from the CLB certificate management module.
-- `certificate_source` (String) Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.
 - `client_body_timeout` (Number) Timeout for reading the client request body. This timeout applies only between two consecutive read operations, not the entire request transmission. Range: 30–120 seconds, default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.
 - `client_header_timeout` (Number) Timeout for reading the client request header. Value range: 30–120 seconds. Default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.
 - `connection_drain_enabled` (String) Whether the listener enables graceful connection termination. on: enabled. off: not enabled. When Protocol returns HTTP or HTTPS, this parameter always returns off.
@@ -81,6 +77,7 @@ resource "volcenginecc_clb_listener" "ClbListenerDemo" {
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--domain_extensions))
 - `enabled` (String) Enable listener. on (default): enabled. off: disabled.
 - `end_port` (Number) End port for all-port listening. Range: 1–65535. When Port is '0', this parameter is required and must be greater than startPort.
+- `enhanced_scheduler_enable` (String) Enable weighted extension for the scheduling algorithm?
 - `established_timeout` (Number) Listener connection timeout. This parameter is valid only when Protocol is set to TCP or UDP. Values: TCP protocol: 10–900 seconds, default is 900 seconds. UDP protocol: 1–300 seconds, default is 90 seconds.
 - `health_check` (Attributes) Health check information. (see [below for nested schema](#nestedatt--health_check))
 - `http_2_enabled` (String) Whether the listener enables frontend HTTP 2.0 protocol. This parameter is valid only when Protocol is set to HTTPS. Values: on: enabled. off (default): disabled.
@@ -102,9 +99,14 @@ resource "volcenginecc_clb_listener" "ClbListenerDemo" {
 
 ### Read-Only
 
+- `ca_certificate_id` (String) CA certificate for mutual authentication.
+- `cert_center_certificate_id` (String) Certificate ID from Certificate Center.
+- `certificate_id` (String) Certificate ID from the CLB certificate management module.
+- `certificate_source` (String) Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.
 - `created_time` (String) Creation time of the listener.
 - `id` (String) Uniquely identifies the resource.
 - `listener_id` (String) Listener ID.
+- `response_check_enabled` (String) Enable response validation?
 - `rule_ids` (Set of String) List of rule IDs bound to the listener.
 - `status` (String) Listener status. Creating: being created. Active: running. Deleting: being deleted. Disabled: disabled.
 - `updated_time` (String) Last operation time of the listener.

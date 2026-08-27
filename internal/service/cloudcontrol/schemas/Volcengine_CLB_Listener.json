@@ -5,7 +5,8 @@
     "/properties/Protocol",
     "/properties/Port",
     "/properties/StartPort",
-    "/properties/EndPort"
+    "/properties/EndPort",
+    "/properties/EnhancedSchedulerEnable"
   ],
   "definitions": {
     "DomainExtension": {
@@ -313,6 +314,14 @@
       "minimum": 1,
       "type": "integer"
     },
+    "EnhancedSchedulerEnable": {
+      "description": "Enable weighted extension for the scheduling algorithm?",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "type": "string"
+    },
     "EstablishedTimeout": {
       "description": "Listener connection timeout. This parameter is valid only when Protocol is set to TCP or UDP. Values: TCP protocol: 10–900 seconds, default is 900 seconds. UDP protocol: 1–300 seconds, default is 90 seconds.",
       "format": "int64",
@@ -421,6 +430,14 @@
       "minimum": 30,
       "type": "integer"
     },
+    "ResponseCheckEnabled": {
+      "description": "Enable response validation?",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "type": "string"
+    },
     "RuleIds": {
       "description": "List of rule IDs bound to the listener.",
       "insertionOrder": false,
@@ -433,11 +450,6 @@
     "Scheduler": {
       "default": "wrr",
       "description": "Scheduling algorithm used by the listener. wrr (default): Weighted round robin. wlc: Weighted least connections. sh: Source address hash.",
-      "enum": [
-        "wrr",
-        "wlc",
-        "sh"
-      ],
       "type": "string"
     },
     "SecurityPolicyId": {
@@ -505,7 +517,12 @@
     "/properties/Status",
     "/properties/WafProtectionEnabled",
     "/properties/RuleIds",
-    "/properties/DomainExtensions/*/DomainExtensionId"
+    "/properties/DomainExtensions/*/DomainExtensionId",
+    "/properties/ResponseCheckEnabled",
+    "/properties/CACertificateId",
+    "/properties/CertCenterCertificateId",
+    "/properties/CertificateId",
+    "/properties/CertificateSource"
   ],
   "required": [
     "Protocol",
