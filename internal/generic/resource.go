@@ -828,16 +828,27 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	currentDesiredState, err = translateForUpdate(currentDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
-	plannedDesiredState, err = translateForUpdate(plannedDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
-	//plannedDesiredState中补全sys: volc: tag处理，保证patchDocument与CCAPI计算一致
-	plannedDesiredState, err = MergeSystemTags(currentDesiredState, plannedDesiredState)
-	if err != nil {
+	addJSONPatchError := func(err error) {
 		response.Diagnostics.AddError(
 			"Creation Of JSON Patch Unsuccessful",
 			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
+	}
 
+	currentDesiredState, err = translateForUpdate(currentDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
+	if err != nil {
+		addJSONPatchError(err)
+		return
+	}
+	plannedDesiredState, err = translateForUpdate(plannedDesiredState, id, r.tfSchema.Attributes, r.ccToTfNameMap)
+	if err != nil {
+		addJSONPatchError(err)
+		return
+	}
+	//plannedDesiredState中补全sys: volc: tag处理，保证patchDocument与CCAPI计算一致
+	plannedDesiredState, err = MergeSystemTags(currentDesiredState, plannedDesiredState)
+	if err != nil {
+		addJSONPatchError(err)
 		return
 	}
 	if len(r.collectionIdentities) > 0 {
@@ -854,13 +865,8 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		}
 	}
 	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
-
 	if err != nil {
-		response.Diagnostics.AddError(
-			"Creation Of JSON Patch Unsuccessful",
-			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
-
+		addJSONPatchError(err)
 		return
 	}
 
@@ -881,12 +887,12 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		PatchDocument: PatchDocumentArray,
 	})
 	if err != nil {
-		apiErr := fmt.Errorf("invoke create handler failed status,resp:%s,err:%v ", util.JsonString(output), nil)
+		apiErr := fmt.Errorf("invoke update handler failed status,resp:%s,err:%v ", util.JsonString(output), err)
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "UpdateResource", apiErr))
 		return
 	}
 	if output == nil || output.OperationStatus == nil {
-		apiErr := fmt.Errorf("invoke create handler failed,resp:%s,err:%v ", util.JsonString(output), err)
+		apiErr := fmt.Errorf("invoke update handler failed,resp:%s,err:%v ", util.JsonString(output), err)
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "UpdateResource", apiErr))
 		return
 	}

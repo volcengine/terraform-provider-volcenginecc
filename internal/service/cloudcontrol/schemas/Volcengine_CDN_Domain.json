@@ -43,6 +43,7 @@
     "/properties/Tags",
     "/properties/ResponseHeader",
     "/properties/RewriteHLS",
+    "/properties/RuleEngine",
     "/properties/ServiceRegion",
     "/properties/ServiceType",
     "/properties/SignedUrlAuth",
@@ -1337,6 +1338,15 @@
     "OriginCertCheck": {
       "description": "Origin certificate verification",
       "properties": {
+        "CertInfoList": {
+          "description": "Indicates the list of certificates used for origin certificate validation. The list can contain up to 20 certificates.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/CertInfoList"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
         "Switch": {
           "description": "Switch",
           "type": "boolean"
@@ -1969,6 +1979,51 @@
       },
       "type": "object"
     },
+    "Rule": {
+      "description": "Indicates a rule in the rule engine.",
+      "properties": {
+        "DSLRule": {
+          "description": "Indicates the DSL description of the rule.",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Indicates the unique ID of the rule.",
+          "type": "string"
+        },
+        "Locked": {
+          "description": "Indicates whether the rule is locked. Once locked, the rule cannot be modified.",
+          "type": "boolean"
+        },
+        "Name": {
+          "description": "Indicates the name of the rule.",
+          "type": "string"
+        },
+        "Rule": {
+          "description": "Indicates the detailed content of the rule.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RuleEngine": {
+      "description": "Indicates the configuration module for the 'Rule Engine' feature.",
+      "properties": {
+        "Rules": {
+          "description": "Indicates the list of rules in the rule engine. The order of rules in the list determines their priority.",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Switch": {
+          "description": "Indicates whether this feature is enabled. Valid values: true: Enable this feature. false: Disable this feature. The default value is false.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "SharedConfig": {
       "description": "Indicates a global configuration module.",
       "properties": {
@@ -2298,7 +2353,8 @@
       "permissions": [
         "CDN:DeleteCdnDomain",
         "CDN:DescribeCdnConfig",
-        "CDN:ListCdnDomains"
+        "CDN:ListCdnDomains",
+        "CDN:StopCdnDomain"
       ]
     },
     "list": {
@@ -2596,6 +2652,11 @@
     "RewriteHLS": {
       "$ref": "#/definitions/RewriteHLS",
       "description": "Indicates the configuration module for the \"Standard HLS Encryption Rewrite\" feature. This feature is disabled by default.",
+      "type": "object"
+    },
+    "RuleEngine": {
+      "$ref": "#/definitions/RuleEngine",
+      "description": "Indicates the configuration module for the 'Rule Engine' feature. This feature is disabled by default.",
       "type": "object"
     },
     "ServiceRegion": {

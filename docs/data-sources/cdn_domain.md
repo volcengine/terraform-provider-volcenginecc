@@ -71,6 +71,7 @@ Data Source schema for Volcengine::CDN::Domain
 - `request_header` (Attributes Set) Indicates the configuration module for the 'origin HTTP request header' feature. This feature is disabled by default. (see [below for nested schema](#nestedatt--request_header))
 - `response_header` (Attributes Set) Indicates the configuration module for the 'HTTP response header' feature. This feature is disabled by default. (see [below for nested schema](#nestedatt--response_header))
 - `rewrite_hls` (Attributes) Indicates the configuration module for the "Standard HLS Encryption Rewrite" feature. This feature is disabled by default. (see [below for nested schema](#nestedatt--rewrite_hls))
+- `rule_engine` (Attributes) Indicates the configuration module for the 'Rule Engine' feature. This feature is disabled by default. (see [below for nested schema](#nestedatt--rule_engine))
 - `service_region` (String) Indicates the acceleration region for this accelerated domain name. The parameter values are: chinese_mainland: Chinese Mainland. global: Global. outside_chinese_mainland: Global (excluding Chinese Mainland).
 - `service_type` (String) Indicates the business type of the domain name. This parameter has the following options: download: File download. web: Web page. video: Audio and video on demand.
 - `signed_url_auth` (Attributes) Indicates the configuration module for the 'URL Authentication' feature. This feature is disabled by default (see [below for nested schema](#nestedatt--signed_url_auth))
@@ -916,7 +917,35 @@ Read-Only:
 
 Read-Only:
 
+- `cert_info_list` (Attributes Set) Indicates the list of certificates used for origin certificate validation. The list can contain up to 20 certificates. (see [below for nested schema](#nestedatt--origin_cert_check--cert_info_list))
 - `switch` (Boolean) Switch
+
+<a id="nestedatt--origin_cert_check--cert_info_list"></a>
+### Nested Schema for `origin_cert_check.cert_info_list`
+
+Read-Only:
+
+- `cert_id` (String) Indicates the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.
+- `cert_name` (String) Represents the content of the Common Name (CN) field in the CA certificate.
+- `certificate` (Attributes) Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the content delivery network. (see [below for nested schema](#nestedatt--origin_cert_check--cert_info_list--certificate))
+- `effective_time` (Number) Indicates the issuance time of the certificate, in Unix timestamp.
+- `encry_type` (String) Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.
+- `expire_time` (Number) Indicates the expiration time of the certificate, as a Unix timestamp.
+- `source` (String) Specifies the certificate hosting location. The parameter values are: volc_cert_center: certificate center; cdn_cert_hosting: content delivery network.
+
+<a id="nestedatt--origin_cert_check--cert_info_list--certificate"></a>
+### Nested Schema for `origin_cert_check.cert_info_list.certificate`
+
+Read-Only:
+
+- `certificate` (String) Indicates the content of the certificate file. Line breaks in the content must be replaced with \r\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.
+  
+  If the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to <domain>.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to <domain>_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.
+- `encryption_cert` (String) Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \r\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid
+- `encryption_key` (String) Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \r\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to <domain>_encrypt.key.
+- `private_key` (String) Indicates the content of the private key file. Line breaks in the content must be replaced with \r\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to <domain>.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to <domain>_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.
+
+
 
 
 <a id="nestedatt--origin_retry"></a>
@@ -1417,6 +1446,27 @@ Read-Only:
 
 - `sign_name` (String) Indicates the name of the signature parameter, which cannot exceed 100 characters. Parameter names are case-sensitive and can include letters, numbers, underscores (_), hyphens (-), commas (,), periods (.), and exclamation marks (!). The default value is DrmAuthToken.
 - `switch` (Boolean) Indicates whether this feature is enabled. This parameter has the following options: true: Enable this feature. false: Disable this feature. The default value for this parameter is false.
+
+
+<a id="nestedatt--rule_engine"></a>
+### Nested Schema for `rule_engine`
+
+Read-Only:
+
+- `rules` (Attributes List) Indicates the list of rules in the rule engine. The order of rules in the list determines their priority. (see [below for nested schema](#nestedatt--rule_engine--rules))
+- `switch` (Boolean) Indicates whether this feature is enabled. Valid values: true: Enable this feature. false: Disable this feature. The default value is false.
+
+<a id="nestedatt--rule_engine--rules"></a>
+### Nested Schema for `rule_engine.rules`
+
+Read-Only:
+
+- `dsl_rule` (String) Indicates the DSL description of the rule.
+- `id` (String) Indicates the unique ID of the rule.
+- `locked` (Boolean) Indicates whether the rule is locked. Once locked, the rule cannot be modified.
+- `name` (String) Indicates the name of the rule.
+- `rule` (String) Indicates the detailed content of the rule.
+
 
 
 <a id="nestedatt--signed_url_auth"></a>

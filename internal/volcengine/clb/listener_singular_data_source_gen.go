@@ -329,6 +329,21 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "End port for all-port listening. Range: 1–65535. When Port is '0', this parameter is required and must be greater than startPort.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnhancedSchedulerEnable
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Enable weighted extension for the scheduling algorithm?",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"enhanced_scheduler_enable": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable weighted extension for the scheduling algorithm?",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EstablishedTimeout
 		// Cloud Control resource type schema:
 		//
@@ -690,6 +705,21 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Timeout for CLB to transmit requests to backend servers. This timeout applies only between two consecutive write operations, not the entire request transmission process. Value range: 30–3600 seconds. Default is 60 seconds. This parameter is valid only when Protocol is set to HTTP or HTTPS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResponseCheckEnabled
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Enable response validation?",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"response_check_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable response validation?",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RuleIds
 		// Cloud Control resource type schema:
 		//
@@ -713,11 +743,6 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "default": "wrr",
 		//	  "description": "Scheduling algorithm used by the listener. wrr (default): Weighted round robin. wlc: Weighted least connections. sh: Source address hash.",
-		//	  "enum": [
-		//	    "wrr",
-		//	    "wlc",
-		//	    "sh"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"scheduler": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -904,6 +929,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_extensions":          "DomainExtensions",
 		"enabled":                    "Enabled",
 		"end_port":                   "EndPort",
+		"enhanced_scheduler_enable":  "EnhancedSchedulerEnable",
 		"established_timeout":        "EstablishedTimeout",
 		"health_check":               "HealthCheck",
 		"healthy_threshold":          "HealthyThreshold",
@@ -925,6 +951,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"proxy_protocol_type":        "ProxyProtocolType",
 		"proxy_read_timeout":         "ProxyReadTimeout",
 		"proxy_send_timeout":         "ProxySendTimeout",
+		"response_check_enabled":     "ResponseCheckEnabled",
 		"rule_ids":                   "RuleIds",
 		"scheduler":                  "Scheduler",
 		"security_policy_id":         "SecurityPolicyId",

@@ -3255,6 +3255,66 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "Origin certificate validation",
 		//	  "properties": {
+		//	    "CertInfoList": {
+		//	      "description": "Indicates the list of certificates used for origin certificate validation. The list can contain up to 20 certificates.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Indicates the single certificate to be associated with the acceleration domain.",
+		//	        "properties": {
+		//	          "CertId": {
+		//	            "description": "Indicates the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
+		//	            "type": "string"
+		//	          },
+		//	          "CertName": {
+		//	            "description": "Represents the content of the Common Name (CN) field in the CA certificate.",
+		//	            "type": "string"
+		//	          },
+		//	          "Certificate": {
+		//	            "description": "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the content delivery network.",
+		//	            "properties": {
+		//	              "Certificate": {
+		//	                "description": "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n\nIf the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to \u003cdomain\u003e.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to \u003cdomain\u003e_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
+		//	                "type": "string"
+		//	              },
+		//	              "EncryptionCert": {
+		//	                "description": "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
+		//	                "type": "string"
+		//	              },
+		//	              "EncryptionKey": {
+		//	                "description": "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to \u003cdomain\u003e_encrypt.key.",
+		//	                "type": "string"
+		//	              },
+		//	              "PrivateKey": {
+		//	                "description": "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to \u003cdomain\u003e.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to \u003cdomain\u003e_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "EffectiveTime": {
+		//	            "description": "Indicates the issuance time of the certificate, in Unix timestamp.",
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          },
+		//	          "EncryType": {
+		//	            "description": "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
+		//	            "type": "string"
+		//	          },
+		//	          "ExpireTime": {
+		//	            "description": "Indicates the expiration time of the certificate, as a Unix timestamp.",
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          },
+		//	          "Source": {
+		//	            "description": "Specifies the certificate hosting location. The parameter values are: volc_cert_center: certificate center; cdn_cert_hosting: content delivery network.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Switch": {
 		//	      "description": "Switch",
 		//	      "type": "boolean"
@@ -3264,6 +3324,72 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"origin_cert_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertInfoList
+				"cert_info_list": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CertId
+							"cert_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the ID of a CA certificate hosted on the content delivery network. The ID starts with cert_hosting-.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CertName
+							"cert_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Represents the content of the Common Name (CN) field in the CA certificate.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Certificate
+							"certificate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Certificate
+									"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates the content of the certificate file. Line breaks in the content must be replaced with \\r\\n. The certificate file extension is .crt or .pem, and the certificate file must include the complete certificate chain.\n  \n  If the certificate uses the RSA or ECC encryption algorithm, this file is the server certificate file you need to upload. The file name is similar to <domain>.crt. The public key in this certificate file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the SM2 certificate file you need to upload. The file name is similar to <domain>_sign.crt. The public key in this certificate file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: EncryptionCert
+									"encryption_cert": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the content of the certificate file for the SM certificate Line breaks in the content must be replaced with \\r\\n The public key contained in this file is used to encrypt the session key The file extension must be .crt or .pem, and the certificate file must include the complete certificate chain If the certificate to be uploaded is not an SM certificate, this parameter is invalid",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: EncryptionKey
+									"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates the content of the private key file for the SM certificate. Line breaks in the content must be replaced with \\r\\n. This file is used for decryption and has an extension of .key or .pem. The file name is similar to <domain>_encrypt.key.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: PrivateKey
+									"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates the content of the private key file. Line breaks in the content must be replaced with \\r\\n. The private key file extension is .key or .pem. If the certificate uses the RSA or ECC encryption algorithm, this file is the private key file for the server certificate you want to upload. The file name is similar to <domain>.key. The private key contained in this file is used to verify the server's signature and encrypt session keys. If the certificate uses the SM2 encryption algorithm, this file is the private key file for the national cryptography certificate you want to upload. The file name is similar to <domain>_sign.key. The private key contained in this file is used to verify the server's signature. For certificates to be uploaded, this parameter is required.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Indicates a CA certificate to be uploaded. The uploaded certificate is hosted on the content delivery network.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EffectiveTime
+							"effective_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the issuance time of the certificate, in Unix timestamp.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EncryType
+							"encry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the encryption algorithm used by the certificate. The parameter has the following values: inter_cert: RSA or ECC encryption algorithm. sm_cert: SM2 encryption algorithm.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExpireTime
+							"expire_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the expiration time of the certificate, as a Unix timestamp.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Source
+							"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the certificate hosting location. The parameter values are: volc_cert_center: certificate center; cdn_cert_hosting: content delivery network.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Indicates the list of certificates used for origin certificate validation. The list can contain up to 20 certificates.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Switch
 				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Switch",
@@ -5120,6 +5246,96 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Indicates the configuration module for the \"Standard HLS Encryption Rewrite\" feature. This feature is disabled by default.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RuleEngine
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates the configuration module for the 'Rule Engine' feature. This feature is disabled by default.",
+		//	  "properties": {
+		//	    "Rules": {
+		//	      "description": "Indicates the list of rules in the rule engine. The order of rules in the list determines their priority.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Indicates a rule in the rule engine.",
+		//	        "properties": {
+		//	          "DSLRule": {
+		//	            "description": "Indicates the DSL description of the rule.",
+		//	            "type": "string"
+		//	          },
+		//	          "Id": {
+		//	            "description": "Indicates the unique ID of the rule.",
+		//	            "type": "string"
+		//	          },
+		//	          "Locked": {
+		//	            "description": "Indicates whether the rule is locked. Once locked, the rule cannot be modified.",
+		//	            "type": "boolean"
+		//	          },
+		//	          "Name": {
+		//	            "description": "Indicates the name of the rule.",
+		//	            "type": "string"
+		//	          },
+		//	          "Rule": {
+		//	            "description": "Indicates the detailed content of the rule.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Switch": {
+		//	      "description": "Indicates whether this feature is enabled. Valid values: true: Enable this feature. false: Disable this feature. The default value is false.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"rule_engine": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DSLRule
+							"dsl_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the DSL description of the rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the unique ID of the rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Locked
+							"locked": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether the rule is locked. Once locked, the rule cannot be modified.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the name of the rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Rule
+							"rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the detailed content of the rule.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Indicates the list of rules in the rule engine. The order of rules in the list determines their priority.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Switch
+				"switch": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether this feature is enabled. Valid values: true: Enable this feature. false: Disable this feature. The default value is false.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Indicates the configuration module for the 'Rule Engine' feature. This feature is disabled by default.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceRegion
 		// Cloud Control resource type schema:
 		//
@@ -5930,6 +6146,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"download_speed_limit":        "DownloadSpeedLimit",
 		"download_speed_limit_action": "DownloadSpeedLimitAction",
 		"download_speed_limit_rules":  "DownloadSpeedLimitRules",
+		"dsl_rule":                    "DSLRule",
 		"duration":                    "Duration",
 		"effective_time":              "EffectiveTime",
 		"enable_forced_redirect":      "EnableForcedRedirect",
@@ -5952,6 +6169,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"https":                       "HTTPS",
 		"https_port":                  "HttpsPort",
 		"i_pv_6":                      "IPv6",
+		"id":                          "Id",
 		"ignore_case":                 "IgnoreCase",
 		"ignore_scheme":               "IgnoreScheme",
 		"instance_type":               "InstanceType",
@@ -5964,6 +6182,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                         "Key",
 		"list_rules":                  "ListRules",
 		"lock_status":                 "LockStatus",
+		"locked":                      "Locked",
 		"master_remote_addr":          "MasterRemoteAddr",
 		"master_secret_key":           "MasterSecretKey",
 		"max_file_size_kb":            "MaxFileSizeKB",
@@ -6043,8 +6262,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rewrite_m3_u_8":              "RewriteM3u8",
 		"rewrite_m3_u_8_rule":         "RewriteM3u8Rule",
 		"rewrite_type":                "RewriteType",
+		"rule":                        "Rule",
+		"rule_engine":                 "RuleEngine",
 		"rule_name":                   "RuleName",
 		"rule_type":                   "RuleType",
+		"rules":                       "Rules",
 		"service_region":              "ServiceRegion",
 		"service_type":                "ServiceType",
 		"shared_config":               "SharedConfig",
