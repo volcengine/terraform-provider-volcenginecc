@@ -1,0 +1,116 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/ScanKeyNumPerSecond",
+    "/properties/TimeoutMinutes"
+  ],
+  "description": "Volcengine Redis expired key scan/cleanup task (KeyScanJob). Refers to a one-time expired key scan and cleanup job initiated for the target Redis instance. You can create, query, or cancel (interrupt) the job. The task is one-time and does not support updates. Finished/Failed/Interrupted are terminal states; canceled and failed tasks are considered nonexistent resources when queried.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "Redis:CreateKeyScanJob",
+        "Redis:DescribeKeyScanJobs"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Redis:DescribeKeyScanJobs",
+        "Redis:InterruptKeyScanJob"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Redis:DescribeKeyScanJobs"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Redis:DescribeKeyScanJobs"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/JobId"
+  ],
+  "properties": {
+    "CompletedCount": {
+      "description": "Number of shards analyzed.",
+      "type": "integer"
+    },
+    "CreateTime": {
+      "description": "Task creation time. Format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "FinishTime": {
+      "description": "Task end time. Format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Instance ID. You can call the DescribeDBInstances API to query basic information for all Redis instances in the target region, including the instance ID.",
+      "type": "string"
+    },
+    "JobId": {
+      "description": "Task ID of the scan job.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ScanKeyNumPerSecond": {
+      "description": "Number of expired keys scanned per second. Value range: integer between 2000 and 100000.",
+      "maximum": 100000,
+      "minimum": 2000,
+      "type": "integer"
+    },
+    "StartTime": {
+      "description": "Task start time. Format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Task status. Values: Created, Running, Finished, Failed, Interrupted.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TimeoutMinutes": {
+      "description": "Scan timeout. Value range: integer between 30 and 1440, unit: minutes.",
+      "maximum": 1440,
+      "minimum": 30,
+      "type": "integer"
+    },
+    "TotalCount": {
+      "description": "Total number of shards to analyze.",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/JobId",
+    "/properties/Status",
+    "/properties/StartTime",
+    "/properties/CreateTime",
+    "/properties/FinishTime",
+    "/properties/TotalCount",
+    "/properties/CompletedCount"
+  ],
+  "required": [
+    "InstanceId",
+    "ScanKeyNumPerSecond",
+    "TimeoutMinutes"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Redis::KeyScanJob",
+  "writeOnlyProperties": [
+    "/properties/ScanKeyNumPerSecond",
+    "/properties/TimeoutMinutes"
+  ]
+}

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_redis_key_scan_job.example "instance_id|job_id"

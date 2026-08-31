@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_waf_ip_group.example "ip_group_id"

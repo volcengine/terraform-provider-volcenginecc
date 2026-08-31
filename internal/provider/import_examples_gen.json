@@ -1513,5 +1513,45 @@
         "resource": "volcenginecc_fwcenter_nat_fire_wall",
         "identifier": ["NatFirewallId"],
         "path": "./examples/resources/volcenginecc_fwcenter_nat_fire_wall/import.sh"
+    },
+    {
+        "resource": "volcenginecc_ecs_dedicated_host_cluster",
+        "identifier": ["DedicatedHostClusterId"],
+        "path": "./examples/resources/volcenginecc_ecs_dedicated_host_cluster/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cr_robot_account",
+        "identifier": ["Registry","Username"],
+        "path": "./examples/resources/volcenginecc_cr_robot_account/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_ipv4_gateway",
+        "identifier": ["Ipv4GatewayId"],
+        "path": "./examples/resources/volcenginecc_vpc_ipv4_gateway/import.sh"
+    },
+    {
+        "resource": "volcenginecc_redis_key_scan_job",
+        "identifier": ["InstanceId","JobId"],
+        "path": "./examples/resources/volcenginecc_redis_key_scan_job/import.sh"
+    },
+    {
+        "resource": "volcenginecc_iam_api_key",
+        "identifier": ["UserName","ApiKeyId"],
+        "path": "./examples/resources/volcenginecc_iam_api_key/import.sh"
+    },
+    {
+        "resource": "volcenginecc_waf_ip_group",
+        "identifier": ["IpGroupId"],
+        "path": "./examples/resources/volcenginecc_waf_ip_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_waf_system_bot",
+        "identifier": ["Host","RuleTag"],
+        "path": "./examples/resources/volcenginecc_waf_system_bot/import.sh"
+    },
+    {
+        "resource": "volcenginecc_waf_custom_page",
+        "identifier": ["Host","RuleId"],
+        "path": "./examples/resources/volcenginecc_waf_custom_page/import.sh"
     }
 ]

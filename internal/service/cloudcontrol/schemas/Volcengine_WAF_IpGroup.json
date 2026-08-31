@@ -1,0 +1,119 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "RelatedRule": {
+      "properties": {
+        "RuleName": {
+          "description": "Rule Name",
+          "type": "string"
+        },
+        "RuleTag": {
+          "description": "Rule ID",
+          "type": "string"
+        },
+        "RuleType": {
+          "description": "Rule type. Allow indicates an allowlist; Block indicates a blocklist.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "WAF IP Address Group",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/IpGroupId",
+      "/properties/RelatedRules/0/RuleTag",
+      "/properties/IpList/0"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "waf:AddIpGroup",
+        "waf:ListAllIpGroups",
+        "waf:ListIpGroup"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "waf:DeleteIpGroup",
+        "waf:ListAllIpGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "waf:ListAllIpGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "waf:ListAllIpGroups",
+        "waf:ListIpGroup"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "waf:UpdateIpGroup",
+        "waf:ListAllIpGroups",
+        "waf:ListIpGroup"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/IpGroupId"
+  ],
+  "properties": {
+    "IpCount": {
+      "description": "Number of IPs in the IP Address Group",
+      "type": "integer"
+    },
+    "IpGroupId": {
+      "description": "IP Address Group ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "IpList": {
+      "description": "IP Address or Address Range List",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Name": {
+      "description": "IP Address Group Name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "RelatedRules": {
+      "description": "Associated Rule",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RelatedRule"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Last Updated",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/IpGroupId",
+    "/properties/IpCount",
+    "/properties/UpdateTime",
+    "/properties/RelatedRules"
+  ],
+  "required": [
+    "Name",
+    "IpList"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::WAF::IpGroup"
+}

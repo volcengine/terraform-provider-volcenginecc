@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_waf_custom_page.example "host|rule_id"

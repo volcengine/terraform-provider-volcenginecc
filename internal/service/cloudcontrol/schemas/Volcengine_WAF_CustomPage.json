@@ -1,0 +1,203 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Host"
+  ],
+  "definitions": {
+    "Accurate": {
+      "description": "Advanced condition group. Do not pass this field if advanced conditions are not enabled or the rule list is empty; if enabled, you must specify Logic and at least one valid AccurateRules.",
+      "properties": {
+        "AccurateRules": {
+          "description": "Sub-rule list in advanced conditions.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AccurateRule"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Logic": {
+          "description": "Logical relationship between sub-rules. 0: OR; 1: AND.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AccurateRule": {
+      "description": "Sub-rule in advanced conditions.",
+      "properties": {
+        "HttpObj": {
+          "description": "Matching object. For example: request.uri, request.header, request.header.clientip, request.queryargs.abc, request.header.custom-header, request.cookie.custom-cookie, etc.",
+          "type": "string"
+        },
+        "ObjType": {
+          "description": "Matching object type enumeration. 0: Request protocol; 1: Request URI; 2: Request method; 3: Request path; 4: Request parameter; 5: Request header; 6: User-Agent; 7: Referer; 8: Cookie; 9: Request body length; 10: Request body format; 11: X-Forwarded-For; 12: Client IP; 13: Custom Args; 14: Custom Header; 15: Custom Cookie.",
+          "type": "integer"
+        },
+        "Opretar": {
+          "description": "Matching operator enumeration. 0–5: numerical comparison; 6–11: substring match; 12–15: set match; 16: regex; 17–21: IP recognition (only for request.header.clientip or custom objects).",
+          "type": "integer"
+        },
+        "Property": {
+          "description": "Matching attribute type enumeration. 0: Value; 5: IP (used only when Operator=17~21).",
+          "type": "integer"
+        },
+        "ValueString": {
+          "description": "Matching value. For IP recognition operations with Operator=17~21, no matching content is involved and this can be an empty string; for other operators, enter the actual matching value.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "WAF custom block response rule. When block conditions are met, WAF returns a custom response code, page, or redirects to the specified URL according to this rule.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Host",
+      "/properties/RuleTag",
+      "/properties/ProjectName"
+    ],
+    "required": [
+      "/properties/Host"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "waf:CreateCustomPage",
+        "waf:ListCustomPage"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "waf:DeleteCustomPage",
+        "waf:ListCustomPage"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "waf:ListCustomPage"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "waf:ListCustomPage"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "waf:UpdateCustomPage",
+        "waf:ListCustomPage"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Host",
+    "/properties/RuleId"
+  ],
+  "properties": {
+    "Accurate": {
+      "$ref": "#/definitions/Accurate",
+      "description": "Advanced condition configuration. Only takes effect when Advanced=1."
+    },
+    "Advanced": {
+      "description": "Enable advanced conditions. 0: Off (default); 1: On. If enabled, Accurate must also be configured.",
+      "enum": [
+        0,
+        1
+      ],
+      "type": "integer"
+    },
+    "Body": {
+      "description": "Custom response page content. Maximum length: 4096 bytes. Only effective when PageMode=0.",
+      "type": "string"
+    },
+    "ClientIp": {
+      "description": "Client IP. Value is fixed as ALL, meaning it applies to all source IPs.",
+      "type": "string"
+    },
+    "Code": {
+      "description": "Custom response status code, such as 403, 405, 503. Only effective when PageMode=0.",
+      "type": "string"
+    },
+    "ContentType": {
+      "description": "Custom response Content-Type response header. For example: text/html, application/json, etc. Only effective when PageMode=0.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Rule description.",
+      "type": "string"
+    },
+    "Enable": {
+      "description": "Rule switch. 0: Off; 1: On.",
+      "type": "integer"
+    },
+    "Host": {
+      "description": "Domain name. The website domain name to be protected. Before calling, make sure the domain name has been added to the current WAF instance.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "Rule name. Must start with a Chinese character, letter, or number. Allows Chinese characters, letters, numbers, periods (.), underscores (_), and hyphens (-). Length: 1–128 characters.",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PageMode": {
+      "description": "Response page mode. 0: Custom response body; 2: Redirect URL.",
+      "type": "integer"
+    },
+    "Policy": {
+      "description": "Associated protection policy. 1: Observe; 8: Block.",
+      "type": "integer"
+    },
+    "ProjectName": {
+      "description": "Project name, which is the project associated with the current resource. Only projects with permissions under the current identity can be associated. Default is default.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RedirectUrl": {
+      "description": "Redirect target URL. Only effective when PageMode=2.",
+      "type": "string"
+    },
+    "RuleId": {
+      "description": "Custom block response rule ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "RuleTag": {
+      "description": "Rule display ID. The RuleTag prefix for custom interception response rules is always B, consisting of the prefix B and a 12-digit RuleId (zero-padded in the middle if fewer than 12 digits). For example, RuleId=116869 corresponds to RuleTag=B000000116869.",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Last updated time of the rule.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Url": {
+      "description": "URL path where the rule takes effect.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RuleId",
+    "/properties/RuleTag",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "ClientIp",
+    "Description",
+    "Host",
+    "Name",
+    "PageMode",
+    "Policy",
+    "Url"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::WAF::CustomPage",
+  "writeOnlyProperties": [
+    "/properties/ProjectName"
+  ]
+}

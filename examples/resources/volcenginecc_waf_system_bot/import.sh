@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_waf_system_bot.example "host|rule_tag"
