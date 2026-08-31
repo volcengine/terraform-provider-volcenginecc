@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_iam_api_key.example "user_name|api_key_id"

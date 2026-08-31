@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cr_robot_account.example "registry|username"

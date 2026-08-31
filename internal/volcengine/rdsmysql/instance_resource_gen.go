@@ -1854,11 +1854,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Instance type. Values: DoubleNode: dual-node type. MultiNode: multi-node type",
+		//	  "description": "Instance types. Values: DoubleNode, dual-node type; MultiNode, multi-node type; SingleNode, single-node type.",
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Instance type. Values: DoubleNode: dual-node type. MultiNode: multi-node type",
+			Description: "Instance types. Values: DoubleNode, dual-node type; MultiNode, multi-node type; SingleNode, single-node type.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

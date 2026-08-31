@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_ipv4_gateway.example "ipv4_gateway_id"

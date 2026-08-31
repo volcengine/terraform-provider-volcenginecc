@@ -1,0 +1,176 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ZoneId"
+  ],
+  "definitions": {
+    "AvailableInstanceType": {
+      "properties": {
+        "AvailableCapacity": {
+          "description": "Number of instances of this type that can still be created in the dedicated host cluster.",
+          "type": "integer"
+        },
+        "InstanceType": {
+          "description": "Instance type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DedicatedHostClusterCapacity": {
+      "properties": {
+        "AvailableInstanceTypes": {
+          "description": "Supported instance types and the remaining number of instances that can be created for each type in this dedicated host cluster.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AvailableInstanceType"
+          },
+          "type": "array"
+        },
+        "AvailableMemory": {
+          "description": "Total remaining available memory in this dedicated host cluster, measured in GiB.",
+          "type": "integer"
+        },
+        "AvailableVcpus": {
+          "description": "Total remaining available vCPU count in this dedicated host cluster.",
+          "type": "integer"
+        },
+        "LocalVolumeCapacities": {
+          "description": "Available and total capacity of each type of local disk in this dedicated host cluster.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/LocalVolumeCapacity"
+          },
+          "type": "array"
+        },
+        "TotalMemory": {
+          "description": "Total memory of this dedicated host cluster, measured in GiB.",
+          "type": "integer"
+        },
+        "TotalVcpus": {
+          "description": "Total vCPU count of this dedicated host cluster.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "LocalVolumeCapacity": {
+      "properties": {
+        "AvailableSize": {
+          "description": "Remaining available capacity of this type of local disk, measured in GiB.",
+          "type": "integer"
+        },
+        "TotalSize": {
+          "description": "Total capacity of this type of local disk, measured in GiB.",
+          "type": "integer"
+        },
+        "VolumeType": {
+          "description": "Local disk type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "The dedicated host cluster is a logical collection at the availability zone level. You can use dedicated host clusters to group and manage dedicated hosts, or create instances in a specified cluster.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/DedicatedHostClusterName",
+      "/properties/DedicatedHostClusterId",
+      "/properties/ZoneId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ecs:CreateDedicatedHostCluster",
+        "ecs:DescribeDedicatedHostClusters"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ecs:DeleteDedicatedHostCluster",
+        "ecs:DescribeDedicatedHostClusters"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ecs:DescribeDedicatedHostClusters"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ecs:DescribeDedicatedHostClusters"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ecs:ModifyDedicatedHostClusterAttribute",
+        "ecs:DescribeDedicatedHostClusters"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/DedicatedHostClusterId"
+  ],
+  "properties": {
+    "CreatedAt": {
+      "description": "Creation time of the dedicated host cluster.",
+      "type": "string"
+    },
+    "DedicatedHostClusterCapacity": {
+      "$ref": "#/definitions/DedicatedHostClusterCapacity",
+      "description": "Capacity information of the dedicated host cluster, including available memory, available vCPU, supported instance types, and more."
+    },
+    "DedicatedHostClusterId": {
+      "description": "ID of the dedicated host cluster.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "DedicatedHostClusterName": {
+      "description": "Name of the dedicated host cluster. Length limit: 1–128 characters. Can include Chinese characters, letters, numbers, underscores (_), hyphens (-), and periods (.), and must start with a letter, number, or Chinese character.",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "DedicatedHostIds": {
+      "description": "List of IDs for all dedicated hosts contained in this dedicated host cluster.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Description": {
+      "description": "Description of the dedicated host cluster. Length limit: 0–256 characters.",
+      "maxLength": 256,
+      "semantic": "description",
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "description": "Last update time of the dedicated host cluster.",
+      "type": "string"
+    },
+    "ZoneId": {
+      "description": "Availability zone ID to which the dedicated host cluster belongs. Cannot be modified after creation.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/DedicatedHostClusterId",
+    "/properties/DedicatedHostIds",
+    "/properties/DedicatedHostClusterCapacity",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "required": [
+    "DedicatedHostClusterName",
+    "ZoneId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::ECS::DedicatedHostCluster"
+}

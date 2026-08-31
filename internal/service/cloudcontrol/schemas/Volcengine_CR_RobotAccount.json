@@ -1,0 +1,152 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Registry",
+    "/properties/Username"
+  ],
+  "definitions": {
+    "Permission": {
+      "properties": {
+        "Actions": {
+          "description": "Supported operation permissions: CreateRepository for creating image repositories, PullRepository for pulling images, PushRepository for pushing images.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Resource": {
+          "description": "Resource object to operate on.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Resource",
+        "Actions"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Container image repository robot account, used to access the image repository with a robot account in the format crrobot@****.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Registry",
+      "/properties/Username",
+      "/properties/Description",
+      "/properties/Disabled"
+    ],
+    "required": [
+      "/properties/Registry"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cr:CreateRobotAccount",
+        "cr:ListRobotAccounts"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cr:DeleteRobotAccount",
+        "cr:ListRobotAccounts"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cr:ListRobotAccounts"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cr:ListRobotAccounts"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cr:UpdateRobotAccount",
+        "cr:UpdateRobotAccountPassword",
+        "cr:ListRobotAccounts"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Registry",
+    "/properties/Username"
+  ],
+  "properties": {
+    "CreateTime": {
+      "description": "Creation timestamp.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the robot account.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Disabled": {
+      "description": "Disable status of the robot account. false means the account is enabled; true means the account is disabled.",
+      "type": "boolean"
+    },
+    "Duration": {
+      "description": "Effective period, in days, with a maximum of 366. Enter -1 for unlimited.",
+      "type": "integer"
+    },
+    "ExpiresAt": {
+      "description": "Expiration timestamp.",
+      "type": "integer"
+    },
+    "Password": {
+      "description": "Login password for the robot account. If not specified during creation, a random password will be generated; when updating the password, this field is required if Random is false.",
+      "type": "string"
+    },
+    "Permissions": {
+      "description": "Operation permissions for the robot account.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Permission"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Random": {
+      "description": "Whether to automatically generate a random password. false means a random string is not used and you must enter a password manually; true means a random password is generated automatically.",
+      "type": "boolean"
+    },
+    "Registry": {
+      "description": "Instance name where the robot account resides.",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Update timestamp.",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Username": {
+      "description": "Name of the robot account, in the format crrobot@****.",
+      "semantic": "resourceId",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ExpiresAt",
+    "/properties/CreateTime",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "Registry",
+    "Username",
+    "Permissions",
+    "Duration"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CR::RobotAccount",
+  "writeOnlyProperties": [
+    "/properties/Duration",
+    "/properties/Random"
+  ]
+}

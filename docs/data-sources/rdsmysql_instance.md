@@ -59,7 +59,7 @@ Data Source schema for Volcengine::RDSMySQL::Instance
 - `instance_id` (String) Instance ID.
 - `instance_name` (String) Instance name.
 - `instance_status` (String) Instance status.
-- `instance_type` (String) Instance type. Values: DoubleNode: dual-node type. MultiNode: multi-node type
+- `instance_type` (String) Instance types. Values: DoubleNode, dual-node type; MultiNode, multi-node type; SingleNode, single-node type.
 - `lower_case_table_names` (String) Whether table names are case-sensitive. Default value is true. Values: false: Table names are stored as fixed and are case-sensitive. true: Table names are stored in lowercase and are case-insensitive.
 - `maintenance_window` (Attributes) Specify the maintenance window for the instance when creating it. This field is optional. If not set, the default is UTC18:00Z-21:59Z every day of the week (Beijing time 02:00-05:59). (see [below for nested schema](#nestedatt--maintenance_window))
 - `master_instance_id` (String) Primary instance ID

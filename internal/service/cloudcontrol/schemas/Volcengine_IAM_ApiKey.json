@@ -1,0 +1,106 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/UserName"
+  ],
+  "description": "IAM API Key。",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/UserName"
+    ],
+    "required": [
+      "/properties/UserName"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateApiKey",
+        "iam:ListApiKeys"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:DeleteApiKey",
+        "iam:UpdateApiKey",
+        "iam:ListApiKeys"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListApiKeys"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:ListApiKeys"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:UpdateApiKey",
+        "iam:ListApiKeys"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/UserName",
+    "/properties/ApiKeyId"
+  ],
+  "properties": {
+    "ApiKeyId": {
+      "description": "API Key ID。",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CreateDate": {
+      "description": "Created At",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Name": {
+      "description": "API Key Name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "PermissionsBoundary": {
+      "description": "Permission Boundary",
+      "type": "string"
+    },
+    "Secret": {
+      "description": "API Key Secret",
+      "type": "string"
+    },
+    "Status": {
+      "description": "API Key Status",
+      "semantic": "status",
+      "type": "string"
+    },
+    "UpdateDate": {
+      "description": "Last Updated",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UserName": {
+      "description": "Username",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ApiKeyId",
+    "/properties/Secret",
+    "/properties/CreateDate",
+    "/properties/UpdateDate"
+  ],
+  "required": [
+    "UserName",
+    "Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::IAM::ApiKey",
+  "writeOnlyProperties": [
+    "/properties/PermissionsBoundary"
+  ]
+}

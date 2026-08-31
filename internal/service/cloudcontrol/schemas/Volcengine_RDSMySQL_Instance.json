@@ -975,7 +975,7 @@
       "type": "string"
     },
     "InstanceType": {
-      "description": "Instance type. Values: DoubleNode: dual-node type. MultiNode: multi-node type",
+      "description": "Instance types. Values: DoubleNode, dual-node type; MultiNode, multi-node type; SingleNode, single-node type.",
       "type": "string"
     },
     "LowerCaseTableNames": {

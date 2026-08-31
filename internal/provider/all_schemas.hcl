@@ -1227,3 +1227,35 @@ resource_schema "volcengine_kafka_acl" {
 resource_schema "volcengine_fwcenter_nat_fire_wall" {
   cloudcontrol_type_name = "Volcengine::FWCenter::NATFireWall"
 }
+
+resource_schema "volcengine_ecs_dedicated_host_cluster" {
+  cloudcontrol_type_name = "Volcengine::ECS::DedicatedHostCluster"
+}
+
+resource_schema "volcengine_cr_robot_account" {
+  cloudcontrol_type_name = "Volcengine::CR::RobotAccount"
+}
+
+resource_schema "volcengine_vpc_ipv4_gateway" {
+  cloudcontrol_type_name = "Volcengine::VPC::Ipv4Gateway"
+}
+
+resource_schema "volcengine_redis_key_scan_job" {
+  cloudcontrol_type_name = "Volcengine::Redis::KeyScanJob"
+}
+
+resource_schema "volcengine_iam_api_key" {
+  cloudcontrol_type_name = "Volcengine::IAM::ApiKey"
+}
+
+resource_schema "volcengine_waf_ip_group" {
+  cloudcontrol_type_name = "Volcengine::WAF::IpGroup"
+}
+
+resource_schema "volcengine_waf_system_bot" {
+  cloudcontrol_type_name = "Volcengine::WAF::SystemBot"
+}
+
+resource_schema "volcengine_waf_custom_page" {
+  cloudcontrol_type_name = "Volcengine::WAF::CustomPage"
+}

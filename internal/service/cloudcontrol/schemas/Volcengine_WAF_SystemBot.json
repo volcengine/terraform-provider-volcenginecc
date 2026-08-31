@@ -1,0 +1,118 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/BotType",
+    "/properties/Host",
+    "/properties/ProjectName",
+    "/properties/RuleTag"
+  ],
+  "description": "Volcengine WAF system Bot rule configuration. System Bot rules are built-in bot detection rules in WAF, categorized by BotType. Each category contains several independently configurable sub-rules (SubRule), each uniquely identified by a RuleTag. Use UpdateSystemBotConfig to set the action and switch for a sub-rule (RuleTag) under a specified domain (Host) (Enable=1 means enabled and considered created, Enable=0 means disabled and considered deleted), and use ListSystemBotConfig to query the current configuration of each sub-rule. Resource granularity is 'domain name + sub-rule tag'.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Host",
+      "/properties/RuleTag",
+      "/properties/Name",
+      "/properties/IPMatch"
+    ],
+    "required": [
+      "/properties/Host"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "waf:UpdateSystemBotConfig",
+        "waf:ListSystemBotConfig"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "waf:UpdateSystemBotConfig",
+        "waf:ListSystemBotConfig"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "waf:ListSystemBotConfig"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "waf:ListSystemBotConfig"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "waf:UpdateSystemBotConfig",
+        "waf:ListSystemBotConfig"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Host",
+    "/properties/RuleTag"
+  ],
+  "properties": {
+    "Action": {
+      "description": "Action taken when this sub-rule is triggered. Values: observe, block, etc.",
+      "type": "string"
+    },
+    "BotType": {
+      "description": "Category of the system Bot rule, such as llm_crawler_bot (large model crawler), user_bot (user-triggered crawling), search_engine_bot (search engine), marketing (marketing tool), etc.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the sub-rule.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Enable": {
+      "description": "Sub-rule switch. Values:\n\n- 1: Enabled (fixed as 1 when created)\n- 0: Disabled (fixed as 0 when deleted)",
+      "type": "integer"
+    },
+    "Host": {
+      "description": "Domain name to be protected by the system Bot rule.",
+      "type": "string"
+    },
+    "IPMatch": {
+      "description": "Whether this sub-rule supports IP-based matching.",
+      "type": "boolean"
+    },
+    "Name": {
+      "description": "Sub-rule name.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project name to which the resource belongs.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RuleTag": {
+      "description": "Unique tag for the system Bot sub-rule, such as J000000001026. Used to uniquely identify a sub-rule within a BotType category.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "VerificationExemptionTime": {
+      "description": "Verification exemption duration, in seconds. The period during which verification is not required after a hit and successful verification.",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Enable",
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/IPMatch"
+  ],
+  "required": [
+    "Host",
+    "RuleTag"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::WAF::SystemBot",
+  "writeOnlyProperties": [
+    "/properties/ProjectName"
+  ]
+}
