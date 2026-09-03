@@ -204,7 +204,7 @@
     "tagUpdatable": true,
     "taggable": true
   },
-  "typeName": "Volcengine::VPC::IpamPool",
+  "typeName": "Volcengine::VPC::IPAMPool",
   "writeOnlyProperties": [
     "/properties/ClearAllocationDefaultCidrMask"
   ]

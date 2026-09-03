@@ -217,7 +217,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "San": {
-		//	        "description": "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
+		//	        "description": "Separate the certificate's CommonName, extended domain names, and IP addresses with commas.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -267,7 +267,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: San
 					"san": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
+						Description: "Separate the certificate's CommonName, extended domain names, and IP addresses with commas.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

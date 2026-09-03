@@ -66,6 +66,28 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Email.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GeneratePassword
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Generated Password",
+		//	  "type": "string"
+		//	}
+		"generate_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Generated Password",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: GenerateRandomPassword
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Auto Generate Password",
+		//	  "type": "boolean"
+		//	}
+		"generate_random_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Auto Generate Password",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityType
 		// Cloud Control resource type schema:
 		//
@@ -171,18 +193,20 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::CloudIdentity::User").WithTerraformTypeName("volcenginecc_cloudidentity_user")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_time":            "CreatedTime",
-		"description":             "Description",
-		"display_name":            "DisplayName",
-		"email":                   "Email",
-		"identity_type":           "IdentityType",
-		"password":                "Password",
-		"password_reset_required": "PasswordResetRequired",
-		"phone":                   "Phone",
-		"source":                  "Source",
-		"updated_time":            "UpdatedTime",
-		"user_id":                 "UserId",
-		"user_name":               "UserName",
+		"created_time":             "CreatedTime",
+		"description":              "Description",
+		"display_name":             "DisplayName",
+		"email":                    "Email",
+		"generate_password":        "GeneratePassword",
+		"generate_random_password": "GenerateRandomPassword",
+		"identity_type":            "IdentityType",
+		"password":                 "Password",
+		"password_reset_required":  "PasswordResetRequired",
+		"phone":                    "Phone",
+		"source":                   "Source",
+		"updated_time":             "UpdatedTime",
+		"user_id":                  "UserId",
+		"user_name":                "UserName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

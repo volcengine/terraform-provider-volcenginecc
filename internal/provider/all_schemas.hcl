@@ -1189,11 +1189,11 @@ resource_schema "volcengine_vpc_ipam" {
 }
 
 resource_schema "volcengine_vpc_ipam_pool" {
-  cloudcontrol_type_name = "Volcengine::VPC::IpamPool"
+  cloudcontrol_type_name = "Volcengine::VPC::IPAMPool"
 }
 
 resource_schema "volcengine_vpc_ipam_scope" {
-  cloudcontrol_type_name = "Volcengine::VPC::IpamScope"
+  cloudcontrol_type_name = "Volcengine::VPC::IPAMScope"
 }
 
 resource_schema "volcengine_transitrouter_transit_router_attachment_to_route_table" {

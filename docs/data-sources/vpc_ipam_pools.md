@@ -3,12 +3,12 @@
 page_title: "volcenginecc_vpc_ipam_pools Data Source - terraform-provider-volcenginecc"
 subcategory: "VPC"
 description: |-
-  Plural Data Source schema for Volcengine::VPC::IpamPool
+  Plural Data Source schema for Volcengine::VPC::IPAMPool
 ---
 
 # volcenginecc_vpc_ipam_pools (Data Source)
 
-Plural Data Source schema for Volcengine::VPC::IpamPool
+Plural Data Source schema for Volcengine::VPC::IPAMPool
 
 
 

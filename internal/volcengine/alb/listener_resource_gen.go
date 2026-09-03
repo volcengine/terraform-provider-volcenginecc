@@ -294,7 +294,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "San": {
-		//	        "description": "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
+		//	        "description": "Separate the certificate's CommonName, extended domain names, and IP addresses with commas.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -364,14 +364,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: San
-					"san": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseNonNullStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "List of additional domain names associated with the HTTPS listener. A single HTTPS listener can be associated with up to 20 additional domain names.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
@@ -844,6 +836,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Status",
 		"/properties/ProjectName",
 		"/properties/DomainExtensions/*/DomainExtensionId",
+		"/properties/DomainExtensions/*/San",
 		"/properties/DomainExtensions/*/ListenerId",
 	})
 

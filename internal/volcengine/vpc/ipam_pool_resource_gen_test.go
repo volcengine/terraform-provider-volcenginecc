@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineVPCIpamPool_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::VPC::IpamPool", "volcenginecc_vpc_ipam_pool", "test")
+func TestAccVolcengineVPCIPAMPool_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::VPC::IPAMPool", "volcenginecc_vpc_ipam_pool", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

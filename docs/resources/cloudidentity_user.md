@@ -31,6 +31,7 @@ resource "volcenginecc_cloudidentity_user" "CloudIdentityUserDemo" {
 - `description` (String) User Description.
 - `display_name` (String) User Display Name.
 - `email` (String) Email.
+- `generate_random_password` (Boolean) Auto Generate Password
 - `password` (String) Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.
 - `password_reset_required` (Boolean) Is password reset required on first login?
 - `phone` (String) Mobile Number.
@@ -39,6 +40,7 @@ resource "volcenginecc_cloudidentity_user" "CloudIdentityUserDemo" {
 ### Read-Only
 
 - `created_time` (String) Creation Time.
+- `generate_password` (String) Generated Password
 - `id` (String) Uniquely identifies the resource.
 - `identity_type` (String) Identity Type.
 - `source` (String) User Source.

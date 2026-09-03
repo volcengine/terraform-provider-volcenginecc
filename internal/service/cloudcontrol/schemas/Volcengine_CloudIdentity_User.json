@@ -61,6 +61,14 @@
       "description": "Email.",
       "type": "string"
     },
+    "GeneratePassword": {
+      "description": "Generated Password",
+      "type": "string"
+    },
+    "GenerateRandomPassword": {
+      "description": "Auto Generate Password",
+      "type": "boolean"
+    },
     "IdentityType": {
       "description": "Identity Type.",
       "type": "string"
@@ -102,7 +110,8 @@
     "/properties/UpdatedTime",
     "/properties/IdentityType",
     "/properties/Source",
-    "/properties/UserId"
+    "/properties/UserId",
+    "/properties/GeneratePassword"
   ],
   "tagging": {
     "taggable": false
@@ -110,6 +119,7 @@
   "typeName": "Volcengine::CloudIdentity::User",
   "writeOnlyProperties": [
     "/properties/Password",
-    "/properties/PasswordResetRequired"
+    "/properties/PasswordResetRequired",
+    "/properties/GenerateRandomPassword"
   ]
 }
