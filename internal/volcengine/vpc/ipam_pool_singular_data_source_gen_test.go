@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineVPCIpamPoolDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::VPC::IpamPool", "volcenginecc_vpc_ipam_pool", "test")
+func TestAccVolcengineVPCIPAMPoolDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::VPC::IPAMPool", "volcenginecc_vpc_ipam_pool", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
@@ -24,8 +24,8 @@ func TestAccVolcengineVPCIpamPoolDataSource_basic(t *testing.T) {
 	})
 }
 
-func TestAccVolcengineVPCIpamPoolDataSource_NonExistent(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::VPC::IpamPool", "volcenginecc_vpc_ipam_pool", "test")
+func TestAccVolcengineVPCIPAMPoolDataSource_NonExistent(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::VPC::IPAMPool", "volcenginecc_vpc_ipam_pool", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

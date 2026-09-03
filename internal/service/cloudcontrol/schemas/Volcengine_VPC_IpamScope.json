@@ -166,5 +166,5 @@
     "tagUpdatable": true,
     "taggable": true
   },
-  "typeName": "Volcengine::VPC::IpamScope"
+  "typeName": "Volcengine::VPC::IPAMScope"
 }

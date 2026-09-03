@@ -84,6 +84,36 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: GeneratePassword
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Generated Password",
+		//	  "type": "string"
+		//	}
+		"generate_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Generated Password",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: GenerateRandomPassword
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Auto Generate Password",
+		//	  "type": "boolean"
+		//	}
+		"generate_random_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Auto Generate Password",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// GenerateRandomPassword is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityType
 		// Cloud Control resource type schema:
 		//
@@ -224,23 +254,26 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::CloudIdentity::User").WithTerraformTypeName("volcenginecc_cloudidentity_user")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_time":            "CreatedTime",
-		"description":             "Description",
-		"display_name":            "DisplayName",
-		"email":                   "Email",
-		"identity_type":           "IdentityType",
-		"password":                "Password",
-		"password_reset_required": "PasswordResetRequired",
-		"phone":                   "Phone",
-		"source":                  "Source",
-		"updated_time":            "UpdatedTime",
-		"user_id":                 "UserId",
-		"user_name":               "UserName",
+		"created_time":             "CreatedTime",
+		"description":              "Description",
+		"display_name":             "DisplayName",
+		"email":                    "Email",
+		"generate_password":        "GeneratePassword",
+		"generate_random_password": "GenerateRandomPassword",
+		"identity_type":            "IdentityType",
+		"password":                 "Password",
+		"password_reset_required":  "PasswordResetRequired",
+		"phone":                    "Phone",
+		"source":                   "Source",
+		"updated_time":             "UpdatedTime",
+		"user_id":                  "UserId",
+		"user_name":                "UserName",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Password",
 		"/properties/PasswordResetRequired",
+		"/properties/GenerateRandomPassword",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -249,6 +282,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/IdentityType",
 		"/properties/Source",
 		"/properties/UserId",
+		"/properties/GeneratePassword",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

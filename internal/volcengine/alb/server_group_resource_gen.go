@@ -110,7 +110,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "HttpVersion": {
-		//	      "default": "HTTP1.0",
 		//	      "description": "Health check HTTP protocol version. This parameter is available only when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default for API usage), HTTP1.1.",
 		//	      "enum": [
 		//	        "HTTP1.0",
@@ -141,7 +140,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "Protocol": {
-		//	      "default": "HTTP",
 		//	      "description": "Health check protocol. Currently supports HTTP and TCP. Default: HTTP.",
 		//	      "enum": [
 		//	        "HTTP",
@@ -229,7 +227,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Health check HTTP protocol version. This parameter is available only when HealthCheck.Protocol is set to HTTP. Values: HTTP1.0 (default for API usage), HTTP1.1.",
 					Optional:    true,
 					Computed:    true,
-					Default:     stringdefault.StaticString("HTTP1.0"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"HTTP1.0",
@@ -286,7 +283,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Health check protocol. Currently supports HTTP and TCP. Default: HTTP.",
 					Optional:    true,
 					Computed:    true,
-					Default:     stringdefault.StaticString("HTTP"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"HTTP",

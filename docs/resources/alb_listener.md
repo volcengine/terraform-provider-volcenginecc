@@ -103,7 +103,6 @@ Optional:
 - `certificate_source` (String) Source of the server certificate used by the domain. Values: alb: certificate uploaded via ALB. cert_center: SSL certificate purchased or uploaded through Volcano Engine Certificate Center.
 - `domain` (String) Domain name. Usually cannot be empty. If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain must be an empty string. Must contain at least one '.' and cannot start or end with '.'. Only lowercase letters, digits, '.', '-', and '*' are allowed. Length must be between 1 and 128 characters. Wildcard domain: use '*' to replace one or more characters. '*' must be at the beginning or end of the domain name. '*' cannot appear twice in the same domain name. No characters except '.' can be before or after '*'. Exact domain: a domain name that meets domain name specifications. Domain names under the same HTTPS listener cannot be duplicated. Domain matching is case-insensitive.
 - `pca_leaf_certificate_id` (String) Private leaf certificate ID associated with the HTTPS listener. Required when creating an HTTPS listener and the certificate source is pca_leaf.
-- `san` (String) If the instance supports automatic selection of extended certificates (SniAutoMatch is on), Domain is an empty string. San refers to the extended domain names of the certificate, separated by commas.
 
 
 <a id="nestedatt--server_groups"></a>

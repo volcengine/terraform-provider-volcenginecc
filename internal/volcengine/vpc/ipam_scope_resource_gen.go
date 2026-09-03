@@ -23,12 +23,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceFactory("volcenginecc_vpc_ipam_scope", ipamScopeResource)
+	registry.AddResourceFactory("volcenginecc_vpc_ipam_scope", iPAMScopeResource)
 }
 
-// ipamScopeResource returns the Terraform volcenginecc_vpc_ipam_scope resource.
-// This Terraform resource corresponds to the Cloud Control Volcengine::VPC::IpamScope resource.
-func ipamScopeResource(ctx context.Context) (resource.Resource, error) {
+// iPAMScopeResource returns the Terraform volcenginecc_vpc_ipam_scope resource.
+// This Terraform resource corresponds to the Cloud Control Volcengine::VPC::IPAMScope resource.
+func iPAMScopeResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
@@ -310,7 +310,7 @@ func ipamScopeResource(ctx context.Context) (resource.Resource, error) {
 
 	var opts generic.ResourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IpamScope").WithTerraformTypeName("volcenginecc_vpc_ipam_scope")
+	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IPAMScope").WithTerraformTypeName("volcenginecc_vpc_ipam_scope")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":      "AccountId",

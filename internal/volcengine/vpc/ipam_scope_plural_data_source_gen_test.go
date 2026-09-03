@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineVPCIpamScopesDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::VPC::IpamScope", "volcenginecc_vpc_ipam_scopes", "test")
+func TestAccVolcengineVPCIPAMScopesDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::VPC::IPAMScope", "volcenginecc_vpc_ipam_scopes", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

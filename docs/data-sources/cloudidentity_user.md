@@ -25,6 +25,8 @@ Data Source schema for Volcengine::CloudIdentity::User
 - `description` (String) User Description.
 - `display_name` (String) User Display Name.
 - `email` (String) Email.
+- `generate_password` (String) Generated Password
+- `generate_random_password` (Boolean) Auto Generate Password
 - `identity_type` (String) Identity Type.
 - `password` (String) Password. Password must be 8–32 characters long and include at least three of the following: uppercase letters, lowercase letters, numbers, and special symbols.
 - `password_reset_required` (Boolean) Is password reset required on first login?

@@ -13,8 +13,8 @@ import (
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/acctest"
 )
 
-func TestAccVolcengineVPCIpamScopeDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::VPC::IpamScope", "volcenginecc_vpc_ipam_scope", "test")
+func TestAccVolcengineVPCIPAMScopeDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::VPC::IPAMScope", "volcenginecc_vpc_ipam_scope", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
@@ -24,8 +24,8 @@ func TestAccVolcengineVPCIpamScopeDataSource_basic(t *testing.T) {
 	})
 }
 
-func TestAccVolcengineVPCIpamScopeDataSource_NonExistent(t *testing.T) {
-	td := acctest.NewTestData(t, "Volcengine::VPC::IpamScope", "volcenginecc_vpc_ipam_scope", "test")
+func TestAccVolcengineVPCIPAMScopeDataSource_NonExistent(t *testing.T) {
+	td := acctest.NewTestData(t, "Volcengine::VPC::IPAMScope", "volcenginecc_vpc_ipam_scope", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

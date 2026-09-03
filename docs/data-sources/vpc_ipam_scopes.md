@@ -3,12 +3,12 @@
 page_title: "volcenginecc_vpc_ipam_scopes Data Source - terraform-provider-volcenginecc"
 subcategory: "VPC"
 description: |-
-  Plural Data Source schema for Volcengine::VPC::IpamScope
+  Plural Data Source schema for Volcengine::VPC::IPAMScope
 ---
 
 # volcenginecc_vpc_ipam_scopes (Data Source)
 
-Plural Data Source schema for Volcengine::VPC::IpamScope
+Plural Data Source schema for Volcengine::VPC::IPAMScope
 
 
 

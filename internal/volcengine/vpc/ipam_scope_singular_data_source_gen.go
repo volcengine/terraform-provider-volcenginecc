@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("volcenginecc_vpc_ipam_scope", ipamScopeDataSource)
+	registry.AddDataSourceFactory("volcenginecc_vpc_ipam_scope", iPAMScopeDataSource)
 }
 
-// ipamScopeDataSource returns the Terraform volcenginecc_vpc_ipam_scope data source.
-// This Terraform data source corresponds to the Cloud Control Volcengine::VPC::IpamScope resource.
-func ipamScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
+// iPAMScopeDataSource returns the Terraform volcenginecc_vpc_ipam_scope data source.
+// This Terraform data source corresponds to the Cloud Control Volcengine::VPC::IPAMScope resource.
+func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
@@ -222,13 +222,13 @@ func ipamScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Data Source schema for Volcengine::VPC::IpamScope",
+		Description: "Data Source schema for Volcengine::VPC::IPAMScope",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IpamScope").WithTerraformTypeName("volcenginecc_vpc_ipam_scope")
+	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IPAMScope").WithTerraformTypeName("volcenginecc_vpc_ipam_scope")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":      "AccountId",

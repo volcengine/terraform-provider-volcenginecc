@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("volcenginecc_vpc_ipam_scopes", ipamScopesDataSource)
+	registry.AddDataSourceFactory("volcenginecc_vpc_ipam_scopes", iPAMScopesDataSource)
 }
 
-// ipamScopesDataSource returns the Terraform volcenginecc_vpc_ipam_scopes data source.
-// This Terraform data source corresponds to the Cloud Control Volcengine::VPC::IpamScope resource.
-func ipamScopesDataSource(ctx context.Context) (datasource.DataSource, error) {
+// iPAMScopesDataSource returns the Terraform volcenginecc_vpc_ipam_scopes data source.
+// This Terraform data source corresponds to the Cloud Control Volcengine::VPC::IPAMScope resource.
+func iPAMScopesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -35,13 +35,13 @@ func ipamScopesDataSource(ctx context.Context) (datasource.DataSource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Plural Data Source schema for Volcengine::VPC::IpamScope",
+		Description: "Plural Data Source schema for Volcengine::VPC::IPAMScope",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IpamScope").WithTerraformTypeName("volcenginecc_vpc_ipam_scopes")
+	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IPAMScope").WithTerraformTypeName("volcenginecc_vpc_ipam_scopes")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)

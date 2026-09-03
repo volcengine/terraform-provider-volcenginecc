@@ -22,12 +22,12 @@ import (
 )
 
 func init() {
-	registry.AddResourceFactory("volcenginecc_vpc_ipam_pool", ipamPoolResource)
+	registry.AddResourceFactory("volcenginecc_vpc_ipam_pool", iPAMPoolResource)
 }
 
-// ipamPoolResource returns the Terraform volcenginecc_vpc_ipam_pool resource.
-// This Terraform resource corresponds to the Cloud Control Volcengine::VPC::IpamPool resource.
-func ipamPoolResource(ctx context.Context) (resource.Resource, error) {
+// iPAMPoolResource returns the Terraform volcenginecc_vpc_ipam_pool resource.
+// This Terraform resource corresponds to the Cloud Control Volcengine::VPC::IPAMPool resource.
+func iPAMPoolResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: AccountId
 		// Cloud Control resource type schema:
@@ -429,7 +429,7 @@ func ipamPoolResource(ctx context.Context) (resource.Resource, error) {
 
 	var opts generic.ResourceOptions
 
-	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IpamPool").WithTerraformTypeName("volcenginecc_vpc_ipam_pool")
+	opts = opts.WithCloudControlTypeName("Volcengine::VPC::IPAMPool").WithTerraformTypeName("volcenginecc_vpc_ipam_pool")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                         "AccountId",
