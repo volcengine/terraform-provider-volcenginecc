@@ -32,7 +32,7 @@ Data Source schema for Volcengine::MongoDB::Instance
 - `config_servers_id` (String) ConfigServer ID
 - `created_time` (String) Instance creation time (UTC).
 - `db_engine` (String) Database engine. The value is fixed as MongoDB
-- `db_engine_version` (String) Database engine version. Options: MongoDB_4_0 (default): MongoDB 4.0. MongoDB_4_2: MongoDB 4.2. MongoDB_4_4: MongoDB 4.4. MongoDB_5_0: MongoDB 5.0. MongoDB_6_0: MongoDB 6.0. MongoDB_7_0: MongoDB 7.0.
+- `db_engine_version` (String) Database engine version. Available values are as follows: MongoDB_4_0 (default): MongoDB version 4.0. MongoDB_4_2: MongoDB version 4.2. MongoDB_4_4: MongoDB version 4.4. MongoDB_5_0: MongoDB version 5.0. MongoDB_6_0: MongoDB version 6.0. MongoDB_7_0: MongoDB version 7.0. MongoDB_8_0: MongoDB version 8.0. MongoDB_8_3: MongoDB version 8.3. Note: For more details about MongoDB versions, see Version Introduction.
 - `db_engine_version_str` (String) Database engine version string
 - `expired_time` (String) Instance expiration time (UTC).
 - `instance_count` (Number) Number of instances to create. Must be a positive integer greater than or equal to 1. Default is 1.

@@ -58,15 +58,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Instance billing status. Valid values: Normal: normal. WaitingPaid: waiting for payment. ChangingPayType: changing billing type. Renewing: renewing. Overdue: overdue. Owing: owing. Unsubscribing: unsubscribing.",
-		//	  "enum": [
-		//	    "Normal",
-		//	    "WaitingPaid",
-		//	    "ChangingPayType",
-		//	    "Renewing",
-		//	    "Overdue",
-		//	    "Owing",
-		//	    "Unsubscribing"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"charge_status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -262,19 +253,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "MongoDB_4_0",
-		//	  "description": "Database engine version. Options: MongoDB_4_0 (default): MongoDB 4.0. MongoDB_4_2: MongoDB 4.2. MongoDB_4_4: MongoDB 4.4. MongoDB_5_0: MongoDB 5.0. MongoDB_6_0: MongoDB 6.0. MongoDB_7_0: MongoDB 7.0.",
-		//	  "enum": [
-		//	    "MongoDB_4_0",
-		//	    "MongoDB_4_2",
-		//	    "MongoDB_4_4",
-		//	    "MongoDB_5_0",
-		//	    "MongoDB_6_0",
-		//	    "MongoDB_7_0"
-		//	  ],
+		//	  "description": "Database engine version. Available values are as follows: MongoDB_4_0 (default): MongoDB version 4.0. MongoDB_4_2: MongoDB version 4.2. MongoDB_4_4: MongoDB version 4.4. MongoDB_5_0: MongoDB version 5.0. MongoDB_6_0: MongoDB version 6.0. MongoDB_7_0: MongoDB version 7.0. MongoDB_8_0: MongoDB version 8.0. MongoDB_8_3: MongoDB version 8.3. Note: For more details about MongoDB versions, see Version Introduction.",
 		//	  "type": "string"
 		//	}
 		"db_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Database engine version. Options: MongoDB_4_0 (default): MongoDB 4.0. MongoDB_4_2: MongoDB 4.2. MongoDB_4_4: MongoDB 4.4. MongoDB_5_0: MongoDB 5.0. MongoDB_6_0: MongoDB 6.0. MongoDB_7_0: MongoDB 7.0.",
+			Description: "Database engine version. Available values are as follows: MongoDB_4_0 (default): MongoDB version 4.0. MongoDB_4_2: MongoDB version 4.2. MongoDB_4_4: MongoDB version 4.4. MongoDB_5_0: MongoDB version 5.0. MongoDB_6_0: MongoDB version 6.0. MongoDB_7_0: MongoDB version 7.0. MongoDB_8_0: MongoDB version 8.0. MongoDB_8_3: MongoDB version 8.3. Note: For more details about MongoDB versions, see Version Introduction.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBEngineVersionStr
@@ -448,24 +431,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Instance status. Creating: Creating. Running: Running. Allowlist maintenance: AllowListMaintaining. Scaling: Scaling. Restarting: Restarting. Network maintaining: NetworkMaintaining. Restoring: Restoring. Upgrading: Upgrading. Unavailable: Unavailable. Closing: Closing. Deleting: Deleting. Closed: Closed. SSL updating: SSLUpdating. Switch mastering: SwitchMastering. Role changing: RoleChanging. Migrating: Migrating.",
-		//	  "enum": [
-		//	    "Creating",
-		//	    "Running",
-		//	    "AllowListMaintaining",
-		//	    "Scaling",
-		//	    "Restarting",
-		//	    "NetworkMaintaining",
-		//	    "Restoring",
-		//	    "Upgrading",
-		//	    "Unavailable",
-		//	    "Closing",
-		//	    "Deleting",
-		//	    "Closed",
-		//	    "SSLUpdating",
-		//	    "SwitchMastering",
-		//	    "RoleChanging",
-		//	    "Migrating"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1082,9 +1047,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Instance storage type. Currently, only local SSD disks (LocalSSD) are supported.",
-		//	  "enum": [
-		//	    "LocalSSD"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/

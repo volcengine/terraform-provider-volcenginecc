@@ -126,7 +126,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "Method": {
-		//	      "default": "HEAD",
 		//	      "description": "Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.",
 		//	      "enum": [
 		//	        "GET",
@@ -255,7 +254,6 @@ func serverGroupResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.",
 					Optional:    true,
 					Computed:    true,
-					Default:     stringdefault.StaticString("HEAD"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"GET",
