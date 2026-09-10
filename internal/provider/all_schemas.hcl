@@ -1259,3 +1259,4 @@ resource_schema "volcengine_waf_system_bot" {
 resource_schema "volcengine_waf_custom_page" {
   cloudcontrol_type_name = "Volcengine::WAF::CustomPage"
 }
+

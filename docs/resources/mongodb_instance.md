@@ -61,7 +61,7 @@ resource "volcenginecc_mongodb_instance" "MongoDBInstanceDemo" {
 - `config_server_node_spec` (String) ConfigServer node specification code in the sharded cluster. Default: mongo.config.1c2g.
 - `config_server_storage_space_gb` (Number) ConfigServer storage space in the sharded cluster, unit: GiB. Step size: 10. Default: 20.
 - `db_engine` (String) Database engine. The value is fixed as MongoDB
-- `db_engine_version` (String) Database engine version. Options: MongoDB_4_0 (default): MongoDB 4.0. MongoDB_4_2: MongoDB 4.2. MongoDB_4_4: MongoDB 4.4. MongoDB_5_0: MongoDB 5.0. MongoDB_6_0: MongoDB 6.0. MongoDB_7_0: MongoDB 7.0.
+- `db_engine_version` (String) Database engine version. Available values are as follows: MongoDB_4_0 (default): MongoDB version 4.0. MongoDB_4_2: MongoDB version 4.2. MongoDB_4_4: MongoDB version 4.4. MongoDB_5_0: MongoDB version 5.0. MongoDB_6_0: MongoDB version 6.0. MongoDB_7_0: MongoDB version 7.0. MongoDB_8_0: MongoDB version 8.0. MongoDB_8_3: MongoDB version 8.3. Note: For more details about MongoDB versions, see Version Introduction.
 - `instance_count` (Number) Number of instances to create. Must be a positive integer greater than or equal to 1. Default is 1.
 - `instance_name` (String) Instance name. The name must meet the following requirements: Cannot start with a digit or hyphen (-). Can only contain Chinese characters, letters, digits, underscores (_), and hyphens (-). Length must be 2–64 characters.
 - `instance_parameters` (Attributes Set) Instance parameter list

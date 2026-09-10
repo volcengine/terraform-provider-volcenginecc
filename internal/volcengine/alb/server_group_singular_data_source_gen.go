@@ -103,7 +103,6 @@ func serverGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "Method": {
-		//	      "default": "HEAD",
 		//	      "description": "Health check method after health checks are enabled. This parameter is valid only when HealthCheck.Protocol is set to HTTP. Values: GET: The server must support the GET method. HEAD (default): The server returns only the HEAD header, which reduces backend resource consumption, but the server must support the HEAD method.",
 		//	      "enum": [
 		//	        "GET",
