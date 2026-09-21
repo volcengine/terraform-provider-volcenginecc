@@ -201,28 +201,34 @@ Replace `cn-beijing` with the configured region, or list the host from `endpoint
 
 The equivalent environment variables are `VOLCENGINE_NO_PROXY` (with `NO_PROXY` and `no_proxy` as fallbacks) and comma-separated `VOLCENGINE_PROXY_INCLUDE_DOMAINS`. Explicit provider attributes take precedence over the environment variables. These settings apply to Cloud Control API traffic; STS calls made by `assume_role` use a separate client.
 
+### HTTPS proxy environment variables
+
+Cloud Control and provider-level AssumeRole HTTPS requests use `HTTPS_PROXY`, with `https_proxy` as a fallback, and honor `NO_PROXY` / `no_proxy`. `HTTP_PROXY` and `http_proxy` are ignored. The proxy URL may still start with `http://`: `HTTPS_PROXY` selects the proxy for HTTPS destinations, which use CONNECT through an HTTP proxy.
+
+Explicit provider proxy settings and their product-specific environment variables retain precedence. Cloud Control keeps its existing `no_proxy`, `proxy_include_domains`, and `proxy_authorization` behavior. Standard environment proxy settings are captured per provider, so aliases and credential refreshes do not change routes when the process environment changes later. Plain HTTP requests (`disable_ssl = true`) require an explicit provider proxy or its product-specific environment variable.
+
 ### AssumeRole STS proxy
 
-Configure `assume_role.proxy_url` to send STS AssumeRole requests through a separate proxy:
+Configure a separate STS proxy and bypass list:
 
 ```hcl
 provider "volcenginecc" {
   region = "cn-beijing"
-  # Source credentials can come from VOLCENGINE_ACCESS_KEY / VOLCENGINE_SECRET_KEY.
   assume_role = {
     assume_role_trn = "trn:iam::222222222222:role/terraform-execution"
     proxy_url       = "http://127.0.0.1:8080"
+    no_proxy        = "sts.internal.example,10.0.0.0/8"
   }
 }
 ```
 
-When `assume_role.proxy_url` is omitted or null, the provider uses the first non-empty value from `VOLCENGINE_ASSUME_ROLE_PROXY_URL`, `HTTP_PROXY`, then `http_proxy`. For example, `export HTTP_PROXY="http://127.0.0.1:8080"` also proxies the default **HTTPS** STS endpoint using CONNECT. An explicit `proxy_url = ""` skips these environment defaults; with the pinned SDK's default STS transport this connects directly.
+When `assume_role.proxy_url` is omitted or null, the provider uses `VOLCENGINE_ASSUME_ROLE_PROXY_URL`, then `HTTPS_PROXY` / `https_proxy` for HTTPS STS endpoints. An explicit `proxy_url = ""` skips these defaults and uses the pinned SDK's direct STS transport. Unlike earlier development revisions, `HTTP_PROXY` no longer supplies an STS proxy; migrate that configuration to `HTTPS_PROXY`.
 
-The resolved proxy is captured when credentials are constructed and reused for refreshes. Supported URL schemes are `http`, `https`, `socks5`, and `socks5h`; URL user information supports Basic proxy authentication. Use a sensitive Terraform variable for proxy passwords. Invalid proxy URLs fail provider configuration without exposing the URL in the diagnostic.
+`assume_role.no_proxy` takes precedence over `VOLCENGINE_ASSUME_ROLE_NO_PROXY`, `NO_PROXY`, then `no_proxy`. It accepts comma-separated hosts, domain suffixes, IP addresses, CIDR ranges, optional ports, and `*`. An explicit empty string clears inherited bypass rules. These settings are independent of Cloud Control's top-level `no_proxy` and `proxy_include_domains`; standard `NO_PROXY` can be inherited by both clients.
 
-This is a forced proxy for provider-level AssumeRole requests: `NO_PROXY`, `no_proxy`, `HTTPS_PROXY`, and the top-level Cloud Control proxy attributes do not override it. An IAM role Profile's own STS request is a separate source-credential operation and does not inherit `assume_role.proxy_url`.
+The resolved route is captured for the STS endpoint when credentials are constructed and reused for refreshes. Supported explicit proxy schemes are `http`, `https`, `socks5`, and `socks5h`. URL user information supports Basic authentication; use a sensitive variable for passwords. Invalid proxy URLs fail configuration without exposing them in diagnostics. An IAM role Profile's own STS request is a separate source-credential operation and does not inherit these provider-level AssumeRole settings.
 
-The STS implementation uses Volcengine Go SDK commit `410d17f17d99`, based on `feat/ykf/proxy_url` with an HTTP/2 transport fix. `go.mod` pins the remote module version `code.byted.org/iaasng/volcengine-go-sdk v0.0.0-20260921013847-410d17f17d99`; no local SDK checkout is required. Source builds need access to the private repository and `code.byted.org` in `GOPRIVATE`. Replace this development dependency with a released SDK version containing the fix before a public release.
+The STS implementation pins remote SDK commit `410d17f17d99` with the HTTP/2 transport fix. Source builds need access to `code.byted.org/iaasng/volcengine-go-sdk` and `code.byted.org` in `GOPRIVATE`; no local SDK path is committed. Use a released SDK version containing the fix before a public release.
 
 <!-- schema generated by tfplugindocs -->
 
@@ -239,7 +245,7 @@ The STS implementation uses Volcengine Go SDK commit `410d17f17d99`, based on `f
 - `customer_headers` (String) CUSTOMER HEADERS for Volcengine Provider. The customer_headers field uses commas (,) to separate multiple headers, and colons (:) to separate each header key from its corresponding value.
 - `disable_ssl` (Boolean) Disable SSL for Volcengine Provider
 - `endpoints` (Attributes) An `endpoints` block (documented below). Only one `endpoints` block may be in the configuration. (see [below for nested schema](#nestedatt--endpoints))
-- `no_proxy` (String) Comma-separated hosts, domain suffixes, IP addresses, or CIDR ranges that bypass proxy_url. It follows standard NO_PROXY matching and can be sourced from VOLCENGINE_NO_PROXY, NO_PROXY, or no_proxy.
+- `no_proxy` (String) Comma-separated hosts, domain suffixes, IP addresses, or CIDR ranges that bypass the configured or environment proxy. It follows standard NO_PROXY matching and can be sourced from VOLCENGINE_NO_PROXY, NO_PROXY, or no_proxy.
 - `proxy_authorization` (String, Sensitive) Value of the Proxy-Authorization header for Cloud Control API proxy requests, for example `Basic <token>`. It can also be sourced from the `VOLCENGINE_PROXY_AUTHORIZATION` environment variable.
 - `proxy_include_domains` (Set of String) Hosts, domain suffixes, IP addresses, or CIDR ranges that use proxy_url while all other destinations connect directly. It can be sourced as a comma-separated list from VOLCENGINE_PROXY_INCLUDE_DOMAINS and cannot be combined with no_proxy.
 - `proxy_url` (String) HTTP, HTTPS, SOCKS5, or SOCKS5H proxy URL for Cloud Control API requests. It can also be sourced from the `VOLCENGINE_PROXY_URL` environment variable.
@@ -258,7 +264,8 @@ Optional:
 
 - `duration_seconds` (Number) The duration of the session when making the AssumeRole call. Its value ranges from 900 to 43200(seconds), and default is 3600 seconds.
 - `policy` (String) A more restrictive policy when making the AssumeRole call
-- `proxy_url` (String, Sensitive) Proxy URL for AssumeRole STS requests, including HTTPS. Defaults to `VOLCENGINE_ASSUME_ROLE_PROXY_URL`, `HTTP_PROXY`, then `http_proxy`. An explicit empty string skips these defaults. Independent of Cloud Control proxy settings; does not use `NO_PROXY`.
+- `proxy_url` (String, Sensitive) Proxy URL for AssumeRole STS requests. Defaults to `VOLCENGINE_ASSUME_ROLE_PROXY_URL`, then `HTTPS_PROXY` or `https_proxy` for HTTPS endpoints. An explicit empty string connects directly; `HTTP_PROXY` is ignored.
+- `no_proxy` (String) Hosts, domain suffixes, IP addresses, or CIDRs that bypass the STS proxy. Defaults to `VOLCENGINE_ASSUME_ROLE_NO_PROXY`, `NO_PROXY`, then `no_proxy`. An explicit empty string clears inherited bypass rules.
 
 <a id="nestedatt--endpoints"></a>
 

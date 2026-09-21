@@ -28,7 +28,7 @@ import (
 
 func clearAssumeRoleProxyEnvironment(t *testing.T) {
 	t.Helper()
-	for _, name := range []string{"VOLCENGINE_ASSUME_ROLE_PROXY_URL", "HTTP_PROXY", "http_proxy", "HTTPS_PROXY", "https_proxy", "NO_PROXY", "no_proxy"} {
+	for _, name := range []string{"VOLCENGINE_ASSUME_ROLE_PROXY_URL", "VOLCENGINE_ASSUME_ROLE_NO_PROXY", "HTTP_PROXY", "http_proxy", "HTTPS_PROXY", "https_proxy", "NO_PROXY", "no_proxy"} {
 		t.Setenv(name, "")
 	}
 }
@@ -42,11 +42,11 @@ func TestAssumeRoleProxyPrecedence(t *testing.T) {
 	}{
 		{"explicit", types.StringValue("http://explicit:8080"), map[string]string{"VOLCENGINE_ASSUME_ROLE_PROXY_URL": "http://dedicated:8080", "HTTP_PROXY": "http://standard:8080"}, "http://explicit:8080"},
 		{"dedicated environment", types.StringNull(), map[string]string{"VOLCENGINE_ASSUME_ROLE_PROXY_URL": "http://dedicated:8080", "HTTP_PROXY": "http://standard:8080"}, "http://dedicated:8080"},
-		{"HTTP_PROXY", types.StringNull(), map[string]string{"HTTP_PROXY": "http://standard:8080", "http_proxy": "http://lower:8080"}, "http://standard:8080"},
-		{"lowercase", types.StringNull(), map[string]string{"http_proxy": "http://lower:8080"}, "http://lower:8080"},
+		{"HTTP_PROXY ignored", types.StringNull(), map[string]string{"HTTP_PROXY": "http://standard:8080", "http_proxy": "http://lower:8080"}, ""},
+		{"lowercase", types.StringNull(), map[string]string{"https_proxy": "http://lower:8080"}, "http://lower:8080"},
 		{"explicit empty", types.StringValue(""), map[string]string{"HTTP_PROXY": "http://standard:8080", "VOLCENGINE_ASSUME_ROLE_PROXY_URL": "http://dedicated:8080"}, ""},
 		{"unset", types.StringNull(), nil, ""},
-		{"unrelated settings", types.StringNull(), map[string]string{"HTTPS_PROXY": "http://https:8080", "VOLCENGINE_PROXY_URL": "http://cloudcontrol:8080"}, ""},
+		{"HTTPS_PROXY", types.StringNull(), map[string]string{"HTTPS_PROXY": "http://https:8080", "HTTP_PROXY": "http://http:8080", "VOLCENGINE_PROXY_URL": "http://cloudcontrol:8080"}, "http://https:8080"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -89,7 +89,7 @@ func TestAssumeRoleProxyValidation(t *testing.T) {
 		})
 	}
 	for _, value := range []string{"http://user:password@proxy:8080", "https://proxy:8443", "socks5://proxy:1080", "socks5h://proxy:1080"} {
-		if _, err := assumeRoleProxyURL(types.StringValue(value)); err != nil {
+		if _, err := parseAssumeRoleProxyURL(value); err != nil {
 			t.Errorf("valid proxy rejected: %v", err)
 		}
 	}
@@ -108,7 +108,7 @@ func writeSTSResponse(w http.ResponseWriter) {
 // Exercises framework decoding, Configure, the source wrapper and the real SDK
 // against a local forward proxy, with no cloud credentials or cloud requests.
 func TestConfigureAssumeRoleThroughProxy(t *testing.T) {
-	for _, mode := range []string{"terraform", "HTTP_PROXY", "dedicated environment", "environment role"} {
+	for _, mode := range []string{"terraform", "dedicated environment", "environment role"} {
 		t.Run(mode, func(t *testing.T) {
 			clearAssumeRoleProxyEnvironment(t)
 			var requests atomic.Int32
@@ -136,14 +136,12 @@ func TestConfigureAssumeRoleThroughProxy(t *testing.T) {
 			case "terraform":
 				role["proxy_url"] = proxyURL.String()
 				t.Setenv("HTTP_PROXY", "http://127.0.0.1:1")
-			case "HTTP_PROXY", "environment role":
-				t.Setenv("HTTP_PROXY", proxyURL.String())
-			case "dedicated environment":
+			case "dedicated environment", "environment role":
 				t.Setenv("VOLCENGINE_ASSUME_ROLE_PROXY_URL", proxyURL.String())
 				t.Setenv("HTTP_PROXY", "http://127.0.0.1:1")
 			}
-			// SDK ProxyURL is a forced STS proxy, independent of bypass and CC settings.
-			t.Setenv("NO_PROXY", "*")
+			// Cloud Control bypass settings do not affect the separate STS route.
+			t.Setenv("VOLCENGINE_NO_PROXY", "*")
 			input := map[string]interface{}{
 				"access_key": "source-ak", "secret_key": "source-sk", "session_token": "source-token", "region": "cn-beijing", "disable_ssl": true,
 				"assume_role": role, "endpoints": map[string]interface{}{"sts": "sts.invalid"},
@@ -207,7 +205,7 @@ func configureAssumeRoleForTest(t *testing.T, input map[string]interface{}) *Vol
 	return p
 }
 
-func TestAssumeRoleHTTPProxyForHTTPS(t *testing.T) {
+func TestAssumeRoleHTTPSProxyForHTTPS(t *testing.T) {
 	clearAssumeRoleProxyEnvironment(t)
 	var connects atomic.Int32
 	proxy := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -215,12 +213,12 @@ func TestAssumeRoleHTTPProxyForHTTPS(t *testing.T) {
 		if r.Method != http.MethodConnect || r.Host != "sts.volcengineapi.com:443" {
 			t.Errorf("unexpected HTTPS proxy request: %s %s", r.Method, r.Host)
 		}
-		// Stop before TLS: proves the default HTTPS STS endpoint uses HTTP_PROXY
+		// Stop before TLS: proves the default HTTPS STS endpoint uses HTTPS_PROXY
 		// without trusting a test certificate or contacting any external service.
 		w.WriteHeader(http.StatusForbidden)
 	}))
 	defer proxy.Close()
-	t.Setenv("HTTP_PROXY", proxy.URL)
+	t.Setenv("HTTPS_PROXY", proxy.URL)
 	c := testConfigModel()
 	c.AccessKey, c.SecretKey = types.StringValue("source-ak"), types.StringValue("source-sk")
 	c.AssumeRole = &AssumeRoleData{AssumeRoleTRN: types.StringValue("trn:iam::222222222222:role/test")}
@@ -235,7 +233,7 @@ func TestAssumeRoleHTTPProxyForHTTPS(t *testing.T) {
 		t.Fatal("proxy denial must fail credential retrieval")
 	}
 	if connects.Load() == 0 {
-		t.Fatal("HTTPS STS bypassed HTTP_PROXY")
+		t.Fatal("HTTPS STS bypassed HTTPS_PROXY")
 	}
 }
 
@@ -258,7 +256,7 @@ func TestAssumeRoleProxyIsolationAndDirect(t *testing.T) {
 		}
 		return creds
 	}
-	proxied, unproxied := makeCreds(types.StringNull()), makeCreds(types.StringValue(""))
+	proxied, unproxied := makeCreds(types.StringValue(proxy.URL)), makeCreds(types.StringValue(""))
 	for _, creds := range []*credentials.Credentials{proxied, unproxied, proxied, unproxied} {
 		creds.Expire()
 		if _, err := creds.Get(); err != nil {
@@ -312,5 +310,129 @@ func TestAssumeRoleProxyHTTPSNegotiation(t *testing.T) {
 	observation := receiveProxyObservation(t, observations)
 	if observation.method != http.MethodConnect {
 		t.Fatal("expected CONNECT")
+	}
+}
+
+func TestConfigureAssumeRoleNoProxyAndRefresh(t *testing.T) {
+	for _, tt := range []struct {
+		name, noProxy string
+		direct        bool
+	}{
+		{"explicit bypass", "*", true},
+		{"empty overrides environment", "", false},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			clearAssumeRoleProxyEnvironment(t)
+			var directCalls, proxyCalls atomic.Int32
+			target := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { directCalls.Add(1); writeSTSResponse(w) }))
+			defer target.Close()
+			proxy := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { proxyCalls.Add(1); writeSTSResponse(w) }))
+			defer proxy.Close()
+			t.Setenv("NO_PROXY", "*")
+			p := configureAssumeRoleForTest(t, map[string]interface{}{
+				"access_key": "source-ak", "secret_key": "source-sk", "region": "cn-beijing", "disable_ssl": true,
+				"endpoints":   map[string]interface{}{"sts": strings.TrimPrefix(target.URL, "http://")},
+				"assume_role": map[string]interface{}{"assume_role_trn": "trn:iam::222222222222:role/test", "proxy_url": proxy.URL, "no_proxy": tt.noProxy},
+			})
+			creds := p.providerData.ccAPIClient.Config.Credentials
+			for i := 0; i < 2; i++ {
+				t.Setenv("NO_PROXY", "") // Already-constructed credentials retain their route.
+				creds.Expire()
+				if _, err := creds.Get(); err != nil {
+					t.Fatal(err)
+				}
+			}
+			if tt.direct {
+				if directCalls.Load() != 2 || proxyCalls.Load() != 0 {
+					t.Fatalf("direct=%d proxy=%d", directCalls.Load(), proxyCalls.Load())
+				}
+			} else if directCalls.Load() != 0 || proxyCalls.Load() != 2 {
+				t.Fatalf("direct=%d proxy=%d", directCalls.Load(), proxyCalls.Load())
+			}
+		})
+	}
+}
+
+func TestAssumeRoleProxyRouting(t *testing.T) {
+	const explicit = "http://explicit-proxy.example:8080"
+	const standard = "http://https-proxy.example:8080"
+	tests := []struct {
+		name, host     string
+		disableSSL     bool
+		proxy, noProxy types.String
+		env            map[string]string
+		want           string
+	}{
+		{name: "HTTPS prefers HTTPS_PROXY", host: "sts.example.com", env: map[string]string{"HTTPS_PROXY": standard, "HTTP_PROXY": "http://http-proxy.example:8080"}, want: standard},
+		{name: "HTTP environment ignored", host: "sts.example.com", disableSSL: true, env: map[string]string{"HTTPS_PROXY": standard, "HTTP_PROXY": explicit}},
+		{name: "HTTP_PROXY ignored", host: "sts.example.com", env: map[string]string{"HTTP_PROXY": explicit}},
+		{name: "lowercase HTTPS and bypass", host: "sts.example.com", env: map[string]string{"https_proxy": standard, "no_proxy": ".example.com"}},
+		{name: "environment wildcard", host: "sts.example.com", env: map[string]string{"HTTPS_PROXY": standard, "NO_PROXY": "*"}},
+		{name: "explicit URL honors environment bypass", host: "sts.example.com", proxy: types.StringValue(explicit), env: map[string]string{"NO_PROXY": ".example.com"}},
+		{name: "explicit no_proxy overrides environment", host: "sts.example.com", proxy: types.StringValue(explicit), noProxy: types.StringValue("unrelated.example"), env: map[string]string{"NO_PROXY": "*"}, want: explicit},
+		{name: "explicit empty bypass", host: "sts.example.com", proxy: types.StringValue(explicit), noProxy: types.StringValue(""), env: map[string]string{"NO_PROXY": "*"}, want: explicit},
+		{name: "dedicated bypass", host: "sts.example.com", env: map[string]string{"HTTPS_PROXY": standard, "VOLCENGINE_ASSUME_ROLE_NO_PROXY": "sts.example.com", "NO_PROXY": "unrelated.example"}},
+		{name: "dedicated URL", host: "sts.example.com", env: map[string]string{"VOLCENGINE_ASSUME_ROLE_PROXY_URL": explicit, "HTTPS_PROXY": standard}, want: explicit},
+		{name: "CIDR", host: "10.2.3.4", env: map[string]string{"HTTPS_PROXY": standard}, noProxy: types.StringValue("10.0.0.0/8")},
+		{name: "IPv6 CIDR", host: "[2001:db8::1]", env: map[string]string{"HTTPS_PROXY": standard}, noProxy: types.StringValue("2001:db8::/32")},
+		{name: "port", host: "sts.example.com:8443", env: map[string]string{"HTTPS_PROXY": standard}, noProxy: types.StringValue("sts.example.com:8443")},
+		{name: "other port", host: "sts.example.com:443", env: map[string]string{"HTTPS_PROXY": standard}, noProxy: types.StringValue("sts.example.com:8443"), want: standard},
+		{name: "CC bypass is independent", host: "sts.example.com", env: map[string]string{"HTTPS_PROXY": standard, "VOLCENGINE_NO_PROXY": "*"}, want: standard},
+		{name: "explicit direct", host: "sts.example.com", proxy: types.StringValue(""), env: map[string]string{"HTTPS_PROXY": standard}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			clearProxyEnvironment(t)
+			clearAssumeRoleProxyEnvironment(t)
+			for key, value := range tt.env {
+				t.Setenv(key, value)
+			}
+			c := testConfigModel()
+			c.DisableSSL = types.BoolValue(tt.disableSSL)
+			c.Endpoints.STS = types.StringValue(tt.host)
+			c.NoProxy = types.StringValue("*") // Top-level bypass must never leak into STS.
+			c.AssumeRole = &AssumeRoleData{AssumeRoleTRN: types.StringValue("trn:iam::222222222222:role/test"), ProxyURL: tt.proxy, NoProxy: tt.noProxy}
+			var got string
+			_, diags := buildCredentialsWithFactory(c, func(_ *credentials.Credentials, value credentials.StsValue) *credentials.Credentials {
+				got = value.ProxyURL
+				return credentials.NewStaticCredentials("ak", "sk", "")
+			})
+			if diags.HasError() {
+				t.Fatal(diags)
+			}
+			if got != tt.want {
+				t.Fatalf("proxy=%q, want %q", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestAssumeRoleHTTPSNoProxyRequest(t *testing.T) {
+	clearAssumeRoleProxyEnvironment(t)
+	var requests atomic.Int32
+	target := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { requests.Add(1); writeSTSResponse(w) }))
+	defer target.Close()
+	caFile := filepath.Join(t.TempDir(), "sts-ca.pem")
+	if err := os.WriteFile(caFile, pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: target.Certificate().Raw}), 0600); err != nil {
+		t.Fatal(err)
+	}
+	t.Setenv("HTTPS_PROXY", "http://127.0.0.1:1")
+	c := testConfigModel()
+	c.AccessKey = types.StringValue("source-ak")
+	c.SecretKey = types.StringValue("source-sk")
+	c.Endpoints.STS = types.StringValue(strings.TrimPrefix(target.URL, "https://"))
+	c.AssumeRole = &AssumeRoleData{AssumeRoleTRN: types.StringValue("trn:iam::222222222222:role/test"), ProxyURL: types.StringValue("http://127.0.0.1:1"), NoProxy: types.StringValue("*")}
+	creds, diags := buildCredentialsWithFactory(c, func(source *credentials.Credentials, value credentials.StsValue) *credentials.Credentials {
+		value.CAFile = caFile
+		return newAssumeRoleCredentials(source, value)
+	})
+	if diags.HasError() {
+		t.Fatal(diags)
+	}
+	if _, err := creds.Get(); err != nil {
+		t.Fatal(err)
+	}
+	if requests.Load() != 1 {
+		t.Fatalf("direct STS requests=%d, want 1", requests.Load())
 	}
 }
