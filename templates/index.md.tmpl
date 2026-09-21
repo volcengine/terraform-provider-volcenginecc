@@ -203,9 +203,13 @@ The equivalent environment variables are `VOLCENGINE_NO_PROXY` (with `NO_PROXY` 
 
 ### HTTPS proxy environment variables
 
-Cloud Control and provider-level AssumeRole HTTPS requests use `HTTPS_PROXY`, with `https_proxy` as a fallback, and honor `NO_PROXY` / `no_proxy`. `HTTP_PROXY` and `http_proxy` are ignored. The proxy URL may still start with `http://`: `HTTPS_PROXY` selects the proxy for HTTPS destinations, which use CONNECT through an HTTP proxy.
+For Cloud Control requests, use the top-level `proxy_url` first; if it is omitted or null, use `VOLCENGINE_PROXY_URL`. For STS requests initiated by `assume_role`, use `assume_role.proxy_url` first; if it is omitted or null, use `VOLCENGINE_ASSUME_ROLE_PROXY_URL`.
 
-Explicit provider proxy settings and their product-specific environment variables retain precedence. Cloud Control keeps its existing `no_proxy`, `proxy_include_domains`, and `proxy_authorization` behavior. Standard environment proxy settings are captured per provider, so aliases and credential refreshes do not change routes when the process environment changes later. Plain HTTP requests (`disable_ssl = true`) require an explicit provider proxy or its product-specific environment variable.
+When neither source supplies a non-empty proxy address, HTTPS requests to Cloud Control and STS use `HTTPS_PROXY`; if it is unset or empty, they use `https_proxy`. The exception is an explicit `assume_role.proxy_url = ""`, which disables proxy fallback and connects directly. `HTTP_PROXY` and `http_proxy` are ignored. The proxy address may still start with `http://`: HTTPS requests use CONNECT through that HTTP proxy.
+
+Each client applies its own bypass rules: top-level `no_proxy` for Cloud Control, and `assume_role.no_proxy` for STS. When those settings and their product-specific environment variables are not configured, the client inherits `NO_PROXY`, then `no_proxy`. A matching rule bypasses the selected proxy, including an explicitly configured proxy. Cloud Control does not inherit these standard bypass variables when `proxy_include_domains` is configured; its existing include-only routing and `proxy_authorization` behavior are unchanged.
+
+Proxy settings are captured when each client is configured, so changing environment variables later does not change its route or the route used for credential refreshes. Plain HTTP requests (`disable_ssl = true`) require an explicit proxy setting or its product-specific environment variable.
 
 ### AssumeRole STS proxy
 
@@ -226,7 +230,7 @@ When `assume_role.proxy_url` is omitted or null, the provider uses `VOLCENGINE_A
 
 `assume_role.no_proxy` takes precedence over `VOLCENGINE_ASSUME_ROLE_NO_PROXY`, `NO_PROXY`, then `no_proxy`. It accepts comma-separated hosts, domain suffixes, IP addresses, CIDR ranges, optional ports, and `*`. An explicit empty string clears inherited bypass rules. These settings are independent of Cloud Control's top-level `no_proxy` and `proxy_include_domains`; standard `NO_PROXY` can be inherited by both clients.
 
-The resolved route is captured for the STS endpoint when credentials are constructed and reused for refreshes. Supported explicit proxy schemes are `http`, `https`, `socks5`, and `socks5h`. URL user information supports Basic authentication; use a sensitive variable for passwords. Invalid proxy URLs fail configuration without exposing them in diagnostics. An IAM role Profile's own STS request is a separate source-credential operation and does not inherit these provider-level AssumeRole settings.
+The resolved route is captured for the STS endpoint when credentials are constructed and reused for refreshes. Supported explicit proxy schemes are `http`, `https`, `socks5`, and `socks5h`. URL user information supports Basic authentication; use a sensitive variable for passwords. Invalid proxy URLs fail configuration without exposing them in diagnostics. An IAM role Profile's own STS request is a separate source-credential operation and does not inherit the proxy settings from the provider configuration's `assume_role` object.
 
 The STS implementation pins remote SDK commit `410d17f17d99` with the HTTP/2 transport fix. Source builds need access to `code.byted.org/iaasng/volcengine-go-sdk` and `code.byted.org` in `GOPRIVATE`; no local SDK path is committed. Use a released SDK version containing the fix before a public release.
 
