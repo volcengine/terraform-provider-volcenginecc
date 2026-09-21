@@ -1,0 +1,8 @@
+.terraform/
+*.tfstate*
+*.tfplan
+*.auto.tfvars.json
+terraform.rc
+bin/
+artifacts/
+__pycache__/

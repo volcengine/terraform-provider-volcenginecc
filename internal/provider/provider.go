@@ -144,6 +144,11 @@ func (p *VolcengineCCProvider) Schema(ctx context.Context, request provider.Sche
 						Description: "A more restrictive policy when making the AssumeRole call",
 						Optional:    true,
 					},
+					"proxy_url": schema.StringAttribute{
+						Description: "HTTP, HTTPS, SOCKS5, or SOCKS5H proxy URL for AssumeRole STS requests, including HTTPS requests. Defaults to VOLCENGINE_ASSUME_ROLE_PROXY_URL, HTTP_PROXY, then http_proxy. An explicit empty string skips these environment defaults. This proxy is independent of the top-level Cloud Control proxy settings and does not use NO_PROXY.",
+						Optional:    true,
+						Sensitive:   true,
+					},
 				},
 				Optional:    true,
 				Description: "An `assume_role` block that uses the selected source credentials to obtain target-role credentials. Only one `assume_role` block may be in the configuration.",
@@ -195,6 +200,7 @@ type AssumeRoleData struct {
 	AssumeRoleTRN types.String `tfsdk:"assume_role_trn"`
 	Duration      types.Int32  `tfsdk:"duration_seconds"`
 	Policy        types.String `tfsdk:"policy"`
+	ProxyURL      types.String `tfsdk:"proxy_url"`
 }
 
 type endpointData struct {
@@ -269,6 +275,7 @@ func (p *VolcengineCCProvider) Configure(ctx context.Context, request provider.C
 			AssumeRoleTRN: types.StringNull(),
 			Duration:      types.Int32Null(),
 			Policy:        types.StringNull(),
+			ProxyURL:      types.StringNull(),
 		}
 	}
 	if config.AssumeRole.AssumeRoleTRN.IsNull() || config.AssumeRole.AssumeRoleTRN.IsUnknown() {
@@ -411,6 +418,12 @@ func buildCredentialsWithFactory(c *configModel, factory assumeRoleCredentialsFa
 		c.AssumeRole.Duration = types.Int32Value(int32(defaultAssumeRoleDuration.Seconds()))
 	}
 
+	proxyURL, err := assumeRoleProxyURL(c.AssumeRole.ProxyURL)
+	if err != nil {
+		diags.AddError("Invalid AssumeRole Proxy Configuration", err.Error())
+		return nil, diags
+	}
+
 	stsValue := credentials.StsValue{
 		RoleName:        roleName,
 		AccountId:       accountId,
@@ -418,6 +431,7 @@ func buildCredentialsWithFactory(c *configModel, factory assumeRoleCredentialsFa
 		Region:          c.Region.ValueString(),
 		DurationSeconds: int(c.AssumeRole.Duration.ValueInt32()),
 		Policy:          c.AssumeRole.Policy.ValueString(),
+		ProxyURL:        proxyURL,
 	}
 	if c.Endpoints != nil && !c.Endpoints.STS.IsNull() && c.Endpoints.STS.ValueString() != "" {
 		stsValue.Host = c.Endpoints.STS.ValueString()
