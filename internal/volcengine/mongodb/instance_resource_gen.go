@@ -77,6 +77,156 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BackupId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Backup file ID of the source instance for backup restore, used for restoring by backup file. Either BackupId or RestoreTime must be specified. Currently, only replica set instances support restoring a backup set to a new instance; sharded cluster instances are not supported.",
+		//	  "type": "string"
+		//	}
+		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Backup file ID of the source instance for backup restore, used for restoring by backup file. Either BackupId or RestoreTime must be specified. Currently, only replica set instances support restoring a backup set to a new instance; sharded cluster instances are not supported.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// BackupId is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: BackupType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Backup type. Valid values: Physical: physical backup. Logical: logical backup.",
+		//	  "type": "string"
+		//	}
+		"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Backup type. Valid values: Physical: physical backup. Logical: logical backup.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// BackupType is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Backups
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Backup file list information for the instance.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Backup file information for the MongoDB instance.",
+		//	    "properties": {
+		//	      "BackupDownloadStatus": {
+		//	        "description": "Download status of the backup file. Valid values: NotDownLoad: backup file not obtained. Success: backup file available for download. Running: backup file being obtained.",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupEndTime": {
+		//	        "description": "Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupFileName": {
+		//	        "description": "Backup file name.",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupFileSize": {
+		//	        "description": "Backup file size, unit: Byte.",
+		//	        "format": "int64",
+		//	        "type": "integer"
+		//	      },
+		//	      "BackupId": {
+		//	        "description": "Backup ID.",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupObject": {
+		//	        "description": "Backup target. Valid values: Data: data backup. Log: log backup.",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupStartTime": {
+		//	        "description": "Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupStatus": {
+		//	        "description": "Backup status. Valid values: Success: backup succeeded. Failed: backup failed. Running: backup in progress.",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupType": {
+		//	        "description": "Backup type. Valid values: Physical: physical backup. Logical: logical backup.",
+		//	        "type": "string"
+		//	      },
+		//	      "Creator": {
+		//	        "description": "Entity that created the backup. Valid values: System: system automatic backup. User: user manual backup.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"backups": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BackupDownloadStatus
+					"backup_download_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Download status of the backup file. Valid values: NotDownLoad: backup file not obtained. Success: backup file available for download. Running: backup file being obtained.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupEndTime
+					"backup_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupFileName
+					"backup_file_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup file name.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupFileSize
+					"backup_file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Backup file size, unit: Byte.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupId
+					"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup ID.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupObject
+					"backup_object": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup target. Valid values: Data: data backup. Log: log backup.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupStartTime
+					"backup_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupStatus
+					"backup_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup status. Valid values: Success: backup succeeded. Failed: backup failed. Running: backup in progress.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupType
+					"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup type. Valid values: Physical: physical backup. Logical: logical backup.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Creator
+					"creator": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Entity that created the backup. Valid values: System: system automatic backup. User: user manual backup.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Backup file list information for the instance.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ChargeStatus
 		// Cloud Control resource type schema:
 		//
@@ -1047,6 +1197,67 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RecoverableTime
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "List of recoverable time ranges for the instance. If the returned data is empty, the instance cannot be recovered.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Recoverable time range information for the instance.",
+		//	    "properties": {
+		//	      "EarliestRecoverableTime": {
+		//	        "description": "Earliest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+		//	        "type": "string"
+		//	      },
+		//	      "LatestRecoverableTime": {
+		//	        "description": "Latest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"recoverable_time": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EarliestRecoverableTime
+					"earliest_recoverable_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Earliest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LatestRecoverableTime
+					"latest_recoverable_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Latest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of recoverable time ranges for the instance. If the returned data is empty, the instance cannot be recovered.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RestoreTime
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "When restoring a backup, specify the restore time point in the format yyyy-MM-ddTHH:mm:ssZ (UTC). Either BackupId or RestoreTime must be specified. Use DescribeRecoverableTime to query supported recoverable time ranges.",
+		//	  "type": "string"
+		//	}
+		"restore_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When restoring a backup, specify the restore time point in the format yyyy-MM-ddTHH:mm:ssZ (UTC). Either BackupId or RestoreTime must be specified. Use DescribeRecoverableTime to query supported recoverable time ranges.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// RestoreTime is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ShardNumber
 		// Cloud Control resource type schema:
 		//
@@ -1235,6 +1446,23 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SrcDBInstanceId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Source instance ID for backup restore. If this parameter is provided, a new instance will be created based on the backup file or specified time point of the source instance, and data will be restored to the new instance via RestoreToNewInstance. If left blank, the instance will be created normally via CreateDBInstance.",
+		//	  "type": "string"
+		//	}
+		"src_db_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Source instance ID for backup restore. If this parameter is provided, a new instance will be created based on the backup file or specified time point of the source instance, and data will be restored to the new instance via RestoreToNewInstance. If left blank, the instance will be created normally via CreateDBInstance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// SrcDBInstanceId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StorageSpaceGB
 		// Cloud Control resource type schema:
@@ -1437,6 +1665,16 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_list_ids":                 "AllowListIds",
 		"auto_renew":                     "AutoRenew",
+		"backup_download_status":         "BackupDownloadStatus",
+		"backup_end_time":                "BackupEndTime",
+		"backup_file_name":               "BackupFileName",
+		"backup_file_size":               "BackupFileSize",
+		"backup_id":                      "BackupId",
+		"backup_object":                  "BackupObject",
+		"backup_start_time":              "BackupStartTime",
+		"backup_status":                  "BackupStatus",
+		"backup_type":                    "BackupType",
+		"backups":                        "Backups",
 		"charge_status":                  "ChargeStatus",
 		"charge_type":                    "ChargeType",
 		"checking_code":                  "CheckingCode",
@@ -1447,9 +1685,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"config_servers":                 "ConfigServers",
 		"config_servers_id":              "ConfigServersId",
 		"created_time":                   "CreatedTime",
+		"creator":                        "Creator",
 		"db_engine":                      "DBEngine",
 		"db_engine_version":              "DBEngineVersion",
 		"db_engine_version_str":          "DBEngineVersionStr",
+		"earliest_recoverable_time":      "EarliestRecoverableTime",
 		"expired_time":                   "ExpiredTime",
 		"force_modify":                   "ForceModify",
 		"force_restart":                  "ForceRestart",
@@ -1460,6 +1700,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"instance_status":                "InstanceStatus",
 		"instance_type":                  "InstanceType",
 		"key":                            "Key",
+		"latest_recoverable_time":        "LatestRecoverableTime",
 		"mongos":                         "Mongos",
 		"mongos_id":                      "MongosId",
 		"mongos_node_id":                 "MongosNodeId",
@@ -1485,9 +1726,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"project_name":                   "ProjectName",
 		"read_only_node_number":          "ReadOnlyNodeNumber",
 		"reclaim_time":                   "ReclaimTime",
+		"recoverable_time":               "RecoverableTime",
+		"restore_time":                   "RestoreTime",
 		"shard_id":                       "ShardId",
 		"shard_number":                   "ShardNumber",
 		"shards":                         "Shards",
+		"src_db_instance_id":             "SrcDBInstanceId",
 		"storage_space_gb":               "StorageSpaceGB",
 		"storage_type":                   "StorageType",
 		"subnet_id":                      "SubnetId",
@@ -1522,6 +1766,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/MongosNodeSpec",
 		"/properties/ShardNumber",
 		"/properties/NodeSpec",
+		"/properties/SrcDBInstanceId",
+		"/properties/BackupId",
+		"/properties/RestoreTime",
+		"/properties/BackupType",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -1549,6 +1797,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/InstanceParameters/*/ForceModify",
 		"/properties/InstanceParameters/*/ForceRestart",
 		"/properties/ReadOnlyNodeNumber",
+		"/properties/Backups",
+		"/properties/RecoverableTime",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -1571,6 +1821,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/NodeAvailabilityZone",
 		"/properties/Period",
 		"/properties/PeriodUnit",
+		"/properties/SrcDBInstanceId",
+		"/properties/BackupId",
+		"/properties/RestoreTime",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

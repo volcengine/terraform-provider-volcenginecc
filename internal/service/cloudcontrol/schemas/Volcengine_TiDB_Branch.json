@@ -1,0 +1,366 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/ParentId",
+    "/properties/ParentTimestamp"
+  ],
+  "definitions": {
+    "AlicloudPrivateEndpoint": {
+      "description": "Alicloud private endpoint configuration",
+      "properties": {
+        "AvailabilityZone": {
+          "description": "Availability zone list",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ServiceName": {
+          "description": "Private service name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AwsPrivateEndpoint": {
+      "description": "AWS private endpoint configuration",
+      "properties": {
+        "AvailabilityZone": {
+          "description": "Availability zone list",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ServiceName": {
+          "description": "VPC endpoint service name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BranchAnnotation": {
+      "description": "Branch annotation key-value pair",
+      "properties": {
+        "Key": {
+          "description": "Annotation key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Annotation value",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BranchUsages": {
+      "description": "Branch resource usage",
+      "properties": {
+        "ColumnStorage": {
+          "description": "Column storage usage (int64 string)",
+          "type": "string"
+        },
+        "RequestUnit": {
+          "description": "Request unit usage (int64 string)",
+          "type": "string"
+        },
+        "RowStorage": {
+          "description": "Row storage usage (int64 string)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointAuthorizedNetwork": {
+      "description": "Endpoint authorized network (Allowlist) configuration",
+      "properties": {
+        "DisplayName": {
+          "description": "Authorized network name",
+          "type": "string"
+        },
+        "EndIpAddress": {
+          "description": "End IP",
+          "type": "string"
+        },
+        "StartIpAddress": {
+          "description": "Start IP",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointPrivate": {
+      "description": "Private access endpoint configuration",
+      "properties": {
+        "Alicloud": {
+          "$ref": "#/definitions/AlicloudPrivateEndpoint",
+          "description": "Alicloud private endpoint"
+        },
+        "AuthorizedNetworks": {
+          "description": "Private endpoint authorized network list",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointAuthorizedNetwork"
+          },
+          "type": "array"
+        },
+        "Aws": {
+          "$ref": "#/definitions/AwsPrivateEndpoint",
+          "description": "AWS private endpoint"
+        },
+        "Disabled": {
+          "description": "Disable private network access",
+          "type": "boolean"
+        },
+        "Host": {
+          "description": "Private hostname",
+          "type": "string"
+        },
+        "Port": {
+          "description": "Private port",
+          "type": "integer"
+        },
+        "SecurityGroupCount": {
+          "description": "Security group count",
+          "type": "integer"
+        },
+        "ServiceName": {
+          "description": "Private endpoint service name",
+          "type": "string"
+        },
+        "VpcEndpointId": {
+          "description": "VPC endpoint ID",
+          "type": "string"
+        },
+        "VpcEndpointName": {
+          "description": "VPC endpoint name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointPublic": {
+      "description": "Public access endpoint configuration",
+      "properties": {
+        "AuthorizedNetworks": {
+          "description": "IP Allowlist",
+          "items": {
+            "$ref": "#/definitions/EndpointAuthorizedNetwork"
+          },
+          "type": "array"
+        },
+        "Disabled": {
+          "description": "Disable public network access",
+          "type": "boolean"
+        },
+        "Host": {
+          "description": "Public hostname",
+          "type": "string"
+        },
+        "Port": {
+          "description": "Public port",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Endpoints": {
+      "description": "Unified connection endpoint configuration",
+      "properties": {
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/EndpointPrivate",
+          "description": "Private endpoint"
+        },
+        "PublicEndpoint": {
+          "$ref": "#/definitions/EndpointPublic",
+          "description": "Public endpoint"
+        }
+      },
+      "type": "object"
+    },
+    "PrivateEndpointAuthorizedNetwork": {
+      "description": "Private endpoint authorized network configuration",
+      "properties": {
+        "DisplayName": {
+          "description": "Authorized network name",
+          "type": "string"
+        },
+        "SecurityGroupCount": {
+          "description": "Security group count",
+          "type": "integer"
+        },
+        "VpcEndpointId": {
+          "description": "VPC endpoint ID",
+          "type": "string"
+        },
+        "VpcEndpointName": {
+          "description": "VPC endpoint name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Branch resources under the TiDB cluster, corresponding to the branches object",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ClusterId"
+    ],
+    "required": [
+      "/properties/ClusterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tidb:CreateBranch",
+        "tidb:ChangeBranchPassword",
+        "tidb:GetBranchDetails"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tidb:DeleteBranch",
+        "tidb:GetBranchDetails"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "tidb:ListBranches"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tidb:GetBranchDetails"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tidb:UpdateBranch",
+        "tidb:ChangeBranchPassword",
+        "tidb:ResetBranch",
+        "tidb:GetBranchDetails"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId",
+    "/properties/BranchId"
+  ],
+  "properties": {
+    "Annotations": {
+      "description": "Annotation",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/BranchAnnotation"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BranchId": {
+      "description": "Branch ID, assigned by the creation API",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "ClusterId": {
+      "description": "Cluster ID",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "CreatedBy": {
+      "description": "Creator identifier",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "Branch display name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Endpoints": {
+      "$ref": "#/definitions/Endpoints",
+      "description": "Branch endpoint configuration"
+    },
+    "HasSetPwd": {
+      "description": "Root password set",
+      "type": "boolean"
+    },
+    "Name": {
+      "description": "Branch resource name",
+      "type": "string"
+    },
+    "ParentDisplayName": {
+      "description": "Parent branch display name",
+      "type": "string"
+    },
+    "ParentId": {
+      "description": "Parent branch ID",
+      "type": "string"
+    },
+    "ParentTimestamp": {
+      "description": "Timestamp of derivation from the parent branch",
+      "type": "string"
+    },
+    "Password": {
+      "description": "Branch root password, only for setting or changing the password (not returned after writing)",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Name of the project to which the IP address pool belongs",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "ResetBranch": {
+      "description": "Reset branch. Resetting briefly changes the branch status before returning to READY; only used to trigger actions (no return value)",
+      "type": "boolean"
+    },
+    "State": {
+      "description": "Branch status (e.g., CREATING, READY)",
+      "semantic": "status",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Update time",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "Usages": {
+      "$ref": "#/definitions/BranchUsages",
+      "description": "Branch resource usage"
+    },
+    "UserPrefix": {
+      "description": "Default username prefix",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/BranchId",
+    "/properties/Name",
+    "/properties/ParentDisplayName",
+    "/properties/CreatedBy",
+    "/properties/State",
+    "/properties/UserPrefix",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/Annotations",
+    "/properties/HasSetPwd",
+    "/properties/Endpoints",
+    "/properties/Usages",
+    "/properties/ProjectName"
+  ],
+  "required": [
+    "ClusterId",
+    "DisplayName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TiDB::Branch",
+  "writeOnlyProperties": [
+    "/properties/Password",
+    "/properties/ResetBranch"
+  ]
+}

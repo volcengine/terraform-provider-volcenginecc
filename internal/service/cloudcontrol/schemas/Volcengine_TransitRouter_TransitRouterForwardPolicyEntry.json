@@ -1,0 +1,127 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TransitRouterForwardPolicyTableId"
+  ],
+  "description": "Forwarding policy entry of the transit router. The forwarding policy entry matches source and destination address segments and forwards matching traffic to the specified transit router route table.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TransitRouterForwardPolicyTableId",
+      "/properties/TransitRouterForwardPolicyEntryId",
+      "/properties/TransitRouterRouteTableId",
+      "/properties/SourceCidrBlock",
+      "/properties/DestinationCidrBlock"
+    ],
+    "required": [
+      "/properties/TransitRouterForwardPolicyTableId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:CreateTransitRouterForwardPolicyEntry",
+        "transitrouter:DescribeTransitRouterForwardPolicyEntries"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DeleteTransitRouterForwardPolicyEntry",
+        "transitrouter:DescribeTransitRouterForwardPolicyEntries"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterForwardPolicyEntries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterForwardPolicyEntries"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transitrouter:ModifyTransitRouterForwardPolicyEntryAttributes",
+        "transitrouter:DescribeTransitRouterForwardPolicyEntries"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterForwardPolicyTableId",
+    "/properties/TransitRouterForwardPolicyEntryId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "Creation time of the forwarding policy entry.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of the forwarding policy entry. Must start with a letter, number, or Chinese character. Can include letters, numbers, Chinese characters, and the following special characters: English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length must be between 0 and 255 characters.",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "DestinationCidrBlock": {
+      "description": "Destination address segment of the forwarding policy entry. Supports IPv4 and IPv6 subnets. If this parameter is empty, it matches all destination addresses.",
+      "type": "string"
+    },
+    "Priority": {
+      "description": "Priority of the forwarding policy entry. Value range: 1–10000. Priorities cannot be duplicated within the same forwarding policy.",
+      "format": "int32",
+      "maximum": 10000,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "SourceCidrBlock": {
+      "description": "Source address segment of the forwarding policy entry. Supports IPv4 and IPv6 subnets.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status of the forwarding policy entry. Available: available. Creating: creating. Pending: configuring. Deleting: deleting. Conflicted: not effective.",
+      "enum": [
+        "Available",
+        "Creating",
+        "Pending",
+        "Deleting",
+        "Conflicted"
+      ],
+      "semantic": "status",
+      "type": "string"
+    },
+    "TransitRouterForwardPolicyEntryId": {
+      "description": "ID of the forwarding policy entry.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterForwardPolicyTableId": {
+      "description": "ID of the forwarding policy to which the entry belongs.",
+      "type": "string"
+    },
+    "TransitRouterRouteTableId": {
+      "description": "ID of the transit router route table to which traffic matching this forwarding policy entry is forwarded.",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Last operation time of the forwarding policy entry.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TransitRouterForwardPolicyEntryId",
+    "/properties/CreationTime",
+    "/properties/UpdateTime",
+    "/properties/Status"
+  ],
+  "required": [
+    "TransitRouterForwardPolicyTableId",
+    "TransitRouterRouteTableId",
+    "SourceCidrBlock",
+    "Priority"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TransitRouter::TransitRouterForwardPolicyEntry"
+}

@@ -618,25 +618,10 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "CLBSpecCode": {
 		//	      "description": "CLB specification code. CLB specifications. Options: small_1: Small I; small_2: Small II; medium_1: Medium I; medium_2: Medium II; large_1: Large I; large_2: Large II",
-		//	      "enum": [
-		//	        "small_1",
-		//	        "small_2",
-		//	        "medium_1",
-		//	        "medium_2",
-		//	        "large_1",
-		//	        "large_2",
-		//	        ""
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceSpecCode": {
 		//	      "description": "Node specifications. Options: 1c2g, 2c4g, 4c8g, 8c16g",
-		//	      "enum": [
-		//	        "1c2g",
-		//	        "2c4g",
-		//	        "4c8g",
-		//	        "8c16g"
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "NetworkType": {
@@ -661,11 +646,6 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "PublicNetworkBillingType": {
 		//	      "description": "Public network billing method. Options: traffic: billed by actual traffic; bandwidth: billed by bandwidth limit",
-		//	      "enum": [
-		//	        "traffic",
-		//	        "bandwidth",
-		//	        ""
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Replicas": {
@@ -684,17 +664,6 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 					Description: "CLB specification code. CLB specifications. Options: small_1: Small I; small_2: Small II; medium_1: Medium I; medium_2: Medium II; large_1: Large I; large_2: Large II",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"small_1",
-							"small_2",
-							"medium_1",
-							"medium_2",
-							"large_1",
-							"large_2",
-							"",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseNonNullStateForUnknown(),
 						stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -705,14 +674,6 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Node specifications. Options: 1c2g, 2c4g, 4c8g, 8c16g",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"1c2g",
-							"2c4g",
-							"4c8g",
-							"8c16g",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseNonNullStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -765,13 +726,6 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Public network billing method. Options: traffic: billed by actual traffic; bandwidth: billed by bandwidth limit",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"traffic",
-							"bandwidth",
-							"",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseNonNullStateForUnknown(),
 						stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -990,20 +944,12 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Gateway type. Options: standard: Standard gateway; serverless: Serverless gateway (not supported yet)",
-		//	  "enum": [
-		//	    "standard"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Gateway type. Options: standard: Standard gateway; serverless: Serverless gateway (not supported yet)",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"standard",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),

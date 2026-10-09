@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cloudmonitor_object_group.example "group_id"

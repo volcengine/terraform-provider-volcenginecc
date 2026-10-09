@@ -313,6 +313,18 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_waf_ip_group -ccschema ../service/cloudcontrol/schemas/Volcengine_WAF_IpGroup.json -package waf -- ../volcengine/waf/ip_group_resource_gen.go ../volcengine/waf/ip_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_waf_system_bot -ccschema ../service/cloudcontrol/schemas/Volcengine_WAF_SystemBot.json -package waf -- ../volcengine/waf/system_bot_resource_gen.go ../volcengine/waf/system_bot_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_waf_custom_page -ccschema ../service/cloudcontrol/schemas/Volcengine_WAF_CustomPage.json -package waf -- ../volcengine/waf/custom_page_resource_gen.go ../volcengine/waf/custom_page_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vke_nodepool_scaling_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_VKE_NodepoolScalingPolicy.json -package vke -- ../volcengine/vke/nodepool_scaling_policy_resource_gen.go ../volcengine/vke/nodepool_scaling_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_vpc_ipam_resource_discovery -ccschema ../service/cloudcontrol/schemas/Volcengine_VPC_IPAMResourceDiscovery.json -package vpc -- ../volcengine/vpc/ipam_resource_discovery_resource_gen.go ../volcengine/vpc/ipam_resource_discovery_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_transitrouter_transit_router_route_policy_table -ccschema ../service/cloudcontrol/schemas/Volcengine_TransitRouter_TransitRouterRoutePolicyTable.json -package transitrouter -- ../volcengine/transitrouter/transit_router_route_policy_table_resource_gen.go ../volcengine/transitrouter/transit_router_route_policy_table_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_transitrouter_transit_router_forward_policy_entry -ccschema ../service/cloudcontrol/schemas/Volcengine_TransitRouter_TransitRouterForwardPolicyEntry.json -package transitrouter -- ../volcengine/transitrouter/transit_router_forward_policy_entry_resource_gen.go ../volcengine/transitrouter/transit_router_forward_policy_entry_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_billing_financial_relation -ccschema ../service/cloudcontrol/schemas/Volcengine_Billing_FinancialRelation.json -package billing -- ../volcengine/billing/financial_relation_resource_gen.go ../volcengine/billing/financial_relation_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_waf_bot_analyse_protect_rule -ccschema ../service/cloudcontrol/schemas/Volcengine_WAF_BotAnalyseProtectRule.json -package waf -- ../volcengine/waf/bot_analyse_protect_rule_resource_gen.go ../volcengine/waf/bot_analyse_protect_rule_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_waf_custom_bot -ccschema ../service/cloudcontrol/schemas/Volcengine_WAF_CustomBot.json -package waf -- ../volcengine/waf/custom_bot_resource_gen.go ../volcengine/waf/custom_bot_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_securitycenter_agent -ccschema ../service/cloudcontrol/schemas/Volcengine_SecurityCenter_Agent.json -package securitycenter -- ../volcengine/securitycenter/agent_resource_gen.go ../volcengine/securitycenter/agent_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tidb_instance -ccschema ../service/cloudcontrol/schemas/Volcengine_TiDB_Instance.json -package tidb -- ../volcengine/tidb/instance_resource_gen.go ../volcengine/tidb/instance_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tidb_branch -ccschema ../service/cloudcontrol/schemas/Volcengine_TiDB_Branch.json -package tidb -- ../volcengine/tidb/branch_resource_gen.go ../volcengine/tidb/branch_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cloudmonitor_object_group -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_ObjectGroup.json -package cloudmonitor -- ../volcengine/cloudmonitor/object_group_resource_gen.go ../volcengine/cloudmonitor/object_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cloudmonitor_alert_template -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_AlertTemplate.json -package cloudmonitor -- ../volcengine/cloudmonitor/alert_template_resource_gen.go ../volcengine/cloudmonitor/alert_template_resource_gen_test.go
 
 package provider
 
@@ -321,6 +333,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/apig"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/billing"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/bmq"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cbr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cdn"
@@ -357,7 +370,9 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/resourceshare"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rocketmq"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/securitycenter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tidb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"

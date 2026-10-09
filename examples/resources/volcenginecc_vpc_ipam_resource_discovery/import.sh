@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vpc_ipam_resource_discovery.example "ipam_resource_discovery_id"

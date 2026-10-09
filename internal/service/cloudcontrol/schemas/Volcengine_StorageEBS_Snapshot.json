@@ -35,9 +35,12 @@
       "/properties/VolumeId",
       "/properties/SnapshotName",
       "/properties/Status",
+      "/properties/SnapshotType",
       "/properties/ZoneId",
       "/properties/CreationTime",
-      "/properties/ProjectName"
+      "/properties/ProjectName",
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
     ]
   },
   "handlers": {

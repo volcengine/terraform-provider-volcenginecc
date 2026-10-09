@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_waf_custom_bot.example "host|bot_id"

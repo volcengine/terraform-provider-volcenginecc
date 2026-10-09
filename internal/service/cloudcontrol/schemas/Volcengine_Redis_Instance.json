@@ -63,6 +63,47 @@
       },
       "type": "object"
     },
+    "BackupPlan": {
+      "description": "Automatic backup policy.",
+      "properties": {
+        "Active": {
+          "description": "Whether to enable automatic backup. The value range is as follows: false (default): Disabled. true: Enabled.",
+          "type": "boolean"
+        },
+        "BackupHour": {
+          "description": "Backup window (UTC+8). The value can be any integer from 0 to 23. 0 means the system performs the backup between 00:00 and 00:59, 1 means between 01:00 and 01:59, and so on.",
+          "maximum": 23,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "BackupType": {
+          "description": "Restore method. The value range is as follows: Full: Full restore, that is, restore by backup set. Inc: Incremental restore, that is, restore by point in time.",
+          "type": "string"
+        },
+        "ExpectNextBackupTime": {
+          "description": "Expected time for the next backup execution, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).",
+          "type": "string"
+        },
+        "LastUpdateTime": {
+          "description": "Last time the backup policy was modified, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).",
+          "type": "string"
+        },
+        "Period": {
+          "description": "Backup cycle. The value can be any integer from 1 to 7. 1 means backup is performed every Monday, 2 means every Tuesday, and so on. This parameter is required when automatic backup is enabled (that is, when Active is set to true).",
+          "insertionOrder": false,
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "TTL": {
+          "description": "Backup file retention period, default is 7 days.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "BackupRestore": {
       "properties": {
         "BackupPointId": {
@@ -232,7 +273,9 @@
         "Redis:DescribeDBInstanceShards",
         "Redis:DescribeBackups",
         "Redis:CreateBackup",
-        "Redis:StartContinuousBackup"
+        "Redis:StartContinuousBackup",
+        "Redis:DescribeBackupPlan",
+        "Redis:ModifyBackupPlan"
       ]
     },
     "delete": {
@@ -252,7 +295,8 @@
         "Redis:DescribeDBInstanceDetail",
         "Redis:DescribeNodeIds",
         "Redis:DescribeDBInstanceShards",
-        "Redis:DescribeBackups"
+        "Redis:DescribeBackups",
+        "Redis:DescribeBackupPlan"
       ]
     },
     "update": {
@@ -272,7 +316,9 @@
         "Redis:DescribeNodeIds",
         "Redis:DescribeDBInstanceShards",
         "Redis:DescribeBackups",
-        "Redis:RestartDBInstance"
+        "Redis:DescribeBackupPlan",
+        "Redis:RestartDBInstance",
+        "Redis:ModifyBackupPlan"
       ]
     }
   },
@@ -293,6 +339,11 @@
       "default": false,
       "description": "Whether to enable auto-renewal. Value options: false (default): Disabled; true: Enabled.",
       "type": "boolean"
+    },
+    "BackupPlan": {
+      "$ref": "#/definitions/BackupPlan",
+      "description": "Automatic backup policy for the instance.",
+      "type": "object"
     },
     "BackupPointName": {
       "description": "Set a backup name for the full backup created before changes.",
@@ -318,7 +369,8 @@
     },
     "Capacity": {
       "$ref": "#/definitions/Capacity",
-      "description": "Capacity information of the instance."
+      "description": "Capacity information of the instance.",
+      "type": "object"
     },
     "ChargeType": {
       "description": "Instance billing type. Value options: PrePaid: Subscription (also called prepaid). PostPaid: Pay-as-you-go (also called postpaid).",
@@ -596,7 +648,11 @@
     "/properties/VisitAddrs",
     "/properties/VpcAuthMode",
     "/properties/InstanceShards",
-    "/properties/NodeIds"
+    "/properties/NodeIds",
+    "/properties/BackupPlan/TTL",
+    "/properties/BackupPlan/BackupType",
+    "/properties/BackupPlan/ExpectNextBackupTime",
+    "/properties/BackupPlan/LastUpdateTime"
   ],
   "required": [
     "EngineVersion",

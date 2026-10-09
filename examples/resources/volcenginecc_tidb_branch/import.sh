@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tidb_branch.example "cluster_id|branch_id"

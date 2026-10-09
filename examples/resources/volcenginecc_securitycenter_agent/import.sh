@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_securitycenter_agent.example "agent_id"

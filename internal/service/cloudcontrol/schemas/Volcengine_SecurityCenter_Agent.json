@@ -1,0 +1,273 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AgentID"
+  ],
+  "definitions": {
+    "AutoProtectConfig": {
+      "description": "Host auto protection configuration (returned by GetAutoProtectConfig API)",
+      "properties": {
+        "Enable": {
+          "description": "Enable auto protection",
+          "type": "boolean"
+        },
+        "UpdateTime": {
+          "description": "Auto protection configuration update time (timestamp)",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "EcsInstance": {
+      "description": "Basic information of the cloud host (ECS) corresponding to the host where the Agent resides",
+      "properties": {
+        "AccessKey": {
+          "description": "Host AccessKey information",
+          "type": "string"
+        },
+        "AccountID": {
+          "description": "Host account ID",
+          "type": "string"
+        },
+        "Cpu": {
+          "description": "CPU core count",
+          "type": "integer"
+        },
+        "CreatedAt": {
+          "description": "Host creation time",
+          "type": "string"
+        },
+        "ECSUpdateAt": {
+          "description": "ECS information update time",
+          "type": "string"
+        },
+        "EipAddress": {
+          "description": "Public IP address",
+          "type": "string"
+        },
+        "HostName": {
+          "description": "Host name",
+          "type": "string"
+        },
+        "IPList": {
+          "description": "Host IP list",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "InstanceName": {
+          "description": "Instance name",
+          "type": "string"
+        },
+        "Mem": {
+          "description": "Memory size",
+          "type": "integer"
+        },
+        "OsName": {
+          "description": "Operating system name",
+          "type": "string"
+        },
+        "OsType": {
+          "description": "Operating system type",
+          "type": "string"
+        },
+        "Platform": {
+          "description": "Platform",
+          "type": "string"
+        },
+        "PlatformVersion": {
+          "description": "Platform version",
+          "type": "string"
+        },
+        "PrimaryIpAddress": {
+          "description": "Main private IP address",
+          "type": "string"
+        },
+        "Region": {
+          "description": "Region",
+          "type": "string"
+        },
+        "SecurityEnhancementStrategy": {
+          "description": "Security hardening policy",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Host status",
+          "type": "string"
+        },
+        "Visibility": {
+          "description": "Visibility",
+          "type": "string"
+        },
+        "VpcId": {
+          "description": "Private network VPC ID",
+          "type": "string"
+        },
+        "VpcName": {
+          "description": "Private network VPC name",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "Zone ID",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Cloud Security Center (seccenter) Host Security Agent resource. Represents a security protection Agent on a host, uniquely identified by AgentID. Create means installing/enabling host security protection (InstallAgentClient) on an existing AgentID. Delete means uninstalling/disabling the Agent (UninstallAgentClient). Reading and listing are performed via ListOrderedHostsBasicInfos.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/AgentID"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "seccenter:InstallAgentClient",
+        "seccenter:ListOrderedHostsBasicInfos",
+        "seccenter:GetAutoProtectConfig"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "seccenter:UninstallAgentClient"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "seccenter:ListOrderedHostsBasicInfos"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "seccenter:ListOrderedHostsBasicInfos",
+        "seccenter:GetAutoProtectConfig"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AgentID"
+  ],
+  "properties": {
+    "AbnormalPluginsList": {
+      "description": "Abnormal plugin list",
+      "type": "string"
+    },
+    "AgentID": {
+      "description": "Agent unique ID, which is also the security Agent identifier for the host. Installation, uninstallation, and queries are based on this ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AgentStatus": {
+      "description": "Agent status",
+      "semantic": "status",
+      "type": "string"
+    },
+    "AutoProtectConfig": {
+      "$ref": "#/definitions/AutoProtectConfig",
+      "description": "Host auto protection configuration (returned by GetAutoProtectConfig API)"
+    },
+    "CloudProvider": {
+      "description": "Cloud vendor information",
+      "type": "string"
+    },
+    "EcsInstance": {
+      "$ref": "#/definitions/EcsInstance",
+      "description": "Basic information of the cloud host (ECS) corresponding to the host where the Agent resides"
+    },
+    "Group": {
+      "description": "Host group",
+      "type": "string"
+    },
+    "GroupPath": {
+      "description": "Host group path",
+      "type": "string"
+    },
+    "LastHeartbeatTime": {
+      "description": "Last heartbeat time",
+      "type": "integer"
+    },
+    "OldValidCode": {
+      "description": "Old valid status code",
+      "type": "integer"
+    },
+    "Online": {
+      "description": "Agent online status",
+      "type": "boolean"
+    },
+    "Platform": {
+      "description": "Platform",
+      "type": "string"
+    },
+    "PluginsStatus": {
+      "description": "Plugin status",
+      "type": "string"
+    },
+    "Reason": {
+      "description": "Status reason description",
+      "type": "string"
+    },
+    "SecurityEnhancement": {
+      "description": "Enable security hardening",
+      "type": "boolean"
+    },
+    "Status": {
+      "description": "Host/Agent overall status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag list",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UserStatus": {
+      "description": "User-side status",
+      "type": "string"
+    },
+    "UserStatusReason": {
+      "description": "User-side status reason",
+      "type": "string"
+    },
+    "UserStatusReasonCode": {
+      "description": "User-side status reason code",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AgentStatus",
+    "/properties/AbnormalPluginsList",
+    "/properties/CloudProvider",
+    "/properties/Group",
+    "/properties/GroupPath",
+    "/properties/LastHeartbeatTime",
+    "/properties/OldValidCode",
+    "/properties/Online",
+    "/properties/Platform",
+    "/properties/PluginsStatus",
+    "/properties/Reason",
+    "/properties/SecurityEnhancement",
+    "/properties/Status",
+    "/properties/Tags",
+    "/properties/UserStatus",
+    "/properties/UserStatusReason",
+    "/properties/UserStatusReasonCode",
+    "/properties/EcsInstance",
+    "/properties/AutoProtectConfig"
+  ],
+  "required": [
+    "AgentID"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::SecurityCenter::Agent"
+}

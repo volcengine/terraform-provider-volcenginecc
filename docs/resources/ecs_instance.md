@@ -213,6 +213,7 @@ resource "volcenginecc_ecs_instance" "EcsInstanceDemo" {
 - `rdma_ip_addresses` (Set of String) When querying high performance computing GPU instances, returns the RDMA IP addresses of each network interface card in a list.
 - `rdma_network_interface_details` (Attributes Set) RDMA information for each network interface.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--rdma_network_interface_details))
+- `show_role_names` (Set of String) IAM role name bound to the instance.
 - `updated_at` (String) The update time of the instance.
 - `vpc_id` (String) The private network ID to which the instance belongs. You can call the [DescribeVpcs](https://www.volcengine.com/docs/6563/66127) API to obtain VPC information for the target region.
 

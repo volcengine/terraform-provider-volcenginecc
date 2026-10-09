@@ -19,9 +19,59 @@
     "/properties/ConfigServerStorageSpaceGB",
     "/properties/NodeAvailabilityZone",
     "/properties/Period",
-    "/properties/PeriodUnit"
+    "/properties/PeriodUnit",
+    "/properties/SrcDBInstanceId",
+    "/properties/BackupId",
+    "/properties/RestoreTime"
   ],
   "definitions": {
+    "Backup": {
+      "description": "Backup file information for the MongoDB instance.",
+      "properties": {
+        "BackupDownloadStatus": {
+          "description": "Download status of the backup file. Valid values: NotDownLoad: backup file not obtained. Success: backup file available for download. Running: backup file being obtained.",
+          "type": "string"
+        },
+        "BackupEndTime": {
+          "description": "Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+          "type": "string"
+        },
+        "BackupFileName": {
+          "description": "Backup file name.",
+          "type": "string"
+        },
+        "BackupFileSize": {
+          "description": "Backup file size, unit: Byte.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "BackupId": {
+          "description": "Backup ID.",
+          "type": "string"
+        },
+        "BackupObject": {
+          "description": "Backup target. Valid values: Data: data backup. Log: log backup.",
+          "type": "string"
+        },
+        "BackupStartTime": {
+          "description": "Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+          "type": "string"
+        },
+        "BackupStatus": {
+          "description": "Backup status. Valid values: Success: backup succeeded. Failed: backup failed. Running: backup in progress.",
+          "type": "string"
+        },
+        "BackupType": {
+          "description": "Backup type. Valid values: Physical: physical backup. Logical: logical backup.",
+          "type": "string"
+        },
+        "Creator": {
+          "description": "Entity that created the backup. Valid values: System: system automatic backup. User: user manual backup.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ConfigServer": {
       "properties": {
         "ConfigServerNodeId": {
@@ -219,6 +269,20 @@
       },
       "type": "object"
     },
+    "RecoverableTimeInfo": {
+      "description": "Recoverable time range information for the instance.",
+      "properties": {
+        "EarliestRecoverableTime": {
+          "description": "Earliest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+          "type": "string"
+        },
+        "LatestRecoverableTime": {
+          "description": "Latest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Shard": {
       "properties": {
         "Nodes": {
@@ -275,9 +339,13 @@
     "create": {
       "permissions": [
         "mongodb:CreateDBInstance",
+        "mongodb:RestoreToNewInstance",
+        "mongodb:CreateBackup",
         "mongodb:DescribeDBInstanceDetail",
         "mongodb:DescribeDBInstanceParameters",
-        "mongodb:ModifyMultiDBInstanceParameters"
+        "mongodb:ModifyMultiDBInstanceParameters",
+        "mongodb:DescribeBackups",
+        "mongodb:DescribeRecoverableTime"
       ]
     },
     "delete": {
@@ -294,7 +362,9 @@
     "read": {
       "permissions": [
         "mongodb:DescribeDBInstanceDetail",
-        "mongodb:DescribeDBInstanceParameters"
+        "mongodb:DescribeDBInstanceParameters",
+        "mongodb:DescribeBackups",
+        "mongodb:DescribeRecoverableTime"
       ]
     },
     "update": {
@@ -305,7 +375,10 @@
         "mongodb:DescribeDBInstanceParameters",
         "mongodb:ModifyMultiDBInstanceParameters",
         "mongodb:AddTagsToResource",
-        "mongodb:RemoveTagsFromResource"
+        "mongodb:RemoveTagsFromResource",
+        "mongodb:CreateBackup",
+        "mongodb:DescribeBackups",
+        "mongodb:DescribeRecoverableTime"
       ]
     }
   },
@@ -327,6 +400,23 @@
       "default": false,
       "description": "Enable auto-renewal. Options: false (default): auto-renewal disabled. true: auto-renewal enabled.",
       "type": "boolean"
+    },
+    "BackupId": {
+      "description": "Backup file ID of the source instance for backup restore, used for restoring by backup file. Either BackupId or RestoreTime must be specified. Currently, only replica set instances support restoring a backup set to a new instance; sharded cluster instances are not supported.",
+      "type": "string"
+    },
+    "BackupType": {
+      "description": "Backup type. Valid values: Physical: physical backup. Logical: logical backup.",
+      "type": "string"
+    },
+    "Backups": {
+      "description": "Backup file list information for the instance.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Backup"
+      },
+      "type": "array",
+      "uniqueItems": true
     },
     "ChargeStatus": {
       "description": "Instance billing status. Valid values: Normal: normal. WaitingPaid: waiting for payment. ChangingPayType: changing billing type. Renewing: renewing. Overdue: overdue. Owing: owing. Unsubscribing: unsubscribing.",
@@ -512,6 +602,19 @@
       "description": "Scheduled recycle time for the instance (UTC)",
       "type": "string"
     },
+    "RecoverableTime": {
+      "description": "List of recoverable time ranges for the instance. If the returned data is empty, the instance cannot be recovered.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RecoverableTimeInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "RestoreTime": {
+      "description": "When restoring a backup, specify the restore time point in the format yyyy-MM-ddTHH:mm:ssZ (UTC). Either BackupId or RestoreTime must be specified. Use DescribeRecoverableTime to query supported recoverable time ranges.",
+      "type": "string"
+    },
     "ShardNumber": {
       "description": "Number of shards in the sharded cluster. Range: 2–32.",
       "maximum": 32,
@@ -526,6 +629,10 @@
       },
       "type": "array",
       "uniqueItems": true
+    },
+    "SrcDBInstanceId": {
+      "description": "Source instance ID for backup restore. If this parameter is provided, a new instance will be created based on the backup file or specified time point of the source instance, and data will be restored to the new instance via RestoreToNewInstance. If left blank, the instance will be created normally via CreateDBInstance.",
+      "type": "string"
     },
     "StorageSpaceGB": {
       "description": "Total storage space for replica set instances, or storage space for a single Shard in a sharded cluster. Unit: GiB, step size: 10.",
@@ -596,7 +703,9 @@
     "/properties/InstanceParameters/*/CheckingCode",
     "/properties/InstanceParameters/*/ForceModify",
     "/properties/InstanceParameters/*/ForceRestart",
-    "/properties/ReadOnlyNodeNumber"
+    "/properties/ReadOnlyNodeNumber",
+    "/properties/Backups",
+    "/properties/RecoverableTime"
   ],
   "required": [
     "NodeSpec",
@@ -626,6 +735,10 @@
     "/properties/MongosNodeNumber",
     "/properties/MongosNodeSpec",
     "/properties/ShardNumber",
-    "/properties/NodeSpec"
+    "/properties/NodeSpec",
+    "/properties/SrcDBInstanceId",
+    "/properties/BackupId",
+    "/properties/RestoreTime",
+    "/properties/BackupType"
   ]
 }

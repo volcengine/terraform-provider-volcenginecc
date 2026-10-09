@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -68,20 +67,10 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	    },
 		//	    "BillingType": {
 		//	      "description": "Billing type for public IP. Options: PostPaidByBandwidth (default): Pay-as-you-go, billed by bandwidth cap. PostPaidByTraffic: Pay-as-you-go, billed by actual traffic.",
-		//	      "enum": [
-		//	        "PostPaidByBandwidth",
-		//	        "PostPaidByTraffic"
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ISP": {
 		//	      "description": "Line type. Values: BGP (default): BGP line. If your account has applied for static single line, ISP can also be set to ChinaMobile (China Mobile), ChinaTelecom (China Telecom), or ChinaUnicom (China Unicom).",
-		//	      "enum": [
-		//	        "BGP",
-		//	        "ChinaMobile",
-		//	        "ChinaTelecom",
-		//	        "ChinaUnicom"
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ReleaseWithInstance": {
@@ -119,12 +108,6 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					Description: "Billing type for public IP. Options: PostPaidByBandwidth (default): Pay-as-you-go, billed by bandwidth cap. PostPaidByTraffic: Pay-as-you-go, billed by actual traffic.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"PostPaidByBandwidth",
-							"PostPaidByTraffic",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseNonNullStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -134,14 +117,6 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 					Description: "Line type. Values: BGP (default): BGP line. If your account has applied for static single line, ISP can also be set to ChinaMobile (China Mobile), ChinaTelecom (China Telecom), or ChinaUnicom (China Unicom).",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"BGP",
-							"ChinaMobile",
-							"ChinaTelecom",
-							"ChinaUnicom",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseNonNullStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -213,10 +188,6 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "description": "Instance billing type. Values: PrePaid (subscription) / PostPaid (pay-as-you-go)",
-		//	  "enum": [
-		//	    "PrePaid",
-		//	    "PostPaid"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"instance_charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -339,22 +310,12 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "description": "Assign an IPv6 address to the instance NIC. Values: 0: Do not assign an IPv6 address. 1: Assign an IPv6 address; the system automatically allocates an IPv6 subnet for you.",
-		//	  "enum": [
-		//	    0,
-		//	    1
-		//	  ],
 		//	  "type": "integer"
 		//	}
 		"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Assign an IPv6 address to the instance NIC. Values: 0: Do not assign an IPv6 address. 1: Assign an IPv6 address; the system automatically allocates an IPv6 subnet for you.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.OneOf(
-					0,
-					1,
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -379,22 +340,12 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "description": "Lifecycle status. Values: Active (active) / InActive (inactive)",
-		//	  "enum": [
-		//	    "Active",
-		//	    "InActive"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"lifecycle_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Lifecycle status. Values: Active (active) / InActive (inactive)",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"Active",
-					"InActive",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -482,22 +433,12 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "description": "Enable security hardening. Options: Active: Enable security hardening, applies only to public images. InActive: Disable security hardening, applies to all images.",
-		//	  "enum": [
-		//	    "Active",
-		//	    "InActive"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"security_enhancement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Enable security hardening. Options: Active: Enable security hardening, applies only to public images. InActive: Disable security hardening, applies to all images.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"Active",
-					"InActive",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -533,24 +474,12 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "description": "Instance preemption policy. Values: NoSpot (default): creates a standard pay-as-you-go instance. SpotAsPriceGo: system automatically bids, creating a preemptible instance that follows the current market price. SpotWithPriceLimit: creates a preemptible instance with a specified bid limit",
-		//	  "enum": [
-		//	    "NoSpot",
-		//	    "SpotAsPriceGo",
-		//	    "SpotWithPriceLimit"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"spot_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Instance preemption policy. Values: NoSpot (default): creates a standard pay-as-you-go instance. SpotAsPriceGo: system automatically bids, creating a preemptible instance that follows the current market price. SpotWithPriceLimit: creates a preemptible instance with a specified bid limit",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"NoSpot",
-					"SpotAsPriceGo",
-					"SpotWithPriceLimit",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -651,10 +580,6 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "description": "Cloud disk",
-		//	  "elementIdentifier": [
-		//	    "/Size",
-		//	    "/VolumeType"
-		//	  ],
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "Cloud disk",
@@ -681,11 +606,6 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	      },
 		//	      "VolumeType": {
 		//	        "description": "Cloud disk types: ESSD_FlexPL: Extreme SSD FlexPL. ESSD_PL0: Extreme SSD PL0.",
-		//	        "enum": [
-		//	          "ESSD_FlexPL",
-		//	          "ESSD_PL0",
-		//	          "PTSSD"
-		//	        ],
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -747,13 +667,6 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 						Description: "Cloud disk types: ESSD_FlexPL: Extreme SSD FlexPL. ESSD_PL0: Extreme SSD PL0.",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"ESSD_FlexPL",
-								"ESSD_PL0",
-								"PTSSD",
-							),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseNonNullStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -864,16 +777,6 @@ func scalingConfigurationResource(ctx context.Context) (resource.Resource, error
 		"/properties/Password",
 		"/properties/ScalingGroupId",
 		"/properties/ProjectName",
-	})
-	opts = opts.WithCollectionIdentities([]generic.CollectionIdentity{
-		{
-			PropertyPath: "/Volumes",
-			IdentifierPaths: []string{
-				"/Size",
-				"/VolumeType",
-			},
-			UniqueItems: false,
-		},
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_vke_nodepool_scaling_policy.example "scaling_policy_id|cluster_id|node_pool_id"

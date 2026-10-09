@@ -51,6 +51,23 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Allowlist ID list permitted for access.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AvailableCrossRegions
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "List of cross-region backup destination regions.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"available_cross_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of cross-region backup destination regions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BackupUse
 		// Cloud Control resource type schema:
 		//
@@ -316,6 +333,50 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Creation time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CrossBackupPolicy
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Cross-region backup policy.",
+		//	  "properties": {
+		//	    "BackupEnabled": {
+		//	      "description": "Whether to enable cross-region backup. The values are as follows: true: Cross-region backup is enabled. false: Cross-region backup is disabled.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "CrossBackupRegion": {
+		//	      "description": "ID of the cross-region backup destination region. This parameter is required when BackupEnabled is set to true.",
+		//	      "type": "string"
+		//	    },
+		//	    "Retention": {
+		//	      "description": "Number of days to retain cross-region backups. The valid range is 7–1825 days. The default value is 7.",
+		//	      "maximum": 1825,
+		//	      "minimum": 7,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cross_backup_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BackupEnabled
+				"backup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable cross-region backup. The values are as follows: true: Cross-region backup is enabled. false: Cross-region backup is disabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CrossBackupRegion
+				"cross_backup_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ID of the cross-region backup destination region. This parameter is required when BackupEnabled is set to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Retention
+				"retention": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Number of days to retain cross-region backups. The valid range is 7–1825 days. The default value is 7.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Cross-region backup policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBEngineVersion
@@ -731,6 +792,110 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Password for the high-privilege account. Password rules: 8–32 characters; must include at least three of the following: uppercase letters, lowercase letters, numbers, special characters. Allowed special characters: !@#$%^&*()_+-=.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TDEConfig
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance TDE configuration.",
+		//	  "properties": {
+		//	    "Certificate": {
+		//	      "description": "Certificate file used for TDE encryption. You can enter a TOS path in the format \u003cendpoint\u003e:\u003cbucket\u003e:\u003cxxx.cer\u003e. Valid only when TDEMode is set to User_Default.",
+		//	      "type": "string"
+		//	    },
+		//	    "DBStatus": {
+		//	      "description": "Database encryption status.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "properties": {
+		//	          "DBName": {
+		//	            "description": "Database name.",
+		//	            "type": "string"
+		//	          },
+		//	          "Enable": {
+		//	            "description": "Whether encryption is enabled. true: The database is encrypted. false: The database is decrypted.",
+		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DBName",
+		//	          "Enable"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Password": {
+		//	      "description": "Password for the private key of the certificate used in TDE encryption. Valid only when TDEMode is set to User_Default. The password must be 8–32 characters long and can only contain uppercase and lowercase letters, numbers, and special characters ~!@#$%^\u0026*()-_+=?. It must include at least three of the following: uppercase letters, lowercase letters, numbers, or special characters. Note: This is only valid when the TDEMode parameter is set to User_Default.",
+		//	      "maxLength": 32,
+		//	      "minLength": 8,
+		//	      "type": "string"
+		//	    },
+		//	    "PrivateKey": {
+		//	      "description": "Private key for the certificate used in TDE encryption. You can enter a TOS path in the format \u003cendpoint\u003e:\u003cbucket\u003e:\u003cxxx.pvk\u003e. Valid only when TDEMode is set to User_Default.",
+		//	      "type": "string"
+		//	    },
+		//	    "TDEMode": {
+		//	      "description": "Instance TDE encryption certificate generation mode. MSSQL_Default: Encryption certificate generated by SQL Server. User_Default: Custom certificate uploaded by the user.",
+		//	      "type": "string"
+		//	    },
+		//	    "TDEStatus": {
+		//	      "description": "Instance TDE status. Enable: The instance TDE status is enabled. Disable: The instance TDE status is disabled. Currently, only Enable is supported.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tde_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Certificate
+				"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Certificate file used for TDE encryption. You can enter a TOS path in the format <endpoint>:<bucket>:<xxx.cer>. Valid only when TDEMode is set to User_Default.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DBStatus
+				"db_status": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DBName
+							"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Database name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Enable
+							"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Whether encryption is enabled. true: The database is encrypted. false: The database is decrypted.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Database encryption status.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Password
+				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Password for the private key of the certificate used in TDE encryption. Valid only when TDEMode is set to User_Default. The password must be 8–32 characters long and can only contain uppercase and lowercase letters, numbers, and special characters ~!@#$%^&*()-_+=?. It must include at least three of the following: uppercase letters, lowercase letters, numbers, or special characters. Note: This is only valid when the TDEMode parameter is set to User_Default.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateKey
+				"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Private key for the certificate used in TDE encryption. You can enter a TOS path in the format <endpoint>:<bucket>:<xxx.pvk>. Valid only when TDEMode is set to User_Default.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TDEMode
+				"tde_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Instance TDE encryption certificate generation mode. MSSQL_Default: Encryption certificate generated by SQL Server. User_Default: Custom certificate uploaded by the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TDEStatus
+				"tde_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Instance TDE status. Enable: The instance TDE status is enabled. Disable: The instance TDE status is disabled. Currently, only Enable is supported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Instance TDE configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
@@ -846,71 +1011,85 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::RDSMsSQL::Instance").WithTerraformTypeName("volcenginecc_rdsmssql_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":                "Address",
-		"advanced_features":      "AdvancedFeatures",
-		"allow_list_ids":         "AllowListIds",
-		"auto_renew":             "AutoRenew",
-		"backup_use":             "BackupUse",
-		"charge_end_time":        "ChargeEndTime",
-		"charge_info":            "ChargeInfo",
-		"charge_start_time":      "ChargeStartTime",
-		"charge_status":          "ChargeStatus",
-		"charge_type":            "ChargeType",
-		"connection_info":        "ConnectionInfo",
-		"create_time":            "CreateTime",
-		"created_time":           "CreatedTime",
-		"db_engine_version":      "DBEngineVersion",
-		"description":            "Description",
-		"dns_visibility":         "DNSVisibility",
-		"domain":                 "Domain",
-		"eip_id":                 "EipId",
-		"endpoint_id":            "EndpointId",
-		"endpoint_name":          "EndpointName",
-		"endpoint_type":          "EndpointType",
-		"host_name":              "HostName",
-		"inner_version":          "InnerVersion",
-		"instance_category":      "InstanceCategory",
-		"instance_id":            "InstanceId",
-		"instance_name":          "InstanceName",
-		"instance_status":        "InstanceStatus",
-		"instance_type":          "InstanceType",
-		"ip_address":             "IPAddress",
-		"key":                    "Key",
-		"maintenance_time":       "MaintenanceTime",
-		"master_node_id":         "MasterNodeId",
-		"memory":                 "Memory",
-		"network_type":           "NetworkType",
-		"node_detail_info":       "NodeDetailInfo",
-		"node_id":                "NodeId",
-		"node_ip":                "NodeIP",
-		"node_spec":              "NodeSpec",
-		"node_status":            "NodeStatus",
-		"node_type":              "NodeType",
-		"overdue_reclaim_time":   "OverdueReclaimTime",
-		"overdue_time":           "OverdueTime",
-		"period":                 "Period",
-		"period_unit":            "PeriodUnit",
-		"port":                   "Port",
-		"primary_instance_id":    "PrimaryInstanceId",
-		"project_name":           "ProjectName",
-		"read_only_number":       "ReadOnlyNumber",
-		"region_id":              "RegionId",
-		"server_collation":       "ServerCollation",
-		"slow_query_enable":      "SlowQueryEnable",
-		"slow_query_time":        "SlowQueryTime",
-		"storage_space":          "StorageSpace",
-		"storage_type":           "StorageType",
-		"storage_use":            "StorageUse",
-		"subnet_id":              "SubnetId",
-		"super_account_password": "SuperAccountPassword",
-		"tags":                   "Tags",
-		"time_zone":              "TimeZone",
-		"update_time":            "UpdateTime",
-		"updated_time":           "UpdatedTime",
-		"value":                  "Value",
-		"vcpu":                   "VCPU",
-		"vpc_id":                 "VpcId",
-		"zone_id":                "ZoneId",
+		"address":                 "Address",
+		"advanced_features":       "AdvancedFeatures",
+		"allow_list_ids":          "AllowListIds",
+		"auto_renew":              "AutoRenew",
+		"available_cross_regions": "AvailableCrossRegions",
+		"backup_enabled":          "BackupEnabled",
+		"backup_use":              "BackupUse",
+		"certificate":             "Certificate",
+		"charge_end_time":         "ChargeEndTime",
+		"charge_info":             "ChargeInfo",
+		"charge_start_time":       "ChargeStartTime",
+		"charge_status":           "ChargeStatus",
+		"charge_type":             "ChargeType",
+		"connection_info":         "ConnectionInfo",
+		"create_time":             "CreateTime",
+		"created_time":            "CreatedTime",
+		"cross_backup_policy":     "CrossBackupPolicy",
+		"cross_backup_region":     "CrossBackupRegion",
+		"db_engine_version":       "DBEngineVersion",
+		"db_name":                 "DBName",
+		"db_status":               "DBStatus",
+		"description":             "Description",
+		"dns_visibility":          "DNSVisibility",
+		"domain":                  "Domain",
+		"eip_id":                  "EipId",
+		"enable":                  "Enable",
+		"endpoint_id":             "EndpointId",
+		"endpoint_name":           "EndpointName",
+		"endpoint_type":           "EndpointType",
+		"host_name":               "HostName",
+		"inner_version":           "InnerVersion",
+		"instance_category":       "InstanceCategory",
+		"instance_id":             "InstanceId",
+		"instance_name":           "InstanceName",
+		"instance_status":         "InstanceStatus",
+		"instance_type":           "InstanceType",
+		"ip_address":              "IPAddress",
+		"key":                     "Key",
+		"maintenance_time":        "MaintenanceTime",
+		"master_node_id":          "MasterNodeId",
+		"memory":                  "Memory",
+		"network_type":            "NetworkType",
+		"node_detail_info":        "NodeDetailInfo",
+		"node_id":                 "NodeId",
+		"node_ip":                 "NodeIP",
+		"node_spec":               "NodeSpec",
+		"node_status":             "NodeStatus",
+		"node_type":               "NodeType",
+		"overdue_reclaim_time":    "OverdueReclaimTime",
+		"overdue_time":            "OverdueTime",
+		"password":                "Password",
+		"period":                  "Period",
+		"period_unit":             "PeriodUnit",
+		"port":                    "Port",
+		"primary_instance_id":     "PrimaryInstanceId",
+		"private_key":             "PrivateKey",
+		"project_name":            "ProjectName",
+		"read_only_number":        "ReadOnlyNumber",
+		"region_id":               "RegionId",
+		"retention":               "Retention",
+		"server_collation":        "ServerCollation",
+		"slow_query_enable":       "SlowQueryEnable",
+		"slow_query_time":         "SlowQueryTime",
+		"storage_space":           "StorageSpace",
+		"storage_type":            "StorageType",
+		"storage_use":             "StorageUse",
+		"subnet_id":               "SubnetId",
+		"super_account_password":  "SuperAccountPassword",
+		"tags":                    "Tags",
+		"tde_config":              "TDEConfig",
+		"tde_mode":                "TDEMode",
+		"tde_status":              "TDEStatus",
+		"time_zone":               "TimeZone",
+		"update_time":             "UpdateTime",
+		"updated_time":            "UpdatedTime",
+		"value":                   "Value",
+		"vcpu":                    "VCPU",
+		"vpc_id":                  "VpcId",
+		"zone_id":                 "ZoneId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

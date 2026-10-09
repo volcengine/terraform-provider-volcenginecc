@@ -1,0 +1,183 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AccountAlias",
+    "/properties/Relation",
+    "/properties/SubAccountID"
+  ],
+  "definitions": {
+    "AuthInfo": {
+      "properties": {
+        "AuthID": {
+          "description": "Financial relationship authorization ID.",
+          "type": "string"
+        },
+        "AuthList": {
+          "description": "Authorization list, separated by commas. Permission points are as follows: 1 Allow sub-account to share contract discounts of the main account; 2 Allow main account to view the sub-account's fund balance; 3 Allow main account to allocate and reclaim credit limits for the sub-account; 4 Allow main account to view the sub-account's billing information; 5 Allow main account to assist the sub-account with invoice management.",
+          "insertionOrder": false,
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "AuthStatus": {
+          "description": "Authorization status enumeration values. 100: Authorization in progress; 200: Authorization established; 250: Authorization change rejected by sub-account; 300: Authorization change canceled by main account; 400: Authorization revoked.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Enterprise financial management provides multi-account enterprise customers with a cloud-based, cross-account solution for integrated business and fulfillment (funds, invoices, billing) management.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Relation",
+      "/properties/SubAccountID"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "billing:CreateFinancialRelation",
+        "billing:ListFinancialRelation"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "billing:DeleteFinancialRelation",
+        "billing:CancelInvitation",
+        "billing:ListFinancialRelation"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "billing:ListFinancialRelation"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "billing:ListFinancialRelation"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "billing:UpdateAuth",
+        "billing:CancelInvitation",
+        "billing:ListFinancialRelation"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/SubAccountID"
+  ],
+  "properties": {
+    "AccountAlias": {
+      "description": "Display name, used for page display to clarify account usage scenarios.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "AuthInfo": {
+      "description": "Financial relationship authorization point.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AuthInfo"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AuthListStr": {
+      "description": "Authorization list, separated by commas. Permission points are as follows: 1 Allow sub-account to share contract discounts of the main account; 2 Allow main account to view the sub-account's fund balance; 3 Allow main account to allocate and reclaim credit limits for the sub-account; 4 Allow main account to view the sub-account's billing information; 5 Allow main account to assist the sub-account with invoice management.",
+      "type": "string"
+    },
+    "CancelInvitation": {
+      "description": "Cancel authorization invitation. false: Do not cancel; true: Cancel. To initiate a new authorization invitation, please cancel the existing one first.",
+      "type": "boolean"
+    },
+    "Filiation": {
+      "description": "Main-sub relationship enumeration values. 1: Main; 2: Sub.",
+      "enum": [
+        1,
+        2
+      ],
+      "type": "integer"
+    },
+    "FiliationDesc": {
+      "description": "Description of main-sub relationship.",
+      "type": "string"
+    },
+    "MajorAccountID": {
+      "description": "Main account UID.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "MajorAccountName": {
+      "description": "Main account name.",
+      "type": "string"
+    },
+    "Relation": {
+      "description": "Relationship type. Currently, only Enterprise Finance is supported: 1 Financial Custody; 4 Financial Management.",
+      "enum": [
+        1,
+        4
+      ],
+      "type": "integer"
+    },
+    "RelationDesc": {
+      "description": "Description of relationship type.",
+      "type": "string"
+    },
+    "RelationID": {
+      "description": "Relationship ID.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Financial relationship status enumeration values. 100: In progress; 200: Established; 250: Rejected; 300: Canceled; 400: Revoked; 500: Deleted (not visible on the page).",
+      "semantic": "status",
+      "type": "integer"
+    },
+    "StatusDesc": {
+      "description": "Description of financial relationship status.",
+      "type": "string"
+    },
+    "SubAccountID": {
+      "description": "Sub-account UID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "SubAccountName": {
+      "description": "Sub-account name.",
+      "type": "string"
+    },
+    "UpdatedTime": {
+      "description": "Update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/RelationID",
+    "/properties/Filiation",
+    "/properties/FiliationDesc",
+    "/properties/MajorAccountID",
+    "/properties/MajorAccountName",
+    "/properties/RelationDesc",
+    "/properties/Status",
+    "/properties/StatusDesc",
+    "/properties/SubAccountName",
+    "/properties/UpdatedTime",
+    "/properties/AuthInfo"
+  ],
+  "required": [
+    "SubAccountID",
+    "Relation"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Billing::FinancialRelation",
+  "writeOnlyProperties": [
+    "/properties/AuthListStr",
+    "/properties/CancelInvitation"
+  ]
+}

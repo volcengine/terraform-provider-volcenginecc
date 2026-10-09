@@ -288,6 +288,7 @@
     }
   },
   "readOnlyProperties": [
+    "/properties/Endpoints",
     "/properties/UsedColdStorage",
     "/properties/PrimarySubnetId",
     "/properties/UsedStorage",

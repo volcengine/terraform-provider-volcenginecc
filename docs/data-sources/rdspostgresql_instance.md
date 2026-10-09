@@ -48,6 +48,7 @@ Data Source schema for Volcengine::RDSPostgreSQL::Instance
 - `storage_wal_use` (Number) Used WAL file space of the instance's primary node. Unit: Byte
 - `subnet_id` (String) Subnet ID
 - `tags` (Attributes Set) Tag information of the cloud disk (see [below for nested schema](#nestedatt--tags))
+- `tde_enable` (Boolean) Specifies whether to enable the Transparent Data Encryption (TDE) feature. The default value is false (disabled). This feature can only be enabled when creating an instance, and is supported only for PostgreSQL 17 with local SSD storage. Once enabled, it cannot be disabled.
 - `update_time` (String) Instance update time
 - `vcpu` (Number) CPU size. For example: 1 means 1U
 - `vpc_id` (String) Use this parameter to specify the private network for the instance

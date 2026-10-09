@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_transitrouter_transit_router_forward_policy_entry.example "transit_router_forward_policy_table_id|transit_router_forward_policy_entry_id"
