@@ -1695,16 +1695,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// RoleNames is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryNetworkInterfaces
 		// Cloud Control resource type schema:
 		//
 		//	{
 		//	  "description": "Auxiliary network interface card of the instance.",
-		//	  "elementIdentifier": [
-		//	    "/SubnetId",
-		//	    "/PrimaryIpAddress"
-		//	  ],
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "Instance network interface.",
@@ -1874,6 +1871,26 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ShowRoleNames
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "IAM role name bound to the instance.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"show_role_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "IAM role name bound to the instance.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SpotPriceLimit
@@ -2385,6 +2402,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids":              "SecurityGroupIds",
 		"security_protection_instance_id": "SecurityProtectionInstanceId",
 		"security_protection_types":       "SecurityProtectionTypes",
+		"show_role_names":                 "ShowRoleNames",
 		"size":                            "Size",
 		"snapshot_id":                     "SnapshotId",
 		"spot_price_limit":                "SpotPriceLimit",
@@ -2440,6 +2458,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SystemVolume/ExtraPerformanceThroughputMB",
 		"/properties/SystemVolume/ExtraPerformanceTypeId",
 		"/properties/SystemVolume/SnapshotId",
+		"/properties/RoleNames",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -2467,6 +2486,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/KeyPair/KeyPairId",
 		"/properties/OperationSystem",
 		"/properties/VpcId",
+		"/properties/ShowRoleNames",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -2511,16 +2531,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/EipAddress/SecurityProtectionTypes",
 		"/properties/HpcClusterId",
 		"/properties/Image/SecurityEnhancementStrategy",
-	})
-	opts = opts.WithCollectionIdentities([]generic.CollectionIdentity{
-		{
-			PropertyPath: "/SecondaryNetworkInterfaces",
-			IdentifierPaths: []string{
-				"/SubnetId",
-				"/PrimaryIpAddress",
-			},
-			UniqueItems: false,
-		},
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

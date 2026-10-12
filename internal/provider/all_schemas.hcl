@@ -1260,3 +1260,50 @@ resource_schema "volcengine_waf_custom_page" {
   cloudcontrol_type_name = "Volcengine::WAF::CustomPage"
 }
 
+resource_schema "volcengine_vke_nodepool_scaling_policy" {
+  cloudcontrol_type_name = "Volcengine::VKE::NodepoolScalingPolicy"
+}
+
+resource_schema "volcengine_vpc_ipam_resource_discovery" {
+  cloudcontrol_type_name = "Volcengine::VPC::IPAMResourceDiscovery"
+}
+
+resource_schema "volcengine_transitrouter_transit_router_route_policy_table" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::TransitRouterRoutePolicyTable"
+}
+
+resource_schema "volcengine_transitrouter_transit_router_forward_policy_entry" {
+  cloudcontrol_type_name = "Volcengine::TransitRouter::TransitRouterForwardPolicyEntry"
+}
+
+resource_schema "volcengine_billing_financial_relation" {
+  cloudcontrol_type_name = "Volcengine::Billing::FinancialRelation"
+}
+
+resource_schema "volcengine_waf_bot_analyse_protect_rule" {
+  cloudcontrol_type_name = "Volcengine::WAF::BotAnalyseProtectRule"
+}
+
+resource_schema "volcengine_waf_custom_bot" {
+  cloudcontrol_type_name = "Volcengine::WAF::CustomBot"
+}
+
+resource_schema "volcengine_securitycenter_agent" {
+  cloudcontrol_type_name = "Volcengine::SecurityCenter::Agent"
+}
+
+resource_schema "volcengine_tidb_instance" {
+  cloudcontrol_type_name = "Volcengine::TiDB::Instance"
+}
+
+resource_schema "volcengine_tidb_branch" {
+  cloudcontrol_type_name = "Volcengine::TiDB::Branch"
+}
+
+resource_schema "volcengine_cloudmonitor_object_group" {
+  cloudcontrol_type_name = "Volcengine::CloudMonitor::ObjectGroup"
+}
+
+resource_schema "volcengine_cloudmonitor_alert_template" {
+  cloudcontrol_type_name = "Volcengine::CloudMonitor::AlertTemplate"
+}

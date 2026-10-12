@@ -40,27 +40,27 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Node pool scaling policy configuration.",
 		//	  "properties": {
 		//	    "DesiredReplicas": {
-		//	      "description": "Configure the expected number of nodes in the node pool",
+		//	      "description": "Configure the expected number of nodes in the node pool. Value description: Default is 0. Range: 0–2000. Note: When auto scaling is enabled for the node pool, DesiredReplicas must be greater than or equal to MinReplicas and less than or equal to MaxReplicas.",
 		//	      "type": "integer"
 		//	    },
 		//	    "Enabled": {
-		//	      "description": "Configure the node pool auto scaling feature switch. Parameter values: false: disabled. true: enabled.",
+		//	      "description": "Configure the node pool auto scaling feature switch. Parameter values: false (default): disabled. true: enabled.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "MaxReplicas": {
-		//	      "description": "Configure the maximum number of nodes in the node pool",
+		//	      "description": "Set the maximum number of nodes in the node pool. This takes effect only when auto scaling is enabled (Enabled=true). The number of nodes will not exceed this value during node pool scaling.",
 		//	      "type": "integer"
 		//	    },
 		//	    "MinReplicas": {
-		//	      "description": "Minimum number of nodes configured for the node pool",
+		//	      "description": "Minimum number of nodes in the node pool. Only effective when node pool auto scaling is enabled (Enabled=true). The number of nodes will not fall below this value during auto scaling.",
 		//	      "type": "integer"
 		//	    },
 		//	    "Priority": {
-		//	      "description": "Priority",
+		//	      "description": "Elastic scaling priority of the node pool. Effective only when SubnetPolicy=Priority. The higher the value, the higher the priority.",
 		//	      "type": "integer"
 		//	    },
 		//	    "ScalingGroupId": {
-		//	      "description": "Scaling group ID",
+		//	      "description": "Scaling group ID associated with the node pool.",
 		//	      "type": "string"
 		//	    },
 		//	    "SubnetPolicy": {
@@ -78,7 +78,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DesiredReplicas
 				"desired_replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Configure the expected number of nodes in the node pool",
+					Description: "Configure the expected number of nodes in the node pool. Value description: Default is 0. Range: 0–2000. Note: When auto scaling is enabled for the node pool, DesiredReplicas must be greater than or equal to MinReplicas and less than or equal to MaxReplicas.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -87,7 +87,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Configure the node pool auto scaling feature switch. Parameter values: false: disabled. true: enabled.",
+					Description: "Configure the node pool auto scaling feature switch. Parameter values: false (default): disabled. true: enabled.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -96,7 +96,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MaxReplicas
 				"max_replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Configure the maximum number of nodes in the node pool",
+					Description: "Set the maximum number of nodes in the node pool. This takes effect only when auto scaling is enabled (Enabled=true). The number of nodes will not exceed this value during node pool scaling.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -105,7 +105,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MinReplicas
 				"min_replicas": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Minimum number of nodes configured for the node pool",
+					Description: "Minimum number of nodes in the node pool. Only effective when node pool auto scaling is enabled (Enabled=true). The number of nodes will not fall below this value during auto scaling.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -114,7 +114,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Priority
 				"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Priority",
+					Description: "Elastic scaling priority of the node pool. Effective only when SubnetPolicy=Priority. The higher the value, the higher the priority.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -123,7 +123,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ScalingGroupId
 				"scaling_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Scaling group ID",
+					Description: "Scaling group ID associated with the node pool.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -157,11 +157,11 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "ID of the cluster where the node pool is located",
+		//	  "description": "ID of the cluster where the node pool resides. You can call the ListClusters API to obtain the cluster ID. Note: The cluster must be in {Running,[Ok]} or {Updating,[Progressing]} status.",
 		//	  "type": "string"
 		//	}
 		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the cluster where the node pool is located",
+			Description: "ID of the cluster where the node pool resides. You can call the ListClusters API to obtain the cluster ID. Note: The cluster must be in {Running,[Ok]} or {Updating,[Progressing]} status.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
@@ -185,14 +185,14 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Kubernetes-related configuration for the node pool",
 		//	  "properties": {
 		//	    "AutoSyncDisabled": {
-		//	      "description": "Disable automatic synchronization of labels and taints to existing nodes. Parameter values: true: disable (turn off automatic sync). false: do not disable (turn on automatic sync)",
+		//	      "description": "Disable automatic synchronization of labels and taints to existing nodes. Parameter value description: true: Disable, i.e., turn off automatic synchronization. false: (Default) Do not disable, i.e., enable automatic synchronization.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ContainerdConfig": {
 		//	      "description": "Node pool Containerd configuration",
 		//	      "properties": {
 		//	        "InsecureRegistries": {
-		//	          "description": "Specify the container image repository address to skip certificate verification.",
+		//	          "description": "Specify container image registry addresses to skip certificate authentication. The format is a domain name or IP address without protocol, and can include a port number, for example: example.com or example.com:8080. Supports up to 10 domain names or IP addresses.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -207,7 +207,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Container image repository proxy configuration",
 		//	            "properties": {
 		//	              "ProxyEndpoints": {
-		//	                "description": "Proxy address.",
+		//	                "description": "Proxy address. Format: domain name or IP address with protocol, may include port number, for example: https://example.com or https://example.com:8080. Supports up to 5 domain names or IP addresses.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -216,7 +216,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	                "uniqueItems": true
 		//	              },
 		//	              "Registry": {
-		//	                "description": "Container image repository address.",
+		//	                "description": "Container image repository address. The format is a domain name or IP address without protocol, and may include a port number, for example: example.com or example.com:8080.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -229,18 +229,18 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Cordon": {
-		//	      "description": "Node blocking configuration. Parameter values: false: not blocked; true: blocked",
+		//	      "description": "Node blocking configuration. Options: false: (default) Not blocked. true: Blocked. Note: When updating the node pool (UpdateNodePoolConfig), if no parameter value is provided, the original parameter configuration is retained.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "KubeletConfig": {
-		//	      "description": "Kubelet component configuration",
+		//	      "description": "Custom kubelet parameter configuration for nodes in the node pool, used to adjust node behavior.",
 		//	      "properties": {
 		//	        "CpuManagerPolicy": {
-		//	          "description": "Configure kubelet CpuManagerPolicy. Supports none and static policies",
+		//	          "description": "CPU manager policy. Options: none: Default policy. static: Allows Pods with certain resource characteristics on the node to have stronger CPU affinity and exclusivity.",
 		//	          "type": "string"
 		//	        },
 		//	        "EvictionHard": {
-		//	          "description": "Set of hard thresholds for triggering Pod eviction",
+		//	          "description": "A set of hard thresholds that trigger Pod eviction. For detailed parameter explanations, see the Kubernetes official documentation (https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/). To explicitly disable, set the threshold for any resource to 0% or 100%. Default values: memory.available: \"100Mi\", nodefs.available: \"10%\", nodefs.inodesFree: \"5%\", imagefs.available: \"15%\".",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "description": "Set of hard thresholds for triggering Pod eviction",
@@ -256,7 +256,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "Value": {
-		//	                "description": "Hard threshold value.",
+		//	                "description": "Hard threshold value. Supports integer or percentage format: Integer format specifies the actual resource threshold in bytes, for example, 100Mi. Percentage format specifies the resource threshold as a proportion, range: 0%–100%, for example, 20%. To explicitly disable, set the threshold to 0% or 100% for any resource.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -270,33 +270,33 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "FeatureGates": {
-		//	          "description": "Feature gate",
+		//	          "description": "Feature gates, which are a set of key-value pairs that describe Kubernetes features. Note: These feature gates are only supported in clusters running Kubernetes v1.26 or earlier.",
 		//	          "properties": {
 		//	            "InPlacePodVerticalScaling": {
-		//	              "description": "Enable local vertical Pod autoscaling feature toggle",
+		//	              "description": "Enable Pod vertical scaling. Options: true: enabled. false: disabled.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "QoSResourceManager": {
-		//	              "description": "Whether to enable the QoSResourceManager feature switch. Values: - true enabled; - false disabled",
+		//	              "description": "Whether to enable the QoS resource manager to support micro-topology scheduling. Values: true: Enable the QoS resource manager. false: (default) Do not enable the QoS resource manager.",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "KubeApiBurst": {
-		//	          "description": "Maximum burst request rate sent to the API server per second. Excludes events and node heartbeat APIs, whose rate limits are controlled by a different set of flags",
+		//	          "description": "Maximum burst request count sent to APIServer per second. Integer value, range: 1–100, default is 10. Note: This value must be greater than or equal to the value of the KubeApiQps parameter.",
 		//	          "maximum": 100,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "KubeApiQps": {
-		//	          "description": "Queries per second (QPS) for communication with apiserver. Events and node heartbeat APIs are not included; their rate limits are controlled by a different set of flags.",
+		//	          "description": "Number of queries per second (QPS) to APIServer. Integer, range: 1–50, default is 5.",
 		//	          "maximum": 50,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "KubeReserved": {
-		//	          "description": "Resources reserved for Kubernetes system components on the node. By default, half of the default value in the node reserved resource policy is reserved.",
+		//	          "description": "Resources reserved for Kubernetes system components on the node. By default, reserves half of the default value specified in the node resource reservation policy.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "properties": {
@@ -305,7 +305,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "Quantity": {
-		//	                "description": "Specify the resource quantity. - For cpu, example value: 200m - For memory, example value: 1G",
+		//	                "description": "Specify the resource quantity. For cpu, example value is 200m. For memory, example value is 1G.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -315,27 +315,27 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": true
 		//	        },
 		//	        "MaxPods": {
-		//	          "description": "Configure the maximum number of Pods supported by kubelet",
+		//	          "description": "Maximum number of Pods supported by the node. Default is 110.",
 		//	          "type": "integer"
 		//	        },
 		//	        "RegistryBurst": {
-		//	          "description": "Set the maximum number of burst image pulls. Temporarily allows the number of image pulls specified by this parameter, provided it does not exceed the RegistryPullQps setting",
+		//	          "description": "Burst threshold for pulling images from the image registry in the cluster. Integer value, range: 1–100, default is 5. Note: Only required when RegistryPullQps is greater than 0, and the value must be greater than or equal to the value of the RegistryPullQps parameter.",
 		//	          "maximum": 100,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "RegistryPullQps": {
-		//	          "description": "Used to limit the QPS cap for the image repository",
+		//	          "description": "QPS threshold for pulling images from the image registry in the cluster. Integer value, range: 1–50, default is 2.",
 		//	          "maximum": 50,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
 		//	        "SerializeImagePulls": {
-		//	          "description": "Pull images sequentially",
+		//	          "description": "Enable serial image pulling. Values: true: Pull images serially. false: (Default) Pull images in parallel to speed up Pod startup.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "SystemReserved": {
-		//	          "description": "Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is used for resource reservation.",
+		//	          "description": "Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is allocated.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "properties": {
@@ -344,7 +344,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "Quantity": {
-		//	                "description": "Resource quantity for the specified resource. - For cpu, example value: 200m. - For memory, example value: 1G.",
+		//	                "description": "Specify the resource quantity. For cpu, example value is 200m. For memory, example value is 1G.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -375,17 +375,17 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Labels": {
-		//	      "description": "Kubernetes label information for node pools/nodes",
+		//	      "description": "Kubernetes label information for the node pool/nodes. Up to 20 labels can be specified. Note: The node pool centrally manages node label configurations, so label information is synchronized to all nodes in the pool. When labels change, the original label configuration will be overwritten.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Kubernetes label information for node pools/nodes",
 		//	        "properties": {
 		//	          "Key": {
-		//	            "description": "Tag key.",
+		//	            "description": "Tag key. A valid tag key consists of two segments: prefix and name, separated by a slash (/). The name is required and supports English letters (upper and lower case), numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and cannot exceed 63 characters. The prefix is optional; if specified, it must be a DNS subdomain: a series of DNS labels separated by periods (.), not exceeding 253 characters. The total length of prefix and name must not exceed 82 characters.",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "Label value.",
+		//	            "description": "Tag value. Maximum length is 63 characters (can be empty). Must start and end with English letters or numbers. Supports special characters: hyphen (-), underscore (_), period (.).",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -395,7 +395,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "NamePrefix": {
-		//	      "description": "Prefix for node object metadata name in Kubernetes",
+		//	      "description": "Prefix for the metadata name of node objects in Kubernetes. Disabled by default. If set, it is enabled and will affect the metadata.name prefix displayed in the Kubernetes Node Manifest file. Prefix validation rules: Supports lowercase English letters, numbers, hyphens (-), and periods (.); must start with a lowercase English letter or number; length must be 1–48 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "NameSuffix": {
@@ -403,13 +403,14 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "NameUseHostname": {
-		//	      "description": "Whether the node object metadata name in Kubernetes uses the ECS host name. Values: true: use ECS host name as node name; false: do not use ECS host name as node name",
+		//	      "description": "Whether to use the ECS host name as the metadata name for node objects in Kubernetes. Options: true: Use ECS host name as node name. false: Do not use ECS host name as node name. Note: This setting takes precedence over NamePrefix and NameSuffix.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Taints": {
-		//	      "description": "Kubernetes taint information for node pools/nodes",
+		//	      "description": "Kubernetes taints information for the node pool/nodes. You can specify up to 20 taints. Note: The node pool manages taint configuration uniformly, so taint information is synchronized to all nodes in the pool. When taints are changed, the original taint configuration will be overwritten.",
 		//	      "insertionOrder": false,
 		//	      "items": {
+		//	        "description": "Kubernetes taint information for node pools/nodes.",
 		//	        "properties": {
 		//	          "Effect": {
 		//	            "description": "Taint effect. Values: NoSchedule: (default) Do not schedule. NoExecute: Evict pods that do not tolerate the taint. PreferNoSchedule: Prefer not to schedule.",
@@ -421,11 +422,11 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Key": {
-		//	            "description": "Taint key.",
+		//	            "description": "Taint key. A valid taint key consists of two segments: prefix and name, separated by a slash (/). The name is required and supports English letters (upper and lower case), numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and cannot exceed 63 characters. The prefix is optional; if specified, it must be a DNS subdomain: a series of DNS labels separated by periods (.), not exceeding 253 characters. The total length of prefix and name must not exceed 82 characters.",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "Taint value",
+		//	            "description": "Taint value. Maximum length is 63 characters (can be empty). Must start and end with an English letter (upper or lower case) or a number. Supports special characters: hyphen (-), underscore (_), and period (.).",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -441,7 +442,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoSyncDisabled
 				"auto_sync_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Disable automatic synchronization of labels and taints to existing nodes. Parameter values: true: disable (turn off automatic sync). false: do not disable (turn on automatic sync)",
+					Description: "Disable automatic synchronization of labels and taints to existing nodes. Parameter value description: true: Disable, i.e., turn off automatic synchronization. false: (Default) Do not disable, i.e., enable automatic synchronization.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -454,7 +455,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						// Property: InsecureRegistries
 						"insecure_registries": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "Specify the container image repository address to skip certificate verification.",
+							Description: "Specify container image registry addresses to skip certificate authentication. The format is a domain name or IP address without protocol, and can include a port number, for example: example.com or example.com:8080. Supports up to 10 domain names or IP addresses.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -468,7 +469,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									// Property: ProxyEndpoints
 									"proxy_endpoints": schema.SetAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "Proxy address.",
+										Description: "Proxy address. Format: domain name or IP address with protocol, may include port number, for example: https://example.com or https://example.com:8080. Supports up to 5 domain names or IP addresses.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -477,7 +478,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Registry
 									"registry": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Container image repository address.",
+										Description: "Container image repository address. The format is a domain name or IP address without protocol, and may include a port number, for example: example.com or example.com:8080.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -503,7 +504,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Cordon
 				"cordon": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Node blocking configuration. Parameter values: false: not blocked; true: blocked",
+					Description: "Node blocking configuration. Options: false: (default) Not blocked. true: Blocked. Note: When updating the node pool (UpdateNodePoolConfig), if no parameter value is provided, the original parameter configuration is retained.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -515,7 +516,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CpuManagerPolicy
 						"cpu_manager_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Configure kubelet CpuManagerPolicy. Supports none and static policies",
+							Description: "CPU manager policy. Options: none: Default policy. static: Allows Pods with certain resource characteristics on the node to have stronger CPU affinity and exclusivity.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -546,7 +547,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Value
 									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Hard threshold value.",
+										Description: "Hard threshold value. Supports integer or percentage format: Integer format specifies the actual resource threshold in bytes, for example, 100Mi. Percentage format specifies the resource threshold as a proportion, range: 0%–100%, for example, 20%. To explicitly disable, set the threshold to 0% or 100% for any resource.",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -558,7 +559,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "Set of hard thresholds for triggering Pod eviction\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+							Description: "A set of hard thresholds that trigger Pod eviction. For detailed parameter explanations, see the Kubernetes official documentation (https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/). To explicitly disable, set the threshold for any resource to 0% or 100%. Default values: memory.available: \"100Mi\", nodefs.available: \"10%\", nodefs.inodesFree: \"5%\", imagefs.available: \"15%\".\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -570,7 +571,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: InPlacePodVerticalScaling
 								"in_place_pod_vertical_scaling": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Enable local vertical Pod autoscaling feature toggle",
+									Description: "Enable Pod vertical scaling. Options: true: enabled. false: disabled.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -579,7 +580,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: QoSResourceManager
 								"qo_s_resource_manager": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Whether to enable the QoSResourceManager feature switch. Values:   - true enabled;   - false disabled",
+									Description: "Whether to enable the QoS resource manager to support micro-topology scheduling. Values: true: Enable the QoS resource manager. false: (default) Do not enable the QoS resource manager.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -587,7 +588,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Feature gate",
+							Description: "Feature gates, which are a set of key-value pairs that describe Kubernetes features. Note: These feature gates are only supported in clusters running Kubernetes v1.26 or earlier.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -596,7 +597,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: KubeApiBurst
 						"kube_api_burst": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Maximum burst request rate sent to the API server per second. Excludes events and node heartbeat APIs, whose rate limits are controlled by a different set of flags",
+							Description: "Maximum burst request count sent to APIServer per second. Integer value, range: 1–100, default is 10. Note: This value must be greater than or equal to the value of the KubeApiQps parameter.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -608,7 +609,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: KubeApiQps
 						"kube_api_qps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Queries per second (QPS) for communication with apiserver. Events and node heartbeat APIs are not included; their rate limits are controlled by a different set of flags.",
+							Description: "Number of queries per second (QPS) to APIServer. Integer, range: 1–50, default is 5.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -633,7 +634,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Quantity
 									"quantity": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Specify the resource quantity.   - For cpu, example value: 200m   - For memory, example value: 1G",
+										Description: "Specify the resource quantity. For cpu, example value is 200m. For memory, example value is 1G.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -642,7 +643,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "Resources reserved for Kubernetes system components on the node. By default, half of the default value in the node reserved resource policy is reserved.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+							Description: "Resources reserved for Kubernetes system components on the node. By default, reserves half of the default value specified in the node resource reservation policy.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -651,7 +652,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: MaxPods
 						"max_pods": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Configure the maximum number of Pods supported by kubelet",
+							Description: "Maximum number of Pods supported by the node. Default is 110.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -660,7 +661,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RegistryBurst
 						"registry_burst": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Set the maximum number of burst image pulls. Temporarily allows the number of image pulls specified by this parameter, provided it does not exceed the RegistryPullQps setting",
+							Description: "Burst threshold for pulling images from the image registry in the cluster. Integer value, range: 1–100, default is 5. Note: Only required when RegistryPullQps is greater than 0, and the value must be greater than or equal to the value of the RegistryPullQps parameter.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -672,7 +673,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RegistryPullQps
 						"registry_pull_qps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Used to limit the QPS cap for the image repository",
+							Description: "QPS threshold for pulling images from the image registry in the cluster. Integer value, range: 1–50, default is 2.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -684,7 +685,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SerializeImagePulls
 						"serialize_image_pulls": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Pull images sequentially",
+							Description: "Enable serial image pulling. Values: true: Pull images serially. false: (Default) Pull images in parallel to speed up Pod startup.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -706,7 +707,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Quantity
 									"quantity": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Resource quantity for the specified resource.   - For cpu, example value: 200m.   - For memory, example value: 1G.",
+										Description: "Specify the resource quantity. For cpu, example value is 200m. For memory, example value is 1G.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -715,7 +716,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is used for resource reservation.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+							Description: "Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is allocated.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -755,7 +756,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Kubelet component configuration",
+					Description: "Custom kubelet parameter configuration for nodes in the node pool, used to adjust node behavior.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -768,7 +769,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Tag key.",
+								Description: "Tag key. A valid tag key consists of two segments: prefix and name, separated by a slash (/). The name is required and supports English letters (upper and lower case), numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and cannot exceed 63 characters. The prefix is optional; if specified, it must be a DNS subdomain: a series of DNS labels separated by periods (.), not exceeding 253 characters. The total length of prefix and name must not exceed 82 characters.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -777,7 +778,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Label value.",
+								Description: "Tag value. Maximum length is 63 characters (can be empty). Must start and end with English letters or numbers. Supports special characters: hyphen (-), underscore (_), period (.).",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -786,7 +787,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Kubernetes label information for node pools/nodes\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Description: "Kubernetes label information for the node pool/nodes. Up to 20 labels can be specified. Note: The node pool centrally manages node label configurations, so label information is synchronized to all nodes in the pool. When labels change, the original label configuration will be overwritten.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -795,7 +796,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NamePrefix
 				"name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Prefix for node object metadata name in Kubernetes",
+					Description: "Prefix for the metadata name of node objects in Kubernetes. Disabled by default. If set, it is enabled and will affect the metadata.name prefix displayed in the Kubernetes Node Manifest file. Prefix validation rules: Supports lowercase English letters, numbers, hyphens (-), and periods (.); must start with a lowercase English letter or number; length must be 1–48 characters.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -813,7 +814,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NameUseHostname
 				"name_use_hostname": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the node object metadata name in Kubernetes uses the ECS host name. Values: true: use ECS host name as node name; false: do not use ECS host name as node name",
+					Description: "Whether to use the ECS host name as the metadata name for node objects in Kubernetes. Options: true: Use ECS host name as node name. false: Do not use ECS host name as node name. Note: This setting takes precedence over NamePrefix and NameSuffix.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -842,7 +843,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Taint key.",
+								Description: "Taint key. A valid taint key consists of two segments: prefix and name, separated by a slash (/). The name is required and supports English letters (upper and lower case), numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and cannot exceed 63 characters. The prefix is optional; if specified, it must be a DNS subdomain: a series of DNS labels separated by periods (.), not exceeding 253 characters. The total length of prefix and name must not exceed 82 characters.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -851,7 +852,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Taint value",
+								Description: "Taint value. Maximum length is 63 characters (can be empty). Must start and end with an English letter (upper or lower case) or a number. Supports special characters: hyphen (-), underscore (_), and period (.).",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -860,7 +861,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Kubernetes taint information for node pools/nodes\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Description: "Kubernetes taints information for the node pool/nodes. You can specify up to 20 taints. Note: The node pool manages taint configuration uniformly, so taint information is synchronized to all nodes in the pool. When taints are changed, the original taint configuration will be overwritten.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -882,18 +883,18 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Managed node pool configuration",
 		//	  "properties": {
 		//	    "Enabled": {
-		//	      "description": "Enable managed mode for node pool. Options: - true: on - false: off",
+		//	      "description": "Enable managed mode for the node pool. Options: true: Enabled. false: Disabled.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "RemedyConfig": {
-		//	      "description": "Check self-healing configuration.",
+		//	      "description": "Node pool health check and self-healing rule configuration.",
 		//	      "properties": {
 		//	        "Enabled": {
-		//	          "description": "Enable self-healing check",
+		//	          "description": "Whether to enable the self-healing check after enabling managed mode for the node pool. Values: true: enable; false: disable.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "RemedyId": {
-		//	          "description": "Self-healing rule ID",
+		//	          "description": "Self-healing rule ID associated after enabling self-healing check for the node pool.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -906,7 +907,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enable managed mode for node pool. Options:   - true: on   - false: off",
+					Description: "Enable managed mode for the node pool. Options: true: Enabled. false: Disabled.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -918,7 +919,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Enable self-healing check",
+							Description: "Whether to enable the self-healing check after enabling managed mode for the node pool. Values: true: enable; false: disable.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -927,7 +928,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RemedyId
 						"remedy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Self-healing rule ID",
+							Description: "Self-healing rule ID associated after enabling self-healing check for the node pool.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -935,7 +936,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Check self-healing configuration.",
+					Description: "Node pool health check and self-healing rule configuration.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -954,13 +955,13 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Node pool name. The node pool name must be unique within the same cluster. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length limit: 2–64 characters.",
+		//	  "description": "Node pool name. Within the same cluster, node pool names must be unique. Supports English letters (upper and lower case), Chinese characters, numbers, and hyphens (-). Length must be between 2 and 64 characters. Note: The reserved default node pool name vke-default-nodepool cannot be used.",
 		//	  "maxLength": 64,
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Node pool name. The node pool name must be unique within the same cluster. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length limit: 2–64 characters.",
+			Description: "Node pool name. Within the same cluster, node pool names must be unique. Supports English letters (upper and lower case), Chinese characters, numbers, and hyphens (-). Length must be between 2 and 64 characters. Note: The reserved default node pool name vke-default-nodepool cannot be used.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -977,24 +978,24 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Cloud server (ECS) instance configuration in the node pool",
 		//	  "properties": {
 		//	    "AdditionalContainerStorageEnabled": {
-		//	      "description": "Whether the first data disk of the node is configured, formatted, and mounted as the storage directory for container images and logs. Parameter values: false: not configured and formatted; true: configured and formatted",
+		//	      "description": "Whether to configure the first data disk of the node, format it, and mount it to the container and image storage directory (/var/lib/containerd). Options: false: (default) Disabled. true: Enabled. Note: When enabled, at least one data disk must be configured; otherwise, node pool creation will fail. This method will automatically format the first data disk and create the file system.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "AutoRenew": {
-		//	      "description": "Whether the cloud server instance will be automatically renewed upon expiration. Parameter description: true: auto renewal false: no auto renewal This parameter is returned only when InstanceChargeType=PrePaid.",
+		//	      "description": "Whether the ECS instance will be automatically renewed upon expiration. Options: true (default): auto renewal. false: no auto renewal. Only required when InstanceChargeType=PrePaid; otherwise, ignore.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "AutoRenewPeriod": {
-		//	      "description": "Automatic renewal duration for cloud server instances, in months. This parameter is returned only when AutoRenew=true",
+		//	      "description": "ECS instance auto-renewal duration, in months. Values: 1 (default), 2, 3, 6, 12. Only required when AutoRenew=true; otherwise, ignore.",
 		//	      "type": "integer"
 		//	    },
 		//	    "DataVolumes": {
-		//	      "description": "Node data disk configuration.",
+		//	      "description": "Node data disk configuration. You can call the DescribeInstanceTypes API of the cloud server to obtain the matching relationship between ECS instance families and cloud disk specifications.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "properties": {
 		//	          "FileSystem": {
-		//	            "description": "File system. Options: - Ext4 (default) - Xfs",
+		//	            "description": "[Invitation Test · Apply for Trial] File system for the node pool data disk. Values: Ext4 (default), Xfs.",
 		//	            "type": "string"
 		//	          },
 		//	          "MountPoint": {
@@ -1002,7 +1003,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "PlacementGroupId": {
-		//	            "description": "Placement group ID",
+		//	            "description": "Storage placement group ID to which the data disk belongs.",
 		//	            "type": "string"
 		//	          },
 		//	          "Size": {
@@ -1010,15 +1011,15 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "integer"
 		//	          },
 		//	          "SnapshotId": {
-		//	            "description": "Create a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only Ultra SSD and High-performance Cloud Disk support creating disks from snapshots. Only snapshots in the 'available' status can be used to create new disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' status cannot be used to create new disks.",
+		//	            "description": "Snapshot ID used when creating a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only ultra-fast SSDs and efficient cloud disks support creating cloud disks from snapshots. Only snapshots in the 'available' state can be used to create new cloud disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' states cannot be used to create new cloud disks.",
 		//	            "type": "string"
 		//	          },
 		//	          "SubgroupNumber": {
-		//	            "description": "Placement subgroup",
+		//	            "description": "Storage sub-placement group number of the data disk.",
 		//	            "type": "integer"
 		//	          },
 		//	          "Type": {
-		//	            "description": "Disk type: ESSD_PL0: ultra-fast SSD disk with performance level PL0. ESSD_FlexPL: ultra-fast SSD disk with performance level PL1",
+		//	            "description": "Disk types. Cloud disks: ESSD_PL0: Ultra-fast SSD cloud disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD cloud disk, FlexPL specification. Ultra_Disk: [EBS Invitation Test] High-performance SSD cloud disk. TSSD_TL0: Throughput SSD cloud disk, TL0 specification. RSSD_PL0: [EBS Invitation Test] Elastic remote disk, PL0 specification. Local disks: LOCAL_SSD: SSD type local disk. LOCAL_HDD: HDD type local disk. LOCAL_LVM_SSD: SSD LVM logical local disk. LOCAL_SSD_SRIOV: SSD SRIOV local disk.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1028,19 +1029,19 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "DeploymentSetGroupNumber": {
-		//	      "description": "Group number of the instance in the deployment set; 0 means not set",
+		//	      "description": "When the specified deployment set policy is the deployment set group high availability policy, you can use this parameter to specify the group number of the instance in the deployment set. Value range: 1–3. 0 means not set.",
 		//	      "type": "integer"
 		//	    },
 		//	    "DeploymentSetId": {
-		//	      "description": "Deployment Set ID to be added to the instance",
+		//	      "description": "Deployment set ID that nodes in the node pool need to join. You can call the DescribeDeploymentSets API to obtain the deployment set ID.",
 		//	      "type": "string"
 		//	    },
 		//	    "Hostname": {
-		//	      "description": "The host name corresponding to the node.",
+		//	      "description": "Host name corresponding to the node. Supports defining fixed incremental sorting and dynamic expansion sorting. For details on the definition format, see naming format.",
 		//	      "type": "string"
 		//	    },
 		//	    "HpcClusterIds": {
-		//	      "description": "High performance computing cluster ID. When the node pool is configured with high performance computing GPU node types, returns the high performance computing cluster ID",
+		//	      "description": "High Performance Computing Cluster ID. When creating a node pool with a high-performance computing GPU type, you must specify the High Performance Computing Cluster ID, which can be obtained from the 'Instances \u0026 Images \u003e High Performance Computing Cluster' page in the cloud server console. Note: Only one High Performance Computing Cluster ID is supported; ensure the specified cluster and the subnets in SubnetIds are in the same availability zone.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1049,15 +1050,15 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "ImageId": {
-		//	      "description": "Image ID used by the cloud server corresponding to the node",
+		//	      "description": "The image ID used by the ECS instance corresponding to the node. Different image types have different image IDs. For details, see Public Images Supported by Container Service. Note: If you do not specify this parameter, Container Service will assign the veLinux-VKE image ID corresponding to the selected ECS instance type by default. If you specify multiple instance types, this parameter is required.",
 		//	      "type": "string"
 		//	    },
 		//	    "InitializeScript": {
-		//	      "description": "Custom script executed after node creation and initialization. Shell script in Base64 encoding",
+		//	      "description": "Custom script to execute after creating and initializing the node. Supports Shell format and must be Base64-encoded before being passed in. Note: The Base64-encoded length must not exceed 8 KB. If both InitializeScript and PreScript are provided, the total length of both parameters must not exceed 8 KB.",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceChargeType": {
-		//	      "description": "Cloud server instance billing type. Parameter values: PostPaid: pay-as-you-go. PrePaid: subscription (annual/monthly).",
+		//	      "description": "ECS instance billing type. Values: PostPaid (default): pay-as-you-go. PrePaid: subscription.",
 		//	      "enum": [
 		//	        "PostPaid",
 		//	        "PrePaid"
@@ -1065,11 +1066,11 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceName": {
-		//	      "description": "Node (instance) name",
+		//	      "description": "Name of the node (instance). Supports defining fixed incremental sorting and dynamic expansion sorting. For format details, see naming format.",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceTypeIds": {
-		//	      "description": "List of cloud server instance type IDs corresponding to the nodes",
+		//	      "description": "List of instance type IDs for cloud server (ECS) instances corresponding to the nodes. This list serves as the candidate set of instance types when creating nodes in the node pool, not as a fixed quota for each type: the node pool selects instance types from the list based on available inventory and other factors. Different nodes in the same node pool may use different types from the list, or all may use the same type. Each type does not correspond to an independent node count quota. To strictly split node counts by type, create a separate node pool for each type. You can call the ListSupportedResourceTypes API to query the resource types and ranges supported by the cluster instance. Constraints: Up to ten array elements are supported; all types in the list must be consistent, such as all GPU types, all non-GPU types, or all bare metal types; when multiple types are provided, the ImageId parameter is required.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1078,60 +1079,60 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "InstancesDistribution": {
-		//	      "description": "Set the mixed strategy for spot and pay-as-you-go instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo.",
+		//	      "description": "Configure a mixed strategy for spot instances and on-demand instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo.",
 		//	      "properties": {
 		//	        "CapacityRebalance": {
-		//	          "description": "Capacity rebalancing. Value range: - true: enables this feature. When a preemptible instance is about to be reclaimed, proactively creates a new preemptible instance for compensation. - false (default): disables this feature. Waits until the preemptible instance is reclaimed before scaling out to make up the instance count",
+		//	          "description": "Whether to enable capacity rebalancing (on-demand instance supplementation for preemptible capacity). Values: true: enable this feature to proactively create new preemptible instances for compensation before existing preemptible instances are reclaimed; false (default): do not enable this feature, and only scale out to replenish instances after preemptible instances are reclaimed.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "CompensateWithOnDemand": {
-		//	          "description": "On-demand instance fallback feature. Value range: - true: enable this feature; when all preemptible instances fail to purchase due to insufficient inventory or other reasons, attempt to purchase on-demand instances - false (default): disable this feature; only attempt to purchase configured preemptible instances when scaling up",
+		//	          "description": "Enable on-demand instance replacement. Values: true: Enable this feature. When all preemptible instances fail to be purchased due to insufficient inventory or other reasons, attempt to purchase on-demand instances. false: (Default) Do not enable this feature. When scaling out preemptible instances, only the configured preemptible instances are attempted.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "OnDemandBaseCapacity": {
-		//	          "description": "Size of the base capacity. The base capacity is always pay-as-you-go instances. Value range: [0,500], default is 0.",
+		//	          "description": "Base capacity size. The base capacity portion is fixed as on-demand instances. Value range: [0,500], default is 0.",
 		//	          "type": "integer"
 		//	        },
 		//	        "OnDemandPercentageAboveBaseCapacity": {
-		//	          "description": "Proportion of pay-as-you-go instances in the part exceeding the base capacity. Value range: [0, 100]. 0 means only preemptible instances are produced for the part exceeding the base capacity; 100 means only pay-as-you-go instances are produced. Default value is 0.",
+		//	          "description": "Proportion of pay-as-you-go instances in the remaining capacity of the node pool after deducting the base capacity for pay-as-you-go instances. Value range: [0,100]. 0 means only preemptible instances are created for the portion exceeding the base capacity; 100 means only pay-as-you-go instances are created. Default value is 0.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "NamePrefix": {
-		//	      "description": "Node name prefix. An empty string or nil means the node name prefix policy is not enabled.",
+		//	      "description": "Node name prefix. If the value is an empty string or nil, it indicates that the node name prefix policy is not enabled. This policy is not enabled by default. Prefix validation rules: supports uppercase and lowercase English letters, numbers, and hyphens (-); must start with a letter and end with a letter or number; hyphens (-) cannot be used consecutively; length must be between 2 and 51 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "NetworkTrafficMode": {
-		//	      "description": "Network communication mode between nodes",
+		//	      "description": "Network communication mode between nodes. Options: HighPerformance: Communication method based on RDMA for data transmission. Standard: Communication method based on TCP for data transmission.",
 		//	      "type": "string"
 		//	    },
 		//	    "Period": {
-		//	      "description": "Purchase duration for cloud server instances, in months. This parameter is returned only when InstanceChargeType=PrePaid",
+		//	      "description": "ECS instance purchase duration, in months. Values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36. Only required and mandatory when InstanceChargeType=PrePaid.",
 		//	      "type": "integer"
 		//	    },
 		//	    "PreScript": {
-		//	      "description": "Script to execute before deploying the node",
+		//	      "description": "[Invitation Test · Apply for Trial] Script executed before deploying the node. Enter the Shell script encoded in Base64. Note: The length after Base64 encoding must not exceed 8 KB. If both InitializeScript and PreScript are provided, the total length of both parameters must not exceed 8 KB.",
 		//	      "type": "string"
 		//	    },
 		//	    "ProjectName": {
-		//	      "description": "Project to which the ECS belongs. Each ECS can only belong to one project.",
+		//	      "description": "Project name to which the ECS expanded from the node pool belongs. Each ECS can only belong to one project. Only English letters, numbers, underscores (_), periods (.), and hyphens (-) are allowed. Maximum length is 64 characters. Default is default.",
 		//	      "type": "string"
 		//	    },
 		//	    "PublicAccessConfig": {
-		//	      "description": "Configuration for automatic public network access for nodes",
+		//	      "description": "Configuration information for automatically binding EIP to nodes.",
 		//	      "properties": {
 		//	        "Bandwidth": {
 		//	          "description": "Peak bandwidth for public IP, unit: Mbps",
 		//	          "type": "integer"
 		//	        },
 		//	        "BillingType": {
-		//	          "description": "Billing type for public IP: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.",
+		//	          "description": "Billing type for public IP. Values: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Isp": {
-		//	          "description": "Public IP line type. Parameter description: BGP: BGP (multi-line)",
+		//	          "description": "Public IP line type. Parameter value description: BGP: BGP (multi-line).",
 		//	          "enum": [
 		//	            "BGP"
 		//	          ],
@@ -1141,7 +1142,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "PublicAccessEnabled": {
-		//	      "description": "Enable public network access for nodes automatically. Options: - false: off - true: on",
+		//	      "description": "Enable automatic public IP (EIP) binding for nodes. Options: false: (default) Disabled. The system will not automatically assign an EIP to the node. If you need public network access later, refer to Applying for a Public IP and Binding to a Cloud Server. true: Enabled. The system automatically assigns an EIP to nodes in the cluster. You must also configure the PublicAccessConfig parameter to customize the EIP settings.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Security": {
@@ -1191,7 +1192,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "SpotStrategy": {
-		//	      "description": "Spot pricing strategy for pay-as-you-go billing. When InstanceChargeType=PostPaid: NoSpot: Standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, following the current market price.",
+		//	      "description": "Spot pricing strategy for on-demand billing applies only when InstanceChargeType=PostPaid. Options: NoSpot (default): standard on-demand instance. SpotAsPriceGo: system automatically bids, following the current market price.",
 		//	      "enum": [
 		//	        "NoSpot",
 		//	        "SpotAsPriceGo"
@@ -1199,7 +1200,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "SubnetIds": {
-		//	      "description": "List of subnet IDs for the node network.",
+		//	      "description": "List of subnet IDs to which the node network belongs. You can call the private network API to obtain subnet IDs. Note: Must be in the same private network as the cluster. A single node pool supports up to 8 subnet IDs.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1208,18 +1209,18 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "SystemVolume": {
-		//	      "description": "System disk configuration for the node",
+		//	      "description": "System disk configuration for the node. You can call the DescribeInstanceTypes API of the cloud server to obtain the matching relationship between ECS instance families and disk specifications.",
 		//	      "properties": {
 		//	        "PlacementGroupId": {
-		//	          "description": "Placement group ID",
+		//	          "description": "Storage placement group ID of the system disk.",
 		//	          "type": "string"
 		//	        },
 		//	        "Size": {
-		//	          "description": "Disk capacity, in GiB. Value description: Default: 40 GiB. Ultra-fast SSD (ESSD_PL0, ESSD_FlexPL): 40–2048 GiB",
+		//	          "description": "Cloud disk capacity, in GiB. Value description: Default is 40 GiB; for Ultra SSD (ESSD_PL0, ESSD_FlexPL), the range is 40–2048 GiB.",
 		//	          "type": "integer"
 		//	        },
 		//	        "SubgroupNumber": {
-		//	          "description": "Placement subgroup",
+		//	          "description": "Storage sub-placement group number for the system disk.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Type": {
@@ -1234,7 +1235,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Tags": {
-		//	      "description": "Label information configured for the node pool",
+		//	      "description": "Tag information bound to the ECS instance corresponding to the node, used for searching and managing ECS instances. Note: Keys in Tags must be unique. If a resource already has the same Tags.Key, binding the same Tags.Key again will not cause an error and will update to the latest Tags.Value. A single resource supports up to 20 ECS instance tags. Do not enter spaces at the beginning or end of Keys or Values in Tags.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Node pool tag information",
@@ -1263,7 +1264,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AdditionalContainerStorageEnabled
 				"additional_container_storage_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the first data disk of the node is configured, formatted, and mounted as the storage directory for container images and logs. Parameter values: false: not configured and formatted; true: configured and formatted",
+					Description: "Whether to configure the first data disk of the node, format it, and mount it to the container and image storage directory (/var/lib/containerd). Options: false: (default) Disabled. true: Enabled. Note: When enabled, at least one data disk must be configured; otherwise, node pool creation will fail. This method will automatically format the first data disk and create the file system.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1272,7 +1273,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenew
 				"auto_renew": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the cloud server instance will be automatically renewed upon expiration. Parameter description: true: auto renewal false: no auto renewal This parameter is returned only when InstanceChargeType=PrePaid.",
+					Description: "Whether the ECS instance will be automatically renewed upon expiration. Options: true (default): auto renewal. false: no auto renewal. Only required when InstanceChargeType=PrePaid; otherwise, ignore.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1281,7 +1282,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AutoRenewPeriod
 				"auto_renew_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Automatic renewal duration for cloud server instances, in months. This parameter is returned only when AutoRenew=true",
+					Description: "ECS instance auto-renewal duration, in months. Values: 1 (default), 2, 3, 6, 12. Only required when AutoRenew=true; otherwise, ignore.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1294,7 +1295,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: FileSystem
 							"file_system": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "File system. Options:   - Ext4 (default)   - Xfs",
+								Description: "[Invitation Test · Apply for Trial] File system for the node pool data disk. Values: Ext4 (default), Xfs.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1312,7 +1313,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: PlacementGroupId
 							"placement_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Placement group ID",
+								Description: "Storage placement group ID to which the data disk belongs.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1330,7 +1331,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: SnapshotId
 							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Create a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only Ultra SSD and High-performance Cloud Disk support creating disks from snapshots. Only snapshots in the 'available' status can be used to create new disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' status cannot be used to create new disks.",
+								Description: "Snapshot ID used when creating a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only ultra-fast SSDs and efficient cloud disks support creating cloud disks from snapshots. Only snapshots in the 'available' state can be used to create new cloud disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' states cannot be used to create new cloud disks.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1339,7 +1340,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: SubgroupNumber
 							"subgroup_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "Placement subgroup",
+								Description: "Storage sub-placement group number of the data disk.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1348,7 +1349,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Disk type: ESSD_PL0: ultra-fast SSD disk with performance level PL0. ESSD_FlexPL: ultra-fast SSD disk with performance level PL1",
+								Description: "Disk types. Cloud disks: ESSD_PL0: Ultra-fast SSD cloud disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD cloud disk, FlexPL specification. Ultra_Disk: [EBS Invitation Test] High-performance SSD cloud disk. TSSD_TL0: Throughput SSD cloud disk, TL0 specification. RSSD_PL0: [EBS Invitation Test] Elastic remote disk, PL0 specification. Local disks: LOCAL_SSD: SSD type local disk. LOCAL_HDD: HDD type local disk. LOCAL_LVM_SSD: SSD LVM logical local disk. LOCAL_SSD_SRIOV: SSD SRIOV local disk.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1357,7 +1358,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Node data disk configuration.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Description: "Node data disk configuration. You can call the DescribeInstanceTypes API of the cloud server to obtain the matching relationship between ECS instance families and cloud disk specifications.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1366,7 +1367,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentSetGroupNumber
 				"deployment_set_group_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Group number of the instance in the deployment set; 0 means not set",
+					Description: "When the specified deployment set policy is the deployment set group high availability policy, you can use this parameter to specify the group number of the instance in the deployment set. Value range: 1–3. 0 means not set.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1376,7 +1377,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentSetId
 				"deployment_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Deployment Set ID to be added to the instance",
+					Description: "Deployment set ID that nodes in the node pool need to join. You can call the DescribeDeploymentSets API to obtain the deployment set ID.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1386,7 +1387,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Hostname
 				"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The host name corresponding to the node.",
+					Description: "Host name corresponding to the node. Supports defining fixed incremental sorting and dynamic expansion sorting. For details on the definition format, see naming format.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1397,7 +1398,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				// Property: HpcClusterIds
 				"hpc_cluster_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "High performance computing cluster ID. When the node pool is configured with high performance computing GPU node types, returns the high performance computing cluster ID",
+					Description: "High Performance Computing Cluster ID. When creating a node pool with a high-performance computing GPU type, you must specify the High Performance Computing Cluster ID, which can be obtained from the 'Instances & Images > High Performance Computing Cluster' page in the cloud server console. Note: Only one High Performance Computing Cluster ID is supported; ensure the specified cluster and the subnets in SubnetIds are in the same availability zone.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1406,7 +1407,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ImageId
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Image ID used by the cloud server corresponding to the node",
+					Description: "The image ID used by the ECS instance corresponding to the node. Different image types have different image IDs. For details, see Public Images Supported by Container Service. Note: If you do not specify this parameter, Container Service will assign the veLinux-VKE image ID corresponding to the selected ECS instance type by default. If you specify multiple instance types, this parameter is required.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1415,7 +1416,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InitializeScript
 				"initialize_script": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Custom script executed after node creation and initialization. Shell script in Base64 encoding",
+					Description: "Custom script to execute after creating and initializing the node. Supports Shell format and must be Base64-encoded before being passed in. Note: The Base64-encoded length must not exceed 8 KB. If both InitializeScript and PreScript are provided, the total length of both parameters must not exceed 8 KB.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1424,7 +1425,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceChargeType
 				"instance_charge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Cloud server instance billing type. Parameter values: PostPaid: pay-as-you-go. PrePaid: subscription (annual/monthly).",
+					Description: "ECS instance billing type. Values: PostPaid (default): pay-as-you-go. PrePaid: subscription.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -1439,7 +1440,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceName
 				"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Node (instance) name",
+					Description: "Name of the node (instance). Supports defining fixed incremental sorting and dynamic expansion sorting. For format details, see naming format.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1450,7 +1451,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				// Property: InstanceTypeIds
 				"instance_type_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "List of cloud server instance type IDs corresponding to the nodes",
+					Description: "List of instance type IDs for cloud server (ECS) instances corresponding to the nodes. This list serves as the candidate set of instance types when creating nodes in the node pool, not as a fixed quota for each type: the node pool selects instance types from the list based on available inventory and other factors. Different nodes in the same node pool may use different types from the list, or all may use the same type. Each type does not correspond to an independent node count quota. To strictly split node counts by type, create a separate node pool for each type. You can call the ListSupportedResourceTypes API to query the resource types and ranges supported by the cluster instance. Constraints: Up to ten array elements are supported; all types in the list must be consistent, such as all GPU types, all non-GPU types, or all bare metal types; when multiple types are provided, the ImageId parameter is required.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1462,7 +1463,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CapacityRebalance
 						"capacity_rebalance": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Capacity rebalancing. Value range:   - true: enables this feature. When a preemptible instance is about to be reclaimed, proactively creates a new preemptible instance for compensation.   - false (default): disables this feature. Waits until the preemptible instance is reclaimed before scaling out to make up the instance count",
+							Description: "Whether to enable capacity rebalancing (on-demand instance supplementation for preemptible capacity). Values: true: enable this feature to proactively create new preemptible instances for compensation before existing preemptible instances are reclaimed; false (default): do not enable this feature, and only scale out to replenish instances after preemptible instances are reclaimed.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1471,7 +1472,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: CompensateWithOnDemand
 						"compensate_with_on_demand": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "On-demand instance fallback feature. Value range:   - true: enable this feature; when all preemptible instances fail to purchase due to insufficient inventory or other reasons, attempt to purchase on-demand instances   - false (default): disable this feature; only attempt to purchase configured preemptible instances when scaling up",
+							Description: "Enable on-demand instance replacement. Values: true: Enable this feature. When all preemptible instances fail to be purchased due to insufficient inventory or other reasons, attempt to purchase on-demand instances. false: (Default) Do not enable this feature. When scaling out preemptible instances, only the configured preemptible instances are attempted.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1480,7 +1481,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: OnDemandBaseCapacity
 						"on_demand_base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Size of the base capacity. The base capacity is always pay-as-you-go instances. Value range: [0,500], default is 0.",
+							Description: "Base capacity size. The base capacity portion is fixed as on-demand instances. Value range: [0,500], default is 0.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1489,7 +1490,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: OnDemandPercentageAboveBaseCapacity
 						"on_demand_percentage_above_base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Proportion of pay-as-you-go instances in the part exceeding the base capacity. Value range: [0, 100]. 0 means only preemptible instances are produced for the part exceeding the base capacity; 100 means only pay-as-you-go instances are produced. Default value is 0.",
+							Description: "Proportion of pay-as-you-go instances in the remaining capacity of the node pool after deducting the base capacity for pay-as-you-go instances. Value range: [0,100]. 0 means only preemptible instances are created for the portion exceeding the base capacity; 100 means only pay-as-you-go instances are created. Default value is 0.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1497,7 +1498,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Set the mixed strategy for spot and pay-as-you-go instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo.",
+					Description: "Configure a mixed strategy for spot instances and on-demand instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1506,7 +1507,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NamePrefix
 				"name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Node name prefix. An empty string or nil means the node name prefix policy is not enabled.",
+					Description: "Node name prefix. If the value is an empty string or nil, it indicates that the node name prefix policy is not enabled. This policy is not enabled by default. Prefix validation rules: supports uppercase and lowercase English letters, numbers, and hyphens (-); must start with a letter and end with a letter or number; hyphens (-) cannot be used consecutively; length must be between 2 and 51 characters.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1515,7 +1516,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NetworkTrafficMode
 				"network_traffic_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Network communication mode between nodes",
+					Description: "Network communication mode between nodes. Options: HighPerformance: Communication method based on RDMA for data transmission. Standard: Communication method based on TCP for data transmission.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1525,7 +1526,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Purchase duration for cloud server instances, in months. This parameter is returned only when InstanceChargeType=PrePaid",
+					Description: "ECS instance purchase duration, in months. Values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36. Only required and mandatory when InstanceChargeType=PrePaid.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1534,7 +1535,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PreScript
 				"pre_script": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Script to execute before deploying the node",
+					Description: "[Invitation Test · Apply for Trial] Script executed before deploying the node. Enter the Shell script encoded in Base64. Note: The length after Base64 encoding must not exceed 8 KB. If both InitializeScript and PreScript are provided, the total length of both parameters must not exceed 8 KB.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1543,7 +1544,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ProjectName
 				"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Project to which the ECS belongs. Each ECS can only belong to one project.",
+					Description: "Project name to which the ECS expanded from the node pool belongs. Each ECS can only belong to one project. Only English letters, numbers, underscores (_), periods (.), and hyphens (-) are allowed. Maximum length is 64 characters. Default is default.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1564,7 +1565,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: BillingType
 						"billing_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Billing type for public IP: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.",
+							Description: "Billing type for public IP. Values: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1573,7 +1574,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Isp
 						"isp": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Public IP line type. Parameter description: BGP: BGP (multi-line)",
+							Description: "Public IP line type. Parameter value description: BGP: BGP (multi-line).",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -1586,7 +1587,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configuration for automatic public network access for nodes",
+					Description: "Configuration information for automatically binding EIP to nodes.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1595,7 +1596,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PublicAccessEnabled
 				"public_access_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enable public network access for nodes automatically. Options:   - false: off   - true: on",
+					Description: "Enable automatic public IP (EIP) binding for nodes. Options: false: (default) Disabled. The system will not automatically assign an EIP to the node. If you need public network access later, refer to Applying for a Public IP and Binding to a Cloud Server. true: Enabled. The system automatically assigns an EIP to nodes in the cluster. You must also configure the PublicAccessConfig parameter to customize the EIP settings.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1681,7 +1682,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SpotStrategy
 				"spot_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Spot pricing strategy for pay-as-you-go billing. When InstanceChargeType=PostPaid: NoSpot: Standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, following the current market price.",
+					Description: "Spot pricing strategy for on-demand billing applies only when InstanceChargeType=PostPaid. Options: NoSpot (default): standard on-demand instance. SpotAsPriceGo: system automatically bids, following the current market price.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -1698,7 +1699,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SubnetIds
 				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "List of subnet IDs for the node network.",
+					Description: "List of subnet IDs to which the node network belongs. You can call the private network API to obtain subnet IDs. Note: Must be in the same private network as the cluster. A single node pool supports up to 8 subnet IDs.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1710,7 +1711,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PlacementGroupId
 						"placement_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Placement group ID",
+							Description: "Storage placement group ID of the system disk.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1719,7 +1720,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Disk capacity, in GiB. Value description: Default: 40 GiB. Ultra-fast SSD (ESSD_PL0, ESSD_FlexPL): 40–2048 GiB",
+							Description: "Cloud disk capacity, in GiB. Value description: Default is 40 GiB; for Ultra SSD (ESSD_PL0, ESSD_FlexPL), the range is 40–2048 GiB.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1728,7 +1729,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SubgroupNumber
 						"subgroup_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Placement subgroup",
+							Description: "Storage sub-placement group number for the system disk.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1751,7 +1752,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "System disk configuration for the node",
+					Description: "System disk configuration for the node. You can call the DescribeInstanceTypes API of the cloud server to obtain the matching relationship between ECS instance families and disk specifications.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1785,7 +1786,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Label information configured for the node pool\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+					Description: "Tag information bound to the ECS instance corresponding to the node, used for searching and managing ECS instances. Note: Keys in Tags must be unique. If a resource already has the same Tags.Key, binding the same Tags.Key again will not cause an error and will update to the latest Tags.Value. A single resource supports up to 20 ECS instance tags. Do not enter spaces at the beginning or end of Keys or Values in Tags.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1919,7 +1920,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "properties": {
 		//	          "Type": {
-		//	            "description": "Status conditions for the node pool in the current main state, i.e., the reasons for entering this main state. There can be multiple reasons. Parameter values: ProgressingOk, ResourceCleanupFailed, Unknown, ClusterNotRunning.",
+		//	            "description": "Status conditions under the current primary state of the node pool, indicating the reasons for entering this state. Multiple reasons are possible. Values: Progressing: in progress. Ok: normal. ResourceCleanupFailed: resource cleanup failed. Unknown: creation failed due to unknown reasons. ClusterNotRunning: cluster exception. ScalingFailed: scaling failed. ClusterVersionUpgrading: node version upgrading in the node pool. Note: For valid Phase and Conditions.Type combinations, see resource status description.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1929,7 +1930,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Phase": {
-		//	      "description": "Status of the node pool. Parameter values: Creating, Running, Updating, Deleting, Failed, Scaling",
+		//	      "description": "Status of the node pool. Values: Creating: Creating. Running: Running. Updating: Updating. Deleting: Deleting. Failed: Abnormal. Scaling: Scaling. Note: For valid combinations of Phase and Conditions.Type, see the resource status documentation.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1943,7 +1944,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Status conditions for the node pool in the current main state, i.e., the reasons for entering this main state. There can be multiple reasons. Parameter values: ProgressingOk, ResourceCleanupFailed, Unknown, ClusterNotRunning.",
+								Description: "Status conditions under the current primary state of the node pool, indicating the reasons for entering this state. Multiple reasons are possible. Values: Progressing: in progress. Ok: normal. ResourceCleanupFailed: resource cleanup failed. Unknown: creation failed due to unknown reasons. ClusterNotRunning: cluster exception. ScalingFailed: scaling failed. ClusterVersionUpgrading: node version upgrading in the node pool. Note: For valid Phase and Conditions.Type combinations, see resource status description.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1953,7 +1954,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Phase
 				"phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Status of the node pool. Parameter values: Creating, Running, Updating, Deleting, Failed, Scaling",
+					Description: "Status of the node pool. Values: Creating: Creating. Running: Running. Updating: Updating. Deleting: Deleting. Failed: Abnormal. Scaling: Scaling. Note: For valid combinations of Phase and Conditions.Type, see the resource status documentation.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1967,7 +1968,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Node pool tag information",
+		//	  "description": "Custom resource tags for classifying, searching, and aggregating node pools with similar characteristics from different dimensions, enabling flexible node pool management. Note: Each Key in Tags must be unique; if a resource already has the same Tags.Key, rebinding will not cause an error and will update to the latest Tags.Value; a single resource supports up to 50 Tags; do not enter spaces at the beginning or end of Keys or Values in Tags.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "Node pool tag information",
@@ -2015,7 +2016,7 @@ func nodePoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Node pool tag information\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
+			Description: "Custom resource tags for classifying, searching, and aggregating node pools with similar characteristics from different dimensions, enabling flexible node pool management. Note: Each Key in Tags must be unique; if a resource already has the same Tags.Key, rebinding will not cause an error and will update to the latest Tags.Value; a single resource supports up to 50 Tags; do not enter spaces at the beginning or end of Keys or Values in Tags.\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/

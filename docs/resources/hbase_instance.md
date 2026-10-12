@@ -65,8 +65,6 @@ resource "volcenginecc_hbase_instance" "HBaseInstanceDemo" {
 - `deletion_protection` (String) Instance deletion protection switch status. Value range: enabled: enabled. disabled: not enabled. For more information about instance deletion protection, see Instance Deletion Protection.
 - `enable_auth` (Boolean) Whether login authentication is enabled. Values: true: login authentication enabled. false: login authentication disabled.
 - `enable_cloud_storage` (Boolean) Whether capacity-type storage is enabled. Values: true: capacity-type storage enabled. false: capacity-type storage not enabled. For details about capacity-type storage, see Hot and Cold Data Separation. The hot and cold data separation feature is supported only when MultiAZ (deployment mode) is set to false (single availability zone deployment).
-- `endpoints` (Attributes Set) Connection address information list
- Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints))
 - `instance_name` (String) Instance name
 - `instance_type` (String) Instance type. Currently, only Standard is supported. The default value is Standard
 - `multi_az` (Boolean) Instance deployment mode. Values: true: multi-availability zone deployment. false: single availability zone deployment. Currently, only single availability zone deployment is supported.
@@ -79,6 +77,8 @@ resource "volcenginecc_hbase_instance" "HBaseInstanceDemo" {
 
 - `charge_status` (String) Billing status. Values: Normal: normal. Overdue: overdue. Shutdown: shutdown.
 - `create_time` (String) Instance creation time (UTC).
+- `endpoints` (Attributes Set) Connection address information list
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints))
 - `id` (String) Uniquely identifies the resource.
 - `instance_id` (String) Instance ID
 - `master_count` (Number) Number of Master nodes. For single-zone deployment, 2 Master nodes are included by default
@@ -92,19 +92,6 @@ resource "volcenginecc_hbase_instance" "HBaseInstanceDemo" {
 - `vpc_name` (String) Name of the private network to which the instance belongs.
 - `zone_name` (String) Name of the availability zone to which the instance belongs.
 
-<a id="nestedatt--endpoints"></a>
-### Nested Schema for `endpoints`
-
-Optional:
-
-- `address_type` (String) Connection address type. For more information about connection addresses, see Connection Address Types. The value range is as follows: Zk: ZK address. Thrift: Thrift2 address. HBaseReUsedEipId: When public access is enabled for the ZK or Thrift2 connection address, this parameter is returned, indicating the EIP ID information shared and used by other components in the instance (such as RS nodes, Master nodes, etc.)
-- `eip_id` (String) When the ZK connection address or Thrift2 connection address enables public access, this parameter is returned, indicating the EIP ID.
-- `endpoint_id` (String) Connection address ID. By default, only the ZK private network connection address is returned. If you apply for a Thrift2 connection address or enable public access for the ZK or Thrift2 connection address, the corresponding connection address ID will also be returned. When the connection address type is HBaseReUsedEipId, the connection address ID is fixed as HBaseReUsedEipId
-- `endpoint_str` (String) Connection string for the connection address. By default, only the ZK private network connection address is returned. If you have requested a Thrift2 connection address, or enabled public access for ZK or Thrift2 connection addresses, the corresponding connection string will also be provided. When the connection address type is HBaseReUsedEipId, the connection string is always set to HBaseReUsedEipId.
-- `network_type` (String) Connection address network type. Value range: Public: public access address. Private: private access address.
-- `private_dns_visibility` (Boolean) Whether public DNS resolution is enabled for the private network domain name.
-
-
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -112,6 +99,19 @@ Optional:
 
 - `key` (String) Tag key of the tags bound to the instance
 - `value` (String) Tag values bound to the instance.
+
+
+<a id="nestedatt--endpoints"></a>
+### Nested Schema for `endpoints`
+
+Read-Only:
+
+- `address_type` (String) Connection address type. For more information about connection addresses, see Connection Address Types. The value range is as follows: Zk: ZK address. Thrift: Thrift2 address. HBaseReUsedEipId: When public access is enabled for the ZK or Thrift2 connection address, this parameter is returned, indicating the EIP ID information shared and used by other components in the instance (such as RS nodes, Master nodes, etc.)
+- `eip_id` (String) When the ZK connection address or Thrift2 connection address enables public access, this parameter is returned, indicating the EIP ID.
+- `endpoint_id` (String) Connection address ID. By default, only the ZK private network connection address is returned. If you apply for a Thrift2 connection address or enable public access for the ZK or Thrift2 connection address, the corresponding connection address ID will also be returned. When the connection address type is HBaseReUsedEipId, the connection address ID is fixed as HBaseReUsedEipId
+- `endpoint_str` (String) Connection string for the connection address. By default, only the ZK private network connection address is returned. If you have requested a Thrift2 connection address, or enabled public access for ZK or Thrift2 connection addresses, the corresponding connection string will also be provided. When the connection address type is HBaseReUsedEipId, the connection string is always set to HBaseReUsedEipId.
+- `network_type` (String) Connection address network type. Value range: Public: public access address. Private: private access address.
+- `private_dns_visibility` (Boolean) Whether public DNS resolution is enabled for the private network domain name.
 
 ## Import
 

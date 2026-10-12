@@ -503,22 +503,12 @@ func launchTemplateVersionResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "description": "Enable security hardening. Active: Enable security hardening, effective only for public images. InActive: Disable security hardening, effective for all images.",
-		//	  "enum": [
-		//	    "Active",
-		//	    "InActive"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"security_enhancement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Enable security hardening. Active: Enable security hardening, effective only for public images. InActive: Disable security hardening, effective for all images.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"Active",
-					"InActive",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),

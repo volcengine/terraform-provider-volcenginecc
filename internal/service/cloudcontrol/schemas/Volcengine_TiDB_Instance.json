@@ -1,0 +1,473 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/RegionId",
+    "/properties/VpcId",
+    "/properties/EncryptionConfig",
+    "/properties/HighAvailabilityType",
+    "/properties/ServicePlan",
+    "/properties/Zones"
+  ],
+  "definitions": {
+    "AuditLogConfig": {
+      "description": "Audit Log Configuration",
+      "properties": {
+        "Enabled": {
+          "description": "Enable Audit Log",
+          "type": "boolean"
+        },
+        "Unredacted": {
+          "description": "Retain Non-Masked Content",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "AutoScalingConfig": {
+      "description": "Auto Scaling",
+      "properties": {
+        "MaxRcu": {
+          "description": "Max RCU",
+          "type": "integer"
+        },
+        "MinRcu": {
+          "description": "Min RCU",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AutomatedBackupPolicy": {
+      "description": "Automatic Backup Policy",
+      "properties": {
+        "RetentionDays": {
+          "description": "Retention Days",
+          "type": "integer"
+        },
+        "StartTime": {
+          "description": "Backup Start Time (UTC HH:mm)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Backup": {
+      "description": "Backup Information",
+      "properties": {
+        "BackupId": {
+          "description": "Backup ID",
+          "type": "string"
+        },
+        "BackupTime": {
+          "description": "Backup Time",
+          "type": "string"
+        },
+        "ClusterId": {
+          "description": "Cluster ID",
+          "type": "string"
+        },
+        "CreateTime": {
+          "description": "Creation Time",
+          "type": "string"
+        },
+        "ExpireTime": {
+          "description": "Expiration Time",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Backup Name",
+          "type": "string"
+        },
+        "State": {
+          "description": "Backup Status",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Backup Type",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ClusterZoneSubnet": {
+      "description": "Availability Zones and Subnets",
+      "properties": {
+        "SubnetId": {
+          "description": "Subnet ID",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "Availability Zone ID",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EncryptionConfig": {
+      "description": "Data Encryption Configuration",
+      "properties": {
+        "EnhancedEncryptionEnabled": {
+          "description": "Enable Enhanced Encryption",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointAuthorizedNetwork": {
+      "description": "Authorized Network",
+      "properties": {
+        "DisplayName": {
+          "description": "Authorized Network Name",
+          "type": "string"
+        },
+        "EndIpAddress": {
+          "description": "End IP",
+          "type": "string"
+        },
+        "StartIpAddress": {
+          "description": "Start IP",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointPrivate": {
+      "description": "Private Endpoint",
+      "properties": {
+        "AuthorizedNetworks": {
+          "description": "Private VPC Endpoint ID Allowlist",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EndpointPrivateAuthorizedNetwork",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Disabled": {
+          "description": "Disable Private Access",
+          "type": "boolean"
+        },
+        "Host": {
+          "description": "Private Hostname",
+          "type": "string"
+        },
+        "Port": {
+          "description": "Private Port",
+          "type": "integer"
+        },
+        "SecurityGroupCount": {
+          "description": "Number of Security Groups Associated with Default Private Endpoint (not returned if query fails)",
+          "type": "integer"
+        },
+        "ServiceName": {
+          "description": "Private Service Name",
+          "type": "string"
+        },
+        "VpcEndpointId": {
+          "description": "Default Private Endpoint ID",
+          "type": "string"
+        },
+        "VpcEndpointName": {
+          "description": "Cloud Real Name of Default Private Endpoint (not returned if query fails)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointPrivateAuthorizedNetwork": {
+      "description": "Authorized Network",
+      "properties": {
+        "DisplayName": {
+          "description": "Descriptive Name",
+          "type": "string"
+        },
+        "SecurityGroupCount": {
+          "description": "Number of Security Groups Associated with Endpoint (not returned if query fails)",
+          "type": "string"
+        },
+        "VpcEndpointId": {
+          "description": "VPC Endpoint ID。",
+          "type": "string"
+        },
+        "VpcEndpointName": {
+          "description": "Cloud Real Name of VPC Endpoint (not returned if query fails)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EndpointPublic": {
+      "description": "Public Endpoint",
+      "properties": {
+        "AuthorizedNetworks": {
+          "description": "IP Allowlist",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EndpointAuthorizedNetwork",
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Disabled": {
+          "description": "Disable Public Access",
+          "type": "boolean"
+        },
+        "Host": {
+          "description": "Public Hostname",
+          "type": "string"
+        },
+        "Port": {
+          "description": "Public Port",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Endpoints": {
+      "description": "Connection Endpoint",
+      "properties": {
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/EndpointPrivate",
+          "type": "object"
+        },
+        "PublicEndpoint": {
+          "$ref": "#/definitions/EndpointPublic",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "SpendingLimit": {
+      "description": "Spending Limit Configuration",
+      "properties": {
+        "Monthly": {
+          "description": "Monthly Spending Limit",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "description": "Tags",
+      "properties": {
+        "Key": {
+          "description": "Tag Key",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "TiDB Instance (Cluster)",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Tags/*/Key",
+      "/properties/Tags/*/Value"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tidb:CreateCluster",
+        "tidb:GetClusterDetails",
+        "tidb:UpdateCluster"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tidb:GetClusterDetails",
+        "tidb:DeleteCluster"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "tidb:ListClusters"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tidb:GetClusterDetails",
+        "tidb:ListBackups"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tidb:UntagResources",
+        "tidb:TagResources",
+        "tidb:UpdateCluster",
+        "tidb:GetClusterDetails"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ClusterId"
+  ],
+  "properties": {
+    "Annotations": {
+      "description": "Annotation",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AuditLogConfig": {
+      "$ref": "#/definitions/AuditLogConfig",
+      "type": "object"
+    },
+    "AutoScaling": {
+      "$ref": "#/definitions/AutoScalingConfig",
+      "type": "object"
+    },
+    "AutomatedBackupPolicy": {
+      "$ref": "#/definitions/AutomatedBackupPolicy",
+      "type": "object"
+    },
+    "Backups": {
+      "description": "Cluster Backup List",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Backup",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ClusterId": {
+      "description": "Cluster ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "Creation Time (ISO8601)",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "Cluster Display Name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "EncryptionConfig": {
+      "$ref": "#/definitions/EncryptionConfig",
+      "type": "object"
+    },
+    "Endpoints": {
+      "$ref": "#/definitions/Endpoints",
+      "type": "object"
+    },
+    "HighAvailabilityType": {
+      "description": "High Availability Type",
+      "type": "string"
+    },
+    "Labels": {
+      "description": "Tags",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "Name": {
+      "description": "Resource Name: clusters/{clusterId}",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Volcano Engine Project Name",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RegionId": {
+      "description": "Deployment Region",
+      "type": "string"
+    },
+    "ServicePlan": {
+      "description": "Service Plan",
+      "type": "string"
+    },
+    "SpendingLimit": {
+      "$ref": "#/definitions/SpendingLimit",
+      "type": "object"
+    },
+    "State": {
+      "description": "Cluster Status",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Instance Tags",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Last Updated Time (ISO8601)",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "UserPrefix": {
+      "description": "Default Username Prefix",
+      "type": "string"
+    },
+    "Version": {
+      "description": "TiDB Version",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "VPC ID Used at Creation",
+      "type": "string"
+    },
+    "Zones": {
+      "description": "Availability Zones and Subnets Used at Creation",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ClusterZoneSubnet",
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Name",
+    "/properties/ClusterId",
+    "/properties/Backups",
+    "/properties/Endpoints",
+    "/properties/Version",
+    "/properties/UserPrefix",
+    "/properties/State",
+    "/properties/Labels",
+    "/properties/Annotations",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/AuditLogConfig",
+    "/properties/SpendingLimit"
+  ],
+  "required": [
+    "VpcId",
+    "Zones",
+    "AutoScaling"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::TiDB::Instance"
+}

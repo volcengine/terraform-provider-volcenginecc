@@ -60,6 +60,7 @@ resource "volcenginecc_rdspostgresql_instance" "RDSPostgreSQLInstanceDemo" {
 - `storage_space` (Number) Instance storage space. Value range: [20, 3000], unit: GB, increment: 10GB. Default value is 100
 - `tags` (Attributes Set) Tag information of the cloud disk
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `tde_enable` (Boolean) Specifies whether to enable the Transparent Data Encryption (TDE) feature. The default value is false (disabled). This feature can only be enabled when creating an instance, and is supported only for PostgreSQL 17 with local SSD storage. Once enabled, it cannot be disabled.
 
 ### Read-Only
 

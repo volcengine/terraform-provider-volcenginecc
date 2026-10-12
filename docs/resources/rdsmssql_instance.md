@@ -58,6 +58,7 @@ resource "volcenginecc_rdsmssql_instance" "RDSMsSQLInstanceDemo" {
 - `advanced_features` (String) Advanced instance features to modify. This API currently requires allowlisting. To use it, contact technical support. Example value: {"Key":"Value"}
 - `allow_list_ids` (Set of String) Allowlist ID list permitted for access.
 - `charge_info` (Attributes) Payment method. (see [below for nested schema](#nestedatt--charge_info))
+- `cross_backup_policy` (Attributes) Cross-region backup policy. (see [below for nested schema](#nestedatt--cross_backup_policy))
 - `instance_name` (String) Instance name. Naming rules: Cannot start with a digit or hyphen. Can only contain Chinese characters, letters, digits, underscores, and hyphens. Length must be between 1 and 128 characters.
 - `maintenance_time` (String) Instance maintenance window. Format: HH:mmZ-HH:mmZ (UTC time). Default: UTC18:00Z-21:59Z (Beijing time 02:00-05:59). Note: To ensure cloud database stability, the system performs maintenance on instances periodically. It is recommended to set the maintenance window during off-peak hours to avoid business impact. During the maintenance window, the instance may experience 1–2 brief disconnections. Ensure your application supports automatic reconnection. The minimum maintenance window is 1 hour, the maximum is 24 hours, and cross-day maintenance windows are not allowed.
 - `master_node_id` (String) Primary node ID. This parameter is required when manually switching master and standby nodes.
@@ -65,9 +66,11 @@ resource "volcenginecc_rdsmssql_instance" "RDSMsSQLInstanceDemo" {
 - `server_collation` (String) Instance collation. Default: Chinese_PRC_CI_AS. Most native collations are supported. Available values: Latin1_General_CI_AS, Latin1_General_CS_AS, SQL_Latin1_General_CP1_CI_AS, SQL_Latin1_General_CP1_CS_AS, Chinese_PRC_CI_AS, Chinese_PRC_CS_AS, Chinese_PRC_BIN, Japanese_CI_AS, Japanese_CS_AS, Chinese_Taiwan_Stroke_CI_AS, Chinese_Taiwan_Stroke_CS_AS, Thai_CI_AS, Chinese_PRC_CI_AI, Chinese_PRC_BIN2, Cyrillic_General_CI_AS.
 - `tags` (Attributes Set) Tag list.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `tde_config` (Attributes) Instance TDE configuration. (see [below for nested schema](#nestedatt--tde_config))
 
 ### Read-Only
 
+- `available_cross_regions` (Set of String) List of cross-region backup destination regions.
 - `backup_use` (Number) Used backup space for the instance, in GiB.
 - `connection_info` (Attributes Set) Connection information.
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--connection_info))
@@ -109,6 +112,16 @@ Read-Only:
 - `overdue_time` (String) Shutdown time due to overdue payment, in the format yyyy-MM-ddTHH:mm:ssZ (UTC time).
 
 
+<a id="nestedatt--cross_backup_policy"></a>
+### Nested Schema for `cross_backup_policy`
+
+Optional:
+
+- `backup_enabled` (Boolean) Whether to enable cross-region backup. The values are as follows: true: Cross-region backup is enabled. false: Cross-region backup is disabled.
+- `cross_backup_region` (String) ID of the cross-region backup destination region. This parameter is required when BackupEnabled is set to true.
+- `retention` (Number) Number of days to retain cross-region backups. The valid range is 7–1825 days. The default value is 7.
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -116,6 +129,29 @@ Optional:
 
 - `key` (String) Tag key for user tags.
 - `value` (String) User tag value.
+
+
+<a id="nestedatt--tde_config"></a>
+### Nested Schema for `tde_config`
+
+Optional:
+
+- `certificate` (String) Certificate file used for TDE encryption. You can enter a TOS path in the format <endpoint>:<bucket>:<xxx.cer>. Valid only when TDEMode is set to User_Default.
+- `db_status` (Attributes Set) Database encryption status.
+ Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tde_config--db_status))
+- `password` (String) Password for the private key of the certificate used in TDE encryption. Valid only when TDEMode is set to User_Default. The password must be 8–32 characters long and can only contain uppercase and lowercase letters, numbers, and special characters ~!@#$%^&*()-_+=?. It must include at least three of the following: uppercase letters, lowercase letters, numbers, or special characters. Note: This is only valid when the TDEMode parameter is set to User_Default.
+- `private_key` (String) Private key for the certificate used in TDE encryption. You can enter a TOS path in the format <endpoint>:<bucket>:<xxx.pvk>. Valid only when TDEMode is set to User_Default.
+- `tde_mode` (String) Instance TDE encryption certificate generation mode. MSSQL_Default: Encryption certificate generated by SQL Server. User_Default: Custom certificate uploaded by the user.
+- `tde_status` (String) Instance TDE status. Enable: The instance TDE status is enabled. Disable: The instance TDE status is disabled. Currently, only Enable is supported.
+
+<a id="nestedatt--tde_config--db_status"></a>
+### Nested Schema for `tde_config.db_status`
+
+Optional:
+
+- `db_name` (String) Database name.
+- `enable` (Boolean) Whether encryption is enabled. true: The database is encrypted. false: The database is decrypted.
+
 
 
 <a id="nestedatt--connection_info"></a>

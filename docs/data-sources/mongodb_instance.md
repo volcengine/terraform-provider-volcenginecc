@@ -23,6 +23,9 @@ Data Source schema for Volcengine::MongoDB::Instance
 
 - `allow_list_ids` (Set of String) Allowlist ID list. New instances are bound to the specified allowlist.
 - `auto_renew` (Boolean) Enable auto-renewal. Options: false (default): auto-renewal disabled. true: auto-renewal enabled.
+- `backup_id` (String) Backup file ID of the source instance for backup restore, used for restoring by backup file. Either BackupId or RestoreTime must be specified. Currently, only replica set instances support restoring a backup set to a new instance; sharded cluster instances are not supported.
+- `backup_type` (String) Backup type. Valid values: Physical: physical backup. Logical: logical backup.
+- `backups` (Attributes Set) Backup file list information for the instance. (see [below for nested schema](#nestedatt--backups))
 - `charge_status` (String) Instance billing status. Valid values: Normal: normal. WaitingPaid: waiting for payment. ChangingPayType: changing billing type. Renewing: renewing. Overdue: overdue. Owing: owing. Unsubscribing: unsubscribing.
 - `charge_type` (String) Instance billing type. Options: PostPaid (default): pay-as-you-go (also called postpaid). Prepaid: subscription (also called prepaid).
 - `closed_time` (String) Scheduled shutdown time (UTC).
@@ -55,8 +58,11 @@ Data Source schema for Volcengine::MongoDB::Instance
 - `project_name` (String) Select the project for the instance. If left blank, the new instance will be added to the default project.
 - `read_only_node_number` (Number) Number of read-only nodes in the instance
 - `reclaim_time` (String) Scheduled recycle time for the instance (UTC)
+- `recoverable_time` (Attributes Set) List of recoverable time ranges for the instance. If the returned data is empty, the instance cannot be recovered. (see [below for nested schema](#nestedatt--recoverable_time))
+- `restore_time` (String) When restoring a backup, specify the restore time point in the format yyyy-MM-ddTHH:mm:ssZ (UTC). Either BackupId or RestoreTime must be specified. Use DescribeRecoverableTime to query supported recoverable time ranges.
 - `shard_number` (Number) Number of shards in the sharded cluster. Range: 2–32.
 - `shards` (Attributes Set) Shard information list (see [below for nested schema](#nestedatt--shards))
+- `src_db_instance_id` (String) Source instance ID for backup restore. If this parameter is provided, a new instance will be created based on the backup file or specified time point of the source instance, and data will be restored to the new instance via RestoreToNewInstance. If left blank, the instance will be created normally via CreateDBInstance.
 - `storage_space_gb` (Number) Total storage space for replica set instances, or storage space for a single Shard in a sharded cluster. Unit: GiB, step size: 10.
 - `storage_type` (String) Instance storage type. Currently, only local SSD disks (LocalSSD) are supported.
 - `subnet_id` (String) Subnet ID.
@@ -66,6 +72,23 @@ Data Source schema for Volcengine::MongoDB::Instance
 - `updated_time` (String) Instance update time (UTC).
 - `vpc_id` (String) Private network ID.
 - `zone_id` (String) The ID of the availability zone where the instance is located. If you want to deploy a new instance across multiple availability zones, you can provide three availability zone IDs, separated by English commas (,).
+
+<a id="nestedatt--backups"></a>
+### Nested Schema for `backups`
+
+Read-Only:
+
+- `backup_download_status` (String) Download status of the backup file. Valid values: NotDownLoad: backup file not obtained. Success: backup file available for download. Running: backup file being obtained.
+- `backup_end_time` (String) Backup end time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).
+- `backup_file_name` (String) Backup file name.
+- `backup_file_size` (Number) Backup file size, unit: Byte.
+- `backup_id` (String) Backup ID.
+- `backup_object` (String) Backup target. Valid values: Data: data backup. Log: log backup.
+- `backup_start_time` (String) Backup start time, format: yyyy-MM-ddTHH:mm:ssZ (UTC).
+- `backup_status` (String) Backup status. Valid values: Success: backup succeeded. Failed: backup failed. Running: backup in progress.
+- `backup_type` (String) Backup type. Valid values: Physical: physical backup. Logical: logical backup.
+- `creator` (String) Entity that created the backup. Valid values: System: system automatic backup. User: user manual backup.
+
 
 <a id="nestedatt--config_servers"></a>
 ### Nested Schema for `config_servers`
@@ -139,6 +162,15 @@ Read-Only:
 - `used_storage_gb` (Number) Storage space used by this node. Unit: GiB.
 - `usedv_cpu` (Number) Used cores.
 - `zone_id` (String) Availability zone ID of the current node.
+
+
+<a id="nestedatt--recoverable_time"></a>
+### Nested Schema for `recoverable_time`
+
+Read-Only:
+
+- `earliest_recoverable_time` (String) Earliest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).
+- `latest_recoverable_time` (String) Latest recoverable time point for the instance, format: yyyy-MM-ddTHH:mm:ssZ (UTC).
 
 
 <a id="nestedatt--shards"></a>

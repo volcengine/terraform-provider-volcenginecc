@@ -525,7 +525,8 @@
         "ecs:DescribeInstances",
         "ecs:DescribeUserData",
         "ecs:DescribeInstancesIamRoles",
-        "storage_ebs:DescribeVolumes"
+        "storage_ebs:DescribeVolumes",
+        "vpc:ModifyNetworkInterfaceAttributes"
       ]
     }
   },
@@ -779,10 +780,6 @@
     },
     "SecondaryNetworkInterfaces": {
       "description": "Auxiliary network interface card of the instance.",
-      "elementIdentifier": [
-        "/SubnetId",
-        "/PrimaryIpAddress"
-      ],
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/NetworkInterface"
@@ -790,6 +787,15 @@
       "minItems": 1,
       "type": "array",
       "uniqueItems": false
+    },
+    "ShowRoleNames": {
+      "description": "IAM role name bound to the instance.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
     },
     "SpotPriceLimit": {
       "description": "Maximum hourly price for spot instances.\n- Supports up to three decimal places.\n- Only effective when `SpotStrategy` is set to `SpotWithPriceLimit`.\n- When `SpotStrategy` is set to `SpotWithPriceLimit`, you can set a custom price limit for the spot instance. If the market price exceeds your bid, the instance will be released. When `SpotStrategy` is set to `SpotAsPriceGo`, you accept the system's automatic bidding, following the current market price, and this parameter does not need to be filled in.",
@@ -887,7 +893,8 @@
     "/properties/DataVolumes/*/VolumeId",
     "/properties/KeyPair/KeyPairId",
     "/properties/OperationSystem",
-    "/properties/VpcId"
+    "/properties/VpcId",
+    "/properties/ShowRoleNames"
   ],
   "required": [
     "InstanceName",
@@ -933,6 +940,7 @@
     "/properties/SystemVolume/ExtraPerformanceIOPS",
     "/properties/SystemVolume/ExtraPerformanceThroughputMB",
     "/properties/SystemVolume/ExtraPerformanceTypeId",
-    "/properties/SystemVolume/SnapshotId"
+    "/properties/SystemVolume/SnapshotId",
+    "/properties/RoleNames"
   ]
 }

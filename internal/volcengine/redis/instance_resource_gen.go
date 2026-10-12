@@ -76,6 +76,123 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BackupPlan
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Automatic backup policy for the instance.",
+		//	  "properties": {
+		//	    "Active": {
+		//	      "description": "Whether to enable automatic backup. The value range is as follows: false (default): Disabled. true: Enabled.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "BackupHour": {
+		//	      "description": "Backup window (UTC+8). The value can be any integer from 0 to 23. 0 means the system performs the backup between 00:00 and 00:59, 1 means between 01:00 and 01:59, and so on.",
+		//	      "maximum": 23,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "BackupType": {
+		//	      "description": "Restore method. The value range is as follows: Full: Full restore, that is, restore by backup set. Inc: Incremental restore, that is, restore by point in time.",
+		//	      "type": "string"
+		//	    },
+		//	    "ExpectNextBackupTime": {
+		//	      "description": "Expected time for the next backup execution, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).",
+		//	      "type": "string"
+		//	    },
+		//	    "LastUpdateTime": {
+		//	      "description": "Last time the backup policy was modified, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).",
+		//	      "type": "string"
+		//	    },
+		//	    "Period": {
+		//	      "description": "Backup cycle. The value can be any integer from 1 to 7. 1 means backup is performed every Monday, 2 means every Tuesday, and so on. This parameter is required when automatic backup is enabled (that is, when Active is set to true).",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "integer"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "TTL": {
+		//	      "description": "Backup file retention period, default is 7 days.",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"backup_plan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Active
+				"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to enable automatic backup. The value range is as follows: false (default): Disabled. true: Enabled.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BackupHour
+				"backup_hour": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Backup window (UTC+8). The value can be any integer from 0 to 23. 0 means the system performs the backup between 00:00 and 00:59, 1 means between 01:00 and 01:59, and so on.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(0, 23),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BackupType
+				"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Restore method. The value range is as follows: Full: Full restore, that is, restore by backup set. Inc: Incremental restore, that is, restore by point in time.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExpectNextBackupTime
+				"expect_next_backup_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Expected time for the next backup execution, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LastUpdateTime
+				"last_update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Last time the backup policy was modified, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Period
+				"period": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Description: "Backup cycle. The value can be any integer from 1 to 7. 1 means backup is performed every Monday, 2 means every Tuesday, and so on. This parameter is required when automatic backup is enabled (that is, when Active is set to true).",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TTL
+				"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Backup file retention period, default is 7 days.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Automatic backup policy for the instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: BackupPointName
 		// Cloud Control resource type schema:
 		//
@@ -1291,11 +1408,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::Redis::Instance").WithTerraformTypeName("volcenginecc_redis_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"active":                       "Active",
 		"addr_type":                    "AddrType",
 		"address":                      "Address",
 		"allow_list_ids":               "AllowListIds",
 		"auto_renew":                   "AutoRenew",
 		"az":                           "AZ",
+		"backup_hour":                  "BackupHour",
+		"backup_plan":                  "BackupPlan",
 		"backup_point_id":              "BackupPointId",
 		"backup_point_name":            "BackupPointName",
 		"backup_progress":              "BackupProgress",
@@ -1316,12 +1436,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"eip_id":                       "EipId",
 		"end_time":                     "EndTime",
 		"engine_version":               "EngineVersion",
+		"expect_next_backup_time":      "ExpectNextBackupTime",
 		"expired_time":                 "ExpiredTime",
 		"instance_class":               "InstanceClass",
 		"instance_id":                  "InstanceId",
 		"instance_name":                "InstanceName",
 		"instance_shards":              "InstanceShards",
 		"key":                          "Key",
+		"last_update_time":             "LastUpdateTime",
 		"maintenance_time":             "MaintenanceTime",
 		"max_connections":              "MaxConnections",
 		"multi_az":                     "MultiAZ",
@@ -1331,6 +1453,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"node_number":                  "NodeNumber",
 		"parameter_group_id":           "ParameterGroupId",
 		"password":                     "Password",
+		"period":                       "Period",
 		"port":                         "Port",
 		"private_address":              "PrivateAddress",
 		"private_port":                 "PrivatePort",
@@ -1351,6 +1474,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                         "Tags",
 		"time_point":                   "TimePoint",
 		"total":                        "Total",
+		"ttl":                          "TTL",
 		"used":                         "Used",
 		"value":                        "Value",
 		"vi_pv_6":                      "VIPv6",
@@ -1399,6 +1523,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/VpcAuthMode",
 		"/properties/InstanceShards",
 		"/properties/NodeIds",
+		"/properties/BackupPlan/TTL",
+		"/properties/BackupPlan/BackupType",
+		"/properties/BackupPlan/ExpectNextBackupTime",
+		"/properties/BackupPlan/LastUpdateTime",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{

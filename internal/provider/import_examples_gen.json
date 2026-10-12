@@ -1553,5 +1553,65 @@
         "resource": "volcenginecc_waf_custom_page",
         "identifier": ["Host","RuleId"],
         "path": "./examples/resources/volcenginecc_waf_custom_page/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vke_nodepool_scaling_policy",
+        "identifier": ["ScalingPolicyId","ClusterId","NodePoolId"],
+        "path": "./examples/resources/volcenginecc_vke_nodepool_scaling_policy/import.sh"
+    },
+    {
+        "resource": "volcenginecc_vpc_ipam_resource_discovery",
+        "identifier": ["IpamResourceDiscoveryId"],
+        "path": "./examples/resources/volcenginecc_vpc_ipam_resource_discovery/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_transit_router_route_policy_table",
+        "identifier": ["TransitRouterId","TransitRouterRoutePolicyTableId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_transit_router_route_policy_table/import.sh"
+    },
+    {
+        "resource": "volcenginecc_transitrouter_transit_router_forward_policy_entry",
+        "identifier": ["TransitRouterForwardPolicyTableId","TransitRouterForwardPolicyEntryId"],
+        "path": "./examples/resources/volcenginecc_transitrouter_transit_router_forward_policy_entry/import.sh"
+    },
+    {
+        "resource": "volcenginecc_billing_financial_relation",
+        "identifier": ["SubAccountID"],
+        "path": "./examples/resources/volcenginecc_billing_financial_relation/import.sh"
+    },
+    {
+        "resource": "volcenginecc_waf_bot_analyse_protect_rule",
+        "identifier": ["Host","RuleId","StatisticalType"],
+        "path": "./examples/resources/volcenginecc_waf_bot_analyse_protect_rule/import.sh"
+    },
+    {
+        "resource": "volcenginecc_waf_custom_bot",
+        "identifier": ["Host","BotId"],
+        "path": "./examples/resources/volcenginecc_waf_custom_bot/import.sh"
+    },
+    {
+        "resource": "volcenginecc_securitycenter_agent",
+        "identifier": ["AgentID"],
+        "path": "./examples/resources/volcenginecc_securitycenter_agent/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tidb_instance",
+        "identifier": ["ClusterId"],
+        "path": "./examples/resources/volcenginecc_tidb_instance/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tidb_branch",
+        "identifier": ["ClusterId","BranchId"],
+        "path": "./examples/resources/volcenginecc_tidb_branch/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudmonitor_object_group",
+        "identifier": ["GroupId"],
+        "path": "./examples/resources/volcenginecc_cloudmonitor_object_group/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudmonitor_alert_template",
+        "identifier": ["TemplateId"],
+        "path": "./examples/resources/volcenginecc_cloudmonitor_alert_template/import.sh"
     }
 ]

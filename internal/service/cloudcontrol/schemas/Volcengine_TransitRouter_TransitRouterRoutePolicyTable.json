@@ -1,0 +1,117 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/TransitRouterId",
+    "/properties/Direction"
+  ],
+  "description": "Transit router route policy table",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/TransitRouterRoutePolicyTableId",
+      "/properties/TransitRouterId",
+      "/properties/TransitRouterRoutePolicyTableName",
+      "/properties/Direction"
+    ],
+    "required": [
+      "/properties/TransitRouterId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transitrouter:CreateTransitRouterRoutePolicyTable",
+        "transitrouter:DescribeTransitRouterRoutePolicyTables"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transitrouter:DeleteTransitRouterRoutePolicyTable",
+        "transitrouter:DescribeTransitRouterRoutePolicyTables"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterRoutePolicyTables"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transitrouter:DescribeTransitRouterRoutePolicyTables"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transitrouter:ModifyTransitRouterRoutePolicyTableAttributes",
+        "transitrouter:DescribeTransitRouterRoutePolicyTables"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/TransitRouterId",
+    "/properties/TransitRouterRoutePolicyTableId"
+  ],
+  "properties": {
+    "CreationTime": {
+      "description": "Creation time",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Direction": {
+      "description": "Association direction",
+      "type": "string"
+    },
+    "Status": {
+      "description": "Status",
+      "semantic": "status",
+      "type": "string"
+    },
+    "TransitRouterId": {
+      "description": "Transit router ID",
+      "type": "string"
+    },
+    "TransitRouterRoutePolicyTableId": {
+      "description": "Route policy table ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "TransitRouterRoutePolicyTableName": {
+      "description": "Route policy table name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "TransitRouterRouteTableIds": {
+      "description": "List of associated route table IDs",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "Update time",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/TransitRouterRoutePolicyTableId",
+    "/properties/Status",
+    "/properties/TransitRouterRouteTableIds",
+    "/properties/CreationTime",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "TransitRouterId",
+    "Direction"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TransitRouter::TransitRouterRoutePolicyTable"
+}

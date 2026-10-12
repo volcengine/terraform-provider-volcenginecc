@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_billing_financial_relation.example "sub_account_id"

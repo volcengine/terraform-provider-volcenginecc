@@ -271,10 +271,6 @@
     },
     "SecurityEnhancementStrategy": {
       "description": "Enable security hardening. Active: Enable security hardening, effective only for public images. InActive: Disable security hardening, effective for all images.",
-      "enum": [
-        "Active",
-        "InActive"
-      ],
       "type": "string"
     },
     "SpotPriceLimit": {

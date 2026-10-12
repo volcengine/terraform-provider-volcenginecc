@@ -22,17 +22,17 @@ Data Source schema for Volcengine::VKE::NodePool
 ### Read-Only
 
 - `auto_scaling` (Attributes) Node pool scaling policy configuration. (see [below for nested schema](#nestedatt--auto_scaling))
-- `cluster_id` (String) ID of the cluster where the node pool is located
+- `cluster_id` (String) ID of the cluster where the node pool resides. You can call the ListClusters API to obtain the cluster ID. Note: The cluster must be in {Running,[Ok]} or {Updating,[Progressing]} status.
 - `created_time` (String) Node pool creation time
 - `kubernetes_config` (Attributes) Kubernetes-related configuration for the node pool (see [below for nested schema](#nestedatt--kubernetes_config))
 - `management` (Attributes) Managed node pool configuration (see [below for nested schema](#nestedatt--management))
-- `name` (String) Node pool name. The node pool name must be unique within the same cluster. Supports uppercase and lowercase English letters, Chinese characters, numbers, and hyphens (-). Length limit: 2–64 characters.
+- `name` (String) Node pool name. Within the same cluster, node pool names must be unique. Supports English letters (upper and lower case), Chinese characters, numbers, and hyphens (-). Length must be between 2 and 64 characters. Note: The reserved default node pool name vke-default-nodepool cannot be used.
 - `node_config` (Attributes) Cloud server (ECS) instance configuration in the node pool (see [below for nested schema](#nestedatt--node_config))
 - `node_pool_id` (String) Node pool ID
 - `node_statistics` (Attributes) Node statistics in the node pool. (see [below for nested schema](#nestedatt--node_statistics))
 - `retain_resources` (Set of String) When deleting a node pool, specify related resources to retain. Values: Empty value (default): delete associated resources Ecs: when deleting the node pool, retain ECS instances in the node pool. If the node pool contains prepaid ECS instances and retaining ECS is not selected, this API only removes the ECS instance from the node pool and does not delete it. You can query the instance via the ECS console or ECS API and perform subsequent operations as needed.
 - `status` (Attributes) Node pool status (see [below for nested schema](#nestedatt--status))
-- `tags` (Attributes Set) Node pool tag information (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) Custom resource tags for classifying, searching, and aggregating node pools with similar characteristics from different dimensions, enabling flexible node pool management. Note: Each Key in Tags must be unique; if a resource already has the same Tags.Key, rebinding will not cause an error and will update to the latest Tags.Value; a single resource supports up to 50 Tags; do not enter spaces at the beginning or end of Keys or Values in Tags. (see [below for nested schema](#nestedatt--tags))
 - `updated_time` (String) Node pool update time
 
 <a id="nestedatt--auto_scaling"></a>
@@ -40,12 +40,12 @@ Data Source schema for Volcengine::VKE::NodePool
 
 Read-Only:
 
-- `desired_replicas` (Number) Configure the expected number of nodes in the node pool
-- `enabled` (Boolean) Configure the node pool auto scaling feature switch. Parameter values: false: disabled. true: enabled.
-- `max_replicas` (Number) Configure the maximum number of nodes in the node pool
-- `min_replicas` (Number) Minimum number of nodes configured for the node pool
-- `priority` (Number) Priority
-- `scaling_group_id` (String) Scaling group ID
+- `desired_replicas` (Number) Configure the expected number of nodes in the node pool. Value description: Default is 0. Range: 0–2000. Note: When auto scaling is enabled for the node pool, DesiredReplicas must be greater than or equal to MinReplicas and less than or equal to MaxReplicas.
+- `enabled` (Boolean) Configure the node pool auto scaling feature switch. Parameter values: false (default): disabled. true: enabled.
+- `max_replicas` (Number) Set the maximum number of nodes in the node pool. This takes effect only when auto scaling is enabled (Enabled=true). The number of nodes will not exceed this value during node pool scaling.
+- `min_replicas` (Number) Minimum number of nodes in the node pool. Only effective when node pool auto scaling is enabled (Enabled=true). The number of nodes will not fall below this value during auto scaling.
+- `priority` (Number) Elastic scaling priority of the node pool. Effective only when SubnetPolicy=Priority. The higher the value, the higher the priority.
+- `scaling_group_id` (String) Scaling group ID associated with the node pool.
 - `subnet_policy` (String) Multi-subnet scheduling strategy for the node pool. Parameter values: ZoneBalance: availability zone balancing strategy. Priority: subnet priority strategy.
 
 
@@ -54,22 +54,22 @@ Read-Only:
 
 Read-Only:
 
-- `auto_sync_disabled` (Boolean) Disable automatic synchronization of labels and taints to existing nodes. Parameter values: true: disable (turn off automatic sync). false: do not disable (turn on automatic sync)
+- `auto_sync_disabled` (Boolean) Disable automatic synchronization of labels and taints to existing nodes. Parameter value description: true: Disable, i.e., turn off automatic synchronization. false: (Default) Do not disable, i.e., enable automatic synchronization.
 - `containerd_config` (Attributes) Node pool Containerd configuration (see [below for nested schema](#nestedatt--kubernetes_config--containerd_config))
-- `cordon` (Boolean) Node blocking configuration. Parameter values: false: not blocked; true: blocked
-- `kubelet_config` (Attributes) Kubelet component configuration (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config))
-- `labels` (Attributes Set) Kubernetes label information for node pools/nodes (see [below for nested schema](#nestedatt--kubernetes_config--labels))
-- `name_prefix` (String) Prefix for node object metadata name in Kubernetes
+- `cordon` (Boolean) Node blocking configuration. Options: false: (default) Not blocked. true: Blocked. Note: When updating the node pool (UpdateNodePoolConfig), if no parameter value is provided, the original parameter configuration is retained.
+- `kubelet_config` (Attributes) Custom kubelet parameter configuration for nodes in the node pool, used to adjust node behavior. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config))
+- `labels` (Attributes Set) Kubernetes label information for the node pool/nodes. Up to 20 labels can be specified. Note: The node pool centrally manages node label configurations, so label information is synchronized to all nodes in the pool. When labels change, the original label configuration will be overwritten. (see [below for nested schema](#nestedatt--kubernetes_config--labels))
+- `name_prefix` (String) Prefix for the metadata name of node objects in Kubernetes. Disabled by default. If set, it is enabled and will affect the metadata.name prefix displayed in the Kubernetes Node Manifest file. Prefix validation rules: Supports lowercase English letters, numbers, hyphens (-), and periods (.); must start with a lowercase English letter or number; length must be 1–48 characters.
 - `name_suffix` (String) Suffix for node object metadata name in Kubernetes
-- `name_use_hostname` (Boolean) Whether the node object metadata name in Kubernetes uses the ECS host name. Values: true: use ECS host name as node name; false: do not use ECS host name as node name
-- `taints` (Attributes Set) Kubernetes taint information for node pools/nodes (see [below for nested schema](#nestedatt--kubernetes_config--taints))
+- `name_use_hostname` (Boolean) Whether to use the ECS host name as the metadata name for node objects in Kubernetes. Options: true: Use ECS host name as node name. false: Do not use ECS host name as node name. Note: This setting takes precedence over NamePrefix and NameSuffix.
+- `taints` (Attributes Set) Kubernetes taints information for the node pool/nodes. You can specify up to 20 taints. Note: The node pool manages taint configuration uniformly, so taint information is synchronized to all nodes in the pool. When taints are changed, the original taint configuration will be overwritten. (see [below for nested schema](#nestedatt--kubernetes_config--taints))
 
 <a id="nestedatt--kubernetes_config--containerd_config"></a>
 ### Nested Schema for `kubernetes_config.containerd_config`
 
 Read-Only:
 
-- `insecure_registries` (Set of String) Specify the container image repository address to skip certificate verification.
+- `insecure_registries` (Set of String) Specify container image registry addresses to skip certificate authentication. The format is a domain name or IP address without protocol, and can include a port number, for example: example.com or example.com:8080. Supports up to 10 domain names or IP addresses.
 - `registry_proxy_configs` (Attributes Set) Container image repository proxy configuration (see [below for nested schema](#nestedatt--kubernetes_config--containerd_config--registry_proxy_configs))
 
 <a id="nestedatt--kubernetes_config--containerd_config--registry_proxy_configs"></a>
@@ -77,8 +77,8 @@ Read-Only:
 
 Read-Only:
 
-- `proxy_endpoints` (Set of String) Proxy address.
-- `registry` (String) Container image repository address.
+- `proxy_endpoints` (Set of String) Proxy address. Format: domain name or IP address with protocol, may include port number, for example: https://example.com or https://example.com:8080. Supports up to 5 domain names or IP addresses.
+- `registry` (String) Container image repository address. The format is a domain name or IP address without protocol, and may include a port number, for example: example.com or example.com:8080.
 
 
 
@@ -87,17 +87,17 @@ Read-Only:
 
 Read-Only:
 
-- `cpu_manager_policy` (String) Configure kubelet CpuManagerPolicy. Supports none and static policies
-- `eviction_hard` (Attributes Set) Set of hard thresholds for triggering Pod eviction (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--eviction_hard))
-- `feature_gates` (Attributes) Feature gate (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--feature_gates))
-- `kube_api_burst` (Number) Maximum burst request rate sent to the API server per second. Excludes events and node heartbeat APIs, whose rate limits are controlled by a different set of flags
-- `kube_api_qps` (Number) Queries per second (QPS) for communication with apiserver. Events and node heartbeat APIs are not included; their rate limits are controlled by a different set of flags.
-- `kube_reserved` (Attributes Set) Resources reserved for Kubernetes system components on the node. By default, half of the default value in the node reserved resource policy is reserved. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--kube_reserved))
-- `max_pods` (Number) Configure the maximum number of Pods supported by kubelet
-- `registry_burst` (Number) Set the maximum number of burst image pulls. Temporarily allows the number of image pulls specified by this parameter, provided it does not exceed the RegistryPullQps setting
-- `registry_pull_qps` (Number) Used to limit the QPS cap for the image repository
-- `serialize_image_pulls` (Boolean) Pull images sequentially
-- `system_reserved` (Attributes Set) Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is used for resource reservation. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
+- `cpu_manager_policy` (String) CPU manager policy. Options: none: Default policy. static: Allows Pods with certain resource characteristics on the node to have stronger CPU affinity and exclusivity.
+- `eviction_hard` (Attributes Set) A set of hard thresholds that trigger Pod eviction. For detailed parameter explanations, see the Kubernetes official documentation (https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/). To explicitly disable, set the threshold for any resource to 0% or 100%. Default values: memory.available: "100Mi", nodefs.available: "10%", nodefs.inodesFree: "5%", imagefs.available: "15%". (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--eviction_hard))
+- `feature_gates` (Attributes) Feature gates, which are a set of key-value pairs that describe Kubernetes features. Note: These feature gates are only supported in clusters running Kubernetes v1.26 or earlier. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--feature_gates))
+- `kube_api_burst` (Number) Maximum burst request count sent to APIServer per second. Integer value, range: 1–100, default is 10. Note: This value must be greater than or equal to the value of the KubeApiQps parameter.
+- `kube_api_qps` (Number) Number of queries per second (QPS) to APIServer. Integer, range: 1–50, default is 5.
+- `kube_reserved` (Attributes Set) Resources reserved for Kubernetes system components on the node. By default, reserves half of the default value specified in the node resource reservation policy. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--kube_reserved))
+- `max_pods` (Number) Maximum number of Pods supported by the node. Default is 110.
+- `registry_burst` (Number) Burst threshold for pulling images from the image registry in the cluster. Integer value, range: 1–100, default is 5. Note: Only required when RegistryPullQps is greater than 0, and the value must be greater than or equal to the value of the RegistryPullQps parameter.
+- `registry_pull_qps` (Number) QPS threshold for pulling images from the image registry in the cluster. Integer value, range: 1–50, default is 2.
+- `serialize_image_pulls` (Boolean) Enable serial image pulling. Values: true: Pull images serially. false: (Default) Pull images in parallel to speed up Pod startup.
+- `system_reserved` (Attributes Set) Resources reserved for the operating system on the node. By default, half of the default value in the node reserved resource policy is allocated. (see [below for nested schema](#nestedatt--kubernetes_config--kubelet_config--system_reserved))
 - `topology_manager_policy` (String) Topology management policy. Values: none (default): disables topology management policy. restricted: kubelet only accepts Pods that achieve optimal NUMA (Non-Uniform Memory Access) on requested resources. best-effort: kubelet prioritizes Pods that achieve NUMA on CPU and device resources. single-numa-node: kubelet only allows Pods that achieve NUMA on CPU and device resources within the same node
 - `topology_manager_scope` (String) Resource granularity for topology management policy. Values: container: resource alignment at container level pod: resource alignment at Pod level
 
@@ -107,7 +107,7 @@ Read-Only:
 Read-Only:
 
 - `key` (String) Hard threshold name. Options: memory.available, nodefs.available, nodefs.inodesFree, imagefs.available
-- `value` (String) Hard threshold value.
+- `value` (String) Hard threshold value. Supports integer or percentage format: Integer format specifies the actual resource threshold in bytes, for example, 100Mi. Percentage format specifies the resource threshold as a proportion, range: 0%–100%, for example, 20%. To explicitly disable, set the threshold to 0% or 100% for any resource.
 
 
 <a id="nestedatt--kubernetes_config--kubelet_config--feature_gates"></a>
@@ -115,8 +115,8 @@ Read-Only:
 
 Read-Only:
 
-- `in_place_pod_vertical_scaling` (Boolean) Enable local vertical Pod autoscaling feature toggle
-- `qo_s_resource_manager` (Boolean) Whether to enable the QoSResourceManager feature switch. Values:   - true enabled;   - false disabled
+- `in_place_pod_vertical_scaling` (Boolean) Enable Pod vertical scaling. Options: true: enabled. false: disabled.
+- `qo_s_resource_manager` (Boolean) Whether to enable the QoS resource manager to support micro-topology scheduling. Values: true: Enable the QoS resource manager. false: (default) Do not enable the QoS resource manager.
 
 
 <a id="nestedatt--kubernetes_config--kubelet_config--kube_reserved"></a>
@@ -125,7 +125,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) Resource name. Valid values: cpu or memory.
-- `quantity` (String) Specify the resource quantity.   - For cpu, example value: 200m   - For memory, example value: 1G
+- `quantity` (String) Specify the resource quantity. For cpu, example value is 200m. For memory, example value is 1G.
 
 
 <a id="nestedatt--kubernetes_config--kubelet_config--system_reserved"></a>
@@ -134,7 +134,7 @@ Read-Only:
 Read-Only:
 
 - `name` (String) Resource name. Valid values: cpu or memory.
-- `quantity` (String) Resource quantity for the specified resource.   - For cpu, example value: 200m.   - For memory, example value: 1G.
+- `quantity` (String) Specify the resource quantity. For cpu, example value is 200m. For memory, example value is 1G.
 
 
 
@@ -143,8 +143,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) Tag key.
-- `value` (String) Label value.
+- `key` (String) Tag key. A valid tag key consists of two segments: prefix and name, separated by a slash (/). The name is required and supports English letters (upper and lower case), numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and cannot exceed 63 characters. The prefix is optional; if specified, it must be a DNS subdomain: a series of DNS labels separated by periods (.), not exceeding 253 characters. The total length of prefix and name must not exceed 82 characters.
+- `value` (String) Tag value. Maximum length is 63 characters (can be empty). Must start and end with English letters or numbers. Supports special characters: hyphen (-), underscore (_), period (.).
 
 
 <a id="nestedatt--kubernetes_config--taints"></a>
@@ -153,8 +153,8 @@ Read-Only:
 Read-Only:
 
 - `effect` (String) Taint effect. Values: NoSchedule: (default) Do not schedule. NoExecute: Evict pods that do not tolerate the taint. PreferNoSchedule: Prefer not to schedule.
-- `key` (String) Taint key.
-- `value` (String) Taint value
+- `key` (String) Taint key. A valid taint key consists of two segments: prefix and name, separated by a slash (/). The name is required and supports English letters (upper and lower case), numbers, hyphens (-), underscores (_), and periods (.), must start and end with a letter or number, and cannot exceed 63 characters. The prefix is optional; if specified, it must be a DNS subdomain: a series of DNS labels separated by periods (.), not exceeding 253 characters. The total length of prefix and name must not exceed 82 characters.
+- `value` (String) Taint value. Maximum length is 63 characters (can be empty). Must start and end with an English letter (upper or lower case) or a number. Supports special characters: hyphen (-), underscore (_), and period (.).
 
 
 
@@ -163,16 +163,16 @@ Read-Only:
 
 Read-Only:
 
-- `enabled` (Boolean) Enable managed mode for node pool. Options:   - true: on   - false: off
-- `remedy_config` (Attributes) Check self-healing configuration. (see [below for nested schema](#nestedatt--management--remedy_config))
+- `enabled` (Boolean) Enable managed mode for the node pool. Options: true: Enabled. false: Disabled.
+- `remedy_config` (Attributes) Node pool health check and self-healing rule configuration. (see [below for nested schema](#nestedatt--management--remedy_config))
 
 <a id="nestedatt--management--remedy_config"></a>
 ### Nested Schema for `management.remedy_config`
 
 Read-Only:
 
-- `enabled` (Boolean) Enable self-healing check
-- `remedy_id` (String) Self-healing rule ID
+- `enabled` (Boolean) Whether to enable the self-healing check after enabling managed mode for the node pool. Values: true: enable; false: disable.
+- `remedy_id` (String) Self-healing rule ID associated after enabling self-healing check for the node pool.
 
 
 
@@ -181,45 +181,45 @@ Read-Only:
 
 Read-Only:
 
-- `additional_container_storage_enabled` (Boolean) Whether the first data disk of the node is configured, formatted, and mounted as the storage directory for container images and logs. Parameter values: false: not configured and formatted; true: configured and formatted
-- `auto_renew` (Boolean) Whether the cloud server instance will be automatically renewed upon expiration. Parameter description: true: auto renewal false: no auto renewal This parameter is returned only when InstanceChargeType=PrePaid.
-- `auto_renew_period` (Number) Automatic renewal duration for cloud server instances, in months. This parameter is returned only when AutoRenew=true
-- `data_volumes` (Attributes Set) Node data disk configuration. (see [below for nested schema](#nestedatt--node_config--data_volumes))
-- `deployment_set_group_number` (Number) Group number of the instance in the deployment set; 0 means not set
-- `deployment_set_id` (String) Deployment Set ID to be added to the instance
-- `hostname` (String) The host name corresponding to the node.
-- `hpc_cluster_ids` (Set of String) High performance computing cluster ID. When the node pool is configured with high performance computing GPU node types, returns the high performance computing cluster ID
-- `image_id` (String) Image ID used by the cloud server corresponding to the node
-- `initialize_script` (String) Custom script executed after node creation and initialization. Shell script in Base64 encoding
-- `instance_charge_type` (String) Cloud server instance billing type. Parameter values: PostPaid: pay-as-you-go. PrePaid: subscription (annual/monthly).
-- `instance_name` (String) Node (instance) name
-- `instance_type_ids` (Set of String) List of cloud server instance type IDs corresponding to the nodes
-- `instances_distribution` (Attributes) Set the mixed strategy for spot and pay-as-you-go instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo. (see [below for nested schema](#nestedatt--node_config--instances_distribution))
-- `name_prefix` (String) Node name prefix. An empty string or nil means the node name prefix policy is not enabled.
-- `network_traffic_mode` (String) Network communication mode between nodes
-- `period` (Number) Purchase duration for cloud server instances, in months. This parameter is returned only when InstanceChargeType=PrePaid
-- `pre_script` (String) Script to execute before deploying the node
-- `project_name` (String) Project to which the ECS belongs. Each ECS can only belong to one project.
-- `public_access_config` (Attributes) Configuration for automatic public network access for nodes (see [below for nested schema](#nestedatt--node_config--public_access_config))
-- `public_access_enabled` (Boolean) Enable public network access for nodes automatically. Options:   - false: off   - true: on
+- `additional_container_storage_enabled` (Boolean) Whether to configure the first data disk of the node, format it, and mount it to the container and image storage directory (/var/lib/containerd). Options: false: (default) Disabled. true: Enabled. Note: When enabled, at least one data disk must be configured; otherwise, node pool creation will fail. This method will automatically format the first data disk and create the file system.
+- `auto_renew` (Boolean) Whether the ECS instance will be automatically renewed upon expiration. Options: true (default): auto renewal. false: no auto renewal. Only required when InstanceChargeType=PrePaid; otherwise, ignore.
+- `auto_renew_period` (Number) ECS instance auto-renewal duration, in months. Values: 1 (default), 2, 3, 6, 12. Only required when AutoRenew=true; otherwise, ignore.
+- `data_volumes` (Attributes Set) Node data disk configuration. You can call the DescribeInstanceTypes API of the cloud server to obtain the matching relationship between ECS instance families and cloud disk specifications. (see [below for nested schema](#nestedatt--node_config--data_volumes))
+- `deployment_set_group_number` (Number) When the specified deployment set policy is the deployment set group high availability policy, you can use this parameter to specify the group number of the instance in the deployment set. Value range: 1–3. 0 means not set.
+- `deployment_set_id` (String) Deployment set ID that nodes in the node pool need to join. You can call the DescribeDeploymentSets API to obtain the deployment set ID.
+- `hostname` (String) Host name corresponding to the node. Supports defining fixed incremental sorting and dynamic expansion sorting. For details on the definition format, see naming format.
+- `hpc_cluster_ids` (Set of String) High Performance Computing Cluster ID. When creating a node pool with a high-performance computing GPU type, you must specify the High Performance Computing Cluster ID, which can be obtained from the 'Instances & Images > High Performance Computing Cluster' page in the cloud server console. Note: Only one High Performance Computing Cluster ID is supported; ensure the specified cluster and the subnets in SubnetIds are in the same availability zone.
+- `image_id` (String) The image ID used by the ECS instance corresponding to the node. Different image types have different image IDs. For details, see Public Images Supported by Container Service. Note: If you do not specify this parameter, Container Service will assign the veLinux-VKE image ID corresponding to the selected ECS instance type by default. If you specify multiple instance types, this parameter is required.
+- `initialize_script` (String) Custom script to execute after creating and initializing the node. Supports Shell format and must be Base64-encoded before being passed in. Note: The Base64-encoded length must not exceed 8 KB. If both InitializeScript and PreScript are provided, the total length of both parameters must not exceed 8 KB.
+- `instance_charge_type` (String) ECS instance billing type. Values: PostPaid (default): pay-as-you-go. PrePaid: subscription.
+- `instance_name` (String) Name of the node (instance). Supports defining fixed incremental sorting and dynamic expansion sorting. For format details, see naming format.
+- `instance_type_ids` (Set of String) List of instance type IDs for cloud server (ECS) instances corresponding to the nodes. This list serves as the candidate set of instance types when creating nodes in the node pool, not as a fixed quota for each type: the node pool selects instance types from the list based on available inventory and other factors. Different nodes in the same node pool may use different types from the list, or all may use the same type. Each type does not correspond to an independent node count quota. To strictly split node counts by type, create a separate node pool for each type. You can call the ListSupportedResourceTypes API to query the resource types and ranges supported by the cluster instance. Constraints: Up to ten array elements are supported; all types in the list must be consistent, such as all GPU types, all non-GPU types, or all bare metal types; when multiple types are provided, the ImageId parameter is required.
+- `instances_distribution` (Attributes) Configure a mixed strategy for spot instances and on-demand instances. This strategy takes effect when SpotStrategy is SpotAsPriceGo. (see [below for nested schema](#nestedatt--node_config--instances_distribution))
+- `name_prefix` (String) Node name prefix. If the value is an empty string or nil, it indicates that the node name prefix policy is not enabled. This policy is not enabled by default. Prefix validation rules: supports uppercase and lowercase English letters, numbers, and hyphens (-); must start with a letter and end with a letter or number; hyphens (-) cannot be used consecutively; length must be between 2 and 51 characters.
+- `network_traffic_mode` (String) Network communication mode between nodes. Options: HighPerformance: Communication method based on RDMA for data transmission. Standard: Communication method based on TCP for data transmission.
+- `period` (Number) ECS instance purchase duration, in months. Values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36. Only required and mandatory when InstanceChargeType=PrePaid.
+- `pre_script` (String) [Invitation Test · Apply for Trial] Script executed before deploying the node. Enter the Shell script encoded in Base64. Note: The length after Base64 encoding must not exceed 8 KB. If both InitializeScript and PreScript are provided, the total length of both parameters must not exceed 8 KB.
+- `project_name` (String) Project name to which the ECS expanded from the node pool belongs. Each ECS can only belong to one project. Only English letters, numbers, underscores (_), periods (.), and hyphens (-) are allowed. Maximum length is 64 characters. Default is default.
+- `public_access_config` (Attributes) Configuration information for automatically binding EIP to nodes. (see [below for nested schema](#nestedatt--node_config--public_access_config))
+- `public_access_enabled` (Boolean) Enable automatic public IP (EIP) binding for nodes. Options: false: (default) Disabled. The system will not automatically assign an EIP to the node. If you need public network access later, refer to Applying for a Public IP and Binding to a Cloud Server. true: Enabled. The system automatically assigns an EIP to nodes in the cluster. You must also configure the PublicAccessConfig parameter to customize the EIP settings.
 - `security` (Attributes) Node security configuration (see [below for nested schema](#nestedatt--node_config--security))
-- `spot_strategy` (String) Spot pricing strategy for pay-as-you-go billing. When InstanceChargeType=PostPaid: NoSpot: Standard pay-as-you-go instance. SpotAsPriceGo: System automatically bids, following the current market price.
-- `subnet_ids` (Set of String) List of subnet IDs for the node network.
-- `system_volume` (Attributes) System disk configuration for the node (see [below for nested schema](#nestedatt--node_config--system_volume))
-- `tags` (Attributes Set) Label information configured for the node pool (see [below for nested schema](#nestedatt--node_config--tags))
+- `spot_strategy` (String) Spot pricing strategy for on-demand billing applies only when InstanceChargeType=PostPaid. Options: NoSpot (default): standard on-demand instance. SpotAsPriceGo: system automatically bids, following the current market price.
+- `subnet_ids` (Set of String) List of subnet IDs to which the node network belongs. You can call the private network API to obtain subnet IDs. Note: Must be in the same private network as the cluster. A single node pool supports up to 8 subnet IDs.
+- `system_volume` (Attributes) System disk configuration for the node. You can call the DescribeInstanceTypes API of the cloud server to obtain the matching relationship between ECS instance families and disk specifications. (see [below for nested schema](#nestedatt--node_config--system_volume))
+- `tags` (Attributes Set) Tag information bound to the ECS instance corresponding to the node, used for searching and managing ECS instances. Note: Keys in Tags must be unique. If a resource already has the same Tags.Key, binding the same Tags.Key again will not cause an error and will update to the latest Tags.Value. A single resource supports up to 20 ECS instance tags. Do not enter spaces at the beginning or end of Keys or Values in Tags. (see [below for nested schema](#nestedatt--node_config--tags))
 
 <a id="nestedatt--node_config--data_volumes"></a>
 ### Nested Schema for `node_config.data_volumes`
 
 Read-Only:
 
-- `file_system` (String) File system. Options:   - Ext4 (default)   - Xfs
+- `file_system` (String) [Invitation Test · Apply for Trial] File system for the node pool data disk. Values: Ext4 (default), Xfs.
 - `mount_point` (String) Target mount directory after disk formatting.
-- `placement_group_id` (String) Placement group ID
+- `placement_group_id` (String) Storage placement group ID to which the data disk belongs.
 - `size` (Number) Disk capacity, in GiB.
-- `snapshot_id` (String) Create a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only Ultra SSD and High-performance Cloud Disk support creating disks from snapshots. Only snapshots in the 'available' status can be used to create new disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' status cannot be used to create new disks.
-- `subgroup_number` (Number) Placement subgroup
-- `type` (String) Disk type: ESSD_PL0: ultra-fast SSD disk with performance level PL0. ESSD_FlexPL: ultra-fast SSD disk with performance level PL1
+- `snapshot_id` (String) Snapshot ID used when creating a data disk from a snapshot. You can call the DescribeSnapshots API to query the snapshot ID. Note: Only ultra-fast SSDs and efficient cloud disks support creating cloud disks from snapshots. Only snapshots in the 'available' state can be used to create new cloud disks. Snapshots in 'creating', 'rolling back', 'deleting', or 'error' states cannot be used to create new cloud disks.
+- `subgroup_number` (Number) Storage sub-placement group number of the data disk.
+- `type` (String) Disk types. Cloud disks: ESSD_PL0: Ultra-fast SSD cloud disk, PL0 specification. ESSD_FlexPL: Ultra-fast SSD cloud disk, FlexPL specification. Ultra_Disk: [EBS Invitation Test] High-performance SSD cloud disk. TSSD_TL0: Throughput SSD cloud disk, TL0 specification. RSSD_PL0: [EBS Invitation Test] Elastic remote disk, PL0 specification. Local disks: LOCAL_SSD: SSD type local disk. LOCAL_HDD: HDD type local disk. LOCAL_LVM_SSD: SSD LVM logical local disk. LOCAL_SSD_SRIOV: SSD SRIOV local disk.
 
 
 <a id="nestedatt--node_config--instances_distribution"></a>
@@ -227,10 +227,10 @@ Read-Only:
 
 Read-Only:
 
-- `capacity_rebalance` (Boolean) Capacity rebalancing. Value range:   - true: enables this feature. When a preemptible instance is about to be reclaimed, proactively creates a new preemptible instance for compensation.   - false (default): disables this feature. Waits until the preemptible instance is reclaimed before scaling out to make up the instance count
-- `compensate_with_on_demand` (Boolean) On-demand instance fallback feature. Value range:   - true: enable this feature; when all preemptible instances fail to purchase due to insufficient inventory or other reasons, attempt to purchase on-demand instances   - false (default): disable this feature; only attempt to purchase configured preemptible instances when scaling up
-- `on_demand_base_capacity` (Number) Size of the base capacity. The base capacity is always pay-as-you-go instances. Value range: [0,500], default is 0.
-- `on_demand_percentage_above_base_capacity` (Number) Proportion of pay-as-you-go instances in the part exceeding the base capacity. Value range: [0, 100]. 0 means only preemptible instances are produced for the part exceeding the base capacity; 100 means only pay-as-you-go instances are produced. Default value is 0.
+- `capacity_rebalance` (Boolean) Whether to enable capacity rebalancing (on-demand instance supplementation for preemptible capacity). Values: true: enable this feature to proactively create new preemptible instances for compensation before existing preemptible instances are reclaimed; false (default): do not enable this feature, and only scale out to replenish instances after preemptible instances are reclaimed.
+- `compensate_with_on_demand` (Boolean) Enable on-demand instance replacement. Values: true: Enable this feature. When all preemptible instances fail to be purchased due to insufficient inventory or other reasons, attempt to purchase on-demand instances. false: (Default) Do not enable this feature. When scaling out preemptible instances, only the configured preemptible instances are attempted.
+- `on_demand_base_capacity` (Number) Base capacity size. The base capacity portion is fixed as on-demand instances. Value range: [0,500], default is 0.
+- `on_demand_percentage_above_base_capacity` (Number) Proportion of pay-as-you-go instances in the remaining capacity of the node pool after deducting the base capacity for pay-as-you-go instances. Value range: [0,100]. 0 means only preemptible instances are created for the portion exceeding the base capacity; 100 means only pay-as-you-go instances are created. Default value is 0.
 
 
 <a id="nestedatt--node_config--public_access_config"></a>
@@ -239,8 +239,8 @@ Read-Only:
 Read-Only:
 
 - `bandwidth` (Number) Peak bandwidth for public IP, unit: Mbps
-- `billing_type` (Number) Billing type for public IP: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.
-- `isp` (String) Public IP line type. Parameter description: BGP: BGP (multi-line)
+- `billing_type` (Number) Billing type for public IP. Values: 2: pay-as-you-go by bandwidth cap. 3: pay-as-you-go by actual traffic.
+- `isp` (String) Public IP line type. Parameter value description: BGP: BGP (multi-line).
 
 
 <a id="nestedatt--node_config--security"></a>
@@ -269,9 +269,9 @@ Read-Only:
 
 Read-Only:
 
-- `placement_group_id` (String) Placement group ID
-- `size` (Number) Disk capacity, in GiB. Value description: Default: 40 GiB. Ultra-fast SSD (ESSD_PL0, ESSD_FlexPL): 40–2048 GiB
-- `subgroup_number` (Number) Placement subgroup
+- `placement_group_id` (String) Storage placement group ID of the system disk.
+- `size` (Number) Cloud disk capacity, in GiB. Value description: Default is 40 GiB; for Ultra SSD (ESSD_PL0, ESSD_FlexPL), the range is 40–2048 GiB.
+- `subgroup_number` (Number) Storage sub-placement group number for the system disk.
 - `type` (String) Cloud disk types: ESSD_PL0: (default) Ultra-fast SSD cloud disk with performance level PL0. ESSD_FlexPL: Ultra-fast SSD cloud disk with performance level PL1.
 
 
@@ -304,14 +304,14 @@ Read-Only:
 Read-Only:
 
 - `conditions` (Attributes Set) Status conditions for the current primary state of the node pool, i.e., the reason for entering this primary state (see [below for nested schema](#nestedatt--status--conditions))
-- `phase` (String) Status of the node pool. Parameter values: Creating, Running, Updating, Deleting, Failed, Scaling
+- `phase` (String) Status of the node pool. Values: Creating: Creating. Running: Running. Updating: Updating. Deleting: Deleting. Failed: Abnormal. Scaling: Scaling. Note: For valid combinations of Phase and Conditions.Type, see the resource status documentation.
 
 <a id="nestedatt--status--conditions"></a>
 ### Nested Schema for `status.conditions`
 
 Read-Only:
 
-- `type` (String) Status conditions for the node pool in the current main state, i.e., the reasons for entering this main state. There can be multiple reasons. Parameter values: ProgressingOk, ResourceCleanupFailed, Unknown, ClusterNotRunning.
+- `type` (String) Status conditions under the current primary state of the node pool, indicating the reasons for entering this state. Multiple reasons are possible. Values: Progressing: in progress. Ok: normal. ResourceCleanupFailed: resource cleanup failed. Unknown: creation failed due to unknown reasons. ClusterNotRunning: cluster exception. ScalingFailed: scaling failed. ClusterVersionUpgrading: node version upgrading in the node pool. Note: For valid Phase and Conditions.Type combinations, see resource status description.
 
 
 

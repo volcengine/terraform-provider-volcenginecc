@@ -312,6 +312,18 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_waf_ip_groups -cctype Volcengine::WAF::IpGroup -package waf ../volcengine/waf/ip_group_plural_data_source_gen.go ../volcengine/waf/ip_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_waf_system_bots -cctype Volcengine::WAF::SystemBot -package waf ../volcengine/waf/system_bot_plural_data_source_gen.go ../volcengine/waf/system_bot_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_waf_custom_pages -cctype Volcengine::WAF::CustomPage -package waf ../volcengine/waf/custom_page_plural_data_source_gen.go ../volcengine/waf/custom_page_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vke_nodepool_scaling_policies -cctype Volcengine::VKE::NodepoolScalingPolicy -package vke ../volcengine/vke/nodepool_scaling_policy_plural_data_source_gen.go ../volcengine/vke/nodepool_scaling_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_vpc_ipam_resource_discoveries -cctype Volcengine::VPC::IPAMResourceDiscovery -package vpc ../volcengine/vpc/ipam_resource_discovery_plural_data_source_gen.go ../volcengine/vpc/ipam_resource_discovery_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_transitrouter_transit_router_route_policy_tables -cctype Volcengine::TransitRouter::TransitRouterRoutePolicyTable -package transitrouter ../volcengine/transitrouter/transit_router_route_policy_table_plural_data_source_gen.go ../volcengine/transitrouter/transit_router_route_policy_table_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_transitrouter_transit_router_forward_policy_entries -cctype Volcengine::TransitRouter::TransitRouterForwardPolicyEntry -package transitrouter ../volcengine/transitrouter/transit_router_forward_policy_entry_plural_data_source_gen.go ../volcengine/transitrouter/transit_router_forward_policy_entry_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_billing_financial_relations -cctype Volcengine::Billing::FinancialRelation -package billing ../volcengine/billing/financial_relation_plural_data_source_gen.go ../volcengine/billing/financial_relation_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_waf_bot_analyse_protect_rules -cctype Volcengine::WAF::BotAnalyseProtectRule -package waf ../volcengine/waf/bot_analyse_protect_rule_plural_data_source_gen.go ../volcengine/waf/bot_analyse_protect_rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_waf_custom_bots -cctype Volcengine::WAF::CustomBot -package waf ../volcengine/waf/custom_bot_plural_data_source_gen.go ../volcengine/waf/custom_bot_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_securitycenter_agents -cctype Volcengine::SecurityCenter::Agent -package securitycenter ../volcengine/securitycenter/agent_plural_data_source_gen.go ../volcengine/securitycenter/agent_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tidb_instances -cctype Volcengine::TiDB::Instance -package tidb ../volcengine/tidb/instance_plural_data_source_gen.go ../volcengine/tidb/instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tidb_branches -cctype Volcengine::TiDB::Branch -package tidb ../volcengine/tidb/branch_plural_data_source_gen.go ../volcengine/tidb/branch_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_object_groups -cctype Volcengine::CloudMonitor::ObjectGroup -package cloudmonitor ../volcengine/cloudmonitor/object_group_plural_data_source_gen.go ../volcengine/cloudmonitor/object_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_alert_templates -cctype Volcengine::CloudMonitor::AlertTemplate -package cloudmonitor ../volcengine/cloudmonitor/alert_template_plural_data_source_gen.go ../volcengine/cloudmonitor/alert_template_plural_data_source_gen_test.go
 
 package provider
 
@@ -320,6 +332,7 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/apig"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/ark"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/autoscaling"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/billing"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/bmq"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cbr"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/cdn"
@@ -356,7 +369,9 @@ import (
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/redis"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/resourceshare"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/rocketmq"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/securitycenter"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/storageebs"
+	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tidb"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tls"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/tos"
 	_ "github.com/volcengine/terraform-provider-volcenginecc/internal/volcengine/transitrouter"

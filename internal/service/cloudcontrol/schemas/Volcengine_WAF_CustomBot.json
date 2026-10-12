@@ -1,0 +1,169 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/Host"
+  ],
+  "definitions": {
+    "Accurate": {
+      "description": "Advanced configuration details",
+      "properties": {
+        "AccurateRules": {
+          "description": "Advanced condition subrule list",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/AccurateRule"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "Logic": {
+          "description": "Advanced condition group logical relationship. 1: AND; 2: OR",
+          "type": "integer"
+        }
+      }
+    },
+    "AccurateRule": {
+      "description": "Subrules in advanced conditions",
+      "properties": {
+        "HttpObj": {
+          "description": "HTTP objects. Supported match objects are as follows: request.schema: request protocol; request.uri: request URI; request.method: request method; request.path: request path; request.queryargs: request parameters; request.header: request headers; request.header.ua: request User-Agent; request.header.refer: request referer; request.header.cookie: request Cookie header; request.header.content-length: request body length; request.header.content-type: request body format; request.header.x-forwarded-for: X-Forwarded-For; request.header.clientip: client IP; request.queryargs.{Key}: custom request parameter (replace {Key} with the specific parameter name); request.header.{Key}: custom request header (replace {Key} with the specific header name); request.cookie.{Key}: custom Cookie (replace {Key} with the specific Cookie name); response.header: response headers; response.body: response body; response.code: response status code; response.header.content-type: response header content-type; response.header.{Key}: custom response header (replace {Key} with the specific header name); response.body.{Key}: response body field (replace {Key} with the specific field name); request.ja3-hash: JA3 Hash (applicable only to byteplus-global region). You cannot directly pass generalized forms such as request.queryargs.*, request.header.*, request.cookie.*, response.header.*, response.body.*; you must provide a specific Key.",
+          "type": "string"
+        },
+        "ObjType": {
+          "description": "Enumeration value for the match object type, used to specify the match object type for subrules in advanced conditions. Supported values are as follows: 0: request.schema; 1: request.uri; 2: request.method; 3: request.path; 4: request.queryargs; 5: request.header; 6: request.header.ua; 7: request.header.refer; 8: request.header.cookie; 9: request.header.content-length; 10: request.header.content-type; 11: request.header.x-forwarded-for; 12: request.header.clientip; 13: request.queryargs.{Key}; 14: request.header.{Key}; 15: request.cookie.{Key}; 17: response.header; 18: response.body; 19: response.code; 20: response.header.content-type; 21: response.header.{Key}; 22: response.body.{Key}; 23: request.ja3-hash (applicable only to byteplus-global regions)",
+          "type": "integer"
+        },
+        "Opretar": {
+          "description": "Enumeration values for match operators, used to specify how subrules are matched in advanced conditions. Supported values are as follows: 0: greater than; 1: greater than or equal to; 2: equal to; 3: less than; 4: less than or equal to; 5: not equal to; 6: contains substring; 7: does not contain substring; 8: prefix match; 9: prefix does not match; 10: suffix match; 11: suffix does not match; 12: contains all match sets; 13: does not contain all match sets; 14: belongs to match set; 15: does not belong to match set; 16: regex match; 17: recognized as IP; 18: recognized as IPv4; 19: recognized as IPv6; 20: recognized as private IP; 21: recognized as public IP; 22: reserved value; 23: belongs to IP group; 24: does not belong to IP group; 25: belongs to IP location; 26: does not belong to IP location; 27: contains IP intelligence; 28: belongs to ASN; 29: does not belong to ASN.",
+          "type": "integer"
+        },
+        "Property": {
+          "description": "Enumeration value for the match attribute type. Default is 0 (except for special IP recognition scenarios). Supported values are as follows: 0: Value, applicable to most match object scenarios, such as request protocol, URI, method, request header, client IP, JA3 Hash, etc.; 5: IP, only used for the following IP recognition operations: 17 (recognize as IP), 18 (recognize as IPv4), 19 (recognize as IPv6), 20 (recognize as private IP), 21 (recognize as public IP)",
+          "type": "integer"
+        },
+        "ValueString": {
+          "description": "Specific value corresponding to the match rule. When the match object is a generalized object such as request.header.{Key}, request.queryargs.{Key}, or request.cookie.{Key}, this field indicates the match value for the corresponding Key. Special note: When the operator (Operator) is 17, 18, 19, 20, or 21 and the match object (HttpObj) is request.header.clientip, this field does not need to be filled in; for all other operator scenarios, fill in the actual match value as required",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "WAF custom Bot configuration",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/Host",
+      "/properties/RuleTag"
+    ],
+    "required": [
+      "/properties/Host"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "waf:CreateCustomBotConfig",
+        "waf:ListCustomBotConfig"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "waf:DeleteCustomBotConfig",
+        "waf:ListCustomBotConfig"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "waf:ListCustomBotConfig"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "waf:ListCustomBotConfig"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "waf:UpdateCustomBotConfig",
+        "waf:ListCustomBotConfig"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Host",
+    "/properties/BotId"
+  ],
+  "properties": {
+    "Accurate": {
+      "$ref": "#/definitions/Accurate",
+      "description": "Advanced configuration details",
+      "type": "object"
+    },
+    "Action": {
+      "description": "Action. observe: Observe; block: Block; js: JS challenge; captcha: CAPTCHA; pow: Proof of Work; permit: Allow",
+      "type": "string"
+    },
+    "Advanced": {
+      "description": "Is advanced rule",
+      "type": "integer"
+    },
+    "BotId": {
+      "description": "Bot configuration ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "BotType": {
+      "description": "Bot name. Must start with a Chinese character, letter, or number. Letters, numbers, Chinese characters, period '.', underscore '_', and hyphen '-' are allowed. Length: 1–128 characters",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description. Must start with a Chinese character, letter, or number. Letters, numbers, Chinese characters, period '.', space, underscore '_', hyphen '-', equal sign '=', English comma ',', Chinese comma '，', and Chinese period '。' are allowed. Length: 0–255 characters",
+      "semantic": "description",
+      "type": "string"
+    },
+    "Enable": {
+      "description": "Enable or not. 0 means disabled, 1 means enabled",
+      "type": "integer"
+    },
+    "Host": {
+      "description": "Domain name of the protected website for which the rule needs to be created",
+      "type": "string"
+    },
+    "ProjectName": {
+      "description": "Project name of the resource",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "RuleTag": {
+      "description": "Rule tags",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Update time",
+      "semantic": "updatedTime",
+      "type": "string"
+    },
+    "VerificationExemptionTime": {
+      "description": "Verification exemption time",
+      "type": "integer"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/ProjectName",
+    "/properties/BotId",
+    "/properties/Advanced",
+    "/properties/RuleTag",
+    "/properties/UpdateTime"
+  ],
+  "required": [
+    "Action",
+    "BotType",
+    "Enable",
+    "Host"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::WAF::CustomBot"
+}

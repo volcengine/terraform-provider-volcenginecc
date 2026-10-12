@@ -122,6 +122,7 @@ Data Source schema for Volcengine::ECS::Instance
 - `renew_info` (Attributes) Renewal information. (see [below for nested schema](#nestedatt--renew_info))
 - `role_names` (Set of String) IAM role name bound to the instance
 - `secondary_network_interfaces` (Attributes List) Auxiliary network interface card of the instance. (see [below for nested schema](#nestedatt--secondary_network_interfaces))
+- `show_role_names` (Set of String) IAM role name bound to the instance.
 - `spot_price_limit` (Number) Maximum hourly price for spot instances.
     - Supports up to three decimal places.
     - Only effective when `SpotStrategy` is set to `SpotWithPriceLimit`.

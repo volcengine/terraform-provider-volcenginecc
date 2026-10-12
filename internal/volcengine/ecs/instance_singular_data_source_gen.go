@@ -1192,10 +1192,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Auxiliary network interface card of the instance.",
-		//	  "elementIdentifier": [
-		//	    "/SubnetId",
-		//	    "/PrimaryIpAddress"
-		//	  ],
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "Instance network interface.",
@@ -1314,6 +1310,23 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Auxiliary network interface card of the instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ShowRoleNames
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "IAM role name bound to the instance.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"show_role_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "IAM role name bound to the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SpotPriceLimit
@@ -1674,6 +1687,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_ids":              "SecurityGroupIds",
 		"security_protection_instance_id": "SecurityProtectionInstanceId",
 		"security_protection_types":       "SecurityProtectionTypes",
+		"show_role_names":                 "ShowRoleNames",
 		"size":                            "Size",
 		"snapshot_id":                     "SnapshotId",
 		"spot_price_limit":                "SpotPriceLimit",

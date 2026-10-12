@@ -23,6 +23,7 @@ Data Source schema for Volcengine::Redis::Instance
 
 - `allow_list_ids` (Set of String) Allowlist ID list. If left empty, the new instance will not be added to any allowlist by default. You can call the DescribeAllowLists API to query all IP allowlist information, including allowlist IDs, for the specified region under your account. Each instance supports binding up to 100 allowlists, and you can batch bind up to 100 allowlists at a time. Each instance supports binding up to 1000 IP addresses or CIDR-format IP address ranges.
 - `auto_renew` (Boolean) Whether to enable auto-renewal. Value options: false (default): Disabled; true: Enabled.
+- `backup_plan` (Attributes) Automatic backup policy for the instance. (see [below for nested schema](#nestedatt--backup_plan))
 - `backup_point_name` (String) Set a backup name for the full backup created before changes.
 - `backup_restore` (Attributes) Restore data from the backup set to the original Redis instance. (see [below for nested schema](#nestedatt--backup_restore))
 - `backups` (Attributes List) Backup list information for the instance (see [below for nested schema](#nestedatt--backups))
@@ -69,6 +70,20 @@ Data Source schema for Volcengine::Redis::Instance
 - `vpc_auth_mode` (String) Enable or disable password-free access. Valid values: open: enable password-free access; close: disable password-free access. Values are case-insensitive.
 - `vpc_id` (String) Set the private network ID for the instance. It is recommended that the Redis instance and the ECS instance you want to connect to are in the same private network; otherwise, they cannot communicate optimally via the internal network. You can call the CreateVpc API to create a private network. You can call the DescribeVpcs API to query private network information that meets specified conditions, including the private network ID.
 - `zone_ids` (Set of String) List of available zones where the instance is located.
+
+<a id="nestedatt--backup_plan"></a>
+### Nested Schema for `backup_plan`
+
+Read-Only:
+
+- `active` (Boolean) Whether to enable automatic backup. The value range is as follows: false (default): Disabled. true: Enabled.
+- `backup_hour` (Number) Backup window (UTC+8). The value can be any integer from 0 to 23. 0 means the system performs the backup between 00:00 and 00:59, 1 means between 01:00 and 01:59, and so on.
+- `backup_type` (String) Restore method. The value range is as follows: Full: Full restore, that is, restore by backup set. Inc: Incremental restore, that is, restore by point in time.
+- `expect_next_backup_time` (String) Expected time for the next backup execution, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).
+- `last_update_time` (String) Last time the backup policy was modified, in the format yyyy-MM-ddTHH:mm:ssZ (UTC).
+- `period` (Set of Number) Backup cycle. The value can be any integer from 1 to 7. 1 means backup is performed every Monday, 2 means every Tuesday, and so on. This parameter is required when automatic backup is enabled (that is, when Active is set to true).
+- `ttl` (Number) Backup file retention period, default is 7 days.
+
 
 <a id="nestedatt--backup_restore"></a>
 ### Nested Schema for `backup_restore`

@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_waf_bot_analyse_protect_rule.example "host|rule_id|statistical_type"

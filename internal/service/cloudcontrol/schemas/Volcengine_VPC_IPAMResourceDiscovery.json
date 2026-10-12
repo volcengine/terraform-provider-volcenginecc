@@ -1,0 +1,160 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/OperatingRegions"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "Resource tag, consisting of a tag key and tag value.",
+      "properties": {
+        "Key": {
+          "description": "Tag key.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Tag value.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "Custom IPAM resource discovery for identifying network resources in a specified region.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/IpamResourceDiscoveryId",
+      "/properties/IpamResourceDiscoveryName",
+      "/properties/AccountId",
+      "/properties/ProjectName",
+      "/properties/IpamResourceDiscoveryType",
+      "/properties/Tags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc:CreateIpamResourceDiscovery",
+        "vpc:DescribeIpamResourceDiscoveries"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc:DeleteIpamResourceDiscovery",
+        "vpc:DescribeIpamResourceDiscoveries"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc:DescribeIpamResourceDiscoveries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc:DescribeIpamResourceDiscoveries"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc:ModifyIpamResourceDiscovery",
+        "vpc:TagIpamResources",
+        "vpc:UntagIpamResources",
+        "vpc:DescribeIpamResourceDiscoveries"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/IpamResourceDiscoveryId"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Account ID for IPAM resource discovery.",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "IPAM resource discovery creation time.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "Description": {
+      "description": "IPAM resource discovery description.",
+      "maxLength": 255,
+      "semantic": "description",
+      "type": "string"
+    },
+    "IpamResourceDiscoveryId": {
+      "description": "IPAM resource discovery ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "IpamResourceDiscoveryName": {
+      "description": "IPAM resource discovery name.",
+      "maxLength": 128,
+      "minLength": 1,
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "IpamResourceDiscoveryRegionId": {
+      "description": "Region ID for IPAM resource discovery.",
+      "type": "string"
+    },
+    "IpamResourceDiscoveryType": {
+      "description": "IPAM resource discovery type, such as system.",
+      "type": "string"
+    },
+    "IsDefault": {
+      "description": "Whether it is the default resource discovery.",
+      "type": "boolean"
+    },
+    "OperatingRegions": {
+      "description": "List of regions where IPAM resource discovery is effective.",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ProjectName": {
+      "description": "Project name for IPAM resource discovery.",
+      "semantic": "projectName",
+      "type": "string"
+    },
+    "Status": {
+      "description": "IPAM resource discovery status, such as Available.",
+      "semantic": "status",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tag for IPAM resource discovery.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "semantic": "tags",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "UpdateTime": {
+      "description": "IPAM resource discovery update time.",
+      "semantic": "updatedTime",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/IpamResourceDiscoveryId",
+    "/properties/AccountId",
+    "/properties/CreateTime",
+    "/properties/UpdateTime",
+    "/properties/Status",
+    "/properties/ProjectName",
+    "/properties/IpamResourceDiscoveryRegionId",
+    "/properties/IpamResourceDiscoveryType",
+    "/properties/IsDefault"
+  ],
+  "tagging": {
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "typeName": "Volcengine::VPC::IPAMResourceDiscovery"
+}
