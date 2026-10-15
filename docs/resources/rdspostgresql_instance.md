@@ -52,6 +52,7 @@ resource "volcenginecc_rdspostgresql_instance" "RDSPostgreSQLInstanceDemo" {
 
 - `allow_list_ids` (Set of String) Allowlist ID. To bind multiple allowlists, separate allowlist IDs with commas (,). An instance can bind up to 100 allowlists.
 - `instance_name` (String) Instance name
+- `kms_trn` (String) KMS key ring TRN, format: trn:kms:<region>:<account_id>:keyrings/<ring_name>/keys/<key_name>. This parameter is required when TDEEnable is true.
 - `maintenance_window` (Attributes) Instance maintenance window (see [below for nested schema](#nestedatt--maintenance_window))
 - `project_name` (String) Project. Default value: default project
 - `replication_slots` (Attributes Set) Replication slot list for the instance

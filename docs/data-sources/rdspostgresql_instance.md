@@ -31,6 +31,7 @@ Data Source schema for Volcengine::RDSPostgreSQL::Instance
 - `instance_name` (String) Instance name
 - `instance_status` (String) Instance status
 - `instance_type` (String) Instance type. Value: HA (high availability edition)
+- `kms_trn` (String) KMS key ring TRN, format: trn:kms:<region>:<account_id>:keyrings/<ring_name>/keys/<key_name>. This parameter is required when TDEEnable is true.
 - `maintenance_window` (Attributes) Instance maintenance window (see [below for nested schema](#nestedatt--maintenance_window))
 - `memory` (Number) Memory size, unit: GB
 - `node_info` (Attributes List) Instance specification configuration (see [below for nested schema](#nestedatt--node_info))
