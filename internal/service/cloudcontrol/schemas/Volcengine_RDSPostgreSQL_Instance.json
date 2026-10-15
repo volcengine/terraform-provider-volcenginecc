@@ -7,7 +7,8 @@
     "/properties/VpcId",
     "/properties/SubnetId",
     "/properties/StorageType",
-    "/properties/TDEEnable"
+    "/properties/TDEEnable",
+    "/properties/KMSTrn"
   ],
   "definitions": {
     "Address": {
@@ -516,6 +517,10 @@
     },
     "InstanceType": {
       "description": "Instance type. Value: HA (high availability edition)",
+      "type": "string"
+    },
+    "KMSTrn": {
+      "description": "KMS key ring TRN, format: trn:kms:\u003cregion\u003e:\u003caccount_id\u003e:keyrings/\u003cring_name\u003e/keys/\u003ckey_name\u003e. This parameter is required when TDEEnable is true.",
       "type": "string"
     },
     "MaintenanceWindow": {

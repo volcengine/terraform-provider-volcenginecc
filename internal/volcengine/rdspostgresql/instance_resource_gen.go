@@ -616,6 +616,22 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KMSTrn
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "KMS key ring TRN, format: trn:kms:\u003cregion\u003e:\u003caccount_id\u003e:keyrings/\u003cring_name\u003e/keys/\u003ckey_name\u003e. This parameter is required when TDEEnable is true.",
+		//	  "type": "string"
+		//	}
+		"kms_trn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "KMS key ring TRN, format: trn:kms:<region>:<account_id>:keyrings/<ring_name>/keys/<key_name>. This parameter is required when TDEEnable is true.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaintenanceWindow
 		// Cloud Control resource type schema:
 		//
@@ -1491,6 +1507,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"instance_type":                    "InstanceType",
 		"ip_address":                       "IPAddress",
 		"key":                              "Key",
+		"kms_trn":                          "KMSTrn",
 		"maintenance_window":               "MaintenanceWindow",
 		"maintenance_window_start_time":    "MaintenanceWindowStartTime",
 		"memory":                           "Memory",
@@ -1593,6 +1610,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SubnetId",
 		"/properties/StorageType",
 		"/properties/TDEEnable",
+		"/properties/KMSTrn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
