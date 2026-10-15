@@ -17,7 +17,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0
 	github.com/mattbaird/jsonpatch v0.0.0-20240118010651-0ba75a80ca38
 	github.com/test-go/testify v1.1.4
-	github.com/volcengine/volcengine-go-sdk v1.2.36
+	github.com/volcengine/volcengine-go-sdk v1.2.56
 	github.com/xeipuuv/gojsonschema v1.2.0
 	golang.org/x/net v0.52.0
 	golang.org/x/text v0.36.0
@@ -91,5 +91,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-replace github.com/volcengine/volcengine-go-sdk => code.byted.org/iaasng/volcengine-go-sdk v0.0.0-20260921013847-410d17f17d99

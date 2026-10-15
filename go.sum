@@ -1,6 +1,4 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
-code.byted.org/iaasng/volcengine-go-sdk v0.0.0-20260921013847-410d17f17d99 h1:JAz3UOqi/larA/bw1saPe8RVE/YKx8+7cX5OaQQQowQ=
-code.byted.org/iaasng/volcengine-go-sdk v0.0.0-20260921013847-410d17f17d99/go.mod h1:5duonraYH9kPPB5/Ke2y63atELLRymBSgCo9ItIZqEM=
 dario.cat/mergo v1.0.0 h1:AGCNq9Evsj31mOgNPcLyXc+4PNABt905YmuqPYYpBWk=
 dario.cat/mergo v1.0.0/go.mod h1:uNxQE+84aUszobStD9th8a29P2fMDhsBdgRYvZOxGmk=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
@@ -238,8 +236,8 @@ github.com/vmihailenco/tagparser/v2 v2.0.0 h1:y09buUbR+b5aycVFQs/g70pqKVZNBmxwAh
 github.com/vmihailenco/tagparser/v2 v2.0.0/go.mod h1:Wri+At7QHww0WTrCBeu4J6bNtoV6mEfg5OIWRZA9qds=
 github.com/volcengine/volc-sdk-golang v1.0.23 h1:anOslb2Qp6ywnsbyq9jqR0ljuO63kg9PY+4OehIk5R8=
 github.com/volcengine/volc-sdk-golang v1.0.23/go.mod h1:AfG/PZRUkHJ9inETvbjNifTDgut25Wbkm2QoYBTbvyU=
-github.com/volcengine/volcengine-go-sdk v1.2.36 h1:rUH7t3bOzaGVJ9ys8L2Jizb+9AZkhu2qCjJwWtF+weo=
-github.com/volcengine/volcengine-go-sdk v1.2.36/go.mod h1:oxoVo+A17kvkwPkIeIHPVLjSw7EQAm+l/Vau1YGHN+A=
+github.com/volcengine/volcengine-go-sdk v1.2.56 h1:bvXfpbl0Qo0aanMpHZW+SMWWqANW2ScHs1/9HLzEwtM=
+github.com/volcengine/volcengine-go-sdk v1.2.56/go.mod h1:DURKPVQ8Rsi4OQu4/NPjUyjla3MeHPgXT/qV+400fAw=
 github.com/xanzy/ssh-agent v0.3.3 h1:+/15pJfg/RsTxqYcX6fHqOXZwwMP+2VyYWJeWM2qQFM=
 github.com/xanzy/ssh-agent v0.3.3/go.mod h1:6dzNDKs0J9rVPHPhaGCukekBHKqfl+L3KghI1Bc68Uw=
 github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f h1:J9EGpcZtP0E/raorCMxlFGSTBrsSlaDGf3jU/qvAE2c=
