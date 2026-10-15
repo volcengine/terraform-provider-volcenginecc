@@ -120,7 +120,7 @@ func (p *VolcengineCCProvider) Schema(ctx context.Context, request provider.Sche
 			},
 			"no_proxy": schema.StringAttribute{
 				Optional:    true,
-				Description: "Comma-separated hosts, domain suffixes, IP addresses, or CIDR ranges that bypass proxy_url. It follows standard NO_PROXY matching and can be sourced from VOLCENGINE_NO_PROXY, NO_PROXY, or no_proxy.",
+				Description: "Comma-separated hosts, domain suffixes, IP addresses, or CIDR ranges that bypass the configured or environment proxy. It follows standard NO_PROXY matching and can be sourced from VOLCENGINE_NO_PROXY, NO_PROXY, or no_proxy.",
 			},
 			"proxy_include_domains": schema.SetAttribute{
 				ElementType: types.StringType,
@@ -142,6 +142,15 @@ func (p *VolcengineCCProvider) Schema(ctx context.Context, request provider.Sche
 					},
 					"policy": schema.StringAttribute{
 						Description: "A more restrictive policy when making the AssumeRole call",
+						Optional:    true,
+					},
+					"proxy_url": schema.StringAttribute{
+						Description: "HTTP, HTTPS, SOCKS5, or SOCKS5H proxy URL for AssumeRole STS requests, including HTTPS requests. Defaults to VOLCENGINE_ASSUME_ROLE_PROXY_URL, then HTTPS_PROXY or https_proxy for HTTPS STS endpoints. HTTP_PROXY is not used. Honors assume_role.no_proxy and NO_PROXY. An explicit empty string skips proxy environment defaults. Independent of Cloud Control proxy settings.",
+						Optional:    true,
+						Sensitive:   true,
+					},
+					"no_proxy": schema.StringAttribute{
+						Description: "Comma-separated hosts, domain suffixes, IP addresses, or CIDR ranges that bypass the AssumeRole proxy. Defaults to VOLCENGINE_ASSUME_ROLE_NO_PROXY, NO_PROXY, then no_proxy. An explicit empty string disables inherited bypass rules. Independent of the top-level no_proxy and proxy_include_domains.",
 						Optional:    true,
 					},
 				},
@@ -195,6 +204,8 @@ type AssumeRoleData struct {
 	AssumeRoleTRN types.String `tfsdk:"assume_role_trn"`
 	Duration      types.Int32  `tfsdk:"duration_seconds"`
 	Policy        types.String `tfsdk:"policy"`
+	ProxyURL      types.String `tfsdk:"proxy_url"`
+	NoProxy       types.String `tfsdk:"no_proxy"`
 }
 
 type endpointData struct {
@@ -269,6 +280,8 @@ func (p *VolcengineCCProvider) Configure(ctx context.Context, request provider.C
 			AssumeRoleTRN: types.StringNull(),
 			Duration:      types.Int32Null(),
 			Policy:        types.StringNull(),
+			ProxyURL:      types.StringNull(),
+			NoProxy:       types.StringNull(),
 		}
 	}
 	if config.AssumeRole.AssumeRoleTRN.IsNull() || config.AssumeRole.AssumeRoleTRN.IsUnknown() {
@@ -427,6 +440,13 @@ func buildCredentialsWithFactory(c *configModel, factory assumeRoleCredentialsFa
 	if c.DisableSSL.ValueBool() {
 		stsValue.Schema = "http"
 	}
+
+	proxyURL, err := assumeRoleProxyURL(c.AssumeRole.ProxyURL, c.AssumeRole.NoProxy, stsValue.Schema, stsValue.Host)
+	if err != nil {
+		diags.AddError("Invalid AssumeRole Proxy Configuration", err.Error())
+		return nil, diags
+	}
+	stsValue.ProxyURL = proxyURL
 
 	return factory(sourceCredentials, stsValue), diags
 }
@@ -738,7 +758,7 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 		diags.AddError("Invalid Proxy Configuration", "proxy_url must be configured when proxy_include_domains is set")
 		return nil, diags
 	}
-	var configuredProxy func(*http.Request) (*url.URL, error)
+	configuredProxy := newEnvironmentProxySelector(noProxy)
 	if proxyURL != "" {
 		httpClient, normalizedProxyURL, err := newProxyHTTPClient(proxyURL, proxyAuthorization, noProxy, proxyIncludeDomains)
 		if err != nil {
@@ -749,6 +769,17 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 			WithHTTPSProxy(normalizedProxyURL).
 			WithHTTPClient(httpClient)
 		configuredProxy = httpClient.Transport.(*http.Transport).Proxy
+	}
+
+	// Validate before SDK session setup, whose URL parse errors can otherwise
+	// include credentials embedded in an environment proxy URL.
+	scheme := "https"
+	if c.DisableSSL.ValueBool() {
+		scheme = "http"
+	}
+	if _, err := configuredProxy(&http.Request{URL: &url.URL{Scheme: scheme, Host: volcengine.StringValue(config.Endpoint)}}); err != nil {
+		diags.AddError("Invalid Proxy Configuration", err.Error())
+		return nil, diags
 	}
 
 	sess, err := session.NewSession(config)
