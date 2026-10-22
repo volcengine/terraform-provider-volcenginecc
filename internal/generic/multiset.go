@@ -27,6 +27,62 @@ func (attributePlanModifier multisetAttributePlanModifier) MarkdownDescription(c
 	return attributePlanModifier.Description(ctx)
 }
 
+// matchesConfiguredValues compares the known values supplied by configuration,
+// ignoring computed fields that are null in configuration. The comparable
+// result is false when the configuration does not provide a usable match key.
+func matchesConfiguredValues(configValue, plannedValue, currentValue attr.Value) (bool, bool) {
+	if configValue.IsUnknown() {
+		return false, true
+	}
+	if configValue.IsNull() {
+		return false, false
+	}
+
+	configObject, isObject := configValue.(interface{ Attributes() map[string]attr.Value })
+	if !isObject {
+		return configValue.Equal(plannedValue) && configValue.Equal(currentValue), true
+	}
+
+	plannedObject, plannedIsObject := plannedValue.(interface{ Attributes() map[string]attr.Value })
+	currentObject, currentIsObject := currentValue.(interface{ Attributes() map[string]attr.Value })
+	if !plannedIsObject || !currentIsObject {
+		return false, true
+	}
+
+	plannedAttributes := plannedObject.Attributes()
+	currentAttributes := currentObject.Attributes()
+	hasConfiguredValue := false
+
+	for name, configAttribute := range configObject.Attributes() {
+		if configAttribute.IsUnknown() {
+			return false, true
+		}
+		if configAttribute.IsNull() {
+			continue
+		}
+
+		plannedAttribute, exists := plannedAttributes[name]
+		if !exists {
+			return false, true
+		}
+		currentAttribute, exists := currentAttributes[name]
+		if !exists {
+			return false, true
+		}
+
+		matches, comparable := matchesConfiguredValues(configAttribute, plannedAttribute, currentAttribute)
+		if !comparable {
+			continue
+		}
+		hasConfiguredValue = true
+		if !matches {
+			return false, true
+		}
+	}
+
+	return hasConfiguredValue, hasConfiguredValue
+}
+
 func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx context.Context, request planmodifier.ListRequest, response *planmodifier.ListResponse) {
 	if request.StateValue.IsNull() {
 		response.PlanValue = request.PlanValue
@@ -58,10 +114,21 @@ func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx co
 	currentVals := make([]attr.Value, len(current.Elements()))
 	copy(currentVals, current.Elements())
 
-	for _, plannedVal := range planned.Elements() {
+	configValues := request.ConfigValue.Elements()
+	configMatchesPlan := !request.ConfigValue.IsNull() && !request.ConfigValue.IsUnknown() && len(configValues) == len(planned.Elements())
+
+	for plannedIndex, plannedVal := range planned.Elements() {
 		for i, currentVal := range currentVals {
-			if currentVal.Equal(plannedVal) {
-				// Remove from the slice.
+			equivalent := currentVal.Equal(plannedVal)
+			if configMatchesPlan {
+				matches, comparable := matchesConfiguredValues(configValues[plannedIndex], plannedVal, currentVal)
+				if comparable {
+					equivalent = matches
+				}
+			}
+
+			if equivalent {
+				// Remove the match so duplicate elements are compared as a multiset.
 				currentVals = append(currentVals[:i], currentVals[i+1:]...)
 
 				break
