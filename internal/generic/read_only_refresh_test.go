@@ -117,9 +117,18 @@ func TestPopulateUnknownValuesRefreshesKnownReadOnlySet(t *testing.T) {
 		provider:               provider,
 	}
 
-	diags := resource.populateUnknownValues(ctx, "instance-1", &state)
+	withoutRefresh := tfsdk.State{Schema: stateSchema, Raw: initialStateRaw}
+	diags := resource.populateUnknownValues(ctx, "instance-1", &withoutRefresh, false)
 	if diags.HasError() {
-		t.Fatalf("populateUnknownValues returned diagnostics: %s", diags)
+		t.Fatalf("populateUnknownValues without refresh returned diagnostics: %s", diags)
+	}
+	if got := getResourceCalls.Load(); got != 0 {
+		t.Fatalf("GetResource calls without refresh = %d, want 0", got)
+	}
+
+	diags = resource.populateUnknownValues(ctx, "instance-1", &state, true)
+	if diags.HasError() {
+		t.Fatalf("populateUnknownValues with refresh returned diagnostics: %s", diags)
 	}
 	if got := getResourceCalls.Load(); got != 1 {
 		t.Fatalf("GetResource calls = %d, want 1", got)
