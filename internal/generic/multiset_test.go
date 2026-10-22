@@ -138,3 +138,93 @@ func TestMultiset(t *testing.T) {
 		})
 	}
 }
+
+func TestMultisetUsesConfiguredObjectAttributes(t *testing.T) {
+	t.Parallel()
+
+	nodeAttributeTypes := map[string]attr.Type{
+		"node_id":   types.StringType,
+		"node_type": types.StringType,
+		"node_spec": types.StringType,
+		"zone_id":   types.StringType,
+	}
+	nodeType := types.ObjectType{AttrTypes: nodeAttributeTypes}
+	node := func(id attr.Value, nodeType, nodeSpec, zoneID string) attr.Value {
+		return types.ObjectValueMust(nodeAttributeTypes, map[string]attr.Value{
+			"node_id":   id,
+			"node_type": types.StringValue(nodeType),
+			"node_spec": types.StringValue(nodeSpec),
+			"zone_id":   types.StringValue(zoneID),
+		})
+	}
+	configuredNode := func(nodeType, nodeSpec, zoneID string) attr.Value {
+		return node(types.StringNull(), nodeType, nodeSpec, zoneID)
+	}
+
+	stateValue := types.ListValueMust(nodeType, []attr.Value{
+		node(types.StringValue("node-a"), "Primary", "spec-a", "zone-a"),
+		node(types.StringValue("node-b"), "Secondary", "spec-b", "zone-b"),
+	})
+
+	tests := map[string]struct {
+		plan     basetypes.ListValue
+		config   basetypes.ListValue
+		expected basetypes.ListValue
+	}{
+		"reordered elements with stale computed identities": {
+			plan: types.ListValueMust(nodeType, []attr.Value{
+				node(types.StringValue("node-a"), "Secondary", "spec-b", "zone-b"),
+				node(types.StringValue("node-b"), "Primary", "spec-a", "zone-a"),
+			}),
+			config: types.ListValueMust(nodeType, []attr.Value{
+				configuredNode("Secondary", "spec-b", "zone-b"),
+				configuredNode("Primary", "spec-a", "zone-a"),
+			}),
+			expected: stateValue,
+		},
+		"reordered elements with unknown computed identities": {
+			plan: types.ListValueMust(nodeType, []attr.Value{
+				node(types.StringUnknown(), "Secondary", "spec-b", "zone-b"),
+				node(types.StringUnknown(), "Primary", "spec-a", "zone-a"),
+			}),
+			config: types.ListValueMust(nodeType, []attr.Value{
+				configuredNode("Secondary", "spec-b", "zone-b"),
+				configuredNode("Primary", "spec-a", "zone-a"),
+			}),
+			expected: stateValue,
+		},
+		"configured change is not suppressed": {
+			plan: types.ListValueMust(nodeType, []attr.Value{
+				node(types.StringUnknown(), "Primary", "spec-updated", "zone-a"),
+				node(types.StringUnknown(), "Secondary", "spec-b", "zone-b"),
+			}),
+			config: types.ListValueMust(nodeType, []attr.Value{
+				configuredNode("Primary", "spec-updated", "zone-a"),
+				configuredNode("Secondary", "spec-b", "zone-b"),
+			}),
+			expected: types.ListValueMust(nodeType, []attr.Value{
+				node(types.StringUnknown(), "Primary", "spec-updated", "zone-a"),
+				node(types.StringUnknown(), "Secondary", "spec-b", "zone-b"),
+			}),
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			response := planmodifier.ListResponse{}
+			Multiset().PlanModifyList(context.Background(), planmodifier.ListRequest{
+				Path:        path.Root("node_info"),
+				ConfigValue: test.config,
+				PlanValue:   test.plan,
+				StateValue:  stateValue,
+			}, &response)
+
+			if response.Diagnostics.HasError() {
+				t.Fatalf("unexpected diagnostics: %s", ccdiag.DiagnosticsError(response.Diagnostics))
+			}
+			if diff := cmp.Diff(response.PlanValue, test.expected); diff != "" {
+				t.Errorf("unexpected plan value (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
