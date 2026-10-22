@@ -518,11 +518,7 @@
     "/properties/WafProtectionEnabled",
     "/properties/RuleIds",
     "/properties/DomainExtensions/*/DomainExtensionId",
-    "/properties/ResponseCheckEnabled",
-    "/properties/CACertificateId",
-    "/properties/CertCenterCertificateId",
-    "/properties/CertificateId",
-    "/properties/CertificateSource"
+    "/properties/ResponseCheckEnabled"
   ],
   "required": [
     "Protocol",
