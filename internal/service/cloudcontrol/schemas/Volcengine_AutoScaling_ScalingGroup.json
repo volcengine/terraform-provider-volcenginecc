@@ -192,6 +192,7 @@
     "create": {
       "permissions": [
         "auto_scaling:CreateScalingGroup",
+        "auto_scaling:EnableScalingGroup",
         "auto_scaling:DescribeScalingGroups"
       ]
     },

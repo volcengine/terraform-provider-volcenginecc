@@ -28,10 +28,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Image architecture type. Options: amd64 (x86 compute), arm64 (ARM compute).",
-		//	  "enum": [
-		//	    "amd64",
-		//	    "arm64"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -43,10 +39,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Image boot mode. You can select BIOS or UEFI",
-		//	  "enum": [
-		//	    "BIOS",
-		//	    "UEFI"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"boot_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -95,10 +87,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "DetectionStatus": {
 		//	      "description": "Check status. Options: Finished (completed), Processing (in progress).",
-		//	      "enum": [
-		//	        "Finished",
-		//	        "Processing"
-		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "Items": {
@@ -308,11 +296,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Image license type. VolcanoEngine: Default, uses the official license based on your platform setting. BYOL: Bring Your Own License (BYOL)",
-		//	  "enum": [
-		//	    "VolcanoEngine",
-		//	    "BYOL",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"license_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -357,15 +340,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Release version of the image operating system. Options: CentOS, Debian, veLinux, Windows Server, Fedora, OpenSUSE, Ubuntu.",
-		//	  "enum": [
-		//	    "CentOS",
-		//	    "Debian",
-		//	    "veLinux",
-		//	    "Windows Server",
-		//	    "Fedora",
-		//	    "OpenSUSE",
-		//	    "Ubuntu"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -427,10 +401,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Image sharing status. HasShared: The custom image has been shared with other users. If the custom image is not shared or a public image is used, ShareStatus returns empty.",
-		//	  "enum": [
-		//	    "HasShared",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -488,10 +458,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "VolumeKind": {
 		//	        "description": "Cloud disk type. system: System disk. data: Data disk.",
-		//	        "enum": [
-		//	          "system",
-		//	          "data"
-		//	        ],
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -604,11 +570,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Image visibility. public: Public image. private: Private image. shared: Shared image.",
-		//	  "enum": [
-		//	    "public",
-		//	    "private",
-		//	    "shared"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/

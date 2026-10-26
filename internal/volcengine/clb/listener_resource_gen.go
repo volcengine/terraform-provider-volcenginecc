@@ -125,6 +125,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "CA certificate for mutual authentication.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -154,6 +155,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"cert_center_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate ID from Certificate Center.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -168,6 +170,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate ID from the CLB certificate management module.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -182,6 +185,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"certificate_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate source. clb (default): certificate uploaded to CLB. cert_center: certificate uploaded to Certificate Center. user: certificate uploaded by user.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1393,10 +1397,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/RuleIds",
 		"/properties/DomainExtensions/*/DomainExtensionId",
 		"/properties/ResponseCheckEnabled",
-		"/properties/CACertificateId",
-		"/properties/CertCenterCertificateId",
-		"/properties/CertificateId",
-		"/properties/CertificateSource",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
