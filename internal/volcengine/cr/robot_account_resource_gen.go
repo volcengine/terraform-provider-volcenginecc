@@ -111,6 +111,7 @@ func robotAccountResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// Cloud Control resource type schema:
@@ -259,6 +260,7 @@ func robotAccountResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Duration",
+		"/properties/Password",
 		"/properties/Random",
 	})
 
