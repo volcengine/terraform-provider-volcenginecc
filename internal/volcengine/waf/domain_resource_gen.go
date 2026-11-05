@@ -8,7 +8,6 @@ package waf
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -39,22 +38,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Access mode. 10: CNAME access, 11: Layer 7 load balancing (CLB) access.",
-		//	  "enum": [
-		//	    10,
-		//	    11
-		//	  ],
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
 		"access_mode": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Access mode. 10: CNAME access, 11: Layer 7 load balancing (CLB) access.",
 			Required:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.OneOf(
-					10,
-					11,
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -376,12 +365,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "default": 0,
 		//	  "description": "Set the default action for the bot behavior map policy. Effective when BotSequenceEnable = 1 is enabled. Default is 0 (Observe).\n0: Observe\n2: Intercept\n6: JS Challenge\n7: CAPTCHA.",
-		//	  "enum": [
-		//	    0,
-		//	    2,
-		//	    6,
-		//	    7
-		//	  ],
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
@@ -390,14 +373,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(0),
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.OneOf(
-					0,
-					2,
-					6,
-					7,
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

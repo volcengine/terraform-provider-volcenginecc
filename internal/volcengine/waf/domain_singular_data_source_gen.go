@@ -28,10 +28,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Access mode. 10: CNAME access, 11: Layer 7 load balancing (CLB) access.",
-		//	  "enum": [
-		//	    10,
-		//	    11
-		//	  ],
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
@@ -280,12 +276,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "default": 0,
 		//	  "description": "Set the default action for the bot behavior map policy. Effective when BotSequenceEnable = 1 is enabled. Default is 0 (Observe).\n0: Observe\n2: Intercept\n6: JS Challenge\n7: CAPTCHA.",
-		//	  "enum": [
-		//	    0,
-		//	    2,
-		//	    6,
-		//	    7
-		//	  ],
 		//	  "format": "int32",
 		//	  "type": "integer"
 		//	}
