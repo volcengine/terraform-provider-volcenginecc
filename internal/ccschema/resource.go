@@ -17,6 +17,7 @@ type Resource struct {
 	Definitions                     map[string]*Property   `json:"definitions,omitempty"`
 	DeprecatedProperties            PropertyJsonPointers   `json:"deprecatedProperties,omitempty"`
 	Description                     *string                `json:"description,omitempty"`
+	FilterProperties                *FilterProperties      `json:"filterProperties,omitempty"`
 	Handlers                        map[string]*Handler    `json:"handlers,omitempty"`
 	NonPublicDefinitions            PropertyJsonPointers   `json:"nonPublicDefinitions,omitempty"`
 	NonPublicProperties             PropertyJsonPointers   `json:"nonPublicProperties,omitempty"`
