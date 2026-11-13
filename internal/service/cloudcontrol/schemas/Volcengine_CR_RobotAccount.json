@@ -147,6 +147,7 @@
   "typeName": "Volcengine::CR::RobotAccount",
   "writeOnlyProperties": [
     "/properties/Duration",
+    "/properties/Password",
     "/properties/Random"
   ]
 }
