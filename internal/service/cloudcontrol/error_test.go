@@ -111,3 +111,55 @@ func TestIsCloudControlNotFoundProgressEvent(t *testing.T) {
 		})
 	}
 }
+
+// TestIsECSDeletionProtectionConflict verifies that only an ECS instance
+// rejected for its declared deletion protection is treated as recoverable.
+func TestIsECSDeletionProtectionConflict(t *testing.T) {
+	t.Parallel()
+
+	accessDenied := ecsDeletionProtectionCode
+	otherCode := "OtherError"
+	exactMessage := "AccessDenied: InvalidOperation.DeletionProtection: deletion is protected"
+	unrelatedMessage := "AccessDenied: InvalidOperation.Something: denied"
+
+	tests := map[string]struct {
+		typeName string
+		event    *ccsdk.ProgressEvent
+		expected bool
+	}{
+		"ECS instance rejected for deletion protection": {
+			typeName: ecsInstanceTypeName,
+			event:    &ccsdk.ProgressEvent{ErrorCode: &accessDenied, StatusMessage: &exactMessage},
+			expected: true,
+		},
+		"another resource type with the same rejection": {
+			typeName: "Volcengine::ECS::KeyPair",
+			event:    &ccsdk.ProgressEvent{ErrorCode: &accessDenied, StatusMessage: &exactMessage},
+			expected: false,
+		},
+		"different error code": {
+			typeName: ecsInstanceTypeName,
+			event:    &ccsdk.ProgressEvent{ErrorCode: &otherCode, StatusMessage: &exactMessage},
+			expected: false,
+		},
+		"access denied for an unrelated reason": {
+			typeName: ecsInstanceTypeName,
+			event:    &ccsdk.ProgressEvent{ErrorCode: &accessDenied, StatusMessage: &unrelatedMessage},
+			expected: false,
+		},
+		"no event": {
+			typeName: ecsInstanceTypeName,
+			event:    nil,
+			expected: false,
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+			if got := isECSDeletionProtectionConflict(test.typeName, test.event); got != test.expected {
+				t.Fatalf("isECSDeletionProtectionConflict = %v, want %v", got, test.expected)
+			}
+		})
+	}
+}

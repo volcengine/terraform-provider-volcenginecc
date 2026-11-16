@@ -13,7 +13,22 @@ import (
 	"github.com/volcengine/volcengine-go-sdk/volcengine/volcengineerr"
 )
 
-const cloudControlNotFoundHandlerErrorCode = "(HandlerErrorCode: NotFound)"
+const (
+	cloudControlNotFoundHandlerErrorCode = "(HandlerErrorCode: NotFound)"
+
+	ecsInstanceTypeName                  = "Volcengine::ECS::Instance"
+	ecsDeletionProtectionCode            = "AccessDenied"
+	ecsDeletionProtectionStatusSubstring = "InvalidOperation.DeletionProtection:"
+)
+
+// isECSDeletionProtectionConflict identifies the exact delete rejection that
+// can be recovered by disabling the instance's declared protection first.
+func isECSDeletionProtectionConflict(typeName string, event *cloudcontrol.ProgressEvent) bool {
+	return typeName == ecsInstanceTypeName &&
+		event != nil &&
+		event.ErrorCode != nil && *event.ErrorCode == ecsDeletionProtectionCode &&
+		event.StatusMessage != nil && strings.Contains(*event.StatusMessage, ecsDeletionProtectionStatusSubstring)
+}
 
 // wrapCloudControlNotFound converts errors that explicitly identify a missing
 // Cloud Control resource into the provider's shared NotFoundError type.

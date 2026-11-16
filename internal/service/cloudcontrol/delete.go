@@ -22,14 +22,21 @@ func DeleteResource(ctx context.Context, cloudControlClient *cloudcontrol.CloudC
 		"id":         id,
 	})
 
-	resp, err := cloudControlClient.DeleteResourceWithContext(ctx, &cloudcontrol.DeleteResourceInput{
-		TypeName:    util.StringPtr(typeName),
-		RegionID:    util.StringPtr(region),
-		Identifier:  util.StringPtr(id),
-		ClientToken: util.StringPtr(util.GenerateToken(32)),
-	})
+	resp, err := deleteResourceOnce(ctx, cloudControlClient, region, typeName, id)
 	if err != nil {
 		return wrapCloudControlNotFound(err)
+	}
+	// An ECS instance that still declares deletion protection rejects the
+	// delete outright. The declared intent is to remove it, so clear the
+	// protection the resource itself carries and delete once more.
+	if resp != nil && isECSDeletionProtectionConflict(typeName, &resp.ProgressEvent) {
+		if updateErr := disableECSDeletionProtection(ctx, cloudControlClient, region, typeName, id); updateErr != nil {
+			return fmt.Errorf("disable ECS deletion protection before delete: %w", updateErr)
+		}
+		resp, err = deleteResourceOnce(ctx, cloudControlClient, region, typeName, id)
+		if err != nil {
+			return wrapCloudControlNotFound(err)
+		}
 	}
 	if resp == nil || resp.OperationStatus == nil {
 		return fmt.Errorf("call DeleteResource failed,resp:%s,err:%v ", util.JsonString(resp), err)
@@ -59,6 +66,49 @@ func DeleteResource(ctx context.Context, cloudControlClient *cloudcontrol.CloudC
 		return err
 	}
 	return nil
+}
+
+func deleteResourceOnce(ctx context.Context, cloudControlClient *cloudcontrol.CloudControl, region, typeName, id string) (*cloudcontrol.DeleteResourceOutput, error) {
+	return cloudControlClient.DeleteResourceWithContext(ctx, &cloudcontrol.DeleteResourceInput{
+		TypeName:    util.StringPtr(typeName),
+		RegionID:    util.StringPtr(region),
+		Identifier:  util.StringPtr(id),
+		ClientToken: util.StringPtr(util.GenerateToken(32)),
+	})
+}
+
+// disableECSDeletionProtection clears the instance's declared deletion
+// protection so the pending delete can proceed.
+func disableECSDeletionProtection(ctx context.Context, cloudControlClient *cloudcontrol.CloudControl, region, typeName, id string) error {
+	resp, err := cloudControlClient.UpdateResourceWithContext(ctx, &cloudcontrol.UpdateResourceInput{
+		TypeName:    util.StringPtr(typeName),
+		RegionID:    util.StringPtr(region),
+		Identifier:  util.StringPtr(id),
+		ClientToken: util.StringPtr(util.GenerateToken(32)),
+		PatchDocument: []any{map[string]any{
+			"op":    "replace",
+			"path":  "/DeletionProtection",
+			"value": false,
+		}},
+	})
+	if err != nil {
+		return err
+	}
+	if resp == nil || resp.OperationStatus == nil {
+		return fmt.Errorf("call UpdateResource failed,resp:%s", util.JsonString(resp))
+	}
+	status := *resp.OperationStatus
+	if status == base.SUCCESS {
+		return nil
+	}
+	if status != base.IN_PROGRESS && status != base.PENDING {
+		return fmt.Errorf("invoke UpdateResource handler failed,resp:%s", util.JsonString(resp))
+	}
+	if resp.TaskID == nil || *resp.TaskID == "" {
+		return fmt.Errorf("invoke UpdateResource handler returned no task,resp:%s", util.JsonString(resp))
+	}
+	_, _, err = AwaitTask(ctx, cloudControlClient, *resp.TaskID)
+	return err
 }
 
 func InvokeGetTask(ctx context.Context, client *cloudcontrol.CloudControl, taskId string) (*cloudcontrol.ProgressEvent, error) {
