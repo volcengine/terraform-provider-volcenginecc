@@ -563,7 +563,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
-	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
+	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State, false)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
@@ -951,7 +951,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = copyPlan
 
-	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
+	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State, true)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
@@ -1060,8 +1060,8 @@ func (r *genericResource) setId(ctx context.Context, val string, state *tfsdk.St
 	return nil
 }
 
-// populateUnknownValues populates and unknown values in State with values from the current resource description.
-func (r *genericResource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
+// populateUnknownValues fills unknown State values and optionally refreshes read-only values from the current resource description.
+func (r *genericResource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State, refreshReadOnly bool) diag.Diagnostics {
 	var diags diag.Diagnostics
 
 	unknowns, err := UnknownValuePaths(ctx, state.Raw)
@@ -1074,7 +1074,7 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 
 		return diags
 	}
-	if len(unknowns) == 0 {
+	if len(unknowns) == 0 && (!refreshReadOnly || len(r.readOnlyAttributePaths) == 0) {
 		return nil
 	}
 
@@ -1098,18 +1098,26 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 		return diags
 	}
 
-	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, util.ToString(description.ResourceDescription.Properties), r.ccToTfNameMap)
+	if len(unknowns) > 0 {
+		err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, util.ToString(description.ResourceDescription.Properties), r.ccToTfNameMap)
 
-	if err != nil {
-		diags.AddError(
-			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
+		if err != nil {
+			diags.AddError(
+				"Creation Of Terraform State Unsuccessful",
+				fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
 
-		return diags
+			return diags
+		}
 	}
 
-	//diags = SetReadOnlyFromResourceModel(ctx, state, r.readOnlyAttributePaths, util.ToString(description.ResourceDescription.Properties), r.ccToTfNameMap)
+	if refreshReadOnly && len(r.readOnlyAttributePaths) > 0 {
+		diags.Append(SetReadOnlyFromResourceModel(ctx, state, r.readOnlyAttributePaths, util.ToString(description.ResourceDescription.Properties), r.ccToTfNameMap)...)
+		if diags.HasError() {
+			return diags
+		}
+	}
+
 	return nil
 }
 

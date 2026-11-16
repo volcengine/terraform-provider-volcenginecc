@@ -102,7 +102,10 @@ func SetReadOnlyFromResourceModel(ctx context.Context, state *tfsdk.State, paths
 	val, err := translator.FromString(ctx, schema, resourceModel)
 
 	if err != nil {
-		diags.AddError("", err.Error())
+		diags.AddError(
+			"Unable to Refresh Read-Only Terraform State",
+			fmt.Sprintf("Unable to set read-only Terraform state values from Cloud Control API Properties. Original Error: %s", err.Error()),
+		)
 		return diags
 	}
 
@@ -111,11 +114,16 @@ func SetReadOnlyFromResourceModel(ctx context.Context, state *tfsdk.State, paths
 		Raw:    val,
 	}
 
-	// Copy all unknown values from the ResourceModel to destination State.
+	// Copy all read-only values from the ResourceModel to destination State.
 	for _, path := range paths {
-		diag := copyStateValue(ctx, state, &src, *path)
-		if diag.HasError() {
-			diags.Append(diag...)
+		var pathDiags diag.Diagnostics
+		if len(path.Steps()) == 1 {
+			pathDiags = copyStateValue(ctx, state, &src, *path)
+		} else {
+			pathDiags = copyStateValueAtPath(ctx, state, &src, *path)
+		}
+		if pathDiags.HasError() {
+			diags.Append(pathDiags...)
 			return diags
 		}
 	}
