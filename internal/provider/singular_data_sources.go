@@ -325,6 +325,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_tidb_branch -ccschema ../service/cloudcontrol/schemas/Volcengine_TiDB_Branch.json -package tidb ../volcengine/tidb/branch_singular_data_source_gen.go ../volcengine/tidb/branch_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_cloudmonitor_object_group -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_ObjectGroup.json -package cloudmonitor ../volcengine/cloudmonitor/object_group_singular_data_source_gen.go ../volcengine/cloudmonitor/object_group_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_cloudmonitor_alert_template -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_AlertTemplate.json -package cloudmonitor ../volcengine/cloudmonitor/alert_template_singular_data_source_gen.go ../volcengine/cloudmonitor/alert_template_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source volcenginecc_organization_delegated_administrator -ccschema ../service/cloudcontrol/schemas/Volcengine_Organization_DelegatedAdministrator.json -package organization ../volcengine/organization/delegated_administrator_singular_data_source_gen.go ../volcengine/organization/delegated_administrator_singular_data_source_gen_test.go
 
 package provider
 

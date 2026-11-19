@@ -1,0 +1,88 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/ServicePrincipal"
+  ],
+  "description": "Delegated administrator account for the specified trusted service.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ServicePrincipal"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "organization:RegisterDelegatedAdministrator",
+        "organization:ListTrustedServiceAdministrators"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "organization:DeregisterDelegatedAdministrator",
+        "organization:ListTrustedServiceAdministrators"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "organization:ListTrustedServiceAdministrators"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "organization:ListTrustedServiceAdministrators"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/AccountId",
+    "/properties/ServicePrincipal"
+  ],
+  "properties": {
+    "AccountId": {
+      "description": "Member account ID of the delegated administrator.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "AccountName": {
+      "description": "Member account name.",
+      "type": "string"
+    },
+    "DelegationEnabledTime": {
+      "description": "Timestamp when the account was set as the delegated administrator.",
+      "semantic": "createdTime",
+      "type": "string"
+    },
+    "DisplayName": {
+      "description": "Member account display name.",
+      "type": "string"
+    },
+    "JoinMethod": {
+      "description": "Method by which the member joined the organization.",
+      "type": "string"
+    },
+    "Owner": {
+      "description": "Organization owner account ID.",
+      "type": "string"
+    },
+    "ServicePrincipal": {
+      "description": "Trusted service identifier.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AccountName",
+    "/properties/DisplayName",
+    "/properties/Owner",
+    "/properties/JoinMethod",
+    "/properties/DelegationEnabledTime"
+  ],
+  "required": [
+    "AccountId",
+    "ServicePrincipal"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::Organization::DelegatedAdministrator"
+}

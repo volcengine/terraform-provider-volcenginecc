@@ -8,6 +8,7 @@ package rdsmysql
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -2478,6 +2479,94 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TDEConfig
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance transparent data encryption TDE configuration. TDE cannot be disabled after it is enabled. Enabling transparent data encryption TDE requires restarting the instance.",
+		//	  "properties": {
+		//	    "KeyName": {
+		//	      "description": "Custom key name. When using a custom key, you must set KeyringName at the same time.",
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "KeyringName": {
+		//	      "description": "Custom keyring name. When using a custom key, you must set KeyName at the same time.",
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "SwitchType": {
+		//	      "description": "TDE activation time. Only Immediate is supported, which means immediate execution.",
+		//	      "type": "string"
+		//	    },
+		//	    "TDEStatus": {
+		//	      "description": "Status of transparent data encryption. Only Enable is supported; once enabled, it cannot be disabled.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TDEStatus"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"tde_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyName
+				"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom key name. When using a custom key, you must set KeyringName at the same time.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// KeyName is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: KeyringName
+				"keyring_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom keyring name. When using a custom key, you must set KeyName at the same time.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// KeyringName is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: SwitchType
+				"switch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TDE activation time. Only Immediate is supported, which means immediate execution.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// SwitchType is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: TDEStatus
+				"tde_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Status of transparent data encryption. Only Enable is supported; once enabled, it cannot be disabled.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseNonNullStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Instance transparent data encryption TDE configuration. TDE cannot be disabled after it is enabled. Enabling transparent data encryption TDE requires restarting the instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
@@ -2753,6 +2842,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"ip_address":                                   "IPAddress",
 		"keep_cross_backup_enable_after_released":      "KeepCrossBackupEnableAfterReleased",
 		"key":                              "Key",
+		"key_name":                         "KeyName",
+		"keyring_name":                     "KeyringName",
 		"lock_ddl_time":                    "LockDDLTime",
 		"lock_ddl_time_second":             "LockDDLTimeSecond",
 		"log_backup_enabled":               "LogBackupEnabled",
@@ -2813,9 +2904,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_id":                        "SubnetId",
 		"super_account_name":               "SuperAccountName",
 		"super_account_password":           "SuperAccountPassword",
+		"switch_type":                      "SwitchType",
 		"sync_delay":                       "SyncDelay",
 		"sync_mode":                        "SyncMode",
 		"tags":                             "Tags",
+		"tde_config":                       "TDEConfig",
+		"tde_status":                       "TDEStatus",
 		"temp_modify_end_time":             "TempModifyEndTime",
 		"temp_modify_start_time":           "TempModifyStartTime",
 		"time_zone":                        "TimeZone",
@@ -2840,6 +2934,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SuperAccountPassword",
 		"/properties/PrivateIpAddress",
 		"/properties/EnableExternalReplication",
+		"/properties/TDEConfig/KeyringName",
+		"/properties/TDEConfig/KeyName",
+		"/properties/TDEConfig/SwitchType",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

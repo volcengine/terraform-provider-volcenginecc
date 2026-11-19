@@ -2035,6 +2035,62 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Data synchronization mode: SemiSync: semi-synchronous. Async: asynchronous",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TDEConfig
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance transparent data encryption TDE configuration. TDE cannot be disabled after it is enabled. Enabling transparent data encryption TDE requires restarting the instance.",
+		//	  "properties": {
+		//	    "KeyName": {
+		//	      "description": "Custom key name. When using a custom key, you must set KeyringName at the same time.",
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "KeyringName": {
+		//	      "description": "Custom keyring name. When using a custom key, you must set KeyName at the same time.",
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "SwitchType": {
+		//	      "description": "TDE activation time. Only Immediate is supported, which means immediate execution.",
+		//	      "type": "string"
+		//	    },
+		//	    "TDEStatus": {
+		//	      "description": "Status of transparent data encryption. Only Enable is supported; once enabled, it cannot be disabled.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TDEStatus"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"tde_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyName
+				"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom key name. When using a custom key, you must set KeyringName at the same time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyringName
+				"keyring_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Custom keyring name. When using a custom key, you must set KeyName at the same time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SwitchType
+				"switch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "TDE activation time. Only Immediate is supported, which means immediate execution.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TDEStatus
+				"tde_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Status of transparent data encryption. Only Enable is supported; once enabled, it cannot be disabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Instance transparent data encryption TDE configuration. TDE cannot be disabled after it is enabled. Enabling transparent data encryption TDE requires restarting the instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// Cloud Control resource type schema:
 		//
@@ -2272,6 +2328,8 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ip_address":                                   "IPAddress",
 		"keep_cross_backup_enable_after_released":      "KeepCrossBackupEnableAfterReleased",
 		"key":                              "Key",
+		"key_name":                         "KeyName",
+		"keyring_name":                     "KeyringName",
 		"lock_ddl_time":                    "LockDDLTime",
 		"lock_ddl_time_second":             "LockDDLTimeSecond",
 		"log_backup_enabled":               "LogBackupEnabled",
@@ -2332,9 +2390,12 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_id":                        "SubnetId",
 		"super_account_name":               "SuperAccountName",
 		"super_account_password":           "SuperAccountPassword",
+		"switch_type":                      "SwitchType",
 		"sync_delay":                       "SyncDelay",
 		"sync_mode":                        "SyncMode",
 		"tags":                             "Tags",
+		"tde_config":                       "TDEConfig",
+		"tde_status":                       "TDEStatus",
 		"temp_modify_end_time":             "TempModifyEndTime",
 		"temp_modify_start_time":           "TempModifyStartTime",
 		"time_zone":                        "TimeZone",

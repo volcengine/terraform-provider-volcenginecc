@@ -659,6 +659,33 @@
       },
       "type": "object"
     },
+    "TDEConfig": {
+      "description": "Instance transparent data encryption TDE configuration.",
+      "properties": {
+        "KeyName": {
+          "description": "Custom key name. When using a custom key, you must set KeyringName at the same time.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "KeyringName": {
+          "description": "Custom keyring name. When using a custom key, you must set KeyName at the same time.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "SwitchType": {
+          "description": "TDE activation time. Only Immediate is supported, which means immediate execution.",
+          "type": "string"
+        },
+        "TDEStatus": {
+          "description": "Status of transparent data encryption. Only Enable is supported; once enabled, it cannot be disabled.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "TDEStatus"
+      ],
+      "type": "object"
+    },
     "Tag": {
       "description": "Tag information for the RDS MySQL instance.",
       "properties": {
@@ -715,7 +742,9 @@
         "rds_mysql:ModifyCrossBackupPolicy",
         "rds_mysql:DescribeBackupPolicy",
         "rds_mysql:DescribeAvailableCrossRegion",
-        "rds_mysql:DescribeCrossBackupPolicy"
+        "rds_mysql:DescribeCrossBackupPolicy",
+        "rds_mysql:DescribeDBInstanceTDE",
+        "rds_mysql:ModifyDBInstanceTDE"
       ]
     },
     "delete": {
@@ -729,7 +758,8 @@
         "rds_mysql:DescribeDBDisasterRecoveryInstances",
         "rds_mysql:DescribeDBProxy",
         "rds_mysql:DescribeDBProxyConfig",
-        "rds_mysql:DescribeDBInstances"
+        "rds_mysql:DescribeDBInstances",
+        "rds_mysql:DescribeDBInstanceTDE"
       ]
     },
     "list": {
@@ -750,7 +780,8 @@
         "rds_mysql:DescribeDBInstances",
         "rds_mysql:DescribeBackupPolicy",
         "rds_mysql:DescribeAvailableCrossRegion",
-        "rds_mysql:DescribeCrossBackupPolicy"
+        "rds_mysql:DescribeCrossBackupPolicy",
+        "rds_mysql:DescribeDBInstanceTDE"
       ]
     },
     "update": {
@@ -777,7 +808,9 @@
         "rds_mysql:ModifyCrossBackupPolicy",
         "rds_mysql:DescribeBackupPolicy",
         "rds_mysql:DescribeAvailableCrossRegion",
-        "rds_mysql:DescribeCrossBackupPolicy"
+        "rds_mysql:DescribeCrossBackupPolicy",
+        "rds_mysql:DescribeDBInstanceTDE",
+        "rds_mysql:ModifyDBInstanceTDE"
       ]
     }
   },
@@ -1103,6 +1136,11 @@
       "description": "Data synchronization mode: SemiSync: semi-synchronous. Async: asynchronous",
       "type": "string"
     },
+    "TDEConfig": {
+      "$ref": "#/definitions/TDEConfig",
+      "description": "Instance transparent data encryption TDE configuration. TDE cannot be disabled after it is enabled. Enabling transparent data encryption TDE requires restarting the instance.",
+      "type": "object"
+    },
     "Tags": {
       "description": "RDS MySQL instance tag information",
       "insertionOrder": false,
@@ -1233,6 +1271,9 @@
     "/properties/SuperAccountName",
     "/properties/SuperAccountPassword",
     "/properties/PrivateIpAddress",
-    "/properties/EnableExternalReplication"
+    "/properties/EnableExternalReplication",
+    "/properties/TDEConfig/KeyringName",
+    "/properties/TDEConfig/KeyName",
+    "/properties/TDEConfig/SwitchType"
   ]
 }

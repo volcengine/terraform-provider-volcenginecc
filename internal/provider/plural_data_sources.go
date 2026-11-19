@@ -324,6 +324,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_tidb_branches -cctype Volcengine::TiDB::Branch -package tidb ../volcengine/tidb/branch_plural_data_source_gen.go ../volcengine/tidb/branch_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_object_groups -cctype Volcengine::CloudMonitor::ObjectGroup -package cloudmonitor ../volcengine/cloudmonitor/object_group_plural_data_source_gen.go ../volcengine/cloudmonitor/object_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_cloudmonitor_alert_templates -cctype Volcengine::CloudMonitor::AlertTemplate -package cloudmonitor ../volcengine/cloudmonitor/alert_template_plural_data_source_gen.go ../volcengine/cloudmonitor/alert_template_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source volcenginecc_organization_delegated_administrators -cctype Volcengine::Organization::DelegatedAdministrator -package organization ../volcengine/organization/delegated_administrator_plural_data_source_gen.go ../volcengine/organization/delegated_administrator_plural_data_source_gen_test.go
 
 package provider
 

@@ -89,6 +89,7 @@ Data Source schema for Volcengine::RDSMySQL::Instance
 - `super_account_password` (String) Password for high-privilege account. Password rules: 8–32 characters in length. Must contain at least three of the following: uppercase letters, lowercase letters, numbers, special characters. Special characters: !@#$%^&*()_+-=,.&?|/.
 - `sync_mode` (String) Data synchronization mode: SemiSync: semi-synchronous. Async: asynchronous
 - `tags` (Attributes Set) RDS MySQL instance tag information (see [below for nested schema](#nestedatt--tags))
+- `tde_config` (Attributes) Instance transparent data encryption TDE configuration. TDE cannot be disabled after it is enabled. Enabling transparent data encryption TDE requires restarting the instance. (see [below for nested schema](#nestedatt--tde_config))
 - `time_zone` (String) Time zone
 - `updated_time` (String) Instance updates local time.
 - `vcpu` (Number) CPU size. For example: 1 means 1U.
@@ -329,3 +330,14 @@ Read-Only:
 
 - `key` (String) Tag key
 - `value` (String) Tag value.
+
+
+<a id="nestedatt--tde_config"></a>
+### Nested Schema for `tde_config`
+
+Read-Only:
+
+- `key_name` (String) Custom key name. When using a custom key, you must set KeyringName at the same time.
+- `keyring_name` (String) Custom keyring name. When using a custom key, you must set KeyName at the same time.
+- `switch_type` (String) TDE activation time. Only Immediate is supported, which means immediate execution.
+- `tde_status` (String) Status of transparent data encryption. Only Enable is supported; once enabled, it cannot be disabled.

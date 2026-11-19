@@ -1613,5 +1613,10 @@
         "resource": "volcenginecc_cloudmonitor_alert_template",
         "identifier": ["TemplateId"],
         "path": "./examples/resources/volcenginecc_cloudmonitor_alert_template/import.sh"
+    },
+    {
+        "resource": "volcenginecc_organization_delegated_administrator",
+        "identifier": ["AccountId","ServicePrincipal"],
+        "path": "./examples/resources/volcenginecc_organization_delegated_administrator/import.sh"
     }
 ]
