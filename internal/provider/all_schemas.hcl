@@ -1307,3 +1307,7 @@ resource_schema "volcengine_cloudmonitor_object_group" {
 resource_schema "volcengine_cloudmonitor_alert_template" {
   cloudcontrol_type_name = "Volcengine::CloudMonitor::AlertTemplate"
 }
+
+resource_schema "volcengine_organization_delegated_administrator" {
+  cloudcontrol_type_name = "Volcengine::Organization::DelegatedAdministrator"
+}

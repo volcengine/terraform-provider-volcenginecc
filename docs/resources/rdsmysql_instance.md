@@ -110,6 +110,7 @@ resource "volcenginecc_rdsmysql_instance" "RDSMySQLInstanceDemo" {
 - `sync_mode` (String) Data synchronization mode: SemiSync: semi-synchronous. Async: asynchronous
 - `tags` (Attributes Set) RDS MySQL instance tag information
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--tags))
+- `tde_config` (Attributes) Instance transparent data encryption TDE configuration. TDE cannot be disabled after it is enabled. Enabling transparent data encryption TDE requires restarting the instance. (see [below for nested schema](#nestedatt--tde_config))
 
 ### Read-Only
 
@@ -290,6 +291,17 @@ Optional:
 
 - `key` (String) Tag key
 - `value` (String) Tag value.
+
+
+<a id="nestedatt--tde_config"></a>
+### Nested Schema for `tde_config`
+
+Optional:
+
+- `key_name` (String) Custom key name. When using a custom key, you must set KeyringName at the same time.
+- `keyring_name` (String) Custom keyring name. When using a custom key, you must set KeyName at the same time.
+- `switch_type` (String) TDE activation time. Only Immediate is supported, which means immediate execution.
+- `tde_status` (String) Status of transparent data encryption. Only Enable is supported; once enabled, it cannot be disabled.
 
 
 <a id="nestedatt--address_objects"></a>

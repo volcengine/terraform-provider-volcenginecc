@@ -108,6 +108,16 @@
           "description": "Region of the monitoring object",
           "type": "string"
         },
+        "Rules": {
+          "description": "List of alarm rules associated with the monitored object, returned by the server.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Rule",
+            "description": "Alarm rule associated with the monitored object."
+          },
+          "type": "array",
+          "uniqueItems": false
+        },
         "Type": {
           "description": "Object access method, such as `Dimension` / `DimensionCondition`",
           "type": "string"
@@ -126,6 +136,28 @@
           },
           "type": "array",
           "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
+    "Rule": {
+      "description": "Alarm rule associated with the monitored object.",
+      "properties": {
+        "AlertTemplateId": {
+          "description": "Associated Alarm Template ID",
+          "type": "string"
+        },
+        "Id": {
+          "description": "Alarm Rule ID",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Alarm Rule Name",
+          "type": "string"
+        },
+        "TemplateRuleId": {
+          "description": "Rule ID in Alarm Template",
+          "type": "string"
         }
       },
       "type": "object"
@@ -169,6 +201,20 @@
           },
           "type": "array",
           "uniqueItems": false
+        }
+      },
+      "type": "object"
+    },
+    "TemplateDetail": {
+      "description": "Alarm template information associated with the object group.",
+      "properties": {
+        "AlertTemplateId": {
+          "description": "Associated Alarm Template ID",
+          "type": "string"
+        },
+        "AlertTemplateName": {
+          "description": "Associated Alarm Template Name",
+          "type": "string"
         }
       },
       "type": "object"
@@ -249,6 +295,16 @@
       "type": "array",
       "uniqueItems": false
     },
+    "TemplateDetails": {
+      "description": "List of alarm template information associated with the object group, returned by the server.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/TemplateDetail",
+        "description": "Alarm template information associated with the object group."
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
     "UpdatedAt": {
       "description": "Object group last update time",
       "semantic": "updatedTime",
@@ -259,9 +315,11 @@
     "/properties/GroupId",
     "/properties/AlertTemplateId",
     "/properties/AlertTemplateName",
+    "/properties/TemplateDetails",
     "/properties/CreatedAt",
     "/properties/UpdatedAt",
-    "/properties/Objects/*/Id"
+    "/properties/Objects/*/Id",
+    "/properties/Objects/*/Rules"
   ],
   "required": [
     "Name"

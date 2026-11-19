@@ -221,6 +221,34 @@ func objectGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "Region of the monitoring object",
 		//	        "type": "string"
 		//	      },
+		//	      "Rules": {
+		//	        "description": "List of alarm rules associated with the monitored object, returned by the server.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "Alarm rule associated with the monitored object.",
+		//	          "properties": {
+		//	            "AlertTemplateId": {
+		//	              "description": "Associated Alarm Template ID",
+		//	              "type": "string"
+		//	            },
+		//	            "Id": {
+		//	              "description": "Alarm Rule ID",
+		//	              "type": "string"
+		//	            },
+		//	            "Name": {
+		//	              "description": "Alarm Rule Name",
+		//	              "type": "string"
+		//	            },
+		//	            "TemplateRuleId": {
+		//	              "description": "Rule ID in Alarm Template",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
 		//	      "Type": {
 		//	        "description": "Object access method, such as `Dimension` / `DimensionCondition`",
 		//	        "type": "string"
@@ -366,6 +394,35 @@ func objectGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "Region of the monitoring object",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: Rules
+					"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AlertTemplateId
+								"alert_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Associated Alarm Template ID",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Id
+								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Alarm Rule ID",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Alarm Rule Name",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TemplateRuleId
+								"template_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Rule ID in Alarm Template",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of alarm rules associated with the monitored object, returned by the server.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Object access method, such as `Dimension` / `DimensionCondition`",
@@ -374,6 +431,47 @@ func objectGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "List of monitoring objects contained in the object group",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TemplateDetails
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "List of alarm template information associated with the object group, returned by the server.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Alarm template information associated with the object group.",
+		//	    "properties": {
+		//	      "AlertTemplateId": {
+		//	        "description": "Associated Alarm Template ID",
+		//	        "type": "string"
+		//	      },
+		//	      "AlertTemplateName": {
+		//	        "description": "Associated Alarm Template Name",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"template_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AlertTemplateId
+					"alert_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Associated Alarm Template ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AlertTemplateName
+					"alert_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Associated Alarm Template Name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of alarm template information associated with the object group, returned by the server.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
@@ -424,8 +522,11 @@ func objectGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"projects":             "Projects",
 		"region":               "Region",
 		"resource_id":          "ResourceID",
+		"rules":                "Rules",
 		"tag_condition":        "TagCondition",
 		"tags":                 "Tags",
+		"template_details":     "TemplateDetails",
+		"template_rule_id":     "TemplateRuleId",
 		"type":                 "Type",
 		"updated_at":           "UpdatedAt",
 		"values":               "Values",
