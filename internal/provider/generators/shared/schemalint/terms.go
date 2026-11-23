@@ -212,12 +212,6 @@ func matchTerm(name string, pos int) (token, int, bool) {
 	return token{}, 0, false
 }
 
-// isPascalCase reports whether name starts with an upper-case letter and
-// contains only ASCII letters and digits.
-func isPascalCase(name string) bool {
-	return len(name) > 0 && isUpper(name[0]) && isAlphanumeric(name)
-}
-
 func isAlphanumeric(s string) bool {
 	if s == "" {
 		return false

@@ -43,7 +43,10 @@ const (
 	taggingPath      = "/tagging"
 )
 
-var arrayIndex = regexp.MustCompile(`^[0-9]+$`)
+var (
+	arrayIndex = regexp.MustCompile(`^[0-9]+$`)
+	pascalCase = regexp.MustCompile(`^[A-Z][A-Za-z0-9]*$`)
+)
 
 // Violation is a property name or JSON Pointer that breaks a naming rule.
 type Violation struct {
@@ -180,7 +183,7 @@ func (v *validator) checkNames(fields []field) {
 	for _, f := range fields {
 		a := analyzeName(f.name)
 
-		if !isPascalCase(f.name) {
+		if !pascalCase.MatchString(f.name) {
 			v.add(f.path, RulePascalCase, "field name %q must be PascalCase; suggested name %q", f.name, a.canonical)
 		}
 		if len(a.spellingFixes) > 0 {
