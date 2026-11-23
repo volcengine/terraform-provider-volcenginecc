@@ -1,0 +1,398 @@
+{
+  "Volcengine::ALB::LoadBalancer": [
+    "/properties/AddressIpVersion"
+  ],
+  "Volcengine::ALB::ServerGroup": [
+    "/properties/IPAddressType"
+  ],
+  "Volcengine::APIG::Gateway": [
+    "/properties/GatewayID",
+    "/properties/MonitorSpec/WorkspaceID"
+  ],
+  "Volcengine::APIG::GatewayService": [
+    "/properties/ServiceNetworkSpec/PrivateNetworkIP"
+  ],
+  "Volcengine::APIG::Upstream": [
+    "/properties/BackendTargets/*/IP",
+    "/properties/ConnectionPoolSettings/Http1MaxPendingRequests",
+    "/properties/LoadBalancerSettings/ConsistentHashLB",
+    "/properties/LoadBalancerSettings/ConsistentHashLB/HTTPCookie",
+    "/properties/LoadBalancerSettings/ConsistentHashLB/HttpHeaderName",
+    "/properties/LoadBalancerSettings/ConsistentHashLB/HttpQueryParameterName",
+    "/properties/LoadBalancerSettings/LbPolicy",
+    "/properties/LoadBalancerSettings/SimpleLB",
+    "/properties/UpstreamSpec/EcsInstances/*/IP"
+  ],
+  "Volcengine::Billing::FinancialRelation": [
+    "/properties/AuthInfo/*/AuthID",
+    "/properties/FiliationDesc",
+    "/properties/MajorAccountID",
+    "/properties/RelationDesc",
+    "/properties/RelationID",
+    "/properties/StatusDesc",
+    "/properties/SubAccountID"
+  ],
+  "Volcengine::CDN::Domain": [
+    "/properties/ConditionalOrigin/OriginRules/*/Actions/OriginLines/*/HttpPort",
+    "/properties/ConditionalOrigin/OriginRules/*/Actions/OriginLines/*/HttpsPort",
+    "/properties/CustomErrorPage/ErrorPageRule/*/ErrorPageAction/RedirectUrl",
+    "/properties/HTTPS",
+    "/properties/HTTPS/DisableHttp",
+    "/properties/HTTPS/HTTP2",
+    "/properties/HttpForcedRedirect",
+    "/properties/IPv6",
+    "/properties/Origin/*/OriginAction/OriginLines/*/HttpPort",
+    "/properties/Origin/*/OriginAction/OriginLines/*/HttpsPort",
+    "/properties/OriginIPv6",
+    "/properties/RequestBlockRule/BlockRule/*/BlockAction/RedirectUrl",
+    "/properties/SignedUrlAuth",
+    "/properties/SignedUrlAuth/SignedUrlAuthRules",
+    "/properties/SignedUrlAuth/SignedUrlAuthRules/*/SignedUrlAuthAction",
+    "/properties/SignedUrlAuth/SignedUrlAuthRules/*/SignedUrlAuthAction/URLAuthType",
+    "/properties/Timeout/TimeoutRules/*/TimeoutAction/HttpTimeout",
+    "/properties/UrlNormalize"
+  ],
+  "Volcengine::CLB::CLB": [
+    "/properties/AddressIpVersion",
+    "/properties/EipID",
+    "/properties/Eni/EniID",
+    "/properties/Enis/EniID"
+  ],
+  "Volcengine::CLB::ServerGroup": [
+    "/properties/AddressIpVersion"
+  ],
+  "Volcengine::CloudMonitor::ObjectGroup": [
+    "/properties/Objects/*/Dimensions/ResourceID"
+  ],
+  "Volcengine::DNS::Backup": [
+    "/properties/BackupID"
+  ],
+  "Volcengine::DNS::Record": [
+    "/properties/RecordID",
+    "/properties/RecordSetID"
+  ],
+  "Volcengine::DNS::Zone": [
+    "/properties/AllocateDNSServerList",
+    "/properties/DnsSecurity",
+    "/properties/InstanceID",
+    "/properties/RealDNSServerList"
+  ],
+  "Volcengine::ECS::LaunchTemplate": [
+    "/tagging"
+  ],
+  "Volcengine::ESCloud::Instance": [
+    "/properties/ESEip",
+    "/properties/ESEipId",
+    "/properties/ESPrivateEndpoint",
+    "/properties/ESPrivateIpAllowList",
+    "/properties/ESPrivateIpWhitelist",
+    "/properties/ESPublicEndpoint",
+    "/properties/ESPublicIpAllowList",
+    "/properties/ESPublicIpWhitelist",
+    "/properties/EnableESPrivateDomainPublic",
+    "/properties/EnableESPrivateNetwork",
+    "/properties/EnableESPublicNetwork",
+    "/properties/EsPubBandwidth",
+    "/properties/InstanceConfiguration/VPC",
+    "/tagging"
+  ],
+  "Volcengine::IAM::AllowedIpAddress": [
+    "/properties/EnableIPList",
+    "/properties/IPList",
+    "/properties/IPList/*/IP"
+  ],
+  "Volcengine::IAM::Group": [
+    "/properties/AccountID",
+    "/properties/UserGroupID",
+    "/properties/Users/*/UserID"
+  ],
+  "Volcengine::IAM::Project": [
+    "/properties/AccountID"
+  ],
+  "Volcengine::KMS::Key": [
+    "/properties/KeyID",
+    "/properties/ReEncrypt/NewKeyID",
+    "/properties/ReplicateKey/ReplicaKeyID"
+  ],
+  "Volcengine::KMS::KeyMaterial": [
+    "/properties/KeyID"
+  ],
+  "Volcengine::KMS::Secret": [
+    "/properties/SecretID",
+    "/properties/SecretVersions/*/VersionID"
+  ],
+  "Volcengine::Kafka::AllowList": [
+    "/properties/AllowListDesc"
+  ],
+  "Volcengine::MongoDB::Account": [
+    "/properties/AccountDesc"
+  ],
+  "Volcengine::MongoDB::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "Volcengine::MongoDB::Endpoint": [
+    "/properties/DBAddresses/*/AddressIP"
+  ],
+  "Volcengine::Organization::Account": [
+    "/properties/OrgID",
+    "/properties/OrgUnitID",
+    "/properties/OrgVerificationID"
+  ],
+  "Volcengine::Organization::Organization": [
+    "/properties/OrganizationID",
+    "/properties/Owner/AccountID"
+  ],
+  "Volcengine::Organization::ServiceControlPolicy": [
+    "/properties/PolicyID",
+    "/properties/Targets/*/TargetID"
+  ],
+  "Volcengine::Organization::ServiceControlPolicyEnabler": [
+    "/properties/OrganizationID"
+  ],
+  "Volcengine::Organization::Unit": [
+    "/properties/OrgID"
+  ],
+  "Volcengine::PrivateLink::VpcEndpointConnection": [
+    "/properties/Zones/*/NetworkInterfaceIP"
+  ],
+  "Volcengine::PrivateZone::PrivateZone": [
+    "/properties/Vpcs/*/AccountID"
+  ],
+  "Volcengine::PrivateZone::Record": [
+    "/properties/RecordSets/*/ID"
+  ],
+  "Volcengine::PrivateZone::ResolverEndpoint": [
+    "/properties/EndpointID",
+    "/properties/IpConfigs/*/AzID",
+    "/properties/IpConfigs/*/IP",
+    "/properties/IpConfigs/*/SubnetID",
+    "/properties/SecurityGroupID",
+    "/properties/VpcID"
+  ],
+  "Volcengine::PrivateZone::ResolverRule": [
+    "/properties/EndpointID",
+    "/properties/ForwardIPs",
+    "/properties/ForwardIPs/*/IP",
+    "/properties/RuleID",
+    "/properties/VPCs",
+    "/properties/VPCs/*/AccountID"
+  ],
+  "Volcengine::PrivateZone::UserVPCAuthorization": [
+    "/properties/AccountID"
+  ],
+  "Volcengine::RDSMsSQL::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "Volcengine::RDSMsSQL::Backup": [
+    "/properties/BackupDatabaseDetail/*/BackupDownloadLinkEIP"
+  ],
+  "Volcengine::RDSMsSQL::Instance": [
+    "/properties/ConnectionInfo/*/Address/*/IPAddress",
+    "/properties/NodeDetailInfo/*/NodeIP"
+  ],
+  "Volcengine::RDSMySQL::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "Volcengine::RDSMySQL::DBAccount": [
+    "/properties/AccountDesc"
+  ],
+  "Volcengine::RDSMySQL::Endpoint": [
+    "/properties/Addresses/*/IPAddress"
+  ],
+  "Volcengine::RDSMySQL::EndpointPublicAddress": [
+    "/properties/IPAddress"
+  ],
+  "Volcengine::RDSMySQL::Instance": [
+    "/properties/AddressObjects/*/IPAddress",
+    "/properties/CpuNum",
+    "/properties/Endpoints/*/Addresses/*/IPAddress",
+    "/properties/NodeCPUUsedPercentage",
+    "/properties/ProxyDetail/ProxyResourceInfo/CurrentProxyCpuNum",
+    "/properties/ProxyDetail/ProxyResourceInfo/MaxProxyCpuNum",
+    "/properties/ProxyDetail/ProxyResourceInfo/MinProxyCpuNum"
+  ],
+  "Volcengine::RDSMySQL::ParameterTemplate": [
+    "/properties/TemplateDesc"
+  ],
+  "Volcengine::RDSPostgreSQL::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC",
+    "/properties/IPAddress"
+  ],
+  "Volcengine::RDSPostgreSQL::DBEndpoint": [
+    "/properties/InnerAddresses/IPAddress",
+    "/properties/PrivateAddresses/IPAddress",
+    "/properties/PublicAddresses/IPAddress"
+  ],
+  "Volcengine::RDSPostgreSQL::Instance": [
+    "/properties/Endpoints/*/Address/*/IPAddress",
+    "/properties/ReplicationSlots/*/IPAddress",
+    "/properties/ReplicationSlots/*/WalDelay",
+    "/properties/StorageWALUse"
+  ],
+  "Volcengine::RDSPostgreSQL::ParameterTemplate": [
+    "/properties/TemplateDesc"
+  ],
+  "Volcengine::RabbitMQ::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "Volcengine::Redis::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "Volcengine::RocketMQ::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "Volcengine::RocketMQ::Instance": [
+    "/properties/ConnectionInfo/*/EndpointAddressIP",
+    "/properties/IPVersionType"
+  ],
+  "Volcengine::SecurityCenter::Agent": [
+    "/properties/AgentID",
+    "/properties/EcsInstance",
+    "/properties/EcsInstance/AccountID",
+    "/properties/EcsInstance/ECSUpdateAt",
+    "/properties/EcsInstance/IPList"
+  ],
+  "Volcengine::TLS::Alarm": [
+    "/properties/QueryRequests/0/TopicId",
+    "/properties/QueryRequests/0/TopicName"
+  ],
+  "Volcengine::TLS::AlarmNotifyGroup": [
+    "/properties/NoticeRules/*/ReceiverInfos/*/GeneralWebhookHeaders/*/key",
+    "/properties/NoticeRules/*/ReceiverInfos/*/GeneralWebhookHeaders/*/value",
+    "/properties/Receivers/*/GeneralWebhookHeaders/*/key",
+    "/properties/Receivers/*/GeneralWebhookHeaders/*/value"
+  ],
+  "Volcengine::TLS::AlarmWebhookIntegrationType": [
+    "/properties/WebhookID"
+  ],
+  "Volcengine::TLS::ConsumerGroup": [
+    "/properties/ProjectID",
+    "/properties/TopicIDList"
+  ],
+  "Volcengine::TLS::Etl": [
+    "/properties/TaskID"
+  ],
+  "Volcengine::TLS::Host": [
+    "/properties/HostGroupID",
+    "/properties/IP"
+  ],
+  "Volcengine::TLS::HostGroup": [
+    "/properties/HostGroupID",
+    "/properties/HostIPList"
+  ],
+  "Volcengine::TLS::ImportTask": [
+    "/properties/ImportSourceInfo/KafkaSourceInfo/InstanceID",
+    "/properties/ProjectID",
+    "/properties/TaskID",
+    "/properties/TopicID"
+  ],
+  "Volcengine::TLS::Index": [
+    "/properties/KeyValue/*/Value/IndexSQLAll",
+    "/properties/KeyValue/*/Value/JsonKeys/*/Value/IndexSQLAll",
+    "/properties/KeyValue/*/Value/JsonKeys/*/Value/SqlFlag",
+    "/properties/KeyValue/*/Value/SqlFlag",
+    "/properties/UserInnerKeyValue/*/Value/IndexSQLAll",
+    "/properties/UserInnerKeyValue/*/Value/JsonKeys/*/Value/IndexSQLAll",
+    "/properties/UserInnerKeyValue/*/Value/JsonKeys/*/Value/SqlFlag",
+    "/properties/UserInnerKeyValue/*/Value/SqlFlag"
+  ],
+  "Volcengine::TLS::Project": [
+    "/properties/ProjectID"
+  ],
+  "Volcengine::TLS::ScheduleSqlTask": [
+    "/properties/DestProjectID",
+    "/properties/DestTopicID",
+    "/properties/SourceProjectID",
+    "/properties/SourceTopicID"
+  ],
+  "Volcengine::TLS::Topic": [
+    "/properties/LogPublicIP",
+    "/properties/TopicID"
+  ],
+  "Volcengine::TOS::BucketEncryption": [
+    "/properties/KMSMasterKeyID"
+  ],
+  "Volcengine::TOS::BucketInventory": [
+    "/properties/Destination/TOSBucketDestination/AccountID"
+  ],
+  "Volcengine::TOS::BucketMirrorBack": [
+    "/properties/Rules/*/ID"
+  ],
+  "Volcengine::TOS::BucketRealtimeLog": [
+    "/properties/RealTimeLog/TLSProjectID",
+    "/properties/RealTimeLog/TLSTopicID"
+  ],
+  "Volcengine::TOS::BucketReplication": [
+    "/properties/Rules/*/ID"
+  ],
+  "Volcengine::TOS::Object": [
+    "/properties/VersionID",
+    "/properties/VersionIDs"
+  ],
+  "Volcengine::VEDBM::Account": [
+    "/properties/AccountDesc"
+  ],
+  "Volcengine::VEDBM::AllowList": [
+    "/properties/AllowListDesc",
+    "/properties/AllowListIPNum",
+    "/properties/AssociatedInstances/*/VPC"
+  ],
+  "Volcengine::VEDBM::Database": [
+    "/properties/DBDesc"
+  ],
+  "Volcengine::VEDBM::Endpoint": [
+    "/properties/PrivateAddresses/IPAddress",
+    "/properties/PublicAddresses/IPAddress"
+  ],
+  "Volcengine::VEDBM::Instance": [
+    "/properties/Nodes/*/vCPU"
+  ],
+  "Volcengine::VeenEdge::CloudServer": [
+    "/properties/AdvancedConfiguration/InstanceDesc",
+    "/properties/CloudServerDesc"
+  ],
+  "Volcengine::VeenEdge::VPC": [
+    "/properties/Desc",
+    "/properties/Subnets/*/Desc"
+  ],
+  "Volcengine::VeenEdge::Veen": [
+    "/properties/InstanceDesc"
+  ],
+  "Volcengine::WAF::CcRule": [
+    "/properties/CustomResponsePageID"
+  ],
+  "Volcengine::WAF::Domain": [
+    "/properties/AdvancedDefenseIP",
+    "/properties/AutoCCEnable",
+    "/properties/BackendGroups/*/Backends/*/IP",
+    "/properties/CcEnable",
+    "/properties/CertificateID",
+    "/properties/ClientIPLocation",
+    "/properties/CloudAccessConfig/*/InstanceID",
+    "/properties/CloudAccessConfig/*/ListenerID",
+    "/properties/TCPListenerConfig/*/InstanceID",
+    "/properties/TCPListenerConfig/*/ListenerID",
+    "/properties/VpcID"
+  ],
+  "Volcengine::WAF::IpGroup": [
+    "/properties/IpList/0",
+    "/properties/RelatedRules/0/RuleTag"
+  ],
+  "Volcengine::WAF::SystemBot": [
+    "/properties/IPMatch"
+  ]
+}

@@ -255,6 +255,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 
 	resources := []*ResourceData{}
 	var singularDataSources, pluralDataSources []*DataSourceData
+	var invalidSchemas []error
 
 	for _, schema := range d.config.ResourceSchemas {
 		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(d.client, schema)
@@ -281,6 +282,13 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 
 		if terraformTypeNamePrefix != "" {
 			tfResourceTypeName = naming.CreateTerraformTypeName(terraformTypeNamePrefix, svc, res)
+		}
+
+		// Schemas that break the naming rules block the whole generation instead of
+		// being skipped, so a published resource never silently drops out.
+		if _, err := shared.NewResource(tfResourceTypeName, cfResourceSchemaFilename); err != nil {
+			invalidSchemas = append(invalidSchemas, fmt.Errorf("%s: %w", cfResourceSchemaFilename, err))
+			continue
 		}
 
 		if schema.SuppressSingularDataSourceGeneration {
@@ -324,6 +332,10 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 			GeneratedCodePathSuffix:    fmt.Sprintf("%s/%s", org, svc), // e.g. "ve/logs"
 			TerraformResourceType:      tfResourceTypeName,
 		})
+	}
+
+	if len(invalidSchemas) > 0 {
+		return nil, nil, errors.Join(invalidSchemas...)
 	}
 
 	dataSources := &DataSources{

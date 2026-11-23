@@ -8,11 +8,13 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
 
 	"github.com/hashicorp/cli"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/ccschema"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/naming"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/provider/generators/shared/codegen"
+	"github.com/volcengine/terraform-provider-volcenginecc/internal/provider/generators/shared/schemalint"
 	tfslices "github.com/volcengine/terraform-provider-volcenginecc/internal/slices"
 )
 
@@ -231,6 +233,9 @@ func collectCollectionIdentities(properties map[string]*ccschema.Property, paren
 	return result
 }
 
+// namingBaseline loads the embedded schema naming baseline once per generator run.
+var namingBaseline = sync.OnceValues(schemalint.DefaultBaseline)
+
 type Resource struct {
 	CfResource *ccschema.Resource
 	TfType     string
@@ -256,6 +261,14 @@ func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
 	}
 	if err := resource.ValidateCollectionIdentities(); err != nil {
 		return nil, fmt.Errorf("validating collection identities: %w", err)
+	}
+
+	baseline, err := namingBaseline()
+	if err != nil {
+		return nil, err
+	}
+	if err := schemalint.Check(resource, baseline); err != nil {
+		return nil, fmt.Errorf("validating schema naming: %w", err)
 	}
 
 	return &Resource{
