@@ -67,9 +67,9 @@ func analyzeName(name string) analysis {
 	var result analysis
 
 	tokens := tokenize(name)
-	words := make([]string, len(tokens))
-	for i, t := range tokens {
-		words[i] = t.canonical
+	words := make([]string, 0, len(tokens))
+	for _, t := range tokens {
+		words = append(words, t.canonical)
 		if t.term && t.text != t.canonical {
 			result.spellingFixes = append(result.spellingFixes, fmt.Sprintf("%q -> %q", t.text, t.canonical))
 		}
@@ -87,7 +87,7 @@ func analyzeName(name string) analysis {
 
 	var sb strings.Builder
 	for _, w := range words {
-		if !isAlphanumeric(w) {
+		if len(w) == 0 || !isAlphanumeric(w) {
 			continue // Drop separators such as '_' and '-'.
 		}
 		sb.WriteString(strings.ToUpper(w[:1]) + w[1:])
@@ -147,6 +147,9 @@ func tokenize(name string) []token {
 // not end inside an upper-case run unless the rest of the run is the first
 // letter of a capitalized word (IPAddress, IDCard).
 func matchTermBlock(name string, i int) ([]token, int, bool) {
+	if i < 0 || i >= len(name) {
+		return nil, 0, false
+	}
 	if i > 0 && !isUpper(name[i]) {
 		return nil, 0, false
 	}
@@ -212,7 +215,7 @@ func matchTerm(name string, pos int) (token, int, bool) {
 // isPascalCase reports whether name starts with an upper-case letter and
 // contains only ASCII letters and digits.
 func isPascalCase(name string) bool {
-	return name != "" && isUpper(name[0]) && isAlphanumeric(name)
+	return len(name) > 0 && isUpper(name[0]) && isAlphanumeric(name)
 }
 
 func isAlphanumeric(s string) bool {

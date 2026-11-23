@@ -370,34 +370,30 @@ func resolvePointer(properties map[string]*ccschema.Property, pointer string) st
 		return fmt.Sprintf("must start with %q", propertiesPrefix+"/")
 	}
 
-	var property *ccschema.Property
+	property := &ccschema.Property{Properties: properties}
 	for _, segment := range strings.Split(strings.TrimPrefix(pointer, propertiesPrefix+"/"), "/") {
-		isArray := property != nil && property.Items != nil
-
 		if segment == "*" {
-			if !isArray {
+			if property.Items == nil {
 				return `uses "*" on a field that is not an array`
 			}
 			property = property.Items
-			properties = property.Properties
 			continue
 		}
-		if isArray {
+		if property.Items != nil {
 			if arrayIndex.MatchString(segment) {
 				return fmt.Sprintf(`addresses array elements by index %q; use "*"`, segment)
 			}
 			return fmt.Sprintf(`must address the elements of an array with "*" before %q`, segment)
 		}
 
-		next, ok := properties[segment]
+		next, ok := property.Properties[segment]
 		if !ok || next == nil {
-			if match := matchFold(properties, segment); match != "" {
+			if match := matchFold(property.Properties, segment); match != "" {
 				return fmt.Sprintf("segment %q does not match the field name %q", segment, match)
 			}
 			return fmt.Sprintf("segment %q is not a declared field", segment)
 		}
 		property = next
-		properties = next.Properties
 	}
 
 	return ""
