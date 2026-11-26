@@ -7,7 +7,8 @@
     "/properties/ProjectName",
     "/properties/NetworkType",
     "/properties/SubnetId",
-    "/properties/VpcId"
+    "/properties/VpcId",
+    "/properties/RenewType"
   ],
   "definitions": {
     "EipAddress": {
@@ -77,7 +78,8 @@
     "create": {
       "permissions": [
         "natgateway:CreateNatGateway",
-        "natgateway:DescribeNatGatewayAttributes"
+        "natgateway:DescribeNatGatewayAttributes",
+        "natgateway:DescribeNatGateways"
       ]
     },
     "delete": {
@@ -95,13 +97,15 @@
     },
     "read": {
       "permissions": [
-        "natgateway:DescribeNatGatewayAttributes"
+        "natgateway:DescribeNatGatewayAttributes",
+        "natgateway:DescribeNatGateways"
       ]
     },
     "update": {
       "permissions": [
         "natgateway:ModifyNatGatewayAttributes",
         "natgateway:DescribeNatGatewayAttributes",
+        "natgateway:DescribeNatGateways",
         "natgateway:UntagResources",
         "natgateway:TagResources"
       ]
@@ -195,10 +199,6 @@
     "NetworkType": {
       "default": "internet",
       "description": "NAT Gateway type. internet: Public NAT Gateway. intranet: Private NAT Gateway.",
-      "enum": [
-        "internet",
-        "intranet"
-      ],
       "type": "string"
     },
     "OverdueTime": {
@@ -220,19 +220,17 @@
       "semantic": "projectName",
       "type": "string"
     },
+    "RenewType": {
+      "description": "Renewal methods for prepaid NAT instances. Possible values:\n-0 (default): Manual renewal\n-2: Automatic renewal",
+      "format": "int64",
+      "type": "integer"
+    },
     "SmartScheduleEnabled": {
       "description": "Whether to enable intelligent scheduling",
       "type": "boolean"
     },
     "SmartScheduleRule": {
       "description": "Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.",
-      "enum": [
-        "ChinaMobile",
-        "ChinaUnicom",
-        "ChinaTelecom",
-        "BGP",
-        ""
-      ],
       "type": "string"
     },
     "SnatEntryIds": {
@@ -246,24 +244,10 @@
     },
     "Spec": {
       "description": "NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.",
-      "enum": [
-        "Small",
-        "Medium",
-        "Large",
-        "Extra_Large_1",
-        "Extra_Large_2",
-        ""
-      ],
       "type": "string"
     },
     "Status": {
       "description": "Status of the NAT Gateway. Available: Available. Creating: Creating. Pending: In progress. Deleting: Deleting.",
-      "enum": [
-        "Available",
-        "Creating",
-        "Pending",
-        "Deleting"
-      ],
       "semantic": "status",
       "type": "string"
     },
@@ -310,8 +294,7 @@
     "/properties/UpdatedTime",
     "/properties/ZoneId",
     "/properties/EipAddresses",
-    "/properties/NatIpAddresses",
-    "/properties/DirectMode"
+    "/properties/NatIpAddresses"
   ],
   "required": [
     "VpcId"
@@ -321,5 +304,10 @@
     "tagUpdatable": true,
     "taggable": true
   },
-  "typeName": "Volcengine::NatGateway::NGW"
+  "typeName": "Volcengine::NatGateway::NGW",
+  "writeOnlyProperties": [
+    "/properties/RenewType",
+    "/properties/Period",
+    "/properties/PeriodUnit"
+  ]
 }

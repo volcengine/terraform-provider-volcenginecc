@@ -1311,3 +1311,11 @@ resource_schema "volcengine_cloudmonitor_alert_template" {
 resource_schema "volcengine_organization_delegated_administrator" {
   cloudcontrol_type_name = "Volcengine::Organization::DelegatedAdministrator"
 }
+
+resource_schema "volcengine_tidb_allowlist" {
+  cloudcontrol_type_name = "Volcengine::TiDB::allowlist"
+}
+
+resource_schema "volcengine_cloudmonitor_aggregation_policy" {
+  cloudcontrol_type_name = "Volcengine::CloudMonitor::AggregationPolicy"
+}

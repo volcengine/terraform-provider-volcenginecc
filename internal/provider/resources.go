@@ -326,6 +326,8 @@
 //go:generate go run generators/resource/main.go -resource volcenginecc_cloudmonitor_object_group -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_ObjectGroup.json -package cloudmonitor -- ../volcengine/cloudmonitor/object_group_resource_gen.go ../volcengine/cloudmonitor/object_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_cloudmonitor_alert_template -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_AlertTemplate.json -package cloudmonitor -- ../volcengine/cloudmonitor/alert_template_resource_gen.go ../volcengine/cloudmonitor/alert_template_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource volcenginecc_organization_delegated_administrator -ccschema ../service/cloudcontrol/schemas/Volcengine_Organization_DelegatedAdministrator.json -package organization -- ../volcengine/organization/delegated_administrator_resource_gen.go ../volcengine/organization/delegated_administrator_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_tidb_allowlist -ccschema ../service/cloudcontrol/schemas/Volcengine_TiDB_allowlist.json -package tidb -- ../volcengine/tidb/allowlist_resource_gen.go ../volcengine/tidb/allowlist_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource volcenginecc_cloudmonitor_aggregation_policy -ccschema ../service/cloudcontrol/schemas/Volcengine_CloudMonitor_AggregationPolicy.json -package cloudmonitor -- ../volcengine/cloudmonitor/aggregation_policy_resource_gen.go ../volcengine/cloudmonitor/aggregation_policy_resource_gen_test.go
 
 package provider
 

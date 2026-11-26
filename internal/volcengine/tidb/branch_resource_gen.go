@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/generic"
 	"github.com/volcengine/terraform-provider-volcenginecc/internal/registry"
 )
@@ -86,19 +85,16 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: ClusterId
+		// Property: BranchName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Cluster ID",
+		//	  "description": "Branch Name",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Cluster ID",
+		"branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Branch Name",
 			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
 		// Cloud Control resource type schema:
@@ -128,17 +124,6 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: DisplayName
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "Branch display name",
-		//	  "type": "string"
-		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Branch display name",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: Endpoints
 		// Cloud Control resource type schema:
 		//
@@ -148,30 +133,13 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 		//	    "PrivateEndpoint": {
 		//	      "description": "Private endpoint",
 		//	      "properties": {
-		//	        "Alicloud": {
-		//	          "description": "Alicloud private endpoint",
-		//	          "properties": {
-		//	            "AvailabilityZone": {
-		//	              "description": "Availability zone list",
-		//	              "items": {
-		//	                "type": "string"
-		//	              },
-		//	              "type": "array"
-		//	            },
-		//	            "ServiceName": {
-		//	              "description": "Private service name",
-		//	              "type": "string"
-		//	            }
-		//	          },
-		//	          "type": "object"
-		//	        },
 		//	        "AuthorizedNetworks": {
 		//	          "description": "Private endpoint authorized network list",
 		//	          "items": {
 		//	            "description": "Private endpoint authorized network configuration",
 		//	            "properties": {
-		//	              "DisplayName": {
-		//	                "description": "Authorized network name",
+		//	              "AuthorizedNetworkName": {
+		//	                "description": "Authorized Network Name",
 		//	                "type": "string"
 		//	              },
 		//	              "SecurityGroupCount": {
@@ -190,23 +158,6 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "type": "array"
-		//	        },
-		//	        "Aws": {
-		//	          "description": "AWS private endpoint",
-		//	          "properties": {
-		//	            "AvailabilityZone": {
-		//	              "description": "Availability zone list",
-		//	              "items": {
-		//	                "type": "string"
-		//	              },
-		//	              "type": "array"
-		//	            },
-		//	            "ServiceName": {
-		//	              "description": "VPC endpoint service name",
-		//	              "type": "string"
-		//	            }
-		//	          },
-		//	          "type": "object"
 		//	        },
 		//	        "Disabled": {
 		//	          "description": "Disable private network access",
@@ -238,46 +189,6 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
-		//	    },
-		//	    "PublicEndpoint": {
-		//	      "description": "Public endpoint",
-		//	      "properties": {
-		//	        "AuthorizedNetworks": {
-		//	          "description": "IP Allowlist",
-		//	          "items": {
-		//	            "description": "Endpoint authorized network (Allowlist) configuration",
-		//	            "properties": {
-		//	              "DisplayName": {
-		//	                "description": "Authorized network name",
-		//	                "type": "string"
-		//	              },
-		//	              "EndIpAddress": {
-		//	                "description": "End IP",
-		//	                "type": "string"
-		//	              },
-		//	              "StartIpAddress": {
-		//	                "description": "Start IP",
-		//	                "type": "string"
-		//	              }
-		//	            },
-		//	            "type": "object"
-		//	          },
-		//	          "type": "array"
-		//	        },
-		//	        "Disabled": {
-		//	          "description": "Disable public network access",
-		//	          "type": "boolean"
-		//	        },
-		//	        "Host": {
-		//	          "description": "Public hostname",
-		//	          "type": "string"
-		//	        },
-		//	        "Port": {
-		//	          "description": "Public port",
-		//	          "type": "integer"
-		//	        }
-		//	      },
-		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -287,31 +198,13 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 				// Property: PrivateEndpoint
 				"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Alicloud
-						"alicloud": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AvailabilityZone
-								"availability_zone": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Availability zone list",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ServiceName
-								"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Private service name",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Alicloud private endpoint",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
 						// Property: AuthorizedNetworks
 						"authorized_networks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DisplayName
-									"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Authorized network name",
+									// Property: AuthorizedNetworkName
+									"authorized_network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Authorized Network Name",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SecurityGroupCount
@@ -332,24 +225,6 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
 							Description: "Private endpoint authorized network list\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Aws
-						"aws": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AvailabilityZone
-								"availability_zone": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Availability zone list",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ServiceName
-								"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "VPC endpoint service name",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "AWS private endpoint",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Disabled
@@ -391,52 +266,6 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Private endpoint",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
-				// Property: PublicEndpoint
-				"public_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizedNetworks
-						"authorized_networks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DisplayName
-									"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Authorized network name",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: EndIpAddress
-									"end_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "End IP",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: StartIpAddress
-									"start_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Start IP",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "IP Allowlist\n Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Disabled
-						"disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Disable public network access",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Host
-						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Public hostname",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Public port",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Public endpoint",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Branch endpoint configuration",
 			Computed:    true,
@@ -458,29 +287,29 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: Name
+		// Property: InstanceId
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Branch resource name",
+		//	  "description": "Instance ID",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Branch resource name",
-			Computed:    true,
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Instance ID",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: ParentDisplayName
+		// Property: ParentBranchName
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Parent branch display name",
+		//	  "description": "Parent Branch Name",
 		//	  "type": "string"
 		//	}
-		"parent_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Parent branch display name",
+		"parent_branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Parent Branch Name",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -673,45 +502,39 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::TiDB::Branch").WithTerraformTypeName("volcenginecc_tidb_branch")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alicloud":             "Alicloud",
-		"annotations":          "Annotations",
-		"authorized_networks":  "AuthorizedNetworks",
-		"availability_zone":    "AvailabilityZone",
-		"aws":                  "Aws",
-		"branch_id":            "BranchId",
-		"cluster_id":           "ClusterId",
-		"column_storage":       "ColumnStorage",
-		"create_time":          "CreateTime",
-		"created_by":           "CreatedBy",
-		"disabled":             "Disabled",
-		"display_name":         "DisplayName",
-		"end_ip_address":       "EndIpAddress",
-		"endpoints":            "Endpoints",
-		"has_set_pwd":          "HasSetPwd",
-		"host":                 "Host",
-		"key":                  "Key",
-		"name":                 "Name",
-		"parent_display_name":  "ParentDisplayName",
-		"parent_id":            "ParentId",
-		"parent_timestamp":     "ParentTimestamp",
-		"password":             "Password",
-		"port":                 "Port",
-		"private_endpoint":     "PrivateEndpoint",
-		"project_name":         "ProjectName",
-		"public_endpoint":      "PublicEndpoint",
-		"request_unit":         "RequestUnit",
-		"reset_branch":         "ResetBranch",
-		"row_storage":          "RowStorage",
-		"security_group_count": "SecurityGroupCount",
-		"service_name":         "ServiceName",
-		"start_ip_address":     "StartIpAddress",
-		"state":                "State",
-		"update_time":          "UpdateTime",
-		"usages":               "Usages",
-		"user_prefix":          "UserPrefix",
-		"value":                "Value",
-		"vpc_endpoint_id":      "VpcEndpointId",
-		"vpc_endpoint_name":    "VpcEndpointName",
+		"annotations":             "Annotations",
+		"authorized_network_name": "AuthorizedNetworkName",
+		"authorized_networks":     "AuthorizedNetworks",
+		"branch_id":               "BranchId",
+		"branch_name":             "BranchName",
+		"column_storage":          "ColumnStorage",
+		"create_time":             "CreateTime",
+		"created_by":              "CreatedBy",
+		"disabled":                "Disabled",
+		"endpoints":               "Endpoints",
+		"has_set_pwd":             "HasSetPwd",
+		"host":                    "Host",
+		"instance_id":             "InstanceId",
+		"key":                     "Key",
+		"parent_branch_name":      "ParentBranchName",
+		"parent_id":               "ParentId",
+		"parent_timestamp":        "ParentTimestamp",
+		"password":                "Password",
+		"port":                    "Port",
+		"private_endpoint":        "PrivateEndpoint",
+		"project_name":            "ProjectName",
+		"request_unit":            "RequestUnit",
+		"reset_branch":            "ResetBranch",
+		"row_storage":             "RowStorage",
+		"security_group_count":    "SecurityGroupCount",
+		"service_name":            "ServiceName",
+		"state":                   "State",
+		"update_time":             "UpdateTime",
+		"usages":                  "Usages",
+		"user_prefix":             "UserPrefix",
+		"value":                   "Value",
+		"vpc_endpoint_id":         "VpcEndpointId",
+		"vpc_endpoint_name":       "VpcEndpointName",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
@@ -721,8 +544,7 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
 		"/properties/BranchId",
-		"/properties/Name",
-		"/properties/ParentDisplayName",
+		"/properties/ParentBranchName",
 		"/properties/CreatedBy",
 		"/properties/State",
 		"/properties/UserPrefix",
@@ -736,7 +558,7 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
-		"/properties/ClusterId",
+		"/properties/InstanceId",
 		"/properties/ParentId",
 		"/properties/ParentTimestamp",
 	})

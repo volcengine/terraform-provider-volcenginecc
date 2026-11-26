@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_cloudmonitor_aggregation_policy.example "resource_id"

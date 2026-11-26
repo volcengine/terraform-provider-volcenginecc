@@ -127,6 +127,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"direct_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the NAT is direct or non-direct.   - true (default): EIP direct NAT gateway.   - false: Non-EIP direct NAT gateway.",
+			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(true),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -329,10 +330,6 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "default": "internet",
 		//	  "description": "NAT Gateway type. internet: Public NAT Gateway. intranet: Private NAT Gateway.",
-		//	  "enum": [
-		//	    "internet",
-		//	    "intranet"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -340,12 +337,6 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("internet"),
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"internet",
-					"intranet",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
@@ -381,6 +372,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// Period is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PeriodUnit
 		// Cloud Control resource type schema:
@@ -397,6 +389,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// PeriodUnit is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
 		// Cloud Control resource type schema:
@@ -415,6 +408,24 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RenewType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Renewal methods for prepaid NAT instances. Possible values:\n-0 (default): Manual renewal\n-2: Automatic renewal",
+		//	  "format": "int64",
+		//	  "type": "integer"
+		//	}
+		"renew_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Renewal methods for prepaid NAT instances. Possible values:\n  -0 (default): Manual renewal\n  -2: Automatic renewal",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// RenewType is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SmartScheduleEnabled
 		// Cloud Control resource type schema:
@@ -436,28 +447,12 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.",
-		//	  "enum": [
-		//	    "ChinaMobile",
-		//	    "ChinaUnicom",
-		//	    "ChinaTelecom",
-		//	    "BGP",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"smart_schedule_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ChinaMobile",
-					"ChinaUnicom",
-					"ChinaTelecom",
-					"BGP",
-					"",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -487,30 +482,12 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.",
-		//	  "enum": [
-		//	    "Small",
-		//	    "Medium",
-		//	    "Large",
-		//	    "Extra_Large_1",
-		//	    "Extra_Large_2",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"spec": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"Small",
-					"Medium",
-					"Large",
-					"Extra_Large_1",
-					"Extra_Large_2",
-					"",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -520,12 +497,6 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Status of the NAT Gateway. Available: Available. Creating: Creating. Pending: In progress. Deleting: Deleting.",
-		//	  "enum": [
-		//	    "Available",
-		//	    "Creating",
-		//	    "Pending",
-		//	    "Deleting"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -697,6 +668,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		"period":                 "Period",
 		"period_unit":            "PeriodUnit",
 		"project_name":           "ProjectName",
+		"renew_type":             "RenewType",
 		"smart_schedule_enabled": "SmartScheduleEnabled",
 		"smart_schedule_rule":    "SmartScheduleRule",
 		"snat_entry_ids":         "SnatEntryIds",
@@ -709,6 +681,12 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		"value":                  "Value",
 		"vpc_id":                 "VpcId",
 		"zone_id":                "ZoneId",
+	})
+
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RenewType",
+		"/properties/Period",
+		"/properties/PeriodUnit",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{
@@ -727,7 +705,6 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ZoneId",
 		"/properties/EipAddresses",
 		"/properties/NatIpAddresses",
-		"/properties/DirectMode",
 	})
 
 	opts = opts.WithCreateOnlyPropertyPaths([]string{
@@ -738,6 +715,7 @@ func nGWResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/NetworkType",
 		"/properties/SubnetId",
 		"/properties/VpcId",
+		"/properties/RenewType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

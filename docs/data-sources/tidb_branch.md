@@ -23,14 +23,13 @@ Data Source schema for Volcengine::TiDB::Branch
 
 - `annotations` (Attributes Set) Annotation (see [below for nested schema](#nestedatt--annotations))
 - `branch_id` (String) Branch ID, assigned by the creation API
-- `cluster_id` (String) Cluster ID
+- `branch_name` (String) Branch Name
 - `create_time` (String) Creation time
 - `created_by` (String) Creator identifier
-- `display_name` (String) Branch display name
 - `endpoints` (Attributes) Branch endpoint configuration (see [below for nested schema](#nestedatt--endpoints))
 - `has_set_pwd` (Boolean) Root password set
-- `name` (String) Branch resource name
-- `parent_display_name` (String) Parent branch display name
+- `instance_id` (String) Instance ID
+- `parent_branch_name` (String) Parent Branch Name
 - `parent_id` (String) Parent branch ID
 - `parent_timestamp` (String) Timestamp of derivation from the parent branch
 - `password` (String) Branch root password, only for setting or changing the password (not returned after writing)
@@ -56,16 +55,13 @@ Read-Only:
 Read-Only:
 
 - `private_endpoint` (Attributes) Private endpoint (see [below for nested schema](#nestedatt--endpoints--private_endpoint))
-- `public_endpoint` (Attributes) Public endpoint (see [below for nested schema](#nestedatt--endpoints--public_endpoint))
 
 <a id="nestedatt--endpoints--private_endpoint"></a>
 ### Nested Schema for `endpoints.private_endpoint`
 
 Read-Only:
 
-- `alicloud` (Attributes) Alicloud private endpoint (see [below for nested schema](#nestedatt--endpoints--private_endpoint--alicloud))
 - `authorized_networks` (Attributes List) Private endpoint authorized network list (see [below for nested schema](#nestedatt--endpoints--private_endpoint--authorized_networks))
-- `aws` (Attributes) AWS private endpoint (see [below for nested schema](#nestedatt--endpoints--private_endpoint--aws))
 - `disabled` (Boolean) Disable private network access
 - `host` (String) Private hostname
 - `port` (Number) Private port
@@ -74,54 +70,15 @@ Read-Only:
 - `vpc_endpoint_id` (String) VPC endpoint ID
 - `vpc_endpoint_name` (String) VPC endpoint name
 
-<a id="nestedatt--endpoints--private_endpoint--alicloud"></a>
-### Nested Schema for `endpoints.private_endpoint.alicloud`
-
-Read-Only:
-
-- `availability_zone` (List of String) Availability zone list
-- `service_name` (String) Private service name
-
-
 <a id="nestedatt--endpoints--private_endpoint--authorized_networks"></a>
 ### Nested Schema for `endpoints.private_endpoint.authorized_networks`
 
 Read-Only:
 
-- `display_name` (String) Authorized network name
+- `authorized_network_name` (String) Authorized Network Name
 - `security_group_count` (Number) Security group count
 - `vpc_endpoint_id` (String) VPC endpoint ID
 - `vpc_endpoint_name` (String) VPC endpoint name
-
-
-<a id="nestedatt--endpoints--private_endpoint--aws"></a>
-### Nested Schema for `endpoints.private_endpoint.aws`
-
-Read-Only:
-
-- `availability_zone` (List of String) Availability zone list
-- `service_name` (String) VPC endpoint service name
-
-
-
-<a id="nestedatt--endpoints--public_endpoint"></a>
-### Nested Schema for `endpoints.public_endpoint`
-
-Read-Only:
-
-- `authorized_networks` (Attributes List) IP Allowlist (see [below for nested schema](#nestedatt--endpoints--public_endpoint--authorized_networks))
-- `disabled` (Boolean) Disable public network access
-- `host` (String) Public hostname
-- `port` (Number) Public port
-
-<a id="nestedatt--endpoints--public_endpoint--authorized_networks"></a>
-### Nested Schema for `endpoints.public_endpoint.authorized_networks`
-
-Read-Only:
-
-- `display_name` (String) Authorized network name
-- `end_ip_address` (String) End IP
-- `start_ip_address` (String) Start IP
 
 
 

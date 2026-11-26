@@ -1596,12 +1596,12 @@
     },
     {
         "resource": "volcenginecc_tidb_instance",
-        "identifier": ["ClusterId"],
+        "identifier": ["InstanceId"],
         "path": "./examples/resources/volcenginecc_tidb_instance/import.sh"
     },
     {
         "resource": "volcenginecc_tidb_branch",
-        "identifier": ["ClusterId","BranchId"],
+        "identifier": ["InstanceId","BranchId"],
         "path": "./examples/resources/volcenginecc_tidb_branch/import.sh"
     },
     {
@@ -1618,5 +1618,15 @@
         "resource": "volcenginecc_organization_delegated_administrator",
         "identifier": ["AccountId","ServicePrincipal"],
         "path": "./examples/resources/volcenginecc_organization_delegated_administrator/import.sh"
+    },
+    {
+        "resource": "volcenginecc_tidb_allowlist",
+        "identifier": ["InstanceId","VpcEndpointId"],
+        "path": "./examples/resources/volcenginecc_tidb_allowlist/import.sh"
+    },
+    {
+        "resource": "volcenginecc_cloudmonitor_aggregation_policy",
+        "identifier": ["ResourceId"],
+        "path": "./examples/resources/volcenginecc_cloudmonitor_aggregation_policy/import.sh"
     }
 ]

@@ -1,0 +1,86 @@
+{
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/VpcEndpointId"
+  ],
+  "description": "PrivateLink private network allowlist rule for TiDB cluster; each resource manages one VPC endpoint.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/InstanceId"
+    ],
+    "required": [
+      "/properties/InstanceId"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "tidb:CreatePrivateEndpointAllowlistRule",
+        "tidb:ListPrivateEndpointAllowlist"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "tidb:DeletePrivateEndpointAllowlistRule",
+        "tidb:GetPrivateEndpointAllowlistRule"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "tidb:ListPrivateEndpointAllowlist"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "tidb:GetPrivateEndpointAllowlistRule"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "tidb:UpdatePrivateEndpointAllowlistRule",
+        "tidb:ListPrivateEndpointAllowlist"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/VpcEndpointId"
+  ],
+  "properties": {
+    "AuthorizedNetworkName": {
+      "description": "Allowlist rule name.",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "InstanceId": {
+      "description": "Associated TiDB instance ID.",
+      "type": "string"
+    },
+    "SecurityGroupCount": {
+      "description": "Number of associated security groups.",
+      "type": "integer"
+    },
+    "VpcEndpointId": {
+      "description": "Private network endpoint ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "VpcEndpointName": {
+      "description": "VPC endpoint name.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/VpcEndpointName",
+    "/properties/SecurityGroupCount"
+  ],
+  "required": [
+    "InstanceId",
+    "VpcEndpointId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::TiDB::Allowlist"
+}

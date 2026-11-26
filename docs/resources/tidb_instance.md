@@ -13,7 +13,7 @@ TiDB Instance (Cluster)
 
 ```terraform
 resource "volcenginecc_tidb_instance" "example" {
-  display_name = "ccapi-tidb-instance-full"
+  instance_name = "ccapi-tidb-instance-full"
   auto_scaling = {
     min_rcu = 2000
     max_rcu = 4000
@@ -58,9 +58,9 @@ resource "volcenginecc_tidb_instance" "example" {
 ### Optional
 
 - `automated_backup_policy` (Attributes) Automatic Backup Policy (see [below for nested schema](#nestedatt--automated_backup_policy))
-- `display_name` (String) Cluster Display Name
 - `encryption_config` (Attributes) Data Encryption Configuration (see [below for nested schema](#nestedatt--encryption_config))
 - `high_availability_type` (String) High Availability Type
+- `instance_name` (String) Instance name
 - `project_name` (String) Volcano Engine Project Name
 - `region_id` (String) Deployment Region
 - `service_plan` (String) Service Plan
@@ -69,20 +69,20 @@ resource "volcenginecc_tidb_instance" "example" {
 
 ### Read-Only
 
+- `account_id` (String) Account ID of the instance owner
 - `annotations` (Attributes Set) Annotation
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--annotations))
 - `audit_log_config` (Attributes) Audit Log Configuration (see [below for nested schema](#nestedatt--audit_log_config))
-- `backups` (Attributes Set) Cluster Backup List
+- `backups` (Attributes Set) Instance backup list
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--backups))
-- `cluster_id` (String) Cluster ID
 - `create_time` (String) Creation Time (ISO8601)
 - `endpoints` (Attributes) Connection Endpoint (see [below for nested schema](#nestedatt--endpoints))
 - `id` (String) Uniquely identifies the resource.
+- `instance_id` (String) Instance ID
 - `labels` (Attributes Set) Tags
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--labels))
-- `name` (String) Resource Name: clusters/{clusterId}
 - `spending_limit` (Attributes) Spending Limit Configuration (see [below for nested schema](#nestedatt--spending_limit))
-- `state` (String) Cluster Status
+- `state` (String) Instance status
 - `update_time` (String) Last Updated Time (ISO8601)
 - `user_prefix` (String) Default Username Prefix
 - `version` (String) TiDB Version
@@ -102,7 +102,7 @@ Optional:
 Optional:
 
 - `subnet_id` (String) Subnet ID
-- `zone_id` (String) Availability Zone ID
+- `zone_id` (String) Availability zone ID
 
 
 <a id="nestedatt--automated_backup_policy"></a>
@@ -155,12 +155,14 @@ Read-Only:
 Read-Only:
 
 - `backup_id` (String) Backup ID
+- `backup_name` (String) Backup name
 - `backup_time` (String) Backup Time
-- `cluster_id` (String) Cluster ID
 - `create_time` (String) Creation Time
 - `expire_time` (String) Expiration Time
-- `name` (String) Backup Name
+- `instance_id` (String) Instance ID
+- `size_bytes` (Number) Backup size (bytes)
 - `state` (String) Backup Status
+- `trigger_type` (String) Backup trigger type
 - `type` (String) Backup Type
 
 
@@ -192,8 +194,8 @@ Read-Only:
 
 Read-Only:
 
-- `display_name` (String) Descriptive Name
-- `security_group_count` (String) Number of Security Groups Associated with Endpoint (not returned if query fails)
+- `authorized_network_name` (String) Identifiable name
+- `security_group_count` (Number) Number of Security Groups Associated with Endpoint (not returned if query fails)
 - `vpc_endpoint_id` (String) VPC Endpoint ID。
 - `vpc_endpoint_name` (String) Cloud Real Name of VPC Endpoint (not returned if query fails)
 
@@ -215,7 +217,7 @@ Read-Only:
 
 Read-Only:
 
-- `display_name` (String) Authorized Network Name
+- `authorized_network_name` (String) Authorized network name
 - `end_ip_address` (String) End IP
 - `start_ip_address` (String) Start IP
 
@@ -243,5 +245,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import volcenginecc_tidb_instance.example "cluster_id"
+$ terraform import volcenginecc_tidb_instance.example "instance_id"
 ```

@@ -21,24 +21,24 @@ Data Source schema for Volcengine::TiDB::Instance
 
 ### Read-Only
 
+- `account_id` (String) Account ID of the instance owner
 - `annotations` (Attributes Set) Annotation (see [below for nested schema](#nestedatt--annotations))
 - `audit_log_config` (Attributes) Audit Log Configuration (see [below for nested schema](#nestedatt--audit_log_config))
 - `auto_scaling` (Attributes) Auto Scaling (see [below for nested schema](#nestedatt--auto_scaling))
 - `automated_backup_policy` (Attributes) Automatic Backup Policy (see [below for nested schema](#nestedatt--automated_backup_policy))
-- `backups` (Attributes Set) Cluster Backup List (see [below for nested schema](#nestedatt--backups))
-- `cluster_id` (String) Cluster ID
+- `backups` (Attributes Set) Instance backup list (see [below for nested schema](#nestedatt--backups))
 - `create_time` (String) Creation Time (ISO8601)
-- `display_name` (String) Cluster Display Name
 - `encryption_config` (Attributes) Data Encryption Configuration (see [below for nested schema](#nestedatt--encryption_config))
 - `endpoints` (Attributes) Connection Endpoint (see [below for nested schema](#nestedatt--endpoints))
 - `high_availability_type` (String) High Availability Type
+- `instance_id` (String) Instance ID
+- `instance_name` (String) Instance name
 - `labels` (Attributes Set) Tags (see [below for nested schema](#nestedatt--labels))
-- `name` (String) Resource Name: clusters/{clusterId}
 - `project_name` (String) Volcano Engine Project Name
 - `region_id` (String) Deployment Region
 - `service_plan` (String) Service Plan
 - `spending_limit` (Attributes) Spending Limit Configuration (see [below for nested schema](#nestedatt--spending_limit))
-- `state` (String) Cluster Status
+- `state` (String) Instance status
 - `tags` (Attributes Set) Instance Tags (see [below for nested schema](#nestedatt--tags))
 - `update_time` (String) Last Updated Time (ISO8601)
 - `user_prefix` (String) Default Username Prefix
@@ -88,12 +88,14 @@ Read-Only:
 Read-Only:
 
 - `backup_id` (String) Backup ID
+- `backup_name` (String) Backup name
 - `backup_time` (String) Backup Time
-- `cluster_id` (String) Cluster ID
 - `create_time` (String) Creation Time
 - `expire_time` (String) Expiration Time
-- `name` (String) Backup Name
+- `instance_id` (String) Instance ID
+- `size_bytes` (Number) Backup size (bytes)
 - `state` (String) Backup Status
+- `trigger_type` (String) Backup trigger type
 - `type` (String) Backup Type
 
 
@@ -132,8 +134,8 @@ Read-Only:
 
 Read-Only:
 
-- `display_name` (String) Descriptive Name
-- `security_group_count` (String) Number of Security Groups Associated with Endpoint (not returned if query fails)
+- `authorized_network_name` (String) Identifiable name
+- `security_group_count` (Number) Number of Security Groups Associated with Endpoint (not returned if query fails)
 - `vpc_endpoint_id` (String) VPC Endpoint ID。
 - `vpc_endpoint_name` (String) Cloud Real Name of VPC Endpoint (not returned if query fails)
 
@@ -154,7 +156,7 @@ Read-Only:
 
 Read-Only:
 
-- `display_name` (String) Authorized Network Name
+- `authorized_network_name` (String) Authorized network name
 - `end_ip_address` (String) End IP
 - `start_ip_address` (String) Start IP
 
@@ -193,4 +195,4 @@ Read-Only:
 Read-Only:
 
 - `subnet_id` (String) Subnet ID
-- `zone_id` (String) Availability Zone ID
+- `zone_id` (String) Availability zone ID

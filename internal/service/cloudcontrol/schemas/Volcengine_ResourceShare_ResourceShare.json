@@ -89,6 +89,7 @@
     },
     "ResourceShareId": {
       "description": "Resource share unit ID",
+      "semantic": "resourceId",
       "type": "string"
     },
     "ResourceShareName": {
@@ -98,7 +99,6 @@
     },
     "ResourceShareTrn": {
       "description": "Resource share unit Trn",
-      "semantic": "resourceId",
       "type": "string"
     },
     "ResourceTrns": {
