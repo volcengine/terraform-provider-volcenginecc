@@ -1,0 +1,1 @@
+$ terraform import volcenginecc_tidb_allowlist.example "instance_id|vpc_endpoint_id"

@@ -40,11 +40,15 @@ resource "volcenginecc_natgateway_ngw" "NatGatewayNGWDemo" {
 
 - `billing_type` (Number) NAT Gateway billing mode. Possible values: 1: Subscription. 2 (default): Pay-as-you-go by specification. 3: Pay-as-you-go by usage. When NetworkType is set to intranet, only 3 is supported and required for this parameter.
 - `description` (String) Description of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include English comma (,), period (.), underscore (_), space ( ), equals sign (=), hyphen (-), Chinese comma (，), and Chinese period (。). Length: 1 to 255 characters. If not specified, defaults to an empty string.
+- `direct_mode` (Boolean) Indicates whether the NAT is direct or non-direct.   - true (default): EIP direct NAT gateway.   - false: Non-EIP direct NAT gateway.
 - `nat_gateway_name` (String) Name of the NAT Gateway. Must start with a letter, Chinese character, or number. Can include period (.), underscore (_), and hyphen (-). Length: 1 to 128 characters. If not specified, defaults to the NAT Gateway instance ID.
 - `network_type` (String) NAT Gateway type. internet: Public NAT Gateway. intranet: Private NAT Gateway.
 - `period` (Number) Duration for purchasing a subscription NAT Gateway, default is 1. If PeriodUnit is Month, Period can be 1 ~ 9, 12, 24, 36. If PeriodUnit is Year, Period can be 1 ~ 3.
 - `period_unit` (String) Unit for subscription NAT Gateway duration, default is Month. Month: month. Year: year.
 - `project_name` (String) Name of the project the NAT Gateway belongs to. If not specified, defaults to the 'default' project.
+- `renew_type` (Number) Renewal methods for prepaid NAT instances. Possible values:
+  -0 (default): Manual renewal
+  -2: Automatic renewal
 - `smart_schedule_enabled` (Boolean) Whether to enable intelligent scheduling
 - `smart_schedule_rule` (String) Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.
 - `spec` (String) NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.
@@ -57,7 +61,6 @@ resource "volcenginecc_natgateway_ngw" "NatGatewayNGWDemo" {
 - `business_status` (String) Indicates whether the NAT gateway is locked. Empty: Normal, not locked. Normal: Normal, not locked. FinancialLocked: Locked due to overdue payment.
 - `created_time` (String) Creation time
 - `deleted_time` (String) Deletion time
-- `direct_mode` (Boolean) Indicates whether the NAT is direct or non-direct.   - true (default): EIP direct NAT gateway.   - false: Non-EIP direct NAT gateway.
 - `dnat_entry_ids` (Set of String) DNAT rule ID list.
 - `eip_addresses` (Attributes Set) Information about the public IP bound to the NAT Gateway
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--eip_addresses))

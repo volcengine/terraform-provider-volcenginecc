@@ -1,0 +1,199 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "Aggregation": {
+      "description": "Single aggregation rule configured by alert severity.",
+      "properties": {
+        "GroupBy": {
+          "description": "Alert group fields, default [rule_id+region]. Currently only supports: 1. rule_id+region grouping, i.e., default grouping by severity. 2. Any rule_id+region+* grouping, i.e., each faulty resource forms a separate group, notification cycle is not affected by other faulty resources; in this mode, GroupWait/GroupInterval are not effective, default is 0. 3. rule_id+region+keys grouping based on actual alert group fields, grouped by key match and value. For example, rule_id+region+namespace+cluster+pod, each namespace+cluster+pod combination forms a separate group, notification cycle is not affected by other faulty resources; this method requires configuring a fallback aggregation strategy.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "GroupInterval": {
+          "description": "Alert group wait interval for the 2nd to Nth times, in seconds, range is 5 seconds to 24 hours. If there is a new alert or recovery in the alert group, send immediately after GroupInterval and recalculate RepeatInterval.",
+          "type": "integer"
+        },
+        "GroupWait": {
+          "description": "Alert group initial wait time, in seconds, range is 5 seconds to 24 hours. If not specified, defaults to GroupInterval.",
+          "type": "integer"
+        },
+        "Level": {
+          "description": "Alert severity, supports p0/p1/p2/all. all indicates the fallback aggregation strategy, meaning alerts are aggregated without distinguishing severity, but messages are still sent separately by severity. If not all p0/p1/p2 levels are configured, the \"all\" fallback strategy must be configured.",
+          "type": "string"
+        },
+        "RepeatDowngrade": {
+          "$ref": "#/definitions/RepeatDowngrade",
+          "description": "Notification frequency reduction configuration. Note: P0 does not support notification frequency reduction, while P1/P2 do."
+        },
+        "RepeatInterval": {
+          "description": "Alert repeat notification interval, in seconds, range is 1 minute to 24 hours.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AssociatedAttribute": {
+      "description": "Associated object attribute key-value pairs.",
+      "properties": {
+        "Name": {
+          "description": "Attribute name. CloudMonitor supports Namespace, SubNamespace; VMP supports WorkspaceID; Cloud probe supports DetectTaskID; APMPlus Server supports ServiceName, Workspace; APMPlus Client TBD.",
+          "type": "string"
+        },
+        "Values": {
+          "description": "List of attribute values.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "RepeatDowngrade": {
+      "description": "Notification frequency reduction configuration. Note: P0 does not support notification frequency reduction, while P1/P2 do.",
+      "properties": {
+        "Enable": {
+          "description": "Enable notification frequency reduction.",
+          "type": "boolean"
+        },
+        "MaxRepeatInterval": {
+          "description": "Maximum repeat send interval, in seconds. Frequency reduction stops when this value is exceeded. Default is 24 hours (86400 seconds).",
+          "type": "integer"
+        },
+        "Mode": {
+          "description": "Frequency reduction mode, currently only supports doubled. doubled means each time the frequency is reduced, the repeat send interval is multiplied by 2 until MaxRepeatInterval.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "description": "CloudMonitor alert aggregation strategy.",
+  "filterProperties": {
+    "filterableProperties": [
+      "/properties/ResourceId",
+      "/properties/Name",
+      "/properties/Type"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudmonitor:CreateAggregationPolicy",
+        "cloudmonitor:ListAggregationPolicies"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudmonitor:DeleteAggregationPolicies",
+        "cloudmonitor:ListAggregationPolicies"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudmonitor:ListAggregationPolicies"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudmonitor:ListAggregationPolicies"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudmonitor:UpdateAggregationPolicy",
+        "cloudmonitor:ListAggregationPolicies"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/ResourceId"
+  ],
+  "properties": {
+    "Aggregations": {
+      "description": "List of aggregation rules configured by alert level",
+      "elementIdentifier": [
+        "/Level"
+      ],
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Aggregation"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "AssociatedAttributes": {
+      "description": "Associated attributes. RuleIDs: list of associated alert strategy IDs.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AssociatedAttribute"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "CreateTime": {
+      "description": "Creation time, Unix timestamp in milliseconds.",
+      "semantic": "createdTime",
+      "type": "integer"
+    },
+    "CreatedBy": {
+      "description": "Creator",
+      "type": "string"
+    },
+    "Description": {
+      "description": "Description of alert aggregation strategy.",
+      "semantic": "description",
+      "type": "string"
+    },
+    "IsDefault": {
+      "description": "Whether it is the default aggregation strategy.",
+      "type": "boolean"
+    },
+    "Name": {
+      "description": "Alert aggregation policy name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
+    "ResourceId": {
+      "description": "Alert aggregation strategy ID.",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "Type": {
+      "description": "Aggregation strategy type. custom: custom; bound: bound to alert strategy (1:1).",
+      "type": "string"
+    },
+    "UpdateTime": {
+      "description": "Update time, Unix timestamp in milliseconds",
+      "semantic": "updatedTime",
+      "type": "integer"
+    },
+    "UpdatedBy": {
+      "description": "Updated by.",
+      "type": "string"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/AssociatedAttributes",
+    "/properties/CreateTime",
+    "/properties/CreatedBy",
+    "/properties/ResourceId",
+    "/properties/Type",
+    "/properties/UpdateTime",
+    "/properties/UpdatedBy"
+  ],
+  "required": [
+    "Name",
+    "Aggregations"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "Volcengine::CloudMonitor::AggregationPolicy"
+}

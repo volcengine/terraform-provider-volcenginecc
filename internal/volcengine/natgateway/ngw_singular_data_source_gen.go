@@ -262,10 +262,6 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "default": "internet",
 		//	  "description": "NAT Gateway type. internet: Public NAT Gateway. intranet: Private NAT Gateway.",
-		//	  "enum": [
-		//	    "internet",
-		//	    "intranet"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -318,6 +314,18 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Name of the project the NAT Gateway belongs to. If not specified, defaults to the 'default' project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RenewType
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Renewal methods for prepaid NAT instances. Possible values:\n-0 (default): Manual renewal\n-2: Automatic renewal",
+		//	  "format": "int64",
+		//	  "type": "integer"
+		//	}
+		"renew_type": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Renewal methods for prepaid NAT instances. Possible values:\n  -0 (default): Manual renewal\n  -2: Automatic renewal",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SmartScheduleEnabled
 		// Cloud Control resource type schema:
 		//
@@ -334,13 +342,6 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.",
-		//	  "enum": [
-		//	    "ChinaMobile",
-		//	    "ChinaUnicom",
-		//	    "ChinaTelecom",
-		//	    "BGP",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"smart_schedule_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -369,14 +370,6 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "NAT Gateway specification. Small (default): Small. Medium: Medium. Large: Large. Extra_Large_1: Extra Large 1. Extra_Large_2: Extra Large 2.",
-		//	  "enum": [
-		//	    "Small",
-		//	    "Medium",
-		//	    "Large",
-		//	    "Extra_Large_1",
-		//	    "Extra_Large_2",
-		//	    ""
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"spec": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -388,12 +381,6 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Status of the NAT Gateway. Available: Available. Creating: Creating. Pending: In progress. Deleting: Deleting.",
-		//	  "enum": [
-		//	    "Available",
-		//	    "Creating",
-		//	    "Pending",
-		//	    "Deleting"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -528,6 +515,7 @@ func nGWDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"period":                 "Period",
 		"period_unit":            "PeriodUnit",
 		"project_name":           "ProjectName",
+		"renew_type":             "RenewType",
 		"smart_schedule_enabled": "SmartScheduleEnabled",
 		"smart_schedule_rule":    "SmartScheduleRule",
 		"snat_entry_ids":         "SnatEntryIds",

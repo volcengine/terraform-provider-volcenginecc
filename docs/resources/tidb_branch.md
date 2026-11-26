@@ -13,8 +13,8 @@ Branch resources under the TiDB cluster, corresponding to the branches object
 
 ```terraform
 resource "volcenginecc_tidb_branch" "example" {
-  cluster_id       = "cluster_id-xxx"
-  display_name     = "ccapi-tidb-branch-full"
+  instance_id      = "替换为 TiDB 实例 ID"
+  branch_name      = "ccapi-tidb-branch-full"
   parent_id        = "parent_id"
   parent_timestamp = "YYYY-MM-DD'T'hh:mm:ss'Z'"
   password         = "Example@Test1234"
@@ -27,8 +27,8 @@ resource "volcenginecc_tidb_branch" "example" {
 
 ### Required
 
-- `cluster_id` (String) Cluster ID
-- `display_name` (String) Branch display name
+- `branch_name` (String) Branch Name
+- `instance_id` (String) Instance ID
 
 ### Optional
 
@@ -47,8 +47,7 @@ resource "volcenginecc_tidb_branch" "example" {
 - `endpoints` (Attributes) Branch endpoint configuration (see [below for nested schema](#nestedatt--endpoints))
 - `has_set_pwd` (Boolean) Root password set
 - `id` (String) Uniquely identifies the resource.
-- `name` (String) Branch resource name
-- `parent_display_name` (String) Parent branch display name
+- `parent_branch_name` (String) Parent Branch Name
 - `project_name` (String) Name of the project to which the IP address pool belongs
 - `state` (String) Branch status (e.g., CREATING, READY)
 - `update_time` (String) Update time
@@ -70,17 +69,14 @@ Read-Only:
 Read-Only:
 
 - `private_endpoint` (Attributes) Private endpoint (see [below for nested schema](#nestedatt--endpoints--private_endpoint))
-- `public_endpoint` (Attributes) Public endpoint (see [below for nested schema](#nestedatt--endpoints--public_endpoint))
 
 <a id="nestedatt--endpoints--private_endpoint"></a>
 ### Nested Schema for `endpoints.private_endpoint`
 
 Read-Only:
 
-- `alicloud` (Attributes) Alicloud private endpoint (see [below for nested schema](#nestedatt--endpoints--private_endpoint--alicloud))
 - `authorized_networks` (Attributes List) Private endpoint authorized network list
  Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints--private_endpoint--authorized_networks))
-- `aws` (Attributes) AWS private endpoint (see [below for nested schema](#nestedatt--endpoints--private_endpoint--aws))
 - `disabled` (Boolean) Disable private network access
 - `host` (String) Private hostname
 - `port` (Number) Private port
@@ -89,55 +85,15 @@ Read-Only:
 - `vpc_endpoint_id` (String) VPC endpoint ID
 - `vpc_endpoint_name` (String) VPC endpoint name
 
-<a id="nestedatt--endpoints--private_endpoint--alicloud"></a>
-### Nested Schema for `endpoints.private_endpoint.alicloud`
-
-Read-Only:
-
-- `availability_zone` (List of String) Availability zone list
-- `service_name` (String) Private service name
-
-
 <a id="nestedatt--endpoints--private_endpoint--authorized_networks"></a>
 ### Nested Schema for `endpoints.private_endpoint.authorized_networks`
 
 Read-Only:
 
-- `display_name` (String) Authorized network name
+- `authorized_network_name` (String) Authorized Network Name
 - `security_group_count` (Number) Security group count
 - `vpc_endpoint_id` (String) VPC endpoint ID
 - `vpc_endpoint_name` (String) VPC endpoint name
-
-
-<a id="nestedatt--endpoints--private_endpoint--aws"></a>
-### Nested Schema for `endpoints.private_endpoint.aws`
-
-Read-Only:
-
-- `availability_zone` (List of String) Availability zone list
-- `service_name` (String) VPC endpoint service name
-
-
-
-<a id="nestedatt--endpoints--public_endpoint"></a>
-### Nested Schema for `endpoints.public_endpoint`
-
-Read-Only:
-
-- `authorized_networks` (Attributes List) IP Allowlist
- Important Note: When using SetNestedAttribute, you must fully define all attributes of its nested structure. Incomplete definitions may cause Terraform to detect unexpected differences during plan comparison, triggering unnecessary resource updates and affecting resource stability and predictability. (see [below for nested schema](#nestedatt--endpoints--public_endpoint--authorized_networks))
-- `disabled` (Boolean) Disable public network access
-- `host` (String) Public hostname
-- `port` (Number) Public port
-
-<a id="nestedatt--endpoints--public_endpoint--authorized_networks"></a>
-### Nested Schema for `endpoints.public_endpoint.authorized_networks`
-
-Read-Only:
-
-- `display_name` (String) Authorized network name
-- `end_ip_address` (String) End IP
-- `start_ip_address` (String) Start IP
 
 
 
@@ -156,5 +112,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import volcenginecc_tidb_branch.example "cluster_id|branch_id"
+$ terraform import volcenginecc_tidb_branch.example "instance_id|branch_id"
 ```

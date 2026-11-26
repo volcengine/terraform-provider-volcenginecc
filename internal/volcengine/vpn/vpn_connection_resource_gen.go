@@ -841,7 +841,6 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Spec is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// Cloud Control resource type schema:
@@ -1488,10 +1487,6 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		"vpn_connection_name": "VpnConnectionName",
 		"vpn_gateway_id":      "VpnGatewayId",
 		"zone_id":             "ZoneId",
-	})
-
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Spec",
 	})
 
 	opts = opts.WithReadOnlyPropertyPaths([]string{

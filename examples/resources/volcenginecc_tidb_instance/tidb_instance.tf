@@ -1,5 +1,5 @@
 resource "volcenginecc_tidb_instance" "example" {
-  display_name = "ccapi-tidb-instance-full"
+  instance_name = "ccapi-tidb-instance-full"
   auto_scaling = {
     min_rcu = 2000
     max_rcu = 4000

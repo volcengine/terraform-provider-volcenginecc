@@ -370,6 +370,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Total number of unconsumed messages in the consumer instance group. The message backlog shown here is the total backlog before Tag filtering, including messages for all Tags under the Topic.",
+		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
 		"total_diff": schema.Int64Attribute{ /*START ATTRIBUTE*/

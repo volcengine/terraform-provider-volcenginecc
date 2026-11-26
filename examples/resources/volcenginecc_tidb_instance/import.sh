@@ -1,1 +1,1 @@
-$ terraform import volcenginecc_tidb_instance.example "cluster_id"
+$ terraform import volcenginecc_tidb_instance.example "instance_id"

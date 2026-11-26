@@ -237,6 +237,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "EndOffset": {
 		//	        "description": "The maximum offset of the current queue, which is the offset of the next message. The position of the latest message is EndOffset - 1.",
+		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "LastUpdateTimestamp": {
@@ -246,6 +247,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "MessageCount": {
 		//	        "description": "The number of messages in the current queue. EndOffset is the offset of the next message, so MessageCount = EndOffset - StartOffset.",
+		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      },
 		//	      "QueueId": {
@@ -254,6 +256,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "StartOffset": {
 		//	        "description": "The earliest message offset in the current queue.",
+		//	        "format": "int64",
 		//	        "type": "integer"
 		//	      }
 		//	    },

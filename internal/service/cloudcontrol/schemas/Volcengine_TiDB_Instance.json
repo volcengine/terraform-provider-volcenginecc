@@ -59,12 +59,12 @@
           "description": "Backup ID",
           "type": "string"
         },
-        "BackupTime": {
-          "description": "Backup Time",
+        "BackupName": {
+          "description": "Backup name",
           "type": "string"
         },
-        "ClusterId": {
-          "description": "Cluster ID",
+        "BackupTime": {
+          "description": "Backup Time",
           "type": "string"
         },
         "CreateTime": {
@@ -75,30 +75,24 @@
           "description": "Expiration Time",
           "type": "string"
         },
-        "Name": {
-          "description": "Backup Name",
+        "InstanceId": {
+          "description": "Instance ID",
           "type": "string"
+        },
+        "SizeBytes": {
+          "description": "Backup size (bytes)",
+          "type": "integer"
         },
         "State": {
           "description": "Backup Status",
           "type": "string"
         },
-        "Type": {
-          "description": "Backup Type",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ClusterZoneSubnet": {
-      "description": "Availability Zones and Subnets",
-      "properties": {
-        "SubnetId": {
-          "description": "Subnet ID",
+        "TriggerType": {
+          "description": "Backup trigger type",
           "type": "string"
         },
-        "ZoneId": {
-          "description": "Availability Zone ID",
+        "Type": {
+          "description": "Backup Type",
           "type": "string"
         }
       },
@@ -117,8 +111,8 @@
     "EndpointAuthorizedNetwork": {
       "description": "Authorized Network",
       "properties": {
-        "DisplayName": {
-          "description": "Authorized Network Name",
+        "AuthorizedNetworkName": {
+          "description": "Authorized network name",
           "type": "string"
         },
         "EndIpAddress": {
@@ -179,13 +173,13 @@
     "EndpointPrivateAuthorizedNetwork": {
       "description": "Authorized Network",
       "properties": {
-        "DisplayName": {
-          "description": "Descriptive Name",
+        "AuthorizedNetworkName": {
+          "description": "Identifiable name",
           "type": "string"
         },
         "SecurityGroupCount": {
           "description": "Number of Security Groups Associated with Endpoint (not returned if query fails)",
-          "type": "string"
+          "type": "integer"
         },
         "VpcEndpointId": {
           "description": "VPC Endpoint ID。",
@@ -266,6 +260,20 @@
         "Key"
       ],
       "type": "object"
+    },
+    "ZoneSubnet": {
+      "description": "Availability zone and subnet",
+      "properties": {
+        "SubnetId": {
+          "description": "Subnet ID",
+          "type": "string"
+        },
+        "ZoneId": {
+          "description": "Availability zone ID",
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "description": "TiDB Instance (Cluster)",
@@ -278,25 +286,25 @@
   "handlers": {
     "create": {
       "permissions": [
-        "tidb:CreateCluster",
-        "tidb:GetClusterDetails",
-        "tidb:UpdateCluster"
+        "tidb:CreateInstance",
+        "tidb:GetInstanceDetails",
+        "tidb:UpdateInstance"
       ]
     },
     "delete": {
       "permissions": [
-        "tidb:GetClusterDetails",
-        "tidb:DeleteCluster"
+        "tidb:GetInstanceDetails",
+        "tidb:DeleteInstance"
       ]
     },
     "list": {
       "permissions": [
-        "tidb:ListClusters"
+        "tidb:ListInstances"
       ]
     },
     "read": {
       "permissions": [
-        "tidb:GetClusterDetails",
+        "tidb:GetInstanceDetails",
         "tidb:ListBackups"
       ]
     },
@@ -304,15 +312,19 @@
       "permissions": [
         "tidb:UntagResources",
         "tidb:TagResources",
-        "tidb:UpdateCluster",
-        "tidb:GetClusterDetails"
+        "tidb:UpdateInstance",
+        "tidb:GetInstanceDetails"
       ]
     }
   },
   "primaryIdentifier": [
-    "/properties/ClusterId"
+    "/properties/InstanceId"
   ],
   "properties": {
+    "AccountId": {
+      "description": "Account ID of the instance owner",
+      "type": "string"
+    },
     "Annotations": {
       "description": "Annotation",
       "insertionOrder": false,
@@ -335,7 +347,7 @@
       "type": "object"
     },
     "Backups": {
-      "description": "Cluster Backup List",
+      "description": "Instance backup list",
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Backup",
@@ -344,19 +356,9 @@
       "type": "array",
       "uniqueItems": true
     },
-    "ClusterId": {
-      "description": "Cluster ID",
-      "semantic": "resourceId",
-      "type": "string"
-    },
     "CreateTime": {
       "description": "Creation Time (ISO8601)",
       "semantic": "createdTime",
-      "type": "string"
-    },
-    "DisplayName": {
-      "description": "Cluster Display Name",
-      "semantic": "resourceName",
       "type": "string"
     },
     "EncryptionConfig": {
@@ -371,6 +373,16 @@
       "description": "High Availability Type",
       "type": "string"
     },
+    "InstanceId": {
+      "description": "Instance ID",
+      "semantic": "resourceId",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "Instance name",
+      "semantic": "resourceName",
+      "type": "string"
+    },
     "Labels": {
       "description": "Tags",
       "insertionOrder": false,
@@ -379,10 +391,6 @@
       },
       "type": "array",
       "uniqueItems": true
-    },
-    "Name": {
-      "description": "Resource Name: clusters/{clusterId}",
-      "type": "string"
     },
     "ProjectName": {
       "description": "Volcano Engine Project Name",
@@ -402,7 +410,7 @@
       "type": "object"
     },
     "State": {
-      "description": "Cluster Status",
+      "description": "Instance status",
       "semantic": "status",
       "type": "string"
     },
@@ -437,7 +445,7 @@
       "description": "Availability Zones and Subnets Used at Creation",
       "insertionOrder": false,
       "items": {
-        "$ref": "#/definitions/ClusterZoneSubnet",
+        "$ref": "#/definitions/ZoneSubnet",
         "type": "object"
       },
       "type": "array",
@@ -445,8 +453,7 @@
     }
   },
   "readOnlyProperties": [
-    "/properties/Name",
-    "/properties/ClusterId",
+    "/properties/InstanceId",
     "/properties/Backups",
     "/properties/Endpoints",
     "/properties/Version",
@@ -457,7 +464,8 @@
     "/properties/CreateTime",
     "/properties/UpdateTime",
     "/properties/AuditLogConfig",
-    "/properties/SpendingLimit"
+    "/properties/SpendingLimit",
+    "/properties/AccountId"
   ],
   "required": [
     "VpcId",

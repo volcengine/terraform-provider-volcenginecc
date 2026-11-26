@@ -22,6 +22,17 @@ func init() {
 // This Terraform data source corresponds to the Cloud Control Volcengine::TiDB::Instance resource.
 func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccountId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Account ID of the instance owner",
+		//	  "type": "string"
+		//	}
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Account ID of the instance owner",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Annotations
 		// Cloud Control resource type schema:
 		//
@@ -169,7 +180,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Cluster Backup List",
+		//	  "description": "Instance backup list",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "Backup Information",
@@ -178,12 +189,12 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "Backup ID",
 		//	        "type": "string"
 		//	      },
-		//	      "BackupTime": {
-		//	        "description": "Backup Time",
+		//	      "BackupName": {
+		//	        "description": "Backup name",
 		//	        "type": "string"
 		//	      },
-		//	      "ClusterId": {
-		//	        "description": "Cluster ID",
+		//	      "BackupTime": {
+		//	        "description": "Backup Time",
 		//	        "type": "string"
 		//	      },
 		//	      "CreateTime": {
@@ -194,12 +205,20 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "Expiration Time",
 		//	        "type": "string"
 		//	      },
-		//	      "Name": {
-		//	        "description": "Backup Name",
+		//	      "InstanceId": {
+		//	        "description": "Instance ID",
 		//	        "type": "string"
+		//	      },
+		//	      "SizeBytes": {
+		//	        "description": "Backup size (bytes)",
+		//	        "type": "integer"
 		//	      },
 		//	      "State": {
 		//	        "description": "Backup Status",
+		//	        "type": "string"
+		//	      },
+		//	      "TriggerType": {
+		//	        "description": "Backup trigger type",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
@@ -220,14 +239,14 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "Backup ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: BackupName
+					"backup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: BackupTime
 					"backup_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Backup Time",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ClusterId
-					"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Cluster ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CreateTime
@@ -240,14 +259,24 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "Expiration Time",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Backup Name",
+					// Property: InstanceId
+					"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Instance ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SizeBytes
+					"size_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Backup size (bytes)",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: State
 					"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Backup Status",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TriggerType
+					"trigger_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Backup trigger type",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
@@ -257,18 +286,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Cluster Backup List",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: ClusterId
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "Cluster ID",
-		//	  "type": "string"
-		//	}
-		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Cluster ID",
+			Description: "Instance backup list",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreateTime
@@ -280,17 +298,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Creation Time (ISO8601)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: DisplayName
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "Cluster Display Name",
-		//	  "type": "string"
-		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Cluster Display Name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfig
@@ -332,13 +339,13 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "Authorized Network",
 		//	            "properties": {
-		//	              "DisplayName": {
-		//	                "description": "Descriptive Name",
+		//	              "AuthorizedNetworkName": {
+		//	                "description": "Identifiable name",
 		//	                "type": "string"
 		//	              },
 		//	              "SecurityGroupCount": {
 		//	                "description": "Number of Security Groups Associated with Endpoint (not returned if query fails)",
-		//	                "type": "string"
+		//	                "type": "integer"
 		//	              },
 		//	              "VpcEndpointId": {
 		//	                "description": "VPC Endpoint ID。",
@@ -394,8 +401,8 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "description": "Authorized Network",
 		//	            "properties": {
-		//	              "DisplayName": {
-		//	                "description": "Authorized Network Name",
+		//	              "AuthorizedNetworkName": {
+		//	                "description": "Authorized network name",
 		//	                "type": "string"
 		//	              },
 		//	              "EndIpAddress": {
@@ -439,13 +446,13 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"authorized_networks": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DisplayName
-									"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Descriptive Name",
+									// Property: AuthorizedNetworkName
+									"authorized_network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Identifiable name",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SecurityGroupCount
-									"security_group_count": schema.StringAttribute{ /*START ATTRIBUTE*/
+									"security_group_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Description: "Number of Security Groups Associated with Endpoint (not returned if query fails)",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -510,9 +517,9 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"authorized_networks": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DisplayName
-									"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Authorized Network Name",
+									// Property: AuthorizedNetworkName
+									"authorized_network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Authorized network name",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: EndIpAddress
@@ -564,6 +571,28 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "High Availability Type",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceId
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance ID",
+		//	  "type": "string"
+		//	}
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Instance ID",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceName
+		// Cloud Control resource type schema:
+		//
+		//	{
+		//	  "description": "Instance name",
+		//	  "type": "string"
+		//	}
+		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Instance name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Labels
 		// Cloud Control resource type schema:
 		//
@@ -606,17 +635,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Tags",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: Name
-		// Cloud Control resource type schema:
-		//
-		//	{
-		//	  "description": "Resource Name: clusters/{clusterId}",
-		//	  "type": "string"
-		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Resource Name: clusters/{clusterId}",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectName
@@ -680,11 +698,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// Cloud Control resource type schema:
 		//
 		//	{
-		//	  "description": "Cluster Status",
+		//	  "description": "Instance status",
 		//	  "type": "string"
 		//	}
 		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Cluster Status",
+			Description: "Instance status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -782,14 +800,14 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Availability Zones and Subnets Used at Creation",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "Availability Zones and Subnets",
+		//	    "description": "Availability zone and subnet",
 		//	    "properties": {
 		//	      "SubnetId": {
 		//	        "description": "Subnet ID",
 		//	        "type": "string"
 		//	      },
 		//	      "ZoneId": {
-		//	        "description": "Availability Zone ID",
+		//	        "description": "Availability zone ID",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -808,7 +826,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ZoneId
 					"zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Availability Zone ID",
+						Description: "Availability zone ID",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -833,18 +851,19 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudControlTypeName("Volcengine::TiDB::Instance").WithTerraformTypeName("volcenginecc_tidb_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                  "AccountId",
 		"annotations":                 "Annotations",
 		"audit_log_config":            "AuditLogConfig",
+		"authorized_network_name":     "AuthorizedNetworkName",
 		"authorized_networks":         "AuthorizedNetworks",
 		"auto_scaling":                "AutoScaling",
 		"automated_backup_policy":     "AutomatedBackupPolicy",
 		"backup_id":                   "BackupId",
+		"backup_name":                 "BackupName",
 		"backup_time":                 "BackupTime",
 		"backups":                     "Backups",
-		"cluster_id":                  "ClusterId",
 		"create_time":                 "CreateTime",
 		"disabled":                    "Disabled",
-		"display_name":                "DisplayName",
 		"enabled":                     "Enabled",
 		"encryption_config":           "EncryptionConfig",
 		"end_ip_address":              "EndIpAddress",
@@ -853,12 +872,13 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"expire_time":                 "ExpireTime",
 		"high_availability_type":      "HighAvailabilityType",
 		"host":                        "Host",
+		"instance_id":                 "InstanceId",
+		"instance_name":               "InstanceName",
 		"key":                         "Key",
 		"labels":                      "Labels",
 		"max_rcu":                     "MaxRcu",
 		"min_rcu":                     "MinRcu",
 		"monthly":                     "Monthly",
-		"name":                        "Name",
 		"port":                        "Port",
 		"private_endpoint":            "PrivateEndpoint",
 		"project_name":                "ProjectName",
@@ -868,12 +888,14 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_count":        "SecurityGroupCount",
 		"service_name":                "ServiceName",
 		"service_plan":                "ServicePlan",
+		"size_bytes":                  "SizeBytes",
 		"spending_limit":              "SpendingLimit",
 		"start_ip_address":            "StartIpAddress",
 		"start_time":                  "StartTime",
 		"state":                       "State",
 		"subnet_id":                   "SubnetId",
 		"tags":                        "Tags",
+		"trigger_type":                "TriggerType",
 		"type":                        "Type",
 		"unredacted":                  "Unredacted",
 		"update_time":                 "UpdateTime",

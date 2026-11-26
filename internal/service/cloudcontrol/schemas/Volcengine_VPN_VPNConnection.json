@@ -505,8 +505,5 @@
   "tagging": {
     "taggable": false
   },
-  "typeName": "Volcengine::VPN::VPNConnection",
-  "writeOnlyProperties": [
-    "/properties/Spec"
-  ]
+  "typeName": "Volcengine::VPN::VPNConnection"
 }

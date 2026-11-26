@@ -40,6 +40,9 @@ Data Source schema for Volcengine::NatGateway::NGW
 - `period` (Number) Duration for purchasing a subscription NAT Gateway, default is 1. If PeriodUnit is Month, Period can be 1 ~ 9, 12, 24, 36. If PeriodUnit is Year, Period can be 1 ~ 3.
 - `period_unit` (String) Unit for subscription NAT Gateway duration, default is Month. Month: month. Year: year.
 - `project_name` (String) Name of the project the NAT Gateway belongs to. If not specified, defaults to the 'default' project.
+- `renew_type` (Number) Renewal methods for prepaid NAT instances. Possible values:
+  -0 (default): Manual renewal
+  -2: Automatic renewal
 - `smart_schedule_enabled` (Boolean) Whether to enable intelligent scheduling
 - `smart_schedule_rule` (String) Intelligent scheduling policy rules. ChinaMobile: China Mobile. ChinaUnicom: China Unicom. ChinaTelecom: China Telecom. BGP: BGP multi-line.
 - `snat_entry_ids` (Set of String) SNAT rule ID list

@@ -1,45 +1,11 @@
 {
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/ClusterId",
+    "/properties/InstanceId",
     "/properties/ParentId",
     "/properties/ParentTimestamp"
   ],
   "definitions": {
-    "AlicloudPrivateEndpoint": {
-      "description": "Alicloud private endpoint configuration",
-      "properties": {
-        "AvailabilityZone": {
-          "description": "Availability zone list",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "ServiceName": {
-          "description": "Private service name",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AwsPrivateEndpoint": {
-      "description": "AWS private endpoint configuration",
-      "properties": {
-        "AvailabilityZone": {
-          "description": "Availability zone list",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "ServiceName": {
-          "description": "VPC endpoint service name",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "BranchAnnotation": {
       "description": "Branch annotation key-value pair",
       "properties": {
@@ -72,41 +38,15 @@
       },
       "type": "object"
     },
-    "EndpointAuthorizedNetwork": {
-      "description": "Endpoint authorized network (Allowlist) configuration",
-      "properties": {
-        "DisplayName": {
-          "description": "Authorized network name",
-          "type": "string"
-        },
-        "EndIpAddress": {
-          "description": "End IP",
-          "type": "string"
-        },
-        "StartIpAddress": {
-          "description": "Start IP",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "EndpointPrivate": {
       "description": "Private access endpoint configuration",
       "properties": {
-        "Alicloud": {
-          "$ref": "#/definitions/AlicloudPrivateEndpoint",
-          "description": "Alicloud private endpoint"
-        },
         "AuthorizedNetworks": {
           "description": "Private endpoint authorized network list",
           "items": {
             "$ref": "#/definitions/PrivateEndpointAuthorizedNetwork"
           },
           "type": "array"
-        },
-        "Aws": {
-          "$ref": "#/definitions/AwsPrivateEndpoint",
-          "description": "AWS private endpoint"
         },
         "Disabled": {
           "description": "Disable private network access",
@@ -139,41 +79,12 @@
       },
       "type": "object"
     },
-    "EndpointPublic": {
-      "description": "Public access endpoint configuration",
-      "properties": {
-        "AuthorizedNetworks": {
-          "description": "IP Allowlist",
-          "items": {
-            "$ref": "#/definitions/EndpointAuthorizedNetwork"
-          },
-          "type": "array"
-        },
-        "Disabled": {
-          "description": "Disable public network access",
-          "type": "boolean"
-        },
-        "Host": {
-          "description": "Public hostname",
-          "type": "string"
-        },
-        "Port": {
-          "description": "Public port",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
     "Endpoints": {
       "description": "Unified connection endpoint configuration",
       "properties": {
         "PrivateEndpoint": {
           "$ref": "#/definitions/EndpointPrivate",
           "description": "Private endpoint"
-        },
-        "PublicEndpoint": {
-          "$ref": "#/definitions/EndpointPublic",
-          "description": "Public endpoint"
         }
       },
       "type": "object"
@@ -181,8 +92,8 @@
     "PrivateEndpointAuthorizedNetwork": {
       "description": "Private endpoint authorized network configuration",
       "properties": {
-        "DisplayName": {
-          "description": "Authorized network name",
+        "AuthorizedNetworkName": {
+          "description": "Authorized Network Name",
           "type": "string"
         },
         "SecurityGroupCount": {
@@ -204,10 +115,10 @@
   "description": "Branch resources under the TiDB cluster, corresponding to the branches object",
   "filterProperties": {
     "filterableProperties": [
-      "/properties/ClusterId"
+      "/properties/InstanceId"
     ],
     "required": [
-      "/properties/ClusterId"
+      "/properties/InstanceId"
     ]
   },
   "handlers": {
@@ -244,7 +155,7 @@
     }
   },
   "primaryIdentifier": [
-    "/properties/ClusterId",
+    "/properties/InstanceId",
     "/properties/BranchId"
   ],
   "properties": {
@@ -262,8 +173,9 @@
       "semantic": "resourceId",
       "type": "string"
     },
-    "ClusterId": {
-      "description": "Cluster ID",
+    "BranchName": {
+      "description": "Branch Name",
+      "semantic": "resourceName",
       "type": "string"
     },
     "CreateTime": {
@@ -275,11 +187,6 @@
       "description": "Creator identifier",
       "type": "string"
     },
-    "DisplayName": {
-      "description": "Branch display name",
-      "semantic": "resourceName",
-      "type": "string"
-    },
     "Endpoints": {
       "$ref": "#/definitions/Endpoints",
       "description": "Branch endpoint configuration"
@@ -288,12 +195,12 @@
       "description": "Root password set",
       "type": "boolean"
     },
-    "Name": {
-      "description": "Branch resource name",
+    "InstanceId": {
+      "description": "Instance ID",
       "type": "string"
     },
-    "ParentDisplayName": {
-      "description": "Parent branch display name",
+    "ParentBranchName": {
+      "description": "Parent Branch Name",
       "type": "string"
     },
     "ParentId": {
@@ -338,8 +245,7 @@
   },
   "readOnlyProperties": [
     "/properties/BranchId",
-    "/properties/Name",
-    "/properties/ParentDisplayName",
+    "/properties/ParentBranchName",
     "/properties/CreatedBy",
     "/properties/State",
     "/properties/UserPrefix",
@@ -352,8 +258,8 @@
     "/properties/ProjectName"
   ],
   "required": [
-    "ClusterId",
-    "DisplayName"
+    "InstanceId",
+    "BranchName"
   ],
   "tagging": {
     "taggable": false
